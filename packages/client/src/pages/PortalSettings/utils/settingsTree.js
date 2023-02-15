@@ -281,8 +281,26 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer",
+    id: "portal-settings_catalog-portal-statistics",
     key: "5",
+    icon: DeveloperReactSvgUrl,
+    link: "statistics",
+    tKey: "Statistics",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-statistics",
+        key: "5-0",
+        icon: "",
+        link: "portal-statistics",
+        tKey: "Statistics",
+        isCategory: true,
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-developer",
+    key: "6",
     icon: DeveloperReactSvgUrl,
     link: "developer",
     tKey: "DeveloperTools",
@@ -290,7 +308,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-developer-tools",
-        key: "5-0",
+        key: "6-0",
         icon: "",
         link: "tools",
         tKey: "DeveloperTools",
@@ -300,21 +318,21 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-delete",
-    key: "6",
+    key: "7",
     icon: TrashIconUrl,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
     children: [
       {
-        key: "6-0",
+        key: "7-0",
         icon: "",
         link: "deletion",
         tKey: "PortalDeletion",
         isCategory: true,
       },
       {
-        key: "6-1",
+        key: "7-1",
         icon: "",
         link: "deactivation",
         tKey: "PortalDeactivation",
@@ -324,7 +342,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-payments",
-    key: "7",
+    key: "8",
     icon: PaymentIconUrl,
     link: "payments",
     tKey: "Payments",
@@ -332,7 +350,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-payments",
-        key: "7-0",
+        key: "8-0",
         icon: "",
         link: "portal-payments",
         tKey: "Payments",

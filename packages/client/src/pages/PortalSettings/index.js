@@ -69,6 +69,9 @@ const WhiteLabel = lazy(() =>
 );
 
 const Branding = lazy(() => import("./categories/common/branding"));
+
+const Statistics = lazy(() => import("./categories/statistics"));
+
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
   "/portal-settings"
@@ -164,6 +167,10 @@ const INTEGRATION_URLS = [
 ];
 
 const PAYMENTS_URL = combineUrl(PROXY_BASE_URL, "/payments/portal-payments");
+const STATISTICS_URL = combineUrl(
+  PROXY_BASE_URL,
+  "/statistics/portal-statistics"
+);
 
 const THIRD_PARTY_URL = combineUrl(
   PROXY_BASE_URL,
@@ -233,6 +240,7 @@ const Settings = () => {
 
           <Route exact path={INTEGRATION_URLS} component={Integration} />
           <Route exact path={PAYMENTS_URL} component={Payments} />
+          <Route exact path={STATISTICS_URL} component={Statistics} />
           <Route exact path={THIRD_PARTY_URL} component={ThirdParty} />
           <Route exact path={SSO_URL} component={SingleSignOn} />
           <Route exact path={DEVELOPER_URLS} component={DeveloperTools} />

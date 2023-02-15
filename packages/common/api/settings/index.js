@@ -694,3 +694,17 @@ export function removeActiveSession(eventId) {
     data: { eventId },
   });
 }
+
+export function baseUserQuota(enableUserQuota, defaultUserQuota) {
+  const data = {
+    enableUserQuota,
+    defaultUserQuota,
+  };
+  const options = {
+    method: "post",
+    url: "/settings/userquotasettings",
+    data,
+  };
+
+  return request(options);
+}

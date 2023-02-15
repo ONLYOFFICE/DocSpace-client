@@ -208,6 +208,8 @@ class ArticleBodyContent extends React.Component {
         return t("PortalDeletion");
       case "DeveloperTools":
         return t("DeveloperTools");
+      case "Statistics":
+        return t("Statistics");
       default:
         throw new Error("Unexpected translation key");
     }

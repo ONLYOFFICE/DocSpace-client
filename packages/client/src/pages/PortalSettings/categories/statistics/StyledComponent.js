@@ -21,4 +21,53 @@ const StyledBaseQuotaComponent = styled.div`
     }
   }
 `;
-export { StyledBaseQuotaComponent };
+const StyledDiscSpaceUsedComponent = styled.div`
+  margin-top: 16px;
+
+  .disk-space_slider,
+  .disk-space_description {
+    margin-top: 16px;
+  }
+  .disk-space_slider {
+    width: 300px;
+    display: flex;
+    background: #f3f4f4;
+    border-radius: 29px;
+  }
+  .disk-space_description {
+    display: flex;
+    grid-gap: 24px;
+
+    div {
+      display: flex;
+    }
+  }
+`;
+
+const StyledFolderTagSection = styled.div`
+  height: 12px;
+  border-right: 1px solid #f3f4f4;
+  background: ${(props) => props.color};
+  width: ${(props) => props.width + "%"};
+
+  &:first-of-type {
+    border-radius: 46px 0px 0px 46px;
+  }
+`;
+
+const StyledFolderTagColor = styled.div`
+  margin: auto 0;
+
+  width: 12px;
+  height: 12px;
+  background: ${(props) => props.color};
+  border-radius: 50%;
+  margin-right: 4px;
+`;
+
+export {
+  StyledBaseQuotaComponent,
+  StyledDiscSpaceUsedComponent,
+  StyledFolderTagSection,
+  StyledFolderTagColor,
+};

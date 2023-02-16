@@ -1,5 +1,7 @@
 import React from "react";
+
 import BaseQuotaComponent from "./BaseQuota";
+import DiskSpaceUsedComponent from "./DiskSpaceUsed";
 import MainInfoComponent from "./MainInfo";
 
 const StatisticsComponent = () => {
@@ -7,6 +9,7 @@ const StatisticsComponent = () => {
     <>
       <MainInfoComponent />
       <BaseQuotaComponent />
+      <DiskSpaceUsedComponent />
     </>
   );
 };

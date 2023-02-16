@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
 const StyledBaseQuotaComponent = styled.div`
+  .backup_radio-button {
+    margin-top: 16px;
+  }
   .radio-button_content {
     margin-top: 16px;
   }

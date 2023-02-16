@@ -1151,6 +1151,9 @@ public class UserController : PeopleControllerBase
             .Select(userId => _userManager.GetUsers(userId))
             .ToList();
 
+        var tenanSpaceQuota = _quotaService.GetTenantQuota(Tenant.Id);
+        var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
+
         foreach (var user in users)
         {
             if (inDto.Quota != -1)
@@ -1162,9 +1165,7 @@ public class UserController : PeopleControllerBase
                         )
                 .Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
 
-                var tenanSpaceQuota = _quotaService.GetTenantQuota(Tenant.Id).MaxTotalSize;
-
-                if (tenanSpaceQuota < inDto.Quota || usedSpace > inDto.Quota)
+                if ((maxTotalSize > -1 && (maxTotalSize < inDto.Quota)) || usedSpace > inDto.Quota)
                 {
                     continue;
                 }

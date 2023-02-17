@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import {
   StyledDiscSpaceUsedComponent,
@@ -8,6 +9,7 @@ import {
 import FolderTagSection from "./sub-components/FolderTagSection";
 
 import Text from "@docspace/components/text";
+import { getConvertedSize } from "@docspace/common/utils";
 
 const calculateSize = (size, common) => ((100 * size) / common).toFixed(2);
 const DiskSpaceUsedComponent = (props) => {
@@ -18,7 +20,13 @@ const DiskSpaceUsedComponent = (props) => {
     archiveSize = 5,
     roomsSize = 40,
     common = 115,
+    used = 75,
+    usedTotalStorageSizeCount,
+    maxTotalSizeByQuota,
   } = props;
+
+  const totalSize = getConvertedSize(t, maxTotalSizeByQuota);
+  const usedSize = getConvertedSize(t, usedTotalStorageSizeCount);
 
   const folderTags = [
     {
@@ -47,11 +55,30 @@ const DiskSpaceUsedComponent = (props) => {
     },
   ];
 
+  const DiskSpace = (
+    <>
+      <Text fontWeight={600}>
+        {t("TotalStorage", {
+          size: totalSize,
+        })}
+      </Text>
+
+      <Text fontWeight={600}>
+        {t("UsedStorage", {
+          size: usedSize,
+        })}
+      </Text>
+    </>
+  );
+
+  console.log("Disk Space render");
   return (
     <StyledDiscSpaceUsedComponent>
-      <Text fontSize="16px" fontWeight={700}>
+      <Text fontSize="16px" fontWeight={700} className="disk-space_title">
         {t("DiskSpaceUsed")}
       </Text>
+
+      {DiskSpace}
 
       <div className="disk-space_slider">
         {folderTags.map((tag, index) => (
@@ -77,4 +104,12 @@ const DiskSpaceUsedComponent = (props) => {
   );
 };
 
-export default DiskSpaceUsedComponent;
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+  const { maxTotalSizeByQuota, usedTotalStorageSizeCount } = currentQuotaStore;
+
+  return {
+    maxTotalSizeByQuota,
+    usedTotalStorageSizeCount,
+  };
+})(observer(DiskSpaceUsedComponent));

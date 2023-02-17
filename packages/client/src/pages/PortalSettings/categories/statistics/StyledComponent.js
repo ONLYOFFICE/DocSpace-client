@@ -23,7 +23,9 @@ const StyledBaseQuotaComponent = styled.div`
 `;
 const StyledDiscSpaceUsedComponent = styled.div`
   margin-top: 16px;
-
+  .disk-space_title {
+    margin-bottom: 16px;
+  }
   .disk-space_slider,
   .disk-space_description {
     margin-top: 16px;

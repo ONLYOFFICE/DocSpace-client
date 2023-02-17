@@ -63,8 +63,8 @@ const DiskSpaceUsedComponent = (props) => {
         ))}
       </div>
       <div className="disk-space_description">
-        {folderTags.map((tag) => (
-          <div>
+        {folderTags.map((tag, index) => (
+          <div className="disk-space_folder-tag" key={index}>
             <StyledFolderTagColor
               className="disk-space_color"
               color={tag.color}

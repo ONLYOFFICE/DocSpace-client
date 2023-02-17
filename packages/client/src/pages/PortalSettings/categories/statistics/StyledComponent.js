@@ -36,10 +36,13 @@ const StyledDiscSpaceUsedComponent = styled.div`
   }
   .disk-space_description {
     display: flex;
-    grid-gap: 24px;
 
-    div {
+    flex-wrap: wrap;
+
+    .disk-space_folder-tag {
       display: flex;
+      margin-right: 24px;
+      padding-bottom: 8px;
     }
   }
 `;

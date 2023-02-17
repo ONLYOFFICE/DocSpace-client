@@ -275,6 +275,12 @@ public class SettingsController : BaseSettingsController
         return Resource.SuccessfullySaveSettingsMessage;
     }
 
+    [HttpGet("userquotasettings")]
+    public object GetUserQuotaSettings()
+    {
+        return _settingsManager.Load<TenantUserQuotaSettings>();
+    }
+
     [AllowAnonymous]
     [AllowNotPayment]
     [HttpGet("cultures")]

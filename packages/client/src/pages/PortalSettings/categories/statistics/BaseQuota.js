@@ -1,15 +1,21 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
 import { StyledBaseQuotaComponent } from "./StyledComponent";
+import BaseQuotaContentComponent from "./sub-components/BaseQuotaContent";
 
 import RadioButtonGroup from "@docspace/components/radio-button-group";
-import BaseQuotaContentComponent from "./sub-components/BaseQuotaContent";
+import Text from "@docspace/components/text";
+import HelpButton from "@docspace/components/help-button";
 
 const DISABLE = "Disable",
   ENABLE = "Enable";
 const BaseQuotaComponent = () => {
   const [radioButtonState, setRadioButtonState] = useState(DISABLE);
 
+  const { t } = useTranslation("Settings");
   const onChangeRadioButton = (e) => {
     const value = e.target.value;
     if (value === radioButtonState) return;
@@ -19,6 +25,9 @@ const BaseQuotaComponent = () => {
 
   return (
     <StyledBaseQuotaComponent>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("DefineQuotaPerUser")}
+      </Text>
       <RadioButtonGroup
         name="restore_backup"
         orientation="vertical"

@@ -95,6 +95,7 @@ public class UsersQuotaSyncOperation
 public class UsersQuotaSyncJob : DistributedTaskProgress
 {
     private readonly IServiceScopeFactory _serviceScopeFactory;
+    private readonly SettingsManager _settingsManager;
 
     protected readonly IDbContextFactory<FilesDbContext> _dbContextFactory;
 
@@ -113,9 +114,11 @@ public class UsersQuotaSyncJob : DistributedTaskProgress
         }
     }
 
-    public UsersQuotaSyncJob(IServiceScopeFactory serviceScopeFactory)
+    public UsersQuotaSyncJob(IServiceScopeFactory serviceScopeFactory, SettingsManager settingsManager)
     {
         _serviceScopeFactory = serviceScopeFactory;
+        _settingsManager = settingsManager;
+
     }
 
     public void InitJob(Tenant tenant)
@@ -178,6 +181,10 @@ public class UsersQuotaSyncJob : DistributedTaskProgress
         }
         finally
         {
+            var quotaSettings = _settingsManager.Load<TenantUserQuotaSettings>();
+            quotaSettings.LastRecalculateDate = DateTime.UtcNow;
+
+            _settingsManager.Save(quotaSettings);
             IsCompleted = true;
         }
         PublishChanges();

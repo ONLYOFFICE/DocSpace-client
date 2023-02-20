@@ -33,12 +33,15 @@ public class TenantUserQuotaSettings : ISettings<TenantUserQuotaSettings>
 
     public long DefaultUserQuota { get; set; }
 
+    public DateTime LastRecalculateDate { get; set; }
+
     public TenantUserQuotaSettings GetDefault()
     {
         return new TenantUserQuotaSettings
         {
             EnableUserQuota = false,
-            DefaultUserQuota = -1
+            DefaultUserQuota = -1,
+            LastRecalculateDate = DateTime.MinValue
         };
     }
 

@@ -270,7 +270,11 @@ public class SettingsController : BaseSettingsController
     {
         _permissionContext.DemandPermissions(SecutiryConstants.EditPortalSettings);
 
-        _settingsManager.Save(new TenantUserQuotaSettings { EnableUserQuota = inDto.EnableUserQuota, DefaultUserQuota = inDto.DefaultUserQuota });
+        var quotaSettings = _settingsManager.Load<TenantUserQuotaSettings>();
+        quotaSettings.EnableUserQuota = inDto.EnableUserQuota;
+        quotaSettings.DefaultUserQuota = inDto.DefaultUserQuota;
+
+        _settingsManager.Save(quotaSettings);
 
         return Resource.SuccessfullySaveSettingsMessage;
     }

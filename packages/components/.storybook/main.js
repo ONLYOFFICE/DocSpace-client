@@ -4,7 +4,7 @@ module.exports = {
   },
   stories: [
     "../all/all.stories.js", // default page
-    "../**/*.stories.js", //"../**/*.stories.@(js|mdx)",
+    "../**/*.stories.@(js|jsx|ts|tsx)", //"../**/*.stories.@(js|mdx)",
   ],
   staticDirs: ["../../../public"],
   addons: [

@@ -40,6 +40,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     private const string Projects = "projects";
     private const string VirtualRooms = "virtualrooms";
     private const string Archive = "archive";
+    private const string Board = "board";
 
     private readonly FactoryIndexerFolder _factoryIndexer;
     private readonly GlobalSpace _globalSpace;
@@ -1113,6 +1114,10 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                         folder.FolderType = FolderType.Archive;
                         folder.Title = Archive;
                         break;
+                    case Board:
+                        folder.FolderType = FolderType.Board;
+                        folder.Title = Board;
+                        break;
                     default:
                         folder.FolderType = FolderType.BUNCH;
                         folder.Title = key;
@@ -1229,6 +1234,10 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                     folder.FolderType = FolderType.Archive;
                     folder.Title = Archive;
                     break;
+                case Board:
+                    folder.FolderType = FolderType.Board;
+                    folder.Title = Board;
+                    break;
                 default:
                     folder.FolderType = FolderType.BUNCH;
                     folder.Title = key;
@@ -1323,6 +1332,11 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     public Task<int> GetFolderIDArchive(bool createIfNotExists)
     {
         return (this as IFolderDao<int>).GetFolderIDAsync(FileConstant.ModuleId, Archive, null, createIfNotExists);
+    }
+
+    public Task<int> GetFolderIDBoard(bool createIfNotExists)
+    {
+        return (this as IFolderDao<int>).GetFolderIDAsync(FileConstant.ModuleId, Board, null, createIfNotExists);
     }
 
     public IAsyncEnumerable<OriginData> GetOriginsDataAsync(IEnumerable<int> entriesIds)

@@ -47,6 +47,7 @@ const {
   strongBlue,
   lightGrayishStrongBlue,
   darkRed,
+  blueDenim,
 } = globalColors;
 
 const Dark = {
@@ -165,6 +166,17 @@ const Dark = {
       base: white,
       primary: white,
     },
+  },
+
+  card: {
+    background: "#282828",
+    userNameColor: "rgba(255, 255, 255, 0.6)",
+    dividerBackground: "#474747",
+    borderColor: "#474747",
+    forMeBorderColor: blueDenim,
+    titleColor: white,
+    hoverColor: black,
+    selectedColor: black,
   },
 
   helpButton: {

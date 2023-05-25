@@ -172,6 +172,17 @@ const Base = {
     },
   },
 
+  card: {
+    background: white,
+    userNameColor: cyanBlueDarkShade,
+    dividerBackground: grayMid,
+    borderColor: grayMid,
+    forMeBorderColor: blueDenim,
+    titleColor: black,
+    hoverColor: lightHover,
+    selectedColor: lightHover,
+  },
+
   helpButton: {
     width: "100%",
     backgroundColor: white,

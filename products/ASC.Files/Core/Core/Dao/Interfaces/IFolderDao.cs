@@ -339,6 +339,14 @@ public interface IFolderDao<T>
     Task<T> GetFolderIDArchive(bool createIfNotExists);
 
     /// <summary>
+    /// Returns id folder "Board"
+    /// Only in TMFolderDao
+    /// </summary>
+    /// <param name="createIfNotExists"></param>
+    /// <returns></returns>
+    Task<T> GetFolderIDBoard(bool createIfNotExists);
+
+    /// <summary>
     /// Return id of related object
     /// Only in TMFolderDao
     /// </summary>

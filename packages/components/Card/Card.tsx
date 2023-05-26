@@ -21,14 +21,14 @@ import OformIcon from "PUBLIC_DIR/images/icons/32/oform.svg";
 import DefaultUserAvatar from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 function Card({
-  isForMe,
-  userName,
-  fileName,
-  isSelected,
+  username,
+  filename,
+  isForMe = false,
+  isSelected = false,
   avatarUrl = "",
   isLoading = false,
-  getOptions,
-  onSelected,
+  getOptions = () => [],
+  onSelected = () => {},
 }: CardProps) {
   const contextMenuRef = useRef<ContextMenu>(null);
 
@@ -65,9 +65,9 @@ function Card({
             isChecked={isSelected}
             onChange={onSelected}
           />
-          <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={userName} />
+          <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
         </CardAvatarWrapper>
-        <CardUserName>{userName}</CardUserName>
+        <CardUserName>{username}</CardUserName>
         <ContextMenu
           ref={contextMenuRef}
           getContextModel={getOptions}
@@ -85,7 +85,7 @@ function Card({
       <CardContent>
         <OformIcon className="card__oform-icon" />
         <CardContentTitle>
-          {userName} - {fileName}
+          {username} - {filename}
         </CardContentTitle>
       </CardContent>
     </CardContainer>

@@ -19,12 +19,6 @@ export default {
         component: "",
       },
     },
-    argTypes: {
-      userName: {
-        options: "string",
-        control: { type: "string" },
-      },
-    },
   },
 } as ComponentMeta<CardType>;
 
@@ -39,20 +33,20 @@ export const Default = (args: CardProps) => {
     <Card
       isForMe={args.isForMe}
       avatarUrl={args.avatarUrl}
-      userName={args.userName}
+      username={args.username}
       isSelected={isSelected}
       getOptions={args.getOptions}
       onSelected={handleSelected}
       isLoading={args.isLoading}
-      fileName={args.fileName}
+      filename={args.filename}
     />
   );
 };
 
 Default.args = {
   avatarUrl: "",
-  userName: "Leo Dokidis",
-  fileName: "Заявление на отпуск",
+  username: "Leo Dokidis",
+  filename: "Заявление на отпуск",
   isSelected: false,
   isForMe: false,
   getOptions() {

@@ -19,16 +19,16 @@ export type SeparatorType = {
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
 interface CardProps {
-  userName: string;
-  fileName: string;
-  isSelected: boolean;
+  username: string;
+  filename: string;
+  isSelected?: boolean;
   avatarUrl?: string;
   isLoading?: boolean;
 
-  isForMe: boolean;
+  isForMe?: boolean;
 
-  getOptions: () => (ContextMenuType | SeparatorType)[];
-  onSelected: (event: ChangeEvent<HTMLInputElement>) => void;
+  getOptions?: () => (ContextMenuType | SeparatorType)[];
+  onSelected?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default CardProps;

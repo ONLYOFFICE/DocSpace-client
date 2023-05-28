@@ -179,6 +179,11 @@ const Dark = {
     selectedColor: black,
   },
 
+  column: {
+    titleColor: white,
+    userColor: white,
+  },
+
   helpButton: {
     width: "100%",
     backgroundColor: black,

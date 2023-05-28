@@ -183,6 +183,11 @@ const Base = {
     selectedColor: lightHover,
   },
 
+  column: {
+    titleColor: black,
+    userColor: grayMain,
+  },
+
   helpButton: {
     width: "100%",
     backgroundColor: white,

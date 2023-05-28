@@ -26,6 +26,7 @@ export const Default = (args: CardProps) => {
   const [isSelected, setIsSelected] = useState(args.isSelected);
 
   const handleSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    args.onSelected?.(event);
     setIsSelected(event.target.checked);
   };
 

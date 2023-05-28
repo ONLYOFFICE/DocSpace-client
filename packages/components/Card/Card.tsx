@@ -68,11 +68,7 @@ function Card({
           <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
         </CardAvatarWrapper>
         <CardUserName>{username}</CardUserName>
-        <ContextMenu
-          ref={contextMenuRef}
-          getContextModel={getOptions}
-          withBackdrop={true}
-        />
+        <ContextMenu ref={contextMenuRef} getContextModel={getOptions} />
         <ContextMenuButton
           className="card__context-menu"
           displayType="toggle"

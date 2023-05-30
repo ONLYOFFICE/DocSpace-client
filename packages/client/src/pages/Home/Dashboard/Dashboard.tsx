@@ -1,5 +1,3 @@
-import React from "react";
-
 import Column from "@docspace/components/Column";
 import Card from "@docspace/components/Card";
 

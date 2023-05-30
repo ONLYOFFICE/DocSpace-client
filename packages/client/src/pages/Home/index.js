@@ -125,6 +125,7 @@ const PureHome = (props) => {
 
   const isAccountsPage = location.pathname.includes("accounts");
   const isSettingsPage = location.pathname.includes("settings");
+  const isDashboard = location.pathname.includes("dashboard");
 
   React.useEffect(() => {
     if (isAccountsPage || isSettingsPage) return;
@@ -273,6 +274,10 @@ const PureHome = (props) => {
           if (!isRooms) {
             filter.selectedItem = selectedItem;
           }
+        }
+
+        if (isDashboard) {
+          return null;
         }
 
         if (filter) {
@@ -736,12 +741,8 @@ export default inject(
       setItemsSelectionTitle,
     } = secondaryProgressDataStore;
 
-    const {
-      setUploadPanelVisible,
-      startUpload,
-      uploaded,
-      converted,
-    } = uploadDataStore;
+    const { setUploadPanelVisible, startUpload, uploaded, converted } =
+      uploadDataStore;
 
     const { uploadEmptyFolders, onClickBack } = filesActionsStore;
 

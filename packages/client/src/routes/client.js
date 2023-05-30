@@ -10,6 +10,7 @@ import Error404 from "SRC_DIR/pages/Errors/404";
 import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
+import Dashboard from "SRC_DIR/pages/Home/Dashboard";
 
 const Client = loadable(() => import("../Client"));
 
@@ -87,6 +88,22 @@ const ClientRoutes = [
             element: (
               <PrivateRoute restricted withManager withCollaborator>
                 <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:room/dashboard",
+            element: (
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:room/dashboard/filter",
+            element: (
+              <PrivateRoute>
+                <Dashboard />
               </PrivateRoute>
             ),
           },

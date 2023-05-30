@@ -1639,6 +1639,7 @@ class FilesStore {
       let fileOptions = [
         //"open",
         "select",
+        "open-board",
         "fill-form",
         "edit",
         "preview",
@@ -1707,6 +1708,7 @@ class FilesStore {
 
       if (!(shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
+        fileOptions = this.removeOptions(fileOptions, ["open-board"]);
       }
 
       if (!canDelete) {
@@ -2759,12 +2761,8 @@ class FilesStore {
   }
 
   get cbMenuItems() {
-    const {
-      isDocument,
-      isPresentation,
-      isSpreadsheet,
-      isArchive,
-    } = this.filesSettingsStore;
+    const { isDocument, isPresentation, isSpreadsheet, isArchive } =
+      this.filesSettingsStore;
 
     let cbMenu = ["all"];
     const filesItems = [...this.files, ...this.folders];

@@ -31,6 +31,8 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
+import BoardIconSvgUrl from "PUBLIC_DIR/images/board.icon.svg?url";
+
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
@@ -95,6 +97,11 @@ class ContextOptionsStore {
     return this.gotoDocEditor(false, item);
   };
 
+  onClickOpenBoard = (item) => {
+    console.log({ item });
+    window.DocSpace.navigate("rooms/shared/7/dashboard");
+  };
+
   onClickReconnectStorage = async (item, t) => {
     const { thirdPartyStore } = this.settingsStore;
 
@@ -151,10 +158,8 @@ class ContextOptionsStore {
   };
 
   onClickMakeForm = (item, t) => {
-    const {
-      setConvertPasswordDialogVisible,
-      setFormCreationInfo,
-    } = this.dialogsStore;
+    const { setConvertPasswordDialogVisible, setFormCreationInfo } =
+      this.dialogsStore;
     const { title, id, folderId, fileExst } = item;
 
     const newTitle =
@@ -208,10 +213,8 @@ class ContextOptionsStore {
   };
 
   showVersionHistory = (id, security) => {
-    const {
-      fetchFileVersions,
-      setIsVerHistoryPanel,
-    } = this.versionHistoryStore;
+    const { fetchFileVersions, setIsVerHistoryPanel } =
+      this.versionHistoryStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
@@ -241,9 +244,8 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const {
-      setSelection: setInfoPanelSelection,
-    } = this.authStore.infoPanelStore;
+    const { setSelection: setInfoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -408,19 +410,13 @@ class ContextOptionsStore {
   };
 
   onClickDeleteSelectedFolder = (t, isRoom) => {
-    const {
-      setIsFolderActions,
-      setDeleteDialogVisible,
-      setIsRoomDelete,
-    } = this.dialogsStore;
+    const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
+      this.dialogsStore;
     const { confirmDelete } = this.settingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId } = this.selectedFolderStore;
-    const {
-      isThirdPartySelection,
-      getFolderInfo,
-      setBufferSelection,
-    } = this.filesStore;
+    const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
+      this.filesStore;
 
     setIsFolderActions(true);
 
@@ -462,10 +458,8 @@ class ContextOptionsStore {
   onClickDelete = (item, t) => {
     const { id, title, providerKey, rootFolderId, isFolder, isRoom } = item;
 
-    const {
-      setRemoveItem,
-      setDeleteThirdPartyDialogVisible,
-    } = this.dialogsStore;
+    const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
+      this.dialogsStore;
 
     if (id === this.selectedFolderStore.id) {
       this.onClickDeleteSelectedFolder(t, isRoom);
@@ -864,6 +858,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_open-board",
+        key: "open-board",
+        label: "Open board",
+        icon: BoardIconSvgUrl,
+        onClick: () => this.onClickOpenBoard(item),
+        disabled: false,
+      },
+      {
         id: "option_edit",
         key: "edit",
         label: t("Common:EditButton"),
@@ -1155,11 +1157,8 @@ class ContextOptionsStore {
     const { personal } = this.authStore.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
-    const {
-      isRecycleBinFolder,
-      isRoomsFolder,
-      isArchiveFolder,
-    } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
+      this.treeFoldersStore;
 
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 

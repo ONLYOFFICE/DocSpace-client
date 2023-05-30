@@ -99,7 +99,9 @@ class ContextOptionsStore {
 
   onClickOpenBoard = (item) => {
     console.log({ item });
-    window.DocSpace.navigate("rooms/shared/7/dashboard");
+    window.DocSpace.navigate(
+      combineUrl("rooms/shared", item.folderId.toString(), "dashboard")
+    );
   };
 
   onClickReconnectStorage = async (item, t) => {

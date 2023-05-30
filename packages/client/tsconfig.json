@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
     "target": "es2016",
     "jsx": "react-jsx",
     "module": "ESNext",
@@ -10,6 +11,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "allowJs": true,
 
     "paths": {
       "PUBLIC_DIR": ["../../public"]

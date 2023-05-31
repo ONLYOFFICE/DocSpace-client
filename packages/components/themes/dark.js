@@ -47,6 +47,7 @@ const {
   strongBlue,
   lightGrayishStrongBlue,
   darkRed,
+  blueDenim,
 } = globalColors;
 
 const Dark = {
@@ -165,6 +166,22 @@ const Dark = {
       base: white,
       primary: white,
     },
+  },
+
+  card: {
+    background: "#282828",
+    userNameColor: "rgba(255, 255, 255, 0.6)",
+    dividerBackground: "#474747",
+    borderColor: "#474747",
+    forMeBorderColor: blueDenim,
+    titleColor: white,
+    hoverColor: black,
+    selectedColor: black,
+  },
+
+  column: {
+    titleColor: white,
+    userColor: "rgba(255, 255, 255, 0.6)",
   },
 
   helpButton: {
@@ -2874,6 +2891,7 @@ const Dark = {
 
     settings: {
       iconFill: white,
+      trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
         fillIcon: "#c4c4c4",
@@ -2953,6 +2971,7 @@ const Dark = {
         separatorBorder: "1px solid #474747",
         warningColor: "#E06451",
         textColor: "#ADADAD",
+        backupCheckedListItemBackground: "#3D3D3D",
       },
 
       payment: {

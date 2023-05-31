@@ -1637,6 +1637,7 @@ class FilesStore {
       let fileOptions = [
         //"open",
         "select",
+        "show-filling-status",
         "open-board",
         "fill-form",
         "edit",
@@ -1707,6 +1708,7 @@ class FilesStore {
       if (!(shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
         fileOptions = this.removeOptions(fileOptions, ["open-board"]);
+        fileOptions = this.removeOptions(fileOptions, ["show-filling-status"]);
       }
 
       if (!canDelete) {

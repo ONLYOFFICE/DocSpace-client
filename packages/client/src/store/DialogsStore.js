@@ -26,6 +26,7 @@ class DialogsStore {
   selectFileDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
+  statusFillingPanelVisible = false;
 
   isFolderActions = false;
   roomCreation = false;
@@ -94,6 +95,10 @@ class DialogsStore {
 
   setSharingPanelVisible = (sharingPanelVisible) => {
     this.sharingPanelVisible = sharingPanelVisible;
+  };
+
+  setStatusFillinglVisible = (statusFillingPanelVisible) => {
+    this.statusFillingPanelVisible = statusFillingPanelVisible;
   };
 
   setIsFolderActions = (isFolderActions) => {
@@ -339,7 +344,8 @@ class DialogsStore {
       this.inviteUsersWarningDialogVisible ||
       this.createRoomDialogVisible ||
       this.createRoomConfirmDialogVisible ||
-      this.changeUserTypeDialogVisible
+      this.changeUserTypeDialogVisible ||
+      this.statusFillingPanelVisible
     );
   }
 

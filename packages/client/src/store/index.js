@@ -34,6 +34,7 @@ import OformsStore from "./OformsStore";
 import AccessRightsStore from "./AccessRightsStore";
 import TableStore from "./TableStore";
 import CreateEditRoomStore from "./CreateEditRoomStore";
+import DashboardStore from "./DashboardStore";
 
 const oformsStore = new OformsStore(authStore);
 
@@ -160,6 +161,8 @@ const createEditRoomStore = new CreateEditRoomStore(
   authStore.currentQuotaStore
 );
 
+const dashboardStore = new DashboardStore();
+
 const store = {
   auth: authStore,
   payments: paymentStore,
@@ -195,6 +198,8 @@ const store = {
 
   accessRightsStore,
   createEditRoomStore,
+
+  dashboardStore,
 };
 
 export default store;

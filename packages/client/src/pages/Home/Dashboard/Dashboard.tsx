@@ -1,3 +1,5 @@
+import { inject, observer } from "mobx-react";
+
 import Column from "@docspace/components/Column";
 import Card from "@docspace/components/Card";
 
@@ -7,8 +9,10 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
+import { DashboardInjectType } from "./types";
+import DashboardProps from "./Dashboard.props";
 
-function Dashboard() {
+function Dashboard({ viewAs }: DashboardProps) {
   const columns = [
     {
       id: 1,
@@ -111,6 +115,10 @@ function Dashboard() {
     },
   ];
 
+  if (viewAs === "row") {
+    return <>Row</>;
+  }
+
   return (
     <DashboardContainer>
       {columns.map(({ id, user, title, color, cards, badge }) => (
@@ -147,4 +155,10 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default inject<DashboardInjectType>(({ dashboardStore }) => {
+  const { viewAs } = dashboardStore;
+
+  return {
+    viewAs,
+  };
+})(observer(Dashboard));

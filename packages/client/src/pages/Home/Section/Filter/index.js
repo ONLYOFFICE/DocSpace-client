@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect } from "react";
+﻿import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 import { isMobile, isMobileOnly } from "react-device-detect";
@@ -36,6 +36,7 @@ import {
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
+import ViewDashboardReactSvgUrl from "PUBLIC_DIR/images/view-board.react.svg?url";
 
 import { showLoader, hideLoader } from "./FilterUtils";
 
@@ -235,10 +236,13 @@ const SectionFilterContent = ({
   groups,
   fetchPeople,
   accountsFilter,
+  dashboardViewAs,
+  setDashboardViewAs,
 }) => {
   const location = useLocation();
 
   const isAccountsPage = location.pathname.includes("accounts");
+  const isDashboardPage = location.pathname.includes("dashboard");
 
   const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
 
@@ -509,6 +513,10 @@ const SectionFilterContent = ({
 
   const onChangeViewAs = React.useCallback(
     (view) => {
+      if (isDashboardPage) {
+        return setDashboardViewAs(view);
+      }
+
       if (view === "row") {
         if (
           (sectionWidth < 1025 && !infoPanelVisible) ||
@@ -523,7 +531,13 @@ const SectionFilterContent = ({
         setViewAs(view);
       }
     },
-    [sectionWidth, infoPanelVisible, setViewAs]
+    [
+      sectionWidth,
+      infoPanelVisible,
+      setViewAs,
+      isDashboardPage,
+      setDashboardViewAs,
+    ]
   );
 
   const getSelectedInputValue = React.useCallback(() => {
@@ -1487,6 +1501,24 @@ const SectionFilterContent = ({
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
+    console.log({ isDashboardPage });
+
+    if (isDashboardPage) {
+      return [
+        {
+          id: "view-switch_rows",
+          value: "row",
+          label: t("ViewList"),
+          icon: ViewRowsReactSvgUrl,
+        },
+        {
+          id: "view-switch_dashboard",
+          value: "dashboard",
+          label: "DashBoard",
+          icon: ViewDashboardReactSvgUrl,
+        },
+      ];
+    }
     const viewSettings = [
       {
         id: "view-switch_rows",
@@ -1504,9 +1536,12 @@ const SectionFilterContent = ({
     ];
 
     return viewSettings;
-  }, [createThumbnails]);
+  }, [createThumbnails, isDashboardPage]);
 
   const getSortData = React.useCallback(() => {
+    // TODO: Add sort data for dashboard
+    if (isDashboardPage) return [];
+
     if (isAccountsPage) {
       return [
         {
@@ -1805,6 +1840,7 @@ const SectionFilterContent = ({
     infoPanelVisible,
     viewAs,
     isPersonalRoom,
+    isDashboardPage,
   ]);
 
   const removeSelectedItem = React.useCallback(
@@ -1956,6 +1992,20 @@ const SectionFilterContent = ({
     }
   };
 
+  const getViewAs = useCallback(() => {
+    if (isAccountsPage) return accountsViewAs;
+
+    if (isDashboardPage) return dashboardViewAs;
+
+    return viewAs;
+  }, [
+    isAccountsPage,
+    isDashboardPage,
+    viewAs,
+    accountsViewAs,
+    dashboardViewAs,
+  ]);
+
   return (
     <FilterInput
       t={t}
@@ -1965,7 +2015,7 @@ const SectionFilterContent = ({
       onSort={onSort}
       getSortData={getSortData}
       getSelectedSortData={getSelectedSortData}
-      viewAs={isAccountsPage ? accountsViewAs : viewAs}
+      viewAs={getViewAs()}
       viewSelectorVisible={!isAccountsPage}
       onChangeViewAs={onChangeViewAs}
       getViewSettingsData={getViewSettingsData}
@@ -1998,6 +2048,7 @@ export default inject(
     selectedFolderStore,
     tagsStore,
     peopleStore,
+    dashboardStore,
   }) => {
     const {
       fetchFiles,
@@ -2016,6 +2067,9 @@ export default inject(
       isLoadedEmptyPage,
       isEmptyPage,
     } = filesStore;
+
+    const { viewAs: dashboardViewAs, setViewAs: setDashboardViewAs } =
+      dashboardStore;
 
     const { providers } = thirdPartyStore;
 
@@ -2090,6 +2144,9 @@ export default inject(
       groups,
       fetchPeople,
       accountsFilter,
+
+      dashboardViewAs,
+      setDashboardViewAs,
     };
   }
 )(

@@ -717,6 +717,7 @@ public class FileSecurity : IFileSecurity
         var file = e as File<T>;
         var folder = e as Folder<T>;
         var isRoom = folder != null && DocSpaceHelper.IsRoom(folder.FolderType);
+        var isBoard = folder != null && DocSpaceHelper.IsBoard(folder.FolderType);
 
         if (file != null &&
             action == FilesSecurityActions.Edit &&
@@ -741,6 +742,10 @@ public class FileSecurity : IFileSecurity
 
             if (action != FilesSecurityActions.Read)
             {
+                if (isBoard)
+                {
+                    return false;
+                }
                 if ((action == FilesSecurityActions.Pin ||
                      action == FilesSecurityActions.EditAccess ||
                      action == FilesSecurityActions.Mute) &&
@@ -795,6 +800,11 @@ public class FileSecurity : IFileSecurity
                 }
 
                 if (folder.FolderType == FolderType.Archive)
+                {
+                    return true;
+                }
+
+                if (folder.FolderType == FolderType.Board)
                 {
                     return true;
                 }

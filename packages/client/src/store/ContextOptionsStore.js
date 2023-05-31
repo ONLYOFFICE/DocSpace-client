@@ -32,6 +32,7 @@ import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.s
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import BoardIconSvgUrl from "PUBLIC_DIR/images/board.icon.svg?url";
+import FillingStatusSvgUrl from "PUBLIC_DIR/images/filling-status.react.svg?url";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
@@ -95,6 +96,11 @@ class ContextOptionsStore {
 
   onClickLinkFillForm = (item) => {
     return this.gotoDocEditor(false, item);
+  };
+
+  onShowFillingStatus = (item) => {
+    const { setStatusFillinglVisible } = this.dialogsStore;
+    setStatusFillinglVisible(true);
   };
 
   onClickOpenBoard = (item) => {
@@ -544,7 +550,7 @@ class ContextOptionsStore {
 
   onShowInfoPanel = (item) => {
     const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
-
+    
     setSelection(item);
     setIsVisible(true);
   };
@@ -863,6 +869,14 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: false,
+      },
+      {
+        id: "option_show-filling-status",
+        key: "show-filling-status",
+        label: "Filling status",
+        icon: FillingStatusSvgUrl,
+        onClick: () => this.onShowFillingStatus(item),
         disabled: false,
       },
       {

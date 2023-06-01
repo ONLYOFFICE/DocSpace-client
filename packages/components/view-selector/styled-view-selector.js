@@ -85,7 +85,8 @@ const IconWrapper = styled.div`
               ${(props) => props.theme.viewSelector.hoverBorderColor};
           `}
     svg {
-      path {
+      path,
+      rect {
         fill: ${(props) => props.theme.iconButton.hoverColor};
       }
     }
@@ -104,17 +105,20 @@ const IconWrapper = styled.div`
       !props.isDisabled
         ? !props.isChecked
           ? css`
-              path {
+              path,
+              rect {
                 fill: ${(props) => props.theme.viewSelector.checkedFillColor};
               }
             `
           : css`
-              path {
+              path,
+              rect {
                 fill: ${(props) => props.theme.viewSelector.fillColor};
               }
             `
         : css`
-            path {
+            path,
+            rect {
               fill: ${(props) =>
                 props.theme.viewSelector.disabledFillColorInner};
             }

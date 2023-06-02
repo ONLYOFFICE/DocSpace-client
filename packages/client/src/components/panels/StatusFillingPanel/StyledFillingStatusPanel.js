@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Scrollbar from "@docspace/components/scrollbar";
 import { Base } from "@docspace/components/themes";
+import { hugeMobile } from "@docspace/components/utils/device";
 
 const StyledFillingStatusPanel = styled.div`
   .status-filling-panel {
@@ -25,7 +26,7 @@ const StyledFillingStatusPanel = styled.div`
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
-    color: rgba(255, 255, 255, 0.6);
+    color: #333333;
   }
 
   .status-filling_item {
@@ -33,11 +34,16 @@ const StyledFillingStatusPanel = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 9px 16px;
-    background: #282828;
-    width: 94%;
+    background: #f8f9f9;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
     height: 50px;
     border-radius: 6px;
-    margin: 0 auto;
+
+    @media ${hugeMobile} {
+      max-width: 360px;
+    }
 
     .item-title {
       display: flex;
@@ -59,7 +65,7 @@ const StyledFillingStatusPanel = styled.div`
   .status-filling_footer {
     .footer-text {
       margin-bottom: 16px;
-      color: rgba(255, 255, 255, 0.6);
+      color: #333333;
     }
 
     display: block;

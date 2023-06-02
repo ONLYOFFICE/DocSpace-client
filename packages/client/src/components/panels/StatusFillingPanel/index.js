@@ -12,6 +12,8 @@ import IconButton from "@docspace/components/icon-button";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";
 import ButtonFileReactSvgUrl from "PUBLIC_DIR/images/button.file.react.svg?url";
 
+import FillingStatusLine from "./sub-components";
+
 import {
   StyledFillingStatusPanel,
   StyledScrollbar,
@@ -60,6 +62,8 @@ const StatusFillingPanel = ({ visible, setStatusFillinglVisible }) => {
               onClick={() => console.log("icon clicked")}
             />
           </Box>
+          
+          <FillingStatusLine />
         </StyledScrollbar>
 
         <div className="status-filling_footer">

@@ -39,6 +39,7 @@ import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewDashboardReactSvgUrl from "PUBLIC_DIR/images/view-board.react.svg?url";
 
 import { showLoader, hideLoader } from "./FilterUtils";
+import { getRoomInfo } from "@docspace/common/api/rooms";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(
@@ -82,6 +83,17 @@ const getAuthorType = (filterValues) => {
   );
 
   return authorType ? authorType : null;
+};
+
+const getRoomId = (filterValues) => {
+  const filterRoomId = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterRoom;
+    }),
+    "key"
+  );
+
+  return filterRoomId || null;
 };
 
 const getSearchParams = (filterValues) => {
@@ -348,6 +360,8 @@ const SectionFilterContent = ({
         const withSubfolders = getSearchParams(data);
         const withContent = getFilterContent(data);
 
+        const roomId = getRoomId(data);
+
         const newFilter = filter.clone();
         newFilter.page = 0;
 
@@ -365,6 +379,10 @@ const SectionFilterContent = ({
           withSubfolders === FilterKeys.excludeSubfolders ? "false" : "true";
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
+        if (isTrash) {
+          newFilter.roomId = roomId;
+        }
+
         setIsLoading(true);
 
         fetchFiles(selectedFolderId, newFilter).finally(() =>
@@ -374,6 +392,8 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
+      isAccountsPage,
+      isTrash,
       fetchFiles,
       fetchRooms,
       fetchPeople,
@@ -382,7 +402,6 @@ const SectionFilterContent = ({
       accountsFilter,
       filter,
       selectedFolderId,
-      isAccountsPage,
     ]
   );
 
@@ -870,7 +889,6 @@ const SectionFilterContent = ({
 
         if (!isMe) {
           const user = await getUser(filter.authorType.replace("user_", ""));
-
           label = user.displayName;
         }
 
@@ -881,6 +899,17 @@ const SectionFilterContent = ({
               : FilterKeys.me
             : filter.authorType.replace("user_", ""),
           group: FilterGroups.filterAuthor,
+          label: label,
+        });
+      }
+
+      if (filter.roomId) {
+        const room = await getRoomInfo(filter.roomId);
+        const label = room.title;
+
+        filterValues.push({
+          key: filter.roomId,
+          group: FilterGroups.filterRoom,
           label: label,
         });
       }
@@ -935,6 +964,7 @@ const SectionFilterContent = ({
   }, [
     filter.withSubfolders,
     filter.authorType,
+    filter.roomId,
     filter.filterType,
     filter.searchInContent,
     filter.excludeSubject,
@@ -1224,7 +1254,7 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: t("Common:Type"),
             isHeader: true,
-            isLast: true,
+            isLast: !isTrash,
           },
           ...folders,
           {
@@ -1485,8 +1515,30 @@ const SectionFilterContent = ({
       ];
 
       filterOptions.push(...authorOption);
-
       filterOptions.push(...typeOptions);
+
+      if (isTrash) {
+        const roomOption = [
+          {
+            id: "filter_search-by-room-content-header",
+            key: "filter_search-by-room-content-header",
+            group: FilterGroups.filterRoom,
+            label: "Room",
+            isHeader: true,
+            isLast: true,
+          },
+          {
+            id: "filter_search-by-room-content",
+            key: "filter_search-by-room-content",
+            group: FilterGroups.filterRoom,
+            withoutHeader: true,
+            label: "Select room",
+            displaySelectorType: "button",
+            isLast: true,
+          },
+        ];
+        filterOptions.push(...roomOption);
+      }
     }
     return filterOptions;
   }, [
@@ -1498,6 +1550,7 @@ const SectionFilterContent = ({
     isAccountsPage,
     isFavoritesFolder,
     isRecentFolder,
+    isTrash,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1840,6 +1893,7 @@ const SectionFilterContent = ({
     infoPanelVisible,
     viewAs,
     isPersonalRoom,
+    isTrash,
     isDashboardPage,
   ]);
 
@@ -1938,6 +1992,9 @@ const SectionFilterContent = ({
         }
         if (group === FilterGroups.filterContent) {
           newFilter.searchInContent = null;
+        }
+        if (group === FilterGroups.filterRoom) {
+          newFilter.roomId = null;
         }
 
         newFilter.page = 0;

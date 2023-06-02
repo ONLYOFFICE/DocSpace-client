@@ -991,6 +991,77 @@ const SectionFilterContent = ({
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    if (isDashboardPage) {
+      const dashboardFilterOptions = [
+        //contentOptions
+        {
+          key: FilterGroups.roomFilterContent,
+          group: FilterGroups.roomFilterContent,
+          label: t("Common:Search"),
+          isHeader: true,
+        },
+        {
+          id: "filter_search-by-file-contents",
+          key: FilterKeys.withContent,
+          group: FilterGroups.roomFilterContent,
+          label: t("SearchByContent"),
+          isCheckbox: true,
+        },
+        //fillerByAuthor
+        {
+          key: FilterGroups.filterAuthor,
+          group: FilterGroups.filterAuthor,
+          label: t("ByAuthor"),
+          isHeader: true,
+          withMultiItems: true,
+        },
+        {
+          id: "filter_author-me",
+          key: FilterKeys.me,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:MeLabel"),
+        },
+        {
+          id: "filter_author-other",
+          key: FilterKeys.other,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:OtherLabel"),
+        },
+      ];
+
+      // temp TODO: remove
+
+      const columns = [
+        "Сотрудник",
+        "Руководитель",
+        "Бухгалтер",
+        "Директор",
+        "Готовые",
+        "Отказ",
+      ];
+
+      if (columns.length > 0) {
+        const tagsOptions = columns.map((column) => ({
+          key: column,
+          group: FilterGroups.roomFilterTags,
+          label: column,
+          isMultiSelect: true,
+        }));
+
+        dashboardFilterOptions.push({
+          key: FilterGroups.roomFilterTags,
+          group: FilterGroups.roomFilterTags,
+          label: "Show columns",
+          isHeader: true,
+          isLast: true,
+        });
+
+        dashboardFilterOptions.push(...tagsOptions);
+      }
+
+      return dashboardFilterOptions;
+    }
+
     if (isAccountsPage) {
       const statusItems = [
         {
@@ -1551,6 +1622,7 @@ const SectionFilterContent = ({
     isFavoritesFolder,
     isRecentFolder,
     isTrash,
+    isDashboardPage,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {

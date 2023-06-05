@@ -62,7 +62,7 @@ const StatusFillingPanel = ({ visible, setStatusFillinglVisible }) => {
               onClick={() => console.log("icon clicked")}
             />
           </Box>
-          
+
           <FillingStatusLine />
         </StyledScrollbar>
 

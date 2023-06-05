@@ -37,7 +37,7 @@ import FillingStatusSvgUrl from "PUBLIC_DIR/images/filling-status.react.svg?url"
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights } from "@docspace/common/constants";
@@ -100,7 +100,12 @@ class ContextOptionsStore {
 
   onShowFillingStatus = (item) => {
     const { setStatusFillinglVisible } = this.dialogsStore;
+    const { setMainButtonMobileVisible } = this.filesStore;
     setStatusFillinglVisible(true);
+
+    if (isMobileOnly) {
+      setMainButtonMobileVisible(false);
+    }
   };
 
   onClickOpenBoard = (item) => {
@@ -554,7 +559,7 @@ class ContextOptionsStore {
 
   onShowInfoPanel = (item) => {
     const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
-    
+
     setSelection(item);
     setIsVisible(true);
   };

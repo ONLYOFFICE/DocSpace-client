@@ -74,6 +74,13 @@ public class FoldersControllerHelper : FilesHelperBase
         return await _folderDtoHelper.GetAsync(folder);
     }
 
+    public async Task<FolderDto<T>> CreateBoardAsync<T>(T folderId, string title)
+    {
+        var folder = await _fileStorageService.CreateNewBoardAsync(folderId, title);
+
+        return await _folderDtoHelper.GetAsync(folder);
+    }
+
     public async Task<FolderContentDto<T>> GetFolderAsync<T>(T folderId, Guid? userIdOrGroupId, FilterType? filterType, T roomId, bool? searchInContent, bool? withSubFolders, bool? excludeSubject)
     {
         var folderContentWrapper = await ToFolderContentWrapperAsync(folderId, userIdOrGroupId ?? Guid.Empty, filterType ?? FilterType.None, roomId, searchInContent ?? false, withSubFolders ?? false, excludeSubject ?? false);

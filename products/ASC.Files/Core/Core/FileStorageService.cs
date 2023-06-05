@@ -484,6 +484,15 @@ public class FileStorageService //: IFileStorageService
 
         return await InternalCreateNewFolderAsync(parentId, title);
     }
+    public async Task<Folder<T>> CreateNewBoardAsync<T>(T parentId, string title)
+    {
+        if (string.IsNullOrEmpty(title) || parentId == null)
+        {
+            throw new ArgumentException();
+        }
+
+        return await CreateBoardAsync(title, parentId, false);
+    }
 
     public async Task<Folder<int>> CreateRoomAsync(string title, RoomType roomType, bool @private, IEnumerable<FileShareParams> share, bool notify, string sharingMessage)
     {

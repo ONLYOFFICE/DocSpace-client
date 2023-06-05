@@ -459,6 +459,18 @@ public class EntryManager
 
             CalculateTotal();
         }
+        else if (parent.FolderType == FolderType.Board)
+        {
+            var folderDao = _daoFactory.GetFolderDao<T>();
+            var fileDao = _daoFactory.GetFileDao<T>();
+
+            var formFillingSteps = folderDao.GetFoldersAsync(parent.Id, orderBy, filterType, subjectGroup, subjectId, searchText, withSubfolders);
+            var task1 = _fileSecurity.FilterReadAsync(formFillingSteps).ToListAsync();
+
+            entries.AddRange(await task1);
+
+            CalculateTotal();
+        }
         else
         {
             if (parent.FolderType == FolderType.TRASH)

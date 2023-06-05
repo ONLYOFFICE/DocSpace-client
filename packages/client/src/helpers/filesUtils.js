@@ -90,6 +90,9 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewPresentation");
     case "docxf":
       return i18n.t("Common:NewMasterForm");
+    //TODO: remove later
+    case "board":
+      return "New board";
     default:
       return i18n.t("Common:NewFolder");
   }

@@ -260,6 +260,14 @@ const SectionFilterContent = ({
 
   const onFilter = React.useCallback(
     (data) => {
+      if (isDashboardPage) {
+        const tags = getTags(data);
+        const withContent = getFilterContent(data);
+        const authorType = getAuthorType(data);
+
+        return console.log("onFilter", { data, tags, withContent, authorType });
+      }
+
       if (isAccountsPage) {
         setIsLoading(true);
         const status = getStatus(data);
@@ -393,6 +401,7 @@ const SectionFilterContent = ({
     [
       isRooms,
       isAccountsPage,
+      isDashboardPage,
       isTrash,
       fetchFiles,
       fetchRooms,
@@ -443,6 +452,13 @@ const SectionFilterContent = ({
 
   const onSearch = React.useCallback(
     (data = "") => {
+      if (isDashboardPage) {
+        // TODO: add a search handler for the dashboard
+
+        console.log("Search", { data });
+        return;
+      }
+
       if (isAccountsPage) {
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
@@ -477,6 +493,7 @@ const SectionFilterContent = ({
     [
       isRooms,
       isAccountsPage,
+      isDashboardPage,
       setIsLoading,
       fetchFiles,
       fetchRooms,

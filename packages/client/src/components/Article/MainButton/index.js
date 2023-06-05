@@ -375,6 +375,16 @@ const ArticleMainButtonContent = (props) => {
             onClick: onCreate,
             key: "new-folder",
           },
+          // Temp removed later
+          {
+            id: "actions_new-board",
+            className: "main-button_drop-down",
+            icon: CatalogFolderReactSvgUrl,
+            label: "Create new board",
+            onClick: onCreate,
+            action: "board",
+            key: "new-board",
+          },
         ];
 
     const uploadActions = isAccountsPage

@@ -1226,6 +1226,7 @@ class FilesStore {
           if (filter && isEmptyList) {
             const {
               authorType,
+              roomId,
               search,
               withSubfolders,
               filterType,
@@ -1233,6 +1234,7 @@ class FilesStore {
             } = filter;
             const isFiltered =
               authorType ||
+              roomId ||
               search ||
               !withSubfolders ||
               filterType ||
@@ -1633,6 +1635,7 @@ class FilesStore {
       const canViewFile = item.viewAccessability.WebView;
 
       const isMasterForm = item.fileExst === ".docxf";
+      const isPdf = item.fileExst === ".pdf";
 
       let fileOptions = [
         //"open",
@@ -1643,6 +1646,7 @@ class FilesStore {
         "edit",
         "preview",
         "view",
+        "pdf-view",
         "make-form",
         "separator0",
         "link-for-room-members",
@@ -1675,6 +1679,10 @@ class FilesStore {
         // "unsubscribe",
         "delete",
       ];
+
+      if (!isPdf || !window.DocSpaceConfig.pdfViewer) {
+        fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
+      }
 
       if (!canLockFile) {
         fileOptions = this.removeOptions(fileOptions, [
@@ -2193,8 +2201,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id) {
-    return api.rooms.getHistory(module, id);
+  getHistory(module, id, signal = null) {
+    return api.rooms.getHistory(module, id, signal);
   }
 
   getRoomHistory(id) {
@@ -3182,10 +3190,12 @@ class FilesStore {
     return openEditor(id, providerKey, tab, url, isPrivacy);
   };
 
-  createThumbnails = async () => {
-    if (this.viewAs !== "tile" || !this.files) return;
+  createThumbnails = async (files = null) => {
+    if ((this.viewAs !== "tile" || !this.files) && !files) return;
 
-    const newFiles = this.files.filter((f) => {
+    const currentFiles = files || this.files;
+
+    const newFiles = currentFiles.filter((f) => {
       return (
         typeof f.id !== "string" &&
         f?.thumbnailStatus === thumbnailStatuses.WAITING &&
@@ -3497,8 +3507,14 @@ class FilesStore {
       withoutTags,
     } = this.roomsFilter;
 
-    const { authorType, search, withSubfolders, filterType, searchInContent } =
-      this.filter;
+    const {
+      authorType,
+      roomId,
+      search,
+      withSubfolders,
+      filterType,
+      searchInContent,
+    } = this.filter;
 
     const isFiltered =
       isRoomsFolder || isArchiveFolder
@@ -3510,6 +3526,7 @@ class FilesStore {
           tags ||
           withoutTags
         : authorType ||
+          roomId ||
           search ||
           !withSubfolders ||
           filterType ||

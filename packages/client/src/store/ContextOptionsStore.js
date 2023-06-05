@@ -231,9 +231,9 @@ class ContextOptionsStore {
   };
 
   finalizeVersion = (id) => {
-    this.filesActionsStore
-      .finalizeVersionAction(id)
-      .catch((err) => toastr.error(err));
+    this.filesActionsStore.finalizeVersionAction(id).catch((err) => {
+      toastr.error(err);
+    });
   };
 
   onClickFavorite = (e, id, t) => {
@@ -263,7 +263,9 @@ class ContextOptionsStore {
           : toastr.success(t("Translations:FileLocked"))
       )
       .then(() => setInfoPanelSelection({ ...item, locked: !locked }))
-      .catch((err) => toastr.error(err));
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   onClickLinkForPortal = (item, t) => {
@@ -416,7 +418,9 @@ class ContextOptionsStore {
     const itemId = typeof fileId !== "object" ? fileId : item.id;
     this.mediaViewerDataStore.setMediaViewerData({ visible: true, id: itemId });
     // localStorage.setItem("isFirstUrl", window.location.href);
-    this.mediaViewerDataStore.saveFirstUrl(window.location.href);
+    this.mediaViewerDataStore.saveFirstUrl(
+      `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+    );
     this.mediaViewerDataStore.changeUrl(itemId);
   };
 
@@ -907,6 +911,14 @@ class ContextOptionsStore {
         id: "option_view",
         key: "view",
         label: t("Common:View"),
+        icon: EyeReactSvgUrl,
+        onClick: (fileId) => this.onMediaFileClick(fileId, item),
+        disabled: false,
+      },
+      {
+        id: "option_pdf-view",
+        key: "pdf-view",
+        label: "Pdf viewer",
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
         disabled: false,

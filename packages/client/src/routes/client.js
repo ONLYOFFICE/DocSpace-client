@@ -60,6 +60,14 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "archived",
+            element: (
+              <PrivateRoute>
+                <Navigate to="/rooms/archived" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/personal",
             element: (
               <PrivateRoute restricted withManager withCollaborator>
@@ -92,22 +100,6 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:room/dashboard",
-            element: (
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "rooms/shared/:room/dashboard/filter",
-            element: (
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>
@@ -136,6 +128,22 @@ const ClientRoutes = [
             element: (
               <PrivateRoute>
                 <FilesView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:room/dashboard",
+            element: (
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:room/dashboard/filter",
+            element: (
+              <PrivateRoute>
+                <Dashboard />
               </PrivateRoute>
             ),
           },

@@ -254,7 +254,8 @@ class SettingsStore {
     providerKey = null,
     contentLength = null,
     roomType = null,
-    isArchive = null
+    isArchive = null,
+    isDashboard = false
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -273,6 +274,8 @@ class SettingsStore {
       return icon;
     } else if (roomType) {
       return this.getRoomsIcon(roomType, isArchive, 32);
+    } else if (isDashboard) {
+      return this.getBoardIcon(size);
     } else {
       return this.getFolderIcon(providerKey, size);
     }
@@ -316,6 +319,11 @@ class SettingsStore {
       }
     }
 
+    return this.getIconBySize(size, path);
+  };
+
+  getBoardIcon = (size = 32) => {
+    const path = "board.svg";
     return this.getIconBySize(size, path);
   };
 

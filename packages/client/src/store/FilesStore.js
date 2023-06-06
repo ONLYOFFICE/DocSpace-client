@@ -13,6 +13,7 @@ import {
 
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
+import partition from "@docspace/common/utils/partition";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import toastr from "@docspace/components/toast/toastr";
 import config from "PACKAGE_FILE";
@@ -49,6 +50,7 @@ class FilesStore {
   treeFoldersStore;
   filesSettingsStore;
   thirdPartyStore;
+  dashboardStore;
 
   accessRightsStore;
 
@@ -136,7 +138,8 @@ class FilesStore {
     treeFoldersStore,
     filesSettingsStore,
     thirdPartyStore,
-    accessRightsStore
+    accessRightsStore,
+    dashboardStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -149,6 +152,7 @@ class FilesStore {
     this.filesSettingsStore = filesSettingsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.accessRightsStore = accessRightsStore;
+    this.dashboardStore = dashboardStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1248,7 +1252,15 @@ class FilesStore {
           } else {
             this.setIsEmptyPage(isEmptyList);
           }
-          this.setFolders(isPrivacyFolder && isMobile ? [] : data.folders);
+
+          const [dashboards, folders] = partition(
+            data.folders,
+            (folder) => folder?.type === 22
+          );
+
+          this.dashboardStore.setBoards(dashboards);
+
+          this.setFolders(isPrivacyFolder && isMobile ? [] : folders);
           this.setFiles(isPrivacyFolder && isMobile ? [] : data.files);
         });
 
@@ -2578,7 +2590,7 @@ class FilesStore {
       return secondValue - firstValue;
     });
 
-    const items = [...newFolders, ...this.files];
+    const items = [...newFolders, ...this.dashboardStore.boards, ...this.files];
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
@@ -2638,6 +2650,8 @@ class FilesStore {
         "small"
       );
 
+      const isDashboard = item?.type === FolderType.Dashboard;
+
       const providerType =
         RoomsProviderType[
           Object.keys(RoomsProviderType).find((key) => key === item.providerKey)
@@ -2649,6 +2663,7 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
+
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
@@ -2672,6 +2687,8 @@ class FilesStore {
 
       const href = isRecycleBinFolder
         ? null
+        : isDashboard
+        ? this.dashboardStore.getUrlToBoard(id)
         : previewUrl
         ? previewUrl
         : !isFolder
@@ -2689,7 +2706,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              isDashboard
             );
 
       const defaultRoomIcon = isRoom
@@ -2699,7 +2717,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            isDashboard
           )
         : undefined;
 
@@ -2724,6 +2743,7 @@ class FilesStore {
         defaultRoomIcon,
         id,
         isFolder,
+        isDashboard,
         logo,
         locked,
         new: item.new,

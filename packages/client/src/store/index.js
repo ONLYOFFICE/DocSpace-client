@@ -56,13 +56,16 @@ const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
+const dashboardStore = new DashboardStore();
+
 const filesStore = new FilesStore(
   authStore,
   selectedFolderStore,
   treeFoldersStore,
   settingsStore,
   thirdPartyStore,
-  accessRightsStore
+  accessRightsStore,
+  dashboardStore
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -160,8 +163,6 @@ const createEditRoomStore = new CreateEditRoomStore(
   authStore.infoPanelStore,
   authStore.currentQuotaStore
 );
-
-const dashboardStore = new DashboardStore();
 
 const store = {
   auth: authStore,

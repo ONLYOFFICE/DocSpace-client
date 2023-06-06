@@ -64,7 +64,10 @@ const FileTile = (props) => {
     96,
     temporaryExtension,
     item.providerKey,
-    item.contentLength
+    item.contentLength,
+    null,
+    null,
+    item.isDashboard
   );
 
   const { thumbnailUrl } = item;

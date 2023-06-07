@@ -20,14 +20,16 @@ import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/common/utils";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
 import {
   getCategoryType,
+  getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
 import { isDesktop } from "@docspace/components/utils/device";
 import { getContextMenuKeysByType } from "SRC_DIR/helpers/plugins";
 import { PluginContextMenuItemType } from "SRC_DIR/helpers/plugins/constants";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 
 const { FilesFilter, RoomsFilter } = api;
@@ -51,11 +53,9 @@ class FilesStore {
   filesSettingsStore;
   thirdPartyStore;
   dashboardStore;
+  clientLoadingStore;
 
   accessRightsStore;
-
-  isLoaded = false;
-  isLoading = false;
 
   viewAs =
     isMobile && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
@@ -71,7 +71,6 @@ class FilesStore {
   tooltipPageY = 0;
   startDrag = false;
 
-  firstLoad = true;
   alreadyFetchingRooms = false;
 
   files = [];
@@ -139,7 +138,8 @@ class FilesStore {
     filesSettingsStore,
     thirdPartyStore,
     accessRightsStore,
-    dashboardStore
+    dashboardStore,
+    clientLoadingStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -153,6 +153,7 @@ class FilesStore {
     this.thirdPartyStore = thirdPartyStore;
     this.accessRightsStore = accessRightsStore;
     this.dashboardStore = dashboardStore;
+    this.clientLoadingStore = clientLoadingStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -161,7 +162,7 @@ class FilesStore {
     socketHelper.on("s:modify-folder", async (opt) => {
       console.log("[WS] s:modify-folder", opt);
 
-      if (!(this.isLoading || this.operationAction))
+      if (!(this.clientLoadingStore.isLoading || this.operationAction))
         switch (opt?.cmd) {
           case "create":
             this.wsModifyFolderCreate(opt);
@@ -187,10 +188,12 @@ class FilesStore {
           this.selectedFolderStore.foldersCount--;
         this.authStore.infoPanelStore.reloadSelection();
       }
+
+      this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
 
     socketHelper.on("refresh-folder", (id) => {
-      if (!id || this.isLoading) return;
+      if (!id || this.clientLoadingStore.isLoading) return;
 
       //console.log(
       //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
@@ -591,16 +594,19 @@ class FilesStore {
     }
   };
 
+  clearFiles = () => {
+    this.setFolders([]);
+    this.setFiles([]);
+
+    this.selectedFolderStore.setSelectedFolder(null);
+  };
+
   setActiveFiles = (activeFiles) => {
     this.activeFiles = activeFiles;
   };
 
   setActiveFolders = (activeFolders) => {
     this.activeFolders = activeFolders;
-  };
-
-  setIsLoaded = (isLoaded) => {
-    this.isLoaded = isLoaded;
   };
 
   setViewAs = (viewAs) => {
@@ -615,10 +621,6 @@ class FilesStore {
 
   setDragging = (dragging) => {
     this.dragging = dragging;
-  };
-
-  setIsLoading = (isLoading) => {
-    this.isLoading = isLoading;
   };
 
   setTooltipPosition = (tooltipPageX, tooltipPageY) => {
@@ -686,7 +688,7 @@ class FilesStore {
 
     updateTempContent();
     if (!isAuthenticated) {
-      return this.setIsLoaded(true);
+      return this.clientLoadingStore.setIsLoaded(true);
     } else {
       updateTempContent(isAuthenticated);
     }
@@ -715,7 +717,12 @@ class FilesStore {
     }
     requests.push(getFilesSettings());
 
-    return Promise.all(requests).then(() => this.setIsInit(true));
+    return Promise.all(requests).then(() => {
+      this.clientLoadingStore.setIsArticleLoading(false);
+      this.clientLoadingStore.setFirstLoad(false);
+
+      this.setIsInit(true);
+    });
   };
 
   setIsInit = (isInit) => {
@@ -724,9 +731,12 @@ class FilesStore {
 
   reset = () => {
     this.isInit = false;
-    this.isLoaded = false;
-    this.isLoading = false;
-    this.firstLoad = true;
+    this.clientLoadingStore.setIsLoaded(false);
+    this.clientLoadingStore.setIsSectionHeaderLoading(true);
+    this.clientLoadingStore.setIsSectionFilterLoading(true);
+    this.clientLoadingStore.setIsSectionBodyLoading(true);
+    this.clientLoadingStore.setIsArticleLoading(true);
+    this.clientLoadingStore.setFirstLoad(true);
 
     this.alreadyFetchingRooms = false;
 
@@ -736,9 +746,6 @@ class FilesStore {
     this.selection = [];
     this.bufferSelection = null;
     this.selected = "close";
-  };
-  setFirstLoad = (firstLoad) => {
-    this.firstLoad = firstLoad;
   };
 
   setFiles = (files) => {
@@ -1031,7 +1038,7 @@ class FilesStore {
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
-    this.setFilterUrl(filter);
+    // this.setFilterUrl(filter);
     this.filter = filter;
 
     runInAction(() => {
@@ -1058,7 +1065,7 @@ class FilesStore {
 
     if (!this.authStore.settingsStore.withPaging) filter.pageCount = 100;
 
-    this.setFilterUrl(filter, true);
+    // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
 
     runInAction(() => {
@@ -1099,14 +1106,14 @@ class FilesStore {
 
     if (newUrl === currentUrl) return;
 
-    window.DocSpace.navigate(newUrl, {
-      state: {
-        fromAccounts:
-          window.DocSpace.location.pathname.includes("accounts/filter"),
-        fromSettings: window.DocSpace.location.pathname.includes("settings"),
-      },
-      replace: !location.search,
-    });
+    // window.DocSpace.navigate(newUrl, {
+    //   state: {
+    //     fromAccounts:
+    //       window.DocSpace.location.pathname.includes("accounts/filter"),
+    //     fromSettings: window.DocSpace.location.pathname.includes("settings"),
+    //   },
+    //   replace: !location.search,
+    // });
   };
 
   isEmptyLastPageAfterOperation = (newSelection) => {
@@ -1154,7 +1161,7 @@ class FilesStore {
     clearSelection = true
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
-    if (this.isLoading) {
+    if (this.clientLoadingStore.isLoading) {
       this.roomsController.abort();
       this.roomsController = new AbortController();
     }
@@ -1162,8 +1169,12 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    if (folderId === "@my" && this.authStore.userStore.user.isVisitor)
-      return this.fetchRooms();
+    if (folderId === "@my" && this.authStore.userStore.user.isVisitor) {
+      const url = getCategoryUrl(CategoryType.Shared);
+      return window.DocSpace.navigate(
+        `${url}?${RoomsFilter.getDefault().toUrlParams()}`
+      );
+    }
 
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
@@ -1330,6 +1341,8 @@ class FilesStore {
           ...{ new: data.new },
         });
 
+        this.clientLoadingStore.setIsSectionHeaderLoading(false);
+
         const selectedFolder = {
           selectedFolder: { ...this.selectedFolderStore },
         };
@@ -1382,6 +1395,13 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
+
+        if (window?.DocSpace?.location?.state?.highlightFileId) {
+          this.setHighlightFile({
+            highlightFileId: window.DocSpace.location.state.highlightFileId,
+            isFileHasExst: window.DocSpace.location.state.isFileHasExst,
+          });
+        }
       });
   };
 
@@ -1394,7 +1414,7 @@ class FilesStore {
   ) => {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
 
-    if (this.isLoading) {
+    if (this.clientLoadingStore.isLoading) {
       this.filesController.abort();
       this.filesController = new AbortController();
     }
@@ -1495,6 +1515,8 @@ class FilesStore {
             navigationPath: [],
             ...{ new: data.new },
           });
+
+          this.clientLoadingStore.setIsSectionHeaderLoading(false);
 
           const selectedFolder = {
             selectedFolder: { ...this.selectedFolderStore },
@@ -3331,7 +3353,7 @@ class FilesStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;
 
-    if (this.isLoading) return false;
+    if (this.clientLoadingStore.isLoading) return false;
     return this.filesList.length < filterTotal;
   }
 
@@ -3340,7 +3362,12 @@ class FilesStore {
   };
 
   fetchMoreFiles = async () => {
-    if (!this.hasMoreFiles || this.filesIsLoading || this.isLoading) return;
+    if (
+      !this.hasMoreFiles ||
+      this.filesIsLoading ||
+      this.clientLoadingStore.isLoading
+    )
+      return;
 
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 

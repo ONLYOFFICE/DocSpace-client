@@ -86,7 +86,7 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
-    if (isAccountsPage || isSettingsPage) return;
+    if (isAccountsPage || isSettingsPage || isDashboardPage) return;
     setIsLoading(true);
 
     if (!window.location.href.includes("#preview")) {
@@ -232,8 +232,6 @@ const useFiles = ({
             filter.selectedItem = selectedItem;
           }
         }
-
-        if (isDashboardPage) return null;
 
         if (filter) {
           if (isRooms) {

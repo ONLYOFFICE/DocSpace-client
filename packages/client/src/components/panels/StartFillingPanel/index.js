@@ -1,0 +1,122 @@
+import React, { useState, useCallback } from "react";
+import ModalDialog from "@docspace/components/modal-dialog";
+import Button from "@docspace/components/button";
+import FillingRoleSelector from "@docspace/components/filling-role-selector";
+import InviteUserForRolePanel from "../InviteUserForRolePanel";
+import Aside from "@docspace/components/aside";
+
+const roles = [
+  { id: 3, name: "Director", order: 3, color: "#BB85E7" },
+  { id: 2, name: "Accountant", order: 2, color: "#70D3B0" },
+  {
+    id: 1,
+    name: "Employee",
+    order: 1,
+    color: "#FBCC86",
+    everyone: "@Everyone",
+  },
+];
+
+const StartFillingPanel = ({ visible }) => {
+  const [visibleStartFilling, setVisibleStartFilling] = useState(visible);
+  const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
+    useState(false);
+  const [currentRole, setCurrentRole] = useState("");
+  const [users, setUsers] = useState([]);
+
+  const onAddUser = (role) => {
+    console.log("onAddUser", role);
+    setCurrentRole(role);
+    setVisibleInviteUserForRolePanel(true);
+  };
+
+  const onClose = () => {
+    setVisibleStartFilling(false);
+    setVisibleInviteUserForRolePanel(false);
+    setCurrentRole("");
+  };
+
+  const onSelectUserForRole = (user) => {
+    // TODO: Field hasAvatar is not coming now, can remove it in FillingRoleSelector
+    setUsers([
+      ...users,
+      {
+        ...user,
+        displayName: user.label,
+        role: currentRole,
+      },
+    ]);
+
+    setVisibleInviteUserForRolePanel(false);
+    setCurrentRole("");
+  };
+
+  const onRemoveUser = useCallback(
+    (id) => {
+      const filteredUsers = users.filter((user) => user.id !== id);
+      setUsers(filteredUsers);
+    },
+    [users, setUsers]
+  );
+
+  return (
+    <>
+      <Aside
+        className="start-filling"
+        visible={visibleStartFilling}
+        onClose={onClose}
+        withoutBodyScroll
+        zIndex={310}
+      >
+        <ModalDialog
+          displayType="aside"
+          withBodyScroll
+          visible={visibleStartFilling}
+          withFooterBorder
+          onClose={onClose}
+        >
+          <ModalDialog.Header>Start Filling</ModalDialog.Header>
+
+          <ModalDialog.Body>
+            <FillingRoleSelector
+              roles={roles}
+              users={users}
+              onAddUser={onAddUser}
+              onRemoveUser={onRemoveUser}
+            />
+          </ModalDialog.Body>
+
+          <ModalDialog.Footer>
+            <Button
+              id="shared_create-room-modal_submit"
+              tabIndex={5}
+              label="Start"
+              size="normal"
+              primary
+              scale
+            />
+            <Button
+              id="shared_create-room-modal_cancel"
+              tabIndex={5}
+              label="Cancel"
+              size="normal"
+              scale
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      </Aside>
+
+      {visibleInviteUserForRolePanel && (
+        <InviteUserForRolePanel
+          visible={visibleInviteUserForRolePanel}
+          currentRole={currentRole}
+          onClose={onClose}
+          onSelectUserForRole={onSelectUserForRole}
+          setVisibleInviteUserForRolePanel={setVisibleInviteUserForRolePanel}
+        />
+      )}
+    </>
+  );
+};
+
+export default StartFillingPanel;

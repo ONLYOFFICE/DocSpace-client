@@ -211,7 +211,7 @@ public interface IFolderDao<T>
     /// <returns>Maximum size of file which can be uploaded to folder</returns>
     Task<long> GetMaxUploadSizeAsync(T folderId, bool chunkedUpload = false);
 
-    IDataWriteOperator CreateDataWriteOperator(
+    Task<IDataWriteOperator> CreateDataWriteOperatorAsync(
             T folderId,
             CommonChunkedUploadSession chunkedUploadSession,
             CommonChunkedUploadSessionHolder sessionHolder);
@@ -345,6 +345,14 @@ public interface IFolderDao<T>
     /// <param name="createIfNotExists"></param>
     /// <returns></returns>
     Task<T> GetFolderIDBoard(bool createIfNotExists);
+
+    /// <summary>
+    /// Returns id folder "FormFillingStep"
+    /// Only in TMFolderDao
+    /// </summary>
+    /// <param name="createIfNotExists"></param>
+    /// <returns></returns>
+    Task<T> GetFolderIDFormFillingStep(bool createIfNotExists);
 
     /// <summary>
     /// Return id of related object

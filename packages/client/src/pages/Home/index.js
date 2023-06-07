@@ -2,30 +2,13 @@ import React from "react";
 import { useLocation, Outlet } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import { withTranslation, Trans } from "react-i18next";
-import axios from "axios";
+import { withTranslation } from "react-i18next";
 
-import {
-  showLoader,
-  hideLoader,
-  frameCallbackData,
-  frameCallCommand,
-  getObjectByLocation,
-} from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/common/utils";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
-import { getGroup } from "@docspace/common/api/groups";
-import { getUserById } from "@docspace/common/api/people";
-import { Events } from "@docspace/common/constants";
 import Section from "@docspace/common/components/Section";
 
-import toastr from "@docspace/components/toast/toastr";
-
 import DragTooltip from "SRC_DIR/components/DragTooltip";
-import { getCategoryType, setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import {
   SectionFilterContent,
@@ -37,16 +20,24 @@ import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 import MediaViewer from "./MediaViewer";
 import SelectionArea from "./SelectionArea";
 import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+import { RoomSearchArea } from "@docspace/common/constants";
+
+import {
+  useFiles,
+  useSDK,
+  useOperations,
+  useAccounts,
+  useSettings,
+} from "./Hooks";
 
 const PureHome = (props) => {
   const {
     fetchFiles,
     fetchRooms,
-    alreadyFetchingRooms,
-    setAlreadyFetchingRooms,
+
     //homepage,
     setIsLoading,
-    setFirstLoad,
+
     setToPreviewFile,
     playlist,
 
@@ -72,8 +63,7 @@ const PureHome = (props) => {
     itemsSelectionTitle,
     setItemsSelectionTitle,
     refreshFiles,
-    isHeaderVisible,
-    setHeaderVisible,
+
     setFrameConfig,
     user,
     folders,
@@ -112,7 +102,6 @@ const PureHome = (props) => {
     frameConfig,
     withPaging,
     isEmptyPage,
-    isLoadedEmptyPage,
 
     setPortalTariff,
 
@@ -120,430 +109,91 @@ const PureHome = (props) => {
     fetchPeople,
     setSelectedNode,
     onClickBack,
+
+    showFilterLoader,
   } = props;
 
   const location = useLocation();
 
-  const isAccountsPage = location.pathname.includes("accounts");
+  const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
-  const isDashboard = location.pathname.includes("dashboard");
+  const isDashboardPage = location.pathname.includes("dashboard");
 
-  React.useEffect(() => {
-    if (isAccountsPage || isSettingsPage) return;
+  const { onDrop } = useFiles({
+    t,
+    dragging,
+    setDragging,
+    disableDrag,
+    uploadEmptyFolders,
+    startUpload,
+    fetchFiles,
+    fetchRooms,
+    setIsLoading,
 
-    if (!window.location.href.includes("#preview")) {
-      // localStorage.removeItem("isFirstUrl");
-      // Media viewer
-      removeFirstUrl();
-    }
+    isAccountsPage,
+    isSettingsPage,
+    isDashboardPage,
 
-    const categoryType = getCategoryType(location);
+    location,
 
-    let filterObj = null;
-    let isRooms = false;
+    playlist,
 
-    if (window.location.href.indexOf("/#preview") > 1 && playlist.length < 1) {
-      const pathname = window.location.href;
-      const fileId = pathname.slice(pathname.indexOf("#preview") + 9);
+    getFileInfo,
+    setToPreviewFile,
+    setIsPreview,
 
-      setTimeout(() => {
-        getFileInfo(fileId)
-          .then((data) => {
-            const canOpenPlayer =
-              data.viewAccessability.ImageView ||
-              data.viewAccessability.MediaView;
-            const file = { ...data, canOpenPlayer };
-            setToPreviewFile(file, true);
-            setIsPreview(true);
-          })
-          .catch((err) => {
-            toastr.error(err);
-            fetchDefaultFiles();
-          });
-      }, 1);
+    setIsUpdatingRowItem,
+    removeFirstUrl,
 
-      return;
-    }
-
-    const isRoomFolder = getObjectByLocation(window.location)?.folder;
-
-    if (
-      (categoryType == CategoryType.Shared ||
-        categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive) &&
-      !isRoomFolder
-    ) {
-      filterObj = RoomsFilter.getFilter(window.location);
-
-      isRooms = true;
-
-      if (!filterObj) {
-        setIsLoading(true);
-        fetchDefaultRooms();
-
-        return;
-      }
-    } else {
-      filterObj = FilesFilter.getFilter(window.location);
-
-      if (!filterObj) {
-        setIsLoading(true);
-        fetchDefaultFiles();
-
-        return;
-      }
-    }
-
-    if (!filterObj) return;
-
-    if (isRooms && alreadyFetchingRooms && selectedFolderStore.title)
-      return setAlreadyFetchingRooms(false);
-
-    let dataObj = { filter: filterObj };
-
-    if (filterObj && filterObj.authorType) {
-      const authorType = filterObj.authorType;
-      const indexOfUnderscore = authorType.indexOf("_");
-      const type = authorType.slice(0, indexOfUnderscore);
-      const itemId = authorType.slice(indexOfUnderscore + 1);
-
-      if (itemId) {
-        dataObj = {
-          type,
-          itemId,
-          filter: filterObj,
-        };
-      } else {
-        filterObj.authorType = null;
-        dataObj = { filter: filterObj };
-      }
-    }
-
-    if (filterObj && filterObj.subjectId) {
-      const type = "user";
-      const itemId = filterObj.subjectId;
-
-      if (itemId) {
-        dataObj = {
-          type,
-          itemId,
-          filter: filterObj,
-        };
-      } else {
-        filterObj.subjectId = null;
-        dataObj = { filter: filterObj };
-      }
-    }
-
-    if (!dataObj) return;
-
-    const { filter, itemId, type } = dataObj;
-    const newFilter = filter
-      ? filter.clone()
-      : isRooms
-      ? RoomsFilter.getDefault()
-      : FilesFilter.getDefault();
-    const requests = [Promise.resolve(newFilter)];
-
-    if (type === "group") {
-      requests.push(getGroup(itemId));
-    } else if (type === "user") {
-      requests.push(getUserById(itemId));
-    }
-
-    setIsLoading(true);
-
-    axios
-      .all(requests)
-      .catch((err) => {
-        if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault());
-        } else {
-          Promise.resolve(FilesFilter.getDefault());
-        }
-
-        //console.warn("Filter restored by default", err);
-      })
-      .then((data) => {
-        const filter = data[0];
-        const result = data[1];
-        if (result) {
-          const type = result.displayName ? "user" : "group";
-          const selectedItem = {
-            key: result.id,
-            label: type === "user" ? result.displayName : result.name,
-            type,
-          };
-          if (!isRooms) {
-            filter.selectedItem = selectedItem;
-          }
-        }
-
-        if (isDashboard) {
-          return null;
-        }
-
-        if (filter) {
-          if (isRooms) {
-            return fetchRooms(null, filter);
-          } else {
-            const folderId = filter.folder;
-            return fetchFiles(folderId, filter);
-          }
-        }
-
-        return Promise.resolve();
-      })
-      .then(() => {
-        if (gallerySelected) {
-          setIsUpdatingRowItem(false);
-
-          const event = new Event(Events.CREATE);
-
-          const payload = {
-            extension: "docxf",
-            id: -1,
-            fromTemplate: true,
-            title: gallerySelected.attributes.name_form,
-          };
-
-          event.payload = payload;
-
-          window.dispatchEvent(event);
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setFirstLoad(false);
-        setAlreadyFetchingRooms(false);
-      });
-
-    window.addEventListener("message", handleMessage, false);
-
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-    };
-  }, []);
-
-  const fetchDefaultFiles = () => {
-    const filterObj = FilesFilter.getDefault();
-    const folderId = filterObj.folder;
-
-    fetchFiles(folderId).finally(() => {
-      setIsLoading(false);
-      setFirstLoad(false);
-    });
-  };
-
-  const fetchDefaultRooms = () => {
-    fetchRooms().finally(() => {
-      setIsLoading(false);
-      setFirstLoad(false);
-    });
-  };
-
-  const onDrop = (files, uploadToFolder) => {
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-    if (emptyFolders.length > 0) {
-      uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-        const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-        if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
-      });
-    } else {
-      startUpload(files, uploadToFolder, t);
-    }
-  };
-
-  const showOperationToast = (type, qty, title) => {
-    switch (type) {
-      case "move":
-        if (qty > 1) {
-          return (
-            toastr.success(
-              <Trans t={t} i18nKey="MoveItems" ns="Files">
-                {{ qty }} elements has been moved
-              </Trans>
-            ),
-            refreshFiles()
-          );
-        }
-        return (
-          toastr.success(
-            <Trans t={t} i18nKey="MoveItem" ns="Files">
-              {{ title }} moved
-            </Trans>
-          ),
-          refreshFiles()
-        );
-
-      case "duplicate":
-        if (qty > 1) {
-          return (
-            toastr.success(
-              <Trans t={t} i18nKey="CopyItems" ns="Files">
-                {{ qty }} elements copied
-              </Trans>
-            ),
-            refreshFiles()
-          );
-        }
-        return (
-          toastr.success(
-            <Trans t={t} i18nKey="CopyItem" ns="Files">
-              {{ title }} copied
-            </Trans>
-          ),
-          refreshFiles()
-        );
-
-      default:
-        break;
-    }
-  };
-
-  const showUploadPanel = () => {
-    setUploadPanelVisible(true);
-
-    if (primaryProgressDataVisible && uploaded && converted)
-      clearPrimaryProgressData();
-  };
-
-  const prevProps = React.useRef({
-    isHeaderVisible: isHeaderVisible,
-    isProgressFinished: isProgressFinished,
+    gallerySelected,
   });
 
-  React.useEffect(() => {
-    if (isHeaderVisible !== prevProps.current.isHeaderVisible) {
-      setHeaderVisible(isHeaderVisible);
-    }
-
-    if (
-      isProgressFinished &&
-      itemsSelectionTitle &&
-      isProgressFinished !== prevProps.current.isProgressFinished
-    ) {
-      showOperationToast(
-        secondaryProgressDataStoreIcon,
-        itemsSelectionLength,
-        itemsSelectionTitle
-      );
-      setItemsSelectionTitle(null);
-    }
-  }, [
-    isAccountsPage,
-    isHeaderVisible,
-    setHeaderVisible,
+  const { showUploadPanel } = useOperations({
+    t,
+    setUploadPanelVisible,
+    primaryProgressDataVisible,
+    uploaded,
+    converted,
+    clearPrimaryProgressData,
     isProgressFinished,
     refreshFiles,
     itemsSelectionTitle,
-    showOperationToast,
+    secondaryProgressDataStoreIcon,
+    itemsSelectionLength,
+    isAccountsPage,
+    isSettingsPage,
     setItemsSelectionTitle,
-  ]);
+  });
 
-  React.useEffect(() => {
-    prevProps.current.isHeaderVisible = isHeaderVisible;
-    prevProps.current.isProgressFinished = isProgressFinished;
-  }, [isHeaderVisible, isProgressFinished]);
+  useAccounts({
+    t,
+    isAccountsPage,
+    location,
 
-  const handleMessage = async (e) => {
-    const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+    setIsLoading,
 
-    if (eventData.data) {
-      const { data, methodName } = eventData.data;
+    setSelectedNode,
+    fetchPeople,
+    setPortalTariff,
+  });
 
-      let res;
+  useSettings({ t, isSettingsPage, setIsLoading });
 
-      switch (methodName) {
-        case "setConfig":
-          res = await setFrameConfig(data);
-          break;
-        case "getFolderInfo":
-          res = selectedFolderStore;
-          break;
-        case "getFolders":
-          res = folders;
-          break;
-        case "getFiles":
-          res = files;
-          break;
-        case "getList":
-          res = filesList;
-          break;
-        case "getSelection":
-          res = selection;
-          break;
-        case "getUserInfo":
-          res = user;
-          break;
-        case "openModal": {
-          const { type, options } = data;
-
-          if (type === "CreateFile" || type === "CreateFolder") {
-            const item = new Event(Events.CREATE);
-
-            const payload = {
-              extension: options,
-              id: -1,
-            };
-
-            item.payload = payload;
-
-            window.dispatchEvent(item);
-          }
-
-          if (type === "CreateRoom") {
-            const room = new Event(Events.ROOM_CREATE);
-
-            window.dispatchEvent(room);
-          }
-          break;
-        }
-        case "createFile":
-          {
-            const { folderId, title, templateId, formId } = data;
-            res = await createFile(folderId, title, templateId, formId);
-
-            refreshFiles();
-          }
-          break;
-        case "createFolder":
-          {
-            const { parentFolderId, title } = data;
-            res = await createFolder(parentFolderId, title);
-
-            refreshFiles();
-          }
-          break;
-        case "createRoom":
-          {
-            const { title, type } = data;
-            res = await createRoom(title, type);
-
-            refreshFiles();
-          }
-          break;
-        case "setListView":
-          {
-            setViewAs(data);
-          }
-          break;
-        default:
-          res = "Wrong method";
-      }
-
-      frameCallbackData(res);
-    }
-  };
-
-  if (window.parent && !frameConfig && !isAccountsPage && !isSettingsPage) {
-    frameCallCommand("setConfig");
-  }
+  useSDK({
+    frameConfig,
+    setFrameConfig,
+    selectedFolderStore,
+    folders,
+    files,
+    filesList,
+    selection,
+    user,
+    createFile,
+    createFolder,
+    createRoom,
+    refreshFiles,
+    setViewAs,
+  });
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -552,24 +202,6 @@ const PureHome = (props) => {
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
-
-  React.useEffect(() => {
-    if (!isAccountsPage) return;
-    if (location.pathname.indexOf("/accounts/filter") > -1) {
-      setSelectedNode(["accounts", "filter"]);
-
-      const newFilter = AccountsFilter.getFilter(location);
-      //console.log("PEOPLE URL changed", pathname, newFilter);
-      fetchPeople(newFilter, true).catch((err) => {
-        if (err?.response?.status === 402) setPortalTariff();
-      });
-    }
-  }, [isAccountsPage, location, setSelectedNode]);
-
-  React.useEffect(() => {
-    if (!isSettingsPage) return;
-    setDocumentTitle(t("Common:Settings"));
-  }, [t, tReady, isSettingsPage]);
 
   let sectionProps = {};
 
@@ -596,7 +228,6 @@ const PureHome = (props) => {
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
         primaryProgressDataVisible || secondaryProgressDataStoreVisible;
-      sectionProps.isHeaderVisible = isHeaderVisible;
 
       sectionProps.isEmptyPage = isEmptyPage;
     }
@@ -636,7 +267,8 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         )}
 
-        {((!isEmptyPage && !isErrorRoomNotAvailable) || isAccountsPage) &&
+        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
+          isAccountsPage) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -680,24 +312,37 @@ export default inject(
     peopleStore,
     filesActionsStore,
     oformsStore,
+    selectedFolderStore,
+    clientLoadingStore,
   }) => {
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
       clearUploadedFilesHistory,
     } = uploadDataStore;
+
     const {
       firstLoad,
-      setFirstLoad,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
+      isLoading,
+
+      showFilterLoader,
+    } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
+    };
+
+    const {
       fetchFiles,
       fetchRooms,
-      alreadyFetchingRooms,
-      setAlreadyFetchingRooms,
+
       selection,
       dragging,
       setDragging,
-      setIsLoading,
-      isLoading,
+
       viewAs,
       getFileInfo,
       setIsUpdatingRowItem,
@@ -705,14 +350,14 @@ export default inject(
       folders,
       files,
       filesList,
-      selectedFolderStore,
+
       createFile,
       createFolder,
       createRoom,
       refreshFiles,
       setViewAs,
       isEmptyPage,
-      isLoadedEmptyPage,
+
       disableDrag,
       isErrorRoomNotAvailable,
       setIsPreview,
@@ -724,7 +369,6 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
 
-      expandedKeys,
       setExpandedKeys,
       isRoomsFolder,
       isArchiveFolder,
@@ -766,15 +410,8 @@ export default inject(
 
     const { setPortalTariff } = currentTariffStatusStore;
 
-    const {
-      isHeaderVisible,
-      setHeaderVisible,
-      setFrameConfig,
-      frameConfig,
-      isFrame,
-      withPaging,
-      showCatalog,
-    } = settingsStore;
+    const { setFrameConfig, frameConfig, isFrame, withPaging, showCatalog } =
+      settingsStore;
 
     const {
       usersStore,
@@ -830,18 +467,16 @@ export default inject(
       disableDrag,
 
       setExpandedKeys,
-      setFirstLoad,
+
       setDragging,
       setIsLoading,
       fetchFiles,
       fetchRooms,
-      alreadyFetchingRooms,
-      setAlreadyFetchingRooms,
+
       setUploadPanelVisible,
       startUpload,
       uploadEmptyFolders,
-      isHeaderVisible,
-      setHeaderVisible,
+
       setToPreviewFile,
       setIsPreview,
       playlist,
@@ -869,13 +504,15 @@ export default inject(
       setViewAs,
       withPaging,
       isEmptyPage,
-      isLoadedEmptyPage,
+
       setPortalTariff,
 
       accountsViewAs,
       fetchPeople,
       setSelectedNode,
       onClickBack,
+
+      showFilterLoader,
     };
   }
 )(observer(Home));

@@ -32,11 +32,12 @@ import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.s
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import BoardIconSvgUrl from "PUBLIC_DIR/images/board.icon.svg?url";
+import FillingStatusSvgUrl from "PUBLIC_DIR/images/filling-status.react.svg?url";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights } from "@docspace/common/constants";
@@ -88,18 +89,28 @@ class ContextOptionsStore {
   }
 
   onOpenFolder = (item) => {
-    const { id, folderId, fileExst } = item;
-    const locationId = !fileExst ? id : folderId;
-    this.filesActionsStore.openLocationAction(locationId);
+    this.filesActionsStore.openLocationAction(item);
   };
 
   onClickLinkFillForm = (item) => {
     return this.gotoDocEditor(false, item);
   };
 
+  onShowFillingStatus = (item) => {
+    const { setStatusFillinglVisible } = this.dialogsStore;
+    const { setMainButtonMobileVisible } = this.filesStore;
+    setStatusFillinglVisible(true);
+
+    if (isMobileOnly) {
+      setMainButtonMobileVisible(false);
+    }
+  };
+
   onClickOpenBoard = (item) => {
     console.log({ item });
-    window.DocSpace.navigate("rooms/shared/7/dashboard");
+    window.DocSpace.navigate(
+      combineUrl("rooms/shared", item.folderId.toString(), "dashboard")
+    );
   };
 
   onClickReconnectStorage = async (item, t) => {
@@ -195,9 +206,7 @@ class ContextOptionsStore {
   };
 
   onOpenLocation = (item) => {
-    const { parentId, folderId, fileExst } = item;
-    const locationId = !fileExst ? parentId : folderId;
-    this.filesActionsStore.openLocationAction(locationId);
+    this.filesActionsStore.openLocationAction(item);
   };
 
   onOwnerChange = () => {
@@ -223,9 +232,9 @@ class ContextOptionsStore {
   };
 
   finalizeVersion = (id) => {
-    this.filesActionsStore
-      .finalizeVersionAction(id)
-      .catch((err) => toastr.error(err));
+    this.filesActionsStore.finalizeVersionAction(id).catch((err) => {
+      toastr.error(err);
+    });
   };
 
   onClickFavorite = (e, id, t) => {
@@ -255,7 +264,9 @@ class ContextOptionsStore {
           : toastr.success(t("Translations:FileLocked"))
       )
       .then(() => setInfoPanelSelection({ ...item, locked: !locked }))
-      .catch((err) => toastr.error(err));
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   onClickLinkForPortal = (item, t) => {
@@ -408,7 +419,9 @@ class ContextOptionsStore {
     const itemId = typeof fileId !== "object" ? fileId : item.id;
     this.mediaViewerDataStore.setMediaViewerData({ visible: true, id: itemId });
     // localStorage.setItem("isFirstUrl", window.location.href);
-    this.mediaViewerDataStore.saveFirstUrl(window.location.href);
+    this.mediaViewerDataStore.saveFirstUrl(
+      `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+    );
     this.mediaViewerDataStore.changeUrl(itemId);
   };
 
@@ -864,6 +877,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_show-filling-status",
+        key: "show-filling-status",
+        label: "Filling status",
+        icon: FillingStatusSvgUrl,
+        onClick: () => this.onShowFillingStatus(item),
+        disabled: false,
+      },
+      {
         id: "option_open-board",
         key: "open-board",
         label: "Open board",
@@ -891,6 +912,14 @@ class ContextOptionsStore {
         id: "option_view",
         key: "view",
         label: t("Common:View"),
+        icon: EyeReactSvgUrl,
+        onClick: (fileId) => this.onMediaFileClick(fileId, item),
+        disabled: false,
+      },
+      {
+        id: "option_pdf-view",
+        key: "pdf-view",
+        label: "Pdf viewer",
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
         disabled: false,

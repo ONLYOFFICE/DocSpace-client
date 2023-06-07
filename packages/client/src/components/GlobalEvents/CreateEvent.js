@@ -24,6 +24,8 @@ const CreateEvent = ({
   setIsLoading,
   createFile,
   createFolder,
+  //TODO: temp remove later
+  createBoard,
   addActiveItems,
   openDocEditor,
   setIsUpdatingRowItem,
@@ -108,6 +110,32 @@ const CreateEvent = ({
           : getTitleWithoutExtension({ fileExst: extension });
 
       setStartValue(newValue);
+    }
+
+    //TODO: remove later
+    if (extension === "board") {
+      console.log({ extension, newValue, parentId });
+      createBoard(parentId, newValue)
+        .then((folder) => {
+          item = folder;
+          createdFolderId = folder.id;
+          addActiveItems(null, [folder.id]);
+          setCreatedItem({ id: createdFolderId, type: "folder" });
+        })
+        .then(() => completeAction(item, type, true))
+        .catch((e) => {
+          isPaymentRequiredError(e);
+          toastr.error(e);
+        })
+        .finally(() => {
+          const folderIds = [+id];
+          createdFolderId && folderIds.push(createdFolderId);
+
+          clearActiveOperations(null, folderIds);
+          onCloseAction();
+          return setIsLoading(false);
+        });
+      return;
     }
 
     let tab =
@@ -301,11 +329,19 @@ export default inject(
     dialogsStore,
     oformsStore,
     settingsStore,
+    clientLoadingStore,
   }) => {
+    const { setIsSectionBodyLoading } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionBodyLoading(param);
+    };
+
     const {
-      setIsLoading,
       createFile,
       createFolder,
+      //TODO: temp remove later
+      createBoard,
       addActiveItems,
       openDocEditor,
       setIsUpdatingRowItem,
@@ -345,6 +381,8 @@ export default inject(
       setIsLoading,
       createFile,
       createFolder,
+      //TODO: temp remove later
+      createBoard,
       addActiveItems,
       openDocEditor,
       setIsUpdatingRowItem,

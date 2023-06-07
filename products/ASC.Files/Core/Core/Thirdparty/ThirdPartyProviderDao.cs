@@ -214,6 +214,11 @@ internal abstract class ThirdPartyProviderDao
         return null;
     }
 
+    public Task<string> GetFolderIDFormFillingStep(bool createIfNotExists)
+    {
+        return null;
+    }
+
     public Task<string> GetBunchObjectIDAsync(string folderID)
     {
         return null;
@@ -440,18 +445,13 @@ internal abstract class ThirdPartyProviderDao<TFile, TFolder, TItem> : ThirdPart
         return set.Where(r => r.TenantId == TenantID);
     }
 
-    public Task<string> MappingIDAsync(string id, bool saveIfNotExist = false)
+    public async Task<string> MappingIDAsync(string id, bool saveIfNotExist = false)
     {
         if (id == null)
         {
             return null;
         }
 
-        return InternalMappingIDAsync(id, saveIfNotExist);
-    }
-
-    private async Task<string> InternalMappingIDAsync(string id, bool saveIfNotExist = false)
-    {
         using var filesDbContext = _dbContextFactory.CreateDbContext();
 
         string result;

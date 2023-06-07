@@ -11,6 +11,7 @@ import {
   SelectFileDialog,
   HotkeyPanel,
   InvitePanel,
+  StatusFillingPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -62,6 +63,7 @@ const Panels = (props) => {
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
+    statusFillingPanelVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -138,6 +140,9 @@ const Panels = (props) => {
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
     ),
+    statusFillingPanelVisible && (
+      <StatusFillingPanel key="status-filling-panel" />
+    )
   ];
 };
 
@@ -178,6 +183,7 @@ export default inject(
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
+      statusFillingPanelVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -218,6 +224,7 @@ export default inject(
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
+      statusFillingPanelVisible,
     };
   }
 )(observer(Panels));

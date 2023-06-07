@@ -39,6 +39,9 @@ public class FolderDto<T> : FileEntryDto<T>
     public Logo Logo { get; set; }
     public bool Pinned { get; set; }
     public RoomType? RoomType { get; set; }
+    public FolderType? Type { get; set; }
+    public EmployeeDto AssignedBy { get; set; }
+
     public bool Private { get; set; }
 
     protected internal override FileEntryType EntryType { get => FileEntryType.Folder; }
@@ -76,6 +79,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
     private readonly RoomLogoManager _roomLogoManager;
     private readonly RoomsNotificationSettingsHelper _roomsNotificationSettingsHelper;
     private readonly BadgesSettingsHelper _badgesSettingsHelper;
+    private readonly EmployeeDtoHelper _employeeWraperHelper;
 
     public FolderDtoHelper(
         ApiDateTimeHelper apiDateTimeHelper,
@@ -87,7 +91,8 @@ public class FolderDtoHelper : FileEntryDtoHelper
         FileSharingHelper fileSharingHelper,
         RoomLogoManager roomLogoManager,
         BadgesSettingsHelper badgesSettingsHelper,
-        RoomsNotificationSettingsHelper roomsNotificationSettingsHelper)
+        RoomsNotificationSettingsHelper roomsNotificationSettingsHelper,
+        EmployeeDtoHelper employeeDtoHelper)
         : base(apiDateTimeHelper, employeeWrapperHelper, fileSharingHelper, fileSecurity)
     {
         _authContext = authContext;
@@ -96,6 +101,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
         _roomLogoManager = roomLogoManager;
         _roomsNotificationSettingsHelper = roomsNotificationSettingsHelper;
         _badgesSettingsHelper = badgesSettingsHelper;
+        _employeeWraperHelper = employeeDtoHelper;
     }
 
     public async Task<FolderDto<T>> GetAsync<T>(Folder<T> folder, List<Tuple<FileEntry<T>, bool>> folders = null)
@@ -136,6 +142,21 @@ public class FolderDtoHelper : FileEntryDtoHelper
             result.Mute = isMuted;
             }
         }
+        else
+        {
+            if (folder.FolderType == FolderType.FormFillingStep)
+            {
+                var mockUserData = new EmployeeDto
+                {
+                    Id = Guid.Parse("da80d2dd-4aaf-44de-8168-654ed529f8ed"),
+                    DisplayName = "Madelyn Septimus",
+                    Title = "Manager"
+                };
+                result.AssignedBy = mockUserData;
+                //result.AssignedBy = await _employeeWraperHelper.Get(Guid.Parse(""));
+            }
+            result.Type = folder.FolderType;
+        }
 
         if (folder.RootFolderType == FolderType.USER
             && !Equals(folder.RootCreateBy, _authContext.CurrentAccount.ID))
@@ -173,7 +194,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
 
         if (folder.RootFolderType == FolderType.VirtualRooms)
         {
-            var isEnabledBadges = _badgesSettingsHelper.GetEnabledForCurrentUser();
+            var isEnabledBadges = await _badgesSettingsHelper.GetEnabledForCurrentUserAsync();
 
             if (!isEnabledBadges)
             {

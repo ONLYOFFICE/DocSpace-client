@@ -37,6 +37,17 @@ public static class DocSpaceHelper
             FolderType.ReadOnlyRoom or 
             FolderType.FillingFormsRoom;
     }
+    public static bool IsBoard(FolderType folderType)
+    {
+        return folderType is
+            FolderType.Board;
+    }
+
+    public static bool IsFormFillingStep(FolderType folderType)
+    {
+        return folderType is
+            FolderType.FormFillingStep;
+    }
 
     public static async Task<bool> LocatedInPrivateRoomAsync<T>(File<T> file, IFolderDao<T> folderDao)
     {

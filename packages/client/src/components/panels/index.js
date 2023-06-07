@@ -10,6 +10,9 @@ import SelectFileDialog from "./SelectFileDialog";
 import HotkeyPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import StatusFillingPanel from "./StatusFillingPanel";
+import StartFillingPanel from "./StartFillingPanel";
+import InviteUserForRolePanel from "./InviteUserForRolePanel";
+import AddUserToRoomPanel from "./AddUserToRoomPanel";
 
 export {
   SharingPanel,
@@ -24,4 +27,7 @@ export {
   HotkeyPanel,
   InvitePanel,
   StatusFillingPanel,
+  StartFillingPanel,
+  InviteUserForRolePanel,
+  AddUserToRoomPanel,
 };

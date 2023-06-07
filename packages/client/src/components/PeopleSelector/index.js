@@ -52,6 +52,9 @@ const PeopleSelector = ({
   currentUserId,
   theme,
   withOutCurrentAuthorizedUser,
+  selectByClick,
+  onSelectUserForRole,
+  blockNode,
 }) => {
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
@@ -250,6 +253,9 @@ const PeopleSelector = ({
           isUser={true}
         />
       }
+      selectByClick={selectByClick}
+      onSelectUserForRole={onSelectUserForRole}
+      blockNode={blockNode}
     />
   );
 };

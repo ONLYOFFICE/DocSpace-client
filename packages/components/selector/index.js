@@ -47,6 +47,9 @@ const Selector = ({
   isLoading,
   searchLoader,
   rowLoader,
+  selectByClick,
+  onSelectUserForRole,
+  blockNode,
 }) => {
   const [footerVisible, setFooterVisible] = React.useState(false);
 
@@ -76,6 +79,11 @@ const Selector = ({
   }, [onClearSearch]);
 
   const onSelectAction = (item) => {
+    if (selectByClick) {
+      onSelectUserForRole(item);
+      return;
+    }
+
     onSelect &&
       onSelect({
         id: item.id,
@@ -288,6 +296,7 @@ const Selector = ({
         isLoading={isLoading}
         searchLoader={searchLoader}
         rowLoader={rowLoader}
+        blockNode={blockNode}
       />
 
       {footerVisible && (

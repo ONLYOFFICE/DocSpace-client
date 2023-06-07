@@ -62,12 +62,14 @@ const FillingRoleSelector = ({
           <StyledUserRow key={index}>
             <div className="content">
               <StyledNumber>{role.order}</StyledNumber>
+              {/* TODO: hasAvatar field will come or not? */}
               <StyledAvatar
-                src={
-                  roleWithUser.hasAvatar
-                    ? roleWithUser.avatar
-                    : AvatarBaseReactSvgUrl
-                }
+                src={roleWithUser.avatar}
+                // src={
+                //   roleWithUser.hasAvatar
+                //     ? roleWithUser.avatar
+                //     : AvatarBaseReactSvgUrl
+                // }
               />
               <div className="user-with-role">
                 <StyledRole>{roleWithUser.displayName}</StyledRole>
@@ -82,7 +84,12 @@ const FillingRoleSelector = ({
         ) : (
           <StyledRow key={index}>
             <StyledNumber>{role.order}</StyledNumber>
-            <StyledAddRoleButton onClick={onAddUser} color={role.color} />
+            <StyledAddRoleButton
+              onClick={() => {
+                onAddUser(role.name);
+              }}
+              color={role.color}
+            />
             <StyledRole>{role.name}</StyledRole>
           </StyledRow>
         );

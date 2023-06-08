@@ -144,7 +144,7 @@ const PeopleSelector = ({
   const selectExistUsers = (listUser) => {
     return listUser.map((item) => {
       if (existUsers.find((user) => user.id === item.id)) {
-        item.isSelected = true;
+        item.isAlwaysSelected = true;
         item.isDisabledCheckbox = true;
 
         return item;

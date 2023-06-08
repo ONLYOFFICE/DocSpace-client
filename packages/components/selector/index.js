@@ -173,10 +173,13 @@ const Selector = ({
       setNewSelectedItems(cloneItems);
       compareSelectedItems(cloneItems);
     } else {
-      const cloneRenderedItems = items.map((x) => ({
-        ...x,
-        isSelected: false,
-      }));
+      const cloneRenderedItems = items.map((x) => {
+        if (x.isAlwaysSelected) {
+          return { ...x, isSelected: true };
+        }
+
+        return { ...x, isSelected: false };
+      });
 
       setRenderedItems(cloneRenderedItems);
       setNewSelectedItems([]);
@@ -236,11 +239,11 @@ const Selector = ({
     if (items && selectedItems) {
       if (selectedItems.length === 0 || !isMultiSelect) {
         const cloneItems = items.map((x) => {
-          if (!x.isSelected) {
-            return { ...x, isSelected: false };
+          if (x.isAlwaysSelected) {
+            return { ...x, isSelected: true };
           }
 
-          return x;
+          return { ...x, isSelected: false };
         });
 
         return setRenderedItems(cloneItems);

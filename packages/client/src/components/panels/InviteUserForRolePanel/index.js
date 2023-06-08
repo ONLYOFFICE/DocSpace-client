@@ -42,8 +42,9 @@ const InviteUserForRolePanel = ({
 
   const [isBackButtonPressed, setIsBackButtonPressed] = useState(false);
   const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
+  let timerId;
 
-  const fetchMembers = async (roomId) => {
+  const getMembers = async () => {
     let data = await getRoomMembers(roomId);
 
     data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
@@ -58,6 +59,11 @@ const InviteUserForRolePanel = ({
     });
 
     setMembers(inRoomMembers);
+    clearTimeout(timerId);
+  };
+
+  const fetchMembers = () => {
+    timerId = setTimeout(() => getMembers(), 1000);
   };
 
   useEffect(() => {

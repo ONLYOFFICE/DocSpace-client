@@ -89,6 +89,7 @@ const AddUserToRoomPanel = ({
         onClose={onClose}
         withoutBodyScroll
         zIndex={410}
+        isCloseable={false}
       >
         <PeopleSelector
           headerLabel="Add user to room"

@@ -44,7 +44,7 @@ const InviteUserForRolePanel = ({
   const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
   let timerId;
 
-  const getMembers = async () => {
+  const getMembers = async (roomId) => {
     let data = await getRoomMembers(roomId);
 
     data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
@@ -75,7 +75,7 @@ const InviteUserForRolePanel = ({
   }, [addUserToRoomVisible]);
 
   const onBackClickAction = () => {
-    setIsBackButtonPressed(true);
+    setVisibleInviteUserForRolePanel(false);
   };
 
   const onOpenAddUserToRoom = () => {
@@ -100,22 +100,21 @@ const InviteUserForRolePanel = ({
     </StyledBlock>
   );
 
-  console.log("members", members);
-
   return (
     <>
       <Backdrop
         onClose={onClose}
-        visible={visible && !isBackButtonPressed}
+        visible={visible}
         zIndex={410}
         isAside={true}
       />
       <Aside
         className="header_aside-panel"
-        visible={visible && !isBackButtonPressed}
+        visible={visible}
         onClose={onClose}
         withoutBodyScroll
         zIndex={410}
+        isCloseable={false}
       >
         {!addUserToRoomVisible && (
           // <PeopleSelector

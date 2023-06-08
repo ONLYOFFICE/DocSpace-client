@@ -4,6 +4,8 @@ import Button from "@docspace/components/button";
 import FillingRoleSelector from "@docspace/components/filling-role-selector";
 import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
+import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 
 const roles = [
   { id: 3, name: "Director", order: 3, color: "#BB85E7" },
@@ -17,8 +19,10 @@ const roles = [
   },
 ];
 
-const StartFillingPanel = ({ visible }) => {
-  const [visibleStartFilling, setVisibleStartFilling] = useState(visible);
+const StartFillingPanel = ({
+  startFillingPanelVisible,
+  setStartFillingPanelVisible,
+}) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
   const [currentRole, setCurrentRole] = useState("");
@@ -31,7 +35,7 @@ const StartFillingPanel = ({ visible }) => {
   };
 
   const onClose = () => {
-    setVisibleStartFilling(false);
+    setStartFillingPanelVisible(false);
     setVisibleInviteUserForRolePanel(false);
     setCurrentRole("");
   };
@@ -63,17 +67,17 @@ const StartFillingPanel = ({ visible }) => {
     <>
       <Aside
         className="start-filling"
-        visible={visibleStartFilling}
-        onClose={onClose}
+        visible={startFillingPanelVisible}
         withoutBodyScroll
         zIndex={310}
       >
         <ModalDialog
           displayType="aside"
           withBodyScroll
-          visible={visibleStartFilling}
+          visible={startFillingPanelVisible}
           withFooterBorder
           onClose={onClose}
+          isCloseable={!visibleInviteUserForRolePanel}
         >
           <ModalDialog.Header>Start Filling</ModalDialog.Header>
 
@@ -119,4 +123,9 @@ const StartFillingPanel = ({ visible }) => {
   );
 };
 
-export default StartFillingPanel;
+export default inject(({ dialogsStore }) => {
+  const { startFillingPanelVisible, setStartFillingPanelVisible } =
+    dialogsStore;
+
+  return { startFillingPanelVisible, setStartFillingPanelVisible };
+})(withTranslation(["Common"])(observer(StartFillingPanel)));

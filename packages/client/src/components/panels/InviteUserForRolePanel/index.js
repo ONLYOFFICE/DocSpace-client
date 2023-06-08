@@ -125,6 +125,7 @@ const InviteUserForRolePanel = ({
         <AddUserToRoomPanel
           visible={addUserToRoomVisible}
           onClose={onCloseAddUserToRoom}
+          existUsers={members}
         />
       )}
     </>

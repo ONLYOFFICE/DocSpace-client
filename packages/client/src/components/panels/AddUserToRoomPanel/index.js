@@ -20,6 +20,7 @@ const AddUserToRoomPanel = ({
   setRoomSecurity,
   inviteUsers,
   setUpdateRoomMembers,
+  existUsers,
 }) => {
   const onAddToRoom = (users) => {
     console.log("newSelectedItems", users);
@@ -83,8 +84,10 @@ const AddUserToRoomPanel = ({
           placeholder="Search users"
           zIndex={410}
           onAccept={onAddToRoom}
+          existUsers={existUsers}
           isMultiSelect
           withSelectAll
+          withSelectExistUsers
         />
       </Aside>
     </>

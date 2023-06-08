@@ -235,7 +235,14 @@ const Selector = ({
   React.useEffect(() => {
     if (items && selectedItems) {
       if (selectedItems.length === 0 || !isMultiSelect) {
-        const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+        const cloneItems = items.map((x) => {
+          if (!x.isSelected) {
+            return { ...x, isSelected: false };
+          }
+
+          return x;
+        });
+
         return setRenderedItems(cloneItems);
       }
 

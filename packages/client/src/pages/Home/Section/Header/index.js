@@ -212,6 +212,7 @@ const SectionHeaderContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("accounts");
   const isSettingsPage = location.pathname.includes("settings");
+  const isDasboardPage = location.pathname.includes("dashboard");
 
   const onCreate = (format) => {
     const event = new Event(Events.CREATE);
@@ -700,7 +701,7 @@ const SectionHeaderContent = (props) => {
   const onSelect = (e) => {
     const key = e.currentTarget.dataset.key;
 
-    isAccountsPage ? setAccountsSelected(key) : setSelected(key);
+    isSettingsPage ? setAccountsSelected(key) : setSelected(key);
   };
 
   const onClose = () => {
@@ -914,7 +915,7 @@ const SectionHeaderContent = (props) => {
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom}
-                hideInfoPanel={isSettingsPage}
+                hideInfoPanel={isSettingsPage || isDasboardPage}
                 showRootFolderTitle={insideTheRoom}
               />
             </div>

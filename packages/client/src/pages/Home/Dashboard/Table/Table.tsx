@@ -8,7 +8,8 @@ import TableBody from "@docspace/components/table-container/TableBody";
 import { TableColumnType } from "../types";
 
 const TABLE_VERSION = "3";
-const TABLE_COLUMNS = `boardTableColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `boardTableColumns_ver=${TABLE_VERSION}`;
+const TABLE_COLUMNS_SIZE = `boardTableColumnsSize_ver=${TABLE_VERSION}`;
 
 const userId = 1;
 
@@ -17,6 +18,11 @@ function Table() {
 
   const tableLocalStorageKey = useMemo(
     () => `${TABLE_COLUMNS}=${userId}`,
+    [userId]
+  );
+
+  const tableSizeLocalStorageKey = useMemo(
+    () => `${TABLE_COLUMNS_SIZE}=${userId}`,
     [userId]
   );
 
@@ -53,10 +59,7 @@ function Table() {
     setColumns(tempColumns);
 
     const tableColumns = tempColumns.map((c) => c.enable && c.key);
-    localStorage.setItem(
-      `${TABLE_COLUMNS}=${userId}`,
-      JSON.stringify(tableColumns)
-    );
+    localStorage.setItem(tableLocalStorageKey, tableColumns.toString());
   };
 
   const [columns, setColumns] = useState(() => {
@@ -86,7 +89,7 @@ function Table() {
   });
 
   return (
-    <TableContainer useReactWindow>
+    <TableContainer useReactWindow forwardedRef={containerRef}>
       <TableHeader
         sorted
         sortBy={"AZ"}
@@ -95,7 +98,7 @@ function Table() {
         checkboxSize="48px"
         checkboxMargin="12px"
         containerRef={containerRef}
-        columnStorageName={tableLocalStorageKey}
+        columnStorageName={tableSizeLocalStorageKey}
         // columnInfoPanelStorageName={columnInfoPanelStorageName}
         // sectionWidth={sectionWidth}
         infoPanelVisible={false}
@@ -105,14 +108,14 @@ function Table() {
         useReactWindow
         itemHeight={49}
         infoPanelVisible={false}
-        columnStorageName={tableLocalStorageKey}
+        columnStorageName={tableSizeLocalStorageKey}
         fetchMoreFiles={() => {}}
         hasMoreFiles={false}
         rowCount={1}
         itemCount={1}
         filesLength={1}
       >
-        <div>row</div>
+        {[<div key="test">row</div>]}
       </TableBody>
     </TableContainer>
   );

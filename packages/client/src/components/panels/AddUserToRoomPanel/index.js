@@ -21,12 +21,6 @@ const AddUserToRoomPanel = ({
   inviteUsers,
   setUpdateRoomMembers,
 }) => {
-  const [isBackButtonPressed, setIsBackButtonPressed] = useState(false);
-
-  const onBackClickAction = () => {
-    setIsBackButtonPressed(true);
-  };
-
   const onAddToRoom = (users) => {
     console.log("newSelectedItems", users);
 
@@ -52,8 +46,6 @@ const AddUserToRoomPanel = ({
     if (users.length > items.length)
       toastr.warning("Some users are already in room");
 
-    console.log("items", items);
-
     const invitations = items.map((item) => {
       let newItem = {};
 
@@ -77,16 +69,9 @@ const AddUserToRoomPanel = ({
 
   return (
     <>
-      <Backdrop
-        onClose={onClose}
-        visible={visible && !isBackButtonPressed}
-        zIndex={410}
-        isAside={true}
-      />
       <Aside
         className="header_aside-panel"
-        visible={visible && !isBackButtonPressed}
-        onClose={onClose}
+        visible={visible}
         withoutBodyScroll
         zIndex={410}
         isCloseable={false}
@@ -94,7 +79,7 @@ const AddUserToRoomPanel = ({
         <PeopleSelector
           headerLabel="Add user to room"
           visible={visible}
-          onBackClickAction={onBackClickAction}
+          onBackClick={onClose}
           placeholder="Search users"
           zIndex={410}
           onAccept={onAddToRoom}

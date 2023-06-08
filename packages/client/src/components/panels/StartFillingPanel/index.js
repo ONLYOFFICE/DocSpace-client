@@ -25,19 +25,28 @@ const StartFillingPanel = ({
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
+  const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
+
   const [currentRole, setCurrentRole] = useState("");
   const [users, setUsers] = useState([]);
 
   const onAddUser = (role) => {
-    console.log("onAddUser", role);
     setCurrentRole(role);
-    setVisibleInviteUserForRolePanel(true);
+    onOpenInviteUserForRolePanel();
   };
 
   const onClose = () => {
     setStartFillingPanelVisible(false);
-    setVisibleInviteUserForRolePanel(false);
+    onCloseInviteUserForRolePanel();
     setCurrentRole("");
+  };
+
+  const onOpenInviteUserForRolePanel = () => {
+    setVisibleInviteUserForRolePanel(true);
+  };
+
+  const onCloseInviteUserForRolePanel = () => {
+    setVisibleInviteUserForRolePanel(false);
   };
 
   const onSelectUserForRole = (user) => {
@@ -51,7 +60,7 @@ const StartFillingPanel = ({
       },
     ]);
 
-    setVisibleInviteUserForRolePanel(false);
+    onCloseInviteUserForRolePanel();
     setCurrentRole("");
   };
 
@@ -62,6 +71,14 @@ const StartFillingPanel = ({
     },
     [users, setUsers]
   );
+
+  const onOpenAddUserToRoom = () => {
+    setAddUserToRoomVisible(true);
+  };
+
+  const onCloseAddUserToRoom = () => {
+    setAddUserToRoomVisible(false);
+  };
 
   return (
     <>
@@ -117,6 +134,10 @@ const StartFillingPanel = ({
           onClose={onClose}
           onSelectUserForRole={onSelectUserForRole}
           setVisibleInviteUserForRolePanel={setVisibleInviteUserForRolePanel}
+          onCloseInviteUserForRolePanel={onCloseInviteUserForRolePanel}
+          addUserToRoomVisible={addUserToRoomVisible}
+          onOpenAddUserToRoom={onOpenAddUserToRoom}
+          onCloseAddUserToRoom={onCloseAddUserToRoom}
         />
       )}
     </>

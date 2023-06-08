@@ -35,13 +35,15 @@ const InviteUserForRolePanel = ({
   getRoomMembers,
   roomId,
   onSelectUserForRole,
-  setVisibleInviteUserForRolePanel,
   updateRoomMembers,
+
+  onCloseInviteUserForRolePanel,
+
+  addUserToRoomVisible,
+  onOpenAddUserToRoom,
+  onCloseAddUserToRoom,
 }) => {
   const [members, setMembers] = useState([]);
-
-  const [isBackButtonPressed, setIsBackButtonPressed] = useState(false);
-  const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
   let timerId;
 
   const getMembers = async (roomId) => {
@@ -68,23 +70,7 @@ const InviteUserForRolePanel = ({
 
   useEffect(() => {
     fetchMembers();
-
-    return () => {
-      setIsBackButtonPressed(false);
-    };
   }, [addUserToRoomVisible]);
-
-  const onBackClickAction = () => {
-    setVisibleInviteUserForRolePanel(false);
-  };
-
-  const onOpenAddUserToRoom = () => {
-    setAddUserToRoomVisible(true);
-  };
-
-  const onCloseAddUserToRoom = () => {
-    setAddUserToRoomVisible(false);
-  };
 
   const blockNode = (
     <StyledBlock>
@@ -102,12 +88,6 @@ const InviteUserForRolePanel = ({
 
   return (
     <>
-      <Backdrop
-        onClose={onClose}
-        visible={visible}
-        zIndex={410}
-        isAside={true}
-      />
       <Aside
         className="header_aside-panel"
         visible={visible}
@@ -130,7 +110,7 @@ const InviteUserForRolePanel = ({
 
           <Selector
             headerLabel={"Invite user for role"}
-            onBackClick={onBackClickAction}
+            onBackClick={onCloseInviteUserForRolePanel}
             items={members}
             placeholder="Search users"
             zIndex={410}

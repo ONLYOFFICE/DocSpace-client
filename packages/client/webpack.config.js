@@ -309,6 +309,8 @@ module.exports = (env, argv) => {
         "./PeopleSelector": "./src/components/PeopleSelector",
         "./PeopleSelector/UserTooltip":
           "./src/components/PeopleSelector/sub-components/UserTooltip.js",
+        "./StartFillingPanel":
+          "./src/components/panels/StartFillingPanel/index.js",
       },
       shared: {
         ...deps,

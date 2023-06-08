@@ -18,6 +18,7 @@ const Aside = React.memo((props) => {
     contentPaddingBottom,
     withoutBodyScroll,
     onClose,
+    isCloseable,
   } = props;
 
   return (
@@ -35,7 +36,7 @@ const Aside = React.memo((props) => {
         <Scrollbar stype="mediumBlack">{children}</Scrollbar>
       )}
 
-      {visible && (
+      {visible && isCloseable && (
         <StyledControlContainer onClick={onClose}>
           <StyledCrossIcon />
         </StyledControlContainer>
@@ -57,12 +58,14 @@ Aside.propTypes = {
     PropTypes.node,
   ]),
   withoutBodyScroll: PropTypes.bool,
+  isCloseable: PropTypes.bool,
   onClose: PropTypes.func,
 };
 Aside.defaultProps = {
   scale: false,
   zIndex: 400,
   withoutBodyScroll: false,
+  isCloseable: true,
 };
 
 export default Aside;

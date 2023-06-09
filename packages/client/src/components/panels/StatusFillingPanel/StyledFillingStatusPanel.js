@@ -26,7 +26,7 @@ const StyledFillingStatusPanel = styled.div`
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
-    color: #333333;
+    color: ${(props) => props.theme.statusPanel.subTitleColor};
   }
 
   .status-filling_item {
@@ -34,7 +34,7 @@ const StyledFillingStatusPanel = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 9px 16px;
-    background: #f8f9f9;
+    background: ${(props) => props.theme.statusPanel.itemBackground};
     width: 100%;
     max-width: 450px;
     margin: 0 auto;
@@ -54,18 +54,20 @@ const StyledFillingStatusPanel = styled.div`
         width: 24px;
         height: 24px;
         margin-right: 15px;
+
         svg {
           width: 24px;
           height: 24px;
         }
       }
     }
+
   }
 
   .status-filling_footer {
     .footer-text {
       margin-bottom: 16px;
-      color: #333333;
+      color: ${(props) => props.theme.statusPanel.footerTextColor};
     }
 
     display: block;

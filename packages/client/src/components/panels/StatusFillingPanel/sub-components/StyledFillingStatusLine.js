@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Base } from "@docspace/components/themes";
 import { hugeMobile } from "@docspace/components/utils/device";
 
 const FillingStatusContainer = styled.div`
@@ -10,7 +11,7 @@ const FillingStatusContainer = styled.div`
     max-width: 350px;
   }
 
-  .status-done-text, 
+  .status-done-text,
   .status-interrupted-text {
     font-size: 14px;
     line-height: 16px;
@@ -18,25 +19,32 @@ const FillingStatusContainer = styled.div`
   }
 
   .status-done-text {
-    color: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
+    color: ${(props) =>
+      props.isDone
+        ? props.theme.statusPanel.doneTextColor
+        : props.theme.statusPanel.defaultTextColor};
   }
 
   .status-done-icon {
     circle,
     path {
-      stroke: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
+      stroke: ${(props) =>
+        props.isDone
+          ? props.theme.statusPanel.doneTextColor
+          : props.theme.statusPanel.defaultTextColor};
     }
   }
-  
 
   .status-interrupted-text {
-    color: ${(props) => props.isInterrupted && "#F2675A"};
+    color: ${(props) =>
+      props.isInterrupted && props.theme.statusPanel.interruptedTextColor};
   }
 
   .status-interrupted-icon {
     circle,
     path {
-      stroke: ${(props) => props.isInterrupted && "#F2675A"};
+      stroke: ${(props) =>
+        props.isInterrupted && props.theme.statusPanel.interruptedTextColor};
     }
   }
 
@@ -45,6 +53,8 @@ const FillingStatusContainer = styled.div`
     margin-right: 10px;
   }
 `;
+
+FillingStatusContainer.defaultProps = { theme: Base };
 
 const AccordionItem = styled.div`
   width: 100%;
@@ -59,23 +69,25 @@ const AccordionItem = styled.div`
   
     .user-avatar {
       padding 1px;
-      border: 2px solid #A3A9AE;
-      border-color: ${(props) => (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
       border-radius: 50%;
+      border: 2px solid ${(props) => props.theme.statusPanel.avatarBorderColor};
+      border-color: ${(props) =>
+        (props.isDone && props.theme.statusPanel.doneTextColor) ||
+        (props.isInterrupted && props.theme.statusPanel.interruptedTextColor)};
     }
 
     .accordion-displayname {
       font-size: 14px;
       font-weight: bold;
       line-height: 16px;
-      color: #333333;
+      color: ${(props) => props.theme.statusPanel.displayNameColor};
       margin-left: 10px;
     }
 
     .accordion-role {
       font-size: 12px;
       line-height: 16px;
-      color: #657077;
+      color: ${(props) => props.theme.statusPanel.roleTextColor};
       margin-left: 10px;
     }
   
@@ -84,9 +96,13 @@ const AccordionItem = styled.div`
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transform: ${(props) => props.isOpen ? "rotate(270deg)" : "rotate(90deg)"};
+      transform: ${(props) =>
+        props.isOpen ? "rotate(270deg)" : "rotate(90deg)"};
       path { 
-        fill: ${(props) => (props.isOpen ? "#4781d1" : "#A3A9AE")};
+        fill: ${(props) =>
+          props.isOpen
+            ? props.theme.statusPanel.doneTextColor
+            : props.theme.statusPanel.arrowIconColor};
       }
     }
   }
@@ -98,7 +114,7 @@ const AccordionItem = styled.div`
     padding-left: 15px;
 
     .status-date {
-      color: #657077;
+      color: ${(props) => props.theme.statusPanel.fillingTextColor};
     }
   }
 
@@ -107,21 +123,30 @@ const AccordionItem = styled.div`
     align-items: center;
     min-height: 40px;
     margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
-    border-left: 2px ${(props) => props.isDone || props.isInterrupted ? "solid" : "dashed"} #A3A9AE;
-    border-color: ${(props) => (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
+    border-left: 2px ${(props) =>
+      props.isDone || props.isInterrupted ? "solid" : "dashed"} 
+      ${(props) => props.theme.statusPanel.defaultTextColor};
+    border-color: ${(props) =>
+      (props.isDone && props.theme.statusPanel.doneTextColor) ||
+      (props.isInterrupted && props.theme.statusPanel.interruptedTextColor)};
 
     .status-text {
       margin-left: 15px;
-      color: #657077;
+      color: ${(props) => props.theme.statusPanel.fillingTextColor};
     }
 
     .filled-status-text {
       font-size: 12px;
       line-height: 16px;
       margin-left: 15px;
-      color: ${(props) => (props.isDone ? "#4781D1" : "#657077")};
+      color: ${(props) =>
+        props.isDone
+          ? props.theme.statusPanel.doneTextColor
+          : props.theme.statusPanel.fillingTextColor};
     }
   }
 `;
+
+AccordionItem.defaultProps = { theme: Base };
 
 export { FillingStatusContainer, AccordionItem };

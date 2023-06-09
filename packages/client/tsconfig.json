@@ -14,7 +14,8 @@
     "allowJs": true,
 
     "paths": {
-      "PUBLIC_DIR": ["../../public"]
+      "PUBLIC_DIR": ["../../public"],
+      "@docspace/*": ["../*"]
     }
   }
 }

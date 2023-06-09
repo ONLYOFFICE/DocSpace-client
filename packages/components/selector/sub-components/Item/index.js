@@ -86,7 +86,7 @@ const Item = React.memo(({ index, style, data }) => {
 
     if (!item && !item?.id) return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected } = item;
+    const { label, avatar, icon, role, isSelected, isDisabledCheckbox } = item;
 
     const currentRole = role ? role : "user";
 
@@ -136,6 +136,7 @@ const Item = React.memo(({ index, style, data }) => {
             className="checkbox"
             isChecked={isSelected}
             onChange={onChangeAction}
+            isDisabled={isDisabledCheckbox}
           />
         )}
       </StyledItem>

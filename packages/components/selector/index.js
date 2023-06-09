@@ -47,6 +47,9 @@ const Selector = ({
   isLoading,
   searchLoader,
   rowLoader,
+  selectByClick,
+  onSelectUserForRole,
+  blockNode,
 }) => {
   const [footerVisible, setFooterVisible] = React.useState(false);
 
@@ -76,6 +79,11 @@ const Selector = ({
   }, [onClearSearch]);
 
   const onSelectAction = (item) => {
+    if (selectByClick) {
+      onSelectUserForRole(item);
+      return;
+    }
+
     onSelect &&
       onSelect({
         id: item.id,
@@ -165,10 +173,13 @@ const Selector = ({
       setNewSelectedItems(cloneItems);
       compareSelectedItems(cloneItems);
     } else {
-      const cloneRenderedItems = items.map((x) => ({
-        ...x,
-        isSelected: false,
-      }));
+      const cloneRenderedItems = items.map((x) => {
+        if (x.isAlwaysSelected) {
+          return { ...x, isSelected: true };
+        }
+
+        return { ...x, isSelected: false };
+      });
 
       setRenderedItems(cloneRenderedItems);
       setNewSelectedItems([]);
@@ -227,7 +238,14 @@ const Selector = ({
   React.useEffect(() => {
     if (items && selectedItems) {
       if (selectedItems.length === 0 || !isMultiSelect) {
-        const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+        const cloneItems = items.map((x) => {
+          if (x.isAlwaysSelected) {
+            return { ...x, isSelected: true };
+          }
+
+          return { ...x, isSelected: false };
+        });
+
         return setRenderedItems(cloneItems);
       }
 
@@ -288,6 +306,7 @@ const Selector = ({
         isLoading={isLoading}
         searchLoader={searchLoader}
         rowLoader={rowLoader}
+        blockNode={blockNode}
       />
 
       {footerVisible && (

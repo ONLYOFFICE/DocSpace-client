@@ -52,6 +52,11 @@ const PeopleSelector = ({
   currentUserId,
   theme,
   withOutCurrentAuthorizedUser,
+  selectByClick,
+  onSelectUserForRole,
+  blockNode,
+  existUsers,
+  withSelectExistUsers,
 }) => {
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
@@ -136,6 +141,18 @@ const PeopleSelector = ({
     return listUser.filter((user) => user.id !== currentUserId);
   };
 
+  const selectExistUsers = (listUser) => {
+    return listUser.map((item) => {
+      if (existUsers.find((user) => user.id === item.id)) {
+        item.isAlwaysSelected = true;
+        item.isDisabledCheckbox = true;
+
+        return item;
+      }
+      return item;
+    });
+  };
+
   const loadNextPage = (startIndex, search = searchValue) => {
     const pageCount = 100;
 
@@ -173,6 +190,8 @@ const PeopleSelector = ({
         newItems = withOutCurrentAuthorizedUser
           ? removeCurrentUserFromList(tempItems)
           : moveCurrentUserToTopOfList(tempItems);
+
+        if (withSelectExistUsers) newItems = selectExistUsers(newItems);
 
         const newTotal = withOutCurrentAuthorizedUser
           ? response.total - totalDifferent - 1
@@ -250,6 +269,9 @@ const PeopleSelector = ({
           isUser={true}
         />
       }
+      selectByClick={selectByClick}
+      onSelectUserForRole={onSelectUserForRole}
+      blockNode={blockNode}
     />
   );
 };

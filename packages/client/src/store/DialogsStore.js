@@ -60,6 +60,7 @@ class DialogsStore {
   createRoomDialogVisible = false;
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
+  startFillingPanelVisible = false;
 
   constructor(
     authStore,
@@ -316,6 +317,10 @@ class DialogsStore {
 
   setChangeUserTypeDialogVisible = (changeUserTypeDialogVisible) => {
     this.changeUserTypeDialogVisible = changeUserTypeDialogVisible;
+  };
+
+  setStartFillingPanelVisible = (startFillingPanelVisible) => {
+    this.startFillingPanelVisible = startFillingPanelVisible;
   };
 
   get someDialogIsOpen() {

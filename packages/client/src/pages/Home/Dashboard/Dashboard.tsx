@@ -11,6 +11,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import { DashboardInjectType } from "./types";
 import DashboardProps from "./Dashboard.props";
+import Table from "./Table";
 
 function Dashboard({ viewAs }: DashboardProps) {
   const columns = [
@@ -116,7 +117,7 @@ function Dashboard({ viewAs }: DashboardProps) {
   ];
 
   if (viewAs === "row") {
-    return <>Row</>;
+    return <Table />;
   }
 
   return (

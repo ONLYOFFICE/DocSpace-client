@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 //import SharingDialog from "../components/SharingDialog";
 import SelectFileDialog from "../components/SelectFileDialog";
 import SelectFolderDialog from "../components/SelectFolderDialog";
+import StartFillingPanel from "../components/StartFillingPanel";
 
 const insertImageAction = "imageFileType";
 const mailMergeAction = "mailMergeFileType";
@@ -21,6 +22,8 @@ const withDialogs = (WrappedComponent) => {
     const [urlSelectorFolder, setUrlSelectorFolder] = useState("");
     const [extension, setExtension] = useState();
     const [openNewTab, setNewOpenTab] = useState(false);
+    const [isStartFillingPanelVisible, setIsStartFillingPanelVisible] =
+      useState(false);
 
     const { t } = useTranslation(["Editor", "Common"]);
 
@@ -248,6 +251,11 @@ const withDialogs = (WrappedComponent) => {
       setTitleSelectorFolder(e.target.value);
     };
 
+    //TODO: Delete
+    const onClickStartFillingPanel = () => {
+      setIsStartFillingPanelVisible(true);
+    };
+
     // const sharingDialog = (
     //   <SharingDialog
     //     mfReady={mfReady}
@@ -287,6 +295,14 @@ const withDialogs = (WrappedComponent) => {
       />
     );
 
+    const startFillingPanel = (
+      <StartFillingPanel
+        successAuth={props.successAuth}
+        isVisible={isStartFillingPanelVisible}
+        mfReady={mfReady}
+      />
+    );
+
     return (
       <WrappedComponent
         {...props}
@@ -302,6 +318,8 @@ const withDialogs = (WrappedComponent) => {
         selectFolderDialog={selectFolderDialog}
         onSDKRequestSaveAs={onSDKRequestSaveAs}
         isFolderDialogVisible={isFolderDialogVisible}
+        startFillingPanel={startFillingPanel}
+        onClickStartFillingPanel={onClickStartFillingPanel}
       />
     );
   };

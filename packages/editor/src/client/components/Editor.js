@@ -93,6 +93,8 @@ function Editor({
   fileId,
   url,
   filesSettings,
+  startFillingPanel,
+  onClickStartFillingPanel,
 }) {
   const fileInfo = config?.file;
 
@@ -766,6 +768,7 @@ function Editor({
     ) : (
       <>
         {/* {sharingDialog} */}
+        {startFillingPanel}
         {selectFileDialog}
         {selectFolderDialog}
       </>
@@ -775,6 +778,8 @@ function Editor({
     <EditorWrapper
     // isVisibleSharingDialog={isVisible}
     >
+      {/* TODO: Delete */}
+      <div onClick={onClickStartFillingPanel}>Open StartFillingPanel</div>
       {newConfig && (
         <DocumentEditor
           id={EDITOR_ID}

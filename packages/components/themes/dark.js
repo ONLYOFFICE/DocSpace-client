@@ -2027,6 +2027,21 @@ const Dark = {
     },
   },
 
+  statusPanel: {
+    subTitleColor: "rgba(255, 255, 255, 0.6)",
+    itemBackground: "#282828",
+    footerTextColor: "rgba(255, 255, 255, 0.6)",
+    arrowIconColor: "#858585",
+    avatarBorderColor: "#858585",
+    defaultTextColor: "#858585",
+    dashedBorderColor: "#858585",
+    displayNameColor: "#FFFFFF",
+    roleTextColor: "rgba(255, 255, 255, 0.6)",
+    fillingTextColor: "rgba(255, 255, 255, 0.6)",
+    doneTextColor: "#4781d1",
+    interruptedTextColor: "#F2675A",
+  },
+
   infoPanel: {
     sectionHeaderToggleIcon: "#858585",
     sectionHeaderToggleIconActive: "#c4c4c4",

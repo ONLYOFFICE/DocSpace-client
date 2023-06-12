@@ -35,7 +35,8 @@ public class FilesControllerHelper : FilesHelperBase
     private readonly DisplayUserSettingsHelper _displayUserSettingsHelper;
     private readonly FileConverter _fileConverter;
     private readonly PathProvider _pathProvider;
-
+    private readonly FileRoleDtoHelper _fileRoleDtoHelper;
+    
     public FilesControllerHelper(
         IServiceProvider serviceProvider,
         FilesSettingsHelper filesSettingsHelper,
@@ -52,7 +53,8 @@ public class FilesControllerHelper : FilesHelperBase
         UserManager userManager,
         DisplayUserSettingsHelper displayUserSettingsHelper,
         FileConverter fileConverter,
-        PathProvider pathProvider)
+        PathProvider pathProvider,
+        FileRoleDtoHelper fileRoleDtoHelper)
         : base(
             filesSettingsHelper,
             fileUploader,
@@ -71,6 +73,7 @@ public class FilesControllerHelper : FilesHelperBase
         _userManager = userManager;
         _displayUserSettingsHelper = displayUserSettingsHelper;
         _pathProvider = pathProvider;
+        _fileRoleDtoHelper = fileRoleDtoHelper;
     }
 
     public async IAsyncEnumerable<FileDto<T>> ChangeHistoryAsync<T>(T fileId, int version, bool continueVersion)
@@ -203,6 +206,14 @@ public class FilesControllerHelper : FilesHelperBase
         {
             yield return await _fileDtoHelper.GetAsync(e);
         }
+    }
+
+    public async Task<List<FileRoleDto>> GetFormRolesAsync<T>(T fileId)
+    {
+        var file = await _fileStorageService.GetFileAsync(fileId, -1);
+        file = file.NotFoundIfNull("File not found");
+
+        return await _fileRoleDtoHelper.GetAsync(file);
     }
 
     public async Task<FileDto<T>> LockFileAsync<T>(T fileId, bool lockFile)

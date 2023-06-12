@@ -35,22 +35,17 @@ const InviteUserForRolePanel = ({
   getRoomMembers,
   roomId,
   onSelectUserForRole,
-  updateRoomMembers,
-
   onCloseInviteUserForRolePanel,
-
   addUserToRoomVisible,
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
 }) => {
   const [members, setMembers] = useState([]);
-  let timerId;
 
-  const getMembers = async (roomId) => {
+  const fetchMembers = async () => {
     let data = await getRoomMembers(roomId);
 
     data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
-
     let inRoomMembers = [];
     data.map((fetchedMember) => {
       const member = {
@@ -59,18 +54,12 @@ const InviteUserForRolePanel = ({
       };
       inRoomMembers.push(member);
     });
-
     setMembers(inRoomMembers);
-    clearTimeout(timerId);
-  };
-
-  const fetchMembers = () => {
-    timerId = setTimeout(() => getMembers(), 1000);
   };
 
   useEffect(() => {
     fetchMembers();
-  }, [addUserToRoomVisible]);
+  }, []);
 
   const blockNode = (
     <StyledBlock>
@@ -126,6 +115,7 @@ const InviteUserForRolePanel = ({
           visible={addUserToRoomVisible}
           onClose={onCloseAddUserToRoom}
           existUsers={members}
+          fetchMembers={fetchMembers}
         />
       )}
     </>

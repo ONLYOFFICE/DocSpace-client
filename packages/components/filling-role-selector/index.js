@@ -14,16 +14,21 @@ import {
   StyledAvatar,
   StyledUserRow,
 } from "./styled-filling-role-selector";
-import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import TooltipSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.react.svg?url";
 
 const FillingRoleSelector = ({
   roles,
   users,
   onAddUser,
   onRemoveUser,
+  onCloseTooltip,
   descriptionEveryone,
   descriptionTooltip,
+  titleTooltip,
+  listHeader,
+  visibleTooltip,
   ...props
 }) => {
   //If the roles in the roles array come out of order
@@ -47,12 +52,30 @@ const FillingRoleSelector = ({
           <div className="role-description">{descriptionEveryone}</div>
         </StyledEveryoneRoleContainer>
       </StyledRow>
-      <StyledTooltip>{descriptionTooltip}</StyledTooltip>
     </>
   );
 
   return (
     <StyledFillingRoleSelector {...props}>
+      <StyledTooltip visibleTooltip={visibleTooltip}>
+        <div className="title-container">
+          <div className="title-tooltip">
+            <ReactSVG className="help-icon" src={TooltipSvgUrl} />
+            <div className="title">{titleTooltip}</div>
+          </div>
+
+          <ReactSVG
+            className="cross-icon"
+            src={CrossIcon}
+            onClick={onCloseTooltip}
+          />
+        </div>
+
+        <div className="description">{descriptionTooltip}</div>
+      </StyledTooltip>
+
+      <div className="list-header">{listHeader}:</div>
+
       {everyoneRole && everyoneRoleNode}
       {sortedInOrderRoles.map((role, index) => {
         if (role.everyone) return;
@@ -62,15 +85,8 @@ const FillingRoleSelector = ({
           <StyledUserRow key={index}>
             <div className="content">
               <StyledNumber>{role.order}</StyledNumber>
-              {/* TODO: hasAvatar field will come or not? */}
-              <StyledAvatar
-                src={roleWithUser.avatar}
-                // src={
-                //   roleWithUser.hasAvatar
-                //     ? roleWithUser.avatar
-                //     : AvatarBaseReactSvgUrl
-                // }
-              />
+
+              <StyledAvatar src={roleWithUser.avatar} />
               <div className="user-with-role">
                 <StyledRole>{roleWithUser.displayName}</StyledRole>
                 <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
@@ -105,19 +121,26 @@ FillingRoleSelector.propTypes = {
   descriptionEveryone: PropTypes.string,
   /** Tooltip text */
   descriptionTooltip: PropTypes.string,
+  /** Tooltip title */
+  titleTooltip: PropTypes.string,
   /** Accepts id */
   id: PropTypes.string,
+  /** List Header */
+  listHeader: PropTypes.string,
   /** The function of adding a user to a role */
   onAddUser: PropTypes.func,
   /** Function to remove a user from a role */
   onRemoveUser: PropTypes.func,
+  /** Function to closes the tooltip */
+  onCloseTooltip: PropTypes.func,
   /** Array of roles */
   roles: PropTypes.array,
   /** Accepts CSS style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-
   /** Array of assigned users per role */
   users: PropTypes.array,
+  /** Visible tooltip */
+  visibleTooltip: PropTypes.bool,
 };
 
 export default FillingRoleSelector;

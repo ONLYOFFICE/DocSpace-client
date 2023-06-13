@@ -24,39 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Files.Core.ApiModels.ResponseDto;
-public class FileRoleDto
+namespace ASC.Files.Core.ApiModels.RequestDto;
+public class FileRoleRequestDto
 {
-    public FileRoleDto() { }
 
     public int Id { get; set; }
-    public string Title { get; set; }
-    public string Color { get; set; }
-    public EmployeeDto Assigned { get; set; }
-
-}
-
-[Scope]
-public class FileRoleDtoHelper
-{
-
-    public FileRoleDtoHelper()
-    {
-       
-    }
-
-    public async Task<List<FileRoleDto>> GetAsync<T>(File<T> file)
-    {
-
-        //TODO get roles from file
-
-        var mockResult = new List<FileRoleDto>() {
-
-            new FileRoleDto() {Id = 1, Title = "everyone",Color = "fbcc86"},
-            new FileRoleDto() {Id = 2, Title = "accountant",Color = "70d3b0"},
-            new FileRoleDto() {Id = 3, Title = "director",Color = "bb85e7"},
-        };
-
-        return mockResult;
-    }
+    public Guid UserId { get; set; }
 }

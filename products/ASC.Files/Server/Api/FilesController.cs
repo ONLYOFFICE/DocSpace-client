@@ -258,6 +258,12 @@ public abstract class FilesController<T> : ApiControllerBase
         return await _filesControllerHelper.GetFormRolesAsync(fileId);
     }
 
+    [HttpPut("file/{fileId}/roles")]
+    public async Task<List<FileRoleDto>> GetFormRolesAsync(T fileId, List<FileRoleRequestDto> inDto)
+    {
+        return await _filesControllerHelper.SetFormRolesAsync(fileId, inDto);
+    }
+
     [HttpPut("file/{fileId}/lock")]
     public async Task<FileDto<T>> LockFileAsync(T fileId, LockFileRequestDto inDto)
     {

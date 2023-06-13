@@ -7,22 +7,11 @@ import Aside from "@docspace/components/aside";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-const roles = [
-  { id: 3, name: "Director", order: 3, color: "#BB85E7" },
-  { id: 2, name: "Accountant", order: 2, color: "#70D3B0" },
-  {
-    id: 1,
-    name: "Employee",
-    order: 1,
-    color: "#FBCC86",
-    everyone: "@Everyone",
-  },
-];
-
 const StartFillingPanel = ({
   startFillingPanelVisible,
   setStartFillingPanelVisible,
   isVisible,
+  getRolesUsersForFillingForm,
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
@@ -30,7 +19,16 @@ const StartFillingPanel = ({
   const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
 
   const [currentRole, setCurrentRole] = useState("");
+  const [roles, setRoles] = useState([]);
   const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getRolesUsersForFillingForm(fileId)
+      .then((roles) => {
+        setRoles(roles);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   useEffect(() => {
     Boolean(isVisible) && setStartFillingPanelVisible(isVisible);
@@ -90,6 +88,7 @@ const StartFillingPanel = ({
     setAddUserToRoomVisible(false);
   };
 
+  if (!roles.length) return <div>loader</div>;
   return (
     <>
       <Aside
@@ -112,6 +111,10 @@ const StartFillingPanel = ({
             <FillingRoleSelector
               roles={roles}
               users={users}
+              everyoneTranslation={"Everyone"}
+              descriptionEveryone={
+                "The form is available for filling for all room members"
+              }
               descriptionTooltip={
                 "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields."
               }
@@ -161,9 +164,14 @@ const StartFillingPanel = ({
   );
 };
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, filesStore }) => {
   const { startFillingPanelVisible, setStartFillingPanelVisible } =
     dialogsStore;
+  const { getRolesUsersForFillingForm } = filesStore;
 
-  return { startFillingPanelVisible, setStartFillingPanelVisible };
+  return {
+    startFillingPanelVisible,
+    setStartFillingPanelVisible,
+    getRolesUsersForFillingForm,
+  };
 })(withTranslation(["Common"])(observer(StartFillingPanel)));

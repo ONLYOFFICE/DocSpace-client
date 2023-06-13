@@ -1,18 +1,16 @@
 export interface IconOwn {
   size: "small" | "medium";
+  roleType: RoleType;
 }
 
 export interface IconDefaultProps extends IconOwn {
   color: string;
-  roleType: RoleType;
 }
 
 export interface IconDoneProps extends IconOwn {
-  roleType: RoleType;
   color?: never;
 }
 export interface IconInterruptedProps extends IconOwn {
-  roleType: RoleType;
   color?: never;
 }
 

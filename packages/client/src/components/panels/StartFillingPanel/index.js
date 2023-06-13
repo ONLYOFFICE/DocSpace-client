@@ -33,7 +33,7 @@ const StartFillingPanel = ({
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setStartFillingPanelVisible(isVisible);
+    Boolean(isVisible) && setStartFillingPanelVisible(isVisible);
   }, [isVisible]);
 
   const onAddUser = (role) => {

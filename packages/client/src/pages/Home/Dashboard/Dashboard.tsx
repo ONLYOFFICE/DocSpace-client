@@ -12,6 +12,7 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import { DashboardInjectType } from "./types";
 import DashboardProps from "./Dashboard.props";
 import Table from "./Table";
+import TableProps from "./Table/Table.porps";
 
 function Dashboard({ viewAs }: DashboardProps) {
   const columns = [
@@ -80,6 +81,42 @@ function Dashboard({ viewAs }: DashboardProps) {
     },
   ];
 
+  const roles: TableProps["roles"] = [
+    {
+      id: 1,
+      title: "Сотрудник",
+      color: "#a3c3fa",
+      roleType: "default",
+      queue: "1",
+    },
+    {
+      id: 2,
+      title: "Бухгалтер",
+      color: "#CBDFB7",
+      roleType: "default",
+      queue: "2",
+    },
+    {
+      id: 3,
+      title: "Директор",
+      color: "#D2AFC6",
+      roleType: "default",
+      queue: "3",
+    },
+    {
+      id: 4,
+      title: "Готовые",
+      queue: "Done",
+      roleType: "done",
+    },
+    {
+      id: 5,
+      title: "Отказ",
+      queue: "Interrupted",
+      roleType: "interrupted",
+    },
+  ];
+
   const getOptions = () => [
     {
       key: "link_for_room_members",
@@ -117,7 +154,7 @@ function Dashboard({ viewAs }: DashboardProps) {
   ];
 
   if (viewAs === "row") {
-    return <Table />;
+    return <Table roles={roles} />;
   }
 
   return (

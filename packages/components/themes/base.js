@@ -2030,6 +2030,21 @@ const Base = {
     },
   },
 
+  statusPanel: {
+    subTitleColor: "#333333",
+    itemBackground: "#f8f9f9",
+    footerTextColor: "#333333",
+    arrowIconColor: "#A3A9AE",
+    avatarBorderColor: "#A3A9AE",
+    defaultTextColor: "#A3A9AE",
+    dashedBorderColor: "#A3A9AE",
+    displayNameColor: "#333333",
+    roleTextColor: "#657077",
+    fillingTextColor: "#657077",
+    doneTextColor: "#4781d1",
+    interruptedTextColor: "#F2675A",
+  },
+
   infoPanel: {
     sectionHeaderToggleIcon: gray,
     sectionHeaderToggleIconActive: "#3B72A7",

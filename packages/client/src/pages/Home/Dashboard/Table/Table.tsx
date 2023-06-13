@@ -1,10 +1,12 @@
 import { useState, useRef, useMemo } from "react";
-
 import { useTranslation } from "react-i18next";
 
 import TableContainer from "@docspace/components/table-container";
 import TableHeader from "@docspace/components/table-container/TableHeader";
 import TableBody from "@docspace/components/table-container/TableBody";
+
+import TableRow from "./TableRow";
+import TableProps from "./Table.porps";
 import { TableColumnType } from "../types";
 
 const TABLE_VERSION = "3";
@@ -13,7 +15,7 @@ const TABLE_COLUMNS_SIZE = `boardTableColumnsSize_ver=${TABLE_VERSION}`;
 
 const userId = 1;
 
-function Table() {
+function Table({ roles }: TableProps) {
   const { t } = useTranslation();
 
   const tableLocalStorageKey = useMemo(
@@ -111,11 +113,19 @@ function Table() {
         columnStorageName={tableSizeLocalStorageKey}
         fetchMoreFiles={() => {}}
         hasMoreFiles={false}
-        rowCount={1}
-        itemCount={1}
-        filesLength={1}
+        itemCount={3}
+        filesLength={3}
       >
-        {[<div key="test">row</div>]}
+        {roles.map((role) => (
+          <TableRow
+            id={role.id}
+            key={role.id}
+            title={role.title}
+            queue={role.queue}
+            color={role.color}
+            roleType={role.roleType}
+          />
+        ))}
       </TableBody>
     </TableContainer>
   );

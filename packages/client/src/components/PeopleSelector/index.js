@@ -57,6 +57,7 @@ const PeopleSelector = ({
   blockNode,
   existUsers,
   withSelectExistUsers,
+  withExpectedUsersExcluded,
 }) => {
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
@@ -176,7 +177,10 @@ const PeopleSelector = ({
 
         const items = response.items
           .filter((item) => {
-            if (excludeItems.includes(item.id)) {
+            if (
+              excludeItems.includes(item.id) ||
+              (withExpectedUsersExcluded && item.activationStatus === 2)
+            ) {
               totalDifferent++;
               return false;
             } else {

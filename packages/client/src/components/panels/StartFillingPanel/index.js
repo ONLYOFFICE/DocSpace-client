@@ -25,6 +25,7 @@ const StartFillingPanel = ({
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
+  const [visibleTooltip, setVisibleTooltip] = useState(true);
   const [addUserToRoomVisible, setAddUserToRoomVisible] = useState(false);
 
   const [currentRole, setCurrentRole] = useState("");
@@ -72,6 +73,10 @@ const StartFillingPanel = ({
     [users, setUsers]
   );
 
+  const onCloseTooltip = () => {
+    setVisibleTooltip(false);
+  };
+
   const onOpenAddUserToRoom = () => {
     setAddUserToRoomVisible(true);
   };
@@ -102,8 +107,15 @@ const StartFillingPanel = ({
             <FillingRoleSelector
               roles={roles}
               users={users}
+              descriptionTooltip={
+                "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields."
+              }
+              titleTooltip={"How it works"}
+              listHeader={"Roles in this form"}
+              visibleTooltip={visibleTooltip}
               onAddUser={onAddUser}
               onRemoveUser={onRemoveUser}
+              onCloseTooltip={onCloseTooltip}
             />
           </ModalDialog.Body>
 

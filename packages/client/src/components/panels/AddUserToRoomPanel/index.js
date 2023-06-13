@@ -11,20 +11,13 @@ import { withTranslation } from "react-i18next";
 
 const AddUserToRoomPanel = ({
   visible,
-  currentRole,
   onClose,
-  getRoomMembers,
   roomId,
-  onSelectUserForRole,
-  inviteItems,
   setRoomSecurity,
-  inviteUsers,
-  setUpdateRoomMembers,
   existUsers,
+  fetchMembers,
 }) => {
   const onAddToRoom = (users) => {
-    console.log("newSelectedItems", users);
-
     const access = ShareAccessRights.FormFilling;
 
     const items = [];
@@ -64,8 +57,14 @@ const AddUserToRoomPanel = ({
     data.notify = true;
     data.message = "Invitation message";
 
-    setRoomSecurity(roomId, data);
-    onClose();
+    setRoomSecurity(roomId, data)
+      .catch((e) => {
+        console.log("e", e);
+      })
+      .finally(() => {
+        fetchMembers();
+        onClose();
+      });
   };
 
   return (

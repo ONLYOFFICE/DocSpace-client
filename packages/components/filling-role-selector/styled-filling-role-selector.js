@@ -6,6 +6,13 @@ const StyledFillingRoleSelector = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  .list-header {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 0;
+  }
 `;
 
 const StyledRow = styled.div`
@@ -98,16 +105,54 @@ const StyledEveryoneRoleContainer = styled.div`
 `;
 
 const StyledTooltip = styled.div`
-  background: #f8f7bf;
-  color: #333;
+  display: ${(props) => (props.visibleTooltip ? "flex" : "none")};
+  flex-direction: column;
+
+  background: #f8f9f9;
   border-radius: 6px;
-  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   padding: 8px 12px;
-  height: 48px;
   box-sizing: border-box;
   margin: 8px 0;
+
+  .help-icon {
+    path,
+    circle,
+    rect {
+      fill: #ed7309;
+    }
+  }
+
+  .cross-icon {
+    path {
+      fill: #a3a9ae;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+  }
+
+  .title-tooltip {
+    display: flex;
+    gap: 8px;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .description {
+    color: #555f65;
+    font-weight: 400;
+  }
 `;
 
 StyledFillingRoleSelector.defaultProps = { theme: Base };

@@ -85,7 +85,7 @@ const AddUserToRoomPanel = ({
           onAccept={onAddToRoom}
           existUsers={existUsers}
           isMultiSelect
-          withSelectAll
+          withSelectAll={false}
           withSelectExistUsers
           withExpectedUsersExcluded
         />

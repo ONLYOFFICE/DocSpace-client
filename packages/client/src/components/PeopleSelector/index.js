@@ -290,7 +290,7 @@ PeopleSelector.defaultProps = {
 const ExtendedPeopleSelector = inject(({ auth }) => {
   return {
     theme: auth.settingsStore.theme,
-    currentUserId: auth.userStore.user.id,
+    currentUserId: auth.userStore.user?.id,
   };
 })(
   observer(

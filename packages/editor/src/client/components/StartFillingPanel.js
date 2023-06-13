@@ -12,7 +12,7 @@ const StartFillingPanel = ({ isVisible, mfReady, successAuth, ...rest }) => {
           url: CLIENT_REMOTE_ENTRY_URL,
           module: "./StartFillingPanel",
         }}
-        visible={isVisible}
+        isVisible={isVisible}
       />
     )) ||
     null

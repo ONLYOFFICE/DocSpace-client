@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import FillingRoleSelector from "@docspace/components/filling-role-selector";
@@ -22,6 +22,7 @@ const roles = [
 const StartFillingPanel = ({
   startFillingPanelVisible,
   setStartFillingPanelVisible,
+  isVisible,
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
@@ -30,6 +31,10 @@ const StartFillingPanel = ({
 
   const [currentRole, setCurrentRole] = useState("");
   const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    setStartFillingPanelVisible(isVisible);
+  }, [isVisible]);
 
   const onAddUser = (role) => {
     setCurrentRole(role);

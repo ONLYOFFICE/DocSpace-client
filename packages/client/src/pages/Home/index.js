@@ -245,7 +245,7 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? (
+      {isSettingsPage || isDashboardPage ? (
         <></>
       ) : isAccountsPage ? (
         <AccountsDialogs />

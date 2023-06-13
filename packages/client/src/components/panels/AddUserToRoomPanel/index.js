@@ -87,6 +87,7 @@ const AddUserToRoomPanel = ({
           isMultiSelect
           withSelectAll
           withSelectExistUsers
+          withExpectedUsersExcluded
         />
       </Aside>
     </>

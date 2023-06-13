@@ -52,7 +52,7 @@ const InviteUserForRolePanel = ({
         label: fetchedMember.sharedTo.displayName,
         ...fetchedMember.sharedTo,
       };
-      inRoomMembers.push(member);
+      if (member.activationStatus !== 2) inRoomMembers.push(member);
     });
     setMembers(inRoomMembers);
   };

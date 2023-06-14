@@ -43,12 +43,6 @@ public static class DocSpaceHelper
             FolderType.Board;
     }
 
-    public static bool IsFormFillingStep(FolderType folderType)
-    {
-        return folderType is
-            FolderType.FormFillingStep;
-    }
-
     public static async Task<bool> LocatedInPrivateRoomAsync<T>(File<T> file, IFolderDao<T> folderDao)
     {
         var parents = await folderDao.GetParentFoldersAsync(file.ParentId).ToListAsync();

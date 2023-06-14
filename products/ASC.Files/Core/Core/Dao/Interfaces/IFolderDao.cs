@@ -347,14 +347,6 @@ public interface IFolderDao<T>
     Task<T> GetFolderIDBoard(bool createIfNotExists);
 
     /// <summary>
-    /// Returns id folder "FormFillingStep"
-    /// Only in TMFolderDao
-    /// </summary>
-    /// <param name="createIfNotExists"></param>
-    /// <returns></returns>
-    Task<T> GetFolderIDFormFillingStep(bool createIfNotExists);
-
-    /// <summary>
     /// Return id of related object
     /// Only in TMFolderDao
     /// </summary>

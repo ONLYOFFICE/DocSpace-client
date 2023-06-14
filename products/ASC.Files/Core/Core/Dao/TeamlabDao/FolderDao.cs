@@ -41,7 +41,6 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     private const string VirtualRooms = "virtualrooms";
     private const string Archive = "archive";
     private const string Board = "board";
-    private const string FormFillingStep = "formfillingstep";
 
     private readonly FactoryIndexerFolder _factoryIndexer;
     private readonly GlobalSpace _globalSpace;
@@ -1107,10 +1106,6 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                         folder.FolderType = FolderType.Board;
                         folder.Title = Board;
                         break;
-                    case FormFillingStep:
-                        folder.FolderType = FolderType.FormFillingStep;
-                        folder.Title = FormFillingStep;
-                        break;
                     default:
                         folder.FolderType = FolderType.BUNCH;
                         folder.Title = key;
@@ -1226,10 +1221,6 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                     folder.FolderType = FolderType.Board;
                     folder.Title = Board;
                     break;
-                case FormFillingStep:
-                    folder.FolderType = FolderType.FormFillingStep;
-                    folder.Title = FormFillingStep;
-                    break;
                 default:
                     folder.FolderType = FolderType.BUNCH;
                     folder.Title = key;
@@ -1329,11 +1320,6 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     public Task<int> GetFolderIDBoard(bool createIfNotExists)
     {
         return (this as IFolderDao<int>).GetFolderIDAsync(FileConstant.ModuleId, Board, null, createIfNotExists);
-    }
-
-    public Task<int> GetFolderIDFormFillingStep(bool createIfNotExists)
-    {
-        return (this as IFolderDao<int>).GetFolderIDAsync(FileConstant.ModuleId, FormFillingStep, null, createIfNotExists);
     }
 
     public IAsyncEnumerable<OriginData> GetOriginsDataAsync(IEnumerable<int> entriesIds)

@@ -610,11 +610,6 @@ internal class ThirdPartyFolderDao<TFile, TFolder, TItem> : BaseFolderDao, IFold
         return null;
     }
 
-    public Task<string> GetFolderIDFormFillingStep(bool createIfNotExists)
-    {
-        return null;
-    }
-
     public Task<string> GetBunchObjectIDAsync(string folderID)
     {
         return null;

@@ -3339,6 +3339,10 @@ class FilesStore {
     this.mainButtonMobileVisible = visible;
   };
 
+  getRolesUsersForFillingForm = (fileId) => {
+    return api.files.getRolesUsersForFillingForm(fileId);
+  };
+
   get roomsFilterTotal() {
     return this.roomsFilter.total;
   }

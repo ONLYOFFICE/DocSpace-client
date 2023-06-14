@@ -26,28 +26,56 @@ const FillingRoleSelector = ({
   onCloseTooltip,
   descriptionEveryone,
   descriptionTooltip,
+  everyoneTranslation,
   titleTooltip,
   listHeader,
   visibleTooltip,
   ...props
 }) => {
   //If the roles in the roles array come out of order
-  const cloneRoles = JSON.parse(JSON.stringify(roles));
-  const sortedInOrderRoles = cloneRoles.sort((a, b) =>
-    a.order > b.order ? 1 : -1
-  );
+  // const cloneRoles = JSON.parse(JSON.stringify(roles));
+  // const sortedInOrderRoles = cloneRoles.sort((a, b) =>
+  //   a.order > b.order ? 1 : -1
+  // );
 
-  const everyoneRole = roles.find((item) => item.everyone);
+  // const everyoneRole = roles.find((item) => item.everyone);
+
+  // const everyoneRoleNode = (
+  //   <>
+  //     <StyledRow>
+  //       <StyledNumber>{everyoneRole.order}</StyledNumber>
+  //       <StyledEveryoneRoleIcon />
+  //       <StyledEveryoneRoleContainer>
+  //         <div className="title">
+  //           <StyledRole>{everyoneRole.name}</StyledRole>
+  //           <StyledAssignedRole>{everyoneRole.everyone}</StyledAssignedRole>
+  //         </div>
+  //         <div className="role-description">{descriptionEveryone}</div>
+  //       </StyledEveryoneRoleContainer>
+  //     </StyledRow>
+  //   </>
+  // );
+
+  const capitalize = (str) => {
+    if (!str) return str;
+    return str[0].toUpperCase() + str.slice(1);
+  };
+
+  const cloneRoles = JSON.parse(JSON.stringify(roles));
+  const capitalizedRoles = cloneRoles.map((item) => {
+    const title = capitalize(item.title);
+    return { ...item, title };
+  });
 
   const everyoneRoleNode = (
     <>
       <StyledRow>
-        <StyledNumber>{everyoneRole.order}</StyledNumber>
+        <StyledNumber>1</StyledNumber>
         <StyledEveryoneRoleIcon />
         <StyledEveryoneRoleContainer>
           <div className="title">
-            <StyledRole>{everyoneRole.name}</StyledRole>
-            <StyledAssignedRole>{everyoneRole.everyone}</StyledAssignedRole>
+            <StyledRole>{capitalizedRoles[0].title}</StyledRole>
+            <StyledAssignedRole>@{everyoneTranslation}</StyledAssignedRole>
           </div>
           <div className="role-description">{descriptionEveryone}</div>
         </StyledEveryoneRoleContainer>
@@ -76,15 +104,15 @@ const FillingRoleSelector = ({
 
       <div className="list-header">{listHeader}:</div>
 
-      {everyoneRole && everyoneRoleNode}
-      {sortedInOrderRoles.map((role, index) => {
-        if (role.everyone) return;
-        const roleWithUser = users?.find((user) => user.role === role.name);
+      {everyoneRoleNode}
+      {capitalizedRoles.map((role, index) => {
+        if (index === 0) return;
+        const roleWithUser = users?.find((user) => user.role === role.title);
 
         return roleWithUser ? (
           <StyledUserRow key={index}>
             <div className="content">
-              <StyledNumber>{role.order}</StyledNumber>
+              <StyledNumber>{index + 1}</StyledNumber>
 
               <StyledAvatar src={roleWithUser.avatar} />
               <div className="user-with-role">
@@ -99,14 +127,14 @@ const FillingRoleSelector = ({
           </StyledUserRow>
         ) : (
           <StyledRow key={index}>
-            <StyledNumber>{role.order}</StyledNumber>
+            <StyledNumber>{index + 1}</StyledNumber>
             <StyledAddRoleButton
               onClick={() => {
-                onAddUser(role.name);
+                onAddUser(role.title);
               }}
-              color={role.color}
+              color={`#` + role.color}
             />
-            <StyledRole>{role.name}</StyledRole>
+            <StyledRole>{role.title}</StyledRole>
           </StyledRow>
         );
       })}
@@ -122,6 +150,8 @@ FillingRoleSelector.propTypes = {
   /** Tooltip text */
   descriptionTooltip: PropTypes.string,
   /** Tooltip title */
+  /** Everyone translation */
+  everyoneTranslation: PropTypes.string,
   titleTooltip: PropTypes.string,
   /** Accepts id */
   id: PropTypes.string,

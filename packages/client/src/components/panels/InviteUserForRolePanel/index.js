@@ -30,40 +30,19 @@ const StyledBlock = styled.div`
 
 const InviteUserForRolePanel = ({
   visible,
+  members,
   currentRole,
   onClose,
-  getRoomMembers,
-  roomId,
   onSelectUserForRole,
   onCloseInviteUserForRolePanel,
   addUserToRoomVisible,
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
+  fetchMembers,
 }) => {
-  const [members, setMembers] = useState([]);
-
-  const fetchMembers = async () => {
-    let data = await getRoomMembers(roomId);
-
-    data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
-    let inRoomMembers = [];
-    data.map((fetchedMember) => {
-      const member = {
-        label: fetchedMember.sharedTo.displayName,
-        ...fetchedMember.sharedTo,
-      };
-      if (member.activationStatus !== 2) inRoomMembers.push(member);
-    });
-    setMembers(inRoomMembers);
-  };
-
-  useEffect(() => {
-    fetchMembers();
-  }, []);
-
   const blockNode = (
     <StyledBlock>
-      <div className="role">({currentRole})</div>
+      <div className="role">({currentRole.title})</div>
       <Link
         fontWeight="600"
         type="action"
@@ -122,12 +101,4 @@ const InviteUserForRolePanel = ({
   );
 };
 
-export default inject(({ filesStore, auth }) => {
-  const { getRoomMembers } = filesStore;
-  const { updateRoomMembers } = auth.infoPanelStore;
-
-  return {
-    getRoomMembers,
-    updateRoomMembers,
-  };
-})(withTranslation(["Common"])(observer(InviteUserForRolePanel)));
+export default InviteUserForRolePanel;

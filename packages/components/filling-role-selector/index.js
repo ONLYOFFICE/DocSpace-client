@@ -130,7 +130,7 @@ const FillingRoleSelector = ({
             <StyledNumber>{index + 1}</StyledNumber>
             <StyledAddRoleButton
               onClick={() => {
-                onAddUser(role.title);
+                onAddUser(role);
               }}
               color={`#` + role.color}
             />

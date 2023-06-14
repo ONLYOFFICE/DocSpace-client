@@ -3343,6 +3343,10 @@ class FilesStore {
     return api.files.getRolesUsersForFillingForm(fileId);
   };
 
+  setRolesUsersForFillingForm = (fileId, idUsersRoles) => {
+    return api.files.setRolesUsersForFillingForm(fileId, idUsersRoles);
+  };
+
   get roomsFilterTotal() {
     return this.roomsFilter.total;
   }

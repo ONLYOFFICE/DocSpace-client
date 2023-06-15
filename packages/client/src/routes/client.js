@@ -12,12 +12,11 @@ import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
 import Dashboard from "SRC_DIR/pages/Home/Dashboard";
 
+import { generalRoutes } from "./general";
+
 const Client = loadable(() => import("../Client"));
 
 const Home = loadable(() => import("../pages/Home"));
-
-const Profile = loadable(() => import("../pages/Profile"));
-const NotificationComponent = loadable(() => import("../pages/Notifications"));
 
 const FormGallery = loadable(() => import("../pages/FormGallery"));
 const About = loadable(() => import("../pages/About"));
@@ -230,22 +229,7 @@ const ClientRoutes = [
         ],
       },
 
-      {
-        path: "accounts/view/@self",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "accounts/view/@self/notification",
-        element: (
-          <PrivateRoute>
-            <NotificationComponent />
-          </PrivateRoute>
-        ),
-      },
+      ...generalRoutes,
     ],
   },
   {

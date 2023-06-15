@@ -22,7 +22,7 @@ import {
 const StatusFillingPanel = ({
   visible,
   setStatusFillinglVisible,
-  getRolesInRoom,
+  getRolesUsersForFillingForm,
   selection,
 }) => {
   const [statusInfo, setStatusInfo] = useState([]);
@@ -30,7 +30,7 @@ const StatusFillingPanel = ({
   const onClose = () => setStatusFillinglVisible(false);
 
   useEffect(() => {
-    getRolesInRoom(selection.id).then((res) => {
+    getRolesUsersForFillingForm(selection.id).then((res) => {
       console.log(res), setStatusInfo(res);
     });
   }, []);
@@ -97,13 +97,13 @@ const StatusFillingPanel = ({
 export default inject(({ auth, dialogsStore, filesStore }) => {
   const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
   const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
-  const { getRolesInRoom } = filesStore;
+  const { getRolesUsersForFillingForm } = filesStore;
 
   return {
     visible: statusFillingPanelVisible,
     setStatusFillinglVisible,
     getInfoPanelItemIcon,
-    getRolesInRoom,
+    getRolesUsersForFillingForm,
     selection,
   };
 })(observer(StatusFillingPanel));

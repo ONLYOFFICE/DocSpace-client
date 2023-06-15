@@ -1,8 +1,14 @@
-import DashboardStore from "src/store/DashboardStore";
+import store from "src/store";
+import { Base, Dark } from "@docspace/components/themes";
 
-export type DashboardInjectType = {
-  dashboardStore: DashboardStore;
+export type ContextType = {
+  sectionWidth: number;
+  sectionHeight: number;
 };
+
+export type ThemeType = typeof Base | typeof Dark;
+
+export type InjectType = typeof store;
 
 export type TableColumnType = {
   key: string;
@@ -15,4 +21,14 @@ export type TableColumnType = {
   onChange?: (key: string) => void;
   onClick: (sortBy: any) => void;
   onIconClick?: () => void;
+};
+
+export type ParamType = {
+  room: string;
+};
+
+export type RoleType = {
+  id: number;
+  title: string;
+  queue: number | string;
 };

@@ -6,6 +6,30 @@ import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import styled from "styled-components";
+
+const StyledModalDialog = styled(ModalDialog)`
+  .modal-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .scroll-body {
+    padding-right: 0 !important;
+  }
+
+  .row {
+    padding: 0 16px;
+  }
+
+  .list-header {
+    padding: 8px 16px;
+  }
+
+  .tooltip {
+    margin: 8px 16px;
+  }
+`;
 
 const everyoneRole = 1;
 const StartFillingPanel = ({
@@ -146,12 +170,10 @@ const StartFillingPanel = ({
       <Aside
         className="start-filling"
         visible={startFillingPanelVisible}
-        withoutBodyScroll
         zIndex={310}
       >
-        <ModalDialog
+        <StyledModalDialog
           displayType="aside"
-          withBodyScroll
           visible={startFillingPanelVisible}
           withFooterBorder
           onClose={onClose}
@@ -199,7 +221,7 @@ const StartFillingPanel = ({
               scale
             />
           </ModalDialog.Footer>
-        </ModalDialog>
+        </StyledModalDialog>
       </Aside>
 
       {visibleInviteUserForRolePanel && (

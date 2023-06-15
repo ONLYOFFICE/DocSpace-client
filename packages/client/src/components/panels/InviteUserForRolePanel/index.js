@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
-import Header from "@docspace/components/selector/sub-components/Header";
-import Body from "@docspace/components/selector/sub-components/Body";
 
 import Selector from "@docspace/components/selector";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import Link from "@docspace/components/link";
 import { AddUserToRoomPanel } from "../index";
 
-import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 const StyledBlock = styled.div`

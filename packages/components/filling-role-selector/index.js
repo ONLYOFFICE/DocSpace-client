@@ -46,7 +46,7 @@ const FillingRoleSelector = ({
 
   const everyoneRoleNode = (
     <>
-      <StyledRow>
+      <StyledRow className="row">
         <StyledNumber>1</StyledNumber>
         <StyledEveryoneRoleIcon />
         <StyledEveryoneRoleContainer>
@@ -62,7 +62,7 @@ const FillingRoleSelector = ({
 
   return (
     <StyledFillingRoleSelector {...props}>
-      <StyledTooltip visibleTooltip={visibleTooltip}>
+      <StyledTooltip className="tooltip" visibleTooltip={visibleTooltip}>
         <div className="title-container">
           <div className="title-tooltip">
             <ReactSVG className="help-icon" src={TooltipSvgUrl} />
@@ -88,7 +88,7 @@ const FillingRoleSelector = ({
           const roleWithUser = users?.find((user) => user.role === role.title);
 
           return roleWithUser ? (
-            <StyledUserRow key={index}>
+            <StyledUserRow className="row" key={index}>
               <div className="content">
                 <StyledNumber>{index + 1}</StyledNumber>
 
@@ -99,12 +99,13 @@ const FillingRoleSelector = ({
                 </div>
               </div>
               <ReactSVG
+                className="remove-image"
                 src={RemoveSvgUrl}
                 onClick={() => onRemoveUser(roleWithUser.id)}
               />
             </StyledUserRow>
           ) : (
-            <StyledRow key={index}>
+            <StyledRow className="row" key={index}>
               <StyledNumber>{index + 1}</StyledNumber>
               <StyledAddRoleButton
                 onClick={() => {

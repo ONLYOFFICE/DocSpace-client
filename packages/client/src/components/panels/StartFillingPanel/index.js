@@ -165,13 +165,28 @@ const StartFillingPanel = ({
   };
 
   if (!roles.length) return <div></div>;
+
+  if (visibleInviteUserForRolePanel) {
+    return (
+      <InviteUserForRolePanel
+        visible={visibleInviteUserForRolePanel}
+        members={members}
+        currentRole={currentRole}
+        onClose={onClose}
+        onSelectUserForRole={onSelectUserForRole}
+        setVisibleInviteUserForRolePanel={setVisibleInviteUserForRolePanel}
+        onCloseInviteUserForRolePanel={onCloseInviteUserForRolePanel}
+        addUserToRoomVisible={addUserToRoomVisible}
+        onOpenAddUserToRoom={onOpenAddUserToRoom}
+        onCloseAddUserToRoom={onCloseAddUserToRoom}
+        fetchMembers={fetchMembers}
+      />
+    );
+  }
+
   return (
     <>
-      <Aside
-        className="start-filling"
-        visible={startFillingPanelVisible}
-        zIndex={310}
-      >
+      <Aside visible={startFillingPanelVisible} zIndex={310}>
         <StyledModalDialog
           displayType="aside"
           visible={startFillingPanelVisible}
@@ -223,22 +238,6 @@ const StartFillingPanel = ({
           </ModalDialog.Footer>
         </StyledModalDialog>
       </Aside>
-
-      {visibleInviteUserForRolePanel && (
-        <InviteUserForRolePanel
-          visible={visibleInviteUserForRolePanel}
-          members={members}
-          currentRole={currentRole}
-          onClose={onClose}
-          onSelectUserForRole={onSelectUserForRole}
-          setVisibleInviteUserForRolePanel={setVisibleInviteUserForRolePanel}
-          onCloseInviteUserForRolePanel={onCloseInviteUserForRolePanel}
-          addUserToRoomVisible={addUserToRoomVisible}
-          onOpenAddUserToRoom={onOpenAddUserToRoom}
-          onCloseAddUserToRoom={onCloseAddUserToRoom}
-          fetchMembers={fetchMembers}
-        />
-      )}
     </>
   );
 };

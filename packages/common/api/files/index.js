@@ -1003,10 +1003,19 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
   });
 }
 
-export function getRolesInRoom(fileId) {
+export function getRolesUsersForFillingForm(fileId) {
   const options = {
     method: "get",
-    url: `files/file/${fileId}/roles`,
+    url: `/files/file/${fileId}/roles`,
   };
+
   return request(options);
+}
+
+export function setRolesUsersForFillingForm(fileId, idUsersRoles) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/roles`,
+    data: idUsersRoles,
+  });
 }

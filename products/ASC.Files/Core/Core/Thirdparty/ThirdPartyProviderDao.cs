@@ -214,11 +214,6 @@ internal abstract class ThirdPartyProviderDao
         return null;
     }
 
-    public Task<string> GetFolderIDFormFillingStep(bool createIfNotExists)
-    {
-        return null;
-    }
-
     public Task<string> GetBunchObjectIDAsync(string folderID)
     {
         return null;

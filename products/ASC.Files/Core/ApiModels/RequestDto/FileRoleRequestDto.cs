@@ -29,5 +29,5 @@ public class FileRoleRequestDto
 {
 
     public int Id { get; set; }
-    public Guid UserId { get; set; }
+    public List<Guid> UserId { get; set; }
 }

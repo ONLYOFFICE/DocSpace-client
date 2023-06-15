@@ -720,7 +720,6 @@ public class FileSecurity : IFileSecurity
         var folder = e as Folder<T>;
         var isRoom = folder != null && DocSpaceHelper.IsRoom(folder.FolderType);
         var isBoard = folder != null && DocSpaceHelper.IsBoard(folder.FolderType);
-        var isFormFillingStep = folder != null && DocSpaceHelper.IsFormFillingStep(folder.FolderType);
 
         if (file != null &&
             action == FilesSecurityActions.Edit &&
@@ -745,7 +744,7 @@ public class FileSecurity : IFileSecurity
 
             if (action != FilesSecurityActions.Read)
             {
-                if (isBoard || isFormFillingStep)
+                if (isBoard)
                 {
                     return false;
                 }
@@ -807,7 +806,7 @@ public class FileSecurity : IFileSecurity
                     return true;
                 }
 
-                if (isBoard || isFormFillingStep)
+                if (isBoard)
                 {
                     return true;
                 }

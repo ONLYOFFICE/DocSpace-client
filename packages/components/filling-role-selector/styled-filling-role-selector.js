@@ -3,6 +3,7 @@ import Base from "../themes/base";
 import { AddRoleButton, EveryoneRoleIcon } from "./svg";
 
 const StyledFillingRoleSelector = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -20,6 +21,12 @@ const StyledRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media (hover: hover) {
+    &:hover {
+      background: ${(props) => props.theme.selector.item.hoverBackground};
+    }
+  }
 `;
 
 const StyledUserRow = styled.div`
@@ -36,6 +43,20 @@ const StyledUserRow = styled.div`
 
   .user-with-role {
     display: flex;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: ${(props) => props.theme.selector.item.hoverBackground};
+    }
+  }
+
+  .remove-image {
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 `;
 
@@ -62,6 +83,12 @@ const StyledAddRoleButton = styled(AddRoleButton)`
 
   rect {
     stroke: ${(props) => props.color};
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

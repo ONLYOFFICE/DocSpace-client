@@ -11,15 +11,13 @@ export default {
 };
 
 const mockRoles = [
-  { id: 3, name: "Director", order: 3, color: "#BB85E7" },
-  { id: 2, name: "Accountant", order: 2, color: "#70D3B0" },
   {
     id: 1,
-    name: "Employee",
-    order: 1,
+    title: "Employee",
     color: "#FBCC86",
-    everyone: "@Everyone",
   },
+  { id: 2, title: "Director", color: "#BB85E7" },
+  { id: 3, title: "Accountant", color: "#70D3B0" },
 ];
 
 const mockUsers = [
@@ -28,21 +26,22 @@ const mockUsers = [
     displayName: "Makenna Lipshutz",
     role: "Accountant",
     avatar: "/images/user.avatar.example.react.svg",
-    hasAvatar: true,
   },
   {
     id: 2,
     displayName: "Randy Korsgaard",
     role: "Director",
-    hasAvatar: false,
+    avatar: "/images/user.avatar.example.react.svg",
   },
 ];
 
-//TODO: Fix translations to correct ones when they appear on layouts
 const textRoleEveryone =
-  "The form is available for filling out by all participants of this room.";
+  "The form is available for filling for all room members.";
 const textTooltip =
-  "Each form filled out by users from the first role will go in turn to the next users listed below.";
+  "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields.";
+const textEveryoneTranslation = "Everyone";
+const textTitleTooltip = "How it works";
+const textListHeader = "Roles in this form";
 
 const Template = ({ onAddUser, ...args }) => {
   const onAddUserHandler = () => {
@@ -64,6 +63,9 @@ Default.args = {
   roles: mockRoles,
   descriptionEveryone: textRoleEveryone,
   descriptionTooltip: textTooltip,
+  everyoneTranslation: textEveryoneTranslation,
+  titleTooltip: textTitleTooltip,
+  listHeader: textListHeader,
 };
 
 const TemplateRolesFilledUsers = ({
@@ -102,4 +104,7 @@ rolesFilledUsers.args = {
   users: mockUsers,
   descriptionEveryone: textRoleEveryone,
   descriptionTooltip: textTooltip,
+  everyoneTranslation: textEveryoneTranslation,
+  titleTooltip: textTitleTooltip,
+  listHeader: textListHeader,
 };

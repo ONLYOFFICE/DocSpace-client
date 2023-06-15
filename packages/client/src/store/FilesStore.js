@@ -3200,6 +3200,12 @@ class FilesStore {
 
   unpinRoom = (id) => api.rooms.unpinRoom(id);
 
+  getRolesInRoom = async (id) => {
+    const fileInfo = await api.files.getRolesInRoom(id);
+    this.setFile(fileInfo);
+    return fileInfo;
+  };
+
   getFileInfo = async (id) => {
     const fileInfo = await api.files.getFileInfo(id);
     this.setFile(fileInfo);

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { observer, inject } from "mobx-react";
 
@@ -19,9 +19,21 @@ import {
   StyledScrollbar,
 } from "./StyledFillingStatusPanel";
 
-const StatusFillingPanel = ({ visible, setStatusFillinglVisible }) => {
+const StatusFillingPanel = ({
+  visible,
+  setStatusFillinglVisible,
+  getRolesInRoom,
+  selection,
+}) => {
+  const [statusInfo, setStatusInfo] = useState([]);
   const scrollRef = useRef(null);
   const onClose = () => setStatusFillinglVisible(false);
+
+  useEffect(() => {
+    getRolesInRoom(selection.id).then((res) => {
+      console.log(res), setStatusInfo(res);
+    });
+  }, []);
 
   return (
     <StyledFillingStatusPanel>
@@ -63,7 +75,7 @@ const StatusFillingPanel = ({ visible, setStatusFillinglVisible }) => {
             />
           </Box>
 
-          <FillingStatusLine />
+          <FillingStatusLine statusInfo={statusInfo} />
         </StyledScrollbar>
 
         <div className="status-filling_footer">
@@ -82,13 +94,16 @@ const StatusFillingPanel = ({ visible, setStatusFillinglVisible }) => {
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ auth, dialogsStore, filesStore }) => {
   const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
-  const { getInfoPanelItemIcon } = auth.infoPanelStore;
+  const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
+  const { getRolesInRoom } = filesStore;
 
   return {
     visible: statusFillingPanelVisible,
     setStatusFillinglVisible,
     getInfoPanelItemIcon,
+    getRolesInRoom,
+    selection,
   };
 })(observer(StatusFillingPanel));

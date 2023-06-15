@@ -99,7 +99,10 @@ class ContextOptionsStore {
   onShowFillingStatus = (item) => {
     const { setStatusFillinglVisible } = this.dialogsStore;
     const { setMainButtonMobileVisible } = this.filesStore;
+    const { setSelection } = this.authStore.infoPanelStore;
+
     setStatusFillinglVisible(true);
+    setSelection(item);
 
     if (isMobileOnly) {
       setMainButtonMobileVisible(false);

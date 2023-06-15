@@ -50,7 +50,7 @@ const StyledItem = styled.div`
 
   @media (hover: hover) {
     &:hover {
-      cursor: pointer;
+      cursor: ${(props) => (props.isAlwaysSelected ? "default" : "pointer")};
       background: ${(props) => props.theme.selector.item.hoverBackground};
     }
   }
@@ -86,7 +86,7 @@ const Item = React.memo(({ index, style, data }) => {
 
     if (!item && !item?.id) return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabledCheckbox } = item;
+    const { label, avatar, icon, role, isSelected, isAlwaysSelected } = item;
 
     const currentRole = role ? role : "user";
 
@@ -97,7 +97,7 @@ const Item = React.memo(({ index, style, data }) => {
     };
 
     const onClick = (e) => {
-      if (e.target.closest(".checkbox")) return;
+      if (e.target.closest(".checkbox") || isAlwaysSelected) return;
 
       onSelect && onSelect(item);
     };
@@ -109,6 +109,7 @@ const Item = React.memo(({ index, style, data }) => {
         style={style}
         onClick={onClick}
         className="test-22"
+        isAlwaysSelected={isAlwaysSelected}
       >
         {!isLogo ? (
           <Avatar
@@ -136,7 +137,7 @@ const Item = React.memo(({ index, style, data }) => {
             className="checkbox"
             isChecked={isSelected}
             onChange={onChangeAction}
-            isDisabled={isDisabledCheckbox}
+            isDisabled={isAlwaysSelected}
           />
         )}
       </StyledItem>

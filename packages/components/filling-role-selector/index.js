@@ -17,6 +17,7 @@ import {
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TooltipSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg?url";
+import Scrollbar from "@docspace/components/scrollbar";
 
 const FillingRoleSelector = ({
   roles,
@@ -32,30 +33,6 @@ const FillingRoleSelector = ({
   visibleTooltip,
   ...props
 }) => {
-  //If the roles in the roles array come out of order
-  // const cloneRoles = JSON.parse(JSON.stringify(roles));
-  // const sortedInOrderRoles = cloneRoles.sort((a, b) =>
-  //   a.order > b.order ? 1 : -1
-  // );
-
-  // const everyoneRole = roles.find((item) => item.everyone);
-
-  // const everyoneRoleNode = (
-  //   <>
-  //     <StyledRow>
-  //       <StyledNumber>{everyoneRole.order}</StyledNumber>
-  //       <StyledEveryoneRoleIcon />
-  //       <StyledEveryoneRoleContainer>
-  //         <div className="title">
-  //           <StyledRole>{everyoneRole.name}</StyledRole>
-  //           <StyledAssignedRole>{everyoneRole.everyone}</StyledAssignedRole>
-  //         </div>
-  //         <div className="role-description">{descriptionEveryone}</div>
-  //       </StyledEveryoneRoleContainer>
-  //     </StyledRow>
-  //   </>
-  // );
-
   const capitalize = (str) => {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);
@@ -69,7 +46,7 @@ const FillingRoleSelector = ({
 
   const everyoneRoleNode = (
     <>
-      <StyledRow>
+      <StyledRow className="row">
         <StyledNumber>1</StyledNumber>
         <StyledEveryoneRoleIcon />
         <StyledEveryoneRoleContainer>
@@ -85,7 +62,7 @@ const FillingRoleSelector = ({
 
   return (
     <StyledFillingRoleSelector {...props}>
-      <StyledTooltip visibleTooltip={visibleTooltip}>
+      <StyledTooltip className="tooltip" visibleTooltip={visibleTooltip}>
         <div className="title-container">
           <div className="title-tooltip">
             <ReactSVG className="help-icon" src={TooltipSvgUrl} />
@@ -104,40 +81,43 @@ const FillingRoleSelector = ({
 
       <div className="list-header">{listHeader}:</div>
 
-      {everyoneRoleNode}
-      {capitalizedRoles.map((role, index) => {
-        if (index === 0) return;
-        const roleWithUser = users?.find((user) => user.role === role.title);
+      <Scrollbar stype="mediumBlack">
+        {everyoneRoleNode}
+        {capitalizedRoles.map((role, index) => {
+          if (index === 0) return;
+          const roleWithUser = users?.find((user) => user.role === role.title);
 
-        return roleWithUser ? (
-          <StyledUserRow key={index}>
-            <div className="content">
-              <StyledNumber>{index + 1}</StyledNumber>
+          return roleWithUser ? (
+            <StyledUserRow className="row" key={index}>
+              <div className="content">
+                <StyledNumber>{index + 1}</StyledNumber>
 
-              <StyledAvatar src={roleWithUser.avatar} />
-              <div className="user-with-role">
-                <StyledRole>{roleWithUser.displayName}</StyledRole>
-                <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
+                <StyledAvatar src={roleWithUser.avatar} />
+                <div className="user-with-role">
+                  <StyledRole>{roleWithUser.displayName}</StyledRole>
+                  <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
+                </div>
               </div>
-            </div>
-            <ReactSVG
-              src={RemoveSvgUrl}
-              onClick={() => onRemoveUser(roleWithUser.id)}
-            />
-          </StyledUserRow>
-        ) : (
-          <StyledRow key={index}>
-            <StyledNumber>{index + 1}</StyledNumber>
-            <StyledAddRoleButton
-              onClick={() => {
-                onAddUser(role.title);
-              }}
-              color={`#` + role.color}
-            />
-            <StyledRole>{role.title}</StyledRole>
-          </StyledRow>
-        );
-      })}
+              <ReactSVG
+                className="remove-image"
+                src={RemoveSvgUrl}
+                onClick={() => onRemoveUser(roleWithUser.id)}
+              />
+            </StyledUserRow>
+          ) : (
+            <StyledRow className="row" key={index}>
+              <StyledNumber>{index + 1}</StyledNumber>
+              <StyledAddRoleButton
+                onClick={() => {
+                  onAddUser(role);
+                }}
+                color={`#` + role.color}
+              />
+              <StyledRole>{role.title}</StyledRole>
+            </StyledRow>
+          );
+        })}
+      </Scrollbar>
     </StyledFillingRoleSelector>
   );
 };

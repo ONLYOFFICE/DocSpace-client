@@ -1011,3 +1011,11 @@ export function getRolesUsersForFillingForm(fileId) {
 
   return request(options);
 }
+
+export function setRolesUsersForFillingForm(fileId, idUsersRoles) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/roles`,
+    data: idUsersRoles,
+  });
+}

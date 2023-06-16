@@ -3200,6 +3200,12 @@ class FilesStore {
 
   unpinRoom = (id) => api.rooms.unpinRoom(id);
 
+  getRolesUsersForFillingForm = async (id) => {
+    const fileInfo = await api.files.getRolesUsersForFillingForm(id);
+    this.setFile(fileInfo);
+    return fileInfo;
+  };
+
   getFileInfo = async (id) => {
     const fileInfo = await api.files.getFileInfo(id);
     this.setFile(fileInfo);
@@ -3341,6 +3347,10 @@ class FilesStore {
 
   getRolesUsersForFillingForm = (fileId) => {
     return api.files.getRolesUsersForFillingForm(fileId);
+  };
+
+  setRolesUsersForFillingForm = (fileId, idUsersRoles) => {
+    return api.files.setRolesUsersForFillingForm(fileId, idUsersRoles);
   };
 
   get roomsFilterTotal() {

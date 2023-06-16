@@ -10,4 +10,5 @@ export type TableRowProps = Omit<IconProps, "size"> & {
   id: number;
   queue: string;
   title: string;
+  badge?: number;
 };

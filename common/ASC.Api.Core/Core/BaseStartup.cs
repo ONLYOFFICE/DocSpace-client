@@ -191,9 +191,6 @@ public abstract class BaseStartup
         {
             config.Conventions.Add(new ControllerNameAttributeConvention());
 
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-
-            config.Filters.Add(new AuthorizeFilter(policy));
             config.Filters.Add(new TypeFilterAttribute(typeof(TenantStatusFilter)));
             config.Filters.Add(new TypeFilterAttribute(typeof(PaymentFilter)));
             config.Filters.Add(new TypeFilterAttribute(typeof(IpSecurityFilter)));

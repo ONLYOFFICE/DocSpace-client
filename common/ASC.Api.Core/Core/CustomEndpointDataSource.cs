@@ -77,7 +77,7 @@ public static class EndpointExtension
 {
     public static async Task<IEndpointRouteBuilder> MapCustomAsync(this IEndpointRouteBuilder endpoints, bool webhooksEnabled = false, IServiceProvider serviceProvider = null)
     {
-        endpoints.MapControllers();
+        endpoints.MapControllers().RequireAuthorization();
 
         if (webhooksEnabled && serviceProvider != null)
         {

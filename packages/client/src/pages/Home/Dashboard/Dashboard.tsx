@@ -1,20 +1,37 @@
+import { useContext, useState, useEffect, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import Column from "@docspace/components/Column";
 import Card from "@docspace/components/Card";
+import { Context } from "@docspace/components/utils/context";
+
+import List from "./List";
+import Table from "./Table";
 
 import { DashboardContainer } from "./Dashboard.styled";
+
+import TableProps from "./Table/Table.porps";
+import DashboardProps from "./Dashboard.props";
+
+import { ContextType, InjectType } from "./types";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-import { DashboardInjectType } from "./types";
-import DashboardProps from "./Dashboard.props";
-import Table from "./Table";
-import TableProps from "./Table/Table.porps";
 
 function Dashboard({ viewAs }: DashboardProps) {
+  const { sectionWidth } = useContext<ContextType>(Context);
+  const [showListView, setShowListView] = useState<boolean>(false);
+
+  useLayoutEffect(() => {
+    if (viewAs !== "row") return;
+
+    const width = window.innerWidth;
+
+    setShowListView(width < 1024);
+  }, [sectionWidth, viewAs]);
+
   const columns = [
     {
       id: 1,
@@ -95,6 +112,7 @@ function Dashboard({ viewAs }: DashboardProps) {
       color: "#CBDFB7",
       roleType: "default",
       queue: "2",
+      badge: 2,
     },
     {
       id: 3,
@@ -154,7 +172,11 @@ function Dashboard({ viewAs }: DashboardProps) {
   ];
 
   if (viewAs === "row") {
-    return <Table roles={roles} />;
+    return showListView ? (
+      <List sectionWidth={sectionWidth} roles={roles} />
+    ) : (
+      <Table roles={roles} />
+    );
   }
 
   return (
@@ -193,7 +215,7 @@ function Dashboard({ viewAs }: DashboardProps) {
   );
 }
 
-export default inject<DashboardInjectType>(({ dashboardStore }) => {
+export default inject<InjectType>(({ dashboardStore }) => {
   const { viewAs } = dashboardStore;
 
   return {

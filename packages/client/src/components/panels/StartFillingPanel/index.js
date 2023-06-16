@@ -38,8 +38,8 @@ const StartFillingPanel = ({
   isVisible,
   getRolesUsersForFillingForm,
   setRolesUsersForFillingForm,
-  fileId,
-  roomId,
+  fileId = 4,
+  roomId = 7,
   getRoomMembers,
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =

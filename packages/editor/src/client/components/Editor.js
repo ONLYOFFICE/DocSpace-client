@@ -18,7 +18,7 @@ import {
   getProtectUsers,
   sendEditorNotify,
 } from "@docspace/common/api/files";
-import { EditorWrapper } from "../components/StyledEditor";
+import { EditorWrapper, StyledButton } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
 import { assign } from "@docspace/common/utils";
@@ -94,7 +94,9 @@ function Editor({
   url,
   filesSettings,
   startFillingPanel,
+  statusFillingPanel,
   onClickStartFillingPanel,
+  onClickStatusFillingPanel,
 }) {
   const fileInfo = config?.file;
 
@@ -769,17 +771,24 @@ function Editor({
       <>
         {/* {sharingDialog} */}
         {startFillingPanel}
+        {statusFillingPanel}
         {selectFileDialog}
         {selectFolderDialog}
       </>
     );
 
   return (
-    <EditorWrapper
-    // isVisibleSharingDialog={isVisible}
-    >
+    <EditorWrapper>
       {/* TODO: Delete */}
-      <div onClick={onClickStartFillingPanel}>Open StartFillingPanel</div>
+
+      <StyledButton onClick={onClickStartFillingPanel}>
+        Open StartFillingPanel
+      </StyledButton>
+
+      <StyledButton onClick={onClickStatusFillingPanel}>
+        Open StatusFillingPanel
+      </StyledButton>
+
       {newConfig && (
         <DocumentEditor
           id={EDITOR_ID}

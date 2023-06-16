@@ -21,6 +21,24 @@ const StyledSelectFile = styled.div`
   }
 `;
 
+const StyledButton = styled.button`
+  position: relative;
+  color: #fff;
+  height: 32px;
+  background-color: #333333;
+  border: 1px solid #474747;
+  font-family: ${(props) => props.theme.fontFamily};
+  padding: 0 28px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 3px;
+`;
+
+StyledButton.defaultProps = { theme: Base };
+
 const EditorWrapper = styled.div`
   height: 100vh;
 
@@ -29,4 +47,4 @@ const EditorWrapper = styled.div`
   }
 `;
 
-export { StyledSelectFolder, StyledSelectFile, EditorWrapper };
+export { StyledSelectFolder, StyledSelectFile, EditorWrapper, StyledButton };

@@ -27,7 +27,7 @@
 namespace ASC.Files.Core;
 public enum FormFilingStatusType
 {
-    Process = 1,
-    Signed = 2,
+    StartedFilling = 1,
+    FilledAndSigned = 2,
     Cancel = 3
 }

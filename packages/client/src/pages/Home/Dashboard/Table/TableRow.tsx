@@ -1,3 +1,7 @@
+import { useMemo, ChangeEvent } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+
 import {
   BoardTableRow,
   TableCellQueue,
@@ -5,16 +9,35 @@ import {
 } from "./Table.styled";
 
 import TableCell from "@docspace/components/table-container/TableCell";
+import { Badge } from "@docspace/components";
 import Checkbox from "@docspace/components/checkbox";
 import Link from "@docspace/components/link";
 
 import Icon from "../Icon";
 
 import { TableRowProps } from "./Table.porps";
+import { ParamType } from "../types";
 
-function TableRow({ queue, title, id, roleType, color }: TableRowProps) {
-  const onChange = (e: any) => {
-    console.log("onChange", e);
+function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
+  const { room } = useParams<ParamType>();
+  const navigate = useNavigate();
+
+  const href = useMemo(
+    () => room && `/rooms/shared/${room}/dashboard/${id}`,
+
+    [room, id]
+  );
+
+  const onClickLink = (event: MouseEvent) => {
+    event.preventDefault();
+
+    if (href) {
+      navigate(href);
+    }
+  };
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log("onChange", event);
   };
 
   return (
@@ -42,15 +65,27 @@ function TableRow({ queue, title, id, roleType, color }: TableRowProps) {
 
           <Link
             type="page"
-            fontWeight="600"
-            fontSize="13px"
+            href={href}
+            title={title}
             isTextOverflow
-            className="table-cell_role"
-            noHover
+            fontSize="13px"
+            fontWeight="600"
+            noHover={isMobile}
+            onClick={onClickLink}
             enableUserSelect={false}
+            className="table-cell_role"
           >
             {title}
           </Link>
+
+          <Badge
+            fontSize="9px"
+            maxWidth="5px"
+            fontWeight={800}
+            lineHeight="12px"
+            label={badge}
+            borderRadius="100%"
+          />
         </TableCell>
 
         <TableCell className="table-cell_queue-number" forwardedRef={undefined}>

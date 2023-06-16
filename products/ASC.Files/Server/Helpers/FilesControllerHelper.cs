@@ -227,14 +227,27 @@ public class FilesControllerHelper : FilesHelperBase
 
         var mockResult = new List<FileRoleDto>() {
 
-            new FileRoleDto() {Id = 1, Title = "everyone", Color = "fbcc86", Assigned = new EmployeeDto(){ 
+            new FileRoleDto() {Id = 1, Title = "everyone", Color = "fbcc86", Assigned = new EmployeeDto(){
                 Id = Guid.Parse("a7b9d5de-fe74-499f-b982-8566252c7cf8"),
                 DisplayName = "Administrator",
                 AvatarSmall = "/static/images/default_user_photo_size_32-32.png",
                 ProfileUrl = "http://localhost:8092/accounts/view/administrator",
                 HasAvatar = false
             },
-                FormFilingStatusType = FormFilingStatusType.Signed
+                FormFillingSteps = new List<FormFillingStep>()
+                {
+                    new FormFillingStep()
+                    {
+                        FormFilingStatusType = FormFilingStatusType.StartedFilling,
+                        Date = DateTime.Now.AddDays(-5),
+                    },
+                    new FormFillingStep()
+                    {
+                        FormFilingStatusType = FormFilingStatusType.FilledAndSigned,
+                        Date = DateTime.Now.AddDays(-1),
+                        Comment = "I agree with everything"
+                    }
+                }
             },
             new FileRoleDto() {Id = 2, Title = "accountant",Color = "70d3b0", Assigned = new EmployeeDto(){
                 Id = Guid.Parse("a4d05126-d7e1-4e93-9cdd-51d9c149090d"),
@@ -243,7 +256,14 @@ public class FilesControllerHelper : FilesHelperBase
                 ProfileUrl = "http://localhost:8092/accounts/view/madelyn.septimus",
                 HasAvatar = false
             },
-                FormFilingStatusType = FormFilingStatusType.Process
+                FormFillingSteps = new List<FormFillingStep>()
+                {
+                    new FormFillingStep()
+                    {
+                        FormFilingStatusType = FormFilingStatusType.StartedFilling,
+                        Date = DateTime.Now.AddHours(-3),
+                    }
+                }
             },
             new FileRoleDto() {Id = 3, Title = "director", Color = "bb85e7", Assigned = new EmployeeDto(){
                 Id = Guid.Parse("33e27954-303e-4757-8efd-597d3d2a9f7e"),
@@ -252,7 +272,7 @@ public class FilesControllerHelper : FilesHelperBase
                 ProfileUrl = "http://localhost:8092/accounts/view/mark.bellos",
                 HasAvatar = false
             },
-                FormFilingStatusType = FormFilingStatusType.Process
+                FormFillingSteps = new List<FormFillingStep>(){ }
             },
         };
 

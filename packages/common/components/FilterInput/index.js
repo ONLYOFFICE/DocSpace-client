@@ -43,6 +43,7 @@ const FilterInput = React.memo(
     isPersonalRoom,
     isRooms,
     isAccounts,
+    visibleFilterButton,
     filterTitle,
     sortByTitle,
 
@@ -141,19 +142,21 @@ const FilterInput = React.memo(
             onClearSearch={onClearSearch}
             id="filter_search-input"
           />
-          <FilterButton
-            t={t}
-            id="filter-button"
-            onFilter={onFilter}
-            getFilterData={getFilterData}
-            selectedFilterValue={selectedFilterValue}
-            filterHeader={filterHeader}
-            selectorLabel={selectorLabel}
-            isPersonalRoom={isPersonalRoom}
-            isRooms={isRooms}
-            isAccounts={isAccounts}
-            title={filterTitle}
-          />
+          {visibleFilterButton && (
+            <FilterButton
+              t={t}
+              id="filter-button"
+              onFilter={onFilter}
+              getFilterData={getFilterData}
+              selectedFilterValue={selectedFilterValue}
+              filterHeader={filterHeader}
+              selectorLabel={selectorLabel}
+              isPersonalRoom={isPersonalRoom}
+              isRooms={isRooms}
+              isAccounts={isAccounts}
+              title={filterTitle}
+            />
+          )}
           {!isRecentFolder && (
             <SortButton
               t={t}

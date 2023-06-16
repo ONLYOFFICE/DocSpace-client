@@ -123,6 +123,7 @@ function Table({ roles }: TableProps) {
             title={role.title}
             queue={role.queue}
             color={role.color}
+            badge={role.badge}
             roleType={role.roleType}
           />
         ))}

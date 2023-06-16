@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import Aside from "@docspace/components/aside";
-
+import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import Link from "@docspace/components/link";
 import { AddUserToRoomPanel } from "../index";
-
+import Portal from "@docspace/components/portal";
 import { withTranslation } from "react-i18next";
 
 const StyledBlock = styled.div`
@@ -50,49 +50,56 @@ const InviteUserForRolePanel = ({
   );
 
   return (
-    <>
-      <Aside
-        className="header_aside-panel"
-        visible={visible}
-        onClose={onClose}
-        withoutBodyScroll
-        zIndex={410}
-        isCloseable={false}
-      >
-        {!addUserToRoomVisible && (
-          // <PeopleSelector
-          //   headerLabel="Invite user for role"
-          //   onBackClickAction={onBackClickAction}
-          //   items={members}
-          //   placeholder="Search users"
-          //   zIndex={410}
-          //   selectByClick={true}
-          //   onSelectUserForRole={onSelectUserForRole}
-          //   blockNode={blockNode}
-          // />
-
-          <Selector
-            headerLabel={"Invite user for role"}
-            onBackClick={onCloseInviteUserForRolePanel}
-            items={members}
-            placeholder="Search users"
-            zIndex={410}
-            selectByClick={true}
-            onSelectUserForRole={onSelectUserForRole}
-            blockNode={blockNode}
+    <Portal
+      element={
+        <>
+          <Backdrop
+            style={{ backdropFilter: "blur(8px)" }}
+            visible={visible}
+            zIndex={310}
+            isAside={true}
           />
-        )}
-      </Aside>
+          <Aside
+            visible={visible}
+            onClose={onClose}
+            zIndex={310}
+            isCloseable={false}
+          >
+            {!addUserToRoomVisible && (
+              // <PeopleSelector
+              //   headerLabel="Invite user for role"
+              //   onBackClickAction={onBackClickAction}
+              //   items={members}
+              //   placeholder="Search users"
+              //   zIndex={410}
+              //   selectByClick={true}
+              //   onSelectUserForRole={onSelectUserForRole}
+              //   blockNode={blockNode}
+              // />
 
-      {addUserToRoomVisible && (
-        <AddUserToRoomPanel
-          visible={addUserToRoomVisible}
-          onClose={onCloseAddUserToRoom}
-          existUsers={members}
-          fetchMembers={fetchMembers}
-        />
-      )}
-    </>
+              <Selector
+                headerLabel={"Invite user for role"}
+                onBackClick={onCloseInviteUserForRolePanel}
+                items={members}
+                placeholder="Search users"
+                selectByClick={true}
+                onSelectUserForRole={onSelectUserForRole}
+                blockNode={blockNode}
+              />
+            )}
+          </Aside>
+
+          {addUserToRoomVisible && (
+            <AddUserToRoomPanel
+              visible={addUserToRoomVisible}
+              onClose={onCloseAddUserToRoom}
+              existUsers={members}
+              fetchMembers={fetchMembers}
+            />
+          )}
+        </>
+      }
+    />
   );
 };
 

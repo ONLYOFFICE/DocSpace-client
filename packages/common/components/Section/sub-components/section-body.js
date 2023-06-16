@@ -110,6 +110,7 @@ const commonStyles = css`
       margin-top: ${isMobile ? "-12px" : "0px"};
     }
 
+    .roles-row-container,
     .people-row-container,
     .files-row-container {
       margin-top: -22px;

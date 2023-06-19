@@ -97,7 +97,7 @@ const InviteUserForRolePanel = ({
                 headerLabel={t("StartFillingPanel:InviteUserForRole")}
                 onBackClick={onCloseInviteUserForRolePanel}
                 items={members}
-                placeholder={t(
+                searchPlaceholder={t(
                   "StartFillingPanel:PlaceholderInviteUserForRole"
                 )}
                 selectByClick={true}

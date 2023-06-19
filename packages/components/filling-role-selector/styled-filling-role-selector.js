@@ -21,6 +21,8 @@ const StyledRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (hover: hover) {
     &:hover {
@@ -32,17 +34,30 @@ const StyledRow = styled.div`
 const StyledUserRow = styled.div`
   height: 48px;
   display: flex;
+  gap: 12px;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
 
   .content {
     display: flex;
     align-items: center;
     gap: 8px;
+    width: calc(100% - 32px - 12px);
   }
 
   .user-with-role {
     display: flex;
+    flex-direction: column;
+    width: inherit;
+
+    .user {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   @media (hover: hover) {
@@ -60,6 +75,18 @@ const StyledUserRow = styled.div`
   }
 `;
 
+const StyledAssignedRole = styled.div`
+  color: rgba(170, 170, 170, 1);
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const StyledNumber = styled.div`
   font-weight: 600;
   font-size: 14px;
@@ -68,12 +95,14 @@ const StyledNumber = styled.div`
 `;
 
 const StyledAvatar = styled.img`
+  min-width: 32px;
   height: 32px;
   width: 32px;
   border-radius: 50%;
 `;
 
 const StyledAddRoleButton = styled(AddRoleButton)`
+  min-width: 32px;
   width: 32px;
   height: 32px;
 
@@ -93,6 +122,7 @@ const StyledAddRoleButton = styled(AddRoleButton)`
 `;
 
 const StyledEveryoneRoleIcon = styled(EveryoneRoleIcon)`
+  min-width: 32px;
   width: 32px;
   height: 32px;
 `;
@@ -101,18 +131,10 @@ const StyledRole = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-`;
 
-const StyledAssignedRole = styled.div`
-  padding-left: 4px;
-  color: rgba(170, 170, 170, 1);
-
-  ::before {
-    content: "(";
-  }
-  ::after {
-    content: ")";
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const StyledEveryoneRoleContainer = styled.div`

@@ -52,7 +52,6 @@ const FillingRoleSelector = ({
         <StyledEveryoneRoleContainer>
           <div className="title">
             <StyledRole>{capitalizedRoles[0].title}</StyledRole>
-            <StyledAssignedRole>@{everyoneTranslation}</StyledAssignedRole>
           </div>
           <div className="role-description">{descriptionEveryone}</div>
         </StyledEveryoneRoleContainer>
@@ -94,7 +93,9 @@ const FillingRoleSelector = ({
 
                 <StyledAvatar src={roleWithUser.avatar} />
                 <div className="user-with-role">
-                  <StyledRole>{roleWithUser.displayName}</StyledRole>
+                  <StyledRole className="user">
+                    {roleWithUser.displayName}
+                  </StyledRole>
                   <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
                 </div>
               </div>

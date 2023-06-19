@@ -41,6 +41,7 @@ const StartFillingPanel = ({
   setRolesUsersForFillingForm,
   fileId = 4,
   roomId = 7,
+  theme,
   getRoomMembers,
   tReady,
   t,
@@ -186,6 +187,7 @@ const StartFillingPanel = ({
         onOpenAddUserToRoom={onOpenAddUserToRoom}
         onCloseAddUserToRoom={onCloseAddUserToRoom}
         fetchMembers={fetchMembers}
+        theme={theme}
       />
     );
   }
@@ -247,7 +249,7 @@ const StartFillingPanel = ({
   );
 };
 
-export default inject(({ dialogsStore, filesStore }) => {
+export default inject(({ auth, dialogsStore, filesStore }) => {
   const { startFillingPanelVisible, setStartFillingPanelVisible } =
     dialogsStore;
   const {
@@ -262,6 +264,7 @@ export default inject(({ dialogsStore, filesStore }) => {
     getRolesUsersForFillingForm,
     setRolesUsersForFillingForm,
     getRoomMembers,
+    theme: auth.settingsStore.theme,
   };
 })(
   withTranslation(["Common", "StartFillingPanel"])(observer(StartFillingPanel))

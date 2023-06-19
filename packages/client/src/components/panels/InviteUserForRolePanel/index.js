@@ -8,6 +8,11 @@ import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import Link from "@docspace/components/link";
 import { AddUserToRoomPanel } from "../index";
 import Portal from "@docspace/components/portal";
+import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
+import SelectorRowLoader from "@docspace/common/components/Loaders/SelectorRowLoader";
+import SelectorSearchLoader from "@docspace/common/components/Loaders/SelectorSearchLoader";
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import { withTranslation } from "react-i18next";
 
 const StyledAside = styled(Aside)`
@@ -48,6 +53,8 @@ const InviteUserForRolePanel = ({
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
   fetchMembers,
+  theme,
+  tReady,
   t,
 }) => {
   const blockNode = (
@@ -64,6 +71,17 @@ const InviteUserForRolePanel = ({
       </Link>
     </StyledBlock>
   );
+
+  const blockNodeLoader = (
+    <StyledBlock>
+      <RectangleLoader width="140" height="22" />
+      <RectangleLoader width="110" height="20" />
+    </StyledBlock>
+  );
+
+  const emptyScreenImage = theme.isBase
+    ? EmptyScreenPersonsSvgUrl
+    : EmptyScreenPersonsSvgDarkUrl;
 
   return (
     <Portal
@@ -100,9 +118,25 @@ const InviteUserForRolePanel = ({
                 searchPlaceholder={t(
                   "StartFillingPanel:PlaceholderInviteUserForRole"
                 )}
+                rowLoader={
+                  <SelectorRowLoader
+                    isMultiSelect={false}
+                    isContainer={!tReady}
+                    isUser={true}
+                  />
+                }
+                searchLoader={<SelectorSearchLoader />}
+                emptyScreenImage={emptyScreenImage}
+                emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
+                emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+                searchEmptyScreenImage={emptyScreenImage}
+                searchEmptyScreenHeader={t("People:NotFoundUsers")}
+                searchEmptyScreenDescription={t("SearchEmptyDescription")}
                 selectByClick={true}
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
+                blockNodeLoader={blockNodeLoader}
+                isLoading={!tReady}
               />
             )}
           </StyledAside>
@@ -121,4 +155,6 @@ const InviteUserForRolePanel = ({
   );
 };
 
-export default withTranslation(["StartFillingPanel"])(InviteUserForRolePanel);
+export default withTranslation(["StartFillingPanel", "PeopleSelector"])(
+  InviteUserForRolePanel
+);

@@ -50,6 +50,7 @@ const Selector = ({
   selectByClick,
   onSelectUserForRole,
   blockNode,
+  blockNodeLoader,
 }) => {
   const [footerVisible, setFooterVisible] = React.useState(false);
 
@@ -307,6 +308,7 @@ const Selector = ({
         searchLoader={searchLoader}
         rowLoader={rowLoader}
         blockNode={blockNode}
+        blockNodeLoader={blockNodeLoader}
       />
 
       {footerVisible && (

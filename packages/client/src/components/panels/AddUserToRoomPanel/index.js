@@ -24,8 +24,6 @@ const AddUserToRoomPanel = ({
     const items = [];
 
     for (let item of users) {
-      // const currentItem = shareDataItems.find((x) => x.sharedTo.id === item.id);
-
       const newItem = {
         access: access,
         email: item.email,
@@ -37,9 +35,6 @@ const AddUserToRoomPanel = ({
       };
       items.push(newItem);
     }
-
-    if (users.length > items.length)
-      toastr.warning("Some users are already in room");
 
     const invitations = items.map((item) => {
       let newItem = {};

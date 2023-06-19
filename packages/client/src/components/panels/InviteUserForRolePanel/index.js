@@ -10,6 +10,12 @@ import { AddUserToRoomPanel } from "../index";
 import Portal from "@docspace/components/portal";
 import { withTranslation } from "react-i18next";
 
+const StyledAside = styled(Aside)`
+  .scroll-body {
+    padding-right: 0 !important;
+  }
+`;
+
 const StyledBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -59,7 +65,7 @@ const InviteUserForRolePanel = ({
             zIndex={310}
             isAside={true}
           />
-          <Aside
+          <StyledAside
             visible={visible}
             onClose={onClose}
             zIndex={310}
@@ -87,7 +93,7 @@ const InviteUserForRolePanel = ({
                 blockNode={blockNode}
               />
             )}
-          </Aside>
+          </StyledAside>
 
           {addUserToRoomVisible && (
             <AddUserToRoomPanel

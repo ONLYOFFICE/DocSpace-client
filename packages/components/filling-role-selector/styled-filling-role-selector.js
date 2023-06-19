@@ -14,6 +14,12 @@ const StyledFillingRoleSelector = styled.div`
     line-height: 16px;
     padding: 8px 0;
   }
+
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const StyledRow = styled.div`
@@ -54,9 +60,6 @@ const StyledUserRow = styled.div`
 
     .user {
       width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 
@@ -81,10 +84,6 @@ const StyledAssignedRole = styled.div`
   font-weight: 400;
   font-size: 10px;
   line-height: 14px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const StyledNumber = styled.div`
@@ -131,10 +130,6 @@ const StyledRole = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const StyledEveryoneRoleContainer = styled.div`

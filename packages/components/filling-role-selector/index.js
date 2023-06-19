@@ -53,7 +53,7 @@ const FillingRoleSelector = ({
           <div className="title">
             <StyledRole>{capitalizedRoles[0].title}</StyledRole>
           </div>
-          <div className="role-description">{descriptionEveryone}</div>
+          <div className="role-description truncate">{descriptionEveryone}</div>
         </StyledEveryoneRoleContainer>
       </StyledRow>
     </>
@@ -93,10 +93,12 @@ const FillingRoleSelector = ({
 
                 <StyledAvatar src={roleWithUser.avatar} />
                 <div className="user-with-role">
-                  <StyledRole className="user">
+                  <StyledRole className="user truncate">
                     {roleWithUser.displayName}
                   </StyledRole>
-                  <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
+                  <StyledAssignedRole className="truncate">
+                    {roleWithUser.role}
+                  </StyledAssignedRole>
                 </div>
               </div>
               <ReactSVG
@@ -114,7 +116,7 @@ const FillingRoleSelector = ({
                 }}
                 color={`#` + role.color}
               />
-              <StyledRole>{role.title}</StyledRole>
+              <StyledRole className="truncate">{role.title}</StyledRole>
             </StyledRow>
           );
         })}

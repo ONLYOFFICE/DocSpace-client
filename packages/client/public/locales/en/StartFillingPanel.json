@@ -1,0 +1,10 @@
+{
+  "AddUserToRoom": "Add user to room",
+  "DescriptionEveryone": "The form is available for filling for all room members",
+  "DescriptionTooltip": "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields.",
+  "InviteUserForRole": "Invite user for role",
+  "ListHeader": "Roles in this form",
+  "PlaceholderInviteUserForRole": "Search users",
+  "StartFilling": "Start Filling",
+  "TitleTooltip": "How it works"
+}

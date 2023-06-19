@@ -16,6 +16,7 @@ const AddUserToRoomPanel = ({
   setRoomSecurity,
   existUsers,
   fetchMembers,
+  t,
 }) => {
   const onAddToRoom = (users) => {
     const access = ShareAccessRights.FormFilling;
@@ -70,17 +71,15 @@ const AddUserToRoomPanel = ({
   return (
     <>
       <Aside
-        className="header_aside-panel"
         visible={visible}
         withoutBodyScroll
         zIndex={410}
         isCloseable={false}
       >
         <PeopleSelector
-          headerLabel="Add user to room"
+          headerLabel={t("StartFillingPanel:AddUserToRoom")}
           visible={visible}
           onBackClick={onClose}
-          placeholder="Search users"
           zIndex={410}
           onAccept={onAddToRoom}
           existUsers={existUsers}
@@ -107,4 +106,4 @@ export default inject(({ filesStore, dialogsStore, peopleStore, auth }) => {
     inviteUsers,
     setUpdateRoomMembers,
   };
-})(withTranslation(["Common"])(observer(AddUserToRoomPanel)));
+})(withTranslation(["StartFillingPanel"])(observer(AddUserToRoomPanel)));

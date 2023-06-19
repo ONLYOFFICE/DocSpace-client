@@ -40,6 +40,7 @@ const InviteUserForRolePanel = ({
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
   fetchMembers,
+  t,
 }) => {
   const blockNode = (
     <StyledBlock>
@@ -50,7 +51,7 @@ const InviteUserForRolePanel = ({
         isHovered
         onClick={onOpenAddUserToRoom}
       >
-        Add user to room
+        {t("StartFillingPanel:AddUserToRoom")}
       </Link>
     </StyledBlock>
   );
@@ -84,10 +85,12 @@ const InviteUserForRolePanel = ({
               // />
 
               <Selector
-                headerLabel={"Invite user for role"}
+                headerLabel={t("StartFillingPanel:InviteUserForRole")}
                 onBackClick={onCloseInviteUserForRolePanel}
                 items={members}
-                placeholder="Search users"
+                placeholder={t(
+                  "StartFillingPanel:PlaceholderInviteUserForRole"
+                )}
                 selectByClick={true}
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
@@ -109,4 +112,4 @@ const InviteUserForRolePanel = ({
   );
 };
 
-export default InviteUserForRolePanel;
+export default withTranslation(["StartFillingPanel"])(InviteUserForRolePanel);

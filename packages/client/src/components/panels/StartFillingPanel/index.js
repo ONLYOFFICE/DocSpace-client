@@ -4,6 +4,7 @@ import Button from "@docspace/components/button";
 import FillingRoleSelector from "@docspace/components/filling-role-selector";
 import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
+import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFillingPanelLoader";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -41,6 +42,8 @@ const StartFillingPanel = ({
   fileId = 4,
   roomId = 7,
   getRoomMembers,
+  tReady,
+  t,
 }) => {
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
@@ -53,6 +56,7 @@ const StartFillingPanel = ({
   const [users, setUsers] = useState([]);
 
   const [isDisabledStart, setIsDisabledStart] = useState(true);
+  const [isShowLoader, setIsShowLoader] = useState(true);
 
   useEffect(() => {
     getRolesUsersForFillingForm(fileId)
@@ -61,6 +65,10 @@ const StartFillingPanel = ({
       })
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    setIsShowLoader(!tReady || !roles.length);
+  }, [tReady, roles.length]);
 
   useEffect(() => {
     Boolean(isVisible) && setStartFillingPanelVisible(isVisible);
@@ -160,11 +168,9 @@ const StartFillingPanel = ({
         //TODO: Add toast
       })
       .catch((e) => {
-        console.log("e");
+        console.log("e", e);
       });
   };
-
-  if (!roles.length) return <div></div>;
 
   if (visibleInviteUserForRolePanel) {
     return (
@@ -186,57 +192,56 @@ const StartFillingPanel = ({
 
   return (
     <>
-      <Aside visible={startFillingPanelVisible} zIndex={310}>
-        <StyledModalDialog
-          displayType="aside"
-          visible={startFillingPanelVisible}
-          withFooterBorder
-          onClose={onClose}
-          isCloseable={!visibleInviteUserForRolePanel}
-        >
-          <ModalDialog.Header>Start Filling</ModalDialog.Header>
-
-          <ModalDialog.Body>
-            <FillingRoleSelector
-              roles={roles}
-              users={users}
-              everyoneTranslation={"Everyone"}
-              descriptionEveryone={
-                "The form is available for filling for all room members"
-              }
-              descriptionTooltip={
-                "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields."
-              }
-              titleTooltip={"How it works"}
-              listHeader={"Roles in this form"}
-              visibleTooltip={visibleTooltip}
-              onAddUser={onAddUser}
-              onRemoveUser={onRemoveUser}
-              onCloseTooltip={onCloseTooltip}
-            />
-          </ModalDialog.Body>
-
-          <ModalDialog.Footer>
-            <Button
-              id="shared_create-room-modal_submit"
-              tabIndex={5}
-              label="Start"
-              size="normal"
-              isDisabled={isDisabledStart}
-              onClick={onStart}
-              primary
-              scale
-            />
-            <Button
-              id="shared_create-room-modal_cancel"
-              tabIndex={5}
-              label="Cancel"
-              onClick={onClose}
-              size="normal"
-              scale
-            />
-          </ModalDialog.Footer>
-        </StyledModalDialog>
+      <Aside visible={true} zIndex={310}>
+        {isShowLoader ? (
+          <StartFillingPanelLoader
+            onClose={onClose}
+            isCloseable={!visibleInviteUserForRolePanel}
+            visible={true}
+          />
+        ) : (
+          <StyledModalDialog
+            displayType="aside"
+            visible={true}
+            withFooterBorder
+            onClose={onClose}
+            isCloseable={!visibleInviteUserForRolePanel}
+          >
+            <ModalDialog.Header>
+              {t("StartFillingPanel:StartFilling")}
+            </ModalDialog.Header>
+            <ModalDialog.Body>
+              <FillingRoleSelector
+                roles={roles}
+                users={users}
+                descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
+                descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
+                titleTooltip={t("StartFillingPanel:TitleTooltip")}
+                listHeader={t("StartFillingPanel:ListHeader")}
+                visibleTooltip={visibleTooltip}
+                onAddUser={onAddUser}
+                onRemoveUser={onRemoveUser}
+                onCloseTooltip={onCloseTooltip}
+              />
+            </ModalDialog.Body>
+            <ModalDialog.Footer>
+              <Button
+                label={t("Common:Start")}
+                size="normal"
+                isDisabled={isDisabledStart}
+                onClick={onStart}
+                primary
+                scale
+              />
+              <Button
+                label={t("Common:CancelButton")}
+                onClick={onClose}
+                size="normal"
+                scale
+              />
+            </ModalDialog.Footer>
+          </StyledModalDialog>
+        )}
       </Aside>
     </>
   );
@@ -258,4 +263,6 @@ export default inject(({ dialogsStore, filesStore }) => {
     setRolesUsersForFillingForm,
     getRoomMembers,
   };
-})(withTranslation(["Common"])(observer(StartFillingPanel)));
+})(
+  withTranslation(["Common", "StartFillingPanel"])(observer(StartFillingPanel))
+);

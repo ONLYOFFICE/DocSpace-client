@@ -192,17 +192,17 @@ const StartFillingPanel = ({
 
   return (
     <>
-      <Aside visible={true} zIndex={310}>
+      <Aside visible={startFillingPanelVisible} zIndex={310}>
         {isShowLoader ? (
           <StartFillingPanelLoader
             onClose={onClose}
             isCloseable={!visibleInviteUserForRolePanel}
-            visible={true}
+            visible={startFillingPanelVisible}
           />
         ) : (
           <StyledModalDialog
             displayType="aside"
-            visible={true}
+            visible={startFillingPanelVisible}
             withFooterBorder
             onClose={onClose}
             isCloseable={!visibleInviteUserForRolePanel}

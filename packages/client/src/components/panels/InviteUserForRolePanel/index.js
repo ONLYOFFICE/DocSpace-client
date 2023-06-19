@@ -18,6 +18,7 @@ const StyledAside = styled(Aside)`
 
 const StyledBlock = styled.div`
   display: flex;
+  gap: 16px;
   justify-content: space-between;
   padding: 4px 16px 16px 16px;
 
@@ -26,6 +27,13 @@ const StyledBlock = styled.div`
     font-size: 16px;
     line-height: 22px;
     color: #657077;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-user-to-room {
+    white-space: nowrap;
   }
 `;
 
@@ -46,6 +54,7 @@ const InviteUserForRolePanel = ({
     <StyledBlock>
       <div className="role">({currentRole.title})</div>
       <Link
+        className="add-user-to-room"
         fontWeight="600"
         type="action"
         isHovered

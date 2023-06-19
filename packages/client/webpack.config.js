@@ -309,8 +309,8 @@ module.exports = (env, argv) => {
         "./PeopleSelector": "./src/components/PeopleSelector",
         "./PeopleSelector/UserTooltip":
           "./src/components/PeopleSelector/sub-components/UserTooltip.js",
-        "./StartFillingPanel":
-          "./src/components/panels/StartFillingPanel/index.js",
+        "./StartFillingPanel": "./src/components/panels/StartFillingPanel",
+        "./StatusFillingPanel": "./src/components/panels/StatusFillingPanel",
       },
       shared: {
         ...deps,
@@ -318,7 +318,7 @@ module.exports = (env, argv) => {
       },
     })
   );
-
+  
   if (!!env.hideText) {
     config.plugins.push(
       new HtmlWebpackPlugin({

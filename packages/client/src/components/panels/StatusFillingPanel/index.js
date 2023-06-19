@@ -19,33 +19,42 @@ import {
   StyledScrollbar,
 } from "./StyledFillingStatusPanel";
 
-const StatusFillingPanel = ({
-  visible,
-  setStatusFillinglVisible,
-  getRolesUsersForFillingForm,
-  selection,
-}) => {
+const StatusFillingPanel = (props) => {
+  const {
+    visible,
+    setStatusFillinglVisible,
+    getRolesUsersForFillingForm,
+    selection,
+    fileId,
+    isVisible,
+  } = props;
+
   const [statusInfo, setStatusInfo] = useState([]);
   const scrollRef = useRef(null);
-  const onClose = () => setStatusFillinglVisible(false);
 
   useEffect(() => {
-    getRolesUsersForFillingForm(selection.id).then((res) => {
+    getRolesUsersForFillingForm(selection?.id || fileId).then((res) => {
       console.log(res), setStatusInfo(res);
     });
   }, []);
+
+  useEffect(() => {
+    Boolean(isVisible) && setStatusFillinglVisible(isVisible);
+  }, [isVisible]);
+
+  const onClose = () => setStatusFillinglVisible(false);
 
   return (
     <StyledFillingStatusPanel>
       <Backdrop
         onClick={onClose}
-        visible={visible}
+        visible={visible || isVisible}
         isAside={true}
         zIndex={210}
       />
       <Aside
         className="status-filling-panel"
-        visible={visible}
+        visible={visible || isVisible}
         onClose={onClose}
       >
         <div className="status-filling_header">

@@ -15,7 +15,8 @@
 
     "paths": {
       "PUBLIC_DIR": ["../../public"],
-      "@docspace/*": ["../*"]
+      "@docspace/*": ["../*"],
+      "PACKAGE_FILE": ["./package.json"]
     }
   }
 }

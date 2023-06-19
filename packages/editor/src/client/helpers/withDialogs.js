@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import SelectFileDialog from "../components/SelectFileDialog";
 import SelectFolderDialog from "../components/SelectFolderDialog";
 import StartFillingPanel from "../components/StartFillingPanel";
+import StatusFillingPanel from "../components/StatusFillingPanel";
 
 const insertImageAction = "imageFileType";
 const mailMergeAction = "mailMergeFileType";
@@ -23,6 +24,8 @@ const withDialogs = (WrappedComponent) => {
     const [extension, setExtension] = useState();
     const [openNewTab, setNewOpenTab] = useState(false);
     const [isStartFillingPanelVisible, setIsStartFillingPanelVisible] =
+      useState(false);
+    const [isStatusFillingPanelVisible, setIsStatusFillingPanelVisible] =
       useState(false);
 
     const { t } = useTranslation(["Editor", "Common"]);
@@ -256,6 +259,10 @@ const withDialogs = (WrappedComponent) => {
       setIsStartFillingPanelVisible(true);
     };
 
+    const onClickStatusFillingPanel = () => {
+      setIsStatusFillingPanelVisible(!isStatusFillingPanelVisible);
+    };
+
     // const sharingDialog = (
     //   <SharingDialog
     //     mfReady={mfReady}
@@ -303,6 +310,15 @@ const withDialogs = (WrappedComponent) => {
       />
     );
 
+    const statusFillingPanel = (
+      <StatusFillingPanel
+        successAuth={props.successAuth}
+        isVisible={isStatusFillingPanelVisible}
+        fileId={fileId}
+        mfReady={mfReady}
+      />
+    );
+
     return (
       <WrappedComponent
         {...props}
@@ -319,7 +335,9 @@ const withDialogs = (WrappedComponent) => {
         onSDKRequestSaveAs={onSDKRequestSaveAs}
         isFolderDialogVisible={isFolderDialogVisible}
         startFillingPanel={startFillingPanel}
+        statusFillingPanel={statusFillingPanel}
         onClickStartFillingPanel={onClickStartFillingPanel}
+        onClickStatusFillingPanel={onClickStatusFillingPanel}
       />
     );
   };

@@ -126,6 +126,7 @@ const ArticleMainButtonContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
+  const isDashboardPage = location.pathname.includes("dashboard");
 
   const inputFilesElement = React.useRef(null);
   const inputFolderElement = React.useRef(null);
@@ -461,7 +462,9 @@ const ArticleMainButtonContent = (props) => {
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled = isSettingsPage
+  const isDisabled = isDashboardPage
+    ? isDashboardPage
+    : isSettingsPage
     ? isSettingsPage
     : isAccountsPage
     ? !isAccountsPage
@@ -476,17 +479,19 @@ const ArticleMainButtonContent = (props) => {
     <>
       {isMobileArticle ? (
         <>
-          {!isProfile && (security?.Create || isAccountsPage) && (
-            <MobileView
-              t={t}
-              titleProp={t("Upload")}
-              actionOptions={actions}
-              buttonOptions={uploadActions}
-              isRooms={isRoomsFolder}
-              mainButtonMobileVisible={mainButtonMobileVisible}
-              onMainButtonClick={onCreateRoom}
-            />
-          )}
+          {!isProfile &&
+            (security?.Create || isAccountsPage) &&
+            !isDashboardPage && (
+              <MobileView
+                t={t}
+                titleProp={t("Upload")}
+                actionOptions={actions}
+                buttonOptions={uploadActions}
+                isRooms={isRoomsFolder}
+                mainButtonMobileVisible={mainButtonMobileVisible}
+                onMainButtonClick={onCreateRoom}
+              />
+            )}
         </>
       ) : isRoomsFolder ? (
         <StyledButton

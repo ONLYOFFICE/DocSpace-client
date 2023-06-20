@@ -47,6 +47,7 @@ const Body = ({
   rowLoader,
   blockNode,
   blockNodeLoader,
+  dataInPreparation,
 }) => {
   const [bodyHeight, setBodyHeight] = React.useState(null);
 
@@ -54,7 +55,9 @@ const Body = ({
   const listOptionsRef = React.useRef(null);
 
   const itemsCount = hasNextPage ? items.length + 1 : items.length;
-  const withSearch = isSearch || itemsCount > 0;
+
+  const withSearch =
+    isSearch || (dataInPreparation ? dataInPreparation : itemsCount > 0);
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -126,7 +129,7 @@ const Body = ({
         />
       ) : null}
 
-      {isLoading ? (
+      {isLoading || dataInPreparation ? (
         rowLoader
       ) : itemsCount === 0 ? (
         <EmptyScreen

@@ -268,6 +268,8 @@ const Selector = ({
     }
   }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
 
+  const dataInPreparation = !!(items?.length && !renderedItems?.length);
+
   return (
     <StyledSelector id={id} className={className} style={style}>
       <Header onBackClickAction={onBackClickAction} headerLabel={headerLabel} />
@@ -309,6 +311,7 @@ const Selector = ({
         rowLoader={rowLoader}
         blockNode={blockNode}
         blockNodeLoader={blockNodeLoader}
+        dataInPreparation={dataInPreparation}
       />
 
       {footerVisible && (

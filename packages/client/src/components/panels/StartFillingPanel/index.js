@@ -8,6 +8,7 @@ import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFi
 import toastr from "@docspace/components/toast/toastr";
 import { Trans } from "react-i18next";
 import Link from "@docspace/components/link";
+import i18n from "./i18n";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -56,8 +57,9 @@ const StartFillingPanel = ({
   theme,
   getRoomMembers,
   tReady,
-  t,
 }) => {
+  const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
+
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
   const [visibleTooltip, setVisibleTooltip] = useState(true);
@@ -200,6 +202,7 @@ const StartFillingPanel = ({
     setRolesUsersForFillingForm(fileId, idUsersRoles)
       .then(() => {
         toastr.success(toastrStart);
+        onClose();
       })
       .catch((e) => {
         console.log("e", e);

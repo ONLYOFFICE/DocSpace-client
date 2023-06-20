@@ -5,6 +5,7 @@ import FillingRoleSelector from "@docspace/components/filling-role-selector";
 import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
 import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFillingPanelLoader";
+import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -40,7 +41,7 @@ const StartFillingPanel = ({
   getRolesUsersForFillingForm,
   setRolesUsersForFillingForm,
   fileId = 4,
-  roomId = 7,
+  roomId = 10,
   theme,
   getRoomMembers,
   tReady,
@@ -58,6 +59,7 @@ const StartFillingPanel = ({
 
   const [isDisabledStart, setIsDisabledStart] = useState(true);
   const [isShowLoader, setIsShowLoader] = useState(true);
+  const [isLoadingFetchMembers, setIsLoadingFetchMembers] = useState(false);
 
   useEffect(() => {
     getRolesUsersForFillingForm(fileId)
@@ -85,19 +87,25 @@ const StartFillingPanel = ({
     }
   }, [roles.length, users.length]);
 
-  const fetchMembers = async () => {
-    let data = await getRoomMembers(roomId);
-
-    data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
-    let inRoomMembers = [];
-    data.map((fetchedMember) => {
-      const member = {
-        label: fetchedMember.sharedTo.displayName,
-        ...fetchedMember.sharedTo,
-      };
-      if (member.activationStatus !== 2) inRoomMembers.push(member);
-    });
-    setMembers(inRoomMembers);
+  const fetchMembers = () => {
+    setIsLoadingFetchMembers(true);
+    getRoomMembers(roomId)
+      .then((res) => {
+        const data = res.filter(
+          (m) => m.sharedTo.email || m.sharedTo.displayName
+        );
+        let inRoomMembers = [];
+        data.map((fetchedMember) => {
+          const member = {
+            label: fetchedMember.sharedTo.displayName,
+            ...fetchedMember.sharedTo,
+          };
+          if (member.activationStatus !== 2) inRoomMembers.push(member);
+        });
+        setMembers(inRoomMembers);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoadingFetchMembers(false));
   };
 
   const onAddUser = (role) => {
@@ -112,7 +120,7 @@ const StartFillingPanel = ({
   };
 
   const onOpenInviteUserForRolePanel = () => {
-    fetchMembers();
+    if (!members.length) fetchMembers();
     setVisibleInviteUserForRolePanel(true);
   };
 
@@ -166,7 +174,9 @@ const StartFillingPanel = ({
 
     setRolesUsersForFillingForm(4, idUsersRoles)
       .then(() => {
-        //TODO: Add toast
+        toastr.success(
+          "This form is ready for filling in the room name. Go to form"
+        );
       })
       .catch((e) => {
         console.log("e", e);
@@ -188,6 +198,8 @@ const StartFillingPanel = ({
         onCloseAddUserToRoom={onCloseAddUserToRoom}
         fetchMembers={fetchMembers}
         theme={theme}
+        isLoadingFetchMembers={isLoadingFetchMembers}
+        roomId={roomId}
       />
     );
   }

@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
-
-import Backdrop from "@docspace/components/backdrop";
+import React from "react";
 import Aside from "@docspace/components/aside";
-
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import { ShareAccessRights } from "@docspace/common/constants";
-
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -88,17 +84,10 @@ const AddUserToRoomPanel = ({
   );
 };
 
-export default inject(({ filesStore, dialogsStore, peopleStore, auth }) => {
-  const { getRoomMembers, setRoomSecurity } = filesStore;
-  const { inviteItems } = dialogsStore;
-  const { inviteUsers } = peopleStore.usersStore;
-  const { setUpdateRoomMembers } = auth.infoPanelStore;
+export default inject(({ filesStore }) => {
+  const { setRoomSecurity } = filesStore;
 
   return {
-    getRoomMembers,
-    inviteItems,
     setRoomSecurity,
-    inviteUsers,
-    setUpdateRoomMembers,
   };
 })(withTranslation(["StartFillingPanel"])(observer(AddUserToRoomPanel)));

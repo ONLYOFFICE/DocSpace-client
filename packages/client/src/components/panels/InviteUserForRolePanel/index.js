@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Aside from "@docspace/components/aside";
@@ -53,10 +53,20 @@ const InviteUserForRolePanel = ({
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
   fetchMembers,
+  isLoadingFetchMembers,
+  roomId,
   theme,
   tReady,
   t,
 }) => {
+  const [isShowLoader, setIsShowLoader] = useState(
+    !tReady || !members.length || isLoadingFetchMembers
+  );
+
+  useEffect(() => {
+    setIsShowLoader(!tReady || !members.length || isLoadingFetchMembers);
+  }, [tReady, members.length, isLoadingFetchMembers]);
+
   const blockNode = (
     <StyledBlock>
       <div className="role">({currentRole.title})</div>
@@ -121,7 +131,7 @@ const InviteUserForRolePanel = ({
                 rowLoader={
                   <SelectorRowLoader
                     isMultiSelect={false}
-                    isContainer={!tReady}
+                    isContainer={isShowLoader}
                     isUser={true}
                   />
                 }
@@ -136,7 +146,7 @@ const InviteUserForRolePanel = ({
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
                 blockNodeLoader={blockNodeLoader}
-                isLoading={!tReady}
+                isLoading={isShowLoader}
               />
             )}
           </StyledAside>
@@ -147,6 +157,7 @@ const InviteUserForRolePanel = ({
               onClose={onCloseAddUserToRoom}
               existUsers={members}
               fetchMembers={fetchMembers}
+              roomId={roomId}
             />
           )}
         </>

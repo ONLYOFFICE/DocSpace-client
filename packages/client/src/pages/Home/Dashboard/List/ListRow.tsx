@@ -22,13 +22,13 @@ function ListRow({
   isChecked,
   sectionWidth,
 }: ListRowProps) {
-  const { room } = useParams<ParamType>();
+  const { fileId } = useParams<ParamType>();
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => room && `/rooms/shared/${room}/dashboard/${role.id}`,
+    () => fileId && `/rooms/shared/${fileId}/dashboard/${role.id}`,
 
-    [room, role.id]
+    [fileId, role.id]
   );
 
   const onClickLink = (event: MouseEvent) => {

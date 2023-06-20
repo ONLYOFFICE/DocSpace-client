@@ -112,7 +112,7 @@ class ContextOptionsStore {
   onClickOpenBoard = (item) => {
     console.log({ item });
     window.DocSpace.navigate(
-      combineUrl("rooms/shared", item.folderId.toString(), "dashboard")
+      combineUrl("rooms/shared", item.id.toString(), "dashboard")
     );
   };
 

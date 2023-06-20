@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import RectangleLoader from "../RectangleLoader";
 import CircleLoader from "../CircleLoader";
+import ModalDialog from "@docspace/components/modal-dialog";
 import styled from "styled-components";
 import { size } from "@docspace/components/utils/device";
 
-const StyledContainer = styled.div`
-  .tooltip {
+const StyledModalDialog = styled(ModalDialog)`
+  .tooltip-loader {
     padding-bottom: 19px;
   }
 
@@ -19,7 +20,7 @@ const StyledContainer = styled.div`
     max-width: 284px;
   }
 
-  .row {
+  .row-loader {
     display: flex;
     align-items: center;
     padding-bottom: 16px;
@@ -48,7 +49,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StartFillingPanelLoader = () => {
+const StartFillingPanelLoader = ({ visible, onClose, isCloseable }) => {
   const [isMobileView, setIsMobileView] = useState(false);
   useEffect(() => {
     checkWidth();
@@ -63,38 +64,25 @@ const StartFillingPanelLoader = () => {
   };
 
   return (
-    <StyledContainer>
-      <RectangleLoader
-        className="tooltip"
-        height={isMobileView ? "92px" : "76px"}
-      />
-      <RectangleLoader className="list-title" width="120px" height="16px" />
+    <StyledModalDialog
+      displayType="aside"
+      visible={visible}
+      withFooterBorder
+      onClose={onClose}
+      isCloseable={isCloseable}
+    >
+      <ModalDialog.Header>
+        <RectangleLoader height="29" />
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <RectangleLoader
+          className="tooltip-loader"
+          height={isMobileView ? "92px" : "76px"}
+        />
+        <RectangleLoader className="list-title" width="120px" height="16px" />
 
-      <div className="row-container">
-        <div className="row">
-          <CircleLoader
-            className="avatar"
-            x="16"
-            y="16"
-            width="32"
-            height="32"
-            radius="16"
-          />
-          <RectangleLoader className="name" height="16px" />
-        </div>
-        <div className="row">
-          <CircleLoader
-            className="avatar"
-            x="16"
-            y="16"
-            width="32"
-            height="32"
-            radius="16"
-          />
-          <RectangleLoader className="name" height="16px" />
-        </div>
-        <div className="row row-with-remove">
-          <div className="avatar-with-role">
+        <div className="row-container">
+          <div className="row-loader">
             <CircleLoader
               className="avatar"
               x="16"
@@ -105,11 +93,39 @@ const StartFillingPanelLoader = () => {
             />
             <RectangleLoader className="name" height="16px" />
           </div>
+          <div className="row-loader">
+            <CircleLoader
+              className="avatar"
+              x="16"
+              y="16"
+              width="32"
+              height="32"
+              radius="16"
+            />
+            <RectangleLoader className="name" height="16px" />
+          </div>
+          <div className="row-loader row-with-remove">
+            <div className="avatar-with-role">
+              <CircleLoader
+                className="avatar"
+                x="16"
+                y="16"
+                width="32"
+                height="32"
+                radius="16"
+              />
+              <RectangleLoader className="name" height="16px" />
+            </div>
 
-          <RectangleLoader width="16" height="16" />
+            <RectangleLoader width="16" height="16" />
+          </div>
         </div>
-      </div>
-    </StyledContainer>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <RectangleLoader height="40" />
+        <RectangleLoader height="40" />
+      </ModalDialog.Footer>
+    </StyledModalDialog>
   );
 };
 

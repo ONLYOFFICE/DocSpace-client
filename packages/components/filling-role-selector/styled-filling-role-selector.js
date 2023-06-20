@@ -79,12 +79,13 @@ const StyledUserRow = styled.div`
 `;
 
 const StyledAssignedRole = styled.div`
-  color: rgba(170, 170, 170, 1);
-
+  color: ${(props) => props.theme.startFillingPanel.assignedRoleColor};
   font-weight: 400;
   font-size: 10px;
   line-height: 14px;
 `;
+
+StyledAssignedRole.defaultProps = { theme: Base };
 
 const StyledNumber = styled.div`
   font-weight: 600;
@@ -151,12 +152,11 @@ const StyledEveryoneRoleContainer = styled.div`
 const StyledTooltip = styled.div`
   display: ${(props) => (props.visibleTooltip ? "flex" : "none")};
   flex-direction: column;
-
-  background: #f8f9f9;
+  background: ${(props) => props.theme.startFillingPanel.tooltipBackground};
   border-radius: 6px;
   font-size: 12px;
   line-height: 16px;
-  padding: 8px 12px;
+  padding: 12px 16px;
   box-sizing: border-box;
   margin: 8px 0;
 
@@ -194,12 +194,12 @@ const StyledTooltip = styled.div`
   }
 
   .description {
-    color: #555f65;
+    color: ${(props) => props.theme.startFillingPanel.tooltipDescription};
     font-weight: 400;
   }
 `;
 
-StyledFillingRoleSelector.defaultProps = { theme: Base };
+StyledTooltip.defaultProps = { theme: Base };
 
 export {
   StyledFillingRoleSelector,

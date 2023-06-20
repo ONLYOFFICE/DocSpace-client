@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
@@ -8,6 +7,12 @@ import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import Link from "@docspace/components/link";
 import { AddUserToRoomPanel } from "../index";
 import Portal from "@docspace/components/portal";
+import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
+import SelectorRowLoader from "@docspace/common/components/Loaders/SelectorRowLoader";
+import SelectorSearchLoader from "@docspace/common/components/Loaders/SelectorSearchLoader";
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import i18n from "./i18n";
 import { withTranslation } from "react-i18next";
 
 const StyledAside = styled(Aside)`
@@ -18,6 +23,7 @@ const StyledAside = styled(Aside)`
 
 const StyledBlock = styled.div`
   display: flex;
+  gap: 16px;
   justify-content: space-between;
   padding: 4px 16px 16px 16px;
 
@@ -25,7 +31,15 @@ const StyledBlock = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    color: #657077;
+    color: ${(props) => props.theme.startFillingPanel.roleColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-user-to-room {
+    white-space: nowrap;
+    color: ${(props) => props.theme.startFillingPanel.addUserToRoomColor};
   }
 `;
 
@@ -40,20 +54,49 @@ const InviteUserForRolePanel = ({
   onOpenAddUserToRoom,
   onCloseAddUserToRoom,
   fetchMembers,
+  isLoadingFetchMembers,
+  roomId,
+  theme,
+  tReady,
 }) => {
+  const t = i18n.getFixedT(null, [
+    "StartFillingPanel",
+    "People",
+    "PeopleSelector",
+  ]);
+  const [isShowLoader, setIsShowLoader] = useState(
+    !tReady || !members.length || isLoadingFetchMembers
+  );
+
+  useEffect(() => {
+    setIsShowLoader(!tReady || !members.length || isLoadingFetchMembers);
+  }, [tReady, members.length, isLoadingFetchMembers]);
+
   const blockNode = (
     <StyledBlock>
       <div className="role">({currentRole.title})</div>
       <Link
+        className="add-user-to-room"
         fontWeight="600"
         type="action"
         isHovered
         onClick={onOpenAddUserToRoom}
       >
-        Add user to room
+        {t("StartFillingPanel:AddUserToRoom")}
       </Link>
     </StyledBlock>
   );
+
+  const blockNodeLoader = (
+    <StyledBlock>
+      <RectangleLoader width="140" height="22" />
+      <RectangleLoader width="110" height="20" />
+    </StyledBlock>
+  );
+
+  const emptyScreenImage = theme.isBase
+    ? EmptyScreenPersonsSvgUrl
+    : EmptyScreenPersonsSvgDarkUrl;
 
   return (
     <Portal
@@ -84,13 +127,33 @@ const InviteUserForRolePanel = ({
               // />
 
               <Selector
-                headerLabel={"Invite user for role"}
+                headerLabel={t("StartFillingPanel:InviteUserForRole")}
                 onBackClick={onCloseInviteUserForRolePanel}
                 items={members}
-                placeholder="Search users"
+                searchPlaceholder={t(
+                  "StartFillingPanel:PlaceholderInviteUserForRole"
+                )}
+                rowLoader={
+                  <SelectorRowLoader
+                    isMultiSelect={false}
+                    isContainer={isShowLoader}
+                    isUser={true}
+                  />
+                }
+                searchLoader={<SelectorSearchLoader />}
+                emptyScreenImage={emptyScreenImage}
+                emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
+                emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+                searchEmptyScreenImage={emptyScreenImage}
+                searchEmptyScreenHeader={t("People:NotFoundUsers")}
+                searchEmptyScreenDescription={t(
+                  "PeopleSelector:SearchEmptyDescription"
+                )}
                 selectByClick={true}
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
+                blockNodeLoader={blockNodeLoader}
+                isLoading={isShowLoader}
               />
             )}
           </StyledAside>
@@ -101,6 +164,7 @@ const InviteUserForRolePanel = ({
               onClose={onCloseAddUserToRoom}
               existUsers={members}
               fetchMembers={fetchMembers}
+              roomId={roomId}
             />
           )}
         </>
@@ -109,4 +173,8 @@ const InviteUserForRolePanel = ({
   );
 };
 
-export default InviteUserForRolePanel;
+export default withTranslation([
+  "StartFillingPanel",
+  "PeopleSelector",
+  "People",
+])(InviteUserForRolePanel);

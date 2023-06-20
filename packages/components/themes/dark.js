@@ -3142,6 +3142,14 @@ const Dark = {
   portalUnavailable: {
     textDescriptionColor: "#858585",
   },
+
+  startFillingPanel: {
+    tooltipBackground: "#282828",
+    tooltipDescription: "#ADADAD",
+    assignedRoleColor: "rgba(101, 112, 119, 1)",
+    roleColor: "rgba(255, 255, 255, 0.6)",
+    addUserToRoomColor: "rgba(255, 255, 255, 1)",
+  },
 };
 
 export default Dark;

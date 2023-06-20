@@ -27,7 +27,6 @@ const FillingRoleSelector = ({
   onCloseTooltip,
   descriptionEveryone,
   descriptionTooltip,
-  everyoneTranslation,
   titleTooltip,
   listHeader,
   visibleTooltip,
@@ -78,7 +77,7 @@ const FillingRoleSelector = ({
         <div className="description">{descriptionTooltip}</div>
       </StyledTooltip>
 
-      <div className="list-header">{listHeader}:</div>
+      <div className="list-header truncate">{listHeader}:</div>
 
       <Scrollbar stype="mediumBlack">
         {everyoneRoleNode}
@@ -133,8 +132,6 @@ FillingRoleSelector.propTypes = {
   /** Tooltip text */
   descriptionTooltip: PropTypes.string,
   /** Tooltip title */
-  /** Everyone translation */
-  everyoneTranslation: PropTypes.string,
   titleTooltip: PropTypes.string,
   /** Accepts id */
   id: PropTypes.string,

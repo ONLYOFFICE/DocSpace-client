@@ -6,7 +6,7 @@
   "InviteUserForRole": "Invite user for role",
   "ListHeader": "Roles in this form",
   "PlaceholderInviteUserForRole": "Search users",
-  "StartFilling": "Start Filling",
+  "StartFilling": "Start filling",
   "TitleTooltip": "How it works",
   "ToastrText": "This form is ready for filling in the room",
   "ToastrSuccess": "<0>{{text}}</0> {{roomTitle}}. "

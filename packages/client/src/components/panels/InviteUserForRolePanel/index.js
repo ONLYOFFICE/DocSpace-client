@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
@@ -31,7 +30,7 @@ const StyledBlock = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    color: #657077;
+    color: ${(props) => props.theme.startFillingPanel.roleColor};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -39,6 +38,7 @@ const StyledBlock = styled.div`
 
   .add-user-to-room {
     white-space: nowrap;
+    color: ${(props) => props.theme.startFillingPanel.addUserToRoomColor};
   }
 `;
 

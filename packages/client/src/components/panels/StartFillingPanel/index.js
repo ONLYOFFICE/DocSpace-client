@@ -175,7 +175,7 @@ const StartFillingPanel = ({
   };
 
   const text = t("StartFillingPanel:ToastrText");
-  s;
+
   const toastrStart = (
     <>
       <Trans ns="StartFillingPanel" i18nKey="ToastrSuccess" text={text}>

@@ -6,6 +6,8 @@ import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
 import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFillingPanelLoader";
 import toastr from "@docspace/components/toast/toastr";
+import { Trans } from "react-i18next";
+import Link from "@docspace/components/link";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -33,6 +35,13 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
+const StyledLink = styled(Link)`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(82, 153, 224, 1);
+`;
+
 const everyoneRole = 1;
 const StartFillingPanel = ({
   startFillingPanelVisible,
@@ -41,7 +50,9 @@ const StartFillingPanel = ({
   getRolesUsersForFillingForm,
   setRolesUsersForFillingForm,
   fileId = 4,
+  formHref = "http://192.168.0.102:8092/doceditor?fileId=4",
   roomId = 10,
+  roomTitle = "accountant's room",
   theme,
   getRoomMembers,
   tReady,
@@ -163,6 +174,20 @@ const StartFillingPanel = ({
     setAddUserToRoomVisible(false);
   };
 
+  const text = t("StartFillingPanel:ToastrText");
+  s;
+  const toastrStart = (
+    <>
+      <Trans ns="StartFillingPanel" i18nKey="ToastrSuccess" text={text}>
+        {{ text }}
+        {{ roomTitle }}
+      </Trans>
+      <StyledLink noHover target="_blank" href={formHref}>
+        {t("StartFillingPanel:GoToForm")}
+      </StyledLink>
+    </>
+  );
+
   const onStart = () => {
     const idMembers = members.map((member) => member.id);
     const idUsersRoles = [];
@@ -172,11 +197,9 @@ const StartFillingPanel = ({
       idUsersRoles.push({ id: user.roleId, userId: [user.id] });
     });
 
-    setRolesUsersForFillingForm(4, idUsersRoles)
+    setRolesUsersForFillingForm(fileId, idUsersRoles)
       .then(() => {
-        toastr.success(
-          "This form is ready for filling in the room name. Go to form"
-        );
+        toastr.success(toastrStart);
       })
       .catch((e) => {
         console.log("e", e);

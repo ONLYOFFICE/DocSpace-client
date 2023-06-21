@@ -57,7 +57,7 @@ const StartFillingPanel = ({
   tReady,
   headerCancelButton,
   isCloseable,
-  room,
+  room = { id: 1, title: "accountant room" },
   onCloseSelectRoomPanel,
 }) => {
   const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
@@ -90,7 +90,7 @@ const StartFillingPanel = ({
   }, [tReady, roles.length]);
 
   useEffect(() => {
-    Boolean(isVisible) && setStartFillingPanelVisible(isVisible);
+    typeof isVisible === "boolean" && setStartFillingPanelVisible(isVisible);
   }, [isVisible]);
 
   useEffect(() => {
@@ -238,9 +238,10 @@ const StartFillingPanel = ({
     );
   }
 
-  const isCloseablePanel = Boolean(isCloseable)
-    ? isCloseable
-    : !visibleInviteUserForRolePanel;
+  const isCloseablePanel =
+    typeof isCloseable === "boolean"
+      ? isCloseable
+      : !visibleInviteUserForRolePanel;
 
   return (
     <Aside visible={startFillingPanelVisible} zIndex={310}>
@@ -256,7 +257,7 @@ const StartFillingPanel = ({
           visible={startFillingPanelVisible}
           withFooterBorder
           onClose={onClose}
-          isCloseable={!isCloseablePanel}
+          isCloseable={isCloseablePanel}
         >
           <ModalDialog.Header>
             {t("StartFillingPanel:StartFilling")}

@@ -50,7 +50,6 @@ const Selector = ({
   selectByClick,
   onSelectUserForRole,
   blockNode,
-  blockNodeLoader,
   withArrowButton,
   withButtonsFooterVisible,
   isDisabledAcceptButton,
@@ -323,7 +322,6 @@ const Selector = ({
         searchLoader={searchLoader}
         rowLoader={rowLoader}
         blockNode={blockNode}
-        blockNodeLoader={blockNodeLoader}
         dataInPreparation={dataInPreparation}
       />
 

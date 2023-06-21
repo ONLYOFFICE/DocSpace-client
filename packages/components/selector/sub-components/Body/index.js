@@ -116,7 +116,7 @@ const Body = ({
       headerHeight={HEADER_HEIGHT}
       footerVisible={footerVisible}
     >
-      {isLoading ? blockNodeLoader : blockNode}
+      {blockNode}
 
       {isLoading && !isSearch ? (
         searchLoader

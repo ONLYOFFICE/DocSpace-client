@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RoomSelector from "@docspace/client/src/components/RoomSelector";
 import Aside from "@docspace/components/aside";
 import styled from "styled-components";
@@ -20,10 +20,15 @@ const SelectRoomPanel = ({
   setSelectRoomPanelVisible,
   setStartFillingPanelVisible,
   startFillingPanelVisible,
+  isVisible,
 }) => {
   const t = i18n.getFixedT(null, ["SelectRoomPanel", "Common"]);
   const [isDisabledAcceptButton, setIsDisabledAcceptButton] = useState(true);
   const [room, setRoom] = useState({});
+
+  useEffect(() => {
+    typeof isVisible === "boolean" && setSelectRoomPanelVisible(isVisible);
+  }, [isVisible]);
 
   const onCheckSelectedItems = (hasSelected) => {
     setIsDisabledAcceptButton(!hasSelected);
@@ -54,6 +59,7 @@ const SelectRoomPanel = ({
           <>
             <Backdrop
               visible={selectRoomPanelVisible}
+              isAside={true}
               zIndex={310}
               strongBlur
             />

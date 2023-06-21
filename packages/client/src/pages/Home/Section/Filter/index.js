@@ -2124,7 +2124,9 @@ const SectionFilterContent = ({
     dashboardViewAs,
   ]);
 
-  const visibleFilterButton = !(isDashboardPage && dashboardViewAs === "row");
+  const visibleFilterButton = !(
+    isDashboardPage && dashboardViewAs !== "dashboard"
+  );
 
   if (showFilterLoader) return <Loaders.Filter />;
 

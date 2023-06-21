@@ -40,7 +40,8 @@ public class FolderDto<T> : FileEntryDto<T>
     public bool Pinned { get; set; }
     public RoomType? RoomType { get; set; }
     public FolderType? Type { get; set; }
-    public EmployeeDto AssignedBy { get; set; }
+
+    public List<FormFillingQueue> FillQueue { get; set; }
 
     public bool Private { get; set; }
 
@@ -141,8 +142,36 @@ public class FolderDtoHelper : FileEntryDtoHelper
         }
         else
         {
-            
+
             result.Type = folder.FolderType;
+
+            //TODO MOCK DATA
+            var fillQueue = new List<FormFillingQueue>()
+            {
+                new FormFillingQueue()
+                {
+                    Id = 1, Title = "everyone", Color = "fbcc86", Badge = 0, Queue = 1, Type = FormFillingQueueType.FromForm
+                },
+                new FormFillingQueue()
+                {
+                    Id = 2, Title = "accountant",Color = "70d3b0", Badge = 0, Queue = 2, Type = FormFillingQueueType.FromForm
+                },
+                new FormFillingQueue()
+                {
+                    Id = 3, Title = "director", Color = "bb85e7", Badge = 0, Queue = 3, Type = FormFillingQueueType.FromForm
+                },
+                new FormFillingQueue()
+                {
+                    Id = -1, Title = "done", Badge = 5, Queue = 4, Type = FormFillingQueueType.Done
+                },
+                new FormFillingQueue()
+                {
+                    Id = -2, Title = "Interrupted", Badge = 5, Queue = 5, Type = FormFillingQueueType.Interrupted
+                },
+            };
+
+
+            result.FillQueue = fillQueue;
         }
 
         if (folder.RootFolderType == FolderType.USER

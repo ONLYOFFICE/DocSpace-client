@@ -47,6 +47,7 @@ import SettingsAdmin from "./SettingsLoader/SettingsAdminLoader";
 import SettingsCommon from "./SettingsLoader/SettingsCommonLoader";
 
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
+import DashboardLoader from "./DashboardLoader";
 
 export default {
   Rectangle,
@@ -98,4 +99,5 @@ export default {
 
   EmptyContainerLoader,
   Notifications,
+  DashboardLoader,
 };

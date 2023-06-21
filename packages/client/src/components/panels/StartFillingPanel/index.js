@@ -231,59 +231,57 @@ const StartFillingPanel = ({
   }
 
   return (
-    <>
-      <Aside visible={startFillingPanelVisible} zIndex={310}>
-        {isShowLoader ? (
-          <StartFillingPanelLoader
-            onClose={onClose}
-            isCloseable={!visibleInviteUserForRolePanel}
-            visible={startFillingPanelVisible}
-          />
-        ) : (
-          <StyledModalDialog
-            displayType="aside"
-            visible={startFillingPanelVisible}
-            withFooterBorder
-            onClose={onClose}
-            isCloseable={!visibleInviteUserForRolePanel}
-          >
-            <ModalDialog.Header>
-              {t("StartFillingPanel:StartFilling")}
-            </ModalDialog.Header>
-            <ModalDialog.Body>
-              <FillingRoleSelector
-                roles={roles}
-                users={users}
-                descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
-                descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
-                titleTooltip={t("StartFillingPanel:TitleTooltip")}
-                listHeader={t("StartFillingPanel:ListHeader")}
-                visibleTooltip={visibleTooltip}
-                onAddUser={onAddUser}
-                onRemoveUser={onRemoveUser}
-                onCloseTooltip={onCloseTooltip}
-              />
-            </ModalDialog.Body>
-            <ModalDialog.Footer>
-              <Button
-                label={t("Common:Start")}
-                size="normal"
-                isDisabled={isDisabledStart}
-                onClick={onStart}
-                primary
-                scale
-              />
-              <Button
-                label={t("Common:CancelButton")}
-                onClick={onClose}
-                size="normal"
-                scale
-              />
-            </ModalDialog.Footer>
-          </StyledModalDialog>
-        )}
-      </Aside>
-    </>
+    <Aside visible={startFillingPanelVisible} zIndex={310}>
+      {isShowLoader ? (
+        <StartFillingPanelLoader
+          onClose={onClose}
+          isCloseable={!visibleInviteUserForRolePanel}
+          visible={startFillingPanelVisible}
+        />
+      ) : (
+        <StyledModalDialog
+          displayType="aside"
+          visible={startFillingPanelVisible}
+          withFooterBorder
+          onClose={onClose}
+          isCloseable={!visibleInviteUserForRolePanel}
+        >
+          <ModalDialog.Header>
+            {t("StartFillingPanel:StartFilling")}
+          </ModalDialog.Header>
+          <ModalDialog.Body>
+            <FillingRoleSelector
+              roles={roles}
+              users={users}
+              descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
+              descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
+              titleTooltip={t("StartFillingPanel:TitleTooltip")}
+              listHeader={t("StartFillingPanel:ListHeader")}
+              visibleTooltip={visibleTooltip}
+              onAddUser={onAddUser}
+              onRemoveUser={onRemoveUser}
+              onCloseTooltip={onCloseTooltip}
+            />
+          </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              label={t("Common:Start")}
+              size="normal"
+              isDisabled={isDisabledStart}
+              onClick={onStart}
+              primary
+              scale
+            />
+            <Button
+              label={t("Common:CancelButton")}
+              onClick={onClose}
+              size="normal"
+              scale
+            />
+          </ModalDialog.Footer>
+        </StyledModalDialog>
+      )}
+    </Aside>
   );
 };
 

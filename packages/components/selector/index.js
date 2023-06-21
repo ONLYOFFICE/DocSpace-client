@@ -76,6 +76,7 @@ const Selector = ({
       onSearch && onSearch(value);
 
       setIsSearch(true);
+      onCheckSelectedItems && onCheckSelectedItems(false);
     },
     [onSearch]
   );

@@ -4,10 +4,11 @@ import Button from "@docspace/components/button";
 import FillingRoleSelector from "@docspace/components/filling-role-selector";
 import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
-import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFillingPanelLoader";
 import toastr from "@docspace/components/toast/toastr";
 import { Trans } from "react-i18next";
 import Link from "@docspace/components/link";
+import Loaders from "@docspace/common/components/Loaders";
+import { size } from "@docspace/components/utils/device";
 import i18n from "./i18n";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -43,6 +44,52 @@ const StyledLink = styled(Link)`
   color: rgba(82, 153, 224, 1);
 `;
 
+const StyledListLoader = styled.div`
+  padding-left: 33px;
+
+  .name {
+    padding-left: 8px;
+    padding-right: 28px;
+    max-width: 284px;
+  }
+
+  .row-loader {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+  }
+
+  .row-with-remove {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .avatar-with-role {
+    display: flex;
+    align-items: center;
+
+    .name {
+      padding-right: 12px;
+    }
+  }
+
+  .avatar {
+    min-width: 32px;
+  }
+
+  .checkbox {
+    padding-right: 16px;
+  }
+`;
+
+const StyledTooltipLoaders = styled.div`
+  padding: 0 16px 15px 16px;
+`;
+
+const StyledListHeaderLoaders = styled.div`
+  padding: 0 0 7px 16px;
+`;
+
 const everyoneRole = 1;
 const StartFillingPanel = ({
   startFillingPanelVisible,
@@ -75,7 +122,9 @@ const StartFillingPanel = ({
   const [isDisabledStart, setIsDisabledStart] = useState(true);
   const [isShowLoader, setIsShowLoader] = useState(true);
   const [isLoadingFetchMembers, setIsLoadingFetchMembers] = useState(false);
-  const [roomTitle, setRoomTitle] = useState();
+
+  const [roomTitle, setRoomTitle] = useState("");
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     getRolesUsersForFillingForm(fileId)
@@ -83,11 +132,15 @@ const StartFillingPanel = ({
         setRoles(roles);
       })
       .catch((e) => console.log(e));
+
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    setIsShowLoader(!tReady || !roles.length);
-  }, [tReady, roles.length]);
+    setIsShowLoader(!roles.length);
+  }, [roles.length]);
 
   useEffect(() => {
     typeof isVisible === "boolean" && setStartFillingPanelVisible(isVisible);
@@ -106,6 +159,12 @@ const StartFillingPanel = ({
       setIsDisabledStart(true);
     }
   }, [roles.length, users.length]);
+
+  const checkWidth = () => {
+    window.innerWidth <= size.smallTablet
+      ? setIsMobileView(true)
+      : setIsMobileView(false);
+  };
 
   const fetchMembers = () => {
     setIsLoadingFetchMembers(true);
@@ -140,7 +199,7 @@ const StartFillingPanel = ({
   };
 
   const onOpenInviteUserForRolePanel = () => {
-    if (!members.length) fetchMembers();
+    fetchMembers();
     setVisibleInviteUserForRolePanel(true);
   };
 
@@ -217,6 +276,53 @@ const StartFillingPanel = ({
       });
   };
 
+  const isCloseablePanel =
+    typeof isCloseable === "boolean"
+      ? isCloseable
+      : !visibleInviteUserForRolePanel;
+
+  const listLoader = (
+    <StyledListLoader>
+      <div className="row-loader">
+        <Loaders.Circle
+          className="avatar"
+          x="16"
+          y="16"
+          width="32"
+          height="32"
+          radius="16"
+        />
+        <Loaders.Rectangle className="name" height="16px" />
+      </div>
+      <div className="row-loader">
+        <Loaders.Circle
+          className="avatar"
+          x="16"
+          y="16"
+          width="32"
+          height="32"
+          radius="16"
+        />
+        <Loaders.Rectangle className="name" height="16px" />
+      </div>
+      <div className="row-loader row-with-remove">
+        <div className="avatar-with-role">
+          <Loaders.Circle
+            className="avatar"
+            x="16"
+            y="16"
+            width="32"
+            height="32"
+            radius="16"
+          />
+          <Loaders.Rectangle className="name" height="16px" />
+        </div>
+
+        <Loaders.Rectangle width="16" height="16" className="checkbox" />
+      </div>
+    </StyledListLoader>
+  );
+
   if (visibleInviteUserForRolePanel) {
     return (
       <InviteUserForRolePanel
@@ -238,62 +344,62 @@ const StartFillingPanel = ({
     );
   }
 
-  const isCloseablePanel =
-    typeof isCloseable === "boolean"
-      ? isCloseable
-      : !visibleInviteUserForRolePanel;
-
   return (
     <Aside visible={startFillingPanelVisible} zIndex={310}>
-      {isShowLoader ? (
-        <StartFillingPanelLoader
-          onClose={onClose}
-          isCloseable={isCloseablePanel}
-          visible={startFillingPanelVisible}
-        />
-      ) : (
-        <StyledModalDialog
-          displayType="aside"
-          visible={startFillingPanelVisible}
-          withFooterBorder
-          onClose={onClose}
-          isCloseable={isCloseablePanel}
-        >
-          <ModalDialog.Header>
-            {t("StartFillingPanel:StartFilling")}
-          </ModalDialog.Header>
-          <ModalDialog.Body>
-            <FillingRoleSelector
-              roles={roles}
-              users={users}
-              descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
-              descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
-              titleTooltip={t("StartFillingPanel:TitleTooltip")}
-              listHeader={t("StartFillingPanel:ListHeader")}
-              visibleTooltip={visibleTooltip}
-              onAddUser={onAddUser}
-              onRemoveUser={onRemoveUser}
-              onCloseTooltip={onCloseTooltip}
-            />
-          </ModalDialog.Body>
-          <ModalDialog.Footer>
-            <Button
-              label={t("Common:Start")}
-              size="normal"
-              isDisabled={isDisabledStart}
-              onClick={onStart}
-              primary
-              scale
-            />
-            <Button
-              label={headerCancelButton || t("Common:CancelButton")}
-              onClick={onClose}
-              size="normal"
-              scale
-            />
-          </ModalDialog.Footer>
-        </StyledModalDialog>
-      )}
+      <StyledModalDialog
+        displayType="aside"
+        visible={startFillingPanelVisible}
+        withFooterBorder
+        onClose={onClose}
+        isCloseable={isCloseablePanel}
+      >
+        <ModalDialog.Header>
+          {t("StartFillingPanel:StartFilling")}
+        </ModalDialog.Header>
+        <ModalDialog.Body>
+          <FillingRoleSelector
+            roles={roles}
+            users={users}
+            descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
+            descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
+            titleTooltip={t("StartFillingPanel:TitleTooltip")}
+            listHeader={t("StartFillingPanel:ListHeader")}
+            visibleTooltip={visibleTooltip}
+            onAddUser={onAddUser}
+            onRemoveUser={onRemoveUser}
+            onCloseTooltip={onCloseTooltip}
+            listLoader={listLoader}
+            listHeaderLoader={
+              <StyledListHeaderLoaders>
+                <Loaders.Rectangle width="120px" height="16px" />
+              </StyledListHeaderLoaders>
+            }
+            tooltipLoader={
+              <StyledTooltipLoaders>
+                <Loaders.Rectangle height={isMobileView ? "92px" : "76px"} />
+              </StyledTooltipLoaders>
+            }
+            isShowLoader={isShowLoader}
+            isLoadingText={!tReady}
+          />
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <Button
+            label={t("Common:Start")}
+            size="normal"
+            isDisabled={isDisabledStart}
+            onClick={onStart}
+            primary
+            scale
+          />
+          <Button
+            label={headerCancelButton || t("Common:CancelButton")}
+            onClick={onClose}
+            size="normal"
+            scale
+          />
+        </ModalDialog.Footer>
+      </StyledModalDialog>
     </Aside>
   );
 };

@@ -58,6 +58,7 @@ const StartFillingPanel = ({
   headerCancelButton,
   isCloseable,
   room,
+  onCloseSelectRoomPanel,
 }) => {
   const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
 
@@ -209,6 +210,7 @@ const StartFillingPanel = ({
       .then(() => {
         toastr.success(toastrStart);
         onClose();
+        onCloseSelectRoomPanel && onCloseSelectRoomPanel();
       })
       .catch((e) => {
         console.log("e", e);

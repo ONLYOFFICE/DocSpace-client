@@ -7,6 +7,7 @@ import Portal from "@docspace/components/portal";
 import { StartFillingPanel } from "@docspace/client/src/components/panels/index";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import i18n from "./i18n";
 
 const StyledAside = styled(Aside)`
   .scroll-body {
@@ -20,6 +21,7 @@ const SelectRoomPanel = ({
   setStartFillingPanelVisible,
   startFillingPanelVisible,
 }) => {
+  const t = i18n.getFixedT(null, ["SelectRoomPanel", "Common"]);
   const [isDisabledAcceptButton, setIsDisabledAcceptButton] = useState(true);
   const [room, setRoom] = useState({});
 
@@ -40,6 +42,7 @@ const SelectRoomPanel = ({
         room={room}
         headerCancelButton={"Back"}
         isCloseable={false}
+        onCloseSelectRoomPanel={onClose}
       />
     );
   }
@@ -62,8 +65,8 @@ const SelectRoomPanel = ({
               <RoomSelector
                 onAccept={onAccept}
                 onCancel={onClose}
-                headerLabel={"Select room"}
-                acceptButtonLabel={"Next"}
+                headerLabel={t("SelectRoomPanel:SelectRoom")}
+                acceptButtonLabel={t("Common:Next")}
                 withCancelButton
                 withArrowButton={false}
                 withButtonsFooterVisible={true}
@@ -93,4 +96,4 @@ export default inject(({ dialogsStore }) => {
     setStartFillingPanelVisible,
     startFillingPanelVisible,
   };
-})(withTranslation(["Common"])(observer(SelectRoomPanel)));
+})(withTranslation(["Common", "SelectRoomPanel"])(observer(SelectRoomPanel)));

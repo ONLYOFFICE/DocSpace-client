@@ -102,12 +102,7 @@ const InviteUserForRolePanel = ({
     <Portal
       element={
         <>
-          <Backdrop
-            style={{ backdropFilter: "blur(8px)" }}
-            visible={visible}
-            zIndex={310}
-            isAside={true}
-          />
+          <Backdrop strongBlur visible={visible} zIndex={310} isAside={true} />
           <StyledAside
             visible={visible}
             onClose={onClose}

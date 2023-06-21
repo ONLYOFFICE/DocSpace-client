@@ -27,7 +27,6 @@ const FillingRoleSelector = ({
   onCloseTooltip,
   descriptionEveryone,
   descriptionTooltip,
-  everyoneTranslation,
   titleTooltip,
   listHeader,
   visibleTooltip,
@@ -52,9 +51,8 @@ const FillingRoleSelector = ({
         <StyledEveryoneRoleContainer>
           <div className="title">
             <StyledRole>{capitalizedRoles[0].title}</StyledRole>
-            <StyledAssignedRole>@{everyoneTranslation}</StyledAssignedRole>
           </div>
-          <div className="role-description">{descriptionEveryone}</div>
+          <div className="role-description truncate">{descriptionEveryone}</div>
         </StyledEveryoneRoleContainer>
       </StyledRow>
     </>
@@ -79,7 +77,7 @@ const FillingRoleSelector = ({
         <div className="description">{descriptionTooltip}</div>
       </StyledTooltip>
 
-      <div className="list-header">{listHeader}:</div>
+      <div className="list-header truncate">{listHeader}:</div>
 
       <Scrollbar stype="mediumBlack">
         {everyoneRoleNode}
@@ -94,8 +92,12 @@ const FillingRoleSelector = ({
 
                 <StyledAvatar src={roleWithUser.avatar} />
                 <div className="user-with-role">
-                  <StyledRole>{roleWithUser.displayName}</StyledRole>
-                  <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
+                  <StyledRole className="user truncate">
+                    {roleWithUser.displayName}
+                  </StyledRole>
+                  <StyledAssignedRole className="truncate">
+                    {roleWithUser.role}
+                  </StyledAssignedRole>
                 </div>
               </div>
               <ReactSVG
@@ -113,7 +115,7 @@ const FillingRoleSelector = ({
                 }}
                 color={`#` + role.color}
               />
-              <StyledRole>{role.title}</StyledRole>
+              <StyledRole className="truncate">{role.title}</StyledRole>
             </StyledRow>
           );
         })}
@@ -130,8 +132,6 @@ FillingRoleSelector.propTypes = {
   /** Tooltip text */
   descriptionTooltip: PropTypes.string,
   /** Tooltip title */
-  /** Everyone translation */
-  everyoneTranslation: PropTypes.string,
   titleTooltip: PropTypes.string,
   /** Accepts id */
   id: PropTypes.string,

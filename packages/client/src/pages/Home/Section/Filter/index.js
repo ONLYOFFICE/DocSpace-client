@@ -2123,6 +2123,11 @@ const SectionFilterContent = ({
     accountsViewAs,
     dashboardViewAs,
   ]);
+
+  const visibleFilterButton = !(
+    isDashboardPage && dashboardViewAs !== "dashboard"
+  );
+
   if (showFilterLoader) return <Loaders.Filter />;
 
   return (
@@ -2148,6 +2153,7 @@ const SectionFilterContent = ({
       isRecentFolder={isRecentFolder}
       isPersonalRoom={isPersonalRoom}
       isRooms={isRooms}
+      visibleFilterButton={visibleFilterButton}
       removeSelectedItem={removeSelectedItem}
       clearAll={clearAll}
       filterTitle={t("Filter")}

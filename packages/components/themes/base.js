@@ -3137,6 +3137,14 @@ const Base = {
   portalUnavailable: {
     textDescriptionColor: "#A3A9AE",
   },
+
+  startFillingPanel: {
+    tooltipBackground: "#f8f9f9",
+    tooltipDescription: "#555F65",
+    assignedRoleColor: "rgba(170, 170, 170, 1)",
+    roleColor: "rgba(101, 112, 119, 1)",
+    addUserToRoomColor:"rgba(51, 51, 51, 1)"
+  },
 };
 
 export default Base;

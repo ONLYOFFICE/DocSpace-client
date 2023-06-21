@@ -18,6 +18,7 @@ import { Events } from "@docspace/common/constants";
 
 const selectedViewIcon = css`
   svg {
+    rect,
     path {
       fill: ${(props) => props.theme.filterInput.sort.selectedViewIcon};
     }
@@ -26,6 +27,7 @@ const selectedViewIcon = css`
 
 const notSelectedViewIcon = css`
   svg {
+    rect,
     path {
       fill: ${(props) => props.theme.filterInput.sort.viewIcon};
     }

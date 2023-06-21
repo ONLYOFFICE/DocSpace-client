@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-
-import Backdrop from "@docspace/components/backdrop";
+import React from "react";
 import Aside from "@docspace/components/aside";
-
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import i18n from "./i18n";
 import { ShareAccessRights } from "@docspace/common/constants";
-
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -17,14 +14,13 @@ const AddUserToRoomPanel = ({
   existUsers,
   fetchMembers,
 }) => {
+  const t = i18n.getFixedT(null, ["StartFillingPanel"]);
   const onAddToRoom = (users) => {
     const access = ShareAccessRights.FormFilling;
 
     const items = [];
 
     for (let item of users) {
-      // const currentItem = shareDataItems.find((x) => x.sharedTo.id === item.id);
-
       const newItem = {
         access: access,
         email: item.email,
@@ -36,9 +32,6 @@ const AddUserToRoomPanel = ({
       };
       items.push(newItem);
     }
-
-    if (users.length > items.length)
-      toastr.warning("Some users are already in room");
 
     const invitations = items.map((item) => {
       let newItem = {};
@@ -70,17 +63,15 @@ const AddUserToRoomPanel = ({
   return (
     <>
       <Aside
-        className="header_aside-panel"
         visible={visible}
         withoutBodyScroll
         zIndex={410}
         isCloseable={false}
       >
         <PeopleSelector
-          headerLabel="Add user to room"
+          headerLabel={t("StartFillingPanel:AddUserToRoom")}
           visible={visible}
           onBackClick={onClose}
-          placeholder="Search users"
           zIndex={410}
           onAccept={onAddToRoom}
           existUsers={existUsers}
@@ -94,17 +85,10 @@ const AddUserToRoomPanel = ({
   );
 };
 
-export default inject(({ filesStore, dialogsStore, peopleStore, auth }) => {
-  const { getRoomMembers, setRoomSecurity } = filesStore;
-  const { inviteItems } = dialogsStore;
-  const { inviteUsers } = peopleStore.usersStore;
-  const { setUpdateRoomMembers } = auth.infoPanelStore;
+export default inject(({ filesStore }) => {
+  const { setRoomSecurity } = filesStore;
 
   return {
-    getRoomMembers,
-    inviteItems,
     setRoomSecurity,
-    inviteUsers,
-    setUpdateRoomMembers,
   };
-})(withTranslation(["Common"])(observer(AddUserToRoomPanel)));
+})(withTranslation(["StartFillingPanel"])(observer(AddUserToRoomPanel)));

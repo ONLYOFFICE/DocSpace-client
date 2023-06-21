@@ -4,6 +4,11 @@ import Button from "@docspace/components/button";
 import FillingRoleSelector from "@docspace/components/filling-role-selector";
 import InviteUserForRolePanel from "../InviteUserForRolePanel";
 import Aside from "@docspace/components/aside";
+import StartFillingPanelLoader from "@docspace/common/components/Loaders/StartFillingPanelLoader";
+import toastr from "@docspace/components/toast/toastr";
+import { Trans } from "react-i18next";
+import Link from "@docspace/components/link";
+import i18n from "./i18n";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -31,6 +36,13 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
+const StyledLink = styled(Link)`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(82, 153, 224, 1);
+`;
+
 const everyoneRole = 1;
 const StartFillingPanel = ({
   startFillingPanelVisible,
@@ -39,9 +51,15 @@ const StartFillingPanel = ({
   getRolesUsersForFillingForm,
   setRolesUsersForFillingForm,
   fileId = 4,
-  roomId = 7,
+  formHref = "http://192.168.0.102:8092/doceditor?fileId=4",
+  roomId = 10,
+  roomTitle = "accountant's room",
+  theme,
   getRoomMembers,
+  tReady,
 }) => {
+  const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
+
   const [visibleInviteUserForRolePanel, setVisibleInviteUserForRolePanel] =
     useState(false);
   const [visibleTooltip, setVisibleTooltip] = useState(true);
@@ -53,6 +71,8 @@ const StartFillingPanel = ({
   const [users, setUsers] = useState([]);
 
   const [isDisabledStart, setIsDisabledStart] = useState(true);
+  const [isShowLoader, setIsShowLoader] = useState(true);
+  const [isLoadingFetchMembers, setIsLoadingFetchMembers] = useState(false);
 
   useEffect(() => {
     getRolesUsersForFillingForm(fileId)
@@ -61,6 +81,10 @@ const StartFillingPanel = ({
       })
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    setIsShowLoader(!tReady || !roles.length);
+  }, [tReady, roles.length]);
 
   useEffect(() => {
     Boolean(isVisible) && setStartFillingPanelVisible(isVisible);
@@ -76,19 +100,25 @@ const StartFillingPanel = ({
     }
   }, [roles.length, users.length]);
 
-  const fetchMembers = async () => {
-    let data = await getRoomMembers(roomId);
-
-    data = data.filter((m) => m.sharedTo.email || m.sharedTo.displayName);
-    let inRoomMembers = [];
-    data.map((fetchedMember) => {
-      const member = {
-        label: fetchedMember.sharedTo.displayName,
-        ...fetchedMember.sharedTo,
-      };
-      if (member.activationStatus !== 2) inRoomMembers.push(member);
-    });
-    setMembers(inRoomMembers);
+  const fetchMembers = () => {
+    setIsLoadingFetchMembers(true);
+    getRoomMembers(roomId)
+      .then((res) => {
+        const data = res.filter(
+          (m) => m.sharedTo.email || m.sharedTo.displayName
+        );
+        let inRoomMembers = [];
+        data.map((fetchedMember) => {
+          const member = {
+            label: fetchedMember.sharedTo.displayName,
+            ...fetchedMember.sharedTo,
+          };
+          if (member.activationStatus !== 2) inRoomMembers.push(member);
+        });
+        setMembers(inRoomMembers);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoadingFetchMembers(false));
   };
 
   const onAddUser = (role) => {
@@ -103,7 +133,7 @@ const StartFillingPanel = ({
   };
 
   const onOpenInviteUserForRolePanel = () => {
-    fetchMembers();
+    if (!members.length) fetchMembers();
     setVisibleInviteUserForRolePanel(true);
   };
 
@@ -146,6 +176,20 @@ const StartFillingPanel = ({
     setAddUserToRoomVisible(false);
   };
 
+  const text = t("StartFillingPanel:ToastrText");
+
+  const toastrStart = (
+    <>
+      <Trans ns="StartFillingPanel" i18nKey="ToastrSuccess" text={text}>
+        {{ text }}
+        {{ roomTitle }}
+      </Trans>
+      <StyledLink noHover target="_blank" href={formHref}>
+        {t("StartFillingPanel:GoToForm")}
+      </StyledLink>
+    </>
+  );
+
   const onStart = () => {
     const idMembers = members.map((member) => member.id);
     const idUsersRoles = [];
@@ -155,16 +199,15 @@ const StartFillingPanel = ({
       idUsersRoles.push({ id: user.roleId, userId: [user.id] });
     });
 
-    setRolesUsersForFillingForm(4, idUsersRoles)
+    setRolesUsersForFillingForm(fileId, idUsersRoles)
       .then(() => {
-        //TODO: Add toast
+        toastr.success(toastrStart);
+        onClose();
       })
       .catch((e) => {
-        console.log("e");
+        console.log("e", e);
       });
   };
-
-  if (!roles.length) return <div></div>;
 
   if (visibleInviteUserForRolePanel) {
     return (
@@ -180,6 +223,9 @@ const StartFillingPanel = ({
         onOpenAddUserToRoom={onOpenAddUserToRoom}
         onCloseAddUserToRoom={onCloseAddUserToRoom}
         fetchMembers={fetchMembers}
+        theme={theme}
+        isLoadingFetchMembers={isLoadingFetchMembers}
+        roomId={roomId}
       />
     );
   }
@@ -187,62 +233,61 @@ const StartFillingPanel = ({
   return (
     <>
       <Aside visible={startFillingPanelVisible} zIndex={310}>
-        <StyledModalDialog
-          displayType="aside"
-          visible={startFillingPanelVisible}
-          withFooterBorder
-          onClose={onClose}
-          isCloseable={!visibleInviteUserForRolePanel}
-        >
-          <ModalDialog.Header>Start Filling</ModalDialog.Header>
-
-          <ModalDialog.Body>
-            <FillingRoleSelector
-              roles={roles}
-              users={users}
-              everyoneTranslation={"Everyone"}
-              descriptionEveryone={
-                "The form is available for filling for all room members"
-              }
-              descriptionTooltip={
-                "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields."
-              }
-              titleTooltip={"How it works"}
-              listHeader={"Roles in this form"}
-              visibleTooltip={visibleTooltip}
-              onAddUser={onAddUser}
-              onRemoveUser={onRemoveUser}
-              onCloseTooltip={onCloseTooltip}
-            />
-          </ModalDialog.Body>
-
-          <ModalDialog.Footer>
-            <Button
-              id="shared_create-room-modal_submit"
-              tabIndex={5}
-              label="Start"
-              size="normal"
-              isDisabled={isDisabledStart}
-              onClick={onStart}
-              primary
-              scale
-            />
-            <Button
-              id="shared_create-room-modal_cancel"
-              tabIndex={5}
-              label="Cancel"
-              onClick={onClose}
-              size="normal"
-              scale
-            />
-          </ModalDialog.Footer>
-        </StyledModalDialog>
+        {isShowLoader ? (
+          <StartFillingPanelLoader
+            onClose={onClose}
+            isCloseable={!visibleInviteUserForRolePanel}
+            visible={startFillingPanelVisible}
+          />
+        ) : (
+          <StyledModalDialog
+            displayType="aside"
+            visible={startFillingPanelVisible}
+            withFooterBorder
+            onClose={onClose}
+            isCloseable={!visibleInviteUserForRolePanel}
+          >
+            <ModalDialog.Header>
+              {t("StartFillingPanel:StartFilling")}
+            </ModalDialog.Header>
+            <ModalDialog.Body>
+              <FillingRoleSelector
+                roles={roles}
+                users={users}
+                descriptionEveryone={t("StartFillingPanel:DescriptionEveryone")}
+                descriptionTooltip={t("StartFillingPanel:DescriptionTooltip")}
+                titleTooltip={t("StartFillingPanel:TitleTooltip")}
+                listHeader={t("StartFillingPanel:ListHeader")}
+                visibleTooltip={visibleTooltip}
+                onAddUser={onAddUser}
+                onRemoveUser={onRemoveUser}
+                onCloseTooltip={onCloseTooltip}
+              />
+            </ModalDialog.Body>
+            <ModalDialog.Footer>
+              <Button
+                label={t("Common:Start")}
+                size="normal"
+                isDisabled={isDisabledStart}
+                onClick={onStart}
+                primary
+                scale
+              />
+              <Button
+                label={t("Common:CancelButton")}
+                onClick={onClose}
+                size="normal"
+                scale
+              />
+            </ModalDialog.Footer>
+          </StyledModalDialog>
+        )}
       </Aside>
     </>
   );
 };
 
-export default inject(({ dialogsStore, filesStore }) => {
+export default inject(({ auth, dialogsStore, filesStore }) => {
   const { startFillingPanelVisible, setStartFillingPanelVisible } =
     dialogsStore;
   const {
@@ -257,5 +302,8 @@ export default inject(({ dialogsStore, filesStore }) => {
     getRolesUsersForFillingForm,
     setRolesUsersForFillingForm,
     getRoomMembers,
+    theme: auth.settingsStore.theme,
   };
-})(withTranslation(["Common"])(observer(StartFillingPanel)));
+})(
+  withTranslation(["Common", "StartFillingPanel"])(observer(StartFillingPanel))
+);

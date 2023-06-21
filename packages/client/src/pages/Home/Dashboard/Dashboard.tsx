@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import Column from "@docspace/components/Column";
@@ -20,16 +20,15 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 
-function Dashboard({ viewAs }: DashboardProps) {
+function Dashboard({ viewAs, setViewAs }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
-  const [showListView, setShowListView] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    if (viewAs !== "row") return;
+    if (viewAs === "dashboard") return;
 
     const width = window.innerWidth;
 
-    setShowListView(width < 1024);
+    setViewAs(width < 1024 ? "row" : "table");
   }, [sectionWidth, viewAs]);
 
   const columns = [
@@ -172,11 +171,11 @@ function Dashboard({ viewAs }: DashboardProps) {
   ];
 
   if (viewAs === "row") {
-    return showListView ? (
-      <List sectionWidth={sectionWidth} roles={roles} />
-    ) : (
-      <Table roles={roles} />
-    );
+    return <List sectionWidth={sectionWidth} roles={roles} />;
+  }
+
+  if (viewAs === "table") {
+    return <Table roles={roles} />;
   }
 
   return (
@@ -216,9 +215,10 @@ function Dashboard({ viewAs }: DashboardProps) {
 }
 
 export default inject<InjectType>(({ dashboardStore }) => {
-  const { viewAs } = dashboardStore;
+  const { viewAs, setViewAs } = dashboardStore;
 
   return {
     viewAs,
+    setViewAs,
   };
 })(observer(Dashboard));

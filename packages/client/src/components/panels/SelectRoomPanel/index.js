@@ -39,13 +39,14 @@ const SelectRoomPanel = ({
   const onAccept = (rooms) => {
     setRoom({ id: rooms[0].id, title: rooms[0].label });
     setStartFillingPanelVisible(true);
+    onCheckSelectedItems(false);
   };
 
   if (startFillingPanelVisible) {
     return (
       <StartFillingPanel
         room={room}
-        headerCancelButton={"Back"}
+        headerCancelButton={t("Common:Back")}
         isCloseable={false}
         onCloseSelectRoomPanel={onClose}
       />

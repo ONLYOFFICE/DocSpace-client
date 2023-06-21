@@ -95,8 +95,10 @@ function Editor({
   filesSettings,
   startFillingPanel,
   statusFillingPanel,
+  selectRoomPanel,
   onClickStartFillingPanel,
   onClickStatusFillingPanel,
+  onClickSelectRoomPanel,
 }) {
   const fileInfo = config?.file;
 
@@ -770,6 +772,7 @@ function Editor({
     ) : (
       <>
         {/* {sharingDialog} */}
+        {selectRoomPanel}
         {startFillingPanel}
         {statusFillingPanel}
         {selectFileDialog}
@@ -779,7 +782,9 @@ function Editor({
 
   return (
     <EditorWrapper>
-      {/* TODO: Delete */}
+      <StyledButton onClick={onClickSelectRoomPanel}>
+        Open SelectRoomPanel
+      </StyledButton>
 
       <StyledButton onClick={onClickStartFillingPanel}>
         Open StartFillingPanel

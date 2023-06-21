@@ -52,11 +52,12 @@ const StartFillingPanel = ({
   setRolesUsersForFillingForm,
   fileId = 4,
   formHref = "http://192.168.0.102:8092/doceditor?fileId=4",
-  roomId = 10,
-  roomTitle = "accountant's room",
   theme,
   getRoomMembers,
   tReady,
+  headerCancelButton,
+  isCloseable,
+  room,
 }) => {
   const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
 
@@ -73,6 +74,7 @@ const StartFillingPanel = ({
   const [isDisabledStart, setIsDisabledStart] = useState(true);
   const [isShowLoader, setIsShowLoader] = useState(true);
   const [isLoadingFetchMembers, setIsLoadingFetchMembers] = useState(false);
+  const [roomTitle, setRoomTitle] = useState();
 
   useEffect(() => {
     getRolesUsersForFillingForm(fileId)
@@ -91,6 +93,10 @@ const StartFillingPanel = ({
   }, [isVisible]);
 
   useEffect(() => {
+    setRoomTitle(room.title);
+  }, [room]);
+
+  useEffect(() => {
     const allRolesFilled = roles.length - everyoneRole === users.length;
 
     if (allRolesFilled) {
@@ -102,7 +108,7 @@ const StartFillingPanel = ({
 
   const fetchMembers = () => {
     setIsLoadingFetchMembers(true);
-    getRoomMembers(roomId)
+    getRoomMembers(room.id)
       .then((res) => {
         const data = res.filter(
           (m) => m.sharedTo.email || m.sharedTo.displayName
@@ -225,17 +231,21 @@ const StartFillingPanel = ({
         fetchMembers={fetchMembers}
         theme={theme}
         isLoadingFetchMembers={isLoadingFetchMembers}
-        roomId={roomId}
+        roomId={room.id}
       />
     );
   }
+
+  const isCloseablePanel = Boolean(isCloseable)
+    ? isCloseable
+    : !visibleInviteUserForRolePanel;
 
   return (
     <Aside visible={startFillingPanelVisible} zIndex={310}>
       {isShowLoader ? (
         <StartFillingPanelLoader
           onClose={onClose}
-          isCloseable={!visibleInviteUserForRolePanel}
+          isCloseable={isCloseablePanel}
           visible={startFillingPanelVisible}
         />
       ) : (
@@ -244,7 +254,7 @@ const StartFillingPanel = ({
           visible={startFillingPanelVisible}
           withFooterBorder
           onClose={onClose}
-          isCloseable={!visibleInviteUserForRolePanel}
+          isCloseable={!isCloseablePanel}
         >
           <ModalDialog.Header>
             {t("StartFillingPanel:StartFilling")}
@@ -273,7 +283,7 @@ const StartFillingPanel = ({
               scale
             />
             <Button
-              label={t("Common:CancelButton")}
+              label={headerCancelButton || t("Common:CancelButton")}
               onClick={onClose}
               size="normal"
               scale

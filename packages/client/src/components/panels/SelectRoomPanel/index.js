@@ -21,6 +21,7 @@ const SelectRoomPanel = ({
   startFillingPanelVisible,
 }) => {
   const [isDisabledAcceptButton, setIsDisabledAcceptButton] = useState(true);
+  const [room, setRoom] = useState({});
 
   const onCheckSelectedItems = (hasSelected) => {
     setIsDisabledAcceptButton(!hasSelected);
@@ -28,41 +29,53 @@ const SelectRoomPanel = ({
   const onClose = () => {
     setSelectRoomPanelVisible(false);
   };
-  const onAccept = () => {
+  const onAccept = (rooms) => {
+    setRoom({ id: rooms[0].id, title: rooms[0].label });
     setStartFillingPanelVisible(true);
   };
 
-  if (startFillingPanelVisible) return <StartFillingPanel />;
+  if (startFillingPanelVisible) {
+    return (
+      <StartFillingPanel
+        room={room}
+        headerCancelButton={"Back"}
+        isCloseable={false}
+      />
+    );
+  }
+
   return (
-    <Portal
-      element={
-        <>
-          <Backdrop
-            visible={selectRoomPanelVisible}
-            withBackground={true}
-            zIndex={310}
-          />
-          <StyledAside
-            visible={selectRoomPanelVisible}
-            zIndex={310}
-            onClose={onClose}
-          >
-            <RoomSelector
-              onAccept={onAccept}
-              onCancel={onClose}
-              headerLabel={"Select room"}
-              acceptButtonLabel={"Next"}
-              withCancelButton
-              withArrowButton={false}
-              withButtonsFooterVisible={true}
-              countRowLoader={4}
-              isDisabledAcceptButton={isDisabledAcceptButton}
-              onCheckSelectedItems={onCheckSelectedItems}
+    <>
+      <Portal
+        element={
+          <>
+            <Backdrop
+              visible={selectRoomPanelVisible}
+              zIndex={310}
+              strongBlur
             />
-          </StyledAside>
-        </>
-      }
-    />
+            <StyledAside
+              visible={selectRoomPanelVisible}
+              zIndex={310}
+              onClose={onClose}
+            >
+              <RoomSelector
+                onAccept={onAccept}
+                onCancel={onClose}
+                headerLabel={"Select room"}
+                acceptButtonLabel={"Next"}
+                withCancelButton
+                withArrowButton={false}
+                withButtonsFooterVisible={true}
+                countRowLoader={4}
+                isDisabledAcceptButton={isDisabledAcceptButton}
+                onCheckSelectedItems={onCheckSelectedItems}
+              />
+            </StyledAside>
+          </>
+        }
+      />
+    </>
   );
 };
 

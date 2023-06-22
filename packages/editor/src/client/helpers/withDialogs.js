@@ -260,7 +260,11 @@ const withDialogs = (WrappedComponent) => {
     };
 
     const onClickStatusFillingPanel = () => {
-      setIsStatusFillingPanelVisible(!isStatusFillingPanelVisible);
+      setIsStatusFillingPanelVisible(true);
+    };
+
+    const onCloseStatusFillingPanel = () => {
+      setIsStatusFillingPanelVisible(false);
     };
 
     // const sharingDialog = (
@@ -315,6 +319,7 @@ const withDialogs = (WrappedComponent) => {
         successAuth={props.successAuth}
         isVisible={isStatusFillingPanelVisible}
         fileId={fileId}
+        onClose={onCloseStatusFillingPanel}
         mfReady={mfReady}
       />
     );

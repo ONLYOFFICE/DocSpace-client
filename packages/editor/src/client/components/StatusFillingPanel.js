@@ -7,6 +7,7 @@ const StatusFillingPanel = ({
   mfReady,
   fileId,
   successAuth,
+  onClose,
   ...rest
 }) => {
   return (
@@ -19,6 +20,7 @@ const StatusFillingPanel = ({
           module: "./StatusFillingPanel",
         }}
         isVisible={isVisible}
+        onClose={onClose}
         fileId={fileId}
       />
     )) ||

@@ -71,9 +71,11 @@ const AccordionItem = styled.div`
       padding 1px;
       border-radius: 50%;
       border: 2px solid ${(props) => props.theme.statusPanel.avatarBorderColor};
+      border-style: ${(props) => (props.isStarted ? "dashed" : "solid")};
       border-color: ${(props) =>
         (props.isDone && props.theme.statusPanel.doneTextColor) ||
-        (props.isInterrupted && props.theme.statusPanel.interruptedTextColor)};
+        (props.isInterrupted && props.theme.statusPanel.interruptedTextColor) ||
+        (props.isStarted && props.theme.statusPanel.doneTextColor)};
     }
 
     .accordion-displayname {
@@ -89,6 +91,9 @@ const AccordionItem = styled.div`
       line-height: 16px;
       color: ${(props) => props.theme.statusPanel.roleTextColor};
       margin-left: 10px;
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
   
     .arrow-icon {
@@ -121,6 +126,8 @@ const AccordionItem = styled.div`
   .accordion-item-wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     min-height: 40px;
     margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
     border-left: 2px ${(props) =>

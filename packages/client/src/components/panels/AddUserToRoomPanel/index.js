@@ -1,6 +1,7 @@
 import React from "react";
 import Aside from "@docspace/components/aside";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import i18n from "./i18n";
 import { ShareAccessRights } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -12,8 +13,8 @@ const AddUserToRoomPanel = ({
   setRoomSecurity,
   existUsers,
   fetchMembers,
-  t,
 }) => {
+  const t = i18n.getFixedT(null, ["StartFillingPanel"]);
   const onAddToRoom = (users) => {
     const access = ShareAccessRights.FormFilling;
 
@@ -74,6 +75,7 @@ const AddUserToRoomPanel = ({
           zIndex={410}
           onAccept={onAddToRoom}
           existUsers={existUsers}
+          acceptButtonLabel={t("StartFillingPanel:AddToRoom")}
           isMultiSelect
           withSelectAll={false}
           withSelectExistUsers

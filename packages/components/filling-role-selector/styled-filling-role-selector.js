@@ -156,7 +156,7 @@ const StyledTooltip = styled.div`
   border-radius: 6px;
   font-size: 12px;
   line-height: 16px;
-  padding: 8px 12px;
+  padding: 12px 16px;
   box-sizing: border-box;
   margin: 8px 0;
 

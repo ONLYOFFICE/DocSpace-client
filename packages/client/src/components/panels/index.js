@@ -13,6 +13,7 @@ import StatusFillingPanel from "./StatusFillingPanel";
 import StartFillingPanel from "./StartFillingPanel";
 import InviteUserForRolePanel from "./InviteUserForRolePanel";
 import AddUserToRoomPanel from "./AddUserToRoomPanel";
+import SelectRoomPanel from "./SelectRoomPanel";
 
 export {
   SharingPanel,
@@ -30,4 +31,5 @@ export {
   StartFillingPanel,
   InviteUserForRolePanel,
   AddUserToRoomPanel,
+  SelectRoomPanel,
 };

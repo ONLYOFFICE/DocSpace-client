@@ -46,6 +46,13 @@ public class FormFillingStep
 
 }
 
+public class FormFillingQueue : FileRoleDto
+{
+    public int Queue { get; set; }
+    public int Badge { get; set; }
+    public FormFillingQueueType Type { get; set; }
+}
+
 [Scope]
 public class FileRoleDtoHelper
 {

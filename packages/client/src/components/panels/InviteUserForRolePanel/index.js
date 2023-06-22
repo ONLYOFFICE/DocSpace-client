@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
@@ -13,6 +12,7 @@ import SelectorRowLoader from "@docspace/common/components/Loaders/SelectorRowLo
 import SelectorSearchLoader from "@docspace/common/components/Loaders/SelectorSearchLoader";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import i18n from "./i18n";
 import { withTranslation } from "react-i18next";
 
 const StyledAside = styled(Aside)`
@@ -31,7 +31,7 @@ const StyledBlock = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    color: #657077;
+    color: ${(props) => props.theme.startFillingPanel.roleColor};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -39,6 +39,7 @@ const StyledBlock = styled.div`
 
   .add-user-to-room {
     white-space: nowrap;
+    color: ${(props) => props.theme.startFillingPanel.addUserToRoomColor};
   }
 `;
 
@@ -57,35 +58,41 @@ const InviteUserForRolePanel = ({
   roomId,
   theme,
   tReady,
-  t,
 }) => {
+  const t = i18n.getFixedT(null, [
+    "StartFillingPanel",
+    "People",
+    "PeopleSelector",
+  ]);
   const [isShowLoader, setIsShowLoader] = useState(
-    !tReady || !members.length || isLoadingFetchMembers
+    !members.length || isLoadingFetchMembers
   );
 
   useEffect(() => {
-    setIsShowLoader(!tReady || !members.length || isLoadingFetchMembers);
-  }, [tReady, members.length, isLoadingFetchMembers]);
+    setIsShowLoader(!members.length || isLoadingFetchMembers);
+  }, [members.length, isLoadingFetchMembers]);
 
   const blockNode = (
     <StyledBlock>
-      <div className="role">({currentRole.title})</div>
-      <Link
-        className="add-user-to-room"
-        fontWeight="600"
-        type="action"
-        isHovered
-        onClick={onOpenAddUserToRoom}
-      >
-        {t("StartFillingPanel:AddUserToRoom")}
-      </Link>
-    </StyledBlock>
-  );
-
-  const blockNodeLoader = (
-    <StyledBlock>
-      <RectangleLoader width="140" height="22" />
-      <RectangleLoader width="110" height="20" />
+      {tReady ? (
+        <>
+          <div className="role">({currentRole.title})</div>
+          <Link
+            className="add-user-to-room"
+            fontWeight="600"
+            type="action"
+            isHovered
+            onClick={onOpenAddUserToRoom}
+          >
+            {t("StartFillingPanel:AddUserToRoom")}
+          </Link>
+        </>
+      ) : (
+        <>
+          <RectangleLoader width="140" height="22" />
+          <RectangleLoader width="110" height="20" />
+        </>
+      )}
     </StyledBlock>
   );
 
@@ -97,12 +104,7 @@ const InviteUserForRolePanel = ({
     <Portal
       element={
         <>
-          <Backdrop
-            style={{ backdropFilter: "blur(8px)" }}
-            visible={visible}
-            zIndex={310}
-            isAside={true}
-          />
+          <Backdrop strongBlur visible={visible} zIndex={310} isAside={true} />
           <StyledAside
             visible={visible}
             onClose={onClose}
@@ -141,11 +143,12 @@ const InviteUserForRolePanel = ({
                 emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
                 searchEmptyScreenImage={emptyScreenImage}
                 searchEmptyScreenHeader={t("People:NotFoundUsers")}
-                searchEmptyScreenDescription={t("SearchEmptyDescription")}
+                searchEmptyScreenDescription={t(
+                  "PeopleSelector:SearchEmptyDescription"
+                )}
                 selectByClick={true}
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
-                blockNodeLoader={blockNodeLoader}
                 isLoading={isShowLoader}
               />
             )}
@@ -166,6 +169,8 @@ const InviteUserForRolePanel = ({
   );
 };
 
-export default withTranslation(["StartFillingPanel", "PeopleSelector"])(
-  InviteUserForRolePanel
-);
+export default withTranslation([
+  "StartFillingPanel",
+  "PeopleSelector",
+  "People",
+])(InviteUserForRolePanel);

@@ -4,9 +4,7 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  width: 294px;
-  padding: 16px 15px;
+  width: 264px;
 `;
 
 export const ColumnHeader = styled.div`

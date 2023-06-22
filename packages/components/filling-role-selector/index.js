@@ -30,6 +30,11 @@ const FillingRoleSelector = ({
   titleTooltip,
   listHeader,
   visibleTooltip,
+  tooltipLoader,
+  isLoadingText,
+  isShowLoader,
+  listLoader,
+  listHeaderLoader,
   ...props
 }) => {
   const capitalize = (str) => {
@@ -43,83 +48,94 @@ const FillingRoleSelector = ({
     return { ...item, title };
   });
 
-  const everyoneRoleNode = (
-    <>
-      <StyledRow className="row">
-        <StyledNumber>1</StyledNumber>
-        <StyledEveryoneRoleIcon />
-        <StyledEveryoneRoleContainer>
-          <div className="title">
-            <StyledRole>{capitalizedRoles[0].title}</StyledRole>
-          </div>
-          <div className="role-description truncate">{descriptionEveryone}</div>
-        </StyledEveryoneRoleContainer>
-      </StyledRow>
-    </>
-  );
-
   return (
     <StyledFillingRoleSelector {...props}>
-      <StyledTooltip className="tooltip" visibleTooltip={visibleTooltip}>
-        <div className="title-container">
-          <div className="title-tooltip">
-            <ReactSVG className="help-icon" src={TooltipSvgUrl} />
-            <div className="title">{titleTooltip}</div>
+      {isLoadingText ? (
+        tooltipLoader
+      ) : (
+        <StyledTooltip className="tooltip" visibleTooltip={visibleTooltip}>
+          <div className="title-container">
+            <div className="title-tooltip">
+              <ReactSVG className="help-icon" src={TooltipSvgUrl} />
+              <div className="title">{titleTooltip}</div>
+            </div>
+
+            <ReactSVG
+              className="cross-icon"
+              src={CrossIcon}
+              onClick={onCloseTooltip}
+            />
           </div>
 
-          <ReactSVG
-            className="cross-icon"
-            src={CrossIcon}
-            onClick={onCloseTooltip}
-          />
-        </div>
+          <div className="description">{descriptionTooltip}</div>
+        </StyledTooltip>
+      )}
 
-        <div className="description">{descriptionTooltip}</div>
-      </StyledTooltip>
+      {isLoadingText ? (
+        listHeaderLoader
+      ) : (
+        <div className="list-header truncate">{listHeader}:</div>
+      )}
 
-      <div className="list-header truncate">{listHeader}:</div>
-
-      <Scrollbar stype="mediumBlack">
-        {everyoneRoleNode}
-        {capitalizedRoles.map((role, index) => {
-          if (index === 0) return;
-          const roleWithUser = users?.find((user) => user.role === role.title);
-
-          return roleWithUser ? (
-            <StyledUserRow className="row" key={index}>
-              <div className="content">
-                <StyledNumber>{index + 1}</StyledNumber>
-
-                <StyledAvatar src={roleWithUser.avatar} />
-                <div className="user-with-role">
-                  <StyledRole className="user truncate">
-                    {roleWithUser.displayName}
-                  </StyledRole>
-                  <StyledAssignedRole className="truncate">
-                    {roleWithUser.role}
-                  </StyledAssignedRole>
-                </div>
+      {isShowLoader ? (
+        listLoader
+      ) : (
+        <Scrollbar stype="mediumBlack">
+          <StyledRow className="row">
+            <StyledNumber>1</StyledNumber>
+            <StyledEveryoneRoleIcon />
+            <StyledEveryoneRoleContainer>
+              <div className="title">
+                <StyledRole>{capitalizedRoles[0].title}</StyledRole>
               </div>
-              <ReactSVG
-                className="remove-image"
-                src={RemoveSvgUrl}
-                onClick={() => onRemoveUser(roleWithUser.id)}
-              />
-            </StyledUserRow>
-          ) : (
-            <StyledRow className="row" key={index}>
-              <StyledNumber>{index + 1}</StyledNumber>
-              <StyledAddRoleButton
-                onClick={() => {
-                  onAddUser(role);
-                }}
-                color={`#` + role.color}
-              />
-              <StyledRole className="truncate">{role.title}</StyledRole>
-            </StyledRow>
-          );
-        })}
-      </Scrollbar>
+              <div className="role-description truncate">
+                {descriptionEveryone}
+              </div>
+            </StyledEveryoneRoleContainer>
+          </StyledRow>
+
+          {capitalizedRoles.map((role, index) => {
+            if (index === 0) return;
+            const roleWithUser = users?.find(
+              (user) => user.role === role.title
+            );
+
+            return roleWithUser ? (
+              <StyledUserRow className="row" key={index}>
+                <div className="content">
+                  <StyledNumber>{index + 1}</StyledNumber>
+
+                  <StyledAvatar src={roleWithUser.avatar} />
+                  <div className="user-with-role">
+                    <StyledRole className="user truncate">
+                      {roleWithUser.displayName}
+                    </StyledRole>
+                    <StyledAssignedRole className="truncate">
+                      {roleWithUser.role}
+                    </StyledAssignedRole>
+                  </div>
+                </div>
+                <ReactSVG
+                  className="remove-image"
+                  src={RemoveSvgUrl}
+                  onClick={() => onRemoveUser(roleWithUser.id)}
+                />
+              </StyledUserRow>
+            ) : (
+              <StyledRow className="row" key={index}>
+                <StyledNumber>{index + 1}</StyledNumber>
+                <StyledAddRoleButton
+                  onClick={() => {
+                    onAddUser(role);
+                  }}
+                  color={`#` + role.color}
+                />
+                <StyledRole className="truncate">{role.title}</StyledRole>
+              </StyledRow>
+            );
+          })}
+        </Scrollbar>
+      )}
     </StyledFillingRoleSelector>
   );
 };

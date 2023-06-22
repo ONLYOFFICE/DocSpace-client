@@ -1003,6 +1003,15 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
   });
 }
 
+export function getDashboard(folderId) {
+  const options = {
+    method: "get",
+    url: `files/${folderId}`,
+  };
+
+  return request(options);
+}
+
 export function getRolesUsersForFillingForm(fileId) {
   const options = {
     method: "get",

@@ -1,0 +1,35 @@
+import { CreatedBy } from "./CreatedBy.type";
+import { Security } from "./Security.type";
+import { UpdatedBy } from "./UpdatedBy.type";
+import { ViewAccessability } from "./ViewAccessability.type";
+
+export type File = {
+  folderId: number;
+  version: number;
+  versionGroup: number;
+  contentLength: string;
+  pureContentLength: number;
+  fileStatus: number;
+  mute: boolean;
+  viewUrl: string;
+  webUrl: string;
+  fileType: number;
+  fileExst: string;
+  comment: string;
+  thumbnailStatus: number;
+  denyDownload: boolean;
+  denySharing: boolean;
+  viewAccessability: ViewAccessability;
+  id: number;
+  rootFolderId: number;
+  canShare: boolean;
+  security: Security;
+  title: string;
+  access: number;
+  shared: boolean;
+  created: string;
+  createdBy: CreatedBy;
+  updated: string;
+  rootFolderType: number;
+  updatedBy: UpdatedBy;
+};

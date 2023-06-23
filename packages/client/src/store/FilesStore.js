@@ -286,6 +286,7 @@ class FilesStore {
   debounceRemoveFolders = debounce(() => {
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
+  
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
@@ -492,6 +493,10 @@ class FilesStore {
       });
     }
   };
+
+  setCategoryType = (categoryType)=>{
+    this.categoryType = categoryType
+  }
 
   setIsErrorRoomNotAvailable = (state) => {
     this.isErrorRoomNotAvailable = state;

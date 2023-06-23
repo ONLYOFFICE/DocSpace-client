@@ -61,7 +61,10 @@ const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
-const dashboardStore = new DashboardStore();
+const dashboardStore = new DashboardStore(
+  selectedFolderStore,
+  clientLoadingStore
+);
 
 const filesStore = new FilesStore(
   authStore,

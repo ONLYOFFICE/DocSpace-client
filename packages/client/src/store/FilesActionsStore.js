@@ -2023,10 +2023,34 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessability?.WebEdit;
     const canViewedDocs = item.viewAccessability?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
+    const {
+      id,
+      viewUrl,
+      providerKey,
+      fileStatus,
+      encrypted,
+      isFolder,
+      isDashboard,
+    } = item;
+
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
+
+    if (isDashboard) {
+      const { rootFolderType, title, id } = item;
+
+      const state = {
+        title,
+        isRoot: false,
+        rootFolderType,
+        isRoom: false,
+      };
+
+      return window.DocSpace.navigate(`/rooms/shared/${id}/dashboard`, {
+        state,
+      });
+    }
 
     if (isFolder) {
       const { isRoom, rootFolderType, title } = item;
@@ -2100,6 +2124,14 @@ class FilesActionStore {
 
     const isArchivedRoom = !!(CategoryType.Archive && urlFilter?.folder);
 
+    if (categoryType === CategoryType.Dashboard) {
+      const id = this.selectedFolderStore.parentId;
+
+      const path = getCategoryUrl(CategoryType.SharedRoom, id);
+
+      return this.backToParentFolder(path, true);
+    }
+
     if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
       if (isRoom) {
         return this.moveToRoomsPage();
@@ -2150,7 +2182,11 @@ class FilesActionStore {
 
     const filter = RoomsFilter.getDefault();
 
-    const path = getCategoryUrl(categoryType);
+    const isDasboard = categoryType === CategoryType.Dashboard;
+
+    const path = isDasboard
+      ? getCategoryUrl(CategoryType.Shared)
+      : getCategoryUrl(categoryType);
 
     const state = {
       title:
@@ -2171,7 +2207,7 @@ class FilesActionStore {
     });
   };
 
-  backToParentFolder = () => {
+  backToParentFolder = (path = null, fromDashboard = false) => {
     let id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
@@ -2184,12 +2220,15 @@ class FilesActionStore {
       title: navigationPath[0]?.title || "",
       isRoot: navigationPath.length === 1,
       rootFolderType: rootFolderType,
+      fromDashboard,
     };
 
-    window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${filter.toUrlParams()}`,
-      { state, replace: true }
-    );
+    const url = path ?? window.DocSpace.location.pathname;
+
+    window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
   };
 
   setGroupMenuBlocked = (blocked) => {

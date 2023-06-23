@@ -28,6 +28,7 @@ import {
   useOperations,
   useAccounts,
   useSettings,
+  useDashboard,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -111,6 +112,8 @@ const PureHome = (props) => {
     onClickBack,
 
     showFilterLoader,
+    fetchDashboard,
+    setCategoryType,
   } = props;
 
   const location = useLocation();
@@ -118,6 +121,13 @@ const PureHome = (props) => {
   const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
   const isDashboardPage = location.pathname.includes("dashboard");
+
+  useDashboard({
+    isDashboardPage,
+    setIsLoading,
+    fetchDashboard,
+    setCategoryType,
+  });
 
   const { onDrop } = useFiles({
     t,
@@ -314,12 +324,15 @@ export default inject(
     oformsStore,
     selectedFolderStore,
     clientLoadingStore,
+    dashboardStore,
   }) => {
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
       clearUploadedFilesHistory,
     } = uploadDataStore;
+
+    const { fetchDashboard } = dashboardStore;
 
     const {
       firstLoad,
@@ -330,15 +343,15 @@ export default inject(
       showFilterLoader,
     } = clientLoadingStore;
 
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
+    const setIsLoading = (param, withTimer = true) => {
+      setIsSectionFilterLoading(param, withTimer);
+      setIsSectionBodyLoading(param, withTimer);
     };
 
     const {
       fetchFiles,
       fetchRooms,
-
+      setCategoryType,
       selection,
       dragging,
       setDragging,
@@ -513,6 +526,8 @@ export default inject(
       onClickBack,
 
       showFilterLoader,
+      fetchDashboard,
+      setCategoryType,
     };
   }
 )(observer(Home));

@@ -107,9 +107,17 @@ export const getPasswordErrorMessage = (t, settings) => {
   } ${settings?.specSymbols ? t("Common:PasswordLimitSpecialSymbols") : ""}`;
 };
 
+/**
+ *
+ * @param {Location} location
+ * @returns {number}
+ */
+
 export const getCategoryType = (location) => {
   let categoryType = CategoryType.Shared;
   const { pathname } = location;
+
+  if (pathname.includes("dashboard")) return CategoryType.Dashboard;
 
   if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
@@ -192,7 +200,8 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 
     case CategoryType.Settings:
       return "/settings/common";
-
+    case CategoryType.Dashboard:
+      return `/rooms/shared/${folderId}/dashboard/filter`;
     default:
       throw new Error("Unknown category type");
   }

@@ -50,9 +50,14 @@ const Selector = ({
   selectByClick,
   onSelectUserForRole,
   blockNode,
-  blockNodeLoader,
+  withArrowButton,
+  withButtonsFooterVisible,
+  isDisabledAcceptButton,
+  onCheckSelectedItems,
 }) => {
-  const [footerVisible, setFooterVisible] = React.useState(false);
+  const [footerVisible, setFooterVisible] = React.useState(
+    withButtonsFooterVisible
+  );
 
   const [isSearch, setIsSearch] = React.useState(false);
 
@@ -70,6 +75,7 @@ const Selector = ({
       onSearch && onSearch(value);
 
       setIsSearch(true);
+      onCheckSelectedItems && onCheckSelectedItems(false);
     },
     [onSearch]
   );
@@ -209,18 +215,20 @@ const Selector = ({
       let isEqual = true;
 
       if (selectedItems.length !== newList.length) {
-        return setFooterVisible(true);
+        onCheckSelectedItems && onCheckSelectedItems(true);
+        return !withButtonsFooterVisible && setFooterVisible(true);
       }
 
       if (newList.length === 0 && selectedItems.length === 0) {
-        return setFooterVisible(false);
+        onCheckSelectedItems && onCheckSelectedItems(false);
+        return !withButtonsFooterVisible && setFooterVisible(false);
       }
 
       newList.forEach((item) => {
         isEqual = selectedItems.some((x) => x.id === item.id);
       });
 
-      return setFooterVisible(!isEqual);
+      return !withButtonsFooterVisible && setFooterVisible(!isEqual);
     },
     [selectedItems]
   );
@@ -272,7 +280,11 @@ const Selector = ({
 
   return (
     <StyledSelector id={id} className={className} style={style}>
-      <Header onBackClickAction={onBackClickAction} headerLabel={headerLabel} />
+      <Header
+        onBackClickAction={onBackClickAction}
+        headerLabel={headerLabel}
+        withArrowButton={withArrowButton}
+      />
 
       <Body
         footerVisible={footerVisible}
@@ -310,7 +322,6 @@ const Selector = ({
         searchLoader={searchLoader}
         rowLoader={rowLoader}
         blockNode={blockNode}
-        blockNodeLoader={blockNodeLoader}
         dataInPreparation={dataInPreparation}
       />
 
@@ -327,6 +338,7 @@ const Selector = ({
           onAccept={onAcceptAction}
           onCancel={onCancelAction}
           onChangeAccessRights={onChangeAccessRightsAction}
+          isDisabledAcceptButton={isDisabledAcceptButton}
         />
       )}
     </StyledSelector>
@@ -430,7 +442,8 @@ Selector.defaultProps = {
   withSelectAll: false,
   withAccessRights: false,
   withCancelButton: false,
-
+  withArrowButton: true,
+  withButtonsFooterVisible: false,
   selectedItems: [],
 };
 

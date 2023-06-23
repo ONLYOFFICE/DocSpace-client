@@ -9,7 +9,8 @@ const StyledBackdrop = styled.div`
   ${(props) =>
     props.needBackground &&
     css`
-      backdrop-filter: blur(3px);
+      backdrop-filter: ${(props) =>
+        props.strongBlur ? "blur(8px)" : "blur(3px)"};
     `};
   display: ${(props) => (props.visible ? "block" : "none")};
   height: 100vh;
@@ -19,7 +20,7 @@ const StyledBackdrop = styled.div`
   left: 0;
   top: 0;
   cursor: ${(props) =>
-    props.needBackground && !props.isModalDialog ? "pointer" : "default"}; ;
+    props.needBackground && !props.isModalDialog ? "pointer" : "default"};
 `;
 
 StyledBackdrop.defaultProps = {

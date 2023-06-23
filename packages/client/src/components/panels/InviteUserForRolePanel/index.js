@@ -65,32 +65,34 @@ const InviteUserForRolePanel = ({
     "PeopleSelector",
   ]);
   const [isShowLoader, setIsShowLoader] = useState(
-    !tReady || !members.length || isLoadingFetchMembers
+    !members.length || isLoadingFetchMembers
   );
 
   useEffect(() => {
-    setIsShowLoader(!tReady || !members.length || isLoadingFetchMembers);
-  }, [tReady, members.length, isLoadingFetchMembers]);
+    setIsShowLoader(!members.length || isLoadingFetchMembers);
+  }, [members.length, isLoadingFetchMembers]);
 
   const blockNode = (
     <StyledBlock>
-      <div className="role">({currentRole.title})</div>
-      <Link
-        className="add-user-to-room"
-        fontWeight="600"
-        type="action"
-        isHovered
-        onClick={onOpenAddUserToRoom}
-      >
-        {t("StartFillingPanel:AddUserToRoom")}
-      </Link>
-    </StyledBlock>
-  );
-
-  const blockNodeLoader = (
-    <StyledBlock>
-      <RectangleLoader width="140" height="22" />
-      <RectangleLoader width="110" height="20" />
+      {tReady ? (
+        <>
+          <div className="role">({currentRole.title})</div>
+          <Link
+            className="add-user-to-room"
+            fontWeight="600"
+            type="action"
+            isHovered
+            onClick={onOpenAddUserToRoom}
+          >
+            {t("StartFillingPanel:AddUserToRoom")}
+          </Link>
+        </>
+      ) : (
+        <>
+          <RectangleLoader width="140" height="22" />
+          <RectangleLoader width="110" height="20" />
+        </>
+      )}
     </StyledBlock>
   );
 
@@ -102,12 +104,7 @@ const InviteUserForRolePanel = ({
     <Portal
       element={
         <>
-          <Backdrop
-            style={{ backdropFilter: "blur(8px)" }}
-            visible={visible}
-            zIndex={310}
-            isAside={true}
-          />
+          <Backdrop strongBlur visible={visible} zIndex={310} isAside={true} />
           <StyledAside
             visible={visible}
             onClose={onClose}
@@ -152,7 +149,6 @@ const InviteUserForRolePanel = ({
                 selectByClick={true}
                 onSelectUserForRole={onSelectUserForRole}
                 blockNode={blockNode}
-                blockNodeLoader={blockNodeLoader}
                 isLoading={isShowLoader}
               />
             )}

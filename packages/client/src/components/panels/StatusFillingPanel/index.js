@@ -29,20 +29,19 @@ const StatusFillingPanel = (props) => {
     isVisible,
   } = props;
 
-  const [statusInfo, setStatusInfo] = useState([]);
+  const [fillingStatusInfo, setfillingStatusInfo] = useState([]);
   const scrollRef = useRef(null);
 
   useEffect(() => {
     getRolesUsersForFillingForm(selection?.id || fileId).then((res) => {
-      console.log(res), setStatusInfo(res);
+      setfillingStatusInfo(res);
     });
   }, []);
 
-  useEffect(() => {
-    Boolean(isVisible) && setStatusFillinglVisible(isVisible);
-  }, [isVisible]);
-
-  const onClose = () => setStatusFillinglVisible(false);
+  const onClose = () => {
+    setStatusFillinglVisible(false);
+    props.onClose && props.onClose();
+  };
 
   return (
     <StyledFillingStatusPanel>
@@ -84,7 +83,7 @@ const StatusFillingPanel = (props) => {
             />
           </Box>
 
-          <FillingStatusLine statusInfo={statusInfo} />
+          <FillingStatusLine fillingStatusInfo={fillingStatusInfo} />
         </StyledScrollbar>
 
         <div className="status-filling_footer">

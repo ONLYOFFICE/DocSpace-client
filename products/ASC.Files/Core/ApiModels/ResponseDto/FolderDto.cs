@@ -150,15 +150,27 @@ public class FolderDtoHelper : FileEntryDtoHelper
             {
                 new FormFillingQueue()
                 {
-                    Id = 1, Title = "everyone", Color = "fbcc86", Badge = 0, Queue = 1, Type = FormFillingQueueType.FromForm
+                    Id = 1, Title = "everyone", Color = "#fbcc86", Badge = 0, Queue = 1, Type = FormFillingQueueType.FromForm
                 },
                 new FormFillingQueue()
                 {
-                    Id = 2, Title = "accountant",Color = "70d3b0", Badge = 0, Queue = 2, Type = FormFillingQueueType.FromForm
+                    Id = 2, Title = "accountant",Color = "#70d3b0", Badge = 0, Queue = 2, Type = FormFillingQueueType.FromForm, Assigned = new EmployeeDto(){
+                        Id = Guid.Parse("a4d05126-d7e1-4e93-9cdd-51d9c149090d"),
+                        DisplayName = "Madelyn Septimus",
+                        AvatarSmall = "/static/images/default_user_photo_size_32-32.png",
+                        ProfileUrl = "http://localhost:8092/accounts/view/madelyn.septimus",
+                        HasAvatar = false
+                    }
                 },
                 new FormFillingQueue()
                 {
-                    Id = 3, Title = "director", Color = "bb85e7", Badge = 0, Queue = 3, Type = FormFillingQueueType.FromForm
+                    Id = 3, Title = "director", Color = "#bb85e7", Badge = 0, Queue = 3, Type = FormFillingQueueType.FromForm, Assigned = new EmployeeDto(){
+                        Id = Guid.Parse("33e27954-303e-4757-8efd-597d3d2a9f7e"),
+                        DisplayName = "Mark Bellos",
+                        AvatarSmall = "/static/images/default_user_photo_size_32-32.png",
+                        ProfileUrl = "http://localhost:8092/accounts/view/mark.bellos",
+                        HasAvatar = false
+                    }
                 },
                 new FormFillingQueue()
                 {

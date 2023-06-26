@@ -89,6 +89,12 @@ const RoomSelector = ({
   searchEmptyScreenImage,
   searchEmptyScreenHeader,
   searchEmptyScreenDescription,
+
+  withArrowButton,
+  withButtonsFooterVisible,
+  countRowLoader,
+  isDisabledAcceptButton,
+  onCheckSelectedItems,
 }) => {
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
   const [searchValue, setSearchValue] = React.useState("");
@@ -221,8 +227,13 @@ const RoomSelector = ({
           isMultiSelect={isMultiSelect}
           isContainer={isFirstLoad}
           isUser={false}
+          count={countRowLoader}
         />
       }
+      withArrowButton={withArrowButton}
+      withButtonsFooterVisible={withButtonsFooterVisible}
+      isDisabledAcceptButton={isDisabledAcceptButton}
+      onCheckSelectedItems={onCheckSelectedItems}
     />
   );
 };

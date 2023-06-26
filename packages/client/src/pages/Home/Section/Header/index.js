@@ -862,7 +862,8 @@ const SectionHeaderContent = (props) => {
 
   const insideTheRoom =
     categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Archive;
+    categoryType === CategoryType.Archive ||
+    categoryType === CategoryType.Dashboard;
 
   return (
     <Consumer key="header">

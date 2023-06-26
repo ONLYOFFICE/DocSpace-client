@@ -7,6 +7,7 @@ import SelectFileDialog from "../components/SelectFileDialog";
 import SelectFolderDialog from "../components/SelectFolderDialog";
 import StartFillingPanel from "../components/StartFillingPanel";
 import StatusFillingPanel from "../components/StatusFillingPanel";
+import SelectRoomPanel from "../components/SelectRoomPanel";
 
 const insertImageAction = "imageFileType";
 const mailMergeAction = "mailMergeFileType";
@@ -26,6 +27,8 @@ const withDialogs = (WrappedComponent) => {
     const [isStartFillingPanelVisible, setIsStartFillingPanelVisible] =
       useState(false);
     const [isStatusFillingPanelVisible, setIsStatusFillingPanelVisible] =
+      useState(false);
+    const [isSelectRoomPanelVisible, setIsSelectRoomPanelVisible] =
       useState(false);
 
     const { t } = useTranslation(["Editor", "Common"]);
@@ -256,11 +259,19 @@ const withDialogs = (WrappedComponent) => {
 
     //TODO: Delete
     const onClickStartFillingPanel = () => {
-      setIsStartFillingPanelVisible(true);
+      setIsStartFillingPanelVisible(!isStartFillingPanelVisible);
+    };
+    //TODO: Delete
+    const onClickSelectRoomPanel = () => {
+      setIsSelectRoomPanelVisible(!isSelectRoomPanelVisible);
     };
 
     const onClickStatusFillingPanel = () => {
-      setIsStatusFillingPanelVisible(!isStatusFillingPanelVisible);
+      setIsStatusFillingPanelVisible(true);
+    };
+
+    const onCloseStatusFillingPanel = () => {
+      setIsStatusFillingPanelVisible(false);
     };
 
     // const sharingDialog = (
@@ -302,6 +313,14 @@ const withDialogs = (WrappedComponent) => {
       />
     );
 
+    const selectRoomPanel = (
+      <SelectRoomPanel
+        successAuth={props.successAuth}
+        isVisible={isSelectRoomPanelVisible}
+        mfReady={mfReady}
+      />
+    );
+
     const startFillingPanel = (
       <StartFillingPanel
         successAuth={props.successAuth}
@@ -315,6 +334,7 @@ const withDialogs = (WrappedComponent) => {
         successAuth={props.successAuth}
         isVisible={isStatusFillingPanelVisible}
         fileId={fileId}
+        onClose={onCloseStatusFillingPanel}
         mfReady={mfReady}
       />
     );
@@ -336,8 +356,10 @@ const withDialogs = (WrappedComponent) => {
         isFolderDialogVisible={isFolderDialogVisible}
         startFillingPanel={startFillingPanel}
         statusFillingPanel={statusFillingPanel}
+        selectRoomPanel={selectRoomPanel}
         onClickStartFillingPanel={onClickStartFillingPanel}
         onClickStatusFillingPanel={onClickStatusFillingPanel}
+        onClickSelectRoomPanel={onClickSelectRoomPanel}
       />
     );
   };

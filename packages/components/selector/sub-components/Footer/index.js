@@ -35,6 +35,7 @@ const Footer = React.memo(
     onAccept,
     onCancel,
     onChangeAccessRights,
+    isDisabledAcceptButton,
   }) => {
     const label =
       selectedItemsCount && isMultiSelect
@@ -48,6 +49,7 @@ const Footer = React.memo(
           label={label}
           primary
           scale
+          isDisabled={isDisabledAcceptButton}
           size={"normal"}
           onClick={onAccept}
         />

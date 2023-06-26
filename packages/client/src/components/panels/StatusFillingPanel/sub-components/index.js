@@ -1,5 +1,5 @@
 import { ReactSVG } from "react-svg";
-import { mockData } from "./mockData.js";
+// import { mockData } from "./mockData.js";
 import { FillingStatusContainer } from "./StyledFillingStatusLine";
 import FillingStatusAccordion from "./FillingStatusAccordion";
 import StatusDoneReactSvgUrl from "PUBLIC_DIR/images/done.react.svg?url";
@@ -8,26 +8,24 @@ import StatusInterruptedSvgUrl from "PUBLIC_DIR/images/interrupted.react.svg?url
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 
-const FillingStatusLine = ({ statusDone, statusInterrupted }) => {
+const FillingStatusLine = ({
+  statusDone,
+  statusInterrupted,
+  fillingStatusInfo,
+}) => {
   return (
     <FillingStatusContainer
       isDone={statusDone}
       isInterrupted={statusInterrupted}
     >
-      {mockData.map((data) => {
+      {fillingStatusInfo.map((data) => {
         return (
           <FillingStatusAccordion
             key={data.id}
-            displayName={data.displayName}
-            avatar={data.avatar}
-            role={data.role}
-            startFilling={data.startFillingStatus}
-            startFillingDate={data.startFillingDate}
-            filledAndSigned={data.filledAndSignedStatus}
-            filledAndSignedDate={data.filledAndSignedDate}
-            returnedByUser={data.returnedByUser}
-            returnedDate={data.returnedByUserDate}
-            comment={data.comment}
+            displayName={data.assigned.displayName}
+            avatar={data.assigned.avatarSmall}
+            role={data.title}
+            formFillingSteps={data.formFillingSteps}
             isDone={statusDone}
             isInterrupted={statusInterrupted}
           />

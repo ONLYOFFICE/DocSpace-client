@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactSVG } from "react-svg";
-import { AccordionItem } from "./StyledFillingStatusLine";
+import { observer, inject } from "mobx-react";
 
+import { AccordionItem } from "./StyledFillingStatusLine";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
@@ -11,26 +12,41 @@ const FillingStatusAccordion = ({
   avatar,
   displayName,
   role,
-  startFilling,
-  startFillingDate,
-  filledAndSigned,
-  filledAndSignedDate,
-  returnedByUser,
-  returnedDate,
-  comment,
-  isDone,
+  formFillingSteps,
+
   isInterrupted,
+  locale,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const convertTime = (date) => {
+    return new Date(date).toLocaleString(locale);
+  };
+
+  const statusType = {
+    1: "Start filling",
+    2: "Filled and signed",
+    3: "Interrupted",
+  };
+
+  const lastStatusType = formFillingSteps.at(-1);
+
+  useEffect(() => {
+    if (lastStatusType?.formFilingStatusType === 1) setIsStarted(true);
+    if (lastStatusType?.formFilingStatusType === 2) setIsFilled(true);
+  }, []);
+
   return (
     <AccordionItem
       isOpen={isOpen}
-      isDone={isDone}
+      isStarted={isStarted}
+      isDone={isFilled}
       isInterrupted={isInterrupted}
     >
       <div className="accordion-item-info" onClick={onClickHandler}>
@@ -51,68 +67,64 @@ const FillingStatusAccordion = ({
         <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
       </div>
 
-      {isOpen ? (
-        <>
-          <div className="accordion-item-history">
-            <div className="accordion-item-wrapper">
-              <Text fontSize="12px" lineHeight="16px" className="status-text">
-                {startFilling}
-              </Text>
-            </div>
-
-            <Text fontSize="12px" lineHeight="16px" className="status-date">
-              {startFillingDate}
-            </Text>
-          </div>
-
-          {returnedByUser && (
+      {isOpen &&
+        formFillingSteps.map((step) => (
+          <>
             <div className="accordion-item-history">
               <div className="accordion-item-wrapper">
-                <Text fontSize="12px" lineHeight="16px" className="status-text">
-                  {returnedByUser}
+                <Text
+                  fontSize="12px"
+                  lineHeight="16px"
+                  className={isFilled ? "filled-status-text" : "status-text"}
+                >
+                  {statusType[step.formFilingStatusType]}
                 </Text>
-              </div>
-
-              <Text fontSize="12px" lineHeight="16px" className="status-date">
-                {returnedDate}
-              </Text>
-            </div>
-          )}
-
-          {comment && (
-            <div className="accordion-item-history">
-              <div className="accordion-item-wrapper">
-                <Text fontSize="12px" lineHeight="16px" className="status-text">
-                  {comment}
+                <Text fontSize="12px" lineHeight="16px" className="status-date">
+                  {convertTime(step.date)}
                 </Text>
               </div>
             </div>
-          )}
 
-          {isDone && (
-            <div className="accordion-item-history">
-              <div className="accordion-item-wrapper">
-                <Text className="filled-status-text">{filledAndSigned}</Text>
+            {step.comment && (
+              <div className="accordion-item-history">
+                <div className="accordion-item-wrapper">
+                  <Text
+                    fontSize="12px"
+                    lineHeight="16px"
+                    className="status-text"
+                  >
+                    {step.comment}
+                  </Text>
+                </div>
               </div>
+            )}
+          </>
+        ))}
 
-              <Text fontSize="12px" lineHeight="16px" className="status-date">
-                {filledAndSignedDate}
-              </Text>
-            </div>
-          )}
-        </>
-      ) : (
+      {!isOpen && lastStatusType && (
         <div className="accordion-item-history">
           <div className="accordion-item-wrapper">
-            <Text className="filled-status-text">{filledAndSigned}</Text>
+            <Text
+              fontSize="12px"
+              lineHeight="16px"
+              className={isFilled ? "filled-status-text" : "status-text"}
+            >
+              {statusType[lastStatusType?.formFilingStatusType]}
+            </Text>
+            <Text fontSize="12px" lineHeight="16px" className="status-date">
+              {convertTime(lastStatusType?.date)}
+            </Text>
           </div>
-
-          <Text fontSize="12px" lineHeight="16px" className="status-date">
-            {filledAndSignedDate}
-          </Text>
         </div>
       )}
     </AccordionItem>
   );
 };
-export default FillingStatusAccordion;
+export default inject(({ auth }) => {
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+  return {
+    locale,
+  };
+})(observer(FillingStatusAccordion));

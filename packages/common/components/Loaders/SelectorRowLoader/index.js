@@ -47,6 +47,7 @@ const SelectorRowLoader = ({
   isMultiSelect,
   isContainer,
   isUser,
+  count,
   ...rest
 }) => {
   const getRowItem = (key) => {
@@ -75,7 +76,9 @@ const SelectorRowLoader = ({
 
   const getRowItems = () => {
     const rows = [];
-    for (let i = 0; i < 20; i++) {
+    const quantity = count || 20;
+
+    for (let i = 0; i < quantity; i++) {
       rows.push(getRowItem(i));
     }
 

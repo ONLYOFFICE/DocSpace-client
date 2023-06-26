@@ -1,4 +1,5 @@
 {
+  "AddToRoom": "Add to room",
   "AddUserToRoom": "Add user to room",
   "DescriptionEveryone": "The form is available for filling for all room members",
   "DescriptionTooltip": "Forms filled by the users of the first role are passed over to the next roles in the list for filling the corresponding fields.",

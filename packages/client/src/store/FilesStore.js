@@ -286,6 +286,7 @@ class FilesStore {
   debounceRemoveFolders = debounce(() => {
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
+  
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
@@ -492,6 +493,10 @@ class FilesStore {
       });
     }
   };
+
+  setCategoryType = (categoryType)=>{
+    this.categoryType = categoryType
+  }
 
   setIsErrorRoomNotAvailable = (state) => {
     this.isErrorRoomNotAvailable = state;
@@ -1498,6 +1503,7 @@ class FilesStore {
               this.setIsEmptyPage(isEmptyList);
             }
 
+            this.dashboardStore.setBoards([]);
             this.setFolders(data.folders);
             this.setFiles([]);
           });
@@ -1617,6 +1623,8 @@ class FilesStore {
   getFilesContextOptions = (item) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
+    const isBoard = item.type === FolderType.Dashboard;
+
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
@@ -2006,7 +2014,10 @@ class FilesStore {
       roomOptions = this.removeSeparator(roomOptions);
 
       return roomOptions;
-    } else {
+    } else if (isBoard) {
+      return ["open-board", "link-for-room-members", "show-info"];
+    }
+    {
       let folderOptions = [
         "select",
         "open",
@@ -3070,7 +3081,11 @@ class FilesStore {
   }
 
   get isEmptyFilesList() {
-    const filesList = [...this.files, ...this.folders];
+    const filesList = [
+      ...this.files,
+      ...this.folders,
+      ...this.dashboardStore.boards,
+    ];
     return filesList.length <= 0;
   }
 

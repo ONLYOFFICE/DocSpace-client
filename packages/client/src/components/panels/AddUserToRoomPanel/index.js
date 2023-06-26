@@ -75,6 +75,7 @@ const AddUserToRoomPanel = ({
           zIndex={410}
           onAccept={onAddToRoom}
           existUsers={existUsers}
+          acceptButtonLabel={t("StartFillingPanel:AddToRoom")}
           isMultiSelect
           withSelectAll={false}
           withSelectExistUsers

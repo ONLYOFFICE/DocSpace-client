@@ -90,7 +90,7 @@ function Column(props: PropsWithChildren<ColumnProps>) {
       <ColumnHeader>
         <ColumnCircle color={props.color} />
         <ColumnTitle>{props.title}</ColumnTitle>
-        <ColumnUsers>{props.user}</ColumnUsers>
+        <ColumnUsers>{props.assigned?.displayName}</ColumnUsers>
         <ColumnActions>
           <Badge
             label={props.badge}

@@ -13,7 +13,13 @@ export type RoleTypeOwn = {
 };
 
 export interface RoleDefaultType extends RoleTypeOwn {
-  user: string;
+  assigned?: {
+    id: string;
+    hasAvatar: boolean;
+    profileUrl: string;
+    avatarSmall: string;
+    displayName: string;
+  };
   color: string;
   onClickLocation?: VoidFunction;
   type: RoleTypeEnum.Default;

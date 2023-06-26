@@ -117,15 +117,7 @@ function Table({ roles }: TableProps) {
         filesLength={3}
       >
         {roles.map((role) => (
-          <TableRow
-            id={role.id}
-            key={role.id}
-            title={role.title}
-            queue={role.queue}
-            color={role.color}
-            badge={role.badge}
-            roleType={role.roleType}
-          />
+          <TableRow key={role.id} {...role} />
         ))}
       </TableBody>
     </TableContainer>

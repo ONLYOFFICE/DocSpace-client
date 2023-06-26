@@ -1,8 +1,8 @@
 import { useContext, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import Column from "@docspace/components/Column";
-import Card from "@docspace/components/Card";
+import Column from "@docspace/common/components/Column";
+import Card from "@docspace/common/components/Card";
 import { Context } from "@docspace/components/utils/context";
 
 import List from "./List";
@@ -10,17 +10,15 @@ import Table from "./Table";
 
 import { DashboardContainer } from "./Dashboard.styled";
 
-import TableProps from "./Table/Table.porps";
 import DashboardProps from "./Dashboard.props";
-
-import { ContextType, InjectType } from "./types";
+import { ContextType, StoreType } from "./types";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 
-function Dashboard({ viewAs, setViewAs }: DashboardProps) {
+function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   useLayoutEffect(() => {
@@ -97,43 +95,6 @@ function Dashboard({ viewAs, setViewAs }: DashboardProps) {
     },
   ];
 
-  const roles: TableProps["roles"] = [
-    {
-      id: 1,
-      title: "Сотрудник",
-      color: "#a3c3fa",
-      roleType: "default",
-      queue: "1",
-    },
-    {
-      id: 2,
-      title: "Бухгалтер",
-      color: "#CBDFB7",
-      roleType: "default",
-      queue: "2",
-      badge: 2,
-    },
-    {
-      id: 3,
-      title: "Директор",
-      color: "#D2AFC6",
-      roleType: "default",
-      queue: "3",
-    },
-    {
-      id: 4,
-      title: "Готовые",
-      queue: "Done",
-      roleType: "done",
-    },
-    {
-      id: 5,
-      title: "Отказ",
-      queue: "Interrupted",
-      roleType: "interrupted",
-    },
-  ];
-
   const getOptions = () => [
     {
       key: "link_for_room_members",
@@ -180,9 +141,9 @@ function Dashboard({ viewAs, setViewAs }: DashboardProps) {
 
   return (
     <DashboardContainer>
-      {columns.map(({ id, user, title, color, cards, badge }) => (
-        <Column key={id} user={user} title={title} color={color} badge={badge}>
-          {cards?.map((card) => (
+      {roles.map((role) => (
+        <Column key={role.id} {...role}>
+          {columns[0].cards?.map((card) => (
             <Card
               key={card.id}
               username={card.username}
@@ -191,34 +152,16 @@ function Dashboard({ viewAs, setViewAs }: DashboardProps) {
           ))}
         </Column>
       ))}
-
-      <Column as="accepted" title="Готовые" getOptions={getOptions}>
-        {columns[0].cards?.map((card) => (
-          <Card
-            key={card.id}
-            username={card.username}
-            filename={card.filename}
-          />
-        ))}
-      </Column>
-      <Column as="cancelled" title="Отказы" getOptions={getOptions}>
-        {columns[0].cards?.map((card) => (
-          <Card
-            key={card.id}
-            username={card.username}
-            filename={card.filename}
-          />
-        ))}
-      </Column>
     </DashboardContainer>
   );
 }
 
-export default inject<InjectType>(({ dashboardStore }) => {
-  const { viewAs, setViewAs } = dashboardStore;
+export default inject<StoreType>(({ dashboardStore }) => {
+  const { viewAs, setViewAs, roles } = dashboardStore;
 
   return {
     viewAs,
     setViewAs,
+    roles,
   };
 })(observer(Dashboard));

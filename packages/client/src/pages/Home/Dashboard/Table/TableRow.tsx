@@ -18,7 +18,7 @@ import Icon from "../Icon";
 import { TableRowProps } from "./Table.porps";
 import { ParamType } from "../types";
 
-function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
+function TableRow({ queue, title, id, type, color, badge }: TableRowProps) {
   const { fileId } = useParams<ParamType>();
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
             forwardedRef={undefined}
           >
             <div className="table-container_element">
-              <Icon size="small" roleType={roleType} color={color} />
+              <Icon size="small" type={type} color={color} />
             </div>
             <Checkbox
               className="table-container_row-checkbox"

@@ -1,14 +1,9 @@
-import IconProps from "../Icon/Icon.props";
+import { IRole } from "@docspace/common/Models";
 
 interface TableProps {
-  roles: TableRowProps[];
+  roles: IRole[];
 }
 
 export default TableProps;
 
-export type TableRowProps = Omit<IconProps, "size"> & {
-  id: number;
-  queue: string;
-  title: string;
-  badge?: number;
-};
+export type TableRowProps = IRole;

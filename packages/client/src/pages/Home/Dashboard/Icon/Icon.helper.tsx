@@ -6,11 +6,8 @@ import BoardRoleInterrupted24SvgIcon from "PUBLIC_DIR/images/icons/24/board_role
 import BoardRoleDone32SvgIcon from "PUBLIC_DIR/images/icons/32/board_role_done.svg";
 import BoardRoleInterrupted32SvgIcon from "PUBLIC_DIR/images/icons/32/board_role_interrupted.svg";
 
-import IconProps, {
-  DefaultIconProps,
-  IconDoneProps,
-  IconInterruptedProps,
-} from "./Icon.props";
+import IconProps, { IconDoneProps, IconInterruptedProps } from "./Icon.props";
+import { RoleTypeEnum } from "@docspace/common/types";
 
 export const icons = {
   small: {
@@ -24,13 +21,16 @@ export const icons = {
 };
 
 export function isDone(props: IconProps): props is IconDoneProps {
-  return props.roleType === "done";
+  return props.type === RoleTypeEnum.Done;
 }
 export function isInterrupted(props: IconProps): props is IconInterruptedProps {
-  return props.roleType === "interrupted";
+  return props.type === RoleTypeEnum.Interrupted;
 }
 
-export const DefaultIcon = ({ color, size }: DefaultIconProps) => {
+export const DefaultIcon = ({
+  color,
+  size,
+}: Pick<IconProps, "color" | "size">) => {
   const id = useId();
 
   switch (size) {

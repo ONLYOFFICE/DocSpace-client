@@ -13,7 +13,7 @@ import Icon from "../Icon";
 import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
 import { ListRowProps } from "./List.props";
-import { InjectType, ParamType } from "../types";
+import { StoreType, ParamType } from "../types";
 
 function ListRow({
   role,
@@ -40,8 +40,8 @@ function ListRow({
   };
 
   const element = useMemo(
-    () => <Icon size="medium" roleType={role.roleType} color={role.color} />,
-    [role.roleType, role.color]
+    () => <Icon size="medium" type={role.type} color={role.color} />,
+    [role.type, role.color]
   );
 
   const onSelect = (checked: boolean, role: any) => {
@@ -102,7 +102,7 @@ function ListRow({
   );
 }
 
-export default inject<InjectType>(({ auth }) => {
+export default inject<StoreType>(({ auth }) => {
   const theme = (auth.settingsStore as unknown as SettingsStore).theme;
 
   return {

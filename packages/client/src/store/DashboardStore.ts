@@ -9,7 +9,7 @@ import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import api from "@docspace/common/api";
 
-import type { IDashboard } from "@docspace/common/Models";
+import type { IDashboard, IRole } from "@docspace/common/Models";
 import type { Folder as FolderInfoType } from "@docspace/common/types";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
@@ -19,6 +19,7 @@ class DashboardStore {
   public viewAs!: string;
   public boards: unknown[] = [];
   public dashboard?: IDashboard;
+  private _roles: IRole[] = [];
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -27,6 +28,8 @@ class DashboardStore {
     makeAutoObservable(this);
     this.initViewAs();
   }
+
+  //#region private method
 
   private initViewAs = (): void => {
     const viewAs =
@@ -77,11 +80,26 @@ class DashboardStore {
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
+  //#endregion
+
+  //#region getter
+
+  public get roles() {
+    return this._roles;
+  }
+  //#endregion
+
+  //#region public method
+
   public setViewAs = (viewAs: string): void => {
     console.log("DashboardStore setViewAs", viewAs);
 
     this.viewAs = viewAs;
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
+  };
+
+  public setRoles = (roles: IRole[]) => {
+    this._roles = roles;
   };
 
   public setBoards(boards: unknown[]) {
@@ -97,8 +115,12 @@ class DashboardStore {
   ): Promise<IDashboard> => {
     try {
       const dashboard: IDashboard = await api.files.getDashboard(fileId);
-      console.log({ dashboard });
+
+      console.log({ role: dashboard.current.fillQueue });
+
+      this.setRoles(dashboard.current.fillQueue);
       this.setDashboard(dashboard);
+
       await this.settingUpNavigationPath(dashboard);
 
       return dashboard;
@@ -121,6 +143,8 @@ class DashboardStore {
       "dashboard"
     );
   }
+
+  //#endregion
 }
 
 export default DashboardStore;

@@ -334,6 +334,7 @@ const withDialogs = (WrappedComponent) => {
         successAuth={props.successAuth}
         isVisible={isStatusFillingPanelVisible}
         fileId={fileId}
+        fileInfo={fileInfo}
         onClose={onCloseStatusFillingPanel}
         mfReady={mfReady}
       />

@@ -531,6 +531,19 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsFolder = () => {
     const isDisabled = isRecycleBinFolder || isRoom;
 
+    if (isDasboardPage) {
+      return [
+        {
+          id: "header_option_link-for-room-members",
+          key: "link-for-room-members",
+          label: t("LinkForRoomMembers"),
+          onClick: onCopyLinkAction,
+          disabled: isRecycleBinFolder || isPersonalRoom,
+          icon: InvitationLinkReactSvgUrl,
+        },
+      ];
+    }
+
     if (isArchiveFolder) {
       return [
         {

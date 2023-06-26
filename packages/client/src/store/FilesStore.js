@@ -52,7 +52,6 @@ class FilesStore {
   treeFoldersStore;
   filesSettingsStore;
   thirdPartyStore;
-  dashboardStore;
   clientLoadingStore;
 
   accessRightsStore;
@@ -75,6 +74,7 @@ class FilesStore {
 
   files = [];
   folders = [];
+  boards = [];
 
   selection = [];
   bufferSelection = null;
@@ -138,7 +138,6 @@ class FilesStore {
     filesSettingsStore,
     thirdPartyStore,
     accessRightsStore,
-    dashboardStore,
     clientLoadingStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
@@ -152,7 +151,6 @@ class FilesStore {
     this.filesSettingsStore = filesSettingsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.accessRightsStore = accessRightsStore;
-    this.dashboardStore = dashboardStore;
     this.clientLoadingStore = clientLoadingStore;
 
     this.roomsController = new AbortController();
@@ -286,7 +284,6 @@ class FilesStore {
   debounceRemoveFolders = debounce(() => {
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
-  
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
@@ -494,9 +491,9 @@ class FilesStore {
     }
   };
 
-  setCategoryType = (categoryType)=>{
-    this.categoryType = categoryType
-  }
+  setCategoryType = (categoryType) => {
+    this.categoryType = categoryType;
+  };
 
   setIsErrorRoomNotAvailable = (state) => {
     this.isErrorRoomNotAvailable = state;
@@ -751,6 +748,10 @@ class FilesStore {
     this.selection = [];
     this.bufferSelection = null;
     this.selected = "close";
+  };
+
+  setBoards = (boards) => {
+    this.boards = boards;
   };
 
   setFiles = (files) => {
@@ -1274,7 +1275,7 @@ class FilesStore {
             (folder) => folder?.type === 22
           );
 
-          this.dashboardStore.setBoards(dashboards);
+          this.setBoards(dashboards);
 
           this.setFolders(isPrivacyFolder && isMobile ? [] : folders);
           this.setFiles(isPrivacyFolder && isMobile ? [] : data.files);
@@ -1503,7 +1504,7 @@ class FilesStore {
               this.setIsEmptyPage(isEmptyList);
             }
 
-            this.dashboardStore.setBoards([]);
+            this.setBoards([]);
             this.setFolders(data.folders);
             this.setFiles([]);
           });
@@ -2610,6 +2611,21 @@ class FilesStore {
     }
   };
 
+  getUrlToBoard(folderId) {
+    const proxyURL =
+      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+
+    const homepage = config?.homepage ?? "";
+
+    return combineUrl(
+      proxyURL,
+      homepage,
+      "rooms/shared",
+      folderId.toString(),
+      "dashboard"
+    );
+  }
+
   get filesList() {
     const { getIcon } = this.filesSettingsStore;
     //return [...this.folders, ...this.files];
@@ -2623,7 +2639,7 @@ class FilesStore {
       return secondValue - firstValue;
     });
 
-    const items = [...newFolders, ...this.dashboardStore.boards, ...this.files];
+    const items = [...newFolders, ...this.boards, ...this.files];
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
@@ -2721,7 +2737,7 @@ class FilesStore {
       const href = isRecycleBinFolder
         ? null
         : isDashboard
-        ? this.dashboardStore.getUrlToBoard(id)
+        ? this.getUrlToBoard(id)
         : previewUrl
         ? previewUrl
         : !isFolder
@@ -3081,11 +3097,7 @@ class FilesStore {
   }
 
   get isEmptyFilesList() {
-    const filesList = [
-      ...this.files,
-      ...this.folders,
-      ...this.dashboardStore.boards,
-    ];
+    const filesList = [...this.files, ...this.folders, ...this.boards];
     return filesList.length <= 0;
   }
 

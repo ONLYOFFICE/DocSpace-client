@@ -17,7 +17,6 @@ const DEFAULT_VIEW_AS_VALUE = "dashboard";
 
 class DashboardStore {
   public viewAs!: string;
-  public boards: unknown[] = [];
   public dashboard?: IDashboard;
   private _roles: IRole[] = [];
 
@@ -102,10 +101,6 @@ class DashboardStore {
     this._roles = roles;
   };
 
-  public setBoards(boards: unknown[]) {
-    this.boards = boards;
-  }
-
   public setDashboard = (dashboard: IDashboard) => {
     this.dashboard = dashboard;
   };
@@ -128,21 +123,6 @@ class DashboardStore {
       return Promise.reject(error);
     }
   };
-
-  public getUrlToBoard(folderId: number) {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
-
-    const homepage = config?.homepage ?? "";
-
-    return combineUrl(
-      proxyURL,
-      homepage,
-      "rooms/shared",
-      folderId.toString(),
-      "dashboard"
-    );
-  }
 
   //#endregion
 }

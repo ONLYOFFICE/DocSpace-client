@@ -13,7 +13,6 @@ const FillingStatusAccordion = ({
   displayName,
   role,
   formFillingSteps,
-
   isInterrupted,
   locale,
 }) => {
@@ -64,7 +63,10 @@ const FillingStatusAccordion = ({
             <Text className="accordion-role">{role}</Text>
           </Box>
         </Box>
-        <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
+
+        {formFillingSteps.length > 1 && (
+          <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
+        )}
       </div>
 
       {isOpen &&

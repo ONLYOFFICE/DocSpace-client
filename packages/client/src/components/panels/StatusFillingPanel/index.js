@@ -9,8 +9,6 @@ import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 import Box from "@docspace/components/box";
 import IconButton from "@docspace/components/icon-button";
-import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";
-import ButtonFileReactSvgUrl from "PUBLIC_DIR/images/button.file.react.svg?url";
 
 import FillingStatusLine from "./sub-components";
 
@@ -27,10 +25,15 @@ const StatusFillingPanel = (props) => {
     selection,
     fileId,
     isVisible,
+    checkAndOpenLocationAction,
+    fileInfo,
   } = props;
 
   const [fillingStatusInfo, setfillingStatusInfo] = useState([]);
   const scrollRef = useRef(null);
+
+  const displayName = selection?.createdBy?.displayName;
+  const name = fileInfo?.createdBy?.displayName;
 
   useEffect(() => {
     getRolesUsersForFillingForm(selection?.id || fileId).then((res) => {
@@ -67,19 +70,21 @@ const StatusFillingPanel = (props) => {
             <div className="item-title">
               <ReactSVG
                 className="icon"
-                src={ButtonFileReactSvgUrl}
+                src={selection?.icon || fileInfo?.icon}
                 wrapper="span"
               />
-              <span className="name">Elyor Djalilov - New form template</span>
-              <span className="exst">.oform</span>
+              <span className="name">
+                {displayName || name} - {selection?.title || fileInfo?.title}
+              </span>
             </div>
 
             <IconButton
               className="location-btn"
-              iconName={FolderLocationReactSvgUrl}
+              iconName="/static/images/folder-location.react.svg"
               size="16"
               isFill={true}
-              onClick={() => console.log("icon clicked")}
+              onClick={() => checkAndOpenLocationAction(selection || fileInfo)}
+              title="Open Location"
             />
           </Box>
 
@@ -102,16 +107,19 @@ const StatusFillingPanel = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, filesStore }) => {
-  const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
-  const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
-  const { getRolesUsersForFillingForm } = filesStore;
+export default inject(({ auth, dialogsStore, filesActionsStore, filesStore }) => {
+    const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
+    const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
+    const { getRolesUsersForFillingForm } = filesStore;
+    const { checkAndOpenLocationAction } = filesActionsStore;
 
-  return {
-    visible: statusFillingPanelVisible,
-    setStatusFillinglVisible,
-    getInfoPanelItemIcon,
-    getRolesUsersForFillingForm,
-    selection,
-  };
-})(observer(StatusFillingPanel));
+    return {
+      visible: statusFillingPanelVisible,
+      setStatusFillinglVisible,
+      getInfoPanelItemIcon,
+      getRolesUsersForFillingForm,
+      selection,
+      checkAndOpenLocationAction,
+    };
+  }
+)(observer(StatusFillingPanel));

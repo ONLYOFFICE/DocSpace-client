@@ -84,11 +84,11 @@ const Header = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item
+        index === columnIndex ? { ...item, enabled: !item.enabled } : item
       )
     );
 
-    const tableColumns = columns.map((c) => c.enable && c.key);
+    const tableColumns = columns.map((c) => c.enabled && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
 

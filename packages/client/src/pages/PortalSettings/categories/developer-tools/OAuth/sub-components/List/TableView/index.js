@@ -42,7 +42,7 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelOauthConfigColumnsSize_ver-${TABLE_VER
 const TableView = (props) => {
   const {
     items,
-    getProjects,
+    getClients,
     sectionWidth,
     viewAs,
     setViewAs,
@@ -82,7 +82,7 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         filesLength={items.length}
-        fetchMoreFiles={getProjects}
+        fetchMoreFiles={getClients}
         hasMoreFiles={false}
         itemCount={items.length}
       >
@@ -102,7 +102,7 @@ const TableView = (props) => {
 };
 
 export default inject(({ oauthStore, setup, auth }) => {
-  const { getProjects } = oauthStore;
+  const { getClients } = oauthStore;
 
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
@@ -110,7 +110,7 @@ export default inject(({ oauthStore, setup, auth }) => {
   return {
     viewAs,
     setViewAs,
-    getProjects,
+    getClients,
     userId,
   };
 })(observer(TableView));

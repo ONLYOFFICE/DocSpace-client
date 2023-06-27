@@ -13,29 +13,49 @@ import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import List from "./sub-components/List";
+import DeleteDialog from "./sub-components/DeleteDialog";
 
 const OAuth = (props) => {
-  const { t, setDocumentTitle } = props;
+  const {
+    t,
+    setDocumentTitle,
+    getClients,
+    deleteClient,
+    currentClient,
+  } = props;
+
+  const [isDeleteOpened, setIsDeleteOpened] = useState(false);
+
+  const closeDeleteModal = () => setIsDeleteOpened(false);
+  const openDeleteModal = () => setIsDeleteOpened(true);
+
+  useEffect(() => getClients(), []);
 
   setDocumentTitle("OAuth");
 
   return (
     <>
-      {isMobile ? (
-        <BreakpointWarning sectionName={"OAuth"} />
-      ) : (
-        <List openSettingsModal={() => {}} openDeleteModal={() => {}} />
-      )}
+      <List openDeleteModal={openDeleteModal} />
+      <DeleteDialog
+        visible={isDeleteOpened}
+        onClose={closeDeleteModal}
+        handleSubmit={deleteClient}
+        currentClient={currentClient}
+      />
     </>
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, oauthStore }) => {
   const { settingsStore, setDocumentTitle } = auth;
+  const { getClients, deleteClient, currentClient } = oauthStore;
   const { theme } = settingsStore;
 
   return {
     theme,
     setDocumentTitle,
+    getClients,
+    deleteClient,
+    currentClient,
   };
 })(withTranslation(["Common"])(observer(OAuth)));

@@ -5,12 +5,12 @@ import { Consumer } from "@docspace/components/utils/context";
 
 import TableView from "./TableView";
 
-const List = ({ viewAs, openSettingsModal, openDeleteModal, projects }) => {
+const List = ({ viewAs, openSettingsModal, openDeleteModal, clients }) => {
   return (
     <Consumer>
       {(context) => (
         <TableView
-          items={projects}
+          items={clients}
           sectionWidth={context.sectionWidth}
           openSettingsModal={openSettingsModal}
           openDeleteModal={openDeleteModal}
@@ -21,10 +21,10 @@ const List = ({ viewAs, openSettingsModal, openDeleteModal, projects }) => {
 };
 export default inject(({ setup, oauthStore }) => {
   const { viewAs } = setup;
-  const { projects } = oauthStore;
+  const { clients } = oauthStore;
 
   return {
     viewAs,
-    projects,
+    clients,
   };
 })(observer(List));

@@ -1,78 +1,67 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-const projects = [...Array(10)].map((value, index) => {
+const clients = [...Array(5)].map((value, index) => {
   return {
     id: index,
-    general: {
-      name: `Project ${index}`,
-      description: `Description ${index}`,
-    },
-    credentials: {
-      client_id: "random_client_id",
-      client_secret: "random_client_secret",
-    },
-    token: {
-      enable: true,
-      bearer_only: true,
-      public_client: false,
-    },
-    scopes: {
-      files: {
-        read: true,
-        write: true,
-      },
-      workspaces: {
-        read: false,
-        write: false,
-      },
-      users: {
-        read: false,
-        write: false,
-      },
-    },
-    links: {
-      installation_url: "https://example.com/install",
-      redirect_url: "https://example.com/redirect",
-      allowed_origins: "https://example.com",
-    },
+    name: `46192a5a-e19c-${index}`,
+    description: "Demo description",
+    client_id: "46192a5a-e19c-453c-aec3-50617290edbe",
+    client_secret: "e5ff57e4-4ce2-4dac-a265-88bc7e726684",
+    root_url: "https://google.com",
+    redirect_uris: ["https://openidconnect.net/callback"],
+    allowed_origins: [
+      "https://google.com",
+      "https://openidconnect.net/callback",
+    ],
+    scopes: [
+      "files:write",
+      "accounts:write",
+      "files:read",
+      "account.self:write",
+      "rooms:read",
+      "accounts:read",
+      "account.self:read",
+      "rooms:write",
+    ],
+    enabled: true,
   };
 });
 
 class OAuthStore {
-  projects = projects;
-  currentProject = {};
+  clients = [];
+  currentClient = clients[0];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getProjects = () => {
-    this.projects = projects;
+  getClients = () => {
+    this.clients = clients;
   };
 
-  setCurrentProject = (project) => {
-    this.currentProject = project;
+  setCurrentClient = (client) => {
+    this.currentClient = client;
   };
 
-  addProject = (project) => {
-    this.projects = [...this.projects, project];
+  addClient = (client) => {
+    this.clients = [...this.clients, client];
   };
 
   setEnabled = (id) => {
-    const index = this.projects.findIndex((proj) => proj.id === id);
+    const index = this.clients.findIndex((proj) => proj.id === id);
 
-    this.projects[index].token.enable = !this.projects[index].token.enable;
+    this.clients[index].enabled = !this.clients[index].enabled;
   };
 
-  deleteProject = (id) => {
-    this.projects = this.projects.filter((proj) => proj.id !== id);
+  deleteClient = (id) => {
+    this.clients = this.clients.filter((proj) => proj.id !== id);
   };
 
-  editProject = (project) => {
-    const index = this.projects.findIndex((proj) => proj.id === project.id);
+  editClient = (client) => {
+    const index = this.clients.findIndex((proj) => proj.id === client.id);
 
     runInAction(() => {
-      this.projects[index] = project;
+      this.clients[index] = client;
     });
   };
 }

@@ -45,19 +45,33 @@ const Row = (props) => {
   const {
     item,
     setEnabled,
-    openSettingsModal,
     openDeleteModal,
-    setCurrentProject,
+    setCurrentClient,
     hideColumns,
   } = props;
   const navigate = useNavigate();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
 
-  const [isChecked, setIsChecked] = useState(item.token.enable);
+  const [isChecked, setIsChecked] = useState(item.enabled);
 
-  const redirectToHistory = () => {
+  const openClientSettings = () => {
     navigate(window.location.pathname + `/${item.id}`);
+  };
+
+  const handleToggleEnabled = () => {
+    setEnabled(item.id);
+    setIsChecked((prevIsChecked) => !prevIsChecked);
+  };
+
+  const onSettingsOpen = () => {
+    setCurrentClient(item);
+    openClientSettings();
+  };
+
+  const onDeleteOpen = () => {
+    setCurrentClient(item);
+    openDeleteModal();
   };
 
   const handleRowClick = (e) => {
@@ -72,20 +86,7 @@ const Row = (props) => {
       return;
     }
 
-    redirectToHistory();
-  };
-  const handleToggleEnabled = () => {
-    setEnabled(item.id);
-    setIsChecked((prevIsChecked) => !prevIsChecked);
-  };
-
-  const onSettingsOpen = () => {
-    setCurrentProject(item);
-    //openSettingsModal();
-  };
-  const onDeleteOpen = () => {
-    setCurrentProject(item);
-    //openDeleteModal();
+    onSettingsOpen();
   };
 
   const contextOptions = [
@@ -119,12 +120,12 @@ const Row = (props) => {
           </TableCell>
           <TableCell>
             <Text as="span" fontWeight={600} className="mr-8 textOverflow">
-              {item.general.name}
+              {item.name}
             </Text>
           </TableCell>
           <TableCell>
             <Text as="span" fontWeight={400} className="mr-8 textOverflow">
-              {item.general.description}
+              {item.description}
             </Text>
           </TableCell>
           <TableCell>
@@ -141,7 +142,7 @@ const Row = (props) => {
 };
 
 export default inject(({ oauthStore }) => {
-  const { setCurrentProject, setEnabled } = oauthStore;
+  const { setCurrentClient, setEnabled } = oauthStore;
 
-  return { setEnabled, setCurrentProject };
+  return { setEnabled, setCurrentClient };
 })(observer(Row));

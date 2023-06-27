@@ -110,10 +110,7 @@ class ContextOptionsStore {
   };
 
   onClickOpenBoard = (item) => {
-    console.log({ item });
-    window.DocSpace.navigate(
-      combineUrl("rooms/shared", item.id.toString(), "dashboard")
-    );
+    this.filesActionsStore.openFileAction(item);
   };
 
   onClickReconnectStorage = async (item, t) => {

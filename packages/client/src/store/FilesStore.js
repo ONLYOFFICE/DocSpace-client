@@ -1684,7 +1684,6 @@ class FilesStore {
         //"open",
         "select",
         "show-filling-status",
-        "open-board",
         "fill-form",
         "edit",
         "preview",
@@ -1758,7 +1757,6 @@ class FilesStore {
 
       if (!(shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
-        fileOptions = this.removeOptions(fileOptions, ["open-board"]);
         fileOptions = this.removeOptions(fileOptions, ["show-filling-status"]);
       }
 
@@ -2016,7 +2014,19 @@ class FilesStore {
 
       return roomOptions;
     } else if (isBoard) {
-      return ["open-board", "link-for-room-members", "show-info"];
+      let borderOptions = [
+        "open-board",
+        "link-for-room-members",
+        "show-info",
+        "separator1",
+        "delete",
+      ];
+
+      if (!canDelete) {
+        borderOptions = this.removeOptions(borderOptions, ["delete"]);
+      }
+
+      return borderOptions;
     }
     {
       let folderOptions = [

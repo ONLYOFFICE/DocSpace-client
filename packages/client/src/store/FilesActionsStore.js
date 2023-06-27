@@ -2040,6 +2040,9 @@ class FilesActionStore {
     if (isDashboard) {
       const { rootFolderType, title, id } = item;
 
+      setIsLoading(true);
+      this.filesStore.setSelection([]);
+
       const state = {
         title,
         isRoot: false,

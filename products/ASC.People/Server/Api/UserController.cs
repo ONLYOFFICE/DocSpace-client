@@ -1228,11 +1228,12 @@ public class UserController : PeopleControllerBase
     [HttpPut("quota")]
     public async IAsyncEnumerable<EmployeeFullDto> UpdateUserQuotaAsync(UpdateMembersQuotaRequestDto inDto)
     {
-        var users = inDto.UserIds.ToAsyncEnumerable()
+        var users = await inDto.UserIds.ToAsyncEnumerable()
             .Where(userId => !_userManager.IsSystemUser(userId))
-            .SelectAwait(async userId => await _userManager.GetUsersAsync(userId));
+            .SelectAwait(async userId => await _userManager.GetUsersAsync(userId))
+            .ToListAsync();
 
-        var tenanSpaceQuota = _quotaService.GetTenantQuota(Tenant.Id);
+        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
         foreach (var user in users)

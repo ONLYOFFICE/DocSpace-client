@@ -275,7 +275,7 @@ public class SettingsController : BaseSettingsController
     {
         await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
 
-        var quotaSettings = _settingsManager.Load<TenantUserQuotaSettings>();
+        var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
         quotaSettings.EnableUserQuota = inDto.EnableUserQuota;
         quotaSettings.DefaultUserQuota = inDto.DefaultUserQuota;
 

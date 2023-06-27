@@ -8,7 +8,7 @@ import { combineUrl } from "@docspace/common/utils";
 
 import config from "PACKAGE_FILE";
 
-import { getTitleWithoutExst } from "../../helpers/files-helpers";
+import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
 import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 
 import Dialog from "./sub-components/Dialog";
@@ -48,18 +48,21 @@ const CreateEvent = ({
 
   setEventDialogVisible,
   eventDialogVisible,
-  createWithoutDialog,
+  keepNewFileName,
+  setPortalTariff,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
 
   const { t } = useTranslation(["Translations", "Common"]);
 
-  const onCloseAction = () => {
+  const onCloseAction = (e) => {
     if (gallerySelected) {
       setGallerySelected && setGallerySelected(null);
     }
-    onClose && onClose();
+
+    setEventDialogVisible(false);
+    onClose && onClose(e);
   };
 
   React.useEffect(() => {
@@ -68,7 +71,7 @@ const CreateEvent = ({
     if (title) {
       const item = { fileExst: extension, title: title };
 
-      setStartValue(getTitleWithoutExst(item, fromTemplate));
+      setStartValue(getTitleWithoutExtension(item, fromTemplate));
     } else {
       setStartValue(defaultName);
     }
@@ -77,7 +80,7 @@ const CreateEvent = ({
 
     if (!extension) return setEventDialogVisible(true);
 
-    if (!createWithoutDialog) {
+    if (!keepNewFileName) {
       setEventDialogVisible(true);
     } else {
       onSave(null, title || defaultName);
@@ -102,7 +105,7 @@ const CreateEvent = ({
       newValue =
         templateId === null
           ? getDefaultFileName(extension)
-          : getTitleWithoutExst({ fileExst: extension });
+          : getTitleWithoutExtension({ fileExst: extension });
 
       setStartValue(newValue);
     }
@@ -119,6 +122,10 @@ const CreateEvent = ({
           )
         : null;
 
+    const isPaymentRequiredError = (err) => {
+      if (err?.response?.status === 402) setPortalTariff();
+    };
+
     if (!extension) {
       createFolder(parentId, newValue)
         .then((folder) => {
@@ -128,7 +135,10 @@ const CreateEvent = ({
           setCreatedItem({ id: createdFolderId, type: "folder" });
         })
         .then(() => completeAction(item, type, true))
-        .catch((e) => toastr.error(e))
+        .catch((e) => {
+          isPaymentRequiredError(e);
+          toastr.error(e);
+        })
         .finally(() => {
           const folderIds = [+id];
           createdFolderId && folderIds.push(createdFolderId);
@@ -149,6 +159,8 @@ const CreateEvent = ({
           })
           .then(() => completeAction(item, type))
           .catch((err) => {
+            isPaymentRequiredError(e);
+
             let errorMessage = "";
             if (typeof err === "object") {
               errorMessage =
@@ -208,7 +220,10 @@ const CreateEvent = ({
             return open && openDocEditor(file.id, file.providerKey, tab);
           })
           .then(() => completeAction(item, type))
-          .catch((e) => toastr.error(e))
+          .catch((e) => {
+            isPaymentRequiredError(e);
+            toastr.error(e);
+          })
           .finally(() => {
             const fileIds = [+id];
             createdFileId && fileIds.push(createdFileId);
@@ -244,7 +259,10 @@ const CreateEvent = ({
             return open && openDocEditor(file.id, file.providerKey, tab);
           })
           .then(() => completeAction(item, type))
-          .catch((e) => toastr.error(e))
+          .catch((e) => {
+            isPaymentRequiredError(e);
+            toastr.error(e);
+          })
           .finally(() => {
             const fileIds = [+id];
             createdFileId && fileIds.push(createdFileId);
@@ -257,13 +275,6 @@ const CreateEvent = ({
     }
   };
 
-  const onCancel = React.useCallback(
-    (e) => {
-      onCloseAction && onCloseAction();
-    },
-    [onCloseAction]
-  );
-
   return (
     <Dialog
       t={t}
@@ -271,7 +282,7 @@ const CreateEvent = ({
       title={headerTitle}
       startValue={startValue}
       onSave={onSave}
-      onCancel={onCancel}
+      onCancel={onCloseAction}
       onClose={onCloseAction}
       isCreateDialog={true}
       extension={extension}
@@ -289,9 +300,16 @@ export default inject(
     uploadDataStore,
     dialogsStore,
     oformsStore,
+    settingsStore,
+    clientLoadingStore,
   }) => {
+    const { setIsSectionBodyLoading } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionBodyLoading(param);
+    };
+
     const {
-      setIsLoading,
       createFile,
       createFolder,
       addActiveItems,
@@ -310,9 +328,12 @@ export default inject(
 
     const { id: parentId } = selectedFolderStore;
 
-    const { replaceFileStream, setEncryptionAccess } = auth;
+    const { replaceFileStream, setEncryptionAccess, currentTariffStatusStore } =
+      auth;
 
     const { isDesktopClient } = auth.settingsStore;
+
+    const { setPortalTariff } = currentTariffStatusStore;
 
     const {
       setConvertPasswordDialogVisible,
@@ -321,9 +342,10 @@ export default inject(
       eventDialogVisible,
     } = dialogsStore;
 
-    const { createWithoutDialog } = filesStore;
+    const { keepNewFileName } = settingsStore;
 
     return {
+      setPortalTariff,
       setEventDialogVisible,
       eventDialogVisible,
       setIsLoading,
@@ -352,7 +374,7 @@ export default inject(
       replaceFileStream,
       setEncryptionAccess,
 
-      createWithoutDialog,
+      keepNewFileName,
     };
   }
 )(observer(CreateEvent));

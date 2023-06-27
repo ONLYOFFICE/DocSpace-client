@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import { inject, observer } from "mobx-react";
 import SelectUsersCountContainer from "./sub-components/SelectUsersCountContainer";
 import TotalTariffContainer from "./sub-components/TotalTariffContainer";
-import toastr from "@docspace/components/toast/toastr";
-import axios from "axios";
-//import { combineUrl } from "@docspace/common/utils";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import { Trans } from "react-i18next";
-import { getPaymentLink } from "@docspace/common/api/portal";
 import CurrentUsersCountContainer from "./sub-components/CurrentUsersCount";
 
 const StyledBody = styled.div`
@@ -20,16 +16,16 @@ const StyledBody = styled.div`
     props.theme.client.settings.payment.priceContainer.background};
   max-width: 320px;
 
-  padding: 24px;
+  padding: 23px;
   box-sizing: border-box;
 
   .payment_main-title {
     margin-bottom: 24px;
     ${(props) =>
-      props.isDisabled &&
-      css`
+    props.isDisabled &&
+    css`
         color: ${props.theme.client.settings.payment.priceContainer
-          .disableColor};
+        .disableColor};
       `}
   }
   .payment_price_user {
@@ -37,100 +33,73 @@ const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     background: ${(props) =>
-      props.theme.client.settings.payment.priceContainer.backgroundText};
+    props.theme.client.settings.payment.priceContainer.backgroundText};
     margin-top: 24px;
     min-height: 38px;
     border-radius: 6px;
-    p:first-child {
-      margin-right: 8px;
-    }
+
     p {
       margin-bottom: 5px;
       margin-top: 5px;
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
 `;
 
 let timeout = null,
-  CancelToken,
-  source;
-
-const backUrl = window.location.origin;
+  controller;
 const PriceCalculation = ({
   t,
-  user,
   theme,
-  setPaymentLink,
   setIsLoading,
   maxAvailableManagersCount,
-  isFreeTariff,
-  isPayer,
+  canUpdateTariff,
   isGracePeriod,
   isNotPaidPeriod,
-  initializeInfo,
+
   priceManagerPerMonth,
   currencySymbol,
   isAlreadyPaid,
   isFreeAfterPaidPeriod,
   managersCount,
+  getPaymentLink,
 }) => {
-  useEffect(async () => {
-    initializeInfo();
+  const didMountRef = useRef(false);
 
-    if (isAlreadyPaid) return;
+  useEffect(() => {
+    didMountRef.current && !isAlreadyPaid && setShoppingLink();
+  }, [managersCount]);
 
-    try {
-      const link = await getPaymentLink(managersCount, source?.token, backUrl);
-      setPaymentLink(link);
-    } catch (e) {
-      toastr.error(t("ErrorNotification"));
-    }
-
+  useEffect(() => {
+    didMountRef.current = true;
     return () => {
       timeout && clearTimeout(timeout);
       timeout = null;
     };
   }, []);
 
-  const setShoppingLink = (value) => {
-    if (isAlreadyPaid || value > maxAvailableManagersCount) {
+  const setShoppingLink = () => {
+    if (managersCount > maxAvailableManagersCount) {
       timeout && clearTimeout(timeout);
       setIsLoading(false);
       return;
     }
-
     setIsLoading(true);
 
     timeout && clearTimeout(timeout);
-    timeout = setTimeout(async () => {
-      if (source) {
-        source.cancel();
-      }
+    timeout = setTimeout(() => {
+      if (controller) controller.abort();
 
-      CancelToken = axios.CancelToken;
-      source = CancelToken.source();
+      controller = new AbortController();
 
-      await getPaymentLink(value, source.token, backUrl)
-        .then((link) => {
-          setPaymentLink(link);
-          setIsLoading(false);
-        })
-        .catch((thrown) => {
-          setIsLoading(false);
-          if (axios.isCancel(thrown)) {
-            console.log("Request canceled", thrown.message);
-          } else {
-            console.error(thrown);
-            toastr.error(t("ErrorNotification"));
-          }
-          return;
-        });
+      getPaymentLink(controller.signal).finally(() => {
+        setIsLoading(false);
+      });
     }, 1000);
   };
 
-  const isDisabled = isFreeTariff
-    ? false
-    : (!user.isOwner && !user.isAdmin) || !isPayer;
+  const isDisabled = !canUpdateTariff;
 
   const priceInfoPerManager = (
     <div className="payment_price_user">
@@ -144,7 +113,7 @@ const PriceCalculation = ({
         }
         fontWeight={600}
       >
-        <Trans t={t} i18nKey="PerUserMonth" ns="Payments">
+        <Trans t={t} i18nKey="PerUserMonth" ns="Common">
           ""
           <Text
             fontSize="16px"
@@ -183,13 +152,15 @@ const PriceCalculation = ({
           : t("PriceCalculation")}
       </Text>
       {isGracePeriod || isNotPaidPeriod || isFreeAfterPaidPeriod ? (
-        <CurrentUsersCountContainer isNeedPlusSign={isNeedPlusSign} t={t} />
+        <CurrentUsersCountContainer
+          isNeedPlusSign={isNeedPlusSign}
+          t={t}
+          isDisabled={isDisabled}
+        />
       ) : (
         <SelectUsersCountContainer
           isNeedPlusSign={isNeedPlusSign}
           isDisabled={isDisabled}
-          setShoppingLink={setShoppingLink}
-          isAlreadyPaid={isAlreadyPaid}
         />
       )}
 
@@ -199,7 +170,6 @@ const PriceCalculation = ({
       <ButtonContainer
         isDisabled={isDisabled}
         t={t}
-        isAlreadyPaid={isAlreadyPaid}
         isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
       />
     </StyledBody>
@@ -209,40 +179,41 @@ const PriceCalculation = ({
 export default inject(({ auth, payments }) => {
   const {
     tariffsInfo,
-    setPaymentLink,
     setIsLoading,
     setManagersCount,
     maxAvailableManagersCount,
-    initializeInfo,
+
     managersCount,
+    isAlreadyPaid,
+    getPaymentLink,
+    canUpdateTariff,
   } = payments;
   const { theme } = auth.settingsStore;
   const {
-    userStore,
     currentTariffStatusStore,
-    currentQuotaStore,
+
     paymentQuotasStore,
   } = auth;
-  const { isFreeTariff } = currentQuotaStore;
+
   const { planCost } = paymentQuotasStore;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
-  const { user } = userStore;
 
   return {
+    canUpdateTariff,
+    isAlreadyPaid,
     managersCount,
 
-    isFreeTariff,
     setManagersCount,
     tariffsInfo,
     theme,
-    setPaymentLink,
     setIsLoading,
     maxAvailableManagersCount,
-    user,
+
     isGracePeriod,
     isNotPaidPeriod,
-    initializeInfo,
+
     priceManagerPerMonth: planCost.value,
     currencySymbol: planCost.currencySymbol,
+    getPaymentLink,
   };
 })(observer(PriceCalculation));

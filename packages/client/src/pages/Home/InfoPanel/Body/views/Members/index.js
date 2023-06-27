@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
@@ -28,6 +28,8 @@ const Members = ({
 
   selectionParentRoom,
   setSelectionParentRoom,
+  isScrollLocked,
+  setIsScrollLocked,
 
   getRoomMembers,
   updateRoomMemberRole,
@@ -35,7 +37,9 @@ const Members = ({
   roomsView,
   resendEmailInvitations,
   setInvitePanelOptions,
+  setInviteUsersWarningDialogVisible,
   changeUserType,
+  isGracePeriod,
 }) => {
   const membersHelper = new MembersHelper({ t });
 
@@ -74,7 +78,7 @@ const Members = ({
     };
   };
 
-  useEffect(async () => {
+  const updateSelectionParentRoomAction = useCallback(async () => {
     if (!selectionParentRoom) return;
 
     if (selectionParentRoom.members) {
@@ -89,7 +93,11 @@ const Members = ({
     });
   }, [selectionParentRoom]);
 
-  useEffect(async () => {
+  useEffect(() => {
+    updateSelectionParentRoomAction();
+  }, [selectionParentRoom, updateSelectionParentRoomAction]);
+
+  const updateSelectionParentRoomActionSelection = useCallback(async () => {
     if (!selection.isRoom) return;
 
     const fetchedMembers = await fetchMembers(selection.id);
@@ -101,7 +109,11 @@ const Members = ({
       setView("info_details");
   }, [selection]);
 
-  useEffect(async () => {
+  useEffect(() => {
+    updateSelectionParentRoomActionSelection();
+  }, [selection, updateSelectionParentRoomActionSelection]);
+
+  const updateMembersAction = useCallback(async () => {
     if (!updateRoomMembers) return;
 
     const fetchedMembers = await fetchMembers(selection.id);
@@ -113,9 +125,23 @@ const Members = ({
     setMembers(fetchedMembers);
   }, [selectionParentRoom, selection?.id, updateRoomMembers]);
 
+  useEffect(() => {
+    updateMembersAction();
+  }, [
+    selectionParentRoom,
+    selection?.id,
+    updateRoomMembers,
+    updateMembersAction,
+  ]);
+
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
     const parentRoomId = selectionParentRoom.id;
+
+    if (isGracePeriod) {
+      setInviteUsersWarningDialogVisible(true);
+      return;
+    }
 
     setInvitePanelOptions({
       visible: true,
@@ -175,13 +201,15 @@ const Members = ({
             selectionParentRoom={selectionParentRoom}
             setSelectionParentRoom={setSelectionParentRoom}
             changeUserType={changeUserType}
+            isScrollLocked={isScrollLocked}
+            setIsScrollLocked={setIsScrollLocked}
           />
         ))}
       </StyledUserList>
 
       {!!members.expected.length && (
         <StyledUserTypeHeader isExpect>
-          <Text className="title">{t("ExpectPeople")}</Text>
+          <Text className="title">{t("PendingInvitations")}</Text>
           {canInviteUserInRoomAbility && (
             <IconButton
               className={"icon"}
@@ -196,11 +224,11 @@ const Members = ({
       )}
 
       <StyledUserList>
-        {Object.values(members.expected).map((user) => (
+        {Object.values(members.expected).map((user, i) => (
           <User
             security={security}
             isExpect
-            key={user.id}
+            key={i}
             t={t}
             user={user}
             membersHelper={membersHelper}
@@ -211,6 +239,8 @@ const Members = ({
             selectionParentRoom={selectionParentRoom}
             setSelectionParentRoom={setSelectionParentRoom}
             changeUserType={changeUserType}
+            isScrollLocked={isScrollLocked}
+            setIsScrollLocked={setIsScrollLocked}
           />
         ))}
       </StyledUserList>
@@ -237,6 +267,8 @@ export default inject(
 
       updateRoomMembers,
       setUpdateRoomMembers,
+      isScrollLocked,
+      setIsScrollLocked,
     } = auth.infoPanelStore;
     const {
       getRoomMembers,
@@ -244,7 +276,11 @@ export default inject(
       resendEmailInvitations,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
-    const { setInvitePanelOptions } = dialogsStore;
+    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const {
+      setInvitePanelOptions,
+      setInviteUsersWarningDialogVisible,
+    } = dialogsStore;
 
     const { changeType: changeUserType } = peopleStore;
 
@@ -254,6 +290,8 @@ export default inject(
       setIsMobileHidden,
       selectionParentRoom,
       setSelectionParentRoom,
+      isScrollLocked,
+      setIsScrollLocked,
 
       getRoomMembers,
       updateRoomMemberRole,
@@ -264,8 +302,10 @@ export default inject(
       selfId,
 
       setInvitePanelOptions,
+      setInviteUsersWarningDialogVisible,
       resendEmailInvitations,
       changeUserType,
+      isGracePeriod,
     };
   }
 )(

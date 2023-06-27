@@ -1,34 +1,56 @@
-﻿import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
-import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
-import React from "react";
+﻿import React, { useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-import { withRouter } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isMobile, isMobileOnly } from "react-device-detect";
 import { withTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 import find from "lodash/find";
 import result from "lodash/result";
 
+import FilterInput from "@docspace/common/components/FilterInput";
+import Loaders from "@docspace/common/components/Loaders";
+import { withLayoutSize } from "@docspace/common/utils";
+import { getUser } from "@docspace/common/api/people";
+import RoomsFilter from "@docspace/common/api/rooms/filter";
+import AccountsFilter from "@docspace/common/api/people/filter";
+import FilesFilter from "@docspace/common/api/files/filter";
 import {
   FilterGroups,
   FilterKeys,
-} from "@docspace/client/src/helpers/filesConstants";
-
-import { getUser } from "@docspace/common/api/people";
-import {
   FilterType,
   RoomsType,
   RoomsProviderType,
   RoomsProviderTypeName,
   FilterSubject,
+  RoomSearchArea,
+  EmployeeType,
+  EmployeeStatus,
+  PaymentsType,
+  AccountLoginType,
 } from "@docspace/common/constants";
-import Loaders from "@docspace/common/components/Loaders";
-import FilterInput from "@docspace/common/components/FilterInput";
-import { withLayoutSize } from "@docspace/common/utils";
-import { getDefaultRoomName } from "@docspace/client/src/helpers/filesUtils";
 
-import withLoader from "../../../../HOCs/withLoader";
-import { TableVersions } from "SRC_DIR/helpers/constants";
+import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
+
+import {
+  TableVersions,
+  SortByFieldName,
+  SSO_LABEL,
+} from "SRC_DIR/helpers/constants";
+
+import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
+
+import { getRoomInfo } from "@docspace/common/api/rooms";
+
+const getAccountLoginType = (filterValues) => {
+  const accountLoginType = result(
+    find(filterValues, (value) => {
+      return value.group === "filter-login-type";
+    }),
+    "key"
+  );
+
+  return accountLoginType || null;
+};
 
 const getFilterType = (filterValues) => {
   const filterType = result(
@@ -61,6 +83,17 @@ const getAuthorType = (filterValues) => {
   );
 
   return authorType ? authorType : null;
+};
+
+const getRoomId = (filterValues) => {
+  const filterRoomId = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterRoom;
+    }),
+    "key"
+  );
+
+  return filterRoomId || null;
 };
 
 const getSearchParams = (filterValues) => {
@@ -105,18 +138,49 @@ const getSubjectId = (filterValues) => {
   return filterOwner ? filterOwner : null;
 };
 
-//TODO: restore all comments if search with subfolders and in content will be available for rooms filter
+const getStatus = (filterValues) => {
+  const employeeStatus = result(
+    find(filterValues, (value) => {
+      return value.group === "filter-status";
+    }),
+    "key"
+  );
 
-// const getFilterFolders = (filterValues) => {
-//   const filterFolders = result(
-//     find(filterValues, (value) => {
-//       return value.group === FilterGroups.roomFilterFolders;
-//     }),
-//     "key"
-//   );
+  return employeeStatus ? +employeeStatus : null;
+};
 
-//   return filterFolders ? filterFolders : null;
-// };
+const getRole = (filterValues) => {
+  const employeeStatus = result(
+    find(filterValues, (value) => {
+      return value.group === "filter-type";
+    }),
+    "key"
+  );
+
+  return employeeStatus || null;
+};
+
+const getPayments = (filterValues) => {
+  const employeeStatus = result(
+    find(filterValues, (value) => {
+      return value.group === "filter-account";
+    }),
+    "key"
+  );
+
+  return employeeStatus || null;
+};
+
+const getGroup = (filterValues) => {
+  const groupId = result(
+    find(filterValues, (value) => {
+      return value.group === "filter-other";
+    }),
+    "key"
+  );
+
+  return groupId || null;
+};
 
 const getFilterContent = (filterValues) => {
   const filterContent = result(
@@ -147,6 +211,10 @@ const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 
+const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
+
+const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
+
 const SectionFilterContent = ({
   t,
   filter,
@@ -159,47 +227,71 @@ const SectionFilterContent = ({
   createThumbnails,
   setViewAs,
   setIsLoading,
-  selectedFolderId,
-  fetchFiles,
-  fetchRooms,
+
   fetchTags,
   infoPanelVisible,
   isRooms,
+  isTrash,
   userId,
   isPersonalRoom,
-  setCurrentRoomsFilter,
+
   providers,
-  searchTitleOpenLocation,
-  isLoadedLocationFiles,
-  setIsLoadedSearchFiles,
-  isLoadedEmptyPage,
-  isEmptyPage,
+
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
+  isArchiveFolder,
+  accountsViewAs,
+  groups,
+
+  accountsFilter,
+  showFilterLoader,
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isAccountsPage = location.pathname.includes("accounts");
+
   const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
-  const [isLoadedFilter, setIsLoadedFilter] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isEmptyPage) {
-      setIsLoadedFilter(isLoadedEmptyPage);
-    }
-
-    if (!isEmptyPage && !isLoadedEmptyPage) {
-      setIsLoadedFilter(true);
-    }
-  }, [isLoadedEmptyPage, isEmptyPage]);
-
-  React.useEffect(() => {
-    if (!(searchTitleOpenLocation && isLoadedLocationFiles)) return;
-
-    onSearch(searchTitleOpenLocation);
-  }, [searchTitleOpenLocation, isLoadedLocationFiles, onSearch]);
 
   const onFilter = React.useCallback(
     (data) => {
-      if (isRooms) {
+      setIsLoading(true);
+      if (isAccountsPage) {
+        const status = getStatus(data);
+
+        const role = getRole(data);
+        const group = getGroup(data);
+        const payments = getPayments(data);
+        const accountLoginType = getAccountLoginType(data);
+
+        const newFilter = accountsFilter.clone();
+
+        if (status === 3) {
+          newFilter.employeeStatus = EmployeeStatus.Disabled;
+          newFilter.activationStatus = null;
+        } else if (status === 2) {
+          newFilter.employeeStatus = EmployeeStatus.Active;
+          newFilter.activationStatus = status;
+        } else {
+          newFilter.employeeStatus = null;
+          newFilter.activationStatus = status;
+        }
+
+        newFilter.page = 0;
+
+        newFilter.role = role;
+
+        newFilter.group = group;
+
+        newFilter.payments = payments;
+
+        newFilter.accountLoginType = accountLoginType;
+
+        //console.log(newFilter);
+
+        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+      } else if (isRooms) {
         const type = getType(data) || null;
 
         const subjectId = getSubjectId(data) || null;
@@ -208,13 +300,6 @@ const SectionFilterContent = ({
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
-
-        // const withSubfolders =
-        //   getFilterFolders(data) === FilterKeys.withSubfolders;
-
-        // const withContent = getFilterContent(data) === FilterKeys.withContent;
-
-        setIsLoading(true);
 
         const newFilter = roomsFilter.clone();
 
@@ -227,6 +312,10 @@ const SectionFilterContent = ({
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
+
+          if (subjectId === FilterKeys.me) {
+            newFilter.subjectId = `${userId}`;
+          }
 
           newFilter.subjectFilter = subjectFilter?.toString()
             ? subjectFilter.toString()
@@ -246,12 +335,12 @@ const SectionFilterContent = ({
           newFilter.withoutTags = false;
         }
 
-        // newFilter.withSubfolders = withSubfolders;
-        // newFilter.searchInContent = withContent;
+        const path =
+          newFilter.searchArea === RoomSearchArea.Active
+            ? "rooms/shared"
+            : "rooms/archived";
 
-        fetchRooms(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -259,6 +348,8 @@ const SectionFilterContent = ({
 
         const withSubfolders = getSearchParams(data);
         const withContent = getFilterContent(data);
+
+        const roomId = getRoomId(data);
 
         const newFilter = filter.clone();
         newFilter.page = 0;
@@ -277,58 +368,104 @@ const SectionFilterContent = ({
           withSubfolders === FilterKeys.excludeSubfolders ? "false" : "true";
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
-        setIsLoading(true);
+        const path = location.pathname.split("/filter")[0];
+        if (isTrash) {
+          newFilter.roomId = roomId;
+        }
 
-        fetchFiles(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       }
     },
     [
       isRooms,
-      fetchFiles,
-      fetchRooms,
+      isAccountsPage,
+      isTrash,
       setIsLoading,
       roomsFilter,
+      accountsFilter,
       filter,
-      selectedFolderId,
+
+      isAccountsPage,
+      location.pathname,
     ]
   );
 
+  const onClearFilter = useCallback(() => {
+    if (isAccountsPage) {
+      return;
+    }
+    setIsLoading(true);
+    if (isRooms) {
+      const newFilter = RoomsFilter.getDefault();
+      newFilter.searchArea = roomsFilter.searchArea;
+
+      const path =
+        roomsFilter.searchArea === RoomSearchArea.Active
+          ? "rooms/shared"
+          : "rooms/archived";
+
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+    } else {
+      const newFilter = filter.clone();
+      newFilter.page = 0;
+      newFilter.filterValue = "";
+
+      const path = location.pathname.split("/filter")[0];
+
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+    }
+  }, [
+    isRooms,
+    setIsLoading,
+
+    filter,
+
+    roomsFilter,
+    isAccountsPage,
+
+    location.pathname,
+  ]);
+
   const onSearch = React.useCallback(
     (data = "") => {
-      if (isRooms) {
+      setIsLoading(true);
+      if (isAccountsPage) {
+        const newFilter = accountsFilter.clone();
+        newFilter.page = 0;
+        newFilter.search = data;
+
+        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+      } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
         newFilter.filterValue = data;
 
-        fetchRooms(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        const path =
+          newFilter.searchArea === RoomSearchArea.Active
+            ? "rooms/shared"
+            : "rooms/archived";
+
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       } else {
-        setIsLoadedSearchFiles(false);
         const newFilter = filter.clone();
         newFilter.page = 0;
         newFilter.search = data;
 
-        setIsLoading(true);
+        const path = location.pathname.split("/filter")[0];
 
-        fetchFiles(selectedFolderId, newFilter).finally(() => {
-          setIsLoading(false);
-          setIsLoadedSearchFiles(true);
-        });
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       }
     },
     [
       isRooms,
+      isAccountsPage,
       setIsLoading,
-      fetchFiles,
-      fetchRooms,
-      selectedFolderId,
+
       filter,
       roomsFilter,
-      setIsLoadedSearchFiles,
+      accountsFilter,
+      location.pathname,
     ]
   );
 
@@ -337,32 +474,33 @@ const SectionFilterContent = ({
       const sortBy = sortId;
       const sortOrder = sortDirection === "desc" ? "descending" : "ascending";
 
-      const newFilter = isRooms ? roomsFilter.clone() : filter.clone();
+      const newFilter = isAccountsPage
+        ? accountsFilter.clone()
+        : isRooms
+        ? roomsFilter.clone()
+        : filter.clone();
       newFilter.page = 0;
       newFilter.sortBy = sortBy;
       newFilter.sortOrder = sortOrder;
 
       setIsLoading(true);
 
-      if (isRooms) {
-        fetchRooms(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+      if (isAccountsPage) {
+        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+      } else if (isRooms) {
+        const path =
+          newFilter.searchArea === RoomSearchArea.Active
+            ? "rooms/shared"
+            : "rooms/archived";
+
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       } else {
-        fetchFiles(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        const path = location.pathname.split("/filter")[0];
+
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       }
     },
-    [
-      isRooms,
-      setIsLoading,
-      fetchFiles,
-      fetchRooms,
-      selectedFolderId,
-      filter,
-      roomsFilter,
-    ]
+    [isRooms, isAccountsPage, setIsLoading, filter, roomsFilter, accountsFilter]
   );
 
   const onChangeViewAs = React.useCallback(
@@ -385,8 +523,10 @@ const SectionFilterContent = ({
   );
 
   const getSelectedInputValue = React.useCallback(() => {
-    return searchTitleOpenLocation
-      ? searchTitleOpenLocation
+    return isAccountsPage
+      ? accountsFilter.search
+        ? accountsFilter.search
+        : ""
       : isRooms
       ? roomsFilter.filterValue
         ? roomsFilter.filterValue
@@ -396,27 +536,174 @@ const SectionFilterContent = ({
       : "";
   }, [
     isRooms,
+    isAccountsPage,
     roomsFilter.filterValue,
     filter.search,
-    searchTitleOpenLocation,
+    accountsFilter.search,
   ]);
 
   const getSelectedSortData = React.useCallback(() => {
-    const currentFilter = isRooms ? roomsFilter : filter;
+    const currentFilter = isAccountsPage
+      ? accountsFilter
+      : isRooms
+      ? roomsFilter
+      : filter;
     return {
       sortDirection: currentFilter.sortOrder === "ascending" ? "asc" : "desc",
       sortId: currentFilter.sortBy,
     };
   }, [
     isRooms,
+    isAccountsPage,
     filter.sortOrder,
     filter.sortBy,
     roomsFilter.sortOrder,
     roomsFilter.sortBy,
+    accountsFilter.sortOrder,
+    accountsFilter.sortBy,
   ]);
 
   const getSelectedFilterData = React.useCallback(async () => {
     const filterValues = [];
+
+    if (isAccountsPage) {
+      if (accountsFilter.employeeStatus || accountsFilter.activationStatus) {
+        const key =
+          accountsFilter.employeeStatus === 2
+            ? 3
+            : accountsFilter.activationStatus;
+        let label = "";
+
+        switch (key) {
+          case 1:
+            label = t("Common:Active");
+            break;
+          case 2:
+            label = t("PeopleTranslations:PendingTitle");
+            break;
+          case 3:
+            label = t("PeopleTranslations:DisabledEmployeeStatus");
+            break;
+        }
+
+        filterValues.push({
+          key,
+          label,
+          group: "filter-status",
+        });
+      }
+
+      if (accountsFilter.role) {
+        let label = null;
+
+        switch (+accountsFilter.role) {
+          case EmployeeType.Admin:
+            label = t("Common:DocSpaceAdmin");
+            break;
+          case EmployeeType.User:
+            label = t("Common:RoomAdmin");
+            break;
+          case EmployeeType.Collaborator:
+            label = t("Common:PowerUser");
+            break;
+          case EmployeeType.Guest:
+            label = t("Common:User");
+            break;
+          default:
+            label = "";
+        }
+
+        filterValues.push({
+          key: +accountsFilter.role,
+          label: label,
+          group: "filter-type",
+        });
+      }
+
+      if (accountsFilter?.payments?.toString()) {
+        filterValues.push({
+          key: accountsFilter.payments.toString(),
+          label:
+            PaymentsType.Paid === accountsFilter.payments.toString()
+              ? t("Common:Paid")
+              : t("SmartBanner:Price"),
+          group: "filter-account",
+        });
+      }
+
+      if (accountsFilter?.accountLoginType?.toString()) {
+        const label =
+          AccountLoginType.SSO === accountsFilter.accountLoginType.toString()
+            ? SSO_LABEL
+            : AccountLoginType.LDAP ===
+              accountsFilter.accountLoginType.toString()
+            ? t("PeopleTranslations:LDAPLbl")
+            : t("PeopleTranslations:StandardLogin");
+        filterValues.push({
+          key: accountsFilter.accountLoginType.toString(),
+          label: label,
+          group: "filter-login-type",
+        });
+      }
+
+      if (accountsFilter.group) {
+        const group = groups.find((group) => group.id === accountsFilter.group);
+
+        if (group) {
+          filterValues.push({
+            key: accountsFilter.group,
+            label: group.name,
+            group: "filter-other",
+          });
+        }
+      }
+
+      const currentFilterValues = [];
+
+      setSelectedFilterValues((value) => {
+        if (!value) {
+          currentFilterValues.push(...filterValues);
+          return filterValues.map((f) => ({ ...f }));
+        }
+
+        const items = value.map((v) => {
+          const item = filterValues.find((f) => f.group === v.group);
+
+          if (item) {
+            if (item.isMultiSelect) {
+              let isEqual = true;
+
+              item.key.forEach((k) => {
+                if (!v.key.includes(k)) {
+                  isEqual = false;
+                }
+              });
+
+              if (isEqual) return item;
+
+              return false;
+            } else {
+              if (item.key === v.key) return item;
+              return false;
+            }
+          } else {
+            return false;
+          }
+        });
+
+        const newItems = filterValues.filter(
+          (v) => !items.find((i) => i.group === v.group)
+        );
+
+        items.push(...newItems);
+
+        currentFilterValues.push(...items.filter((i) => i));
+
+        return items.filter((i) => i);
+      });
+
+      return currentFilterValues;
+    }
 
     if (isRooms) {
       // if (!roomsFilter.withSubfolders) {
@@ -437,11 +724,12 @@ const SectionFilterContent = ({
 
       if (roomsFilter.subjectId) {
         const user = await getUser(roomsFilter.subjectId);
+        const isMe = userId === roomsFilter.subjectId;
 
-        let label = user.displayName;
+        let label = isMe ? t("Common:MeLabel") : user.displayName;
 
         const subject = {
-          key: roomsFilter.subjectId,
+          key: isMe ? FilterKeys.me : roomsFilter.subjectId,
           group: FilterGroups.roomFilterSubject,
           label: label,
         };
@@ -564,7 +852,6 @@ const SectionFilterContent = ({
 
         if (!isMe) {
           const user = await getUser(filter.authorType.replace("user_", ""));
-
           label = user.displayName;
         }
 
@@ -575,6 +862,17 @@ const SectionFilterContent = ({
               : FilterKeys.me
             : filter.authorType.replace("user_", ""),
           group: FilterGroups.filterAuthor,
+          label: label,
+        });
+      }
+
+      if (filter.roomId) {
+        const room = await getRoomInfo(filter.roomId);
+        const label = room.title;
+
+        filterValues.push({
+          key: filter.roomId,
+          group: FilterGroups.filterRoom,
           label: label,
         });
       }
@@ -629,6 +927,7 @@ const SectionFilterContent = ({
   }, [
     filter.withSubfolders,
     filter.authorType,
+    filter.roomId,
     filter.filterType,
     filter.searchInContent,
     filter.excludeSubject,
@@ -644,9 +943,169 @@ const SectionFilterContent = ({
     // roomsFilter.searchInContent,
     userId,
     isRooms,
+    isAccountsPage,
+    accountsFilter.employeeStatus,
+    accountsFilter.activationStatus,
+    accountsFilter.role,
+    accountsFilter.payments,
+    accountsFilter.group,
+    accountsFilter.accountLoginType,
+    t,
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    if (isAccountsPage) {
+      const statusItems = [
+        {
+          id: "filter_status-user",
+          key: "filter-status",
+          group: "filter-status",
+          label: t("People:UserStatus"),
+          isHeader: true,
+        },
+        {
+          id: "filter_status-active",
+          key: 1,
+          group: "filter-status",
+          label: t("Common:Active"),
+        },
+        {
+          id: "filter_status-pending",
+          key: 2,
+          group: "filter-status",
+          label: t("PeopleTranslations:PendingTitle"),
+        },
+        {
+          id: "filter_status-disabled",
+          key: 3,
+          group: "filter-status",
+          label: t("PeopleTranslations:DisabledEmployeeStatus"),
+        },
+      ];
+
+      const typeItems = [
+        {
+          key: "filter-type",
+          group: "filter-type",
+          label: t("Common:Type"),
+          isHeader: true,
+        },
+        {
+          id: "filter_type-docspace-admin",
+          key: EmployeeType.Admin,
+          group: "filter-type",
+          label: t("Common:DocSpaceAdmin"),
+        },
+        {
+          id: "filter_type-room-admin",
+          key: EmployeeType.User,
+          group: "filter-type",
+          label: t("Common:RoomAdmin"),
+        },
+        {
+          id: "filter_type-room-admin",
+          key: EmployeeType.Collaborator,
+          group: "filter-type",
+          label: t("Common:PowerUser"),
+        },
+        {
+          id: "filter_type-user",
+          key: EmployeeType.Guest,
+          group: "filter-type",
+          label: t("Common:User"),
+        },
+      ];
+
+      // const roleItems = [
+      //   {
+      //     key: "filter-role",
+      //     group: "filter-role",
+      //     label: "Role in room",
+      //     isHeader: true,
+      //   },
+      //   { key: "1", group: "filter-role", label: "Room manager" },
+      //   { key: "2", group: "filter-role", label: "Co-worker" },
+      //   { key: "3", group: "filter-role", label: "Editor" },
+      //   { key: "4", group: "filter-role", label: "Form filler" },
+      //   { key: "5", group: "filter-role", label: "Reviewer" },
+      //   { key: "6", group: "filter-role", label: "Commentator" },
+      //   { key: "7", group: "filter-role", label: "Viewer" },
+      // ];
+
+      const accountItems = [
+        {
+          key: "filter-account",
+          group: "filter-account",
+          label: t("ConnectDialog:Account"),
+          isHeader: true,
+          isLast: false,
+        },
+        {
+          key: PaymentsType.Paid,
+          group: "filter-account",
+          label: t("Common:Paid"),
+        },
+        {
+          key: PaymentsType.Free,
+          group: "filter-account",
+          label: t("SmartBanner:Price"),
+        },
+      ];
+
+      // const roomItems = [
+      //   {
+      //     key: "filter-status",
+      //     group: "filter-status",
+      //     label: t("People:UserStatus"),
+      //     isHeader: true,
+      //   },
+      //   {
+      //     key: "1",
+      //     group: "filter-status",
+      //     label: t("Common:Active"),
+      //     isSelector: true,
+      //     selectorType: "room",
+      //   },
+      // ];
+
+      const accountLoginTypeItems = [
+        {
+          key: "filter-login-type",
+          group: "filter-login-type",
+          label: t("PeopleTranslations:AccountLoginType"),
+          isHeader: true,
+          isLast: true,
+        },
+        {
+          key: AccountLoginType.SSO,
+          group: "filter-login-type",
+          label: SSO_LABEL,
+        },
+        //TODO: uncomment after ldap be ready
+        /*{
+          key: AccountLoginType.LDAP,
+          group: "filter-login-type",
+          label: t("PeopleTranslations:LDAPLbl"),
+        },*/
+        {
+          key: AccountLoginType.STANDART,
+          group: "filter-login-type",
+          label: t("PeopleTranslations:StandardLogin"),
+        },
+      ];
+
+      const filterOptions = [];
+
+      filterOptions.push(...statusItems);
+      filterOptions.push(...typeItems);
+      // filterOptions.push(...roleItems);
+      filterOptions.push(...accountItems);
+      // filterOptions.push(...roomItems);
+      filterOptions.push(...accountLoginTypeItems);
+
+      return filterOptions;
+    }
+
     const tags = await fetchTags();
     const connectedThirdParty = [];
 
@@ -711,36 +1170,46 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          {
-            id: "filter_type-custom",
-            key: RoomsType.CustomRoom,
-            group: FilterGroups.roomFilterType,
-            label: t("CustomRooms"),
-          },
-          {
-            id: "filter_type-filling-form",
-            key: RoomsType.FillingFormsRoom,
-            group: FilterGroups.roomFilterType,
-            label: t("FillingFormRooms"),
-          },
-          {
-            id: "filter_type-collaboration",
-            key: RoomsType.EditingRoom,
-            group: FilterGroups.roomFilterType,
-            label: t("CollaborationRooms"),
-          },
-          {
-            id: "filter_type-review",
-            key: RoomsType.ReviewRoom,
-            group: FilterGroups.roomFilterType,
-            label: t("Common:Review"),
-          },
-          {
-            id: "filter_type-view-only",
-            key: RoomsType.ReadOnlyRoom,
-            group: FilterGroups.roomFilterType,
-            label: t("ViewOnlyRooms"),
-          },
+          ...Object.values(RoomsType).map((roomType) => {
+            switch (roomType) {
+              case RoomsType.FillingFormsRoom:
+                return {
+                  id: "filter_type-filling-form",
+                  key: RoomsType.FillingFormsRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("FillingFormRooms"),
+                };
+              case RoomsType.EditingRoom:
+                return {
+                  id: "filter_type-collaboration",
+                  key: RoomsType.EditingRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("CollaborationRooms"),
+                };
+              case RoomsType.ReviewRoom:
+                return {
+                  id: "filter_type-review",
+                  key: RoomsType.ReviewRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:Review"),
+                };
+              case RoomsType.ReadOnlyRoom:
+                return {
+                  id: "filter_type-view-only",
+                  key: RoomsType.ReadOnlyRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("ViewOnlyRooms"),
+                };
+              case RoomsType.CustomRoom:
+              default:
+                return {
+                  id: "filter_type-custom",
+                  key: RoomsType.CustomRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("CustomRooms"),
+                };
+            }
+          }),
         ]
       : [
           {
@@ -748,7 +1217,7 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: t("Common:Type"),
             isHeader: true,
-            isLast: true,
+            isLast: !isTrash,
           },
           ...folders,
           {
@@ -800,13 +1269,25 @@ const SectionFilterContent = ({
         label: t("Common:Member"),
         isHeader: true,
         withoutSeparator: true,
+        withMultiItems: true,
+      },
+      {
+        id: "filter_author-me",
+        key: FilterKeys.me,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:OtherLabel"),
       },
       {
         id: "filter_author-user",
         key: FilterKeys.user,
         group: FilterGroups.roomFilterSubject,
-        label: t("Translations:ChooseFromList"),
-        isSelector: true,
+        displaySelectorType: "link",
       },
     ];
 
@@ -919,7 +1400,7 @@ const SectionFilterContent = ({
         filterOptions.push(...thirdPartyOptions);
       }
     } else {
-      if (!isRecentFolder && !isFavoritesFolder) {
+      if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
           {
             key: FilterGroups.filterFolders,
@@ -992,25 +1473,47 @@ const SectionFilterContent = ({
           id: "filter_author-user",
           key: FilterKeys.user,
           group: FilterGroups.filterAuthor,
-          label: t("Translations:ChooseFromList"),
-          isSelector: true,
+          displaySelectorType: "link",
         },
       ];
 
       filterOptions.push(...authorOption);
-
       filterOptions.push(...typeOptions);
-    }
 
+      if (isTrash) {
+        const roomOption = [
+          {
+            id: "filter_search-by-room-content-header",
+            key: "filter_search-by-room-content-header",
+            group: FilterGroups.filterRoom,
+            label: "Room",
+            isHeader: true,
+            isLast: true,
+          },
+          {
+            id: "filter_search-by-room-content",
+            key: "filter_search-by-room-content",
+            group: FilterGroups.filterRoom,
+            withoutHeader: true,
+            label: "Select room",
+            displaySelectorType: "button",
+            isLast: true,
+          },
+        ];
+        filterOptions.push(...roomOption);
+      }
+    }
     return filterOptions;
   }, [
-    isFavoritesFolder,
-    isRecentFolder,
-    isRooms,
     t,
     personal,
-    isPersonalRoom,
     providers,
+    isPersonalRoom,
+    isRooms,
+    isAccountsPage,
+    isFavoritesFolder,
+    isRecentFolder,
+    isTrash,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1034,59 +1537,100 @@ const SectionFilterContent = ({
   }, [createThumbnails]);
 
   const getSortData = React.useCallback(() => {
+    if (isAccountsPage) {
+      return [
+        {
+          id: "sory-by_first-name",
+          key: "firstname",
+          label: t("Common:ByFirstNameSorting"),
+          default: true,
+        },
+        {
+          id: "sory-by_last-name",
+          key: "lastname",
+          label: t("Common:ByLastNameSorting"),
+          default: true,
+        },
+        {
+          id: "sory-by_type",
+          key: "type",
+          label: t("Common:Type"),
+          default: true,
+        },
+        {
+          id: "sory-by_email",
+          key: "email",
+          label: t("Common:Email"),
+          default: true,
+        },
+      ];
+    }
+
     const commonOptions = [];
 
     const name = {
       id: "sort-by_name",
-      key: "AZ",
+      key: SortByFieldName.Name,
       label: t("Common:Name"),
       default: true,
     };
     const modifiedDate = {
       id: "sort-by_modified",
-      key: "DateAndTime",
-      label: t("ByLastModified"),
+      key: SortByFieldName.ModifiedDate,
+      label: t("Common:LastModifiedDate"),
       default: true,
     };
-    const type = {
-      id: "sort-by_type",
-      key: "Type",
-      label: t("Common:Type"),
-      default: true,
-    };
-    const size = {
-      id: "sort-by_size",
-      key: "Size",
-      label: t("Common:Size"),
-      default: true,
-    };
-    const creationDate = {
-      id: "sort-by_created",
-      key: "DateAndTimeCreation",
-      label: t("ByCreation"),
+    const room = {
+      id: "sort-by_room",
+      key: SortByFieldName.Room,
+      label: t("Common:Room"),
       default: true,
     };
     const authorOption = {
       id: "sort-by_author",
-      key: "Author",
+      key: SortByFieldName.Author,
       label: t("ByAuthor"),
+      default: true,
+    };
+    const creationDate = {
+      id: "sort-by_created",
+      key: SortByFieldName.CreationDate,
+      label: t("InfoPanel:CreationDate"),
       default: true,
     };
     const owner = {
       id: "sort-by_owner",
-      key: "Author",
+      key: SortByFieldName.Author,
       label: t("Common:Owner"),
+      default: true,
+    };
+    const erasure = {
+      id: "sort-by_erasure",
+      key: SortByFieldName.ModifiedDate,
+      label: t("ByErasure"),
       default: true,
     };
     const tags = {
       id: "sort-by_tags",
-      key: "Tags",
+      key: SortByFieldName.Tags,
       label: t("Common:Tags"),
+      default: true,
+    };
+    const size = {
+      id: "sort-by_size",
+      key: SortByFieldName.Size,
+      label: t("Common:Size"),
+      default: true,
+    };
+    const type = {
+      id: "sort-by_type",
+      key: SortByFieldName.Type,
+      label: t("Common:Type"),
       default: true,
     };
     const roomType = {
       id: "sort-by_room-type",
-      key: "roomType",
+      key: SortByFieldName.RoomType,
       label: t("Common:Type"),
       default: true,
     };
@@ -1141,6 +1685,69 @@ const SectionFilterContent = ({
             infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(modifiedDate);
+        }
+      } else if (isTrash) {
+        const availableSort = localStorage
+          ?.getItem(`${TABLE_TRASH_COLUMNS}=${userId}`)
+          ?.split(",");
+
+        const infoPanelColumnsSize = localStorage
+          ?.getItem(`${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`)
+          ?.split(" ");
+
+        if (availableSort?.includes("Room")) {
+          const idx = availableSort.findIndex((x) => x === "Room");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(room);
+        }
+        if (availableSort?.includes("AuthorTrash")) {
+          const idx = availableSort.findIndex((x) => x === "AuthorTrash");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(authorOption);
+        }
+        if (availableSort?.includes("CreatedTrash")) {
+          const idx = availableSort.findIndex((x) => x === "CreatedTrash");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(creationDate);
+        }
+        if (availableSort?.includes("Erasure")) {
+          const idx = availableSort.findIndex((x) => x === "Erasure");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(erasure);
+        }
+        if (availableSort?.includes("SizeTrash")) {
+          const idx = availableSort.findIndex((x) => x === "SizeTrash");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(size);
+        }
+        if (availableSort?.includes("TypeTrash")) {
+          const idx = availableSort.findIndex((x) => x === "TypeTrash");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(type);
         }
       } else {
         const availableSort = localStorage
@@ -1203,6 +1810,12 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
+      } else if (isTrash) {
+        commonOptions.push(authorOption);
+        commonOptions.push(creationDate);
+        commonOptions.push(erasure);
+        commonOptions.push(size);
+        commonOptions.push(type);
       } else {
         commonOptions.push(authorOption);
         commonOptions.push(creationDate);
@@ -1213,13 +1826,48 @@ const SectionFilterContent = ({
     }
 
     return commonOptions;
-  }, [personal, isRooms, t, userId, infoPanelVisible, viewAs, isPersonalRoom]);
+  }, [
+    personal,
+    isRooms,
+    isAccountsPage,
+    t,
+    userId,
+    infoPanelVisible,
+    viewAs,
+    isPersonalRoom,
+    isTrash,
+  ]);
 
   const removeSelectedItem = React.useCallback(
     ({ key, group }) => {
-      if (isRooms) {
-        setIsLoading(true);
+      setIsLoading(true);
+      if (isAccountsPage) {
+        const newFilter = accountsFilter.clone();
+        newFilter.page = 0;
 
+        if (group === "filter-status") {
+          newFilter.employeeStatus = null;
+          newFilter.activationStatus = null;
+        }
+
+        if (group === "filter-type") {
+          newFilter.role = null;
+        }
+
+        if (group === "filter-other") {
+          newFilter.group = null;
+        }
+
+        if (group === "filter-account") {
+          newFilter.payments = null;
+        }
+
+        if (group === "filter-login-type") {
+          newFilter.accountLoginType = null;
+        }
+
+        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+      } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
         if (group === FilterGroups.roomFilterProviderType) {
@@ -1265,9 +1913,12 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
 
-        fetchRooms(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        const path =
+          newFilter.searchArea === RoomSearchArea.Active
+            ? "rooms/shared"
+            : "rooms/archived";
+
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       } else {
         const newFilter = filter.clone();
 
@@ -1284,25 +1935,18 @@ const SectionFilterContent = ({
         if (group === FilterGroups.filterContent) {
           newFilter.searchInContent = null;
         }
+        if (group === FilterGroups.filterRoom) {
+          newFilter.roomId = null;
+        }
 
         newFilter.page = 0;
 
-        setIsLoading(true);
+        const path = location.pathname.split("/filter")[0];
 
-        fetchFiles(selectedFolderId, newFilter).finally(() =>
-          setIsLoading(false)
-        );
+        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
       }
     },
-    [
-      isRooms,
-      fetchFiles,
-      fetchRooms,
-      setIsLoading,
-      roomsFilter,
-      filter,
-      selectedFolderId,
-    ]
+    [isRooms, isAccountsPage, setIsLoading, roomsFilter, filter, accountsFilter]
   );
 
   const onSortButtonClick = (isOpen) => {
@@ -1312,20 +1956,34 @@ const SectionFilterContent = ({
   };
 
   const clearAll = () => {
-    if (isRooms) {
-      setIsLoading(true);
+    setIsLoading(true);
+    if (isAccountsPage) {
+      const newFilter = AccountsFilter.getDefault();
 
-      fetchRooms(selectedFolderId).finally(() => setIsLoading(false));
+      navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+    } else if (isRooms) {
+      const newFilter = RoomsFilter.getDefault();
+
+      if (isArchiveFolder) {
+        newFilter.searchArea = RoomSearchArea.Archive;
+      }
+
+      const path =
+        newFilter.searchArea === RoomSearchArea.Active
+          ? "rooms/shared"
+          : "rooms/archived";
+
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
     } else {
-      setIsLoading(true);
+      const newFilter = FilesFilter.getDefault();
 
-      fetchFiles(selectedFolderId).finally(() => setIsLoading(false));
+      const path = location.pathname.split("/filter")[0];
+
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
     }
   };
 
-  if (!isLoadedFilter) {
-    return <Loaders.Filter />;
-  }
+  if (showFilterLoader) return <Loaders.Filter />;
 
   return (
     <FilterInput
@@ -1336,11 +1994,12 @@ const SectionFilterContent = ({
       onSort={onSort}
       getSortData={getSortData}
       getSelectedSortData={getSelectedSortData}
-      viewAs={viewAs}
-      viewSelectorVisible={true}
+      viewAs={isAccountsPage ? accountsViewAs : viewAs}
+      viewSelectorVisible={!isAccountsPage}
       onChangeViewAs={onChangeViewAs}
       getViewSettingsData={getViewSettingsData}
       onSearch={onSearch}
+      onClearFilter={onClearFilter}
       getSelectedInputValue={getSelectedInputValue}
       filterHeader={t("Common:AdvancedFilter")}
       placeholder={t("Common:Search")}
@@ -1352,6 +2011,7 @@ const SectionFilterContent = ({
       removeSelectedItem={removeSelectedItem}
       clearAll={clearAll}
       filterTitle={t("Filter")}
+      sortByTitle={t("Common:SortBy")}
       clearSearch={clearSearch}
       setClearSearch={setClearSearch}
       onSortButtonClick={onSortButtonClick}
@@ -1364,16 +2024,15 @@ export default inject(
     auth,
     filesStore,
     treeFoldersStore,
-    selectedFolderStore,
+    clientLoadingStore,
     tagsStore,
-    filesActionsStore,
+    peopleStore,
   }) => {
     const {
-      fetchFiles,
       filter,
-      fetchRooms,
+
       roomsFilter,
-      setIsLoading,
+
       setViewAs,
       viewAs,
       createThumbnails,
@@ -1383,7 +2042,6 @@ export default inject(
       clearSearch,
       setClearSearch,
       isLoadedEmptyPage,
-      isEmptyPage,
     } = filesStore;
 
     const { providers } = thirdPartyStore;
@@ -1398,6 +2056,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
+      isTrashFolder: isTrash,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -1405,16 +2064,20 @@ export default inject(
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
 
     const {
-      searchTitleOpenLocation,
-      setSearchTitleOpenLocation,
-      isLoadedLocationFiles,
-      setIsLoadedSearchFiles,
-    } = filesActionsStore;
+      filterStore,
+
+      groupsStore,
+      viewAs: accountsViewAs,
+    } = peopleStore;
+
+    const { groups } = groupsStore;
+
+    const { filter: accountsFilter } = filterStore;
 
     return {
       user,
       userId: user.id,
-      selectedFolderId: selectedFolderStore.id,
+
       selectedItem: filter.selectedItem,
       filter,
       roomsFilter,
@@ -1423,10 +2086,12 @@ export default inject(
       isFavoritesFolder,
       isRecentFolder,
       isRooms,
+      isTrash,
+      isArchiveFolder,
 
-      setIsLoading,
-      fetchFiles,
-      fetchRooms,
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      showFilterLoader: clientLoadingStore.showFilterLoader,
+
       fetchTags,
       setViewAs,
       createThumbnails,
@@ -1437,26 +2102,33 @@ export default inject(
       setCurrentRoomsFilter,
       providers,
 
-      searchTitleOpenLocation,
-      setSearchTitleOpenLocation,
-      isLoadedLocationFiles,
-      setIsLoadedSearchFiles,
-
       isLoadedEmptyPage,
-      isEmptyPage,
 
       clearSearch,
       setClearSearch,
 
       setMainButtonMobileVisible,
+
+      user,
+
+      accountsViewAs,
+      groups,
+
+      accountsFilter,
     };
   }
 )(
-  withRouter(
-    withLayoutSize(
-      withTranslation(["Files", "Settings", "Common", "Translations"])(
-        withLoader(observer(SectionFilterContent))(<Loaders.Filter />)
-      )
-    )
+  withLayoutSize(
+    withTranslation([
+      "Files",
+      "Settings",
+      "Common",
+      "Translations",
+      "InfoPanel",
+      "People",
+      "PeopleTranslations",
+      "ConnectDialog",
+      "SmartBanner",
+    ])(observer(SectionFilterContent))
   )
 );

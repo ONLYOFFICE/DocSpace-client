@@ -33,10 +33,6 @@ class UsersStore {
       filterData.pageCount = 100;
     }
 
-    if (filterData.employeeStatus === EmployeeStatus.Active) {
-      filterData.employeeStatus = null;
-    }
-
     if (filterData.group && filterData.group === "root")
       filterData.group = undefined;
 
@@ -119,17 +115,24 @@ class UsersStore {
       case "user":
         toType = EmployeeType.Guest;
         break;
+      case "collaborator":
+        toType = EmployeeType.Collaborator;
+        break;
       case "manager":
         toType = EmployeeType.User;
     }
 
+    let users = null;
+
     try {
-      await api.people.updateUserType(toType, userIds);
+      users = await api.people.updateUserType(toType, userIds);
     } catch (e) {
       throw new Error(e);
     }
 
     await this.getUsersList(filter);
+
+    return users;
   };
 
   updateProfileInUsers = async (updatedProfile) => {
@@ -183,24 +186,14 @@ class UsersStore {
   getUserRole = (user) => {
     if (user.isOwner) return "owner";
     else if (user.isAdmin) return "admin";
-    //TODO: Need refactoring
+    else if (user.isCollaborator) return "collaborator";
     else if (user.isVisitor) return "user";
     else return "manager";
   };
 
-  getUserContextOptions = (
-    isMySelf,
-    isUserOwner,
-    isUserAdmin,
-    statusType,
-    userRole,
-    status
-  ) => {
-    const {
-      isOwner,
-      isAdmin,
-      isVisitor,
-    } = this.peopleStore.authStore.userStore.user;
+  getUserContextOptions = (isMySelf, statusType, userRole, status) => {
+    const { isOwner, isAdmin, isVisitor, isCollaborator } =
+      this.peopleStore.authStore.userStore.user;
 
     const options = [];
 
@@ -231,7 +224,10 @@ class UsersStore {
         } else {
           if (
             isOwner ||
-            (isAdmin && (userRole === "user" || userRole === "manager"))
+            (isAdmin &&
+              (userRole === "user" ||
+                userRole === "manager" ||
+                userRole === "collaborator"))
           ) {
             options.push("separator-1");
 
@@ -248,7 +244,10 @@ class UsersStore {
       case "disabled":
         if (
           isOwner ||
-          (isAdmin && (userRole === "manager" || userRole === "user"))
+          (isAdmin &&
+            (userRole === "manager" ||
+              userRole === "user" ||
+              userRole === "collaborator"))
         ) {
           options.push("enable");
 
@@ -265,7 +264,9 @@ class UsersStore {
       case "pending":
         if (
           isOwner ||
-          ((isAdmin || !isVisitor) && userRole === "manager") ||
+          ((isAdmin || (!isVisitor && !isCollaborator)) &&
+            userRole === "manager") ||
+          userRole === "collaborator" ||
           userRole === "user"
         ) {
           if (isMySelf) {
@@ -281,7 +282,10 @@ class UsersStore {
 
           if (
             isOwner ||
-            (isAdmin && (userRole === "manager" || userRole === "user"))
+            (isAdmin &&
+              (userRole === "manager" ||
+                userRole === "user" ||
+                userRole === "collaborator"))
           ) {
             options.push("separator-1");
 
@@ -362,6 +366,7 @@ class UsersStore {
       isOwner,
       isAdmin: isAdministrator,
       isVisitor,
+      isCollaborator,
       mobilePhone,
       userName,
       activationStatus,
@@ -370,6 +375,7 @@ class UsersStore {
       title,
       firstName,
       lastName,
+      isSSO,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
@@ -380,8 +386,6 @@ class UsersStore {
 
     const options = this.getUserContextOptions(
       isMySelf,
-      isOwner,
-      isAdministrator,
       statusType,
       role,
       status
@@ -397,6 +401,7 @@ class UsersStore {
       role,
       isOwner,
       isAdmin: isAdministrator,
+      isCollaborator,
       isVisitor,
       displayName,
       avatar: currentAvatar,
@@ -409,6 +414,7 @@ class UsersStore {
       position: title,
       firstName,
       lastName,
+      isSSO,
     };
   };
 

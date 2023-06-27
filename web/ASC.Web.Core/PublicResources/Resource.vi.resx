@@ -53,10 +53,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActivateMobilePhoneEmptyCode" xml:space="preserve">
     <value>Trường mã xác nhận không được để trống</value>
@@ -121,6 +121,9 @@
   <data name="ErrorImageWeightLimit" xml:space="preserve">
     <value>Kích thước file hình ảnh quá lớn</value>
   </data>
+  <data name="ErrorIpSecurity" xml:space="preserve">
+    <value>Truy cập vào cổng này bị giới hạn</value>
+  </data>
   <data name="ErrorNotAllowedOption" xml:space="preserve">
     <value>Gói của bạn không hỗ trợ tùy chọn này</value>
   </data>
@@ -131,7 +134,7 @@
     <value>Tên miền không hợp lệ</value>
   </data>
   <data name="ErrorPasswordEmpty" xml:space="preserve">
-    <value>Chưa có mật khẩu</value>
+    <value>Chưa có mật khẩu.</value>
   </data>
   <data name="ErrorPasswordLength" xml:space="preserve">
     <value>từ {0} đến {1} ký tự</value>
@@ -152,7 +155,7 @@
     <value>Không tìm thấy người dùng này</value>
   </data>
   <data name="ErrorUserNotFoundByEmail" xml:space="preserve">
-    <value>Không tìm thấy người dùng với thư điện tử "{0}" </value>
+    <value>Không tìm thấy người dùng với thư điện tử "{0}"</value>
   </data>
   <data name="EuServerRegion" xml:space="preserve">
     <value>Vùng châu Âu (Frankfurt)</value>
@@ -164,23 +167,133 @@
     <value>Lưu ý: kích thước file không được vượt quá {1}{0}{2}</value>
   </data>
   <data name="FileSizePostfix" xml:space="preserve">
-    <value>bytes,KB,MB,GB,TB
-</value>
+    <value>bytes,KB,MB,GB,TB</value>
   </data>
   <data name="FinishInviteJoinEmailMessage" xml:space="preserve">
     <value>Liên kết để xác nhận tài khoản của bạn đã được gửi tới email chỉ định</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Họ</value>
+  </data>
+  <data name="LdapSettingsConnectError" xml:space="preserve">
+    <value>Lỗi kết nối</value>
+  </data>
+  <data name="LdapSettingsErrorCantCreateUsers" xml:space="preserve">
+    <value>Không thể tạo người dùng, dữ liệu nhận được không chính xác.</value>
+  </data>
+  <data name="LdapSettingsErrorCantGetLdapSettings" xml:space="preserve">
+    <value>Server không thể nhận cài đặt.</value>
+  </data>
   <data name="LdapSettingsErrorCantSaveLdapSettings" xml:space="preserve">
     <value>Server không thể lưu cài đặt.</value>
   </data>
+  <data name="LdapSettingsErrorCredentialsNotValid" xml:space="preserve">
+    <value>Tên đăng nhập hoặc mật khẩu không chính xác.</value>
+  </data>
+  <data name="LdapSettingsErrorDomainNotFound" xml:space="preserve">
+    <value>Không tìm thấy tên miền LDAP.</value>
+  </data>
+  <data name="LdapSettingsErrorGroupsNotFound" xml:space="preserve">
+    <value>Không tìm thấy nhóm nào.</value>
+  </data>
+  <data name="LdapSettingsErrorIncorrectLdapFilter" xml:space="preserve">
+    <value>Giá trị Lọc Người dùng không hợp lệ.</value>
+  </data>
+  <data name="LdapSettingsErrorUnknownError" xml:space="preserve">
+    <value>Lỗi không xác định.</value>
+  </data>
+  <data name="LdapSettingsErrorUsersNotFound" xml:space="preserve">
+    <value>Không tìm thấy người dùng.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongGroupAttribute" xml:space="preserve">
+    <value>Không thể gán Thuộc tính nhóm cho một hoặc nhiều nhóm.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongGroupFilter" xml:space="preserve">
+    <value>Lọc Nhóm không chính xác.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongGroupNameAttribute" xml:space="preserve">
+    <value>Không thể gán Thuộc tính Tên Nhóm cho một hoặc nhiều nhóm.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongLoginAttribute" xml:space="preserve">
+    <value>Không thể gán Thuộc tính Đăng nhập cho một hoặc nhiều người dùng.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongServerOrPort" xml:space="preserve">
+    <value>Không thể kết nối với LDAP server. Vui lòng kiểm tra tính chính xác của địa chỉ server và số cổng.</value>
+  </data>
+  <data name="LdapSettingsErrorWrongUserAttribute" xml:space="preserve">
+    <value>Không thể gán Thuộc tính Người dùng cho một hoặc nhiều người dùng.</value>
+  </data>
+  <data name="LdapSettingsInternalServerError" xml:space="preserve">
+    <value>Lỗi nội bộ server.</value>
+  </data>
+  <data name="LdapSettingsModifyLdapUsers" xml:space="preserve">
+    <value>Điều chỉnh người dùng LDAP thành người dùng cổng thông thường</value>
+  </data>
+  <data name="LdapSettingsStatusAddingGroupUser" xml:space="preserve">
+    <value>đang thêm người dùng</value>
+  </data>
+  <data name="LdapSettingsStatusCertificateVerification" xml:space="preserve">
+    <value>Xác minh chứng chỉ</value>
+  </data>
+  <data name="LdapSettingsStatusCheckingLdapSettings" xml:space="preserve">
+    <value>Kiểm tra thiết lập hỗ trợ LDAP</value>
+  </data>
+  <data name="LdapSettingsStatusDisconnecting" xml:space="preserve">
+    <value>Ngắt kết nối LDAP</value>
+  </data>
+  <data name="LdapSettingsStatusGettingGroupsFromLdap" xml:space="preserve">
+    <value>Đang truy xuất danh sách nhóm từ LDAP server</value>
+  </data>
+  <data name="LdapSettingsStatusGettingUsersFromLdap" xml:space="preserve">
+    <value>Đang truy xuất danh sách người dùng từ LDAP server</value>
+  </data>
+  <data name="LdapSettingsStatusLoadingBaseInfo" xml:space="preserve">
+    <value>Đang tải thông tin cơ bản về LDAP</value>
+  </data>
+  <data name="LdapSettingsStatusRemovingGroupUser" xml:space="preserve">
+    <value>đang xóa người dùng</value>
+  </data>
+  <data name="LdapSettingsStatusRemovingOldGroups" xml:space="preserve">
+    <value>Đang loại bỏ các nhóm đã lỗi thời được tải qua LDAP trước đó</value>
+  </data>
+  <data name="LdapSettingsStatusRemovingOldUsers" xml:space="preserve">
+    <value>Đang loại bỏ hồ sơ người dùng đã lỗi thời được tải qua LDAP trước đó</value>
+  </data>
+  <data name="LdapSettingsStatusSavingGroups" xml:space="preserve">
+    <value>Đang lưu nhóm</value>
+  </data>
+  <data name="LdapSettingsStatusSavingSettings" xml:space="preserve">
+    <value>Đang lưu cài đặt</value>
+  </data>
+  <data name="LdapSettingsStatusSavingUsers" xml:space="preserve">
+    <value>Đang lưu người dùng</value>
+  </data>
+  <data name="LdapSettingsStatusSyncingUsers" xml:space="preserve">
+    <value>Đang đồng bộ người dùng</value>
+  </data>
+  <data name="LdapSettingsStrongAuthRequired" xml:space="preserve">
+    <value>Yêu cầu hình thức xác thực bảo mật hơn. Vui lòng sử dụng kết nối được mã hóa hoặc cho phép xác thực cơ bản trên server.</value>
+  </data>
+  <data name="LdapSettingsTenantQuotaSettled" xml:space="preserve">
+    <value>Đã đạt đến giới hạn số người dùng của gói hiện tại</value>
+  </data>
+  <data name="LdapSettingsTlsNotSupported" xml:space="preserve">
+    <value>Server LDAP hiện tại không được hỗ trợ StartTLS.</value>
+  </data>
   <data name="LdapSettingsTooManyOperations" xml:space="preserve">
     <value>Quá nhiều hoạt động từ LDAP.</value>
+  </data>
+  <data name="LdapSettingsWrongSidAttribute" xml:space="preserve">
+    <value>Không thể lấy ID duy nhất cho đối tượng người dùng/nhóm. Theo mặc định, hệ thống sẽ cố gắng khớp với một trong những cách nhận dạng sau: entryUUID, nsuniqueid, GUID, objectSid. Nếu không có thuộc tính nào tương ứng với LDAP server của bạn, vui lòng chỉ rõ thuộc tính cần thiết trong cài đặt ldap.unique.id của file web.appsettings.config.</value>
   </data>
   <data name="LicenseError" xml:space="preserve">
     <value>Giấy phép không đúng</value>
   </data>
   <data name="LicenseErrorExpired" xml:space="preserve">
-    <value>Giấy phép đã hết hạn</value>
+    <value>Giấy phép đã hết hạn.</value>
   </data>
   <data name="LicenseErrorPortal" xml:space="preserve">
     <value>Số cổng thông tin vượt quá số lượng quy định trong giấy phép</value>
@@ -256,5 +369,236 @@
   </data>
   <data name="WhatsNewSubscriptionName" xml:space="preserve">
     <value>Tin tức mới</value>
+  </data>
+  <data name="TariffsFeature_audit" xml:space="preserve">
+    <value>Theo dõi thông tin đăng nhập và hành động của người dùng</value>
+  </data>
+  <data name="TariffsFeature_file_size" xml:space="preserve">
+    <value>Kích thước tập tin tối đa</value>
+  </data>
+  <data name="TariffsFeature_file_size_exception" xml:space="preserve">
+    <value>Kích thước tập tin không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_manager_exception" xml:space="preserve">
+    <value>Số lượng quản trị viên không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_manager_price_count" xml:space="preserve">
+    <value>Số lượng quản trị viên</value>
+  </data>
+  <data name="TariffsFeature_restore" xml:space="preserve">
+    <value>Tự động sao lưu &amp; khôi phục</value>
+  </data>
+  <data name="TariffsFeature_room" xml:space="preserve">
+    <value>Không giới hạn số lượng phòng hoạt động</value>
+  </data>
+  <data name="TariffsFeature_room_exception" xml:space="preserve">
+    <value>Số lượng phòng không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_sso" xml:space="preserve">
+    <value>SSO</value>
+  </data>
+  <data name="TariffsFeature_total_size" xml:space="preserve">
+    <value>không gian lưu trữ {0}</value>
+  </data>
+  <data name="TariffsFeature_total_size_exception" xml:space="preserve">
+    <value>Kích thước lưu trữ đã sử dụng không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_total_size_price_count" xml:space="preserve">
+    <value>Không gian lưu trữ</value>
+  </data>
+  <data name="TariffsFeature_used_room" xml:space="preserve">
+    <value>Số phòng:</value>
+  </data>
+  <data name="TariffsFeature_used_total_size" xml:space="preserve">
+    <value>Không gian lưu trữ đã dùng:</value>
+  </data>
+  <data name="TariffsFeature_used_usersInRoom" xml:space="preserve">
+    <value>Người dùng trong phòng:</value>
+  </data>
+  <data name="TariffsFeature_users" xml:space="preserve">
+    <value>Số lượng người dùng không giới hạn</value>
+  </data>
+  <data name="TariffsFeature_users_exception" xml:space="preserve">
+    <value>Số lượng người dùng không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_usersInRoom" xml:space="preserve">
+    <value>Người dùng trong phòng</value>
+  </data>
+  <data name="TariffsFeature_usersInRoom_exception" xml:space="preserve">
+    <value>Số lượng người dùng trong phòng không được vượt quá {0}</value>
+  </data>
+  <data name="TariffsFeature_whitelabel" xml:space="preserve">
+    <value>Xây dựng thương hiệu &amp; tùy chỉnh</value>
+  </data>
+  <data name="TariffsFeature_used_manager" xml:space="preserve">
+    <value>Số lượng quản trị viên/người dùng cấp cao:</value>
+  </data>
+  <data name="ConsumersBitly" xml:space="preserve">
+    <value>Bitly</value>
+  </data>
+  <data name="ConsumersbitlyClientSecret" xml:space="preserve">
+    <value>apiKey</value>
+  </data>
+  <data name="ConsumersbitlyClientId" xml:space="preserve">
+    <value>đăng nhập</value>
+  </data>
+  <data name="ConsumersBitlyDescription" xml:space="preserve">
+    <value>Kết nối dịch vụ Bitly để rút gọn các liên kết lời mời của cổng thông tin và các liên kết được chia sẻ trong mô-đun Tài liệu.</value>
+  </data>
+  <data name="ConsumersboxClientId" xml:space="preserve">
+    <value>Box ID</value>
+  </data>
+  <data name="ConsumersBoxDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để quản lý các file và thư mục Box.</value>
+  </data>
+  <data name="ConsumersClickatell" xml:space="preserve">
+    <value>Clickatell</value>
+  </data>
+  <data name="ConsumersclickatellapiKey" xml:space="preserve">
+    <value>apiKey</value>
+  </data>
+  <data name="ConsumersClickatellDescription" xml:space="preserve">
+    <value>Bật ứng dụng cho phép xác thực hai yếu tố thông qua Clickatell.</value>
+  </data>
+  <data name="ConsumersDocuSign" xml:space="preserve">
+    <value>DocuSign</value>
+  </data>
+  <data name="ConsumersdocuSignClientId" xml:space="preserve">
+    <value>DocuSign Key</value>
+  </data>
+  <data name="ConsumersDocuSignDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để thêm chữ ký điện tử DocuSign vào tài liệu.</value>
+  </data>
+  <data name="ConsumersdocuSignHost" xml:space="preserve">
+    <value>Điểm cuối xác thực DocuSign</value>
+  </data>
+  <data name="ConsumersDropBoxDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để quản lý các file và thư mục Dropbox.</value>
+  </data>
+  <data name="ConsumersDropBoxKey" xml:space="preserve">
+    <value>DropBox ID</value>
+  </data>
+  <data name="ConsumersfacebookClientId" xml:space="preserve">
+    <value>Facebook ID</value>
+  </data>
+  <data name="ConsumersFacebookDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để đăng nhập vào hệ thống bằng tài khoản Facebook.</value>
+  </data>
+  <data name="ConsumersfacebookClientSecret" xml:space="preserve">
+    <value>Facebook Key</value>
+  </data>
+  <data name="ConsumersFirebase" xml:space="preserve">
+    <value>Firebase</value>
+  </data>
+  <data name="Consumersfirebase_apiKey" xml:space="preserve">
+    <value>Web API key</value>
+  </data>
+  <data name="ConsumersFirebaseDescription" xml:space="preserve">
+    <value>Kết nối Dịch vụ Tin nhắn đám mây Firebase để nhận thông báo về tin nhắn được gửi cho bạn.</value>
+  </data>
+  <data name="Consumersfirebase_messagingSenderId" xml:space="preserve">
+    <value>ID người gửi</value>
+  </data>
+  <data name="Consumersfirebase_projectId" xml:space="preserve">
+    <value>ID dự án</value>
+  </data>
+  <data name="ConsumersGoogleDescription" xml:space="preserve">
+    <value>Kết nối dự án để đăng nhập vào cổng thông tin bằng tài khoản Google và quản lý file và thư mục Google Drive.</value>
+  </data>
+  <data name="ConsumersLinkedInDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để đăng nhập vào hệ thống bằng tài khoản LinkedIn.</value>
+  </data>
+  <data name="ConsumersSkyDriveDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để quản lý file và thư mục OneDrive.</value>
+  </data>
+  <data name="ConsumersSmscDescription" xml:space="preserve">
+    <value>Kích hoạt ứng dụng cho phép xác thực hai yếu tố thông qua Trung tâm SMS.</value>
+  </data>
+  <data name="Consumerssmscpsw" xml:space="preserve">
+    <value>Mật khẩu hoặc mật khẩu MD5 hash bằng chữ thường</value>
+  </data>
+  <data name="ConsumersTwilioDescription" xml:space="preserve">
+    <value>Thêm Twilio để có thể gọi cho các liên hệ CRM ngay từ trình duyệt.</value>
+  </data>
+  <data name="Consumerstwiliosender" xml:space="preserve">
+    <value>Số điện thoại từ Twilio (được yêu cầu để cho phép gửi SMS)</value>
+  </data>
+  <data name="ConsumersTwitterDescription" xml:space="preserve">
+    <value>Kết nối ứng dụng để đăng nhập vào hệ thống bằng tài khoản Twitter và tìm kiếm địa chỉ liên hệ.</value>
+  </data>
+  <data name="ConsumersYahooDescription" xml:space="preserve">
+    <value>Bật ứng dụng cho phép nhập liên hệ từ Yahoo.</value>
+  </data>
+  <data name="ErrorFileNotImage" xml:space="preserve">
+    <value>Loại file ảnh không xác định</value>
+  </data>
+  <data name="ErrorImageSize" xml:space="preserve">
+    <value>Kích thước hình ảnh vượt quá thông số cho phép</value>
+  </data>
+  <data name="ConsumersDropBoxSecret" xml:space="preserve">
+    <value>DropBox Key</value>
+  </data>
+  <data name="ConsumersEasyBib" xml:space="preserve">
+    <value>EasyBib</value>
+  </data>
+  <data name="ConsumersGoogle" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="ConsumersgoogleClientId" xml:space="preserve">
+    <value>Google ID</value>
+  </data>
+  <data name="ConsumersgoogleClientSecret" xml:space="preserve">
+    <value>Google Key</value>
+  </data>
+  <data name="ConsumersMailru" xml:space="preserve">
+    <value>Mail.ru</value>
+  </data>
+  <data name="ConsumersMicrosoft" xml:space="preserve">
+    <value>Microsoft</value>
+  </data>
+  <data name="ConsumersSkyDrive" xml:space="preserve">
+    <value>OneDrive</value>
+  </data>
+  <data name="ConsumersSmsc" xml:space="preserve">
+    <value>Trung tâm SMS</value>
+  </data>
+  <data name="Consumerssmsclogin" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="ConsumersTelegram" xml:space="preserve">
+    <value>Telegram</value>
+  </data>
+  <data name="ConsumersTwilio" xml:space="preserve">
+    <value>Twilio</value>
+  </data>
+  <data name="ConsumerstwilioAccountSid" xml:space="preserve">
+    <value>Tài khoản Sid</value>
+  </data>
+  <data name="ConsumerstwilioAuthToken" xml:space="preserve">
+    <value>Token xác thực</value>
+  </data>
+  <data name="ConsumersYahoo" xml:space="preserve">
+    <value>Yahoo</value>
+  </data>
+  <data name="ConsumersYandex" xml:space="preserve">
+    <value>Yandex</value>
+  </data>
+  <data name="ConsumersWordpress" xml:space="preserve">
+    <value>WordPress</value>
+  </data>
+  <data name="ConsumersTwitter" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="ConsumersYandexClientSecret" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="ConsumersdocuSignClientSecret" xml:space="preserve">
+    <value>DocuSign Secret</value>
+  </data>
+  <data name="Tariffs_admin" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="Tariffs_startup" xml:space="preserve">
+    <value>Startup</value>
   </data>
 </root>

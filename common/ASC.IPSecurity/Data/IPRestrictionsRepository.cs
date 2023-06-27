@@ -38,42 +38,31 @@ public class IPRestrictionsRepository
         _mapper = mapper;
     }
 
-    public List<IPRestriction> Get(int tenant)
+    public async Task<List<IPRestriction>> GetAsync(int tenant)
     {
         using var tenantDbContext = _dbContextManager.CreateDbContext();
-        return tenantDbContext.TenantIpRestrictions
-            .Where(r => r.Tenant == tenant)
+        return await tenantDbContext.TenantIpRestrictions
+            .Where(r => r.TenantId == tenant)
             .ProjectTo<IPRestriction>(_mapper.ConfigurationProvider)
-            .ToList();
+            .ToListAsync();
     }
 
-    public List<IpRestrictionBase> Save(IEnumerable<IpRestrictionBase> ips, int tenant)
+    public async Task<List<IpRestrictionBase>> SaveAsync(IEnumerable<IpRestrictionBase> ips, int tenant)
     {
         using var tenantDbContext = _dbContextManager.CreateDbContext();
-        var strategy = tenantDbContext.Database.CreateExecutionStrategy();
 
-        strategy.Execute(() =>
-        {
-            using var tenantDbContext = _dbContextManager.CreateDbContext();
-            using var tx = tenantDbContext.Database.BeginTransaction();
-
-            var restrictions = tenantDbContext.TenantIpRestrictions.Where(r => r.Tenant == tenant).ToList();
-            tenantDbContext.TenantIpRestrictions.RemoveRange(restrictions);
-            tenantDbContext.SaveChanges();
+        tenantDbContext.TenantIpRestrictions.RemoveRange(tenantDbContext.TenantIpRestrictions.Where(r => r.TenantId == tenant));
 
             var ipsList = ips.Select(r => new TenantIpRestrictions
             {
-                Tenant = tenant,
+                TenantId = tenant,
                 Ip = r.Ip,
                 ForAdmin = r.ForAdmin
-                
+
             });
 
             tenantDbContext.TenantIpRestrictions.AddRange(ipsList);
-            tenantDbContext.SaveChanges();
-
-            tx.Commit();
-        });
+            await tenantDbContext.SaveChangesAsync();
 
         return ips.ToList();
     }

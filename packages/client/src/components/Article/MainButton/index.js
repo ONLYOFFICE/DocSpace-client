@@ -9,6 +9,7 @@ import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentati
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
+import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import React from "react";
@@ -19,17 +20,15 @@ import MainButton from "@docspace/components/main-button";
 import { withTranslation } from "react-i18next";
 import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
-import { combineUrl } from "@docspace/common/utils";
-import config from "PACKAGE_FILE";
-import withLoader from "../../../HOCs/withLoader";
+
 import { Events, EmployeeType } from "@docspace/common/constants";
 import { getMainButtonItems } from "SRC_DIR/helpers/plugins";
 
 import toastr from "@docspace/components/toast/toastr";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
 
 import { resendInvitesAgain } from "@docspace/common/api/people";
@@ -38,33 +37,39 @@ const StyledButton = styled(Button)`
   font-weight: 700;
   font-size: 16px;
   padding: 0;
-  opacity: 1;
+  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
-  background-color: ${({ currentColorScheme }) =>
-    currentColorScheme.main.accent} !important;
-  background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-  border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+  background-color: ${({ $currentColorScheme }) =>
+    $currentColorScheme.main.accent} !important;
+  background: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+  border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
 
-  :hover {
-    background-color: ${({ currentColorScheme }) =>
-      currentColorScheme.main.accent};
-    opacity: 0.85;
-    background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-    border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-  }
+  ${(props) =>
+    !props.isDisabled &&
+    css`
+      :hover {
+        background-color: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        opacity: 0.85;
+        background: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+      }
 
-  :active {
-    background-color: ${({ currentColorScheme }) =>
-      currentColorScheme.main.accent};
-    background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-    border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-    opacity: 1;
-    filter: brightness(90%);
-    cursor: pointer;
-  }
+      :active {
+        background-color: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        background: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+        opacity: 1;
+        filter: brightness(90%);
+        cursor: pointer;
+      }
+    `}
 
   .button-content {
-    color: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+    color: ${({ $currentColorScheme }) => $currentColorScheme.text.accent};
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -82,24 +87,23 @@ const StyledButton = styled(Button)`
 const ArticleMainButtonContent = (props) => {
   const {
     t,
+    tReady,
     isMobileArticle,
-    canCreate,
+
     isPrivacy,
     encryptedFile,
     encrypted,
     startUpload,
     setAction,
     setSelectFileDialogVisible,
-    isArticleLoading,
+    showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
-    history,
+
     currentFolderId,
     isRoomsFolder,
     isArchiveFolder,
-
-    selectedTreeNode,
 
     enablePlugins,
 
@@ -108,14 +112,20 @@ const ArticleMainButtonContent = (props) => {
     isOwner,
     isAdmin,
 
-    canCreateFiles,
-
     setInvitePanelOptions,
 
     mainButtonMobileVisible,
+
+    security,
+    isGracePeriod,
+    setInviteUsersWarningDialogVisible,
   } = props;
 
-  const isAccountsPage = selectedTreeNode[0] === "accounts";
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAccountsPage = location.pathname.includes("/accounts/filter");
+  const isSettingsPage = location.pathname.includes("settings");
 
   const inputFilesElement = React.useRef(null);
   const inputFolderElement = React.useRef(null);
@@ -143,6 +153,11 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onCreateRoom = React.useCallback(() => {
+    if (isGracePeriod) {
+      setInviteUsersWarningDialogVisible(true);
+      return;
+    }
+
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
   }, []);
@@ -182,17 +197,16 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    history.push(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/form-gallery/${currentFolderId}/`
-      )
-    );
+    navigate(`/form-gallery/${currentFolderId}/`);
   };
 
   const onInvite = React.useCallback((e) => {
     const type = e.action;
+
+    if (isGracePeriod) {
+      setInviteUsersWarningDialogVisible(true);
+      return;
+    }
 
     setInvitePanelOptions({
       visible: true,
@@ -211,16 +225,12 @@ const ArticleMainButtonContent = (props) => {
   }, [resendInvitesAgain]);
 
   React.useEffect(() => {
-    const isSettingFolder =
-      window.location.pathname.endsWith("/settings/common") ||
-      window.location.pathname.endsWith("/settings/admin");
-
     const isFolderHiddenDropdown =
       isArchiveFolder ||
       isFavoritesFolder ||
       isRecentFolder ||
       isRecycleBinFolder ||
-      isSettingFolder;
+      isSettingsPage;
 
     if (isFolderHiddenDropdown) {
       setIsDropdownMainButton(false);
@@ -232,11 +242,11 @@ const ArticleMainButtonContent = (props) => {
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
-    window.location.pathname,
+    isSettingsPage,
   ]);
 
   React.useEffect(() => {
-    if (isRoomsFolder) return;
+    if (isRoomsFolder || isSettingsPage) return;
 
     const formActions = [
       {
@@ -277,9 +287,9 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const actions = isAccountsPage
+    const addAdmin = isOwner
       ? [
-          isOwner && {
+          {
             id: "invite_doc-space-administrator",
             className: "main-button_drop-down",
             icon: PersonAdminReactSvgUrl,
@@ -288,6 +298,12 @@ const ArticleMainButtonContent = (props) => {
             action: EmployeeType.Admin,
             key: "administrator",
           },
+        ]
+      : [];
+
+    const actions = isAccountsPage
+      ? [
+          ...addAdmin,
           {
             id: "invite_room-admin",
             className: "main-button_drop-down",
@@ -296,6 +312,15 @@ const ArticleMainButtonContent = (props) => {
             onClick: onInvite,
             action: EmployeeType.User,
             key: "manager",
+          },
+          {
+            id: "invite_room-collaborator",
+            className: "main-button_drop-down",
+            icon: PersonReactSvgUrl,
+            label: t("Common:PowerUser"),
+            onClick: onInvite,
+            action: EmployeeType.Collaborator,
+            key: "collaborator",
           },
           {
             id: "invite_user",
@@ -312,7 +337,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_new-document",
             className: "main-button_drop-down",
             icon: ActionsDocumentsReactSvgUrl,
-            label: t("Common:NewDocument"),
+            label: t("Files:Document"),
             onClick: onCreate,
             action: "docx",
             key: "docx",
@@ -321,7 +346,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_new-spreadsheet",
             className: "main-button_drop-down",
             icon: SpreadsheetReactSvgUrl,
-            label: t("Common:NewSpreadsheet"),
+            label: t("Files:Spreadsheet"),
             onClick: onCreate,
             action: "xlsx",
             key: "xlsx",
@@ -330,7 +355,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_new-presentation",
             className: "main-button_drop-down",
             icon: ActionsPresentationReactSvgUrl,
-            label: t("Common:NewPresentation"),
+            label: t("Files:Presentation"),
             onClick: onCreate,
             action: "pptx",
             key: "pptx",
@@ -340,7 +365,7 @@ const ArticleMainButtonContent = (props) => {
             id: "actions_new-folder",
             className: "main-button_drop-down",
             icon: CatalogFolderReactSvgUrl,
-            label: t("Common:NewFolder"),
+            label: t("Files:Folder"),
             onClick: onCreate,
             key: "new-folder",
           },
@@ -408,6 +433,7 @@ const ArticleMainButtonContent = (props) => {
     isPrivacy,
     currentFolderId,
     isAccountsPage,
+    isSettingsPage,
     enablePlugins,
     isRoomsFolder,
     isOwner,
@@ -421,24 +447,26 @@ const ArticleMainButtonContent = (props) => {
     onUploadFolderClick,
   ]);
 
-  const canInvite =
-    isAccountsPage &&
-    selectedTreeNode.length > 1 &&
-    selectedTreeNode[1] === "filter";
   const mainButtonText = isAccountsPage
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled =
-    ((!canCreate || (!canCreateFiles && !isRoomsFolder)) && !canInvite) ||
-    isArchiveFolder;
-  const isProfile = history.location.pathname === "/accounts/view/@self";
+  const isDisabled = isSettingsPage
+    ? isSettingsPage
+    : isAccountsPage
+    ? !isAccountsPage
+    : !security?.Create;
+
+  const isProfile = location.pathname.includes("/profile");
+
+  if (showArticleLoader)
+    return isMobileArticle ? null : <Loaders.ArticleButton height="32px" />;
 
   return (
     <>
       {isMobileArticle ? (
         <>
-          {!isArticleLoading && !isProfile && (canCreateFiles || canInvite) && (
+          {!isProfile && (security?.Create || isAccountsPage) && (
             <MobileView
               t={t}
               titleProp={t("Upload")}
@@ -456,11 +484,12 @@ const ArticleMainButtonContent = (props) => {
           id="rooms-shared_create-room-button"
           label={t("Files:NewRoom")}
           onClick={onCreateRoom}
-          currentColorScheme={currentColorScheme}
+          $currentColorScheme={currentColorScheme}
           isDisabled={isDisabled}
           size="small"
           primary
           scale
+          title={t("Files:NewRoom")}
         />
       ) : (
         <MainButton
@@ -473,6 +502,7 @@ const ArticleMainButtonContent = (props) => {
           isDropdown={isDropdownMainButton}
           text={mainButtonText}
           model={model}
+          title={mainButtonText}
         />
       )}
 
@@ -509,15 +539,10 @@ export default inject(
     uploadDataStore,
     treeFoldersStore,
     selectedFolderStore,
-    accessRightsStore,
+    clientLoadingStore,
   }) => {
-    const {
-      isLoaded,
-      firstLoad,
-      isLoading,
-      canCreate,
-      mainButtonMobileVisible,
-    } = filesStore;
+    const { showArticleLoader } = clientLoadingStore;
+    const { mainButtonMobileVisible } = filesStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -528,23 +553,28 @@ export default inject(
       selectedTreeNode,
     } = treeFoldersStore;
     const { startUpload } = uploadDataStore;
-    const { setSelectFileDialogVisible, setInvitePanelOptions } = dialogsStore;
-
-    const isArticleLoading = (!isLoaded || isLoading) && firstLoad;
+    const {
+      setSelectFileDialogVisible,
+      setInvitePanelOptions,
+      setInviteUsersWarningDialogVisible,
+    } = dialogsStore;
 
     const { enablePlugins, currentColorScheme } = auth.settingsStore;
 
+    const security = selectedFolderStore.security;
+
     const currentFolderId = selectedFolderStore.id;
 
-    const { isAdmin, isOwner, isVisitor } = auth.userStore.user;
-
-    const { canCreateFiles } = accessRightsStore;
+    const { isAdmin, isOwner } = auth.userStore.user;
+    const { isGracePeriod } = auth.currentTariffStatusStore;
 
     return {
+      isGracePeriod,
+      setInviteUsersWarningDialogVisible,
       showText: auth.settingsStore.showText,
       isMobileArticle: auth.settingsStore.isMobileArticle,
 
-      isArticleLoading,
+      showArticleLoader,
       isPrivacy: isPrivacyFolder,
       isFavoritesFolder,
       isRecentFolder,
@@ -554,17 +584,11 @@ export default inject(
       isArchiveFolder,
       selectedTreeNode,
 
-      canCreate,
-      canCreateFiles,
-
       startUpload,
 
       setSelectFileDialogVisible,
       setInvitePanelOptions,
 
-      isLoading,
-      isLoaded,
-      firstLoad,
       currentFolderId,
 
       enablePlugins,
@@ -572,9 +596,9 @@ export default inject(
 
       isAdmin,
       isOwner,
-      isVisitor,
 
       mainButtonMobileVisible,
+      security,
     };
   }
 )(
@@ -585,9 +609,5 @@ export default inject(
     "Files",
     "People",
     "PeopleTranslations",
-  ])(
-    withLoader(observer(withRouter(ArticleMainButtonContent)))(
-      <Loaders.ArticleButton height="28px" />
-    )
-  )
+  ])(observer(ArticleMainButtonContent))
 );

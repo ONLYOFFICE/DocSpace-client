@@ -17,6 +17,9 @@ import {
 import IconButton from "../icon-button";
 import commonIconsStyles from "../utils/common-icons-style";
 
+import Text from "../text";
+import Tooltip from "../tooltip";
+
 const StyledGuestIcon = styled(GuestReactSvg)`
   ${commonIconsStyles}
 `;
@@ -63,6 +66,8 @@ const Avatar = (props) => {
     editAction,
     isDefaultSource = false,
     hideRoleIcon,
+    tooltipContent,
+    withTooltip,
   } = props;
   let isDefault = false,
     isIcon = false;
@@ -88,6 +93,8 @@ const Avatar = (props) => {
 
   const roleIcon = getRoleIcon(role);
 
+  const uniqueTooltipId = withTooltip ? `roleTooltip_${Math.random()}` : "";
+
   return (
     <StyledAvatar {...props}>
       <AvatarWrapper source={source} userName={userName}>
@@ -104,7 +111,27 @@ const Avatar = (props) => {
         </EditContainer>
       ) : (
         <>
-          {!hideRoleIcon && <RoleWrapper size={size}>{roleIcon}</RoleWrapper>}
+          {!hideRoleIcon && (
+            <>
+              <RoleWrapper
+                size={size}
+                data-for={uniqueTooltipId}
+                data-tip={tooltipContent}
+              >
+                {roleIcon}
+              </RoleWrapper>
+              {withTooltip && (
+                <Tooltip
+                  id={uniqueTooltipId}
+                  getContent={(dataTip) => (
+                    <Text fontSize="12px">{dataTip}</Text>
+                  )}
+                  effect="float"
+                  place="right"
+                />
+              )}
+            </>
+          )}
         </>
       )}
     </StyledAvatar>
@@ -114,18 +141,27 @@ const Avatar = (props) => {
 Avatar.propTypes = {
   /** Size of avatar */
   size: PropTypes.oneOf(["max", "big", "medium", "base", "small", "min"]),
-  /** Adds a user role table */
-  role: PropTypes.oneOf(["owner", "admin", "guest", "user", "manager", ""]),
-  /** Provide either a url to display as `Picture` or path to **.svg** file to display as `Icon` */
+  /** Adds a table of user roles */
+  role: PropTypes.oneOf([
+    "owner",
+    "admin",
+    "guest",
+    "user",
+    "manager",
+    "collaborator",
+    "",
+  ]),
+  /** Displays as `Picture` in case the url is specified and as `Icon` in case the path to the .svg file is specified */
   source: PropTypes.string,
-  /** Provide this and leave `source` empty to display as initials */
+  /** Allows to display a user name as initials when `source` is set to blank */
   userName: PropTypes.string,
+  /** Enables avatar editing */
   editing: PropTypes.bool,
-  /** Provide this and leave `source` empty to display as default icon */
+  /** Allows to display as a default icon when `source` is set to blank */
   isDefaultSource: PropTypes.bool,
   /** Function called when the avatar change button is pressed */
   editAction: PropTypes.func,
-  /** Hide user role */
+  /** Hides user role */
   hideRoleIcon: PropTypes.bool,
   /** Accepts class */
   className: PropTypes.string,
@@ -133,6 +169,10 @@ Avatar.propTypes = {
   id: PropTypes.string,
   /** Accepts css style  */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  /** Show tooltip on hover role icon */
+  withTooltip: PropTypes.bool,
+  /** Tooltip content */
+  tooltipContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 Avatar.defaultProps = {
@@ -142,6 +182,8 @@ Avatar.defaultProps = {
   userName: "",
   editing: false,
   hideRoleIcon: false,
+  withTooltip: false,
+  tooltipContent: "",
 };
 
 export default memo(Avatar);

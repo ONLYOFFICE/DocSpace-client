@@ -15,6 +15,7 @@ import { login } from "@docspace/common/utils/loginUtils";
 import toastr from "@docspace/components/toast/toastr";
 import { thirdPartyLogin } from "@docspace/common/api/user";
 import { setWithCredentialsStatus } from "@docspace/common/api/client";
+import { isMobileOnly } from "react-device-detect";
 
 interface ILoginFormProps {
   isLoading: boolean;
@@ -51,17 +52,17 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  const [isWithoutPasswordLogin, setIsWithoutPasswordLogin] = useState(
-    IS_ROOMS_MODE
-  );
+  const [isWithoutPasswordLogin, setIsWithoutPasswordLogin] =
+    useState(IS_ROOMS_MODE);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { t } = useTranslation(["Login", "Common"]);
+  const { t, ready } = useTranslation(["Login", "Common"]);
 
-  const { message, confirmedEmail } = match || {
+  const { message, confirmedEmail, authError } = match || {
     message: "",
     confirmedEmail: "",
+    authError: "",
   };
 
   const authCallback = (profile: string) => {
@@ -78,6 +79,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         if (redirectPath) {
           sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
+        } else {
+          window.location.replace("/");
         }
       })
       .catch(() => {
@@ -99,10 +102,18 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     message && setErrorText(message);
     confirmedEmail && setIdentifier(confirmedEmail);
 
+    const messageEmailConfirmed = t("MessageEmailConfirmed");
+    const messageAuthorize = t("MessageAuthorize");
+
+    const text = `${messageEmailConfirmed} ${messageAuthorize}`;
+
+    confirmedEmail && ready && toastr.success(text);
+    authError && ready && toastr.error(t("Common:ProviderLoginError"));
+
     focusInput();
 
     window.authCallback = authCallback;
-  }, []);
+  }, [message, confirmedEmail]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -156,8 +167,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     const session = !isChecked;
     login(user, hash, session)
       .then((res: string | object) => {
+        const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath = sessionStorage.getItem("referenceUrl");
-        if (redirectPath) {
+        if (redirectPath && !isConfirm) {
           sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
           return;
@@ -302,10 +314,12 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                       <HelpButton
                         id="login_remember-hint"
                         className="help-button"
+                        offsetRight={0}
                         helpButtonHeaderContent={t("CookieSettingsTitle")}
                         tooltipContent={
                           <Text fontSize="12px">{t("RememberHelper")}</Text>
                         }
+                        tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
                       />
                     )
                   }
@@ -314,7 +328,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
               <Link
                 fontSize="13px"
-                color="#316DAA"
                 className="login-link"
                 type="page"
                 isHovered={false}
@@ -356,7 +369,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           {/*<Link
                   fontWeight="600"
                   fontSize="13px"
-                  color="#316DAA"
                   type="action"
                   isHovered={true}
                   onClick={onLoginWithCodeClick}
@@ -365,14 +377,11 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                 </Link>*/}
           {enableAdmMess && (
             <>
-              <Text color="#A3A9AE" className="login-or-access-text">
-                {t("Or")}
-              </Text>
+              <Text className="login-or-access-text">{t("Or")}</Text>
               <Link
                 id="login_recover-link"
                 fontWeight="600"
                 fontSize="13px"
-                color="#316DAA"
                 type="action"
                 isHovered={true}
                 className="login-link recover-link"
@@ -390,7 +399,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           <Link
             fontWeight="600"
             fontSize="13px"
-            color="#316DAA"
             type="action"
             isHovered={true}
             onClick={onLoginWithPasswordClick}
@@ -398,11 +406,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
             {t("SignInWithPassword")}
           </Link>
         </div>
-      )}
-      {confirmedEmail && (
-        <Text isBold={true} fontSize="16px">
-          {t("MessageEmailConfirmed")} {t("MessageAuthorize")}
-        </Text>
       )}
     </form>
   );

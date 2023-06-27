@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import elementResizeDetectorMaker from "element-resize-detector";
 import TableContainer from "@docspace/components/table-container";
 import { inject, observer } from "mobx-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -116,10 +117,11 @@ const Table = ({
   hasMoreFiles,
   filterTotal,
   isRooms,
+  isTrashFolder,
   withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
-  setUploadedFileIdWithVersion,
+  highlightFile,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -127,12 +129,17 @@ const Table = ({
   const ref = useRef(null);
   const tagRef = useRef(null);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
+    const width = window.innerWidth;
+
     if ((viewAs !== "table" && viewAs !== "row") || !setViewAs) return;
     // 400 - it is desktop info panel width
     if (
-      (sectionWidth < 1025 && !infoPanelVisible) ||
-      ((sectionWidth < 625 || (viewAs === "row" && sectionWidth < 1025)) &&
+      (width < 1025 && !infoPanelVisible) ||
+      ((width < 625 || (viewAs === "row" && width < 1025)) &&
         infoPanelVisible) ||
       isMobile
     ) {
@@ -174,6 +181,45 @@ const Table = ({
     }
   }, []);
 
+  React.useEffect(() => {
+    if (!isRooms) setTagCount(0);
+  }, [isRooms]);
+
+  const filesListNode = useMemo(() => {
+    return filesList.map((item, index) => (
+      <TableRow
+        id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+        key={
+          item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
+        }
+        item={item}
+        itemIndex={index}
+        index={index}
+        setFirsElemChecked={setFirsElemChecked}
+        setHeaderBorder={setHeaderBorder}
+        theme={theme}
+        tagCount={tagCount}
+        isRooms={isRooms}
+        isTrashFolder={isTrashFolder}
+        hideColumns={hideColumns}
+        isHighlight={
+          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+        }
+      />
+    ));
+  }, [
+    filesList,
+    setFirsElemChecked,
+    setHeaderBorder,
+    theme,
+    tagCount,
+    isRooms,
+    hideColumns,
+    highlightFile.id,
+    highlightFile.isExst,
+    isTrashFolder,
+  ]);
+
   return (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
@@ -181,6 +227,8 @@ const Table = ({
         containerRef={ref}
         tagRef={onSetTagRef}
         setHideColumns={setHideColumns}
+        navigate={navigate}
+        location={location}
       />
 
       <TableBody
@@ -194,22 +242,7 @@ const Table = ({
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={49}
       >
-        {filesList.map((item, index) => (
-          <TableRow
-            id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
-            key={`${item.id}_${index}`}
-            item={item}
-            itemIndex={index}
-            index={index}
-            setFirsElemChecked={setFirsElemChecked}
-            setHeaderBorder={setHeaderBorder}
-            theme={theme}
-            tagCount={tagCount}
-            isRooms={isRooms}
-            hideColumns={hideColumns}
-            setUploadedFileIdWithVersion={setUploadedFileIdWithVersion}
-          />
-        ))}
+        {filesListNode}
       </TableBody>
     </StyledTableContainer>
   );
@@ -218,7 +251,7 @@ const Table = ({
 export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
 
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
   const isRooms = isRoomsFolder || isArchiveFolder;
 
   const { columnStorageName, columnInfoPanelStorageName } = tableStore;
@@ -233,7 +266,7 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     hasMoreFiles,
     filterTotal,
     roomsFilterTotal,
-    setUploadedFileIdWithVersion,
+    highlightFile,
   } = filesStore;
 
   const { withPaging, theme } = auth.settingsStore;
@@ -251,9 +284,10 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     hasMoreFiles,
     filterTotal: isRooms ? roomsFilterTotal : filterTotal,
     isRooms,
+    isTrashFolder,
     withPaging,
     columnStorageName,
     columnInfoPanelStorageName,
-    setUploadedFileIdWithVersion,
+    highlightFile,
   };
 })(observer(Table));

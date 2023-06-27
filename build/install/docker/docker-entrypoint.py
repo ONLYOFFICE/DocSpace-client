@@ -1,7 +1,8 @@
-import json, sys, os
+import json, sys, os, netifaces
 from jsonpath_ng import jsonpath, parse
 from os import environ
 from multipledispatch import dispatch
+from netaddr import *
 
 filePath = None
 saveFilePath = None
@@ -26,6 +27,8 @@ APP_CORE_BASE_DOMAIN = os.environ["APP_CORE_BASE_DOMAIN"] if environ.get("APP_CO
 APP_CORE_MACHINEKEY = os.environ["APP_CORE_MACHINEKEY"] if environ.get("APP_CORE_MACHINEKEY") else "your_core_machinekey"
 APP_URL_PORTAL = os.environ["APP_URL_PORTAL"] if environ.get("APP_URL_PORTAL") else "http://" + ROUTER_HOST + ":8092"
 APP_STORAGE_ROOT = os.environ["APP_STORAGE_ROOT"] if environ.get("APP_STORAGE_ROOT") else BASE_DIR + "/data/"
+APP_KNOWN_PROXIES = os.environ["APP_KNOWN_PROXIES"]
+APP_KNOWN_NETWORKS = os.environ["APP_KNOWN_NETWORKS"]
 
 DOCUMENT_SERVER_JWT_SECRET = os.environ["DOCUMENT_SERVER_JWT_SECRET"] if environ.get("DOCUMENT_SERVER_JWT_SECRET") else "your_jwt_secret"
 DOCUMENT_SERVER_JWT_HEADER = os.environ["DOCUMENT_SERVER_JWT_HEADER"] if environ.get("DOCUMENT_SERVER_JWT_HEADER") else "AuthorizationJwt"
@@ -38,8 +41,9 @@ ELK_PORT = os.environ["ELK_PORT"] if environ.get("ELK_PORT") else "9200"
 ELK_THREADS = os.environ["ELK_THREADS"] if environ.get("ELK_THREADS") else "1"
 
 KAFKA_HOST = os.environ["KAFKA_HOST"] if environ.get("KAFKA_HOST") else "kafka:9092"
-RUN_FILE = sys.argv[1] if sys.argv[1] else "none"
-LOG_FILE = sys.argv[2] if sys.argv[2] else "none"
+RUN_FILE = sys.argv[1] if (len(sys.argv) > 1) else "none"
+LOG_FILE = sys.argv[2] if (len(sys.argv) > 2) else "none"
+CORE_EVENT_BUS = sys.argv[3] if (len(sys.argv) > 3) else ""
 
 REDIS_HOST = os.environ["REDIS_HOST"] if environ.get("REDIS_HOST") else "onlyoffice-redis"
 REDIS_PORT = os.environ["REDIS_PORT"] if environ.get("REDIS_PORT") else "6379"
@@ -84,7 +88,8 @@ class RunServices:
                         " --log:dir=" + LOG_DIR +\
                             " --log:name=" + LOG_FILE +\
                                 " core:products:folder=/var/www/products/" +\
-                                    " core:products:subfolder=server")
+                                    " core:products:subfolder=server" + " " +\
+                                        CORE_EVENT_BUS)
         else:
             os.system("dotnet " + RUN_FILE + " --urls=" + URLS + self.SERVICE_PORT +\
                  " --\'$STORAGE_ROOT\'=" + APP_STORAGE_ROOT +\
@@ -93,7 +98,8 @@ class RunServices:
                             " --log:name=" + LOG_FILE +\
                                 " --ENVIRONMENT=" + ENV_EXTENSION +\
                                     " core:products:folder=/var/www/products/" +\
-                                        " core:products:subfolder=server")
+                                        " core:products:subfolder=server" + " " +\
+                                            CORE_EVENT_BUS)
 
 def openJsonFile(filePath):
     try:
@@ -131,7 +137,7 @@ saveFilePath = filePath
 filePath = "/app/onlyoffice/config/appsettings.json"
 jsonData = openJsonFile(filePath)
 #jsonUpdateValue = parseJsonValue(jsonValue)
-updateJsonData(jsonData, "$.ConnectionStrings.default.connectionString", "Server="+ MYSQL_HOST +";Port=3306;Database="+ MYSQL_DATABASE +";User ID="+ MYSQL_USER +";Password="+ MYSQL_PASSWORD +";Pooling=true;Character Set=utf8;AutoEnlist=false;SSL Mode=none;ConnectionReset=false",)
+updateJsonData(jsonData,"$.ConnectionStrings.default.connectionString", "Server="+ MYSQL_HOST +";Port=3306;Database="+ MYSQL_DATABASE +";User ID="+ MYSQL_USER +";Password="+ MYSQL_PASSWORD +";Pooling=true;Character Set=utf8;AutoEnlist=false;SSL Mode=none;ConnectionReset=false",)
 updateJsonData(jsonData,"$.core.base-domain", APP_CORE_BASE_DOMAIN)
 updateJsonData(jsonData,"$.core.machinekey", APP_CORE_MACHINEKEY)
 updateJsonData(jsonData,"$.core.products.subfolder", "server")
@@ -141,14 +147,38 @@ updateJsonData(jsonData,"$.files.docservice.url.public", DOCUMENT_SERVER_URL_PUB
 updateJsonData(jsonData,"$.files.docservice.url.internal", DOCUMENT_SERVER_URL_INTERNAL)
 updateJsonData(jsonData,"$.files.docservice.secret.value", DOCUMENT_SERVER_JWT_SECRET)
 updateJsonData(jsonData,"$.files.docservice.secret.header", DOCUMENT_SERVER_JWT_HEADER)
+
+ip_address = netifaces.ifaddresses('eth0').get(netifaces.AF_INET)[0].get('addr')
+netmask = netifaces.ifaddresses('eth0').get(netifaces.AF_INET)[0].get('netmask')
+ip_address_netmask = '%s/%s' % (ip_address, netmask)
+interface_cidr = IPNetwork(ip_address_netmask)
+knownNetwork = [str(interface_cidr)]
+knownProxies = ["127.0.0.1"]
+
+if APP_KNOWN_NETWORKS:
+    knownNetwork= knownNetwork + [x.strip() for x in APP_KNOWN_NETWORKS.split(',')]
+
+if APP_KNOWN_PROXIES:
+    knownNetwork= knownNetwork + [x.strip() for x in APP_KNOWN_PROXIES.split(',')]
+
+updateJsonData(jsonData,"$.core.hosting.forwardedHeadersOptions.knownNetworks", knownNetwork)
+updateJsonData(jsonData,"$.core.hosting.forwardedHeadersOptions.knownProxies", knownProxies)
+
+writeJsonFile(filePath, jsonData)
+
+filePath = "/app/onlyoffice/config/apisystem.json"
+jsonData = openJsonFile(filePath)
+updateJsonData(jsonData, "$.ConnectionStrings.default.connectionString", "Server="+ MYSQL_HOST +";Port=3306;Database="+ MYSQL_DATABASE +";User ID="+ MYSQL_USER +";Password="+ MYSQL_PASSWORD +";Pooling=true;Character Set=utf8;AutoEnlist=false;SSL Mode=none;ConnectionReset=false",)
+updateJsonData(jsonData,"$.core.base-domain", APP_CORE_BASE_DOMAIN)
+updateJsonData(jsonData,"$.core.machinekey", APP_CORE_MACHINEKEY)
 writeJsonFile(filePath, jsonData)
 
 filePath = "/app/onlyoffice/config/elastic.json"
 jsonData = openJsonFile(filePath)
-updateJsonData(jsonData,"$.elastic.Scheme", ELK_SHEME)
-updateJsonData(jsonData,"$.elastic.Host", ELK_HOST)
-updateJsonData(jsonData,"$.elastic.Port", ELK_PORT)
-updateJsonData(jsonData,"$.elastic.Threads", ELK_THREADS)
+jsonData["elastic"]["Scheme"] = ELK_SHEME
+jsonData["elastic"]["Host"] = ELK_HOST
+jsonData["elastic"]["Port"] = ELK_PORT
+jsonData["elastic"]["Threads"] = ELK_THREADS
 writeJsonFile(filePath, jsonData)
 
 filePath = "/app/onlyoffice/config/kafka.json"

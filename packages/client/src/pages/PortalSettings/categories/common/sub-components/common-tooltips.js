@@ -52,7 +52,7 @@ export const LanguageTimeSettingsTooltip = ({
             className="display-block font-size"
             isHovered={true}
             target="_blank"
-            href={`${helpLink}/administration/configuration.aspx#CustomizingPortal_block`}
+            href={`${helpLink}/administration/docspace-settings.aspx#DocSpacelanguage`}
           >
             {{ learnMore }}
           </Link>
@@ -102,42 +102,37 @@ export const CustomTitlesTooltip = ({ t }) => {
 
 export const DNSSettingsTooltip = ({
   t,
-  theme,
+  currentColorScheme,
   helpLink,
   organizationName,
 }) => {
-  const text = t("Settings:DNSSettingsTooltip");
-  const learnMore = t("Common:LearnMore");
-
   return (
     <StyledTooltip>
       <div className="font-size">
         <Trans
           ns="Settings"
           i18nKey="DNSSettingsTooltip"
-          text={text}
-          learnMore={learnMore}
+          organizationName={organizationName}
         >
           DNS Settings allow you to set an alternative URL address for your
-          {{ organizationName }} portal. Send your request to our support team,
+          {{ organizationName }} space. Send your request to our support team,
           and our specialists will help you with the settings.
-          <div className="display-inline font-size"> {{ text }}</div>
-          <Link
-            color={theme.client.settings.common.linkColorHelp}
-            className="display-block font-size"
-            isHovered={true}
-            target="_blank"
-            href={`${helpLink}/administration/configuration.aspx#CustomizingPortal_block`}
-          >
-            {{ learnMore }}
-          </Link>
         </Trans>
+        <Link
+          color={currentColorScheme.main.accent}
+          className="display-block font-size"
+          isHovered={true}
+          target="_blank"
+          href={`${helpLink}/administration/docspace-settings.aspx#alternativeurl`}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </div>
     </StyledTooltip>
   );
 };
 
-export const PortalRenamingTooltip = ({ t }) => {
+export const PortalRenamingTooltip = ({ t, domain }) => {
   const text = t("Settings:PortalRenamingDescription");
   const pleaseNote = t("Settings:PleaseNote");
   const save = t("Common:SaveButton");
@@ -149,10 +144,11 @@ export const PortalRenamingTooltip = ({ t }) => {
           ns="Settings"
           i18nKey="PortalRenamingSettingsTooltip"
           text={text}
+          domain={domain}
         >
           <div className="display-inline font-size"> {{ text }}</div>
           Enter the part that will appear next to the
-          onlyoffice.com/onlyoffice.eu portal address.
+          {{ domain }} portal address.
         </Trans>
       </div>
       <div className="font-size">

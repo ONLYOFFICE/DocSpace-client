@@ -68,9 +68,13 @@ public class RoomLogoManager
     }
 
     public bool EnableAudit { get; set; } = true;
-    private IDataStore DataStore => _dataStore ??= _storageFactory.GetStorage(TenantId, ModuleName);
     private int TenantId => _tenantManager.GetCurrentTenant().Id;
     private IDictionary<string, StringValues> Headers => _httpContextAccessor?.HttpContext?.Request?.Headers;
+
+    private async ValueTask<IDataStore> GetDataStoreAsync()
+    {
+        return _dataStore ??= await _storageFactory.GetStorageAsync(TenantId, ModuleName);
+    }
 
     public async Task<Folder<T>> CreateAsync<T>(T id, string tempFile, int x, int y, int width, int height)
     {
@@ -113,7 +117,7 @@ public class RoomLogoManager
 
         if (EnableAudit)
         {
-            _filesMessageService.Send(room, Headers, MessageAction.RoomLogoCreated, room.Title);
+            _ = _filesMessageService.SendAsync(room, Headers, MessageAction.RoomLogoCreated, room.Title);
         }
 
         return room;
@@ -133,7 +137,7 @@ public class RoomLogoManager
 
         try
         {
-            await DataStore.DeleteFilesAsync(string.Empty, $"{ProcessFolderId(stringId)}*.*", false);
+            await (await GetDataStoreAsync()).DeleteFilesAsync(string.Empty, $"{ProcessFolderId(stringId)}*.*", false);
             room.HasLogo = false;
 
             if (room.ProviderEntry)
@@ -147,7 +151,7 @@ public class RoomLogoManager
 
             if (EnableAudit)
             {
-                _filesMessageService.Send(room, Headers, MessageAction.RoomLogoDeleted, room.Title);
+                _ = _filesMessageService.SendAsync(room, Headers, MessageAction.RoomLogoDeleted, room.Title);
             }
         }
         catch (Exception e)
@@ -191,7 +195,7 @@ public class RoomLogoManager
         var fileName = $"{Guid.NewGuid()}.png";
 
         using var stream = new MemoryStream(data);
-        var path = await DataStore.SaveAsync(TempDomainPath, fileName, stream);
+        var path = await (await GetDataStoreAsync()).SaveAsync(TempDomainPath, fileName, stream);
 
         var pathAsString = path.ToString();
 
@@ -212,7 +216,7 @@ public class RoomLogoManager
 
         try
         {
-            await DataStore.DeleteFilesAsync(TempDomainPath, "", fileNameWithoutExt + "*.*", false);
+            await (await GetDataStoreAsync()).DeleteFilesAsync(TempDomainPath, "", fileNameWithoutExt + "*.*", false);
         }
         catch (Exception e)
         {
@@ -232,7 +236,7 @@ public class RoomLogoManager
         }
 
         using var stream = new MemoryStream(imageData);
-        await DataStore.SaveAsync(fileName, stream);
+        await (await GetDataStoreAsync()).SaveAsync(fileName, stream);
 
         await ResizeAndSaveAsync(id, imageData, maxFileSize, _mediumLogoSize, position, cropSize);
         await ResizeAndSaveAsync(id, imageData, maxFileSize, _smallLogoSize, position, cropSize);
@@ -253,9 +257,9 @@ public class RoomLogoManager
         try
         {
             using var stream = new MemoryStream(data);
-            using var img = Image.Load(stream, out _);
+            using var img = Image.Load(stream);
 
-            if (size.Item2 != img.Size())
+            if (size.Item2 != img.Size)
             {
                 using var img2 = UserPhotoThumbnailManager.GetImage(img, size.Item2, new UserPhotoThumbnailSettings(position, cropSize));
                 data = CommonPhotoManager.SaveToBytes(img2);
@@ -268,7 +272,7 @@ public class RoomLogoManager
             var fileName = string.Format(LogosPath, ProcessFolderId(id), size.Item1.ToStringLowerFast());
 
             using var stream2 = new MemoryStream(data);
-            await DataStore.SaveAsync(fileName, stream2);
+            await (await GetDataStoreAsync()).SaveAsync(fileName, stream2);
         }
         catch (ArgumentException error)
         {
@@ -279,14 +283,14 @@ public class RoomLogoManager
     private async ValueTask<string> GetLogoPathAsync<T>(T id, SizeName size)
     {
         var fileName = string.Format(LogosPath, ProcessFolderId(id), size.ToStringLowerFast());
-        var uri = await DataStore.GetUriAsync(fileName);
+        var uri = await (await GetDataStoreAsync()).GetUriAsync(fileName);
 
         return uri.ToString();
     }
 
     private async Task<byte[]> GetTempAsync(string fileName)
     {
-        await using var stream = await DataStore.GetReadStreamAsync(TempDomainPath, fileName);
+        await using var stream = await (await GetDataStoreAsync()).GetReadStreamAsync(TempDomainPath, fileName);
 
         var data = new MemoryStream();
         var buffer = new byte[1024 * 10];
@@ -320,14 +324,14 @@ public class RoomLogoManager
             return room.Id.ToString();
         }
 
-        if (room.Id.ToString()!.Contains("sbox"))
+        if (room.Id.ToString()!.Contains(Selectors.SharpBox.Id))
         {
-            return $"sbox-{room.ProviderId}";
+            return $"{Selectors.SharpBox.Id}-{room.ProviderId}";
         }
 
-        if (room.Id.ToString()!.Contains("spoint"))
+        if (room.Id.ToString()!.Contains(Selectors.SharePoint.Id))
         {
-            return $"spoint-{room.ProviderId}";
+            return $"{Selectors.SharePoint.Id}-{room.ProviderId}";
         }
 
         return room.Id.ToString();

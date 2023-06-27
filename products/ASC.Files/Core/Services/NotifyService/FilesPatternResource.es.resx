@@ -68,13 +68,6 @@ Todas las personas han firmado el documento "$DocumentTitle":"$DocumentURL".</va
 
 Para recibir una información adicional entre en su cuenta de DocuSign.</value>
   </data>
-  <data name="pattern_EditorMentions" xml:space="preserve">
-    <value>h1. "$__AuthorName":"$__AuthorUrl" le ha mencionado en el comentario del documento
-
-Este es un mensaje de correo electrónico para notificarle que usted ha sido mencionado por "$__AuthorName":"$__AuthorUrl" en el comentario del documento "$DocumentTitle":"$DocumentURL":
-
-$Message</value>
-  </data>
   <data name="pattern_MailMergeEnd" xml:space="preserve">
     <value>h1. Envío está completo
 
@@ -97,16 +90,13 @@ $__DateTime user "$__AuthorName":"$__AuthorUrl" le ha concedido el acceso a la c
 $Message</value>
   </data>
   <data name="subject_DocuSignComplete" xml:space="preserve">
-    <value>Documentos. Todas las personas han firmado.</value>
+    <value>Documentos. Todas las personas han firmado</value>
   </data>
   <data name="subject_DocuSignComplete_tg" xml:space="preserve">
     <value>Documentos. Todos los firmantes han completado [$DocumentTitle]($DocumentURL)</value>
   </data>
   <data name="subject_DocuSignStatus" xml:space="preserve">
-    <value>Documentos. Estado de la firma ha sido cambiado.</value>
-  </data>
-  <data name="subject_EditorMentions" xml:space="preserve">
-    <value>Documentos. Mencionado en documento</value>
+    <value>Documentos. Estado de la firma ha sido cambiado</value>
   </data>
   <data name="subject_MailMergeEnd" xml:space="preserve">
     <value>Documentos. Envío está completo.</value>

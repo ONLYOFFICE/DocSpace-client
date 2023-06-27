@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { observer, inject } from "mobx-react";
@@ -40,8 +40,14 @@ const SectionBodyContent = (props) => {
     setScrollToItem,
     filesList,
     uploaded,
-    setSearchTitleOpenLocation,
+    onClickBack,
+
+    movingInProgress,
   } = props;
+
+  useEffect(() => {
+    return () => window?.getSelection()?.removeAllRanges();
+  }, []);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -71,7 +77,15 @@ const SectionBodyContent = (props) => {
       document.removeEventListener("dragleave", onDragLeaveDoc);
       document.removeEventListener("drop", onDropEvent);
     };
-  }, [onMouseUp, onMouseMove, startDrag, folderId, viewAs, uploaded]);
+  }, [
+    onMouseUp,
+    onMouseMove,
+    onClickBack,
+    startDrag,
+    folderId,
+    viewAs,
+    uploaded,
+  ]);
 
   useEffect(() => {
     if (scrollToItem) {
@@ -111,13 +125,13 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".files-item") &&
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
-        !e.target.closest(".table-container_group-menu")) ||
+        !e.target.closest(".table-container_group-menu") &&
+        !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
       e.target.closest(".search-input-block")
     ) {
       setSelection([]);
-      setSearchTitleOpenLocation(null);
       setBufferSelection(null);
       setHotkeyCaretStart(null);
       setHotkeyCaret(null);
@@ -237,12 +251,14 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  //console.log("Files Home SectionBodyContent render", props);
+  if (isEmptyFilesList && movingInProgress) return <></>;
+
+  const isEmptyPage = isEmptyFilesList;
 
   return (
     <Consumer>
       {(context) =>
-        isEmptyFilesList || null ? (
+        isEmptyPage ? (
           <>
             <EmptyContainer sectionWidth={context.sectionWidth} />
           </>
@@ -292,6 +308,8 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
+
+      movingInProgress,
     } = filesStore;
     return {
       dragging,
@@ -315,13 +333,12 @@ export default inject(
       setScrollToItem,
       filesList,
       uploaded: uploadDataStore.uploaded,
-      setSearchTitleOpenLocation: filesActionsStore.setSearchTitleOpenLocation,
+      onClickBack: filesActionsStore.onClickBack,
+      movingInProgress,
     };
   }
 )(
-  withRouter(
-    withTranslation(["Files", "Common", "Translations"])(
-      withLoader(withHotkeys(observer(SectionBodyContent)))()
-    )
+  withTranslation(["Files", "Common", "Translations"])(
+    withHotkeys(withLoader(observer(SectionBodyContent))())
   )
 );

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import {
   getBackupStorage,
@@ -48,7 +47,6 @@ const RestoreBackup = (props) => {
     isEnableRestore,
     setRestoreResource,
     buttonSize,
-    history,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -57,14 +55,12 @@ const RestoreBackup = (props) => {
     confirmation: false,
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-  const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] = useState(
-    false
-  );
-  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] = useState(
-    false
-  );
+  const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
+    useState(false);
+  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
+    useState(false);
 
-  useEffect(async () => {
+  const startRestoreBackup = useCallback(async () => {
     try {
       getProgress(t);
 
@@ -82,7 +78,10 @@ const RestoreBackup = (props) => {
     } catch (error) {
       toastr.error(error);
     }
+  }, []);
 
+  useEffect(() => {
+    startRestoreBackup();
     return () => {
       clearProgressInterval();
       setRestoreResource(null);
@@ -145,7 +144,7 @@ const RestoreBackup = (props) => {
           { value: LOCAL_FILE, label: t("LocalFile") },
           { value: BACKUP_ROOM, label: t("RoomsModule") },
           { value: DISK_SPACE, label: t("ThirdPartyResource") },
-          { value: STORAGE_SPACE, label: t("ThirdPartyStorage") },
+          { value: STORAGE_SPACE, label: t("Common:ThirdPartyStorage") },
         ]}
         onClick={onChangeRadioButton}
         selected={radioButtonState}
@@ -211,7 +210,7 @@ const RestoreBackup = (props) => {
     : {};
 
   if (isInitialLoading) return <RestoreBackupLoader />;
-  console.log("index render");
+
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
       <div className="restore-description">
@@ -235,7 +234,6 @@ const RestoreBackup = (props) => {
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
           isNotify={checkboxState.notification}
-          history={history}
         />
       )}
       <Checkbox
@@ -264,7 +262,6 @@ const RestoreBackup = (props) => {
         radioButtonState={radioButtonState}
         isCheckedThirdPartyStorage={radioButtonState === STORAGE_SPACE}
         isCheckedLocalFile={radioButtonState === LOCAL_FILE}
-        history={history}
         t={t}
         buttonSize={buttonSize}
       />

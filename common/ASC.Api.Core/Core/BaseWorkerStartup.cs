@@ -50,6 +50,7 @@ public class BaseWorkerStartup
         services.AddBaseDbContextPool<TenantDbContext>();
         services.AddBaseDbContextPool<UserDbContext>();
         services.AddBaseDbContextPool<TelegramDbContext>();
+        services.AddBaseDbContextPool<FirebaseDbContext>();
         services.AddBaseDbContextPool<CustomDbContext>();
         services.AddBaseDbContextPool<WebstudioDbContext>();
         services.AddBaseDbContextPool<InstanceRegistrationContext>();
@@ -80,7 +81,7 @@ public class BaseWorkerStartup
         DIHelper.Configure(services);
     }
 
-    private IEnumerable<Assembly> GetAutoMapperProfileAssemblies()
+    protected IEnumerable<Assembly> GetAutoMapperProfileAssemblies()
     {
         return AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GetName().Name.StartsWith("ASC."));
     }

@@ -238,18 +238,18 @@ const Dark = {
   },
 
   mainButton: {
-    backgroundColor: "#ED7309",
-    disableBackgroundColor: "#4C3B2D",
-    hoverBackgroundColor: "#FFAD3D",
-    clickBackgroundColor: "#E6842E",
+    backgroundColor: "#4781D1",
+    disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
+    hoverBackgroundColor: "rgba(71, 129, 209, .85)",
+    clickBackgroundColor: "#4074BC",
 
     padding: "5px 14px 5px 12px",
     borderRadius: "3px",
     lineHeight: "22px",
     fontSize: "16px",
     fontWeight: 700,
-    textColor: black,
-    textColorDisabled: black,
+    textColor: white,
+    textColorDisabled: white,
 
     cornerRoundsTopRight: "0",
     cornerRoundsBottomRight: "0",
@@ -291,17 +291,19 @@ const Dark = {
 
     background: black,
     disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
-    connectBackground: "#3B72A7",
+    connectBackground:
+      "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
     hoverBackground: "#292929",
-    hoverConnectBackground: "#265A8F",
+    hoverConnectBackground: "#FFFFFF",
     activeBackground: "#292929",
-    hoverBorder: "#292929",
+    hoverBorder: "#858585",
 
     boxShadow: "none",
     hoverBoxShadow: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
     disableColor: "rgba(0, 0, 0, 0.4)",
+    disabledSvgColor: "#474747",
 
     border: "1px solid #474747",
     text: {
@@ -317,7 +319,7 @@ const Dark = {
       whiteSpace: "nowrap",
       color: grayMaxLight,
       hoverColor: grayMaxLight,
-      connectColor: white,
+      connectColor: darkBlack,
     },
 
     svg: {
@@ -326,7 +328,7 @@ const Dark = {
       height: "18px",
       minWidth: "18px",
       minHeight: "18px",
-      fill: white,
+      fill: darkBlack,
     },
   },
 
@@ -569,6 +571,7 @@ const Dark = {
     overflow: "hidden",
     color: black,
     backgroundColor: "#F59931",
+    disableBackgroundColor: "#858585",
   },
 
   scrollbar: {
@@ -837,16 +840,6 @@ const Dark = {
   },
 
   textArea: {
-    width: "100%",
-    height: "90%",
-    border: "none",
-    outline: "none",
-    resize: "none",
-    overflow: "hidden",
-    padding: "5px 8px 2px 8px",
-    fontSize: "13px",
-    lineHeight: "1.5",
-
     disabledColor: "#474747",
 
     focusBorderColor: grayMaxLight,
@@ -855,6 +848,11 @@ const Dark = {
 
     scrollWidth: "100%",
     scrollHeight: "91px",
+
+    numerationColor: "#858585",
+
+    copyIconFilter:
+      "invert(62%) sepia(0%) saturate(0%) hue-rotate(119deg) brightness(85%) contrast(87%)",
   },
 
   link: {
@@ -1282,6 +1280,10 @@ const Dark = {
     background: "#3D3D3D",
     disableColor: "#858585",
 
+    icon: {
+      color: "#ADADAD",
+    },
+
     dragging: {
       draggable: {
         background: "rgba(230, 211, 138, 0.12)",
@@ -1291,6 +1293,7 @@ const Dark = {
 
       title: {
         width: "85%",
+        color: "#000",
       },
     },
 
@@ -1374,6 +1377,7 @@ const Dark = {
     borderRadius: "6px",
     boxShadow:
       "0px 16px 16px rgba(0, 0, 0, 0.16), 0px 8.1px 6.975px rgba(0, 0, 0, 0.108), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08), 0px 0.7px 0.925px rgba(0, 0, 0, 0.052)",
+    boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
     border: "1px solid #474747",
   },
 
@@ -1383,6 +1387,7 @@ const Dark = {
     backgroundColor: black,
     hoverBackgroundColor: "#3D3D3D",
     hoverDisabledBackgroundColor: black,
+    selectedBackgroundColor: "#282828",
     fontWeight: "600",
     fontSize: "13px",
     width: "100%",
@@ -1608,6 +1613,7 @@ const Dark = {
     button: {
       height: "18px",
       heightWithBorder: "30px",
+      heightModernView: "28px",
 
       paddingLeft: "16px",
       paddingRightNoArrow: "16px",
@@ -1713,67 +1719,15 @@ const Dark = {
   },
 
   calendar: {
-    baseWidth: "265px",
-    bigWidth: "289px",
-
-    baseMaxWidth: "293px",
-    bigMaxWidth: "325px",
-
-    hover: {
-      backgroundColor: "#292929",
-      borderRadius: "16px",
-      cursor: "pointer",
-    },
-
-    day: {
-      width: "32px",
-      height: "32px",
-      baseSizeWidth: "270px",
-      bigSizeWidth: "294px",
-      baseMarginTop: "3px",
-      bigMarginTop: "7.5px",
-      lineHeight: "33px",
-    },
-
-    weekdays: {
-      color: "#5c5c5c",
-      disabledColor: "#5c5c5c",
-      baseWidth: "272px",
-      bigWidth: "295px",
-      marginBottom: "-5px",
-    },
-
-    month: {
-      baseWidth: "267px",
-      bigWidth: "295px",
-      color: black,
-      weekendColor: grayMaxLight,
-      disabledColor: "#474747",
-      neighboringHoverColor: grayMaxLight,
-      neighboringColor: "#5c5c5c",
-    },
-
-    selectedDay: {
-      backgroundColor: "#F59931",
-      borderRadius: "16px",
-      cursor: "pointer",
-      color: black,
-    },
-
-    comboBox: {
-      color: black,
-      minWidth: "80px",
-      height: "32px",
-      marginLeft: "8px",
-      padding: "0 0 24px 0",
-    },
-    comboBoxMonth: {
-      baseWidth: "172px",
-      bigWidth: "205px",
-
-      baseMaxWidth: "172px",
-      bigMaxWidth: "196px",
-    },
+    color: "#FFFFFF",
+    disabledColor: "#474747",
+    pastColor: "#858585",
+    onHoverBackground: "#3D3D3D",
+    titleColor: "#ADADAD",
+    outlineColor: "#474747",
+    arrowColor: "#F6F9FC",
+    disabledArrow: "#474747",
+    weekdayColor: "#858585",
   },
 
   datePicker: {
@@ -1901,9 +1855,18 @@ const Dark = {
     paymentAlert: {
       color: "#ed7309",
       warningColor: "#E06451",
-      border: "1px solid #ed7309",
-      warningBorder: "1px solid #E06451",
     },
+
+    teamTrainingAlert: {
+      titleColor: "#FFFFFF",
+      borderColor: "#388BDE",
+      linkColor: "#5299E0",
+    },
+  },
+
+  alertComponent: {
+    descriptionColor: "#ADADAD",
+    iconColor: "#ADADAD",
   },
 
   catalogItem: {
@@ -1911,6 +1874,7 @@ const Dark = {
       width: "100%",
       height: "36px",
       padding: "0 12px",
+      background: "#1b1c1d",
       marginBottom: "16px",
       tablet: {
         height: "44px",
@@ -1988,6 +1952,7 @@ const Dark = {
   navigation: {
     expanderColor: "#eeeeee",
     background: black,
+    rootFolderTitleColor: "#858585",
 
     icon: {
       fill: "#E06A1B",
@@ -2040,6 +2005,8 @@ const Dark = {
     header: {
       backgroundColor: black,
       background: `linear-gradient(180deg, #333333 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
+      trashErasureLabelBackground: "#292929",
+      trashErasureLabelText: "#ADADAD",
     },
   },
 
@@ -2328,7 +2295,7 @@ const Dark = {
     },
 
     emptyScreen: {
-      descriptionColor: cyanBlueDarkShade,
+      descriptionColor: "#ADADAD",
     },
   },
 
@@ -2641,6 +2608,8 @@ const Dark = {
 
       itemOwnerColor: "#858585",
 
+      backgroundButtons: "#333333",
+
       dropdownColor: grayMaxLight,
 
       loader: {
@@ -2912,6 +2881,7 @@ const Dark = {
 
     settings: {
       iconFill: white,
+      trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
         fillIcon: "#c4c4c4",
@@ -2987,10 +2957,11 @@ const Dark = {
       },
 
       backup: {
-        rectangleBackgroundColor: "#292929",
+        rectangleBackgroundColor: "#3D3D3D",
         separatorBorder: "1px solid #474747",
         warningColor: "#E06451",
         textColor: "#ADADAD",
+        backupCheckedListItemBackground: "#3D3D3D",
       },
 
       payment: {
@@ -3078,10 +3049,18 @@ const Dark = {
     main: {
       background: "#1f1f1f",
       textColor: white,
+
+      descriptionTextColor: "#858585",
+      pendingEmailTextColor: "#858585",
+
+      mobileRowBackground: "#3D3D3D",
     },
     themePreview: {
       descriptionColor: "#ADADAD",
       border: "1px solid #474747",
+    },
+    notifications: {
+      textDescriptionColor: "#858585",
     },
   },
 
@@ -3122,6 +3101,14 @@ const Dark = {
 
   itemIcon: {
     borderColor: "#474747",
+  },
+
+  invitePage: {
+    borderColor: "#474747",
+  },
+
+  portalUnavailable: {
+    textDescriptionColor: "#858585",
   },
 };
 

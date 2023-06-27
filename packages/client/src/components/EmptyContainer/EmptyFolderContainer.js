@@ -1,64 +1,107 @@
-﻿import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
+import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
 import { inject, observer } from "mobx-react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import { Text } from "@docspace/components";
 import { ReactSVG } from "react-svg";
+import FilesFilter from "@docspace/common/api/files/filter";
+import RoomsFilter from "@docspace/common/api/rooms/filter";
 import Loaders from "@docspace/common/components/Loaders";
+import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
+import { FolderType, RoomSearchArea } from "@docspace/common/constants";
+import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const EmptyFolderContainer = ({
   t,
   onCreate,
-  fetchFiles,
-  fetchRooms,
+
   setIsLoading,
   parentId,
   linkStyles,
-  isRooms,
+  editAccess,
   sectionWidth,
   canCreateFiles,
-  canInviteUsers,
-  setIsEmptyPage,
+
   onClickInviteUsers,
   folderId,
-  tReady,
-  isLoadedFetchFiles,
-  viewAs,
-  setIsLoadedEmptyPage,
+
+  theme,
+
+  navigationPath,
+  rootFolderType,
+
+  roomType,
+  isLoading,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isRoom =
+    isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
+
+  const canInviteUsers = isRoom && editAccess;
+
   const onBackToParentFolder = () => {
     setIsLoading(true);
 
-    isRooms
-      ? fetchRooms(parentId).finally(() => setIsLoading(false))
-      : fetchFiles(parentId).finally(() => setIsLoading(false));
+    if (isRoom) {
+      const path =
+        rootFolderType === FolderType.Archive
+          ? getCategoryUrl(CategoryType.Archive)
+          : getCategoryUrl(CategoryType.Shared);
+
+      const newFilter = RoomsFilter.getDefault();
+
+      newFilter.searchArea =
+        rootFolderType === FolderType.Archive
+          ? RoomSearchArea.Archive
+          : RoomSearchArea.Active;
+
+      const state = {
+        title: navigationPath[0].title,
+        isRoot: true,
+        rootFolderType,
+      };
+
+      navigate(`${path}?${newFilter.toUrlParams()}`, {
+        state,
+      });
+    } else {
+      const categoryType = getCategoryType(location);
+
+      const newFilter = FilesFilter.getDefault();
+      newFilter.folder = parentId;
+
+      const parentIdx = navigationPath.findIndex((v) => v.id === parentId);
+
+      const parentItem = navigationPath[parentIdx];
+
+      const state = {
+        title: parentItem.title,
+        isRoot: navigationPath.length === 1,
+        rootFolderType,
+      };
+
+      const path = getCategoryUrl(categoryType, parentId);
+
+      navigate(`${path}?${newFilter.toUrlParams()}`, {
+        state,
+      });
+    }
   };
 
-  React.useEffect(() => {
-    if (isLoadedFetchFiles && tReady) {
-      setIsLoadedEmptyPage(true);
-    } else {
-      setIsLoadedEmptyPage(false);
-    }
-  }, [isLoadedFetchFiles, tReady]);
-
-  React.useEffect(() => {
-    setIsEmptyPage(true);
-
-    return () => {
-      setIsEmptyPage(false);
-      setIsLoadedEmptyPage(false);
-    };
-  }, []);
-
   const onInviteUsersClick = () => {
-    if (!isRooms) return;
+    if (!isRoom) return;
 
     onClickInviteUsers && onClickInviteUsers(folderId);
   };
@@ -99,7 +142,7 @@ const EmptyFolderContainer = ({
         </Link>
       </div>
 
-      {isRooms ? (
+      {isRoom ? (
         canInviteUsers ? (
           <>
             <div className="empty-folder_container-links second-description">
@@ -139,20 +182,23 @@ const EmptyFolderContainer = ({
     <></>
   );
 
-  if (!isLoadedFetchFiles || !tReady) {
-    return <Loaders.EmptyContainerLoader viewAs={viewAs} />;
-  }
+  const emptyScreenCorporateSvg = theme.isBase
+    ? EmptyScreenCorporateSvgUrl
+    : EmptyScreenCorporateDarkSvgUrl;
+  const emptyScreenAltSvg = theme.isBase
+    ? EmptyScreenAltSvgUrl
+    : EmptyScreenAltSvgDarkUrl;
 
   return (
     <EmptyContainer
-      headerText={isRooms ? t("RoomCreated") : t("EmptyScreenFolder")}
-      style={{ gridColumnGap: "39px" }}
+      headerText={isRoom ? t("RoomCreated") : t("EmptyScreenFolder")}
+      style={{ gridColumnGap: "39px", marginTop: 32 }}
       descriptionText={
         canCreateFiles
           ? t("EmptyFolderDecription")
           : t("EmptyFolderDescriptionUser")
       }
-      imageSrc={isRooms ? EmptyScreenCorporateSvgUrl : EmptyScreenAltSvgUrl}
+      imageSrc={isRoom ? emptyScreenCorporateSvg : emptyScreenAltSvg}
       buttons={buttons}
       sectionWidth={sectionWidth}
       isEmptyFolderContainer={true}
@@ -162,26 +208,22 @@ const EmptyFolderContainer = ({
 
 export default inject(
   ({
+    auth,
     accessRightsStore,
-    filesStore,
+
     selectedFolderStore,
     contextOptionsStore,
+    clientLoadingStore,
   }) => {
-    const {
-      fetchFiles,
-      fetchRooms,
-      setIsEmptyPage,
-      isLoadedFetchFiles,
-      viewAs,
-      setIsLoadedEmptyPage,
-    } = filesStore;
     const {
       navigationPath,
       parentId,
-      access,
+
       id: folderId,
-      roomType,
+
       security,
+      rootFolderType,
+      roomType,
     } = selectedFolderStore;
 
     let id;
@@ -190,28 +232,31 @@ export default inject(
       id = elem.id;
     }
 
-    const isRooms = !!roomType;
-
     const { canCreateFiles } = accessRightsStore;
 
     const { onClickInviteUsers } = contextOptionsStore;
 
-    const canInviteUsers = isRooms && security?.EditAccess; // skip sub-folders
+    const { setIsSectionFilterLoading, isLoading } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
 
     return {
-      fetchFiles,
-      fetchRooms,
-      setIsLoading: filesStore.setIsLoading,
+      setIsLoading,
+      isLoading,
       parentId: id ?? parentId,
-      isRooms,
+      roomType,
       canCreateFiles,
-      canInviteUsers,
-      setIsEmptyPage,
+
+      navigationPath,
+      rootFolderType,
+
+      editAccess: security?.EditAccess,
       onClickInviteUsers,
       folderId,
-      isLoadedFetchFiles,
-      viewAs,
-      setIsLoadedEmptyPage,
+
+      theme: auth.settingsStore.theme,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(EmptyFolderContainer)));

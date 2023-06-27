@@ -2,12 +2,7 @@ import { makeAutoObservable } from "mobx";
 import api from "../api";
 import { combineUrl, setCookie, getCookie } from "../utils";
 import FirebaseHelper from "../utils/firebase";
-import {
-  ThemeKeys,
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-  TenantStatus,
-} from "../constants";
+import { ThemeKeys, COOKIE_EXPIRATION_YEAR, LANGUAGE, TenantStatus } from "../constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
@@ -24,7 +19,7 @@ const isDesktopEditors = window["AscDesktopEditor"] !== undefined;
 class SettingsStore {
   isLoading = false;
   isLoaded = false;
-  isBurgerLoading = false;
+  isBurgerLoading = true;
 
   checkedMaintenance = false;
   maintenanceExist = false;
@@ -36,8 +31,7 @@ class SettingsStore {
     ? window.RendererProcessVariable?.theme?.type === "dark"
       ? Dark
       : Base
-    : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+    : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
     ? Dark
     : Base;
   trustedDomains = [];
@@ -122,6 +116,7 @@ class SettingsStore {
 
   tenantStatus = null;
   helpLink = null;
+  bookTrainingEmail = null;
   hotkeyPanelVisible = false;
   frameConfig = null;
 
@@ -140,6 +135,13 @@ class SettingsStore {
   whiteLabelLogoUrls = [];
   standalone = false;
 
+  mainBarVisible = false;
+  zendeskKey = null;
+  bookTrainingEmail = null;
+  legalTerms = null;
+  baseDomain = "onlyoffice.io";
+  documentationEmail = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -148,21 +150,141 @@ class SettingsStore {
     this.tenantStatus = tenantStatus;
   };
 
-  get urlAuthKeys() {
-    return `${this.helpLink}/installation/groups-authorization-keys.aspx`;
+  get docspaceSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx`;
+  }
+
+  get integrationSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#AdjustingIntegrationSettings_block`;
+  }
+
+  get docuSignUrl() {
+    return `${this.helpLink}/administration/connect-docusign-docspace.aspx`;
+  }
+
+  get dropboxUrl() {
+    return `${this.helpLink}/administration/connect-dropbox-docspace.aspx`;
+  }
+
+  get boxUrl() {
+    return `${this.helpLink}/administration/connect-box-docspace.aspx`;
+  }
+
+  get mailRuUrl() {
+    return `${this.helpLink}/administration/connect-mail-ru-docspace.aspx`;
+  }
+
+  get oneDriveUrl() {
+    return `${this.helpLink}/administration/connect-onedrive-docspace.aspx`;
+  }
+
+  get microsoftUrl() {
+    return `${this.helpLink}/administration/connect-microsoft-docspace.aspx`;
+  }
+
+  get googleUrl() {
+    return `${this.helpLink}/administration/connect-google-docspace.aspx`;
+  }
+
+  get facebookUrl() {
+    return `${this.helpLink}/administration/connect-facebook-docspace.aspx`;
+  }
+
+  get linkedinUrl() {
+    return `${this.helpLink}/administration/connect-linkedin-docspace.aspx`;
+  }
+
+  get clickatellUrl() {
+    return `${this.helpLink}/administration/connect-clickatell-docspace.aspx`;
+  }
+
+  get smsclUrl() {
+    return `${this.helpLink}/administration/connect-smsc-docspace.aspx`;
+  }
+
+  get firebaseUrl() {
+    return `${this.helpLink}/administration/connect-firebase-docspace.aspx`;
+  }
+
+  get appleIDUrl() {
+    return `${this.helpLink}/administration/connect-apple-docspace.aspx`;
+  }
+
+  get telegramUrl() {
+    return `${this.helpLink}/administration/connect-telegram-docspace.aspx`;
+  }
+
+  get wordpressUrl() {
+    return `${this.helpLink}/administration/connect-wordpress-docspace.aspx`;
+  }
+
+  get awsUrl() {
+    return `${this.helpLink}/administration/connect-amazon-docspace.aspx`;
+  }
+
+  get googleCloudUrl() {
+    return `${this.helpLink}/administration/connect-google-cloud-storage-docspace.aspx`;
+  }
+
+  get rackspaceUrl() {
+    return `${this.helpLink}/administration/connect-rackspace-docspace.aspx`;
+  }
+
+  get selectelUrl() {
+    return `${this.helpLink}/administration/connect-selectel-docspace.aspx`;
+  }
+
+  get yandexUrl() {
+    return `${this.helpLink}/administration/connect-yandex-docspace.aspx`;
+  }
+
+  get vkUrl() {
+    return `${this.helpLink}/administration/connect-vk-docspace.aspx`;
+  }
+
+  get languageAndTimeZoneSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacelanguage`;
+  }
+
+  get dnsSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#alternativeurl`;
+  }
+
+  get passwordStrengthSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#passwordstrength`;
+  }
+
+  get tfaSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-two-factor-authentication.aspx`;
+  }
+
+  get trustedMailDomainSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#TrustedDomain`;
+  }
+
+  get administratorMessageSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#administratormessage`;
+  }
+
+  get dataBackupUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#CreatingBackup_block`;
+  }
+
+  get automaticBackupUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#AutoBackup`;
+  }
+
+  get webhooksGuideUrl() {
+    return `${this.helpLink}/administration/docspace-webhooks.aspx`;
   }
 
   get wizardCompleted() {
     return this.isLoaded && !this.wizardToken;
   }
 
-  get helpUrlCommonSettings() {
-    return `${this.helpLink}/administration/configuration.aspx#CustomizingPortal_block`;
-  }
-
-  get helpUrlCreatingBackup() {
-    return `${this.helpLink}/administration/configuration.aspx#CreatingBackup_block`;
-  }
+  setMainBarVisible = (visible) => {
+    this.mainBarVisible = visible;
+  };
 
   setValue = (key, value) => {
     this[key] = value;
@@ -188,18 +310,15 @@ class SettingsStore {
     this.greetingSettings = greetingSettings;
   };
 
-  getSettings = async (withPassword) => {
+  getSettings = async () => {
     let newSettings = null;
 
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings)
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
-    else newSettings = await api.settings.getSettings(withPassword);
+    else newSettings = await api.settings.getSettings(true);
 
     if (window["AscDesktopEditor"] !== undefined || this.personal) {
-      const dp = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        "/products/files/"
-      );
+      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, "/products/files/");
       this.setDefaultPage(dp);
     }
 
@@ -209,7 +328,7 @@ class SettingsStore {
           key,
           key === "defaultPage"
             ? combineUrl(window.DocSpaceConfig?.proxy?.url, newSettings[key])
-            : newSettings[key]
+            : newSettings[key],
         );
         if (key === "culture") {
           if (newSettings.wizardToken) return;
@@ -242,9 +361,10 @@ class SettingsStore {
     const origSettings = await this.getSettings().catch((err) => {
       if (err?.response?.status === 404) {
         // portal not found
-        return window.location.replace(
-          `${wrongPortalNameUrl}?url=${window.location.hostname}`
-        );
+        const url = new URL(wrongPortalNameUrl);
+        url.searchParams.append("url", window.location.hostname);
+        url.searchParams.append("ref", window.location.href);
+        return window.location.replace(url);
       }
     });
 
@@ -268,7 +388,7 @@ class SettingsStore {
       this.getPortalSettings(),
       this.getAppearanceTheme(),
       this.getWhiteLabelLogoUrls(),
-      this.getBuildVersionInfo()
+      this.getBuildVersionInfo(),
     );
 
     await Promise.all(requests);
@@ -304,12 +424,12 @@ class SettingsStore {
   setAdditionalResources = async (
     feedbackAndSupportEnabled,
     videoGuidesEnabled,
-    helpCenterEnabled
+    helpCenterEnabled,
   ) => {
     return await api.settings.setAdditionalResources(
       feedbackAndSupportEnabled,
       videoGuidesEnabled,
-      helpCenterEnabled
+      helpCenterEnabled,
     );
   };
 
@@ -356,13 +476,7 @@ class SettingsStore {
   };
 
   setCompanyInfoSettings = async (address, companyName, email, phone, site) => {
-    return api.settings.setCompanyInfoSettings(
-      address,
-      companyName,
-      email,
-      phone,
-      site
-    );
+    return api.settings.setCompanyInfoSettings(address, companyName, email, phone, site);
   };
 
   setLogoUrl = (url) => {
@@ -421,15 +535,11 @@ class SettingsStore {
   };
 
   getLoginLink = (token, code) => {
-    return combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      `/login.ashx?p=${token}&code=${code}`
-    );
+    return combineUrl(window.DocSpaceConfig?.proxy?.url, `/login.ashx?p=${token}&code=${code}`);
   };
 
   setModuleInfo = (homepage, productId) => {
-    if (this.homepage === homepage || this.currentProductId === productId)
-      return;
+    if (this.homepage === homepage || this.currentProductId === productId) return;
 
     console.log(`setModuleInfo('${homepage}', '${productId}')`);
 
@@ -452,9 +562,13 @@ class SettingsStore {
     this.currentProductId = currentProductId;
   };
 
+  setPortalOwner = (owner) => {
+    this.owner = owner;
+  };
+
   getPortalOwner = async () => {
     const owner = await api.people.getUserById(this.ownerId);
-    this.owner = owner;
+    this.setPortalOwner(owner);
     return owner;
   };
 
@@ -471,17 +585,12 @@ class SettingsStore {
     this.setPasswordSettings(settings);
   };
 
-  setPortalPasswordSettings = async (
-    minLength,
-    upperCase,
-    digits,
-    specSymbols
-  ) => {
+  setPortalPasswordSettings = async (minLength, upperCase, digits, specSymbols) => {
     const settings = await api.settings.setPortalPasswordSettings(
       minLength,
       upperCase,
       digits,
-      specSymbols
+      specSymbols,
     );
     this.setPasswordSettings(settings);
   };
@@ -548,8 +657,7 @@ class SettingsStore {
       ...versionInfo,
     };
 
-    if (!this.buildVersionInfo.documentServer)
-      this.buildVersionInfo.documentServer = "6.4.1";
+    if (!this.buildVersionInfo.documentServer) this.buildVersionInfo.documentServer = "6.4.1";
   };
 
   setTheme = (key) => {
@@ -567,8 +675,7 @@ class SettingsStore {
       case ThemeKeys.SystemStr:
       default:
         theme =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
+          window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
             ? ThemeKeys.DarkStr
             : ThemeKeys.BaseStr;
     }
@@ -594,7 +701,7 @@ class SettingsStore {
 
   setIpRestrictions = async (ips) => {
     const data = {
-      ips: ips,
+      IpRestrictions: ips,
     };
     const res = await api.settings.setIpRestrictions(data);
     this.ipRestrictions = res;

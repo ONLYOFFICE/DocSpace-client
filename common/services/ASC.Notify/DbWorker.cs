@@ -27,9 +27,9 @@
 namespace ASC.Notify;
 
 [Singletone]
-public class DbWorker
+public class DbWorker : IDisposable
 {
-    private readonly object _syncRoot = new object();
+    private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
 
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly NotifyServiceCfg _notifyServiceCfg;
@@ -40,7 +40,7 @@ public class DbWorker
         _notifyServiceCfg = notifyServiceCfg.Value;
     }
 
-    public int SaveMessage(NotifyMessage m)
+    public async Task SaveMessageAsync(NotifyMessage m)
     {
         using var scope = _serviceScopeFactory.CreateScope();
 
@@ -50,14 +50,14 @@ public class DbWorker
 
         var strategy = dbContext.Database.CreateExecutionStrategy();
 
-        strategy.Execute(() =>
+        await strategy.ExecuteAsync(async () =>
         {
-            using var tx = dbContext.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+            using var tx = await dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
 
             var notifyQueue = _mapper.Map<NotifyMessage, NotifyQueue>(m);
+            notifyQueue.Attachments = JsonConvert.SerializeObject(m.Attachments);
 
-            notifyQueue = dbContext.NotifyQueue.Add(notifyQueue).Entity;
-            dbContext.SaveChanges();
+            notifyQueue = (await dbContext.NotifyQueue.AddAsync(notifyQueue)).Entity;
 
             var id = notifyQueue.NotifyId;
 
@@ -70,19 +70,18 @@ public class DbWorker
                 Priority = m.Priority
             };
 
-            dbContext.NotifyInfo.Add(info);
-            dbContext.SaveChanges();
+            await dbContext.NotifyInfo.AddAsync(info);
+            await dbContext.SaveChangesAsync();
 
-            tx.Commit();
+            await tx.CommitAsync();
         });
-
-        return 1;
     }
 
-    public IDictionary<int, NotifyMessage> GetMessages(int count)
+    public async Task<IDictionary<int, NotifyMessage>> GetMessagesAsync(int count)
     {
-        lock (_syncRoot)
+        try
         {
+            await _semaphore.WaitAsync();
             using var scope = _serviceScopeFactory.CreateScope();
 
             var _mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
@@ -97,8 +96,8 @@ public class DbWorker
                 .Take(count);
 
 
-            var messages = q
-                .ToDictionary(
+            var messages = await q
+                .ToDictionaryAsync(
                     r => r.queue.NotifyId,
                     r =>
                     {
@@ -116,92 +115,61 @@ public class DbWorker
                         return res;
                     });
 
-            var strategy = dbContext.Database.CreateExecutionStrategy();
 
-            strategy.Execute(() =>
-            {
-                using var tx = dbContext.Database.BeginTransaction();
-
-                var info = dbContext.NotifyInfo.Where(r => messages.Keys.Any(a => a == r.NotifyId)).ToList();
-
-                foreach (var i in info)
-                {
-                    i.State = (int)MailSendingState.Sending;
-                }
-
-                dbContext.SaveChanges();
-                tx.Commit();
-            });
+            await dbContext.NotifyInfo.Where(r => messages.Keys.Any(a => a == r.NotifyId)).ExecuteUpdateAsync(q=> q.SetProperty(p => p.State, (int)MailSendingState.Sending));
 
             return messages;
         }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 
-    public void ResetStates()
+    public async Task ResetStatesAsync()
     {
         using var scope = _serviceScopeFactory.CreateScope();
         using var dbContext = scope.ServiceProvider.GetService<IDbContextFactory<NotifyDbContext>>().CreateDbContext();
 
-        var strategy = dbContext.Database.CreateExecutionStrategy();
-
-        strategy.Execute(() =>
-        {
-            var tr = dbContext.Database.BeginTransaction();
-            var info = dbContext.NotifyInfo.Where(r => r.State == 1).ToList();
-
-            foreach (var i in info)
-            {
-                i.State = 0;
-            }
-
-            dbContext.SaveChanges();
-            tr.Commit();
-        });
+        await dbContext.NotifyInfo.Where(r => r.State == 1).ExecuteUpdateAsync(q => q.SetProperty(p => p.State, 0));
     }
 
-    public void SetState(int id, MailSendingState result)
+    public async Task SetStateAsync(int id, MailSendingState result)
     {
         using var scope = _serviceScopeFactory.CreateScope();
         using var dbContext = scope.ServiceProvider.GetService<IDbContextFactory<NotifyDbContext>>().CreateDbContext();
-        var strategy = dbContext.Database.CreateExecutionStrategy();
 
-        strategy.Execute(() =>
+        if (result == MailSendingState.Sended)
         {
-            using var scope = _serviceScopeFactory.CreateScope();
-            using var dbContext = scope.ServiceProvider.GetService<IDbContextFactory<NotifyDbContext>>().CreateDbContext();
-            using var tx = dbContext.Database.BeginTransaction();
-            if (result == MailSendingState.Sended)
+            var d = await dbContext.NotifyInfo.Where(r => r.NotifyId == id).FirstOrDefaultAsync();
+            dbContext.NotifyInfo.Remove(d);
+            await dbContext.SaveChangesAsync();
+        }
+        else
+        {
+            if (result == MailSendingState.Error)
             {
-                var d = dbContext.NotifyInfo.Where(r => r.NotifyId == id).FirstOrDefault();
-                dbContext.NotifyInfo.Remove(d);
-                dbContext.SaveChanges();
-            }
-            else
-            {
-                if (result == MailSendingState.Error)
+                var attempts = await dbContext.NotifyInfo.Where(r => r.NotifyId == id).Select(r => r.Attempts).FirstOrDefaultAsync();
+                if (_notifyServiceCfg.Process.MaxAttempts <= attempts + 1)
                 {
-                    var attempts = dbContext.NotifyInfo.Where(r => r.NotifyId == id).Select(r => r.Attempts).FirstOrDefault();
-                    if (_notifyServiceCfg.Process.MaxAttempts <= attempts + 1)
-                    {
-                        result = MailSendingState.FatalError;
-                    }
+                    result = MailSendingState.FatalError;
                 }
-
-                var info = dbContext.NotifyInfo
-                    .Where(r => r.NotifyId == id)
-                    .ToList();
-
-                foreach (var i in info)
-                {
-                    i.State = (int)result;
-                    i.Attempts += 1;
-                    i.ModifyDate = DateTime.UtcNow;
-                }
-
-                dbContext.SaveChanges();
             }
 
-            tx.Commit();
-        });
+            await dbContext.NotifyInfo.Where(r => r.NotifyId == id)
+            .ExecuteUpdateAsync(q =>
+                q.SetProperty(p => p.State, (int)result)
+                .SetProperty(p => p.Attempts, p => p.Attempts + 1)
+                .SetProperty(p => p.ModifyDate, DateTime.UtcNow));
+        }
+    }
+
+    public void Dispose()
+    {
+        _semaphore.Dispose();
     }
 }

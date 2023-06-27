@@ -35,11 +35,6 @@ public class Startup : BaseStartup
     {
         base.Configure(app, env);
 
-        app.UseForwardedHeaders(new ForwardedHeadersOptions
-        {
-            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-        });
-
         app.UseRouting();
 
         app.UseAuthentication();
@@ -76,5 +71,43 @@ public class Startup : BaseStartup
         DIHelper.TryAdd<FacebookLoginProvider>();
         DIHelper.TryAdd<LinkedInLoginProvider>();
         DIHelper.TryAdd<SsoHandlerService>();
+        DIHelper.TryAdd<RemovePortalIntegrationEventHandler>();
+
+        services.AddHttpClient();
+
+        DIHelper.TryAdd<DbWorker>();
+
+        services.AddHostedService<WorkerService>();
+        DIHelper.TryAdd<WorkerService>();
+
+        services.TryAddSingleton(new ConcurrentQueue<WebhookRequestIntegrationEvent>());
+        DIHelper.TryAdd<WebhookRequestIntegrationEventHandler>();
+
+        var lifeTime = TimeSpan.FromMinutes(5);
+
+        Func<IServiceProvider, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policyHandler = (s, request) =>
+        {
+            var settings = s.GetRequiredService<Settings>();
+
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
+                .WaitAndRetryAsync(settings.RepeatCount.HasValue ? settings.RepeatCount.Value : 5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+        };
+
+        services.AddHttpClient(WebhookSender.WEBHOOK)
+        .SetHandlerLifetime(lifeTime)
+        .AddPolicyHandler(policyHandler);
+
+        services.AddHttpClient(WebhookSender.WEBHOOK_SKIP_SSL)
+        .SetHandlerLifetime(lifeTime)
+        .AddPolicyHandler(policyHandler)
+        .ConfigurePrimaryHttpMessageHandler((s) =>
+        {
+            return new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+            };
+        });
     }
 }

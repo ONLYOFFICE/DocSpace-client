@@ -32,7 +32,7 @@ const template: Template = (
   t
 ) => {
   const documentTitle = t
-    ? `${t("Authorization")} – ${organizationName}`
+    ? `${t("Common:Authorization")} – ${organizationName}`
     : title;
 
   const favicon = getLogoFromPath(
@@ -232,6 +232,7 @@ const template: Template = (
       <body>
         <noscript> You need to enable JavaScript to run this app. </noscript>
         <div id="root">${appComponent}</div>
+        <script src="/static/scripts/browserDetector.js"></script>
         ${scripts}
       </body>
     </html>

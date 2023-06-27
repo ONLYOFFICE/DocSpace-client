@@ -52,18 +52,13 @@ public class CrossModuleTransferUtility
         _chunkSize = 5 * 1024 * 1024;
     }
 
-    public Task CopyFileAsync(string srcDomain, string srcPath, string destDomain, string destPath)
+    public async ValueTask CopyFileAsync(string srcDomain, string srcPath, string destDomain, string destPath)
     {
         ArgumentNullException.ThrowIfNull(srcDomain);
         ArgumentNullException.ThrowIfNull(srcPath);
         ArgumentNullException.ThrowIfNull(destDomain);
         ArgumentNullException.ThrowIfNull(destPath);
 
-        return InternalCopyFileAsync(srcDomain, srcPath, destDomain, destPath);
-    }
-
-    private async Task InternalCopyFileAsync(string srcDomain, string srcPath, string destDomain, string destPath)
-    {
         using var stream = await _source.GetReadStreamAsync(srcDomain, srcPath);
         if (stream.Length < _maxChunkUploadSize)
         {
@@ -72,7 +67,7 @@ public class CrossModuleTransferUtility
         else
         {
             var session = new CommonChunkedUploadSession(stream.Length);
-            var holder = new CommonChunkedUploadSessionHolder(_tempPath, _logger, _destination, destDomain);
+            var holder = new CommonChunkedUploadSessionHolder(_tempPath, _destination, destDomain);
             await holder.InitAsync(session);
             try
             {

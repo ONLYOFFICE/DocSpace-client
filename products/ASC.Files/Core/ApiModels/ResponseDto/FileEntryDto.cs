@@ -43,7 +43,7 @@ public abstract class FileEntryDto
         get => _updated < Created ? Created : _updated;
         set => _updated = value;
     }
-
+    public ApiDateTime AutoDelete { get; set; }
     public FolderType RootFolderType { get; set; }
     public EmployeeDto UpdatedBy { get; set; }
     public bool? ProviderItem { get; set; }
@@ -68,6 +68,14 @@ public abstract class FileEntryDto<T> : FileEntryDto
 {
     public T Id { get; set; }
     public T RootFolderId { get; set; }
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public T OriginId { get; set; }
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public T OriginRoomId { get; set; }
+    public string OriginTitle { get; set; }
+    public string OriginRoomTitle { get; set; }
     public bool CanShare { get; set; }
     public IDictionary<FilesSecurityActions, bool> Security { get; set; }
 
@@ -120,16 +128,21 @@ public class FileEntryDtoHelper
             Access = entry.Access,
             Shared = entry.Shared,
             Created = _apiDateTimeHelper.Get(entry.CreateOn),
-            CreatedBy = await _employeeWraperHelper.Get(entry.CreateBy),
+            CreatedBy = await _employeeWraperHelper.GetAsync(entry.CreateBy),
             Updated = _apiDateTimeHelper.Get(entry.ModifiedOn),
-            UpdatedBy = await _employeeWraperHelper.Get(entry.ModifiedBy),
+            UpdatedBy = await _employeeWraperHelper.GetAsync(entry.ModifiedBy),
             RootFolderType = entry.RootFolderType,
             RootFolderId = entry.RootId,
             ProviderItem = entry.ProviderEntry.NullIfDefault(),
             ProviderKey = entry.ProviderKey,
             ProviderId = entry.ProviderId.NullIfDefault(),
             CanShare = await _fileSharingHelper.CanSetAccessAsync(entry),
-            Security = entry.Security
+            Security = entry.Security,
+            OriginId = entry.OriginId,
+            OriginTitle = entry.OriginTitle,
+            OriginRoomId = entry.OriginRoomId,
+            OriginRoomTitle = entry.OriginRoomTitle,
+            AutoDelete = entry.DeletedPermanentlyOn != default ? _apiDateTimeHelper.Get(entry.DeletedPermanentlyOn) : null
         };
     }
 }

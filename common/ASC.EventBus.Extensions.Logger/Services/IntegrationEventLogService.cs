@@ -44,7 +44,7 @@ public class IntegrationEventLogService : IIntegrationEventLogService
     {
         var tid = transactionId.ToString();
 
-        using var _integrationEventLogContext = await _dbContextFactory.CreateDbContextAsync();
+        using var _integrationEventLogContext = _dbContextFactory.CreateDbContext();
         var result = await _integrationEventLogContext.IntegrationEventLogs
             .Where(e => e.TransactionId == tid && e.State == EventStateEnum.NotPublished).ToListAsync();
 
@@ -66,31 +66,31 @@ public class IntegrationEventLogService : IIntegrationEventLogService
 
         var eventLogEntry = new IntegrationEventLogEntry(@event, transaction.TransactionId);
 
-        using var _integrationEventLogContext = await _dbContextFactory.CreateDbContextAsync();
+        using var _integrationEventLogContext = _dbContextFactory.CreateDbContext();
         _integrationEventLogContext.Database.UseTransaction(transaction.GetDbTransaction());
         _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
 
         await _integrationEventLogContext.SaveChangesAsync();
     }
 
-    public Task MarkEventAsPublishedAsync(Guid eventId)
+    public async Task MarkEventAsPublishedAsync(Guid eventId)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.Published);
+        await UpdateEventStatusAsync(eventId, EventStateEnum.Published);
     }
 
-    public Task MarkEventAsInProgressAsync(Guid eventId)
+    public async Task MarkEventAsInProgressAsync(Guid eventId)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.InProgress);
+        await UpdateEventStatusAsync(eventId, EventStateEnum.InProgress);
     }
 
-    public Task MarkEventAsFailedAsync(Guid eventId)
+    public async Task MarkEventAsFailedAsync(Guid eventId)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.PublishedFailed);
+        await UpdateEventStatusAsync(eventId, EventStateEnum.PublishedFailed);
     }
 
-    private async Task UpdateEventStatus(Guid eventId, EventStateEnum status)
+    private async Task UpdateEventStatusAsync(Guid eventId, EventStateEnum status)
     {
-        using var _integrationEventLogContext = await _dbContextFactory.CreateDbContextAsync();
+        using var _integrationEventLogContext = _dbContextFactory.CreateDbContext();
         var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.EventId == eventId);
         eventLogEntry.State = status;
 

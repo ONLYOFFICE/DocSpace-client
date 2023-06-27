@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using Actions = ASC.Web.Studio.Core.Notify.Actions;
+
 namespace ASC.Files.Core.Security;
 
 [Scope]
@@ -38,10 +40,10 @@ public class FileSecurityCommon
         _webItemSecurity = webItemSecurity;
     }
 
-    public bool IsDocSpaceAdministrator(Guid userId)
+    public async Task<bool> IsDocSpaceAdministratorAsync(Guid userId)
     {
-        return _userManager.IsUserInGroup(userId, Constants.GroupAdmin.ID) ||
-               _webItemSecurity.IsProductAdministrator(ProductEntryPoint.ID, userId);
+        return await _userManager.IsUserInGroupAsync(userId, Constants.GroupAdmin.ID) ||
+               await _webItemSecurity.IsProductAdministratorAsync(ProductEntryPoint.ID, userId);
     }
 }
 
@@ -53,7 +55,69 @@ public class FileSecurity : IFileSecurity
     public readonly FileShare DefaultCommonShare = FileShare.Read;
     public readonly FileShare DefaultPrivacyShare = FileShare.Restrict;
     public readonly FileShare DefaultVirtualRoomsShare = FileShare.Restrict;
+    
+    public static readonly Dictionary<FolderType, HashSet<FileShare>> AvailableRoomRights = new()
+    { 
+        { 
+            FolderType.CustomRoom, new HashSet<FileShare>
+            { 
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Editing, FileShare.Review, FileShare.Comment, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
+        }, 
+        {
+            FolderType.FillingFormsRoom, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            FolderType.EditingRoom, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Editing, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            FolderType.ReviewRoom, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Review, FileShare.Comment, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            FolderType.ReadOnlyRoom, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Read, FileShare.None
+            }
+        }
+    };
 
+    public static readonly Dictionary<EmployeeType, HashSet<FileShare>> AvailableUserRights = new()
+    {
+        {
+            EmployeeType.DocSpaceAdmin, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.None
+            }
+        },
+        {
+            EmployeeType.RoomAdmin, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Editing, FileShare.Review, FileShare.Comment, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            EmployeeType.Collaborator, new HashSet<FileShare>
+            {
+                FileShare.Collaborator, FileShare.Editing, FileShare.Review, FileShare.Comment, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            EmployeeType.User, new HashSet<FileShare>
+            {
+                FileShare.Editing, FileShare.Review, FileShare.Comment, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
+        }
+    };
+        
     private static readonly IDictionary<FileEntryType, IEnumerable<FilesSecurityActions>> _securityEntries =
     new Dictionary<FileEntryType, IEnumerable<FilesSecurityActions>>()
     {
@@ -89,6 +153,7 @@ public class FileSecurity : IFileSecurity
                     FilesSecurityActions.Copy,
                     FilesSecurityActions.Move,
                     FilesSecurityActions.Pin,
+                    FilesSecurityActions.Mute,
                     FilesSecurityActions.EditAccess,
                     FilesSecurityActions.Duplicate,
                 }
@@ -102,6 +167,8 @@ public class FileSecurity : IFileSecurity
     private readonly GlobalFolder _globalFolder;
     private readonly FileSecurityCommon _fileSecurityCommon;
     private readonly FileUtility _fileUtility;
+    private readonly StudioNotifyHelper _studioNotifyHelper;
+    private readonly BadgesSettingsHelper _badgesSettingsHelper;
 
     public FileSecurity(
         IDaoFactory daoFactory,
@@ -111,7 +178,9 @@ public class FileSecurity : IFileSecurity
         AuthManager authManager,
         GlobalFolder globalFolder,
         FileSecurityCommon fileSecurityCommon,
-        FileUtility fileUtility)
+        FileUtility fileUtility,
+        StudioNotifyHelper studioNotifyHelper,
+        BadgesSettingsHelper badgesSettingsHelper)
     {
         _daoFactory = daoFactory;
         _userManager = userManager;
@@ -121,6 +190,8 @@ public class FileSecurity : IFileSecurity
         _globalFolder = globalFolder;
         _fileSecurityCommon = fileSecurityCommon;
         _fileUtility = fileUtility;
+        _studioNotifyHelper = studioNotifyHelper;
+        _badgesSettingsHelper = badgesSettingsHelper;
     }
 
     public IAsyncEnumerable<Tuple<FileEntry<T>, bool>> CanReadAsync<T>(IAsyncEnumerable<FileEntry<T>> entries, Guid userId)
@@ -133,69 +204,69 @@ public class FileSecurity : IFileSecurity
         return CanReadAsync(entries, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanReadAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanReadAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Read);
+        return await CanAsync(entry, userId, FilesSecurityActions.Read);
     }
 
-    public Task<bool> CanReadHistoryAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanReadHistoryAsync<T>(FileEntry<T> entry)
     {
-        return CanReadHistoryAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanReadHistoryAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanReadHistoryAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanReadHistoryAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.ReadHistory);
+        return await CanAsync(entry, userId, FilesSecurityActions.ReadHistory);
     }
 
-    public Task<bool> CanCommentAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanCommentAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Comment);
+        return await CanAsync(entry, userId, FilesSecurityActions.Comment);
     }
 
-    public Task<bool> CanFillFormsAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanFillFormsAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.FillForms);
+        return await CanAsync(entry, userId, FilesSecurityActions.FillForms);
     }
 
-    public Task<bool> CanReviewAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanReviewAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Review);
+        return await CanAsync(entry, userId, FilesSecurityActions.Review);
     }
 
-    public Task<bool> CanCustomFilterEditAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanCustomFilterEditAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.CustomFilter);
+        return await CanAsync(entry, userId, FilesSecurityActions.CustomFilter);
     }
 
-    public Task<bool> CanCreateAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanCreateAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Create);
+        return await CanAsync(entry, userId, FilesSecurityActions.Create);
     }
 
-    public Task<bool> CanEditAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanEditAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Edit);
+        return await CanAsync(entry, userId, FilesSecurityActions.Edit);
     }
 
-    public Task<bool> CanDeleteAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanDeleteAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Delete);
+        return await CanAsync(entry, userId, FilesSecurityActions.Delete);
     }
 
-    public Task<bool> CanEditRoomAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanEditRoomAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.EditRoom);
+        return await CanAsync(entry, userId, FilesSecurityActions.EditRoom);
     }
 
-    public Task<bool> CanRenameAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanRenameAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Rename);
+        return await CanAsync(entry, userId, FilesSecurityActions.Rename);
     }
 
-    public Task<bool> CanDownloadAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanDownloadAsync<T>(FileEntry<T> entry)
     {
-        return CanDownloadAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanDownloadAsync(entry, _authContext.CurrentAccount.ID);
     }
 
     public async Task<bool> CanDownloadAsync<T>(FileEntry<T> entry, Guid userId)
@@ -218,113 +289,113 @@ public class FileSecurity : IFileSecurity
         return CheckDenySharing(entry);
     }
 
-    public Task<bool> CanReadAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanReadAsync<T>(FileEntry<T> entry)
     {
-        return CanReadAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanReadAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanCommentAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanCommentAsync<T>(FileEntry<T> entry)
     {
-        return CanCommentAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanCommentAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanCustomFilterEditAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanCustomFilterEditAsync<T>(FileEntry<T> entry)
     {
-        return CanCustomFilterEditAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanCustomFilterEditAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanFillFormsAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanFillFormsAsync<T>(FileEntry<T> entry)
     {
-        return CanFillFormsAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanFillFormsAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanReviewAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanReviewAsync<T>(FileEntry<T> entry)
     {
-        return CanReviewAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanReviewAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanCreateAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanCreateAsync<T>(FileEntry<T> entry)
     {
-        return CanCreateAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanCreateAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanEditAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanEditAsync<T>(FileEntry<T> entry)
     {
-        return CanEditAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanEditAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanRenameAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanRenameAsync<T>(FileEntry<T> entry)
     {
-        return CanRenameAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanRenameAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanDeleteAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanDeleteAsync<T>(FileEntry<T> entry)
     {
-        return CanDeleteAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanDeleteAsync(entry, _authContext.CurrentAccount.ID);
     }
-    public Task<bool> CanDownload<T>(FileEntry<T> entry)
+    public async Task<bool> CanDownload<T>(FileEntry<T> entry)
     {
-        return CanDownloadAsync(entry, _authContext.CurrentAccount.ID);
-    }
-
-    public Task<bool> CanEditRoomAsync<T>(FileEntry<T> entry)
-    {
-        return CanEditRoomAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanDownloadAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanShareAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanEditRoomAsync<T>(FileEntry<T> entry)
     {
-        return CanShareAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanEditRoomAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanLockAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanShareAsync<T>(FileEntry<T> entry)
     {
-        return CanLockAsync(entry, _authContext.CurrentAccount.ID);
+        return await CanShareAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanLockAsync<T>(FileEntry<T> entry, Guid userId)
+    public async Task<bool> CanLockAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, userId, FilesSecurityActions.Lock);
+        return await CanLockAsync(entry, _authContext.CurrentAccount.ID);
     }
 
-    public Task<bool> CanCopyToAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanLockAsync<T>(FileEntry<T> entry, Guid userId)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.CopyTo);
+        return await CanAsync(entry, userId, FilesSecurityActions.Lock);
     }
 
-    public Task<bool> CanCopyAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanCopyToAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Copy);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.CopyTo);
     }
 
-    public Task<bool> CanMoveToAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanCopyAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.MoveTo);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Copy);
     }
 
-    public Task<bool> CanMoveAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanMoveToAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Move);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.MoveTo);
     }
 
-    public Task<bool> CanPinAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanMoveAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Pin);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Move);
     }
 
-    public Task<bool> CanEditAccessAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanPinAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.EditAccess);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.Pin);
     }
 
-    public Task<bool> CanEditHistoryAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanEditAccessAsync<T>(FileEntry<T> entry)
     {
-        return CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.EditHistory);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.EditAccess);
     }
 
-    public Task<IEnumerable<Guid>> WhoCanReadAsync<T>(FileEntry<T> entry)
+    public async Task<bool> CanEditHistoryAsync<T>(FileEntry<T> entry)
     {
-        return WhoCanAsync(entry, FilesSecurityActions.Read);
+        return await CanAsync(entry, _authContext.CurrentAccount.ID, FilesSecurityActions.EditHistory);
+    }
+
+    public async Task<IEnumerable<Guid>> WhoCanReadAsync<T>(FileEntry<T> entry)
+    {
+        return await WhoCanAsync(entry, FilesSecurityActions.Read);
     }
 
     private async Task<IEnumerable<Guid>> WhoCanAsync<T>(FileEntry<T> entry, FilesSecurityActions action)
@@ -346,7 +417,7 @@ public class FileSecurity : IFileSecurity
                         EntryType = entry.FileEntryType,
                         Share = DefaultCommonShare,
                         Subject = Constants.GroupEveryone.ID,
-                        TenantId = _tenantManager.GetCurrentTenant().Id,
+                        TenantId = await _tenantManager.GetCurrentTenantIdAsync(),
                         Owner = _authContext.CurrentAccount.ID
                     }
                 };
@@ -358,7 +429,7 @@ public class FileSecurity : IFileSecurity
                     if ((defaultShareRecord.Share == FileShare.Read && action == FilesSecurityActions.Read) ||
                         (defaultShareRecord.Share == FileShare.ReadWrite))
                     {
-                        return _userManager.GetUsersByGroup(defaultShareRecord.Subject)
+                        return (await _userManager.GetUsersByGroupAsync(defaultShareRecord.Subject))
                                           .Where(x => x.Status == EmployeeStatus.Active).Select(y => y.Id).Distinct();
                     }
 
@@ -377,7 +448,7 @@ public class FileSecurity : IFileSecurity
                         EntryType = entry.FileEntryType,
                         Share = DefaultMyShare,
                         Subject = entry.RootCreateBy,
-                        TenantId = _tenantManager.GetCurrentTenant().Id,
+                        TenantId = await _tenantManager.GetCurrentTenantIdAsync(),
                         Owner = entry.RootCreateBy
                     }
                 };
@@ -401,7 +472,7 @@ public class FileSecurity : IFileSecurity
                         EntryType = entry.FileEntryType,
                         Share = DefaultPrivacyShare,
                         Subject = entry.RootCreateBy,
-                        TenantId = _tenantManager.GetCurrentTenant().Id,
+                        TenantId = await _tenantManager.GetCurrentTenantIdAsync(),
                         Owner = entry.RootCreateBy
                     }
                 };
@@ -454,7 +525,7 @@ public class FileSecurity : IFileSecurity
                         EntryType = entry.FileEntryType,
                         Share = FileShare.Read,
                         Subject = Constants.GroupEveryone.ID,
-                        TenantId = _tenantManager.GetCurrentTenant().Id,
+                        TenantId = await _tenantManager.GetCurrentTenantIdAsync(),
                         Owner = entry.RootCreateBy
                     }
                 };
@@ -465,7 +536,7 @@ public class FileSecurity : IFileSecurity
 
                     foreach (var defaultRecord in defaultRecords)
                     {
-                        users.AddRange(_userManager.GetUsersByGroup(defaultRecord.Subject).Where(x => x.Status == EmployeeStatus.Active).Select(y => y.Id));
+                        users.AddRange((await _userManager.GetUsersByGroupAsync(defaultRecord.Subject)).Where(x => x.Status == EmployeeStatus.Active).Select(y => y.Id));
                     }
 
                     return users.Distinct();
@@ -483,23 +554,11 @@ public class FileSecurity : IFileSecurity
             shares = shares.Concat(defaultRecords);
         }
 
-        var manyShares = shares.SelectMany(x =>
-        {
-            var groupInfo = _userManager.GetGroupInfo(x.Subject);
-
-            if (groupInfo.ID != Constants.LostGroupInfo.ID)
-            {
-                return _userManager.GetUsersByGroup(groupInfo.ID)
-                .Where(p => p.Status == EmployeeStatus.Active)
-                .Select(y => y.Id);
-            }
-
-            return new[] { x.Subject };
-        }).Distinct();
+        var manyShares = shares.ToAsyncEnumerable().SelectManyAwait(async x => await ToGuidAsync(x)).Distinct();
 
         var result = new List<Guid>();
 
-        foreach (var x in manyShares)
+        await foreach (var x in manyShares)
         {
             if (await CanAsync(entry, x, action, copyShares))
             {
@@ -508,6 +567,20 @@ public class FileSecurity : IFileSecurity
         }
 
         return result;
+    }
+
+    private async ValueTask<IAsyncEnumerable<Guid>> ToGuidAsync(FileShareRecord x)
+    {
+        var groupInfo = await _userManager.GetGroupInfoAsync(x.Subject);
+
+        if (groupInfo.ID != Constants.LostGroupInfo.ID)
+        {
+            return (await _userManager.GetUsersByGroupAsync(groupInfo.ID))
+            .Where(p => p.Status == EmployeeStatus.Active)
+            .Select(y => y.Id).ToAsyncEnumerable();
+        }
+
+        return new[] { x.Subject }.ToAsyncEnumerable();
     }
 
     public async IAsyncEnumerable<FileEntry<T>> FilterReadAsync<T>(IAsyncEnumerable<FileEntry<T>> entries)
@@ -528,11 +601,12 @@ public class FileSecurity : IFileSecurity
 
     public async IAsyncEnumerable<FileEntry<T>> SetSecurity<T>(IAsyncEnumerable<FileEntry<T>> entries, Guid userId)
     {
-        var user = _userManager.GetUsers(userId);
-        var isOutsider = _userManager.IsOutsider(user);
-        var isUser = _userManager.IsUser(user);
-        var isAuthenticated = _authManager.GetAccountByID(_tenantManager.GetCurrentTenant().Id, userId).IsAuthenticated;
-        var isDocSpaceAdmin = _fileSecurityCommon.IsDocSpaceAdministrator(userId);
+        var user = await _userManager.GetUsersAsync(userId);
+        var isOutsider = await _userManager.IsOutsiderAsync(user);
+        var isUser = await _userManager.IsUserAsync(user);
+        var isAuthenticated = (await _authManager.GetAccountByIDAsync(await _tenantManager.GetCurrentTenantIdAsync(), userId)).IsAuthenticated;
+        var isDocSpaceAdmin = await _fileSecurityCommon.IsDocSpaceAdministratorAsync(userId);
+        var isCollaborator = await _userManager.IsCollaboratorAsync(user);
 
         await foreach (var entry in entries)
         {
@@ -545,7 +619,7 @@ public class FileSecurity : IFileSecurity
                 .Where(r => _securityEntries[entry.FileEntryType].Contains(r))
                 .Select(async e =>
                 {
-                    var t = await FilterEntry(entry, e, userId, null, isOutsider, isUser, isAuthenticated, isDocSpaceAdmin);
+                    var t = await FilterEntry(entry, e, userId, null, isOutsider, isUser, isAuthenticated, isDocSpaceAdmin, isCollaborator);
                     return new KeyValuePair<FilesSecurityActions, bool>(e, t);
                 });
 
@@ -562,24 +636,48 @@ public class FileSecurity : IFileSecurity
             return entry.Security[action];
         }
 
-        var user = _userManager.GetUsers(userId);
-        var isOutsider = _userManager.IsOutsider(user);
+        var user = await _userManager.GetUsersAsync(userId);
+        var isOutsider = await _userManager.IsOutsiderAsync(user);
 
         if (isOutsider && action != FilesSecurityActions.Read)
         {
             return false;
         }
 
-        var isUser = _userManager.IsUser(user);
-        var isAuthenticated = _authManager.GetAccountByID(_tenantManager.GetCurrentTenant().Id, userId).IsAuthenticated;
-        var isDocSpaceAdmin = _fileSecurityCommon.IsDocSpaceAdministrator(userId);
+        var isUser = await _userManager.IsUserAsync(user);
+        var isAuthenticated = (await _authManager.GetAccountByIDAsync(await _tenantManager.GetCurrentTenantIdAsync(), userId)).IsAuthenticated;
+        var isDocSpaceAdmin = await _fileSecurityCommon.IsDocSpaceAdministratorAsync(userId);
+        var isCollaborator = await _userManager.IsCollaboratorAsync(user);
 
-        return await FilterEntry(entry, action, userId, shares, isOutsider, isUser, isAuthenticated, isDocSpaceAdmin);
+        return await FilterEntry(entry, action, userId, shares, isOutsider, isUser, isAuthenticated, isDocSpaceAdmin, isCollaborator);
     }
 
     public IAsyncEnumerable<FileEntry<T>> FilterDownloadAsync<T>(IAsyncEnumerable<FileEntry<T>> entries)
     {
         return FilterReadAsync(entries).Where(CheckDenyDownload);
+    }
+    
+    public static FileShare GetHighFreeRole(FolderType folderType)
+    {
+        return folderType switch
+        {
+            FolderType.CustomRoom => FileShare.Editing,
+            FolderType.FillingFormsRoom => FileShare.FillForms,
+            FolderType.EditingRoom => FileShare.Editing,
+            FolderType.ReviewRoom => FileShare.Review,
+            FolderType.ReadOnlyRoom => FileShare.Read,
+            _ => FileShare.None
+        };
+    }
+    
+    public static EmployeeType GetTypeByShare(FileShare share)
+    {
+        return share switch
+        {
+            FileShare.RoomAdmin => EmployeeType.RoomAdmin,
+            FileShare.Collaborator => EmployeeType.Collaborator,
+            _ => EmployeeType.User,
+        };
     }
 
     private bool CheckDenyDownload<T>(FileEntry<T> entry)
@@ -611,7 +709,7 @@ public class FileSecurity : IFileSecurity
         }
     }
 
-    private async Task<bool> FilterEntry<T>(FileEntry<T> e, FilesSecurityActions action, Guid userId, IEnumerable<FileShareRecord> shares, bool isOutsider, bool isUser, bool isAuthenticated, bool isDocSpaceAdmin)
+    private async Task<bool> FilterEntry<T>(FileEntry<T> e, FilesSecurityActions action, Guid userId, IEnumerable<FileShareRecord> shares, bool isOutsider, bool isUser, bool isAuthenticated, bool isDocSpaceAdmin, bool isCollaborator)
     {
         if (!isAuthenticated && userId != FileConstant.ShareLinkId)
         {
@@ -646,8 +744,14 @@ public class FileSecurity : IFileSecurity
             if (action != FilesSecurityActions.Read)
             {
                 if ((action == FilesSecurityActions.Pin ||
-                     action == FilesSecurityActions.EditAccess) &&
+                     action == FilesSecurityActions.EditAccess ||
+                     action == FilesSecurityActions.Mute) &&
                     !isRoom)
+                {
+                    return false;
+                }
+
+                if (action == FilesSecurityActions.Mute && isRoom && await IsAllGeneralNotificationSettingsOffAsync())
                 {
                     return false;
                 }
@@ -672,7 +776,7 @@ public class FileSecurity : IFileSecurity
                         return action == FilesSecurityActions.MoveTo;
                     }
 
-                    if (folder.FolderType == FolderType.VirtualRooms)
+                    if (folder.FolderType == FolderType.VirtualRooms && !isCollaborator)
                     {
                         return action == FilesSecurityActions.Create ||
                             action == FilesSecurityActions.MoveTo;
@@ -713,9 +817,8 @@ public class FileSecurity : IFileSecurity
                 {
                     return false;
                 }
-
-                var folderDao = _daoFactory.GetFolderDao<T>();
-                var mytrashId = await folderDao.GetFolderIDTrashAsync(false, userId);
+                
+                var mytrashId = await _globalFolder.GetFolderTrashAsync(_daoFactory);
                 if (!Equals(mytrashId, 0) && Equals(e.RootId, mytrashId))
                 {
                     return folder == null || action != FilesSecurityActions.Delete || !Equals(e.Id, mytrashId);
@@ -738,7 +841,7 @@ public class FileSecurity : IFileSecurity
                     return false;
                 }
 
-                if (await HasAccessAsync(e, userId, isUser, isDocSpaceAdmin, isRoom))
+                if (await HasAccessAsync(e, userId, isUser, isDocSpaceAdmin, isRoom, isCollaborator))
                 {
                     return true;
                 }
@@ -761,7 +864,7 @@ public class FileSecurity : IFileSecurity
                     return false;
                 }
 
-                if (await HasAccessAsync(e, userId, isUser, isDocSpaceAdmin, isRoom))
+                if (await HasAccessAsync(e, userId, isUser, isDocSpaceAdmin, isRoom, isCollaborator))
                 {
                     return true;
                 }
@@ -779,7 +882,7 @@ public class FileSecurity : IFileSecurity
         var subjects = new List<Guid>();
         if (shares == null)
         {
-            subjects = GetUserSubjects(userId);
+            subjects = await GetUserSubjectsAsync(userId);
             shares = (await GetSharesAsync(e))
                     .Join(subjects, r => r.Subject, s => s, (r, s) => r)
                     .ToList();
@@ -829,6 +932,7 @@ public class FileSecurity : IFileSecurity
         {
             case FilesSecurityActions.Read:
             case FilesSecurityActions.Pin:
+            case FilesSecurityActions.Mute:
                 return e.Access != FileShare.Restrict;
             case FilesSecurityActions.Comment:
                 if (e.Access == FileShare.Comment ||
@@ -837,7 +941,8 @@ public class FileSecurity : IFileSecurity
                     e.Access == FileShare.ReadWrite ||
                     e.Access == FileShare.RoomAdmin ||
                     e.Access == FileShare.Editing ||
-                    e.Access == FileShare.FillForms)
+                    e.Access == FileShare.FillForms ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
@@ -846,7 +951,8 @@ public class FileSecurity : IFileSecurity
                 if (e.Access == FileShare.FillForms ||
                     e.Access == FileShare.ReadWrite ||
                     e.Access == FileShare.RoomAdmin ||
-                    e.Access == FileShare.Editing)
+                    e.Access == FileShare.Editing ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
@@ -855,13 +961,16 @@ public class FileSecurity : IFileSecurity
                 if (e.Access == FileShare.Review ||
                     e.Access == FileShare.ReadWrite ||
                     e.Access == FileShare.RoomAdmin ||
-                    e.Access == FileShare.Editing)
+                    e.Access == FileShare.Editing ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.Create:
-                if (e.Access == FileShare.ReadWrite || e.Access == FileShare.RoomAdmin)
+                if (e.Access == FileShare.ReadWrite || 
+                    e.Access == FileShare.RoomAdmin || 
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
@@ -869,30 +978,33 @@ public class FileSecurity : IFileSecurity
             case FilesSecurityActions.Edit:
                 if (e.Access == FileShare.ReadWrite ||
                     e.Access == FileShare.RoomAdmin ||
-                    e.Access == FileShare.Editing)
+                    e.Access == FileShare.Editing ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.Delete:
-                if (e.Access == FileShare.RoomAdmin)
+                if (e.Access == FileShare.RoomAdmin || 
+                    (e.Access == FileShare.Collaborator && e.CreateBy == _authContext.CurrentAccount.ID))
                 {
-                    if (file != null && (file.RootFolderType == FolderType.VirtualRooms))
+                    if (file is { RootFolderType: FolderType.VirtualRooms })
                     {
                         return true;
                     }
-                    else if (folder != null && folder.RootFolderType == FolderType.VirtualRooms &&
-                        folder.FolderType == FolderType.DEFAULT)
+
+                    if (folder is { RootFolderType: FolderType.VirtualRooms, FolderType: FolderType.DEFAULT })
                     {
                         return true;
                     }
                 }
                 break;
             case FilesSecurityActions.CustomFilter:
-                if ((e.Access == FileShare.CustomFilter ||
+                if (e.Access == FileShare.CustomFilter ||
                     e.Access == FileShare.ReadWrite ||
                     e.Access == FileShare.RoomAdmin ||
-                    e.Access == FileShare.Editing))
+                    e.Access == FileShare.Editing ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
@@ -904,42 +1016,62 @@ public class FileSecurity : IFileSecurity
                 }
                 break;
             case FilesSecurityActions.Rename:
-                if (e.Access == FileShare.ReadWrite || e.Access == FileShare.RoomAdmin)
+                if (e.Access == FileShare.ReadWrite || 
+                    e.Access == FileShare.RoomAdmin ||
+                    (e.Access == FileShare.Collaborator && e.CreateBy == _authContext.CurrentAccount.ID))
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.ReadHistory:
-                if (e.Access == FileShare.RoomAdmin || e.Access == FileShare.Editing)
+                if (e.Access == FileShare.RoomAdmin || 
+                    e.Access == FileShare.Editing ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.Lock:
-                if (e.Access == FileShare.RoomAdmin)
+                if (e.Access == FileShare.RoomAdmin ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.EditHistory:
                 if (e.Access == FileShare.ReadWrite ||
-                    e.Access == FileShare.RoomAdmin)
+                    e.Access == FileShare.RoomAdmin ||
+                    e.Access == FileShare.Collaborator)
                 {
                     return file != null && !file.Encrypted;
                 }
                 break;
             case FilesSecurityActions.CopyTo:
-            case FilesSecurityActions.Copy:
             case FilesSecurityActions.MoveTo:
-            case FilesSecurityActions.EditAccess:
+                if (e.Access == FileShare.RoomAdmin || 
+                    e.Access == FileShare.Collaborator)
+                {
+                    return true;
+                }
+                break;
+            case FilesSecurityActions.Copy:
             case FilesSecurityActions.Duplicate:
+                if (e.Access == FileShare.RoomAdmin || 
+                    (e.Access == FileShare.Collaborator && e.CreateBy == _authContext.CurrentAccount.ID))
+                {
+                    return true;
+                }
+                break;
+            case FilesSecurityActions.EditAccess:
                 if (e.Access == FileShare.RoomAdmin)
                 {
                     return true;
                 }
                 break;
             case FilesSecurityActions.Move:
-                if (e.Access == FileShare.RoomAdmin && !isRoom)
+                if ((e.Access == FileShare.RoomAdmin || 
+                     e.Access == FileShare.Collaborator && e.CreateBy == _authContext.CurrentAccount.ID) 
+                    && !isRoom)
                 {
                     return true;
                 }
@@ -963,12 +1095,12 @@ public class FileSecurity : IFileSecurity
         return false;
     }
 
-    public Task ShareAsync<T>(T entryId, FileEntryType entryType, Guid @for, FileShare share, SubjectType subjectType = default, FileShareOptions fileShareOptions = null)
+    public async Task ShareAsync<T>(T entryId, FileEntryType entryType, Guid @for, FileShare share, SubjectType subjectType = default, FileShareOptions fileShareOptions = null)
     {
         var securityDao = _daoFactory.GetSecurityDao<T>();
         var r = new FileShareRecord
         {
-            TenantId = _tenantManager.GetCurrentTenant().Id,
+            TenantId = await _tenantManager.GetCurrentTenantIdAsync(),
             EntryId = entryId,
             EntryType = entryType,
             Subject = @for,
@@ -978,18 +1110,18 @@ public class FileSecurity : IFileSecurity
             FileShareOptions = fileShareOptions,
         };
 
-        return securityDao.SetShareAsync(r);
+        await securityDao.SetShareAsync(r);
     }
 
-    public Task<IEnumerable<FileShareRecord>> GetSharesAsync<T>(FileEntry<T> entry)
+    public async Task<IEnumerable<FileShareRecord>> GetSharesAsync<T>(FileEntry<T> entry)
     {
-        return _daoFactory.GetSecurityDao<T>().GetSharesAsync(entry);
+        return await _daoFactory.GetSecurityDao<T>().GetSharesAsync(entry);
     }
 
     public async IAsyncEnumerable<FileEntry> GetSharesForMeAsync(FilterType filterType, bool subjectGroup, Guid subjectID, string searchText = "", bool searchInContent = false, bool withSubfolders = false)
     {
         var securityDao = _daoFactory.GetSecurityDao<int>();
-        var subjects = GetUserSubjects(_authContext.CurrentAccount.ID);
+        var subjects = await GetUserSubjectsAsync(_authContext.CurrentAccount.ID);
         var records = await securityDao.GetSharesAsync(subjects).ToListAsync();
 
         var firstTask = GetSharesForMeAsync<int>(records.Where(r => r.EntryId is int), subjects, filterType, subjectGroup, subjectID, searchText, searchInContent, withSubfolders).ToListAsync();
@@ -1013,7 +1145,7 @@ public class FileSecurity : IFileSecurity
                 ? await securityDao.GetSharesAsync(new[] { subjectId }).Where(r => r.EntryType == FileEntryType.Folder).Select(r => r.EntryId.ToString()).ToListAsync()
                 : null;
 
-        if (_fileSecurityCommon.IsDocSpaceAdministrator(_authContext.CurrentAccount.ID))
+        if (await _fileSecurityCommon.IsDocSpaceAdministratorAsync(_authContext.CurrentAccount.ID))
         {
             return await GetAllVirtualRoomsAsync(filterType, subjectId, searchText, searchInContent, withSubfolders, searchArea, withoutTags, tagNames, excludeSubject, provider, subjectFilter, subjectEntries);
         }
@@ -1085,7 +1217,7 @@ public class FileSecurity : IFileSecurity
 
         var entries = new List<FileEntry>();
 
-        var currentUserSubjects = GetUserSubjects(_authContext.CurrentAccount.ID);
+        var currentUserSubjects = await GetUserSubjectsAsync(_authContext.CurrentAccount.ID);
         var currentUsersRecords = await securityDao.GetSharesAsync(currentUserSubjects).ToListAsync();
 
         var roomsIds = new Dictionary<int, FileShare>();
@@ -1123,7 +1255,7 @@ public class FileSecurity : IFileSecurity
             _ => new[] { await _globalFolder.GetFolderVirtualRoomsAsync(_daoFactory), await _globalFolder.GetFolderArchiveAsync(_daoFactory) }
         };
 
-        var rooms = await folderDao.GetRoomsAsync(rootFoldersIds, roomsIds.Keys, filterType, tagNames, subjectId, search, withSubfolders, withoutTags, excludeSubject, provider, subjectFilter, subjectEntries)
+       var rooms = await folderDao.GetRoomsAsync(roomsIds.Keys, filterType, tagNames, subjectId, search, withSubfolders, withoutTags, excludeSubject, provider, subjectFilter, subjectEntries, rootFoldersIds)
             .Where(r => Filter(r, roomsIds)).ToListAsync();
         var thirdPartyRooms = await folderThirdPartyDao.GetFakeRoomsAsync(rootFoldersIds.Select(id => id.ToString()), thirdPartyRoomsIds.Keys, filterType, 
                 tagNames, subjectId, search, withSubfolders, withoutTags, excludeSubject, provider, subjectFilter, subjectEntries)
@@ -1312,7 +1444,7 @@ public class FileSecurity : IFileSecurity
                                 && f.RootCreateBy != _authContext.CurrentAccount.ID // don't show my files
             );
 
-        if (_userManager.IsUser(_authContext.CurrentAccount.ID))
+        if (await _userManager.IsUserAsync(_authContext.CurrentAccount.ID))
         {
             data = data.Where(r => !r.ProviderEntry);
         }
@@ -1347,7 +1479,7 @@ public class FileSecurity : IFileSecurity
     public async IAsyncEnumerable<FileEntry> GetPrivacyForMeAsync(FilterType filterType, bool subjectGroup, Guid subjectID, string searchText = "", bool searchInContent = false, bool withSubfolders = false)
     {
         var securityDao = _daoFactory.GetSecurityDao<int>();
-        var subjects = GetUserSubjects(_authContext.CurrentAccount.ID);
+        var subjects = await GetUserSubjectsAsync(_authContext.CurrentAccount.ID);
         var records = await securityDao.GetSharesAsync(subjects).ToListAsync();
 
         await foreach (var e in GetPrivacyForMeAsync<int>(records.Where(r => r.EntryId is int), subjects, filterType, subjectGroup, subjectID, searchText, searchInContent, withSubfolders))
@@ -1455,12 +1587,12 @@ public class FileSecurity : IFileSecurity
     }
 
 
-    public Task RemoveSubjectAsync<T>(Guid subject)
+    public async Task RemoveSubjectAsync<T>(Guid subject)
     {
-        return _daoFactory.GetSecurityDao<T>().RemoveSubjectAsync(subject);
+        await _daoFactory.GetSecurityDao<T>().RemoveSubjectAsync(subject);
     }
 
-    public List<Guid> GetUserSubjects(Guid userId)
+    public async Task<List<Guid>> GetUserSubjectsAsync(Guid userId)
     {
         // priority order
         // User, Departments, admin, everyone
@@ -1471,8 +1603,8 @@ public class FileSecurity : IFileSecurity
             return result;
         }
 
-        result.AddRange(_userManager.GetUserGroups(userId).Select(g => g.ID));
-        if (_fileSecurityCommon.IsDocSpaceAdministrator(userId))
+        result.AddRange((await _userManager.GetUserGroupsAsync(userId)).Select(g => g.ID));
+        if (await _fileSecurityCommon.IsDocSpaceAdministratorAsync(userId))
         {
             result.Add(Constants.GroupAdmin.ID);
         }
@@ -1502,9 +1634,9 @@ public class FileSecurity : IFileSecurity
         }
     }
 
-    private async Task<bool> HasAccessAsync<T>(FileEntry<T> entry, Guid userId, bool isUser, bool isDocSpaceAdmin, bool isRoom)
+    private async Task<bool> HasAccessAsync<T>(FileEntry<T> entry, Guid userId, bool isUser, bool isDocSpaceAdmin, bool isRoom, bool isCollaborator)
     {
-        if (!isUser)
+        if (!isUser && !isCollaborator)
         {
             if (isDocSpaceAdmin)
             {
@@ -1523,6 +1655,20 @@ public class FileSecurity : IFileSecurity
             {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    private async Task<bool> IsAllGeneralNotificationSettingsOffAsync()
+    {
+        var userId = _authContext.CurrentAccount.ID;
+
+        if (!await _badgesSettingsHelper.GetEnabledForCurrentUserAsync()
+            && !await _studioNotifyHelper.IsSubscribedToNotifyAsync(userId, Actions.RoomsActivity)
+            && !await _studioNotifyHelper.IsSubscribedToNotifyAsync(userId, Actions.SendWhatsNew))
+        {
+            return true;
         }
 
         return false;
@@ -1577,6 +1723,7 @@ public class FileSecurity : IFileSecurity
         MoveTo,
         Move,
         Pin,
+        Mute,
         EditAccess,
         Duplicate,
     }

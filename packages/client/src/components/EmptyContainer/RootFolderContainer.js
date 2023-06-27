@@ -2,29 +2,40 @@
 import PersonSvgUrl from "PUBLIC_DIR/images/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import EmptyFolderImageSvgUrl from "PUBLIC_DIR/images/empty-folder-image.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
-import Loaders from "@docspace/common/components/Loaders";
+
 import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { combineUrl } from "@docspace/common/utils";
+import FilesFilter from "@docspace/common/api/files/filter";
+
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import history from "@docspace/common/history";
-import config from "PACKAGE_FILE";
+import { CategoryType } from "SRC_DIR/helpers/constants";
+
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
+import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
+import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
 import EmptyScreenFavoritesUrl from "PUBLIC_DIR/images/empty_screen_favorites.svg?url";
+import EmptyScreenFavoritesDarkUrl from "PUBLIC_DIR/images/empty_screen_favorites_dark.svg?url";
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenPrivacyUrl from "PUBLIC_DIR/images/empty_screen_privacy.png";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
+import EmptyScreenPrivacyUrl from "PUBLIC_DIR/images/empty_screen_privacy.svg?url";
+import EmptyScreenPrivacyDarkUrl from "PUBLIC_DIR/images/empty_screen_privacy_dark.svg?url";
 import EmptyScreenTrashSvgUrl from "PUBLIC_DIR/images/empty_screen_trash.svg?url";
+import EmptyScreenTrashSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_trash_dark.svg?url";
 import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?url";
+import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
+
+import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
 
 const StyledPlusIcon = styled(PlusIcon)`
   path {
@@ -45,23 +56,26 @@ const RootFolderContainer = (props) => {
     onCreate,
     onCreateRoom,
     myFolderId,
-    filter,
-    fetchFiles,
+
     setIsLoading,
     rootFolderType,
     linkStyles,
-    isLoading,
-    viewAs,
-    fetchRooms,
-    setAlreadyFetchingRooms,
-    categoryType,
+
     isEmptyPage,
-    setIsEmptyPage,
+
     isVisitor,
+    isCollaborator,
     sectionWidth,
-    setIsLoadedEmptyPage,
+
+    security,
+
+    myFolder,
+    roomsFolder,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const emptyScreenHeader = t("EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
@@ -70,12 +84,14 @@ const RootFolderContainer = (props) => {
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
   const recentDescription = t("RecentEmptyContainerDescription");
 
-  const roomsDescription = isVisitor
-    ? t("RoomEmptyContainerDescriptionUser")
-    : t("RoomEmptyContainerDescription");
-  const archiveRoomsDescription = isVisitor
-    ? t("ArchiveEmptyScreenUser")
-    : t("ArchiveEmptyScreen");
+  const roomsDescription =
+    isVisitor || isCollaborator
+      ? t("RoomEmptyContainerDescriptionUser")
+      : t("RoomEmptyContainerDescription");
+  const archiveRoomsDescription =
+    isVisitor || isCollaborator
+      ? t("ArchiveEmptyScreenUser")
+      : t("ArchiveEmptyScreen");
 
   const privateRoomHeader = t("PrivateRoomHeader");
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
@@ -86,87 +102,79 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = "Welcome to DocSpace";
-
-  const [showLoader, setShowLoader] = React.useState(false);
-
-  React.useEffect(() => {
-    if (rootFolderType !== FolderType.COMMON) {
-      setIsEmptyPage(true);
-    } else {
-      setIsEmptyPage(false);
-    }
-
-    return () => {
-      setIsEmptyPage(false);
-      setIsLoadedEmptyPage(false);
-    };
-  }, []);
-
-  React.useEffect(() => {
-    setIsLoadedEmptyPage(!isLoading);
-  }, [isLoading]);
+  const roomHeader = t("EmptyRootRoomHeader");
 
   const onGoToPersonal = () => {
-    const newFilter = filter.clone();
+    const newFilter = FilesFilter.getDefault();
+
+    newFilter.folder = myFolderId;
+
+    const state = {
+      title: myFolder.title,
+      isRoot: true,
+      rootFolderType: myFolder.rootFolderType,
+    };
+
+    const path = getCategoryUrl(CategoryType.Personal);
+
     setIsLoading(true);
-    fetchFiles(myFolderId, newFilter).finally(() => setIsLoading(false));
+
+    navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 
   const onGoToShared = () => {
+    const newFilter = RoomsFilter.getDefault();
+
+    newFilter.searchArea = RoomSearchArea.Active;
+
+    const state = {
+      title: roomsFolder.title,
+      isRoot: true,
+      rootFolderType: roomsFolder.rootFolderType,
+    };
+
     setIsLoading(true);
 
-    setAlreadyFetchingRooms(true);
-    fetchRooms(null, null)
-      .then(() => {
-        const filter = RoomsFilter.getDefault();
+    const path = getCategoryUrl(CategoryType.Shared);
 
-        const filterParamsStr = filter.toUrlParams();
-
-        const url = getCategoryUrl(categoryType, filter.folder);
-
-        const pathname = `${url}?${filterParamsStr}`;
-
-        history.push(
-          combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
-            config.homepage,
-            pathname
-          )
-        );
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 
   const getEmptyFolderProps = () => {
-    switch (rootFolderType) {
+    switch (rootFolderType || location?.state?.rootFolderType) {
       case FolderType.USER:
         return {
           headerText: emptyScreenHeader,
           descriptionText: personalDescription,
-          imageSrc: EmptyScreenPersonalUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenPersonalUrl
+            : EmptyScreenPersonalDarkUrl,
           buttons: commonButtons,
         };
       case FolderType.Favorites:
         return {
           headerText: noFilesHeader,
           descriptionText: favoritesDescription,
-          imageSrc: EmptyScreenFavoritesUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenFavoritesUrl
+            : EmptyScreenFavoritesDarkUrl,
           buttons: isVisitor ? null : goToPersonalButtons,
         };
       case FolderType.Recent:
         return {
           headerText: noFilesHeader,
           descriptionText: recentDescription,
-          imageSrc: EmptyScreenRecentUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenRecentUrl
+            : EmptyScreenRecentDarkUrl,
           buttons: isVisitor ? null : goToPersonalButtons,
         };
       case FolderType.Privacy:
         return {
           descriptionText: privateRoomDescription,
-          imageSrc: EmptyScreenPrivacyUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenPrivacyUrl
+            : EmptyScreenPrivacyDarkUrl,
           buttons: isDesktop && isEncryptionSupport && commonButtons,
         };
       case FolderType.TRASH:
@@ -174,21 +182,27 @@ const RootFolderContainer = (props) => {
           headerText: emptyScreenHeader,
           descriptionText: trashDescription,
           style: { gridColumnGap: "39px", gridTemplateColumns: "150px" },
-          imageSrc: EmptyScreenTrashSvgUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenTrashSvgUrl
+            : EmptyScreenTrashSvgDarkUrl,
           buttons: trashButtons,
         };
       case FolderType.Rooms:
         return {
           headerText: roomHeader,
           descriptionText: roomsDescription,
-          imageSrc: EmptyScreenCorporateSvgUrl,
-          buttons: isVisitor ? null : roomsButtons,
+          imageSrc: theme.isBase
+            ? EmptyScreenCorporateSvgUrl
+            : EmptyScreenCorporateDarkSvgUrl,
+          buttons: !security?.Create ? null : roomsButtons,
         };
       case FolderType.Archive:
         return {
           headerText: archiveHeader,
           descriptionText: archiveRoomsDescription,
-          imageSrc: EmptyScreenArchiveUrl,
+          imageSrc: theme.isBase
+            ? EmptyScreenArchiveUrl
+            : EmptyScreenArchiveDarkUrl,
           buttons: archiveButtons,
         };
       default:
@@ -328,68 +342,79 @@ const RootFolderContainer = (props) => {
   const headerText = isPrivacyFolder ? privateRoomHeader : title;
   const emptyFolderProps = getEmptyFolderProps();
 
-  if (isLoading) {
-    return <Loaders.EmptyContainerLoader viewAs={viewAs} />;
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Loaders.EmptyContainerLoader
+  //       style={{ display: "none", marginTop: 32 }}
+  //       id="empty-container-loader"
+  //       viewAs={viewAs}
+  //     />
+  //   );
+  // }
 
   return (
-    <EmptyContainer
-      headerText={headerText}
-      isEmptyPage={isEmptyPage}
-      sectionWidth={sectionWidth}
-      {...emptyFolderProps}
-    />
+    emptyFolderProps && (
+      <EmptyContainer
+        headerText={headerText}
+        isEmptyPage={isEmptyPage}
+        sectionWidth={sectionWidth}
+        style={{ marginTop: 32 }}
+        {...emptyFolderProps}
+      />
+    )
   );
 };
 
 export default inject(
-  ({ auth, filesStore, treeFoldersStore, selectedFolderStore }) => {
-    const {
-      isDesktopClient,
-      isEncryptionSupport,
-      organizationName,
-      theme,
-    } = auth.settingsStore;
+  ({
+    auth,
+    filesStore,
+    treeFoldersStore,
+    selectedFolderStore,
+    clientLoadingStore,
+  }) => {
+    const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
+      auth.settingsStore;
+
+    const { setIsSectionFilterLoading } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
 
     const {
       filter,
-      fetchFiles,
+
       privacyInstructions,
-      isLoading,
-      setIsLoading,
-      viewAs,
-      fetchRooms,
-      categoryType,
-      setAlreadyFetchingRooms,
+
       isEmptyPage,
-      setIsEmptyPage,
-      setIsLoadedEmptyPage,
     } = filesStore;
-    const { title, rootFolderType } = selectedFolderStore;
-    const { isPrivacyFolder, myFolderId } = treeFoldersStore;
+    const { title, rootFolderType, security } = selectedFolderStore;
+    const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
+      treeFoldersStore;
 
     return {
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
       isVisitor: auth.userStore.user.isVisitor,
+      isCollaborator: auth.userStore.user.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,
       title,
       myFolderId,
       filter,
-      fetchFiles,
-      isLoading,
+
       setIsLoading,
       rootFolderType,
-      viewAs,
-      fetchRooms,
-      categoryType,
-      setAlreadyFetchingRooms,
+
       isEmptyPage,
-      setIsEmptyPage,
-      setIsLoadedEmptyPage,
+
+      security,
+
+      myFolder,
+      roomsFolder,
     };
   }
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

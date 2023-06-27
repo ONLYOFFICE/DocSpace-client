@@ -2,6 +2,17 @@ import React from "react";
 import Link from "../link";
 import Text from "../text";
 import Tooltip from "./";
+import TooltipDocs from "./tooltip.mdx";
+
+export default {
+  title: "Components/Tooltip",
+  component: Tooltip,
+  parameters: {
+    docs: {
+      page: TooltipDocs,
+    },
+  },
+};
 
 const BodyStyle = { marginTop: 100, marginLeft: 200, position: "absolute" };
 
@@ -88,7 +99,7 @@ const AllTemplate = (args) => {
           Bob Johnston
         </Link>
       </div>
-      <Tooltip id="link" offsetRight={90} effect="solid">
+      <Tooltip id="link" offsetRight={0} effect="solid">
         <div>
           <Text isBold={true} fontSize="16px">
             Bob Johnston
@@ -125,7 +136,7 @@ const AllTemplate = (args) => {
 
       <Tooltip
         id="group"
-        offsetRight={90}
+        offsetRight={0}
         getContent={(dataTip) =>
           dataTip ? (
             <div>

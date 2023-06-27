@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import {
-  StyledCircle,
-  StyledCircleWrap,
   StyledLoadingButton,
-} from "@docspace/common/components/StyledLoadingButton";
-
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+  StyledCircle,
+} from "@docspace/components/ColorTheme/styled/sub-components/StyledLoadingButton";
 
 const LoadingButton = (props) => {
-  const {
-    id,
-    className,
-    style,
-    percent,
-    onClick,
-    isConversion,
-    inConversion,
-    ...rest
-  } = props;
+  const { id, className, style, percent, onClick, isConversion, inConversion } =
+    props;
   const [isAnimation, setIsAnimation] = useState(true);
 
   const stopAnimation = () => {
@@ -53,7 +44,10 @@ const LoadingButton = (props) => {
           <div className="circle__fill"></div>
         </div>
 
-        <StyledLoadingButton isConversion={isConversion}>
+        <StyledLoadingButton
+          className="loading-button"
+          isConversion={isConversion}
+        >
           {!inConversion && <>&times;</>}
         </StyledLoadingButton>
       </StyledCircle>
@@ -61,4 +55,22 @@ const LoadingButton = (props) => {
   );
 };
 
-export default LoadingButton;
+export default inject(({ uploadDataStore }, { item }) => {
+  const { primaryProgressDataStore, isParallel } = uploadDataStore;
+  const { loadingFile: file } = primaryProgressDataStore;
+
+  const loadingFile = !file || !file.uniqueId ? null : file;
+
+  const currentFileUploadProgress =
+    file && loadingFile?.uniqueId === item?.uniqueId
+      ? loadingFile.percent
+      : null;
+
+  return {
+    percent: isParallel
+      ? item?.percent
+        ? item.percent
+        : null
+      : currentFileUploadProgress,
+  };
+})(observer(LoadingButton));

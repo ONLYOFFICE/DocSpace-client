@@ -45,6 +45,7 @@ public abstract class BaseStartup
     protected DIHelper DIHelper { get; }
     protected bool LoadProducts { get; set; } = true;
     protected bool LoadConsumers { get; } = true;
+    protected bool WebhooksEnabled { get; set; }
 
     public BaseStartup(IConfiguration configuration, IHostEnvironment hostEnvironment)
     {
@@ -68,20 +69,52 @@ public abstract class BaseStartup
         services.AddMemoryCache();
         services.AddHttpClient();
 
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.ForwardLimit = null;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+
+            var knownProxies = _configuration.GetSection("core:hosting:forwardedHeadersOptions:knownProxies").Get<List<String>>();
+            var knownNetworks = _configuration.GetSection("core:hosting:forwardedHeadersOptions:knownNetworks").Get<List<String>>();
+
+            if (knownProxies != null && knownProxies.Count > 0)
+            {
+                foreach (var knownProxy in knownProxies)
+                {
+                    options.KnownProxies.Add(IPAddress.Parse(knownProxy));
+                }
+            }
+
+
+            if (knownNetworks != null && knownNetworks.Count > 0)
+            {
+                foreach (var knownNetwork in knownNetworks)
+                {
+                    var prefix = IPAddress.Parse(knownNetwork.Split("/")[0]);
+                    var prefixLength = Convert.ToInt32(knownNetwork.Split("/")[1]);
+
+                    options.KnownNetworks.Add(new IPNetwork(prefix, prefixLength));
+                }
+            }
+        });
+
         services.AddScoped<EFLoggerFactory>();
-        services.AddBaseDbContextPool<AccountLinkContext>();
-        services.AddBaseDbContextPool<CoreDbContext>();
-        services.AddBaseDbContextPool<TenantDbContext>();
-        services.AddBaseDbContextPool<UserDbContext>();
-        services.AddBaseDbContextPool<TelegramDbContext>();
-        services.AddBaseDbContextPool<FirebaseDbContext>();
-        services.AddBaseDbContextPool<CustomDbContext>();
-        services.AddBaseDbContextPool<WebstudioDbContext>();
-        services.AddBaseDbContextPool<InstanceRegistrationContext>();
-        services.AddBaseDbContextPool<IntegrationEventLogContext>();
-        services.AddBaseDbContextPool<FeedDbContext>();
-        services.AddBaseDbContextPool<MessagesContext>();
-        services.AddBaseDbContextPool<WebhooksDbContext>();
+
+        services.AddBaseDbContextPool<AccountLinkContext>()
+                .AddBaseDbContextPool<CoreDbContext>()
+                .AddBaseDbContextPool<TenantDbContext>()
+                .AddBaseDbContextPool<UserDbContext>()
+                .AddBaseDbContextPool<TelegramDbContext>()
+                .AddBaseDbContextPool<FirebaseDbContext>()
+                .AddBaseDbContextPool<CustomDbContext>()
+                .AddBaseDbContextPool<WebstudioDbContext>()
+                .AddBaseDbContextPool<InstanceRegistrationContext>()
+                .AddBaseDbContextPool<IntegrationEventLogContext>()
+                .AddBaseDbContextPool<FeedDbContext>()
+                .AddBaseDbContextPool<MessagesContext>()
+                .AddBaseDbContextPool<WebhooksDbContext>();
 
         if (AddAndUseSession)
         {
@@ -105,14 +138,13 @@ public abstract class BaseStartup
                 }
             };
 
-        services.AddControllers()
-            .AddXmlSerializerFormatters()
-            .AddJsonOptions(jsonOptions);
+        services.AddControllers().AddJsonOptions(jsonOptions);
 
         services.AddSingleton(jsonOptions);
 
         DIHelper.AddControllers();
         DIHelper.TryAdd<CultureMiddleware>();
+        DIHelper.TryAdd<LoggerMiddleware>();
         DIHelper.TryAdd<IpSecurityFilter>();
         DIHelper.TryAdd<PaymentFilter>();
         DIHelper.TryAdd<ProductSecurityFilter>();
@@ -169,11 +201,6 @@ public abstract class BaseStartup
             config.Filters.Add(new CustomResponseFilterAttribute());
             config.Filters.Add(new CustomExceptionFilterAttribute());
             config.Filters.Add(new TypeFilterAttribute(typeof(WebhooksGlobalFilterAttribute)));
-            config.Filters.Add(new TypeFilterAttribute(typeof(FormatFilter)));
-
-
-            config.OutputFormatters.RemoveType<XmlSerializerOutputFormatter>();
-            config.OutputFormatters.Add(new XmlOutputFormatter());
         });
 
         var authBuilder = services.AddAuthentication(options =>
@@ -195,7 +222,7 @@ public abstract class BaseStartup
 
                 options.Events = new JwtBearerEvents
                 {
-                    OnTokenValidated = ctx =>
+                    OnTokenValidated = async ctx =>
                     {
                         using var scope = ctx.HttpContext.RequestServices.CreateScope();
 
@@ -210,9 +237,7 @@ public abstract class BaseStartup
 
                         var userId = new Guid(claimUserId);
 
-                        securityContext.AuthenticateMeWithoutCookie(userId, ctx.Principal.Claims.ToList());
-
-                        return Task.CompletedTask;
+                        await securityContext.AuthenticateMeWithoutCookieAsync(userId, ctx.Principal.Claims.ToList());
                     }
                 };
             })
@@ -267,10 +292,7 @@ public abstract class BaseStartup
 
     public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseForwardedHeaders(new ForwardedHeadersOptions
-        {
-            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-        });
+        app.UseForwardedHeaders();
 
         app.UseRouting();
 
@@ -284,24 +306,43 @@ public abstract class BaseStartup
             app.UseSession();
         }
 
+        app.UseSynchronizationContextMiddleware();
+
         app.UseAuthentication();
 
         app.UseAuthorization();
 
         app.UseCultureMiddleware();
 
-        app.UseEndpoints(endpoints =>
+        app.UseLoggerMiddleware();
+
+        app.UseEndpoints(async endpoints =>
         {
-            endpoints.MapCustom();
+            await endpoints.MapCustomAsync(WebhooksEnabled, app.ApplicationServices);
 
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+
+            endpoints.MapHealthChecks("/ready", new HealthCheckOptions
+            {
+                Predicate = r => r.Name.Contains("services")
+            });
+
             endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
             {
                 Predicate = r => r.Name.Contains("self")
+            });
+        });
+
+        app.Map("/switch", appBuilder =>
+        {
+            appBuilder.Run(async context =>
+            {
+                CustomHealthCheck.Running = !CustomHealthCheck.Running;
+                await context.Response.WriteAsync($"{Environment.MachineName} running {CustomHealthCheck.Running}");
             });
         });
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
@@ -51,8 +51,8 @@ const getTreeItems = (data, path, t) => {
         return t("Backup");
       case "PortalDeletion":
         return t("PortalDeletion");
-      case "Payments":
-        return t("Payments");
+      case "Common:PaymentsTitle":
+        return t("Common:PaymentsTitle");
       case "SingleSignOn":
         return t("SingleSignOn");
       case "DeveloperTools":
@@ -94,16 +94,36 @@ const getTreeItems = (data, path, t) => {
   });
 };
 
-class ArticleBodyContent extends React.Component {
-  constructor(props) {
-    super(props);
+const ArticleBodyContent = (props) => {
+  const {
+    t,
 
-    const fullSettingsUrl = props.match.url;
-    const locationPathname = props.location.pathname;
+    tReady,
+    setIsLoadedArticleBody,
+    toggleArticleOpen,
+    showText,
+    isNotPaidPeriod,
+    isOwner,
+    isLoadedArticleBody,
+  } = props;
 
-    const fullSettingsUrlLength = fullSettingsUrl.length;
-    const resultPath = locationPathname.slice(fullSettingsUrlLength + 1);
+  const [selectedKeys, setSelectedKeys] = React.useState([]);
+
+  const prevLocation = React.useRef(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    prevLocation.current = location;
+  }, [location]);
+
+  React.useEffect(() => {
+    const locationPathname = location.pathname;
+
+    const resultPath = locationPathname;
     const arrayOfParams = resultPath.split("/");
+    arrayOfParams.splice(0, 2);
 
     let link = "";
     const selectedItem = arrayOfParams[arrayOfParams.length - 1];
@@ -116,6 +136,7 @@ class ArticleBodyContent extends React.Component {
     } else if (selectedItem === "accessrights") {
       link = `/${resultPath}/owner`;
     }
+
     const CurrentSettingsCategoryKey = getCurrentSettingsCategory(
       arrayOfParams,
       settingsTree
@@ -125,54 +146,69 @@ class ArticleBodyContent extends React.Component {
       link = getSelectedLinkByKey(CurrentSettingsCategoryKey, settingsTree);
     }
 
-    this.state = {
-      selectedKeys: [CurrentSettingsCategoryKey],
-    };
-  }
+    setSelectedKeys([CurrentSettingsCategoryKey]);
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    const { tReady, setIsLoadedArticleBody } = this.props;
-
+  React.useEffect(() => {
     if (tReady) setIsLoadedArticleBody(true);
 
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      if (this.props.location.pathname.includes("payments")) {
-        this.setState({ selectedKeys: ["7-0"] });
+    if (prevLocation.current.pathname !== location.pathname) {
+      if (location.pathname.includes("common")) {
+        setSelectedKeys(["0-0"]);
       }
 
-      if (this.props.location.pathname.includes("common")) {
-        this.setState({ selectedKeys: ["0-0"] });
+      if (location.pathname.includes("security")) {
+        setSelectedKeys(["1-0"]);
+      }
+
+      if (location.pathname.includes("backup")) {
+        setSelectedKeys(["2-0"]);
+      }
+
+      if (location.pathname.includes("restore")) {
+        setSelectedKeys(["3-0"]);
+      }
+
+      if (location.pathname.includes("integration")) {
+        setSelectedKeys(["4-0"]);
+      }
+
+      if (location.pathname.includes("developer")) {
+        setSelectedKeys(["5-0"]);
+      }
+
+      if (location.pathname.includes("delete-data")) {
+        setSelectedKeys(["6-0"]);
+      }
+
+      if (location.pathname.includes("payments")) {
+        setSelectedKeys(["7-0"]);
       }
     }
+  }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
 
-    if (!isArrayEqual(prevState.selectedKeys, this.state.selectedKeys)) {
-      const { selectedKeys } = this.state;
-
-      const { match, history } = this.props;
-      const settingsPath = getSelectedLinkByKey(selectedKeys[0], settingsTree);
-      const newPath = match.path + settingsPath;
-      history.push(newPath);
-    }
-  }
-
-  onSelect = (value) => {
-    const { selectedKeys } = this.state;
-
-    const { toggleArticleOpen } = this.props;
-
+  const onSelect = (value) => {
     if (isArrayEqual([value], selectedKeys)) {
       return;
     }
 
-    this.setState({ selectedKeys: [value + "-0"] });
+    setSelectedKeys([value + "-0"]);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();
     }
+
+    const settingsPath = `/portal-settings${getSelectedLinkByKey(
+      value + "-0",
+      settingsTree
+    )}`;
+
+    if (settingsPath === location.pathname) return;
+
+    navigate(`${settingsPath}`);
   };
 
-  mapKeys = (tKey) => {
-    const { t } = this.props;
+  const mapKeys = (tKey) => {
     switch (tKey) {
       case "AccessRights":
         return t("Common:AccessRights");
@@ -198,8 +234,8 @@ class ArticleBodyContent extends React.Component {
         return t("Migration");
       case "Backup":
         return t("Backup");
-      case "Payments":
-        return t("Payments");
+      case "Common:PaymentsTitle":
+        return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
       case "RestoreBackup":
@@ -215,18 +251,16 @@ class ArticleBodyContent extends React.Component {
     }
   };
 
-  catalogItems = () => {
-    const { selectedKeys } = this.state;
-    const { showText, isNotPaidPeriod, t, isOwner } = this.props;
-
+  const catalogItems = () => {
     const items = [];
+
     let resultTree = [...settingsTree];
 
     if (isNotPaidPeriod) {
       resultTree = [...settingsTree].filter((e) => {
         return (
           e.tKey === "Backup" ||
-          e.tKey === "Payments" ||
+          e.tKey === "Common:PaymentsTitle" ||
           (isOwner && e.tKey === "PortalDeletion")
         );
       });
@@ -239,6 +273,8 @@ class ArticleBodyContent extends React.Component {
       }
     }
 
+    if (selectedKeys.length === 0) return <></>;
+
     resultTree.map((item) => {
       items.push(
         <CatalogItem
@@ -246,10 +282,10 @@ class ArticleBodyContent extends React.Component {
           id={item.key}
           icon={item.icon}
           showText={showText}
-          text={this.mapKeys(item.tKey)}
+          text={mapKeys(item.tKey)}
           value={item.link}
           isActive={item.key === selectedKeys[0][0]}
-          onClick={() => this.onSelect(item.key)}
+          onClick={() => onSelect(item.key)}
           folderId={item.id}
           style={{ marginTop: `${item.key.includes(7) ? "16px" : "0"}` }}
         />
@@ -259,13 +295,10 @@ class ArticleBodyContent extends React.Component {
     return items;
   };
 
-  render() {
-    const items = this.catalogItems();
-    const { isLoadedArticleBody } = this.props;
+  const items = catalogItems();
 
-    return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
-  }
-}
+  return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
+};
 
 export default inject(({ auth, common }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
@@ -284,8 +317,6 @@ export default inject(({ auth, common }) => {
   };
 })(
   withLoading(
-    withRouter(
-      withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
-    )
+    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
   )
 );

@@ -35,6 +35,7 @@ var options = new WebApplicationOptions
 var builder = WebApplication.CreateBuilder(options);
 
 builder.Configuration.AddDefaultConfiguration(builder.Environment)
+                     .AddWebStudioConfiguration()
                      .AddEnvironmentVariables()
                      .AddCommandLine(args);
 
@@ -56,14 +57,15 @@ try
 
     startup.ConfigureServices(builder.Services);
 
-    builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
-    {
-        startup.ConfigureContainer(containerBuilder);
-    });
+    builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
 
     var app = builder.Build();
 
     startup.Configure(app, app.Environment);
+
+    var eventBus = ((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IEventBus>();
+
+    eventBus.Subscribe<RemovePortalIntegrationEvent, RemovePortalIntegrationEventHandler>();
 
     logger.Info("Starting web host ({applicationContext})...", AppName);
     await app.RunWithTasksAsync();
@@ -86,5 +88,5 @@ finally
 public partial class Program
 {
     public static string Namespace = typeof(Startup).Namespace;
-    public static string AppName = Namespace.Substring(Namespace.LastIndexOf('.', Namespace.LastIndexOf('.') - 1) + 1).Replace(".","");
+    public static string AppName = Namespace.Substring(Namespace.LastIndexOf('.', Namespace.LastIndexOf('.') - 1) + 1).Replace(".", "");
 }

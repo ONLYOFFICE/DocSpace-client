@@ -9,7 +9,6 @@ import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
 const StyledRowLoader = styled.div`
   width: 100%;
   height: 48px;
-  background: red;
 `;
 
 const StyledSearchLoader = styled.div`
@@ -26,6 +25,13 @@ export default {
       description: {
         component:
           "Selector for displaying items list of people or room selector",
+      },
+    },
+  },
+  argTypes: {
+    height: {
+      table: {
+        disable: true,
       },
     },
   },
@@ -50,7 +56,7 @@ const getItems = (count) => {
       key: `user_${i}`,
       id: `user_${i}`,
       label: makeName() + " " + i,
-      avatar: ArchiveSvgUrl,
+      icon: CustomSvgUrl,
     });
   }
 
@@ -129,7 +135,7 @@ const Template = (args) => {
       style={{
         width: "480px",
         height: args.height,
-        border: "1px solid red",
+        border: "1px solid #eee",
         margin: "auto",
       }}
     >
@@ -149,27 +155,26 @@ export const Default = Template.bind({});
 Default.args = {
   height: "485px", // container height
   headerLabel: "Room list",
-  onBackClick: () => console.log("back click"),
+  onBackClick: () => {},
   searchPlaceholder: "Search",
   searchValue: "",
   items: renderedItems,
-  onSelect: (item) => console.log("select " + item),
+  onSelect: (item) => {},
   isMultiSelect: false,
   selectedItems: selectedItems,
   acceptButtonLabel: "Add",
-  onAccept: (items, access) => console.log("accept " + items + access),
+  onAccept: (items, access) => {},
   withSelectAll: false,
   selectAllLabel: "All accounts",
   selectAllIcon: ArchiveSvgUrl,
-  onSelectAll: () => console.log("select all"),
+  onSelectAll: () => {},
   withAccessRights: false,
   accessRights,
   selectedAccessRight,
-  onAccessRightsChange: (access) =>
-    console.log("access rights change " + access),
+  onAccessRightsChange: (access) => {},
   withCancelButton: false,
   cancelButtonLabel: "Cancel",
-  onCancel: () => console.log("cancel"),
+  onCancel: () => {},
   emptyScreenImage: EmptyScreenFilter,
   emptyScreenHeader: "No other accounts here yet",
   emptyScreenDescription:

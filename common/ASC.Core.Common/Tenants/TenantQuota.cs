@@ -39,9 +39,10 @@ public class TenantQuota : IMapFrom<DbQuota>
         CountRoom = int.MaxValue
     };
 
-    public int Tenant { get; set; }
+    public int TenantId { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
+    public string PriceCurrencySymbol { get; set; }
     public string ProductId { get; set; }
     public bool Visible { get; set; }
 
@@ -90,11 +91,11 @@ public class TenantQuota : IMapFrom<DbQuota>
         set => _countUserFeature.Value = value;
     }
 
-    private readonly CountRoomAdminFeature _countRoomAdminFeature;
+    private readonly CountPaidUserFeature _countPaidUserFeature;
     public int CountRoomAdmin
     {
-        get => _countRoomAdminFeature.Value;
-        set => _countRoomAdminFeature.Value = value;
+        get => _countPaidUserFeature.Value;
+        set => _countPaidUserFeature.Value = value;
     }
 
     private readonly UsersInRoomFeature _usersInRoomFeature;
@@ -221,14 +222,14 @@ public class TenantQuota : IMapFrom<DbQuota>
         _featuresList = new List<string>();
 
         _countUserFeature = new CountUserFeature(this) { Order = 1 };
-        _countRoomAdminFeature = new CountRoomAdminFeature(this);
-        _usersInRoomFeature = new UsersInRoomFeature(this) { Order = 8 };
+        _countPaidUserFeature = new CountPaidUserFeature(this);
+        _usersInRoomFeature = new UsersInRoomFeature(this) { Order = 8, Visible = false };
         _countRoomFeature = new CountRoomFeature(this) { Order = 2 };
         _maxTotalSizeFeature = new MaxTotalSizeFeature(this);
         _maxFileSizeFeature = new MaxFileSizeFeature(this);
         _nonProfitFeature = new TenantQuotaFeatureFlag(this) { Name = "non-profit", Visible = false };
         _trialFeature = new TenantQuotaFeatureFlag(this) { Name = "trial", Visible = false };
-        _freeFeature = new TenantQuotaFeatureFlag(this) { Name = "free", Visible = false };
+        _freeFeature = new FreeFeature(this) { Visible = false };
         _updateFeature = new TenantQuotaFeatureFlag(this) { Name = "update", Visible = false };
         _auditFeature = new TenantQuotaFeatureFlag(this) { Name = "audit", Order = 7 };
         _docsEditionFeature = new TenantQuotaFeatureFlag(this) { Name = "docs", Visible = false };
@@ -245,7 +246,7 @@ public class TenantQuota : IMapFrom<DbQuota>
         TenantQuotaFeatures = new List<TenantQuotaFeature>
         {
             _countUserFeature,
-            _countRoomAdminFeature,
+            _countPaidUserFeature,
             _usersInRoomFeature,
             _countRoomFeature,
             _maxTotalSizeFeature,
@@ -270,12 +271,12 @@ public class TenantQuota : IMapFrom<DbQuota>
 
     public TenantQuota(int tenant) : this()
     {
-        Tenant = tenant;
+        TenantId = tenant;
     }
 
     public TenantQuota(TenantQuota quota) : this()
     {
-        Tenant = quota.Tenant;
+        TenantId = quota.TenantId;
         Name = quota.Name;
         Price = quota.Price;
         ProductId = quota.ProductId;
@@ -286,15 +287,15 @@ public class TenantQuota : IMapFrom<DbQuota>
 
     public override int GetHashCode()
     {
-        return Tenant.GetHashCode();
+        return TenantId.GetHashCode();
     }
 
     public override bool Equals(object obj)
     {
-        return obj is TenantQuota q && q.Tenant == Tenant;
+        return obj is TenantQuota q && q.TenantId == TenantId;
     }
 
-    public async Task Check(IServiceProvider serviceProvider)
+    public async Task CheckAsync(IServiceProvider serviceProvider)
     {
         foreach (var checker in serviceProvider.GetServices<ITenantQuotaFeatureChecker>())
         {
@@ -323,7 +324,7 @@ public class TenantQuota : IMapFrom<DbQuota>
             return quota;
         }
 
-        var newQuota = new TenantQuota(quota);
+        var newQuota = new TenantQuota(old);
         newQuota.Price += quota.Price;
         newQuota.Visible &= quota.Visible;
         newQuota.ProductId = "";
@@ -336,11 +337,31 @@ public class TenantQuota : IMapFrom<DbQuota>
             }
             else if (f is TenantQuotaFeatureCount count)
             {
-                count.Value += quota.GetFeature<int>(f.Name).Value;
+                var currentValue = count.Value;
+                var newValue = quota.GetFeature<int>(f.Name).Value;
+
+                if (currentValue == count.Default && newValue != currentValue)
+                {
+                    count.Value = newValue;
+                }
+                else if (currentValue != count.Default && newValue != count.Default)
+                {
+                    count.Value += newValue;
+                }
             }
             else if (f is TenantQuotaFeatureSize length)
             {
-                length.Value += quota.GetFeature<long>(f.Name).Value;
+                var currentValue = length.Value;
+                var newValue = quota.GetFeature<long>(f.Name).Value;
+
+                if (currentValue == length.Default && newValue != currentValue)
+                {
+                    length.Value = newValue;
+                }
+                else
+                {
+                    length.Value += newValue;
+                }
             }
             else if (f is TenantQuotaFeatureFlag flag)
             {
@@ -353,7 +374,8 @@ public class TenantQuota : IMapFrom<DbQuota>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<DbQuota, TenantQuota>();
+        profile.CreateMap<DbQuota, TenantQuota>()
+            .ForMember(dest => dest.Price, o => o.MapFrom<TenantQuotaPriceResolver>());
     }
 
     public TenantQuotaFeature<T> GetFeature<T>(string name)

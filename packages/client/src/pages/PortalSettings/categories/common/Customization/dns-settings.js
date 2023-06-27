@@ -6,9 +6,8 @@ import FieldContainer from "@docspace/components/field-container";
 import TextInput from "@docspace/components/text-input";
 import Button from "@docspace/components/button";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
-import config from "PACKAGE_FILE";
-import history from "@docspace/common/history";
+
+import { useNavigate } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
 import { isSmallTablet } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
@@ -16,9 +15,9 @@ import { DNSSettingsTooltip } from "../sub-components/common-tooltips";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderCustomization from "../sub-components/loaderCustomization";
-import Textarea from "@docspace/components/textarea";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Badge from "@docspace/components/badge";
+
 const DNSSettings = (props) => {
   const {
     t,
@@ -28,14 +27,15 @@ const DNSSettings = (props) => {
     setIsLoadedDNSSettings,
     isLoadedPage,
     helpLink,
-    theme,
     initSettings,
     setIsLoaded,
     isSettingPaid,
+    currentColorScheme,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
   const [isCustomizationView, setIsCustomizationView] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
@@ -53,9 +53,8 @@ const DNSSettings = (props) => {
     }
 
     // TODO: Remove div with height 64 and remove settings-mobile class
-    const settingsMobile = document.getElementsByClassName(
-      "settings-mobile"
-    )[0];
+    const settingsMobile =
+      document.getElementsByClassName("settings-mobile")[0];
 
     if (settingsMobile) {
       settingsMobile.style.display = "none";
@@ -76,20 +75,27 @@ const DNSSettings = (props) => {
     if (!isSmallTablet()) {
       setIsCustomizationView(true);
 
-      history.push(
-        combineUrl(
-          window.DocSpaceConfig?.proxy?.url,
-          config.homepage,
-          "/portal-settings/common/customization"
-        )
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        ""
       );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
     } else {
       setIsCustomizationView(false);
     }
   }, [isSmallTablet, setIsCustomizationView]);
 
   const tooltipDNSSettingsTooltip = (
-    <DNSSettingsTooltip t={t} theme={theme} helpLink={helpLink} />
+    <DNSSettingsTooltip
+      t={t}
+      currentColorScheme={currentColorScheme}
+      helpLink={helpLink}
+    />
   );
 
   const settingsBlock = (
@@ -101,10 +107,10 @@ const DNSSettings = (props) => {
         labelText={`${t("YourCurrentDomain")}`}
         isVertical={true}
       >
-        <Textarea
+        <TextInput
           id="textInputContainerDNSSettings"
           className="dns-textarea"
-          heightTextArea={30}
+          scale={true}
           tabIndex={8}
           isDisabled={true}
           value={location.hostname}
@@ -132,7 +138,12 @@ const DNSSettings = (props) => {
             className="dns-setting_helpbutton "
           />
           {!isSettingPaid && (
-            <Badge backgroundColor="#EDC409" label="Paid" isPaidBadge={true} />
+            <Badge
+              className="paid-badge"
+              backgroundColor="#EDC409"
+              label={t("Common:Paid")}
+              isPaidBadge={true}
+            />
           )}
         </div>
       )}
@@ -157,22 +168,18 @@ const DNSSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { theme, helpLink } = auth.settingsStore;
-  const {
-    isLoaded,
-    setIsLoadedDNSSettings,
-    initSettings,
-    setIsLoaded,
-  } = common;
+  const { helpLink, currentColorScheme } = auth.settingsStore;
+  const { isLoaded, setIsLoadedDNSSettings, initSettings, setIsLoaded } =
+    common;
   const { currentQuotaStore } = auth;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   return {
-    theme,
     isLoaded,
     setIsLoadedDNSSettings,
     helpLink,
     initSettings,
     setIsLoaded,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    currentColorScheme,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

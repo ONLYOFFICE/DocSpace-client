@@ -60,8 +60,8 @@ public interface IFolderDao<T>
     IAsyncEnumerable<Folder<T>> GetRoomsAsync(IEnumerable<T> parentsIds, FilterType filterType, IEnumerable<string> tags, Guid subjectId, string searchText, bool withSubfolders,
         bool withoutTags, bool excludeSubject, ProviderFilter provider, SubjectFilter subjectFilter, IEnumerable<string> subjectEntriesIds);
 
-    IAsyncEnumerable<Folder<T>> GetRoomsAsync(IEnumerable<T> parentsIds, IEnumerable<T> roomsIds, FilterType filterType, IEnumerable<string> tags, Guid subjectId, string searchText, bool withSubfolders,
-        bool withoutTags, bool excludeSubject, ProviderFilter provider, SubjectFilter subjectFilter, IEnumerable<string> subjectEntriesIds);
+    IAsyncEnumerable<Folder<T>> GetRoomsAsync(IEnumerable<T> roomsIds, FilterType filterType, IEnumerable<string> tags, Guid subjectId, string searchText, bool withSubfolders,
+        bool withoutTags, bool excludeSubject, ProviderFilter provider, SubjectFilter subjectFilter, IEnumerable<string> subjectEntriesIds, IEnumerable<int> parentsIds = null);
 
     IAsyncEnumerable<Folder<T>> GetFakeRoomsAsync(IEnumerable<T> parentsIds, FilterType filterType, IEnumerable<string> tags, Guid subjectId, string searchText,
         bool withSubfolders, bool withoutTags, bool excludeSubject, ProviderFilter provider, SubjectFilter subjectFilter, IEnumerable<string> subjectEntriesIds);
@@ -211,7 +211,7 @@ public interface IFolderDao<T>
     /// <returns>Maximum size of file which can be uploaded to folder</returns>
     Task<long> GetMaxUploadSizeAsync(T folderId, bool chunkedUpload = false);
 
-    IDataWriteOperator CreateDataWriteOperator(
+    Task<IDataWriteOperator> CreateDataWriteOperatorAsync(
             T folderId,
             CommonChunkedUploadSession chunkedUploadSession,
             CommonChunkedUploadSessionHolder sessionHolder);
@@ -359,6 +359,15 @@ public interface IFolderDao<T>
 
     IAsyncEnumerable<int> GetTenantsWithFoldersFeedsAsync(DateTime fromTime);
     IAsyncEnumerable<int> GetTenantsWithRoomsFeedsAsync(DateTime fromTime);
+    IAsyncEnumerable<OriginData> GetOriginsDataAsync(IEnumerable<T> entriesIds);
+
+    /// <summary>
+    /// Tries to return id of the parent virtual room
+    /// Only in TMFolderDao
+    /// </summary>
+    /// <param name="fileEntry"></param>
+    /// <returns></returns>
+    Task<(int RoomId, string RoomTitle)> GetParentRoomInfoFromFileEntryAsync<TTo>(FileEntry<TTo> fileEntry);
 
     #endregion
 }

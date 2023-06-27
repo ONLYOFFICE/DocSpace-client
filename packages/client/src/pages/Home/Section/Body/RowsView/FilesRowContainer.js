@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import RowContainer from "@docspace/components/row-container";
 import SimpleFilesRow from "./SimpleFilesRow";
 import { isMobile } from "react-device-detect";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import marginStyles from "./CommonStyles";
 import { isTablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
@@ -13,7 +13,7 @@ const StyledRowContainer = styled(RowContainer)`
     .row-selected {
       .files-row {
         border-top: ${(props) =>
-          `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
         margin-top: -1px;
         padding-top: 0px;
         padding-bottom: 1px;
@@ -24,7 +24,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .files-row {
       border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -35,7 +35,7 @@ const StyledRowContainer = styled(RowContainer)`
     + .row-selected {
     .files-row {
       border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -50,7 +50,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:last-child {
     .files-row {
       border-bottom: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       ${marginStyles}
     }
     .files-row::after {
@@ -60,7 +60,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:first-child {
     .files-row {
       border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -2px;
       padding-top: 1px;
       padding-bottom: 1px;
@@ -81,15 +81,19 @@ const FilesRowContainer = ({
   fetchMoreFiles,
   hasMoreFiles,
   isRooms,
+  isTrashFolder,
   withPaging,
-  setUploadedFileIdWithVersion,
+  highlightFile,
 }) => {
   useEffect(() => {
+    const width = window.innerWidth;
+
+
     if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
     // 400 - it is desktop info panel width
     if (
-      (sectionWidth < 1025 && !infoPanelVisible) ||
-      ((sectionWidth < 625 || (viewAs === "row" && sectionWidth < 1025)) &&
+      (width < 1025 && !infoPanelVisible) ||
+      ((width < 625 || (viewAs === "row" && width < 1025)) &&
         infoPanelVisible) ||
       isMobile
     ) {
@@ -98,6 +102,32 @@ const FilesRowContainer = ({
       viewAs !== "table" && setViewAs("table");
     }
   }, [sectionWidth]);
+
+  const filesListNode = useMemo(() => {
+    return filesList.map((item, index) => (
+      <SimpleFilesRow
+        id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+        key={
+          item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
+        }
+        item={item}
+        itemIndex={index}
+        sectionWidth={sectionWidth}
+        isRooms={isRooms}
+        isTrashFolder={isTrashFolder}
+        isHighlight={
+          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+        }
+      />
+    ));
+  }, [
+    filesList,
+    sectionWidth,
+    isRooms,
+    highlightFile.id,
+    highlightFile.isExst,
+    isTrashFolder,
+  ]);
 
   return (
     <StyledRowContainer
@@ -110,17 +140,7 @@ const FilesRowContainer = ({
       useReactWindow={!withPaging}
       itemHeight={59}
     >
-      {filesList.map((item, index) => (
-        <SimpleFilesRow
-          id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
-          key={`${item.id}_${index}`}
-          item={item}
-          itemIndex={index}
-          sectionWidth={sectionWidth}
-          isRooms={isRooms}
-          setUploadedFileIdWithVersion={setUploadedFileIdWithVersion}
-        />
-      ))}
+      {filesListNode}
     </StyledRowContainer>
   );
 };
@@ -134,10 +154,10 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
     fetchMoreFiles,
     hasMoreFiles,
     roomsFilterTotal,
-    setUploadedFileIdWithVersion,
+    highlightFile,
   } = filesStore;
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
   const { withPaging } = auth.settingsStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
@@ -151,7 +171,8 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
     fetchMoreFiles,
     hasMoreFiles,
     isRooms,
+    isTrashFolder,
     withPaging,
-    setUploadedFileIdWithVersion,
+    highlightFile,
   };
 })(observer(FilesRowContainer));

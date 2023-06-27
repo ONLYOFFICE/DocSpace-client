@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -19,25 +19,27 @@ const Details = ({
   getInfoPanelItemIcon,
   openUser,
   isVisitor,
+  isCollaborator,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
   const [isThumbnailError, setIsThumbmailError] = useState(false);
   const onThumbnailError = () => setIsThumbmailError(true);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const detailsHelper = new DetailsHelper({
+    isCollaborator,
     isVisitor,
     t,
     item: selection,
     openUser,
-    history,
+    navigate,
     personal,
     culture,
   });
 
-  useEffect(async () => {
+  const createThumbnailAction = useCallback(async () => {
     setItemProperties(detailsHelper.getPropertyList());
 
     if (
@@ -52,20 +54,31 @@ const Details = ({
     }
   }, [selection]);
 
+  useEffect(() => {
+    createThumbnailAction();
+  }, [selection, createThumbnailAction]);
+
   const currentIcon =
     !selection.isArchive && selection?.logo?.large
       ? selection?.logo?.large
       : getInfoPanelItemIcon(selection, 96);
 
+  //console.log("InfoPanel->Details render", { selection });
+
   return (
     <>
       {selection.thumbnailUrl && !isThumbnailError ? (
-        <StyledThumbnail>
+        <StyledThumbnail
+          isImageOrMedia={
+            selection?.viewAccessability?.ImageView ||
+            selection?.viewAccessability?.MediaView
+          }
+        >
           <img
-            src={selection.thumbnailUrl}
+            src={`${selection.thumbnailUrl}&size=1280x720`}
             alt="thumbnail-image"
-            height={260}
-            width={360}
+            //height={260}
+            //width={360}
             onError={onThumbnailError}
           />
         </StyledThumbnail>
@@ -116,6 +129,7 @@ export default inject(({ auth, filesStore }) => {
   const { user } = userStore;
 
   const isVisitor = user.isVisitor;
+  const isCollaborator = user.isCollaborator;
 
   return {
     personal,
@@ -125,5 +139,6 @@ export default inject(({ auth, filesStore }) => {
     getInfoPanelItemIcon,
     openUser,
     isVisitor,
+    isCollaborator,
   };
 })(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

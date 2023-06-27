@@ -64,26 +64,37 @@ public class PhotoController : PeopleControllerBase
     [HttpPost("{userid}/photo/thumbnails")]
     public async Task<ThumbnailsDataDto> CreateMemberPhotoThumbnails(string userid, ThumbnailsRequestDto inDto)
     {
-        var user = GetUserInfo(userid);
+        var user = await GetUserInfoAsync(userid);
 
         if (_userManager.IsSystemUser(user.Id))
         {
             throw new SecurityException();
         }
 
-        _permissionContext.DemandPermissions(new UserSecurityProvider(user.Id), Constants.Action_EditUser);
+        await _permissionContext.DemandPermissionsAsync(new UserSecurityProvider(user.Id), Constants.Action_EditUser);
 
         if (!string.IsNullOrEmpty(inDto.TmpFile))
         {
             var fileName = Path.GetFileName(inDto.TmpFile);
             var data = await _userPhotoManager.GetTempPhotoData(fileName);
 
-            var settings = new UserPhotoThumbnailSettings(inDto.X, inDto.Y, inDto.Width, inDto.Height);
+            UserPhotoThumbnailSettings settings = null;
 
-            _settingsManager.SaveForUser(settings, user.Id);
-            await _userPhotoManager.RemovePhoto(user.Id);
+            if (inDto.Width == 0 && inDto.Height == 0)
+            {
+                using var img = Image.Load(data);
+                settings = new UserPhotoThumbnailSettings(inDto.X, inDto.Y, img.Width, img.Height);
+            }
+            else
+            {
+                settings = new UserPhotoThumbnailSettings(inDto.X, inDto.Y, inDto.Width, inDto.Height);
+            }
+
+            await _settingsManager.SaveAsync(settings, user.Id);
+
+            await _userPhotoManager.RemovePhotoAsync(user.Id);
             await _userPhotoManager.SaveOrUpdatePhoto(user.Id, data);
-            await _userPhotoManager.RemoveTempPhoto(fileName);
+            await _userPhotoManager.RemoveTempPhotoAsync(fileName);
         }
         else
         {
@@ -91,46 +102,46 @@ public class PhotoController : PeopleControllerBase
         }
 
         await _userManager.UpdateUserInfoWithSyncCardDavAsync(user);
-        _messageService.Send(MessageAction.UserUpdatedAvatarThumbnails, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
-        return await ThumbnailsDataDto.Create(user.Id, _userPhotoManager);
+        await _messageService.SendAsync(MessageAction.UserUpdatedAvatarThumbnails, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
+        return await ThumbnailsDataDto.Create(user, _userPhotoManager);
     }
 
     [HttpDelete("{userid}/photo")]
-    public async Task<ThumbnailsDataDto> DeleteMemberPhoto(string userid)
+    public async Task<ThumbnailsDataDto> DeleteMemberPhotoAsync(string userid)
     {
-        var user = GetUserInfo(userid);
+        var user = await GetUserInfoAsync(userid);
 
         if (_userManager.IsSystemUser(user.Id))
         {
             throw new SecurityException();
         }
 
-        _permissionContext.DemandPermissions(new UserSecurityProvider(user.Id), Constants.Action_EditUser);
+        await _permissionContext.DemandPermissionsAsync(new UserSecurityProvider(user.Id), Constants.Action_EditUser);
 
-        await _userPhotoManager.RemovePhoto(user.Id);
+        await _userPhotoManager.RemovePhotoAsync(user.Id);
         await _userManager.UpdateUserInfoWithSyncCardDavAsync(user);
-        _messageService.Send(MessageAction.UserDeletedAvatar, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
+        await _messageService.SendAsync(MessageAction.UserDeletedAvatar, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
 
-        return await ThumbnailsDataDto.Create(user.Id, _userPhotoManager);
+        return await ThumbnailsDataDto.Create(user, _userPhotoManager);
     }
 
     [HttpGet("{userid}/photo")]
     public async Task<ThumbnailsDataDto> GetMemberPhoto(string userid)
     {
-        var user = GetUserInfo(userid);
+        var user = await GetUserInfoAsync(userid);
 
         if (_userManager.IsSystemUser(user.Id))
         {
             throw new SecurityException();
         }
 
-        return await ThumbnailsDataDto.Create(user.Id, _userPhotoManager);
+        return await ThumbnailsDataDto.Create(user, _userPhotoManager);
     }
 
     [HttpPut("{userid}/photo")]
     public async Task<ThumbnailsDataDto> UpdateMemberPhoto(string userid, UpdateMemberRequestDto inDto)
     {
-        var user = GetUserInfo(userid);
+        var user = await GetUserInfoAsync(userid);
 
         if (_userManager.IsSystemUser(user.Id))
         {
@@ -139,13 +150,13 @@ public class PhotoController : PeopleControllerBase
 
         if (inDto.Files != await _userPhotoManager.GetPhotoAbsoluteWebPath(user.Id))
         {
-            await UpdatePhotoUrl(inDto.Files, user);
+            await UpdatePhotoUrlAsync(inDto.Files, user);
         }
 
         await _userManager.UpdateUserInfoWithSyncCardDavAsync(user);
-        _messageService.Send(MessageAction.UserAddedAvatar, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
+        await _messageService.SendAsync(MessageAction.UserAddedAvatar, _messageTarget.Create(user.Id), user.DisplayUserName(false, _displayUserSettingsHelper));
 
-        return await ThumbnailsDataDto.Create(user.Id, _userPhotoManager);
+        return await ThumbnailsDataDto.Create(user, _userPhotoManager);
     }
 
     [HttpPost("{userid}/photo")]
@@ -168,7 +179,7 @@ public class PhotoController : PeopleControllerBase
                     userId = _securityContext.CurrentAccount.ID;
                 }
 
-                _permissionContext.DemandPermissions(new UserSecurityProvider(userId), Constants.Action_EditUser);
+                await _permissionContext.DemandPermissionsAsync(new UserSecurityProvider(userId), Constants.Action_EditUser);
 
                 var userPhoto = formCollection.Files[0];
 
@@ -196,17 +207,19 @@ public class PhotoController : PeopleControllerBase
                         throw new ImageSizeLimitException();
                     }
 
-                    var mainPhoto = _userPhotoManager.SaveOrUpdatePhoto(userId, data);
+                    var mainPhoto = await _userPhotoManager.SaveOrUpdatePhoto(userId, data);
+                    var userInfo = _userManager.GetUsers(userId);
+                    var cacheKey = Math.Abs(userInfo.LastModified.GetHashCode());
 
                     result.Data =
                         new
                         {
-                            main = mainPhoto,
-                            retina = _userPhotoManager.GetRetinaPhotoURL(userId),
-                            max = _userPhotoManager.GetMaxPhotoURL(userId),
-                            big = _userPhotoManager.GetBigPhotoURL(userId),
-                            medium = _userPhotoManager.GetMediumPhotoURL(userId),
-                            small = _userPhotoManager.GetSmallPhotoURL(userId),
+                            main = mainPhoto.Item1 + $"?hash={cacheKey}",
+                            retina = await _userPhotoManager.GetRetinaPhotoURL(userId) + $"?hash={cacheKey}",
+                            max = await _userPhotoManager.GetMaxPhotoURL(userId) + $"?hash={cacheKey}",
+                            big = await _userPhotoManager.GetBigPhotoURL(userId) + $"?hash={cacheKey}",
+                            medium = await _userPhotoManager.GetMediumPhotoURL(userId) + $"?hash={cacheKey}",
+                            small = await _userPhotoManager.GetSmallPhotoURL(userId) + $"?hash={cacheKey}"
                         };
                 }
                 else
@@ -252,8 +265,8 @@ public class PhotoController : PeopleControllerBase
         IImageFormat imgFormat;
         try
         {
-            using var img = Image.Load(data, out var format);
-            imgFormat = format;
+            using var img = Image.Load(data);
+            imgFormat = img.Metadata.DecodedImageFormat;
         }
         catch (OutOfMemoryException)
         {

@@ -14,6 +14,7 @@ ARG BUILD_PATH
 ARG BUILD_ARGS="build"
 ARG DEPLOY_ARGS="deploy"
 ARG DEBUG_INFO="true"
+ARG PUBLISH_CNF="Debug"
 
 LABEL onlyoffice.docspace.release-date="${RELEASE_DATE}" \
     maintainer="Ascensio System SIA <support@onlyoffice.com>"
@@ -49,7 +50,7 @@ RUN cd ${SRC_PATH} && \
     sed -e 's/#//' -i /etc/nginx/conf.d/onlyoffice.conf && \
     cd ${SRC_PATH}/build/install/common/ && \
     bash build-backend.sh -sp "${SRC_PATH}"  && \
-    bash publish-backend.sh -sp "${SRC_PATH}" -bp "${BUILD_PATH}"  && \
+    bash publish-backend.sh -pc "${PUBLISH_CNF}" -sp "${SRC_PATH}" -bp "${BUILD_PATH}"  && \
     cp -rf ${SRC_PATH}/products/ASC.Files/Server/DocStore ${BUILD_PATH}/products/ASC.Files/server/ && \
     rm -rf ${SRC_PATH}/common/* && \
     rm -rf ${SRC_PATH}/web/ASC.Web.Core/* && \
@@ -82,7 +83,7 @@ RUN mkdir -p /var/log/onlyoffice && \
     vim \
     python3-pip \
     libgdiplus && \
-    pip3 install --upgrade jsonpath-ng multipledispatch && \
+    pip3 install --upgrade jsonpath-ng multipledispatch netaddr netifaces && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=base --chown=onlyoffice:onlyoffice /app/onlyoffice/config/* /app/onlyoffice/config/
@@ -111,7 +112,7 @@ RUN mkdir -p /var/log/onlyoffice && \
     curl \
     vim \
     python3-pip && \
-    pip3 install --upgrade jsonpath-ng multipledispatch && \
+    pip3 install --upgrade jsonpath-ng multipledispatch netaddr netifaces && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=base --chown=onlyoffice:onlyoffice /app/onlyoffice/config/* /app/onlyoffice/config/
@@ -129,8 +130,8 @@ ENV DNS_NAMESERVER=127.0.0.11 \
     MAP_HASH_BUCKET_SIZE=""
 
 RUN apt-get -y update && \
-    apt-get install -yq vim && \
-    apt-get install -y dos2unix && \
+    apt-get install -yq vim \
+    dos2unix && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/nginx/html/* 
 
@@ -150,7 +151,7 @@ RUN dos2unix /docker-entrypoint.d/prepare-nginx-proxy.sh && \
 RUN chown nginx:nginx /etc/nginx/* -R && \
     chown nginx:nginx /docker-entrypoint.d/* && \
     # changes for upstream configure
-    sed -i 's/127.0.0.1:5010/$service_api_system/' /etc/nginx/conf.d/onlyoffice.conf && \
+    # sed -i 's/127.0.0.1:5010/$service_api_system/' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/127.0.0.1:5012/$service_backup/' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/127.0.0.1:5007/$service_files/' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/127.0.0.1:5004/$service_people_server/' /etc/nginx/conf.d/onlyoffice.conf && \
@@ -163,6 +164,8 @@ RUN chown nginx:nginx /etc/nginx/* -R && \
     sed -i 's/127.0.0.1:5013/$service_doceditor/' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/127.0.0.1:5011/$service_login/' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/127.0.0.1:5001/$service_client/' /etc/nginx/conf.d/onlyoffice.conf && \
+    sed -i 's/127.0.0.1:5033/$service_healthchecks/' /etc/nginx/conf.d/onlyoffice.conf && \
+    sed -i 's/$public_root/\/var\/www\/public\//' /etc/nginx/conf.d/onlyoffice.conf && \
     sed -i 's/172.*/$document_server;/' /etc/nginx/conf.d/onlyoffice.conf
 
 ## ASC.Data.Backup.BackgroundTasks ##
@@ -175,22 +178,22 @@ COPY --from=base --chown=onlyoffice:onlyoffice ${BUILD_PATH}/services/ASC.Data.B
 CMD ["ASC.Data.Backup.BackgroundTasks.dll", "ASC.Data.Backup.BackgroundTasks"]
 
 # ASC.ApiSystem ##
-FROM dotnetrun AS api_system
-WORKDIR ${BUILD_PATH}/services/ASC.ApiSystem/
+# FROM dotnetrun AS api_system
+# WORKDIR ${BUILD_PATH}/services/ASC.ApiSystem/
 
-COPY --chown=onlyoffice:onlyoffice docker-entrypoint.py ./docker-entrypoint.py
-COPY --from=base --chown=onlyoffice:onlyoffice ${BUILD_PATH}/services/ASC.ApiSystem/service/ .
+# COPY --chown=onlyoffice:onlyoffice docker-entrypoint.py ./docker-entrypoint.py
+# COPY --from=base --chown=onlyoffice:onlyoffice ${BUILD_PATH}/services/ASC.ApiSystem/service/ .
 
-CMD ["ASC.ApiSystem.dll", "ASC.ApiSystem"]
+# CMD ["ASC.ApiSystem.dll", "ASC.ApiSystem"]
 
 ## ASC.ClearEvents ##
-FROM dotnetrun AS clear-events
-WORKDIR ${BUILD_PATH}/services/ASC.ClearEvents/
+# FROM dotnetrun AS clear-events
+# WORKDIR ${BUILD_PATH}/services/ASC.ClearEvents/
 
-COPY --chown=onlyoffice:onlyoffice docker-entrypoint.py ./docker-entrypoint.py
-COPY --from=base --chown=onlyoffice:onlyoffice ${BUILD_PATH}/services/ASC.ClearEvents/service/ .
+# COPY --chown=onlyoffice:onlyoffice docker-entrypoint.py ./docker-entrypoint.py
+# COPY --from=base --chown=onlyoffice:onlyoffice ${BUILD_PATH}/services/ASC.ClearEvents/service/ .
 
-CMD ["ASC.ClearEvents.dll", "ASC.ClearEvents"]
+# CMD ["ASC.ClearEvents.dll", "ASC.ClearEvents"]
 
 ## ASC.Migration ##
 # FROM dotnetrun AS migration
@@ -221,6 +224,8 @@ CMD ["ASC.Files.dll", "ASC.Files"]
 
 ## ASC.Files.Service ##
 FROM dotnetrun AS files_services
+RUN apt-get -y update && \
+    apt-get install -yq ffmpeg
 WORKDIR ${BUILD_PATH}/products/ASC.Files/service/
 
 COPY --chown=onlyoffice:onlyoffice docker-entrypoint.py ./docker-entrypoint.py
@@ -327,7 +332,7 @@ ENV SRC_PATH=${SRC_PATH}
 WORKDIR ${BUILD_PATH}/services/ASC.Migration.Runner/
 
 RUN apt-get update && \
-    apt-get install -y dos2unix
+    apt-get install -yq dos2unix
 
 COPY docker-migration-entrypoint.sh docker-migration-entrypoint.sh
 

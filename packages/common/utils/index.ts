@@ -15,6 +15,8 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
+import moment from "moment";
+
 import { LANGUAGE } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
@@ -180,6 +182,7 @@ export const getUserRole = (user) => {
     return "admin";
   //TODO: Need refactoring
   else if (user.isVisitor) return "user";
+  else if (user.isCollaborator) return "collaborator";
   else return "manager";
 };
 
@@ -259,7 +262,12 @@ export function toCommunityHostname(hostname) {
   return communityHostname;
 }
 
-export function getProviderTranslation(provider, t) {
+export function getProviderTranslation(provider, t, linked = false) {
+  const capitalizeProvider = provider.charAt(0).toUpperCase() + provider.slice(1);
+  if (linked) {
+    return `${t("Common:Disconnect")} ${capitalizeProvider}`
+  }
+
   switch (provider) {
     case "google":
       return t("Common:SignInWithGoogle");
@@ -432,38 +440,29 @@ export const frameCallCommand = (commandName: string, commandData: any) => {
   );
 };
 
-export const getConvertedSize = (t, size) => {
-  let sizeNames;
+export const getConvertedSize = (t, bytes) => {
+  let power = 0,
+    resultSize = bytes;
 
-  if (size < 0) return `${8 + " " + t("Common:Exabyte")}`;
+  const sizeNames = [
+    t("Common:Bytes"),
+    t("Common:Kilobyte"),
+    t("Common:Megabyte"),
+    t("Common:Gigabyte"),
+    t("Common:Terabyte"),
+    t("Common:Petabyte"),
+    t("Common:Exabyte"),
+  ];
 
-  if (size < 1024 * 1024) {
-    sizeNames = [
-      t("Common:Megabyte"),
-      t("Common:Gigabyte"),
-      t("Common:Terabyte"),
-    ];
-  } else {
-    sizeNames = [
-      t("Common:Bytes"),
-      t("Common:Kilobyte"),
-      t("Common:Megabyte"),
-      t("Common:Gigabyte"),
-      t("Common:Terabyte"),
-      t("Common:Petabyte"),
-      t("Common:Exabyte"),
-    ];
+  if (bytes <= 0) return `${"0" + " " + t("Common:Bytes")}`;
+
+  if (bytes >= 1024) {
+    power = Math.floor(Math.log(bytes) / Math.log(1024));
+    power = power < sizeNames.length ? power : sizeNames.length - 1;
+    resultSize = parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
   }
 
-  const bytes = size;
-
-  if (bytes == 0) return `${"0" + " " + t("Bytes")}`;
-
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-
-  return (
-    parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + " " + sizeNames[i]
-  );
+  return resultSize + " " + sizeNames[power];
 };
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {
@@ -517,4 +516,25 @@ export const getLogoFromPath = (path) => {
   }
 
   return path;
+};
+
+export const getDaysRemaining = (autoDelete) => {
+  let daysRemaining = moment(autoDelete)
+    .startOf("day")
+    .diff(moment().startOf("day"), "days");
+
+  if (daysRemaining <= 0) return "<1";
+  return "" + daysRemaining;
+};
+
+export const checkFilterInstance = (filterObject, certainClass) => {
+  const isInstance =
+    filterObject.constructor.name === certainClass.prototype.constructor.name;
+
+  if (!isInstance)
+    throw new Error(
+      `Filter ${filterObject.constructor.name} isn't an instance of   ${certainClass.prototype.constructor.name}`
+    );
+
+  return isInstance;
 };

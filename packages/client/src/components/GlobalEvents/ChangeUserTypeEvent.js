@@ -6,7 +6,7 @@ import { ChangeUserTypeDialog } from "../dialogs";
 import toastr from "@docspace/components/toast/toastr";
 import Link from "@docspace/components/link";
 import { combineUrl } from "@docspace/common/utils";
-import history from "@docspace/common/history";
+import { useNavigate } from "react-router-dom";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -15,15 +15,23 @@ const ChangeUserTypeEvent = ({
   peopleFilter,
   updateUserType,
   getUsersList,
+  onClose,
 }) => {
-  const {
-    toType,
-    fromType,
-    userIDs,
-    successCallback,
-    abortCallback,
-  } = peopleDialogData;
+  const { toType, fromType, userIDs, successCallback, abortCallback } =
+    peopleDialogData;
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
+
+  const onKeyUpHandler = (e) => {
+    if (e.keyCode === 27) onCloseAction();
+    if (e.keyCode === 13) onChangeUserType();
+  };
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUpHandler, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUpHandler, false);
+    };
+  }, []);
 
   useEffect(() => {
     if (!peopleDialogData.toType) return;
@@ -37,21 +45,21 @@ const ChangeUserTypeEvent = ({
 
   const onClickPayments = () => {
     const paymentPageUrl = combineUrl(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, "/portal-settings"),
+      "/portal-settings",
       "/payments/portal-payments"
     );
 
     toastr.clear();
-    history.push(paymentPageUrl);
+    navigate(paymentPageUrl);
   };
 
   const onChangeUserType = () => {
-    onClose();
+    onClosePanel();
     updateUserType(toType, userIDs, peopleFilter, fromType)
-      .then(() => {
+      .then((users) => {
         toastr.success(t("SuccessChangeUserType"));
 
-        successCallback && successCallback();
+        successCallback && successCallback(users);
       })
       .catch((err) => {
         toastr.error(
@@ -71,14 +79,15 @@ const ChangeUserTypeEvent = ({
       });
   };
 
-  const onClose = () => {
+  const onClosePanel = () => {
     setVisible(false);
+    onClose();
   };
 
   const onCloseAction = async () => {
     await getUsersList(peopleFilter);
     abortCallback && abortCallback();
-    onClose();
+    onClosePanel();
   };
 
   const getType = (type) => {
@@ -87,6 +96,8 @@ const ChangeUserTypeEvent = ({
         return t("Common:DocSpaceAdmin");
       case "manager":
         return t("Common:RoomAdmin");
+      case "collaborator":
+        return t("Common:PowerUser");
       case "user":
       default:
         return t("Common:User");

@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
 
 import Link from "@docspace/components/link";
@@ -14,6 +13,8 @@ import withBadges from "../../../../../HOCs/withBadges";
 import { Base } from "@docspace/components/themes";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
+import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import { SortByFieldName } from "../../../../../helpers/constants";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -49,36 +50,41 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   ${(props) =>
     ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
-    `
-    .row-main-container-wrapper {
-      display: flex;
-      justify-content: space-between;
-      max-width: inherit;
-    }
+    css`
+      .row-main-container-wrapper {
+        display: flex;
+        justify-content: space-between;
+        max-width: inherit;
+      }
 
-    .badges {
-      flex-direction: row-reverse;
-    }
+      .badges {
+        flex-direction: row-reverse;
+      }
 
-    .tablet-badge {
-      margin-top: 5px;
-    }
+      .tablet-badge {
+        margin-top: 5px;
+      }
 
-    .tablet-edit,
-    .can-convert {
-     margin-top: 6px;
-     margin-right: 24px !important;
-    }
+      .tablet-edit,
+      .can-convert {
+        margin-top: 6px;
+        margin-right: 24px !important;
+      }
 
-    .badge-version {
-      margin-right: 22px;
-    }
+      .badge-version {
+        margin-right: 22px;
+      }
 
-    .new-items {
-      min-width: 16px;
-      margin: 5px 24px 0 0;
-    }
-  `}
+      .new-items {
+        min-width: 16px;
+        margin: 5px 24px 0 0;
+      }
+    `}
+
+  .row-content-link {
+    padding: 12px 12px 0px 0px;
+    margin-top: -12px;
+  }
 `;
 
 SimpleFilesRowContent.defaultProps = { theme: Base };
@@ -94,6 +100,10 @@ const FilesRowContent = ({
   quickButtons,
   theme,
   isRooms,
+  isTrashFolder,
+  filterSortBy,
+  createdDate,
+  fileOwner,
 }) => {
   const {
     contentLength,
@@ -103,7 +113,41 @@ const FilesRowContent = ({
     providerKey,
     title,
     isRoom,
+    daysRemaining,
+    fileType,
+    tags,
   } = item;
+
+  const contentComponent = () => {
+    switch (filterSortBy) {
+      case SortByFieldName.Size:
+        if (!contentLength) return "—";
+        return contentLength;
+
+      case SortByFieldName.CreationDate:
+        return createdDate;
+
+      case SortByFieldName.Author:
+        return fileOwner;
+
+      case SortByFieldName.Type:
+        return getFileTypeName(fileType);
+
+      case SortByFieldName.Tags:
+        if (tags?.length === 0) return "—";
+        return tags?.map((elem) => {
+          return elem;
+        });
+
+      default:
+        if (isTrashFolder)
+          return t("Files:DaysRemaining", {
+            daysRemaining,
+          });
+
+        return updatedDate;
+    }
+  };
 
   return (
     <>
@@ -111,6 +155,7 @@ const FilesRowContent = ({
         sectionWidth={sectionWidth}
         isMobile={isMobile}
         isFile={fileExst || contentLength}
+        sideColor={theme.filesSection.rowView.sideColor}
       >
         <Link
           className="row-content-link"
@@ -135,10 +180,9 @@ const FilesRowContent = ({
           containerWidth="15%"
           fontSize="12px"
           fontWeight={400}
-          // color={sideColor}
           className="row_update-text"
         >
-          {updatedDate && updatedDate}
+          {contentComponent()}
         </Text>
 
         <Text
@@ -148,7 +192,6 @@ const FilesRowContent = ({
           className="row-content-text"
           fontSize="12px"
           fontWeight={400}
-          title=""
           truncate={true}
         >
           {isRooms
@@ -166,14 +209,23 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ auth }) => {
-  return { theme: auth.settingsStore.theme };
+export default inject(({ auth, treeFoldersStore, filesStore }) => {
+  const { filter, roomsFilter } = filesStore;
+  const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
+    treeFoldersStore;
+
+  const isRooms = isRoomsFolder || isArchiveFolder;
+  const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+
+  return {
+    filterSortBy,
+    theme: auth.settingsStore.theme,
+    isTrashFolder: isRecycleBinFolder,
+  };
 })(
   observer(
-    withRouter(
-      withTranslation(["Files", "Translations"])(
-        withContent(withBadges(FilesRowContent))
-      )
+    withTranslation(["Files", "Translations"])(
+      withContent(withBadges(FilesRowContent))
     )
   )
 );

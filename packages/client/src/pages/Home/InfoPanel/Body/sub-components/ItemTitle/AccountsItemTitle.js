@@ -4,26 +4,21 @@ import { withTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Avatar, ContextMenuButton } from "@docspace/components";
-import Badges from "@docspace/client/src/pages/AccountsHome/Section/Body/Badges";
+import Badge from "@docspace/components/badge";
+import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";
+
+import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 
 const AccountsItemTitle = ({
   t,
   isSeveralItems,
   selection,
   getUserContextOptions,
-  selectionLength,
 }) => {
   if (isSeveralItems) {
-    return (
-      <StyledTitle>
-        <Avatar size={"min"} role={"user"} />
-        <Text className="text" fontWeight={600} fontSize="16px">
-          {`${t("InfoPanel:SelectedUsers")}: ${selectionLength}`}
-        </Text>
-      </StyledTitle>
-    );
+    return <></>;
   }
 
   const itemTitleRef = useRef();
@@ -40,9 +35,14 @@ const AccountsItemTitle = ({
   const contextOptions = getData();
 
   const userAvatar = selection.hasAvatar ? selection.avatar : DefaultUserPhoto;
+  const isSSO = selection.isSSO || false;
 
   return (
-    <StyledAccountsItemTitle isPending={isPending} ref={itemTitleRef}>
+    <StyledAccountsItemTitle
+      isPending={isPending}
+      isSSO={isSSO}
+      ref={itemTitleRef}
+    >
       <Avatar
         className="avatar"
         role={selection.role ? selection.role : "user"}
@@ -50,25 +50,39 @@ const AccountsItemTitle = ({
         source={userAvatar}
       />
       <div className="info-panel__info-text">
-        <Text
-          className={"info-text__name"}
-          noSelect
-          title={selection.displayName}
-          truncate
-        >
-          {isPending
-            ? selection.email
-            : selection.displayName?.trim()
-            ? selection.displayName
-            : selection.email}
-        </Text>
+        <div className="info-panel__info-wrapper">
+          <Text
+            className={"info-text__name"}
+            noSelect
+            title={selection.displayName}
+            truncate
+          >
+            {isPending
+              ? selection.email
+              : selection.displayName?.trim()
+              ? selection.displayName
+              : selection.email}
+          </Text>
+          {isPending && (
+            <Badges withoutPaid={true} statusType={selection.statusType} />
+          )}
+        </div>
         {!isPending && (
-          <Text className={"info-text__email"} noSelect title={selection.email}>
+          <Text className={"info-text__email"} title={selection.email}>
             {selection.email}
           </Text>
         )}
-        {isPending && (
-          <Badges withoutPaid={true} statusType={selection.statusType} />
+        {isSSO && (
+          <Badge
+            className="sso-badge"
+            label={SSO_LABEL}
+            color={"#FFFFFF"}
+            backgroundColor="#22C386"
+            fontSize={"9px"}
+            fontWeight={800}
+            noHover
+            lineHeight={"13px"}
+          />
         )}
       </div>
       {!!contextOptions.length && (

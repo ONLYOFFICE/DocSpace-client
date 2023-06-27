@@ -14,6 +14,7 @@ import { decode } from "he";
 const HistoryBlock = ({
   t,
   selection,
+  selectionIsFile,
   feed,
   selectedFolder,
   selectionParentRoom,
@@ -21,6 +22,8 @@ const HistoryBlock = ({
   checkAndOpenLocationAction,
   openUser,
   isVisitor,
+  isCollaborator,
+  withFileList,
   isLastEntity,
 }) => {
   const { target, initiator, json, groupedFeeds } = feed;
@@ -74,7 +77,7 @@ const HistoryBlock = ({
           selectionParentRoom={selectionParentRoom}
         />
 
-        {isItemAction && (
+        {isItemAction && withFileList && (
           <HistoryBlockItemList
             t={t}
             items={[json, ...groupedFeeds]}
@@ -87,6 +90,7 @@ const HistoryBlock = ({
           users.map((user, i) => (
             <HistoryBlockUser
               isVisitor={isVisitor}
+              isCollaborator={isCollaborator}
               key={user.id}
               user={user}
               withComma={i < users.length - 1}

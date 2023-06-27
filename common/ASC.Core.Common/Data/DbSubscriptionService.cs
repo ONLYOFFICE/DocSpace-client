@@ -38,7 +38,7 @@ public class DbSubscriptionService : ISubscriptionService
         _mapper = mapper;
     }
 
-    public string[] GetRecipients(int tenant, string sourceId, string actionId, string objectId)
+    public async Task<string[]> GetRecipientsAsync(int tenant, string sourceId, string actionId, string objectId)
     {
         ArgumentNullException.ThrowIfNull(sourceId);
         ArgumentNullException.ThrowIfNull(actionId);
@@ -50,10 +50,10 @@ public class DbSubscriptionService : ISubscriptionService
             .Select(r => r.Recipient)
             .Distinct();
 
-        return q.ToArray();
+        return await q.ToArrayAsync();
     }
 
-    public IEnumerable<SubscriptionRecord> GetSubscriptions(int tenant, string sourceId, string actionId)
+    public async Task<IEnumerable<SubscriptionRecord>> GetSubscriptionsAsync(int tenant, string sourceId, string actionId)
     {
         ArgumentNullException.ThrowIfNull(sourceId);
         ArgumentNullException.ThrowIfNull(actionId);
@@ -62,10 +62,10 @@ public class DbSubscriptionService : ISubscriptionService
 
         var q = GetQuery(userDbContext, tenant, sourceId, actionId);
 
-        return GetSubscriptions(q, tenant);
+        return await GetSubscriptionsAsync(q, tenant);
     }
 
-    public IEnumerable<SubscriptionRecord> GetSubscriptions(int tenant, string sourceId, string actionId, string recipientId, string objectId)
+    public async Task<IEnumerable<SubscriptionRecord>> GetSubscriptionsAsync(int tenant, string sourceId, string actionId, string recipientId, string objectId)
     {
         using var userDbContext = _dbContextFactory.CreateDbContext();
 
@@ -80,10 +80,10 @@ public class DbSubscriptionService : ISubscriptionService
             q = q.Where(r => r.Object == (objectId ?? string.Empty));
         }
 
-        return GetSubscriptions(q, tenant);
+        return await GetSubscriptionsAsync(q, tenant);
     }
 
-    public SubscriptionRecord GetSubscription(int tenant, string sourceId, string actionId, string recipientId, string objectId)
+    public async Task<SubscriptionRecord> GetSubscriptionAsync(int tenant, string sourceId, string actionId, string recipientId, string objectId)
     {
         ArgumentNullException.ThrowIfNull(recipientId);
 
@@ -93,10 +93,10 @@ public class DbSubscriptionService : ISubscriptionService
             .Where(r => r.Recipient == recipientId)
             .Where(r => r.Object == (objectId ?? string.Empty));
 
-        return GetSubscriptions(q, tenant).Take(1).FirstOrDefault();
+        return (await GetSubscriptionsAsync(q, tenant)).Take(1).FirstOrDefault();
     }
 
-    public bool IsUnsubscribe(int tenant, string sourceId, string actionId, string recipientId, string objectId)
+    public async Task<bool> IsUnsubscribeAsync(int tenant, string sourceId, string actionId, string recipientId, string objectId)
     {
         ArgumentNullException.ThrowIfNull(recipientId);
         ArgumentNullException.ThrowIfNull(sourceId);
@@ -106,7 +106,7 @@ public class DbSubscriptionService : ISubscriptionService
         var q = userDbContext.Subscriptions
             .Where(r => r.Source == sourceId &&
                         r.Action == actionId &&
-                        r.Tenant == tenant &&
+                        r.TenantId == tenant &&
                         r.Recipient == recipientId &&
                         r.Unsubscribed);
 
@@ -119,10 +119,10 @@ public class DbSubscriptionService : ISubscriptionService
             q = q.Where(r => r.Object == string.Empty);
         }
 
-        return q.Any();
+        return await q.AnyAsync();
     }
 
-    public string[] GetSubscriptions(int tenant, string sourceId, string actionId, string recipientId, bool checkSubscribe)
+    public async Task<string[]> GetSubscriptionsAsync(int tenant, string sourceId, string actionId, string recipientId, bool checkSubscribe)
     {
         ArgumentNullException.ThrowIfNull(recipientId);
         ArgumentNullException.ThrowIfNull(sourceId);
@@ -139,11 +139,11 @@ public class DbSubscriptionService : ISubscriptionService
             q = q.Where(r => !r.Unsubscribed);
         }
 
-        return q.Select(r => r.Object).ToArray();
+        return await q.Select(r => r.Object).ToArrayAsync();
     }
 
 
-    public void SaveSubscription(SubscriptionRecord s)
+    public async Task SaveSubscriptionAsync(SubscriptionRecord s)
     {
         ArgumentNullException.ThrowIfNull(s);
 
@@ -154,33 +154,27 @@ public class DbSubscriptionService : ISubscriptionService
             Recipient = s.RecipientId,
             Source = s.SourceId,
             Unsubscribed = !s.Subscribed,
-            Tenant = s.Tenant
+            TenantId = s.Tenant
         };
 
         using var userDbContext = _dbContextFactory.CreateDbContext();
-        userDbContext.AddOrUpdate(userDbContext.Subscriptions, subs);
-        userDbContext.SaveChanges();
+        await userDbContext.AddOrUpdateAsync(q=> q.Subscriptions, subs);
+        await userDbContext.SaveChangesAsync();
     }
 
-    public void RemoveSubscriptions(int tenant, string sourceId, string actionId)
+    public async Task RemoveSubscriptionsAsync(int tenant, string sourceId, string actionId)
     {
-        RemoveSubscriptions(tenant, sourceId, actionId, string.Empty);
+        await RemoveSubscriptionsAsync(tenant, sourceId, actionId, string.Empty);
     }
 
-    public void RemoveSubscriptions(int tenant, string sourceId, string actionId, string objectId)
+    public async Task RemoveSubscriptionsAsync(int tenant, string sourceId, string actionId, string objectId)
     {
         ArgumentNullException.ThrowIfNull(sourceId);
         ArgumentNullException.ThrowIfNull(actionId);
 
         using var userDbContext = _dbContextFactory.CreateDbContext();
-        var strategy = userDbContext.Database.CreateExecutionStrategy();
-
-        strategy.Execute(() =>
-        {
-            using var userDbContext = _dbContextFactory.CreateDbContext();
-            using var tr = userDbContext.Database.BeginTransaction();
             var q = userDbContext.Subscriptions
-                .Where(r => r.Tenant == tenant)
+                .Where(r => r.TenantId == tenant)
                 .Where(r => r.Source == sourceId)
                 .Where(r => r.Action == actionId);
 
@@ -189,26 +183,24 @@ public class DbSubscriptionService : ISubscriptionService
                 q = q.Where(r => r.Object == (objectId ?? string.Empty));
             }
 
-            var sub = q.FirstOrDefault();
+            var sub = await q.FirstOrDefaultAsync();
 
             if (sub != null)
             {
                 userDbContext.Subscriptions.Remove(sub);
+            await userDbContext.SaveChangesAsync();
             }
-
-            tr.Commit();
-        });
     }
 
 
-    public IEnumerable<SubscriptionMethod> GetSubscriptionMethods(int tenant, string sourceId, string actionId, string recipientId)
+    public async Task<IEnumerable<SubscriptionMethod>> GetSubscriptionMethodsAsync(int tenant, string sourceId, string actionId, string recipientId)
     {
         ArgumentNullException.ThrowIfNull(sourceId);
         ArgumentNullException.ThrowIfNull(actionId);
 
         using var userDbContext = _dbContextFactory.CreateDbContext();
         var q = userDbContext.SubscriptionMethods
-            .Where(r => r.Tenant == -1 || r.Tenant == tenant)
+            .Where(r => r.TenantId == -1 || r.TenantId == tenant)
             .Where(r => r.Source == sourceId);
 
         if (recipientId != null)
@@ -217,11 +209,11 @@ public class DbSubscriptionService : ISubscriptionService
         }
 
         var a = q
-            .OrderBy(r => r.Tenant)
+            .OrderBy(r => r.TenantId)
             .Distinct();
 
 
-        var methods = a.ToList();
+        var methods = await a.ToListAsync();
         var result = new List<SubscriptionMethod>();
         var common = new Dictionary<string, SubscriptionMethod>();
 
@@ -246,27 +238,21 @@ public class DbSubscriptionService : ISubscriptionService
         return result;
     }
 
-    public void SetSubscriptionMethod(SubscriptionMethod m)
+    public async Task SetSubscriptionMethodAsync(SubscriptionMethod m)
     {
         ArgumentNullException.ThrowIfNull(m);
 
         using var userDbContext = _dbContextFactory.CreateDbContext();
-        var strategy = userDbContext.Database.CreateExecutionStrategy();
-
-        strategy.Execute(() =>
-        {
-            using var userDbContext = _dbContextFactory.CreateDbContext();
-            using var tr = userDbContext.Database.BeginTransaction();
 
             if (m.Methods == null || m.Methods.Length == 0)
             {
                 var q = userDbContext.SubscriptionMethods
-                    .Where(r => r.Tenant == m.Tenant)
+                    .Where(r => r.TenantId == m.Tenant)
                     .Where(r => r.Source == m.Source)
                     .Where(r => r.Recipient == m.Recipient)
                     .Where(r => r.Action == m.Action);
 
-                var sm = q.FirstOrDefault();
+                var sm = await q.FirstOrDefaultAsync();
 
                 if (sm != null)
                 {
@@ -280,15 +266,13 @@ public class DbSubscriptionService : ISubscriptionService
                     Action = m.Action,
                     Recipient = m.Recipient,
                     Source = m.Source,
-                    Tenant = m.Tenant,
+                    TenantId = m.Tenant,
                     Sender = string.Join("|", m.Methods)
                 };
-                userDbContext.AddOrUpdate(userDbContext.SubscriptionMethods, sm);
+            await userDbContext.AddOrUpdateAsync(q => q.SubscriptionMethods, sm);
             }
 
-            userDbContext.SaveChanges();
-            tr.Commit();
-        });
+            await userDbContext.SaveChangesAsync();
     }
 
 
@@ -301,13 +285,13 @@ public class DbSubscriptionService : ISubscriptionService
             userDbContext.Subscriptions
             .Where(r => r.Source == sourceId)
             .Where(r => r.Action == actionId)
-            .Where(r => r.Tenant == -1 || r.Tenant == tenant)
-            .OrderBy(r => r.Tenant);
+            .Where(r => r.TenantId == -1 || r.TenantId == tenant)
+            .OrderBy(r => r.TenantId);
     }
 
-    private IEnumerable<SubscriptionRecord> GetSubscriptions(IQueryable<Subscription> q, int tenant)
+    private async Task<IEnumerable<SubscriptionRecord>> GetSubscriptionsAsync(IQueryable<Subscription> q, int tenant)
     {
-        var subs = q.ToList();
+        var subs = await q.ToListAsync();
         var result = new List<SubscriptionRecord>();
         var common = new Dictionary<string, SubscriptionRecord>();
 

@@ -241,10 +241,10 @@ const Base = {
   },
 
   mainButton: {
-    backgroundColor: orangeMain,
-    disableBackgroundColor: orangeDisabled,
-    hoverBackgroundColor: orangeHover,
-    clickBackgroundColor: orangePressed,
+    backgroundColor: "#4781D1",
+    disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
+    hoverBackgroundColor: "rgba(71, 129, 209, .85)",
+    clickBackgroundColor: "#4074BC",
 
     padding: "5px 14px 5px 12px",
     borderRadius: "3px",
@@ -293,7 +293,7 @@ const Base = {
     width: "100%",
 
     background: white,
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+    disableBackgroundColor: "#F8F9F9",
     connectBackground: "#3B72A7",
     hoverBackground: white,
     hoverConnectBackground: "#265A8F",
@@ -305,7 +305,8 @@ const Base = {
     hoverBoxShadow: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
-    disableColor: "rgba(0, 0, 0, 0.4)",
+    disableColor: "#333333",
+    disabledSvgColor: "none",
     border: "none",
     text: {
       width: "100%",
@@ -576,6 +577,7 @@ const Base = {
     overflow: "hidden",
     color: white,
     backgroundColor: orangeMain,
+    disableBackgroundColor: "#A3A9AE",
   },
 
   scrollbar: {
@@ -845,16 +847,6 @@ const Base = {
   },
 
   textArea: {
-    width: "100%",
-    height: "90%",
-    border: "none",
-    outline: "none",
-    resize: "none",
-    overflow: "hidden",
-    padding: "5px 8px 2px 8px",
-    fontSize: "13px",
-    lineHeight: "1.5",
-
     disabledColor: grayLight,
 
     focusBorderColor: blueMain,
@@ -863,6 +855,11 @@ const Base = {
 
     scrollWidth: "100%",
     scrollHeight: "91px",
+
+    numerationColor: "#A3A9AE",
+
+    copyIconFilter:
+      "invert(71%) sepia(1%) saturate(1597%) hue-rotate(166deg) brightness(100%) contrast(73%)",
   },
 
   link: {
@@ -1304,6 +1301,9 @@ const Base = {
         width: "85%",
       },
     },
+    icon: {
+      color: grayMain,
+    },
 
     draggable: {
       color: cyanBlueDarkShade,
@@ -1393,6 +1393,7 @@ const Base = {
     backgroundColor: white,
     hoverBackgroundColor: grayLight,
     hoverDisabledBackgroundColor: white,
+    selectedBackgroundColor: lightHover,
     fontWeight: "600",
     fontSize: "13px",
     width: "100%",
@@ -1721,67 +1722,15 @@ const Base = {
   },
 
   calendar: {
-    baseWidth: "265px",
-    bigWidth: "289px",
-
-    baseMaxWidth: "293px",
-    bigMaxWidth: "325px",
-
-    hover: {
-      backgroundColor: grayLightMid,
-      borderRadius: "16px",
-      cursor: "pointer",
-    },
-
-    day: {
-      width: "32px",
-      height: "32px",
-      baseSizeWidth: "270px",
-      bigSizeWidth: "294px",
-      baseMarginTop: "3px",
-      bigMarginTop: "7.5px",
-      lineHeight: "33px",
-    },
-
-    weekdays: {
-      color: black,
-      disabledColor: gray,
-      baseWidth: "272px",
-      bigWidth: "295px",
-      marginBottom: "-5px",
-    },
-
-    month: {
-      baseWidth: "267px",
-      bigWidth: "295px",
-      color: black,
-      weekendColor: gray,
-      disabledColor: grayLightMid,
-      neighboringHoverColor: black,
-      neighboringColor: grayLightMid,
-    },
-
-    selectedDay: {
-      backgroundColor: orangeMain,
-      borderRadius: "16px",
-      cursor: "pointer",
-      color: white,
-    },
-
-    comboBox: {
-      color: black,
-      minWidth: "80px",
-      height: "32px",
-      marginLeft: "8px",
-      padding: "0 0 24px 0",
-    },
-    comboBoxMonth: {
-      baseWidth: "172px",
-      bigWidth: "205px",
-
-      baseMaxWidth: "172px",
-      bigMaxWidth: "196px",
-    },
+    color: "#333333",
+    disabledColor: "#DFE2E3",
+    pastColor: "#A3A9AE",
+    onHoverBackground: "#f3f4f4",
+    titleColor: "#555F65",
+    outlineColor: "#eceef1",
+    arrowColor: "#555f65",
+    disabledArrow: "#A3A9AE",
+    weekdayColor: "#A3A9AE",
   },
 
   datePicker: {
@@ -1910,9 +1859,18 @@ const Base = {
     paymentAlert: {
       color: "#ed7309",
       warningColor: "#F21C0E",
-      border: "1px solid #ed7309",
-      warningBorder: "1px solid #F21C0E",
     },
+
+    teamTrainingAlert: {
+      titleColor: "#388BDE",
+      borderColor: "#388BDE",
+      linkColor: "#5299E0",
+    },
+  },
+
+  alertComponent: {
+    descriptionColor: "#555F65",
+    iconColor: "#657077",
   },
 
   catalogItem: {
@@ -1921,6 +1879,7 @@ const Base = {
       height: "36px",
       padding: "0 12px",
       marginBottom: "16px",
+      background: "#fff",
       tablet: {
         height: "44px",
         padding: "0 12px",
@@ -1997,6 +1956,7 @@ const Base = {
   navigation: {
     expanderColor: black,
     background: white,
+    rootFolderTitleColor: "#A3A9AE",
 
     icon: {
       fill: "#316DAA",
@@ -2049,6 +2009,8 @@ const Base = {
     header: {
       backgroundColor: white,
       background: `linear-gradient(180deg,#ffffff 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
+      trashErasureLabelBackground: "#f8f9f9",
+      trashErasureLabelText: "#555f65",
     },
   },
 
@@ -2641,6 +2603,8 @@ const Base = {
 
       itemOwnerColor: "rgb(163, 169, 174)",
 
+      backgroundButtons: "#FFFFFF",
+
       dropdownColor: black,
 
       loader: {
@@ -2911,6 +2875,7 @@ const Base = {
 
     settings: {
       iconFill: black,
+      trashIcon: "#A3A9AE",
       article: {
         titleColor: grayMain,
         fillIcon: "dimgray",
@@ -2990,6 +2955,7 @@ const Base = {
         separatorBorder: "1px solid #eceef1",
         warningColor: "#f21c0e",
         textColor: "#A3A9AE",
+        backupCheckedListItemBackground: "#F3F4F4",
       },
 
       payment: {
@@ -3079,10 +3045,18 @@ const Base = {
     main: {
       background: "#F8F9F9",
       textColor: black,
+
+      descriptionTextColor: "#A3A9AE",
+      pendingEmailTextColor: "#A3A9AE",
+
+      mobileRowBackground: "#F8F9F9",
     },
     themePreview: {
       descriptionColor: "#A3A9AE",
       border: "1px solid #eceef1",
+    },
+    notifications: {
+      textDescriptionColor: "#A3A9AE",
     },
   },
 
@@ -3123,6 +3097,14 @@ const Base = {
 
   itemIcon: {
     borderColor: grayLightMid,
+  },
+
+  invitePage: {
+    borderColor: "#eceef1",
+  },
+
+  portalUnavailable: {
+    textDescriptionColor: "#A3A9AE",
   },
 };
 

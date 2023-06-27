@@ -25,11 +25,23 @@ const fillAvailableWidth = css`
   width: fill-available;
 `;
 
-const StyledInvitePanel = styled.div``;
+const StyledInvitePanel = styled.div`
+  .invite-panel-body {
+    height: ${(props) =>
+      props.hasInvitedUsers ? "calc(100% - 55px - 70px)" : "calc(100% - 55px)"};
+
+    .scroll-body {
+      padding-right: 0px !important;
+    }
+  }
+`;
 
 const ScrollList = styled.div`
   width: 100%;
-  height: ${(props) => props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
+  height: ${(props) =>
+    props.scrollAllPanelContent && props.isTotalListHeight
+      ? "auto"
+      : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 `;
 
 const StyledBlock = styled.div`
@@ -49,7 +61,7 @@ const StyledSubHeader = styled(Heading)`
   font-size: 16px;
   padding-left: 16px;
   padding-right: 16px;
-  margin: 16px 0;
+  margin: 16px 0 8px 0;
 
   ${(props) =>
     props.inline &&
@@ -59,6 +71,20 @@ const StyledSubHeader = styled(Heading)`
       gap: 16px;
     `};
 `;
+
+const StyledDescription = styled(Text)`
+  padding-left: 16px;
+  padding-right: 16px;
+  color: ${(props) =>
+    props.theme.createEditRoomDialog.commonParam.descriptionColor};
+  margin-bottom: 16px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+`;
+
+StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
   width: calc(100% - 32px) !important;
@@ -76,6 +102,11 @@ const StyledRow = styled.div`
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
+  }
+
+  .invite-panel_access-selector {
+    margin-left: auto;
+    margin-right: 0;
   }
 `;
 
@@ -199,7 +230,9 @@ const StyledDeleteIcon = styled(DeleteIcon)`
 
 StyledDeleteIcon.defaultProps = { theme: Base };
 
-const StyledHelpButton = styled(HelpButton)``;
+const StyledHelpButton = styled(HelpButton)`
+  margin-right: 8px;
+`;
 
 const StyledButtons = styled(Box)`
   padding: 16px 16px 16px 16px;
@@ -210,7 +243,7 @@ const StyledButtons = styled(Box)`
   position: absolute;
   bottom: 0px;
   width: 100%;
-
+  background: ${(props) => props.theme.filesPanels.sharing.backgroundButtons};
   border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
 `;
 
@@ -247,4 +280,5 @@ export {
   ScrollList,
   StyledAccessSelector,
   StyledToggleButton,
+  StyledDescription,
 };

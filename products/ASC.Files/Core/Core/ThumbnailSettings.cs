@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using SixLabors.ImageSharp.Processing;
+
 namespace ASC.Files.ThumbnailBuilder;
 
 [Singletone]
@@ -41,22 +43,6 @@ public class ThumbnailSettings
     {
         get => _serverRoot ?? "http://localhost/";
         set => _serverRoot = value;
-    }
-
-    private int _boundedChannelCapacity;
-
-    public int BoundedChannelCapacity
-    {
-        get => _boundedChannelCapacity != 0 ? _boundedChannelCapacity : MaxDegreeOfParallelism * 10;
-        set => _boundedChannelCapacity = value;
-    }
-
-    private int _batchSize;
-
-    public int BatchSize
-    {
-        get => _batchSize != 0 ? _batchSize : MaxDegreeOfParallelism * 10;
-        set => _batchSize = value;
     }
 
     #endregion
@@ -109,16 +95,24 @@ public class ThumbnailSettings
     private int _maxDegreeOfParallelism;
     public int MaxDegreeOfParallelism
     {
-        get => _maxDegreeOfParallelism != 0 ? _maxDegreeOfParallelism : 10;
+        get => _maxDegreeOfParallelism != 0 ? _maxDegreeOfParallelism : 1;
         set => _maxDegreeOfParallelism = value;
     }
 
-    private long? _availableFileSize;
-    public long? AvailableFileSize
+    private long? _maxImageFileSize;
+    public long? MaxImageFileSize
     {
-        get => _availableFileSize ?? 100L * 1024L * 1024L;
-        set => _availableFileSize = value;
+        get => _maxImageFileSize ?? 30L * 1024L * 1024L;
+        set => _maxImageFileSize = value;
     }
+
+    private long? _maxVideoFileSize;
+    public long? MaxVideoFileSize
+    {
+        get => _maxVideoFileSize ?? 1000L * 1024L * 1024L;
+        set => _maxVideoFileSize = value;
+    }
+
 
     private int? _attemptsLimit;
     public int? AttemptsLimit
@@ -143,4 +137,5 @@ public class ThumbnailSize
 {
     public int Height { get; set; }
     public int Width { get; set; }
+    public ResizeMode ResizeMode { get; set; } = ResizeMode.Crop;
 }

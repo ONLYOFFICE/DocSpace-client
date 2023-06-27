@@ -27,7 +27,7 @@ const FilesListRow = ({
     >
       <div className="selection-panel_icon">{element}</div>
       <div className="selection-panel_text">
-        <Text fontSize="14px" fontWeight={600}>
+        <Text fontSize="14px" fontWeight={600} noSelect>
           {title}
         </Text>
       </div>
@@ -37,7 +37,6 @@ const FilesListRow = ({
             fontSize="13px"
             fontWeight="400"
             name={`${index}`}
-            label=""
             isChecked={isChecked}
             onClick={onFileClick}
             value=""

@@ -14,18 +14,18 @@ import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?
 
 export const settingsTree = [
   {
-    id: "portal-settings_catalog-common",
+    id: "portal-settings_catalog-customization",
     key: "0",
     icon: CommonSettingsSvgUrl,
-    link: "common",
+    link: "customization",
     tKey: "Customization",
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-customization",
+        id: "portal-settings_catalog-general",
         key: "0-0",
         icon: "",
-        link: "customization",
+        link: "general",
         tKey: "SettingsGeneral",
         isCategory: true,
         children: [
@@ -299,18 +299,26 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer",
+    id: "portal-settings_catalog-developer-tools",
     key: "6",
     icon: DeveloperReactSvgUrl,
-    link: "developer",
+    link: "developer-tools",
     tKey: "DeveloperTools",
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-developer-tools",
+        id: "portal-settings_catalog-javascript-sdk",
         key: "6-0",
         icon: "",
-        link: "tools",
+        link: "javascript-sdk",
+        tKey: "DeveloperTools",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-webhooks",
+        key: "5-1",
+        icon: "",
+        link: "webhooks",
         tKey: "DeveloperTools",
         isCategory: true,
       },
@@ -345,7 +353,7 @@ export const settingsTree = [
     key: "8",
     icon: PaymentIconUrl,
     link: "payments",
-    tKey: "Payments",
+    tKey: "Common:PaymentsTitle",
     isHeader: true,
     children: [
       {
@@ -353,7 +361,7 @@ export const settingsTree = [
         key: "8-0",
         icon: "",
         link: "portal-payments",
-        tKey: "Payments",
+        tKey: "Common:PaymentsTitle",
         isCategory: true,
       },
     ],

@@ -17,8 +17,10 @@ import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
   isDesktop as isDesktopUtils,
+  isSmallTablet as isSmallTabletUtils,
 } from "@docspace/components/utils/device";
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
+import TrashWarning from "./sub-components/trash-warning";
 
 const Navigation = ({
   tReady,
@@ -33,6 +35,7 @@ const Navigation = ({
   getContextOptionsPlus,
   getContextOptionsFolder,
   onBackToParentFolder,
+  isTrashFolder,
   isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
@@ -46,6 +49,8 @@ const Navigation = ({
   isEmptyPage,
   isDesktop: isDesktopClient,
   isRoom,
+  hideInfoPanel,
+  showRootFolderTitle,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -57,8 +62,7 @@ const Navigation = ({
   const containerRef = React.useRef(null);
 
   const isDesktop =
-    (!isMobile && !isTabletUtils() && !isMobileUtils()) ||
-    (isDesktopUtils() && !isMobile);
+    (!isTabletUtils() && !isSmallTabletUtils()) || isDesktopUtils();
 
   const infoPanelIsVisible = React.useMemo(
     () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
@@ -125,6 +129,36 @@ const Navigation = ({
     onBackToParentFolder && onBackToParentFolder();
   }, [onBackToParentFolder]);
 
+  const showRootFolderNavigation =
+    showRootFolderTitle &&
+    navigationItems &&
+    navigationItems.length > 1 &&
+    !isSmallTabletUtils() &&
+    !isMobileOnly;
+
+  const navigationTitleNode = (
+    <Text
+      title={title}
+      isOpen={false}
+      isRootFolder={isRootFolder}
+      onClick={toggleDropBox}
+    />
+  );
+
+  const navigationTitleContainerNode = showRootFolderNavigation ? (
+    <div className="title-container">
+      <Text
+        title={navigationItems[navigationItems.length - 2].title}
+        isOpen={false}
+        isRootFolder={isRootFolder}
+        isRootFolderTitle
+      />
+      {navigationTitleNode}
+    </div>
+  ) : (
+    navigationTitleNode
+  );
+
   return (
     <Consumer>
       {(context) => (
@@ -159,6 +193,7 @@ const Navigation = ({
                 isInfoPanelVisible={isInfoPanelVisible}
                 onClickAvailable={onClickAvailable}
                 isDesktopClient={isDesktopClient}
+                showRootFolderNavigation={showRootFolderNavigation}
               />
             </>
           )}
@@ -168,6 +203,7 @@ const Navigation = ({
             isRootFolder={isRootFolder}
             canCreate={canCreate}
             isTabletView={isTabletView}
+            isTrashFolder={isTrashFolder}
             isRecycleBinFolder={isRecycleBinFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
@@ -177,12 +213,9 @@ const Navigation = ({
               isRootFolder={isRootFolder}
               onBackToParentFolder={onBackToParentFolder}
             />
-            <Text
-              title={title}
-              isOpen={false}
-              isRootFolder={isRootFolder}
-              onClick={toggleDropBox}
-            />
+
+            {navigationTitleContainerNode}
+
             <ControlButtons
               personal={personal}
               isRootFolder={isRootFolder}
@@ -200,12 +233,16 @@ const Navigation = ({
               onPlusClick={onPlusClick}
             />
           </StyledContainer>
-          {infoPanelIsVisible && (
+          {isTrashFolder && !isEmptyPage && (
+            <TrashWarning title={titles.trashWarning} />
+          )}
+          {infoPanelIsVisible && !hideInfoPanel && (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
               toggleInfoPanel={toggleInfoPanel}
               isInfoPanelVisible={isInfoPanelVisible}
+              titles={titles}
             />
           )}
         </>

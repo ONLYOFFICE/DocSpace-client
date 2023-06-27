@@ -7,6 +7,7 @@ import getCorrectDate from "@docspace/components/utils/getCorrectDate";
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import Tag from "@docspace/components/tag";
+import { decode } from "he";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -63,11 +64,12 @@ class DetailsHelper {
   constructor(props) {
     this.t = props.t;
     this.item = props.item;
-    this.history = props.history;
+    this.navigate = props.navigate;
     this.openUser = props.openUser;
     this.personal = props.personal;
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
+    this.isCollaborator = props.isCollaborator;
   }
 
   getPropertyList = () => {
@@ -224,11 +226,11 @@ class DetailsHelper {
   /// Property  //
 
   getItemOwner = () => {
-    const onOpenUser = () => this.openUser(this.item.createdBy, this.history);
+    const onOpenUser = () => this.openUser(this.item.createdBy, this.navigate);
 
-    return this.personal || this.isVisitor
-      ? text(decodeString(this.item.createdBy?.displayName))
-      : link(decodeString(this.item.createdBy?.displayName), onOpenUser);
+    return this.personal || this.isVisitor || this.isCollaborator
+      ? text(decode(this.item.createdBy?.displayName))
+      : link(decode(this.item.createdBy?.displayName), onOpenUser);
   };
 
   getItemLocation = () => {
@@ -239,7 +241,7 @@ class DetailsHelper {
     return text(
       this.item.isRoom
         ? getDefaultRoomName(this.item.roomType, this.t)
-        : getFileTypeName(this.item.fileType, this.t)
+        : getFileTypeName(this.item.fileType)
     );
   };
 
@@ -276,11 +278,11 @@ class DetailsHelper {
   };
 
   getItemLastModifiedBy = () => {
-    const onOpenUser = () => this.openUser(this.item.updatedBy, this.history);
+    const onOpenUser = () => this.openUser(this.item.updatedBy, this.navigate);
 
-    return this.personal || this.isVisitor
-      ? text(decodeString(this.item.updatedBy?.displayName))
-      : link(decodeString(this.item.updatedBy?.displayName), onOpenUser);
+    return this.personal || this.isVisitor || this.isCollaborator
+      ? text(decode(this.item.updatedBy?.displayName))
+      : link(decode(this.item.updatedBy?.displayName), onOpenUser);
   };
 
   getItemCreationDate = () => {

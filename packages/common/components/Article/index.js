@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 
 import {
   isDesktop as isDesktopUtils,
@@ -14,7 +14,8 @@ import SubArticleHeader from "./sub-components/article-header";
 import SubArticleMainButton from "./sub-components/article-main-button";
 import SubArticleBody from "./sub-components/article-body";
 import ArticleProfile from "./sub-components/article-profile";
-import ArticlePaymentAlert from "./sub-components/article-payment-alert";
+import ArticleAlerts from "./sub-components/article-alerts";
+import ArticleLiveChat from "./sub-components/article-live-chat";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
@@ -30,21 +31,24 @@ const Article = ({
 
   withMainButton,
 
-  isGracePeriod,
-
   hideProfileBlock,
-  isFreeTariff,
-  isAvailableArticlePaymentAlert,
+
   currentColorScheme,
   setArticleOpen,
+  withSendAgain,
+  mainBarVisible,
+  isBannerVisible,
+
+  isLiveChatAvailable,
+
+  onLogoClickAction,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
-  const [
-    articleMainButtonContent,
-    setArticleMainButtonContent,
-  ] = React.useState(null);
+  const [articleMainButtonContent, setArticleMainButtonContent] =
+    React.useState(null);
   const [articleBodyContent, setArticleBodyContent] = React.useState(null);
+  const [correctTabletHeight, setCorrectTabletHeight] = React.useState(null);
 
   React.useEffect(() => {
     if (isMobileOnly) {
@@ -103,8 +107,44 @@ const Article = ({
 
   const onMobileBack = React.useCallback(() => {
     //close article
+
     setArticleOpen(false);
   }, [setArticleOpen]);
+
+  // TODO: make some better
+  const onResize = React.useCallback(() => {
+    let correctTabletHeight = window.innerHeight;
+
+    if (mainBarVisible) correctTabletHeight -= 62;
+
+    const isTouchDevice =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0;
+
+    const path = window.location.pathname.toLowerCase();
+
+    if (
+      isBannerVisible &&
+      isMobile &&
+      isTouchDevice &&
+      (path.includes("rooms") || path.includes("files"))
+    )
+      correctTabletHeight -= 80;
+
+    setCorrectTabletHeight(correctTabletHeight);
+  }, [mainBarVisible, isBannerVisible]);
+
+  React.useEffect(() => {
+    if (isTablet) {
+      onResize();
+      window.addEventListener("resize", onResize);
+    }
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [onResize]);
 
   const articleComponent = (
     <>
@@ -113,11 +153,16 @@ const Article = ({
         showText={showText}
         articleOpen={articleOpen}
         $withMainButton={withMainButton}
+        correctTabletHeight={correctTabletHeight}
         {...rest}
       >
-        <SubArticleHeader showText={showText}>
+        <SubArticleHeader
+          showText={showText}
+          onLogoClickAction={onLogoClickAction}
+        >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
+
         {articleMainButtonContent &&
         withMainButton &&
         !isMobileOnly &&
@@ -126,6 +171,7 @@ const Article = ({
             {articleMainButtonContent.props.children}
           </SubArticleMainButton>
         ) : null}
+
         <SubArticleBody showText={showText}>
           {articleBodyContent ? articleBodyContent.props.children : null}
           <HideArticleMenuButton
@@ -136,14 +182,15 @@ const Article = ({
           {!hideProfileBlock && !isMobileOnly && (
             <ArticleProfile showText={showText} />
           )}
-          {isAvailableArticlePaymentAlert &&
-            (isFreeTariff || isGracePeriod) &&
-            showText && (
-              <ArticlePaymentAlert
-                isFreeTariff={isFreeTariff}
-                toggleArticleOpen={toggleArticleOpen}
-              />
-            )}
+
+          <ArticleAlerts />
+
+          {!isMobile && isLiveChatAvailable && (
+            <ArticleLiveChat
+              currentColorScheme={currentColorScheme}
+              withMainButton={withMainButton && !!articleMainButtonContent}
+            />
+          )}
         </SubArticleBody>
       </StyledArticle>
       {articleOpen && (isMobileOnly || window.innerWidth <= 375) && (
@@ -151,6 +198,7 @@ const Article = ({
           <SubArticleBackdrop onClick={toggleArticleOpen} />
         </>
       )}
+
       {articleMainButtonContent && (isMobileOnly || isMobileUtils()) ? (
         <SubArticleMainButton showText={showText}>
           {articleMainButtonContent.props.children}
@@ -170,6 +218,11 @@ const Article = ({
       />
     );
   };
+
+  // console.log("Article render", {
+  //   articleMainButton: !!articleMainButtonContent,
+  //   withMainButton,
+  // });
 
   return isMobileOnly ? renderPortalArticle() : articleComponent;
 };
@@ -200,18 +253,11 @@ Article.Body = () => {
 Article.Body.displayName = "Body";
 
 export default inject(({ auth }) => {
-  const {
-    settingsStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
-    userStore,
-  } = auth;
-  const { isFreeTariff } = currentQuotaStore;
-  const { isGracePeriod } = currentTariffStatusStore;
+  const { settingsStore, userStore, isLiveChatAvailable, bannerStore } = auth;
 
-  const { user } = userStore;
+  const { withSendAgain } = userStore;
 
-  const isAvailableArticlePaymentAlert = user.isOwner || user.isAdmin;
+  const { isBannerVisible } = bannerStore;
 
   const {
     showText,
@@ -222,6 +268,7 @@ export default inject(({ auth }) => {
     toggleArticleOpen,
     currentColorScheme,
     setArticleOpen,
+    mainBarVisible,
   } = settingsStore;
 
   return {
@@ -231,10 +278,13 @@ export default inject(({ auth }) => {
     setIsMobileArticle,
     toggleShowText,
     toggleArticleOpen,
-    isFreeTariff,
-    isGracePeriod,
-    isAvailableArticlePaymentAlert,
+
     currentColorScheme,
     setArticleOpen,
+    withSendAgain,
+    mainBarVisible,
+    isBannerVisible,
+
+    isLiveChatAvailable,
   };
 })(observer(Article));

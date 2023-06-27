@@ -2,6 +2,26 @@ import React, { useState } from "react";
 import { EmailSettings } from "../utils/email";
 import EmailInput from "./";
 
+const disable = {
+  table: {
+    disable: true,
+  },
+};
+
+export default {
+  title: "Components/EmailInput",
+  component: EmailInput,
+  argTypes: {
+    allowDomainPunycode: disable,
+    allowLocalPartPunycode: disable,
+    allowDomainIp: disable,
+    allowStrictLocalPart: disable,
+    allowSpaces: disable,
+    allowName: disable,
+    allowLocalDomainName: disable,
+  },
+};
+
 const Template = ({
   allowDomainPunycode,
   allowLocalPartPunycode,
@@ -27,21 +47,23 @@ const Template = ({
     allowLocalDomainName,
   });
   return (
-    <EmailInput
-      {...rest}
-      value={emailValue}
-      emailSettings={settings}
-      onValidateInput={(isEmailValid) => rest.onValidateInput(isEmailValid)}
-      onChange={(e) => {
-        rest.onChange(e.target.value);
-        onChangeHandler(e.target.value);
-      }}
-    />
+    <div style={{ margin: "7px" }}>
+      <EmailInput
+        {...rest}
+        value={emailValue}
+        emailSettings={settings}
+        onValidateInput={(isEmailValid) => rest.onValidateInput(isEmailValid)}
+        onChange={(e) => {
+          rest.onChange(e.target.value);
+          onChangeHandler(e.target.value);
+        }}
+      />
+    </div>
   );
 };
 
-export const basic = Template.bind({});
-basic.args = {
+export const Default = Template.bind({});
+Default.args = {
   allowDomainPunycode: false,
   allowLocalPartPunycode: false,
   allowDomainIp: false,

@@ -10,6 +10,7 @@ import ChangePasswordDialog from "./ChangePasswordDialog";
 import ChangePhoneDialog from "./ChangePhoneDialog";
 import DeleteProfileEverDialog from "./DeleteProfileEverDialog";
 import DeleteSelfProfileDialog from "./DeleteSelfProfileDialog";
+import DeleteOwnerProfileDialog from "./DeleteOwnerProfileDialog";
 import DeleteUsersDialog from "./DeleteUsersDialog";
 import SendInviteDialog from "./SendInviteDialog";
 import ChangeUserStatusDialog from "./ChangeUserStatusDialog";
@@ -27,6 +28,7 @@ import InviteUsersWarningDialog from "./InviteUsersWarningDialog";
 import LogoutConnectionDialog from "./LogoutConnectionDialog";
 import LogoutAllConnectionDialog from "./LogoutAllConnectionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
+import PortalRenamingDialog from "./PortalRenamingDialog";
 
 export {
   EmptyTrashDialog,
@@ -41,6 +43,7 @@ export {
   ChangePhoneDialog,
   DeleteProfileEverDialog,
   DeleteSelfProfileDialog,
+  DeleteOwnerProfileDialog,
   DeleteUsersDialog,
   SendInviteDialog,
   ChangeUserStatusDialog,
@@ -58,4 +61,5 @@ export {
   LogoutConnectionDialog,
   InviteUsersWarningDialog,
   LogoutAllConnectionDialog,
+  PortalRenamingDialog,
 };

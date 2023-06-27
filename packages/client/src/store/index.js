@@ -37,6 +37,7 @@ import CreateEditRoomStore from "./CreateEditRoomStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
+import OAuthStore from "./OAuthStore";
 
 const oformsStore = new OformsStore(authStore);
 
@@ -172,6 +173,8 @@ const createEditRoomStore = new CreateEditRoomStore(
 
 const webhooksStore = new WebhooksStore();
 
+const oauthStore = new OAuthStore();
+
 const store = {
   auth: authStore,
   payments: paymentStore,
@@ -210,6 +213,7 @@ const store = {
 
   webhooksStore,
   clientLoadingStore,
+  oauthStore,
 };
 
 export default store;

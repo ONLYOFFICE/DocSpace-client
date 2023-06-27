@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { TableRow as Row } from "@docspace/components/table-container/TableRow";
+import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
 
@@ -8,6 +8,7 @@ import ToggleButton from "@docspace/components/toggle-button";
 import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
+import LinuxIcon from "PUBLIC_DIR/images/linux.react.svg?url";
 //import StatusBadge from "../../StatusBadge";
 
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,7 @@ const StyledWrapper = styled.div`
   display: contents;
 `;
 
-const StyledTableRow = styled(Row)`
+const StyledTableRow = styled(TableRow)`
   .table-container_cell {
     padding-right: 30px;
     text-overflow: ellipsis;
@@ -28,30 +29,35 @@ const StyledTableRow = styled(Row)`
   .mr-8 {
     margin-right: 8px;
   }
+
   .textOverflow {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .toggleButton {
+    display: contents;
+  }
 `;
 
-const TableRow = (props) => {
+const Row = (props) => {
   const {
-    webhook,
-    toggleEnabled,
+    item,
+    setEnabled,
     openSettingsModal,
     openDeleteModal,
-    setCurrentWebhook,
+    setCurrentProject,
     hideColumns,
   } = props;
   const navigate = useNavigate();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
 
-  const [isChecked, setIsChecked] = useState(webhook.enabled);
+  const [isChecked, setIsChecked] = useState(item.token.enable);
 
   const redirectToHistory = () => {
-    navigate(window.location.pathname + `/${webhook.id}`);
+    navigate(window.location.pathname + `/${item.id}`);
   };
 
   const handleRowClick = (e) => {
@@ -69,39 +75,33 @@ const TableRow = (props) => {
     redirectToHistory();
   };
   const handleToggleEnabled = () => {
-    toggleEnabled(webhook);
+    setEnabled(item.id);
     setIsChecked((prevIsChecked) => !prevIsChecked);
   };
 
   const onSettingsOpen = () => {
-    setCurrentWebhook(webhook);
-    openSettingsModal();
+    setCurrentProject(item);
+    //openSettingsModal();
   };
   const onDeleteOpen = () => {
-    setCurrentWebhook(webhook);
-    openDeleteModal();
+    setCurrentProject(item);
+    //openDeleteModal();
   };
 
   const contextOptions = [
     {
-      key: "Settings dropdownItem",
+      key: "settings",
       label: t("Common:Settings"),
       icon: SettingsIcon,
       onClick: onSettingsOpen,
-    },
-    {
-      key: "Webhook history dropdownItem",
-      label: t("WebhookHistory"),
-      icon: HistoryIcon,
-      onClick: redirectToHistory,
     },
     {
       key: "Separator dropdownItem",
       isSeparator: true,
     },
     {
-      key: "Delete webhook dropdownItem",
-      label: t("DeleteWebhook"),
+      key: "delete",
+      label: t("Common:Delete"),
       icon: DeleteIcon,
       onClick: onDeleteOpen,
     },
@@ -115,26 +115,21 @@ const TableRow = (props) => {
           hideColumns={hideColumns}
         >
           <TableCell>
-            <Text as="span" fontWeight={600} className="mr-8 textOverflow">
-              {webhook.name}{" "}
-            </Text>
-            {/* <StatusBadge status={webhook.status} /> */}
+            <img src={LinuxIcon} />
           </TableCell>
           <TableCell>
-            <Text
-              as="span"
-              fontSize="11px"
-              color="#A3A9AE"
-              fontWeight={600}
-              className="textOverflow"
-            >
-              {webhook.uri}
+            <Text as="span" fontWeight={600} className="mr-8 textOverflow">
+              {item.general.name}
+            </Text>
+          </TableCell>
+          <TableCell>
+            <Text as="span" fontWeight={400} className="mr-8 textOverflow">
+              {item.general.description}
             </Text>
           </TableCell>
           <TableCell>
             <ToggleButton
               className="toggle toggleButton"
-              id="toggle id"
               isChecked={isChecked}
               onChange={handleToggleEnabled}
             />
@@ -145,11 +140,8 @@ const TableRow = (props) => {
   );
 };
 
-export default inject(({ webhooksStore }) => {
-  const { toggleEnabled, setCurrentWebhook } = webhooksStore;
+export default inject(({ oauthStore }) => {
+  const { setCurrentProject, setEnabled } = oauthStore;
 
-  return {
-    toggleEnabled,
-    setCurrentWebhook,
-  };
-})(observer(TableRow));
+  return { setEnabled, setCurrentProject };
+})(observer(Row));

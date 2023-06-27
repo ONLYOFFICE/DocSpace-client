@@ -7,8 +7,8 @@ import styled from "styled-components";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import TableRow from "./TableRow";
-import TableHeader from "./TableHeader";
+import Row from "./Row";
+import Header from "./Header";
 
 import { Base } from "@docspace/components/themes";
 
@@ -35,14 +35,14 @@ const TableWrapper = styled(TableContainer)`
 
 TableWrapper.defaultProps = { theme: Base };
 
-const TABLE_VERSION = "5";
-const COLUMNS_SIZE = `webhooksConfigColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelWebhooksConfigColumnsSize_ver-${TABLE_VERSION}`;
+const TABLE_VERSION = "1";
+const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelOauthConfigColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = (props) => {
   const {
-    webhooks,
-    loadWebhooks,
+    items,
+    getProjects,
     sectionWidth,
     viewAs,
     setViewAs,
@@ -68,7 +68,7 @@ const TableView = (props) => {
 
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
-      <TableHeader
+      <Header
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         columnStorageName={columnStorageName}
@@ -81,15 +81,15 @@ const TableView = (props) => {
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={webhooks.length}
-        fetchMoreFiles={loadWebhooks}
+        filesLength={items.length}
+        fetchMoreFiles={getProjects}
         hasMoreFiles={false}
-        itemCount={webhooks.length}
+        itemCount={items.length}
       >
-        {webhooks.map((webhook, index) => (
-          <TableRow
-            key={webhook.id}
-            webhook={webhook}
+        {items.map((item, index) => (
+          <Row
+            key={item.id}
+            item={item}
             index={index}
             openSettingsModal={openSettingsModal}
             openDeleteModal={openDeleteModal}
@@ -101,17 +101,16 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup, auth }) => {
-  const { webhooks, loadWebhooks } = webhooksStore;
+export default inject(({ oauthStore, setup, auth }) => {
+  const { getProjects } = oauthStore;
 
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
 
   return {
-    webhooks,
     viewAs,
     setViewAs,
-    loadWebhooks,
+    getProjects,
     userId,
   };
 })(observer(TableView));

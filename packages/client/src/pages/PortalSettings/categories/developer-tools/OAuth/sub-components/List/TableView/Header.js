@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { TableHeader as Header } from "@docspace/components/table-container/TableHeader";
+import TableHeader from "@docspace/components/table-container/TableHeader";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-const TABLE_VERSION = "5";
-const TABLE_COLUMNS = `webhooksConfigColumns_ver-${TABLE_VERSION}`;
+const TABLE_VERSION = "1";
+const TABLE_COLUMNS = `oauthConfigColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
@@ -26,7 +26,7 @@ const getColumns = (defaultColumns, userId) => {
   }
 };
 
-const TableHeader = (props) => {
+const Header = (props) => {
   const {
     userId,
     sectionWidth,
@@ -39,6 +39,15 @@ const TableHeader = (props) => {
 
   const defaultColumns = [
     {
+      key: "Logo",
+      title: "Logo",
+      enable: true,
+      active: true,
+      resizable: false,
+      defaultSize: 64,
+      onChange: onColumnChange,
+    },
+    {
       key: "Name",
       title: t("Common:Name"),
       resizable: true,
@@ -49,17 +58,19 @@ const TableHeader = (props) => {
       onChange: onColumnChange,
     },
     {
-      key: "URL",
-      title: t("URL"),
-      enable: true,
+      key: "Description",
+      title: "Description",
       resizable: true,
+      enable: true,
+      minWidth: 150,
       onChange: onColumnChange,
     },
     {
-      key: "State",
-      title: t("State"),
+      key: "Enable",
+      title: "Enable",
       enable: true,
-      resizable: true,
+      resizable: false,
+      defaultSize: 64,
       onChange: onColumnChange,
     },
   ];
@@ -82,7 +93,7 @@ const TableHeader = (props) => {
   }
 
   return (
-    <Header
+    <TableHeader
       checkboxSize="48px"
       containerRef={tableRef}
       columns={columns}
@@ -102,4 +113,4 @@ export default inject(({ auth }) => {
   return {
     userId: auth.userStore.user.id,
   };
-})(observer(TableHeader));
+})(observer(Header));

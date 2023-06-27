@@ -20,7 +20,7 @@ const FillingStatusContainer = styled.div`
 
   .status-done-text {
     color: ${(props) =>
-      props.isDone
+      props.isFilled
         ? props.theme.statusPanel.doneTextColor
         : props.theme.statusPanel.defaultTextColor};
   }
@@ -29,7 +29,7 @@ const FillingStatusContainer = styled.div`
     circle,
     path {
       stroke: ${(props) =>
-        props.isDone
+        props.isFilled
           ? props.theme.statusPanel.doneTextColor
           : props.theme.statusPanel.defaultTextColor};
     }
@@ -68,12 +68,12 @@ const AccordionItem = styled.div`
     padding: 18px 0;
   
     .user-avatar {
-      padding 1px;
+      padding: 1px;
       border-radius: 50%;
       border: 2px solid ${(props) => props.theme.statusPanel.avatarBorderColor};
       border-style: ${(props) => (props.isStarted ? "dashed" : "solid")};
       border-color: ${(props) =>
-        (props.isDone && props.theme.statusPanel.doneTextColor) ||
+        (props.isFilled && props.theme.statusPanel.doneTextColor) ||
         (props.isInterrupted && props.theme.statusPanel.interruptedTextColor) ||
         (props.isStarted && props.theme.statusPanel.doneTextColor)};
     }
@@ -129,12 +129,13 @@ const AccordionItem = styled.div`
     justify-content: space-between;
     width: 100%;
     min-height: 40px;
-    margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
+    margin: ${(props) =>
+      props.isFilled || props.isInterrupted ? "0" : "2px 0"};
     border-left: 2px ${(props) =>
-      props.isDone || props.isInterrupted ? "solid" : "dashed"} 
+      props.isFilled || props.isInterrupted ? "solid" : "dashed"} 
       ${(props) => props.theme.statusPanel.defaultTextColor};
     border-color: ${(props) =>
-      (props.isDone && props.theme.statusPanel.doneTextColor) ||
+      (props.isFilled && props.theme.statusPanel.doneTextColor) ||
       (props.isInterrupted && props.theme.statusPanel.interruptedTextColor)};
 
     .status-text {
@@ -147,7 +148,7 @@ const AccordionItem = styled.div`
       line-height: 16px;
       margin-left: 15px;
       color: ${(props) =>
-        props.isDone
+        props.isFilled
           ? props.theme.statusPanel.doneTextColor
           : props.theme.statusPanel.fillingTextColor};
     }

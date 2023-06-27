@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { observer, inject } from "mobx-react";
 import { ReactSVG } from "react-svg";
 // import { mockData } from "./mockData.js";
 import { FillingStatusContainer } from "./StyledFillingStatusLine";
@@ -9,13 +11,43 @@ import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 
 const FillingStatusLine = ({
+  selection,
+  fileId,
+  locale,
   statusDone,
   statusInterrupted,
-  fillingStatusInfo,
+  getStatusFillingForm,
 }) => {
+  const [fillingStatusInfo, setfillingStatusInfo] = useState([]);
+  const [showIcon, setShowIcon] = useState(false);
+
+  const getStatusIcon = (value) => {
+    setShowIcon(value);
+  };
+
+  useEffect(() => {
+    getStatusFillingForm(selection?.id || fileId).then((res) => {
+      setfillingStatusInfo(res);
+    });
+  }, []);
+
+  const statusIcon = statusInterrupted
+    ? StatusInterruptedSvgUrl
+    : StatusDoneReactSvgUrl;
+
+  const statusIconClassName = statusInterrupted
+    ? "status-interrupted-icon"
+    : "status-done-icon";
+
+  const statusTextClassName = statusInterrupted
+    ? "status-interrupted-text"
+    : "status-done-text";
+
+  const statusText = statusInterrupted ? "Interrupted" : "Done";
+
   return (
     <FillingStatusContainer
-      isDone={statusDone}
+      isFilled={statusDone}
       isInterrupted={statusInterrupted}
     >
       {fillingStatusInfo.map((data) => {
@@ -26,33 +58,34 @@ const FillingStatusLine = ({
             avatar={data.assigned.avatarSmall}
             role={data.title}
             formFillingSteps={data.formFillingSteps}
-            isDone={statusDone}
-            isInterrupted={statusInterrupted}
+            locale={locale}
+            getStatusIcon={getStatusIcon}
           />
         );
       })}
 
-      {statusInterrupted ? (
+      {showIcon && (
         <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
-          <ReactSVG
-            src={StatusInterruptedSvgUrl}
-            className="status-interrupted-icon"
-          />
-          <Text className="status-interrupted-text">Interrupted</Text>
-        </Box>
-      ) : (
-        <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
-          <ReactSVG src={StatusDoneReactSvgUrl} className="status-done-icon" />
-          <Text className="status-done-text">Done</Text>
+          <ReactSVG src={statusIcon} className={statusIconClassName} />
+          <Text className={statusTextClassName}>{statusText}</Text>
         </Box>
       )}
     </FillingStatusContainer>
   );
 };
 
-FillingStatusLine.defaultProps = {
-  statusDone: false,
-  statusInterrupted: false,
-};
+export default inject(({ auth, filesStore }) => {
+  const { getRolesUsersForFillingForm } = filesStore;
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+  const statusDone = false;
+  const statusInterrupted = false;
 
-export default FillingStatusLine;
+  return {
+    statusDone,
+    statusInterrupted,
+    locale,
+    getStatusFillingForm: getRolesUsersForFillingForm,
+  };
+})(observer(FillingStatusLine));

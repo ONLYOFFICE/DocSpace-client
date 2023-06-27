@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { observer, inject } from "mobx-react";
 
@@ -21,7 +21,6 @@ const StatusFillingPanel = (props) => {
   const {
     visible,
     setStatusFillinglVisible,
-    getRolesUsersForFillingForm,
     selection,
     fileId,
     isVisible,
@@ -29,17 +28,10 @@ const StatusFillingPanel = (props) => {
     fileInfo,
   } = props;
 
-  const [fillingStatusInfo, setfillingStatusInfo] = useState([]);
   const scrollRef = useRef(null);
 
   const displayName = selection?.createdBy?.displayName;
   const name = fileInfo?.createdBy?.displayName;
-
-  useEffect(() => {
-    getRolesUsersForFillingForm(selection?.id || fileId).then((res) => {
-      setfillingStatusInfo(res);
-    });
-  }, []);
 
   const onClose = () => {
     setStatusFillinglVisible(false);
@@ -88,7 +80,7 @@ const StatusFillingPanel = (props) => {
             />
           </Box>
 
-          <FillingStatusLine fillingStatusInfo={fillingStatusInfo} />
+          <FillingStatusLine selection={selection} fileId={fileId} />
         </StyledScrollbar>
 
         <div className="status-filling_footer">
@@ -107,19 +99,16 @@ const StatusFillingPanel = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, filesActionsStore, filesStore }) => {
-    const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
-    const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
-    const { getRolesUsersForFillingForm } = filesStore;
-    const { checkAndOpenLocationAction } = filesActionsStore;
+export default inject(({ auth, dialogsStore, filesActionsStore }) => {
+  const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
+  const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
+  const { checkAndOpenLocationAction } = filesActionsStore;
 
-    return {
-      visible: statusFillingPanelVisible,
-      setStatusFillinglVisible,
-      getInfoPanelItemIcon,
-      getRolesUsersForFillingForm,
-      selection,
-      checkAndOpenLocationAction,
-    };
-  }
-)(observer(StatusFillingPanel));
+  return {
+    visible: statusFillingPanelVisible,
+    setStatusFillinglVisible,
+    getInfoPanelItemIcon,
+    selection,
+    checkAndOpenLocationAction,
+  };
+})(observer(StatusFillingPanel));

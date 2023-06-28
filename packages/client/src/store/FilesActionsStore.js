@@ -1322,7 +1322,6 @@ class FilesActionStore {
 
     const state = {
       title: ExtraLocationTitle,
-
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1340,6 +1339,18 @@ class FilesActionStore {
     setIsLoading(true);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
+  };
+
+  openLocationAction = (item) => {
+    const { categoryType } = this.filesStore;
+
+    const url = getCategoryUrl(categoryType, item.folderId);
+    const newFilter = FilesFilter.getDefault();
+
+    newFilter.search = item.title;
+    newFilter.folder = item.folderId;
+
+    window.open(`${url}?${newFilter.toUrlParams()}`, "_self");
   };
 
   setThirdpartyInfo = (providerKey) => {

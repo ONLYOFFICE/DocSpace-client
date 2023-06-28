@@ -24,18 +24,32 @@ const StatusFillingPanel = (props) => {
     selection,
     fileId,
     isVisible,
-    checkAndOpenLocationAction,
     fileInfo,
+    getIcon,
+    openLocation,
+    openLocationAction,
+    isEditor,
   } = props;
 
   const scrollRef = useRef(null);
 
-  const displayName = selection?.createdBy?.displayName;
-  const name = fileInfo?.createdBy?.displayName;
+  const displayName = selection?.createdBy?.displayName || fileInfo?.createdBy?.displayName;
+  const fileTitle = selection?.title || fileInfo?.title;
+  const item = selection || fileInfo;
+  const icon = getIcon(24, selection?.fileExst || fileInfo?.fileExst);
 
   const onClose = () => {
     setStatusFillinglVisible(false);
     props.onClose && props.onClose();
+  };
+
+  const openFileLocation = () => {
+    if (isEditor) {
+      openLocationAction(item);
+    } else {
+      openLocation({ ...item, ExtraLocation: item.folderId });
+    }
+    return onClose();
   };
 
   return (
@@ -60,13 +74,9 @@ const StatusFillingPanel = (props) => {
 
           <Box className="status-filling_item">
             <div className="item-title">
-              <ReactSVG
-                className="icon"
-                src={selection?.icon || fileInfo?.icon}
-                wrapper="span"
-              />
+              <ReactSVG className="icon" src={icon} wrapper="span" />
               <span className="name">
-                {displayName || name} - {selection?.title || fileInfo?.title}
+                {displayName} - {fileTitle}
               </span>
             </div>
 
@@ -75,7 +85,7 @@ const StatusFillingPanel = (props) => {
               iconName="/static/images/folder-location.react.svg"
               size="16"
               isFill={true}
-              onClick={() => checkAndOpenLocationAction(selection || fileInfo)}
+              onClick={openFileLocation}
               title="Open Location"
             />
           </Box>
@@ -99,16 +109,20 @@ const StatusFillingPanel = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, filesActionsStore }) => {
-  const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
-  const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
-  const { checkAndOpenLocationAction } = filesActionsStore;
+export default inject(({ auth, dialogsStore, filesActionsStore, settingsStore }) => {
+    const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
+    const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
+    const { checkAndOpenLocationAction, openLocationAction } = filesActionsStore;
+    const { getIcon } = settingsStore;
 
-  return {
-    visible: statusFillingPanelVisible,
-    setStatusFillinglVisible,
-    getInfoPanelItemIcon,
-    selection,
-    checkAndOpenLocationAction,
-  };
-})(observer(StatusFillingPanel));
+    return {
+      getIcon,
+      visible: statusFillingPanelVisible,
+      setStatusFillinglVisible,
+      getInfoPanelItemIcon,
+      selection,
+      openLocationAction,
+      openLocation: checkAndOpenLocationAction,
+    };
+  }
+)(observer(StatusFillingPanel));

@@ -24,6 +24,7 @@ const StatusFillingPanel = ({
         onClose={onClose}
         fileId={fileId}
         fileInfo={fileInfo}
+        isEditor={true}
       />
     )) ||
     null

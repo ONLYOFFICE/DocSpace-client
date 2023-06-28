@@ -26,22 +26,26 @@ const StyledDiscSpaceUsedComponent = styled.div`
   .disk-space_title {
     margin-bottom: 16px;
   }
-  .disk-space_slider,
-  .disk-space_description {
+`;
+
+const StyledDiagramComponent = styled.div`
+  .diagram_slider,
+  .diagram_description {
     margin-top: 16px;
   }
-  .disk-space_slider {
-    width: 300px;
+  .diagram_slider {
+    width: 100%;
+    max-width: ${(props) => props.maxWidth}px;
     display: flex;
     background: #f3f4f4;
     border-radius: 29px;
   }
-  .disk-space_description {
+  .diagram_description {
     display: flex;
 
     flex-wrap: wrap;
 
-    .disk-space_folder-tag {
+    .diagram_folder-tag {
       display: flex;
       margin-right: 24px;
       padding-bottom: 8px;
@@ -75,4 +79,5 @@ export {
   StyledDiscSpaceUsedComponent,
   StyledFolderTagSection,
   StyledFolderTagColor,
+  StyledDiagramComponent,
 };

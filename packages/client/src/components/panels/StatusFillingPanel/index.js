@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { observer, inject } from "mobx-react";
+import { isMobileOnly } from "react-device-detect";
 
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
@@ -69,29 +70,33 @@ const StatusFillingPanel = (props) => {
           <Heading className="status_heading">Filling status</Heading>
         </div>
 
-        <StyledScrollbar ref={scrollRef} stype="mediumBlack">
-          <Text className="status-filling_sub-header">File action</Text>
+        <Text className="status-filling_sub-header">File action</Text>
 
-          <Box className="status-filling_item">
-            <div className="item-title">
-              <ReactSVG className="icon" src={icon} wrapper="span" />
-              <span className="name">
-                {displayName} - {fileTitle}
-              </span>
-            </div>
+        <Box className="status-filling_item">
+          <div className="item-title">
+            <ReactSVG className="icon" src={icon} wrapper="span" />
+            <span className="name">
+              {displayName} - {fileTitle}
+            </span>
+          </div>
 
-            <IconButton
-              className="location-btn"
-              iconName="/static/images/folder-location.react.svg"
-              size="16"
-              isFill={true}
-              onClick={openFileLocation}
-              title="Open Location"
-            />
-          </Box>
-
+          <IconButton
+            className="location-btn"
+            iconName="/static/images/folder-location.react.svg"
+            size="16"
+            isFill={true}
+            onClick={openFileLocation}
+            title="Open Location"
+          />
+        </Box>
+        
+        {isMobileOnly ? (
+          <StyledScrollbar ref={scrollRef} stype="mediumBlack">
+            <FillingStatusLine selection={selection} fileId={fileId} />
+          </StyledScrollbar>
+        ) : (
           <FillingStatusLine selection={selection} fileId={fileId} />
-        </StyledScrollbar>
+        )}
 
         <div className="status-filling_footer">
           <Text className="footer-text">

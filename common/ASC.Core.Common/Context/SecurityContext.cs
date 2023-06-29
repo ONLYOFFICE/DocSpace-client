@@ -84,7 +84,7 @@ public class SecurityContext
     }
 
 
-    public async Task<string> AuthenticateMeAsync(string login, string passwordHash, Func<Task<int>> funcLoginEvent = null)
+    public async Task<string> AuthenticateMeAsync(string login, string passwordHash, Func<Task<int>> funcLoginEvent = null, List<Claim> additionalClaims = null)
     {
         ArgumentNullException.ThrowIfNull(login);
         ArgumentNullException.ThrowIfNull(passwordHash);
@@ -92,7 +92,7 @@ public class SecurityContext
         var tenantid = await _tenantManager.GetCurrentTenantIdAsync();
         var u = await _userManager.GetUsersByPasswordHashAsync(tenantid, login, passwordHash);
 
-        return await AuthenticateMeAsync(new UserAccount(u, tenantid, _userFormatter), funcLoginEvent);
+        return await AuthenticateMeAsync(new UserAccount(u, tenantid, _userFormatter), funcLoginEvent,additionalClaims);
     }
 
     public async Task<bool> AuthenticateMe(string cookie)
@@ -168,7 +168,13 @@ public class SecurityContext
                 return false;
             }
 
-            await AuthenticateMeWithoutCookieAsync(new UserAccount(new UserInfo { Id = userid }, tenant, _userFormatter));
+            var claims = new List<Claim>()
+            {
+                AuthConstants.Claim_ScopeRootWrite
+            };
+
+            await AuthenticateMeWithoutCookieAsync(new UserAccount(new UserInfo { Id = userid }, tenant, _userFormatter), claims);
+            
             return true;
         }
         catch (InvalidCredentialException ice)
@@ -381,10 +387,13 @@ public class AuthContext
 
     internal ClaimsPrincipal Principal
     {
-        get => CustomSynchronizationContext.CurrentContext.CurrentPrincipal as ClaimsPrincipal ?? HttpContextAccessor?.HttpContext?.User;
+        get => CustomSynchronizationContext.CurrentContext?.CurrentPrincipal as ClaimsPrincipal ?? HttpContextAccessor?.HttpContext?.User;
         set
         {
-            CustomSynchronizationContext.CurrentContext.CurrentPrincipal = value;
+            if (CustomSynchronizationContext.CurrentContext != null)
+            {
+                CustomSynchronizationContext.CurrentContext.CurrentPrincipal = value;
+            }
 
             if (HttpContextAccessor?.HttpContext != null)
             {

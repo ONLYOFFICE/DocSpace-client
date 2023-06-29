@@ -81,9 +81,10 @@ public class ConfirmAuthHandler : AuthenticationHandler<AuthenticationSchemeOpti
 
         var claims = new List<Claim>()
         {
-                new Claim(ClaimTypes.Role, emailValidationKeyModel.Type.ToString())
+                new Claim(ClaimTypes.Role, emailValidationKeyModel.Type.ToString()),
+                AuthConstants.Claim_ScopeRootWrite
         };
-
+        
         if (checkKeyResult == EmailValidationKeyProvider.ValidationResult.Ok)
         {
             Guid userId;

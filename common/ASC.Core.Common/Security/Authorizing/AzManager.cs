@@ -56,7 +56,7 @@ public class AzManager
 
     internal async Task<AzManagerAcl> GetAzManagerAclAsync(ISubject subject, IAction action, ISecurityObjectId objectId, ISecurityObjectProvider securityObjProvider)
     {
-        if (action.AdministratorAlwaysAllow && (Constants.DocSpaceAdmin.ID == subject.ID || await _roleProvider.IsSubjectInRoleAsync(subject, Constants.DocSpaceAdmin) 
+        if (action.AdministratorAlwaysAllow && (AuthConstants.DocSpaceAdmin.ID == subject.ID || await _roleProvider.IsSubjectInRoleAsync(subject, AuthConstants.DocSpaceAdmin) 
             || (objectId is SecurityObject obj && await obj.IsMatchDefaultRulesAsync(subject, action, _roleProvider))))
         {
             return AzManagerAcl.Allow;

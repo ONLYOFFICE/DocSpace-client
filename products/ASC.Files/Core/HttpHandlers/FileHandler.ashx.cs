@@ -665,7 +665,7 @@ public class FileHandlerService
 #pragma warning disable CS0618 // Type or member is obsolete
                         var stringPayload = JwtBuilder.Create()
                                                 .WithAlgorithm(new HMACSHA256Algorithm())
-                                                .WithSerializer(new JwtSerializer())
+                                                .WithJsonSerializer(new JwtSerializer())
                                                 .WithSecret(_fileUtility.SignatureSecret)
                                                 .MustVerifySignature()
                                                 .Decode(header);
@@ -779,8 +779,8 @@ public class FileHandlerService
 #pragma warning disable CS0618 // Type or member is obsolete
                     var stringPayload = JwtBuilder.Create()
                                                     .WithAlgorithm(new HMACSHA256Algorithm())
-                                                    .WithSerializer(new JwtSerializer())
                                                     .WithSecret(_fileUtility.SignatureSecret)
+                                                    .WithJsonSerializer(new JwtSerializer())
                                                     .MustVerifySignature()
                                                     .Decode(header);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -1516,7 +1516,7 @@ public class FileHandlerService
 #pragma warning disable CS0618 // Type or member is obsolete
                     var dataString = JwtBuilder.Create()
                             .WithAlgorithm(new HMACSHA256Algorithm())
-                            .WithSerializer(new JwtSerializer())
+                            .WithJsonSerializer(new JwtSerializer())
                             .WithSecret(_fileUtility.SignatureSecret)
                             .MustVerifySignature()
                             .Decode(fileData.Token);
@@ -1551,7 +1551,7 @@ public class FileHandlerService
 #pragma warning disable CS0618 // Type or member is obsolete
                     var stringPayload = JwtBuilder.Create()
                             .WithAlgorithm(new HMACSHA256Algorithm())
-                            .WithSerializer(new JwtSerializer())
+                            .WithJsonSerializer(new JwtSerializer())
                             .WithSecret(_fileUtility.SignatureSecret)
                             .MustVerifySignature()
                             .Decode(header);

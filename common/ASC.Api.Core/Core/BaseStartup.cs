@@ -199,45 +199,14 @@ public abstract class BaseStartup
             config.Filters.Add(new CustomExceptionFilterAttribute());
             config.Filters.Add(new TypeFilterAttribute(typeof(WebhooksGlobalFilterAttribute)));
         });
-
-        var authBuilder = services.AddAuthentication(options =>
+        
+        services.AddAuthentication(options =>
         {
             options.DefaultScheme = MultiAuthSchemes;
             options.DefaultChallengeScheme = MultiAuthSchemes;
         }).AddScheme<AuthenticationSchemeOptions, CookieAuthHandler>(CookieAuthenticationDefaults.AuthenticationScheme, a => { })
           .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>(BasicAuthScheme, a => { })
           .AddScheme<AuthenticationSchemeOptions, ConfirmAuthHandler>("confirm", a => { })
-          .AddJwtBearer("Bearer", options =>
-            {
-                options.Authority = _configuration["core:oidc:authority"];
-                options.IncludeErrorDetails = true;
-
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = false
-                };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = async ctx =>
-                    {
-                        using var scope = ctx.HttpContext.RequestServices.CreateScope();
-
-                        var securityContext = scope.ServiceProvider.GetService<ASC.Core.SecurityContext>();
-
-                        var claimUserId = ctx.Principal.FindFirstValue("userId");
-
-                        if (string.IsNullOrEmpty(claimUserId))
-                        {
-                            throw new Exception("Claim 'UserId' is not present in claim list");
-                        }
-
-                        var userId = new Guid(claimUserId);
-
-                        await securityContext.AuthenticateMeWithoutCookieAsync(userId, ctx.Principal.Claims.ToList());
-                    }
-                };
-            })
           .AddPolicyScheme(MultiAuthSchemes, JwtBearerDefaults.AuthenticationScheme, options =>
             {
                 options.ForwardDefaultSelector = context =>
@@ -261,17 +230,15 @@ public abstract class BaseStartup
 
                         if (jwtHandler.CanReadToken(token))
                         {
-                            var issuer = jwtHandler.ReadJwtToken(token).Issuer;
-                            if (!string.IsNullOrEmpty(issuer) && issuer.Equals(_configuration["core:oidc:authority"]))
-                            {
-                                return JwtBearerDefaults.AuthenticationScheme;
-                            }
+                            return JwtBearerDefaults.AuthenticationScheme;
                         }
                     }
 
                     return CookieAuthenticationDefaults.AuthenticationScheme;
                 };
             });
+
+        services.AddJwtBearerAuthentication();
 
         services.AddAutoMapper(GetAutoMapperProfileAssemblies());
 
@@ -305,16 +272,16 @@ public abstract class BaseStartup
 
         app.UseSynchronizationContextMiddleware();
 
-        app.UseAuthentication();
-
+        app.UseAuthorization();
         app.UseAuthorization();
 
         app.UseCultureMiddleware();
 
         app.UseLoggerMiddleware();
-
+        
         app.UseEndpoints(async endpoints =>
         {
+
             await endpoints.MapCustomAsync(WebhooksEnabled, app.ApplicationServices);
 
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()

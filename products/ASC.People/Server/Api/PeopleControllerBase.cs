@@ -51,6 +51,7 @@ public abstract class PeopleControllerBase : ApiControllerBase
         _httpContextAccessor = httpContextAccessor;
     }
 
+
     protected async Task<UserInfo> GetUserInfoAsync(string userNameOrId)
     {
         UserInfo user;

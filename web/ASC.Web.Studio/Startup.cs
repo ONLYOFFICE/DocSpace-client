@@ -36,9 +36,7 @@ public class Startup : BaseStartup
         base.Configure(app, env);
 
         app.UseRouting();
-
-        app.UseAuthentication();
-
+            
         app.UseEndpoints(endpoints =>
         {
             endpoints.InitializeHttpHandlers();

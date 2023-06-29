@@ -24,40 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using UserConstants = ASC.Core.Users.Constants;
-using AuthConstants = ASC.Common.Security.Authorizing.AuthConstants;
-
-namespace ASC.Core.Common.Security;
-
-public static class Security
+namespace ASC.Api.Core.Auth;
+public class ScopesRequirement : IAuthorizationRequirement
 {
-    public static readonly Dictionary<Guid, Dictionary<Guid, HashSet<Rule>>> Rules = new()
+    public string Scopes { get; }
+
+    public ScopesRequirement(string scopes)
     {
-        {
-            AuthConstants.RoomAdmin.ID, new Dictionary<Guid, HashSet<Rule>>
-            {
-                {
-                    AuthConstants.User.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.User),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                },
-                {
-                    AuthConstants.RoomAdmin.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.User),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                },
-                {
-                    AuthConstants.Collaborator.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.Collaborator),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                }
-            }
-        }
-    };
+        Scopes = scopes ?? throw new ArgumentNullException(nameof(scopes));
+    }
 }

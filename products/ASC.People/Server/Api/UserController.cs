@@ -144,6 +144,19 @@ public class UserController : PeopleControllerBase
         _usersQuotaSyncOperation = usersQuotaSyncOperation;
     }
 
+    [HttpGet("tokendiagnostics")]
+    public object GetClaims()
+    {
+        var result = new
+        {
+            Name = User.Identity?.Name ?? "Unknown Name",
+            Claims = (from c in User.Claims select c.Type + ":" + c.Value).ToList()
+        };
+
+        return result;
+    }
+
+
     [HttpPost("active")]
     public async Task<EmployeeFullDto> AddMemberAsActivatedAsync(MemberRequestDto inDto)
     {

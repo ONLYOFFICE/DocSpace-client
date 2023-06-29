@@ -24,40 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using UserConstants = ASC.Core.Users.Constants;
-using AuthConstants = ASC.Common.Security.Authorizing.AuthConstants;
-
-namespace ASC.Core.Common.Security;
-
-public static class Security
+namespace ASC.Api.Core.Auth;
+public class AuthorizationPolicyProvider : IAuthorizationPolicyProvider
 {
-    public static readonly Dictionary<Guid, Dictionary<Guid, HashSet<Rule>>> Rules = new()
+    public AuthorizationPolicyProvider(IOptions<AuthorizationOptions> options)
     {
-        {
-            AuthConstants.RoomAdmin.ID, new Dictionary<Guid, HashSet<Rule>>
-            {
-                {
-                    AuthConstants.User.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.User),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                },
-                {
-                    AuthConstants.RoomAdmin.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.User),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                },
-                {
-                    AuthConstants.Collaborator.ID, new HashSet<Rule>
-                    {
-                        new(UserConstants.Action_EditGroups.ID, AuthConstants.Collaborator),
-                        new(UserConstants.Action_AddRemoveUser.ID),
-                    }
-                }
-            }
-        }
-    };
+        FallbackPolicyProvider = new DefaultAuthorizationPolicyProvider(options);
+    }
+
+    public DefaultAuthorizationPolicyProvider FallbackPolicyProvider { get; }
+
+    public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
+    {
+        var basePolicy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser();
+
+        basePolicy.AddRequirements(new ScopesRequirement(AuthConstants.Claim_ScopeRootWrite.Value));
+
+        return Task.FromResult(basePolicy.Build());
+    }
+
+    public Task<AuthorizationPolicy> GetFallbackPolicyAsync() => FallbackPolicyProvider.GetFallbackPolicyAsync();
+
+    public Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
+    {
+        var policy = new AuthorizationPolicyBuilder();
+
+        policy.AddRequirements(new ScopesRequirement(policyName));
+
+        return Task.FromResult(policy.Build());
+    }
 }

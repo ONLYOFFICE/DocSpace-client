@@ -2,9 +2,10 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 const clients = [...Array(5)].map((value, index) => {
   return {
+    enabled: true,
     id: index,
-    name: `46192a5a-e19c-${index}`,
-    description: "Demo description",
+    name: `7383bc80-b0ad-4fad-8850-${index}`,
+    description: "Application description",
     client_id: "46192a5a-e19c-453c-aec3-50617290edbe",
     client_secret: "e5ff57e4-4ce2-4dac-a265-88bc7e726684",
     root_url: "https://google.com",
@@ -13,19 +14,24 @@ const clients = [...Array(5)].map((value, index) => {
       "https://google.com",
       "https://openidconnect.net/callback",
     ],
-    scopes: [
-      "files:write",
-      "accounts:write",
-      "files:read",
-      "account.self:write",
-      "rooms:read",
-      "accounts:read",
-      "account.self:read",
-      "rooms:write",
-    ],
-    enabled: true,
+    scopes: ["accounts:write", "accounts:read"],
+    logo_uri: "https://logo2.example",
+    policy_uri: "https://policy2.example",
+    terms_uri: "https://terms2.example",
+    state: "draft",
   };
 });
+
+const scopes = [
+  "files:read",
+  "files:write",
+  "rooms:read",
+  "rooms:write",
+  "account.self:read",
+  "account.self:write",
+  "accounts:read",
+  "accounts:write",
+];
 
 class OAuthStore {
   clients = [];

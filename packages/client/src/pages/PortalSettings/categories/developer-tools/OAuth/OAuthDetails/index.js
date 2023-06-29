@@ -1,109 +1,115 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
-import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
-import Textarea from "@docspace/components/textarea";
 import Label from "@docspace/components/label";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import ComboBox from "@docspace/components/combobox";
-import Heading from "@docspace/components/heading";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-
-const Container = styled.div`
-  width: 100%;
-  margin-top: 5px;
-`;
-
-const Property = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-`;
+import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import Category from "../sub-components/Category";
+import { Container, Property } from "../StyledOAuth";
 
 const OAuthDetails = (props) => {
-  const { t, setDocumentTitle, currentClient } = props;
+  const { t, setDocumentTitle, currentClient, theme } = props;
 
   setDocumentTitle("OAuth");
 
   return (
-    <>
-      <Container>
-        <Property>
-          <Label htmlFor="name" text="Name:" title="Fill the client name" />
-          <TextInput id="name" value={currentClient.name} />
-        </Property>
-        <Property>
-          <Label
-            htmlFor="description"
-            text="Description:"
-            title="Fill the client description"
-          />
-          <TextInput id="description" value={currentClient.description} scale />
-        </Property>
-        <Property>
-          <Label htmlFor="id" text="Id:" title="Client id" />
-          <TextInput id="id" value={currentClient.client_id} isDisabled scale />
-        </Property>
-        <Property>
-          <Label htmlFor="secret" text="Secret:" title="Client secret" />
-          <TextInput
-            id="secret"
-            value={currentClient.client_secret}
-            isDisabled
-            scale
-          />
-        </Property>
-        <Property>
-          <Label htmlFor="rootUrl" text="Root url:" title="Root url" />
-          <TextInput
-            id="rootUrl"
-            value={currentClient.root_url}
-            isReadOnly
-            scale
-          />
-        </Property>
-        <Property>
-          <Label
-            htmlFor="redirectUris"
-            text="Redirect uris:"
-            title="Redirect uris"
-          />
-          <TextInput
-            id="redirectUris"
-            value={currentClient.redirect_uris}
-            isReadOnly
-            scale
-          />
-        </Property>
-        <Property>
-          <Label
-            htmlFor="allowedOrigins"
-            text="Allowed origins:"
-            title="Allowed origins"
-          />
-          <TextInput
-            id="allowedOrigins"
-            value={currentClient.allowed_origins}
-            isReadOnly
-            scale
-          />
-        </Property>
-        <Property>
-          <Label htmlFor="scopes" text="Scopes:" title="Scopes" />
-          <TextInput
-            id="scopes"
-            value={currentClient.scopes}
-            isReadOnly
-            scale
-          />
-        </Property>
-      </Container>
-    </>
+    <Container>
+      <Category
+        t={t}
+        title={"Basic info"}
+        tooltipTitle={"Test"}
+        tooltipUrl={""}
+        currentColorScheme={theme}
+      />
+      <Property>
+        <Label htmlFor="name" text="App name:" title="Fill app name" />
+        <TextInput id="name" value={currentClient.name} />
+      </Property>
+      <Property>
+        <Label htmlFor="icon" text="App icon:" title="Fill app icon" />
+        <TextInput id="icon" value={currentClient.logo_uri} />
+      </Property>
+      <Property>
+        <Label
+          htmlFor="description"
+          text="Description:"
+          title="Fill description"
+        />
+        <TextInput id="description" value={currentClient.description} />
+      </Property>
+      <StyledSettingsSeparator />
+      <Category
+        t={t}
+        title={"Client ID"}
+        tooltipTitle={"Test"}
+        tooltipUrl={""}
+        currentColorScheme={theme}
+      />
+      <Property>
+        <Label htmlFor="id" text="Client ID:" title="Client ID" />
+        <TextInput id="id" value={currentClient.client_id} isDisabled />
+      </Property>
+      <Property>
+        <Label htmlFor="secret" text="Secret:" title="Client secret" />
+        <TextInput id="secret" value={currentClient.client_secret} isDisabled />
+      </Property>
+      <StyledSettingsSeparator />
+      <Category
+        t={t}
+        title={"OAuth urls"}
+        tooltipTitle={"Test"}
+        tooltipUrl={""}
+        currentColorScheme={theme}
+      />
+      <Property>
+        <Label
+          htmlFor="redirectUris"
+          text="Redirect uris:"
+          title="Redirect uris"
+        />
+        <TextInput id="redirectUris" value={currentClient.redirect_uris} />
+      </Property>
+      <Property>
+        <Label
+          htmlFor="allowedOrigins"
+          text="Allowed origins:"
+          title="Allowed origins"
+        />
+        <TextInput id="allowedOrigins" value={currentClient.allowed_origins} />
+      </Property>
+      <StyledSettingsSeparator />
+      <Category
+        t={t}
+        title={"Access scopes"}
+        tooltipTitle={"Test"}
+        tooltipUrl={""}
+        currentColorScheme={theme}
+      />
+      <Property>
+        <Label htmlFor="scopes" text="Scopes:" title="Scopes" />
+        <TextInput id="scopes" value={currentClient.scopes} isReadOnly />
+      </Property>
+      <StyledSettingsSeparator />
+      <Category
+        t={t}
+        title={"Support and legal info"}
+        tooltipTitle={"Test"}
+        tooltipUrl={""}
+        currentColorScheme={theme}
+      />
+      <Property>
+        <Label htmlFor="rootUrl" text="Website URL:" title="Root url" />
+        <TextInput id="rootUrl" value={currentClient.root_url} />
+      </Property>
+      <Property>
+        <Label htmlFor="policy" text="Privacy policy URL:" title="Policy" />
+        <TextInput id="policy" value={currentClient.policy_uri} />
+      </Property>
+      <Property>
+        <Label htmlFor="terms" text="Terms of Service URL:" title="Terms" />
+        <TextInput id="terms" value={currentClient.terms_uri} />
+      </Property>
+    </Container>
   );
 };
 

@@ -2048,6 +2048,7 @@ class FilesActionStore {
         isRoot: false,
         rootFolderType,
         isRoom: false,
+        fromDashboard: true,
       };
 
       return window.DocSpace.navigate(`/rooms/shared/${id}/dashboard`, {

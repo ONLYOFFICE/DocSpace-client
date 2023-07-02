@@ -37,11 +37,6 @@ function Column(props: PropsWithChildren<ColumnProps>) {
     contextMenuRef.current?.hide(event);
   }, []);
 
-  console.log({
-    props,
-    isDefault: isDefaultColumn(props),
-  });
-
   if (!isDefaultColumn(props)) {
     const isDone = props.type === RoleTypeEnum.Done;
 

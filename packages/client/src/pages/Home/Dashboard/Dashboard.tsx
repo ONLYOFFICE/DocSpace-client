@@ -1,9 +1,13 @@
 import { useContext, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { isMobile, isMobileOnly } from "react-device-detect";
 
 import Column from "@docspace/common/components/Column";
 import Card from "@docspace/common/components/Card";
 import { Context } from "@docspace/components/utils/context";
+import Scrollbar from "@docspace/components/scrollbar";
+
+import withDashboardLoader from "SRC_DIR/HOCs/withDashboardLoader";
 
 import List from "./List";
 import Table from "./Table";
@@ -139,29 +143,71 @@ function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
     return <Table roles={roles} />;
   }
 
+  if (isMobile) {
+    return (
+      //@ts-ignore
+      <Scrollbar
+        style={{
+          width: sectionWidth,
+          height: `calc(100vh  - ${isMobileOnly ? 255 : 155}px)`,
+        }}
+      >
+        <DashboardContainer>
+          {roles.map((role) => (
+            <Column key={role.id} {...role}>
+              {columns[0].cards?.map((card) => {
+                return (
+                  <Card
+                    key={card.id}
+                    username={card.username}
+                    filename={card.filename}
+                  />
+                );
+              })}
+            </Column>
+          ))}
+        </DashboardContainer>
+      </Scrollbar>
+    );
+  }
+
   return (
     <DashboardContainer>
       {roles.map((role) => (
         <Column key={role.id} {...role}>
-          {columns[0].cards?.map((card) => (
-            <Card
-              key={card.id}
-              username={card.username}
-              filename={card.filename}
-            />
-          ))}
+          {columns[0].cards?.map((card) => {
+            return (
+              <Card
+                key={card.id}
+                username={card.username}
+                filename={card.filename}
+              />
+            );
+          })}
         </Column>
       ))}
     </DashboardContainer>
   );
 }
 
-export default inject<StoreType>(({ dashboardStore }) => {
-  const { viewAs, setViewAs, roles } = dashboardStore;
+export default inject<StoreType>(
+  ({ dashboardStore, filesStore, clientLoadingStore, auth }) => {
+    const { viewAs, setViewAs, roles } = dashboardStore;
+    const { isInit, isLoadingFilesFind } = filesStore;
+    const { firstLoad, showBodyLoader } = clientLoadingStore;
 
-  return {
-    viewAs,
-    setViewAs,
-    roles,
-  };
-})(observer(Dashboard));
+    const isLoading =
+      isLoadingFilesFind ||
+      showBodyLoader ||
+      !auth.isLoaded ||
+      firstLoad ||
+      !isInit;
+
+    return {
+      viewAs,
+      setViewAs,
+      roles,
+      isLoading,
+    };
+  }
+)(observer(withDashboardLoader(Dashboard)));

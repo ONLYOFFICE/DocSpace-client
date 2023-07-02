@@ -292,7 +292,9 @@ class SectionBody extends React.Component {
               <div className="section-wrapper">
                 <div className="section-wrapper-content" {...focusProps}>
                   {children}
-                  <StyledSpacer className="settings-mobile" />
+                  {viewAs !== "dashboard" && (
+                    <StyledSpacer className="settings-mobile" />
+                  )}
                 </div>
               </div>
             </Scrollbar>
@@ -300,7 +302,9 @@ class SectionBody extends React.Component {
             <div className="section-wrapper">
               <div className="section-wrapper-content" {...focusProps}>
                 {children}
-                <StyledSpacer className="settings-mobile" />
+                {viewAs !== "dashboard" && (
+                  <StyledSpacer className="settings-mobile" />
+                )}
               </div>
             </div>
           )

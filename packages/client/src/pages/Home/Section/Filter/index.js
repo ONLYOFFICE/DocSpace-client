@@ -1622,8 +1622,6 @@ const SectionFilterContent = ({
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
-    console.log({ isDashboardPage });
-
     if (isDashboardPage) {
       return [
         {

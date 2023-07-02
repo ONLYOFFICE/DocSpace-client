@@ -114,6 +114,7 @@ const PureHome = (props) => {
     showFilterLoader,
     fetchDashboard,
     setCategoryType,
+    dashboardViewAs,
   } = props;
 
   const location = useLocation();
@@ -225,10 +226,10 @@ const PureHome = (props) => {
       withBodyAutoFocus: !isMobile,
       firstLoad,
       isLoaded: !firstLoad,
-      viewAs: accountsViewAs,
+      viewAs: isDashboardPage ? dashboardViewAs : accountsViewAs,
     };
 
-    if (!isAccountsPage) {
+    if (!isAccountsPage && !isDashboardPage) {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = true;
       sectionProps.onDrop =
@@ -332,7 +333,7 @@ export default inject(
       clearUploadedFilesHistory,
     } = uploadDataStore;
 
-    const { fetchDashboard } = dashboardStore;
+    const { fetchDashboard, viewAs: dashboardViewAs } = dashboardStore;
 
     const {
       firstLoad,
@@ -528,6 +529,7 @@ export default inject(
       showFilterLoader,
       fetchDashboard,
       setCategoryType,
+      dashboardViewAs,
     };
   }
 )(observer(Home));

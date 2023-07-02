@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { observer, inject } from "mobx-react";
+import { isMobileOnly } from "react-device-detect";
 
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
@@ -21,29 +22,35 @@ const StatusFillingPanel = (props) => {
   const {
     visible,
     setStatusFillinglVisible,
-    getRolesUsersForFillingForm,
     selection,
     fileId,
     isVisible,
-    checkAndOpenLocationAction,
     fileInfo,
+    getIcon,
+    openLocation,
+    openLocationAction,
+    isEditor,
   } = props;
 
-  const [fillingStatusInfo, setfillingStatusInfo] = useState([]);
   const scrollRef = useRef(null);
 
-  const displayName = selection?.createdBy?.displayName;
-  const name = fileInfo?.createdBy?.displayName;
-
-  useEffect(() => {
-    getRolesUsersForFillingForm(selection?.id || fileId).then((res) => {
-      setfillingStatusInfo(res);
-    });
-  }, []);
+  const displayName = selection?.createdBy?.displayName || fileInfo?.createdBy?.displayName;
+  const fileTitle = selection?.title || fileInfo?.title;
+  const item = selection || fileInfo;
+  const icon = getIcon(24, selection?.fileExst || fileInfo?.fileExst);
 
   const onClose = () => {
     setStatusFillinglVisible(false);
     props.onClose && props.onClose();
+  };
+
+  const openFileLocation = () => {
+    if (isEditor) {
+      openLocationAction(item);
+    } else {
+      openLocation({ ...item, ExtraLocation: item.folderId });
+    }
+    return onClose();
   };
 
   return (
@@ -63,33 +70,33 @@ const StatusFillingPanel = (props) => {
           <Heading className="status_heading">Filling status</Heading>
         </div>
 
-        <StyledScrollbar ref={scrollRef} stype="mediumBlack">
-          <Text className="status-filling_sub-header">File action</Text>
+        <Text className="status-filling_sub-header">File action</Text>
 
-          <Box className="status-filling_item">
-            <div className="item-title">
-              <ReactSVG
-                className="icon"
-                src={selection?.icon || fileInfo?.icon}
-                wrapper="span"
-              />
-              <span className="name">
-                {displayName || name} - {selection?.title || fileInfo?.title}
-              </span>
-            </div>
+        <Box className="status-filling_item">
+          <div className="item-title">
+            <ReactSVG className="icon" src={icon} wrapper="span" />
+            <span className="name">
+              {displayName} - {fileTitle}
+            </span>
+          </div>
 
-            <IconButton
-              className="location-btn"
-              iconName="/static/images/folder-location.react.svg"
-              size="16"
-              isFill={true}
-              onClick={() => checkAndOpenLocationAction(selection || fileInfo)}
-              title="Open Location"
-            />
-          </Box>
-
-          <FillingStatusLine fillingStatusInfo={fillingStatusInfo} />
-        </StyledScrollbar>
+          <IconButton
+            className="location-btn"
+            iconName="/static/images/folder-location.react.svg"
+            size="16"
+            isFill={true}
+            onClick={openFileLocation}
+            title="Open Location"
+          />
+        </Box>
+        
+        {isMobileOnly ? (
+          <StyledScrollbar ref={scrollRef} stype="mediumBlack">
+            <FillingStatusLine selection={selection} fileId={fileId} />
+          </StyledScrollbar>
+        ) : (
+          <FillingStatusLine selection={selection} fileId={fileId} />
+        )}
 
         <div className="status-filling_footer">
           <Text className="footer-text">
@@ -107,19 +114,20 @@ const StatusFillingPanel = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, filesActionsStore, filesStore }) => {
+export default inject(({ auth, dialogsStore, filesActionsStore, settingsStore }) => {
     const { statusFillingPanelVisible, setStatusFillinglVisible } = dialogsStore;
     const { getInfoPanelItemIcon, selection } = auth.infoPanelStore;
-    const { getRolesUsersForFillingForm } = filesStore;
-    const { checkAndOpenLocationAction } = filesActionsStore;
+    const { checkAndOpenLocationAction, openLocationAction } = filesActionsStore;
+    const { getIcon } = settingsStore;
 
     return {
+      getIcon,
       visible: statusFillingPanelVisible,
       setStatusFillinglVisible,
       getInfoPanelItemIcon,
-      getRolesUsersForFillingForm,
       selection,
-      checkAndOpenLocationAction,
+      openLocationAction,
+      openLocation: checkAndOpenLocationAction,
     };
   }
 )(observer(StatusFillingPanel));

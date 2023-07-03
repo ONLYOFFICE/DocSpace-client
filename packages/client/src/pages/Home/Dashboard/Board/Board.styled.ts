@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DashboardContainer = styled.section`
+export const BoardContainer = styled.section`
   display: grid;
 
   grid-template-columns: repeat(auto-fit, 264px);

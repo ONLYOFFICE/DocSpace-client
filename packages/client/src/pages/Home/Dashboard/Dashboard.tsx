@@ -2,8 +2,6 @@ import { useContext, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
-import Column from "@docspace/common/components/Column";
-import Card from "@docspace/common/components/Card";
 import { Context } from "@docspace/components/utils/context";
 import Scrollbar from "@docspace/components/scrollbar";
 
@@ -11,8 +9,7 @@ import withDashboardLoader from "SRC_DIR/HOCs/withDashboardLoader";
 
 import List from "./List";
 import Table from "./Table";
-
-import { DashboardContainer } from "./Dashboard.styled";
+import Board from "./Board";
 
 import DashboardProps from "./Dashboard.props";
 import { ContextType, StoreType } from "./types";
@@ -32,72 +29,6 @@ function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
 
     setViewAs(width < 1024 ? "row" : "table");
   }, [sectionWidth, viewAs]);
-
-  const columns = [
-    {
-      id: 1,
-      user: "@Anyone",
-      title: "Сотрудник",
-      color: "#a3c3fa",
-      cards: [
-        {
-          id: 1,
-          username: "Leo Dokidis",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 2,
-          username: "William White",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 3,
-          username: "Robert Coleman",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 4,
-          username: "John Dean",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 5,
-          username: "Anna Allen",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 6,
-          username: "James Chavez",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 7,
-          username: "Geraldine Rodriguez",
-          filename: "Заявление на отпуск",
-        },
-      ],
-    },
-    {
-      id: 2,
-      user: "Irina Vikulova",
-      title: "Бухгалтер",
-      color: "#CBDFB7",
-    },
-    {
-      id: 3,
-      user: "Lev Bannov",
-      title: "Директор",
-      color: "#D2AFC6;",
-      badge: 1,
-      cards: [
-        {
-          id: 7,
-          username: "Linnik Sergey",
-          filename: "Заявление на отпуск",
-        },
-      ],
-    },
-  ];
 
   const getOptions = () => [
     {
@@ -152,42 +83,12 @@ function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
           height: `calc(100vh  - ${isMobileOnly ? 255 : 155}px)`,
         }}
       >
-        <DashboardContainer>
-          {roles.map((role) => (
-            <Column key={role.id} {...role}>
-              {columns[0].cards?.map((card) => {
-                return (
-                  <Card
-                    key={card.id}
-                    username={card.username}
-                    filename={card.filename}
-                  />
-                );
-              })}
-            </Column>
-          ))}
-        </DashboardContainer>
+        <Board roles={roles} />
       </Scrollbar>
     );
   }
 
-  return (
-    <DashboardContainer>
-      {roles.map((role) => (
-        <Column key={role.id} {...role}>
-          {columns[0].cards?.map((card) => {
-            return (
-              <Card
-                key={card.id}
-                username={card.username}
-                filename={card.filename}
-              />
-            );
-          })}
-        </Column>
-      ))}
-    </DashboardContainer>
-  );
+  return <Board roles={roles} />;
 }
 
 export default inject<StoreType>(

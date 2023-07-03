@@ -19,13 +19,13 @@ import { TableRowProps } from "./Table.porps";
 import { ParamType } from "../types";
 
 function TableRow({ queue, title, id, type, color, badge }: TableRowProps) {
-  const { fileId } = useParams<ParamType>();
+  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => fileId && `/rooms/shared/${fileId}/dashboard/${id}`,
+    () => roomId && `/rooms/shared/${roomId}/dashboard/${id}`,
 
-    [fileId, id]
+    [roomId, id]
   );
 
   const onClickLink = (event: MouseEvent) => {

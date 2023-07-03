@@ -19,14 +19,14 @@ function useDashboard({
   fetchDashboard,
   setCategoryType,
 }: useDashboardProps) {
-  const { fileId } = useParams<ParamType>();
+  const { boardId } = useParams<ParamType>();
 
   useEffect(() => {
-    if (!isDashboardPage || !fileId) return;
+    if (!isDashboardPage || !boardId) return;
 
     setIsLoading(true, false);
     setCategoryType(CategoryType.Dashboard);
-    fetchDashboard(fileId).finally(() => {
+    fetchDashboard(boardId).finally(() => {
       setIsLoading(false);
     });
   }, [isDashboardPage]);

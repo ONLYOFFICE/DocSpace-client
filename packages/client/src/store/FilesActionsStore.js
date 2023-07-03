@@ -2062,9 +2062,12 @@ class FilesActionStore {
         fromDashboard: true,
       };
 
-      return window.DocSpace.navigate(`/rooms/shared/${id}/dashboard`, {
-        state,
-      });
+      return window.DocSpace.navigate(
+        `/rooms/shared/${item.parentId}/dashboard/${id}`,
+        {
+          state,
+        }
+      );
     }
 
     if (isFolder) {
@@ -2197,9 +2200,9 @@ class FilesActionStore {
 
     const filter = RoomsFilter.getDefault();
 
-    const isDasboard = categoryType === CategoryType.Dashboard;
+    const isDashboard = categoryType === CategoryType.Dashboard;
 
-    const path = isDasboard
+    const path = isDashboard
       ? getCategoryUrl(CategoryType.Shared)
       : getCategoryUrl(categoryType);
 

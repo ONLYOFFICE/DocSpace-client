@@ -25,6 +25,7 @@ export type TableColumnType = {
 };
 
 export type ParamType = {
-  fileId: string;
+  boardId: string;
   roleId: string;
+  roomId: string;
 };

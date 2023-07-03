@@ -131,7 +131,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:fileId/dashboard",
+            path: "rooms/shared/:roomId/dashboard/:boardId",
             element: (
               <PrivateRoute>
                 <Dashboard />
@@ -139,7 +139,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:fileId/dashboard/filter",
+            path: "rooms/shared/:roomId/dashboard/:boardId/filter",
             element: (
               <PrivateRoute>
                 <Dashboard />

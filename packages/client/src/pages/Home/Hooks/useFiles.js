@@ -29,6 +29,7 @@ const useFiles = ({
   isAccountsPage,
   isSettingsPage,
   isDashboardPage,
+  isRolePage,
 
   location,
 
@@ -86,7 +87,8 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
-    if (isAccountsPage || isSettingsPage || isDashboardPage) return;
+    if (isAccountsPage || isSettingsPage || isDashboardPage || isRolePage)
+      return;
 
     setIsLoading(true, !location.state?.fromDashboard);
 

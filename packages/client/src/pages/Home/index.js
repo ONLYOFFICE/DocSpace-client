@@ -122,6 +122,7 @@ const PureHome = (props) => {
   const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
   const isDashboardPage = location.pathname.includes("dashboard");
+  const isRolePage = location.pathname.includes("role");
 
   useDashboard({
     isDashboardPage,
@@ -144,6 +145,7 @@ const PureHome = (props) => {
     isAccountsPage,
     isSettingsPage,
     isDashboardPage,
+    isRolePage,
 
     location,
 

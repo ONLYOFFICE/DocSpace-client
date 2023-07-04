@@ -1,12 +1,12 @@
 import { ContextMenuModel } from "@docspace/components/types";
-import { RoleTypeEnum } from "./RoleType.enum";
+import { RoleTypeEnum } from "../enums/RoleType.enum";
 
 export type RoleTypeOwn = {
   id: number;
   type: RoleTypeEnum;
   queue: number;
   title: string;
-  badge?: number;
+  badge: number;
   onClickBadge?: VoidFunction;
   getOptions: () => ContextMenuModel[];
   color?: string;
@@ -21,7 +21,7 @@ export interface RoleDefaultType extends RoleTypeOwn {
     displayName: string;
   };
   color: string;
-  onClickLocation?: VoidFunction;
+  onClickLocation: (roomId: string | number) => void;
   type: RoleTypeEnum.Default;
 }
 

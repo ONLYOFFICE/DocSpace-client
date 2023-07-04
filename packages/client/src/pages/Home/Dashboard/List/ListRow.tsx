@@ -26,7 +26,7 @@ function ListRow({
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/dashboard/${role.id}`,
+    () => roomId && `/rooms/shared/${roomId}/role/${role.id}`,
 
     [roomId, role.id]
   );

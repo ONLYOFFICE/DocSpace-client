@@ -1,4 +1,5 @@
 import { CreatedBy } from "./CreatedBy.type";
+import { FillQueue } from "./FillQueue.type";
 import { RoleType } from "./RoleType";
 import { Security } from "./Security.type";
 import { UpdatedBy } from "./UpdatedBy.type";
@@ -11,7 +12,7 @@ export type Current = {
   mute: boolean;
   pinned: boolean;
   type: number;
-  fillQueue: RoleType[];
+  fillQueue: FillQueue[];
   private: boolean;
   id: number;
   rootFolderId: number;

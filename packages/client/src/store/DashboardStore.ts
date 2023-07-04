@@ -4,13 +4,20 @@ import SelectedFolderStore from "./SelectedFolderStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
 import { FolderType } from "@docspace/common/constants";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl, isDefaultRole } from "@docspace/common/utils";
 
 import config from "PACKAGE_FILE";
 import api from "@docspace/common/api";
 
 import type { IDashboard, IRole } from "@docspace/common/Models";
-import type { Folder as FolderInfoType } from "@docspace/common/types";
+import type {
+  FillQueue,
+  Folder as FolderInfoType,
+  RoleDefaultType,
+  RoleDoneType,
+  RoleInterruptedType,
+} from "@docspace/common/types";
+import { RoleTypeEnum } from "@docspace/common/enums";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
@@ -18,7 +25,7 @@ const DEFAULT_VIEW_AS_VALUE = "dashboard";
 class DashboardStore {
   public viewAs!: string;
   public dashboard?: IDashboard;
-  private _roles: IRole[] = [];
+  private _roles: FillQueue[] = [];
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -66,7 +73,6 @@ class DashboardStore {
     ).then((res) => {
       return res.slice(0, -1).reverse();
     });
-    console.log({ navigationPath, dashboard });
 
     this.selectedFolderStore.setSelectedFolder({
       folders: dashboard.folders,
@@ -79,12 +85,51 @@ class DashboardStore {
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
+  private getRolesContextOptions = (type: RoleTypeEnum) => {
+    switch (type) {
+      case RoleTypeEnum.Default:
+        return [];
+
+      case RoleTypeEnum.Done:
+        return ["link-for-room-members", "download"];
+
+      case RoleTypeEnum.Interrupted:
+        return [];
+    }
+  };
+
+  private gotoRole = (id: string | number, roodId: string | number) => {
+    window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
+  };
+
   //#endregion
 
   //#region getter
 
-  public get roles() {
-    return this._roles;
+  public get roles(): IRole[] {
+    const roles = this._roles.map<IRole>((role) => {
+      if (role.type === RoleTypeEnum.Default) {
+        const defaultRole: RoleDefaultType = {
+          ...role,
+          getOptions: () => [],
+          onClickLocation: (roomId: string | number) =>
+            this.gotoRole(role.id, roomId),
+          onClickBadge: () => {},
+        };
+
+        return defaultRole;
+      }
+
+      const doneOrInterruptedRole: RoleDoneType | RoleInterruptedType = {
+        ...role,
+        getOptions: () => [],
+        onClickBadge: () => {},
+      };
+
+      return doneOrInterruptedRole;
+    });
+
+    return roles;
   }
   //#endregion
 
@@ -97,7 +142,7 @@ class DashboardStore {
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
   };
 
-  public setRoles = (roles: IRole[]) => {
+  public setRoles = (roles: FillQueue[]) => {
     this._roles = roles;
   };
 
@@ -110,8 +155,6 @@ class DashboardStore {
   ): Promise<IDashboard> => {
     try {
       const dashboard: IDashboard = await api.files.getDashboard(fileId);
-
-      console.log({ role: dashboard.current.fillQueue });
 
       this.setRoles(dashboard.current.fillQueue);
       this.setDashboard(dashboard);

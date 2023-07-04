@@ -23,7 +23,7 @@ function TableRow({ queue, title, id, type, color, badge }: TableRowProps) {
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/dashboard/${id}`,
+    () => roomId && `/rooms/shared/${roomId}/role/${id}`,
 
     [roomId, id]
   );

@@ -7,7 +7,7 @@ import BoardRoleDone32SvgIcon from "PUBLIC_DIR/images/icons/32/board_role_done.s
 import BoardRoleInterrupted32SvgIcon from "PUBLIC_DIR/images/icons/32/board_role_interrupted.svg";
 
 import IconProps, { IconDoneProps, IconInterruptedProps } from "./Icon.props";
-import { RoleTypeEnum } from "@docspace/common/types";
+import { RoleTypeEnum } from "@docspace/common/enums";
 
 export const icons = {
   small: {

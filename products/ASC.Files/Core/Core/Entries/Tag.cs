@@ -39,7 +39,8 @@ public enum TagType
     Template = 32,
     Custom = 64,
     Pin = 128,
-    Origin = 256
+    Origin = 256,
+    Role = 512
 }
 
 [Serializable]
@@ -122,6 +123,11 @@ public sealed class Tag : IMapFrom<DbFilesTag>
             EntryId = entryId, 
             EntryType = type
         };
+    }
+
+    public static Tag Role<T>(Guid owner, FileEntry<T> entry, string name)
+    {
+        return new Tag(name, TagType.Role, owner, 0);
     }
 
     public override bool Equals(object obj)

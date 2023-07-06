@@ -886,7 +886,9 @@ class FilesStore {
       case "all":
         return true;
       case FilterType.FoldersOnly.toString():
-        return file.parentId;
+        return file.isFolder;
+      case FilterType.BoardsOnly.toString():
+        return file.isDashboard;
       case FilterType.DocumentsOnly.toString():
         return type === FileType.Document;
       case FilterType.PresentationsOnly.toString():
@@ -1272,7 +1274,7 @@ class FilesStore {
 
           const [dashboards, folders] = partition(
             data.folders,
-            (folder) => folder?.type === 22
+            (folder) => folder?.type === FolderType.Dashboard
           );
 
           this.setBoards(dashboards);
@@ -2018,6 +2020,7 @@ class FilesStore {
         "open-board",
         "link-for-room-members",
         "show-info",
+        "download",
         "separator1",
         "delete",
       ];
@@ -2514,14 +2517,14 @@ class FilesStore {
   }
 
   get isHeaderIndeterminate() {
-    const items = [...this.files, ...this.folders];
+    const items = [...this.files, ...this.folders, ...this.boards];
     return this.isHeaderVisible && this.selection.length
       ? this.selection.length < items.length
       : false;
   }
 
   get isHeaderChecked() {
-    const items = [...this.files, ...this.folders];
+    const items = [...this.files, ...this.folders, ...this.boards];
     return this.isHeaderVisible && this.selection.length === items.length;
   }
 
@@ -2848,6 +2851,8 @@ class FilesStore {
       };
     });
 
+    console.log({ newItem });
+
     return newItem;
   }
 
@@ -2856,7 +2861,11 @@ class FilesStore {
       this.filesSettingsStore;
 
     let cbMenu = ["all"];
-    const filesItems = [...this.files, ...this.folders];
+    const filesItems = [...this.files, ...this.folders, ...this.boards];
+
+    if (this.boards.length) {
+      cbMenu.push(FilterType.BoardsOnly);
+    }
 
     if (this.folders.length) {
       for (const item of this.folders) {
@@ -2896,6 +2905,8 @@ class FilesStore {
 
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
 
+    console.log({ cbMenu });
+
     return cbMenu;
   }
 
@@ -2905,6 +2916,8 @@ class FilesStore {
         return t("All");
       case FilterType.FoldersOnly:
         return t("Translations:Folders");
+      case FilterType.BoardsOnly:
+        return t("Boards");
       case FilterType.DocumentsOnly:
         return t("Common:Documents");
       case FilterType.PresentationsOnly:
@@ -2941,6 +2954,8 @@ class FilesStore {
         return "selected-all";
       case FilterType.FoldersOnly:
         return "selected-only-folders";
+      case FilterType.BoardsOnly:
+        return "selected-only-boards";
       case FilterType.DocumentsOnly:
         return "selected-only-documents";
       case FilterType.PresentationsOnly:
@@ -3112,7 +3127,7 @@ class FilesStore {
   }
 
   get hasNew() {
-    const newFiles = [...this.files, ...this.folders].filter(
+    const newFiles = [...this.files, ...this.folders, ...this.boards].filter(
       (item) => (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew
     );
     return newFiles.length > 0;
@@ -3436,9 +3451,15 @@ class FilesStore {
       ? await api.rooms.getRooms(newFilter)
       : await api.files.getFolder(newFilter.folder, newFilter);
 
+    const [newdashboards, newfolders] = partition(
+      newFiles.folders,
+      (folder) => folder?.type === FolderType.Dashboard
+    );
+
     runInAction(() => {
       this.setFiles([...this.files, ...newFiles.files]);
-      this.setFolders([...this.folders, ...newFiles.folders]);
+      this.setFolders([...this.folders, ...newfolders]);
+      this.boards([...this.boards, ...newdashboards]);
       this.setFilesIsLoading(false);
     });
   };

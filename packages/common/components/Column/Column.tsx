@@ -69,12 +69,12 @@ function Column(props: PropsWithChildren<ColumnProps>) {
             />
             <ContextMenu
               ref={contextMenuRef}
-              getContextModel={props.getOptions}
+              getContextModel={props.contextOptions}
             />
             <ContextMenuButton
               className="card__context-menu"
               displayType="toggle"
-              getData={props.getOptions}
+              getData={props.contextOptions}
               onClick={onClickHandler}
               onClose={onHideContextMenu}
             />

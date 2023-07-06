@@ -190,7 +190,7 @@ public class MigrationRunner
                 LastModified = DateTime.UtcNow,
                 RefType = Core.UserGroupRefType.Contains,
                 Removed = false,
-                UserGroupId = ASC.Common.Security.Authorizing.Constants.DocSpaceAdmin.ID,
+                UserGroupId = ASC.Common.Security.Authorizing.AuthConstants.DocSpaceAdmin.ID,
                 Userid = tenant.OwnerId.Value
             };
 

@@ -62,6 +62,11 @@ public class DaoFactory : IDaoFactory
     {
         return _serviceProvider.GetService<ILinkDao>();
     }
+
+    public IBoardRoleDao<T> GetBoardRoleDao<T>()
+    {
+        return _serviceProvider.GetService<IBoardRoleDao<T>>();
+    }
 }
 
 public static class DaoFactoryExtension
@@ -88,6 +93,8 @@ public static class DaoFactoryExtension
 
         services.TryAdd<ITagDao<int>, TagDao>();
         services.TryAdd<ITagDao<string>, ThirdPartyTagDao>();
+
+        services.TryAdd<IBoardRoleDao<int>, BoardRoleDao>();
 
         services.TryAdd<ILinkDao, LinkDao>();
 

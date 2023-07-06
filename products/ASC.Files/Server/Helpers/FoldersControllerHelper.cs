@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+
+using ASC.Files.Core.Core.Entries;
+
 namespace ASC.Files.Helpers;
 
 public class FoldersControllerHelper : FilesHelperBase
@@ -74,9 +77,9 @@ public class FoldersControllerHelper : FilesHelperBase
         return await _folderDtoHelper.GetAsync(folder);
     }
 
-    public async Task<FolderDto<T>> CreateBoardAsync<T>(T folderId, string title)
+    public async Task<FolderDto<T>> CreateBoardAsync<T>(T folderId, string title, IEnumerable<BoardRole> boardRoles)
     {
-        var folder = await _fileStorageService.CreateNewBoardAsync(folderId, title);
+        var folder = await _fileStorageService.CreateNewBoardAsync(folderId, title, boardRoles);
 
         return await _folderDtoHelper.GetAsync(folder);
     }

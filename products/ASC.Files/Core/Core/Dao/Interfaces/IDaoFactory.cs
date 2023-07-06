@@ -35,5 +35,6 @@ public interface IDaoFactory
     IFileDao<T> GetFileDao<T>();
     ITagDao<T> GetTagDao<T>();
     ISecurityDao<T> GetSecurityDao<T>();
+    IBoardRoleDao<T> GetBoardRoleDao<T>();
     ILinkDao GetLinkDao();
 }

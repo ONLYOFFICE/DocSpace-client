@@ -484,14 +484,14 @@ public class FileStorageService //: IFileStorageService
 
         return await InternalCreateNewFolderAsync(parentId, title);
     }
-    public async Task<Folder<T>> CreateNewBoardAsync<T>(T parentId, string title)
+    public async Task<Folder<T>> CreateNewBoardAsync<T>(T parentId, string title, IEnumerable<BoardRole> boardRoles)
     {
         if (string.IsNullOrEmpty(title) || parentId == null)
         {
             throw new ArgumentException();
         }
 
-        return await CreateBoardAsync(title, parentId, false);
+        return await CreateBoardAsync(title, parentId, boardRoles);
     }
 
     public async Task<Folder<int>> CreateRoomAsync(string title, RoomType roomType, bool @private, IEnumerable<FileShareParams> share, bool notify, string sharingMessage)
@@ -601,9 +601,36 @@ public class FileStorageService //: IFileStorageService
     {
         return await InternalCreateNewFolderAsync(parentId, title, FolderType.EditingRoom, privacy);
     }
-    private async Task<Folder<T>> CreateBoardAsync<T>(string title, T parentId, bool privacy)
+    private async Task<Folder<T>> CreateBoardAsync<T>(string title, T parentId, IEnumerable<BoardRole> boardRoles)
     {
-        return await InternalCreateNewFolderAsync(parentId, title, FolderType.Board, privacy);
+        var board = await InternalCreateNewFolderAsync(parentId, title, FolderType.Board, false);
+
+        var tagDao = _daoFactory.GetTagDao<T>();
+        var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
+        var boardRolesDb = new List<BoardRole>();
+
+
+        foreach (var role in boardRoles)
+        {
+            var tagInfo = new TagInfo
+            {
+                Name = role.Title,
+                Owner = Guid.Empty,
+                Type = TagType.Role
+            };
+
+            var tag = await tagDao.SaveTagInfoAsync(tagInfo);
+            if (board is FileEntry<int> internalEntry)
+            {
+                role.BoardId = internalEntry.Id;
+                role.RoleId = tag.Id;
+                boardRolesDb.Add(role);
+            }
+        }
+
+        await boardRolesDao.SaveBoardRoleAsync(boardRolesDb);
+
+        return board;
     }
 
     private async ValueTask<Folder<T>> InternalCreateNewFolderAsync<T>(T parentId, string title, FolderType folderType = FolderType.DEFAULT, bool privacy = false)

@@ -42,6 +42,7 @@ public class FilesDbContext : DbContext
     public DbSet<DbFilesProperties> FilesProperties { get; set; }
     public DbSet<DbTenant> Tenants { get; set; }
     public DbSet<FilesConverts> FilesConverts { get; set; }
+    public DbSet<DbFilesBoardRole> FilesBoardRole { get; set; }
 
     public FilesDbContext(DbContextOptions<FilesDbContext> dbContextOptions) : base(dbContextOptions) { }
 
@@ -62,6 +63,7 @@ public class FilesDbContext : DbContext
             .AddDbFilesLink()
             .AddDbFilesProperties()
             .AddDbTenant()
+            .AddDbFilesBoardRole()
             .AddFilesConverts();
     }
 }

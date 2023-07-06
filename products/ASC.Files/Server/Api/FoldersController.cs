@@ -103,9 +103,9 @@ public abstract class FoldersController<T> : ApiControllerBase
     /// <param name="title">Title of new board</param>
     /// <returns>New board contents</returns>
     [HttpPost("folder/board/{folderId}")]
-    public async Task<FolderDto<T>> CreateBoardAsync(T folderId, CreateFolderRequestDto inDto)
+    public async Task<FolderDto<T>> CreateBoardAsync(T folderId, CreateBoardRequestDto<T> inDto)
     {
-        return await _foldersControllerHelper.CreateBoardAsync(folderId, inDto.Title);
+        return await _foldersControllerHelper.CreateBoardAsync(folderId, inDto.Title, inDto.BoardRoles);
     }
 
     /// <summary>

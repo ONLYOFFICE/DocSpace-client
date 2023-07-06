@@ -10,8 +10,6 @@ export default ListProps;
 
 export interface ListRowProps {
   sectionWidth: number;
-  isActive: boolean;
-  isChecked: boolean;
   role: IRole;
   theme?: ThemeType;
 }

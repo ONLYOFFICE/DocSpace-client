@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
@@ -19,8 +19,36 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 
-function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
+function Dashboard({
+  viewAs,
+  roles,
+  setViewAs,
+  clearSelectedRoleMap,
+  clearBufferSelectionRole,
+  userID,
+}: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
+
+  const onMouseDownOutSide = useCallback((event: MouseEvent) => {
+    if (
+      !(event.target instanceof HTMLElement) ||
+      !event.target.classList.contains("section-wrapper")
+    ) {
+      return;
+    }
+    clearSelectedRoleMap();
+    clearBufferSelectionRole();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDownOutSide);
+
+    return () => {
+      clearSelectedRoleMap();
+      clearBufferSelectionRole();
+      window.removeEventListener("mousedown", onMouseDownOutSide);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     if (viewAs === "dashboard") return;
@@ -71,7 +99,7 @@ function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
   }
 
   if (viewAs === "table") {
-    return <Table roles={roles} />;
+    return <Table sectionWidth={sectionWidth} roles={roles} userID={userID} />;
   }
 
   if (isMobile) {
@@ -93,7 +121,13 @@ function Dashboard({ viewAs, roles, setViewAs }: DashboardProps) {
 
 export default inject<StoreType>(
   ({ dashboardStore, filesStore, clientLoadingStore, auth }) => {
-    const { viewAs, setViewAs, roles } = dashboardStore;
+    const {
+      viewAs,
+      setViewAs,
+      roles,
+      clearSelectedRoleMap,
+      clearBufferSelectionRole,
+    } = dashboardStore;
     const { isInit, isLoadingFilesFind } = filesStore;
     const { firstLoad, showBodyLoader } = clientLoadingStore;
 
@@ -104,11 +138,16 @@ export default inject<StoreType>(
       firstLoad ||
       !isInit;
 
+    const userID = (auth.userStore as any).user.id;
+
     return {
       viewAs,
       setViewAs,
       roles,
       isLoading,
+      clearSelectedRoleMap,
+      clearBufferSelectionRole,
+      userID,
     };
   }
 )(observer(withDashboardLoader(Dashboard)));

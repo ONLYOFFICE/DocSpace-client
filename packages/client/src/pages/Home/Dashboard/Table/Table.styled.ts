@@ -1,7 +1,81 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import TableRow from "@docspace/components/table-container/TableRow";
+import TableContainer from "@docspace/components/table-container";
 
 import NoUserSelect from "@docspace/components/utils/commonStyles";
+
+const marginCss = css`
+  margin-top: -1px;
+  border-top: ${(props) =>
+    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+`;
+
+const userNameCss = css`
+  margin-left: -24px;
+  padding-left: 24px;
+  ${marginCss}
+`;
+
+const contextCss = css`
+  margin-right: -20px;
+  padding-right: 18px;
+  ${marginCss}
+`;
+
+export const StyledTableContainer = styled(TableContainer)`
+  .table-row-selected {
+    .table-container_role-name-cell {
+      ${userNameCss}
+    }
+
+    .table-container_row-context-menu-wrapper {
+      ${contextCss}
+    }
+  }
+
+  .table-row-selected + .table-row-selected {
+    .table-row {
+      .table-container_role-name-cell,
+      .table-container_row-context-menu-wrapper {
+        margin-top: -1px;
+        border-image-slice: 1;
+        border-top: 1px solid;
+      }
+      .table-container_role-name-cell {
+        ${userNameCss}
+        border-left: 0; //for Safari macOS
+        border-right: 0; //for Safari macOS
+
+        border-image-source: ${(props) => `linear-gradient(to right, 
+          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+      }
+      .table-container_row-context-menu-wrapper {
+        ${contextCss}
+
+        border-image-source: ${(props) => `linear-gradient(to left,
+          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+      }
+    }
+  }
+
+  .role-item:not(.table-row-selected) + .table-row-selected {
+    .table-row {
+      .table-container_role-name-cell {
+        ${userNameCss}
+      }
+
+      .table-container_row-context-menu-wrapper {
+        ${contextCss}
+      }
+
+      .table-container_role-name-cell,
+      .table-container_row-context-menu-wrapper {
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+      }
+    }
+  }
+`;
 
 export const TableRowContainer = styled.div`
   display: contents;

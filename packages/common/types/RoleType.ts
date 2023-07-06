@@ -1,5 +1,6 @@
 import { ContextMenuModel } from "@docspace/components/types";
 import { RoleTypeEnum } from "../enums/RoleType.enum";
+import { IRole } from "../Models";
 
 export type RoleTypeOwn = {
   id: number;
@@ -9,7 +10,11 @@ export type RoleTypeOwn = {
   badge: number;
   onClickBadge?: VoidFunction;
   getOptions: () => ContextMenuModel[];
+  onContentRowCLick: (role: IRole, checked: boolean) => void;
   color?: string;
+
+  isChecked: boolean;
+  onChecked: (role: RoleType, checked: boolean) => void;
 };
 
 export interface RoleDefaultType extends RoleTypeOwn {

@@ -23,9 +23,12 @@ const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
 
 class DashboardStore {
+  private _roles: FillQueue[] = [];
+
   public viewAs!: string;
   public dashboard?: IDashboard;
-  private _roles: FillQueue[] = [];
+  public SelectedRolesMap: Map<number, IRole> = new Map();
+  public BufferSelectionRole?: IRole;
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -102,19 +105,33 @@ class DashboardStore {
     window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
   };
 
+  private setBufferSelection = (role: IRole, checked: boolean) => {
+    this.BufferSelectionRole = role;
+    this.SelectedRolesMap.clear();
+
+    if (checked) this.SelectedRolesMap.set(role.id, role);
+  };
+
   //#endregion
 
   //#region getter
 
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
+      const general = {
+        getOptions: () => [],
+        onClickBadge: () => {},
+        onChecked: this.selectedRole,
+        onContentRowCLick: this.setBufferSelection,
+        isChecked: this.SelectedRolesMap.has(role.id),
+      };
+
       if (role.type === RoleTypeEnum.Default) {
         const defaultRole: RoleDefaultType = {
           ...role,
-          getOptions: () => [],
+          ...general,
           onClickLocation: (roomId: string | number) =>
             this.gotoRole(role.id, roomId),
-          onClickBadge: () => {},
         };
 
         return defaultRole;
@@ -122,8 +139,7 @@ class DashboardStore {
 
       const doneOrInterruptedRole: RoleDoneType | RoleInterruptedType = {
         ...role,
-        getOptions: () => [],
-        onClickBadge: () => {},
+        ...general,
       };
 
       return doneOrInterruptedRole;
@@ -135,6 +151,19 @@ class DashboardStore {
 
   //#region public method
 
+  public selectedRole = (role: IRole, checked: boolean): void => {
+    if (checked) this.SelectedRolesMap.set(role.id, role);
+    else this.SelectedRolesMap.delete(role.id);
+  };
+
+  public clearSelectedRoleMap = (): void => {
+    this.SelectedRolesMap.clear();
+  };
+
+  public clearBufferSelectionRole = (): void => {
+    this.BufferSelectionRole = undefined;
+  };
+
   public setViewAs = (viewAs: string): void => {
     console.log("DashboardStore setViewAs", viewAs);
 
@@ -142,11 +171,11 @@ class DashboardStore {
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
   };
 
-  public setRoles = (roles: FillQueue[]) => {
+  public setRoles = (roles: FillQueue[]): void => {
     this._roles = roles;
   };
 
-  public setDashboard = (dashboard: IDashboard) => {
+  public setDashboard = (dashboard: IDashboard): void => {
     this.dashboard = dashboard;
   };
 

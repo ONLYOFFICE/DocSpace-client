@@ -14,14 +14,9 @@ import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
 import { ListRowProps } from "./List.props";
 import { StoreType, ParamType } from "../types";
+import { IRole } from "@docspace/common/Models";
 
-function ListRow({
-  role,
-  theme,
-  isActive,
-  isChecked,
-  sectionWidth,
-}: ListRowProps) {
+function ListRow({ role, theme, sectionWidth }: ListRowProps) {
   const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
 
@@ -44,15 +39,21 @@ function ListRow({
     [role.type, role.color]
   );
 
-  const onSelect = (checked: boolean, role: any) => {
-    console.log("onSelect", { checked, role });
+  const onSelect = (checked: boolean, role: IRole) => {
+    role.onChecked(role, checked);
   };
+
+  const onRowClick = () => {
+    role.onContentRowCLick(role, !role.isChecked);
+  };
+
+  const contextOptions = role.getOptions();
 
   return (
     <div
       className={
         classNames("row-wrapper", {
-          ["row-selected"]: isChecked || isActive,
+          ["row-selected"]: role.isChecked,
         }) as string
       }
     >
@@ -61,12 +62,13 @@ function ListRow({
           data={role}
           mode="modern"
           element={element}
-          checked={isChecked}
-          isActive={isActive}
           className="role-row"
+          isActive={false}
+          checked={role.isChecked}
           sectionWidth={sectionWidth}
           onSelect={onSelect}
-          contextOptions={[{ key: "Separator", isSeparator: true }]}
+          onRowClick={onRowClick}
+          contextOptions={contextOptions}
         >
           <RoleRowContent
             isMobile={isMobile}

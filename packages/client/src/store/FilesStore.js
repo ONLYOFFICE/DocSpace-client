@@ -2851,8 +2851,6 @@ class FilesStore {
       };
     });
 
-    console.log({ newItem });
-
     return newItem;
   }
 
@@ -2904,8 +2902,6 @@ class FilesStore {
     if (hasFiles) cbMenu.push(FilterType.FilesOnly);
 
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
-
-    console.log({ cbMenu });
 
     return cbMenu;
   }

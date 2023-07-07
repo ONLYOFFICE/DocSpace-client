@@ -31,6 +31,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
+  isDashboard = false;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -140,6 +141,7 @@ class SelectedFolderStore {
 
       for (let key of selectedFolderItems) {
         if (key in this) {
+          console.log({ key, selectedFolder, selectedFolderItems });
           this[key] = selectedFolder[key];
         }
       }

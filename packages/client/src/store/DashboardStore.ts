@@ -82,6 +82,7 @@ class DashboardStore {
       ...dashboard.current,
       pathParts: dashboard.pathParts,
       navigationPath: navigationPath,
+      isDashboard: true,
       ...{ new: dashboard.new },
     });
 
@@ -119,7 +120,7 @@ class DashboardStore {
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
       const general = {
-        getOptions: () => [],
+        contextOptions: [],
         onClickBadge: () => {},
         onChecked: this.selectedRole,
         onContentRowCLick: this.setBufferSelection,

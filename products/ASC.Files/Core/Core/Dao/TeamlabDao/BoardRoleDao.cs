@@ -67,14 +67,29 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
 
     public async IAsyncEnumerable<BoardRole> GetBoardRolesAsync(int boardId)
     {
-        var result = new BoardRole();
-        yield return result;
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var sqlQuery = Query(filesDbContext.FilesBoardRole)
+                   .Where(r => r.BoardId == boardId);
+
+        await foreach (var e in sqlQuery.AsAsyncEnumerable())
+        {
+            yield return ToBoardRole(e);
+        }
+
     }
 
     public async Task<BoardRole> GetBoardRoleAsync(int boardId, int roleId)
     {
-        var result = new BoardRole();
-        return result;
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var sqlQuery = Query(filesDbContext.FilesBoardRole)
+                   .Where(r => r.BoardId == boardId)
+                   .Where(r => r.RoleId == roleId);
+
+        var r = await sqlQuery.Take(1).SingleOrDefaultAsync();
+
+        return ToBoardRole(r);
     }
 
     public async Task<IEnumerable<BoardRole>> SaveBoardRoleAsync(IEnumerable<BoardRole> boarRoles)
@@ -125,6 +140,13 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
         await filesDbContext.SaveChangesAsync();
 
         return _mapper.Map<DbFilesBoardRole, BoardRole>(boardRoleResult.Entity);
+    }
+
+    protected BoardRole ToBoardRole(DbFilesBoardRole r)
+    {
+        var result = _mapper.Map<DbFilesBoardRole, BoardRole>(r);
+
+        return result;
     }
 
 }

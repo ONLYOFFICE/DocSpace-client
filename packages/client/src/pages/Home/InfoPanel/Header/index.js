@@ -53,7 +53,7 @@ const InfoPanelHeaderContent = (props) => {
     !isGallery &&
     !isAccounts &&
     !isTrash &&
-    !selection.isDashboard;
+    !selection?.isDashboard;
 
   useEffect(() => {
     checkWidth();

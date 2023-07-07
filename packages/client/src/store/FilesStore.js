@@ -1626,7 +1626,7 @@ class FilesStore {
   getFilesContextOptions = (item) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isBoard = item.type === FolderType.Dashboard;
+    const isBoard = item.type === FolderType.Dashboard || item.isDashboard;
 
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;

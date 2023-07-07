@@ -35,6 +35,17 @@ const ItemTitle = ({
       <GalleryItemTitle gallerySelected={gallerySelected} getIcon={getIcon} />
     );
 
+  if (selection?.isDashboard) {
+    return (
+      <FilesItemTitle
+        getIcon={getIcon}
+        selection={selection}
+        selectionLength={selectionLength}
+        isSeveralItems={isSeveralItems}
+      />
+    );
+  }
+
   const filesItemSelection =
     isRooms &&
     !isSeveralItems &&

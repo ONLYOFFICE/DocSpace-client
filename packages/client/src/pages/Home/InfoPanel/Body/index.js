@@ -66,6 +66,7 @@ const InfoPanelBodyContent = ({
     if (isSeveralItems) return viewHelper.SeveralItemsView();
     if (isGallery) return viewHelper.GalleryView();
     if (isAccounts) return viewHelper.AccountsView();
+    if (selection.isDashboard) return viewHelper.DetailsView();
 
     switch (isRooms ? roomsView : fileView) {
       case "info_members":

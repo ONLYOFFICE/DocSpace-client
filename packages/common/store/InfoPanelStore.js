@@ -205,6 +205,17 @@ class InfoPanelStore {
   // Icon helpers //
 
   getInfoPanelItemIcon = (item, size) => {
+    if (item.isDashboard)
+      return this.settingsStore.getIcon(
+        size,
+        null,
+        null,
+        null,
+        item.roomType,
+        true,
+        true
+      );
+
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? this.settingsStore.getIcon(

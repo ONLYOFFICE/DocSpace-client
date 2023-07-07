@@ -113,39 +113,42 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    return (this.item.isRoom
-      ? [
-          "Owner",
-          this.item.providerKey && "Storage Type",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          this.item.tags.length && "Tags",
-        ]
-      : this.item.isFolder
-      ? [
-          "Owner",
-          //"Location",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-        ]
-      : [
-          "Owner",
-          //"Location",
-          "Type",
-          "File extension",
-          "Size",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          "Versions",
-          "Comments",
-        ]
+    return (
+      this.item.isRoom
+        ? [
+            "Owner",
+            this.item.providerKey && "Storage Type",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            this.item.tags.length && "Tags",
+          ]
+        : this.item.isFolder
+        ? [
+            "Owner",
+            //"Location",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+          ]
+        : this.item.isDashboard
+        ? ["Owner", "Content", "Type", "Creation date"]
+        : [
+            "Owner",
+            //"Location",
+            "Type",
+            "File extension",
+            "Size",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            "Versions",
+            "Comments",
+          ]
     ).filter((nP) => !!nP);
   };
 
@@ -241,7 +244,7 @@ class DetailsHelper {
     return text(
       this.item.isRoom
         ? getDefaultRoomName(this.item.roomType, this.t)
-        : getFileTypeName(this.item.fileType)
+        : getFileTypeName(this.item.fileType, this.item.isDashboard)
     );
   };
 

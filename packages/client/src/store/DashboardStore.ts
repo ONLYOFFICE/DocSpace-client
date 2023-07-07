@@ -4,21 +4,31 @@ import SelectedFolderStore from "./SelectedFolderStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
 import { FolderType } from "@docspace/common/constants";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl, isDefaultRole } from "@docspace/common/utils";
 
 import config from "PACKAGE_FILE";
 import api from "@docspace/common/api";
 
-import type { IDashboard } from "@docspace/common/Models";
-import type { Folder as FolderInfoType } from "@docspace/common/types";
+import type { IDashboard, IRole } from "@docspace/common/Models";
+import type {
+  FillQueue,
+  Folder as FolderInfoType,
+  RoleDefaultType,
+  RoleDoneType,
+  RoleInterruptedType,
+} from "@docspace/common/types";
+import { RoleTypeEnum } from "@docspace/common/enums";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
 
 class DashboardStore {
+  private _roles: FillQueue[] = [];
+
   public viewAs!: string;
-  public boards: unknown[] = [];
   public dashboard?: IDashboard;
+  public SelectedRolesMap: Map<number, IRole> = new Map();
+  public BufferSelectionRole?: IRole;
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -27,6 +37,8 @@ class DashboardStore {
     makeAutoObservable(this);
     this.initViewAs();
   }
+
+  //#region private method
 
   private initViewAs = (): void => {
     const viewAs =
@@ -64,7 +76,6 @@ class DashboardStore {
     ).then((res) => {
       return res.slice(0, -1).reverse();
     });
-    console.log({ navigationPath, dashboard });
 
     this.selectedFolderStore.setSelectedFolder({
       folders: dashboard.folders,
@@ -77,6 +88,82 @@ class DashboardStore {
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
+  private getRolesContextOptions = (type: RoleTypeEnum) => {
+    switch (type) {
+      case RoleTypeEnum.Default:
+        return [];
+
+      case RoleTypeEnum.Done:
+        return ["link-for-room-members", "download"];
+
+      case RoleTypeEnum.Interrupted:
+        return [];
+    }
+  };
+
+  private gotoRole = (id: string | number, roodId: string | number) => {
+    window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
+  };
+
+  private setBufferSelection = (role: IRole, checked: boolean) => {
+    this.BufferSelectionRole = role;
+    this.SelectedRolesMap.clear();
+
+    if (checked) this.SelectedRolesMap.set(role.id, role);
+  };
+
+  //#endregion
+
+  //#region getter
+
+  public get roles(): IRole[] {
+    const roles = this._roles.map<IRole>((role) => {
+      const general = {
+        getOptions: () => [],
+        onClickBadge: () => {},
+        onChecked: this.selectedRole,
+        onContentRowCLick: this.setBufferSelection,
+        isChecked: this.SelectedRolesMap.has(role.id),
+      };
+
+      if (role.type === RoleTypeEnum.Default) {
+        const defaultRole: RoleDefaultType = {
+          ...role,
+          ...general,
+          onClickLocation: (roomId: string | number) =>
+            this.gotoRole(role.id, roomId),
+        };
+
+        return defaultRole;
+      }
+
+      const doneOrInterruptedRole: RoleDoneType | RoleInterruptedType = {
+        ...role,
+        ...general,
+      };
+
+      return doneOrInterruptedRole;
+    });
+
+    return roles;
+  }
+  //#endregion
+
+  //#region public method
+
+  public selectedRole = (role: IRole, checked: boolean): void => {
+    if (checked) this.SelectedRolesMap.set(role.id, role);
+    else this.SelectedRolesMap.delete(role.id);
+  };
+
+  public clearSelectedRoleMap = (): void => {
+    this.SelectedRolesMap.clear();
+  };
+
+  public clearBufferSelectionRole = (): void => {
+    this.BufferSelectionRole = undefined;
+  };
+
   public setViewAs = (viewAs: string): void => {
     console.log("DashboardStore setViewAs", viewAs);
 
@@ -84,11 +171,11 @@ class DashboardStore {
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
   };
 
-  public setBoards(boards: unknown[]) {
-    this.boards = boards;
-  }
+  public setRoles = (roles: FillQueue[]): void => {
+    this._roles = roles;
+  };
 
-  public setDashboard = (dashboard: IDashboard) => {
+  public setDashboard = (dashboard: IDashboard): void => {
     this.dashboard = dashboard;
   };
 
@@ -97,8 +184,10 @@ class DashboardStore {
   ): Promise<IDashboard> => {
     try {
       const dashboard: IDashboard = await api.files.getDashboard(fileId);
-      console.log({ dashboard });
+
+      this.setRoles(dashboard.current.fillQueue);
       this.setDashboard(dashboard);
+
       await this.settingUpNavigationPath(dashboard);
 
       return dashboard;
@@ -107,20 +196,7 @@ class DashboardStore {
     }
   };
 
-  public getUrlToBoard(folderId: number) {
-    const proxyURL =
-      window.DocSpaceConfig?.proxy?.url || window.location.origin;
-
-    const homepage = config?.homepage ?? "";
-
-    return combineUrl(
-      proxyURL,
-      homepage,
-      "rooms/shared",
-      folderId.toString(),
-      "dashboard"
-    );
-  }
+  //#endregion
 }
 
 export default DashboardStore;

@@ -61,11 +61,6 @@ const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
-const dashboardStore = new DashboardStore(
-  selectedFolderStore,
-  clientLoadingStore
-);
-
 const filesStore = new FilesStore(
   authStore,
   selectedFolderStore,
@@ -73,7 +68,6 @@ const filesStore = new FilesStore(
   settingsStore,
   thirdPartyStore,
   accessRightsStore,
-  dashboardStore,
   clientLoadingStore
 );
 
@@ -178,6 +172,11 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore();
+
+const dashboardStore = new DashboardStore(
+  selectedFolderStore,
+  clientLoadingStore
+);
 
 const store = {
   auth: authStore,

@@ -1,22 +1,24 @@
-export interface IconOwn {
-  size: "small" | "medium";
-  roleType: RoleType;
-}
+import type { IconSizeType } from "../types";
+import type {} from "@docspace/common/Models";
+import { RoleTypeEnum } from "@docspace/common/enums";
 
-export interface IconDefaultProps extends IconOwn {
+export type IconProps = {
+  size: IconSizeType;
+  type: RoleTypeEnum;
+  color?: string;
+};
+
+export interface IconDefaultProps extends IconProps {
   color: string;
+  type: RoleTypeEnum.Default;
 }
-
-export interface IconDoneProps extends IconOwn {
-  color?: never;
+export interface IconDoneProps extends IconProps {
+  color?: undefined;
+  type: RoleTypeEnum.Done;
 }
-export interface IconInterruptedProps extends IconOwn {
-  color?: never;
+export interface IconInterruptedProps extends IconProps {
+  color?: undefined;
+  type: RoleTypeEnum.Interrupted;
 }
-
-export type DefaultIconProps = Pick<IconDefaultProps, "color" | "size">;
-export type RoleType = "default" | "done" | "interrupted";
-
-type IconProps = IconDefaultProps | IconDoneProps | IconInterruptedProps;
 
 export default IconProps;

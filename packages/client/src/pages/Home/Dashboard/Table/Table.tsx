@@ -1,31 +1,29 @@
 import { useState, useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import TableContainer from "@docspace/components/table-container";
 import TableHeader from "@docspace/components/table-container/TableHeader";
 import TableBody from "@docspace/components/table-container/TableBody";
 
 import TableRow from "./TableRow";
 import TableProps from "./Table.porps";
 import { TableColumnType } from "../types";
+import { StyledTableContainer } from "./Table.styled";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `boardTableColumns_ver=${TABLE_VERSION}`;
 const TABLE_COLUMNS_SIZE = `boardTableColumnsSize_ver=${TABLE_VERSION}`;
 
-const userId = 1;
-
-function Table({ roles }: TableProps) {
+function Table({ roles, sectionWidth, userID }: TableProps) {
   const { t } = useTranslation();
 
   const tableLocalStorageKey = useMemo(
-    () => `${TABLE_COLUMNS}=${userId}`,
-    [userId]
+    () => `${TABLE_COLUMNS}=${userID}`,
+    [userID]
   );
 
   const tableSizeLocalStorageKey = useMemo(
-    () => `${TABLE_COLUMNS_SIZE}=${userId}`,
-    [userId]
+    () => `${TABLE_COLUMNS_SIZE}=${userID}`,
+    [userID]
   );
 
   const containerRef = useRef();
@@ -91,7 +89,7 @@ function Table({ roles }: TableProps) {
   });
 
   return (
-    <TableContainer useReactWindow forwardedRef={containerRef}>
+    <StyledTableContainer useReactWindow forwardedRef={containerRef}>
       <TableHeader
         sorted
         sortBy={"AZ"}
@@ -102,7 +100,7 @@ function Table({ roles }: TableProps) {
         containerRef={containerRef}
         columnStorageName={tableSizeLocalStorageKey}
         // columnInfoPanelStorageName={columnInfoPanelStorageName}
-        // sectionWidth={sectionWidth}
+        sectionWidth={sectionWidth}
         infoPanelVisible={false}
         // setHideColumns={setHideColumns}
       />
@@ -113,22 +111,14 @@ function Table({ roles }: TableProps) {
         columnStorageName={tableSizeLocalStorageKey}
         fetchMoreFiles={() => {}}
         hasMoreFiles={false}
-        itemCount={3}
-        filesLength={3}
+        itemCount={roles.length}
+        filesLength={roles.length}
       >
         {roles.map((role) => (
-          <TableRow
-            id={role.id}
-            key={role.id}
-            title={role.title}
-            queue={role.queue}
-            color={role.color}
-            badge={role.badge}
-            roleType={role.roleType}
-          />
+          <TableRow key={role.id} role={role} />
         ))}
       </TableBody>
-    </TableContainer>
+    </StyledTableContainer>
   );
 }
 

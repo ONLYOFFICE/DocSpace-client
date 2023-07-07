@@ -3,7 +3,7 @@ import { ComponentMeta } from "@storybook/react";
 
 import Column from "./Column";
 import Card from "../Card";
-import ColumnProps from "./Column.props";
+import { ColumnProps } from "./Column.props";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";

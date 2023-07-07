@@ -167,7 +167,11 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
   }
 };
 
-export const getCategoryUrl = (categoryType, folderId = null) => {
+export const getCategoryUrl = (
+  categoryType,
+  folderId = null,
+  boardId = null
+) => {
   const cType = categoryType;
 
   switch (cType) {
@@ -201,7 +205,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     case CategoryType.Settings:
       return "/settings/common";
     case CategoryType.Dashboard:
-      return `/rooms/shared/${folderId}/dashboard/filter`;
+      return `/rooms/shared/${folderId}/dashboard/${boardId}/filter`;
     default:
       throw new Error("Unknown category type");
   }

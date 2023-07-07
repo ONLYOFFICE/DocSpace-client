@@ -1,8 +1,8 @@
-import React, { useRef, useCallback } from "react";
-import Checkbox from "../checkbox";
-import ContextMenu from "../context-menu";
-import ContextMenuButton from "../context-menu-button";
-import Loaders from "@docspace/common/components/Loaders";
+import { useRef, useCallback } from "react";
+import Checkbox from "@docspace/components//checkbox";
+import ContextMenu from "@docspace/components/context-menu";
+import ContextMenuButton from "@docspace/components/context-menu-button";
+import Loaders from "../Loaders";
 import {
   CardAvatar,
   CardAvatarWrapper,

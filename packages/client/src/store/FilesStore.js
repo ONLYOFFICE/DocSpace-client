@@ -52,7 +52,6 @@ class FilesStore {
   treeFoldersStore;
   filesSettingsStore;
   thirdPartyStore;
-  dashboardStore;
   clientLoadingStore;
 
   accessRightsStore;
@@ -75,6 +74,7 @@ class FilesStore {
 
   files = [];
   folders = [];
+  boards = [];
 
   selection = [];
   bufferSelection = null;
@@ -138,7 +138,6 @@ class FilesStore {
     filesSettingsStore,
     thirdPartyStore,
     accessRightsStore,
-    dashboardStore,
     clientLoadingStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
@@ -152,7 +151,6 @@ class FilesStore {
     this.filesSettingsStore = filesSettingsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.accessRightsStore = accessRightsStore;
-    this.dashboardStore = dashboardStore;
     this.clientLoadingStore = clientLoadingStore;
 
     this.roomsController = new AbortController();
@@ -286,7 +284,6 @@ class FilesStore {
   debounceRemoveFolders = debounce(() => {
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
-  
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
@@ -494,9 +491,9 @@ class FilesStore {
     }
   };
 
-  setCategoryType = (categoryType)=>{
-    this.categoryType = categoryType
-  }
+  setCategoryType = (categoryType) => {
+    this.categoryType = categoryType;
+  };
 
   setIsErrorRoomNotAvailable = (state) => {
     this.isErrorRoomNotAvailable = state;
@@ -753,6 +750,10 @@ class FilesStore {
     this.selected = "close";
   };
 
+  setBoards = (boards) => {
+    this.boards = boards;
+  };
+
   setFiles = (files) => {
     const { socketHelper } = this.authStore.settingsStore;
     if (files.length === 0 && this.files.length === 0) return;
@@ -885,7 +886,9 @@ class FilesStore {
       case "all":
         return true;
       case FilterType.FoldersOnly.toString():
-        return file.parentId;
+        return file.isFolder;
+      case FilterType.BoardsOnly.toString():
+        return file.isDashboard;
       case FilterType.DocumentsOnly.toString():
         return type === FileType.Document;
       case FilterType.PresentationsOnly.toString():
@@ -1271,10 +1274,10 @@ class FilesStore {
 
           const [dashboards, folders] = partition(
             data.folders,
-            (folder) => folder?.type === 22
+            (folder) => folder?.type === FolderType.Dashboard
           );
 
-          this.dashboardStore.setBoards(dashboards);
+          this.setBoards(dashboards);
 
           this.setFolders(isPrivacyFolder && isMobile ? [] : folders);
           this.setFiles(isPrivacyFolder && isMobile ? [] : data.files);
@@ -1503,7 +1506,7 @@ class FilesStore {
               this.setIsEmptyPage(isEmptyList);
             }
 
-            this.dashboardStore.setBoards([]);
+            this.setBoards([]);
             this.setFolders(data.folders);
             this.setFiles([]);
           });
@@ -1623,7 +1626,7 @@ class FilesStore {
   getFilesContextOptions = (item) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isBoard = item.type === FolderType.Dashboard;
+    const isBoard = item.type === FolderType.Dashboard || item.isDashboard;
 
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
@@ -1683,7 +1686,6 @@ class FilesStore {
         //"open",
         "select",
         "show-filling-status",
-        "open-board",
         "fill-form",
         "edit",
         "preview",
@@ -1757,7 +1759,6 @@ class FilesStore {
 
       if (!(shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
-        fileOptions = this.removeOptions(fileOptions, ["open-board"]);
         fileOptions = this.removeOptions(fileOptions, ["show-filling-status"]);
       }
 
@@ -2015,7 +2016,20 @@ class FilesStore {
 
       return roomOptions;
     } else if (isBoard) {
-      return ["open-board", "link-for-room-members", "show-info"];
+      let borderOptions = [
+        "open-board",
+        "link-for-room-members",
+        "show-info",
+        "download",
+        "separator1",
+        "delete",
+      ];
+
+      if (!canDelete) {
+        borderOptions = this.removeOptions(borderOptions, ["delete"]);
+      }
+
+      return borderOptions;
     }
     {
       let folderOptions = [
@@ -2503,14 +2517,14 @@ class FilesStore {
   }
 
   get isHeaderIndeterminate() {
-    const items = [...this.files, ...this.folders];
+    const items = [...this.files, ...this.folders, ...this.boards];
     return this.isHeaderVisible && this.selection.length
       ? this.selection.length < items.length
       : false;
   }
 
   get isHeaderChecked() {
-    const items = [...this.files, ...this.folders];
+    const items = [...this.files, ...this.folders, ...this.boards];
     return this.isHeaderVisible && this.selection.length === items.length;
   }
 
@@ -2610,6 +2624,21 @@ class FilesStore {
     }
   };
 
+  getUrlToBoard(folderId) {
+    const proxyURL =
+      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+
+    const homepage = config?.homepage ?? "";
+
+    return combineUrl(
+      proxyURL,
+      homepage,
+      "rooms/shared",
+      folderId.toString(),
+      "dashboard"
+    );
+  }
+
   get filesList() {
     const { getIcon } = this.filesSettingsStore;
     //return [...this.folders, ...this.files];
@@ -2623,7 +2652,7 @@ class FilesStore {
       return secondValue - firstValue;
     });
 
-    const items = [...newFolders, ...this.dashboardStore.boards, ...this.files];
+    const items = [...newFolders, ...this.boards, ...this.files];
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
@@ -2721,7 +2750,7 @@ class FilesStore {
       const href = isRecycleBinFolder
         ? null
         : isDashboard
-        ? this.dashboardStore.getUrlToBoard(id)
+        ? this.getUrlToBoard(id)
         : previewUrl
         ? previewUrl
         : !isFolder
@@ -2822,6 +2851,8 @@ class FilesStore {
       };
     });
 
+    console.log({ newItem });
+
     return newItem;
   }
 
@@ -2830,7 +2861,11 @@ class FilesStore {
       this.filesSettingsStore;
 
     let cbMenu = ["all"];
-    const filesItems = [...this.files, ...this.folders];
+    const filesItems = [...this.files, ...this.folders, ...this.boards];
+
+    if (this.boards.length) {
+      cbMenu.push(FilterType.BoardsOnly);
+    }
 
     if (this.folders.length) {
       for (const item of this.folders) {
@@ -2870,6 +2905,8 @@ class FilesStore {
 
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
 
+    console.log({ cbMenu });
+
     return cbMenu;
   }
 
@@ -2879,6 +2916,8 @@ class FilesStore {
         return t("All");
       case FilterType.FoldersOnly:
         return t("Translations:Folders");
+      case FilterType.BoardsOnly:
+        return t("Boards");
       case FilterType.DocumentsOnly:
         return t("Common:Documents");
       case FilterType.PresentationsOnly:
@@ -2915,6 +2954,8 @@ class FilesStore {
         return "selected-all";
       case FilterType.FoldersOnly:
         return "selected-only-folders";
+      case FilterType.BoardsOnly:
+        return "selected-only-boards";
       case FilterType.DocumentsOnly:
         return "selected-only-documents";
       case FilterType.PresentationsOnly:
@@ -3081,16 +3122,12 @@ class FilesStore {
   }
 
   get isEmptyFilesList() {
-    const filesList = [
-      ...this.files,
-      ...this.folders,
-      ...this.dashboardStore.boards,
-    ];
+    const filesList = [...this.files, ...this.folders, ...this.boards];
     return filesList.length <= 0;
   }
 
   get hasNew() {
-    const newFiles = [...this.files, ...this.folders].filter(
+    const newFiles = [...this.files, ...this.folders, ...this.boards].filter(
       (item) => (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew
     );
     return newFiles.length > 0;
@@ -3414,9 +3451,15 @@ class FilesStore {
       ? await api.rooms.getRooms(newFilter)
       : await api.files.getFolder(newFilter.folder, newFilter);
 
+    const [newdashboards, newfolders] = partition(
+      newFiles.folders,
+      (folder) => folder?.type === FolderType.Dashboard
+    );
+
     runInAction(() => {
       this.setFiles([...this.files, ...newFiles.files]);
-      this.setFolders([...this.folders, ...newFiles.folders]);
+      this.setFolders([...this.folders, ...newfolders]);
+      this.boards([...this.boards, ...newdashboards]);
       this.setFilesIsLoading(false);
     });
   };

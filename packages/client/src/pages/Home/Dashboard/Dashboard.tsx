@@ -1,27 +1,54 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import { isMobile, isMobileOnly } from "react-device-detect";
 
-import Column from "@docspace/components/Column";
-import Card from "@docspace/components/Card";
 import { Context } from "@docspace/components/utils/context";
+import Scrollbar from "@docspace/components/scrollbar";
+
+import withDashboardLoader from "SRC_DIR/HOCs/withDashboardLoader";
 
 import List from "./List";
 import Table from "./Table";
+import Board from "./Board";
 
-import { DashboardContainer } from "./Dashboard.styled";
-
-import TableProps from "./Table/Table.porps";
 import DashboardProps from "./Dashboard.props";
-
-import { ContextType, InjectType } from "./types";
+import { ContextType, StoreType } from "./types";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 
-function Dashboard({ viewAs, setViewAs }: DashboardProps) {
+function Dashboard({
+  viewAs,
+  roles,
+  setViewAs,
+  clearSelectedRoleMap,
+  clearBufferSelectionRole,
+  userID,
+}: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
+
+  const onMouseDownOutSide = useCallback((event: MouseEvent) => {
+    if (
+      !(event.target instanceof HTMLElement) ||
+      !event.target.classList.contains("section-wrapper")
+    ) {
+      return;
+    }
+    clearSelectedRoleMap();
+    clearBufferSelectionRole();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDownOutSide);
+
+    return () => {
+      clearSelectedRoleMap();
+      clearBufferSelectionRole();
+      window.removeEventListener("mousedown", onMouseDownOutSide);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     if (viewAs === "dashboard") return;
@@ -30,109 +57,6 @@ function Dashboard({ viewAs, setViewAs }: DashboardProps) {
 
     setViewAs(width < 1024 ? "row" : "table");
   }, [sectionWidth, viewAs]);
-
-  const columns = [
-    {
-      id: 1,
-      user: "@Anyone",
-      title: "Сотрудник",
-      color: "#a3c3fa",
-      cards: [
-        {
-          id: 1,
-          username: "Leo Dokidis",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 2,
-          username: "William White",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 3,
-          username: "Robert Coleman",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 4,
-          username: "John Dean",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 5,
-          username: "Anna Allen",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 6,
-          username: "James Chavez",
-          filename: "Заявление на отпуск",
-        },
-        {
-          id: 7,
-          username: "Geraldine Rodriguez",
-          filename: "Заявление на отпуск",
-        },
-      ],
-    },
-    {
-      id: 2,
-      user: "Irina Vikulova",
-      title: "Бухгалтер",
-      color: "#CBDFB7",
-    },
-    {
-      id: 3,
-      user: "Lev Bannov",
-      title: "Директор",
-      color: "#D2AFC6;",
-      badge: 1,
-      cards: [
-        {
-          id: 7,
-          username: "Linnik Sergey",
-          filename: "Заявление на отпуск",
-        },
-      ],
-    },
-  ];
-
-  const roles: TableProps["roles"] = [
-    {
-      id: 1,
-      title: "Сотрудник",
-      color: "#a3c3fa",
-      roleType: "default",
-      queue: "1",
-    },
-    {
-      id: 2,
-      title: "Бухгалтер",
-      color: "#CBDFB7",
-      roleType: "default",
-      queue: "2",
-      badge: 2,
-    },
-    {
-      id: 3,
-      title: "Директор",
-      color: "#D2AFC6",
-      roleType: "default",
-      queue: "3",
-    },
-    {
-      id: 4,
-      title: "Готовые",
-      queue: "Done",
-      roleType: "done",
-    },
-    {
-      id: 5,
-      title: "Отказ",
-      queue: "Interrupted",
-      roleType: "interrupted",
-    },
-  ];
 
   const getOptions = () => [
     {
@@ -175,50 +99,55 @@ function Dashboard({ viewAs, setViewAs }: DashboardProps) {
   }
 
   if (viewAs === "table") {
-    return <Table roles={roles} />;
+    return <Table sectionWidth={sectionWidth} roles={roles} userID={userID} />;
   }
 
-  return (
-    <DashboardContainer>
-      {columns.map(({ id, user, title, color, cards, badge }) => (
-        <Column key={id} user={user} title={title} color={color} badge={badge}>
-          {cards?.map((card) => (
-            <Card
-              key={card.id}
-              username={card.username}
-              filename={card.filename}
-            />
-          ))}
-        </Column>
-      ))}
+  if (isMobile) {
+    return (
+      //@ts-ignore
+      <Scrollbar
+        style={{
+          width: sectionWidth,
+          height: `calc(100vh  - ${isMobileOnly ? 255 : 155}px)`,
+        }}
+      >
+        <Board roles={roles} />
+      </Scrollbar>
+    );
+  }
 
-      <Column as="accepted" title="Готовые" getOptions={getOptions}>
-        {columns[0].cards?.map((card) => (
-          <Card
-            key={card.id}
-            username={card.username}
-            filename={card.filename}
-          />
-        ))}
-      </Column>
-      <Column as="cancelled" title="Отказы" getOptions={getOptions}>
-        {columns[0].cards?.map((card) => (
-          <Card
-            key={card.id}
-            username={card.username}
-            filename={card.filename}
-          />
-        ))}
-      </Column>
-    </DashboardContainer>
-  );
+  return <Board roles={roles} />;
 }
 
-export default inject<InjectType>(({ dashboardStore }) => {
-  const { viewAs, setViewAs } = dashboardStore;
+export default inject<StoreType>(
+  ({ dashboardStore, filesStore, clientLoadingStore, auth }) => {
+    const {
+      viewAs,
+      setViewAs,
+      roles,
+      clearSelectedRoleMap,
+      clearBufferSelectionRole,
+    } = dashboardStore;
+    const { isInit, isLoadingFilesFind } = filesStore;
+    const { firstLoad, showBodyLoader } = clientLoadingStore;
 
-  return {
-    viewAs,
-    setViewAs,
-  };
-})(observer(Dashboard));
+    const isLoading =
+      isLoadingFilesFind ||
+      showBodyLoader ||
+      !auth.isLoaded ||
+      firstLoad ||
+      !isInit;
+
+    const userID = (auth.userStore as any).user.id;
+
+    return {
+      viewAs,
+      setViewAs,
+      roles,
+      isLoading,
+      clearSelectedRoleMap,
+      clearBufferSelectionRole,
+      userID,
+    };
+  }
+)(observer(withDashboardLoader(Dashboard)));

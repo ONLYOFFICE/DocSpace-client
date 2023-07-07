@@ -8,6 +8,7 @@ const StatusFillingPanel = ({
   fileId,
   successAuth,
   onClose,
+  fileInfo,
   ...rest
 }) => {
   return (
@@ -22,6 +23,8 @@ const StatusFillingPanel = ({
         isVisible={isVisible}
         onClose={onClose}
         fileId={fileId}
+        fileInfo={fileInfo}
+        isEditor={true}
       />
     )) ||
     null

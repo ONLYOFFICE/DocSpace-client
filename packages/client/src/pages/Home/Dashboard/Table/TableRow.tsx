@@ -17,15 +17,30 @@ import Icon from "../Icon";
 
 import { TableRowProps } from "./Table.porps";
 import { ParamType } from "../types";
+import { classNames } from "@docspace/components/utils/classNames";
 
-function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
-  const { fileId } = useParams<ParamType>();
+function TableRow({ role }: TableRowProps) {
+  const {
+    queue,
+    title,
+    id,
+    type,
+    color,
+    badge,
+    isChecked,
+    onChecked,
+    getOptions,
+    onClickBadge,
+    onContentRowCLick,
+  } = role;
+
+  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => fileId && `/rooms/shared/${fileId}/dashboard/${id}`,
+    () => roomId && `/rooms/shared/${roomId}/role/${id}`,
 
-    [fileId, id]
+    [roomId, id]
   );
 
   const onClickLink = (event: MouseEvent) => {
@@ -37,12 +52,45 @@ function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("onChange", event);
+    onChecked(role, event.target.checked);
   };
 
+  const onRowClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (
+      !(event.target instanceof HTMLElement) ||
+      event.target.closest(".checkbox") ||
+      event.target.closest(".table-container_row-checkbox") ||
+      event.target.closest(".type-combobox") ||
+      event.target.closest(".paid-badge") ||
+      event.target.closest(".pending-badge") ||
+      event.target.closest(".disabled-badge") ||
+      event.detail === 0
+    ) {
+      return;
+    }
+
+    console.log("Ckick", { role, isChecked });
+
+    onContentRowCLick(role, !isChecked);
+  };
+
+  const contextOptions = getOptions();
+
   return (
-    <TableRowContainer id={id.toString()}>
-      <BoardTableRow contextOptions={[{ key: "Separator", isSeparator: true }]}>
+    <TableRowContainer
+      id={id.toString()}
+      className={
+        classNames("role-item", {
+          ["table-row-selected"]: isChecked,
+        }) as string
+      }
+    >
+      <BoardTableRow
+        className="table-row"
+        checked={isChecked}
+        contextOptions={contextOptions}
+        onClick={onRowClick}
+      >
         <TableCell
           className="table-container_role-name-cell"
           forwardedRef={undefined}
@@ -50,16 +98,16 @@ function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
           <TableCell
             hasAccess={true}
             className="table-container_row-checkbox-wrapper"
-            checked={false}
+            checked={isChecked}
             forwardedRef={undefined}
           >
             <div className="table-container_element">
-              <Icon size="small" roleType={roleType} color={color} />
+              <Icon size="small" type={type} color={color} />
             </div>
             <Checkbox
               className="table-container_row-checkbox"
               onChange={onChange}
-              isChecked={false}
+              isChecked={isChecked}
             />
           </TableCell>
 
@@ -85,6 +133,7 @@ function TableRow({ queue, title, id, roleType, color, badge }: TableRowProps) {
             lineHeight="12px"
             label={badge}
             borderRadius="100%"
+            onClick={onClickBadge}
           />
         </TableCell>
 

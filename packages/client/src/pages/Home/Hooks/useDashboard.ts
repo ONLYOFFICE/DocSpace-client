@@ -8,7 +8,7 @@ import type { IDashboard } from "@docspace/common/Models";
 
 type useDashboardProps = {
   isDashboardPage: boolean;
-  setIsLoading: (predicate: boolean) => void;
+  setIsLoading: (predicate: boolean, withTimer?: boolean) => void;
   fetchDashboard: (fileId: number | string) => Promise<IDashboard>;
   setCategoryType: (categoryType: number) => void;
 };
@@ -19,16 +19,14 @@ function useDashboard({
   fetchDashboard,
   setCategoryType,
 }: useDashboardProps) {
-  const { fileId } = useParams<ParamType>();
+  const { boardId } = useParams<ParamType>();
 
   useEffect(() => {
-    if (!isDashboardPage || !fileId) return;
+    if (!isDashboardPage || !boardId) return;
 
-    console.log("useDashboard fetching");
-
-    setIsLoading(true);
+    setIsLoading(true, false);
     setCategoryType(CategoryType.Dashboard);
-    fetchDashboard(fileId).finally(() => {
+    fetchDashboard(boardId).finally(() => {
       setIsLoading(false);
     });
   }, [isDashboardPage]);

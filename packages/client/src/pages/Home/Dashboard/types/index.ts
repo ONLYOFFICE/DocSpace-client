@@ -8,7 +8,8 @@ export type ContextType = {
 
 export type ThemeType = typeof Base | typeof Dark;
 
-export type InjectType = typeof store;
+export type StoreType = typeof store;
+export type IconSizeType = "small" | "medium";
 
 export type TableColumnType = {
   key: string;
@@ -24,12 +25,7 @@ export type TableColumnType = {
 };
 
 export type ParamType = {
-  fileId: string;
+  boardId: string;
   roleId: string;
-};
-
-export type RoleType = {
-  id: number;
-  title: string;
-  queue: number | string;
+  roomId: string;
 };

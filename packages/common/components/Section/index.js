@@ -58,6 +58,7 @@ const Section = (props) => {
 
   const containerRef = React.useRef(null);
   const timerRef = React.useRef(null);
+  const isDashboardView = viewAs === "dashboard";
 
   let sectionHeaderContent = null;
   let sectionFilterContent = null;
@@ -224,11 +225,13 @@ const Section = (props) => {
                       ? sectionBodyContent.props.children
                       : null}
                   </SubSectionBodyContent>
-                  <SubSectionFooter>
-                    {sectionFooterContent
-                      ? sectionFooterContent.props.children
-                      : null}
-                  </SubSectionFooter>
+                  {!isDashboardView && (
+                    <SubSectionFooter>
+                      {sectionFooterContent
+                        ? sectionFooterContent.props.children
+                        : null}
+                    </SubSectionFooter>
+                  )}
                   {isSectionPagingAvailable && (
                     <SubSectionPaging>
                       {sectionPagingContent

@@ -24,6 +24,8 @@ import TopLoaderService from "@docspace/components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
+import type { FillQueue, RoleDefaultType } from "../types";
+import { RoleTypeEnum } from "../enums";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";
@@ -263,9 +265,10 @@ export function toCommunityHostname(hostname) {
 }
 
 export function getProviderTranslation(provider, t, linked = false) {
-  const capitalizeProvider = provider.charAt(0).toUpperCase() + provider.slice(1);
+  const capitalizeProvider =
+    provider.charAt(0).toUpperCase() + provider.slice(1);
   if (linked) {
-    return `${t("Common:Disconnect")} ${capitalizeProvider}`
+    return `${t("Common:Disconnect")} ${capitalizeProvider}`;
   }
 
   switch (provider) {
@@ -537,4 +540,8 @@ export const checkFilterInstance = (filterObject, certainClass) => {
     );
 
   return isInstance;
+};
+
+export const isDefaultRole = (role: FillQueue): role is RoleDefaultType => {
+  return role.type === RoleTypeEnum.Default;
 };

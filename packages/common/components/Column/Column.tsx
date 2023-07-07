@@ -1,9 +1,11 @@
-import React, { PropsWithChildren, useCallback, useRef } from "react";
+import { useParams } from "react-router";
+import { PropsWithChildren, useCallback, useRef } from "react";
 
-import Badge from "../badge";
-import ContextMenu from "../context-menu";
+import Badge from "@docspace/components/badge";
+import ContextMenu from "@docspace/components/context-menu";
+import ContextMenuButton from "@docspace/components/context-menu-button";
 
-import ContextMenuButton from "../context-menu-button";
+import { RoleTypeEnum } from "../../enums";
 
 import {
   ColumnCircle,
@@ -15,17 +17,21 @@ import {
   ColumnUsers,
   ColumnBody,
 } from "./Column.styled";
-import ColumnProps, { ColumnDefaultProps } from "./Column.props";
+import { ColumnDefaultProps, ColumnProps } from "./Column.props";
 
+import { ParamType } from "SRC_DIR/pages/Home/Dashboard/types";
+
+import CrossIcon from "PUBLIC_DIR/images/cross.sidebar.react.svg";
 import FolderLocationIcon from "PUBLIC_DIR/images/folder-location.react.svg";
 import CheckmarkIcon from "PUBLIC_DIR/images/checkmark.rounded.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.sidebar.react.svg";
 
 function isDefaultColumn(column: ColumnProps): column is ColumnDefaultProps {
-  return column?.as === undefined;
+  return column.type == RoleTypeEnum.Default;
 }
 
 function Column(props: PropsWithChildren<ColumnProps>) {
+  const { roomId } = useParams<ParamType>();
+
   const contextMenuRef = useRef<ContextMenu>(null);
 
   const onClickHandler = useCallback((event: MouseEvent) => {
@@ -37,13 +43,13 @@ function Column(props: PropsWithChildren<ColumnProps>) {
   }, []);
 
   if (!isDefaultColumn(props)) {
+    const isDone = props.type === RoleTypeEnum.Done;
+
     return (
       <ColumnContainer>
         <ColumnHeader>
-          <ColumnIconWrapper
-            color={props.as === "accepted" ? "#657077" : "#F2675A"}
-          >
-            {props.as === "accepted" ? (
+          <ColumnIconWrapper color={isDone ? "#657077" : "#F2675A"}>
+            {isDone ? (
               <CheckmarkIcon />
             ) : (
               <CrossIcon className="column__cross-icon" />
@@ -57,19 +63,18 @@ function Column(props: PropsWithChildren<ColumnProps>) {
               fontSize="11px"
               lineHeight="16px"
               borderRadius="100%"
-              height="16px"
               maxWidth="16px"
               backgroundColor="#4781d1"
               onClick={props.onClickBadge}
             />
             <ContextMenu
               ref={contextMenuRef}
-              getContextModel={props.getOptions}
+              getContextModel={props.contextOptions}
             />
             <ContextMenuButton
               className="card__context-menu"
               displayType="toggle"
-              getData={props.getOptions}
+              getData={props.contextOptions}
               onClick={onClickHandler}
               onClose={onHideContextMenu}
             />
@@ -85,7 +90,7 @@ function Column(props: PropsWithChildren<ColumnProps>) {
       <ColumnHeader>
         <ColumnCircle color={props.color} />
         <ColumnTitle>{props.title}</ColumnTitle>
-        <ColumnUsers>{props.user}</ColumnUsers>
+        <ColumnUsers>{props.assigned?.displayName}</ColumnUsers>
         <ColumnActions>
           <Badge
             label={props.badge}
@@ -93,14 +98,13 @@ function Column(props: PropsWithChildren<ColumnProps>) {
             fontSize="11px"
             lineHeight="16px"
             borderRadius="100%"
-            height="16px"
             maxWidth="16px"
             backgroundColor="#4781d1"
             onClick={props.onClickBadge}
           />
           <FolderLocationIcon
             className="column__location-btn"
-            onClick={props.onClickLocation}
+            onClick={() => roomId && props.onClickLocation(roomId)}
           />
         </ColumnActions>
       </ColumnHeader>

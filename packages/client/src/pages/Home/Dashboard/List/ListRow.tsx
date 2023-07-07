@@ -13,22 +13,17 @@ import Icon from "../Icon";
 import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
 import { ListRowProps } from "./List.props";
-import { InjectType, ParamType } from "../types";
+import { StoreType, ParamType } from "../types";
+import { IRole } from "@docspace/common/Models";
 
-function ListRow({
-  role,
-  theme,
-  isActive,
-  isChecked,
-  sectionWidth,
-}: ListRowProps) {
-  const { fileId } = useParams<ParamType>();
+function ListRow({ role, theme, sectionWidth }: ListRowProps) {
+  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
 
   const href = useMemo(
-    () => fileId && `/rooms/shared/${fileId}/dashboard/${role.id}`,
+    () => roomId && `/rooms/shared/${roomId}/role/${role.id}`,
 
-    [fileId, role.id]
+    [roomId, role.id]
   );
 
   const onClickLink = (event: MouseEvent) => {
@@ -40,19 +35,25 @@ function ListRow({
   };
 
   const element = useMemo(
-    () => <Icon size="medium" roleType={role.roleType} color={role.color} />,
-    [role.roleType, role.color]
+    () => <Icon size="medium" type={role.type} color={role.color} />,
+    [role.type, role.color]
   );
 
-  const onSelect = (checked: boolean, role: any) => {
-    console.log("onSelect", { checked, role });
+  const onSelect = (checked: boolean, role: IRole) => {
+    role.onChecked(role, checked);
   };
+
+  const onRowClick = () => {
+    role.onContentRowCLick(role, !role.isChecked);
+  };
+
+  const contextOptions = role.getOptions();
 
   return (
     <div
       className={
         classNames("row-wrapper", {
-          ["row-selected"]: isChecked || isActive,
+          ["row-selected"]: role.isChecked,
         }) as string
       }
     >
@@ -61,12 +62,13 @@ function ListRow({
           data={role}
           mode="modern"
           element={element}
-          checked={isChecked}
-          isActive={isActive}
           className="role-row"
+          isActive={false}
+          checked={role.isChecked}
           sectionWidth={sectionWidth}
           onSelect={onSelect}
-          contextOptions={[{ key: "Separator", isSeparator: true }]}
+          onRowClick={onRowClick}
+          contextOptions={contextOptions}
         >
           <RoleRowContent
             isMobile={isMobile}
@@ -102,7 +104,7 @@ function ListRow({
   );
 }
 
-export default inject<InjectType>(({ auth }) => {
+export default inject<StoreType>(({ auth }) => {
   const theme = (auth.settingsStore as unknown as SettingsStore).theme;
 
   return {

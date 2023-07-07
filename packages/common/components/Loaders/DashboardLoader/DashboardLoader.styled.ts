@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import { isMobile } from "react-device-detect";
+import styled, { css } from "styled-components";
+
 import Circle from "../CircleLoader";
 import Rectangle from "../RectangleLoader";
 
@@ -23,4 +25,10 @@ export const DashboardLoaderContainer = styled.section`
   height: 100%;
 
   padding-right: 20px;
+
+  ${isMobile &&
+  css`
+    width: auto;
+    overflow-x: scroll;
+  `}
 `;

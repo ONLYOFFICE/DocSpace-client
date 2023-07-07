@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ReactSVG } from "react-svg";
-import { observer, inject } from "mobx-react";
 
 import { AccordionItem } from "./StyledFillingStatusLine";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
@@ -13,13 +12,13 @@ const FillingStatusAccordion = ({
   displayName,
   role,
   formFillingSteps,
-
-  isInterrupted,
   locale,
+  getStatusIcon,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
+  const [isInterrupted, setIsInterrupted] = useState(false);
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
@@ -29,24 +28,39 @@ const FillingStatusAccordion = ({
     return new Date(date).toLocaleString(locale);
   };
 
-  const statusType = {
-    1: "Start filling",
-    2: "Filled and signed",
-    3: "Interrupted",
+  const convertStep = (step) => {
+    if (step === 1) return "Start Filling";
+    if (step === 2) return "Filled and signed";
+    if (step === 3) return "Interrupted filling";
   };
 
   const lastStatusType = formFillingSteps.at(-1);
 
   useEffect(() => {
-    if (lastStatusType?.formFilingStatusType === 1) setIsStarted(true);
-    if (lastStatusType?.formFilingStatusType === 2) setIsFilled(true);
+    switch (lastStatusType?.formFilingStatusType) {
+      case 1:
+        setIsStarted(true);
+        getStatusIcon(true);
+        break;
+      case 2:
+        setIsFilled(true);
+        getStatusIcon(true);
+        break;
+      case 3:
+        setIsInterrupted(true);
+        getStatusIcon(true);
+        break;
+      default:
+        getStatusIcon(false);
+        break;
+    }
   }, []);
 
   return (
     <AccordionItem
       isOpen={isOpen}
       isStarted={isStarted}
-      isDone={isFilled}
+      isFilled={isFilled}
       isInterrupted={isInterrupted}
     >
       <div className="accordion-item-info" onClick={onClickHandler}>
@@ -64,7 +78,10 @@ const FillingStatusAccordion = ({
             <Text className="accordion-role">{role}</Text>
           </Box>
         </Box>
-        <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
+
+        {formFillingSteps.length > 1 && (
+          <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
+        )}
       </div>
 
       {isOpen &&
@@ -77,7 +94,7 @@ const FillingStatusAccordion = ({
                   lineHeight="16px"
                   className={isFilled ? "filled-status-text" : "status-text"}
                 >
-                  {statusType[step.formFilingStatusType]}
+                  {convertStep(step.formFilingStatusType)}
                 </Text>
                 <Text fontSize="12px" lineHeight="16px" className="status-date">
                   {convertTime(step.date)}
@@ -109,7 +126,7 @@ const FillingStatusAccordion = ({
               lineHeight="16px"
               className={isFilled ? "filled-status-text" : "status-text"}
             >
-              {statusType[lastStatusType?.formFilingStatusType]}
+              {convertStep(lastStatusType?.formFilingStatusType)}
             </Text>
             <Text fontSize="12px" lineHeight="16px" className="status-date">
               {convertTime(lastStatusType?.date)}
@@ -120,11 +137,4 @@ const FillingStatusAccordion = ({
     </AccordionItem>
   );
 };
-export default inject(({ auth }) => {
-  const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
-  const locale = (user && user.cultureName) || culture || "en";
-  return {
-    locale,
-  };
-})(observer(FillingStatusAccordion));
+export default FillingStatusAccordion;

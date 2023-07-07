@@ -20,6 +20,7 @@ const FilesItemTitle = ({ t, selection, isSeveralItems }) => {
     <StyledTitle ref={itemTitleRef}>
       <div className="item-icon">
         <img
+          id="test-header"
           className={`icon ${selection.isRoom && "is-room"}`}
           src={icon}
           alt="thumbnail-icon"

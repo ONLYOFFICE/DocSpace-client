@@ -1622,8 +1622,6 @@ const SectionFilterContent = ({
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
-    console.log({ isDashboardPage });
-
     if (isDashboardPage) {
       return [
         {
@@ -1660,9 +1658,6 @@ const SectionFilterContent = ({
   }, [createThumbnails, isDashboardPage]);
 
   const getSortData = React.useCallback(() => {
-    // TODO: Add sort data for dashboard
-    if (isDashboardPage) return [];
-
     if (isAccountsPage) {
       return [
         {
@@ -1760,6 +1755,8 @@ const SectionFilterContent = ({
       label: t("Common:Type"),
       default: true,
     };
+
+    if (isDashboardPage) return [name, modifiedDate];
 
     commonOptions.push(name);
 

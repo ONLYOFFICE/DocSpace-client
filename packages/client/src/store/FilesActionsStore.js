@@ -1322,7 +1322,6 @@ class FilesActionStore {
 
     const state = {
       title: ExtraLocationTitle,
-
       isRoot,
       fileExst,
       highlightFileId: item.id,
@@ -1340,6 +1339,18 @@ class FilesActionStore {
     setIsLoading(true);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
+  };
+
+  openLocationAction = (item) => {
+    const { categoryType } = this.filesStore;
+
+    const url = getCategoryUrl(categoryType, item.folderId);
+    const newFilter = FilesFilter.getDefault();
+
+    newFilter.search = item.title;
+    newFilter.folder = item.folderId;
+
+    window.open(`${url}?${newFilter.toUrlParams()}`, "_self");
   };
 
   setThirdpartyInfo = (providerKey) => {
@@ -2011,7 +2022,8 @@ class FilesActionStore {
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
+      this.clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -2040,16 +2052,24 @@ class FilesActionStore {
     if (isDashboard) {
       const { rootFolderType, title, id } = item;
 
+      setIsSectionFilterLoading(true, false);
+      setIsSectionBodyLoading(true, false);
+      this.filesStore.setSelection([]);
+
       const state = {
         title,
         isRoot: false,
         rootFolderType,
         isRoom: false,
+        fromDashboard: true,
       };
 
-      return window.DocSpace.navigate(`/rooms/shared/${id}/dashboard`, {
-        state,
-      });
+      return window.DocSpace.navigate(
+        `/rooms/shared/${item.parentId}/dashboard/${id}`,
+        {
+          state,
+        }
+      );
     }
 
     if (isFolder) {
@@ -2182,9 +2202,9 @@ class FilesActionStore {
 
     const filter = RoomsFilter.getDefault();
 
-    const isDasboard = categoryType === CategoryType.Dashboard;
+    const isDashboard = categoryType === CategoryType.Dashboard;
 
-    const path = isDasboard
+    const path = isDashboard
       ? getCategoryUrl(CategoryType.Shared)
       : getCategoryUrl(categoryType);
 

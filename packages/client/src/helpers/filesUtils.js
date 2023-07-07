@@ -16,7 +16,7 @@ import i18n from "./i18n";
 
 import { request } from "@docspace/common/api/client";
 
-export const getFileTypeName = (fileType) => {
+export const getFileTypeName = (fileType, isDasboard = false) => {
   switch (fileType) {
     case FileType.Unknown:
       return i18n.t("Common:Unknown");
@@ -37,7 +37,7 @@ export const getFileTypeName = (fileType) => {
     case FileType.OForm:
       return i18n.t("Files:Document");
     default:
-      return i18n.t("Files:Folder");
+      return i18n.t(isDasboard ? "Files:Board" : "Files:Folder");
   }
 };
 

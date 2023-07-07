@@ -6,7 +6,7 @@ import {
   ColumnBody,
   ColumnHeader,
   ColumnActions,
-} from "@docspace/components/Column/Column.styled";
+} from "../../Column/Column.styled";
 import {
   DashboardLoaderContainer,
   LoadersCircle,

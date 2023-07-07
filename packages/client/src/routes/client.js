@@ -11,6 +11,7 @@ import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
 import Dashboard from "SRC_DIR/pages/Home/Dashboard";
+import Role from "SRC_DIR/pages/Home/Role";
 
 import { generalRoutes } from "./general";
 
@@ -131,7 +132,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:fileId/dashboard",
+            path: "rooms/shared/:roomId/dashboard/:boardId",
             element: (
               <PrivateRoute>
                 <Dashboard />
@@ -139,10 +140,26 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:fileId/dashboard/filter",
+            path: "rooms/shared/:roomId/dashboard/:boardId/filter",
             element: (
               <PrivateRoute>
                 <Dashboard />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:roomId/role/:roleId",
+            element: (
+              <PrivateRoute>
+                <Role />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/shared/:roomId/role/:roleId/filter",
+            element: (
+              <PrivateRoute>
+                <Role />
               </PrivateRoute>
             ),
           },

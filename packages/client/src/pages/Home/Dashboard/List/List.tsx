@@ -14,13 +14,7 @@ function List({ roles, sectionWidth }: ListProps) {
       fetchMoreFiles={() => {}}
     >
       {roles.map((role) => (
-        <ListRow
-          key={role.id}
-          isActive={false}
-          isChecked={false}
-          sectionWidth={sectionWidth}
-          role={role}
-        />
+        <ListRow key={role.id} sectionWidth={sectionWidth} role={role} />
       ))}
     </RoleRowContainer>
   );

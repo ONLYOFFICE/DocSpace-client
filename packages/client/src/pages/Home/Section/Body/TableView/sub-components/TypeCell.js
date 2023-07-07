@@ -27,7 +27,7 @@ const TypeCell = ({ t, item, sideColor }) => {
         return t("Document");
 
       default:
-        return t("Folder");
+        return item.isDashboard ? t("Board") : t("Folder");
     }
   };
 

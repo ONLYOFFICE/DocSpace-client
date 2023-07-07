@@ -48,7 +48,12 @@ const InfoPanelHeaderContent = (props) => {
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
-    !isNoItem && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isNoItem &&
+    !isSeveralItems &&
+    !isGallery &&
+    !isAccounts &&
+    !isTrash &&
+    !selection?.isDashboard;
 
   useEffect(() => {
     checkWidth();

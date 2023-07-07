@@ -7,3 +7,11 @@ export type { UpdatedBy } from "./UpdatedBy.type";
 export type { CreatedBy } from "./CreatedBy.type";
 export type { FillQueue } from "./FillQueue.type";
 export type { ViewAccessability } from "./ViewAccessability.type";
+
+export type {
+  RoleType,
+  RoleDefaultType,
+  RoleDoneType,
+  RoleInterruptedType,
+  RoleTypeOwn,
+} from "./RoleType";

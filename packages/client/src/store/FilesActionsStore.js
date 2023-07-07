@@ -2022,7 +2022,8 @@ class FilesActionStore {
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
+      this.clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -2051,7 +2052,8 @@ class FilesActionStore {
     if (isDashboard) {
       const { rootFolderType, title, id } = item;
 
-      setIsLoading(true);
+      setIsSectionFilterLoading(true, false);
+      setIsSectionBodyLoading(true, false);
       this.filesStore.setSelection([]);
 
       const state = {

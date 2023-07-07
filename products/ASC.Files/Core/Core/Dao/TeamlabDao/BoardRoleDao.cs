@@ -81,8 +81,15 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
 
     public async Task<BoardRole> GetBoardRoleAsync(int boardId, int roleId)
     {
-        var result = new BoardRole();
-        return result;
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var sqlQuery = Query(filesDbContext.FilesBoardRole)
+                   .Where(r => r.BoardId == boardId)
+                   .Where(r => r.RoleId == roleId);
+
+        var r = await sqlQuery.Take(1).SingleOrDefaultAsync();
+
+        return ToBoardRole(r);
     }
 
     public async Task<IEnumerable<BoardRole>> SaveBoardRoleAsync(IEnumerable<BoardRole> boarRoles)

@@ -26,7 +26,7 @@
 
 namespace ASC.Files.Core.EF;
 
-public class DbFilesBoardRole : BaseEntity, IMapFrom<BoardRole>
+public class DbFilesBoardRole : BaseEntity, IDbFile, IMapFrom<BoardRole>
 {
     public int TenantId { get; set; }
     public int BoardId { get; set; }

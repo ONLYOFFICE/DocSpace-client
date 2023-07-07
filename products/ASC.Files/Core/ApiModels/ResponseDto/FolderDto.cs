@@ -145,6 +145,11 @@ public class FolderDtoHelper : FileEntryDtoHelper
 
             result.Type = folder.FolderType;
 
+            var boardRoleDao = _daoFactory.GetBoardRoleDao<T>();
+
+            var roles = await boardRoleDao.GetBoardRolesAsync(folder.Id).ToListAsync();
+
+
             //TODO MOCK DATA
             var fillQueue = new List<FormFillingQueue>()
             {

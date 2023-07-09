@@ -92,21 +92,6 @@ public abstract class FoldersController<T> : ApiControllerBase
         return await _foldersControllerHelper.CreateFolderAsync(folderId, inDto.Title);
     }
 
-    /// <summary>
-    /// Creates a new board with the title sent in the request. The ID of a parent folder can be also specified.
-    /// </summary>
-    /// <short>
-    /// New board
-    /// </short>
-    /// <category>Folders</category>
-    /// <param name="folderId">Parent folder ID</param>
-    /// <param name="title">Title of new board</param>
-    /// <returns>New board contents</returns>
-    [HttpPost("folder/board/{folderId}")]
-    public async Task<FolderDto<T>> CreateBoardAsync(T folderId, CreateBoardRequestDto<T> inDto)
-    {
-        return await _foldersControllerHelper.CreateBoardAsync(folderId, inDto.Title, inDto.BoardRoles);
-    }
 
     /// <summary>
     /// Deletes the folder with the ID specified in the request

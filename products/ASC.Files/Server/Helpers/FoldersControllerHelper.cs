@@ -77,9 +77,9 @@ public class FoldersControllerHelper : FilesHelperBase
         return await _folderDtoHelper.GetAsync(folder);
     }
 
-    public async Task<FolderDto<T>> CreateBoardAsync<T>(T folderId, string title, IEnumerable<BoardRole> boardRoles)
+    public async Task<FolderDto<T>> CreateBoardAsync<T>(T folderId, Dictionary<int, Guid> boardRoles)
     {
-        var folder = await _fileStorageService.CreateNewBoardAsync(folderId, title, boardRoles);
+        var folder = await _fileStorageService.CreateNewBoardAsync(folderId, boardRoles);
 
         return await _folderDtoHelper.GetAsync(folder);
     }

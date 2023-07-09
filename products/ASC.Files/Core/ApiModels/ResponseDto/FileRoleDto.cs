@@ -32,6 +32,7 @@ public class FileRoleDto
     public int Id { get; set; }
     public string Title { get; set; }
     public string Color { get; set; }
+    public int QueueNumber { get; set; }
     public EmployeeDto Assigned { get; set; }
     public List<FormFillingStep> FormFillingSteps { get; set; }
 

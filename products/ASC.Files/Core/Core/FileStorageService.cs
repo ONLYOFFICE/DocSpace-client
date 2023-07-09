@@ -484,14 +484,9 @@ public class FileStorageService //: IFileStorageService
 
         return await InternalCreateNewFolderAsync(parentId, title);
     }
-    public async Task<Folder<T>> CreateNewBoardAsync<T>(T parentId, string title, IEnumerable<BoardRole> boardRoles)
+    public async Task<Folder<T>> CreateNewBoardAsync<T>(T formId, Dictionary<int, Guid> boardRoles)
     {
-        if (string.IsNullOrEmpty(title) || parentId == null)
-        {
-            throw new ArgumentException();
-        }
-
-        return await CreateBoardAsync(title, parentId, boardRoles);
+        return await CreateBoardAsync(formId, boardRoles);
     }
 
     public async Task<Folder<int>> CreateRoomAsync(string title, RoomType roomType, bool @private, IEnumerable<FileShareParams> share, bool notify, string sharingMessage)
@@ -601,15 +596,41 @@ public class FileStorageService //: IFileStorageService
     {
         return await InternalCreateNewFolderAsync(parentId, title, FolderType.EditingRoom, privacy);
     }
-    private async Task<Folder<T>> CreateBoardAsync<T>(string title, T parentId, IEnumerable<BoardRole> boardRoles)
+    private async Task<Folder<T>> CreateBoardAsync<T>(T formId, Dictionary<int, Guid> assignedRoles)
     {
-        var board = await InternalCreateNewFolderAsync(parentId, title, FolderType.Board, false);
+        var fileDao = GetFileDao<T>();
+        await fileDao.InvalidateCacheAsync(formId);
+
+        var file = await fileDao.GetFileAsync(formId);
+        ErrorIf(file == null, FilesCommonResource.ErrorMassage_FileNotFound);
+        ErrorIf(!await _fileSecurity.CanReadAsync(file), FilesCommonResource.ErrorMassage_SecurityException_ReadFile);
+
+
+        //TODO mock data, from form
+        var rolesFromForm = new List<FileRoleDto>() {
+            new FileRoleDto() {Id = 1, Title = "everyone", Color = "#fbcc86", QueueNumber = 1},
+            new FileRoleDto() {Id = 2, Title = "accountant",Color = "#70d3b0", QueueNumber = 2},
+            new FileRoleDto() {Id = 3, Title = "director", Color = "#bb85e7", QueueNumber = 3},
+        };
+
+        var boardRoles = new List<BoardRole>();
+
+        foreach (var r in rolesFromForm)
+        {
+            boardRoles.Add(new BoardRole()
+            {
+                Title = r.Title,
+                Color = r.Color,
+                QueueNumber = r.QueueNumber,
+                AssignedTo = assignedRoles[r.Id]
+            });
+        }
+
+        var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
 
         var tagDao = _daoFactory.GetTagDao<T>();
         var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
-        var boardRolesDb = new List<BoardRole>();
-
-
+       
         foreach (var role in boardRoles)
         {
             var tagInfo = new TagInfo
@@ -624,11 +645,10 @@ public class FileStorageService //: IFileStorageService
             {
                 role.BoardId = internalEntry.Id;
                 role.RoleId = tag.Id;
-                boardRolesDb.Add(role);
             }
         }
 
-        await boardRolesDao.SaveBoardRoleAsync(boardRolesDb);
+        var result = await boardRolesDao.SaveBoardRoleAsync(boardRoles);
 
         return board;
     }

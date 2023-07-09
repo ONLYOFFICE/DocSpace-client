@@ -47,11 +47,10 @@ public class FormFillingStep
 
 }
 
-public class FormFillingQueue : FileRoleDto
+public class BoardRolesDto : FileRoleDto
 {
-    public int Queue { get; set; }
     public int Badge { get; set; }
-    public FormFillingQueueType Type { get; set; }
+    public BoardRoleQueueType Type { get; set; }
 }
 
 [Scope]

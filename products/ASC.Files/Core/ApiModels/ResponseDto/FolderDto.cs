@@ -41,7 +41,7 @@ public class FolderDto<T> : FileEntryDto<T>
     public RoomType? RoomType { get; set; }
     public FolderType? Type { get; set; }
 
-    public List<FormFillingQueue> FillQueue { get; set; }
+    public List<BoardRolesDto> RoleQueue { get; set; }
 
     public bool Private { get; set; }
 
@@ -80,6 +80,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
     private readonly RoomLogoManager _roomLogoManager;
     private readonly RoomsNotificationSettingsHelper _roomsNotificationSettingsHelper;
     private readonly BadgesSettingsHelper _badgesSettingsHelper;
+    private readonly EmployeeDtoHelper _employeeDtoHelper;
 
     public FolderDtoHelper(
         ApiDateTimeHelper apiDateTimeHelper,
@@ -91,7 +92,8 @@ public class FolderDtoHelper : FileEntryDtoHelper
         FileSharingHelper fileSharingHelper,
         RoomLogoManager roomLogoManager,
         BadgesSettingsHelper badgesSettingsHelper,
-        RoomsNotificationSettingsHelper roomsNotificationSettingsHelper)
+        RoomsNotificationSettingsHelper roomsNotificationSettingsHelper,
+        EmployeeDtoHelper employeeDtoHelper)
         : base(apiDateTimeHelper, employeeWrapperHelper, fileSharingHelper, fileSecurity)
     {
         _authContext = authContext;
@@ -100,6 +102,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
         _roomLogoManager = roomLogoManager;
         _roomsNotificationSettingsHelper = roomsNotificationSettingsHelper;
         _badgesSettingsHelper = badgesSettingsHelper;
+        _employeeDtoHelper = employeeDtoHelper;
     }
 
     public async Task<FolderDto<T>> GetAsync<T>(Folder<T> folder, List<Tuple<FileEntry<T>, bool>> folders = null)
@@ -149,46 +152,22 @@ public class FolderDtoHelper : FileEntryDtoHelper
 
             var roles = await boardRoleDao.GetBoardRolesAsync(folder.Id).ToListAsync();
 
-
-            //TODO MOCK DATA
-            var fillQueue = new List<FormFillingQueue>()
+            var boardRolesDto = new List<BoardRolesDto>();
+            foreach ( var role in roles )
             {
-                new FormFillingQueue()
+                boardRolesDto.Add(new BoardRolesDto
                 {
-                    Id = 1, Title = "everyone", Color = "#fbcc86", Badge = 0, Queue = 1, Type = FormFillingQueueType.FromForm
-                },
-                new FormFillingQueue()
-                {
-                    Id = 2, Title = "accountant",Color = "#70d3b0", Badge = 0, Queue = 2, Type = FormFillingQueueType.FromForm, Assigned = new EmployeeDto(){
-                        Id = Guid.Parse("a4d05126-d7e1-4e93-9cdd-51d9c149090d"),
-                        DisplayName = "Madelyn Septimus",
-                        AvatarSmall = "/static/images/default_user_photo_size_32-32.png",
-                        ProfileUrl = "http://localhost:8092/accounts/view/madelyn.septimus",
-                        HasAvatar = false
-                    }
-                },
-                new FormFillingQueue()
-                {
-                    Id = 3, Title = "director", Color = "#bb85e7", Badge = 0, Queue = 3, Type = FormFillingQueueType.FromForm, Assigned = new EmployeeDto(){
-                        Id = Guid.Parse("33e27954-303e-4757-8efd-597d3d2a9f7e"),
-                        DisplayName = "Mark Bellos",
-                        AvatarSmall = "/static/images/default_user_photo_size_32-32.png",
-                        ProfileUrl = "http://localhost:8092/accounts/view/mark.bellos",
-                        HasAvatar = false
-                    }
-                },
-                new FormFillingQueue()
-                {
-                    Id = -1, Title = "done", Badge = 5, Queue = 4, Type = FormFillingQueueType.Done
-                },
-                new FormFillingQueue()
-                {
-                    Id = -2, Title = "Interrupted", Badge = 5, Queue = 5, Type = FormFillingQueueType.Interrupted
-                },
-            };
+                    Id = role.QueueNumber,
+                    Title = role.Title,
+                    Color  = role.Color,
+                    Badge = 0, //TODO
+                    QueueNumber = role.QueueNumber,
+                    Type = role.Type,
+                    Assigned = role.AssignedTo != Guid.Empty ? await _employeeDtoHelper.GetAsync(role.AssignedTo) : null
+                });
+            }
 
-
-            result.FillQueue = fillQueue;
+            result.RoleQueue = boardRolesDto;
         }
 
         if (folder.RootFolderType == FolderType.USER

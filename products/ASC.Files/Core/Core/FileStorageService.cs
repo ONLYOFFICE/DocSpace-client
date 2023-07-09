@@ -614,7 +614,7 @@ public class FileStorageService //: IFileStorageService
         };
 
         var boardRoles = new List<BoardRole>();
-
+        var queueNumber = 0;
         foreach (var r in rolesFromForm)
         {
             boardRoles.Add(new BoardRole()
@@ -622,9 +622,30 @@ public class FileStorageService //: IFileStorageService
                 Title = r.Title,
                 Color = r.Color,
                 QueueNumber = r.QueueNumber,
-                AssignedTo = assignedRoles[r.Id]
+                AssignedTo = assignedRoles[r.Id],
+                Type = BoardRoleQueueType.FromForm
             });
+            queueNumber++;
         }
+
+        boardRoles.Add(
+            new BoardRole()
+            {
+                Title = "Done", //TODO
+                QueueNumber = queueNumber + 1,
+                Type = BoardRoleQueueType.Done,
+                AssignedTo = Guid.Empty
+            }
+        );
+
+        boardRoles.Add(
+            new BoardRole()
+            {
+                Title = "Interrupted", //TODO
+                QueueNumber = queueNumber + 2,
+                Type = BoardRoleQueueType.Interrupted,
+                AssignedTo = Guid.Empty
+            });
 
         var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
 

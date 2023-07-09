@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 namespace ASC.Files.Core;
-public enum FormFillingQueueType
+public enum BoardRoleQueueType
 {
     FromForm = 1,
     Done = 2,

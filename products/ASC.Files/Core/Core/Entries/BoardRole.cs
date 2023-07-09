@@ -36,6 +36,7 @@ public sealed class BoardRole : IMapFrom<DbFilesBoardRole>
     public string Color { get; set; }
     public int QueueNumber { get; set; }
     public Guid AssignedTo { get; set; }
+    public BoardRoleQueueType Type  { get; set; }
 
     public void Mapping(Profile profile)
     {

@@ -116,7 +116,7 @@ class InfoPanelStore {
     const selectedFolderStore = { ...this.selectedFolderStore };
     return {
       ...selectedFolderStore,
-      isFolder: true,
+      isFolder: !selectedFolderStore.isDashboard,
       isRoom: !!this.selectedFolderStore.roomType,
     };
   };

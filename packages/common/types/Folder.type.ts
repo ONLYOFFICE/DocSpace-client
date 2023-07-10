@@ -1,5 +1,5 @@
 import { CreatedBy } from "./CreatedBy.type";
-import { FillQueue } from "./FillQueue.type";
+import { RoleQueue } from "./RoleQueue.type";
 import { Security } from "./Security.type";
 import { UpdatedBy } from "./UpdatedBy.type";
 
@@ -11,7 +11,7 @@ export type Folder = {
   mute: boolean;
   pinned: boolean;
   type: number;
-  fillQueue: FillQueue[];
+  roleQueue: RoleQueue[];
   private: boolean;
   id: number;
   roomType?: number;

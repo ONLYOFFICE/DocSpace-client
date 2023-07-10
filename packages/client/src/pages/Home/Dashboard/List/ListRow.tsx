@@ -47,7 +47,7 @@ function ListRow({ role, theme, sectionWidth }: ListRowProps) {
     role.onContentRowCLick(role, !role.isChecked);
   };
 
-  const contextOptions = role.getOptions();
+  const contextOptions = role.contextOptions;
 
   return (
     <div

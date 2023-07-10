@@ -7,8 +7,8 @@ export type ContextType = {
 };
 
 export type ThemeType = typeof Base | typeof Dark;
-
 export type StoreType = typeof store;
+
 export type IconSizeType = "small" | "medium";
 
 export type TableColumnType = {

@@ -1,6 +1,6 @@
 import { RoleTypeEnum } from "../enums/RoleType.enum";
 
-export type FillQueueOwn = {
+export type RoleQueueOwn = {
   id: number;
   type: RoleTypeEnum;
   queue: number;
@@ -10,7 +10,7 @@ export type FillQueueOwn = {
   color?: string;
 };
 
-export type FillQueueDefaultType = FillQueueOwn & {
+export type RoleQueueDefaultType = RoleQueueOwn & {
   color: string;
   assigned?: {
     id: string;
@@ -22,16 +22,16 @@ export type FillQueueDefaultType = FillQueueOwn & {
   type: RoleTypeEnum.Default;
 };
 
-export type FillQueueDoneType = FillQueueOwn & {
+export type RoleQueueDoneType = RoleQueueOwn & {
   type: RoleTypeEnum.Done;
   color?: never;
 };
-export type FillQueueInterruptedType = FillQueueOwn & {
+export type RoleQueueInterruptedType = RoleQueueOwn & {
   type: RoleTypeEnum.Done;
   color?: never;
 };
 
-export type FillQueue =
-  | FillQueueDefaultType
-  | FillQueueDoneType
-  | FillQueueInterruptedType;
+export type RoleQueue =
+  | RoleQueueDefaultType
+  | RoleQueueDoneType
+  | RoleQueueInterruptedType;

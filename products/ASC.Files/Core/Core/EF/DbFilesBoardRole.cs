@@ -34,6 +34,7 @@ public class DbFilesBoardRole : BaseEntity, IDbFile, IMapFrom<BoardRole>
     public string RoleTitle { get; set; }
     public string Color { get; set; }
     public int QueueNumber { get; set; }
+    public BoardRoleQueueType Type { get; set; }
     public Guid AssignedTo { get; set; }
 
     public override object[] GetKeys()
@@ -86,6 +87,8 @@ public static class DbFilesBoardRoleExtension
 
             entity.Property(e => e.QueueNumber).HasColumnName("queue_number");
 
+            entity.Property(e => e.Type).HasColumnName("type");
+
             entity.Property(e => e.AssignedTo)
                 .HasColumnName("assigned_to")
                 .HasColumnType("varchar(38)")
@@ -125,6 +128,8 @@ public static class DbFilesBoardRoleExtension
                 .HasDefaultValueSql("NULL::bpchar");
 
             entity.Property(e => e.QueueNumber).HasColumnName("queue_number");
+
+            entity.Property(e => e.Type).HasColumnName("type");
 
             entity.Property(e => e.AssignedTo)
                 .HasColumnName("assigned_to")

@@ -132,7 +132,8 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
             RoleTitle = boardRole.Title,
             Color = boardRole.Color,
             QueueNumber = boardRole.QueueNumber,
-            AssignedTo = boardRole.AssignedTo
+            AssignedTo = boardRole.AssignedTo,
+            Type = boardRole.Type
 
         };
 

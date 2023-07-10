@@ -622,7 +622,7 @@ public class FileStorageService //: IFileStorageService
                 Title = r.Title,
                 Color = r.Color,
                 QueueNumber = r.QueueNumber,
-                AssignedTo = assignedRoles[r.Id],
+                AssignedTo = r.QueueNumber == 1 ? Guid.Empty : assignedRoles[r.Id],
                 Type = BoardRoleQueueType.FromForm
             });
             queueNumber++;

@@ -51,6 +51,9 @@ import { getContextMenuItems } from "SRC_DIR/helpers/plugins";
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/common/utils";
 
+//TODO: Remove later Added role
+import api from "@docspace/common/api";
+
 class ContextOptionsStore {
   authStore;
   dialogsStore;
@@ -94,6 +97,19 @@ class ContextOptionsStore {
 
   onClickLinkFillForm = (item) => {
     return this.gotoDocEditor(false, item);
+  };
+
+  //TODO: Remove later Added role
+  onClickAddRole = async (item) => {
+    const people = await api.people.getSelectorUserList();
+    console.log(people);
+
+    await api.files.setRoles(
+      item.id,
+      people.items.reduce((previous, current, index) => {
+        return { ...previous, [index + 1]: current.id };
+      }, {})
+    );
   };
 
   onShowFillingStatus = (item) => {
@@ -874,6 +890,15 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
+        disabled: false,
+      },
+      //TODO: Remove later Added role
+      {
+        id: "option_add-role",
+        key: "add-role",
+        label: "Added role",
+        icon: FormFillRectSvgUrl,
+        onClick: () => this.onClickAddRole(item),
         disabled: false,
       },
       {

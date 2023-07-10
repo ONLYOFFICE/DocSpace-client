@@ -1012,6 +1012,17 @@ export function getDashboard(folderId) {
   return request(options);
 }
 
+//TODO: Remove later Added role
+export function setRoles(fileId, users) {
+  const options = {
+    method: "put",
+    url: `files/file/${fileId}/roles`,
+    data: users,
+  };
+
+  return request(options);
+}
+
 export function getRolesUsersForFillingForm(fileId) {
   const options = {
     method: "get",

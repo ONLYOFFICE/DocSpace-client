@@ -11,7 +11,7 @@ import api from "@docspace/common/api";
 
 import type { IDashboard, IRole } from "@docspace/common/Models";
 import type {
-  FillQueue,
+  RoleQueue,
   Folder as FolderInfoType,
   RoleDefaultType,
   RoleDoneType,
@@ -23,7 +23,7 @@ const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
 
 class DashboardStore {
-  private _roles: FillQueue[] = [];
+  private _roles: RoleQueue[] = [];
 
   public viewAs!: string;
   public dashboard?: IDashboard;
@@ -89,17 +89,26 @@ class DashboardStore {
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
-  private getRolesContextOptions = (type: RoleTypeEnum) => {
-    switch (type) {
-      case RoleTypeEnum.Default:
-        return [];
+  private removeOptions = (options: string[], toRemoveArray: string[]) =>
+    options.filter((o) => !toRemoveArray.includes(o));
 
-      case RoleTypeEnum.Done:
-        return ["link-for-room-members", "download"];
+  private getRolesContextOptions = (role: RoleQueue) => {
+    let roleOptions = [
+      "link-for-room-members",
+      "separator0",
+      "download-role",
+      "copy-role",
+      "separator1",
+      "delete-role",
+    ];
 
-      case RoleTypeEnum.Interrupted:
-        return [];
+    if (role.type === RoleTypeEnum.Done) {
+      roleOptions = this.removeOptions(roleOptions, [
+        "separator1, delete-role",
+      ]);
     }
+
+    return roleOptions;
   };
 
   private gotoRole = (id: string | number, roodId: string | number) => {
@@ -120,7 +129,7 @@ class DashboardStore {
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
       const general = {
-        contextOptions: [],
+        contextOptions: this.getRolesContextOptions(role),
         onClickBadge: () => {},
         onChecked: this.selectedRole,
         onContentRowCLick: this.setBufferSelection,
@@ -172,7 +181,7 @@ class DashboardStore {
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
   };
 
-  public setRoles = (roles: FillQueue[]): void => {
+  public setRoles = (roles: RoleQueue[]): void => {
     this._roles = roles;
   };
 
@@ -186,7 +195,7 @@ class DashboardStore {
     try {
       const dashboard: IDashboard = await api.files.getDashboard(fileId);
 
-      this.setRoles(dashboard.current.fillQueue);
+      this.setRoles(dashboard.current.roleQueue);
       this.setDashboard(dashboard);
 
       await this.settingUpNavigationPath(dashboard);

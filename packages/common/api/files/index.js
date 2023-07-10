@@ -339,18 +339,6 @@ export function createFolder(parentFolderId, title) {
   return request(options);
 }
 
-//TODO: temp remove later
-export function createBoard(parentFolderId, title) {
-  const data = { title };
-  const options = {
-    method: "post",
-    url: `/files/folder/board/${parentFolderId}`,
-    data,
-  };
-
-  return request(options);
-}
-
 export function renameFolder(folderId, title) {
   const data = { title };
   const options = {
@@ -1007,6 +995,17 @@ export function getDashboard(folderId) {
   const options = {
     method: "get",
     url: `files/${folderId}`,
+  };
+
+  return request(options);
+}
+
+//TODO: Remove later Added role
+export function setRoles(fileId, users) {
+  const options = {
+    method: "put",
+    url: `files/file/${fileId}/roles`,
+    data: users,
   };
 
   return request(options);

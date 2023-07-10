@@ -1687,6 +1687,8 @@ class FilesStore {
         "select",
         "show-filling-status",
         "fill-form",
+        //TODO: Remove later Added role
+        "add-role",
         "edit",
         "preview",
         "view",
@@ -1759,6 +1761,8 @@ class FilesStore {
 
       if (!(shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
+        //TODO: Remove later Added role
+        fileOptions = this.removeOptions(fileOptions, ["add-role"]);
         fileOptions = this.removeOptions(fileOptions, ["show-filling-status"]);
       }
 
@@ -2194,10 +2198,6 @@ class FilesStore {
 
   createFolder(parentFolderId, title) {
     return api.files.createFolder(parentFolderId, title);
-  }
-  //TODO: temp remove later
-  createBoard(parentFolderId, title) {
-    return api.files.createBoard(parentFolderId, title);
   }
 
   createRoom = (roomParams) => {

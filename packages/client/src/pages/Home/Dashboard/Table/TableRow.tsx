@@ -29,7 +29,7 @@ function TableRow({ role }: TableRowProps) {
     badge,
     isChecked,
     onChecked,
-    getOptions,
+    contextOptions,
     onClickBadge,
     onContentRowCLick,
   } = role;
@@ -74,7 +74,7 @@ function TableRow({ role }: TableRowProps) {
     onContentRowCLick(role, !isChecked);
   };
 
-  const contextOptions = getOptions();
+  // const contextOptions = contextOptions;
 
   return (
     <TableRowContainer

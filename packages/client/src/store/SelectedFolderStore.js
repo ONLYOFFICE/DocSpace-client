@@ -141,7 +141,6 @@ class SelectedFolderStore {
 
       for (let key of selectedFolderItems) {
         if (key in this) {
-          console.log({ key, selectedFolder, selectedFolderItems });
           this[key] = selectedFolder[key];
         }
       }

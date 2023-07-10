@@ -2199,10 +2199,6 @@ class FilesStore {
   createFolder(parentFolderId, title) {
     return api.files.createFolder(parentFolderId, title);
   }
-  //TODO: temp remove later
-  createBoard(parentFolderId, title) {
-    return api.files.createBoard(parentFolderId, title);
-  }
 
   createRoom = (roomParams) => {
     this.roomCreated = true;

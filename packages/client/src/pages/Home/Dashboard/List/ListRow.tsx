@@ -36,11 +36,6 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
     }
   };
 
-  const element = useMemo(
-    () => <Icon size="medium" type={role.type} color={role.color} />,
-    [role.type, role.color]
-  );
-
   const onSelect = (checked: boolean, role: IRole) => {
     role.onChecked(role, checked);
   };
@@ -49,13 +44,19 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
     role.onContentRowCLick(role, !role.isChecked);
   };
 
-  const contextOptions = getModel(role, t);
+  const onRowContextClick = (withSelection?: boolean) => {
+    if (withSelection === undefined) return;
+
+    role.onContentRowCLick(role, false, withSelection);
+  };
+
+  const contextOptions = useMemo(() => getModel(role, t), [role, t]);
 
   return (
     <div
       className={
         classNames("row-wrapper", {
-          ["row-selected"]: role.isChecked,
+          ["row-selected"]: role.isChecked || role.isActive,
         }) as string
       }
     >
@@ -63,15 +64,15 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
         <RoleRow
           data={role}
           mode="modern"
-          element={element}
+          element={<Icon size="medium" type={role.type} color={role.color} />}
           className="role-row"
-          isActive={false}
+          isActive={role.isActive}
           checked={role.isChecked}
           sectionWidth={sectionWidth}
           onSelect={onSelect}
           onRowClick={onRowClick}
           contextOptions={contextOptions}
-          onContextClick={onRowClick}
+          onContextClick={onRowContextClick}
         >
           <RoleRowContent
             isMobile={isMobile}

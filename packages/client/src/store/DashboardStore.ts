@@ -114,11 +114,27 @@ class DashboardStore {
     window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
   };
 
-  private setBufferSelection = (role: IRole, checked: boolean) => {
-    this.BufferSelectionRole = role;
-    this.SelectedRolesMap.clear();
+  private setBufferSelection = (
+    role: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => {
+    const hasRole = this.SelectedRolesMap.has(role.id);
 
-    if (checked) this.SelectedRolesMap.set(role.id, role);
+    if (withSelection && hasRole) {
+      this.clearBufferSelectionRole();
+    }
+
+    if (withSelection && !hasRole) {
+      this.BufferSelectionRole = role;
+      this.SelectedRolesMap.clear();
+    }
+
+    if (!withSelection) {
+      this.BufferSelectionRole = role;
+      this.SelectedRolesMap.clear();
+      if (checked) this.SelectedRolesMap.set(role.id, role);
+    }
   };
 
   //#endregion
@@ -133,6 +149,7 @@ class DashboardStore {
         onChecked: this.selectedRole,
         onContentRowCLick: this.setBufferSelection,
         isChecked: this.SelectedRolesMap.has(role.id),
+        isActive: this.BufferSelectionRole?.id === role.id,
       };
 
       if (role.type === RoleTypeEnum.Default) {
@@ -161,6 +178,8 @@ class DashboardStore {
   //#region public method
 
   public selectedRole = (role: IRole, checked: boolean): void => {
+    if (this.BufferSelectionRole) this.clearBufferSelectionRole();
+
     if (checked) this.SelectedRolesMap.set(role.id, role);
     else this.SelectedRolesMap.delete(role.id);
   };
@@ -174,7 +193,11 @@ class DashboardStore {
   };
 
   public setViewAs = (viewAs: string): void => {
-    console.log("DashboardStore setViewAs", viewAs);
+    const isNotEmptySelected = this.SelectedRolesMap.size !== 0;
+
+    if (isNotEmptySelected && viewAs === "dashboard") {
+      this.clearSelectedRoleMap();
+    }
 
     this.viewAs = viewAs;
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);

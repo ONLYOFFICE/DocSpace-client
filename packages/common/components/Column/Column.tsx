@@ -43,9 +43,13 @@ function Column(props: PropsWithChildren<ColumnProps>) {
     contextMenuRef.current?.hide(event);
   }, []);
 
+  const getModel = useCallback(
+    () => props.getModel(props.role, t),
+    [props.role, t]
+  );
+
   if (!isDefaultColumn(props)) {
     const isDone = props.role.type === RoleTypeEnum.Done;
-    const getModel = () => props.getModel(props.role, t);
 
     return (
       <ColumnContainer>

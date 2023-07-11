@@ -10,9 +10,13 @@ export type RoleTypeOwn = {
   badge: number;
   onClickBadge?: VoidFunction;
   contextOptionsModel: string[];
-  onContentRowCLick: (role: IRole, checked: boolean) => void;
+  onContentRowCLick: (
+    role: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
   color?: string;
-
+  isActive: boolean;
   isChecked: boolean;
   onChecked: (role: RoleType, checked: boolean) => void;
 };

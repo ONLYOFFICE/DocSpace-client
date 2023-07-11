@@ -73,7 +73,7 @@ class DashboardContextOpetion {
       "link-for-room-members": {
         id: "option_role_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:LinkForRoomMembers"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => {},
         disabled: false,

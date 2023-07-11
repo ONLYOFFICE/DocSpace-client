@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { DefaultIcon, icons, isDone, isInterrupted } from "./Icon.helper";
 import IconProps from "./Icon.props";
 
@@ -10,4 +11,4 @@ function Icon(props: IconProps): JSX.Element {
   return <DefaultIcon color={props.color} size={props.size} />;
 }
 
-export default Icon;
+export default memo(Icon);

@@ -3030,6 +3030,10 @@ namespace ASC.Migrations.PostgreSql.Migrations.FilesDb
                         .HasDefaultValueSql("NULL::bpchar")
                         .IsFixedLength();
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
                     b.HasKey("TenantId", "BoardId", "RoleId")
                         .HasName("files_board_role_pkey");
 

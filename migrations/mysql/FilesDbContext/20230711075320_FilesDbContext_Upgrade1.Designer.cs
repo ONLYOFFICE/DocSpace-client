@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASC.Migrations.MySql.Migrations.FilesDb
 {
     [DbContext(typeof(FilesDbContext))]
-    [Migration("20230707103328_FilesDbContext_Upgrade1")]
+    [Migration("20230711075320_FilesDbContext_Upgrade1")]
     partial class FilesDbContextUpgrade1
     {
         /// <inheritdoc />
@@ -3048,6 +3048,10 @@ namespace ASC.Migrations.MySql.Migrations.FilesDb
                         .HasColumnName("role_title")
                         .UseCollation("utf8_general_ci")
                         .HasAnnotation("MySql:CharSet", "utf8");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
 
                     b.HasKey("TenantId", "BoardId", "RoleId")
                         .HasName("PRIMARY");

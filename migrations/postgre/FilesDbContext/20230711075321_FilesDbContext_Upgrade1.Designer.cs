@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ASC.Migrations.PostgreSql.Migrations.FilesDb
 {
     [DbContext(typeof(FilesDbContext))]
-    [Migration("20230707103329_FilesDbContext_Upgrade1")]
+    [Migration("20230711075321_FilesDbContext_Upgrade1")]
     partial class FilesDbContextUpgrade1
     {
         /// <inheritdoc />
@@ -3032,6 +3032,10 @@ namespace ASC.Migrations.PostgreSql.Migrations.FilesDb
                         .HasColumnName("color")
                         .HasDefaultValueSql("NULL::bpchar")
                         .IsFixedLength();
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
 
                     b.HasKey("TenantId", "BoardId", "RoleId")
                         .HasName("files_board_role_pkey");

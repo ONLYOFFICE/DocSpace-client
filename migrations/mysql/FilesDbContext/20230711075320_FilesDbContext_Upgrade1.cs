@@ -22,6 +22,7 @@ namespace ASC.Migrations.MySql.Migrations.FilesDb
                     color = table.Column<string>(type: "varchar(10)", nullable: true, collation: "utf8_general_ci")
                         .Annotation("MySql:CharSet", "utf8"),
                     queuenumber = table.Column<int>(name: "queue_number", type: "int", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: false),
                     assignedto = table.Column<string>(name: "assigned_to", type: "varchar(38)", nullable: false, collation: "utf8_general_ci")
                         .Annotation("MySql:CharSet", "utf8")
                 },

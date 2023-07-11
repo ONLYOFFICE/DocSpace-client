@@ -2,10 +2,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import StyledLdapPage from "./styled-components/StyledLdapPage";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
+
+import StyledLdapPage from "./styled-components/StyledLdapPage";
+import ToggleLDAP from "./sub-components/ToggleLDAP";
 
 const LDAP = ({ ldapSettingsUrl, theme, currentColorScheme }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
@@ -22,6 +24,8 @@ const LDAP = ({ ldapSettingsUrl, theme, currentColorScheme }) => {
           {t("Common:LearnMore")}
         </Link>
       </Box>
+
+      <ToggleLDAP isLDAPAvailable={true} />
     </StyledLdapPage>
   );
 };

@@ -10,6 +10,24 @@ const StyledLdapPage = styled(Box)`
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .toggle-caption_title_badge {
+        margin-left: 4px;
+        cursor: auto;
+      }
+    }
+  }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

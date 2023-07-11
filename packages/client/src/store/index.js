@@ -8,6 +8,7 @@ import CommonStore from "./CommonStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
+import LdapFormStore from "./LdapFormStore";
 
 import FilesStore from "./FilesStore";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -52,6 +53,7 @@ const backupStore = new BackupStore();
 const commonStore = new CommonStore();
 
 const ssoStore = new SsoFormStore();
+const ldapStore = new LdapFormStore();
 
 const tagsStore = new TagsStore();
 
@@ -182,6 +184,8 @@ const store = {
   common: commonStore,
 
   ssoStore,
+  ldapStore,
+
   profileActionsStore,
 
   filesStore,

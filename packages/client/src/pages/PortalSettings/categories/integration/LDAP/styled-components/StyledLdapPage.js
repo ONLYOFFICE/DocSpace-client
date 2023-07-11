@@ -28,6 +28,10 @@ const StyledLdapPage = styled(Box)`
     }
   }
 
+  .hide-button {
+    margin-left: 12px;
+  }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

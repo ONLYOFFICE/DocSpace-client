@@ -8,12 +8,14 @@ import Link from "@docspace/components/link";
 
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import ToggleLDAP from "./sub-components/ToggleLDAP";
+import HideButton from "./sub-components/HideButton";
 
 const LDAP = ({
   ldapSettingsUrl,
   theme,
   currentColorScheme,
   isLdapAvailable,
+  isSettingsShown,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   return (
@@ -31,18 +33,32 @@ const LDAP = ({
       </Box>
 
       <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
+
+      <HideButton
+        text={t("Settings:LDAP")}
+        value={isSettingsShown}
+        isDisabled={!isLdapAvailable}
+      />
+
+      {isSettingsShown && (
+        <Box>
+          <Text>{t("LdapDisclaimer")}</Text>
+        </Box>
+      )}
     </StyledLdapPage>
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, ldapStore }) => {
   const { settingsStore, currentQuotaStore } = auth;
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme } = settingsStore;
+  const { isSettingsShown } = ldapStore;
   return {
     ldapSettingsUrl,
     theme,
     currentColorScheme,
     isLdapAvailable,
+    isSettingsShown,
   };
 })(observer(LDAP));

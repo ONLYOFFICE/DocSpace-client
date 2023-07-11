@@ -255,8 +255,16 @@ export const settingsTree = [
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-third-party-services",
+        id: "portal-settings_catalog-ldap",
         key: "4-0",
+        icon: "",
+        link: "ldap",
+        tKey: "LdapSettings",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-third-party-services",
+        key: "4-1",
         icon: "",
         link: "third-party-services",
         tKey: "ThirdPartyAuthorization",
@@ -264,7 +272,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-single-sign-on",
-        key: "4-1",
+        key: "4-2",
         icon: "",
         link: "single-sign-on",
         tKey: "SingleSignOn",
@@ -272,7 +280,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-plugins",
-        key: "4-2",
+        key: "4-3",
         icon: "",
         link: "plugins",
         tKey: "Plugins",
@@ -280,7 +288,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-smtp-settings",
-        key: "4-3",
+        key: "4-4",
         icon: "",
         link: "smtp-settings",
         tKey: "SMTPSettings",

@@ -1,19 +1,16 @@
 import styled from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
+import Box from "@docspace/components/box";
 
-const StyledLdapPage = styled.div`
-  box-sizing: border-box;
-  outline: none;
+const StyledLdapPage = styled(Box)`
   max-width: 700px;
-  padding-top: 5px;
+  width: 100%;
 
   .intro-text {
-    margin-bottom: 18px;
-    max-width: 700px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
-  ${(props) => !props.isSettingPaid && UnavailableStyles}i
+  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledLdapPage;

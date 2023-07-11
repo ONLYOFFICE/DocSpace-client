@@ -1,5 +1,4 @@
 import type { IconSizeType } from "../types";
-import type {} from "@docspace/common/Models";
 import { RoleTypeEnum } from "@docspace/common/enums";
 
 export type IconProps = {

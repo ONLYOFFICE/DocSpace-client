@@ -9,7 +9,7 @@ export type RoleTypeOwn = {
   title: string;
   badge: number;
   onClickBadge?: VoidFunction;
-  contextOptions: string[];
+  contextOptionsModel: string[];
   onContentRowCLick: (role: IRole, checked: boolean) => void;
   color?: string;
 

@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Badge } from "@docspace/components";
 import Link from "@docspace/components/link";
@@ -16,9 +17,10 @@ import { ListRowProps } from "./List.props";
 import { StoreType, ParamType } from "../types";
 import { IRole } from "@docspace/common/Models";
 
-function ListRow({ role, theme, sectionWidth }: ListRowProps) {
+function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
   const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const href = useMemo(
     () => roomId && `/rooms/shared/${roomId}/role/${role.id}`,
@@ -47,7 +49,7 @@ function ListRow({ role, theme, sectionWidth }: ListRowProps) {
     role.onContentRowCLick(role, !role.isChecked);
   };
 
-  const contextOptions = role.contextOptions;
+  const contextOptions = getModel(role, t);
 
   return (
     <div
@@ -69,6 +71,7 @@ function ListRow({ role, theme, sectionWidth }: ListRowProps) {
           onSelect={onSelect}
           onRowClick={onRowClick}
           contextOptions={contextOptions}
+          onContextClick={onRowClick}
         >
           <RoleRowContent
             isMobile={isMobile}

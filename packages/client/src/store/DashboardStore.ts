@@ -4,9 +4,7 @@ import SelectedFolderStore from "./SelectedFolderStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
 import { FolderType } from "@docspace/common/constants";
-import { combineUrl, isDefaultRole } from "@docspace/common/utils";
 
-import config from "PACKAGE_FILE";
 import api from "@docspace/common/api";
 
 import type { IDashboard, IRole } from "@docspace/common/Models";
@@ -92,7 +90,7 @@ class DashboardStore {
   private removeOptions = (options: string[], toRemoveArray: string[]) =>
     options.filter((o) => !toRemoveArray.includes(o));
 
-  private getRolesContextOptions = (role: RoleQueue) => {
+  private getRolesContextOptionsModel = (role: RoleQueue) => {
     let roleOptions = [
       "link-for-room-members",
       "separator0",
@@ -102,9 +100,10 @@ class DashboardStore {
       "delete-role",
     ];
 
-    if (role.type === RoleTypeEnum.Done) {
+    if (role.type === RoleTypeEnum.Default) {
       roleOptions = this.removeOptions(roleOptions, [
-        "separator1, delete-role",
+        "separator1",
+        "delete-role",
       ]);
     }
 
@@ -129,7 +128,7 @@ class DashboardStore {
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
       const general = {
-        contextOptions: this.getRolesContextOptions(role),
+        contextOptionsModel: this.getRolesContextOptionsModel(role),
         onClickBadge: () => {},
         onChecked: this.selectedRole,
         onContentRowCLick: this.setBufferSelection,

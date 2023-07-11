@@ -13,7 +13,7 @@ const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `boardTableColumns_ver=${TABLE_VERSION}`;
 const TABLE_COLUMNS_SIZE = `boardTableColumnsSize_ver=${TABLE_VERSION}`;
 
-function Table({ roles, sectionWidth, userID }: TableProps) {
+function Table({ roles, sectionWidth, userID, getModel }: TableProps) {
   const { t } = useTranslation();
 
   const tableLocalStorageKey = useMemo(
@@ -115,7 +115,7 @@ function Table({ roles, sectionWidth, userID }: TableProps) {
         filesLength={roles.length}
       >
         {roles.map((role) => (
-          <TableRow key={role.id} role={role} />
+          <TableRow key={role.id} role={role} getModel={getModel} />
         ))}
       </TableBody>
     </StyledTableContainer>

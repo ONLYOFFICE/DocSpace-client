@@ -1,6 +1,7 @@
 import { useMemo, ChangeEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import {
   BoardTableRow,
@@ -19,7 +20,7 @@ import { TableRowProps } from "./Table.porps";
 import { ParamType } from "../types";
 import { classNames } from "@docspace/components/utils/classNames";
 
-function TableRow({ role }: TableRowProps) {
+function TableRow({ role, getModel }: TableRowProps) {
   const {
     queue,
     title,
@@ -29,13 +30,13 @@ function TableRow({ role }: TableRowProps) {
     badge,
     isChecked,
     onChecked,
-    contextOptions,
     onClickBadge,
     onContentRowCLick,
   } = role;
 
   const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const href = useMemo(
     () => roomId && `/rooms/shared/${roomId}/role/${id}`,
@@ -69,12 +70,14 @@ function TableRow({ role }: TableRowProps) {
       return;
     }
 
-    console.log("Ckick", { role, isChecked });
-
     onContentRowCLick(role, !isChecked);
   };
 
-  // const contextOptions = contextOptions;
+  const onRowContextClick = () => {
+    onContentRowCLick(role, !isChecked);
+  };
+
+  const contextOptions = getModel(role, t);
 
   return (
     <TableRowContainer
@@ -90,6 +93,7 @@ function TableRow({ role }: TableRowProps) {
         checked={isChecked}
         contextOptions={contextOptions}
         onClick={onRowClick}
+        fileContextClick={onRowContextClick}
       >
         <TableCell
           className="table-container_role-name-cell"

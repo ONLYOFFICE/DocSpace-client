@@ -38,6 +38,7 @@ import DashboardStore from "./DashboardStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
+import DashboardContextOpetion from "./DashboardContextOption";
 
 const oformsStore = new OformsStore(authStore);
 
@@ -178,6 +179,8 @@ const dashboardStore = new DashboardStore(
   clientLoadingStore
 );
 
+const dashboardContextOptionStore = new DashboardContextOpetion(dashboardStore);
+
 const store = {
   auth: authStore,
   payments: paymentStore,
@@ -215,6 +218,7 @@ const store = {
   createEditRoomStore,
 
   dashboardStore,
+  dashboardContextOptionStore,
   webhooksStore,
   clientLoadingStore,
 };

@@ -1,4 +1,5 @@
 import { IRole } from "@docspace/common/Models";
+import { GetModelFunctionType } from "./types";
 
 interface DashboardProps {
   viewAs: string;
@@ -7,6 +8,7 @@ interface DashboardProps {
   roles: IRole[];
   clearSelectedRoleMap: VoidFunction;
   clearBufferSelectionRole: VoidFunction;
+  getModel: GetModelFunctionType;
 }
 
 export default DashboardProps;

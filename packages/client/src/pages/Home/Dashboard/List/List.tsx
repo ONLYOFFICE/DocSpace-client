@@ -2,7 +2,7 @@ import ListProps from "./List.props";
 import { RoleRowContainer } from "./List.styled";
 import ListRow from "./ListRow";
 
-function List({ roles, sectionWidth }: ListProps) {
+function List({ roles, sectionWidth, getModel }: ListProps) {
   return (
     <RoleRowContainer
       useReactWindow
@@ -14,7 +14,12 @@ function List({ roles, sectionWidth }: ListProps) {
       fetchMoreFiles={() => {}}
     >
       {roles.map((role) => (
-        <ListRow key={role.id} sectionWidth={sectionWidth} role={role} />
+        <ListRow
+          key={role.id}
+          getModel={getModel}
+          sectionWidth={sectionWidth}
+          role={role}
+        />
       ))}
     </RoleRowContainer>
   );

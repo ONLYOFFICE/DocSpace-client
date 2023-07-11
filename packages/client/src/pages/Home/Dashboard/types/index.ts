@@ -1,5 +1,7 @@
 import store from "src/store";
 import { Base, Dark } from "@docspace/components/themes";
+import { IRole } from "@docspace/common/Models";
+import { ContextMenuModel } from "@docspace/components/types";
 
 export type ContextType = {
   sectionWidth: number;
@@ -23,6 +25,11 @@ export type TableColumnType = {
   onClick: (sortBy: any) => void;
   onIconClick?: () => void;
 };
+
+export type GetModelFunctionType = (
+  role: IRole,
+  t: (arg: string) => string
+) => ContextMenuModel[];
 
 export type ParamType = {
   boardId: string;

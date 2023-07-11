@@ -3,7 +3,7 @@ import Card from "@docspace/common/components/Card";
 import { BoardContainer } from "./Board.styled";
 import BoardProps from "./Board.props";
 
-function Board({ roles }: BoardProps) {
+function Board({ roles, getModel }: BoardProps) {
   const columns = [
     {
       id: 1,
@@ -73,7 +73,7 @@ function Board({ roles }: BoardProps) {
   return (
     <BoardContainer>
       {roles.map((role, index) => (
-        <Column key={role.id} {...role}>
+        <Column key={role.id} role={role} getModel={getModel}>
           {columns[index]?.cards?.map((card) => {
             return (
               <Card

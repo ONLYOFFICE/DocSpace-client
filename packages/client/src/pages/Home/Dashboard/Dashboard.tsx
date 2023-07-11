@@ -14,18 +14,14 @@ import Board from "./Board";
 import DashboardProps from "./Dashboard.props";
 import { ContextType, StoreType } from "./types";
 
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import LinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-
 function Dashboard({
   viewAs,
   roles,
+  userID,
+  getModel,
   setViewAs,
   clearSelectedRoleMap,
   clearBufferSelectionRole,
-  userID,
 }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
 
@@ -58,48 +54,21 @@ function Dashboard({
     setViewAs(width < 1024 ? "row" : "table");
   }, [sectionWidth, viewAs]);
 
-  const getOptions = () => [
-    {
-      key: "link_for_room_members",
-      label: "Link for room members",
-      icon: LinkReactSvgUrl,
-      onClick: () => console.log("onClick Link for room members"),
-      disabled: false,
-    },
-    {
-      key: "download_folder",
-      label: "Download folder",
-      icon: DownloadReactSvgUrl,
-      onClick: () => console.log("onClick Download folder"),
-      disabled: false,
-    },
-    {
-      key: "copy_folder",
-      label: "Copy folder",
-      icon: CopyReactSvgUrl,
-      onClick: () => console.log("onClick Copy folder"),
-      disabled: false,
-    },
-    {
-      key: "separator0",
-      isSeparator: true,
-      disabled: false,
-    },
-    {
-      key: "delete_all_forms",
-      label: "Delete all forms",
-      icon: TrashReactSvgUrl,
-      onClick: () => console.log("onClick Delete all forms"),
-      disabled: false,
-    },
-  ];
-
   if (viewAs === "row") {
-    return <List sectionWidth={sectionWidth} roles={roles} />;
+    return (
+      <List sectionWidth={sectionWidth} roles={roles} getModel={getModel} />
+    );
   }
 
   if (viewAs === "table") {
-    return <Table sectionWidth={sectionWidth} roles={roles} userID={userID} />;
+    return (
+      <Table
+        sectionWidth={sectionWidth}
+        roles={roles}
+        userID={userID}
+        getModel={getModel}
+      />
+    );
   }
 
   if (isMobile) {
@@ -111,16 +80,22 @@ function Dashboard({
           height: `calc(100vh  - ${isMobileOnly ? 255 : 155}px)`,
         }}
       >
-        <Board roles={roles} />
+        <Board roles={roles} getModel={getModel} />
       </Scrollbar>
     );
   }
 
-  return <Board roles={roles} />;
+  return <Board roles={roles} getModel={getModel} />;
 }
 
 export default inject<StoreType>(
-  ({ dashboardStore, filesStore, clientLoadingStore, auth }) => {
+  ({
+    dashboardStore,
+    filesStore,
+    clientLoadingStore,
+    dashboardContextOptionStore,
+    auth,
+  }) => {
     const {
       viewAs,
       setViewAs,
@@ -128,6 +103,9 @@ export default inject<StoreType>(
       clearSelectedRoleMap,
       clearBufferSelectionRole,
     } = dashboardStore;
+
+    const { getModel } = dashboardContextOptionStore;
+
     const { isInit, isLoadingFilesFind } = filesStore;
     const { firstLoad, showBodyLoader } = clientLoadingStore;
 
@@ -148,6 +126,7 @@ export default inject<StoreType>(
       clearSelectedRoleMap,
       clearBufferSelectionRole,
       userID,
+      getModel,
     };
   }
 )(observer(withDashboardLoader(Dashboard)));

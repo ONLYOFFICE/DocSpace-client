@@ -8,6 +8,7 @@ import config from "PACKAGE_FILE";
 import { isMobile } from "react-device-detect";
 
 import SSO from "./SingleSignOn";
+import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
 import AppLoader from "@docspace/common/components/AppLoader";
@@ -27,6 +28,11 @@ const IntegrationWrapper = (props) => {
   }, []);
 
   const data = [
+    {
+      id: "ldap",
+      name: t("LDAP"),
+      content: <LDAP />,
+    },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),

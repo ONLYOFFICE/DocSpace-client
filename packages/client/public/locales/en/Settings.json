@@ -106,6 +106,7 @@
   "LanguageAndTimeZoneSettingsDescription": "Language and Time Zone Settings is a way to change the language of the space for all users and to configure the time zone so that all the actions will be shown with the correct date and time.",
   "LanguageTimeSettingsTooltip": "<0>{{text}}</0> is a way to change the language of the space for all users and to configure the time zone so that all the actions of the {{ organizationName }} space will be shown with the correct date and time.",
   "LanguageTimeSettingsTooltipDescription": "To make the parameters you set take effect click the <1>{{save}}</1> button at the bottom of the section.<3>{{learnMore}}</3>",
+  "LDAP": "LDAP",
   "Lifetime": "Lifetime (min)",
   "LimitThemesTooltip": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "LocalFile": "Local file",

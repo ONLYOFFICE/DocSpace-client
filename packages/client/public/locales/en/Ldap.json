@@ -1,0 +1,3 @@
+{
+  "LdapIntro": "LDAP is a way to import users and groups from an LDAP server, as well as provide user authentication on the portal using logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication on the portal."
+}

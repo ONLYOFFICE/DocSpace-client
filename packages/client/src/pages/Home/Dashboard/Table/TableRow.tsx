@@ -22,7 +22,7 @@ import { classNames } from "@docspace/components/utils/classNames";
 
 function TableRow({ role, getModel }: TableRowProps) {
   const {
-    queue,
+    queueNumber,
     title,
     id,
     type,
@@ -143,7 +143,7 @@ function TableRow({ role, getModel }: TableRowProps) {
 
         <TableCell className="table-cell_queue-number" forwardedRef={undefined}>
           <TableCellQueue className="table-cell_queue-number_color">
-            {queue}
+            {queueNumber}
           </TableCellQueue>
         </TableCell>
       </BoardTableRow>

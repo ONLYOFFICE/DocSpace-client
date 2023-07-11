@@ -5,7 +5,7 @@ import { IRole } from "../Models";
 export type RoleTypeOwn = {
   id: number;
   type: RoleTypeEnum;
-  queue: number;
+  queueNumber: number;
   title: string;
   badge: number;
   onClickBadge?: VoidFunction;

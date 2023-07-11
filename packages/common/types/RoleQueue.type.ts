@@ -3,7 +3,7 @@ import { RoleTypeEnum } from "../enums/RoleType.enum";
 export type RoleQueueOwn = {
   id: number;
   type: RoleTypeEnum;
-  queue: number;
+  queueNumber: number;
   title: string;
   badge: number;
 

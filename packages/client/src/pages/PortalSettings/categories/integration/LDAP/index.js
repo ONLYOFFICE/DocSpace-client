@@ -9,10 +9,15 @@ import Link from "@docspace/components/link";
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 
-const LDAP = ({ ldapSettingsUrl, theme, currentColorScheme }) => {
+const LDAP = ({
+  ldapSettingsUrl,
+  theme,
+  currentColorScheme,
+  isLdapAvailable,
+}) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   return (
-    <StyledLdapPage theme={theme}>
+    <StyledLdapPage theme={theme} isSettingPaid={isLdapAvailable}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <Box marginProp="8px 0 24px 0">
         <Link
@@ -25,17 +30,19 @@ const LDAP = ({ ldapSettingsUrl, theme, currentColorScheme }) => {
         </Link>
       </Box>
 
-      <ToggleLDAP isLDAPAvailable={true} />
+      <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
     </StyledLdapPage>
   );
 };
 
 export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+  const { settingsStore, currentQuotaStore } = auth;
+  const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme } = settingsStore;
   return {
     ldapSettingsUrl,
     theme,
     currentColorScheme,
+    isLdapAvailable,
   };
 })(observer(LDAP));

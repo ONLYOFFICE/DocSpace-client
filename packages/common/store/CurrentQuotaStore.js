@@ -139,6 +139,15 @@ class QuotasStore {
     return result?.value;
   }
 
+  get isLdapAvailable() {
+    const result = this.currentPortalQuotaFeatures.find(
+      (obj) => obj.id === "ldap"
+    );
+
+    //TODO: restore after backed quota fix
+    return true; // result?.value;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "restore"

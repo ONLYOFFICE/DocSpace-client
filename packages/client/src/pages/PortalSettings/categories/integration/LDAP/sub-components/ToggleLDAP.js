@@ -88,6 +88,12 @@ export default inject(({ auth, ldapStore }) => {
   const { theme } = auth.settingsStore;
   const { enableLdap, isLdapEnabled, ldapToggle } = ldapStore;
 
+  console.log({
+    theme,
+    toggleContentBackground:
+      theme.client.settings.integration.sso.toggleContentBackground,
+  });
+
   return {
     theme,
     enableLdap,

@@ -9,6 +9,7 @@ import Link from "@docspace/components/link";
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import HideButton from "./sub-components/HideButton";
+import Checkboxes from "./sub-components/Checkboxes";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -18,6 +19,7 @@ const LDAP = ({
   isSettingsShown,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+
   return (
     <StyledLdapPage theme={theme} isSettingPaid={isLdapAvailable}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
@@ -43,6 +45,7 @@ const LDAP = ({
       {isSettingsShown && (
         <Box>
           <Text>{t("LdapDisclaimer")}</Text>
+          <Checkboxes />
         </Box>
       )}
     </StyledLdapPage>

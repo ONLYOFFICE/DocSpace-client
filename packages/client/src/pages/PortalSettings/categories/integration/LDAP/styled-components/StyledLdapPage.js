@@ -32,6 +32,13 @@ const StyledLdapPage = styled(Box)`
     margin-left: 12px;
   }
 
+  .checkbox-container {
+    margin: 20px 0 20px 0;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 12px;
+  }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

@@ -4,6 +4,8 @@ class LdapFormStore {
   isLdapEnabled = false;
   enableLdap = false;
   isSettingsShown = false;
+  isTlsEnabled = false;
+  isSslEnabled = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -19,6 +21,14 @@ class LdapFormStore {
 
   setIsSettingsShown = (shown) => {
     this.isSettingsShown = shown;
+  };
+
+  setIsTlsEnabled = (enabled) => {
+    this.isTlsEnabled = enabled;
+  };
+
+  setIsSslEnabled = (enabled) => {
+    this.isSslEnabled = enabled;
   };
 }
 

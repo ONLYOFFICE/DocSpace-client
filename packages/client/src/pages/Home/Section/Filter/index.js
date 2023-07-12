@@ -1755,8 +1755,20 @@ const SectionFilterContent = ({
       label: t("Common:Type"),
       default: true,
     };
+    const queueNumber = {
+      id: "sort-by_queue-number",
+      key: SortByFieldName.QueueNumber,
+      label: t("Common:QueueNumber"),
+      default: true,
+    };
 
-    if (isDashboardPage) return [name, modifiedDate];
+    if (isDashboardPage) {
+      if (dashboardViewAs === "dashboard") {
+        return [name, modifiedDate];
+      }
+
+      return [name, queueNumber];
+    }
 
     commonOptions.push(name);
 
@@ -1960,6 +1972,7 @@ const SectionFilterContent = ({
     isPersonalRoom,
     isTrash,
     isDashboardPage,
+    dashboardViewAs,
   ]);
 
   const removeSelectedItem = React.useCallback(

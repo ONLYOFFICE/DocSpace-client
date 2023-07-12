@@ -132,7 +132,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:roomId/dashboard/:boardId",
+            path: "rooms/shared/dashboard/:boardId",
             element: (
               <PrivateRoute>
                 <Dashboard />
@@ -140,7 +140,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:roomId/dashboard/:boardId/filter",
+            path: "rooms/shared/dashboard/:boardId/filter",
             element: (
               <PrivateRoute>
                 <Dashboard />
@@ -148,7 +148,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:roomId/role/:roleId",
+            path: "rooms/shared/role/:roleId",
             element: (
               <PrivateRoute>
                 <Role />
@@ -156,7 +156,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/:roomId/role/:roleId/filter",
+            path: "rooms/shared/role/:roleId/filter",
             element: (
               <PrivateRoute>
                 <Role />

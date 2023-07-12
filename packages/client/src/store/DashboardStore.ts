@@ -16,6 +16,8 @@ import type {
   RoleInterruptedType,
 } from "@docspace/common/types";
 import { RoleTypeEnum } from "@docspace/common/enums";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
@@ -110,8 +112,8 @@ class DashboardStore {
     return roleOptions;
   };
 
-  private gotoRole = (id: string | number, roodId: string | number) => {
-    window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
+  private gotoRole = (id: string | number, roomId: string | number) => {
+    window.DocSpace.navigate(`rooms/shared/${roomId}/role/${id}`);
   };
 
   private setBufferSelection = (
@@ -143,6 +145,8 @@ class DashboardStore {
 
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
+      const url = getCategoryUrl(CategoryType.Role, role.id);
+
       const general = {
         contextOptionsModel: this.getRolesContextOptionsModel(role),
         onClickBadge: () => {},
@@ -150,6 +154,7 @@ class DashboardStore {
         onContentRowCLick: this.setBufferSelection,
         isChecked: this.SelectedRolesMap.has(role.id),
         isActive: this.BufferSelectionRole?.id === role.id,
+        url,
       };
 
       if (role.type === RoleTypeEnum.Default) {

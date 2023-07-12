@@ -4,20 +4,22 @@ import { IRole } from "../Models";
 
 export type RoleTypeOwn = {
   id: number;
-  type: RoleTypeEnum;
-  queueNumber: number;
   title: string;
   badge: number;
-  onClickBadge?: VoidFunction;
+  url: string;
+  color?: string;
+  isActive: boolean;
+  isChecked: boolean;
+  type: RoleTypeEnum;
+  queueNumber: number;
   contextOptionsModel: string[];
+
+  onClickBadge?: VoidFunction;
   onContentRowCLick: (
     role: IRole,
     checked: boolean,
     withSelection?: boolean
   ) => void;
-  color?: string;
-  isActive: boolean;
-  isChecked: boolean;
   onChecked: (role: RoleType, checked: boolean) => void;
 };
 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Badge } from "@docspace/components";
@@ -14,26 +14,17 @@ import Icon from "../Icon";
 import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
 import { ListRowProps } from "./List.props";
-import { StoreType, ParamType } from "../types";
+import { StoreType } from "../types";
 import { IRole } from "@docspace/common/Models";
 
 function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
-  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/role/${role.id}`,
-
-    [roomId, role.id]
-  );
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    if (href) {
-      navigate(href);
-    }
+    navigate(role.url);
   };
 
   const onSelect = (checked: boolean, role: IRole) => {
@@ -81,6 +72,7 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
           >
             <Link
               type="page"
+              href={role.url}
               isTextOverflow
               fontSize="14px"
               fontWeight={600}

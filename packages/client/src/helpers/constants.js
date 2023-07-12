@@ -54,6 +54,7 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   Dashboard: 10,
+  Role: 11,
 });
 
 /**

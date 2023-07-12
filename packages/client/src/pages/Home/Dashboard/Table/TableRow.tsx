@@ -1,5 +1,5 @@
-import { useMemo, ChangeEvent } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,6 @@ import Link from "@docspace/components/link";
 import Icon from "../Icon";
 
 import { TableRowProps } from "./Table.porps";
-import { ParamType } from "../types";
 import { classNames } from "@docspace/components/utils/classNames";
 
 function TableRow({ role, getModel }: TableRowProps) {
@@ -35,22 +34,13 @@ function TableRow({ role, getModel }: TableRowProps) {
     onContentRowCLick,
   } = role;
 
-  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/role/${id}`,
-
-    [roomId, id]
-  );
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    if (href) {
-      navigate(href);
-    }
+    navigate(role.url);
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +109,7 @@ function TableRow({ role, getModel }: TableRowProps) {
 
           <Link
             type="page"
-            href={href}
+            href={role.url}
             title={title}
             isTextOverflow
             fontSize="13px"

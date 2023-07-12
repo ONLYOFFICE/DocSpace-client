@@ -2064,12 +2064,11 @@ class FilesActionStore {
         fromDashboard: true,
       };
 
-      return window.DocSpace.navigate(
-        `/rooms/shared/${item.parentId}/dashboard/${id}`,
-        {
-          state,
-        }
-      );
+      const url = getCategoryUrl(CategoryType.Dashboard, id);
+
+      return window.DocSpace.navigate(url, {
+        state,
+      });
     }
 
     if (isFolder) {

@@ -1,6 +1,9 @@
-import { IRole } from "@docspace/common/Models";
-import { ContextMenuModel } from "@docspace/components/types";
 import { makeAutoObservable } from "mobx";
+
+import DashboardHeaderMenuService from "SRC_DIR/services/DashboardHeaderMenu.service";
+import type { IRole } from "@docspace/common/Models";
+
+import { ContextMenuModel } from "@docspace/components/types";
 import DashboardStore from "./DashboardStore";
 
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
@@ -9,7 +12,14 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
 class DashboardContextOpetion {
+  public dashboardHeaderMenuService!: DashboardHeaderMenuService;
+
   constructor(private dashboardStore: DashboardStore) {
+    this.dashboardHeaderMenuService = new DashboardHeaderMenuService(
+      dashboardStore,
+      this
+    );
+
     makeAutoObservable(this);
   }
 
@@ -29,6 +39,7 @@ class DashboardContextOpetion {
         key: "download-role",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
+        iconUrl: DownloadReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },
@@ -38,6 +49,7 @@ class DashboardContextOpetion {
         key: "copy-role",
         label: t("Common:Copy"),
         icon: CopyReactSvgUrl,
+        iconUrl: CopyReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },
@@ -47,6 +59,7 @@ class DashboardContextOpetion {
         key: "delete-role",
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
+        iconUrl: TrashReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },

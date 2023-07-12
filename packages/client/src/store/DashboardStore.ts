@@ -228,6 +228,9 @@ class DashboardStore {
     }
   };
 
+  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
+    this.SelectedRolesMap = selectedRolesMap;
+  };
   //#endregion
 }
 

@@ -45,6 +45,15 @@ const StyledLdapPage = styled(Box)`
     grid-template-columns: minmax(100px, 340px) 1fr;
     grid-gap: 12px;
   }
+
+  .ldap_attribute-mapping {
+    input {
+      margin-bottom: 16px;
+    }
+    display: grid;
+    grid-template-columns: minmax(100px, 340px) 1fr;
+    grid-gap: 12px;
+  }
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

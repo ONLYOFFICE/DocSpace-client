@@ -11,6 +11,7 @@ import ToggleLDAP from "./sub-components/ToggleLDAP";
 import HideButton from "./sub-components/HideButton";
 import Checkboxes from "./sub-components/Checkboxes";
 import ConnectionSettings from "./sub-components/ConnectionSettings";
+import AttributeMapping from "./sub-components/AttributeMapping";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -51,6 +52,7 @@ const LDAP = ({
           </Box>
 
           <ConnectionSettings t={t} />
+          <AttributeMapping t={t} />
         </>
       )}
     </StyledLdapPage>

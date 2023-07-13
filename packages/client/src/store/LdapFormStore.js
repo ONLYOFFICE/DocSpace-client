@@ -13,6 +13,21 @@ class LdapFormStore {
   portNumber = "";
   userFilter = "";
 
+  firstName = "givenName";
+  secondName = "sn";
+  mail = "mail";
+
+  errors = {
+    isServerError: false,
+    isUserDNError: false,
+    isPortNumberError: false,
+    isUserFilterError: false,
+    isLoginAttributeError: false,
+    isFirstNameError: false,
+    isSecondNameError: false,
+    isMailError: false,
+  };
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -53,6 +68,20 @@ class LdapFormStore {
 
   setUserFilter = (userFilter) => {
     this.userFilter = userFilter;
+  };
+
+  setFirstName = (firstName) => {
+    this.firstName = firstName;
+  };
+  setSecondName = (secondName) => {
+    this.secondName = secondName;
+  };
+  setMail = (mail) => {
+    this.mail = mail;
+  };
+
+  setErrors = (key, value) => {
+    this.errors[key] = value;
   };
 
   ldapToggle = () => {

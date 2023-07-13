@@ -112,8 +112,8 @@ class DashboardStore {
     return roleOptions;
   };
 
-  private gotoRole = (id: string | number, roomId: string | number) => {
-    window.DocSpace.navigate(`rooms/shared/${roomId}/role/${id}`);
+  private goTo = (url: string) => {
+    window.DocSpace.navigate(url);
   };
 
   private setBufferSelection = (
@@ -161,8 +161,7 @@ class DashboardStore {
         const defaultRole: RoleDefaultType = {
           ...role,
           ...general,
-          onClickLocation: (roomId: string | number) =>
-            this.gotoRole(role.id, roomId),
+          onClickLocation: () => this.goTo(url),
         };
 
         return defaultRole;

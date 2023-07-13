@@ -32,7 +32,7 @@ export interface RoleDefaultType extends RoleTypeOwn {
     displayName: string;
   };
   color: string;
-  onClickLocation: (roomId: string | number) => void;
+  onClickLocation: VoidFunction;
   type: RoleTypeEnum.Default;
 }
 

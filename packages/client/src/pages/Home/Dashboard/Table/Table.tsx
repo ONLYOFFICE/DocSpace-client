@@ -77,7 +77,7 @@ function Table({ roles, sectionWidth, userID, getModel }: TableProps) {
       },
       {
         key: "Queue",
-        title: "Queue number",
+        title: t("Common:QueueNumber"),
         enable: true,
         resizable: true,
         sortBy: "Queue",

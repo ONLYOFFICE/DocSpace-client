@@ -1,8 +1,12 @@
+import copy from "copy-to-clipboard";
 import { makeAutoObservable } from "mobx";
+import config from "PACKAGE_FILE";
 
 import DashboardHeaderMenuService from "SRC_DIR/services/DashboardHeaderMenu.service";
+import toastr from "@docspace/components/toast/toastr";
 import type { IRole } from "@docspace/common/Models";
 
+import { combineUrl } from "@docspace/common/utils";
 import { ContextMenuModel } from "@docspace/components/types";
 import DashboardStore from "./DashboardStore";
 
@@ -22,6 +26,21 @@ class DashboardContextOpetion {
 
     makeAutoObservable(this);
   }
+
+  private getFullUrl = (url: string) => {
+    const proxyURL =
+      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+
+    return combineUrl(proxyURL, config.homepage, url);
+  };
+
+  public onCopyLink = (item: IRole, t: (arg: string) => string) => {
+    const url = this.getFullUrl(item.url);
+
+    copy(url);
+
+    return toastr.success(t("Translations:LinkCopySuccess"));
+  };
 
   public getGroupContextOptions = (t: (arg: string) => string) => {
     const length = this.dashboardStore.SelectedRolesMap.size;
@@ -88,7 +107,7 @@ class DashboardContextOpetion {
         key: "link-for-room-members",
         label: t("Files:LinkForRoomMembers"),
         icon: InvitationLinkReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.onCopyLink(role, t),
         disabled: false,
       },
 

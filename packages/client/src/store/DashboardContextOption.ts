@@ -76,7 +76,7 @@ class DashboardContextOpetion {
       "delete-role": {
         id: "option_role_delete",
         key: "delete-role",
-        label: t("Common:Delete"),
+        label: t("Files:DeleteAllForm"),
         icon: TrashReactSvgUrl,
         iconUrl: TrashReactSvgUrl,
         onClick: () => {},
@@ -142,7 +142,7 @@ class DashboardContextOpetion {
       "delete-role": {
         id: "option_role_delete",
         key: "delete-role",
-        label: t("Common:Delete"),
+        label: t("Files:DeleteAllForm"),
         icon: TrashReactSvgUrl,
         onClick: () => {},
         disabled: false,

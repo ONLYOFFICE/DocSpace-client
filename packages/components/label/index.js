@@ -34,7 +34,13 @@ const Label = (props) => {
       title={title}
       className={className}
     >
-      {text} {isRequired && " *"} {children}
+      {text}{" "}
+      {isRequired && (
+        <Text as="span" color="#F21C0E">
+          *
+        </Text>
+      )}
+      {children}
     </Text>
   );
 };

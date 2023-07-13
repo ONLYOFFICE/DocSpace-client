@@ -912,7 +912,7 @@ class ContextOptionsStore {
       {
         id: "option_open-board",
         key: "open-board",
-        label: "Open board",
+        label: t("OpenBoard"),
         icon: BoardIconSvgUrl,
         onClick: () => this.onClickOpenBoard(item),
         disabled: false,

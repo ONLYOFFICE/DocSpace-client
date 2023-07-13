@@ -47,12 +47,18 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_attribute-mapping {
+    margin-top: 16px;
     input {
       margin-bottom: 16px;
     }
     display: grid;
     grid-template-columns: minmax(100px, 340px) 1fr;
     grid-gap: 12px;
+  }
+  .ldap_buttons-container {
+    button:first-child {
+      margin-right: 8px;
+    }
   }
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;

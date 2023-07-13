@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
+import Text from "@docspace/components/text";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -20,9 +21,7 @@ const AttributeMapping = (props) => {
     setSecondName,
     setMail,
 
-    isFirstNameError,
-    isSecondNameError,
-    isMailError,
+    errors,
   } = props;
 
   const onChangeValue = (e) => {
@@ -42,38 +41,43 @@ const AttributeMapping = (props) => {
   };
 
   return (
-    <Box className="ldap_attribute-mapping">
-      <div>
-        <TextInput isReadOnly isDisabled value={"First name"} scale />
-        <TextInput isReadOnly isDisabled value={"Second name"} scale />
-        <TextInput isReadOnly isDisabled value={"Mail"} scale />
-      </div>
-      <div>
-        <TextInput
-          name={FIRST_NAME}
-          hasError={isFirstNameError}
-          onChange={onChangeValue}
-          value={firstName}
-          scale
-        />
+    <>
+      <Text fontWeight={600} fontSize={"14px"}>
+        {t("LdapAttributeMapping")}
+      </Text>
+      <Box className="ldap_attribute-mapping">
+        <div>
+          <TextInput isReadOnly isDisabled value={t("LdapFirstName")} scale />
+          <TextInput isReadOnly isDisabled value={t("LdapSecondName")} scale />
+          <TextInput isReadOnly isDisabled value={t("LdapMail")} scale />
+        </div>
+        <div>
+          <TextInput
+            name={FIRST_NAME}
+            hasError={errors.firstName}
+            onChange={onChangeValue}
+            value={firstName}
+            scale
+          />
 
-        <TextInput
-          name={SECOND_NAME}
-          hasError={isSecondNameError}
-          onChange={onChangeValue}
-          value={secondName}
-          scale
-        />
+          <TextInput
+            name={SECOND_NAME}
+            hasError={errors.secondName}
+            onChange={onChangeValue}
+            value={secondName}
+            scale
+          />
 
-        <TextInput
-          name={MAIL}
-          hasError={isMailError}
-          onChange={onChangeValue}
-          value={mail}
-          scale
-        />
-      </div>
-    </Box>
+          <TextInput
+            name={MAIL}
+            hasError={errors.mail}
+            onChange={onChangeValue}
+            value={mail}
+            scale
+          />
+        </div>
+      </Box>
+    </>
   );
 };
 
@@ -83,14 +87,11 @@ export default inject(({ ldapStore }) => {
     setFirstName,
     setSecondName,
 
-    firstName,
-    secondName,
-    mail,
+    requiredSettings,
     errors,
   } = ldapStore;
 
-  const { isFirstNameError, isSecondNameError, isMailError } = errors;
-
+  const { firstName, secondName, mail } = requiredSettings;
   return {
     setFirstName,
     setSecondName,
@@ -100,8 +101,6 @@ export default inject(({ ldapStore }) => {
     secondName,
     mail,
 
-    isFirstNameError,
-    isSecondNameError,
-    isMailError,
+    errors,
   };
 })(observer(AttributeMapping));

@@ -7,81 +7,71 @@ class LdapFormStore {
   isTlsEnabled = false;
   isSslEnabled = false;
 
-  server = "";
-  userDN = "";
-  loginAttribute = "";
-  portNumber = "";
-  userFilter = "";
-
-  firstName = "givenName";
-  secondName = "sn";
-  mail = "mail";
-
-  errors = {
-    isServerError: false,
-    isUserDNError: false,
-    isPortNumberError: false,
-    isUserFilterError: false,
-    isLoginAttributeError: false,
-    isFirstNameError: false,
-    isSecondNameError: false,
-    isMailError: false,
+  requiredSettings = {
+    server: "",
+    userDN: "",
+    loginAttribute: "uid",
+    portNumber: "389",
+    userFilter: "(objectclass=*)",
+    firstName: "givenName",
+    secondName: "sn",
+    mail: "mail",
   };
+
+  errors = {};
 
   constructor() {
     makeAutoObservable(this);
   }
 
   setServer = (server) => {
-    this.server = server;
-  };
-
-  setIsServerError = (isServerError) => {
-    this.isServerError = isServerError;
-  };
-
-  setIsUserDNError = (isUserDNError) => {
-    this.isUserDNError = isUserDNError;
-  };
-
-  setIsPortNumberError = (isPortNumberError) => {
-    this.isPortNumberError = isPortNumberError;
-  };
-  setIsUserFilterError = (isUserFilterError) => {
-    this.isUserFilterError = isUserFilterError;
-  };
-  setIsLoginAttributeError = (isLoginAttributeError) => {
-    this.isLoginAttributeError = isLoginAttributeError;
+    this.requiredSettings.server = server;
   };
 
   setUserDN = (userDN) => {
-    this.userDN = userDN;
+    this.requiredSettings.userDN = userDN;
   };
 
   setLoginAttribute = (loginAttribute) => {
-    this.loginAttribute = loginAttribute;
+    this.requiredSettings.loginAttribute = loginAttribute;
   };
 
   setPortNumber = (portNumber) => {
-    this.portNumber = portNumber;
+    this.requiredSettings.portNumber = portNumber;
   };
 
   setUserFilter = (userFilter) => {
-    this.userFilter = userFilter;
+    this.requiredSettings.userFilter = userFilter;
   };
 
   setFirstName = (firstName) => {
-    this.firstName = firstName;
+    this.requiredSettings.firstName = firstName;
   };
   setSecondName = (secondName) => {
-    this.secondName = secondName;
+    this.requiredSettings.secondName = secondName;
   };
+
   setMail = (mail) => {
-    this.mail = mail;
+    this.requiredSettings.mail = mail;
   };
 
   setErrors = (key, value) => {
     this.errors[key] = value;
+  };
+
+  saveLdapSettings = () => {
+    let isErrorExist = false;
+
+    for (var key in this.requiredSettings) {
+      if (this.requiredSettings[key].trim() === "") {
+        isErrorExist = true;
+        this.errors[key] = true;
+      } else this.errors[key] = false;
+    }
+
+    if (isErrorExist) return;
+
+    console.log("saving settings");
   };
 
   ldapToggle = () => {

@@ -31,11 +31,7 @@ const ConnectionSettings = (props) => {
     setPortNumber,
     setUserFilter,
 
-    isServerError,
-    isUserDNError,
-    isLoginAttributeError,
-    isPortNumberError,
-    isUserFilterError,
+    errors,
   } = props;
 
   const onChangeValue = (e) => {
@@ -67,13 +63,13 @@ const ConnectionSettings = (props) => {
           style={FIELD_STYLE}
           isVertical
           errorMessage={t("Common:EmptyFieldError")}
-          hasError={isServerError}
+          hasError={errors.server}
           labelText={t("LdapServer")}
           isRequired
         >
           <TextInput
             name={SERVER}
-            hasError={isServerError}
+            hasError={errors.server}
             onChange={onChangeValue}
             value={server}
             scale
@@ -83,13 +79,13 @@ const ConnectionSettings = (props) => {
           style={FIELD_STYLE}
           isVertical
           errorMessage={t("Common:EmptyFieldError")}
-          hasError={isUserDNError}
+          hasError={errors.userDN}
           labelText={t("LdapUserDN")}
           isRequired
         >
           <TextInput
             name={USER_DN}
-            hasError={isUserDNError}
+            hasError={errors.userDN}
             onChange={onChangeValue}
             value={userDN}
             scale
@@ -99,13 +95,13 @@ const ConnectionSettings = (props) => {
           style={LAST_FIELD_STYLE}
           isVertical
           errorMessage={t("Common:EmptyFieldError")}
-          hasError={isLoginAttributeError}
+          hasError={errors.loginAttribute}
           labelText={t("LdapLoginAttribute")}
           isRequired
         >
           <TextInput
             name={LOGIN_ATTRIBUTE}
-            hasError={isLoginAttributeError}
+            hasError={errors.loginAttribute}
             onChange={onChangeValue}
             value={loginAttribute}
             scale
@@ -117,14 +113,14 @@ const ConnectionSettings = (props) => {
           style={FIELD_STYLE}
           isVertical
           errorMessage={t("Common:EmptyFieldError")}
-          hasError={isPortNumberError}
+          hasError={errors.portNumber}
           labelText={t("LdapPortNumber")}
           isRequired
         >
           <TextInput
             pattern="[1-9]*"
             name={PORT_NUMBER}
-            hasError={isPortNumberError}
+            hasError={errors.portNumber}
             onChange={onChangeValue}
             value={portNumber}
             scale
@@ -135,13 +131,13 @@ const ConnectionSettings = (props) => {
           style={LAST_FIELD_STYLE}
           isVertical
           errorMessage={t("Common:EmptyFieldError")}
-          hasError={isUserFilterError}
+          hasError={errors.userFilter}
           labelText={t("LdapUserFilter")}
           isRequired
         >
           <Textarea
             name={USER_FILTER}
-            hasError={isUserFilterError}
+            hasError={errors.userFilter}
             onChange={onChangeValue}
             value={userFilter}
             heightTextArea={100}
@@ -156,22 +152,21 @@ export default inject(({ ldapStore }) => {
   const {
     setServer,
     setPortNumber,
-    server,
     setUserDN,
-    userDN,
-    loginAttribute,
-    userFilter,
     setLoginAttribute,
     setUserFilter,
-    portNumber,
 
-    isServerError,
-    isUserDNError,
-    isLoginAttributeError,
-    isPortNumberError,
-    isUserFilterError,
+    requiredSettings,
+    errors,
   } = ldapStore;
 
+  const {
+    portNumber,
+    userFilter,
+    userDN,
+    server,
+    loginAttribute,
+  } = requiredSettings;
   return {
     setServer,
     setUserDN,
@@ -185,10 +180,6 @@ export default inject(({ ldapStore }) => {
     portNumber,
     userFilter,
 
-    isServerError,
-    isUserDNError,
-    isLoginAttributeError,
-    isPortNumberError,
-    isUserFilterError,
+    errors,
   };
 })(observer(ConnectionSettings));

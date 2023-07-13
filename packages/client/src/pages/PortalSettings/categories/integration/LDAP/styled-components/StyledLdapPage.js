@@ -40,10 +40,6 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_connection-container {
-    input {
-      width: 100%;
-    }
-
     margin: 20px 0 28px 0;
     display: grid;
     grid-template-columns: minmax(100px, 340px) 1fr;

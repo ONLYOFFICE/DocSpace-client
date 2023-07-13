@@ -76,6 +76,7 @@ const ConnectionSettings = (props) => {
             hasError={isServerError}
             onChange={onChangeValue}
             value={server}
+            scale
           />
         </FieldContainer>
         <FieldContainer
@@ -91,6 +92,7 @@ const ConnectionSettings = (props) => {
             hasError={isUserDNError}
             onChange={onChangeValue}
             value={userDN}
+            scale
           />
         </FieldContainer>
         <FieldContainer
@@ -106,6 +108,7 @@ const ConnectionSettings = (props) => {
             hasError={isLoginAttributeError}
             onChange={onChangeValue}
             value={loginAttribute}
+            scale
           />
         </FieldContainer>
       </div>
@@ -124,6 +127,7 @@ const ConnectionSettings = (props) => {
             hasError={isPortNumberError}
             onChange={onChangeValue}
             value={portNumber}
+            scale
           />
         </FieldContainer>
 

@@ -4,5 +4,10 @@
   "LdapToggleDescription": "Enable this option if you want to add users from LDAP server/Active Directory to DocSpace automatically. The added users will be able to authorize using their LDAP server/Active Directory credentials. DocSpace does not save the user passwords locally and will authenticate users sending their login and password to LDAP server/Active Directory.",
   "LdapDisclaimer": "Please, keep in mind: the portal user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any portal notification.",
   "LdapEnableStartTls": "Enable StartTLS",
-  "LdapEnableSSL": "Enable SSL"
+  "LdapEnableSSL": "Enable SSL",
+  "LdapLoginAttribute": "Login Attribute",
+  "LdapPortNumber": "Port Number",
+  "LdapServer": "Server",
+  "LdapUserDN": "User DN",
+  "LdapUserFilter": "User Filter"
 }

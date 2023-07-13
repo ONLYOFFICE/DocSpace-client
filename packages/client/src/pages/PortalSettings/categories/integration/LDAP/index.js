@@ -10,6 +10,7 @@ import StyledLdapPage from "./styled-components/StyledLdapPage";
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import HideButton from "./sub-components/HideButton";
 import Checkboxes from "./sub-components/Checkboxes";
+import ConnectionSettings from "./sub-components/ConnectionSettings";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -43,10 +44,14 @@ const LDAP = ({
       />
 
       {isSettingsShown && (
-        <Box>
-          <Text>{t("LdapDisclaimer")}</Text>
-          <Checkboxes />
-        </Box>
+        <>
+          <Box>
+            <Text>{t("LdapDisclaimer")}</Text>
+            <Checkboxes />
+          </Box>
+
+          <ConnectionSettings t={t} />
+        </>
       )}
     </StyledLdapPage>
   );

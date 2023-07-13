@@ -543,6 +543,14 @@ const SectionHeaderContent = (props) => {
           disabled: isRecycleBinFolder || isPersonalRoom,
           icon: InvitationLinkReactSvgUrl,
         },
+        {
+          id: "header_option_download",
+          key: "download",
+          label: t("Common:Download"),
+          onClick: onDownloadAction,
+          disabled: isDisabled,
+          icon: DownloadReactSvgUrl,
+        },
       ];
     }
 

@@ -20,7 +20,7 @@ export default function withDashboardLoader<T extends DashboardProps>(
         case "row":
           return <Loaders.Rows />;
         case "table":
-          return <Loaders.Rows />;
+          return <Loaders.TableLoader />;
         case "dashboard":
           return <Loaders.DashboardLoader />;
         default:

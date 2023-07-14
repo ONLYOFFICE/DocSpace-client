@@ -1,6 +1,13 @@
-import { IRole } from "@docspace/common/Models";
-import { ContextMenuModel } from "@docspace/components/types";
+import copy from "copy-to-clipboard";
 import { makeAutoObservable } from "mobx";
+import config from "PACKAGE_FILE";
+
+import DashboardHeaderMenuService from "SRC_DIR/services/DashboardHeaderMenu.service";
+import toastr from "@docspace/components/toast/toastr";
+import type { IRole } from "@docspace/common/Models";
+
+import { combineUrl } from "@docspace/common/utils";
+import { ContextMenuModel } from "@docspace/components/types";
 import DashboardStore from "./DashboardStore";
 
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
@@ -9,9 +16,31 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
 class DashboardContextOpetion {
+  public dashboardHeaderMenuService!: DashboardHeaderMenuService;
+
   constructor(private dashboardStore: DashboardStore) {
+    this.dashboardHeaderMenuService = new DashboardHeaderMenuService(
+      dashboardStore,
+      this
+    );
+
     makeAutoObservable(this);
   }
+
+  private getFullUrl = (url: string) => {
+    const proxyURL =
+      window.DocSpaceConfig?.proxy?.url || window.location.origin;
+
+    return combineUrl(proxyURL, config.homepage, url);
+  };
+
+  public onCopyLink = (item: IRole, t: (arg: string) => string) => {
+    const url = this.getFullUrl(item.url);
+
+    copy(url);
+
+    return toastr.success(t("Translations:LinkCopySuccess"));
+  };
 
   public getGroupContextOptions = (t: (arg: string) => string) => {
     const length = this.dashboardStore.SelectedRolesMap.size;
@@ -29,6 +58,7 @@ class DashboardContextOpetion {
         key: "download-role",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
+        iconUrl: DownloadReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },
@@ -38,6 +68,7 @@ class DashboardContextOpetion {
         key: "copy-role",
         label: t("Common:Copy"),
         icon: CopyReactSvgUrl,
+        iconUrl: CopyReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },
@@ -45,8 +76,9 @@ class DashboardContextOpetion {
       "delete-role": {
         id: "option_role_delete",
         key: "delete-role",
-        label: t("Common:Delete"),
+        label: t("Files:DeleteAllForm"),
         icon: TrashReactSvgUrl,
+        iconUrl: TrashReactSvgUrl,
         onClick: () => {},
         disabled: false,
       },
@@ -73,9 +105,9 @@ class DashboardContextOpetion {
       "link-for-room-members": {
         id: "option_role_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:LinkForRoomMembers"),
         icon: InvitationLinkReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.onCopyLink(role, t),
         disabled: false,
       },
 
@@ -110,7 +142,7 @@ class DashboardContextOpetion {
       "delete-role": {
         id: "option_role_delete",
         key: "delete-role",
-        label: t("Common:Delete"),
+        label: t("Files:DeleteAllForm"),
         icon: TrashReactSvgUrl,
         onClick: () => {},
         disabled: false,

@@ -1,5 +1,5 @@
-import { useMemo, ChangeEvent } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
@@ -17,39 +17,30 @@ import Link from "@docspace/components/link";
 import Icon from "../Icon";
 
 import { TableRowProps } from "./Table.porps";
-import { ParamType } from "../types";
 import { classNames } from "@docspace/components/utils/classNames";
 
 function TableRow({ role, getModel }: TableRowProps) {
   const {
-    queueNumber,
-    title,
     id,
     type,
     color,
     badge,
+    title,
+    isActive,
     isChecked,
+    queueNumber,
     onChecked,
     onClickBadge,
     onContentRowCLick,
   } = role;
 
-  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/role/${id}`,
-
-    [roomId, id]
-  );
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    if (href) {
-      navigate(href);
-    }
+    navigate(role.url);
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -69,38 +60,39 @@ function TableRow({ role, getModel }: TableRowProps) {
     ) {
       return;
     }
-
     onContentRowCLick(role, !isChecked);
   };
+  const onRowContextClick = (withSelect?: boolean) => {
+    if (withSelect === undefined) return;
 
-  const onRowContextClick = () => {
-    onContentRowCLick(role, !isChecked);
+    onContentRowCLick(role, false, withSelect);
   };
-
-  const contextOptions = getModel(role, t);
 
   return (
     <TableRowContainer
       id={id.toString()}
       className={
         classNames("role-item", {
-          ["table-row-selected"]: isChecked,
+          ["table-row-selected"]: isChecked || isActive,
         }) as string
       }
     >
       <BoardTableRow
         className="table-row"
         checked={isChecked}
-        contextOptions={contextOptions}
+        isActive={isActive}
+        contextOptions={role.contextOptionsModel}
+        getContextModel={() => getModel(role, t)}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
+        title={title}
       >
         <TableCell
           className="table-container_role-name-cell"
           forwardedRef={undefined}
         >
           <TableCell
-            hasAccess={true}
+            hasAccess
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
             forwardedRef={undefined}
@@ -117,7 +109,7 @@ function TableRow({ role, getModel }: TableRowProps) {
 
           <Link
             type="page"
-            href={href}
+            href={role.url}
             title={title}
             isTextOverflow
             fontSize="13px"

@@ -54,6 +54,7 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   Dashboard: 10,
+  Role: 11,
 });
 
 /**
@@ -117,6 +118,7 @@ export const SortByFieldName = Object.freeze({
   Room: "Room",
   Tags: "Tags",
   RoomType: "roomType",
+  QueueNumber: "QueueNumber",
 });
 
 export const SSO_LABEL = "SSO";

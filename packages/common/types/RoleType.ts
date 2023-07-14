@@ -4,16 +4,22 @@ import { IRole } from "../Models";
 
 export type RoleTypeOwn = {
   id: number;
-  type: RoleTypeEnum;
-  queueNumber: number;
   title: string;
   badge: number;
-  onClickBadge?: VoidFunction;
-  contextOptionsModel: string[];
-  onContentRowCLick: (role: IRole, checked: boolean) => void;
+  url: string;
   color?: string;
-
+  isActive: boolean;
   isChecked: boolean;
+  type: RoleTypeEnum;
+  queueNumber: number;
+  contextOptionsModel: string[];
+
+  onClickBadge?: VoidFunction;
+  onContentRowCLick: (
+    role: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
   onChecked: (role: RoleType, checked: boolean) => void;
 };
 
@@ -26,7 +32,7 @@ export interface RoleDefaultType extends RoleTypeOwn {
     displayName: string;
   };
   color: string;
-  onClickLocation: (roomId: string | number) => void;
+  onClickLocation: VoidFunction;
   type: RoleTypeEnum.Default;
 }
 

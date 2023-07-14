@@ -3,6 +3,7 @@ export type ContextMenuType = {
   key: string;
   label: string;
   icon: string;
+  iconUrl?: string;
   disabled: boolean;
   onClick: VoidFunction;
   isSeparator?: undefined;

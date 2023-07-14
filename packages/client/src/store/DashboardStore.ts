@@ -16,6 +16,8 @@ import type {
   RoleInterruptedType,
 } from "@docspace/common/types";
 import { RoleTypeEnum } from "@docspace/common/enums";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
@@ -110,15 +112,31 @@ class DashboardStore {
     return roleOptions;
   };
 
-  private gotoRole = (id: string | number, roodId: string | number) => {
-    window.DocSpace.navigate(`rooms/shared/${roodId}/role/${id}`);
+  private goTo = (url: string) => {
+    window.DocSpace.navigate(url);
   };
 
-  private setBufferSelection = (role: IRole, checked: boolean) => {
-    this.BufferSelectionRole = role;
-    this.SelectedRolesMap.clear();
+  private setBufferSelection = (
+    role: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => {
+    const hasRole = this.SelectedRolesMap.has(role.id);
 
-    if (checked) this.SelectedRolesMap.set(role.id, role);
+    if (withSelection && hasRole) {
+      this.clearBufferSelectionRole();
+    }
+
+    if (withSelection && !hasRole) {
+      this.BufferSelectionRole = role;
+      this.SelectedRolesMap.clear();
+    }
+
+    if (!withSelection) {
+      this.BufferSelectionRole = role;
+      this.SelectedRolesMap.clear();
+      if (checked) this.SelectedRolesMap.set(role.id, role);
+    }
   };
 
   //#endregion
@@ -127,20 +145,23 @@ class DashboardStore {
 
   public get roles(): IRole[] {
     const roles = this._roles.map<IRole>((role) => {
+      const url = getCategoryUrl(CategoryType.Role, role.id);
+
       const general = {
         contextOptionsModel: this.getRolesContextOptionsModel(role),
         onClickBadge: () => {},
         onChecked: this.selectedRole,
         onContentRowCLick: this.setBufferSelection,
         isChecked: this.SelectedRolesMap.has(role.id),
+        isActive: this.BufferSelectionRole?.id === role.id,
+        url,
       };
 
       if (role.type === RoleTypeEnum.Default) {
         const defaultRole: RoleDefaultType = {
           ...role,
           ...general,
-          onClickLocation: (roomId: string | number) =>
-            this.gotoRole(role.id, roomId),
+          onClickLocation: () => this.goTo(url),
         };
 
         return defaultRole;
@@ -161,6 +182,8 @@ class DashboardStore {
   //#region public method
 
   public selectedRole = (role: IRole, checked: boolean): void => {
+    if (this.BufferSelectionRole) this.clearBufferSelectionRole();
+
     if (checked) this.SelectedRolesMap.set(role.id, role);
     else this.SelectedRolesMap.delete(role.id);
   };
@@ -174,7 +197,11 @@ class DashboardStore {
   };
 
   public setViewAs = (viewAs: string): void => {
-    console.log("DashboardStore setViewAs", viewAs);
+    const isNotEmptySelected = this.SelectedRolesMap.size !== 0;
+
+    if (isNotEmptySelected && viewAs === "dashboard") {
+      this.clearSelectedRoleMap();
+    }
 
     this.viewAs = viewAs;
     localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
@@ -205,6 +232,9 @@ class DashboardStore {
     }
   };
 
+  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
+    this.SelectedRolesMap = selectedRolesMap;
+  };
   //#endregion
 }
 

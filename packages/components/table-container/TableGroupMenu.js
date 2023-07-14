@@ -48,19 +48,21 @@ const TableGroupMenu = (props) => {
           isIndeterminate={isIndeterminate}
           title={t("Common:MainHeaderSelectAll")}
         />
-        <ComboBox
-          id="menu-combobox"
-          comboIcon={TriangleNavigationDownReactSvgUrl}
-          noBorder
-          advancedOptions={checkboxOptions}
-          className="table-container_group-menu-combobox not-selectable"
-          options={[]}
-          selectedOption={{}}
-          manualY="42px"
-          manualX="-32px"
-          title={t("Common:TitleSelectFile")}
-          isMobileView={isMobileView}
-        />
+        {checkboxOptions.length > 0 && (
+          <ComboBox
+            id="menu-combobox"
+            comboIcon={TriangleNavigationDownReactSvgUrl}
+            noBorder
+            advancedOptions={checkboxOptions}
+            className="table-container_group-menu-combobox not-selectable"
+            options={[]}
+            selectedOption={{}}
+            manualY="42px"
+            manualX="-32px"
+            title={t("Common:TitleSelectFile")}
+            isMobileView={isMobileView}
+          />
+        )}
         <div className="table-container_group-menu-separator" />
         <StyledScrollbar>
           {headerMenu.map((item, index) => (

@@ -2634,8 +2634,8 @@ class FilesStore {
       proxyURL,
       homepage,
       "rooms/shared",
-      folderId.toString(),
-      "dashboard"
+      "dashboard",
+      folderId.toString()
     );
   }
 

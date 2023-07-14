@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Badge } from "@docspace/components";
@@ -14,32 +14,18 @@ import Icon from "../Icon";
 import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
 import { ListRowProps } from "./List.props";
-import { StoreType, ParamType } from "../types";
+import { StoreType } from "../types";
 import { IRole } from "@docspace/common/Models";
 
 function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
-  const { roomId } = useParams<ParamType>();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const href = useMemo(
-    () => roomId && `/rooms/shared/${roomId}/role/${role.id}`,
-
-    [roomId, role.id]
-  );
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    if (href) {
-      navigate(href);
-    }
+    navigate(role.url);
   };
-
-  const element = useMemo(
-    () => <Icon size="medium" type={role.type} color={role.color} />,
-    [role.type, role.color]
-  );
 
   const onSelect = (checked: boolean, role: IRole) => {
     role.onChecked(role, checked);
@@ -49,13 +35,19 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
     role.onContentRowCLick(role, !role.isChecked);
   };
 
-  const contextOptions = getModel(role, t);
+  const onRowContextClick = (withSelection?: boolean) => {
+    if (withSelection === undefined) return;
+
+    role.onContentRowCLick(role, false, withSelection);
+  };
+
+  const contextOptions = useMemo(() => getModel(role, t), [role, t]);
 
   return (
     <div
       className={
         classNames("row-wrapper", {
-          ["row-selected"]: role.isChecked,
+          ["row-selected"]: role.isChecked || role.isActive,
         }) as string
       }
     >
@@ -63,15 +55,15 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
         <RoleRow
           data={role}
           mode="modern"
-          element={element}
+          element={<Icon size="medium" type={role.type} color={role.color} />}
           className="role-row"
-          isActive={false}
+          isActive={role.isActive}
           checked={role.isChecked}
           sectionWidth={sectionWidth}
           onSelect={onSelect}
           onRowClick={onRowClick}
           contextOptions={contextOptions}
-          onContextClick={onRowClick}
+          onContextClick={onRowContextClick}
         >
           <RoleRowContent
             isMobile={isMobile}
@@ -80,6 +72,7 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
           >
             <Link
               type="page"
+              href={role.url}
               isTextOverflow
               fontSize="14px"
               fontWeight={600}

@@ -205,6 +205,8 @@ const SectionHeaderContent = (props) => {
     pathParts,
     emptyTrashInProgress,
     categoryType,
+
+    dashboardHeaderMenuService,
   } = props;
 
   const navigate = useNavigate();
@@ -541,6 +543,14 @@ const SectionHeaderContent = (props) => {
           disabled: isRecycleBinFolder || isPersonalRoom,
           icon: InvitationLinkReactSvgUrl,
         },
+        {
+          id: "header_option_download",
+          key: "download",
+          label: t("Common:Download"),
+          onClick: onDownloadAction,
+          disabled: isDisabled,
+          icon: DownloadReactSvgUrl,
+        },
       ];
     }
 
@@ -760,9 +770,14 @@ const SectionHeaderContent = (props) => {
   };
 
   const onChange = (checked) => {
-    isAccountsPage
-      ? setAccountsSelected(checked ? "all" : "none")
-      : setSelected(checked ? "all" : "none");
+    if (isAccountsPage) {
+      return setAccountsSelected(checked ? "all" : "none");
+    }
+
+    if (isDasboardPage)
+      return dashboardHeaderMenuService.onChangeSelected(checked);
+
+    setSelected(checked ? "all" : "none");
   };
 
   const onClickFolder = (id, isRootRoom) => {
@@ -828,6 +843,7 @@ const SectionHeaderContent = (props) => {
   const menuItems = getMenuItems();
 
   let tableGroupMenuVisible = headerMenu.length;
+
   const tableGroupMenuProps = {
     checkboxOptions: menuItems,
     onChange,
@@ -845,6 +861,23 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isChecked = isAccountsHeaderChecked;
     tableGroupMenuProps.isIndeterminate = isAccountsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
+  }
+  if (isDasboardPage) {
+    const {
+      isHeaderMenuVisible,
+      isHeaderChecked,
+      isHeaderIndeterminate,
+      getHeaderContextMenu,
+    } = dashboardHeaderMenuService;
+
+    tableGroupMenuVisible = isHeaderMenuVisible;
+    tableGroupMenuProps.isChecked = isHeaderChecked;
+    tableGroupMenuProps.isIndeterminate = isHeaderIndeterminate;
+
+    tableGroupMenuProps.withoutInfoPanelToggler = true;
+    tableGroupMenuProps.visibleComboBox = false;
+    tableGroupMenuProps.checkboxOptions = [];
+    tableGroupMenuProps.headerMenu = getHeaderContextMenu(t);
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
     tableGroupMenuProps.isChecked = isHeaderChecked;
@@ -954,6 +987,7 @@ export default inject(
     settingsStore,
     clientLoadingStore,
     contextOptionsStore,
+    dashboardContextOptionStore,
   }) => {
     const { isOwner, isAdmin } = auth.userStore.user;
 
@@ -1072,6 +1106,8 @@ export default inject(
 
     const { setSelected: setAccountsSelected } = selectionStore;
 
+    const { dashboardHeaderMenuService } = dashboardContextOptionStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1170,6 +1206,8 @@ export default inject(
       clearFiles,
       emptyTrashInProgress,
       categoryType,
+
+      dashboardHeaderMenuService,
     };
   }
 )(

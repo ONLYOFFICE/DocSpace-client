@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import { PropsWithChildren, useCallback, useRef } from "react";
 
 import Badge from "@docspace/components/badge";
@@ -19,8 +18,6 @@ import {
 } from "./Column.styled";
 import { ColumnProps, ColumnDefaultProps } from "./Column.props";
 
-import { ParamType } from "SRC_DIR/pages/Home/Dashboard/types";
-
 import CrossIcon from "PUBLIC_DIR/images/cross.sidebar.react.svg";
 import FolderLocationIcon from "PUBLIC_DIR/images/folder-location.react.svg";
 import CheckmarkIcon from "PUBLIC_DIR/images/checkmark.rounded.svg";
@@ -32,7 +29,6 @@ function isDefaultColumn(column: ColumnProps): column is ColumnDefaultProps {
 
 function Column(props: PropsWithChildren<ColumnProps>) {
   const contextMenuRef = useRef<ContextMenu>(null);
-  const { roomId } = useParams<ParamType>();
   const { t } = useTranslation();
 
   const onClickHandler = useCallback((event: MouseEvent) => {
@@ -43,9 +39,13 @@ function Column(props: PropsWithChildren<ColumnProps>) {
     contextMenuRef.current?.hide(event);
   }, []);
 
+  const getModel = useCallback(
+    () => props.getModel(props.role, t),
+    [props.role, t]
+  );
+
   if (!isDefaultColumn(props)) {
     const isDone = props.role.type === RoleTypeEnum.Done;
-    const getModel = () => props.getModel(props.role, t);
 
     return (
       <ColumnContainer>
@@ -89,7 +89,9 @@ function Column(props: PropsWithChildren<ColumnProps>) {
       <ColumnHeader>
         <ColumnCircle color={props.role.color} />
         <ColumnTitle>{props.role.title}</ColumnTitle>
-        <ColumnUsers>{props.role.assigned?.displayName}</ColumnUsers>
+        <ColumnUsers>
+          {props.role.assigned?.displayName ?? `@${t("Files:Everyone")}`}
+        </ColumnUsers>
         <ColumnActions>
           <Badge
             label={props.role.badge}
@@ -103,7 +105,7 @@ function Column(props: PropsWithChildren<ColumnProps>) {
           />
           <FolderLocationIcon
             className="column__location-btn"
-            onClick={() => roomId && props.role.onClickLocation(roomId)}
+            onClick={props.role.onClickLocation}
           />
         </ColumnActions>
       </ColumnHeader>

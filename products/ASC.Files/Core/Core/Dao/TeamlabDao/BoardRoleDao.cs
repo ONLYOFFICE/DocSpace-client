@@ -129,6 +129,7 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
             TenantId = TenantID,
             BoardId = boardRole.BoardId,
             RoleId = boardRole.RoleId,
+            TagId = boardRole.TagId,
             RoleTitle = boardRole.Title,
             Color = boardRole.Color,
             QueueNumber = boardRole.QueueNumber,

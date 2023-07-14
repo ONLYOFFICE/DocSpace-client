@@ -222,7 +222,14 @@ public class FilesControllerHelper : FilesHelperBase
 
         return board;
     }
+    
 
+    public async Task<FileDto<T>> ChangeFillingRoleAsync<T>(T fileId, int roleId)
+    {
+        var result = await _fileStorageService.ChangeFillingRoleAsync(fileId, roleId);
+
+        return await _fileDtoHelper.GetAsync(result);
+    }
     public async Task<FileDto<T>> LockFileAsync<T>(T fileId, bool lockFile)
     {
         var result = await _fileStorageService.LockFileAsync(fileId, lockFile);

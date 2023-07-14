@@ -287,7 +287,25 @@ internal abstract class BaseTagDao<T> : AbstractDao
             yield return _mapper.Map<DbFilesTag, TagInfo>(tag);
         }
     }
+    
+    public async Task<TagInfo> SaveTagInfoIfNotExistAsync(TagInfo tagInfo)
+    {
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
 
+        var id = await filesDbContext.Tag
+                .Where(r => r.Owner == tagInfo.Owner)
+                .Where(r => r.Name == tagInfo.Name)
+                .Where(r => r.Type == tagInfo.Type)
+                .Select(r => r.Id)
+                .FirstOrDefaultAsync();
+        if(id == 0)
+        {
+            return await SaveTagInfoAsync(tagInfo);
+        }
+        tagInfo.Id = id;
+
+        return tagInfo;
+    }
     public async Task<TagInfo> SaveTagInfoAsync(TagInfo tagInfo)
     {
         using var filesDbContext = _dbContextFactory.CreateDbContext();

@@ -17,6 +17,7 @@ namespace ASC.Migrations.MySql.Migrations.FilesDb
                     tenantid = table.Column<int>(name: "tenant_id", type: "int", nullable: false),
                     boardid = table.Column<int>(name: "board_id", type: "int", nullable: false),
                     roleid = table.Column<int>(name: "role_id", type: "int", nullable: false),
+                    tagid = table.Column<int>(name: "tag_id", type: "int", nullable: false),
                     roletitle = table.Column<string>(name: "role_title", type: "varchar(400)", nullable: true, collation: "utf8_general_ci")
                         .Annotation("MySql:CharSet", "utf8"),
                     color = table.Column<string>(type: "varchar(10)", nullable: true, collation: "utf8_general_ci")

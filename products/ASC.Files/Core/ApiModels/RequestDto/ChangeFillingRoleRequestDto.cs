@@ -23,26 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-using Profile = AutoMapper.Profile;
 
-namespace ASC.Files.Core.Core.Entries;
+namespace ASC.Files.Core.ApiModels.RequestDto;
 
-[Serializable]
-public sealed class BoardRole : IMapFrom<DbFilesBoardRole>
+public class ChangeFillingRoleRequestDto
 {
-    public int BoardId { get; set; }
     public int RoleId { get; set; }
-    public int TagId { get; set; }
-    public string Title { get; set; }
-    public string Color { get; set; }
-    public int QueueNumber { get; set; }
-    public Guid AssignedTo { get; set; }
-    public BoardRoleQueueType Type  { get; set; }
-
-    public void Mapping(Profile profile)
-    {
-        profile.CreateMap<DbFilesBoardRole, BoardRole>()
-            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.RoleTitle));
-    }
-
 }

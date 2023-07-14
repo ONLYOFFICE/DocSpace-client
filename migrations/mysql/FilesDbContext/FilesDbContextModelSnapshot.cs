@@ -3046,6 +3046,10 @@ namespace ASC.Migrations.MySql.Migrations.FilesDb
                         .UseCollation("utf8_general_ci")
                         .HasAnnotation("MySql:CharSet", "utf8");
 
+                    b.Property<int>("TagId")
+                        .HasColumnType("int")
+                        .HasColumnName("tag_id");
+
                     b.Property<int>("Type")
                         .HasColumnType("int")
                         .HasColumnName("type");

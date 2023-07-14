@@ -54,11 +54,11 @@ const LDAP = ({
             <Checkboxes />
           </Box>
 
-          <ConnectionSettings t={t} />
-          <AttributeMapping t={t} />
-          <AuthenticationContainer t={t} />
+          <ConnectionSettings />
+          <AttributeMapping />
+          <AuthenticationContainer />
           <AdvancedSettings />
-          <ButtonsContainer t={t} />
+          <ButtonsContainer />
         </>
       )}
     </StyledLdapPage>

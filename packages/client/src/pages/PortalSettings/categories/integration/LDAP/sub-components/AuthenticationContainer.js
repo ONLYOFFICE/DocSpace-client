@@ -1,19 +1,17 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
 import FieldContainer from "@docspace/components/field-container";
 import ToggleButton from "@docspace/components/toggle-button";
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
 
 const LOGIN = "login",
   PASSWORD = "password";
 
 const AuthenticationContainer = (props) => {
   const {
-    t,
     login,
     password,
     authentication,
@@ -24,7 +22,7 @@ const AuthenticationContainer = (props) => {
 
     errors,
   } = props;
-
+  const { t } = useTranslation(["Ldap", "Common"]);
   const onChangeValue = (e) => {
     const { value, name } = e.target;
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
@@ -12,8 +13,6 @@ const FIRST_NAME = "firstName",
 
 const AttributeMapping = (props) => {
   const {
-    t,
-
     firstName,
     secondName,
     mail,
@@ -24,6 +23,8 @@ const AttributeMapping = (props) => {
 
     errors,
   } = props;
+
+  const { t } = useTranslation("Ldap");
 
   const onChangeValue = (e) => {
     const { value, name } = e.target;

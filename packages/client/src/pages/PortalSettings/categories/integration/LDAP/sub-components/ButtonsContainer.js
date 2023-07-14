@@ -1,11 +1,13 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@docspace/components/box";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 const ButtonContainer = (props) => {
-  const { t, saveLdapSettings } = props;
+  const { saveLdapSettings } = props;
+  const { t } = useTranslation(["Settings", "Common"]);
 
   const onSaveClick = () => {
     saveLdapSettings();

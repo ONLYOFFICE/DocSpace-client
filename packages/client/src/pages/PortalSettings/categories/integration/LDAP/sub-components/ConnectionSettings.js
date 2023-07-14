@@ -1,5 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
@@ -17,8 +18,6 @@ const FIELD_STYLE = { marginBottom: "12px" },
 
 const ConnectionSettings = (props) => {
   const {
-    t,
-
     server,
     userDN,
     loginAttribute,
@@ -33,7 +32,7 @@ const ConnectionSettings = (props) => {
 
     errors,
   } = props;
-
+  const { t } = useTranslation(["Ldap", "Common"]);
   const onChangeValue = (e) => {
     const { value, name, validity } = e.target;
 

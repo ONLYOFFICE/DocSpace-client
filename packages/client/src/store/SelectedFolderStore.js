@@ -70,6 +70,7 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
+    this.isDashboard = false;
   };
 
   setParentId = (parentId) => {
@@ -138,6 +139,8 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
+
+      if (!("isDashboard" in selectedFolderItems)) this.isDashboard = false;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

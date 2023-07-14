@@ -877,6 +877,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.withoutInfoPanelToggler = true;
     tableGroupMenuProps.visibleComboBox = false;
     tableGroupMenuProps.checkboxOptions = [];
+    tableGroupMenuProps.withComboboxMenu = false;
     tableGroupMenuProps.headerMenu = getHeaderContextMenu(t);
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;

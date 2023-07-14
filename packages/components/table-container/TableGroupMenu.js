@@ -22,6 +22,7 @@ const TableGroupMenu = (props) => {
     onChange,
     checkboxOptions,
     checkboxMargin,
+    withComboboxMenu = true,
     isInfoPanelVisible,
     toggleInfoPanel,
     withoutInfoPanelToggler,
@@ -48,7 +49,7 @@ const TableGroupMenu = (props) => {
           isIndeterminate={isIndeterminate}
           title={t("Common:MainHeaderSelectAll")}
         />
-        {checkboxOptions.length > 0 && (
+        {withComboboxMenu && (
           <ComboBox
             id="menu-combobox"
             comboIcon={TriangleNavigationDownReactSvgUrl}
@@ -99,5 +100,6 @@ TableGroupMenu.propTypes = {
   onChange: PropTypes.func,
   checkboxMargin: PropTypes.string,
   withoutInfoPanelToggler: PropTypes.bool,
+  withComboboxMenu: PropTypes.bool,
 };
 export default TableGroupMenu;

@@ -9,12 +9,19 @@
   "LdapEnableStartTls": "Enable StartTLS",
   "LdapEnableSSL": "Enable SSL",
   "LdapLoginAttribute": "Login Attribute",
+  "LdapLoginAttributeTooltip": "Enter the object attribute corresponding to the user login.",
+  "LdapLoginTooltip": "Please specify Login user who has LDAP server/Active Directory read access rights.",
   "LdapMail": "Mail",
+  "LdapPasswordTooltip": "Enter the password for the user with the access rights to read data from LDAP server/Active Directory.",
   "LdapPortNumber": "Port Number",
+  "LdapPortNumberTooltip": "Enter the port number for your LDAP server/Active Directory.",
   "LdapSendWelcomeLetter": "Send welcome letter",
   "LdapSendWelcomeLetterTooltip": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",
   "LdapServer": "Server",
+  "LdapServerTooltip": "Enter the LDAP server URL without the port number, e.g. LDAP://mycompany.com.",
   "LdapSecondName": "Second name",
   "LdapUserDN": "User DN",
-  "LdapUserFilter": "User Filter"
+  "LdapUserDNTooltip": "Enter the distinguished name to the directory containing users you want to add.",
+  "LdapUserFilter": "User Filter",
+  "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported."
 }

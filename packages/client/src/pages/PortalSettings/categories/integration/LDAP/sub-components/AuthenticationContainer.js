@@ -5,6 +5,8 @@ import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
 import FieldContainer from "@docspace/components/field-container";
 import ToggleButton from "@docspace/components/toggle-button";
+import HelpButton from "@docspace/components/help-button";
+import Text from "@docspace/components/text";
 
 const LOGIN = "login",
   PASSWORD = "password";
@@ -50,6 +52,8 @@ const AuthenticationContainer = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.login}
           labelText={"Login"}
+          tooltipContent={t("LdapLoginTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput
@@ -67,6 +71,8 @@ const AuthenticationContainer = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.password}
           labelText={t("Common:Password")}
+          tooltipContent={t("LdapPasswordTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput

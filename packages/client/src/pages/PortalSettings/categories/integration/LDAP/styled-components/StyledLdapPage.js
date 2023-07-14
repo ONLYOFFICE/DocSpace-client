@@ -60,6 +60,13 @@ const StyledLdapPage = styled(Box)`
     grid-template-columns: minmax(100px, 340px) 1fr;
     grid-gap: 12px;
   }
+  .ldap_attribute-mapping-text {
+    display: flex;
+    align-items: baseline;
+    p:first-child {
+      margin-right: 4px;
+    }
+  }
   .ldap_buttons-container {
     button:first-child {
       margin-right: 8px;
@@ -75,14 +82,10 @@ const StyledLdapPage = styled(Box)`
     p:first-child {
       margin-bottom: 16px;
     }
-    div {
-      display: flex;
-      .checkbox {
-        margin-right: 4px;
-      }
-    }
+
     margin-bottom: 28px;
   }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

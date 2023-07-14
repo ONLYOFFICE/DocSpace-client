@@ -65,6 +65,8 @@ const ConnectionSettings = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.server}
           labelText={t("LdapServer")}
+          tooltipContent={t("LdapServerTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput
@@ -81,6 +83,8 @@ const ConnectionSettings = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userDN}
           labelText={t("LdapUserDN")}
+          tooltipContent={t("LdapUserDNTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput
@@ -97,6 +101,8 @@ const ConnectionSettings = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.loginAttribute}
           labelText={t("LdapLoginAttribute")}
+          tooltipContent={t("LdapLoginAttributeTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput
@@ -115,6 +121,8 @@ const ConnectionSettings = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.portNumber}
           labelText={t("LdapPortNumber")}
+          tooltipContent={t("LdapPortNumberTooltip")}
+          inlineHelpButton
           isRequired
         >
           <TextInput
@@ -133,6 +141,8 @@ const ConnectionSettings = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userFilter}
           labelText={t("LdapUserFilter")}
+          tooltipContent={t("LdapUserFilterTooltip")}
+          inlineHelpButton
           isRequired
         >
           <Textarea

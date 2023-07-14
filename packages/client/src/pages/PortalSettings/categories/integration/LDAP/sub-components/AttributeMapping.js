@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
+import HelpButton from "@docspace/components/help-button";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -42,9 +43,12 @@ const AttributeMapping = (props) => {
 
   return (
     <>
-      <Text fontWeight={600} fontSize={"14px"}>
-        {t("LdapAttributeMapping")}
-      </Text>
+      <div className="ldap_attribute-mapping-text">
+        <Text fontWeight={600} fontSize={"14px"}>
+          {t("LdapAttributeMapping")}
+        </Text>
+        <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
+      </div>
       <Box className="ldap_attribute-mapping">
         <div>
           <TextInput isReadOnly isDisabled value={t("LdapFirstName")} scale />

@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import Checkbox from "@docspace/components/checkbox";
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
-import { HelpButton } from "@docspace/components";
 
 const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
   const { t } = useTranslation("Ldap");
@@ -21,20 +20,13 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
       <Text fontWeight={600} fontSize={"14px"}>
         {t("LdapAdvancedSettings")}
       </Text>
-      <div>
-        <Checkbox
-          className="checkbox"
-          label={t("LdapSendWelcomeLetter")}
-          isChecked={isSendWelcomeEmail}
-          onChange={onChange}
-        />
-        <HelpButton
-          className="smtp-settings_help-button"
-          tooltipContent={
-            <Text fontSize="12px">{t("LdapSendWelcomeLetterTooltip")}</Text>
-          }
-        />
-      </div>
+
+      <Checkbox
+        className="checkbox"
+        label={t("LdapSendWelcomeLetter")}
+        isChecked={isSendWelcomeEmail}
+        onChange={onChange}
+      />
     </Box>
   );
 };

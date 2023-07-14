@@ -7,6 +7,7 @@ import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?u
 import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
 import TrashIconUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
+import DataImportReactSvgUrl from "PUBLIC_DIR/images/catalog.import.react.svg?url";
 
 /**
  * Array for generation current settings tree.
@@ -281,8 +282,26 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer-tools",
+    id: "portal-settings_catalog-migration",
     key: "5",
+    icon: DataImportReactSvgUrl,
+    link: "migration",
+    tKey: "DataImport",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-data-migration",
+        key: "5-0",
+        icon: "",
+        link: "data-import",
+        tKey: "DataImport",
+        isCategory: true,
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-developer-tools",
+    key: "6",
     icon: DeveloperReactSvgUrl,
     link: "developer-tools",
     tKey: "DeveloperTools",
@@ -290,7 +309,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-javascript-sdk",
-        key: "5-0",
+        key: "6-0",
         icon: "",
         link: "javascript-sdk",
         tKey: "DeveloperTools",
@@ -298,7 +317,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "5-1",
+        key: "6-1",
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",
@@ -308,21 +327,21 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-delete",
-    key: "6",
+    key: "7",
     icon: TrashIconUrl,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
     children: [
       {
-        key: "6-0",
+        key: "7-0",
         icon: "",
         link: "deletion",
         tKey: "PortalDeletion",
         isCategory: true,
       },
       {
-        key: "6-1",
+        key: "7-1",
         icon: "",
         link: "deactivation",
         tKey: "PortalDeactivation",
@@ -332,7 +351,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-payments",
-    key: "7",
+    key: "8",
     icon: PaymentIconUrl,
     link: "payments",
     tKey: "Common:PaymentsTitle",
@@ -340,7 +359,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-payments",
-        key: "7-0",
+        key: "8-0",
         icon: "",
         link: "portal-payments",
         tKey: "Common:PaymentsTitle",

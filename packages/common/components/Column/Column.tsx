@@ -89,7 +89,9 @@ function Column(props: PropsWithChildren<ColumnProps>) {
       <ColumnHeader>
         <ColumnCircle color={props.role.color} />
         <ColumnTitle>{props.role.title}</ColumnTitle>
-        <ColumnUsers>{props.role.assigned?.displayName}</ColumnUsers>
+        <ColumnUsers>
+          {props.role.assigned?.displayName ?? `@${t("Files:Everyone")}`}
+        </ColumnUsers>
         <ColumnActions>
           <Badge
             label={props.role.badge}

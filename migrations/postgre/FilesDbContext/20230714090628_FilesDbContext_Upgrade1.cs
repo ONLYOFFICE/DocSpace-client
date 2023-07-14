@@ -19,6 +19,7 @@ namespace ASC.Migrations.PostgreSql.Migrations.FilesDb
                     tenantid = table.Column<int>(name: "tenant_id", type: "integer", nullable: false),
                     boardid = table.Column<int>(name: "board_id", type: "integer", nullable: false),
                     roleid = table.Column<int>(name: "role_id", type: "integer", nullable: false),
+                    tagid = table.Column<int>(name: "tag_id", type: "integer", nullable: false),
                     color = table.Column<string>(type: "character(10)", fixedLength: true, maxLength: 10, nullable: true, defaultValueSql: "NULL::bpchar"),
                     roletitle = table.Column<string>(name: "role_title", type: "character(400)", fixedLength: true, maxLength: 400, nullable: true, defaultValueSql: "NULL::bpchar"),
                     queuenumber = table.Column<int>(name: "queue_number", type: "integer", nullable: false),

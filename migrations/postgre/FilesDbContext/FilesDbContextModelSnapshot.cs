@@ -3030,6 +3030,10 @@ namespace ASC.Migrations.PostgreSql.Migrations.FilesDb
                         .HasDefaultValueSql("NULL::bpchar")
                         .IsFixedLength();
 
+                    b.Property<int>("TagId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tag_id");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer")
                         .HasColumnName("type");

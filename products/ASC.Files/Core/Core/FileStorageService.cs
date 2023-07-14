@@ -598,6 +598,8 @@ public class FileStorageService //: IFileStorageService
     }
     private async Task<Folder<T>> CreateBoardAsync<T>(T formId, Dictionary<int, Guid> assignedRoles)
     {
+        TagInfo tag;
+
         var fileDao = GetFileDao<T>();
         await fileDao.InvalidateCacheAsync(formId);
 
@@ -615,60 +617,76 @@ public class FileStorageService //: IFileStorageService
 
         var boardRoles = new List<BoardRole>();
         var queueNumber = 0;
-        foreach (var r in rolesFromForm)
-        {
-            boardRoles.Add(new BoardRole()
-            {
-                Title = r.Title,
-                Color = r.Color,
-                QueueNumber = r.QueueNumber,
-                AssignedTo = r.QueueNumber == 1 ? Guid.Empty : assignedRoles[r.Id],
-                Type = BoardRoleQueueType.FromForm
-            });
-            queueNumber++;
-        }
-
-        boardRoles.Add(
-            new BoardRole()
-            {
-                Title = "Done", //TODO
-                QueueNumber = queueNumber + 1,
-                Type = BoardRoleQueueType.Done,
-                AssignedTo = Guid.Empty
-            }
-        );
-
-        boardRoles.Add(
-            new BoardRole()
-            {
-                Title = "Interrupted", //TODO
-                QueueNumber = queueNumber + 2,
-                Type = BoardRoleQueueType.Interrupted,
-                AssignedTo = Guid.Empty
-            });
-
-        var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
 
         var tagDao = _daoFactory.GetTagDao<T>();
         var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
-       
-        foreach (var role in boardRoles)
+
+        var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
+        if (board is FileEntry<int> internalEntry)
         {
-            var tagInfo = new TagInfo
+            foreach (var r in rolesFromForm)
             {
-                Name = role.Title,
+
+                var tagInfo = new TagInfo
+                {
+                    Name = r.Title,
+                    Owner = Guid.Empty,
+                    Type = TagType.Role
+                };
+                tag = await tagDao.SaveTagInfoAsync(tagInfo);
+
+                boardRoles.Add(new BoardRole()
+                {
+                    BoardId = internalEntry.Id,
+                    TagId = tag.Id,
+                    RoleId = r.Id,
+                    Title = r.Title,
+                    Color = r.Color,
+                    QueueNumber = r.QueueNumber,
+                    AssignedTo = r.QueueNumber == 1 ? Guid.Empty : assignedRoles[r.Id],
+                    Type = BoardRoleQueueType.FromForm
+                });
+
+                queueNumber++;
+            }
+            var tagDone = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
+            {
+                Name = "Done", //TODO
                 Owner = Guid.Empty,
                 Type = TagType.Role
-            };
-
-            var tag = await tagDao.SaveTagInfoAsync(tagInfo);
-            if (board is FileEntry<int> internalEntry)
+            });
+            var tagInterrupted = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
             {
-                role.BoardId = internalEntry.Id;
-                role.RoleId = tag.Id;
+                Name = "Interrupted", //TODO
+                Owner = Guid.Empty,
+                Type = TagType.Role
+            });
+            boardRoles.AddRange(new List<BoardRole>()
+            {
+                new BoardRole()
+                {
+                    BoardId = internalEntry.Id,
+                    TagId = tagDone.Id,
+                    RoleId = -1,
+                    Title = "Done", //TODO
+                    QueueNumber = queueNumber + 1,
+                    Type = BoardRoleQueueType.Done,
+                    AssignedTo = Guid.Empty
+                },
+                new BoardRole()
+                {
+                    BoardId = internalEntry.Id,
+                    TagId = tagInterrupted.Id,
+                    RoleId = -2,
+                    Title = "Interrupted", //TODO
+                    QueueNumber = queueNumber + 1,
+                    Type = BoardRoleQueueType.Done,
+                    AssignedTo = Guid.Empty
+                }
             }
-        }
 
+            );
+        }
         var result = await boardRolesDao.SaveBoardRoleAsync(boardRoles);
 
         return board;
@@ -1347,6 +1365,27 @@ public class FileStorageService //: IFileStorageService
         return new KeyValuePair<File<T>, IAsyncEnumerable<File<T>>>(file, GetFileHistoryAsync(fileId));
     }
 
+    public async Task<File<T>> ChangeFillingRoleAsync<T>(T fileId, int roleId)
+    {
+        var tagDao = GetTagDao<T>();
+        var fileDao = GetFileDao<T>();
+        var boardRolesDao = GetBoardRoleDao<T>();
+
+        var file = await fileDao.GetFileAsync(fileId);
+
+        ErrorIf(file == null, FilesCommonResource.ErrorMassage_FileNotFound);
+        var tags = tagDao.GetTagsAsync(file.Id, FileEntryType.File, TagType.Role);
+        var tagRole = await tags.FirstOrDefaultAsync();
+        if(tagRole != null)
+        {
+            await tagDao.RemoveTags(tagRole);
+        }
+
+        var tag = new Tag("locked", TagType.Locked, _authContext.CurrentAccount.ID, 0).AddEntry(file);
+
+        return file;
+    }
+    
     public async Task<File<T>> LockFileAsync<T>(T fileId, bool lockfile)
     {
         var tagDao = GetTagDao<T>();
@@ -3342,6 +3381,11 @@ public class FileStorageService //: IFileStorageService
     private IFileDao<T> GetFileDao<T>()
     {
         return _daoFactory.GetFileDao<T>();
+    }
+
+    private IBoardRoleDao<T> GetBoardRoleDao<T>()
+    {
+        return _daoFactory.GetBoardRoleDao<T>();
     }
 
     private ITagDao<T> GetTagDao<T>()

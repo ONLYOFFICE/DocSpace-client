@@ -31,6 +31,7 @@ public class DbFilesBoardRole : BaseEntity, IDbFile, IMapFrom<BoardRole>
     public int TenantId { get; set; }
     public int BoardId { get; set; }
     public int RoleId { get; set; }
+    public int TagId { get; set; }
     public string RoleTitle { get; set; }
     public string Color { get; set; }
     public int QueueNumber { get; set; }
@@ -73,6 +74,8 @@ public static class DbFilesBoardRoleExtension
 
             entity.Property(e => e.RoleId).HasColumnName("role_id");
 
+            entity.Property(e => e.TagId).HasColumnName("tag_id");
+
             entity.Property(e => e.RoleTitle)
                 .HasColumnName("role_title")
                 .HasColumnType("varchar(400)")
@@ -114,6 +117,8 @@ public static class DbFilesBoardRoleExtension
             entity.Property(e => e.BoardId).HasColumnName("board_id");
 
             entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+            entity.Property(e => e.TagId).HasColumnName("tag_id");
 
             entity.Property(e => e.RoleTitle)
                 .HasColumnName("color")

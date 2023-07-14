@@ -14,6 +14,7 @@ import ConnectionSettings from "./sub-components/ConnectionSettings";
 import AttributeMapping from "./sub-components/AttributeMapping";
 import ButtonsContainer from "./sub-components/ButtonsContainer";
 import AuthenticationContainer from "./sub-components/AuthenticationContainer";
+import AdvancedSettings from "./sub-components/AdvancedSettings";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -56,6 +57,7 @@ const LDAP = ({
           <ConnectionSettings t={t} />
           <AttributeMapping t={t} />
           <AuthenticationContainer t={t} />
+          <AdvancedSettings />
           <ButtonsContainer t={t} />
         </>
       )}

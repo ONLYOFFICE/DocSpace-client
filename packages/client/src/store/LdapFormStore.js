@@ -21,7 +21,7 @@ class LdapFormStore {
   login = "";
   password = "";
   authentication = true;
-
+  isSendWelcomeEmail = false;
   errors = {};
 
   constructor() {
@@ -70,6 +70,9 @@ class LdapFormStore {
     this.authentication = !this.authentication;
   };
 
+  setIsSendWelcomeEmail = (sendWelcomeEmail) => {
+    this.isSendWelcomeEmail = sendWelcomeEmail;
+  };
   saveLdapSettings = () => {
     let isErrorExist = false;
     this.errors = {};

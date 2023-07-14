@@ -71,6 +71,18 @@ const StyledLdapPage = styled(Box)`
     grid-template-columns: minmax(100px, 340px) 1fr;
     grid-gap: 12px;
   }
+  .ldap_advanced-settings {
+    p:first-child {
+      margin-bottom: 16px;
+    }
+    div {
+      display: flex;
+      .checkbox {
+        margin-right: 4px;
+      }
+    }
+    margin-bottom: 28px;
+  }
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

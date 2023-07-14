@@ -1,0 +1,48 @@
+import React from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import Checkbox from "@docspace/components/checkbox";
+import Box from "@docspace/components/box";
+import Text from "@docspace/components/text";
+import { HelpButton } from "@docspace/components";
+
+const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
+  const { t } = useTranslation("Ldap");
+
+  const onChange = (e) => {
+    const checked = e.target.checked;
+
+    setIsSendWelcomeEmail(checked);
+  };
+
+  return (
+    <Box className="ldap_advanced-settings">
+      <Text fontWeight={600} fontSize={"14px"}>
+        {t("LdapAdvancedSettings")}
+      </Text>
+      <div>
+        <Checkbox
+          className="checkbox"
+          label={t("LdapSendWelcomeLetter")}
+          isChecked={isSendWelcomeEmail}
+          onChange={onChange}
+        />
+        <HelpButton
+          className="smtp-settings_help-button"
+          tooltipContent={
+            <Text fontSize="12px">{t("LdapSendWelcomeLetterTooltip")}</Text>
+          }
+        />
+      </div>
+    </Box>
+  );
+};
+
+export default inject(({ ldapStore }) => {
+  const { setIsSendWelcomeEmail, isSendWelcomeEmail } = ldapStore;
+  return {
+    setIsSendWelcomeEmail,
+    isSendWelcomeEmail,
+  };
+})(observer(AdvancedSettings));

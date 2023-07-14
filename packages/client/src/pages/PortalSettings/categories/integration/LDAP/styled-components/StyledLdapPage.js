@@ -13,6 +13,10 @@ const StyledLdapPage = styled(Box)`
   .toggle {
     position: static;
     margin-top: 1px;
+    .toggle-button-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
   }
 
   .toggle-caption {
@@ -48,6 +52,7 @@ const StyledLdapPage = styled(Box)`
 
   .ldap_attribute-mapping {
     margin-top: 16px;
+    margin-bottom: 30px;
     input {
       margin-bottom: 16px;
     }
@@ -59,6 +64,12 @@ const StyledLdapPage = styled(Box)`
     button:first-child {
       margin-right: 8px;
     }
+  }
+  .ldap_authentication {
+    margin: 16px 0;
+    display: grid;
+    grid-template-columns: minmax(100px, 340px) 1fr;
+    grid-gap: 12px;
   }
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;

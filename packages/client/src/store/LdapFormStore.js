@@ -18,6 +18,10 @@ class LdapFormStore {
     mail: "mail",
   };
 
+  login = "";
+  password = "";
+  authentication = true;
+
   errors = {};
 
   constructor() {
@@ -55,18 +59,33 @@ class LdapFormStore {
     this.requiredSettings.mail = mail;
   };
 
-  setErrors = (key, value) => {
-    this.errors[key] = value;
+  setLogin = (login) => {
+    this.login = login;
+  };
+  setPassword = (password) => {
+    this.password = password;
+  };
+
+  setIsAuthentication = () => {
+    this.authentication = !this.authentication;
   };
 
   saveLdapSettings = () => {
     let isErrorExist = false;
+    this.errors = {};
+
+    if (this.authentication) {
+      this.errors.login = this.login.trim() === "";
+      this.errors.password = this.password.trim() === "";
+
+      isErrorExist = this.errors.login || this.errors.password;
+    }
 
     for (var key in this.requiredSettings) {
       if (this.requiredSettings[key].trim() === "") {
         isErrorExist = true;
         this.errors[key] = true;
-      } else this.errors[key] = false;
+      }
     }
 
     if (isErrorExist) return;

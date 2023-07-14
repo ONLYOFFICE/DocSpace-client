@@ -1,0 +1,109 @@
+import React from "react";
+import { inject, observer } from "mobx-react";
+
+import Box from "@docspace/components/box";
+import TextInput from "@docspace/components/text-input";
+import FieldContainer from "@docspace/components/field-container";
+import ToggleButton from "@docspace/components/toggle-button";
+
+const LOGIN = "login",
+  PASSWORD = "password";
+
+const AuthenticationContainer = (props) => {
+  const {
+    t,
+    login,
+    password,
+    authentication,
+
+    setLogin,
+    setPassword,
+    setIsAuthentication,
+
+    errors,
+  } = props;
+
+  const onChangeValue = (e) => {
+    const { value, name } = e.target;
+
+    switch (name) {
+      case LOGIN:
+        setLogin(value);
+        break;
+      case PASSWORD:
+        setPassword(value);
+        break;
+    }
+  };
+
+  return (
+    <>
+      <ToggleButton
+        label={"Authentication"}
+        className="toggle"
+        isChecked={authentication}
+        onChange={setIsAuthentication}
+      />
+      <Box className="ldap_authentication">
+        <FieldContainer
+          isVertical
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.login}
+          labelText={"Login"}
+          isRequired
+        >
+          <TextInput
+            name={LOGIN}
+            hasError={errors.login}
+            onChange={onChangeValue}
+            value={login}
+            isDisabled={!authentication}
+            scale
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          isVertical
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.password}
+          labelText={t("Common:Password")}
+          isRequired
+        >
+          <TextInput
+            name={PASSWORD}
+            hasError={errors.password}
+            onChange={onChangeValue}
+            value={password}
+            isDisabled={!authentication}
+            scale
+          />
+        </FieldContainer>
+      </Box>
+    </>
+  );
+};
+
+export default inject(({ ldapStore }) => {
+  const {
+    setLogin,
+    setPassword,
+    setIsAuthentication,
+
+    authentication,
+    login,
+    password,
+    errors,
+  } = ldapStore;
+
+  return {
+    setLogin,
+    setPassword,
+    setIsAuthentication,
+
+    login,
+    password,
+    authentication,
+
+    errors,
+  };
+})(observer(AuthenticationContainer));

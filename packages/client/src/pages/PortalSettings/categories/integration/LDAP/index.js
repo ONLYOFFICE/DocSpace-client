@@ -13,6 +13,7 @@ import Checkboxes from "./sub-components/Checkboxes";
 import ConnectionSettings from "./sub-components/ConnectionSettings";
 import AttributeMapping from "./sub-components/AttributeMapping";
 import ButtonsContainer from "./sub-components/ButtonsContainer";
+import AuthenticationContainer from "./sub-components/AuthenticationContainer";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -54,7 +55,7 @@ const LDAP = ({
 
           <ConnectionSettings t={t} />
           <AttributeMapping t={t} />
-
+          <AuthenticationContainer t={t} />
           <ButtonsContainer t={t} />
         </>
       )}

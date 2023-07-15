@@ -1,9 +1,13 @@
-import { useContext, useLayoutEffect, useEffect, useCallback } from "react";
+import {
+  useContext,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { Context } from "@docspace/components/utils/context";
-import Scrollbar from "@docspace/components/scrollbar";
 
 import withDashboardLoader from "SRC_DIR/HOCs/withDashboardLoader";
 
@@ -13,6 +17,12 @@ import Board from "./Board";
 
 import DashboardProps from "./Dashboard.props";
 import { ContextType, StoreType } from "./types";
+
+const view: Record<string, typeof List | typeof Table | typeof Board> = {
+  row: List,
+  table: Table,
+  dashboard: Board,
+};
 
 function Dashboard({
   viewAs,
@@ -54,38 +64,19 @@ function Dashboard({
     setViewAs(width < 1024 ? "row" : "table");
   }, [sectionWidth, viewAs]);
 
-  if (viewAs === "row") {
-    return (
-      <List sectionWidth={sectionWidth} roles={roles} getModel={getModel} />
-    );
-  }
+  const View = useMemo(() => view[viewAs], [viewAs]);
 
-  if (viewAs === "table") {
-    return (
-      <Table
-        sectionWidth={sectionWidth}
+  return (
+    <>
+      <View
+        key={`view-${viewAs}`}
         roles={roles}
         userID={userID}
         getModel={getModel}
+        sectionWidth={sectionWidth}
       />
-    );
-  }
-
-  if (isMobile) {
-    return (
-      //@ts-ignore
-      <Scrollbar
-        style={{
-          width: sectionWidth,
-          height: `calc(100vh  - ${isMobileOnly ? 255 : 155}px)`,
-        }}
-      >
-        <Board roles={roles} getModel={getModel} />
-      </Scrollbar>
-    );
-  }
-
-  return <Board roles={roles} getModel={getModel} />;
+    </>
+  );
 }
 
 export default inject<StoreType>(

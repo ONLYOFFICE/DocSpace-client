@@ -1,9 +1,12 @@
 import Column from "@docspace/common/components/Column";
 import Card from "@docspace/common/components/Card";
+
+import BoardWrapper from "./BoardWrapper";
 import { BoardContainer } from "./Board.styled";
+
 import BoardProps from "./Board.props";
 
-function Board({ roles, getModel }: BoardProps) {
+function Board({ roles, getModel, sectionWidth }: BoardProps) {
   const columns = [
     {
       id: 1,
@@ -71,21 +74,23 @@ function Board({ roles, getModel }: BoardProps) {
   ];
 
   return (
-    <BoardContainer>
-      {roles.map((role, index) => (
-        <Column key={role.id} role={role} getModel={getModel}>
-          {columns[index]?.cards?.map((card) => {
-            return (
-              <Card
-                key={card.id}
-                username={card.username}
-                filename={card.filename}
-              />
-            );
-          })}
-        </Column>
-      ))}
-    </BoardContainer>
+    <BoardWrapper sectionWidth={sectionWidth}>
+      <BoardContainer>
+        {roles.map((role, index) => (
+          <Column key={role.id} role={role} getModel={getModel}>
+            {columns[index]?.cards?.map((card) => {
+              return (
+                <Card
+                  key={card.id}
+                  username={card.username}
+                  filename={card.filename}
+                />
+              );
+            })}
+          </Column>
+        ))}
+      </BoardContainer>
+    </BoardWrapper>
   );
 }
 

@@ -679,8 +679,8 @@ public class FileStorageService //: IFileStorageService
                     TagId = tagInterrupted.Id,
                     RoleId = -2,
                     Title = "Interrupted", //TODO
-                    QueueNumber = queueNumber + 1,
-                    Type = BoardRoleQueueType.Done,
+                    QueueNumber = queueNumber + 2,
+                    Type = BoardRoleQueueType.Interrupted,
                     AssignedTo = Guid.Empty
                 }
             }

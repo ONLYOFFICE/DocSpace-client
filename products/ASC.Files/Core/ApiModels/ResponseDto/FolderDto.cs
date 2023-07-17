@@ -153,7 +153,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
             var roles = await boardRoleDao.GetBoardRolesAsync(folder.Id).ToListAsync();
 
             var boardRolesDto = new List<BoardRolesDto>();
-            foreach ( var role in roles )
+            foreach ( var role in roles.OrderBy(r => r.QueueNumber))
             {
                 boardRolesDto.Add(new BoardRolesDto
                 {

@@ -290,8 +290,16 @@ export const settingsTree = [
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-google-data-migration",
+        id: "portal-settings_catalog-data-migration",
         key: "5-0",
+        icon: "",
+        link: "migration",
+        tKey: "DataImport",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-google-data-migration",
+        key: "5-1",
         icon: "",
         link: "google",
         tKey: "DataImport",
@@ -299,7 +307,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-nextcloud-data-migration",
-        key: "5-1",
+        key: "5-2",
         icon: "",
         link: "nextcloud",
         tKey: "DataImport",
@@ -307,7 +315,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-onlyoffice-data-migration",
-        key: "5-2",
+        key: "5-3",
         icon: "",
         link: "onlyoffice",
         tKey: "DataImport",

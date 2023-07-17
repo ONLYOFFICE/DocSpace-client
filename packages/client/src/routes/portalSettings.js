@@ -239,19 +239,19 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "data-import",
+      path: "data-import/migration",
       element: <DataImport />,
     },
     {
-      path: "data-import/google",
+      path: "data-import/migration/google",
       element: <GoogleDataImport />,
     },
     {
-      path: "data-import/nextcloud",
+      path: "data-import/migration/nextcloud",
       element: <NextcloudDataImport />,
     },
     {
-      path: "data-import/onlyoffice",
+      path: "data-import/migration/onlyoffice",
       element: <OnlyofficeDataImport />,
     },
     {

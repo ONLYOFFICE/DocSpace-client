@@ -59,6 +59,12 @@ const getTreeItems = (data, path, t) => {
         return t("DeveloperTools");
       case "DataImport":
         return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
+      case "ImportFromNextcloud":
+        return t("ImportFromNextcloud");
+      case "ImportFromOnlyoffice":
+        return t("ImportFromOnlyoffice");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -175,7 +181,7 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["4-0"]);
       }
 
-      if (location.pathname.includes("migration")) {
+      if (location.pathname.includes("data-import")) {
         setSelectedKeys(["5-0"]);
       }
 
@@ -252,6 +258,12 @@ const ArticleBodyContent = (props) => {
         return t("DeveloperTools");
       case "DataImport":
         return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
+      case "ImportFromNextcloud":
+        return t("ImportFromNextcloud");
+      case "ImportFromOnlyoffice":
+        return t("ImportFromOnlyoffice");
       default:
         throw new Error("Unexpected translation key");
     }

@@ -302,7 +302,7 @@ export const settingsTree = [
         key: "5-1",
         icon: "",
         link: "google",
-        tKey: "DataImport",
+        tKey: "ImportFromGoogle",
         isCategory: true,
       },
       {
@@ -310,7 +310,7 @@ export const settingsTree = [
         key: "5-2",
         icon: "",
         link: "nextcloud",
-        tKey: "DataImport",
+        tKey: "ImportFromNextcloud",
         isCategory: true,
       },
       {
@@ -318,7 +318,7 @@ export const settingsTree = [
         key: "5-3",
         icon: "",
         link: "onlyoffice",
-        tKey: "DataImport",
+        tKey: "ImportFromOnlyoffice",
         isCategory: true,
       },
     ],

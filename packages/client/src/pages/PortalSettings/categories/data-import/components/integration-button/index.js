@@ -41,7 +41,7 @@ export const IntegrationButton = ({ icon, onClick }) => {
   return (
     <StyledButtonWrapper onClick={onClick}>
       <img src={icon} />
-      <Link type="page" isHovered color="#4781D1" fontWeight={600} lineHeight={15}>
+      <Link type="page" isHovered color="#4781D1" fontWeight={600} lineHeight="15px">
         Import
       </Link>
     </StyledButtonWrapper>

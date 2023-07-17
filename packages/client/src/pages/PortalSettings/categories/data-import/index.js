@@ -3,6 +3,8 @@ import Text from "@docspace/components/text";
 
 import styled from "styled-components";
 
+import { useNavigate } from "react-router-dom";
+
 import { IntegrationButton } from "./components/integration-button";
 
 import GoogleWorkspaceSvg from "PUBLIC_DIR/images/googleworkspace.react.svg?url";
@@ -23,6 +25,15 @@ const WorkspacesWrapper = styled.div`
 `;
 
 const DataImport = () => {
+  const navigate = useNavigate();
+
+  const redirectToGoogleMigration = () => {
+    navigate(window.location.pathname + `/google`);
+  };
+  const redirectToNextcloudMigration = () => {
+    navigate(window.location.pathname + `/nextcloud`);
+  };
+
   return (
     <div>
       <DescriptionWrapper>
@@ -36,8 +47,8 @@ const DataImport = () => {
       </Text>
 
       <WorkspacesWrapper>
-        <IntegrationButton icon={GoogleWorkspaceSvg} />
-        <IntegrationButton icon={NextcloudSvg} />
+        <IntegrationButton icon={GoogleWorkspaceSvg} onClick={redirectToGoogleMigration} />
+        <IntegrationButton icon={NextcloudSvg} onClick={redirectToNextcloudMigration} />
         <IntegrationButton icon={OnlyOfficeWorkspaceSvg} />
       </WorkspacesWrapper>
     </div>

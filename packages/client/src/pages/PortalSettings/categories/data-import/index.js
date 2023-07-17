@@ -1,30 +1,17 @@
-import React from "react";
-import Text from "@docspace/components/text";
-
-import styled from "styled-components";
-
+import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-import { IntegrationButton } from "./components/integration-button";
+import Text from "@docspace/components/text";
+import { StyledWrapper } from "./StyledDataImport";
+import ServiceItem from "./sub-components/serviceItem";
 
-import GoogleWorkspaceSvg from "PUBLIC_DIR/images/googleworkspace.react.svg?url";
-import NextcloudSvg from "PUBLIC_DIR/images/nextcloud.logo.react.svg?url";
-import OnlyOfficeWorkspaceSvg from "PUBLIC_DIR/images/logo/workspace.svg?url";
+import WorkspaceGoogleSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
+import WorkspaceNextcloudSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
+import WorkspaceOnlyofficeeSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.react.svg?url";
 
-const DescriptionWrapper = styled.div`
-  max-width: 675px;
-  margin-bottom: 21px;
-  margin-top: 3px;
-`;
-const WorkspacesWrapper = styled.div`
-  max-width: 700px;
-  margin-top: 21px;
-  gap: 20px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const DataImport = () => {
+const DataImport = (props) => {
+  const { t } = props;
   const navigate = useNavigate();
 
   const redirectToGoogleMigration = () => {
@@ -33,25 +20,37 @@ const DataImport = () => {
   const redirectToNextcloudMigration = () => {
     navigate(window.location.pathname + `/nextcloud`);
   };
+  const redirectToOnlyofficeMigration = () => {
+    navigate(window.location.pathname + `/onlyoffice`);
+  };
 
   return (
-    <div>
-      <DescriptionWrapper>
-        <Text color="#657077" lineHeight="20px">
-          Import data from a third party service to ONLYOFFICE DocSpace. Data import allows
-          transferring data such as all users, their personal and shared documents.
-        </Text>
-      </DescriptionWrapper>
-      <Text fontWeight={600}>
-        Upload a backup copy from a desired service below to start migration.
+    <StyledWrapper>
+      <Text className="data-import-description">
+        {t("Settings:DataImportDescription")}
+      </Text>
+      <Text fontWeight={600} className="start-migration-text">
+        {t("Settings:UploadBackupData")}
       </Text>
 
-      <WorkspacesWrapper>
-        <IntegrationButton icon={GoogleWorkspaceSvg} onClick={redirectToGoogleMigration} />
-        <IntegrationButton icon={NextcloudSvg} onClick={redirectToNextcloudMigration} />
-        <IntegrationButton icon={OnlyOfficeWorkspaceSvg} />
-      </WorkspacesWrapper>
-    </div>
+      <div className="service-list">
+        <ServiceItem
+          t={t}
+          logo={WorkspaceGoogleSvgUrl}
+          onClick={redirectToGoogleMigration}
+        />
+        <ServiceItem
+          t={t}
+          logo={WorkspaceNextcloudSvgUrl}
+          onClick={redirectToNextcloudMigration}
+        />
+        <ServiceItem
+          t={t}
+          logo={WorkspaceOnlyofficeeSvgUrl}
+          onClick={redirectToOnlyofficeMigration}
+        />
+      </div>
+    </StyledWrapper>
   );
 };
 

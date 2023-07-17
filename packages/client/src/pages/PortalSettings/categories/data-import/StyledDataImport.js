@@ -25,10 +25,15 @@ const StyledWrapper = styled.div`
     border-radius: 6px;
     width: 340px;
     height: 64px;
-    padding: 0 20px;
+    box-sizing: border-box;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &:hover {
+      border-color: #4781d1;
+    }
   }
 `;
 

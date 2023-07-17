@@ -856,3 +856,25 @@ export function getLdapSettings() {
 
   return request(options);
 }
+
+export function saveLdapSettings(settings, acceptCertificate) {
+  const options = {
+    method: "post",
+    url: "/settings/ldap",
+    data: {
+      settings,
+      acceptCertificate,
+    },
+  };
+
+  return request(options);
+}
+
+export function getLdapStatus() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/status",
+  };
+
+  return request(options);
+}

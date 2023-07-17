@@ -305,6 +305,14 @@ export const settingsTree = [
         tKey: "DataImport",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-onlyoffice-data-migration",
+        key: "5-2",
+        icon: "",
+        link: "onlyoffice",
+        tKey: "DataImport",
+        isCategory: true,
+      },
     ],
   },
   {

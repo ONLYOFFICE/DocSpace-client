@@ -1,3 +1,4 @@
+import { getLdapSettings } from "@docspace/common/api/settings";
 import { makeAutoObservable } from "mobx";
 
 class LdapFormStore {
@@ -27,6 +28,42 @@ class LdapFormStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  load = async () => {
+    const response = await getLdapSettings();
+
+    console.log("LDAP settings", response);
+    /*
+    "response": {
+      "enableLdapAuthentication": false,
+      "startTls": false,
+      "ssl": false,
+      "sendWelcomeEmail": false,
+      "server": "",
+      "userDN": "",
+      "portNumber": 389,
+      "userFilter": "(uid=*)",
+      "loginAttribute": "uid",
+      "ldapMapping": {
+        "FirstNameAttribute": "givenName",
+        "SecondNameAttribute": "sn",
+        "MailAttribute": "mail",
+        "TitleAttribute": "title",
+        "MobilePhoneAttribute": "mobile",
+        "LocationAttribute": "street"
+      },
+      "accessRights": {},
+      "groupMembership": false,
+      "groupDN": "",
+      "userAttribute": "uid",
+      "groupFilter": "(objectClass=posixGroup)",
+      "groupAttribute": "memberUid",
+      "groupNameAttribute": "cn",
+      "authentication": true,
+      "acceptCertificate": false
+    }
+      */
+  };
 
   setServer = (server) => {
     this.requiredSettings.server = server;
@@ -73,6 +110,7 @@ class LdapFormStore {
   setIsSendWelcomeEmail = (sendWelcomeEmail) => {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
+
   saveLdapSettings = () => {
     let isErrorExist = false;
     this.errors = {};

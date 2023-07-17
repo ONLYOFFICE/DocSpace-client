@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { isMobile, isDesktop } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
+
+import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import ToggleLDAP from "./sub-components/ToggleLDAP";
@@ -22,8 +25,31 @@ const LDAP = ({
   currentColorScheme,
   isLdapAvailable,
   isSettingsShown,
+  load,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+  const [isSmallWindow, setIsSmallWindow] = useState(false);
+
+  useEffect(() => {
+    isLdapAvailable && load();
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, []);
+
+  const onCheckView = () => {
+    if (isDesktop && window.innerWidth < 795) {
+      setIsSmallWindow(true);
+    } else {
+      setIsSmallWindow(false);
+    }
+  };
+
+  if (isSmallWindow)
+    return <BreakpointWarning sectionName={t("Settings:LDAP")} isSmallWindow />;
+
+  if (isMobile) return <BreakpointWarning sectionName={t("Settings:LDAP")} />;
 
   return (
     <StyledLdapPage theme={theme} isSettingPaid={isLdapAvailable}>
@@ -69,12 +95,13 @@ export default inject(({ auth, ldapStore }) => {
   const { settingsStore, currentQuotaStore } = auth;
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme } = settingsStore;
-  const { isSettingsShown } = ldapStore;
+  const { isSettingsShown, load } = ldapStore;
   return {
     ldapSettingsUrl,
     theme,
     currentColorScheme,
     isLdapAvailable,
     isSettingsShown,
+    load,
   };
 })(observer(LDAP));

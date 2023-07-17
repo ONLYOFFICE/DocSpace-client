@@ -847,3 +847,12 @@ export function getSendingTestMailStatus() {
     url: `/smtpsettings/smtp/test/status`,
   });
 }
+
+export function getLdapSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap",
+  };
+
+  return request(options);
+}

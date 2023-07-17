@@ -13,9 +13,9 @@ import SettingsStore from "@docspace/common/store/SettingsStore";
 import Icon from "../Icon";
 import { RoleRow, RoleRowContent, RoleRowWrapper } from "./List.styled";
 
-import { ListRowProps } from "./List.props";
-import { StoreType } from "../types";
-import { IRole } from "@docspace/common/Models";
+import type { ListRowProps } from "./List.props";
+import type { IRole } from "@docspace/common/Models";
+import type { StoreType } from "SRC_DIR/types";
 
 function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
   const navigate = useNavigate();

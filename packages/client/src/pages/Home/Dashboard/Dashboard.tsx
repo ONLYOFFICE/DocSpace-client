@@ -16,7 +16,8 @@ import Table from "./Table";
 import Board from "./Board";
 
 import DashboardProps from "./Dashboard.props";
-import { ContextType, StoreType } from "./types";
+import type { ContextType } from "./types";
+import type { StoreType } from "SRC_DIR/types";
 
 const view: Record<string, typeof List | typeof Table | typeof Board> = {
   row: List,

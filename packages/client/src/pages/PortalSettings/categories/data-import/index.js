@@ -1,10 +1,12 @@
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import { ReactSVG } from "react-svg";
 
+import Link from "@docspace/components/link";
+import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
 import { StyledWrapper } from "./StyledDataImport";
-import ServiceItem from "./sub-components/serviceItem";
 
 import WorkspaceGoogleSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import WorkspaceNextcloudSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
@@ -14,14 +16,26 @@ const DataImport = (props) => {
   const { t } = props;
   const navigate = useNavigate();
 
-  const redirectToGoogleMigration = () => {
-    navigate(window.location.pathname + `/google`);
-  };
-  const redirectToNextcloudMigration = () => {
-    navigate(window.location.pathname + `/nextcloud`);
-  };
-  const redirectToOnlyofficeMigration = () => {
-    navigate(window.location.pathname + `/onlyoffice`);
+  const services = [
+    { id: 1, logo: WorkspaceGoogleSvgUrl, title: "google" },
+    { id: 2, logo: WorkspaceNextcloudSvgUrl, title: "nextcloud" },
+    { id: 3, logo: WorkspaceOnlyofficeeSvgUrl, title: "onlyoffice" },
+  ];
+
+  const redirectToWorkspace = (title) => {
+    switch (title) {
+      case "google":
+        navigate(window.location.pathname + `/google`);
+        break;
+      case "nextcloud":
+        navigate(window.location.pathname + `/nextcloud`);
+        break;
+      case "onlyoffice":
+        navigate(window.location.pathname + `/onlyoffice`);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -34,21 +48,20 @@ const DataImport = (props) => {
       </Text>
 
       <div className="service-list">
-        <ServiceItem
-          t={t}
-          logo={WorkspaceGoogleSvgUrl}
-          onClick={redirectToGoogleMigration}
-        />
-        <ServiceItem
-          t={t}
-          logo={WorkspaceNextcloudSvgUrl}
-          onClick={redirectToNextcloudMigration}
-        />
-        <ServiceItem
-          t={t}
-          logo={WorkspaceOnlyofficeeSvgUrl}
-          onClick={redirectToOnlyofficeMigration}
-        />
+        {services.map((service) => (
+          <Box className="service-wrapper" key={service.id}>
+            <ReactSVG src={service.logo} />
+            <Link
+              type="page"
+              fontWeight="600"
+              color="#4781D1"
+              isTextOverflow
+              onClick={() => redirectToWorkspace(service.title)}
+            >
+              {t("Settings:Import")}
+            </Link>
+          </Box>
+        ))}
       </div>
     </StyledWrapper>
   );

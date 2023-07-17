@@ -54,4 +54,10 @@ const DataImport = () => {
     </div>
   );
 };
-export default DataImport;
+
+export default inject(({ setup }) => {
+  const { initSettings } = setup;
+  return {
+    initSettings,
+  };
+})(withTranslation(["Settings"])(observer(DataImport)));

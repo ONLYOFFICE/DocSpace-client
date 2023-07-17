@@ -179,7 +179,10 @@ const dashboardStore = new DashboardStore(
   clientLoadingStore
 );
 
-const dashboardContextOptionStore = new DashboardContextOpetion(dashboardStore);
+const dashboardContextOptionStore = new DashboardContextOpetion(
+  dashboardStore,
+  dialogsStore
+);
 
 const store = {
   auth: authStore,

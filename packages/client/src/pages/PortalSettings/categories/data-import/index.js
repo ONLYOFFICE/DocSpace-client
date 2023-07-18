@@ -55,6 +55,7 @@ const DataImport = (props) => {
               type="page"
               fontWeight="600"
               color="#4781D1"
+              isHovered
               isTextOverflow
               onClick={() => redirectToWorkspace(service.title)}
             >

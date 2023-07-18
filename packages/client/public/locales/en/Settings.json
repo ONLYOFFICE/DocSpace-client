@@ -1,4 +1,5 @@
 {
+  "AboutDataImport": "Data import is an asynchronous process. It includes several steps: data upload, parcing, import configuration, and import. Your backup file will be stored in ONLYOFFICE DocSpace servers for 24 hours, and then it will be automatically deleted.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Access to {{product}} module is given to",
   "AccessRightsAllUsers": "All {{users}}",

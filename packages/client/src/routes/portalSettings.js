@@ -87,17 +87,17 @@ const DataImport = loadable(() =>
 );
 const GoogleDataImport = loadable(() =>
   import(
-    "../pages/PortalSettings/categories/data-import/sub-components/googleWorkspace.js"
+    "../pages/PortalSettings/categories/data-import/sub-components/GoogleWorkspace"
   )
 );
 const NextcloudDataImport = loadable(() =>
   import(
-    "../pages/PortalSettings/categories/data-import/sub-components/nextcloudWorkspace.js"
+    "../pages/PortalSettings/categories/data-import/sub-components/NextcloudWorkspace"
   )
 );
 const OnlyofficeDataImport = loadable(() =>
   import(
-    "../pages/PortalSettings/categories/data-import/sub-components/onlyofficeWorkspace.js"
+    "../pages/PortalSettings/categories/data-import/sub-components/OnlyofficeWorkspace"
   )
 );
 

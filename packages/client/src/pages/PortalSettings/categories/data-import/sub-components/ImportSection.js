@@ -1,7 +1,7 @@
 import React from "react";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 
 const SectionWrapper = styled.div`
@@ -22,8 +22,21 @@ const SectionWrapper = styled.div`
   .description {
     margin-top: 4px;
     margin-bottom: 12px;
-    color: #333;
   }
+
+  ${(props) =>
+    !props.isChecked &&
+    css`
+      .importSection {
+        color: #a3a9ae;
+
+        svg {
+          path {
+            fill: #a3a9ae;
+          }
+        }
+      }
+    `}
 `;
 
 const FlexContainer = styled.div`
@@ -43,7 +56,7 @@ const ImportItemWrapper = styled.div`
     border-radius: 3px;
     background: #eceef1;
 
-    color: #555f65;
+    color: "#555f65";
     font-weight: 600;
     line-height: 20px;
 
@@ -63,16 +76,14 @@ const ArrowWrapper = styled.div`
   width: 16px;
 `;
 
-const ImportItem = ({ sectionName, sectionIcon, workspace }) => {
+const ImportItem = ({ sectionName, SectionIcon, workspace }) => {
   return (
     <ImportItemWrapper>
       <Text color="#A3A9AE" fontSize="11px" fontWeight={600} lineHeight="12px">
         {workspace}
       </Text>
       <div className="importSection">
-        {sectionIcon && (
-          <img src={sectionIcon} alt={sectionName + " icon"} className="sectionIcon" />
-        )}
+        {SectionIcon && <SectionIcon />}
         {sectionName}
       </div>
     </ImportItemWrapper>
@@ -89,7 +100,7 @@ const ImportSection = ({
   importSection,
 }) => {
   return (
-    <SectionWrapper>
+    <SectionWrapper isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
         onChange={onChange}
@@ -100,7 +111,7 @@ const ImportSection = ({
         <Text lineHeight="20px" fontWeight={600}>
           {sectionName}
         </Text>
-        <Text fontSize="12px" className="description">
+        <Text fontSize="12px" className="description" color={isChecked ? "#333" : "#A3A9AE"}>
           {description}
         </Text>
         <FlexContainer>

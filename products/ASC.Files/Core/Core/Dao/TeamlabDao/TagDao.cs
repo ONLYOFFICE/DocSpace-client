@@ -409,6 +409,28 @@ internal abstract class BaseTagDao<T> : AbstractDao
         return result;
     }
 
+    public async Task SaveTagLinkAsync(Tag tag)
+    {
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var createOn = _tenantUtil.DateTimeToUtc(_tenantUtil.DateTimeNow());
+
+        var linkToInsert = new DbFilesTagLink
+        {
+            TenantId = TenantID,
+            TagId = tag.Id,
+            EntryId = (await MappingIDAsync(tag.EntryId, true)).ToString(),
+            EntryType = tag.EntryType,
+            CreateBy = Guid.Empty,
+            CreateOn = createOn,
+            Count = tag.Count
+        };
+
+        await filesDbContext.AddOrUpdateAsync(r => r.TagLink, linkToInsert);
+        await filesDbContext.SaveChangesAsync();
+
+    }
+
     private async Task DeleteTagsBeforeSave()
     {
         using var filesDbContext = _dbContextFactory.CreateDbContext();

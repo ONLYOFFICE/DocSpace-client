@@ -52,4 +52,5 @@ public interface ITagDao<T>
     Task RemoveTags(IEnumerable<Tag> tag);
     Task RemoveTags(Tag tag);
     Task<int> RemoveTagLinksAsync(T entryId, FileEntryType entryType, TagType tagType);
+    Task<int> SaveTagLinkAsync(Tag tag);
 }

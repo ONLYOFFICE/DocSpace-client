@@ -111,6 +111,13 @@ public sealed class Tag : IMapFrom<DbFilesTag>
         return new Tag(name, TagType.Custom, owner, 0).AddEntry(entry);
     }
 
+    public static Tag Role<T>(int Id, string name, Guid owner, FileEntry<T> entry)
+    {
+        var tag = new Tag(name, TagType.Role, owner, 0).AddEntry(entry);
+        tag.Id = Id;
+        return tag;
+    }
+
     public static Tag Pin<T>(Guid owner, FileEntry<T> entry)
     {
         return new Tag("pin", TagType.Pin, owner, 0).AddEntry(entry);

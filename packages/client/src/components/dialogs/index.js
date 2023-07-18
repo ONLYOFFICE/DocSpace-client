@@ -30,6 +30,7 @@ import LogoutAllConnectionDialog from "./LogoutAllConnectionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DeleteAllFormsDialog from "./DeleteAllFormsDialog";
+import DeleteFormDialog from "./DeleteFormDialog";
 
 export {
   EmptyTrashDialog,
@@ -64,4 +65,5 @@ export {
   LogoutAllConnectionDialog,
   PortalRenamingDialog,
   DeleteAllFormsDialog,
+  DeleteFormDialog,
 };

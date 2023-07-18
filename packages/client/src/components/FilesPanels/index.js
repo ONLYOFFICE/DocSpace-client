@@ -26,6 +26,7 @@ import {
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   DeleteAllFormsDialog,
+  DeleteFormDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -66,6 +67,7 @@ const Panels = (props) => {
     restoreRoomDialogVisible,
     statusFillingPanelVisible,
     deleteAllFormsDialogVisible,
+    deleteFormDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -148,6 +150,7 @@ const Panels = (props) => {
     deleteAllFormsDialogVisible && (
       <DeleteAllFormsDialog key="delete-all-forms-dialog" />
     ),
+    deleteFormDialogVisible && <DeleteFormDialog key="delete-form-dialog" />,
   ];
 };
 
@@ -190,6 +193,7 @@ export default inject(
       changeUserTypeDialogVisible,
       statusFillingPanelVisible,
       deleteAllFormsDialogVisible,
+      deleteFormDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -232,6 +236,7 @@ export default inject(
       restoreRoomDialogVisible,
       statusFillingPanelVisible,
       deleteAllFormsDialogVisible,
+      deleteFormDialogVisible,
     };
   }
 )(observer(Panels));

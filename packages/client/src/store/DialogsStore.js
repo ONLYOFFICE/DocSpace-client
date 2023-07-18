@@ -64,6 +64,7 @@ class DialogsStore {
   selectRoomPanelVisible = false;
 
   deleteAllFormsDialogVisible = false;
+  deleteFormDialogVisible = false;
 
   constructor(
     authStore,
@@ -337,6 +338,13 @@ class DialogsStore {
     this.deleteAllFormsDialogVisible = deleteAllFormsDialogVisible;
   };
 
+  /**
+   * @param {boolean} deleteFormDialogVisible
+   */
+  setDeleteFormDialogVisible = (deleteFormDialogVisible) => {
+    this.deleteFormDialogVisible = deleteFormDialogVisible;
+  };
+
   get someDialogIsOpen() {
     return (
       this.sharingPanelVisible ||
@@ -365,7 +373,8 @@ class DialogsStore {
       this.createRoomConfirmDialogVisible ||
       this.changeUserTypeDialogVisible ||
       this.statusFillingPanelVisible ||
-      this.deleteAllFormsDialogVisible
+      this.deleteAllFormsDialogVisible ||
+      this.deleteFormDialogVisible
     );
   }
 

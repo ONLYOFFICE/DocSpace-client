@@ -1,0 +1,7 @@
+{
+  "Body": "Are you sure you want to delete the form “{{fileName}}”? Progress of active forms from the board “{{boardName}}” will still be available unless you delete the board.",
+  "DeleteTheLinkedBoards": "Delete the linked board",
+  "Title": "Delete form",
+  "Tooltip": "If you delete the linked board, all related forms in progress will be canceled and deleted.",
+  "KeepTheBoards": "Keep the board"
+}

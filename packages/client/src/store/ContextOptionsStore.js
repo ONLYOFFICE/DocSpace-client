@@ -648,6 +648,10 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onClickRemoveOForm = () => {
+    this.dialogsStore.setDeleteFormDialogVisible(true);
+  };
+
   getRoomsRootContextOptions = (item, t) => {
     const { id, rootFolderId } = this.selectedFolderStore;
     const isRootRoom = item.isRoom && rootFolderId === id;
@@ -1169,8 +1173,14 @@ class ContextOptionsStore {
           ? t("Common:Disconnect")
           : t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: () =>
-          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
+        onClick: () => {
+          //TODO: Remove temp later
+          if (item.fileExst === ".oform") {
+            return this.onClickRemoveOForm();
+          }
+
+          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t);
+        },
         disabled: false,
       },
     ];

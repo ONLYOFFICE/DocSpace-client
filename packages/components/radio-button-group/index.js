@@ -59,6 +59,7 @@ class RadioButtonGroup extends React.Component {
               fontWeight={this.props.fontWeight}
               spacing={this.props.spacing}
               orientation={this.props.orientation}
+              afterContent={option.afterContent}
             />
           );
         })}

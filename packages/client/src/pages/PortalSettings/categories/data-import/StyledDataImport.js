@@ -3,19 +3,26 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   max-width: 700px;
+  margin-top: 4px;
 
   @media ${mobile} {
     max-width: 343px;
+  }
+
+  .service-icon {
+    display: flex;
+    align-items: center;
   }
 
   .data-import-description {
     color: #657077;
     line-height: 20px;
     margin-bottom: 20px;
+    max-width: 675px;
   }
 
   .start-migration-text {
-    margin-bottom: 20px;
+    margin-bottom: 21px;
   }
 
   .service-list {
@@ -37,8 +44,14 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    cursor: pointer;
+
     &:hover {
       border-color: #4781d1;
+    }
+
+    &:active {
+      background-color: #eceef1;
     }
 
     @media ${tablet} {

@@ -40,25 +40,19 @@ const DataImport = (props) => {
 
   return (
     <StyledWrapper>
-      <Text className="data-import-description">
-        {t("Settings:DataImportDescription")}
-      </Text>
+      <Text className="data-import-description">{t("Settings:DataImportDescription")}</Text>
       <Text fontWeight={600} className="start-migration-text">
         {t("Settings:UploadBackupData")}
       </Text>
 
       <div className="service-list">
         {services.map((service) => (
-          <Box className="service-wrapper" key={service.id}>
-            <ReactSVG src={service.logo} />
-            <Link
-              type="page"
-              fontWeight="600"
-              color="#4781D1"
-              isHovered
-              isTextOverflow
-              onClick={() => redirectToWorkspace(service.title)}
-            >
+          <Box
+            className="service-wrapper"
+            key={service.id}
+            onClick={() => redirectToWorkspace(service.title)}>
+            <ReactSVG src={service.logo} className="service-icon" />
+            <Link type="page" fontWeight="600" color="#4781D1" isHovered isTextOverflow>
               {t("Settings:Import")}
             </Link>
           </Box>

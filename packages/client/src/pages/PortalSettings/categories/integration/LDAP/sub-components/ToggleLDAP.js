@@ -13,7 +13,7 @@ const borderProp = { radius: "6px" };
 const ToggleLDAP = (props) => {
   const {
     theme,
-    enableLdap,
+    //enableLdap,
     isLdapEnabled,
     ldapToggle,
     isLDAPAvailable,
@@ -38,7 +38,7 @@ const ToggleLDAP = (props) => {
       >
         <ToggleButton
           className="toggle"
-          isChecked={enableLdap}
+          isChecked={isLdapEnabled}
           onChange={
             ldapToggle
             // isLdapEnabled && enableLdap

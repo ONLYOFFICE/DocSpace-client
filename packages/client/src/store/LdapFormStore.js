@@ -59,6 +59,7 @@ class LdapFormStore {
 
   progressBarIntervalId = null;
   alreadyChecking = false;
+  lastWarning = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -212,45 +213,43 @@ class LdapFormStore {
 
     if (isErrorExist) return;
 
-    console.log("saveing settings");
+    console.log("saving settings");
 
     const settings = {
-      EnableLdapAuthentication: this.isLdapEnabled,
-      StartTls: this.isTlsEnabled,
-      Ssl: this.isSslEnabled,
-      SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
-      UserDN: this.requiredSettings.userDN,
-      PortNumber: this.requiredSettings.portNumber,
-      UserFilter: this.requiredSettings.userFilter,
-      LoginAttribute: this.requiredSettings.loginAttribute,
-      LdapMapping: {
-        FirstNameAttribute: this.requiredSettings.firstName,
-        SecondNameAttribute: this.requiredSettings.secondName,
-        MailAttribute: this.requiredSettings.mail,
+      enableLdapAuthentication: this.isLdapEnabled,
+      startTls: this.isTlsEnabled,
+      ssl: this.isSslEnabled,
+      sendWelcomeEmail: this.isSendWelcomeEmail,
+      server: this.requiredSettings.server,
+      userDN: this.requiredSettings.userDN,
+      portNumber: this.requiredSettings.portNumber,
+      userFilter: this.requiredSettings.userFilter,
+      loginAttribute: this.requiredSettings.loginAttribute,
+      ldapMapping: {
+        firstNameAttribute: this.requiredSettings.firstName,
+        secondNameAttribute: this.requiredSettings.secondName,
+        mailAttribute: this.requiredSettings.mail,
       },
-      AccessRights: {},
-      GroupMembership: false,
-      GroupDN: "",
-      UserAttribute: "",
-      GroupFilter: "",
-      GroupAttribute: "",
-      GroupNameAttribute: "",
-      Authentication: this.authentication,
-      Login: this.login,
-      Password: this.password,
+      accessRights: {},
+      groupMembership: false,
+      groupDN: "",
+      userAttribute: "",
+      groupFilter: "",
+      groupAttribute: "",
+      groupNameAttribute: "",
+      authentication: this.authentication,
+      login: this.login,
+      password: this.password,
+      acceptCertificate: this.acceptCertificate,
     };
 
     console.log({ settings });
 
-    const { id } = await saveLdapSettings(
-      JSON.stringify(settings),
-      this.acceptCertificate
-    );
+    const respose = await saveLdapSettings(settings);
 
     console.log(respose);
 
-    if (id) {
+    if (respose?.id) {
       this.progressBarIntervalId = setInterval(
         this.checkStatus,
         constants.GET_STATUS_TIMEOUT
@@ -300,13 +299,14 @@ class LdapFormStore {
 
       this.setProgress(status);
 
-      if (status.warning && lastWarning !== status.warning) {
-        lastWarning = status.warning;
-        toastr.warning(status.warning, "", { timeOut: 0, extendedTimeOut: 0 });
+      if (status.warning && this.lastWarning !== status.warning) {
+        this.lastWarning = status.warning;
+        console.warn(status.warning);
+        //toastr.warning(status.warning, "", { timeOut: 0, extendedTimeOut: 0 });
       }
 
       if (this.isCompleted(status)) {
-        lastWarning = "";
+        this.lastWarning = "";
 
         if (status.error) throw status.error;
 
@@ -450,9 +450,9 @@ class LdapFormStore {
   };
 
   ldapToggle = () => {
-    this.enableLdap = !this.enableLdap;
+    this.isLdapEnabled = !this.isLdapEnabled;
 
-    if (this.enableLdap) {
+    if (this.isLdapEnabled) {
       this.setIsSettingsShown(true);
     }
   };

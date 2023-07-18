@@ -857,14 +857,11 @@ export function getLdapSettings() {
   return request(options);
 }
 
-export function saveLdapSettings(settings, acceptCertificate) {
+export function saveLdapSettings(data) {
   const options = {
     method: "post",
     url: "/settings/ldap",
-    data: {
-      settings,
-      acceptCertificate,
-    },
+    data,
   };
 
   return request(options);

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { RadioButtonReactSvg, RadioButtonCheckedReactSvg } from "./svg";
 import Text from "../text";
-import { Label, Input } from "./styled-radio-button";
+import { Label, Input, LabelWrapper } from "./styled-radio-button";
 
 // eslint-disable-next-line react/prop-types
 const RadiobuttonIcon = ({ isChecked, theme }) => {
@@ -41,42 +41,48 @@ class RadioButton extends React.Component {
 
   render() {
     return (
-      <Label
-        theme={this.props.theme}
-        orientation={this.props.orientation}
-        spacing={this.props.spacing}
-        isDisabled={this.props.isDisabled}
-        id={this.props.id}
-        className={this.props.className}
-        style={this.props.style}
+      <LabelWrapper
+        $orientation={this.props.orientation}
+        $spacing={this.props.spacing}
       >
-        <Input
+        <Label
           theme={this.props.theme}
-          type="radio"
-          name={this.props.name}
-          value={this.props.value}
-          checked={this.props.isChecked}
-          onChange={
-            this.props.onChange
-              ? this.props.onChange
-              : (e) => {
-                  this.setState({ isChecked: true });
-                  this.props.onClick && this.props.onClick(e);
-                }
-          }
-          disabled={this.props.isDisabled}
-        />
-        <RadiobuttonIcon {...this.props} />
-        <Text
-          theme={this.props.theme}
-          as="span"
-          className="radio-button_text"
-          fontSize={this.props.fontSize}
-          fontWeight={this.props.fontWeight}
+          orientation={this.props.orientation}
+          spacing={this.props.spacing}
+          isDisabled={this.props.isDisabled}
+          id={this.props.id}
+          className={this.props.className}
+          style={this.props.style}
         >
-          {this.props.label || this.props.value}
-        </Text>
-      </Label>
+          <Input
+            theme={this.props.theme}
+            type="radio"
+            name={this.props.name}
+            value={this.props.value}
+            checked={this.props.isChecked}
+            onChange={
+              this.props.onChange
+                ? this.props.onChange
+                : (e) => {
+                    this.setState({ isChecked: true });
+                    this.props.onClick && this.props.onClick(e);
+                  }
+            }
+            disabled={this.props.isDisabled}
+          />
+          <RadiobuttonIcon {...this.props} />
+          <Text
+            theme={this.props.theme}
+            as="span"
+            className="radio-button_text"
+            fontSize={this.props.fontSize}
+            fontWeight={this.props.fontWeight}
+          >
+            {this.props.label || this.props.value}
+          </Text>
+        </Label>
+        {this.props.afterContent}
+      </LabelWrapper>
     );
   }
 }
@@ -112,6 +118,8 @@ RadioButton.propTypes = {
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   /** Position of radiobuttons */
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+
+  afterContent: PropTypes.node,
 };
 
 RadioButton.defaultProps = {

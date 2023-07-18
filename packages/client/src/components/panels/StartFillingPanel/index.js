@@ -97,14 +97,14 @@ const StartFillingPanel = ({
   isVisible,
   getRolesUsersForFillingForm,
   setRolesUsersForFillingForm,
-  fileId = 4,
-  formHref = "http://192.168.0.102:8092/doceditor?fileId=4",
+  fileId,
+  formHref,
   theme,
   getRoomMembers,
   tReady,
   headerCancelButton,
   isCloseable,
-  room = { id: 1, title: "accountant room" },
+  room,
   onCloseSelectRoomPanel,
 }) => {
   const t = i18n.getFixedT(null, ["StartFillingPanel", "Common"]);
@@ -257,12 +257,13 @@ const StartFillingPanel = ({
   );
 
   const onStart = () => {
-    const idMembers = members.map((member) => member.id);
-    const idUsersRoles = [];
+    const idUsersRoles = {};
 
-    idUsersRoles.push({ id: everyoneRole, userId: idMembers });
     users.map((user) => {
-      idUsersRoles.push({ id: user.roleId, userId: [user.id] });
+      const idRole = user.roleId;
+      const idUser = user.id;
+
+      idUsersRoles[idRole] = idUser;
     });
 
     setRolesUsersForFillingForm(fileId, idUsersRoles)

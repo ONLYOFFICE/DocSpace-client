@@ -7,8 +7,10 @@ import toastr from "@docspace/components/toast/toastr";
 import type { IRole } from "@docspace/common/Models";
 
 import { combineUrl } from "@docspace/common/utils";
-import { ContextMenuModel } from "@docspace/components/types";
-import DashboardStore from "./DashboardStore";
+import type { ContextMenuModel } from "@docspace/components/types";
+
+import type DashboardStore from "./DashboardStore";
+import type DialogsStore from "./DialogsStore";
 
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
@@ -18,7 +20,10 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 class DashboardContextOpetion {
   public dashboardHeaderMenuService!: DashboardHeaderMenuService;
 
-  constructor(private dashboardStore: DashboardStore) {
+  constructor(
+    private dashboardStore: DashboardStore,
+    private dialogsStore: DialogsStore
+  ) {
     this.dashboardHeaderMenuService = new DashboardHeaderMenuService(
       dashboardStore,
       this
@@ -40,6 +45,11 @@ class DashboardContextOpetion {
     copy(url);
 
     return toastr.success(t("Translations:LinkCopySuccess"));
+  };
+
+  public deleteRole = (role: IRole) => {
+    this.dialogsStore.setDeleteAllFormsDialogVisible(true);
+    this.dashboardStore.BufferSelectionRole = role;
   };
 
   public getGroupContextOptions = (t: (arg: string) => string) => {
@@ -144,7 +154,7 @@ class DashboardContextOpetion {
         key: "delete-role",
         label: t("Files:DeleteAllForm"),
         icon: TrashReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.deleteRole(role),
         disabled: false,
       },
     };

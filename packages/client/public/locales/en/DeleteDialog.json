@@ -1,4 +1,6 @@
 {
+  "DeleteBoardTitle": "Delete board",
+  "DeleteBoardBody": "Are you sure you want to delete the board \"{{name}}\"? Forms associated with this board will also be deleted, and it will be impossible to continue filling them.",
   "DeleteFile": "You are about to delete this file. Are you sure you want to continue?",
   "DeleteFolder": "You are about to delete this folder. Are you sure you want to continue?",
   "DeleteItems": "You are about to delete these items. Are you sure you want to continue?",

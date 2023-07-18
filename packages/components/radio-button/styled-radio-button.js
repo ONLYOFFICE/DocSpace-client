@@ -8,6 +8,26 @@ const ClearLabel = ({ spacing, isDisabled, orientation, ...props }) => (
   <label {...props} />
 );
 
+export const LabelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  &:not(:first-child) {
+    ${(props) =>
+      props.$orientation === "horizontal" &&
+      css`
+        margin-left: ${props.$spacing};
+      `};
+  }
+
+  &:not(:last-child) {
+    ${(props) =>
+      props.$orientation === "vertical" &&
+      css`
+        margin-bottom: ${props.$spacing};
+      `};
+  }
+`;
+
 const Label = styled(ClearLabel)`
   display: flex;
   align-items: center;
@@ -65,22 +85,6 @@ const Label = styled(ClearLabel)`
             }
           }
         `}
-
-  &:not(:first-child) {
-    ${(props) =>
-      props.orientation === "horizontal" &&
-      css`
-        margin-left: ${props.spacing};
-      `};
-  }
-
-  &:not(:last-child) {
-    ${(props) =>
-      props.orientation === "vertical" &&
-      css`
-        margin-bottom: ${props.spacing};
-      `};
-  }
 `;
 Label.defaultProps = { theme: Base };
 const Input = styled.input`

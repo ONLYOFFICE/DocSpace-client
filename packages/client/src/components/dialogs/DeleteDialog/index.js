@@ -122,7 +122,9 @@ const DeleteDialogComponent = (props) => {
     const isDashboard = selection[0]?.isDashboard;
 
     if (isDashboard) {
-      return isSingle ? t("DeleteBoardBody", { name: selection[0].title }) : "";
+      return isSingle
+        ? t("DeleteBoardBody", { name: selection[0].title })
+        : t("DeleteItems");
     }
 
     if (isRoomDelete) {
@@ -156,12 +158,14 @@ const DeleteDialogComponent = (props) => {
     }
   };
 
+  const isSingle = selection.length === 1;
+
   const title =
     isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverTitle")
       : isPrivacyFolder || selection[0]?.providerKey
       ? t("Common:Confirmation")
-      : selection[0]?.isDashboard
+      : isSingle && selection[0]?.isDashboard
       ? t("DeleteBoardTitle")
       : moveToTrashTitle();
 
@@ -174,7 +178,7 @@ const DeleteDialogComponent = (props) => {
       ? t("Common:OKButton")
       : unsubscribe
       ? t("UnsubscribeButton")
-      : selection[0]?.isDashboard
+      : isSingle && selection[0]?.isDashboard
       ? t("Common:Delete")
       : t("MoveToTrashButton");
 

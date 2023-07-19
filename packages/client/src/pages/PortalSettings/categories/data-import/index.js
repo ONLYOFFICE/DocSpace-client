@@ -6,7 +6,7 @@ import { ReactSVG } from "react-svg";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
-import { StyledWrapper } from "./StyledDataImport";
+import { DataImportWrapper } from "./StyledDataImport";
 
 import WorkspaceGoogleSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import WorkspaceNextcloudSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
@@ -39,7 +39,7 @@ const DataImport = (props) => {
   };
 
   return (
-    <StyledWrapper>
+    <DataImportWrapper>
       <Text className="data-import-description">{t("Settings:DataImportDescription")}</Text>
       <Text fontWeight={600} className="start-migration-text">
         {t("Settings:UploadBackupData")}
@@ -58,7 +58,7 @@ const DataImport = (props) => {
           </Box>
         ))}
       </div>
-    </StyledWrapper>
+    </DataImportWrapper>
   );
 };
 

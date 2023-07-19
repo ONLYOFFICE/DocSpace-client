@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
-const StyledWrapper = styled.div`
+const DataImportWrapper = styled.div`
   max-width: 700px;
   margin-top: 4px;
 
@@ -64,4 +64,47 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export { StyledWrapper };
+const WorkspaceWrapper = styled.div`
+  max-width: 700px;
+  margin-top: 4px;
+
+  @media ${mobile} {
+    max-width: 343px;
+  }
+
+  .data-import-description {
+    color: #657077;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+
+  .step-counter {
+    margin-right: 5px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .select-file-wrapper {
+    max-width: 350px;
+  }
+
+  .select-file-description {
+    font-size: 12px;
+    margin-bottom: 16px;
+    line-height: 16px;
+    color: #333333;
+  }
+
+  .select-file-title {
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 4px;
+  }
+
+  .upload-backup-input {
+    height: 32px;
+    margin-bottom: 16px;
+  }
+`;
+
+export { DataImportWrapper, WorkspaceWrapper };

@@ -209,7 +209,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/accounts/filter";
 
     case CategoryType.Settings:
-      return "/settings/common";
+      return "/settings/personal";
     case CategoryType.Dashboard:
       return `/rooms/shared/dashboard/${folderId}/filter`;
     case CategoryType.Role:

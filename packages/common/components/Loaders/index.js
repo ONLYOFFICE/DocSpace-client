@@ -36,6 +36,8 @@ import DataBackupLoader from "./DataBackupLoader";
 import AutoBackupLoader from "./AutoBackupLoader";
 import RestoreBackupLoader from "./RestoreBackupLoader";
 import PaymentsLoader from "./PaymentsLoader";
+
+import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import SelectorSearchLoader from "./SelectorSearchLoader";
 import SelectorRowLoader from "./SelectorRowLoader";
 
@@ -87,6 +89,8 @@ export default {
   AutoBackupLoader,
   RestoreBackupLoader,
   PaymentsLoader,
+
+  SelectorBreadCrumbsLoader,
   SelectorSearchLoader,
   SelectorRowLoader,
 

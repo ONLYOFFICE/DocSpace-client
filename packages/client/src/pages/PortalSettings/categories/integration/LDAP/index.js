@@ -18,6 +18,7 @@ import AttributeMapping from "./sub-components/AttributeMapping";
 import ButtonsContainer from "./sub-components/ButtonsContainer";
 import AuthenticationContainer from "./sub-components/AuthenticationContainer";
 import AdvancedSettings from "./sub-components/AdvancedSettings";
+import ProgressContainer from "./sub-components/ProgressContainer";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -85,6 +86,8 @@ const LDAP = ({
           <AuthenticationContainer />
           <AdvancedSettings />
           <ButtonsContainer />
+
+          <ProgressContainer />
         </>
       )}
     </StyledLdapPage>

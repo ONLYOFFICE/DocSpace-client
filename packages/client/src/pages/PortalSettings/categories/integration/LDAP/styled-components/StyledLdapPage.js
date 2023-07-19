@@ -86,6 +86,10 @@ const StyledLdapPage = styled(Box)`
     margin-bottom: 28px;
   }
 
+  .ldap_progress-container {
+    margin: 16px 0;
+  }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

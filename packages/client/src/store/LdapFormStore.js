@@ -58,9 +58,17 @@ class LdapFormStore {
   isSendWelcomeEmail = false;
   errors = {};
 
+  inProgress = false;
   progressBarIntervalId = null;
   alreadyChecking = false;
   lastWarning = "";
+
+  progressStatus = {
+    percents: 0,
+    completed: false,
+    error: "",
+    source: "",
+  };
 
   constructor() {
     makeAutoObservable(this);
@@ -199,6 +207,14 @@ class LdapFormStore {
   };
 
   saveLdapSettings = async () => {
+    this.inProgress = false;
+    this.progressStatus = {
+      percents: 0,
+      completed: false,
+      error: "",
+      source: "",
+    };
+
     let isErrorExist = false;
     this.errors = {};
 
@@ -272,6 +288,8 @@ class LdapFormStore {
       return;
     }
     this.alreadyChecking = true;
+    this.inProgress = true;
+
     getLdapStatus()
       .then(this.onGetStatus)
       .catch((e) => {
@@ -331,6 +349,7 @@ class LdapFormStore {
 
   setProgress = (status) => {
     console.log(status);
+    this.progressStatus = status;
   };
 
   endProcess = () => {

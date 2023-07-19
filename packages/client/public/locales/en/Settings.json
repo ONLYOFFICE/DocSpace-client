@@ -127,6 +127,7 @@
   "ManualBackupHelp": "<strong>Data Backup</strong> option is used to back up the space data to be able to restore it later to your local server.",
   "MaxCopies": "{{copiesCount}} - maximum number of backup copies",
   "Migration": "Migration",
+  "NextStep": "Next step",
   "NewColorScheme": "New color scheme",
   "PasswordMinLenght": "Minimal password length",
   "Path": "Path",

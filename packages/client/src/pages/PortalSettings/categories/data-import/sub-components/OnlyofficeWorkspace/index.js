@@ -1,6 +1,4 @@
-import React from "react";
-
 const OnlyofficeWorkspace = () => {
-  return <div>onlyofficeWorkspace</div>;
+  return <div>Onlyoffice workspace</div>;
 };
 export default OnlyofficeWorkspace;

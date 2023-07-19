@@ -617,6 +617,12 @@ public class FileStorageService //: IFileStorageService
     {
         return await InternalCreateNewFolderAsync(parentId, title, FolderType.EditingRoom, privacy);
     }
+
+    private async Task<Folder<T>> CreateFillingFormsRoom<T>(string title, T parentId, bool privacy)
+    {
+        return await InternalCreateNewFolderAsync(parentId, title, FolderType.FillingFormsRoom, privacy);
+    }
+
     private async Task<Folder<T>> CreateBoardAsync<T>(T formId, Dictionary<int, Guid> assignedRoles)
     {
         TagInfo tag;

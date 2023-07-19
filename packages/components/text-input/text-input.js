@@ -23,7 +23,7 @@ TextInput.propTypes = {
   /** Supported type of the input fields. */
   type: PropTypes.oneOf(["text", "password", "email", "tel"]),
   /** Value of the input */
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   /** Default maxLength value of the input */
   maxLength: PropTypes.number,
   /** Placeholder text for the input */

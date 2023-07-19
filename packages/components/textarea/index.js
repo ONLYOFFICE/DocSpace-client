@@ -49,6 +49,7 @@ const Textarea = ({
   enableCopy,
   hasNumeration,
   isFullHeight,
+  classNameCopyIcon,
 }) => {
   const areaRef = useRef(null);
   const [isError, setIsError] = useState(hasError);
@@ -81,6 +82,10 @@ const Textarea = ({
   }
 
   useEffect(() => {
+    hasError !== isError && setIsError(hasError);
+  }, [hasError]);
+
+  useEffect(() => {
     setIsError(isJSONField && (!value || !isJSON(value)));
   }, [isJSONField, value]);
 
@@ -102,6 +107,7 @@ const Textarea = ({
     >
       {isJSONField && (
         <CopyIconWrapper
+          className={classNameCopyIcon}
           isJSONField={isJSONField}
           onClick={() => {
             copy(modifiedValue);
@@ -203,7 +209,6 @@ Textarea.propTypes = {
 };
 
 Textarea.defaultProps = {
-  className: "",
   isDisabled: false,
   isReadOnly: false,
   hasError: false,

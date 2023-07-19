@@ -1135,8 +1135,8 @@ const Base = {
     },
 
     icon: {
-      background: lightHover,
-      color: grayMain,
+      background: "#ECEEF1",
+      color: "#A3A9AE",
     },
 
     width: {
@@ -1747,6 +1747,7 @@ const Base = {
     arrowColor: "#555f65",
     disabledArrow: "#A3A9AE",
     weekdayColor: "#A3A9AE",
+    accent: "#4781d1",
   },
 
   datePicker: {
@@ -2315,6 +2316,13 @@ const Base = {
 
   selector: {
     border: `1px solid ${grayLightMid}`,
+
+    breadCrumbs: {
+      prevItemColor: "#A3A9AE",
+      arrowRightColor: "#A3A9AE",
+    },
+
+    bodyDescriptionText: "#A3A9AE",
 
     item: {
       hoverBackground: grayLight,
@@ -3143,7 +3151,11 @@ const Base = {
     tooltipDescription: "#555F65",
     assignedRoleColor: "rgba(170, 170, 170, 1)",
     roleColor: "rgba(101, 112, 119, 1)",
-    addUserToRoomColor:"rgba(51, 51, 51, 1)"
+    addUserToRoomColor: "rgba(51, 51, 51, 1)",
+  },
+  emailChips: {
+    borderColor: "#A3A9AE",
+    dashedBorder: "1px dashed #5299E0",
   },
 };
 

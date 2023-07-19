@@ -62,7 +62,7 @@ const SelectorRowLoader = ({
         {...rest}
       >
         <RectangleLoader className={"avatar"} width={"32px"} height={"32px"} />
-        <RectangleLoader className={"text"} width={"212px"} height={"16px"} />
+        <RectangleLoader width={"212px"} height={"16px"} />
         {isMultiSelect && (
           <RectangleLoader
             className={"checkbox"}
@@ -76,7 +76,7 @@ const SelectorRowLoader = ({
 
   const getRowItems = () => {
     const rows = [];
-    const quantity = count || 20;
+    const quantity = count || 5;
 
     for (let i = 0; i < quantity; i++) {
       rows.push(getRowItem(i));

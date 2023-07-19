@@ -11,7 +11,7 @@ import Link from "@docspace/components/link";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-import SelectedItem from "./sub-components/SelectedItem";
+import SelectedItem from "@docspace/components/selected-item";
 
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
 
@@ -123,7 +123,7 @@ const FilterInput = React.memo(
 
         removeSelectedItem({ key, group });
       },
-      [selectedItems, removeSelectedItem]
+      [selectedItems, removeSelectedItem],
     );
 
     React.useEffect(() => {
@@ -201,7 +201,8 @@ const FilterInput = React.memo(
                 propKey={item.key}
                 label={item.selectedLabel ? item.selectedLabel : item.label}
                 group={item.group}
-                removeSelectedItem={removeSelectedItemAction}
+                onClose={removeSelectedItemAction}
+                onClick={removeSelectedItemAction}
               />
             ))}
             {selectedItems.filter((item) => item.label).length > 1 && (
@@ -211,8 +212,7 @@ const FilterInput = React.memo(
                 fontWeight={600}
                 isSemitransparent
                 type="action"
-                onClick={clearAll}
-              >
+                onClick={clearAll}>
                 {t("Common:ClearAll")}
               </Link>
             )}
@@ -220,7 +220,7 @@ const FilterInput = React.memo(
         )}
       </StyledFilterInput>
     );
-  }
+  },
 );
 
 FilterInput.defaultProps = {

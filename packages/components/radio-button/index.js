@@ -40,6 +40,12 @@ class RadioButton extends React.Component {
   }
 
   render() {
+    const setClassNameInput = this.props.classNameInput
+      ? {
+          className: this.props.classNameInput,
+        }
+      : {};
+
     return (
       <LabelWrapper
         $orientation={this.props.orientation}
@@ -69,6 +75,7 @@ class RadioButton extends React.Component {
                   }
             }
             disabled={this.props.isDisabled}
+            {...setClassNameInput}
           />
           <RadiobuttonIcon {...this.props} />
           <Text

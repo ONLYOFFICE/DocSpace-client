@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getPresignedUri } from "@docspace/common/api/files";
-import { EDITOR_ID } from "@docspace/common/constants";
+import {
+  EDITOR_ID,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/common/constants";
 import { useTranslation } from "react-i18next";
 //import SharingDialog from "../components/SharingDialog";
 import SelectFileDialog from "../components/SelectFileDialog";
@@ -144,7 +148,7 @@ const withDialogs = (WrappedComponent) => {
     };
 
     const insertImageActionProps = {
-      isImageOnly: true,
+      filterParam: FilesSelectorFilterTypes.IMG,
     };
 
     const mailMergeActionProps = {
@@ -207,10 +211,9 @@ const withDialogs = (WrappedComponent) => {
 
     const onCloseFolderDialog = () => {
       setIsFolderDialogVisible(false);
-      setNewOpenTab(false);
     };
 
-    const getSavingInfo = async (title, folderId) => {
+    const getSavingInfo = async (title, folderId, openNewTab) => {
       const savingInfo = await window.filesUtils.SaveAs(
         title,
         urlSelectorFolder,
@@ -229,13 +232,13 @@ const withDialogs = (WrappedComponent) => {
       }
     };
 
-    const onClickSaveSelectFolder = (e, folderId) => {
-      const currentExst = titleSelectorFolder.split(".").pop();
+    const onClickSaveSelectFolder = (e, folderId, fileTitle, openNewTab) => {
+      const currentExst = fileTitle.split(".").pop();
 
       const title =
         currentExst !== extension
-          ? titleSelectorFolder.concat(`.${extension}`)
-          : titleSelectorFolder;
+          ? fileTitle.concat(`.${extension}`)
+          : fileTitle;
 
       if (openNewTab) {
         window.filesUtils.SaveAs(
@@ -245,7 +248,7 @@ const withDialogs = (WrappedComponent) => {
           openNewTab
         );
       } else {
-        getSavingInfo(title, folderId);
+        getSavingInfo(title, folderId, openNewTab);
       }
     };
 
@@ -306,9 +309,6 @@ const withDialogs = (WrappedComponent) => {
         onCloseFolderDialog={onCloseFolderDialog}
         onClickSaveSelectFolder={onClickSaveSelectFolder}
         titleSelectorFolder={titleSelectorFolder}
-        onChangeInput={onChangeInput}
-        onClickCheckbox={onClickCheckbox}
-        openNewTab={openNewTab}
         mfReady={mfReady}
       />
     );

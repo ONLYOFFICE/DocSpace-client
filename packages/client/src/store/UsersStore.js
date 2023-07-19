@@ -376,6 +376,8 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
@@ -415,6 +417,8 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
     };
   };
 

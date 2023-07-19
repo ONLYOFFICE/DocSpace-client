@@ -10,6 +10,7 @@ import ComboBox from "@docspace/components/combobox";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
+import UserQuota from "./sub-components/UserQuota";
 
 const Accounts = ({
   t,
@@ -215,6 +216,7 @@ const Accounts = ({
           >
             {statusText}
           </Text>
+          <UserQuota selection={selection} t={t} />
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
           </Text>

@@ -484,6 +484,23 @@ public class FileStorageService //: IFileStorageService
 
         return await InternalCreateNewFolderAsync(parentId, title);
     }
+
+    
+    public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T formId, int roleId)
+    {
+        var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
+        var files = _fileSecurity.FilterReadAsync(boardRolesDao.GetBoardFilesByRole(formId, roleId)).ToListAsync();
+
+        List<FileEntry<T>> entries = new();
+
+        foreach (var items in await Task.WhenAll(files.AsTask()))
+        {
+            entries.AddRange(items);
+        }
+
+        return entries;
+
+    }
     public async Task<Folder<T>> CreateNewBoardAsync<T>(T formId, Dictionary<int, Guid> boardRoles)
     {
         return await CreateBoardAsync(formId, boardRoles);
@@ -1374,14 +1391,14 @@ public class FileStorageService //: IFileStorageService
         var file = await fileDao.GetFileAsync(fileId);
 
         ErrorIf(file == null, FilesCommonResource.ErrorMassage_FileNotFound);
-        var tags = tagDao.GetTagsAsync(file.Id, FileEntryType.File, TagType.Role);
-        var tagRole = await tags.FirstOrDefaultAsync();
-        if(tagRole != null)
-        {
-            await tagDao.RemoveTags(tagRole);
-        }
 
-        var tag = new Tag("locked", TagType.Locked, _authContext.CurrentAccount.ID, 0).AddEntry(file);
+        var role = await boardRolesDao.GetBoardRoleAsync(file.ParentId, roleId);
+
+        await tagDao.RemoveTagLinksAsync(fileId, FileEntryType.File, TagType.Role);
+
+        var tag = Tag.Role(role.TagId, role.Title, Guid.Empty, file);
+
+        await tagDao.SaveTagLinkAsync(tag);
 
         return file;
     }

@@ -31,5 +31,6 @@ public interface IBoardRoleDao<T>
 {
     IAsyncEnumerable<BoardRole> GetBoardRolesAsync(T boardId);
     Task<BoardRole> GetBoardRoleAsync(T boardId, int roleId);
+    IAsyncEnumerable<File<T>> GetBoardFilesByRole(T boardId, int roleId);
     Task<IEnumerable<BoardRole>> SaveBoardRoleAsync(IEnumerable<BoardRole> boarRoles);
 }

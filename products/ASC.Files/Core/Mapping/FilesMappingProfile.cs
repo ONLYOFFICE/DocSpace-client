@@ -40,6 +40,10 @@ public class FilesMappingProfile : AutoMapper.Profile
                 .IncludeMembers(r => r.File)
                 .ConstructUsingServiceLocator();
 
+        CreateMap<DbFileBoardQuery, File<int>>()
+            .IncludeMembers(r => r.File)
+            .ConstructUsingServiceLocator();
+
         CreateMap<DbFolder, Folder<int>>();
 
         CreateMap<DbFolderQuery, Folder<int>>()

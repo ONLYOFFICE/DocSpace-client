@@ -78,6 +78,22 @@ internal class BoardRoleDao : AbstractDao, IBoardRoleDao<int>
         }
 
     }
+    public async IAsyncEnumerable<File<int>> GetBoardFilesByRole(int boardId, int roleId)
+    {
+        using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var q = Query(filesDbContext.Files)
+            .Join(filesDbContext.TagLink, f => f.Id.ToString(), t => t.EntryId, (files, tagLinks) => new { files, tagLinks })
+            .Join(filesDbContext.FilesBoardRole, r => r.tagLinks.TagId, t => t.TagId, (result, boardInfo) => new DbFileBoardQuery { File = result.files, Board = boardInfo })
+            .Where(r => r.Board.BoardId == boardId)
+            .Where(r => r.Board.RoleId == roleId);
+
+        await foreach (var e in q.AsAsyncEnumerable())
+        {
+            yield return _mapper.Map<DbFileBoardQuery, File<int>>(e);
+        }
+    }
+
 
     public async Task<BoardRole> GetBoardRoleAsync(int boardId, int roleId)
     {

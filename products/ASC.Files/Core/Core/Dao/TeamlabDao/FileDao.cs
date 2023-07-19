@@ -1677,6 +1677,11 @@ internal class FileDao : AbstractDao, IFileDao<int>
     }
 }
 
+public class DbFileBoardQuery
+{
+    public DbFile File { get; set; }
+    public DbFilesBoardRole Board { get; set; }
+}
 public class DbFileQuery
 {
     public DbFile File { get; set; }

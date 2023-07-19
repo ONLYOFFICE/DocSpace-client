@@ -84,6 +84,11 @@ public class FoldersControllerHelper : FilesHelperBase
         return await _folderDtoHelper.GetAsync(folder);
     }
 
+    public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T folderId, int? roleId)
+    {
+        return await _fileStorageService.GetFilesByRole(folderId, roleId ?? 0);
+    }
+    
     public async Task<FolderContentDto<T>> GetFolderAsync<T>(T folderId, Guid? userIdOrGroupId, FilterType? filterType, T roomId, bool? searchInContent, bool? withSubFolders, bool? excludeSubject)
     {
         var folderContentWrapper = await ToFolderContentWrapperAsync(folderId, userIdOrGroupId ?? Guid.Empty, filterType ?? FilterType.None, roomId, searchInContent ?? false, withSubFolders ?? false, excludeSubject ?? false);

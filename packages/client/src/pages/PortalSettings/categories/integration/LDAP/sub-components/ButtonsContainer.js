@@ -2,18 +2,21 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import toastr from "@docspace/components/toast/toastr";
 import Box from "@docspace/components/box";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { tablet } from "@docspace/components/utils/device";
 
-const ButtonContainer = (props) => {
-  const { saveLdapSettings } = props;
+const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
   const onSaveClick = () => {
-    saveLdapSettings();
+    saveLdapSettings().catch((e) => toastr.error(e));
   };
   const onResetClick = () => {
-    console.log("on reset click");
+    restoreToDefault()
+      .then(() => toastr.success("Settings:SuccessfullySaveSettingsMessage"))
+      .catch((e) => toastr.error(e));
   };
   return (
     <Box className="ldap_buttons-container">
@@ -31,9 +34,10 @@ const ButtonContainer = (props) => {
 };
 
 export default inject(({ ldapStore }) => {
-  const { saveLdapSettings } = ldapStore;
+  const { saveLdapSettings, restoreToDefault } = ldapStore;
 
   return {
     saveLdapSettings,
+    restoreToDefault,
   };
 })(observer(ButtonContainer));

@@ -2,6 +2,7 @@ import {
   getLdapSettings,
   saveLdapSettings,
   getLdapStatus,
+  getLdapDefaultSettings,
 } from "@docspace/common/api/settings";
 import { makeAutoObservable } from "mobx";
 
@@ -65,10 +66,8 @@ class LdapFormStore {
     makeAutoObservable(this);
   }
 
-  load = async () => {
-    const response = await getLdapSettings();
-
-    console.log("LDAP settings", response);
+  mapResponse = (response) => {
+    console.log("LDAP settings data", { response });
 
     const {
       enableLdapAuthentication,
@@ -109,6 +108,12 @@ class LdapFormStore {
     this.authentication = authentication;
     this.acceptCertificate = acceptCertificate;
     this.isSendWelcomeEmail = sendWelcomeEmail;
+  };
+
+  load = async () => {
+    const response = await getLdapSettings();
+
+    this.mapResponse(response);
 
     /*
     "response": {
@@ -186,6 +191,11 @@ class LdapFormStore {
 
   setIsSendWelcomeEmail = (sendWelcomeEmail) => {
     this.isSendWelcomeEmail = sendWelcomeEmail;
+  };
+
+  restoreToDefault = async () => {
+    const response = await getLdapDefaultSettings();
+    this.mapResponse(response);
   };
 
   saveLdapSettings = async () => {

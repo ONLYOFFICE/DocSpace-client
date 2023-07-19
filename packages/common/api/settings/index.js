@@ -875,3 +875,12 @@ export function getLdapStatus() {
 
   return request(options);
 }
+
+export function getLdapDefaultSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/default",
+  };
+
+  return request(options);
+}

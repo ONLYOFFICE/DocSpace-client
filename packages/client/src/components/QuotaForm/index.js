@@ -7,11 +7,13 @@ import ComboBox from "@docspace/components/combobox";
 import Button from "@docspace/components/button";
 import StyledBody from "./StyledComponent";
 
+const conversionToBytes = (size, power) => size * Math.pow(1024, power);
 const QuotaForm = ({
   isLoading,
   onSaveQuota,
   isButtonsEnable = true,
   maxInputWidth,
+  onSetQuotaSize,
 }) => {
   const [size, setSize] = useState("");
   const [power, setPower] = useState(0);
@@ -29,12 +31,16 @@ const QuotaForm = ({
   const onChangeTextInput = (e) => {
     const { value, validity } = e.target;
 
-    if (validity.valid) setSize(value);
+    if (validity.valid) {
+      onSetQuotaSize && onSetQuotaSize(conversionToBytes(value, power));
+      setSize(value);
+    }
   };
 
   const onSelectComboBox = (option) => {
     const { key } = option;
 
+    onSetQuotaSize && onSetQuotaSize(conversionToBytes(size, key));
     setPower(key);
   };
 
@@ -49,7 +55,7 @@ const QuotaForm = ({
   const onKeyDown = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isSizeError()) return;
-      onSaveQuota();
+      onSaveQuota && onSaveQuota();
     }
 
     setIsError(false);
@@ -58,8 +64,7 @@ const QuotaForm = ({
   const onButtonClick = () => {
     if (isSizeError()) return;
 
-    const conversionToBytes = size * Math.pow(1024, power);
-    onSaveQuota(conversionToBytes);
+    onSaveQuota && onSaveQuota(conversionToBytes(size, power));
   };
 
   return (

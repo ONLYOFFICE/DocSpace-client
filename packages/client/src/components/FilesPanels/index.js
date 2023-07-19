@@ -24,6 +24,7 @@ import {
   InviteUsersWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
+  ChangeQuotaDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -62,6 +63,7 @@ const Panels = (props) => {
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
+    changeQuotaDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -138,6 +140,7 @@ const Panels = (props) => {
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
     ),
+    changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
   ];
 };
 
@@ -178,6 +181,7 @@ export default inject(
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
+      changeQuotaDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -218,6 +222,7 @@ export default inject(
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
+      changeQuotaDialogVisible,
     };
   }
 )(observer(Panels));

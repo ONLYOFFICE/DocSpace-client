@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import SettingQuotaComponent from "./SettingQuota";
-
 import Button from "@docspace/components/button";
 import { baseUserQuota } from "@docspace/common/api/settings";
 import toastr from "@docspace/components/toast/toastr";
+import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const BaseQuotaContentComponent = ({ isEnable }) => {
@@ -28,25 +27,23 @@ const BaseQuotaContentComponent = ({ isEnable }) => {
     setIsLoading(false);
   };
 
-  const commonButtonProps = {
-    size: "small",
-    primary: true,
-    value: "value",
-    label: t("Common:Save"),
-    isDisabled: isLoading,
-    isLoading: isLoading,
-  };
-
   return (
     <>
       {isEnable ? (
-        <SettingQuotaComponent
-          commonButtonProps={commonButtonProps}
-          SaveQuota={onSaveQuota}
+        <QuotaForm
+          onSaveQuota={onSaveQuota}
           isLoading={isLoading}
+          maxInputWidth={"50px"}
         />
       ) : (
-        <Button {...commonButtonProps} onClick={onSaveQuota} />
+        <Button
+          size="small"
+          primary
+          label={t("Common:Save")}
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          onClick={onSaveQuota}
+        />
       )}
     </>
   );

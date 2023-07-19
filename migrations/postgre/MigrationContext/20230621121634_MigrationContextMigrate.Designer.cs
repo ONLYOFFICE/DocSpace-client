@@ -5612,6 +5612,65 @@ namespace ASC.Migrations.PostgreSql.Migrations
                     b.ToTable("files_file", "onlyoffice");
                 });
 
+            modelBuilder.Entity("ASC.Files.Core.EF.DbFilesBoardRole", b =>
+                {
+                    b.Property<int>("TenantId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<int>("BoardId")
+                        .HasColumnType("integer")
+                        .HasColumnName("board_id");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    b.Property<Guid>("AssignedTo")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(38)
+                        .HasColumnType("uuid")
+                        .HasColumnName("assigned_to")
+                        .HasDefaultValueSql("NULL::bpchar")
+                        .IsFixedLength();
+
+                    b.Property<string>("Color")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(400)
+                        .HasColumnType("character(400)")
+                        .HasColumnName("role_title")
+                        .HasDefaultValueSql("NULL::bpchar")
+                        .IsFixedLength();
+
+                    b.Property<int>("QueueNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("queue_number");
+
+                    b.Property<string>("RoleTitle")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(10)
+                        .HasColumnType("character(10)")
+                        .HasColumnName("color")
+                        .HasDefaultValueSql("NULL::bpchar")
+                        .IsFixedLength();
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tag_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.HasKey("TenantId", "BoardId", "RoleId")
+                        .HasName("files_board_role_pkey");
+
+                    b.HasIndex("AssignedTo")
+                        .HasDatabaseName("assigned_to_files_board_role");
+
+                    b.ToTable("files_board_role", "onlyoffice");
+                });
+
             modelBuilder.Entity("ASC.Files.Core.EF.DbFilesBunchObjects", b =>
                 {
                     b.Property<int>("TenantId")

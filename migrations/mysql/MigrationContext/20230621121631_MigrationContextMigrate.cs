@@ -718,6 +718,29 @@ namespace ASC.Migrations.MySql.Migrations
                 .Annotation("MySql:CharSet", "utf8");
 
             migrationBuilder.CreateTable(
+                name: "files_board_role",
+                columns: table => new
+                {
+                    tenantid = table.Column<int>(name: "tenant_id", type: "int", nullable: false),
+                    boardid = table.Column<int>(name: "board_id", type: "int", nullable: false),
+                    roleid = table.Column<int>(name: "role_id", type: "int", nullable: false),
+                    tagid = table.Column<int>(name: "tag_id", type: "int", nullable: false),
+                    roletitle = table.Column<string>(name: "role_title", type: "varchar(400)", nullable: true, collation: "utf8_general_ci")
+                        .Annotation("MySql:CharSet", "utf8"),
+                    color = table.Column<string>(type: "varchar(10)", nullable: true, collation: "utf8_general_ci")
+                        .Annotation("MySql:CharSet", "utf8"),
+                    queuenumber = table.Column<int>(name: "queue_number", type: "int", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: false),
+                    assignedto = table.Column<string>(name: "assigned_to", type: "varchar(38)", nullable: false, collation: "utf8_general_ci")
+                        .Annotation("MySql:CharSet", "utf8")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PRIMARY", x => new { x.tenantid, x.boardid, x.roleid });
+                })
+                .Annotation("MySql:CharSet", "utf8");
+
+            migrationBuilder.CreateTable(
                 name: "files_folder",
                 columns: table => new
                 {
@@ -2067,6 +2090,11 @@ namespace ASC.Migrations.MySql.Migrations
                 column: "modified_on");
 
             migrationBuilder.CreateIndex(
+                name: "assigned_to_files_board_role",
+                table: "files_board_role",
+                column: "assigned_to");
+
+            migrationBuilder.CreateIndex(
                 name: "modified_on",
                 table: "files_folder",
                 column: "modified_on");
@@ -2291,6 +2319,9 @@ namespace ASC.Migrations.MySql.Migrations
 
             migrationBuilder.DropTable(
                 name: "files_file");
+
+            migrationBuilder.DropTable(
+                name: "files_board_role");
 
             migrationBuilder.DropTable(
                 name: "files_folder_tree");

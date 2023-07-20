@@ -274,6 +274,8 @@ const useFiles = ({
     location.state,
     isAccountsPage,
     isSettingsPage,
+    isDashboardPage,
+    isRolePage,
   ]);
 
   return { onDrop };

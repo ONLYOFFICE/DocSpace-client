@@ -29,6 +29,7 @@ import {
   useAccounts,
   useSettings,
   useDashboard,
+  useRole,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -115,14 +116,16 @@ const PureHome = (props) => {
     fetchDashboard,
     setCategoryType,
     dashboardViewAs,
+    roleService,
   } = props;
 
   const location = useLocation();
 
   const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
-  const isDashboardPage = location.pathname.includes("dashboard");
   const isRolePage = location.pathname.includes("role");
+  const isDashboardPage =
+    location.pathname.includes("dashboard") && !isRolePage;
 
   useDashboard({
     isDashboardPage,
@@ -130,6 +133,8 @@ const PureHome = (props) => {
     fetchDashboard,
     setCategoryType,
   });
+
+  useRole({ isRolePage, roleService, setIsLoading, location });
 
   const { onDrop } = useFiles({
     t,
@@ -377,6 +382,8 @@ export default inject(
       disableDrag,
       isErrorRoomNotAvailable,
       setIsPreview,
+
+      roleService,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -532,6 +539,7 @@ export default inject(
       fetchDashboard,
       setCategoryType,
       dashboardViewAs,
+      roleService,
     };
   }
 )(observer(Home));

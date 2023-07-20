@@ -31,6 +31,7 @@ import { getContextMenuKeysByType } from "SRC_DIR/helpers/plugins";
 import { PluginContextMenuItemType } from "SRC_DIR/helpers/plugins/constants";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
+import RoleService from "SRC_DIR/services/Role.service";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -131,6 +132,8 @@ class FilesStore {
   thumbnails = new Set();
   movingInProgress = false;
 
+  roleService;
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -142,6 +145,7 @@ class FilesStore {
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
+    this.roleService = new RoleService(this);
 
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -744,6 +748,7 @@ class FilesStore {
 
     this.files = [];
     this.folders = [];
+    this.boards = [];
 
     this.selection = [];
     this.bufferSelection = null;
@@ -3468,7 +3473,7 @@ class FilesStore {
     runInAction(() => {
       this.setFiles([...this.files, ...newFiles.files]);
       this.setFolders([...this.folders, ...newfolders]);
-      this.boards([...this.boards, ...newdashboards]);
+      this.setBoards([...this.boards, ...newdashboards]);
       this.setFilesIsLoading(false);
     });
   };

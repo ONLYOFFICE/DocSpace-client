@@ -24,7 +24,7 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    navigate(role.url);
+    navigate(role.url, { state: { fromDashboard: true } });
   };
 
   const onSelect = (checked: boolean, role: IRole) => {

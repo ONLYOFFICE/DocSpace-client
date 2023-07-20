@@ -4,3 +4,4 @@ export { default as useOperations } from "./useOperations";
 export { default as useAccounts } from "./useAccounts";
 export { default as useSettings } from "./useSettings";
 export { default as useDashboard } from "./useDashboard";
+export { default as useRole } from "./useRole";

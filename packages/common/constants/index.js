@@ -209,7 +209,7 @@ export const FolderType = Object.freeze({
   Privacy: 13,
   Rooms: 14,
   Archive: 20,
-  Dashboard: 22,
+  Dashboard: 23,
 });
 
 // extends FolderType keys

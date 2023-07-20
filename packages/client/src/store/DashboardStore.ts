@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { NavigateOptions } from "react-router-dom";
 
 import SelectedFolderStore from "./SelectedFolderStore";
 import ClientLoadingStore from "./ClientLoadingStore";
@@ -112,8 +113,8 @@ class DashboardStore {
     return roleOptions;
   };
 
-  private goTo = (url: string) => {
-    window.DocSpace.navigate(url);
+  private goTo = (url: string, options?: NavigateOptions) => {
+    window.DocSpace.navigate(url, options);
   };
 
   private setBufferSelection = (
@@ -144,8 +145,14 @@ class DashboardStore {
   //#region getter
 
   public get roles(): IRole[] {
+    if (!this.dashboard) return [];
+
     const roles = this._roles.map<IRole>((role) => {
-      const url = getCategoryUrl(CategoryType.Role, role.id);
+      const url = getCategoryUrl(
+        CategoryType.Role,
+        this.dashboard?.current.id,
+        role.id
+      );
 
       const general = {
         contextOptionsModel: this.getRolesContextOptionsModel(role),
@@ -161,7 +168,8 @@ class DashboardStore {
         const defaultRole: RoleDefaultType = {
           ...role,
           ...general,
-          onClickLocation: () => this.goTo(url),
+          onClickLocation: () =>
+            this.goTo(url, { state: { fromDashboard: true } }),
         };
 
         return defaultRole;

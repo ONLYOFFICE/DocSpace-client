@@ -148,18 +148,18 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "rooms/shared/role/:roleId",
+            path: "rooms/shared/dashboard/:boardId/role/:roleId",
             element: (
               <PrivateRoute>
-                <Role />
+                <FilesView />
               </PrivateRoute>
             ),
           },
           {
-            path: "rooms/shared/role/:roleId/filter",
+            path: "rooms/shared/dashboard/:boardId/role/:roleId/filter",
             element: (
               <PrivateRoute>
-                <Role />
+                <FilesView />
               </PrivateRoute>
             ),
           },

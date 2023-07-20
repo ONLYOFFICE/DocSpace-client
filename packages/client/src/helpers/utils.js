@@ -118,6 +118,7 @@ export const getCategoryType = (location) => {
   const { pathname } = location;
 
   if (pathname.includes("dashboard")) return CategoryType.Dashboard;
+  if (pathname.includes("role")) return CategoryType.Role;
 
   if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
@@ -174,10 +175,15 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
 
 /**
  * @param { valueOf<CategoryType> } categoryType
- * @param { string | null | number } folderId
+ * @param { string | number } [folderId = null]
+ * @param { string | number } [roleId = null]
  * @returns { string }
  */
-export const getCategoryUrl = (categoryType, folderId = null) => {
+export const getCategoryUrl = (
+  categoryType,
+  folderId = null,
+  roleId = null
+) => {
   const cType = categoryType;
 
   switch (cType) {
@@ -213,7 +219,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     case CategoryType.Dashboard:
       return `/rooms/shared/dashboard/${folderId}/filter`;
     case CategoryType.Role:
-      return `/rooms/shared/role/${folderId}/filter`;
+      return `/rooms/shared/dashboard/${folderId}/role/${roleId}/filter`;
     default:
       throw new Error("Unknown category type");
   }

@@ -1,5 +1,5 @@
 import api from "@docspace/common/api";
-import type FilesFilter from "@docspace/common/api/files/filter";
+import type RoleFilter from "@docspace/common/api/files/roleFilter";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 
 class RoleService {
@@ -17,7 +17,7 @@ class RoleService {
   public getRoleFiles = async (
     boardId: string,
     roleId: string,
-    filter: FilesFilter
+    filter: RoleFilter
   ) => {
     const promise = new Promise((res, rej) => {
       setTimeout(() => {

@@ -214,7 +214,9 @@ const SectionHeaderContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("accounts");
   const isSettingsPage = location.pathname.includes("settings");
-  const isDasboardPage = location.pathname.includes("dashboard");
+  const isRolePage = location.pathname.includes("role");
+  const isDashboardPage =
+    !isRolePage && location.pathname.includes("dashboard");
 
   const onCreate = (format) => {
     const event = new Event(Events.CREATE);
@@ -533,7 +535,7 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsFolder = () => {
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    if (isDasboardPage) {
+    if (isDashboardPage) {
       return [
         {
           id: "header_option_link-for-room-members",
@@ -774,7 +776,7 @@ const SectionHeaderContent = (props) => {
       return setAccountsSelected(checked ? "all" : "none");
     }
 
-    if (isDasboardPage)
+    if (isDashboardPage)
       return dashboardHeaderMenuService.onChangeSelected(checked);
 
     setSelected(checked ? "all" : "none");
@@ -862,7 +864,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = isAccountsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   }
-  if (isDasboardPage) {
+  if (isDashboardPage) {
     const {
       isHeaderMenuVisible,
       isHeaderChecked,
@@ -930,7 +932,8 @@ const SectionHeaderContent = (props) => {
                 canCreate={
                   (security?.Create || isAccountsPage) &&
                   !isSettingsPage &&
-                  !isDasboardPage
+                  !isDashboardPage &&
+                  !isRolePage
                 }
                 title={currentTitle}
                 isDesktop={isDesktop}
@@ -965,7 +968,7 @@ const SectionHeaderContent = (props) => {
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom}
-                hideInfoPanel={isSettingsPage || isDasboardPage}
+                hideInfoPanel={isSettingsPage || isDashboardPage || isRolePage}
                 showRootFolderTitle={insideTheRoom}
               />
             </div>

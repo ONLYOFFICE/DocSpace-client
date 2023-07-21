@@ -254,7 +254,9 @@ const SectionFilterContent = ({
   const navigate = useNavigate();
 
   const isAccountsPage = location.pathname.includes("accounts");
-  const isDashboardPage = location.pathname.includes("dashboard");
+  const isRolePage = location.pathname.includes("role");
+  const isDashboardPage =
+    location.pathname.includes("dashboard") && !isRolePage;
 
   const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
 

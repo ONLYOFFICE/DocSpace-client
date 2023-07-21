@@ -126,7 +126,7 @@ class FileMoveCopyOperation<T> : FileOperation<FileMoveCopyOperationData<T>, T>
             return;
         }
 
-        if (toFolder.FolderType != FolderType.VirtualRooms && toFolder.FolderType != FolderType.Archive)
+        if (toFolder.FolderType != FolderType.VirtualRooms && toFolder.FolderType != FolderType.Archive && toFolder.FolderType != FolderType.Board)
         {
             if (!await FilesSecurity.CanCreateAsync(toFolder))
             {

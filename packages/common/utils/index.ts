@@ -24,7 +24,7 @@ import TopLoaderService from "@docspace/components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
-import type { FillQueue, RoleDefaultType } from "../types";
+import type { RoleQueue, RoleDefaultType } from "../types";
 import { RoleTypeEnum } from "../enums";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
@@ -542,6 +542,6 @@ export const checkFilterInstance = (filterObject, certainClass) => {
   return isInstance;
 };
 
-export const isDefaultRole = (role: FillQueue): role is RoleDefaultType => {
+export const isDefaultRole = (role: RoleQueue): role is RoleDefaultType => {
   return role.type === RoleTypeEnum.Default;
 };

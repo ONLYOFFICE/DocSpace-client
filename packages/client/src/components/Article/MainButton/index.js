@@ -126,7 +126,9 @@ const ArticleMainButtonContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("/accounts/filter");
   const isSettingsPage = location.pathname.includes("settings");
-  const isDashboardPage = location.pathname.includes("dashboard");
+  const isRolePage = location.pathname.includes("role");
+  const isDashboardPage =
+    location.pathname.includes("dashboard") && !isRolePage;
 
   const inputFilesElement = React.useRef(null);
   const inputFolderElement = React.useRef(null);
@@ -452,13 +454,14 @@ const ArticleMainButtonContent = (props) => {
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled = isDashboardPage
-    ? isDashboardPage
-    : isSettingsPage
-    ? isSettingsPage
-    : isAccountsPage
-    ? !isAccountsPage
-    : !security?.Create;
+  const isDisabled =
+    isDashboardPage || isRolePage
+      ? isDashboardPage || isRolePage
+      : isSettingsPage
+      ? isSettingsPage
+      : isAccountsPage
+      ? !isAccountsPage
+      : !security?.Create;
 
   const isProfile = location.pathname.includes("/profile");
 
@@ -471,7 +474,8 @@ const ArticleMainButtonContent = (props) => {
         <>
           {!isProfile &&
             (security?.Create || isAccountsPage) &&
-            !isDashboardPage && (
+            !isDashboardPage &&
+            !isRolePage && (
               <MobileView
                 t={t}
                 titleProp={t("Upload")}

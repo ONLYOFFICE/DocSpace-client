@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Location, useNavigate, useParams } from "react-router-dom";
 
-import FilesFilter from "@docspace/common/api/files/filter";
+import RoleFilter from "@docspace/common/api/files/roleFilter";
 
 import type RoleService from "SRC_DIR/services/Role.service";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -27,9 +27,9 @@ function useRole({
   const { roleId, boardId } = useParams<ParamType>();
 
   const fetchDefaultRoleFiles = (roleId: string, boardId: string) => {
-    const filter = FilesFilter.getDefault();
+    const filter = RoleFilter.getDefault();
 
-    filter.folder = roleId;
+    filter.roleid = roleId;
 
     const url = getCategoryUrl(CategoryType.Role, boardId, roleId);
 
@@ -39,7 +39,7 @@ function useRole({
   useEffect(() => {
     if (!isRolePage || !roleId || !boardId) return;
 
-    const filterObj = FilesFilter.getFilter(window.location);
+    const filterObj = RoleFilter.getFilter(window.location);
     const state = location.state;
 
     setIsLoading(true, !state?.fromDashboard);
@@ -48,7 +48,7 @@ function useRole({
       return fetchDefaultRoleFiles(roleId, boardId);
     }
 
-    let dataObj: { filter: FilesFilter; type?: string; itemId?: string } = {
+    let dataObj: { filter: RoleFilter; type?: string; itemId?: string } = {
       filter: filterObj,
     };
 
@@ -74,7 +74,7 @@ function useRole({
 
     const newFilter = filter.clone();
 
-    const requests: [Promise<FilesFilter>, Promise<any>?] = [
+    const requests: [Promise<RoleFilter>, Promise<any>?] = [
       Promise.resolve(newFilter),
     ];
 
@@ -101,7 +101,7 @@ function useRole({
         });
       })
       .catch(() => {
-        Promise.resolve(FilesFilter.getDefault());
+        Promise.resolve(RoleFilter.getDefault());
       });
 
     // ggetGroup(itemId).then()

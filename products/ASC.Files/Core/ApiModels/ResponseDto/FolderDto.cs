@@ -149,7 +149,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
             {
                 boardRolesDto.Add(new BoardRolesDto
                 {
-                    Id = role.QueueNumber,
+                    Id = role.RoleId,
                     Title = role.Title,
                     Color  = role.Color,
                     Badge = 0, //TODO

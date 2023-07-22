@@ -7,6 +7,7 @@ import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 
 import ProgressContainer from "./ProgressContainer";
+import ToggleAutoSync from "./ToggleAutoSync";
 
 const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
@@ -45,6 +46,8 @@ const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
       />
 
       <ProgressContainer />
+
+      <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
     </Box>
   );
 };

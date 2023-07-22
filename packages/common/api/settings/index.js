@@ -893,3 +893,12 @@ export function syncLdap() {
 
   return request(options);
 }
+
+export function getCronLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/cron",
+  };
+
+  return request(options);
+}

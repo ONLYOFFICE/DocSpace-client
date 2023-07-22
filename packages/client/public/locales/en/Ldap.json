@@ -26,5 +26,7 @@
   "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported.",
   "LdapSyncTitle": "Sync LDAP data",
   "LdapSyncDescription": "Sync LDAP data is a way to synchronize data changes between your portal and the LDAP server. Enable the ‘Auto Sync’ option and set a time period to automatically update the information.",
-  "LdapSyncButton": "Sync users"
+  "LdapSyncButton": "Sync users",
+  "LdapAutoSyncToggle": "Auto sync",
+  "LdapAutoSyncToggleDescription": "Synchronization will allow to upload all the data from the portal and update the new data after changing the settings. Sync every time you have new data on users in the portal."
 }

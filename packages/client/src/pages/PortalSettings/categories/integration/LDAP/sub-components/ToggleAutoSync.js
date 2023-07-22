@@ -10,14 +10,8 @@ import Badge from "@docspace/components/badge";
 //import SSOLoader from "../../sub-components/ssoLoader";
 const borderProp = { radius: "6px" };
 
-const ToggleLDAP = (props) => {
-  const {
-    theme,
-    //enableLdap,
-    isLdapEnabled,
-    toggleLdap,
-    isLDAPAvailable,
-  } = props;
+const ToggleAutoSync = (props) => {
+  const { theme, toggleCron, isLDAPAvailable, isCronEnabled } = props;
 
   const { t } = useTranslation(["Ldap", "Common"]);
 
@@ -34,13 +28,14 @@ const ToggleLDAP = (props) => {
         borderProp={borderProp}
         displayProp="flex"
         flexDirection="row"
+        marginProp={"20px 0 0 0"}
         paddingProp="12px"
       >
         <ToggleButton
           className="toggle"
-          isChecked={isLdapEnabled}
+          isChecked={isCronEnabled}
           onChange={
-            toggleLdap
+            toggleCron
             // isLdapEnabled && enableLdap
             //   ? openConfirmationDisableModal
             //   : ldapToggle
@@ -56,7 +51,7 @@ const ToggleLDAP = (props) => {
               noSelect
               className="settings_unavailable"
             >
-              {t("LdapToggle")}
+              {t("LdapAutoSyncToggle")}
             </Text>
             {!isLDAPAvailable && (
               <Badge
@@ -74,7 +69,7 @@ const ToggleLDAP = (props) => {
             className="settings_unavailable"
             noSelect
           >
-            {t("LdapToggleDescription")}
+            {t("LdapAutoSyncToggleDescription")}
           </Text>
         </div>
       </Box>
@@ -86,7 +81,7 @@ const ToggleLDAP = (props) => {
 
 export default inject(({ auth, ldapStore }) => {
   const { theme } = auth.settingsStore;
-  const { enableLdap, isLdapEnabled, toggleLdap } = ldapStore;
+  const { enableLdap, isLdapEnabled, toggleCron, isCronEnabled } = ldapStore;
 
   console.log({
     theme,
@@ -97,7 +92,8 @@ export default inject(({ auth, ldapStore }) => {
   return {
     theme,
     enableLdap,
-    toggleLdap,
+    toggleCron,
     isLdapEnabled,
+    isCronEnabled,
   };
-})(observer(ToggleLDAP));
+})(observer(ToggleAutoSync));

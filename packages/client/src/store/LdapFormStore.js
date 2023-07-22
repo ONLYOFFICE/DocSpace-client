@@ -4,6 +4,7 @@ import {
   getLdapStatus,
   getLdapDefaultSettings,
   syncLdap,
+  getCronLdap,
 } from "@docspace/common/api/settings";
 import { makeAutoObservable } from "mobx";
 
@@ -59,6 +60,8 @@ class LdapFormStore {
   isSendWelcomeEmail = false;
   errors = {};
 
+  cron = null;
+
   inProgress = false;
   progressBarIntervalId = null;
   alreadyChecking = false;
@@ -75,8 +78,8 @@ class LdapFormStore {
     makeAutoObservable(this);
   }
 
-  mapResponse = (response) => {
-    console.log("LDAP settings data", { response });
+  mapSettings = (data) => {
+    console.log("LDAP settings data", data);
 
     const {
       enableLdapAuthentication,
@@ -91,7 +94,7 @@ class LdapFormStore {
       ldapMapping,
       authentication,
       acceptCertificate,
-    } = response;
+    } = data;
 
     const {
       FirstNameAttribute,
@@ -119,10 +122,19 @@ class LdapFormStore {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
 
-  load = async () => {
-    const response = await getLdapSettings();
+  mapCron = (data) => {
+    console.log("LDAP cron settings data", { data });
+  };
 
-    this.mapResponse(response);
+  load = async () => {
+    const [settings, cron] = await Promise.allSettled([
+      getLdapSettings(),
+      getCronLdap(),
+    ]);
+
+    if (settings.status == "fulfilled") this.mapSettings(settings.value);
+
+    if (cron.status == "fulfilled") this.mapCron(cron.value);
 
     /*
     "response": {
@@ -204,7 +216,7 @@ class LdapFormStore {
 
   restoreToDefault = async () => {
     const response = await getLdapDefaultSettings();
-    this.mapResponse(response);
+    this.mapSettings(response);
   };
 
   syncLdap = async () => {
@@ -500,11 +512,19 @@ class LdapFormStore {
     console.error(errorMessage);
   };
 
-  ldapToggle = () => {
+  toggleLdap = () => {
     this.isLdapEnabled = !this.isLdapEnabled;
 
     if (this.isLdapEnabled) {
       this.setIsSettingsShown(true);
+    }
+  };
+
+  toggleCron = () => {
+    if (!this.cron) {
+      this.cron = "* * * * *";
+    } else {
+      this.cron = null;
     }
   };
 
@@ -519,6 +539,10 @@ class LdapFormStore {
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;
   };
+
+  get isCronEnabled() {
+    return !!this.cron;
+  }
 }
 
 export default LdapFormStore;

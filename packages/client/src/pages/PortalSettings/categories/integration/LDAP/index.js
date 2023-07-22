@@ -10,6 +10,8 @@ import Link from "@docspace/components/link";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 
 import StyledLdapPage from "./styled-components/StyledLdapPage";
+import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import HideButton from "./sub-components/HideButton";
 import Checkboxes from "./sub-components/Checkboxes";
@@ -18,7 +20,7 @@ import AttributeMapping from "./sub-components/AttributeMapping";
 import ButtonsContainer from "./sub-components/ButtonsContainer";
 import AuthenticationContainer from "./sub-components/AuthenticationContainer";
 import AdvancedSettings from "./sub-components/AdvancedSettings";
-import ProgressContainer from "./sub-components/ProgressContainer";
+import SyncContainer from "./sub-components/SyncContainer";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -86,10 +88,12 @@ const LDAP = ({
           <AuthenticationContainer />
           <AdvancedSettings />
           <ButtonsContainer />
-
-          <ProgressContainer />
         </>
       )}
+
+      <StyledSettingsSeparator />
+
+      <SyncContainer />
     </StyledLdapPage>
   );
 };

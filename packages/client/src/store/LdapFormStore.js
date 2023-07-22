@@ -3,6 +3,7 @@ import {
   saveLdapSettings,
   getLdapStatus,
   getLdapDefaultSettings,
+  syncLdap,
 } from "@docspace/common/api/settings";
 import { makeAutoObservable } from "mobx";
 
@@ -204,6 +205,27 @@ class LdapFormStore {
   restoreToDefault = async () => {
     const response = await getLdapDefaultSettings();
     this.mapResponse(response);
+  };
+
+  syncLdap = async () => {
+    this.inProgress = false;
+    this.progressStatus = {
+      percents: 0,
+      completed: false,
+      error: "",
+      source: "",
+    };
+
+    const respose = await syncLdap();
+
+    console.log(respose);
+
+    if (respose?.id) {
+      this.progressBarIntervalId = setInterval(
+        this.checkStatus,
+        constants.GET_STATUS_TIMEOUT
+      );
+    }
   };
 
   saveLdapSettings = async () => {

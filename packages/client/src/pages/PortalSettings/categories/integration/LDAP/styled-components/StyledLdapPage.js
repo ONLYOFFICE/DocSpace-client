@@ -90,6 +90,14 @@ const StyledLdapPage = styled(Box)`
     margin: 16px 0;
   }
 
+  .sync-description {
+    margin-top: 8px;
+  }
+
+  .manual-sync-button {
+    margin-top: 16px;
+  }
+
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 

@@ -884,3 +884,12 @@ export function getLdapDefaultSettings() {
 
   return request(options);
 }
+
+export function syncLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/sync",
+  };
+
+  return request(options);
+}

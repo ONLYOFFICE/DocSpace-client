@@ -543,6 +543,10 @@ class LdapFormStore {
   get isCronEnabled() {
     return !!this.cron;
   }
+
+  get isStatusEmpty() {
+    return !this.progressStatus.source;
+  }
 }
 
 export default LdapFormStore;

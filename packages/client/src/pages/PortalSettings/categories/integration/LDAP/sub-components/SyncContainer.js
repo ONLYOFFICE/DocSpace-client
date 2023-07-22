@@ -13,7 +13,7 @@ const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
   return (
-    <Box className="ldap_progress-container">
+    <Box className="ldap_sync-container">
       <Text
         fontSize="16px"
         fontWeight={700}

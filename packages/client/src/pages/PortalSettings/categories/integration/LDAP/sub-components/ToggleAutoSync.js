@@ -11,7 +11,13 @@ import Badge from "@docspace/components/badge";
 const borderProp = { radius: "6px" };
 
 const ToggleAutoSync = (props) => {
-  const { theme, toggleCron, isLDAPAvailable, isCronEnabled } = props;
+  const {
+    theme,
+    toggleCron,
+    isLDAPAvailable,
+    isCronEnabled,
+    isStatusEmpty,
+  } = props;
 
   const { t } = useTranslation(["Ldap", "Common"]);
 
@@ -28,7 +34,7 @@ const ToggleAutoSync = (props) => {
         borderProp={borderProp}
         displayProp="flex"
         flexDirection="row"
-        marginProp={"20px 0 0 0"}
+        marginProp={isStatusEmpty ? "20px 0 0 0" : "40px 0 0 0"}
         paddingProp="12px"
       >
         <ToggleButton
@@ -81,7 +87,13 @@ const ToggleAutoSync = (props) => {
 
 export default inject(({ auth, ldapStore }) => {
   const { theme } = auth.settingsStore;
-  const { enableLdap, isLdapEnabled, toggleCron, isCronEnabled } = ldapStore;
+  const {
+    enableLdap,
+    isLdapEnabled,
+    toggleCron,
+    isCronEnabled,
+    isStatusEmpty,
+  } = ldapStore;
 
   console.log({
     theme,
@@ -95,5 +107,6 @@ export default inject(({ auth, ldapStore }) => {
     toggleCron,
     isLdapEnabled,
     isCronEnabled,
+    isStatusEmpty,
   };
 })(observer(ToggleAutoSync));

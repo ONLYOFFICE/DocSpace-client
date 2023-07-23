@@ -755,10 +755,10 @@ public class FileSecurity : IFileSecurity
 
             if (action != FilesSecurityActions.Read)
             {
-                if (isBoard)
+                /*if (isBoard)
                 {
                     return false;
-                }
+                }*/
                 if ((action == FilesSecurityActions.Pin ||
                      action == FilesSecurityActions.EditAccess ||
                      action == FilesSecurityActions.Mute) &&

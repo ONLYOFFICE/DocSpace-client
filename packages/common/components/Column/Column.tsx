@@ -1,18 +1,15 @@
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ColumnContainer, ColumnHeader, ColumnBody } from "./Column.styled";
 import ColumnHeaderContent from "./ColumnHeaderContent";
 import ColumnBodyContent from "./ColumnBodyContent";
 
 import type { ColumnProps } from "./Column.props";
-
-import { StoreType } from "SRC_DIR/types";
+import type { StoreType } from "SRC_DIR/types";
+import type { IFileByRole } from "@docspace/common/Models";
 
 function Column(props: ColumnProps) {
-  const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,6 +19,17 @@ function Column(props: ColumnProps) {
     });
   }, []);
 
+  const onSelected = useCallback(
+    (file: IFileByRole, checked: boolean) => {
+      props.selectedFileByRole?.(file, checked);
+    },
+    [props.selectedFileByRole]
+  );
+
+  console.log("Column" + props.role.id);
+
+  const filesByRoleStore = props.collectionFileByRoleStore?.get(props.role.id);
+
   return (
     <ColumnContainer>
       <ColumnHeader>
@@ -30,7 +38,8 @@ function Column(props: ColumnProps) {
       <ColumnBody>
         <ColumnBodyContent
           isLoading={isLoading}
-          filesByRole={props.filesByRole?.get(props.role.id)}
+          filesByRole={filesByRoleStore?.FilesByRole}
+          onSelected={onSelected}
         />
       </ColumnBody>
     </ColumnContainer>
@@ -38,7 +47,19 @@ function Column(props: ColumnProps) {
 }
 
 export default inject<StoreType>(({ dashboardStore }) => {
-  const { filesByRole, fetchFilesByRole } = dashboardStore;
+  const {
+    filesByRole,
+    fetchFilesByRole,
+    selectedFilesByRoleMap,
+    selectedFileByRole,
+    collectionFileByRoleStore,
+  } = dashboardStore;
 
-  return { filesByRole, fetchFilesByRole };
+  return {
+    filesByRole,
+    fetchFilesByRole,
+    selectedFilesByRoleMap,
+    selectedFileByRole,
+    collectionFileByRoleStore,
+  };
 })(observer(Column));

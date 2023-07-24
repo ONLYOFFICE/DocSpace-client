@@ -1,4 +1,6 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, ChangeEvent, memo } from "react";
+import equal from "fast-deep-equal/react";
+
 import Checkbox from "@docspace/components//checkbox";
 import ContextMenu from "@docspace/components/context-menu";
 import ContextMenuButton from "@docspace/components/context-menu-button";
@@ -21,15 +23,14 @@ import OformIcon from "PUBLIC_DIR/images/icons/32/oform.svg";
 import DefaultUserAvatar from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 function Card({
-  username,
-  filename,
-  isForMe = false,
-  isSelected = false,
-  avatarUrl = "",
+  file,
   isLoading = false,
+  isForMe = false,
   getOptions = () => [],
   onSelected = () => {},
 }: CardProps) {
+  console.log("Card", file.id);
+
   const contextMenuRef = useRef<ContextMenu>(null);
 
   const onClickHandler = useCallback((event: MouseEvent) => {
@@ -39,6 +40,15 @@ function Card({
   const onHideContextMenu = useCallback((event: MouseEvent) => {
     contextMenuRef.current?.hide(event);
   }, []);
+
+  const handleSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    onSelected(file, event.target.checked);
+  };
+
+  const isSelected = file.selected;
+  const filename = file.title;
+  const avatarUrl = "";
+  const username = file.title;
 
   if (isLoading)
     return (
@@ -63,7 +73,7 @@ function Card({
           <Checkbox
             className="card__checkbox"
             isChecked={isSelected}
-            onChange={onSelected}
+            onChange={handleSelected}
           />
           <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
         </CardAvatarWrapper>
@@ -88,4 +98,6 @@ function Card({
   );
 }
 
-export default Card;
+export default memo(Card, (prevProps, nextProps) =>
+  equal(prevProps, nextProps)
+);

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import Badge from "@docspace/components/badge";
@@ -28,6 +28,8 @@ function isDefaultRole(role: IRole): role is RoleDefaultType {
 }
 
 function ColumnHeaderContent({ role, getModel }: ColumnHeaderContentProps) {
+  console.log("ColumnHeaderContent");
+
   const { t } = useTranslation();
   const contextMenuRef = useRef<ContextMenu>(null);
 
@@ -105,4 +107,4 @@ function ColumnHeaderContent({ role, getModel }: ColumnHeaderContentProps) {
   );
 }
 
-export default ColumnHeaderContent;
+export default memo(ColumnHeaderContent);

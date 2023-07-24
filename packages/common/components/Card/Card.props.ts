@@ -1,17 +1,13 @@
-import { ChangeEvent } from "react";
 import type { ContextMenuModel } from "@docspace/components/types";
+import type { IFileByRole } from "@docspace/common/Models";
 
 interface CardProps {
-  username: string;
-  filename: string;
-  isSelected?: boolean;
-  avatarUrl?: string;
+  file: IFileByRole;
   isLoading?: boolean;
-
   isForMe?: boolean;
 
   getOptions?: () => ContextMenuModel[];
-  onSelected?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSelected?: (file: IFileByRole, checked: boolean) => void;
 }
 
 export default CardProps;

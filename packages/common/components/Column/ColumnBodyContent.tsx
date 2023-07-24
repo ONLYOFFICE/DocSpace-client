@@ -3,7 +3,11 @@ import Loaders from "../Loaders";
 
 import type { ColumnBodyContentProps } from "./Column.props";
 
-function ColumnBodyContent({ isLoading, filesByRole }: ColumnBodyContentProps) {
+function ColumnBodyContent({
+  isLoading,
+  filesByRole,
+  onSelected,
+}: ColumnBodyContentProps) {
   if (isLoading) {
     return (
       <>
@@ -22,9 +26,7 @@ function ColumnBodyContent({ isLoading, filesByRole }: ColumnBodyContentProps) {
   return (
     <>
       {filesByRole?.map((file) => {
-        return (
-          <Card key={file.id} filename={file.title} username={file.title} />
-        );
+        return <Card key={file.id} file={file} onSelected={onSelected} />;
       })}
     </>
   );

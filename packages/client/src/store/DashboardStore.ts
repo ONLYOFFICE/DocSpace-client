@@ -8,18 +8,19 @@ import { FolderType } from "@docspace/common/constants";
 
 import api from "@docspace/common/api";
 
-import type { IDashboard, IRole } from "@docspace/common/Models";
+import type { IDashboard, IFileByRole, IRole } from "@docspace/common/Models";
 import type {
   RoleQueue,
   Folder as FolderInfoType,
   RoleDefaultType,
   RoleDoneType,
   RoleInterruptedType,
-  File,
+  FileByRoleType,
 } from "@docspace/common/types";
 import { RoleTypeEnum } from "@docspace/common/enums";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import FileByRoleStore from "./FileByRoleStore";
 
 const DASHBOARD_VIEW_AS_KEY = "board-view-as";
 const DEFAULT_VIEW_AS_VALUE = "dashboard";
@@ -32,7 +33,9 @@ class DashboardStore {
   public SelectedRolesMap: Map<number, IRole> = new Map();
   public BufferSelectionRole?: IRole;
 
-  public filesByRole = new Map<number, File[]>();
+  public filesByRole = new Map<number, FileByRoleType[]>();
+  public selectedFilesByRoleMap: Map<number, IFileByRole> = new Map();
+  public collectionFileByRoleStore: Map<number, FileByRoleStore> = new Map();
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -91,6 +94,14 @@ class DashboardStore {
     });
 
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
+  };
+
+  private converToFileModel = (file: FileByRoleType): IFileByRole => {
+    return {
+      ...file,
+      selected: this.selectedFilesByRoleMap.has(file.id),
+      isActive: false,
+    };
   };
 
   private removeOptions = (options: string[], toRemoveArray: string[]) =>
@@ -199,6 +210,14 @@ class DashboardStore {
     else this.SelectedRolesMap.delete(role.id);
   };
 
+  public selectedFileByRole = (file: IFileByRole, checked: boolean) => {
+    if (checked) {
+      this.selectedFilesByRoleMap.set(file.id, file);
+    } else {
+      this.selectedFilesByRoleMap.delete(file.id);
+    }
+  };
+
   public clearSelectedRoleMap = (): void => {
     this.SelectedRolesMap.clear();
   };
@@ -226,16 +245,26 @@ class DashboardStore {
     this.dashboard = dashboard;
   };
 
-  public fetchFilesByRole = async (roleId: number): Promise<File[]> => {
+  public fetchFilesByRole = async (
+    roleId: number
+  ): Promise<FileByRoleType[]> => {
     const boardId = this.dashboard?.current.id;
 
     if (!boardId) return Promise.reject();
 
     try {
-      const files: File[] = await api.files.getFilesByRole(boardId, roleId);
+      const files: FileByRoleType[] = await api.files.getFilesByRole(
+        boardId,
+        roleId
+      );
       runInAction(() => {
         this.filesByRole.set(roleId, files);
+        this.collectionFileByRoleStore.set(
+          roleId,
+          new FileByRoleStore(this, roleId)
+        );
       });
+
       return files;
     } catch (error) {
       return Promise.reject(error);

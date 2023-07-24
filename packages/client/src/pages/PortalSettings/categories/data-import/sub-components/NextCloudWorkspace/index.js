@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import ImportSection from "./ImportSection";
+import ImportSection from "../ImportSection";
 import Text from "@docspace/components/text";
 
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
@@ -35,21 +35,38 @@ const NextcloudWrapper = styled.div`
 
 const NextcloudWorkspace = (props) => {
   const { t } = props;
-  const [isChecked, setIsChecked] = useState({ users: true, pFiles: true, sFiles: true });
+  const [isChecked, setIsChecked] = useState({
+    users: true,
+    pFiles: true,
+    sFiles: true,
+  });
 
   const onChange = (name) => {
-    setIsChecked((prevIsChecked) => ({ ...prevIsChecked, [name]: !prevIsChecked[name] }));
+    setIsChecked((prevIsChecked) => ({
+      ...prevIsChecked,
+      [name]: !prevIsChecked[name],
+    }));
   };
   return (
     <NextcloudWrapper>
-      <Text className="data-import-description" lineHeight="20px" color="#657077">
+      <Text
+        className="data-import-description"
+        lineHeight="20px"
+        color="#657077"
+      >
         {t("Settings:AboutDataImport")}
       </Text>
-      <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
+      <Text
+        className="data-import-counter"
+        fontSize="16px"
+        fontWeight={700}
+        lineHeight="22px"
+      >
         5/7. Data import
       </Text>
       <Text className="data-import-section-description" lineHeight="16px">
-        Select sections for import. They will appear in the corresponding sections of DocSpace.
+        Select sections for import. They will appear in the corresponding
+        sections of DocSpace.
       </Text>
       <div className="sections-wrapper">
         <ImportSection
@@ -70,7 +87,10 @@ const NextcloudWorkspace = (props) => {
           onChange={() => onChange("pFiles")}
           sectionName="Personal files"
           description={`Files and documents of Nextcloud users will be imported into the users' "My Documents" section.`}
-          exportSection={{ sectionName: "User’s Files", workspace: "NextCloud" }}
+          exportSection={{
+            sectionName: "User’s Files",
+            workspace: "NextCloud",
+          }}
           importSection={{
             sectionName: "Accounts",
             workspace: "My documents",
@@ -82,7 +102,10 @@ const NextcloudWorkspace = (props) => {
           onChange={() => onChange("sFiles")}
           sectionName="Shared files"
           description="Files shared with other users will be copied to their personal documents regardless of the permission level in Nextcloud. "
-          exportSection={{ sectionName: "Shared Files", workspace: "NextCloud" }}
+          exportSection={{
+            sectionName: "Shared Files",
+            workspace: "NextCloud",
+          }}
           importSection={{
             sectionName: "My documents",
             workspace: "DocSpace",

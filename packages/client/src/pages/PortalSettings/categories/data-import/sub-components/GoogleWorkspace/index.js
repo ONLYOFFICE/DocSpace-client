@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
 import FileUpload from "./FileUpload";
+import GwTable from "./GWTable";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
@@ -23,7 +24,14 @@ const GoogleWorkspace = (props) => {
       case 1:
         return <FileUpload t={t} setShowReminder={setShowReminder} />;
       case 2:
-        return <Text>2 Step</Text>;
+        return (
+          <GwTable
+            t={t}
+            nextStep={onSaveClick}
+            prevStep={onCancelClick}
+            showReminder={showReminder}
+          />
+        );
       case 3:
         return <Text>3 Step</Text>;
       case 4:
@@ -37,6 +45,25 @@ const GoogleWorkspace = (props) => {
     }
   };
 
+  const getStepTitle = (stepIndex) => {
+    switch (stepIndex) {
+      case 1:
+        return t("Common:SelectFile");
+      case 2:
+        return t("Settings:SelectUsers");
+      case 3:
+        return t("Settings:DataImport");
+      case 4:
+        return t("Common:SelectFile");
+      case 5:
+        return t("Common:SelectFile");
+      case 6:
+        return t("Common:SelectFile");
+      default:
+        return;
+    }
+  };
+
   const isFirstStep = currentStep === 1;
 
   const saveButtonText = isFirstStep
@@ -44,11 +71,15 @@ const GoogleWorkspace = (props) => {
     : t("Settings:NextStep");
 
   const onSaveClick = () => {
-    setCurrentStep((prev) => prev + 1);
+    if (currentStep !== 6) {
+      setCurrentStep((prev) => prev + 1);
+    }
   };
 
   const onCancelClick = () => {
-    setCurrentStep((prev) => prev - 1);
+    if (currentStep !== 1) {
+      setCurrentStep((prev) => prev - 1);
+    }
   };
 
   if (isMobile)
@@ -56,18 +87,21 @@ const GoogleWorkspace = (props) => {
 
   return (
     <WorkspaceWrapper>
-      <Text className="data-import-description">
-        {t("Settings:AboutDataImport")}
-      </Text>
-      <Box displayProp="flex" marginProp="0 0 8px">
-        <Text className="step-counter">
-          {currentStep}/{steps.length}.
+      <Box className="header-content">
+        <Text className="data-import-description">
+          {t("Settings:AboutDataImport")}
         </Text>
-        <Text isBold fontSize="16px">
-          {t("Common:SelectFile")}
-        </Text>
+        <Box displayProp="flex" marginProp="0 0 8px">
+          <Text className="step-counter">
+            {currentStep}/{steps.length}.
+          </Text>
+          <Text isBold fontSize="16px">
+            {getStepTitle(currentStep)}
+          </Text>
+        </Box>
       </Box>
-      <Box className="content-wrapper">
+
+      <Box className="body-content">
         {getStepContent(currentStep)}
         <SaveCancelButtons
           className="save-cancel-buttons"

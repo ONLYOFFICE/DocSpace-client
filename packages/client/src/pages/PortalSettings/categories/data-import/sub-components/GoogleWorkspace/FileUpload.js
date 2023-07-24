@@ -10,13 +10,13 @@ const FileUpload = ({ t, setShowReminder }) => {
   };
 
   return (
-    <>
-      <Text className="select-file-description">
+    <Box className="description-wrapper">
+      <Text className="step-description">
         {t("Settings:SelectFileDescription")}
       </Text>
       <Box className="select-file-wrapper">
-        <Text className="select-file-title">
-          {t("Settings:SelectFileTitle")}
+        <Text className="choose-backup-file">
+          {t("Settings:ChooseBackupFile")}
         </Text>
         <FileInput
           onInput={onClickInput}
@@ -25,7 +25,7 @@ const FileUpload = ({ t, setShowReminder }) => {
           scale
         />
       </Box>
-    </>
+    </Box>
   );
 };
 

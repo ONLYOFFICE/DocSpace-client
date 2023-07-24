@@ -65,11 +65,15 @@ const DataImportWrapper = styled.div`
 `;
 
 const WorkspaceWrapper = styled.div`
-  max-width: 700px;
   margin-top: 4px;
 
   @media ${mobile} {
     max-width: 343px;
+  }
+
+  .header-content,
+  .description-wrapper {
+    max-width: 700px;
   }
 
   .data-import-description {
@@ -88,14 +92,14 @@ const WorkspaceWrapper = styled.div`
     max-width: 350px;
   }
 
-  .select-file-description {
+  .step-description {
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
     color: #333333;
   }
 
-  .select-file-title {
+  .choose-backup-file {
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 4px;

@@ -1,18 +1,26 @@
-import {
-  RoleType,
-  RoleDoneType,
-  RoleDefaultType,
-  RoleInterruptedType,
-} from "@docspace/common/types";
-import { GetModelFunctionType } from "SRC_DIR/pages/Home/Dashboard/types";
+import type { RoleType, RoleDefaultType, File } from "@docspace/common/types";
+import type { GetModelFunctionType } from "SRC_DIR/pages/Home/Dashboard/types";
 
-export type ColumnProps = {
+type CulimnPropsOwn = {
+  getModel: GetModelFunctionType;
+  filesByRole?: Map<number, File[]>;
+  fetchFilesByRole?: (roleId: number) => Promise<File[]>;
+};
+
+export type ColumnProps = CulimnPropsOwn & {
+  role: RoleType;
+};
+
+export type ColumnDefaultProps = CulimnPropsOwn & {
+  role: RoleDefaultType;
+};
+
+export type ColumnHeaderContentProps = {
   role: RoleType;
   getModel: GetModelFunctionType;
 };
 
-export type ColumnDefaultProps = {
-  role: RoleDefaultType;
-  getModel: GetModelFunctionType;
-  children?: React.ReactNode;
+export type ColumnBodyContentProps = {
+  filesByRole?: File[];
+  isLoading: boolean;
 };

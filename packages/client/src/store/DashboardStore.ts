@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { NavigateOptions } from "react-router-dom";
 
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -15,6 +15,7 @@ import type {
   RoleDefaultType,
   RoleDoneType,
   RoleInterruptedType,
+  File,
 } from "@docspace/common/types";
 import { RoleTypeEnum } from "@docspace/common/enums";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -30,6 +31,8 @@ class DashboardStore {
   public dashboard?: IDashboard;
   public SelectedRolesMap: Map<number, IRole> = new Map();
   public BufferSelectionRole?: IRole;
+
+  public filesByRole = new Map<number, File[]>();
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -221,6 +224,22 @@ class DashboardStore {
 
   public setDashboard = (dashboard: IDashboard): void => {
     this.dashboard = dashboard;
+  };
+
+  public fetchFilesByRole = async (roleId: number): Promise<File[]> => {
+    const boardId = this.dashboard?.current.id;
+
+    if (!boardId) return Promise.reject();
+
+    try {
+      const files: File[] = await api.files.getFilesByRole(boardId, roleId);
+      runInAction(() => {
+        this.filesByRole.set(roleId, files);
+      });
+      return files;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   };
 
   public fetchDashboard = async (

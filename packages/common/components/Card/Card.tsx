@@ -67,7 +67,7 @@ function Card({
           />
           <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
         </CardAvatarWrapper>
-        <CardUserName>{username}</CardUserName>
+        <CardUserName title={username}>{username}</CardUserName>
         <ContextMenu ref={contextMenuRef} getContextModel={getOptions} />
         <ContextMenuButton
           className="card__context-menu"
@@ -80,7 +80,7 @@ function Card({
       <CardDivider />
       <CardContent>
         <OformIcon className="card__oform-icon" />
-        <CardContentTitle>
+        <CardContentTitle title={`${username} - ${filename}`}>
           {username} - {filename}
         </CardContentTitle>
       </CardContent>

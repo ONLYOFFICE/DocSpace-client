@@ -101,6 +101,10 @@ export const CardUserName = styled.p`
   line-height: 20px;
 
   color: ${(props) => props.theme.card.userNameColor};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const CardContent = styled.div`
@@ -125,4 +129,10 @@ export const CardContentTitle = styled.p`
 
   color: ${(props) => props.theme.card.titleColor};
   margin: 0px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;

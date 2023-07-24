@@ -10,6 +10,11 @@ declare global {
     export default SVGUrl;
   }
 
+  declare module "*.png" {
+    const IMGUrl: string;
+    export default IMGUrl;
+  }
+
   interface Window {
     Tiff: new (arg: object) => any;
     DocSpaceConfig: any;

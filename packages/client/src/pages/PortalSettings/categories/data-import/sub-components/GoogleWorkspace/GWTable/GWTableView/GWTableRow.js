@@ -24,21 +24,8 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 const GWTableRow = ({ hideColumns, displayName, email, dublicate }) => {
-  const handleRowClick = (e) => {
-    if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".table-container_row-context-menu-wrapper") ||
-      e.target.closest(".toggleButton") ||
-      e.detail === 0
-    ) {
-      return;
-    }
-  };
-
   return (
-    <StyledWrapper onClick={handleRowClick}>
+    <StyledWrapper>
       <StyledTableRow hideColumns={hideColumns}>
         <TableCell>
           <Text as="span" fontWeight={600} className="mr-8 textOverflow">

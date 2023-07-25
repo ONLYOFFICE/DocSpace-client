@@ -8,6 +8,7 @@ import GWTableHeader from "./GWTableHeader";
 import GWTableRow from "./GWTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
+import SearchInput from "@docspace/components/search-input";
 
 import { mockData } from "../../mockData.js";
 
@@ -57,6 +58,12 @@ const GWTableView = (props) => {
 
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
+      <SearchInput
+        id="search-users-input"
+        onChange={() => console.log("changed")}
+        onClearSearch={() => console.log("cleared")}
+        placeholder="Search"
+      />
       <GWTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}

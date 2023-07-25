@@ -109,6 +109,28 @@ const WorkspaceWrapper = styled.div`
     height: 32px;
     margin-bottom: 16px;
   }
+
+  .selected-users-count {
+    margin-right: 24px;
+    color: #555f65;
+    font-weight: 700;
+  }
+
+  .selected-admins-count {
+    margin-right: 8px;
+    color: #555f65;
+    font-weight: 700;
+  }
+
+  .selected-users-info {
+    display: flex;
+    align-items: center;
+    max-width: 660px;
+    background: #f8f9f9;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
 `;
 
 export { DataImportWrapper, WorkspaceWrapper };

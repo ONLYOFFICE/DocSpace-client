@@ -1,6 +1,8 @@
+import { useState } from "react";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
+import Checkbox from "@docspace/components/checkbox";
 import styled from "styled-components";
 
 const StyledWrapper = styled.div`
@@ -23,11 +25,22 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const GWTableRow = ({ hideColumns, displayName, email, dublicate }) => {
+const GWTableRow = ({ displayName, email, dublicate }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const onChangeCheckbox = () => {
+    setIsChecked((prev) => !prev);
+  };
+
   return (
     <StyledWrapper>
-      <StyledTableRow hideColumns={hideColumns}>
+      <StyledTableRow checked={isChecked}>
         <TableCell>
+          <Checkbox
+            className="checkbox"
+            onChange={onChangeCheckbox}
+            isChecked={isChecked}
+          />
           <Text as="span" fontWeight={600} className="mr-8 textOverflow">
             {displayName}
           </Text>

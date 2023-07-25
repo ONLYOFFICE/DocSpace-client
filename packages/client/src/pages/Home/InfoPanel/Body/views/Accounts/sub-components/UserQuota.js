@@ -1,20 +1,31 @@
 import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
 
 import { getConvertedSize } from "@docspace/common/utils";
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
 const UserQuota = (props) => {
-  const { selection, t, isCustomQuota = true } = props;
+  const {
+    selection,
+    t,
+    isCustomQuota = true,
+    setChangeQuotaDialogVisible,
+    changeQuotaDialogVisible,
+  } = props;
   const [action, setAction] = useState("no-quota");
-
-  const isEditingQuota = action === "edit";
 
   const onQuotaChange = React.useCallback(
     ({ action }) => {
       setAction(action);
+      if (action === "edit") {
+        setChangeQuotaDialogVisible(true);
+        return;
+      }
+      setChangeQuotaDialogVisible(false);
     },
     [selection]
   );
+
   const renderQuotaComponent = () => {
     const options = [
       {
@@ -49,7 +60,7 @@ const UserQuota = (props) => {
           size="content"
           displaySelectedOption
           modernView
-          isLoading={isEditingQuota}
+          isLoading={changeQuotaDialogVisible}
           manualWidth={"fit-content"}
         />
       </div>
@@ -68,4 +79,11 @@ const UserQuota = (props) => {
   );
 };
 
-export default UserQuota;
+export default inject(({ dialogsStore }) => {
+  const { setChangeQuotaDialogVisible, changeQuotaDialogVisible } =
+    dialogsStore;
+  return {
+    setChangeQuotaDialogVisible,
+    changeQuotaDialogVisible,
+  };
+})(observer(UserQuota));

@@ -4,6 +4,7 @@ import toastr from "@docspace/components/toast/toastr";
 import api from "../api";
 import { PortalFeaturesLimitations } from "../constants";
 import authStore from "./AuthStore";
+import { baseUserQuota } from "../api/settings";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";
@@ -253,6 +254,17 @@ class QuotasStore {
       this.setPortalQuotaValue(res);
 
       this.setIsLoaded(true);
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  setUserQuota = async (quota, isEnable = true, t) => {
+    const quotaSize = isEnable ? quota : -1;
+
+    try {
+      await baseUserQuota(isEnable, quotaSize);
+      toastr.success(t("Common:MemoryQuotaEnabled"));
     } catch (e) {
       toastr.error(e);
     }

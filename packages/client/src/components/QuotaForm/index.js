@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { inject, observer } from "mobx-react";
 
+import { conversionToBytes } from "@docspace/common/utils";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
-import Button from "@docspace/components/button";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import StyledBody from "./StyledComponent";
 
-const conversionToBytes = (size, power) => size * Math.pow(1024, power);
+let timerId = null;
 const QuotaForm = ({
   isLoading,
-  onSaveQuota,
-  isButtonsEnable = true,
   maxInputWidth,
-  onSetQuotaSize,
+  onSetQuotaBytesSize,
+  initialSize = "",
+  initialPower = 0,
+  isError,
+  isButtonsEnable = true,
+  setUserQuota,
 }) => {
-  const [size, setSize] = useState("");
-  const [power, setPower] = useState(0);
-  const [isError, setIsError] = useState(false);
+  const [size, setSize] = useState(initialSize);
+  const [power, setPower] = useState(initialPower);
+  const [hasError, setHasError] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const { t } = useTranslation(["Common"]);
   const options = [
@@ -32,7 +38,10 @@ const QuotaForm = ({
     const { value, validity } = e.target;
 
     if (validity.valid) {
-      onSetQuotaSize && onSetQuotaSize(conversionToBytes(value, power));
+      const transmittedSize =
+        value.trim() !== "" ? conversionToBytes(value, power) : "";
+
+      onSetQuotaBytesSize && onSetQuotaBytesSize(transmittedSize);
       setSize(value);
     }
   };
@@ -40,66 +49,85 @@ const QuotaForm = ({
   const onSelectComboBox = (option) => {
     const { key } = option;
 
-    onSetQuotaSize && onSetQuotaSize(conversionToBytes(size, key));
+    onSetQuotaBytesSize && onSetQuotaBytesSize(conversionToBytes(size, key));
     setPower(key);
   };
-
   const isSizeError = () => {
     if (size.trim() === "") {
-      setIsError(true);
+      setHasError(true);
       return true;
     }
 
     return false;
   };
-  const onKeyDown = (e) => {
+  const onKeyDownInput = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
-      if (isSizeError()) return;
-      onSaveQuota && onSaveQuota();
-    }
+      if (isButtonsEnable) {
+        if (isSizeError()) return;
 
-    setIsError(false);
+        onSaveClick();
+
+        setHasError(false);
+
+        return;
+      }
+    }
   };
 
-  const onButtonClick = () => {
+  const onSaveClick = async () => {
     if (isSizeError()) return;
 
-    onSaveQuota && onSaveQuota(conversionToBytes(size, power));
+    const size = conversionToBytes(size, power);
+
+    timerId = setTimeout(() => setIsProcessing(true), 500);
+    await setUserQuota(size, true, t);
+
+    timerId && clearTimeout(timerId);
+    timerId = null;
+    setIsProcessing(false);
+  };
+  const onCancelClick = () => {
+    console.log("onCancel");
   };
 
+  const isDisabled = isLoading || isProcessing;
   return (
     <StyledBody maxInputWidth={maxInputWidth}>
-      <TextInput
-        className="quota_limit"
-        isAutoFocussed={true}
-        value={size}
-        onChange={onChangeTextInput}
-        isDisabled={isLoading}
-        onKeyDown={onKeyDown}
-        hasError={isError}
-        pattern="[0-9]*"
-        scale
-        withBorder
-      />
-      <ComboBox
-        className="quota_value"
-        options={options}
-        isDisabled={isLoading}
-        selectedOption={options.find((elem) => elem.key === power)}
-        size="content"
-        onSelect={onSelectComboBox}
-        showDisabledItems
-        manualWidth={"fit-content"}
-      />
-
+      <div className="quota-container">
+        <TextInput
+          className="quota_limit"
+          isAutoFocussed={true}
+          value={size}
+          onChange={onChangeTextInput}
+          isDisabled={isDisabled}
+          onKeyDown={onKeyDownInput}
+          hasError={isError || hasError}
+          pattern="[0-9]*"
+          scale
+          withBorder
+        />
+        <ComboBox
+          className="quota_value"
+          options={options}
+          isDisabled={isDisabled}
+          selectedOption={options.find((elem) => elem.key === power)}
+          size="content"
+          onSelect={onSelectComboBox}
+          showDisabledItems
+          manualWidth={"fit-content"}
+        />
+      </div>
       {isButtonsEnable && (
-        <Button
-          size="small"
-          primary
-          label={t("Common:Save")}
-          isDisabled={isLoading}
-          isLoading={isLoading}
-          onClick={onButtonClick}
+        <SaveCancelButtons
+          onSaveClick={onSaveClick}
+          onCancelClick={onCancelClick}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
+          reminderTest={t("YouHaveUnsavedChanges")}
+          displaySettings
+          cancelEnable
+          saveButtonDisabled={false}
+          showReminder
         />
       )}
     </StyledBody>
@@ -108,6 +136,19 @@ const QuotaForm = ({
 
 QuotaForm.propTypes = {
   maxInputWidth: PropTypes.string,
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
   isButtonsEnable: PropTypes.bool,
+  onSetQuotaBytesSize: PropTypes.func,
+  initialSize: PropTypes.string,
+  initialPower: PropTypes.number,
 };
-export default QuotaForm;
+
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+
+  const { setUserQuota } = currentQuotaStore;
+  return {
+    setUserQuota,
+  };
+})(observer(QuotaForm));

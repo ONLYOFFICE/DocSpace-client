@@ -465,6 +465,8 @@ export const getConvertedSize = (t, bytes) => {
   return resultSize + " " + sizeNames[power];
 };
 
+export const conversionToBytes = (size, power) => size * Math.pow(1024, power);
+
 export const getBgPattern = (colorSchemeId: number | undefined) => {
   switch (colorSchemeId) {
     case 1:

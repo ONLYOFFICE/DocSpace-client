@@ -1,9 +1,11 @@
 import styled, { css } from "styled-components";
 
 const StyledBody = styled.div`
-  display: flex;
-  grid-gap: 4px;
-
+  .quota-container {
+    display: flex;
+    grid-gap: 4px;
+    margin-bottom: 16px;
+  }
   .quota_limit {
     ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
     max-height: 32px;

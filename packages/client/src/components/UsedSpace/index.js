@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { getConvertedSize } from "@docspace/common/utils";
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
-const UserQuota = (props) => {
+import StyledBody from "./StyledComponent";
+const UsedSpace = (props) => {
   const {
     selection,
-    t,
+    hideColumns,
     isCustomQuota = true,
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
   } = props;
   const [action, setAction] = useState("no-quota");
-
+  const { t } = useTranslation(["Common"]);
   const onQuotaChange = React.useCallback(
     ({ action }) => {
       setAction(action);
@@ -26,30 +28,30 @@ const UserQuota = (props) => {
     [selection]
   );
 
-  const renderQuotaComponent = () => {
-    const options = [
-      {
-        id: "info-account-quota_edit",
-        key: "edit-quota",
-        label: "Edit Quota",
-        action: "edit",
-      },
-      {
-        id: "info-account-quota_no-quota",
-        key: "no-quota",
-        label: "No Quota",
-        action: "no-quota",
-      },
-    ];
+  const options = [
+    {
+      id: "info-account-quota_edit",
+      key: "edit-quota",
+      label: "Edit Quota",
+      action: "edit",
+    },
+    {
+      id: "info-account-quota_no-quota",
+      key: "no-quota",
+      label: "No Quota",
+      action: "no-quota",
+    },
+  ];
 
-    const usedSpace = getConvertedSize(t, selection.usedSpace);
-    const spaceLimited = getConvertedSize(t, selection.quotaLimit);
+  const usedSpace = getConvertedSize(t, 560);
+  const spaceLimited = getConvertedSize(t, 400);
 
-    const selectedOption = isCustomQuota
-      ? { title: spaceLimited, label: spaceLimited }
-      : options.find((elem) => elem.key === action);
+  const selectedOption = isCustomQuota
+    ? { title: spaceLimited, label: spaceLimited }
+    : options.find((elem) => elem.key === action);
 
-    return (
+  return (
+    <StyledBody hideColumns={hideColumns}>
       <div className="info-account-quota">
         <Text fontWeight={600}>{usedSpace} /</Text>
         <ComboBox
@@ -64,18 +66,7 @@ const UserQuota = (props) => {
           manualWidth={"fit-content"}
         />
       </div>
-    );
-  };
-
-  const quotaComponent = renderQuotaComponent();
-
-  return (
-    <>
-      <Text className={"info_field"} noSelect title={"Quota"}>
-        {"Quota"}
-      </Text>
-      {quotaComponent}
-    </>
+    </StyledBody>
   );
 };
 
@@ -86,4 +77,4 @@ export default inject(({ dialogsStore }) => {
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
   };
-})(observer(UserQuota));
+})(observer(UsedSpace));

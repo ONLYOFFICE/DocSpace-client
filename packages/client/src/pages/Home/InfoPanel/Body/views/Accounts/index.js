@@ -7,10 +7,9 @@ import Loaders from "@docspace/common/components/Loaders";
 
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
-
+import UsedSpace from "SRC_DIR/components/UsedSpace";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
-import UserQuota from "./sub-components/UserQuota";
 
 const Accounts = ({
   t,
@@ -216,7 +215,11 @@ const Accounts = ({
           >
             {statusText}
           </Text>
-          <UserQuota selection={selection} t={t} />
+          <Text className={"info_field"} noSelect title={"Quota"}>
+            {"Quota"}
+          </Text>
+          <UsedSpace />
+
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
           </Text>

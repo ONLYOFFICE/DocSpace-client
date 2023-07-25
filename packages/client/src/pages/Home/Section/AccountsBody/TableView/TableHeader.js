@@ -50,6 +50,16 @@ class PeopleTableHeader extends React.Component {
         onChange: this.onColumnChange,
         onClick: this.onFilter,
       },
+      {
+        key: "Storage/Quota",
+        title: "Storage / Quota",
+        enable: true,
+        // sortBy: "type",
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: () => {},
+        minWidth: 177,
+      },
     ];
 
     const columns = this.getColumns(defaultColumns);

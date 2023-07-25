@@ -111,13 +111,6 @@ const StyledAccountContent = styled.div`
       }
     }
   }
-
-  .info-account-quota {
-    display: flex;
-    p {
-      padding-top: 8px;
-    }
-  }
 `;
 
 export { StyledAccountsItemTitle, StyledAccountContent };

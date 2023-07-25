@@ -29,8 +29,6 @@ function Card({
   getOptions = () => [],
   onSelected = () => {},
 }: CardProps) {
-  console.log("Card", file.id);
-
   const contextMenuRef = useRef<ContextMenu>(null);
 
   const onClickHandler = useCallback((event: MouseEvent) => {
@@ -43,6 +41,10 @@ function Card({
 
   const handleSelected = (event: ChangeEvent<HTMLInputElement>) => {
     onSelected(file, event.target.checked);
+  };
+
+  const handleClickAvatar = () => {
+    onSelected(file, true);
   };
 
   const isSelected = file.selected;
@@ -75,7 +77,11 @@ function Card({
             isChecked={isSelected}
             onChange={handleSelected}
           />
-          <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
+          <CardAvatar
+            src={avatarUrl || DefaultUserAvatar}
+            alt={username}
+            onClick={handleClickAvatar}
+          />
         </CardAvatarWrapper>
         <CardUserName title={username}>{username}</CardUserName>
         <ContextMenu ref={contextMenuRef} getContextModel={getOptions} />
@@ -98,6 +104,4 @@ function Card({
   );
 }
 
-export default memo(Card, (prevProps, nextProps) =>
-  equal(prevProps, nextProps)
-);
+export default memo(Card, equal);

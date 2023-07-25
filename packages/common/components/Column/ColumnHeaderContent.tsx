@@ -28,8 +28,6 @@ function isDefaultRole(role: IRole): role is RoleDefaultType {
 }
 
 function ColumnHeaderContent({ role, getModel }: ColumnHeaderContentProps) {
-  console.log("ColumnHeaderContent");
-
   const { t } = useTranslation();
   const contextMenuRef = useRef<ContextMenu>(null);
 

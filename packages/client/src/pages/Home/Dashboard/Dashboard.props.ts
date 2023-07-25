@@ -8,6 +8,7 @@ interface DashboardProps {
   roles: IRole[];
   clearSelectedRoleMap: VoidFunction;
   clearBufferSelectionRole: VoidFunction;
+  clearSelectedFileByRoleMap: VoidFunction;
   getModel: GetModelFunctionType;
 }
 

@@ -34,3 +34,7 @@ export type ColumnBodyContentProps = {
   isLoading: boolean;
   onSelected: (file: IFileByRole, checked: boolean) => void;
 };
+
+export type ListChildDataType = {
+  files?: IFileByRole[];
+};

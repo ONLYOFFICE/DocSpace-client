@@ -33,18 +33,21 @@ function Dashboard({
   setViewAs,
   clearSelectedRoleMap,
   clearBufferSelectionRole,
+  clearSelectedFileByRoleMap,
 }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   const onMouseDownOutSide = useCallback((event: MouseEvent) => {
     if (
       !(event.target instanceof HTMLElement) ||
-      !event.target.classList.contains("section-wrapper")
+      (!event.target.classList.contains("section-wrapper") &&
+        !(event.target.dataset.id === "board"))
     ) {
       return;
     }
     clearSelectedRoleMap();
     clearBufferSelectionRole();
+    clearSelectedFileByRoleMap();
   }, []);
 
   useEffect(() => {
@@ -75,6 +78,7 @@ function Dashboard({
         userID={userID}
         getModel={getModel}
         sectionWidth={sectionWidth}
+        clearSelectedFileByRoleMap={clearSelectedFileByRoleMap}
       />
     </>
   );
@@ -94,6 +98,7 @@ export default inject<StoreType>(
       roles,
       clearSelectedRoleMap,
       clearBufferSelectionRole,
+      clearSelectedFileByRoleMap,
     } = dashboardStore;
 
     const { getModel } = dashboardContextOptionStore;
@@ -117,6 +122,7 @@ export default inject<StoreType>(
       isLoading,
       clearSelectedRoleMap,
       clearBufferSelectionRole,
+      clearSelectedFileByRoleMap,
       userID,
       getModel,
     };

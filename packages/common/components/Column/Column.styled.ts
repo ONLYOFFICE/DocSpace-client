@@ -105,6 +105,6 @@ export const ColumnActions = styled.div`
 export const ColumnBody = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  flex-grow: 1;
+  width: 100%;
 `;

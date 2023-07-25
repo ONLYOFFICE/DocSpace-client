@@ -26,8 +26,6 @@ function Column(props: ColumnProps) {
     [props.selectedFileByRole]
   );
 
-  console.log("Column" + props.role.id);
-
   const filesByRoleStore = props.collectionFileByRoleStore?.get(props.role.id);
 
   return (

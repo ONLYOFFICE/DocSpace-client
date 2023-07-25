@@ -44,6 +44,7 @@
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
+    "@types/react-window-infinite-loader": "^1.0.6",
     "@welldone-software/why-did-you-render": "^6.2.3"
   }
 }

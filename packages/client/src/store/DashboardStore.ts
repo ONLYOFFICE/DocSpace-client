@@ -96,14 +96,6 @@ class DashboardStore {
     this.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
-  private converToFileModel = (file: FileByRoleType): IFileByRole => {
-    return {
-      ...file,
-      selected: this.selectedFilesByRoleMap.has(file.id),
-      isActive: false,
-    };
-  };
-
   private removeOptions = (options: string[], toRemoveArray: string[]) =>
     options.filter((o) => !toRemoveArray.includes(o));
 
@@ -220,6 +212,9 @@ class DashboardStore {
 
   public clearSelectedRoleMap = (): void => {
     this.SelectedRolesMap.clear();
+  };
+  public clearSelectedFileByRoleMap = (): void => {
+    this.selectedFilesByRoleMap.clear();
   };
 
   public clearBufferSelectionRole = (): void => {

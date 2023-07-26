@@ -12,7 +12,7 @@ import SearchInput from "@docspace/components/search-input";
 
 import { mockData } from "../mockData.js";
 
-const TableWrapper = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer)`
   margin: 20px 0;
 
   .header-container-text {
@@ -33,7 +33,7 @@ const TableWrapper = styled(TableContainer)`
   }
 `;
 
-TableWrapper.defaultProps = { theme: Base };
+StyledTableContainer.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
@@ -57,7 +57,7 @@ const TableView = (props) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <TableWrapper forwardedRef={tableRef} useReactWindow>
+    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <SearchInput
         id="search-users-input"
         onChange={() => console.log("changed")}
@@ -92,7 +92,7 @@ const TableView = (props) => {
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </StyledTableContainer>
   );
 };
 

@@ -44,6 +44,12 @@ const UsersTableHeader = (props) => {
       default: true,
       active: true,
       minWidth: 180,
+      checkbox: {
+        value: true,
+        onChange: (e) => {
+          console.log(e);
+        },
+      },
       onChange: onColumnChange,
     },
     {

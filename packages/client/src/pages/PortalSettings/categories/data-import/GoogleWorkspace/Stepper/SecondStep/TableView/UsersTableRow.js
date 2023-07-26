@@ -11,19 +11,30 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .mr-8 {
-    margin-right: 8px;
+  .user-email {
+    margin-right: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #a3a9ae;
   }
 
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .not-existing {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a3a9ae;
+  }
+
+  .user-existing {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2db482;
   }
 `;
 
 const UsersTableRow = ({ displayName, email, dublicate }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const isExistingUser = dublicate !== "—";
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
@@ -32,34 +43,16 @@ const UsersTableRow = ({ displayName, email, dublicate }) => {
   return (
     <StyledTableRow checked={isChecked}>
       <TableCell>
-        <Checkbox
-          className="checkbox"
-          onChange={onChangeCheckbox}
-          isChecked={isChecked}
-        />
-        <Text as="span" fontWeight={600} className="mr-8 textOverflow">
-          {displayName}
-        </Text>
+        <Checkbox onChange={onChangeCheckbox} isChecked={isChecked} />
+        <Text fontWeight={600}>{displayName}</Text>
       </TableCell>
+
       <TableCell>
-        <Text
-          as="span"
-          fontSize="11px"
-          color="#A3A9AE"
-          fontWeight={600}
-          className="textOverflow"
-        >
-          {email}
-        </Text>
+        <Text className="user-email">{email}</Text>
       </TableCell>
+
       <TableCell>
-        <Text
-          as="span"
-          fontSize="11px"
-          color="#A3A9AE"
-          fontWeight={600}
-          className="textOverflow"
-        >
+        <Text className={isExistingUser ? "user-existing" : "not-existing"}>
           {dublicate}
         </Text>
       </TableCell>

@@ -5,6 +5,7 @@ import IconButton from "../icon-button";
 import globalColors from "../utils/globalColors";
 import { StyledTableHeaderCell } from "./StyledTableContainer";
 import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
+import Checkbox from "../checkbox";
 
 const TableHeaderCell = ({
   column,
@@ -17,7 +18,7 @@ const TableHeaderCell = ({
   sortingVisible,
   tagRef,
 }) => {
-  const { title, enable, active, minWidth, withTagRef } = column;
+  const { title, enable, active, minWidth, withTagRef, checkbox } = column;
 
   const isActive = (sortBy && column.sortBy === sortBy) || active;
 
@@ -86,6 +87,14 @@ const TableHeaderCell = ({
     >
       <div className="table-container_header-item">
         <div className="header-container-text-wrapper">
+          {checkbox && (
+            <Checkbox
+              isIndeterminate
+              onChange={checkbox.onChange}
+              checked={checkbox.value}
+            />
+          )}
+
           <Text fontWeight={600} className="header-container-text">
             {enable ? title : ""}
           </Text>

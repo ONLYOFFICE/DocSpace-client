@@ -2,9 +2,13 @@ import { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
+
 import FirstStep from "./Stepper/FirstStep";
 import SecondStep from "./Stepper/SecondStep";
 import ThirdStep from "./Stepper/ThirdStep";
+import FourthStep from "./Stepper/FourthStep";
+import FifthStep from "./Stepper/FifthStep";
+import SixthStep from "./Stepper/SixthStep";
 
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -43,6 +47,33 @@ const GoogleWorkspace = (props) => {
       case 3:
         return (
           <ThirdStep
+            t={t}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
+            showReminder={showReminder}
+          />
+        );
+      case 4:
+        return (
+          <FourthStep
+            t={t}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
+            showReminder={showReminder}
+          />
+        );
+      case 5:
+        return (
+          <FifthStep
+            t={t}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
+            showReminder={showReminder}
+          />
+        );
+      case 6:
+        return (
+          <SixthStep
             t={t}
             onNextStepClick={onNextStepClick}
             onPrevStepClick={onPrevStepClick}

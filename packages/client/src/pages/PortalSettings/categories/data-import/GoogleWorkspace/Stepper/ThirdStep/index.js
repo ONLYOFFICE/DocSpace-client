@@ -2,7 +2,7 @@
 
 const ThirdStep = ({ t, onNextStepClick, onPrevStepClick, showReminder }) => {
   return (
-    <div>Third Step</div>
+    <></>
     // <SaveCancelButtons
     //   className="save-cancel-buttons"
     //   onSaveClick={onNextStepClick}

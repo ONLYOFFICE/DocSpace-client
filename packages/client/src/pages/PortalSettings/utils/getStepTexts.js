@@ -5,13 +5,13 @@ export const getStepTitle = (t, stepIndex) => {
     case 2:
       return t("Settings:SelectUsers");
     case 3:
-      return t("Settings:DataImport");
+      return t("Settings:SelectUserTypes");
     case 4:
-      return t("Common:SelectFile");
+      return t("Settings:DataImport");
     case 5:
-      return t("Common:SelectFile");
+      return t("Settings:DataImportProcessing");
     case 6:
-      return t("Common:SelectFile");
+      return t("Settings:DataImportComplete");
     default:
       return;
   }
@@ -24,13 +24,13 @@ export const getStepDescription = (t, stepIndex) => {
     case 2:
       return t("Settings:SelectUsersDescription");
     case 3:
-      return t("Settings:DataImport");
+      return t("Settings:SelectUserTypesDescription");
     case 4:
-      return t("Common:SelectFile");
+      return t("Settings:SelectSectionsDescription");
     case 5:
-      return t("Common:SelectFile");
+      return t("Settings:DataImportProcessingDescription");
     case 6:
-      return t("Common:SelectFile");
+      return t("Settings:DataImportCompleteDescription");
     default:
       return;
   }

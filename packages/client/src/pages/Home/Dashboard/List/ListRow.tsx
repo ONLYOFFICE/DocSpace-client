@@ -92,7 +92,7 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
               label={role.badge}
               borderRadius="100%"
             />
-            <span>{`Queue number: ${role.queueNumber}`}</span>
+            <span>{`${t("Common:QueueNumber")}: ${role.queueNumber}`}</span>
           </RoleRowContent>
         </RoleRow>
       </RoleRowWrapper>

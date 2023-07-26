@@ -107,4 +107,5 @@ export const ColumnBody = styled.div`
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
+  gap: 16px;
 `;

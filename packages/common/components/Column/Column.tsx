@@ -14,7 +14,7 @@ function Column(props: ColumnProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    props.fetchFilesByRole?.(props.role.id).finally(() => {
+    props.fetchFilesByRole?.(props.role).finally(() => {
       setIsLoading(false);
     });
   }, []);

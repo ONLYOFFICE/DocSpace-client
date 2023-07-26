@@ -15,7 +15,7 @@ import List from "./List";
 import Table from "./Table";
 import Board from "./Board";
 
-import DashboardProps from "./Dashboard.props";
+import type DashboardProps from "./Dashboard.props";
 import type { ContextType } from "./types";
 import type { StoreType } from "SRC_DIR/types";
 

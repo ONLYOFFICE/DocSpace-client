@@ -210,6 +210,15 @@ class DashboardStore {
     }
   };
 
+  public resetState = (): void => {
+    this.clearSelectedRoleMap();
+    this.clearBufferSelectionRole();
+
+    this.filesByRole.clear();
+    this.clearSelectedFileByRoleMap();
+    this.collectionFileByRoleStore.clear();
+  };
+
   public clearSelectedRoleMap = (): void => {
     this.SelectedRolesMap.clear();
   };
@@ -224,8 +233,9 @@ class DashboardStore {
   public setViewAs = (viewAs: string): void => {
     const isNotEmptySelected = this.SelectedRolesMap.size !== 0;
 
-    if (isNotEmptySelected && viewAs === "dashboard") {
-      this.clearSelectedRoleMap();
+    if (viewAs === "dashboard") {
+      isNotEmptySelected && this.clearSelectedRoleMap();
+      this.clearBufferSelectionRole();
     }
 
     this.viewAs = viewAs;
@@ -240,9 +250,7 @@ class DashboardStore {
     this.dashboard = dashboard;
   };
 
-  public fetchFilesByRole = async (
-    roleId: number
-  ): Promise<FileByRoleType[]> => {
+  public fetchFilesByRole = async (role: IRole): Promise<FileByRoleType[]> => {
     const boardId = this.dashboard?.current.id;
 
     if (!boardId) return Promise.reject();
@@ -250,13 +258,13 @@ class DashboardStore {
     try {
       const files: FileByRoleType[] = await api.files.getFilesByRole(
         boardId,
-        roleId
+        role.id
       );
       runInAction(() => {
-        this.filesByRole.set(roleId, files);
+        this.filesByRole.set(role.id, files);
         this.collectionFileByRoleStore.set(
-          roleId,
-          new FileByRoleStore(this, roleId)
+          role.id,
+          new FileByRoleStore(this, role)
         );
       });
 
@@ -270,6 +278,7 @@ class DashboardStore {
     fileId: number | string
   ): Promise<IDashboard> => {
     try {
+      this.resetState();
       const dashboard: IDashboard = await api.files.getDashboard(fileId);
 
       this.setRoles(dashboard.current.roleQueue);
@@ -285,6 +294,11 @@ class DashboardStore {
 
   public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
     this.SelectedRolesMap = selectedRolesMap;
+  };
+  public setSelectedFilesByRoleMap = (
+    selectedFilesByRoleMap: Map<number, IFileByRole>
+  ): void => {
+    this.selectedFilesByRoleMap = selectedFilesByRoleMap;
   };
   //#endregion
 }

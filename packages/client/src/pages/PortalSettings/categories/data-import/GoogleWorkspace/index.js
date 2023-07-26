@@ -2,117 +2,108 @@ import { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
+import FirstStep from "./Stepper/FirstStep";
+import SecondStep from "./Stepper/SecondStep";
+import ThirdStep from "./Stepper/ThirdStep";
 
-import FileUpload from "./FileUpload";
-import GwTable from "./GWTable";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 
-import { WorkspaceWrapper } from "../../StyledDataImport";
+import { getStepTitle, getStepDescription } from "../../../utils";
+import { WorkspaceWrapper } from "../StyledDataImport";
 
 const GoogleWorkspace = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const { t } = props;
 
-  const steps = [1, 2, 3, 4, 5, 6];
-
   const getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 1:
-        return <FileUpload t={t} setShowReminder={setShowReminder} />;
+        return (
+          <FirstStep
+            t={t}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
+            showReminder={showReminder}
+            setShowReminder={setShowReminder}
+          />
+        );
       case 2:
         return (
-          <GwTable
+          <SecondStep
             t={t}
-            nextStep={onSaveClick}
-            prevStep={onCancelClick}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
             showReminder={showReminder}
           />
         );
       case 3:
-        return <Text>3 Step</Text>;
-      case 4:
-        return <Text>4 Step</Text>;
-      case 5:
-        return <Text>5 Step</Text>;
-      case 6:
-        return <Text>6 Step</Text>;
+        return (
+          <ThirdStep
+            t={t}
+            onNextStepClick={onNextStepClick}
+            onPrevStepClick={onPrevStepClick}
+            showReminder={showReminder}
+          />
+        );
       default:
         break;
     }
   };
 
-  const getStepTitle = (stepIndex) => {
-    switch (stepIndex) {
-      case 1:
-        return t("Common:SelectFile");
-      case 2:
-        return t("Settings:SelectUsers");
-      case 3:
-        return t("Settings:DataImport");
-      case 4:
-        return t("Common:SelectFile");
-      case 5:
-        return t("Common:SelectFile");
-      case 6:
-        return t("Common:SelectFile");
-      default:
-        return;
-    }
-  };
-
-  const isFirstStep = currentStep === 1;
-
-  const saveButtonText = isFirstStep
-    ? t("Settings:UploadToServer")
-    : t("Settings:NextStep");
-
-  const onSaveClick = () => {
+  const onNextStepClick = () => {
     if (currentStep !== 6) {
       setCurrentStep((prev) => prev + 1);
     }
   };
 
-  const onCancelClick = () => {
+  const onPrevStepClick = () => {
     if (currentStep !== 1) {
       setCurrentStep((prev) => prev - 1);
     }
   };
+
+  const isSecondStep = currentStep === 2;
+  const isThirdStep = currentStep === 3;
 
   if (isMobile)
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   return (
     <WorkspaceWrapper>
-      <Box className="header-content">
-        <Text className="data-import-description">
-          {t("Settings:AboutDataImport")}
-        </Text>
+      <Text className="data-import-subtitle">
+        {t("Settings:AboutDataImport")}
+      </Text>
+      <div className="data-import-content">
         <Box displayProp="flex" marginProp="0 0 8px">
-          <Text className="step-counter">
-            {currentStep}/{steps.length}.
+          <Text className="stepper">
+            {currentStep}/{6}.
           </Text>
           <Text isBold fontSize="16px">
-            {getStepTitle(currentStep)}
+            {getStepTitle(t, currentStep)}
           </Text>
         </Box>
-      </Box>
-
-      <Box className="body-content">
+        <Text className="step-description">
+          {getStepDescription(t, currentStep)}
+        </Text>
         {getStepContent(currentStep)}
+      </div>
+      {isSecondStep || isThirdStep ? (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={onSaveClick}
-          onCancelClick={onCancelClick}
+          onSaveClick={onNextStepClick}
+          onCancelClick={onPrevStepClick}
           showReminder={showReminder}
-          saveButtonLabel={saveButtonText}
+          saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
         />
-      </Box>
+      ) : (
+        <></>
+      )}
     </WorkspaceWrapper>
   );
 };

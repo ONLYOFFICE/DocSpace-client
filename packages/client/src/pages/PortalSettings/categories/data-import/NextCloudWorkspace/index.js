@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import ImportSection from "../ImportSection";
+import ImportSection from "../sub-components/ImportSection";
 import Text from "@docspace/components/text";
 
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";

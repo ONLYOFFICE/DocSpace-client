@@ -25,7 +25,7 @@ const getColumns = (defaultColumns, userId) => {
   }
 };
 
-const GWTableHeader = (props) => {
+const UsersTableHeader = (props) => {
   const {
     userId,
     sectionWidth,
@@ -100,4 +100,4 @@ export default inject(({ auth }) => {
   return {
     userId: auth.userStore.user.id,
   };
-})(observer(GWTableHeader));
+})(observer(UsersTableHeader));

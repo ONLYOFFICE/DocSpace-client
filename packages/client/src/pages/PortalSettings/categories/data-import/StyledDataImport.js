@@ -9,11 +9,6 @@ const DataImportWrapper = styled.div`
     max-width: 343px;
   }
 
-  .service-icon {
-    display: flex;
-    align-items: center;
-  }
-
   .data-import-description {
     color: #657077;
     line-height: 20px;
@@ -21,8 +16,9 @@ const DataImportWrapper = styled.div`
     max-width: 675px;
   }
 
-  .start-migration-text {
+  .data-import-subtitle {
     margin-bottom: 21px;
+    font-weight: 600;
   }
 
   .service-list {
@@ -61,75 +57,36 @@ const DataImportWrapper = styled.div`
     @media ${mobile} {
       width: 100%;
     }
+
+    .service-icon {
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
 const WorkspaceWrapper = styled.div`
   margin-top: 4px;
 
-  @media ${mobile} {
-    max-width: 343px;
-  }
-
-  .header-content,
-  .description-wrapper {
-    max-width: 700px;
-  }
-
-  .data-import-description {
+  .data-import-subtitle {
     color: #657077;
+    max-width: 700px;
     line-height: 20px;
     margin-bottom: 20px;
   }
 
-  .step-counter {
+  .stepper {
     margin-right: 5px;
     font-weight: 700;
     font-size: 16px;
   }
 
-  .select-file-wrapper {
-    max-width: 350px;
-  }
-
   .step-description {
+    max-width: 700px;
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
     color: #333333;
-  }
-
-  .choose-backup-file {
-    font-weight: 600;
-    line-height: 20px;
-    margin-bottom: 4px;
-  }
-
-  .upload-backup-input {
-    height: 32px;
-    margin-bottom: 16px;
-  }
-
-  .selected-users-count {
-    margin-right: 24px;
-    color: #555f65;
-    font-weight: 700;
-  }
-
-  .selected-admins-count {
-    margin-right: 8px;
-    color: #555f65;
-    font-weight: 700;
-  }
-
-  .selected-users-info {
-    display: flex;
-    align-items: center;
-    max-width: 660px;
-    background: #f8f9f9;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 16px 0;
   }
 `;
 

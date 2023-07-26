@@ -40,8 +40,10 @@ const DataImport = (props) => {
 
   return (
     <DataImportWrapper>
-      <Text className="data-import-description">{t("Settings:DataImportDescription")}</Text>
-      <Text fontWeight={600} className="start-migration-text">
+      <Text className="data-import-description">
+        {t("Settings:DataImportDescription")}
+      </Text>
+      <Text className="data-import-subtitle">
         {t("Settings:UploadBackupData")}
       </Text>
 
@@ -50,9 +52,16 @@ const DataImport = (props) => {
           <Box
             className="service-wrapper"
             key={service.id}
-            onClick={() => redirectToWorkspace(service.title)}>
+            onClick={() => redirectToWorkspace(service.title)}
+          >
             <ReactSVG src={service.logo} className="service-icon" />
-            <Link type="page" fontWeight="600" color="#4781D1" isHovered isTextOverflow>
+            <Link
+              type="page"
+              fontWeight="600"
+              color="#4781D1"
+              isHovered
+              isTextOverflow
+            >
               {t("Settings:Import")}
             </Link>
           </Box>

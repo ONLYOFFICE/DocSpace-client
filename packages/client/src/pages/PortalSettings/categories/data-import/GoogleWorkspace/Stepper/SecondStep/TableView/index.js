@@ -4,13 +4,13 @@ import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
 import styled from "styled-components";
 
-import GWTableHeader from "./GWTableHeader";
-import GWTableRow from "./GWTableRow";
+import UsersTableHeader from "./UsersTableHeader";
+import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 import SearchInput from "@docspace/components/search-input";
 
-import { mockData } from "../../mockData.js";
+import { mockData } from "../mockData.js";
 
 const TableWrapper = styled(TableContainer)`
   margin: 20px 0;
@@ -39,7 +39,7 @@ const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
-const GWTableView = (props) => {
+const TableView = (props) => {
   const { userId, viewAs, setViewAs, sectionWidth } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
@@ -64,7 +64,7 @@ const GWTableView = (props) => {
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"
       />
-      <GWTableHeader
+      <UsersTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         userId={userId}
@@ -83,7 +83,7 @@ const GWTableView = (props) => {
         itemCount={mockData.length}
       >
         {mockData.map((data) => (
-          <GWTableRow
+          <UsersTableRow
             key={data.id}
             displayName={data.displayName}
             email={data.email}
@@ -105,4 +105,4 @@ export default inject(({ setup, auth }) => {
     setViewAs,
     userId,
   };
-})(observer(GWTableView));
+})(observer(TableView));

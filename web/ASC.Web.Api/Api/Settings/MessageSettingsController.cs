@@ -90,9 +90,14 @@ public class MessageSettingsController : BaseSettingsController
     }
 
     [HttpGet("cookiesettings")]
-    public async Task<int> GetCookieSettingsAsync()
+    public async Task<CookieSettingsDto> GetCookieSettings()
     {
-        return await _cookiesManager.GetLifeTimeAsync(await _tenantManager.GetCurrentTenantIdAsync());
+        var result = await _cookiesManager.GetLifeTimeAsync(await _tenantManager.GetCurrentTenantIdAsync());
+        return new CookieSettingsDto
+        {
+            Enabled = result.Enabled,
+            LifeTime = result.LifeTime
+        };
     }
 
     [HttpPut("cookiesettings")]
@@ -105,7 +110,7 @@ public class MessageSettingsController : BaseSettingsController
             throw new BillingException(Resource.ErrorNotAllowedOption, "CookieSettings");
         }
 
-        await _cookiesManager.SetLifeTimeAsync(model.LifeTime);
+        await _cookiesManager.SetLifeTimeAsync(model.LifeTime, model.Enabled);
 
         await _messageService.SendAsync(MessageAction.CookieSettingsUpdated);
 
@@ -168,13 +173,6 @@ public class MessageSettingsController : BaseSettingsController
             if (!user.Id.Equals(Constants.LostUser.Id))
             {
                 throw new Exception(_customNamingPeople.Substitute<Resource>("ErrorEmailAlreadyExists"));
-            }
-
-            var settings = await _settingsManager.LoadAsync<IPRestrictionsSettings>();
-
-            if (settings.Enable && !await _ipSecurity.VerifyAsync())
-            {
-                throw new Exception(Resource.ErrorAccessRestricted);
             }
 
             var trustedDomainSettings = await _settingsManager.LoadAsync<StudioTrustedDomainSettings>();

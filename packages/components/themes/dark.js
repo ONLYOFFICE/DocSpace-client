@@ -681,6 +681,14 @@ const Dark = {
       large: "550px",
     },
 
+    height: {
+      base: "32px",
+      middle: "38px",
+      big: "38px",
+      huge: "39px",
+      large: "44px",
+    },
+
     paddingRight: {
       base: "37px",
       middle: "48px",
@@ -1110,8 +1118,8 @@ const Dark = {
     },
 
     icon: {
-      background: grayMain,
-      color: globalColors.lightHover,
+      background: "#242424",
+      color: "#ADADAD",
     },
 
     width: {
@@ -1670,7 +1678,7 @@ const Dark = {
       defaultColor: white,
       disabledColor: "#858585",
       color: white,
-      selectedColor: white,
+      // selectedColor: white,
     },
   },
 
@@ -1728,6 +1736,7 @@ const Dark = {
     arrowColor: "#F6F9FC",
     disabledArrow: "#474747",
     weekdayColor: "#858585",
+    accent: "#4781d1",
   },
 
   datePicker: {
@@ -2068,10 +2077,9 @@ const Dark = {
     downloadAppList: {
       color: "#C4C4C4",
       winHoverColor: "#3785D3",
-      macHoverColor: white,
+      macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
-      iosHoverColor: white,
     },
 
     thirdPartyList: {
@@ -2288,6 +2296,13 @@ const Dark = {
 
   selector: {
     border: `1px solid #474747`,
+
+    breadCrumbs: {
+      prevItemColor: "#858585",
+      arrowRightColor: "#858585",
+    },
+
+    bodyDescriptionText: "#858585",
 
     item: {
       hoverBackground: "#3d3d3d",
@@ -2954,6 +2969,10 @@ const Dark = {
           iconButton: white,
           iconButtonDisabled: "#333",
         },
+
+        smtp: {
+          requirementColor: "#E06451",
+        },
       },
 
       backup: {
@@ -2988,7 +3007,12 @@ const Dark = {
         benefitsContainer: {
           iconsColor: "#858585",
         },
+        contactContainer: {
+          textColor: "#ADADAD",
+          linkColor: "#858585",
+        },
         warningColor: "#E06451",
+        color: "#E17415",
       },
     },
 
@@ -3109,6 +3133,11 @@ const Dark = {
 
   portalUnavailable: {
     textDescriptionColor: "#858585",
+  },
+
+  emailChips: {
+    borderColor: "#858585",
+    dashedBorder: "1px dashed #fff",
   },
 };
 

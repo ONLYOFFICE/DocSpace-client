@@ -29,6 +29,7 @@ import LogoutConnectionDialog from "./LogoutConnectionDialog";
 import LogoutAllConnectionDialog from "./LogoutAllConnectionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
+import ReportDialog from "./ReportDialog";
 import ChangeQuotaDialog from "./ChangeQuotaDialog";
 
 export {
@@ -63,5 +64,6 @@ export {
   InviteUsersWarningDialog,
   LogoutAllConnectionDialog,
   PortalRenamingDialog,
+  ReportDialog,
   ChangeQuotaDialog,
 };

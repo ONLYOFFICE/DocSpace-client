@@ -122,6 +122,93 @@ class DashboardContextOpetion {
     return options;
   };
 
+  public getGroupFileByRoleContextOptions = (t: (arg: string) => string) => {
+    const length = this.dashboardStore.selectedFilesByRoleMap.size;
+    const selectedFiles = this.dashboardStore.selectedFilesByRoleMap.values();
+
+    const optionsModel: Record<string, ContextMenuModel> = {
+      "cancel-filling": {
+        id: "option_cancel-filling",
+        key: "cancel-filling",
+        label: t("Common:CancelFilling"),
+        icon: CrossReactSvgUrl,
+        iconUrl: CrossReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "download-file": {
+        id: "option_file-by-role_download-role",
+        key: "download-file",
+        label: t("Common:Download"),
+        icon: DownloadReactSvgUrl,
+        iconUrl: DownloadReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "download-file-as": {
+        id: "option_file-by-role_download-file",
+        key: "download-file-as",
+        label: t("Translations:DownloadAs"),
+        icon: DownloadAsReactSvgUrl,
+        iconUrl: DownloadAsReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "move-to": {
+        id: "option_move-to",
+        key: "move-to",
+        label: t("Common:MoveTo"),
+        icon: MoveReactSvgUrl,
+        iconUrl: MoveReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "copy-file": {
+        id: "option_file-by-role_copy-file",
+        key: "copy-file",
+        label: t("Common:Copy"),
+        icon: CopyReactSvgUrl,
+        iconUrl: CopyReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+      delete: {
+        id: "option_file-by-role_delete",
+        key: "delete",
+        label: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        iconUrl: TrashReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+    };
+
+    const groupOptions: Record<string, number> = {
+      "cancel-filling": 0,
+      "download-file": 0,
+      "download-file-as": 0,
+      "move-to": 0,
+      "copy-file": 0,
+      delete: 0,
+    };
+
+    for (const role of selectedFiles) {
+      role.contextOptionsModel.forEach((option) => {
+        groupOptions[option] !== undefined && ++groupOptions[option];
+      });
+    }
+
+    const options = Object.entries(groupOptions)
+      .filter((item) => item[1] === length)
+      .map((item) => optionsModel[item[0]]);
+
+    return options;
+  };
+
   public getOptions = (
     role: IRole,
     t: (arg: string) => string
@@ -270,7 +357,7 @@ class DashboardContextOpetion {
       delete: {
         id: "option_file-by-role_delete",
         key: "delete",
-        label: t("Files:DeleteAllForm"),
+        label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => {},
         disabled: false,
@@ -297,7 +384,7 @@ class DashboardContextOpetion {
     const countSelectedFiles = this.dashboardStore.selectedFilesByRoleMap.size;
 
     if (countSelectedFiles > 1) {
-      return this.getGroupContextOptions(t);
+      return this.getGroupFileByRoleContextOptions(t);
     }
 
     return this.getOptionsFileByRole(t, file);

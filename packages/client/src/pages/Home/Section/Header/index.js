@@ -207,6 +207,7 @@ const SectionHeaderContent = (props) => {
     categoryType,
 
     dashboardHeaderMenuService,
+    isDashboardView,
   } = props;
 
   const navigate = useNavigate();

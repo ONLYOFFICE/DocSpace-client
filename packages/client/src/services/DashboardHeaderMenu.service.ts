@@ -72,6 +72,11 @@ class DashboardHeaderMenuService {
   };
 
   public getHeaderContextMenu = (t: (text: string) => string) => {
+    if (this.isDashboardView)
+      return this.dashboardContextOptionStore.getGroupFileByRoleContextOptions(
+        t
+      );
+
     return this.dashboardContextOptionStore.getGroupContextOptions(t);
   };
 }

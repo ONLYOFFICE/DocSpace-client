@@ -6,6 +6,7 @@ interface BoardProps {
   sectionWidth: number;
   getModel: GetModelFunctionType;
   clearSelectedFileByRoleMap: VoidFunction;
+  clearBufferSelectionFilesByRole: VoidFunction;
 }
 
 export default BoardProps;

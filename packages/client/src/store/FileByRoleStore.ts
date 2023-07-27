@@ -13,7 +13,7 @@ class FileByRoleStore {
   private getContextMenuModel = (file: FileByRoleType) => {
     if (this.role.type === RoleTypeEnum.Default) {
       let options: string[] = [
-        "fill",
+        "fill-form",
         "preview",
         "separator0",
         "link-for-room-members",
@@ -27,10 +27,11 @@ class FileByRoleStore {
         "preview",
         "separator0",
         "link-for-room-members",
-        "download",
-        "download-as",
+        "download-file",
+        "download-file-as",
         "move-to",
-        "copy",
+        "copy-file",
+        "separator1",
         "delete",
       ];
 
@@ -47,7 +48,7 @@ class FileByRoleStore {
       return {
         ...file,
         selected: this.dashboard.selectedFilesByRoleMap.has(file.id),
-        isActive: false,
+        isActive: file.id === this.dashboard.BufferSelectionFilesByRole?.id,
         contextOptionsModel: this.getContextMenuModel(file),
       };
     });

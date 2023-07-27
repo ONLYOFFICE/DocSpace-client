@@ -181,7 +181,8 @@ const dashboardStore = new DashboardStore(
 
 const dashboardContextOptionStore = new DashboardContextOpetion(
   dashboardStore,
-  dialogsStore
+  dialogsStore,
+  contextOptionsStore
 );
 
 const store = {

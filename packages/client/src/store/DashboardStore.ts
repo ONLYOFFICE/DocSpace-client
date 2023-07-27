@@ -36,6 +36,7 @@ class DashboardStore {
   public filesByRole = new Map<number, FileByRoleType[]>();
   public selectedFilesByRoleMap: Map<number, IFileByRole> = new Map();
   public collectionFileByRoleStore: Map<number, FileByRoleStore> = new Map();
+  public BufferSelectionFilesByRole?: IFileByRole;
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -203,6 +204,8 @@ class DashboardStore {
   };
 
   public selectedFileByRole = (file: IFileByRole, checked: boolean) => {
+    if (this.BufferSelectionFilesByRole) this.clearBufferSelectionFilesByRole();
+
     if (checked) {
       this.selectedFilesByRoleMap.set(file.id, file);
     } else {
@@ -217,6 +220,7 @@ class DashboardStore {
     this.filesByRole.clear();
     this.clearSelectedFileByRoleMap();
     this.collectionFileByRoleStore.clear();
+    this.clearBufferSelectionFilesByRole();
   };
 
   public clearSelectedRoleMap = (): void => {
@@ -228,6 +232,10 @@ class DashboardStore {
 
   public clearBufferSelectionRole = (): void => {
     this.BufferSelectionRole = undefined;
+  };
+
+  public clearBufferSelectionFilesByRole = (): void => {
+    this.BufferSelectionFilesByRole = undefined;
   };
 
   public setViewAs = (viewAs: string): void => {
@@ -271,6 +279,29 @@ class DashboardStore {
       return files;
     } catch (error) {
       return Promise.reject(error);
+    }
+  };
+
+  public setBufferSelectionFileByRole = (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => {
+    const hasFile = this.selectedFilesByRoleMap.has(file.id);
+
+    if (withSelection && hasFile) {
+      this.clearBufferSelectionFilesByRole();
+    }
+
+    if (withSelection && !hasFile) {
+      this.BufferSelectionFilesByRole = file;
+      this.selectedFilesByRoleMap.clear();
+    }
+
+    if (!withSelection) {
+      this.BufferSelectionFilesByRole = file;
+      this.selectedFilesByRoleMap.clear();
+      if (checked) this.selectedFilesByRoleMap.set(file.id, file);
     }
   };
 

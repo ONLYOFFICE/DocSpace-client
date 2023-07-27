@@ -34,6 +34,7 @@ function Dashboard({
   clearSelectedRoleMap,
   clearBufferSelectionRole,
   clearSelectedFileByRoleMap,
+  clearBufferSelectionFilesByRole,
 }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
 
@@ -48,6 +49,7 @@ function Dashboard({
     clearSelectedRoleMap();
     clearBufferSelectionRole();
     clearSelectedFileByRoleMap();
+    clearBufferSelectionFilesByRole();
   }, []);
 
   useEffect(() => {
@@ -79,6 +81,7 @@ function Dashboard({
         getModel={getModel}
         sectionWidth={sectionWidth}
         clearSelectedFileByRoleMap={clearSelectedFileByRoleMap}
+        clearBufferSelectionFilesByRole={clearBufferSelectionFilesByRole}
       />
     </>
   );
@@ -99,6 +102,7 @@ export default inject<StoreType>(
       clearSelectedRoleMap,
       clearBufferSelectionRole,
       clearSelectedFileByRoleMap,
+      clearBufferSelectionFilesByRole,
     } = dashboardStore;
 
     const { getModel } = dashboardContextOptionStore;
@@ -123,6 +127,7 @@ export default inject<StoreType>(
       clearSelectedRoleMap,
       clearBufferSelectionRole,
       clearSelectedFileByRoleMap,
+      clearBufferSelectionFilesByRole,
       userID,
       getModel,
     };

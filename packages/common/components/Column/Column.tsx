@@ -38,26 +38,35 @@ function Column(props: ColumnProps) {
           isLoading={isLoading}
           filesByRole={filesByRoleStore?.FilesByRole}
           onSelected={onSelected}
+          getOptions={props.getModelFile!}
+          setBufferSelectionFileByRole={props.setBufferSelectionFileByRole!}
         />
       </ColumnBody>
     </ColumnContainer>
   );
 }
 
-export default inject<StoreType>(({ dashboardStore }) => {
-  const {
-    filesByRole,
-    fetchFilesByRole,
-    selectedFilesByRoleMap,
-    selectedFileByRole,
-    collectionFileByRoleStore,
-  } = dashboardStore;
+export default inject<StoreType>(
+  ({ dashboardStore, dashboardContextOptionStore }) => {
+    const {
+      filesByRole,
+      fetchFilesByRole,
+      selectedFilesByRoleMap,
+      selectedFileByRole,
+      collectionFileByRoleStore,
+      setBufferSelectionFileByRole,
+    } = dashboardStore;
 
-  return {
-    filesByRole,
-    fetchFilesByRole,
-    selectedFilesByRoleMap,
-    selectedFileByRole,
-    collectionFileByRoleStore,
-  };
-})(observer(Column));
+    const { getModelFile } = dashboardContextOptionStore;
+
+    return {
+      filesByRole,
+      fetchFilesByRole,
+      selectedFilesByRoleMap,
+      selectedFileByRole,
+      collectionFileByRoleStore,
+      getModelFile,
+      setBufferSelectionFileByRole,
+    };
+  }
+)(observer(Column));

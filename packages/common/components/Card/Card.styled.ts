@@ -60,6 +60,14 @@ export const CardContainer = styled.div<CardContainerProps>`
   }
 
   ${(props) =>
+    props.isActive &&
+    css`
+      ${CardHeader}, ${CardDivider} {
+        background: ${(props) => props.theme.card.selectedColor};
+      }
+    `}
+
+  ${(props) =>
     props.isSelected &&
     css`
       ${CardHeader}, ${CardDivider} {

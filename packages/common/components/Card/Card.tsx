@@ -1,5 +1,6 @@
-import { useRef, useCallback, ChangeEvent, memo } from "react";
 import equal from "fast-deep-equal/react";
+import { useTranslation } from "react-i18next";
+import { useRef, useCallback, ChangeEvent, memo } from "react";
 
 import Checkbox from "@docspace/components//checkbox";
 import ContextMenu from "@docspace/components/context-menu";
@@ -26,18 +27,28 @@ function Card({
   file,
   isLoading = false,
   isForMe = false,
-  getOptions = () => [],
+  getOptions,
   onSelected = () => {},
+  setBufferSelectionFileByRole,
 }: CardProps) {
+  const { t } = useTranslation();
+
   const contextMenuRef = useRef<ContextMenu>(null);
 
-  const onClickHandler = useCallback((event: MouseEvent) => {
-    contextMenuRef.current?.show(event);
-  }, []);
+  const onClickHandler = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      contextMenuRef.current?.show(event);
+      setBufferSelectionFileByRole(file, false);
+    },
+    []
+  );
 
-  const onHideContextMenu = useCallback((event: MouseEvent) => {
-    contextMenuRef.current?.hide(event);
-  }, []);
+  const onHideContextMenu = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      contextMenuRef.current?.hide(event);
+    },
+    []
+  );
 
   const handleSelected = (event: ChangeEvent<HTMLInputElement>) => {
     onSelected(file, event.target.checked);
@@ -47,9 +58,19 @@ function Card({
     onSelected(file, true);
   };
 
-  const isSelected = file.selected;
-  const filename = file.title;
+  const getOptionsModel = useCallback(() => getOptions(file, t), [file, t]);
+
+  const onContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    setBufferSelectionFileByRole(file, false, event.button === 2);
+    contextMenuRef.current?.show(event);
+  };
+
+  const { isActive, selected } = file;
+
   const avatarUrl = "";
+  const filename = file.title;
   const username = file.title;
 
   if (isLoading)
@@ -69,12 +90,17 @@ function Card({
     );
 
   return (
-    <CardContainer isSelected={isSelected} isForMe={isForMe}>
+    <CardContainer
+      isSelected={selected}
+      isActive={isActive}
+      isForMe={isForMe}
+      onContextMenu={onContextMenu}
+    >
       <CardHeader>
         <CardAvatarWrapper>
           <Checkbox
             className="card__checkbox"
-            isChecked={isSelected}
+            isChecked={selected}
             onChange={handleSelected}
           />
           <CardAvatar
@@ -84,11 +110,11 @@ function Card({
           />
         </CardAvatarWrapper>
         <CardUserName title={username}>{username}</CardUserName>
-        <ContextMenu ref={contextMenuRef} getContextModel={getOptions} />
+        <ContextMenu ref={contextMenuRef} getContextModel={getOptionsModel} />
         <ContextMenuButton
           className="card__context-menu"
           displayType="toggle"
-          getData={getOptions}
+          getData={getOptionsModel}
           onClick={onClickHandler}
           onClose={onHideContextMenu}
         />

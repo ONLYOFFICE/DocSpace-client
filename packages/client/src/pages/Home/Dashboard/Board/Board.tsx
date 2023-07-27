@@ -11,9 +11,13 @@ function Board({
   getModel,
   sectionWidth,
   clearSelectedFileByRoleMap,
+  clearBufferSelectionFilesByRole,
 }: BoardProps) {
   useEffect(() => {
-    return () => clearSelectedFileByRoleMap();
+    return () => {
+      clearSelectedFileByRoleMap();
+      clearBufferSelectionFilesByRole();
+    };
   }, []);
 
   return (

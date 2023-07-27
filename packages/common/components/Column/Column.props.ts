@@ -1,5 +1,6 @@
 import type { IFileByRole } from "@docspace/common/Models";
 import type { RoleType, RoleDefaultType } from "@docspace/common/types";
+import { ContextMenuModel } from "@docspace/components/types";
 import type { GetModelFunctionType } from "SRC_DIR/pages/Home/Dashboard/types";
 import type FileByRoleStore from "SRC_DIR/store/FileByRoleStore";
 import type { StoreType } from "SRC_DIR/types";
@@ -14,6 +15,15 @@ type ColumnPropsOwn = {
   fetchFilesByRole?: DashboardStoreType["fetchFilesByRole"];
   selectedFilesByRoleMap?: Map<number, IFileByRole>;
   collectionFileByRoleStore?: Map<number, FileByRoleStore>;
+  getModelFile?: (
+    file: IFileByRole,
+    t: (arg: string) => string
+  ) => ContextMenuModel[];
+  setBufferSelectionFileByRole?: (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
 };
 
 export type ColumnProps = ColumnPropsOwn & {
@@ -33,6 +43,15 @@ export type ColumnBodyContentProps = {
   filesByRole?: IFileByRole[];
   isLoading: boolean;
   onSelected: (file: IFileByRole, checked: boolean) => void;
+  getOptions: (
+    file: IFileByRole,
+    t: (arg: string) => string
+  ) => ContextMenuModel[];
+  setBufferSelectionFileByRole: (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
 };
 
 export type ListChildDataType = {

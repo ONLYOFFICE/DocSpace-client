@@ -14,6 +14,8 @@ function ColumnBodyContent({
   isLoading,
   filesByRole,
   onSelected,
+  getOptions,
+  setBufferSelectionFileByRole,
 }: ColumnBodyContentProps) {
   const rowRender: ComponentType<ListChildComponentProps<ListChildDataType>> =
     useCallback(
@@ -26,11 +28,17 @@ function ColumnBodyContent({
 
         return (
           <div key={file.id} style={style}>
-            <Card key={file.id} file={file} onSelected={onSelected} />
+            <Card
+              key={file.id}
+              file={file}
+              onSelected={onSelected}
+              getOptions={getOptions}
+              setBufferSelectionFileByRole={setBufferSelectionFileByRole}
+            />
           </div>
         );
       },
-      [onSelected]
+      [onSelected, getOptions, setBufferSelectionFileByRole]
     );
 
   if (isLoading) {

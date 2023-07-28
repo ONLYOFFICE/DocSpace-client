@@ -39,6 +39,7 @@ public class SecurityControllerHelper : FilesHelperBase
         ApiContext apiContext,
         FileStorageService fileStorageService,
         FolderContentDtoHelper folderContentDtoHelper,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         IHttpContextAccessor httpContextAccessor,
         FolderDtoHelper folderDtoHelper,
         FileShareDtoHelper fileShareDtoHelper,
@@ -51,6 +52,7 @@ public class SecurityControllerHelper : FilesHelperBase
             apiContext,
             fileStorageService,
             folderContentDtoHelper,
+            boardRoleContentDtoHelper,
             httpContextAccessor,
             folderDtoHelper)
     {

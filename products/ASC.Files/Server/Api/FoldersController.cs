@@ -140,6 +140,14 @@ public abstract class FoldersController<T> : ApiControllerBase
         return files;
     }
 
+    [HttpGet("board/{boardId}/role")]
+    public async Task<BoardRoleContentDto<T>> GetBoardRole(T boardId, int? roleId)
+    {
+        var boardRole = await _foldersControllerHelper.GetBoardRole(boardId, roleId);
+
+        return boardRole.NotFoundIfNull();
+    }
+
     /// <summary>
     /// Returns a detailed information about the folder with the ID specified in the request
     /// </summary>

@@ -54,6 +54,31 @@ public class BoardRolesDto : FileRoleDto
 }
 
 [Scope]
+public class BoardRolesDtoHelper
+{
+    private readonly EmployeeDtoHelper _employeeDtoHelper;
+
+    public BoardRolesDtoHelper(
+        EmployeeDtoHelper employeeDtoHelper)
+    {
+        _employeeDtoHelper = employeeDtoHelper;
+    }
+
+    public async Task<BoardRolesDto> GetAsync(BoardRole role)
+    {
+
+        return new BoardRolesDto()
+        {
+            Id = role.RoleId,
+            Title = role.Title,
+            Color = role.Color,
+            QueueNumber = role.QueueNumber,
+            Assigned = role.AssignedTo != Guid.Empty ? await _employeeDtoHelper.GetAsync(role.AssignedTo) : null
+        };
+    }
+}
+
+[Scope]
 public class FileRoleDtoHelper
 {
 

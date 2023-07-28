@@ -45,6 +45,7 @@ public class FoldersControllerHelper : FilesHelperBase
         ApiContext apiContext,
         FileStorageService fileStorageService,
         FolderContentDtoHelper folderContentDtoHelper,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         IHttpContextAccessor httpContextAccessor,
         FolderDtoHelper folderDtoHelper,
         UserManager userManager,
@@ -60,6 +61,7 @@ public class FoldersControllerHelper : FilesHelperBase
             apiContext,
             fileStorageService,
             folderContentDtoHelper,
+            boardRoleContentDtoHelper,
             httpContextAccessor,
             folderDtoHelper)
     {
@@ -83,7 +85,14 @@ public class FoldersControllerHelper : FilesHelperBase
 
         return await _folderDtoHelper.GetAsync(folder);
     }
+    
+    public async Task<BoardRoleContentDto<T>> GetBoardRole<T>(T folderId, int? roleId)
+    {
+        var boardRoleContentWrapper = await ToBoardRoleContentWrapperAsync(folderId, roleId ?? 0);
 
+        return boardRoleContentWrapper.NotFoundIfNull();
+
+    }
     public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T folderId, int? roleId)
     {
         return await _fileStorageService.GetFilesByRole(folderId, roleId ?? 0);
@@ -179,6 +188,13 @@ public class FoldersControllerHelper : FilesHelperBase
         var folder = await _fileStorageService.FolderRenameAsync(folderId, title);
 
         return await _folderDtoHelper.GetAsync(folder);
+    }
+    private async Task<BoardRoleContentDto<T>> ToBoardRoleContentWrapperAsync<T>(T folderId, int roleId)
+    {
+        var items = await _fileStorageService.GetBoardRoleItemsAsync(folderId, roleId);
+        var startIndex = Convert.ToInt32(_apiContext.StartIndex);
+
+        return await _boardRoleContentDtoHelper.GetAsync(items, folderId, roleId, startIndex);
     }
 
     private async Task<FolderContentDto<T>> ToFolderContentWrapperAsync<T>(T folderId, Guid userIdOrGroupId, FilterType filterType, T roomId, bool searchInContent, bool withSubFolders, bool excludeSubject, ApplyFilterOption applyFilterOption)

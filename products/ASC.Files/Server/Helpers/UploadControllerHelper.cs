@@ -42,6 +42,7 @@ public class UploadControllerHelper : FilesHelperBase
         ApiContext apiContext,
         FileStorageService fileStorageService,
         FolderContentDtoHelper folderContentDtoHelper,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         IHttpContextAccessor httpContextAccessor,
         FolderDtoHelper folderDtoHelper,
         FilesLinkUtility filesLinkUtility,
@@ -57,6 +58,7 @@ public class UploadControllerHelper : FilesHelperBase
             apiContext,
             fileStorageService,
             folderContentDtoHelper,
+            boardRoleContentDtoHelper,
             httpContextAccessor,
             folderDtoHelper)
     {

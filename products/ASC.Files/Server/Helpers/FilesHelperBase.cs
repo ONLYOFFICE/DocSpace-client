@@ -36,6 +36,7 @@ public abstract class FilesHelperBase
     protected readonly ApiContext _apiContext;
     protected readonly FileStorageService _fileStorageService;
     protected readonly FolderContentDtoHelper _folderContentDtoHelper;
+    protected readonly BoardRoleContentDtoHelper _boardRoleContentDtoHelper;
     protected readonly IHttpContextAccessor _httpContextAccessor;
     protected readonly FolderDtoHelper _folderDtoHelper;
 
@@ -47,6 +48,7 @@ public abstract class FilesHelperBase
         ApiContext apiContext,
         FileStorageService fileStorageService,
         FolderContentDtoHelper folderContentDtoHelper,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         IHttpContextAccessor httpContextAccessor,
         FolderDtoHelper folderDtoHelper)
     {
@@ -57,6 +59,7 @@ public abstract class FilesHelperBase
         _apiContext = apiContext;
         _fileStorageService = fileStorageService;
         _folderContentDtoHelper = folderContentDtoHelper;
+        _boardRoleContentDtoHelper = boardRoleContentDtoHelper;
         _httpContextAccessor = httpContextAccessor;
         _folderDtoHelper = folderDtoHelper;
     }

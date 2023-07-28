@@ -493,7 +493,69 @@ public class FileStorageService //: IFileStorageService
         return await InternalCreateNewFolderAsync(parentId, title);
     }
 
-    
+    public async Task<DataWrapper<T>> GetBoardRoleItemsAsync<T>(T boardId, int roleId)
+    {
+        var folderDao = GetFolderDao<T>();
+        var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
+        var files = _fileSecurity.FilterReadAsync(boardRolesDao.GetBoardFilesByRole(boardId, roleId)).ToListAsync();
+
+        Folder<T> parent = null;
+        try
+        {
+            parent = await folderDao.GetFolderAsync(boardId);
+            if (parent != null && !string.IsNullOrEmpty(parent.Error))
+            {
+                throw new Exception(parent.Error);
+            }
+        }
+        catch (Exception e)
+        {
+            if (parent != null && parent.ProviderEntry)
+            {
+                throw GenerateException(new Exception(FilesCommonResource.ErrorMassage_SharpBoxException, e));
+            }
+
+            throw GenerateException(e);
+        }
+
+        List<FileEntry> entries = new();
+
+        foreach (var items in await Task.WhenAll(files.AsTask()))
+        {
+            entries.AddRange(items);
+        }
+
+        var breadCrumbsTask = _entryManager.GetBreadCrumbsAsync(boardId, folderDao);
+        var breadCrumbs = await breadCrumbsTask;
+
+        var result = new DataWrapper<T>
+        {
+            Total = entries.Count,
+            Entries = entries,
+            FolderPathParts = new List<object>(breadCrumbs.Select(f =>
+            {
+                if (f.FileEntryType == FileEntryType.Folder)
+                {
+                    if (f is Folder<string> f1)
+                    {
+                        return (object)f1.Id;
+                    }
+
+                    if (f is Folder<int> f2)
+                    {
+                        return f2.Id;
+                    }
+                }
+
+                return 0;
+            })),
+            FolderInfo = parent,
+           // New = await newTask   //TODO
+        };
+
+        return result;
+
+    }
     public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T formId, int roleId)
     {
         var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();

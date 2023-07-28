@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import Badge from "@docspace/components/badge";
@@ -105,4 +105,4 @@ function ColumnHeaderContent({ role, getModel }: ColumnHeaderContentProps) {
   );
 }
 
-export default ColumnHeaderContent;
+export default memo(ColumnHeaderContent);

@@ -1,17 +1,36 @@
-import type { RoleType, RoleDefaultType, File } from "@docspace/common/types";
+import type { IFileByRole } from "@docspace/common/Models";
+import type { RoleType, RoleDefaultType } from "@docspace/common/types";
+import { ContextMenuModel } from "@docspace/components/types";
 import type { GetModelFunctionType } from "SRC_DIR/pages/Home/Dashboard/types";
+import type FileByRoleStore from "SRC_DIR/store/FileByRoleStore";
+import type { StoreType } from "SRC_DIR/types";
 
-type CulimnPropsOwn = {
+type DashboardStoreType = StoreType["dashboardStore"];
+
+type ColumnPropsOwn = {
   getModel: GetModelFunctionType;
-  filesByRole?: Map<number, File[]>;
-  fetchFilesByRole?: (roleId: number) => Promise<File[]>;
+
+  filesByRole?: Map<number, Map<number, IFileByRole>>;
+  selectedFileByRole?: DashboardStoreType["selectedFileByRole"];
+  fetchFilesByRole?: DashboardStoreType["fetchFilesByRole"];
+  selectedFilesByRoleMap?: Map<number, IFileByRole>;
+  collectionFileByRoleStore?: Map<number, FileByRoleStore>;
+  getModelFile?: (
+    file: IFileByRole,
+    t: (arg: string) => string
+  ) => ContextMenuModel[];
+  setBufferSelectionFileByRole?: (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
 };
 
-export type ColumnProps = CulimnPropsOwn & {
+export type ColumnProps = ColumnPropsOwn & {
   role: RoleType;
 };
 
-export type ColumnDefaultProps = CulimnPropsOwn & {
+export type ColumnDefaultProps = ColumnPropsOwn & {
   role: RoleDefaultType;
 };
 
@@ -21,6 +40,20 @@ export type ColumnHeaderContentProps = {
 };
 
 export type ColumnBodyContentProps = {
-  filesByRole?: File[];
+  filesByRole?: IFileByRole[];
   isLoading: boolean;
+  onSelected: (file: IFileByRole, checked: boolean) => void;
+  getOptions: (
+    file: IFileByRole,
+    t: (arg: string) => string
+  ) => ContextMenuModel[];
+  setBufferSelectionFileByRole: (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
+};
+
+export type ListChildDataType = {
+  files?: IFileByRole[];
 };

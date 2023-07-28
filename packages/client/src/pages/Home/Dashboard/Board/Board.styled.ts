@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const BoardContainer = styled.section`
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, 264px);
+  grid-template-columns: repeat(auto-fit, 270px);
+  grid-template-rows: 1fr;
   grid-auto-flow: column;
   gap: 30px;
 

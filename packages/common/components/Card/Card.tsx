@@ -1,4 +1,7 @@
-import { useRef, useCallback } from "react";
+import equal from "fast-deep-equal/react";
+import { useTranslation } from "react-i18next";
+import { useRef, useCallback, ChangeEvent, memo } from "react";
+
 import Checkbox from "@docspace/components//checkbox";
 import ContextMenu from "@docspace/components/context-menu";
 import ContextMenuButton from "@docspace/components/context-menu-button";
@@ -21,24 +24,54 @@ import OformIcon from "PUBLIC_DIR/images/icons/32/oform.svg";
 import DefaultUserAvatar from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 function Card({
-  username,
-  filename,
-  isForMe = false,
-  isSelected = false,
-  avatarUrl = "",
+  file,
   isLoading = false,
-  getOptions = () => [],
+  isForMe = false,
+  getOptions,
   onSelected = () => {},
+  setBufferSelectionFileByRole,
 }: CardProps) {
+  const { t } = useTranslation();
+
   const contextMenuRef = useRef<ContextMenu>(null);
 
-  const onClickHandler = useCallback((event: MouseEvent) => {
-    contextMenuRef.current?.show(event);
-  }, []);
+  const onClickHandler = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      contextMenuRef.current?.show(event);
+      setBufferSelectionFileByRole(file, false);
+    },
+    []
+  );
 
-  const onHideContextMenu = useCallback((event: MouseEvent) => {
-    contextMenuRef.current?.hide(event);
-  }, []);
+  const onHideContextMenu = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      contextMenuRef.current?.hide(event);
+    },
+    []
+  );
+
+  const handleSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    onSelected(file, event.target.checked);
+  };
+
+  const handleClickAvatar = () => {
+    onSelected(file, true);
+  };
+
+  const getOptionsModel = useCallback(() => getOptions(file, t), [file, t]);
+
+  const onContextMenu = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    setBufferSelectionFileByRole(file, false, event.button === 2);
+    contextMenuRef.current?.show(event);
+  };
+
+  const { isActive, selected } = file;
+
+  const avatarUrl = "";
+  const filename = file.title;
+  const username = file.title;
 
   if (isLoading)
     return (
@@ -57,22 +90,31 @@ function Card({
     );
 
   return (
-    <CardContainer isSelected={isSelected} isForMe={isForMe}>
+    <CardContainer
+      isSelected={selected}
+      isActive={isActive}
+      isForMe={isForMe}
+      onContextMenu={onContextMenu}
+    >
       <CardHeader>
         <CardAvatarWrapper>
           <Checkbox
             className="card__checkbox"
-            isChecked={isSelected}
-            onChange={onSelected}
+            isChecked={selected}
+            onChange={handleSelected}
           />
-          <CardAvatar src={avatarUrl || DefaultUserAvatar} alt={username} />
+          <CardAvatar
+            src={avatarUrl || DefaultUserAvatar}
+            alt={username}
+            onClick={handleClickAvatar}
+          />
         </CardAvatarWrapper>
         <CardUserName title={username}>{username}</CardUserName>
-        <ContextMenu ref={contextMenuRef} getContextModel={getOptions} />
+        <ContextMenu ref={contextMenuRef} getContextModel={getOptionsModel} />
         <ContextMenuButton
           className="card__context-menu"
           displayType="toggle"
-          getData={getOptions}
+          getData={getOptionsModel}
           onClick={onClickHandler}
           onClose={onHideContextMenu}
         />
@@ -88,4 +130,4 @@ function Card({
   );
 }
 
-export default Card;
+export default memo(Card, equal);

@@ -1,9 +1,46 @@
+import { ComponentType, useCallback } from "react";
+import AutoSizer from "react-virtualized-auto-sizer";
+import InfiniteLoader from "react-window-infinite-loader";
+import { FixedSizeList, ListChildComponentProps } from "react-window";
+
+import { CustomScrollbarsVirtualList } from "@docspace/components";
+
 import Card from "../Card";
 import Loaders from "../Loaders";
 
-import type { ColumnBodyContentProps } from "./Column.props";
+import type { ColumnBodyContentProps, ListChildDataType } from "./Column.props";
 
-function ColumnBodyContent({ isLoading, filesByRole }: ColumnBodyContentProps) {
+function ColumnBodyContent({
+  isLoading,
+  filesByRole,
+  onSelected,
+  getOptions,
+  setBufferSelectionFileByRole,
+}: ColumnBodyContentProps) {
+  const rowRender: ComponentType<ListChildComponentProps<ListChildDataType>> =
+    useCallback(
+      ({ index, data, style, isScrolling }) => {
+        const { files } = data;
+
+        if (!files) return <></>;
+
+        const file = files[index];
+
+        return (
+          <div key={file.id} style={style}>
+            <Card
+              key={file.id}
+              file={file}
+              onSelected={onSelected}
+              getOptions={getOptions}
+              setBufferSelectionFileByRole={setBufferSelectionFileByRole}
+            />
+          </div>
+        );
+      },
+      [onSelected, getOptions, setBufferSelectionFileByRole]
+    );
+
   if (isLoading) {
     return (
       <>
@@ -19,13 +56,40 @@ function ColumnBodyContent({ isLoading, filesByRole }: ColumnBodyContentProps) {
     );
   }
 
+  const itemCount = filesByRole?.length ?? 0;
+
   return (
     <>
-      {filesByRole?.map((file) => {
-        return (
-          <Card key={file.id} filename={file.title} username={file.title} />
-        );
-      })}
+      <AutoSizer>
+        {({ height }: { height: number }) => (
+          <InfiniteLoader
+            itemCount={itemCount}
+            loadMoreItems={(startIndex, stopIndex) => {}}
+            isItemLoaded={(index) => {
+              return false;
+            }}
+          >
+            {({ onItemsRendered, ref }) => (
+              <FixedSizeList
+                ref={ref}
+                layout="vertical"
+                width={270}
+                height={height}
+                itemSize={120}
+                itemData={{
+                  files: filesByRole,
+                }}
+                overscanCount={3}
+                itemCount={itemCount}
+                onItemsRendered={onItemsRendered}
+                outerElementType={CustomScrollbarsVirtualList}
+              >
+                {rowRender}
+              </FixedSizeList>
+            )}
+          </InfiniteLoader>
+        )}
+      </AutoSizer>
     </>
   );
 }

@@ -5,6 +5,8 @@ interface BoardProps {
   roles: IRole[];
   sectionWidth: number;
   getModel: GetModelFunctionType;
+  clearSelectedFileByRoleMap: VoidFunction;
+  clearBufferSelectionFilesByRole: VoidFunction;
 }
 
 export default BoardProps;

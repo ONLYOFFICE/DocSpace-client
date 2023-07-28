@@ -3130,6 +3130,7 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.21.0
     "@loadable/component": ^5.15.3
+    "@types/react-window-infinite-loader": ^1.0.6
     "@welldone-software/why-did-you-render": ^6.2.3
     axios: ^0.22.0
     cross-fetch: 3.1.5
@@ -8012,6 +8013,25 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: af30e35ff007daf7ba4d3269b12b1236f1620c88988f8f528271814d00a76bb1840b689197197bd2c493f23285072dcaaf47fb6e65cdb9ca853ab72f6b916617
+  languageName: node
+  linkType: hard
+
+"@types/react-window-infinite-loader@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@types/react-window-infinite-loader@npm:1.0.6"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-window": "*"
+  checksum: d4648dfb44614e4f0137d7b77eb1868b0c5252f451a78edfc4520e508157ce7687d4b7d9efd6df8f01e72e0d92224338b8c8d934220f32a3081b528599a25829
+  languageName: node
+  linkType: hard
+
+"@types/react-window@npm:*":
+  version: 1.8.5
+  resolution: "@types/react-window@npm:1.8.5"
+  dependencies:
+    "@types/react": "*"
+  checksum: 5f519e1402300d11b6e6595223feb6499f3227e38da166cbc565773cd7f71862abcf855b7835d391b5119fcfacdfba79d73a965b45f60a293fc1ff25986319ed
   languageName: node
   linkType: hard
 

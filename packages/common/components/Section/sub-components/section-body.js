@@ -8,6 +8,7 @@ import { inject, observer } from "mobx-react";
 
 import Scrollbar from "@docspace/components/scrollbar";
 import DragAndDrop from "@docspace/components/drag-and-drop";
+import { classNames } from "@docspace/components/utils/classNames";
 import {
   tablet,
   desktop,
@@ -78,6 +79,11 @@ const commonStyles = css`
         box-sizing: border-box;
       `};
     ${(props) => !props.withScroll && paddingStyles}
+  }
+
+  .section-wrapper-dashboard {
+    height: 100%;
+    box-sizing: border-box;
   }
 
   .section-wrapper-content {
@@ -290,7 +296,12 @@ class SectionBody extends React.Component {
           !isMobileOnly ? (
             <Scrollbar id="sectionScroll" stype="mediumBlack">
               <div className="section-wrapper">
-                <div className="section-wrapper-content" {...focusProps}>
+                <div
+                  className={classNames("section-wrapper-content", {
+                    ["section-wrapper-dashboard"]: viewAs === "dashboard",
+                  })}
+                  {...focusProps}
+                >
                   {children}
                   {viewAs !== "dashboard" && (
                     <StyledSpacer className="settings-mobile" />

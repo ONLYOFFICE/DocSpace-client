@@ -15,7 +15,7 @@ import List from "./List";
 import Table from "./Table";
 import Board from "./Board";
 
-import DashboardProps from "./Dashboard.props";
+import type DashboardProps from "./Dashboard.props";
 import type { ContextType } from "./types";
 import type { StoreType } from "SRC_DIR/types";
 
@@ -33,18 +33,23 @@ function Dashboard({
   setViewAs,
   clearSelectedRoleMap,
   clearBufferSelectionRole,
+  clearSelectedFileByRoleMap,
+  clearBufferSelectionFilesByRole,
 }: DashboardProps) {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   const onMouseDownOutSide = useCallback((event: MouseEvent) => {
     if (
       !(event.target instanceof HTMLElement) ||
-      !event.target.classList.contains("section-wrapper")
+      (!event.target.classList.contains("section-wrapper") &&
+        !(event.target.dataset.id === "board"))
     ) {
       return;
     }
     clearSelectedRoleMap();
     clearBufferSelectionRole();
+    clearSelectedFileByRoleMap();
+    clearBufferSelectionFilesByRole();
   }, []);
 
   useEffect(() => {
@@ -75,6 +80,8 @@ function Dashboard({
         userID={userID}
         getModel={getModel}
         sectionWidth={sectionWidth}
+        clearSelectedFileByRoleMap={clearSelectedFileByRoleMap}
+        clearBufferSelectionFilesByRole={clearBufferSelectionFilesByRole}
       />
     </>
   );
@@ -94,6 +101,8 @@ export default inject<StoreType>(
       roles,
       clearSelectedRoleMap,
       clearBufferSelectionRole,
+      clearSelectedFileByRoleMap,
+      clearBufferSelectionFilesByRole,
     } = dashboardStore;
 
     const { getModel } = dashboardContextOptionStore;
@@ -117,6 +126,8 @@ export default inject<StoreType>(
       isLoading,
       clearSelectedRoleMap,
       clearBufferSelectionRole,
+      clearSelectedFileByRoleMap,
+      clearBufferSelectionFilesByRole,
       userID,
       getModel,
     };

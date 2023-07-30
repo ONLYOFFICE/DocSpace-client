@@ -1,11 +1,22 @@
 import styled, { css } from "styled-components";
 
 const StyledBaseQuotaComponent = styled.div`
-  .backup_radio-button {
-    margin-top: 16px;
+  .quotas_label {
+    margin-bottom: 20px;
+    p:first-child {
+      margin-bottom: 8px;
+    }
   }
-  .radio-button_content {
-    margin-top: 16px;
+  .toggle-container {
+    margin-bottom: 32px;
+    max-width: 700px;
+    .quotas_toggle-button {
+      position: static;
+    }
+    .toggle_label {
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
   }
 `;
 const StyledDiscSpaceUsedComponent = styled.div`

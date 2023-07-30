@@ -7,9 +7,10 @@ import { conversionToBytes } from "@docspace/common/utils";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import Text from "@docspace/components/text";
+
 import StyledBody from "./StyledComponent";
 
-let timerId = null;
 const QuotaForm = ({
   isLoading,
   maxInputWidth,
@@ -18,12 +19,12 @@ const QuotaForm = ({
   initialPower = 0,
   isError,
   isButtonsEnable = true,
-  setUserQuota,
+  onSave,
+  label,
 }) => {
   const [size, setSize] = useState(initialSize);
   const [power, setPower] = useState(initialPower);
   const [hasError, setHasError] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const { t } = useTranslation(["Common"]);
   const options = [
@@ -73,26 +74,22 @@ const QuotaForm = ({
       }
     }
   };
-
   const onSaveClick = async () => {
     if (isSizeError()) return;
 
-    const size = conversionToBytes(size, power);
+    onSave & onSave(conversionToBytes(size, power));
 
-    timerId = setTimeout(() => setIsProcessing(true), 500);
-    await setUserQuota(size, true, t);
-
-    timerId && clearTimeout(timerId);
-    timerId = null;
-    setIsProcessing(false);
+    setHasError(false);
   };
+
   const onCancelClick = () => {
     console.log("onCancel");
   };
 
-  const isDisabled = isLoading || isProcessing;
+  const isDisabled = isLoading;
   return (
-    <StyledBody maxInputWidth={maxInputWidth}>
+    <StyledBody maxInputWidth={maxInputWidth} label={label}>
+      {label && <Text fontWeight={600}>{label}</Text>}
       <div className="quota-container">
         <TextInput
           className="quota_limit"

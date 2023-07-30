@@ -76,6 +76,7 @@ class ToggleButton extends Component {
       style,
       isLoading,
       noAnimation,
+      name,
     } = this.props;
 
     //console.log("ToggleButton render");
@@ -97,6 +98,7 @@ class ToggleButton extends Component {
           isChecked={this.state.checked}
         >
           <HiddenInput
+            name={name}
             type="checkbox"
             checked={this.state.checked}
             disabled={isDisabled}

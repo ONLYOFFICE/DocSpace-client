@@ -5,6 +5,7 @@ const StyledBody = styled.div`
     display: flex;
     grid-gap: 4px;
     margin-bottom: 16px;
+    ${(props) => props.label && " margin-top: 4px"};
   }
   .quota_limit {
     ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};

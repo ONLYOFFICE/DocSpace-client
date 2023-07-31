@@ -51,7 +51,6 @@ public class SettingsController : BaseSettingsController
     private readonly IConfiguration _configuration;
     private readonly SetupInfo _setupInfo;
     private readonly StatisticManager _statisticManager;
-    private readonly UrlShortener _urlShortener;
     private readonly PasswordHasher _passwordHasher;
     private readonly ILogger _log;
     private readonly TelegramHelper _telegramHelper;
@@ -61,6 +60,7 @@ public class SettingsController : BaseSettingsController
     private readonly QuotaUsageManager _quotaUsageManager;
     private readonly TenantDomainValidator _tenantDomainValidator;
     private readonly QuotaSyncOperation _quotaSyncOperation;
+    private readonly ExternalShare _externalShare;
 
     public SettingsController(
         ILoggerProvider option,
@@ -88,7 +88,6 @@ public class SettingsController : BaseSettingsController
         ProviderManager providerManager,
         FirstTimeTenantSettings firstTimeTenantSettings,
         TelegramHelper telegramHelper,
-        UrlShortener urlShortener,
         PasswordHasher passwordHasher,
         IHttpContextAccessor httpContextAccessor,
         DnsSettings dnsSettings,
@@ -96,7 +95,8 @@ public class SettingsController : BaseSettingsController
         CustomColorThemesSettingsHelper customColorThemesSettingsHelper,
         QuotaSyncOperation quotaSyncOperation,
         QuotaUsageManager quotaUsageManager,
-        TenantDomainValidator tenantDomainValidator
+        TenantDomainValidator tenantDomainValidator, 
+        ExternalShare externalShare
         ) : base(apiContext, memoryCache, webItemManager, httpContextAccessor)
     {
         _log = option.CreateLogger("ASC.Api");
@@ -121,7 +121,6 @@ public class SettingsController : BaseSettingsController
         _setupInfo = setupInfo;
         _statisticManager = statisticManager;
         _passwordHasher = passwordHasher;
-        _urlShortener = urlShortener;
         _telegramHelper = telegramHelper;
         _dnsSettings = dnsSettings;
         _additionalWhiteLabelSettingsHelper = additionalWhiteLabelSettingsHelper;
@@ -129,6 +128,7 @@ public class SettingsController : BaseSettingsController
         _customColorThemesSettingsHelper = customColorThemesSettingsHelper;
         _quotaUsageManager = quotaUsageManager;
         _tenantDomainValidator = tenantDomainValidator;
+        _externalShare = externalShare;
     }
 
     [HttpGet("")]
@@ -136,6 +136,7 @@ public class SettingsController : BaseSettingsController
     public async Task<SettingsDto> GetSettingsAsync(bool? withpassword)
     {
         var studioAdminMessageSettings = await _settingsManager.LoadAsync<StudioAdminMessageSettings>();
+        var tenantCookieSettings = _settingsManager.Load<TenantCookieSettings>();
 
         var settings = new SettingsDto
         {
@@ -149,8 +150,14 @@ public class SettingsController : BaseSettingsController
             TenantStatus = (await _tenantManager.GetCurrentTenantAsync()).Status,
             TenantAlias = Tenant.Alias,
             EnableAdmMess = studioAdminMessageSettings.Enable || await _tenantExtra.IsNotPaidAsync(),
-            LegalTerms = _setupInfo.LegalTerms
+            LegalTerms = _setupInfo.LegalTerms,
+            CookieSettingsEnabled = tenantCookieSettings.Enabled
         };
+
+        if (!_authContext.IsAuthenticated && await _externalShare.GetLinkIdAsync() != default)
+        {
+            settings.SocketUrl = _configuration["web:hub:url"] ?? "";
+        }
 
         if (_authContext.IsAuthenticated)
         {
@@ -162,11 +169,11 @@ public class SettingsController : BaseSettingsController
             settings.UtcHoursOffset = settings.UtcOffset.TotalHours;
             settings.OwnerId = Tenant.OwnerId;
             settings.NameSchemaId = _customNamingPeople.Current.Id;
-            settings.SocketUrl = _configuration["web:hub:url"] ?? "";
             settings.DomainValidator = _tenantDomainValidator;
             settings.ZendeskKey = _setupInfo.ZendeskKey;
             settings.BookTrainingEmail = _setupInfo.BookTrainingEmail;
             settings.DocumentationEmail = _setupInfo.DocumentationEmail;
+            settings.SocketUrl = _configuration["web:hub:url"] ?? "";
 
             settings.Firebase = new FirebaseDto
             {
@@ -176,10 +183,12 @@ public class SettingsController : BaseSettingsController
                 StorageBucket = _configuration["firebase:storageBucket"] ?? "",
                 MessagingSenderId = _configuration["firebase:messagingSenderId"] ?? "",
                 AppId = _configuration["firebase:appId"] ?? "",
-                MeasurementId = _configuration["firebase:measurementId"] ?? ""
+                MeasurementId = _configuration["firebase:measurementId"] ?? "",
+                DatabaseURL = _configuration["firebase:databaseURL"] ?? ""
             };
 
             settings.HelpLink = await _commonLinkUtility.GetHelpLinkAsync(_settingsManager, _additionalWhiteLabelSettingsHelper, true);
+            settings.ApiDocsLink = _configuration["web:api-docs"];
 
             bool debugInfo;
             if (bool.TryParse(_configuration["debug-info:enabled"], out debugInfo))
@@ -443,7 +452,7 @@ public class SettingsController : BaseSettingsController
             catch
             {
                 throw;
-            }
+        }
             finally
             {
                 _semaphore.Release();
@@ -692,21 +701,6 @@ public class SettingsController : BaseSettingsController
         var consumer = _consumerFactory.GetByKey<Consumer>(inDto.Name);
 
         var validateKeyProvider = consumer as IValidateKeysProvider;
-
-        if (validateKeyProvider != null)
-        {
-            try
-            {
-                if (validateKeyProvider is BitlyLoginProvider bitly)
-                {
-                    _urlShortener.Instance = null;
-                }
-            }
-            catch (Exception e)
-            {
-                _log.ErrorSaveAuthKeys(e);
-            }
-        }
 
         if (inDto.Props.All(r => string.IsNullOrEmpty(r.Value)))
         {

@@ -37,12 +37,12 @@ const UsersTableRow = ({
   dublicate,
   isChecked,
   checkbox,
-  onChangeAllCheckbox,
+  onChangeCheckbox,
 }) => {
   const isExistingUser = dublicate !== "—";
 
   const onChange = (e) => {
-    onChangeAllCheckbox(id, e.target.checked);
+    onChangeCheckbox(id, e.target.checked);
   };
 
   return (

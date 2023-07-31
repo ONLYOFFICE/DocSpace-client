@@ -45,7 +45,7 @@ const TableView = (props) => {
   const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
 
-  const onChangeCheckbox = (e) => {
+  const onChangeAllCheckbox = (e) => {
     setIsChecked(e.target.checked);
     if (e.target.checked) {
       setCheckbox(mockData.map((data) => data.id));
@@ -54,7 +54,7 @@ const TableView = (props) => {
     }
   };
 
-  const onChangeAllCheckbox = (id, checked) => {
+  const onChangeCheckbox = (id, checked) => {
     if (checked) {
       setCheckbox([...checkbox, id]);
     } else {
@@ -88,7 +88,7 @@ const TableView = (props) => {
         userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        onChangeCheckbox={onChangeCheckbox}
+        onChangeAllCheckbox={onChangeAllCheckbox}
         isChecked={isChecked}
         isIndeterminate={checkbox.length && !isChecked}
       />
@@ -111,7 +111,7 @@ const TableView = (props) => {
             dublicate={data.dublicate}
             checkbox={checkbox}
             isChecked={isChecked}
-            onChangeAllCheckbox={onChangeAllCheckbox}
+            onChangeCheckbox={onChangeCheckbox}
           />
         ))}
       </TableBody>

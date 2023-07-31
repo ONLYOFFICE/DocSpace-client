@@ -352,7 +352,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-javascript-sdk",
-        key: "5-1",
+        key: "6-1",
         icon: "",
         link: "javascript-sdk",
         tKey: "DeveloperTools",
@@ -412,7 +412,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "8",
+    key: "9",
     icon: GiftReactSvgUrl,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -420,7 +420,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "8-0",
+        key: "9-0",
         icon: "",
         link: "",
         tKey: "Common:FreeProFeatures",

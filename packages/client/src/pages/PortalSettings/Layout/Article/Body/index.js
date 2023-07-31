@@ -63,6 +63,10 @@ const getTreeItems = (data, path, t) => {
         return t("Common:Bonus");
       case "FreeProFeatures":
         return "Common:FreeProFeatures";
+      case "DataImport":
+        return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
       case "ImportFromOnlyoffice":
@@ -263,6 +267,10 @@ const ArticleBodyContent = (props) => {
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
         return "Common:FreeProFeatures";
+      case "DataImport":
+        return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
       case "ImportFromNextcloud":
         return t("ImportFromNextcloud");
       case "ImportFromOnlyoffice":

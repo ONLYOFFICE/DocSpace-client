@@ -550,7 +550,7 @@ public class FileStorageService //: IFileStorageService
                 return 0;
             })),
             FolderInfo = parent,
-           // New = await newTask   //TODO
+            //New = await newTask   //TODO
         };
 
         return result;
@@ -567,6 +567,21 @@ public class FileStorageService //: IFileStorageService
         {
             entries.AddRange(items);
         }
+
+        IEnumerable<FileEntry> data = entries;
+        var internalFiles = new List<File<int>>();
+
+        foreach (var item in data.Where(r => r != null))
+        {
+            if (item.FileEntryType == FileEntryType.File)
+            {
+                if (item is File<int> internalFile)
+                {
+                    internalFiles.Add(internalFile);
+                }
+            }
+        }
+        await _entryStatusManager.SetFileStatusAsync(internalFiles);
 
         return entries;
 
@@ -1471,6 +1486,8 @@ public class FileStorageService //: IFileStorageService
         var tag = Tag.Role(role.TagId, role.Title, Guid.Empty, file);
 
         await tagDao.SaveTagLinkAsync(tag);
+
+        await _fileMarker.MarkAsNewAsync(file);
 
         return file;
     }

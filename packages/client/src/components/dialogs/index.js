@@ -34,6 +34,7 @@ import DeleteLinkDialog from "./DeleteLinkDialog";
 import RoomSharingDialog from "./RoomSharingDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import ReportDialog from "./ReportDialog";
+import CancelUploadDialog from "./CancelUploadDialog";
 
 export {
   EmptyTrashDialog,
@@ -72,4 +73,5 @@ export {
   RoomSharingDialog,
   MoveToPublicRoom,
   ReportDialog,
+  CancelUploadDialog,
 };

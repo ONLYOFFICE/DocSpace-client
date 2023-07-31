@@ -30,6 +30,7 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
+  cancelUploadDialogVisible = false;
 
   isFolderActions = false;
   roomCreation = false;
@@ -350,6 +351,10 @@ class DialogsStore {
     this.moveToPublicRoomData = data;
   };
 
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
+  };
+
   get someDialogIsOpen() {
     return (
       this.sharingPanelVisible ||
@@ -381,7 +386,8 @@ class DialogsStore {
       this.unsavedChangesDialogVisible ||
       this.deleteLinkDialogVisible ||
       this.embeddingPanelIsVisible ||
-      this.moveToPublicRoomVisible
+      this.moveToPublicRoomVisible ||
+      this.cancelUploadDialogVisible
     );
   }
 

@@ -360,7 +360,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "6-1",
+        key: "6-2",
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",

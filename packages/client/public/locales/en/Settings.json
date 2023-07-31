@@ -103,7 +103,7 @@
   "ForcePathStyle": "Force Path Style",
   "Import": "Import",
   "ImportFromGoogle": "Import from Google Workspace",
-  "ImportFromNextcloud": "Import from Nextcloud Workspace",
+  "ImportFromNextcloud": "Import from Nextcloud",
   "ImportFromOnlyoffice": "Import from Onlyoffice Workspace",
   "IPSecurity": "IP Security",
   "IPSecurityDescription": "IP Security is used to restrict login to the space from all IP addresses except certain addresses.",

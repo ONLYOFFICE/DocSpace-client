@@ -41,8 +41,26 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE
 
 const TableView = (props) => {
   const { userId, viewAs, setViewAs, sectionWidth } = props;
-  const [hideColumns, setHideColumns] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
+
+  const onChangeCheckbox = (e) => {
+    setIsChecked(e.target.checked);
+    if (e.target.checked) {
+      setCheckbox(mockData.map((data) => data.id));
+    } else {
+      setCheckbox([]);
+    }
+  };
+
+  const onChangeAllCheckbox = (id, checked) => {
+    if (checked) {
+      setCheckbox([...checkbox, id]);
+    } else {
+      setCheckbox([...checkbox.filter((item) => item !== id)]);
+    }
+  };
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -70,7 +88,9 @@ const TableView = (props) => {
         userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        setHideColumns={setHideColumns}
+        onChangeCheckbox={onChangeCheckbox}
+        isChecked={isChecked}
+        isIndeterminate={checkbox.length && !isChecked}
       />
       <TableBody
         itemHeight={49}
@@ -85,10 +105,13 @@ const TableView = (props) => {
         {mockData.map((data) => (
           <UsersTableRow
             key={data.id}
+            id={data.id}
             displayName={data.displayName}
             email={data.email}
             dublicate={data.dublicate}
-            hideColumns={hideColumns}
+            checkbox={checkbox}
+            isChecked={isChecked}
+            onChangeAllCheckbox={onChangeAllCheckbox}
           />
         ))}
       </TableBody>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import TableHeader from "@docspace/components/table-container/TableHeader";
@@ -32,7 +32,9 @@ const UsersTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
-    setHideColumns,
+    onChangeCheckbox,
+    isChecked,
+    isIndeterminate,
   } = props;
 
   const defaultColumns = [
@@ -45,10 +47,9 @@ const UsersTableHeader = (props) => {
       active: true,
       minWidth: 180,
       checkbox: {
-        value: true,
-        onChange: (e) => {
-          console.log(e);
-        },
+        value: isChecked,
+        onChange: onChangeCheckbox,
+        isIndeterminate: isIndeterminate,
       },
       onChange: onColumnChange,
     },
@@ -69,6 +70,10 @@ const UsersTableHeader = (props) => {
   ];
 
   const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns));
+  }, [isIndeterminate, isChecked]);
 
   function onColumnChange(key, e) {
     const columnIndex = columns.findIndex((c) => c.key === key);
@@ -96,7 +101,6 @@ const UsersTableHeader = (props) => {
       checkboxMargin="12px"
       showSettings={false}
       useReactWindow
-      setHideColumns={setHideColumns}
       infoPanelVisible={false}
     />
   );

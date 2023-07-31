@@ -1,4 +1,3 @@
-import { useState } from "react";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
@@ -31,19 +30,25 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const UsersTableRow = ({ displayName, email, dublicate }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
+const UsersTableRow = ({
+  id,
+  displayName,
+  email,
+  dublicate,
+  isChecked,
+  checkbox,
+  onChangeAllCheckbox,
+}) => {
   const isExistingUser = dublicate !== "—";
 
-  const onChangeCheckbox = () => {
-    setIsChecked((prev) => !prev);
+  const onChange = (e) => {
+    onChangeAllCheckbox(id, e.target.checked);
   };
 
   return (
     <StyledTableRow checked={isChecked}>
       <TableCell>
-        <Checkbox onChange={onChangeCheckbox} isChecked={isChecked} />
+        <Checkbox isChecked={checkbox.includes(id)} onChange={onChange} />
         <Text fontWeight={600}>{displayName}</Text>
       </TableCell>
 

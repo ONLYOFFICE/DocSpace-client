@@ -89,11 +89,11 @@ const TableHeaderCell = ({
     >
       <div className="table-container_header-item">
         <div className="header-container-text-wrapper">
-          {checkbox && (
+          {checkbox && (checkbox.isIndeterminate || checkbox.value) && (
             <Checkbox
-              isIndeterminate
               onChange={checkbox.onChange}
-              checked={checkbox.value}
+              isChecked={checkbox.value}
+              isIndeterminate={checkbox.isIndeterminate}
             />
           )}
 

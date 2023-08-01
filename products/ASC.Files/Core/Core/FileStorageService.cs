@@ -525,6 +525,21 @@ public class FileStorageService //: IFileStorageService
             entries.AddRange(items);
         }
 
+        IEnumerable<FileEntry> data = entries;
+        var internalFiles = new List<File<int>>();
+
+        foreach (var item in data.Where(r => r != null))
+        {
+            if (item.FileEntryType == FileEntryType.File)
+            {
+                if (item is File<int> internalFile)
+                {
+                    internalFiles.Add(internalFile);
+                }
+            }
+        }
+        await _entryStatusManager.SetFileStatusAsync(internalFiles);
+
         var breadCrumbsTask = _entryManager.GetBreadCrumbsAsync(boardId, folderDao);
         var breadCrumbs = await breadCrumbsTask;
 

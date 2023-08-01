@@ -556,12 +556,12 @@ public class FileStorageService //: IFileStorageService
         return result;
 
     }
-    public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T formId, int roleId)
+    public async Task<List<FileEntry>> GetFilesByRole<T>(T formId, int roleId)
     {
         var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
         var files = _fileSecurity.FilterReadAsync(boardRolesDao.GetBoardFilesByRole(formId, roleId)).ToListAsync();
 
-        List<FileEntry<T>> entries = new();
+        List<FileEntry> entries = new();
 
         foreach (var items in await Task.WhenAll(files.AsTask()))
         {

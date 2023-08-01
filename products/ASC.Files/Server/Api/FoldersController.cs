@@ -133,11 +133,14 @@ public abstract class FoldersController<T> : ApiControllerBase
     }
 
     [HttpGet("board/{boardId}/filesbyrole")]
-    public async Task<List<FileEntry<T>>> GetFilesByRole(T boardId, int? roleId)
+    public async IAsyncEnumerable<FileEntryDto> GetFilesByRole(T boardId, int? roleId)
     {
         var files = await _foldersControllerHelper.GetFilesByRole(boardId, roleId);
 
-        return files;
+        foreach (var e in files)
+        {
+            yield return await GetFileEntryWrapperAsync(e);
+        }
     }
 
     [HttpGet("board/{boardId}/role")]

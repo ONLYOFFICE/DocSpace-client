@@ -93,7 +93,7 @@ public class FoldersControllerHelper : FilesHelperBase
         return boardRoleContentWrapper.NotFoundIfNull();
 
     }
-    public async Task<List<FileEntry<T>>> GetFilesByRole<T>(T folderId, int? roleId)
+    public async Task<List<FileEntry>> GetFilesByRole<T>(T folderId, int? roleId)
     {
         return await _fileStorageService.GetFilesByRole(folderId, roleId ?? 0);
     }

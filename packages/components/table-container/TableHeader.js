@@ -120,7 +120,11 @@ class TableHeader extends React.Component {
     const defaultColumn = document.getElementById("column_" + colIndex);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
-    if (column2Width + offset >= defaultMinColumnSize) {
+    const size = defaultColumn.dataset.minWidth
+      ? defaultColumn.dataset.minWidth
+      : defaultMinColumnSize;
+
+    if (column2Width + offset >= size) {
       widths[+columnIndex] = newWidth + "px";
       widths[colIndex] = column2Width + offset + "px";
     } else {
@@ -501,6 +505,7 @@ class TableHeader extends React.Component {
             index == tableContainer.length - 1 ||
             (column ? column.dataset.enable === "true" : item !== "0px");
           const defaultColumnSize = column && column.dataset.defaultSize;
+          const minColumnWidth = column && column.dataset.minWidth;
 
           const isActiveNow = item === "0px" && enable;
           if (isActiveNow && column) activeColumnIndex = index;
@@ -523,13 +528,16 @@ class TableHeader extends React.Component {
           } else if (item !== `${settingsSize}px`) {
             const percent = (this.getSubstring(item) / oldWidth) * 100;
 
+            const itemSize =
+              ((containerWidth - defaultSize - settingsSize) * percent) / 100;
+
             const newItemWidth = defaultColumnSize
               ? `${defaultColumnSize}px`
               : percent === 0
-                ? `${minColumnSize}px`
-                : ((containerWidth - defaultSize - settingsSize) * percent) /
-                100 +
-                "px";
+              ? `${minColumnSize}px`
+              : itemSize < minColumnWidth
+              ? `${minColumnWidth}px`
+              : `${itemSize}px`;
 
             gridTemplateColumns.push(newItemWidth);
           } else {

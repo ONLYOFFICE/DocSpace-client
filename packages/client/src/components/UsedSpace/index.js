@@ -44,7 +44,7 @@ const UsedSpace = (props) => {
   ];
 
   const usedSpace = getConvertedSize(t, 560);
-  const spaceLimited = getConvertedSize(t, 400);
+  const spaceLimited = getConvertedSize(t, 4000);
 
   const selectedOption = isCustomQuota
     ? { title: spaceLimited, label: spaceLimited }

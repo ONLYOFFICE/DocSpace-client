@@ -58,7 +58,7 @@ class PeopleTableHeader extends React.Component {
         resizable: true,
         onChange: this.onColumnChange,
         onClick: () => {},
-        minWidth: 177,
+        minWidth: 179,
       },
     ];
 

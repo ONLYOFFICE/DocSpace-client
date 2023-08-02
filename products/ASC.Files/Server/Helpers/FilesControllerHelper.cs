@@ -46,7 +46,6 @@ public class FilesControllerHelper : FilesHelperBase
         ApiContext apiContext,
         FileStorageService fileStorageService,
         FolderContentDtoHelper folderContentDtoHelper,
-        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         IHttpContextAccessor httpContextAccessor,
         FolderDtoHelper folderDtoHelper,
         ILogger<FilesControllerHelper> logger,
@@ -64,7 +63,6 @@ public class FilesControllerHelper : FilesHelperBase
             apiContext,
             fileStorageService,
             folderContentDtoHelper,
-            boardRoleContentDtoHelper,
             httpContextAccessor,
             folderDtoHelper)
     {

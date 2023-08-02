@@ -31,9 +31,12 @@ public class BoardsControllerInternal : BoardsController<int>
 {
     public BoardsControllerInternal(
         FoldersControllerHelper foldersControllerHelper,
+        FileStorageService fileStorageService,
+        ApiContext apiContext,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper)
-        : base(foldersControllerHelper, folderDtoHelper, fileDtoHelper)
+        : base(foldersControllerHelper, fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
     {
     }
 }
@@ -42,9 +45,12 @@ public class BoardsControllerThirdparty : BoardsController<string>
 {
     public BoardsControllerThirdparty(
         FoldersControllerHelper foldersControllerHelper,
+        FileStorageService fileStorageService,
+        ApiContext apiContext,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper)
-        : base(foldersControllerHelper, folderDtoHelper, fileDtoHelper)
+        : base(foldersControllerHelper, fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
     {
     }
 }
@@ -52,18 +58,28 @@ public class BoardsControllerThirdparty : BoardsController<string>
 public abstract class BoardsController<T> : ApiControllerBase
 {
     private readonly FoldersControllerHelper _foldersControllerHelper;
+    protected readonly FileStorageService _fileStorageService;
+    private readonly ApiContext _apiContext;
+    protected readonly BoardRoleContentDtoHelper _boardRoleContentDtoHelper;
+
     protected BoardsController(
         FoldersControllerHelper foldersControllerHelper,
+        FileStorageService fileStorageService,
+        ApiContext apiContext,
+        BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper) : base(folderDtoHelper, fileDtoHelper)
     {
-       _foldersControllerHelper = foldersControllerHelper;
+        _foldersControllerHelper = foldersControllerHelper;
+        _fileStorageService = fileStorageService;
+        _apiContext = apiContext;
+        _boardRoleContentDtoHelper = boardRoleContentDtoHelper;
     }
 
     [HttpGet("board/{boardId}/filesbyrole")]
     public async IAsyncEnumerable<FileEntryDto> GetFilesByRole(T boardId, int? roleId)
     {
-        var files = await _foldersControllerHelper.GetFilesByRole(boardId, roleId);
+        var files = await _fileStorageService.GetFilesByRole(boardId, roleId ?? 0);
 
         foreach (var e in files)
         {
@@ -75,7 +91,10 @@ public abstract class BoardsController<T> : ApiControllerBase
     [HttpGet("board/{boardId}/role")]
     public async Task<BoardRoleContentDto<T>> GetBoardRole(T boardId, int? roleId)
     {
-        var boardRole = await _foldersControllerHelper.GetBoardRole(boardId, roleId);
+        var items = await _fileStorageService.GetBoardRoleItemsAsync(boardId, roleId ?? 0);
+        var startIndex = Convert.ToInt32(_apiContext.StartIndex);
+
+        var boardRole = await _boardRoleContentDtoHelper.GetAsync(items, boardId, roleId ?? 0, startIndex);
 
         return boardRole.NotFoundIfNull();
     }

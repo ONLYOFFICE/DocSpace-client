@@ -1,7 +1,7 @@
 import Row from "@docspace/components/row";
-import UsersRowContent from "./UsersRowContent";
+import UsersTypeRowContent from "./UsersTypeRowContent";
 
-const UsersRow = (props) => {
+const UsersTypeRow = (props) => {
   const { isChecked, onChangeCheckbox, checkbox, data, sectionWidth, id } =
     props;
 
@@ -19,11 +19,11 @@ const UsersRow = (props) => {
         checkbox={checkbox}
         onClick={onChange}
       >
-        <UsersRowContent
+        <UsersTypeRowContent
           sectionWidth={sectionWidth}
           displayName={data.displayName}
           email={data.email}
-          dublicate={data.dublicate}
+          type={data.type}
           isChecked={isChecked}
           onChangeCheckbox={onChangeCheckbox}
         />
@@ -32,4 +32,4 @@ const UsersRow = (props) => {
   );
 };
 
-export default UsersRow;
+export default UsersTypeRow;

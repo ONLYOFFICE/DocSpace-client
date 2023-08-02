@@ -4,7 +4,7 @@ import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import SearchInput from "@docspace/components/search-input";
 import RowContainer from "@docspace/components/row-container";
-import UsersRow from "./UsersRow";
+import UsersTypeRow from "./UsersTypeRow";
 import { mockData } from "../../mockData.js";
 
 const StyledRowContainer = styled(RowContainer)`
@@ -43,7 +43,7 @@ const RowView = (props) => {
         placeholder="Search"
       />
       {mockData.map((data) => (
-        <UsersRow
+        <UsersTypeRow
           key={data.id}
           id={data.id}
           data={data}

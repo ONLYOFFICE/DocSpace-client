@@ -4,8 +4,8 @@ import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
 import styled from "styled-components";
 
-import UsersTableHeader from "./UsersTableHeader";
-import UsersTableRow from "./UsersTableRow";
+import UsersTypeTableHeader from "./UsersTypeTableHeader";
+import UsersTypeTableRow from "./UsersTypeTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 import SearchInput from "@docspace/components/search-input";
@@ -82,7 +82,7 @@ const TableView = (props) => {
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"
       />
-      <UsersTableHeader
+      <UsersTypeTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         userId={userId}
@@ -103,12 +103,12 @@ const TableView = (props) => {
         itemCount={mockData.length}
       >
         {mockData.map((data) => (
-          <UsersTableRow
+          <UsersTypeTableRow
             key={data.id}
             id={data.id}
             displayName={data.displayName}
             email={data.email}
-            dublicate={data.dublicate}
+            type={data.type}
             checkbox={checkbox}
             isChecked={isChecked}
             onChangeCheckbox={onChangeCheckbox}

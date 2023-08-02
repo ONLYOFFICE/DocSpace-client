@@ -132,25 +132,6 @@ public abstract class FoldersController<T> : ApiControllerBase
         return folder.NotFoundIfNull();
     }
 
-    [HttpGet("board/{boardId}/filesbyrole")]
-    public async IAsyncEnumerable<FileEntryDto> GetFilesByRole(T boardId, int? roleId)
-    {
-        var files = await _foldersControllerHelper.GetFilesByRole(boardId, roleId);
-
-        foreach (var e in files)
-        {
-            yield return await GetFileEntryWrapperAsync(e);
-        }
-    }
-
-    [HttpGet("board/{boardId}/role")]
-    public async Task<BoardRoleContentDto<T>> GetBoardRole(T boardId, int? roleId)
-    {
-        var boardRole = await _foldersControllerHelper.GetBoardRole(boardId, roleId);
-
-        return boardRole.NotFoundIfNull();
-    }
-
     /// <summary>
     /// Returns a detailed information about the folder with the ID specified in the request
     /// </summary>

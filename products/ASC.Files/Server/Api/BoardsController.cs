@@ -30,13 +30,12 @@ namespace ASC.Files.Api;
 public class BoardsControllerInternal : BoardsController<int>
 {
     public BoardsControllerInternal(
-        FoldersControllerHelper foldersControllerHelper,
         FileStorageService fileStorageService,
         ApiContext apiContext,
         BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper)
-        : base(foldersControllerHelper, fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
+        : base(fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
     {
     }
 }
@@ -44,33 +43,29 @@ public class BoardsControllerInternal : BoardsController<int>
 public class BoardsControllerThirdparty : BoardsController<string>
 {
     public BoardsControllerThirdparty(
-        FoldersControllerHelper foldersControllerHelper,
         FileStorageService fileStorageService,
         ApiContext apiContext,
         BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper)
-        : base(foldersControllerHelper, fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
+        : base(fileStorageService, apiContext, boardRoleContentDtoHelper, folderDtoHelper, fileDtoHelper)
     {
     }
 }
 
 public abstract class BoardsController<T> : ApiControllerBase
 {
-    private readonly FoldersControllerHelper _foldersControllerHelper;
     protected readonly FileStorageService _fileStorageService;
     private readonly ApiContext _apiContext;
     protected readonly BoardRoleContentDtoHelper _boardRoleContentDtoHelper;
 
     protected BoardsController(
-        FoldersControllerHelper foldersControllerHelper,
         FileStorageService fileStorageService,
         ApiContext apiContext,
         BoardRoleContentDtoHelper boardRoleContentDtoHelper,
         FolderDtoHelper folderDtoHelper,
         FileDtoHelper fileDtoHelper) : base(folderDtoHelper, fileDtoHelper)
     {
-        _foldersControllerHelper = foldersControllerHelper;
         _fileStorageService = fileStorageService;
         _apiContext = apiContext;
         _boardRoleContentDtoHelper = boardRoleContentDtoHelper;
@@ -86,7 +81,6 @@ public abstract class BoardsController<T> : ApiControllerBase
             yield return await GetFileEntryWrapperAsync(e);
         }
     }
-
 
     [HttpGet("board/{boardId}/role")]
     public async Task<BoardRoleContentDto<T>> GetBoardRole(T boardId, int? roleId)

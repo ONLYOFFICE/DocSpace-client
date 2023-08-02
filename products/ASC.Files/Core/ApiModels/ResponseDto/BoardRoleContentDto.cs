@@ -103,8 +103,7 @@ public class BoardRoleContentDtoHelper
             Current = await currentTask
         };
 
-        var tasks = await Task.WhenAll(filesTask.AsTask());
-        result.Files = tasks[0];
+        result.Files = await filesTask.AsTask();
 
         return result;
 

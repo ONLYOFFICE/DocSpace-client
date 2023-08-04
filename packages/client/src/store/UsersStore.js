@@ -29,8 +29,13 @@ class UsersStore {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
     if (!this.authStore.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (filterData.group && filterData.group === "root")

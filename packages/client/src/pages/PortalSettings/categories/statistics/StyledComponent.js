@@ -19,6 +19,7 @@ const StyledBaseQuotaComponent = styled.div`
     }
   }
 `;
+
 const StyledDiscSpaceUsedComponent = styled.div`
   margin-top: 16px;
   .disk-space_title {
@@ -72,10 +73,25 @@ const StyledFolderTagColor = styled.div`
   margin-right: 4px;
 `;
 
+const StyledStatistics = styled.div`
+  .statistics-description {
+    margin-bottom: 20px;
+  }
+  .statistics-container {
+    margin-bottom: 40px;
+  }
+  .item-statistic {
+    margin-bottom: 4px;
+  }
+  .statistics_title {
+    margin-bottom: 8px;
+  }
+`;
 export {
   StyledBaseQuotaComponent,
   StyledDiscSpaceUsedComponent,
   StyledFolderTagSection,
   StyledFolderTagColor,
   StyledDiagramComponent,
+  StyledStatistics,
 };

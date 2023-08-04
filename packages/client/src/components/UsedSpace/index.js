@@ -13,6 +13,9 @@ const UsedSpace = (props) => {
     isCustomQuota = true,
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
+    isDisabledQuotaChange,
+    quotaLimit = 0,
+    usedQuota = 0,
   } = props;
   const [action, setAction] = useState("no-quota");
   const { t } = useTranslation(["Common"]);
@@ -43,28 +46,36 @@ const UsedSpace = (props) => {
     },
   ];
 
-  const usedSpace = getConvertedSize(t, 560);
-  const spaceLimited = getConvertedSize(t, 4000);
+  const usedSpace = getConvertedSize(t, usedQuota);
+  const spaceLimited =
+    quotaLimit === -1 ? "Unlimited" : getConvertedSize(t, quotaLimit);
 
   const selectedOption = isCustomQuota
     ? { title: spaceLimited, label: spaceLimited }
     : options.find((elem) => elem.key === action);
 
   return (
-    <StyledBody hideColumns={hideColumns}>
+    <StyledBody
+      hideColumns={hideColumns}
+      isDisabledQuotaChange={isDisabledQuotaChange}
+    >
       <div className="info-account-quota">
-        <Text fontWeight={600}>{usedSpace} /</Text>
-        <ComboBox
-          selectedOption={selectedOption}
-          options={options}
-          onSelect={onQuotaChange}
-          scaled={false}
-          size="content"
-          displaySelectedOption
-          modernView
-          isLoading={changeQuotaDialogVisible}
-          manualWidth={"fit-content"}
-        />
+        <Text fontWeight={600}>
+          {usedSpace} / {isDisabledQuotaChange ? spaceLimited : ""}
+        </Text>
+        {!isDisabledQuotaChange && (
+          <ComboBox
+            selectedOption={selectedOption}
+            options={options}
+            onSelect={onQuotaChange}
+            scaled={false}
+            size="content"
+            displaySelectedOption
+            modernView
+            isLoading={changeQuotaDialogVisible}
+            manualWidth={"fit-content"}
+          />
+        )}
       </div>
     </StyledBody>
   );

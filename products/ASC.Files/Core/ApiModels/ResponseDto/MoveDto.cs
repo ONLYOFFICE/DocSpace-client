@@ -24,21 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Web.Api.ApiModels.RequestsDto;
+namespace ASC.Files.Core.ApiModels.ResponseDto;
 
 /// <summary>
 /// </summary>
-public class LoginSettingsRequestDto
+public class MoveDto
 {
-    /// <summary>Maximum number of the user attempts to log in</summary>
-    /// <type>System.Int32, System</type>
-    public int AttemptCount { get; set; }
+    /// <summary>Document config</summary>
+    /// <type>ASC.Files.Core.ApiModels.ResponseDto.FileEntryDto, ASC.Files.Core</type>
+    public FileEntryDto EntryFrom { get; set; }
 
-    /// <summary>The duration of the account suspension for unsuccessful login attempts</summary>
-    /// <type>System.Int32, System</type>
-    public int BlockTime { get; set; }
-
-    /// <summary>Expected server response time</summary>
-    /// <type>System.Int32, System</type>
-    public int CheckPeriod { get; set; }
+    /// <summary>Document config</summary>
+    /// <type>ASC.Files.Core.ApiModels.ResponseDto.FileEntryDto, ASC.Files.Core</type>
+    public FileEntryDto EntryTo { get; set; }
 }

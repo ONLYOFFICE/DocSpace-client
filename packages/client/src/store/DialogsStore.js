@@ -93,12 +93,12 @@ class DialogsStore {
     this.restoreAllArchive = restoreAllArchive;
   };
 
-  setArchiveDialogVisible = (archiveDialogVisible) => {
-    this.archiveDialogVisible = archiveDialogVisible;
+  setArchiveDialogVisible = (visible) => {
+    this.archiveDialogVisible = visible;
   };
 
-  setRestoreRoomDialogVisible = (restoreRoomDialogVisible) => {
-    this.restoreRoomDialogVisible = restoreRoomDialogVisible;
+  setRestoreRoomDialogVisible = (visible) => {
+    this.restoreRoomDialogVisible = visible;
   };
 
   setSharingPanelVisible = (sharingPanelVisible) => {
@@ -117,18 +117,36 @@ class DialogsStore {
     this.ownerPanelVisible = ownerPanelVisible;
   };
 
-  setMoveToPanelVisible = (moveToPanelVisible) => {
-    !moveToPanelVisible && this.deselectActiveFiles();
-    this.moveToPanelVisible = moveToPanelVisible;
+  setMoveToPanelVisible = (visible) => {
+    !visible && this.deselectActiveFiles();
+
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection
+    )
+      return;
+
+    this.moveToPanelVisible = visible;
   };
 
-  setRestoreAllPanelVisible = (restoreAllPanelVisible) => {
-    this.restoreAllPanelVisible = restoreAllPanelVisible;
+  setRestoreAllPanelVisible = (visible) => {
+    this.restoreAllPanelVisible = visible;
   };
 
-  setCopyPanelVisible = (copyPanelVisible) => {
-    !copyPanelVisible && this.deselectActiveFiles();
-    this.copyPanelVisible = copyPanelVisible;
+  setCopyPanelVisible = (visible) => {
+    !visible && this.deselectActiveFiles();
+
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection
+    ) {
+      console.log("No files selected");
+      return;
+    }
+
+    this.copyPanelVisible = visible;
   };
 
   setRoomCreation = (roomCreation) => {

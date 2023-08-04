@@ -18,7 +18,12 @@ const Wrapper = styled.div`
 
   .upload-backup-input {
     height: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+  }
+
+  .upload-backup-text {
+    font-size: 12px;
+    margin-bottom: 12px;
   }
 `;
 
@@ -59,11 +64,16 @@ const FirstStep = ({
         />
       </Wrapper>
       {isLoading ? (
-        <Button
-          size="small"
-          label={t("Common:CancelButton")}
-          onClick={onClickButton}
-        />
+        <Wrapper>
+          <Text className="upload-backup-text">
+            {t("Settings:BackupFileUploading")}
+          </Text>
+          <Button
+            size="small"
+            label={t("Common:CancelButton")}
+            onClick={onClickButton}
+          />
+        </Wrapper>
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"

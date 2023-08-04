@@ -1,5 +1,6 @@
-import { Consumer } from "@docspace/components/utils/context";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { Consumer } from "@docspace/components/utils/context";
 import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -8,6 +9,13 @@ import HelpButton from "@docspace/components/help-button";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
+
+const StyledText = styled(Text)`
+  color: #f21c0e;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,6 +41,11 @@ const Wrapper = styled.div`
 
 const SecondStep = (props) => {
   const { t, onNextStepClick, onPrevStepClick, viewAs, showReminder } = props;
+  const [isExceeded, setIsExceeded] = useState(false);
+  const selectedUsers = 0;
+  const totalUsers = 10;
+  const licencelimit = 0;
+  const totalLicenceLimit = 100;
 
   return (
     <>
@@ -45,17 +58,21 @@ const SecondStep = (props) => {
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
       />
+      {isExceeded && <StyledText>{t("Settings:UserLimitExceeded")}</StyledText>}
       <Wrapper>
-        <Text className="selected-users-count">Selected: 0/10 users</Text>
+        <Text className="selected-users-count">
+          {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
+        </Text>
         <Text className="selected-admins-count">
-          License limit Admins/Power: 0/100
+          {t("Settings:LicenseLimitCounter", {
+            licencelimit,
+            totalLicenceLimit,
+          })}
         </Text>
         <HelpButton
           place="right"
           offsetRight={0}
-          tooltipContent={
-            <Text fontSize="13px">Paste you tooltip content here</Text>
-          }
+          tooltipContent={<Text>{t("Settings:LicenseLimitDescription")}</Text>}
         />
       </Wrapper>
 

@@ -7,6 +7,7 @@ import DiskSpaceUsedComponent from "./StorageSpaceUsed";
 import MainInfoComponent from "./MainInfo";
 import Filter from "@docspace/common/api/people/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
+import Divider from "./sub-components/Divider";
 
 const FILTER_COUNT = 5;
 
@@ -39,8 +40,11 @@ const StorageManagement = ({ fetchRooms, getUsersList }) => {
   return (
     <>
       <MainInfoComponent />
+
       <DiskSpaceUsedComponent />
+      <Divider />
       <QuotasComponent />
+      <Divider />
       <StatisticsComponent />
     </>
   );

@@ -74,6 +74,8 @@ const StyledFolderTagColor = styled.div`
 `;
 
 const StyledStatistics = styled.div`
+  max-width: 700px;
+
   .statistics-description {
     margin-bottom: 20px;
   }
@@ -87,6 +89,13 @@ const StyledStatistics = styled.div`
     margin-bottom: 8px;
   }
 `;
+
+const StyledDivider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: #ddd;
+  margin: 28px 0 28px 0;
+`;
 export {
   StyledBaseQuotaComponent,
   StyledDiscSpaceUsedComponent,
@@ -94,4 +103,5 @@ export {
   StyledFolderTagColor,
   StyledDiagramComponent,
   StyledStatistics,
+  StyledDivider,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import RowContainer from "@docspace/components/row-container";
+
 import Row from "@docspace/components/row";
 import Text from "@docspace/components/text";
 import styled, { css } from "styled-components";

@@ -24,7 +24,20 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    navigate(role.url, { state: { fromDashboard: true } });
+    // const state = {
+    //   title: parentNavigationPath?.title ?? "",
+    //   isRoot: navigationPath.length === 1,
+    //   rootFolderType: rootFolderType,
+    // };
+
+    navigate(role.url, {
+      state: {
+        fromDashboard: true,
+        title: role.title,
+        isRoot: false,
+        isRoom: false,
+      },
+    });
   };
 
   const onSelect = (checked: boolean, role: IRole) => {

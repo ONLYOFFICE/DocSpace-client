@@ -16,3 +16,5 @@ export type {
   RoleInterruptedType,
   RoleTypeOwn,
 } from "./RoleType";
+
+export type { CurrentRoleResponseType } from "./CurrentRoleResponse.type";

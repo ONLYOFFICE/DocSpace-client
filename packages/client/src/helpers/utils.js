@@ -117,8 +117,10 @@ export const getCategoryType = (location) => {
   let categoryType = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.includes("dashboard")) return CategoryType.Dashboard;
-  if (pathname.includes("role")) return CategoryType.Role;
+  const role = pathname.includes("role");
+
+  if (pathname.includes("dashboard") && !role) return CategoryType.Dashboard;
+  if (role) return CategoryType.Role;
 
   if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {

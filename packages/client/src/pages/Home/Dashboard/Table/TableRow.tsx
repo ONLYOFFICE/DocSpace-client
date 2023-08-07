@@ -40,7 +40,14 @@ function TableRow({ role, getModel }: TableRowProps) {
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    navigate(role.url, { state: { fromDashboard: true } });
+    navigate(role.url, {
+      state: {
+        fromDashboard: true,
+        title: title,
+        isRoot: false,
+        isRoom: false,
+      },
+    });
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

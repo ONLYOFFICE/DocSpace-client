@@ -14,6 +14,7 @@ interface useRoleProps {
   isRolePage: boolean;
   roleService: RoleService;
   setIsLoading: (predicate: boolean, withTimer?: boolean) => void;
+  setCategoryType: (categoryType: number) => void;
   location: Location;
 }
 
@@ -22,8 +23,10 @@ function useRole({
   roleService,
   location,
   setIsLoading,
+  setCategoryType,
 }: useRoleProps) {
   const navigate = useNavigate();
+
   const { roleId, boardId } = useParams<ParamType>();
 
   const fetchDefaultRoleFiles = (roleId: string, boardId: string) => {
@@ -33,16 +36,18 @@ function useRole({
 
     const url = getCategoryUrl(CategoryType.Role, boardId, roleId);
 
-    navigate(`${url}?${filter.toUrlParams()}`);
+    navigate(`${url}?${filter.toUrlParams()}`, {
+      state: { ...location.state },
+    });
   };
 
   useEffect(() => {
     if (!isRolePage || !roleId || !boardId) return;
 
     const filterObj = RoleFilter.getFilter(window.location);
-    const state = location.state;
 
-    setIsLoading(true, !state?.fromDashboard);
+    setIsLoading(true, false);
+    setCategoryType(CategoryType.Role);
 
     if (!filterObj) {
       return fetchDefaultRoleFiles(roleId, boardId);
@@ -96,12 +101,12 @@ function useRole({
           filter.selectedItem = selectedItem;
         }
 
-        roleService.getRoleFiles(boardId, roleId, filter).finally(() => {
+        roleService.getRole(boardId, roleId, filter).finally(() => {
           setIsLoading(false);
         });
       })
-      .catch(() => {
-        Promise.resolve(RoleFilter.getDefault());
+      .catch((error) => {
+        console.log(error);
       });
 
     // ggetGroup(itemId).then()

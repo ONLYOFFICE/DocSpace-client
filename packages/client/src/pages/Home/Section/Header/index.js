@@ -207,7 +207,7 @@ const SectionHeaderContent = (props) => {
     categoryType,
 
     dashboardHeaderMenuService,
-    isDashboardView,
+    backToParentDashboard,
   } = props;
 
   const navigate = useNavigate();
@@ -784,6 +784,15 @@ const SectionHeaderContent = (props) => {
   };
 
   const onClickFolder = (id, isRootRoom) => {
+    const currentNavigationPath = selectedFolder.navigationPath.find(
+      (v) => v.id === id
+    );
+
+    if (currentNavigationPath?.isDashboard) {
+      const path = getCategoryUrl(CategoryType.Dashboard, id);
+      return backToParentDashboard(path, currentNavigationPath);
+    }
+
     if (isRootRoom) {
       return moveToRoomsPage();
     }
@@ -893,6 +902,8 @@ const SectionHeaderContent = (props) => {
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
 
+  console.log({ state: location?.state });
+
   const isRoot =
     isLoading && stateIsRoot
       ? stateIsRoot
@@ -913,7 +924,8 @@ const SectionHeaderContent = (props) => {
   const insideTheRoom =
     categoryType === CategoryType.SharedRoom ||
     categoryType === CategoryType.Archive ||
-    categoryType === CategoryType.Dashboard;
+    categoryType === CategoryType.Dashboard ||
+    categoryType === CategoryType.Role;
 
   return (
     <Consumer key="header">
@@ -1061,6 +1073,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       emptyTrashInProgress,
+      backToParentDashboard,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
@@ -1213,6 +1226,7 @@ export default inject(
       categoryType,
 
       dashboardHeaderMenuService,
+      backToParentDashboard,
     };
   }
 )(

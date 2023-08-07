@@ -121,7 +121,9 @@ class DashboardStore {
   };
 
   private goTo = (url: string, options?: NavigateOptions) => {
-    window.DocSpace.navigate(url, options);
+    console.log({ options });
+
+    window?.DocSpace?.navigate(url, options);
   };
 
   private setBufferSelection = (
@@ -171,12 +173,26 @@ class DashboardStore {
         url,
       };
 
+      // const state = {
+      //   title: parentNavigationPath?.title ?? "",
+      //   isRoot: navigationPath.length === 1,
+      //   rootFolderType: rootFolderType,
+      // };
+
       if (role.type === RoleTypeEnum.Default) {
         const defaultRole: RoleDefaultType = {
           ...role,
           ...general,
           onClickLocation: () =>
-            this.goTo(url, { state: { fromDashboard: true } }),
+            this.goTo(url, {
+              state: {
+                title: role.title,
+                isRoot: false,
+                isRoom: false,
+                fromDashboard: true,
+              },
+              replace: true,
+            }),
         };
 
         return defaultRole;

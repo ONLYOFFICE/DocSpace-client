@@ -134,7 +134,7 @@ const PureHome = (props) => {
     setCategoryType,
   });
 
-  useRole({ isRolePage, roleService, setIsLoading, location });
+  useRole({ isRolePage, roleService, setIsLoading, location, setCategoryType });
 
   const { onDrop } = useFiles({
     t,

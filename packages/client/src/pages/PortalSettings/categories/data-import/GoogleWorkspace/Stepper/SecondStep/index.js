@@ -72,7 +72,9 @@ const SecondStep = (props) => {
         <HelpButton
           place="right"
           offsetRight={0}
-          tooltipContent={<Text>{t("Settings:LicenseLimitDescription")}</Text>}
+          tooltipContent={
+            <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
+          }
         />
       </Wrapper>
 

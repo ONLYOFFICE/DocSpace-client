@@ -1,3 +1,5 @@
+import { Trans } from "react-i18next";
+
 export const getStepTitle = (t, stepIndex) => {
   switch (stepIndex) {
     case 1:
@@ -20,17 +22,17 @@ export const getStepTitle = (t, stepIndex) => {
 export const getStepDescription = (t, stepIndex) => {
   switch (stepIndex) {
     case 1:
-      return t("Settings:SelectFileDescription");
+      return <Trans i18nKey="SelectFileDescription" ns="Settings" t={t} />;
     case 2:
-      return t("Settings:SelectUsersDescription");
+      return <Trans i18nKey="SelectUsersDescription" ns="Settings" t={t} />;
     case 3:
-      return t("Settings:SelectUserTypesDescription");
+      return <Trans i18nKey="SelectUserTypesDescription" ns="Settings" t={t} />;
     case 4:
-      return t("Settings:SelectSectionsDescription");
+      return <Trans i18nKey="SelectSectionsDescription" ns="Settings" t={t} />;
     case 5:
-      return t("Settings:DataImportProcessingDescription");
-    case 6:
-      return t("Settings:DataImportCompleteDescription");
+      return <Trans i18nKey="DataImportProcessingDescription" ns="Settings" t={t} />
+    case 6: 
+      return <Trans i18nKey="DataImportCompleteDescription" ns="Settings" t={t} />
     default:
       return;
   }

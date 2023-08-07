@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
@@ -13,6 +13,7 @@ import SixthStep from "./Stepper/SixthStep";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
+import HelpButton from "@docspace/components/help-button";
 import Box from "@docspace/components/box";
 
 import { getStepTitle, getStepDescription } from "../../../utils";
@@ -100,6 +101,29 @@ const GoogleWorkspace = (props) => {
   const isSecondStep = currentStep === 2;
   const isThirdStep = currentStep === 3;
 
+  const renderTooltip = (
+    <HelpButton
+      className="step-tooltip"
+      offsetRight={0}
+      size={12}
+      tooltipContent={
+        <Text fontSize="12px">
+          <Trans
+            i18nKey="TypesAndPrivileges"
+            ns="Settings"
+            t={t}
+            components={{
+              1: <strong></strong>,
+              2: <strong></strong>,
+              3: <strong></strong>,
+              4: <strong></strong>,
+            }}
+          />
+        </Text>
+      }
+    />
+  );
+
   if (isMobile)
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
@@ -119,6 +143,7 @@ const GoogleWorkspace = (props) => {
         </Box>
         <Text className="step-description">
           {getStepDescription(t, currentStep)}
+          {isThirdStep && renderTooltip}
         </Text>
         {getStepContent(currentStep)}
       </div>

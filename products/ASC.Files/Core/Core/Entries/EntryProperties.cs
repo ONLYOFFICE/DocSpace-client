@@ -62,100 +62,10 @@ public class EntryProperties
 [Transient]
 public class FormFillingProperties
 {
-    public static readonly string DefaultTitleMask = "{0} - {1} ({2})";
-    private readonly UserManager _userManager;
-    private readonly SecurityContext _securityContext;
-    private readonly DisplayUserSettingsHelper _displayUserSettingsHelper;
-    private readonly TenantUtil _tenantUtil;
-    private readonly CustomNamingPeople _customNamingPeople;
-
-    public bool CollectFillForm { get; set; }
     public string ToFolderId { get; set; }
-    public string ToFolderPath { get; set; }
-    public string CreateFolderTitle { get; set; }
-    public string CreateFileMask { get; set; }
 
-    public FormFillingProperties(
-        UserManager userManager,
-        SecurityContext securityContext,
-        DisplayUserSettingsHelper displayUserSettingsHelper,
-        TenantUtil tenantUtil,
-        CustomNamingPeople customNamingPeople)
+    public FormFillingProperties()
     {
-        _userManager = userManager;
-        _securityContext = securityContext;
-        _displayUserSettingsHelper = displayUserSettingsHelper;
-        _tenantUtil = tenantUtil;
-        _customNamingPeople = customNamingPeople;
     }
 
-    public void FixFileMask()
-    {
-        if (string.IsNullOrEmpty(CreateFileMask))
-        {
-            return;
-        }
-
-        var indFileName = CreateFileMask.IndexOf("{0}");
-        CreateFileMask = CreateFileMask.Replace("{0}", "");
-
-        var indUserName = CreateFileMask.IndexOf("{1}");
-        CreateFileMask = CreateFileMask.Replace("{1}", "");
-
-        var indDate = CreateFileMask.IndexOf("{2}");
-        CreateFileMask = CreateFileMask.Replace("{2}", "");
-
-        CreateFileMask = "_" + CreateFileMask + "_";
-        CreateFileMask = Global.ReplaceInvalidCharsAndTruncate(CreateFileMask);
-        CreateFileMask = CreateFileMask.Substring(1, CreateFileMask.Length - 2);
-
-        if (indDate >= 0)
-        {
-            CreateFileMask = CreateFileMask.Insert(indDate, "{2}");
-        }
-
-        if (indUserName >= 0)
-        {
-            CreateFileMask = CreateFileMask.Insert(indUserName, "{1}");
-        }
-
-        if (indFileName >= 0)
-        {
-            CreateFileMask = CreateFileMask.Insert(indFileName, "{0}");
-        }
-    }
-
-    public async Task<string> GetTitleByMaskAsync(string sourceFileName)
-    {
-        FixFileMask();
-
-        var mask = CreateFileMask;
-        if (string.IsNullOrEmpty(mask))
-        {
-            mask = DefaultTitleMask;
-        }
-
-        string userName;
-        var userInfo = await _userManager.GetUsersAsync(_securityContext.CurrentAccount.ID);
-        if (userInfo.Equals(Constants.LostUser))
-        {
-            userName = _customNamingPeople.Substitute<FilesCommonResource>("ProfileRemoved");
-        }
-        else
-        {
-            userName = userInfo.DisplayUserName(false, _displayUserSettingsHelper);
-        }
-
-        var title = mask
-            .Replace("{0}", Path.GetFileNameWithoutExtension(sourceFileName))
-            .Replace("{1}", userName)
-            .Replace("{2}", _tenantUtil.DateTimeNow().ToString("g"));
-
-        if (FileUtility.GetFileExtension(title) != "docx")
-        {
-            title += ".docx";
-        }
-
-        return title;
-    }
 }

@@ -1735,38 +1735,10 @@ public class FileStorageService //: IFileStorageService
             {
                 properties.FormFilling = null;
             }
-            else
-            {
-                var folderId = properties.FormFilling.ToFolderId;
-                if (int.TryParse(folderId, out var fId))
-                {
-                    await SetFormFillingFolderProps(fId);
-                }
-                else
-                {
-                    await SetFormFillingFolderProps(folderId);
-                }
-            }
         }
 
         return properties;
 
-        async Task SetFormFillingFolderProps<TProp>(TProp toFolderId)
-        {
-            var folderDao = _daoFactory.GetFolderDao<TProp>();
-            var folder = await folderDao.GetFolderAsync(toFolderId);
-
-            if (folder == null)
-            {
-                properties.FormFilling.ToFolderId = null;
-            }
-            else if (await _fileSecurity.CanCreateAsync(folder))
-            {
-                properties.FormFilling.ToFolderPath = null;
-                var breadCrumbs = await _entryManager.GetBreadCrumbsAsync(folder.Id, folderDao);
-                properties.FormFilling.ToFolderPath = string.Join("/", breadCrumbs.Select(f => f.Title));
-            }
-        }
     }
 
     public async Task<EntryProperties> SetFileProperties<T>(T fileId, EntryProperties fileProperties)
@@ -1820,8 +1792,6 @@ public class FileStorageService //: IFileStorageService
                     currentProperies.FormFilling = scope.ServiceProvider.GetService<FormFillingProperties>();
                 }
 
-                currentProperies.FormFilling.CollectFillForm = fileProperties.FormFilling.CollectFillForm;
-
                 if (!string.IsNullOrEmpty(fileProperties.FormFilling.ToFolderId))
                 {
                     if (int.TryParse(fileProperties.FormFilling.ToFolderId, out var fId))
@@ -1834,10 +1804,6 @@ public class FileStorageService //: IFileStorageService
                     }
                 }
 
-                currentProperies.FormFilling.CreateFolderTitle = Global.ReplaceInvalidCharsAndTruncate(fileProperties.FormFilling.CreateFolderTitle);
-
-                currentProperies.FormFilling.CreateFileMask = fileProperties.FormFilling.CreateFileMask;
-                currentProperies.FormFilling.FixFileMask();
             }
 
             await fileDao.SaveProperties(file.Id, currentProperies);

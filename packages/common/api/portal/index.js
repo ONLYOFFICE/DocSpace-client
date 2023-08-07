@@ -298,3 +298,11 @@ export function getPortal() {
   };
   return request(options);
 }
+
+export function getPortalUsersCount() {
+  const options = {
+    method: "get",
+    url: "/portal/userscount",
+  };
+  return request(options);
+}

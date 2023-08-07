@@ -10,7 +10,6 @@ const StyledBaseQuotaComponent = styled.div`
   }
   .toggle-container {
     margin-bottom: 32px;
-    max-width: 700px;
     .quotas_toggle-button {
       position: static;
     }
@@ -134,7 +133,23 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 `;
+
+const StyledMainInfo = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  background: ${(props) => props.theme.client.settings.payment.backgroundColor};
+
+  column-gap: 24px;
+  row-gap: 12px;
+  padding: 12px;
+`;
+
+const StyledBody = styled.div`
+  max-width: 700px;
+`;
+
 export {
+  StyledBody,
   StyledBaseQuotaComponent,
   StyledDiscSpaceUsedComponent,
   StyledFolderTagSection,
@@ -143,4 +158,5 @@ export {
   StyledStatistics,
   StyledDivider,
   StyledSimpleFilesRow,
+  StyledMainInfo,
 };

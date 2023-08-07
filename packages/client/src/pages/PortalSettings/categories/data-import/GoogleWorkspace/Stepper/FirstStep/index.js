@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
+import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -18,12 +20,17 @@ const Wrapper = styled.div`
 
   .upload-backup-input {
     height: 32px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   .upload-backup-text {
     font-size: 12px;
+    margin-top: -4px;
     margin-bottom: 12px;
+  }
+  
+  .data-import-progress-bar {
+    margin: 12px 0 16px;
   }
 `;
 
@@ -68,6 +75,7 @@ const FirstStep = ({
           <Text className="upload-backup-text">
             {t("Settings:BackupFileUploading")}
           </Text>
+          <ProgressBar percent={75} className="data-import-progress-bar" />
           <Button
             size="small"
             label={t("Common:CancelButton")}

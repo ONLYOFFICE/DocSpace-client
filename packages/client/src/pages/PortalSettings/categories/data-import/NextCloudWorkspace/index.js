@@ -22,19 +22,10 @@ const NextcloudWrapper = styled.div`
   }
 
   .data-import-section-description {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-size: 12px;
   }
 
-  .sections-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 22px;
-  }
 `;
 
 const NextcloudWorkspace = (props) => {
@@ -49,18 +40,20 @@ const NextcloudWorkspace = (props) => {
   if (!tReady) return;
 
   return (
-    <NextcloudWrapper>
-      <Text className="data-import-description" lineHeight="20px" color="#657077">
-        {t("Settings:AboutDataImport")}
-      </Text>
-      <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
-        {currentStep + 1}/{StepsData.length}. {StepsData[currentStep].title}
-      </Text>
-      <Text className="data-import-section-description" lineHeight="16px">
-        {StepsData[currentStep].description}
-      </Text>
+    <>
+      <NextcloudWrapper>
+        <Text className="data-import-description" lineHeight="20px" color="#657077">
+          {t("Settings:AboutDataImport")}
+        </Text>
+        <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
+          {currentStep + 1}/{StepsData.length}. {StepsData[currentStep].title}
+        </Text>
+        <Text className="data-import-section-description" lineHeight="16px">
+          {StepsData[currentStep].description}
+        </Text>
+      </NextcloudWrapper>
       {StepsData[currentStep].component}
-    </NextcloudWrapper>
+    </>
   );
 };
 

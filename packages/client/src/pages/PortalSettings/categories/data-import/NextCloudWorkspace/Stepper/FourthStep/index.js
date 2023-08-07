@@ -13,7 +13,7 @@ const FourthStep = (props) => {
   return (
     <Wrapper>
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className="save-cancel-buttons upper-buttons"
         onSaveClick={incrementStep}
         onCancelClick={decrementStep}
         showReminder={true}

@@ -5,6 +5,9 @@ import FourthStep from "./FourthStep";
 import FifthStep from "./FifthStep";
 import SixthStep from "./SixthStep";
 
+import HelpButton from "@docspace/components/help-button";
+import Text from "@docspace/components/text";
+
 export const getStepsData = (t, currentStep, setCurrentStep) => {
   const incrementStep = () => {
     if (currentStep !== 6) {
@@ -39,8 +42,24 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
     },
     {
       title: "Select user types",
-      description:
-        "Select DocSpace roles for the imported users: DocSpace admin, Room admin or Power user. By default, Power user role is selected for each user. You can manage the roles after the import.",
+      description: (
+        <>
+          Select DocSpace roles for the imported users: DocSpace admin, Room admin or Power user. By
+          default, Power user role is selected for each user. You can manage the roles after the
+          import.
+          <HelpButton
+            place="right"
+            offsetRight={0}
+            tooltipContent={<Text>Insert tooltip content</Text>}
+            style={{
+              display: "inline-block",
+              position: "relative",
+              bottom: "-2px",
+              marginLeft: "4px",
+            }}
+          />
+        </>
+      ),
       component: <FourthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {

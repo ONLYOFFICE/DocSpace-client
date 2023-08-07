@@ -28,10 +28,10 @@ const ThirdStep = (props) => {
         displaySettings
       />
       <UsersInfoBlock>
-        <Text color="#555f65" fontWeight={700} className="selected-users-count">
+        <Text color="#555f65" fontSize="14px" fontWeight={700} className="selected-users-count">
           Selected: 0/10 users
         </Text>
-        <Text color="#555f65" fontWeight={700} className="selected-admins-count">
+        <Text color="#555f65" fontSize="14px" fontWeight={700} className="selected-admins-count">
           License limit Admins/Power: 0/100
         </Text>
         <HelpButton

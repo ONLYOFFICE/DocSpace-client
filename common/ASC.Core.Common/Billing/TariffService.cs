@@ -285,7 +285,7 @@ public class TariffService : ITariffService
                     UpdateCache(tariff.Id);
                 }
             }
-            else if (_tenantExtraConfig.Enterprise && tariff.Id == 0)
+            else if (_tenantExtraConfig.Enterprise && tariff.Id == 0 && tariff.LicenseDate == DateTime.MaxValue)
             {
                 var defaultQuota = await _quotaService.GetTenantQuotaAsync(Tenant.DefaultTenant);
 
@@ -301,8 +301,7 @@ public class TariffService : ITariffService
                 tariff = new Tariff
                 {
                     Quotas = new List<Quota> { new Quota(quota.TenantId, 1) },
-                    DueDate = DateTime.UtcNow.AddDays(DefaultTrialPeriod),
-                    Id = 1000
+                    DueDate = DateTime.UtcNow.AddDays(DefaultTrialPeriod)
                 };
 
                 await SetTariffAsync(Tenant.DefaultTenant, tariff, new List<TenantQuota> { quota });
@@ -696,13 +695,13 @@ public class TariffService : ITariffService
                 try
                 {
                     url = _billingClient.GetAccountLink(await _coreSettings.GetKeyAsync(tenant), backUrl);
+                    _cache.Insert(key, url, DateTime.UtcNow.Add(TimeSpan.FromMinutes(10)));
                 }
                 catch (Exception error)
                 {
                     LogError(error);
                 }
             }
-            _cache.Insert(key, url, DateTime.UtcNow.Add(TimeSpan.FromMinutes(10)));
         }
         if (!string.IsNullOrEmpty(url))
         {
@@ -905,6 +904,7 @@ public class TariffService : ITariffService
 
                 var unlimTariff = await CreateDefaultAsync();
                 unlimTariff.LicenseDate = tariff.DueDate;
+                unlimTariff.DueDate = tariff.DueDate;
                 unlimTariff.Quotas = new List<Quota>()
                 {
                     new Quota(defaultQuota.TenantId, 1)
@@ -1040,6 +1040,11 @@ public class TariffService : ITariffService
     public int GetPaymentDelay()
     {
         return _paymentDelay;
+    }
+
+    public bool IsConfigured()
+    {
+        return _billingClient.Configured;
     }
 }
 

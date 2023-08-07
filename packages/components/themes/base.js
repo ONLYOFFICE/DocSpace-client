@@ -61,6 +61,7 @@ const Base = {
   backgroundColor: white,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
+  interfaceDirection: "ltr",
 
   text: {
     color: black,
@@ -496,7 +497,7 @@ const Base = {
     textColor: black,
     textDisableColor: gray,
 
-    marginRight: "8px",
+    marginBeforeLabel: "8px",
 
     background: white,
     disableBackground: grayLight,
@@ -3111,9 +3112,21 @@ const Base = {
     textDescriptionColor: "#A3A9AE",
   },
 
+  deepLink: {
+    navBackground: "#f8f9f9",
+    fileTileBackground: "#f3f4f4",
+  },
+
   emailChips: {
     borderColor: "#A3A9AE",
     dashedBorder: "1px dashed #5299E0",
+  },
+
+  editLink: {
+    text: {
+      color: "#A3A9AE",
+      errorColor: "#F21C0E",
+    },
   },
 };
 

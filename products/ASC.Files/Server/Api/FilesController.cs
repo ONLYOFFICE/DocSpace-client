@@ -338,18 +338,6 @@ public abstract class FilesController<T> : ApiControllerBase
         return await _filesControllerHelper.UpdateFileStreamAsync(_filesControllerHelper.GetFileFromRequest(inDto).OpenReadStream(), fileId, inDto.FileExtension, inDto.Encrypted, inDto.Forcesave);
     }
 
-    [HttpGet("{fileId}/properties")]
-    public async Task<EntryPropertiesRequestDto> GetProperties(T fileId)
-    {
-        return _mapper.Map<EntryProperties, EntryPropertiesRequestDto>(await _fileStorageService.GetFileProperties(fileId));
-    }
-
-
-    [HttpPut("{fileId}/properties")]
-    public Task<EntryProperties> SetProperties(T fileId, EntryPropertiesRequestDto fileProperties)
-    {
-        return _fileStorageService.SetFileProperties(fileId, _mapper.Map<EntryPropertiesRequestDto, EntryProperties>(fileProperties));
-    }
 }
 
 public class FilesControllerCommon : ApiControllerBase
@@ -453,38 +441,4 @@ public class FilesControllerCommon : ApiControllerBase
         return await _fileStorageService.CreateThumbnailsAsync(inDto.FileIds.ToList());
     }
 
-
-    [HttpPut("batch/properties")]
-    public async Task<List<EntryProperties>> SetProperties(BatchEntryPropertiesRequestDto batchEntryPropertiesRequestDto)
-    {
-        var result = new List<EntryProperties>();
-
-        foreach (var fileId in batchEntryPropertiesRequestDto.FilesId)
-        {
-            if (fileId.ValueKind == JsonValueKind.String)
-            {
-                await AddProps(fileId.GetString());
-            }
-            else if (fileId.ValueKind == JsonValueKind.String)
-            {
-                await AddProps(fileId.GetInt32());
-            }
-        }
-
-        return result;
-
-        async Task AddProps<T>(T fileId)
-        {
-            await using var scope = _serviceScopeFactory.CreateAsyncScope();
-            var fileStorageService = scope.ServiceProvider.GetRequiredService<FileStorageService>();
-            var props = _mapper.Map<EntryPropertiesRequestDto, EntryProperties>(batchEntryPropertiesRequestDto.FileProperties);
-            if (batchEntryPropertiesRequestDto.CreateSubfolder)
-            {
-                var file = await fileStorageService.GetFileAsync(fileId, -1).NotFoundIfNull("File not found");
-                props.FormFilling.CreateFolderTitle = Path.GetFileNameWithoutExtension(file.Title);
-            }
-
-            result.Add(await fileStorageService.SetFileProperties(fileId, props));
-        }
-    }
 }

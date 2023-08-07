@@ -70,8 +70,7 @@ public class DocumentServiceTracker
         {
             Command = 0,
             User = 1,
-            Timer = 2,
-            UserSubmit = 3
+            Timer = 2
         }
     }
 
@@ -424,10 +423,6 @@ public class DocumentServiceTrackerHelper
                         forcesaveType = ForcesaveType.User;
                         comments.Add(FilesCommonResource.CommentForcesave);
                         break;
-                    case TrackerData.ForceSaveInitiator.UserSubmit:
-                        forcesaveType = ForcesaveType.UserSubmit;
-                        comments.Add(FilesCommonResource.CommentSubmitFillForm);
-                        break;
                 }
             }
 
@@ -463,10 +458,6 @@ public class DocumentServiceTrackerHelper
                 await SaveHistoryAsync(file, (fileData.History ?? "").ToString(), _documentServiceConnector.ReplaceDocumentAdress(fileData.ChangesUrl));
             }
 
-            if (fileData.Status == TrackerStatus.ForceSave && fileData.ForceSaveType == TrackerData.ForceSaveInitiator.UserSubmit)
-            {
-                await _entryManager.SubmitFillForm(file);
-            }
         }
 
         return new TrackResponse { Message = saveMessage };

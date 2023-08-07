@@ -826,38 +826,6 @@ public class CustomizationConfig<T>
         get { return _configuration.EditorConfig.ModeWrite ? null : "markup"; }
     }
 
-    public bool SubmitForm
-    {
-        get
-        {
-            if (_configuration.EditorConfig.ModeWrite
-              && _configuration.Document.Info.GetFile().Access == FileShare.FillForms)
-            {
-                var linkDao = _daoFactory.GetLinkDao();
-                var sourceId = linkDao.GetSourceAsync(_configuration.Document.Info.GetFile().Id.ToString()).Result;
-
-                if (sourceId != null)
-                {
-                    EntryProperties properties;
-
-                    if (int.TryParse(sourceId, out var sourceInt))
-                    {
-                        properties = _daoFactory.GetFileDao<int>().GetProperties(sourceInt).Result;
-                    }
-                    else
-                    {
-                        properties = _daoFactory.GetFileDao<string>().GetProperties(sourceId).Result;
-                    }
-
-                    return properties != null
-                        && properties.FormFilling != null
-                        && properties.FormFilling.CollectFillForm;
-                }
-            }
-            return false;
-        }
-    }
-
     private FileSharing FileSharing { get; }
 
     public CustomizationConfig(

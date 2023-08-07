@@ -725,62 +725,73 @@ public class FileStorageService //: IFileStorageService
         var file = await fileDao.GetFileAsync(formId);
         ErrorIf(file == null, FilesCommonResource.ErrorMassage_FileNotFound);
         ErrorIf(!await _fileSecurity.CanReadAsync(file), FilesCommonResource.ErrorMassage_SecurityException_ReadFile);
+        ErrorIf(FileUtility.GetFileTypeByFileName(file.Title) != FileType.OForm, FilesCommonResource.ErrorMassage_NotSupportedFormat);
 
-
-        //TODO mock data, from form
-        var rolesFromForm = new List<FileRoleDto>() {
-            new FileRoleDto() {Id = 1, Title = "everyone", Color = "#fbcc86", QueueNumber = 1},
-            new FileRoleDto() {Id = 2, Title = "accountant",Color = "#70d3b0", QueueNumber = 2},
-            new FileRoleDto() {Id = 3, Title = "director", Color = "#bb85e7", QueueNumber = 3},
-        };
-
-        var boardRoles = new List<BoardRole>();
-        var queueNumber = 0;
-
-        var tagDao = _daoFactory.GetTagDao<T>();
-        var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
-
-        var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
-        if (board is FileEntry<int> internalEntry)
+        try
         {
-            foreach (var r in rolesFromForm)
-            {
+            //TODO mock data, from form
+            var rolesFromForm = new List<FileRoleDto>() {
+                new FileRoleDto() {Id = 1, Title = "everyone", Color = "#fbcc86", QueueNumber = 1},
+                new FileRoleDto() {Id = 2, Title = "accountant",Color = "#70d3b0", QueueNumber = 2},
+                new FileRoleDto() {Id = 3, Title = "director", Color = "#bb85e7", QueueNumber = 3},
+            };
 
-                var tagInfo = new TagInfo
+            var boardRoles = new List<BoardRole>();
+            var queueNumber = 0;
+
+            var tagDao = _daoFactory.GetTagDao<T>();
+            var boardRolesDao = _daoFactory.GetBoardRoleDao<T>();
+
+            var board = await InternalCreateNewFolderAsync(file.ParentId, Path.GetFileNameWithoutExtension(file.Title), FolderType.Board, false);
+            if (board is FileEntry<int> internalEntry)
+            {
+                var prop = new EntryProperties()
                 {
-                    Name = r.Title,
+                    FormFilling = new FormFillingProperties()
+                    {
+                        ToFolderId = internalEntry.Id.ToString()
+                    }
+                };
+                await SetFileProperties(file.Id, prop);
+
+                foreach (var r in rolesFromForm)
+                {
+
+                    var tagInfo = new TagInfo
+                    {
+                        Name = r.Title,
+                        Owner = Guid.Empty,
+                        Type = TagType.Role
+                    };
+                    tag = await tagDao.SaveTagInfoAsync(tagInfo);
+
+                    boardRoles.Add(new BoardRole()
+                    {
+                        BoardId = internalEntry.Id,
+                        TagId = tag.Id,
+                        RoleId = r.Id,
+                        Title = r.Title,
+                        Color = r.Color,
+                        QueueNumber = r.QueueNumber,
+                        AssignedTo = r.QueueNumber == 1 ? Guid.Empty : assignedRoles[r.Id],
+                        Type = BoardRoleQueueType.FromForm
+                    });
+
+                    queueNumber++;
+                }
+                var tagDone = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
+                {
+                    Name = "Done", //TODO
                     Owner = Guid.Empty,
                     Type = TagType.Role
-                };
-                tag = await tagDao.SaveTagInfoAsync(tagInfo);
-
-                boardRoles.Add(new BoardRole()
-                {
-                    BoardId = internalEntry.Id,
-                    TagId = tag.Id,
-                    RoleId = r.Id,
-                    Title = r.Title,
-                    Color = r.Color,
-                    QueueNumber = r.QueueNumber,
-                    AssignedTo = r.QueueNumber == 1 ? Guid.Empty : assignedRoles[r.Id],
-                    Type = BoardRoleQueueType.FromForm
                 });
-
-                queueNumber++;
-            }
-            var tagDone = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
-            {
-                Name = "Done", //TODO
-                Owner = Guid.Empty,
-                Type = TagType.Role
-            });
-            var tagInterrupted = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
-            {
-                Name = "Interrupted", //TODO
-                Owner = Guid.Empty,
-                Type = TagType.Role
-            });
-            boardRoles.AddRange(new List<BoardRole>()
+                var tagInterrupted = await tagDao.SaveTagInfoIfNotExistAsync(new TagInfo
+                {
+                    Name = "Interrupted", //TODO
+                    Owner = Guid.Empty,
+                    Type = TagType.Role
+                });
+                boardRoles.AddRange(new List<BoardRole>()
             {
                 new BoardRole()
                 {
@@ -804,11 +815,17 @@ public class FileStorageService //: IFileStorageService
                 }
             }
 
-            );
-        }
-        var result = await boardRolesDao.SaveBoardRoleAsync(boardRoles);
+                );
+            }
+            var result = await boardRolesDao.SaveBoardRoleAsync(boardRoles);
 
-        return board;
+            return board;
+        }
+        catch (Exception e)
+        {
+            throw GenerateException(e);
+        }
+
     }
 
     private async ValueTask<Folder<T>> InternalCreateNewFolderAsync<T>(T parentId, string title, FolderType folderType = FolderType.DEFAULT, bool privacy = false)
@@ -1735,38 +1752,10 @@ public class FileStorageService //: IFileStorageService
             {
                 properties.FormFilling = null;
             }
-            else
-            {
-                var folderId = properties.FormFilling.ToFolderId;
-                if (int.TryParse(folderId, out var fId))
-                {
-                    await SetFormFillingFolderProps(fId);
-                }
-                else
-                {
-                    await SetFormFillingFolderProps(folderId);
-                }
-            }
         }
 
         return properties;
 
-        async Task SetFormFillingFolderProps<TProp>(TProp toFolderId)
-        {
-            var folderDao = _daoFactory.GetFolderDao<TProp>();
-            var folder = await folderDao.GetFolderAsync(toFolderId);
-
-            if (folder == null)
-            {
-                properties.FormFilling.ToFolderId = null;
-            }
-            else if (await _fileSecurity.CanCreateAsync(folder))
-            {
-                properties.FormFilling.ToFolderPath = null;
-                var breadCrumbs = await _entryManager.GetBreadCrumbsAsync(folder.Id, folderDao);
-                properties.FormFilling.ToFolderPath = string.Join("/", breadCrumbs.Select(f => f.Title));
-            }
-        }
     }
 
     public async Task<EntryProperties> SetFileProperties<T>(T fileId, EntryProperties fileProperties)
@@ -1777,11 +1766,6 @@ public class FileStorageService //: IFileStorageService
         if (file == null)
         {
             throw new FileNotFoundException(FilesCommonResource.ErrorMassage_FileNotFound);
-        }
-
-        if (!await _fileSecurity.CanEditAsync(file))
-        {
-            throw new SecurityException(FilesCommonResource.ErrorMassage_SecurityException_RenameFile);
         }
 
         if (await _entryManager.FileLockedForMeAsync(file.Id))
@@ -1809,18 +1793,11 @@ public class FileStorageService //: IFileStorageService
                     throw new SecurityException(FilesCommonResource.ErrorMassage_SecurityException);
                 }
 
-                if (!_fileUtility.CanWebRestrictedEditing(file.Title))
-                {
-                    throw new Exception(FilesCommonResource.ErrorMassage_NotSupportedFormat);
-                }
-
                 if (currentProperies.FormFilling == null)
                 {
                     await using var scope = _serviceScopeFactory.CreateAsyncScope();
-                    currentProperies.FormFilling = scope.ServiceProvider.GetService<FormFillingProperties>();
+                    currentProperies.FormFilling = new FormFillingProperties();     //TODO scope
                 }
-
-                currentProperies.FormFilling.CollectFillForm = fileProperties.FormFilling.CollectFillForm;
 
                 if (!string.IsNullOrEmpty(fileProperties.FormFilling.ToFolderId))
                 {
@@ -1834,10 +1811,6 @@ public class FileStorageService //: IFileStorageService
                     }
                 }
 
-                currentProperies.FormFilling.CreateFolderTitle = Global.ReplaceInvalidCharsAndTruncate(fileProperties.FormFilling.CreateFolderTitle);
-
-                currentProperies.FormFilling.CreateFileMask = fileProperties.FormFilling.CreateFileMask;
-                currentProperies.FormFilling.FixFileMask();
             }
 
             await fileDao.SaveProperties(file.Id, currentProperies);

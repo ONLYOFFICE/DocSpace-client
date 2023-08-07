@@ -38,22 +38,11 @@ public class EntryPropertiesRequestDto : IMapFrom<EntryProperties>
 
 public class FormFillingPropertiesRequestDto : IMapFrom<FormFillingProperties>
 {
-    public bool CollectFillForm { get; set; }
     public string ToFolderId { get; set; }
-    public string ToFolderPath { get; set; }
-    public string CreateFolderTitle { get; set; }
-    public string CreateFileMask { get; set; }
 
     public void Mapping(AutoMapper.Profile profile)
     {
         profile.CreateMap(typeof(FormFillingProperties), GetType());
         profile.CreateMap(GetType(), typeof(FormFillingProperties));
     }
-}
-
-public class BatchEntryPropertiesRequestDto
-{
-    public JsonElement[] FilesId { get; set; }
-    public bool CreateSubfolder { get; set; }
-    public EntryPropertiesRequestDto FileProperties { get; set; }
 }

@@ -16,7 +16,7 @@ const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
 
 const StyledTableContainer = styled(TableContainer)`
-  margin: 20px 0;
+  margin: 0.5px 0px 20px;
 
   .header-container-text {
     font-size: 12px;
@@ -52,7 +52,8 @@ const TableView = (props) => {
     }
   };
 
-  const toggleAccount = (id) => {
+  const toggleAccount = (e, id) => {
+    e.stopPropagation();
     setCheckedAccounts((prevCheckedAccounts) =>
       prevCheckedAccounts.includes(id)
         ? prevCheckedAccounts.filter((item) => item !== id)
@@ -102,7 +103,7 @@ const TableView = (props) => {
             isDuplicate={data.isDuplicate}
             hideColumns={hideColumns}
             isChecked={checkedAccounts.includes(data.id)}
-            toggleAccount={() => toggleAccount(data.id)}
+            toggleAccount={(e) => toggleAccount(e, data.id)}
           />
         ))}
       </TableBody>

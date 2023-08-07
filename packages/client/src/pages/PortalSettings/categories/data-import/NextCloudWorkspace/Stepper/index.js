@@ -26,7 +26,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       component: <FirstStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: "Select users with filled e-mail",
+      title: "Select users with e-mail",
       description:
         "Check users from the list to import into ONLYOFFICE DocSpace. Only users with emails can be selected. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
       component: <SecondStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,

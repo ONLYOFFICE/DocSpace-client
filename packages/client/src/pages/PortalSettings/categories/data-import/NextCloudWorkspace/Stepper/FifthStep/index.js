@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import ImportSection from "../../../sub-components/ImportSection";
 
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+
+const SectionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .save-cancel-buttons {
+    margin-top: 4px;
+  }
+`;
 
 const FifthStep = ({ t, incrementStep, decrementStep }) => {
   const [isChecked, setIsChecked] = useState({
@@ -21,7 +32,7 @@ const FifthStep = ({ t, incrementStep, decrementStep }) => {
   };
 
   return (
-    <div className="sections-wrapper">
+    <SectionsWrapper>
       <ImportSection
         isChecked={isChecked.users}
         onChange={() => onChange("users")}
@@ -75,7 +86,7 @@ const FifthStep = ({ t, incrementStep, decrementStep }) => {
         displaySettings
         showReminder
       />
-    </div>
+    </SectionsWrapper>
   );
 };
 export default FifthStep;

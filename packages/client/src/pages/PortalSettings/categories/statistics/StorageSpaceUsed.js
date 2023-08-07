@@ -96,12 +96,21 @@ const DiskSpaceUsedComponent = (props) => {
       </Text>
 
       <Diagram />
-      <Button
-        label={"Recalculate"}
-        onClick={onRecalculateClick}
-        isLoading={isLoading}
-        isDisabled={isLoading}
-      />
+      <div className="button-container">
+        <Button
+          size="small"
+          label={"Recalculate"}
+          onClick={onRecalculateClick}
+          isLoading={isLoading}
+          isDisabled={isLoading}
+        />
+        <div className="text-container">
+          <Text>{"Updating statistics can take a long time"}</Text>
+          <Text fontSize="12px" color={"#657077"}>
+            {"Last update: 19/6/2022 12:50"}
+          </Text>
+        </div>
+      </div>
     </StyledDiscSpaceUsedComponent>
   );
 };

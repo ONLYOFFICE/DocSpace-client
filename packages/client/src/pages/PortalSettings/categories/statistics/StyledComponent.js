@@ -26,6 +26,14 @@ const StyledDiscSpaceUsedComponent = styled.div`
   .disk-space_title {
     margin-bottom: 16px;
   }
+  .button-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    .text-container {
+      display: grid;
+    }
+  }
 `;
 
 const StyledDiagramComponent = styled.div`

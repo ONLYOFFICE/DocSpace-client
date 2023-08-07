@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
+
+import { StyledBaseQuotaComponent } from "../StyledComponent";
+import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotasComponent = () => {

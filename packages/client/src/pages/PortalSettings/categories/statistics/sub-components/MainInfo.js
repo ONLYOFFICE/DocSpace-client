@@ -1,6 +1,8 @@
 import React from "react";
-import Text from "@docspace/components/text";
 import moment from "moment";
+
+import Text from "@docspace/components/text";
+
 import { StyledMainInfo } from "../StyledComponent";
 const MainInfoComponent = ({ portalInfo, activeUsersCount }) => {
   return (

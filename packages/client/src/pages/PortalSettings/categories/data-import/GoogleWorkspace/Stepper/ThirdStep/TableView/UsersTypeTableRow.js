@@ -1,3 +1,6 @@
+import { useState, useRef } from "react";
+
+import AccessRightSelect from "@docspace/components/access-right-select";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
@@ -18,21 +21,57 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .user-type {
-    font-size: 13px;
-    font-weight: 600;
-    color: #a3a9ae;
+    .combo-button {
+      border: none;
+      padding: 0;
+      justify-content: flex-start;
+      background-color: transparent;
+    }
+
+    .combo-button-label {
+      color: #a3a9ae;
+    }
+
+    .combo-buttons_arrow-icon {
+      flex: initial;
+      margin-left: 0;
+    }
+
+    svg {
+      path {
+        fill: #a3a9ae;
+      }
+    }
   }
 `;
+
+const data = [
+  {
+    key: "key1",
+    label: "DocSpace admin",
+  },
+  {
+    key: "key2",
+    label: "Room admin",
+  },
+  {
+    key: "key3",
+    label: "Power user",
+  },
+];
 
 const UsersTypeTableRow = ({
   id,
   displayName,
   email,
-  type,
+  // type,
   isChecked,
   checkbox,
   onChangeCheckbox,
 }) => {
+  const [selectUserType, setSelectUserType] = useState(data[2]);
+  const userTypeRef = useRef();
+
   const onChange = (e) => {
     onChangeCheckbox(id, e.target.checked);
   };
@@ -45,7 +84,17 @@ const UsersTypeTableRow = ({
       </TableCell>
 
       <TableCell>
-        <Text className="user-type">{type}</Text>
+        <div ref={userTypeRef}>
+          <AccessRightSelect
+            accessOptions={data}
+            selectedOption={selectUserType}
+            scaledOptions={false}
+            scaled={false}
+            manualWidth="fit-content"
+            className="user-type"
+            onSelect={setSelectUserType}
+          />
+        </div>
       </TableCell>
 
       <TableCell>

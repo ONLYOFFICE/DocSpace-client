@@ -1,42 +1,39 @@
 import React from "react";
-
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
-import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
+
+import Text from "@docspace/components/text";
+import RoomsFilter from "@docspace/common/api/rooms/filter";
+import Filter from "@docspace/common/api/people/filter";
+
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import UsedSpace from "SRC_DIR/components/UsedSpace";
-import { StyledStatistics } from "../StyledComponent";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
-const StyledSimpleFilesRow = styled(Row)`
-  .row_content {
-    gap: 12px;
-    align-items: center;
-    height: 56px;
-    .row_name {
-      width: 100%;
-      overflow: hidden;
-
-      p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-`;
+import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
+import Button from "@docspace/components/button";
 
 const StatisticsComponent = (props) => {
   const { filesList, peopleList } = props;
+  const navigate = useNavigate();
 
-  const iconElement = (id, icon, fileExst, isRoom, defaultRoomIcon) => (
-    <ItemIcon
-      id={id}
-      icon={icon}
-      fileExst={fileExst}
-      isRoom={isRoom}
-      defaultRoomIcon={defaultRoomIcon}
-    />
+  const iconElement = (
+    id,
+    icon,
+    fileExst,
+    isRoom,
+    defaultRoomIcon,
+    className
+  ) => (
+    <div className={className}>
+      <ItemIcon
+        id={id}
+        icon={icon}
+        fileExst={fileExst}
+        isRoom={isRoom}
+        defaultRoomIcon={defaultRoomIcon}
+      />
+    </div>
   );
   const quotaElement = (usedSpace, quotaLimit) => (
     <UsedSpace
@@ -45,6 +42,37 @@ const StatisticsComponent = (props) => {
       quotaLimit={quotaLimit}
     />
   );
+  const textElement = (title) => (
+    <div className="row_name">
+      <Text fontSize={"12px"} fontWeight={600}>
+        {title}
+      </Text>
+    </div>
+  );
+
+  const onClickUsers = () => {
+    const newFilter = Filter.getDefault();
+    newFilter.sortBy = SortByFieldName.Name;
+    const urlFilter = newFilter.toUrlParams();
+
+    navigate(`/accounts/filter?${urlFilter}`);
+  };
+  const onClickRooms = (e) => {
+    const newFilter = RoomsFilter.getDefault();
+    newFilter.sortBy = SortByFieldName.RoomType;
+    const urlFilter = newFilter.toUrlParams();
+
+    navigate(`/rooms/shared/filter?${urlFilter}`);
+  };
+  const buttonElement = (isRooms) => (
+    <Button
+      className="button-element"
+      label={"Show more"}
+      size="small"
+      onClick={isRooms ? onClickRooms : onClickUsers}
+    />
+  );
+
   const roomsList = filesList.map((item) => {
     const {
       id,
@@ -60,11 +88,7 @@ const StatisticsComponent = (props) => {
       <StyledSimpleFilesRow key={item.id}>
         <>
           {iconElement(id, icon, fileExst, isRoom, defaultRoomIcon)}
-          <div className="row_name">
-            <Text fontSize={"12px"} fontWeight={600}>
-              {title}
-            </Text>
-          </div>
+          {textElement(title)}
           {quotaElement(usedSpace, quotaLimit)}
         </>
       </StyledSimpleFilesRow>
@@ -86,12 +110,15 @@ const StatisticsComponent = (props) => {
     return (
       <StyledSimpleFilesRow key={id}>
         <>
-          {iconElement(id, avatar, fileExst, isRoom, defaultRoomIcon)}
-          <div className="row_name">
-            <Text fontSize={"12px"} fontWeight={600}>
-              {displayName}
-            </Text>
-          </div>
+          {iconElement(
+            id,
+            avatar,
+            fileExst,
+            isRoom,
+            defaultRoomIcon,
+            "user-icon"
+          )}
+          {textElement(displayName)}
           {quotaElement(usedSpace, quotaLimit)}
         </>
       </StyledSimpleFilesRow>
@@ -111,12 +138,14 @@ const StatisticsComponent = (props) => {
           {"Top 5 rooms by storage usage:"}
         </Text>
         {roomsList}
+        {buttonElement(true)}
       </div>
       <div>
         <Text fontWeight={600} className="item-statistic">
           {"Top 5 users by storage usage:"}
         </Text>
         {usersList}
+        {buttonElement()}
       </div>
     </StyledStatistics>
   );

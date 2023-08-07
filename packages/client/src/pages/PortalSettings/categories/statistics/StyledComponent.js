@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import Row from "@docspace/components/row";
 
 const StyledBaseQuotaComponent = styled.div`
   .quotas_label {
@@ -88,6 +89,10 @@ const StyledStatistics = styled.div`
   .statistics_title {
     margin-bottom: 8px;
   }
+
+  .button-element {
+    margin-top: 20px;
+  }
 `;
 
 const StyledDivider = styled.div`
@@ -95,6 +100,31 @@ const StyledDivider = styled.div`
   width: 100%;
   background-color: #ddd;
   margin: 28px 0 28px 0;
+`;
+
+const StyledSimpleFilesRow = styled(Row)`
+  .row_content {
+    gap: 12px;
+    align-items: center;
+    height: 56px;
+    .row_name {
+      width: 100%;
+      overflow: hidden;
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .user-icon {
+      .react-svg-icon {
+        height: 32px;
+        border-radius: 50%;
+      }
+    }
+  }
 `;
 export {
   StyledBaseQuotaComponent,
@@ -104,4 +134,5 @@ export {
   StyledDiagramComponent,
   StyledStatistics,
   StyledDivider,
+  StyledSimpleFilesRow,
 };

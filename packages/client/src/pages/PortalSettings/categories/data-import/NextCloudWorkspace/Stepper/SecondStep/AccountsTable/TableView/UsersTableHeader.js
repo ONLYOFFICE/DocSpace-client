@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import TableHeader from "@docspace/components/table-container/TableHeader";
 
 const TABLE_VERSION = "6";
-const TABLE_COLUMNS = `GoogleWorkspaceColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `nextcloudSecondColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
@@ -33,6 +33,9 @@ const UsersTableHeader = (props) => {
     columnStorageName,
     columnInfoPanelStorageName,
     setHideColumns,
+    isIndeterminate,
+    isChecked,
+    toggleAll,
   } = props;
 
   const defaultColumns = [
@@ -45,10 +48,9 @@ const UsersTableHeader = (props) => {
       active: true,
       minWidth: 180,
       checkbox: {
-        value: true,
-        onChange: (e) => {
-          console.log(e);
-        },
+        value: isChecked,
+        isIndeterminate,
+        onChange: toggleAll,
       },
       onChange: onColumnChange,
     },
@@ -60,8 +62,8 @@ const UsersTableHeader = (props) => {
       onChange: onColumnChange,
     },
     {
-      key: "Dublicate",
-      title: "Dublicate",
+      key: "Duplicate",
+      title: "Duplicate",
       enable: true,
       resizable: true,
       onChange: onColumnChange,
@@ -77,13 +79,17 @@ const UsersTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item
-      )
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns));
+  }, [isIndeterminate, isChecked]);
 
   return (
     <TableHeader

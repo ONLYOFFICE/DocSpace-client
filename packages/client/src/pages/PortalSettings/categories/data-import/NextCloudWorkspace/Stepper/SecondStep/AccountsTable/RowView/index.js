@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import RowContainer from "@docspace/components/row-container";
 import UsersRow from "./UsersRow";
-import { mockData } from "../mockData.js";
+import { mockData } from "../../mockData.js";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;

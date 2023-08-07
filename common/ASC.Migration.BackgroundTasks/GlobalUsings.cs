@@ -24,37 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-global using System.IO.Compression;
-global using System.Reflection;
-global using System.Runtime.Serialization;
 global using System.Text;
-global using System.Text.Json.Serialization;
-global using System.Text.RegularExpressions;
 
-global using ASC.Common;
-global using ASC.Common.Log;
-global using ASC.Core;
-global using ASC.Core.Users;
-global using ASC.Files.Core;
-global using ASC.Files.Core.Resources;
-global using ASC.Files.Core.Security;
-global using ASC.Migration.Core;
-global using ASC.Migration.Core.Models;
-global using ASC.Migration.Core.Models.Api;
-global using ASC.Migration.Core.Resources;
-global using ASC.Migration.GoogleWorkspace.Models;
-global using ASC.Migration.GoogleWorkspace.Models.Parse;
-global using ASC.Web.Files.Classes;
-global using ASC.Web.Files.Services.WCFService;
+global using ASC.Api.Core;
+global using ASC.Api.Core.Extensions;
+global using ASC.Migration;
 
 global using Autofac;
 
-global using HtmlAgilityPack;
+global using Microsoft.Extensions.Hosting.WindowsServices;
 
-global using Ical.Net;
-
-global using Microsoft.Extensions.Logging;
-
-global using MimeKit;
-
-global using Newtonsoft.Json;
+global using NLog;

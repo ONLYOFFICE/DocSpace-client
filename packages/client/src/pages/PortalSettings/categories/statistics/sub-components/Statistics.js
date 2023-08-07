@@ -57,7 +57,7 @@ const StatisticsComponent = (props) => {
 
     navigate(`/accounts/filter?${urlFilter}`);
   };
-  const onClickRooms = (e) => {
+  const onClickRooms = () => {
     const newFilter = RoomsFilter.getDefault();
     newFilter.sortBy = SortByFieldName.RoomType;
     const urlFilter = newFilter.toUrlParams();

@@ -861,3 +861,17 @@ export function getSendingTestMailStatus() {
     url: `/smtpsettings/smtp/test/status`,
   });
 }
+
+export function recalculateQuota() {
+  return request({
+    method: "get",
+    url: `/settings/recalculatequota`,
+  });
+}
+
+export function checkRecalculateQuota() {
+  return request({
+    method: "get",
+    url: `/settings/checkrecalculatequota`,
+  });
+}

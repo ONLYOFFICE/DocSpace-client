@@ -26,39 +26,37 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       component: <FirstStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: t("Common:SelectUsers"),
+      title: "Select users with filled e-mail",
       description:
-        "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+        "Check users from the list to import into ONLYOFFICE DocSpace. Only users with emails can be selected. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
       component: <SecondStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
       title: "Add emails to incomplete accounts",
       description:
-        "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+        "Check users from the list to import into ONLYOFFICE DocSpace. Only users with emails can be selected. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
       component: <ThirdStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: t("Common:SelectUserTypes"),
+      title: "Select user types",
       description:
-        "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+        "Select DocSpace roles for the imported users: DocSpace admin, Room admin or Power user. By default, Power user role is selected for each user. You can manage the roles after the import.",
       component: <FourthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: t("Common:DataImport"),
+      title: "Data import",
       description:
         "Select sections for import. They will appear in the corresponding sections of DocSpace.",
       component: <FifthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: t("Common:DataImportProcessing"),
-      description:
-        "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+      title: "Processing of data import",
+      description: "Data migration in progress. Please wait.",
       component: <SixthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
     {
-      title: t("Common:DataImportComplete"),
-      description:
-        "Select sections for import. They will appear in the corresponding sections of DocSpace.",
+      title: "Data import complete",
+      description: "Data import from NextCloud to ONLYOFFICE DocSpace is complete!",
       component: <SixthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
   ];

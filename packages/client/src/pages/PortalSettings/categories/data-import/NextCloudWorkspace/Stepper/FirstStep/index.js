@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 350px;
+  margin-top: 16px;
 
   .choose-backup-file {
     font-weight: 600;

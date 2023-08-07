@@ -8,9 +8,12 @@ import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
-import SearchInput from "@docspace/components/search-input";
 
-import { mockData } from "../mockData.js";
+import { mockData } from "../../mockData.js";
+
+const TABLE_VERSION = "6";
+const COLUMNS_SIZE = `nextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
 
 const StyledTableContainer = styled(TableContainer)`
   margin: 20px 0;
@@ -27,22 +30,35 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
     }
   }
 `;
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const TABLE_VERSION = "6";
-const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
-
 const TableView = (props) => {
   const { userId, viewAs, setViewAs, sectionWidth } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
+
+  const [checkedAccounts, setCheckedAccounts] = useState([]);
+
+  const toggleAll = (e) => {
+    if (e.target.checked) {
+      setCheckedAccounts(mockData.map((data) => data.id));
+    } else {
+      setCheckedAccounts([]);
+    }
+  };
+
+  const toggleAccount = (id) => {
+    setCheckedAccounts((prevCheckedAccounts) =>
+      prevCheckedAccounts.includes(id)
+        ? prevCheckedAccounts.filter((item) => item !== id)
+        : [...prevCheckedAccounts, id],
+    );
+  };
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -58,19 +74,15 @@ const TableView = (props) => {
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      <SearchInput
-        id="search-users-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
-      />
       <UsersTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
-        userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         setHideColumns={setHideColumns}
+        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
+        isChecked={checkedAccounts.length === mockData.length}
+        toggleAll={toggleAll}
       />
       <TableBody
         itemHeight={49}
@@ -81,14 +93,14 @@ const TableView = (props) => {
         filesLength={mockData.length}
         hasMoreFiles={false}
         itemCount={mockData.length}
-      >
+        fetchMoreFiles={() => {}}>
         {mockData.map((data) => (
           <UsersTableRow
             key={data.id}
             displayName={data.displayName}
-            email={data.email}
-            dublicate={data.dublicate}
             hideColumns={hideColumns}
+            isChecked={checkedAccounts.includes(data.id)}
+            toggleAccount={() => toggleAccount(data.id)}
           />
         ))}
       </TableBody>

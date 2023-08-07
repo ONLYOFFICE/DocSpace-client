@@ -1,81 +1,71 @@
-import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
 
-import ImportSection from "../../../sub-components/ImportSection";
-
-import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
-import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import Text from "@docspace/components/text";
+import HelpButton from "@docspace/components/help-button";
+import SearchInput from "@docspace/components/search-input";
 
-const ThirdStep = ({ t, incrementStep, decrementStep }) => {
-  const [isChecked, setIsChecked] = useState({
-    users: true,
-    pFiles: true,
-    sFiles: true,
-  });
+import AccountsTable from "./AccountsTable";
 
-  const onChange = (name) => {
-    setIsChecked((prevIsChecked) => ({
-      ...prevIsChecked,
-      [name]: !prevIsChecked[name],
-    }));
-  };
+import { Wrapper, UsersInfoBlock } from "../StyledStepper";
+
+const ThirdStep = (props) => {
+  const { t, incrementStep, decrementStep } = props;
 
   return (
-    <div className="sections-wrapper">
-      <ImportSection
-        isChecked={isChecked.users}
-        onChange={() => onChange("users")}
-        sectionName="Users"
-        description="Section “Users” includes the users you selected in the previous step. By default, it is always enabled and can’t be unselected. "
-        exportSection={{ sectionName: "Users", workspace: "NextCloud" }}
-        importSection={{
-          sectionName: "Accounts",
-          workspace: "DocSpace",
-          SectionIcon: PeopleIcon,
-        }}
-        isDisabled
-      />
-      <ImportSection
-        isChecked={isChecked.pFiles}
-        onChange={() => onChange("pFiles")}
-        sectionName="Personal files"
-        description={`Files and documents of Nextcloud users will be imported into the users' "My Documents" section.`}
-        exportSection={{
-          sectionName: "User’s Files",
-          workspace: "NextCloud",
-        }}
-        importSection={{
-          sectionName: "Accounts",
-          workspace: "My documents",
-          SectionIcon: UserIcon,
-        }}
-      />
-      <ImportSection
-        isChecked={isChecked.sFiles}
-        onChange={() => onChange("sFiles")}
-        sectionName="Shared files"
-        description="Files shared with other users will be copied to their personal documents regardless of the permission level in Nextcloud. "
-        exportSection={{
-          sectionName: "Shared Files",
-          workspace: "NextCloud",
-        }}
-        importSection={{
-          sectionName: "My documents",
-          workspace: "DocSpace",
-          SectionIcon: PeopleIcon,
-        }}
-      />
-
+    <Wrapper>
+      <p className="users-without-email">
+        We found <b>6 users</b> without emails. You can add necessary data to their accounts on the
+        next step.
+      </p>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={incrementStep}
         onCancelClick={decrementStep}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
-        displaySettings
         showReminder
+        displaySettings
       />
-    </div>
+      <UsersInfoBlock>
+        <Text color="#555f65" fontWeight={700} className="selected-users-count">
+          Selected: 0/10 users
+        </Text>
+        <Text color="#555f65" fontWeight={700} className="selected-admins-count">
+          License limit Admins/Power: 0/100
+        </Text>
+        <HelpButton
+          place="right"
+          offsetRight={0}
+          tooltipContent={<Text>Insert tooltip content</Text>}
+        />
+      </UsersInfoBlock>
+
+      <SearchInput
+        id="search-users-input"
+        onChange={() => console.log("changed")}
+        onClearSearch={() => console.log("cleared")}
+        placeholder="Search"
+      />
+
+      <AccountsTable />
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={incrementStep}
+        onCancelClick={decrementStep}
+        saveButtonLabel={t("Settings:NextStep")}
+        cancelButtonLabel={t("Common:Back")}
+        showReminder
+        displaySettings
+      />
+    </Wrapper>
   );
 };
-export default ThirdStep;
+
+export default inject(({ setup }) => {
+  const { viewAs } = setup;
+
+  return {
+    viewAs,
+  };
+})(observer(ThirdStep));

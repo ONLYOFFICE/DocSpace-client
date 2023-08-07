@@ -1,0 +1,26 @@
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
+  .users-without-email {
+    font-size: 12px;
+    margin: 0 0 16px;
+  }
+`;
+
+export const UsersInfoBlock = styled.div`
+  display: flex;
+  align-items: center;
+  max-width: 660px;
+  background: #f8f9f9;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 16px 0;
+
+  .selected-users-count {
+    margin-right: 24px;
+  }
+
+  .selected-admins-count {
+    margin-right: 8px;
+  }
+`;

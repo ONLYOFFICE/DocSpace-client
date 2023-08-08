@@ -10,6 +10,11 @@ export const Wrapper = styled.div`
     margin-top: 16px;
     margin-bottom: 20px;
   }
+
+  .accounts-pagging {
+    margin-top: -5px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const UsersInfoBlock = styled.div`

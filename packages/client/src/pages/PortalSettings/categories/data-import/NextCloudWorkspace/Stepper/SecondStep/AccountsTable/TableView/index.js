@@ -9,8 +9,6 @@ import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import { mockData } from "../../mockData.js";
-
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
@@ -38,7 +36,7 @@ const StyledTableContainer = styled(TableContainer)`
 StyledTableContainer.defaultProps = { theme: Base };
 
 const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth } = props;
+  const { userId, viewAs, setViewAs, sectionWidth, accountsData } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
@@ -46,7 +44,7 @@ const TableView = (props) => {
 
   const toggleAll = (e) => {
     if (e.target.checked) {
-      setCheckedAccounts(mockData.map((data) => data.id));
+      setCheckedAccounts(accountsData.map((data) => data.id));
     } else {
       setCheckedAccounts([]);
     }
@@ -81,8 +79,10 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         setHideColumns={setHideColumns}
-        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
-        isChecked={checkedAccounts.length === mockData.length}
+        isIndeterminate={
+          checkedAccounts.length > 0 && checkedAccounts.length !== accountsData.length
+        }
+        isChecked={checkedAccounts.length === accountsData.length}
         toggleAll={toggleAll}
       />
       <TableBody
@@ -91,11 +91,11 @@ const TableView = (props) => {
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={mockData.length}
+        filesLength={accountsData.length}
         hasMoreFiles={false}
-        itemCount={mockData.length}
+        itemCount={accountsData.length}
         fetchMoreFiles={() => {}}>
-        {mockData.map((data) => (
+        {accountsData.map((data) => (
           <UsersTableRow
             key={data.id}
             displayName={data.displayName}

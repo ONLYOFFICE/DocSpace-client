@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -11,9 +12,79 @@ import SearchInput from "@docspace/components/search-input";
 import { Wrapper, UsersInfoBlock } from "../StyledStepper";
 
 import Paging from "@docspace/components/paging";
+import { mockData } from "./mockData";
 
 const SecondStep = (props) => {
   const { t, incrementStep, decrementStep } = props;
+
+  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+  const [currentCount, setCurrentCount] = useState(25);
+
+  const createPageItems = (count) => {
+    let pageItems = [];
+    for (let i = 0; i < count; i++) {
+      pageItems.push({
+        key: i,
+        label: i + 1 + " of " + count,
+      });
+    }
+    return pageItems;
+  };
+
+  const countItems = [
+    {
+      key: "25 per page",
+      label: "25 per page",
+    },
+    {
+      key: "50 per page",
+      label: "50 per page",
+    },
+    {
+      key: "100 per page",
+      label: "100 per page",
+    },
+  ];
+
+  const pageItems = createPageItems(Math.ceil(mockData.length / 25));
+
+  const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
+  const [countItem, setCountItem] = useState(countItems[0]);
+
+  const onSelectPageNextHandler = (e) => {
+    const currentPage = pageItems[selectedPageItem.key + 1];
+    if (currentPage) {
+      if (currentCount <= 0) {
+        setDataPortion(mockData.slice(currentCount + 25, currentCount + 50));
+        setCurrentCount((prevCurrentCount) => prevCurrentCount + 50);
+      } else {
+        setDataPortion(mockData.slice(currentCount, currentCount + 25));
+        setCurrentCount((prevCurrentCount) => prevCurrentCount + 25);
+      }
+      setSelectedPageItems(currentPage);
+    }
+  };
+
+  const onSelectPagePrevHandler = () => {
+    const currentPage = pageItems[selectedPageItem.key - 1];
+    if (currentPage) {
+      if (currentCount >= mockData.length) {
+        setDataPortion(mockData.slice(currentCount - 50, currentCount - 25));
+        setCurrentCount((prevCurrentCount) => prevCurrentCount - 50);
+      } else {
+        setDataPortion(mockData.slice(currentCount - 25, currentCount));
+        setCurrentCount((prevCurrentCount) => prevCurrentCount - 25);
+      }
+      setSelectedPageItems(currentPage);
+    }
+  };
+
+  const onSelectPage = (selectedPage) => {
+    const count = selectedPage.key * 25;
+    setDataPortion(mockData.slice(count, count + 25));
+    setCurrentCount(count + 25);
+    setSelectedPageItems(pageItems[selectedPage.key]);
+  };
 
   return (
     <Wrapper>
@@ -51,25 +122,25 @@ const SecondStep = (props) => {
         placeholder="Search"
       />
 
-      <AccountsTable />
+      <AccountsTable accountsData={dataPortion} />
 
-      {/* <Paging
+      <Paging
+        className="accounts-pagging"
+        pageItems={pageItems}
+        countItems={countItems}
         previousLabel="Previous"
         nextLabel="Next"
-        displayItems={true}
-        displayCount={true}
-        disablePrevious={false}
-        disableNext={false}
-        openDirection="bottom"
-        selectedCount={100}
-        pageCount={10}
-        selectedCountItem={{
-          key: 100,
-          label: "100 per page",
-        }}
-        selectedPageItem={{ key: 1, label: "1 of 10" }}
+        openDirection="top"
         style={{ justifyContent: "center", alignItems: "center" }}
-      /> */}
+        onSelectPage={onSelectPage}
+        onSelectCount={console.log}
+        previousAction={onSelectPagePrevHandler}
+        nextAction={onSelectPageNextHandler}
+        selectedPageItem={selectedPageItem}
+        selectedCountItem={countItem}
+        disablePrevious={currentCount <= 25}
+        disableNext={mockData.length - currentCount <= 0}
+      />
 
       <SaveCancelButtons
         className="save-cancel-buttons"

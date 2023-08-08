@@ -74,7 +74,7 @@
   "DataBackup": "Резервное копирование данных",
   "DataImport": "Перенос данных",
   "DataImportComplete": "Импорт данных завершен",
-  "DataImportCompleteDescription": "Импорт данных из Google Workspace в ONLYOFFICE DocSpace завершен! <br/> 70/70 пользователей были успешно импортированы.",
+  "DataImportCompleteDescription": "Импорт данных из Google Workspace в ONLYOFFICE DocSpace завершен! <br> 70/70 пользователей были успешно импортированы.",
   "DataImportDescription": "Импорт данных из стороннего сервиса в ONLYOFFICE DocSpace. Импорт данных позволяет передавать такие данные, как все пользователи, их личные и общие документы.",
   "DataImportProcessing": "Обработка импорта данных",
   "DataImportProcessingDescription": "Выполняется перенос данных. Пожалуйста, подождите.",

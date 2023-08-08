@@ -82,11 +82,18 @@ const WorkspaceWrapper = styled.div`
   }
 
   .step-description {
+    position: relative;
     max-width: 700px;
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
     color: #333333;
+  }
+
+  .step-tooltip {
+    position: absolute;
+    top: 18px;
+    right: 45%;
   }
 `;
 

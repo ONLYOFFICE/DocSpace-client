@@ -24,15 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Migration.ApiModels.ResponseDto;
+namespace ASC.Web.Api.ApiModel.ResponseDto;
 
-public class MigrationStatus
+public class DeepLinkDto
 {
-    public double Progress { get; set; }
-
-    public string ProgressStatus { get; set; }
-
-    public MigrationApiInfo ParseResult { get; set; }
-
-    public bool MigrationEnded { get; set; }
+    public string AndroidPackageName { get; set; }
+    public string Url { get; set; }
+    public string IosPackageId { get; set; }
 }

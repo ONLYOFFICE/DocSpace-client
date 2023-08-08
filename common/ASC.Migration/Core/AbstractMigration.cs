@@ -26,6 +26,7 @@
 
 namespace ASC.Migration.Core;
 
+[Scope]
 public abstract class AbstractMigration<TMigrationInfo, TUser, TContacts, TCalendar, TFiles, TMail> : IMigration
     where TMigrationInfo : IMigrationInfo
 {
@@ -35,6 +36,7 @@ public abstract class AbstractMigration<TMigrationInfo, TUser, TContacts, TCalen
     private double _lastProgressUpdate;
     private string _lastStatusUpdate;
     protected List<Guid> _importedUsers;
+    public abstract MigratorMeta Meta { get; }
 
     public event Action<double, string> OnProgressUpdate;
 

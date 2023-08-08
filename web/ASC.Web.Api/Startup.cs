@@ -54,6 +54,7 @@ public class Startup : BaseStartup
         services.AddScoped<ITenantQuotaFeatureStat<CountRoomFeature, int>, CountRoomCheckerStatistic>();
         services.AddScoped<CountRoomCheckerStatistic>();
 
+        MigrationCore.Register(DIHelper);
         DIHelper.TryAdd<AdditionalWhiteLabelSettingsConverter>();
     }
 

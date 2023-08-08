@@ -26,6 +26,7 @@
 
 namespace ASC.Migration.Core;
 
+[Scope]
 public interface IMigration : IDisposable
 {
     event Action<double, string> OnProgressUpdate;
@@ -43,4 +44,6 @@ public interface IMigration : IDisposable
     Stream GetLogs();
 
     List<Guid> GetGuidImportedUsers();
+
+    MigratorMeta Meta { get; }
 }

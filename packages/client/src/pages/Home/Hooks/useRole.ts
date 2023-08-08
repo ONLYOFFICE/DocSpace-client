@@ -3,16 +3,20 @@ import { Location, useNavigate, useParams } from "react-router-dom";
 
 import RoleFilter from "@docspace/common/api/files/roleFilter";
 
-import type RoleService from "SRC_DIR/services/Role.service";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import { ParamType } from "../Dashboard/types";
 import { getUserById } from "@docspace/common/api/people";
+import type { CurrentRoleResponseType } from "@docspace/common/types";
 
 interface useRoleProps {
   isRolePage: boolean;
-  roleService: RoleService;
+  getRole: (
+    boardId: string,
+    roleId: string,
+    filter: RoleFilter
+  ) => Promise<CurrentRoleResponseType>;
   setIsLoading: (predicate: boolean, withTimer?: boolean) => void;
   setCategoryType: (categoryType: number) => void;
   location: Location;
@@ -20,7 +24,7 @@ interface useRoleProps {
 
 function useRole({
   isRolePage,
-  roleService,
+  getRole,
   location,
   setIsLoading,
   setCategoryType,
@@ -101,7 +105,7 @@ function useRole({
           filter.selectedItem = selectedItem;
         }
 
-        roleService.getRole(boardId, roleId, filter).finally(() => {
+        getRole(boardId, roleId, filter).finally(() => {
           setIsLoading(false);
         });
       })

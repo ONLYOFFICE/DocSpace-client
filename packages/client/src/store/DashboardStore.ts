@@ -100,26 +100,6 @@ class DashboardStore {
   private removeOptions = (options: string[], toRemoveArray: string[]) =>
     options.filter((o) => !toRemoveArray.includes(o));
 
-  private getRolesContextOptionsModel = (role: RoleQueue) => {
-    let roleOptions = [
-      "link-for-room-members",
-      "separator0",
-      "download-role",
-      "copy-role",
-      "separator1",
-      "delete-role",
-    ];
-
-    if (role.type === RoleTypeEnum.Default) {
-      roleOptions = this.removeOptions(roleOptions, [
-        "separator1",
-        "delete-role",
-      ]);
-    }
-
-    return roleOptions;
-  };
-
   private goTo = (url: string, options?: NavigateOptions) => {
     console.log({ options });
 
@@ -156,61 +136,77 @@ class DashboardStore {
   public get roles(): IRole[] {
     if (!this.dashboard) return [];
 
-    const roles = this._roles.map<IRole>((role) => {
-      const url = getCategoryUrl(
-        CategoryType.Role,
-        this.dashboard?.current.id,
-        role.id
-      );
-
-      const general = {
-        contextOptionsModel: this.getRolesContextOptionsModel(role),
-        onClickBadge: () => {},
-        onChecked: this.selectedRole,
-        onContentRowCLick: this.setBufferSelection,
-        isChecked: this.SelectedRolesMap.has(role.id),
-        isActive: this.BufferSelectionRole?.id === role.id,
-        url,
-      };
-
-      // const state = {
-      //   title: parentNavigationPath?.title ?? "",
-      //   isRoot: navigationPath.length === 1,
-      //   rootFolderType: rootFolderType,
-      // };
-
-      if (role.type === RoleTypeEnum.Default) {
-        const defaultRole: RoleDefaultType = {
-          ...role,
-          ...general,
-          onClickLocation: () =>
-            this.goTo(url, {
-              state: {
-                title: role.title,
-                isRoot: false,
-                isRoom: false,
-                fromDashboard: true,
-              },
-              replace: true,
-            }),
-        };
-
-        return defaultRole;
-      }
-
-      const doneOrInterruptedRole: RoleDoneType | RoleInterruptedType = {
-        ...role,
-        ...general,
-      };
-
-      return doneOrInterruptedRole;
-    });
+    const roles = this._roles.map<IRole>(this.convertToRole);
 
     return roles;
   }
   //#endregion
 
   //#region public method
+
+  public convertToRole = (role: RoleQueue): IRole => {
+    const url = getCategoryUrl(
+      CategoryType.Role,
+      this.dashboard?.current.id,
+      role.id
+    );
+
+    const general = {
+      contextOptionsModel: this.getRolesContextOptionsModel(role),
+      onClickBadge: () => {},
+      onChecked: this.selectedRole,
+      onContentRowCLick: this.setBufferSelection,
+      isChecked: this.SelectedRolesMap.has(role.id),
+      isActive: this.BufferSelectionRole?.id === role.id,
+      url,
+    };
+
+    if (role.type === RoleTypeEnum.Default) {
+      const defaultRole: RoleDefaultType = {
+        ...role,
+        ...general,
+        onClickLocation: () =>
+          this.goTo(url, {
+            state: {
+              title: role.title,
+              isRoot: false,
+              isRoom: false,
+              fromDashboard: true,
+            },
+            replace: true,
+          }),
+      };
+
+      return defaultRole;
+    }
+
+    const doneOrInterruptedRole: RoleDoneType | RoleInterruptedType = {
+      ...role,
+      ...general,
+    };
+
+    return doneOrInterruptedRole;
+  };
+
+  public getRolesContextOptionsModel = (role: RoleQueue) => {
+    let roleOptions = [
+      "link-for-room-members",
+      "separator0",
+      "download-role",
+      "copy-role",
+      "separator1",
+      "delete-role",
+    ];
+
+    if (role.type === RoleTypeEnum.Default) {
+      roleOptions = this.removeOptions(roleOptions, [
+        "separator1",
+        "delete-role",
+      ]);
+    }
+
+    return roleOptions;
+  };
 
   public selectedRole = (role: IRole, checked: boolean): void => {
     if (this.BufferSelectionRole) this.clearBufferSelectionRole();

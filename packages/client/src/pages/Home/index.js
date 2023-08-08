@@ -116,7 +116,7 @@ const PureHome = (props) => {
     fetchDashboard,
     setCategoryType,
     dashboardViewAs,
-    roleService,
+    getRole,
   } = props;
 
   const location = useLocation();
@@ -134,7 +134,7 @@ const PureHome = (props) => {
     setCategoryType,
   });
 
-  useRole({ isRolePage, roleService, setIsLoading, location, setCategoryType });
+  useRole({ isRolePage, getRole, setIsLoading, location, setCategoryType });
 
   const { onDrop } = useFiles({
     t,
@@ -333,6 +333,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     dashboardStore,
+    roleStore,
   }) => {
     const {
       secondaryProgressDataStore,
@@ -382,8 +383,6 @@ export default inject(
       disableDrag,
       isErrorRoomNotAvailable,
       setIsPreview,
-
-      roleService,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -451,6 +450,8 @@ export default inject(
         hideLoader();
       }
     }
+
+    const { getRole } = roleStore;
 
     return {
       //homepage: config.homepage,
@@ -539,7 +540,7 @@ export default inject(
       fetchDashboard,
       setCategoryType,
       dashboardViewAs,
-      roleService,
+      getRole,
     };
   }
 )(observer(Home));

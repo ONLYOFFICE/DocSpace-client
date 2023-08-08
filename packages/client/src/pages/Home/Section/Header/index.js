@@ -208,6 +208,7 @@ const SectionHeaderContent = (props) => {
 
     dashboardHeaderMenuService,
     backToParentDashboard,
+    getRoleHeaderContextMenu,
   } = props;
 
   const navigate = useNavigate();
@@ -535,6 +536,10 @@ const SectionHeaderContent = (props) => {
 
   const getContextOptionsFolder = () => {
     const isDisabled = isRecycleBinFolder || isRoom;
+
+    if (isRolePage) {
+      return getRoleHeaderContextMenu(t);
+    }
 
     if (isDashboardPage) {
       return [
@@ -902,8 +907,6 @@ const SectionHeaderContent = (props) => {
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
 
-  console.log({ state: location?.state });
-
   const isRoot =
     isLoading && stateIsRoot
       ? stateIsRoot
@@ -995,6 +998,7 @@ const SectionHeaderContent = (props) => {
 export default inject(
   ({
     auth,
+    roleStore,
     filesStore,
     peopleStore,
     dialogsStore,
@@ -1126,6 +1130,8 @@ export default inject(
 
     const { dashboardHeaderMenuService } = dashboardContextOptionStore;
 
+    const { getRoleHeaderContextMenu } = roleStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1227,6 +1233,7 @@ export default inject(
 
       dashboardHeaderMenuService,
       backToParentDashboard,
+      getRoleHeaderContextMenu,
     };
   }
 )(

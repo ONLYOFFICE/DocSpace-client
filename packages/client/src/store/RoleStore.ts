@@ -1,19 +1,30 @@
 import api from "@docspace/common/api";
+import RoleFilter from "@docspace/common/api/files/roleFilter";
 
 import { FolderType } from "@docspace/common/constants";
+import { IRole } from "@docspace/common/Models";
 
-import type RoleFilter from "@docspace/common/api/files/roleFilter";
 import type {
   CurrentRoleResponseType,
   Folder as FolderInfoType,
+  RoleQueue,
 } from "@docspace/common/types";
-import type FilesStore from "SRC_DIR/store/FilesStore";
+import type DashboardContextOpetion from "./DashboardContextOption";
+import type DashboardStore from "./DashboardStore";
+import type FilesStore from "./FilesStore";
 
-class RoleService {
-  constructor(private fileStore: FilesStore) {}
+class RoleStore {
+  public role?: IRole;
+
+  constructor(
+    private filesStore: FilesStore,
+    private dashboardStore: DashboardStore,
+    private dashboardContextOptionStore: DashboardContextOpetion
+  ) {}
 
   private resetState = (): void => {
-    const { setFolders, setBoards, setSelection, setSelected } = this.fileStore;
+    const { setFolders, setBoards, setSelection, setSelected } =
+      this.filesStore;
 
     setFolders([]);
     setBoards([]);
@@ -49,19 +60,28 @@ class RoleService {
       })
     );
 
-    this.fileStore.selectedFolderStore.setSelectedFolder({
+    this.filesStore.selectedFolderStore.setSelectedFolder({
       folders: [],
       ...currentRole.current,
       pathParts: currentRole.pathParts,
       navigationPath: navigationPath.reverse(),
       isDashboard: false,
       isRolePage: true,
-      ...{ new: currentRole.new },
+      new: currentRole.new,
     });
 
-    this.fileStore.clientLoadingStore.setIsSectionHeaderLoading(false);
+    this.filesStore.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
+  public setRole = (role: RoleQueue) => {
+    this.role = this.dashboardStore.convertToRole(role);
+  };
+
+  public getRoleHeaderContextMenu = (t: (arg: string) => string) => {
+    if (!this.role) return [];
+
+    return this.dashboardContextOptionStore.getOptions(this.role, t);
+  };
   public getRole = async (
     boardId: string,
     roleId: string,
@@ -74,11 +94,12 @@ class RoleService {
       );
 
       this.resetState();
-      this.fileStore.setFiles(result.files);
-      this.settingUpNavigationPath(result);
+      this.setRole(result.current);
+      this.filesStore.setFiles(result.files);
+      await this.settingUpNavigationPath(result);
 
       filter.total = result.total;
-      this.fileStore.setFilter(filter);
+      this.filesStore.setFilter(filter);
       return result;
     } catch (error) {
       return Promise.reject(error);
@@ -86,4 +107,4 @@ class RoleService {
   };
 }
 
-export default RoleService;
+export default RoleStore;

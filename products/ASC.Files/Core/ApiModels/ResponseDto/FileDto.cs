@@ -48,6 +48,7 @@ public class FileDto<T> : FileEntryDto<T>
     public string LockedBy { get; set; }
     public bool DenyDownload { get; set; }
     public bool DenySharing { get; set; }
+    public string BoardId { get; set; }
     public IDictionary<Accessability, bool> ViewAccessability { get; set; }
 
     protected internal override FileEntryType EntryType { get => FileEntryType.File; }
@@ -89,6 +90,7 @@ public class FileDtoHelper : FileEntryDtoHelper
     private readonly FilesLinkUtility _filesLinkUtility;
     private readonly FileUtility _fileUtility;
     private readonly BadgesSettingsHelper _badgesSettingsHelper;
+    private readonly FileSharing _fileSharing;
 
     public FileDtoHelper(
         ApiDateTimeHelper apiDateTimeHelper,
@@ -101,7 +103,8 @@ public class FileDtoHelper : FileEntryDtoHelper
         FilesLinkUtility filesLinkUtility,
         FileUtility fileUtility,
         FileSharingHelper fileSharingHelper,
-        BadgesSettingsHelper badgesSettingsHelper)
+        BadgesSettingsHelper badgesSettingsHelper,
+        FileSharing fileSharing)
         : base(apiDateTimeHelper, employeeWrapperHelper, fileSharingHelper, fileSecurity)
     {
         _authContext = authContext;
@@ -111,6 +114,7 @@ public class FileDtoHelper : FileEntryDtoHelper
         _filesLinkUtility = filesLinkUtility;
         _fileUtility = fileUtility;
         _badgesSettingsHelper = badgesSettingsHelper;
+        _fileSharing = fileSharing;
     }
 
     public async Task<FileDto<T>> GetAsync<T>(File<T> file, List<Tuple<FileEntry<T>, bool>> folders = null)
@@ -182,6 +186,21 @@ public class FileDtoHelper : FileEntryDtoHelper
             if (file.ThumbnailStatus == Thumbnail.Created)
             {
                 result.ThumbnailUrl = _commonLinkUtility.GetFullAbsolutePath(_filesLinkUtility.GetFileThumbnailUrl(file.Id, file.Version)) + $"&hash={cacheKey}"; 
+            }
+
+            if (result.FileType == FileType.OForm)
+            {
+
+                var fileDao = _daoFactory.GetFileDao<T>();
+                var properties = await fileDao.GetProperties(file.Id) ?? new EntryProperties();
+
+                if (properties.FormFilling != null)
+                {
+                    if (await _fileSharing.CanSetAccessAsync(file) || _fileUtility.CanWebRestrictedEditing(file.Title))
+                    {
+                        result.BoardId = properties.FormFilling.ToFolderId;
+                    }
+                }
             }
         }
         catch (Exception)

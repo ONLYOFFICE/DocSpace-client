@@ -2151,6 +2151,22 @@ class FilesActionStore {
       return this.backToParentFolder(path, true);
     }
 
+    if (categoryType === CategoryType.Role) {
+      const parentNavigationPath = this.selectedFolderStore.navigationPath.find(
+        (item) => item.isDashboard
+      );
+
+      if (!parentNavigationPath) {
+        return console.error("parent id not found");
+      }
+
+      const path = getCategoryUrl(
+        CategoryType.Dashboard,
+        parentNavigationPath.id
+      );
+      return this.backToParentDashboard(path, parentNavigationPath);
+    }
+
     if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
       if (isRoom) {
         return this.moveToRoomsPage();
@@ -2221,6 +2237,21 @@ class FilesActionStore {
     }
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
+  };
+
+  backToParentDashboard = (url, parentNavigationPath) => {
+    const { navigationPath, rootFolderType } = this.selectedFolderStore;
+
+    const state = {
+      title: parentNavigationPath?.title ?? "",
+      isRoot: navigationPath.length === 1,
+      rootFolderType: rootFolderType,
+    };
+
+    window.DocSpace.navigate(url, {
       state,
       replace: true,
     });

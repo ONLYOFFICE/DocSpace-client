@@ -46,7 +46,7 @@ class DashboardContextOpetion {
     return combineUrl(proxyURL, config.homepage, url);
   };
 
-  public onCopyLink = (item: IRole, t: (arg: string) => string) => {
+  public onCopyLink = (item: { url: string }, t: (arg: string) => string) => {
     const url = this.getFullUrl(item.url);
 
     copy(url);

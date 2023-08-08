@@ -3,27 +3,34 @@ import { Location, useNavigate, useParams } from "react-router-dom";
 
 import RoleFilter from "@docspace/common/api/files/roleFilter";
 
-import type RoleService from "SRC_DIR/services/Role.service";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import { ParamType } from "../Dashboard/types";
 import { getUserById } from "@docspace/common/api/people";
+import type { CurrentRoleResponseType } from "@docspace/common/types";
 
 interface useRoleProps {
   isRolePage: boolean;
-  roleService: RoleService;
+  getRole: (
+    boardId: string,
+    roleId: string,
+    filter: RoleFilter
+  ) => Promise<CurrentRoleResponseType>;
   setIsLoading: (predicate: boolean, withTimer?: boolean) => void;
+  setCategoryType: (categoryType: number) => void;
   location: Location;
 }
 
 function useRole({
   isRolePage,
-  roleService,
+  getRole,
   location,
   setIsLoading,
+  setCategoryType,
 }: useRoleProps) {
   const navigate = useNavigate();
+
   const { roleId, boardId } = useParams<ParamType>();
 
   const fetchDefaultRoleFiles = (roleId: string, boardId: string) => {
@@ -33,16 +40,18 @@ function useRole({
 
     const url = getCategoryUrl(CategoryType.Role, boardId, roleId);
 
-    navigate(`${url}?${filter.toUrlParams()}`);
+    navigate(`${url}?${filter.toUrlParams()}`, {
+      state: { ...location.state },
+    });
   };
 
   useEffect(() => {
     if (!isRolePage || !roleId || !boardId) return;
 
     const filterObj = RoleFilter.getFilter(window.location);
-    const state = location.state;
 
-    setIsLoading(true, !state?.fromDashboard);
+    setIsLoading(true, false);
+    setCategoryType(CategoryType.Role);
 
     if (!filterObj) {
       return fetchDefaultRoleFiles(roleId, boardId);
@@ -96,12 +105,12 @@ function useRole({
           filter.selectedItem = selectedItem;
         }
 
-        roleService.getRoleFiles(boardId, roleId, filter).finally(() => {
+        getRole(boardId, roleId, filter).finally(() => {
           setIsLoading(false);
         });
       })
-      .catch(() => {
-        Promise.resolve(RoleFilter.getDefault());
+      .catch((error) => {
+        console.log(error);
       });
 
     // ggetGroup(itemId).then()

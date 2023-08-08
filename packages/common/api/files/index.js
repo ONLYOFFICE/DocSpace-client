@@ -1036,3 +1036,11 @@ export function getFilesByRole(boardId, roleId, filter) {
     url: `/files/board/${boardId}/filesbyrole${param}`,
   });
 }
+export function getRole(boardId, roleId, filter) {
+  const param = filter ? filter.toApiUrlParams() : `?roleid=${roleId}`;
+
+  return request({
+    method: "get",
+    url: `/files/board/${boardId}/role${param}`,
+  });
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Text from "@docspace/components/text";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
@@ -15,6 +16,7 @@ import Button from "@docspace/components/button";
 
 const StatisticsComponent = (props) => {
   const { filesList, peopleList } = props;
+  const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 
   const iconElement = (
@@ -67,7 +69,7 @@ const StatisticsComponent = (props) => {
   const buttonElement = (isRooms) => (
     <Button
       className="button-element"
-      label={"Show more"}
+      label={t("ShowMore")}
       size="small"
       onClick={isRooms ? onClickRooms : onClickUsers}
     />
@@ -128,21 +130,21 @@ const StatisticsComponent = (props) => {
   return (
     <StyledStatistics>
       <Text fontWeight={700} fontSize={"16px"} className="statistics_title">
-        {"Statistic"}
+        {t("Statistic")}
       </Text>
       <Text className="statistics-description">
-        {"Here, you can view the detailed storage usage data in this DocSpace."}
+        {t("StatisticDescription")}
       </Text>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
-          {"Top 5 rooms by storage usage:"}
+          {t("Top5rooms")}
         </Text>
         {roomsList}
         {buttonElement(true)}
       </div>
       <div>
         <Text fontWeight={600} className="item-statistic">
-          {"Top 5 users by storage usage:"}
+          {t("Top5Users")}
         </Text>
         {usersList}
         {buttonElement()}

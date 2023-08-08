@@ -9,6 +9,8 @@ import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotasComponent = () => {
+  const { t } = useTranslation("Settings");
+
   const [isToggleChecked, setIsToggleChecked] = useState({
     room: false,
     user: false,
@@ -81,25 +83,21 @@ const QuotasComponent = () => {
         <Text fontSize="16px" fontWeight={700}>
           {"Quotas"}
         </Text>
-        <Text>{"Here, you can set storage quota for users and rooms."}</Text>
+        <Text>{t("QuotasDescription")}</Text>
       </div>
       <div className="toggle-container">
         <ToggleButton
           className="quotas_toggle-button"
           name="room"
-          label={"Define quota per room"}
+          label={t("DefineQuotaPerRoom")}
           onChange={onToggleChange}
           isChecked={isRoomQuotaEnable}
           isDisabled={isLoading.room}
         />
-        <Text className="toggle_label">
-          {
-            "Set the default storage quota for rooms in this DocSpace. It can later be adjusted for each room individually by the room admin."
-          }
-        </Text>
+        <Text className="toggle_label">{t("SetDefaultRoomQuota")}</Text>
         {isRoomQuotaEnable && (
           <QuotaForm
-            label={"Quota per room"}
+            label={t("QuotaPerRoom")}
             maxInputWidth={"214px"}
             onSave={onSaveRoomQuota}
             isLoading={isLoading.room}
@@ -110,19 +108,15 @@ const QuotasComponent = () => {
         <ToggleButton
           className="quotas_toggle-button"
           name="user"
-          label={"Define quota per user"}
+          label={t("DefineQuotaPerUser")}
           onChange={onToggleChange}
           isChecked={isUserQuotaEnable}
           isDisabled={isLoading.user}
         />
-        <Text className="toggle_label">
-          {
-            "Set the storage quota for users of this DocSpace. User quota affects storage limit for My Documents folder of each user."
-          }
-        </Text>
+        <Text className="toggle_label">{t("SetDefaultUserQuota")}</Text>
         {isUserQuotaEnable && (
           <QuotaForm
-            label={"Quota per user"}
+            label={t("QuotaPerUser")}
             maxInputWidth={"214px"}
             isLoading={isLoading.user}
             onSave={onSaveUserQuota}

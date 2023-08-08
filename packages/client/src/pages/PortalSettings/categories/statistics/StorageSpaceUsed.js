@@ -108,9 +108,9 @@ const DiskSpaceUsedComponent = (props) => {
           isDisabled={isLoading}
         />
         <div className="text-container">
-          <Text>{"Updating statistics can take a long time"}</Text>
+          <Text>{t("UpdatingStatistics")}</Text>
           <Text fontSize="12px" color={"#657077"}>
-            {`Last update: ${lastUpdateDate}`}
+            {t("LastUpdate", { date: lastUpdateDate })}
           </Text>
         </div>
       </div>

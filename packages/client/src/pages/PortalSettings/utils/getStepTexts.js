@@ -29,10 +29,10 @@ export const getStepDescription = (t, stepIndex) => {
       return <Trans i18nKey="SelectUserTypesDescription" ns="Settings" t={t} />;
     case 4:
       return <Trans i18nKey="SelectSectionsDescription" ns="Settings" t={t} />;
-    case 5:
-      return <Trans i18nKey="DataImportProcessingDescription" ns="Settings" t={t} />
-    case 6: 
-      return <Trans i18nKey="DataImportCompleteDescription" ns="Settings" t={t} />
+    case 6:
+      return (
+        <Trans i18nKey="DataImportCompleteDescription" ns="Settings" t={t} />
+      );
     default:
       return;
   }

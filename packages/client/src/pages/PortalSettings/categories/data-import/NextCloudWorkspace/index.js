@@ -25,7 +25,6 @@ const NextcloudWrapper = styled.div`
     margin-bottom: 8px;
     font-size: 12px;
   }
-
 `;
 
 const NextcloudWorkspace = (props) => {
@@ -48,9 +47,7 @@ const NextcloudWorkspace = (props) => {
         <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
           {currentStep + 1}/{StepsData.length}. {StepsData[currentStep].title}
         </Text>
-        <Text className="data-import-section-description" lineHeight="16px">
-          {StepsData[currentStep].description}
-        </Text>
+        <div className="data-import-section-description">{StepsData[currentStep].description}</div>
       </NextcloudWrapper>
       {StepsData[currentStep].component}
     </>

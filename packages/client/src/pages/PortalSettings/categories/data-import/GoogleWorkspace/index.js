@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly, isDesktop } from "react-device-detect";
 
 import FirstStep from "./Stepper/FirstStep";
 import SecondStep from "./Stepper/SecondStep";
@@ -22,7 +22,25 @@ import { WorkspaceWrapper } from "../StyledDataImport";
 const GoogleWorkspace = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSmallWindow, setIsSmallWindow] = useState(false);
   const { t } = props;
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => {
+      window.removeEventListener("resize", onCheckView);
+    };
+  }, []);
+
+  const onCheckView = () => {
+    if (isDesktop && window.innerWidth < 600) {
+      setIsSmallWindow(true);
+    } else {
+      setIsSmallWindow(false);
+    }
+  };
 
   const getStepContent = (stepIndex) => {
     switch (stepIndex) {
@@ -124,7 +142,9 @@ const GoogleWorkspace = (props) => {
     />
   );
 
-  if (isMobile)
+  if (isSmallWindow)
+    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobileOnly)
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   return (

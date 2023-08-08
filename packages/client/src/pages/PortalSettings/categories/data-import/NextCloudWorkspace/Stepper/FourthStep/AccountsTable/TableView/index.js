@@ -16,7 +16,7 @@ const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
 
 const StyledTableContainer = styled(TableContainer)`
-  margin: 20px 0;
+  margin: 0.5px 0px 20px;
 
   .header-container-text {
     font-size: 12px;

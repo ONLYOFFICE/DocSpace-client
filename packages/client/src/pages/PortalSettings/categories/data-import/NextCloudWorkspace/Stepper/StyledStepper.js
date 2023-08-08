@@ -5,6 +5,16 @@ export const Wrapper = styled.div`
     font-size: 12px;
     margin: 0 0 16px;
   }
+
+  .upper-buttons {
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .accounts-pagging {
+    margin-top: -5px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const UsersInfoBlock = styled.div`

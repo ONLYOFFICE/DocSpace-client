@@ -24,23 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-
-
 namespace ASC.Migration.GoogleWorkspace
 {
-    [ApiMigrator("GoogleWorkspace")]
+    [Scope]
     public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsMigratingUser, GwsMigratingContacts, GwsMigratingCalendar, GwsMigratingFiles, GwsMigratingMail>
     {
         private string[] _takeouts;
         private readonly UserManager _userManager;
         private readonly SecurityContext _securityContext;
         private readonly TempPath _tempPath;
+        private readonly MigratorMeta _meta;
+        public override MigratorMeta Meta => _meta;
 
         public GoogleWorkspaceMigration(MigrationLogger migrationLogger, UserManager userManager, SecurityContext securityContext, TempPath tempPath) : base(migrationLogger)
         {
             _userManager = userManager;
             _securityContext = securityContext;
             _tempPath = tempPath;
+            _meta = new("GoogleWorkspace", 5, true);
         }
 
         public override void Init(string path, CancellationToken cancellationToken)

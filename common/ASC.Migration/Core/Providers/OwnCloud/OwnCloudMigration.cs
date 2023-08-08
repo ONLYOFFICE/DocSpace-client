@@ -28,24 +28,24 @@ using ASC.Migration.OwnCloud.Models;
 
 namespace ASC.Migration.OwnCloud;
 
-[ApiMigrator("OwncloudMigrate")]
-public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingUser, OCMigratingContacts, OCMigratingCalendar, OCMigratingFiles, OCMigratingMail>
+[Scope]
+public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingUser, OCMigratingContacts, OCMigratingCalendar, OCMigratingFiles, OCMigratingMail>, IMigration
 {
     private string _takeouts;
     public string[] TempParse;
     private string _tmpFolder;
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IDaoFactory _daoFactory;
-    private readonly FileSecurity _fileSecurity;
     private readonly FileStorageService _fileStorageService;
     private readonly SecurityContext _securityContext;
     private readonly TenantManager _tenantManager;
     private readonly UserManager _userManager;
+    private readonly MigratorMeta _meta;
+    public override MigratorMeta Meta => _meta;
 
     public OwnCloudMigration(
         GlobalFolderHelper globalFolderHelper,
         IDaoFactory daoFactory,
-        FileSecurity fileSecurity,
         FileStorageService fileStorageService,
         SecurityContext securityContext,
         TenantManager tenantManager,
@@ -54,11 +54,11 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
         _fileStorageService = fileStorageService;
         _securityContext = securityContext;
         _tenantManager = tenantManager;
         _userManager = userManager;
+        _meta = new MigratorMeta("Owncloud", 6, false);
     }
 
     public override void Init(string path, CancellationToken cancellationToken)

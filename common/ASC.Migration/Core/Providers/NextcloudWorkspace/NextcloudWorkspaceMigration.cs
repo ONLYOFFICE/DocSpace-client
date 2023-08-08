@@ -29,8 +29,8 @@ using ASC.Migration.NextcloudWorkspace.Models.Parse;
 
 namespace ASC.Migration.NextcloudWorkspace;
 
-[ApiMigrator("NextcloudMigrate")]
-public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NCMigratingUser, NCMigratingContacts, NCMigratingCalendar, NCMigratingFiles, NCMigratingMail>
+[Scope]
+public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NCMigratingUser, NCMigratingContacts, NCMigratingCalendar, NCMigratingFiles, NCMigratingMail>, IMigration
 {
     private string _takeouts;
     public string[] TempParse;
@@ -42,6 +42,8 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
     private readonly SecurityContext _securityContext;
     private readonly UserManager _userManager;
     private readonly TenantManager _tenantManager;
+    private readonly MigratorMeta _meta;
+    public override MigratorMeta Meta => _meta;
 
     public NextcloudWorkspaceMigration(
         GlobalFolderHelper globalFolderHelper,
@@ -60,6 +62,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         _securityContext = securityContext;
         _userManager = userManager;
         _tenantManager = tenantManager;
+        _meta = new("Nextcloud", 6, false);
     }
 
     public override void Init(string path, CancellationToken cancellationToken)

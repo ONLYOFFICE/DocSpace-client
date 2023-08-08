@@ -24,44 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using ASC.Migration.GoogleWorkspace;
+using ASC.Migration.NextcloudWorkspace;
+using ASC.Migration.OwnCloud;
+
+using Microsoft.Extensions.DependencyInjection;
+
 namespace ASC.Migration.Core.Models.Api;
 
-public static class MigrationCore
+[Scope]
+public class MigrationCore
 {
-
-    private static Dictionary<string, MigratorMeta> _migrators;
-    private static Dictionary<string, MigratorMeta> Migrators
+    private readonly System.IServiceProvider _serviceProvider;
+    public MigrationCore(System.IServiceProvider serviceProvider)
     {
-        get
-        {
-            if (_migrators != null)
-            {
-                return _migrators;
-            }
-
-            _migrators = new Dictionary<string, MigratorMeta>(StringComparer.OrdinalIgnoreCase);
-
-            var migratorTypes = Assembly.GetExecutingAssembly()
-                .GetExportedTypes()
-                .Where(t => !t.IsAbstract && !t.IsInterface
-                    && typeof(IMigration).IsAssignableFrom(t));
-
-            foreach (var type in migratorTypes)
-            {
-                var attr = type.GetCustomAttribute<ApiMigratorAttribute>();
-                if (attr == null)
-                {
-                    continue;
-                }
-
-                _migrators.Add(attr.Name, new MigratorMeta(type));
-            }
-
-            return _migrators;
-        }
+        _serviceProvider = serviceProvider;
     }
 
-    public static string[] GetAvailableMigrations() => Migrators.Keys.ToArray();
+    public string[] GetAvailableMigrations() => _serviceProvider.GetService<IEnumerable<IMigration>>().Select(r => r.Meta.Name).ToArray();
 
-    public static MigratorMeta GetMigrator(string migrator) => Migrators.TryGetValue(migrator, out var meta) ? meta : null;
+    public IMigration GetMigrator(string migrator)
+    {
+        return _serviceProvider.GetService<IEnumerable<IMigration>>().FirstOrDefault(r => r.Meta.Name == migrator);
+    }
+
+    public static void Register(DIHelper services)
+    {
+        services.TryAdd<IMigration, GoogleWorkspaceMigration>();
+        services.TryAdd<IMigration, NextcloudWorkspaceMigration>();
+        services.TryAdd<IMigration, OwnCloudMigration>();
+    }
 }

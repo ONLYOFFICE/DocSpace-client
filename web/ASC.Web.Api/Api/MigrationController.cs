@@ -41,6 +41,7 @@ public class MigrationController : ControllerBase
     private readonly StudioNotifyService _studioNotifyService;
     private readonly ICache _cache;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly MigrationCore _migrationCore;
 
     public MigrationController(
         CoreBaseSettings coreBaseSettings,
@@ -49,7 +50,8 @@ public class MigrationController : ControllerBase
         TempPath tempPath,
         StudioNotifyService studioNotifyService,
         ICache cache,
-        IHttpContextAccessor httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor,
+        MigrationCore migrationCore)
     {
         _coreBaseSettings = coreBaseSettings;
         _userManager = userManager;
@@ -58,6 +60,7 @@ public class MigrationController : ControllerBase
         _studioNotifyService = studioNotifyService;
         _cache = cache;
         _httpContextAccessor = httpContextAccessor;
+        _migrationCore = migrationCore;
     }
 
     /// <summary>
@@ -93,7 +96,7 @@ public class MigrationController : ControllerBase
             throw new SecurityException(Resource.ErrorAccessDenied);
         }
 
-        return MigrationCore.GetAvailableMigrations();
+        return _migrationCore.GetAvailableMigrations();
     }
 
     /// <summary>
@@ -114,20 +117,20 @@ public class MigrationController : ControllerBase
             throw new Exception(MigrationResource.MigrationUploadException);
         }
 
-        var migratorMeta = MigrationCore.GetMigrator(migratorName);
-        if (migratorMeta == null)
+        var migrator = _migrationCore.GetMigrator(migratorName);
+        if (migrator == null)
         {
             throw new ItemNotFoundException(MigrationResource.MigrationNotFoundException);
         }
+
         var cts = new CancellationTokenSource();
-        var migrator = (IMigration)Activator.CreateInstance(migratorMeta.MigratorType);
         try
         {
             migrator.Init(path, cts.Token);
         }
         catch (Exception ex)
         {
-            throw new Exception(string.Format(MigrationResource.MigrationUploadException, migratorMeta.MigratorInfo.Name), ex);
+            throw new Exception(string.Format(MigrationResource.MigrationUploadException, migratorName), ex);
         }
 
         var ongoingMigration = new OngoingMigration { Migration = migrator, CancelTokenSource = cts };
@@ -156,7 +159,7 @@ public class MigrationController : ControllerBase
 
         if (ongoingMigration.CancelTokenSource.IsCancellationRequested == true)
         {
-            var migratorName = ongoingMigration.Migration.GetType().GetCustomAttribute<ApiMigratorAttribute>().Name;
+            var migratorName = ongoingMigration.Migration.Meta.Name;
             return migratorName;
         }
 

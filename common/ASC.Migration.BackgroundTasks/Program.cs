@@ -47,18 +47,21 @@ var logger = LogManager.Setup()
 try
 {
     logger.Info("Configuring web host ({applicationContext})...", AppName);
+
     builder.Host.ConfigureDefault();
-    builder.WebHost.ConfigureDefaultKestrel();
 
     var startup = new Startup(builder.Configuration, builder.Environment);
 
     startup.ConfigureServices(builder.Services);
 
-    builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
+    builder.Host.ConfigureContainer<ContainerBuilder>((context, builder) =>
+    {
+        builder.Register(context.Configuration);
+    });
 
     var app = builder.Build();
 
-    startup.Configure(app, app.Environment);
+    startup.Configure(app);
 
     logger.Info("Starting web host ({applicationContext})...", AppName);
     await app.RunWithTasksAsync();

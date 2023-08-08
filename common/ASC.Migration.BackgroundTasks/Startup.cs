@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using ASC.Migration.Core.Models.Api;
+
 namespace ASC.Migration;
 
-public class Startup : BaseStartup
+public class Startup : BaseWorkerStartup
 {
     public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
         : base(configuration, hostEnvironment)
@@ -36,10 +38,8 @@ public class Startup : BaseStartup
 
     public override void ConfigureServices(IServiceCollection services)
     {
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-        services.AddMemoryCache();
-
         base.ConfigureServices(services);
+
+        MigrationCore.Register(DIHelper);
     }
 }

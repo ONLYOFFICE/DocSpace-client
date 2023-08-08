@@ -15,6 +15,11 @@ export const Wrapper = styled.div`
     margin-top: -5px;
     margin-bottom: 30px;
   }
+
+  .data-import-progress-bar {
+    width: 350px;
+    margin: 12px 0 16px;
+  }
 `;
 
 export const UsersInfoBlock = styled.div`

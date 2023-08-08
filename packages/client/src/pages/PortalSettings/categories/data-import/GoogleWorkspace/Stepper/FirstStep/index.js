@@ -28,9 +28,10 @@ const Wrapper = styled.div`
     margin-top: -4px;
     margin-bottom: 12px;
   }
-  
+
   .data-import-progress-bar {
     margin: 12px 0 16px;
+    width: 350px;
   }
 `;
 
@@ -60,9 +61,7 @@ const FirstStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="choose-backup-file">
-          {t("Settings:ChooseBackupFile")}
-        </Text>
+        <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
         <FileInput
           onInput={onClickInput}
           className="upload-backup-input"
@@ -72,15 +71,9 @@ const FirstStep = ({
       </Wrapper>
       {isLoading ? (
         <Wrapper>
-          <Text className="upload-backup-text">
-            {t("Settings:BackupFileUploading")}
-          </Text>
+          <Text className="upload-backup-text">{t("Settings:BackupFileUploading")}</Text>
           <ProgressBar percent={75} className="data-import-progress-bar" />
-          <Button
-            size="small"
-            label={t("Common:CancelButton")}
-            onClick={onClickButton}
-          />
+          <Button size="small" label={t("Common:CancelButton")} onClick={onClickButton} />
         </Wrapper>
       ) : (
         <SaveCancelButtons
@@ -106,8 +99,7 @@ const FirstStep = ({
 };
 
 export default inject(({ dialogsStore }) => {
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
   return {
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,

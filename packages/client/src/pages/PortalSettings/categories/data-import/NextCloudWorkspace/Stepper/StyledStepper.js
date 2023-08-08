@@ -20,6 +20,10 @@ export const Wrapper = styled.div`
     width: 350px;
     margin: 12px 0 16px;
   }
+
+  .mt-8{
+    margin-top: 8px;
+  }
 `;
 
 export const UsersInfoBlock = styled.div`

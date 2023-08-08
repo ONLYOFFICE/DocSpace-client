@@ -4,6 +4,7 @@ import ThirdStep from "./ThirdStep";
 import FourthStep from "./FourthStep";
 import FifthStep from "./FifthStep";
 import SixthStep from "./SixthStep";
+import SeventhStep from "./SeventhStep";
 
 import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
@@ -76,7 +77,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
     {
       title: "Data import complete",
       description: "Data import from NextCloud to ONLYOFFICE DocSpace is complete!",
-      component: <SixthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: <SeventhStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
     },
   ];
 };

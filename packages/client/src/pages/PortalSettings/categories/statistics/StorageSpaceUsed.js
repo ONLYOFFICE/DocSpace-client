@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import moment from "moment";
 
 import Text from "@docspace/components/text";
 import { getConvertedSize } from "@docspace/common/utils";
@@ -78,6 +79,8 @@ const DiskSpaceUsedComponent = (props) => {
     }
   };
 
+  const lastUpdateDate = moment("2023-03-09T17:46:59").format("l LT");
+
   return (
     <StyledDiscSpaceUsedComponent>
       <Text fontSize="16px" fontWeight={700} className="disk-space_title">
@@ -107,7 +110,7 @@ const DiskSpaceUsedComponent = (props) => {
         <div className="text-container">
           <Text>{"Updating statistics can take a long time"}</Text>
           <Text fontSize="12px" color={"#657077"}>
-            {"Last update: 19/6/2022 12:50"}
+            {`Last update: ${lastUpdateDate}`}
           </Text>
         </div>
       </div>

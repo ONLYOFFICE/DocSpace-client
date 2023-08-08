@@ -9,6 +9,7 @@ import {
 import TableSettings from "./TableSettings";
 import TableHeaderCell from "./TableHeaderCell";
 import { size } from "../utils/device";
+import { withTheme } from "styled-components";
 
 const minColumnSize = 150;
 const defaultMinColumnSize = 110;
@@ -171,11 +172,15 @@ class TableHeader extends React.Component {
 
   onMouseMove = (e) => {
     const { columnIndex } = this.state;
-    const { containerRef } = this.props;
+    const { containerRef, theme } = this.props;
+    const isRtl = theme.interfaceDirection === "rtl";
+
     if (!columnIndex) return;
     const column = document.getElementById("column_" + columnIndex);
     const columnSize = column.getBoundingClientRect();
-    const newWidth = e.clientX - columnSize.left;
+    const newWidth = isRtl
+      ? columnSize.right - e.clientX
+      : e.clientX - columnSize.left;
 
     const tableContainer = containerRef.current.style.gridTemplateColumns;
     const widths = tableContainer.split(" ");
@@ -718,7 +723,7 @@ class TableHeader extends React.Component {
 
               return (
                 <TableHeaderCell
-                  key={column.key}
+                  key={column.key ?? "empty-cell"}
                   index={index}
                   column={column}
                   sorted={sorted}
@@ -775,4 +780,4 @@ TableHeader.propTypes = {
   showSettings: PropTypes.bool,
 };
 
-export default TableHeader;
+export default withTheme(TableHeader);

@@ -72,6 +72,7 @@ public class BoardRolesDtoHelper
             Id = role.RoleId,
             Title = role.Title,
             Color = role.Color,
+            Type = role.Type,
             QueueNumber = role.QueueNumber,
             Assigned = role.AssignedTo != Guid.Empty ? await _employeeDtoHelper.GetAsync(role.AssignedTo) : null
         };

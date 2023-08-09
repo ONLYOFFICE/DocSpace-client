@@ -303,6 +303,22 @@ export const settingsTree = [
         link: "portal-statistics",
         tKey: "Statistics",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-statistics_quota-per-room",
+            key: "5-0-1",
+            icon: "",
+            link: "quota-per-room",
+            tKey: "QuotaPerRoom",
+          },
+          {
+            id: "portal-settings_catalog-statistics_quota-per-user",
+            key: "5-0-2",
+            icon: "",
+            link: "quota-per-user",
+            tKey: "QuotaPerUser",
+          },
+        ],
       },
     ],
   },

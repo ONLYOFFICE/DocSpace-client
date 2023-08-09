@@ -6,12 +6,12 @@ import Filter from "@docspace/common/api/people/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import { getPortal, getPortalUsersCount } from "@docspace/common/api/portal";
 
-import QuotasComponent from "./sub-components/Quotas";
+import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./sub-components/Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
 import MainInfoComponent from "./sub-components/MainInfo";
-import Divider from "./sub-components/Divider";
 import { StyledBody } from "./StyledComponent";
+import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
 const FILTER_COUNT = 5;
 let portalInfo, activeUsersCount;
@@ -50,11 +50,11 @@ const StorageManagement = ({ fetchRooms, getUsersList, language }) => {
         portalInfo={portalInfo}
         activeUsersCount={activeUsersCount}
       />
-      <Divider />
+      <StyledSettingsSeparator />
       <DiskSpaceUsedComponent />
-      <Divider />
+      <StyledSettingsSeparator />
       <QuotasComponent />
-      <Divider />
+      <StyledSettingsSeparator />
       <StatisticsComponent />
     </StyledBody>
   );

@@ -19,13 +19,13 @@ const MobileQuotasComponent = () => {
       <MobileCategoryWrapper
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
-        url="/portal-settings/statistics/portal-statistics/quota-per-room"
+        url="portal-settings/management/disk-space/quota-per-room"
         subtitle={t("SetDefaultRoomQuota")}
       />
       <MobileCategoryWrapper
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
-        url="/portal-settings/statistics/portal-statistics/quota-per-user"
+        url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("SetDefaultUserQuota")}
       />
     </StyledBaseQuotaComponent>

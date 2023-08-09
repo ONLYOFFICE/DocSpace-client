@@ -7,6 +7,8 @@ import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 import Filter from "@docspace/common/api/people/filter";
 
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
+
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const StatisticsComponent = (props) => {

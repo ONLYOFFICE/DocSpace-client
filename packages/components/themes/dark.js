@@ -47,6 +47,8 @@ const {
   strongBlue,
   lightGrayishStrongBlue,
   darkRed,
+  darkMain,
+  grayBackgroundTextDark,
 } = globalColors;
 
 const Dark = {
@@ -62,6 +64,8 @@ const Dark = {
     disableColor: "#5c5c5c",
     fontWeight: "normal",
     fontWeightBold: "bold",
+    descriptionColor: darkMain,
+    grayBackgroundText: grayBackgroundTextDark,
   },
 
   heading: {

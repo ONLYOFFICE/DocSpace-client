@@ -2675,6 +2675,7 @@ class FilesStore {
     const newItem = items.map((item) => {
       const {
         access,
+        boardId,
         autoDelete,
         originTitle,
         comment,
@@ -2800,6 +2801,7 @@ class FilesStore {
 
       return {
         access,
+        boardId,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
         //checked,

@@ -33,7 +33,9 @@ function DeleteFormDialog(props: DeleteFormDialogProps) {
     setVisible(false);
   };
 
-  const onDeleteForm = () => {};
+  const onDeleteForm = () => {
+    console.log({ removeItem, seleted });
+  };
 
   const onSelectTfaType = (event: ChangeEvent<HTMLInputElement>) => {
     if (seleted !== event.target.value) {
@@ -89,8 +91,8 @@ function DeleteFormDialog(props: DeleteFormDialogProps) {
       <ModalDialog.Body>
         <ContentWrapper>
           {t("DeleteFormDialog:Body", {
-            fileName: removeItem?.title ?? "",
-            boardName: "",
+            fileName: removeItem.fileName,
+            boardName: removeItem.boardName,
           })}
           <RadioButtonGroup
             className="box"
@@ -133,13 +135,10 @@ export default inject<StoreType>(({ dialogsStore, filesStore, auth }) => {
   const {
     deleteFormDialogVisible: visible,
     setDeleteFormDialogVisible: setVisible,
+    removeItem,
   } = dialogsStore;
 
   const theme = (auth.settingsStore as unknown as SettingsStore).theme;
-
-  const removeItem = filesStore.bufferSelection;
-
-  console.log({ removeItem });
 
   return {
     visible,

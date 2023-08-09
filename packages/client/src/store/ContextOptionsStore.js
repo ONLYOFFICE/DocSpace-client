@@ -648,7 +648,12 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
-  onClickRemoveOForm = () => {
+  onClickRemoveOForm = (item) => {
+    this.dialogsStore.setRemoveItem({
+      boardId: item.boardId,
+      fileName: item.title,
+      boardName: "",
+    });
     this.dialogsStore.setDeleteFormDialogVisible(true);
   };
 
@@ -1175,8 +1180,8 @@ class ContextOptionsStore {
         icon: TrashReactSvgUrl,
         onClick: () => {
           //TODO: Remove temp later
-          if (item.fileExst === ".oform") {
-            return this.onClickRemoveOForm();
+          if (item.fileExst === ".oform" && item.boardId) {
+            return this.onClickRemoveOForm(item);
           }
 
           isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t);

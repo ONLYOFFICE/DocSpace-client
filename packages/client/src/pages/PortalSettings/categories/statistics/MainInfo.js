@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import Text from "@docspace/components/text";
 
-import { StyledMainInfo } from "../StyledComponent";
+import { StyledMainInfo } from "./StyledComponent";
 
 const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;

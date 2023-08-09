@@ -7,9 +7,9 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 import { getPortal, getPortalUsersCount } from "@docspace/common/api/portal";
 
 import QuotasComponent from "./Quotas";
-import StatisticsComponent from "./sub-components/Statistics";
+import StatisticsComponent from "./Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
-import MainInfoComponent from "./sub-components/MainInfo";
+import MainInfoComponent from "./MainInfo";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 

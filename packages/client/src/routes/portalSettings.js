@@ -71,16 +71,16 @@ const Payments = loadable(() =>
   import("../pages/PortalSettings/categories/payments")
 );
 const Statistics = loadable(() =>
-  import("../pages/PortalSettings/categories/statistics")
+  import("../pages/PortalSettings/categories/storage-management")
 );
 const QuotaPerRoom = loadable(() =>
   import(
-    "../pages/PortalSettings/categories/statistics/sub-components/QuotaPerRoom.js"
+    "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js"
   )
 );
 const QuotaPerUser = loadable(() =>
   import(
-    "../pages/PortalSettings/categories/statistics/sub-components/QuotaPerUser.js"
+    "../pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js"
   )
 );
 const ThirdParty = loadable(() =>
@@ -233,15 +233,15 @@ const PortalSettingsRoutes = {
       element: <Payments />,
     },
     {
-      path: "statistics/portal-statistics",
+      path: "management/disk-space",
       element: <Statistics />,
     },
     {
-      path: "statistics/portal-statistics/quota-per-room",
+      path: "management/disk-space/quota-per-room",
       element: <QuotaPerRoom />,
     },
     {
-      path: "statistics/portal-statistics/quota-per-user",
+      path: "management/disk-space/quota-per-user",
       element: <QuotaPerUser />,
     },
     {

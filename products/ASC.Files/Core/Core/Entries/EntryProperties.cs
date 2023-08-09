@@ -31,6 +31,7 @@ namespace ASC.Files.Core;
 public class EntryProperties
 {
     public FormFillingProperties FormFilling { get; set; }
+    public FormBoardProperties FormBoard { get; set; }
 
     public static EntryProperties Deserialize(string data, ILogger logger)
     {
@@ -65,6 +66,18 @@ public class FormFillingProperties
     public string ToFolderId { get; set; }
 
     public FormFillingProperties()
+    {
+    }
+
+}
+
+[Transient]
+public class FormBoardProperties
+{
+    public string BoardId { get; set; }
+    public string BoardTitle { get; set; }
+
+    public FormBoardProperties()
     {
     }
 

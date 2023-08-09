@@ -5,7 +5,7 @@ import { Base } from "@docspace/components/themes";
 import {
   StyledMobileCategoryWrapper,
   StyledArrowRightIcon,
-} from "../StyledSecurity";
+} from "../categories/security/StyledSecurity";
 import { combineUrl } from "@docspace/common/utils";
 
 const MobileCategoryWrapper = (props) => {

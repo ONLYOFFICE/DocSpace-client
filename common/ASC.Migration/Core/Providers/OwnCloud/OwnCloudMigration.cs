@@ -29,7 +29,7 @@ using ASC.Migration.OwnCloud.Models;
 namespace ASC.Migration.OwnCloud;
 
 [Scope]
-public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingUser, OCMigratingContacts, OCMigratingCalendar, OCMigratingFiles, OCMigratingMail>, IMigration
+public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingUser, OCMigratingFiles>
 {
     private string _takeouts;
     public string[] TempParse;
@@ -502,7 +502,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
 
             try
             {
-                await user.MigratingContacts.MigrateAsync();
+                //await user.MigratingContacts.MigrateAsync();
             }
             catch (Exception ex)
             {

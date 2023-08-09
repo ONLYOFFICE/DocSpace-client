@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.Core.Resources;
-
 namespace ASC.Api.Migration;
 
 [Scope]
@@ -70,10 +68,7 @@ public class MigrationController : ControllerBase
     [HttpGet("backuptmp")]
     public async Task<string> GetTmpFolderAsync()
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
         var tempFolder = Path.Combine(_tempPath.GetTempPath(), "migration", DateTime.Now.ToString("dd.MM.yyyy_HH_mm"));
 
@@ -91,10 +86,7 @@ public class MigrationController : ControllerBase
     [HttpGet("list")]
     public async Task<string[]> ListAsync()
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
         return _migrationCore.GetAvailableMigrations();
     }
@@ -107,36 +99,9 @@ public class MigrationController : ControllerBase
     [HttpPost("init/{migratorName}")]
     public async Task UploadAndInitAsync(string migratorName, string path)
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
-        if (GetOngoingMigration() != null)
-        {
-            throw new Exception(MigrationResource.MigrationUploadException);
-        }
-
-        var migrator = _migrationCore.GetMigrator(migratorName);
-        if (migrator == null)
-        {
-            throw new ItemNotFoundException(MigrationResource.MigrationNotFoundException);
-        }
-
-        var cts = new CancellationTokenSource();
-        try
-        {
-            migrator.Init(path, cts.Token);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(string.Format(MigrationResource.MigrationUploadException, migratorName), ex);
-        }
-
-        var ongoingMigration = new OngoingMigration { Migration = migrator, CancelTokenSource = cts };
-        StoreOngoingMigration(ongoingMigration);
-
-        ongoingMigration.ParseTask = Task.Run(migrator.Parse);
+        await _migrationCore.StartParse(migratorName, path);
     }
 
     /// <summary>
@@ -144,34 +109,11 @@ public class MigrationController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("status")]
-    public async Task<object> Status()
+    public async Task<MigrationOperation> Status()
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
-        var ongoingMigration = GetOngoingMigration();
-        if (ongoingMigration == null)
-        {
-            return null;
-        }
-
-        if (ongoingMigration.CancelTokenSource.IsCancellationRequested == true)
-        {
-            var migratorName = ongoingMigration.Migration.Meta.Name;
-            return migratorName;
-        }
-
-        var result = new MigrationStatus()
-        {
-            ParseResult = ongoingMigration.ParseTask.IsCompleted ? await ongoingMigration.ParseTask : null,
-            MigrationEnded = ongoingMigration.MigrationEnded,
-            Progress = ongoingMigration.Migration.GetProgress(),
-            ProgressStatus = ongoingMigration.Migration.GetProgressStatus()
-        };
-
-        return result;
+        return await _migrationCore.GetStatus();
     }
 
     /// <summary>
@@ -180,17 +122,9 @@ public class MigrationController : ControllerBase
     [HttpPost("cancel")]
     public async Task CancelAsync()
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
-        var ongoingMigration = GetOngoingMigration();
-        if (ongoingMigration == null)
-        {
-            throw new Exception(MigrationResource.MigrationProgressException);
-        }
-        ongoingMigration.CancelTokenSource.Cancel();
+        await _migrationCore.Stop();
     }
 
     /// <summary>
@@ -200,98 +134,61 @@ public class MigrationController : ControllerBase
     [HttpPost("migrate")]
     public async Task MigrateAsync(MigrationApiInfo info)
     {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
+        await DemandPermission();
 
-        var ongoingMigration = GetOngoingMigration();
-        if (ongoingMigration == null)
-        {
-            throw new Exception(MigrationResource.MigrationProgressException);
-        }
-        else if (!ongoingMigration.ParseTask.IsCompleted)
-        {
-            throw new Exception(MigrationResource.MigrationStartException);
-        }
-
-        ongoingMigration.MigrationTask = ongoingMigration.Migration.Migrate(info);
+        await _migrationCore.Start(info);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("logs")]
-    public async Task LogsAsync()
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <returns></returns>
+    //[HttpGet("logs")]
+    //public async Task LogsAsync()
+    //{
+    //    await DemandPermission();
+
+    //    var ongoingMigration = GetOngoingMigration();
+    //    if (ongoingMigration == null)
+    //    {
+    //        throw new Exception(MigrationResource.MigrationProgressException);
+    //    }
+
+    //    _httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", ContentDispositionUtil.GetHeaderValue("migration.log"));
+    //    _httpContextAccessor.HttpContext.Response.ContentType = "text/plain; charset=UTF-8";
+    //    await ongoingMigration.Migration.GetLogs().CopyToAsync(_httpContextAccessor.HttpContext.Response.Body);
+    //}
+
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="isSendWelcomeEmail"></param>
+    //[HttpPost("finish")]
+    //public async Task FinishAsync(bool isSendWelcomeEmail)
+    //{
+    //    await DemandPermission();
+
+    //    if (isSendWelcomeEmail)
+    //    {
+    //        var ongoingMigration = GetOngoingMigration();
+    //        if (ongoingMigration == null)
+    //        {
+    //            throw new Exception(MigrationResource.MigrationProgressException);
+    //        }
+    //        var guidUsers = ongoingMigration.Migration.GetGuidImportedUsers();
+    //        foreach (var gu in guidUsers)
+    //        {
+    //            var u = await _userManager.GetUsersAsync(gu);
+    //            await _studioNotifyService.UserInfoActivationAsync(u);
+    //        }
+    //    }
+    //}
+
+    private async Task DemandPermission()
     {
         if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
         {
             throw new SecurityException(Resource.ErrorAccessDenied);
-        }
-
-        var ongoingMigration = GetOngoingMigration();
-        if (ongoingMigration == null)
-        {
-            throw new Exception(MigrationResource.MigrationProgressException);
-        }
-
-        _httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", ContentDispositionUtil.GetHeaderValue("migration.log"));
-        _httpContextAccessor.HttpContext.Response.ContentType = "text/plain; charset=UTF-8";
-        await ongoingMigration.Migration.GetLogs().CopyToAsync(_httpContextAccessor.HttpContext.Response.Body);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="isSendWelcomeEmail"></param>
-    [HttpPost("finish")]
-    public async Task FinishAsync(bool isSendWelcomeEmail)
-    {
-        if (!_coreBaseSettings.Standalone || !await _userManager.IsDocSpaceAdminAsync(_authContext.CurrentAccount.ID))
-        {
-            throw new SecurityException(Resource.ErrorAccessDenied);
-        }
-
-        if (isSendWelcomeEmail)
-        {
-            var ongoingMigration = GetOngoingMigration();
-            if (ongoingMigration == null)
-            {
-                throw new Exception(MigrationResource.MigrationProgressException);
-            }
-            var guidUsers = ongoingMigration.Migration.GetGuidImportedUsers();
-            foreach (var gu in guidUsers)
-            {
-                var u = await _userManager.GetUsersAsync(gu);
-                await _studioNotifyService.UserInfoActivationAsync(u);
-            }
-        }
-        ClearCache();
-    }
-
-    // ToDo: Use ASCCache
-    private void StoreOngoingMigration(OngoingMigration migration)
-    {
-        _cache.Insert(MigrationCacheKey, migration, TimeSpan.FromDays(1));
-    }
-
-    private OngoingMigration GetOngoingMigration()
-    {
-        return _cache.Get<OngoingMigration>(MigrationCacheKey);
-    }
-
-    private void ClearCache()
-    {
-        _cache.Remove(MigrationCacheKey);
-    }
-
-    private void ClearMigration(CacheEntryRemovedArguments arguments)
-    {
-        if (typeof(OngoingMigration).IsAssignableFrom(arguments.CacheItem.Value.GetType()))
-        {
-            var ongoingMigration = (OngoingMigration)arguments.CacheItem.Value;
-            ongoingMigration.Migration.Dispose();
         }
     }
 }

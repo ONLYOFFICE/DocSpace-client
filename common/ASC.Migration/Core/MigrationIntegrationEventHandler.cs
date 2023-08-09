@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2022
+﻿// (c) Copyright Ascensio System SIA 2010-2022
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,22 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.Core.Models.Api;
+using ASC.EventBus.Log;
 
-namespace ASC.Migration;
-
-public class Startup : BaseWorkerStartup
+namespace ASC.Migration.Core.Core;
+public class MigrationIntegrationEventHandler : IIntegrationEventHandler<MigrationIntegrationEvent>
 {
-    public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
-        : base(configuration, hostEnvironment)
-    {
+    private readonly MigrationWorker _worker;
+    private readonly ILogger<MigrationIntegrationEventHandler> _logger;
 
+    public MigrationIntegrationEventHandler(MigrationWorker worker, ILogger<MigrationIntegrationEventHandler> logger)
+    {
+        _worker = worker;
+        _logger = logger;
     }
 
-    public override void ConfigureServices(IServiceCollection services)
+    public Task Handle(MigrationIntegrationEvent @event)
     {
-        base.ConfigureServices(services);
+        using (_logger.BeginScope(new[] { new KeyValuePair<string, object>("integrationEventContext", $"{@event.Id}-migration") }))
+        {
+            _logger.InformationHandlingIntegrationEvent(@event.Id, "migration", @event);
 
-        MigrationCore.Register(DIHelper);
+            _worker.Start(@event.TenantId, @event.MigratorName, @event.Path);
+
+            return Task.CompletedTask;
+        }
     }
 }

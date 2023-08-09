@@ -27,7 +27,7 @@
 namespace ASC.Migration.GoogleWorkspace
 {
     [Scope]
-    public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsMigratingUser, GwsMigratingContacts, GwsMigratingCalendar, GwsMigratingFiles, GwsMigratingMail>
+    public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsMigratingUser, GwsMigratingFiles>
     {
         private string[] _takeouts;
         private readonly UserManager _userManager;
@@ -202,7 +202,6 @@ namespace ASC.Migration.GoogleWorkspace
 
                 try
                 {
-                    await user.MigratingContacts.MigrateAsync();
                 }
                 catch (Exception ex)
                 {

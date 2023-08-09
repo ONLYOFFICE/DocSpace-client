@@ -41,6 +41,7 @@ global using ASC.EventBus.Abstractions;
 global using ASC.EventBus.Log;
 global using ASC.FederatedLogin;
 global using ASC.FederatedLogin.LoginProviders;
+global using ASC.Migration.Core.Core;
 global using ASC.Web.Core.HttpHandlers;
 global using ASC.Web.Core.RemovePortal;
 global using ASC.Web.Studio;
@@ -60,6 +61,8 @@ global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Hosting.WindowsServices;
 global using Microsoft.Extensions.Logging;
+
+global using NLog;
 
 global using Polly;
 global using Polly.Extensions.Http;

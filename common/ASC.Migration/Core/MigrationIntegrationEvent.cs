@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2022
+﻿// (c) Copyright Ascensio System SIA 2010-2022
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-global using ASC.Api.Core;
-global using ASC.Api.Core.Extensions;
-global using ASC.Common.DependencyInjection;
-global using ASC.Migration;
+namespace ASC.Migration.Core.Core;
 
-global using Autofac;
+[ProtoContract]
+public record MigrationIntegrationEvent : IntegrationEvent
+{
 
-global using Microsoft.Extensions.Hosting.WindowsServices;
+    [ProtoMember(6)]
+    public string MigratorName { get; set; }
 
-global using NLog;
+
+    [ProtoMember(7)]
+    public string Path { get; set; }
+
+    public MigrationIntegrationEvent(Guid createBy, int tenantId) : base(createBy, tenantId)
+    {
+    }
+
+    protected MigrationIntegrationEvent()
+    {
+    }
+}

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using ASC.Migration.Core.Core;
 using ASC.Migration.GoogleWorkspace;
 using ASC.Migration.NextcloudWorkspace;
 using ASC.Migration.OwnCloud;
@@ -36,9 +37,22 @@ namespace ASC.Migration.Core.Models.Api;
 public class MigrationCore
 {
     private readonly System.IServiceProvider _serviceProvider;
-    public MigrationCore(System.IServiceProvider serviceProvider)
+    private readonly IEventBus _eventBus;
+    private readonly AuthContext _authContext;
+    private readonly TenantManager _tenantManager;
+    private readonly MigrationWorker _migrationWorker;
+
+    public MigrationCore(System.IServiceProvider serviceProvider,
+        IEventBus eventBus,
+        AuthContext authContext,
+        TenantManager tenantManager,
+        MigrationWorker migrationWorker)
     {
         _serviceProvider = serviceProvider;
+        _eventBus = eventBus;
+        _authContext = authContext;
+        _tenantManager = tenantManager;
+        _migrationWorker = migrationWorker;
     }
 
     public string[] GetAvailableMigrations() => _serviceProvider.GetService<IEnumerable<IMigration>>().Select(r => r.Meta.Name).ToArray();
@@ -46,6 +60,32 @@ public class MigrationCore
     public IMigration GetMigrator(string migrator)
     {
         return _serviceProvider.GetService<IEnumerable<IMigration>>().FirstOrDefault(r => r.Meta.Name == migrator);
+    }
+
+    public async Task StartParse(string migrationName, string path)
+    {
+        _eventBus.Publish(new MigrationIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
+        {
+            MigratorName = migrationName,
+            Path = path
+        });
+    }
+
+    public async Task Start(MigrationApiInfo info)
+    {
+        _eventBus.Publish(new MigrationIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
+        {
+        });
+    }
+
+    public async Task Stop()
+    {
+        _migrationWorker.Stop(await _tenantManager.GetCurrentTenantIdAsync());
+    }
+
+    public async Task<MigrationOperation> GetStatus()
+    {
+        return _migrationWorker.GetStatus(await _tenantManager.GetCurrentTenantIdAsync());
     }
 
     public static void Register(DIHelper services)

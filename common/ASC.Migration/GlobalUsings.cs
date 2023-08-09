@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 global using System.IO.Compression;
-global using System.Reflection;
 global using System.Runtime.Serialization;
 global using System.Text;
 global using System.Text.Json.Serialization;
@@ -35,6 +34,8 @@ global using ASC.Common;
 global using ASC.Common.Log;
 global using ASC.Core;
 global using ASC.Core.Users;
+global using ASC.EventBus.Abstractions;
+global using ASC.EventBus.Events;
 global using ASC.Files.Core;
 global using ASC.Files.Core.Resources;
 global using ASC.Files.Core.Security;
@@ -58,3 +59,5 @@ global using Microsoft.Extensions.Logging;
 global using MimeKit;
 
 global using Newtonsoft.Json;
+
+global using ProtoBuf;

@@ -30,7 +30,7 @@ using ASC.Migration.NextcloudWorkspace.Models.Parse;
 namespace ASC.Migration.NextcloudWorkspace;
 
 [Scope]
-public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NCMigratingUser, NCMigratingContacts, NCMigratingCalendar, NCMigratingFiles, NCMigratingMail>, IMigration
+public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NCMigratingUser, NCMigratingFiles>
 {
     private string _takeouts;
     public string[] TempParse;
@@ -531,7 +531,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
 
             try
             {
-                await user.MigratingContacts.MigrateAsync();
+                //await user.MigratingContacts.MigrateAsync();
             }
             catch (Exception ex)
             {

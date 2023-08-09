@@ -26,12 +26,9 @@
 
 namespace ASC.Migration.Core.Models;
 
-public abstract class MigrationInfo<TUser, TContacts, TCalendar, TFiles, TMail, TGroup> : IMigrationInfo
-    where TUser : MigratingUser<TContacts, TCalendar, TFiles, TMail>
-    where TContacts : MigratingContacts
-    where TCalendar : MigratingCalendar
+public abstract class MigrationInfo<TUser, TFiles, TGroup> : IMigrationInfo
+    where TUser : MigratingUser<TFiles>
     where TFiles : MigratingFiles
-    where TMail : MigratingMail
     where TGroup : MigratingGroup
 {
     public Dictionary<string, TUser> Users = new Dictionary<string, TUser>();
@@ -63,11 +60,7 @@ public abstract class MigrationInfo<TUser, TContacts, TCalendar, TFiles, TMail, 
 
             var user = Users[apiUser.Key];
             user.ShouldImport = apiUser.ShouldImport;
-
-            user.MigratingCalendar.ShouldImport = apiUser.MigratingCalendar.ShouldImport;
-            user.MigratingContacts.ShouldImport = apiUser.MigratingContacts.ShouldImport;
             user.MigratingFiles.ShouldImport = apiUser.MigratingFiles.ShouldImport;
-            user.MigratingMail.ShouldImport = apiUser.MigratingMail.ShouldImport;
         }
         foreach (var apiGroup in apiInfo.Groups)
         {

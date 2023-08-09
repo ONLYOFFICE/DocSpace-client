@@ -26,7 +26,7 @@
 
 namespace ASC.Migration.GoogleWorkspace.Models;
 
-public class GwsMigratingUser : MigratingUser<GwsMigratingContacts, GwsMigratingCalendar, GwsMigratingFiles, GwsMigratingMail>
+public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 {
     public override string Email => _userInfo.Email;
     public Guid Guid => _userInfo.Id;
@@ -69,29 +69,12 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingContacts, GwsMigrating
 
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingContacts = new GwsMigratingContacts(_rootFolder, this, log);
-        MigratingContacts.Parse();
-        if (MigratingContacts.ContactsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingContacts.ModuleName, MigrationResource.OnlyofficeModuleNameMail));
-        }
-
-        MigratingCalendar = new GwsMigratingCalendar(_rootFolder, log);
-        //MigratingCalendar.Parse();
-        if (MigratingCalendar.CalendarsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingCalendar.ModuleName, MigrationResource.OnlyofficeModuleNameCalendar));
-        }
-
         MigratingFiles = new GwsMigratingFiles(_globalFolderHelper, _daoFactory, _fileSecurity, _fileStorageService, _rootFolder, this, log);
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
             ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
         }
-
-        MigratingMail = new GwsMigratingMail(_rootFolder, this, log);
-        //MigratingMail.Parse();
 
         _userInfo.UserName = _userInfo.Email.Split('@').First();
         if (_userInfo.FirstName == null || _userInfo.FirstName == "")

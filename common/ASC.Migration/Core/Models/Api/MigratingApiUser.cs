@@ -32,8 +32,5 @@ public class MigratingApiUser : ImportableApiEntity
     public string Email { get; set; }
     public string DisplayName { get; set; }
     public string ModuleName { get; set; }
-    public MigratingApiContacts MigratingContacts { get; set; }
-    public MigratingApiCalendar MigratingCalendar { get; set; }
     public MigratingApiFiles MigratingFiles { get; set; }
-    public MigratingApiMail MigratingMail { get; set; }
 }

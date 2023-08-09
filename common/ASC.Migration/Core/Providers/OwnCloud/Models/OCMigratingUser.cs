@@ -26,7 +26,7 @@
 
 namespace ASC.Migration.OwnCloud.Models;
 
-public class OCMigratingUser : MigratingUser<OCMigratingContacts, OCMigratingCalendar, OCMigratingFiles, OCMigratingMail>
+public class OCMigratingUser : MigratingUser<OCMigratingFiles>
 {
     public override string Email => _userInfo.Email;
 
@@ -109,28 +109,12 @@ public class OCMigratingUser : MigratingUser<OCMigratingContacts, OCMigratingCal
         _userInfo.ActivationStatus = EmployeeActivationStatus.Pending;
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingContacts = new OCMigratingContacts(_tenantManager, this, _user.Addressbooks, log);
-        MigratingContacts.Parse();
-        if (MigratingContacts.ContactsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingContacts.ModuleName, MigrationResource.OnlyofficeModuleNameMail));
-        }
-
-        MigratingCalendar = new OCMigratingCalendar(_user.Calendars, log);
-        //MigratingCalendar.Parse();
-        if (MigratingCalendar.CalendarsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingCalendar.ModuleName, MigrationResource.OnlyofficeModuleNameCalendar));
-        }
-
         MigratingFiles = new OCMigratingFiles(_globalFolderHelper, _daoFactory, _fileStorageService, this, _user.Storages, _rootFolder, log);
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
             ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
         }
-
-        MigratingMail = new OCMigratingMail(log);
     }
 
     public void dataСhange(MigratingApiUser frontUser)

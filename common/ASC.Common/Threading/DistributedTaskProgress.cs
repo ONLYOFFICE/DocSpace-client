@@ -53,6 +53,8 @@ public class DistributedTaskProgress : DistributedTask
     [ProtoMember(3)]
     protected int StepCount { get; set; }
 
+    protected CancellationToken CancellationToken { get; }
+
     public virtual async Task RunJob(DistributedTask _, CancellationToken cancellationToken)
     {
         Percentage = 0;

@@ -27,7 +27,7 @@
 namespace ASC.Migration.Core;
 
 [Scope]
-public abstract class AbstractMigration<TMigrationInfo, TUser, TContacts, TCalendar, TFiles, TMail> : IMigration
+public abstract class AbstractMigration<TMigrationInfo, TUser, TFiles> : IMigration
     where TMigrationInfo : IMigrationInfo
 {
     private readonly MigrationLogger _logger;

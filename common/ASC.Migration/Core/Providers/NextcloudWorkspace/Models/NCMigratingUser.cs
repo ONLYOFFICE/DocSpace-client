@@ -26,7 +26,7 @@
 
 namespace ASC.Migration.NextcloudWorkspace.Models.Parse;
 
-public class NCMigratingUser : MigratingUser<NCMigratingContacts, NCMigratingCalendar, NCMigratingFiles, NCMigratingMail>
+public class NCMigratingUser : MigratingUser<NCMigratingFiles>
 {
     public override string Email => _userInfo.Email;
 
@@ -137,28 +137,12 @@ public class NCMigratingUser : MigratingUser<NCMigratingContacts, NCMigratingCal
         _userInfo.ActivationStatus = EmployeeActivationStatus.Pending;
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingContacts = new NCMigratingContacts(_tenantManager, this, _user.Addressbooks, log);
-        MigratingContacts.Parse();
-        if (MigratingContacts.ContactsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingContacts.ModuleName, MigrationResource.OnlyofficeModuleNameMail));
-        }
-
-        MigratingCalendar = new NCMigratingCalendar(_user.Calendars, log);
-        //MigratingCalendar.Parse();
-        if (MigratingCalendar.CalendarsCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingCalendar.ModuleName, MigrationResource.OnlyofficeModuleNameCalendar));
-        }
-
         MigratingFiles = new NCMigratingFiles(_globalFolderHelper, _daoFactory, _fileSecurity, _fileStorageService, this, _user.Storages, _rootFolder, log);
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
             ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
         }
-
-        MigratingMail = new NCMigratingMail(log);
     }
 
     public void dataСhange(MigratingApiUser frontUser)

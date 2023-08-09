@@ -2,11 +2,13 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import { RoleTypeEnum } from "@docspace/common/enums";
 import type DashboardStore from "./DashboardStore";
-import type { IFileByRole, IRole } from "@docspace/common/Models";
-import type { FileByRoleType } from "@docspace/common/types";
+import type { IFileByRole } from "@docspace/common/Models";
+import type { FileByRoleType, RoleQueue } from "@docspace/common/types";
 
 class FileByRoleStore {
-  constructor(private dashboard: DashboardStore, private role: IRole) {
+  public firstLoaded: boolean = false;
+
+  constructor(private dashboard: DashboardStore, private role: RoleQueue) {
     makeAutoObservable(this);
   }
 
@@ -53,6 +55,10 @@ class FileByRoleStore {
       };
     });
   }
+
+  public setFirstLoaded = (arg: boolean) => {
+    this.firstLoaded = arg;
+  };
 }
 
 export default FileByRoleStore;

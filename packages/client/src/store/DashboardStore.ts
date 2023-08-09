@@ -55,6 +55,12 @@ class DashboardStore {
     this.viewAs = viewAs;
   };
 
+  private createCollectionFileByRoleStore = (roles: RoleQueue[]) => {
+    this.collectionFileByRoleStore = new Map(
+      roles.map((role) => [role.id, new FileByRoleStore(this, role)])
+    );
+  };
+
   private settingUpNavigationPath = async (dashboard: IDashboard) => {
     const navigationPath = await Promise.all(
       dashboard.pathParts.map(async (folder) => {
@@ -282,10 +288,7 @@ class DashboardStore {
       );
       runInAction(() => {
         this.filesByRole.set(role.id, files);
-        this.collectionFileByRoleStore.set(
-          role.id,
-          new FileByRoleStore(this, role)
-        );
+        this.collectionFileByRoleStore.get(role.id)?.setFirstLoaded(true);
       });
 
       return files;
@@ -326,9 +329,9 @@ class DashboardStore {
 
       this.setRoles(dashboard.current.roleQueue);
       this.setDashboard(dashboard);
+      this.createCollectionFileByRoleStore(dashboard.current.roleQueue);
 
       await this.settingUpNavigationPath(dashboard);
-
       return dashboard;
     } catch (error) {
       return Promise.reject(error);

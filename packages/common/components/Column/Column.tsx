@@ -26,8 +26,6 @@ function Column(props: ColumnProps) {
     [props.selectedFileByRole]
   );
 
-  const filesByRoleStore = props.collectionFileByRoleStore?.get(props.role.id);
-
   return (
     <ColumnContainer>
       <ColumnHeader>
@@ -35,8 +33,8 @@ function Column(props: ColumnProps) {
       </ColumnHeader>
       <ColumnBody>
         <ColumnBodyContent
-          isLoading={isLoading}
-          filesByRole={filesByRoleStore?.FilesByRole}
+          isLoading={isLoading && !props.firstLoaded}
+          filesByRole={props.filesByRole}
           onSelected={onSelected}
           getOptions={props.getModelFile!}
           setBufferSelectionFileByRole={props.setBufferSelectionFileByRole!}
@@ -46,12 +44,10 @@ function Column(props: ColumnProps) {
   );
 }
 
-export default inject<StoreType>(
-  ({ dashboardStore, dashboardContextOptionStore }) => {
+export default inject<StoreType, ColumnProps>(
+  ({ dashboardStore, dashboardContextOptionStore }, { role: { id } }) => {
     const {
-      filesByRole,
       fetchFilesByRole,
-      selectedFilesByRoleMap,
       selectedFileByRole,
       collectionFileByRoleStore,
       setBufferSelectionFileByRole,
@@ -59,10 +55,17 @@ export default inject<StoreType>(
 
     const { getModelFile } = dashboardContextOptionStore;
 
+    const filesByRoleStore = collectionFileByRoleStore?.get(id);
+
+    const filesByRole = filesByRoleStore?.FilesByRole ?? [];
+    const firstLoaded = Boolean(filesByRoleStore?.firstLoaded);
+
     return {
+      firstLoaded,
       filesByRole,
+
       fetchFilesByRole,
-      selectedFilesByRoleMap,
+
       selectedFileByRole,
       collectionFileByRoleStore,
       getModelFile,

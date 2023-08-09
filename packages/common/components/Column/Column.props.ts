@@ -10,10 +10,12 @@ type DashboardStoreType = StoreType["dashboardStore"];
 type ColumnPropsOwn = {
   getModel: GetModelFunctionType;
 
-  filesByRole?: Map<number, Map<number, IFileByRole>>;
+  filesByRole?: IFileByRole[];
+  firstLoaded?: boolean;
+
   selectedFileByRole?: DashboardStoreType["selectedFileByRole"];
   fetchFilesByRole?: DashboardStoreType["fetchFilesByRole"];
-  selectedFilesByRoleMap?: Map<number, IFileByRole>;
+
   collectionFileByRoleStore?: Map<number, FileByRoleStore>;
   getModelFile?: (
     file: IFileByRole,

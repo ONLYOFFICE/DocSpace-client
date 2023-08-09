@@ -747,9 +747,10 @@ public class FileStorageService //: IFileStorageService
             {
                 var prop = new EntryProperties()
                 {
-                    FormFilling = new FormFillingProperties()
+                    FormBoard = new FormBoardProperties()
                     {
-                        ToFolderId = internalEntry.Id.ToString()
+                        BoardId = internalEntry.Id.ToString(),
+                        BoardTitle = internalEntry.Title,
                     }
                 };
                 await SetFileProperties(file.Id, prop);
@@ -1746,11 +1747,12 @@ public class FileStorageService //: IFileStorageService
 
         var properties = await fileDao.GetProperties(fileId) ?? new EntryProperties();
 
-        if (properties.FormFilling != null)
+        if (properties.FormFilling != null || properties.FormBoard != null)
         {
             if (!await _fileSharing.CanSetAccessAsync(file) || !_fileUtility.CanWebRestrictedEditing(file.Title))
             {
                 properties.FormFilling = null;
+                properties.FormBoard = null;
             }
         }
 
@@ -1786,13 +1788,12 @@ public class FileStorageService //: IFileStorageService
         var currentProperies = await fileDao.GetProperties(fileId) ?? new EntryProperties();
         if (fileProperties != null)
         {
+            if (!await _fileSharing.CanSetAccessAsync(file))
+            {
+                throw new SecurityException(FilesCommonResource.ErrorMassage_SecurityException);
+            }
             if (fileProperties.FormFilling != null)
             {
-                if (!await _fileSharing.CanSetAccessAsync(file))
-                {
-                    throw new SecurityException(FilesCommonResource.ErrorMassage_SecurityException);
-                }
-
                 if (currentProperies.FormFilling == null)
                 {
                     await using var scope = _serviceScopeFactory.CreateAsyncScope();
@@ -1811,6 +1812,27 @@ public class FileStorageService //: IFileStorageService
                     }
                 }
 
+            }
+            if (fileProperties.FormBoard != null)
+            {
+                if (currentProperies.FormBoard == null)
+                {
+                    currentProperies.FormBoard = new FormBoardProperties();     //TODO scope
+                }
+
+                if (!string.IsNullOrEmpty(fileProperties.FormBoard.BoardId))
+                {
+                    if (int.TryParse(fileProperties.FormBoard.BoardId, out var bId))
+                    {
+                        currentProperies.FormBoard.BoardId = await GetFormFillingFolder(bId);
+                    }
+                    else
+                    {
+                        currentProperies.FormBoard.BoardId = await GetFormFillingFolder(bId);
+                    }
+                }
+
+                currentProperies.FormBoard.BoardTitle = Global.ReplaceInvalidCharsAndTruncate(fileProperties.FormBoard.BoardTitle);
             }
 
             await fileDao.SaveProperties(file.Id, currentProperies);

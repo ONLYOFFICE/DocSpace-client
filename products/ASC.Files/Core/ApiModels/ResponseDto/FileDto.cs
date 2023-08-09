@@ -49,6 +49,7 @@ public class FileDto<T> : FileEntryDto<T>
     public bool DenyDownload { get; set; }
     public bool DenySharing { get; set; }
     public string BoardId { get; set; }
+    public string BoardTitle { get; set; }
     public IDictionary<Accessability, bool> ViewAccessability { get; set; }
 
     protected internal override FileEntryType EntryType { get => FileEntryType.File; }
@@ -194,11 +195,12 @@ public class FileDtoHelper : FileEntryDtoHelper
                 var fileDao = _daoFactory.GetFileDao<T>();
                 var properties = await fileDao.GetProperties(file.Id) ?? new EntryProperties();
 
-                if (properties.FormFilling != null)
+                if (properties.FormBoard != null)
                 {
                     if (await _fileSharing.CanSetAccessAsync(file) || _fileUtility.CanWebRestrictedEditing(file.Title))
                     {
-                        result.BoardId = properties.FormFilling.ToFolderId;
+                        result.BoardId = properties.FormBoard.BoardId;
+                        result.BoardTitle = properties.FormBoard.BoardTitle;
                     }
                 }
             }

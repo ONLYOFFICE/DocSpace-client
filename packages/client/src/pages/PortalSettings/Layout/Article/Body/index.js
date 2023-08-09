@@ -194,7 +194,7 @@ const ArticleBodyContent = (props) => {
       }
       if (this.props.location.pathname.includes("bonus")) {
         this.setState({ selectedKeys: ["8-0"] });
-    }
+      }
     }
   }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
 
@@ -259,8 +259,8 @@ const ArticleBodyContent = (props) => {
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
         return "Common:FreeProFeatures";
-      case "Statistics":
-        return t("Statistics");
+      case "StorageManagement":
+        return t("StorageManagement");
       default:
         throw new Error("Unexpected translation key");
     }

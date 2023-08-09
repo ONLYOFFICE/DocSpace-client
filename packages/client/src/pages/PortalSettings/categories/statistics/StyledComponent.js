@@ -7,6 +7,9 @@ const StyledBaseQuotaComponent = styled.div`
     p:first-child {
       margin-bottom: 8px;
     }
+    p:last-child {
+      color: ${(props) => props.theme.text.descriptionColor};
+    }
   }
   .toggle-container {
     margin-bottom: 32px;
@@ -16,7 +19,11 @@ const StyledBaseQuotaComponent = styled.div`
     .toggle_label {
       margin-top: 10px;
       margin-bottom: 16px;
+      color: ${(props) => props.theme.text.descriptionColor};
     }
+  }
+  .category-item-description {
+    color: ${(props) => props.theme.text.descriptionColor};
   }
 `;
 
@@ -31,6 +38,9 @@ const StyledDiscSpaceUsedComponent = styled.div`
     margin-top: 16px;
     .text-container {
       display: grid;
+      .last-update {
+        color: ${(props) => props.theme.text.descriptionColor};
+      }
     }
   }
 `;
@@ -86,6 +96,7 @@ const StyledStatistics = styled.div`
 
   .statistics-description {
     margin-bottom: 20px;
+    color: ${(props) => props.theme.text.descriptionColor};
   }
   .statistics-container {
     margin-bottom: 40px;
@@ -142,6 +153,9 @@ const StyledMainInfo = styled.div`
   column-gap: 24px;
   row-gap: 12px;
   padding: 12px;
+  p {
+    color: ${(props) => props.theme.text.grayBackgroundText};
+  }
 `;
 
 const StyledBody = styled.div`

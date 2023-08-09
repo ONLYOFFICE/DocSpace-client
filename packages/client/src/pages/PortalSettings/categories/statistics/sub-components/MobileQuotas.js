@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import MobileCategoryWrapper from "../../../components/mobile-category";
 
-const MobileQuotasComponent = ({ onQuotasClick }) => {
+const MobileQuotasComponent = () => {
   const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 

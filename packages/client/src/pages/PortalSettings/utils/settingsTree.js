@@ -293,7 +293,7 @@ export const settingsTree = [
     key: "5",
     icon: DeveloperReactSvgUrl,
     link: "statistics",
-    tKey: "Statistics",
+    tKey: "StorageManagement",
     isHeader: true,
     children: [
       {
@@ -301,7 +301,7 @@ export const settingsTree = [
         key: "5-0",
         icon: "",
         link: "portal-statistics",
-        tKey: "Statistics",
+        tKey: "StorageManagement",
         isCategory: true,
         children: [
           {

@@ -14,10 +14,10 @@ const MainInfoComponent = (props) => {
 
   return (
     <StyledMainInfo>
-      <Text fontSize={"14px"} fontWeight={700} color={"#555F65"}>
+      <Text fontSize={"14px"} fontWeight={700}>
         {t("PortalCreatedDate", { date: creationDate })}
       </Text>
-      <Text fontSize={"14px"} fontWeight={700} color={"#555F65"}>
+      <Text fontSize={"14px"} fontWeight={700}>
         {t("NumberOfActiveEmployees", { count: activeUsersCount })}
       </Text>
     </StyledMainInfo>

@@ -476,6 +476,11 @@ export const getConvertedSize = (t, bytes) => {
   return resultSize + " " + sizeNames[power];
 };
 
+export const getConvertedQuota = (t, bytes) => {
+  if (bytes === -1) return "Unlimited";
+  return getConvertedSize(t, bytes);
+};
+
 export const conversionToBytes = (size, power) => size * Math.pow(1024, power);
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {

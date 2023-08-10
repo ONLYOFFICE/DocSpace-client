@@ -15,7 +15,7 @@ import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
-import { getConvertedQuota, getConvertedSize } from "@docspace/common/utils";
+import { getSpaceQuotaAsText } from "@docspace/common/utils";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -155,10 +155,9 @@ const FilesRowContent = ({
   const additionalComponent = () => {
     if (isRooms) {
       let value = t(RoomsTypeTranslations[item.roomType]);
-      const usedValue = getConvertedQuota(t, usedSpace);
-      const quotaValue = getConvertedQuota(t, quotaLimit);
+      const spaceQuota = getSpaceQuotaAsText(t, usedSpace, quotaLimit);
 
-      if (!isMobileOnly) value = `${value} | ${usedValue} / ${quotaValue}`;
+      if (!isMobileOnly) value = `${value} | ${spaceQuota}`;
 
       return value;
     }

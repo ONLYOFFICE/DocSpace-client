@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 
 import RowContent from "@docspace/components/row-content";
 import Link from "@docspace/components/link";
-import { getConvertedQuota } from "@docspace/common/utils";
+import { getSpaceQuotaAsText } from "@docspace/common/utils";
 
 import Badges from "../Badges";
 
@@ -69,8 +69,7 @@ const UserContent = ({
       ? t("Common:User")
       : t("Common:RoomAdmin");
 
-  const usedValue = getConvertedQuota(t, usedSpace);
-  const quotaValue = getConvertedQuota(t, quotaLimit);
+  const spaceQuota = getSpaceQuotaAsText(t, usedSpace, quotaLimit);
 
   return (
     <StyledRowContent
@@ -132,7 +131,7 @@ const UserContent = ({
         color={sideInfoColor}
         isTextOverflow={true}
       >
-        {`${usedValue} / ${quotaValue}`}
+        {spaceQuota}
       </Link>
     </StyledRowContent>
   );

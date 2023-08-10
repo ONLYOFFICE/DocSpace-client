@@ -481,6 +481,13 @@ export const getConvertedQuota = (t, bytes) => {
   return getConvertedSize(t, bytes);
 };
 
+export const getSpaceQuotaAsText = (t, usedSpace, quotaLimit) => {
+  const usedValue = getConvertedQuota(t, usedSpace);
+  const quotaValue = getConvertedQuota(t, quotaLimit);
+
+  return `${usedValue} / ${quotaValue}`;
+};
+
 export const conversionToBytes = (size, power) => size * Math.pow(1024, power);
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedQuota } from "@docspace/common/utils";
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
 import StyledBody from "./StyledComponent";
@@ -46,37 +46,44 @@ const UsedSpace = (props) => {
     },
   ];
 
-  const usedSpace = getConvertedSize(t, usedQuota);
-  const spaceLimited =
-    quotaLimit === -1 ? "Unlimited" : getConvertedSize(t, quotaLimit);
+  const usedSpace = getConvertedQuota(t, usedQuota);
+  const spaceLimited = getConvertedQuota(t, quotaLimit);
 
   const selectedOption = isCustomQuota
     ? { title: spaceLimited, label: spaceLimited }
     : options.find((elem) => elem.key === action);
+
+  if (isDisabledQuotaChange) {
+    return (
+      <StyledBody
+        hideColumns={hideColumns}
+        isDisabledQuotaChange={isDisabledQuotaChange}
+      >
+        <Text fontWeight={600}>
+          {usedSpace} / {spaceLimited}
+        </Text>
+      </StyledBody>
+    );
+  }
 
   return (
     <StyledBody
       hideColumns={hideColumns}
       isDisabledQuotaChange={isDisabledQuotaChange}
     >
-      <div className="info-account-quota">
-        <Text fontWeight={600}>
-          {usedSpace} / {isDisabledQuotaChange ? spaceLimited : ""}
-        </Text>
-        {!isDisabledQuotaChange && (
-          <ComboBox
-            selectedOption={selectedOption}
-            options={options}
-            onSelect={onQuotaChange}
-            scaled={false}
-            size="content"
-            displaySelectedOption
-            modernView
-            isLoading={changeQuotaDialogVisible}
-            manualWidth={"fit-content"}
-          />
-        )}
-      </div>
+      <Text fontWeight={600}>{usedSpace} / </Text>
+
+      <ComboBox
+        selectedOption={selectedOption}
+        options={options}
+        onSelect={onQuotaChange}
+        scaled={false}
+        size="content"
+        displaySelectedOption
+        modernView
+        isLoading={changeQuotaDialogVisible}
+        manualWidth={"fit-content"}
+      />
     </StyledBody>
   );
 };

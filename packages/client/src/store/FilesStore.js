@@ -2789,6 +2789,8 @@ class FilesStore {
         security,
         viewAccessability,
         mute,
+        quotaLimit,
+        usedSpace,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -2924,6 +2926,8 @@ class FilesStore {
         providerType,
         security,
         viewAccessability,
+        quotaLimit,
+        usedSpace,
       };
     });
 

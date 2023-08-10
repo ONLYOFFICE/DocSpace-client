@@ -15,6 +15,7 @@ import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
+import { getConvertedQuota, getConvertedSize } from "@docspace/common/utils";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -116,6 +117,8 @@ const FilesRowContent = ({
     daysRemaining,
     fileType,
     tags,
+    quotaLimit = -1,
+    usedSpace = 0,
   } = item;
 
   const contentComponent = () => {
@@ -148,6 +151,30 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
+
+  const additionalComponent = () => {
+    if (isRooms) {
+      let value = t(RoomsTypeTranslations[item.roomType]);
+      const usedValue = getConvertedQuota(t, usedSpace);
+      const quotaValue = getConvertedQuota(t, quotaLimit);
+
+      if (!isMobileOnly) value = `${value} | ${usedValue} / ${quotaValue}`;
+
+      return value;
+    }
+
+    if (!fileExst && !contentLength && !providerKey && !isMobileOnly)
+      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+        "Translations:Files"
+      )}`;
+
+    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+
+    return "";
+  };
+
+  const additionalInfo = additionalComponent();
+  const mainInfo = contentComponent();
 
   return (
     <>
@@ -182,7 +209,7 @@ const FilesRowContent = ({
           fontWeight={400}
           className="row_update-text"
         >
-          {contentComponent()}
+          {mainInfo}
         </Text>
 
         <Text
@@ -194,15 +221,7 @@ const FilesRowContent = ({
           fontWeight={400}
           truncate={true}
         >
-          {isRooms
-            ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobileOnly
-            ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-                "Translations:Files"
-              )}`
-            : fileExst
-            ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-            : ""}
+          {additionalInfo}
         </Text>
       </SimpleFilesRowContent>
     </>

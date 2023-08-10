@@ -38,26 +38,25 @@ const StyledTableContainer = styled(TableContainer)`
 StyledTableContainer.defaultProps = { theme: Base };
 
 const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth } = props;
+  const {
+    userId,
+    viewAs,
+    setViewAs,
+    sectionWidth,
+    accountsData,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
-  const [checkedAccounts, setCheckedAccounts] = useState([]);
-
-  const toggleAll = (e) => {
-    if (e.target.checked) {
-      setCheckedAccounts(mockData.map((data) => data.id));
-    } else {
-      setCheckedAccounts([]);
-    }
-  };
-
-  const toggleAccount = (id) => {
-    setCheckedAccounts((prevCheckedAccounts) =>
-      prevCheckedAccounts.includes(id)
-        ? prevCheckedAccounts.filter((item) => item !== id)
-        : [...prevCheckedAccounts, id],
-    );
+  const toggleAll = (e) => toggleAllAccounts(e, mockData);
+  const handleToggle = (e, id) => {
+    e.stopPropagation();
+    toggleAccount(id);
   };
 
   useEffect(() => {
@@ -67,6 +66,8 @@ const TableView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
+
+    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -100,8 +101,8 @@ const TableView = (props) => {
             displayName={data.displayName}
             email={data.email}
             hideColumns={hideColumns}
-            isChecked={checkedAccounts.includes(data.id)}
-            toggleAccount={() => toggleAccount(data.id)}
+            isChecked={isAccountChecked(data.id)}
+            toggleAccount={(e) => handleToggle(e, data.id)}
           />
         ))}
       </TableBody>
@@ -109,13 +110,25 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const {
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = importAccountsStore;
 
   return {
     viewAs,
     setViewAs,
     userId,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
   };
 })(observer(TableView));

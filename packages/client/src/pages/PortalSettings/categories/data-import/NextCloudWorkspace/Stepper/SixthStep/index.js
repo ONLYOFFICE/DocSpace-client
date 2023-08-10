@@ -36,7 +36,7 @@ const SixthStep = ({ t, incrementStep, decrementStep }) => {
 
   return (
     <Wrapper>
-      {percent < 100 ? (
+      {percent < 102 ? (
         <>
           <ProgressBar percent={percent} className="data-import-progress-bar" />
           <Button size="small" label={t("Common:CancelButton")} onClick={onClickButton} />

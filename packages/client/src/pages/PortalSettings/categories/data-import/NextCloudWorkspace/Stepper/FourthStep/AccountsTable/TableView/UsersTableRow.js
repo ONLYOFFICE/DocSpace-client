@@ -77,7 +77,7 @@ const UsersTableRow = ({ displayName, email, isChecked, toggleAccount }) => {
       "access-right-item",
     ) ||
       roleSelectorRef.current?.contains(e.target) ||
-      toggleAccount();
+      toggleAccount(e);
   };
 
   return (

@@ -5,14 +5,13 @@ import styled from "styled-components";
 
 import RowContainer from "@docspace/components/row-container";
 import UsersRow from "./UsersRow";
-import { mockData } from "../../mockData.js";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;
 `;
 
 const RowView = (props) => {
-  const { sectionWidth, viewAs, setViewAs } = props;
+  const { sectionWidth, viewAs, setViewAs, accountsData } = props;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -26,7 +25,7 @@ const RowView = (props) => {
 
   return (
     <StyledRowContainer useReactWindow={false}>
-      {mockData.map((data) => (
+      {accountsData.map((data) => (
         <UsersRow key={data.id} data={data} sectionWidth={sectionWidth} />
       ))}
     </StyledRowContainer>

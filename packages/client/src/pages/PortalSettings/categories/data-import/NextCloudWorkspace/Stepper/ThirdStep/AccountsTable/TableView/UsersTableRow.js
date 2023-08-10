@@ -83,7 +83,7 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount }) => {
     e.stopPropagation();
     emailInputRef.current?.contains(e.target) ||
       emailTextRef.current?.contains(e.target) ||
-      toggleAccount();
+      toggleAccount(e);
   };
 
   return (

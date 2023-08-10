@@ -15,7 +15,7 @@ const AccountsTable = (props) => {
         viewAs === "table" ? (
           <TableView sectionWidth={context.sectionWidth} accountsData={accountsData} />
         ) : (
-          <RowView sectionWidth={context.sectionWidth} />
+          <RowView sectionWidth={context.sectionWidth} accountsData={accountsData} />
         )
       }
     </Consumer>

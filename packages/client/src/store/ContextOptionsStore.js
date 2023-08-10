@@ -650,9 +650,10 @@ class ContextOptionsStore {
 
   onClickRemoveOForm = (item) => {
     this.dialogsStore.setRemoveItem({
+      fileId: item.id,
       boardId: item.boardId,
       fileName: item.title,
-      boardName: "",
+      boardName: item.boardTitle,
     });
     this.dialogsStore.setDeleteFormDialogVisible(true);
   };

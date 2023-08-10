@@ -1,9 +1,8 @@
-import { File } from "@docspace/common/types";
-
 interface DeleteFormDialogProps {
   theme: any;
   visible: boolean;
   removeItem: {
+    fileId: number;
     boardId: string;
     fileName: string;
     boardName: string;

@@ -2676,6 +2676,7 @@ class FilesStore {
       const {
         access,
         boardId,
+        boardTitle,
         autoDelete,
         originTitle,
         comment,
@@ -2802,6 +2803,7 @@ class FilesStore {
       return {
         access,
         boardId,
+        boardTitle,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
         //checked,

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
-import UsedSpace from "SRC_DIR/components/UsedSpace";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 import { StyledStatistics } from "./StyledComponent";
 
@@ -38,7 +38,7 @@ const StatisticsComponent = () => {
     </div>
   );
   const quotaElement = (usedSpace, quotaLimit) => (
-    <UsedSpace
+    <SpaceQuota
       isDisabledQuotaChange
       usedQuota={usedSpace}
       quotaLimit={quotaLimit}

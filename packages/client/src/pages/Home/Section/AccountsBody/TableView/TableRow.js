@@ -9,7 +9,7 @@ import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import ComboBox from "@docspace/components/combobox";
 import DropDownItem from "@docspace/components/drop-down-item";
-import UsedSpace from "SRC_DIR/components/UsedSpace";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
@@ -435,7 +435,7 @@ const PeopleTableRow = (props) => {
           </Link>
         </TableCell>
         <TableCell className={"table-cell_Storage/Quota"}>
-          <UsedSpace hideColumns={hideColumns} />
+          <SpaceQuota hideColumns={hideColumns} />
         </TableCell>
       </StyledPeopleRow>
     </StyledWrapper>

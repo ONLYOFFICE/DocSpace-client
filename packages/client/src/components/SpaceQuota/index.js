@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { getConvertedQuota } from "@docspace/common/utils";
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
-import StyledBody from "./StyledComponent";
-const UsedSpace = (props) => {
+import { StyledBody, StyledText } from "./StyledComponent";
+const SpaceQuota = (props) => {
   const {
     selection,
     hideColumns,
@@ -55,14 +55,9 @@ const UsedSpace = (props) => {
 
   if (isDisabledQuotaChange) {
     return (
-      <StyledBody
-        hideColumns={hideColumns}
-        isDisabledQuotaChange={isDisabledQuotaChange}
-      >
-        <Text fontWeight={600}>
-          {usedSpace} / {spaceLimited}
-        </Text>
-      </StyledBody>
+      <StyledText fontWeight={600}>
+        {usedSpace} / {spaceLimited}
+      </StyledText>
     );
   }
 
@@ -95,4 +90,4 @@ export default inject(({ dialogsStore }) => {
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
   };
-})(observer(UsedSpace));
+})(observer(SpaceQuota));

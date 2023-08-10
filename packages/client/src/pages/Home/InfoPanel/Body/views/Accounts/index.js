@@ -7,7 +7,7 @@ import Loaders from "@docspace/common/components/Loaders";
 
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
-import UsedSpace from "SRC_DIR/components/UsedSpace";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 
@@ -218,7 +218,7 @@ const Accounts = ({
           <Text className={"info_field"} noSelect title={"Quota"}>
             {"Quota"}
           </Text>
-          <UsedSpace />
+          <SpaceQuota />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}

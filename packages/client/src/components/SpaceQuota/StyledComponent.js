@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Text from "@docspace/components/text";
 
 const StyledBody = styled.div`
   overflow: hidden;
@@ -22,4 +23,16 @@ const StyledBody = styled.div`
   }
 `;
 
-export default StyledBody;
+const StyledText = styled(Text)`
+  overflow: hidden;
+  width: 100%;
+  max-width: max-content;
+
+  padding-top: 8px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export { StyledText, StyledBody };

@@ -5,7 +5,8 @@ import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
 
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
+import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 
 import { getStepsData } from "./Stepper";
 
@@ -34,7 +35,7 @@ const NextcloudWorkspace = (props) => {
 
   const StepsData = getStepsData(t, currentStep, setCurrentStep);
 
-  if (isMobile) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobileOnly) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   if (!tReady) return;
 

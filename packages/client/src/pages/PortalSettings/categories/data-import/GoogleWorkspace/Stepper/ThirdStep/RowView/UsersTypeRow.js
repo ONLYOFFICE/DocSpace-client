@@ -18,6 +18,7 @@ const UsersTypeRow = (props) => {
         checked={checkbox.includes(id)}
         checkbox={checkbox}
         onClick={onChange}
+        contextButtonSpacerWidth="0"
       >
         <UsersTypeRowContent
           sectionWidth={sectionWidth}

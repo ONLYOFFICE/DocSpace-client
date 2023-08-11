@@ -47,6 +47,7 @@ const StyledRowContent = styled(RowContent)`
         fill: #a3a9ae;
       }
     }
+  }
 `;
 
 const data = [

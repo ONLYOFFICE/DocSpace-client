@@ -6,14 +6,39 @@ import styled from "styled-components";
 
 import UsersTypeTableHeader from "./UsersTypeTableHeader";
 import UsersTypeTableRow from "./UsersTypeTableRow";
+
+import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 import SearchInput from "@docspace/components/search-input";
+import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 import { mockData } from "../../mockData.js";
 
 const StyledTableContainer = styled(TableContainer)`
   margin: 20px 0;
+
+  .table-group-menu {
+    height: 69px;
+    position: absolute;
+    z-index: 201;
+    left: 0;
+    top: 214px;
+    width: 100%;
+
+    .table-container_group-menu {
+      border-image-slice: 0;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 4px;
+    }
+
+    .table-container_group-menu-checkbox {
+      margin-left: 0;
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+  }
 
   .header-container-text {
     font-size: 12px;
@@ -35,6 +60,24 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
+const data = [
+  {
+    key: "docspace-admin",
+    label: "DocSpace admin",
+    onClick: () => console.log("changed-type"),
+  },
+  {
+    key: "room-admin",
+    label: "Room admin",
+    onClick: () => console.log("changed-type"),
+  },
+  {
+    key: "power-user",
+    label: "Power user",
+    onClick: () => console.log("changed-type"),
+  },
+];
+
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
@@ -45,13 +88,17 @@ const TableView = (props) => {
   const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
 
-  const onChangeAllCheckbox = (e) => {
-    setIsChecked(e.target.checked);
-    if (e.target.checked) {
+  const onCheck = (checked) => {
+    setIsChecked(checked);
+    if (checked) {
       setCheckbox(mockData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
+  };
+
+  const onChangeAllCheckbox = (e) => {
+    onCheck(e.target.checked);
   };
 
   const onChangeCheckbox = (id, checked) => {
@@ -74,8 +121,35 @@ const TableView = (props) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
+  const headerMenu = [
+    {
+      id: "change-type",
+      key: "change-type",
+      label: "Change type",
+      disabled: false,
+      onClick: () => console.log("open-menu"),
+      withDropDown: true,
+      options: data,
+      iconUrl: ChangeTypeReactSvgUrl,
+    },
+  ];
+
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+      <div className="table-group-menu">
+        {checkbox.length > 0 && (
+          <TableGroupMenu
+            onChange={onCheck}
+            headerMenu={headerMenu}
+            isChecked={isChecked}
+            isIndeterminate={checkbox.length && !isChecked}
+            withoutInfoPanelToggler
+            sectionWidth={sectionWidth}
+            withComboBox={false}
+          />
+        )}
+      </div>
+
       <SearchInput
         id="search-users-input"
         onChange={() => console.log("changed")}

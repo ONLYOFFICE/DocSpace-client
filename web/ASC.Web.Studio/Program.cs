@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 
+using ASC.Migration.Core;
+
 var options = new WebApplicationOptions
 {
     Args = args,
@@ -66,6 +68,7 @@ try
     var eventBus = ((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IEventBus>();
 
     eventBus.Subscribe<RemovePortalIntegrationEvent, RemovePortalIntegrationEventHandler>();
+    eventBus.Subscribe<MigrationParseIntegrationEvent, MigrationIntegrationEventHandler>();
     eventBus.Subscribe<MigrationIntegrationEvent, MigrationIntegrationEventHandler>();
 
     logger.Info("Starting web host ({applicationContext})...", AppName);

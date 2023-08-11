@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2022
+﻿// (c) Copyright Ascensio System SIA 2010-2022
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,40 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-global using System.IO.Compression;
-global using System.Text;
-global using System.Text.Json.Serialization;
-global using System.Text.RegularExpressions;
+/*
+ *
+ * (c) Copyright Ascensio System Limited 2010-2023
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
 
-global using ASC.Common;
-global using ASC.Common.Log;
-global using ASC.Common.Threading;
-global using ASC.Common.Web;
-global using ASC.Core;
-global using ASC.Core.Users;
-global using ASC.EventBus.Abstractions;
-global using ASC.EventBus.Events;
-global using ASC.Files.Core;
-global using ASC.Files.Core.Resources;
-global using ASC.Files.Core.Security;
-global using ASC.Migration.Core;
-global using ASC.Migration.Core.Models;
-global using ASC.Migration.Core.Models.Api;
-global using ASC.Migration.Core.Resources;
-global using ASC.Migration.GoogleWorkspace.Models;
-global using ASC.Migration.GoogleWorkspace.Models.Parse;
-global using ASC.Web.Files.Classes;
-global using ASC.Web.Files.Services.WCFService;
+namespace ASC.Web.Api.ApiModels.ResponseDto;
 
-global using Autofac;
+/// <summary>
+/// 
+/// </summary>
+public class MigrationStatusDto
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public double Progress { get; set; }
 
-global using HtmlAgilityPack;
+    /// <summary>
+    /// 
+    /// </summary>
+    public Exception Error { get; set; }
 
-global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Logging;
+    /// <summary>
+    /// 
+    /// </summary>
+    public MigrationApiInfo ParseResult { get; set; }
 
-global using MimeKit;
-
-global using Newtonsoft.Json;
-
-global using ProtoBuf;
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsCompleted { get; set; }
+}

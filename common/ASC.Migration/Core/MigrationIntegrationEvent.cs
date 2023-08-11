@@ -24,18 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Migration.Core.Core;
+namespace ASC.Migration.Core;
 
 [ProtoContract]
 public record MigrationIntegrationEvent : IntegrationEvent
 {
 
     [ProtoMember(6)]
-    public string MigratorName { get; set; }
+    public MigrationApiInfo ApiInfo { get; set; }
 
-
-    [ProtoMember(7)]
-    public string Path { get; set; }
 
     public MigrationIntegrationEvent(Guid createBy, int tenantId) : base(createBy, tenantId)
     {

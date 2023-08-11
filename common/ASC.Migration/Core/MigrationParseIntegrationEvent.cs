@@ -24,15 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Web.Api.ApiModels.ResponseDto;
+namespace ASC.Migration.Core.Core;
 
-public class MigrationStatus
+[ProtoContract]
+public record MigrationParseIntegrationEvent : IntegrationEvent
 {
-    public double Progress { get; set; }
 
-    public string ProgressStatus { get; set; }
+    [ProtoMember(6)]
+    public string MigratorName { get; set; }
 
-    public MigrationApiInfo ParseResult { get; set; }
 
-    public bool MigrationEnded { get; set; }
+    [ProtoMember(7)]
+    public string Path { get; set; }
+
+    public MigrationParseIntegrationEvent(Guid createBy, int tenantId) : base(createBy, tenantId)
+    {
+    }
+
+    protected MigrationParseIntegrationEvent()
+    {
+    }
 }

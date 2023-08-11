@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using ASC.Files.Core.Core;
+using ASC.Migration.Core.Models.Api;
+
 namespace ASC.Web.Studio;
 public class Startup : BaseStartup
 {
@@ -72,7 +75,10 @@ public class Startup : BaseStartup
         DIHelper.TryAdd<LinkedInLoginProvider>();
         DIHelper.TryAdd<SsoHandlerService>();
         DIHelper.TryAdd<RemovePortalIntegrationEventHandler>();
+        DIHelper.TryAdd<MigrationIntegrationEventHandler>();
+        MigrationCore.Register(DIHelper);
 
+        services.RegisterQuotaFeature();
         services.AddHttpClient();
 
         DIHelper.TryAdd<DbWorker>();

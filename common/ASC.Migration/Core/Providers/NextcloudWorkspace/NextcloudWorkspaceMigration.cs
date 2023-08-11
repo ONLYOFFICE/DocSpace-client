@@ -83,10 +83,11 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         }
 
         _migrationInfo = new NCMigrationInfo();
-        _migrationInfo.MigratorName = GetType().CustomAttributes.First().ConstructorArguments.First().Value.ToString();
+        _migrationInfo.MigratorName = _meta.Name;
         _tmpFolder = path;
     }
-    public override Task<MigrationApiInfo> Parse()
+
+    public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
         ReportProgress(0, MigrationResource.Unzipping);
         try
@@ -112,7 +113,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             }
             catch (Exception ex)
             {
-                _migrationInfo.failedArchives.Add(Path.GetFileName(_takeouts));
+                _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
                 Log("Archive must not be empty and should contain .bak files.", ex);
             }
             ReportProgress(40, MigrationResource.DumpParse);
@@ -149,26 +150,11 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
 
             var groups = DBExtractGroup(bdFile);
             progress = 80;
-            foreach (var item in groups)
-            {
-                ReportProgress(progress, MigrationResource.DataProcessing);
-                progress += 10 / groups.Count;
-                var group = new NCMigratingGroups(_userManager, item, Log);
-                group.Parse();
-                if (group.Module.MigrationModule != null)
-                {
-                    _migrationInfo.Groups.Add(group);
-                    if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == group.Module.MigrationModule))
-                    {
-                        _migrationInfo.Modules.Add(new MigrationModules(group.Module.MigrationModule, group.Module.Module));
-                    }
-                }
-            }
             ReportProgress(90, MigrationResource.ClearingTemporaryData);
         }
         catch (Exception ex)
         {
-            _migrationInfo.failedArchives.Add(Path.GetFileName(_takeouts));
+            _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
             Log($"Couldn't parse users from {Path.GetFileNameWithoutExtension(_takeouts)} archive", ex);
         }
         ReportProgress(100, MigrationResource.DataProcessingCompleted);
@@ -489,34 +475,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             }
         }
 
-        var groupsForImport = _migrationInfo.Groups
-            .Where(g => g.ShouldImport)
-            .Select(g => g);
-        var groupsCount = groupsForImport.Count();
-        if (groupsCount != 0)
-        {
-            progressStep = 25 / groupsForImport.Count();
-            //Create all groups
-            i = 1;
-            foreach (var group in groupsForImport)
-            {
-                if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
-                ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.GroupMigration, group.GroupName, i++, groupsCount));
-                try
-                {
-                    group.UsersGuidList = _migrationInfo.Users
-                    .Where(user => group.UserUidList.Exists(u => user.Key == u))
-                    .Select(u => u)
-                    .ToDictionary(k => k.Key, v => v.Value.Guid);
-                    await group.MigrateAsync();
-                }
-                catch (Exception ex)
-                {
-                    Log($"Couldn't migrate group {group.GroupName} ", ex);
-                }
-            }
-        }
-
         i = 1;
         foreach (var user in usersForImport)
         {
@@ -542,25 +500,11 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                 ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserContacts, user.DisplayName, i, usersCount));
             }
 
-            /*try
-            {
-                user.MigratingCalendar.Migrate();
-            }
-            catch (Exception ex)
-            {
-                Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) calendar", ex);
-            }
-            finally
-            {
-                ReportProgress(GetProgress() + smallStep, String.Format(MigrationResource.UserCalendarMigration, user.DisplayName, i, usersCount));
-            }*/
-
             try
             {
                 var currentUser = _securityContext.CurrentAccount;
                 await _securityContext.AuthenticateMeAsync(user.Guid);
                 user.MigratingFiles.SetUsersDict(usersForImport.Except(failedUsers));
-                user.MigratingFiles.SetGroupsDict(groupsForImport);
                 await user.MigratingFiles.MigrateAsync();
                 await _securityContext.AuthenticateMeAsync(currentUser.ID);
             }

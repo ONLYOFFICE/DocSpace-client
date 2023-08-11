@@ -66,7 +66,7 @@ public class MigrationController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("backuptmp")]
-    public async Task<string> GetTmpFolderAsync()
+    public async Task<object> GetTmpFolderAsync()
     {
         await DemandPermission();
 
@@ -95,13 +95,13 @@ public class MigrationController : ControllerBase
     /// 
     /// </summary>
     /// <param name="migratorName"></param>
-    /// <param name="path"></param>
+    /// <param name="dto"></param>
     [HttpPost("init/{migratorName}")]
-    public async Task UploadAndInitAsync(string migratorName, string path)
+    public async Task UploadAndInitAsync(string migratorName, MigrationInitRequestsDto dto)
     {
         await DemandPermission();
 
-        await _migrationCore.StartParse(migratorName, path);
+        await _migrationCore.StartParse(migratorName, dto.Path);
     }
 
     /// <summary>
@@ -109,11 +109,24 @@ public class MigrationController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("status")]
-    public async Task<MigrationOperation> Status()
+    public async Task<MigrationStatusDto> Status()
     {
         await DemandPermission();
 
-        return await _migrationCore.GetStatus();
+        var status = await _migrationCore.GetStatus();
+
+        if (status != null)
+        {
+            return new MigrationStatusDto
+            {
+                Progress = status.Percentage,
+                Error = status.Exception,
+                IsCompleted = status.IsCompleted,
+                ParseResult = status.MigrationApiInfo
+            };
+        }
+
+        return null;
     }
 
     /// <summary>

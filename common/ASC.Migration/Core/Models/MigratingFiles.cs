@@ -44,5 +44,10 @@ public abstract class MigratingFiles : ImportableEntity
         };
     }
 
+    public MigratingFiles()
+    {
+
+    }
+
     protected MigratingFiles(Action<string, Exception> log) : base(log) { }
 }

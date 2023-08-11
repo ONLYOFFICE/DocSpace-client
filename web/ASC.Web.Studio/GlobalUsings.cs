@@ -66,3 +66,6 @@ global using NLog;
 
 global using Polly;
 global using Polly.Extensions.Http;
+
+global using ILogger = Microsoft.Extensions.Logging.ILogger;
+global using LogLevel = Microsoft.Extensions.Logging.LogLevel;

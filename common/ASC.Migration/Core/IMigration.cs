@@ -33,11 +33,11 @@ public interface IMigration : IDisposable
 
     double GetProgress();
     string GetProgressStatus();
-
+    MigrationApiInfo ApiInfo { get; }
 
     void Init(string path, CancellationToken token);
 
-    Task<MigrationApiInfo> Parse();
+    Task<MigrationApiInfo> Parse(bool reportProgress);
 
     Task Migrate(MigrationApiInfo migrationInfo);
 

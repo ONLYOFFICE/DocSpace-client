@@ -25,9 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 namespace ASC.Migration.Core.Models;
+
+[ProtoContract]
 public class MigrationModules
 {
+    [ProtoMember(1)]
     public string MigrationModule { get; set; }
+
+    [ProtoMember(2)]
     public string Module { get; set; }
 
     public MigrationModules() { }

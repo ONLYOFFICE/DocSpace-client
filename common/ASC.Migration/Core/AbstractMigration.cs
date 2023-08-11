@@ -56,9 +56,11 @@ public abstract class AbstractMigration<TMigrationInfo, TUser, TFiles> : IMigrat
     public double GetProgress() => _lastProgressUpdate;
     public string GetProgressStatus() => _lastStatusUpdate;
 
+    public MigrationApiInfo ApiInfo { get => _migrationInfo?.ToApiInfo(); }
+
     public abstract void Init(string path, CancellationToken cancellationToken);
 
-    public abstract Task<MigrationApiInfo> Parse();
+    public abstract Task<MigrationApiInfo> Parse(bool reportProgress = true);
 
     public abstract Task Migrate(MigrationApiInfo migrationInfo);
 

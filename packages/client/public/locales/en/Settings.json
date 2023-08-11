@@ -242,5 +242,6 @@
   "YourCurrentDomain": "Your current domain",
   "UnsavedChangesBody": "If you close the link settings menu right now, your changes will not be saved.",
   "CloseMenu": "Close menu",
-  "WantToCancelUpload": "Do you want to cancel the upload?"
+  "WantToCancelUpload": "Do you want to cancel the upload?",
+  "WantToCancelDataImport": "Do you want to cancel data import?"
 }

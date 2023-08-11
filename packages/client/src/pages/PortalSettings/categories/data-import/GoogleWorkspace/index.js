@@ -88,6 +88,7 @@ const GoogleWorkspace = (props) => {
             onNextStepClick={onNextStepClick}
             onPrevStepClick={onPrevStepClick}
             showReminder={showReminder}
+            isFifthStep={isFifthStep}
           />
         );
       case 6:
@@ -118,6 +119,7 @@ const GoogleWorkspace = (props) => {
 
   const isSecondStep = currentStep === 2;
   const isThirdStep = currentStep === 3;
+  const isFifthStep = currentStep === 5;
 
   const renderTooltip = (
     <HelpButton

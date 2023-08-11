@@ -3,8 +3,12 @@ import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const CancelUploadDialog = ({ visible, onClose, loading }) => {
+const CancelUploadDialog = ({ isFifthStep, visible, onClose, loading }) => {
   const { t } = useTranslation(["Settings", "Common"]);
+
+  const modalBodyText = isFifthStep
+    ? t("Settings:WantToCancelDataImport")
+    : t("Settings:WantToCancelUpload");
 
   return (
     <ModalDialogContainer
@@ -13,7 +17,7 @@ const CancelUploadDialog = ({ visible, onClose, loading }) => {
       displayType="modal"
     >
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
-      <ModalDialog.Body>{t("Settings:WantToCancelUpload")}</ModalDialog.Body>
+      <ModalDialog.Body>{modalBodyText}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           label={t("Common:Yes")}

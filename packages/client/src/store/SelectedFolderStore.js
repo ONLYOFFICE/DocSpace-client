@@ -32,6 +32,7 @@ class SelectedFolderStore {
   settingsStore = null;
   security = null;
   isDashboard = false;
+  isRolePage = false;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -71,6 +72,7 @@ class SelectedFolderStore {
     this.rootFolderId = null;
     this.security = null;
     this.isDashboard = false;
+    this.isRolePage = false;
   };
 
   setParentId = (parentId) => {
@@ -141,6 +143,7 @@ class SelectedFolderStore {
       setDocumentTitle(selectedFolder.title);
 
       if (!("isDashboard" in selectedFolderItems)) this.isDashboard = false;
+      if (!("isRolePage" in selectedFolderItems)) this.isRolePage = false;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

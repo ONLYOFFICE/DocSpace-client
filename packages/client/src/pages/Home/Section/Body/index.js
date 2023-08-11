@@ -45,6 +45,10 @@ const SectionBodyContent = (props) => {
     movingInProgress,
   } = props;
 
+  const location = useLocation();
+
+  const isRolePage = location.pathname.includes("role");
+
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
@@ -264,15 +268,24 @@ const SectionBodyContent = (props) => {
           </>
         ) : viewAs === "tile" ? (
           <>
-            <FilesTileContainer sectionWidth={context.sectionWidth} t={t} />
+            <FilesTileContainer
+              isRolePage={isRolePage}
+              sectionWidth={context.sectionWidth}
+              t={t}
+            />
           </>
         ) : viewAs === "table" ? (
           <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
+            <TableView
+              isRolePage={isRolePage}
+              sectionWidth={context.sectionWidth}
+              tReady={tReady}
+            />
           </>
         ) : (
           <>
             <FilesRowContainer
+              isRolePage={isRolePage}
               sectionWidth={context.sectionWidth}
               tReady={tReady}
             />

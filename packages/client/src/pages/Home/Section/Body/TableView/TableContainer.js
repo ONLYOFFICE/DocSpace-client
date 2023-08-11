@@ -122,6 +122,7 @@ const Table = ({
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
+  isRolePage,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -195,6 +196,7 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        isRolePage={isRolePage}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}

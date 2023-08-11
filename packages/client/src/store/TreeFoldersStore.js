@@ -259,7 +259,9 @@ class TreeFoldersStore {
 
   get isRoomsFolder() {
     return (
-      this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
+      this.roomsFolder &&
+      !this.selectedFolderStore.isRolePage &&
+      this.selectedFolderStore.id === this.roomsFolder.id
     );
   }
 

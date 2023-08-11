@@ -79,6 +79,7 @@ export default function withFileActions(WrappedFileItem) {
         inProgress,
         isSelected,
         setSelection,
+        isRolePage,
       } = this.props;
 
       const { isThirdPartyFolder } = item;
@@ -98,7 +99,8 @@ export default function withFileActions(WrappedFileItem) {
         notSelectable ||
         isMobile ||
         isThirdPartyFolder ||
-        inProgress
+        inProgress ||
+        isRolePage
       ) {
         return e;
       }

@@ -45,6 +45,7 @@ const FilesTileContainer = ({
   sectionWidth,
   withPaging,
   thumbnails1280x720,
+  isRolePage,
 }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
@@ -113,6 +114,7 @@ const FilesTileContainer = ({
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }
+          isRolePage={isRolePage}
           item={item}
           itemIndex={index}
           sectionWidth={sectionWidth}
@@ -129,6 +131,7 @@ const FilesTileContainer = ({
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }
+          isRolePage={isRolePage}
           item={item}
           itemIndex={index}
           sectionWidth={sectionWidth}

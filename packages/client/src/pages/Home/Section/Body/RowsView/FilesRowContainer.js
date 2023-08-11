@@ -13,7 +13,7 @@ const StyledRowContainer = styled(RowContainer)`
     .row-selected {
       .files-row {
         border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+          `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
         margin-top: -1px;
         padding-top: 0px;
         padding-bottom: 1px;
@@ -24,7 +24,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -35,7 +35,7 @@ const StyledRowContainer = styled(RowContainer)`
     + .row-selected {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -50,7 +50,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:last-child {
     .files-row {
       border-bottom: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       ${marginStyles}
     }
     .files-row::after {
@@ -60,7 +60,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:first-child {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -2px;
       padding-top: 1px;
       padding-bottom: 1px;
@@ -84,10 +84,10 @@ const FilesRowContainer = ({
   isTrashFolder,
   withPaging,
   highlightFile,
+  isRolePage,
 }) => {
   useEffect(() => {
     const width = window.innerWidth;
-
 
     if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
     // 400 - it is desktop info panel width
@@ -113,6 +113,7 @@ const FilesRowContainer = ({
         item={item}
         itemIndex={index}
         sectionWidth={sectionWidth}
+        isRolePage={isRolePage}
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
         isHighlight={

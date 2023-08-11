@@ -971,7 +971,7 @@ const SectionHeaderContent = (props) => {
           hideContextMenuInsideArchiveRoom={hideContextMenuInsideArchiveRoom}
         >
           {tableGroupMenuVisible ? (
-            <TableGroupMenu {...tableGroupMenuProps} />
+            <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : (
             <div className="header-container">
               <Navigation
@@ -1126,7 +1126,8 @@ export default inject(
 
     const selectedFolder = { ...selectedFolderStore };
 
-    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } = auth.settingsStore;
+    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } =
+      auth.settingsStore;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;

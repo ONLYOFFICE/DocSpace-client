@@ -280,6 +280,7 @@ const SectionHeaderContent = (props) => {
             isChecked={isHeaderChecked}
             isIndeterminate={isHeaderIndeterminate}
             headerMenu={headerMenu}
+            withComboBox
           />
         </div>
       ) : !isLoadedSectionHeader ? (

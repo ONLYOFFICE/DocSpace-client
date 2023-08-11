@@ -227,6 +227,7 @@ const HistoryHeader = (props) => {
       isIndeterminate={isIndeterminate}
       withoutInfoPanelToggler
       isBlocked={isRetryPending}
+      withComboBox
     />
   );
 

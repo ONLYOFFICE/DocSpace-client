@@ -5,10 +5,10 @@ const UsersTypeRow = (props) => {
   const { isChecked, onChangeCheckbox, checkbox, data, sectionWidth, id } =
     props;
 
-  const onChange = (e) => {
-    onChangeCheckbox(id, e.target.checked);
+  const onChange = (checked) => {
+    onChangeCheckbox(id, checked);
   };
-
+  
   return (
     <>
       <Row
@@ -16,8 +16,8 @@ const UsersTypeRow = (props) => {
         key={data.id}
         data={data}
         checked={checkbox.includes(id)}
-        checkbox={checkbox}
-        onClick={onChange}
+        checkbox={isChecked}
+        onSelect={onChange}
         contextButtonSpacerWidth="0"
       >
         <UsersTypeRowContent
@@ -25,8 +25,6 @@ const UsersTypeRow = (props) => {
           displayName={data.displayName}
           email={data.email}
           type={data.type}
-          isChecked={isChecked}
-          onChangeCheckbox={onChangeCheckbox}
         />
       </Row>
     </>

@@ -130,8 +130,8 @@ const RowView = (props) => {
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
-      <div className="table-group-menu">
-        {checkbox.length > 0 && (
+      {checkbox.length > 0 && (
+        <div className="table-group-menu" id="magic-id">
           <TableGroupMenu
             onChange={onChangeAllCheckbox}
             headerMenu={headerMenu}
@@ -141,10 +141,10 @@ const RowView = (props) => {
             sectionWidth={sectionWidth}
             withComboBox={false}
           />
-        )}
-      </div>
+        </div>
+      )}
       <SearchInput
-        id="search-users-input"
+        id="search-types-input"
         onChange={() => console.log("changed")}
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"

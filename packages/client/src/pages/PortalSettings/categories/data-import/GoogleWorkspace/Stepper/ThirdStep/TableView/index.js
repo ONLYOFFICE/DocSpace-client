@@ -136,8 +136,8 @@ const TableView = (props) => {
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      <div className="table-group-menu">
-        {checkbox.length > 0 && (
+      {checkbox.length > 0 && (
+        <div className="table-group-menu">
           <TableGroupMenu
             onChange={onCheck}
             headerMenu={headerMenu}
@@ -147,8 +147,8 @@ const TableView = (props) => {
             sectionWidth={sectionWidth}
             withComboBox={false}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       <SearchInput
         id="search-users-input"

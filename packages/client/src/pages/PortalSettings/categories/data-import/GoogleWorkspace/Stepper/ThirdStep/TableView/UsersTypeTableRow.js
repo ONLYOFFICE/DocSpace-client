@@ -47,15 +47,15 @@ const StyledTableRow = styled(TableRow)`
 
 const data = [
   {
-    key: "key1",
+    key: "docspace-admin",
     label: "DocSpace admin",
   },
   {
-    key: "key2",
+    key: "room-admin",
     label: "Room admin",
   },
   {
-    key: "key3",
+    key: "power-user",
     label: "Power user",
   },
 ];

@@ -1,13 +1,33 @@
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
+import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 import SearchInput from "@docspace/components/search-input";
 import RowContainer from "@docspace/components/row-container";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
+import Text from "@docspace/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import UsersTypeRow from "./UsersTypeRow";
 import { mockData } from "../../mockData.js";
+import Row from "@docspace/components/row";
+
+const StyledRow = styled(Row)`
+  box-sizing: border-box;
+  min-height: 40px;
+
+  .row-header-title {
+    color: #a3a9ae;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  @media ${tablet} {
+    .row_content {
+      height: auto;
+    }
+  }
+`;
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;
@@ -63,22 +83,18 @@ const data = [
 ];
 
 const RowView = (props) => {
-  const { sectionWidth, viewAs, setViewAs } = props;
+  const { t, sectionWidth, viewAs, setViewAs } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const rowRef = useRef(null);
 
-  const onCheck = (checked) => {
+  const onChangeAllCheckbox = (checked) => {
     setIsChecked(checked);
     if (checked) {
       setCheckbox(mockData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
-  };
-
-  const onChangeAllCheckbox = (e) => {
-    onCheck(e.target.checked);
   };
 
   const onChangeCheckbox = (id, checked) => {
@@ -117,7 +133,7 @@ const RowView = (props) => {
       <div className="table-group-menu">
         {checkbox.length > 0 && (
           <TableGroupMenu
-            onChange={onCheck}
+            onChange={onChangeAllCheckbox}
             headerMenu={headerMenu}
             isChecked={isChecked}
             isIndeterminate={checkbox.length && !isChecked}
@@ -133,6 +149,15 @@ const RowView = (props) => {
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"
       />
+
+      <StyledRow
+        key="Name"
+        sectionWidth={sectionWidth}
+        onClick={onChangeAllCheckbox}
+      >
+        <Text className="row-header-title">{t("Common:Name")}</Text>
+      </StyledRow>
+
       {mockData.map((data) => (
         <UsersTypeRow
           key={data.id}

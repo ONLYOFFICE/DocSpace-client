@@ -23,9 +23,9 @@ const ThirdStep = (props) => {
       <Consumer>
         {(context) =>
           viewAs === "table" ? (
-            <TableView sectionWidth={context.sectionWidth} />
+            <TableView sectionWidth={context.sectionWidth} t={t} />
           ) : (
-            <RowView sectionWidth={context.sectionWidth} />
+            <RowView sectionWidth={context.sectionWidth} t={t} />
           )
         }
       </Consumer>

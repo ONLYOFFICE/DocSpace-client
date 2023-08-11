@@ -107,7 +107,9 @@ const FilesTileContainer = ({
     return filesList.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
-          id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+          id={`${item?.isFolder || item.isDashboard ? "folder" : "file"}_${
+            item.id
+          }`}
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }
@@ -121,7 +123,9 @@ const FilesTileContainer = ({
         />
       ) : (
         <FileTile
-          id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+          id={`${item?.isFolder || item.isDashboard ? "folder" : "file"}_${
+            item.id
+          }`}
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }

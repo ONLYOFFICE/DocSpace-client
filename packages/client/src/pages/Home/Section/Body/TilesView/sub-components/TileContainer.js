@@ -182,8 +182,9 @@ class TileContainer extends React.PureComponent {
     const Files = [];
 
     React.Children.map(children, (item) => {
-      const { isFolder, isRoom, fileExst, id } = item.props.item;
-      if ((isFolder || id === -1) && !fileExst && !isRoom) {
+      const { isFolder, isRoom, fileExst, id, isDashboard } = item.props.item;
+
+      if ((isFolder || isDashboard || id === -1) && !fileExst && !isRoom) {
         Folders.push(
           <div className="tile-item-wrapper folder" key={id}>
             {item}

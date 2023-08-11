@@ -34,13 +34,8 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const {
-        t,
-        dragging,
-        setDragging,
-        startUpload,
-        uploadEmptyFolders,
-      } = this.props;
+      const { t, dragging, setDragging, startUpload, uploadEmptyFolders } =
+        this.props;
 
       dragging && setDragging(false);
 
@@ -240,7 +235,8 @@ export default function withFileActions(WrappedFileItem) {
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";
 
-      let value = !item.isFolder ? `file_${id}` : `folder_${id}`;
+      let value =
+        !item.isFolder && !item.isDashboard ? `file_${id}` : `folder_${id}`;
       value += draggable ? "_draggable" : "_false";
 
       value += `_index_${itemIndex}`;

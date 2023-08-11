@@ -542,7 +542,7 @@ class Tile extends React.PureComponent {
       isHighlight,
       thumbnails1280x720,
     } = this.props;
-    const { isFolder, isRoom, id, fileExst } = item;
+    const { isFolder, isRoom, id, fileExst, isDashboard } = item;
 
     const renderElement = Object.prototype.hasOwnProperty.call(
       this.props,
@@ -580,9 +580,10 @@ class Tile extends React.PureComponent {
       title: children[0].props.item.title,
     };
 
-    const title = item.isFolder
-      ? t("Translations:TitleShowFolderActions")
-      : t("Translations:TitleShowActions");
+    const title =
+      item.isFolder || item.isDashboard
+        ? t("Translations:TitleShowFolderActions")
+        : t("Translations:TitleShowActions");
 
     const tags = [];
 
@@ -620,7 +621,9 @@ class Tile extends React.PureComponent {
         onContextMenu={onContextMenu}
         isDragging={isDragging}
         dragging={dragging && isFolder}
-        isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+        isFolder={
+          (isFolder && !fileExst) || (!fileExst && id === -1) || isDashboard
+        }
         isRecycleBin={isRecycleBin}
         isArchiveFolder={isArchiveFolder}
         checked={checked}
@@ -632,7 +635,7 @@ class Tile extends React.PureComponent {
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
       >
-        {isFolder || (!fileExst && id === -1) ? (
+        {isFolder || (!fileExst && id === -1) || isDashboard ? (
           isRoom ? (
             <>
               <div className="room-tile_top-content">
@@ -668,7 +671,10 @@ class Tile extends React.PureComponent {
                   </>
                 )}
                 <StyledContent
-                  isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+                  isFolder={
+                    ((isFolder || isDashboard) && !fileExst) ||
+                    (!fileExst && id === -1)
+                  }
                 >
                   {FilesTileContent}
                   {badges}
@@ -761,7 +767,10 @@ class Tile extends React.PureComponent {
                 </>
               )}
               <StyledContent
-                isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+                isFolder={
+                  ((isFolder || isDashboard) && !fileExst) ||
+                  (!fileExst && id === -1)
+                }
               >
                 {FilesTileContent}
                 {badges}
@@ -841,7 +850,10 @@ class Tile extends React.PureComponent {
                 </>
               )}
               <StyledContent
-                isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+                isFolder={
+                  ((isFolder || isDashboard) && !fileExst) ||
+                  (!fileExst && id === -1)
+                }
               >
                 {FilesTileContent}
               </StyledContent>

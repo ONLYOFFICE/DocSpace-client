@@ -52,7 +52,6 @@ public class NCMigratingFiles : MigratingFiles
     private long _bytesTotal;
     private readonly NCStorages _storages;
     private Dictionary<string, NCMigratingUser> _users;
-    private Dictionary<string, NCMigratingGroups> _groups;
     private Dictionary<object, int> _matchingFileId;
     private string _folderCreation;
     public NCMigratingFiles(GlobalFolderHelper globalFolderHelper, IDaoFactory daoFactory, FileSecurity fileSecurity, FileStorageService fileStorageService, NCMigratingUser user, NCStorages storages, string rootFolder, Action<string, Exception> log) : base(log)
@@ -217,11 +216,10 @@ public class NCMigratingFiles : MigratingFiles
 
                 var shareType = GetPortalShare(shareInfo.Premissions, entryIsFile);
                 _users.TryGetValue(shareInfo.ShareWith, out var userToShare);
-                _groups.TryGetValue(shareInfo.ShareWith, out var groupToShare);
 
-                if (userToShare != null || groupToShare != null)
+                if (userToShare != null)
                 {
-                    var entryGuid = userToShare == null ? groupToShare.Guid : userToShare.Guid;
+                    var entryGuid = userToShare.Guid;
                     list.Add(new AceWrapper
                     {
                         Access = shareType.Value,
@@ -266,11 +264,6 @@ public class NCMigratingFiles : MigratingFiles
     public void SetUsersDict(IEnumerable<NCMigratingUser> users)
     {
         this._users = users.ToDictionary(user => user.Key, user => user);
-    }
-
-    public void SetGroupsDict(IEnumerable<NCMigratingGroups> groups)
-    {
-        this._groups = groups.ToDictionary(group => group.GroupName, group => group);
     }
 
     private ASCShare? GetPortalShare(int role, bool entryType)

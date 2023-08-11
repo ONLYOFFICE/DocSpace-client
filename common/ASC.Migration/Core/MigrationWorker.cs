@@ -24,30 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Common.Threading;
-
-using Microsoft.Extensions.DependencyInjection;
-
 namespace ASC.Migration.Core;
 
-[Singletone(Additional = typeof(RemovePortalWorkerExtension))]
+[Singletone(Additional = typeof(MigrationWorkerExtension))]
 public class MigrationWorker
 {
     private readonly object _locker;
     private readonly DistributedTaskQueue _queue;
-    private readonly System.IServiceProvider _serviceProvider;
+    private readonly IServiceProvider _serviceProvider;
 
     public const string CUSTOM_DISTRIBUTED_TASK_QUEUE_NAME = "migration";
 
     public MigrationWorker(IDistributedTaskQueueFactory queueFactory,
-                            System.IServiceProvider serviceProvider)
+                            IServiceProvider serviceProvider)
     {
         _locker = new object();
         _serviceProvider = serviceProvider;
         _queue = queueFactory.CreateQueue(CUSTOM_DISTRIBUTED_TASK_QUEUE_NAME);
     }
 
-    public void Start(int tenantId, string migratorName, string path)
+    public void StartParse(int tenantId, Guid userId, string migratorName, string path)
+    {
+        Start(tenantId, (item) => item.InitParse(tenantId, userId, migratorName, path));
+    }
+
+    public void StartMigrate(int tenantId, Guid userId, MigrationApiInfo migrationApiInfo)
+    {
+        Start(tenantId, (item) => item.InitMigrate(tenantId, userId, migrationApiInfo));
+    }
+
+    private void Start(int tenantId, Action<MigrationOperation> init)
     {
         lock (_locker)
         {
@@ -63,7 +69,7 @@ public class MigrationWorker
             {
                 item = _serviceProvider.GetService<MigrationOperation>();
 
-                item.Init(tenantId, migratorName, path);
+                init(item);
 
                 _queue.EnqueueTask(item);
             }
@@ -74,9 +80,9 @@ public class MigrationWorker
 
     public void Stop(int tenantId)
     {
-        var tasks = _queue.GetAllTasks(DistributedTaskQueue.INSTANCE_ID).OfType<MigrationOperation>();
+        var tasks = _queue.GetAllTasks(DistributedTaskQueue.INSTANCE_ID);
 
-        foreach (var t in tasks.Where(r => r.TenantId == tenantId))
+        foreach (var t in tasks.OfType<MigrationOperation>().Where(r => r.TenantId == tenantId))
         {
             _queue.DequeueTask(t.Id);
         }
@@ -88,10 +94,11 @@ public class MigrationWorker
     }
 }
 
-public static class RemovePortalWorkerExtension
+public static class MigrationWorkerExtension
 {
     public static void Register(DIHelper services)
     {
+        services.TryAdd<MigrationOperation>();
         services.TryAdd<MigrationOperation>();
     }
 }

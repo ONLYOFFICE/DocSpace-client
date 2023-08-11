@@ -26,16 +26,15 @@
 
 namespace ASC.Migration.Core.Models;
 
-public abstract class MigrationInfo<TUser, TFiles, TGroup> : IMigrationInfo
+public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
     where TUser : MigratingUser<TFiles>
     where TFiles : MigratingFiles
-    where TGroup : MigratingGroup
 {
     public Dictionary<string, TUser> Users = new Dictionary<string, TUser>();
+    public string Path { get; set; }
     public string MigratorName { get; set; }
     public List<MigrationModules> Modules = new List<MigrationModules>();
-    public List<string> failedArchives = new List<string>();
-    public List<TGroup> Groups = new List<TGroup>();
+    public List<string> FailedArchives = new List<string>();
 
     public virtual MigrationApiInfo ToApiInfo()
     {
@@ -43,9 +42,9 @@ public abstract class MigrationInfo<TUser, TFiles, TGroup> : IMigrationInfo
         {
             Users = Users.Values.Select(u => u.ToApiInfo()).ToList(),
             MigratorName = MigratorName,
+            Path = Path,
             Modules = Modules,
-            FailedArchives = failedArchives,
-            Groups = Groups.Select(g => g.ToApiInfo()).ToList()
+            FailedArchives = FailedArchives
         };
     }
 
@@ -61,16 +60,6 @@ public abstract class MigrationInfo<TUser, TFiles, TGroup> : IMigrationInfo
             var user = Users[apiUser.Key];
             user.ShouldImport = apiUser.ShouldImport;
             user.MigratingFiles.ShouldImport = apiUser.MigratingFiles.ShouldImport;
-        }
-        foreach (var apiGroup in apiInfo.Groups)
-        {
-            if (!Groups.Exists(g => apiGroup.GroupName == g.GroupName))
-            {
-                continue;
-            }
-
-            var group = Groups.Find(g => apiGroup.GroupName == g.GroupName);
-            group.ShouldImport = apiGroup.ShouldImport;
         }
     }
 }

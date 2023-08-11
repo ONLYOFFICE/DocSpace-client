@@ -26,6 +26,7 @@
 
 namespace ASC.Migration.GoogleWorkspace.Models;
 
+[Scope]
 public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 {
     public override string Email => _userInfo.Email;
@@ -35,24 +36,33 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
     public override string DisplayName => $"{_userInfo.FirstName} {_userInfo.LastName}".Trim();
 
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileSecurity _fileSecurity;
-    private readonly FileStorageService _fileStorageService;
     private readonly UserManager _userManager;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
+    private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
+
+    private string _rootFolder;
+    private UserInfo _userInfo;
+    private bool _hasPhoto;
 
     public GwsMigratingUser(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileSecurity fileSecurity,
-        FileStorageService fileStorageService,
-        UserManager userManager)
+        UserManager userManager,
+        IServiceProvider serviceProvider)
     {
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
-        _fileStorageService = fileStorageService;
         _userManager = userManager;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(string key, string rootFolder, Action<string, Exception> log)
+    {
+        Key = key;
+        _rootFolder = rootFolder;
+        Log = log;
+    }
+
+    public void Init(GwsMigratingUser user)
+    {
+        _userInfo = user._userInfo;
     }
 
     public override void Parse()
@@ -69,7 +79,8 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingFiles = new GwsMigratingFiles(_globalFolderHelper, _daoFactory, _fileSecurity, _fileStorageService, _rootFolder, this, log);
+        MigratingFiles = _serviceProvider.GetService<GwsMigratingFiles>();
+        MigratingFiles.Init(_rootFolder, this, log);
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
@@ -131,19 +142,6 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
             }
         }
     }
-
-    public GwsMigratingUser(string key, string rootFolder, Action<string, Exception> log) : base(log)
-    {
-        Key = key;
-        this._rootFolder = rootFolder;
-    }
-
-    private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
-    private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
-
-    private readonly string _rootFolder;
-    private UserInfo _userInfo;
-    private bool _hasPhoto;
 
     private void ParseRootHtml()
     {

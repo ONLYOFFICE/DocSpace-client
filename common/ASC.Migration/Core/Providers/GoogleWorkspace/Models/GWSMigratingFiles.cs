@@ -30,6 +30,7 @@ using File = System.IO.File;
 
 namespace ASC.Migration.GoogleWorkspace.Models;
 
+[Scope]
 public class GwsMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _foldersCount;
@@ -47,13 +48,14 @@ public class GwsMigratingFiles : MigratingFiles
     private readonly IDaoFactory _daoFactory;
     private readonly FileSecurity _fileSecurity;
     private readonly FileStorageService _fileStorageService;
-    private readonly string _rootFolder;
+    private readonly TempPath _tempPath;
+    private readonly IServiceProvider _serviceProvider;
+    private string _rootFolder;
     private int _foldersCount;
     private int _filesCount;
     private long _bytesTotal;
-    private readonly GwsMigratingUser _user;
+    private GwsMigratingUser _user;
     private Dictionary<string, GwsMigratingUser> _users;
-    private Dictionary<string, GWSMigratingGroups> _groups;
     private string _folderCreation;
 
     public override void Parse()
@@ -104,19 +106,28 @@ public class GwsMigratingFiles : MigratingFiles
     {
         _users = users.ToDictionary(user => user.Email, user => user);
     }
-    public void SetGroupsDict(IEnumerable<GWSMigratingGroups> groups)
-    {
-        _groups = groups.ToDictionary(group => group.GroupName, group => group);
-    }
 
-    public GwsMigratingFiles(GlobalFolderHelper globalFolderHelper, IDaoFactory daoFactory, FileSecurity fileSecurity, FileStorageService fileStorageService, string rootFolder, GwsMigratingUser user, Action<string, Exception> log) : base(log)
+    public GwsMigratingFiles(
+        GlobalFolderHelper globalFolderHelper,
+        IDaoFactory daoFactory,
+        FileSecurity fileSecurity,
+        FileStorageService fileStorageService,
+        TempPath tempPath,
+        IServiceProvider serviceProvider)
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
         _fileSecurity = fileSecurity;
         _fileStorageService = fileStorageService;
+        _tempPath = tempPath;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(string rootFolder, GwsMigratingUser user, Action<string, Exception> log)
+    {
         _rootFolder = rootFolder;
         _user = user;
+        Log = log;
     }
 
     public override async Task MigrateAsync()
@@ -126,7 +137,7 @@ public class GwsMigratingFiles : MigratingFiles
             return;
         }
 
-        var tmpFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(_user.Key));
+        var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(_user.Key));
         try
         {
             ZipFile.ExtractToDirectory(_user.Key, tmpFolder);
@@ -189,13 +200,11 @@ public class GwsMigratingFiles : MigratingFiles
 
                         var parentFolder = string.IsNullOrWhiteSpace(maskParentPath) ? foldersDict[_newParentFolder] : foldersDict[maskParentPath];
 
-                        var newFile = new File<int>
-                        {
-                            ParentId = parentFolder.Id,
-                            Comment = FilesCommonResource.CommentCreate,
-                            Title = Path.GetFileName(file),
-                            ContentLength = fs.Length
-                        };
+                        var newFile = _serviceProvider.GetService<File<int>>();
+                        newFile.ParentId = parentFolder.Id;
+                        newFile.Comment = FilesCommonResource.CommentCreate;
+                        newFile.Title = Path.GetFileName(file);
+                        newFile.ContentLength = fs.Length;
                         newFile = await fileDao.SaveFileAsync(newFile, fs);
                         realPath = realPath.Contains(Path.DirectorySeparatorChar.ToString() + _newParentFolder) ? realPath.Replace(Path.DirectorySeparatorChar.ToString() + _newParentFolder, "") : realPath;
                         filesDict.Add(realPath, newFile);
@@ -239,9 +248,12 @@ public class GwsMigratingFiles : MigratingFiles
                         if (shareInfo.Type == "user" || shareInfo.Type == "group")
                         {
                             var shareType = GetPortalShare(shareInfo);
+                            if (string.IsNullOrEmpty(shareInfo.EmailAddress))
+                            {
+                                continue;
+                            }
                             _users.TryGetValue(shareInfo.EmailAddress, out var userToShare);
-                            _groups.TryGetValue(shareInfo.Name, out var groupToShare);
-                            if (shareType == null || (userToShare == null && groupToShare == null))
+                            if (shareType == null || (userToShare == null))
                             {
                                 continue;
                             }
@@ -261,7 +273,7 @@ public class GwsMigratingFiles : MigratingFiles
                                 default: // unused
                                     break;
                             }
-                            var entryGuid = userToShare == null ? groupToShare.Guid : userToShare.Guid;
+                            var entryGuid = userToShare.Guid;
 
                             if (checkRights != null && await checkRights(kv.Value, entryGuid))
                             {

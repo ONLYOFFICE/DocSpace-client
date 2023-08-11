@@ -70,7 +70,24 @@ public class CountRoomCheckerStatistic : ITenantQuotaFeatureStat<CountRoomFeatur
         {
             return 0;
         }
-        
+
         return await folderDao.GetFoldersAsync(parentId).CountAsync();
+    }
+}
+
+public static class QuotaFeatureRegister
+{
+    public static void RegisterQuotaFeature(this IServiceCollection services)
+    {
+        services.AddScoped<UsersInRoomChecker>();
+
+        services.AddScoped<ITenantQuotaFeatureStat<UsersInRoomFeature, int>, UsersInRoomStatistic>();
+        services.AddScoped<UsersInRoomStatistic>();
+
+        services.AddScoped<ITenantQuotaFeatureChecker, CountRoomChecker>();
+        services.AddScoped<CountRoomChecker>();
+
+        services.AddScoped<ITenantQuotaFeatureStat<CountRoomFeature, int>, CountRoomCheckerStatistic>();
+        services.AddScoped<CountRoomCheckerStatistic>();
     }
 }

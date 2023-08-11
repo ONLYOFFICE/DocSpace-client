@@ -26,11 +26,21 @@
 
 namespace ASC.Migration.Core.Models.Api;
 
+[ProtoContract]
 public class MigratingApiUser : ImportableApiEntity
 {
+    [ProtoMember(2)]
     public string Key { get; set; }
+
+    [ProtoMember(3)]
     public string Email { get; set; }
+
+    [ProtoMember(4)]
     public string DisplayName { get; set; }
+
+    [ProtoMember(5)]
     public string ModuleName { get; set; }
+
+    [ProtoMember(6)]
     public MigratingApiFiles MigratingFiles { get; set; }
 }

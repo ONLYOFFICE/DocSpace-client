@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Common.Threading;
-using ASC.Common.Web;
-
 namespace ASC.Migration.Core;
 
 [Transient]
@@ -34,32 +31,76 @@ public class MigrationOperation : DistributedTaskProgress
 {
     private readonly ILogger<MigrationOperation> _logger;
     private readonly MigrationCore _migrationCore;
-
+    private readonly TenantManager _tenantManager;
+    private readonly SecurityContext _securityContext;
     private string _migratorName;
     private string _path;
-    public int TenantId { get; set; }
+    private Guid _userId;
 
+    private int? _tenantId;
+    public int TenantId
+    {
+        get => _tenantId ?? this[nameof(_tenantId)];
+        set
+        {
+            _tenantId = value;
+            this[nameof(_tenantId)] = value;
+        }
+    }
 
-    public MigrationOperation(ILogger<MigrationOperation> logger, MigrationCore migrationCore)
+    private MigrationApiInfo _migrationApiInfo;
+    public MigrationApiInfo MigrationApiInfo
+    {
+        get => _migrationApiInfo ?? System.Text.Json.JsonSerializer.Deserialize<MigrationApiInfo>(this[nameof(_migrationApiInfo)]);
+        set
+        {
+            _migrationApiInfo = value;
+            this[nameof(_migrationApiInfo)] = System.Text.Json.JsonSerializer.Serialize(value);
+        }
+    }
+
+    public MigrationOperation(
+        ILogger<MigrationOperation> logger,
+        MigrationCore migrationCore,
+        TenantManager tenantManager,
+        SecurityContext securityContext)
     {
         _logger = logger;
         _migrationCore = migrationCore;
+        _tenantManager = tenantManager;
+        _securityContext = securityContext;
     }
 
-    public void Init(int tenantId, string migratorName, string path)
+    public void InitParse(int tenantId, Guid userId, string migratorName, string path)
     {
         TenantId = tenantId;
         _migratorName = migratorName;
         _path = path;
+        _userId = userId;
+    }
+
+    public void InitMigrate(int tenantId, Guid userId, MigrationApiInfo migrationApiInfo)
+    {
+        TenantId = tenantId;
+        MigrationApiInfo = migrationApiInfo;
+        _migratorName = migrationApiInfo.MigratorName;
+        _path = migrationApiInfo.Path;
+        _userId = userId;
     }
 
     protected override async Task DoJob()
     {
+        IMigration migrator = null;
+
         try
         {
             CustomSynchronizationContext.CreateContext();
 
-            var migrator = _migrationCore.GetMigrator(_migratorName);
+            await _tenantManager.SetCurrentTenantAsync(TenantId);
+            await _securityContext.AuthenticateMeWithoutCookieAsync(_userId);
+            migrator = _migrationCore.GetMigrator(_migratorName);
+            migrator.OnProgressUpdate += Migrator_OnProgressUpdate;
+
             if (migrator == null)
             {
                 throw new ItemNotFoundException(MigrationResource.MigrationNotFoundException);
@@ -68,15 +109,19 @@ public class MigrationOperation : DistributedTaskProgress
             try
             {
                 migrator.Init(_path, CancellationToken);
-                migrator.OnProgressUpdate += Migrator_OnProgressUpdate;
+
             }
             catch (Exception ex)
             {
                 throw new Exception(string.Format(MigrationResource.MigrationUploadException, _migratorName), ex);
             }
 
-            await migrator.Parse();
-            migrator.OnProgressUpdate -= Migrator_OnProgressUpdate;
+            await migrator.Parse(_migrationApiInfo == null);
+
+            if (_migrationApiInfo != null)
+            {
+                await migrator.Migrate(_migrationApiInfo);
+            }
         }
         catch (Exception e)
         {
@@ -87,12 +132,20 @@ public class MigrationOperation : DistributedTaskProgress
         {
             IsCompleted = true;
             PublishChanges();
+            if (migrator != null)
+            {
+                migrator.OnProgressUpdate -= Migrator_OnProgressUpdate;
+            }
         }
-    }
 
-    private void Migrator_OnProgressUpdate(double arg1, string arg2)
-    {
-        Percentage = arg1;
-        PublishChanges();
+        void Migrator_OnProgressUpdate(double arg1, string arg2)
+        {
+            Percentage = arg1;
+            if (migrator != null && migrator.ApiInfo != null)
+            {
+                MigrationApiInfo = migrator.ApiInfo;
+            }
+            PublishChanges();
+        }
     }
 }

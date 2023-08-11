@@ -29,20 +29,18 @@ using ASC.Migration.GoogleWorkspace;
 using ASC.Migration.NextcloudWorkspace;
 using ASC.Migration.OwnCloud;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace ASC.Migration.Core.Models.Api;
 
 [Scope]
 public class MigrationCore
 {
-    private readonly System.IServiceProvider _serviceProvider;
+    private readonly IServiceProvider _serviceProvider;
     private readonly IEventBus _eventBus;
     private readonly AuthContext _authContext;
     private readonly TenantManager _tenantManager;
     private readonly MigrationWorker _migrationWorker;
 
-    public MigrationCore(System.IServiceProvider serviceProvider,
+    public MigrationCore(IServiceProvider serviceProvider,
         IEventBus eventBus,
         AuthContext authContext,
         TenantManager tenantManager,
@@ -59,12 +57,12 @@ public class MigrationCore
 
     public IMigration GetMigrator(string migrator)
     {
-        return _serviceProvider.GetService<IEnumerable<IMigration>>().FirstOrDefault(r => r.Meta.Name == migrator);
+        return _serviceProvider.GetService<IEnumerable<IMigration>>().FirstOrDefault(r => r.Meta.Name.Equals(migrator, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task StartParse(string migrationName, string path)
     {
-        _eventBus.Publish(new MigrationIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
+        _eventBus.Publish(new MigrationParseIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
         {
             MigratorName = migrationName,
             Path = path
@@ -75,6 +73,7 @@ public class MigrationCore
     {
         _eventBus.Publish(new MigrationIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
         {
+            ApiInfo = info
         });
     }
 
@@ -91,6 +90,8 @@ public class MigrationCore
     public static void Register(DIHelper services)
     {
         services.TryAdd<IMigration, GoogleWorkspaceMigration>();
+        services.TryAdd<GwsMigratingUser>();
+        services.TryAdd<GwsMigratingFiles>();
         services.TryAdd<IMigration, NextcloudWorkspaceMigration>();
         services.TryAdd<IMigration, OwnCloudMigration>();
     }

@@ -6,6 +6,7 @@ import { IRole } from "@docspace/common/Models";
 
 import type {
   CurrentRoleResponseType,
+  FileByRoleType,
   Folder as FolderInfoType,
   RoleQueue,
 } from "@docspace/common/types";
@@ -73,6 +74,19 @@ class RoleStore {
     this.filesStore.clientLoadingStore.setIsSectionHeaderLoading(false);
   };
 
+  private setFiles = (files: FileByRoleType[], role: RoleQueue) => {
+    const roleFiles = files.map((file) => ({
+      ...file,
+      roleFile: true,
+      contextOptions: this.dashboardStore.getFilesContextOptionsMode(
+        file,
+        role
+      ),
+    }));
+
+    this.filesStore.setFiles(roleFiles);
+  };
+
   public setRole = (role: RoleQueue) => {
     this.role = this.dashboardStore.convertToRole(role);
   };
@@ -95,7 +109,7 @@ class RoleStore {
 
       this.resetState();
       this.setRole(result.current);
-      this.filesStore.setFiles(result.files);
+      this.setFiles(result.files, result.current);
       await this.settingUpNavigationPath(result);
 
       filter.total = result.total;

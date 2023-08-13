@@ -6,6 +6,7 @@ export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
     constructor(props) {
       super(props);
+      this.isRolePage = window.DocSpace.location.pathname.includes("role");
     }
 
     onContentFileSelect = (checked, file) => {
@@ -212,7 +213,9 @@ export default function withFileActions(WrappedFileItem) {
 
     getContextModel = () => {
       const { getModel, item, t } = this.props;
-      return getModel(item, t);
+      return getModel(item, t, {
+        isRolePage: this.isRolePage,
+      });
     };
 
     render() {

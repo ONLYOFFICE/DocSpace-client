@@ -213,6 +213,37 @@ class DashboardStore {
 
     return roleOptions;
   };
+  public getFilesContextOptionsMode = (
+    file: FileByRoleType,
+    role: RoleQueue
+  ) => {
+    if (role.type === RoleTypeEnum.Default) {
+      let options: string[] = [
+        "fill-form",
+        "preview",
+        "separator0",
+        "link-for-room-members",
+        "separator1",
+        "cancel-filling",
+      ];
+
+      return options;
+    } else {
+      let options: string[] = [
+        "preview",
+        "separator0",
+        "link-for-room-members",
+        "download-file",
+        "download-file-as",
+        "move-to",
+        "copy-file",
+        "separator1",
+        "delete",
+      ];
+
+      return options;
+    }
+  };
 
   public selectedRole = (role: IRole, checked: boolean): void => {
     if (this.BufferSelectionRole) this.clearBufferSelectionRole();
@@ -276,25 +307,13 @@ class DashboardStore {
     this.dashboard = dashboard;
   };
 
-  public fetchFilesByRole = async (role: IRole): Promise<FileByRoleType[]> => {
-    const boardId = this.dashboard?.current.id;
-
-    if (!boardId) return Promise.reject();
-
-    try {
-      const files: FileByRoleType[] = await api.files.getFilesByRole(
-        boardId,
-        role.id
-      );
-      runInAction(() => {
-        this.filesByRole.set(role.id, files);
-        this.collectionFileByRoleStore.get(role.id)?.setFirstLoaded(true);
-      });
-
-      return files;
-    } catch (error) {
-      return Promise.reject(error);
-    }
+  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
+    this.SelectedRolesMap = selectedRolesMap;
+  };
+  public setSelectedFilesByRoleMap = (
+    selectedFilesByRoleMap: Map<number, IFileByRole>
+  ): void => {
+    this.selectedFilesByRoleMap = selectedFilesByRoleMap;
   };
 
   public setBufferSelectionFileByRole = (
@@ -320,6 +339,27 @@ class DashboardStore {
     }
   };
 
+  public fetchFilesByRole = async (role: IRole): Promise<FileByRoleType[]> => {
+    const boardId = this.dashboard?.current.id;
+
+    if (!boardId) return Promise.reject();
+
+    try {
+      const files: FileByRoleType[] = await api.files.getFilesByRole(
+        boardId,
+        role.id
+      );
+      runInAction(() => {
+        this.filesByRole.set(role.id, files);
+        this.collectionFileByRoleStore.get(role.id)?.setFirstLoaded(true);
+      });
+
+      return files;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
   public fetchDashboard = async (
     fileId: number | string
   ): Promise<IDashboard> => {
@@ -338,14 +378,6 @@ class DashboardStore {
     }
   };
 
-  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
-    this.SelectedRolesMap = selectedRolesMap;
-  };
-  public setSelectedFilesByRoleMap = (
-    selectedFilesByRoleMap: Map<number, IFileByRole>
-  ): void => {
-    this.selectedFilesByRoleMap = selectedFilesByRoleMap;
-  };
   //#endregion
 }
 

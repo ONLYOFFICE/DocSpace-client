@@ -33,6 +33,7 @@ import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import BoardIconSvgUrl from "PUBLIC_DIR/images/board.icon.svg?url";
 import FillingStatusSvgUrl from "PUBLIC_DIR/images/filling-status.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
@@ -658,6 +659,196 @@ class ContextOptionsStore {
     this.dialogsStore.setDeleteFormDialogVisible(true);
   };
 
+  getRoleFilesContextOptions = (file, t) => {
+    const { isEditing } = file;
+
+    const options = {
+      "link-for-room-members": {
+        id: "option_file-by-role_link-for-room-members",
+        key: "link-for-room-members",
+        label: t("Files:LinkForRoomMembers"),
+        icon: InvitationLinkReactSvgUrl,
+        onClick: () => this.onCopyLink(file, t),
+        disabled: false,
+      },
+
+      preview: {
+        id: "option_preview",
+        key: "preview",
+        label: t("Common:Preview"),
+        icon: EyeReactSvgUrl,
+        onClick: () => this.onPreviewClick(file),
+        disabled: false,
+      },
+
+      "cancel-filling": {
+        id: "option_cancel-filling",
+        key: "cancel-filling",
+        label: t("Common:CancelFilling"),
+        icon: CrossReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "fill-form": {
+        id: "option_fill-form",
+        key: "fill-form",
+        label: t("Common:FillFormButton"),
+        icon: FormFillRectSvgUrl,
+        onClick: () => this.onClickLinkFillForm(file),
+        disabled: false,
+      },
+
+      "download-file": {
+        id: "option_file-by-role_download-role",
+        key: "download-file",
+        label: t("Common:Download"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onClickDownload(file, t),
+        disabled: false,
+      },
+
+      "download-file-as": {
+        id: "option_file-by-role_download-file",
+        key: "download-file-as",
+        label: t("Translations:DownloadAs"),
+        icon: DownloadAsReactSvgUrl,
+        onClick: this.onClickDownloadAs,
+        disabled: false,
+      },
+
+      "move-to": {
+        id: "option_move-to",
+        key: "move-to",
+        label: t("Common:MoveTo"),
+        icon: MoveReactSvgUrl,
+        onClick: () => {
+          isEditing ? this.onShowEditingToast(t) : this.onMoveAction();
+        },
+        disabled: false,
+      },
+
+      "copy-file": {
+        id: "option_file-by-role_copy-file",
+        key: "copy-file",
+        label: t("Common:Copy"),
+        icon: CopyReactSvgUrl,
+        onClick: this.onCopyAction,
+        disabled: false,
+      },
+
+      separator0: {
+        key: "separator0",
+        isSeparator: true,
+        disabled: false,
+      },
+      separator1: {
+        key: "separator1",
+        isSeparator: true,
+        disabled: false,
+      },
+      delete: {
+        id: "option_file-by-role_delete",
+        key: "delete",
+        label: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => {
+          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(file, t);
+        },
+        disabled: false,
+      },
+    };
+
+    return file.contextOptions.map((option) => options[option]);
+  };
+
+  getGroupRoleFilesContextOptions = (t) => {
+    const { selection } = this.filesStore;
+
+    const length = selection.length;
+
+    const optionsModel = {
+      "cancel-filling": {
+        id: "option_cancel-filling",
+        key: "cancel-filling",
+        label: t("Common:CancelFilling"),
+        icon: CrossReactSvgUrl,
+        iconUrl: CrossReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "download-file": {
+        id: "option_file-by-role_download-role",
+        key: "download-file",
+        label: t("Common:Download"),
+        icon: DownloadReactSvgUrl,
+        iconUrl: DownloadReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "download-file-as": {
+        id: "option_file-by-role_download-file",
+        key: "download-file-as",
+        label: t("Translations:DownloadAs"),
+        icon: DownloadAsReactSvgUrl,
+        iconUrl: DownloadAsReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "move-to": {
+        id: "option_move-to",
+        key: "move-to",
+        label: t("Common:MoveTo"),
+        icon: MoveReactSvgUrl,
+        iconUrl: MoveReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+
+      "copy-file": {
+        id: "option_file-by-role_copy-file",
+        key: "copy-file",
+        label: t("Common:Copy"),
+        icon: CopyReactSvgUrl,
+        iconUrl: CopyReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+      delete: {
+        id: "option_file-by-role_delete",
+        key: "delete",
+        label: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        iconUrl: TrashReactSvgUrl,
+        onClick: () => {},
+        disabled: false,
+      },
+    };
+
+    const groupOptions = {
+      "cancel-filling": 0,
+      "download-file": 0,
+      "download-file-as": 0,
+      "move-to": 0,
+      "copy-file": 0,
+      delete: 0,
+    };
+
+    for (const file of selection) {
+      file.contextOptions.forEach((option) => {
+        groupOptions[option] !== undefined && ++groupOptions[option];
+      });
+    }
+    const options = Object.entries(groupOptions)
+      .filter((item) => item[1] === length)
+      .map((item) => optionsModel[item[0]]);
+
+    return options;
+  };
+
   getRoomsRootContextOptions = (item, t) => {
     const { id, rootFolderId } = this.selectedFolderStore;
     const isRootRoom = item.isRoom && rootFolderId === id;
@@ -1180,12 +1371,15 @@ class ContextOptionsStore {
           : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => {
-          //TODO: Remove temp later
+          if (isEditing) {
+            return this.onShowEditingToast(t);
+          }
+
           if (item.fileExst === ".oform" && item.boardId) {
             return this.onClickRemoveOForm(item);
           }
 
-          isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t);
+          this.onClickDelete(item, t);
         },
         disabled: false,
       },
@@ -1472,10 +1666,16 @@ class ContextOptionsStore {
     return options;
   };
 
-  getModel = (item, t) => {
+  getModel = (item, t, options) => {
     const { selection } = this.filesStore;
 
     const { fileExst, contextOptions } = item;
+
+    if (options?.isRolePage) {
+      return selection.length > 1
+        ? this.getGroupRoleFilesContextOptions(t)
+        : this.getRoleFilesContextOptions(item, t);
+    }
 
     const contextOptionsProps =
       contextOptions && contextOptions.length > 0

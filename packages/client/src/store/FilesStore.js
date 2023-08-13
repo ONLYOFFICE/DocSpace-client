@@ -2742,7 +2742,9 @@ class FilesStore {
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
 
-      const contextOptions = this.getFilesContextOptions(item);
+      const contextOptions = item.roleFile
+        ? item.contextOptions
+        : this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       const iconSize = this.viewAs === "table" ? 24 : 32;
@@ -2804,6 +2806,7 @@ class FilesStore {
         access,
         boardId,
         boardTitle,
+        roleFile: item.roleFile,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
         //checked,

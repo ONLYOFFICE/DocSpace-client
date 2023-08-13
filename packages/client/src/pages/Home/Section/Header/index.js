@@ -209,6 +209,7 @@ const SectionHeaderContent = (props) => {
     dashboardHeaderMenuService,
     backToParentDashboard,
     getRoleHeaderContextMenu,
+    getGroupRoleFilesContextOptions,
   } = props;
 
   const navigate = useNavigate();
@@ -855,6 +856,8 @@ const SectionHeaderContent = (props) => {
 
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t)
+    : isRolePage
+    ? getGroupRoleFilesContextOptions(t)
     : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -1099,6 +1102,7 @@ export default inject(
       onClickArchive,
       onClickReconnectStorage,
       onCopyLink,
+      getGroupRoleFilesContextOptions,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1234,6 +1238,7 @@ export default inject(
       dashboardHeaderMenuService,
       backToParentDashboard,
       getRoleHeaderContextMenu,
+      getGroupRoleFilesContextOptions,
     };
   }
 )(

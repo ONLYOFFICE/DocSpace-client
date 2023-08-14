@@ -178,6 +178,18 @@ class AccessRightsStore {
 
     return true;
   };
+
+  canSetDefaultQuota = () => {
+    const {
+      isOwner,
+      isAdmin,
+      isCustomQuota = true,
+    } = this.authStore.userStore.user;
+
+    if (!isOwner && !isAdmin) return false;
+
+    return isCustomQuota;
+  };
 }
 
 export default AccessRightsStore;

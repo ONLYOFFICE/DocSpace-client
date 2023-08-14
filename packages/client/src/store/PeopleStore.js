@@ -6,6 +6,7 @@ import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -212,6 +213,7 @@ class PeopleStore {
       hasFreeUsers,
       hasUsersToChangeQuota,
       hasUsersToDisableQuota,
+      hasUsersToSetDefaultQuota,
       selection,
     } = this.selectionStore;
     const {
@@ -311,6 +313,14 @@ class PeopleStore {
         disabled: !hasUsersToChangeQuota,
         iconUrl: ChangQuotaReactSvgUrl,
         onClick: () => this.changeUserQuota(selection),
+      },
+      {
+        id: "menu-default-quota",
+        key: "default-quota",
+        label: "Set to default",
+        disabled: !hasUsersToSetDefaultQuota,
+        iconUrl: DefaultQuotaReactSvgUrl,
+        onClick: () => console.log("set to default", selection),
       },
       {
         id: "menu-disable-quota",

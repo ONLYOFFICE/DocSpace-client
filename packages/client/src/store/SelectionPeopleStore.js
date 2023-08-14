@@ -258,6 +258,12 @@ class SelectionStore {
 
     return this.selection.every((x) => canDisableQuota(x));
   }
+
+  get hasUsersToSetDefaultQuota() {
+    const { canSetDefaultQuota } = this.peopleStore.accessRightsStore;
+
+    return this.selection.every((x) => canSetDefaultQuota(x));
+  }
 }
 
 export default SelectionStore;

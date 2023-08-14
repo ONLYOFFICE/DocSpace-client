@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
-const DataImportWrapper = styled.div`
+const WorkspacesContainer = styled.div`
   max-width: 700px;
   margin-top: 4px;
+
+  @media ${tablet} {
+    max-width: 675px;
+  }
 
   @media ${mobile} {
     max-width: 343px;
@@ -21,7 +25,7 @@ const DataImportWrapper = styled.div`
     font-weight: 600;
   }
 
-  .service-list {
+  .workspace-list {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -29,7 +33,7 @@ const DataImportWrapper = styled.div`
     gap: 20px;
   }
 
-  .service-wrapper {
+  .workspace-item {
     border: 1px solid #d0d5da;
     border-radius: 6px;
     width: 340px;
@@ -39,7 +43,6 @@ const DataImportWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     cursor: pointer;
 
     &:hover {
@@ -51,50 +54,18 @@ const DataImportWrapper = styled.div`
     }
 
     @media ${tablet} {
-      width: 328px;
+      width: 327.5px;
     }
 
     @media ${mobile} {
       width: 100%;
     }
 
-    .service-icon {
+    .workspace-logo {
       display: flex;
       align-items: center;
     }
   }
 `;
 
-const WorkspaceWrapper = styled.div`
-  margin-top: 4px;
-
-  .data-import-subtitle {
-    color: #657077;
-    max-width: 700px;
-    line-height: 20px;
-    margin-bottom: 20px;
-  }
-
-  .stepper {
-    margin-right: 5px;
-    font-weight: 700;
-    font-size: 16px;
-  }
-
-  .step-description {
-    position: relative;
-    max-width: 700px;
-    font-size: 12px;
-    margin-bottom: 16px;
-    line-height: 16px;
-    color: #333333;
-  }
-
-  .step-tooltip {
-    position: absolute;
-    top: 18px;
-    right: 45%;
-  }
-`;
-
-export { DataImportWrapper, WorkspaceWrapper };
+export { WorkspacesContainer };

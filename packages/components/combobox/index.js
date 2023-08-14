@@ -235,16 +235,15 @@ class ComboBox extends React.Component {
             {advancedOptions
               ? advancedOptions
               : options.map((option) => {
-                  const disabled =
-                    option.disabled ||
-                    (!displaySelectedOption &&
-                      option.label === selectedOption.label);
-
-                  const isActive =
-                    displaySelectedOption &&
+                  const isSelected =
+                    option.key === selectedOption.key ||
                     option.label === selectedOption.label;
 
-                  const isSelected = option.label === selectedOption.label;
+                  const disabled =
+                    option.disabled || (!displaySelectedOption && isSelected);
+
+                  const isActive = displaySelectedOption && isSelected;
+
                   return (
                     <DropDownItem
                       {...option}

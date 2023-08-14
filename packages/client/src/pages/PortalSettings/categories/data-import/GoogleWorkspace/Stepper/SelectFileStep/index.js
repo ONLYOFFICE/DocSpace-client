@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -7,38 +8,37 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 
 const Wrapper = styled.div`
   max-width: 350px;
 
-  .choose-backup-file {
+  .select-file-title {
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 4px;
   }
 
-  .upload-backup-input {
+  .select-file-input {
     height: 32px;
     margin-bottom: 16px;
   }
 
-  .upload-backup-text {
+  .select-file-progress-text {
     font-size: 12px;
     margin-top: -4px;
     margin-bottom: 12px;
   }
 
-  .data-import-progress-bar {
+  .select-file-progress-bar {
     margin: 12px 0 16px;
     width: 350px;
   }
 `;
 
-const FirstStep = ({
+const SelectFileStep = ({
   t,
-  onNextStepClick,
-  onPrevStepClick,
+  onNextStep,
+  onPrevStep,
   showReminder,
   setShowReminder,
   cancelDialogVisble,
@@ -46,14 +46,13 @@ const FirstStep = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const onClickInput = (file) => {
+  const onSelectFile = (file) => {
     let data = new FormData();
     data.append("file", file);
     setShowReminder(true);
-    setIsLoading(true);
   };
 
-  const onClickButton = () => {
+  const onCancel = () => {
     setCancelDialogVisbile(true);
     setIsLoading(false);
   };
@@ -61,25 +60,33 @@ const FirstStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
+        <Text className="select-file-title">
+          {t("Settings:ChooseBackupFile")}
+        </Text>
         <FileInput
-          onInput={onClickInput}
-          className="upload-backup-input"
-          placeholder={t("Settings:BackupFile")}
           scale
+          onInput={onSelectFile}
+          className="select-file-input"
+          placeholder={t("Settings:BackupFile")}
         />
       </Wrapper>
       {isLoading ? (
         <Wrapper>
-          <Text className="upload-backup-text">{t("Settings:BackupFileUploading")}</Text>
-          <ProgressBar percent={75} className="data-import-progress-bar" />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onClickButton} />
+          <Text className="select-file-progress-text">
+            {t("Settings:BackupFileUploading")}
+          </Text>
+          <ProgressBar percent={75} className="select-file-progress-bar" />
+          <Button
+            size="small"
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </Wrapper>
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={onNextStepClick}
-          onCancelClick={onPrevStepClick}
+          onSaveClick={onNextStep}
+          onCancelClick={onPrevStep}
           showReminder={showReminder}
           saveButtonLabel={t("Settings:UploadToServer")}
           cancelButtonLabel={t("Common:Back")}
@@ -99,9 +106,10 @@ const FirstStep = ({
 };
 
 export default inject(({ dialogsStore }) => {
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
   return {
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,
   };
-})(observer(FirstStep));
+})(observer(SelectFileStep));

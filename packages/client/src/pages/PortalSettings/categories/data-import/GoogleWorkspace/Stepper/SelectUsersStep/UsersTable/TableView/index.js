@@ -8,13 +8,13 @@ import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
-import SearchInput from "@docspace/components/search-input";
 
 const StyledTableContainer = styled(TableContainer)`
-  margin: 20px 0;
+  margin: 0 0 20px;
 
   .header-container-text {
     font-size: 12px;
+    color: #a3a9ae;
   }
 
   .table-container_header {
@@ -74,12 +74,6 @@ const TableView = (props) => {
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      <SearchInput
-        id="search-users-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
-      />
       <UsersTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}

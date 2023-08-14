@@ -1,5 +1,5 @@
-import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
+import SelectFileStep from "./SelectFileStep";
+import SelectUsersStep from "./SelectUsersStep";
 import ThirdStep from "./ThirdStep";
 import FourthStep from "./FourthStep";
 import FifthStep from "./FifthStep";
@@ -10,28 +10,28 @@ const StepContent = ({
   currentStep,
   showReminder,
   setShowReminder,
-  onNextStepClick,
-  onPrevStepClick,
+  onNextStep,
+  onPrevStep,
 }) => {
   const isFifthStep = currentStep === 5;
 
   switch (currentStep) {
     case 1:
       return (
-        <FirstStep
+        <SelectFileStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
           setShowReminder={setShowReminder}
         />
       );
     case 2:
       return (
-        <SecondStep
+        <SelectUsersStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
         />
       );
@@ -39,8 +39,8 @@ const StepContent = ({
       return (
         <ThirdStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
         />
       );
@@ -48,8 +48,8 @@ const StepContent = ({
       return (
         <FourthStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
         />
       );
@@ -57,8 +57,8 @@ const StepContent = ({
       return (
         <FifthStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
           isFifthStep={isFifthStep}
         />
@@ -67,8 +67,8 @@ const StepContent = ({
       return (
         <SixthStep
           t={t}
-          onNextStepClick={onNextStepClick}
-          onPrevStepClick={onPrevStepClick}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
           showReminder={showReminder}
         />
       );

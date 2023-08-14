@@ -1,26 +1,28 @@
 import { useState } from "react";
-import { inject, observer } from "mobx-react";
-import { Consumer } from "@docspace/components/utils/context";
+import { tablet } from "@docspace/components/utils/device";
+import { mockData } from "../mockData.js";
 import styled from "styled-components";
 
+import UsersTable from "./UsersTable";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Text from "@docspace/components/text";
+import SearchInput from "@docspace/components/search-input";
 import HelpButton from "@docspace/components/help-button";
+import Text from "@docspace/components/text";
 import Paging from "@docspace/components/paging";
 
-import { mockData } from "../mockData.js";
-
-import TableView from "./TableView";
-import RowView from "./RowView";
-
-const Wrapper = styled.div`
+const UsersInfoBlock = styled.div`
   display: flex;
   align-items: center;
   max-width: 660px;
   background: #f8f9f9;
+  box-sizing: border-box;
   padding: 12px 16px;
   border-radius: 6px;
   margin: 16px 0;
+
+  @media ${tablet} {
+    max-width: 100%;
+  }
 
   .selected-users-count {
     margin-right: 24px;
@@ -42,7 +44,7 @@ const StyledText = styled(Text)`
   font-weight: 600;
 `;
 
-const StyledPagging = styled(Paging)`
+const StyledPaging = styled(Paging)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,21 +53,25 @@ const StyledPagging = styled(Paging)`
 
 const countItems = [
   {
-    key: "25 per page",
+    key: "25-per-page",
     label: "25 per page",
   },
   {
-    key: "50 per page",
+    key: "50-per-page",
     label: "50 per page",
   },
   {
-    key: "100 per page",
+    key: "100-per-page",
     label: "100 per page",
   },
 ];
 
-const SecondStep = (props) => {
-  const { t, onNextStepClick, onPrevStepClick, viewAs, showReminder } = props;
+const SelectUsersStep = ({
+  t,
+  onNextStep,
+  onPrevStep,
+  showReminder,
+}) => {
   const [isExceeded, setIsExceeded] = useState(false);
   const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
   const [currentCount, setCurrentCount] = useState(25);
@@ -91,7 +97,7 @@ const SecondStep = (props) => {
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
   const [countItem, setCountItem] = useState(countItems[0]);
 
-  const onSelectPageNextHandler = (e) => {
+  const onSelectPageNextHandler = () => {
     const currentPage = pageItems[selectedPageItem.key + 1];
     if (currentPage) {
       if (currentCount <= 0) {
@@ -130,15 +136,17 @@ const SecondStep = (props) => {
     <>
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={onNextStepClick}
-        onCancelClick={onPrevStepClick}
+        onSaveClick={onNextStep}
+        onCancelClick={onPrevStep}
         showReminder={showReminder}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
       />
+
       {isExceeded && <StyledText>{t("Settings:UserLimitExceeded")}</StyledText>}
-      <Wrapper>
+
+      <UsersInfoBlock>
         <Text className="selected-users-count">
           {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
         </Text>
@@ -155,25 +163,18 @@ const SecondStep = (props) => {
             <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
           }
         />
-      </Wrapper>
+      </UsersInfoBlock>
 
-      <Consumer>
-        {(context) =>
-          viewAs === "table" ? (
-            <TableView
-              sectionWidth={context.sectionWidth}
-              usersData={dataPortion}
-            />
-          ) : (
-            <RowView
-              sectionWidth={context.sectionWidth}
-              usersData={dataPortion}
-            />
-          )
-        }
-      </Consumer>
-      <StyledPagging
-        className="users-pagging"
+      <SearchInput
+        id="search-users-input"
+        placeholder={t("Common:Search")}
+        onChange={() => console.log("changed")}
+        onClearSearch={() => console.log("cleared")}
+      />
+
+      <UsersTable t={t} usersData={dataPortion} />
+
+      <StyledPaging
         pageItems={pageItems}
         countItems={countItems}
         previousLabel={t("Common:Previous")}
@@ -192,10 +193,4 @@ const SecondStep = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
-  const { viewAs } = setup;
-
-  return {
-    viewAs,
-  };
-})(observer(SecondStep));
+export default SelectUsersStep;

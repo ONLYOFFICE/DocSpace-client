@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   gap: 12px;
 `;
 
-const FourthStep = ({ t, onNextStepClick, onPrevStepClick, showReminder }) => {
+const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   const [isChecked, setIsChecked] = useState({
     users: true,
     pFiles: true,
@@ -74,8 +74,8 @@ const FourthStep = ({ t, onNextStepClick, onPrevStepClick, showReminder }) => {
 
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={onNextStepClick}
-        onCancelClick={onPrevStepClick}
+        onSaveClick={onNextStep}
+        onCancelClick={onPrevStep}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings

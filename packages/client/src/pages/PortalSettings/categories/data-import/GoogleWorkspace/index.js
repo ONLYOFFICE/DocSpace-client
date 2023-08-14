@@ -16,17 +16,22 @@ const STEP_LENGTH = 6;
 const GoogleWrapper = styled.div`
   margin-top: 4px;
 
-  .data-import-subtitle {
+  .workspace-subtitle {
     color: #657077;
     max-width: 700px;
     line-height: 20px;
     margin-bottom: 20px;
   }
 
-  .stepper {
+  .step-counter {
     margin-right: 5px;
-    font-weight: 700;
     font-size: 16px;
+    font-weight: 700;
+  }
+
+  .step-title {
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .step-description {
@@ -113,17 +118,15 @@ const GoogleWorkspace = (props) => {
 
   return (
     <GoogleWrapper>
-      <Text className="data-import-subtitle">
+      <Text className="workspace-subtitle">
         {t("Settings:AboutDataImport")}
       </Text>
-      <>
+      <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
-          <Text className="stepper">
+          <Text className="step-counter">
             {currentStep}/{STEP_LENGTH}.
           </Text>
-          <Text isBold fontSize="16px">
-            {getStepTitle(t, currentStep)}
-          </Text>
+          <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Text className="step-description">
           {getStepDescription(t, currentStep)}
@@ -137,7 +140,7 @@ const GoogleWorkspace = (props) => {
           showReminder={showReminder}
           setShowReminder={setShowReminder}
         />
-      </>
+      </div>
       {isSecondStep || isThirdStep ? (
         <SaveCancelButtons
           className="save-cancel-buttons"

@@ -26,8 +26,8 @@ const Wrapper = styled.div`
 
 const FifthStep = ({
   t,
-  onNextStepClick,
-  onPrevStepClick,
+  onNextStep,
+  onPrevStep,
   showReminder,
   isFifthStep,
 }) => {
@@ -44,7 +44,7 @@ const FifthStep = ({
         percentRef.current += PERCENT_STEP;
       } else {
         clearInterval(interval);
-        onNextStepClick();
+        onNextStep();
       }
     }, 200);
 
@@ -74,8 +74,8 @@ const FifthStep = ({
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={onNextStepClick}
-          onCancelClick={onPrevStepClick}
+          onSaveClick={onNextStep}
+          onCancelClick={onPrevStep}
           showReminder={showReminder}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}

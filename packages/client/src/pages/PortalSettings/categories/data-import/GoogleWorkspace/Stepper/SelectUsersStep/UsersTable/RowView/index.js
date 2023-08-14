@@ -1,20 +1,53 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
+import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import SearchInput from "@docspace/components/search-input";
+
 import RowContainer from "@docspace/components/row-container";
+import Row from "@docspace/components/row";
+import Text from "@docspace/components/text";
 import UsersRow from "./UsersRow";
-import { mockData } from "../../mockData.js";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin: 20px 0;
+  margin: 0 0 20px;
+`;
+
+const StyledRow = styled(Row)`
+  box-sizing: border-box;
+  min-height: 40px;
+
+  .row-header-title {
+    color: #a3a9ae;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  @media ${tablet} {
+    .row_content {
+      height: auto;
+    }
+  }
 `;
 
 const RowView = (props) => {
-  const { sectionWidth, viewAs, setViewAs } = props;
+  const { t, sectionWidth, viewAs, setViewAs, usersData } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
+  const rowRef = useRef(null);
+
+  const onCheck = (checked) => {
+    setIsChecked(checked);
+    if (checked) {
+      setCheckbox(usersData.map((data) => data.id));
+    } else {
+      setCheckbox([]);
+    }
+  };
+
+  const onChangeAllCheckbox = (e) => {
+    onCheck(e.target.checked);
+  };
 
   const onChangeCheckbox = (id, checked) => {
     if (checked) {
@@ -35,14 +68,15 @@ const RowView = (props) => {
   }, [sectionWidth]);
 
   return (
-    <StyledRowContainer useReactWindow={false}>
-      <SearchInput
-        id="search-users-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
-      />
-      {mockData.map((data) => (
+    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
+      <StyledRow
+        key="Name"
+        sectionWidth={sectionWidth}
+        onClick={onChangeAllCheckbox}
+      >
+        <Text className="row-header-title">{t("Common:Name")}</Text>
+      </StyledRow>
+      {usersData.map((data) => (
         <UsersRow
           key={data.id}
           id={data.id}

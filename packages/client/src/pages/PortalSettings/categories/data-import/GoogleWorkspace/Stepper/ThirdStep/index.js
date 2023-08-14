@@ -33,7 +33,7 @@ const countItems = [
 ];
 
 const ThirdStep = (props) => {
-  const { t, onNextStepClick, onPrevStepClick, viewAs, showReminder } = props;
+  const { t, onNextStep, onPrevStep, viewAs, showReminder } = props;
   const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
   const [currentCount, setCurrentCount] = useState(25);
 
@@ -92,8 +92,8 @@ const ThirdStep = (props) => {
     <>
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={onNextStepClick}
-        onCancelClick={onPrevStepClick}
+        onSaveClick={onNextStep}
+        onCancelClick={onPrevStep}
         showReminder={showReminder}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}

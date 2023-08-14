@@ -17,6 +17,7 @@ const SpaceQuota = (props) => {
     type,
     item,
     changeUserQuota,
+    updateUserQuota,
   } = props;
   console.log("SpaceQuota render");
   const [action, setAction] = useState("no-quota");
@@ -41,6 +42,11 @@ const SpaceQuota = (props) => {
         changeUserQuota([item], successCallback, abortCallback);
       }
 
+      return;
+    }
+
+    if (action === "no-quota") {
+      if (type === "user") updateUserQuota(-1, [item]);
       return;
     }
     setAction(action);
@@ -124,11 +130,12 @@ export default inject(({ dialogsStore, peopleStore }) => {
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
   } = dialogsStore;
-  const { changeUserQuota } = peopleStore;
-
+  const { changeUserQuota, usersStore } = peopleStore;
+  const { updateUserQuota } = usersStore;
   return {
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
     changeUserQuota,
+    updateUserQuota,
   };
 })(observer(SpaceQuota));

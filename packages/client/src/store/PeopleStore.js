@@ -5,6 +5,7 @@ import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.re
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -210,6 +211,7 @@ class PeopleStore {
       hasUsersToRemove,
       hasFreeUsers,
       hasUsersToChangeQuota,
+      hasUsersToDisableQuota,
       selection,
     } = this.selectionStore;
     const {
@@ -220,6 +222,7 @@ class PeopleStore {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
 
     const { isVisible } = this.authStore.infoPanelStore;
+    const { updateUserQuota } = this.usersStore;
 
     const options = [];
 
@@ -308,6 +311,14 @@ class PeopleStore {
         disabled: !hasUsersToChangeQuota,
         iconUrl: ChangQuotaReactSvgUrl,
         onClick: () => this.changeUserQuota(selection),
+      },
+      {
+        id: "menu-disable-quota",
+        key: "disable-quota",
+        label: "Disable quota",
+        disabled: !hasUsersToDisableQuota,
+        iconUrl: DisableQuotaReactSvgUrl,
+        onClick: () => updateUserQuota(-1, selection),
       },
       {
         id: "menu-delete",

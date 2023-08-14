@@ -169,8 +169,15 @@ class AccessRightsStore {
 
     return isOwner || isAdmin;
   };
+  canDisableQuota = () => {
+    const { isOwner, isAdmin, quotaLimit } = this.authStore.userStore.user;
 
-  
+    if (!isOwner && !isAdmin) return false;
+
+    if (quotaLimit === 0) return false;
+
+    return true;
+  };
 }
 
 export default AccessRightsStore;

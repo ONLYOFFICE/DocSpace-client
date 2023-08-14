@@ -252,6 +252,12 @@ class SelectionStore {
 
     return users.length > 0;
   }
+
+  get hasUsersToDisableQuota() {
+    const { canDisableQuota } = this.peopleStore.accessRightsStore;
+
+    return this.selection.every((x) => canDisableQuota(x));
+  }
 }
 
 export default SelectionStore;

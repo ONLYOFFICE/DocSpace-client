@@ -163,6 +163,14 @@ class AccessRightsStore {
 
     return false;
   };
+
+  canChangeQuota = () => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+
+    return isOwner || isAdmin;
+  };
+
+  
 }
 
 export default AccessRightsStore;

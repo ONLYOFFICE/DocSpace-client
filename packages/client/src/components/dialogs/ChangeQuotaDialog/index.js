@@ -9,54 +9,20 @@ import Text from "@docspace/components/text";
 import QuotaForm from "../../../components/QuotaForm";
 import StyledModalDialog from "./StyledComponent";
 
-let timerId = null;
 const ChangeQuotaDialog = (props) => {
   const {
-    changeQuotaDialogVisible,
-    setUserQuota,
+    visible,
     headerTitle,
     bodyDescription,
-    setChangeQuotaDialogVisible,
+    onSaveClick,
+    onCloseClick,
+    onSetQuotaBytesSize,
+    isError,
+    isLoading,
   } = props;
   const { t } = useTranslation("Common");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const sizeRef = useRef("");
-
-  const onSetQuotaBytesSize = (size) => {
-    sizeRef.current = size;
-  };
-
-  const onSaveClick = async () => {
-    const size = sizeRef.current;
-
-    if (!size || (typeof size === "string" && size?.trim() === "")) {
-      setIsError(true);
-      return;
-    }
-
-    timerId = setTimeout(() => setIsLoading(true), 500);
-    await setUserQuota(size, true, t);
-    timerId && clearTimeout(timerId);
-    timerId = null;
-
-    setIsLoading(false);
-    setIsError(false);
-    setChangeQuotaDialogVisible(false);
-  };
-
-  const onCloseClick = () => {
-    timerId && clearTimeout(timerId);
-    timerId = null;
-
-    setChangeQuotaDialogVisible(false);
-  };
-
   return (
-    <StyledModalDialog
-      visible={changeQuotaDialogVisible}
-      onClose={onCloseClick}
-    >
+    <StyledModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>
         {headerTitle ? headerTitle : "Edit quota"}
       </ModalDialog.Header>
@@ -79,12 +45,14 @@ const ChangeQuotaDialog = (props) => {
           size="normal"
           primary
           onClick={onSaveClick}
+          isLoading={isLoading}
           scale
         />
         <Button
           label={t("Common:CancelButton")}
           size="normal"
           onClick={onCloseClick}
+          isDisabled={isLoading}
           scale
         />
       </ModalDialog.Footer>

@@ -139,7 +139,23 @@ class UsersStore {
 
     return users;
   };
+  updateUserQuota = async (quotaSize, userIds, filter) => {
+    let users = null;
 
+    var promise_1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("promise updateUserQuota", quotaSize, userIds);
+        resolve();
+        // reject(new Error("timeout"));
+      }, [1000]);
+    });
+
+    await promise_1;
+
+    await this.getUsersList(filter);
+
+    return users;
+  };
   updateProfileInUsers = async (updatedProfile) => {
     if (!this.users) {
       return this.getUsersList();

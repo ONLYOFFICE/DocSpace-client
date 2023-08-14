@@ -244,6 +244,14 @@ class SelectionStore {
 
     return users.map((u) => u.id);
   }
+
+  get hasUsersToChangeQuota() {
+    const { canChangeQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter((x) => canChangeQuota(x));
+
+    return users.length > 0;
+  }
 }
 
 export default SelectionStore;

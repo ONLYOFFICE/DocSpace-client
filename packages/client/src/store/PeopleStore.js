@@ -4,6 +4,7 @@ import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -145,6 +146,25 @@ class PeopleStore {
     return true;
   };
 
+  changeUserQuota = (users, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+    console.log("==changeUserQuota", userIDs);
+    const payload = {
+      visible: true,
+      type: "user",
+      ids: userIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
   onChangeStatus = (status) => {
     const users = [];
 
@@ -162,8 +182,10 @@ class PeopleStore {
   };
 
   changeStatus = (status, users) => {
-    const { setChangeUserStatusDialogVisible, setDialogData } =
-      this.dialogStore;
+    const {
+      setChangeUserStatusDialogVisible,
+      setDialogData,
+    } = this.dialogStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
@@ -187,11 +209,15 @@ class PeopleStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasFreeUsers,
+      hasUsersToChangeQuota,
+      selection,
     } = this.selectionStore;
-    const { setSendInviteDialogVisible, setDeleteDialogVisible } =
-      this.dialogStore;
+    const {
+      setSendInviteDialogVisible,
+      setDeleteDialogVisible,
+    } = this.dialogStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
 
     const { isVisible } = this.authStore.infoPanelStore;
 
@@ -274,6 +300,14 @@ class PeopleStore {
         disabled: !hasUsersToDisable,
         onClick: () => this.onChangeStatus(EmployeeStatus.Disabled),
         iconUrl: DisableReactSvgUrl,
+      },
+      {
+        id: "menu-change-quota",
+        key: "change-quota",
+        label: "Change quota",
+        disabled: !hasUsersToChangeQuota,
+        iconUrl: ChangQuotaReactSvgUrl,
+        onClick: () => this.changeUserQuota(selection),
       },
       {
         id: "menu-delete",

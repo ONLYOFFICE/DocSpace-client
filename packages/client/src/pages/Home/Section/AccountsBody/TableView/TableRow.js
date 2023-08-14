@@ -435,7 +435,7 @@ const PeopleTableRow = (props) => {
           </Link>
         </TableCell>
         <TableCell className={"table-cell_Storage/Quota"}>
-          <SpaceQuota hideColumns={hideColumns} />
+          <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
         </TableCell>
       </StyledPeopleRow>
     </StyledWrapper>

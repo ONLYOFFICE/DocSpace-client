@@ -8,7 +8,7 @@ import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
-
+import ChangeQuotaEvent from "./ChangeQuotaEvent";
 const GlobalEvents = () => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -42,7 +42,13 @@ const GlobalEvents = () => {
     visible: false,
     onClose: null,
   });
-
+  const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
+    visible: false,
+    type: null,
+    ids: null,
+    bodyDescription: null,
+    headerTitle: null,
+  });
   const onCreate = useCallback((e) => {
     const { payload } = e;
 
@@ -120,13 +126,38 @@ const GlobalEvents = () => {
     });
   }, []);
 
+  const onChangeQuota = useCallback((e) => {
+    const { payload } = e;
+
+    setChangeQuotaDialogProps({
+      visible: payload.visible,
+      type: payload.type,
+      ids: payload.ids,
+      bodyDescription: payload.bodyDescriptionKey,
+      headerTitle: payload.headerKey,
+      successCallback: payload.successCallback,
+      abortCallback: payload.abortCallback,
+      onClose: () => {
+        setChangeQuotaDialogProps({
+          visible: false,
+          type: null,
+          ids: null,
+          bodyDescription: null,
+          headerTitle: null,
+          successCallback: null,
+          abortCallback: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
   useEffect(() => {
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
-
+    window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
     return () => {
       window.removeEventListener(Events.CREATE, onCreate);
       window.removeEventListener(Events.RENAME, onRename);
@@ -154,6 +185,9 @@ const GlobalEvents = () => {
         key={Events.CHANGE_USER_TYPE}
         {...changeUserTypeDialog}
       />
+    ),
+    changeQuotaDialog.visible && (
+      <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
   ];
 };

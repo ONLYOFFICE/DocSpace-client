@@ -9,7 +9,7 @@ import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu"
 import Text from "@docspace/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import UsersTypeRow from "./UsersTypeRow";
-import { mockData } from "../../mockData.js";
+
 import Row from "@docspace/components/row";
 
 const StyledRow = styled(Row)`
@@ -83,7 +83,7 @@ const data = [
 ];
 
 const RowView = (props) => {
-  const { t, sectionWidth, viewAs, setViewAs } = props;
+  const { t, sectionWidth, viewAs, setViewAs, usersData } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const rowRef = useRef(null);
@@ -91,7 +91,7 @@ const RowView = (props) => {
   const onChangeAllCheckbox = (checked) => {
     setIsChecked(checked);
     if (checked) {
-      setCheckbox(mockData.map((data) => data.id));
+      setCheckbox(usersData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
@@ -131,7 +131,7 @@ const RowView = (props) => {
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
       {checkbox.length > 0 && (
-        <div className="table-group-menu" id="magic-id">
+        <div className="table-group-menu">
           <TableGroupMenu
             onChange={onChangeAllCheckbox}
             headerMenu={headerMenu}
@@ -158,7 +158,7 @@ const RowView = (props) => {
         <Text className="row-header-title">{t("Common:Name")}</Text>
       </StyledRow>
 
-      {mockData.map((data) => (
+      {usersData.map((data) => (
         <UsersTypeRow
           key={data.id}
           id={data.id}

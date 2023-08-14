@@ -13,8 +13,6 @@ import TableBody from "@docspace/components/table-container/TableBody";
 import SearchInput from "@docspace/components/search-input";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
-import { mockData } from "../../mockData.js";
-
 const StyledTableContainer = styled(TableContainer)`
   margin: 20px 0;
 
@@ -83,7 +81,7 @@ const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth } = props;
+  const { userId, viewAs, setViewAs, sectionWidth, usersData } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
@@ -91,7 +89,7 @@ const TableView = (props) => {
   const onCheck = (checked) => {
     setIsChecked(checked);
     if (checked) {
-      setCheckbox(mockData.map((data) => data.id));
+      setCheckbox(usersData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
@@ -172,11 +170,11 @@ const TableView = (props) => {
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={mockData.length}
+        filesLength={usersData.length}
         hasMoreFiles={false}
-        itemCount={mockData.length}
+        itemCount={usersData.length}
       >
-        {mockData.map((data) => (
+        {usersData.map((data) => (
           <UsersTypeTableRow
             key={data.id}
             id={data.id}

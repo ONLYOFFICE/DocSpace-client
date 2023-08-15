@@ -9,7 +9,8 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
-
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -1856,7 +1857,7 @@ class FilesActionStore {
             id: "menu-default-quota",
             key: "default-quota",
             label: "Set to quota",
-            iconUrl: ChangQuotaReactSvgUrl,
+            iconUrl: DefaultQuotaReactSvgUrl,
             onClick: () => console.log("default-quota"),
             disabled: false,
           };
@@ -1867,7 +1868,7 @@ class FilesActionStore {
             id: "menu-disable-quota",
             key: "disable-quota",
             label: "Disable quota",
-            iconUrl: ChangQuotaReactSvgUrl,
+            iconUrl: DisableQuotaReactSvgUrl,
             onClick: () => updateRoomQuota(-1, selection),
             disabled: false,
           };

@@ -61,7 +61,9 @@ const SecondStep = (props) => {
 
       <AccountsTable accountsData={dataPortion} />
 
-      <AccountsPaging numberOfItems={mockData.length} setDataPortion={handleDataChange} />
+      {mockData.length > 25 && (
+        <AccountsPaging numberOfItems={mockData.length} setDataPortion={handleDataChange} />
+      )}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

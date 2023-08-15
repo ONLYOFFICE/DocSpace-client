@@ -24,12 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using Profile = AutoMapper.Profile;
+
 namespace ASC.MessagingSystem.EF.Model;
 
 public class AuditEvent : MessageEvent, IMapFrom<EventMessage>
 {
     public string Initiator { get; set; }
     public string Target { get; set; }
+
+    public DbTenant Tenant { get; set; }
 
     public void Mapping(Profile profile)
     {
@@ -43,6 +47,8 @@ public static class AuditEventExtension
 {
     public static ModelBuilderWrapper AddAuditEvent(this ModelBuilderWrapper modelBuilder)
     {
+        modelBuilder.Entity<AuditEvent>().Navigation(e => e.Tenant).AutoInclude(false);
+
         modelBuilder
             .Add(MySqlAddAuditEvent, Provider.MySql)
             .Add(PgSqlAddAuditEvent, Provider.PostgreSql);

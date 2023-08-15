@@ -196,7 +196,7 @@ public abstract class BaseStartup
             config.Filters.Add(new TypeFilterAttribute(typeof(IpSecurityFilter)));
             config.Filters.Add(new TypeFilterAttribute(typeof(ProductSecurityFilter)));
             config.Filters.Add(new CustomResponseFilterAttribute());
-            config.Filters.Add(new CustomExceptionFilterAttribute());
+            config.Filters.Add<CustomExceptionFilterAttribute>();
             config.Filters.Add(new TypeFilterAttribute(typeof(WebhooksGlobalFilterAttribute)));
         });
         
@@ -281,7 +281,6 @@ public abstract class BaseStartup
         
         app.UseEndpoints(async endpoints =>
         {
-
             await endpoints.MapCustomAsync(WebhooksEnabled, app.ApplicationServices);
 
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()

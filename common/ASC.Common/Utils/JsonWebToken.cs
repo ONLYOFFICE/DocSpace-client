@@ -27,7 +27,6 @@
 using IJsonSerializer = JWT.IJsonSerializer;
 using JsonException = System.Text.Json.JsonException;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-
 namespace ASC.Web.Core.Files;
 
 public static class JsonWebToken

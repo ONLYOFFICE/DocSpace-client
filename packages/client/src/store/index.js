@@ -34,14 +34,12 @@ import OformsStore from "./OformsStore";
 import AccessRightsStore from "./AccessRightsStore";
 import TableStore from "./TableStore";
 import CreateEditRoomStore from "./CreateEditRoomStore";
+import PublicRoomStore from "./PublicRoomStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
-import OAuthStore from "./OAuthStore";
 
 const oformsStore = new OformsStore(authStore);
-
-const clientLoadingStore = new ClientLoadingStore();
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
@@ -57,7 +55,16 @@ const ssoStore = new SsoFormStore();
 const tagsStore = new TagsStore();
 
 const treeFoldersStore = new TreeFoldersStore(selectedFolderStore, authStore);
-const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
+
+const publicRoomStore = new PublicRoomStore();
+
+const clientLoadingStore = new ClientLoadingStore(publicRoomStore);
+
+const settingsStore = new SettingsStore(
+  thirdPartyStore,
+  treeFoldersStore,
+  publicRoomStore
+);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
@@ -68,12 +75,14 @@ const filesStore = new FilesStore(
   settingsStore,
   thirdPartyStore,
   accessRightsStore,
-  clientLoadingStore
+  clientLoadingStore,
+  publicRoomStore
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
-  settingsStore
+  settingsStore,
+  publicRoomStore
 );
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
@@ -115,7 +124,8 @@ const filesActionsStore = new FilesActionsStore(
   dialogsStore,
   mediaViewerDataStore,
   accessRightsStore,
-  clientLoadingStore
+  clientLoadingStore,
+  publicRoomStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -128,7 +138,8 @@ const contextOptionsStore = new ContextOptionsStore(
   uploadDataStore,
   versionHistoryStore,
   settingsStore,
-  selectedFolderStore
+  selectedFolderStore,
+  publicRoomStore
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -173,8 +184,6 @@ const createEditRoomStore = new CreateEditRoomStore(
 
 const webhooksStore = new WebhooksStore();
 
-const oauthStore = new OAuthStore();
-
 const store = {
   auth: authStore,
   payments: paymentStore,
@@ -213,7 +222,7 @@ const store = {
 
   webhooksStore,
   clientLoadingStore,
-  oauthStore,
+  publicRoomStore,
 };
 
 export default store;

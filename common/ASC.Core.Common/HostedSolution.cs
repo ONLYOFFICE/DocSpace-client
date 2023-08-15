@@ -42,8 +42,6 @@ public class HostedSolution
     internal SettingsManager SettingsManager { get; set; }
     internal CoreSettings CoreSettings { get; set; }
 
-    public string Region { get; private set; }
-
     public HostedSolution(ITenantService tenantService,
         IUserService userService,
         IQuotaService quotaService,
@@ -65,39 +63,34 @@ public class HostedSolution
         CoreSettings = coreSettings;
     }
 
-    public void Init(string region)
-    {
-        Region = region;
-    }
-
     public async Task<List<Tenant>> GetTenantsAsync(DateTime from)
     {
-        return (await TenantService.GetTenantsAsync(from)).Select(AddRegion).ToList();
+        return (await TenantService.GetTenantsAsync(from)).ToList();
     }
 
     public async Task<List<Tenant>> FindTenantsAsync(string login, string passwordHash = null)
     {
         if (!string.IsNullOrEmpty(passwordHash) && await UserService.GetUserByPasswordHashAsync(Tenant.DefaultTenant, login, passwordHash) == null)
-        {
+    {
             throw new SecurityException("Invalid login or password.");
         }
 
-        return (await TenantService.GetTenantsAsync(login, passwordHash)).Select(AddRegion).ToList();
+        return (await TenantService.GetTenantsAsync(login, passwordHash)).ToList();
     }
 
     public async Task<Tenant> GetTenantAsync(string domain)
     {
-        return AddRegion(await TenantService.GetTenantAsync(domain));
+        return await TenantService.GetTenantAsync(domain);
     }
 
     public async Task<Tenant> GetTenantAsync(int id)
     {
-        return AddRegion(await TenantService.GetTenantAsync(id));
+        return await TenantService.GetTenantAsync(id);
     }
 
     public Tenant GetTenant(int id)
     {
-        return AddRegion(TenantService.GetTenant(id));
+        return TenantService.GetTenant(id);
     }
 
     public async Task CheckTenantAddressAsync(string address)
@@ -229,7 +222,7 @@ public class HostedSolution
         var quota = (await QuotaService.GetTenantQuotasAsync()).FirstOrDefault(q => paid ? q.NonProfit : q.Trial);
         if (quota != null)
         {
-            await TariffService.SetTariffAsync(tenant, new Tariff { Quotas = new List<Quota> { new Quota(quota.Tenant, 1) }, DueDate = DateTime.MaxValue, });
+            await TariffService.SetTariffAsync(tenant, new Tariff { Quotas = new List<Quota> { new Quota(quota.TenantId, 1) }, DueDate = DateTime.MaxValue, });
         }
     }
 
@@ -241,15 +234,5 @@ public class HostedSolution
     public async Task<IEnumerable<UserInfo>> FindUsersAsync(IEnumerable<Guid> userIds)
     {
         return await UserService.GetUsersAllTenantsAsync(userIds);
-    }
-
-    private Tenant AddRegion(Tenant tenant)
-    {
-        if (tenant != null)
-        {
-            tenant.HostedRegion = Region;
-        }
-
-        return tenant;
     }
 }

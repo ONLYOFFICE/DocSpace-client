@@ -50,6 +50,7 @@ public class TenantQuotaController : IQuotaController
     private readonly TenantQuotaFeatureChecker<MaxTotalSizeFeature, long> _maxTotalSizeChecker;
     private Lazy<long> _lazyCurrentSize;
     private long _currentSize;
+    public string ExcludePattern { get; set; }
 
     public TenantQuotaController(TenantManager tenantManager, AuthContext authContext, TenantQuotaFeatureChecker<MaxFileSizeFeature, long> maxFileSizeChecker, TenantQuotaFeatureChecker<MaxTotalSizeFeature, long> maxTotalSizeChecker)
     {
@@ -58,13 +59,14 @@ public class TenantQuotaController : IQuotaController
         _maxTotalSizeChecker = maxTotalSizeChecker;
         _authContext = authContext;
     }
-    
-    public void Init(int tenant)
+
+    public void Init(int tenant, string excludePattern = null)
     {
         _tenant = tenant;
         _lazyCurrentSize = new Lazy<long>(() => _tenantManager.FindTenantQuotaRowsAsync(tenant).Result
             .Where(r => UsedInQuota(r.Tag))
             .Sum(r => r.Counter));
+        ExcludePattern = excludePattern;
     }
 
     public async Task QuotaUsedAddAsync(string module, string domain, string dataTag, long size, bool quotaCheckFileSize = true)
@@ -129,7 +131,7 @@ public class TenantQuotaController : IQuotaController
     private async Task SetTenantQuotaRowAsync(string module, string domain, long size, string dataTag, bool exchange, Guid userId)
     {
         await _tenantManager.SetTenantQuotaRowAsync(
-            new TenantQuotaRow { Tenant = _tenant, Path = $"/{module}/{domain}", Counter = size, Tag = dataTag, UserId = userId, LastModified = DateTime.UtcNow },
+            new TenantQuotaRow { TenantId = _tenant, Path = $"/{module}/{domain}", Counter = size, Tag = dataTag, UserId = userId, LastModified = DateTime.UtcNow },
             exchange);
 
     }

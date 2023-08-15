@@ -1,14 +1,24 @@
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
 
 import AccountsTable from "./AccountsTable";
+import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../StyledStepper";
 
+import { mockData } from "./mockData";
+
 const FourthStep = (props) => {
   const { t, incrementStep, decrementStep } = props;
+
+  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+
+  const handleDataChange = (leftBoundary, rightBoundary) => {
+    setDataPortion(mockData.slice(leftBoundary, rightBoundary));
+  };
 
   return (
     <Wrapper>
@@ -28,7 +38,12 @@ const FourthStep = (props) => {
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"
       />
-      <AccountsTable />
+      <AccountsTable accountsData={dataPortion} />
+
+      {mockData.length > 25 && (
+        <AccountsPaging numberOfItems={mockData.length} setDataPortion={handleDataChange} />
+      )}
+
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={incrementStep}

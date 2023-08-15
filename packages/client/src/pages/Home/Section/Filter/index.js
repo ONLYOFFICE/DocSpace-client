@@ -250,6 +250,7 @@ const SectionFilterContent = ({
   isPublicRoom,
   publicRoomKey,
   setRoomsFilter,
+  standalone,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1134,7 +1135,7 @@ const SectionFilterContent = ({
       filterOptions.push(...statusItems);
       filterOptions.push(...typeItems);
       // filterOptions.push(...roleItems);
-      filterOptions.push(...accountItems);
+      if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
       filterOptions.push(...quotaFilter);
@@ -2093,7 +2094,7 @@ export default inject(
     const { fetchTags } = tagsStore;
 
     const { user } = auth.userStore;
-    const { personal } = auth.settingsStore;
+    const { personal, standalone } = auth.settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2167,6 +2168,7 @@ export default inject(
       isPublicRoom,
       publicRoomKey,
       setRoomsFilter,
+      standalone,
     };
   }
 )(

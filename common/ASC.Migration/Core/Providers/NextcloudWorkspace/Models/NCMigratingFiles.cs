@@ -29,40 +29,48 @@ using File = System.IO.File;
 
 namespace ASC.Migration.NextcloudWorkspace.Models.Parse;
 
+[Scope]
 public class NCMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _foldersCount;
-
     public override int FilesCount => _filesCount;
-
     public override long BytesTotal => _bytesTotal;
-
     public override string ModuleName => MigrationResource.NextcloudModuleNameDocuments;
 
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IDaoFactory _daoFactory;
-    private readonly FileSecurity _fileSecurity;
     private readonly FileStorageService _fileStorageService;
-    private readonly NCMigratingUser _user;
-    private readonly string _rootFolder;
+    private readonly IServiceProvider _serviceProvider;
+
+    private NCMigratingUser _user;
+    private string _rootFolder;
     private List<NCFileCache> _files;
     private List<NCFileCache> _folders;
     private int _foldersCount;
     private int _filesCount;
     private long _bytesTotal;
-    private readonly NCStorages _storages;
+    private NCStorages _storages;
     private Dictionary<string, NCMigratingUser> _users;
     private Dictionary<object, int> _matchingFileId;
     private string _folderCreation;
-    public NCMigratingFiles(GlobalFolderHelper globalFolderHelper, IDaoFactory daoFactory, FileSecurity fileSecurity, FileStorageService fileStorageService, NCMigratingUser user, NCStorages storages, string rootFolder, Action<string, Exception> log) : base(log)
+
+    public NCMigratingFiles(GlobalFolderHelper globalFolderHelper,
+        IDaoFactory daoFactory,
+        FileStorageService fileStorageService,
+        IServiceProvider serviceProvider)
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
         _fileStorageService = fileStorageService;
-        _user = user;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(string rootFolder, NCMigratingUser user, NCStorages storages, Action<string, Exception> log)
+    {
         _rootFolder = rootFolder;
+        _user = user;
         _storages = storages;
+        Log = log;
     }
 
     public override void Parse()
@@ -179,13 +187,11 @@ public class NCMigratingFiles : MigratingFiles
                     {
                         var parentFolder = string.IsNullOrWhiteSpace(parentPath) ? await folderDao.GetFolderAsync(await _globalFolderHelper.FolderMyAsync) : foldersDict[parentPath];
 
-                        var newFile = new File<int>
-                        {
-                            ParentId = parentFolder.Id,
-                            Comment = FilesCommonResource.CommentCreate,
-                            Title = Path.GetFileName(file.Path),
-                            ContentLength = fs.Length
-                        };
+                        var newFile = _serviceProvider.GetService<File<int>>();
+                        newFile.ParentId = parentFolder.Id;
+                        newFile.Comment = FilesCommonResource.CommentCreate;
+                        newFile.Title = Path.GetFileName(file.Path);
+                        newFile.ContentLength = fs.Length;
                         newFile = await fileDao.SaveFileAsync(newFile, fs);
                         _matchingFileId.Add(newFile.Id, file.FileId);
                     }
@@ -263,7 +269,7 @@ public class NCMigratingFiles : MigratingFiles
 
     public void SetUsersDict(IEnumerable<NCMigratingUser> users)
     {
-        this._users = users.ToDictionary(user => user.Key, user => user);
+        _users = users.ToDictionary(user => user.Key, user => user);
     }
 
     private ASCShare? GetPortalShare(int role, bool entryType)

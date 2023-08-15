@@ -26,54 +26,42 @@
 
 namespace ASC.Migration.NextcloudWorkspace.Models.Parse;
 
+[Scope]
 public class NCMigratingUser : MigratingUser<NCMigratingFiles>
 {
     public override string Email => _userInfo.Email;
 
     public override string DisplayName => _userInfo.ToString();
 
-    public List<MigrationModules> ModulesList = new List<MigrationModules>();
-
     public Guid Guid => _userInfo.Id;
 
+    public List<MigrationModules> ModulesList = new List<MigrationModules>();
     public override string ModuleName => MigrationResource.ModuleNameUsers;
 
-    public string ConnectionString { get; set; }
-    private readonly string _rootFolder;
+    private string _rootFolder;
     private bool _hasPhoto;
     private string _pathToPhoto;
     private UserInfo _userInfo;
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileSecurity _fileSecurity;
-    private readonly FileStorageService _fileStorageService;
-    private readonly TenantManager _tenantManager;
     private readonly UserManager _userManager;
     private readonly NCUser _user;
+    private readonly IServiceProvider _serviceProvider;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
     private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
 
-    public NCMigratingUser(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileSecurity fileSecurity,
-        FileStorageService fileStorageService,
-        TenantManager tenantManager,
-        UserManager userManager,
-        string key,
+    public NCMigratingUser(UserManager userManager,
         NCUser userData,
-        string rootFolder,
-        Action<string, Exception> log) : base(log)
+        IServiceProvider serviceProvider)
     {
-        Key = key;
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
-        _fileStorageService = fileStorageService;
-        _tenantManager = tenantManager;
         _userManager = userManager;
         _user = userData;
-        this._rootFolder = rootFolder;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(string key, string rootFolder, Action<string, Exception> log)
+    {
+        Key = key;
+        _rootFolder = rootFolder;
+        Log = log;
     }
 
     public override void Parse()
@@ -137,7 +125,9 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
         _userInfo.ActivationStatus = EmployeeActivationStatus.Pending;
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingFiles = new NCMigratingFiles(_globalFolderHelper, _daoFactory, _fileSecurity, _fileStorageService, this, _user.Storages, _rootFolder, log);
+        MigratingFiles = _serviceProvider.GetService<NCMigratingFiles>();
+        MigratingFiles.Init(_rootFolder, this, _user.Storages, log);
+
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
@@ -145,7 +135,7 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
         }
     }
 
-    public void dataСhange(MigratingApiUser frontUser)
+    public void DataСhange(MigratingApiUser frontUser)
     {
         if (_userInfo.Email == null)
         {

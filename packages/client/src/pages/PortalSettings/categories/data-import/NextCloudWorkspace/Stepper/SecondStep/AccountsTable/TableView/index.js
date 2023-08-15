@@ -8,6 +8,7 @@ import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
+import { mockData } from "../../mockData";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
@@ -51,7 +52,7 @@ const TableView = (props) => {
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, accountsData);
+  const toggleAll = (e) => toggleAllAccounts(e, mockData);
   const handleToggle = (e, id) => {
     e.stopPropagation();
     toggleAccount(id);

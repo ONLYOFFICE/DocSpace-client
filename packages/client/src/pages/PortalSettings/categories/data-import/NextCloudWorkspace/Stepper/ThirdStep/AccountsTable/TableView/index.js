@@ -81,8 +81,10 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         setHideColumns={setHideColumns}
-        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
-        isChecked={checkedAccounts.length === mockData.length}
+        isIndeterminate={
+          checkedAccounts.length > 0 && checkedAccounts.length !== accountsData.length
+        }
+        isChecked={checkedAccounts.length === accountsData.length}
         toggleAll={toggleAll}
       />
       <TableBody
@@ -91,11 +93,11 @@ const TableView = (props) => {
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={mockData.length}
+        filesLength={accountsData.length}
         hasMoreFiles={false}
-        itemCount={mockData.length}
+        itemCount={accountsData.length}
         fetchMoreFiles={() => {}}>
-        {mockData.map((data) => (
+        {accountsData.map((data) => (
           <UsersTableRow
             key={data.id}
             displayName={data.displayName}

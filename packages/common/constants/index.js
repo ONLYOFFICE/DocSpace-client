@@ -440,6 +440,7 @@ export const FilterGroups = Object.freeze({
   filterFolders: "filter-folders",
   filterRoom: "filter-room",
   filterContent: "filter-withContent",
+  filterQuota: "filter-quota",
   roomFilterProviderType: "filter-provider-type",
   roomFilterType: "filter-type",
   roomFilterSubject: "filter-subject",
@@ -456,6 +457,8 @@ export const FilterKeys = Object.freeze({
   me: "me",
   other: "other",
   user: "user",
+  customQuota: "custom-quota",
+  defaultQuota: "default-quota",
 });
 
 export const IndexedDBStores = Object.freeze({

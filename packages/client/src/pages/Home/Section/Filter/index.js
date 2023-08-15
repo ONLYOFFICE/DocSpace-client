@@ -966,6 +966,29 @@ const SectionFilterContent = ({
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    const quotaFilter = [
+      {
+        key: FilterGroups.filterQuota,
+        group: FilterGroups.filterQuota,
+        label: "Storage quota",
+        isHeader: true,
+        withoutSeparator: true,
+        withMultiItems: true,
+      },
+      {
+        id: "filter_custom-quota",
+        key: FilterKeys.customQuota,
+        group: FilterGroups.filterQuota,
+        label: "Custom quota",
+      },
+      {
+        id: "filter_default-quota",
+        key: FilterKeys.defaultQuota,
+        group: FilterGroups.filterQuota,
+        label: "Default quota",
+      },
+    ];
+
     if (isAccountsPage) {
       const statusItems = [
         {
@@ -1114,7 +1137,7 @@ const SectionFilterContent = ({
       filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
-
+      filterOptions.push(...quotaFilter);
       return filterOptions;
     }
 
@@ -1412,6 +1435,8 @@ const SectionFilterContent = ({
 
         filterOptions.push(...thirdPartyOptions);
       }
+
+      filterOptions.push(...quotaFilter);
     } else {
       if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [

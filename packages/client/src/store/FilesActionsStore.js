@@ -1582,6 +1582,10 @@ class FilesActionStore {
 
       case "change-quota":
         return true;
+      case "disable-quota":
+        return true;
+      case "default-quota":
+        return true;
     }
   };
 
@@ -1740,7 +1744,7 @@ class FilesActionStore {
       setCopyPanelVisible,
       setDeleteDialogVisible,
     } = this.dialogsStore;
-    const { selection } = this.filesStore;
+    const { selection, updateRoomQuota } = this.filesStore;
     switch (option) {
       case "show-info":
         if (!isTablet() && !isMobile) return null;
@@ -1845,6 +1849,29 @@ class FilesActionStore {
             onClick: () => this.changeRoomQuota(selection),
             disabled: false,
           };
+      case "default-quota":
+        if (!this.isAvailableOption("default-quota")) return null;
+        else
+          return {
+            id: "menu-default-quota",
+            key: "default-quota",
+            label: "Set to quota",
+            iconUrl: ChangQuotaReactSvgUrl,
+            onClick: () => console.log("default-quota"),
+            disabled: false,
+          };
+      case "disable-quota":
+        if (!this.isAvailableOption("disable-quota")) return null;
+        else
+          return {
+            id: "menu-disable-quota",
+            key: "disable-quota",
+            label: "Disable quota",
+            iconUrl: ChangQuotaReactSvgUrl,
+            onClick: () => updateRoomQuota(-1, selection),
+            disabled: false,
+          };
+
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         else
@@ -1894,13 +1921,15 @@ class FilesActionStore {
     const pin = this.getOption(pinName, t);
     const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
-    //const disableQuota = this.getOption("disable-quota", t);
+    const disableQuota = this.getOption("disable-quota", t);
+    const defaultQuota = this.getOption("default-quota", t);
 
     itemsCollection
       .set(pinName, pin)
       .set("archive", archive)
-      .set("change-quota", changeQuota);
-    // .set("disable-quota", disableQuota);
+      .set("change-quota", changeQuota)
+      .set("default-quota", defaultQuota)
+      .set("disable-quota", disableQuota);
     return this.convertToArray(itemsCollection);
   };
 

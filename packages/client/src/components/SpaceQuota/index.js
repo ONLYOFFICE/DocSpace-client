@@ -17,6 +17,7 @@ const SpaceQuota = (props) => {
     type,
     item,
     changeUserQuota,
+    changeRoomQuota,
     updateUserQuota,
   } = props;
   console.log("SpaceQuota render");
@@ -25,7 +26,6 @@ const SpaceQuota = (props) => {
   const { t } = useTranslation(["Common"]);
 
   const successCallback = () => {
-   
     setIsLoading(false);
   };
 
@@ -40,6 +40,8 @@ const SpaceQuota = (props) => {
 
       if (type === "user") {
         changeUserQuota([item], successCallback, abortCallback);
+      } else {
+        changeRoomQuota([item], successCallback, abortCallback);
       }
 
       return;
@@ -95,7 +97,7 @@ const SpaceQuota = (props) => {
 
   const selectedOption = displayFunction();
 
-  console.log("selectedOption", selectedOption);
+  // console.log("SpaceQuota selectedOption", selectedOption);
   if (isDisabledQuotaChange) {
     return (
       <StyledText fontWeight={600}>
@@ -125,17 +127,17 @@ const SpaceQuota = (props) => {
   );
 };
 
-export default inject(({ dialogsStore, peopleStore }) => {
-  const {
-    setChangeQuotaDialogVisible,
-    changeQuotaDialogVisible,
-  } = dialogsStore;
+export default inject(({ dialogsStore, peopleStore, filesActionsStore }) => {
+  const { setChangeQuotaDialogVisible, changeQuotaDialogVisible } =
+    dialogsStore;
   const { changeUserQuota, usersStore } = peopleStore;
   const { updateUserQuota } = usersStore;
+  const { changeRoomQuota } = filesActionsStore;
   return {
     setChangeQuotaDialogVisible,
     changeQuotaDialogVisible,
     changeUserQuota,
     updateUserQuota,
+    changeRoomQuota,
   };
 })(observer(SpaceQuota));

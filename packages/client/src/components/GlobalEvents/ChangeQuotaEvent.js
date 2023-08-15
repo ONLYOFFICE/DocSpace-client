@@ -16,6 +16,7 @@ const ChangeQuotaEvent = (props) => {
     headerTitle,
     onClose,
     updateUserQuota,
+    updateRoomQuota,
     successCallback,
     abortCallback,
   } = props;
@@ -38,7 +39,9 @@ const ChangeQuotaEvent = (props) => {
 
     timerId = setTimeout(() => setIsLoading(true), 500);
     //await setUserQuota(size, true, t);
-    type === "user" ? await updateUserQuota(size, ids) : null;
+    type === "user"
+      ? await updateUserQuota(size, ids)
+      : await updateRoomQuota(size, ids);
 
     timerId && clearTimeout(timerId);
     timerId = null;
@@ -72,15 +75,17 @@ const ChangeQuotaEvent = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, peopleStore }) => {
+export default inject(({ auth, dialogsStore, peopleStore, filesStore }) => {
   const { currentQuotaStore } = auth;
   const { setChangeQuotaDialogVisible } = dialogsStore;
   const { setUserQuota } = currentQuotaStore;
   const { usersStore } = peopleStore;
   const { updateUserQuota } = usersStore;
+  const { updateRoomQuota } = filesStore;
+
   return {
     setUserQuota,
     updateUserQuota,
-    setChangeQuotaDialogVisible,
+    updateRoomQuota,
   };
 })(observer(ChangeQuotaEvent));

@@ -1660,6 +1660,20 @@ class FilesStore {
     return request();
   };
 
+  updateRoomQuota = async (quotaSize, itemsIDs, filter) => {
+    var promise_1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("promise updateRoomQuota", quotaSize, itemsIDs);
+        resolve();
+        // reject(new Error("timeout"));
+      }, [1000]);
+    });
+
+    await promise_1;
+
+    await this.fetchRooms(null, filter, false, false, false);
+  };
+
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {
     this.alreadyFetchingRooms = alreadyFetchingRooms;
   };

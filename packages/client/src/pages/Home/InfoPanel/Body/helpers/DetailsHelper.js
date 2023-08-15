@@ -15,6 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 // Property Content Components
 
@@ -115,6 +116,8 @@ class DetailsHelper {
         return "info_details_comments";
       case "Tags":
         return "info_details_tags";
+      case "Storage":
+        return "info_details_storage";
     }
   };
 
@@ -129,6 +132,7 @@ class DetailsHelper {
           "Last modified by",
           "Creation date",
           this.item.tags.length && "Tags",
+          "Storage",
         ]
       : this.item.isFolder
       ? [
@@ -188,6 +192,8 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+      case "Storage":
+        return this.t("Common:Storage");
     }
   };
 
@@ -226,6 +232,8 @@ class DetailsHelper {
         return this.getItemComments();
       case "Tags":
         return this.getItemTags();
+      case "Storage":
+        return this.getQuotaComments();
     }
   };
 
@@ -307,6 +315,10 @@ class DetailsHelper {
 
   getItemTags = () => {
     return tagList(this.item.tags, this.selectTag);
+  };
+
+  getQuotaComments = () => {
+    return <SpaceQuota item={this.item} />;
   };
 }
 

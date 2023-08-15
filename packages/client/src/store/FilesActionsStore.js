@@ -8,6 +8,8 @@ import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+
 import {
   checkFileConflicts,
   deleteFile,
@@ -24,6 +26,7 @@ import {
 } from "@docspace/common/api/files";
 import {
   ConflictResolveType,
+  Events,
   FileAction,
   FileStatus,
   FolderType,
@@ -1576,6 +1579,9 @@ class FilesActionStore {
         const canDelete = selection.every((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
+
+      case "change-quota":
+        return true;
     }
   };
 
@@ -1706,16 +1712,35 @@ class FilesActionStore {
     setSelection([selection]);
     setIsVisible(true);
   };
+  changeRoomQuota = (items, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const itemsIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+    console.log("==changeRoomQuota", itemsIDs);
+    const payload = {
+      visible: true,
+      type: "room",
+      ids: itemsIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
 
   getOption = (option, t) => {
     const {
-      setSharingPanelVisible,
+      // setSharingPanelVisible,
       setDownloadDialogVisible,
       setMoveToPanelVisible,
       setCopyPanelVisible,
       setDeleteDialogVisible,
     } = this.dialogsStore;
-
+    const { selection } = this.filesStore;
     switch (option) {
       case "show-info":
         if (!isTablet() && !isMobile) return null;
@@ -1809,6 +1834,17 @@ class FilesActionStore {
             onClick: () => this.archiveRooms("unarchive"),
             disabled: false,
           };
+      case "change-quota":
+        if (!this.isAvailableOption("change-quota")) return null;
+        else
+          return {
+            id: "menu-change-quota",
+            key: "change-quota",
+            label: "Change quota",
+            iconUrl: ChangQuotaReactSvgUrl,
+            onClick: () => this.changeRoomQuota(selection),
+            disabled: false,
+          };
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         else
@@ -1857,8 +1893,14 @@ class FilesActionStore {
 
     const pin = this.getOption(pinName, t);
     const archive = this.getOption("archive", t);
+    const changeQuota = this.getOption("change-quota", t);
+    //const disableQuota = this.getOption("disable-quota", t);
 
-    itemsCollection.set(pinName, pin).set("archive", archive);
+    itemsCollection
+      .set(pinName, pin)
+      .set("archive", archive)
+      .set("change-quota", changeQuota);
+    // .set("disable-quota", disableQuota);
     return this.convertToArray(itemsCollection);
   };
 

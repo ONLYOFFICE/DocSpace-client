@@ -26,219 +26,203 @@
 
 
 
-namespace ASC.Migration.GoogleWorkspace
+namespace ASC.Migration.GoogleWorkspace;
+
+[Scope]
+public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsMigratingUser, GwsMigratingFiles>
 {
-    [Scope]
-    public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsMigratingUser, GwsMigratingFiles>
+    private string[] _takeouts;
+    private readonly SecurityContext _securityContext;
+    private readonly TempPath _tempPath;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly MigratorMeta _meta;
+    public override MigratorMeta Meta => _meta;
+
+    public GoogleWorkspaceMigration(
+        MigrationLogger migrationLogger,
+        SecurityContext securityContext,
+        TempPath tempPath,
+        IServiceProvider serviceProvider)
+        : base(migrationLogger)
     {
-        private string[] _takeouts;
-        private readonly UserManager _userManager;
-        private readonly SecurityContext _securityContext;
-        private readonly TempPath _tempPath;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly MigratorMeta _meta;
-        public override MigratorMeta Meta => _meta;
+        _securityContext = securityContext;
+        _tempPath = tempPath;
+        _serviceProvider = serviceProvider;
+        _meta = new("GoogleWorkspace", 5, true);
+    }
 
-        public GoogleWorkspaceMigration(
-            MigrationLogger migrationLogger,
-            UserManager userManager,
-            SecurityContext securityContext,
-            TempPath tempPath,
-            IServiceProvider serviceProvider)
-            : base(migrationLogger)
+    public override void Init(string path, CancellationToken cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        var tempTakeouts = new List<string>();
+        var files = Directory.GetFiles(path);
+        if (!files.Any() || !files.Any(f => f.EndsWith(".zip")))
         {
-            _userManager = userManager;
-            _securityContext = securityContext;
-            _tempPath = tempPath;
-            _serviceProvider = serviceProvider;
-            _meta = new("GoogleWorkspace", 5, true);
+            throw new Exception("Folder must not be empty and should contain .zip files.");
+        }
+        foreach (var item in files)
+        {
+            if (item.EndsWith(".zip"))
+            {
+                tempTakeouts.Add(item);
+            }
+        }
+        _takeouts = tempTakeouts.ToArray();
+
+        _migrationInfo = new GwsMigrationInfo();
+        _migrationInfo.MigratorName = _meta.Name;
+        _migrationInfo.Path = path;
+    }
+
+    public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
+    {
+        if (reportProgress)
+        {
+            ReportProgress(0, MigrationResource.StartOfDataProcessing);
         }
 
-        public override void Init(string path, CancellationToken cancellationToken)
+        var progressStep = 100 / _takeouts.Length;
+        var i = 1;
+        foreach (var takeout in _takeouts)
         {
-            _cancellationToken = cancellationToken;
-            var tempTakeouts = new List<string>();
-            var files = Directory.GetFiles(path);
-            if (!files.Any() || !files.Any(f => f.EndsWith(".zip")))
+            if (_cancellationToken.IsCancellationRequested)
             {
-                throw new Exception("Folder must not be empty and should contain .zip files.");
-            }
-            foreach (var item in files)
-            {
-                if (item.EndsWith(".zip"))
-                {
-                    tempTakeouts.Add(item);
-                }
-            }
-            _takeouts = tempTakeouts.ToArray();
-
-            _migrationInfo = new GwsMigrationInfo();
-            _migrationInfo.MigratorName = _meta.Name;
-            _migrationInfo.Path = path;
-        }
-
-        public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
-        {
-            if (reportProgress)
-            {
-                ReportProgress(0, MigrationResource.StartOfDataProcessing);
-            }
-
-            var progressStep = 100 / _takeouts.Length;
-            var i = 1;
-            foreach (var takeout in _takeouts)
-            {
-                if (_cancellationToken.IsCancellationRequested)
-                {
-                    if (reportProgress)
-                    {
-                        ReportProgress(100, MigrationResource.MigrationCanceled);
-                    }
-                    return null;
-                }
-
                 if (reportProgress)
                 {
-                    ReportProgress(GetProgress() + progressStep, MigrationResource.DataProcessing + $" {takeout} ({i++}/{_takeouts.Length})");
+                    ReportProgress(100, MigrationResource.MigrationCanceled);
                 }
-
-                var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(takeout));
-                try
-                {
-                    ZipFile.ExtractToDirectory(takeout, tmpFolder);
-
-                    var rootFolder = Path.Combine(tmpFolder, "Takeout");
-
-                    if (!Directory.Exists(rootFolder))
-                    {
-                        throw new Exception("Takeout zip does not contain root 'Takeout' folder.");
-                    }
-                    var directories = Directory.GetDirectories(rootFolder);
-                    if (directories.Length == 1 && directories[0].Split(Path.DirectorySeparatorChar).Last() == "Groups")
-                    {
-                    }
-                    else
-                    {
-                        var user = _serviceProvider.GetService<GwsMigratingUser>();
-                        user.Init(takeout, rootFolder, Log);
-                        user.Parse();
-                        foreach (var element in user.ModulesList)
-                        {
-                            if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
-                            {
-                                _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
-                            }
-                        }
-                        _migrationInfo.Users.Add(takeout, user);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _migrationInfo.FailedArchives.Add(Path.GetFileName(takeout));
-                    Log($"Couldn't parse user from {Path.GetFileNameWithoutExtension(takeout)} archive", ex);
-                }
-                finally
-                {
-                    if (Directory.Exists(tmpFolder))
-                    {
-                        Directory.Delete(tmpFolder, true);
-                    }
-                }
+                return null;
             }
+
             if (reportProgress)
             {
-                ReportProgress(100, MigrationResource.DataProcessingCompleted);
+                ReportProgress(GetProgress() + progressStep, MigrationResource.DataProcessing + $" {takeout} ({i++}/{_takeouts.Length})");
             }
 
-            return Task.FromResult(_migrationInfo.ToApiInfo());
-        }
+            var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(takeout));
+            try
+            {
+                ZipFile.ExtractToDirectory(takeout, tmpFolder);
 
-        public override async Task Migrate(MigrationApiInfo migrationApiInfo)
+                var rootFolder = Path.Combine(tmpFolder, "Takeout");
+
+                if (!Directory.Exists(rootFolder))
+                {
+                    throw new Exception("Takeout zip does not contain root 'Takeout' folder.");
+                }
+                var directories = Directory.GetDirectories(rootFolder);
+                if (directories.Length == 1 && directories[0].Split(Path.DirectorySeparatorChar).Last() == "Groups")
+                {
+                }
+                else
+                {
+                    var user = _serviceProvider.GetService<GwsMigratingUser>();
+                    user.Init(takeout, rootFolder, Log);
+                    user.Parse();
+                    foreach (var element in user.ModulesList)
+                    {
+                        if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
+                        {
+                            _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
+                        }
+                    }
+                    _migrationInfo.Users.Add(takeout, user);
+                }
+            }
+            catch (Exception ex)
+            {
+                _migrationInfo.FailedArchives.Add(Path.GetFileName(takeout));
+                Log($"Couldn't parse user from {Path.GetFileNameWithoutExtension(takeout)} archive", ex);
+            }
+            finally
+            {
+                if (Directory.Exists(tmpFolder))
+                {
+                    Directory.Delete(tmpFolder, true);
+                }
+            }
+        }
+        if (reportProgress)
         {
-            ReportProgress(0, MigrationResource.PreparingForMigration);
-            _migrationInfo.Merge(migrationApiInfo);
-
-            var usersForImport = _migrationInfo.Users
-                .Where(u => u.Value.ShouldImport)
-                .Select(u => u.Value);
-
-            _importedUsers = new List<Guid>();
-            var failedUsers = new List<GwsMigratingUser>();
-            var usersCount = usersForImport.Count();
-            var progressStep = 25 / usersCount;
-            // Add all users first
-            var i = 1;
-            foreach (var u in usersForImport)
-            {
-                if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
-
-                var user = _serviceProvider.GetService<GwsMigratingUser>();
-                user.Init(u);
-
-                ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
-                try
-                {
-                    user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
-                    await user.MigrateAsync();
-                    _importedUsers.Add(user.Guid);
-                }
-                catch (Exception ex)
-                {
-                    failedUsers.Add(user);
-                    Log($"Couldn't migrate user {user.DisplayName} ({user.Email})", ex);
-                }
-            }
-
-            // Add files, contacts and other stuff
-            i = 1;
-            foreach (var user in usersForImport)
-            {
-                if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
-                if (failedUsers.Contains(user))
-                {
-                    ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserSkipped, user.DisplayName, i, usersCount));
-                    continue;
-                }
-
-                var smallStep = progressStep / 4;
-
-                try
-                {
-                }
-                catch (Exception ex)
-                {
-                    Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) contacts", ex);
-                }
-                finally
-                {
-                    ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserContacts, user.DisplayName, i, usersCount));
-                }
-
-                try
-                {
-                    var currentUser = _securityContext.CurrentAccount;
-                    await _securityContext.AuthenticateMeAsync(user.Guid);
-                    user.MigratingFiles.SetUsersDict(usersForImport.Except(failedUsers));
-                    await user.MigratingFiles.MigrateAsync();
-                    await _securityContext.AuthenticateMeAsync(currentUser.ID);
-                }
-                catch (Exception ex)
-                {
-                    Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) files", ex);
-                }
-                finally
-                {
-                    ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserFiles, user.DisplayName, i, usersCount));
-                }
-                i++;
-            }
-
-            foreach (var item in _takeouts)
-            {
-                File.Delete(item);
-            }
-
-            ReportProgress(100, MigrationResource.MigrationCompleted);
+            ReportProgress(100, MigrationResource.DataProcessingCompleted);
         }
+
+        return Task.FromResult(_migrationInfo.ToApiInfo());
+    }
+
+    public override async Task Migrate(MigrationApiInfo migrationApiInfo)
+    {
+        ReportProgress(0, MigrationResource.PreparingForMigration);
+        _migrationInfo.Merge(migrationApiInfo);
+
+        var usersForImport = _migrationInfo.Users
+            .Where(u => u.Value.ShouldImport)
+            .Select(u => u.Value);
+
+        _importedUsers = new List<Guid>();
+        var failedUsers = new List<GwsMigratingUser>();
+        var usersCount = usersForImport.Count();
+        var progressStep = 25 / usersCount;
+        // Add all users first
+        var i = 1;
+        foreach (var u in usersForImport)
+        {
+            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+
+            var user = _serviceProvider.GetService<GwsMigratingUser>();
+            user.Init(u);
+
+            ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
+            try
+            {
+                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                await user.MigrateAsync();
+                _importedUsers.Add(user.Guid);
+            }
+            catch (Exception ex)
+            {
+                failedUsers.Add(user);
+                Log($"Couldn't migrate user {user.DisplayName} ({user.Email})", ex);
+            }
+        }
+
+        // Add files, contacts and other stuff
+        i = 1;
+        foreach (var user in usersForImport)
+        {
+            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (failedUsers.Contains(user))
+            {
+                ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserSkipped, user.DisplayName, i, usersCount));
+                continue;
+            }
+
+            var smallStep = progressStep / 4;
+
+            try
+            {
+                var currentUser = _securityContext.CurrentAccount;
+                await _securityContext.AuthenticateMeAsync(user.Guid);
+                user.MigratingFiles.SetUsersDict(usersForImport.Except(failedUsers));
+                await user.MigratingFiles.MigrateAsync();
+                await _securityContext.AuthenticateMeAsync(currentUser.ID);
+            }
+            catch (Exception ex)
+            {
+                Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) files", ex);
+            }
+            finally
+            {
+                ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserFiles, user.DisplayName, i, usersCount));
+            }
+            i++;
+        }
+
+        foreach (var item in _takeouts)
+        {
+            File.Delete(item);
+        }
+
+        ReportProgress(100, MigrationResource.MigrationCompleted);
     }
 }

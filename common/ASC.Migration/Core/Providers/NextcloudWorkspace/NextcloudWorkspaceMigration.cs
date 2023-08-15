@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.NextcloudWorkspace.Models;
-using ASC.Migration.NextcloudWorkspace.Models.Parse;
-
 namespace ASC.Migration.NextcloudWorkspace;
 
 [Scope]
@@ -35,34 +32,19 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
     private string _takeouts;
     public string[] TempParse;
     private string _tmpFolder;
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileSecurity _fileSecurity;
-    private readonly FileStorageService _fileStorageService;
     private readonly SecurityContext _securityContext;
-    private readonly UserManager _userManager;
-    private readonly TenantManager _tenantManager;
+    private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
     public override MigratorMeta Meta => _meta;
 
     public NextcloudWorkspaceMigration(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileSecurity fileSecurity,
-        FileStorageService fileStorageService,
         SecurityContext securityContext,
-        UserManager userManager,
-        TenantManager tenantManager,
-        MigrationLogger migrationLogger) : base(migrationLogger)
+        MigrationLogger migrationLogger,
+        IServiceProvider serviceProvider) : base(migrationLogger)
     {
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
-        _fileStorageService = fileStorageService;
         _securityContext = securityContext;
-        _userManager = userManager;
-        _tenantManager = tenantManager;
-        _meta = new("Nextcloud", 6, false);
+        _meta = new("Nextcloud", 5, false);
+        _serviceProvider = serviceProvider;
     }
 
     public override void Init(string path, CancellationToken cancellationToken)
@@ -89,7 +71,10 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
 
     public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
-        ReportProgress(0, MigrationResource.Unzipping);
+        if (reportProgress)
+        {
+            ReportProgress(0, MigrationResource.Unzipping);
+        }
         try
         {
             try
@@ -100,8 +85,18 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             {
                 Log($"Couldn't to unzip {_takeouts}", ex);
             }
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return null; }
-            ReportProgress(30, MigrationResource.UnzippingFinished);
+            if (_cancellationToken.IsCancellationRequested)
+            {
+                if (reportProgress)
+                {
+                    ReportProgress(100, MigrationResource.MigrationCanceled);
+                }
+                return null;
+            }
+            if (reportProgress)
+            {
+                ReportProgress(30, MigrationResource.UnzippingFinished);
+            }
             var bdFile = "";
             try
             {
@@ -116,21 +111,35 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                 _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
                 Log("Archive must not be empty and should contain .bak files.", ex);
             }
-            ReportProgress(40, MigrationResource.DumpParse);
+            if (reportProgress)
+            {
+                ReportProgress(40, MigrationResource.DumpParse);
+            }
             var users = DBExtractUser(bdFile);
             var progress = 40;
-            foreach (var item in users)
+            foreach (var u in users)
             {
-                if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return null; }
-                ReportProgress(progress, MigrationResource.DataProcessing);
-                progress += 30 / users.Count;
-                if (item.Data.DisplayName != null)
+                if (_cancellationToken.IsCancellationRequested) 
+                {
+                    if (reportProgress)
+                    {
+                        ReportProgress(100, MigrationResource.MigrationCanceled);
+                    }
+                    return null;
+                }
+                if (reportProgress)
+                {
+                    ReportProgress(progress, MigrationResource.DataProcessing);
+                    progress += 50 / users.Count;
+                }
+                if (u.Data.DisplayName != null)
                 {
                     try
                     {
-                        var userName = item.Data.DisplayName.Split(' ');
-                        item.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
-                        var user = new NCMigratingUser(_globalFolderHelper, _daoFactory, _fileSecurity, _fileStorageService, _tenantManager, _userManager, item.Uid, item, Directory.GetDirectories(_tmpFolder)[0], Log);
+                        var userName = u.Data.DisplayName.Split(' ');
+                        u.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
+                        var user = _serviceProvider.GetService<NCMigratingUser>();
+                        user.Init(u.Uid, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
                         foreach (var element in user.ModulesList)
                         {
@@ -139,58 +148,25 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                                 _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
                             }
                         }
-                        _migrationInfo.Users.Add(item.Uid, user);
+                        _migrationInfo.Users.Add(u.Uid, user);
                     }
                     catch (Exception ex)
                     {
-                        Log($"Couldn't parse user {item.Data.DisplayName}", ex);
+                        Log($"Couldn't parse user {u.Data.DisplayName}", ex);
                     }
                 }
             }
-
-            var groups = DBExtractGroup(bdFile);
-            progress = 80;
-            ReportProgress(90, MigrationResource.ClearingTemporaryData);
         }
         catch (Exception ex)
         {
             _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
             Log($"Couldn't parse users from {Path.GetFileNameWithoutExtension(_takeouts)} archive", ex);
         }
-        ReportProgress(100, MigrationResource.DataProcessingCompleted);
+        if (reportProgress)
+        {
+            ReportProgress(100, MigrationResource.DataProcessingCompleted);
+        }
         return Task.FromResult(_migrationInfo.ToApiInfo());
-    }
-
-    public List<NCGroup> DBExtractGroup(string dbFile)
-    {
-        var groups = new List<NCGroup>();
-
-        var sqlFile = File.ReadAllText(dbFile);
-
-        var groupList = GetDumpChunk("oc_groups", sqlFile);
-        if (groupList == null)
-        {
-            return groups;
-        }
-
-        foreach (var group in groupList)
-        {
-            groups.Add(new NCGroup
-            {
-                GroupGid = group.Split(',').First().Trim('\''),
-                UsersUid = new List<string>()
-            });
-        }
-
-        var usersInGroups = GetDumpChunk("oc_group_user", sqlFile);
-        foreach (var user in usersInGroups)
-        {
-            var userGroupGid = user.Split(',').First().Trim('\'');
-            var userUid = user.Split(',').Last().Trim('\'');
-            groups.Find(ggid => userGroupGid == ggid.GroupGid).UsersUid.Add(userUid);
-        }
-
-        return groups;
     }
 
     public List<NCUser> DBExtractUser(string dbFile)
@@ -213,8 +189,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             {
                 Uid = userId,
                 Data = new NCUserData(),
-                Addressbooks = null,
-                Calendars = new List<NCCalendars>(),
                 Storages = new NCStorages()
             });
         }
@@ -270,88 +244,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                 {
                     continue;
                 }
-
-                user.Calendars.Add(new NCCalendars()
-                {
-                    Id = int.Parse(values[0]),
-                    CalendarObject = new List<NCCalendarObjects>(),
-                    DisplayName = values[2]
-                });
-            }
-        }
-
-        var calendars = userDataList.Values
-            .SelectMany(u => u.Calendars)
-            .ToDictionary(c => c.Id, c => c);
-        var calendarObjects = GetDumpChunk("oc_calendarobjects", sqlFile);
-        if (calendarObjects != null)
-        {
-            foreach (var calendarObject in calendarObjects)
-            {
-                var values = calendarObject.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var calId = int.Parse(values[3]);
-                calendars.TryGetValue(calId, out var cal);
-                if (cal == null)
-                {
-                    continue;
-                }
-
-                cal.CalendarObject.Add(new NCCalendarObjects()
-                {
-                    Id = int.Parse(values[0]),
-                    CalendarData = Encoding.UTF8.GetBytes(values[1]
-                                                    .Replace("\\r", "")
-                                                    .Replace("\\n", "\n")),
-                });
-            }
-        }
-
-        var addressBooks = GetDumpChunk("oc_addressbooks", sqlFile);
-        if (addressBooks != null)
-        {
-            foreach (var addressBook in addressBooks)
-            {
-                var values = addressBook.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var uid = values[1].Split('/').Last();
-                userDataList.TryGetValue(uid, out var user);
-                if (user == null)
-                {
-                    continue;
-                }
-
-                user.Addressbooks = new NCAddressbooks();
-                user.Addressbooks.Id = int.Parse(values[0]);
-                user.Addressbooks.Cards = new List<NCCards>();
-            }
-        }
-
-        var addressBooksDict = userDataList.Values
-            .Select(u => u.Addressbooks)
-            .Where(x => x != null)
-            .ToDictionary(b => b.Id, b => b);
-        var cards = GetDumpChunk("oc_cards", sqlFile);
-        if (cards != null)
-        {
-            foreach (var card in cards)
-            {
-                var values = card.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var bookId = int.Parse(values[1]);
-                addressBooksDict.TryGetValue(bookId, out var book);
-                if (book == null)
-                {
-                    continue;
-                }
-
-                book.Cards.Add(new NCCards()
-                {
-                    Id = int.Parse(values[0]),
-                    CardData = Encoding.UTF8.GetBytes(values[2]
-                                                    .Replace("\\r", "")
-                                                    .Replace("\\n", "\n")),
-                });
             }
         }
 
@@ -453,6 +345,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         var usersForImport = _migrationInfo.Users
             .Where(u => u.Value.ShouldImport)
             .Select(u => u.Value);
+
         _importedUsers = new List<Guid>();
         var failedUsers = new List<NCMigratingUser>();
         var usersCount = usersForImport.Count();
@@ -460,11 +353,15 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         var i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested) 
+            { 
+                ReportProgress(100, MigrationResource.MigrationCanceled); 
+                return; 
+            }
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
-                user.dataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
             }
@@ -478,7 +375,11 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested)
+            {
+                ReportProgress(100, MigrationResource.MigrationCanceled);
+                return;
+            }
             if (failedUsers.Contains(user))
             {
                 ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserSkipped, user.DisplayName, i, usersCount));
@@ -486,19 +387,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             }
 
             var smallStep = progressStep / 3;
-
-            try
-            {
-                //await user.MigratingContacts.MigrateAsync();
-            }
-            catch (Exception ex)
-            {
-                Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) contacts", ex);
-            }
-            finally
-            {
-                ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserContacts, user.DisplayName, i, usersCount));
-            }
 
             try
             {

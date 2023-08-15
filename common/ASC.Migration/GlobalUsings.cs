@@ -43,6 +43,8 @@ global using ASC.Files.Core.Security;
 global using ASC.Migration.Core;
 global using ASC.Migration.Core.Models;
 global using ASC.Migration.Core.Models.Api;
+global using ASC.Migration.NextcloudWorkspace.Models;
+global using ASC.Migration.NextcloudWorkspace.Models.Parse;
 global using ASC.Migration.Core.Resources;
 global using ASC.Migration.GoogleWorkspace.Models;
 global using ASC.Migration.GoogleWorkspace.Models.Parse;

@@ -26,7 +26,7 @@
 
 namespace ASC.Migration.NextcloudWorkspace.Models.Parse;
 
-[Scope]
+[Transient]
 public class NCMigratingUser : MigratingUser<NCMigratingFiles>
 {
     public override string Email => _userInfo.Email;
@@ -43,24 +43,23 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
     private string _pathToPhoto;
     private UserInfo _userInfo;
     private readonly UserManager _userManager;
-    private readonly NCUser _user;
+    private NCUser _user;
     private readonly IServiceProvider _serviceProvider;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
     private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
 
     public NCMigratingUser(UserManager userManager,
-        NCUser userData,
         IServiceProvider serviceProvider)
     {
         _userManager = userManager;
-        _user = userData;
         _serviceProvider = serviceProvider;
     }
 
-    public void Init(string key, string rootFolder, Action<string, Exception> log)
+    public void Init(NCUser userData, string rootFolder, Action<string, Exception> log)
     {
-        Key = key;
+        Key = userData.Uid;
         _rootFolder = rootFolder;
+        _user = userData;
         Log = log;
     }
 
@@ -69,7 +68,8 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
         ModulesList.Add(new MigrationModules(ModuleName, MigrationResource.OnlyofficeModuleNamePeople));
         _userInfo = new UserInfo()
         {
-            Id = Guid.NewGuid()
+            Id = Guid.NewGuid(),
+            ContactsList = new List<string>()
         };
         var drivePath = Directory.Exists(Path.Combine(_rootFolder, "data", Key, "cache")) ?
             Path.Combine(_rootFolder, "data", Key, "cache") : null;

@@ -93,6 +93,8 @@ public class MigrationCore
         services.TryAdd<GwsMigratingUser>();
         services.TryAdd<GwsMigratingFiles>();
         services.TryAdd<IMigration, NextcloudWorkspaceMigration>();
+        services.TryAdd<NCMigratingUser>();
+        services.TryAdd<NCMigratingFiles>();
         services.TryAdd<IMigration, OwnCloudMigration>();
     }
 }

@@ -139,7 +139,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                         var userName = u.Data.DisplayName.Split(' ');
                         u.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
                         var user = _serviceProvider.GetService<NCMigratingUser>();
-                        user.Init(u.Uid, Directory.GetDirectories(_tmpFolder)[0], Log);
+                        user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
                         foreach (var element in user.ModulesList)
                         {

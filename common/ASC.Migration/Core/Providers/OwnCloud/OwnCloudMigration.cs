@@ -206,22 +206,6 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
             });
         }
 
-        var calendarsData = GetDumpChunk("oc_calendars", sqlFile);
-        if (calendarsData != null)
-        {
-            foreach (var calendarData in calendarsData)
-            {
-                var values = calendarData.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var uid = values[1].Split('/').Last();
-                userDataList.TryGetValue(uid, out var user);
-                if (user == null)
-                {
-                    continue;
-                }
-            }
-        }
-
         var storages = GetDumpChunk("oc_storages", sqlFile);
         if (storages != null)
         {

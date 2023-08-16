@@ -44,24 +44,15 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
     private bool _hasPhoto;
     private string _pathToPhoto;
     private UserInfo _userInfo;
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileStorageService _fileStorageService;
     private readonly UserManager _userManager;
     private readonly IServiceProvider _serviceProvider;
     private OCUser _user;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
 
     public OCMigratingUser(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileStorageService fileStorageService,
         UserManager userManager,
         IServiceProvider serviceProvider)
     {
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileStorageService = fileStorageService;
         _userManager = userManager;
         _serviceProvider = serviceProvider;
     }
@@ -120,7 +111,7 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
         }
     }
 
-    public void dataСhange(MigratingApiUser frontUser)
+    public void DataСhange(MigratingApiUser frontUser)
     {
         if (_userInfo.Email == null)
         {

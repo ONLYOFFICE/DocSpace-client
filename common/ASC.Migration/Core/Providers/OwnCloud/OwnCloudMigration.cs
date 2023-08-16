@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.OwnCloud.Models;
-
 namespace ASC.Migration.OwnCloud;
 
 [Scope]
@@ -317,6 +315,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     public override async Task Migrate(MigrationApiInfo migrationApiInfo)
     {
         ReportProgress(0, MigrationResource.PreparingForMigration);
+
         _migrationInfo.Merge(migrationApiInfo);
 
         var usersForImport = _migrationInfo.Users
@@ -330,11 +329,15 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         var i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested) 
+            { 
+                ReportProgress(100, MigrationResource.MigrationCanceled);
+                return;
+            }
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
-                user.dataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
             }
@@ -348,7 +351,11 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested) 
+            {
+                ReportProgress(100, MigrationResource.MigrationCanceled);
+                return;
+            }
             if (failedUsers.Contains(user))
             {
                 ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserSkipped, user.DisplayName, i, usersCount));

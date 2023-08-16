@@ -39,6 +39,7 @@ public class OCMigratingFiles : MigratingFiles
 
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IDaoFactory _daoFactory;
+    private readonly IServiceProvider _serviceProvider;
     private readonly FileStorageService _fileStorageService;
     private OCMigratingUser _user;
     private string _rootFolder;
@@ -53,11 +54,13 @@ public class OCMigratingFiles : MigratingFiles
     private string _folderCreation;
     public OCMigratingFiles(GlobalFolderHelper globalFolderHelper,
         IDaoFactory daoFactory,
-        FileStorageService fileStorageService)
+        FileStorageService fileStorageService,
+        IServiceProvider serviceProvider)
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
         _fileStorageService = fileStorageService;
+        _serviceProvider = serviceProvider;
     }
 
     public void Init(OCMigratingUser user, OCStorages storages, string rootFolder, Action<string, Exception> log)
@@ -182,14 +185,13 @@ public class OCMigratingFiles : MigratingFiles
                     var folderDao = _daoFactory.GetFolderDao<int>();
 
                     var parentFolder = string.IsNullOrWhiteSpace(parentPath) ? await folderDao.GetFolderAsync(await _globalFolderHelper.FolderMyAsync) : foldersDict[parentPath];
+                    
+                    var newFile = _serviceProvider.GetService<File<int>>();
+                    newFile.ParentId = parentFolder.Id;
+                    newFile.Comment = FilesCommonResource.CommentCreate;
+                    newFile.Title = Path.GetFileName(file.Path);
+                    newFile.ContentLength = fs.Length;
 
-                    var newFile = new File<int>
-                    {
-                        ParentId = parentFolder.Id,
-                        Comment = FilesCommonResource.CommentCreate,
-                        Title = Path.GetFileName(file.Path),
-                        ContentLength = fs.Length
-                    };
                     newFile = await fileDao.SaveFileAsync(newFile, fs);
                     _matchingFileId.Add(newFile.Id, file.FileId);
 

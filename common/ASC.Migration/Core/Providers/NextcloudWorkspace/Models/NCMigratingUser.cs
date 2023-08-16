@@ -55,11 +55,11 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
         _serviceProvider = serviceProvider;
     }
 
-    public void Init(NCUser userData, string rootFolder, Action<string, Exception> log)
+    public void Init(NCUser user, string rootFolder, Action<string, Exception> log)
     {
-        Key = userData.Uid;
+        Key = user.Uid;
         _rootFolder = rootFolder;
-        _user = userData;
+        _user = user;
         Log = log;
     }
 

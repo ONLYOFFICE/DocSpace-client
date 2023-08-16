@@ -29,44 +29,50 @@ using File = System.IO.File;
 
 namespace ASC.Migration.OwnCloud.Models;
 
+[Transient]
 public class OCMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _foldersCount;
-
     public override int FilesCount => _filesCount;
-
     public override long BytesTotal => _bytesTotal;
-
     public override string ModuleName => MigrationResource.NextcloudModuleNameDocuments;
 
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IDaoFactory _daoFactory;
     private readonly FileStorageService _fileStorageService;
-    private readonly OCMigratingUser _user;
-    private readonly string _rootFolder;
+    private OCMigratingUser _user;
+    private string _rootFolder;
     private List<OCFileCache> _files;
     private List<OCFileCache> _folders;
     private int _foldersCount;
     private int _filesCount;
     private long _bytesTotal;
-    private readonly OCStorages _storages;
+    private OCStorages _storages;
     private Dictionary<string, OCMigratingUser> _users;
     private Dictionary<object, int> _matchingFileId;
     private string _folderCreation;
-    public OCMigratingFiles(GlobalFolderHelper globalFolderHelper, IDaoFactory daoFactory, FileStorageService fileStorageService, OCMigratingUser user, OCStorages storages, string rootFolder, Action<string, Exception> log) : base(log)
+    public OCMigratingFiles(GlobalFolderHelper globalFolderHelper,
+        IDaoFactory daoFactory,
+        FileStorageService fileStorageService)
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
         _fileStorageService = fileStorageService;
+    }
+
+    public void Init(OCMigratingUser user, OCStorages storages, string rootFolder, Action<string, Exception> log)
+    {
         _user = user;
         _rootFolder = rootFolder;
         _storages = storages;
+        Log = log;
     }
 
     public override void Parse()
     {
         var drivePath = Directory.Exists(Path.Combine(_rootFolder, "data", _user.Key, "files")) ?
             Path.Combine(_rootFolder, "data", _user.Key, "files") : null;
+
         if (drivePath == null)
         {
             return;

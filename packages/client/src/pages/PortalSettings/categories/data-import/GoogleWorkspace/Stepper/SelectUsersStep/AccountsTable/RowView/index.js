@@ -31,7 +31,7 @@ const StyledRow = styled(Row)`
 `;
 
 const RowView = (props) => {
-  const { t, sectionWidth, viewAs, setViewAs, usersData } = props;
+  const { t, sectionWidth, viewAs, setViewAs, accountsData } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const rowRef = useRef(null);
@@ -39,7 +39,7 @@ const RowView = (props) => {
   const onCheck = (checked) => {
     setIsChecked(checked);
     if (checked) {
-      setCheckbox(usersData.map((data) => data.id));
+      setCheckbox(accountsData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
@@ -76,7 +76,7 @@ const RowView = (props) => {
       >
         <Text className="row-header-title">{t("Common:Name")}</Text>
       </StyledRow>
-      {usersData.map((data) => (
+      {accountsData.map((data) => (
         <UsersRow
           key={data.id}
           id={data.id}

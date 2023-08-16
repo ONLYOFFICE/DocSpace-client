@@ -38,7 +38,7 @@ const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth, usersData } = props;
+  const { userId, viewAs, setViewAs, sectionWidth, accountsData } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
@@ -46,7 +46,7 @@ const TableView = (props) => {
   const onChangeAllCheckbox = (e) => {
     setIsChecked(e.target.checked);
     if (e.target.checked) {
-      setCheckbox(usersData.map((data) => data.id));
+      setCheckbox(accountsData.map((data) => data.id));
     } else {
       setCheckbox([]);
     }
@@ -90,11 +90,11 @@ const TableView = (props) => {
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={usersData.length}
+        filesLength={accountsData.length}
         hasMoreFiles={false}
-        itemCount={usersData.length}
+        itemCount={accountsData.length}
       >
-        {usersData.map((data) => (
+        {accountsData.map((data) => (
           <UsersTableRow
             key={data.id}
             id={data.id}

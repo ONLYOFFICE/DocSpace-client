@@ -6,7 +6,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
 import Text from "@docspace/components/text";
 
-import UsersTable from "./UsersTable";
+import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging.js";
 import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
@@ -59,7 +59,7 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         onClearSearch={() => console.log("cleared")}
       />
 
-      <UsersTable t={t} usersData={dataPortion} />
+      <AccountsTable t={t} accountsData={dataPortion} />
 
       {mockData.length > 25 && (
         <AccountsPaging

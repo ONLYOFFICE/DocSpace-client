@@ -106,13 +106,13 @@ const ThirdStep = (props) => {
             <TableView
               t={t}
               sectionWidth={context.sectionWidth}
-              usersData={dataPortion}
+              accountsData={dataPortion}
             />
           ) : (
             <RowView
               t={t}
               sectionWidth={context.sectionWidth}
-              usersData={dataPortion}
+              accountsData={dataPortion}
             />
           )
         }

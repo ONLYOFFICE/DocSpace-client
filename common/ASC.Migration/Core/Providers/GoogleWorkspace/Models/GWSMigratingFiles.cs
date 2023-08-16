@@ -30,7 +30,7 @@ using File = System.IO.File;
 
 namespace ASC.Migration.GoogleWorkspace.Models;
 
-[Scope]
+[Transient]
 public class GwsMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _foldersCount;

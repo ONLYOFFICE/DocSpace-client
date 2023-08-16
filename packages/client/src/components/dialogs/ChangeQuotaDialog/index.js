@@ -33,7 +33,6 @@ const ChangeQuotaDialog = (props) => {
             : "Set quota to define the storage limitation."}
         </Text>
         <QuotaForm
-          isButtonsEnable={false}
           onSetQuotaBytesSize={onSetQuotaBytesSize}
           isLoading={isLoading}
           isError={isError}

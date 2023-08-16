@@ -251,6 +251,7 @@ const SectionFilterContent = ({
   publicRoomKey,
   setRoomsFilter,
   standalone,
+  isItemQuotaAvailable,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1580,7 +1581,7 @@ const SectionFilterContent = ({
 
   const getSortData = React.useCallback(() => {
     if (isAccountsPage) {
-      return [
+      const accountsOptions = [
         {
           id: "sory-by_first-name",
           key: "firstname",
@@ -1606,6 +1607,16 @@ const SectionFilterContent = ({
           default: true,
         },
       ];
+
+      isItemQuotaAvailable &&
+        accountsOptions.push({
+          id: "sort-quota",
+          key: "Storage/Quota",
+          label: "Storage",
+          default: true,
+        });
+
+      return accountsOptions;
     }
 
     const commonOptions = [];
@@ -2089,6 +2100,8 @@ export default inject(
       setRoomsFilter,
     } = filesStore;
 
+    const { currentQuotaStore } = auth;
+
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
@@ -2107,6 +2120,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isItemQuotaAvailable } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2123,6 +2137,8 @@ export default inject(
     const { canSearchByContent } = filesSettingsStore;
 
     return {
+      isItemQuotaAvailable,
+
       user,
       userId: user?.id,
 

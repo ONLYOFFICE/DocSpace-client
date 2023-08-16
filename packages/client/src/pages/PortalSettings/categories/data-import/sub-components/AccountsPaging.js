@@ -1,6 +1,14 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import styled from "styled-components";
 import Paging from "@docspace/components/paging";
+
+const SyledPaging = styled(Paging)`
+  display: flex;
+  margin-top: -5px;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+`;
 
 const createPageItems = (count) => {
   let pageItems = [];
@@ -33,12 +41,12 @@ const countItems = [
 ];
 
 const AccountsPaging = (props) => {
-  const { numberOfItems, setDataPortion } = props;
+  const { t, numberOfItems, setDataPortion } = props;
 
   const [selectedCountItem, setSelectedCountItem] = useState(countItems[0]);
 
   const [pageItems, setPageItems] = useState(
-    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count)),
+    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count))
   );
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
@@ -47,11 +55,11 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       console.log(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        (currentPage.pageNumber + 1) * selectedCountItem.count
       );
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        (currentPage.pageNumber + 1) * selectedCountItem.count
       );
       setSelectedPageItems(currentPage);
     }
@@ -62,7 +70,7 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        (currentPage.pageNumber + 1) * selectedCountItem.count
       );
       setSelectedPageItems(currentPage);
     }
@@ -77,20 +85,21 @@ const AccountsPaging = (props) => {
   const onCountChange = (countItem) => {
     setSelectedCountItem(countItem);
     setDataPortion(0, countItem.count);
-    const tempPageItems = createPageItems(Math.ceil(numberOfItems / countItem.count));
+    const tempPageItems = createPageItems(
+      Math.ceil(numberOfItems / countItem.count)
+    );
     setPageItems(tempPageItems);
     setSelectedPageItems(tempPageItems[0]);
   };
 
   return (
-    <Paging
-      className="accounts-pagging"
+    <SyledPaging
+      className="accounts-paging"
       pageItems={pageItems}
       countItems={countItems}
-      previousLabel="Previous"
-      nextLabel="Next"
+      previousLabel={t("Common:Previous")}
+      nextLabel={t("Common:Next")}
       openDirection="top"
-      style={{ justifyContent: "center", alignItems: "center" }}
       onSelectPage={onSelectPage}
       onSelectCount={onCountChange}
       previousAction={onSelectPagePrevHandler}

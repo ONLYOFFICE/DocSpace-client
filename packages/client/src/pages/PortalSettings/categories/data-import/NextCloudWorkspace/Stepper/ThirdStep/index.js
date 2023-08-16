@@ -25,8 +25,8 @@ const ThirdStep = (props) => {
   return (
     <Wrapper>
       <p className="users-without-email">
-        We found <b>6 users</b> without emails. You can add necessary data to their accounts on the
-        next step.
+        We found <b>6 users</b> without emails. You can add necessary data to
+        their accounts on the next step.
       </p>
       <SaveCancelButtons
         className="save-cancel-buttons"
@@ -38,10 +38,20 @@ const ThirdStep = (props) => {
         displaySettings
       />
       <UsersInfoBlock>
-        <Text color="#555f65" fontSize="14px" fontWeight={700} className="selected-users-count">
+        <Text
+          color="#555f65"
+          fontSize="14px"
+          fontWeight={700}
+          className="selected-users-count"
+        >
           Selected: 0/10 users
         </Text>
-        <Text color="#555f65" fontSize="14px" fontWeight={700} className="selected-admins-count">
+        <Text
+          color="#555f65"
+          fontSize="14px"
+          fontWeight={700}
+          className="selected-admins-count"
+        >
           License limit Admins/Power: 0/100
         </Text>
         <HelpButton
@@ -61,7 +71,11 @@ const ThirdStep = (props) => {
       <AccountsTable accountsData={dataPortion} />
 
       {mockData.length > 25 && (
-        <AccountsPaging numberOfItems={mockData.length} setDataPortion={handleDataChange} />
+        <AccountsPaging
+          t={t}
+          numberOfItems={mockData.length}
+          setDataPortion={handleDataChange}
+        />
       )}
 
       <SaveCancelButtons

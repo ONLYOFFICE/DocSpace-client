@@ -139,7 +139,13 @@ class QuotasStore {
 
     return result?.value;
   }
+  get isItemQuotaAvailable() {
+    const result = this.currentPortalQuotaFeatures.find(
+      (obj) => obj.id === "statistic"
+    );
 
+    return result?.value;
+  }
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "restore"

@@ -2,15 +2,11 @@ import styled from "styled-components";
 import Row from "@docspace/components/row";
 
 const StyledBaseQuotaComponent = styled.div`
-  .quotas_label {
+  .quotas_description {
     margin-bottom: 20px;
-    p:first-child {
-      margin-bottom: 8px;
-    }
-    p:last-child {
-      color: ${(props) => props.theme.text.descriptionColor};
-    }
+    margin-top: 8px;
   }
+
   .toggle-container {
     margin-bottom: 32px;
     .quotas_toggle-button {
@@ -19,7 +15,9 @@ const StyledBaseQuotaComponent = styled.div`
     .toggle_label {
       margin-top: 10px;
       margin-bottom: 16px;
-      color: ${(props) => props.theme.text.descriptionColor};
+
+      ${(props) =>
+        props.isDisabled && `color: ${props.theme.text.disableColor}`};
     }
   }
   .category-item-description {
@@ -94,18 +92,18 @@ const StyledFolderTagColor = styled.div`
 const StyledStatistics = styled.div`
   max-width: 700px;
 
+  .statistics_title {
+    margin-bottom: 8px;
+  }
+
   .statistics-description {
     margin-bottom: 20px;
-    color: ${(props) => props.theme.text.descriptionColor};
   }
   .statistics-container {
     margin-bottom: 40px;
   }
   .item-statistic {
     margin-bottom: 4px;
-  }
-  .statistics_title {
-    margin-bottom: 8px;
   }
 
   .button-element {
@@ -160,6 +158,11 @@ const StyledMainInfo = styled.div`
 
 const StyledBody = styled.div`
   max-width: 700px;
+  .title-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
 `;
 
 export {

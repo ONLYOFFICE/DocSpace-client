@@ -13,14 +13,16 @@ import StyledBody from "./StyledComponent";
 
 const QuotaForm = ({
   isLoading,
+  isDisabled,
   maxInputWidth,
   onSetQuotaBytesSize,
   initialSize = "",
   initialPower = 0,
   isError,
-  isButtonsEnable = true,
+  isButtonsEnable = false,
   onSave,
   label,
+  description,
 }) => {
   const [size, setSize] = useState(initialSize);
   const [power, setPower] = useState(initialPower);
@@ -86,17 +88,22 @@ const QuotaForm = ({
     console.log("onCancel");
   };
 
-  const isDisabled = isLoading;
+  const isDisable = isLoading || isDisabled;
   return (
     <StyledBody maxInputWidth={maxInputWidth} label={label}>
       {label && <Text fontWeight={600}>{label}</Text>}
+      {description && (
+        <Text fontSize="12px" className="quota_description">
+          {description}
+        </Text>
+      )}
       <div className="quota-container">
         <TextInput
           className="quota_limit"
           isAutoFocussed={true}
           value={size}
           onChange={onChangeTextInput}
-          isDisabled={isDisabled}
+          isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
           pattern="[0-9]*"
@@ -106,7 +113,7 @@ const QuotaForm = ({
         <ComboBox
           className="quota_value"
           options={options}
-          isDisabled={isDisabled}
+          isDisabled={isDisable}
           selectedOption={options.find((elem) => elem.key === power)}
           size="content"
           onSelect={onSelectComboBox}

@@ -32,7 +32,10 @@ const StyledMobileCategoryWrapper = styled.div`
   }
 
   .category-item-description {
-    color: ${(props) => props.theme.client.settings.security.descriptionColor};
+    color: ${(props) =>
+      props.isDisabled
+        ? props.theme.text.disableColor
+        : props.theme.client.settings.security.descriptionColor};
     font-size: 12px;
     max-width: 1024px;
   }
@@ -41,6 +44,7 @@ const StyledMobileCategoryWrapper = styled.div`
     margin-right: 7px;
     font-size: 16px;
     font-weight: 600;
+    ${(props) => props.isDisabled && `color: ${props.theme.text.disableColor}`};
   }
 
   .link-text {
@@ -49,20 +53,25 @@ const StyledMobileCategoryWrapper = styled.div`
 `;
 
 const MobileCategoryWrapper = (props) => {
-  const { title, url, subtitle, onClickLink } = props;
+  const { title, url, subtitle, onClickLink, isDisabled } = props;
+
+  const onClickProp = isDisabled ? {} : onClickLink;
+  const onHrefProp = isDisabled
+    ? {}
+    : { href: combineUrl(window.DocSpaceConfig?.proxy?.url, url) };
 
   return (
-    <StyledMobileCategoryWrapper>
+    <StyledMobileCategoryWrapper isDisabled={isDisabled}>
       <div className="category-item-heading">
         <Link
           className="inherit-title-link header"
-          onClick={onClickLink}
-          truncate={true}
-          href={combineUrl(window.DocSpaceConfig?.proxy?.url, url)}
+          {...onClickProp}
+          {...onHrefProp}
+          truncate
         >
           {title}
         </Link>
-        <StyledArrowRightIcon size="small" />
+        {!isDisabled && <StyledArrowRightIcon size="small" />}
       </div>
       <Text className="category-item-description">{subtitle}</Text>
     </StyledMobileCategoryWrapper>

@@ -8,7 +8,8 @@ import { StyledBaseQuotaComponent } from "../StyledComponent";
 import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
-const QuotaPerRoomComponent = () => {
+const QuotaPerRoomComponent = (props) => {
+  const { isDisabled } = props;
   const { t } = useTranslation("Settings");
 
   const [isToggleChecked, setIsToggleChecked] = useState(false);
@@ -48,7 +49,7 @@ const QuotaPerRoomComponent = () => {
   };
 
   return (
-    <StyledBaseQuotaComponent>
+    <StyledBaseQuotaComponent isDisabled={isDisabled}>
       <div className="toggle-container">
         <ToggleButton
           className="quotas_toggle-button"
@@ -56,15 +57,17 @@ const QuotaPerRoomComponent = () => {
           label={t("DefineQuotaPerRoom")}
           onChange={onToggleChange}
           isChecked={isToggleChecked}
-          isDisabled={isLoading.room}
+          isDisabled={isDisabled || isLoading}
         />
         <Text className="toggle_label">{t("SetDefaultRoomQuota")}</Text>
         {isToggleChecked && (
           <QuotaForm
+            isButtonsEnable
             label={t("QuotaPerRoom")}
             maxInputWidth={"214px"}
             onSave={onSaveRoomQuota}
-            isLoading={isLoading.room}
+            isLoading={isLoading}
+            isDisabled={isDisabled}
           />
         )}
       </div>

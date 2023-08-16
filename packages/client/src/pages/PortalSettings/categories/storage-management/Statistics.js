@@ -1,8 +1,9 @@
 import React from "react";
-
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import Text from "@docspace/components/text";
+import Badge from "@docspace/components/badge";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -16,9 +17,9 @@ const buttonProps = {
   className: "button-element",
   size: "small",
 };
-const StatisticsComponent = () => {
+const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
-
+  const { isItemQuotaAvailable } = props;
   const iconElement = (
     id,
     icon,
@@ -54,26 +55,47 @@ const StatisticsComponent = () => {
 
   return (
     <StyledStatistics>
-      <Text fontWeight={700} fontSize={"16px"} className="statistics_title">
-        {t("Statistic")}
-      </Text>
+      <div className="title-container">
+        <Text fontWeight={700} fontSize={"16px"} className="statistics_title">
+          {t("Statistic")}
+        </Text>
+        {!isItemQuotaAvailable && (
+          <Badge
+            backgroundColor="#EDC409"
+            label={t("Common:Paid")}
+            className="paid-badge"
+            isPaidBadge
+          />
+        )}
+      </div>
       <Text className="statistics-description">
         {t("StatisticDescription")}
       </Text>
-      <RoomsList
-        buttonProps={buttonProps}
-        textElement={textElement}
-        quotaElement={quotaElement}
-        iconElement={iconElement}
-      />
-      <UsersList
-        buttonProps={buttonProps}
-        textElement={textElement}
-        quotaElement={quotaElement}
-        iconElement={iconElement}
-      />
+      {isItemQuotaAvailable && (
+        <>
+          <RoomsList
+            buttonProps={buttonProps}
+            textElement={textElement}
+            quotaElement={quotaElement}
+            iconElement={iconElement}
+          />
+          <UsersList
+            buttonProps={buttonProps}
+            textElement={textElement}
+            quotaElement={quotaElement}
+            iconElement={iconElement}
+          />
+        </>
+      )}
     </StyledStatistics>
   );
 };
 
-export default StatisticsComponent;
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+  const { isItemQuotaAvailable } = currentQuotaStore;
+
+  return {
+    isItemQuotaAvailable,
+  };
+})(observer(StatisticsComponent));

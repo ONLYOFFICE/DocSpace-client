@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import MobileCategoryWrapper from "../../../components/mobile-category";
 
-const MobileQuotasComponent = () => {
+const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 
@@ -21,12 +21,14 @@ const MobileQuotasComponent = () => {
         onClickLink={onClickLink}
         url="portal-settings/management/disk-space/quota-per-room"
         subtitle={t("SetDefaultRoomQuota")}
+        isDisabled={isDisabled}
       />
       <MobileCategoryWrapper
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("SetDefaultUserQuota")}
+        isDisabled={isDisabled}
       />
     </StyledBaseQuotaComponent>
   );

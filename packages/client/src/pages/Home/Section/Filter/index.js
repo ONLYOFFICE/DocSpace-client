@@ -1692,6 +1692,13 @@ const SectionFilterContent = ({
 
     if (viewAs === "table") {
       if (isRooms) {
+        const sortByStorage = {
+          id: "sort-by_storage",
+          key: SortByFieldName.RoomType,
+          label: "Storage",
+          default: true,
+        };
+
         const availableSort = localStorage
           ?.getItem(`${TABLE_ROOMS_COLUMNS}=${userId}`)
           ?.split(",");
@@ -1700,44 +1707,41 @@ const SectionFilterContent = ({
           ?.getItem(`${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`)
           ?.split(" ");
 
+        const hideOption = infoPanelVisible && infoPanelColumnsSize;
+
         if (availableSort?.includes("Type")) {
           const idx = availableSort.findIndex((x) => x === "Type");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(roomType);
         }
 
         if (availableSort?.includes("Tags")) {
           const idx = availableSort.findIndex((x) => x === "Tags");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(tags);
         }
 
         if (availableSort?.includes("Owner")) {
           const idx = availableSort.findIndex((x) => x === "Owner");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(owner);
         }
 
         if (availableSort?.includes("Activity")) {
           const idx = availableSort.findIndex((x) => x === "Activity");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(modifiedDate);
+        }
+
+        if (isItemQuotaAvailable && availableSort?.includes("Storage/Quota")) {
+          const idx = availableSort.findIndex((x) => x === "Storage/Quota");
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(sortByStorage);
         }
       } else if (isTrash) {
         const availableSort = localStorage

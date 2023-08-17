@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 global using System.IO.Compression;
-global using System.Text;
 global using System.Text.Json.Serialization;
 global using System.Text.RegularExpressions;
 
@@ -41,13 +40,18 @@ global using ASC.Files.Core;
 global using ASC.Files.Core.Resources;
 global using ASC.Files.Core.Security;
 global using ASC.Migration.Core;
+global using ASC.Migration.Core.Core;
 global using ASC.Migration.Core.Models;
 global using ASC.Migration.Core.Models.Api;
-global using ASC.Migration.NextcloudWorkspace.Models;
-global using ASC.Migration.NextcloudWorkspace.Models.Parse;
 global using ASC.Migration.Core.Resources;
+global using ASC.Migration.GoogleWorkspace;
 global using ASC.Migration.GoogleWorkspace.Models;
 global using ASC.Migration.GoogleWorkspace.Models.Parse;
+global using ASC.Migration.NextcloudWorkspace;
+global using ASC.Migration.NextcloudWorkspace.Models;
+global using ASC.Migration.NextcloudWorkspace.Models.Parse;
+global using ASC.Migration.OwnCloud;
+global using ASC.Migration.OwnCloud.Models;
 global using ASC.Web.Files.Classes;
 global using ASC.Web.Files.Services.WCFService;
 
@@ -57,8 +61,6 @@ global using HtmlAgilityPack;
 
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
-
-global using MimeKit;
 
 global using Newtonsoft.Json;
 

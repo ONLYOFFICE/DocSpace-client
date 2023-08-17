@@ -139,7 +139,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                         var userName = u.Data.DisplayName.Split(' ');
                         u.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
                         var user = _serviceProvider.GetService<NCMigratingUser>();
-                        user.Init(u.Uid, Directory.GetDirectories(_tmpFolder)[0], Log);
+                        user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
                         foreach (var element in user.ModulesList)
                         {
@@ -229,22 +229,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         else
         {
             throw new Exception();
-        }
-
-        var calendarsData = GetDumpChunk("oc_calendars", sqlFile);
-        if (calendarsData != null)
-        {
-            foreach (var calendarData in calendarsData)
-            {
-                var values = calendarData.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var uid = values[1].Split('/').Last();
-                userDataList.TryGetValue(uid, out var user);
-                if (user == null)
-                {
-                    continue;
-                }
-            }
         }
 
         var storages = GetDumpChunk("oc_storages", sqlFile);

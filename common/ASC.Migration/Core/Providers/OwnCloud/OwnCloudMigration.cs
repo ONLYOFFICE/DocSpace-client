@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.OwnCloud.Models;
-
 namespace ASC.Migration.OwnCloud;
 
 [Scope]
@@ -34,31 +32,19 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     private string _takeouts;
     public string[] TempParse;
     private string _tmpFolder;
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileStorageService _fileStorageService;
     private readonly SecurityContext _securityContext;
-    private readonly TenantManager _tenantManager;
-    private readonly UserManager _userManager;
+    private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
     public override MigratorMeta Meta => _meta;
 
     public OwnCloudMigration(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileStorageService fileStorageService,
         SecurityContext securityContext,
-        TenantManager tenantManager,
-        UserManager userManager,
-        MigrationLogger migrationLogger) : base(migrationLogger)
+        MigrationLogger migrationLogger,
+        IServiceProvider serviceProvider) : base(migrationLogger)
     {
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileStorageService = fileStorageService;
         _securityContext = securityContext;
-        _tenantManager = tenantManager;
-        _userManager = userManager;
         _meta = new MigratorMeta("Owncloud", 6, false);
+        _serviceProvider = serviceProvider;
     }
 
     public override void Init(string path, CancellationToken cancellationToken)
@@ -82,9 +68,13 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         _migrationInfo.MigratorName = _meta.Name;
         _tmpFolder = path;
     }
+
     public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
-        ReportProgress(0, MigrationResource.Unzipping);
+        if (reportProgress)
+        {
+            ReportProgress(0, MigrationResource.Unzipping);
+        }
         try
         {
             try
@@ -95,8 +85,18 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
             {
                 Log($"Couldn't to unzip {_takeouts}", ex);
             }
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return null; }
-            ReportProgress(30, MigrationResource.UnzippingFinished);
+            if (_cancellationToken.IsCancellationRequested) 
+            {
+                if (reportProgress) 
+                {
+                    ReportProgress(100, MigrationResource.MigrationCanceled);
+                }
+                return null;
+            }
+            if (reportProgress)
+            {
+                ReportProgress(30, MigrationResource.UnzippingFinished);
+            }
             var bdFile = "";
             try
             {
@@ -111,23 +111,38 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
                 _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
                 Log("Archive must not be empty and should contain .bak files.", ex);
             }
-
-            ReportProgress(40, MigrationResource.DumpParse);
+            if (reportProgress)
+            {
+                ReportProgress(40, MigrationResource.DumpParse);
+            }
             var users = DBExtractUser(bdFile);
             var progress = 40;
-            foreach (var item in users)
+            foreach (var u in users)
             {
-                if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return null; }
-                ReportProgress(progress, MigrationResource.DataProcessing);
-                progress += 30 / users.Count;
-                if (item.Data.DisplayName != null)
+                if (_cancellationToken.IsCancellationRequested) 
+                {
+                    if (reportProgress)
+                    {
+                        ReportProgress(100, MigrationResource.MigrationCanceled);
+                    }
+                    return null;
+                }
+                if (reportProgress)
+                {
+                    ReportProgress(progress, MigrationResource.DataProcessing);
+                    progress += 50 / users.Count;
+                }
+                if (u.Data.DisplayName != null)
                 {
                     try
                     {
-                        var userName = item.Data.DisplayName.Split(' ');
-                        item.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
-                        var user = new OCMigratingUser(_globalFolderHelper, _daoFactory, _fileStorageService, _tenantManager, _userManager, item.Uid, item, Directory.GetDirectories(_tmpFolder)[0], Log);
+                        var userName = u.Data.DisplayName.Split(' ');
+                        u.Data.DisplayName = userName.Length > 1 ? string.Format("{0} {1}", userName[0], userName[1]).Trim() : userName[0].Trim();
+                        
+                        var user = _serviceProvider.GetService<OCMigratingUser>();
+                        user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
+
                         foreach (var element in user.ModulesList)
                         {
                             if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
@@ -135,25 +150,24 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
                                 _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
                             }
                         }
-                        _migrationInfo.Users.Add(item.Uid, user);
+                        _migrationInfo.Users.Add(u.Uid, user);
                     }
                     catch (Exception ex)
                     {
-                        Log($"Couldn't parse user {item.Data.DisplayName}", ex);
+                        Log($"Couldn't parse user {u.Data.DisplayName}", ex);
                     }
                 }
             }
-
-            progress = 80;
-
-            ReportProgress(90, MigrationResource.ClearingTemporaryData);
         }
         catch (Exception ex)
         {
             _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
             Log($"Couldn't parse users from {Path.GetFileNameWithoutExtension(_takeouts)} archive", ex);
         }
-        ReportProgress(100, MigrationResource.DataProcessingCompleted);
+        if (reportProgress)
+        {
+            ReportProgress(100, MigrationResource.DataProcessingCompleted);
+        }
         return Task.FromResult(_migrationInfo.ToApiInfo());
     }
 
@@ -188,108 +202,8 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
                     DisplayName = account.Split(',')[4].Trim('\''),
                     Email = account.Split(',')[1].Trim('\'')
                 },
-                Addressbooks = null,
-                Calendars = new List<OCCalendars>(),
                 Storages = new OCStorages()
             });
-        }
-
-        var calendarsData = GetDumpChunk("oc_calendars", sqlFile);
-        if (calendarsData != null)
-        {
-            foreach (var calendarData in calendarsData)
-            {
-                var values = calendarData.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var uid = values[1].Split('/').Last();
-                userDataList.TryGetValue(uid, out var user);
-                if (user == null)
-                {
-                    continue;
-                }
-
-                user.Calendars.Add(new OCCalendars()
-                {
-                    Id = int.Parse(values[0]),
-                    CalendarObject = new List<OCCalendarObjects>(),
-                    DisplayName = values[2]
-                });
-            }
-        }
-
-        var calendars = userDataList.Values
-            .SelectMany(u => u.Calendars)
-            .ToDictionary(c => c.Id, c => c);
-        var calendarObjects = GetDumpChunk("oc_calendarobjects", sqlFile);
-        if (calendarObjects != null)
-        {
-            foreach (var calendarObject in calendarObjects)
-            {
-                var values = calendarObject.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var calId = int.Parse(values[3]);
-                calendars.TryGetValue(calId, out var cal);
-                if (cal == null)
-                {
-                    continue;
-                }
-
-                cal.CalendarObject.Add(new OCCalendarObjects()
-                {
-                    Id = int.Parse(values[0]),
-                    CalendarData = Encoding.UTF8.GetBytes(values[1]
-                                                    .Replace("\\r", "")
-                                                    .Replace("\\n", "\n")),
-                });
-            }
-        }
-
-        var addressBooks = GetDumpChunk("oc_addressbooks", sqlFile);
-        if (addressBooks != null)
-        {
-            foreach (var addressBook in addressBooks)
-            {
-                var values = addressBook.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var uid = values[1].Split('/').Last();
-                userDataList.TryGetValue(uid, out var user);
-                if (user == null)
-                {
-                    continue;
-                }
-
-                user.Addressbooks = new OCAddressbooks();
-                user.Addressbooks.Id = int.Parse(values[0]);
-                user.Addressbooks.Cards = new List<OCCards>();
-            }
-        }
-
-        var addressBooksDict = userDataList.Values
-            .Select(u => u.Addressbooks)
-            .Where(x => x != null)
-            .ToDictionary(b => b.Id, b => b);
-        var cards = GetDumpChunk("oc_cards", sqlFile);
-        if (cards != null)
-        {
-            foreach (var card in cards)
-            {
-                var values = card.Split(',')
-                    .Select(s => s.Trim('\'')).ToArray();
-                var bookId = int.Parse(values[1]);
-                addressBooksDict.TryGetValue(bookId, out var book);
-                if (book == null)
-                {
-                    continue;
-                }
-
-                book.Cards.Add(new OCCards()
-                {
-                    Id = int.Parse(values[0]),
-                    CardData = Encoding.UTF8.GetBytes(values[2]
-                                                    .Replace("\\r", "")
-                                                    .Replace("\\n", "\n")),
-                });
-            }
         }
 
         var storages = GetDumpChunk("oc_storages", sqlFile);
@@ -385,6 +299,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     public override async Task Migrate(MigrationApiInfo migrationApiInfo)
     {
         ReportProgress(0, MigrationResource.PreparingForMigration);
+
         _migrationInfo.Merge(migrationApiInfo);
 
         var usersForImport = _migrationInfo.Users
@@ -398,11 +313,15 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         var i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested) 
+            { 
+                ReportProgress(100, MigrationResource.MigrationCanceled);
+                return;
+            }
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
-                user.dataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
             }
@@ -416,7 +335,11 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         i = 1;
         foreach (var user in usersForImport)
         {
-            if (_cancellationToken.IsCancellationRequested) { ReportProgress(100, MigrationResource.MigrationCanceled); return; }
+            if (_cancellationToken.IsCancellationRequested) 
+            {
+                ReportProgress(100, MigrationResource.MigrationCanceled);
+                return;
+            }
             if (failedUsers.Contains(user))
             {
                 ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserSkipped, user.DisplayName, i, usersCount));
@@ -424,32 +347,6 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
             }
 
             var smallStep = progressStep / 3;
-
-            try
-            {
-                //await user.MigratingContacts.MigrateAsync();
-            }
-            catch (Exception ex)
-            {
-                Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) contacts", ex);
-            }
-            finally
-            {
-                ReportProgress(GetProgress() + smallStep, string.Format(MigrationResource.MigratingUserContacts, user.DisplayName, i, usersCount));
-            }
-
-            /*try
-            {
-                user.MigratingCalendar.Migrate();
-            }
-            catch (Exception ex)
-            {
-                Log($"Couldn't migrate user {user.DisplayName} ({user.Email}) calendar", ex);
-            }
-            finally
-            {
-                ReportProgress(GetProgress() + smallStep, String.Format(MigrationResource.UserCalendarMigration, user.DisplayName, i, usersCount));
-            }*/
 
             try
             {

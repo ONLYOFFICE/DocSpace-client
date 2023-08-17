@@ -26,6 +26,7 @@
 
 namespace ASC.Migration.OwnCloud.Models;
 
+[Transient]
 public class OCMigratingUser : MigratingUser<OCMigratingFiles>
 {
     public override string Email => _userInfo.Email;
@@ -39,37 +40,29 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
     public override string ModuleName => MigrationResource.ModuleNameUsers;
 
     public string ConnectionString { get; set; }
-    private readonly string _rootFolder;
+    private string _rootFolder;
     private bool _hasPhoto;
     private string _pathToPhoto;
     private UserInfo _userInfo;
-    private readonly GlobalFolderHelper _globalFolderHelper;
-    private readonly IDaoFactory _daoFactory;
-    private readonly FileStorageService _fileStorageService;
-    private readonly TenantManager _tenantManager;
     private readonly UserManager _userManager;
-    private readonly OCUser _user;
+    private readonly IServiceProvider _serviceProvider;
+    private OCUser _user;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
 
     public OCMigratingUser(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileStorageService fileStorageService,
-        TenantManager tenantManager,
         UserManager userManager,
-        string key,
-        OCUser userData,
-        string rootFolder,
-        Action<string, Exception> log) : base(log)
+        IServiceProvider serviceProvider)
     {
-        Key = key;
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileStorageService = fileStorageService;
-        _tenantManager = tenantManager;
         _userManager = userManager;
-        _user = userData;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(OCUser user, string rootFolder, Action<string, Exception> log)
+    {
+        _user = user;
+        Key = user.Uid;
         _rootFolder = rootFolder;
+        Log = log;
     }
 
     public override void Parse()
@@ -109,7 +102,8 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
         _userInfo.ActivationStatus = EmployeeActivationStatus.Pending;
         Action<string, Exception> log = (m, e) => { Log($"{DisplayName} ({Email}): {m}", e); };
 
-        MigratingFiles = new OCMigratingFiles(_globalFolderHelper, _daoFactory, _fileStorageService, this, _user.Storages, _rootFolder, log);
+        MigratingFiles = _serviceProvider.GetService<OCMigratingFiles>();
+        MigratingFiles.Init(this, _user.Storages, _rootFolder, log);
         MigratingFiles.Parse();
         if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
         {
@@ -117,7 +111,7 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
         }
     }
 
-    public void dataСhange(MigratingApiUser frontUser)
+    public void DataСhange(MigratingApiUser frontUser)
     {
         if (_userInfo.Email == null)
         {

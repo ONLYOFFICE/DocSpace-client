@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const UsersTable = ({ t, viewAs, usersData }) => {
+const AccountsTable = ({ t, viewAs, accountsData }) => {
   return (
     <Consumer>
       {(context) =>
@@ -12,13 +12,13 @@ const UsersTable = ({ t, viewAs, usersData }) => {
           <TableView
             t={t}
             sectionWidth={context.sectionWidth}
-            usersData={usersData}
+            accountsData={accountsData}
           />
         ) : (
           <RowView
             t={t}
             sectionWidth={context.sectionWidth}
-            usersData={usersData}
+            accountsData={accountsData}
           />
         )
       }
@@ -32,4 +32,4 @@ export default inject(({ setup }) => {
   return {
     viewAs,
   };
-})(observer(UsersTable));
+})(observer(AccountsTable));

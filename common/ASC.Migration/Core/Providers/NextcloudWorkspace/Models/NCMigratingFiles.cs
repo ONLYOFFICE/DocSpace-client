@@ -29,7 +29,7 @@ using File = System.IO.File;
 
 namespace ASC.Migration.NextcloudWorkspace.Models.Parse;
 
-[Scope]
+[Transient]
 public class NCMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _foldersCount;

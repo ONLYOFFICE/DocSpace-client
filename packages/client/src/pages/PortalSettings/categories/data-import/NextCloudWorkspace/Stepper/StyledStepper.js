@@ -11,17 +11,12 @@ export const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  .accounts-pagging {
-    margin-top: -5px;
-    margin-bottom: 30px;
-  }
-
   .data-import-progress-bar {
     width: 350px;
     margin: 12px 0 16px;
   }
 
-  .mt-8{
+  .mt-8 {
     margin-top: 8px;
   }
 `;

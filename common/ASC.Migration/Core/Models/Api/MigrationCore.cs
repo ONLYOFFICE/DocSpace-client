@@ -24,11 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Migration.Core.Core;
-using ASC.Migration.GoogleWorkspace;
-using ASC.Migration.NextcloudWorkspace;
-using ASC.Migration.OwnCloud;
-
 namespace ASC.Migration.Core.Models.Api;
 
 [Scope]
@@ -92,7 +87,13 @@ public class MigrationCore
         services.TryAdd<IMigration, GoogleWorkspaceMigration>();
         services.TryAdd<GwsMigratingUser>();
         services.TryAdd<GwsMigratingFiles>();
+
         services.TryAdd<IMigration, NextcloudWorkspaceMigration>();
+        services.TryAdd<NCMigratingUser>();
+        services.TryAdd<NCMigratingFiles>();
+
         services.TryAdd<IMigration, OwnCloudMigration>();
+        services.TryAdd<OCMigratingUser>();
+        services.TryAdd<OCMigratingFiles>();
     }
 }

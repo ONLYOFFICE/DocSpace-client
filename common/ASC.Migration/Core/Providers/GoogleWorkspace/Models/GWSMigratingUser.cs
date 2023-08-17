@@ -26,7 +26,7 @@
 
 namespace ASC.Migration.GoogleWorkspace.Models;
 
-[Scope]
+[Transient]
 public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 {
     public override string Email => _userInfo.Email;

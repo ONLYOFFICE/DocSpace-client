@@ -30,16 +30,37 @@ namespace ASC.Migration.Core;
 public class MigrationLogger : IDisposable
 {
     private readonly ILogger<MigrationLogger> _logger;
-    private readonly string _migrationLogPath;
-    private readonly Stream _migration;
-    private readonly StreamWriter _migrationLog;
+    private string _migrationLogPath;
+    private Stream _migration;
+    private StreamWriter _migrationLog;
+    private readonly StorageFactory _storageFactory;
+    private readonly TenantManager _tenantManager;
 
-    public MigrationLogger(TempPath tempPath, ILogger<MigrationLogger> logger)
+    public MigrationLogger(ILogger<MigrationLogger> logger, StorageFactory storageFactory, TenantManager tenantManager)
     {
-        _migrationLogPath = tempPath.GetTempFileName();
-        _migration = new FileStream(_migrationLogPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, System.IO.FileShare.Read, 4096, FileOptions.DeleteOnClose);
-        _migrationLog = new StreamWriter(_migration);
         _logger = logger;
+        _storageFactory = storageFactory;
+        _tenantManager = tenantManager;
+    }
+
+    public void Init(string logName = null)
+    {
+        _migrationLogPath = GetTmpFilePathAsync(logName).Result;
+        _migration = new FileStream(_migrationLogPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+        _migrationLog = new StreamWriter(_migration);
+    }
+
+    public async Task<string> GetTmpFilePathAsync(string logName)
+    {
+        var discStore = await _storageFactory.GetStorageAsync(await _tenantManager.GetCurrentTenantIdAsync(), "migration_temp", (IQuotaController)null) as DiscDataStore;
+        var folder = discStore.GetPhysicalPath("", "");
+
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+
+        return Path.Combine(folder, logName ?? Path.GetRandomFileName());
     }
 
     public void Log(string msg, Exception exception = null)
@@ -69,7 +90,6 @@ public class MigrationLogger : IDisposable
         try
         {
             _migrationLog.Dispose();
-            File.Delete(_migrationLogPath);
         }
         catch { }
     }
@@ -78,5 +98,9 @@ public class MigrationLogger : IDisposable
     {
         _migration.Position = 0;
         return _migration;
+    }
+    public string GetLogName()
+    {
+        return Path.GetFileName(_migrationLogPath);
     }
 }

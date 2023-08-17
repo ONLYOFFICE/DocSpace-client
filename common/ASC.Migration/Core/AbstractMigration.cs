@@ -30,7 +30,7 @@ namespace ASC.Migration.Core;
 public abstract class AbstractMigration<TMigrationInfo, TUser, TFiles> : IMigration
     where TMigrationInfo : IMigrationInfo
 {
-    private readonly MigrationLogger _logger;
+    protected readonly MigrationLogger _logger;
     protected CancellationToken _cancellationToken;
     protected TMigrationInfo _migrationInfo;
     private double _lastProgressUpdate;
@@ -73,9 +73,9 @@ public abstract class AbstractMigration<TMigrationInfo, TUser, TFiles> : IMigrat
         _logger.Dispose();
     }
 
-    public Stream GetLogs()
+    public string GetLogName()
     {
-        return _logger.GetStream();
+        return _logger.GetLogName();
     }
 
     public virtual List<Guid> GetGuidImportedUsers()

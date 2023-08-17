@@ -115,9 +115,16 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
         }
 
         var saved = await _userManager.GetUserByEmailAsync(_userInfo.Email);
-        if (saved != Constants.LostUser)
+        if (saved != ASC.Core.Users.Constants.LostUser)
         {
-            saved.ContactsList = saved.ContactsList.Union(_userInfo.ContactsList).ToList();
+            if (saved.ContactsList != null)
+            {
+                saved.ContactsList = saved.ContactsList.Union(_userInfo.ContactsList).ToList();
+            }
+            else
+            {
+                saved.ContactsList = _userInfo.ContactsList;
+            }
             _userInfo.Id = saved.Id;
         }
         else

@@ -31,13 +31,11 @@ namespace ASC.Api.Migration;
 [ApiController]
 public class MigrationController : ControllerBase
 {
-    private const string MigrationCacheKey = "ASC.Migration.Ongoing";
     private readonly CoreBaseSettings _coreBaseSettings;
     private readonly UserManager _userManager;
     private readonly AuthContext _authContext;
     private readonly TempPath _tempPath;
     private readonly StudioNotifyService _studioNotifyService;
-    private readonly ICache _cache;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly MigrationCore _migrationCore;
 
@@ -47,7 +45,6 @@ public class MigrationController : ControllerBase
         AuthContext authContext,
         TempPath tempPath,
         StudioNotifyService studioNotifyService,
-        ICache cache,
         IHttpContextAccessor httpContextAccessor,
         MigrationCore migrationCore)
     {
@@ -56,7 +53,6 @@ public class MigrationController : ControllerBase
         _authContext = authContext;
         _tempPath = tempPath;
         _studioNotifyService = studioNotifyService;
-        _cache = cache;
         _httpContextAccessor = httpContextAccessor;
         _migrationCore = migrationCore;
     }
@@ -152,50 +148,50 @@ public class MigrationController : ControllerBase
         await _migrationCore.Start(info);
     }
 
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    ///// <returns></returns>
-    //[HttpGet("logs")]
-    //public async Task LogsAsync()
-    //{
-    //    await DemandPermission();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("logs")]
+    public async Task LogsAsync()
+    {
+        await DemandPermission();
 
-    //    var ongoingMigration = GetOngoingMigration();
-    //    if (ongoingMigration == null)
-    //    {
-    //        throw new Exception(MigrationResource.MigrationProgressException);
-    //    }
+        var status = await _migrationCore.GetStatus();
+        if (status == null)
+        {
+            throw new Exception(MigrationResource.MigrationProgressException);
+        }
 
-    //    _httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", ContentDispositionUtil.GetHeaderValue("migration.log"));
-    //    _httpContextAccessor.HttpContext.Response.ContentType = "text/plain; charset=UTF-8";
-    //    await ongoingMigration.Migration.GetLogs().CopyToAsync(_httpContextAccessor.HttpContext.Response.Body);
-    //}
+        _httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", ContentDispositionUtil.GetHeaderValue("migration.log"));
+        _httpContextAccessor.HttpContext.Response.ContentType = "text/plain; charset=UTF-8";
+        await status.CopyLogsAsync(_httpContextAccessor.HttpContext.Response.Body);
+    }
 
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    ///// <param name="isSendWelcomeEmail"></param>
-    //[HttpPost("finish")]
-    //public async Task FinishAsync(bool isSendWelcomeEmail)
-    //{
-    //    await DemandPermission();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="inDto"></param>
+    [HttpPost("finish")]
+    public async Task FinishAsync(FinishDto inDto)
+    {
+        await DemandPermission();
 
-    //    if (isSendWelcomeEmail)
-    //    {
-    //        var ongoingMigration = GetOngoingMigration();
-    //        if (ongoingMigration == null)
-    //        {
-    //            throw new Exception(MigrationResource.MigrationProgressException);
-    //        }
-    //        var guidUsers = ongoingMigration.Migration.GetGuidImportedUsers();
-    //        foreach (var gu in guidUsers)
-    //        {
-    //            var u = await _userManager.GetUsersAsync(gu);
-    //            await _studioNotifyService.UserInfoActivationAsync(u);
-    //        }
-    //    }
-    //}
+        if (inDto.IsSendWelcomeEmail)
+        {
+            var status = await _migrationCore.GetStatus();
+            if (status == null)
+            {
+                throw new Exception(MigrationResource.MigrationProgressException);
+            }
+            var guidUsers = status.ImportedUsers;
+            foreach (var gu in guidUsers)
+            {
+                var u = await _userManager.GetUsersAsync(gu);
+                await _studioNotifyService.UserInfoActivationAsync(u);
+            }
+        }
+    }
 
     private async Task DemandPermission()
     {

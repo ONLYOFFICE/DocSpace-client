@@ -49,6 +49,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
 
     public override void Init(string path, CancellationToken cancellationToken)
     {
+        _logger.Init();
         _cancellationToken = cancellationToken;
         var files = Directory.GetFiles(path);
         if (!files.Any() || !files.Any(f => f.EndsWith(".zip")))
@@ -299,14 +300,13 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     public override async Task Migrate(MigrationApiInfo migrationApiInfo)
     {
         ReportProgress(0, MigrationResource.PreparingForMigration);
-
+        _importedUsers = new List<Guid>();
         _migrationInfo.Merge(migrationApiInfo);
 
         var usersForImport = _migrationInfo.Users
             .Where(u => u.Value.ShouldImport)
             .Select(u => u.Value);
 
-        _importedUsers = new List<Guid>();
         var failedUsers = new List<OCMigratingUser>();
         var usersCount = usersForImport.Count();
         var progressStep = 25 / usersCount;

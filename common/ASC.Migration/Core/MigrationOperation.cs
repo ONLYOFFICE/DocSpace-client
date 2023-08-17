@@ -33,6 +33,7 @@ public class MigrationOperation : DistributedTaskProgress
     private readonly MigrationCore _migrationCore;
     private readonly TenantManager _tenantManager;
     private readonly SecurityContext _securityContext;
+    private readonly IServiceProvider _serviceProvider;
     private string _migratorName;
     private string _path;
     private Guid _userId;
@@ -59,16 +60,40 @@ public class MigrationOperation : DistributedTaskProgress
         }
     }
 
+    private List<Guid> _importedUsers;
+    public List<Guid> ImportedUsers
+    {
+        get => _migrationApiInfo ?? System.Text.Json.JsonSerializer.Deserialize<List<Guid>>(this[nameof(_importedUsers)]);
+        set
+        {
+            _importedUsers = value;
+            this[nameof(_importedUsers)] = System.Text.Json.JsonSerializer.Serialize(value);
+        }
+    }
+
+    private string _logName;
+    public string LogName
+    {
+        get => _logName ?? this[nameof(_logName)];
+        set
+        {
+            _logName = value;
+            this[nameof(_logName)] = value;
+        }
+    }
+
     public MigrationOperation(
         ILogger<MigrationOperation> logger,
         MigrationCore migrationCore,
         TenantManager tenantManager,
-        SecurityContext securityContext)
+        SecurityContext securityContext,
+        IServiceProvider serviceProvider)
     {
         _logger = logger;
         _migrationCore = migrationCore;
         _tenantManager = tenantManager;
         _securityContext = securityContext;
+        _serviceProvider = serviceProvider;
     }
 
     public void InitParse(int tenantId, Guid userId, string migratorName, string path)
@@ -91,7 +116,6 @@ public class MigrationOperation : DistributedTaskProgress
     protected override async Task DoJob()
     {
         IMigration migrator = null;
-
         try
         {
             CustomSynchronizationContext.CreateContext();
@@ -116,9 +140,10 @@ public class MigrationOperation : DistributedTaskProgress
                 throw new Exception(string.Format(MigrationResource.MigrationUploadException, _migratorName), ex);
             }
 
-            await migrator.Parse(_migrationApiInfo == null);
+            var onlyParse = _migrationApiInfo == null;
+            await migrator.Parse(onlyParse);
 
-            if (_migrationApiInfo != null)
+            if (!onlyParse)
             {
                 await migrator.Migrate(_migrationApiInfo);
             }
@@ -131,11 +156,15 @@ public class MigrationOperation : DistributedTaskProgress
         finally
         {
             IsCompleted = true;
-            PublishChanges();
             if (migrator != null)
             {
                 migrator.OnProgressUpdate -= Migrator_OnProgressUpdate;
+                ImportedUsers = migrator.GetGuidImportedUsers();
+                LogName = migrator.GetLogName();
             }
+
+            migrator.Dispose();
+            PublishChanges();
         }
 
         void Migrator_OnProgressUpdate(double arg1, string arg2)
@@ -147,5 +176,12 @@ public class MigrationOperation : DistributedTaskProgress
             }
             PublishChanges();
         }
+    }
+
+    public async Task CopyLogsAsync(Stream stream)
+    {
+        using var logger = _serviceProvider.GetService<MigrationLogger>();
+        logger.Init(LogName);
+        await logger.GetStream().CopyToAsync(stream);
     }
 }

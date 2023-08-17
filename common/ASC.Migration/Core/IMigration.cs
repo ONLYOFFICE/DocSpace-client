@@ -41,7 +41,7 @@ public interface IMigration : IDisposable
 
     Task Migrate(MigrationApiInfo migrationInfo);
 
-    Stream GetLogs();
+    string GetLogName();
 
     List<Guid> GetGuidImportedUsers();
 

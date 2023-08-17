@@ -3,32 +3,22 @@ import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
 const UserskRow = (props) => {
-  const { data, sectionWidth } = props;
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const onChangeCheckbox = () => {
-    setIsChecked((prev) => !prev);
-  };
+  const { data, sectionWidth, isChecked, toggleAccount } = props;
 
   return (
-    <>
-      <Row
+    <Row
+      sectionWidth={sectionWidth}
+      data={data}
+      checked={isChecked}
+      checkbox
+      onClick={toggleAccount}
+      onSelect={toggleAccount}>
+      <UsersRowContent
         sectionWidth={sectionWidth}
-        key={data.id}
-        data={data}
-        onClick={() => console.log("row click")}
-      >
-        <UsersRowContent
-          sectionWidth={sectionWidth}
-          displayName={data.displayName}
-          email={data.email}
-          dublicate={data.dublicate}
-          isChecked={isChecked}
-          onChangeCheckbox={onChangeCheckbox}
-        />
-      </Row>
-    </>
+        displayName={data.displayName}
+        email={data.email}
+      />
+    </Row>
   );
 };
 

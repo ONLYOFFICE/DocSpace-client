@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
+import styled from "styled-components";
 
 import AccessRightSelect from "@docspace/components/access-right-select";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
-import styled from "styled-components";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
@@ -45,31 +45,16 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const data = [
-  {
-    key: "docspace-admin",
-    label: "DocSpace admin",
-  },
-  {
-    key: "room-admin",
-    label: "Room admin",
-  },
-  {
-    key: "power-user",
-    label: "Power user",
-  },
-];
-
 const UsersTypeTableRow = ({
   id,
   displayName,
   email,
-  // type,
   isChecked,
   checkbox,
   onChangeCheckbox,
+  typeOptions,
 }) => {
-  const [selectUserType, setSelectUserType] = useState(data[2]);
+  const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
   const userTypeRef = useRef();
 
   const onChange = (e) => {
@@ -86,7 +71,7 @@ const UsersTypeTableRow = ({
       <TableCell>
         <div ref={userTypeRef}>
           <AccessRightSelect
-            accessOptions={data}
+            accessOptions={typeOptions}
             selectedOption={selectUserType}
             scaledOptions={false}
             scaled={false}

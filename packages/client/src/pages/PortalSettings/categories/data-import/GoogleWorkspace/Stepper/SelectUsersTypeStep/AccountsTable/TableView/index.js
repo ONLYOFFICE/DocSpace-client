@@ -10,11 +10,10 @@ import UsersTypeTableRow from "./UsersTypeTableRow";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
-import SearchInput from "@docspace/components/search-input";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 const StyledTableContainer = styled(TableContainer)`
-  margin: 20px 0;
+  margin: 0 0 20px;
 
   .table-group-menu {
     height: 69px;
@@ -40,6 +39,7 @@ const StyledTableContainer = styled(TableContainer)`
 
   .header-container-text {
     font-size: 12px;
+    color: #a3a9ae;
   }
 
   .table-container_header {
@@ -58,33 +58,46 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const data = [
-  {
-    key: "docspace-admin",
-    label: "DocSpace admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "room-admin",
-    label: "Room admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "power-user",
-    label: "Power user",
-    onClick: () => console.log("changed-type"),
-  },
-];
-
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
-const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth, accountsData } = props;
+const TableView = ({
+  userId,
+  viewAs,
+  setViewAs,
+  sectionWidth,
+  accountsData,
+  typeOptions,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
+
+  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+  useEffect(() => {
+    if (!sectionWidth) return;
+    if (sectionWidth < 1025 || isMobile) {
+      viewAs !== "row" && setViewAs("row");
+    } else {
+      viewAs !== "table" && setViewAs("table");
+    }
+  }, [sectionWidth]);
+
+  const headerMenu = [
+    {
+      id: "change-type",
+      key: "change-type",
+      label: "Change type",
+      disabled: false,
+      onClick: () => console.log("open-menu"),
+      withDropDown: true,
+      options: typeOptions,
+      iconUrl: ChangeTypeReactSvgUrl,
+    },
+  ];
 
   const onCheck = (checked) => {
     setIsChecked(checked);
@@ -107,31 +120,6 @@ const TableView = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
-
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-
-  const headerMenu = [
-    {
-      id: "change-type",
-      key: "change-type",
-      label: "Change type",
-      disabled: false,
-      onClick: () => console.log("open-menu"),
-      withDropDown: true,
-      options: data,
-      iconUrl: ChangeTypeReactSvgUrl,
-    },
-  ];
-
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       {checkbox.length > 0 && (
@@ -147,13 +135,6 @@ const TableView = (props) => {
           />
         </div>
       )}
-
-      <SearchInput
-        id="search-users-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
-      />
       <UsersTypeTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
@@ -184,6 +165,7 @@ const TableView = (props) => {
             checkbox={checkbox}
             isChecked={isChecked}
             onChangeCheckbox={onChangeCheckbox}
+            typeOptions={typeOptions}
           />
         ))}
       </TableBody>

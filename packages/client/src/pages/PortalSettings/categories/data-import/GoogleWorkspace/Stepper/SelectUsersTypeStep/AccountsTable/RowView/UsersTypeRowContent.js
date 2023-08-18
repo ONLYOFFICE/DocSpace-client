@@ -50,23 +50,13 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const data = [
-  {
-    key: "docspace-admin",
-    label: "DocSpace admin",
-  },
-  {
-    key: "room-admin",
-    label: "Room admin",
-  },
-  {
-    key: "power-user",
-    label: "Power user",
-  },
-];
-
-const UsersTypeRowContent = ({ sectionWidth, displayName, email, type }) => {
-  const [selectUserType, setSelectUserType] = useState(data[2]);
+const UsersTypeRowContent = ({
+  sectionWidth,
+  displayName,
+  email,
+  typeOptions,
+}) => {
+  const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
   const userTypeRef = useRef();
 
   const contentData = [
@@ -80,7 +70,7 @@ const UsersTypeRowContent = ({ sectionWidth, displayName, email, type }) => {
 
       <div ref={userTypeRef}>
         <AccessRightSelect
-          accessOptions={data}
+          accessOptions={typeOptions}
           selectedOption={selectUserType}
           scaledOptions={false}
           scaled={false}

@@ -3,41 +3,24 @@ import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import SearchInput from "@docspace/components/search-input";
-import RowContainer from "@docspace/components/row-container";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import Text from "@docspace/components/text";
-import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
+
 import UsersTypeRow from "./UsersTypeRow";
 
+import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
+import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
-
-const StyledRow = styled(Row)`
-  box-sizing: border-box;
-  min-height: 40px;
-
-  .row-header-title {
-    color: #a3a9ae;
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  @media ${tablet} {
-    .row_content {
-      height: auto;
-    }
-  }
-`;
+import Text from "@docspace/components/text";
+import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin: 20px 0;
+  margin: 0 0 20px;
 
   .table-group-menu {
     height: 60px;
     position: absolute;
     z-index: 201;
     left: -20px;
-    top: 0;
+    top: -35px;
     width: 100%;
 
     .table-container_group-menu {
@@ -57,6 +40,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .header-container-text {
     font-size: 12px;
+    color: #a3a9ae;
   }
 
   .table-container_header {
@@ -64,46 +48,34 @@ const StyledRowContainer = styled(RowContainer)`
   }
 `;
 
-const data = [
-  {
-    key: "docspace-admin",
-    label: "DocSpace admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "room-admin",
-    label: "Room admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "power-user",
-    label: "Power user",
-    onClick: () => console.log("changed-type"),
-  },
-];
+const StyledRow = styled(Row)`
+  box-sizing: border-box;
+  min-height: 40px;
 
-const RowView = (props) => {
-  const { t, sectionWidth, viewAs, setViewAs, accountsData } = props;
+  .row-header-title {
+    color: #a3a9ae;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  @media ${tablet} {
+    .row_content {
+      height: auto;
+    }
+  }
+`;
+
+const RowView = ({
+  t,
+  sectionWidth,
+  viewAs,
+  setViewAs,
+  accountsData,
+  typeOptions,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkbox, setCheckbox] = useState([]);
   const rowRef = useRef(null);
-
-  const onChangeAllCheckbox = (checked) => {
-    setIsChecked(checked);
-    if (checked) {
-      setCheckbox(accountsData.map((data) => data.id));
-    } else {
-      setCheckbox([]);
-    }
-  };
-
-  const onChangeCheckbox = (id, checked) => {
-    if (checked) {
-      setCheckbox([...checkbox, id]);
-    } else {
-      setCheckbox([...checkbox.filter((item) => item !== id)]);
-    }
-  };
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -123,10 +95,27 @@ const RowView = (props) => {
       disabled: false,
       onClick: () => console.log("open-menu"),
       withDropDown: true,
-      options: data,
+      options: typeOptions,
       iconUrl: ChangeTypeReactSvgUrl,
     },
   ];
+
+  const onChangeAllCheckbox = (checked) => {
+    setIsChecked(checked);
+    if (checked) {
+      setCheckbox(accountsData.map((data) => data.id));
+    } else {
+      setCheckbox([]);
+    }
+  };
+
+  const onChangeCheckbox = (id, checked) => {
+    if (checked) {
+      setCheckbox([...checkbox, id]);
+    } else {
+      setCheckbox([...checkbox.filter((item) => item !== id)]);
+    }
+  };
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
@@ -143,12 +132,6 @@ const RowView = (props) => {
           />
         </div>
       )}
-      <SearchInput
-        id="search-types-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
-      />
 
       <StyledRow
         key="Name"
@@ -167,6 +150,7 @@ const RowView = (props) => {
           checkbox={checkbox}
           isChecked={isChecked}
           onChangeCheckbox={onChangeCheckbox}
+          typeOptions={typeOptions}
         />
       ))}
     </StyledRowContainer>

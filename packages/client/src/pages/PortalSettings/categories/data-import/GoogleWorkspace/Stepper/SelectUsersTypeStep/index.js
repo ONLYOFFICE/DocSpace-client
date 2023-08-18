@@ -4,26 +4,15 @@ import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
-import Text from "@docspace/components/text";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-const StyledText = styled(Text)`
-  color: #f21c0e;
-  margin-top: 16px;
-  font-size: 12px;
-  font-weight: 600;
+const StyledSearchInput = styled(SearchInput)`
+  margin-top: 20px;
 `;
 
-const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
-  const [isExceeded, setIsExceeded] = useState(false);
+const SelectUsersTypeStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
-
-  const selectedUsers = 0;
-  const totalUsers = 10;
-  const licencelimit = 0;
-  const totalLicenceLimit = 100;
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(mockData.slice(leftBoundary, rightBoundary));
@@ -41,18 +30,8 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         displaySettings={true}
       />
 
-      {isExceeded && <StyledText>{t("Settings:UserLimitExceeded")}</StyledText>}
-
-      <UsersInfoBlock
-        t={t}
-        selectedUsers={selectedUsers}
-        totalUsers={totalUsers}
-        licencelimit={licencelimit}
-        totalLicenceLimit={totalLicenceLimit}
-      />
-
-      <SearchInput
-        id="search-users-input"
+      <StyledSearchInput
+        id="search-users-type-input"
         placeholder={t("Common:Search")}
         onChange={() => console.log("changed")}
         onClearSearch={() => console.log("cleared")}
@@ -71,4 +50,4 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   );
 };
 
-export default SelectUsersStep;
+export default SelectUsersTypeStep;

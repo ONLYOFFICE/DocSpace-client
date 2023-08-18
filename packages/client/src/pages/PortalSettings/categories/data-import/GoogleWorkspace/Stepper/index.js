@@ -1,6 +1,6 @@
 import SelectFileStep from "./SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
-import ThirdStep from "./ThirdStep";
+import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import FourthStep from "./FourthStep";
 import FifthStep from "./FifthStep";
 import SixthStep from "./SixthStep";
@@ -37,7 +37,7 @@ const StepContent = ({
       );
     case 3:
       return (
-        <ThirdStep
+        <SelectUsersTypeStep
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}

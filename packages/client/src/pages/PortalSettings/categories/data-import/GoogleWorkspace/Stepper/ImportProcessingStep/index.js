@@ -5,26 +5,17 @@ import styled from "styled-components";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import ProgressBar from "@docspace/components/progress-bar";
 import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
 
 const Wrapper = styled.div`
   max-width: 350px;
 
-  .data-import-progress-text {
-    position: relative;
-    max-width: 700px;
-    font-size: 12px;
-    margin-bottom: 8px;
-    line-height: 16px;
-    color: #333333;
-  }
-
   .data-import-progress-bar {
+    margin-top: -8px;
     margin-bottom: 16px;
   }
 `;
 
-const FifthStep = ({
+const ImportProcessingStep = ({
   t,
   onNextStep,
   onPrevStep,
@@ -59,9 +50,6 @@ const FifthStep = ({
 
   return (
     <Wrapper>
-      <Text className="data-import-progress-text">
-        {t("Settings:DataImportProcessingDescription")}
-      </Text>
       {percent < 102 ? (
         <>
           <ProgressBar percent={percent} className="data-import-progress-bar" />
@@ -95,4 +83,4 @@ const FifthStep = ({
   );
 };
 
-export default FifthStep;
+export default ImportProcessingStep;

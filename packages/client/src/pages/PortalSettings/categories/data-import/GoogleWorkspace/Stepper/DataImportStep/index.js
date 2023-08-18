@@ -2,9 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import ImportSection from "../../../sub-components/ImportSection";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   gap: 12px;
 `;
 
-const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
+const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   const [isChecked, setIsChecked] = useState({
     users: true,
     pFiles: true,
@@ -26,16 +26,18 @@ const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
     }));
   };
 
+  const serviceName = "Google Workspace";
+
   return (
     <Wrapper>
       <ImportSection
         isChecked={isChecked.users}
         onChange={() => onChange("users")}
         sectionName="Users"
-        description="Section “Users” includes the users you selected in the previous step. By default, it is always enabled and can't be unselected."
-        exportSection={{ sectionName: "Users", workspace: "Google Workspace" }}
+        description={t("Settings:UsersSectionDescription")}
+        exportSection={{ sectionName: "Users", workspace: serviceName }}
         importSection={{
-          sectionName: "Accounts",
+          sectionName: t("Common:Accounts"),
           workspace: "DocSpace",
           SectionIcon: PeopleIcon,
         }}
@@ -44,14 +46,14 @@ const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
       <ImportSection
         isChecked={isChecked.pFiles}
         onChange={() => onChange("pFiles")}
-        sectionName="Personal files"
-        description={`Files and documents of Google Workspace users will be imported into the users' "My Documents" section.`}
+        sectionName={t("Settings:PersonalFiles")}
+        description={t("Settings:PersonalFilesDescription", { serviceName })}
         exportSection={{
           sectionName: "Google Drive's Files",
-          workspace: "Google Workspace",
+          workspace: serviceName,
         }}
         importSection={{
-          sectionName: "Accounts",
+          sectionName: t("Common:Accounts"),
           workspace: "My documents",
           SectionIcon: UserIcon,
         }}
@@ -59,11 +61,11 @@ const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
       <ImportSection
         isChecked={isChecked.sFiles}
         onChange={() => onChange("sFiles")}
-        sectionName="Shared files"
-        description="Files shared with other users will be copied to their personal documents regardless of the permission level in Google Workspace."
+        sectionName={t("Settings:SharedFiles")}
+        description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
           sectionName: "Shared Files",
-          workspace: "Google Workspace",
+          workspace: serviceName,
         }}
         importSection={{
           sectionName: "My documents",
@@ -84,4 +86,4 @@ const FourthStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
     </Wrapper>
   );
 };
-export default FourthStep;
+export default ImportStep;

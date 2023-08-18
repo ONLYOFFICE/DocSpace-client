@@ -20,7 +20,7 @@ const StyledTableContainer = styled(TableContainer)`
     position: absolute;
     z-index: 201;
     left: 0;
-    top: 214px;
+    top: 209px;
     width: 100%;
 
     .table-container_group-menu {

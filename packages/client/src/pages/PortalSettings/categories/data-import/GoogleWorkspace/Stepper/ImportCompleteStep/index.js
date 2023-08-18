@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
-import styled from "styled-components";
+
+const StyledText = styled(Text)`
+  margin-top: -8px;
+  margin-bottom: 16px;
+`;
 
 const ButtonsWrapper = styled.div`
   max-width: 445px;
@@ -13,8 +20,12 @@ const ButtonsWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const SixthStep = ({ t }) => {
+const ImportCompleteStep = ({ t }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+
+  const selectedUsers = 70;
+  const importedUsers = 70;
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
@@ -22,9 +33,13 @@ const SixthStep = ({ t }) => {
 
   return (
     <>
+      <StyledText>
+        {t("Settings:ImportedUsers", { selectedUsers, importedUsers })}
+      </StyledText>
+
       <Box displayProp="flex" alignItems="center" marginProp="0 0 16px">
         <Checkbox
-          label="Send welcome letter"
+          label={t("Settings:SendWelcomeLetter")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
         />
@@ -33,21 +48,23 @@ const SixthStep = ({ t }) => {
           offsetRight={0}
           style={{ marginLeft: "4px" }}
           tooltipContent={
-            <Text fontSize="12px">
-              If checked, all new users will receive welcome letter with
-              authorization details.
-            </Text>
+            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
           }
         />
       </Box>
 
       <ButtonsWrapper>
-        <Button size="small" label="Finish" primary />
-        <Button size="small" label="Download log" />
-        <Button size="small" label="Delete temporary file" />
+        <Button
+          size="small"
+          label={t("Common:Finish")}
+          primary
+          onClick={() => navigate(-1)}
+        />
+        <Button size="small" label={t("Settings:DownloadLog")} />
+        <Button size="small" label={t("Settings:DeleteTemporaryFile")} />
       </ButtonsWrapper>
     </>
   );
 };
 
-export default SixthStep;
+export default ImportCompleteStep;

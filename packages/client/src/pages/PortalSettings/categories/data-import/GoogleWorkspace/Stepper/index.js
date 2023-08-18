@@ -1,9 +1,9 @@
 import SelectFileStep from "./SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
-import FourthStep from "./FourthStep";
-import FifthStep from "./FifthStep";
-import SixthStep from "./SixthStep";
+import ImportStep from "./DataImportStep";
+import ImportProcessingStep from "./ImportProcessingStep";
+import ImportCompleteStep from "./ImportCompleteStep";
 
 const StepContent = ({
   t,
@@ -46,7 +46,7 @@ const StepContent = ({
       );
     case 4:
       return (
-        <FourthStep
+        <ImportStep
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}
@@ -55,7 +55,7 @@ const StepContent = ({
       );
     case 5:
       return (
-        <FifthStep
+        <ImportProcessingStep
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}
@@ -65,7 +65,7 @@ const StepContent = ({
       );
     case 6:
       return (
-        <SixthStep
+        <ImportCompleteStep
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}

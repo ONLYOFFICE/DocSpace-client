@@ -1,7 +1,7 @@
 import SelectFileStep from "./SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
-import ImportStep from "./DataImportStep";
+import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 

@@ -17,14 +17,19 @@ export const getStepTitle = (t, stepIndex) => {
   }
 };
 
-export const getStepDescription = (t, stepIndex) => {
+export const getStepDescription = (t, stepIndex, renderTooltip) => {
   switch (stepIndex) {
     case 1:
       return t("Settings:SelectFileDescription");
     case 2:
       return t("Settings:SelectUsersDescription");
     case 3:
-      return t("Settings:SelectUserTypesDescription");
+      return (
+        <>
+          {t("Settings:SelectUserTypesDescription")}
+          {renderTooltip}
+        </>
+      );
     case 4:
       return t("Settings:ImportSectionDescription");
     case 5:

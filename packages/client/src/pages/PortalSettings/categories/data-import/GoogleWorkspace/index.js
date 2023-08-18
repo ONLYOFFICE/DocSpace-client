@@ -35,18 +35,11 @@ const GoogleWrapper = styled.div`
   }
 
   .step-description {
-    position: relative;
     max-width: 700px;
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
     color: #333333;
-  }
-
-  .step-tooltip {
-    position: absolute;
-    top: 18px;
-    right: 45%;
   }
 `;
 
@@ -88,26 +81,33 @@ const GoogleWorkspace = (props) => {
     }
   };
 
+  const helpContent = () => (
+    <Text fontSize="12px">
+      <Trans
+        i18nKey="TypesAndPrivileges"
+        ns="Settings"
+        t={t}
+        components={{
+          1: <strong></strong>,
+          2: <strong></strong>,
+          3: <strong></strong>,
+          4: <strong></strong>,
+        }}
+      />
+    </Text>
+  );
+
   const renderTooltip = (
     <HelpButton
-      className="step-tooltip"
+      place="bottom"
       offsetRight={0}
-      size={12}
-      tooltipContent={
-        <Text fontSize="12px">
-          <Trans
-            i18nKey="TypesAndPrivileges"
-            ns="Settings"
-            t={t}
-            components={{
-              1: <strong></strong>,
-              2: <strong></strong>,
-              3: <strong></strong>,
-              4: <strong></strong>,
-            }}
-          />
-        </Text>
-      }
+      getContent={helpContent}
+      style={{
+        display: "inline-block",
+        position: "relative",
+        bottom: "-2px",
+        marginLeft: "4px",
+      }}
     />
   );
 
@@ -129,8 +129,7 @@ const GoogleWorkspace = (props) => {
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Text className="step-description">
-          {getStepDescription(t, currentStep)}
-          {isThirdStep && renderTooltip}
+          {getStepDescription(t, currentStep, renderTooltip)}
         </Text>
         <StepContent
           t={t}

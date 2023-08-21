@@ -53,10 +53,6 @@ const AccountsPaging = (props) => {
   const onSelectPageNextHandler = () => {
     const currentPage = pageItems[selectedPageItem.pageNumber + 1];
     if (currentPage) {
-      console.log(
-        currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count
-      );
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
         (currentPage.pageNumber + 1) * selectedCountItem.count

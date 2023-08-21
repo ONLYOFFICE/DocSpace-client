@@ -1,15 +1,20 @@
-import React from "react";
+import { tablet } from "@docspace/components/utils/device";
+
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
 import styled, { css } from "styled-components";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 
 const SectionWrapper = styled.div`
-  width: 700px;
+  max-width: 700px;
   padding: 12px;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
+
+  @media ${tablet} {
+    max-width: 675px;
+  }
 
   border-radius: 6px;
   background: #f8f9f9;
@@ -111,7 +116,11 @@ const ImportSection = ({
         <Text lineHeight="20px" fontWeight={600}>
           {sectionName}
         </Text>
-        <Text fontSize="12px" className="description" color={isChecked ? "#333" : "#A3A9AE"}>
+        <Text
+          fontSize="12px"
+          className="description"
+          color={isChecked ? "#333" : "#A3A9AE"}
+        >
           {description}
         </Text>
         <FlexContainer>

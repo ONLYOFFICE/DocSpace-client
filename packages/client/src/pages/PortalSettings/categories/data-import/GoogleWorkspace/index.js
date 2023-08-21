@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { isMobileOnly, isDesktop } from "react-device-detect";
 import { getStepTitle, getStepDescription } from "../../../utils";
+import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 import StepContent from "./Stepper";
@@ -21,6 +22,10 @@ const GoogleWrapper = styled.div`
     max-width: 700px;
     line-height: 20px;
     margin-bottom: 20px;
+
+    @media ${tablet} {
+      max-width: 675px;
+    }
   }
 
   .step-counter {
@@ -40,6 +45,10 @@ const GoogleWrapper = styled.div`
     margin-bottom: 16px;
     line-height: 16px;
     color: #333333;
+
+    @media ${tablet} {
+      max-width: 675px;
+    }
   }
 `;
 

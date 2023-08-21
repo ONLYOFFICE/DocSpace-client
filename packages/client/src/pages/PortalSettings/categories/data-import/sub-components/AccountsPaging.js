@@ -4,7 +4,6 @@ import Paging from "@docspace/components/paging";
 
 const SyledPaging = styled(Paging)`
   display: flex;
-  margin-top: -5px;
   margin-bottom: 30px;
   align-items: center;
   justify-content: center;

@@ -22,12 +22,14 @@ const Wrapper = styled.div`
     margin-right: 24px;
     color: #555f65;
     font-weight: 700;
+    font-size: 14px;
   }
 
   .selected-admins-count {
     margin-right: 8px;
     color: #555f65;
     font-weight: 700;
+    font-size: 14px;
   }
 `;
 

@@ -84,9 +84,23 @@ const Tile = (props) => {
         onClick: onCreateForm,
       },
       {
+        key: "preview",
+        label: t("Common:Preview"),
+        onClick: () => {},
+      },
+      {
         key: "template-info",
         label: t("TemplateInfo"),
         onClick: onShowTemplateInfo,
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        key: "suggest-changes",
+        label: t("FormGallery:SuggestChanges"),
+        onClick: () => {},
       },
     ];
   };

@@ -236,7 +236,17 @@ const ClientRoutes = [
     element: <Navigate to="/rooms/shared" replace />,
   },
   {
-    path: "/form-gallery/:folderId",
+    path: "/form-gallery",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <FormGallery />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/form-gallery/filter",
     element: (
       <PrivateRoute>
         <ErrorBoundary>

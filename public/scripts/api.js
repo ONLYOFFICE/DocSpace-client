@@ -28,6 +28,7 @@
       search: "",
       roomId: null,
       withSubfolders: true,
+      locale: "en",
     },
     keysForReload: [
       "src",

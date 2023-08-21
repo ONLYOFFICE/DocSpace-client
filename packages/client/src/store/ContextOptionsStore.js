@@ -1159,7 +1159,7 @@ class ContextOptionsStore {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security.Download,
+        disabled: !item.security?.Download,
       },
       {
         id: "option_download-as",
@@ -1167,7 +1167,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !item.security.Download || this.publicRoomStore.isPublicRoom,
+        disabled: !item.security?.Download || this.publicRoomStore.isPublicRoom,
       },
       ...moveActions,
       {

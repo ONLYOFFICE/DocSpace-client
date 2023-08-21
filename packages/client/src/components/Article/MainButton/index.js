@@ -197,7 +197,7 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    navigate(`/form-gallery`);
   };
 
   const onInvite = React.useCallback((e) => {

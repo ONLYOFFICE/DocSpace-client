@@ -7,18 +7,44 @@ import { ContextMenu, ContextMenuButton } from "@docspace/components";
 import ContextHelper from "../../helpers/ContextHelper";
 
 const StyledItemContextOptions = styled.div`
-  margin-left: auto;
+  height: 16px;
+  ${({ withLabel }) => !withLabel && "margin-left: auto;"}
 `;
+
+const getFormContextOptions = (t) => [
+  {
+    key: "create",
+    label: t("Common:Create"),
+    onClick: () => {},
+  },
+  {
+    key: "preview",
+    label: t("Common:Preview"),
+    onClick: () => {},
+  },
+  {
+    key: "separator",
+    isSeparator: true,
+  },
+  {
+    key: "suggest-changes",
+    label: t("FormGallery:SuggestChanges"),
+    onClick: () => {},
+  },
+];
 
 const ItemContextOptions = ({
   t,
   selection,
+  isForm = false,
   getContextOptions,
   getContextOptionActions,
   getUserContextOptions,
 
   isUser = false,
   itemTitleRef,
+
+  withLabel = false,
 }) => {
   if (!selection) return null;
 
@@ -59,11 +85,12 @@ const ItemContextOptions = ({
   const options = contextHelper?.getItemContextOptions();
 
   const getData = () => {
+    if (isForm) return getFormContextOptions(t);
     return options;
   };
 
   return (
-    <StyledItemContextOptions>
+    <StyledItemContextOptions withLabel={withLabel}>
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}

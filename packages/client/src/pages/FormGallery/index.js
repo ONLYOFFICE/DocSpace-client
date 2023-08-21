@@ -1,20 +1,35 @@
 import React, { useEffect } from "react";
 import Section from "@docspace/common/components/Section";
 import { observer, inject } from "mobx-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import SectionHeaderContent from "./Header";
 import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
+import SectionFilterContent from "./Filter";
+import OformsFilter from "@docspace/common/api/oforms/filter";
 
 const FormGallery = ({ getOforms, setOformFiles }) => {
-  useEffect(() => {
-    getOforms();
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!window.location.search) {
+      const defaultFilter = OformsFilter.getDefault();
+      navigate(`${location.pathname}/filter?${defaultFilter.toUrlParams()}`);
+      getOforms(defaultFilter);
+    } else {
+      const firstLoadFilter = OformsFilter.getFilter(window.location);
+      getOforms(firstLoadFilter);
+    }
     return () => {
       setOformFiles(null);
     };
   }, [getOforms, setOformFiles]);
+
+  const [value, setValue] = React.useState("");
+  const onChange = (e) => setValue(e.target.value);
 
   return (
     <Section
@@ -22,9 +37,13 @@ const FormGallery = ({ getOforms, setOformFiles }) => {
       // withBodyAutoFocus={!isMobile}
       withPaging={false}
     >
+      <input value={value} onChange={onChange} />
       <Section.SectionHeader>
         <SectionHeaderContent />
       </Section.SectionHeader>
+      <Section.SectionFilter>
+        <SectionFilterContent />
+      </Section.SectionFilter>
       <Section.SectionBody>
         <SectionBodyContent />
       </Section.SectionBody>

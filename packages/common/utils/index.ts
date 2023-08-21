@@ -66,6 +66,7 @@ export function getObjectByLocation(location) {
   if (!location.search || !location.search.length) return null;
 
   const searchUrl = location.search.substring(1);
+  console.log(searchUrl);
   const decodedString = decodeURIComponent(searchUrl)
     .replace(/\["/g, '["')
     .replace(/"\]/g, '"]')
@@ -79,6 +80,7 @@ export function getObjectByLocation(location) {
     .replace(/\]"/g, "]")
     .replace(/\\\\",\\\\"/g, '","');
 
+  console.log(`{"${decodedString}"}`);
   const object = JSON.parse(`{"${decodedString}"}`);
 
   return object;
@@ -303,6 +305,12 @@ export function getLanguage(lng) {
   return lng;
 }
 
+export const getDefaultOformLocale = () => {
+  const avialableLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
+  const userLocale = getCookie(LANGUAGE) || "en";
+  return avialableLocales.includes(userLocale) ? userLocale : "en";
+};
+
 export function loadScript(url, id, onLoad, onError) {
   try {
     const script = document.createElement("script");
@@ -347,6 +355,31 @@ export function convertLanguage(key) {
       return "it";
     case "fr-FR":
       return "fr";
+  }
+
+  return key;
+}
+
+export function convertToCulture(key: string) {
+  switch (key) {
+    case "en":
+      return "en-US";
+    case "el":
+      return "el-GR";
+    case "hy":
+      return "hy-AM";
+    case "ko":
+      return "ko-KR";
+    case "lo":
+      return "lo-LA";
+    case "pt":
+      return "pt-BR";
+    case "uk":
+      return "uk-UA";
+    case "ja":
+      return "ja-JP";
+    case "zh":
+      return "zh-CN";
   }
 
   return key;

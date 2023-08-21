@@ -244,7 +244,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    navigate(`/form-gallery/`);
   };
 
   const createFolder = () => onCreate();
@@ -1126,7 +1126,8 @@ export default inject(
 
     const selectedFolder = { ...selectedFolderStore };
 
-    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } = auth.settingsStore;
+    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } =
+      auth.settingsStore;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;

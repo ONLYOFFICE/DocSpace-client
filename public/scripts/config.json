@@ -4,6 +4,11 @@
     "prefix": "/api/2.0",
     "timeout": 30000
   },
+  "oformsApi": {
+    "origin": "https://cmsoforms.onlyoffice.com/",
+    "prefix": "/api",
+    "timeout": 30000
+  },
   "proxy": {
     "url": ""
   },

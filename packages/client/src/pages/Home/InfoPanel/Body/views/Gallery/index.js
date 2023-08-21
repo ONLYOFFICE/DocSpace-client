@@ -10,7 +10,13 @@ import Text from "@docspace/components/text";
 
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
 import { StyledGalleryThumbnail } from "../../styles/gallery.js";
-import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
+import {
+  StyledDescription,
+  StyledLink,
+  StyledProperties,
+  StyledSubtitle,
+} from "../../styles/common.js";
+import Link from "@docspace/components/link/index.js";
 
 const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
   const thumbnailBlank = getIcon(96, ".docxf");
@@ -30,9 +36,34 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
         </div>
       )}
 
+      <StyledLink>
+        <Link
+          className="link"
+          href={"https://oforms.onlyoffice.com/form-submit"}
+          target="_blank"
+          type="action"
+          isHovered
+        >
+          {t("FormGallery:SuggestChanges")}
+        </Link>
+      </StyledLink>
+
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
-          {t("InfoPanel:SystemProperties")}
+          {t("Description")}
+        </Text>
+      </StyledSubtitle>
+
+      <StyledDescription>
+        Fill out the form online and get a recipe page ready, or just download
+        the template in the desirable format: DOCXF, OFORM, or PDF. Designing
+        custom recipe cards or pages helps create useful complimentary content
+        for cooking blogs, culinary websites, or restaurants.
+      </StyledDescription>
+
+      <StyledSubtitle>
+        <Text fontWeight="600" fontSize="14px">
+          {t("Properties")}
         </Text>
       </StyledSubtitle>
 

@@ -2,5 +2,14 @@
   "EmptyScreenDescription": "Проверьте подключение к Интернету и обновите страницу или повторите попытку позже.",
   "GalleryEmptyScreenDescription": "Выберите шаблон формы, чтобы просмотреть подробности",
   "GalleryEmptyScreenHeader": "Не удалось загрузить шаблоны форм",
-  "TemplateInfo": "Информация шаблона"
+  "TemplateInfo": "Информация шаблона",
+
+  "Categories": "Категории",
+  "ViewAllTemplates": "Все шаблоны",
+  "FormsByBranch": "Формы по ветке",
+  "FormsByType": "Формы по типу",
+  "PopularCompilations": "Популярные подборки",
+
+  "Free": "Бесплатно",
+  "SuggestChanges": "Предложить изменения"
 }

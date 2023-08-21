@@ -68,6 +68,15 @@ const StyledTitle = styled.div`
     -webkit-line-clamp: 2;
   }
 
+  .free-label {
+    margin-left: auto;
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #4781d1;
+  }
+
   ${(props) =>
     props.withBottomBorder &&
     css`
@@ -97,12 +106,35 @@ const StyledTitle = styled.div`
   }
 `;
 
+const StyledLink = styled.div`
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  a,
+  .link {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 15px;
+    color: #4781d1;
+  }
+`;
+
 const StyledSubtitle = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   padding: 24px 0;
+`;
+
+const StyledDescription = styled.div`
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #657077;
 `;
 
 const StyledProperties = styled.div`
@@ -205,5 +237,13 @@ const StyledProperties = styled.div`
 
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
+StyledTitle.StyledLink = { theme: Base };
 
-export { StyledInfoPanelBody, StyledTitle, StyledSubtitle, StyledProperties };
+export {
+  StyledInfoPanelBody,
+  StyledTitle,
+  StyledSubtitle,
+  StyledProperties,
+  StyledLink,
+  StyledDescription,
+};

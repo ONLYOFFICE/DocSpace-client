@@ -240,7 +240,7 @@ const PureHome = (props) => {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = true;
       sectionProps.onDrop =
-        isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
+        isRecycleBinFolder || isPrivacyFolder || isRolePage ? null : onDrop;
 
       sectionProps.clearUploadedFilesHistory = clearUploadedFilesHistory;
       sectionProps.viewAs = viewAs;

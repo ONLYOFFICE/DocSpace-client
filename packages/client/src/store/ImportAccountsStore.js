@@ -20,6 +20,10 @@ class ImportAccountsStore {
   isAccountChecked = (id) => this.checkedAccounts.includes(id);
 
   cleanCheckedAccounts = () => (this.checkedAccounts = []);
+
+  get numberOfCheckedAccounts() {
+    return this.checkedAccounts.length;
+  }
 }
 
 export default ImportAccountsStore;

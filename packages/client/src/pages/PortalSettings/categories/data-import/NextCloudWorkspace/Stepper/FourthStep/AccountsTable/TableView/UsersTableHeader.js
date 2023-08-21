@@ -59,6 +59,7 @@ const UsersTableHeader = (props) => {
       title: "Type",
       enable: true,
       resizable: true,
+      minWidth: 100,
       onChange: onColumnChange,
     },
     {

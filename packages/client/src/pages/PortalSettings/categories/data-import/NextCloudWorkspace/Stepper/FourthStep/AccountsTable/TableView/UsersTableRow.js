@@ -26,6 +26,12 @@ const StyledTableRow = styled(TableRow)`
     max-width: 357.67px;
   }
 
+  .textOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .role-type-selector {
     .combo-button {
       border: none;
@@ -84,7 +90,9 @@ const UsersTableRow = ({ displayName, email, isChecked, toggleAccount }) => {
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell>
         <Checkbox onChange={handleAccountToggle} isChecked={isChecked} />
-        <Text fontWeight={600}>{displayName}</Text>
+        <Text fontWeight={600} className="textOverflow">
+          {displayName}
+        </Text>
       </TableCell>
 
       <TableCell>
@@ -101,7 +109,7 @@ const UsersTableRow = ({ displayName, email, isChecked, toggleAccount }) => {
         </div>
       </TableCell>
       <TableCell>
-        <Text lineHeight="20px" fontWeight={600} color="#A3A9AE">
+        <Text lineHeight="20px" fontWeight={600} color="#A3A9AE" className="textOverflow">
           {email}
         </Text>
       </TableCell>

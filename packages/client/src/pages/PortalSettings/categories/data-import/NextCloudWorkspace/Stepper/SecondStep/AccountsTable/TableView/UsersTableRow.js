@@ -14,6 +14,12 @@ const StyledTableRow = styled(TableRow)`
   .user-email {
     margin-right: 5px;
   }
+
+  .textOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const UsersTableRow = ({ displayName, email, isDuplicate, isChecked, toggleAccount }) => {
@@ -21,22 +27,24 @@ const UsersTableRow = ({ displayName, email, isDuplicate, isChecked, toggleAccou
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>
         <Checkbox onChange={toggleAccount} isChecked={isChecked} />
-        <Text fontWeight={600}>{displayName}</Text>
+        <Text fontWeight={600} className="textOverflow">
+          {displayName}
+        </Text>
       </TableCell>
 
       <TableCell>
-        <Text fontWeight={600} color="#a3a9ae" className="user-email">
+        <Text fontWeight={600} color="#a3a9ae" className="user-email textOverflow">
           {email}
         </Text>
       </TableCell>
 
       <TableCell>
         {isDuplicate ? (
-          <Text fontWeight={600} color="#2db482">
+          <Text fontWeight={600} color="#2db482" className="textOverflow">
             Existing account
           </Text>
         ) : (
-          <Text fontWeight={600} color="#a3a9ae">
+          <Text fontWeight={600} color="#a3a9ae" className="textOverflow">
             -
           </Text>
         )}

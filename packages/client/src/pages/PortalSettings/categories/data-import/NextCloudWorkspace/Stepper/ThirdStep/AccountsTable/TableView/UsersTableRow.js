@@ -28,6 +28,7 @@ const StyledTableRow = styled(TableRow)`
   .user-email {
     display: flex;
     gap: 8px;
+    overflow: hidden;
     path {
       fill: #a3a9ae;
     }
@@ -35,6 +36,12 @@ const StyledTableRow = styled(TableRow)`
 
   .email-input {
     width: 357.67px;
+  }
+
+  .textOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -90,7 +97,9 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount }) => {
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell>
         <Checkbox onChange={handleAccountToggle} isChecked={isChecked} />
-        <Text fontWeight={600}>{displayName}</Text>
+        <Text fontWeight={600} className="textOverflow">
+          {displayName}
+        </Text>
       </TableCell>
 
       <TableCell>
@@ -113,7 +122,7 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount }) => {
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
-            <Text fontWeight={600} color="#A3A9AE">
+            <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
               {email !== "" ? email : "NO EMAIL"}
             </Text>
           </span>

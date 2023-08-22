@@ -79,9 +79,7 @@ const UsersTableRow = ({ displayName, email, isChecked, toggleAccount }) => {
   const handleAccountToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    Array.from(e.target?.parentElement?.parentElement?.parentElement?.classList || []).includes(
-      "access-right-item",
-    ) ||
+    e.target.closest(".dropdown-container") ||
       roleSelectorRef.current?.contains(e.target) ||
       toggleAccount(e);
   };

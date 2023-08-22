@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
@@ -54,18 +54,18 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, email }) => {
+const UsersRowContent = ({ sectionWidth, displayName, email, roleSelectorRef }) => {
   const data = [
     {
-      key: "key1",
+      key: "role-DocSpace-admin",
       label: "DocSpace admin",
     },
     {
-      key: "key2",
+      key: "role-Room-admin",
       label: "Room admin",
     },
     {
-      key: "key3",
+      key: "role-Power-user",
       label: "Power user",
     },
   ];
@@ -81,15 +81,17 @@ const UsersRowContent = ({ sectionWidth, displayName, email }) => {
           {email}
         </Text>
       </div>
-      <AccessRightSelect
-        accessOptions={data}
-        selectedOption={selectedType}
-        scaledOptions={false}
-        scaled={false}
-        manualWidth="fit-content"
-        className="role-type-selector"
-        onSelect={setSelectedType}
-      />
+      <div ref={roleSelectorRef}>
+        <AccessRightSelect
+          accessOptions={data}
+          selectedOption={selectedType}
+          scaledOptions={false}
+          scaled={false}
+          manualWidth="fit-content"
+          className="role-type-selector"
+          onSelect={setSelectedType}
+        />
+      </div>
     </StyledRowContent>
   );
 };

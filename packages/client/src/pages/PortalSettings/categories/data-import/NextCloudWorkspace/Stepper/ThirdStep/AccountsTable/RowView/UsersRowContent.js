@@ -66,7 +66,7 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName }) => {
+const UsersRowContent = ({ sectionWidth, displayName, emailInputRef, emailTextRef }) => {
   const [email, setEmail] = useState("");
   const [isEmailOpen, setIsEmailOpen] = useState(false);
 
@@ -93,7 +93,7 @@ const UsersRowContent = ({ sectionWidth, displayName }) => {
         </Text>
       </div>
       {isEmailOpen ? (
-        <EmailInputWrapper>
+        <EmailInputWrapper ref={emailInputRef}>
           <TextInput
             placeholder="Enter email"
             className="email-input"
@@ -109,7 +109,7 @@ const UsersRowContent = ({ sectionWidth, displayName }) => {
           </DecisionButton>
         </EmailInputWrapper>
       ) : (
-        <span onClick={openEmail} className="user-email">
+        <span onClick={openEmail} className="user-email" ref={emailTextRef}>
           <EditSvg />
         </span>
       )}

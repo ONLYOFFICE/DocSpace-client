@@ -39,7 +39,7 @@ const RowView = (props) => {
     cleanCheckedAccounts,
   } = props;
 
-  const toggleAll = (e) => toggleAllAccounts(e, mockData);
+  const toggleAll = (e) => toggleAllAccounts({ target: { checked: !e.target.checked } }, mockData);
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -58,17 +58,14 @@ const RowView = (props) => {
       <StyledRow
         sectionWidth={sectionWidth}
         checkbox
-        checked={checkedAccounts.length === accountsData.length}
+        checked={checkedAccounts.length === mockData.length}
         onClick={toggleAll}
-        isIndeterminate={
-          checkedAccounts.length > 0 && checkedAccounts.length !== accountsData.length
-        }
-        onSelect={(isChecked) => toggleAllAccounts({ target: { checked: isChecked } }, mockData)}>
+        indeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}>
         <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
           Name
         </Text>
       </StyledRow>
-      {mockData.map((data) => (
+      {accountsData.map((data) => (
         <UsersRow
           key={data.id}
           data={data}

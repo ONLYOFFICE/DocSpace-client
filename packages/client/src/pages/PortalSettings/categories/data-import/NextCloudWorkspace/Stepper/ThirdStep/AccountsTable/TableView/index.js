@@ -81,10 +81,8 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         setHideColumns={setHideColumns}
-        isIndeterminate={
-          checkedAccounts.length > 0 && checkedAccounts.length !== accountsData.length
-        }
-        isChecked={checkedAccounts.length === accountsData.length}
+        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
+        isChecked={checkedAccounts.length === mockData.length}
         toggleAll={toggleAll}
       />
       <TableBody

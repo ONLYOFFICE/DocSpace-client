@@ -90,6 +90,7 @@ class FilesStore {
   hotkeyCaretStart = null;
   activeFiles = [];
   activeFolders = [];
+  activeBoards = [];
 
   firstElemChecked = false;
   headerBorder = false;
@@ -611,6 +612,10 @@ class FilesStore {
     this.activeFolders = activeFolders;
   };
 
+  setActiveBoards = (activeBoards) => {
+    this.activeBoards = activeBoards;
+  };
+
   setViewAs = (viewAs) => {
     this.viewAs = viewAs;
     localStorage.setItem("viewAs", viewAs);
@@ -977,6 +982,7 @@ class FilesStore {
       const splitValue = value && value.split("_");
 
       const fileType = splitValue[0];
+
       const id = splitValue.slice(1, -3).join("_");
 
       if (fileType === "file") {
@@ -987,6 +993,16 @@ class FilesStore {
           isFound &&
             newSelections.push(
               this.filesList.find((f) => f.id == id && !f.isFolder)
+            );
+        }
+      } else if (fileType === "board") {
+        const isFound =
+          this.selection.findIndex((f) => f.id == id && f.isDashboard) === -1;
+
+        if (this.activeBoards.findIndex((f) => f == id) === -1) {
+          isFound &&
+            newSelections.push(
+              this.filesList.find((f) => f.id == id && f.isDashboard)
             );
         }
       } else if (this.activeFolders.findIndex((f) => f == id) === -1) {
@@ -1021,6 +1037,12 @@ class FilesStore {
         if (this.activeFiles.findIndex((f) => f == id) === -1) {
           newSelections = newSelections.filter(
             (f) => !(f.id == id && !f.isFolder)
+          );
+        }
+      } else if (fileType === "board") {
+        if (this.activeBoards.findIndex((f) => f == id) === -1) {
+          newSelections = newSelections.filter(
+            (f) => !(f.id == id && f.isDashboard)
           );
         }
       } else if (this.activeFolders.findIndex((f) => f == id) === -1) {

@@ -147,7 +147,11 @@ class FilesActionStore {
     if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
       fetchRooms(
         updatedFolder,
-        newFilter ? newFilter : roomsFilter.clone()
+        newFilter ? newFilter : roomsFilter.clone(),
+        undefined,
+        undefined,
+        undefined,
+        true
       ).finally(() => {
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
@@ -1365,7 +1369,10 @@ class FilesActionStore {
     newFilter.search = item.title;
     newFilter.folder = ExtraLocation;
 
-    setIsLoading(true);
+    setIsLoading(
+      window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
+        url !== window.DocSpace.location.pathname
+    );
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };

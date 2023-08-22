@@ -10,6 +10,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  .save-cancel-buttons {
+    margin-top: 4px;
+  }
 `;
 
 const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
@@ -53,8 +57,8 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
-          workspace: "My documents",
+          sectionName: "My documents",
+          workspace: "DocSpace",
           SectionIcon: UserIcon,
         }}
       />

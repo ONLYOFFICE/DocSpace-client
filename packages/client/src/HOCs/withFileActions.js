@@ -218,6 +218,16 @@ export default function withFileActions(WrappedFileItem) {
       });
     };
 
+    getValue = (item) => {
+      const { id, isFolder, isDashboard } = item;
+
+      if (isFolder) return `folder_${id}`;
+
+      if (isDashboard) return `board_${id}`;
+
+      return `file_${id}`;
+    };
+
     render() {
       const {
         item,
@@ -240,8 +250,8 @@ export default function withFileActions(WrappedFileItem) {
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";
 
-      let value =
-        !item.isFolder && !item.isDashboard ? `file_${id}` : `folder_${id}`;
+      let value = this.getValue(item);
+
       value += draggable ? "_draggable" : "_false";
 
       value += `_index_${itemIndex}`;

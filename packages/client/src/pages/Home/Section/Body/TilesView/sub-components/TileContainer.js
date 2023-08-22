@@ -174,17 +174,25 @@ class TileContainer extends React.PureComponent {
       style,
       headingFolders,
       headingFiles,
+      headingBoards,
       isDesc,
     } = this.props;
 
     const Rooms = [];
     const Folders = [];
     const Files = [];
+    const Boards = [];
 
     React.Children.map(children, (item) => {
       const { isFolder, isRoom, fileExst, id, isDashboard } = item.props.item;
 
-      if ((isFolder || isDashboard || id === -1) && !fileExst && !isRoom) {
+      if (isDashboard && !isFolder && !fileExst && !isRoom) {
+        Boards.push(
+          <div className="tile-item-wrapper board" key={id}>
+            {item}
+          </div>
+        );
+      } else if ((isFolder || id === -1) && !fileExst && !isRoom) {
         Folders.push(
           <div className="tile-item-wrapper folder" key={id}>
             {item}
@@ -229,6 +237,26 @@ class TileContainer extends React.PureComponent {
             Folders
           ) : (
             <StyledGridWrapper isFolders>{Folders}</StyledGridWrapper>
+          )
+        ) : null}
+
+        {Boards.length > 0 && (
+          <Heading
+            size="xsmall"
+            id={"folder-tile-heading"}
+            className="tile-items-heading"
+          >
+            {headingBoards}
+          </Heading>
+        )}
+
+        {Boards.length > 0 ? (
+          useReactWindow ? (
+            Boards
+          ) : (
+            <StyledGridWrapper id="test-tail" isFolders>
+              {Boards}
+            </StyledGridWrapper>
           )
         ) : null}
 

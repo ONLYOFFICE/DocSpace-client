@@ -17,6 +17,7 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
   const getItemSize = (child) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
+    const isBoard = child?.props?.className?.includes("board");
     const isRoom = child?.props?.className?.includes("room");
 
     const horizontalGap = 16;
@@ -29,8 +30,9 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
     const titleHeight = 20 + headerMargin;
 
     if (isRoom) return roomHeight;
-    if (isFolder) return folderHeight;
+    if (isFolder || isBoard) return folderHeight;
     if (isFile) return fileHeight;
+
     return titleHeight;
   };
 
@@ -93,6 +95,12 @@ const InfiniteGrid = (props) => {
 
     if (isFolder) return "isFolder";
 
+    const isBoard = useTempList
+      ? card.props.children.props.className.includes("board")
+      : listItem.props.className.includes("isBoard");
+
+    if (isBoard) return "isBoard";
+
     return "isRoom";
   };
 
@@ -134,8 +142,15 @@ const InfiniteGrid = (props) => {
         );
       } else {
         const isFile = child?.props?.className?.includes("file");
+        const isBoard = child?.props?.className?.includes("board");
         const isRoom = child?.props?.className?.includes("room");
-        const className = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
+        const className = isFile
+          ? "isFile"
+          : isRoom
+          ? "isRoom"
+          : isBoard
+          ? "isBoard"
+          : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");

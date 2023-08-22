@@ -545,3 +545,17 @@ export const checkFilterInstance = (filterObject, certainClass) => {
 export const isDefaultRole = (role: RoleQueue): role is RoleDefaultType => {
   return role.type === RoleTypeEnum.Default;
 };
+
+export const getId = (item: {
+  isFolder: boolean;
+  isDashboard: boolean;
+  id: number | string;
+}) => {
+  const { isFolder, isDashboard, id } = item;
+
+  if (isFolder) return `folder_${id}`;
+
+  if (isDashboard) return `board_${id}`;
+
+  return `file_${id}`;
+};

@@ -9,6 +9,7 @@ import { inject, observer } from "mobx-react";
 import elementResizeDetectorMaker from "element-resize-detector";
 import TileContainer from "./sub-components/TileContainer";
 import FileTile from "./FileTile";
+import { getId } from "@docspace/common/utils";
 
 const getThumbSize = (width) => {
   let imgWidth = 216;
@@ -108,9 +109,7 @@ const FilesTileContainer = ({
     return filesList.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
-          id={`${item?.isFolder || item.isDashboard ? "folder" : "file"}_${
-            item.id
-          }`}
+          id={getId(item)}
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }
@@ -125,9 +124,7 @@ const FilesTileContainer = ({
         />
       ) : (
         <FileTile
-          id={`${item?.isFolder || item.isDashboard ? "folder" : "file"}_${
-            item.id
-          }`}
+          id={getId(item)}
           key={
             item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
           }
@@ -149,6 +146,7 @@ const FilesTileContainer = ({
       useReactWindow={!withPaging}
       headingFolders={t("Translations:Folders")}
       headingFiles={t("Translations:Files")}
+      headingBoards={t("Files:Boards")}
     >
       {filesListNode}
     </TileContainer>

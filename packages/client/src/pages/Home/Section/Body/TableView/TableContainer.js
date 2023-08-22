@@ -9,6 +9,7 @@ import TableBody from "@docspace/components/table-container/TableBody";
 import { isMobile } from "react-device-detect";
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
+import { getId } from "@docspace/common/utils";
 
 const marginCss = css`
   margin-top: -1px;
@@ -189,7 +190,7 @@ const Table = ({
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
       <TableRow
-        id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+        id={getId(item)}
         key={
           item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
         }

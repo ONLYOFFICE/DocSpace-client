@@ -7,6 +7,7 @@ import styled, { css } from "styled-components";
 import marginStyles from "./CommonStyles";
 import { isTablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
+import { getId } from "@docspace/common/utils";
 
 const StyledRowContainer = styled(RowContainer)`
   .row-list-item:first-child {
@@ -106,7 +107,7 @@ const FilesRowContainer = ({
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
       <SimpleFilesRow
-        id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
+        id={getId(item)}
         key={
           item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
         }

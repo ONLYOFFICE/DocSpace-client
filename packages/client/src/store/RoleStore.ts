@@ -102,17 +102,24 @@ class RoleStore {
     filter: RoleFilter
   ) => {
     try {
+      const filterData = filter.clone();
+
+      filterData.page = 0;
+      filterData.pageCount = 100;
+
       const result: CurrentRoleResponseType = await api.files.getRole(
         boardId,
-        roleId
+        roleId,
+        filterData
       );
+
+      filterData.total = result.total;
 
       this.resetState();
       this.setRole(result.current);
       this.setFiles(result.files, result.current);
       await this.settingUpNavigationPath(result);
 
-      filter.total = result.total;
       this.filesStore.setFilter(filter);
       return result;
     } catch (error) {

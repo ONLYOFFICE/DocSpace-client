@@ -144,6 +144,7 @@ class RoleFilter {
 
   toApiUrlParams = () => {
     const {
+      roleid,
       authorType,
       filterType,
       page,
@@ -173,6 +174,7 @@ class RoleFilter {
         : null;
 
     const dtoFilter = {
+      roleid,
       count: pageCount,
       startIndex: startIndex ? startIndex : this.getStartIndex(),
       page: page,

@@ -1040,10 +1040,12 @@ export function getFilesByRole(boardId, roleId, options) {
   });
 }
 export function getRole(boardId, roleId, filter) {
-  const param = filter ? filter.toApiUrlParams() : `?roleid=${roleId}`;
+  const param = filter ? filter.toApiUrlParams() : `roleid=${roleId}`;
+
+  // console.log(`/files/board/${boardId}/role?${param}`, { param });
 
   return request({
     method: "get",
-    url: `/files/board/${boardId}/role${param}`,
+    url: `/files/board/${boardId}/role?${param}`,
   });
 }

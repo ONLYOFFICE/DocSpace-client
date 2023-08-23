@@ -2251,6 +2251,12 @@ class FilesActionStore {
       rootFolderType: rootFolderType,
     };
 
+    const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
+      this.clientLoadingStore;
+
+    setIsSectionFilterLoading(true, false);
+    setIsSectionBodyLoading(true, false);
+
     window.DocSpace.navigate(url, {
       state,
       replace: true,

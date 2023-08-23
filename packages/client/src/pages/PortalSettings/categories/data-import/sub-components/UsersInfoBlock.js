@@ -5,6 +5,14 @@ import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
 
 const Wrapper = styled.div`
+  margin: 16px 0;
+
+  .license-limit-warning {
+    margin-bottom: 16px;
+  }
+`;
+
+const UsersInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   max-width: 660px;
@@ -20,9 +28,6 @@ const Wrapper = styled.div`
 
   .selected-users-count {
     margin-right: 24px;
-    color: #555f65;
-    font-weight: 700;
-    font-size: 14px;
   }
 
   .selected-admins-count {
@@ -33,31 +38,35 @@ const Wrapper = styled.div`
   }
 `;
 
-const UsersInfoBlock = ({
-  t,
-  selectedUsers,
-  totalUsers,
-  licencelimit,
-  totalLicenceLimit,
-}) => {
+const UsersInfoBlock = ({ t, selectedUsers, totalUsers, totalLicenceLimit }) => {
   return (
     <Wrapper>
-      <Text className="selected-users-count">
-        {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
-      </Text>
-      <Text className="selected-admins-count">
-        {t("Settings:LicenseLimitCounter", {
-          licencelimit,
-          totalLicenceLimit,
-        })}
-      </Text>
-      <HelpButton
-        place="right"
-        offsetRight={0}
-        tooltipContent={
-          <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
-        }
-      />
+      {selectedUsers > totalLicenceLimit && (
+        <Text fontSize="12px" color="#F21C0E" fontWeight={600} className="license-limit-warning">
+          {t("Settings:LicenseLimitWarning")}
+        </Text>
+      )}
+
+      <UsersInfoWrapper>
+        <Text color="#555f65" fontWeight={700} fontSize="14px" className="selected-users-count">
+          {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
+        </Text>
+        <div className="selected-admins-count">
+          {t("Settings:LicenseLimitCounter")}{" "}
+          <Text
+            as="span"
+            color={selectedUsers > totalLicenceLimit ? "#f21c0e" : "#555f65"}
+            fontWeight={700}
+            fontSize="14px">
+            {selectedUsers}/{totalLicenceLimit}
+          </Text>
+        </div>
+        <HelpButton
+          place="right"
+          offsetRight={0}
+          tooltipContent={<Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>}
+        />
+      </UsersInfoWrapper>
     </Wrapper>
   );
 };

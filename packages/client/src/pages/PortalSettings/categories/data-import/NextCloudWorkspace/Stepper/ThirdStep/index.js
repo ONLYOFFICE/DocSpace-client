@@ -49,7 +49,6 @@ const ThirdStep = (props) => {
             selectedUsers={numberOfCheckedAccounts}
             totalUsers={mockData.length}
             totalLicenceLimit={100}
-            licencelimit={10}
           />
 
           <SearchInput

@@ -19,6 +19,10 @@ export const Wrapper = styled.div`
   .mt-8 {
     margin-top: 8px;
   }
+
+  .mb-17 {
+    margin-bottom: 17px;
+  }
 `;
 
 export const UsersInfoBlock = styled.div`

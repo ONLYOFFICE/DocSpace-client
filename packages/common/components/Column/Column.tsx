@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ColumnContainer, ColumnHeader, ColumnBody } from "./Column.styled";
 import ColumnHeaderContent from "./ColumnHeaderContent";
@@ -12,11 +12,19 @@ import type { IFileByRole } from "@docspace/common/Models";
 function Column(props: ColumnProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const abortControllerRef = useRef(new AbortController());
+
   useEffect(() => {
     setIsLoading(true);
-    props.fetchFilesByRole?.(props.role).finally(() => {
-      setIsLoading(false);
-    });
+    props
+      .fetchFilesByRole?.(props.role, abortControllerRef.current.signal)
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    return () => {
+      abortControllerRef.current.abort();
+    };
   }, []);
 
   const onSelected = useCallback(

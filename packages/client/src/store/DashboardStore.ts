@@ -1,3 +1,4 @@
+import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import { NavigateOptions } from "react-router-dom";
 
@@ -339,7 +340,10 @@ class DashboardStore {
     }
   };
 
-  public fetchFilesByRole = async (role: IRole): Promise<FileByRoleType[]> => {
+  public fetchFilesByRole = async (
+    role: IRole,
+    signal: AbortSignal
+  ): Promise<FileByRoleType[]> => {
     const boardId = this.dashboard?.current.id;
 
     if (!boardId) return Promise.reject();
@@ -347,7 +351,8 @@ class DashboardStore {
     try {
       const files: FileByRoleType[] = await api.files.getFilesByRole(
         boardId,
-        role.id
+        role.id,
+        { signal }
       );
       runInAction(() => {
         this.filesByRole.set(role.id, files);
@@ -356,6 +361,10 @@ class DashboardStore {
 
       return files;
     } catch (error) {
+      if (axios.isCancel(error)) {
+        return Promise.reject();
+      }
+
       return Promise.reject(error);
     }
   };

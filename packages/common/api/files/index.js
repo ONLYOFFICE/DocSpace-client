@@ -1028,12 +1028,15 @@ export function setRolesUsersForFillingForm(fileId, idUsersRoles) {
   });
 }
 
-export function getFilesByRole(boardId, roleId, filter) {
+export function getFilesByRole(boardId, roleId, options) {
+  const { filter, signal } = options;
+
   const param = filter ? filter.toApiUrlParams() : `?roleid=${roleId}`;
 
   return request({
     method: "get",
     url: `/files/board/${boardId}/filesbyrole${param}`,
+    signal,
   });
 }
 export function getRole(boardId, roleId, filter) {

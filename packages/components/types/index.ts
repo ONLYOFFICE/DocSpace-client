@@ -3,3 +3,5 @@ export type {
   ContextMenuType,
   SeparatorType,
 } from "./ContextMenuModelType";
+
+export type { ThemeType } from "./ThemeType";

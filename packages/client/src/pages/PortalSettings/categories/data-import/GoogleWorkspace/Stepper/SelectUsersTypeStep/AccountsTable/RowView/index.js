@@ -26,7 +26,7 @@ const StyledRowContainer = styled(RowContainer)`
     .table-container_group-menu {
       padding: 0px 20px;
       border-image-slice: 0;
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 4px;
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
     }
 
     .table-container_group-menu-checkbox {
@@ -40,7 +40,8 @@ const StyledRowContainer = styled(RowContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: #a3a9ae;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .table-container_header {
@@ -53,7 +54,7 @@ const StyledRow = styled(Row)`
   min-height: 40px;
 
   .row-header-title {
-    color: #a3a9ae;
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     font-weight: 600;
     font-size: 12px;
   }

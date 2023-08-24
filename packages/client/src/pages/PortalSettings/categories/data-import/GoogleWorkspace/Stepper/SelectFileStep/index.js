@@ -16,6 +16,7 @@ const Wrapper = styled.div`
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 4px;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .select-file-input {

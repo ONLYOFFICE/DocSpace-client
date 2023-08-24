@@ -25,7 +25,10 @@ const StyledTableContainer = styled(TableContainer)`
 
     .table-container_group-menu {
       border-image-slice: 0;
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 4px;
+      border-image-source: none;
+      border-bottom: ${(props) =>
+        props.theme.client.settings.migration.workspaceBorder};
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
     }
 
     .table-container_group-menu-checkbox {
@@ -39,7 +42,7 @@ const StyledTableContainer = styled(TableContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
   }
 
   .table-container_header {
@@ -50,8 +53,8 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+      background: ${(props) =>
+        props.theme.client.settings.migration.tableRowHoverColor};
     }
   }
 `;

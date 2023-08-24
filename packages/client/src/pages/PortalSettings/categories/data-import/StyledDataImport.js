@@ -14,7 +14,7 @@ const WorkspacesContainer = styled.div`
   }
 
   .data-import-description {
-    color: #657077;
+    color: ${(props) => props.theme.client.settings.migration.descriptionColor};
     line-height: 20px;
     margin-bottom: 20px;
     max-width: 675px;
@@ -23,6 +23,7 @@ const WorkspacesContainer = styled.div`
   .data-import-subtitle {
     margin-bottom: 21px;
     font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .workspace-list {
@@ -34,7 +35,9 @@ const WorkspacesContainer = styled.div`
   }
 
   .workspace-item {
-    border: 1px solid #d0d5da;
+    background: ${(props) =>
+      props.theme.client.settings.migration.workspaceBackground};
+    border: ${(props) => props.theme.client.settings.migration.workspaceBorder};
     border-radius: 6px;
     width: 340px;
     height: 64px;
@@ -50,7 +53,8 @@ const WorkspacesContainer = styled.div`
     }
 
     &:active {
-      background-color: #eceef1;
+      background-color: ${(props) =>
+        props.theme.client.settings.migration.workspaceBackground};
     }
 
     @media ${tablet} {

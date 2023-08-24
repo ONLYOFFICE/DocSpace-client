@@ -1351,7 +1351,7 @@ const Base = {
   },
 
   progressBar: {
-    backgroundColor: "#DADDDF",
+    backgroundColor: "#A3A9AE",
 
     percent: {
       background: "#4781D1",
@@ -2989,6 +2989,28 @@ const Base = {
 
         warningColor: "#F21C0E",
         color: "#F97A0B",
+      },
+
+      migration: {
+        descriptionColor: grayMain,
+        subtitleColor: "#333333",
+        workspaceBackground: "#FFFFFF",
+        workspaceBorder: "1px solid #d0d5da",
+        stepDescriptionColor: "#333333",
+        infoBlockBackground: "#f8f9f9",
+        infoBlockTextColor: "#555F65",
+        exceededTextColor: "#F21C0E",
+        tableHeaderText: "#A3A9AE",
+        tableRowHoverColor: "#F3F4F4",
+        tableRowTextColor: "#A3A9AE",
+        importSectionBackground: "#F8F9F9",
+        importSectionTextColor: "#A3A9AE",
+        importItemBackground: "#eceef1",
+        importItemDisableBackground: "#F3F4F4",
+        importItemTextColor: "#555f65",
+        importItemDisableTextColor: "#A3A9AE",
+        importItemDescription: "#333333",
+        importDisableTextColor: "#A3A9AE",
       },
     },
 

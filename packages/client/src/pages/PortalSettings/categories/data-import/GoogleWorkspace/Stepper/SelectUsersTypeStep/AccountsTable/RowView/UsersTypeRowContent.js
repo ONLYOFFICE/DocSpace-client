@@ -22,7 +22,8 @@ const StyledRowContent = styled(RowContent)`
     margin-right: 5px;
     font-size: 12px;
     font-weight: 600;
-    color: #a3a9ae;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-type {
@@ -34,7 +35,8 @@ const StyledRowContent = styled(RowContent)`
     }
 
     .combo-button-label {
-      color: #a3a9ae;
+      color: ${(props) =>
+        props.theme.client.settings.migration.tableRowTextColor};
     }
 
     .combo-buttons_arrow-icon {
@@ -44,7 +46,8 @@ const StyledRowContent = styled(RowContent)`
 
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.migration.tableRowTextColor};
       }
     }
   }

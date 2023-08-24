@@ -18,7 +18,7 @@ const GoogleWrapper = styled.div`
   margin-top: 4px;
 
   .workspace-subtitle {
-    color: #657077;
+    color: ${(props) => props.theme.client.settings.migration.descriptionColor};
     max-width: 700px;
     line-height: 20px;
     margin-bottom: 20px;
@@ -32,11 +32,13 @@ const GoogleWrapper = styled.div`
     margin-right: 5px;
     font-size: 16px;
     font-weight: 700;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .step-title {
     font-size: 16px;
     font-weight: 700;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .step-description {
@@ -44,7 +46,8 @@ const GoogleWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
-    color: #333333;
+    color: ${(props) =>
+      props.theme.client.settings.migration.stepDescriptionColor};
 
     @media ${tablet} {
       max-width: 675px;

@@ -1343,10 +1343,10 @@ const Dark = {
   },
 
   progressBar: {
-    backgroundColor: "#DADDDF",
+    backgroundColor: "#858585",
 
     percent: {
-      background: "#4781D1",
+      background: "#FFFFFF",
     },
   },
 
@@ -2992,6 +2992,28 @@ const Dark = {
         },
         warningColor: "#E06451",
         color: "#E17415",
+      },
+
+      migration: {
+        descriptionColor: "#ADADAD",
+        subtitleColor: "#FFFFFF",
+        workspaceBackground: "#333333",
+        workspaceBorder: "1px solid #474747",
+        stepDescriptionColor: "#FFFFFF",
+        infoBlockBackground: "#282828",
+        infoBlockTextColor: "#858585",
+        exceededTextColor: "#E06451",
+        tableHeaderText: "#858585",
+        tableRowHoverColor: "#3D3D3D",
+        tableRowTextColor: "#858585",
+        importSectionBackground: "#282828",
+        importSectionTextColor: "#858585",
+        importItemBackground: "#333333",
+        importItemDisableBackground: "#3D3D3D",
+        importItemTextColor: "#ADADAD",
+        importItemDisableTextColor: "#5C5C5C",
+        importItemDescription: "#A3A9AE",
+        importDisableTextColor: "#5C5C5C",
       },
     },
 

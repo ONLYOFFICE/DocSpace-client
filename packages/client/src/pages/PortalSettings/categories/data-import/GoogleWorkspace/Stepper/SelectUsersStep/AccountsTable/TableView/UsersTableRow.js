@@ -14,13 +14,15 @@ const StyledTableRow = styled(TableRow)`
     margin-right: 5px;
     font-size: 13px;
     font-weight: 600;
-    color: #a3a9ae;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .not-existing {
     font-size: 13px;
     font-weight: 600;
-    color: #a3a9ae;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-existing {

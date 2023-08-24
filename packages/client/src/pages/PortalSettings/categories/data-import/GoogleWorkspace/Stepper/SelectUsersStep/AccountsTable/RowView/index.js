@@ -18,7 +18,7 @@ const StyledRow = styled(Row)`
   min-height: 40px;
 
   .row-header-title {
-    color: #a3a9ae;
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     font-weight: 600;
     font-size: 12px;
   }

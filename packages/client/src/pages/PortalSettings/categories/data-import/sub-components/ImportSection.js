@@ -1,3 +1,4 @@
+import { ReactSVG } from "react-svg";
 import { tablet } from "@docspace/components/utils/device";
 
 import Text from "@docspace/components/text";
@@ -17,31 +18,26 @@ const SectionWrapper = styled.div`
   }
 
   border-radius: 6px;
-  background: #f8f9f9;
+  background: ${(props) =>
+    props.theme.client.settings.migration.importSectionBackground};
 
   .toggleButton {
     position: relative;
     margin-top: 0.5px;
   }
 
-  .description {
+  .section-title {
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
+  .section-description {
+    color: ${(props) =>
+      props.isChecked
+        ? props.theme.client.settings.migration.subtitleColor
+        : props.theme.client.settings.migration.importDisableTextColor};
     margin-top: 4px;
     margin-bottom: 12px;
   }
-
-  ${(props) =>
-    !props.isChecked &&
-    css`
-      .importSection {
-        color: #a3a9ae;
-
-        svg {
-          path {
-            fill: #a3a9ae;
-          }
-        }
-      }
-    `}
 `;
 
 const FlexContainer = styled.div`
@@ -51,24 +47,40 @@ const FlexContainer = styled.div`
 const ImportItemWrapper = styled.div`
   padding-top: 8px;
 
+  .workspace-title {
+    color: ${(props) =>
+      props.theme.client.settings.migration.importSectionTextColor};
+  }
+
   .importSection {
     width: 160px;
     height: 36px;
     padding: 8px 12px;
     box-sizing: border-box;
     margin-top: 12px;
-
     border-radius: 3px;
-    background: #eceef1;
-
-    color: "#555f65";
+    background: ${(props) =>
+      props.isChecked
+        ? props.theme.client.settings.migration.importItemBackground
+        : props.theme.client.settings.migration.importItemDisableBackground};
+    color: ${(props) =>
+      props.isChecked
+        ? props.theme.client.settings.migration.importItemTextColor
+        : props.theme.client.settings.migration.importItemDisableTextColor};
     font-weight: 600;
     line-height: 20px;
-
     display: flex;
     align-items: center;
-
     gap: 8px;
+
+    svg {
+      path {
+        fill: ${(props) =>
+          props.isChecked
+            ? props.theme.client.settings.migration.importItemTextColor
+            : props.theme.client.settings.migration.importItemDisableTextColor};
+      }
+    }
   }
 `;
 
@@ -79,12 +91,26 @@ const ArrowWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 16px;
+
+  .arrow-icon {
+    svg {
+      path {
+        fill: ${(props) =>
+          props.theme.client.settings.migration.importSectionTextColor};
+      }
+    }
+  }
 `;
 
-const ImportItem = ({ sectionName, SectionIcon, workspace }) => {
+const ImportItem = ({ sectionName, SectionIcon, workspace, isChecked }) => {
   return (
-    <ImportItemWrapper>
-      <Text color="#A3A9AE" fontSize="11px" fontWeight={600} lineHeight="12px">
+    <ImportItemWrapper isChecked={isChecked}>
+      <Text
+        className="workspace-title"
+        fontSize="11px"
+        fontWeight={600}
+        lineHeight="12px"
+      >
         {workspace}
       </Text>
       <div className="importSection">
@@ -113,22 +139,18 @@ const ImportSection = ({
         isDisabled={isDisabled}
       />
       <div>
-        <Text lineHeight="20px" fontWeight={600}>
+        <Text lineHeight="20px" fontWeight={600} className="section-title">
           {sectionName}
         </Text>
-        <Text
-          fontSize="12px"
-          className="description"
-          color={isChecked ? "#333" : "#A3A9AE"}
-        >
+        <Text fontSize="12px" className="section-description">
           {description}
         </Text>
-        <FlexContainer>
-          <ImportItem {...exportSection} />
+        <FlexContainer isChecked={isChecked}>
+          <ImportItem {...exportSection} isChecked={isChecked} />
           <ArrowWrapper>
-            <img src={ArrowSvg} alt="arrow" />
+            <ReactSVG className="arrow-icon" src={ArrowSvg} />
           </ArrowWrapper>
-          <ImportItem {...importSection} />
+          <ImportItem {...importSection} isChecked={isChecked} />
         </FlexContainer>
       </div>
     </SectionWrapper>

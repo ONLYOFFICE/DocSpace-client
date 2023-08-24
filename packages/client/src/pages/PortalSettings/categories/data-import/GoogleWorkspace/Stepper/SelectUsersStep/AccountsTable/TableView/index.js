@@ -14,7 +14,7 @@ const StyledTableContainer = styled(TableContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
   }
 
   .table-container_header {
@@ -25,8 +25,8 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+      background: ${(props) =>
+        props.theme.client.settings.migration.tableRowHoverColor};
     }
   }
 `;

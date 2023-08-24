@@ -8,7 +8,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   max-width: 660px;
-  background: #f8f9f9;
+  background: ${(props) =>
+    props.theme.client.settings.migration.infoBlockBackground};
   box-sizing: border-box;
   padding: 12px 16px;
   border-radius: 6px;
@@ -20,14 +21,16 @@ const Wrapper = styled.div`
 
   .selected-users-count {
     margin-right: 24px;
-    color: #555f65;
+    color: ${(props) =>
+      props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
     font-size: 14px;
   }
 
   .selected-admins-count {
     margin-right: 8px;
-    color: #555f65;
+    color: ${(props) =>
+      props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
     font-size: 14px;
   }

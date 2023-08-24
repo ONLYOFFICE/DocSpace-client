@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -10,15 +11,39 @@ import { WorkspacesContainer } from "./StyledDataImport";
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.react.svg?url";
+import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.react.svg?url";
+import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
+import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 const DataImport = (props) => {
-  const { t } = props;
+  const { t, theme } = props;
   const navigate = useNavigate();
 
+  const google = theme.isBase
+    ? GoogleWorkspaceSvgUrl
+    : GoogleWorkspaceDarkSvgUrl;
+
+  const nextcloud = theme.isBase
+    ? NextcloudWorkspaceSvgUrl
+    : NextcloudWorkspaceDarkSvgUrl;
+
+  const onlyoffice = theme.isBase
+    ? OnlyofficeWorkspaceSvgUrl
+    : OnlyofficeWorkspaceDarkSvgUrl;
+
   const workspaces = [
-    { id: 1, logo: GoogleWorkspaceSvgUrl, title: "google" },
-    { id: 2, logo: NextcloudWorkspaceSvgUrl, title: "nextcloud" },
-    { id: 3, logo: OnlyofficeWorkspaceSvgUrl, title: "onlyoffice" },
+    {
+      title: "google",
+      logo: google,
+    },
+    {
+      title: "nextcloud",
+      logo: nextcloud,
+    },
+    {
+      title: "onlyoffice",
+      logo: onlyoffice,
+    },
   ];
 
   const redirectToWorkspace = (title) => {
@@ -49,7 +74,7 @@ const DataImport = (props) => {
       <Box className="workspace-list">
         {workspaces.map((workspace) => (
           <Box
-            key={workspace.id}
+            key={workspace.title}
             className="workspace-item"
             onClick={() => redirectToWorkspace(workspace.title)}
           >
@@ -69,5 +94,8 @@ const DataImport = (props) => {
     </WorkspacesContainer>
   );
 };
-
-export default withTranslation(["Settings"])(DataImport);
+export default inject(({ auth }) => {
+  return {
+    theme: auth.settingsStore.theme,
+  };
+})(withTranslation(["Settings"])(observer(DataImport)));

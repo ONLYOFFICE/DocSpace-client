@@ -10,7 +10,7 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
 const StyledText = styled(Text)`
-  color: #f21c0e;
+  color: ${(props) => props.theme.client.settings.migration.exceededTextColor};
   margin-top: 16px;
   font-size: 12px;
   font-weight: 600;

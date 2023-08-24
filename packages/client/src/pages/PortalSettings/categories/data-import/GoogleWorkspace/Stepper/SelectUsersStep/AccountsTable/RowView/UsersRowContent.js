@@ -15,7 +15,8 @@ const StyledRowContent = styled(RowContent)`
     margin-right: 5px;
     font-size: 12px;
     font-weight: 600;
-    color: #a3a9ae;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-existing {

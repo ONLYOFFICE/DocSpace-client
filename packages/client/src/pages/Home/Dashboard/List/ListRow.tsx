@@ -17,18 +17,20 @@ import type { ListRowProps } from "./List.props";
 import type { IRole } from "@docspace/common/Models";
 import type { StoreType } from "SRC_DIR/types";
 
-function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
+function ListRow({
+  role,
+  theme,
+  sectionWidth,
+  getModel,
+  setIsLoading,
+}: ListRowProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
 
-    // const state = {
-    //   title: parentNavigationPath?.title ?? "",
-    //   isRoot: navigationPath.length === 1,
-    //   rootFolderType: rootFolderType,
-    // };
+    setIsLoading!(true, false);
 
     navigate(role.url, {
       state: {
@@ -113,10 +115,15 @@ function ListRow({ role, theme, sectionWidth, getModel }: ListRowProps) {
   );
 }
 
-export default inject<StoreType>(({ auth }) => {
+export default inject<StoreType>(({ auth, clientLoadingStore }) => {
   const theme = (auth.settingsStore as unknown as SettingsStore).theme;
+  const { setIsSectionFilterLoading } = clientLoadingStore;
+  const setIsLoading = (arg: boolean, withTimer?: boolean) => {
+    setIsSectionFilterLoading(arg, withTimer);
+  };
 
   return {
     theme,
+    setIsLoading,
   };
 })(observer(ListRow)) as (arg: Omit<ListRowProps, "theme">) => JSX.Element;

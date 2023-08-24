@@ -2,6 +2,16 @@ import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import TableCell from "@docspace/components/table-container/TableCell";
+import { Badge } from "@docspace/components";
+import Checkbox from "@docspace/components/checkbox";
+import Link from "@docspace/components/link";
+
+import { classNames } from "@docspace/components/utils/classNames";
+
+import Icon from "../Icon";
 
 import {
   BoardTableRow,
@@ -9,17 +19,10 @@ import {
   TableRowContainer,
 } from "./Table.styled";
 
-import TableCell from "@docspace/components/table-container/TableCell";
-import { Badge } from "@docspace/components";
-import Checkbox from "@docspace/components/checkbox";
-import Link from "@docspace/components/link";
+import type { TableRowProps } from "./Table.porps";
+import type { StoreType } from "SRC_DIR/types";
 
-import Icon from "../Icon";
-
-import { TableRowProps } from "./Table.porps";
-import { classNames } from "@docspace/components/utils/classNames";
-
-function TableRow({ role, getModel }: TableRowProps) {
+function TableRow({ role, getModel, setIsLoading }: TableRowProps) {
   const {
     id,
     type,
@@ -39,6 +42,8 @@ function TableRow({ role, getModel }: TableRowProps) {
 
   const onClickLink = (event: MouseEvent) => {
     event.preventDefault();
+
+    setIsLoading!(true, false);
 
     navigate(role.url, {
       state: {
@@ -150,4 +155,13 @@ function TableRow({ role, getModel }: TableRowProps) {
   );
 }
 
-export default TableRow;
+export default inject<StoreType>(({ clientLoadingStore }) => {
+  const { setIsSectionFilterLoading } = clientLoadingStore;
+  const setIsLoading = (arg: boolean, withTimer?: boolean) => {
+    setIsSectionFilterLoading(arg, withTimer);
+  };
+
+  return {
+    setIsLoading,
+  };
+})(observer(TableRow));

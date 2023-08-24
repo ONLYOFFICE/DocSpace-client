@@ -14,4 +14,5 @@ export interface ListRowProps {
   sectionWidth: number;
   theme?: ThemeType;
   getModel: GetModelFunctionType;
+  setIsLoading?: (arg: boolean, withTimer?: boolean) => void;
 }

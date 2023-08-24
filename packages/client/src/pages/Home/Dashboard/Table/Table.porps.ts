@@ -13,4 +13,5 @@ export default TableProps;
 export type TableRowProps = {
   role: IRole;
   getModel: GetModelFunctionType;
+  setIsLoading?: (arg: boolean, withTimer?: boolean) => void;
 };

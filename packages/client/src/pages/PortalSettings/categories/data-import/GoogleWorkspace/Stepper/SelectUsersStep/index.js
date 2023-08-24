@@ -1,23 +1,14 @@
 import { useState } from "react";
 import { mockData } from "../mockData.js";
-import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
-import Text from "@docspace/components/text";
+
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-const StyledText = styled(Text)`
-  color: ${(props) => props.theme.client.settings.migration.exceededTextColor};
-  margin-top: 16px;
-  font-size: 12px;
-  font-weight: 600;
-`;
-
 const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
-  const [isExceeded, setIsExceeded] = useState(false);
   const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
 
   const selectedUsers = 0;
@@ -40,8 +31,6 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
       />
-
-      {isExceeded && <StyledText>{t("Settings:UserLimitExceeded")}</StyledText>}
 
       <UsersInfoBlock
         t={t}

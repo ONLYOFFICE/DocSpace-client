@@ -2997,6 +2997,7 @@ const Base = {
         workspaceBackground: "#FFFFFF",
         workspaceBorder: "1px solid #d0d5da",
         stepDescriptionColor: "#333333",
+        fileInputIconColor: "#A3A9AE",
         infoBlockBackground: "#f8f9f9",
         infoBlockTextColor: "#555F65",
         exceededTextColor: "#F21C0E",

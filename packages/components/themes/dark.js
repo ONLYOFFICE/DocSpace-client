@@ -3000,6 +3000,7 @@ const Dark = {
         workspaceBackground: "#333333",
         workspaceBorder: "1px solid #474747",
         stepDescriptionColor: "#FFFFFF",
+        fileInputIconColor: "#5c5c5c",
         infoBlockBackground: "#282828",
         infoBlockTextColor: "#858585",
         exceededTextColor: "#E06451",

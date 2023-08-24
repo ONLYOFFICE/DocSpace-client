@@ -8,7 +8,11 @@ const Wrapper = styled.div`
   margin: 16px 0;
 
   .license-limit-warning {
+    font-size: 12px;
+    font-weight: 600;
     margin-bottom: 16px;
+    color: ${(props) =>
+      props.theme.client.settings.migration.exceededTextColor};
   }
 `;
 
@@ -41,6 +45,16 @@ const UsersInfoWrapper = styled.div`
       props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
     font-size: 14px;
+
+    span {
+      font-weight: 700;
+      font-size: 14px;
+      margin-left: 4px;
+      color: ${(props) =>
+        props.selectedUsers > props.totalLicenceLimit
+          ? props.theme.client.settings.migration.exceededTextColor
+          : props.theme.client.settings.migration.infoBlockTextColor};
+    }
   }
 `;
 
@@ -53,33 +67,21 @@ const UsersInfoBlock = ({
   return (
     <Wrapper>
       {selectedUsers > totalLicenceLimit && (
-        <Text
-          fontSize="12px"
-          color="#F21C0E"
-          fontWeight={600}
-          className="license-limit-warning"
-        >
-          {t("Settings:LicenseLimitWarning")}
+        <Text className="license-limit-warning">
+          {t("Settings:UserLimitExceeded")}
         </Text>
       )}
 
-      <UsersInfoWrapper>
-        <Text
-          color="#555f65"
-          fontWeight={700}
-          fontSize="14px"
-          className="selected-users-count"
-        >
+      <UsersInfoWrapper
+        selectedUsers={selectedUsers}
+        totalLicenceLimit={totalLicenceLimit}
+      >
+        <Text className="selected-users-count">
           {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
         </Text>
         <div className="selected-admins-count">
-          {t("Settings:LicenseLimitCounter")}{" "}
-          <Text
-            as="span"
-            color={selectedUsers > totalLicenceLimit ? "#f21c0e" : "#555f65"}
-            fontWeight={700}
-            fontSize="14px"
-          >
+          {t("Settings:LicenseLimitCounter")}
+          <Text as="span">
             {selectedUsers}/{totalLicenceLimit}
           </Text>
         </div>

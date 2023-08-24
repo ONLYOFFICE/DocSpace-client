@@ -22,6 +22,15 @@ const Wrapper = styled.div`
   .select-file-input {
     height: 32px;
     margin-bottom: 16px;
+
+    .icon-button_svg {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.theme.client.settings.migration.fileInputIconColor};
+        }
+      }
+    }
   }
 
   .select-file-progress-text {

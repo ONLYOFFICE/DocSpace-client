@@ -73,6 +73,14 @@ const EmptyFolderWrapper = styled.div`
       cursor: pointer;
     }
 
+    .empty-folder_container_board-image {
+      cursor: pointer;
+      margin-top: 1px;
+      width: 12px;
+      height: 12px;
+      ${NoUserSelect}
+    }
+
     .empty-folder_container_up-image,
     .empty-folder_container_plus-image {
       margin: 4px 8px 0 0;

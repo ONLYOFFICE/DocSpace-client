@@ -9,6 +9,7 @@ import { FileAction } from "@docspace/common/constants";
 import { isMobile } from "react-device-detect";
 import { Events } from "@docspace/common/constants";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
+import EmptyRoleContainer from "./EmptyRoleContainer";
 
 const linkStyles = {
   isHovered: true,
@@ -30,6 +31,7 @@ const EmptyContainer = ({
   setInviteUsersWarningDialogVisible,
 }) => {
   const location = useLocation();
+  const isRolePage = location.pathname.includes("role");
 
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
@@ -78,6 +80,8 @@ const EmptyContainer = ({
       onCreateRoom={onCreateRoom}
       sectionWidth={sectionWidth}
     />
+  ) : isRolePage ? (
+    <EmptyRoleContainer sectionWidth={sectionWidth} linkStyles={linkStyles} />
   ) : (
     <EmptyFolderContainer
       sectionWidth={sectionWidth}
@@ -112,7 +116,6 @@ export default inject(
       theme: auth.settingsStore.theme,
       isFiltered,
       isLoading,
-
       parentId: selectedFolderStore.parentId,
       isRoomNotFoundOrMoved,
       isGracePeriod,

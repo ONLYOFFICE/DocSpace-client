@@ -1,0 +1,9 @@
+{
+  "BackToParentDashboardButton": "Go to Board",
+  "EmptyRoleHeader": "Nothing here yet",
+  "EmptyRoleHeaderCanceled": "No canceled forms yet",
+  "EmptyRoleHeaderDone": "No finished forms yet",
+  "EmptyRoleDescription": "This section will display forms that require completion.",
+  "EmptyRoleDescriptionCanceled": "This section will display canceled forms available for you.",
+  "EmptyRoleDescriptionDone": "This section will display all forms that are complete."
+}

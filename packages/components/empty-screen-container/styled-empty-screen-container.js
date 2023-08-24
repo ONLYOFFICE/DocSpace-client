@@ -150,6 +150,9 @@ const EmptyContentBody = styled.div`
       path {
         fill: ${(props) => props.theme.emptyContent.button.colorLink};
       }
+      rect {
+        stroke: ${(props) => props.theme.emptyContent.button.colorLink};
+      }
     }
 
     a {

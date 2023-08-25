@@ -11,6 +11,12 @@ const StyledRowContent = styled(RowContent)`
     width: 100%;
   }
 
+  .username {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
   .user-email {
     margin-right: 5px;
     font-size: 12px;
@@ -22,7 +28,8 @@ const StyledRowContent = styled(RowContent)`
   .user-existing {
     font-size: 12px;
     font-weight: 600;
-    color: #2db482;
+    color: ${(props) =>
+      props.theme.client.settings.migration.existingTextColor};
   }
 `;
 
@@ -31,9 +38,7 @@ const UsersRowContent = ({ sectionWidth, displayName, email, dublicate }) => {
 
   const contentData = [
     <>
-      <Text fontWeight={600} fontSize="14px">
-        {displayName}
-      </Text>
+      <Text className="username">{displayName}</Text>
       <Box displayProp="flex">
         <Text className="user-email">{email}</Text>
         {isExistingUser && <Text className="user-existing">{dublicate}</Text>}

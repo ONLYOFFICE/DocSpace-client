@@ -2869,6 +2869,7 @@ const Base = {
 
     settings: {
       iconFill: black,
+      headerTitleColor: "#333333",
       trashIcon: "#A3A9AE",
       article: {
         titleColor: grayMain,
@@ -3001,6 +3002,7 @@ const Base = {
         infoBlockBackground: "#f8f9f9",
         infoBlockTextColor: "#555F65",
         exceededTextColor: "#F21C0E",
+        existingTextColor: "#2db482",
         tableHeaderText: "#A3A9AE",
         tableRowHoverColor: "#F3F4F4",
         tableRowTextColor: "#A3A9AE",
@@ -3011,7 +3013,6 @@ const Base = {
         importItemTextColor: "#555f65",
         importItemDisableTextColor: "#A3A9AE",
         importItemDescription: "#333333",
-        importDisableTextColor: "#A3A9AE",
       },
     },
 

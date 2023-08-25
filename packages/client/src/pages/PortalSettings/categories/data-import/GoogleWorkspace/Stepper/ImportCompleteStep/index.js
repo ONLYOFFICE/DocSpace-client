@@ -5,13 +5,24 @@ import styled from "styled-components";
 
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
+
+const Wrapper = styled.div`
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+
+  .checkbox-text {
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+`;
 
 const StyledText = styled(Text)`
   margin-top: -8px;
   margin-bottom: 16px;
+  font-size: 12px;
+  color: ${(props) => props.theme.client.settings.migration.subtitleColor};
 `;
 
 const ButtonsWrapper = styled.div`
@@ -49,7 +60,7 @@ const ImportCompleteStep = ({ t }) => {
         {t("Settings:ImportedUsers", { selectedUsers, importedUsers })}
       </StyledText>
 
-      <Box displayProp="flex" alignItems="center" marginProp="0 0 16px">
+      <Wrapper>
         <Checkbox
           label={t("Settings:SendWelcomeLetter")}
           isChecked={isChecked}
@@ -63,7 +74,7 @@ const ImportCompleteStep = ({ t }) => {
             <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
           }
         />
-      </Box>
+      </Wrapper>
 
       <ButtonsWrapper>
         <Button

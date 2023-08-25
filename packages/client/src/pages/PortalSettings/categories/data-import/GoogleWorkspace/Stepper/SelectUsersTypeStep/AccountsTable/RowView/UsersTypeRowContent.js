@@ -11,11 +11,18 @@ const StyledRowContent = styled(RowContent)`
 
   .row-main-container-wrapper {
     width: 100%;
+    margin-right: 0;
   }
 
   .rowMainContainer {
     height: 100%;
     width: 100%;
+  }
+
+  .username {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .user-email {
@@ -65,9 +72,7 @@ const UsersTypeRowContent = ({
   const contentData = [
     <Box displayProp="flex" justifyContent="space-between" alignItems="center">
       <Box>
-        <Text fontWeight={600} fontSize="14px">
-          {displayName}
-        </Text>
+        <Text className="username">{displayName}</Text>
         <Text className="user-email">{email}</Text>
       </Box>
 

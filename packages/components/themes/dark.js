@@ -2875,6 +2875,7 @@ const Dark = {
 
     settings: {
       iconFill: white,
+      headerTitleColor: "#FFFFFF",
       trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
@@ -3004,6 +3005,7 @@ const Dark = {
         infoBlockBackground: "#282828",
         infoBlockTextColor: "#858585",
         exceededTextColor: "#E06451",
+        existingTextColor: "#3BA420",
         tableHeaderText: "#858585",
         tableRowHoverColor: "#3D3D3D",
         tableRowTextColor: "#858585",
@@ -3014,7 +3016,6 @@ const Dark = {
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: "#A3A9AE",
-        importDisableTextColor: "#5C5C5C",
       },
     },
 

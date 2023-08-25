@@ -40,6 +40,7 @@ const HeaderContainer = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      color: ${(props) => props.theme.client.settings.headerTitleColor};
     }
   }
   .action-wrapper {

@@ -34,7 +34,7 @@ const SectionWrapper = styled.div`
     color: ${(props) =>
       props.isChecked
         ? props.theme.client.settings.migration.subtitleColor
-        : props.theme.client.settings.migration.importDisableTextColor};
+        : props.theme.client.settings.migration.importItemDisableTextColor};
     margin-top: 4px;
     margin-bottom: 12px;
   }

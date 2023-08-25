@@ -13,6 +13,12 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
+  .username {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
   .user-email {
     margin-right: 5px;
     font-size: 13px;
@@ -68,7 +74,7 @@ const UsersTypeTableRow = ({
     <StyledTableRow checked={isChecked}>
       <TableCell>
         <Checkbox isChecked={checkbox.includes(id)} onChange={onChange} />
-        <Text fontWeight={600}>{displayName}</Text>
+        <Text className="username">{displayName}</Text>
       </TableCell>
 
       <TableCell>

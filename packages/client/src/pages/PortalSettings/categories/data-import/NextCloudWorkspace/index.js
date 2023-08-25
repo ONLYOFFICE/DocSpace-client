@@ -29,7 +29,7 @@ const NextcloudWrapper = styled.div`
 `;
 
 const NextcloudWorkspace = (props) => {
-  const { t, tReady } = props;
+  const { t, tReady, theme } = props;
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -42,7 +42,10 @@ const NextcloudWorkspace = (props) => {
   return (
     <>
       <NextcloudWrapper>
-        <Text className="data-import-description" lineHeight="20px" color="#657077">
+        <Text
+          className="data-import-description"
+          lineHeight="20px"
+          color={theme.isBase ? "#657077" : "#ADADAD"}>
           {t("Settings:AboutDataImport")}
         </Text>
         <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
@@ -55,9 +58,10 @@ const NextcloudWorkspace = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, auth }) => {
   const { initSettings } = setup;
   return {
     initSettings,
+    theme: auth.settingsStore.theme,
   };
 })(withTranslation(["Common, Settings"])(observer(NextcloudWorkspace)));

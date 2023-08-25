@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { mockData } from "../mockData.js";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -8,13 +9,16 @@ import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
-  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+const LICENSE_LIMIT = 100;
 
-  const selectedUsers = 0;
-  const totalUsers = 10;
-  const licencelimit = 0;
-  const totalLicenceLimit = 100;
+const SelectUsersStep = ({
+  t,
+  onNextStep,
+  onPrevStep,
+  showReminder,
+  numberOfCheckedAccounts,
+}) => {
+  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(mockData.slice(leftBoundary, rightBoundary));
@@ -30,14 +34,14 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
+        saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
 
       <UsersInfoBlock
         t={t}
-        selectedUsers={selectedUsers}
-        totalUsers={totalUsers}
-        licencelimit={licencelimit}
-        totalLicenceLimit={totalLicenceLimit}
+        selectedUsers={numberOfCheckedAccounts}
+        totalUsers={mockData.length}
+        totalLicenceLimit={LICENSE_LIMIT}
       />
 
       <SearchInput
@@ -60,4 +64,10 @@ const SelectUsersStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   );
 };
 
-export default SelectUsersStep;
+export default inject(({ importAccountsStore }) => {
+  const { numberOfCheckedAccounts } = importAccountsStore;
+
+  return {
+    numberOfCheckedAccounts,
+  };
+})(observer(SelectUsersStep));

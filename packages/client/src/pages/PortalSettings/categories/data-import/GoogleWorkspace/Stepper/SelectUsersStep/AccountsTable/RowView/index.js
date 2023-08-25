@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
+import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import RowContainer from "@docspace/components/row-container";
@@ -15,6 +16,7 @@ const StyledRowContainer = styled(RowContainer)`
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
+  height: 40px;
   min-height: 40px;
 
   .row-header-title {
@@ -31,31 +33,26 @@ const StyledRow = styled(Row)`
 `;
 
 const RowView = (props) => {
-  const { t, sectionWidth, viewAs, setViewAs, accountsData } = props;
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkbox, setCheckbox] = useState([]);
+  const {
+    t,
+    sectionWidth,
+    viewAs,
+    setViewAs,
+    accountsData,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = props;
   const rowRef = useRef(null);
 
-  const onCheck = (checked) => {
-    setIsChecked(checked);
-    if (checked) {
-      setCheckbox(accountsData.map((data) => data.id));
-    } else {
-      setCheckbox([]);
-    }
+  const toggleAll = (e) => {
+    toggleAllAccounts({ target: { checked: !e.target.checked } }, mockData);
   };
 
-  const onChangeAllCheckbox = (e) => {
-    onCheck(e.target.checked);
-  };
-
-  const onChangeCheckbox = (id, checked) => {
-    if (checked) {
-      setCheckbox([...checkbox, id]);
-    } else {
-      setCheckbox([...checkbox.filter((item) => item !== id)]);
-    }
-  };
+  const isIndeterminate =
+    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -65,37 +62,50 @@ const RowView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
+    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
       <StyledRow
-        key="Name"
         sectionWidth={sectionWidth}
-        onClick={onChangeAllCheckbox}
+        onClick={toggleAll}
+        indeterminate={isIndeterminate}
+        checkbox
+        checked={checkedAccounts.length === mockData.length}
       >
         <Text className="row-header-title">{t("Common:Name")}</Text>
       </StyledRow>
       {accountsData.map((data) => (
         <UsersRow
           key={data.id}
-          id={data.id}
           data={data}
           sectionWidth={sectionWidth}
-          checkbox={checkbox}
-          isChecked={isChecked}
-          onChangeCheckbox={onChangeCheckbox}
+          toggleAccount={() => toggleAccount(data.id)}
+          isChecked={isAccountChecked(data.id)}
         />
       ))}
     </StyledRowContainer>
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
+  const {
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = importAccountsStore;
 
   return {
     viewAs,
     setViewAs,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
   };
 })(observer(RowView));

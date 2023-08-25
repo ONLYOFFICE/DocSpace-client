@@ -40,24 +40,18 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 const UsersTableRow = ({
-  id,
   displayName,
   email,
   dublicate,
   isChecked,
-  checkbox,
-  onChangeCheckbox,
+  toggleAccount,
 }) => {
   const isExistingUser = dublicate !== "—";
 
-  const onChange = (e) => {
-    onChangeCheckbox(id, e.target.checked);
-  };
-
   return (
-    <StyledTableRow checked={isChecked}>
+    <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>
-        <Checkbox isChecked={checkbox.includes(id)} onChange={onChange} />
+        <Checkbox isChecked={isChecked} onChange={toggleAccount} />
         <Text className="username">{displayName}</Text>
       </TableCell>
 

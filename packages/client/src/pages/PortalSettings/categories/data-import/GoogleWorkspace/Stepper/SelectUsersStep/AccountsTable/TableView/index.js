@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
+import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import UsersTableHeader from "./UsersTableHeader";
@@ -38,27 +39,29 @@ const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = (props) => {
-  const { userId, viewAs, setViewAs, sectionWidth, accountsData } = props;
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkbox, setCheckbox] = useState([]);
+  const {
+    userId,
+    viewAs,
+    setViewAs,
+    sectionWidth,
+    accountsData,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = props;
   const tableRef = useRef(null);
 
-  const onChangeAllCheckbox = (e) => {
-    setIsChecked(e.target.checked);
-    if (e.target.checked) {
-      setCheckbox(accountsData.map((data) => data.id));
-    } else {
-      setCheckbox([]);
-    }
+  const toggleAll = (e) => toggleAllAccounts(e, mockData);
+
+  const handleToggle = (e, id) => {
+    e.stopPropagation();
+    toggleAccount(id);
   };
 
-  const onChangeCheckbox = (id, checked) => {
-    if (checked) {
-      setCheckbox([...checkbox, id]);
-    } else {
-      setCheckbox([...checkbox.filter((item) => item !== id)]);
-    }
-  };
+  const isIndeterminate =
+    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -67,6 +70,7 @@ const TableView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
+    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -80,9 +84,9 @@ const TableView = (props) => {
         userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        onChangeAllCheckbox={onChangeAllCheckbox}
-        isChecked={isChecked}
-        isIndeterminate={checkbox.length && !isChecked}
+        isIndeterminate={isIndeterminate}
+        isChecked={checkedAccounts.length === mockData.length}
+        toggleAll={toggleAll}
       />
       <TableBody
         itemHeight={49}
@@ -101,9 +105,8 @@ const TableView = (props) => {
             displayName={data.displayName}
             email={data.email}
             dublicate={data.dublicate}
-            checkbox={checkbox}
-            isChecked={isChecked}
-            onChangeCheckbox={onChangeCheckbox}
+            isChecked={isAccountChecked(data.id)}
+            toggleAccount={(e) => handleToggle(e, data.id)}
           />
         ))}
       </TableBody>
@@ -111,13 +114,25 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const {
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+  } = importAccountsStore;
 
   return {
     viewAs,
     setViewAs,
     userId,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
   };
 })(observer(TableView));

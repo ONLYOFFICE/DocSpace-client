@@ -32,9 +32,9 @@ const UsersTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
-    onChangeAllCheckbox,
-    isChecked,
     isIndeterminate,
+    isChecked,
+    toggleAll,
   } = props;
 
   const defaultColumns = [
@@ -48,8 +48,8 @@ const UsersTableHeader = (props) => {
       minWidth: 180,
       checkbox: {
         value: isChecked,
-        onChange: onChangeAllCheckbox,
-        isIndeterminate: isIndeterminate,
+        isIndeterminate,
+        onChange: toggleAll,
       },
       onChange: onColumnChange,
     },
@@ -71,10 +71,6 @@ const UsersTableHeader = (props) => {
 
   const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
 
-  useEffect(() => {
-    setColumns(getColumns(defaultColumns));
-  }, [isIndeterminate, isChecked]);
-
   function onColumnChange(key, e) {
     const columnIndex = columns.findIndex((c) => c.key === key);
 
@@ -89,6 +85,10 @@ const UsersTableHeader = (props) => {
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns));
+  }, [isIndeterminate, isChecked]);
 
   return (
     <TableHeader

@@ -579,7 +579,7 @@ class FilesStore {
     }
   };
 
-  addActiveItems = (files, folders) => {
+  addActiveItems = (files, folders, boards) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
         this.setActiveFolders(folders);
@@ -593,6 +593,14 @@ class FilesStore {
         this.setActiveFiles(files);
       } else {
         files.map((item) => this.activeFiles.push(item));
+      }
+    }
+
+    if (boards && boards.length) {
+      if (!this.activeBoards.length) {
+        this.setActiveBoards(boards);
+      } else {
+        boards.map((item) => this.activeBoards.push(item));
       }
     }
   };
@@ -881,6 +889,8 @@ class FilesStore {
   getFilesChecked = (file, selected) => {
     if (!file.parentId) {
       if (this.activeFiles.includes(file.id)) return false;
+    } else if (file.isDashboard) {
+      if (this.activeBoards.includes(file.id)) return false;
     } else {
       if (this.activeFolders.includes(file.id)) return false;
     }
@@ -2396,9 +2406,12 @@ class FilesStore {
     this.scrollToTop();
   };
 
-  removeFiles = (fileIds, folderIds, showToast) => {
+  removeFiles = (fileIds, folderIds, showToast, boardIds) => {
     const newFilter = this.filter.clone();
-    const deleteCount = (fileIds?.length ?? 0) + (folderIds?.length ?? 0);
+    const deleteCount =
+      (fileIds?.length ?? 0) +
+      (folderIds?.length ?? 0) +
+      (boardIds?.length ?? 0);
 
     if (newFilter.total <= newFilter.pageCount) {
       const files = fileIds
@@ -2408,12 +2421,17 @@ class FilesStore {
         ? this.folders.filter((x) => !folderIds.includes(x.id))
         : this.folders;
 
+      const boards = boardIds
+        ? this.boards.filter((x) => !boardIds.includes(x.id))
+        : this.boards;
+
       newFilter.total -= deleteCount;
 
       runInAction(() => {
         this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
+        this.setBoards(boards);
         this.setTempActionFilesIds([]);
       });
 
@@ -2434,8 +2452,18 @@ class FilesStore {
           ? this.folders.filter((x) => !folderIds.includes(x.id))
           : this.folders;
 
+        const boards = boardIds
+          ? this.boards.filter((x) => !boardIds.includes(x.id))
+          : this.boards;
+
+        const [resBoards, resfolders] = partition(
+          res.folders,
+          (folder) => folder?.type === FolderType.Dashboard
+        );
+
         const newFiles = [...files, ...res.files];
-        const newFolders = [...folders, ...res.folders];
+        const newFolders = [...folders, ...resfolders];
+        const newBoards = [...boards, ...resBoards];
 
         const filter = this.filter.clone();
         filter.total = res.total;
@@ -2444,6 +2472,7 @@ class FilesStore {
           this.setFilter(filter);
           this.setFiles(newFiles);
           this.setFolders(newFolders);
+          this.setBoards(newBoards);
         });
 
         showToast && showToast();

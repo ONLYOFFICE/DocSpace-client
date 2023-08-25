@@ -263,6 +263,7 @@ class FilesActionStore {
       bufferSelection,
       activeFiles,
       activeFolders,
+      activeBoards,
     } = this.filesStore;
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
@@ -286,6 +287,7 @@ class FilesActionStore {
 
     let folderIds = [];
     let fileIds = [];
+    let boardIds = [];
 
     let i = 0;
     while (selection.length !== i) {
@@ -293,6 +295,9 @@ class FilesActionStore {
         // try to fix with one check later (see onDeleteMediaFile)
         const isActiveFile = activeFiles.find((id) => id === selection[i].id);
         !isActiveFile && fileIds.push(selection[i].id);
+      } else if (selection[i].isDashboard) {
+        const isActiveBoard = activeBoards.some((id) => id === selection[i].id);
+        !isActiveBoard && boardIds.push(selection[i].id);
       } else {
         // try to fix with one check later (see onDeleteMediaFile)
         const isActiveFolder = activeFolders.find(
@@ -303,8 +308,8 @@ class FilesActionStore {
       i++;
     }
 
-    if (!folderIds.length && !fileIds.length) return;
-    const filesCount = folderIds.length + fileIds.length;
+    if (!folderIds.length && !fileIds.length && !boardIds.length) return;
+    const filesCount = folderIds.length + fileIds.length + boardIds.length;
 
     setSecondaryProgressBarData({
       icon: "trash",
@@ -316,23 +321,31 @@ class FilesActionStore {
       operationId,
     });
 
-    addActiveItems(fileIds);
-    addActiveItems(null, folderIds);
+    addActiveItems(fileIds, folderIds, boardIds);
+    // addActiveItems(null, folderIds);
 
     if (this.dialogsStore.isFolderActions && withoutDialog) {
       folderIds = [];
       fileIds = [];
+      boardIds = [];
 
       folderIds.push(selection[0]);
     }
 
-    if (folderIds.length || fileIds.length) {
+    if (folderIds.length || fileIds.length || boardIds.length) {
       this.isMediaOpen();
+
+      console.log();
 
       try {
         this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
-        await removeFiles(folderIds, fileIds, deleteAfter, immediately)
+        await removeFiles(
+          [...folderIds, ...boardIds],
+          fileIds,
+          deleteAfter,
+          immediately
+        )
           .then(async (res) => {
             if (res[0]?.error) return Promise.reject(res[0].error);
             const data = res[0] ? res[0] : null;
@@ -358,11 +371,21 @@ class FilesActionStore {
             };
 
             if (withPaging || this.dialogsStore.isFolderActions) {
-              this.updateCurrentFolder(fileIds, folderIds, false, operationId);
+              this.updateCurrentFolder(
+                fileIds,
+                [...folderIds, ...boardIds],
+                false,
+                operationId
+              );
               showToast();
             } else {
               this.updateFilesAfterDelete(operationId);
-              this.filesStore.removeFiles(fileIds, folderIds, showToast);
+              this.filesStore.removeFiles(
+                fileIds,
+                folderIds,
+                showToast,
+                boardIds
+              );
               this.uploadDataStore.removeFiles(fileIds);
             }
 
@@ -376,11 +399,11 @@ class FilesActionStore {
             }
           })
           .finally(() => {
-            clearActiveOperations(fileIds, folderIds);
+            clearActiveOperations(fileIds, folderIds, boardIds);
             getIsEmptyTrash();
           });
       } catch (err) {
-        clearActiveOperations(fileIds, folderIds);
+        clearActiveOperations(fileIds, folderIds, boardIds);
         setSecondaryProgressBarData({
           visible: true,
           alert: true,
@@ -706,6 +729,8 @@ class FilesActionStore {
     isThirdParty,
     isRoom
   ) => {
+    console.log("deleteItemAction");
+
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =

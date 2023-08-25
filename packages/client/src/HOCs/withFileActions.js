@@ -339,6 +339,7 @@ export default function withFileActions(WrappedFileItem) {
         hotkeyCaret,
         activeFiles,
         activeFolders,
+        activeBoards,
         setEnabledHotkeys,
         setSelected,
         withCtrlSelect,
@@ -361,7 +362,8 @@ export default function withFileActions(WrappedFileItem) {
           (x) =>
             x === item.id &&
             (item.isFolder || (!item.fileExst && item.id === -1))
-        ) !== -1;
+        ) !== -1 ||
+        activeBoards.some((id) => item.id === id && item.isDashboard);
 
       let isActive = false;
 

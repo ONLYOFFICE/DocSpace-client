@@ -1610,16 +1610,25 @@ class UploadDataStore {
     return promise;
   };
 
-  clearActiveOperations = (fileIds = [], folderIds = []) => {
-    const { activeFiles, activeFolders, setActiveFiles, setActiveFolders } =
-      this.filesStore;
+  clearActiveOperations = (fileIds = [], folderIds = [], boardIds = []) => {
+    const {
+      activeFiles,
+      activeBoards,
+      activeFolders,
+      setActiveFiles,
+      setActiveBoards,
+      setActiveFolders,
+    } = this.filesStore;
 
     const newActiveFiles = activeFiles.filter((el) => !fileIds?.includes(el));
     const newActiveFolders = activeFolders.filter(
       (el) => !folderIds.includes(el)
     );
 
+    const newActiveBoards = activeBoards.filter((id) => !boardIds.includes(id));
+
     setActiveFiles(newActiveFiles);
+    setActiveBoards(newActiveBoards);
     setActiveFolders(newActiveFolders);
   };
 

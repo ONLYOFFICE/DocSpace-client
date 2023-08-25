@@ -531,7 +531,12 @@ class FilesActionStore {
     }
   };
 
-  downloadFiles = async (fileConvertIds, folderIds, translations) => {
+  downloadFiles = async (
+    fileConvertIds,
+    folderIds,
+    translations,
+    boardIds = []
+  ) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
@@ -559,45 +564,47 @@ class FilesActionStore {
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
-    addActiveItems(fileIds, folderIds);
+    addActiveItems(fileIds, folderIds, boardIds);
 
     try {
-      await downloadFiles(fileConvertIds, folderIds).then(async (res) => {
-        const data = res[0] ? res[0] : null;
-        const pbData = {
-          icon: "file",
-          label,
-          operationId,
-        };
-
-        const item =
-          data?.finished && data?.url
-            ? data
-            : await this.uploadDataStore.loopFilesOperations(
-                data,
-                pbData,
-                true
-              );
-
-        clearActiveOperations(fileIds, folderIds);
-        this.setIsBulkDownload(false);
-
-        if (item.url) {
-          window.location.href = item.url;
-        } else {
-          setSecondaryProgressBarData({
-            visible: true,
-            alert: true,
+      await downloadFiles(fileConvertIds, [...folderIds, ...boardIds]).then(
+        async (res) => {
+          const data = res[0] ? res[0] : null;
+          const pbData = {
+            icon: "file",
+            label,
             operationId,
-          });
-        }
+          };
 
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        !item.url && toastr.error(translations.error, null, 0, true);
-      });
+          const item =
+            data?.finished && data?.url
+              ? data
+              : await this.uploadDataStore.loopFilesOperations(
+                  data,
+                  pbData,
+                  true
+                );
+
+          clearActiveOperations(fileIds, folderIds, boardIds);
+          this.setIsBulkDownload(false);
+
+          if (item.url) {
+            window.location.href = item.url;
+          } else {
+            setSecondaryProgressBarData({
+              visible: true,
+              alert: true,
+              operationId,
+            });
+          }
+
+          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+          !item.url && toastr.error(translations.error, null, 0, true);
+        }
+      );
     } catch (err) {
       this.setIsBulkDownload(false);
-      clearActiveOperations(fileIds, folderIds);
+      clearActiveOperations(fileIds, folderIds, boardIds);
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
@@ -617,6 +624,8 @@ class FilesActionStore {
 
     let fileIds = [];
     let folderIds = [];
+    let boardIds = [];
+
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
@@ -628,6 +637,9 @@ class FilesActionStore {
       if (item.fileExst) {
         fileIds.push(item.id);
         items.push({ id: item.id, fileExst: item.fileExst });
+      } else if (item.isDashboard) {
+        boardIds.push(item.id);
+        items.push({ id: item.id });
       } else {
         folderIds.push(item.id);
         items.push({ id: item.id });
@@ -637,13 +649,14 @@ class FilesActionStore {
     if (this.dialogsStore.isFolderActions) {
       fileIds = [];
       folderIds = [];
+      boardIds = [];
 
       folderIds.push(bufferSelection);
       this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);
-    return this.downloadFiles(fileIds, folderIds, label).finally(() =>
+    return this.downloadFiles(fileIds, folderIds, label, boardIds).finally(() =>
       this.setGroupMenuBlocked(false)
     );
   };

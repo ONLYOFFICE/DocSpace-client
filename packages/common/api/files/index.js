@@ -53,6 +53,8 @@ export function getFolderInfo(folderId) {
 }
 
 export function getFolderPath(folderId) {
+  if (!folderId) debugger;
+
   const options = {
     method: "get",
     url: `/files/folder/${folderId}/path`,

@@ -19,7 +19,7 @@ import {
 const avialableLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
 const defaultOformLocale = getDefaultOformLocale();
 
-const LanguageFilter = ({ getOforms }) => {
+const LanguageFilter = ({ oformsFilter, getOforms }) => {
   const dropdownRef = useRef(null);
 
   const location = useLocation();
@@ -33,7 +33,7 @@ const LanguageFilter = ({ getOforms }) => {
 
   const onSelectLanguage = (newLocale) => {
     return () => {
-      const newFilter = OformsFilter.getFilter(location);
+      const newFilter = oformsFilter.clone();
       newFilter.locale = newLocale;
       getOforms(newFilter);
       navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -86,5 +86,6 @@ const LanguageFilter = ({ getOforms }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,
 }))(withTranslation(["FormGallery", "Common"])(LanguageFilter));

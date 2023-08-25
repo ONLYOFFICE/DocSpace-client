@@ -25,6 +25,11 @@ class OformsStore {
     if (oformsFilter) {
       newOformsFilter.page = oformsFilter.page;
       newOformsFilter.total = oformsFilter.total;
+      newOformsFilter.categorizeBy = filter.categorizeBy;
+      newOformsFilter.categoryUrl = filter.categoryUrl;
+      newOformsFilter.locale = filter.locale;
+      newOformsFilter.sortBy = filter.sortBy;
+      newOformsFilter.sortOrder = filter.sortOrder;
     }
 
     runInAction(() => {

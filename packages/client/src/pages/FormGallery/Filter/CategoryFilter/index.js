@@ -11,9 +11,14 @@ import { withTranslation } from "react-i18next";
 import SubListByBranch from "./SubListByBranch";
 import SubListByType from "./SubListByType";
 import SubListPopular from "./SubListPopular";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import OformsFilter from "@docspace/common/api/oforms/filter";
 
-const CategoryFilter = ({ t }) => {
+const CategoryFilter = ({ t, getOforms }) => {
   const dropdownRef = useRef(null);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -40,6 +45,14 @@ const CategoryFilter = ({ t }) => {
     setMobileSubByTypeIsOpen(false);
   };
 
+  const onViewAllTemplates = () => {
+    const newFilter = OformsFilter.getFilter(location);
+    newFilter.categorizeBy = "";
+    newFilter.categoryUrl = "";
+    getOforms(newFilter);
+    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  };
+
   return (
     <Styled.CategoryFilter isOpen={isOpen}>
       <div className="combobox" onClick={toggleDropdownIsOpen}>
@@ -62,7 +75,7 @@ const CategoryFilter = ({ t }) => {
           <DropDownItem
             className="dropdown-item"
             label={t("FormGallery:ViewAllTemplates")}
-            onClick={() => {}}
+            onClick={onViewAllTemplates}
           />
           <DropDownItem isSeparator />
 
@@ -100,6 +113,6 @@ const CategoryFilter = ({ t }) => {
     </Styled.CategoryFilter>
   );
 };
-export default inject(({}) => ({}))(
-  withTranslation(["FormGallery"])(CategoryFilter)
-);
+export default inject(({ oformsStore }) => ({
+  getOforms: oformsStore.getOforms,
+}))(withTranslation(["FormGallery"])(CategoryFilter));

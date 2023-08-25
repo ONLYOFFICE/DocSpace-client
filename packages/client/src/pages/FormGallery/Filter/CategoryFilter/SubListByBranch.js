@@ -4,31 +4,22 @@ import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
 import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { getCategoriesByBranch } from "@docspace/common/api/oforms";
 import { useState, useEffect } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { OformCategory } from "@docspace/client/src/helpers/constants";
 
-const SubListByBranch = ({ isOpen, getOforms }) => {
+const SubListByBranch = ({ isOpen, oformsFilter, getOforms }) => {
   const [formsByBranch, setFormsByBranch] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { category } = useParams();
 
-  const onOpenCategory = (newCategory) => {
-    console.log(location);
-    console.log(newCategory);
-    console.log(category);
-
-    const newFilter = OformsFilter.getFilter(location);
-    newFilter.categorizeBy = "categorie";
-    newFilter.categoryId = newCategory.id;
+  const onOpenCategory = (category) => {
+    const newFilter = oformsFilter.clone();
+    newFilter.categorizeBy = OformCategory.Branch;
+    newFilter.categoryUrl = category.attributes.urlReq;
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
@@ -76,5 +67,6 @@ const SubListByBranch = ({ isOpen, getOforms }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,
 }))(withTranslation(["FormGallery", "Common"])(SubListByBranch));

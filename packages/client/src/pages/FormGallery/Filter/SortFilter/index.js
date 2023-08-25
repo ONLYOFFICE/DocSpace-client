@@ -1,12 +1,9 @@
 import * as Styled from "./index.styled";
 
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
 import { useRef, useState } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
-import { ReactSVG } from "react-svg";
 import IconButton from "@docspace/components/icon-button";
 import ComboBox from "@docspace/components/combobox";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
@@ -26,7 +23,7 @@ const sortData = [
   },
 ];
 
-const SortFilter = ({ t, getOforms }) => {
+const SortFilter = ({ t, oformsFilter, getOforms }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -39,18 +36,20 @@ const SortFilter = ({ t, getOforms }) => {
   const onCloseCombobox = () => setIsOpen(false);
 
   const onSetSortBy = (sortBy) => {
-    const newFilter = OformsFilter.getFilter(location);
+    const newFilter = oformsFilter.clone();
     newFilter.sortBy = sortBy;
+    if (!sortOrder) newFilter.sortOrder = "asc";
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
 
     onCloseCombobox();
   };
 
-  const onToggleSortOrder = (e) => {
+  const onToggleSortOrder = (e, sortBy) => {
     e.stopPropagation();
 
-    const newFilter = OformsFilter.getFilter(location);
+    const newFilter = oformsFilter.clone();
+    newFilter.sortBy = sortBy;
     newFilter.sortOrder = sortOrder === "desc" ? "asc" : "desc";
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -94,7 +93,7 @@ const SortFilter = ({ t, getOforms }) => {
                 >
                   <Text fontWeight={600}>{t(`Common:${item.label}`)}</Text>
                   <SortDesc
-                    onClick={onToggleSortOrder}
+                    onClick={(e) => onToggleSortOrder(e, item.key)}
                     className="sortorder-arrow"
                   />
                 </Styled.SortDropdownItem>
@@ -115,5 +114,6 @@ const SortFilter = ({ t, getOforms }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,
 }))(withTranslation(["FormGallery", "Common"])(SortFilter));

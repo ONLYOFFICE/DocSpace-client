@@ -4,30 +4,21 @@ import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
 import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { getCategoriesByType } from "@docspace/common/api/oforms";
 import { useState, useEffect } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import OformsFilter from "@docspace/common/api/oforms/filter";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Scrollbar from "@docspace/components/scrollbar";
-import styled from "styled-components";
+import { OformCategory } from "@docspace/client/src/helpers/constants";
 
-const SubListByType = ({ getOforms, isOpen }) => {
+const SubListByType = ({ isOpen, getOforms, oformsFilter }) => {
   const [formsByType, setFormsByType] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const onOpenCategory = (category) => {
-    console.log(category);
-
-    const newFilter = OformsFilter.getFilter(location);
-    newFilter.categorizeBy = "type";
-    newFilter.categoryName = category.attributes.urlReq;
+    const newFilter = oformsFilter.clone();
+    newFilter.categorizeBy = OformCategory.Type;
+    newFilter.categoryUrl = category.attributes.urlReq;
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
@@ -75,5 +66,6 @@ const SubListByType = ({ getOforms, isOpen }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,
 }))(withTranslation(["FormGallery", "Common"])(SubListByType));

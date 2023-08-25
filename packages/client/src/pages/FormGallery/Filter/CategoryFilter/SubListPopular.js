@@ -5,11 +5,24 @@ import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { getPopularCategories } from "@docspace/common/api/oforms";
 import { useState, useEffect } from "react";
 
-const SubListPopular = ({ isOpen }) => {
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import OformsFilter from "@docspace/common/api/oforms/filter";
+import { inject } from "mobx-react";
+import { withTranslation } from "react-i18next";
+import { OformCategory } from "@docspace/client/src/helpers/constants";
+
+const SubListPopular = ({ isOpen, oformsFilter, getOforms }) => {
   const [popularForms, setPopularForms] = useState([]);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const onOpenCategory = (category) => {
-    openCategory();
+    const newFilter = oformsFilter.clone();
+    newFilter.categorizeBy = OformCategory.Compilation;
+    newFilter.categoryUrl = category.attributes.urlReq;
+    getOforms(newFilter);
+    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
   useEffect(() => {
@@ -54,4 +67,7 @@ const SubListPopular = ({ isOpen }) => {
     );
 };
 
-export default SubListPopular;
+export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
+  getOforms: oformsStore.getOforms,
+}))(withTranslation(["FormGallery", "Common"])(SubListPopular));

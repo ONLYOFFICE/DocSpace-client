@@ -16,6 +16,8 @@ import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { mockData as nextStepData } from "../ThirdStep/mockData";
 import { mockData } from "./mockData";
 
+const LICENSE_LIMIT = 100;
+
 const SecondStep = (props) => {
   const { t, incrementStep, decrementStep, numberOfCheckedAccounts } = props;
 
@@ -44,13 +46,14 @@ const SecondStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
+            saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
           />
 
           <UsersInfoBlock
             t={t}
             selectedUsers={numberOfCheckedAccounts}
             totalUsers={mockData.length}
-            totalLicenceLimit={100}
+            totalLicenceLimit={LICENSE_LIMIT}
           />
 
           <SearchInput
@@ -84,6 +87,7 @@ const SecondStep = (props) => {
         cancelButtonLabel={t("Common:Back")}
         showReminder
         displaySettings
+        saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
     </Wrapper>
   );

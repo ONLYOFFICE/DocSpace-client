@@ -86,10 +86,6 @@ class OformsFilter {
     this.total = total;
   }
 
-  getStartIndex = () => {
-    return this.page * this.pageSize;
-  };
-
   toUrlParams = () => {
     const { categorizeBy, categoryUrl, sortBy, sortOrder, locale } = this;
 
@@ -103,9 +99,19 @@ class OformsFilter {
   };
 
   toApiUrlParams = () => {
-    const { categorizeBy, categoryUrl, sortBy, sortOrder, locale } = this;
+    const {
+      page,
+      pageSize,
+      categorizeBy,
+      categoryUrl,
+      sortBy,
+      sortOrder,
+      locale,
+    } = this;
 
     const dtoFilter = {};
+    dtoFilter[PAGE] = page;
+    dtoFilter[PAGE_SIZE] = pageSize;
     if (categorizeBy && categoryUrl)
       dtoFilter[`filters[${categorizeBy}][urlReq][$eq]`] = categoryUrl;
     if (sortBy && sortOrder) dtoFilter[SORT] = `${sortBy}:${sortOrder}`;

@@ -8,81 +8,66 @@ class OformsStore {
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
-  gallerySelected = null;
   oformsIsLoading = false;
+  gallerySelected = null;
 
   constructor(authStore) {
-    makeAutoObservable(this);
-
     this.authStore = authStore;
+    makeAutoObservable(this);
   }
 
-  getOforms = async (filter = OformsFilter.getDefault()) => {
-    const oformData = await this.authStore.getOforms(filter);
-    const oformsFilter = oformData?.data?.meta?.pagination;
-    const newOformsFilter = this.oformsFilter.clone();
-
-    if (oformsFilter) {
-      newOformsFilter.page = oformsFilter.page;
-      newOformsFilter.total = oformsFilter.total;
-      newOformsFilter.categorizeBy = filter.categorizeBy;
-      newOformsFilter.categoryUrl = filter.categoryUrl;
-      newOformsFilter.locale = filter.locale;
-      newOformsFilter.sortBy = filter.sortBy;
-      newOformsFilter.sortOrder = filter.sortOrder;
-    }
-
-    runInAction(() => {
-      this.setOformsFilter(newOformsFilter);
-      this.setOformFiles(oformData?.data?.data ?? []);
-    });
-  };
-
-  setOformFiles = (oformFiles) => {
-    this.oformFiles = oformFiles;
-  };
-
-  setOformsFilter = (oformsFilter) => {
-    this.oformsFilter = oformsFilter;
-  };
-
+  setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
+  setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
+  setOformsIsLoading = (oformsIsLoading) =>
+    (this.oformsIsLoading = oformsIsLoading);
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
     this.authStore.infoPanelStore.setSelection(gallerySelected);
   };
 
-  setOformsIsLoading = (oformsIsLoading) => {
-    this.oformsIsLoading = oformsIsLoading;
+  getOforms = async (filter = OformsFilter.getDefault()) => {
+    const oformData = await this.authStore.getOforms(filter);
+    const forms = oformData?.data?.data ?? [];
+
+    runInAction(() => {
+      this.setOformsFilter(filter);
+      this.setOformFiles(forms);
+    });
   };
 
   loadMoreForms = async () => {
     if (!this.hasMoreForms || this.oformsIsLoading) return;
-
-    // console.log("loadMoreForms");
-
     this.setOformsIsLoading(true);
 
     const newOformsFilter = this.oformsFilter.clone();
-
     newOformsFilter.page += 1;
-    this.setOformsFilter(newOformsFilter);
 
-    const oformData = await this.authStore.getOforms(newOformsFilter);
+    const oformData = await this.authStore.getOforms(newOformsFilter, true);
     const newForms = oformData?.data?.data ?? [];
 
     runInAction(() => {
+      this.setOformsFilter(newOformsFilter);
       this.setOformFiles([...this.oformFiles, ...newForms]);
       this.setOformsIsLoading(false);
     });
   };
 
+  sortOforms = (sortBy, sortOrder) => {
+    if (!sortBy) return;
+
+    const newOformsFilter = this.oformsFilter.clone();
+    newOformsFilter.page = 1;
+    newOformsFilter.sortBy = sortBy;
+    newOformsFilter.sortOrder = sortOrder;
+
+    this.getOforms(newOformsFilter);
+  };
+
+  filterByCategory = async () => {};
+
   get hasGalleryFiles() {
     return this.oformFiles && !!this.oformFiles.length;
   }
-
-  //   get oformFilesLength() {
-  //     return this.oformFiles.length;
-  //   }
 
   get oformsFilterTotal() {
     return this.oformsFilter.total;

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
 import { smallTablet } from "@docspace/components/utils/device";
+import { getDefaultOformLocale } from "@docspace/common/utils";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 
 export const StyledFilter = styled.div`
@@ -45,7 +46,26 @@ export const StyledFilter = styled.div`
   }
 `;
 
-const SectionFilterContent = ({}) => {
+const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [isInitLoading, setIsInitLoading] = useState(true);
+
+  useEffect(() => {
+    const firstLoadFilter = OformsFilter.getFilter(location);
+    if (!firstLoadFilter.locale)
+      firstLoadFilter.locale = getDefaultOformLocale();
+
+    setOformsFilter(firstLoadFilter);
+    setIsInitLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (isInitLoading) return;
+    navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+  }, [oformsFilter.sortBy, oformsFilter.sortOrder]);
+
   return (
     <StyledFilter>
       <div className="form-only-filters">
@@ -60,4 +80,7 @@ const SectionFilterContent = ({}) => {
   );
 };
 
-export default inject(({}) => ({}))(observer(SectionFilterContent));
+export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
+  setOformsFilter: oformsStore.setOformsFilter,
+}))(SectionFilterContent);

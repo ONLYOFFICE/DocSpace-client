@@ -61,9 +61,6 @@ const GoogleWorkspace = (props) => {
   const [currentStep, setCurrentStep] = useState(1);
   const { t } = props;
 
-  const isSecondStep = currentStep === 2;
-  const isThirdStep = currentStep === 3;
-
   useEffect(() => {
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -152,19 +149,6 @@ const GoogleWorkspace = (props) => {
           setShowReminder={setShowReminder}
         />
       </div>
-      {isSecondStep || isThirdStep ? (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={onNextStep}
-          onCancelClick={onPrevStep}
-          showReminder={showReminder}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
-        />
-      ) : (
-        <></>
-      )}
     </GoogleWrapper>
   );
 };

@@ -60,6 +60,17 @@ const SelectUsersStep = ({
           setDataPortion={handleDataChange}
         />
       )}
+
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={onNextStep}
+        onCancelClick={onPrevStep}
+        showReminder={showReminder}
+        saveButtonLabel={t("Settings:NextStep")}
+        cancelButtonLabel={t("Common:Back")}
+        displaySettings={true}
+        saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+      />
     </>
   );
 };

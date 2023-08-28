@@ -129,12 +129,8 @@ const InfiniteGrid = (props) => {
 };
 
 export default inject(({ auth, filesStore, oformsStore }) => {
-  const {
-    oformFiles,
-    hasMoreForms,
-    oformsFilterTotal,
-    loadMoreForms,
-  } = oformsStore;
+  const { oformFiles, hasMoreForms, oformsFilterTotal, loadMoreForms } =
+    oformsStore;
 
   const { getCountTilesInRow } = filesStore;
 

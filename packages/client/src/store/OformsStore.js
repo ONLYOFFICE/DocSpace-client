@@ -27,15 +27,21 @@ class OformsStore {
 
   getOforms = async (filter = OformsFilter.getDefault()) => {
     const oformData = await this.authStore.getOforms(filter);
-    const forms = oformData?.data?.data ?? [];
+
+    const paginationData = oformData?.data?.meta?.pagination;
+    if (paginationData) {
+      filter.page = paginationData.page;
+      filter.total = paginationData.total;
+    }
 
     runInAction(() => {
       this.setOformsFilter(filter);
-      this.setOformFiles(forms);
+      this.setOformFiles(oformData?.data?.data ?? []);
     });
   };
 
   loadMoreForms = async () => {
+    console.log("loadmore!!");
     if (!this.hasMoreForms || this.oformsIsLoading) return;
     this.setOformsIsLoading(true);
 

@@ -55,25 +55,27 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 const UsersTypeTableRow = ({
-  id,
   displayName,
   email,
-  isChecked,
-  checkbox,
-  onChangeCheckbox,
   typeOptions,
+  isChecked,
+  toggleAccount,
 }) => {
   const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
   const userTypeRef = useRef();
 
-  const onChange = (e) => {
-    onChangeCheckbox(id, e.target.checked);
+  const handleAccountToggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.closest(".dropdown-container") ||
+      userTypeRef.current?.contains(e.target) ||
+      toggleAccount(e);
   };
 
   return (
-    <StyledTableRow checked={isChecked}>
+    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell>
-        <Checkbox isChecked={checkbox.includes(id)} onChange={onChange} />
+        <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text className="username">{displayName}</Text>
       </TableCell>
 

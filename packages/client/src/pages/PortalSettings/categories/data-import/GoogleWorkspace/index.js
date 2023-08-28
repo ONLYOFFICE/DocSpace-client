@@ -7,7 +7,6 @@ import styled from "styled-components";
 
 import StepContent from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import HelpButton from "@docspace/components/help-button";

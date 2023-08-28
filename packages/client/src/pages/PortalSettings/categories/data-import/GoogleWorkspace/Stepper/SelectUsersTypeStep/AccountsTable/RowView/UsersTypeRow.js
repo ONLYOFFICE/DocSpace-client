@@ -1,17 +1,22 @@
+import { useRef } from "react";
 import Row from "@docspace/components/row";
 import UsersTypeRowContent from "./UsersTypeRowContent";
 
 const UsersTypeRow = ({
-  isChecked,
-  onChangeCheckbox,
-  checkbox,
   data,
-  id,
   sectionWidth,
   typeOptions,
+  isChecked,
+  toggleAccount,
 }) => {
-  const onChange = (checked) => {
-    onChangeCheckbox(id, checked);
+  const userTypeRef = useRef();
+
+  const handleAccountToggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.closest(".dropdown-container") ||
+      userTypeRef.current?.contains(e.target) ||
+      toggleAccount(e);
   };
 
   return (
@@ -20,9 +25,9 @@ const UsersTypeRow = ({
         sectionWidth={sectionWidth}
         key={data.id}
         data={data}
-        checked={checkbox.includes(id)}
+        checked={isChecked}
         checkbox={isChecked}
-        onSelect={onChange}
+        onClick={handleAccountToggle}
         contextButtonSpacerWidth="0"
       >
         <UsersTypeRowContent
@@ -31,6 +36,7 @@ const UsersTypeRow = ({
           email={data.email}
           type={data.type}
           typeOptions={typeOptions}
+          userTypeRef={userTypeRef}
         />
       </Row>
     </>

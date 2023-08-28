@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
+import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import UsersTypeTableHeader from "./UsersTypeTableHeader";
@@ -72,13 +73,27 @@ const TableView = ({
   sectionWidth,
   accountsData,
   typeOptions,
+  checkedAccounts,
+  toggleAccount,
+  onCheckAccounts,
+  isAccountChecked,
+  cleanCheckedAccounts,
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkbox, setCheckbox] = useState([]);
   const tableRef = useRef(null);
-
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+  const isIndeterminate =
+    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
+
+  const toggleAll = (checked) => {
+    onCheckAccounts(checked, mockData);
+  };
+
+  const handleToggle = (e, id) => {
+    e.stopPropagation();
+    toggleAccount(id);
+  };
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -87,6 +102,7 @@ const TableView = ({
     } else {
       viewAs !== "table" && setViewAs("table");
     }
+    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const headerMenu = [
@@ -102,51 +118,29 @@ const TableView = ({
     },
   ];
 
-  const onCheck = (checked) => {
-    setIsChecked(checked);
-    if (checked) {
-      setCheckbox(accountsData.map((data) => data.id));
-    } else {
-      setCheckbox([]);
-    }
-  };
-
-  const onChangeAllCheckbox = (e) => {
-    onCheck(e.target.checked);
-  };
-
-  const onChangeCheckbox = (id, checked) => {
-    if (checked) {
-      setCheckbox([...checkbox, id]);
-    } else {
-      setCheckbox([...checkbox.filter((item) => item !== id)]);
-    }
-  };
-
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkbox.length > 0 && (
+      {checkedAccounts.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
-            onChange={onCheck}
-            headerMenu={headerMenu}
-            isChecked={isChecked}
-            isIndeterminate={checkbox.length && !isChecked}
-            withoutInfoPanelToggler
             sectionWidth={sectionWidth}
+            headerMenu={headerMenu}
+            withoutInfoPanelToggler
             withComboBox={false}
+            isIndeterminate={isIndeterminate}
+            isChecked={checkedAccounts.length === mockData.length}
+            onChange={toggleAll}
           />
         </div>
       )}
       <UsersTypeTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
-        userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        onChangeAllCheckbox={onChangeAllCheckbox}
-        isChecked={isChecked}
-        isIndeterminate={checkbox.length && !isChecked}
+        isIndeterminate={isIndeterminate}
+        isChecked={checkedAccounts.length === mockData.length}
+        toggleAll={toggleAll}
       />
       <TableBody
         itemHeight={49}
@@ -165,10 +159,9 @@ const TableView = ({
             displayName={data.displayName}
             email={data.email}
             type={data.type}
-            checkbox={checkbox}
-            isChecked={isChecked}
-            onChangeCheckbox={onChangeCheckbox}
             typeOptions={typeOptions}
+            isChecked={isAccountChecked(data.id)}
+            toggleAccount={(e) => handleToggle(e, data.id)}
           />
         ))}
       </TableBody>
@@ -176,13 +169,27 @@ const TableView = ({
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const {
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+    onCheckAccounts,
+  } = importAccountsStore;
 
   return {
     viewAs,
     setViewAs,
     userId,
+    checkedAccounts,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    cleanCheckedAccounts,
+    onCheckAccounts,
   };
 })(observer(TableView));

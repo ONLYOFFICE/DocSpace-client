@@ -32,9 +32,9 @@ const UsersTypeTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
-    onChangeAllCheckbox,
-    isChecked,
     isIndeterminate,
+    isChecked,
+    toggleAll,
   } = props;
 
   const defaultColumns = [
@@ -48,8 +48,8 @@ const UsersTypeTableHeader = (props) => {
       minWidth: 180,
       checkbox: {
         value: isChecked,
-        onChange: onChangeAllCheckbox,
-        isIndeterminate: isIndeterminate,
+        isIndeterminate,
+        onChange: toggleAll,
       },
       onChange: onColumnChange,
     },

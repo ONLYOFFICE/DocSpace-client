@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -65,9 +65,9 @@ const UsersTypeRowContent = ({
   displayName,
   email,
   typeOptions,
+  userTypeRef,
 }) => {
   const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
-  const userTypeRef = useRef();
 
   const contentData = [
     <Box displayProp="flex" justifyContent="space-between" alignItems="center">

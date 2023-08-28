@@ -13,8 +13,14 @@ class ImportAccountsStore {
       : [...this.checkedAccounts, id];
   };
 
+  onCheckAccounts = (checked, accounts) => {
+    this.checkedAccounts = checked ? accounts.map((data) => data.id) : [];
+  };
+
   toggleAllAccounts = (e, accounts) => {
-    this.checkedAccounts = e.target.checked ? accounts.map((data) => data.id) : [];
+    this.checkedAccounts = e.target.checked
+      ? accounts.map((data) => data.id)
+      : [];
   };
 
   isAccountChecked = (id) => this.checkedAccounts.includes(id);

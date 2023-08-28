@@ -11,6 +11,8 @@ const SelectionArea = (props) => {
     getCountTilesInRow,
     isRooms,
     foldersLength,
+    filesLength,
+    boardsLength,
     isInfoPanelVisible,
   } = props;
 
@@ -39,19 +41,28 @@ const SelectionArea = (props) => {
   };
 
   const selectableClass = viewAs === "tile" ? "files-item" : "window-item";
-  const itemHeight = viewAs === "table" ? 49 : viewAs === "row" ? 59 : null;
 
   const countRowsOfFolders = Math.ceil(foldersLength / countTilesInRow);
-  const division = foldersLength % countTilesInRow;
-  const countOfMissingTiles = division ? countTilesInRow - division : 0;
 
-  // const itemsContainer = document.getElementsByClassName(itemsContainerClass);
-  // const folderHeaderHeight = itemsContainer[0]
-  //   .getElementsByClassName("folder_header")[0]
-  //   .parentElement.getBoundingClientRect().height;
-  // const filesHeaderHeight = itemsContainer[0]
-  //   .getElementsByClassName("files_header")[0]
-  //   .parentElement.getBoundingClientRect().height;
+  const countRowsOfBoards = Math.ceil(boardsLength / countTilesInRow);
+
+  const foldersDivision = foldersLength % countTilesInRow;
+
+  const countOfMissingFolderTiles = foldersDivision
+    ? countTilesInRow - foldersDivision
+    : 0;
+
+  const boardsDivision = boardsLength % countTilesInRow;
+
+  const countOfMissingBoardTiles = boardsDivision
+    ? countTilesInRow - boardsDivision
+    : 0;
+
+  const countRowsOfFiles = Math.ceil(filesLength / countTilesInRow);
+  const filesDivision = filesLength % countTilesInRow;
+  const countOfMissingFilesTiles = filesDivision
+    ? countTilesInRow - filesDivision
+    : 0;
 
   return isMobile || dragging ? (
     <></>
@@ -61,19 +72,33 @@ const SelectionArea = (props) => {
       scrollClass="section-scroll"
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       selectableClass={selectableClass}
+      itemClass="files-item"
       onMove={onMove}
       viewAs={viewAs}
-      itemHeight={itemHeight}
       countTilesInRow={countTilesInRow}
       isRooms={isRooms}
-      countRowsOfFolders={countRowsOfFolders}
-      countOfMissingTiles={countOfMissingTiles}
-      folderTileGap={12}
-      fileTileGap={14}
-      foldersTileHeight={66}
-      filesTileHeight={222}
       folderHeaderHeight={35}
-      filesHeaderHeight={countRowsOfFolders ? 46 : 0}
+      defaultHeaderHeight={46}
+      arrayTypes={[
+        {
+          type: "board",
+          rowCount: countRowsOfBoards,
+          rowGap: 12,
+          countOfMissingTiles: countOfMissingBoardTiles,
+        },
+        {
+          type: "file",
+          rowCount: countRowsOfFiles,
+          rowGap: 14,
+          countOfMissingTiles: countOfMissingFilesTiles,
+        },
+        {
+          type: "folder",
+          rowCount: countRowsOfFolders,
+          rowGap: 12,
+          countOfMissingTiles: countOfMissingFolderTiles,
+        },
+      ]}
     />
   );
 };
@@ -85,6 +110,8 @@ export default inject(({ auth, filesStore, treeFoldersStore }) => {
     setSelections,
     getCountTilesInRow,
     folders,
+    files,
+    boards,
   } = filesStore;
   const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
   const { isVisible: isInfoPanelVisible } = auth.infoPanelStore;
@@ -97,7 +124,9 @@ export default inject(({ auth, filesStore, treeFoldersStore }) => {
     setSelections,
     getCountTilesInRow,
     isRooms,
+    boardsLength: boards.length,
     foldersLength: folders.length,
+    filesLength: files.length,
     isInfoPanelVisible,
   };
 })(observer(SelectionArea));

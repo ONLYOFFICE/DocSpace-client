@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
+import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 import UsersRow from "./UsersRow";
 
@@ -18,6 +19,12 @@ const StyledRow = styled(Row)`
   box-sizing: border-box;
   height: 40px;
   min-height: 40px;
+
+  .row-header-item {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+  }
 
   .row-header-title {
     color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
@@ -48,7 +55,7 @@ const RowView = (props) => {
   const rowRef = useRef(null);
 
   const toggleAll = (e) => {
-    toggleAllAccounts({ target: { checked: !e.target.checked } }, mockData);
+    toggleAllAccounts(e, mockData);
   };
 
   const isIndeterminate =
@@ -67,14 +74,17 @@ const RowView = (props) => {
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
-      <StyledRow
-        sectionWidth={sectionWidth}
-        onClick={toggleAll}
-        indeterminate={isIndeterminate}
-        checkbox
-        checked={checkedAccounts.length === mockData.length}
-      >
-        <Text className="row-header-title">{t("Common:Name")}</Text>
+      <StyledRow sectionWidth={sectionWidth}>
+        <div className="row-header-item">
+          {checkedAccounts.length > 0 && (
+            <Checkbox
+              isChecked={checkedAccounts.length === mockData.length}
+              isIndeterminate={isIndeterminate}
+              onChange={toggleAll}
+            />
+          )}
+          <Text className="row-header-title">{t("Common:Name")}</Text>
+        </div>
       </StyledRow>
       {accountsData.map((data) => (
         <UsersRow

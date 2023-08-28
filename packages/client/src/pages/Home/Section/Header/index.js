@@ -136,6 +136,7 @@ const SectionHeaderContent = (props) => {
     isHeaderChecked,
     isHeaderIndeterminate,
     showText,
+    oformsFilter,
 
     isEmptyArchive,
 
@@ -244,7 +245,10 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const createFolder = () => onCreate();
@@ -1046,6 +1050,7 @@ export default inject(
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
+    oformsStore,
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
     const isAdmin = auth.userStore.user?.isAdmin;
@@ -1118,6 +1123,8 @@ export default inject(
       emptyTrashInProgress,
       moveToPublicRoom,
     } = filesActionsStore;
+
+    const { oformsFilter } = oformsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
@@ -1193,6 +1200,7 @@ export default inject(
       currentFolderId: id,
       pathParts: pathParts,
       navigationPath: folderPath,
+      oformsFilter,
 
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,

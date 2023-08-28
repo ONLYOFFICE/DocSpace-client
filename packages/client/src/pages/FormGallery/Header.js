@@ -26,19 +26,15 @@ const SectionHeaderContent = (props) => {
   } = props;
 
   const navigate = useNavigate();
-  const params = useParams();
+  const { fromFolderId } = useParams();
 
   const onBackToFiles = () => {
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
-
-    filter.folder = params.folderId;
-
+    filter.folder = fromFolderId;
     const filterParamsStr = filter.toUrlParams();
-
-    const url = getCategoryUrl(categoryType, filter.folder);
-
+    const url = getCategoryUrl(categoryType, fromFolderId);
     const pathname = `${url}?${filterParamsStr}`;
 
     navigate(

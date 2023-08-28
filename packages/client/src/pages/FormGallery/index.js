@@ -15,17 +15,10 @@ const FormGallery = ({ getOforms, setOformFiles }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!window.location.search) {
-      const defaultFilter = OformsFilter.getDefault();
-      navigate(`${location.pathname}/filter?${defaultFilter.toUrlParams()}`);
-      getOforms(defaultFilter);
-    } else {
-      const firstLoadFilter = OformsFilter.getFilter(window.location);
-      getOforms(firstLoadFilter);
-    }
-    return () => {
-      setOformFiles(null);
-    };
+    const firstLoadFilter = OformsFilter.getFilter(location);
+    getOforms(firstLoadFilter);
+
+    return () => setOformFiles(null);
   }, [getOforms, setOformFiles]);
 
   const [value, setValue] = React.useState("");

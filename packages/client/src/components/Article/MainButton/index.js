@@ -105,6 +105,8 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
+    oformsFilter,
+
     enablePlugins,
 
     currentColorScheme,
@@ -197,7 +199,10 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    navigate(`/form-gallery`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const onInvite = React.useCallback((e) => {
@@ -540,6 +545,7 @@ export default inject(
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    oformsStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -568,6 +574,8 @@ export default inject(
     const { isAdmin, isOwner } = auth.userStore.user;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
+    const { oformsFilter } = oformsStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -590,6 +598,8 @@ export default inject(
       setInvitePanelOptions,
 
       currentFolderId,
+
+      oformsFilter,
 
       enablePlugins,
       currentColorScheme,

@@ -5,6 +5,7 @@ const PAGE_SIZE = "pagination[pageSize]";
 const CATEGORIZE_BY = "categorizeby";
 const CATEGORY_URL = "categoryUrl";
 const LOCALE = "locale";
+const SEARCH = "filterValue";
 const SORT = "sort";
 const SORT_BY = "sortby";
 const SORT_ORDER = "sortorder";
@@ -13,12 +14,35 @@ const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 150;
 const DEFAULT_TOTAL = 0;
 const DEFAULT_LOCALE = getDefaultOformLocale();
+const DEFAULT_SEARCH = "";
 const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_CATEGORIZE_BY = "";
 const DEFAULT_CATEGORY_URL = "";
 
 class OformsFilter {
+  constructor(
+    page = DEFAULT_PAGE,
+    pageSize = DEFAULT_PAGE_SIZE,
+    categorizeBy = DEFAULT_CATEGORIZE_BY,
+    categoryUrl = DEFAULT_CATEGORY_URL,
+    locale = DEFAULT_LOCALE,
+    search = DEFAULT_SEARCH,
+    sortBy = DEFAULT_SORT_BY,
+    sortOrder = DEFAULT_SORT_ORDER,
+    total = DEFAULT_TOTAL
+  ) {
+    this.page = page;
+    this.pageSize = pageSize;
+    this.categorizeBy = categorizeBy;
+    this.categoryUrl = categoryUrl;
+    this.locale = locale;
+    this.search = search;
+    this.sortBy = sortBy;
+    this.sortOrder = sortOrder;
+    this.total = total;
+  }
+
   static getDefault(total = DEFAULT_TOTAL) {
     return new OformsFilter(
       DEFAULT_PAGE,
@@ -26,6 +50,7 @@ class OformsFilter {
       DEFAULT_CATEGORIZE_BY,
       DEFAULT_CATEGORY_URL,
       DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
       DEFAULT_SORT_BY,
       DEFAULT_SORT_ORDER,
       total
@@ -49,6 +74,7 @@ class OformsFilter {
     const categoryUrl =
       urlFilter.get(CATEGORY_URL) || defaultFilter.categoryUrl;
     const locale = urlFilter.get(LOCALE) || defaultFilter.locale;
+    const search = urlFilter.get(SEARCH) || defaultFilter.search;
     const sortBy = urlFilter.get(SORT_BY) || defaultFilter.sortBy;
     const sortOrder = urlFilter.get(SORT_ORDER) || defaultFilter.sortOrder;
 
@@ -58,6 +84,7 @@ class OformsFilter {
       categorizeBy,
       categoryUrl,
       locale,
+      search,
       sortBy,
       sortOrder,
       defaultFilter.total
@@ -66,32 +93,28 @@ class OformsFilter {
     return newFilter;
   }
 
-  constructor(
-    page = DEFAULT_PAGE,
-    pageSize = DEFAULT_PAGE_SIZE,
-    categorizeBy = DEFAULT_CATEGORIZE_BY,
-    categoryUrl = DEFAULT_CATEGORY_URL,
-    locale = DEFAULT_LOCALE,
-    sortBy = DEFAULT_SORT_BY,
-    sortOrder = DEFAULT_SORT_ORDER,
-    total = DEFAULT_TOTAL
-  ) {
-    this.page = page;
-    this.pageSize = pageSize;
-    this.categorizeBy = categorizeBy;
-    this.categoryUrl = categoryUrl;
-    this.locale = locale;
-    this.sortBy = sortBy;
-    this.sortOrder = sortOrder;
-    this.total = total;
+  clone() {
+    return new OformsFilter(
+      this.page,
+      this.pageSize,
+      this.categorizeBy,
+      this.categoryUrl,
+      this.locale,
+      this.search,
+      this.sortBy,
+      this.sortOrder,
+      this.total
+    );
   }
 
   toUrlParams = () => {
-    const { categorizeBy, categoryUrl, sortBy, sortOrder, locale } = this;
+    const { categorizeBy, categoryUrl, locale, search, sortBy, sortOrder } =
+      this;
 
     const dtoFilter = {};
     dtoFilter[categorizeBy] = categoryUrl;
     dtoFilter[LOCALE] = locale;
+    dtoFilter[SEARCH] = search;
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
 
@@ -104,9 +127,10 @@ class OformsFilter {
       pageSize,
       categorizeBy,
       categoryUrl,
+      locale,
+      search,
       sortBy,
       sortOrder,
-      locale,
     } = this;
 
     const dtoFilter = {};
@@ -114,24 +138,12 @@ class OformsFilter {
     dtoFilter[PAGE_SIZE] = pageSize;
     if (categorizeBy && categoryUrl)
       dtoFilter[`filters[${categorizeBy}][urlReq][$eq]`] = categoryUrl;
-    if (sortBy && sortOrder) dtoFilter[SORT] = `${sortBy}:${sortOrder}`;
     dtoFilter[LOCALE] = locale;
+    dtoFilter[`filters[name_form][$containsi]`] = search;
+    if (sortBy && sortOrder) dtoFilter[SORT] = `${sortBy}:${sortOrder}`;
 
     return toUrlParams(dtoFilter, true);
   };
-
-  clone() {
-    return new OformsFilter(
-      this.page,
-      this.pageSize,
-      this.categorizeBy,
-      this.categoryUrl,
-      this.locale,
-      this.sortBy,
-      this.sortOrder,
-      this.total
-    );
-  }
 }
 
 export default OformsFilter;

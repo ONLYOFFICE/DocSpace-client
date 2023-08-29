@@ -9,6 +9,7 @@ import OformsFilter from "@docspace/common/api/oforms/filter";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { OformCategory } from "@docspace/client/src/helpers/constants";
+import SubList from "./SubList";
 
 const SubListByBranch = ({ isOpen, oformsFilter, getOforms }) => {
   const [formsByBranch, setFormsByBranch] = useState([]);
@@ -31,41 +32,15 @@ const SubListByBranch = ({ isOpen, oformsFilter, getOforms }) => {
     })();
   }, []);
 
-  if (isSmallTablet() || isMobile() || isMobileOnly) {
-    if (isOpen)
-      return formsByBranch.map((category) => (
-        <StyledSubItemMobile
-          className="dropdown-item item-mobile"
-          key={category.id}
-          label={category.attributes.categorie}
-          onClick={() => onOpenCategory(category)}
-        />
-      ));
-  } else
-    return (
-      <StyledSubList
-        className={"dropdown-sub sub-by-branch"}
-        open={true}
-        directionY={"bottom"}
-        directionX={"right"}
-        isDefaultMode={false}
-        fixedDirection={true}
-        clickOutsideAction={() => {}}
-        withBackdrop={false}
-        marginTop={"43px"}
-      >
-        {formsByBranch.map((category) => (
-          <DropDownItem
-            className="dropdown-item"
-            key={category.id}
-            label={category.attributes.categorie}
-            onClick={() => onOpenCategory(category)}
-          />
-        ))}
-      </StyledSubList>
-    );
+  return (
+    <SubList
+      isOpen={isOpen}
+      categories={formsByBranch}
+      marginTop={"43px"}
+      categoryType={OformCategory.Branch}
+    />
+  );
 };
-
 export default inject(({ oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,

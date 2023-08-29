@@ -2,53 +2,75 @@ import InputBlock from "@docspace/components/input-block";
 import SearchInput from "@docspace/components/search-input";
 import TextInput from "@docspace/components/text-input";
 import FieldContainer from "@docspace/components/field-container";
-
-import { useState, useRef } from "react";
+import { inject } from "mobx-react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-
 import styled from "styled-components";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import debounce from "lodash/debounce";
 
 export const StyledTextInput = styled(TextInput)`
   width: 100%;
   max-width: 653px;
 `;
 
-const SearchFilter = ({}) => {
+const SearchFilter = ({ oformsFilter, getOforms }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [value, setValue] = useState("");
 
-  const onChangeValue = (e) => {
-    setValue(e.target.value);
+  // const onFilter = useCallback((val) => {
+  //   const newFilter = oformsFilter.clone();
+  //   newFilter.search = val;
+  //   getOforms(newFilter);
+  //   navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  // }, []);
+
+  const onFilter = (val) => {
+    const newFilter = oformsFilter.clone();
+    newFilter.search = val;
+    console.log(newFilter);
+    getOforms(newFilter);
+    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  const onClearSearch = () => {
-    setValue("");
+  const debouncedOnFilter = useMemo(() => {
+    return debounce(onFilter, 300);
+  }, [onFilter]);
+
+  const onChangeValue = (val) => {
+    setValue(val);
+    // debouncedOnFilter(value);
+    onFilter(val);
   };
+  const onClearValue = () => onChangeValue("");
 
   const ref = useRef(null);
-  const handleClick = () => {
-    if (!ref?.current) return;
-    console.log(ref.current);
-  };
+  const onInputClick = () => ref?.current?.focus();
+  const onInputOutsideClick = (e) =>
+    !ref?.current?.contains(e.target) && ref.current.blur();
+  useEffect(() => {
+    document.addEventListener("mousedown", onInputOutsideClick);
+    return () => document.removeEventListener("mousedown", onInputOutsideClick);
+  }, [ref]);
 
   return (
-    <div>
-      <TextInput
-        ref={ref}
-        className="first-name"
-        placeholder={"Search"}
-        value={value}
-        onChange={onChangeValue}
-        onMouseDown={() => {}}
-        onBlur={() => console.log("blur")}
-        onFocus={() => console.log("onFocus")}
-        onClick={handleClick}
-        // tabIndex={1}
-        // isAutoFocussed={true}
-        // isDisabled={false}
-        // onKeyDown={onKeyDown}
-      />
-    </div>
+    <SearchInput
+      forwardedRef={ref}
+      className="first-name"
+      tabIndex={1}
+      placeholder={"Search"}
+      value={value}
+      onChange={onChangeValue}
+      onClick={onInputClick}
+      onClearSearch={onClearValue}
+    />
   );
 };
 
-export default SearchFilter;
+export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
+  getOforms: oformsStore.getOforms,
+}))(withTranslation(["FormGallery", "Common"])(SearchFilter));

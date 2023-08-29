@@ -20,17 +20,13 @@ const sortData = [
   },
 ];
 
-const SortFilter = ({ t, oformsFilter, sortOforms }) => {
-  const sortBy = oformsFilter.sortBy;
-  const sortOrder = oformsFilter.sortOrder;
-
+const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
   const onCloseCombobox = () => setIsOpen(false);
 
   const onSort = async (newSortBy, newSortOrder = "asc") => {
     await sortOforms(newSortBy, newSortOrder);
-    onCloseCombobox();
   };
 
   const onToggleSortOrder = (e, newSortBy) => {
@@ -95,6 +91,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
 };
 
 export default inject(({ oformsStore }) => ({
-  oformsFilter: oformsStore.oformsFilter,
+  sortBy: oformsStore.oformsFilter.sortBy,
+  sortOrder: oformsStore.oformsFilter.sortOrder,
   sortOforms: oformsStore.sortOforms,
 }))(withTranslation(["FormGallery", "Common"])(SortFilter));

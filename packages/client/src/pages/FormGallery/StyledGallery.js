@@ -2,18 +2,8 @@ import styled, { css } from "styled-components";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
+import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
-
-const StyledHeadline = styled(Headline)`
-  width: 100%;
-  font-weight: 700;
-  font-size: ${isMobile ? "21px !important" : "18px"};
-  line-height: ${isMobile ? "28px !important" : "24px"};
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -21,7 +11,13 @@ const StyledContainer = styled.div`
   display: grid;
 
   grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto" : "29px 1fr auto"};
+    props.isRootFolder
+      ? props.withDropdown
+        ? "min-content 12px auto"
+        : "min-content auto"
+      : props.withDropdown
+      ? "29px min-content 12px auto"
+      : "29px min-content auto"};
 
   align-items: center;
 
@@ -51,6 +47,22 @@ const StyledContainer = styled.div`
     width: 100% !important;
     padding: 12px 0 0;
   `}
+`;
+
+const StyledHeadline = styled(Headline)`
+  width: fit-content;
+  font-weight: 700;
+  font-size: ${isMobile ? "21px !important" : "18px"};
+  line-height: ${isMobile ? "28px !important" : "24px"};
+  @media ${tablet} {
+    font-size: 21px;
+    line-height: 28px;
+  }
+`;
+
+const StyledNavigationDrodown = styled(ComboBox)`
+  width: 12px;
+  margin-left: 4px;
 `;
 
 const StyledInfoPanelToggleWrapper = styled.div`
@@ -88,4 +100,9 @@ const StyledInfoPanelToggleWrapper = styled.div`
 `;
 StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
-export { StyledHeadline, StyledContainer, StyledInfoPanelToggleWrapper };
+export {
+  StyledHeadline,
+  StyledContainer,
+  StyledNavigationDrodown,
+  StyledInfoPanelToggleWrapper,
+};

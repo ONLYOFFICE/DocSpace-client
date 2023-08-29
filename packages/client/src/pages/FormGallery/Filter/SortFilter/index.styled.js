@@ -68,14 +68,19 @@ export const SortDropdownItem = styled(DropDownItem)`
   }
 
   ${({ isSelected, theme }) =>
-    isSelected &&
-    css`
-      background: ${theme.filterInput.sort.hoverBackground};
-      cursor: auto;
-      .sortorder-arrow {
-        visibility: visible;
-      }
-    `}
+    isSelected
+      ? css`
+          background: ${theme.filterInput.sort.hoverBackground};
+          cursor: auto;
+          .sortorder-arrow {
+            visibility: visible;
+          }
+        `
+      : css`
+          .sortorder-arrow {
+            pointer-events: none;
+          }
+        `}
 
   ${({ isDescending }) =>
     isDescending &&

@@ -1,64 +1,125 @@
 ﻿import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import IconButton from "@docspace/components/icon-button";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  StyledHeadline,
   StyledContainer,
+  StyledHeadline,
+  StyledNavigationDrodown,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { combineUrl } from "@docspace/common/utils";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
+import api from "@docspace/common/api";
+import { isMobileOnly } from "react-device-detect";
+import DropDownItem from "@docspace/components/drop-down-item";
 
-const SectionHeaderContent = (props) => {
-  const {
-    t,
+const SectionHeaderContent = ({
+  t,
 
-    isInfoPanelVisible,
-    setIsInfoPanelVisible,
-    setGallerySelected,
-    categoryType,
-  } = props;
+  categorizeBy,
+  categoryUrl,
 
+  isInfoPanelVisible,
+  setIsInfoPanelVisible,
+  setGallerySelected,
+  categoryType,
+}) => {
   const navigate = useNavigate();
   const { fromFolderId } = useParams();
 
-  const onBackToFiles = () => {
+  const [checkboxOptions, setCheckboxOptions] = useState(<>{[]}</>);
+
+  const onNavigateBack = () => {
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
     filter.folder = fromFolderId;
-    const filterParamsStr = filter.toUrlParams();
     const url = getCategoryUrl(categoryType, fromFolderId);
-    const pathname = `${url}?${filterParamsStr}`;
+    const filterParamsStr = filter.toUrlParams();
 
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, pathname)
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterParamsStr}`
+      )
     );
   };
 
-  const toggleInfoPanel = () => {
-    setIsInfoPanelVisible(!isInfoPanelVisible);
-  };
+  const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
+
+  useEffect(() => {
+    (async () => {
+      const newCheckboxOptions = [];
+
+      if (categorizeBy && categoryUrl) {
+        newCheckboxOptions.push(
+          <DropDownItem
+            id={"view-all"}
+            key={"view-all"}
+            label={"OFORMs gallery"}
+            data-key={"OFORMs gallery"}
+            onClick={() => {}}
+          />
+        );
+      }
+
+      if (fromFolderId) {
+        const fromFolder = await api.files.getFolderInfo(fromFolderId);
+        newCheckboxOptions.push(
+          <DropDownItem
+            id={"fromFolder"}
+            key={"fromFolder"}
+            label={fromFolder.title}
+            data-key={fromFolder.title}
+            onClick={onNavigateBack}
+          />
+        );
+      }
+
+      setCheckboxOptions(<>{newCheckboxOptions}</>);
+    })();
+  }, [fromFolderId, categoryUrl]);
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      withDropdown={(categorizeBy && categoryUrl) || fromFolderId}
+    >
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
         isFill
-        onClick={onBackToFiles}
+        onClick={onNavigateBack}
         className="arrow-button"
       />
 
       <StyledHeadline type="content" truncate>
         {t("Common:OFORMsGallery")}
       </StyledHeadline>
+
+      {((categorizeBy && categoryUrl) || fromFolderId) && (
+        <StyledNavigationDrodown
+          id="oform-header-combobox"
+          comboIcon={TriangleNavigationDownReactSvgUrl}
+          noBorder
+          advancedOptions={checkboxOptions}
+          className="oform-header-combobox not-selectable"
+          options={[]}
+          selectedOption={{}}
+          manualY="42px"
+          manualX="-32px"
+          title={t("Common:TitleSelectFile")}
+          isMobileView={isMobileOnly}
+        />
+      )}
+
       <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
         <div className="info-panel-toggle-bg">
           <IconButton
@@ -66,7 +127,7 @@ const SectionHeaderContent = (props) => {
             iconName={PanelReactSvgUrl}
             size="16"
             isFill={true}
-            onClick={toggleInfoPanel}
+            onClick={onToggleInfoPanel}
             title={t("Common:InfoPanel")}
           />
         </div>
@@ -76,13 +137,15 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(({ auth, filesStore, oformsStore }) => {
-  const { isVisible, setIsVisible } = auth.infoPanelStore;
-  const { categoryType } = filesStore;
-  const { setGallerySelected } = oformsStore;
   return {
-    isInfoPanelVisible: isVisible,
-    setIsInfoPanelVisible: setIsVisible,
-    setGallerySelected,
-    categoryType,
+    categoryType: filesStore.categoryType,
+
+    categorizeBy: oformsStore.oformsFilter.categorizeBy,
+    categoryUrl: oformsStore.oformsFilter.categoryUrl,
+
+    setGallerySelected: oformsStore.setGallerySelected,
+
+    isInfoPanelVisible: auth.infoPanelStore.isVisible,
+    setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
   };
 })(withTranslation("Common")(observer(SectionHeaderContent)));

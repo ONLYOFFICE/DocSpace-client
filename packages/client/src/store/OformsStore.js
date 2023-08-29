@@ -66,7 +66,9 @@ class OformsStore {
     newOformsFilter.sortBy = sortBy;
     newOformsFilter.sortOrder = sortOrder;
 
-    this.getOforms(newOformsFilter);
+    runInAction(() => {
+      this.getOforms(newOformsFilter);
+    });
   };
 
   filterByCategory = async () => {};

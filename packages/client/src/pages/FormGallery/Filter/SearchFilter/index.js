@@ -14,7 +14,7 @@ export const StyledTextInput = styled(TextInput)`
 `;
 
 const SearchFilter = ({}) => {
-  const [value, setValue] = useState("asd");
+  const [value, setValue] = useState("");
 
   const onChangeValue = (e) => {
     setValue(e.target.value);

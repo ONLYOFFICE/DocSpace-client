@@ -29,27 +29,27 @@ const SeventhStep = ({ t }) => {
     <Wrapper>
       <Text fontSize="12px">67/70 users were imported successfully.</Text>
       <Text fontSize="12px" color="#F21C0E" className="mt-8">
-        3 errors were found.
+        {t("Settings:ErrorsWereFound", { errors: 3 })}
       </Text>
 
       <Box displayProp="flex" alignItems="center" marginProp="17px 0 16px">
-        <Checkbox label="Send welcome letter" isChecked={isChecked} onChange={onChangeCheckbox} />
+        <Checkbox
+          label={t("Settings:SendWelcomeLetter")}
+          isChecked={isChecked}
+          onChange={onChangeCheckbox}
+        />
         <HelpButton
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={
-            <Text fontSize="12px">
-              If checked, all new users will receive welcome letter with authorization details.
-            </Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
         />
       </Box>
 
       <ButtonsWrapper>
-        <Button size="small" label="Finish" primary onClick={() => navigate(-1)} />
-        <Button size="small" label="Download log" />
-        <Button size="small" label="Delete temporary file" />
+        <Button size="small" label={t("Settings:Finish")} primary onClick={() => navigate(-1)} />
+        <Button size="small" label={t("Settings:DownloadLog")} />
+        <Button size="small" label={t("Settings:DeleteTemporaryFile")} />
       </ButtonsWrapper>
     </Wrapper>
   );

@@ -7,15 +7,15 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 const AccountsTable = (props) => {
-  const { viewAs, accountsData } = props;
+  const { t, viewAs, accountsData } = props;
 
   return (
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <TableView sectionWidth={context.sectionWidth} accountsData={accountsData} />
+          <TableView sectionWidth={context.sectionWidth} accountsData={accountsData} t={t} />
         ) : (
-          <RowView sectionWidth={context.sectionWidth} accountsData={accountsData} />
+          <RowView sectionWidth={context.sectionWidth} accountsData={accountsData} t={t} />
         )
       }
     </Consumer>

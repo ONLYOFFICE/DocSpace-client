@@ -66,7 +66,7 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, emailInputRef, emailTextRef }) => {
+const UsersRowContent = ({ t, sectionWidth, displayName, emailInputRef, emailTextRef }) => {
   const [email, setEmail] = useState("");
   const [isEmailOpen, setIsEmailOpen] = useState(false);
 
@@ -89,7 +89,7 @@ const UsersRowContent = ({ sectionWidth, displayName, emailInputRef, emailTextRe
           {displayName}
         </Text>
         <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
-          {email === "" ? "NO EMAIL" : email}
+          {email === "" ? t("Settings:NoEmail") : email}
         </Text>
       </div>
       {isEmailOpen ? (

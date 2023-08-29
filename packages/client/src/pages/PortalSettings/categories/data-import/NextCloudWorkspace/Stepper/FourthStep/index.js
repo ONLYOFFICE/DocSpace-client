@@ -38,14 +38,10 @@ const FourthStep = (props) => {
         onClearSearch={() => console.log("cleared")}
         placeholder="Search"
       />
-      <AccountsTable accountsData={dataPortion} />
+      <AccountsTable t={t} accountsData={dataPortion} />
 
       {mockData.length > 25 && (
-        <AccountsPaging
-          t={t}
-          numberOfItems={mockData.length}
-          setDataPortion={handleDataChange}
-        />
+        <AccountsPaging t={t} numberOfItems={mockData.length} setDataPortion={handleDataChange} />
       )}
 
       <SaveCancelButtons

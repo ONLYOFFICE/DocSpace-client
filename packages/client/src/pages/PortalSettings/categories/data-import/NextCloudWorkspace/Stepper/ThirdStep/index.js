@@ -11,6 +11,7 @@ import Text from "@docspace/components/text";
 import { Wrapper } from "../StyledStepper";
 
 import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
+import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 import { mockData } from "./mockData";
 
@@ -25,14 +26,11 @@ const ThirdStep = (props) => {
     setDataPortion(mockData.slice(leftBoundary, rightBoundary));
   };
 
+  const users = `${mockData.length} ${t("Settings:Employees")}`;
+
   return (
     <Wrapper>
-      {mockData.length > 0 && (
-        <p className="users-without-email">
-          We found <b>{mockData.length} users</b> without emails. You can add necessary data to
-          their accounts on the next step.
-        </p>
-      )}
+      {mockData.length > 0 && <NoEmailUsersBlock users={users} t={t} />}
 
       {mockData.length > 0 ? (
         <>
@@ -61,7 +59,7 @@ const ThirdStep = (props) => {
             placeholder="Search"
           />
 
-          <AccountsTable accountsData={dataPortion} />
+          <AccountsTable t={t} accountsData={dataPortion} />
 
           {mockData.length > 25 && (
             <AccountsPaging
@@ -73,7 +71,7 @@ const ThirdStep = (props) => {
         </>
       ) : (
         <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          You don’t have users with emails. Please proceed to the next step to add them.
+          {t("Settings:AddEmailsWarning")}
         </Text>
       )}
 

@@ -15,6 +15,7 @@ import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 
 import { mockData as nextStepData } from "../ThirdStep/mockData";
 import { mockData } from "./mockData";
+import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 const LICENSE_LIMIT = 100;
 
@@ -27,14 +28,11 @@ const SecondStep = (props) => {
     setDataPortion(mockData.slice(leftBoundary, rightBoundary));
   };
 
+  const users = `${nextStepData.length} ${t("Settings:Employees")}`;
+
   return (
     <Wrapper>
-      {nextStepData.length > 0 && (
-        <p className="users-without-email">
-          We found <b>{nextStepData.length} users</b> without emails. You can add necessary data to
-          their accounts on the next step.
-        </p>
-      )}
+      {nextStepData.length > 0 && <NoEmailUsersBlock users={users} t={t} />}
 
       {mockData.length > 0 ? (
         <>
@@ -63,7 +61,7 @@ const SecondStep = (props) => {
             placeholder="Search"
           />
 
-          <AccountsTable accountsData={dataPortion} />
+          <AccountsTable accountsData={dataPortion} t={t} />
 
           {mockData.length > 25 && (
             <AccountsPaging
@@ -75,7 +73,7 @@ const SecondStep = (props) => {
         </>
       ) : (
         <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          You don’t have users with emails. Please proceed to the next step to add them.
+          {t("Settings:AddEmailsWarning")}
         </Text>
       )}
 

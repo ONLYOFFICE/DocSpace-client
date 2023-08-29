@@ -57,19 +57,19 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const UsersTableRow = ({ displayName, email, isChecked, toggleAccount }) => {
+const UsersTableRow = ({ t, displayName, email, isChecked, toggleAccount }) => {
   const data = [
     {
-      key: "key1",
-      label: "DocSpace admin",
+      key: "DocSpaceAdmin",
+      label: t("Common:DocSpaceAdmin"),
     },
     {
-      key: "key2",
-      label: "Room admin",
+      key: "RoomAdmin",
+      label: t("Common:RoomAdmin"),
     },
     {
-      key: "key3",
-      label: "Power user",
+      key: "PowerUser",
+      label: t("Common:PowerUser"),
     },
   ];
 

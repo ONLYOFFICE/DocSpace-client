@@ -33,12 +33,14 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, email, isDuplicate }) => {
+const UsersRowContent = ({ t, sectionWidth, displayName, email, isDuplicate }) => {
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <div className="import-accounts-name">
         {displayName}
-        {isDuplicate && <span className="import-account-duplicate">&nbsp;(Existing account)</span>}
+        {isDuplicate && (
+          <span className="import-account-duplicate">&nbsp;({t("Settings:ExistingAccount")})</span>
+        )}
       </div>
       <Text fontSize="12px" color="#a3a9ae" className="user-email">
         {email}

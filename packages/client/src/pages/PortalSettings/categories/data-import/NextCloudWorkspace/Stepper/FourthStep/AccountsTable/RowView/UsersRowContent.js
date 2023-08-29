@@ -54,19 +54,19 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, email, roleSelectorRef }) => {
+const UsersRowContent = ({ t, sectionWidth, displayName, email, roleSelectorRef }) => {
   const data = [
     {
       key: "role-DocSpace-admin",
-      label: "DocSpace admin",
+      label: t("Settings:DocSpaceAdmin"),
     },
     {
       key: "role-Room-admin",
-      label: "Room admin",
+      label: t("Settings:RoomAdmin"),
     },
     {
       key: "role-Power-user",
-      label: "Power user",
+      label: t("Settings:PowerUser"),
     },
   ];
   const [selectedType, setSelectedType] = useState(data[2]);

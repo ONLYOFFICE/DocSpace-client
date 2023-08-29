@@ -66,7 +66,7 @@ const DecisionButton = styled.div`
 
 DecisionButton.defaultProps = { theme: Base };
 
-const UsersTableRow = ({ displayName, isChecked, toggleAccount }) => {
+const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
   const [email, setEmail] = useState("");
   const [isEmailOpen, setIsEmailOpen] = useState(false);
 
@@ -123,7 +123,7 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount }) => {
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
             <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
-              {email !== "" ? email : "NO EMAIL"}
+              {email !== "" ? email : t("Settings:NoEmail")}
             </Text>
           </span>
         )}

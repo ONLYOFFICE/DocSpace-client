@@ -3,7 +3,7 @@ import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
 const UserskRow = (props) => {
-  const { data, sectionWidth, isChecked, toggleAccount } = props;
+  const { t, data, sectionWidth, isChecked, toggleAccount } = props;
 
   const roleSelectorRef = useRef();
 
@@ -23,6 +23,7 @@ const UserskRow = (props) => {
       checkbox
       onClick={handleAccountToggle}>
       <UsersRowContent
+        t={t}
         sectionWidth={sectionWidth}
         displayName={data.displayName}
         email={data.email}

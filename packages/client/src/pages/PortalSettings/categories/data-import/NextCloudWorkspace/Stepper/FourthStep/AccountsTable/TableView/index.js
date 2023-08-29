@@ -39,6 +39,7 @@ StyledTableContainer.defaultProps = { theme: Base };
 
 const TableView = (props) => {
   const {
+    t,
     userId,
     viewAs,
     setViewAs,
@@ -76,6 +77,7 @@ const TableView = (props) => {
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <UsersTableHeader
+        t={t}
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         columnStorageName={columnStorageName}
@@ -97,6 +99,7 @@ const TableView = (props) => {
         fetchMoreFiles={() => {}}>
         {accountsData.map((data) => (
           <UsersTableRow
+            t={t}
             key={data.id}
             displayName={data.displayName}
             email={data.email}

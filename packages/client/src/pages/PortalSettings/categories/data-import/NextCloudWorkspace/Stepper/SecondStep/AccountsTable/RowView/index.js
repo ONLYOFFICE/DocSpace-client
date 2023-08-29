@@ -28,6 +28,7 @@ const StyledRow = styled(Row)`
 
 const RowView = (props) => {
   const {
+    t,
     viewAs,
     setViewAs,
     sectionWidth,
@@ -62,11 +63,12 @@ const RowView = (props) => {
         onClick={toggleAll}
         indeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}>
         <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
-          Name
+          {t("Common:Name")}
         </Text>
       </StyledRow>
       {accountsData.map((data) => (
         <UsersRow
+          t={t}
           key={data.id}
           data={data}
           sectionWidth={sectionWidth}

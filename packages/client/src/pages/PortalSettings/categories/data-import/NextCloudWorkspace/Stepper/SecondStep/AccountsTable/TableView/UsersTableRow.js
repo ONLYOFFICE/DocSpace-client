@@ -22,7 +22,7 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const UsersTableRow = ({ displayName, email, isDuplicate, isChecked, toggleAccount }) => {
+const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>
@@ -41,7 +41,7 @@ const UsersTableRow = ({ displayName, email, isDuplicate, isChecked, toggleAccou
       <TableCell>
         {isDuplicate ? (
           <Text fontWeight={600} color="#2db482" className="textOverflow">
-            Existing account
+            {t("Settings:ExistingAccount")}
           </Text>
         ) : (
           <Text fontWeight={600} color="#a3a9ae" className="textOverflow">

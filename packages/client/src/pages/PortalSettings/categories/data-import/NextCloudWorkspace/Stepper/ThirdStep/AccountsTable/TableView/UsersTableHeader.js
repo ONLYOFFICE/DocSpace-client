@@ -27,6 +27,7 @@ const getColumns = (defaultColumns, userId) => {
 
 const UsersTableHeader = (props) => {
   const {
+    t,
     userId,
     sectionWidth,
     tableRef,
@@ -41,7 +42,7 @@ const UsersTableHeader = (props) => {
   const defaultColumns = [
     {
       key: "Name",
-      title: "Name",
+      title: t("Common:Name"),
       resizable: true,
       enable: true,
       default: true,
@@ -56,7 +57,7 @@ const UsersTableHeader = (props) => {
     },
     {
       key: "Email",
-      title: "Email",
+      title: t("Common:Email"),
       enable: true,
       resizable: true,
       onChange: onColumnChange,

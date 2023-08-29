@@ -12,12 +12,8 @@ const StyledContainer = styled.div`
 
   grid-template-columns: ${(props) =>
     props.isRootFolder
-      ? props.withDropdown
-        ? "min-content 12px auto"
-        : "min-content auto"
-      : props.withDropdown
-      ? "29px min-content 12px auto"
-      : "29px min-content auto"};
+      ? "min-content 12px auto"
+      : "29px min-content 12px auto"};
 
   align-items: center;
 

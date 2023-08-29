@@ -19,6 +19,7 @@ import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.naviga
 import api from "@docspace/common/api";
 import { isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
+import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 const SectionHeaderContent = ({
   t,
@@ -64,34 +65,31 @@ const SectionHeaderContent = ({
           <DropDownItem
             id={"view-all"}
             key={"view-all"}
-            label={"OFORMs gallery"}
+            label={t("Common:OFORMsGallery")}
             data-key={"OFORMs gallery"}
             onClick={() => {}}
           />
         );
       }
 
-      if (fromFolderId) {
-        const fromFolder = await api.files.getFolderInfo(fromFolderId);
-        newCheckboxOptions.push(
-          <DropDownItem
-            id={"fromFolder"}
-            key={"fromFolder"}
-            label={fromFolder.title}
-            data-key={fromFolder.title}
-            onClick={onNavigateBack}
-          />
-        );
-      }
+      const prevFolderId = fromFolderId || CategoryType.SharedRoom;
+      const prevFolder = await api.files.getFolderInfo(prevFolderId);
+      newCheckboxOptions.push(
+        <DropDownItem
+          id={"fromFolder"}
+          key={"fromFolder"}
+          label={prevFolder.title}
+          data-key={prevFolder.title}
+          onClick={onNavigateBack}
+        />
+      );
 
       setCheckboxOptions(<>{newCheckboxOptions}</>);
     })();
   }, [fromFolderId, categoryUrl]);
 
   return (
-    <StyledContainer
-      withDropdown={(categorizeBy && categoryUrl) || fromFolderId}
-    >
+    <StyledContainer>
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
@@ -104,21 +102,19 @@ const SectionHeaderContent = ({
         {t("Common:OFORMsGallery")}
       </StyledHeadline>
 
-      {((categorizeBy && categoryUrl) || fromFolderId) && (
-        <StyledNavigationDrodown
-          id="oform-header-combobox"
-          comboIcon={TriangleNavigationDownReactSvgUrl}
-          noBorder
-          advancedOptions={checkboxOptions}
-          className="oform-header-combobox not-selectable"
-          options={[]}
-          selectedOption={{}}
-          manualY="42px"
-          manualX="-32px"
-          title={t("Common:TitleSelectFile")}
-          isMobileView={isMobileOnly}
-        />
-      )}
+      <StyledNavigationDrodown
+        id="oform-header-combobox"
+        comboIcon={TriangleNavigationDownReactSvgUrl}
+        noBorder
+        advancedOptions={checkboxOptions}
+        className="oform-header-combobox not-selectable"
+        options={[]}
+        selectedOption={{}}
+        manualY="42px"
+        manualX="-32px"
+        title={t("Common:TitleSelectFile")}
+        isMobileView={isMobileOnly}
+      />
 
       <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
         <div className="info-panel-toggle-bg">

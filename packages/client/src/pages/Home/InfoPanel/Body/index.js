@@ -140,10 +140,10 @@ const InfoPanelBodyContent = ({
 
   //////////////////////////////////////////////////////////
 
-  // useEffect(() => {
-  //   console.log("\nfor-dev  Selected items: ", selectedItems);
-  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  // }, [selectedItems, selectedFolder]);
+  useEffect(() => {
+    console.log("\nfor-dev  Selected items: ", selectedItems);
+    console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  }, [selectedItems, selectedFolder]);
 
   //////////////////////////////////////////////////////////
 

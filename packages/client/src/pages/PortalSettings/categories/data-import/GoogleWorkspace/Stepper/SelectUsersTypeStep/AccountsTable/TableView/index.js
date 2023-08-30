@@ -18,10 +18,10 @@ const StyledTableContainer = styled(TableContainer)`
 
   .table-group-menu {
     height: 69px;
-    position: absolute;
+    position: relative;
     z-index: 201;
-    left: 0;
-    top: 209px;
+    left: -20px;
+    top: 28px;
     width: 100%;
 
     .table-container_group-menu {

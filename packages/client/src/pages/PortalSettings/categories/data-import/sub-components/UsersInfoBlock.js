@@ -19,6 +19,7 @@ const UsersInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
+  min-width: 660px;
   background: ${(props) =>
     props.theme.client.settings.migration.infoBlockBackground};
   box-sizing: border-box;

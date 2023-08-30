@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { mockData } from "../mockData.js";
 import styled from "styled-components";
 
@@ -11,7 +12,13 @@ const StyledSearchInput = styled(SearchInput)`
   margin-top: 20px;
 `;
 
-const SelectUsersTypeStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
+const SelectUsersTypeStep = ({
+  t,
+  onNextStep,
+  onPrevStep,
+  showReminder,
+  checkedAccounts,
+}) => {
   const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
@@ -30,12 +37,14 @@ const SelectUsersTypeStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         displaySettings={true}
       />
 
-      <StyledSearchInput
-        id="search-users-type-input"
-        placeholder={t("Common:Search")}
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-      />
+      {!checkedAccounts.length > 0 && (
+        <StyledSearchInput
+          id="search-users-type-input"
+          placeholder={t("Common:Search")}
+          onChange={() => console.log("changed")}
+          onClearSearch={() => console.log("cleared")}
+        />
+      )}
 
       <AccountsTable t={t} accountsData={dataPortion} />
 
@@ -60,4 +69,10 @@ const SelectUsersTypeStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   );
 };
 
-export default SelectUsersTypeStep;
+export default inject(({ importAccountsStore }) => {
+  const { checkedAccounts } = importAccountsStore;
+
+  return {
+    checkedAccounts,
+  };
+})(observer(SelectUsersTypeStep));

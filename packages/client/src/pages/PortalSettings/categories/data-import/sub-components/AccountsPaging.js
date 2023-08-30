@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Paging from "@docspace/components/paging";
 
-const SyledPaging = styled(Paging)`
+const StyledPaging = styled(Paging)`
   display: flex;
   margin-bottom: 30px;
   align-items: center;
@@ -45,7 +45,7 @@ const AccountsPaging = (props) => {
   const [selectedCountItem, setSelectedCountItem] = useState(countItems[0]);
 
   const [pageItems, setPageItems] = useState(
-    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count)),
+    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count))
   );
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
@@ -54,7 +54,7 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        (currentPage.pageNumber + 1) * selectedCountItem.count
       );
       setSelectedPageItems(currentPage);
     }
@@ -65,7 +65,7 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        (currentPage.pageNumber + 1) * selectedCountItem.count
       );
       setSelectedPageItems(currentPage);
     }
@@ -80,13 +80,15 @@ const AccountsPaging = (props) => {
   const onCountChange = (countItem) => {
     setSelectedCountItem(countItem);
     setDataPortion(0, countItem.count);
-    const tempPageItems = createPageItems(Math.ceil(numberOfItems / countItem.count));
+    const tempPageItems = createPageItems(
+      Math.ceil(numberOfItems / countItem.count)
+    );
     setPageItems(tempPageItems);
     setSelectedPageItems(tempPageItems[0]);
   };
 
   return (
-    <SyledPaging
+    <StyledPaging
       className="accounts-paging"
       pageItems={pageItems}
       countItems={countItems}

@@ -1,28 +1,29 @@
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 import { Consumer } from "@docspace/components/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const typeOptions = [
-  {
-    key: "docspace-admin",
-    label: "DocSpace admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "room-admin",
-    label: "Room admin",
-    onClick: () => console.log("changed-type"),
-  },
-  {
-    key: "power-user",
-    label: "Power user",
-    onClick: () => console.log("changed-type"),
-  },
-];
-
 const AccountsTable = ({ t, viewAs, accountsData }) => {
+  const typeOptions = [
+    {
+      key: "DocSpaceAdmin",
+      label: t("Common:DocSpaceAdmin"),
+      onClick: () => console.log("changed-type"),
+    },
+    {
+      key: "RoomAdmin",
+      label: t("Common:RoomAdmin"),
+      onClick: () => console.log("changed-type"),
+    },
+    {
+      key: "PowerUser",
+      label: t("Common:PowerUser"),
+      onClick: () => console.log("changed-type"),
+    },
+  ];
+
   return (
     <Consumer>
       {(context) =>
@@ -52,4 +53,6 @@ export default inject(({ setup }) => {
   return {
     viewAs,
   };
-})(observer(AccountsTable));
+})(withTranslation(["ChangeUserTypeDialog"])(observer(AccountsTable)));
+
+// export default withTranslation(["Common, Settings"])(GoogleWorkspace);

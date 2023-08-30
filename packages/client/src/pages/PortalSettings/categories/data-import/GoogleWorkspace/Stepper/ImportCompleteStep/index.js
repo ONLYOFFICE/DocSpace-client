@@ -30,6 +30,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  column-gap: 8px;
 
   @media ${tablet} {
     max-width: 462px;

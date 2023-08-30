@@ -31,15 +31,17 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   };
 
   const serviceName = "Google Workspace";
+  const users =
+    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   return (
     <Wrapper>
       <ImportSection
         isChecked={isChecked.users}
         onChange={() => onChange("users")}
-        sectionName="Users"
+        sectionName={users}
         description={t("Settings:UsersSectionDescription")}
-        exportSection={{ sectionName: "Users", workspace: serviceName }}
+        exportSection={{ sectionName: users, workspace: serviceName }}
         importSection={{
           sectionName: t("Common:Accounts"),
           workspace: "DocSpace",
@@ -57,7 +59,7 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: "My documents",
+          sectionName: t("Settings:MyDocuments"),
           workspace: "DocSpace",
           SectionIcon: UserIcon,
         }}
@@ -68,11 +70,11 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
-          sectionName: "Shared Files",
+          sectionName: t("Settings:SharedFiles"),
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: "My documents",
+          sectionName: t("Settings:MyDocuments"),
           workspace: "DocSpace",
           SectionIcon: UserIcon,
         }}

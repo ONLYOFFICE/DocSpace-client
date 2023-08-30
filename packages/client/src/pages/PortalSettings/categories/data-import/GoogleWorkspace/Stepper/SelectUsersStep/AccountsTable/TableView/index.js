@@ -40,6 +40,7 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE
 
 const TableView = (props) => {
   const {
+    t,
     userId,
     viewAs,
     setViewAs,
@@ -79,6 +80,7 @@ const TableView = (props) => {
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <UsersTableHeader
+        t={t}
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         userId={userId}

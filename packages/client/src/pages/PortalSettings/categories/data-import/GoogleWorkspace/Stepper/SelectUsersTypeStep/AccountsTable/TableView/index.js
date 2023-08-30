@@ -67,6 +67,7 @@ const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = ({
+  t,
   userId,
   viewAs,
   setViewAs,
@@ -109,7 +110,7 @@ const TableView = ({
     {
       id: "change-type",
       key: "change-type",
-      label: "Change type",
+      label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
       disabled: false,
       onClick: () => console.log("open-menu"),
       withDropDown: true,
@@ -134,6 +135,7 @@ const TableView = ({
         </div>
       )}
       <UsersTypeTableHeader
+        t={t}
         sectionWidth={sectionWidth}
         tableRef={tableRef}
         columnStorageName={columnStorageName}

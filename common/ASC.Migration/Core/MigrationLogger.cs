@@ -52,7 +52,7 @@ public class MigrationLogger : IDisposable
 
     public async Task<string> GetTmpFilePathAsync(string logName)
     {
-        var discStore = await _storageFactory.GetStorageAsync(await _tenantManager.GetCurrentTenantIdAsync(), "migration_temp", (IQuotaController)null) as DiscDataStore;
+        var discStore = await _storageFactory.GetStorageAsync(await _tenantManager.GetCurrentTenantIdAsync(), "migration_log", (IQuotaController)null) as DiscDataStore;
         var folder = discStore.GetPhysicalPath("", "");
 
         if (!Directory.Exists(folder))

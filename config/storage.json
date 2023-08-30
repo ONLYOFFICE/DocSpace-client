@@ -105,10 +105,18 @@
 		"disableEncryption": true
       },
 	  {
-        "name": "migration_temp",
+        "name": "migration",
         "visible": false,
         "type": "disc",
         "path": "$STORAGE_ROOT\\Studio\\{0}\\temp\\migration",
+        "expires": "0:10:0",
+		"disableEncryption": true
+      },
+	  {
+        "name": "migration_log",
+        "visible": false,
+        "type": "disc",
+        "path": "$STORAGE_ROOT\\Studio\\{0}\\temp\\log\\migration",
         "expires": "0:10:0",
 		"disableEncryption": true
       },

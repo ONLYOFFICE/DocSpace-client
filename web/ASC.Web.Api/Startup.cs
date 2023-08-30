@@ -77,5 +77,12 @@ public class Startup : BaseStartup
             {
                 appBranch.UseUrlShortRewriter();
             });
+
+        app.MapWhen(
+            context => context.Request.Path.ToString().EndsWith("migrationFileUpload.ashx"),
+            appBranch =>
+            {
+                appBranch.UseMigrationFileUploadHandler();
+            });
     }
 }

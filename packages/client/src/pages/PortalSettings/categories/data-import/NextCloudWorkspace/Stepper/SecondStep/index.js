@@ -28,11 +28,9 @@ const SecondStep = (props) => {
     setDataPortion(mockData.slice(leftBoundary, rightBoundary));
   };
 
-  const users = `${nextStepData.length} ${t("Settings:Employees")}`;
-
   return (
     <Wrapper>
-      {nextStepData.length > 0 && <NoEmailUsersBlock users={users} t={t} />}
+      {nextStepData.length > 0 && <NoEmailUsersBlock users={nextStepData.length} t={t} />}
 
       {mockData.length > 0 ? (
         <>
@@ -58,7 +56,7 @@ const SecondStep = (props) => {
             id="search-users-input"
             onChange={() => console.log("changed")}
             onClearSearch={() => console.log("cleared")}
-            placeholder="Search"
+            placeholder={t("Common:Search")}
           />
 
           <AccountsTable accountsData={dataPortion} t={t} />

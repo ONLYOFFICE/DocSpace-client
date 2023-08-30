@@ -36,7 +36,7 @@ const FourthStep = (props) => {
         id="search-users-input"
         onChange={() => console.log("changed")}
         onClearSearch={() => console.log("cleared")}
-        placeholder="Search"
+        placeholder={t("Common:Search")}
       />
       <AccountsTable t={t} accountsData={dataPortion} />
 

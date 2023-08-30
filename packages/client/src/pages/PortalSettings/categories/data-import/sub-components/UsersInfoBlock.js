@@ -11,17 +11,15 @@ const Wrapper = styled.div`
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 16px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.exceededTextColor};
+    color: ${(props) => props.theme.client.settings.migration.exceededTextColor};
   }
 `;
 
 const UsersInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  max-width: 660px;
-  background: ${(props) =>
-    props.theme.client.settings.migration.infoBlockBackground};
+  width: fit-content;
+  background: ${(props) => props.theme.client.settings.migration.infoBlockBackground};
   box-sizing: border-box;
   padding: 12px 16px;
   border-radius: 6px;
@@ -33,16 +31,14 @@ const UsersInfoWrapper = styled.div`
 
   .selected-users-count {
     margin-right: 24px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
+    color: ${(props) => props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
     font-size: 14px;
   }
 
   .selected-admins-count {
     margin-right: 8px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
+    color: ${(props) => props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
     font-size: 14px;
 
@@ -58,24 +54,14 @@ const UsersInfoWrapper = styled.div`
   }
 `;
 
-const UsersInfoBlock = ({
-  t,
-  selectedUsers,
-  totalUsers,
-  totalLicenceLimit,
-}) => {
+const UsersInfoBlock = ({ t, selectedUsers, totalUsers, totalLicenceLimit }) => {
   return (
     <Wrapper>
       {selectedUsers > totalLicenceLimit && (
-        <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded")}
-        </Text>
+        <Text className="license-limit-warning">{t("Settings:UserLimitExceeded")}</Text>
       )}
 
-      <UsersInfoWrapper
-        selectedUsers={selectedUsers}
-        totalLicenceLimit={totalLicenceLimit}
-      >
+      <UsersInfoWrapper selectedUsers={selectedUsers} totalLicenceLimit={totalLicenceLimit}>
         <Text className="selected-users-count">
           {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
         </Text>
@@ -88,9 +74,7 @@ const UsersInfoBlock = ({
         <HelpButton
           place="right"
           offsetRight={0}
-          tooltipContent={
-            <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>}
         />
       </UsersInfoWrapper>
     </Wrapper>

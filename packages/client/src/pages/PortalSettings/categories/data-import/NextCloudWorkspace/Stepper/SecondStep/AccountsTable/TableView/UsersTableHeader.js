@@ -64,7 +64,7 @@ const UsersTableHeader = (props) => {
     },
     {
       key: "Duplicate",
-      title: t("Common:Duplicate"),
+      title: t("Settings:DuplicateNoun"),
       enable: true,
       resizable: true,
       onChange: onColumnChange,

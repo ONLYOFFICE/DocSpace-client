@@ -42,7 +42,7 @@ const UsersTableHeader = (props) => {
   const defaultColumns = [
     {
       key: "Name",
-      title: "Name",
+      title: t("Common:Name"),
       resizable: true,
       enable: true,
       default: true,

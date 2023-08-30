@@ -64,4 +64,4 @@ export default inject(({ setup, auth }) => {
     initSettings,
     theme: auth.settingsStore.theme,
   };
-})(withTranslation(["Common, Settings"])(observer(NextcloudWorkspace)));
+})(withTranslation(["Common, Settings, SMTPSettings"])(observer(NextcloudWorkspace)));

@@ -106,7 +106,7 @@ const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
         {isEmailOpen ? (
           <EmailInputWrapper ref={emailInputRef}>
             <TextInput
-              placeholder="Enter email"
+              placeholder={t("SMTPSettings:EnterEmail")}
               className="email-input"
               value={email}
               onChange={handleEmailChange}

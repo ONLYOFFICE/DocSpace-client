@@ -9,43 +9,43 @@ const SyledPaging = styled(Paging)`
   justify-content: center;
 `;
 
-const createPageItems = (count) => {
-  let pageItems = [];
-  for (let i = 0; i < count; i++) {
-    pageItems.push({
-      key: i + 1 + "-page-of-" + count,
-      label: i + 1 + " of " + count,
-      pageNumber: i,
-    });
-  }
-  return pageItems;
-};
-
-const countItems = [
-  {
-    key: "25-items-per-page",
-    label: "25 per page",
-    count: 25,
-  },
-  {
-    key: "50-items-per-page",
-    label: "50 per page",
-    count: 50,
-  },
-  {
-    key: "100-items-per-page",
-    label: "100 per page",
-    count: 100,
-  },
-];
-
 const AccountsPaging = (props) => {
   const { t, numberOfItems, setDataPortion } = props;
+
+  const createPageItems = (count) => {
+    let pageItems = [];
+    for (let i = 0; i < count; i++) {
+      pageItems.push({
+        key: i + 1 + "-page-of-" + count,
+        label: t("Common:PageOfTotalPage", { page: i + 1, totalPage: count }),
+        pageNumber: i,
+      });
+    }
+    return pageItems;
+  };
+
+  const countItems = [
+    {
+      key: "25-items-per-page",
+      label: t("Common:CountPerPage", { count: 25 }),
+      count: 25,
+    },
+    {
+      key: "50-items-per-page",
+      label: t("Common:CountPerPage", { count: 50 }),
+      count: 50,
+    },
+    {
+      key: "100-items-per-page",
+      label: t("Common:CountPerPage", { count: 100 }),
+      count: 100,
+    },
+  ];
 
   const [selectedCountItem, setSelectedCountItem] = useState(countItems[0]);
 
   const [pageItems, setPageItems] = useState(
-    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count))
+    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count)),
   );
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
@@ -54,7 +54,7 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count
+        (currentPage.pageNumber + 1) * selectedCountItem.count,
       );
       setSelectedPageItems(currentPage);
     }
@@ -65,7 +65,7 @@ const AccountsPaging = (props) => {
     if (currentPage) {
       setDataPortion(
         currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count
+        (currentPage.pageNumber + 1) * selectedCountItem.count,
       );
       setSelectedPageItems(currentPage);
     }
@@ -80,9 +80,7 @@ const AccountsPaging = (props) => {
   const onCountChange = (countItem) => {
     setSelectedCountItem(countItem);
     setDataPortion(0, countItem.count);
-    const tempPageItems = createPageItems(
-      Math.ceil(numberOfItems / countItem.count)
-    );
+    const tempPageItems = createPageItems(Math.ceil(numberOfItems / countItem.count));
     setPageItems(tempPageItems);
     setSelectedPageItems(tempPageItems[0]);
   };

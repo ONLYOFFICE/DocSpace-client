@@ -15,6 +15,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  column-gap: 8px;
 `;
 
 const SeventhStep = ({ t }) => {
@@ -27,7 +28,9 @@ const SeventhStep = ({ t }) => {
 
   return (
     <Wrapper>
-      <Text fontSize="12px">67/70 users were imported successfully.</Text>
+      <Text fontSize="12px">
+        {t("Settings:ImportedUsers", { selectedUsers: 67, importedUsers: 70 })}
+      </Text>
       <Text fontSize="12px" color="#F21C0E" className="mt-8">
         {t("Settings:ErrorsWereFound", { errors: 3 })}
       </Text>
@@ -47,7 +50,7 @@ const SeventhStep = ({ t }) => {
       </Box>
 
       <ButtonsWrapper>
-        <Button size="small" label={t("Settings:Finish")} primary onClick={() => navigate(-1)} />
+        <Button size="small" label={t("Common:Finish")} primary onClick={() => navigate(-1)} />
         <Button size="small" label={t("Settings:DownloadLog")} />
         <Button size="small" label={t("Settings:DeleteTemporaryFile")} />
       </ButtonsWrapper>

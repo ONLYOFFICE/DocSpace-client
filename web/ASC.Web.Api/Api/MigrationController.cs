@@ -113,13 +113,18 @@ public class MigrationController : ControllerBase
 
         if (status != null)
         {
-            return new MigrationStatusDto
+            var result = new MigrationStatusDto
             {
                 Progress = status.Percentage,
                 Error = status.Exception,
-                IsCompleted = status.IsCompleted,
-                ParseResult = status.MigrationApiInfo
+                IsCompleted = status.IsCompleted
             };
+
+            if(result.Error == null)
+            {
+                result.ParseResult = status.MigrationApiInfo;
+            }
+            return result;
         }
 
         return null;

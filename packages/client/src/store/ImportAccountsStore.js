@@ -1,7 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import api from "@docspace/common/api";
 
 class ImportAccountsStore {
   checkedAccounts = [];
+  services = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -30,6 +32,18 @@ class ImportAccountsStore {
   get numberOfCheckedAccounts() {
     return this.checkedAccounts.length;
   }
+
+  setServices = (service) => {
+    this.services = service;
+  };
+
+  getMigrationName = () => {
+    return api.settings.getMigrationList();
+  };
+
+  initMigration = (name) => {
+    return api.settings.initMigrationName(name);
+  };
 }
 
 export default ImportAccountsStore;

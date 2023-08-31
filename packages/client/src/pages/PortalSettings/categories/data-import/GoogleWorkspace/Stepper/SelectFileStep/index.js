@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
@@ -53,8 +54,15 @@ const SelectFileStep = ({
   setShowReminder,
   cancelDialogVisble,
   setCancelDialogVisbile,
+  initMigration,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  const uploadFile = () => {
+    initMigration(searchParams.get("service"));
+    // onNextStep();
+  };
 
   const onSelectFile = (file) => {
     let data = new FormData();
@@ -95,7 +103,7 @@ const SelectFileStep = ({
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={onNextStep}
+          onSaveClick={uploadFile}
           onCancelClick={onPrevStep}
           showReminder={showReminder}
           saveButtonLabel={t("Settings:UploadToServer")}
@@ -115,10 +123,13 @@ const SelectFileStep = ({
   );
 };
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, importAccountsStore }) => {
+  const { initMigration } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
+
   return {
+    initMigration,
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,
   };

@@ -54,11 +54,10 @@ const GoogleWrapper = styled.div`
   }
 `;
 
-const GoogleWorkspace = (props) => {
+const GoogleWorkspace = ({ t }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const { t } = props;
 
   useEffect(() => {
     onCheckView();
@@ -152,4 +151,4 @@ const GoogleWorkspace = (props) => {
   );
 };
 
-export default withTranslation(["Common, Settings"])(GoogleWorkspace);
+export default withTranslation(["Common", "Settings"])(GoogleWorkspace);

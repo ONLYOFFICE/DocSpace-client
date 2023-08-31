@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
@@ -15,8 +16,7 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
-const DataImport = (props) => {
-  const { t, theme } = props;
+const DataImport = ({ t, theme, services, setServices, getMigrationName }) => {
   const navigate = useNavigate();
 
   const google = theme.isBase
@@ -31,31 +31,33 @@ const DataImport = (props) => {
     ? OnlyofficeWorkspaceSvgUrl
     : OnlyofficeWorkspaceDarkSvgUrl;
 
-  const workspaces = [
-    {
-      title: "google",
-      logo: google,
-    },
-    {
-      title: "nextcloud",
-      logo: nextcloud,
-    },
-    {
-      title: "onlyoffice",
-      logo: onlyoffice,
-    },
-  ];
+  const logos = {
+    GoogleWorkspace: google,
+    Nextcloud: nextcloud,
+    Owncloud: onlyoffice,
+  };
+
+  const workspaces = useMemo(() => {
+    return services.map((service) => ({
+      title: service,
+      logo: logos[service],
+    }));
+  }, [theme.isBase, services]);
+
+  useEffect(() => {
+    getMigrationName().then((res) => setServices(res));
+  }, []);
 
   const redirectToWorkspace = (title) => {
     switch (title) {
-      case "google":
-        navigate(window.location.pathname + `/google`);
+      case "GoogleWorkspace":
+        navigate(`google?service=${title}`);
         break;
-      case "nextcloud":
-        navigate(window.location.pathname + `/nextcloud`);
+      case "Nextcloud":
+        navigate(`nextcloud?service=${title}`);
         break;
-      case "onlyoffice":
-        navigate(window.location.pathname + `/onlyoffice`);
+      case "Owncloud":
+        navigate(`onlyoffice?service=${title}`);
         break;
       default:
         break;
@@ -94,8 +96,13 @@ const DataImport = (props) => {
     </WorkspacesContainer>
   );
 };
-export default inject(({ auth }) => {
+export default inject(({ auth, importAccountsStore }) => {
+  const { services, setServices, getMigrationName } = importAccountsStore;
+
   return {
+    services,
+    setServices,
+    getMigrationName,
     theme: auth.settingsStore.theme,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

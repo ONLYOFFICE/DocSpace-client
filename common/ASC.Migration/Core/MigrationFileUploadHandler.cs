@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using System.Security;
 
 namespace ASC.Migration.Core.Core;
 public class MigrationFileUploadHandler
@@ -59,7 +60,7 @@ public class MigrationFileUploadHandler
                 {
                     var discStore = await storageFactory.GetStorageAsync(tenantId, "migration", (IQuotaController)null) as DiscDataStore;
                     var folder = discStore.GetPhysicalPath("", "");
-                    if (Directory.Exists(folder)
+                    if (Directory.Exists(folder))
                     {
                         Directory.Delete(folder, true);
                     }

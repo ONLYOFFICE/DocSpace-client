@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 global using System.IO.Compression;
-global using System.Security;
 global using System.Text.Json.Serialization;
 global using System.Text.RegularExpressions;
 

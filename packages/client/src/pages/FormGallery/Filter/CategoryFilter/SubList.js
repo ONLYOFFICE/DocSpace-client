@@ -13,8 +13,7 @@ const SubListByBranch = ({
   categories,
   marginTop,
 
-  getOforms,
-  oformsFilter,
+  filterOformsByCategory,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,12 +25,8 @@ const SubListByBranch = ({
       ? category.attributes.type
       : category.attributes.compilation;
 
-  const onOpenCategory = (category) => {
-    const newFilter = oformsFilter.clone();
-    newFilter.categorizeBy = categoryType;
-    newFilter.categoryUrl = category.attributes.urlReq;
-    getOforms(newFilter);
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  const onOpenCategory = async (category) => {
+    await filterOformsByCategory(categoryType, category.id);
   };
 
   if (isSmallTablet() || isMobile() || isMobileOnly)
@@ -73,4 +68,5 @@ const SubListByBranch = ({
 export default inject(({ oformsStore }) => ({
   getOforms: oformsStore.getOforms,
   oformsFilter: oformsStore.oformsFilter,
+  filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery", "Common"])(SubListByBranch));

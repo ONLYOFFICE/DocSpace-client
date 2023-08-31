@@ -15,8 +15,8 @@ const sortData = [
     id: "sort-by_name",
     key: "name_form",
     label: "Name",
-    default: true,
-    isSelected: true,
+    default: false,
+    isSelected: false,
   },
 ];
 

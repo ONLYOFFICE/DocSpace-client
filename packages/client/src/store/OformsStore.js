@@ -58,6 +58,20 @@ class OformsStore {
     });
   };
 
+  filterOformsByCategory = (categorizeBy, categoryId) => {
+    console.log(categorizeBy, categoryId);
+    if (!categorizeBy || !categoryId) return;
+
+    const newOformsFilter = this.oformsFilter.clone();
+    newOformsFilter.page = 1;
+    newOformsFilter.categorizeBy = categorizeBy;
+    newOformsFilter.categoryId = categoryId;
+
+    runInAction(() => {
+      this.getOforms(newOformsFilter);
+    });
+  };
+
   sortOforms = (sortBy, sortOrder) => {
     if (!sortBy) return;
 

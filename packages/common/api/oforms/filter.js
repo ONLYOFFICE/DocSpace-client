@@ -3,7 +3,7 @@ import { getDefaultOformLocale, toUrlParams } from "../../utils";
 const PAGE = "pagination[page]";
 const PAGE_SIZE = "pagination[pageSize]";
 const CATEGORIZE_BY = "categorizeby";
-const CATEGORY_URL = "categoryUrl";
+const CATEGORY_ID = "categoryId";
 const LOCALE = "locale";
 const SEARCH = "filterValue";
 const SORT = "sort";
@@ -18,14 +18,14 @@ const DEFAULT_SEARCH = "";
 const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_CATEGORIZE_BY = "";
-const DEFAULT_CATEGORY_URL = "";
+const DEFAULT_CATEGORY_ID = "";
 
 class OformsFilter {
   constructor(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
     categorizeBy = DEFAULT_CATEGORIZE_BY,
-    categoryUrl = DEFAULT_CATEGORY_URL,
+    categoryId = DEFAULT_CATEGORY_ID,
     locale = DEFAULT_LOCALE,
     search = DEFAULT_SEARCH,
     sortBy = DEFAULT_SORT_BY,
@@ -35,7 +35,7 @@ class OformsFilter {
     this.page = page;
     this.pageSize = pageSize;
     this.categorizeBy = categorizeBy;
-    this.categoryUrl = categoryUrl;
+    this.categoryId = categoryId;
     this.locale = locale;
     this.search = search;
     this.sortBy = sortBy;
@@ -48,7 +48,7 @@ class OformsFilter {
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
       DEFAULT_CATEGORIZE_BY,
-      DEFAULT_CATEGORY_URL,
+      DEFAULT_CATEGORY_ID,
       DEFAULT_LOCALE,
       DEFAULT_SEARCH,
       DEFAULT_SORT_BY,
@@ -71,8 +71,7 @@ class OformsFilter {
       defaultFilter.pageSize;
     const categorizeBy =
       urlFilter.get(CATEGORIZE_BY) || defaultFilter.categorizeBy;
-    const categoryUrl =
-      urlFilter.get(CATEGORY_URL) || defaultFilter.categoryUrl;
+    const categoryId = urlFilter.get(CATEGORY_ID) || defaultFilter.categoryId;
     const locale = urlFilter.get(LOCALE) || defaultFilter.locale;
     const search = urlFilter.get(SEARCH) || defaultFilter.search;
     const sortBy = urlFilter.get(SORT_BY) || defaultFilter.sortBy;
@@ -82,7 +81,7 @@ class OformsFilter {
       page,
       pageSize,
       categorizeBy,
-      categoryUrl,
+      categoryId,
       locale,
       search,
       sortBy,
@@ -98,7 +97,7 @@ class OformsFilter {
       this.page,
       this.pageSize,
       this.categorizeBy,
-      this.categoryUrl,
+      this.categoryId,
       this.locale,
       this.search,
       this.sortBy,
@@ -108,11 +107,11 @@ class OformsFilter {
   }
 
   toUrlParams = () => {
-    const { categorizeBy, categoryUrl, locale, search, sortBy, sortOrder } =
+    const { categorizeBy, categoryId, locale, search, sortBy, sortOrder } =
       this;
 
     const dtoFilter = {};
-    dtoFilter[categorizeBy] = categoryUrl;
+    dtoFilter[categorizeBy] = categoryId;
     dtoFilter[LOCALE] = locale;
     dtoFilter[SEARCH] = search;
     dtoFilter[SORT_BY] = sortBy;
@@ -126,7 +125,7 @@ class OformsFilter {
       page,
       pageSize,
       categorizeBy,
-      categoryUrl,
+      categoryId,
       locale,
       search,
       sortBy,
@@ -136,8 +135,8 @@ class OformsFilter {
     const dtoFilter = {};
     dtoFilter[PAGE] = page;
     dtoFilter[PAGE_SIZE] = pageSize;
-    if (categorizeBy && categoryUrl)
-      dtoFilter[`filters[${categorizeBy}][urlReq][$eq]`] = categoryUrl;
+    if (categorizeBy && categoryId)
+      dtoFilter[`filters[${categorizeBy}][id][$eq]`] = categoryId;
     dtoFilter[LOCALE] = locale;
     dtoFilter[`filters[name_form][$containsi]`] = search;
     if (sortBy && sortOrder) dtoFilter[SORT] = `${sortBy}:${sortOrder}`;

@@ -57,10 +57,6 @@ const CategoryFilter = ({ t, getOforms }) => {
     })();
   }, []);
 
-  console.log(formsByBranch);
-  console.log(formsByType);
-  console.log(formsByCompilation);
-
   const onViewAllTemplates = () => {
     const newFilter = OformsFilter.getFilter(location);
     newFilter.categorizeBy = "";

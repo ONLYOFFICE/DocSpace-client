@@ -54,17 +54,27 @@ const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
 
   useEffect(() => {
     const firstLoadFilter = OformsFilter.getFilter(location);
-    if (!firstLoadFilter.locale)
-      firstLoadFilter.locale = getDefaultOformLocale();
 
-    setOformsFilter(firstLoadFilter);
+    if (!firstLoadFilter.locale) {
+      firstLoadFilter.locale = getDefaultOformLocale();
+      setOformsFilter(firstLoadFilter);
+      navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+    } else setOformsFilter(firstLoadFilter);
+
     setIsInitLoading(false);
   }, []);
 
   useEffect(() => {
     if (isInitLoading) return;
     navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
-  }, [oformsFilter.sortBy, oformsFilter.sortOrder]);
+  }, [
+    oformsFilter.categorizeBy,
+    oformsFilter.categoryId,
+    // oformsFilter.locale,
+    // oformsFilter.search,
+    oformsFilter.sortBy,
+    oformsFilter.sortOrder,
+  ]);
 
   return (
     <StyledFilter>

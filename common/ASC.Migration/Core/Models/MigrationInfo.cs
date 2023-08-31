@@ -42,6 +42,8 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
         return new MigrationApiInfo()
         {
             Users = Users.Values.Select(u => u.ToApiInfo()).ToList(),
+            ExistUsers = ExistUsers.Values.Select(u => u.ToApiInfo()).ToList(),
+            WithoutEmailUsers = WithoutEmailUsers.Values.Select(u => u.ToApiInfo()).ToList(),
             MigratorName = MigratorName,
             FailedArchives = FailedArchives
         };

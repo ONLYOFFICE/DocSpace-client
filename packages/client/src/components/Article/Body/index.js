@@ -51,9 +51,9 @@ const ArticleBodyContent = (props) => {
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
 
-  const campaigns = (localStorage.getItem("campaigns") || "")
+  const banners = (localStorage.getItem("docspace_banners") || "")
     .split(",")
-    .filter((campaign) => campaign.length > 0);
+    .filter((banner) => banner.length > 0);
 
   const isAccounts = location.pathname.includes("accounts/filter");
 
@@ -239,7 +239,7 @@ const ArticleBodyContent = (props) => {
         showText &&
         (isDesktop || isTablet) &&
         !firstLoad &&
-        campaigns.length > 0 && <Banner FirebaseHelper={FirebaseHelper} />}
+        banners.length > 0 && <Banner FirebaseHelper={FirebaseHelper} />}
     </>
   );
 };

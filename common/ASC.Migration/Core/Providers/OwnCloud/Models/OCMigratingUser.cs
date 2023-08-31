@@ -33,11 +33,7 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
 
     public override string DisplayName => _userInfo.ToString();
 
-    public List<MigrationModules> ModulesList = new List<MigrationModules>();
-
     public Guid Guid => _userInfo.Id;
-
-    public override string ModuleName => MigrationResource.ModuleNameUsers;
 
     public string ConnectionString { get; set; }
     private string _rootFolder;
@@ -67,7 +63,6 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
 
     public override void Parse()
     {
-        ModulesList.Add(new MigrationModules(ModuleName, MigrationResource.OnlyofficeModuleNamePeople));
         _userInfo = new UserInfo()
         {
             Id = Guid.NewGuid()
@@ -105,10 +100,6 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
         MigratingFiles = _serviceProvider.GetService<OCMigratingFiles>();
         MigratingFiles.Init(this, _user.Storages, _rootFolder, log);
         MigratingFiles.Parse();
-        if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
-        }
     }
 
     public void DataСhange(MigratingApiUser frontUser)

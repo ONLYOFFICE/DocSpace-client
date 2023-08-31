@@ -142,13 +142,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                         var user = _serviceProvider.GetService<NCMigratingUser>();
                         user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
-                        foreach (var element in user.ModulesList)
-                        {
-                            if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
-                            {
-                                _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
-                            }
-                        }
                         _migrationInfo.Users.Add(u.Uid, user);
                     }
                     catch (Exception ex)

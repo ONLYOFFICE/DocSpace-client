@@ -31,8 +31,6 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 {
     public override string Email => _userInfo.Email;
     public Guid Guid => _userInfo.Id;
-    public List<MigrationModules> ModulesList = new List<MigrationModules>();
-    public override string ModuleName => MigrationResource.ModuleNameUsers;
 
     public override string DisplayName => $"{_userInfo.FirstName} {_userInfo.LastName}".Trim();
 
@@ -67,7 +65,6 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
     public override void Parse()
     {
-        ModulesList.Add(new MigrationModules(ModuleName, MigrationResource.OnlyofficeModuleNamePeople));
         _userInfo = new UserInfo()
         {
             Id = Guid.NewGuid()
@@ -82,10 +79,6 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
         MigratingFiles = _serviceProvider.GetService<GwsMigratingFiles>();
         MigratingFiles.Init(_rootFolder, this, log);
         MigratingFiles.Parse();
-        if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
-        }
 
         _userInfo.UserName = _userInfo.Email.Split('@').First();
         if (_userInfo.FirstName == null || _userInfo.FirstName == "")

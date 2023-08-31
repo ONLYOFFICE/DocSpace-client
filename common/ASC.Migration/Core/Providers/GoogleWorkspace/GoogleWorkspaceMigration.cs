@@ -120,13 +120,6 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                     var user = _serviceProvider.GetService<GwsMigratingUser>();
                     user.Init(takeout, rootFolder, Log);
                     user.Parse();
-                    foreach (var element in user.ModulesList)
-                    {
-                        if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
-                        {
-                            _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
-                        }
-                    }
                     _migrationInfo.Users.Add(takeout, user);
                 }
             }

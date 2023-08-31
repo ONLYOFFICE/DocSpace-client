@@ -38,7 +38,6 @@ public class GwsMigratingFiles : MigratingFiles
     public override int FilesCount => _filesCount;
 
     public override long BytesTotal => _bytesTotal;
-    public override string ModuleName => MigrationResource.GoogleModuleNameDocuments;
 
     private string _newParentFolder;
 
@@ -72,7 +71,7 @@ public class GwsMigratingFiles : MigratingFiles
         _files = new List<string>();
         _folders = new List<string>();
         _folderCreation = _folderCreation != null ? _folderCreation : DateTime.Now.ToString("dd.MM.yyyy");
-        _newParentFolder = ModuleName + " " + _folderCreation;
+        _newParentFolder = MigrationResource.GoogleModuleNameDocuments + " " + _folderCreation;
 
         foreach (var entry in entries)
         {
@@ -186,7 +185,7 @@ public class GwsMigratingFiles : MigratingFiles
             {
                 foreach (var file in _files)
                 {
-                    var maskFile = file.Replace(ModuleName + " " + _folderCreation + Path.DirectorySeparatorChar.ToString(), "");
+                    var maskFile = file.Replace(MigrationResource.GoogleModuleNameDocuments + " " + _folderCreation + Path.DirectorySeparatorChar.ToString(), "");
                     var maskParentPath = Path.GetDirectoryName(maskFile);
 
                     // ToDo: maybe we should upload to root, if required folder wasn't created

@@ -35,9 +35,6 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
 
     public Guid Guid => _userInfo.Id;
 
-    public List<MigrationModules> ModulesList = new List<MigrationModules>();
-    public override string ModuleName => MigrationResource.ModuleNameUsers;
-
     private string _rootFolder;
     private bool _hasPhoto;
     private string _pathToPhoto;
@@ -65,7 +62,6 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
 
     public override void Parse()
     {
-        ModulesList.Add(new MigrationModules(ModuleName, MigrationResource.OnlyofficeModuleNamePeople));
         _userInfo = new UserInfo()
         {
             Id = Guid.NewGuid(),
@@ -129,10 +125,6 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
         MigratingFiles.Init(_rootFolder, this, _user.Storages, log);
 
         MigratingFiles.Parse();
-        if (MigratingFiles.FoldersCount != 0 || MigratingFiles.FilesCount != 0)
-        {
-            ModulesList.Add(new MigrationModules(MigratingFiles.ModuleName, MigrationResource.OnlyofficeModuleNameDocuments));
-        }
     }
 
     public void DataСhange(MigratingApiUser frontUser)

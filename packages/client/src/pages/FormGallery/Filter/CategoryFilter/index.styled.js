@@ -107,15 +107,15 @@ export const CategoryFilter = styled.div`
         }
       }
 
-      .item-by-branch:hover + .sub-by-branch {
+      .item-by-categories:hover + .sub-by-categories {
         visibility: visible;
       }
 
-      .item-by-type:hover + .sub-by-type {
+      .item-by-types:hover + .sub-by-types {
         visibility: visible;
       }
 
-      .item-popular:hover + .sub-popular {
+      .item-by-compilations:hover + .sub-by-compilations {
         visibility: visible;
       }
     }

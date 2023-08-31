@@ -5,14 +5,18 @@ import DropDownItem from "@docspace/components/drop-down-item";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { ReactSVG } from "react-svg";
 import Text from "@docspace/components/text";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import SubListByBranch from "./SubListByBranch";
-import SubListByType from "./SubListByType";
-import SubListPopular from "./SubListPopular";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OformsFilter from "@docspace/common/api/oforms/filter";
+import SubList from "./SubList";
+import { OformCategory } from "@docspace/client/src/helpers/constants";
+import {
+  getCategoriesByBranch,
+  getCategoriesByType,
+  getPopularCategories,
+} from "@docspace/common/api/oforms";
 
 const CategoryFilter = ({ t, getOforms }) => {
   const dropdownRef = useRef(null);
@@ -24,26 +28,38 @@ const CategoryFilter = ({ t, getOforms }) => {
   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
   const onCloseDropdown = () => setIsOpen(false);
 
-  const [mobileSubByBranchIsOpen, setMobileSubByBranchIsOpen] = useState(false);
-  const onToggleMobileSubByBranchIsOpen = () => {
-    setMobileSubByBranchIsOpen(!mobileSubByBranchIsOpen);
-    setMobileSubByTypeIsOpen(false);
-    setMobileSubPopularIsOpen(false);
-  };
+  const [openedCategory, setOpenedCategory] = useState(null);
+  const isBranchCategoryOpen = openedCategory === OformCategory.Branch;
+  const isTypeCategoryOpen = openedCategory === OformCategory.Type;
+  const isCompilationCategoryOpen =
+    openedCategory === OformCategory.Compilation;
 
-  const [mobileSubByTypeIsOpen, setMobileSubByTypeIsOpen] = useState(false);
-  const onToggleMobileSubByTypeIsOpen = () => {
-    setMobileSubByTypeIsOpen(!mobileSubByTypeIsOpen);
-    setMobileSubByBranchIsOpen(false);
-    setMobileSubPopularIsOpen(false);
-  };
+  const onToggleBranchCategory = () =>
+    setOpenedCategory(isBranchCategoryOpen ? null : OformCategory.Branch);
+  const onToggleTypeCategory = () =>
+    setOpenedCategory(isTypeCategoryOpen ? null : OformCategory.Type);
+  const onToggleCompilationCategory = () =>
+    setOpenedCategory(
+      isCompilationCategoryOpen ? null : OformCategory.Compilation
+    );
 
-  const [mobileSubPopularIsOpen, setMobileSubPopularIsOpen] = useState(false);
-  const onToggleMobileSubPopularIsOpen = () => {
-    setMobileSubPopularIsOpen(!mobileSubPopularIsOpen);
-    setMobileSubByBranchIsOpen(false);
-    setMobileSubByTypeIsOpen(false);
-  };
+  const [formsByBranch, setFormsByBranch] = useState([]);
+  const [formsByType, setFormsByType] = useState([]);
+  const [formsByCompilation, setFormsByCompilation] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const branchData = await getCategoriesByBranch();
+      setFormsByBranch(branchData);
+      const typeData = await getCategoriesByType();
+      setFormsByType(typeData);
+      const compilationData = await getPopularCategories();
+      setFormsByCompilation(compilationData);
+    })();
+  }, []);
+
+  console.log(formsByBranch);
+  console.log(formsByType);
+  console.log(formsByCompilation);
 
   const onViewAllTemplates = () => {
     const newFilter = OformsFilter.getFilter(location);
@@ -77,37 +93,53 @@ const CategoryFilter = ({ t, getOforms }) => {
             label={t("FormGallery:ViewAllTemplates")}
             onClick={onViewAllTemplates}
           />
+
           <DropDownItem isSeparator />
 
           <DropDownItem
-            className={`dropdown-item item-by-branch ${
-              mobileSubByBranchIsOpen && "mobile-sub-open"
+            className={`dropdown-item item-by-${OformCategory.Branch} ${
+              isBranchCategoryOpen && "mobile-sub-open"
             }`}
             label={t("FormGallery:FormsByBranch")}
-            onClick={onToggleMobileSubByBranchIsOpen}
+            onClick={onToggleBranchCategory}
             isSubMenu
           />
-          <SubListByBranch isOpen={mobileSubByBranchIsOpen} />
+          <SubList
+            isOpen={isBranchCategoryOpen}
+            categoryType={OformCategory.Branch}
+            categories={formsByBranch}
+            marginTop={"43px"}
+          />
 
           <DropDownItem
-            className={`dropdown-item item-by-type ${
-              mobileSubByTypeIsOpen && "mobile-sub-open"
+            className={`dropdown-item item-by-${OformCategory.Type} ${
+              isTypeCategoryOpen && "mobile-sub-open"
             }`}
             label={t("FormGallery:FormsByType")}
-            onClick={onToggleMobileSubByTypeIsOpen}
+            onClick={onToggleTypeCategory}
             isSubMenu
           />
-          <SubListByType isOpen={mobileSubByTypeIsOpen} />
+          <SubList
+            isOpen={isTypeCategoryOpen}
+            categoryType={OformCategory.Type}
+            categories={formsByType}
+            marginTop={"79px"}
+          />
 
           <DropDownItem
-            className={`dropdown-item item-popular ${
-              mobileSubPopularIsOpen && "mobile-sub-open"
+            className={`dropdown-item item-by-${OformCategory.Compilation} ${
+              isCompilationCategoryOpen && "mobile-sub-open"
             }`}
             label={t("FormGallery:PopularCompilations")}
-            onClick={onToggleMobileSubPopularIsOpen}
+            onClick={onToggleCompilationCategory}
             isSubMenu
           />
-          <SubListPopular isOpen={mobileSubPopularIsOpen} />
+          <SubList
+            isOpen={isCompilationCategoryOpen}
+            categoryType={OformCategory.Compilation}
+            categories={formsByCompilation}
+            marginTop={"111px"}
+          />
         </DropDown>
       </div>
     </Styled.CategoryFilter>

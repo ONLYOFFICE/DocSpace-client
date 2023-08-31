@@ -1,16 +1,11 @@
-import InputBlock from "@docspace/components/input-block";
 import SearchInput from "@docspace/components/search-input";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
 import { inject } from "mobx-react";
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash/debounce";
 
-export const StyledTextInput = styled(TextInput)`
+export const StyledSearchInput = styled(SearchInput)`
   width: 100%;
   max-width: 653px;
 `;
@@ -20,32 +15,19 @@ const SearchFilter = ({ oformsFilter, getOforms }) => {
   const navigate = useNavigate();
 
   const [value, setValue] = useState("");
+  const onChangeValue = (val) => {
+    setValue(val);
+    onSearch(val);
+  };
+  const onClearValue = () => onChangeValue("");
 
-  // const onFilter = useCallback((val) => {
-  //   const newFilter = oformsFilter.clone();
-  //   newFilter.search = val;
-  //   getOforms(newFilter);
-  //   navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-  // }, []);
-
-  const onFilter = (val) => {
+  const onSearch = (val) => {
     const newFilter = oformsFilter.clone();
     newFilter.search = val;
     console.log(newFilter);
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
-
-  const debouncedOnFilter = useMemo(() => {
-    return debounce(onFilter, 300);
-  }, [onFilter]);
-
-  const onChangeValue = (val) => {
-    setValue(val);
-    // debouncedOnFilter(value);
-    onFilter(val);
-  };
-  const onClearValue = () => onChangeValue("");
 
   const ref = useRef(null);
   const onInputClick = () => ref?.current?.focus();
@@ -57,7 +39,7 @@ const SearchFilter = ({ oformsFilter, getOforms }) => {
   }, [ref]);
 
   return (
-    <SearchInput
+    <StyledSearchInput
       forwardedRef={ref}
       className="first-name"
       tabIndex={1}

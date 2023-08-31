@@ -5,14 +5,30 @@ import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import { OformCategory } from "@docspace/client/src/helpers/constants";
 
-const SubListByBranch = ({ isOpen, categories, marginTop, categoryType }) => {
+const SubListByBranch = ({
+  isOpen,
+  categoryType,
+  categories,
+  marginTop,
+
+  getOforms,
+  oformsFilter,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const getCategoryLabel = (category) =>
+    categoryType === OformCategory.Branch
+      ? category.attributes.categorie
+      : categoryType === OformCategory.Type
+      ? category.attributes.type
+      : category.attributes.compilation;
+
   const onOpenCategory = (category) => {
     const newFilter = oformsFilter.clone();
-    newFilter.categorizeBy = OformCategory.Branch;
+    newFilter.categorizeBy = categoryType;
     newFilter.categoryUrl = category.attributes.urlReq;
     getOforms(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -24,10 +40,11 @@ const SubListByBranch = ({ isOpen, categories, marginTop, categoryType }) => {
         <StyledSubItemMobile
           className="dropdown-item item-mobile"
           key={category.id}
-          label={category.attributes.categorie}
+          label={getCategoryLabel(category)}
           onClick={() => onOpenCategory(category)}
         />
       ));
+    else return null;
 
   return (
     <StyledSubList
@@ -45,7 +62,7 @@ const SubListByBranch = ({ isOpen, categories, marginTop, categoryType }) => {
         <DropDownItem
           className="dropdown-item"
           key={category.id}
-          label={category.attributes.categorie}
+          label={getCategoryLabel(category)}
           onClick={() => onOpenCategory(category)}
         />
       ))}
@@ -53,6 +70,7 @@ const SubListByBranch = ({ isOpen, categories, marginTop, categoryType }) => {
   );
 };
 
-export default inject(({}) => ({}))(
-  withTranslation(["FormGallery", "Common"])(SubListByBranch)
-);
+export default inject(({ oformsStore }) => ({
+  getOforms: oformsStore.getOforms,
+  oformsFilter: oformsStore.oformsFilter,
+}))(withTranslation(["FormGallery", "Common"])(SubListByBranch));

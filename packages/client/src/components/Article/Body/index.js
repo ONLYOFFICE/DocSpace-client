@@ -20,14 +20,6 @@ import Loaders from "@docspace/common/components/Loaders";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
-const StyledBlock = styled.div`
-  padding: 0 20px;
-
-  @media ${tablet} {
-    padding: ${(props) => (props.showText ? "0 16px" : 0)};
-  }
-`;
-
 const ArticleBodyContent = (props) => {
   const {
     isDesktopClient,
@@ -243,13 +235,11 @@ const ArticleBodyContent = (props) => {
         activeItemId={activeItemId}
       />
 
-      {/* {!isDesktopClient && showText && (
-        <StyledBlock showText={showText}>
-          {(isDesktop || isTablet) && !firstLoad && campaigns.length > 0 && (
-            <Banner FirebaseHelper={FirebaseHelper} />
-          )}
-        </StyledBlock>
-      )} */}
+      {!isDesktopClient &&
+        showText &&
+        (isDesktop || isTablet) &&
+        !firstLoad &&
+        campaigns.length > 0 && <Banner FirebaseHelper={FirebaseHelper} />}
     </>
   );
 };

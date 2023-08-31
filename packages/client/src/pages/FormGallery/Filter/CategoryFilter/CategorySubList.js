@@ -4,7 +4,8 @@ import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
 import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { OformCategory } from "@docspace/client/src/helpers/constants";
+import { OformCategoryType } from "@docspace/client/src/helpers/constants";
+import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 
 const CategorySubList = ({
   isOpen,
@@ -13,16 +14,12 @@ const CategorySubList = ({
   marginTop,
 
   filterOformsByCategory,
+  setOformsCurrentCategory,
 }) => {
-  const getCategoryLabel = (category) =>
-    categoryType === OformCategory.Branch
-      ? category.attributes.categorie
-      : categoryType === OformCategory.Type
-      ? category.attributes.type
-      : category.attributes.compilation;
-
-  const onOpenCategory = (category) =>
+  const onFilterByCategory = (category) => {
+    setOformsCurrentCategory(category);
     filterOformsByCategory(categoryType, category.id);
+  };
 
   if (isSmallTablet() || isMobile() || isMobileOnly)
     if (isOpen)
@@ -30,8 +27,8 @@ const CategorySubList = ({
         <StyledSubItemMobile
           className="dropdown-item item-mobile"
           key={category.id}
-          label={getCategoryLabel(category)}
-          onClick={() => onOpenCategory(category)}
+          label={getOformCategoryTitle(categoryType, category)}
+          onClick={() => onFilterByCategory(category)}
         />
       ));
     else return null;
@@ -52,8 +49,8 @@ const CategorySubList = ({
         <DropDownItem
           className="dropdown-item"
           key={category.id}
-          label={getCategoryLabel(category)}
-          onClick={() => onOpenCategory(category)}
+          label={getOformCategoryTitle(categoryType, category)}
+          onClick={() => onFilterByCategory(category)}
         />
       ))}
     </StyledSubList>
@@ -64,4 +61,5 @@ export default inject(({ oformsStore }) => ({
   getOforms: oformsStore.getOforms,
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
+  setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
 }))(withTranslation(["FormGallery", "Common"])(CategorySubList));

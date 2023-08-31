@@ -1,13 +1,18 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/common/api";
+import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 
 const { OformsFilter } = api;
+
+import { getCategoryById } from "@docspace/common/api/oforms";
 
 class OformsStore {
   authStore;
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
+  currentCategory = null;
+
   oformsIsLoading = false;
   gallerySelected = null;
 
@@ -18,6 +23,8 @@ class OformsStore {
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
   setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
+  setOformsCurrentCategory = (currentCategory) =>
+    (this.currentCategory = currentCategory);
   setOformsIsLoading = (oformsIsLoading) =>
     (this.oformsIsLoading = oformsIsLoading);
   setGallerySelected = (gallerySelected) => {
@@ -58,33 +65,47 @@ class OformsStore {
     });
   };
 
+  fetchCurrentCategory = async () => {
+    const { categorizeBy, categoryId } = this.oformsFilter;
+    if (!categorizeBy || !categoryId) {
+      this.setOformsCurrentCategory(null);
+      return;
+    }
+
+    const fetchedCategory = await getCategoryById(categorizeBy, categoryId);
+
+    runInAction(() => {
+      this.setOformsCurrentCategory(fetchedCategory);
+    });
+  };
+
   filterOformsByCategory = (categorizeBy, categoryId) => {
-    if (!categorizeBy || !categoryId) return;
-
+    this.oformsFilter.page = 1;
+    this.oformsFilter.categorizeBy = categorizeBy;
+    this.oformsFilter.categoryId = categoryId;
     const newOformsFilter = this.oformsFilter.clone();
-    newOformsFilter.page = 1;
-    newOformsFilter.categorizeBy = categorizeBy;
-    newOformsFilter.categoryId = categoryId;
 
-    runInAction(() => this.getOforms(newOformsFilter));
+    runInAction(() => {
+      this.getOforms(newOformsFilter);
+    });
   };
 
   filterOformsByLocale = (locale) => {
     if (!locale) return;
 
+    this.oformsFilter.page = 1;
+    this.oformsFilter.locale = locale;
+    this.oformsFilter.categorizeBy = "";
+    this.oformsFilter.categoryId = "";
     const newOformsFilter = this.oformsFilter.clone();
-    newOformsFilter.page = 1;
-    newOformsFilter.locale = locale;
-    newOformsFilter.categorizeBy = "";
-    newOformsFilter.categoryId = "";
 
     runInAction(() => this.getOforms(newOformsFilter));
   };
 
   filterOformsBySearch = (search) => {
+    this.oformsFilter.page = 1;
+    this.oformsFilter.search = search;
     const newOformsFilter = this.oformsFilter.clone();
-    newOformsFilter.page = 1;
-    newOformsFilter.search = search;
 
     runInAction(() => this.getOforms(newOformsFilter));
   };
@@ -92,10 +113,10 @@ class OformsStore {
   sortOforms = (sortBy, sortOrder) => {
     if (!sortBy || !sortOrder) return;
 
+    this.oformsFilter.page = 1;
+    this.oformsFilter.sortBy = sortBy;
+    this.oformsFilter.sortOrder = sortOrder;
     const newOformsFilter = this.oformsFilter.clone();
-    newOformsFilter.page = 1;
-    newOformsFilter.sortBy = sortBy;
-    newOformsFilter.sortOrder = sortOrder;
 
     runInAction(() => this.getOforms(newOformsFilter));
   };

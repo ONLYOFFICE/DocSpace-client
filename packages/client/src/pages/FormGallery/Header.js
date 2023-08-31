@@ -20,17 +20,23 @@ import api from "@docspace/common/api";
 import { isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
+import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 
 const SectionHeaderContent = ({
   t,
 
-  categorizeBy,
-  categoryUrl,
+  categoryType,
+
+  currentCategory,
+  fetchCurrentCategory,
+
+  oformsFilter,
+  filterOformsByCategory,
+
+  setGallerySelected,
 
   isInfoPanelVisible,
   setIsInfoPanelVisible,
-  setGallerySelected,
-  categoryType,
 }) => {
   const navigate = useNavigate();
   const { fromFolderId } = useParams();
@@ -54,39 +60,45 @@ const SectionHeaderContent = ({
     );
   };
 
+  const onViewAllTemplates = () => filterOformsByCategory("", "");
+
   const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
 
   useEffect(() => {
-    (async () => {
-      const newCheckboxOptions = [];
+    if (currentCategory) return;
+    fetchCurrentCategory();
+  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
-      if (categorizeBy && categoryUrl) {
+  useEffect(() => {
+    (async () => {
+      const prevFolderId = fromFolderId || CategoryType.SharedRoom;
+      const prevFolder = await api.files.getFolderInfo(prevFolderId);
+
+      const newCheckboxOptions = [];
+      if (oformsFilter.categorizeBy && oformsFilter.categoryId)
         newCheckboxOptions.push(
           <DropDownItem
             id={"view-all"}
             key={"view-all"}
             label={t("Common:OFORMsGallery")}
             data-key={"OFORMs gallery"}
-            onClick={() => {}}
+            onClick={onViewAllTemplates}
           />
         );
-      }
-
-      const prevFolderId = fromFolderId || CategoryType.SharedRoom;
-      const prevFolder = await api.files.getFolderInfo(prevFolderId);
-      newCheckboxOptions.push(
-        <DropDownItem
-          id={"fromFolder"}
-          key={"fromFolder"}
-          label={prevFolder.title}
-          data-key={prevFolder.title}
-          onClick={onNavigateBack}
-        />
-      );
+      if (prevFolder)
+        newCheckboxOptions.push(
+          <DropDownItem
+            id={"fromFolder"}
+            key={"fromFolder"}
+            label={prevFolder.title}
+            data-key={prevFolder.title}
+            onClick={onNavigateBack}
+          />
+        );
 
       setCheckboxOptions(<>{newCheckboxOptions}</>);
     })();
-  }, [fromFolderId, categoryUrl]);
+  }, [fromFolderId, oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
     <StyledContainer>
@@ -99,7 +111,8 @@ const SectionHeaderContent = ({
       />
 
       <StyledHeadline type="content" truncate>
-        {t("Common:OFORMsGallery")}
+        {getOformCategoryTitle(oformsFilter.categorizeBy, currentCategory) ||
+          t("Common:OFORMsGallery")}
       </StyledHeadline>
 
       <StyledNavigationDrodown
@@ -136,8 +149,11 @@ export default inject(({ auth, filesStore, oformsStore }) => {
   return {
     categoryType: filesStore.categoryType,
 
-    categorizeBy: oformsStore.oformsFilter.categorizeBy,
-    categoryUrl: oformsStore.oformsFilter.categoryUrl,
+    currentCategory: oformsStore.currentCategory,
+    fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+
+    oformsFilter: oformsStore.oformsFilter,
+    filterOformsByCategory: oformsStore.filterOformsByCategory,
 
     setGallerySelected: oformsStore.setGallerySelected,
 

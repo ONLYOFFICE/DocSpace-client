@@ -1,22 +1,21 @@
-import SearchInput from "@docspace/components/search-input";
 import { inject } from "mobx-react";
 import { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
-export const StyledSearchInput = styled(SearchInput)`
-  width: 100%;
-  max-width: 653px;
-`;
+import * as Styled from "./index.styled";
 
-const SearchFilter = ({ filterOformsBySearch }) => {
-  const [value, setValue] = useState("");
+const SearchFilter = ({ oformsFilter, filterOformsBySearch }) => {
+  const [value, setValue] = useState(oformsFilter.search);
   const onSearch = (val) => filterOformsBySearch(val);
   const onClear = () => onChangeValue("");
   const onChangeValue = (val) => {
     setValue(val);
     onSearch(val);
   };
+
+  useEffect(() => {
+    if (value !== oformsFilter.search) setValue(oformsFilter.search);
+  }, [oformsFilter.search]);
 
   const ref = useRef(null);
   const onInputClick = () => ref?.current?.focus();
@@ -28,7 +27,7 @@ const SearchFilter = ({ filterOformsBySearch }) => {
   }, [ref]);
 
   return (
-    <StyledSearchInput
+    <Styled.SearchFilter
       forwardedRef={ref}
       className="first-name"
       tabIndex={1}
@@ -42,5 +41,6 @@ const SearchFilter = ({ filterOformsBySearch }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   filterOformsBySearch: oformsStore.filterOformsBySearch,
 }))(withTranslation(["FormGallery", "Common"])(SearchFilter));

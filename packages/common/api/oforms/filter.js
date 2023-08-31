@@ -89,6 +89,8 @@ class OformsFilter {
       defaultFilter.total
     );
 
+    console.log(location, newFilter);
+
     return newFilter;
   }
 
@@ -111,7 +113,8 @@ class OformsFilter {
       this;
 
     const dtoFilter = {};
-    dtoFilter[categorizeBy] = categoryId;
+    dtoFilter[CATEGORIZE_BY] = categorizeBy;
+    dtoFilter[CATEGORY_ID] = categoryId;
     dtoFilter[LOCALE] = locale;
     dtoFilter[SEARCH] = search;
     dtoFilter[SORT_BY] = sortBy;

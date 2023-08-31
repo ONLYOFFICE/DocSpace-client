@@ -126,7 +126,7 @@ export const LinkType = Object.freeze({
   External: 1,
 });
 
-export const OformCategory = Object.freeze({
+export const OformCategoryType = Object.freeze({
   Branch: "categories",
   Type: "types",
   Compilation: "compilations",

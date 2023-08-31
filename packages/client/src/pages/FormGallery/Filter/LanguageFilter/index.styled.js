@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import DropDownItem from "@docspace/components/drop-down-item";
+import styled, { css } from "styled-components";
+import Base from "@docspace/components/themes/base";
 
 export const LanguageFilter = styled.div`
   width: 41px;
@@ -95,3 +97,12 @@ export const LanguageFilter = styled.div`
     }
   }
 `;
+
+export const LanguageFilterItem = styled(DropDownItem)`
+  ${({ isSelected, theme }) =>
+    isSelected &&
+    css`
+      background-color: ${theme.dropDownItem.hoverBackgroundColor};
+    `}
+`;
+LanguageFilterItem.defaultProps = { theme: Base };

@@ -45,9 +45,10 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
           isDefaultMode={false}
           fixedDirection={true}
         >
-          {avialableLocales.map((locale, i) => (
-            <DropDownItem
-              key={i}
+          {avialableLocales.map((locale) => (
+            <Styled.LanguageFilterItem
+              key={locale}
+              isSelected={locale === oformsFilter.locale}
               className="dropdown-item"
               icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
               onClick={() => onFilterByLocale(locale)}

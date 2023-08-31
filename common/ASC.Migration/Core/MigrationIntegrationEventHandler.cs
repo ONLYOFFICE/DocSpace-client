@@ -48,7 +48,7 @@ public class MigrationIntegrationEventHandler :
         {
             _logger.InformationHandlingIntegrationEvent(@event.Id, "migration-parse", @event);
 
-            _worker.StartParse(@event.TenantId, @event.CreateBy, @event.MigratorName, @event.Path);
+            _worker.StartParse(@event.TenantId, @event.CreateBy, @event.MigratorName);
 
             return Task.CompletedTask;
         }

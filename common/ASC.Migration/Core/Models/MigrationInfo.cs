@@ -42,7 +42,6 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
         {
             Users = Users.Values.Select(u => u.ToApiInfo()).ToList(),
             MigratorName = MigratorName,
-            Path = Path,
             Modules = Modules,
             FailedArchives = FailedArchives
         };

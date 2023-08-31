@@ -33,10 +33,6 @@ public record MigrationParseIntegrationEvent : IntegrationEvent
     [ProtoMember(6)]
     public string MigratorName { get; set; }
 
-
-    [ProtoMember(7)]
-    public string Path { get; set; }
-
     public MigrationParseIntegrationEvent(Guid createBy, int tenantId) : base(createBy, tenantId)
     {
     }

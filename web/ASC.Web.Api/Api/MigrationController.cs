@@ -93,11 +93,11 @@ public class MigrationController : ControllerBase
     /// <param name="migratorName"></param>
     /// <param name="dto"></param>
     [HttpPost("init/{migratorName}")]
-    public async Task UploadAndInitAsync(string migratorName, MigrationInitRequestsDto dto)
+    public async Task UploadAndInitAsync(string migratorName)
     {
         await DemandPermission();
 
-        await _migrationCore.StartParse(migratorName, dto.Path);
+        await _migrationCore.StartParse(migratorName);
     }
 
     /// <summary>

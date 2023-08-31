@@ -55,12 +55,11 @@ public class MigrationCore
         return _serviceProvider.GetService<IEnumerable<IMigration>>().FirstOrDefault(r => r.Meta.Name.Equals(migrator, StringComparison.OrdinalIgnoreCase));
     }
 
-    public async Task StartParse(string migrationName, string path)
+    public async Task StartParse(string migrationName)
     {
         _eventBus.Publish(new MigrationParseIntegrationEvent(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantIdAsync())
         {
-            MigratorName = migrationName,
-            Path = path
+            MigratorName = migrationName
         });
     }
 

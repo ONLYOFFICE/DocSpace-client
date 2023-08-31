@@ -33,14 +33,11 @@ public class MigrationApiInfo
     public string MigratorName { get; set; }
 
     [ProtoMember(2)]
-    public string Path { get; set; }
-
-    [ProtoMember(3)]
     public List<string> FailedArchives { get; set; } = new List<string>();
 
-    [ProtoMember(4)]
+    [ProtoMember(3)]
     public List<MigratingApiUser> Users { get; set; } = new List<MigratingApiUser>();
 
-    [ProtoMember(5)]
+    [ProtoMember(4)]
     public List<MigrationModules> Modules { get; set; } = new List<MigrationModules>();
 }

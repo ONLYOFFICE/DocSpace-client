@@ -33,9 +33,9 @@ public class MigrationOperation : DistributedTaskProgress
     private readonly MigrationCore _migrationCore;
     private readonly TenantManager _tenantManager;
     private readonly SecurityContext _securityContext;
+    private readonly StorageFactory _storageFactory;
     private readonly IServiceProvider _serviceProvider;
     private string _migratorName;
-    private string _path;
     private Guid _userId;
 
     private int? _tenantId;
@@ -87,20 +87,21 @@ public class MigrationOperation : DistributedTaskProgress
         MigrationCore migrationCore,
         TenantManager tenantManager,
         SecurityContext securityContext,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        StorageFactory storageFactory)
     {
         _logger = logger;
         _migrationCore = migrationCore;
         _tenantManager = tenantManager;
         _securityContext = securityContext;
         _serviceProvider = serviceProvider;
+        _storageFactory = storageFactory;
     }
 
-    public void InitParse(int tenantId, Guid userId, string migratorName, string path)
+    public void InitParse(int tenantId, Guid userId, string migratorName)
     {
         TenantId = tenantId;
         _migratorName = migratorName;
-        _path = path;
         _userId = userId;
     }
 
@@ -109,7 +110,6 @@ public class MigrationOperation : DistributedTaskProgress
         TenantId = tenantId;
         MigrationApiInfo = migrationApiInfo;
         _migratorName = migrationApiInfo.MigratorName;
-        _path = migrationApiInfo.Path;
         _userId = userId;
     }
 
@@ -132,7 +132,9 @@ public class MigrationOperation : DistributedTaskProgress
 
             try
             {
-                migrator.Init(_path, CancellationToken);
+                var discStore = await _storageFactory.GetStorageAsync(TenantId, "migration", (IQuotaController)null) as DiscDataStore;
+                var folder = discStore.GetPhysicalPath("", "");
+                migrator.Init(folder, CancellationToken);
 
             }
             catch (Exception ex)

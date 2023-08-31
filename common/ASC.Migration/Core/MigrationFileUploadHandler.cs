@@ -35,8 +35,6 @@ public class MigrationFileUploadHandler
     }
 
     public async Task Invoke(HttpContext context,
-        PermissionContext permissionContext,
-        ICache cache,
         TenantManager tenantManager,
         IConfiguration configuration,
         StorageFactory storageFactory,
@@ -116,7 +114,7 @@ public class MigrationFileUploadHandler
         };
     }
 
-    public async Task<string> GetTmpFilePathAsync(string name, StorageFactory storageFactory, int tenantId)
+    private async Task<string> GetTmpFilePathAsync(string name, StorageFactory storageFactory, int tenantId)
     {
         var discStore = await storageFactory.GetStorageAsync(tenantId, "migration", (IQuotaController)null) as DiscDataStore;
         var folder = discStore.GetPhysicalPath("", "");

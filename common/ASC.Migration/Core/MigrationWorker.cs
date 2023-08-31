@@ -43,9 +43,9 @@ public class MigrationWorker
         _queue = queueFactory.CreateQueue(CUSTOM_DISTRIBUTED_TASK_QUEUE_NAME);
     }
 
-    public void StartParse(int tenantId, Guid userId, string migratorName, string path)
+    public void StartParse(int tenantId, Guid userId, string migratorName)
     {
-        Start(tenantId, (item) => item.InitParse(tenantId, userId, migratorName, path));
+        Start(tenantId, (item) => item.InitParse(tenantId, userId, migratorName));
     }
 
     public void StartMigrate(int tenantId, Guid userId, MigrationApiInfo migrationApiInfo)

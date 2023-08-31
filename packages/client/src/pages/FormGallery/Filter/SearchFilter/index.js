@@ -2,7 +2,6 @@ import SearchInput from "@docspace/components/search-input";
 import { inject } from "mobx-react";
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 export const StyledSearchInput = styled(SearchInput)`
@@ -10,23 +9,13 @@ export const StyledSearchInput = styled(SearchInput)`
   max-width: 653px;
 `;
 
-const SearchFilter = ({ oformsFilter, getOforms }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
+const SearchFilter = ({ filterOformsBySearch }) => {
   const [value, setValue] = useState("");
+  const onSearch = (val) => filterOformsBySearch(val);
+  const onClear = () => onChangeValue("");
   const onChangeValue = (val) => {
     setValue(val);
     onSearch(val);
-  };
-  const onClearValue = () => onChangeValue("");
-
-  const onSearch = (val) => {
-    const newFilter = oformsFilter.clone();
-    newFilter.search = val;
-    console.log(newFilter);
-    getOforms(newFilter);
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
   const ref = useRef(null);
@@ -47,12 +36,11 @@ const SearchFilter = ({ oformsFilter, getOforms }) => {
       value={value}
       onChange={onChangeValue}
       onClick={onInputClick}
-      onClearSearch={onClearValue}
+      onClearSearch={onClear}
     />
   );
 };
 
 export default inject(({ oformsStore }) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  getOforms: oformsStore.getOforms,
+  filterOformsBySearch: oformsStore.filterOformsBySearch,
 }))(withTranslation(["FormGallery", "Common"])(SearchFilter));

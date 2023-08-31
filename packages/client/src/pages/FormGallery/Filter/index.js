@@ -70,8 +70,8 @@ const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
   }, [
     oformsFilter.categorizeBy,
     oformsFilter.categoryId,
-    // oformsFilter.locale,
-    // oformsFilter.search,
+    oformsFilter.locale,
+    oformsFilter.search,
     oformsFilter.sortBy,
     oformsFilter.sortOrder,
   ]);

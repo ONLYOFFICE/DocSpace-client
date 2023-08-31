@@ -59,7 +59,6 @@ class OformsStore {
   };
 
   filterOformsByCategory = (categorizeBy, categoryId) => {
-    console.log(categorizeBy, categoryId);
     if (!categorizeBy || !categoryId) return;
 
     const newOformsFilter = this.oformsFilter.clone();
@@ -67,25 +66,39 @@ class OformsStore {
     newOformsFilter.categorizeBy = categorizeBy;
     newOformsFilter.categoryId = categoryId;
 
-    runInAction(() => {
-      this.getOforms(newOformsFilter);
-    });
+    runInAction(() => this.getOforms(newOformsFilter));
+  };
+
+  filterOformsByLocale = (locale) => {
+    if (!locale) return;
+
+    const newOformsFilter = this.oformsFilter.clone();
+    newOformsFilter.page = 1;
+    newOformsFilter.locale = locale;
+    newOformsFilter.categorizeBy = "";
+    newOformsFilter.categoryId = "";
+
+    runInAction(() => this.getOforms(newOformsFilter));
+  };
+
+  filterOformsBySearch = (search) => {
+    const newOformsFilter = this.oformsFilter.clone();
+    newOformsFilter.page = 1;
+    newOformsFilter.search = search;
+
+    runInAction(() => this.getOforms(newOformsFilter));
   };
 
   sortOforms = (sortBy, sortOrder) => {
-    if (!sortBy) return;
+    if (!sortBy || !sortOrder) return;
 
     const newOformsFilter = this.oformsFilter.clone();
     newOformsFilter.page = 1;
     newOformsFilter.sortBy = sortBy;
     newOformsFilter.sortOrder = sortOrder;
 
-    runInAction(() => {
-      this.getOforms(newOformsFilter);
-    });
+    runInAction(() => this.getOforms(newOformsFilter));
   };
-
-  filterByCategory = async () => {};
 
   get hasGalleryFiles() {
     return this.oformFiles && !!this.oformFiles.length;

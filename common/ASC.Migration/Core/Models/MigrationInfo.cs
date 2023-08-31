@@ -31,9 +31,10 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
     where TFiles : MigratingFiles
 {
     public Dictionary<string, TUser> Users = new Dictionary<string, TUser>();
+    public Dictionary<string, TUser> WithoutEmailUsers = new Dictionary<string, TUser>();
+    public Dictionary<string, TUser> ExistUsers = new Dictionary<string, TUser>();
     public string Path { get; set; }
     public string MigratorName { get; set; }
-    public List<MigrationModules> Modules = new List<MigrationModules>();
     public List<string> FailedArchives = new List<string>();
 
     public virtual MigrationApiInfo ToApiInfo()
@@ -41,8 +42,9 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
         return new MigrationApiInfo()
         {
             Users = Users.Values.Select(u => u.ToApiInfo()).ToList(),
+            ExistUsers = ExistUsers.Values.Select(u => u.ToApiInfo()).ToList(),
+            WithoutEmailUsers = WithoutEmailUsers.Values.Select(u => u.ToApiInfo()).ToList(),
             MigratorName = MigratorName,
-            Modules = Modules,
             FailedArchives = FailedArchives
         };
     }

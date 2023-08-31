@@ -33,6 +33,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
 {
     private string[] _takeouts;
     private readonly SecurityContext _securityContext;
+    private readonly UserManager _userManager;
     private readonly TempPath _tempPath;
     private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
@@ -42,13 +43,15 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
         MigrationLogger migrationLogger,
         SecurityContext securityContext,
         TempPath tempPath,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        UserManager userManager)
         : base(migrationLogger)
     {
         _securityContext = securityContext;
         _tempPath = tempPath;
         _serviceProvider = serviceProvider;
         _meta = new("GoogleWorkspace", 5, true);
+        _userManager = userManager;
     }
 
     public override void Init(string path, CancellationToken cancellationToken)
@@ -75,7 +78,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
         _migrationInfo.Path = path;
     }
 
-    public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
+    public override async Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
         if (reportProgress)
         {
@@ -120,14 +123,18 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                     var user = _serviceProvider.GetService<GwsMigratingUser>();
                     user.Init(takeout, rootFolder, Log);
                     user.Parse();
-                    foreach (var element in user.ModulesList)
+                    if (user.Email.IsNullOrEmpty()) 
                     {
-                        if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
-                        {
-                            _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
-                        }
+                        _migrationInfo.WithoutEmailUsers.Add(takeout, user);
                     }
-                    _migrationInfo.Users.Add(takeout, user);
+                    else if((await _userManager.GetUserByEmailAsync(user.Email)) != ASC.Core.Users.Constants.LostUser)
+                    {
+                        _migrationInfo.ExistUsers.Add(takeout, user);
+                    }
+                    else
+                    {
+                        _migrationInfo.Users.Add(takeout, user);
+                    }
                 }
             }
             catch (Exception ex)
@@ -148,7 +155,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
             ReportProgress(100, MigrationResource.DataProcessingCompleted);
         }
 
-        return Task.FromResult(_migrationInfo.ToApiInfo());
+        return _migrationInfo.ToApiInfo();
     }
 
     public override async Task Migrate(MigrationApiInfo migrationApiInfo)

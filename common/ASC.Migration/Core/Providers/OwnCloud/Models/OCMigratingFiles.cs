@@ -35,7 +35,6 @@ public class OCMigratingFiles : MigratingFiles
     public override int FoldersCount => _foldersCount;
     public override int FilesCount => _filesCount;
     public override long BytesTotal => _bytesTotal;
-    public override string ModuleName => MigrationResource.NextcloudModuleNameDocuments;
 
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IDaoFactory _daoFactory;

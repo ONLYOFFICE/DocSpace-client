@@ -38,6 +38,9 @@ public class MigrationApiInfo
     [ProtoMember(3)]
     public List<MigratingApiUser> Users { get; set; } = new List<MigratingApiUser>();
 
-    [ProtoMember(4)]
-    public List<MigrationModules> Modules { get; set; } = new List<MigrationModules>();
+    [ProtoMember(5)]
+    public List<MigratingApiUser> WithoutEmailUsers { get; set; } = new List<MigratingApiUser>();
+
+    [ProtoMember(6)]
+    public List<MigratingApiUser> ExistUsers { get; set; } = new List<MigratingApiUser>();
 }

@@ -33,7 +33,6 @@ public abstract class MigratingUser<TFiles> : ImportableEntity
 
     public abstract string Email { get; }
     public abstract string DisplayName { get; }
-    public abstract string ModuleName { get; }
     public TFiles MigratingFiles { get; set; }
 
     public virtual MigratingApiUser ToApiInfo()
@@ -43,7 +42,6 @@ public abstract class MigratingUser<TFiles> : ImportableEntity
             Key = Key,
             Email = Email,
             DisplayName = DisplayName,
-            ModuleName = ModuleName,
             MigratingFiles = MigratingFiles.ToApiInfo(),
         };
     }

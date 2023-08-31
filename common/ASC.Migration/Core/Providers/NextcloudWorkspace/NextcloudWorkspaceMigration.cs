@@ -34,17 +34,20 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
     private string _tmpFolder;
     private readonly SecurityContext _securityContext;
     private readonly IServiceProvider _serviceProvider;
+    private readonly UserManager _userManager;
     private readonly MigratorMeta _meta;
     public override MigratorMeta Meta => _meta;
 
     public NextcloudWorkspaceMigration(
         SecurityContext securityContext,
         MigrationLogger migrationLogger,
-        IServiceProvider serviceProvider) : base(migrationLogger)
+        IServiceProvider serviceProvider,
+        UserManager userManager) : base(migrationLogger)
     {
         _securityContext = securityContext;
         _meta = new("Nextcloud", 5, false);
         _serviceProvider = serviceProvider;
+        _userManager = userManager;
     }
 
     public override void Init(string path, CancellationToken cancellationToken)
@@ -70,7 +73,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         _tmpFolder = path;
     }
 
-    public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
+    public override async Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
         if (reportProgress)
         {
@@ -142,14 +145,18 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
                         var user = _serviceProvider.GetService<NCMigratingUser>();
                         user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
-                        foreach (var element in user.ModulesList)
+                        if (user.Email.IsNullOrEmpty())
                         {
-                            if (!_migrationInfo.Modules.Exists(x => x.MigrationModule == element.MigrationModule))
-                            {
-                                _migrationInfo.Modules.Add(new MigrationModules(element.MigrationModule, element.Module));
-                            }
+                            _migrationInfo.WithoutEmailUsers.Add(u.Uid, user);
                         }
-                        _migrationInfo.Users.Add(u.Uid, user);
+                        else if ((await _userManager.GetUserByEmailAsync(user.Email)) != ASC.Core.Users.Constants.LostUser)
+                        {
+                            _migrationInfo.ExistUsers.Add(u.Uid, user);
+                        }
+                        else
+                        {
+                            _migrationInfo.Users.Add(u.Uid, user);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -167,7 +174,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         {
             ReportProgress(100, MigrationResource.DataProcessingCompleted);
         }
-        return Task.FromResult(_migrationInfo.ToApiInfo());
+        return _migrationInfo.ToApiInfo();
     }
 
     public List<NCUser> DBExtractUser(string dbFile)

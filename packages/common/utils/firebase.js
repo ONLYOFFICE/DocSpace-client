@@ -105,27 +105,27 @@ class FirebaseHelper {
     return await Promise.resolve(bar);
   }
 
-  async checkCampaigns() {
+  async checkBanners() {
     if (!this.isEnabled) return Promise.reject("Not enabled");
 
     const res = await this.remoteConfig.fetchAndActivate();
 
-    const campaignsValue = this.remoteConfig.getValue("campaigns");
-    const campaignsString = campaignsValue && campaignsValue.asString();
+    const bannersValue = this.remoteConfig.getValue("docspace_banners");
+    const bannersString = bannersValue && bannersValue.asString();
 
-    if (!campaignsValue || !campaignsString) {
+    if (!bannersValue || !bannersString) {
       return Promise.resolve([]);
     }
 
-    const list = JSON.parse(campaignsString);
+    const list = JSON.parse(bannersString);
 
     if (!list || !(list instanceof Array)) return Promise.resolve([]);
 
-    const campaigns = list.filter((element) => {
+    const banners = list.filter((element) => {
       return typeof element === "string" && element.length > 0;
     });
 
-    return await Promise.resolve(campaigns);
+    return await Promise.resolve(banners);
   }
 
   async getCampaignsImages(banner) {

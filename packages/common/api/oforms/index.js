@@ -9,24 +9,24 @@ export const getCategoryById = async (categorizeBy, id) => {
   });
 };
 
-export const getCategoriesByBranch = async () => {
-  const options = { method: "get", url: `/categories` };
+export const getCategoriesByBranch = async (locale = "en") => {
+  const options = { method: "get", url: `/categories?locale=${locale}` };
   return request(options).then((res) => {
     console.log(res);
     return res;
   });
 };
 
-export const getCategoriesByType = async () => {
-  const options = { method: "get", url: `/types` };
+export const getCategoriesByType = async (locale = "en") => {
+  const options = { method: "get", url: `/types?locale=${locale}` };
   return request(options).then((res) => {
     console.log(res);
     return res;
   });
 };
 
-export const getPopularCategories = async () => {
-  const options = { method: "get", url: `/compilations` };
+export const getPopularCategories = async (locale = "en") => {
+  const options = { method: "get", url: `/compilations?locale=${locale}` };
   return request(options).then((res) => {
     console.log(res);
     return res;

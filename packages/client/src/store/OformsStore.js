@@ -4,7 +4,12 @@ import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 
 const { OformsFilter } = api;
 
-import { getCategoryById } from "@docspace/common/api/oforms";
+import {
+  getCategoryById,
+  getCategoriesByBranch,
+  getCategoriesByType,
+  getPopularCategories,
+} from "@docspace/common/api/oforms";
 
 class OformsStore {
   authStore;
@@ -77,6 +82,24 @@ class OformsStore {
     runInAction(() => {
       this.setOformsCurrentCategory(fetchedCategory);
     });
+  };
+
+  fetchCategoriesByBranch = async () => {
+    const { locale } = this.oformsFilter;
+    const categoriesByBranch = await getCategoriesByBranch(locale);
+    return categoriesByBranch;
+  };
+
+  fetchCategoriesByType = async () => {
+    const { locale } = this.oformsFilter;
+    const categoriesByType = await getCategoriesByType(locale);
+    return categoriesByType;
+  };
+
+  fetchPopularCategories = async () => {
+    const { locale } = this.oformsFilter;
+    const popularCategories = await getPopularCategories(locale);
+    return popularCategories;
   };
 
   filterOformsByCategory = (categorizeBy, categoryId) => {

@@ -19,7 +19,13 @@ import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 
 const CategoryFilter = ({
   t,
+
   currentCategory,
+
+  fetchCategoriesByBranch,
+  fetchCategoriesByType,
+  fetchPopularCategories,
+
   oformsFilter,
   filterOformsByCategory,
 }) => {
@@ -51,19 +57,19 @@ const CategoryFilter = ({
   const [formsByCompilation, setFormsByCompilation] = useState([]);
   useEffect(() => {
     (async () => {
-      const branchData = await getCategoriesByBranch();
+      const branchData = await fetchCategoriesByBranch();
       setFormsByBranch(branchData);
-      const typeData = await getCategoriesByType();
+      const typeData = await fetchCategoriesByType();
       setFormsByType(typeData);
-      const compilationData = await getPopularCategories();
+      const compilationData = await fetchPopularCategories();
       setFormsByCompilation(compilationData);
     })();
-  }, []);
+  }, [oformsFilter.locale]);
 
   return (
     <Styled.CategoryFilter isOpen={isOpen}>
       <div className="combobox" onClick={toggleDropdownIsOpen}>
-        <Text className="combobox-text" noSelect>
+        <Text truncate className="combobox-text" noSelect>
           {getOformCategoryTitle(oformsFilter.categorizeBy, currentCategory) ||
             t("FormGallery:Categories")}
         </Text>
@@ -139,6 +145,10 @@ const CategoryFilter = ({
 };
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
+
+  fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,
+  fetchCategoriesByType: oformsStore.fetchCategoriesByType,
+  fetchPopularCategories: oformsStore.fetchPopularCategories,
 
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,

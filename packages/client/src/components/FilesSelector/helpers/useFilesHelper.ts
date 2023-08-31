@@ -185,6 +185,7 @@ const convertFoldersToItems = (
       security,
       parentId,
       rootFolderType,
+      type,
     }: {
       id: number;
       title: string;
@@ -193,9 +194,14 @@ const convertFoldersToItems = (
       security: Security;
       parentId: number;
       rootFolderType: number;
+      type: number;
     } = room;
 
-    const icon = iconSize32.get("folder.svg");
+    const isBoard = type === FolderType.Dashboard;
+
+    const icon = isBoard
+      ? iconSize32.get("board.svg")
+      : iconSize32.get("folder.svg");
 
     return {
       id,
@@ -207,8 +213,9 @@ const convertFoldersToItems = (
       security,
       parentId,
       rootFolderType,
-      isFolder: true,
-      isDisabled: !!filterParam ? false : disabledItems.includes(id),
+      isFolder: !isBoard,
+      isDisabled:
+        (!!filterParam ? false : disabledItems.includes(id)) || isBoard,
     };
   });
 

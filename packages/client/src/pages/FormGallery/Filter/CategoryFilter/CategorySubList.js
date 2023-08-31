@@ -4,10 +4,9 @@ import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
 import { StyledSubList, StyledSubItemMobile } from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
 import { OformCategory } from "@docspace/client/src/helpers/constants";
 
-const SubListByBranch = ({
+const CategorySubList = ({
   isOpen,
   categoryType,
   categories,
@@ -15,9 +14,6 @@ const SubListByBranch = ({
 
   filterOformsByCategory,
 }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const getCategoryLabel = (category) =>
     categoryType === OformCategory.Branch
       ? category.attributes.categorie
@@ -25,9 +21,8 @@ const SubListByBranch = ({
       ? category.attributes.type
       : category.attributes.compilation;
 
-  const onOpenCategory = async (category) => {
-    await filterOformsByCategory(categoryType, category.id);
-  };
+  const onOpenCategory = (category) =>
+    filterOformsByCategory(categoryType, category.id);
 
   if (isSmallTablet() || isMobile() || isMobileOnly)
     if (isOpen)
@@ -69,4 +64,4 @@ export default inject(({ oformsStore }) => ({
   getOforms: oformsStore.getOforms,
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery", "Common"])(SubListByBranch));
+}))(withTranslation(["FormGallery", "Common"])(CategorySubList));

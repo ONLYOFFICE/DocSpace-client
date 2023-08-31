@@ -10,7 +10,7 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import OformsFilter from "@docspace/common/api/oforms/filter";
-import SubList from "./SubList";
+import CategorySubList from "./CategorySubList";
 import { OformCategory } from "@docspace/client/src/helpers/constants";
 import {
   getCategoriesByBranch,
@@ -100,7 +100,7 @@ const CategoryFilter = ({ t, getOforms }) => {
             onClick={onToggleBranchCategory}
             isSubMenu
           />
-          <SubList
+          <CategorySubList
             isOpen={isBranchCategoryOpen}
             categoryType={OformCategory.Branch}
             categories={formsByBranch}
@@ -115,7 +115,7 @@ const CategoryFilter = ({ t, getOforms }) => {
             onClick={onToggleTypeCategory}
             isSubMenu
           />
-          <SubList
+          <CategorySubList
             isOpen={isTypeCategoryOpen}
             categoryType={OformCategory.Type}
             categories={formsByType}
@@ -130,7 +130,7 @@ const CategoryFilter = ({ t, getOforms }) => {
             onClick={onToggleCompilationCategory}
             isSubMenu
           />
-          <SubList
+          <CategorySubList
             isOpen={isCompilationCategoryOpen}
             categoryType={OformCategory.Compilation}
             categories={formsByCompilation}

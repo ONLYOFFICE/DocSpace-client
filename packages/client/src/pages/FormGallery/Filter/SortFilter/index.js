@@ -57,6 +57,11 @@ const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
           directionY={"both"}
           scaled={true}
           size={"content"}
+          advancedOptionsCount={sortData.length}
+          disableIconClick={false}
+          disableItemClick={true}
+          isDefaultMode={false}
+          manualY={"102%"}
           advancedOptions={
             <>
               {sortData?.map((item) => (
@@ -77,11 +82,6 @@ const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
               ))}
             </>
           }
-          advancedOptionsCount={sortData.length}
-          disableIconClick={false}
-          disableItemClick={true}
-          isDefaultMode={false}
-          manualY={"102%"}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </ComboBox>

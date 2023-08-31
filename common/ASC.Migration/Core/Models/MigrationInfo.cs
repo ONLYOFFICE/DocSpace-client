@@ -31,6 +31,8 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
     where TFiles : MigratingFiles
 {
     public Dictionary<string, TUser> Users = new Dictionary<string, TUser>();
+    public Dictionary<string, TUser> WithoutEmailUsers = new Dictionary<string, TUser>();
+    public Dictionary<string, TUser> ExistUsers = new Dictionary<string, TUser>();
     public string Path { get; set; }
     public string MigratorName { get; set; }
     public List<string> FailedArchives = new List<string>();

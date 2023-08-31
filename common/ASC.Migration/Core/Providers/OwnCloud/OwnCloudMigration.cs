@@ -35,16 +35,19 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
     private readonly SecurityContext _securityContext;
     private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
+    private readonly UserManager _userManager;
     public override MigratorMeta Meta => _meta;
 
     public OwnCloudMigration(
         SecurityContext securityContext,
         MigrationLogger migrationLogger,
-        IServiceProvider serviceProvider) : base(migrationLogger)
+        IServiceProvider serviceProvider,
+        UserManager userManager) : base(migrationLogger)
     {
         _securityContext = securityContext;
         _meta = new MigratorMeta("Owncloud", 6, false);
         _serviceProvider = serviceProvider;
+        _userManager = userManager;
     }
 
     public override void Init(string path, CancellationToken cancellationToken)
@@ -70,7 +73,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         _tmpFolder = path;
     }
 
-    public override Task<MigrationApiInfo> Parse(bool reportProgress = true)
+    public override async Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {
         if (reportProgress)
         {
@@ -143,8 +146,18 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
                         var user = _serviceProvider.GetService<OCMigratingUser>();
                         user.Init(u, Directory.GetDirectories(_tmpFolder)[0], Log);
                         user.Parse();
-
-                        _migrationInfo.Users.Add(u.Uid, user);
+                        if (user.Email.IsNullOrEmpty())
+                        {
+                            _migrationInfo.WithoutEmailUsers.Add(u.Uid, user);
+                        }
+                        else if ((await _userManager.GetUserByEmailAsync(user.Email)) != ASC.Core.Users.Constants.LostUser)
+                        {
+                            _migrationInfo.ExistUsers.Add(u.Uid, user);
+                        }
+                        else
+                        {
+                            _migrationInfo.Users.Add(u.Uid, user);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -162,7 +175,7 @@ public class OwnCloudMigration : AbstractMigration<OCMigrationInfo, OCMigratingU
         {
             ReportProgress(100, MigrationResource.DataProcessingCompleted);
         }
-        return Task.FromResult(_migrationInfo.ToApiInfo());
+        return _migrationInfo.ToApiInfo();
     }
 
     public List<OCUser> DBExtractUser(string dbFile)

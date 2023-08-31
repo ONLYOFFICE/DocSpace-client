@@ -39,7 +39,7 @@ public class MigrationApiInfo
     public List<MigratingApiUser> Users { get; set; } = new List<MigratingApiUser>();
 
     [ProtoMember(5)]
-    public List<MigratingApiUser> EmptyEmail { get; set; } = new List<MigratingApiUser>();
+    public List<MigratingApiUser> WithoutEmailUsers { get; set; } = new List<MigratingApiUser>();
 
     [ProtoMember(6)]
     public List<MigratingApiUser> ExistUsers { get; set; } = new List<MigratingApiUser>();

@@ -251,9 +251,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         console.log(err);
       });
 
-    FirebaseHelper.checkCampaigns()
-      .then((campaigns) => {
-        localStorage.setItem("campaigns", campaigns);
+    FirebaseHelper.checkBanners()
+      .then((banners) => {
+        localStorage.setItem("docspace_banners", banners);
       })
       .catch((err) => {
         console.error(err);

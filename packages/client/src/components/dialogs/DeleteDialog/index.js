@@ -231,13 +231,43 @@ const DeleteDialog = withTranslation([
 ])(DeleteDialogComponent);
 
 export default inject(
-  ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore, auth }) => {
+  ({
+    filesStore,
+    dialogsStore,
+    filesActionsStore,
+    treeFoldersStore,
+    auth,
+    selectedFolderStore,
+    dashboardStore,
+    dashboardContextOptionStore,
+  }) => {
+    const { isDashboard } = selectedFolderStore;
+    const {
+      clearBufferSelectionFilesByRole,
+      selectedFilesByRoleMap,
+      BufferSelectionFilesByRole,
+    } = dashboardStore;
+
     const { selection, isLoading, bufferSelection, setBufferSelection } =
       filesStore;
     const { deleteAction, unsubscribeAction, deleteRoomsAction } =
       filesActionsStore;
     const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
       treeFoldersStore;
+
+    const { deleteAction: boardDeleteAction } = dashboardContextOptionStore;
+
+    console.log({ dashboardStore, isDashboard, dashboardContextOptionStore });
+
+    let selectionBoard = [];
+    if (isDashboard) {
+      selectionBoard =
+        selectedFilesByRoleMap.size === 0
+          ? BufferSelectionFilesByRole
+            ? [BufferSelectionFilesByRole]
+            : []
+          : Array.from(selectedFilesByRoleMap.values());
+    }
 
     const {
       deleteDialogVisible: visible,
@@ -252,6 +282,8 @@ export default inject(
     return {
       selection: removeMediaItem
         ? [removeMediaItem]
+        : isDashboard
+        ? selectionBoard
         : selection.length
         ? selection
         : [bufferSelection],
@@ -261,12 +293,14 @@ export default inject(
       isRecycleBinFolder,
 
       setDeleteDialogVisible,
-      deleteAction,
+      deleteAction: isDashboard ? boardDeleteAction : deleteAction,
       unsubscribeAction,
       unsubscribe,
 
       setRemoveMediaItem,
-      setBufferSelection,
+      setBufferSelection: isDashboard
+        ? clearBufferSelectionFilesByRole
+        : setBufferSelection,
 
       isRoomDelete,
       setIsRoomDelete,

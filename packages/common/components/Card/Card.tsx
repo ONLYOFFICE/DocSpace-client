@@ -2,10 +2,12 @@ import equal from "fast-deep-equal/react";
 import { useTranslation } from "react-i18next";
 import { useRef, useCallback, ChangeEvent, memo } from "react";
 
-import Checkbox from "@docspace/components//checkbox";
+import Checkbox from "@docspace/components/checkbox";
 import ContextMenu from "@docspace/components/context-menu";
 import ContextMenuButton from "@docspace/components/context-menu-button";
+import Loader from "@docspace/components/loader";
 import Loaders from "../Loaders";
+
 import {
   CardAvatar,
   CardAvatarWrapper,
@@ -98,16 +100,22 @@ function Card({
     >
       <CardHeader>
         <CardAvatarWrapper>
-          <Checkbox
-            className="card__checkbox"
-            isChecked={selected}
-            onChange={handleSelected}
-          />
-          <CardAvatar
-            src={avatarUrl || DefaultUserAvatar}
-            alt={username}
-            onClick={handleClickAvatar}
-          />
+          {file.isProgress ? (
+            <Loader className="board-card_loader" type="oval" size="18px" />
+          ) : (
+            <>
+              <Checkbox
+                className="card__checkbox"
+                isChecked={selected}
+                onChange={handleSelected}
+              />
+              <CardAvatar
+                src={avatarUrl || DefaultUserAvatar}
+                alt={username}
+                onClick={handleClickAvatar}
+              />
+            </>
+          )}
         </CardAvatarWrapper>
         <CardUserName title={username}>{username}</CardUserName>
         <ContextMenu ref={contextMenuRef} getContextModel={getOptionsModel} />

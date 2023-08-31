@@ -335,8 +335,6 @@ class FilesActionStore {
     if (folderIds.length || fileIds.length || boardIds.length) {
       this.isMediaOpen();
 
-      console.log();
-
       try {
         this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
@@ -742,8 +740,6 @@ class FilesActionStore {
     isThirdParty,
     isRoom
   ) => {
-    console.log("deleteItemAction");
-
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =

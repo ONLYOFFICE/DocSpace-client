@@ -763,7 +763,8 @@ class ContextOptionsStore {
   };
 
   getGroupRoleFilesContextOptions = (t) => {
-    const { selection } = this.filesStore;
+    const { selection, allFilesIsEditing } = this.filesStore;
+    const { setDeleteDialogVisible } = this.dialogsStore;
 
     const length = selection.length;
 
@@ -784,7 +785,10 @@ class ContextOptionsStore {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         iconUrl: DownloadReactSvgUrl,
-        onClick: () => {},
+        onClick: () =>
+          this.filesActionsStore
+            .downloadAction(t("Translations:ArchivingData"))
+            .catch((err) => toastr.error(err)),
         disabled: false,
       },
 
@@ -794,17 +798,19 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         iconUrl: DownloadAsReactSvgUrl,
-        onClick: () => {},
+        onClick: this.onClickDownloadAs,
         disabled: false,
       },
 
       "move-to": {
-        id: "option_move-to",
+        id: "option_file-by-role_move-to",
         key: "move-to",
         label: t("Common:MoveTo"),
         icon: MoveReactSvgUrl,
         iconUrl: MoveReactSvgUrl,
-        onClick: () => {},
+        onClick: allFilesIsEditing
+          ? () => this.onShowEditingToast(t)
+          : this.onMoveAction,
         disabled: false,
       },
 
@@ -814,7 +820,7 @@ class ContextOptionsStore {
         label: t("Common:Copy"),
         icon: CopyReactSvgUrl,
         iconUrl: CopyReactSvgUrl,
-        onClick: () => {},
+        onClick: this.onCopyAction,
         disabled: false,
       },
       delete: {
@@ -823,7 +829,25 @@ class ContextOptionsStore {
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         iconUrl: TrashReactSvgUrl,
-        onClick: () => {},
+        onClick: allFilesIsEditing
+          ? () => this.onShowEditingToast(t)
+          : () => {
+              if (this.settingsStore.confirmDelete) {
+                setDeleteDialogVisible(true);
+              } else {
+                const translations = {
+                  deleteOperation: t("Translations:DeleteOperation"),
+                  deleteFromTrash: t("Translations:DeleteFromTrash"),
+                  deleteSelectedElem: t("Translations:DeleteSelectedElem"),
+                  FileRemoved: t("Files:FileRemoved"),
+                  FolderRemoved: t("Files:FolderRemoved"),
+                };
+
+                this.filesActionsStore
+                  .deleteAction(translations)
+                  .catch((err) => toastr.error(err));
+              }
+            },
         disabled: false,
       },
     };

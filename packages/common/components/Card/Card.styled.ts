@@ -26,6 +26,10 @@ export const CardHeader = styled.div`
     margin-left: 4px;
     margin-right: 2px;
   }
+
+  .board-card_loader {
+    margin-right: 16px;
+  }
 `;
 
 export const CardHeaderLoader = styled(CardHeader)`

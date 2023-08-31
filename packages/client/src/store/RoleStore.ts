@@ -10,7 +10,7 @@ import type {
   Folder as FolderInfoType,
   RoleQueue,
 } from "@docspace/common/types";
-import type DashboardContextOpetion from "./DashboardContextOption";
+import type DashboardContextOptionStore from "./DashboardContextOption";
 import type DashboardStore from "./DashboardStore";
 import type FilesStore from "./FilesStore";
 
@@ -20,7 +20,7 @@ class RoleStore {
   constructor(
     private filesStore: FilesStore,
     private dashboardStore: DashboardStore,
-    private dashboardContextOptionStore: DashboardContextOpetion
+    private dashboardContextOptionStore: DashboardContextOptionStore
   ) {}
 
   private resetState = (): void => {
@@ -44,8 +44,15 @@ class RoleStore {
           folderId
         );
 
-        const { id, title, rootFolderId, rootFolderType, roomType, type } =
-          folderInfo;
+        const {
+          id,
+          title,
+          rootFolderId,
+          rootFolderType,
+          roomType,
+          type,
+          parentId,
+        } = folderInfo;
 
         const isRootRoom =
           rootFolderId === id &&
@@ -57,14 +64,18 @@ class RoleStore {
           isRoom: !!roomType,
           isRootRoom,
           isDashboard: type === FolderType.Dashboard,
+          parentId,
         };
       })
     );
+
+    const board = navigationPath.find((item) => item.isDashboard);
 
     this.filesStore.selectedFolderStore.setSelectedFolder({
       folders: [],
       ...currentRole.current,
       pathParts: currentRole.pathParts,
+      parentId: board?.parentId,
       navigationPath: navigationPath.reverse(),
       isDashboard: false,
       isRolePage: true,

@@ -26,6 +26,8 @@ class FileByRoleStore {
           file,
           this.role
         ),
+        isProgress: this.dashboardStore.activeFilesByRole.has(file.id),
+        roleId: this.role.id,
       };
     });
   }

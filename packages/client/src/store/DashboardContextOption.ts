@@ -1,17 +1,27 @@
 import copy from "copy-to-clipboard";
 import { makeAutoObservable } from "mobx";
+import uniqueid from "lodash/uniqueId";
+
 import config from "PACKAGE_FILE";
 
 import DashboardHeaderMenuService from "SRC_DIR/services/DashboardHeaderMenu.service";
 
 import { combineUrl } from "@docspace/common/utils";
+import {
+  downloadFiles as downloadFilesApi,
+  removeFiles as removeFilesApi,
+} from "@docspace/common/api/files";
 import toastr from "@docspace/components/toast/toastr";
+import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 
 import type { ContextMenuModel } from "@docspace/components/types";
 import type { IFileByRole, IRole } from "@docspace/common/Models";
 import type DashboardStore from "./DashboardStore";
 import type DialogsStore from "./DialogsStore";
 import type ContextOptionsStore from "./ContextOptionsStore";
+import type FilesActionStore from "./FilesActionsStore";
+import type UploadDataStore from "./UploadDataStore";
+import type SecondaryProgressDataStore from "./SecondaryProgressDataStore";
 
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
@@ -23,13 +33,14 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 
-class DashboardContextOpetion {
+class DashboardContextOptionStore {
   public dashboardHeaderMenuService!: DashboardHeaderMenuService;
 
   constructor(
     private dashboardStore: DashboardStore,
     private dialogsStore: DialogsStore,
-    private contextOptionsStore: ContextOptionsStore
+    private contextOptionsStore: ContextOptionsStore,
+    private filesActionsStore: FilesActionStore
   ) {
     this.dashboardHeaderMenuService = new DashboardHeaderMenuService(
       dashboardStore,
@@ -143,7 +154,7 @@ class DashboardContextOpetion {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         iconUrl: DownloadReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.downloadFiles(t("Translations:ArchivingData")),
         disabled: false,
       },
 
@@ -163,7 +174,7 @@ class DashboardContextOpetion {
         label: t("Common:MoveTo"),
         icon: MoveReactSvgUrl,
         iconUrl: MoveReactSvgUrl,
-        onClick: () => {},
+        onClick: this.contextOptionsStore.onMoveAction,
         disabled: false,
       },
 
@@ -173,7 +184,7 @@ class DashboardContextOpetion {
         label: t("Common:Copy"),
         icon: CopyReactSvgUrl,
         iconUrl: CopyReactSvgUrl,
-        onClick: () => {},
+        onClick: this.contextOptionsStore.onCopyAction,
         disabled: false,
       },
       delete: {
@@ -182,7 +193,8 @@ class DashboardContextOpetion {
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         iconUrl: TrashReactSvgUrl,
-        onClick: () => {},
+        onClick: () =>
+          this.contextOptionsStore.dialogsStore.setDeleteDialogVisible(true),
         disabled: false,
       },
     };
@@ -267,6 +279,190 @@ class DashboardContextOpetion {
     return contextOption;
   };
 
+  public deleteAction = async (
+    translations: {
+      deleteOperation: string;
+      successRemoveFile: string;
+      successRemoveFolder: string;
+      successRemoveRoom: string;
+      successRemoveRooms: string;
+      FileRemoved: string;
+      deleteSelectedElem: string;
+    },
+    items: IFileByRole[]
+  ) => {
+    const { secondaryProgressDataStore, loopFilesOperations } = this
+      .filesActionsStore.uploadDataStore as UploadDataStore;
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore as SecondaryProgressDataStore;
+
+    const { selectedFilesByRoleMap, BufferSelectionFilesByRole, removeFiles } =
+      this.dashboardStore;
+
+    const selection =
+      items && items.length > 0
+        ? items
+        : selectedFilesByRoleMap.size === 0
+        ? BufferSelectionFilesByRole
+          ? [BufferSelectionFilesByRole]
+          : []
+        : Array.from(this.dashboardStore.selectedFilesByRoleMap.values());
+
+    const operationId = uniqueid("operation_");
+
+    const files = selection.filter(
+      (item) => !this.dashboardStore.activeFilesByRole.has(item.id)
+    );
+
+    const fileIds = files.map((file) => file.id);
+    const filesCount = files.length;
+
+    if (filesCount === 0) return;
+
+    setSecondaryProgressBarData({
+      icon: "trash",
+      visible: true,
+      percent: 0,
+      label: translations.deleteOperation,
+      alert: false,
+      filesCount,
+      operationId,
+    });
+
+    this.dashboardStore.addActiveFiles(fileIds);
+
+    try {
+      this.filesActionsStore.filesStore.setOperationAction(true);
+      this.filesActionsStore.setGroupMenuBlocked(true);
+
+      await removeFilesApi([], fileIds, false, false)
+        .then(async (res) => {
+          if (res[0]?.errro) return Promise.reject(res[0].error);
+
+          const data = res[0] ? res[0] : null;
+          const pbData = {
+            icon: "trash",
+            label: translations.deleteOperation,
+            operationId,
+          };
+
+          await loopFilesOperations(data, pbData);
+
+          filesCount > 1
+            ? toastr.success(translations.deleteSelectedElem)
+            : toastr.success(translations.FileRemoved);
+
+          removeFiles(files);
+          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        })
+        .finally(() => {
+          this.dashboardStore.clearActiveFiles(fileIds);
+        });
+    } catch (error: any) {
+      setSecondaryProgressBarData({
+        visible: true,
+        alert: true,
+        operationId,
+      });
+      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+      return toastr.error(error?.message ? error.message : error);
+    } finally {
+      this.filesActionsStore.filesStore.setOperationAction(false);
+      this.filesActionsStore.setGroupMenuBlocked(false);
+      this.dashboardStore.clearActiveFiles(fileIds);
+    }
+  };
+
+  public downloadFiles = (label: string) => {
+    const size = this.dashboardStore.selectedFilesByRoleMap.size;
+
+    if (size === 1) {
+      const values = this.dashboardStore.selectedFilesByRoleMap.values();
+      const value = values.next().value;
+
+      if (value.fileExst) window.open(value.viewUrl, "_self");
+
+      return;
+    }
+
+    const fileIds = Array.from(
+      this.dashboardStore.selectedFilesByRoleMap.values(),
+      (file) => file.id
+    );
+
+    this.filesActionsStore.setGroupMenuBlocked(true);
+
+    const { secondaryProgressDataStore } = this.filesActionsStore
+      .uploadDataStore as UploadDataStore;
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore as SecondaryProgressDataStore;
+
+    if (this.filesActionsStore.isBulkDownload) return;
+
+    this.filesActionsStore.setIsBulkDownload(true);
+
+    const operationId = uniqueid("operation_");
+
+    this.dashboardStore.addActiveFiles(fileIds);
+
+    setSecondaryProgressBarData({
+      icon: "file",
+      visible: true,
+      percent: 0,
+      label,
+      alert: false,
+      operationId,
+    });
+
+    downloadFilesApi(fileIds, [])
+      .then(async (res) => {
+        const data = res[0] ? res[0] : null;
+        const pbData = {
+          icon: "file",
+          label,
+          operationId,
+        };
+
+        const item =
+          data?.finished && data?.url
+            ? data
+            : await this.filesActionsStore.uploadDataStore.loopFilesOperations(
+                data,
+                pbData,
+                true
+              );
+        this.filesActionsStore.setIsBulkDownload(false);
+        if (item.url) {
+          window.location.href = item.url;
+        } else {
+          setSecondaryProgressBarData({
+            visible: true,
+            alert: true,
+            operationId,
+          });
+        }
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        !item.url && toastr.error("", null, 0, true);
+      })
+      .catch((error) => {
+        this.filesActionsStore.setIsBulkDownload(false);
+        setSecondaryProgressBarData({
+          visible: true,
+          alert: true,
+          operationId,
+        });
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        return toastr.error(error.message ? error.message : error);
+      })
+      .finally(() => {
+        this.filesActionsStore.setGroupMenuBlocked(false);
+        this.dashboardStore.clearActiveFiles(fileIds);
+      });
+  };
+
   public getOptionsFileByRole = (
     t: (arg: string) => string,
     file: IFileByRole
@@ -313,7 +509,7 @@ class DashboardContextOpetion {
         key: "download-file",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.contextOptionsStore.onClickDownload(file, t),
         disabled: false,
       },
 
@@ -322,7 +518,7 @@ class DashboardContextOpetion {
         key: "download-file-as",
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
-        onClick: () => {},
+        onClick: this.contextOptionsStore.onClickDownloadAs,
         disabled: false,
       },
 
@@ -331,7 +527,7 @@ class DashboardContextOpetion {
         key: "move-to",
         label: t("Common:MoveTo"),
         icon: MoveReactSvgUrl,
-        onClick: () => {},
+        onClick: this.contextOptionsStore.onMoveAction,
         disabled: false,
       },
 
@@ -340,7 +536,7 @@ class DashboardContextOpetion {
         key: "copy-file",
         label: t("Common:Copy"),
         icon: CopyReactSvgUrl,
-        onClick: () => {},
+        onClick: this.contextOptionsStore.onCopyAction,
         disabled: false,
       },
 
@@ -359,7 +555,8 @@ class DashboardContextOpetion {
         key: "delete",
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: () => {},
+        onClick: () =>
+          this.contextOptionsStore.dialogsStore.setDeleteDialogVisible(true),
         disabled: false,
       },
     };
@@ -391,4 +588,4 @@ class DashboardContextOpetion {
   };
 }
 
-export default DashboardContextOpetion;
+export default DashboardContextOptionStore;

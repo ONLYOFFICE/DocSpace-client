@@ -30,6 +30,10 @@ import useLoadersHelper from "./helpers/useLoadersHelper";
 import useFilesHelper from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 
+import type { StoreType } from "SRC_DIR/types";
+import type { IFileByRole } from "@docspace/common/Models";
+import type { ThemeType } from "@docspace/components/types";
+
 const FilesSelector = ({
   isPanelVisible = false,
   withoutBasicSelection = false,
@@ -494,7 +498,7 @@ const FilesSelector = ({
   );
 };
 
-export default inject(
+export default inject<StoreType>(
   (
     {
       auth,
@@ -504,24 +508,34 @@ export default inject(
       treeFoldersStore,
       dialogsStore,
       filesStore,
-    }: any,
+      dashboardStore,
+    },
     { isCopy, isRestoreAll, isMove, isPanelVisible, id, passedFoldersTree }: any
   ) => {
-    const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
+    const {
+      id: selectedId,
+      parentId,
+      rootFolderType,
+      isRolePage,
+      isDashboard,
+    } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts } = filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const fromFolderId = id
-      ? id
-      : passedFoldersTree?.length > 0
-      ? passedFoldersTree[0].id
-      : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId;
+    const fromFolderId =
+      isRolePage || isDashboard
+        ? parentId
+        : id
+        ? id
+        : passedFoldersTree?.length > 0
+        ? passedFoldersTree[0].id
+        : rootFolderType === FolderType.Archive ||
+          rootFolderType === FolderType.TRASH
+        ? undefined
+        : selectedId;
 
     const currentFolderId =
       sessionPath && (isMove || isCopy || isRestoreAll)
@@ -542,19 +556,34 @@ export default inject(
       setIsFolderActions,
     } = dialogsStore;
 
-    const { theme } = auth.settingsStore;
+    const { theme } = auth.settingsStore as any as { theme: ThemeType };
 
     const { selection, bufferSelection, filesList, setMovingInProgress } =
       filesStore;
 
-    const selections =
-      isMove || isCopy || isRestoreAll
-        ? isRestoreAll
-          ? filesList
-          : selection.length
-          ? selection
-          : [bufferSelection]
-        : [];
+    const { selectedFilesByRoleMap, BufferSelectionFilesByRole } =
+      dashboardStore;
+
+    let dashboardSelection: IFileByRole[] = [];
+
+    if (isDashboard) {
+      dashboardSelection =
+        selectedFilesByRoleMap.size > 0
+          ? Array.from(selectedFilesByRoleMap.values())
+          : BufferSelectionFilesByRole
+          ? [BufferSelectionFilesByRole]
+          : [];
+    }
+
+    const selections = isDashboard
+      ? dashboardSelection
+      : isMove || isCopy || isRestoreAll
+      ? isRestoreAll
+        ? filesList
+        : selection.length
+        ? selection
+        : [bufferSelection]
+      : [];
 
     const selectionsWithoutEditing = isRestoreAll
       ? filesList

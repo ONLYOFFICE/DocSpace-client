@@ -20,18 +20,23 @@ const sortData = [
   },
 ];
 
-const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
+const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
-  const onCloseCombobox = () => setIsOpen(false);
 
-  const onSort = async (newSortBy, newSortOrder = "asc") => {
-    await sortOforms(newSortBy, newSortOrder);
+  const onSort = (e, newSortBy, newSortOrder = "asc") => {
+    e.stopPropagation();
+    if (
+      oformsFilter.sortBy === newSortBy &&
+      oformsFilter.sortOrder === newSortOrder
+    )
+      return;
+    sortOforms(newSortBy, newSortOrder);
   };
 
   const onToggleSortOrder = (e, newSortBy) => {
     e.stopPropagation();
-    onSort(newSortBy, sortOrder === "desc" ? "asc" : "desc");
+    onSort(e, newSortBy, oformsFilter.sortOrder === "desc" ? "asc" : "desc");
   };
 
   return (
@@ -67,11 +72,11 @@ const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
               {sortData?.map((item) => (
                 <Styled.SortDropdownItem
                   id={item.id}
-                  onClick={() => onSort(item.key)}
+                  onClick={(e) => onSort(e, item.key)}
                   key={item.key}
                   data-value={item.key}
-                  isSelected={sortBy === item.key}
-                  isDescending={sortOrder === "desc"}
+                  isSelected={oformsFilter.sortBy === item.key}
+                  isDescending={oformsFilter.sortOrder === "desc"}
                 >
                   <Text fontWeight={600}>{t(`Common:${item.label}`)}</Text>
                   <SortDesc
@@ -91,7 +96,6 @@ const SortFilter = ({ t, sortBy, sortOrder, sortOforms }) => {
 };
 
 export default inject(({ oformsStore }) => ({
-  sortBy: oformsStore.oformsFilter.sortBy,
-  sortOrder: oformsStore.oformsFilter.sortOrder,
+  oformsFilter: oformsStore.oformsFilter,
   sortOforms: oformsStore.sortOforms,
 }))(withTranslation(["FormGallery", "Common"])(SortFilter));

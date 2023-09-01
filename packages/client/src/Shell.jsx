@@ -280,7 +280,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     if (!FirebaseHelper.isEnabled) {
       setCheckedMaintenance(true);
-      localStorage.setItem("campaigns", "");
+      localStorage.setItem("docspace_banners", "");
       return;
     }
 

@@ -163,6 +163,10 @@ public class MigrationOperation : DistributedTaskProgress
                 migrator.OnProgressUpdate -= Migrator_OnProgressUpdate;
                 ImportedUsers = migrator.GetGuidImportedUsers();
                 LogName = migrator.GetLogName();
+                if(_migrationApiInfo is null)
+                {
+                    MigrationApiInfo = new MigrationApiInfo();
+                }
             }
 
             migrator.Dispose();

@@ -115,12 +115,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                     throw new Exception("Takeout zip does not contain root 'Takeout' folder.");
                 }
                 var directories = Directory.GetDirectories(rootFolder);
-                if (directories.Length == 1 && directories[0].Split(Path.DirectorySeparatorChar).Last() == "Groups")
-                {
-                }
-                else
-                {
-                    var user = _serviceProvider.GetService<GwsMigratingUser>();
+                var user = _serviceProvider.GetService<GwsMigratingUser>();
                     user.Init(takeout, rootFolder, Log);
                     user.Parse();
                     if (user.Email.IsNullOrEmpty()) 
@@ -135,7 +130,6 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                     {
                         _migrationInfo.Users.Add(takeout, user);
                     }
-                }
             }
             catch (Exception ex)
             {

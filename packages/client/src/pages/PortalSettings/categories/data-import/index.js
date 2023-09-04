@@ -16,7 +16,7 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
-const DataImport = ({ t, theme, services, setServices, getMigrationName }) => {
+const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
   const navigate = useNavigate();
 
   const google = theme.isBase
@@ -45,7 +45,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationName }) => {
   }, [theme.isBase, services]);
 
   useEffect(() => {
-    getMigrationName().then((res) => setServices(res));
+    getMigrationList().then((res) => setServices(res));
   }, []);
 
   const redirectToWorkspace = (title) => {
@@ -97,12 +97,12 @@ const DataImport = ({ t, theme, services, setServices, getMigrationName }) => {
   );
 };
 export default inject(({ auth, importAccountsStore }) => {
-  const { services, setServices, getMigrationName } = importAccountsStore;
+  const { services, setServices, getMigrationList } = importAccountsStore;
 
   return {
     services,
     setServices,
-    getMigrationName,
+    getMigrationList,
     theme: auth.settingsStore.theme,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

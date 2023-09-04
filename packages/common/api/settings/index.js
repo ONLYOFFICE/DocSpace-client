@@ -917,6 +917,13 @@ export function migrationName(name) {
   });
 }
 
+export function migrationStatus() {
+  return request({
+    method: "get",
+    url: `/migration/status`,
+  });
+}
+
 export function setCSPSettings(data) {
   return request({
     method: "post",

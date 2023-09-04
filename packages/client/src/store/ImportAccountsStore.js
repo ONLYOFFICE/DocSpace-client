@@ -80,16 +80,16 @@ class ImportAccountsStore {
     this.services = service;
   };
 
-  getMigrationStatus = () => {
-    return migrationStatus();
-  };
-
-  getMigrationName = () => {
-    return migrationName();
+  getMigrationList = () => {
+    return migrationList();
   };
 
   initMigrationName = (name) => {
-    return migrationList(name);
+    return migrationName(name);
+  };
+
+  getMigrationStatus = () => {
+    return migrationStatus();
   };
 }
 

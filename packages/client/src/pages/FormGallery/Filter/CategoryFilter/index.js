@@ -10,11 +10,6 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import CategorySubList from "./CategorySubList";
 import { OformCategoryType } from "@docspace/client/src/helpers/constants";
-import {
-  getCategoriesByBranch,
-  getCategoriesByType,
-  getPopularCategories,
-} from "@docspace/common/api/oforms";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 
 const CategoryFilter = ({
@@ -55,6 +50,7 @@ const CategoryFilter = ({
   const [formsByBranch, setFormsByBranch] = useState([]);
   const [formsByType, setFormsByType] = useState([]);
   const [formsByCompilation, setFormsByCompilation] = useState([]);
+
   useEffect(() => {
     (async () => {
       const branchData = await fetchCategoriesByBranch();

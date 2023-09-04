@@ -128,6 +128,21 @@ export function setLifetimeAuditSettings(data) {
   });
 }
 
+export function getBruteForceProtection() {
+  return request({
+    method: "get",
+    url: "/settings/security/loginSettings",
+  });
+}
+
+export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
+  return request({
+    method: "put",
+    url: "/settings/security/loginSettings",
+    data: { AttemptCount, BlockTime, CheckPeriod },
+  });
+}
+
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -902,9 +917,17 @@ export function migrationName(name) {
   });
 }
 
-export function migrationStatus() {
+export function setCSPSettings(data) {
+  return request({
+    method: "post",
+    url: `/security/csp`,
+    data,
+  });
+}
+
+export function getCSPSettings() {
   return request({
     method: "get",
-    url: `/migration/status`,
+    url: `/security/csp`,
   });
 }

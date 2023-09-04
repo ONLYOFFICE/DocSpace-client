@@ -1,5 +1,12 @@
+import axios from "axios";
+import { uploadFile } from "@docspace/common/api/files";
+import { combineUrl } from "@docspace/common/utils";
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import {
+  migrationList,
+  migrationName,
+  migrationStatus,
+} from "@docspace/common/api/settings";
 
 class ImportAccountsStore {
   checkedAccounts = [];
@@ -33,16 +40,56 @@ class ImportAccountsStore {
     return this.checkedAccounts.length;
   }
 
+  localFileUploading = async (file) => {
+    try {
+      const location = combineUrl(
+        window.location.origin,
+        "migrationFileUpload.ashx"
+      );
+      const requestsDataArray = [];
+      let chunk = 0;
+
+      const res = await axios.post(location + "?Init=true");
+      console.log(res);
+      const chunkUploadSize = res.data.ChunkSize;
+
+      const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+
+      while (chunk < chunks) {
+        const offset = chunk * chunkUploadSize;
+        const formData = new FormData();
+        formData.append("file", file.slice(offset, offset + chunkUploadSize));
+        requestsDataArray.push(formData);
+        chunk++;
+      }
+
+      chunk = 0;
+      while (chunk < chunks) {
+        await uploadFile(
+          location + `?Name=${file.name}`,
+          requestsDataArray[chunk]
+        );
+        chunk++;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   setServices = (service) => {
     this.services = service;
   };
 
-  getMigrationName = () => {
-    return api.settings.getMigrationList();
+  getMigrationStatus = () => {
+    return migrationStatus();
   };
 
-  initMigration = (name) => {
-    return api.settings.initMigrationName(name);
+  getMigrationName = () => {
+    return migrationName();
+  };
+
+  initMigrationName = (name) => {
+    return migrationList(name);
   };
 }
 

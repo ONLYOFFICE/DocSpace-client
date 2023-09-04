@@ -888,16 +888,23 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function getMigrationList() {
+export function migrationList() {
   return request({
     method: "get",
     url: `/migration/list`,
   });
 }
 
-export function initMigrationName(name) {
+export function migrationName(name) {
   return request({
     method: "post",
     url: `/migration/init/${name}`,
+  });
+}
+
+export function migrationStatus() {
+  return request({
+    method: "get",
+    url: `/migration/status`,
   });
 }

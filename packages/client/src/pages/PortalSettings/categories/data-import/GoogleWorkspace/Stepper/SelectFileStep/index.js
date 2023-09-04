@@ -54,19 +54,17 @@ const SelectFileStep = ({
   setShowReminder,
   cancelDialogVisble,
   setCancelDialogVisbile,
-  initMigration,
+  initMigrationName,
+  localFileUploading,
+  getMigrationStatus,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
-  const uploadFile = () => {
-    initMigration(searchParams.get("service"));
-    // onNextStep();
-  };
-
-  const onSelectFile = (file) => {
-    let data = new FormData();
-    data.append("file", file);
+  const onSelectFile = async (file) => {
+    await localFileUploading(file);
+    await initMigrationName(searchParams.get("service"));
+    await getMigrationStatus();
     setShowReminder(true);
   };
 
@@ -103,7 +101,7 @@ const SelectFileStep = ({
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={uploadFile}
+          onSaveClick={onNextStep}
           onCancelClick={onPrevStep}
           showReminder={showReminder}
           saveButtonLabel={t("Settings:UploadToServer")}
@@ -124,12 +122,15 @@ const SelectFileStep = ({
 };
 
 export default inject(({ dialogsStore, importAccountsStore }) => {
-  const { initMigration } = importAccountsStore;
+  const { initMigrationName, localFileUploading, getMigrationStatus } =
+    importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
 
   return {
-    initMigration,
+    localFileUploading,
+    getMigrationStatus,
+    initMigrationName,
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,
   };

@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
-import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import UsersTableHeader from "./UsersTableHeader";
@@ -51,10 +50,11 @@ const TableView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     cleanCheckedAccounts,
+    users,
   } = props;
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, mockData);
+  const toggleAll = (e) => toggleAllAccounts(e, users);
 
   const handleToggle = (e, id) => {
     e.stopPropagation();
@@ -62,7 +62,7 @@ const TableView = (props) => {
   };
 
   const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
+    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -87,7 +87,7 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         isIndeterminate={isIndeterminate}
-        isChecked={checkedAccounts.length === mockData.length}
+        isChecked={checkedAccounts.length === users.length}
         toggleAll={toggleAll}
       />
       <TableBody
@@ -125,9 +125,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     cleanCheckedAccounts,
+    users,
   } = importAccountsStore;
 
   return {
+    users,
     viewAs,
     setViewAs,
     userId,

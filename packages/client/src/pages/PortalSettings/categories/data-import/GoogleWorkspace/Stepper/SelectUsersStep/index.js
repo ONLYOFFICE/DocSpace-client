@@ -17,11 +17,12 @@ const SelectUsersStep = ({
   onPrevStep,
   showReminder,
   numberOfCheckedAccounts,
+  users,
 }) => {
-  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(mockData.slice(leftBoundary, rightBoundary));
+    setDataPortion(users.slice(leftBoundary, rightBoundary));
   };
 
   return (
@@ -40,7 +41,7 @@ const SelectUsersStep = ({
       <UsersInfoBlock
         t={t}
         selectedUsers={numberOfCheckedAccounts}
-        totalUsers={mockData.length}
+        totalUsers={users.length}
         totalLicenceLimit={LICENSE_LIMIT}
       />
 
@@ -53,10 +54,10 @@ const SelectUsersStep = ({
 
       <AccountsTable t={t} accountsData={dataPortion} />
 
-      {mockData.length > 25 && (
+      {users.length > 25 && (
         <AccountsPaging
           t={t}
-          numberOfItems={mockData.length}
+          numberOfItems={users.length}
           setDataPortion={handleDataChange}
         />
       )}
@@ -76,9 +77,10 @@ const SelectUsersStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { numberOfCheckedAccounts } = importAccountsStore;
+  const { numberOfCheckedAccounts, users } = importAccountsStore;
 
   return {
+    users,
     numberOfCheckedAccounts,
   };
 })(observer(SelectUsersStep));

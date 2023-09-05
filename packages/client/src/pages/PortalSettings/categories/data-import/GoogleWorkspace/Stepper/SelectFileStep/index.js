@@ -57,15 +57,32 @@ const SelectFileStep = ({
   initMigrationName,
   localFileUploading,
   getMigrationStatus,
+  setUsers,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
-  const onSelectFile = async (file) => {
+  const onUploadFile = async (file) => {
     await localFileUploading(file);
     await initMigrationName(searchParams.get("service"));
-    await getMigrationStatus();
-    setShowReminder(true);
+    const interval = setInterval(async () => {
+      const res = await getMigrationStatus();
+      res.isCompleted && clearInterval(interval);
+      console.log(res);
+      setUsers(res);
+    }, 300);
+  };
+
+  const onSelectFile = (file) => {
+    setIsLoading(true);
+    try {
+      onUploadFile(file);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      setShowReminder(true);
+    }
   };
 
   const onCancel = () => {
@@ -122,12 +139,17 @@ const SelectFileStep = ({
 };
 
 export default inject(({ dialogsStore, importAccountsStore }) => {
-  const { initMigrationName, localFileUploading, getMigrationStatus } =
-    importAccountsStore;
+  const {
+    initMigrationName,
+    localFileUploading,
+    getMigrationStatus,
+    setUsers,
+  } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
 
   return {
+    setUsers,
     localFileUploading,
     getMigrationStatus,
     initMigrationName,

@@ -11,6 +11,9 @@ import {
 class ImportAccountsStore {
   checkedAccounts = [];
   services = [];
+  users = [];
+  existUsers = [];
+  withoutEmailUsers = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -32,6 +35,12 @@ class ImportAccountsStore {
       : [];
   };
 
+  setUsers = (data) => {
+    this.users = data.parseResult.users;
+    this.existUsers = data.parseResult.existUsers;
+    this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
+  };
+
   isAccountChecked = (id) => this.checkedAccounts.includes(id);
 
   cleanCheckedAccounts = () => (this.checkedAccounts = []);
@@ -50,9 +59,7 @@ class ImportAccountsStore {
       let chunk = 0;
 
       const res = await axios.post(location + "?Init=true");
-      console.log(res);
       const chunkUploadSize = res.data.ChunkSize;
-
       const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
 
       while (chunk < chunks) {

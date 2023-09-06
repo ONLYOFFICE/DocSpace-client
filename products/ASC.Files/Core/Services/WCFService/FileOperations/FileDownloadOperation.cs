@@ -318,16 +318,40 @@ class FileDownloadOperation<T> : FileOperation<FileDownloadOperationData<T>, T>
             {
                 continue;
             }
+            var folderPath = "";
 
-
-            var folderPath = path + folder.Title + "/";
-            entriesPathId.Add(folderPath, default(T));
-
-            var files = FilesSecurity.FilterDownloadAsync(FileDao.GetFilesAsync(folder.Id, null, FilterType.None, false, Guid.Empty, string.Empty, true));
-
-            await foreach (var file in files)
+            var isBoard = folder != null && DocSpaceHelper.IsBoard(folder.FolderType);
+            if (isBoard)
             {
-                entriesPathId.Add(await ExecPathFromFileAsync(scope, file, folderPath));
+                var roles = BoardRoleDao.GetBoardRolesAsync(folder.Id);
+
+                await foreach (var role in roles)
+                {
+                    folderPath = path + folder.Title + "/" + role.Title + "/";
+
+                    entriesPathId.Add(folderPath, default(T));
+
+                    var files = FilesSecurity.FilterDownloadAsync(BoardRoleDao.GetBoardFilesByRole(folder.Id, role.RoleId));
+
+                    await foreach (var file in files)
+                    {
+                        entriesPathId.Add(await ExecPathFromFileAsync(scope, file, folderPath));
+                    }
+                }
+
+            }
+            else
+            {
+                folderPath = path + folder.Title + "/";
+
+                entriesPathId.Add(folderPath, default(T));
+
+                var files = FilesSecurity.FilterDownloadAsync(FileDao.GetFilesAsync(folder.Id, null, FilterType.None, false, Guid.Empty, string.Empty, true));
+
+                await foreach (var file in files)
+                {
+                    entriesPathId.Add(await ExecPathFromFileAsync(scope, file, folderPath));
+                }
             }
 
             await fileMarker.RemoveMarkAsNewAsync(folder);

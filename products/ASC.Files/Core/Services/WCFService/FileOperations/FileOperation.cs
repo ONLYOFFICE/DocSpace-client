@@ -210,6 +210,7 @@ abstract class FileOperation<T, TId> : FileOperation where T : FileOperationData
     protected FileSecurity FilesSecurity { get; private set; }
     protected IFolderDao<TId> FolderDao { get; private set; }
     protected IFileDao<TId> FileDao { get; private set; }
+    protected IBoardRoleDao<TId> BoardRoleDao { get; private set; }
     protected ITagDao<TId> TagDao { get; private set; }
     protected ILinkDao LinkDao { get; private set; }
     protected IProviderDao ProviderDao { get; private set; }
@@ -264,6 +265,7 @@ abstract class FileOperation<T, TId> : FileOperation where T : FileOperationData
 
             FolderDao = daoFactory.GetFolderDao<TId>();
             FileDao = daoFactory.GetFileDao<TId>();
+            BoardRoleDao = daoFactory.GetBoardRoleDao<TId>();
             TagDao = daoFactory.GetTagDao<TId>();
             LinkDao = daoFactory.GetLinkDao();
             ProviderDao = daoFactory.ProviderDao;

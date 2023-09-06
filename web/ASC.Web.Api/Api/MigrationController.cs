@@ -60,36 +60,6 @@ public class MigrationController : ControllerBase
     /// <summary>
     /// 
     /// </summary>
-    /// <returns></returns>
-    [HttpGet("backuptmp")]
-    public async Task<object> GetTmpFolderAsync()
-    {
-        await DemandPermission();
-
-        var tempFolder = Path.Combine(_tempPath.GetTempPath(), "migration", DateTime.Now.ToString("dd.MM.yyyy_HH_mm"));
-
-        if (!Directory.Exists(tempFolder))
-        {
-            Directory.CreateDirectory(tempFolder);
-        }
-        return tempFolder;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("list")]
-    public async Task<string[]> ListAsync()
-    {
-        await DemandPermission();
-
-        return _migrationCore.GetAvailableMigrations();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="migratorName"></param>
     /// <param name="dto"></param>
     [HttpPost("init/{migratorName}")]

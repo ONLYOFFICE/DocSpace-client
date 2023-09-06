@@ -285,32 +285,6 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             }
         }
 
-        var files = userDataList.Values
-            .SelectMany(u => u.Storages.FileCache)
-            .ToDictionary(f => f.FileId, f => f);
-        var shares = GetDumpChunk("oc_share", sqlFile);
-        if (shares != null)
-        {
-            foreach (var share in shares)
-            {
-                var values = share.Split(',')
-                           .Select(s => s.Trim('\'')).ToArray();
-                var fileId = int.Parse(values[10]);
-                files.TryGetValue(fileId, out var file);
-                if (file == null)
-                {
-                    continue;
-                }
-
-                file.Share.Add(new NCShare()
-                {
-                    Id = int.Parse(values[0]),
-                    ShareWith = values[2],
-                    Premissions = int.Parse(values[12])
-                });
-            }
-        }
-
         return userDataList.Values.ToList();
     }
 

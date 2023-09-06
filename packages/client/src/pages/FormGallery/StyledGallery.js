@@ -59,6 +59,8 @@ const StyledHeadline = styled(Headline)`
 const StyledNavigationDrodown = styled(ComboBox)`
   width: 12px;
   margin-left: 4px;
+  box-sizing: border-box;
+  background: transparent;
 `;
 
 const StyledInfoPanelToggleWrapper = styled.div`

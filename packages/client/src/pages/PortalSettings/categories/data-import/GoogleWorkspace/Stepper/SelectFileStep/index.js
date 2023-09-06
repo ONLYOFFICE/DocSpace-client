@@ -27,8 +27,7 @@ const Wrapper = styled.div`
     .icon-button_svg {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.client.settings.migration.fileInputIconColor};
+          fill: ${(props) => props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
@@ -58,79 +57,84 @@ const SelectFileStep = ({
   localFileUploading,
   getMigrationStatus,
   setUsers,
+  isFileLoading,
+  setIsFileLoading,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
 
+  const [progress, setProgress] = useState(0);
+
   const onUploadFile = async (file) => {
-    await localFileUploading(file);
+    await localFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
     const interval = setInterval(async () => {
       const res = await getMigrationStatus();
-      res.isCompleted && clearInterval(interval);
-      console.log(res);
-      setUsers(res);
-    }, 300);
+
+      if (!res || res.parseResult.failedArchives.length > 0) {
+        console.error("something went wrong");
+        setIsFileLoading(false);
+        clearInterval(interval);
+      } else if (res.isCompleted) {
+        setIsFileLoading(false);
+        clearInterval(interval);
+        setUsers(res);
+        setShowReminder(true);
+      }
+    }, 1000);
   };
 
   const onSelectFile = (file) => {
-    setIsLoading(true);
+    setIsFileLoading(true);
     try {
       onUploadFile(file);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
-      setShowReminder(true);
+      setIsFileLoading(false);
     }
   };
 
   const onCancel = () => {
     setCancelDialogVisbile(true);
-    setIsLoading(false);
+    setProgress(0);
+    setIsFileLoading(false);
   };
 
   return (
     <>
       <Wrapper>
-        <Text className="select-file-title">
-          {t("Settings:ChooseBackupFile")}
-        </Text>
+        <Text className="select-file-title">{t("Settings:ChooseBackupFile")}</Text>
         <FileInput
           scale
           onInput={onSelectFile}
           className="select-file-input"
           placeholder={t("Settings:BackupFile")}
+          isDisabled={isFileLoading}
+          accept=".zip"
         />
       </Wrapper>
-      {isLoading ? (
+      {isFileLoading ? (
         <Wrapper>
-          <Text className="select-file-progress-text">
-            {t("Settings:BackupFileUploading")}
-          </Text>
-          <ProgressBar percent={75} className="select-file-progress-bar" />
-          <Button
-            size="small"
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
+          <Text className="select-file-progress-text">{t("Settings:BackupFileUploading")}</Text>
+          <ProgressBar percent={progress} className="select-file-progress-bar" />
+          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
         </Wrapper>
       ) : (
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={onNextStep}
           onCancelClick={onPrevStep}
-          showReminder={showReminder}
           saveButtonLabel={t("Settings:UploadToServer")}
           cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
+          displaySettings
+          saveButtonDisabled={!showReminder}
+          showReminder
         />
       )}
 
       {cancelDialogVisble && (
         <CancelUploadDialog
           visible={cancelDialogVisble}
-          loading={isLoading}
+          loading={isFileLoading}
           onClose={() => setCancelDialogVisbile(false)}
         />
       )}
@@ -144,9 +148,10 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     localFileUploading,
     getMigrationStatus,
     setUsers,
+    isFileLoading,
+    setIsFileLoading,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
 
   return {
     setUsers,
@@ -155,5 +160,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     initMigrationName,
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,
+    isFileLoading,
+    setIsFileLoading,
   };
 })(observer(SelectFileStep));

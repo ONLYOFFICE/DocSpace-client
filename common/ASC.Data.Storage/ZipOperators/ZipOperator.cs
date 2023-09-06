@@ -78,7 +78,7 @@ public class ZipReadOperator : IDataReadOperator
 {
     private readonly string tmpdir;
 
-    public ZipReadOperator(string targetFile)
+    public ZipReadOperator(string targetFile, bool removeTarget = true)
     {
         tmpdir = Path.Combine(Path.GetDirectoryName(targetFile), Path.GetFileNameWithoutExtension(targetFile).Replace('>', '_').Replace(':', '_').Replace('?', '_'));
 
@@ -89,7 +89,15 @@ public class ZipReadOperator : IDataReadOperator
             tarOutputStream.ExtractContents(tmpdir);
         }
 
-        File.Delete(targetFile);
+        if (removeTarget)
+        {
+            File.Delete(targetFile);
+        }
+    }
+
+    public string GetFolder()
+    {
+        return tmpdir;
     }
 
     public Stream GetEntry(string key)

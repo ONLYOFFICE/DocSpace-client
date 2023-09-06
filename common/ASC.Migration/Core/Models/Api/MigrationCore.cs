@@ -94,5 +94,9 @@ public class MigrationCore
         services.TryAdd<IMigration, OwnCloudMigration>();
         services.TryAdd<OCMigratingUser>();
         services.TryAdd<OCMigratingFiles>();
+
+        services.TryAdd<IMigration, ASCMigration>();
+        services.TryAdd<ASCMigratingUser>();
+        services.TryAdd<ASCMigratingFiles>();
     }
 }

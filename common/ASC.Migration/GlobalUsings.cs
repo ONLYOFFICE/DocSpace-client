@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+global using System.Data;
 global using System.IO.Compression;
 global using System.Text.Json.Serialization;
 global using System.Text.RegularExpressions;
 
 global using ASC.Common;
-global using ASC.Common.Caching;
 global using ASC.Common.Log;
 global using ASC.Common.Threading;
 global using ASC.Common.Web;
@@ -37,6 +37,7 @@ global using ASC.Core;
 global using ASC.Core.Users;
 global using ASC.Data.Storage;
 global using ASC.Data.Storage.DiscStorage;
+global using ASC.Data.Storage.ZipOperators;
 global using ASC.EventBus.Abstractions;
 global using ASC.EventBus.Events;
 global using ASC.Files.Core;
@@ -44,6 +45,9 @@ global using ASC.Files.Core.Resources;
 global using ASC.Files.Core.Security;
 global using ASC.Migration.Core;
 global using ASC.Migration.Core.Core;
+global using ASC.Migration.Core.Core.Providers;
+global using ASC.Migration.Core.Core.Providers.Models;
+global using ASC.Migration.Core.Core.Providers.Models.Parse;
 global using ASC.Migration.Core.Models;
 global using ASC.Migration.Core.Models.Api;
 global using ASC.Migration.Core.Resources;
@@ -72,3 +76,4 @@ global using Microsoft.IdentityModel.Tokens;
 global using Newtonsoft.Json;
 
 global using ProtoBuf;
+global using ASC.Files.Core.Helpers;

@@ -122,7 +122,7 @@ public class MigrationOperation : DistributedTaskProgress
 
             await _tenantManager.SetCurrentTenantAsync(TenantId);
             await _securityContext.AuthenticateMeWithoutCookieAsync(_userId);
-            migrator = _migrationCore.GetMigrator(_migratorName);
+            using migrator = _migrationCore.GetMigrator(_migratorName);
             migrator.OnProgressUpdate += Migrator_OnProgressUpdate;
 
             if (migrator == null)
@@ -169,7 +169,6 @@ public class MigrationOperation : DistributedTaskProgress
                 }
             }
 
-            migrator.Dispose();
             PublishChanges();
         }
 

@@ -34,15 +34,19 @@ const FormGallery = ({ getOforms, setOformFiles }) => {
       <Section.SectionHeader>
         <SectionHeaderContent />
       </Section.SectionHeader>
+
       <Section.SectionFilter>
         <SectionFilterContent />
       </Section.SectionFilter>
+
       <Section.SectionBody>
         <SectionBodyContent />
       </Section.SectionBody>
+
       <Section.InfoPanelHeader>
         <InfoPanelHeaderContent isGallery />
       </Section.InfoPanelHeader>
+
       <Section.InfoPanelBody>
         <InfoPanelBodyContent isGallery />
       </Section.InfoPanelBody>

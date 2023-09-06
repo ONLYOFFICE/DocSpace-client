@@ -18,7 +18,7 @@ export const StyledFilter = styled.div`
   justify-content: space-between;
   gap: 8px;
   height: 32px;
-  padding: 8px 0;
+  padding: 8px 0 5px 0;
 
   .form-only-filters {
     display: flex;

@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 
 import * as Styled from "./index.styled";
 
-const SearchFilter = ({ oformsFilter, filterOformsBySearch }) => {
+const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
   const [value, setValue] = useState(oformsFilter.search);
   const onSearch = (val) => filterOformsBySearch(val);
   const onClear = () => onChangeValue("");
@@ -31,7 +31,7 @@ const SearchFilter = ({ oformsFilter, filterOformsBySearch }) => {
       forwardedRef={ref}
       className="first-name"
       tabIndex={1}
-      placeholder={"Search"}
+      placeholder={t("Common:Search")}
       value={value}
       onChange={onChangeValue}
       onClick={onInputClick}

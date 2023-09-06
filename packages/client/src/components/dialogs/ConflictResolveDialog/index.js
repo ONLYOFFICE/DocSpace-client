@@ -252,35 +252,56 @@ const ConflictResolveDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
-  const {
-    conflictResolveDialogVisible: visible,
-    setConflictResolveDialogVisible,
-    conflictResolveDialogData,
-    conflictResolveDialogItems: items,
-    setMoveToPanelVisible,
-    setRestoreAllPanelVisible,
-    setCopyPanelVisible,
-  } = dialogsStore;
+export default inject(
+  ({
+    auth,
+    dialogsStore,
+    uploadDataStore,
+    filesStore,
+    dashboardStore,
+    selectedFolderStore,
+  }) => {
+    const {
+      conflictResolveDialogVisible: visible,
+      setConflictResolveDialogVisible,
+      conflictResolveDialogData,
+      conflictResolveDialogItems: items,
+      setMoveToPanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+    } = dialogsStore;
 
-  const { itemOperationToFolder } = uploadDataStore;
-  const { activeFiles, setActiveFiles } = filesStore;
-  const { settingsStore } = auth;
-  const { theme } = settingsStore;
-  return {
-    theme,
-    items,
-    visible,
-    conflictResolveDialogData,
-    setConflictResolveDialogVisible,
-    itemOperationToFolder,
-    activeFiles,
-    setActiveFiles,
-    setMoveToPanelVisible,
-    setRestoreAllPanelVisible,
-    setCopyPanelVisible,
-  };
-})(
+    const { itemOperationToFolder } = uploadDataStore;
+
+    const { activeFilesByRole } = dashboardStore;
+
+    const { settingsStore } = auth;
+    const { theme } = settingsStore;
+    const { isDashboard } = selectedFolderStore;
+
+    const activeFiles = isDashboard
+      ? Array.from(activeFilesByRole.values())
+      : filesStore.activeFiles;
+
+    const setActiveFiles = isDashboard
+      ? dashboardStore.setActiveFiles
+      : filesStore.activeFiles;
+
+    return {
+      theme,
+      items,
+      visible,
+      conflictResolveDialogData,
+      setConflictResolveDialogVisible,
+      itemOperationToFolder,
+      activeFiles,
+      setActiveFiles,
+      setMoveToPanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+    };
+  }
+)(
   withTranslation(["ConflictResolveDialog", "Common"])(
     observer(ConflictResolveDialog)
   )

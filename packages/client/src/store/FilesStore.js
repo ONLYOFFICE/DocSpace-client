@@ -31,6 +31,7 @@ import { getContextMenuKeysByType } from "SRC_DIR/helpers/plugins";
 import { PluginContextMenuItemType } from "SRC_DIR/helpers/plugins/constants";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
+import DashboardStore from "./DashboardStore";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -53,6 +54,11 @@ class FilesStore {
   filesSettingsStore;
   thirdPartyStore;
   clientLoadingStore;
+
+  /**
+   *  @type {DashboardStore}
+   */
+  dashboardStore;
 
   accessRightsStore;
 
@@ -139,7 +145,8 @@ class FilesStore {
     filesSettingsStore,
     thirdPartyStore,
     accessRightsStore,
-    clientLoadingStore
+    clientLoadingStore,
+    dashboardStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -153,6 +160,7 @@ class FilesStore {
     this.thirdPartyStore = thirdPartyStore;
     this.accessRightsStore = accessRightsStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.dashboardStore = dashboardStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -579,7 +587,39 @@ class FilesStore {
     }
   };
 
+  clearActiveOperations = (fileIds = [], folderIds = [], boardIds = []) => {
+    if (this.selectedFolderStore.isDashboard) {
+      fileIds &&
+        Array.isArray(fileIds) &&
+        this.dashboardStore.clearActiveFiles(fileIds);
+
+      return;
+    }
+
+    const newActiveFiles = this.activeFiles.filter(
+      (el) => !fileIds?.includes(el)
+    );
+    const newActiveFolders = this.activeFolders.filter(
+      (el) => !folderIds.includes(el)
+    );
+
+    const newActiveBoards = this.activeBoards.filter(
+      (id) => !boardIds.includes(id)
+    );
+
+    this.setActiveFiles(newActiveFiles);
+    this.setActiveBoards(newActiveBoards);
+    this.setActiveFolders(newActiveFolders);
+  };
+
   addActiveItems = (files, folders, boards) => {
+    if (this.selectedFolderStore.isDashboard) {
+      files &&
+        Array.isArray(files) &&
+        this.dashboardStore.addActiveFiles(files);
+      return;
+    }
+
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
         this.setActiveFolders(folders);

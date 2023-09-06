@@ -38,6 +38,7 @@ class DashboardStore {
   public selectedFilesByRoleMap: Map<number, IFileByRole> = new Map();
   public collectionFileByRoleStore: Map<number, FileByRoleStore> = new Map();
   public BufferSelectionFilesByRole?: IFileByRole;
+  public activeFilesByRole: Map<number, number> = new Map();
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -108,8 +109,6 @@ class DashboardStore {
     options.filter((o) => !toRemoveArray.includes(o));
 
   private goTo = (url: string, options?: NavigateOptions) => {
-    console.log({ options });
-
     window?.DocSpace?.navigate(url, options);
   };
 
@@ -235,7 +234,6 @@ class DashboardStore {
         "separator0",
         "link-for-room-members",
         "download-file",
-        "download-file-as",
         "move-to",
         "copy-file",
         "separator1",
@@ -260,6 +258,56 @@ class DashboardStore {
       this.selectedFilesByRoleMap.set(file.id, file);
     } else {
       this.selectedFilesByRoleMap.delete(file.id);
+    }
+  };
+
+  public setActiveFiles = (activeFilesId: number[]) => {
+    if (
+      activeFilesId &&
+      Array.isArray(activeFilesId) &&
+      activeFilesId.length > 0
+    ) {
+      this.activeFilesByRole = new Map(activeFilesId.map((id) => [id, id]));
+    }
+  };
+
+  public addActiveFiles = (activeFilesId: number[]) => {
+    for (const id of activeFilesId) {
+      this.activeFilesByRole.set(id, id);
+    }
+  };
+
+  public clearActiveFiles = (activeFilesId: number[]) => {
+    for (const id of activeFilesId) {
+      this.activeFilesByRole.delete(id);
+    }
+  };
+
+  public removeFiles = (removeFiles: IFileByRole[]) => {
+    if (removeFiles.length === 0) return;
+
+    const tempMap = removeFiles.reduce<Record<number, IFileByRole[]>>(
+      (acc, file) => {
+        if (acc[file.roleId]) {
+          acc[file.roleId].push(file);
+        } else {
+          acc[file.roleId] = [file];
+        }
+        return { ...acc };
+      },
+      {}
+    );
+
+    for (const [key, array] of Object.entries(tempMap)) {
+      const files = this.filesByRole.get(+key);
+
+      if (!files) continue;
+
+      const filteredFiles = files.filter(
+        (file) => !array.some((item) => item.id === file.id)
+      );
+
+      this.filesByRole.set(+key, filteredFiles);
     }
   };
 

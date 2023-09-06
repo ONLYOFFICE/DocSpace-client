@@ -38,7 +38,7 @@ import DashboardStore from "./DashboardStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
-import DashboardContextOpetion from "./DashboardContextOption";
+import DashboardContextOptionStore from "./DashboardContextOption";
 import RoleStore from "./RoleStore";
 
 const oformsStore = new OformsStore(authStore);
@@ -63,6 +63,11 @@ const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
+const dashboardStore = new DashboardStore(
+  selectedFolderStore,
+  clientLoadingStore
+);
+
 const filesStore = new FilesStore(
   authStore,
   selectedFolderStore,
@@ -70,7 +75,8 @@ const filesStore = new FilesStore(
   settingsStore,
   thirdPartyStore,
   accessRightsStore,
-  clientLoadingStore
+  clientLoadingStore,
+  dashboardStore
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -175,15 +181,11 @@ const createEditRoomStore = new CreateEditRoomStore(
 
 const webhooksStore = new WebhooksStore();
 
-const dashboardStore = new DashboardStore(
-  selectedFolderStore,
-  clientLoadingStore
-);
-
-const dashboardContextOptionStore = new DashboardContextOpetion(
+const dashboardContextOptionStore = new DashboardContextOptionStore(
   dashboardStore,
   dialogsStore,
-  contextOptionsStore
+  contextOptionsStore,
+  filesActionsStore
 );
 
 const roleStore = new RoleStore(

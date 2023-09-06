@@ -899,6 +899,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.checkboxOptions = [];
     tableGroupMenuProps.withComboboxMenu = false;
     tableGroupMenuProps.headerMenu = getHeaderContextMenu(t);
+    tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
     tableGroupMenuProps.isChecked = isHeaderChecked;

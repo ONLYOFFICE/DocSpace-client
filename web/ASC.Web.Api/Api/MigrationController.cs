@@ -56,6 +56,16 @@ public class MigrationController : ControllerBase
         _httpContextAccessor = httpContextAccessor;
         _migrationCore = migrationCore;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("list")]
+    public async Task<string[]> ListAsync()
+    {
+        await DemandPermission();
+        return _migrationCore.GetAvailableMigrations();
+    }
 
     /// <summary>
     /// 

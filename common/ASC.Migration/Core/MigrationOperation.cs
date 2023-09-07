@@ -118,6 +118,11 @@ public class MigrationOperation : DistributedTaskProgress
         IMigration migrator = null;
         try
         {
+            var onlyParse = _migrationApiInfo == null;
+            if (onlyParse)
+            {
+                MigrationApiInfo = new MigrationApiInfo();
+            }
             CustomSynchronizationContext.CreateContext();
 
             await _tenantManager.SetCurrentTenantAsync(TenantId);
@@ -142,7 +147,6 @@ public class MigrationOperation : DistributedTaskProgress
                 throw new Exception(string.Format(MigrationResource.MigrationUploadException, _migratorName), ex);
             }
 
-            var onlyParse = _migrationApiInfo == null;
             await migrator.Parse(onlyParse);
 
             if (!onlyParse)
@@ -163,10 +167,6 @@ public class MigrationOperation : DistributedTaskProgress
                 migrator.OnProgressUpdate -= Migrator_OnProgressUpdate;
                 ImportedUsers = migrator.GetGuidImportedUsers();
                 LogName = migrator.GetLogName();
-                if(_migrationApiInfo is null)
-                {
-                    MigrationApiInfo = new MigrationApiInfo();
-                }
             }
 
             PublishChanges();

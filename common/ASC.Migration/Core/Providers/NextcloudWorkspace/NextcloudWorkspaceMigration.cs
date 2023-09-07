@@ -101,19 +101,10 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             {
                 ReportProgress(30, MigrationResource.UnzippingFinished);
             }
-            var bdFile = "";
-            try
+            var bdFile = Directory.GetFiles(Directory.GetDirectories(_tmpFolder)[0], "*.bak")[0];
+            if (bdFile == null)
             {
-                bdFile = Directory.GetFiles(Directory.GetDirectories(_tmpFolder)[0], "*.bak")[0];
-                if (bdFile == null)
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
-                Log("Archive must not be empty and should contain .bak files.", ex);
+                throw new Exception();
             }
             if (reportProgress)
             {
@@ -168,7 +159,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
         catch (Exception ex)
         {
             _migrationInfo.FailedArchives.Add(Path.GetFileName(_takeouts));
-            Log($"Couldn't parse users from {Path.GetFileNameWithoutExtension(_takeouts)} archive", ex);
+            Log($"Couldn't parse {Path.GetFileNameWithoutExtension(_takeouts)} archive", ex);
         }
         if (reportProgress)
         {

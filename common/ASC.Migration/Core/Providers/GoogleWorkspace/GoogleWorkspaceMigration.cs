@@ -103,11 +103,11 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                 ReportProgress(GetProgress() + progressStep, MigrationResource.DataProcessing + $" {takeout} ({i++}/{_takeouts.Length})");
             }
 
-            var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(takeout));
+            var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(takeout)); 
+            var key = Path.GetFileName(takeout);
             try
             {
                 ZipFile.ExtractToDirectory(takeout, tmpFolder);
-
                 var rootFolder = Path.Combine(tmpFolder, "Takeout");
 
                 if (!Directory.Exists(rootFolder))
@@ -116,25 +116,25 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
                 }
                 var directories = Directory.GetDirectories(rootFolder);
                 var user = _serviceProvider.GetService<GwsMigratingUser>();
-                    user.Init(takeout, rootFolder, Log);
+                    user.Init(key, rootFolder, Log);
                     user.Parse();
                     if (user.Email.IsNullOrEmpty()) 
                     {
-                        _migrationInfo.WithoutEmailUsers.Add(takeout, user);
+                        _migrationInfo.WithoutEmailUsers.Add(key, user);
                     }
                     else if((await _userManager.GetUserByEmailAsync(user.Email)) != ASC.Core.Users.Constants.LostUser)
                     {
-                        _migrationInfo.ExistUsers.Add(takeout, user);
+                        _migrationInfo.ExistUsers.Add(key, user);
                     }
                     else
                     {
-                        _migrationInfo.Users.Add(takeout, user);
+                        _migrationInfo.Users.Add(key, user);
                     }
             }
             catch (Exception ex)
             {
-                _migrationInfo.FailedArchives.Add(Path.GetFileName(takeout));
-                Log($"Couldn't parse user from {Path.GetFileNameWithoutExtension(takeout)} archive", ex);
+                _migrationInfo.FailedArchives.Add(key);
+                Log($"Couldn't parse user from {key} archive", ex);
             }
             finally
             {

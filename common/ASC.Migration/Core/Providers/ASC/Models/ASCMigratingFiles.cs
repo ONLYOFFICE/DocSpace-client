@@ -42,21 +42,26 @@ public class ASCMigratingFiles : MigratingFiles
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IServiceProvider _serviceProvider;
     private readonly IDaoFactory _daoFactory;
+    private readonly SecurityContext _securityContext;
+    private ASCMigratingUser _user;
 
     public ASCMigratingFiles(FileStorageService fileStorageService,
         GlobalFolderHelper globalFolderHelper,
         IServiceProvider serviceProvider,
-        IDaoFactory daoFactory)
+        IDaoFactory daoFactory,
+        SecurityContext securityContext)
     {
         _fileStorageService = fileStorageService;
         _globalFolderHelper = globalFolderHelper;
         _serviceProvider = serviceProvider;
         _daoFactory = daoFactory;
+        _securityContext = securityContext;
     }
 
-    public void Init(string key, IDataReadOperator dataReader, ASCStorage storage, Action<string, Exception> log)
+    public void Init(string key, ASCMigratingUser user, IDataReadOperator dataReader, ASCStorage storage, Action<string, Exception> log)
     {
         _key = key;
+        _user = user;
         _dataReader = dataReader;
         Log = log;
         _storage = storage;
@@ -132,6 +137,8 @@ public class ASCMigratingFiles : MigratingFiles
         {
             return;
         }
+
+        await _securityContext.AuthenticateMeAsync(_user.Guid);
 
         var newFolder = await _fileStorageService.CreateNewFolderAsync(await _globalFolderHelper.FolderMyAsync, $"ASC migration files {DateTime.Now.ToString("dd.MM.yyyy")}");
 

@@ -120,41 +120,28 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
 
     public override async Task MigrateAsync()
     {
-        if (string.IsNullOrWhiteSpace(_userInfo.FirstName))
-        {
-            _userInfo.FirstName = FilesCommonResource.UnknownFirstName;
-        }
-        if (string.IsNullOrWhiteSpace(_userInfo.LastName))
-        {
-            _userInfo.LastName = FilesCommonResource.UnknownLastName;
-        }
-
         var saved = await _userManager.GetUserByEmailAsync(_userInfo.Email);
-        if (saved != ASC.Core.Users.Constants.LostUser)
+        if (saved == ASC.Core.Users.Constants.LostUser)
         {
-            if (saved.ContactsList != null)
+            if (string.IsNullOrWhiteSpace(_userInfo.FirstName))
             {
-                saved.ContactsList = saved.ContactsList.Union(_userInfo.ContactsList).ToList();
+                _userInfo.FirstName = FilesCommonResource.UnknownFirstName;
             }
-            else
+            if (string.IsNullOrWhiteSpace(_userInfo.LastName))
             {
-                saved.ContactsList = _userInfo.ContactsList;
+                _userInfo.LastName = FilesCommonResource.UnknownLastName;
             }
-            _userInfo.Id = saved.Id;
-        }
-        else
-        {
             saved = await _userManager.SaveUserInfo(_userInfo);
-        }
-        if (_hasPhoto)
-        {
-            using (var ms = new MemoryStream())
+            if (_hasPhoto)
             {
-                using (var fs = File.OpenRead(_pathToPhoto))
+                using (var ms = new MemoryStream())
                 {
-                    fs.CopyTo(ms);
+                    using (var fs = File.OpenRead(_pathToPhoto))
+                    {
+                        fs.CopyTo(ms);
+                    }
+                    await _userManager.SaveUserPhotoAsync(saved.Id, ms.ToArray());
                 }
-                await _userManager.SaveUserPhotoAsync(saved.Id, ms.ToArray());
             }
         }
     }

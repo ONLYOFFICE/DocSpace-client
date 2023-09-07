@@ -167,6 +167,9 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
     public override void Dispose()
     {
         base.Dispose();
-        _dataReader.Dispose();
+        if (_dataReader != null)
+        {
+            _dataReader.Dispose();
+        }
     }
 }

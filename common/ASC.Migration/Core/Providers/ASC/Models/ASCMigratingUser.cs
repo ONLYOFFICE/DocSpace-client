@@ -40,9 +40,8 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
     private IDataReadOperator _dataReader;
     private readonly UserManager _userManager;
     private readonly IServiceProvider _serviceProvider;
-    private readonly SecurityContext _securityContext;
 
-    public ASCMigratingUser(IServiceProvider serviceProvider, UserManager userManager, SecurityContext securityContext)
+    public ASCMigratingUser(IServiceProvider serviceProvider, UserManager userManager)
     {
         _serviceProvider = serviceProvider;
         _userManager = userManager;
@@ -78,7 +77,7 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
             Files = new List<ASCFile>(),
             Folders = new List<ASCFolder>()
         };
-        MigratingFiles.Init(Key, _dataReader, _user.Storage, Log);
+        MigratingFiles.Init(Key, this, _dataReader, _user.Storage, Log);
         MigratingFiles.Parse();
     }
 
@@ -89,7 +88,6 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
         {
             saved = await _userManager.SaveUserInfo(_user.Info);
             _user.Info = saved;
-            await _securityContext.AuthenticateMeAsync(saved.Id);
             if (_hasPhoto)
             {
                 using (var ms = new MemoryStream())

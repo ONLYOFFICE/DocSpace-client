@@ -45,7 +45,6 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
     {
         _serviceProvider = serviceProvider;
         _userManager = userManager;
-        _securityContext = securityContext;
     }
 
     public void Init(string key,ASCUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)

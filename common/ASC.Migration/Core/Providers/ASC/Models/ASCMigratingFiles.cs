@@ -61,7 +61,7 @@ public class ASCMigratingFiles : MigratingFiles
     public void Init(string key, ASCMigratingUser user, IDataReadOperator dataReader, ASCStorage storage, Action<string, Exception> log)
     {
         _key = key;
-        _user = user
+        _user = user;
         _dataReader = dataReader;
         Log = log;
         _storage = storage;

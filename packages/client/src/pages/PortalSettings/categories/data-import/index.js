@@ -34,7 +34,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
   const logos = {
     GoogleWorkspace: google,
     Nextcloud: nextcloud,
-    Owncloud: onlyoffice,
+    ASC: onlyoffice,
   };
 
   const workspaces = useMemo(() => {
@@ -56,13 +56,17 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
       case "Nextcloud":
         navigate(`nextcloud?service=${title}`);
         break;
-      case "Owncloud":
+      case "ASC":
         navigate(`onlyoffice?service=${title}`);
         break;
       default:
         break;
     }
   };
+
+  const filteredWorkspaces = workspaces.filter(
+    (workspace) => workspace.title !== "Owncloud"
+  );
 
   return (
     <WorkspacesContainer>
@@ -74,7 +78,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
       </Text>
 
       <Box className="workspace-list">
-        {workspaces.map((workspace) => (
+        {filteredWorkspaces.map((workspace) => (
           <Box
             key={workspace.title}
             className="workspace-item"

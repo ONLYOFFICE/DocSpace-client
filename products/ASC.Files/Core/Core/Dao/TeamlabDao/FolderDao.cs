@@ -212,7 +212,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         {
             return 0;
         }
-        
+
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
 
         if (filterType == FilterType.None && subjectId == default && string.IsNullOrEmpty(searchText) && !withSubfolders && !excludeSubject)
@@ -225,7 +225,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         return await q.CountAsync();
     }
 
-    public async IAsyncEnumerable<Folder<int>> GetFoldersAsync(int parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText, bool withSubfolders = false, 
+    public async IAsyncEnumerable<Folder<int>> GetFoldersAsync(int parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText, bool withSubfolders = false,
         bool excludeSubject = false, int offset = 0, int count = -1)
     {
         if (CheckInvalidFilter(filterType) || count == 0)
@@ -320,10 +320,10 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     {
         var roomTypes = new List<FolderType>
         {
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
         };
@@ -528,6 +528,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
             await Queries.DeleteBunchObjectsAsync(filesDbContext, TenantID, folderId.ToString());
 
+            await filesDbContext.SaveChangesAsync();
             await tx.CommitAsync();
             await RecalculateFoldersCountAsync(parent);
         });
@@ -1216,14 +1217,14 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     {
         var roomTypes = new List<FolderType>
         {
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom
         };
-        
+
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
 
         await foreach (var e in GetFeedsInternalAsync(tenant, from, to, filter, null))
@@ -1295,16 +1296,16 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
     public async IAsyncEnumerable<int> GetTenantsWithRoomsFeedsAsync(DateTime fromTime)
     {
-        var roomTypes = new List<FolderType> 
-        { 
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+        var roomTypes = new List<FolderType>
+        {
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
         };
-        
+
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
 
         await foreach (var q in GetTenantsWithFeeds(fromTime, filter, true))
@@ -1331,7 +1332,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
         if (rootFolderType != FolderType.VirtualRooms && rootFolderType != FolderType.Archive)
         {
-            return (-1,"");
+            return (-1, "");
         }
 
         var rootFolderId = Convert.ToInt32(fileEntry.RootId);
@@ -1348,7 +1349,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         {
             return (entryId, fileEntry.Title);
         }
-        
+
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
 
         var parentFolders = await Queries.ParentIdTitlePairAsync(filesDbContext, folderId).ToListAsync();
@@ -1525,7 +1526,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     {
         return (await _globalStore.GetStoreAsync()).CreateDataWriteOperator(chunkedUploadSession, sessionHolder);
     }
-    
+
     private async Task<IQueryable<DbFolder>> GetFoldersQueryWithFilters(int parentId, OrderBy orderBy, bool subjectGroup, Guid subjectId, string searchText, bool withSubfolders, bool excludeSubject,
         FilesDbContext filesDbContext)
     {
@@ -1598,57 +1599,9 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                     Entries = r.Select(e => new KeyValuePair<string, FileEntryType>(e.EntryId, e.EntryType)).ToHashSet()
                 }));
 
-    private string GetProjectTitle(object folderID)
+    public async Task<string> GetBackupExtensionAsync(int folderId)
     {
-        return "";
-        //if (!ApiServer.Available)
-        //{
-        //    return string.Empty;
-        //}
-
-        //var cacheKey = "documents/folders/" + folderID.ToString();
-
-        //var projectTitle = Convert.ToString(cache.Get<string>(cacheKey));
-
-        //if (!string.IsNullOrEmpty(projectTitle)) return projectTitle;
-
-        //var bunchObjectID = GetBunchObjectID(folderID);
-
-        //if (string.IsNullOrEmpty(bunchObjectID))
-        //    throw new Exception("Bunch Object id is null for " + folderID);
-
-        //if (!bunchObjectID.StartsWith("projects/project/"))
-        //    return string.Empty;
-
-        //var bunchObjectIDParts = bunchObjectID.Split('/');
-
-        //if (bunchObjectIDParts.Length < 3)
-        //    throw new Exception("Bunch object id is not supported format");
-
-        //var projectID = Convert.ToInt32(bunchObjectIDParts[bunchObjectIDParts.Length - 1]);
-
-        //if (HttpContext.Current == null || !SecurityContext.IsAuthenticated)
-        //    return string.Empty;
-
-        //var apiServer = new ApiServer();
-
-        //var apiUrl = string.Format("{0}project/{1}.json?fields=id,title", SetupInfo.WebApiBaseUrl, projectID);
-
-        //var responseApi = JObject.Parse(Encoding.UTF8.GetString(Convert.FromBase64String(apiServer.GetApiResponse(apiUrl, "GET"))))["response"];
-
-        //if (responseApi != null && responseApi.HasValues)
-        //{
-        //    projectTitle = Global.ReplaceInvalidCharsAndTruncate(responseApi["title"].Value<string>());
-        //}
-        //else
-        //{
-        //    return string.Empty;
-        //}
-        //if (!string.IsNullOrEmpty(projectTitle))
-        //{
-        //    cache.Insert(cacheKey, projectTitle, TimeSpan.FromMinutes(15));
-        //}
-        //return projectTitle;
+        return (await _globalStore.GetStoreAsync()).GetBackupExtension();
     }
 }
 

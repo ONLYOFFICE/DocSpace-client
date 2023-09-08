@@ -177,7 +177,10 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
-                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                var elem = migrationApiInfo.Users.Find(element => element.Key == user.Key);
+                user.DataСhange(elem);
+                user.UserType = elem.UserType;
+
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
             }

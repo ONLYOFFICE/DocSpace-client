@@ -29,15 +29,12 @@ namespace ASC.Migration.Core.Models.Api;
 [ProtoContract]
 public class MigratingApiFiles : ImportableApiEntity
 {
-    [ProtoMember(2)]
+    [ProtoMember(1)]
     public int FoldersCount { get; set; }
 
-    [ProtoMember(3)]
+    [ProtoMember(2)]
     public int FilesCount { get; set; }
 
-    [ProtoMember(4)]
+    [ProtoMember(3)]
     public long BytesTotal { get; set; }
-
-    [ProtoMember(5)]
-    public string ModuleName { get; set; }
 }

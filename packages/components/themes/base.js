@@ -1353,7 +1353,7 @@ const Base = {
   },
 
   progressBar: {
-    backgroundColor: "#A3A9AE",
+    backgroundColor: "#F3F4F4",
 
     percent: {
       background: "#4781D1",
@@ -3020,6 +3020,7 @@ const Base = {
         importItemTextColor: "#555f65",
         importItemDisableTextColor: "#A3A9AE",
         importItemDescription: "#333333",
+        errorTextColor: "#F21C0E",
       },
     },
 

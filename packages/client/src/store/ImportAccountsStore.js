@@ -2,7 +2,11 @@ import axios from "axios";
 import { uploadFile } from "@docspace/common/api/files";
 import { combineUrl } from "@docspace/common/utils";
 import { makeAutoObservable, runInAction } from "mobx";
-import { migrationList, migrationName, migrationStatus } from "@docspace/common/api/settings";
+import {
+  migrationList,
+  migrationName,
+  migrationStatus,
+} from "@docspace/common/api/settings";
 
 class ImportAccountsStore {
   checkedAccounts = [];
@@ -31,7 +35,9 @@ class ImportAccountsStore {
   };
 
   toggleAllAccounts = (e, accounts) => {
-    this.checkedAccounts = e.target.checked ? accounts.map((data) => data.id) : [];
+    this.checkedAccounts = e.target.checked
+      ? accounts.map((data) => data.id)
+      : [];
   };
 
   setUsers = (data) => {
@@ -52,7 +58,10 @@ class ImportAccountsStore {
 
   localFileUploading = async (file, setProgress) => {
     try {
-      const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
+      const location = combineUrl(
+        window.location.origin,
+        "migrationFileUpload.ashx"
+      );
       const requestsDataArray = [];
       let chunk = 0;
 
@@ -70,8 +79,12 @@ class ImportAccountsStore {
 
       chunk = 0;
       while (chunk < chunks && this.isFileLoading) {
-        await uploadFile(location + `?Name=${file.name}`, requestsDataArray[chunk]);
-        setProgress((chunk / chunks) * 100);
+        await uploadFile(
+          location + `?Name=${file.name}`,
+          requestsDataArray[chunk]
+        );
+        const progress = (chunk / chunks) * 100;
+        setProgress(Math.ceil(progress));
         chunk++;
       }
     } catch (e) {

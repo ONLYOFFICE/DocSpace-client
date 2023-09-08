@@ -150,6 +150,7 @@
   "Load": "Load",
   "LoadingDescription": "Please wait...",
   "LoadingProcessing": "Loading...",
+  "LoadingIsComplete": "Loading is complete 100%",
   "LocalDomain": "Local domains are not supported",
   "Location": "Location",
   "LoginButton": "Sign in",

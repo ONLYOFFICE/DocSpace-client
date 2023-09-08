@@ -150,6 +150,7 @@
   "Load": "Загрузить",
   "LoadingDescription": "Пожалуйста, подождите...",
   "LoadingProcessing": "Загрузка...",
+  "LoadingIsComplete": "Загрузка завершена 100%",
   "LocalDomain": "Псевдодомен верхнего уровня не поддерживается",
   "Location": "Местоположение",
   "LoginButton": "Войти",

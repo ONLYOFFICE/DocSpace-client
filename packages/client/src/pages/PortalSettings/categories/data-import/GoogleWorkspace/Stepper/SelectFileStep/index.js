@@ -5,6 +5,8 @@ import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
+import Box from "@docspace/components/box";
+import Link from "@docspace/components/link";
 import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
@@ -27,21 +29,35 @@ const Wrapper = styled.div`
     .icon-button_svg {
       svg {
         path {
-          fill: ${(props) => props.theme.client.settings.migration.fileInputIconColor};
+          fill: ${(props) =>
+            props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
   }
 
-  .select-file-progress-text {
-    font-size: 12px;
-    margin-top: -4px;
-    margin-bottom: 12px;
-  }
-
   .select-file-progress-bar {
     margin: 12px 0 16px;
     width: 350px;
+  }
+`;
+
+const ErrorBlock = styled.div`
+  max-width: 700px;
+
+  .complete-progress-bar {
+    margin: 12px 0 16px;
+    max-width: 350px;
+  }
+
+  .error-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  }
+
+  .save-cancel-buttons {
+    margin-top: 16px;
   }
 `;
 
@@ -61,8 +77,8 @@ const SelectFileStep = ({
   setIsFileLoading,
 }) => {
   const [searchParams] = useSearchParams();
-
   const [progress, setProgress] = useState(0);
+  const [isFileError, setIsFileError] = useState(false);
 
   const onUploadFile = async (file) => {
     await localFileUploading(file, setProgress);
@@ -71,7 +87,7 @@ const SelectFileStep = ({
       const res = await getMigrationStatus();
 
       if (!res || res.parseResult.failedArchives.length > 0) {
-        console.error("something went wrong");
+        setIsFileError(true);
         setIsFileLoading(false);
         clearInterval(interval);
       } else if (res.isCompleted) {
@@ -102,7 +118,9 @@ const SelectFileStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="select-file-title">{t("Settings:ChooseBackupFile")}</Text>
+        <Text className="select-file-title">
+          {t("Settings:ChooseBackupFile")}
+        </Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -112,23 +130,53 @@ const SelectFileStep = ({
           accept=".zip"
         />
       </Wrapper>
+
       {isFileLoading ? (
         <Wrapper>
-          <Text className="select-file-progress-text">{t("Settings:BackupFileUploading")}</Text>
-          <ProgressBar percent={progress} className="select-file-progress-bar" />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
+          <ProgressBar
+            percent={progress}
+            className="select-file-progress-bar"
+            label={t("Settings:BackupFileUploading")}
+          />
+          <Button
+            size="small"
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </Wrapper>
       ) : (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={onNextStep}
-          onCancelClick={onPrevStep}
-          saveButtonLabel={t("Settings:UploadToServer")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-          saveButtonDisabled={!showReminder}
-          showReminder
-        />
+        <ErrorBlock>
+          {isFileError && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">
+                {t("Settings:UnsupportedArchivesDescription")}
+              </Text>
+              <Link
+                type="action"
+                isHovered
+                fontWeight={600}
+                onClick={() => console.log("download")}
+              >
+                {t("Settings:DownloadUnsupportedArchives")}
+              </Link>
+            </Box>
+          )}
+          <SaveCancelButtons
+            className="save-cancel-buttons"
+            onSaveClick={onNextStep}
+            onCancelClick={onPrevStep}
+            saveButtonLabel={t("Settings:UploadToServer")}
+            cancelButtonLabel={t("Common:Back")}
+            displaySettings
+            saveButtonDisabled={!showReminder}
+            showReminder
+          />
+        </ErrorBlock>
       )}
 
       {cancelDialogVisble && (
@@ -151,7 +199,8 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     isFileLoading,
     setIsFileLoading,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
     setUsers,

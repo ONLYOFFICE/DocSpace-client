@@ -9,8 +9,7 @@ const ProgressBar = ({ percent, label, ...rest }) => {
 
   //console.log("ProgressBar render");
   return (
-    <StyledProgressBar {...rest} percent={progressPercent}>
-      <div className="progress-bar_percent" />
+    <>
       <Text
         className="progress-bar_full-text"
         fontSize="12px"
@@ -20,7 +19,10 @@ const ProgressBar = ({ percent, label, ...rest }) => {
       >
         {label}
       </Text>
-    </StyledProgressBar>
+      <StyledProgressBar {...rest} percent={progressPercent}>
+        <div className="progress-bar_percent" />
+      </StyledProgressBar>
+    </>
   );
 };
 

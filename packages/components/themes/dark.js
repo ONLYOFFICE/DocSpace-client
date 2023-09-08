@@ -3023,6 +3023,7 @@ const Dark = {
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: "#A3A9AE",
+        errorTextColor: "#E06451",
       },
     },
 

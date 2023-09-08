@@ -276,15 +276,14 @@ internal abstract class SecurityBaseDao<T> : AbstractDao
         return result;
     }
 
-    internal async Task<FileShareRecord> ToFileShareRecordAsync(SecurityTreeRecord r)
+    protected FileShareRecord ToFileShareRecord(SecurityTreeRecord r)
     {
-        var result = await ToFileShareRecordAsync(r.DbFilesSecurity);
-        if (r.DbFolderTree != null)
-        {
-            result.EntryId = r.DbFolderTree.FolderId;
-        }
+        var result = _mapper.Map<SecurityTreeRecord, FileShareRecord>(r);
 
-        result.Level = r.DbFolderTree?.Level ?? -1;
+        if (r.FolderId != default)
+        {
+            result.EntryId = r.FolderId;
+        }
 
         return result;
     }
@@ -309,7 +308,7 @@ internal class SecurityDao : SecurityBaseDao<int>, ISecurityDao<int>
     {
     }
 
-    public async Task<IEnumerable<FileShareRecord>> GetSharesAsync(FileEntry<int> entry)
+    public async Task<IEnumerable<FileShareRecord>> GetSharesAsync(FileEntry<int> entry, IEnumerable<Guid> subjects = null)
     {
         if (entry == null)
         {
@@ -321,33 +320,89 @@ internal class SecurityDao : SecurityBaseDao<int>, ISecurityDao<int>
 
         await SelectFilesAndFoldersForShareAsync(entry, files, null, foldersInt);
 
-        return await SaveFilesAndFoldersForShareAsync(files, foldersInt);
-    }
-
-    private async Task<IEnumerable<FileShareRecord>> SaveFilesAndFoldersForShareAsync(List<string> files, List<int> folders)
-    {
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
 
-        var q = await Query(filesDbContext.Security)
-            .Join(filesDbContext.Tree, r => r.EntryId, a => a.ParentId.ToString(), (security, tree) => new SecurityTreeRecord { DbFilesSecurity = security, DbFolderTree = tree })
-            .Where(r => folders.Contains(r.DbFolderTree.FolderId) &&
-                        r.DbFilesSecurity.EntryType == FileEntryType.Folder)
-            .ToListAsync();
+        var q = Query(filesDbContext.Security)
+            .Join(filesDbContext.Tree, r => r.EntryId, a => a.ParentId.ToString(), 
+                (s, t) => new SecurityTreeRecord
+                {
+                    TenantId = s.TenantId,
+                    EntryId = s.EntryId,
+                    EntryType = s.EntryType,
+                    SubjectType = s.SubjectType,
+                    Subject = s.Subject,
+                    Owner = s.Owner,
+                    Share = s.Share,
+                    TimeStamp = s.TimeStamp,
+                    Options = s.Options,
+                    FolderId = t.FolderId,
+                    ParentId = t.ParentId,
+                    Level = t.Level
+                })
+            .Where(r => foldersInt.Contains(r.FolderId) && r.EntryType == FileEntryType.Folder);
 
-        if (0 < files.Count)
+        if (files.Count > 0)
         {
-            var q1 = await GetQuery(filesDbContext, r => files.Contains(r.EntryId) && r.EntryType == FileEntryType.File)
-                .Select(r => new SecurityTreeRecord { DbFilesSecurity = r })
-                .ToListAsync();
-            q = q.Union(q1).ToList();
+            var q1 = GetQuery(filesDbContext, r => files.Contains(r.EntryId) && r.EntryType == FileEntryType.File)
+                .Select(s => new SecurityTreeRecord
+                {
+                    TenantId = s.TenantId,
+                    EntryId = s.EntryId,
+                    EntryType = s.EntryType,
+                    SubjectType = s.SubjectType,
+                    Subject = s.Subject,
+                    Owner = s.Owner,
+                    Share = s.Share,
+                    TimeStamp = s.TimeStamp,
+                    Options = s.Options,
+                    FolderId = 0,
+                    ParentId = 0,
+                    Level = -1
+                });
+            
+            q = q.Concat(q1);
         }
 
-        return await q
-            .ToAsyncEnumerable()
-            .SelectAwait(async e => await ToFileShareRecordAsync(e))
+        if (subjects != null && subjects.Any())
+        {
+            q = q.Where(r => subjects.Contains(r.Subject));
+        }
+
+        var records = await q.ToAsyncEnumerable()
+            .Select(ToFileShareRecord)
             .OrderBy(r => r.Level)
             .ThenByDescending(r => r.Share, new FileShareRecord.ShareComparer())
             .ToListAsync();
+
+        await DeleteExpiredAsync(records, filesDbContext);
+
+        return records;
+    }
+
+    private async Task DeleteExpiredAsync(List<FileShareRecord> records, FilesDbContext filesDbContext)
+    {
+        var expired = new List<Guid>();
+
+        for (var i = 0; i < records.Count; i++)
+        {
+            var r = records[i];
+            if (r.SubjectType != SubjectType.InvitationLink || r.Options is not { IsExpired: true })
+            {
+                continue;
+            }
+
+            expired.Add(r.Subject);
+            records.RemoveAt(i);
+        }
+
+        if (expired.Count > 0)
+        {
+            var tenantId = TenantID;
+
+            await filesDbContext.Security
+                .Where(s => s.TenantId == tenantId && s.SubjectType == SubjectType.InvitationLink && expired.Contains(s.Subject))
+                .ExecuteDeleteAsync();
+        }
     }
 }
 
@@ -374,7 +429,7 @@ internal class ThirdPartySecurityDao : SecurityBaseDao<string>, ISecurityDao<str
         _selectorFactory = selectorFactory;
     }
 
-    public async Task<IEnumerable<FileShareRecord>> GetSharesAsync(FileEntry<string> entry)
+    public async Task<IEnumerable<FileShareRecord>> GetSharesAsync(FileEntry<string> entry, IEnumerable<Guid> subjects = null)
     {
         var result = new List<FileShareRecord>();
 
@@ -402,6 +457,11 @@ internal class ThirdPartySecurityDao : SecurityBaseDao<string>, ISecurityDao<str
         }
 
         result.AddRange(await GetShareForFoldersAsync(folders).ToListAsync());
+
+        if (subjects != null && subjects.Any())
+        {
+            result = result.Where(r => subjects.Contains(r.Subject)).ToList();
+        }
 
         return result;
     }
@@ -463,12 +523,21 @@ internal class ThirdPartySecurityDao : SecurityBaseDao<string>, ISecurityDao<str
             }
         }
     }
-}
-
+} 
 internal class SecurityTreeRecord
 {
-    public DbFilesSecurity DbFilesSecurity { get; init; }
-    public DbFolderTree DbFolderTree { get; init; }
+    public int TenantId { get; set; }
+    public string EntryId { get; set; }
+    public FileEntryType EntryType { get; set; }
+    public SubjectType SubjectType { get; set; }
+    public Guid Subject { get; set; }
+    public Guid Owner { get; set; }
+    public FileShare Share { get; set; }
+    public DateTime TimeStamp { get; set; }
+    public string Options { get; set; }
+    public int FolderId { get; set; }
+    public int ParentId { get; set; }
+    public int Level { get; set; }
 }
 
 static file class Queries

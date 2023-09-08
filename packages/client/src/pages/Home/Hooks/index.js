@@ -5,3 +5,4 @@ export { default as useAccounts } from "./useAccounts";
 export { default as useSettings } from "./useSettings";
 export { default as useDashboard } from "./useDashboard";
 export { default as useRole } from "./useRole";
+export { default as usePublic } from "./usePublic";

@@ -6,13 +6,18 @@ import Button from "@docspace/components/button";
 import ModalDialog from "@docspace/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { RoomsType } from "@docspace/common/constants";
 
 const StyledModal = styled(ModalDialogContainer)`
   max-width: 400px;
 
   .cancel-btn {
     display: inline-block;
-    margin-left: 8px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 8px;`
+        : `margin-left: 8px;`}
   }
 `;
 
@@ -26,6 +31,7 @@ const RestoreRoomDialogComponent = (props) => {
     setRestoreAllArchive,
     setArchiveAction,
     items,
+    hasPublicRoom,
   } = props;
 
   useEffect(() => {
@@ -57,6 +63,12 @@ const RestoreRoomDialogComponent = (props) => {
   };
 
   const getDescription = () => {
+    if (hasPublicRoom) {
+      return items.length > 1
+        ? t("Files:WantToRestoreTheRooms")
+        : t("Files:WantToRestoreTheRoom");
+    }
+
     if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
 
     return items.length > 1
@@ -122,7 +134,10 @@ export default inject(
       ? selection
       : bufferSelection
       ? [bufferSelection]
-      : [{ id: selectedFolderStore.id }];
+      : [selectedFolderStore];
+
+    const hasPublicRoom =
+      items.findIndex((i) => i.roomType === RoomsType.PublicRoom) !== -1;
 
     return {
       visible,
@@ -131,6 +146,7 @@ export default inject(
       setRestoreAllArchive,
       setArchiveAction,
       items,
+      hasPublicRoom,
     };
   }
 )(observer(RestoreRoomDialog));

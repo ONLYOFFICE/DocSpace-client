@@ -1,5 +1,5 @@
 %files
-%attr(744, root, root) %{_bindir}/*
+%attr(744, root, root) %{_bindir}/%{product}-configuration
 
 %files api
 %defattr(-, onlyoffice, onlyoffice, -)
@@ -38,6 +38,7 @@
 %dir %{_sysconfdir}/onlyoffice/
 %dir %{_sysconfdir}/onlyoffice/%{product}/
 %dir %{_sysconfdir}/onlyoffice/%{product}/.private/
+%dir %{_var}/www/onlyoffice/Data
 %dir %{_var}/log/onlyoffice/
 
 %files files-services
@@ -74,6 +75,11 @@
 %defattr(-, onlyoffice, onlyoffice, -)
 %config %{_sysconfdir}/nginx/includes/*
 %config %{_sysconfdir}/nginx/conf.d/*
+%attr(744, root, root) %{_bindir}/%{product}-ssl-setup
+%config %{_sysconfdir}/onlyoffice/%{product}/nginx/nginx.conf.template
+%dir %{_sysconfdir}/onlyoffice/
+%dir %{_sysconfdir}/onlyoffice/%{product}/
+%dir %{_sysconfdir}/onlyoffice/%{product}/nginx/
 %{buildpath}/public/
 %{buildpath}/client/
 

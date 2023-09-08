@@ -17,7 +17,7 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import moment from "moment";
 
-import { LANGUAGE } from "../constants";
+import { LANGUAGE, ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
 import TopLoaderService from "@docspace/components/top-loading-indicator";
@@ -79,11 +79,16 @@ export function getObjectByLocation(location) {
     .replace(/\\\\"\]/g, '"]')
     .replace(/"\[/g, "[")
     .replace(/\]"/g, "]")
-    .replace(/\\\\",\\\\"/g, '","');
+    .replace(/\\\\",\\\\"/g, '","')
+    .replace(/\\\\\\\\"/g, '\\"');
 
-  const object = JSON.parse(`{"${decodedString}"}`);
+  try {
+    const object = JSON.parse(`{"${decodedString}"}`);
 
-  return object;
+    return object;
+  } catch (e) {
+    return {};
+  }
 }
 
 export function changeLanguage(i18n, currentLng = getCookie(LANGUAGE)) {
@@ -280,8 +285,12 @@ export function getProviderTranslation(provider, t, linked = false) {
       return t("Common:SignInWithTwitter");
     case "linkedin":
       return t("Common:SignInWithLinkedIn");
+    case "microsoft":
+      return t("Common:SignInWithMicrosoft");
     case "sso":
       return t("Common:SignInWithSso");
+    case "zoom":
+      return t("Common:SignInWithZoom");
   }
 }
 
@@ -304,6 +313,33 @@ export function getLanguage(lng) {
 
   return lng;
 }
+
+export const isLanguageRtl = (lng: string) => {
+  if (!lng) return;
+
+  const splittedLng = lng.split("-");
+  return RtlLanguages.includes(splittedLng[0]);
+};
+
+// temporary function needed to replace rtl language in Editor to ltr
+export const getLtrLanguageForEditor = (
+  userLng: string,
+  portalLng: string,
+  isEditor: boolean = false
+): string => {
+  let isEditorPath;
+  if (typeof window !== "undefined") {
+    isEditorPath = window?.location.pathname.indexOf("doceditor") !== -1;
+  }
+  const isUserLngRtl = isLanguageRtl(userLng);
+  const isPortalLngRtl = isLanguageRtl(portalLng);
+
+  if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
+    return userLng;
+  if (portalLng && !isPortalLngRtl) return portalLng;
+
+  return "en";
+};
 
 export function loadScript(url, id, onLoad, onError) {
   try {
@@ -432,6 +468,16 @@ export const frameCallbackData = (methodReturnData: any) => {
   );
 };
 
+export const frameCallEvent = (eventReturnData: any) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onEventReturn",
+      eventReturnData,
+    }),
+    "*"
+  );
+};
+
 export const frameCallCommand = (commandName: string, commandData: any) => {
   window.parent.postMessage(
     JSON.stringify({
@@ -521,10 +567,11 @@ export const getLogoFromPath = (path) => {
   return path;
 };
 
+export const getDaysLeft = (date) => {
+  return moment(date).startOf("day").diff(moment().startOf("day"), "days");
+};
 export const getDaysRemaining = (autoDelete) => {
-  let daysRemaining = moment(autoDelete)
-    .startOf("day")
-    .diff(moment().startOf("day"), "days");
+  let daysRemaining = getDaysLeft(autoDelete);
 
   if (daysRemaining <= 0) return "<1";
   return "" + daysRemaining;
@@ -558,4 +605,31 @@ export const getId = (item: {
   if (isDashboard) return `board_${id}`;
 
   return `file_${id}`;
+};
+export const getFileExtension = (fileTitle: string) => {
+  if (!fileTitle) {
+    return "";
+  }
+  fileTitle = fileTitle.trim();
+  const posExt = fileTitle.lastIndexOf(".");
+  return 0 <= posExt ? fileTitle.substring(posExt).trim().toLowerCase() : "";
+};
+
+export const getSystemTheme = () => {
+  const isDesktopClient = window["AscDesktopEditor"] !== undefined;
+  const desktopClientTheme = window?.RendererProcessVariable?.theme;
+  const isDark =
+    desktopClientTheme?.id === "theme-dark" ||
+    desktopClientTheme?.id === "theme-contrast-dark" ||
+    (desktopClientTheme?.id === "theme-system" &&
+      desktopClientTheme?.system === "dark");
+
+  return isDesktopClient
+    ? isDark
+      ? ThemeKeys.DarkStr
+      : ThemeKeys.BaseStr
+    : window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? ThemeKeys.DarkStr
+    : ThemeKeys.BaseStr;
 };

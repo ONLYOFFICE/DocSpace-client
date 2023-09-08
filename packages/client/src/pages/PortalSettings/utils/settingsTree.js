@@ -7,7 +7,7 @@ import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?u
 import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
 import TrashIconUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
-
+import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 /**
  * Array for generation current settings tree.
  */
@@ -154,15 +154,22 @@ export const settingsTree = [
             tKey: "IPSecurity",
           },
           {
-            id: "portal-settings_catalog-admin-message",
+            id: "portal-settings_catalog-brute-force-protection",
             key: "1-0-4",
+            icon: "",
+            link: "brute-force-protection",
+            tKey: "BruteForceProtection",
+          },
+          {
+            id: "portal-settings_catalog-admin-message",
+            key: "1-0-5",
             icon: "",
             link: "admin-message",
             tKey: "AdminsMessage",
           },
           {
             id: "portal-settings_catalog-session-life-time",
-            key: "1-0-5",
+            key: "1-0-6",
             icon: "",
             link: "lifetime",
             tKey: "SessionLifetime",
@@ -278,6 +285,14 @@ export const settingsTree = [
         tKey: "Plugins",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-smtp-settings",
+        key: "4-3",
+        icon: "",
+        link: "smtp-settings",
+        tKey: "SMTPSettings",
+        isCategory: true,
+      },
     ],
   },
   {
@@ -289,8 +304,16 @@ export const settingsTree = [
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-javascript-sdk",
+        id: "portal-settings_catalog-api",
         key: "5-0",
+        icon: "",
+        link: "api",
+        tKey: "Api",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-javascript-sdk",
+        key: "5-1",
         icon: "",
         link: "javascript-sdk",
         tKey: "DeveloperTools",
@@ -298,7 +321,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "5-1",
+        key: "5-2",
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",
@@ -344,6 +367,24 @@ export const settingsTree = [
         icon: "",
         link: "portal-payments",
         tKey: "Common:PaymentsTitle",
+        isCategory: true,
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-bonus",
+    key: "8",
+    icon: GiftReactSvgUrl,
+    link: "bonus",
+    tKey: "Common:Bonus",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-portal-bonus",
+        key: "8-0",
+        icon: "",
+        link: "",
+        tKey: "Common:FreeProFeatures",
         isCategory: true,
       },
     ],

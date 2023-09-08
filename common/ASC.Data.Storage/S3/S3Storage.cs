@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using Amazon.Extensions.S3.Encryption;
-using Amazon.Extensions.S3.Encryption.Primitives;
-using Amazon.S3.Internal;
-
 namespace ASC.Data.Storage.S3;
 
 [Scope]
 public class S3Storage : BaseStorage
 {
+    public override bool IsSupportCdnUri => true;
+    public static long ChunkSize { get; } = 50 * 1024 * 1024;
     public override bool IsSupportChunking => true;
 
     private readonly List<string> _domains = new List<string>();
@@ -41,6 +39,7 @@ public class S3Storage : BaseStorage
     private string _accessKeyId = string.Empty;
     private string _bucket = string.Empty;
     private string _recycleDir = string.Empty;
+    private bool _recycleUse;
     private Uri _bucketRoot;
     private Uri _bucketSSlRoot;
     private string _region = "";
@@ -50,13 +49,15 @@ public class S3Storage : BaseStorage
     private readonly ServerSideEncryptionMethod _sse = ServerSideEncryptionMethod.AES256;
     private bool _useHttp = true;
     private bool _lowerCasing = true;
-    private bool _revalidateCloudFront;
-    private string _distributionId = "";
+    private bool _cdnEnabled;
+    private string _cdnKeyPairId;
+    private string _cdnPrivateKeyPath;
+    public string CdnDistributionDomain { get; private set; }
     private string _subDir = "";
 
     private EncryptionMethod _encryptionMethod = EncryptionMethod.None;
     private string _encryptionKey;
-    private readonly IConfiguration _configuration;
+    private readonly CoreBaseSettings _coreBaseSettings;
 
     public S3Storage(
         TempStream tempStream,
@@ -67,12 +68,12 @@ public class S3Storage : BaseStorage
         ILoggerProvider factory,
         ILogger<S3Storage> options,
         IHttpClientFactory clientFactory,
-        IConfiguration configuration,
         TenantQuotaFeatureStatHelper tenantQuotaFeatureStatHelper,
-        QuotaSocketManager quotaSocketManager)
+        QuotaSocketManager quotaSocketManager,
+        CoreBaseSettings coreBaseSettings)
         : base(tempStream, tenantManager, pathUtils, emailValidationKeyProvider, httpContextAccessor, factory, options, clientFactory, tenantQuotaFeatureStatHelper, quotaSocketManager)
     {
-        _configuration = configuration;
+        _coreBaseSettings = coreBaseSettings;
     }
 
     public Uri GetUriInternal(string path)
@@ -150,7 +151,78 @@ public class S3Storage : BaseStorage
         }
 
         using var client = GetClient();
+
         return Task.FromResult(MakeUri(client.GetPreSignedURL(pUrlRequest)));
+    }
+
+    public override Task<Uri> GetCdnPreSignedUriAsync(string domain, string path, TimeSpan expire, IEnumerable<string> headers)
+    {
+        if (!_cdnEnabled) return GetInternalUriAsync(domain, path, expire, headers);
+
+        var proto = SecureHelper.IsSecure(_httpContextAccessor?.HttpContext, _options) ? "https" : "http";
+
+        var baseUrl = $"{proto}://{CdnDistributionDomain}/{MakePath(domain, path)}";
+
+        var uriBuilder = new UriBuilder(baseUrl)
+        {
+            Port = -1
+        };
+
+        var queryParams = HttpUtility.ParseQueryString(uriBuilder.Query);
+
+        if (headers != null && headers.Any())
+        {
+            foreach (var h in headers)
+            {
+                if (h.StartsWith("Content-Disposition"))
+                {
+                    queryParams["response-content-disposition"] = h.Substring("Content-Disposition".Length + 1);
+                }
+                else if (h.StartsWith("Cache-Control"))
+                {
+                    queryParams["response-cache-control"] = h.Substring("Cache-Control".Length + 1);
+                }
+                else if (h.StartsWith("Content-Encoding"))
+                {
+                    queryParams["response-content-encoding"] = h.Substring("Content-Encoding".Length + 1);
+                }
+                else if (h.StartsWith("Content-Language"))
+                {
+                    queryParams["response-content-language"] = h.Substring("Content-Language".Length + 1);
+                }
+                else if (h.StartsWith("Content-Type"))
+                {
+                    queryParams["response-content-type"] = h.Substring("Content-Type".Length + 1);
+                }
+                else if (h.StartsWith("Expires"))
+                {
+                    queryParams["response-expires"] = h.Substring("Expires".Length + 1);
+                }
+                else if (h.StartsWith("Custom-Cache-Key"))
+                {
+                    queryParams["custom-cache-key"] = h.Substring("Custom-Cache-Key".Length + 1);
+                }
+                else
+                {
+                    throw new FormatException(string.Format("Invalid header: {0}", h));
+                }
+            }
+        }
+
+        uriBuilder.Query = queryParams.ToString();
+
+        var signedUrl = "";
+
+        using (TextReader textReader = File.OpenText(_cdnPrivateKeyPath))
+        {
+            signedUrl = AmazonCloudFrontUrlSigner.GetCannedSignedURL(
+                      uriBuilder.ToString(),
+                      textReader,
+                      _cdnKeyPairId,
+                      DateTime.UtcNow.Add(expire));
+        }
+
+        return Task.FromResult(new Uri(signedUrl));
     }
 
     public override Task<Stream> GetReadStreamAsync(string domain, string path)
@@ -222,12 +294,7 @@ public class S3Storage : BaseStorage
             ContentType = mime,
             ServerSideEncryptionMethod = _sse,
             InputStream = buffered,
-            AutoCloseStream = false,
-            Headers =
-                {
-                    CacheControl = string.Format("public, maxage={0}", (int)TimeSpan.FromDays(cacheDays).TotalSeconds),
-                    ExpiresUtc = DateTime.UtcNow.Add(TimeSpan.FromDays(cacheDays))
-                }
+            AutoCloseStream = false
         };
 
         if (!(client is IAmazonS3Encryption))
@@ -264,7 +331,7 @@ public class S3Storage : BaseStorage
 
         await uploader.UploadAsync(request);
 
-        await InvalidateCloudFrontAsync(MakePath(domain, path));
+        //await InvalidateCloudFrontAsync(MakePath(domain, path));
 
         await QuotaUsedAddAsync(domain, buffered.Length);
 
@@ -353,7 +420,7 @@ public class S3Storage : BaseStorage
             using (var s3 = GetClient())
             {
                 await s3.CompleteMultipartUploadAsync(request);
-                await InvalidateCloudFrontAsync(MakePath(domain, path));
+                //    await InvalidateCloudFrontAsync(MakePath(domain, path));
             }
 
             if (QuotaController != null)
@@ -391,9 +458,28 @@ public class S3Storage : BaseStorage
     }
 
     public override IDataWriteOperator CreateDataWriteOperator(CommonChunkedUploadSession chunkedUploadSession,
-            CommonChunkedUploadSessionHolder sessionHolder)
+            CommonChunkedUploadSessionHolder sessionHolder, bool isConsumerStorage = false)
     {
-        return new S3ZipWriteOperator(_tempStream, chunkedUploadSession, sessionHolder);
+        if (_coreBaseSettings.Standalone || isConsumerStorage)
+        {
+            return new S3ZipWriteOperator(_tempStream, chunkedUploadSession, sessionHolder);
+        }
+        else
+        {
+            return new S3TarWriteOperator(chunkedUploadSession, sessionHolder);
+        }
+    }
+
+    public override string GetBackupExtension(bool isConsumerStorage = false)
+    {
+        if (_coreBaseSettings.Standalone || isConsumerStorage)
+        {
+            return "tar.gz";
+        }
+        else
+        {
+            return "tar";
+        }
     }
 
     #endregion
@@ -495,7 +581,14 @@ public class S3Storage : BaseStorage
 
             await client.DeleteObjectAsync(deleteRequest);
 
+            if (QuotaController != null)
+            {
+                if (string.IsNullOrEmpty(QuotaController.ExcludePattern) ||
+                    !Path.GetFileName(s3Object.Key).StartsWith(QuotaController.ExcludePattern))
+                {
             await QuotaUsedDeleteAsync(domain, s3Object.Size);
+        }
+    }
         }
     }
 
@@ -907,6 +1000,11 @@ public class S3Storage : BaseStorage
 
         props.TryGetValue("recycleDir", out _recycleDir);
 
+        if (props.TryGetValue("recycleUse", out var recycleUseProp) && bool.TryParse(recycleUseProp, out var recycleUse))
+        {
+            _recycleUse = recycleUse;
+        }
+
         if (props.TryGetValue("region", out var region) && !string.IsNullOrEmpty(region))
         {
             _region = region;
@@ -962,12 +1060,17 @@ public class S3Storage : BaseStorage
         {
             bool.TryParse(lower, out _lowerCasing);
         }
-        if (props.TryGetValue("cloudfront", out var front))
+
+        if (props.TryGetValue("cdn_enabled", out var cdnEnabled))
         {
-            bool.TryParse(front, out _revalidateCloudFront);
+            if (bool.TryParse(cdnEnabled, out _cdnEnabled))
+            {
+                _cdnKeyPairId = props["cdn_keyPairId"];
+                _cdnPrivateKeyPath = props["cdn_privateKeyPath"];
+                CdnDistributionDomain = props["cdn_distributionDomain"];
+        }
         }
 
-        props.TryGetValue("distribution", out _distributionId);
         props.TryGetValue("subdir", out _subDir);
 
         return this;
@@ -1022,7 +1125,7 @@ public class S3Storage : BaseStorage
 
     private async ValueTask InvalidateCloudFrontAsync(params string[] paths)
     {
-        if (!_revalidateCloudFront || string.IsNullOrEmpty(_distributionId))
+        if (!_cdnEnabled || string.IsNullOrEmpty(CdnDistributionDomain))
         {
             return;
         }
@@ -1030,7 +1133,7 @@ public class S3Storage : BaseStorage
         using var cfClient = GetCloudFrontClient();
         var invalidationRequest = new CreateInvalidationRequest
         {
-            DistributionId = _distributionId,
+            DistributionId = CdnDistributionDomain,
             InvalidationBatch = new InvalidationBatch
             {
                 CallerReference = Guid.NewGuid().ToString(),
@@ -1131,7 +1234,7 @@ public class S3Storage : BaseStorage
         return s30Objects;
     }
 
-    private string MakePath(string domain, string path)
+    public string MakePath(string domain, string path)
     {
         string result;
 
@@ -1170,7 +1273,7 @@ public class S3Storage : BaseStorage
 
     private async ValueTask RecycleAsync(IAmazonS3 client, string domain, string key)
     {
-        if (string.IsNullOrEmpty(_recycleDir))
+        if (string.IsNullOrEmpty(_recycleDir) || string.IsNullOrEmpty(domain) || domain.EndsWith("_temp") || !_recycleUse)
         {
             return;
         }
@@ -1189,7 +1292,7 @@ public class S3Storage : BaseStorage
         var metadataResponse = await client.GetObjectMetadataAsync(metadataRequest);
         var objectSize = metadataResponse.ContentLength;
 
-        if (objectSize >= 100 * 1024 * 1024L) //100 megabytes
+        if (objectSize >= 1000 * 1024 * 1024L) //1000 megabytes
         {
             var copyResponses = new List<CopyPartResponse>();
 
@@ -1217,7 +1320,9 @@ public class S3Storage : BaseStorage
 
             var uploadId = initResponse.UploadId;
 
-            var partSize = GetChunkSize();
+            var partSize = ChunkSize;
+
+            var uploadTasks = new List<Task<CopyPartResponse>>();
 
             long bytePosition = 0;
             for (var i = 1; bytePosition < objectSize; i++)
@@ -1234,10 +1339,12 @@ public class S3Storage : BaseStorage
                     PartNumber = i
                 };
 
-                copyResponses.Add(await client.CopyPartAsync(copyRequest));
+                uploadTasks.Add(client.CopyPartAsync(copyRequest));
 
                 bytePosition += partSize;
             }
+
+            copyResponses.AddRange(await Task.WhenAll(uploadTasks));
 
             var completeRequest =
                 new CompleteMultipartUploadRequest
@@ -1248,7 +1355,7 @@ public class S3Storage : BaseStorage
                 };
             completeRequest.AddPartETags(copyResponses);
 
-            var completeUploadResponse = await client.CompleteMultipartUploadAsync(completeRequest);
+            await client.CompleteMultipartUploadAsync(completeRequest);
         }
         else
         {
@@ -1275,6 +1382,260 @@ public class S3Storage : BaseStorage
             }
 
             await client.CopyObjectAsync(request);
+        }
+    }
+
+    public async Task ConcatFileStreamAsync(Stream stream, string tarKey, string destinationDomain, string destinationKey)
+    {
+        (var uploadId, var eTags, var partNumber) = await InitiateConcatAsync(destinationDomain, destinationKey);
+
+        using var s3 = GetClient();
+        var destinationPath = MakePath(destinationDomain, destinationKey);
+
+        var blockSize = 512;
+
+        long prevFileSize = 0;
+        try
+        {
+            var objResult = await s3.GetObjectMetadataAsync(_bucket, destinationPath);
+            prevFileSize = objResult.ContentLength;
+        }
+        catch { }
+
+        var header = BuilderHeaders.CreateHeader(tarKey, stream.Length);
+
+        var ms = new MemoryStream();
+        if (prevFileSize % blockSize != 0)
+        {
+            var endBlock = new byte[blockSize - prevFileSize % blockSize];
+            ms.Write(endBlock);
+        }
+        ms.Write(header);
+
+        stream.Position = 0;
+        stream.CopyTo(ms);
+        stream.Dispose();
+
+        stream = ms;
+        stream.Position = 0;
+
+        prevFileSize = stream.Length;
+
+        var uploadRequest = new UploadPartRequest
+        {
+            BucketName = _bucket,
+            Key = destinationPath,
+            UploadId = uploadId,
+            PartNumber = partNumber,
+            InputStream = stream
+        };
+        eTags.Add(new PartETag(partNumber, (await s3.UploadPartAsync(uploadRequest)).ETag));
+
+        var completeRequest = new CompleteMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = destinationPath,
+            UploadId = uploadId,
+            PartETags = eTags
+        };
+        await s3.CompleteMultipartUploadAsync(completeRequest);
+    }
+
+    public async Task ConcatFileAsync(string pathFile, string tarKey, string destinationDomain, string destinationKey)
+    {
+        (var uploadId, var eTags, var partNumber) = await InitiateConcatAsync(destinationDomain, destinationKey);
+        using var s3 = GetClient();
+        var destinationPath = MakePath(destinationDomain, destinationKey);
+
+        var blockSize = 512;
+
+        long prevFileSize = 0;
+        try
+        {
+            var objResult = await s3.GetObjectMetadataAsync(_bucket, destinationPath);
+            prevFileSize = objResult.ContentLength;
+        }
+        catch{}
+
+        var objFile = await s3.GetObjectMetadataAsync(_bucket, pathFile);
+        var header = BuilderHeaders.CreateHeader(tarKey, objFile.ContentLength);
+
+        using var stream = new MemoryStream();
+        if (prevFileSize % blockSize != 0)
+        {
+            var endBlock = new byte[blockSize - prevFileSize % blockSize];
+            stream.Write(endBlock);
+        }
+        stream.Write(header);
+        stream.Position = 0;
+
+        prevFileSize = objFile.ContentLength;
+
+        var uploadRequest = new UploadPartRequest
+        {
+            BucketName = _bucket,
+            Key = destinationPath,
+            UploadId = uploadId,
+            PartNumber = partNumber,
+            InputStream = stream
+        };
+        eTags.Add(new PartETag(partNumber, (await s3.UploadPartAsync(uploadRequest)).ETag));
+
+        var completeRequest = new CompleteMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = destinationPath,
+            UploadId = uploadId,
+            PartETags = eTags
+        };
+        var completeUploadResponse = await s3.CompleteMultipartUploadAsync(completeRequest);
+
+        /*******/
+        (uploadId, eTags, partNumber) = await InitiateConcatAsync(destinationDomain, destinationKey);
+
+        var copyRequest = new CopyPartRequest
+        {
+            DestinationBucket = _bucket,
+            DestinationKey = destinationPath,
+            SourceBucket = _bucket,
+            SourceKey = pathFile,
+            UploadId = uploadId,
+            PartNumber = partNumber
+        };
+        eTags.Add(new PartETag(partNumber, (await s3.CopyPartAsync(copyRequest)).ETag));
+
+        completeRequest = new CompleteMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = destinationPath,
+            UploadId = uploadId,
+            PartETags = eTags
+        };
+        completeUploadResponse = await s3.CompleteMultipartUploadAsync(completeRequest);
+    }
+
+    public async Task AddEndAsync(string domain, string key)
+    {
+        using var s3 = GetClient();
+        var path = MakePath(domain, key);
+        var blockSize = 512;
+
+        (var uploadId, var eTags, var partNumber) = await InitiateConcatAsync(domain, key);
+
+        var obj = await s3.GetObjectMetadataAsync(_bucket, path);
+
+        var buffer = new byte[blockSize - obj.ContentLength % blockSize + blockSize * 2];
+        var stream = new MemoryStream();
+        stream.Write(buffer);
+        stream.Position = 0;
+
+        var uploadRequest = new UploadPartRequest
+        {
+            BucketName = _bucket,
+            Key = path,
+            UploadId = uploadId,
+            PartNumber = partNumber,
+            InputStream = stream
+        };
+        eTags.Add(new PartETag(partNumber, (await s3.UploadPartAsync(uploadRequest)).ETag));
+
+        var completeRequest = new CompleteMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = path,
+            UploadId = uploadId,
+            PartETags = eTags
+        };
+
+        await s3.CompleteMultipartUploadAsync(completeRequest);
+    }
+
+    public async Task RemoveFirstBlockAsync(string domain, string key)
+    {
+        using var s3 = GetClient();
+        var path = MakePath(domain, key);
+
+        (var uploadId, var eTags, var partNumber) = await InitiateConcatAsync(domain, key, true, true);
+        var completeRequest = new CompleteMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = path,
+            UploadId = uploadId,
+            PartETags = eTags
+        };
+
+        await s3.CompleteMultipartUploadAsync(completeRequest);
+    }
+
+    public async Task<(string uploadId, List<PartETag> eTags, int partNumber)> InitiateConcatAsync(string domain, string key, bool removeFirstBlock = false, bool lastInit = false)
+    {
+        using var s3 = GetClient();
+
+        key = MakePath(domain, key);
+
+        var initiateRequest = new InitiateMultipartUploadRequest
+        {
+            BucketName = _bucket,
+            Key = key
+        };
+        var initResponse = await s3.InitiateMultipartUploadAsync(initiateRequest);
+
+        var eTags = new List<PartETag>();
+        try
+        {
+            var mb5 = 5 * 1024 * 1024;
+            long bytePosition = removeFirstBlock ? mb5 : 0;
+
+            var obj = await s3.GetObjectMetadataAsync(_bucket, key);
+            var objectSize = obj.ContentLength;
+
+            var partSize = ChunkSize;
+            var partNumber = 1;
+            for (var i = 1; bytePosition < objectSize; i++)
+            {
+                var copyRequest = new CopyPartRequest
+                {
+                    DestinationBucket = _bucket,
+                    DestinationKey = key,
+                    SourceBucket = _bucket,
+                    SourceKey = key,
+                    UploadId = initResponse.UploadId,
+                    FirstByte = bytePosition,
+                    LastByte = bytePosition + partSize - 1 >= objectSize ? objectSize - 1 : bytePosition + partSize - 1,
+                    PartNumber = i
+                };
+                partNumber = i + 1;
+                bytePosition += partSize;
+
+                var x = objectSize - bytePosition;
+                if (!lastInit && x < mb5 && x > 0)
+                {
+                    copyRequest.LastByte = objectSize - 1;
+                    bytePosition += partSize;
+                }
+                eTags.Add(new PartETag(i, (await s3.CopyPartAsync(copyRequest)).ETag));
+
+            }
+            return (initResponse.UploadId, eTags, partNumber);
+        }
+        catch
+        {
+            using var stream = new MemoryStream();
+            var buffer = new byte[5 * 1024 * 1024];
+            stream.Write(buffer);
+            stream.Position = 0;
+
+            var uploadRequest = new UploadPartRequest
+            {
+                BucketName = _bucket,
+                Key = key,
+                UploadId = initResponse.UploadId,
+                PartNumber = 1,
+                InputStream = stream
+            };
+            eTags.Add(new PartETag(1, (await s3.UploadPartAsync(uploadRequest)).ETag));
+
+            return (initResponse.UploadId, eTags, 2);
         }
     }
 
@@ -1454,18 +1815,6 @@ public class S3Storage : BaseStorage
         var el = await client.GetObjectMetadataAsync(getObjectMetadataRequest);
 
         return el.ETag;
-    }
-
-    private long GetChunkSize()
-    {
-        var configSetting = _configuration["files:uploader:chunk-size"];
-        if (!string.IsNullOrEmpty(configSetting))
-        {
-            configSetting = configSetting.Trim();
-            return long.Parse(configSetting);
-        }
-        long defaultValue = 10 * 1024 * 1024;
-        return defaultValue;
     }
 
     private enum EncryptionMethod

@@ -2,6 +2,8 @@ import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url
 import ShareFacebookReactSvgUrl from "PUBLIC_DIR/images/share.facebook.react.svg?url";
 import ShareTwitterReactSvgUrl from "PUBLIC_DIR/images/share.twitter.react.svg?url";
 import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
+import ShareMicrosoftReactSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
+import ShareZoomReactSvgUrl from "PUBLIC_DIR/images/share.zoom.react.svg?url";
 
 export const LANGUAGE = "asc_language";
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
@@ -132,6 +134,7 @@ export const RoomsType = Object.freeze({
   EditingRoom: 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
+  PublicRoom: 6,
   CustomRoom: 5,
 });
 
@@ -147,6 +150,7 @@ export const RoomsTypeTranslations = Object.freeze({
   3: "Common:Review",
   4: "Files:ViewOnlyRooms",
   5: "Files:CustomRooms",
+  6: "Files:PublicRoom",
 });
 /**
  * Enum for room provider type.
@@ -265,6 +269,14 @@ export const providersData = Object.freeze({
   linkedin: {
     label: "linkedin",
     icon: ShareLinkedinReactSvgUrl,
+  },
+  microsoft: {
+    label: "microsoft",
+    icon: ShareMicrosoftReactSvgUrl,
+  },
+  zoom: {
+    label: "zoom",
+    icon: ShareZoomReactSvgUrl,
   },
 });
 export const LoaderStyle = {
@@ -465,3 +477,18 @@ export const FilterSelectorTypes = Object.freeze({
   people: "people-selector",
   rooms: "rooms-selector",
 });
+
+export const RtlLanguages = [
+  "ar",
+  "arc",
+  "dv",
+  "fa",
+  "ha",
+  "he",
+  "khw",
+  "ks",
+  "ku",
+  "ps",
+  "ur",
+  "yi",
+];

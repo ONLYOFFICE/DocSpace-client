@@ -64,6 +64,7 @@ const Body = ({
   descriptionText,
   blockNode,
   dataInPreparation,
+  withHeader,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -132,6 +133,7 @@ const Body = ({
       }
       headerHeight={HEADER_HEIGHT}
       footerVisible={footerVisible}
+      withHeader={withHeader}
     >
       {blockNode}
 

@@ -173,7 +173,7 @@ export default inject(
     };
   }
 )(
-  withTranslation(["Files", "InfoPanel"])(
+  withTranslation(["Files", "InfoPanel", "Notifications"])(
     withFileActions(withBadges(withQuickButtons(observer(FileTile))))
   )
 );

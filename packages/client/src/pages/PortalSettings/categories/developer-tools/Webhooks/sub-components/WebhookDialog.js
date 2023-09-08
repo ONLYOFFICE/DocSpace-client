@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import { LabledInput } from "./LabledInput";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
@@ -24,7 +24,14 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    margin-right: 10px;
+    ${props =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 10px;
+          `
+        : css`
+            margin-right: 10px;
+          `}
   }
 `;
 
@@ -37,9 +44,17 @@ function validateUrl(url) {
   return true;
 }
 
+
 const WebhookDialog = (props) => {
-  const { visible, onClose, header, isSettingsModal, onSubmit, webhook } =
-    props;
+  const {
+    visible,
+    onClose,
+    header,
+    isSettingsModal,
+    onSubmit,
+    webhook,
+    additionalId,
+  } = props;
 
   const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
 
@@ -70,14 +85,14 @@ const WebhookDialog = (props) => {
     isSettingsModal && setIsResetVisible(true);
   };
 
-  const onInputChange = (e) => {
+  const onInputChange = e => {
     if (e.target.name) {
       !isValid[e.target.name] &&
-        setIsValid((prevIsValid) => ({
+        setIsValid(prevIsValid => ({
           ...prevIsValid,
           [e.target.name]: true,
         }));
-      setWebhookInfo((prevWebhookInfo) => ({
+      setWebhookInfo(prevWebhookInfo => ({
         ...prevWebhookInfo,
         [e.target.name]: e.target.value,
       }));
@@ -97,7 +112,7 @@ const WebhookDialog = (props) => {
     }
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = e => {
     e.preventDefault();
     onSubmit(webhookInfo);
     setWebhookInfo({
@@ -107,7 +122,7 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: true,
     });
-    setPasswordInputKey((prevKey) => prevKey + 1);
+    setPasswordInputKey(prevKey => prevKey + 1);
     onModalClose();
   };
 
@@ -129,7 +144,7 @@ const WebhookDialog = (props) => {
     });
   }, [webhook]);
 
-  const onKeyPress = (e) =>
+  const onKeyPress = e =>
     (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
@@ -137,14 +152,13 @@ const WebhookDialog = (props) => {
       withFooterBorder
       visible={visible}
       onClose={onModalClose}
-      displayType="aside"
-    >
+      displayType="aside">
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
           {!isSettingsModal && <Hint>{t("WebhookCreationHint")}</Hint>}
           <LabledInput
-            id="webhook-name-input"
+            id={additionalId + "-name-input"}
             label={t("WebhookName")}
             placeholder={t("EnterWebhookName")}
             name="name"
@@ -155,7 +169,7 @@ const WebhookDialog = (props) => {
             required
           />
           <LabledInput
-            id="payload-url-input"
+            id={additionalId + "-payload-url-input"}
             label={t("PayloadUrl")}
             placeholder={t("EnterUrl")}
             name="uri"
@@ -174,6 +188,7 @@ const WebhookDialog = (props) => {
             setIsPasswordValid={setIsPasswordValid}
             setIsResetVisible={setIsResetVisible}
             passwordInputKey={passwordInputKey}
+            additionalId={additionalId}
           />
 
           <button type="submit" ref={submitButtonRef} hidden></button>

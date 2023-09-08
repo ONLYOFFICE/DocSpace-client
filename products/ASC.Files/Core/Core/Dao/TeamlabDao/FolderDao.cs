@@ -206,59 +206,43 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         }
     }
 
-    public async IAsyncEnumerable<Folder<int>> GetFoldersAsync(int parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText, bool withSubfolders = false, bool excludeSubject = false)
+    public async Task<int> GetFoldersCountAsync(int parentId, FilterType filterType, bool subjectGroup, Guid subjectId, string searchText,
+        bool withSubfolders = false, bool excludeSubject = false)
     {
         if (CheckInvalidFilter(filterType))
+        {
+            return 0;
+        }
+
+        await using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        if (filterType == FilterType.None && subjectId == default && string.IsNullOrEmpty(searchText) && !withSubfolders && !excludeSubject)
+        {
+            return await filesDbContext.Tree.CountAsync(r => r.ParentId == parentId && r.Level == 1);
+        }
+
+        var q = await GetFoldersQueryWithFilters(parentId, null, subjectGroup, subjectId, searchText, withSubfolders, excludeSubject, filesDbContext);
+
+        return await q.CountAsync();
+    }
+
+    public async IAsyncEnumerable<Folder<int>> GetFoldersAsync(int parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText, bool withSubfolders = false,
+        bool excludeSubject = false, int offset = 0, int count = -1)
+    {
+        if (CheckInvalidFilter(filterType) || count == 0)
         {
             yield break;
         }
 
-        orderBy ??= new OrderBy(SortedByType.DateAndTime, false);
+        var filesDbContext = _dbContextFactory.CreateDbContext();
 
-        await using var filesDbContext = _dbContextFactory.CreateDbContext();
-        var q = GetFolderQuery(filesDbContext, r => r.ParentId == parentId).AsNoTracking();
+        var q = await GetFoldersQueryWithFilters(parentId, orderBy, subjectGroup, subjectID, searchText, withSubfolders, excludeSubject, filesDbContext);
 
-        if (withSubfolders)
+        q = q.Skip(offset);
+
+        if (count > 0)
         {
-            q = GetFolderQuery(filesDbContext).AsNoTracking()
-                .Join(filesDbContext.Tree, r => r.Id, a => a.FolderId, (folder, tree) => new { folder, tree })
-                .Where(r => r.tree.ParentId == parentId && r.tree.Level != 0)
-                .Select(r => r.folder);
-        }
-
-        if (!string.IsNullOrEmpty(searchText))
-        {
-            (var succ, var searchIds) = await _factoryIndexer.TrySelectIdsAsync(s => s.MatchAll(searchText));
-            if (succ)
-            {
-                q = q.Where(r => searchIds.Contains(r.Id));
-            }
-            else
-            {
-                q = BuildSearch(q, searchText, SearhTypeEnum.Any);
-            }
-        }
-
-        q = orderBy.SortedBy switch
-        {
-            SortedByType.Author => orderBy.IsAsc ? q.OrderBy(r => r.CreateBy) : q.OrderByDescending(r => r.CreateBy),
-            SortedByType.AZ => orderBy.IsAsc ? q.OrderBy(r => r.Title) : q.OrderByDescending(r => r.Title),
-            SortedByType.DateAndTime => orderBy.IsAsc ? q.OrderBy(r => r.ModifiedOn) : q.OrderByDescending(r => r.ModifiedOn),
-            SortedByType.DateAndTimeCreation => orderBy.IsAsc ? q.OrderBy(r => r.CreateOn) : q.OrderByDescending(r => r.CreateOn),
-            _ => q.OrderBy(r => r.Title),
-        };
-
-        if (subjectID != Guid.Empty)
-        {
-            if (subjectGroup)
-            {
-                var users = (await _userManager.GetUsersByGroupAsync(subjectID)).Select(u => u.Id).ToArray();
-                q = q.Where(r => users.Contains(r.CreateBy));
-            }
-            else
-            {
-                q = excludeSubject ? q.Where(r => r.CreateBy != subjectID) : q.Where(r => r.CreateBy == subjectID);
-            }
+            q = q.Take(count);
         }
 
         await foreach (var e in FromQuery(filesDbContext, q).AsAsyncEnumerable())
@@ -337,10 +321,10 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     {
         var roomTypes = new List<FolderType>
         {
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
         };
@@ -545,6 +529,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
             await Queries.DeleteBunchObjectsAsync(filesDbContext, TenantID, folderId.ToString());
 
+            await filesDbContext.SaveChangesAsync();
             await tx.CommitAsync();
             await RecalculateFoldersCountAsync(parent);
         });
@@ -597,7 +582,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
                 var subfolders = await Queries.SubfolderAsync(filesDbContext, folderId).ToDictionaryAsync(r => r.FolderId, r => r.Level);
 
-                await Queries.DeleteTreesBySubfoldersDictionaryAsync(filesDbContext, subfolders.Select(r=> r.Key));
+                await Queries.DeleteTreesBySubfoldersDictionaryAsync(filesDbContext, subfolders.Select(r => r.Key));
 
                 var toInsert = Queries.TreesOrderByLevel(filesDbContext, toFolderId);
 
@@ -711,16 +696,16 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         return moved;
     }
 
-    public async Task<IDictionary<int, string>> CanMoveOrCopyAsync<TTo>(int[] folderIds, TTo to)
+    public Task<IDictionary<int, string>> CanMoveOrCopyAsync<TTo>(int[] folderIds, TTo to)
     {
         if (to is int tId)
         {
-            return await CanMoveOrCopyAsync(folderIds, tId);
+            return CanMoveOrCopyAsync(folderIds, tId);
         }
 
         if (to is string tsId)
         {
-            return await CanMoveOrCopyAsync(folderIds, tsId);
+            return CanMoveOrCopyAsync(folderIds, tsId);
         }
 
         throw new NotImplementedException();
@@ -736,7 +721,6 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         var result = new Dictionary<int, string>();
 
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
-
         foreach (var folderId in folderIds)
         {
             var exists = await Queries.AnyTreeAsync(filesDbContext, folderId, to);
@@ -1247,14 +1231,14 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
     {
         var roomTypes = new List<FolderType>
         {
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom
         };
-        
+
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
 
         await foreach (var e in GetFeedsInternalAsync(tenant, from, to, filter, null))
@@ -1326,16 +1310,16 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
     public async IAsyncEnumerable<int> GetTenantsWithRoomsFeedsAsync(DateTime fromTime)
     {
-        var roomTypes = new List<FolderType> 
-        { 
-            FolderType.CustomRoom, 
-            FolderType.ReviewRoom, 
-            FolderType.FillingFormsRoom, 
-            FolderType.EditingRoom, 
+        var roomTypes = new List<FolderType>
+        {
+            FolderType.CustomRoom,
+            FolderType.ReviewRoom,
+            FolderType.FillingFormsRoom,
+            FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
         };
-        
+
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
 
         await foreach (var q in GetTenantsWithFeeds(fromTime, filter, true))
@@ -1557,57 +1541,81 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         return (await _globalStore.GetStoreAsync()).CreateDataWriteOperator(chunkedUploadSession, sessionHolder);
     }
 
-    private string GetProjectTitle(object folderID)
+    private async Task<IQueryable<DbFolder>> GetFoldersQueryWithFilters(int parentId, OrderBy orderBy, bool subjectGroup, Guid subjectId, string searchText, bool withSubfolders, bool excludeSubject,
+        FilesDbContext filesDbContext)
     {
-        return "";
-        //if (!ApiServer.Available)
-        //{
-        //    return string.Empty;
-        //}
+        var q = GetFolderQuery(filesDbContext, r => r.ParentId == parentId).AsNoTracking();
 
-        //var cacheKey = "documents/folders/" + folderID.ToString();
+        if (withSubfolders)
+        {
+            q = GetFolderQuery(filesDbContext).AsNoTracking()
+                .Join(filesDbContext.Tree, r => r.Id, a => a.FolderId, (folder, tree) => new { folder, tree })
+                .Where(r => r.tree.ParentId == parentId && r.tree.Level != 0)
+                .Select(r => r.folder);
+        }
 
-        //var projectTitle = Convert.ToString(cache.Get<string>(cacheKey));
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            (var succ, var searchIds) = await _factoryIndexer.TrySelectIdsAsync(s => s.MatchAll(searchText));
+            if (succ)
+            {
+                q = q.Where(r => searchIds.Contains(r.Id));
+            }
+            else
+            {
+                q = BuildSearch(q, searchText, SearhTypeEnum.Any);
+            }
+        }
 
-        //if (!string.IsNullOrEmpty(projectTitle)) return projectTitle;
+        q = orderBy == null ? q : orderBy.SortedBy switch
+        {
+            SortedByType.Author => orderBy.IsAsc ? q.OrderBy(r => r.CreateBy) : q.OrderByDescending(r => r.CreateBy),
+            SortedByType.AZ => orderBy.IsAsc ? q.OrderBy(r => r.Title) : q.OrderByDescending(r => r.Title),
+            SortedByType.DateAndTime => orderBy.IsAsc ? q.OrderBy(r => r.ModifiedOn) : q.OrderByDescending(r => r.ModifiedOn),
+            SortedByType.DateAndTimeCreation => orderBy.IsAsc ? q.OrderBy(r => r.CreateOn) : q.OrderByDescending(r => r.CreateOn),
+            _ => q.OrderBy(r => r.Title),
+        };
 
-        //var bunchObjectID = GetBunchObjectID(folderID);
+        if (subjectId != Guid.Empty)
+        {
+            if (subjectGroup)
+            {
+                var users = (await _userManager.GetUsersByGroupAsync(subjectId)).Select(u => u.Id).ToArray();
+                q = q.Where(r => users.Contains(r.CreateBy));
+            }
+            else
+            {
+                q = excludeSubject ? q.Where(r => r.CreateBy != subjectId) : q.Where(r => r.CreateBy == subjectId);
+            }
+        }
 
-        //if (string.IsNullOrEmpty(bunchObjectID))
-        //    throw new Exception("Bunch Object id is null for " + folderID);
+        return q;
+    }
 
-        //if (!bunchObjectID.StartsWith("projects/project/"))
-        //    return string.Empty;
+    private static readonly Func<FilesDbContext, IEnumerable<int>, int, IAsyncEnumerable<OriginData>> _getOriginsDataQuery =
+        Microsoft.EntityFrameworkCore.EF.CompileAsyncQuery((FilesDbContext filesDbContext, IEnumerable<int> entriesIds, int tenantId) =>
+            filesDbContext.TagLink.AsNoTracking()
+                .Where(l => l.TenantId == tenantId)
+                .Where(l => entriesIds.Contains(Convert.ToInt32(l.EntryId)))
+                .Join(filesDbContext.Tag.AsNoTracking()
+                    .Where(t => t.Type == TagType.Origin), l => l.TagId, t => t.Id, (l, t) => new { t.Name, t.Type, l.EntryType, l.EntryId })
+                .GroupBy(r => r.Name, r => new { r.EntryId, r.EntryType })
+                .Select(r => new OriginData
+                {
+                    OriginRoom = filesDbContext.Folders.AsNoTracking().FirstOrDefault(f => f.TenantId == tenantId &&
+                                                                            f.Id == filesDbContext.Tree.AsNoTracking()
+                                                                                .Where(t => t.FolderId == Convert.ToInt32(r.Key))
+                                                                                .OrderByDescending(t => t.Level)
+                                                                                .Select(t => t.ParentId)
+                                                                                .Skip(1)
+                                                                                .FirstOrDefault()),
+                    OriginFolder = filesDbContext.Folders.AsNoTracking().FirstOrDefault(f => f.TenantId == tenantId && f.Id == Convert.ToInt32(r.Key)),
+                    Entries = r.Select(e => new KeyValuePair<string, FileEntryType>(e.EntryId, e.EntryType)).ToHashSet()
+                }));
 
-        //var bunchObjectIDParts = bunchObjectID.Split('/');
-
-        //if (bunchObjectIDParts.Length < 3)
-        //    throw new Exception("Bunch object id is not supported format");
-
-        //var projectID = Convert.ToInt32(bunchObjectIDParts[bunchObjectIDParts.Length - 1]);
-
-        //if (HttpContext.Current == null || !SecurityContext.IsAuthenticated)
-        //    return string.Empty;
-
-        //var apiServer = new ApiServer();
-
-        //var apiUrl = string.Format("{0}project/{1}.json?fields=id,title", SetupInfo.WebApiBaseUrl, projectID);
-
-        //var responseApi = JObject.Parse(Encoding.UTF8.GetString(Convert.FromBase64String(apiServer.GetApiResponse(apiUrl, "GET"))))["response"];
-
-        //if (responseApi != null && responseApi.HasValues)
-        //{
-        //    projectTitle = Global.ReplaceInvalidCharsAndTruncate(responseApi["title"].Value<string>());
-        //}
-        //else
-        //{
-        //    return string.Empty;
-        //}
-        //if (!string.IsNullOrEmpty(projectTitle))
-        //{
-        //    cache.Insert(cacheKey, projectTitle, TimeSpan.FromMinutes(15));
-        //}
-        //return projectTitle;
+    public async Task<string> GetBackupExtensionAsync(int folderId)
+    {
+        return (await _globalStore.GetStoreAsync()).GetBackupExtension();
     }
 }
 

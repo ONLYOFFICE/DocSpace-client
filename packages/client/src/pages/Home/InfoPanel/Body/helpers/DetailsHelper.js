@@ -15,6 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
+import { getCookie } from "@docspace/common/utils";
 
 // Property Content Components
 
@@ -35,10 +36,15 @@ const link = (text, onClick) => (
   </Link>
 );
 
-const tagList = (tags) => (
+const tagList = (tags, selectTag) => (
   <div className="property-tag_list">
     {tags.map((tag, i) => (
-      <Tag key={i} className="property-tag" label={tag} />
+      <Tag
+        key={i}
+        className="property-tag"
+        label={tag}
+        onClick={() => selectTag(tag)}
+      />
     ))}
   </div>
 );
@@ -53,7 +59,7 @@ export const decodeString = (str) => {
 };
 
 export const parseAndFormatDate = (date, personal, culture) => {
-  const locale = personal ? localStorage.getItem(LANGUAGE) : culture;
+  const locale = getCookie(LANGUAGE) || culture;
   const correctDate = getCorrectDate(locale, date);
   return correctDate;
 };
@@ -70,6 +76,7 @@ class DetailsHelper {
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
+    this.selectTag = props.selectTag;
   }
 
   getPropertyList = () => {
@@ -303,7 +310,7 @@ class DetailsHelper {
   };
 
   getItemTags = () => {
-    return tagList(this.item.tags);
+    return tagList(this.item.tags, this.selectTag);
   };
 }
 

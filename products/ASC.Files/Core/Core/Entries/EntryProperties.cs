@@ -27,9 +27,13 @@
 namespace ASC.Files.Core;
 
 
+/// <summary>
+/// </summary>
 [DebuggerDisplay("")]
 public class EntryProperties
 {
+    /// <summary>Form filling properties</summary>
+    /// <type>ASC.Files.Core.FormFillingProperties, ASC.Files.Core</type>
     public FormFillingProperties FormFilling { get; set; }
     public FormBoardProperties FormBoard { get; set; }
 
@@ -60,10 +64,37 @@ public class EntryProperties
     }
 }
 
+/// <summary>
+/// </summary>
 [Transient]
 public class FormFillingProperties
 {
+    public static readonly string DefaultTitleMask = "{0} - {1} ({2})";
+    private readonly UserManager _userManager;
+    private readonly SecurityContext _securityContext;
+    private readonly DisplayUserSettingsHelper _displayUserSettingsHelper;
+    private readonly TenantUtil _tenantUtil;
+    private readonly CustomNamingPeople _customNamingPeople;
+
+    /// <summary>Specifies whether to collect the data from the filled forms or not</summary>
+    /// <type>System.Boolean, System</type>
+    public bool CollectFillForm { get; set; }
+
+    /// <summary>Folder ID where a file will be saved</summary>
+    /// <type>System.String, System</type>
     public string ToFolderId { get; set; }
+
+    /// <summary>Folder path where a file will be savedt</summary>
+    /// <type>System.String, System</type>
+    public string ToFolderPath { get; set; }
+
+    /// <summary>New folder title</summary>
+    /// <type>System.String, System</type>
+    public string CreateFolderTitle { get; set; }
+
+    /// <summary>File name mask</summary>
+    /// <type>System.String, System</type>
+    public string CreateFileMask { get; set; }
 
     public FormFillingProperties()
     {

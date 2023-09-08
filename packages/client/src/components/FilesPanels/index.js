@@ -10,6 +10,8 @@ import {
   HotkeyPanel,
   InvitePanel,
   StatusFillingPanel,
+  EditLinkPanel,
+  EmbeddingPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -25,6 +27,10 @@ import {
   ChangeUserTypeDialog,
   DeleteAllFormsDialog,
   DeleteFormDialog,
+  UnsavedChangesDialog,
+  DeleteLinkDialog,
+  RoomSharingDialog,
+  MoveToPublicRoom,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -68,6 +74,12 @@ const Panels = (props) => {
     statusFillingPanelVisible,
     deleteAllFormsDialogVisible,
     deleteFormDialogVisible,
+    editLinkPanelIsVisible,
+    unsavedChangesDialogVisible,
+    deleteLinkDialogVisible,
+    embeddingPanelIsVisible,
+    roomSharingPanelVisible,
+    moveToPublicRoomVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -146,6 +158,16 @@ const Panels = (props) => {
       <DeleteAllFormsDialog key="delete-all-forms-dialog" />
     ),
     deleteFormDialogVisible && <DeleteFormDialog key="delete-form-dialog" />,
+    editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
+    unsavedChangesDialogVisible && (
+      <UnsavedChangesDialog key="unsaved-dialog" />
+    ),
+    deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
+    embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
+    roomSharingPanelVisible && <RoomSharingDialog key="room-sharing-dialog" />,
+    moveToPublicRoomVisible && (
+      <MoveToPublicRoom key="move-to-public-room-panel" />
+    ),
   ];
 };
 
@@ -180,6 +202,7 @@ export default inject(
       archiveDialogVisible,
       restoreRoomDialogVisible,
 
+      unsavedChangesDialogVisible,
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
@@ -189,6 +212,11 @@ export default inject(
       statusFillingPanelVisible,
       deleteAllFormsDialogVisible,
       deleteFormDialogVisible,
+      editLinkPanelIsVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelIsVisible,
+      roomSharingPanelVisible,
+      moveToPublicRoomVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -232,6 +260,12 @@ export default inject(
       statusFillingPanelVisible,
       deleteAllFormsDialogVisible,
       deleteFormDialogVisible,
+      editLinkPanelIsVisible,
+      unsavedChangesDialogVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelIsVisible,
+      roomSharingPanelVisible,
+      moveToPublicRoomVisible,
     };
   }
 )(observer(Panels));

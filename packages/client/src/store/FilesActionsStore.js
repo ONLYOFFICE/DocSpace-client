@@ -62,6 +62,7 @@ class FilesActionStore {
   mediaViewerDataStore;
   accessRightsStore;
   clientLoadingStore;
+  publicRoomStore;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -78,7 +79,8 @@ class FilesActionStore {
     dialogsStore,
     mediaViewerDataStore,
     accessRightsStore,
-    clientLoadingStore
+    clientLoadingStore,
+    publicRoomStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -91,6 +93,7 @@ class FilesActionStore {
     this.mediaViewerDataStore = mediaViewerDataStore;
     this.accessRightsStore = accessRightsStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.publicRoomStore = publicRoomStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -144,7 +147,11 @@ class FilesActionStore {
     if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
       fetchRooms(
         updatedFolder,
-        newFilter ? newFilter : roomsFilter.clone()
+        newFilter ? newFilter : roomsFilter.clone(),
+        undefined,
+        undefined,
+        undefined,
+        true
       ).finally(() => {
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
@@ -256,7 +263,8 @@ class FilesActionStore {
     newSelection = null,
     withoutDialog = false
   ) => {
-    const { isRecycleBinFolder, isPrivacyFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isPrivacyFolder, recycleBinFolderId } =
+      this.treeFoldersStore;
     const {
       addActiveItems,
       getIsEmptyTrash,
@@ -293,7 +301,9 @@ class FilesActionStore {
     while (selection.length !== i) {
       if (selection[i].fileExst || selection[i].contentLength) {
         // try to fix with one check later (see onDeleteMediaFile)
-        const isActiveFile = activeFiles.find((id) => id === selection[i].id);
+        const isActiveFile = activeFiles.find(
+          (elem) => elem.id === selection[i].id
+        );
         !isActiveFile && fileIds.push(selection[i].id);
       } else if (selection[i].isDashboard) {
         const isActiveBoard = activeBoards.some((id) => id === selection[i].id);
@@ -301,7 +311,7 @@ class FilesActionStore {
       } else {
         // try to fix with one check later (see onDeleteMediaFile)
         const isActiveFolder = activeFolders.find(
-          (id) => id === selection[i].id
+          (elem) => elem.id === selection[i].id
         );
         !isActiveFolder && folderIds.push(selection[i].id);
       }
@@ -321,8 +331,11 @@ class FilesActionStore {
       operationId,
     });
 
-    addActiveItems(fileIds, folderIds, boardIds);
-    // addActiveItems(null, folderIds);
+    const destFolderId = immediately ? null : recycleBinFolderId;
+
+    addActiveItems(fileIds, null, destFolderId);
+    addActiveItems(null, folderIds, destFolderId);
+    addActiveItems(null, null, null, boardIds);
 
     if (this.dialogsStore.isFolderActions && withoutDialog) {
       folderIds = [];
@@ -378,12 +391,15 @@ class FilesActionStore {
               showToast();
             } else {
               this.updateFilesAfterDelete(operationId);
+
               this.filesStore.removeFiles(
                 fileIds,
                 folderIds,
                 showToast,
+                destFolderId,
                 boardIds
               );
+
               this.uploadDataStore.removeFiles(fileIds);
             }
 
@@ -562,44 +578,48 @@ class FilesActionStore {
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
-    addActiveItems(fileIds, folderIds, boardIds);
+    addActiveItems(fileIds, folderIds, null, boardIds);
+
+    const shareKey = this.publicRoomStore.publicRoomKey;
 
     try {
-      await downloadFiles(fileConvertIds, [...folderIds, ...boardIds]).then(
-        async (res) => {
-          const data = res[0] ? res[0] : null;
-          const pbData = {
-            icon: "file",
-            label,
+      await downloadFiles(
+        fileConvertIds,
+        [...folderIds, ...boardIds],
+        shareKey
+      ).then(async (res) => {
+        const data = res[0] ? res[0] : null;
+        const pbData = {
+          icon: "file",
+          label,
+          operationId,
+        };
+
+        const item =
+          data?.finished && data?.url
+            ? data
+            : await this.uploadDataStore.loopFilesOperations(
+                data,
+                pbData,
+                true
+              );
+
+        clearActiveOperations(fileIds, folderIds, boardIds);
+        this.setIsBulkDownload(false);
+
+        if (item.url) {
+          window.location.href = item.url;
+        } else {
+          setSecondaryProgressBarData({
+            visible: true,
+            alert: true,
             operationId,
-          };
-
-          const item =
-            data?.finished && data?.url
-              ? data
-              : await this.uploadDataStore.loopFilesOperations(
-                  data,
-                  pbData,
-                  true
-                );
-
-          clearActiveOperations(fileIds, folderIds, boardIds);
-          this.setIsBulkDownload(false);
-
-          if (item.url) {
-            window.location.href = item.url;
-          } else {
-            setSecondaryProgressBarData({
-              visible: true,
-              alert: true,
-              operationId,
-            });
-          }
-
-          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-          !item.url && toastr.error(translations.error, null, 0, true);
+          });
         }
-      );
+
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        !item.url && toastr.error(translations.error, null, 0, true);
+      });
     } catch (err) {
       this.setIsBulkDownload(false);
       clearActiveOperations(fileIds, folderIds, boardIds);
@@ -747,7 +767,8 @@ class FilesActionStore {
     if (
       this.settingsStore.confirmDelete ||
       this.treeFoldersStore.isPrivacyFolder ||
-      isThirdParty
+      isThirdParty ||
+      isRoom
     ) {
       this.dialogsStore.setIsRoomDelete(isRoom);
       this.dialogsStore.setDeleteDialogVisible(true);
@@ -791,6 +812,7 @@ class FilesActionStore {
   deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { withPaging } = this.authStore.settingsStore;
+    const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
 
     const pbData = {
       icon: "trash",
@@ -800,8 +822,10 @@ class FilesActionStore {
 
     this.filesStore.setOperationAction(true);
 
+    const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
+
     if (isFile) {
-      addActiveItems([itemId]);
+      addActiveItems([itemId], null, destFolderId);
       this.isMediaOpen();
       return deleteFile(itemId)
         .then(async (res) => {
@@ -814,8 +838,11 @@ class FilesActionStore {
             toastr.success(translations.successRemoveFile);
           } else {
             this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles([itemId], null, () =>
-              toastr.success(translations.successRemoveFile)
+            this.filesStore.removeFiles(
+              [itemId],
+              null,
+              () => toastr.success(translations.successRemoveFile),
+              destFolderId
             );
           }
         })
@@ -825,10 +852,10 @@ class FilesActionStore {
       addActiveItems(null, items);
 
       this.setGroupMenuBlocked(true);
-      return removeFiles(items, [], true, true)
+      return removeFiles(items, [], false, true)
         .then(async (res) => {
           if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res ? res : null;
+          const data = res[0] ? res[0] : null;
           await this.uploadDataStore.loopFilesOperations(data, pbData);
           this.updateCurrentFolder(null, [itemId], null, operationId);
         })
@@ -843,7 +870,7 @@ class FilesActionStore {
           this.setGroupMenuBlocked(false);
         });
     } else {
-      addActiveItems(null, [itemId]);
+      addActiveItems(null, [itemId], destFolderId);
       return deleteFolder(itemId)
         .then(async (res) => {
           if (res[0]?.error) return Promise.reject(res[0].error);
@@ -855,8 +882,11 @@ class FilesActionStore {
             toastr.success(translations.successRemoveFolder);
           } else {
             this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles(null, [itemId], () =>
-              toastr.success(translations.successRemoveFolder)
+            this.filesStore.removeFiles(
+              null,
+              [itemId],
+              () => toastr.success(translations.successRemoveFolder),
+              destFolderId
             );
           }
 
@@ -1105,7 +1135,9 @@ class FilesActionStore {
       operationId,
     });
 
-    addActiveItems(null, items);
+    const destFolder = action === "archive" ? archiveRoomsId : myRoomsId;
+
+    addActiveItems(null, items, destFolder);
 
     switch (action) {
       case "archive":
@@ -1314,13 +1346,10 @@ class FilesActionStore {
   };
 
   openLocationAction = async (item) => {
-    this.filesStore.setBufferSelection(null);
+    if (this.publicRoomStore.isPublicRoom)
+      return this.moveToPublicRoom(item.id);
 
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
 
     const { id, isRoom, title, rootFolderType } = item;
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
@@ -1370,7 +1399,10 @@ class FilesActionStore {
     newFilter.search = item.title;
     newFilter.folder = ExtraLocation;
 
-    setIsLoading(true);
+    setIsLoading(
+      window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
+        url !== window.DocSpace.location.pathname
+    );
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -1488,8 +1520,8 @@ class FilesActionStore {
   };
 
   checkFileConflicts = (destFolderId, folderIds, fileIds) => {
-    this.filesStore.addActiveItems(fileIds);
-    this.filesStore.addActiveItems(null, folderIds);
+    this.filesStore.addActiveItems(fileIds, null, destFolderId);
+    this.filesStore.addActiveItems(null, folderIds, destFolderId);
     return checkFileConflicts(destFolderId, folderIds, fileIds);
   };
 
@@ -1558,9 +1590,11 @@ class FilesActionStore {
         return hasSelection && canCopy;
       case "showInfo":
       case "download":
-        return hasSelection;
+        const canDownload = selection.every((s) => s.security?.Download);
+
+        return hasSelection && canDownload;
       case "downloadAs":
-        return canConvertSelected;
+        return canConvertSelected && !this.publicRoomStore.isPublicRoom;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 
@@ -2049,7 +2083,7 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item) => {
-    const { openDocEditor, isPrivacyFolder } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
 
     const { isLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
@@ -2059,13 +2093,17 @@ class FilesActionStore {
     const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
       this.clientLoadingStore;
 
+    if (this.publicRoomStore.isPublicRoom && item.isFolder)
+      return this.moveToPublicRoom(item.id);
+
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
 
     const isMediaOrImage =
       item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
-    const canConvert = item.viewAccessability?.Convert;
+    const canConvert =
+      item.viewAccessability?.Convert && item.security?.Convert;
     const canWebEdit = item.viewAccessability?.WebEdit;
     const canViewedDocs = item.viewAccessability?.WebView;
 
@@ -2120,6 +2158,8 @@ class FilesActionStore {
 
       const state = { title, isRoot: false, rootFolderType, isRoom };
 
+      setSelection([]);
+
       window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
     } else {
       if (canConvert) {
@@ -2133,7 +2173,9 @@ class FilesActionStore {
 
       if (canWebEdit || canViewedDocs) {
         let tab =
-          !this.authStore.settingsStore.isDesktopClient && !isFolder
+          !this.authStore.settingsStore.isDesktopClient &&
+          window.DocSpaceConfig?.editor?.openOnNewPage &&
+          !isFolder
             ? window.open(
                 combineUrl(
                   window.DocSpaceConfig?.proxy?.url,
@@ -2144,7 +2186,7 @@ class FilesActionStore {
               )
             : null;
 
-        return openDocEditor(id, providerKey, tab, null, !canWebEdit);
+        return openDocEditor(id, providerKey, tab, null, !item.security.Edit);
       }
 
       if (isMediaOrImage) {
@@ -2156,6 +2198,9 @@ class FilesActionStore {
         setMediaViewerData({ visible: true, id });
 
         const url = "/products/files/#preview/" + id;
+
+        if (this.publicRoomStore.isPublicRoom) return;
+
         window.DocSpace.navigate(url);
         return;
       }
@@ -2199,6 +2244,10 @@ class FilesActionStore {
         parentNavigationPath.id
       );
       return this.backToParentDashboard(path, parentNavigationPath);
+    }
+
+    if (this.publicRoomStore.isPublicRoom) {
+      return this.backToParentFolder();
     }
 
     if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
@@ -2297,7 +2346,32 @@ class FilesActionStore {
     });
   };
 
+  moveToPublicRoom = (folderId) => {
+    const { navigationPath, rootFolderType } = this.selectedFolderStore;
+    const { publicRoomKey } = this.publicRoomStore;
+    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+
+    const id = folderId ? folderId : this.selectedFolderStore.parentId;
+    const path = getCategoryUrl(CategoryType.PublicRoom);
+    const filter = FilesFilter.getDefault();
+    filter.folder = id;
+
+    const state = {
+      title: navigationPath[0]?.title || "",
+      isRoot: navigationPath.length === 1,
+      rootFolderType: rootFolderType,
+    };
+
+    setIsSectionFilterLoading(true);
+    window.DocSpace.navigate(
+      `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
+      { state }
+    );
+  };
+
   backToParentFolder = (path = null, fromDashboard = false) => {
+    if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
+
     let id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;

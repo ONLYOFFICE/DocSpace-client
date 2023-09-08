@@ -33,7 +33,11 @@ const StyledModalDialog = styled(ModalDialog)`
 
     svg {
       overflow: visible;
-      margin-right: 8px;
+
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `margin-left: 8px;`
+          : `margin-right: 8px;`}
       margin-top: 3px;
     }
 
@@ -62,9 +66,11 @@ const ConflictResolveDialog = (props) => {
     itemOperationToFolder,
     activeFiles,
     setActiveFiles,
+    updateActiveFiles,
     setMoveToPanelVisible,
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
+    setMoveToPublicRoomVisible,
   } = props;
 
   const {
@@ -80,12 +86,16 @@ const ConflictResolveDialog = (props) => {
   const [resolveType, setResolveType] = useState("overwrite");
 
   const onSelectResolveType = (e) => setResolveType(e.target.value);
-  const onClose = () => setConflictResolveDialogVisible(false);
+  const onClose = () => {
+    setMoveToPublicRoomVisible(false);
+    setConflictResolveDialogVisible(false);
+  };
   const onClosePanels = () => {
     setConflictResolveDialogVisible(false);
     setMoveToPanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
+    setMoveToPublicRoomVisible(false);
   };
   const onCloseDialog = () => {
     let newActiveFiles = activeFiles;
@@ -120,11 +130,11 @@ const ConflictResolveDialog = (props) => {
     if (conflictResolveType === ConflictResolveType.Skip) {
       for (let item of items) {
         newFileIds = newFileIds.filter((x) => x !== item.id);
-        newActiveFiles = newActiveFiles.filter((f) => f !== item.id);
+        newActiveFiles = newActiveFiles.filter((f) => f.id !== item.id);
       }
     }
 
-    setActiveFiles(newActiveFiles);
+    updateActiveFiles(newActiveFiles);
     if (!folderIds.length && !newFileIds.length) return onClosePanels();
 
     const data = {
@@ -269,6 +279,7 @@ export default inject(
       setMoveToPanelVisible,
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
     } = dialogsStore;
 
     const { itemOperationToFolder } = uploadDataStore;
@@ -287,6 +298,8 @@ export default inject(
       ? dashboardStore.setActiveFiles
       : filesStore.activeFiles;
 
+    const updateActiveFiles = filesStore.updateActiveFiles;
+
     return {
       theme,
       items,
@@ -296,9 +309,11 @@ export default inject(
       itemOperationToFolder,
       activeFiles,
       setActiveFiles,
+      updateActiveFiles,
       setMoveToPanelVisible,
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
     };
   }
 )(

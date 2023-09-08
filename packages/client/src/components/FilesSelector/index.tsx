@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/common/constants";
 
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
@@ -29,18 +29,19 @@ import useRoomsHelper from "./helpers/useRoomsHelper";
 import useLoadersHelper from "./helpers/useLoadersHelper";
 import useFilesHelper from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+import useSocketHelper from "./helpers/useSocketHelper";
 
 import type { StoreType } from "SRC_DIR/types";
 import type { IFileByRole } from "@docspace/common/Models";
-import type { ThemeType } from "@docspace/components/types";
 
 const FilesSelector = ({
   isPanelVisible = false,
-  withoutBasicSelection = false,
-  withoutImmediatelyClose = false,
+  // withoutImmediatelyClose = false,
   isThirdParty = false,
+  isRoomsOnly = false,
   isEditorDialog = false,
 
+  rootThirdPartyId,
   filterParam,
 
   onClose,
@@ -73,7 +74,7 @@ const FilesSelector = ({
 
   onSelectFolder,
   onSetBaseFolderPath,
-  onSetNewFolderPath,
+  //onSetNewFolderPath,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -85,6 +86,13 @@ const FilesSelector = ({
   footerCheckboxLabel,
 
   descriptionText,
+  setSelectedItems,
+
+  includeFolder,
+
+  socketHelper,
+  socketSubscribersId,
+  setMoveToPublicRoomVisible,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -114,6 +122,16 @@ const FilesSelector = ({
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
+
+  const { subscribe, unsubscribe } = useSocketHelper({
+    socketHelper,
+    socketSubscribersId,
+    setItems,
+    setBreadCrumbs,
+    setTotal,
+    disabledItems,
+    filterParam,
+  });
 
   const {
     setIsBreadCrumbsLoading,
@@ -145,6 +163,8 @@ const FilesSelector = ({
     isFirstLoad,
     setIsRoot,
     searchValue,
+    isRoomsOnly,
+    onSetBaseFolderPath,
   });
 
   const { getFileList } = useFilesHelper({
@@ -164,6 +184,12 @@ const FilesSelector = ({
     onSelectTreeNode,
     setSelectedTreeNode,
     filterParam,
+    getRootData,
+    onSetBaseFolderPath,
+    isRoomsOnly,
+    rootThirdPartyId,
+    getRoomList,
+    t,
   });
 
   const onSelectAction = (item: Item) => {
@@ -177,6 +203,7 @@ const FilesSelector = ({
           id: item.id,
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
+          roomType: item.roomType,
         },
       ]);
       setSelectedItemId(item.id);
@@ -195,26 +222,43 @@ const FilesSelector = ({
   };
 
   React.useEffect(() => {
-    if (!withoutBasicSelection) {
-      onSelectFolder && onSelectFolder(currentFolderId);
-      onSetBaseFolderPath && onSetBaseFolderPath(currentFolderId);
+    if (!selectedItemId) return;
+    if (selectedItemId && isRoot) return unsubscribe(+selectedItemId);
+
+    subscribe(+selectedItemId);
+  }, [selectedItemId, isRoot]);
+
+  React.useEffect(() => {
+    const getRoomSettings = () => {
+      setSelectedItemType("rooms");
+      getRoomList(0, true);
+    };
+
+    const needRoomList = isRoomsOnly && !currentFolderId;
+
+    if (needRoomList) {
+      getRoomSettings();
+      return;
     }
+
     if (!currentFolderId) {
       getRootData();
-    } else {
-      setSelectedItemId(currentFolderId);
-      if (
-        parentId === 0 &&
-        rootFolderType === FolderType.Rooms &&
-        !isThirdParty
-      ) {
-        setSelectedItemType("rooms");
-        getRoomList(0, true);
-      } else {
-        setSelectedItemType("files");
-        getFileList(0, currentFolderId, true);
-      }
+      return;
     }
+
+    setSelectedItemId(currentFolderId);
+
+    if (
+      needRoomList ||
+      (!isThirdParty && parentId === 0 && rootFolderType === FolderType.Rooms)
+    ) {
+      getRoomSettings();
+
+      return;
+    }
+
+    setSelectedItemType("files");
+    getFileList(0, currentFolderId, true);
   }, []);
 
   const onClickBreadCrumb = (item: BreadCrumb) => {
@@ -253,15 +297,17 @@ const FilesSelector = ({
   const onCloseAction = () => {
     if (onClose) {
       onClose();
+
+      return;
+    }
+
+    if (isCopy) {
+      setCopyPanelVisible(false);
+      setIsFolderActions(false);
+    } else if (isRestoreAll) {
+      setRestoreAllPanelVisible(false);
     } else {
-      if (isCopy) {
-        setCopyPanelVisible(false);
-        setIsFolderActions(false);
-      } else if (isRestoreAll) {
-        setRestoreAllPanelVisible(false);
-      } else {
-        setMoveToPanelVisible(false);
-      }
+      setMoveToPanelVisible(false);
     }
   };
 
@@ -295,6 +341,10 @@ const FilesSelector = ({
     fileName: string,
     isChecked: boolean
   ) => {
+    const isPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
+
     if ((isMove || isCopy || isRestoreAll) && !isEditorDialog) {
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
@@ -332,8 +382,13 @@ const FilesSelector = ({
           },
         };
 
-        setIsRequestRunning(true);
+        if (isPublic) {
+          setMoveToPublicRoomVisible(true, operationData);
+          return;
+        }
 
+        setIsRequestRunning(true);
+        setSelectedItems();
         checkFileConflicts(selectedItemId, folderIds, fileIds)
           .then(async (conflicts: any) => {
             if (conflicts.length) {
@@ -353,32 +408,20 @@ const FilesSelector = ({
             setIsRequestRunning(false);
             clearActiveOperations(fileIds, folderIds);
           });
+      } else {
+        toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
-      setIsRequestRunning(true);
-      onSetNewFolderPath && onSetNewFolderPath(selectedItemId);
-      onSelectFolder && onSelectFolder(selectedItemId);
+      //setIsRequestRunning(true);
+      //onSetNewFolderPath && onSetNewFolderPath(breadCrumbs);
+      onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
       onSave &&
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-
-      const info: {
-        id: string | number;
-        title: string;
-        path?: string[];
-      } = {
-        id: selectedFileInfo?.id || "",
-        title: selectedFileInfo?.title || "",
-        path: [],
-      };
-
-      breadCrumbs.forEach((item, index) => {
-        if (index !== 0 && info.path) info.path.push(item.label);
-      });
-
-      onSelectFile && selectedFileInfo && onSelectFile(info);
-      !withoutImmediatelyClose && onCloseAction();
+      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
+      onCloseAction();
+      //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
 
@@ -409,7 +452,8 @@ const FilesSelector = ({
     isRequestRunning,
     selectedItemSecurity,
     filterParam,
-    !!selectedFileInfo
+    !!selectedFileInfo,
+    includeFolder
   );
 
   return (
@@ -509,8 +553,8 @@ export default inject<StoreType>(
       dialogsStore,
       filesStore,
       dashboardStore,
-    },
-    { isCopy, isRestoreAll, isMove, isPanelVisible, id, passedFoldersTree }: any
+    }: any,
+    { isCopy, isRestoreAll, isMove, isPanelVisible, id }: any
   ) => {
     const {
       id: selectedId,
@@ -518,9 +562,11 @@ export default inject<StoreType>(
       rootFolderType,
       isRolePage,
       isDashboard,
+      socketSubscribersId,
     } = selectedFolderStore;
 
-    const { setConflictDialogData, checkFileConflicts } = filesActionsStore;
+    const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
+      filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
@@ -530,8 +576,6 @@ export default inject<StoreType>(
         ? parentId
         : id
         ? id
-        : passedFoldersTree?.length > 0
-        ? passedFoldersTree[0].id
         : rootFolderType === FolderType.Archive ||
           rootFolderType === FolderType.TRASH
         ? undefined
@@ -554,12 +598,18 @@ export default inject<StoreType>(
       conflictResolveDialogVisible,
       isFolderActions,
       setIsFolderActions,
+      setMoveToPublicRoomVisible,
     } = dialogsStore;
 
-    const { theme } = auth.settingsStore as any as { theme: ThemeType };
+    const { theme, socketHelper } = auth.settingsStore;
 
-    const { selection, bufferSelection, filesList, setMovingInProgress } =
-      filesStore;
+    const {
+      selection,
+      bufferSelection,
+      filesList,
+
+      setMovingInProgress,
+    } = filesStore;
 
     const { selectedFilesByRoleMap, BufferSelectionFilesByRole } =
       dashboardStore;
@@ -580,9 +630,11 @@ export default inject<StoreType>(
       : isMove || isCopy || isRestoreAll
       ? isRestoreAll
         ? filesList
-        : selection.length
+        : selection.length > 0 && selection[0] != null
         ? selection
-        : [bufferSelection]
+        : bufferSelection != null
+        ? [bufferSelection]
+        : []
       : [];
 
     const selectionsWithoutEditing = isRestoreAll
@@ -598,6 +650,9 @@ export default inject<StoreType>(
         disabledItems.push(item.id);
       }
     });
+
+    const includeFolder =
+      selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
 
     return {
       currentFolderId,
@@ -622,6 +677,11 @@ export default inject<StoreType>(
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       setIsFolderActions,
+      setSelectedItems,
+      includeFolder,
+      socketHelper,
+      socketSubscribersId,
+      setMoveToPublicRoomVisible,
     };
   }
 )(observer(FilesSelector));

@@ -26,6 +26,15 @@ class AxiosClient {
       };
     }
 
+    const lastKeySymbol = location.search.indexOf("&");
+    const lastIndex =
+      lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
+    const publicRoomKey = location.search.substring(5, lastIndex);
+
+    if (publicRoomKey) {
+      headers = { ...headers, "Request-Token": publicRoomKey };
+    }
+
     const apiBaseURL = combineUrl(origin, proxy, prefix);
     const paymentsURL = combineUrl(
       proxy,
@@ -158,11 +167,11 @@ class AxiosClient {
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (!isRooms) return;
-
-            setTimeout(() => {
-              window.DocSpace.navigate(isArchived ? "/archived" : "/");
-            }, 1000);
+            if (isRooms) {
+              setTimeout(() => {
+                window.DocSpace.navigate(isArchived ? "/archived" : "/");
+              }, 1000);
+            }
 
             break;
           default:

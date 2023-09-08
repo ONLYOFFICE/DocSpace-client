@@ -185,7 +185,7 @@ class NewFilesPanel extends React.Component {
                 config.homepage,
                 `/doceditor?fileId=${id}`
               ),
-              "_blank"
+              window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
             )
           );
       }
@@ -360,6 +360,7 @@ export default inject(
     selectedFolderStore,
     dialogsStore,
     settingsStore,
+    clientLoadingStore,
   }) => {
     const {
       addFileToRecentlyViewed,

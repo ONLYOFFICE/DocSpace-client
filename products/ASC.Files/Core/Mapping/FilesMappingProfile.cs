@@ -63,5 +63,9 @@ public class FilesMappingProfile : AutoMapper.Profile
         CreateMap<DbFilesSecurity, FileShareRecord>()
             .ForMember(dest => dest.Options, cfg => 
                 cfg.MapFrom(src => JsonSerializer.Deserialize<FileShareOptions>(src.Options, JsonSerializerOptions.Default)));
+        
+        CreateMap<SecurityTreeRecord, FileShareRecord>()
+            .ForMember(dest => dest.Options, cfg => 
+                cfg.MapFrom(src => JsonSerializer.Deserialize<FileShareOptions>(src.Options, JsonSerializerOptions.Default)));
     }
 }

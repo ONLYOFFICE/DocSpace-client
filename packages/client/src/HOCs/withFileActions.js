@@ -345,7 +345,7 @@ export default function withFileActions(WrappedFileItem) {
         withCtrlSelect,
         withShiftSelect,
       } = filesStore;
-
+      const { id } = selectedFolderStore;
       const { startUpload } = uploadDataStore;
 
       const selectedItem = selection.find(
@@ -356,14 +356,31 @@ export default function withFileActions(WrappedFileItem) {
 
       const isFolder = selectedItem ? false : !item.isFolder ? false : true;
 
-      const inProgress =
-        activeFiles.findIndex((x) => x === item.id) !== -1 ||
-        activeFolders.findIndex(
-          (x) =>
-            x === item.id &&
-            (item.isFolder || (!item.fileExst && item.id === -1))
-        ) !== -1 ||
-        activeBoards.some((id) => item.id === id && item.isDashboard);
+      const isProgress = (index, items) => {
+        if (index === -1) return false;
+        const destFolderId = items[index].destFolderId;
+
+        if (!destFolderId) return true;
+
+        return destFolderId != id;
+      };
+
+      const activeFileIndex = activeFiles.findIndex((x) => x.id === item.id);
+      const activeFolderIndex = activeFolders.findIndex(
+        (x) =>
+          x.id === item.id &&
+          (item.isFolder || (!item.fileExst && item.id === -1))
+      );
+
+      const activeBoardIndex = activeBoards.findIndex(
+        (board) => board.id === item.id && item.isDashboard
+      );
+
+      const isFileProgress = isProgress(activeFileIndex, activeFiles);
+      const isFolderProgress = isProgress(activeFolderIndex, activeFolders);
+      const isBoardProgress = isProgress(activeBoardIndex, activeBoards);
+
+      const inProgress = isFileProgress || isFolderProgress || isBoardProgress;
 
       let isActive = false;
 

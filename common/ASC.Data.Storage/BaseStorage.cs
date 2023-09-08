@@ -30,6 +30,7 @@ public abstract class BaseStorage : IDataStore
 {
     public IQuotaController QuotaController { get; set; }
     public virtual bool IsSupportInternalUri => true;
+    public virtual bool IsSupportCdnUri => false;
     public virtual bool IsSupportedPreSignedUri => true;
     public virtual bool IsSupportChunking => false;
     internal string Modulename { get; set; }
@@ -154,6 +155,11 @@ public abstract class BaseStorage : IDataStore
         return Task.FromResult<Uri>(null);
     }
 
+    public virtual Task<Uri> GetCdnPreSignedUriAsync(string domain, string path, TimeSpan expire, IEnumerable<string> headers)
+    {
+        return null;
+    }
+
     public abstract Task<Stream> GetReadStreamAsync(string domain, string path);
 
     public abstract Task<Stream> GetReadStreamAsync(string domain, string path, long offset);
@@ -201,9 +207,14 @@ public abstract class BaseStorage : IDataStore
 
     public virtual IDataWriteOperator CreateDataWriteOperator(
             CommonChunkedUploadSession chunkedUploadSession,
-            CommonChunkedUploadSessionHolder sessionHolder)
+            CommonChunkedUploadSessionHolder sessionHolder, bool isConsumerStorage = false)
     {
         return new ChunkZipWriteOperator(_tempStream, chunkedUploadSession, sessionHolder);
+    }
+
+    public virtual string GetBackupExtension(bool isConsumerStorage = false)
+    {
+        return "tar.gz";
     }
 
     #endregion

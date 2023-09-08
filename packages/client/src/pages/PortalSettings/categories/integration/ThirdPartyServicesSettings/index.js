@@ -7,11 +7,18 @@ import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Badge from "@docspace/components/badge";
 import toastr from "@docspace/components/toast/toastr";
+import Button from "@docspace/components/button";
 import { showLoader, hideLoader } from "@docspace/common/utils";
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/components/utils/device";
+import {
+  mobile,
+  smallTablet,
+  isSmallTablet,
+} from "@docspace/components/utils/device";
+import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
+import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -42,6 +49,19 @@ const RootContainer = styled(Box)`
     border-radius: 6px;
     min-height: 116px;
     padding: 12px 12px 8px 20px;
+  }
+
+  .request-block {
+    margin-bottom: 20px;
+    padding: 46px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    @media ${smallTablet} {
+      flex-direction: column;
+      align-items: baseline;
+    }
   }
 
   .paid-badge {
@@ -144,8 +164,15 @@ class ThirdPartyServices extends React.Component {
       (consumer) =>
         consumer.title !== "Bitly" &&
         consumer.title !== "WordPress" &&
-        consumer.title !== "DocuSign"
+        consumer.title !== "DocuSign" &&
+        consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
+        consumer.name !== "twilio"
     );
+
+    const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
+
+    const submitRequest = () =>
+      (window.location = `mailto:${this.props.supportEmail}`);
 
     return (
       <>
@@ -172,7 +199,22 @@ class ThirdPartyServices extends React.Component {
               {t("Common:LearnMore")}
             </Link>
           </Box>
-
+          <Box className="consumer-item-wrapper request-block">
+            <img
+              className="integration-image"
+              src={imgSrc}
+              alt="integration_icon"
+            />
+            <Text>{t("IntegrationRequest")}</Text>
+            <Button
+              label={t("Submit")}
+              primary
+              size="normal"
+              minwidth="138px"
+              onClick={submitRequest}
+              scale={isSmallTablet()}
+            />
+          </Box>
           <div className="consumers-list-container">
             {filteredConsumers.map((consumer) => (
               <Box className="consumer-item-wrapper" key={consumer.name}>
@@ -220,7 +262,12 @@ ThirdPartyServices.propTypes = {
 
 export default inject(({ setup, auth }) => {
   const { settingsStore, setDocumentTitle, currentQuotaStore } = auth;
-  const { integrationSettingsUrl, theme, currentColorScheme } = settingsStore;
+  const {
+    integrationSettingsUrl,
+    theme,
+    currentColorScheme,
+    companyInfoSettingsData,
+  } = settingsStore;
   const {
     getConsumers,
     integration,
@@ -240,5 +287,6 @@ export default inject(({ setup, auth }) => {
     setDocumentTitle,
     currentColorScheme,
     isThirdPartyAvailable,
+    supportEmail: companyInfoSettingsData?.email,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

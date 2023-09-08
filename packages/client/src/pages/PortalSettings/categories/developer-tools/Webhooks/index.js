@@ -34,7 +34,8 @@ const ButtonSeating = styled.div`
   width: 100vw;
   height: 73px;
   bottom: 0;
-  left: 0;
+
+  inset-inline-start: 0;
   background-color: ${(props) => props.theme.backgroundColor};
 
   display: flex;
@@ -131,6 +132,7 @@ const Webhooks = (props) => {
           onClose={closeCreateModal}
           header={t("CreateWebhook")}
           onSubmit={onCreateWebhook}
+          additionalId="create-webhook"
         />
         <WebhookDialog
           visible={isSettingsOpened}
@@ -139,6 +141,7 @@ const Webhooks = (props) => {
           isSettingsModal={true}
           webhook={currentWebhook}
           onSubmit={handleWebhookUpdate}
+          additionalId="settings-webhook"
         />
         <DeleteWebhookDialog
           visible={isDeleteOpened}

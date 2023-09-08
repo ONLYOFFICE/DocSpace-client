@@ -33,8 +33,6 @@ const InfoPanelHeaderContent = (props) => {
     getIsAccounts,
     getIsTrash,
     isRootFolder,
-    // rootFolderType,
-    // selectionParentRoom,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -133,12 +131,14 @@ const InfoPanelHeaderContent = (props) => {
               style={{ width: "100%" }}
               data={roomsSubmenu}
               forsedActiveItemId={roomsView}
+              scale={true}
             />
           ) : (
             <Submenu
               style={{ width: "100%" }}
               data={personalSubmenu}
               forsedActiveItemId={fileView}
+              scale={true}
             />
           )}
         </div>
@@ -179,9 +179,6 @@ export default inject(({ auth, selectedFolderStore }) => {
     getIsTrash,
 
     isRootFolder,
-    //  rootFolderType,
-
-    //selectionParentRoom,
   };
 })(
   withTranslation(["Common", "InfoPanel"])(

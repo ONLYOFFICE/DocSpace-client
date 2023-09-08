@@ -98,8 +98,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
                     UserName = row["email"].ToString().Split('@').First(),
                     FirstName = row["firstname"].ToString(),
                     LastName = row["lastname"].ToString(),
-                    Status = EmployeeStatus.Active,
-                    ActivationStatus = EmployeeActivationStatus.NotActivated,
+                    ActivationStatus = EmployeeActivationStatus.Pending,
                     Email = row["email"].ToString(),
                 }
             };
@@ -152,6 +151,9 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
+                var u = migrationInfo.Users.Find(element => element.Key == user.Key);
+                user.UserType = u.UserType;
+
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
                 await user.MigratingFiles.MigrateAsync();

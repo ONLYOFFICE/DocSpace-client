@@ -131,7 +131,7 @@ public class OCMigratingUser : MigratingUser<OCMigratingFiles>
             {
                 _userInfo.LastName = FilesCommonResource.UnknownLastName;
             }
-            saved = await _userManager.SaveUserInfo(_userInfo);
+            saved = await _userManager.SaveUserInfo(_userInfo, UserType);
             if (_hasPhoto)
             {
                 using (var ms = new MemoryStream())

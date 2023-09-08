@@ -318,7 +318,10 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
             ReportProgress(GetProgress() + progressStep, string.Format(MigrationResource.UserMigration, user.DisplayName, i++, usersCount));
             try
             {
-                user.DataСhange(migrationApiInfo.Users.Find(element => element.Key == user.Key));
+                var u = migrationApiInfo.Users.Find(element => element.Key == user.Key);
+                user.DataСhange(u);
+                user.UserType = u.UserType;
+
                 await user.MigrateAsync();
                 _importedUsers.Add(user.Guid);
             }

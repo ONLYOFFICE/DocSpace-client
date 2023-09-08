@@ -85,7 +85,7 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
         var saved = await _userManager.GetUserByEmailAsync(_user.Info.Email);
         if (saved == ASC.Core.Users.Constants.LostUser)
         {
-            saved = await _userManager.SaveUserInfo(_user.Info);
+            saved = await _userManager.SaveUserInfo(_user.Info, UserType);
             _user.Info = saved;
             if (_hasPhoto)
             {

@@ -54,12 +54,12 @@ import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helper
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
 
+
 const LOADER_TIMER = 500;
 let loadingTime;
 let timer;
 
-//TODO: Remove later Added role
-import api from "@docspace/common/api";
+
 
 class ContextOptionsStore {
   authStore;

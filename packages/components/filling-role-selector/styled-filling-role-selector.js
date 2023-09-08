@@ -78,15 +78,6 @@ const StyledUserRow = styled.div`
   }
 `;
 
-const StyledAssignedRole = styled.div`
-  color: ${(props) => props.theme.startFillingPanel.assignedRoleColor};
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 14px;
-`;
-
-StyledAssignedRole.defaultProps = { theme: Base };
-
 const StyledNumber = styled.div`
   font-weight: 600;
   font-size: 14px;
@@ -132,6 +123,15 @@ const StyledRole = styled.div`
   font-size: 14px;
   line-height: 16px;
 `;
+
+// const StyledAssignedRole = styled.div`
+//   color: ${(props) => props.theme.startFillingPanel.assignedRoleColor};
+//   font-weight: 400;
+//   font-size: 10px;
+//   line-height: 14px;
+// `;
+
+// StyledAssignedRole.defaultProps = { theme: Base };
 
 const StyledAssignedRole = styled.div`
   padding-left: 4px;

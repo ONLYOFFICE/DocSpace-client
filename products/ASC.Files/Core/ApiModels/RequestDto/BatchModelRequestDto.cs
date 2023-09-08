@@ -30,12 +30,20 @@ public class BaseBatchRequestDto
 {
     public IEnumerable<JsonElement> FolderIds { get; set; }
     public IEnumerable<JsonElement> FileIds { get; set; }
+    public BoardRoleIds BoardRoleIds { get; set; }
 
     public BaseBatchRequestDto()
     {
         FolderIds = new List<JsonElement>();
+        BoardRoleIds = new BoardRoleIds();
         FileIds = new List<JsonElement>();
     }
+}
+
+public class BoardRoleIds
+{
+    public JsonElement BoardId { get; set; }
+    public IEnumerable<int> RoleIds { get; set; }
 }
 
 public class DownloadRequestDto : BaseBatchRequestDto

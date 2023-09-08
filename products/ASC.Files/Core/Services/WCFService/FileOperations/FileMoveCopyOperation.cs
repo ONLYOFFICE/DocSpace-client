@@ -48,7 +48,7 @@ internal class FileMoveCopyOperationData<T> : FileOperationData<T>
 
     public FileMoveCopyOperationData(IEnumerable<T> folders, IEnumerable<T> files, Tenant tenant, JsonElement toFolderId, bool copy, FileConflictResolveType resolveType, 
         ExternalShareData externalShareData, bool holdResult = true, IDictionary<string, StringValues> headers = null)
-        : base(folders, files, tenant, externalShareData, holdResult)
+        : base(folders, null, null, files, tenant, externalShareData, holdResult)
     {
         if (toFolderId.ValueKind == JsonValueKind.String)
         {

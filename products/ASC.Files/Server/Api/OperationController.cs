@@ -72,7 +72,7 @@ public class OperationController : ApiControllerBase
             folders.Add(folderId, string.Empty);
         }
 
-        foreach (var e in await _fileStorageService.BulkDownloadAsync(folders, files))
+        foreach (var e in await _fileStorageService.BulkDownloadAsync(folders, files, inDto.BoardRoleIds))
         {
             yield return await _fileOperationDtoHelper.GetAsync(e);
         }

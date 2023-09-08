@@ -31,9 +31,9 @@ internal class FileDownloadOperationData<T> : FileOperationData<T>
     public Dictionary<T, string> FilesDownload { get; }
     public IDictionary<string, StringValues> Headers { get; }
 
-    public FileDownloadOperationData(Dictionary<T, string> folders, Dictionary<T, string> files, Tenant tenant, IDictionary<string, StringValues> headers, 
+    public FileDownloadOperationData(Dictionary<T, string> folders, Dictionary<T, string> boards, List<int> roles, Dictionary<T, string> files, Tenant tenant, IDictionary<string, StringValues> headers, 
         ExternalShareData externalShareData, bool holdResult = true)
-        : base(folders.Select(f => f.Key).ToList(), files.Select(f => f.Key).ToList(), tenant, externalShareData, holdResult)
+        : base(folders.Select(f => f.Key).ToList(), boards.Select(f => f.Key).ToList(), roles, files.Select(f => f.Key).ToList(), tenant, externalShareData, holdResult)
     {
         FilesDownload = files;
         Headers = headers;
@@ -95,11 +95,23 @@ class FileDownloadOperation : ComposeFileOperation<FileDownloadOperationData<str
                     fileName = string.Format(@"{0}{1}", (await daoFactory.GetFolderDao<int>().GetFolderAsync(daoOperation.Folders[0])).Title, archiveExtension);
                 }
             }
+            else if (daoOperation.Roles.Count == 1) //TODO thirdParty
+            {
+                if (thirdPartyOperation.Boards.Count == 1)
+                {
+                    fileName = string.Format(@"{0}{1}", (await daoFactory.GetBoardRoleDao<string>().GetBoardRoleAsync(thirdPartyOperation.Boards[0], thirdPartyOperation.Roles[0])).Title, archiveExtension);
+
+                }
+                else
+                {
+                    fileName = string.Format(@"{0}{1}", (await daoFactory.GetBoardRoleDao<int>().GetBoardRoleAsync(daoOperation.Boards[0], daoOperation.Roles[0])).Title, archiveExtension);
+                }
+            }
             else
             {
                 fileName = string.Format(@"{0}-{1}-{2}{3}", (await tenantManager.GetCurrentTenantAsync()).Alias.ToLower(), FileConstant.DownloadTitle, DateTime.UtcNow.ToString("yyyy-MM-dd"), archiveExtension);
             }
-
+           
             var store = await globalStore.GetStoreAsync();
             string path;
             string sessionKey = null;
@@ -192,7 +204,7 @@ class FileDownloadOperation<T> : FileOperation<FileDownloadOperationData<T>, T>
 
     protected override async Task DoJob(IServiceScope scope)
     {
-        if (Files.Count == 0 && Folders.Count == 0)
+        if (Files.Count == 0 && Folders.Count == 0 && Roles.Count == 0)
         {
             return;
         }
@@ -285,6 +297,24 @@ class FileDownloadOperation<T> : FileOperation<FileDownloadOperationData<T>, T>
 
             var filesInFolder = await GetFilesInFoldersAsync(scope, folderForSend.Select(x => x.Id), string.Empty);
             entriesPathId.Add(filesInFolder);
+        }
+
+        if (1 < Roles.Count)
+        {
+            foreach(var roleId in Roles)
+            {
+                var role = await BoardRoleDao.GetBoardRoleAsync(Boards[0], roleId);
+
+                entriesPathId.Add(role.Title + "/", default(T));
+
+                var files = FilesSecurity.FilterDownloadAsync(BoardRoleDao.GetBoardFilesByRole(Boards[0], roleId));
+
+                await foreach (var file in files)
+                {
+                    entriesPathId.Add(await ExecPathFromFileAsync(scope, file, role.Title + "/"));
+                }
+            }
+            
         }
 
         if (Folders.Count == 1 && Files.Count == 0)

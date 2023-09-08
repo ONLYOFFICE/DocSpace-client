@@ -117,7 +117,7 @@ public class FileOperationsManager
         return QueueTask(userId, op);
     }
 
-    public List<FileOperationResult> Download(Guid userId, Tenant tenant, Dictionary<JsonElement, string> folders, Dictionary<JsonElement, string> files, IDictionary<string, StringValues> headers,
+    public List<FileOperationResult> Download(Guid userId, Tenant tenant, Dictionary<JsonElement, string> folders, BoardRoleIds boardRoles, Dictionary<JsonElement, string> files, IDictionary<string, StringValues> headers,
         ExternalShareData externalShareData)
     {
         var operations = _tasks.GetAllTasks()
@@ -128,12 +128,20 @@ public class FileOperationsManager
         {
             throw new InvalidOperationException(FilesCommonResource.ErrorMassage_ManyDownloads);
         }
+        var boardId = new Dictionary<JsonElement, string>();
+        var roleIds = new List<int>();
+        if (boardRoles.RoleIds != null)
+        {
+            boardId.Add(boardRoles.BoardId, string.Empty);
+            roleIds = boardRoles.RoleIds.ToList();
+        }
 
         var (folderIntIds, folderStringIds) = GetIds(folders);
         var (fileIntIds, fileStringIds) = GetIds(files);
+        var (boardIntId, boadrStringId) = GetIds(boardId);
 
-        var op1 = new FileDownloadOperation<int>(_serviceProvider, new FileDownloadOperationData<int>(folderIntIds, fileIntIds, tenant, headers, externalShareData));
-        var op2 = new FileDownloadOperation<string>(_serviceProvider, new FileDownloadOperationData<string>(folderStringIds, fileStringIds, tenant, headers, externalShareData));
+        var op1 = new FileDownloadOperation<int>(_serviceProvider, new FileDownloadOperationData<int>(folderIntIds, boardIntId, roleIds, fileIntIds, tenant, headers, externalShareData));
+        var op2 = new FileDownloadOperation<string>(_serviceProvider, new FileDownloadOperationData<string>(folderStringIds, boadrStringId, roleIds, fileStringIds, tenant, headers, externalShareData));
         var op = new FileDownloadOperation(_serviceProvider, _tempStream, op2, op1);
 
         return QueueTask(userId, op);

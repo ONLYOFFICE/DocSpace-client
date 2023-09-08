@@ -35,7 +35,7 @@ internal class FileDeleteOperationData<T> : FileOperationData<T>
 
     public FileDeleteOperationData(IEnumerable<T> folders, IEnumerable<T> files, Tenant tenant, ExternalShareData externalShareData, bool holdResult = true, 
         bool ignoreException = false, bool immediately = false, IDictionary<string, StringValues> headers = null, bool isEmptyTrash = false)
-        : base(folders, files, tenant, externalShareData, holdResult)
+        : base(folders, null, null, files, tenant, externalShareData, holdResult)
     {
         IgnoreException = ignoreException;
         Immediately = immediately;

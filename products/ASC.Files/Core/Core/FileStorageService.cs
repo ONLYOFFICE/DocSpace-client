@@ -2194,11 +2194,24 @@ public class FileStorageService //: IFileStorageService
         return _fileOperationsManager.CancelOperations(_authContext.CurrentAccount.ID);
     }
 
-    public async Task<List<FileOperationResult>> BulkDownloadAsync(Dictionary<JsonElement, string> folders, Dictionary<JsonElement, string> files)
+    public async Task<List<FileOperationResult>> BulkDownloadAsync(Dictionary<JsonElement, string> folders, Dictionary<JsonElement, string> files, BoardRoleIds boardRoles)
     {
-        ErrorIf(folders.Count == 0 && files.Count == 0, FilesCommonResource.ErrorMassage_BadRequest);
+        ErrorIf(folders.Count == 0 && files.Count == 0 && boardRoles == null, FilesCommonResource.ErrorMassage_BadRequest);
 
-        return _fileOperationsManager.Download(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantAsync(), folders, files, GetHttpHeaders(),
+        if (folders.Count == 0 && files.Count == 0 && boardRoles.RoleIds.Count() == 1)
+        {
+            var daoFactory = _serviceProvider.GetRequiredService<IDaoFactory>();
+            var roleDao = daoFactory.GetBoardRoleDao<int>();
+
+            var roleFiles = _fileSecurity.FilterReadAsync(roleDao.GetBoardFilesByRole(boardRoles.BoardId.GetInt32(), boardRoles.RoleIds.ToList().FirstOrDefault()));
+
+            await foreach (var file in roleFiles)
+            {
+                files.Add(JsonDocument.Parse(file.Id.ToString()).RootElement, string.Empty);
+            }
+        }
+
+        return _fileOperationsManager.Download(_authContext.CurrentAccount.ID, await _tenantManager.GetCurrentTenantAsync(), folders, boardRoles, files, GetHttpHeaders(),
             await _externalShare.GetCurrentShareDataAsync());
     }
 

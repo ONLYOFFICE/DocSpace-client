@@ -99,7 +99,7 @@ internal class ComposeFileOperation<T1, T2> : FileOperation
 
     public override async Task RunJob(DistributedTask _, CancellationToken cancellationToken)
     {
-        if (ThirdPartyOperation.Files.Any() || ThirdPartyOperation.Folders.Any())
+        if (ThirdPartyOperation.Files.Any() || ThirdPartyOperation.Folders.Any() || (ThirdPartyOperation.Roles.Any() && ThirdPartyOperation.Roles.Count > 1))
         {
             ThirdPartyOperation.Publication = PublishChanges;
             await ThirdPartyOperation.RunJob(_, cancellationToken);
@@ -109,7 +109,7 @@ internal class ComposeFileOperation<T1, T2> : FileOperation
             ThirdPartyOperation[Finish] = true;
         }
 
-        if (DaoOperation.Files.Any() || DaoOperation.Folders.Any())
+        if (DaoOperation.Files.Any() || DaoOperation.Folders.Any() || (DaoOperation.Roles.Any() && DaoOperation.Roles.Count > 1))
         {
             DaoOperation.Publication = PublishChanges;
             await DaoOperation.RunJob(_, cancellationToken);
@@ -190,13 +190,17 @@ abstract class FileOperationData<T>
 {
     public List<T> Folders { get; private set; }
     public List<T> Files { get; private set; }
+    public List<T> Boards { get; private set; }
+    public List<int> Roles { get; private set; }
     public Tenant Tenant { get; }
     public ExternalShareData ExternalShareData { get; }
     public bool HoldResult { get; set; }
 
-    protected FileOperationData(IEnumerable<T> folders, IEnumerable<T> files, Tenant tenant, ExternalShareData externalShareData, bool holdResult = true)
+    protected FileOperationData(IEnumerable<T> folders, IEnumerable<T> boards, List<int> roles, IEnumerable<T> files, Tenant tenant, ExternalShareData externalShareData, bool holdResult = true)
     {
         Folders = folders?.ToList() ?? new List<T>();
+        Boards = boards?.ToList() ?? new List<T>();
+        Roles = roles ?? new List<int>();
         Files = files?.ToList() ?? new List<T>();
         Tenant = tenant;
         ExternalShareData = externalShareData;
@@ -218,6 +222,8 @@ abstract class FileOperation<T, TId> : FileOperation where T : FileOperationData
     protected CancellationToken CancellationToken { get; private set; }
     protected internal List<TId> Folders { get; private set; }
     protected internal List<TId> Files { get; private set; }
+    protected internal List<TId> Boards { get; private set; }
+    protected internal List<int> Roles { get; private set; }
     protected ExternalShareData CurrentShareData { get; private set; }
 
     protected IServiceProvider _serviceProvider;
@@ -227,6 +233,8 @@ abstract class FileOperation<T, TId> : FileOperation where T : FileOperationData
         _serviceProvider = serviceProvider;
         Files = fileOperationData.Files;
         Folders = fileOperationData.Folders;
+        Boards = fileOperationData.Boards;
+        Roles = fileOperationData.Roles;
         this[Hold] = fileOperationData.HoldResult;
         CurrentTenant = fileOperationData.Tenant;
         CurrentShareData = fileOperationData.ExternalShareData;

@@ -19,6 +19,7 @@ const SpaceQuota = (props) => {
     changeUserQuota,
     changeRoomQuota,
     updateUserQuota,
+    className,
   } = props;
   console.log("SpaceQuota render");
   const [action, setAction] = useState("no-quota");
@@ -114,6 +115,7 @@ const SpaceQuota = (props) => {
       <Text fontWeight={600}>{usedSpace} / </Text>
 
       <ComboBox
+        className={className}
         selectedOption={selectedOption}
         options={options}
         onSelect={onChange}

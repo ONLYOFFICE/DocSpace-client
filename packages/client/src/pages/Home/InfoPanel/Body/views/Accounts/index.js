@@ -218,7 +218,7 @@ const Accounts = ({
           <Text className={"info_field"} noSelect title={"Quota"}>
             {"Quota"}
           </Text>
-          <SpaceQuota type="user" item={selection} />
+          <SpaceQuota type="user" item={selection} className="type-combobox" />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}

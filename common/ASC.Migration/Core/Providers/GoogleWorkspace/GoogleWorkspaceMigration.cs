@@ -82,7 +82,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
     {
         if (reportProgress)
         {
-            ReportProgress(0, MigrationResource.StartOfDataProcessing);
+            ReportProgress(5, MigrationResource.StartOfDataProcessing);
         }
 
         var progressStep = 90 / _takeouts.Length;

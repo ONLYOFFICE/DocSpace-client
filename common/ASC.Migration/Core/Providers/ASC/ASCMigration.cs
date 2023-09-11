@@ -72,7 +72,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
     {
         if (reportProgress)
         {
-            ReportProgress(0, MigrationResource.StartOfDataProcessing);
+            ReportProgress(5, MigrationResource.StartOfDataProcessing);
         }
         using var stream = _dataReader.GetEntry("databases/core/core_user");
         var data = new DataTable();

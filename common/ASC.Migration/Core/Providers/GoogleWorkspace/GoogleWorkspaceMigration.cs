@@ -85,7 +85,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
             ReportProgress(0, MigrationResource.StartOfDataProcessing);
         }
 
-        var progressStep = 100 / _takeouts.Length;
+        var progressStep = 90 / _takeouts.Length;
         var i = 1;
         foreach (var takeout in _takeouts)
         {

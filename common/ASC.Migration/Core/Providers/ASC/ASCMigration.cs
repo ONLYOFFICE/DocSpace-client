@@ -77,7 +77,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
         using var stream = _dataReader.GetEntry("databases/core/core_user");
         var data = new DataTable();
         data.ReadXml(stream);
-        var progressStep = 100 / data.Rows.Count;
+        var progressStep = 90 / data.Rows.Count;
         var i = 1;
         foreach (var row in data.Rows.Cast<DataRow>())
         {

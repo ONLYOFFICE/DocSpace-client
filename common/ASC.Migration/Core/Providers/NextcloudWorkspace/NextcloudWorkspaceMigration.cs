@@ -77,7 +77,7 @@ public class NextcloudWorkspaceMigration : AbstractMigration<NCMigrationInfo, NC
     {
         if (reportProgress)
         {
-            ReportProgress(0, MigrationResource.Unzipping);
+            ReportProgress(5, MigrationResource.Unzipping);
         }
         try
         {

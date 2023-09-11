@@ -32,6 +32,7 @@ const ImportProcessingStep = ({
   isFifthStep,
   setIsFileLoading,
   migrationFile,
+  cancelMigration,
   data,
 }) => {
   const [isVisble, setIsVisble] = useState(false);
@@ -82,6 +83,7 @@ const ImportProcessingStep = ({
           visible={isVisble}
           loading={false}
           isFifthStep={isFifthStep}
+          cancelMigration={cancelMigration}
           onClose={() => setIsVisble(false)}
         />
       )}
@@ -90,11 +92,13 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsFileLoading, migrationFile } = importAccountsStore;
+  const { data, setIsFileLoading, migrationFile, cancelMigration } =
+    importAccountsStore;
 
   return {
     data,
     setIsFileLoading,
     migrationFile,
+    cancelMigration,
   };
 })(observer(ImportProcessingStep));

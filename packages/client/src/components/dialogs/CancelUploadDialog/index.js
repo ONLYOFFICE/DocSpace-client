@@ -4,7 +4,13 @@ import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const CancelUploadDialog = ({ isFifthStep, visible, onClose, loading }) => {
+const CancelUploadDialog = ({
+  isFifthStep,
+  visible,
+  onClose,
+  loading,
+  cancelMigration,
+}) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
@@ -14,9 +20,11 @@ const CancelUploadDialog = ({ isFifthStep, visible, onClose, loading }) => {
 
   const onCancelProcess = () => {
     if (isFifthStep) {
-      navigate("/portal-settings/data-import/migration");
+      navigate(-1);
+      cancelMigration();
     } else {
       onClose();
+      cancelMigration();
     }
   };
 

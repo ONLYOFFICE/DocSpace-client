@@ -76,6 +76,7 @@ const SelectFileStep = ({
   setData,
   isFileLoading,
   setIsFileLoading,
+  cancelMigration,
 }) => {
   const [searchParams] = useSearchParams();
   const [progress, setProgress] = useState(0);
@@ -186,6 +187,7 @@ const SelectFileStep = ({
           visible={cancelDialogVisble}
           loading={isFileLoading}
           onClose={() => setCancelDialogVisbile(false)}
+          cancelMigration={cancelMigration}
         />
       )}
     </>
@@ -201,11 +203,13 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setData,
     isFileLoading,
     setIsFileLoading,
+    cancelMigration,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
 
   return {
+    cancelMigration,
     setUsers,
     setData,
     localFileUploading,

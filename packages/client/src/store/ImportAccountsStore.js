@@ -6,6 +6,7 @@ import {
   migrationList,
   migrationName,
   migrationStatus,
+  migrationCancel,
   migrateFile,
 } from "@docspace/common/api/settings";
 
@@ -112,6 +113,10 @@ class ImportAccountsStore {
 
   migrationFile = (data) => {
     return migrateFile(data);
+  };
+
+  cancelMigration = () => {
+    return migrationCancel();
   };
 
   getMigrationStatus = () => {

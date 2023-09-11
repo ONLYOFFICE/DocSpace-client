@@ -932,6 +932,13 @@ export function migrateFile(data) {
   });
 }
 
+export function migrationCancel() {
+  return request({
+    method: "post",
+    url: `/migration/cancel`,
+  });
+}
+
 export function setCSPSettings(data) {
   return request({
     method: "post",

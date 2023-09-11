@@ -87,11 +87,10 @@ public class MigrationLogger : IDisposable
 
     public void Dispose()
     {
-        try
+        if(_migrationLog != null)
         {
             _migrationLog.Dispose();
         }
-        catch { }
     }
 
     public Stream GetStream()

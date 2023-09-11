@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import ProgressBar from "@docspace/components/progress-bar";
 import Button from "@docspace/components/button";
 
@@ -24,61 +24,59 @@ const Wrapper = styled.div`
   }
 `;
 
+const PERCENT_STEP = 5;
+
 const ImportProcessingStep = ({
   t,
   onNextStep,
-  onPrevStep,
-  showReminder,
   isFifthStep,
+  isFileLoading,
+  setIsFileLoading,
+  migrationFile,
+  data,
 }) => {
   const [isVisble, setIsVisble] = useState(false);
   const [percent, setPercent] = useState(0);
   const percentRef = useRef(0);
 
-  const PERCENT_STEP = 5;
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (percentRef.current < 100) {
-        setPercent((prevPercent) => prevPercent + PERCENT_STEP);
-        percentRef.current += PERCENT_STEP;
-      } else {
-        clearInterval(interval);
-        onNextStep();
-      }
-    }, 200);
-
-    return () => {
-      clearInterval(interval);
-    };
+    try {
+      const interval = setInterval(() => {
+        if (percentRef.current < 100) {
+          setIsFileLoading(true);
+          setPercent((prev) => prev + PERCENT_STEP);
+          percentRef.current += PERCENT_STEP;
+        } else {
+          clearInterval(interval);
+          setIsFileLoading(false);
+          onNextStep();
+        }
+      }, 1000);
+      migrationFile(data);
+    } catch (error) {
+      console.log(error);
+      setIsFileLoading(false);
+    }
   }, []);
 
-  const onClickButton = () => {
+  const onCancel = () => {
     setIsVisble(true);
+    setPercent(0);
+    setIsFileLoading(false);
   };
 
   return (
     <Wrapper>
-      {percent < 102 ? (
+      {percent < 102 && (
         <>
           <ProgressBar percent={percent} className="data-import-progress-bar" />
           <Button
             size="small"
             className="cancel-button"
             label={t("Common:CancelButton")}
-            onClick={onClickButton}
+            onClick={onCancel}
           />
         </>
-      ) : (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={onNextStep}
-          onCancelClick={onPrevStep}
-          showReminder={showReminder}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
-        />
       )}
 
       {isVisble && (
@@ -93,4 +91,22 @@ const ImportProcessingStep = ({
   );
 };
 
-export default ImportProcessingStep;
+export default inject(({ importAccountsStore }) => {
+  const {
+    data,
+    initMigrationName,
+    getMigrationStatus,
+    isFileLoading,
+    setIsFileLoading,
+    migrationFile,
+  } = importAccountsStore;
+
+  return {
+    data,
+    getMigrationStatus,
+    initMigrationName,
+    isFileLoading,
+    setIsFileLoading,
+    migrationFile,
+  };
+})(observer(ImportProcessingStep));

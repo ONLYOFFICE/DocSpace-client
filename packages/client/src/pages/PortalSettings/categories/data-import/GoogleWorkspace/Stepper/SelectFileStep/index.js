@@ -73,6 +73,7 @@ const SelectFileStep = ({
   localFileUploading,
   getMigrationStatus,
   setUsers,
+  setData,
   isFileLoading,
   setIsFileLoading,
 }) => {
@@ -93,6 +94,7 @@ const SelectFileStep = ({
       } else if (res.isCompleted) {
         setIsFileLoading(false);
         clearInterval(interval);
+        setData(res);
         setUsers(res);
         setShowReminder(true);
       }
@@ -196,6 +198,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     localFileUploading,
     getMigrationStatus,
     setUsers,
+    setData,
     isFileLoading,
     setIsFileLoading,
   } = importAccountsStore;
@@ -204,6 +207,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
 
   return {
     setUsers,
+    setData,
     localFileUploading,
     getMigrationStatus,
     initMigrationName,

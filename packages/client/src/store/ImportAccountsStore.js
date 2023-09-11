@@ -6,6 +6,7 @@ import {
   migrationList,
   migrationName,
   migrationStatus,
+  migrateFile,
 } from "@docspace/common/api/settings";
 
 class ImportAccountsStore {
@@ -15,6 +16,7 @@ class ImportAccountsStore {
   existUsers = [];
   withoutEmailUsers = [];
   isFileLoading = false;
+  data = {};
 
   constructor() {
     makeAutoObservable(this);
@@ -46,6 +48,10 @@ class ImportAccountsStore {
       this.existUsers = data.parseResult.existUsers;
       this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
     });
+  };
+
+  setData = (data) => {
+    this.data = data.parseResult;
   };
 
   isAccountChecked = (id) => this.checkedAccounts.includes(id);
@@ -102,6 +108,10 @@ class ImportAccountsStore {
 
   initMigrationName = (name) => {
     return migrationName(name);
+  };
+
+  migrationFile = (data) => {
+    return migrateFile(data);
   };
 
   getMigrationStatus = () => {

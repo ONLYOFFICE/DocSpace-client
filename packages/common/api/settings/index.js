@@ -924,6 +924,14 @@ export function migrationStatus() {
   });
 }
 
+export function migrateFile(data) {
+  return request({
+    method: "post",
+    url: `/migration/migrate`,
+    data: data,
+  });
+}
+
 export function setCSPSettings(data) {
   return request({
     method: "post",

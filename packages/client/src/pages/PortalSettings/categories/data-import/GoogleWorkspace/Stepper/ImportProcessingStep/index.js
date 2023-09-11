@@ -30,7 +30,6 @@ const ImportProcessingStep = ({
   t,
   onNextStep,
   isFifthStep,
-  isFileLoading,
   setIsFileLoading,
   migrationFile,
   data,
@@ -61,7 +60,6 @@ const ImportProcessingStep = ({
 
   const onCancel = () => {
     setIsVisble(true);
-    setPercent(0);
     setIsFileLoading(false);
   };
 
@@ -92,20 +90,10 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    data,
-    initMigrationName,
-    getMigrationStatus,
-    isFileLoading,
-    setIsFileLoading,
-    migrationFile,
-  } = importAccountsStore;
+  const { data, setIsFileLoading, migrationFile } = importAccountsStore;
 
   return {
     data,
-    getMigrationStatus,
-    initMigrationName,
-    isFileLoading,
     setIsFileLoading,
     migrationFile,
   };

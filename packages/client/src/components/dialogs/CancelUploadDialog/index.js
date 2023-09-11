@@ -1,14 +1,24 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const CancelUploadDialog = ({ isFifthStep, visible, onClose, loading }) => {
   const { t } = useTranslation(["Settings", "Common"]);
+  const navigate = useNavigate();
 
   const modalBodyText = isFifthStep
     ? t("Settings:WantToCancelDataImport")
     : t("Settings:WantToCancelUpload");
+
+  const onCancelProcess = () => {
+    if (isFifthStep) {
+      navigate("/portal-settings/data-import/migration");
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <ModalDialogContainer
@@ -24,7 +34,7 @@ const CancelUploadDialog = ({ isFifthStep, visible, onClose, loading }) => {
           size="normal"
           scale
           primary={true}
-          onClick={onClose}
+          onClick={onCancelProcess}
           isLoading={loading}
         />
         <Button

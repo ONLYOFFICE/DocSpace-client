@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ContextMenu, ContextMenuButton } from "@docspace/components";
 
@@ -9,6 +9,14 @@ import ContextHelper from "../../helpers/ContextHelper";
 const StyledItemContextOptions = styled.div`
   height: 16px;
   ${({ withLabel }) => !withLabel && "margin-left: auto;"}
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
 `;
 
 const getFormContextOptions = (t) => [

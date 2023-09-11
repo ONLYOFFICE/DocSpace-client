@@ -5,7 +5,14 @@ import { hugeMobile, tablet } from "@docspace/components/utils/device";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
-  padding: 0px 3px 0 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 0px 20px 0 3px;
+        `
+      : css`
+          padding: 0px 3px 0 20px;
+        `}
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -22,7 +29,14 @@ const StyledInfoPanelBody = styled.div`
   }
 
   @media ${hugeMobile} {
-    padding: 0px 8px 0 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0px 16px 0 8px;
+          `
+        : css`
+            padding: 0px 8px 0 16px;
+          `}
   }
 `;
 
@@ -30,8 +44,17 @@ const StyledTitle = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  margin-left: -20px;
-  padding: 24px 0 24px 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 24px 20px 24px 0px;
+          margin-right: -20px;
+        `
+      : css`
+          padding: 24px 0 24px 20px;
+          margin-left: -20px;
+        `}
+
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
   display: flex;
@@ -68,21 +91,19 @@ const StyledTitle = styled.div`
     -webkit-line-clamp: 2;
   }
 
-  .free-label {
-    margin-left: auto;
-    margin-right: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 16px;
-    color: #4781d1;
-  }
-
   ${(props) =>
     props.withBottomBorder &&
     css`
       width: calc(100% + 20px);
       margin: 0 -20px 0 -20px;
-      padding: 23px 0 23px 20px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 23px 23px 23px 0;
+            `
+          : css`
+              padding: 23px 0 23px 20px;
+            `}
       border-bottom: ${(props) =>
         `solid 1px ${props.theme.infoPanel.borderColor}`};
     `}
@@ -94,13 +115,27 @@ const StyledTitle = styled.div`
 
   @media ${hugeMobile} {
     width: calc(100vw - 32px);
-    padding: 24px 0 24px 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 24px 16px 24px 0;
+          `
+        : css`
+            padding: 24px 0 24px 16px;
+          `}
 
     ${(props) =>
       props.withBottomBorder &&
       css`
         width: calc(100% + 16px);
-        padding: 23px 0 23px 16px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 23px 16px 23px 0;
+              `
+            : css`
+                padding: 23px 0 23px 16px;
+              `}
         margin: 0 -16px 0 -16px;
       `}
   }

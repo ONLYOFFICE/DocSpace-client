@@ -113,7 +113,7 @@ class OformsStore {
     });
   };
 
-  filterOformsByLocale = (locale) => {
+  filterOformsByLocale = async (locale) => {
     if (!locale) return;
 
     this.oformsFilter.page = 1;

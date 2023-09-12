@@ -1,4 +1,3 @@
-import { smallTablet } from "@docspace/components/utils/device";
 import styled, { css } from "styled-components";
 
 import DropDown from "@docspace/components/drop-down";
@@ -9,19 +8,11 @@ export const CategoryFilterWrapper = styled.div`
   position: relative;
   width: 220px;
   box-sizing: border-box;
-
-  @media ${smallTablet} {
-    width: 100%;
-  }
 `;
 
 export const CategoryFilter = styled(ComboBox)`
-  width: 100%;
+  width: 220px;
   box-sizing: border-box;
-
-  .combobox {
-    width: 100%;
-  }
 
   .combo-button-label {
     font-weight: 400;
@@ -46,17 +37,10 @@ export const CategoryFilterItem = styled(DropDownItem)`
 
   .submenu-arrow {
     margin-right: 0;
-
     svg {
       height: 12px;
       width: 12px;
     }
-
-    ${({ isMobileOpen }) =>
-      isMobileOpen &&
-      css`
-        transform: rotate(270deg);
-      `}
   }
 `;
 

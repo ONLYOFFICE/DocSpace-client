@@ -12,6 +12,7 @@ class ComboBox extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(props.advancedOptions);
     this.ref = React.createRef();
 
     this.state = {

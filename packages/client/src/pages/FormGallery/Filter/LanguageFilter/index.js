@@ -18,8 +18,11 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
 
-  const onFilterByLocale = (newLocale) => {
-    filterOformsByLocale(newLocale);
+  const onFilterByLocale = async (newLocale) => {
+    await filterOformsByLocale(newLocale);
+
+    const [sectionScroll] = document.getElementsByClassName("section-scroll");
+    sectionScroll.scrollTop = 0;
   };
 
   return (

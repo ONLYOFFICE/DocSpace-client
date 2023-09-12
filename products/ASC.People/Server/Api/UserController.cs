@@ -1623,9 +1623,11 @@ public class UserController : PeopleControllerBase
     /// <path>api/2.0/people/quota</path>
     /// <httpMethod>PUT</httpMethod>
     /// <collection>list</collection>
-    [HttpPut("quota")]
+    [HttpPut("userquota")]
     public async IAsyncEnumerable<EmployeeFullDto> UpdateUserQuotaAsync(UpdateMembersQuotaRequestDto inDto)
     {
+        await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
+
         var users = await inDto.UserIds.ToAsyncEnumerable()
             .Where(userId => !_userManager.IsSystemUser(userId))
             .SelectAwait(async userId => await _userManager.GetUsersAsync(userId))
@@ -1634,23 +1636,13 @@ public class UserController : PeopleControllerBase
         var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
+        if (maxTotalSize < inDto.Quota)
+        {
+            throw new Exception(Resource.QuotaGreaterPortalError);
+        }
+
         foreach (var user in users)
         {
-            if (inDto.Quota != -1)
-            {
-                var usedSpace = Math.Max(0,
-                    (await _quotaService.FindUserQuotaRowsAsync(
-                            await _tenantManager.GetCurrentTenantIdAsync(),
-                            user.Id
-                        ))
-                .Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
-
-                if ((maxTotalSize > -1 && (maxTotalSize < inDto.Quota)) || usedSpace > inDto.Quota)
-                {
-                    continue;
-                }
-            }
-
             var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
 
             await _settingsManager.SaveAsync(new UserQuotaSettings { UserQuota = inDto.Quota }, user);

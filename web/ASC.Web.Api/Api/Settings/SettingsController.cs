@@ -61,6 +61,7 @@ public class SettingsController : BaseSettingsController
     private readonly TenantDomainValidator _tenantDomainValidator;
     private readonly QuotaSyncOperation _quotaSyncOperation;
     private readonly ExternalShare _externalShare;
+    private readonly IQuotaService _quotaService;
 
     public SettingsController(
         ILoggerProvider option,
@@ -96,8 +97,8 @@ public class SettingsController : BaseSettingsController
         QuotaSyncOperation quotaSyncOperation,
         QuotaUsageManager quotaUsageManager,
         TenantDomainValidator tenantDomainValidator, 
-        ExternalShare externalShare
-        ) : base(apiContext, memoryCache, webItemManager, httpContextAccessor)
+        ExternalShare externalShare,
+        IQuotaService quotaService) : base(apiContext, memoryCache, webItemManager, httpContextAccessor)
     {
         _log = option.CreateLogger("ASC.Api");
         _consumerFactory = consumerFactory;
@@ -129,6 +130,7 @@ public class SettingsController : BaseSettingsController
         _quotaUsageManager = quotaUsageManager;
         _tenantDomainValidator = tenantDomainValidator;
         _externalShare = externalShare;
+        _quotaService = quotaService;
     }
 
     /// <summary>
@@ -331,9 +333,17 @@ public class SettingsController : BaseSettingsController
     /// <path>api/2.0/settings/userquotasettings</path>
     /// <httpMethod>POST</httpMethod>
     [HttpPost("userquotasettings")]
-    public async Task<object> SaveUserQuotaSettingsAsync(UserQuotaSettingsRequestsDto inDto)
+    public async Task<TenantUserQuotaSettings> SaveUserQuotaSettingsAsync(UserQuotaSettingsRequestsDto inDto)
     {
         await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
+
+        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
+        var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
+
+        if (maxTotalSize < inDto.DefaultUserQuota)
+        {
+            throw new Exception(Resource.QuotaGreaterPortalError);
+        }
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
         quotaSettings.EnableUserQuota = inDto.EnableUserQuota;
@@ -341,7 +351,7 @@ public class SettingsController : BaseSettingsController
 
         await _settingsManager.SaveAsync(quotaSettings);
 
-        return Resource.SuccessfullySaveSettingsMessage;
+        return quotaSettings;
     }
 
     [HttpGet("userquotasettings")]

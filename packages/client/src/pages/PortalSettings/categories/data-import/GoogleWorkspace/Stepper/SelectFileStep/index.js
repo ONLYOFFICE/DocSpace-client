@@ -29,8 +29,7 @@ const Wrapper = styled.div`
     .icon-button_svg {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.client.settings.migration.fileInputIconColor};
+          fill: ${(props) => props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
@@ -70,6 +69,7 @@ const SelectFileStep = ({
   cancelDialogVisble,
   setCancelDialogVisbile,
   initMigrationName,
+  multipleFileUploading,
   localFileUploading,
   getMigrationStatus,
   setUsers,
@@ -83,7 +83,10 @@ const SelectFileStep = ({
   const [isFileError, setIsFileError] = useState(false);
 
   const onUploadFile = async (file) => {
-    await localFileUploading(file, setProgress);
+    (await file.length)
+      ? multipleFileUploading(file, setProgress)
+      : localFileUploading(file, setProgress);
+    await multipleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
     const interval = setInterval(async () => {
       const res = await getMigrationStatus();
@@ -121,9 +124,7 @@ const SelectFileStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="select-file-title">
-          {t("Settings:ChooseBackupFile")}
-        </Text>
+        <Text className="select-file-title">{t("Settings:ChooseBackupFile")}</Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -141,11 +142,7 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button
-            size="small"
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
+          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
         </Wrapper>
       ) : (
         <ErrorBlock>
@@ -156,15 +153,12 @@ const SelectFileStep = ({
                 className="complete-progress-bar"
                 label={t("Common:LoadingIsComplete")}
               />
-              <Text className="error-text">
-                {t("Settings:UnsupportedArchivesDescription")}
-              </Text>
+              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
               <Link
                 type="action"
                 isHovered
                 fontWeight={600}
-                onClick={() => console.log("download")}
-              >
+                onClick={() => console.log("download")}>
                 {t("Settings:DownloadUnsupportedArchives")}
               </Link>
             </Box>
@@ -197,27 +191,28 @@ const SelectFileStep = ({
 export default inject(({ dialogsStore, importAccountsStore }) => {
   const {
     initMigrationName,
-    localFileUploading,
+    multipleFileUploading,
     getMigrationStatus,
     setUsers,
     setData,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
+    localFileUploading,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
 
   return {
     cancelMigration,
     setUsers,
     setData,
-    localFileUploading,
+    multipleFileUploading,
     getMigrationStatus,
     initMigrationName,
     cancelDialogVisble: cancelUploadDialogVisible,
     setCancelDialogVisbile: setCancelUploadDialogVisible,
     isFileLoading,
     setIsFileLoading,
+    localFileUploading,
   };
 })(observer(SelectFileStep));

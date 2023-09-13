@@ -32,6 +32,7 @@ spring:
 application:
   server:
     url: http://onlyoffice-oauth-authorization:8080
+    frontendUrl: http://${FRONTEND_ADDRESS:127.0.0.1:3005}
 
 docspace:
   server:

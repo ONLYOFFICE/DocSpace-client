@@ -32,7 +32,7 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
     private String url;
-    private String frontendUrl = "http://127.0.0.1:3005";
+    private String frontendUrl;
     private String login = "/login";
     private String logout = "/logout";
 

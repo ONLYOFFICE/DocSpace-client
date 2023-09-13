@@ -30,12 +30,7 @@ export function getPortalPasswordSettings(confirmKey = null) {
   return request(options);
 }
 
-export function setPortalPasswordSettings(
-  minLength,
-  upperCase,
-  digits,
-  specSymbols
-) {
+export function setPortalPasswordSettings(minLength, upperCase, digits, specSymbols) {
   return request({
     method: "put",
     url: "/settings/security/password",
@@ -260,13 +255,7 @@ export function restoreWhiteLabelSettings(isDefault) {
   });
 }
 
-export function setCompanyInfoSettings(
-  address,
-  companyName,
-  email,
-  phone,
-  site
-) {
+export function setCompanyInfoSettings(address, companyName, email, phone, site) {
   const data = {
     settings: { address, companyName, email, phone, site },
   };
@@ -302,7 +291,7 @@ export function getCustomSchemaList() {
 export function setAdditionalResources(
   feedbackAndSupportEnabled,
   videoGuidesEnabled,
-  helpCenterEnabled
+  helpCenterEnabled,
 ) {
   const data = {
     settings: {
@@ -349,7 +338,7 @@ export function setCustomSchema(
   regDateCaption,
   groupHeadCaption,
   guestCaption,
-  guestsCaption
+  guestsCaption,
 ) {
   const data = {
     userCaption,
@@ -428,14 +417,7 @@ export function getMachineName(confirmKey = null) {
   return request(options);
 }
 
-export function setPortalOwner(
-  email,
-  hash,
-  lng,
-  timeZone,
-  confirmKey = null,
-  analytics
-) {
+export function setPortalOwner(email, hash, lng, timeZone, confirmKey = null, analytics) {
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
@@ -813,15 +795,7 @@ export function removeWebhook(id) {
 }
 
 export function getWebhooksJournal(props) {
-  const {
-    configId,
-    eventId,
-    count,
-    startIndex,
-    deliveryFrom,
-    deliveryTo,
-    groupStatus,
-  } = props;
+  const { configId, eventId, count, startIndex, deliveryFrom, deliveryTo, groupStatus } = props;
 
   const params = {};
 
@@ -940,10 +914,7 @@ export function migrationCancel() {
 }
 
 export function migrationLog() {
-  return request({
-    method: "get",
-    url: "/migration/logs",
-  });
+  return axios.get("/api/2.0/migration/logs");
 }
 
 export function setCSPSettings(data) {

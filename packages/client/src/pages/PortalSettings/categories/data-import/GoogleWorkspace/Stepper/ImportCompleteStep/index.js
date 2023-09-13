@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
@@ -44,9 +45,29 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const ImportCompleteStep = ({ t }) => {
+const ImportCompleteStep = ({ t, getMigrationLog }) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
+
+  const dowloadLog = async () => {
+    try {
+      await getMigrationLog()
+        .then((response) => response.blob())
+        .then((blob) => {
+          console.log(blob);
+          let a = document.createElement("a");
+          const url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = "migration";
+          a.click();
+          // Clean up
+          window.URL.revokeObjectURL(url);
+          document.removeChild(a);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const selectedUsers = 70;
   const importedUsers = 70;
@@ -89,6 +110,7 @@ const ImportCompleteStep = ({ t }) => {
           size="small"
           className="download-button"
           label={t("Settings:DownloadLog")}
+          onClick={dowloadLog}
         />
         <Button
           size="small"
@@ -100,4 +122,10 @@ const ImportCompleteStep = ({ t }) => {
   );
 };
 
-export default ImportCompleteStep;
+export default inject(({ importAccountsStore }) => {
+  const { getMigrationLog } = importAccountsStore;
+
+  return {
+    getMigrationLog,
+  };
+})(observer(ImportCompleteStep));

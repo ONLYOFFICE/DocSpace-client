@@ -30,7 +30,7 @@ const ImportProcessingStep = ({
   t,
   onNextStep,
   isFifthStep,
-  setIsFileLoading,
+  setIsLoading,
   migrationFile,
   cancelMigration,
   data,
@@ -43,25 +43,25 @@ const ImportProcessingStep = ({
     try {
       const interval = setInterval(() => {
         if (percentRef.current < 100) {
-          setIsFileLoading(true);
+          setIsLoading(true);
           setPercent((prev) => prev + PERCENT_STEP);
           percentRef.current += PERCENT_STEP;
         } else {
           clearInterval(interval);
-          setIsFileLoading(false);
+          setIsLoading(false);
           onNextStep();
         }
       }, 1000);
       migrationFile(data);
     } catch (error) {
       console.log(error);
-      setIsFileLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
   const onCancel = () => {
     setIsVisble(true);
-    setIsFileLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -92,12 +92,12 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsFileLoading, migrationFile, cancelMigration } =
+  const { data, setIsLoading, migrationFile, cancelMigration } =
     importAccountsStore;
 
   return {
     data,
-    setIsFileLoading,
+    setIsLoading,
     migrationFile,
     cancelMigration,
   };

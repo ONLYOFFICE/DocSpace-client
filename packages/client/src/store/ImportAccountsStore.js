@@ -17,6 +17,7 @@ class ImportAccountsStore {
   existUsers = [];
   withoutEmailUsers = [];
   isFileLoading = false;
+  isLoading = false;
   data = {};
 
   constructor() {
@@ -25,6 +26,10 @@ class ImportAccountsStore {
 
   setIsFileLoading = (isLoading) => {
     this.isFileLoading = isLoading;
+  };
+
+  setIsLoading = (isLoading) => {
+    this.isLoading = isLoading;
   };
 
   toggleAccount = (id) => {

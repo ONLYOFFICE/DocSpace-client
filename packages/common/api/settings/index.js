@@ -914,7 +914,10 @@ export function migrationCancel() {
 }
 
 export function migrationLog() {
-  return axios.get("/api/2.0/migration/logs");
+  return request({
+    method: "get",
+    url: `/migration/logs`,
+  });
 }
 
 export function setCSPSettings(data) {

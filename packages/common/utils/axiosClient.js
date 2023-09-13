@@ -123,7 +123,7 @@ class AxiosClient {
 
       if (response.request.responseType === "text") return response.data;
 
-      return response.data.response;
+      return response.data.response ?? response.data;
     };
 
     const onError = (error) => {

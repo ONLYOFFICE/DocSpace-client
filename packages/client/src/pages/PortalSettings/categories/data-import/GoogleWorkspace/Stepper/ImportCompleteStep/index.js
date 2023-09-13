@@ -49,20 +49,17 @@ const ImportCompleteStep = ({ t, getMigrationLog }) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
-  const dowloadLog = async () => {
+  const onDownloadLog = async () => {
     try {
       await getMigrationLog()
-        .then((response) => response.blob())
+        .then((response) => new Blob([response]))
         .then((blob) => {
-          console.log(blob);
           let a = document.createElement("a");
           const url = window.URL.createObjectURL(blob);
           a.href = url;
-          a.download = "migration";
+          a.download = "migration.log";
           a.click();
-          // Clean up
           window.URL.revokeObjectURL(url);
-          document.removeChild(a);
         });
     } catch (error) {
       console.log(error);
@@ -110,7 +107,7 @@ const ImportCompleteStep = ({ t, getMigrationLog }) => {
           size="small"
           className="download-button"
           label={t("Settings:DownloadLog")}
-          onClick={dowloadLog}
+          onClick={onDownloadLog}
         />
         <Button
           size="small"

@@ -96,7 +96,7 @@ public class MigrationController : ControllerBase
             var result = new MigrationStatusDto
             {
                 Progress = status.Percentage,
-                Error = status.Exception,
+                Error = status.Exception != null ? status.Exception.Message : "",
                 IsCompleted = status.IsCompleted,
                 ParseResult = status.MigrationApiInfo
             };

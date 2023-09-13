@@ -27,7 +27,7 @@
 namespace ASC.Migration.Core.Core.Providers;
 
 [Scope]
-public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser, ASCMigratingFiles>
+public class WorkspaceMigration : AbstractMigration<WorkspaceMigrationInfo, WorkspaceMigratingUser, WorkspaceMigratingFiles>
 {
     private string _takeout;
     private string _tmpFolder;
@@ -37,11 +37,11 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
     private IDataReadOperator _dataReader;
     public override MigratorMeta Meta => _meta;
 
-    public ASCMigration(MigrationLogger migrationLogger,
+    public WorkspaceMigration(MigrationLogger migrationLogger,
         IServiceProvider serviceProvider,
         UserManager userManager) : base(migrationLogger)
     {
-        _meta = new("ASC", 5, false);
+        _meta = new("Workspace", 5, false);
         _serviceProvider = serviceProvider;
         _userManager = userManager;
     }
@@ -63,7 +63,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
             }
         }
 
-        _migrationInfo = new ASCMigrationInfo();
+        _migrationInfo = new WorkspaceMigrationInfo();
         _migrationInfo.MigratorName = _meta.Name;
         _tmpFolder = path;
         _dataReader = new ZipReadOperator(_takeout, false);
@@ -90,7 +90,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
                 return null;
             }
 
-            var u = new ASCUser() 
+            var u = new WorkspaceUser() 
             {
                 Id = row["id"].ToString(),
                 Info = new UserInfo()
@@ -107,7 +107,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
                 ReportProgress(GetProgress() + progressStep, MigrationResource.DataProcessing + $" {u.Id} ({i++}/{data.Rows.Count})");
             }
 
-            var user = _serviceProvider.GetService<ASCMigratingUser>();
+            var user = _serviceProvider.GetService<WorkspaceMigratingUser>();
             user.Init(u.Id, u, _tmpFolder, _dataReader, Log);
             user.Parse();
             if ((await _userManager.GetUserByEmailAsync(u.Info.Email)) != ASC.Core.Users.Constants.LostUser)
@@ -136,7 +136,7 @@ public class ASCMigration : AbstractMigration<ASCMigrationInfo, ASCMigratingUser
             .Where(u => u.Value.ShouldImport)
             .Select(u => u.Value);
 
-        var failedUsers = new List<ASCMigratingUser>();
+        var failedUsers = new List<WorkspaceMigratingUser>();
         var usersCount = usersForImport.Count();
         var progressStep = 25 / usersCount;
         var i = 1;

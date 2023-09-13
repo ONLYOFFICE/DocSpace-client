@@ -24,26 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-namespace ASC.Migration.Core.Core.Providers.Models.Parse;
-public class ASCStorage
+namespace ASC.Migration.Core.Core.Providers.Models;
+public class WorkspaceMigrationInfo : MigrationInfo<WorkspaceMigratingUser, WorkspaceMigratingFiles>
 {
-    public List<ASCFile> Files { get; set; }
-    public List<ASCFolder> Folders { get; set; }
-}
-
-public class ASCFile
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public int Version { get; set; }
-    public int VersionGroup { get; set; }
-    public int Folder { get; set; }
-}
-
-public class ASCFolder
-{
-    public int Id { get; set; }
-    public int ParentId { get; set; }
-    public string Title { get; set; }
-    public int Level { get; set; }
 }

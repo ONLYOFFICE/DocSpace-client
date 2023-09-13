@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 namespace ASC.Migration.Core.Core.Providers.Models.Parse;
-public class ASCUser
+public class WorkspaceUser
 {
     public string Id { get; set; }
     public UserInfo Info { get; set; }
-    public ASCStorage Storage { get; set; }
+    public WorkspaceStorage Storage { get; set; }
 }

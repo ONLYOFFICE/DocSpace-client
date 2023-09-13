@@ -55,7 +55,7 @@ public class MigrationStatusDto
     /// <summary>
     /// 
     /// </summary>
-    public Exception Error { get; set; }
+    public string Error { get; set; }
 
     /// <summary>
     /// 

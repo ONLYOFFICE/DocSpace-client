@@ -1620,7 +1620,7 @@ public class UserController : PeopleControllerBase
     /// <category>Quota</category>
     /// <param type="ASC.People.ApiModels.RequestDto.UpdateMembersRequestDto, ASC.People" name="inDto">Request parameters for updating user information</param>
     /// <returns type="ASC.Web.Api.Models.EmployeeFullDto, ASC.Api.Core">List of users with the detailed information</returns>
-    /// <path>api/2.0/people/quota</path>
+    /// <path>api/2.0/people/userquota</path>
     /// <httpMethod>PUT</httpMethod>
     /// <collection>list</collection>
     [HttpPut("userquota")]
@@ -1643,14 +1643,39 @@ public class UserController : PeopleControllerBase
 
         foreach (var user in users)
         {
-            var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
-
             await _settingsManager.SaveAsync(new UserQuotaSettings { UserQuota = inDto.Quota }, user);
 
             yield return await _employeeFullDtoHelper.GetFullAsync(user);
         }
     }
 
+    /// <summary>
+    /// Reset a user quota limit with the ID specified in the request from the portal.
+    /// </summary>
+    /// <short>
+    /// Reset a user quota limit
+    /// </short>
+    /// <category>Quota</category>
+    /// <param type="System.String, System" method="url" name="userid">User ID</param>
+    /// <returns type="ASC.Web.Api.Models.EmployeeFullDto, ASC.Api.Core">User detailed information</returns>
+    /// <path>api/2.0/people/{userid}/resetquota</path>
+    /// <httpMethod>PUT</httpMethod>
+    [HttpPut("{userid}/resetquota")]
+    public async Task<EmployeeFullDto> ResetUserQuota(string userid)
+    {
+        var user = await GetUserInfoAsync(userid);
+
+        if (_userManager.IsSystemUser(user.Id))
+        {
+            throw new SecurityException();
+        }
+
+        await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
+
+        await _settingsManager.SaveAsync(_settingsManager.GetDefault<UserQuotaSettings>(), user);
+        return await _employeeFullDtoHelper.GetFullAsync(user);
+        
+    }
 
     private async Task UpdateDepartmentsAsync(IEnumerable<Guid> department, UserInfo user)
     {

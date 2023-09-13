@@ -35,7 +35,7 @@ public class UserQuotaSettings : ISettings<UserQuotaSettings>
     {
         return new UserQuotaSettings
         {
-            UserQuota = -1
+            UserQuota = -2
         };
     }
 

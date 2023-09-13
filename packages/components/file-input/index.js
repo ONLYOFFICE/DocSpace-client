@@ -34,12 +34,16 @@ class FileInput extends Component {
       toastr.error(t("Common:NotSupportedFormat"));
       return;
     }
+    const fileName =
+      acceptedFiles.length > 1
+        ? acceptedFiles.map((file) => file.name).join(", ")
+        : acceptedFiles[0].name;
 
     this.setState({
-      fileName: acceptedFiles[0].name,
+      fileName,
     });
 
-    onInput(acceptedFiles[0]);
+    onInput(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
   };
 
   render() {

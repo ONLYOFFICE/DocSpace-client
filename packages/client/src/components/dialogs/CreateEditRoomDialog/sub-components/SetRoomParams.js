@@ -17,6 +17,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 import Text from "@docspace/components/text";
 
 const StyledSetRoomParams = styled.div`
@@ -116,6 +117,8 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+
+      {<VirtualDataRoomBlock t={t} />}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage

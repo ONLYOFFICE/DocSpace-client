@@ -134,6 +134,7 @@ export const RoomsType = Object.freeze({
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom: 6,
+  VirtualDataRoom: 7,
   CustomRoom: 5,
 });
 

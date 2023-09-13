@@ -14,6 +14,7 @@
   "MakeRoomPrivateTitle": "Make the Room Private",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
   "PublicRoomDescription": "Invite users via external links to view documents without registration. You can also embed this room into any web interface.",
+  "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency while filling and signing documents step-by-step. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "ReviewRoomDescription": "Request a review or comments on the documents",
   "ReviewRoomTitle": "Review room",
   "RoomEditing": "Room editing",
@@ -25,5 +26,13 @@
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of DocSpace settings. Contact DocSpace owner or administrator to enable the integration.",
   "ViewOnlyRoomDescription": "Share any ready documents, reports, documentation, and other files for viewing.",
-  "ViewOnlyRoomTitle": "View-only room"
+  "ViewOnlyRoomTitle": "View-only room",
+  "AutomaticIndexing": "Automatic indexing",
+  "AutomaticIndexingDescription": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
+  "FileLifetime": "File lifetime",
+  "FileLifetimeDescription": "Set file lifetime to automatically delete the files in this room after a defined period. Lifetime begins on the date of upload/creation of the file.",
+  "RestrictCopyAndDownload": "Restrict copy and download",
+  "RestrictCopyAndDownloadDescription": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
+  "AddWatermarksToDocuments": "Add watermarks to documents",
+  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced."
 }

@@ -14,6 +14,8 @@ export const getRoomTypeTitleTranslation = (roomType = 1, t) => {
       return t("CreateEditRoomDialog:CustomRoomTitle");
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.VirtualDataRoom:
+      return t("Files:VirtualDataRoom");
   }
 };
 
@@ -31,6 +33,8 @@ export const getRoomTypeDescriptionTranslation = (roomType = 1, t) => {
       return t("CreateEditRoomDialog:CustomRoomDescription");
     case RoomsType.PublicRoom:
       return t("CreateEditRoomDialog:PublicRoomDescription");
+    case RoomsType.VirtualDataRoom:
+      return t("CreateEditRoomDialog:VirtualDataRoomDescription");
   }
 };
 

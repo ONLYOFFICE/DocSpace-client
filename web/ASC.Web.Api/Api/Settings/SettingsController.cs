@@ -333,21 +333,21 @@ public class SettingsController : BaseSettingsController
     /// <path>api/2.0/settings/userquotasettings</path>
     /// <httpMethod>POST</httpMethod>
     [HttpPost("userquotasettings")]
-    public async Task<TenantUserQuotaSettings> SaveUserQuotaSettingsAsync(UserQuotaSettingsRequestsDto inDto)
+    public async Task<TenantUserQuotaSettings> SaveUserQuotaSettingsAsync(QuotaSettingsRequestsDto inDto)
     {
         await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
 
         var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
-        if (maxTotalSize < inDto.DefaultUserQuota)
+        if (maxTotalSize < inDto.DefaultQuota)
         {
             throw new Exception(Resource.QuotaGreaterPortalError);
         }
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
-        quotaSettings.EnableUserQuota = inDto.EnableUserQuota;
-        quotaSettings.DefaultUserQuota = inDto.DefaultUserQuota;
+        quotaSettings.EnableUserQuota = inDto.EnableQuota;
+        quotaSettings.DefaultUserQuota = inDto.DefaultQuota;
 
         await _settingsManager.SaveAsync(quotaSettings);
 
@@ -359,6 +359,41 @@ public class SettingsController : BaseSettingsController
     {
         return _settingsManager.Load<TenantUserQuotaSettings>();
     }
+
+    /// <summary>
+    /// Saves the room quota settings specified in the request to the current portal.
+    /// </summary>
+    /// <short>
+    /// Save the room quota settings
+    /// </short>
+    /// <category>Quota</category>
+    /// <param type="ASC.Web.Api.ApiModel.RequestsDto.UserQuotaSettingsRequestsDto, ASC.Web.Api" name="inDto">Request parameters for the user quota settings</param>
+    /// <returns type="System.Object, System">Message about the result of saving the user quota settings</returns>
+    /// <path>api/2.0/settings/userquotasettings</path>
+    /// <httpMethod>POST</httpMethod>
+    [HttpPost("roomquotasettings")]
+    public async Task<TenantRoomQuotaSettings> SaveRoomQuotaSettingsAsync(QuotaSettingsRequestsDto inDto)
+    {
+        await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
+
+        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
+        var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
+
+        if (maxTotalSize < inDto.DefaultQuota)
+        {
+            throw new Exception(Resource.QuotaGreaterPortalError);
+        }
+
+        var quotaSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
+        quotaSettings.EnableRoomQuota = inDto.EnableQuota;
+        quotaSettings.DefaultRoomQuota = inDto.DefaultQuota;
+
+        await _settingsManager.SaveAsync(quotaSettings);
+
+        return quotaSettings;
+    }
+
+
     /// <summary>
     /// Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. "de", "en-US", etc.).
     /// </summary>

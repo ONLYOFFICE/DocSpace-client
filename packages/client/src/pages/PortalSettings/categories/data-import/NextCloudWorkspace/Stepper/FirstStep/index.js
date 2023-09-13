@@ -46,7 +46,7 @@ const FirstStep = ({
   cancelUploadDialogVisible,
   setCancelUploadDialogVisible,
   initMigrationName,
-  localFileUploading,
+  singleFileUploading,
   getMigrationStatus,
   setUsers,
   isFileLoading,
@@ -58,7 +58,7 @@ const FirstStep = ({
   const [progress, setProgress] = useState(0);
 
   const onUploadFile = async (file) => {
-    await localFileUploading(file, setProgress);
+    await singleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
     const interval = setInterval(async () => {
       const res = await getMigrationStatus();
@@ -134,7 +134,7 @@ const FirstStep = ({
 export default inject(({ dialogsStore, importAccountsStore }) => {
   const {
     initMigrationName,
-    localFileUploading,
+    singleFileUploading,
     getMigrationStatus,
     setUsers,
     isFileLoading,
@@ -144,7 +144,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
 
   return {
     setUsers,
-    localFileUploading,
+    singleFileUploading,
     getMigrationStatus,
     initMigrationName,
     cancelUploadDialogVisible,

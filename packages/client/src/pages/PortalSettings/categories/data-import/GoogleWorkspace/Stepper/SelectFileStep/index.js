@@ -70,7 +70,7 @@ const SelectFileStep = ({
   setCancelDialogVisbile,
   initMigrationName,
   multipleFileUploading,
-  localFileUploading,
+  singleFileUploading,
   getMigrationStatus,
   setUsers,
   setData,
@@ -83,10 +83,11 @@ const SelectFileStep = ({
   const [isFileError, setIsFileError] = useState(false);
 
   const onUploadFile = async (file) => {
-    (await file.length)
-      ? multipleFileUploading(file, setProgress)
-      : localFileUploading(file, setProgress);
-    await multipleFileUploading(file, setProgress);
+    if(file.length) {
+      await multipleFileUploading(file, setProgress)
+    } else {
+      await singleFileUploading(file, setProgress);
+    }
     await initMigrationName(searchParams.get("service"));
     const interval = setInterval(async () => {
       const res = await getMigrationStatus();
@@ -191,6 +192,7 @@ const SelectFileStep = ({
 export default inject(({ dialogsStore, importAccountsStore }) => {
   const {
     initMigrationName,
+    singleFileUploading,
     multipleFileUploading,
     getMigrationStatus,
     setUsers,
@@ -198,21 +200,20 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
-    localFileUploading,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
 
   return {
-    cancelMigration,
-    setUsers,
-    setData,
+    initMigrationName,
+    singleFileUploading,
     multipleFileUploading,
     getMigrationStatus,
-    initMigrationName,
-    cancelDialogVisble: cancelUploadDialogVisible,
-    setCancelDialogVisbile: setCancelUploadDialogVisible,
+    setUsers,
+    setData,
     isFileLoading,
     setIsFileLoading,
-    localFileUploading,
+    cancelMigration,
+    cancelDialogVisble: cancelUploadDialogVisible,
+    setCancelDialogVisbile: setCancelUploadDialogVisible,
   };
 })(observer(SelectFileStep));

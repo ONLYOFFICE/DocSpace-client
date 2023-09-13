@@ -94,11 +94,8 @@ class ImportAccountsStore {
 
       let chunk = 0;
 
-      console.log(requestsDataArray);
 
       while (chunk < chunksNumber && this.isFileLoading) {
-        console.log(requestsDataArray[chunk].fileName);
-        console.log(requestsDataArray[chunk].formData);
         await uploadFile(
           location + `?Name=${requestsDataArray[chunk].fileName}`,
           requestsDataArray[chunk].formData,
@@ -112,7 +109,7 @@ class ImportAccountsStore {
     }
   };
 
-  localFileUploading = async (file, setProgress) => {
+  singleFileUploading = async (file, setProgress) => {
     try {
       const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
       const requestsDataArray = [];

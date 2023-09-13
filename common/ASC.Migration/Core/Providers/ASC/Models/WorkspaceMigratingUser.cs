@@ -27,13 +27,13 @@
 namespace ASC.Migration.Core.Core.Providers.Models;
 
 [Transient]
-public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
+public class WorkspaceMigratingUser : MigratingUser<WorkspaceMigratingFiles>
 {
     public override string Email => _user.Info.Email;
     public override string DisplayName => $"{_user.Info.FirstName} {_user.Info.LastName}";
     public Guid Guid => _user.Info.Id;
 
-    private ASCUser _user;
+    private WorkspaceUser _user;
     private bool _hasPhoto;
     private string _pathToPhoto;
     private string _rootFolder;
@@ -41,13 +41,13 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
     private readonly UserManager _userManager;
     private readonly IServiceProvider _serviceProvider;
 
-    public ASCMigratingUser(IServiceProvider serviceProvider, UserManager userManager)
+    public WorkspaceMigratingUser(IServiceProvider serviceProvider, UserManager userManager)
     {
         _serviceProvider = serviceProvider;
         _userManager = userManager;
     }
 
-    public void Init(string key,ASCUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)
+    public void Init(string key,WorkspaceUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)
     {
         Key = key;
         _dataReader = dataReader;
@@ -70,11 +70,11 @@ public class ASCMigratingUser : MigratingUser<ASCMigratingFiles>
             _hasPhoto = _pathToPhoto != null ? true : false;
         }
 
-        MigratingFiles = _serviceProvider.GetService<ASCMigratingFiles>();
-        _user.Storage = new ASCStorage()
+        MigratingFiles = _serviceProvider.GetService<WorkspaceMigratingFiles>();
+        _user.Storage = new WorkspaceStorage()
         {
-            Files = new List<ASCFile>(),
-            Folders = new List<ASCFolder>()
+            Files = new List<WorkspaceFile>(),
+            Folders = new List<WorkspaceFolder>()
         };
         MigratingFiles.Init(Key, this, _dataReader, _user.Storage, Log);
         MigratingFiles.Parse();

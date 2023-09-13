@@ -27,7 +27,7 @@
 namespace ASC.Migration.Core.Core.Providers.Models;
 
 [Transient]
-public class ASCMigratingFiles : MigratingFiles
+public class WorkspaceMigratingFiles : MigratingFiles
 {
     public override int FoldersCount => _storage.Folders.Count;
     public override int FilesCount => _storage.Files.Count;
@@ -37,15 +37,15 @@ public class ASCMigratingFiles : MigratingFiles
     private long _bytesTotal;
     private string _myFolder;
     private IDataReadOperator _dataReader;
-    private ASCStorage _storage;
+    private WorkspaceStorage _storage;
     private readonly FileStorageService _fileStorageService;
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly IServiceProvider _serviceProvider;
     private readonly IDaoFactory _daoFactory;
     private readonly SecurityContext _securityContext;
-    private ASCMigratingUser _user;
+    private WorkspaceMigratingUser _user;
 
-    public ASCMigratingFiles(FileStorageService fileStorageService,
+    public WorkspaceMigratingFiles(FileStorageService fileStorageService,
         GlobalFolderHelper globalFolderHelper,
         IServiceProvider serviceProvider,
         IDaoFactory daoFactory,
@@ -58,7 +58,7 @@ public class ASCMigratingFiles : MigratingFiles
         _securityContext = securityContext;
     }
 
-    public void Init(string key, ASCMigratingUser user, IDataReadOperator dataReader, ASCStorage storage, Action<string, Exception> log)
+    public void Init(string key, WorkspaceMigratingUser user, IDataReadOperator dataReader, WorkspaceStorage storage, Action<string, Exception> log)
     {
         _key = key;
         _user = user;
@@ -99,7 +99,7 @@ public class ASCMigratingFiles : MigratingFiles
             if (row["parent_id"].ToString().Equals(_myFolder))
             {
                 var id = row["id"].ToString();
-                var folder = new ASCFolder()
+                var folder = new WorkspaceFolder()
                 {
                     Id = int.Parse(id),
                     ParentId = int.Parse(row["parent_id"].ToString()),
@@ -117,7 +117,7 @@ public class ASCMigratingFiles : MigratingFiles
         {
             if (folderTree.ContainsKey(row["folder_id"].ToString()))
             {
-                var files = new ASCFile()
+                var files = new WorkspaceFile()
                 {
                     Id = int.Parse(row["id"].ToString()),
                     Folder = int.Parse(row["folder_id"].ToString()),

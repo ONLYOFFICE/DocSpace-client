@@ -95,8 +95,8 @@ public class MigrationCore
         services.TryAdd<OCMigratingUser>();
         services.TryAdd<OCMigratingFiles>();
 
-        services.TryAdd<IMigration, ASCMigration>();
-        services.TryAdd<ASCMigratingUser>();
-        services.TryAdd<ASCMigratingFiles>();
+        services.TryAdd<IMigration, WorkspaceMigration>();
+        services.TryAdd<WorkspaceMigratingUser>();
+        services.TryAdd<WorkspaceMigratingFiles>();
     }
 }

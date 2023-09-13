@@ -18,6 +18,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import { RoomsType } from "@docspace/common/constants";
 import Text from "@docspace/components/text";
 
 const StyledSetRoomParams = styled.div`
@@ -54,6 +55,8 @@ const SetRoomParams = ({
   enableThirdParty,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
+
+  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -118,7 +121,7 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {<VirtualDataRoomBlock t={t} />}
+      {isVDRRoom && <VirtualDataRoomBlock t={t} />}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage

@@ -16,6 +16,8 @@ const CategoryFilterDesktop = ({
   formsByBranch,
   formsByType,
   formsByCompilation,
+
+  ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -36,7 +38,7 @@ const CategoryFilterDesktop = ({
   const onMouseLeaveCompilation = () => setIsCompilationHovered(false);
 
   return (
-    <Styled.CategoryFilterWrapper>
+    <Styled.CategoryFilterWrapper {...rest}>
       <Styled.CategoryFilter
         id="comboBoxLanguage"
         tabIndex={1}

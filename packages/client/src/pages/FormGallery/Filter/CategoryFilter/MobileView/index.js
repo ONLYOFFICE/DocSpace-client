@@ -18,6 +18,8 @@ const CategoryFilterMobile = ({
   formsByBranch,
   formsByType,
   formsByCompilation,
+
+  ...rest
 }) => {
   const wrapperRef = useRef();
   const scrollRef = useRef();
@@ -63,7 +65,7 @@ const CategoryFilterMobile = ({
     calculatedHeight = maxCalculatedHeight;
 
   return (
-    <Styled.CategoryFilterMobileWrapper ref={wrapperRef}>
+    <Styled.CategoryFilterMobileWrapper ref={wrapperRef} {...rest}>
       <ComboButton
         selectedOption={{
           label: t("FormGallery:Categories"),

@@ -4,8 +4,40 @@ import { withTranslation } from "react-i18next";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
+import { smallTablet } from "@docspace/components/utils/device";
 import { isMobileOnly } from "react-device-detect";
+
+import styled, { css } from "styled-components";
+
+export const StyledCategoryFilterWrapper = styled.div`
+  width: 100%;
+
+  .mobileView {
+    display: none;
+  }
+  .desktopView {
+    display: block;
+  }
+
+  @media ${smallTablet} {
+    .mobileView {
+      display: block;
+    }
+    .desktopView {
+      display: none;
+    }
+  }
+
+  ${isMobileOnly &&
+  css`
+    .mobileView {
+      display: block;
+    }
+    .desktopView {
+      display: none;
+    }
+  `}
+`;
 
 const CategoryFilter = ({
   t,
@@ -40,25 +72,25 @@ const CategoryFilter = ({
     })();
   }, [oformsFilter.locale]);
 
-  if (isSmallTablet() || isMobile() || isMobileOnly)
-    return (
+  return (
+    <StyledCategoryFilterWrapper className="categoryFilterWrapper">
       <CategoryFilterMobile
+        className="mobileView"
         currentCategoryTitle={currentCategoryTitle}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}
         formsByCompilation={formsByCompilation}
       />
-    );
-
-  return (
-    <CategoryFilterDesktop
-      currentCategory={currentCategoryTitle}
-      onViewAllTemplates={onViewAllTemplates}
-      formsByBranch={formsByBranch}
-      formsByType={formsByType}
-      formsByCompilation={formsByCompilation}
-    />
+      <CategoryFilterDesktop
+        className="desktopView"
+        currentCategory={currentCategoryTitle}
+        onViewAllTemplates={onViewAllTemplates}
+        formsByBranch={formsByBranch}
+        formsByType={formsByType}
+        formsByCompilation={formsByCompilation}
+      />
+    </StyledCategoryFilterWrapper>
   );
 };
 export default inject(({ oformsStore }) => ({

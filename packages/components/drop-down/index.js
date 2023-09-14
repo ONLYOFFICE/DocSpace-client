@@ -319,7 +319,7 @@ class DropDown extends React.PureComponent {
     // Need to avoid conflict between inline styles from checkPositionPortal and styled-component styles
     const directionXStylesDisabled =
       this.props.isDefaultMode &&
-      this.props.forwardedRef?.current &&
+      this.props.forwardedRef.current &&
       !this.props.fixedDirection;
 
     let cleanChildren = children;

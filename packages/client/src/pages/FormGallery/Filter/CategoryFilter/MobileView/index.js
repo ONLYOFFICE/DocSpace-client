@@ -19,11 +19,12 @@ const CategoryFilterMobile = ({
   formsByType,
   formsByCompilation,
 }) => {
+  const wrapperRef = useRef();
+  const scrollRef = useRef();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
   const onCloseDropdown = () => setIsOpen(false);
-
-  const dropdownRef = useRef();
 
   const [openedCategory, setOpenedCategory] = useState(null);
   const isBranchOpen = openedCategory === OformCategoryType.Branch;
@@ -37,7 +38,15 @@ const CategoryFilterMobile = ({
   const onToggleCompilationCategory = () =>
     setOpenedCategory(isCompilationOpen ? null : OformCategoryType.Compilation);
 
-  const maxCalculatedHeight = window.innerHeight - 240;
+  const wrapperOffsetTop = wrapperRef?.current?.offsetTop;
+  const maxCalculatedHeight = window.innerHeight - wrapperOffsetTop - 64;
+  console.log(wrapperOffsetTop);
+  console.log(
+    window.innerHeight,
+    wrapperOffsetTop,
+    maxCalculatedHeight,
+    maxCalculatedHeight + wrapperOffsetTop
+  );
   let calculatedHeight =
     36 +
     8.2 +
@@ -54,7 +63,7 @@ const CategoryFilterMobile = ({
     calculatedHeight = maxCalculatedHeight;
 
   return (
-    <Styled.CategoryFilterMobileWrapper>
+    <Styled.CategoryFilterMobileWrapper ref={wrapperRef}>
       <ComboButton
         selectedOption={{
           label: t("FormGallery:Categories"),
@@ -81,7 +90,7 @@ const CategoryFilterMobile = ({
           style={{ position: "absolute" }}
           scrollclass="section-scroll"
           stype="mediumBlack"
-          ref={dropdownRef}
+          ref={scrollRef}
         >
           <Styled.CategoryFilterItemMobile
             id={"ViewAllTemplates"}

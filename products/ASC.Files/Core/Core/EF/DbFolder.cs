@@ -45,6 +45,8 @@ public class DbFolder : IDbFile, IDbSearch, ISearchItem
     public int FilesCount { get; set; }
     public bool Private { get; set; }
     public bool HasLogo { get; set; }
+    public long Quota { get; set; }
+    public long Counter { get; set; }
 
     public DbTenant Tenant { get; set; }
 
@@ -145,6 +147,14 @@ public static class DbFolderExtension
                 .HasDefaultValueSql("'0'");
 
             entity.Property(e => e.HasLogo).HasColumnName("has_logo");
+
+            entity.Property(e => e.Quota)
+                .HasColumnName("quota")
+                .HasDefaultValueSql("'-2'");
+
+            entity.Property(e => e.Counter)
+                .HasColumnName("counter")
+                .HasDefaultValueSql("'0'");
         });
     }
     public static void PgSqlAddDbFolder(this ModelBuilder modelBuilder)
@@ -201,6 +211,14 @@ public static class DbFolderExtension
             entity.Property(e => e.Private).HasColumnName("private");
 
             entity.Property(e => e.HasLogo).HasColumnName("has_logo");
+
+            entity.Property(e => e.Quota)
+                .HasColumnName("quota")
+                .HasDefaultValueSql("'-2'");
+
+            entity.Property(e => e.Counter)
+                .HasColumnName("counter")
+                .HasDefaultValueSql("'0'");
         });
     }
 }

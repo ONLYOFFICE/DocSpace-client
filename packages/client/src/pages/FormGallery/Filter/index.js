@@ -68,6 +68,7 @@ const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
     if (isInitLoading) return;
     navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
   }, [
+    oformsFilter,
     oformsFilter.categorizeBy,
     oformsFilter.categoryId,
     oformsFilter.locale,

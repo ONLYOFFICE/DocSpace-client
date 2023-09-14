@@ -734,9 +734,11 @@ class FilesStore {
 
     if (boards && boards.length) {
       if (!this.activeBoards.length) {
-        this.setActiveBoards(boards);
+        this.setActiveBoards(boards, destFolderId);
       } else {
-        boards.map((item) => this.activeBoards.push(item));
+        boards.map((item) =>
+          this.activeBoards.push({ id: item, destFolderId })
+        );
       }
     }
   };
@@ -770,8 +772,13 @@ class FilesStore {
     this.activeFolders = arrayFormation;
   };
 
-  setActiveBoards = (activeBoards) => {
-    this.activeBoards = activeBoards;
+  setActiveBoards = (activeBoards, destFolderId) => {
+    const arrayFormation = activeBoards.map((id) => ({
+      id,
+      destFolderId,
+    }));
+
+    this.activeBoards = arrayFormation;
   };
 
   setViewAs = (viewAs) => {

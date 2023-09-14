@@ -149,7 +149,7 @@ public class LdapUserManager
             portalUserInfo = await _userManager.SaveUserInfo(ldapUserInfo);
 
             var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
-            if (quotaSettings.EnableUserQuota)
+            if (quotaSettings.EnableQuota)
             {
                 await _settingsManager.SaveAsync(new UserQuotaSettings { UserQuota = ldapUserInfo.LdapQouta }, ldapUserInfo.Id);
             }

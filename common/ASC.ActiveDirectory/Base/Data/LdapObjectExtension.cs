@@ -149,7 +149,7 @@ public class LdapObjectExtension
         var skype = GetContacts(ldapUser, Mapping.Skype, settings);
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
-        var quota = settings.LdapMapping.ContainsKey(Mapping.UserQuotaLimit) ? ByteConverter.ConvertSizeToBytes(GetAttribute(ldapUser, settings.LdapMapping[Mapping.UserQuotaLimit])) : quotaSettings.DefaultUserQuota;
+        var quota = settings.LdapMapping.ContainsKey(Mapping.UserQuotaLimit) ? ByteConverter.ConvertSizeToBytes(GetAttribute(ldapUser, settings.LdapMapping[Mapping.UserQuotaLimit])) : quotaSettings.DefaultQuota;
 
         if (string.IsNullOrEmpty(userName))
         {

@@ -307,11 +307,11 @@ public class EmployeeFullDtoHelper : EmployeeDtoHelper
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
 
-        if (quotaSettings.EnableUserQuota)
+        if (quotaSettings.EnableQuota)
         {
             result.UsedSpace = Math.Max(0, (await _quotaService.FindUserQuotaRowsAsync(_context.Tenant.Id, userInfo.Id)).Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
             var userQuotaSettings = await _settingsManager.LoadAsync<UserQuotaSettings>(userInfo);
-            result.QuotaLimit = userQuotaSettings != null ? userQuotaSettings.UserQuota : quotaSettings.DefaultUserQuota;
+            result.QuotaLimit = userQuotaSettings != null ? userQuotaSettings.UserQuota : quotaSettings.DefaultQuota;
         }
 
         if (userInfo.Sex.HasValue)

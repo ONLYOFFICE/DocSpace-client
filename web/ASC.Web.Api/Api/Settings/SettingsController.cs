@@ -346,8 +346,8 @@ public class SettingsController : BaseSettingsController
         }
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
-        quotaSettings.EnableUserQuota = inDto.EnableQuota;
-        quotaSettings.DefaultUserQuota = inDto.DefaultQuota;
+        quotaSettings.EnableQuota = inDto.EnableQuota;
+        quotaSettings.DefaultQuota = inDto.DefaultQuota;
 
         await _settingsManager.SaveAsync(quotaSettings);
 
@@ -385,8 +385,8 @@ public class SettingsController : BaseSettingsController
         }
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
-        quotaSettings.EnableRoomQuota = inDto.EnableQuota;
-        quotaSettings.DefaultRoomQuota = inDto.DefaultQuota;
+        quotaSettings.EnableQuota = inDto.EnableQuota;
+        quotaSettings.DefaultQuota = inDto.DefaultQuota;
 
         await _settingsManager.SaveAsync(quotaSettings);
 

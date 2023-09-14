@@ -29,19 +29,17 @@ namespace ASC.Core.Users;
 [Serializable]
 public class UserQuotaSettings : ISettings<UserQuotaSettings>
 {
-    public long UserQuota { get; set; }
-
-    public UserQuotaSettings GetDefault()
-    {
-        return new UserQuotaSettings
-        {
-            UserQuota = -2
-        };
-    }
-
     [JsonIgnore]
     public Guid ID
     {
         get { return new Guid("{5A097CFA-1A8E-45CB-A4BB-FE8D2B5E5908}"); }
     }
+    public long UserQuota { get; set; } = -2;
+
+    public UserQuotaSettings GetDefault()
+    {
+        return new UserQuotaSettings();
+    }
+
+    
 }

@@ -353,7 +353,7 @@ internal class FileDao : AbstractDao, IFileDao<int>
 
         var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
 
-        if (quotaSettings.EnableUserQuota)
+        if (quotaSettings.EnableQuota)
         {
             var user = await _userManager.GetUsersAsync(file.Id == default ? _authContext.CurrentAccount.ID : file.CreateBy);
             var userQuotaSettings = await _settingsManager.LoadAsync<UserQuotaSettings>(user);

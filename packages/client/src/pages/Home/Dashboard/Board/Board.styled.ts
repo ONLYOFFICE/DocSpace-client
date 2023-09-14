@@ -11,5 +11,5 @@ export const BoardContainer = styled.section`
   width: min-content;
   height: 100%;
 
-  padding-right: 20px;
+  padding-right: 40px;
 `;

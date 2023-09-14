@@ -18,8 +18,11 @@ const CategoryFilterDesktop = ({
   formsByCompilation,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  const onCloseDropdown = () => setIsOpen(false);
+  const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
+  const onCloseDropdown = () => {
+    console.log("close");
+    setIsOpen(false);
+  };
 
   const [isBranchHovered, setIsBranchHovered] = useState(false);
   const [isTypeHovered, setIsTypeHovered] = useState(false);
@@ -38,7 +41,9 @@ const CategoryFilterDesktop = ({
         id="comboBoxLanguage"
         tabIndex={1}
         className={"combobox"}
-        onSelect={() => {}}
+        opened={isOpen}
+        onClick={onToggleDropdownIsOpen}
+        onSelect={onCloseDropdown}
         isDisabled={false}
         manualWidth={"100%"}
         showDisabledItems={true}
@@ -99,20 +104,26 @@ const CategoryFilterDesktop = ({
       <SubList
         categoryType={OformCategoryType.Branch}
         categories={formsByBranch}
+        isDropdownOpen={isOpen}
         isSubHovered={isBranchHovered}
         marginTop={"83px"}
+        onCloseDropdown={onCloseDropdown}
       />
       <SubList
         categoryType={OformCategoryType.Type}
         categories={formsByType}
+        isDropdownOpen={isOpen}
         isSubHovered={isTypeHovered}
         marginTop={"115px"}
+        onCloseDropdown={onCloseDropdown}
       />
       <SubList
         categoryType={OformCategoryType.Compilation}
         categories={formsByCompilation}
+        isDropdownOpen={isOpen}
         isSubHovered={isCompilationHovered}
         marginTop={"147px"}
+        onCloseDropdown={onCloseDropdown}
       />
     </Styled.CategoryFilterWrapper>
   );

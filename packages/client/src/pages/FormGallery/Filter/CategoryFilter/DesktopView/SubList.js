@@ -7,19 +7,24 @@ const SubList = ({
   categoryType,
   categories,
 
+  isDropdownOpen,
   isSubHovered,
   marginTop,
+  onCloseDropdown,
 
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
-  const onFilterByCategory = (category) => {
+  const onFilterByCategory = (e, category) => {
+    e.preventDefault();
+    onCloseDropdown();
     setOformsCurrentCategory(category);
     filterOformsByCategory(categoryType, category.id);
   };
 
   return (
     <Styled.CategoryFilterSubList
+      isDropdownOpen={isDropdownOpen}
       isSubHovered={isSubHovered}
       marginTop={marginTop}
       id={`category-sub-list-${categoryType}`}
@@ -46,7 +51,8 @@ const SubList = ({
           heightTablet={36}
           key={category.id}
           label={getOformCategoryTitle(categoryType, category)}
-          onClick={() => onFilterByCategory(category)}
+          onClick={(e) => onFilterByCategory(e, category)}
+          onMouseDown={(e) => e.preventDefault()}
         />
       ))}
     </Styled.CategoryFilterSubList>

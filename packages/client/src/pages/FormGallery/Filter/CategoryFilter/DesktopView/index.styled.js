@@ -54,14 +54,19 @@ export const CategoryFilterSubList = styled(DropDown)`
   max-height: 296px;
 
   visibility: hidden;
-  &:hover {
-    visibility: visible;
-  }
-  ${({ isSubHovered }) =>
-    isSubHovered &&
+
+  visibility: hidden;
+  ${({ isDropdownOpen, isSubHovered }) =>
+    isDropdownOpen &&
     css`
-      visibility: visible;
-    `};
+      &:hover {
+        visibility: visible;
+      }
+      ${isSubHovered &&
+      css`
+        visibility: visible;
+      `}
+    `}
 
   &:before {
     content: "";

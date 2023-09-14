@@ -1002,6 +1002,45 @@ const SectionFilterContent = ({
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    if (isRolePage) {
+      const roleFilter = [
+        {
+          key: FilterGroups.roomFilterContent,
+          group: FilterGroups.roomFilterContent,
+          label: t("Common:Search"),
+          isHeader: true,
+        },
+        {
+          id: "filter_search-by-file-contents",
+          key: FilterKeys.withContent,
+          group: FilterGroups.roomFilterContent,
+          label: t("SearchByContent"),
+          isCheckbox: true,
+        },
+        {
+          key: FilterGroups.filterAuthor,
+          group: FilterGroups.filterAuthor,
+          label: t("ByAuthor"),
+          isHeader: true,
+          withMultiItems: true,
+        },
+        {
+          id: "filter_author-me",
+          key: FilterKeys.me,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:MeLabel"),
+        },
+        {
+          id: "filter_author-other",
+          key: FilterKeys.other,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:OtherLabel"),
+        },
+      ];
+
+      return roleFilter;
+    }
+
     if (isDashboardPage) {
       const dashboardFilterOptions = [
         //contentOptions
@@ -1638,6 +1677,7 @@ const SectionFilterContent = ({
     isTrash,
     isDashboardPage,
     isPublicRoom,
+    isRolePage,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {

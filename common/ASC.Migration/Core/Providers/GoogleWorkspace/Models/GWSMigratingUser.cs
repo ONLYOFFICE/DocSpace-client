@@ -60,6 +60,7 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
     public void Init(GwsMigratingUser user)
     {
+        Key = user.Key;
         _userInfo = user._userInfo;
     }
 

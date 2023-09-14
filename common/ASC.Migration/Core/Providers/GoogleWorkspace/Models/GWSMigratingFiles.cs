@@ -57,6 +57,29 @@ public class GwsMigratingFiles : MigratingFiles
     private Dictionary<string, GwsMigratingUser> _users;
     private string _folderCreation;
 
+    public GwsMigratingFiles(
+        GlobalFolderHelper globalFolderHelper,
+        IDaoFactory daoFactory,
+        FileSecurity fileSecurity,
+        FileStorageService fileStorageService,
+        TempPath tempPath,
+        IServiceProvider serviceProvider)
+    {
+        _globalFolderHelper = globalFolderHelper;
+        _daoFactory = daoFactory;
+        _fileSecurity = fileSecurity;
+        _fileStorageService = fileStorageService;
+        _tempPath = tempPath;
+        _serviceProvider = serviceProvider;
+    }
+
+    public void Init(string rootFolder, GwsMigratingUser user, Action<string, Exception> log)
+    {
+        _rootFolder = rootFolder;
+        _user = user;
+        Log = log;
+    }
+
     public override void Parse()
     {
         var drivePath = Path.Combine(_rootFolder, "Drive");
@@ -106,29 +129,6 @@ public class GwsMigratingFiles : MigratingFiles
         _users = users.ToDictionary(user => user.Email, user => user);
     }
 
-    public GwsMigratingFiles(
-        GlobalFolderHelper globalFolderHelper,
-        IDaoFactory daoFactory,
-        FileSecurity fileSecurity,
-        FileStorageService fileStorageService,
-        TempPath tempPath,
-        IServiceProvider serviceProvider)
-    {
-        _globalFolderHelper = globalFolderHelper;
-        _daoFactory = daoFactory;
-        _fileSecurity = fileSecurity;
-        _fileStorageService = fileStorageService;
-        _tempPath = tempPath;
-        _serviceProvider = serviceProvider;
-    }
-
-    public void Init(string rootFolder, GwsMigratingUser user, Action<string, Exception> log)
-    {
-        _rootFolder = rootFolder;
-        _user = user;
-        Log = log;
-    }
-
     public override async Task MigrateAsync()
     {
         if (!ShouldImport)
@@ -139,7 +139,7 @@ public class GwsMigratingFiles : MigratingFiles
         var tmpFolder = Path.Combine(_tempPath.GetTempPath(), Path.GetFileNameWithoutExtension(_user.Key));
         try
         {
-            ZipFile.ExtractToDirectory(_user.Key, tmpFolder);
+            ZipFile.ExtractToDirectory(Path.Combine(_rootFolder, _user.Key), tmpFolder);
             var drivePath = Path.Combine(tmpFolder, "Takeout", "Drive");
 
             // Create all folders first

@@ -37,6 +37,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
     private readonly TempPath _tempPath;
     private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
+    private string _path;
     public override MigratorMeta Meta => _meta;
 
     public GoogleWorkspaceMigration(
@@ -60,6 +61,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
         _cancellationToken = cancellationToken;
         var tempTakeouts = new List<string>();
         var files = Directory.GetFiles(path);
+        _path = path;
         if (!files.Any() || !files.Any(f => f.EndsWith(".zip")))
         {
             throw new Exception("Folder must not be empty and should contain .zip files.");
@@ -208,6 +210,7 @@ public class GoogleWorkspaceMigration : AbstractMigration<GwsMigrationInfo, GwsM
             {
                 var currentUser = _securityContext.CurrentAccount;
                 await _securityContext.AuthenticateMeAsync(user.Guid);
+                user.MigratingFiles.Init(_path, user, Log);
                 user.MigratingFiles.SetUsersDict(usersForImport.Except(failedUsers));
                 await user.MigratingFiles.MigrateAsync();
                 await _securityContext.AuthenticateMeAsync(currentUser.ID);

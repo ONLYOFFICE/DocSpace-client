@@ -283,8 +283,16 @@ class DashboardStore {
     }
   };
 
+  public removeSelectedFilesByRole = (removeFiles: IFileByRole[]) => {
+    for (const file of removeFiles) {
+      this.selectedFilesByRoleMap.delete(file.id);
+    }
+  };
+
   public removeFiles = (removeFiles: IFileByRole[]) => {
     if (removeFiles.length === 0) return;
+
+    this.removeSelectedFilesByRole(removeFiles);
 
     const tempMap = removeFiles.reduce<Record<number, IFileByRole[]>>(
       (acc, file) => {

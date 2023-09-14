@@ -341,10 +341,6 @@ class DropDown extends React.PureComponent {
       ? { height: calculatedHeight + "px" }
       : {};
 
-    console.log(cleanChildren, React.Children);
-    console.log(rowHeights);
-    console.log(calculatedHeight);
-
     return (
       <StyledDropdown
         ref={this.dropDownRef}

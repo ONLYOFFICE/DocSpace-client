@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
+import { hugeMobile } from "@docspace/components/utils/device";
 
 const StyledFileLifetime = styled.div`
   margin-top: 12px;
@@ -11,37 +12,39 @@ const StyledFileLifetime = styled.div`
     display: flex;
     align-items: center;
 
+    @media ${hugeMobile} {
+      display: block;
+    }
+
+    .virtual-data-room_file-lifetime_date {
+      display: flex;
+      align-items: center;
+    }
+
     .virtual-data-room_file-lifetime_input {
       min-width: 150px;
       margin-right: 4px;
+
+      @media ${hugeMobile} {
+        margin-right: 8px;
+        width: 165px;
+      }
     }
 
     .virtual-data-room_file-lifetime_combo-box {
       margin-right: 16px;
-      width: 90px;
+      width: 92px;
+      min-width: 92px;
+
+      @media ${hugeMobile} {
+        margin-right: 0px;
+        width: 165px;
+      }
     }
   }
 `;
 
 const FileLifetime = ({ t }) => {
-  const [inputValue, setInputValue] = useState("");
-  const onChange = (e) => {
-    // /^(?:[1-9][0-9]*|0)$/
-    if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) return;
-
-    setInputValue(e.target.value);
-  };
-
-  const isLoading = false;
-
-  const onSelectDate = (option) => {
-    console.log("onDateSelect", option);
-  };
-
-  const onSelectDelete = (option) => {
-    console.log("onSelectDelete", option);
-  };
-
   const dateOptions = [
     {
       key: 1,
@@ -73,6 +76,29 @@ const FileLifetime = ({ t }) => {
     },
   ];
 
+  const [inputValue, setInputValue] = useState("");
+  const [selectedDate, setSelectedDate] = useState(dateOptions[0]);
+  const [selectedDelete, setSelectedDelete] = useState(deleteOptions[0]);
+
+  const onChange = (e) => {
+    // /^(?:[1-9][0-9]*|0)$/
+    if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) return;
+
+    setInputValue(e.target.value);
+  };
+
+  const isLoading = false;
+
+  const onSelectDate = (option) => {
+    setSelectedDate(option);
+    console.log("onDateSelect", option);
+  };
+
+  const onSelectDelete = (option) => {
+    setSelectedDelete(option);
+    console.log("onSelectDelete", option);
+  };
+
   return (
     <StyledFileLifetime className="virtual-data-room_file-lifetime">
       <Text fontWeight={600} fontSize="13px">
@@ -80,29 +106,31 @@ const FileLifetime = ({ t }) => {
       </Text>
 
       <div className="virtual-data-room_file-lifetime_body">
-        <TextInput
-          className="virtual-data-room_file-lifetime_input"
-          isAutoFocussed={true}
-          isDisabled={isLoading}
-          tabIndex={1}
-          value={inputValue}
-          onChange={onChange}
-          scale
-        />
-        <ComboBox
-          className="virtual-data-room_file-lifetime_combo-box"
-          options={dateOptions}
-          isDisabled={isLoading}
-          showDisabledItems
-          selectedOption={dateOptions[0]}
-          scaledOptions={true}
-          onSelect={onSelectDate}
-        />
+        <div className="virtual-data-room_file-lifetime_date">
+          <TextInput
+            className="virtual-data-room_file-lifetime_input"
+            isAutoFocussed={true}
+            isDisabled={isLoading}
+            tabIndex={1}
+            value={inputValue}
+            onChange={onChange}
+            scale
+          />
+          <ComboBox
+            className="virtual-data-room_file-lifetime_combo-box"
+            options={dateOptions}
+            isDisabled={isLoading}
+            showDisabledItems
+            selectedOption={selectedDate}
+            scaledOptions={true}
+            onSelect={onSelectDate}
+          />
+        </div>
         <ComboBox
           options={deleteOptions}
           isDisabled={isLoading}
           showDisabledItems
-          selectedOption={deleteOptions[0]}
+          selectedOption={selectedDelete}
           scale
           onSelect={onSelectDelete}
         />

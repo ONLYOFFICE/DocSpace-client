@@ -146,6 +146,15 @@ class DashboardStore {
 
     return roles;
   }
+
+  public get hasBufferSelectionFileByRole() {
+    return !!this.BufferSelectionFilesByRole;
+  }
+
+  public get hasSelectionFileByRole() {
+    return this.selectedFilesByRoleMap.size > 0;
+  }
+
   //#endregion
 
   //#region public method
@@ -289,10 +298,26 @@ class DashboardStore {
     }
   };
 
+  public removeFilesById = (fileIds: number[]) => {
+    const tempMap = new Map(this.filesByRole);
+
+    for (const [key, files] of tempMap) {
+      const filteredFiles = files.filter((file) => !fileIds.includes(file.id));
+
+      this.filesByRole.set(key, filteredFiles);
+    }
+
+    for (const id of fileIds) {
+      this.selectedFilesByRoleMap.delete(id);
+    }
+    this.clearBufferSelectionFilesByRole();
+  };
+
   public removeFiles = (removeFiles: IFileByRole[]) => {
     if (removeFiles.length === 0) return;
 
     this.removeSelectedFilesByRole(removeFiles);
+    this.clearBufferSelectionFilesByRole();
 
     const tempMap = removeFiles.reduce<Record<number, IFileByRole[]>>(
       (acc, file) => {

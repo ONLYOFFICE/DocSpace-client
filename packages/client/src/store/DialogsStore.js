@@ -9,6 +9,7 @@ class DialogsStore {
   filesStore;
   selectedFolderStore;
   versionHistoryStore;
+  dashboardStore;
 
   sharingPanelVisible = false;
   roomSharingPanelVisible = false;
@@ -79,7 +80,8 @@ class DialogsStore {
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
-    versionHistoryStore
+    versionHistoryStore,
+    dashboardStore
   ) {
     makeAutoObservable(this);
 
@@ -88,6 +90,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.dashboardStore = dashboardStore;
   }
 
   setIsRoomDelete = (isRoomDelete) => {
@@ -131,7 +134,9 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.dashboardStore.hasBufferSelectionFileByRole &&
+      !this.dashboardStore.hasSelectionFileByRole
     )
       return;
 
@@ -148,7 +153,9 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.dashboardStore.hasBufferSelectionFileByRole &&
+      !this.dashboardStore.hasSelectionFileByRole
     ) {
       console.log("No files selected");
       return;

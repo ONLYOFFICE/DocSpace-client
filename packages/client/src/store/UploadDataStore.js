@@ -36,6 +36,7 @@ class UploadDataStore {
   primaryProgressDataStore;
   dialogsStore;
   settingsStore;
+  dashboardStore;
 
   files = [];
   uploadedFilesHistory = [];
@@ -72,7 +73,8 @@ class UploadDataStore {
     secondaryProgressDataStore,
     primaryProgressDataStore,
     dialogsStore,
-    settingsStore
+    settingsStore,
+    dashboardStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -83,6 +85,7 @@ class UploadDataStore {
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
     this.settingsStore = settingsStore;
+    this.dashboardStore = dashboardStore;
   }
 
   removeFiles = (fileIds) => {
@@ -1550,7 +1553,11 @@ class UploadDataStore {
       let newFilter;
 
       if (!withPaging) {
-        !isCopy && removeFiles(fileIds, folderIds);
+        if (!isCopy) {
+          this.selectedFolderStore.isDashboard
+            ? this.dashboardStore.removeFilesById(fileIds)
+            : removeFiles(fileIds, folderIds);
+        }
         this.clearActiveOperations(fileIds, folderIds);
         setTimeout(
           () => clearSecondaryProgressData(pbData.operationId),

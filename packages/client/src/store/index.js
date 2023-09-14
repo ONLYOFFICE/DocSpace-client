@@ -101,7 +101,8 @@ const dialogsStore = new DialogsStore(
   treeFoldersStore,
   filesStore,
   selectedFolderStore,
-  versionHistoryStore
+  versionHistoryStore,
+  dashboardStore
 );
 
 const peopleStore = new PeopleStore(
@@ -119,7 +120,8 @@ const uploadDataStore = new UploadDataStore(
   secondaryProgressDataStore,
   primaryProgressDataStore,
   dialogsStore,
-  settingsStore
+  settingsStore,
+  dashboardStore
 );
 
 const filesActionsStore = new FilesActionsStore(

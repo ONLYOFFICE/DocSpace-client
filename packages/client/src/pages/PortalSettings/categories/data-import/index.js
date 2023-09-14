@@ -34,7 +34,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
   const logos = {
     GoogleWorkspace: google,
     Nextcloud: nextcloud,
-    ASC: onlyoffice,
+    Workspace: onlyoffice,
   };
 
   const workspaces = useMemo(() => {
@@ -56,7 +56,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
       case "Nextcloud":
         navigate(`nextcloud?service=${title}`);
         break;
-      case "ASC":
+      case "Workspace":
         navigate(`onlyoffice?service=${title}`);
         break;
       default:

@@ -47,7 +47,6 @@ const CategoryFilterDesktop = ({
         onClick={onToggleDropdownIsOpen}
         onSelect={onCloseDropdown}
         isDisabled={false}
-        manualWidth={"100%"}
         showDisabledItems={true}
         options={[]}
         directionX={"right"}

@@ -52,12 +52,13 @@ export const CategoryFilterSubList = styled(DropDown)`
   left: calc(100% + 4px);
 
   max-height: 296px;
+  max-width: auto;
 
   visibility: hidden;
 
   visibility: hidden;
-  ${({ isDropdownOpen, isSubHovered }) =>
-    isDropdownOpen &&
+  ${({ open, isSubHovered }) =>
+    open &&
     css`
       &:hover {
         visibility: visible;
@@ -88,8 +89,4 @@ export const CategoryFilterSubListItem = styled(DropDownItem)`
   font-size: 13px;
   font-weight: 600;
   line-height: 20px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;

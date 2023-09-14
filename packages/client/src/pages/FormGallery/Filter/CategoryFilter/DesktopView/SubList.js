@@ -15,8 +15,9 @@ const SubList = ({
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
-  const onFilterByCategory = (e, category) => {
-    e.preventDefault();
+  const onPreventDefault = (e) => e.preventDefault();
+
+  const onFilterByCategory = (category) => {
     onCloseDropdown();
     setOformsCurrentCategory(category);
     filterOformsByCategory(categoryType, category.id);
@@ -24,7 +25,7 @@ const SubList = ({
 
   return (
     <Styled.CategoryFilterSubList
-      isDropdownOpen={isDropdownOpen}
+      open={isDropdownOpen}
       isSubHovered={isSubHovered}
       marginTop={marginTop}
       id={`category-sub-list-${categoryType}`}
@@ -33,10 +34,9 @@ const SubList = ({
       directionY={"bottom"}
       manualY={"0px"}
       manualX={"0px"}
-      open={true}
       clickOutsideAction={() => {}}
       maxHeight={296}
-      manualWidth={"100%"}
+      manualWidth={"206px"}
       showDisabledItems={false}
       isDefaultMode={false}
       withBackdrop={false}
@@ -44,17 +44,33 @@ const SubList = ({
       isMobileView={false}
       isNoFixedHeightOptions={false}
     >
-      {categories.map((category) => (
-        <Styled.CategoryFilterSubListItem
-          className="dropdown-item"
-          height={36}
-          heightTablet={36}
-          key={category.id}
-          label={getOformCategoryTitle(categoryType, category)}
-          onClick={(e) => onFilterByCategory(e, category)}
-          onMouseDown={(e) => e.preventDefault()}
-        />
-      ))}
+      {categories.map((category) => {
+        const categoryTitle = getOformCategoryTitle(categoryType, category);
+        const onCategoryClick = () => onFilterByCategory(category);
+        return (
+          <Styled.CategoryFilterSubListItem
+            className="dropdown-item"
+            height={36}
+            heightTablet={36}
+            key={category.id}
+            onClick={onCategoryClick}
+            onMouseDown={onPreventDefault}
+            title={categoryTitle}
+          >
+            <div
+              className="item-content"
+              style={{
+                maxWidth: "182px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {categoryTitle}
+            </div>
+          </Styled.CategoryFilterSubListItem>
+        );
+      })}
     </Styled.CategoryFilterSubList>
   );
 };

@@ -283,6 +283,11 @@ internal abstract class ThirdPartyProviderDao
         return AsyncEnumerable.Empty<Folder<string>>();
     }
 
+    public Task<string> ChangeFolderQuotaAsync(Folder<string> folder, long quota)
+    {
+        return null;
+    }
+
     protected static IAsyncEnumerable<Folder<string>> FilterRoomsAsync(IAsyncEnumerable<Folder<string>> rooms, ProviderFilter provider, FilterType filterType, Guid subjectId,
         bool excludeSubject, SubjectFilter subjectFilter, IEnumerable<string> subjectEntriesIds, string searchText, bool withoutTags, IEnumerable<string> tags,
         FilesDbContext filesDbContext)

@@ -251,6 +251,14 @@ public interface IFolderDao<T>
     /// <returns></returns>
     Task<T> GetFolderIDAsync(string module, string bunch, string data, bool createIfNotExists);
 
+     /// <summary>
+     /// Only in TMFolderDao
+     /// </summary>
+     /// <param name="folder"></param>
+     /// <param name="quota">new quota</param>
+     /// <returns></returns>
+     Task<T> ChangeFolderQuotaAsync(Folder<T> folder, long quota);
+
     IAsyncEnumerable<T> GetFolderIDsAsync(string module, string bunch, IEnumerable<string> data, bool createIfNotExists);
 
     /// <summary>

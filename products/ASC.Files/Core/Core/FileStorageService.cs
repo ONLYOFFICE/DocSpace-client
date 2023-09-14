@@ -88,6 +88,7 @@ public class FileStorageService //: IFileStorageService
     private readonly QuotaSocketManager _quotaSocketManager;
     private readonly ExternalShare _externalShare;
     private readonly TenantUtil _tenantUtil;
+    private readonly IQuotaService _quotaService;
 
     public FileStorageService(
         Global global,
@@ -147,7 +148,8 @@ public class FileStorageService //: IFileStorageService
         TenantQuotaFeatureStatHelper tenantQuotaFeatureStatHelper,
         QuotaSocketManager quotaSocketManager,
         ExternalShare externalShare,
-        TenantUtil tenantUtil)
+        TenantUtil tenantUtil,
+        IQuotaService quotaService)
     {
         _global = global;
         _globalStore = globalStore;
@@ -207,6 +209,7 @@ public class FileStorageService //: IFileStorageService
         _quotaSocketManager = quotaSocketManager;
         _externalShare = externalShare;
         _tenantUtil = tenantUtil;
+        _quotaService = quotaService;
     }
 
     public async Task<Folder<T>> GetFolderAsync<T>(T folderId)
@@ -638,7 +641,14 @@ public class FileStorageService //: IFileStorageService
 
     public async Task<Folder<T>> FolderQuotaChangeAsync<T>(T folderId, long quota)
     {
-        var tagDao = GetTagDao<T>();
+
+        var tenantId = await _tenantManager.GetCurrentTenantIdAsync();
+
+        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(tenantId);
+        var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
+
+        ErrorIf(maxTotalSize < quota, Resource.QuotaGreaterPortalError);
+
         var folderDao = GetFolderDao<T>();
         var folder = await folderDao.GetFolderAsync(folderId);
         ErrorIf(folder == null, FilesCommonResource.ErrorMassage_FolderNotFound);

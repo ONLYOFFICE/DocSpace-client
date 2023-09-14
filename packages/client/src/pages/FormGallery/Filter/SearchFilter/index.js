@@ -6,12 +6,11 @@ import * as Styled from "./index.styled";
 
 const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
   const [value, setValue] = useState(oformsFilter.search);
-  const onSearch = (val) => filterOformsBySearch(val);
-  const onClear = () => onChangeValue("");
   const onChangeValue = (val) => {
     setValue(val);
-    onSearch(val);
+    filterOformsBySearch(val);
   };
+  const onClear = () => onChangeValue("");
 
   useEffect(() => {
     if (value !== oformsFilter.search) setValue(oformsFilter.search);

@@ -35,14 +35,16 @@ function Card({
 }: CardProps) {
   const { t } = useTranslation();
 
-  const contextMenuRef = useRef<ContextMenu>(null);
+  const contextMenuRef = useRef<{ show: Function; hide: Function }>(null);
 
   const onClickHandler = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (file.isProgress) return;
+
       contextMenuRef.current?.show(event);
       setBufferSelectionFileByRole(file, false);
     },
-    []
+    [file.isProgress]
   );
 
   const onHideContextMenu = useCallback(
@@ -65,6 +67,8 @@ function Card({
   const onContextMenu = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
+    if (file.isProgress) return;
+
     setBufferSelectionFileByRole(file, false, event.button === 2);
     contextMenuRef.current?.show(event);
   };

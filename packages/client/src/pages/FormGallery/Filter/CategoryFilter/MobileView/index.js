@@ -8,6 +8,8 @@ import CategorySubList from "./CategorySubList";
 import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 import Scrollbar from "@docspace/components/scrollbar";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import ComboBox from "@docspace/components/combobox";
+import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 
 const CategoryFilterMobile = ({
   t,
@@ -17,6 +19,10 @@ const CategoryFilterMobile = ({
   formsByType,
   formsByCompilation,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
+  const onCloseDropdown = () => setIsOpen(false);
+
   const dropdownRef = useRef();
 
   const [openedCategory, setOpenedCategory] = useState(null);
@@ -31,149 +37,113 @@ const CategoryFilterMobile = ({
   const onToggleCompilationCategory = () =>
     setOpenedCategory(isCompilationOpen ? null : OformCategoryType.Compilation);
 
+  const maxCalculatedHeight = window.innerHeight - 240;
+  let calculatedHeight =
+    36 +
+    8.2 +
+    36 * 3 +
+    36 *
+      (isBranchOpen
+        ? formsByBranch.length
+        : isTypeOpen
+        ? formsByType.length
+        : isCompilationOpen
+        ? formsByCompilation.length
+        : 0);
+  if (calculatedHeight > maxCalculatedHeight)
+    calculatedHeight = maxCalculatedHeight;
+
   return (
-    <Styled.CategoryFilterMobile
-      open={true}
-      withBackdrop={false}
-      manualWidth={"100%"}
-      directionY="top"
-      directionX="right"
-      isMobile={true}
-      fixedDirection={true}
-      heightProp={500}
-      //   sectionWidth={sectionWidth}
-      isDefaultMode={false}
-      className="mainBtnDropdown"
-    >
-      <Scrollbar
-        style={{ position: "absolute" }}
-        scrollclass="section-scroll"
-        stype="mediumBlack"
-        ref={dropdownRef}
+    <Styled.CategoryFilterMobileWrapper>
+      <ComboButton
+        selectedOption={{
+          label: t("FormGallery:Categories"),
+        }}
+        isOpen={isOpen}
+        scaled={true}
+        onClick={toggleDropdownIsOpen}
+        tabIndex={1}
+      />
+
+      <Styled.CategoryFilterMobile
+        open={isOpen}
+        withBackdrop={false}
+        manualWidth={"100%"}
+        directionY="bottom"
+        directionX="right"
+        isMobile={true}
+        fixedDirection={true}
+        isDefaultMode={false}
+        className="mainBtnDropdown"
+        forcedHeight={`${calculatedHeight}px`}
       >
-        <Styled.CategoryFilterItem
-          id={"ViewAllTemplates"}
-          key={"ViewAllTemplates"}
-          className="dropdown-item"
-          label={t("FormGallery:ViewAllTemplates")}
-          onClick={onViewAllTemplates}
-        />
-        <DropDownItem isSeparator />
-        <Styled.CategoryFilterItem
-          id={"FormsByBranch"}
-          key={"FormsByBranch"}
-          className={`item-by-${OformCategoryType.Branch}`}
-          label={t("FormGallery:FormsByBranch")}
-          isSubMenu
-        />
-        {isBranchOpen && (
-          <CategorySubList
-            isSubOpen={isBranchOpen}
-            categoryType={OformCategoryType.Branch}
-            categories={formsByBranch}
+        <Scrollbar
+          style={{ position: "absolute" }}
+          scrollclass="section-scroll"
+          stype="mediumBlack"
+          ref={dropdownRef}
+        >
+          <Styled.CategoryFilterItemMobile
+            id={"ViewAllTemplates"}
+            key={"ViewAllTemplates"}
+            className="dropdown-item"
+            label={t("FormGallery:ViewAllTemplates")}
+            onClick={onViewAllTemplates}
           />
-        )}
-        <Styled.CategoryFilterItem
-          id={"FormsByType"}
-          key={"FormsByType"}
-          className={`item-by-${OformCategoryType.Type}`}
-          label={t("FormGallery:FormsByType")}
-          isSubMenu
-        />
-        <Styled.CategoryFilterItem
-          id={"PopularCompilations"}
-          key={"PopularCompilations"}
-          className={`item-by-${OformCategoryType.Compilation}`}
-          label={t("FormGallery:PopularCompilations")}
-          isSubMenu
-        />
-      </Scrollbar>
-    </Styled.CategoryFilterMobile>
+
+          <DropDownItem isSeparator />
+
+          <Styled.CategoryFilterItemMobile
+            id={"FormsByBranch"}
+            key={"FormsByBranch"}
+            className={`item-by-${OformCategoryType.Branch}`}
+            label={t("FormGallery:FormsByBranch")}
+            isMobileOpen={isBranchOpen}
+            onClick={onToggleBranchCategory}
+            isSubMenu
+          />
+          {isBranchOpen && (
+            <CategorySubList
+              categoryType={OformCategoryType.Branch}
+              categories={formsByBranch}
+            />
+          )}
+
+          <Styled.CategoryFilterItemMobile
+            id={"FormsByType"}
+            key={"FormsByType"}
+            className={`item-by-${OformCategoryType.Type}`}
+            label={t("FormGallery:FormsByType")}
+            isMobileOpen={isTypeOpen}
+            onClick={onToggleTypeCategory}
+            isSubMenu
+          />
+          {isTypeOpen && (
+            <CategorySubList
+              categoryType={OformCategoryType.Type}
+              categories={formsByType}
+            />
+          )}
+
+          <Styled.CategoryFilterItemMobile
+            id={"PopularCompilations"}
+            key={"PopularCompilations"}
+            className={`item-by-${OformCategoryType.Compilation}`}
+            label={t("FormGallery:PopularCompilations")}
+            isMobileOpen={isCompilationOpen}
+            onClick={onToggleCompilationCategory}
+            isSubMenu
+          />
+          {isCompilationOpen && (
+            <CategorySubList
+              categoryType={OformCategoryType.Compilation}
+              categories={formsByCompilation}
+            />
+          )}
+        </Scrollbar>
+      </Styled.CategoryFilterMobile>
+    </Styled.CategoryFilterMobileWrapper>
   );
-
-  //   // general interactions
-
-  //   const [isOpen, setIsOpen] = useState(false);
-  //   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  //   const onCloseDropdown = () => setIsOpen(false);
-
-  //   // mobile interactions
-
-  //   const [openedCategory, setOpenedCategory] = useState(null);
-  //   const isBranchOpen = openedCategory === OformCategoryType.Branch;
-  //   const isTypeOpen = openedCategory === OformCategoryType.Type;
-  //   const isCompilationOpen = openedCategory === OformCategoryType.Compilation;
-
-  //   const onToggleBranchCategory = () =>
-  //     setOpenedCategory(isBranchOpen ? null : OformCategoryType.Branch);
-  //   const onToggleTypeCategory = () =>
-  //     setOpenedCategory(isTypeOpen ? null : OformCategoryType.Type);
-  //   const onToggleCompilationCategory = () =>
-  //     setOpenedCategory(isCompilationOpen ? null : OformCategoryType.Compilation);
-
-  //   return (
-  //     <Styled.CategoryFilterWrapper>
-  //       <Styled.CategoryFilter
-  //         id="comboBoxLanguage"
-  //         tabIndex={1}
-  //         className={"combobox"}
-  //         selectedOption={{ label: t("FormGallery:ViewAllTemplates") }}
-  //         onSelect={() => {}}
-  //         isDisabled={false}
-  //         manualWidth={"100%"}
-  //         showDisabledItems={true}
-  //         options={[]}
-  //         directionX={"right"}
-  //         directionY={"both"}
-  //         scaled={true}
-  //         size={"content"}
-  //         disableIconClick={false}
-  //         disableItemClick={false}
-  //         isDefaultMode={false}
-  //         fixedDirection={true}
-  //         advancedOptionsCount={5}
-  //         advancedOptions={
-  //           <>
-  //             <Styled.CategoryFilterItem
-  //               id={"ViewAllTemplates"}
-  //               key={"ViewAllTemplates"}
-  //               className="dropdown-item"
-  //               label={t("FormGallery:ViewAllTemplates")}
-  //               onClick={onViewAllTemplates}
-  //             />
-  //             <DropDownItem isSeparator />
-  //             <Styled.CategoryFilterItem
-  //               id={"FormsByBranch"}
-  //               key={"FormsByBranch"}
-  //               className={`item-by-${OformCategoryType.Branch}`}
-  //               isMobileOpen={isBranchOpen}
-  //               label={t("FormGallery:FormsByBranch")}
-  //               onClick={onToggleBranchCategory}
-  //               isSubMenu
-  //             />
-  //             <Styled.CategoryFilterItem
-  //               id={"FormsByType"}
-  //               key={"FormsByType"}
-  //               className={`item-by-${OformCategoryType.Type}`}
-  //               isMobileOpen={isTypeOpen}
-  //               label={t("FormGallery:FormsByType")}
-  //               onClick={onToggleTypeCategory}
-  //               isSubMenu
-  //             />
-  //             <Styled.CategoryFilterItem
-  //               id={"PopularCompilations"}
-  //               key={"PopularCompilations"}
-  //               className={`item-by-${OformCategoryType.Compilation}`}
-  //               isMobileOpen={isCompilationOpen}
-  //               label={t("FormGallery:PopularCompilations")}
-  //               onClick={onToggleCompilationCategory}
-  //               isSubMenu
-  //             />
-  //           </>
-  //         }
-  //       />
-  //     </Styled.CategoryFilterWrapper>
-  //   );
 };
 
 export default inject(({ oformsStore }) => ({

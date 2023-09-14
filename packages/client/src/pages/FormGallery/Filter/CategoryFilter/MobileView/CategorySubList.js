@@ -15,15 +15,14 @@ const CategorySubList = ({
     filterOformsByCategory(categoryType, category.id);
   };
 
-  if (isOpen)
-    return categories.map((category) => (
-      <StyledSubItemMobile
-        className="dropdown-item item-mobile"
-        key={category.id}
-        label={getOformCategoryTitle(categoryType, category)}
-        onClick={() => onFilterByCategory(category)}
-      />
-    ));
+  return categories.map((category) => (
+    <StyledSubItemMobile
+      className="dropdown-item item-mobile"
+      key={category.id}
+      label={getOformCategoryTitle(categoryType, category)}
+      onClick={() => onFilterByCategory(category)}
+    />
+  ));
 };
 
 export default inject(({ auth, oformsStore }) => ({

@@ -14,26 +14,27 @@ export const CategoryFilter = styled(ComboBox)`
   width: 220px;
   box-sizing: border-box;
 
-  .combo-button-label {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
   .dropdown-container {
     margin-top: 4px;
+
+    .combo-button-label {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+    }
   }
 `;
 
 export const CategoryFilterItem = styled(DropDownItem)`
-  width: 100%;
+  width: 220px;
   height: 32px;
+
   box-sizing: border-box;
+  padding: 8px 16px;
+
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
 
   .submenu-arrow {
     margin-right: 0;
@@ -44,11 +45,13 @@ export const CategoryFilterItem = styled(DropDownItem)`
   }
 `;
 
-export const StyledSubList = styled(DropDown)`
+export const CategoryFilterSubList = styled(DropDown)`
   position: absolute;
   top: 0;
   margin-top: ${({ marginTop }) => marginTop};
   left: calc(100% + 4px);
+
+  max-height: 296px;
 
   visibility: hidden;
   &:hover {
@@ -70,6 +73,18 @@ export const StyledSubList = styled(DropDown)`
   }
 `;
 
-export const StyledSubItemMobile = styled(DropDownItem)`
-  margin-left: 16px;
+export const CategoryFilterSubListItem = styled(DropDownItem)`
+  width: 208px;
+  height: 36px;
+
+  box-sizing: border-box;
+  padding: 8px 16px;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

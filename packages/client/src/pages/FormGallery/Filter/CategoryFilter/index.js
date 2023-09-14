@@ -1,29 +1,28 @@
-import * as Styled from "./index.styled";
-
-import DropDownItem from "@docspace/components/drop-down-item";
 import { useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import CategorySubList from "./CategorySubList";
-import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
-
-//
-
+import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 import { isMobile, isSmallTablet } from "@docspace/components/utils/device";
 import { isMobileOnly } from "react-device-detect";
 
 const CategoryFilter = ({
   t,
 
+  currentCategory,
+  oformsFilter,
+  filterOformsByCategory,
+
   fetchCategoriesByBranch,
   fetchCategoriesByType,
   fetchPopularCategories,
-
-  oformsFilter,
-  filterOformsByCategory,
 }) => {
+  const currentCategoryTitle = getOformCategoryTitle(
+    oformsFilter.categorizeBy,
+    currentCategory
+  );
+
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
   const [formsByBranch, setFormsByBranch] = useState([]);
@@ -44,6 +43,7 @@ const CategoryFilter = ({
   if (isSmallTablet() || isMobile() || isMobileOnly)
     return (
       <CategoryFilterMobile
+        currentCategoryTitle={currentCategoryTitle}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}
@@ -53,6 +53,7 @@ const CategoryFilter = ({
 
   return (
     <CategoryFilterDesktop
+      currentCategory={currentCategoryTitle}
       onViewAllTemplates={onViewAllTemplates}
       formsByBranch={formsByBranch}
       formsByType={formsByType}

@@ -4,11 +4,13 @@ import DropDownItem from "@docspace/components/drop-down-item";
 import { useState } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import CategorySubList from "./CategorySubList";
+import SubList from "./SubList";
 import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 
 const CategoryFilterDesktop = ({
   t,
+
+  currentCategoryTitle,
 
   onViewAllTemplates,
   formsByBranch,
@@ -36,7 +38,6 @@ const CategoryFilterDesktop = ({
         id="comboBoxLanguage"
         tabIndex={1}
         className={"combobox"}
-        selectedOption={{ label: t("FormGallery:ViewAllTemplates") }}
         onSelect={() => {}}
         isDisabled={false}
         manualWidth={"100%"}
@@ -51,6 +52,9 @@ const CategoryFilterDesktop = ({
         isDefaultMode={false}
         fixedDirection={true}
         advancedOptionsCount={5}
+        selectedOption={{
+          label: currentCategoryTitle || t("FormGallery:Categories"),
+        }}
         advancedOptions={
           <>
             <Styled.CategoryFilterItem
@@ -92,20 +96,19 @@ const CategoryFilterDesktop = ({
         }
       />
 
-      <CategorySubList
+      <SubList
         categoryType={OformCategoryType.Branch}
         categories={formsByBranch}
         isSubHovered={isBranchHovered}
         marginTop={"83px"}
       />
-      <CategorySubList
+      <SubList
         categoryType={OformCategoryType.Type}
         categories={formsByType}
         isSubHovered={isTypeHovered}
         marginTop={"115px"}
       />
-
-      <CategorySubList
+      <SubList
         categoryType={OformCategoryType.Compilation}
         categories={formsByCompilation}
         isSubHovered={isCompilationHovered}

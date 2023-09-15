@@ -63,6 +63,7 @@ class FilesActionStore {
   accessRightsStore;
   clientLoadingStore;
   publicRoomStore;
+  dashboardStore;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -80,7 +81,8 @@ class FilesActionStore {
     mediaViewerDataStore,
     accessRightsStore,
     clientLoadingStore,
-    publicRoomStore
+    publicRoomStore,
+    dashboardStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -94,6 +96,7 @@ class FilesActionStore {
     this.accessRightsStore = accessRightsStore;
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
+    this.dashboardStore = dashboardStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -1532,8 +1535,16 @@ class FilesActionStore {
   };
 
   setSelectedItems = () => {
-    const selectionLength = this.filesStore.selection.length;
-    const selectionTitle = this.filesStore.selectionTitle;
+    const isDashboard = this.selectedFolderStore.isDashboard;
+    const { selectedFileLength, selectedFileTitle } = this.dashboardStore;
+
+    const selectionLength = isDashboard
+      ? selectedFileLength
+      : this.filesStore.selection.length;
+
+    const selectionTitle = isDashboard
+      ? selectedFileTitle
+      : this.filesStore.selectionTitle;
 
     if (selectionLength !== undefined && selectionTitle) {
       this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(

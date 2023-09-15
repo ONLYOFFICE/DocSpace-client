@@ -62,6 +62,15 @@ class DashboardStore {
       roles.map((role) => [role.id, new FileByRoleStore(this, role)])
     );
   };
+  private refreshCollectionFileByRoleStore = (roles: RoleQueue[]) => {
+    this.collectionFileByRoleStore = new Map(
+      roles.map((role) => {
+        const store = this.collectionFileByRoleStore.get(role.id);
+
+        return [role.id, store ? store : new FileByRoleStore(this, role)];
+      })
+    );
+  };
 
   private settingUpNavigationPath = async (dashboard: IDashboard) => {
     const navigationPath = await Promise.all(
@@ -153,6 +162,14 @@ class DashboardStore {
 
   public get hasSelectionFileByRole() {
     return this.selectedFilesByRoleMap.size > 0;
+  }
+
+  public get selectedFileLength() {
+    return this.selectedFilesByRoleMap.size;
+  }
+
+  public get selectedFileTitle() {
+    return this.BufferSelectionFilesByRole?.title ?? "";
   }
 
   //#endregion
@@ -422,8 +439,8 @@ class DashboardStore {
   };
 
   public fetchFilesByRole = async (
-    role: IRole,
-    signal: AbortSignal
+    role: IRole | RoleQueue,
+    signal?: AbortSignal
   ): Promise<FileByRoleType[]> => {
     const boardId = this.dashboard?.current.id;
 
@@ -462,6 +479,30 @@ class DashboardStore {
       this.createCollectionFileByRoleStore(dashboard.current.roleQueue);
 
       await this.settingUpNavigationPath(dashboard);
+
+      return dashboard;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+  public refreshDashboard = async (boardId: string | number) => {
+    try {
+      const dashboard: IDashboard = await api.files.getDashboard(boardId);
+
+      this.setDashboard(dashboard);
+      this.refreshCollectionFileByRoleStore(dashboard.current.roleQueue);
+      this.setRoles(dashboard.current.roleQueue);
+
+      const files = dashboard.current.roleQueue.map((role) => {
+        //TODO: Add Filter for board
+        // const filesStore = this.collectionFileByRoleStore.get(role.id);
+        // const filter = filesStore.filer
+
+        return this.fetchFilesByRole(role);
+      });
+      await Promise.all(files);
+
       return dashboard;
     } catch (error) {
       return Promise.reject(error);

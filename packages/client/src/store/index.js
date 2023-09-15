@@ -135,7 +135,8 @@ const filesActionsStore = new FilesActionsStore(
   mediaViewerDataStore,
   accessRightsStore,
   clientLoadingStore,
-  publicRoomStore
+  publicRoomStore,
+  dashboardStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(

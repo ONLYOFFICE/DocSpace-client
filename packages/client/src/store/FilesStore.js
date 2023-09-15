@@ -1366,6 +1366,10 @@ class FilesStore {
   };
 
   refreshFiles = async () => {
+    if (this.selectedFolderStore.isDashboard) {
+      return this.dashboardStore.refreshDashboard(this.selectedFolderStore.id);
+    }
+
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);
     return res;
   };

@@ -11,7 +11,6 @@ import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
 import Dashboard from "SRC_DIR/pages/Home/Dashboard";
-import Role from "SRC_DIR/pages/Home/Role";
 
 import { generalRoutes } from "./general";
 

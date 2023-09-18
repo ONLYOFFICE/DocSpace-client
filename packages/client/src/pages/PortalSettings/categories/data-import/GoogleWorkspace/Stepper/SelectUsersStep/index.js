@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { mockData } from "../mockData.js";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";

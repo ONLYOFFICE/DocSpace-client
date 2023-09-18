@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { mockData } from "../mockData.js";
 import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -18,11 +17,12 @@ const SelectUsersTypeStep = ({
   onPrevStep,
   showReminder,
   checkedAccounts,
+  users,
 }) => {
-  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(mockData.slice(leftBoundary, rightBoundary));
+    setDataPortion(users.slice(leftBoundary, rightBoundary));
   };
 
   return (
@@ -48,10 +48,10 @@ const SelectUsersTypeStep = ({
 
       <AccountsTable t={t} accountsData={dataPortion} />
 
-      {mockData.length > 25 && (
+      {users.length > 25 && (
         <AccountsPaging
           t={t}
-          numberOfItems={mockData.length}
+          numberOfItems={users.length}
           setDataPortion={handleDataChange}
         />
       )}
@@ -70,9 +70,10 @@ const SelectUsersTypeStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedAccounts } = importAccountsStore;
+  const { checkedAccounts, users } = importAccountsStore;
 
   return {
     checkedAccounts,
+    users,
   };
 })(observer(SelectUsersTypeStep));

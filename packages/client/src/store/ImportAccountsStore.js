@@ -40,11 +40,13 @@ class ImportAccountsStore {
   };
 
   onCheckAccounts = (checked, accounts) => {
-    this.checkedAccounts = checked ? accounts.map((data) => data.id) : [];
+    this.checkedAccounts = checked ? accounts.map((data) => data.key) : [];
   };
 
   toggleAllAccounts = (e, accounts) => {
-    this.checkedAccounts = e.target.checked ? accounts.map((data) => data.key) : [];
+    this.checkedAccounts = e.target.checked
+      ? accounts.map((data) => data.key)
+      : [];
   };
 
   setUsers = (data) => {
@@ -69,7 +71,10 @@ class ImportAccountsStore {
 
   multipleFileUploading = async (files, setProgress) => {
     try {
-      const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
+      const location = combineUrl(
+        window.location.origin,
+        "migrationFileUpload.ashx"
+      );
       const requestsDataArray = [];
 
       const res = await axios.post(location + "?Init=true");
@@ -94,11 +99,10 @@ class ImportAccountsStore {
 
       let chunk = 0;
 
-
       while (chunk < chunksNumber && this.isFileLoading) {
         await uploadFile(
           location + `?Name=${requestsDataArray[chunk].fileName}`,
-          requestsDataArray[chunk].formData,
+          requestsDataArray[chunk].formData
         );
         const progress = (chunk / chunksNumber) * 100;
         setProgress(Math.ceil(progress));
@@ -111,7 +115,10 @@ class ImportAccountsStore {
 
   singleFileUploading = async (file, setProgress) => {
     try {
-      const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
+      const location = combineUrl(
+        window.location.origin,
+        "migrationFileUpload.ashx"
+      );
       const requestsDataArray = [];
       let chunk = 0;
 
@@ -129,7 +136,10 @@ class ImportAccountsStore {
 
       chunk = 0;
       while (chunk < chunks && this.isFileLoading) {
-        await uploadFile(location + `?Name=${file.name}`, requestsDataArray[chunk]);
+        await uploadFile(
+          location + `?Name=${file.name}`,
+          requestsDataArray[chunk]
+        );
         const progress = (chunk / chunks) * 100;
         setProgress(Math.ceil(progress));
         chunk++;

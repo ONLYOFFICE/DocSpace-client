@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
-import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import UsersTypeTableHeader from "./UsersTypeTableHeader";
@@ -68,6 +67,7 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE
 
 const TableView = ({
   t,
+  users,
   userId,
   viewAs,
   setViewAs,
@@ -85,10 +85,10 @@ const TableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
+    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   const toggleAll = (checked) => {
-    onCheckAccounts(checked, mockData);
+    onCheckAccounts(checked, users);
   };
 
   const handleToggle = (e, id) => {
@@ -129,7 +129,7 @@ const TableView = ({
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === mockData.length}
+            isChecked={checkedAccounts.length === users.length}
             onChange={toggleAll}
           />
         </div>
@@ -141,7 +141,7 @@ const TableView = ({
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         isIndeterminate={isIndeterminate}
-        isChecked={checkedAccounts.length === mockData.length}
+        isChecked={checkedAccounts.length === users.length}
         toggleAll={toggleAll}
       />
       <TableBody
@@ -156,14 +156,12 @@ const TableView = ({
       >
         {accountsData.map((data) => (
           <UsersTypeTableRow
-            key={data.id}
-            id={data.id}
+            key={data.key}
             displayName={data.displayName}
             email={data.email}
-            type={data.type}
             typeOptions={typeOptions}
-            isChecked={isAccountChecked(data.id)}
-            toggleAccount={(e) => handleToggle(e, data.id)}
+            isChecked={isAccountChecked(data.key)}
+            toggleAccount={(e) => handleToggle(e, data.key)}
           />
         ))}
       </TableBody>
@@ -175,6 +173,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
   const {
+    users,
     checkedAccounts,
     toggleAccount,
     toggleAllAccounts,
@@ -184,6 +183,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
+    users,
     viewAs,
     setViewAs,
     userId,

@@ -54,5 +54,3 @@ export default inject(({ setup }) => {
     viewAs,
   };
 })(withTranslation(["ChangeUserTypeDialog"])(observer(AccountsTable)));
-
-// export default withTranslation(["Common, Settings"])(GoogleWorkspace);

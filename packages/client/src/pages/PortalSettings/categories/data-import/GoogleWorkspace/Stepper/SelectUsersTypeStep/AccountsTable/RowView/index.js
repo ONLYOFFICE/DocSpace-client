@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
-import { mockData } from "../../../mockData";
 import styled from "styled-components";
 
 import UsersTypeRow from "./UsersTypeRow";
@@ -69,6 +68,7 @@ const StyledRow = styled(Row)`
 
 const RowView = ({
   t,
+  users,
   sectionWidth,
   viewAs,
   setViewAs,
@@ -83,11 +83,11 @@ const RowView = ({
   const rowRef = useRef(null);
 
   const toggleAll = (checked) => {
-    onCheckAccounts(checked, mockData);
+    onCheckAccounts(checked, users);
   };
 
   const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length;
+    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -123,7 +123,7 @@ const RowView = ({
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === mockData.length}
+            isChecked={checkedAccounts.length === users.length}
             onChange={toggleAll}
           />
         </div>
@@ -135,12 +135,12 @@ const RowView = ({
 
       {accountsData.map((data) => (
         <UsersTypeRow
-          key={data.id}
+          key={data.key}
           data={data}
           sectionWidth={sectionWidth}
           typeOptions={typeOptions}
-          toggleAccount={() => toggleAccount(data.id)}
-          isChecked={isAccountChecked(data.id)}
+          isChecked={isAccountChecked(data.key)}
+          toggleAccount={() => toggleAccount(data.key)}
         />
       ))}
     </StyledRowContainer>
@@ -150,6 +150,7 @@ const RowView = ({
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
+    users,
     checkedAccounts,
     toggleAccount,
     toggleAllAccounts,
@@ -159,6 +160,7 @@ export default inject(({ setup, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
+    users,
     viewAs,
     setViewAs,
     checkedAccounts,

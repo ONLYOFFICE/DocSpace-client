@@ -361,7 +361,10 @@ internal abstract class ThirdPartyFileDao<TFile, TFolder, TItem> : IFileDao<stri
     {
         return SaveFileAsync(file, fileStream);
     }
-
+    public async Task DeleteFileAsync(string fileId, Guid ownerId)
+    {
+        await DeleteFileAsync(fileId);
+    }
     public async Task DeleteFileAsync(string fileId)
     {
         var file = await Dao.GetFileAsync(fileId);

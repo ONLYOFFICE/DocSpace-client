@@ -165,21 +165,30 @@ public abstract class BaseStorage : IDataStore
     public abstract Task<Stream> GetReadStreamAsync(string domain, string path, long offset);
 
     public abstract Task<Uri> SaveAsync(string domain, string path, Stream stream);
+    public abstract Task<Uri> SaveAsync(string domain, string path, Stream stream, Guid ownerId);
     public abstract Task<Uri> SaveAsync(string domain, string path, Stream stream, ACL acl);
 
     public async Task<Uri> SaveAsync(string domain, string path, Stream stream, string attachmentFileName)
     {
+        return await SaveAsync(domain, path, Guid.Empty, stream, attachmentFileName);
+    }
+    public async Task<Uri> SaveAsync(string domain, string path, Guid ownerId, Stream stream, string attachmentFileName)
+    {
         if (!string.IsNullOrEmpty(attachmentFileName))
         {
-            return await SaveWithAutoAttachmentAsync(domain, path, stream, attachmentFileName);
+            return await SaveWithAutoAttachmentAsync(domain, path, ownerId, stream, attachmentFileName);
         }
-        return await SaveAsync(domain, path, stream);
+        return await SaveAsync(domain, path, stream, ownerId);
     }
 
+    protected abstract Task<Uri> SaveWithAutoAttachmentAsync(string domain, string path, Guid ownerId, Stream stream, string attachmentFileName);
     protected abstract Task<Uri> SaveWithAutoAttachmentAsync(string domain, string path, Stream stream, string attachmentFileName);
 
 
     public abstract Task<Uri> SaveAsync(string domain, string path, Stream stream, string contentType,
+                            string contentDisposition);
+
+    public abstract Task<Uri> SaveAsync(string domain, string path,Guid ownerId, Stream stream, string contentType,
                             string contentDisposition);
     public abstract Task<Uri> SaveAsync(string domain, string path, Stream stream, string contentEncoding, int cacheDays);
 
@@ -220,6 +229,7 @@ public abstract class BaseStorage : IDataStore
     #endregion
 
     public abstract Task DeleteAsync(string domain, string path);
+    public abstract Task DeleteFilesAsync(string domain, string folderPath, string pattern, bool recursive, Guid ownerId);
     public abstract Task DeleteFilesAsync(string domain, string folderPath, string pattern, bool recursive);
     public abstract Task DeleteFilesAsync(string domain, List<string> paths);
     public abstract Task DeleteFilesAsync(string domain, string folderPath, DateTime fromDate, DateTime toDate);
@@ -232,6 +242,7 @@ public abstract class BaseStorage : IDataStore
     public abstract Task<bool> IsFileAsync(string domain, string path);
     public abstract Task<bool> IsDirectoryAsync(string domain, string path);
     public abstract Task DeleteDirectoryAsync(string domain, string path);
+    public abstract Task DeleteDirectoryAsync(string domain, string path, Guid ownerId);
     public abstract Task<long> GetFileSizeAsync(string domain, string path);
     public abstract Task<long> GetDirectorySizeAsync(string domain, string path);
     public abstract Task<long> ResetQuotaAsync(string domain);
@@ -308,6 +319,10 @@ public abstract class BaseStorage : IDataStore
     {
         await DeleteDirectoryAsync(string.Empty, path);
     }
+    public async Task DeleteDirectoryAsync(Guid ownerId, string path)
+    {
+        await DeleteDirectoryAsync(string.Empty, path, ownerId);
+    }
 
     public async Task<long> GetFileSizeAsync(string path)
     {
@@ -354,9 +369,13 @@ public abstract class BaseStorage : IDataStore
 
     internal async Task QuotaUsedAddAsync(string domain, long size, bool quotaCheckFileSize = true)
     {
+        await QuotaUsedAddAsync(domain, size, Guid.Empty, quotaCheckFileSize);
+    }
+    internal async Task QuotaUsedAddAsync(string domain, long size, Guid ownerId, bool quotaCheckFileSize = true)
+    {
         if (QuotaController != null)
         {
-            await QuotaController.QuotaUsedAddAsync(Modulename, domain, DataList.GetData(domain), size, quotaCheckFileSize);
+            await QuotaController.QuotaUsedAddAsync(Modulename, domain, DataList.GetData(domain), size, ownerId, quotaCheckFileSize);
             var(name, value) = await _tenantQuotaFeatureStatHelper.GetStatAsync<MaxTotalSizeFeature, long>();
             _ = _quotaSocketManager.ChangeQuotaUsedValueAsync(name, value);
         }
@@ -364,9 +383,13 @@ public abstract class BaseStorage : IDataStore
 
     internal async Task QuotaUsedDeleteAsync(string domain, long size)
     {
+       await QuotaUsedDeleteAsync(domain, size, Guid.Empty);
+    }
+    internal async Task QuotaUsedDeleteAsync(string domain, long size, Guid ownerId)
+    {
         if (QuotaController != null)
         {
-            await QuotaController.QuotaUsedDeleteAsync(Modulename, domain, DataList.GetData(domain), size);
+            await QuotaController.QuotaUsedDeleteAsync(Modulename, domain, DataList.GetData(domain), size, ownerId);
             var (name, value) = await _tenantQuotaFeatureStatHelper.GetStatAsync<MaxTotalSizeFeature, long>();
             _ = _quotaSocketManager.ChangeQuotaUsedValueAsync(name, value);
         }

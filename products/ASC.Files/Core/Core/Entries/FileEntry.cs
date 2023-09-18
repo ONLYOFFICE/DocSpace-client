@@ -120,6 +120,7 @@ public abstract class FileEntry<T> : FileEntry, ICloneable, IFileEntry<T>
     public IDictionary<FilesSecurityActions, bool> Security { get; set; }
 
     private T _folderIdDisplay;
+    private readonly SecurityContext _securityContext;
     private readonly GlobalFolderHelper _globalFolderHelper;
     private readonly FilesSettingsHelper _filesSettingsHelper;
     private readonly FileDateTime _fileDateTime;
@@ -130,10 +131,12 @@ public abstract class FileEntry<T> : FileEntry, ICloneable, IFileEntry<T>
     protected FileEntry(
         FileHelper fileHelper,
         Global global,
+        SecurityContext securityContext,
         GlobalFolderHelper globalFolderHelper,
         FilesSettingsHelper filesSettingsHelper,
         FileDateTime fileDateTime) : base(fileHelper, global)
     {
+        _securityContext = securityContext;
         _globalFolderHelper = globalFolderHelper;
         _filesSettingsHelper = filesSettingsHelper;
         _fileDateTime = fileDateTime;
@@ -187,5 +190,16 @@ public abstract class FileEntry<T> : FileEntry, ICloneable, IFileEntry<T>
     public override string ToString()
     {
         return Title;
+    }
+
+    public Guid GetFileQuotaOwner()
+    {
+        return
+            RootFolderType == FolderType.USER || RootFolderType == FolderType.DEFAULT || RootFolderType == FolderType.TRASH ?
+                RootCreateBy :
+                RootFolderType == FolderType.Privacy && CreateBy == _securityContext.CurrentAccount.ID ?
+                    CreateBy :
+                    ASC.Core.Configuration.Constants.CoreSystem.ID;
+
     }
 }

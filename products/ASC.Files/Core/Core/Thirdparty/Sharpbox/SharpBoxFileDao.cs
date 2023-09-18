@@ -173,7 +173,7 @@ internal class SharpBoxFileDao : SharpBoxDaoBase, IFileDao<string>
         }
     }
 
-    public async IAsyncEnumerable<File<string>> GetFilesAsync(string parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText, 
+    public async IAsyncEnumerable<File<string>> GetFilesAsync(string parentId, OrderBy orderBy, FilterType filterType, bool subjectGroup, Guid subjectID, string searchText,
         bool searchInContent, bool withSubfolders = false, bool excludeSubject = false, int offset = 0, int count = -1)
     {
         if (filterType == FilterType.FoldersOnly)
@@ -369,7 +369,10 @@ internal class SharpBoxFileDao : SharpBoxDaoBase, IFileDao<string>
     {
         return await SaveFileAsync(file, fileStream);
     }
-
+    public async Task DeleteFileAsync(string fileId, Guid ownerId)
+    {
+        await DeleteFileAsync(fileId);
+    }
     public async Task DeleteFileAsync(string fileId)
     {
         var file = GetFileById(fileId);

@@ -71,18 +71,29 @@ public class TenantQuotaController : IQuotaController
 
     public async Task QuotaUsedAddAsync(string module, string domain, string dataTag, long size, bool quotaCheckFileSize = true)
     {
+        await QuotaUsedAddAsync(module, domain, dataTag, size, Guid.Empty, quotaCheckFileSize);
+    }
+    public async Task QuotaUsedAddAsync(string module, string domain, string dataTag, long size, Guid ownerId, bool quotaCheckFileSize = true)
+    {
         size = Math.Abs(size);
         if (UsedInQuota(dataTag))
         {
-            await QuotaUsedCheckAsync(size, quotaCheckFileSize);
+            await QuotaUsedCheckAsync(size, quotaCheckFileSize, ownerId);
             CurrentSize += size;
         }
 
         await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, Guid.Empty);
-        await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, _authContext.CurrentAccount.ID);
+        if (ownerId != Core.Configuration.Constants.CoreSystem.ID)
+        {
+            await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, ownerId != Guid.Empty ? ownerId : _authContext.CurrentAccount.ID);
+        }
+    }
+    public async Task QuotaUsedDeleteAsync(string module, string domain, string dataTag, long size)
+    {
+        await QuotaUsedDeleteAsync(module, domain, dataTag, size, Guid.Empty);
     }
 
-    public async Task QuotaUsedDeleteAsync(string module, string domain, string dataTag, long size)
+    public async Task QuotaUsedDeleteAsync(string module, string domain, string dataTag, long size, Guid ownerId)
     {
         size = -Math.Abs(size);
         if (UsedInQuota(dataTag))
@@ -91,7 +102,10 @@ public class TenantQuotaController : IQuotaController
         }
 
         await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, Guid.Empty);
-        await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, _authContext.CurrentAccount.ID);
+        if (ownerId != Core.Configuration.Constants.CoreSystem.ID)
+        {
+            await SetTenantQuotaRowAsync(module, domain, size, dataTag, true, ownerId != Guid.Empty ? ownerId : _authContext.CurrentAccount.ID);
+        }
     }
 
     public async Task QuotaUsedSetAsync(string module, string domain, string dataTag, long size)
@@ -105,12 +119,12 @@ public class TenantQuotaController : IQuotaController
         await SetTenantQuotaRowAsync(module, domain, size, dataTag, false, Guid.Empty);
     }
 
-    public async Task QuotaUsedCheckAsync(long size)
+    public async Task QuotaUsedCheckAsync(long size, Guid ownedId)
     {
-        await QuotaUsedCheckAsync(size, true);
+        await QuotaUsedCheckAsync(size, true, ownedId);
     }
 
-    public async Task QuotaUsedCheckAsync(long size, bool quotaCheckFileSize)
+    public async Task QuotaUsedCheckAsync(long size, bool quotaCheckFileSize, Guid ownerId)
     {
         var quota = await _tenantManager.GetTenantQuotaAsync(_tenant);
         if (quota != null)
@@ -125,6 +139,25 @@ public class TenantQuotaController : IQuotaController
                 await _maxTotalSizeChecker.CheckAddAsync(_tenant, CurrentSize + size);
             }
         }
+        //TODO 
+        /* var quotaSettings = TenantUserQuotaSettings.Load();
+
+            if (quotaSettings.EnableUserQuota)
+            {
+                var userQuotaSettings = UserQuotaSettings.LoadForUser(ownedId);
+                var quotaLimit = userQuotaSettings.UserQuota;
+
+                if (quotaLimit != -1)
+                {
+                    var userUsedSpace = Math.Max(0, CoreContext.TenantManager.FindUserQuotaRows(_tenant, ownedId).Where(r => !string.IsNullOrEmpty(r.Tag)).Where(r => r.Tag != Guid.Empty.ToString()).Sum(r => r.Counter));
+
+                    if (quotaLimit - userUsedSpace < size)
+                    {
+                        throw new TenantQuotaException(string.Format("Exceeds the maximum file size ({0}MB)", BytesToMegabytes(quotaLimit)));
+                    }
+                }
+            }
+         */
     }
 
 

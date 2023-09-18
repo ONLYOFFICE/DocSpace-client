@@ -324,7 +324,7 @@ class FileDeleteOperation<T> : FileOperation<FileDeleteOperationData<T>, T>
                 {
                     try
                     {
-                        await FileDao.DeleteFileAsync(file.Id);
+                        await FileDao.DeleteFileAsync(file.Id, file.GetFileQuotaOwner());
 
                         if (_headers != null)
                         {

@@ -345,7 +345,7 @@ internal class FileDao : AbstractDao, IFileDao<int>
         if (checkQuota && _coreBaseSettings.Personal && SetupInfo.IsVisibleSettings("PersonalMaxSpace"))
         {
             var personalMaxSpace = await _coreConfiguration.PersonalMaxSpaceAsync(_settingsManager);
-            if (personalMaxSpace - await _globalSpace.GetUserUsedSpaceAsync(file.Id == default ? _authContext.CurrentAccount.ID : file.CreateBy) < file.ContentLength)
+            if (personalMaxSpace - await _globalSpace.GetUserUsedSpaceAsync(file.GetFileQuotaOwner()) < file.ContentLength)
             {
                 throw FileSizeComment.GetPersonalFreeSpaceException(personalMaxSpace);
             }
@@ -471,7 +471,7 @@ internal class FileDao : AbstractDao, IFileDao<int>
                     if (isNew)
                     {
                         var stored = await (await _globalStore.GetStoreAsync()).IsDirectoryAsync(GetUniqFileDirectory(file.Id));
-                        await DeleteFileAsync(file.Id, stored);
+                        await DeleteFileAsync(file.Id, stored, file.GetFileQuotaOwner());
                     }
                     else if (!await IsExistOnStorageAsync(file))
                     {
@@ -529,7 +529,7 @@ internal class FileDao : AbstractDao, IFileDao<int>
         if (_coreBaseSettings.Personal && SetupInfo.IsVisibleSettings("PersonalMaxSpace"))
         {
             var personalMaxSpace = await _coreConfiguration.PersonalMaxSpaceAsync(_settingsManager);
-            if (personalMaxSpace - await _globalSpace.GetUserUsedSpaceAsync(file.Id == default ? _authContext.CurrentAccount.ID : file.CreateBy) < file.ContentLength)
+            if (personalMaxSpace - await _globalSpace.GetUserUsedSpaceAsync(file.GetFileQuotaOwner()) < file.ContentLength)
             {
                 throw FileSizeComment.GetPersonalFreeSpaceException(personalMaxSpace);
             }
@@ -653,15 +653,33 @@ internal class FileDao : AbstractDao, IFileDao<int>
 
     private async Task SaveFileStreamAsync(File<int> file, Stream stream)
     {
-        await (await _globalStore.GetStoreAsync()).SaveAsync(string.Empty, GetUniqFilePath(file), stream, file.Title);
+        var folderDao = _daoFactory.GetFolderDao<int>();
+        var folder = await folderDao.GetFolderAsync(file.FolderIdDisplay);
+
+        if (DocSpaceHelper.IsRoom(folder.FolderType))
+        {
+            file.RootCreateBy = folder.CreateBy;
+            file.RootFolderType = folder.FolderType;
+        }
+        else {
+            file.RootCreateBy = folder.RootCreateBy;
+            file.RootFolderType = folder.RootFolderType;
+        }
+        
+        await (await _globalStore.GetStoreAsync()).SaveAsync(string.Empty, GetUniqFilePath(file), file.GetFileQuotaOwner(), stream, file.Title);
     }
 
     public async Task DeleteFileAsync(int fileId)
     {
-        await DeleteFileAsync(fileId, true);
+        await DeleteFileAsync(fileId, Guid.Empty);
     }
 
-    private async ValueTask DeleteFileAsync(int fileId, bool deleteFolder)
+    public async Task DeleteFileAsync(int fileId, Guid ownerId)
+    {
+        await DeleteFileAsync(fileId, true, ownerId);
+    }
+
+    private async ValueTask DeleteFileAsync(int fileId, bool deleteFolder, Guid ownerId)
     {
         if (fileId == default)
         {
@@ -707,7 +725,7 @@ internal class FileDao : AbstractDao, IFileDao<int>
                 var tenantId = _tenantManager.GetCurrentTenant().Id;
                 _tenantQuotaController.Init(tenantId, ThumbnailTitle);
                 var store = await _storageFactory.GetStorageAsync(tenantId, FileConstant.StorageModule, _tenantQuotaController);
-                await store.DeleteDirectoryAsync(GetUniqFileDirectory(fileId));
+                await store.DeleteDirectoryAsync(ownerId, GetUniqFileDirectory(fileId));
             }
 
             if (toDeleteFile != null)

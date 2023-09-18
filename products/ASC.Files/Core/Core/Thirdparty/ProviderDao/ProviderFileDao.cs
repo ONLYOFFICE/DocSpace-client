@@ -296,10 +296,14 @@ internal class ProviderFileDao : ProviderDaoBase, IFileDao<string>
 
     public async Task DeleteFileAsync(string fileId)
     {
+        await DeleteFileAsync(fileId, Guid.Empty);
+    }
+    public async Task DeleteFileAsync(string fileId, Guid ownerId)
+    {
         var selector = _selectorFactory.GetSelector(fileId);
         var fileDao = selector.GetFileDao(fileId);
 
-        await fileDao.DeleteFileAsync(selector.ConvertId(fileId));
+        await fileDao.DeleteFileAsync(selector.ConvertId(fileId), ownerId);
     }
 
     public async Task<bool> IsExistAsync(string title, object folderId)

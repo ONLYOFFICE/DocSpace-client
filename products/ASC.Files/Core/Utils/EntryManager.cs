@@ -1947,7 +1947,7 @@ public class EntryManager
         await foreach (var file in files)
         {
             _logger.InformationDeletefile(file.Id.ToString(), parentId.ToString());
-            await fileDao.DeleteFileAsync(file.Id);
+            await fileDao.DeleteFileAsync(file.Id, file.GetFileQuotaOwner());
             await _socketManager.DeleteFileAsync(file);
 
             await linkDao.DeleteAllLinkAsync(file.Id.ToString());

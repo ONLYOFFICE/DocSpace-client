@@ -136,6 +136,10 @@ public class DiscDataStore : BaseStorage
         throw new FileNotFoundException("File not found", Path.GetFullPath(target));
     }
 
+    public override Task<Uri> SaveAsync(string domain, string path, Guid ownerId, Stream stream, string contentType, string contentDisposition)
+    {
+        return SaveAsync(domain, path, stream, ownerId);
+    }
     public override Task<Uri> SaveAsync(string domain, string path, Stream stream, string contentType, string contentDisposition)
     {
         return SaveAsync(domain, path, stream);
@@ -152,13 +156,17 @@ public class DiscDataStore : BaseStorage
 
     public override async Task<Uri> SaveAsync(string domain, string path, Stream stream)
     {
+        return await SaveAsync(domain, path, stream, Guid.Empty);
+    }
+    public override async Task<Uri> SaveAsync(string domain, string path, Stream stream, Guid ownerId)
+    {
         Logger.DebugSavePath(path);
 
         var buffered = _tempStream.GetBuffered(stream);
             
         if (EnableQuotaCheck(domain))
         {
-            await QuotaController.QuotaUsedCheckAsync(buffered.Length);
+            await QuotaController.QuotaUsedCheckAsync(buffered.Length, ownerId);
         }
 
         ArgumentNullException.ThrowIfNull(path);
@@ -189,7 +197,7 @@ public class DiscDataStore : BaseStorage
             fslen = fs.Length;
         }
 
-        await QuotaUsedAddAsync(domain, fslen);
+        await QuotaUsedAddAsync(domain, fslen, ownerId);
 
         _crypt.EncryptFile(target);
 
@@ -295,6 +303,10 @@ public class DiscDataStore : BaseStorage
 
     public override async Task DeleteFilesAsync(string domain, string folderPath, string pattern, bool recursive)
     {
+        await DeleteFilesAsync(domain, folderPath, pattern, recursive, Guid.Empty);
+    }
+    public override async Task DeleteFilesAsync(string domain, string folderPath, string pattern, bool recursive, Guid ownerId)
+    {
         ArgumentNullException.ThrowIfNull(folderPath);
 
         //Return dirs
@@ -306,7 +318,7 @@ public class DiscDataStore : BaseStorage
             {
                 var size = _crypt.GetFileSize(entry);
                 File.Delete(entry);
-                await QuotaUsedDeleteAsync(domain, size);
+                await QuotaUsedDeleteAsync(domain, size, ownerId);
             }
         }
         else
@@ -407,6 +419,11 @@ public class DiscDataStore : BaseStorage
 
     public override async Task DeleteDirectoryAsync(string domain, string path)
     {
+        await DeleteDirectoryAsync(domain, path, Guid.Empty);
+    }
+
+    public override async Task DeleteDirectoryAsync(string domain, string path, Guid ownerId)
+    {
         ArgumentNullException.ThrowIfNull(path);
 
         //Return dirs
@@ -444,7 +461,7 @@ public class DiscDataStore : BaseStorage
 
         Directory.Delete(targetDir, true);
 
-        await QuotaUsedDeleteAsync(domain, size);
+        await QuotaUsedDeleteAsync(domain, size, ownerId);
     }
 
     public override Task<long> GetFileSizeAsync(string domain, string path)
@@ -672,7 +689,10 @@ public class DiscDataStore : BaseStorage
             throw new FileNotFoundException("file not found", target);
         }
     }
-
+    protected override Task<Uri> SaveWithAutoAttachmentAsync(string domain, string path, Guid ownerId, Stream stream, string attachmentFileName)
+    {
+        return SaveAsync(domain, path, stream, ownerId);
+    }
     protected override Task<Uri> SaveWithAutoAttachmentAsync(string domain, string path, Stream stream, string attachmentFileName)
     {
         return SaveAsync(domain, path, stream);

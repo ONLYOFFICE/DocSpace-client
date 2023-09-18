@@ -152,6 +152,17 @@ public interface IDataStore
     /// </summary>
     /// <param name="domain"></param>
     /// <param name="path"></param>
+    /// <param name="ownerId"></param>
+    /// <param name="stream"></param>
+    /// <param name="attachmentFileName"></param>
+    /// <returns></returns>
+    Task<Uri> SaveAsync(string domain, string path, Guid ownerId, Stream stream, string attachmentFileName);
+
+    /// <summary>
+    /// Saves the contents of the stream in the repository.
+    /// </summary>
+    /// <param name="domain"></param>
+    /// <param name="path"></param>
     /// <param name="stream"></param>
     /// <param name="contentType"></param>
     /// <param name="contentDisposition"></param>
@@ -316,6 +327,7 @@ public interface IDataStore
     Task<bool> IsFileAsync(string path);
     Task<bool> IsDirectoryAsync(string path);
     Task DeleteDirectoryAsync(string path);
+    Task DeleteDirectoryAsync(Guid ownerId, string path);
     Task<long> GetFileSizeAsync(string path);
     Task<long> GetDirectorySizeAsync(string path);
     Task<Uri> CopyAsync(string path, string newdomain, string newpath);

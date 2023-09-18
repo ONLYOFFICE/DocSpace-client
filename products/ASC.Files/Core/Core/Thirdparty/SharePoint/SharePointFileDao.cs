@@ -333,7 +333,10 @@ internal class SharePointFileDao : SharePointDaoBase, IFileDao<string>
     {
         return await SaveFileAsync(file, fileStream);
     }
-
+    public async Task DeleteFileAsync(string fileId,Guid ownerId)
+    {
+        await DeleteFileAsync(fileId);
+    }
     public async Task DeleteFileAsync(string fileId)
     {
         await SharePointProviderInfo.DeleteFileAsync(fileId);

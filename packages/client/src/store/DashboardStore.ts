@@ -170,7 +170,17 @@ class DashboardStore {
   }
 
   public get selectedFileTitle() {
-    return this.BufferSelectionFilesByRole?.title ?? "";
+    if (
+      this.selectedFilesByRoleMap.size === 0 &&
+      this.BufferSelectionFilesByRole
+    ) {
+      return this.BufferSelectionFilesByRole.title;
+    }
+
+    return (
+      Array.from(this.selectedFilesByRoleMap.values()).find((el) => el.title)
+        ?.title || null
+    );
   }
 
   //#endregion

@@ -78,7 +78,6 @@ const RowView = ({
   toggleAccount,
   isAccountChecked,
   onCheckAccounts,
-  cleanCheckedAccounts,
 }) => {
   const rowRef = useRef(null);
 
@@ -97,7 +96,6 @@ const RowView = ({
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const headerMenu = [
@@ -156,7 +154,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
-    cleanCheckedAccounts,
   } = importAccountsStore;
 
   return {
@@ -168,6 +165,5 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
-    cleanCheckedAccounts,
   };
 })(observer(RowView));

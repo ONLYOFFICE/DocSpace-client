@@ -45,7 +45,12 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const ImportCompleteStep = ({ t, getMigrationLog }) => {
+const ImportCompleteStep = ({
+  t,
+  selectedUsers,
+  importedUsers,
+  getMigrationLog,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -65,9 +70,6 @@ const ImportCompleteStep = ({ t, getMigrationLog }) => {
       console.log(error);
     }
   };
-
-  const selectedUsers = 70;
-  const importedUsers = 70;
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
@@ -120,9 +122,12 @@ const ImportCompleteStep = ({ t, getMigrationLog }) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { getMigrationLog } = importAccountsStore;
+  const { users, getMigrationLog, numberOfCheckedAccounts } =
+    importAccountsStore;
 
   return {
+    importedUsers: users.length,
+    selectedUsers: numberOfCheckedAccounts,
     getMigrationLog,
   };
 })(observer(ImportCompleteStep));

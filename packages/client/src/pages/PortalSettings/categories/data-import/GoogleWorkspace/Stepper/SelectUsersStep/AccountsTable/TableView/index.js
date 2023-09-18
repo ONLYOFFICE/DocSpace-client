@@ -49,7 +49,6 @@ const TableView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
     users,
   } = props;
   const tableRef = useRef(null);
@@ -71,7 +70,6 @@ const TableView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -123,7 +121,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
     users,
   } = importAccountsStore;
 
@@ -136,6 +133,5 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
   };
 })(observer(TableView));

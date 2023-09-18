@@ -17,6 +17,7 @@ import type {
   RoleDoneType,
   RoleInterruptedType,
   FileByRoleType,
+  ActiveFileType,
 } from "@docspace/common/types";
 import { RoleTypeEnum } from "@docspace/common/enums";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -38,7 +39,7 @@ class DashboardStore {
   public selectedFilesByRoleMap: Map<number, IFileByRole> = new Map();
   public collectionFileByRoleStore: Map<number, FileByRoleStore> = new Map();
   public BufferSelectionFilesByRole?: IFileByRole;
-  public activeFilesByRole: Map<number, number> = new Map();
+  public activeFilesByRole: Map<number, ActiveFileType> = new Map();
 
   constructor(
     private selectedFolderStore: SelectedFolderStore,
@@ -287,19 +288,20 @@ class DashboardStore {
     }
   };
 
-  public setActiveFiles = (activeFilesId: number[]) => {
-    if (
-      activeFilesId &&
-      Array.isArray(activeFilesId) &&
-      activeFilesId.length > 0
-    ) {
-      this.activeFilesByRole = new Map(activeFilesId.map((id) => [id, id]));
+  public setActiveFiles = (activeFilesId: ActiveFileType[]) => {
+    if (activeFilesId && Array.isArray(activeFilesId)) {
+      this.activeFilesByRole = new Map(
+        activeFilesId.map((file) => [file.id, file])
+      );
     }
   };
 
-  public addActiveFiles = (activeFilesId: number[]) => {
+  public addActiveFiles = (
+    activeFilesId: number[],
+    destFolderId: string | number
+  ) => {
     for (const id of activeFilesId) {
-      this.activeFilesByRole.set(id, id);
+      this.activeFilesByRole.set(id, { id, destFolderId });
     }
   };
 

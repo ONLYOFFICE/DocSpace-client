@@ -691,14 +691,14 @@ class FilesStore {
     }
 
     const newActiveFiles = this.activeFiles.filter(
-      (el) => !fileIds?.includes(el)
+      (el) => !fileIds?.includes(el.id)
     );
     const newActiveFolders = this.activeFolders.filter(
-      (el) => !folderIds.includes(el)
+      (el) => !folderIds.includes(el.id)
     );
 
     const newActiveBoards = this.activeBoards.filter(
-      (id) => !boardIds.includes(id)
+      (item) => !boardIds.includes(item.id)
     );
 
     this.setActiveFiles(newActiveFiles);
@@ -710,7 +710,7 @@ class FilesStore {
     if (this.selectedFolderStore.isDashboard) {
       files &&
         Array.isArray(files) &&
-        this.dashboardStore.addActiveFiles(files);
+        this.dashboardStore.addActiveFiles(files, destFolderId);
       return;
     }
 
@@ -744,6 +744,13 @@ class FilesStore {
   };
 
   updateActiveFiles = (items) => {
+    if (this.selectedFolderStore.isDashboard) {
+      items &&
+        Array.isArray(items) &&
+        this.dashboardStore.setActiveFiles(items);
+      return;
+    }
+
     this.activeFiles = items;
   };
 
@@ -1065,7 +1072,7 @@ class FilesStore {
     if (!file.parentId) {
       if (this.activeFiles.find((elem) => elem.id === file.id)) return false;
     } else if (file.isDashboard) {
-      if (this.activeBoards.includes(file.id)) return false;
+      if (this.activeBoards.find((elem) => elem.id === file.id)) return false;
     } else {
       if (this.activeFolders.find((elem) => elem.id === file.id)) return false;
     }
@@ -1178,7 +1185,7 @@ class FilesStore {
           );
         }
       } else if (fileType === "board") {
-        if (this.activeBoards.findIndex((f) => f == id) === -1) {
+        if (this.activeBoards.findIndex((f) => f.id == id) === -1) {
           newSelections.push(
             this.filesList.find((f) => f.id == id && f.isDashboard)
           );
@@ -1215,7 +1222,7 @@ class FilesStore {
           );
         }
       } else if (fileType === "board") {
-        if (this.activeBoards.findIndex((f) => f == id) === -1) {
+        if (this.activeBoards.findIndex((f) => f.id == id) === -1) {
           newSelections = newSelections.filter(
             (f) => !(f.id == id && f.isDashboard)
           );

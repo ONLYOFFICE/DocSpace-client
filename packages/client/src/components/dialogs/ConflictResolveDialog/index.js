@@ -101,7 +101,7 @@ const ConflictResolveDialog = (props) => {
     let newActiveFiles = activeFiles;
 
     for (let item of fileIds) {
-      newActiveFiles = newActiveFiles.filter((f) => f !== item);
+      newActiveFiles = newActiveFiles.filter((f) => f.id !== item);
     }
 
     setActiveFiles(newActiveFiles);
@@ -296,7 +296,7 @@ export default inject(
 
     const setActiveFiles = isDashboard
       ? dashboardStore.setActiveFiles
-      : filesStore.activeFiles;
+      : filesStore.setActiveFiles;
 
     const updateActiveFiles = filesStore.updateActiveFiles;
 

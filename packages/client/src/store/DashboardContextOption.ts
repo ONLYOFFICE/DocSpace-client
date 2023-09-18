@@ -330,7 +330,10 @@ class DashboardContextOptionStore {
       operationId,
     });
 
-    this.dashboardStore.addActiveFiles(fileIds);
+    this.dashboardStore.addActiveFiles(
+      fileIds,
+      this.dashboardStore.dashboard?.current.id ?? ""
+    );
 
     try {
       this.filesActionsStore.filesStore.setOperationAction(true);
@@ -406,7 +409,10 @@ class DashboardContextOptionStore {
 
     const operationId = uniqueid("operation_");
 
-    this.dashboardStore.addActiveFiles(fileIds);
+    this.dashboardStore.addActiveFiles(
+      fileIds,
+      this.dashboardStore.dashboard?.current.id ?? ""
+    );
 
     setSecondaryProgressBarData({
       icon: "file",

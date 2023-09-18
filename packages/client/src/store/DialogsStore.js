@@ -445,7 +445,7 @@ class DialogsStore {
 
   deselectActiveFiles = () => {
     if (this.selectedFolderStore.isDashboard) {
-      return this.dashboardStore.clearSelectedFileByRoleMap();
+      return this.dashboardStore.deSelectActiveFiles();
     }
     this.filesStore.setSelected("none");
   };

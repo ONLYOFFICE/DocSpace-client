@@ -187,6 +187,92 @@ class DashboardStore {
 
   //#region public method
 
+  public addActiveFiles = (
+    activeFilesId: number[],
+    destFolderId: string | number
+  ) => {
+    for (const id of activeFilesId) {
+      this.activeFilesByRole.set(id, { id, destFolderId });
+    }
+  };
+
+  public selectedRole = (role: IRole, checked: boolean): void => {
+    if (this.BufferSelectionRole) this.clearBufferSelectionRole();
+
+    if (checked) this.SelectedRolesMap.set(role.id, role);
+    else this.SelectedRolesMap.delete(role.id);
+  };
+
+  public selectedFileByRole = (file: IFileByRole, checked: boolean) => {
+    if (this.BufferSelectionFilesByRole) this.clearBufferSelectionFilesByRole();
+
+    if (checked) {
+      this.selectedFilesByRoleMap.set(file.id, file);
+    } else {
+      this.selectedFilesByRoleMap.delete(file.id);
+    }
+  };
+
+  public setActiveFiles = (activeFilesId: ActiveFileType[]) => {
+    if (activeFilesId && Array.isArray(activeFilesId)) {
+      this.activeFilesByRole = new Map(
+        activeFilesId.map((file) => [file.id, file])
+      );
+    }
+  };
+
+  public setViewAs = (viewAs: string): void => {
+    const isNotEmptySelected = this.SelectedRolesMap.size !== 0;
+
+    if (viewAs === "dashboard") {
+      isNotEmptySelected && this.clearSelectedRoleMap();
+      this.clearBufferSelectionRole();
+    }
+
+    this.viewAs = viewAs;
+    localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
+  };
+
+  public setRoles = (roles: RoleQueue[]): void => {
+    this._roles = roles;
+  };
+
+  public setDashboard = (dashboard: IDashboard): void => {
+    this.dashboard = dashboard;
+  };
+
+  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
+    this.SelectedRolesMap = selectedRolesMap;
+  };
+  public setSelectedFilesByRoleMap = (
+    selectedFilesByRoleMap: Map<number, IFileByRole>
+  ): void => {
+    this.selectedFilesByRoleMap = selectedFilesByRoleMap;
+  };
+
+  public setBufferSelectionFileByRole = (
+    file: IFileByRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => {
+    const hasFile = this.selectedFilesByRoleMap.has(file.id);
+
+    if (withSelection && hasFile) {
+      this.clearBufferSelectionFilesByRole();
+    }
+
+    if (withSelection && !hasFile) {
+      this.BufferSelectionFilesByRole = file;
+      this.selectedFilesByRoleMap.clear();
+    }
+
+    if (!withSelection) {
+      this.BufferSelectionFilesByRole = file;
+      this.selectedFilesByRoleMap.clear();
+      if (checked) this.selectedFilesByRoleMap.set(file.id, file);
+    }
+  };
+
   public convertToRole = (role: RoleQueue): IRole => {
     const url = getCategoryUrl(
       CategoryType.Role,
@@ -281,44 +367,9 @@ class DashboardStore {
     }
   };
 
-  public selectedRole = (role: IRole, checked: boolean): void => {
-    if (this.BufferSelectionRole) this.clearBufferSelectionRole();
-
-    if (checked) this.SelectedRolesMap.set(role.id, role);
-    else this.SelectedRolesMap.delete(role.id);
-  };
-
-  public selectedFileByRole = (file: IFileByRole, checked: boolean) => {
-    if (this.BufferSelectionFilesByRole) this.clearBufferSelectionFilesByRole();
-
-    if (checked) {
-      this.selectedFilesByRoleMap.set(file.id, file);
-    } else {
-      this.selectedFilesByRoleMap.delete(file.id);
-    }
-  };
-
-  public setActiveFiles = (activeFilesId: ActiveFileType[]) => {
-    if (activeFilesId && Array.isArray(activeFilesId)) {
-      this.activeFilesByRole = new Map(
-        activeFilesId.map((file) => [file.id, file])
-      );
-    }
-  };
-
-  public addActiveFiles = (
-    activeFilesId: number[],
-    destFolderId: string | number
-  ) => {
-    for (const id of activeFilesId) {
-      this.activeFilesByRole.set(id, { id, destFolderId });
-    }
-  };
-
-  public clearActiveFiles = (activeFilesId: number[]) => {
-    for (const id of activeFilesId) {
-      this.activeFilesByRole.delete(id);
-    }
+  public deSelectActiveFiles = () => {
+    this.clearBufferSelectionFilesByRole();
+    this.clearSelectedFileByRoleMap();
   };
 
   public removeSelectedFilesByRole = (removeFiles: IFileByRole[]) => {
@@ -383,6 +434,12 @@ class DashboardStore {
     this.clearBufferSelectionFilesByRole();
   };
 
+  public clearActiveFiles = (activeFilesId: number[]) => {
+    for (const id of activeFilesId) {
+      this.activeFilesByRole.delete(id);
+    }
+  };
+
   public clearSelectedRoleMap = (): void => {
     this.SelectedRolesMap.clear();
   };
@@ -396,58 +453,6 @@ class DashboardStore {
 
   public clearBufferSelectionFilesByRole = (): void => {
     this.BufferSelectionFilesByRole = undefined;
-  };
-
-  public setViewAs = (viewAs: string): void => {
-    const isNotEmptySelected = this.SelectedRolesMap.size !== 0;
-
-    if (viewAs === "dashboard") {
-      isNotEmptySelected && this.clearSelectedRoleMap();
-      this.clearBufferSelectionRole();
-    }
-
-    this.viewAs = viewAs;
-    localStorage.setItem(DASHBOARD_VIEW_AS_KEY, viewAs);
-  };
-
-  public setRoles = (roles: RoleQueue[]): void => {
-    this._roles = roles;
-  };
-
-  public setDashboard = (dashboard: IDashboard): void => {
-    this.dashboard = dashboard;
-  };
-
-  public setSelectedRolesMap = (selectedRolesMap: Map<number, IRole>) => {
-    this.SelectedRolesMap = selectedRolesMap;
-  };
-  public setSelectedFilesByRoleMap = (
-    selectedFilesByRoleMap: Map<number, IFileByRole>
-  ): void => {
-    this.selectedFilesByRoleMap = selectedFilesByRoleMap;
-  };
-
-  public setBufferSelectionFileByRole = (
-    file: IFileByRole,
-    checked: boolean,
-    withSelection?: boolean
-  ) => {
-    const hasFile = this.selectedFilesByRoleMap.has(file.id);
-
-    if (withSelection && hasFile) {
-      this.clearBufferSelectionFilesByRole();
-    }
-
-    if (withSelection && !hasFile) {
-      this.BufferSelectionFilesByRole = file;
-      this.selectedFilesByRoleMap.clear();
-    }
-
-    if (!withSelection) {
-      this.BufferSelectionFilesByRole = file;
-      this.selectedFilesByRoleMap.clear();
-      if (checked) this.selectedFilesByRoleMap.set(file.id, file);
-    }
   };
 
   public fetchFilesByRole = async (

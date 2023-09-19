@@ -9,6 +9,7 @@ import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/common/api/oforms/filter";
+import Dialogs from "./Dialogs";
 
 const FormGallery = ({ getOforms, setOformFiles }) => {
   const location = useLocation();
@@ -21,36 +22,35 @@ const FormGallery = ({ getOforms, setOformFiles }) => {
     return () => setOformFiles(null);
   }, [getOforms, setOformFiles]);
 
-  const [value, setValue] = React.useState("");
-  const onChange = (e) => setValue(e.target.value);
-
   return (
-    <Section
-      // withBodyScroll
-      // withBodyAutoFocus={!isMobile}
-      withPaging={false}
-    >
-      <input value={value} onChange={onChange} />
-      <Section.SectionHeader>
-        <SectionHeaderContent />
-      </Section.SectionHeader>
+    <>
+      <Section
+        // withBodyScroll
+        // withBodyAutoFocus={!isMobile}
+        withPaging={false}
+      >
+        <Section.SectionHeader>
+          <SectionHeaderContent />
+        </Section.SectionHeader>
 
-      <Section.SectionFilter>
-        <SectionFilterContent />
-      </Section.SectionFilter>
+        <Section.SectionFilter>
+          <SectionFilterContent />
+        </Section.SectionFilter>
 
-      <Section.SectionBody>
-        <SectionBodyContent />
-      </Section.SectionBody>
+        <Section.SectionBody>
+          <SectionBodyContent />
+        </Section.SectionBody>
 
-      <Section.InfoPanelHeader>
-        <InfoPanelHeaderContent isGallery />
-      </Section.InfoPanelHeader>
+        <Section.InfoPanelHeader>
+          <InfoPanelHeaderContent isGallery />
+        </Section.InfoPanelHeader>
 
-      <Section.InfoPanelBody>
-        <InfoPanelBodyContent isGallery />
-      </Section.InfoPanelBody>
-    </Section>
+        <Section.InfoPanelBody>
+          <InfoPanelBodyContent isGallery />
+        </Section.InfoPanelBody>
+      </Section>
+      <Dialogs />
+    </>
   );
 };
 

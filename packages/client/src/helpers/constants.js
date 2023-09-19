@@ -147,3 +147,8 @@ export const OformCategoryType = Object.freeze({
 });
 
 export const SSO_LABEL = "SSO";
+
+export const ARTICLE_ALERTS = Object.freeze({
+  TeamTraining: "TeamTraining",
+  SubmitToFormGallery: "SubmitToFormGallery",
+});

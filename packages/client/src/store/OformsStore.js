@@ -1,6 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/common/api";
-import { OformCategoryType } from "@docspace/client/src/helpers/constants";
+
+import OformsFilter from "@docspace/common/api/oforms/filter";
+import { submitToGallery } from "@docspace/common/api/oforms";
 
 const { OformsFilter } = api;
 
@@ -21,17 +23,61 @@ class OformsStore {
   oformsIsLoading = false;
   gallerySelected = null;
 
+  submitToGalleryTileIsVisible = !localStorage.getItem(
+    "submitToGalleryTileIsHidden"
+  );
+
   constructor(authStore) {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
+
   setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
+
   setOformsCurrentCategory = (currentCategory) =>
     (this.currentCategory = currentCategory);
+
   setOformsIsLoading = (oformsIsLoading) =>
     (this.oformsIsLoading = oformsIsLoading);
+
+  getOforms = async (filter = OformsFilter.getDefault()) => {
+    const oformData = await this.authStore.getOforms(filter);
+    const oformsFilter = oformData?.data?.meta?.pagination;
+    const newOformsFilter = this.oformsFilter.clone();
+
+    if (oformsFilter) {
+      newOformsFilter.page = oformsFilter.page;
+      newOformsFilter.total = oformsFilter.total;
+    }
+
+    runInAction(() => {
+      this.setOformsFilter(newOformsFilter);
+      this.setOformFiles(oformData?.data?.data ?? []);
+    });
+  };
+
+  submitToFormGallery = async (file, formName, language, signal = null) => {
+    const res = await submitToGallery(
+      this.authStore.settingsStore.formGallery.uploadUrl,
+      file,
+      formName,
+      language,
+      signal
+    );
+
+    return res;
+  };
+
+  setOformFiles = (oformFiles) => {
+    this.oformFiles = oformFiles;
+  };
+
+  setOformsFilter = (oformsFilter) => {
+    this.oformsFilter = oformsFilter;
+  };
+
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
     this.authStore.infoPanelStore.setSelection(gallerySelected);
@@ -155,6 +201,11 @@ class OformsStore {
   get hasMoreForms() {
     return this.oformFiles.length < this.oformsFilterTotal;
   }
+
+  hideSubmitToGalleryTile = () => {
+    localStorage.setItem("submitToGalleryTileIsHidden", true);
+    this.submitToGalleryTileIsVisible = false;
+  };
 }
 
 export default OformsStore;

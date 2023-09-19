@@ -4,6 +4,7 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
+import { Button } from "@docspace/components";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -11,9 +12,7 @@ const StyledContainer = styled.div`
   display: grid;
 
   grid-template-columns: ${(props) =>
-    props.isRootFolder
-      ? "min-content 12px auto"
-      : "29px min-content 12px auto"};
+    props.isRootFolder ? "1fr auto auto" : "29px 1fr auto auto"};
 
   align-items: center;
 
@@ -65,6 +64,18 @@ const StyledNavigationDrodown = styled(ComboBox)`
   box-sizing: border-box;
   background: transparent;
 `;
+const StyledSubmitToGalleryButton = styled(Button)`
+  margin-left: auto;
+  ${(props) =>
+    props.theme.interfaceDirection === "ltr"
+      ? css`
+          margin-right: 12px;
+        `
+      : css`
+          margin-left: 12px;
+        `}
+`;
+StyledSubmitToGalleryButton.defaultProps = { theme: Base };
 
 const StyledInfoPanelToggleWrapper = styled.div`
   ${(props) =>
@@ -117,5 +128,6 @@ export {
   StyledHeadline,
   StyledContainer,
   StyledNavigationDrodown,
+  StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

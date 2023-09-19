@@ -9,6 +9,7 @@ import {
   StyledContainer,
   StyledHeadline,
   StyledNavigationDrodown,
+  StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
@@ -24,8 +25,12 @@ import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 
 const SectionHeaderContent = ({
   t,
-
+  canSubmitToFormGallery,
+  isInfoPanelVisible,
+  setIsInfoPanelVisible,
+  setGallerySelected,
   categoryType,
+  setSubmitToGalleryDialogVisible,
 
   currentCategory,
   fetchCurrentCategory,
@@ -63,6 +68,10 @@ const SectionHeaderContent = ({
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
   const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
+
+  const onOpenSubmitToGalleryDialog = () => {
+    setSubmitToGalleryDialogVisible(true);
+  };
 
   useEffect(() => {
     if (currentCategory) return;
@@ -129,6 +138,14 @@ const SectionHeaderContent = ({
         isMobileView={isMobileOnly}
       />
 
+      {canSubmitToFormGallery() && (
+        <StyledSubmitToGalleryButton
+          primary
+          size="small"
+          onClick={onOpenSubmitToGalleryDialog}
+          label={t("Common:SubmitToFormGallery")}
+        />
+      )}
       <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
         <div className="info-panel-toggle-bg">
           <IconButton
@@ -156,6 +173,10 @@ export default inject(({ auth, filesStore, oformsStore }) => {
     filterOformsByCategory: oformsStore.filterOformsByCategory,
 
     setGallerySelected: oformsStore.setGallerySelected,
+
+    canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+    setSubmitToGalleryDialogVisible:
+      accessRightsStore.setSubmitToGalleryDialogVisible,
 
     isInfoPanelVisible: auth.infoPanelStore.isVisible,
     setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,

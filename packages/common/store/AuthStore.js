@@ -15,6 +15,7 @@ import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
 import { getPortalTenantExtra } from "../api/portal";
+import { combineUrl } from "@docspace/common/utils";
 
 class AuthStore {
   userStore = null;
@@ -249,6 +250,12 @@ class AuthStore {
     );
   }
 
+  get isSubmitToGalleryAlertAvailable() {
+    const { user } = this.userStore;
+    if (!user) return false;
+    return !user.isVisitor;
+  }
+
   get isLiveChatAvailable() {
     const { user } = this.userStore;
 
@@ -438,6 +445,19 @@ class AuthStore {
     const promise = new Promise(async (resolve, reject) => {
       const apiUrl = `${this.settingsStore.urlOforms}${params}`;
       let oforms = await api.settings.getOforms(apiUrl);
+      // let oforms = await api.oforms.getOforms(
+      //   combineUrl(
+      //     this.settingsStore.urlOforms,
+      //     `${params}&locale=${filter.locale}`
+      //   )
+      // );
+
+      if (!oforms?.data?.data?.length) {
+        oforms = await api.oforms.getOforms(
+          combineUrl(this.settingsStore.formGallery.url, `${params}&locale=en`)
+        );
+      }
+
       resolve(oforms);
     });
 

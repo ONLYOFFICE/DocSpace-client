@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
@@ -82,6 +82,7 @@ const SelectFileStep = ({
   const [searchParams] = useSearchParams();
   const [progress, setProgress] = useState(0);
   const [isFileError, setIsFileError] = useState(false);
+  const navigate = useNavigate();
 
   const onDownloadArchives = async () => {
     try {
@@ -199,7 +200,7 @@ const SelectFileStep = ({
           <SaveCancelButtons
             className="save-cancel-buttons"
             onSaveClick={onNextStep}
-            onCancelClick={onPrevStep}
+            onCancelClick={() => navigate(-1)}
             saveButtonLabel={t("Settings:UploadToServer")}
             cancelButtonLabel={t("Common:Back")}
             displaySettings

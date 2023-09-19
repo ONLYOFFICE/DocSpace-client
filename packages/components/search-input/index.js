@@ -11,7 +11,6 @@ class SearchInput extends React.Component {
     super(props);
 
     this.forwardedRef = props.forwardedRef || React.createRef();
-    console.log(this.input);
     this.timerId = null;
 
     this.state = {

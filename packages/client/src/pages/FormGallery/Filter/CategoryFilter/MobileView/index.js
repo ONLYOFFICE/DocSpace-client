@@ -42,17 +42,8 @@ const CategoryFilterMobile = ({
 
   const wrapperOffsetTop = wrapperRef?.current?.offsetTop;
   const maxCalculatedHeight = window.innerHeight - wrapperOffsetTop - 64;
-  console.log(wrapperOffsetTop);
-  console.log(
-    window.innerHeight,
-    wrapperOffsetTop,
-    maxCalculatedHeight,
-    maxCalculatedHeight + wrapperOffsetTop
-  );
   let calculatedHeight =
-    36 +
-    8.2 +
-    36 * 3 +
+    152.2 +
     36 *
       (isBranchOpen
         ? formsByBranch.length

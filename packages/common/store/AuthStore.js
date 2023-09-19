@@ -438,7 +438,6 @@ class AuthStore {
     const promise = new Promise(async (resolve, reject) => {
       const apiUrl = `${this.settingsStore.urlOforms}${params}`;
       let oforms = await api.settings.getOforms(apiUrl);
-      console.log(oforms);
       resolve(oforms);
     });
 

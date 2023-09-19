@@ -89,8 +89,6 @@ class OformsFilter {
       defaultFilter.total
     );
 
-    console.log(location, newFilter);
-
     return newFilter;
   }
 

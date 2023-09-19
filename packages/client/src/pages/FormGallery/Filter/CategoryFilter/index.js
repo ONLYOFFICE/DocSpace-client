@@ -76,7 +76,10 @@ const CategoryFilter = ({
     <StyledCategoryFilterWrapper className="categoryFilterWrapper">
       <CategoryFilterMobile
         className="mobileView"
-        currentCategoryTitle={currentCategoryTitle}
+        currentCategoryTitle={getOformCategoryTitle(
+          oformsFilter.categorizeBy,
+          currentCategory
+        )}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}
@@ -84,7 +87,10 @@ const CategoryFilter = ({
       />
       <CategoryFilterDesktop
         className="desktopView"
-        currentCategory={currentCategoryTitle}
+        currentCategory={getOformCategoryTitle(
+          oformsFilter.categorizeBy,
+          currentCategory
+        )}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}

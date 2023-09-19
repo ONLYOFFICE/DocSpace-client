@@ -21,10 +21,7 @@ const CategoryFilterDesktop = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  const onCloseDropdown = () => {
-    console.log("close");
-    setIsOpen(false);
-  };
+  const onCloseDropdown = () => setIsOpen(false);
 
   const [isBranchHovered, setIsBranchHovered] = useState(false);
   const [isTypeHovered, setIsTypeHovered] = useState(false);

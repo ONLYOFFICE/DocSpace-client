@@ -41,7 +41,10 @@ function Dashboard({
   const onMouseDownOutSide = useCallback((event: MouseEvent) => {
     if (
       !(event.target instanceof HTMLElement) ||
-      (!event.target.classList.contains("section-wrapper") &&
+      (!event.target.classList.contains("scroll-body") &&
+        !event.target.classList.contains("section-wrapper") &&
+        !event.target.classList.contains("section-wrapper-content") &&
+        !event.target.classList.contains("settings-mobile") &&
         !(event.target.dataset.id === "board"))
     ) {
       return;

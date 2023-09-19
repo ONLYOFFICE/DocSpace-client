@@ -573,8 +573,8 @@ export function uploadBackup(url, data) {
   return axios.post(url, data);
 }
 
-export function downloadFiles(fileIds, folderIds, shareKey) {
-  const data = { fileIds, folderIds };
+export function downloadFiles(fileIds, folderIds, shareKey, boardRoleIds) {
+  const data = { fileIds, folderIds, boardRoleIds };
   const share = shareKey ? `?share=${shareKey}` : "";
   return request({
     method: "put",

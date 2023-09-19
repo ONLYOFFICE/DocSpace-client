@@ -37,7 +37,11 @@ function Column(props: ColumnProps) {
   return (
     <ColumnContainer>
       <ColumnHeader>
-        <ColumnHeaderContent role={props.role} getModel={props.getModel} />
+        <ColumnHeaderContent
+          role={props.role}
+          getModel={props.getModel}
+          setBufferSelection={props.setBufferSelection!}
+        />
       </ColumnHeader>
       <ColumnBody>
         <ColumnBodyContent
@@ -58,6 +62,7 @@ export default inject<StoreType, ColumnProps>(
       fetchFilesByRole,
       selectedFileByRole,
       collectionFileByRoleStore,
+      setBufferSelection,
       setBufferSelectionFileByRole,
     } = dashboardStore;
 
@@ -77,6 +82,7 @@ export default inject<StoreType, ColumnProps>(
       selectedFileByRole,
       collectionFileByRoleStore,
       getModelFile,
+      setBufferSelection,
       setBufferSelectionFileByRole,
     };
   }

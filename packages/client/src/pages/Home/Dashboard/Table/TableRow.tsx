@@ -8,6 +8,7 @@ import TableCell from "@docspace/components/table-container/TableCell";
 import { Badge } from "@docspace/components";
 import Checkbox from "@docspace/components/checkbox";
 import Link from "@docspace/components/link";
+import Loader from "@docspace/components/loader";
 
 import { classNames } from "@docspace/components/utils/classNames";
 
@@ -32,6 +33,7 @@ function TableRow({ role, getModel, setIsLoading }: TableRowProps) {
     isActive,
     isChecked,
     queueNumber,
+    inProgress,
     onChecked,
     onClickBadge,
     onContentRowCLick,
@@ -85,14 +87,15 @@ function TableRow({ role, getModel, setIsLoading }: TableRowProps) {
       id={id.toString()}
       className={
         classNames("role-item", {
-          ["table-row-selected"]: isChecked || isActive,
+          ["table-row-selected"]: isChecked || isActive || inProgress,
         }) as string
       }
     >
       <BoardTableRow
         className="table-row"
         checked={isChecked}
-        isActive={isActive}
+        isActive={isActive || inProgress}
+        inProgress={inProgress}
         contextOptions={role.contextOptionsModel}
         getContextModel={() => getModel(role, t)}
         onClick={onRowClick}
@@ -103,21 +106,29 @@ function TableRow({ role, getModel, setIsLoading }: TableRowProps) {
           className="table-container_role-name-cell"
           forwardedRef={undefined}
         >
-          <TableCell
-            hasAccess
-            className="table-container_row-checkbox-wrapper"
-            checked={isChecked}
-            forwardedRef={undefined}
-          >
-            <div className="table-container_element">
-              <Icon size="small" type={type} color={color} />
-            </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
+          {inProgress ? (
+            <Loader
+              className="table-container_row-loader"
+              type="oval"
+              size="16px"
             />
-          </TableCell>
+          ) : (
+            <TableCell
+              hasAccess
+              className="table-container_row-checkbox-wrapper"
+              checked={isChecked}
+              forwardedRef={undefined}
+            >
+              <div className="table-container_element">
+                <Icon size="small" type={type} color={color} />
+              </div>
+              <Checkbox
+                className="table-container_row-checkbox"
+                onChange={onChange}
+                isChecked={isChecked}
+              />
+            </TableCell>
+          )}
 
           <Link
             type="page"

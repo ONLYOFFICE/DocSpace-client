@@ -1,4 +1,4 @@
-import type { IFileByRole } from "@docspace/common/Models";
+import type { IFileByRole, IRole } from "@docspace/common/Models";
 import type { RoleType, RoleDefaultType } from "@docspace/common/types";
 import { ContextMenuModel } from "@docspace/components/types";
 import type { GetModelFunctionType } from "SRC_DIR/pages/Home/Dashboard/types";
@@ -26,6 +26,12 @@ type ColumnPropsOwn = {
     checked: boolean,
     withSelection?: boolean
   ) => void;
+
+  setBufferSelection?: (
+    file: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
 };
 
 export type ColumnProps = ColumnPropsOwn & {
@@ -39,6 +45,11 @@ export type ColumnDefaultProps = ColumnPropsOwn & {
 export type ColumnHeaderContentProps = {
   role: RoleType;
   getModel: GetModelFunctionType;
+  setBufferSelection: (
+    file: IRole,
+    checked: boolean,
+    withSelection?: boolean
+  ) => void;
 };
 
 export type ColumnBodyContentProps = {

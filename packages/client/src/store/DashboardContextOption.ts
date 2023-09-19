@@ -95,7 +95,7 @@ class DashboardContextOptionStore {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         iconUrl: DownloadReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.downloadRoles(t("Translations:ArchivingData")),
         disabled: false,
       },
 
@@ -240,7 +240,7 @@ class DashboardContextOptionStore {
         key: "download-role",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => {},
+        onClick: () => this.downloadRoles(t("Translations:ArchivingData")),
         disabled: false,
       },
 
@@ -376,6 +376,99 @@ class DashboardContextOptionStore {
       this.filesActionsStore.setGroupMenuBlocked(false);
       this.dashboardStore.clearActiveFiles(fileIds);
     }
+  };
+
+  public downloadRoles = (label: string) => {
+    const { SelectedRolesMap, BufferSelectionRole } = this.dashboardStore;
+    if (!this.dashboardStore.dashboard) return;
+
+    let roles: IRole[] = [];
+
+    if (SelectedRolesMap.size === 0 && BufferSelectionRole) {
+      roles = [BufferSelectionRole];
+    } else if (SelectedRolesMap.size > 0) {
+      roles = Array.from(SelectedRolesMap.values());
+    }
+
+    const roleIds = roles.map((role) => role.id);
+
+    console.log({ roleIds });
+
+    this.filesActionsStore.setGroupMenuBlocked(true);
+
+    const { secondaryProgressDataStore } = this.filesActionsStore
+      .uploadDataStore as UploadDataStore;
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore as SecondaryProgressDataStore;
+
+    if (this.filesActionsStore.isBulkDownload) return;
+
+    this.filesActionsStore.setIsBulkDownload(true);
+
+    const operationId = uniqueid("operation_");
+
+    this.dashboardStore.addActiveRoles(
+      roleIds,
+      this.dashboardStore.dashboard.current.id
+    );
+
+    setSecondaryProgressBarData({
+      icon: "file",
+      visible: true,
+      percent: 0,
+      label,
+      alert: false,
+      operationId,
+    });
+
+    downloadFilesApi([], [], null, {
+      boardId: this.dashboardStore.dashboard.current.id,
+      roleIds,
+    })
+      .then(async (response) => {
+        const data = response[0] ? response[0] : null;
+        const pbData = {
+          icon: "file",
+          label,
+          operationId,
+        };
+
+        const item =
+          data?.finished && data?.url
+            ? data
+            : await this.filesActionsStore.uploadDataStore.loopFilesOperations(
+                data,
+                pbData,
+                true
+              );
+        this.filesActionsStore.setIsBulkDownload(false);
+        if (item.url) {
+          window.location.href = item.url;
+        } else {
+          setSecondaryProgressBarData({
+            visible: true,
+            alert: true,
+            operationId,
+          });
+        }
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        !item.url && toastr.error("", null, 0, true);
+      })
+      .catch((error) => {
+        this.filesActionsStore.setIsBulkDownload(false);
+        setSecondaryProgressBarData({
+          visible: true,
+          alert: true,
+          operationId,
+        });
+        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        return toastr.error(error.message ? error.message : error);
+      })
+      .finally(() => {
+        this.filesActionsStore.setGroupMenuBlocked(false);
+        this.dashboardStore.clearActiveRoles(roleIds);
+      });
   };
 
   public downloadFiles = (label: string) => {

@@ -74,6 +74,7 @@ function ListRow({
           className="role-row"
           isActive={role.isActive}
           checked={role.isChecked}
+          inProgress={role.inProgress}
           sectionWidth={sectionWidth}
           onSelect={onSelect}
           onRowClick={onRowClick}

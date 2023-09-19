@@ -1,4 +1,3 @@
-import { ContextMenuModel } from "@docspace/components/types";
 import { RoleTypeEnum } from "../enums/RoleType.enum";
 import { IRole } from "../Models";
 
@@ -10,6 +9,7 @@ export type RoleTypeOwn = {
   color?: string;
   isActive: boolean;
   isChecked: boolean;
+  inProgress: boolean;
   type: RoleTypeEnum;
   queueNumber: number;
   contextOptionsModel: string[];

@@ -27,13 +27,23 @@ function isDefaultRole(role: IRole): role is RoleDefaultType {
   return role.type == RoleTypeEnum.Default;
 }
 
-function ColumnHeaderContent({ role, getModel }: ColumnHeaderContentProps) {
+function ColumnHeaderContent({
+  role,
+  getModel,
+  setBufferSelection,
+}: ColumnHeaderContentProps) {
   const { t } = useTranslation();
-  const contextMenuRef = useRef<ContextMenu>(null);
+  const contextMenuRef = useRef<{ show: Function; hide: Function }>(null);
 
-  const onClickHandler = useCallback((event: MouseEvent) => {
-    contextMenuRef.current?.show(event);
-  }, []);
+  const onClickHandler = useCallback(
+    (event: MouseEvent) => {
+      if (role.inProgress) return;
+
+      contextMenuRef.current?.show(event);
+      setBufferSelection(role, false);
+    },
+    [role.inProgress]
+  );
 
   const onHideContextMenu = useCallback((event: MouseEvent) => {
     contextMenuRef.current?.hide(event);

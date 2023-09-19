@@ -100,6 +100,34 @@ export const TableCellQueue = styled.span`
 `;
 
 export const BoardTableRow = styled(TableRow)`
+  .table-container_element-wrapper,
+  .table-container_quick-buttons-wrapper {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
+  }
+
+  .table-container_element-wrapper,
+  .table-container_row-loader {
+    min-width: ${(props) => (props.isRoom ? "40px" : "30px")};
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -20px;
+            padding-right: 30px;
+          `
+        : css`
+            margin-left: -20px;
+            padding-left: 30px;
+          `}
+  }
+
   :hover {
     .table-container_cell {
       cursor: pointer;

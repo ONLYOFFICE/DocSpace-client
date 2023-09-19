@@ -16,16 +16,14 @@ export const LanguageFilter = styled.div`
     justify-content: space-between;
     gap: 4px;
     padding: 8px;
-    background: ${(props) =>
-      props.theme.createEditRoomDialog.thirdpartyStorage.combobox.background};
+    background: transparent;
     border-radius: 3px;
     max-height: 32px;
 
     border: ${(props) =>
       `1px solid ${
         props.isOpen
-          ? props.theme.createEditRoomDialog.thirdpartyStorage.combobox
-              .isOpenDropdownBorderColor
+          ? props.currentColorScheme.main.accent
           : props.theme.createEditRoomDialog.thirdpartyStorage.combobox
               .dropdownBorderColor
       }`};

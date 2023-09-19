@@ -1,18 +1,20 @@
 import * as Styled from "./index.styled";
 
 import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { ReactSVG } from "react-svg";
 import { useRef, useState } from "react";
 import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
 import { flagsIcons } from "@docspace/common/utils/image-helpers";
 import { convertToCulture } from "@docspace/common/utils";
 
 const avialableLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
 
-const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
+const LanguageFilter = ({
+  oformsFilter,
+  filterOformsByLocale,
+  currentColorScheme,
+}) => {
   const dropdownRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +28,10 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
   };
 
   return (
-    <Styled.LanguageFilter isOpen={isOpen}>
+    <Styled.LanguageFilter
+      currentColorScheme={currentColorScheme}
+      isOpen={isOpen}
+    >
       <div className="combobox" onClick={toggleDropdownIsOpen}>
         <img
           className="combobox-icon"
@@ -64,7 +69,8 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
   );
 };
 
-export default inject(({ oformsStore }) => ({
+export default inject(({ auth, oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
-}))(withTranslation(["FormGallery", "Common"])(LanguageFilter));
+  currentColorScheme: auth.settingsStore.currentColorScheme,
+}))(LanguageFilter);

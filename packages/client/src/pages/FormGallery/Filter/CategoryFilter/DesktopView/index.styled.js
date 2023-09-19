@@ -50,6 +50,7 @@ export const CategoryFilterSubList = styled(DropDown)`
   top: 0;
   margin-top: ${({ marginTop }) => marginTop};
   left: calc(100% + 4px);
+  padding: 4px 0;
 
   max-height: 296px;
   max-width: auto;

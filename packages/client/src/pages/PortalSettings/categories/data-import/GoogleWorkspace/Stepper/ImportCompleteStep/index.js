@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { tablet } from "@docspace/components/utils/device";
@@ -50,6 +50,7 @@ const ImportCompleteStep = ({
   selectedUsers,
   importedUsers,
   getMigrationLog,
+  cleanCheckedAccounts,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
@@ -73,6 +74,11 @@ const ImportCompleteStep = ({
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
+  };
+
+  const onFinishClick = () => {
+    cleanCheckedAccounts();
+    navigate(-1);
   };
 
   return (
@@ -103,7 +109,7 @@ const ImportCompleteStep = ({
           className="finish-button"
           label={t("Common:Finish")}
           primary
-          onClick={() => navigate(-1)}
+          onClick={onFinishClick}
         />
         <Button
           size="small"
@@ -122,12 +128,17 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, getMigrationLog, numberOfCheckedAccounts } =
-    importAccountsStore;
+  const {
+    users,
+    getMigrationLog,
+    numberOfCheckedAccounts,
+    cleanCheckedAccounts,
+  } = importAccountsStore;
 
   return {
     importedUsers: users.length,
     selectedUsers: numberOfCheckedAccounts,
     getMigrationLog,
+    cleanCheckedAccounts,
   };
 })(observer(ImportCompleteStep));

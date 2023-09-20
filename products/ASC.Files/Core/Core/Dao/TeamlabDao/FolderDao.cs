@@ -751,6 +751,22 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
         return result;
     }
+    public async Task<int> ChangeFolderSizeAsync(Folder<int> folder, long size)
+    {
+        await using var filesDbContext = _dbContextFactory.CreateDbContext();
+        var toUpdate = await Queries.FolderAsync(filesDbContext, TenantID, folder.Id);
+
+        toUpdate.Counter = size;
+
+        toUpdate.ModifiedOn = DateTime.UtcNow;
+        toUpdate.ModifiedBy = _authContext.CurrentAccount.ID;
+
+        await filesDbContext.SaveChangesAsync();
+
+        _ = _factoryIndexer.IndexAsync(toUpdate);
+
+        return folder.Id;
+    }
     public async Task<int> ChangeFolderQuotaAsync(Folder<int> folder, long quota)
     {
         await using var filesDbContext = _dbContextFactory.CreateDbContext();

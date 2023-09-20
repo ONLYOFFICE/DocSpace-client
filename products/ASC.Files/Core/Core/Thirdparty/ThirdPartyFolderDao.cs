@@ -692,7 +692,10 @@ internal class ThirdPartyFolderDao<TFile, TFolder, TItem> : BaseFolderDao, IFold
     {
         throw new NotImplementedException();
     }
-
+    public Task<string> ChangeFolderSizeAsync(Folder<string> folder, long size)
+    {
+        return null;
+    }
     public Task<string> ChangeFolderQuotaAsync(Folder<string> folder, long quota)
     {
         return null;

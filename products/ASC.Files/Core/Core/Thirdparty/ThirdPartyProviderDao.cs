@@ -282,7 +282,10 @@ internal abstract class ThirdPartyProviderDao
     {
         return AsyncEnumerable.Empty<Folder<string>>();
     }
-
+    public Task<string> ChangeFolderSizeAsync(Folder<string> folder, long size)
+    {
+        return null;
+    }
     public Task<string> ChangeFolderQuotaAsync(Folder<string> folder, long quota)
     {
         return null;

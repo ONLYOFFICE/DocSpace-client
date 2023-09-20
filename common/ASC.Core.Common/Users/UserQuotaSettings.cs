@@ -29,6 +29,8 @@ namespace ASC.Core.Users;
 [Serializable]
 public class UserQuotaSettings : ISettings<UserQuotaSettings>
 {
+    public const int NoQuota = -1;
+
     [JsonIgnore]
     public Guid ID
     {

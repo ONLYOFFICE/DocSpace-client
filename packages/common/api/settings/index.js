@@ -768,10 +768,10 @@ export function removeActiveSession(eventId) {
   });
 }
 
-export function baseUserQuota(enableUserQuota, defaultUserQuota) {
+export function setDefaultUserQuota(enableQuota, defaultQuota) {
   const data = {
-    enableUserQuota,
-    defaultUserQuota,
+    enableQuota,
+    defaultQuota,
   };
   const options = {
     method: "post",

@@ -4,7 +4,7 @@ import toastr from "@docspace/components/toast/toastr";
 import api from "../api";
 import { PortalFeaturesLimitations } from "../constants";
 import authStore from "./AuthStore";
-import { baseUserQuota } from "../api/settings";
+import { setDefaultUserQuota } from "../api/settings";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";
@@ -144,7 +144,7 @@ class QuotasStore {
       (obj) => obj.id === "statistic"
     );
 
-    return result?.value;
+    return true;
   }
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
@@ -252,7 +252,7 @@ class QuotasStore {
     const quotaSize = isEnable ? quota : -1;
 
     try {
-      await baseUserQuota(isEnable, quotaSize);
+      await setDefaultUserQuota(isEnable, quotaSize);
       toastr.success(t("Common:MemoryQuotaEnabled"));
     } catch (e) {
       toastr.error(e);

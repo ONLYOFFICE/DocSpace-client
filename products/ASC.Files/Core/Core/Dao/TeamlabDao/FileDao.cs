@@ -351,25 +351,46 @@ internal class FileDao : AbstractDao, IFileDao<int>
             }
         }
 
-        var quotaSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
+        var folderDao = _daoFactory.GetFolderDao<int>();
+        var folder = await folderDao.GetFolderAsync(file.FolderIdDisplay);
 
-        if (quotaSettings.EnableQuota)
+        if (DocSpaceHelper.IsRoom(folder.FolderType))
         {
-            var user = await _userManager.GetUsersAsync(file.Id == default ? _authContext.CurrentAccount.ID : file.CreateBy);
-            var userQuotaSettings = await _settingsManager.LoadAsync<UserQuotaSettings>(user);
-            var quotaLimit = userQuotaSettings.UserQuota;
-
-            if (quotaLimit != -1)
+            var quotaRoomSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
+            if (quotaRoomSettings.EnableQuota)
             {
-                var userUsedSpace = Math.Max(0, (await _quotaService.FindUserQuotaRowsAsync(TenantID, user.Id)).Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
-
-                if (quotaLimit - userUsedSpace < file.ContentLength)
+                var roomQuotaLimit = folder.Quota == -2 ? quotaRoomSettings.DefaultQuota : folder.Quota;
+                if (roomQuotaLimit != -1)
                 {
-                    throw FileSizeComment.GetPersonalFreeSpaceException(quotaLimit);
+                    if (roomQuotaLimit - folder.Counter < file.ContentLength)
+                    {
+                        throw FileSizeComment.GetPersonalFreeSpaceException(roomQuotaLimit);
+                    }
                 }
             }
         }
+        else
+        {
+            var quotaUserSettings = await _settingsManager.LoadAsync<TenantUserQuotaSettings>();
+            if (quotaUserSettings.EnableQuota)
+            {
+                var user = await _userManager.GetUsersAsync(file.Id == default ? _authContext.CurrentAccount.ID : file.CreateBy);
+                var userQuotaData = await _settingsManager.LoadAsync<UserQuotaSettings>(user);
 
+                var quotaLimit = userQuotaData.UserQuota == userQuotaData.GetDefault().UserQuota ? quotaUserSettings.DefaultQuota : userQuotaData.UserQuota ;
+
+                if (quotaLimit != UserQuotaSettings.NoQuota)
+                {
+                    var userUsedSpace = Math.Max(0, (await _quotaService.FindUserQuotaRowsAsync(TenantID, user.Id)).Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
+
+                    if (quotaLimit - userUsedSpace < file.ContentLength)
+                    {
+                        throw FileSizeComment.GetPersonalFreeSpaceException(quotaLimit);
+                    }
+                }
+            }
+        }
+       
         var isNew = false;
         List<int> parentFoldersIds;
         DbFile toInsert = null;
@@ -666,7 +687,8 @@ internal class FileDao : AbstractDao, IFileDao<int>
             file.RootFolderType = folder.RootFolderType;
         }
         
-        await (await _globalStore.GetStoreAsync()).SaveAsync(string.Empty, GetUniqFilePath(file), file.GetFileQuotaOwner(), stream, file.Title);
+        var t = await (await _globalStore.GetStoreAsync()).SaveAsync(string.Empty, GetUniqFilePath(file), file.GetFileQuotaOwner(), stream, file.Title);
+        var tt = 0;
     }
 
     public async Task DeleteFileAsync(int fileId)

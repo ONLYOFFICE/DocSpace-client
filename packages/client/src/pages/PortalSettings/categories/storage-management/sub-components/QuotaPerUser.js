@@ -28,7 +28,7 @@ const QuotaPerUserComponent = (props) => {
     console.log("onSaveUserQuota", size);
     timerId = setTimeout(() => setIsLoading(true), 200);
 
-    await setUserQuota(size);
+    await setUserQuota(size, t);
 
     timerId && clearTimeout(timerId);
     timerId = null;

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { inject, observer } from "mobx-react";
 
 import { conversionToBytes } from "@docspace/common/utils";
 import TextInput from "@docspace/components/text-input";
@@ -123,6 +122,7 @@ const QuotaForm = ({
       </div>
       {isButtonsEnable && (
         <SaveCancelButtons
+          isSaving={isLoading}
           onSaveClick={onSaveClick}
           onCancelClick={onCancelClick}
           saveButtonLabel={t("Common:SaveButton")}
@@ -148,11 +148,4 @@ QuotaForm.propTypes = {
   initialPower: PropTypes.number,
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
-
-  const { setUserQuota } = currentQuotaStore;
-  return {
-    setUserQuota,
-  };
-})(observer(QuotaForm));
+export default QuotaForm;

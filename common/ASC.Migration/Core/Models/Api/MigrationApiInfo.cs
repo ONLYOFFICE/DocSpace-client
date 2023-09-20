@@ -43,4 +43,9 @@ public class MigrationApiInfo
 
     [ProtoMember(6)]
     public List<MigratingApiUser> ExistUsers { get; set; } = new List<MigratingApiUser>();
+
+    [ProtoMember(7)]
+    public bool ImportPersonalFiles { get; set; } = true;
+    [ProtoMember(8)]
+    public bool ImportSharedFiles { get; set; } = true;
 }

@@ -38,9 +38,9 @@ public class MigratingApiUser : ImportableApiEntity
     [ProtoMember(3)]
     public string DisplayName { get; set; }
 
-    [ProtoMember(5)]
+    [ProtoMember(4)]
     public EmployeeType UserType { get; set; }
 
-    [ProtoMember(6)]
+    [ProtoMember(5)]
     public MigratingApiFiles MigratingFiles { get; set; }
 }

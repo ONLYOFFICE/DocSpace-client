@@ -27,7 +27,7 @@
 namespace ASC.Migration.Core.Models.Api;
 
 [ProtoContract]
-public class MigratingApiFiles : ImportableApiEntity
+public class MigratingApiFiles
 {
     [ProtoMember(1)]
     public int FoldersCount { get; set; }

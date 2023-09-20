@@ -34,6 +34,7 @@ const ImportProcessingStep = ({
   migrationFile,
   cancelMigration,
   data,
+  toggles,
 }) => {
   const [isVisble, setIsVisble] = useState(false);
   const [percent, setPercent] = useState(0);
@@ -52,7 +53,7 @@ const ImportProcessingStep = ({
           onNextStep();
         }
       }, 1000);
-      migrationFile(data);
+      migrationFile({ ...data, ...toggles });
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -92,11 +93,12 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsLoading, migrationFile, cancelMigration } =
+  const { data, setIsLoading, migrationFile, cancelMigration, toggles } =
     importAccountsStore;
 
   return {
     data,
+    toggles,
     setIsLoading,
     migrationFile,
     cancelMigration,

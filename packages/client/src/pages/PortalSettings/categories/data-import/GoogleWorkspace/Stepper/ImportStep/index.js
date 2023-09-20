@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import ImportSection from "../../../sub-components/ImportSection";
@@ -16,18 +17,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
-  const [isChecked, setIsChecked] = useState({
-    users: true,
-    pFiles: true,
-    sFiles: true,
-  });
+const ImportStep = ({
+  t,
+  onNextStep,
+  onPrevStep,
+  showReminder,
+  toggles,
+  setToggles,
+}) => {
+  const [isChecked, setIsChecked] = useState(true);
 
-  const onChange = (name) => {
-    setIsChecked((prevIsChecked) => ({
-      ...prevIsChecked,
-      [name]: !prevIsChecked[name],
-    }));
+  const onChange = (e, name) => {
+    const checked = e.target.checked;
+    setToggles({ [name]: checked });
   };
 
   const serviceName = "Google Workspace";
@@ -37,8 +39,8 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
   return (
     <Wrapper>
       <ImportSection
-        isChecked={isChecked.users}
-        onChange={() => onChange("users")}
+        isChecked={isChecked}
+        onChange={() => setIsChecked((prev) => !prev)}
         sectionName={users}
         description={t("Settings:UsersSectionDescription")}
         exportSection={{ sectionName: users, workspace: serviceName }}
@@ -50,8 +52,8 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         isDisabled
       />
       <ImportSection
-        isChecked={isChecked.pFiles}
-        onChange={() => onChange("pFiles")}
+        isChecked={toggles.importPersonalFiles}
+        onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:PersonalFilesDescription", { serviceName })}
         exportSection={{
@@ -65,8 +67,8 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
         }}
       />
       <ImportSection
-        isChecked={isChecked.sFiles}
-        onChange={() => onChange("sFiles")}
+        isChecked={toggles.importSharedFiles}
+        onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
@@ -92,4 +94,12 @@ const ImportStep = ({ t, onNextStep, onPrevStep, showReminder }) => {
     </Wrapper>
   );
 };
-export default ImportStep;
+
+export default inject(({ importAccountsStore }) => {
+  const { toggles, setToggles } = importAccountsStore;
+
+  return {
+    toggles,
+    setToggles,
+  };
+})(observer(ImportStep));

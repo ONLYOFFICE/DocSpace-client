@@ -14,12 +14,16 @@ import {
 class ImportAccountsStore {
   checkedAccounts = [];
   services = [];
-  users = [];
+  newUsers = [];
   existUsers = [];
   withoutEmailUsers = [];
   isFileLoading = false;
   isLoading = false;
   data = {};
+  toggles = {
+    importPersonalFiles: true,
+    importSharedFiles: true,
+  };
 
   constructor() {
     makeAutoObservable(this);
@@ -31,6 +35,10 @@ class ImportAccountsStore {
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
+  };
+
+  setToggles = (value) => {
+    this.toggles = { ...this.toggles, ...value };
   };
 
   toggleAccount = (id) => {
@@ -51,11 +59,21 @@ class ImportAccountsStore {
 
   setUsers = (data) => {
     runInAction(() => {
-      this.users = data.parseResult.users;
-      this.existUsers = data.parseResult.existUsers;
+      this.newUsers = data.parseResult.users;
+      this.existUsers = data.parseResult.existUsers.map((user) => ({
+        ...user,
+        isDublicate: true,
+      }));
       this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
+      this.checkedAccounts = this.users
+        .filter((item) => !item.isDublicate)
+        .map((item) => item.key);
     });
   };
+
+  get users() {
+    return [...this.newUsers, ...this.existUsers];
+  }
 
   setData = (data) => {
     this.data = data.parseResult;

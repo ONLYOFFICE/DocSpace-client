@@ -77,6 +77,8 @@ class ToggleButton extends Component {
       isLoading,
       noAnimation,
       name,
+      fontWeight,
+      fontSize,
     } = this.props;
 
     //console.log("ToggleButton render");
@@ -110,7 +112,12 @@ class ToggleButton extends Component {
             noAnimation={noAnimation}
           />
           {label && (
-            <Text className="toggle-button-text" as="span">
+            <Text
+              className="toggle-button-text"
+              as="span"
+              fontWeight={fontWeight}
+              fontSize={fontSize}
+            >
               {label}
             </Text>
           )}
@@ -135,6 +142,10 @@ ToggleButton.propTypes = {
   className: PropTypes.string,
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  /** Sets the font weight */
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /** Sets the font size */
+  fontSize: PropTypes.string,
 };
 
 ToggleIcon.propTypes = {

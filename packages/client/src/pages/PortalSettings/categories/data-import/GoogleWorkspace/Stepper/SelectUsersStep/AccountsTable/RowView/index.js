@@ -86,6 +86,7 @@ const RowView = (props) => {
       </StyledRow>
       {accountsData.map((data) => (
         <UsersRow
+          t={t}
           key={data.key}
           data={data}
           sectionWidth={sectionWidth}

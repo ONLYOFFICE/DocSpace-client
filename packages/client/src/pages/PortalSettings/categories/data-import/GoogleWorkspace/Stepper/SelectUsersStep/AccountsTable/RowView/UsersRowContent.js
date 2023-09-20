@@ -33,15 +33,21 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, email, dublicate }) => {
-  const isExistingUser = dublicate !== "—";
-
+const UsersRowContent = ({
+  t,
+  sectionWidth,
+  displayName,
+  email,
+  isDublicate,
+}) => {
   const contentData = [
     <>
       <Text className="username">{displayName}</Text>
       <Box displayProp="flex">
         <Text className="user-email">{email}</Text>
-        {isExistingUser && <Text className="user-existing">{dublicate}</Text>}
+        {isDublicate && (
+          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
+        )}
       </Box>
     </>,
   ];

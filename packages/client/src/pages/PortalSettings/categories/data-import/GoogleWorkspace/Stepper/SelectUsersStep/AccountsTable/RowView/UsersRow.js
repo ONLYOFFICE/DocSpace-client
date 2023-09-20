@@ -2,7 +2,7 @@ import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
 const UsersRow = (props) => {
-  const { data, sectionWidth, isChecked, toggleAccount } = props;
+  const { t, data, sectionWidth, isChecked, toggleAccount } = props;
 
   return (
     <>
@@ -16,10 +16,11 @@ const UsersRow = (props) => {
         contextButtonSpacerWidth="0"
       >
         <UsersRowContent
+          t={t}
           sectionWidth={sectionWidth}
           displayName={data.displayName}
           email={data.email}
-          dublicate={data.dublicate}
+          isDublicate={data.isDublicate}
         />
       </Row>
     </>

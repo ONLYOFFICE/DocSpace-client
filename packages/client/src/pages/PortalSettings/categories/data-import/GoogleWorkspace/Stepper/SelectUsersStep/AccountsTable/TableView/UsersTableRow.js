@@ -39,15 +39,16 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
+const NOT_EXIST = "—";
+
 const UsersTableRow = ({
+  t,
   displayName,
   email,
-  dublicate,
+  isDublicate,
   isChecked,
   toggleAccount,
 }) => {
-  const isExistingUser = dublicate !== "—";
-
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>
@@ -60,9 +61,11 @@ const UsersTableRow = ({
       </TableCell>
 
       <TableCell>
-        <Text className={isExistingUser ? "user-existing" : "not-existing"}>
-          {dublicate}
-        </Text>
+        {isDublicate ? (
+          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
+        ) : (
+          <Text className="not-existing">{NOT_EXIST}</Text>
+        )}
       </TableCell>
     </StyledTableRow>
   );

@@ -100,10 +100,11 @@ const TableView = (props) => {
       >
         {accountsData.map((data) => (
           <UsersTableRow
+            t={t}
             key={data.key}
             displayName={data.displayName}
             email={data.email}
-            dublicate={data.dublicate}
+            isDublicate={data.isDublicate}
             isChecked={isAccountChecked(data.key)}
             toggleAccount={(e) => handleToggle(e, data.key)}
           />

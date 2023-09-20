@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +11,6 @@ const ChangeQuotaEvent = (props) => {
     visible,
     type,
     ids,
-    // setUserQuota,
     bodyDescription,
     headerTitle,
     onClose,
@@ -29,6 +28,11 @@ const ChangeQuotaEvent = (props) => {
     sizeRef.current = size;
   };
 
+  const updateFunction = (size) => {
+    return type === "user"
+      ? updateUserQuota(size, ids)
+      : updateRoomQuota(size, ids);
+  };
   const onSaveClick = async () => {
     const size = sizeRef.current;
 
@@ -37,11 +41,13 @@ const ChangeQuotaEvent = (props) => {
       return;
     }
 
-    timerId = setTimeout(() => setIsLoading(true), 500);
-    //await setUserQuota(size, true, t);
-    type === "user"
-      ? await updateUserQuota(size, ids)
-      : await updateRoomQuota(size, ids);
+    timerId = setTimeout(() => setIsLoading(true), 200);
+
+    try {
+      await updateFunction(size);
+    } catch (e) {
+      toastr.error(e);
+    }
 
     timerId && clearTimeout(timerId);
     timerId = null;
@@ -49,6 +55,7 @@ const ChangeQuotaEvent = (props) => {
     console.log("onSaveClick", props);
     setIsLoading(false);
     setIsError(false);
+
     successCallback && successCallback();
     onClose && onClose();
   };
@@ -75,16 +82,12 @@ const ChangeQuotaEvent = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, peopleStore, filesStore }) => {
-  const { currentQuotaStore } = auth;
-  const { setChangeQuotaDialogVisible } = dialogsStore;
-  const { setUserQuota } = currentQuotaStore;
+export default inject(({ peopleStore, filesStore }) => {
   const { usersStore } = peopleStore;
   const { updateUserQuota } = usersStore;
   const { updateRoomQuota } = filesStore;
 
   return {
-    setUserQuota,
     updateUserQuota,
     updateRoomQuota,
   };

@@ -45,6 +45,7 @@ const ChangeQuotaEvent = (props) => {
 
     try {
       await updateFunction(size);
+      toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
     }

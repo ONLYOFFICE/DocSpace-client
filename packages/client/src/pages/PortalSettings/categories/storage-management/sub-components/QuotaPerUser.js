@@ -40,13 +40,17 @@ const QuotaPerUserComponent = (props) => {
     <StyledBaseQuotaComponent isDisabled={isDisabled}>
       <div className="toggle-container">
         <ToggleButton
+          fontWeight={600}
+          fontSize="14px"
           className="quotas_toggle-button"
           label={t("DefineQuotaPerUser")}
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
         />
-        <Text className="toggle_label">{t("SetDefaultUserQuota")}</Text>
+        <Text className="toggle_label" fontSize="12px">
+          {t("SetDefaultUserQuota")}
+        </Text>
         {isToggleChecked && (
           <QuotaForm
             isButtonsEnable

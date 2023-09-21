@@ -36,11 +36,12 @@ global using ASC.Common.Web;
 global using ASC.Core;
 global using ASC.Core.Users;
 global using ASC.Data.Storage;
+global using ASC.Data.Storage.DataOperators;
 global using ASC.Data.Storage.DiscStorage;
-global using ASC.Data.Storage.ZipOperators;
 global using ASC.EventBus.Abstractions;
 global using ASC.EventBus.Events;
 global using ASC.Files.Core;
+global using ASC.Files.Core.Helpers;
 global using ASC.Files.Core.Resources;
 global using ASC.Files.Core.Security;
 global using ASC.Migration.Core;
@@ -76,4 +77,3 @@ global using Microsoft.IdentityModel.Tokens;
 global using Newtonsoft.Json;
 
 global using ProtoBuf;
-global using ASC.Files.Core.Helpers;

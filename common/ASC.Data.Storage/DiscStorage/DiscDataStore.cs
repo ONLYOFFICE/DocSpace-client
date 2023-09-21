@@ -371,6 +371,11 @@ public class DiscDataStore : BaseStorage
 
     public override async Task<Uri> MoveAsync(string srcdomain, string srcpath, string newdomain, string newpath, bool quotaCheckFileSize = true)
     {
+       return await MoveAsync(srcdomain, srcpath, newdomain, newpath, Guid.Empty, quotaCheckFileSize);
+    }
+
+    public override async Task<Uri> MoveAsync(string srcdomain, string srcpath, string newdomain, string newpath, Guid ownerId, bool quotaCheckFileSize = true)
+    {
         ArgumentNullException.ThrowIfNull(srcpath);
         ArgumentNullException.ThrowIfNull(newpath);
 
@@ -395,7 +400,7 @@ public class DiscDataStore : BaseStorage
             File.Move(target, newtarget);
 
             await QuotaUsedDeleteAsync(srcdomain, flength);
-            await QuotaUsedAddAsync(newdomain, flength, quotaCheckFileSize);
+            await QuotaUsedAddAsync(newdomain, flength, ownerId, quotaCheckFileSize);
         }
         else
         {

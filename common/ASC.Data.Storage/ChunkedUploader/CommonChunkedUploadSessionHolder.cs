@@ -94,7 +94,11 @@ public class CommonChunkedUploadSessionHolder
 
     public async Task MoveAsync(CommonChunkedUploadSession chunkedUploadSession, string newPath, bool quotaCheckFileSize = true)
     {
-        await DataStore.MoveAsync(Domain, chunkedUploadSession.TempPath, string.Empty, newPath, quotaCheckFileSize);
+        await MoveAsync(chunkedUploadSession, newPath, Guid.Empty, quotaCheckFileSize);
+    }
+    public async Task MoveAsync(CommonChunkedUploadSession chunkedUploadSession, string newPath, Guid ownerId, bool quotaCheckFileSize = true)
+    {
+        await DataStore.MoveAsync(Domain, chunkedUploadSession.TempPath, string.Empty, newPath, ownerId, quotaCheckFileSize);
     }
 
     public async Task AbortAsync(CommonChunkedUploadSession uploadSession)

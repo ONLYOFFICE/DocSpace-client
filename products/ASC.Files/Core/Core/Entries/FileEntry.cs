@@ -195,11 +195,15 @@ public abstract class FileEntry<T> : FileEntry, ICloneable, IFileEntry<T>
     public Guid GetFileQuotaOwner()
     {
         return
-            RootFolderType == FolderType.USER || RootFolderType == FolderType.DEFAULT || RootFolderType == FolderType.TRASH ?
-                RootCreateBy :
-                RootFolderType == FolderType.Privacy && CreateBy == _securityContext.CurrentAccount.ID ?
-                    CreateBy :
-                    ASC.Core.Configuration.Constants.CoreSystem.ID;
+            DocSpaceHelper.IsRoom(RootFolderType) ?
+                ASC.Core.Configuration.Constants.CoreSystem.ID :
+
+                RootFolderType == FolderType.USER || RootFolderType == FolderType.DEFAULT || RootFolderType == FolderType.TRASH ?
+                    RootCreateBy :
+
+                    RootFolderType == FolderType.Privacy && CreateBy == _securityContext.CurrentAccount.ID ?
+                        CreateBy :
+                        ASC.Core.Configuration.Constants.CoreSystem.ID;
 
     }
 }

@@ -430,6 +430,10 @@ public class RackspaceCloudStorage : BaseStorage
 
     public override async Task<Uri> MoveAsync(string srcdomain, string srcpath, string newdomain, string newpath, bool quotaCheckFileSize = true)
     {
+        return await MoveAsync(srcdomain, srcpath, newdomain, newpath, Guid.Empty, quotaCheckFileSize);
+    }
+    public override async Task<Uri> MoveAsync(string srcdomain, string srcpath, string newdomain, string newpath, Guid ownerId, bool quotaCheckFileSize = true)
+    {
         var srcKey = MakePath(srcdomain, srcpath);
         var dstKey = MakePath(newdomain, newpath);
         var size = await GetFileSizeAsync(srcdomain, srcpath);
@@ -441,7 +445,7 @@ public class RackspaceCloudStorage : BaseStorage
         await DeleteAsync(srcdomain, srcpath);
 
         await QuotaUsedDeleteAsync(srcdomain, size);
-        await QuotaUsedAddAsync(newdomain, size, quotaCheckFileSize);
+        await QuotaUsedAddAsync(newdomain, size, ownerId, quotaCheckFileSize);
 
         return await GetUriAsync(newdomain, newpath);
     }

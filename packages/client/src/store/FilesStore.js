@@ -55,6 +55,7 @@ class FilesStore {
   filesSettingsStore;
   thirdPartyStore;
   clientLoadingStore;
+  roleStore;
 
   /**
    *  @type {DashboardStore}
@@ -1375,6 +1376,13 @@ class FilesStore {
   refreshFiles = async () => {
     if (this.selectedFolderStore.isDashboard) {
       return this.dashboardStore.refreshDashboard(this.selectedFolderStore.id);
+    }
+
+    if (this.selectedFolderStore.isRolePage) {
+      return this.roleStore?.refreshRole(
+        this.selectedFolderStore.id,
+        this.filter
+      );
     }
 
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);

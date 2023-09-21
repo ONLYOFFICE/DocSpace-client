@@ -1,3 +1,5 @@
+import { makeAutoObservable } from "mobx";
+
 import api from "@docspace/common/api";
 import RoleFilter from "@docspace/common/api/files/roleFilter";
 
@@ -15,13 +17,18 @@ import type DashboardStore from "./DashboardStore";
 import type FilesStore from "./FilesStore";
 
 class RoleStore {
+  private boardId?: string;
   public role?: IRole;
 
   constructor(
     private filesStore: FilesStore,
     private dashboardStore: DashboardStore,
     private dashboardContextOptionStore: DashboardContextOptionStore
-  ) {}
+  ) {
+    makeAutoObservable(this);
+
+    filesStore.roleStore = this;
+  }
 
   private resetState = (): void => {
     const { setFolders, setBoards, setSelection, setSelected } =
@@ -102,6 +109,12 @@ class RoleStore {
     this.role = this.dashboardStore.convertToRole(role);
   };
 
+  public refreshRole = (roleId: string, filter: RoleFilter) => {
+    if (!this.boardId) return;
+
+    return this.getRole(this.boardId, roleId, filter);
+  };
+
   public getRoleHeaderContextMenu = (t: (arg: string) => string) => {
     if (!this.role) return [];
 
@@ -114,6 +127,8 @@ class RoleStore {
   ) => {
     try {
       const filterData = filter.clone();
+
+      this.boardId = boardId;
 
       filterData.page = 0;
       filterData.pageCount = 100;

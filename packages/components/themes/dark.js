@@ -3156,6 +3156,10 @@ const Dark = {
     dashedBorder: "1px dashed #fff",
   },
 
+  dialogs: {
+    disableText: "#858585",
+  },
+
   editLink: {
     text: {
       color: "#A3A9AE",
@@ -3163,10 +3167,20 @@ const Dark = {
     },
   },
 
+  submitToGalleryTile: {
+    bodyText: "#ADADAD",
+    closeIconFill: "#a9a9a9",
+  },
+
   infoBlock: {
     background: "#282828",
     headerColor: "#FFF",
     descriptionColor: "#ADADAD",
+  },
+
+  roomIcon: {
+    backgroundArchive: "#FFFFFF",
+    opacityBackground: "0.1",
   },
 };
 

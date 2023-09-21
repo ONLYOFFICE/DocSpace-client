@@ -41,6 +41,8 @@ public class Startup : BaseStartup
 
         services.AddBaseDbContextPool<FilesDbContext>();
 
-        services.RegisterQuotaFeature();
+
+        DIHelper.TryAdd<ReassignProgressItem>();
+        DIHelper.TryAdd<RemoveProgressItem>();
     }
 }

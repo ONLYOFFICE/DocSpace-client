@@ -62,6 +62,8 @@ class FileInput extends Component {
       buttonLabel,
       idButton,
       isLoading,
+      fromStorage = false,
+      path,
       ...rest
     } = this.props;
 
@@ -91,6 +93,8 @@ class FileInput extends Component {
         break;
     }
 
+    const onClickProp = fromStorage ? { onClick: rest.onClick } : {};
+
     return (
       <Dropzone
         onDrop={this.onDrop}
@@ -112,20 +116,23 @@ class FileInput extends Component {
               isReadOnly
               className="text-input"
               placeholder={placeholder}
-              value={fileName}
+              value={fromStorage ? path : fileName}
               size={size}
               isDisabled={isDisabled || isLoading}
               hasError={hasError}
               hasWarning={hasWarning}
               scale={scale}
+              {...onClickProp}
             />
-            <input
-              type="file"
-              id={id}
-              ref={this.inputRef}
-              style={{ display: "none" }}
-              {...getInputProps()}
-            />
+            {!fromStorage && (
+              <input
+                type="file"
+                id={id}
+                ref={this.inputRef}
+                style={{ display: "none" }}
+                {...getInputProps()}
+              />
+            )}
 
             {buttonLabel ? (
               <Button
@@ -134,7 +141,7 @@ class FileInput extends Component {
                 size={buttonSize}
               />
             ) : (
-              <div className="icon">
+              <div className="icon" {...onClickProp}>
                 {isLoading ? (
                   <Loader className="loader" size="20px" type="track" />
                 ) : (

@@ -3153,6 +3153,10 @@ const Base = {
     dashedBorder: "1px dashed #5299E0",
   },
 
+  dialogs: {
+    disableText: "#A3A9AE",
+  },
+
   editLink: {
     text: {
       color: "#A3A9AE",
@@ -3160,10 +3164,20 @@ const Base = {
     },
   },
 
+  submitToGalleryTile: {
+    bodyText: "#555F65",
+    closeIconFill: "#657077",
+  },
+
   infoBlock: {
     background: "#F8F9F9",
     headerColor: "#333",
     descriptionColor: "#555F65",
+  },
+
+  roomIcon: {
+    backgroundArchive: "#A3A9AE",
+    opacityBackground: "1",
   },
 };
 

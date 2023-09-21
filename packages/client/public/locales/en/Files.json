@@ -64,6 +64,7 @@
   "Folder": "Folder",
   "FolderRemoved": "Folder moved to Trash",
   "FolderRenamed": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
+  "FormRoom": "Form room",
   "Forms": "Forms",
   "FormsTemplates": "Forms templates",
   "GoToMyRooms": "Go to rooms",

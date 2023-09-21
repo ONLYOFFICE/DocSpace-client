@@ -60,6 +60,8 @@ export const getDefaultRoomName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.FormRoom:
+      return t("Files:FormRoom");
   }
 };
 

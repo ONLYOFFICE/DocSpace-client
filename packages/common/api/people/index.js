@@ -358,3 +358,17 @@ export function getUsersByQuery(query) {
     url: `/people/search?query=${query}`,
   });
 }
+
+export function setCustomUserQuota(userIds, quota) {
+  const data = {
+    userIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "/people/userquota",
+    data,
+  };
+
+  return request(options);
+}

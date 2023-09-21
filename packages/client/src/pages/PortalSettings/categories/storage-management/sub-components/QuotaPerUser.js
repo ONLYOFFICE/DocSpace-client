@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
@@ -9,7 +10,7 @@ import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerUserComponent = (props) => {
-  const { isDisabled } = props;
+  const { isDisabled, setUserQuota } = props;
 
   const { t } = useTranslation("Settings");
 
@@ -23,45 +24,33 @@ const QuotaPerUserComponent = (props) => {
     setIsToggleChecked(checked);
   };
 
-  const startLoading = (name) => {
-    setTimeout(() => setIsLoading({ ...isLoading, [name]: true }), 200);
-  };
-  const resetLoading = (name) => {
-    setIsLoading({ [name]: false });
-  };
-
   const onSaveUserQuota = async (size) => {
     console.log("onSaveUserQuota", size);
-    const name = "user";
-    timerId = startLoading(name);
+    timerId = setTimeout(() => setIsLoading(true), 200);
 
-    var promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        //reject(new Error("timeout"));
-        resolve();
-      }, [1000]);
-    });
-
-    await promise;
+    await setUserQuota(size, t);
 
     timerId && clearTimeout(timerId);
     timerId = null;
 
-    resetLoading(name);
+    setIsLoading(false);
   };
 
   return (
     <StyledBaseQuotaComponent isDisabled={isDisabled}>
       <div className="toggle-container">
         <ToggleButton
+          fontWeight={600}
+          fontSize="14px"
           className="quotas_toggle-button"
-          name="user"
           label={t("DefineQuotaPerUser")}
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
         />
-        <Text className="toggle_label">{t("SetDefaultUserQuota")}</Text>
+        <Text className="toggle_label" fontSize="12px">
+          {t("SetDefaultUserQuota")}
+        </Text>
         {isToggleChecked && (
           <QuotaForm
             isButtonsEnable
@@ -77,4 +66,10 @@ const QuotaPerUserComponent = (props) => {
   );
 };
 
-export default QuotaPerUserComponent;
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+  const { setUserQuota } = currentQuotaStore;
+  const { isItemQuotaAvailable } = currentQuotaStore;
+
+  return { setUserQuota, isDisabled: !isItemQuotaAvailable };
+})(observer(QuotaPerUserComponent));

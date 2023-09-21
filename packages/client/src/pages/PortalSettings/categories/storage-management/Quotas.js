@@ -40,7 +40,7 @@ const QuotasComponent = (props) => {
       ) : (
         <>
           <QuotaPerRoomComponent isDisabled={!isItemQuotaAvailable} />
-          <QuotaPerUserComponent isDisabled={!isItemQuotaAvailable} />
+          <QuotaPerUserComponent />
         </>
       )}
     </StyledBaseQuotaComponent>

@@ -6,7 +6,12 @@ import ItemContextOptions from "./ItemContextOptions";
 import { Text } from "@docspace/components";
 import { StyledTitle } from "../../styles/common";
 
-const GalleryItemTitle = ({ t, gallerySelected, getIcon }) => {
+const GalleryItemTitle = ({
+  t,
+  gallerySelected,
+  getIcon,
+  currentColorScheme,
+}) => {
   const itemTitleRef = useRef();
 
   return (
@@ -14,7 +19,9 @@ const GalleryItemTitle = ({ t, gallerySelected, getIcon }) => {
       <ReactSVG className="icon" src={getIcon(32, ".docxf")} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
-      <Text className="free-label">{t("FormGallery:Free")}</Text>
+      <Text color={currentColorScheme.main.accent} className="free-label">
+        {t("FormGallery:Free")}
+      </Text>
       {gallerySelected && (
         <ItemContextOptions
           t={t}

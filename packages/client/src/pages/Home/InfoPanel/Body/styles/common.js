@@ -93,7 +93,6 @@ const StyledTitle = styled.div`
 
   .free-label {
     margin-left: auto;
-    color: #4781d1;
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;

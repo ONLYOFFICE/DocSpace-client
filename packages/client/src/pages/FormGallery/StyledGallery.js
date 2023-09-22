@@ -14,7 +14,7 @@ import { Button } from "@docspace/components";
 const calculateContainerGridColumns = (isRootFolder, isInfoPanelVisible) => {
   let result = "min-content 12px auto";
   if (!isRootFolder) result = "29px " + result;
-  if (!isInfoPanelVisible) result += " 32px";
+  if (!isInfoPanelVisible) result += " 52px";
   return result;
 };
 
@@ -39,11 +39,6 @@ const StyledContainer = styled.div`
 
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-  }
-
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
   }
 
   ${isMobile &&
@@ -97,26 +92,23 @@ const StyledSubmitToGalleryButton = styled(Button)`
 StyledSubmitToGalleryButton.defaultProps = { theme: Base };
 
 const StyledInfoPanelToggleWrapper = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 12px;
-        `
-      : css`
-          margin-left: 12px;
-        `}
-
+  box-sizing: border-box;
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
   align-items: center;
   justify-content: center;
+  width: 16px;
+  height: 16px;
+
+  margin: ${({ theme }) =>
+    theme.interfaceDirection !== "rtl" ? "0 8px 0 28px" : "0 28px 0 8px"};
 
   @media ${tablet} {
     display: none;
   }
 
   .info-panel-toggle-bg {
-    height: 32px;
-    width: 32px;
+    height: 16px;
+    width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;

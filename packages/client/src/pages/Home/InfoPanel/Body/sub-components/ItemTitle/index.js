@@ -15,6 +15,7 @@ const ItemTitle = ({
   selectionLength,
   selectionParentRoom,
   roomsView,
+  currentColorScheme,
   getIcon,
   getUserContextOptions,
 }) => {
@@ -32,7 +33,11 @@ const ItemTitle = ({
 
   if (isGallery)
     return (
-      <GalleryItemTitle gallerySelected={gallerySelected} getIcon={getIcon} />
+      <GalleryItemTitle
+        currentColorScheme={currentColorScheme}
+        gallerySelected={gallerySelected}
+        getIcon={getIcon}
+      />
     );
 
   const filesItemSelection =
@@ -55,12 +60,14 @@ const ItemTitle = ({
 };
 
 export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
+  const { currentColorScheme } = auth.settingsStore;
   const { selectionParentRoom, roomsView } = auth.infoPanelStore;
   const { getIcon } = settingsStore;
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
   const { gallerySelected } = oformsStore;
 
   return {
+    currentColorScheme,
     gallerySelected,
     getUserContextOptions,
     selectionParentRoom,

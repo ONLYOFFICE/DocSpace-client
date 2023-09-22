@@ -1,18 +1,35 @@
 import styled, { css } from "styled-components";
 import { isMobile, isMobileOnly } from "react-device-detect";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  hugeMobile,
+  smallTablet,
+} from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
+
+const calculateContainerGridColumns = (isRootFolder, isInfoPanelVisible) => {
+  let result = "min-content 12px auto";
+  if (!isRootFolder) result = "29px " + result;
+  if (!isInfoPanelVisible) result += " 32px";
+  return result;
+};
 
 const StyledContainer = styled.div`
   width: 100%;
   height: 32px;
   display: grid;
 
-  grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto auto" : "29px 1fr auto auto"};
+  grid-template-columns: ${({ isRootFolder, isInfoPanelVisible }) =>
+    calculateContainerGridColumns(isRootFolder, isInfoPanelVisible)};
+
+  @media ${tablet} {
+    grid-template-columns: ${({ isRootFolder }) =>
+      isRootFolder ? "min-content 12px auto" : "29px min-content 12px auto"};
+  }
 
   align-items: center;
 
@@ -65,14 +82,16 @@ const StyledNavigationDrodown = styled(ComboBox)`
   background: transparent;
 `;
 const StyledSubmitToGalleryButton = styled(Button)`
-  margin-left: auto;
+  @media ${smallTablet} {
+    display: none;
+  }
   ${(props) =>
     props.theme.interfaceDirection === "ltr"
       ? css`
-          margin-right: 12px;
+          margin-left: auto;
         `
       : css`
-          margin-left: 12px;
+          margin-right: auto;
         `}
 `;
 StyledSubmitToGalleryButton.defaultProps = { theme: Base };
@@ -81,10 +100,10 @@ const StyledInfoPanelToggleWrapper = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-right: auto;
+          margin-right: 12px;
         `
       : css`
-          margin-left: auto;
+          margin-left: 12px;
         `}
 
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};

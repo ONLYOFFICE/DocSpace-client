@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
@@ -8,6 +7,7 @@ import { smallTablet } from "@docspace/components/utils/device";
 import { isMobileOnly } from "react-device-detect";
 
 import styled, { css } from "styled-components";
+import { getDefaultOformLocale } from "@docspace/common/utils";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
@@ -39,9 +39,9 @@ export const StyledCategoryFilterWrapper = styled.div`
   `}
 `;
 
-const CategoryFilter = ({
-  t,
+const categoryLocale = getDefaultOformLocale();
 
+const CategoryFilter = ({
   currentCategory,
   oformsFilter,
   filterOformsByCategory,
@@ -51,8 +51,8 @@ const CategoryFilter = ({
   fetchPopularCategories,
 }) => {
   const currentCategoryTitle = getOformCategoryTitle(
-    oformsFilter.categorizeBy,
-    currentCategory
+    currentCategory,
+    categoryLocale
   );
 
   const onViewAllTemplates = () => filterOformsByCategory("", "");
@@ -64,6 +64,7 @@ const CategoryFilter = ({
   useEffect(() => {
     (async () => {
       const branchData = await fetchCategoriesByBranch();
+      console.log(branchData);
       setFormsByBranch(branchData);
       const typeData = await fetchCategoriesByType();
       setFormsByType(typeData);
@@ -76,10 +77,7 @@ const CategoryFilter = ({
     <StyledCategoryFilterWrapper className="categoryFilterWrapper">
       <CategoryFilterMobile
         className="mobileView"
-        currentCategoryTitle={getOformCategoryTitle(
-          oformsFilter.categorizeBy,
-          currentCategory
-        )}
+        currentCategoryTitle={getOformCategoryTitle(currentCategory)}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}
@@ -87,10 +85,7 @@ const CategoryFilter = ({
       />
       <CategoryFilterDesktop
         className="desktopView"
-        currentCategory={getOformCategoryTitle(
-          oformsFilter.categorizeBy,
-          currentCategory
-        )}
+        currentCategory={getOformCategoryTitle(currentCategory)}
         onViewAllTemplates={onViewAllTemplates}
         formsByBranch={formsByBranch}
         formsByType={formsByType}
@@ -108,4 +103,4 @@ export default inject(({ oformsStore }) => ({
 
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(CategoryFilter));
+}))(CategoryFilter);

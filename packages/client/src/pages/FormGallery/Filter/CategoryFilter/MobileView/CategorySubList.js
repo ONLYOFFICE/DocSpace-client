@@ -2,6 +2,9 @@ import { StyledSubItemMobile } from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import { getDefaultOformLocale } from "@docspace/common/utils";
+
+const categoryLocale = getDefaultOformLocale();
 
 const CategorySubList = ({
   categoryType,
@@ -19,7 +22,7 @@ const CategorySubList = ({
     <StyledSubItemMobile
       className="dropdown-item item-mobile"
       key={category.id}
-      label={getOformCategoryTitle(categoryType, category)}
+      label={getOformCategoryTitle(category, categoryLocale)}
       onClick={() => onFilterByCategory(category)}
     />
   ));

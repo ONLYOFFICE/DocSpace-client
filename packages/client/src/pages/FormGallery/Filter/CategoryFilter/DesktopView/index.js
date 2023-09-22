@@ -1,7 +1,7 @@
 import * as Styled from "./index.styled";
 
 import DropDownItem from "@docspace/components/drop-down-item";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SubList from "./SubList";
@@ -9,6 +9,8 @@ import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 
 const CategoryFilterDesktop = ({
   t,
+
+  fetchCategoryFilterMenuItems,
 
   currentCategoryTitle,
 
@@ -19,6 +21,8 @@ const CategoryFilterDesktop = ({
 
   ...rest
 }) => {
+  // const [menuItems, setMenuItems] = useState([]);
+
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
   const onCloseDropdown = () => setIsOpen(false);
@@ -33,6 +37,13 @@ const CategoryFilterDesktop = ({
   const onMouseLeaveType = () => setIsTypeHovered(false);
   const onMouseEnterCompilation = () => setIsCompilationHovered(true);
   const onMouseLeaveCompilation = () => setIsCompilationHovered(false);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const fetchedMenuItems = await fetchCategoryFilterMenuItems();
+  //     setMenuItems(fetchedMenuItems);
+  //   })();
+  // }, []);
 
   return (
     <Styled.CategoryFilterWrapper {...rest}>
@@ -63,6 +74,7 @@ const CategoryFilterDesktop = ({
             <Styled.CategoryFilterItem
               id={"ViewAllTemplates"}
               key={"ViewAllTemplates"}
+              title={t("FormGallery:ViewAllTemplates")}
               className="dropdown-item"
               label={t("FormGallery:ViewAllTemplates")}
               onClick={onViewAllTemplates}
@@ -71,6 +83,7 @@ const CategoryFilterDesktop = ({
             <Styled.CategoryFilterItem
               id={"FormsByBranch"}
               key={"FormsByBranch"}
+              title={t("FormGallery:FormsByBranch")}
               className={`item-by-${OformCategoryType.Branch}`}
               label={t("FormGallery:FormsByBranch")}
               onMouseEnter={onMouseEnterBranch}
@@ -80,6 +93,7 @@ const CategoryFilterDesktop = ({
             <Styled.CategoryFilterItem
               id={"FormsByType"}
               key={"FormsByType"}
+              title={t("FormGallery:FormsByType")}
               className={`item-by-${OformCategoryType.Type}`}
               label={t("FormGallery:FormsByType")}
               onMouseEnter={onMouseEnterType}
@@ -89,6 +103,7 @@ const CategoryFilterDesktop = ({
             <Styled.CategoryFilterItem
               id={"PopularCompilations"}
               key={"PopularCompilations"}
+              title={t("FormGallery:PopularCompilations")}
               className={`item-by-${OformCategoryType.Compilation}`}
               label={t("FormGallery:PopularCompilations")}
               onMouseEnter={onMouseEnterCompilation}
@@ -127,6 +142,8 @@ const CategoryFilterDesktop = ({
   );
 };
 export default inject(({ oformsStore }) => ({
+  fetchCategoryFilterMenuItems: oformsStore.fetchCategoryFilterMenuItems,
+
   currentCategory: oformsStore.currentCategory,
 
   fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,

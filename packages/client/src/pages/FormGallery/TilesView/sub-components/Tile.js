@@ -55,7 +55,7 @@ const Tile = (props) => {
   const getIconFile = () => {
     // const src =
     //   item.attributes.template_image.data.attributes.formats.small.url;
-    const src = item.attributes.card_prewiew.data.attributes.url;
+    const src = item?.attributes.card_prewiew.data?.attributes.url;
     const svgLoader = () => <div style={{ width: "96px" }} />;
 
     return src ? (

@@ -8,15 +8,14 @@ import ContextHelper from "../../helpers/ContextHelper";
 
 const StyledItemContextOptions = styled.div`
   height: 16px;
-  ${({ withLabel }) => !withLabel && "margin-left: auto;"}
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  margin: ${({ withLabel, theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? withLabel
+        ? "0 8px 0 0"
+        : "0 auto 0 0"
+      : withLabel
+      ? "0 0 0 8px"
+      : "0 0 0 auto"};
 `;
 
 const getFormContextOptions = (t) => [
@@ -54,6 +53,7 @@ const ItemContextOptions = ({
 
   withLabel = false,
 }) => {
+  console.log(withLabel);
   if (!selection) return null;
 
   const [contextHelper, setContextHelper] = useState(null);

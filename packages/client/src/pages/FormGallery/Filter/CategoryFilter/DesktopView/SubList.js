@@ -2,6 +2,9 @@ import * as Styled from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import { getDefaultOformLocale } from "@docspace/common/utils";
+
+const categoryLocale = getDefaultOformLocale();
 
 const SubList = ({
   categoryType,
@@ -45,7 +48,7 @@ const SubList = ({
       isNoFixedHeightOptions={false}
     >
       {categories.map((category) => {
-        const categoryTitle = getOformCategoryTitle(categoryType, category);
+        const categoryTitle = getOformCategoryTitle(category, categoryLocale);
         const onCategoryClick = () => onFilterByCategory(category);
         return (
           <Styled.CategoryFilterSubListItem

@@ -1,17 +1,16 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
 
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import { submitToGallery } from "@docspace/common/api/oforms";
 
-const { OformsFilter } = api;
-
 import {
   getCategoryById,
+  getCategoryFilterMenuItems,
   getCategoriesByBranch,
   getCategoriesByType,
   getPopularCategories,
 } from "@docspace/common/api/oforms";
+import { getDefaultOformLocale } from "@docspace/common/utils";
 
 class OformsStore {
   authStore;
@@ -42,42 +41,6 @@ class OformsStore {
   setOformsIsLoading = (oformsIsLoading) =>
     (this.oformsIsLoading = oformsIsLoading);
 
-  getOforms = async (filter = OformsFilter.getDefault()) => {
-    const oformData = await this.authStore.getOforms(filter);
-    const oformsFilter = oformData?.data?.meta?.pagination;
-    const newOformsFilter = this.oformsFilter.clone();
-
-    if (oformsFilter) {
-      newOformsFilter.page = oformsFilter.page;
-      newOformsFilter.total = oformsFilter.total;
-    }
-
-    runInAction(() => {
-      this.setOformsFilter(newOformsFilter);
-      this.setOformFiles(oformData?.data?.data ?? []);
-    });
-  };
-
-  submitToFormGallery = async (file, formName, language, signal = null) => {
-    const res = await submitToGallery(
-      this.authStore.settingsStore.formGallery.uploadUrl,
-      file,
-      formName,
-      language,
-      signal
-    );
-
-    return res;
-  };
-
-  setOformFiles = (oformFiles) => {
-    this.oformFiles = oformFiles;
-  };
-
-  setOformsFilter = (oformsFilter) => {
-    this.oformsFilter = oformsFilter;
-  };
-
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
     this.authStore.infoPanelStore.setSelection(gallerySelected);
@@ -99,7 +62,6 @@ class OformsStore {
   };
 
   loadMoreForms = async () => {
-    console.log("loadmore!!");
     if (!this.hasMoreForms || this.oformsIsLoading) return;
     this.setOformsIsLoading(true);
 
@@ -116,6 +78,12 @@ class OformsStore {
     });
   };
 
+  submitToFormGallery = async (file, formName, language, signal = null) => {
+    const url = this.authStore.settingsStore.formGallery.uploadUrl;
+    const res = await submitToGallery(url, file, formName, language, signal);
+    return res;
+  };
+
   fetchCurrentCategory = async () => {
     const { categorizeBy, categoryId } = this.oformsFilter;
     if (!categorizeBy || !categoryId) {
@@ -130,21 +98,31 @@ class OformsStore {
     });
   };
 
+  fetchCategoryFilterMenuItems = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api/menu-translations";
+    const locale = getDefaultOformLocale();
+    const menuItems = await getCategoryFilterMenuItems(url, locale);
+    return menuItems;
+  };
+
   fetchCategoriesByBranch = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api/categories";
     const { locale } = this.oformsFilter;
-    const categoriesByBranch = await getCategoriesByBranch(locale);
+    const categoriesByBranch = await getCategoriesByBranch(url, locale);
     return categoriesByBranch;
   };
 
   fetchCategoriesByType = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api/types";
     const { locale } = this.oformsFilter;
-    const categoriesByType = await getCategoriesByType(locale);
+    const categoriesByType = await getCategoriesByType(url, locale);
     return categoriesByType;
   };
 
   fetchPopularCategories = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api/compilations";
     const { locale } = this.oformsFilter;
-    const popularCategories = await getPopularCategories(locale);
+    const popularCategories = await getPopularCategories(url, locale);
     return popularCategories;
   };
 
@@ -161,6 +139,8 @@ class OformsStore {
 
   filterOformsByLocale = async (locale) => {
     if (!locale) return;
+
+    this.currentCategory = null;
 
     this.oformsFilter.page = 1;
     this.oformsFilter.locale = locale;
@@ -190,6 +170,11 @@ class OformsStore {
     runInAction(() => this.getOforms(newOformsFilter));
   };
 
+  hideSubmitToGalleryTile = () => {
+    localStorage.setItem("submitToGalleryTileIsHidden", true);
+    this.submitToGalleryTileIsVisible = false;
+  };
+
   get hasGalleryFiles() {
     return this.oformFiles && !!this.oformFiles.length;
   }
@@ -201,11 +186,6 @@ class OformsStore {
   get hasMoreForms() {
     return this.oformFiles.length < this.oformsFilterTotal;
   }
-
-  hideSubmitToGalleryTile = () => {
-    localStorage.setItem("submitToGalleryTileIsHidden", true);
-    this.submitToGalleryTileIsVisible = false;
-  };
 }
 
 export default OformsStore;

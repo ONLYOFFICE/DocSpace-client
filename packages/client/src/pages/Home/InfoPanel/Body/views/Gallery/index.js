@@ -9,7 +9,10 @@ import Loaders from "@docspace/common/components/Loaders/index.js";
 import Text from "@docspace/components/text";
 
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
-import { StyledGalleryThumbnail } from "../../styles/gallery.js";
+import {
+  StyledGalleryNoThumbnail,
+  StyledGalleryThumbnail,
+} from "../../styles/gallery.js";
 import {
   StyledDescription,
   StyledLink,
@@ -21,8 +24,8 @@ import Link from "@docspace/components/link/index.js";
 const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
   const thumbnailBlank = getIcon(96, ".docxf");
   const thumbnailUrl =
-    gallerySelected?.attributes?.template_image?.data.attributes?.formats?.small
-      ?.url;
+    gallerySelected?.attributes?.template_image?.data?.attributes?.formats
+      ?.small?.url;
 
   return (
     <>
@@ -31,9 +34,9 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
           <img className="info-panel_gallery-img" src={thumbnailUrl} alt="" />
         </StyledGalleryThumbnail>
       ) : (
-        <div className="no-thumbnail-img-wrapper">
+        <StyledGalleryNoThumbnail className="no-thumbnail-img-wrapper">
           <ReactSVG className="no-thumbnail-img" src={thumbnailBlank} />
-        </div>
+        </StyledGalleryNoThumbnail>
       )}
 
       <StyledLink>

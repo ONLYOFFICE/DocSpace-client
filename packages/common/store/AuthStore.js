@@ -443,20 +443,13 @@ class AuthStore {
     const params = `?${filter.toApiUrlParams()}${fields}`;
 
     const promise = new Promise(async (resolve, reject) => {
-      const apiUrl = `${this.settingsStore.urlOforms}${params}`;
+      const apiUrl = `${this.settingsStore.formGallery.url}${params}`;
       let oforms = await api.settings.getOforms(apiUrl);
-      // let oforms = await api.oforms.getOforms(
-      //   combineUrl(
-      //     this.settingsStore.urlOforms,
-      //     `${params}&locale=${filter.locale}`
-      //   )
-      // );
 
-      if (!oforms?.data?.data?.length) {
+      if (!oforms?.data?.data?.length)
         oforms = await api.oforms.getOforms(
           combineUrl(this.settingsStore.formGallery.url, `${params}&locale=en`)
         );
-      }
 
       resolve(oforms);
     });

@@ -36,6 +36,13 @@ export const CategoryFilterItem = styled(DropDownItem)`
   font-weight: 600;
   line-height: 16px;
 
+  span {
+    width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .submenu-arrow {
     margin-right: 0;
     svg {
@@ -54,8 +61,6 @@ export const CategoryFilterSubList = styled(DropDown)`
 
   max-height: 296px;
   max-width: auto;
-
-  visibility: hidden;
 
   visibility: hidden;
   ${({ open, isSubHovered }) =>

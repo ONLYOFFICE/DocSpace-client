@@ -1,36 +1,37 @@
 import axios from "axios";
-import { request } from "../oformClient";
 
 export function getOforms(url) {
   return axios.get(url);
 }
 
-export const getCategoryById = async (categorizeBy, id) => {
-  const options = { method: "get", url: `/${categorizeBy}/${id}` };
+export const getCategoryById = async (categorizeBy, id, locale) => {
+  const options = {
+    method: "get",
+    url: `/${categorizeBy}/${id}?populate=*&locale=${locale}`,
+  };
   return request(options).then((res) => {
     return res;
   });
 };
 
-export const getCategoriesByBranch = async (locale = "en") => {
-  const options = { method: "get", url: `/categories?locale=${locale}` };
-  return request(options).then((res) => {
-    return res;
-  });
+export const getCategoryFilterMenuItems = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
+  return res?.data;
 };
 
-export const getCategoriesByType = async (locale = "en") => {
-  const options = { method: "get", url: `/types?locale=${locale}` };
-  return request(options).then((res) => {
-    return res;
-  });
+export const getCategoriesByBranch = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
+  return res?.data?.data;
 };
 
-export const getPopularCategories = async (locale = "en") => {
-  const options = { method: "get", url: `/compilations?locale=${locale}` };
-  return request(options).then((res) => {
-    return res;
-  });
+export const getCategoriesByType = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
+  return res?.data?.data;
+};
+
+export const getPopularCategories = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
+  return res?.data?.data;
 };
 
 export function submitToGallery(url, file, formName, language, signal) {

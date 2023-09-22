@@ -225,11 +225,26 @@ export const filterUserRoleOptions = (
   return newOptions;
 };
 
-export const getOformCategoryTitle = (categorizeBy, category) => {
-  if (!categorizeBy || !category) return;
-  return categorizeBy === OformCategoryType.Branch
-    ? category.attributes.categorie
-    : categorizeBy === OformCategoryType.Type
-    ? category.attributes.type
-    : category.attributes.compilation;
+export const getLocalizedOformCategoryTitle = (category, locale = null) => {
+  if (!category) return "";
+};
+
+export const getOformCategoryTitle = (category, locale = null) => {
+  if (!category) return "";
+
+  let categoryType = category.attributes.categorie
+    ? "categorie"
+    : category.attributes.type
+    ? "type"
+    : "compilation";
+
+  const categoryTitle = category.attributes[categoryType];
+  if (!locale) return categoryTitle;
+
+  const [localizedCategory] = category.attributes.localizations?.data.filter(
+    (localization) => localization.attributes.locale === locale
+  );
+  return localizedCategory
+    ? localizedCategory.attributes[categoryType]
+    : categoryTitle;
 };

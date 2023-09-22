@@ -20,4 +20,15 @@ const StyledGalleryThumbnail = styled.div`
 
 StyledGalleryThumbnail.defaultProps = { theme: Base };
 
-export { StyledGalleryThumbnail };
+const StyledGalleryNoThumbnail = styled.div`
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .no-thumbnail-img {
+    height: 96px;
+    width: 96px;
+  }
+`;
+
+export { StyledGalleryThumbnail, StyledGalleryNoThumbnail };

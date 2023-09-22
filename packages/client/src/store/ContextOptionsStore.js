@@ -1038,7 +1038,7 @@ class ContextOptionsStore {
         icon: FormFileReactSvgUrl,
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,
-        disabled: !item.security.SubmitToFormGallery,
+        disabled: !item.security?.SubmitToFormGallery,
       },
       {
         key: "separator-SubmitToGallery",

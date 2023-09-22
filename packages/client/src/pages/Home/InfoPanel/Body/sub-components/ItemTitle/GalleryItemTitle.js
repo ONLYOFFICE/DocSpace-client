@@ -18,6 +18,7 @@ const GalleryItemTitle = ({ t, gallerySelected, getIcon }) => {
       {gallerySelected && (
         <ItemContextOptions
           t={t}
+          className="gallery-context-options"
           itemTitleRef={itemTitleRef}
           selection={gallerySelected}
           isForm={true}

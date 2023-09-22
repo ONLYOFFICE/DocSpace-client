@@ -22,12 +22,14 @@ import { isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import { getDefaultOformLocale } from "@docspace/common/utils";
+
+const categoryLocale = getDefaultOformLocale();
 
 const SectionHeaderContent = ({
   t,
   canSubmitToFormGallery,
-  isInfoPanelVisible,
-  setIsInfoPanelVisible,
+
   setGallerySelected,
   categoryType,
   setSubmitToGalleryDialogVisible,
@@ -37,8 +39,6 @@ const SectionHeaderContent = ({
 
   oformsFilter,
   filterOformsByCategory,
-
-  setGallerySelected,
 
   isInfoPanelVisible,
   setIsInfoPanelVisible,
@@ -110,7 +110,7 @@ const SectionHeaderContent = ({
   }, [fromFolderId, oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
-    <StyledContainer>
+    <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
@@ -120,7 +120,7 @@ const SectionHeaderContent = ({
       />
 
       <StyledHeadline type="content" truncate>
-        {getOformCategoryTitle(oformsFilter.categorizeBy, currentCategory) ||
+        {getOformCategoryTitle(currentCategory, categoryLocale) ||
           t("Common:OFORMsGallery")}
       </StyledHeadline>
 
@@ -162,23 +162,25 @@ const SectionHeaderContent = ({
   );
 };
 
-export default inject(({ auth, filesStore, oformsStore }) => {
-  return {
-    categoryType: filesStore.categoryType,
+export default inject(
+  ({ auth, filesStore, oformsStore, accessRightsStore, dialogsStore }) => {
+    return {
+      categoryType: filesStore.categoryType,
 
-    currentCategory: oformsStore.currentCategory,
-    fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+      currentCategory: oformsStore.currentCategory,
+      fetchCurrentCategory: oformsStore.fetchCurrentCategory,
 
-    oformsFilter: oformsStore.oformsFilter,
-    filterOformsByCategory: oformsStore.filterOformsByCategory,
+      oformsFilter: oformsStore.oformsFilter,
+      filterOformsByCategory: oformsStore.filterOformsByCategory,
 
-    setGallerySelected: oformsStore.setGallerySelected,
+      setGallerySelected: oformsStore.setGallerySelected,
 
-    canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-    setSubmitToGalleryDialogVisible:
-      accessRightsStore.setSubmitToGalleryDialogVisible,
+      canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+      setSubmitToGalleryDialogVisible:
+        dialogsStore.setSubmitToGalleryDialogVisible,
 
-    isInfoPanelVisible: auth.infoPanelStore.isVisible,
-    setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
-  };
-})(withTranslation("Common")(observer(SectionHeaderContent)));
+      isInfoPanelVisible: auth.infoPanelStore.isVisible,
+      setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
+    };
+  }
+)(withTranslation("Common")(observer(SectionHeaderContent)));

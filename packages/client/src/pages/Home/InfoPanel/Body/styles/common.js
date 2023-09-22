@@ -8,10 +8,10 @@ const StyledInfoPanelBody = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0px 20px 0 3px;
+          padding: 0px 20px 24px 3px;
         `
       : css`
-          padding: 0px 3px 0 20px;
+          padding: 0px 3px 24px 20px;
         `}
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};

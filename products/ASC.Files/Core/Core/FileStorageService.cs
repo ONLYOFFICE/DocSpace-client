@@ -516,7 +516,6 @@ public class FileStorageService //: IFileStorageService
             RoomType.CustomRoom => await CreateCustomRoomAsync(title, parentId, @private),
             RoomType.EditingRoom => await CreateEditingRoomAsync(title, parentId, @private),
             RoomType.PublicRoom => await CreatePublicRoomAsync(title, parentId, @private),
-            RoomType.FillingFormsRoom => await CreateFillingFormRoomAsync(title, parentId, @private),
             _ => await CreateCustomRoomAsync(title, parentId, @private),
         };
 
@@ -569,7 +568,6 @@ public class FileStorageService //: IFileStorageService
             RoomType.CustomRoom => (await CreateCustomRoomAsync(title, parentId, @private), FolderType.CustomRoom),
             RoomType.EditingRoom => (await CreateEditingRoomAsync(title, parentId, @private), FolderType.EditingRoom),
             RoomType.PublicRoom => (await CreatePublicRoomAsync(title, parentId, @private), FolderType.PublicRoom),
-            RoomType.FillingFormsRoom => (await CreateFillingFormRoomAsync(title, parentId, @private), FolderType.FillingFormsRoom),
             _ => (await CreateCustomRoomAsync(title, parentId, @private), FolderType.CustomRoom),
         };
 
@@ -593,11 +591,6 @@ public class FileStorageService //: IFileStorageService
     private async Task<Folder<T>> CreateEditingRoomAsync<T>(string title, T parentId, bool privacy)
     {
         return await InternalCreateNewFolderAsync(parentId, title, FolderType.EditingRoom, privacy);
-    }
-
-    private async Task<Folder<T>> CreateFillingFormRoomAsync<T>(string title, T parentId, bool privacy)
-    {
-        return await InternalCreateNewFolderAsync(parentId, title, FolderType.FillingFormsRoom, privacy);
     }
 
     private async ValueTask<Folder<T>> InternalCreateNewFolderAsync<T>(T parentId, string title, FolderType folderType = FolderType.DEFAULT, bool privacy = false)

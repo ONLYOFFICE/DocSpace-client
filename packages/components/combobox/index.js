@@ -133,8 +133,10 @@ class ComboBox extends React.Component {
       isLoading,
       isNoFixedHeightOptions,
       hideMobileView,
+      forceCloseClickOutside,
+      withoutBackground,
     } = this.props;
-    const { tabIndex, ...props } = this.props;
+    const { tabIndex, onClickSelectedItem, ...props } = this.props;
     const { isOpen, selectedOption } = this.state;
 
     const dropDownMaxHeightProp = dropDownMaxHeight
@@ -231,6 +233,8 @@ class ComboBox extends React.Component {
             withBackground={withBackground}
             isMobileView={isMobileView && !disableMobileView}
             isNoFixedHeightOptions={isNoFixedHeightOptions}
+            forceCloseClickOutside={forceCloseClickOutside}
+            withoutBackground={withoutBackground}
           >
             {advancedOptions
               ? advancedOptions
@@ -254,6 +258,7 @@ class ComboBox extends React.Component {
                       disabled={disabled}
                       backgroundColor={option.backgroundColor}
                       onClick={this.optionClick.bind(this, option)}
+                      onClickSelectedItem={() => onClickSelectedItem?.(option)}
                       fillIcon={fillIcon}
                       isModern={noBorder}
                       isActive={isActive}

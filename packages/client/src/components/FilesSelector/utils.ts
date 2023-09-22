@@ -26,7 +26,7 @@ export const getHeaderLabel = (
     return t("Translations:CreateMasterFormFromFile");
   if (!!filterParam) return t("Common:SelectFile");
 
-  return t("Common:Save");
+  return t("Common:SaveButton");
 };
 
 export const getAcceptButtonLabel = (
@@ -40,6 +40,7 @@ export const getAcceptButtonLabel = (
   if (isCopy) return t("Translations:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
   if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
+  // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t("Common:SubmitToGallery");
   if (!!filterParam) return t("Common:SaveButton");
 
   return t("Common:SaveHereButton");
@@ -56,12 +57,14 @@ export const getIsDisabled = (
   isRequestRunning?: boolean,
   security?: Security,
   filterParam?: string,
-  isFileSelected?: boolean
+  isFileSelected?: boolean,
+  includeFolder?: boolean
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
   if (!!filterParam) return !isFileSelected;
   if (sameId && !isCopy) return true;
+  if (sameId && isCopy && includeFolder) return true;
   if (isRooms) return true;
   if (isRoot) return true;
   if (isCopy) return !security?.CopyTo;

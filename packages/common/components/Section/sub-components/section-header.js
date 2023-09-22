@@ -18,6 +18,30 @@ const StyledSectionHeader = styled.div`
     height: 61px;
     min-height: 61px;
 
+    ${({ isTrashFolder, isEmptyPage }) =>
+      isTrashFolder &&
+      !isEmptyPage &&
+      css`
+        height: 109px;
+        min-height: 109px;
+
+        .header-container {
+          flex-direction: column;
+          height: 109px !important;
+          min-height: 109px !important;
+
+          .navigation-container {
+            height: calc(100% - 32px);
+          }
+          .trash-warning {
+            min-height: 32px;
+            height: 32px;
+
+            margin-bottom: 15px;
+          }
+        }
+      `}
+
     .header-container {
       margin-bottom: 1px;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -28,30 +52,98 @@ const StyledSectionHeader = styled.div`
   css`
     height: 61px;
     min-height: 61px;
+
+    ${({ isTrashFolder, isEmptyPage }) =>
+      isTrashFolder &&
+      !isEmptyPage &&
+      css`
+        height: 109px;
+        min-height: 109px;
+
+        .header-container {
+          flex-direction: column;
+          height: 109px !important;
+          min-height: 109px !important;
+
+          .navigation-container {
+            height: calc(100% - 32px);
+          }
+          .trash-warning {
+            min-height: 32px;
+            height: 32px;
+
+            margin-bottom: 15px;
+          }
+        }
+      `}
   `}
 
   @media ${mobile} {
     height: 53px;
     min-height: 53px;
+
+    ${({ isTrashFolder, isEmptyPage }) =>
+      isTrashFolder &&
+      !isEmptyPage &&
+      css`
+        height: 101px;
+        min-height: 101px;
+
+        .header-container {
+          flex-direction: column;
+          height: 101px !important;
+          min-height: 101px !important;
+
+          .navigation-container {
+            height: calc(100% - 32px);
+          }
+          .trash-warning {
+            min-height: 32px;
+            height: 32px;
+
+            margin-bottom: 15px;
+          }
+        }
+      `}
   }
 
   ${isMobileOnly &&
   css`
     height: 53px;
     min-height: 53px;
+
+    ${({ isTrashFolder, isEmptyPage }) =>
+      isTrashFolder &&
+      !isEmptyPage &&
+      css`
+        height: 101px;
+        min-height: 101px;
+
+        .header-container {
+          flex-direction: column;
+          height: 101px !important;
+          min-height: 101px !important;
+
+          .navigation-container {
+            height: calc(100% - 32px);
+          }
+          .trash-warning {
+            min-height: 32px;
+            height: 32px;
+
+            margin-bottom: 15px;
+          }
+        }
+      `}
   `}
-
-  ${({ isTrashFolder, isEmptyPage }) =>
-    isTrashFolder &&
-    !isEmptyPage &&
-    css`
-      @media ${tablet} {
-        height: 109px;
-        min-height: 109px;
-      }
-    `}
-
-  padding-right: 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-left: 20px;
+        `
+      : css`
+          padding-right: 20px;
+        `}
 
   box-sizing: border-box;
 
@@ -68,26 +160,55 @@ const StyledSectionHeader = styled.div`
   }
 
   @media ${tablet} {
-    padding-right: 16px;
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 16px;
+            margin-left: 0px;
+          `
+        : css`
+            padding-right: 16px;
+            margin-right: 0px;
+          `}
   }
 
   ${isMobile &&
   css`
-    padding-right: 0 !important;
-    margin-right: -16px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0 !important;
+            margin-left: -16px !important;
+          `
+        : css`
+            padding-right: 0 !important;
+            margin-right: -16px !important;
+          `}
   `}
 
   @media ${mobile} {
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 0px;
+          `
+        : css`
+            margin-right: 0px;
+          `}
   }
 
   ${isMobileOnly &&
   css`
     width: 100vw !important;
     max-width: 100vw !important;
-
-    padding-right: 16px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 16px !important;
+          `
+        : css`
+            padding-right: 16px !important;
+          `}
 
     margin-bottom: ${(props) =>
       props.settingsStudio ? "8px !important" : "0"};
@@ -102,11 +223,9 @@ const SectionHeader = (props) => {
     settingsStudio = false,
     className,
     isEmptyPage,
+    isTrashFolder,
     ...rest
   } = props;
-
-  const pathname = window.location.pathname.toLowerCase();
-  const isTrashFolder = pathname.indexOf("trash") !== -1;
 
   return (
     <StyledSectionHeader

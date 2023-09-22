@@ -58,6 +58,7 @@ const Footer = React.memo(
       <StyledFooter
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
+        className="selector_footer"
       >
         {withFooterInput && (
           <StyledNewNameContainer>
@@ -84,6 +85,15 @@ const Footer = React.memo(
           </StyledNewNameContainer>
         )}
 
+        {withFooterCheckbox && (
+          <Checkbox
+            label={footerCheckboxLabel}
+            isChecked={isFooterCheckboxChecked}
+            onChange={onChangeCheckbox}
+            className="selector_footer-checkbox"
+          />
+        )}
+
         <StyledButtonContainer>
           <Button
             id={acceptButtonId}
@@ -107,6 +117,7 @@ const Footer = React.memo(
               showDisabledItems
               directionX={"right"}
               directionY={"top"}
+              forceCloseClickOutside={true}
             />
           )}
 

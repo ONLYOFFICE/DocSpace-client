@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Text from "@docspace/components/text";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
@@ -15,14 +15,25 @@ import Link from "@docspace/components/link";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   margin: auto 0;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   path {
     fill: ${(props) => props.theme.alertComponent.iconColor};
   }
 `;
 const StyledCrossIcon = styled(CrossReactSvg)`
   position: absolute;
-  right: 0px;
-  margin-right: 8px;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? css`
+          left: 0px;
+          margin-left: 8px;
+        `
+      : css`
+          right: 0px;
+          margin-right: 8px;
+        `}
   margin-top: 8px;
   cursor: pointer;
 
@@ -42,6 +53,7 @@ const AlertComponent = (props) => {
     needArrowIcon = false,
     needCloseIcon = false,
     link,
+    onLinkClick,
     linkColor,
     linkTitle,
     onAlertClick,
@@ -59,7 +71,7 @@ const AlertComponent = (props) => {
       needArrowIcon={needArrowIcon}
       id={id}
     >
-      <div>
+      <div className="main-content">
         <Text
           className="alert-component_title"
           fontSize={titleFontSize ?? "12px"}
@@ -77,8 +89,14 @@ const AlertComponent = (props) => {
         >
           {description}
         </Text>
-        {link && (
-          <Link type="page" href={link} noHover color={linkColor}>
+        {(link || onLinkClick) && (
+          <Link
+            type="page"
+            href={link}
+            onClick={onLinkClick}
+            noHover
+            color={linkColor}
+          >
             {linkTitle}
           </Link>
         )}

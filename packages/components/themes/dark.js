@@ -47,6 +47,8 @@ const {
   strongBlue,
   lightGrayishStrongBlue,
   darkRed,
+
+  darkErrorStatus,
 } = globalColors;
 
 const Dark = {
@@ -1935,6 +1937,7 @@ const Dark = {
     expanderColor: "#eeeeee",
     background: black,
     rootFolderTitleColor: "#858585",
+    publicIcon: "#858585",
 
     icon: {
       fill: "#E06A1B",
@@ -2008,6 +2011,11 @@ const Dark = {
     closeButtonIcon: black,
     closeButtonSize: "12px",
     closeButtonBg: "#a2a2a2",
+
+    links: {
+      iconColor: "#858585",
+      iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+    },
 
     members: {
       iconColor: "#A3A9AE",
@@ -2785,6 +2793,11 @@ const Dark = {
     container: {
       backgroundColor: "#474747",
     },
+
+    captcha: {
+      border: `1px solid ${darkErrorStatus}`,
+      color: darkErrorStatus,
+    },
   },
 
   facebookButton: {
@@ -3118,11 +3131,31 @@ const Dark = {
     dashedBorder: "1px dashed #fff",
   },
 
+  dialogs: {
+    disableText: "#858585",
+  },
+
   editLink: {
     text: {
       color: "#A3A9AE",
       errorColor: "#F21C0E",
     },
+  },
+
+  submitToGalleryTile: {
+    bodyText: "#ADADAD",
+    closeIconFill: "#a9a9a9",
+  },
+
+  infoBlock: {
+    background: "#282828",
+    headerColor: "#FFF",
+    descriptionColor: "#ADADAD",
+  },
+
+  roomIcon: {
+    backgroundArchive: "#FFFFFF",
+    opacityBackground: "0.1",
   },
 };
 

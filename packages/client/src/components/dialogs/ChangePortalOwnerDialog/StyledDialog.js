@@ -10,7 +10,10 @@ const StyledOwnerInfo = styled.div`
   margin-bottom: 24px;
 
   .info {
-    padding-left: 16px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 16px;`
+        : `padding-left: 16px;`}
     display: flex;
     flex-direction: column;
 
@@ -20,11 +23,11 @@ const StyledOwnerInfo = styled.div`
       line-height: 22px;
     }
 
-    .owner {
+    .status {
       font-weight: 600;
       font-size: 13px;
       line-height: 20px;
-      color: ${(props) => props.theme.text.disableColor};
+      color: ${(props) => props.theme.dialogs.disableText};
     }
   }
 `;
@@ -46,7 +49,7 @@ const StyledPeopleSelectorInfo = styled.div`
     font-size: 13px;
     line-height: 20px;
 
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.dialogs.disableText};
   }
 `;
 
@@ -63,9 +66,12 @@ const StyledPeopleSelector = styled.div`
     font-size: 13px;
     line-height: 20px;
 
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.dialogs.disableText};
 
-    margin-left: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 8px;`
+        : `margin-left: 8px;`}
   }
 `;
 
@@ -142,6 +148,46 @@ const StyledSelectedOwnerContainer = styled.div`
 
 StyledSelectedOwnerContainer.defaultProps = { theme: Base };
 
+const StyledSelectedOwner = styled.div`
+  width: fit-content;
+  height: 28px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 15px;
+  gap: 8px;
+
+  box-sizing: border-box;
+
+  background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+
+  border-radius: 16px;
+
+  .text {
+    color: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .cross-icon {
+    display: flex;
+    align-items: center;
+
+    svg {
+      cursor: pointer;
+
+      path {
+        fill: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+      }
+    }
+  }
+`;
+
+StyledSelectedOwner.defaultProps = { theme: Base };
+
 export {
   StyledOwnerInfo,
   StyledPeopleSelectorInfo,
@@ -149,4 +195,5 @@ export {
   StyledAvailableList,
   StyledFooterWrapper,
   StyledSelectedOwnerContainer,
+  StyledSelectedOwner,
 };

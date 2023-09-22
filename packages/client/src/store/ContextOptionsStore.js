@@ -21,6 +21,7 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
@@ -32,13 +33,15 @@ import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.s
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
+import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
 import { isMobile } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import {
   isMobile as isMobileUtils,
@@ -160,8 +163,10 @@ class ContextOptionsStore {
   };
 
   onClickMakeForm = (item, t) => {
-    const { setConvertPasswordDialogVisible, setFormCreationInfo } =
-      this.dialogsStore;
+    const {
+      setConvertPasswordDialogVisible,
+      setFormCreationInfo,
+    } = this.dialogsStore;
     const { title, id, folderId, fileExst } = item;
 
     const newTitle =
@@ -196,6 +201,17 @@ class ContextOptionsStore {
     });
   };
 
+  onClickSubmitToFormGallery = (item) => {
+    if (item && !item.exst) {
+      const splitTitle = item.title.split(".");
+      item.title = splitTitle.slice(0, -1).join(".");
+      item.exst = splitTitle.length !== 1 ? `.${splitTitle.at(-1)}` : null;
+    }
+
+    this.dialogsStore.setFormItem(item);
+    this.dialogsStore.setSubmitToGalleryDialogVisible(true);
+  };
+
   onOpenLocation = (item) => {
     this.filesActionsStore.openLocationAction(item);
   };
@@ -213,8 +229,10 @@ class ContextOptionsStore {
   };
 
   showVersionHistory = (id, security) => {
-    const { fetchFileVersions, setIsVerHistoryPanel } =
-      this.versionHistoryStore;
+    const {
+      fetchFileVersions,
+      setIsVerHistoryPanel,
+    } = this.versionHistoryStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
@@ -244,8 +262,9 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
-      this.authStore.infoPanelStore;
+    const {
+      setSelection: setInfoPanelSelection,
+    } = this.authStore.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -336,7 +355,9 @@ class ContextOptionsStore {
       : null;
 
     let tab =
-      !isDesktopClient && fileExst
+      !isDesktopClient &&
+      window.DocSpaceConfig?.editor?.openOnNewPage &&
+      fileExst
         ? window.open(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
@@ -418,13 +439,19 @@ class ContextOptionsStore {
   };
 
   onClickDeleteSelectedFolder = (t, isRoom) => {
-    const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
-      this.dialogsStore;
+    const {
+      setIsFolderActions,
+      setDeleteDialogVisible,
+      setIsRoomDelete,
+    } = this.dialogsStore;
     const { confirmDelete } = this.settingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId } = this.selectedFolderStore;
-    const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
-      this.filesStore;
+    const {
+      isThirdPartySelection,
+      getFolderInfo,
+      setBufferSelection,
+    } = this.filesStore;
 
     setIsFolderActions(true);
 
@@ -466,8 +493,10 @@ class ContextOptionsStore {
   onClickDelete = (item, t) => {
     const { id, title, providerKey, rootFolderId, isFolder, isRoom } = item;
 
-    const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
-      this.dialogsStore;
+    const {
+      setRemoveItem,
+      setDeleteThirdPartyDialogVisible,
+    } = this.dialogsStore;
 
     if (id === this.selectedFolderStore.id) {
       this.onClickDeleteSelectedFolder(t, isRoom);
@@ -620,7 +649,7 @@ class ContextOptionsStore {
     return promise;
   };
 
-  onClickInviteUsers = (e) => {
+  onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
 
     const { action } = data;
@@ -635,7 +664,10 @@ class ContextOptionsStore {
         visible: true,
         roomId: action ? action : e,
         hideSelector: false,
-        defaultAccess: ShareAccessRights.ReadOnly,
+        defaultAccess:
+          roomType === RoomsType.PublicRoom
+            ? ShareAccessRights.RoomManager
+            : ShareAccessRights.ReadOnly,
       });
     }
   };
@@ -667,6 +699,10 @@ class ContextOptionsStore {
     } else {
       setRestoreRoomDialogVisible(true);
     }
+  };
+
+  onLeaveRoom = () => {
+    this.dialogsStore.setLeaveRoomDialogVisible(true);
   };
 
   onSelect = (item) => {
@@ -762,7 +798,7 @@ class ContextOptionsStore {
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: false,
+        disabled: !item.inRoom,
         "data-action": "unmute",
         action: "unmute",
       },
@@ -772,7 +808,7 @@ class ContextOptionsStore {
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: false,
+        disabled: !item.inRoom,
         "data-action": "mute",
         action: "mute",
       },
@@ -1015,6 +1051,19 @@ class ContextOptionsStore {
       },
       separator0,
       {
+        id: "option_submit-to-gallery",
+        key: "submit-to-gallery",
+        label: t("Common:SubmitToFormGallery"),
+        icon: FormFileReactSvgUrl,
+        onClick: () => this.onClickSubmitToFormGallery(item),
+        isOutsideLink: true,
+        disabled: !item.security.SubmitToFormGallery,
+      },
+      {
+        key: "separator-SubmitToGallery",
+        isSeparator: true,
+      },
+      {
         id: "option_reconnect-storage",
         key: "reconnect-storage",
         label: t("Common:ReconnectStorage"),
@@ -1035,7 +1084,7 @@ class ContextOptionsStore {
         key: "invite-users-to-room",
         label: t("Common:InviteUsers"),
         icon: PersonReactSvgUrl,
-        onClick: (e) => this.onClickInviteUsers(e),
+        onClick: (e) => this.onClickInviteUsers(e, item.roomType),
         disabled: false,
         action: item.id,
       },
@@ -1187,7 +1236,7 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        key: "separator2",
+        key: "separator3",
         isSeparator: true,
       },
       {
@@ -1215,6 +1264,14 @@ class ContextOptionsStore {
         disabled: false,
         "data-action": "archive",
         action: "archive",
+      },
+      {
+        id: "option_leave-room",
+        key: "leave-room",
+        label: t("LeaveTheRoom"),
+        icon: LeaveRoomSvgUrl,
+        onClick: this.onLeaveRoom,
+        disabled: this.treeFoldersStore.isArchiveFolder || !item.inRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1281,8 +1338,11 @@ class ContextOptionsStore {
     const { personal } = this.authStore.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+    } = this.treeFoldersStore;
 
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 

@@ -824,7 +824,7 @@ class FilesActionStore {
       return removeFiles(items, [], false, true)
         .then(async (res) => {
           if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res ? res : null;
+          const data = res[0] ? res[0] : null;
           await this.uploadDataStore.loopFilesOperations(data, pbData);
           this.updateCurrentFolder(null, [itemId], null, operationId);
         })
@@ -1369,7 +1369,10 @@ class FilesActionStore {
     newFilter.search = item.title;
     newFilter.folder = ExtraLocation;
 
-    setIsLoading(true);
+    setIsLoading(
+      window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
+        url !== window.DocSpace.location.pathname
+    );
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -1486,9 +1489,9 @@ class FilesActionStore {
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  setSelectedItems = () => {
-    const selectionLength = this.filesStore.selection.length;
-    const selectionTitle = this.filesStore.selectionTitle;
+  setSelectedItems = (title, length) => {
+    const selectionLength = length ? length : this.filesStore.selection.length;
+    const selectionTitle = title ? title : this.filesStore.selectionTitle;
 
     if (selectionLength !== undefined && selectionTitle) {
       this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(
@@ -2038,7 +2041,7 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item) => {
-    const { openDocEditor, isPrivacyFolder } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
 
     const { isLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
@@ -2081,6 +2084,8 @@ class FilesActionStore {
 
       const state = { title, isRoot: false, rootFolderType, isRoom };
 
+      setSelection([]);
+
       window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
     } else {
       if (canConvert) {
@@ -2094,7 +2099,9 @@ class FilesActionStore {
 
       if (canWebEdit || canViewedDocs) {
         let tab =
-          !this.authStore.settingsStore.isDesktopClient && !isFolder
+          !this.authStore.settingsStore.isDesktopClient &&
+          window.DocSpaceConfig?.editor?.openOnNewPage &&
+          !isFolder
             ? window.open(
                 combineUrl(
                   window.DocSpaceConfig?.proxy?.url,
@@ -2129,7 +2136,7 @@ class FilesActionStore {
   };
 
   onClickBack = () => {
-    const { roomType } = this.selectedFolderStore;
+    const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles } = this.filesStore;
 
@@ -2174,19 +2181,19 @@ class FilesActionStore {
 
       setSelectedNode(["common"]);
 
-      return navigate(path, { replace: true });
+      return window.DocSpace.navigate(path, { replace: true });
     }
 
     if (categoryType === CategoryType.Accounts) {
       const accountsFilter = AccountsFilter.getDefault();
-      params = accountsFilter.toUrlParams();
+      const params = accountsFilter.toUrlParams();
       const path = getCategoryUrl(CategoryType.Accounts);
 
       clearFiles();
 
       setSelectedNode(["accounts", "filter"]);
 
-      return navigate(`${path}?${params}`, { replace: true });
+      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
   };
 
@@ -2195,13 +2202,22 @@ class FilesActionStore {
 
     const filter = RoomsFilter.getDefault();
 
-    const path = getCategoryUrl(categoryType);
+    const correctCategoryType =
+      categoryType === CategoryType.SharedRoom
+        ? CategoryType.Shared
+        : CategoryType.ArchivedRoom === categoryType
+        ? CategoryType.Archive
+        : categoryType;
+
+    const path = getCategoryUrl(correctCategoryType);
 
     const state = {
       title:
-        this.selectedFolderStore?.navigationPath[
-          this.selectedFolderStore?.navigationPath.length - 1
-        ]?.title || "",
+        (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath[
+            this.selectedFolderStore?.navigationPath?.length - 1
+          ]?.title) ||
+        "",
       isRoot: true,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
@@ -2248,7 +2264,7 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    let id = this.selectedFolderStore.parentId;
+    const id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
@@ -2256,16 +2272,19 @@ class FilesActionStore {
 
     filter.folder = id;
 
+    const categoryType = getCategoryType(window.DocSpace.location);
+    const path = getCategoryUrl(categoryType, id);
+
     const state = {
-      title: navigationPath[0]?.title || "",
+      title: (navigationPath && navigationPath[0]?.title) || "",
       isRoot: navigationPath.length === 1,
       rootFolderType: rootFolderType,
     };
 
-    window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${filter.toUrlParams()}`,
-      { state, replace: true }
-    );
+    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
   };
 
   setGroupMenuBlocked = (blocked) => {

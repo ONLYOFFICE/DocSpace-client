@@ -19,6 +19,7 @@ import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
 import { initPluginStore } from "../../client/src/helpers/plugins";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
+import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
 import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
@@ -28,6 +29,25 @@ const themes = {
 };
 
 const isDesktopEditors = window["AscDesktopEditor"] !== undefined;
+const systemTheme = getSystemTheme();
+
+const initArticleAlertsData = () => {
+  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
+  if (savedArticleAlertsData) return JSON.parse(savedArticleAlertsData);
+
+  const articleAlertsArray = Object.values(ARTICLE_ALERTS);
+  const defaultArticleAlertsData = {
+    current: articleAlertsArray[0],
+    available: articleAlertsArray,
+  };
+
+  localStorage.setItem(
+    "articleAlertsData",
+    JSON.stringify(defaultArticleAlertsData)
+  );
+
+  return defaultArticleAlertsData;
+};
 
 class SettingsStore {
   isLoading = false;
@@ -40,14 +60,7 @@ class SettingsStore {
   currentProductId = "";
   culture = "en";
   cultures = [];
-  theme = isDesktopEditors
-    ? window.RendererProcessVariable?.theme?.type === "dark"
-      ? Dark
-      : Base
-    : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? Dark
-    : Base;
+  theme = themes[systemTheme];
   trustedDomains = [];
   trustedDomainsType = 0;
   ipRestrictionEnable = false;
@@ -75,11 +88,18 @@ class SettingsStore {
   enabledJoin = false;
   urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
   urlSupport = "https://helpdesk.onlyoffice.com/";
-  urlOforms = "https://cmsoforms.onlyoffice.com/api/oforms";
+
+  formGallery = {
+    url: "",
+    ext: ".oform",
+    uploadUrl: "",
+    uploadExt: ".docxf",
+  };
 
   logoUrl = "";
 
   isDesktopClient = isDesktopEditors;
+  isDesktopClientInit = false;
   //isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
   encryptionKeys = null;
@@ -157,9 +177,13 @@ class SettingsStore {
   legalTerms = null;
   baseDomain = "onlyoffice.io";
   documentationEmail = null;
+  articleAlertsData = initArticleAlertsData();
+  cspDomains = [];
   publicRoomKey = "";
 
-  interfaceDirection = localStorage.getItem("interfaceDirection") || "ltr";
+  numberAttempt = null;
+  blockingTime = null;
+  checkPeriod = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -265,8 +289,16 @@ class SettingsStore {
     return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacelanguage`;
   }
 
+  get welcomePageSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacetitle`;
+  }
+
   get dnsSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx#alternativeurl`;
+  }
+
+  get renamingSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacerenaming`;
   }
 
   get passwordStrengthSettingsUrl() {
@@ -281,8 +313,20 @@ class SettingsStore {
     return `${this.helpLink}/administration/docspace-settings.aspx#TrustedDomain`;
   }
 
+  get ipSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#ipsecurity`;
+  }
+
+  get bruteForceProtectionUrl() {
+    return `${this.helpLink}/administration/configuration.aspx#loginsettings`;
+  }
+
   get administratorMessageSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx#administratormessage`;
+  }
+
+  get lifetimeSettingsUrl() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#sessionlifetime`;
   }
 
   get dataBackupUrl() {
@@ -297,8 +341,12 @@ class SettingsStore {
     return `${this.helpLink}/administration/docspace-webhooks.aspx`;
   }
 
+  get dataReassignmentUrl() {
+    return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
+  }
+
   get sdkLink() {
-    return `${this.apiDocsLink}/docspace/jssdk`;
+    return `${this.apiDocsLink}/docspace/jssdk/`;
   }
 
   get apiBasicLink() {
@@ -308,6 +356,10 @@ class SettingsStore {
   get wizardCompleted() {
     return this.isLoaded && !this.wizardToken;
   }
+
+  setIsDesktopClientInit = (isDesktopClientInit) => {
+    this.isDesktopClientInit = isDesktopClientInit;
+  };
 
   get isPublicRoom() {
     return window.location.pathname === "/rooms/share";
@@ -425,6 +477,10 @@ class SettingsStore {
     }
   };
 
+  get isPortalDeactivate() {
+    return this.tenantStatus === TenantStatus.PortalDeactivate;
+  }
+
   init = async () => {
     this.setIsLoading(true);
     const requests = [];
@@ -432,11 +488,14 @@ class SettingsStore {
     requests.push(
       this.getPortalSettings(),
       this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
-      this.getBuildVersionInfo()
+      this.getWhiteLabelLogoUrls()
     );
 
     await Promise.all(requests);
+
+    if (!this.isPortalDeactivate) {
+      await this.getBuildVersionInfo();
+    }
 
     this.setIsLoading(false);
     this.setIsLoaded(true);
@@ -746,6 +805,11 @@ class SettingsStore {
       case ThemeKeys.System:
       case ThemeKeys.SystemStr:
       default:
+        theme =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? ThemeKeys.DarkStr
+            : ThemeKeys.BaseStr;
         theme = getSystemTheme();
     }
 
@@ -810,6 +874,26 @@ class SettingsStore {
     return res;
   };
 
+  setBruteForceProtectionSettings = (settings) => {
+    this.numberAttempt = settings.attemptCount;
+    this.blockingTime = settings.blockTime;
+    this.checkPeriod = settings.checkPeriod;
+  };
+
+  getBruteForceProtection = async () => {
+    const res = await api.settings.getBruteForceProtection();
+
+    this.setBruteForceProtectionSettings(res);
+  };
+
+  setBruteForceProtection = async (AttemptCount, BlockTime, CheckPeriod) => {
+    return api.settings.setBruteForceProtection(
+      AttemptCount,
+      BlockTime,
+      CheckPeriod
+    );
+  };
+
   setIsBurgerLoading = (isBurgerLoading) => {
     this.isBurgerLoading = isBurgerLoading;
   };
@@ -872,9 +956,63 @@ class SettingsStore {
     return api.settings.deleteAppearanceTheme(id);
   };
 
+  updateArticleAlertsData = ({ current, available }) => {
+    this.articleAlertsData = {
+      current: current || this.articleAlertsData.current,
+      available: available || this.articleAlertsData.available,
+    };
+    localStorage.setItem(
+      "articleAlertsData",
+      JSON.stringify(this.articleAlertsData)
+    );
+  };
+
+  incrementIndexOfArticleAlertsData = () => {
+    const { current, available } = this.articleAlertsData;
+    if (!available.length) return;
+
+    let next = 0;
+    const indexOfCurrent = available.indexOf(current);
+    if (indexOfCurrent + 1 === available.length) next = available[0];
+    else next = available[indexOfCurrent + 1];
+
+    this.updateArticleAlertsData({ current: next });
+  };
+
+  removeAlertFromArticleAlertsData = (alertToRemove) => {
+    const { available } = this.articleAlertsData;
+    const filteredAvailable = available.filter(
+      (alert) => alert !== alertToRemove
+    );
+    this.updateArticleAlertsData({ available: filteredAvailable });
+  };
+
   setInterfaceDirection = (direction) => {
     this.interfaceDirection = direction;
     localStorage.setItem("interfaceDirection", direction);
+  };
+  setCSPDomains = (domains) => {
+    this.cspDomains = domains;
+  };
+
+  getCSPSettings = async () => {
+    const { domains } = await api.settings.getCSPSettings();
+
+    this.setCSPDomains(domains || []);
+
+    return domains;
+  };
+
+  setCSPSettings = async (data) => {
+    try {
+      const { domains } = await api.settings.setCSPSettings(data);
+
+      this.setCSPDomains(domains);
+
+      return domains;
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 }
 

@@ -60,7 +60,14 @@ const StyledContainer = styled.div`
   min-height: 33px;
 
   .table-container_group-menu {
-    margin: 0 0 0 -20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 -20px 0 0;
+          `
+        : css`
+            margin: 0 0 0 -20px;
+          `}
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     width: calc(100% + 40px);
@@ -68,27 +75,56 @@ const StyledContainer = styled.div`
 
     @media ${tablet} {
       height: 60px;
-      margin: 0 0 0 -16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 0 -16px 0 0;
+            `
+          : css`
+              margin: 0 0 0 -16px;
+            `}
       width: calc(100% + 32px);
     }
 
     ${isMobile &&
     css`
       height: 60px;
-      margin: 0 0 0 -16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 0 -16px 0 0;
+            `
+          : css`
+              margin: 0 0 0 -16px;
+            `}
       width: calc(100% + 32px);
     `}
 
     @media ${mobile} {
       height: 52px;
-      margin: 0 0 0 -16px;
+
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 0 -16px 0 0;
+            `
+          : css`
+              margin: 0 0 0 -16px;
+            `}
       width: calc(100% + 32px);
     }
 
     ${isMobileOnly &&
     css`
       height: 52px;
-      margin: 0 0 0 -16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 0 -16px 0 0;
+            `
+          : css`
+              margin: 0 0 0 -16px;
+            `}
       width: calc(100% + 32px);
     `}
   }
@@ -709,7 +745,8 @@ const SectionHeaderContent = (props) => {
         key: "invite-users-to-room",
         label: t("Common:InviteUsers"),
         icon: PersonReactSvgUrl,
-        onClick: () => onClickInviteUsers(selectedFolder.id),
+        onClick: () =>
+          onClickInviteUsers(selectedFolder.id, selectedFolder.roomType),
         disabled: !isRoom || !security?.EditAccess,
       },
       {
@@ -938,7 +975,7 @@ const SectionHeaderContent = (props) => {
   const isRoot =
     isLoading && stateIsRoot
       ? stateIsRoot
-      : isRootFolder || isAccountsPage || isSettingsPage || isPublicRoom;
+      : isRootFolder || isAccountsPage || isSettingsPage;
 
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
@@ -1076,8 +1113,12 @@ export default inject(
       categoryType,
     } = filesStore;
 
-    const { setIsSectionFilterLoading, showHeaderLoader, isLoading } =
-      clientLoadingStore;
+    const {
+      setIsSectionFilterLoading,
+      showHeaderLoader,
+
+      isLoading,
+    } = clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -1126,7 +1167,8 @@ export default inject(
 
     const selectedFolder = { ...selectedFolderStore };
 
-    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } = auth.settingsStore;
+    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } =
+      auth.settingsStore;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;

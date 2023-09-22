@@ -10,7 +10,8 @@ const StyledTrashWarning = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `right` : `left`};
 
   font-weight: 400;
   font-size: 12px;
@@ -19,21 +20,6 @@ const StyledTrashWarning = styled.div`
   color: ${({ theme }) => theme.section.header.trashErasureLabelText};
   background: ${({ theme }) =>
     theme.section.header.trashErasureLabelBackground};
-
-  ${({ isTabletView }) =>
-    !isTabletView
-      ? css`
-          @media ${tablet} {
-            display: none;
-          }
-        `
-      : css`
-          margin-bottom: 16px;
-          display: none;
-          @media ${tablet} {
-            display: flex;
-          }
-        `}
 `;
 
 const TrashWarning = ({ title, isTabletView }) => {

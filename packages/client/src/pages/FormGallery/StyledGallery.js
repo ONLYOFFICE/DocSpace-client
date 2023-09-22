@@ -3,6 +3,7 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import { Base } from "@docspace/components/themes";
+import { Button } from "@docspace/components";
 
 const StyledHeadline = styled(Headline)`
   width: 100%;
@@ -21,13 +22,16 @@ const StyledContainer = styled.div`
   display: grid;
 
   grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto" : "29px 1fr auto"};
+    props.isRootFolder ? "1fr auto auto" : "29px 1fr auto auto"};
 
   align-items: center;
 
   .arrow-button {
     width: 17px;
     min-width: 17px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   @media ${tablet} {
@@ -53,8 +57,28 @@ const StyledContainer = styled.div`
   `}
 `;
 
-const StyledInfoPanelToggleWrapper = styled.div`
+const StyledSubmitToGalleryButton = styled(Button)`
   margin-left: auto;
+  ${(props) =>
+    props.theme.interfaceDirection === "ltr"
+      ? css`
+          margin-right: 12px;
+        `
+      : css`
+          margin-left: 12px;
+        `}
+`;
+StyledSubmitToGalleryButton.defaultProps = { theme: Base };
+
+const StyledInfoPanelToggleWrapper = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
 
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
   align-items: center;
@@ -78,6 +102,11 @@ const StyledInfoPanelToggleWrapper = styled.div`
         ? props.theme.infoPanel.sectionHeaderToggleBgActive
         : props.theme.infoPanel.sectionHeaderToggleBg};
 
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
+
     path {
       fill: ${(props) =>
         props.isInfoPanelVisible
@@ -88,4 +117,9 @@ const StyledInfoPanelToggleWrapper = styled.div`
 `;
 StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
-export { StyledHeadline, StyledContainer, StyledInfoPanelToggleWrapper };
+export {
+  StyledHeadline,
+  StyledContainer,
+  StyledSubmitToGalleryButton,
+  StyledInfoPanelToggleWrapper,
+};

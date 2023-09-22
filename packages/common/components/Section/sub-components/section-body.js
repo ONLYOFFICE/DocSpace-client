@@ -13,47 +13,114 @@ import {
   desktop,
   smallTablet,
   mobile,
+  hugeMobile,
 } from "@docspace/components/utils/device";
 
 const settingsStudioStyles = css`
   ${({ settingsStudio }) =>
-    settingsStudio
-      ? css`
-          padding: 0 7px 16px 20px;
+    settingsStudio &&
+    css`
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 0 20px 16px 7px;
+            `
+          : css`
+              padding: 0 7px 16px 20px;
+            `}
 
-          @media ${tablet} {
-            padding: 0 0 16px 24px;
-          }
+      @media ${tablet} {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 0 24px 16px 0;
+              `
+            : css`
+                padding: 0 0 16px 24px;
+              `}
+      }
 
-          @media ${smallTablet} {
-            padding: 8px 0 16px 24px;
-          }
+      @media ${smallTablet} {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 8px 24px 16px 0;
+              `
+            : css`
+                padding: 8px 0 16px 24px;
+              `}
+      }
 
-          @media ${mobile} {
-            padding: 0 0 16px 24px;
-          }
-        `
-      : css`
-          @media ${tablet} {
-            padding: 19px 0 16px 24px;
-          }
-        `}
+      @media ${mobile} {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 0 24px 16px 0;
+              `
+            : css`
+                padding: 0 0 16px 24px;
+              `}
+      }
+    `}
 `;
 
 const paddingStyles = css`
-  padding: 19px 3px 16px 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 19px 20px 16px 3px;
+        `
+      : css`
+          padding: 19px 3px 16px 20px;
+        `}
   outline: none;
 
   ${settingsStudioStyles};
 
+  @media ${tablet} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 19px 24px 16px 0;
+          `
+        : css`
+            padding: 19px 0 16px 24px;
+          `}
+  }
+
   ${isMobile &&
   css`
-    padding: 0 0 16px 23px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0 23px 16px 0 !important;
+          `
+        : css`
+            padding: 0 0 16px 23px !important;
+          `}
   `};
+
+  @media ${hugeMobile} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0px 24px 16px 0;
+          `
+        : css`
+            padding: 0px 0 16px 24px;
+          `}
+  }
 
   ${isMobileOnly &&
   css`
-    padding: 0px 0 16px 24px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0px 24px 16px 0 !important;
+          `
+        : css`
+            padding: 0px 0 16px 24px !important;
+          `}
   `};
 `;
 
@@ -87,7 +154,14 @@ const commonStyles = css`
     ${(props) =>
       props.viewAs == "tile" &&
       css`
-        padding-left: 20px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding-right: 20px;
+              `
+            : css`
+                padding-left: 20px;
+              `}
       `}
 
     ${(props) =>
@@ -139,16 +213,37 @@ const StyledSectionBody = styled.div`
   ${(props) =>
     props.withScroll &&
     css`
-      margin-left: -20px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -20px;
+            `
+          : css`
+              margin-left: -20px;
+            `}
 
       @media ${tablet} {
-        margin-left: -24px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+              `
+            : css`
+                margin-left: -24px;
+              `}
       }
     `}
 
   ${isMobile &&
   css`
-    margin-left: -24px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -24px;
+          `
+        : css`
+            margin-left: -24px;
+          `}
   `}
 
     .additional-scroll-height {
@@ -173,15 +268,36 @@ const StyledDropZoneBody = styled(DragAndDrop)`
   ${(props) =>
     props.withScroll &&
     css`
-      margin-left: -20px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -20px;
+            `
+          : css`
+              margin-left: -20px;
+            `}
 
       @media ${tablet} {
-        margin-left: -24px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+              `
+            : css`
+                margin-left: -24px;
+              `}
       }
 
       ${isMobile &&
       css`
-        margin-left: -24px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+              `
+            : css`
+                margin-left: -24px;
+              `}
       `}
     `}
 `;

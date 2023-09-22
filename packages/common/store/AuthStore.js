@@ -15,6 +15,7 @@ import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
 import { getPortalTenantExtra } from "../api/portal";
+import { combineUrl } from "@docspace/common/utils";
 
 class AuthStore {
   userStore = null;
@@ -93,31 +94,35 @@ class AuthStore {
 
     const requests = [];
 
+    const isPortalDeactivated = this.settingsStore.isPortalDeactivate;
+
+    const isPortalRestore =
+      this.settingsStore.tenantStatus === TenantStatus.PortalRestore;
+
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
       !this.settingsStore.isPublicRoom
     ) {
-      requests.push(
-        this.userStore.init().then(() => {
-          if (
-            this.isQuotaAvailable &&
-            this.settingsStore.tenantStatus !== TenantStatus.PortalRestore
-          ) {
-            this.getTenantExtra();
-          }
-        })
-      );
+      !isPortalDeactivated &&
+        requests.push(
+          this.userStore.init().then(() => {
+            if (this.isQuotaAvailable && !isPortalRestore) {
+              this.getTenantExtra();
+            }
+          })
+        );
     } else {
       this.userStore.setIsLoaded(true);
     }
 
     if (this.isAuthenticated && !skipRequest) {
-      this.settingsStore.tenantStatus !== TenantStatus.PortalRestore &&
+      !isPortalRestore &&
+        !isPortalDeactivated &&
         requests.push(this.settingsStore.getAdditionalResources());
 
       if (!this.settingsStore.passwordSettings) {
-        if (this.settingsStore.tenantStatus !== TenantStatus.PortalRestore) {
+        if (!isPortalRestore && !isPortalDeactivated) {
           requests.push(
             this.settingsStore.getPortalPasswordSettings(),
             this.settingsStore.getCompanyInfoSettings()
@@ -245,6 +250,12 @@ class AuthStore {
     );
   }
 
+  get isSubmitToGalleryAlertAvailable() {
+    const { user } = this.userStore;
+    if (!user) return false;
+    return !user.isVisitor;
+  }
+
   get isLiveChatAvailable() {
     const { user } = this.userStore;
 
@@ -320,16 +331,17 @@ class AuthStore {
   };
 
   logout = async () => {
-    await api.user.logout();
+    const ssoLogoutUrl = await api.user.logout();
 
     this.isLogout = true;
-    //console.log("Logout response ", response);
 
     setWithCredentialsStatus(false);
 
     const { isDesktopClient: isDesktop, personal } = this.settingsStore;
 
     isDesktop && logoutDesktop();
+
+    if (ssoLogoutUrl) return ssoLogoutUrl;
 
     this.reset(true);
     this.userStore.setUser(null);
@@ -435,13 +447,16 @@ class AuthStore {
     const params = `?${filter.toUrlParams()}${fields}`;
 
     const promise = new Promise(async (resolve, reject) => {
-      let oforms = await api.settings.getOforms(
-        `${this.settingsStore.urlOforms}${params}&locale=${culture}`
+      let oforms = await api.oforms.getOforms(
+        combineUrl(
+          this.settingsStore.formGallery.url,
+          `${params}&locale=${culture}`
+        )
       );
 
       if (!oforms?.data?.data.length) {
-        oforms = await api.settings.getOforms(
-          `${this.settingsStore.urlOforms}${params}&locale=en`
+        oforms = await api.oforms.getOforms(
+          combineUrl(this.settingsStore.formGallery.url, `${params}&locale=en`)
         );
       }
 

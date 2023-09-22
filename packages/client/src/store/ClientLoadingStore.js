@@ -4,8 +4,6 @@ const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
 
 class ClientLoadingStore {
-  publicRoomStore;
-
   isLoaded = false;
   firstLoad = true;
 
@@ -33,10 +31,8 @@ class ClientLoadingStore {
     body: null,
   };
 
-  constructor(publicRoomStore) {
+  constructor() {
     makeAutoObservable(this);
-
-    this.publicRoomStore = publicRoomStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -70,7 +66,7 @@ class ClientLoadingStore {
         return;
       }
       this.startLoadingTime.header = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionHeaderTimer = setTimeout(() => {
           this.updateIsSectionHeaderLoading(isSectionHeaderLoading);
         }, SHOW_LOADER_TIMER));
@@ -111,7 +107,7 @@ class ClientLoadingStore {
         return;
       }
       this.startLoadingTime.filter = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionFilterTimer = setTimeout(() => {
           this.updateIsSectionFilterLoading(isSectionFilterLoading);
         }, SHOW_LOADER_TIMER));
@@ -157,7 +153,7 @@ class ClientLoadingStore {
         return;
       }
       this.startLoadingTime.body = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionBodyTimer = setTimeout(() => {
           this.updateIsSectionBodyLoading(isSectionBodyLoading);
         }, SHOW_LOADER_TIMER));
@@ -217,7 +213,7 @@ class ClientLoadingStore {
 
   get isLoading() {
     return (
-      (this.isArticleLoading && !this.publicRoomStore.isPublicRoom) ||
+      this.isArticleLoading ||
       this.pendingSectionLoaders.header ||
       this.pendingSectionLoaders.filter ||
       this.pendingSectionLoaders.body
@@ -225,7 +221,6 @@ class ClientLoadingStore {
   }
 
   get showArticleLoader() {
-    if (this.publicRoomStore.isPublicRoom) return false;
     return this.isArticleLoading;
   }
 

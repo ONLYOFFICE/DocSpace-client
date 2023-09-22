@@ -136,7 +136,14 @@ const StyledSimpleFilesRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    margin-right: 7px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 7px;
+          `
+        : css`
+            margin-right: 7px;
+          `}
   }
 
   .row_content {
@@ -151,11 +158,25 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badge {
-    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
   }
 
   .badge:last-child {
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 0px;
+          `
+        : css`
+            margin-right: 0px;
+          `}
   }
 
   .lock-file {
@@ -200,7 +221,16 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badge {
-    margin-right: ${(props) => (props.isSmallContainer ? "8px" : "24px")};
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: ${(props) =>
+              props.isSmallContainer ? "8px" : "24px"};
+          `
+        : css`
+            margin-right: ${(props) =>
+              props.isSmallContainer ? "8px" : "24px"};
+          `}
   }
 
   .lock-file {
@@ -210,14 +240,28 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .expandButton {
-    margin-left: ${(props) => (!props.folderCategory ? "6px" : "0")};
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: ${(props) => (!props.folderCategory ? "6px" : "0")};
+          `
+        : css`
+            margin-left: ${(props) => (!props.folderCategory ? "6px" : "0")};
+          `}
     padding-top: 0px;
   }
   .expandButton > div:first-child {
     ${(props) =>
       props.folderCategory &&
       css`
-        padding-left: 0 !important;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding-right: 0 !important;
+              `
+            : css`
+                padding-left: 0 !important;
+              `}
       `}
   }
 `;
@@ -267,7 +311,10 @@ const SimpleFilesRow = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
-      defaultRoomIcon={item.defaultRoomIcon}
+      title={item.title}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
     />
   );
 

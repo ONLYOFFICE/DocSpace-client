@@ -92,6 +92,7 @@ public class DbTenantService : ITenantService
         await using var tenantDbContext = _dbContextFactory.CreateDbContext();
         await using var userDbContext = _userDbContextFactory.CreateDbContext();//TODO: remove
         IQueryable<TenantUserSecurity> query() => tenantDbContext.Tenants
+                
                 .Where(r => r.Status == TenantStatus.Active)
                 .Join(userDbContext.Users, r => r.Id, r => r.TenantId, (tenant, user) => new
                 {
@@ -219,6 +220,7 @@ public class DbTenantService : ITenantService
     public async Task<Tenant> SaveTenantAsync(CoreSettings coreSettings, Tenant tenant)
     {
         ArgumentNullException.ThrowIfNull(tenant);
+            DbTenant dbTenant = null;
 
         await using var tenantDbContext = _dbContextFactory.CreateDbContext();
 
@@ -242,15 +244,18 @@ public class DbTenantService : ITenantService
 
             tenant.LastModified = DateTime.UtcNow;
 
-            var dbTenant = _mapper.Map<Tenant, DbTenant>(tenant);
+                dbTenant = _mapper.Map<Tenant, DbTenant>(tenant);
             dbTenant.Id = 0;
-            dbTenant = (await tenantDbContext.Tenants.AddAsync(dbTenant)).Entity;
+
+                var entity = await tenantDbContext.Tenants.AddAsync(dbTenant);
+                dbTenant = entity.Entity;
+
             await tenantDbContext.SaveChangesAsync();
             tenant.Id = dbTenant.Id;
         }
         else
         {
-            var dbTenant = await Queries.TenantAsync(tenantDbContext, tenant.Id);
+            dbTenant = await Queries.TenantAsync(tenantDbContext, tenant.Id);
 
             if (dbTenant != null)
             {
@@ -273,6 +278,7 @@ public class DbTenantService : ITenantService
                 dbTenant.Calls = tenant.Calls;
                 dbTenant.OwnerId = tenant.OwnerId;
 
+                tenantDbContext.Update(dbTenant);
                 await tenantDbContext.SaveChangesAsync();
             }
         }
@@ -300,6 +306,7 @@ public class DbTenantService : ITenantService
             tenant.StatusChanged = DateTime.UtcNow;
             tenant.LastModified = DateTime.UtcNow;
 
+            tenantDbContext.Update(tenant);
             await tenantDbContext.SaveChangesAsync();
         }
     }
@@ -457,6 +464,7 @@ static file class Queries
         EF.CompileAsyncQuery(
             (TenantDbContext ctx) =>
                 ctx.TenantVersion
+                    
                     .Where(r => r.DefaultVersion == 1 || r.Id == 0)
                     .OrderByDescending(r => r.Id)
                     .Select(r => r.Id)

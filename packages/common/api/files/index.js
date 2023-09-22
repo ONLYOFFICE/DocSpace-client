@@ -538,8 +538,9 @@ export function removeShareFiles(fileIds, folderIds) {
   });
 }
 
-export function setFileOwner(folderIds, fileIds, userId) {
-  const data = { folderIds, fileIds, userId };
+export function setFileOwner(userId, folderIds) {
+  const data = { userId, folderIds };
+
   return request({
     method: "post",
     url: "/files/owner",
@@ -564,6 +565,10 @@ export function startUploadSession(
 }
 
 export function uploadFile(url, data) {
+  return axios.post(url, data);
+}
+
+export function uploadBackup(url, data) {
   return axios.post(url, data);
 }
 

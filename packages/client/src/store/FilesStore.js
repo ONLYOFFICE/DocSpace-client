@@ -108,7 +108,7 @@ class FilesStore {
   mainButtonMobileVisible = true;
   filesIsLoading = false;
 
-  isEmptyPage = false;
+  isEmptyPage = true;
   isLoadedFetchFiles = false;
 
   tempActionFilesIds = [];
@@ -135,6 +135,8 @@ class FilesStore {
     interval: 500,
     start: true,
   });
+
+  hotkeysClipboard = [];
 
   constructor(
     authStore,
@@ -165,6 +167,21 @@ class FilesStore {
     const { socketHelper } = authStore.settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      if (opt && opt.data) {
+        const data = JSON.parse(opt.data);
+
+        const pathParts = data.folderId
+          ? `DIR-${data.folderId}`
+          : `DIR-${data.parentId}`;
+
+        if (
+          !socketSubscribersId.has(pathParts) &&
+          !socketSubscribersId.has(`DIR-${data.id}`)
+        )
+          return;
+      }
+
       console.log("[WS] s:modify-folder", opt);
 
       if (!(this.clientLoadingStore.isLoading || this.operationAction))
@@ -200,6 +217,11 @@ class FilesStore {
     });
 
     socketHelper.on("refresh-folder", (id) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      const pathParts = `DIR-${id}`;
+
+      if (!socketSubscribersId.has(pathParts)) return;
+
       if (!id || this.clientLoadingStore.isLoading) return;
 
       //console.log(
@@ -216,6 +238,11 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      const pathParts = `DIR-${folderId}`;
+
+      if (!socketSubscribersId.has(pathParts)) return;
+
       console.log(`[WS] markasnew-folder ${folderId}:${count}`);
 
       const foundIndex =
@@ -229,6 +256,11 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-file", ({ fileId, count }) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      const pathParts = `FILE-${fileId}`;
+
+      if (!socketSubscribersId.has(pathParts)) return;
+
       console.log(`[WS] markasnew-file ${fileId}:${count}`);
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
@@ -246,6 +278,11 @@ class FilesStore {
 
     //WAIT FOR RESPONSES OF EDITING FILE
     socketHelper.on("s:start-edit-file", (id) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      const pathParts = `FILE-${id}`;
+
+      if (!socketSubscribersId.has(pathParts)) return;
+
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
 
@@ -264,6 +301,11 @@ class FilesStore {
     });
 
     socketHelper.on("s:stop-edit-file", (id) => {
+      const { socketSubscribersId } = this.selectedFolderStore;
+      const pathParts = `FILE-${id}`;
+
+      if (!socketSubscribersId.has(pathParts)) return;
+
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
 
@@ -432,7 +474,7 @@ class FilesStore {
 
       api.files
         .getFolderInfo(folder.id)
-        .then(() => this.setFolder(folderInfo))
+        .then(this.setFolder)
         .catch(() => {
           // console.log("Folder deleted")
         });
@@ -457,6 +499,10 @@ class FilesStore {
             this.bufferSelection[foundIndex] = folder;
           });
         }
+      }
+
+      if (folder.id === this.selectedFolderStore.id) {
+        this.selectedFolderStore.setSelectedFolder({ ...folder });
       }
     }
   };
@@ -811,9 +857,14 @@ class FilesStore {
 
   setFiles = (files) => {
     const { socketHelper } = this.authStore.settingsStore;
+    const { addSocketSubscribersId, deleteSocketSubscribersId } =
+      this.selectedFolderStore;
     if (files.length === 0 && this.files.length === 0) return;
 
     if (this.files?.length > 0) {
+      this.files.forEach((f) => {
+        deleteSocketSubscribersId(`FILE-${f.id}`);
+      });
       socketHelper.emit({
         command: "unsubscribe",
         data: {
@@ -826,6 +877,10 @@ class FilesStore {
     this.files = files;
 
     if (this.files?.length > 0) {
+      this.files.forEach((f) => {
+        addSocketSubscribersId(`FILE-${f.id}`);
+      });
+
       socketHelper.emit({
         command: "subscribe",
         data: {
@@ -843,33 +898,38 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
+    const { addSocketSubscribersId, deleteSocketSubscribersId } =
+      this.selectedFolderStore;
     const { socketHelper } = this.authStore.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) =>
-        socketHelper.emit({
-          command: "unsubscribe",
-          data: {
-            roomParts: `DIR-${f.id}`,
-            individual: true,
-          },
-        })
-      );
+      this.folders.forEach((f) => {
+        deleteSocketSubscribersId(`DIR-${f.id}`);
+      });
+
+      socketHelper.emit({
+        command: "unsubscribe",
+        data: {
+          roomParts: this.folders.map((f) => `DIR-${f.id}`),
+          individual: true,
+        },
+      });
     }
 
     this.folders = folders;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) =>
-        socketHelper.emit({
-          command: "subscribe",
-          data: {
-            roomParts: `DIR-${f.id}`,
-            individual: true,
-          },
-        })
-      );
+      this.folders.forEach((f) => {
+        addSocketSubscribersId(`DIR-${f.id}`);
+      });
+      socketHelper.emit({
+        command: "subscribe",
+        data: {
+          roomParts: this.folders.map((f) => `DIR-${f.id}`),
+          individual: true,
+        },
+      });
     }
   };
 
@@ -1160,6 +1220,10 @@ class FilesStore {
     return api.files.setFileOwner(folderIds, fileIds, ownerId);
   };
 
+  setRoomOwner = (ownerId, folderIds) => {
+    return api.files.setFileOwner(ownerId, folderIds);
+  };
+
   setFilterUrl = (filter) => {
     const filterParamsStr = filter.toUrlParams();
 
@@ -1330,7 +1394,7 @@ class FilesStore {
               authorType ||
               roomId ||
               search ||
-              !withSubfolders ||
+              withSubfolders ||
               filterType ||
               searchInContent;
 
@@ -1766,6 +1830,8 @@ class FilesStore {
       const canViewVersionFileHistory = item.security?.ReadHistory;
       const canFillForm = item.security?.FillForms;
 
+      const canSubmitToFormGallery = item.security?.SubmitToFormGallery;
+
       const canEditFile = item.security.Edit && item.viewAccessability.WebEdit;
       const canOpenPlayer =
         item.viewAccessability.ImageView || item.viewAccessability.MediaView;
@@ -1784,6 +1850,8 @@ class FilesStore {
         "pdf-view",
         "make-form",
         "separator0",
+        "submit-to-gallery",
+        "separator-SubmitToGallery",
         "link-for-room-members",
         // "sharing-settings",
         // "external-link",
@@ -1877,6 +1945,13 @@ class FilesStore {
 
       if (!(isMasterForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
+
+      if (!canSubmitToFormGallery) {
+        fileOptions = this.removeOptions(fileOptions, [
+          "submit-to-gallery",
+          "separator-SubmitToGallery",
+        ]);
+      }
 
       if (item.rootFolderType === FolderType.Archive) {
         fileOptions = this.removeOptions(fileOptions, [
@@ -2034,6 +2109,7 @@ class FilesStore {
         "download",
         "archive-room",
         "unarchive-room",
+        "leave-room",
         "delete",
       ];
 
@@ -2454,7 +2530,11 @@ class FilesStore {
   };
 
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const newFilter = this.filter.clone();
+    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+
+    const isRooms = isRoomsFolder || isArchiveFolder;
+    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
+
     const deleteCount = (fileIds?.length ?? 0) + (folderIds?.length ?? 0);
 
     if (destFolderId && destFolderId === this.selectedFolderStore.id) return;
@@ -2467,13 +2547,22 @@ class FilesStore {
         ? this.folders.filter((x) => !folderIds.includes(x.id))
         : this.folders;
 
+      const hotkeysClipboard = fileIds
+        ? this.hotkeysClipboard.filter(
+            (f) => !fileIds.includes(f.id) && !f.isFolder
+          )
+        : this.hotkeysClipboard.filter(
+            (f) => !folderIds.includes(f.id) && f.isFolder
+          );
+
       newFilter.total -= deleteCount;
 
       runInAction(() => {
-        this.setFilter(newFilter);
+        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
+        this.setHotkeysClipboard(hotkeysClipboard);
       });
 
       return;
@@ -2736,6 +2825,8 @@ class FilesStore {
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
+    } else if (items.length === 0 && !this.isEmptyPage) {
+      this.setIsEmptyPage(true);
     }
 
     const newItem = items.map((item) => {
@@ -2785,6 +2876,7 @@ class FilesStore {
         security,
         viewAccessability,
         mute,
+        inRoom = true,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -2920,6 +3012,7 @@ class FilesStore {
         providerType,
         security,
         viewAccessability,
+        inRoom,
       };
     });
 
@@ -2927,8 +3020,12 @@ class FilesStore {
   }
 
   get cbMenuItems() {
-    const { isDocument, isPresentation, isSpreadsheet, isArchive } =
-      this.filesSettingsStore;
+    const {
+      isDocument,
+      isPresentation,
+      isSpreadsheet,
+      isArchive,
+    } = this.filesSettingsStore;
 
     let cbMenu = ["all"];
     const filesItems = [...this.files, ...this.folders];
@@ -3673,6 +3770,12 @@ class FilesStore {
     Object.assign(newFilter, filter);
 
     return await api.rooms.getRooms(newFilter);
+  };
+
+  setHotkeysClipboard = (hotkeysClipboard) => {
+    this.hotkeysClipboard = hotkeysClipboard
+      ? hotkeysClipboard
+      : this.selection;
   };
 
   get isFiltered() {

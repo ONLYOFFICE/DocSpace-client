@@ -8,7 +8,6 @@ import CategorySubList from "./CategorySubList";
 import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 import Scrollbar from "@docspace/components/scrollbar";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import ComboBox from "@docspace/components/combobox";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 
 const CategoryFilterMobile = ({

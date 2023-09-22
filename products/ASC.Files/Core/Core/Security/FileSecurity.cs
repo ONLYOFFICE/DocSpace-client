@@ -92,8 +92,14 @@ public class FileSecurity : IFileSecurity
         {
             FolderType.PublicRoom, new HashSet<FileShare>
             {
-                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Read, FileShare.None,
-        }
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.Read, FileShare.None
+            }
+        },
+        {
+            FolderType.FormRoom, new HashSet<FileShare>
+            {
+                FileShare.RoomAdmin, FileShare.Collaborator, FileShare.FillForms, FileShare.Read, FileShare.None
+            }
         }
     };
 
@@ -707,6 +713,7 @@ public class FileSecurity : IFileSecurity
             FolderType.EditingRoom => FileShare.Editing,
             FolderType.ReviewRoom => FileShare.Review,
             FolderType.ReadOnlyRoom => FileShare.Read,
+            FolderType.FormRoom => FileShare.FillForms,
             _ => FileShare.None
         };
     }

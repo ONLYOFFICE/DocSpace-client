@@ -326,6 +326,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
             FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
+            FolderType.FormRoom,
         };
 
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
@@ -1226,7 +1227,8 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
             FolderType.FillingFormsRoom,
             FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
-            FolderType.PublicRoom
+            FolderType.PublicRoom,
+            FolderType.FormRoom
         };
 
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
@@ -1308,6 +1310,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
             FolderType.EditingRoom,
             FolderType.ReadOnlyRoom,
             FolderType.PublicRoom,
+            FolderType.FormRoom
         };
 
         Expression<Func<DbFolder, bool>> filter = f => roomTypes.Contains(f.FolderType);
@@ -1519,6 +1522,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
             FilterType.ReadOnlyRooms => FolderType.ReadOnlyRoom,
             FilterType.CustomRooms => FolderType.CustomRoom,
             FilterType.PublicRooms => FolderType.PublicRoom,
+            FilterType.FormRooms => FolderType.FormRoom,
             _ => FolderType.CustomRoom,
         };
     }

@@ -13,6 +13,7 @@ $LocalIp = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Where
 $Doceditor = ($LocalIp + ":5013")
 $Login = ($LocalIp + ":5011")
 $Client = ($LocalIp + ":5001")
+$Oauth = ($LocalIp + ":9090")
 $PortalUrl = ("http://" + $LocalIp)
 $ProxyVersion="v1.0.0"
 
@@ -92,6 +93,7 @@ $Env:Baseimage_Proxy_Run="onlyoffice/4testing-docspace-proxy-runtime:$ProxyVersi
 $Env:SERVICE_DOCEDITOR=$Doceditor
 $Env:SERVICE_LOGIN=$Login
 $Env:SERVICE_CLIENT=$Client
+$Env:SERVICE_OAUTH=$Oauth
 $Env:ROOT_DIR=$RootDir
 $Env:BUILD_PATH="/var/www"
 $Env:SRC_PATH="$RootDir\publish\services"
@@ -105,6 +107,7 @@ Write-Host "LOCAL IP: $LocalIp" -ForegroundColor Blue
 Write-Host "SERVICE_DOCEDITOR: $Env:SERVICE_DOCEDITOR" -ForegroundColor Blue
 Write-Host "SERVICE_LOGIN: $Env:SERVICE_LOGIN" -ForegroundColor Blue
 Write-Host "SERVICE_CLIENT: $Env:SERVICE_CLIENT" -ForegroundColor Blue
+Write-Host "SERVICE_OAUTH: $Env:SERVICE_OAUTH" -ForegroundColor Blue
 Write-Host "INSTALLATION_TYPE: $Env:INSTALLATION_TYPE" -ForegroundColor Blue
 
 Set-Location -Path $PSScriptRoot

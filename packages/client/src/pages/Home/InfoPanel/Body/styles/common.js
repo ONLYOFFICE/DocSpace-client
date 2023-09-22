@@ -160,7 +160,6 @@ const StyledLink = styled.div`
     font-size: 13px;
     font-weight: 600;
     line-height: 15px;
-    color: #4781d1;
   }
 `;
 
@@ -279,7 +278,6 @@ const StyledProperties = styled.div`
 
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
-StyledTitle.StyledLink = { theme: Base };
 
 export {
   StyledInfoPanelBody,

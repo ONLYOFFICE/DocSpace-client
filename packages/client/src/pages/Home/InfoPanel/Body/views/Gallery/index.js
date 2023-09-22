@@ -21,7 +21,14 @@ import {
 } from "../../styles/common.js";
 import Link from "@docspace/components/link/index.js";
 
-const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
+const Gallery = ({
+  t,
+  gallerySelected,
+  getIcon,
+  culture,
+  personal,
+  currentColorScheme,
+}) => {
   const thumbnailBlank = getIcon(96, ".docxf");
   const thumbnailUrl =
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
@@ -46,6 +53,7 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
           target="_blank"
           type="action"
           isHovered
+          color={currentColorScheme.main.accent}
         >
           {t("FormGallery:SuggestChanges")}
         </Link>
@@ -99,7 +107,7 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
 };
 
 export default inject(({ auth, settingsStore, oformsStore }) => {
-  const { personal, culture } = auth.settingsStore;
+  const { personal, culture, currentColorScheme } = auth.settingsStore;
   const { gallerySelected } = oformsStore;
   const { getIcon } = settingsStore;
   return {
@@ -107,6 +115,7 @@ export default inject(({ auth, settingsStore, oformsStore }) => {
     gallerySelected,
     personal,
     culture,
+    currentColorScheme,
   };
 })(
   withTranslation(["InfoPanel", "FormGallery", "Common", "Translations"])(

@@ -16,6 +16,8 @@
   "MakeRoomPrivateTitle": "Make the Room Private",
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
   "PublicRoomDescription": "Invite users via external links to view documents without registration. You can also embed this room into any web interface.",
+  "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in In progress folder, and completed forms are stored in Complete folder.",
+  "PublicRoomSystemFoldersTitle": "System Folders",
   "ReviewRoomDescription": "Request a review or comments on the documents",
   "ReviewRoomTitle": "Review room",
   "RoomEditing": "Room editing",

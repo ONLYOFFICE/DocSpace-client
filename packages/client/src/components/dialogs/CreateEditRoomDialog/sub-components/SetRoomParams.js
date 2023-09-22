@@ -18,6 +18,8 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
+import SystemFolders from "./SystemFolders";
+import { RoomsType } from "@docspace/common/constants";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -66,6 +68,8 @@ const SetRoomParams = ({
     setRoomParams({ ...roomParams, storageLocation });
 
   const onChangeIcon = (icon) => setRoomParams({ ...roomParams, icon: icon });
+
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
   return (
     <StyledSetRoomParams>
@@ -116,6 +120,8 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+
+      {isFormRoom && <SystemFolders t={t} />}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage

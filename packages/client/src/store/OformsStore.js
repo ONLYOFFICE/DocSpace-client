@@ -107,7 +107,7 @@ class OformsStore {
     },
     {
       key: "template-info",
-      label: t("TemplateInfo"),
+      label: t("FormGallery:TemplateInfo"),
       onClick: () => {
         this.authStore.infoPanelStore.setIsVisible(true);
         this.setGallerySelected(item);

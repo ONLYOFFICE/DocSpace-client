@@ -31,12 +31,10 @@ const GalleryItemTitle = ({
   const params = useParams();
   const navigate = useNavigate();
 
-  console.log(gallerySelected);
-
   const onGetContextOptions = () =>
     getFormContextOptions(t, gallerySelected, categoryType, params, navigate);
 
-  const onContextMenu = (e) => {
+  const onClickContextMenu = (e) => {
     e.button === 2;
     if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
     contextMenuRef.current.show(e);
@@ -61,7 +59,7 @@ const GalleryItemTitle = ({
             id="info-options"
             className="expandButton"
             title={t("Translations:TitleShowActions")}
-            onClick={onContextMenu}
+            onClick={onClickContextMenu}
             getData={onGetContextOptions}
             directionX="right"
             displayType="toggle"
@@ -75,12 +73,4 @@ const GalleryItemTitle = ({
 export default inject(({ oformsStore, filesStore }) => ({
   getFormContextOptions: oformsStore.getFormContextOptions,
   categoryType: filesStore.categoryType,
-}))(
-  withTranslation([
-    "FormGallery",
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-  ])(GalleryItemTitle)
-);
+}))(withTranslation(["FormGallery", "Common"])(GalleryItemTitle));

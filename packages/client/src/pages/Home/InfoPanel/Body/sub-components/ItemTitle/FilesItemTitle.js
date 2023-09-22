@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
-import { inject, observer } from "mobx-react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/components";
 
@@ -13,7 +11,7 @@ import RoomIcon from "@docspace/client/src/components/RoomIcon";
 const FilesItemTitle = ({ t, selection, isSeveralItems }) => {
   const itemTitleRef = useRef();
 
-  if (isSeveralItems) return <></>;
+  if (isSeveralItems) return null;
 
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
@@ -54,4 +52,4 @@ export default withTranslation([
   "Translations",
   "InfoPanel",
   "SharingPanel",
-])(observer(FilesItemTitle));
+])(FilesItemTitle);

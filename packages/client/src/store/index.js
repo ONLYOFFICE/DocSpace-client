@@ -38,6 +38,10 @@ import PublicRoomStore from "./PublicRoomStore";
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore();
+
 const oformsStore = new OformsStore(authStore);
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
@@ -223,6 +227,7 @@ const store = {
   webhooksStore,
   clientLoadingStore,
   publicRoomStore,
+  oauthStore,
 };
 
 export default store;

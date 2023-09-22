@@ -1,5 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
+import {
+  addClient,
+  deleteClient,
+  getClient,
+  getClientList,
+  regenerateSecret,
+  updateClient,
+} from "@docspace/common/api/oauth";
+
 const clients = [...Array(5)].map((value, index) => {
   return {
     enabled: true,
@@ -41,8 +50,30 @@ class OAuthStore {
     makeAutoObservable(this);
   }
 
-  getClients = () => {
+  fetchClient = async (clientId) => {
+    await getClient(clientId);
+  };
+
+  fetchClients = async (page, limit) => {
     this.clients = clients;
+
+    await getClientList(0, 20);
+  };
+
+  saveClient = async (client) => {
+    await addClient(client);
+  };
+
+  updateClient = async (clientId, client) => {
+    await updateClient(clientId, client);
+  };
+
+  regenerateSecret = async (clientId) => {
+    await regenerateSecret(clientId);
+  };
+
+  deleteClient = async (clientId) => {
+    await deleteClient(clientId);
   };
 
   setCurrentClient = (client) => {
@@ -59,9 +90,9 @@ class OAuthStore {
     this.clients[index].enabled = !this.clients[index].enabled;
   };
 
-  deleteClient = (id) => {
-    this.clients = this.clients.filter((proj) => proj.id !== id);
-  };
+  // deleteClient = (id) => {
+  //   this.clients = this.clients.filter((proj) => proj.id !== id);
+  // };
 
   editClient = (client) => {
     const index = this.clients.findIndex((proj) => proj.id === client.id);

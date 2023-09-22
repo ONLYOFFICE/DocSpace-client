@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ContextMenu, ContextMenuButton } from "@docspace/components";
 
@@ -18,32 +18,9 @@ const StyledItemContextOptions = styled.div`
       : "0 0 0 auto"};
 `;
 
-const getFormContextOptions = (t) => [
-  {
-    key: "create",
-    label: t("Common:Create"),
-    onClick: () => {},
-  },
-  {
-    key: "preview",
-    label: t("Common:Preview"),
-    onClick: () => {},
-  },
-  {
-    key: "separator",
-    isSeparator: true,
-  },
-  {
-    key: "suggest-changes",
-    label: t("FormGallery:SuggestChanges"),
-    onClick: () => {},
-  },
-];
-
 const ItemContextOptions = ({
   t,
   selection,
-  isForm = false,
   getContextOptions,
   getContextOptionActions,
   getUserContextOptions,
@@ -53,49 +30,34 @@ const ItemContextOptions = ({
 
   withLabel = false,
 }) => {
-  console.log(withLabel);
   if (!selection) return null;
-
-  const [contextHelper, setContextHelper] = useState(null);
 
   const contextMenuRef = useRef();
 
+  const [contextHelper, setContextHelper] = useState(null);
+
+  const options = contextHelper?.getItemContextOptions();
+  const getData = () => options;
+
   const onContextMenu = (e) => {
     e.button === 2;
-    if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
-    contextMenuRef.current.show(e);
+    if (!contextMenuRef?.current.menuRef.current)
+      itemTitleRef?.current.click(e);
+    contextMenuRef?.current.show(e);
   };
 
   useEffect(() => {
-    contextMenuRef.current.hide();
-  }, [selection]);
-
-  useEffect(() => {
+    contextMenuRef?.current.hide();
     const contextHelper = new ContextHelper({
       t,
-      isUser,
       selection,
+      isUser,
       getContextOptions,
       getContextOptionActions,
       getUserContextOptions,
     });
-
     setContextHelper(contextHelper);
-  }, [
-    t,
-    isUser,
-    selection,
-    getContextOptions,
-    getContextOptionActions,
-    getUserContextOptions,
-  ]);
-
-  const options = contextHelper?.getItemContextOptions();
-
-  const getData = () => {
-    if (isForm) return getFormContextOptions(t);
-    return options;
-  };
+  }, [selection]);
 
   return (
     <StyledItemContextOptions withLabel={withLabel}>
@@ -125,15 +87,18 @@ const ItemContextOptions = ({
 
 export default inject(({ filesStore, peopleStore, contextOptionsStore }) => {
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const { setBufferSelection, getFilesContextOptions: getContextOptions } =
-    filesStore;
+  const {
+    categoryType,
+    setBufferSelection,
+    getFilesContextOptions: getContextOptions,
+  } = filesStore;
   const { getFilesContextOptions: getContextOptionActions } =
     contextOptionsStore;
-
   return {
     setBufferSelection,
     getContextOptions,
     getContextOptionActions,
     getUserContextOptions,
+    categoryType,
   };
 })(observer(ItemContextOptions));

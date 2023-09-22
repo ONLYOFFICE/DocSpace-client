@@ -34,8 +34,9 @@ const Gallery = ({
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
       ?.small?.url;
 
-  const defaultDescription = gallerySelected?.attributes?.description_card;
-  const templateDescription = gallerySelected?.attributes?.template_desc;
+  console.log(gallerySelected);
+
+  const formTitle = gallerySelected?.attributes?.name_form;
 
   return (
     <>
@@ -52,7 +53,7 @@ const Gallery = ({
       <StyledLink>
         <Link
           className="link"
-          href={"https://oforms.onlyoffice.com/form-submit"}
+          href={`mailto:marketing@onlyoffice.com?subject=Suggesting changes for ${formTitle}&body=Suggesting changes for ${formTitle}.`}
           target="_blank"
           type="action"
           isHovered
@@ -69,7 +70,8 @@ const Gallery = ({
       </StyledSubtitle>
 
       <StyledDescription>
-        {templateDescription || defaultDescription}
+        {gallerySelected?.attributes?.template_desc ||
+          gallerySelected?.attributes?.description_card}
       </StyledDescription>
 
       <StyledSubtitle>

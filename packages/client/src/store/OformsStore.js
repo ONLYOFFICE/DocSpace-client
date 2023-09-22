@@ -10,7 +10,10 @@ import {
   getCategoriesByType,
   getPopularCategories,
 } from "@docspace/common/api/oforms";
-import { getDefaultOformLocale } from "@docspace/common/utils";
+import { combineUrl, getDefaultOformLocale } from "@docspace/common/utils";
+import FilesFilter from "@docspace/common/api/files/filter";
+import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
+import config from "PACKAGE_FILE";
 
 class OformsStore {
   authStore;
@@ -77,6 +80,54 @@ class OformsStore {
       this.setOformsIsLoading(false);
     });
   };
+
+  getFormContextOptions = (t, item, categoryType, params, navigate) => [
+    {
+      key: "create",
+      label: t("Common:Create"),
+      onClick: () => {
+        this.authStore.infoPanelStore.setIsVisible(false);
+        const filesFilter = FilesFilter.getDefault();
+        filesFilter.folder = params?.fromFolderId;
+        const filterUrlParams = filesFilter.toUrlParams();
+        const url = getCategoryUrl(categoryType, filterUrlParams.folder);
+        navigate(
+          combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            config.homepage,
+            `${url}?${filterUrlParams}`
+          )
+        );
+      },
+    },
+    {
+      key: "preview",
+      label: t("Common:Preview"),
+      onClick: () => {},
+    },
+    {
+      key: "template-info",
+      label: t("TemplateInfo"),
+      onClick: () => {
+        this.authStore.infoPanelStore.setIsVisible(true);
+        this.setGallerySelected(item);
+      },
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "suggest-changes",
+      label: t("FormGallery:SuggestChanges"),
+      onClick: () => {
+        window.location = `mailto:marketing@onlyoffice.com
+          ?subject=Suggesting changes for ${item.attributes.name_form}
+          &body=Suggesting changes for ${item.attributes.name_form}.
+        `;
+      },
+    },
+  ];
 
   submitToFormGallery = async (file, formName, language, signal = null) => {
     const url = this.authStore.settingsStore.formGallery.uploadUrl;

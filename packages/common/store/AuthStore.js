@@ -436,10 +436,12 @@ class AuthStore {
     const updatedAt = "&fields[1]=updatedAt";
     const size = "&fields[2]=file_size";
     const filePages = "&fields[3]=file_pages";
+    const defaultDescription = "&fields[4]=description_card";
+    const templateDescription = "&fields[5]=template_desc";
     const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
     const templateImage = "&populate[template_image][fields][5]=formats";
 
-    const fields = `${formName}${updatedAt}${size}${filePages}${cardPrewiew}${templateImage}`;
+    const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
     const params = `?${filter.toApiUrlParams()}${fields}`;
 
     const promise = new Promise(async (resolve, reject) => {

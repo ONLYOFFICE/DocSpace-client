@@ -176,6 +176,7 @@ const StyledDescription = styled.div`
   font-weight: 400;
   line-height: 20px;
   color: #657077;
+  white-space: pre-line;
 `;
 
 const StyledProperties = styled.div`

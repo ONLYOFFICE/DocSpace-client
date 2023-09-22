@@ -34,6 +34,9 @@ const Gallery = ({
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
       ?.small?.url;
 
+  const defaultDescription = gallerySelected?.attributes?.description_card;
+  const templateDescription = gallerySelected?.attributes?.template_desc;
+
   return (
     <>
       {thumbnailUrl ? (
@@ -66,10 +69,7 @@ const Gallery = ({
       </StyledSubtitle>
 
       <StyledDescription>
-        Fill out the form online and get a recipe page ready, or just download
-        the template in the desirable format: DOCXF, OFORM, or PDF. Designing
-        custom recipe cards or pages helps create useful complimentary content
-        for cooking blogs, culinary websites, or restaurants.
+        {templateDescription || defaultDescription}
       </StyledDescription>
 
       <StyledSubtitle>

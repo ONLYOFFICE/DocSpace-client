@@ -14,14 +14,14 @@ export const CategoryFilter = styled(ComboBox)`
   width: 220px;
   box-sizing: border-box;
 
+  .combo-button-label {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
   .dropdown-container {
     margin-top: 4px;
-
-    .combo-button-label {
-      font-weight: 400;
-      font-size: 13px;
-      line-height: 20px;
-    }
   }
 `;
 

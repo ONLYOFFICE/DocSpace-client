@@ -126,6 +126,7 @@ const SubmitToFormGallery = ({
               color={currentColorScheme.main.accent}
               href="#"
               type={"page"}
+              target={"_blank"}
               isBold
               isHovered
             >

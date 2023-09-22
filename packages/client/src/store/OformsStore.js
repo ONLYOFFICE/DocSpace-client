@@ -170,6 +170,11 @@ class OformsStore {
     runInAction(() => this.getOforms(newOformsFilter));
   };
 
+  resetFilters = () => {
+    const newOformsFilter = OformsFilter.getDefault();
+    runInAction(() => this.getOforms(newOformsFilter));
+  };
+
   hideSubmitToGalleryTile = () => {
     localStorage.setItem("submitToGalleryTileIsHidden", true);
     this.submitToGalleryTileIsVisible = false;

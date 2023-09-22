@@ -42,6 +42,7 @@ const SectionBodyContent = ({
   oformFiles,
   hasGalleryFiles,
   setGallerySelected,
+  resetFilters,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
 }) => {
@@ -65,8 +66,6 @@ const SectionBodyContent = ({
     };
   }, [onMouseDown]);
 
-  const onResetFilter = () => {};
-
   return !tReady || !oformFiles ? (
     <Loaders.Tiles foldersCount={0} withTitle={false} />
   ) : !hasGalleryFiles ? (
@@ -84,13 +83,13 @@ const SectionBodyContent = ({
           <IconButton
             className={"icon"}
             size="12"
-            onClick={onResetFilter}
+            onClick={resetFilters}
             iconName={ClearEmptyFilterSvgUrl}
             isFill
           />
           <Link
             className={"link"}
-            onClick={onResetFilter}
+            onClick={resetFilters}
             isHovered={true}
             type={"action"}
             fontWeight={"600"}
@@ -118,6 +117,7 @@ export default inject(({ auth, accessRightsStore, oformsStore }) => ({
   oformFiles: oformsStore.oformFiles,
   hasGalleryFiles: oformsStore.hasGalleryFiles,
   setGallerySelected: oformsStore.setGallerySelected,
+  resetFilters: oformsStore.resetFilters,
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
 }))(withTranslation("Common, FormGallery")(observer(SectionBodyContent)));

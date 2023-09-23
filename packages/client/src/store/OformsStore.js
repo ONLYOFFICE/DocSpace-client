@@ -124,7 +124,7 @@ class OformsStore {
         this.mediaViewerDataStore.saveFirstUrl(
           `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
         );
-        this.mediaViewerDataStore.changeUrl(item.id, true);
+        this.mediaViewerDataStore.changeUrl(item.id, true, this.fromFolderId);
       },
     },
     {

@@ -26,6 +26,8 @@ const FilesMediaViewer = ({
   setScrollToItem,
   setCurrentId,
 
+  fromFolderId,
+
   setBufferSelection,
 
   archiveRoomsId,
@@ -71,7 +73,7 @@ const FilesMediaViewer = ({
   };
 
   const onChangeUrl = (id) => {
-    const url = "/form-gallery/null/#preview/" + id;
+    const url = `/form-gallery/${fromFolderId}/#preview/${id}`;
     setCurrentId(id);
     navigate(url);
   };
@@ -180,6 +182,7 @@ const FilesMediaViewer = ({
 
 export default inject(
   ({
+    oformsStore,
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
@@ -243,7 +246,10 @@ export default inject(
       onCopyLink,
     } = contextOptionsStore;
 
+    const { fromFolderId } = oformsStore;
+
     return {
+      fromFolderId,
       files,
       playlist,
       currentPostionIndex,

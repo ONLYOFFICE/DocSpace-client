@@ -1,106 +1,91 @@
 import DropDownItem from "@docspace/components/drop-down-item";
 import styled, { css } from "styled-components";
 import Base from "@docspace/components/themes/base";
+import ComboBox from "@docspace/components/combobox";
 
 export const LanguageFilter = styled.div`
   width: 41px;
   box-sizing: border-box;
 
-  .combobox {
-    cursor: pointer;
+  .dropdown-container {
     width: 100%;
-    height: 32px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 4px;
-    padding: 8px;
-    background: transparent;
-    border-radius: 3px;
-    max-height: 32px;
-
-    border: ${(props) =>
-      `1px solid ${
-        props.isOpen
-          ? props.currentColorScheme.main.accent
-          : props.theme.createEditRoomDialog.thirdpartyStorage.combobox
-              .dropdownBorderColor
-      }`};
-
-    transition: all 0.2s ease;
-    &:hover {
-      border: ${(props) =>
-        `1px solid ${
-          props.isOpen
-            ? props.theme.createEditRoomDialog.thirdpartyStorage.combobox
-                .isOpenDropdownBorderColor
-            : props.theme.createEditRoomDialog.thirdpartyStorage.combobox
-                .hoverDropdownBorderColor
-        }`};
-    }
-
-    &-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    &-expander {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 6.35px;
-      svg {
-        transform: ${(props) =>
-          props.isOpen ? "rotate(180deg)" : "rotate(0)"};
-        width: 6.35px;
-        height: auto;
-        path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.thirdpartyStorage.combobox
-              .arrowFill};
-        }
-      }
-    }
+    margin-top: 4px;
   }
+`;
 
-  .dropdown-wrapper {
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
+export const LanguangeComboBox = styled(ComboBox)`
+  width: 41px;
+  padding: 0;
+  box-sizing: border-box;
 
-    .dropdown-container {
-      width: 100%;
-      box-sizing: border-box;
-      margin-top: 4px;
-    }
+  .combo-button {
+    padding: 8px;
+    gap: 4px;
 
-    .dropdown-item {
-      width: 100%;
-      height: 32px;
-      width: 41px;
-      box-sizing: border-box;
-      padding: 8px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .drop-down-icon {
-        margin-right: 0;
+    .optionalBlock {
+      margin: 0;
+      & > div {
         width: 16px;
         height: 16px;
-        line-height: 0 !important;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
+    }
+
+    .combo-button-label {
+      display: none;
+    }
+
+    .combo-buttons_arrow-icon {
+      margin: 0;
+    }
+  }
+`;
+
+export const LanguageFilterSelectedItem = styled(DropDownItem)`
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .drop-down-icon {
+    margin-right: 0;
+    width: 16px;
+    height: 16px;
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;
 
 export const LanguageFilterItem = styled(DropDownItem)`
+  width: 100%;
+  height: 32px;
+  width: 41px;
+  box-sizing: border-box;
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   ${({ isSelected, theme }) =>
     isSelected &&
     css`
       background-color: ${theme.dropDownItem.hoverBackgroundColor};
     `}
+
+  .drop-down-icon {
+    margin-right: 0;
+    width: 16px;
+    height: 16px;
+    line-height: 0 !important;
+  }
 `;
 LanguageFilterItem.defaultProps = { theme: Base };

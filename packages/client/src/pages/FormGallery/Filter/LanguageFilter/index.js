@@ -114,6 +114,7 @@ const LanguageFilter = ({
         advancedOptionsCount={5}
         fillIcon={false}
         options={[]}
+        selectedOption={{}}
         advancedOptions={
           <>
             {locales.map((locale) => (

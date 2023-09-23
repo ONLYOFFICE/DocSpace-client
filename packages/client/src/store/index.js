@@ -82,11 +82,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   publicRoomStore
 );
 
-const oformsStore = new OformsStore(
-  authStore,
-  filesStore,
-  mediaViewerDataStore
-);
+const oformsStore = new OformsStore(authStore, mediaViewerDataStore);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();

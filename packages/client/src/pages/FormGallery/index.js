@@ -11,8 +11,14 @@ import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import Dialogs from "./Dialogs";
 import MediaViewer from "./MediaViewer";
+import { CategoryType } from "@docspace/client/src/helpers/constants";
 
-const FormGallery = ({ getOforms, setOformFiles, setOformFromFolderId }) => {
+const FormGallery = ({
+  oformsFilter,
+  getOforms,
+  setOformFiles,
+  setOformFromFolderId,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { fromFolderId } = useParams();
@@ -20,12 +26,20 @@ const FormGallery = ({ getOforms, setOformFiles, setOformFromFolderId }) => {
   useEffect(() => {
     const firstLoadFilter = OformsFilter.getFilter(location);
     getOforms(firstLoadFilter);
-
     return () => setOformFiles(null);
-  }, [getOforms, setOformFiles]);
+  }, []);
 
   useEffect(() => {
-    setOformFromFolderId(fromFolderId);
+    if (fromFolderId) {
+      setOformFromFolderId(fromFolderId);
+    } else {
+      setOformFromFolderId(CategoryType.SharedRoom);
+      navigate(
+        `/form-gallery/${
+          CategoryType.SharedRoom
+        }/filter?${oformsFilter.toUrlParams()}`
+      );
+    }
   }, [fromFolderId]);
 
   return (
@@ -63,6 +77,7 @@ const FormGallery = ({ getOforms, setOformFiles, setOformFromFolderId }) => {
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   getOforms: oformsStore.getOforms,
   setOformFiles: oformsStore.setOformFiles,
   setOformFromFolderId: oformsStore.setOformFromFolderId,

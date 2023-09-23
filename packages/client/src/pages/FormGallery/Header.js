@@ -30,6 +30,8 @@ const SectionHeaderContent = ({
   t,
   canSubmitToFormGallery,
 
+  fromFolderId,
+
   setGallerySelected,
   categoryType,
   setSubmitToGalleryDialogVisible,
@@ -44,7 +46,6 @@ const SectionHeaderContent = ({
   setIsInfoPanelVisible,
 }) => {
   const navigate = useNavigate();
-  const { fromFolderId } = useParams();
 
   const [checkboxOptions, setCheckboxOptions] = useState(<>{[]}</>);
 
@@ -80,8 +81,8 @@ const SectionHeaderContent = ({
 
   useEffect(() => {
     (async () => {
-      const prevFolderId = fromFolderId || CategoryType.SharedRoom;
-      const prevFolder = await api.files.getFolderInfo(prevFolderId);
+      const prevFolder =
+        fromFolderId && (await api.files.getFolderInfo(fromFolderId));
 
       const newCheckboxOptions = [];
       if (oformsFilter.categorizeBy && oformsFilter.categoryId)
@@ -166,6 +167,8 @@ export default inject(
   ({ auth, filesStore, oformsStore, accessRightsStore, dialogsStore }) => {
     return {
       categoryType: filesStore.categoryType,
+
+      fromFolderId: oformsStore.fromFolderId,
 
       currentCategory: oformsStore.currentCategory,
       fetchCurrentCategory: oformsStore.fetchCurrentCategory,

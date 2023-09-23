@@ -109,6 +109,7 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
+    setOformFromFolderId,
     oformsFilter,
 
     enablePlugins,
@@ -208,6 +209,7 @@ const ArticleMainButtonContent = (props) => {
     const initOformFilter = (
       oformsFilter || oformsFilter.getDefault()
     ).toUrlParams();
+    setOformFromFolderId(currentFolderId);
     navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
@@ -594,7 +596,7 @@ export default inject(
     const { isAdmin, isOwner } = auth.userStore.user;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
-    const { oformsFilter } = oformsStore;
+    const { setOformFromFolderId, oformsFilter } = oformsStore;
 
     return {
       isGracePeriod,
@@ -620,6 +622,7 @@ export default inject(
 
       currentFolderId,
 
+      setOformFromFolderId,
       oformsFilter,
 
       enablePlugins,

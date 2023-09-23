@@ -30,7 +30,7 @@ const SectionHeaderContent = ({
   t,
   canSubmitToFormGallery,
 
-  fromFolderId,
+  oformFromFolderId,
 
   setGallerySelected,
   categoryType,
@@ -53,8 +53,8 @@ const SectionHeaderContent = ({
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
-    filter.folder = fromFolderId;
-    const url = getCategoryUrl(categoryType, fromFolderId);
+    filter.folder = oformFromFolderId;
+    const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
 
     navigate(
@@ -68,21 +68,15 @@ const SectionHeaderContent = ({
 
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
-  const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
-
-  const onOpenSubmitToGalleryDialog = () => {
+  const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
-  };
 
-  useEffect(() => {
-    if (currentCategory) return;
-    fetchCurrentCategory();
-  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
+  const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
 
   useEffect(() => {
     (async () => {
       const prevFolder =
-        fromFolderId && (await api.files.getFolderInfo(fromFolderId));
+        oformFromFolderId && (await api.files.getFolderInfo(oformFromFolderId));
 
       const newCheckboxOptions = [];
       if (oformsFilter.categorizeBy && oformsFilter.categoryId)
@@ -108,7 +102,7 @@ const SectionHeaderContent = ({
 
       setCheckboxOptions(<>{newCheckboxOptions}</>);
     })();
-  }, [fromFolderId, oformsFilter.categorizeBy, oformsFilter.categoryId]);
+  }, [oformFromFolderId, oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
     <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
@@ -168,7 +162,7 @@ export default inject(
     return {
       categoryType: filesStore.categoryType,
 
-      fromFolderId: oformsStore.fromFolderId,
+      oformFromFolderId: oformsStore.oformFromFolderId,
 
       currentCategory: oformsStore.currentCategory,
       fetchCurrentCategory: oformsStore.fetchCurrentCategory,

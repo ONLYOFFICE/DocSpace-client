@@ -28,11 +28,7 @@ const CategorySubList = ({
   ));
 };
 
-export default inject(({ auth, oformsStore }) => ({
-  theme: auth.settingsStore.theme,
-
-  getOforms: oformsStore.getOforms,
-  oformsFilter: oformsStore.oformsFilter,
+export default inject(({ oformsStore }) => ({
   filterOformsByCategory: oformsStore.filterOformsByCategory,
   setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
 }))(withTranslation(["FormGallery", "Common"])(CategorySubList));

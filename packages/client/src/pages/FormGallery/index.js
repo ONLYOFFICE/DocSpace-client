@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Section from "@docspace/common/components/Section";
 import { observer, inject } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -14,7 +14,12 @@ import MediaViewer from "./MediaViewer";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 const FormGallery = ({
+  currentCategory,
+  fetchCurrentCategory,
+  filterOformsByLocale,
   oformsFilter,
+  setOformsFilter,
+  oformFromFolderId,
   getOforms,
   setOformFiles,
   setOformFromFolderId,
@@ -23,24 +28,35 @@ const FormGallery = ({
   const navigate = useNavigate();
   const { fromFolderId } = useParams();
 
-  useEffect(() => {
-    const firstLoadFilter = OformsFilter.getFilter(location);
-    getOforms(firstLoadFilter);
-    return () => setOformFiles(null);
-  }, []);
+  const [isInitLoading, setIsInitLoading] = useState(true);
 
   useEffect(() => {
-    if (fromFolderId) {
-      setOformFromFolderId(fromFolderId);
-    } else {
-      setOformFromFolderId(CategoryType.SharedRoom);
+    if (!isInitLoading && location.search !== `?${oformsFilter.toUrlParams()}`)
+      navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+  }, [oformsFilter]);
+
+  useEffect(() => {
+    if (!currentCategory) fetchCurrentCategory();
+  }, [oformsFilter]);
+
+  useEffect(() => {
+    if (fromFolderId) setOformFromFolderId(fromFolderId);
+    else
       navigate(
-        `/form-gallery/${
-          CategoryType.SharedRoom
-        }/filter?${oformsFilter.toUrlParams()}`
+        `/form-gallery/${oformFromFolderId}/filter?${oformsFilter.toUrlParams()}`
       );
-    }
   }, [fromFolderId]);
+
+  useEffect(() => {
+    const firstLoadFilter = OformsFilter.getFilter(location);
+    if (!firstLoadFilter.locale)
+      firstLoadFilter.locale = getDefaultOformLocale();
+
+    setOformsFilter(firstLoadFilter);
+    getOforms(firstLoadFilter);
+
+    setIsInitLoading(false);
+  }, []);
 
   return (
     <>
@@ -77,7 +93,16 @@ const FormGallery = ({
 };
 
 export default inject(({ oformsStore }) => ({
+  currentCategory: oformsStore.currentCategory,
+  fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+
   oformsFilter: oformsStore.oformsFilter,
+  setOformsFilter: oformsStore.setOformsFilter,
+
+  filterOformsByLocale: oformsStore.filterOformsByLocale,
+
+  oformFromFolderId: oformsStore.oformFromFolderId,
+
   getOforms: oformsStore.getOforms,
   setOformFiles: oformsStore.setOformFiles,
   setOformFromFolderId: oformsStore.setOformFromFolderId,

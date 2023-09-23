@@ -79,8 +79,6 @@ const SubList = ({
 };
 
 export default inject(({ oformsStore }) => ({
-  getOforms: oformsStore.getOforms,
-  oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
   setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
 }))(withTranslation(["FormGallery", "Common"])(SubList));

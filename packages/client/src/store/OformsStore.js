@@ -24,7 +24,7 @@ class OformsStore {
   oformsFilter = OformsFilter.getDefault();
   currentCategory = null;
 
-  fromFolderId = CategoryType.Personal;
+  oformFromFolderId = CategoryType.SharedRoom;
 
   oformsIsLoading = false;
   gallerySelected = null;
@@ -46,9 +46,9 @@ class OformsStore {
   setOformsCurrentCategory = (currentCategory) =>
     (this.currentCategory = currentCategory);
 
-  setOformFromFolderId = (fromFolderId) => {
-    if (!fromFolderId) return;
-    this.fromFolderId = fromFolderId;
+  setOformFromFolderId = (oformFromFolderId) => {
+    if (!oformFromFolderId) return;
+    this.oformFromFolderId = oformFromFolderId;
   };
 
   setOformsIsLoading = (oformsIsLoading) =>
@@ -98,7 +98,7 @@ class OformsStore {
       onClick: () => {
         this.authStore.infoPanelStore.setIsVisible(false);
         const filesFilter = FilesFilter.getDefault();
-        filesFilter.folder = this.fromFolderId;
+        filesFilter.folder = this.oformFromFolderId;
         const filterUrlParams = filesFilter.toUrlParams();
         const url = getCategoryUrl(
           CategoryType.Personal,
@@ -124,7 +124,11 @@ class OformsStore {
         this.mediaViewerDataStore.saveFirstUrl(
           `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
         );
-        this.mediaViewerDataStore.changeUrl(item.id, true, this.fromFolderId);
+        this.mediaViewerDataStore.changeUrl(
+          item.id,
+          true,
+          this.oformFromFolderId
+        );
       },
     },
     {

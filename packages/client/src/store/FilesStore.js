@@ -474,7 +474,7 @@ class FilesStore {
 
       api.files
         .getFolderInfo(folder.id)
-        .then(() => this.setFolder(folderInfo))
+        .then(this.setFolder)
         .catch(() => {
           // console.log("Folder deleted")
         });
@@ -1069,7 +1069,6 @@ class FilesStore {
   };
 
   setSelection = (selection) => {
-    // console.log("setSelection", selection);
     this.selection = selection;
   };
 
@@ -1218,6 +1217,10 @@ class FilesStore {
 
   setFilesOwner = (folderIds, fileIds, ownerId) => {
     return api.files.setFileOwner(folderIds, fileIds, ownerId);
+  };
+
+  setRoomOwner = (ownerId, folderIds) => {
+    return api.files.setFileOwner(ownerId, folderIds);
   };
 
   setFilterUrl = (filter) => {
@@ -1865,6 +1868,7 @@ class FilesStore {
         "mark-read",
         // "mark-as-favorite",
         // "remove-from-favorites",
+        "create-room",
         "download",
         "download-as",
         "convert",
@@ -2105,6 +2109,7 @@ class FilesStore {
         "download",
         "archive-room",
         "unarchive-room",
+        "leave-room",
         "delete",
       ];
 
@@ -2203,6 +2208,7 @@ class FilesStore {
         // "link-for-portal-users",
         "separator1",
         "open-location",
+        "create-room",
         "download",
         "move", //category
         "move-to",
@@ -2525,7 +2531,11 @@ class FilesStore {
   };
 
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const newFilter = this.filter.clone();
+    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+
+    const isRooms = isRoomsFolder || isArchiveFolder;
+    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
+
     const deleteCount = (fileIds?.length ?? 0) + (folderIds?.length ?? 0);
 
     if (destFolderId && destFolderId === this.selectedFolderStore.id) return;
@@ -2549,7 +2559,7 @@ class FilesStore {
       newFilter.total -= deleteCount;
 
       runInAction(() => {
-        this.setFilter(newFilter);
+        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
@@ -2867,6 +2877,7 @@ class FilesStore {
         security,
         viewAccessability,
         mute,
+        inRoom = true,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3002,6 +3013,7 @@ class FilesStore {
         providerType,
         security,
         viewAccessability,
+        inRoom,
       };
     });
 

@@ -176,6 +176,22 @@ public class StorageFactory
         return GetDataStore(tenantPath, module, consumer, tenantQuotaController);
     }
 
+    public async Task QuotaUsedAddAsync(int? tenant, string module, string domain, string dataTag, long size, Guid ownerId)
+    {
+        var tenantQuotaController = _serviceProvider.GetService<TenantQuotaController>();
+        tenantQuotaController.Init(tenant.GetValueOrDefault());
+
+        await tenantQuotaController.QuotaUserUsedAddAsync(module, domain, dataTag, size, ownerId);
+    }
+
+    public async Task QuotaUsedDeleteAsync(int? tenant, string module, string domain, string dataTag, long size, Guid ownerId)
+    {
+        var tenantQuotaController = _serviceProvider.GetService<TenantQuotaController>();
+        tenantQuotaController.Init(tenant.GetValueOrDefault());
+
+        await tenantQuotaController.QuotaUserUsedDeleteAsync(module, domain, dataTag, size, ownerId);
+    }
+
     private IDataStore GetDataStore(string tenantPath, string module, DataStoreConsumer consumer, IQuotaController controller, string region = "current")
     {
         var storage = _storageFactoryConfig.GetStorage(region);

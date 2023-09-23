@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
@@ -64,7 +64,6 @@ const CategoryFilter = ({
   useEffect(() => {
     (async () => {
       const branchData = await fetchCategoriesByBranch();
-      console.log(branchData);
       setFormsByBranch(branchData);
       const typeData = await fetchCategoriesByType();
       setFormsByType(typeData);
@@ -103,4 +102,4 @@ export default inject(({ oformsStore }) => ({
 
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(CategoryFilter);
+}))(observer(CategoryFilter));

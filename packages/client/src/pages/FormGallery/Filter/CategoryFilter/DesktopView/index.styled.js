@@ -7,12 +7,14 @@ import ComboBox from "@docspace/components/combobox";
 export const CategoryFilterWrapper = styled.div`
   position: relative;
   width: 220px;
+  height: 32px;
   box-sizing: border-box;
 `;
 
 export const CategoryFilter = styled(ComboBox)`
   width: 220px;
   box-sizing: border-box;
+  padding: 0;
 
   .combo-button-label {
     font-weight: 400;

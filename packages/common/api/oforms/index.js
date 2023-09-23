@@ -4,14 +4,11 @@ export function getOforms(url) {
   return axios.get(url);
 }
 
-export const getCategoryById = async (categorizeBy, id, locale) => {
-  const options = {
-    method: "get",
-    url: `/${categorizeBy}/${id}?populate=*&locale=${locale}`,
-  };
-  return request(options).then((res) => {
-    return res;
-  });
+export const getCategoryById = async (url, categorizeBy, id, locale) => {
+  const res = await axios.get(
+    `${url}/${categorizeBy}/${id}?populate=*&locale=${locale}`
+  );
+  return res?.data?.data;
 };
 
 export const getCategoryFilterMenuItems = async (url, locale = "en") => {

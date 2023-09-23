@@ -136,13 +136,21 @@ class OformsStore {
   };
 
   fetchCurrentCategory = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api";
     const { categorizeBy, categoryId } = this.oformsFilter;
+    const locale = getDefaultOformLocale();
+
     if (!categorizeBy || !categoryId) {
       this.setOformsCurrentCategory(null);
       return;
     }
 
-    const fetchedCategory = await getCategoryById(categorizeBy, categoryId);
+    const fetchedCategory = await getCategoryById(
+      url,
+      categorizeBy,
+      categoryId,
+      locale
+    );
 
     runInAction(() => {
       this.setOformsCurrentCategory(fetchedCategory);
@@ -178,6 +186,8 @@ class OformsStore {
   };
 
   filterOformsByCategory = (categorizeBy, categoryId) => {
+    if (!categorizeBy || !categoryId) this.currentCategory = null;
+
     this.oformsFilter.page = 1;
     this.oformsFilter.categorizeBy = categorizeBy;
     this.oformsFilter.categoryId = categoryId;
@@ -222,6 +232,7 @@ class OformsStore {
   };
 
   resetFilters = () => {
+    this.currentCategory = null;
     const newOformsFilter = OformsFilter.getDefault();
     runInAction(() => this.getOforms(newOformsFilter));
   };

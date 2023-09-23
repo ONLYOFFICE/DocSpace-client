@@ -6,6 +6,10 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SubList from "./SubList";
 import { OformCategoryType } from "@docspace/client/src/helpers/constants";
+import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import { getDefaultOformLocale } from "@docspace/common/utils";
+
+const categoryLocale = getDefaultOformLocale();
 
 const CategoryFilterDesktop = ({
   t,
@@ -14,6 +18,7 @@ const CategoryFilterDesktop = ({
 
   currentCategoryTitle,
 
+  currentCategory,
   onViewAllTemplates,
   formsByBranch,
   formsByType,
@@ -67,7 +72,9 @@ const CategoryFilterDesktop = ({
         fixedDirection={true}
         advancedOptionsCount={5}
         selectedOption={{
-          label: currentCategoryTitle || t("FormGallery:Categories"),
+          label:
+            getOformCategoryTitle(currentCategory, categoryLocale) ||
+            t("FormGallery:Categories"),
         }}
         advancedOptions={
           <>

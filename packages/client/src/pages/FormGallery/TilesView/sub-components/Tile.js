@@ -42,19 +42,12 @@ const Tile = ({
   const cm = useRef();
   const tile = useRef();
 
-  const params = useParams();
   const navigate = useNavigate();
 
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
   const previewLoader = () => <div style={{ width: "96px" }} />;
 
-  const formContextOptions = getFormContextOptions(
-    t,
-    item,
-    categoryType,
-    params,
-    navigate
-  );
+  const formContextOptions = getFormContextOptions(t, item, navigate);
 
   const onSelectForm = () => setGallerySelected(item);
 

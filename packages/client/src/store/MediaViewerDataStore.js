@@ -73,10 +73,12 @@ class MediaViewerDataStore {
     localStorage.removeItem(FirstUrlKey);
   };
 
-  changeUrl = (id) => {
+  changeUrl = (id, isForm = false, formFromFolderId = 2) => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const url = "/products/files/#preview/" + id;
+    const url = !isForm
+      ? "/products/files/#preview/" + id
+      : `/form-gallery/${formFromFolderId}/#preview/${id}`;
 
     window.DocSpace.navigate(url);
   };

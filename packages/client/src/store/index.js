@@ -38,8 +38,6 @@ import PublicRoomStore from "./PublicRoomStore";
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
-const oformsStore = new OformsStore(authStore);
-
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
 const paymentStore = new PaymentStore();
@@ -83,6 +81,13 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   settingsStore,
   publicRoomStore
 );
+
+const oformsStore = new OformsStore(
+  authStore,
+  filesStore,
+  mediaViewerDataStore
+);
+
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore);

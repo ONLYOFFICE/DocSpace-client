@@ -14,13 +14,18 @@ import { combineUrl, getDefaultOformLocale } from "@docspace/common/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 import config from "PACKAGE_FILE";
+import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 class OformsStore {
   authStore;
+  filesStore;
+  mediaViewerDataStore;
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
   currentCategory = null;
+
+  fromFolderId = CategoryType.SharedRoom;
 
   oformsIsLoading = false;
   gallerySelected = null;
@@ -29,8 +34,10 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore) {
+  constructor(authStore, filesStore, mediaViewerDataStore) {
     this.authStore = authStore;
+    this.filesStore = filesStore;
+    this.mediaViewerDataStore = mediaViewerDataStore;
     makeAutoObservable(this);
   }
 
@@ -40,6 +47,8 @@ class OformsStore {
 
   setOformsCurrentCategory = (currentCategory) =>
     (this.currentCategory = currentCategory);
+
+  setOformFromFolderId = (fromFolderId) => (this.fromFolderId = fromFolderId);
 
   setOformsIsLoading = (oformsIsLoading) =>
     (this.oformsIsLoading = oformsIsLoading);
@@ -81,16 +90,19 @@ class OformsStore {
     });
   };
 
-  getFormContextOptions = (t, item, categoryType, params, navigate) => [
+  getFormContextOptions = (t, item, navigate) => [
     {
       key: "create",
       label: t("Common:Create"),
       onClick: () => {
         this.authStore.infoPanelStore.setIsVisible(false);
         const filesFilter = FilesFilter.getDefault();
-        filesFilter.folder = params?.fromFolderId;
+        filesFilter.folder = this.fromFolderId;
         const filterUrlParams = filesFilter.toUrlParams();
-        const url = getCategoryUrl(categoryType, filterUrlParams.folder);
+        const url = getCategoryUrl(
+          this.filesStore.categoryType,
+          filterUrlParams.folder
+        );
         navigate(
           combineUrl(
             window.DocSpaceConfig?.proxy?.url,
@@ -103,7 +115,16 @@ class OformsStore {
     {
       key: "preview",
       label: t("Common:Preview"),
-      onClick: () => {},
+      onClick: () => {
+        this.mediaViewerDataStore.setMediaViewerData({
+          visible: true,
+          id: item.id,
+        });
+        this.mediaViewerDataStore.saveFirstUrl(
+          `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+        );
+        this.mediaViewerDataStore.changeUrl(item.id, true);
+      },
     },
     {
       key: "template-info",

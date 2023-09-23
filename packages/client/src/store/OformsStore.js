@@ -18,14 +18,13 @@ import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 class OformsStore {
   authStore;
-  filesStore;
   mediaViewerDataStore;
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
   currentCategory = null;
 
-  fromFolderId = CategoryType.SharedRoom;
+  fromFolderId = CategoryType.Personal;
 
   oformsIsLoading = false;
   gallerySelected = null;
@@ -34,9 +33,8 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore, filesStore, mediaViewerDataStore) {
+  constructor(authStore, mediaViewerDataStore) {
     this.authStore = authStore;
-    this.filesStore = filesStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
     makeAutoObservable(this);
   }
@@ -48,7 +46,10 @@ class OformsStore {
   setOformsCurrentCategory = (currentCategory) =>
     (this.currentCategory = currentCategory);
 
-  setOformFromFolderId = (fromFolderId) => (this.fromFolderId = fromFolderId);
+  setOformFromFolderId = (fromFolderId) => {
+    if (!fromFolderId) return;
+    this.fromFolderId = fromFolderId;
+  };
 
   setOformsIsLoading = (oformsIsLoading) =>
     (this.oformsIsLoading = oformsIsLoading);
@@ -100,7 +101,7 @@ class OformsStore {
         filesFilter.folder = this.fromFolderId;
         const filterUrlParams = filesFilter.toUrlParams();
         const url = getCategoryUrl(
-          this.filesStore.categoryType,
+          CategoryType.Personal,
           filterUrlParams.folder
         );
         navigate(

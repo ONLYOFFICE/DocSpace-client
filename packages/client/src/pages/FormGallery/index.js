@@ -41,10 +41,13 @@ const FormGallery = ({
 
   useEffect(() => {
     if (fromFolderId) setOformFromFolderId(fromFolderId);
-    else
+    else {
+      const sharedRoomId = CategoryType.SharedRoom;
+      setOformFromFolderId(sharedRoomId);
       navigate(
-        `/form-gallery/${oformFromFolderId}/filter?${oformsFilter.toUrlParams()}`
+        `/form-gallery/${sharedRoomId}/filter?${oformsFilter.toUrlParams()}`
       );
+    }
   }, [fromFolderId]);
 
   useEffect(() => {

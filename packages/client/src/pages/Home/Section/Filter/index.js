@@ -795,7 +795,9 @@ const SectionFilterContent = ({
         const key = +roomsFilter.quotaFilter;
 
         const label =
-          key === FilterKeys.customQuota ? "Custom quota" : "Default quota";
+          key === FilterKeys.customQuota
+            ? t("Common:CustomQuota")
+            : t("Common:DefaultQuota");
 
         filterValues.push({
           key: roomsFilter.quotaFilter,

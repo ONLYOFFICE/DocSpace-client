@@ -92,10 +92,12 @@ const StyledTitle = styled.div`
   }
 
   .free-label {
-    margin-left: auto;
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
+
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auro"};
   }
 
   ${(props) =>

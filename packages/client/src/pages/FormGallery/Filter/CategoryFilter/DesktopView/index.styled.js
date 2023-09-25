@@ -50,7 +50,7 @@ export const CategoryFilterItem = styled(DropDownItem)`
     text-overflow: ellipsis;
 
     text-align: ${({ theme }) =>
-      theme.interfaceDirection === "ltl" ? `left` : `right`};
+      theme.interfaceDirection !== "rtl" ? `left` : `right`};
   }
 
   .submenu-arrow {
@@ -70,7 +70,7 @@ export const CategoryFilterSubList = styled(DropDown)`
   padding: 4px 0;
 
   ${({ theme }) =>
-    theme.interfaceDirection === "ltl"
+    theme.interfaceDirection !== "rtl"
       ? css`
           left: calc(100% + 4px);
         `
@@ -99,7 +99,7 @@ export const CategoryFilterSubList = styled(DropDown)`
     position: absolute;
 
     ${({ theme }) =>
-      theme.interfaceDirection === "ltl"
+      theme.interfaceDirection !== "rtl"
         ? css`
             left: -4px;
           `

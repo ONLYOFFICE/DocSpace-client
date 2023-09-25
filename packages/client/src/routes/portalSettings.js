@@ -299,6 +299,18 @@ const PortalSettingsRoutes = {
       element: <WebhookDetails />,
     },
     {
+      path: "developer-tools/oauth",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/create/:id",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/edit/:id",
+      element: <DeveloperTools />,
+    },
+    {
       path: "backup",
       element: <Navigate to="backup/data-backup" />,
     },

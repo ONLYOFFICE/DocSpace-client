@@ -17,6 +17,7 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
+import OAuth from "./OAuth";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -75,6 +76,7 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
+    { id: "oauth", name: "OAuth", content: <OAuth /> },
   ];
 
   const [currentTab, setCurrentTab] = useState(

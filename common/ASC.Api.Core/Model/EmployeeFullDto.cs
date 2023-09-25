@@ -311,7 +311,9 @@ public class EmployeeFullDtoHelper : EmployeeDtoHelper
         {
             result.UsedSpace = Math.Max(0, (await _quotaService.FindUserQuotaRowsAsync(_context.Tenant.Id, userInfo.Id)).Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
             var userQuotaSettings = await _settingsManager.LoadAsync<UserQuotaSettings>(userInfo);
-            result.QuotaLimit = userQuotaSettings != null ? userQuotaSettings.UserQuota : quotaSettings.DefaultQuota;
+            result.QuotaLimit = userQuotaSettings != null ? 
+                                userQuotaSettings.UserQuota != userQuotaSettings.GetDefault().UserQuota ? userQuotaSettings.UserQuota : quotaSettings.DefaultQuota
+                                : quotaSettings.DefaultQuota;
         }
 
         if (userInfo.Sex.HasValue)

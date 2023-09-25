@@ -1633,7 +1633,7 @@ public class UserController : PeopleControllerBase
             .SelectAwait(async userId => await _userManager.GetUsersAsync(userId))
             .ToListAsync();
 
-        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
+        var tenanSpaceQuota = await _tenantManager.GetTenantQuotaAsync(Tenant.Id);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
         if (maxTotalSize < inDto.Quota)

@@ -37,6 +37,7 @@ import PublicRoomStore from "./PublicRoomStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
+import MediaFormViewerDataStore from "./MediaFormViewerDataStore";
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
@@ -82,7 +83,14 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   publicRoomStore
 );
 
-const oformsStore = new OformsStore(authStore, mediaViewerDataStore);
+const mediaFormViewerDataStore = new MediaFormViewerDataStore(
+  filesStore,
+  settingsStore,
+  publicRoomStore
+);
+
+const oformsStore = new OformsStore(authStore, mediaFormViewerDataStore);
+mediaFormViewerDataStore.oformsStore = oformsStore;
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
@@ -134,12 +142,14 @@ const contextOptionsStore = new ContextOptionsStore(
   filesActionsStore,
   filesStore,
   mediaViewerDataStore,
+  mediaFormViewerDataStore,
   treeFoldersStore,
   uploadDataStore,
   versionHistoryStore,
   settingsStore,
   selectedFolderStore,
-  publicRoomStore
+  publicRoomStore,
+  oformsStore
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -201,6 +211,7 @@ const store = {
 
   settingsStore,
   mediaViewerDataStore,
+  mediaFormViewerDataStore,
   versionHistoryStore,
   uploadDataStore,
   dialogsStore,

@@ -17,6 +17,7 @@ import type {
   OmitSecondArg,
   TranslationType,
 } from "../types";
+import { NavigateFunction } from "react-router";
 
 type Functions = {
   onClickDownloadAs: VoidFunction;
@@ -30,6 +31,11 @@ type Functions = {
   onPreviewClick: OmitSecondArg<ContextMenuAction>;
   onCopyLink: ContextMenuAction;
   onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
+};
+
+type OformFunctions = {
+  onClickCreateOform: (navigate: NavigateFunction) => {};
+  onClickSuggestOformChanges: (item: any) => {};
 };
 
 export const getPDFContextModel = (
@@ -117,6 +123,34 @@ export const getPDFContextModel = (
       icon: TrashReactSvgUrl,
       onClick: () => funcs.onClickDelete(item, t),
       disabled: !item.security.Delete,
+    },
+  ];
+
+  return options;
+};
+
+export const getOformContextModel = (
+  t: TranslationType,
+  item: any,
+  navigate: NavigateFunction,
+  funcs: OformFunctions
+) => {
+  const { onClickCreateOform, onClickSuggestOformChanges } = funcs;
+
+  const options: ContextMenuModel[] = [
+    {
+      id: "option_create_form",
+      key: "create",
+      label: t("Common:Create"),
+      onClick: () => onClickCreateOform(navigate),
+      disabled: false,
+    },
+    {
+      id: "option_suggest-changes",
+      key: "suggest-changes",
+      label: t("FormGallery:SuggestChanges"),
+      onClick: () => onClickSuggestOformChanges(item),
+      disabled: false,
     },
   ];
 

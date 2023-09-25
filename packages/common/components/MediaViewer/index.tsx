@@ -22,10 +22,12 @@ import { getFileExtension } from "@docspace/common/utils";
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
+  getOformContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
 
 import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { useNavigate } from "react-router";
 
 function MediaViewer({
   playlistPos,
@@ -33,6 +35,8 @@ function MediaViewer({
   prevMedia,
   ...props
 }: MediaViewerProps): JSX.Element {
+  const navigate = useNavigate();
+
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
 
   const [title, setTitle] = useState<string>("");
@@ -155,6 +159,8 @@ function MediaViewer({
       onCopyAction,
       onDuplicate,
       onCopyLink,
+      onClickCreateOform,
+      onClickSuggestOformChanges,
     } = props;
 
     if (!targetFile) return [];
@@ -192,6 +198,12 @@ function MediaViewer({
         onClickLinkEdit,
         onPreviewClick,
         onCopyLink,
+      });
+
+    if (props.isFormGalleryViewer)
+      return getOformContextModel(t, targetFile, navigate, {
+        onClickCreateOform,
+        onClickSuggestOformChanges,
       });
 
     return isMobile
@@ -340,10 +352,11 @@ function MediaViewer({
   const audioIcon = useMemo(() => props.getIcon(96, ext), [ext]);
   const headerIcon = useMemo(() => props.getIcon(24, ext), [ext]);
 
-  let isVideo = false;
-  let isAudio = false;
   let canOpen = true;
   let isImage = false;
+  let isVideo = false;
+  let isAudio = false;
+  let isForm = false;
   let isPdf = false;
 
   const archiveRoom =
@@ -393,6 +406,7 @@ function MediaViewer({
           isImage={isImage}
           isAudio={isAudio}
           isVideo={isVideo}
+          isForm={!!props.isFormGalleryViewer}
           isPdf={isPdf}
           isPreviewFile={props.isPreviewFile}
           onDownloadClick={onDownload}

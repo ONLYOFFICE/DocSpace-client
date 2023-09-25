@@ -295,7 +295,7 @@ export default inject(
       onPreviewClick,
       onCopyLink,
     } = contextOptionsStore;
-
+    console.log(files);
     return {
       files,
       playlist,

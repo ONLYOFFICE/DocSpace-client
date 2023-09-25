@@ -31,8 +31,13 @@ const FormGallery = ({
   const [isInitLoading, setIsInitLoading] = useState(true);
 
   useEffect(() => {
-    if (!isInitLoading && location.search !== `?${oformsFilter.toUrlParams()}`)
+    if (
+      !isInitLoading &&
+      location.search !== `?${oformsFilter.toUrlParams()}`
+    ) {
+      console.log("NAVIGATE ");
       navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+    }
   }, [oformsFilter]);
 
   useEffect(() => {

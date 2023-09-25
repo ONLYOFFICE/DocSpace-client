@@ -218,6 +218,8 @@ class MediaViewerDataStore {
       this.filesStore.createThumbnails(itemsWithoutThumb);
     }
 
+    console.log(playlist);
+
     return playlist;
   }
 }

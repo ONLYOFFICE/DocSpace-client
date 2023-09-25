@@ -24,7 +24,9 @@ const Tile = ({
   t,
   thumbnailClick,
   item,
-  getFormContextOptions,
+
+  onCreateOform,
+  getFormGalleryContextOptions,
 
   setIsInfoPanelVisible,
   categoryType,
@@ -47,21 +49,14 @@ const Tile = ({
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
   const previewLoader = () => <div style={{ width: "96px" }} />;
 
-  const formContextOptions = getFormContextOptions(t, item, navigate);
-
   const onSelectForm = () => setGallerySelected(item);
 
-  const getContextModel = () => formContextOptions;
+  const onCreateForm = () => onCreateOform(navigate);
 
-  const onCreateForm = () => {
-    const [createFormOption] = formContextOptions.filter(
-      (contextOption) => contextOption.key === "create"
-    );
-    createFormOption?.onClick && createFormOption.onClick();
-  };
+  const getContextModel = () => getFormGalleryContextOptions(item, t, navigate);
 
   const getOptions = () =>
-    formContextOptions.map((contextOption) => contextOption.key);
+    getFormGalleryContextOptions(item, t, navigate).map((item) => item.key);
 
   const onContextMenu = (e) => {
     tileContextClick && tileContextClick();
@@ -151,7 +146,10 @@ Tile.defaultProps = {
 };
 
 export default inject(
-  ({ filesStore, settingsStore, auth, oformsStore }, { item }) => {
+  (
+    { filesStore, settingsStore, auth, oformsStore, contextOptionsStore },
+    { item }
+  ) => {
     const { categoryType } = filesStore;
     const { gallerySelected, setGallerySelected, getFormContextOptions } =
       oformsStore;
@@ -160,10 +158,14 @@ export default inject(
 
     const isSelected = item.id === gallerySelected?.id;
 
+    const { getFormGalleryContextOptions, onCreateOform } = contextOptionsStore;
+
     return {
       isSelected,
       setGallerySelected,
       getFormContextOptions,
+      onCreateOform,
+      getFormGalleryContextOptions,
       getIcon,
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,

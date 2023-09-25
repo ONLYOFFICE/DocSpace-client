@@ -35,6 +35,7 @@ import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
@@ -54,6 +55,7 @@ import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helper
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
 import { FolderType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/common/api/files/filter";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -65,12 +67,14 @@ class ContextOptionsStore {
   filesActionsStore;
   filesStore;
   mediaViewerDataStore;
+  mediaFormViewerDataStore;
   treeFoldersStore;
   uploadDataStore;
   versionHistoryStore;
   settingsStore;
   selectedFolderStore;
   publicRoomStore;
+  oformsStore;
 
   linksIsLoading = false;
 
@@ -80,12 +84,14 @@ class ContextOptionsStore {
     filesActionsStore,
     filesStore,
     mediaViewerDataStore,
+    mediaFormViewerDataStore,
     treeFoldersStore,
     uploadDataStore,
     versionHistoryStore,
     settingsStore,
     selectedFolderStore,
-    publicRoomStore
+    publicRoomStore,
+    oformsStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -93,12 +99,14 @@ class ContextOptionsStore {
     this.filesActionsStore = filesActionsStore;
     this.filesStore = filesStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
+    this.mediaFormViewerDataStore = mediaFormViewerDataStore;
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.versionHistoryStore = versionHistoryStore;
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
+    this.oformsStore = oformsStore;
   }
 
   onOpenFolder = (item) => {
@@ -757,6 +765,85 @@ class ContextOptionsStore {
     }
   };
 
+  onCreateOform = (navigate) => {
+    this.authStore.infoPanelStore.setIsVisible(false);
+    const filesFilter = FilesFilter.getDefault();
+    filesFilter.folder = this.oformsStore.oformFromFolderId;
+    const filterUrlParams = filesFilter.toUrlParams();
+    const url = getCategoryUrl(
+      this.filesStore.categoryType,
+      filterUrlParams.folder
+    );
+
+    this.mediaFormViewerDataStore.removeFirstUrl();
+    this.mediaFormViewerDataStore.setMediaViewerData({
+      visible: false,
+      id: null,
+    });
+
+    navigate(
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterUrlParams}`
+      )
+    );
+  };
+
+  onPreviewOform = (item) => {
+    this.mediaFormViewerDataStore.setMediaViewerData({
+      visible: true,
+      id: item.id,
+    });
+    this.mediaFormViewerDataStore.saveFirstUrl(
+      `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+    );
+    this.mediaFormViewerDataStore.changeUrl(item.id);
+  };
+
+  onShowOformTemplateInfo = (item) => {
+    this.authStore.infoPanelStore.setIsVisible(true);
+    this.oformsStore.setGallerySelected(item);
+  };
+
+  onSuggestOformChanges = (item) => {
+    const formTitle = item.attributes ? item.attributes.name_form : item.title;
+
+    window.location = `mailto:marketing@onlyoffice.com
+    ?subject=Suggesting changes for ${formTitle}
+    &body=Suggesting changes for ${formTitle}.
+  `;
+  };
+
+  getFormGalleryContextOptions = (item, t, navigate) => {
+    return [
+      {
+        key: "create",
+        label: t("Common:Create"),
+        onClick: () => this.onCreateOform(navigate),
+      },
+      {
+        key: "preview",
+        label: t("Common:Preview"),
+        onClick: () => this.onPreviewOform(item),
+      },
+      {
+        key: "template-info",
+        label: t("FormGallery:TemplateInfo"),
+        onClick: () => this.onShowOformTemplateInfo(item),
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        key: "suggest-changes",
+        label: t("FormGallery:SuggestChanges"),
+        onClick: () => this.onSuggestOformChanges(item),
+      },
+    ];
+  };
+
   getRoomsRootContextOptions = (item, t) => {
     const { id, rootFolderId } = this.selectedFolderStore;
     const isRootRoom = item.isRoom && rootFolderId === id;
@@ -811,6 +898,7 @@ class ContextOptionsStore {
 
     return { pinOptions, muteOptions };
   };
+
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
 

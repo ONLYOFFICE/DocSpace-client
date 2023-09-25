@@ -18,7 +18,7 @@ import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 class OformsStore {
   authStore;
-  mediaViewerDataStore;
+  mediaFormViewerDataStore;
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
@@ -33,9 +33,9 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore, mediaViewerDataStore) {
+  constructor(authStore, mediaFormViewerDataStore) {
     this.authStore = authStore;
-    this.mediaViewerDataStore = mediaViewerDataStore;
+    this.mediaFormViewerDataStore = mediaFormViewerDataStore;
     makeAutoObservable(this);
   }
 
@@ -68,6 +68,7 @@ class OformsStore {
       filter.total = paginationData.total;
     }
 
+    console.log(oformData?.data?.data);
     runInAction(() => {
       this.setOformsFilter(filter);
       this.setOformFiles(oformData?.data?.data ?? []);
@@ -117,18 +118,14 @@ class OformsStore {
       key: "preview",
       label: t("Common:Preview"),
       onClick: () => {
-        this.mediaViewerDataStore.setMediaViewerData({
+        this.mediaFormViewerDataStore.setMediaViewerData({
           visible: true,
           id: item.id,
         });
-        this.mediaViewerDataStore.saveFirstUrl(
+        this.mediaFormViewerDataStore.saveFirstUrl(
           `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
         );
-        this.mediaViewerDataStore.changeUrl(
-          item.id,
-          true,
-          this.oformFromFolderId
-        );
+        this.mediaFormViewerDataStore.changeUrl(item.id);
       },
     },
     {

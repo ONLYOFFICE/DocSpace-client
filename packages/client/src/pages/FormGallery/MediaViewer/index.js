@@ -7,57 +7,36 @@ import MediaViewer from "@docspace/common/components/MediaViewer";
 
 const FilesMediaViewer = ({
   t,
+
   files,
   playlist,
+
   currentPostionIndex,
   visible,
   currentMediaFileId,
-  deleteItemAction,
+
   setMediaViewerData,
 
-  setRemoveMediaItem,
   userAccess,
-  deleteDialogVisible,
-  previewFile,
-  fetchFiles,
-  setIsLoading,
-
-  setToPreviewFile,
-  setScrollToItem,
   setCurrentId,
 
-  fromFolderId,
+  oformFromFolderId,
+
+  onCreateOform,
+  onSuggestOformChanges,
 
   setBufferSelection,
 
   archiveRoomsId,
-
-  onShowInfoPanel,
-  onClickDownload,
-
-  onClickLinkEdit,
-  onPreviewClick,
-  onCopyLink,
-  onClickRename,
-  onClickDelete,
-  onMoveAction,
-  onCopyAction,
   getIcon,
-  onDuplicate,
   extsImagePreviewed,
   extsMediaPreviewed,
-  setIsPreview,
   isPreview,
   nextMedia,
   prevMedia,
   resetUrl,
   getFirstUrl,
   firstLoad,
-  setSelection,
-  activeFiles,
-  activeFolders,
-  onClickDownloadAs,
-  someDialogIsOpen,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -73,7 +52,7 @@ const FilesMediaViewer = ({
   };
 
   const onChangeUrl = (id) => {
-    const url = `/form-gallery/${fromFolderId}/#preview/${id}`;
+    const url = `/form-gallery/${oformFromFolderId}/#preview/${id}`;
     setCurrentId(id);
     navigate(url);
   };
@@ -84,13 +63,7 @@ const FilesMediaViewer = ({
 
   const onMediaViewerClose = (e) => {
     if (isPreview) {
-      setIsPreview(false);
       resetUrl();
-      if (previewFile) {
-        setScrollToItem({ id: previewFile.id, type: "file" });
-        setBufferSelection(previewFile);
-      }
-      setToPreviewFile(null);
     }
 
     setMediaViewerData({ visible: false, id: null });
@@ -124,17 +97,6 @@ const FilesMediaViewer = ({
   }, []);
 
   useEffect(() => {
-    if (visible) setSelection([]);
-  }, [visible]);
-
-  useEffect(() => {
-    if (previewFile)
-      fetchFiles(previewFile.folderId).finally(() => {
-        setIsLoading(false);
-      });
-  }, [previewFile]);
-
-  useEffect(() => {
     window.addEventListener("popstate", onButtonBackHandler);
     return () => window.removeEventListener("popstate", onButtonBackHandler);
   }, [onButtonBackHandler]);
@@ -143,32 +105,34 @@ const FilesMediaViewer = ({
     visible && (
       <MediaViewer
         t={t}
+        isFormGalleryViewer
         userAccess={userAccess}
-        someDialogIsOpen={someDialogIsOpen}
         currentFileId={currentMediaFileId}
         visible={visible}
         playlist={playlist}
         playlistPos={currentPostionIndex}
         onDelete={onDeleteMediaFile}
         onDownload={onDownloadMediaFile}
-        setBufferSelection={setBufferSelection}
+        setBufferSelection={() => {}}
         archiveRoomsId={archiveRoomsId}
         files={files}
-        onClickDownload={onClickDownload}
-        onShowInfoPanel={onShowInfoPanel}
-        onClickDelete={onClickDelete}
-        onClickRename={onClickRename}
-        onMoveAction={onMoveAction}
-        onCopyAction={onCopyAction}
-        onDuplicate={onDuplicate}
-        onClickLinkEdit={onClickLinkEdit}
-        onPreviewClick={onPreviewClick}
-        onCopyLink={onCopyLink}
-        onClickDownloadAs={onClickDownloadAs}
+        onClickCreateOform={onCreateOform}
+        onClickSuggestOformChanges={onSuggestOformChanges}
+        onClickDownload={() => {}}
+        onShowInfoPanel={() => {}}
+        onClickDelete={() => {}}
+        onClickRename={() => {}}
+        onMoveAction={() => {}}
+        onCopyAction={() => {}}
+        onDuplicate={() => {}}
+        onClickLinkEdit={() => {}}
+        onPreviewClick={() => {}}
+        onCopyLink={() => {}}
+        onClickDownloadAs={() => {}}
         onClose={onMediaViewerClose}
         getIcon={getIcon}
         onEmptyPlaylistError={onMediaViewerClose}
-        deleteDialogVisible={deleteDialogVisible}
+        deleteDialogVisible={false}
         extsMediaPreviewed={extsMediaPreviewed}
         extsImagePreviewed={extsImagePreviewed}
         isPreviewFile={firstLoad}
@@ -184,13 +148,12 @@ export default inject(
   ({
     oformsStore,
     filesStore,
-    mediaViewerDataStore,
-    filesActionsStore,
+    mediaFormViewerDataStore,
     settingsStore,
     dialogsStore,
     treeFoldersStore,
-    contextOptionsStore,
     clientLoadingStore,
+    contextOptionsStore,
   }) => {
     const { firstLoad, setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -199,18 +162,13 @@ export default inject(
     };
 
     const {
-      files,
+      //   files,
       userAccess,
-      fetchFiles,
       setScrollToItem,
       setBufferSelection,
-      setIsPreview,
       isPreview,
       resetUrl,
-      setSelection,
       setAlreadyFetchingRooms,
-      activeFiles,
-      activeFolders,
     } = filesStore;
 
     const {
@@ -220,36 +178,59 @@ export default inject(
       setMediaViewerData,
       getFirstUrl,
       playlist,
-      previewFile,
-      setToPreviewFile,
       setCurrentId,
       nextMedia,
       prevMedia,
-    } = mediaViewerDataStore;
+    } = mediaFormViewerDataStore;
 
-    const { deleteItemAction } = filesActionsStore;
+    const { onCreateOform, onSuggestOformChanges } = contextOptionsStore;
+
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
-    const {
-      onClickFavorite,
-      onShowInfoPanel,
-      onClickDownloadAs,
-      onClickDownload,
-      onClickRename,
-      onClickDelete,
-      onMoveAction,
-      onCopyAction,
-      onDuplicate,
-      onClickLinkEdit,
-      onPreviewClick,
-      onCopyLink,
-    } = contextOptionsStore;
+    const { oformFromFolderId } = oformsStore;
 
-    const { fromFolderId } = oformsStore;
+    const oformFiles = oformsStore.oformFiles;
+    const files = !oformFiles
+      ? []
+      : oformFiles.map((oform) => ({
+          id: oform.id,
+          title: oform.attributes.name_form,
+          security: {
+            Read: true,
+            Comment: false,
+            FillForms: false,
+            Review: false,
+            Edit: false,
+            Delete: false,
+            CustomFilter: false,
+            Rename: false,
+            ReadHistory: false,
+            Lock: false,
+            EditHistory: false,
+            Copy: false,
+            Move: false,
+            Duplicate: false,
+            SubmitToFormGallery: false,
+            Download: false,
+            Convert: false,
+          },
+          viewAccessability: {
+            ImageView: true,
+            MediaView: false,
+            WebView: false,
+            WebEdit: false,
+            WebReview: false,
+            WebCustomFilterEditing: false,
+            WebRestrictedEditing: false,
+            WebComment: false,
+            CoAuhtoring: false,
+            Convert: false,
+          },
+        }));
 
     return {
-      fromFolderId,
+      oformFromFolderId,
       files,
       playlist,
       currentPostionIndex,
@@ -258,19 +239,14 @@ export default inject(
       userAccess,
       visible: playlist.length > 0 && visible,
       currentMediaFileId,
-      deleteItemAction,
       setMediaViewerData,
       extsImagePreviewed,
       extsMediaPreviewed,
-      setRemoveMediaItem: dialogsStore.setRemoveMediaItem,
-      deleteDialogVisible: dialogsStore.deleteDialogVisible,
       someDialogIsOpen: dialogsStore.someDialogIsOpen,
-      fetchFiles,
-      previewFile,
       setIsLoading,
       firstLoad,
-      setToPreviewFile,
-      setIsPreview,
+      onCreateOform,
+      onSuggestOformChanges,
       resetUrl,
       isPreview,
       setScrollToItem,
@@ -278,24 +254,9 @@ export default inject(
       setBufferSelection,
       setAlreadyFetchingRooms,
       isFavoritesFolder,
-      onClickFavorite,
-      onClickDownloadAs,
-      onClickDelete,
-      onClickDownload,
-      onShowInfoPanel,
-      onClickLinkEdit,
-      onPreviewClick,
-      onCopyLink,
-      onClickRename,
-      onMoveAction,
       getIcon,
-      onCopyAction,
-      onDuplicate,
       archiveRoomsId,
-      setSelection,
       getFirstUrl,
-      activeFiles,
-      activeFolders,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

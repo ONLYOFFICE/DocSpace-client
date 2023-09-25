@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { tablet } from "@docspace/components/utils/device";
@@ -27,7 +27,7 @@ const StyledText = styled(Text)`
 `;
 
 const ButtonsWrapper = styled.div`
-  max-width: 445px;
+  max-width: 245px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,8 +37,7 @@ const ButtonsWrapper = styled.div`
     max-width: 462px;
 
     .finish-button,
-    .download-button,
-    .delete-button {
+    .download-button {
       height: 40px;
       font-size: 14px;
     }
@@ -116,11 +115,6 @@ const ImportCompleteStep = ({
           className="download-button"
           label={t("Settings:DownloadLog")}
           onClick={onDownloadLog}
-        />
-        <Button
-          size="small"
-          className="delete-button"
-          label={t("Settings:DeleteTemporaryFile")}
         />
       </ButtonsWrapper>
     </>

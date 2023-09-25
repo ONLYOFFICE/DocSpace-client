@@ -34,7 +34,7 @@ const ButtonsWrapper = styled.div`
   column-gap: 8px;
 
   @media ${tablet} {
-    max-width: 462px;
+    max-width: 255px;
 
     .finish-button,
     .download-button {

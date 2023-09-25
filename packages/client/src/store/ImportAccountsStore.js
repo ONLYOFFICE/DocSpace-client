@@ -15,6 +15,7 @@ class ImportAccountsStore {
   checkedAccounts = [];
   services = [];
   newUsers = [];
+  users = [];
   existUsers = [];
   withoutEmailUsers = [];
   isFileLoading = false;
@@ -69,15 +70,36 @@ class ImportAccountsStore {
         ...user,
         isDublicate: true,
       }));
+      this.users = [...this.newUsers, ...this.existUsers];
       this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
-      this.checkedAccounts = this.users
-        .filter((item) => !item.isDublicate)
-        .map((item) => item.key);
+      this.checkedAccounts = this.newUsers.map((item) => item.key);
     });
   };
 
-  get users() {
-    return [...this.newUsers, ...this.existUsers];
+  changeType = (id, optionKey) => {
+    this.users = this.users.map((user) => {
+      if (id === user.key) {
+        return { ...user, userType: optionKey };
+      }
+      return user;
+    });
+    const [existUsers, newUsers] = this.partition(
+      this.users,
+      (user) => user.isDublicate
+    );
+    this.data.users = [...newUsers];
+    this.data.existUsers = [...existUsers];
+  };
+
+  partition(array, predicate) {
+    return array.reduce(
+      ([pass, fail], elem, currentIndex, array) => {
+        return predicate(elem, currentIndex, array)
+          ? [[...pass, elem], fail]
+          : [pass, [...fail, elem]];
+      },
+      [[], []]
+    );
   }
 
   setData = (data) => {

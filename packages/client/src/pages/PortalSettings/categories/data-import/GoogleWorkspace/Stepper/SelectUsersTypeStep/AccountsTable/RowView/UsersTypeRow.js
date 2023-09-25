@@ -23,7 +23,7 @@ const UsersTypeRow = ({
     <>
       <Row
         sectionWidth={sectionWidth}
-        key={data.id}
+        key={data.key}
         data={data}
         checked={isChecked}
         checkbox={isChecked}
@@ -31,10 +31,11 @@ const UsersTypeRow = ({
         contextButtonSpacerWidth="0"
       >
         <UsersTypeRowContent
+          id={data.key}
           sectionWidth={sectionWidth}
           displayName={data.displayName}
           email={data.email}
-          type={data.type}
+          type={data.userType}
           typeOptions={typeOptions}
           userTypeRef={userTypeRef}
         />

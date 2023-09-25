@@ -10,17 +10,14 @@ const AccountsTable = ({ t, viewAs, accountsData }) => {
     {
       key: "DocSpaceAdmin",
       label: t("Common:DocSpaceAdmin"),
-      onClick: () => console.log("changed-type"),
     },
     {
       key: "RoomAdmin",
       label: t("Common:RoomAdmin"),
-      onClick: () => console.log("changed-type"),
     },
     {
-      key: "PowerUser",
+      key: "User",
       label: t("Common:PowerUser"),
-      onClick: () => console.log("changed-type"),
     },
   ];
 

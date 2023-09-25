@@ -162,6 +162,8 @@ const TableView = ({
         {filteredAccounts.map((data) => (
           <UsersTypeTableRow
             key={data.key}
+            id={data.key}
+            type={data.userType}
             displayName={data.displayName}
             email={data.email}
             typeOptions={typeOptions}

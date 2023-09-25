@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import AccessRightSelect from "@docspace/components/access-right-select";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
+import ComboBox from "@docspace/components/combobox";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
@@ -55,14 +56,23 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 const UsersTypeTableRow = ({
+  id,
   displayName,
   email,
   typeOptions,
   isChecked,
   toggleAccount,
+  type,
+  changeType,
 }) => {
-  const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
   const userTypeRef = useRef();
+
+  const onSelectUser = (e) => {
+    changeType(id, e.key);
+  };
+
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
@@ -81,14 +91,16 @@ const UsersTypeTableRow = ({
 
       <TableCell>
         <div ref={userTypeRef}>
-          <AccessRightSelect
-            accessOptions={typeOptions}
-            selectedOption={selectUserType}
-            scaledOptions={false}
-            scaled={false}
-            manualWidth="fit-content"
+          <ComboBox
             className="user-type"
-            onSelect={setSelectUserType}
+            selectedOption={selectedOption}
+            options={typeOptions}
+            onSelect={onSelectUser}
+            scaled
+            size="content"
+            displaySelectedOption
+            modernView
+            manualWidth="fit-content"
           />
         </div>
       </TableCell>
@@ -100,4 +112,10 @@ const UsersTypeTableRow = ({
   );
 };
 
-export default UsersTypeTableRow;
+export default inject(({ importAccountsStore }) => {
+  const { changeType } = importAccountsStore;
+
+  return {
+    changeType,
+  };
+})(observer(UsersTypeTableRow));

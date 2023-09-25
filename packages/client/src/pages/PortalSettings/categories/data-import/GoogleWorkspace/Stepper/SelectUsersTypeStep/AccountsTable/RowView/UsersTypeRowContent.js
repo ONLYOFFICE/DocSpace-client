@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
-import AccessRightSelect from "@docspace/components/access-right-select";
+import ComboBox from "@docspace/components/combobox";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -61,13 +61,21 @@ const StyledRowContent = styled(RowContent)`
 `;
 
 const UsersTypeRowContent = ({
+  id,
   sectionWidth,
   displayName,
   email,
   typeOptions,
   userTypeRef,
+  type,
+  changeType,
 }) => {
-  const [selectUserType, setSelectUserType] = useState(typeOptions[2]);
+  const onSelectUser = (e) => {
+    changeType(id, e.key);
+  };
+
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   const contentData = [
     <Box displayProp="flex" justifyContent="space-between" alignItems="center">
@@ -77,14 +85,16 @@ const UsersTypeRowContent = ({
       </Box>
 
       <div ref={userTypeRef}>
-        <AccessRightSelect
-          accessOptions={typeOptions}
-          selectedOption={selectUserType}
-          scaledOptions={false}
-          scaled={false}
-          manualWidth="fit-content"
+        <ComboBox
           className="user-type"
-          onSelect={setSelectUserType}
+          selectedOption={selectedOption}
+          options={typeOptions}
+          onSelect={onSelectUser}
+          scaled
+          size="content"
+          displaySelectedOption
+          modernView
+          manualWidth="fit-content"
         />
       </div>
     </Box>,
@@ -97,4 +107,10 @@ const UsersTypeRowContent = ({
   );
 };
 
-export default UsersTypeRowContent;
+export default inject(({ importAccountsStore }) => {
+  const { changeType } = importAccountsStore;
+
+  return {
+    changeType,
+  };
+})(observer(UsersTypeRowContent));

@@ -101,13 +101,13 @@ const SetRoomParams = ({
 
   const onChangeIcon = (icon) => setRoomParams({ ...roomParams, icon: icon });
 
-  const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const onOwnerChange = () => {
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
       setRoomParams({ ...roomParams, roomOwner })
     );
   };
 
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isMe = userId === roomParams?.roomOwner?.id;
   const canOwnerChange = isAdmin || isMe;
 

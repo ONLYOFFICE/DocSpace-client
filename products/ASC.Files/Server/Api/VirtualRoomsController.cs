@@ -637,12 +637,13 @@ public class VirtualRoomsCommonController : ApiControllerBase
     /// <param type="System.Nullable{System.Boolean}, System" name="excludeSubject">Specifies whether to exclude a subject or not</param>
     /// <param type="System.Nullable{ASC.Files.Core.ProviderFilter}, System" name="provider">Filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex)</param>
     /// <param type="System.Nullable{ASC.Files.Core.Core.SubjectFilter}, System" name="subjectFilter">Filter by subject (Owner - 1, Member - 1)</param>
+    /// <param type="System.Nullable{ASC.Files.Core.Core.QuotaFilter}, System" name="quotaFilter">Filter by quota (Default - 1, Custom - 2)</param>
     /// <returns type="ASC.Files.Core.ApiModels.ResponseDto.FolderContentDto, ASC.Files.Core">Rooms contents</returns>
     /// <path>api/2.0/files/rooms</path>
     /// <httpMethod>GET</httpMethod>
     [HttpGet("rooms")]
     public async Task<FolderContentDto<int>> GetRoomsFolderAsync(RoomType? type, string subjectId, bool? searchInContent, bool? withSubfolders, SearchArea? searchArea, bool? withoutTags, string tags, bool? excludeSubject,
-        ProviderFilter? provider, SubjectFilter? subjectFilter)
+        ProviderFilter? provider, SubjectFilter? subjectFilter, QuotaFilter? quotaFilter)
     {
         ErrorIfNotDocSpace();
 
@@ -674,7 +675,7 @@ public class VirtualRoomsCommonController : ApiControllerBase
 
         var content = await _fileStorageService.GetFolderItemsAsync(parentId, startIndex, count, filter, false, subjectId, filterValue,
             searchInContent ?? false, withSubfolders ?? false, orderBy, searchArea ?? SearchArea.Active, default, withoutTags ?? false, tagNames, excludeSubject ?? false,
-            provider ?? ProviderFilter.None, subjectFilter ?? SubjectFilter.Owner);
+            provider ?? ProviderFilter.None, subjectFilter ?? SubjectFilter.Owner, quotaFilter: quotaFilter ?? QuotaFilter.All);
 
         var dto = await _folderContentDtoHelper.GetAsync(content, startIndex);
 

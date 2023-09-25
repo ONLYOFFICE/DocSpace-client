@@ -17,11 +17,21 @@ const SelectUsersStep = ({
   showReminder,
   numberOfCheckedAccounts,
   users,
+  searchValue,
+  setSearchValue,
 }) => {
   const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(users.slice(leftBoundary, rightBoundary));
+  };
+
+  const onChangeInput = (value) => {
+    setSearchValue(value);
+  };
+
+  const onClearSearchInput = () => {
+    setSearchValue("");
   };
 
   return (
@@ -47,8 +57,10 @@ const SelectUsersStep = ({
       <SearchInput
         id="search-users-input"
         placeholder={t("Common:Search")}
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
+        value={searchValue}
+        onChange={onChangeInput}
+        refreshTimeout={100}
+        onClearSearch={onClearSearchInput}
       />
 
       <AccountsTable t={t} accountsData={dataPortion} />
@@ -76,10 +88,13 @@ const SelectUsersStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { numberOfCheckedAccounts, users } = importAccountsStore;
+  const { numberOfCheckedAccounts, users, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
     users,
+    searchValue,
+    setSearchValue,
     numberOfCheckedAccounts,
   };
 })(observer(SelectUsersStep));

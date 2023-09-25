@@ -20,6 +20,7 @@ class ImportAccountsStore {
   isFileLoading = false;
   isLoading = false;
   data = {};
+  searchValue = "";
   toggles = {
     importPersonalFiles: true,
     importSharedFiles: true,
@@ -35,6 +36,10 @@ class ImportAccountsStore {
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
+  };
+
+  setSearchValue = (value) => {
+    this.searchValue = value;
   };
 
   setToggles = (value) => {

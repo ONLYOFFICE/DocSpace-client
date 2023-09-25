@@ -78,6 +78,7 @@ const RowView = ({
   toggleAccount,
   isAccountChecked,
   onCheckAccounts,
+  searchValue,
 }) => {
   const rowRef = useRef(null);
 
@@ -111,6 +112,12 @@ const RowView = ({
     },
   ];
 
+  const filteredAccounts = accountsData.filter(
+    (data) =>
+      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
+
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
       {checkedAccounts.length > 0 && (
@@ -131,7 +138,7 @@ const RowView = ({
         <Text className="row-header-title">{t("Common:Name")}</Text>
       </StyledRow>
 
-      {accountsData.map((data) => (
+      {filteredAccounts.map((data) => (
         <UsersTypeRow
           key={data.key}
           data={data}
@@ -154,6 +161,7 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
+    searchValue,
   } = importAccountsStore;
 
   return {
@@ -165,5 +173,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
+    searchValue,
   };
 })(observer(RowView));

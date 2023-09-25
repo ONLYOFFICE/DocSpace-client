@@ -50,6 +50,7 @@ const TableView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     users,
+    searchValue,
   } = props;
   const tableRef = useRef(null);
 
@@ -75,6 +76,12 @@ const TableView = (props) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
+  const filteredAccounts = accountsData.filter(
+    (data) =>
+      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
+
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
       <UsersTableHeader
@@ -98,7 +105,7 @@ const TableView = (props) => {
         hasMoreFiles={false}
         itemCount={accountsData.length}
       >
-        {accountsData.map((data) => (
+        {filteredAccounts.map((data) => (
           <UsersTableRow
             t={t}
             key={data.key}
@@ -123,6 +130,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     users,
+    searchValue,
   } = importAccountsStore;
 
   return {
@@ -134,5 +142,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    searchValue,
   };
 })(observer(TableView));

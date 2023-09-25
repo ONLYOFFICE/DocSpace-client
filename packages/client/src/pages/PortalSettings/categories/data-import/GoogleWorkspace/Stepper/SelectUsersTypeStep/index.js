@@ -18,11 +18,21 @@ const SelectUsersTypeStep = ({
   showReminder,
   checkedAccounts,
   users,
+  searchValue,
+  setSearchValue,
 }) => {
   const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(users.slice(leftBoundary, rightBoundary));
+  };
+
+  const onChangeInput = (value) => {
+    setSearchValue(value);
+  };
+
+  const onClearSearchInput = () => {
+    setSearchValue("");
   };
 
   return (
@@ -41,8 +51,10 @@ const SelectUsersTypeStep = ({
         <StyledSearchInput
           id="search-users-type-input"
           placeholder={t("Common:Search")}
-          onChange={() => console.log("changed")}
-          onClearSearch={() => console.log("cleared")}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
         />
       )}
 
@@ -70,10 +82,13 @@ const SelectUsersTypeStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedAccounts, users } = importAccountsStore;
+  const { checkedAccounts, users, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
     checkedAccounts,
     users,
+    searchValue,
+    setSearchValue,
   };
 })(observer(SelectUsersTypeStep));

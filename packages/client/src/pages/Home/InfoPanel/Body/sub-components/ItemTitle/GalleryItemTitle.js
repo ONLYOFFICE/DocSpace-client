@@ -6,7 +6,7 @@ import { inject } from "mobx-react";
 
 import { Text } from "@docspace/components";
 import { StyledTitle } from "../../styles/common";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledGalleryContextOptions = styled.div`
@@ -22,17 +22,18 @@ const GalleryItemTitle = ({
   getIcon,
   currentColorScheme,
 
-  getFormContextOptions,
-  categoryType,
+  getFormGalleryContextOptions,
 }) => {
   const itemTitleRef = useRef();
   const contextMenuRef = useRef();
 
-  const params = useParams();
   const navigate = useNavigate();
 
-  const onGetContextOptions = () =>
-    getFormContextOptions(t, gallerySelected, categoryType, params, navigate);
+  const onGetContextOptions = () => {
+    let options = getFormGalleryContextOptions(gallerySelected, t, navigate);
+    options = options.filter((option) => option.key !== "template-info");
+    return options;
+  };
 
   const onClickContextMenu = (e) => {
     e.button === 2;
@@ -70,7 +71,7 @@ const GalleryItemTitle = ({
   );
 };
 
-export default inject(({ oformsStore, filesStore }) => ({
-  getFormContextOptions: oformsStore.getFormContextOptions,
-  categoryType: filesStore.categoryType,
+export default inject(({ contextOptionsStore }) => ({
+  getFormGalleryContextOptions:
+    contextOptionsStore.getFormGalleryContextOptions,
 }))(withTranslation(["FormGallery", "Common"])(GalleryItemTitle));

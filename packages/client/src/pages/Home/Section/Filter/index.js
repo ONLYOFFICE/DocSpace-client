@@ -203,6 +203,17 @@ const getTags = (filterValues) => {
   return tags;
 };
 
+const getQuotaFilter = (filterValues) => {
+  const filterType = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterQuota;
+    }),
+    "key"
+  );
+
+  return filterType?.toString() ? +filterType : null;
+};
+
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
@@ -314,6 +325,7 @@ const SectionFilterContent = ({
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
+        const quota = getQuotaFilter(data) || null;
 
         const newFilter = roomsFilter.clone();
 
@@ -323,6 +335,10 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -775,6 +791,18 @@ const SectionFilterContent = ({
           group: FilterGroups.roomFilterType,
         });
       }
+      if (roomsFilter.quotaFilter) {
+        const key = +roomsFilter.quotaFilter;
+
+        const label =
+          key === FilterKeys.customQuota ? "Custom quota" : "Default quota";
+
+        filterValues.push({
+          key: roomsFilter.quotaFilter,
+          label: label,
+          group: FilterGroups.filterQuota,
+        });
+      }
 
       if (roomsFilter?.tags?.length > 0) {
         filterValues.push({
@@ -953,6 +981,7 @@ const SectionFilterContent = ({
     roomsFilter.tags?.length,
     roomsFilter.excludeSubject,
     roomsFilter.withoutTags,
+    roomsFilter.quotaFilter,
     // roomsFilter.withSubfolders,
     // roomsFilter.searchInContent,
     userId,
@@ -972,22 +1001,22 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.filterQuota,
         group: FilterGroups.filterQuota,
-        label: "Storage quota",
+        label: t("Common:StorageQuota"),
         isHeader: true,
         withoutSeparator: true,
         withMultiItems: true,
       },
       {
         id: "filter_custom-quota",
-        key: FilterKeys.customQuota,
+        key: FilterKeys.customQuota.toString(),
         group: FilterGroups.filterQuota,
-        label: "Custom quota",
+        label: t("Common:CustomQuota"),
       },
       {
         id: "filter_default-quota",
-        key: FilterKeys.defaultQuota,
+        key: FilterKeys.defaultQuota.toString(),
         group: FilterGroups.filterQuota,
-        label: "Default quota",
+        label: t("Common:DefaultQuota"),
       },
     ];
 
@@ -1933,6 +1962,10 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.roomFilterType) {
           newFilter.type = null;
+        }
+
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
         }
 
         if (group === FilterGroups.roomFilterSubject) {

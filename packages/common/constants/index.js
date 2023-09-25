@@ -467,8 +467,8 @@ export const FilterKeys = Object.freeze({
   me: "me",
   other: "other",
   user: "user",
-  customQuota: "custom-quota",
-  defaultQuota: "default-quota",
+  customQuota: 2,
+  defaultQuota: 1,
 });
 
 export const IndexedDBStores = Object.freeze({

@@ -46,6 +46,9 @@ const DEFAULT_WITHOUT_TAGS = false;
 const SUBJECT_FILTER = "subjectFilter";
 const DEFAULT_SUBJECT_FILTER = null;
 
+const QUOTA_FILTER = "quotaFilter";
+const DEFAULT_QUOTA_FILTER = null;
+
 class RoomsFilter {
   static getDefault(total = DEFAULT_TOTAL) {
     return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
@@ -112,6 +115,7 @@ class RoomsFilter {
       urlFilter[EXCLUDE_SUBJECT] || defaultFilter.excludeSubject;
 
     const withoutTags = urlFilter[WITHOUT_TAGS] || defaultFilter.withoutTags;
+    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
 
     const newFilter = new RoomsFilter(
       page,
@@ -129,7 +133,8 @@ class RoomsFilter {
       sortOrder,
       excludeSubject,
       withoutTags,
-      subjectFilter
+      subjectFilter,
+      quotaFilter
     );
 
     return newFilter;
@@ -151,7 +156,8 @@ class RoomsFilter {
     sortOrder = DEFAULT_SORT_ORDER,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
     withoutTags = DEFAULT_WITHOUT_TAGS,
-    subjectFilter = DEFAULT_SUBJECT_FILTER
+    subjectFilter = DEFAULT_SUBJECT_FILTER,
+    quotaFilter = DEFAULT_QUOTA_FILTER
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -169,6 +175,7 @@ class RoomsFilter {
     this.excludeSubject = excludeSubject;
     this.withoutTags = withoutTags;
     this.subjectFilter = subjectFilter;
+    this.quotaFilter = quotaFilter;
   }
 
   getStartIndex = () => {
@@ -200,6 +207,7 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
     } = this;
 
     const dtoFilter = {
@@ -219,6 +227,7 @@ class RoomsFilter {
       excludeSubject: excludeSubject,
       withoutTags: withoutTags,
       subjectFilter: subjectFilter,
+      quotaFilter: quotaFilter,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -242,6 +251,7 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
+      quotaFilter,
     } = this;
 
     const dtoFilter = {};
@@ -290,6 +300,8 @@ class RoomsFilter {
       dtoFilter[SUBJECT_FILTER] = subjectFilter.toString();
     }
 
+    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
+
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
@@ -320,7 +332,8 @@ class RoomsFilter {
       this.sortOrder,
       this.excludeSubject,
       this.withoutTags,
-      this.subjectFilter
+      this.subjectFilter,
+      this.quotaFilter
     );
   }
 

@@ -47,7 +47,8 @@ public enum FolderType
     CustomRoom = 19,
     Archive = 20,
     ThirdpartyBackup = 21,
-    PublicRoom = 22
+    PublicRoom = 22,
+    FormRoom = 24
 }
 
 public interface IFolder

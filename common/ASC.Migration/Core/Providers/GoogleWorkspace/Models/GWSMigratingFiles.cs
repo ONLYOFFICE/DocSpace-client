@@ -58,6 +58,7 @@ public class GwsMigratingFiles : MigratingFiles
     private Dictionary<string, GwsMigratingUser> _users;
     private string _folderCreation;
     private readonly SecurityContext _securityContext;
+    private readonly UserManager _userManager;
 
     public GwsMigratingFiles(
         GlobalFolderHelper globalFolderHelper,
@@ -66,7 +67,8 @@ public class GwsMigratingFiles : MigratingFiles
         FileStorageService fileStorageService,
         TempPath tempPath,
         IServiceProvider serviceProvider,
-        SecurityContext securityContext)
+        SecurityContext securityContext,
+        UserManager userManager)
     {
         _globalFolderHelper = globalFolderHelper;
         _daoFactory = daoFactory;
@@ -75,6 +77,7 @@ public class GwsMigratingFiles : MigratingFiles
         _tempPath = tempPath;
         _serviceProvider = serviceProvider;
         _securityContext = securityContext;
+        _userManager = userManager;
     }
 
     public void Init(string rootFolder, GwsMigratingUser user, Action<string, Exception> log)
@@ -99,7 +102,7 @@ public class GwsMigratingFiles : MigratingFiles
         _folders = new List<string>();
         _folderCreation = _folderCreation != null ? _folderCreation : DateTime.Now.ToString("dd.MM.yyyy");
         _newParentFolder = MigrationResource.GoogleModuleNameDocuments + " " + _folderCreation;
-        _newSharedParentFolder = $"Google files shared from {_user.DisplayName} {_folderCreation}";
+        _newSharedParentFolder = $"Google files shared from {_user.Email} {_folderCreation}";
 
         foreach (var entry in entries)
         {
@@ -225,7 +228,8 @@ public class GwsMigratingFiles : MigratingFiles
 
                             try
                             {
-                                await _securityContext.AuthenticateMe(shareInfo.EmailAddress);
+                                var user = await _userManager.GetUserByEmailAsync(shareInfo.EmailAddress);
+                                await _securityContext.AuthenticateMeAsync(user.Id);
                                 if (!sharedFolders.ContainsKey(shareInfo.EmailAddress))
                                 {
                                     var parentId = await _globalFolderHelper.FolderMyAsync;
@@ -239,9 +243,9 @@ public class GwsMigratingFiles : MigratingFiles
                                 Log($"Couldn't share file {maskParentPath}/{Path.GetFileName(file)} to {shareInfo.EmailAddress}", ex);
                             }
                         }
-                        await _securityContext.AuthenticateMe(_user.Email);
                     }
                 }
+                await _securityContext.AuthenticateMeAsync(_user.Guid);
             }
         }
         catch

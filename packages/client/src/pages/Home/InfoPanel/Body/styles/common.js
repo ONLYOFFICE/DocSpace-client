@@ -97,7 +97,7 @@ const StyledTitle = styled.div`
     line-height: 16px;
 
     margin: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auro"};
+      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
   }
 
   ${(props) =>

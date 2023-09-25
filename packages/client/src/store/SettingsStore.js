@@ -329,6 +329,8 @@ class SettingsStore {
         case RoomsType.PublicRoom:
           path = "public.svg";
           break;
+        case RoomsType.FormRoom:
+          path = "form.svg";
       }
     }
 

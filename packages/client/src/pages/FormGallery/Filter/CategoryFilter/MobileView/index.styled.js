@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import DropDown from "@docspace/components/drop-down";
 import DropDownItem from "@docspace/components/drop-down-item";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
+import { Base } from "@docspace/components/themes";
 
 export const CategoryFilterMobileWrapper = styled.div`
   width: 100%;
@@ -50,7 +51,8 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
   padding-bottom: 8px;
 
   .submenu-arrow {
-    margin-right: 0;
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "ltl" ? `0 0 0 auto` : `0 auto 0 0`};
 
     svg {
       height: 12px;
@@ -64,6 +66,8 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
       `}
   }
 `;
+
+CategoryFilterItemMobile.defaultProps = { theme: Base };
 
 export const StyledSubItemMobile = styled(DropDownItem)`
   padding-left: 28px;

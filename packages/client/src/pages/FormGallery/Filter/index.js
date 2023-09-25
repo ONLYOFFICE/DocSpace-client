@@ -10,6 +10,7 @@ import SortFilter from "./SortFilter";
 import { smallTablet, tablet } from "@docspace/components/utils/device";
 import { getDefaultOformLocale } from "@docspace/common/utils";
 import OformsFilter from "@docspace/common/api/oforms/filter";
+import { Base } from "@docspace/components/themes";
 
 export const StyledFilter = styled.div`
   display: flex;
@@ -38,13 +39,17 @@ export const StyledFilter = styled.div`
 
   @media ${smallTablet} {
     height: 72px;
-    flex-direction: column-reverse;
+
+    flex-direction: ${({ theme }) =>
+      theme.interfaceDirection === "ltl" ? `column-reverse` : `column`};
 
     .form-only-filters {
       width: 100%;
     }
   }
 `;
+
+StyledFilter.defaultProps = { theme: Base };
 
 const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
   return (

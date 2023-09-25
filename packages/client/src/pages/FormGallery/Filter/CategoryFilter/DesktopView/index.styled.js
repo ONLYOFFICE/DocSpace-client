@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import DropDown from "@docspace/components/drop-down";
 import DropDownItem from "@docspace/components/drop-down-item";
 import ComboBox from "@docspace/components/combobox";
+import { Base } from "@docspace/components/themes";
 
 export const CategoryFilterWrapper = styled.div`
   position: relative;
@@ -31,8 +32,12 @@ export const CategoryFilterItem = styled(DropDownItem)`
   width: 220px;
   height: 32px;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   box-sizing: border-box;
-  padding: 8px 16px;
+  padding: 8px 12px;
 
   font-size: 12px;
   font-weight: 600;
@@ -43,23 +48,35 @@ export const CategoryFilterItem = styled(DropDownItem)`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    text-align: ${({ theme }) =>
+      theme.interfaceDirection === "ltl" ? `left` : `right`};
   }
 
   .submenu-arrow {
-    margin-right: 0;
+    margin: 0;
     svg {
       height: 12px;
       width: 12px;
     }
   }
 `;
+CategoryFilterItem.defaultProps = { theme: Base };
 
 export const CategoryFilterSubList = styled(DropDown)`
   position: absolute;
   top: 0;
   margin-top: ${({ marginTop }) => marginTop};
-  left: calc(100% + 4px);
   padding: 4px 0;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "ltl"
+      ? css`
+          left: calc(100% + 4px);
+        `
+      : css`
+          right: calc(100% + 4px);
+        `};
 
   max-height: 296px;
   max-width: auto;
@@ -80,12 +97,22 @@ export const CategoryFilterSubList = styled(DropDown)`
   &:before {
     content: "";
     position: absolute;
-    left: -4px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "ltl"
+        ? css`
+            left: -4px;
+          `
+        : css`
+            right: -4px;
+          `};
+
     top: 0;
     width: 4px;
     height: 100%;
   }
 `;
+CategoryFilterSubList.defaultProps = { theme: Base };
 
 export const CategoryFilterSubListItem = styled(DropDownItem)`
   width: 208px;

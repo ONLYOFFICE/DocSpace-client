@@ -53,7 +53,7 @@ export const LanguageFilterSelectedItem = styled(DropDownItem)`
   justify-content: center;
 
   .drop-down-icon {
-    margin-right: 0;
+    margin: 0;
     width: 16px;
     height: 16px;
     & > div {
@@ -82,7 +82,7 @@ export const LanguageFilterItem = styled(DropDownItem)`
     `}
 
   .drop-down-icon {
-    margin-right: 0;
+    margin: 0;
     width: 16px;
     height: 16px;
     line-height: 0 !important;

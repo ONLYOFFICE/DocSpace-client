@@ -28,7 +28,7 @@ export const SortButton = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 0;
+      margin: 0;
     }
 
     .combo-buttons_arrow-icon {

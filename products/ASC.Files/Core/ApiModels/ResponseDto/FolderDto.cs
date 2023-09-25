@@ -78,6 +78,14 @@ public class FolderDto<T> : FileEntryDto<T>
     /// <type>System.Boolean, System</type>
     public bool Private { get; set; }
 
+    /// <summary>Quota</summary>
+    /// <type>System.Int32, System</type>
+    public long? Quota { get; set; }
+
+    /// <summary>Counter</summary>
+    /// <type>System.Int32, System</type>
+    public long? Counter { get; set; }
+
     protected internal override FileEntryType EntryType { get => FileEntryType.Folder; }
 
     public FolderDto() { }
@@ -113,6 +121,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
     private readonly RoomLogoManager _roomLogoManager;
     private readonly RoomsNotificationSettingsHelper _roomsNotificationSettingsHelper;
     private readonly BadgesSettingsHelper _badgesSettingsHelper;
+    private readonly SettingsManager _settingsManager;
 
     public FolderDtoHelper(
         ApiDateTimeHelper apiDateTimeHelper,
@@ -124,6 +133,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
         FileSharingHelper fileSharingHelper,
         RoomLogoManager roomLogoManager,
         BadgesSettingsHelper badgesSettingsHelper,
+        SettingsManager settingsManager,
         RoomsNotificationSettingsHelper roomsNotificationSettingsHelper)
         : base(apiDateTimeHelper, employeeWrapperHelper, fileSharingHelper, fileSecurity)
     {
@@ -133,6 +143,7 @@ public class FolderDtoHelper : FileEntryDtoHelper
         _roomLogoManager = roomLogoManager;
         _roomsNotificationSettingsHelper = roomsNotificationSettingsHelper;
         _badgesSettingsHelper = badgesSettingsHelper;
+        _settingsManager = settingsManager;
     }
 
     public async Task<FolderDto<T>> GetAsync<T>(Folder<T> folder, List<Tuple<FileEntry<T>, bool>> folders = null)
@@ -163,6 +174,13 @@ public class FolderDtoHelper : FileEntryDtoHelper
 
                 var isMuted = _roomsNotificationSettingsHelper.CheckMuteForRoom(result.Id.ToString());
                 result.Mute = isMuted;
+            }
+
+            var quotaRoomSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
+            if (quotaRoomSettings.EnableQuota)
+            {
+                result.Counter = folder.Counter;
+                result.Quota = folder.Quota > -2 ? folder.Quota : quotaRoomSettings.DefaultQuota;
             }
         }
 

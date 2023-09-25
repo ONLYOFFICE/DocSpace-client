@@ -152,6 +152,7 @@ export const RoomsTypeTranslations = Object.freeze({
   4: "Files:ViewOnlyRooms",
   5: "Files:CustomRooms",
   6: "Files:PublicRoom",
+  7: "Files:FormRoom",
 });
 /**
  * Enum for room provider type.

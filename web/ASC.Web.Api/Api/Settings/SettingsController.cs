@@ -376,7 +376,7 @@ public class SettingsController : BaseSettingsController
     {
         await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
 
-        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(Tenant.Id);
+        var tenanSpaceQuota = await _tenantManager.GetTenantQuotaAsync(Tenant.Id);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
         if (maxTotalSize < inDto.DefaultQuota)

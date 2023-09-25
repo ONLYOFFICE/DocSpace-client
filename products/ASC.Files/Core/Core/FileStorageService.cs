@@ -644,7 +644,7 @@ public class FileStorageService //: IFileStorageService
 
         var tenantId = await _tenantManager.GetCurrentTenantIdAsync();
 
-        var tenanSpaceQuota = await _quotaService.GetTenantQuotaAsync(tenantId);
+        var tenanSpaceQuota = await _tenantManager.GetTenantQuotaAsync(tenantId);
         var maxTotalSize = tenanSpaceQuota != null ? tenanSpaceQuota.MaxTotalSize : -1;
 
         ErrorIf(maxTotalSize < quota, Resource.QuotaGreaterPortalError);

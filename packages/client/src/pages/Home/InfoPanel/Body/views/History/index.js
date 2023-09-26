@@ -72,8 +72,10 @@ const History = ({
   if (!selectionHistory) return <Loaders.InfoPanelViewLoader view="history" />;
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
+  console.log("selectionHistory", selectionHistory);
+
   return (
-    <StyledHistoryList>
+    <StyledHistoryList id="StyledHistoryList">
       {selectionHistory.map(({ day, feeds }) => [
         <StyledHistorySubtitle key={day}>{day}</StyledHistorySubtitle>,
         ...feeds.map((feed, i) => (

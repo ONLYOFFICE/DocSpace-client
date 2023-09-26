@@ -6,16 +6,16 @@ import { ContextMenu, ContextMenuButton } from "@docspace/components";
 
 import ContextHelper from "../../helpers/ContextHelper";
 
-const StyledItemContextOptions = styled.div`
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
-`;
+// const StyledItemContextOptions = styled.div`
+//   ${props =>
+//     props.theme.interfaceDirection === "rtl"
+//       ? css`
+//           margin-right: auto;
+//         `
+//       : css`
+//           margin-left: auto;
+//         `}
+// `;
 
 const ItemContextOptions = ({
   t,
@@ -33,7 +33,7 @@ const ItemContextOptions = ({
 
   const contextMenuRef = useRef();
 
-  const onContextMenu = e => {
+  const onContextMenu = (e) => {
     e.button === 2;
     if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
     contextMenuRef.current.show(e);
@@ -70,7 +70,7 @@ const ItemContextOptions = ({
   };
 
   return (
-    <StyledItemContextOptions>
+    <>
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
@@ -91,7 +91,7 @@ const ItemContextOptions = ({
           displayType="toggle"
         />
       )}
-    </StyledItemContextOptions>
+    </>
   );
 };
 

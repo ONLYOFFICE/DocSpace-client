@@ -41,8 +41,11 @@ const HistoryBlock = ({
     ? initiator.avatarSmall
     : DefaultUserAvatarSmall;
 
+  console.log("json.ModifiedDate", json.ModifiedDate);
+
   return (
     <StyledHistoryBlock
+      id="StyledHistoryBlock"
       withBottomDivider={!isLastEntity}
       isUserAction={isUserAction}
     >

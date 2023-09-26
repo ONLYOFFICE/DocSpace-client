@@ -6,15 +6,17 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/components";
 
 import ItemContextOptions from "./ItemContextOptions";
+import CalendarComponent from "./Calendar";
 
-import { StyledTitle } from "../../styles/common";
+import { StyledTitle, StyledItemOptions } from "../../styles/common";
 
-const FilesItemTitle = ({ t, selection, isSeveralItems }) => {
+const FilesItemTitle = ({ t, selection, isSeveralItems, openHistory }) => {
   const itemTitleRef = useRef();
 
   if (isSeveralItems) return <></>;
 
   const icon = selection.icon;
+  //only history
 
   return (
     <StyledTitle ref={itemTitleRef}>
@@ -27,11 +29,15 @@ const FilesItemTitle = ({ t, selection, isSeveralItems }) => {
       </div>
       <Text className="text">{selection.title}</Text>
       {selection && (
-        <ItemContextOptions
-          t={t}
-          itemTitleRef={itemTitleRef}
-          selection={selection}
-        />
+        <StyledItemOptions>
+          {openHistory && <CalendarComponent />}
+
+          <ItemContextOptions
+            t={t}
+            itemTitleRef={itemTitleRef}
+            selection={selection}
+          />
+        </StyledItemOptions>
       )}
     </StyledTitle>
   );

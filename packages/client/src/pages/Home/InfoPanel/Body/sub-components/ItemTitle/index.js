@@ -44,12 +44,15 @@ const ItemTitle = ({
       ? selectionParentRoom
       : selection;
 
+  const openHistory = roomsView === "info_history";
+
   return (
     <FilesItemTitle
       selectionLength={selectionLength}
       selection={filesItemSelection}
       isSeveralItems={isSeveralItems}
       getIcon={getIcon}
+      openHistory={openHistory}
     />
   );
 };

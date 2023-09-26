@@ -5,7 +5,7 @@ import { hugeMobile, tablet } from "@docspace/components/utils/device";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding: 0px 20px 0 3px;
@@ -13,8 +13,8 @@ const StyledInfoPanelBody = styled.div`
       : css`
           padding: 0px 3px 0 20px;
         `}
-  color: ${props => props.theme.infoPanel.textColor};
-  background-color: ${props => props.theme.infoPanel.backgroundColor};
+  color: ${(props) => props.theme.infoPanel.textColor};
+  background-color: ${(props) => props.theme.infoPanel.backgroundColor};
 
   .no-item {
     text-align: center;
@@ -29,7 +29,7 @@ const StyledInfoPanelBody = styled.div`
   }
 
   @media ${hugeMobile} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 0px 16px 0 8px;
@@ -44,7 +44,7 @@ const StyledTitle = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding: 24px 20px 24px 0px;
@@ -55,7 +55,7 @@ const StyledTitle = styled.div`
           margin-left: -20px;
         `}
 
-  background: ${props => props.theme.infoPanel.backgroundColor};
+  background: ${(props) => props.theme.infoPanel.backgroundColor};
 
   display: flex;
   flex-wrap: no-wrap;
@@ -74,7 +74,7 @@ const StyledTitle = styled.div`
     }
     &.is-room {
       border-radius: 6px;
-      outline: 1px solid ${props => props.theme.itemIcon.borderColor};
+      outline: 1px solid ${(props) => props.theme.itemIcon.borderColor};
     }
   }
 
@@ -91,12 +91,12 @@ const StyledTitle = styled.div`
     -webkit-line-clamp: 2;
   }
 
-  ${props =>
+  ${(props) =>
     props.withBottomBorder &&
     css`
       width: calc(100% + 20px);
       margin: 0 -20px 0 -20px;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               padding: 23px 23px 23px 0;
@@ -104,7 +104,7 @@ const StyledTitle = styled.div`
           : css`
               padding: 23px 0 23px 20px;
             `}
-      border-bottom: ${props =>
+      border-bottom: ${(props) =>
         `solid 1px ${props.theme.infoPanel.borderColor}`};
     `}
 
@@ -115,7 +115,7 @@ const StyledTitle = styled.div`
 
   @media ${hugeMobile} {
     width: calc(100vw - 32px);
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 24px 16px 24px 0;
@@ -124,11 +124,11 @@ const StyledTitle = styled.div`
             padding: 24px 0 24px 16px;
           `}
 
-    ${props =>
+    ${(props) =>
       props.withBottomBorder &&
       css`
         width: calc(100% + 16px);
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 padding: 23px 16px 23px 0;
@@ -184,7 +184,7 @@ const StyledProperties = styled.div`
         background: red;
         max-width: 195px;
         margin: 0;
-        background: ${props => props.theme.infoPanel.details.tagBackground};
+        background: ${(props) => props.theme.infoPanel.details.tagBackground};
         p {
           white-space: nowrap;
           overflow: hidden;
@@ -209,7 +209,7 @@ const StyledProperties = styled.div`
               width: 12px;
               height: 12px;
               path {
-                fill: ${props =>
+                fill: ${(props) =>
                   props.theme.infoPanel.details.commentEditorIconColor};
               }
             }
@@ -247,7 +247,27 @@ const StyledProperties = styled.div`
   }
 `;
 
+const StyledItemOptions = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
+
+  display: flex;
+`;
+
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
+StyledItemOptions.defaultProps = { theme: Base };
 
-export { StyledInfoPanelBody, StyledTitle, StyledSubtitle, StyledProperties };
+export {
+  StyledInfoPanelBody,
+  StyledTitle,
+  StyledSubtitle,
+  StyledProperties,
+  StyledItemOptions,
+};

@@ -167,6 +167,15 @@ class PeopleStore {
 
     window.dispatchEvent(event);
   };
+  disableUserQuota = (users) => {
+    const { updateUserQuota } = this.usersStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    updateUserQuota(-1, userIDs);
+  };
   onChangeStatus = (status) => {
     const users = [];
 
@@ -225,7 +234,6 @@ class PeopleStore {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
 
     const { isVisible } = this.authStore.infoPanelStore;
-    const { updateUserQuota } = this.usersStore;
 
     const options = [];
 
@@ -332,7 +340,7 @@ class PeopleStore {
         label: "Disable quota",
         disabled: !hasUsersToDisableQuota,
         iconUrl: DisableQuotaReactSvgUrl,
-        onClick: () => updateUserQuota(-1, selection),
+        onClick: () => this.disableUserQuota(selection),
       },
       {
         id: "menu-delete",

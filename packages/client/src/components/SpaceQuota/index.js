@@ -12,8 +12,6 @@ const SpaceQuota = (props) => {
     hideColumns,
     isCustomQuota = false,
     isDisabledQuotaChange,
-    quotaLimit = 0,
-    usedQuota = 0,
     type,
     item,
     changeUserQuota,
@@ -21,8 +19,11 @@ const SpaceQuota = (props) => {
     updateUserQuota,
     className,
   } = props;
-  console.log("SpaceQuota render");
-  const [action, setAction] = useState("no-quota");
+
+  const [action, setAction] = useState(
+    item?.quotaLimit === -1 ? "no-quota" : "current-size"
+  );
+
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
 
@@ -45,30 +46,17 @@ const SpaceQuota = (props) => {
         changeRoomQuota([item], successCallback, abortCallback);
       }
 
+      setAction("current-size");
       return;
     }
 
     if (action === "no-quota") {
-      if (type === "user") updateUserQuota(-1, [item]);
+      if (type === "user") updateUserQuota(-1, [item.id]);
+
+      setAction("no-quota");
       return;
     }
-    setAction(action);
   };
-
-  const options = [
-    {
-      id: "info-account-quota_edit",
-      key: "change-quota",
-      label: "Change quota",
-      action: "change",
-    },
-    {
-      id: "info-account-quota_no-quota",
-      key: "no-quota",
-      label: "Disable quota",
-      action: "no-quota",
-    },
-  ];
 
   if (isCustomQuota)
     options?.splice(1, 0, {
@@ -78,18 +66,34 @@ const SpaceQuota = (props) => {
       action: "default",
     });
 
-  const usedSpace = getConvertedQuota(t, usedQuota);
-  const spaceLimited = getConvertedQuota(t, quotaLimit);
+  const usedQuota = getConvertedQuota(t, item?.usedSpace);
+  const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
 
+  const options = [
+    {
+      id: "info-account-quota_edit",
+      key: "change-quota",
+      label: "Change quota",
+      action: "change",
+    },
+    {
+      id: "info-account-quota_current-size",
+      key: "current-size",
+      label: spaceLimited,
+      action: "current-size",
+    },
+    {
+      id: "info-account-quota_no-quota",
+      key: "no-quota",
+      label: "Disable quota",
+      action: "no-quota",
+    },
+  ];
   const displayFunction = () => {
     const option = options.find((elem) => elem.action === action);
 
     if (option.key === "no-quota") {
       option.label = "Unlimited";
-      return option;
-    }
-    if (option.key === "change-quota") {
-      option.label = spaceLimited;
       return option;
     }
 
@@ -98,11 +102,10 @@ const SpaceQuota = (props) => {
 
   const selectedOption = displayFunction();
 
-  // console.log("SpaceQuota selectedOption", selectedOption);
   if (isDisabledQuotaChange) {
     return (
       <StyledText fontWeight={600}>
-        {usedSpace} / {spaceLimited}
+        {usedQuota} / {spaceLimited}
       </StyledText>
     );
   }
@@ -112,7 +115,7 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       isDisabledQuotaChange={isDisabledQuotaChange}
     >
-      <Text fontWeight={600}>{usedSpace} / </Text>
+      <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
         className={className}
@@ -123,7 +126,7 @@ const SpaceQuota = (props) => {
         size="content"
         modernView
         isLoading={isLoading}
-        manualWidth={"fit-content"}
+        manualWidth="fit-content"
       />
     </StyledBody>
   );

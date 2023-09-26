@@ -10,14 +10,17 @@ const AccountsTable = ({ t, viewAs, accountsData }) => {
     {
       key: "DocSpaceAdmin",
       label: t("Common:DocSpaceAdmin"),
+      onClick: (e) => console.log(e),
     },
     {
       key: "RoomAdmin",
       label: t("Common:RoomAdmin"),
+      onClick: (e) => console.log(e),
     },
     {
       key: "User",
       label: t("Common:PowerUser"),
+      onClick: (e) => console.log(e),
     },
   ];
 
@@ -50,4 +53,6 @@ export default inject(({ setup }) => {
   return {
     viewAs,
   };
-})(withTranslation(["ChangeUserTypeDialog"])(observer(AccountsTable)));
+})(
+  withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable))
+);

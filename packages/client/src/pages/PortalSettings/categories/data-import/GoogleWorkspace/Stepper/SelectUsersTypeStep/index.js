@@ -35,6 +35,12 @@ const SelectUsersTypeStep = ({
     setSearchValue("");
   };
 
+  const filteredAccounts = dataPortion.filter(
+    (data) =>
+      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
+
   return (
     <>
       <SaveCancelButtons
@@ -58,7 +64,7 @@ const SelectUsersTypeStep = ({
         />
       )}
 
-      <AccountsTable t={t} accountsData={dataPortion} />
+      <AccountsTable t={t} accountsData={filteredAccounts} />
 
       {users.length > 25 && (
         <AccountsPaging
@@ -68,15 +74,17 @@ const SelectUsersTypeStep = ({
         />
       )}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onNextStep}
-        onCancelClick={onPrevStep}
-        showReminder={showReminder}
-        saveButtonLabel={t("Settings:NextStep")}
-        cancelButtonLabel={t("Common:Back")}
-        displaySettings={true}
-      />
+      {filteredAccounts.length > 0 && (
+        <SaveCancelButtons
+          className="save-cancel-buttons"
+          onSaveClick={onNextStep}
+          onCancelClick={onPrevStep}
+          showReminder={showReminder}
+          saveButtonLabel={t("Settings:NextStep")}
+          cancelButtonLabel={t("Common:Back")}
+          displaySettings={true}
+        />
+      )}
     </>
   );
 };

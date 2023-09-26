@@ -6,11 +6,17 @@ import styled from "styled-components";
 
 import UsersTypeRow from "./UsersTypeRow";
 
+import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import IconButton from "@docspace/components/icon-button";
+import Link from "@docspace/components/link";
+import Box from "@docspace/components/box";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
 import Text from "@docspace/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
+import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
@@ -47,6 +53,14 @@ const StyledRowContainer = styled(RowContainer)`
   .table-container_header {
     position: absolute;
   }
+
+  .clear-icon {
+    margin-right: 8px;
+  }
+
+  .ec-desc {
+    max-width: 348px;
+  }
 `;
 
 const StyledRow = styled(Row)`
@@ -78,12 +92,16 @@ const RowView = ({
   toggleAccount,
   isAccountChecked,
   onCheckAccounts,
-  searchValue,
+  setSearchValue,
 }) => {
   const rowRef = useRef(null);
 
   const toggleAll = (checked) => {
     onCheckAccounts(checked, users);
+  };
+
+  const onClearFilter = () => {
+    setSearchValue("");
   };
 
   const isIndeterminate =
@@ -105,18 +123,11 @@ const RowView = ({
       key: "change-type",
       label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
       disabled: false,
-      onClick: () => console.log("open-menu"),
       withDropDown: true,
       options: typeOptions,
       iconUrl: ChangeTypeReactSvgUrl,
     },
   ];
-
-  const filteredAccounts = accountsData.filter(
-    (data) =>
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
-  );
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
@@ -133,21 +144,50 @@ const RowView = ({
           />
         </div>
       )}
+      {accountsData.length > 0 ? (
+        <>
+          <StyledRow key="Name" sectionWidth={sectionWidth} onClick={toggleAll}>
+            <Text className="row-header-title">{t("Common:Name")}</Text>
+          </StyledRow>
 
-      <StyledRow key="Name" sectionWidth={sectionWidth} onClick={toggleAll}>
-        <Text className="row-header-title">{t("Common:Name")}</Text>
-      </StyledRow>
-
-      {filteredAccounts.map((data) => (
-        <UsersTypeRow
-          key={data.key}
-          data={data}
-          sectionWidth={sectionWidth}
-          typeOptions={typeOptions}
-          isChecked={isAccountChecked(data.key)}
-          toggleAccount={() => toggleAccount(data.key)}
+          {accountsData.map((data) => (
+            <UsersTypeRow
+              key={data.key}
+              data={data}
+              sectionWidth={sectionWidth}
+              typeOptions={typeOptions}
+              isChecked={isAccountChecked(data.key)}
+              toggleAccount={() => toggleAccount(data.key)}
+            />
+          ))}
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={EmptyScreenUserReactSvgUrl}
+          imageAlt="Empty Screen user image"
+          headerText={t("People:NotFoundUsers")}
+          descriptionText={t("People:NotFoundUsersDesc")}
+          buttons={
+            <Box displayProp="flex" alignItems="center">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size="12"
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </Box>
+          }
         />
-      ))}
+      )}
     </StyledRowContainer>
   );
 };
@@ -161,7 +201,7 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
-    searchValue,
+    setSearchValue,
   } = importAccountsStore;
 
   return {
@@ -173,6 +213,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     onCheckAccounts,
-    searchValue,
+    setSearchValue,
   };
 })(observer(RowView));

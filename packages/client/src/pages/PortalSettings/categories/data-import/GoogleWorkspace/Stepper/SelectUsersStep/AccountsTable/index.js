@@ -1,4 +1,5 @@
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 import { Consumer } from "@docspace/components/utils/context";
 
 import TableView from "./TableView";
@@ -32,4 +33,4 @@ export default inject(({ setup }) => {
   return {
     viewAs,
   };
-})(observer(AccountsTable));
+})(withTranslation(["People"])(observer(AccountsTable)));

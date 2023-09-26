@@ -37,6 +37,7 @@ public interface IUserService
         List<Tuple<List<List<Guid>>, List<Guid>>> combinedGroups,
         EmployeeActivationStatus? activationStatus,
         AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter,
         string text,
         string sortBy,
         bool sortOrderAsc,

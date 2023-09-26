@@ -708,7 +708,7 @@ public class UserController : PeopleControllerBase
             _apiContext.SetDataFiltered();
         }
 
-        return GetFullByFilter(status, groupId, null, null, null, null, null, null);
+        return GetFullByFilter(status, groupId, null, null, null, null, null, null, null);
     }
 
     /// <summary>
@@ -726,14 +726,15 @@ public class UserController : PeopleControllerBase
     /// <param type="System.Nullable{System.Boolean}, System" name="isAdministrator">Specifies if the user is an administrator or not</param>
     /// <param type="System.Nullable{ASC.Core.Payments}, System" name="payments">User payment status</param>
     /// <param type="System.Nullable{ASC.Core.AccountLoginType}, System" name="accountLoginType">Account login type</param>
+    /// <param type="System.Nullable{ASC.Core.QuotaFilter}, System" name="quotaFilter">Filter by quota (Default - 1, Custom - 2)</param>
     /// <returns type="ASC.Web.Api.Models.EmployeeFullDto, ASC.Api.Core">List of users with the detailed information</returns>
     /// <path>api/2.0/people/filter</path>
     /// <httpMethod>GET</httpMethod>
     /// <collection>list</collection>
     [HttpGet("filter")]
-    public async IAsyncEnumerable<EmployeeFullDto> GetFullByFilter(EmployeeStatus? employeeStatus, Guid? groupId, EmployeeActivationStatus? activationStatus, EmployeeType? employeeType, [FromQuery] EmployeeType[] employeeTypes, bool? isAdministrator, Payments? payments, AccountLoginType? accountLoginType)
+    public async IAsyncEnumerable<EmployeeFullDto> GetFullByFilter(EmployeeStatus? employeeStatus, Guid? groupId, EmployeeActivationStatus? activationStatus, EmployeeType? employeeType, [FromQuery] EmployeeType[] employeeTypes, bool? isAdministrator, Payments? payments, AccountLoginType? accountLoginType, QuotaFilter? quotaFilter)
     {
-        var users = await GetByFilterAsync(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType);
+        var users = await GetByFilterAsync(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter);
 
         foreach (var user in users)
         {
@@ -827,9 +828,9 @@ public class UserController : PeopleControllerBase
     /// <httpMethod>GET</httpMethod>
     /// <collection>list</collection>
     [HttpGet("simple/filter")]
-    public async IAsyncEnumerable<EmployeeDto> GetSimpleByFilter(EmployeeStatus? employeeStatus, Guid? groupId, EmployeeActivationStatus? activationStatus, EmployeeType? employeeType, [FromQuery] EmployeeType[] employeeTypes, bool? isAdministrator, Payments? payments, AccountLoginType? accountLoginType)
+    public async IAsyncEnumerable<EmployeeDto> GetSimpleByFilter(EmployeeStatus? employeeStatus, Guid? groupId, EmployeeActivationStatus? activationStatus, EmployeeType? employeeType, [FromQuery] EmployeeType[] employeeTypes, bool? isAdministrator, Payments? payments, AccountLoginType? accountLoginType, QuotaFilter? quotaFilter)
     {
-        var users = await GetByFilterAsync(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType);
+        var users = await GetByFilterAsync(employeeStatus, groupId, activationStatus, employeeType, employeeTypes, isAdministrator, payments, accountLoginType, quotaFilter ?? QuotaFilter.All);
 
         foreach (var user in users)
         {
@@ -1739,7 +1740,8 @@ public class UserController : PeopleControllerBase
         IEnumerable<EmployeeType> employeeTypes,
         bool? isDocSpaceAdministrator,
         Payments? payments,
-        AccountLoginType? accountLoginType)
+        AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter)
     {
         if (_coreBaseSettings.Personal)
         {
@@ -1798,7 +1800,7 @@ public class UserController : PeopleControllerBase
             includeGroups.Add(adminGroups);
         }
 
-        var users = _userManager.GetUsers(isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, _apiContext.FilterValue, _apiContext.SortBy, !_apiContext.SortDescending, _apiContext.Count, _apiContext.StartIndex, out var total, out var count);
+        var users = _userManager.GetUsers(isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, quotaFilter, _apiContext.FilterValue, _apiContext.SortBy, !_apiContext.SortDescending, _apiContext.Count, _apiContext.StartIndex, out var total, out var count);
 
         _apiContext.SetTotalCount(total).SetCount(count);
 

@@ -189,6 +189,7 @@ public class UserManager
         List<Tuple<List<List<Guid>>, List<Guid>>> combinedGroups,
         EmployeeActivationStatus? activationStatus,
         AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter,
         string text,
         string sortBy,
         bool sortOrderAsc,
@@ -197,7 +198,7 @@ public class UserManager
         out int total,
         out int count)
     {
-        return _userService.GetUsers(Tenant.Id, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, text, sortBy, sortOrderAsc, limit, offset, out total, out count);
+        return _userService.GetUsers(Tenant.Id, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, quotaFilter, text, sortBy, sortOrderAsc, limit, offset, out total, out count);
     }
 
     public async Task<string[]> GetUserNamesAsync(EmployeeStatus status)

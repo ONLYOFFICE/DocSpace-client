@@ -190,6 +190,7 @@ public class CachedUserService : IUserService, ICachedService
         List<Tuple<List<List<Guid>>, List<Guid>>> combinedGroups,
         EmployeeActivationStatus? activationStatus,
         AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter,
         string text,
         string sortBy,
         bool sortOrderAsc,
@@ -198,7 +199,7 @@ public class CachedUserService : IUserService, ICachedService
         out int total,
         out int count)
     {
-        return Service.GetUsers(tenant, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, text, sortBy, sortOrderAsc, limit, offset, out total, out count);
+        return Service.GetUsers(tenant, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, quotaFilter, text, sortBy, sortOrderAsc, limit, offset, out total, out count);
     }
 
     public async Task<UserInfo> GetUserAsync(int tenant, Guid id)

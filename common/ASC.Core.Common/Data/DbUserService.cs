@@ -241,6 +241,7 @@ public class EFUserService : IUserService
         List<Tuple<List<List<Guid>>, List<Guid>>> combinedGroups,
         EmployeeActivationStatus? activationStatus,
         AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter,
         string text,
         string sortBy,
         bool sortOrderAsc,
@@ -251,12 +252,12 @@ public class EFUserService : IUserService
     {
         var userDbContext = _dbContextFactory.CreateDbContext();
         var totalQuery = GetUserQuery(userDbContext, tenant);
-        totalQuery = GetUserQueryForFilter(userDbContext, totalQuery, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, text);
+        totalQuery = GetUserQueryForFilter(userDbContext, totalQuery, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, quotaFilter, text);
         total = totalQuery.Count();
 
         var q = GetUserQuery(userDbContext, tenant);
 
-        q = GetUserQueryForFilter(userDbContext, q, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, text);
+        q = GetUserQueryForFilter(userDbContext, q, isDocSpaceAdmin, employeeStatus, includeGroups, excludeGroups, combinedGroups, activationStatus, accountLoginType, quotaFilter, text);
 
         var orderedQuery = q.OrderBy(r => r.ActivationStatus == EmployeeActivationStatus.Pending);
         q = orderedQuery;
@@ -624,6 +625,7 @@ public class EFUserService : IUserService
         List<Tuple<List<List<Guid>>, List<Guid>>> combinedGroups,
         EmployeeActivationStatus? activationStatus,
         AccountLoginType? accountLoginType,
+        QuotaFilter? quotaFilter,
         string text)
     {
         q = q.Where(r => !r.Removed);
@@ -676,6 +678,18 @@ public class EFUserService : IUserService
             }
 
             q = q.Where(a);
+        }
+
+        if(quotaFilter != null)
+        {
+            if (quotaFilter == QuotaFilter.Custom)
+            {
+                q = q.Where(r => userDbContext.WebstudioSettings.Any(a => a.TenantId == r.TenantId && a.Id == new UserQuotaSettings().ID && a.UserId == r.Id));
+            }
+            else if (quotaFilter == QuotaFilter.Default)
+            {
+                q = q.Where(r => userDbContext.WebstudioSettings.Any(a => a.TenantId == r.TenantId && a.Id == new UserQuotaSettings().ID && a.UserId != r.Id));
+            }
         }
 
         if (!isDocSpaceAdmin && employeeStatus == null)

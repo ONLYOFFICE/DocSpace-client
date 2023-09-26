@@ -12,6 +12,7 @@ const DEFAULT_SEARCH = "";
 const DEFAULT_GROUP = null;
 const DEFAULT_PAYMENTS = null;
 const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
+const DEFAULT_QUOTA_FILTER = null;
 
 const ACTIVE_EMPLOYEE_STATUS = 1;
 
@@ -26,6 +27,7 @@ const PAGE = "page";
 const PAGE_COUNT = "pagecount";
 const PAYMENTS = "payments";
 const ACCOUNT_LOGIN_TYPE = "accountLoginType";
+const QUOTA_FILTER = "quotaFilter";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -76,6 +78,7 @@ class Filter {
     const payments = urlFilter[PAYMENTS] || defaultFilter.payments;
     const accountLoginType =
       urlFilter[ACCOUNT_LOGIN_TYPE] || defaultFilter.accountLoginType;
+    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
 
     const newFilter = new Filter(
       page,
@@ -89,7 +92,8 @@ class Filter {
       search,
       group,
       payments,
-      accountLoginType
+      accountLoginType,
+      quotaFilter
     );
 
     return newFilter;
@@ -107,7 +111,8 @@ class Filter {
     search = DEFAULT_SEARCH,
     group = DEFAULT_GROUP,
     payments = DEFAULT_PAYMENTS,
-    accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE
+    accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
+    quotaFilter = DEFAULT_QUOTA_FILTER
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -121,6 +126,7 @@ class Filter {
     this.group = group;
     this.payments = payments;
     this.accountLoginType = accountLoginType;
+    this.quotaFilter = quotaFilter;
   }
 
   getStartIndex = () => {
@@ -147,6 +153,7 @@ class Filter {
       group,
       payments,
       accountLoginType,
+      quotaFilter,
     } = this;
 
     let dtoFilter = {
@@ -162,6 +169,7 @@ class Filter {
       fields: fields,
       payments,
       accountLoginType,
+      quotaFilter,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -181,6 +189,7 @@ class Filter {
       page,
       payments,
       accountLoginType,
+      quotaFilter,
     } = this;
 
     const dtoFilter = {};
@@ -208,6 +217,8 @@ class Filter {
     if (pageCount !== DEFAULT_PAGE_COUNT) {
       dtoFilter[PAGE_COUNT] = pageCount;
     }
+
+    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -241,7 +252,8 @@ class Filter {
           this.search,
           this.group,
           this.payments,
-          this.accountLoginType
+          this.accountLoginType,
+          this.quotaFilter
         );
   }
 

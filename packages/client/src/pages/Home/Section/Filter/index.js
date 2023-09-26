@@ -289,7 +289,7 @@ const SectionFilterContent = ({
         const group = getGroup(data);
         const payments = getPayments(data);
         const accountLoginType = getAccountLoginType(data);
-
+        const quota = getQuotaFilter(data) || null;
         const newFilter = accountsFilter.clone();
 
         if (status === 3) {
@@ -303,6 +303,9 @@ const SectionFilterContent = ({
           newFilter.activationStatus = status;
         }
 
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
         newFilter.page = 0;
 
         newFilter.role = role;
@@ -650,6 +653,21 @@ const SectionFilterContent = ({
         });
       }
 
+      if (accountsFilter.quotaFilter) {
+        const key = +accountsFilter.quotaFilter;
+
+        const label =
+          key === FilterKeys.customQuota
+            ? t("Common:CustomQuota")
+            : t("Common:DefaultQuota");
+
+        filterValues.push({
+          key: accountsFilter.quotaFilter,
+          label: label,
+          group: FilterGroups.filterQuota,
+        });
+      }
+
       if (accountsFilter?.payments?.toString()) {
         filterValues.push({
           key: accountsFilter.payments.toString(),
@@ -732,6 +750,7 @@ const SectionFilterContent = ({
         return items.filter((i) => i);
       });
 
+      console.log("currentFilterValues", currentFilterValues);
       return currentFilterValues;
     }
 
@@ -995,6 +1014,7 @@ const SectionFilterContent = ({
     accountsFilter.payments,
     accountsFilter.group,
     accountsFilter.accountLoginType,
+    accountsFilter.quotaFilter,
     t,
   ]);
 
@@ -1953,7 +1973,9 @@ const SectionFilterContent = ({
         if (group === "filter-login-type") {
           newFilter.accountLoginType = null;
         }
-
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
+        }
         navigate(`accounts/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();

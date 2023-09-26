@@ -41,6 +41,7 @@ const DeveloperToolsWrapper = (props) => {
     "JavascriptSdk",
     "Webhooks",
     "Settings",
+    "OAuth",
   ]);
   const [isPending, startTransition] = useTransition();
 
@@ -76,7 +77,7 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
-    { id: "oauth", name: "OAuth", content: <OAuth /> },
+    { id: "oauth", name: t("OAuth:OAuth"), content: <OAuth /> },
   ];
 
   const [currentTab, setCurrentTab] = useState(

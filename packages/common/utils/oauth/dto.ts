@@ -7,14 +7,14 @@ export interface ClientProps {
   clientId: string;
   secret: string;
   description: string;
-  termsUrl: string;
+  termsUrl?: string;
   policyUrl: string;
   logoUrl: string;
-  authenticationMethod: string;
+  authenticationMethod?: string;
   redirectUri: string;
   logoutRedirectUri: string;
   scopes: string[];
-  tenant: number;
+  tenant?: number;
   invalidated?: boolean;
   name: string;
 }

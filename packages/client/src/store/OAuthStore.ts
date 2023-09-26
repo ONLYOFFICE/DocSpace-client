@@ -61,7 +61,11 @@ class OAuthStore implements OAuthStoreProps {
     this.clients = clientList.content;
   };
 
+  //TODO: add tenant and other params
   saveClient = async (client: ClientProps) => {
+    client.tenant = 1;
+    client.authenticationMethod = "zxc";
+    client.termsUrl = "zxc";
     const newClient = await addClient(client);
 
     return newClient;

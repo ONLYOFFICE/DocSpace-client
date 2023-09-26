@@ -353,7 +353,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-oauth",
-        key: "5-2",
+        key: "5-3",
         icon: "",
         link: "oauth",
         tKey: "OAuth",

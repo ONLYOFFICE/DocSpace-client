@@ -127,6 +127,11 @@ const OAuthCreatePage = loadable(() =>
     "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
   )
 );
+const OAuthEditPage = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+  )
+);
 
 const Backup = loadable(() =>
   import("../pages/PortalSettings/categories/data-management/index")
@@ -314,7 +319,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "developer-tools/oauth/:id",
-      element: <DeveloperTools />,
+      element: <OAuthEditPage />,
     },
     {
       path: "backup",

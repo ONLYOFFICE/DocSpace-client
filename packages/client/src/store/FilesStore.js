@@ -1643,6 +1643,7 @@ class FilesStore {
                 searchInContent: searchInContentRooms,
                 tags,
                 withoutTags,
+                quotaFilter,
               } = filter;
 
               const isFiltered =
@@ -1652,7 +1653,8 @@ class FilesStore {
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
-                withoutTags;
+                withoutTags ||
+                quotaFilter;
 
               if (isFiltered) {
                 this.setIsEmptyPage(false);
@@ -3767,6 +3769,7 @@ class FilesStore {
       searchInContent: searchInContentRooms,
       tags,
       withoutTags,
+      quotaFilter,
     } = this.roomsFilter;
 
     const {
@@ -3786,7 +3789,8 @@ class FilesStore {
           searchInContentRooms ||
           subjectId ||
           tags ||
-          withoutTags
+          withoutTags ||
+          quotaFilter
         : authorType ||
           roomId ||
           search ||

@@ -173,7 +173,7 @@ const TableView = ({
             hasMoreFiles={false}
             itemCount={accountsData.length}
           >
-            {accountsData.map((data) => (
+            {users.map((data) => (
               <UsersTypeTableRow
                 key={data.key}
                 id={data.key}

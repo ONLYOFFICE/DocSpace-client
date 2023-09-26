@@ -150,7 +150,7 @@ const RowView = ({
             <Text className="row-header-title">{t("Common:Name")}</Text>
           </StyledRow>
 
-          {accountsData.map((data) => (
+          {users.map((data) => (
             <UsersTypeRow
               key={data.key}
               data={data}

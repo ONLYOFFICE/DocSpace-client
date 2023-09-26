@@ -47,14 +47,16 @@ const ClientForm = ({
     description: "",
     redirectUrl: "",
     logoutRedirectUrl: "",
-    // allowedOrigins: "",
-    // websiteUrl: "",
+
     privacyURL: "",
-    // serviceUrl: "",
   });
 
-  const [clientId, setClientId] = React.useState<string>("");
-  const [secret, setSecret] = React.useState<string>("");
+  const [clientId, setClientId] = React.useState<string>(
+    "23b2ec16-6a10-462b-8084-16be8e105b73"
+  );
+  const [secret, setSecret] = React.useState<string>(
+    "d2c083aa-9a2d-4147-9328-df32b7be0294"
+  );
 
   const [scopes, setScopes] = React.useState<ScopeDTO[]>([]);
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
@@ -98,7 +100,7 @@ const ClientForm = ({
     newClient.secret = secret;
     newClient.scopes = [...checkedScopes];
 
-    if (id) {
+    if (!id) {
       await saveClient(newClient);
     } else {
       await updateClient(clientId, newClient);
@@ -205,6 +207,7 @@ const ClientForm = ({
               break;
           }
         }
+        isValid = true;
       } else {
         isValid = false;
       }

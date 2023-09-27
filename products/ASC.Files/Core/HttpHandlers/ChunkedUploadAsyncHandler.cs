@@ -147,7 +147,7 @@ public class ChunkedUploadAsyncHandlerService
                         var file = await _fileUploader.VerifyChunkedUploadAsync(request.FolderId, request.FileName, request.FileSize, _filesSettingsHelper.UpdateIfExist, request.RelativePath);
                         var info = new UploadInfo<T>
                         {
-                            UploadId = Guid.NewGuid(),
+                            Uid = Guid.NewGuid(),
                             FileId = file.Id,
                             Title = request.FileName,
                             FolderId = request.FolderId,
@@ -156,7 +156,7 @@ public class ChunkedUploadAsyncHandlerService
                             UploadedChunks = new HashSet<int>()
 
                         };
-                        _cache.Insert(info.UploadId.ToString(), info, TimeSpan.FromMinutes(10));
+                        _cache.Insert(info.Uid.ToString(), info, TimeSpan.FromMinutes(10));
 
                         await WriteSuccess(context, info);
                         return;
@@ -172,7 +172,7 @@ public class ChunkedUploadAsyncHandlerService
 
                         info.UploadedChunks.Add(request.ChunkNumber);
 
-                        _cache.Insert(info.UploadId.ToString(), info, TimeSpan.FromMinutes(10));
+                        _cache.Insert(info.Uid.ToString(), info, TimeSpan.FromMinutes(10));
 
                         await store.SaveAsync(FileConstant.StorageDomainTmp, Path.Combine(request.UploadId, request.ChunkNumber.ToString()), request.ChunkStream);
                         
@@ -265,7 +265,7 @@ public class ChunkedUploadAsyncHandlerService
 
 internal class UploadInfo<T>
 {
-    public Guid UploadId { get; set; }
+    public Guid Uid { get; set; }
     public T FileId { get; set; }
     public string Title { get; set; }
     public T FolderId { get; set; }

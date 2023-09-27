@@ -3,8 +3,6 @@ package com.onlyoffice.authorization.configuration;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.onlyoffice.authorization.extensions.filters.CookieCsrfFilter;
-import com.onlyoffice.authorization.extensions.filters.SimpleCORSFilter;
 import com.onlyoffice.authorization.extensions.jwks.JwksKeyPairGenerator;
 import com.onlyoffice.authorization.extensions.providers.DocspaceAuthenticationProvider;
 import jakarta.servlet.RequestDispatcher;
@@ -16,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
@@ -30,9 +27,6 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.security.NoSuchAlgorithmException;
@@ -61,13 +55,6 @@ public class AuthorizationServerConfiguration {
             RequestDispatcher dispatcher = request.getRequestDispatcher(applicationConfiguration.getLogin());
             dispatcher.forward(request, response);
         }, new AntPathRequestMatcher(applicationConfiguration.getLogin())));
-
-        http.csrf(c -> {
-            c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-            c.csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler());
-        });
-        http.addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class);
-        http.addFilterAfter(new SimpleCORSFilter(), BasicAuthenticationFilter.class);
 
         return http.build();
     }

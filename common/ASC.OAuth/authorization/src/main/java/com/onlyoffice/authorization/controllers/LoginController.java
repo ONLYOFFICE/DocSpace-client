@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,10 +19,20 @@ public class LoginController {
     public String login(HttpServletRequest request) {
         log.debug("A new login request");
         if (request.getDispatcherType().name() == null || !request.getDispatcherType().name().equals(FORWARD))
-            return String.format("redirect:%s/error", configuration.getFrontendUrl());
-        return String.format(
-                "redirect:%s/login?%s",
-                configuration.getFrontendUrl(),
-                request.getQueryString());
+            return "error";
+        return "login";
+    }
+
+    @GetMapping("/authorized")
+    public String authorized(
+            @RequestParam(name = "error", required = false) String error,
+            @RequestParam(name = "error_description", required = false) String description
+    ) {
+        log.debug("Authorized redirect");
+        if (error != null && !error.isBlank() && description != null && !description.isBlank()) {
+            log.debug("Authorization error has occurred {} - {}", error, description);
+            return "error";
+        }
+        return "authorized";
     }
 }

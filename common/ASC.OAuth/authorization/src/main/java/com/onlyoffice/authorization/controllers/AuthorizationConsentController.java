@@ -56,20 +56,12 @@ public class AuthorizationConsentController {
             }
         }
 
-        String url = String.format(
-                "redirect:%s/consent?clientId=%s&state=%s&principalName=%s",
-                configuration.getFrontendUrl(),
-                clientId,
-                state,
-                principal.getName()
-        );
+        model.addAttribute("clientId", clientId);
+        model.addAttribute("state", state);
+        model.addAttribute("scopes", scopesToApprove);
+        model.addAttribute("previouslyApprovedScopes", previouslyApprovedScopes);
+        model.addAttribute("principalName", principal.getName());
 
-        if (scope.length() > 0)
-            url += String.format("&scopes=%s", String.join(",", scopesToApprove));
-
-        if (previouslyApprovedScopes.size() > 0)
-            url += String.format("&previouslyApprovedScopes=%s", String.join(",", previouslyApprovedScopes));
-
-        return url;
+        return "consent";
     }
 }

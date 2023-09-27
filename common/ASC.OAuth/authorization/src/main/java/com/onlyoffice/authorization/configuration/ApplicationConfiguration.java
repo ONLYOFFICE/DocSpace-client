@@ -77,12 +77,7 @@ public class ApplicationConfiguration {
                                 .invalidateHttpSession(true)
                                 .deleteCookies("JSESSIONID")
                 )
-                .csrf(c -> {
-                    c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-                    c.csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler());
-                })
-                .addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new SimpleCORSFilter(), BasicAuthenticationFilter.class)
+
                 .build();
     }
 }

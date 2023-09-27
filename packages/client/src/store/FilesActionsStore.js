@@ -1739,7 +1739,20 @@ class FilesActionStore {
 
     window.dispatchEvent(event);
   };
+  disableRoomQuota = async (users) => {
+    const { updateRoomQuota } = this.filesStore;
 
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      await updateRoomQuota(-1, userIDs);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
   getOption = (option, t) => {
     const {
       // setSharingPanelVisible,
@@ -1748,7 +1761,8 @@ class FilesActionStore {
       setCopyPanelVisible,
       setDeleteDialogVisible,
     } = this.dialogsStore;
-    const { selection, updateRoomQuota } = this.filesStore;
+    const { selection } = this.filesStore;
+
     switch (option) {
       case "show-info":
         if (!isTablet() && !isMobile) return null;
@@ -1872,7 +1886,7 @@ class FilesActionStore {
             key: "disable-quota",
             label: "Disable quota",
             iconUrl: DisableQuotaReactSvgUrl,
-            onClick: () => updateRoomQuota(-1, selection),
+            onClick: () => this.disableRoomQuota(selection, t),
             disabled: false,
           };
 

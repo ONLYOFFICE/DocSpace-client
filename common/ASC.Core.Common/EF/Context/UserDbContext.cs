@@ -38,6 +38,7 @@ public class UserDbContext : DbContext
     public DbSet<DbSubscriptionMethod> SubscriptionMethods { get; set; }
     public DbSet<UserDav> UsersDav { get; set; }
     public DbSet<DbWebstudioSettings> WebstudioSettings { get; set; }
+    public DbSet<DbQuotaRow> QuotaRow { get; set; }
 
     public UserDbContext(DbContextOptions<UserDbContext> dbContextOptions) : base(dbContextOptions)
     {
@@ -58,6 +59,7 @@ public class UserDbContext : DbContext
         .AddSubscription()
         .AddUserDav()
         .AddDbTenant()
-        .AddWebstudioSettings();
+        .AddWebstudioSettings()
+        .AddDbQuotaRow();
     }
 }

@@ -293,21 +293,25 @@ public class EFUserService : IUserService
             else if (sortBy == "used_space")
             {
                 var q2 = from user in q
-                         join quota in userDbContext.QuotaRow.Where(qr => qr.UserId != Guid.Empty)
-                         on user.Id equals quota.UserId into quotaRow
-                         from @quota in quotaRow.GroupBy(q => q.UserId, q => q.Counter, (id, g) => new
-                         {
-                             userid = id,
-                             sum_counter = g.ToList().Sum()
-                         })
-                         select new { user, @quota.sum_counter };
+                         join quota in userDbContext.QuotaRow.Where(qr => qr.UserId != Guid.Empty) 
+                            on user.Id equals quota.UserId into quotaRow
+                         from @quota in quotaRow.DefaultIfEmpty()
+
+                         select new { user, @quota};
+
+                var q3 = q2.GroupBy(q => q.user, q => q.quota.Counter, (user, g) => new
+                {
+                    user = user,
+                    sum_counter = g.ToList().Sum()
+                });
+
                 if (sortOrderAsc)
                 {
-                    q = q2.OrderBy(r => r.sum_counter).Select(r => r.user);
+                    q = q3.OrderBy(r => r.sum_counter).Select(r => r.user);
                 }
                 else
                 {
-                    q = q2.OrderByDescending(r => r.sum_counter).Select(r => r.user);
+                    q = q3.OrderByDescending(r => r.sum_counter).Select(r => r.user);
                 }
             }
             else

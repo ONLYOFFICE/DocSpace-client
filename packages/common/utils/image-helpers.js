@@ -58,6 +58,9 @@ import XlsmSvg24Url from "PUBLIC_DIR/images/icons/24/xlsm.svg?url";
 import XlsxSvg24Url from "PUBLIC_DIR/images/icons/24/xlsx.svg?url";
 import XmlSvg24Url from "PUBLIC_DIR/images/icons/24/xml.svg?url";
 import XpsSvg24Url from "PUBLIC_DIR/images/icons/24/xps.svg?url";
+import folderDone24Url from "PUBLIC_DIR/images/icons/24/folder/done.svg?url";
+import folderInProgress24Url from "PUBLIC_DIR/images/icons/24/folder/inProgress.svg?url";
+
 import AviSvg32Url from "PUBLIC_DIR/images/icons/32/avi.svg?url";
 import CsvSvg32Url from "PUBLIC_DIR/images/icons/32/csv.svg?url";
 import DjvuSvg32Url from "PUBLIC_DIR/images/icons/32/djvu.svg?url";
@@ -126,6 +129,9 @@ import XlsmSvg32Url from "PUBLIC_DIR/images/icons/32/xlsm.svg?url";
 import XlsxSvg32Url from "PUBLIC_DIR/images/icons/32/xlsx.svg?url";
 import XmlSvg32Url from "PUBLIC_DIR/images/icons/32/xml.svg?url";
 import XpsSvg32Url from "PUBLIC_DIR/images/icons/32/xps.svg?url";
+import folderDone32Url from "PUBLIC_DIR/images/icons/32/folder/done.svg?url";
+import folderInProgress32Url from "PUBLIC_DIR/images/icons/32/folder/inProgress.svg?url";
+
 import AviSvg64Url from "PUBLIC_DIR/images/icons/64/avi.svg?url";
 import CsvSvg64Url from "PUBLIC_DIR/images/icons/64/csv.svg?url";
 import DjvuSvg64Url from "PUBLIC_DIR/images/icons/64/djvu.svg?url";
@@ -186,6 +192,7 @@ import XlsmSvg64Url from "PUBLIC_DIR/images/icons/64/xlsm.svg?url";
 import XlsxSvg64Url from "PUBLIC_DIR/images/icons/64/xlsx.svg?url";
 import XmlSvg64Url from "PUBLIC_DIR/images/icons/64/xml.svg?url";
 import XpsSvg64Url from "PUBLIC_DIR/images/icons/64/xps.svg?url";
+
 import AviSvg96Url from "PUBLIC_DIR/images/icons/96/avi.svg?url";
 import CsvSvg96Url from "PUBLIC_DIR/images/icons/96/csv.svg?url";
 import DjvuSvg96Url from "PUBLIC_DIR/images/icons/96/djvu.svg?url";
@@ -246,6 +253,8 @@ import XlsmSvg96Url from "PUBLIC_DIR/images/icons/96/xlsm.svg?url";
 import XlsxSvg96Url from "PUBLIC_DIR/images/icons/96/xlsx.svg?url";
 import XmlSvg96Url from "PUBLIC_DIR/images/icons/96/xml.svg?url";
 import XpsSvg96Url from "PUBLIC_DIR/images/icons/96/xps.svg?url";
+import folderDone96Url from "PUBLIC_DIR/images/icons/96/folder/done.svg?url";
+import folderInProgress96Url from "PUBLIC_DIR/images/icons/96/folder/inProgress.svg?url";
 
 export const iconSize24 = new Map([
   ["avi.svg", AviSvg24Url],
@@ -308,6 +317,8 @@ export const iconSize24 = new Map([
   ["xlsx.svg", XlsxSvg24Url],
   ["xml.svg", XmlSvg24Url],
   ["xps.svg", XpsSvg24Url],
+  ["folderDone.svg", folderDone24Url],
+  ["folderInProgress.svg", folderInProgress24Url],
 ]);
 
 export const iconSize32 = new Map([
@@ -379,6 +390,8 @@ export const iconSize32 = new Map([
   ["xlsx.svg", XlsxSvg32Url],
   ["xml.svg", XmlSvg32Url],
   ["xps.svg", XpsSvg32Url],
+  ["folderDone.svg", folderDone32Url],
+  ["folderInProgress.svg", folderInProgress32Url],
 ]);
 
 export const iconSize64 = new Map([
@@ -505,4 +518,6 @@ export const iconSize96 = new Map([
   ["xlsx.svg", XlsxSvg96Url],
   ["xml.svg", XmlSvg96Url],
   ["xps.svg", XpsSvg96Url],
+  ["folderDone.svg", folderDone96Url],
+  ["folderInProgress.svg", folderInProgress96Url],
 ]);

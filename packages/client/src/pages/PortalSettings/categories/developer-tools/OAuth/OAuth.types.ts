@@ -8,5 +8,5 @@ export interface OAuthProps {
   viewAs: ViewAsType;
   clientList: ClientProps[];
   isEmptyClientList: boolean;
-  fetchClients: (page: number) => Promise<void>;
+  fetchClients: () => Promise<void>;
 }

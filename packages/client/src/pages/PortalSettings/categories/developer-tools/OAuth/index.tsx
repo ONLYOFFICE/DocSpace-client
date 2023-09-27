@@ -24,8 +24,8 @@ const OAuth = ({
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const startLoadingRef = React.useRef<null | Date>(null);
 
-  const getClientList = React.useCallback(async (page = 0) => {
-    await fetchClients(page);
+  const getClientList = React.useCallback(async () => {
+    await fetchClients();
 
     if (startLoadingRef.current) {
       const currentDate = new Date();

@@ -1,118 +1,31 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
-
-//@ts-ignore
-import TableRow from "@docspace/components/table-container/TableRow";
 
 //@ts-ignore
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
-import { Base } from "@docspace/components/themes";
-
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
-
-import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 import NameCell from "./columns/name";
 
-const StyledWrapper = styled.div`
-  display: contents;
-`;
-
-const StyledTableRow = styled(TableRow)`
-  .table-container_cell {
-    text-overflow: ellipsis;
-
-    padding-right: 8px;
-  }
-
-  .mr-8 {
-    margin-right: 8px;
-  }
-
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .toggleButton {
-    display: contents;
-
-    input {
-      position: relative;
-
-      margin-left: -8px;
-    }
-  }
-
-  .table-container_row-loader {
-    margin-left: 8px;
-    margin-right: 16px;
-  }
-
-  :hover {
-    .table-container_cell {
-      cursor: pointer;
-      background: ${(props) =>
-        `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-
-      margin-top: -1px;
-
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-    }
-
-    .table-container_file-name-cell {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-              padding-right: 24px;
-            `
-          : css`
-              margin-left: -24px;
-              padding-left: 24px;
-            `}
-    }
-    .table-container_row-context-menu-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -20px;
-              padding-left: 18px;
-            `
-          : css`
-              margin-right: -20px;
-              padding-right: 18px;
-            `}
-    }
-  }
-`;
-
-StyledTableRow.defaultProps = { theme: Base };
-
-interface RowProps {
-  item: ClientProps;
-  isChecked: boolean;
-  inProgress: boolean;
-  setSelection?: (clientId: string) => void;
-  changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
-}
+import { StyledRowWrapper, StyledTableRow } from "./TableView.styled";
+import { RowProps } from "./TableView.types";
 
 const Row = (props: RowProps) => {
-  const { item, changeClientStatus, isChecked, inProgress, setSelection } =
-    props;
+  const {
+    item,
+    changeClientStatus,
+    isChecked,
+    inProgress,
+    getContextMenuItems,
+    setSelection,
+  } = props;
   const navigate = useNavigate();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
 
   const editClient = () => {
-    navigate(window.location.pathname + `/${item.clientId}`);
+    navigate(`${item.clientId}`);
   };
 
   const handleToggleEnabled = async () => {
@@ -120,45 +33,31 @@ const Row = (props: RowProps) => {
     await changeClientStatus(item.clientId, !item.enabled);
   };
 
-  const onDeleteOpen = () => {};
-
   const handleRowClick = (e: any) => {
     if (
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".table-container_row-context-menu-wrapper") ||
-      e.target.closest(".toggleButton") ||
       e.detail === 0
     ) {
       return;
     }
 
+    if (
+      e.target.closest(".type-combobox") ||
+      e.target.closest(".table-container_row-context-menu-wrapper") ||
+      e.target.closest(".toggleButton")
+    ) {
+      return setSelection && setSelection("");
+    }
+
     editClient();
   };
 
-  const contextOptions = [
-    {
-      key: "settings",
-      label: t("Common:Settings"),
-      icon: SettingsIcon,
-      onClick: editClient,
-    },
-    {
-      key: "Separator dropdownItem",
-      isSeparator: true,
-    },
-    {
-      key: "delete",
-      label: t("Common:Delete"),
-      icon: DeleteIcon,
-      onClick: onDeleteOpen,
-    },
-  ];
+  const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
 
   return (
     <>
-      <StyledWrapper className="handle">
+      <StyledRowWrapper className="handle">
         <StyledTableRow
           contextOptions={contextOptions}
           onClick={handleRowClick}
@@ -187,7 +86,7 @@ const Row = (props: RowProps) => {
             />
           </TableCell>
         </StyledTableRow>
-      </StyledWrapper>
+      </StyledRowWrapper>
     </>
   );
 };

@@ -1,66 +1,35 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
-import styled from "styled-components";
 
-import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
-
-//@ts-ignore
-import TableContainer from "@docspace/components/table-container/TableContainer";
 //@ts-ignore
 import TableBody from "@docspace/components/table-container/TableBody";
 //@ts-ignore
-import { OAuthStoreProps, ViewAsType } from "SRC_DIR/store/OAuthStore";
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 import Row from "./Row";
 import Header from "./Header";
 
-const TableWrapper = styled(TableContainer)`
-  margin-top: 0px;
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-`;
+import { TableViewProps } from "./TableView.types";
+import { TableWrapper } from "./TableView.styled";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
 
-interface TableViewProps {
-  items: ClientProps[];
-  sectionWidth: number;
-  viewAs?: ViewAsType;
-  setViewAs?: (value: ViewAsType) => void;
-  userId?: string;
-  selection?: string[];
-  setSelection?: (clientId: string) => void;
-
-  bufferSelection?: ClientProps | null;
-  currentClient?: ClientProps | null;
-  setBufferSelection?: (clientId: string) => void;
-  changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
-}
-
 const TableView = ({
   items,
-
   sectionWidth,
-
   viewAs,
   setViewAs,
-
   selection,
-  bufferSelection,
-
+  activeClients,
   setSelection,
-
+  getContextMenuItems,
   changeClientStatus,
-
   userId,
+  hasNextPage,
+  totalElements,
+  fetchNextClients,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
 
@@ -72,6 +41,29 @@ const TableView = ({
       viewAs !== "table" && setViewAs("table");
     }
   }, [sectionWidth, viewAs, setViewAs]);
+
+  const clickOutside = React.useCallback(
+    (e: any) => {
+      if (
+        e.target.closest(".checkbox") ||
+        e.target.closest(".table-container_row-checkbox") ||
+        e.detail === 0
+      ) {
+        return;
+      }
+
+      setSelection && setSelection("");
+    },
+    [setSelection]
+  );
+
+  React.useEffect(() => {
+    window.addEventListener("click", clickOutside);
+
+    return () => {
+      window.removeEventListener("click", clickOutside);
+    };
+  }, [clickOutside, setSelection]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
 
@@ -88,18 +80,24 @@ const TableView = ({
         useReactWindow
         columnStorageName={columnStorageName}
         filesLength={items.length}
-        fetchMoreFiles={() => console.log("call")}
-        hasMoreFiles={false}
-        itemCount={items.length}
+        fetchMoreFiles={({
+          startIndex,
+        }: {
+          startIndex: number;
+          stopIndex: number;
+        }) => fetchNextClients && fetchNextClients(startIndex)}
+        hasMoreFiles={hasNextPage}
+        itemCount={totalElements}
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <Row
             key={item.clientId}
             item={item}
             isChecked={selection?.includes(item.clientId) || false}
-            inProgress={false}
+            inProgress={activeClients?.includes(item.clientId) || false}
             setSelection={setSelection}
             changeClientStatus={changeClientStatus}
+            getContextMenuItems={getContextMenuItems}
           />
         ))}
       </TableBody>
@@ -115,26 +113,29 @@ export default inject(
       viewAs,
       setViewAs,
       selection,
-      bufferSelection,
-
       setSelection,
       setBufferSelection,
-
       changeClientStatus,
-
-      currentClient,
+      getContextMenuItems,
+      activeClients,
+      hasNextPage,
+      totalElements,
+      fetchNextClients,
     } = oauthStore;
+
     return {
       viewAs,
       setViewAs,
       userId,
       changeClientStatus,
       selection,
-      bufferSelection,
-
       setSelection,
       setBufferSelection,
-      currentClient,
+      activeClients,
+      getContextMenuItems,
+      hasNextPage,
+      totalElements,
+      fetchNextClients,
     };
   }
 )(observer(TableView));

@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 //@ts-ignore
 import { getPortal } from "@docspace/common/api/portal";
@@ -21,19 +21,37 @@ import {
   Scope,
 } from "@docspace/common/utils/oauth/interfaces";
 
+import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
+import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
+import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+
 const PAGE_LIMIT = 20;
 
 export type ViewAsType = "table" | "row";
 
 export interface OAuthStoreProps {
   viewAs: ViewAsType;
+  setViewAs: (value: "table" | "row") => void;
 
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
 
+  editClient: (clientId: string) => void;
+
   clients: ClientProps[];
+  fetchClient: (clientId: string) => Promise<ClientProps | undefined>;
+  fetchClients: () => Promise<void>;
+  fetchNextClients: (startIndex: number) => Promise<void>;
+  saveClient: (client: ClientProps) => Promise<void>;
+  updateClient: (clientId: string, client: ClientProps) => Promise<void>;
+  changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
+  regenerateSecret: (clientId: string) => Promise<string | undefined>;
+  deleteClient: (clientId: string) => Promise<void>;
+
   currentPage: number;
   totalPages: number;
+  totalElements: number;
 
   selection: string[];
   setSelection: (clientId: string) => void;
@@ -44,20 +62,19 @@ export interface OAuthStoreProps {
   tenant: number;
   fetchTenant: () => Promise<number>;
 
+  activeClients: string[];
+  setActiveClient: (clientId: string) => void;
+
   scopes: Scope[];
-
-  setViewAs: (value: "table" | "row") => void;
-
-  fetchClient: (clientId: string) => Promise<ClientProps | undefined>;
-  fetchClients: (page: number) => Promise<void>;
-  saveClient: (client: ClientProps) => Promise<void>;
-  updateClient: (clientId: string, client: ClientProps) => Promise<void>;
-  changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
-  regenerateSecret: (clientId: string) => Promise<string | undefined>;
-  deleteClient: (clientId: string) => Promise<void>;
-
   fetchScope: (name: string) => Promise<Scope | undefined>;
   fetchScopes: () => Promise<void>;
+
+  getContextMenuItems: (
+    t: any,
+    item: ClientProps
+  ) => {
+    [key: string]: any | string | boolean | ((clientId: string) => void);
+  }[];
 
   clientList: ClientProps[];
   isEmptyClientList: boolean;
@@ -70,6 +87,7 @@ class OAuthStore implements OAuthStoreProps {
 
   currentPage: number = 0;
   totalPages: number = 0;
+  totalElements: number = 0;
 
   deleteDialogVisible: boolean = false;
 
@@ -80,6 +98,8 @@ class OAuthStore implements OAuthStoreProps {
   tenant: number = -1;
 
   clients: ClientProps[] = [];
+
+  activeClients: string[] = [];
 
   scopes: Scope[] = [];
 
@@ -96,10 +116,14 @@ class OAuthStore implements OAuthStoreProps {
   };
 
   setSelection = (clientId: string) => {
-    if (this.selection.includes(clientId)) {
-      this.selection = this.selection.filter((s) => s !== clientId);
+    if (!clientId) {
+      this.selection = [];
     } else {
-      this.selection.push(clientId);
+      if (this.selection.includes(clientId)) {
+        this.selection = this.selection.filter((s) => s !== clientId);
+      } else {
+        this.selection.push(clientId);
+      }
     }
   };
 
@@ -109,6 +133,25 @@ class OAuthStore implements OAuthStoreProps {
     if (client) {
       this.bufferSelection = { ...client, scopes: [...client.scopes] };
     }
+  };
+
+  setActiveClient = (clientId: string) => {
+    if (!clientId) {
+      this.activeClients = [];
+    } else {
+      if (this.activeClients.includes(clientId)) {
+        this.activeClients = this.activeClients.filter((s) => s !== clientId);
+      } else {
+        this.activeClients.push(clientId);
+      }
+    }
+  };
+
+  editClient = (clientId: string) => {
+    //@ts-ignore
+    window?.DocSpace?.navigate(
+      `/portal-settings/developer-tools/oauth/${clientId}`
+    );
   };
 
   fetchTenant = async () => {
@@ -130,16 +173,38 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  fetchClients = async (page: number) => {
+  fetchClients = async () => {
     try {
+      runInAction(() => {
+        this.currentPage = 1;
+      });
+
       const clientList: ClientListProps = await getClientList(0, PAGE_LIMIT);
 
-      this.totalPages = clientList.totalPages;
-      this.currentPage = page;
-      this.clients = clientList.content;
+      runInAction(() => {
+        this.totalPages = clientList.totalPages;
+
+        this.totalElements = clientList.totalElements;
+        this.clients = clientList.content;
+      });
     } catch (e) {
       console.log(e);
     }
+  };
+
+  fetchNextClients = async (startIndex: number) => {
+    const page = startIndex / PAGE_LIMIT;
+    runInAction(() => {
+      this.currentPage = page + 1;
+    });
+    const clientList: ClientListProps = await getClientList(page, PAGE_LIMIT);
+
+    runInAction(() => {
+      this.totalPages = clientList.totalPages;
+
+      this.totalElements = clientList.totalElements;
+      this.clients = [...this.clients, ...clientList.content];
+    });
   };
 
   //TODO: OAuth, add tenant and other params
@@ -148,9 +213,12 @@ class OAuthStore implements OAuthStoreProps {
       client.tenant = 1;
       client.authenticationMethod = "zxc";
       client.termsUrl = "zxc";
+
       const newClient = await addClient(client);
 
-      this.clients.push(newClient);
+      runInAction(() => {
+        this.clients.push(newClient);
+      });
     } catch (e) {
       console.log(e);
     }
@@ -163,7 +231,9 @@ class OAuthStore implements OAuthStoreProps {
       const idx = this.clients.findIndex((c) => c.clientId === clientId);
 
       if (idx > -1) {
-        this.clients[idx] = newClient;
+        runInAction(() => {
+          this.clients[idx] = newClient;
+        });
       }
     } catch (e) {
       console.log(e);
@@ -177,7 +247,9 @@ class OAuthStore implements OAuthStoreProps {
       const idx = this.clients.findIndex((c) => c.clientId === clientId);
 
       if (idx > -1) {
-        this.clients[idx] = { ...this.clients[idx], enabled: status };
+        runInAction(() => {
+          this.clients[idx] = { ...this.clients[idx], enabled: status };
+        });
       }
     } catch (e) {
       console.log(e);
@@ -220,6 +292,109 @@ class OAuthStore implements OAuthStoreProps {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  getContextMenuItems = (t: any, item: ClientProps) => {
+    const { clientId } = item;
+
+    const isGroupContext = this.selection.length;
+
+    const onDelete = () => {
+      if (!isGroupContext) {
+        this.setBufferSelection(clientId);
+      }
+
+      this.setDeleteDialogVisible(true);
+    };
+
+    const onEnable = async (status: boolean) => {
+      if (isGroupContext) {
+        try {
+          const actions: Promise<void>[] = [];
+
+          this.selection.forEach((s) => {
+            this.setActiveClient(s);
+            actions.push(this.changeClientStatus(s, status));
+          });
+
+          await Promise.all(actions);
+
+          runInAction(() => {
+            this.activeClients = [];
+            this.selection = [];
+          });
+
+          //TODO OAuth, show toast
+        } catch (e) {}
+      } else {
+        this.setActiveClient(clientId);
+
+        await this.changeClientStatus(clientId, status);
+
+        //TODO OAuth, show toast
+      }
+    };
+
+    const settingsOption = {
+      key: "settings",
+      icon: SettingsIcon,
+      label: t("Common:Settings"),
+      onClick: () => this.editClient(clientId),
+    };
+
+    const enableOption = {
+      key: "enable",
+      icon: EnableReactSvgUrl,
+      label: t("Common:Enable"),
+      onClick: () => onEnable(true),
+    };
+
+    const disableOption = {
+      key: "disable",
+      icon: RemoveReactSvgUrl,
+      label: t("Common:Disable"),
+      onClick: () => onEnable(false),
+    };
+
+    const contextOptions = [
+      {
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      },
+      {
+        key: "delete",
+        label: t("Common:Delete"),
+        icon: DeleteIcon,
+        onClick: () => onDelete(),
+      },
+    ];
+
+    if (isGroupContext) {
+      let enabled = false;
+
+      this.selection.forEach((s) => {
+        enabled =
+          enabled ||
+          this.clientList.find((client) => client.clientId === s)?.enabled ||
+          false;
+      });
+
+      if (enabled) {
+        contextOptions.unshift(disableOption);
+      } else {
+        contextOptions.unshift(enableOption);
+      }
+    } else {
+      if (item.enabled) {
+        contextOptions.unshift(disableOption);
+      } else {
+        contextOptions.unshift(enableOption);
+      }
+
+      contextOptions.unshift(settingsOption);
+    }
+
+    return contextOptions;
   };
 
   get clientList() {

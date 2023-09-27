@@ -1,18 +1,9 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 //@ts-ignore
 import TableHeader from "@docspace/components/table-container/TableHeader";
 
-const TABLE_VERSION = "1";
-const TABLE_COLUMNS = `oauthConfigColumns_ver-${TABLE_VERSION}`;
-
-interface HeaderProps {
-  sectionWidth: number;
-  tableRef: HTMLDivElement;
-  columnStorageName: string;
-}
+import { HeaderProps } from "./TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName } = props;

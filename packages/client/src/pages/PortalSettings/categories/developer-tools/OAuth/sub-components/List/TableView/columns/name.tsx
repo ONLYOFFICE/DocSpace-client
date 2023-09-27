@@ -24,8 +24,8 @@ const StyledImage = styled.img`
 
 interface NameCellProps {
   name: string;
-  icon?: string;
   clientId: string;
+  icon?: string;
   inProgress?: boolean;
   isChecked?: boolean;
   setSelection?: (clientId: string) => void;
@@ -39,7 +39,7 @@ const NameCell = ({
   isChecked,
   setSelection,
 }: NameCellProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = () => {
     setSelection && setSelection(clientId);
   };
 

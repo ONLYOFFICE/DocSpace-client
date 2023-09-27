@@ -124,7 +124,7 @@ public class ChunkedUploaderHandlerService
                 return;
             }
 
-            switch (request.Type(_instanceCrypto))
+            switch (request.Type())
             {
                 case ChunkedRequestType.Abort:
                     await _fileUploader.AbortUploadAsync<T>(request.UploadId);
@@ -179,7 +179,7 @@ public class ChunkedUploaderHandlerService
             return false;
             }
 
-        if (request.Type(_instanceCrypto) == ChunkedRequestType.Initiate)
+        if (request.Type() == ChunkedRequestType.Initiate)
         {
             return true;
         }
@@ -239,7 +239,8 @@ public enum ChunkedRequestType
     None,
     Initiate,
     Abort,
-    Upload
+    Upload,
+    Finish
 }
 
 [DebuggerDisplay("{Type} ({UploadId})")]
@@ -250,7 +251,7 @@ public class ChunkedRequestHelper<T>
     private int? _tenantId;
     private long? _fileContentLength;
 
-    public ChunkedRequestType Type(InstanceCrypto instanceCrypto)
+    public ChunkedRequestType Type()
     {
         if (_request.Query["initiate"] == "true" && IsFileDataSet())
         {
@@ -260,6 +261,28 @@ public class ChunkedRequestHelper<T>
         if (_request.Query["abort"] == "true" && !string.IsNullOrEmpty(UploadId))
         {
             return ChunkedRequestType.Abort;
+        }
+
+        return !string.IsNullOrEmpty(UploadId)
+                    ? ChunkedRequestType.Upload
+                    : ChunkedRequestType.None;
+    }
+
+    public ChunkedRequestType TypeForAsync()
+    {
+        if (_request.Query["initiate"] == "true")
+        {
+            return ChunkedRequestType.Initiate;
+        }
+
+        if (_request.Query["abort"] == "true" && !string.IsNullOrEmpty(UploadId))
+        {
+            return ChunkedRequestType.Abort;
+        }
+
+        if (_request.Query["finish"] == "true" && !string.IsNullOrEmpty(UploadId))
+        {
+            return ChunkedRequestType.Finish;
         }
 
         return !string.IsNullOrEmpty(UploadId)
@@ -340,6 +363,9 @@ public class ChunkedRequestHelper<T>
     public Stream ChunkStream => File.OpenReadStream();
 
     public bool Encrypted => _request.Query["encrypted"] == "true";
+    public string RelativePath => _request.Query["relativePath"];
+
+    public int ChunkNumber => int.Parse(_request.Query["chunkNumber"]);
 
     private IFormFile File
     {

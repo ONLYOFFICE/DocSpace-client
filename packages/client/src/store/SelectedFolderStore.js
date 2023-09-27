@@ -31,6 +31,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
+  folderType = null;
 
   socketSubscribersId = new Set();
 
@@ -72,6 +73,7 @@ class SelectedFolderStore {
     this.rootFolderId = null;
     this.security = null;
     this.socketSubscribersId = new Set();
+    this.folderType = null;
   };
 
   setParentId = (parentId) => {
@@ -152,6 +154,8 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
+
+      if (!selectedFolder.hasOwnProperty("folderType")) this.folderType = null;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

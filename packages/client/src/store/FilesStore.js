@@ -1488,12 +1488,18 @@ class FilesStore {
             .reverse();
         });
 
+        //TODO: for test remove after
+        const id = data.current.id;
+        const folderType =
+          id === 9 ? FolderType.Done : id === 10 ? FolderType.InProgress : null;
+
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
           pathParts: data.pathParts,
           navigationPath: navigationPath,
           ...{ new: data.new },
+          folderType,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -2927,6 +2933,18 @@ class FilesStore {
         ? docUrl
         : folderUrl;
 
+      //TODO: for test remove after
+      const isDone = isFolder && id === 9;
+
+      //TODO: for test remove after
+      const isProgress = isFolder && id === 10;
+
+      const folderType = isDone
+        ? FolderType.Done
+        : isProgress
+        ? FolderType.InProgress
+        : "";
+
       const isRoom = !!roomType;
 
       const icon =
@@ -2938,7 +2956,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              folderType
             );
 
       const defaultRoomIcon = isRoom
@@ -2948,7 +2967,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            folderType
           )
         : undefined;
 
@@ -3016,6 +3036,7 @@ class FilesStore {
         security,
         viewAccessability,
         inRoom,
+        folderType,
       };
     });
 

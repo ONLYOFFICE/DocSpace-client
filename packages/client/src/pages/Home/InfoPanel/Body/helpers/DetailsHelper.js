@@ -123,39 +123,39 @@ class DetailsHelper {
 
   getNeededProperties = () => {
     return (this.item.isRoom
-      ? [
-          "Owner",
-          this.item.providerKey && "Storage Type",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          this.item.tags.length && "Tags",
-          "Storage",
-        ]
-      : this.item.isFolder
-      ? [
-          "Owner",
-          //"Location",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-        ]
-      : [
-          "Owner",
-          //"Location",
-          "Type",
-          "File extension",
-          "Size",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          "Versions",
-          "Comments",
-        ]
+        ? [
+            "Owner",
+            this.item.providerKey && "Storage Type",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            this.item.tags.length && "Tags",
+            "Storage",
+          ]
+        : this.item.isFolder
+        ? [
+            "Owner",
+            //"Location",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+          ]
+        : [
+            "Owner",
+            //"Location",
+            "Type",
+            "File extension",
+            "Size",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            "Versions",
+            "Comments",
+          ]
     ).filter((nP) => !!nP);
   };
 
@@ -233,7 +233,7 @@ class DetailsHelper {
       case "Tags":
         return this.getItemTags();
       case "Storage":
-        return this.getQuotaComments();
+        return this.getQuotaItem();
     }
   };
 
@@ -317,7 +317,7 @@ class DetailsHelper {
     return tagList(this.item.tags, this.selectTag);
   };
 
-  getQuotaComments = () => {
+  getQuotaItem = () => {
     return <SpaceQuota item={this.item} />;
   };
 }

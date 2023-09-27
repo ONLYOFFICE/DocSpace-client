@@ -7,53 +7,38 @@ import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
 import { StyledBody, StyledText } from "./StyledComponent";
 
+const getSelectedOption = (options, action) => {
+  const option = options.find((elem) => elem.action === action);
+
+  if (option.key === "no-quota") {
+    option.label = "Unlimited";
+    return option;
+  }
+
+  return option;
+};
+
 const SpaceQuota = (props) => {
   const {
     hideColumns,
     isCustomQuota = false,
     isDisabledQuotaChange,
-    quotaLimit = 0,
-    usedQuota = 0,
     type,
     item,
-    changeUserQuota,
-    changeRoomQuota,
     updateUserQuota,
     className,
+    changeQuota,
   } = props;
-  console.log("SpaceQuota render");
-  const [action, setAction] = useState("no-quota");
+
+  const [action, setAction] = useState(
+    item?.quotaLimit === -1 ? "no-quota" : "current-size"
+  );
+
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
 
-  const successCallback = () => {
-    setIsLoading(false);
-  };
-
-  const abortCallback = () => {
-    setIsLoading(false);
-  };
-
-  const onChange = ({ action }) => {
-    console.log("action", action, "type", type, "item", item);
-    if (action === "change") {
-      setIsLoading(true);
-
-      if (type === "user") {
-        changeUserQuota([item], successCallback, abortCallback);
-      } else {
-        changeRoomQuota([item], successCallback, abortCallback);
-      }
-
-      return;
-    }
-
-    if (action === "no-quota") {
-      if (type === "user") updateUserQuota(-1, [item]);
-      return;
-    }
-    setAction(action);
-  };
+  const usedQuota = getConvertedQuota(t, item?.usedSpace);
+  const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
 
   const options = [
     {
@@ -61,6 +46,12 @@ const SpaceQuota = (props) => {
       key: "change-quota",
       label: "Change quota",
       action: "change",
+    },
+    {
+      id: "info-account-quota_current-size",
+      key: "current-size",
+      label: spaceLimited,
+      action: "current-size",
     },
     {
       id: "info-account-quota_no-quota",
@@ -78,31 +69,39 @@ const SpaceQuota = (props) => {
       action: "default",
     });
 
-  const usedSpace = getConvertedQuota(t, usedQuota);
-  const spaceLimited = getConvertedQuota(t, quotaLimit);
-
-  const displayFunction = () => {
-    const option = options.find((elem) => elem.action === action);
-
-    if (option.key === "no-quota") {
-      option.label = "Unlimited";
-      return option;
-    }
-    if (option.key === "change-quota") {
-      option.label = spaceLimited;
-      return option;
-    }
-
-    return option;
+  const successCallback = () => {
+    setIsLoading(false);
   };
 
-  const selectedOption = displayFunction();
+  const abortCallback = () => {
+    setIsLoading(false);
+  };
 
-  // console.log("SpaceQuota selectedOption", selectedOption);
+  const onChange = ({ action }) => {
+    console.log("action", action, "type", type, "item", item);
+    if (action === "change") {
+      setIsLoading(true);
+
+      changeQuota([item], successCallback, abortCallback);
+
+      setAction("current-size");
+      return;
+    }
+
+    if (action === "no-quota") {
+      if (type === "user") updateUserQuota(-1, [item.id]);
+
+      setAction("no-quota");
+      return;
+    }
+  };
+
+  const selectedOption = getSelectedOption(options, action);
+
   if (isDisabledQuotaChange) {
     return (
       <StyledText fontWeight={600}>
-        {usedSpace} / {spaceLimited}
+        {usedQuota} / {spaceLimited}
       </StyledText>
     );
   }
@@ -112,7 +111,7 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       isDisabledQuotaChange={isDisabledQuotaChange}
     >
-      <Text fontWeight={600}>{usedSpace} / </Text>
+      <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
         className={className}
@@ -123,23 +122,27 @@ const SpaceQuota = (props) => {
         size="content"
         modernView
         isLoading={isLoading}
-        manualWidth={"fit-content"}
+        manualWidth="fit-content"
       />
     </StyledBody>
   );
 };
 
-export default inject(({ dialogsStore, peopleStore, filesActionsStore }) => {
-  const { setChangeQuotaDialogVisible, changeQuotaDialogVisible } =
-    dialogsStore;
-  const { changeUserQuota, usersStore } = peopleStore;
-  const { updateUserQuota } = usersStore;
-  const { changeRoomQuota } = filesActionsStore;
-  return {
-    setChangeQuotaDialogVisible,
-    changeQuotaDialogVisible,
-    changeUserQuota,
-    updateUserQuota,
-    changeRoomQuota,
-  };
-})(observer(SpaceQuota));
+export default inject(
+  ({ dialogsStore, peopleStore, filesActionsStore }, { type }) => {
+    const { setChangeQuotaDialogVisible, changeQuotaDialogVisible } =
+      dialogsStore;
+    const { changeUserQuota, usersStore } = peopleStore;
+    const { updateUserQuota } = usersStore;
+    const { changeRoomQuota } = filesActionsStore;
+
+    const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
+
+    return {
+      setChangeQuotaDialogVisible,
+      changeQuotaDialogVisible,
+      updateUserQuota,
+      changeQuota,
+    };
+  }
+)(observer(SpaceQuota));

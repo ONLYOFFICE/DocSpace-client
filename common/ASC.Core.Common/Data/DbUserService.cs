@@ -688,7 +688,7 @@ public class EFUserService : IUserService
             }
             else if (quotaFilter == QuotaFilter.Default)
             {
-                q = q.Where(r => userDbContext.WebstudioSettings.Any(a => a.TenantId == r.TenantId && a.Id == new UserQuotaSettings().ID && a.UserId != r.Id));
+                q = q.Where(r => !userDbContext.WebstudioSettings.Any(a => a.TenantId == r.TenantId && a.Id == new UserQuotaSettings().ID && a.UserId == r.Id));
             }
         }
 

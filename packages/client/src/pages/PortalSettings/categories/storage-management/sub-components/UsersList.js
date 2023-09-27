@@ -26,17 +26,8 @@ const StatisticsComponent = (props) => {
   };
 
   const usersList = peopleList.map((item) => {
-    const {
-      fileExst,
-      avatar,
-      id,
-      displayName,
-      usedSpace,
-      quotaLimit,
-      isRoom,
-      defaultRoomIcon,
-    } = item;
-
+    const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
+    console.log("item", item);
     return (
       <StyledSimpleFilesRow key={id}>
         <>
@@ -49,7 +40,7 @@ const StatisticsComponent = (props) => {
             "user-icon"
           )}
           {textElement(displayName)}
-          {quotaElement(usedSpace, quotaLimit)}
+          {quotaElement(item)}
         </>
       </StyledSimpleFilesRow>
     );

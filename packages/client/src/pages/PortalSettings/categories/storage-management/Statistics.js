@@ -38,12 +38,8 @@ const StatisticsComponent = (props) => {
       />
     </div>
   );
-  const quotaElement = (usedSpace, quotaLimit) => (
-    <SpaceQuota
-      isDisabledQuotaChange
-      usedQuota={usedSpace}
-      quotaLimit={quotaLimit}
-    />
+  const quotaElement = (item) => (
+    <SpaceQuota isDisabledQuotaChange item={item} />
   );
   const textElement = (title) => (
     <div className="row_name">

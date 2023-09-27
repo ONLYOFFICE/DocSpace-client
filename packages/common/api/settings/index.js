@@ -781,7 +781,19 @@ export function setDefaultUserQuota(enableQuota, defaultQuota) {
 
   return request(options);
 }
+export function setDefaultRoomQuota(enableQuota, defaultQuota) {
+  const data = {
+    enableQuota,
+    defaultQuota,
+  };
+  const options = {
+    method: "post",
+    url: "/settings/roomquotasettings",
+    data,
+  };
 
+  return request(options);
+}
 export function createWebhook(name, uri, secretKey, ssl) {
   return request({
     method: "post",

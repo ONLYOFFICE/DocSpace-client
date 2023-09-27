@@ -50,6 +50,7 @@ const ImportCompleteStep = ({
   importedUsers,
   getMigrationLog,
   cleanCheckedAccounts,
+  sendWelcomeLetter,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
@@ -76,8 +77,13 @@ const ImportCompleteStep = ({
   };
 
   const onFinishClick = () => {
-    cleanCheckedAccounts();
-    navigate(-1);
+    if (isChecked) {
+      sendWelcomeLetter({ isSendWelcomeEmail: true });
+    }
+    setTimeout(() => {
+      navigate(-1);
+      cleanCheckedAccounts();
+    }, 300);
   };
 
   return (
@@ -127,6 +133,7 @@ export default inject(({ importAccountsStore }) => {
     getMigrationLog,
     numberOfCheckedAccounts,
     cleanCheckedAccounts,
+    sendWelcomeLetter,
   } = importAccountsStore;
 
   return {
@@ -134,5 +141,6 @@ export default inject(({ importAccountsStore }) => {
     selectedUsers: numberOfCheckedAccounts,
     getMigrationLog,
     cleanCheckedAccounts,
+    sendWelcomeLetter,
   };
 })(observer(ImportCompleteStep));

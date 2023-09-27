@@ -167,15 +167,21 @@ class PeopleStore {
 
     window.dispatchEvent(event);
   };
-  disableUserQuota = (users) => {
+  disableUserQuota = async (users, t) => {
     const { updateUserQuota } = this.usersStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });
 
-    updateUserQuota(-1, userIDs);
+    try {
+      await updateUserQuota(-1, userIDs);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
   };
+
   onChangeStatus = (status) => {
     const users = [];
 
@@ -340,7 +346,7 @@ class PeopleStore {
         label: "Disable quota",
         disabled: !hasUsersToDisableQuota,
         iconUrl: DisableQuotaReactSvgUrl,
-        onClick: () => this.disableUserQuota(selection),
+        onClick: () => this.disableUserQuota(selection, t),
       },
       {
         id: "menu-delete",

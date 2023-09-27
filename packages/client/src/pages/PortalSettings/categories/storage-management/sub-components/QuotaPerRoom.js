@@ -1,78 +1,25 @@
-import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
+import QuotaPerItemComponent from "./QuotaPerItem";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
-
-let timerId = null;
 const QuotaPerRoomComponent = (props) => {
-  const { isDisabled } = props;
+  const { setRoomQuota } = props;
   const { t } = useTranslation("Settings");
 
-  const [isToggleChecked, setIsToggleChecked] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onToggleChange = (e) => {
-    const { checked } = e.currentTarget;
-
-    setIsToggleChecked(checked);
-  };
-
-  const startLoading = (name) => {
-    setTimeout(() => setIsLoading({ ...isLoading, [name]: true }), 200);
-  };
-  const resetLoading = (name) => {
-    setIsLoading({ [name]: false });
-  };
-  const onSaveRoomQuota = async (size) => {
-    const name = "room";
-    console.log("onSaveRoomQuota", size);
-    timerId = startLoading(name);
-
-    var promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        //reject(new Error("timeout"));
-        resolve();
-      }, [1000]);
-    });
-
-    await promise;
-
-    timerId && clearTimeout(timerId);
-    timerId = null;
-
-    resetLoading(name);
-  };
-
   return (
-    <StyledBaseQuotaComponent isDisabled={isDisabled}>
-      <div className="toggle-container">
-        <ToggleButton
-          className="quotas_toggle-button"
-          name="room"
-          label={t("DefineQuotaPerRoom")}
-          onChange={onToggleChange}
-          isChecked={isToggleChecked}
-          isDisabled={isDisabled || isLoading}
-        />
-        <Text className="toggle_label">{t("SetDefaultRoomQuota")}</Text>
-        {isToggleChecked && (
-          <QuotaForm
-            isButtonsEnable
-            label={t("QuotaPerRoom")}
-            maxInputWidth={"214px"}
-            onSave={onSaveRoomQuota}
-            isLoading={isLoading}
-            isDisabled={isDisabled}
-          />
-        )}
-      </div>
-    </StyledBaseQuotaComponent>
+    <QuotaPerItemComponent
+      formLabel={t("QuotaPerRoom")}
+      toggleLabel={t("DefineQuotaPerRoom")}
+      disableQuota={() => setRoomQuota(-1, t)}
+      saveQuota={(size) => setRoomQuota(size, t)}
+    />
   );
 };
 
-export default QuotaPerRoomComponent;
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+  const { setRoomQuota } = currentQuotaStore;
+
+  return { setRoomQuota };
+})(observer(QuotaPerRoomComponent));

@@ -19,24 +19,15 @@ const StatisticsComponent = (props) => {
 
   const onClickUsers = () => {
     const newFilter = Filter.getDefault();
-    newFilter.sortBy = SortByFieldName.Name;
+    newFilter.sortBy = SortByFieldName.UsedSpace;
     const urlFilter = newFilter.toUrlParams();
 
     navigate(`/accounts/filter?${urlFilter}`);
   };
 
   const usersList = peopleList.map((item) => {
-    const {
-      fileExst,
-      avatar,
-      id,
-      displayName,
-      usedSpace,
-      quotaLimit,
-      isRoom,
-      defaultRoomIcon,
-    } = item;
-
+    const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
+    console.log("item", item);
     return (
       <StyledSimpleFilesRow key={id}>
         <>
@@ -49,7 +40,7 @@ const StatisticsComponent = (props) => {
             "user-icon"
           )}
           {textElement(displayName)}
-          {quotaElement(usedSpace, quotaLimit)}
+          {quotaElement(item)}
         </>
       </StyledSimpleFilesRow>
     );

@@ -1662,8 +1662,8 @@ const SectionFilterContent = ({
       isItemQuotaAvailable &&
         accountsOptions.push({
           id: "sort-quota",
-          key: "Storage/Quota",
-          label: "Storage",
+          key: SortByFieldName.UsedSpace,
+          label: t("Common:Storage"),
           default: true,
         });
 
@@ -1746,7 +1746,7 @@ const SectionFilterContent = ({
         const sortByStorage = {
           id: "sort-by_storage",
           key: SortByFieldName.RoomType,
-          label: "Storage",
+          label: t("Common:Storage"),
           default: true,
         };
 

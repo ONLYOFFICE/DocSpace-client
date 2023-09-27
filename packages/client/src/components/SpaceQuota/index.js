@@ -77,7 +77,7 @@ const SpaceQuota = (props) => {
     setIsLoading(false);
   };
 
-  const onChange = ({ action }) => {
+  const onChange = async ({ action }) => {
     console.log("action", action, "type", type, "item", item);
     if (action === "change") {
       setIsLoading(true);
@@ -89,7 +89,14 @@ const SpaceQuota = (props) => {
     }
 
     if (action === "no-quota") {
-      if (type === "user") updateUserQuota(-1, [item.id]);
+      if (type === "user") {
+        try {
+          await updateUserQuota(-1, [item.id]);
+          toastr.success(t("Common:StorageQuotaDisabled"));
+        } catch (e) {
+          toastr.error(e);
+        }
+      }
 
       setAction("no-quota");
       return;

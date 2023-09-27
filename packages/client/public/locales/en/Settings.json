@@ -140,6 +140,7 @@
   "ManualBackupHelp": "<strong>Data Backup</strong> option is used to back up the space data to be able to restore it later to your local server.",
   "MaxCopies": "{{copiesCount}} - maximum number of backup copies",
   "MemoryQuotaEnabled": "Memory quota has been successfully enabled.",
+  "MemoryQuotaDisabled": "Memory quota has been successfully disabled.",
   "Migration": "Migration",
   "NumberOfActiveEmployees": "Number of active employees: {{count}}",
   "NewColorScheme": "New color scheme",

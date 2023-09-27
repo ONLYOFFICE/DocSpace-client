@@ -60,7 +60,7 @@ public abstract class MigrationInfo<TUser, TFiles> : IMigrationInfo
             var user = Users[apiUser.Key];
             user.ShouldImport = apiUser.ShouldImport;
             user.MigratingFiles.ShouldImport = apiUser.ShouldImport && apiInfo.ImportPersonalFiles;
-            user.MigratingFiles.ShouldImportSharedFiles = apiUser.ShouldImport && apiInfo.ImportSharedFiles;
+            user.MigratingFiles.ShouldImportSharedFiles = false;
         }
     }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import copy from "copy-to-clipboard";
 
 import InputBlock from "@docspace/components/input-block";
@@ -45,8 +44,8 @@ const Input = ({
         size={"base"}
         isReadOnly={isReadOnly}
         isDisabled={isReadOnly}
-        iconName={withCopy ? CopyReactSvgUrl : ""}
-        onIconClick={onCopy}
+        iconName={withCopy ? CopyReactSvgUrl : null}
+        onIconClick={withCopy && onCopy}
         scale={true}
         type={isSecret ? "password" : "text"}
       />

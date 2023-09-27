@@ -1,5 +1,3 @@
-import React from "react";
-
 // @ts-ignore
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 

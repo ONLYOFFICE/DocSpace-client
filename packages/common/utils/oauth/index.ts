@@ -1,6 +1,8 @@
-import { ClientDTO, ClientProps } from "./dto";
+import { ClientResDTO, ClientReqDTO, ClientProps } from "./interfaces";
 
-export const transformToClientProps = (clientDto: ClientDTO): ClientProps => {
+export const transformToClientProps = (
+  clientDto: ClientResDTO
+): ClientProps => {
   const {
     client_id,
     client_secret,
@@ -8,13 +10,14 @@ export const transformToClientProps = (clientDto: ClientDTO): ClientProps => {
     terms_url,
     policy_url,
     logo_url,
-    authenticationMethod,
+    authentication_method,
     redirect_uri,
     logout_redirect_uri,
     scopes,
     tenant,
     invalidated,
     name,
+    enabled,
   } = clientDto;
 
   const client: ClientProps = {
@@ -24,22 +27,24 @@ export const transformToClientProps = (clientDto: ClientDTO): ClientProps => {
     termsUrl: terms_url,
     policyUrl: policy_url,
     logoUrl: logo_url,
-    authenticationMethod,
+    authenticationMethod: authentication_method,
     redirectUri: redirect_uri,
     logoutRedirectUri: logout_redirect_uri,
     scopes,
     tenant,
     invalidated,
     name,
+    enabled,
   };
 
   return client;
 };
 
-export const transformToClientDTO = (clientProps: ClientProps): ClientDTO => {
+export const transformToClientReqDTO = (
+  clientProps: ClientProps
+): ClientReqDTO => {
   const {
-    clientId: client_id,
-    secret: client_secret,
+    name,
     description,
     termsUrl: terms_url,
     policyUrl: policy_url,
@@ -49,24 +54,21 @@ export const transformToClientDTO = (clientProps: ClientProps): ClientDTO => {
     logoutRedirectUri: logout_redirect_uri,
     scopes,
     tenant,
-    invalidated,
-    name,
   } = clientProps;
 
-  const client: ClientDTO = {
-    client_id,
-    client_secret,
+  const client: ClientReqDTO = {
+    name,
     description,
-    terms_url,
-    policy_url,
     logo_url,
-    authenticationMethod,
+
     redirect_uri,
     logout_redirect_uri,
+    terms_url,
+    policy_url,
+
     scopes,
+
     tenant,
-    invalidated,
-    name,
   };
 
   return client;

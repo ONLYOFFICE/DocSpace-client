@@ -1,4 +1,4 @@
-import { ClientProps, ScopeDTO } from "@docspace/common/utils/oauth/dto";
+import { ClientProps, Scope } from "@docspace/common/utils/oauth/interfaces";
 
 export interface InputProps {
   value: string;
@@ -38,13 +38,19 @@ export interface ClientFormProps {
   id?: string;
   client?: ClientProps;
 
-  scopeList?: ScopeDTO[];
+  tenant?: number;
+  fetchTenant?: () => Promise<number>;
+
+  scopeList?: Scope[];
 
   fetchClient?: (clientId: string) => Promise<ClientProps>;
   fetchScopes?: () => Promise<void>;
 
-  saveClient: (client: ClientProps) => Promise<ClientProps>;
-  updateClient: (clientId: string, client: ClientProps) => Promise<ClientProps>;
+  saveClient?: (client: ClientProps) => Promise<ClientProps>;
+  updateClient?: (
+    clientId: string,
+    client: ClientProps
+  ) => Promise<ClientProps>;
 
   regenerateSecret?: (clientId: string) => Promise<string>;
 }

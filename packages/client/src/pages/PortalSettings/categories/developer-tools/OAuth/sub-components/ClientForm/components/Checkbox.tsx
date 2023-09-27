@@ -1,5 +1,3 @@
-import React from "react";
-
 import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 

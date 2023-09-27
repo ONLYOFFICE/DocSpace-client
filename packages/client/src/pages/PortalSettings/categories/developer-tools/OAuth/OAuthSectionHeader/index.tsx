@@ -1,6 +1,4 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 // @ts-ignore
@@ -44,6 +42,4 @@ const OAuthSectionHeader = ({ isEdit }: OAuthSectionHeaderProps) => {
   );
 };
 
-export default inject(({}) => {
-  return {};
-})(observer(OAuthSectionHeader));
+export default OAuthSectionHeader;

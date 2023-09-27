@@ -127,8 +127,7 @@ class InputBlock extends React.Component {
           forwardedRef={forwardedRef}
           {...props}
         />
-        {
-          //iconNames.includes(iconName) && (
+        {iconName && (
           <div className="append">
             <StyledIconBlock
               className={`input-block-icon ${iconButtonClassName}`}
@@ -148,7 +147,7 @@ class InputBlock extends React.Component {
               />
             </StyledIconBlock>
           </div>
-        }
+        )}
       </StyledInputGroup>
     );
   }

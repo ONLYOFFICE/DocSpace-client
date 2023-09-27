@@ -1,5 +1,3 @@
-import React from "react";
-
 import Text from "@docspace/components/text";
 //@ts-ignore
 import HelpButton from "@docspace/components/help-button";

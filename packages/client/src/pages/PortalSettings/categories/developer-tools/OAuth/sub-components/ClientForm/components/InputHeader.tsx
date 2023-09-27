@@ -1,5 +1,3 @@
-import React from "react";
-
 import Text from "@docspace/components/text";
 
 const InputHeader = ({ header }: { header: string }) => {

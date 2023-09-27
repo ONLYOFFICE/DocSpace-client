@@ -2,22 +2,23 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import {
   transformToClientProps,
-  transformToClientDTO,
+  transformToClientReqDTO,
 } from "./../../utils/oauth/index";
 
 import {
-  ClientDTO,
-  ClientListDTO,
-  ClientListProps,
   ClientProps,
-  ScopeDTO,
-} from "../../utils/oauth/dto";
+  ClientResDTO,
+  ClientListProps,
+  ClientListDTO,
+  Scope,
+} from "../../utils/oauth/interfaces";
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: "/api",
   responseType: "json",
   timeout: 0,
   withCredentials: true,
+  // TODO: OAuth, remove X-Tenant into API
   headers: { "X-API-Version": "1", "X-Tenant": "1" },
 };
 
@@ -36,10 +37,13 @@ const request = (options: any): Promise<any> => {
 };
 
 export const getClient = async (clientId: string): Promise<ClientProps> => {
-  const client: ClientDTO = await request({
+  const client: ClientResDTO = await request({
     method: "get",
     url: `/clients/${clientId}`,
+    headers: {},
   });
+
+  client.enabled = true;
 
   return transformToClientProps(client);
 };
@@ -58,6 +62,9 @@ export const getClientList = async (
   data.content.forEach((item) => {
     const client = transformToClientProps(item);
 
+    // TODO: OAuth, get it from request
+    client.enabled = true;
+
     clients.content.push({ ...client });
   });
 
@@ -65,11 +72,14 @@ export const getClientList = async (
 };
 
 export const addClient = async (data: ClientProps): Promise<ClientProps> => {
-  const client: ClientDTO = await request({
+  const client: ClientResDTO = await request({
     method: "post",
     url: `/clients`,
-    data: transformToClientDTO(data),
+    data: transformToClientReqDTO(data),
   });
+
+  // TODO: OAuth, get it from request
+  client.enabled = true;
 
   return transformToClientProps(client);
 };
@@ -78,13 +88,25 @@ export const updateClient = async (
   clientId: string,
   data: ClientProps
 ): Promise<ClientProps> => {
-  const client: ClientDTO = await request({
+  const client: ClientResDTO = await request({
     method: "put",
     url: `/clients/${clientId}`,
-    data: transformToClientDTO(data),
+    data: transformToClientReqDTO(data),
   });
 
+  // TODO: OAuth, get it from request
+  client.enabled = true;
+
   return transformToClientProps(client);
+};
+
+export const changeClientStatus = async (
+  clientId: string,
+  status: boolean
+): Promise<boolean> => {
+  console.log(`Change client:${clientId} status to ${status}`);
+
+  return !status;
 };
 
 export const regenerateSecret = async (clientId: string): Promise<string> => {
@@ -105,8 +127,8 @@ export const deleteClient = async (clientId: string): Promise<void> => {
   });
 };
 
-export const getScope = async (name: string): Promise<ScopeDTO> => {
-  const scope: ScopeDTO = await request({
+export const getScope = async (name: string): Promise<Scope> => {
+  const scope: Scope = await request({
     method: "get",
     url: `/scopes/${name}`,
   });
@@ -114,8 +136,8 @@ export const getScope = async (name: string): Promise<ScopeDTO> => {
   return scope;
 };
 
-export const getScopeList = async (): Promise<ScopeDTO[]> => {
-  const scopeList: ScopeDTO[] = await request({
+export const getScopeList = async (): Promise<Scope[]> => {
+  const scopeList: Scope[] = await request({
     method: "get",
     url: `/scopes`,
   });

@@ -1,4 +1,4 @@
-export type ScopeDTO = {
+export type Scope = {
   name: string;
   description: string;
 };
@@ -6,34 +6,61 @@ export type ScopeDTO = {
 export interface ClientProps {
   clientId: string;
   secret: string;
-  description: string;
-  termsUrl?: string;
-  policyUrl: string;
-  logoUrl: string;
-  authenticationMethod?: string;
-  redirectUri: string;
-  logoutRedirectUri: string;
-  scopes: string[];
-  tenant?: number;
-  invalidated?: boolean;
-  name: string;
-}
 
-export type ClientDTO = {
-  client_id: string;
-  client_secret: string;
+  name: string;
   description: string;
-  terms_url: string;
-  policy_url: string;
-  logo_url: string;
+  logoUrl?: string;
+
+  redirectUri: string;
+  policyUrl: string;
+  termsUrl: string;
+  logoutRedirectUri: string;
+
   authenticationMethod: string;
-  redirect_uri: string;
-  logout_redirect_uri: string;
+
   scopes: string[];
+
+  enabled: boolean;
   tenant: number;
   invalidated?: boolean;
+}
+
+export interface ClientReqDTO {
   name: string;
-};
+  description: string;
+  logo_url?: string;
+
+  redirect_uri: string;
+  policy_url: string;
+  terms_url: string;
+  logout_redirect_uri: string;
+
+  scopes: string[];
+
+  tenant: number;
+}
+
+export interface ClientResDTO {
+  client_id: string;
+  client_secret: string;
+
+  name: string;
+  description: string;
+  logo_url?: string;
+
+  redirect_uri: string;
+  terms_url: string;
+  policy_url: string;
+  logout_redirect_uri: string;
+
+  authentication_method: string;
+
+  scopes: string[];
+
+  enabled: boolean;
+  tenant: number;
+  invalidated?: boolean;
+}
 
 export interface ClientListProps {
   content: ClientProps[];
@@ -65,7 +92,7 @@ export interface ClientListProps {
 }
 
 export type ClientListDTO = {
-  content: ClientDTO[];
+  content: ClientResDTO[];
   empty: boolean;
   first: boolean;
   last: true;

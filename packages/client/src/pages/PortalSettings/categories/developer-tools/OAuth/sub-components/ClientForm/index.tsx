@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
 
-import { ClientProps, ScopeDTO } from "@docspace/common/utils/oauth/dto";
+import { ClientProps, Scope } from "@docspace/common/utils/oauth/interfaces";
 
 import Button from "@docspace/components/button";
 
@@ -27,6 +27,9 @@ const ClientForm = ({
 
   scopeList,
 
+  tenant,
+  fetchTenant,
+
   fetchClient,
   fetchScopes,
 
@@ -45,20 +48,19 @@ const ClientForm = ({
     appName: "",
     appIcon: "",
     description: "",
+
     redirectUrl: "",
+    termsURL: "",
+    privacyURL: "",
     logoutRedirectUrl: "",
 
-    privacyURL: "",
+    authenticationMethod: "",
   });
 
-  const [clientId, setClientId] = React.useState<string>(
-    "23b2ec16-6a10-462b-8084-16be8e105b73"
-  );
-  const [secret, setSecret] = React.useState<string>(
-    "d2c083aa-9a2d-4147-9328-df32b7be0294"
-  );
+  const [clientId, setClientId] = React.useState<string>("");
+  const [secret, setSecret] = React.useState<string>("");
 
-  const [scopes, setScopes] = React.useState<ScopeDTO[]>([]);
+  const [scopes, setScopes] = React.useState<Scope[]>([]);
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
 
   const onInputChange = React.useCallback(
@@ -101,8 +103,17 @@ const ClientForm = ({
     newClient.scopes = [...checkedScopes];
 
     if (!id) {
+      if (!saveClient) return;
+
+      if (tenant === -1 && fetchTenant) {
+        const t = await fetchTenant();
+
+        newClient.tenant = t;
+      }
+
       await saveClient(newClient);
     } else {
+      if (!updateClient) return;
       await updateClient(clientId, newClient);
     }
 
@@ -137,11 +148,15 @@ const ClientForm = ({
   const setClient = React.useCallback(async (client: ClientProps) => {
     setForm({
       appName: client.name,
-      appIcon: client.logoUrl,
+      appIcon: client.logoUrl || "",
       description: client.description,
+
       redirectUrl: client.redirectUri,
-      logoutRedirectUrl: client.logoutRedirectUri,
       privacyURL: client.policyUrl,
+      termsUrl: client.termsUrl,
+      logoutRedirectUrl: client.logoutRedirectUri,
+
+      authenticationMethod: client.authenticationMethod,
     });
 
     setSecret(client.secret);
@@ -178,7 +193,7 @@ const ClientForm = ({
     let isValid = false;
 
     for (let key in form) {
-      if (!!form[key]) {
+      if (!!form[key] || key === "appIcon" || key === "authenticationMethod") {
         if (initClient) {
           switch (key) {
             case "appName":
@@ -186,7 +201,7 @@ const ClientForm = ({
 
               break;
             case "appIcon":
-              isValid = isValid || initClient.logoUrl !== form[key];
+              isValid = isValid || initClient.name !== form[key];
 
               break;
             case "description":
@@ -203,6 +218,11 @@ const ClientForm = ({
               break;
             case "privacyUrl":
               isValid = isValid || initClient.policyUrl !== form[key];
+
+              break;
+
+            case "termsUrl":
+              isValid = isValid || initClient.termsUrl !== form[key];
 
               break;
           }
@@ -266,35 +286,49 @@ const ClientForm = ({
         </InputGroup>
       </Block>
 
-      <Block>
-        <BlockHeader header={"Client"} helpButtonText="" />
-        <InputGroup>
-          <InputHeader header={"ID"} />
-          <Input
-            value={clientId}
-            name={"ID"}
-            placeholder={"Enter id"}
-            onChange={onInputChange}
-            isReadOnly
-            withCopy
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputHeader header={"Secret"} />
-          <Input
-            value={secret}
-            name={"secret"}
-            placeholder={"Enter secret"}
-            onChange={onInputChange}
-            isReadOnly
-            isSecret
-            withCopy
-            withButton
-            buttonLabel="Reset"
-            onClickButton={onResetClick}
-          />
-        </InputGroup>
-      </Block>
+      {id && (
+        <Block>
+          <BlockHeader header={"Client"} helpButtonText="" />
+          <InputGroup>
+            <InputHeader header={"ID"} />
+            <Input
+              value={clientId}
+              name={"ID"}
+              placeholder={"Enter id"}
+              onChange={onInputChange}
+              isReadOnly
+              withCopy
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputHeader header={"Secret"} />
+            <Input
+              value={secret}
+              name={"secret"}
+              placeholder={"Enter secret"}
+              onChange={onInputChange}
+              isReadOnly
+              isSecret
+              withCopy
+              withButton
+              buttonLabel="Reset"
+              onClickButton={onResetClick}
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <InputHeader header={"Authentication method "} />
+            <Input
+              value={form.authenticationMethod}
+              name={"authenticationMethod"}
+              placeholder={"Enter secret"}
+              onChange={onInputChange}
+              isReadOnly
+              withCopy
+            />
+          </InputGroup>
+        </Block>
+      )}
 
       <Block>
         <BlockHeader header={"OAuth URLs"} helpButtonText="" />
@@ -316,15 +350,6 @@ const ClientForm = ({
             onChange={onInputChange}
           />
         </InputGroup>
-        {/* <InputGroup>
-          <InputHeader header={"Allowed origins"} />
-          <Input
-            value={form.allowedOrigins}
-            name={"allowedOrigins"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
-          />
-        </InputGroup> */}
       </Block>
 
       <Block>
@@ -345,15 +370,7 @@ const ClientForm = ({
 
       <Block>
         <BlockHeader header={"Support & Legal info"} helpButtonText="" />
-        {/* <InputGroup>
-          <InputHeader header={"Website URL"} />
-          <Input
-            value={form.websiteUrl}
-            name={"websiteUrl"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
-          />
-        </InputGroup> */}
+
         <InputGroup>
           <InputHeader header={"Privacy policy URL"} />
           <Input
@@ -363,15 +380,15 @@ const ClientForm = ({
             onChange={onInputChange}
           />
         </InputGroup>
-        {/* <InputGroup>
+        <InputGroup>
           <InputHeader header={"Terms of Service URL"} />
           <Input
-            value={form.serviceUrl}
-            name={"serviceUrl"}
+            value={form.termsURL}
+            name={"termsURL"}
             placeholder={"Enter URL"}
             onChange={onInputChange}
           />
-        </InputGroup> */}
+        </InputGroup>
       </Block>
 
       <div className="button-container">
@@ -408,6 +425,9 @@ export default inject(
       fetchClient,
       fetchScopes,
 
+      tenant,
+      fetchTenant,
+
       saveClient,
       updateClient,
 
@@ -419,6 +439,9 @@ export default inject(
 
       fetchClient,
       fetchScopes,
+
+      tenant,
+      fetchTenant,
 
       saveClient,
       updateClient,

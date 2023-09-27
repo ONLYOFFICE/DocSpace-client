@@ -38,6 +38,24 @@ docspace:
   server:
     url: http://${DOCSPACE_ADDRESS:localhost:8092}
 
+messaging:
+  rabbitmq:
+    configuration:
+      authorization:
+        exchange: authorization.exchange
+        queue: authorization.queue
+        routing: authorization.routing
+        deadExchange: authorization.dead.exchange
+        deadQueue: authorization.dead.queue
+        deadRouting: authorization.dead.routing
+      consent:
+        exchange: consent.exchange
+        queue: consent.queue
+        routing: consent.routing
+        deadExchange: consent.dead.exchange
+        deadQueue: consent.dead.queue
+        deadRouting: consent.dead.routing
+
 resilience4j:
   bulkhead:
     instances:

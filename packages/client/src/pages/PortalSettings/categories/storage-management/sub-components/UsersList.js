@@ -19,7 +19,7 @@ const StatisticsComponent = (props) => {
 
   const onClickUsers = () => {
     const newFilter = Filter.getDefault();
-    newFilter.sortBy = SortByFieldName.Name;
+    newFilter.sortBy = SortByFieldName.UsedSpace;
     const urlFilter = newFilter.toUrlParams();
 
     navigate(`/accounts/filter?${urlFilter}`);

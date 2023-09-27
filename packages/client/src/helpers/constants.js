@@ -120,6 +120,7 @@ export const SortByFieldName = Object.freeze({
   Room: "Room",
   Tags: "Tags",
   RoomType: "roomType",
+  UsedSpace: "used_space",
 });
 
 export const LinkType = Object.freeze({

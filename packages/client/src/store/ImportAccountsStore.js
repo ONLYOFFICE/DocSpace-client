@@ -76,6 +76,10 @@ class ImportAccountsStore {
     });
   };
 
+  changeTypeGroup = (key) => {
+    this.checkedAccounts.map((item) => this.changeType(item, key));
+  };
+
   changeType = (id, optionKey) => {
     this.users = this.users.map((user) => {
       if (id === user.key) {

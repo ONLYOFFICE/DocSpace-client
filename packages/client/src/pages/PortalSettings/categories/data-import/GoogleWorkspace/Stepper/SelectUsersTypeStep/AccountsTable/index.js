@@ -5,25 +5,28 @@ import { Consumer } from "@docspace/components/utils/context";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const AccountsTable = ({ t, viewAs, accountsData }) => {
+const AccountsTable = ({ t, viewAs, accountsData, changeTypeGroup }) => {
+  const onChangeType = (key) => {
+    changeTypeGroup(key);
+  };
+
   const typeOptions = [
     {
       key: "DocSpaceAdmin",
       label: t("Common:DocSpaceAdmin"),
-      onClick: (e) => console.log(e),
+      onClick: () => onChangeType("DocSpaceAdmin"),
     },
     {
       key: "RoomAdmin",
       label: t("Common:RoomAdmin"),
-      onClick: (e) => console.log(e),
+      onClick: () => onChangeType("RoomAdmin"),
     },
     {
       key: "User",
       label: t("Common:PowerUser"),
-      onClick: (e) => console.log(e),
+      onClick: () => onChangeType("User"),
     },
   ];
-
   return (
     <Consumer>
       {(context) =>
@@ -47,11 +50,13 @@ const AccountsTable = ({ t, viewAs, accountsData }) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, importAccountsStore }) => {
   const { viewAs } = setup;
+  const { changeTypeGroup } = importAccountsStore;
 
   return {
     viewAs,
+    changeTypeGroup,
   };
 })(
   withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable))

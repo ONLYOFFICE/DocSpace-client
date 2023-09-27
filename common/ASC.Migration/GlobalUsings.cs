@@ -34,6 +34,8 @@ global using ASC.Common.Log;
 global using ASC.Common.Threading;
 global using ASC.Common.Web;
 global using ASC.Core;
+global using ASC.Core.Common.Quota;
+global using ASC.Core.Common.Quota.Features;
 global using ASC.Core.Users;
 global using ASC.Data.Storage;
 global using ASC.Data.Storage.DataOperators;

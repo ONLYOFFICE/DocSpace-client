@@ -36,6 +36,8 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
     private readonly UserManager _userManager;
     private readonly IServiceProvider _serviceProvider;
+    private readonly QuotaSocketManager _quotaSocketManager;
+    private readonly TenantQuotaFeatureStatHelper _tenantQuotaFeatureStatHelper;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
     private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
 
@@ -45,10 +47,14 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
 
     public GwsMigratingUser(
         UserManager userManager,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        QuotaSocketManager quotaSocketManager,
+        TenantQuotaFeatureStatHelper tenantQuotaFeatureStatHelper)
     {
         _userManager = userManager;
         _serviceProvider = serviceProvider;
+        _quotaSocketManager = quotaSocketManager;
+        _tenantQuotaFeatureStatHelper = tenantQuotaFeatureStatHelper;
     }
 
     public void Init(string key, string rootFolder, Action<string, Exception> log)
@@ -111,6 +117,25 @@ public class GwsMigratingUser : MigratingUser<GwsMigratingFiles>
                 _userInfo.LastName = FilesCommonResource.UnknownLastName;
             }
             saved = await _userManager.SaveUserInfo(_userInfo, UserType);
+
+            var groupId = UserType switch
+            {
+                EmployeeType.User => ASC.Core.Users.Constants.GroupUser.ID,
+                EmployeeType.DocSpaceAdmin => ASC.Core.Users.Constants.GroupAdmin.ID,
+                EmployeeType.Collaborator => ASC.Core.Users.Constants.GroupCollaborator.ID,
+                _ => Guid.Empty,
+            };
+
+            if (groupId != Guid.Empty)
+            {
+                await _userManager.AddUserIntoGroupAsync(saved.Id, groupId, true);
+            }
+            else if (UserType == EmployeeType.RoomAdmin)
+            {
+                var (name, value) = await _tenantQuotaFeatureStatHelper.GetStatAsync<CountPaidUserFeature, int>();
+                _ = _quotaSocketManager.ChangeQuotaUsedValueAsync(name, value);
+            }
+
             if (_hasPhoto)
             {
                 using (var fs = File.OpenRead(Key))

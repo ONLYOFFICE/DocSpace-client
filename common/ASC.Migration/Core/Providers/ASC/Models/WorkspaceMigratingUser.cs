@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-
 namespace ASC.Migration.Core.Core.Providers.Models;
 
 [Transient]
@@ -40,12 +39,16 @@ public class WorkspaceMigratingUser : MigratingUser<WorkspaceMigratingFiles>
     private string _rootFolder;
     private IDataReadOperator _dataReader;
     private readonly UserManager _userManager;
+    private readonly TenantQuotaFeatureStatHelper _tenantQuotaFeatureStatHelper;
+    private readonly QuotaSocketManager _quotaSocketManager;
     private readonly IServiceProvider _serviceProvider;
 
-    public WorkspaceMigratingUser(IServiceProvider serviceProvider, UserManager userManager)
+    public WorkspaceMigratingUser(IServiceProvider serviceProvider, UserManager userManager, TenantQuotaFeatureStatHelper tenantQuotaFeatureStatHelper, QuotaSocketManager quotaSocketManager)
     {
         _serviceProvider = serviceProvider;
         _userManager = userManager;
+        _tenantQuotaFeatureStatHelper = tenantQuotaFeatureStatHelper;
+        _quotaSocketManager = quotaSocketManager;
     }
 
     public void Init(string key,WorkspaceUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)
@@ -87,6 +90,24 @@ public class WorkspaceMigratingUser : MigratingUser<WorkspaceMigratingFiles>
         if (saved == ASC.Core.Users.Constants.LostUser)
         {
             saved = await _userManager.SaveUserInfo(_user.Info, UserType);
+            var groupId = UserType switch
+            {
+                EmployeeType.User => ASC.Core.Users.Constants.GroupUser.ID,
+                EmployeeType.DocSpaceAdmin => ASC.Core.Users.Constants.GroupAdmin.ID,
+                EmployeeType.Collaborator => ASC.Core.Users.Constants.GroupCollaborator.ID,
+                _ => Guid.Empty,
+            };
+
+            if (groupId != Guid.Empty)
+            {
+                await _userManager.AddUserIntoGroupAsync(saved.Id, groupId, true);
+            }
+            else if (UserType == EmployeeType.RoomAdmin)
+            {
+                var (name, value) = await _tenantQuotaFeatureStatHelper.GetStatAsync<CountPaidUserFeature, int>();
+                _ = _quotaSocketManager.ChangeQuotaUsedValueAsync(name, value);
+            }
+
             _user.Info = saved;
             if (_hasPhoto)
             {

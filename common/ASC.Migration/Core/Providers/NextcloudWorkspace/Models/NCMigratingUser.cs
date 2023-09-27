@@ -42,14 +42,20 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
     private readonly UserManager _userManager;
     private NCUser _user;
     private readonly IServiceProvider _serviceProvider;
+    private readonly TenantQuotaFeatureStatHelper _tenantQuotaFeatureStatHelper;
+    private readonly QuotaSocketManager _quotaSocketManager;
     private readonly Regex _emailRegex = new Regex(@"(\S*@\S*\.\S*)");
     private readonly Regex _phoneRegex = new Regex(@"(\+?\d+)");
 
     public NCMigratingUser(UserManager userManager,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        TenantQuotaFeatureStatHelper tenantQuotaFeatureStatHelper,
+        QuotaSocketManager quotaSocketManager)
     {
         _userManager = userManager;
         _serviceProvider = serviceProvider;
+        _tenantQuotaFeatureStatHelper = tenantQuotaFeatureStatHelper;
+        _quotaSocketManager = quotaSocketManager;
     }
 
     public void Init(NCUser user, string rootFolder, Action<string, Exception> log)
@@ -157,6 +163,24 @@ public class NCMigratingUser : MigratingUser<NCMigratingFiles>
                 _userInfo.LastName = FilesCommonResource.UnknownLastName;
             }
             saved = await _userManager.SaveUserInfo(_userInfo, UserType);
+            var groupId = UserType switch
+            {
+                EmployeeType.User => ASC.Core.Users.Constants.GroupUser.ID,
+                EmployeeType.DocSpaceAdmin => ASC.Core.Users.Constants.GroupAdmin.ID,
+                EmployeeType.Collaborator => ASC.Core.Users.Constants.GroupCollaborator.ID,
+                _ => Guid.Empty,
+            };
+
+            if (groupId != Guid.Empty)
+            {
+                await _userManager.AddUserIntoGroupAsync(saved.Id, groupId, true);
+            }
+            else if (UserType == EmployeeType.RoomAdmin)
+            {
+                var (name, value) = await _tenantQuotaFeatureStatHelper.GetStatAsync<CountPaidUserFeature, int>();
+                _ = _quotaSocketManager.ChangeQuotaUsedValueAsync(name, value);
+            }
+
             if (_hasPhoto)
             {
                 using (var ms = new MemoryStream())

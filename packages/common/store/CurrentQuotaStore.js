@@ -248,12 +248,16 @@ class QuotasStore {
     }
   };
 
-  setUserQuota = async (quota, t, isEnable = true) => {
-    const quotaSize = isEnable ? quota : -1;
+  setUserQuota = async (quota, t) => {
+    const isEnable = quota !== -1;
 
     try {
-      await setDefaultUserQuota(isEnable, quotaSize);
-      toastr.success(t("MemoryQuotaEnabled"));
+      await setDefaultUserQuota(isEnable, quota);
+      const toastrText = isEnable
+        ? t("MemoryQuotaEnabled")
+        : t("MemoryQuotaDisabled");
+
+      toastr.success(toastrText);
     } catch (e) {
       toastr.error(e);
     }

@@ -18,10 +18,17 @@ const QuotaPerUserComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onToggleChange = (e) => {
+  const onToggleChange = async (e) => {
     const { checked } = e.currentTarget;
 
     setIsToggleChecked(checked);
+
+    if (checked) return;
+
+    setIsLoading(true);
+
+    await setUserQuota(-1, t);
+    setIsLoading(false);
   };
 
   const onSaveUserQuota = async (size) => {

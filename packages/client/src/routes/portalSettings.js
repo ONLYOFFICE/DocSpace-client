@@ -90,6 +90,11 @@ const ThirdParty = loadable(() =>
     "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
   )
 );
+
+const DocumentService = loadable(() =>
+  import("../pages/PortalSettings/categories/integration/DocumentService")
+);
+
 const SingleSignOn = loadable(() =>
   import("../pages/PortalSettings/categories/integration/SingleSignOn")
 );
@@ -275,6 +280,10 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/portal-integration",
+      element: <Integration />,
+    },
+    {
+      path: "integration/document-service",
       element: <Integration />,
     },
     {

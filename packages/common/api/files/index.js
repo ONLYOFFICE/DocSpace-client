@@ -830,10 +830,6 @@ export function removeFromFavorite(ids) {
   return request(options);
 }
 
-export function getDocServiceUrl() {
-  return request({ method: "get", url: `/files/docservice` });
-}
-
 export function getIsEncryptionSupport() {
   return request({
     method: "get",
@@ -1007,6 +1003,36 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
       actionLink,
       emails,
       message,
+    },
+  });
+}
+
+export function getDocumentServiceLocation(version) {
+  const params = {};
+
+  if (version !== undefined) {
+    params.version = version;
+  }
+
+  return request({
+    method: "get",
+    url: `/files/docservice`,
+    params,
+  });
+}
+
+export function changeDocumentServiceLocation(
+  docServiceUrl,
+  internalUrl,
+  portalUrl
+) {
+  return request({
+    method: "put",
+    url: `files/docservice`,
+    data: {
+      DocServiceUrl: docServiceUrl,
+      DocServiceUrlInternal: internalUrl,
+      DocServiceUrlPortal: portalUrl,
     },
   });
 }

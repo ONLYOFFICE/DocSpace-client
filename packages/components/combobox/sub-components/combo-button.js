@@ -12,7 +12,6 @@ import {
 
 import Text from "../../text";
 
-
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import Badge from "@docspace/components/badge";
 
@@ -94,7 +93,7 @@ const ComboButton = (props) => {
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
         />
-      ) : (
+      ) : type !== "onlyIcon" ? (
         <Text
           noBorder={noBorder}
           title={selectedOption?.label}
@@ -105,6 +104,8 @@ const ComboButton = (props) => {
         >
           {selectedOption?.label}
         </Text>
+      ) : (
+        <></>
       )}
       <StyledArrowIcon
         displayArrow={displayArrow}

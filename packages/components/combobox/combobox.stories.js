@@ -56,6 +56,24 @@ const comboOptions = [
   },
 ];
 
+const iconsOptions = [
+  {
+    key: 1,
+    icon: CatalogEmployeeReactSvgUrl,
+    label: "Option 1",
+  },
+  {
+    key: 2,
+    icon: CatalogEmployeeReactSvgUrl,
+    label: "Option 2",
+  },
+  {
+    key: 3,
+    icon: CatalogEmployeeReactSvgUrl,
+    label: "Option 3",
+  },
+];
+
 let children = [];
 
 const advancedOptions = (
@@ -178,6 +196,23 @@ const AdvancedOptionsTemplate = (args) => (
   </Wrapper>
 );
 
+const OnlyIconTemplate = (args) => (
+  <Wrapper>
+    <ComboBox
+      {...args}
+      isDefaultMode={false}
+      directionY="both"
+      fixedDirection={true}
+      options={iconsOptions}
+      onSelect={(option) => args.onSelect(option)}
+      selectedOption={iconsOptions[0]}
+      showDisabledItems={true}
+    >
+      {childrenItems}
+    </ComboBox>
+  </Wrapper>
+);
+
 export const basic = Template.bind({});
 basic.args = {
   scaled: false,
@@ -202,6 +237,14 @@ export const badgeType = BadgeTypeTemplate.bind({});
 badgeType.args = {
   scaled: false,
   type: "badge",
+  size: "content",
+  scaledOptions: true,
+};
+
+export const onlyIconType = OnlyIconTemplate.bind({});
+onlyIconType.args = {
+  scaled: false,
+  type: "onlyIcon",
   size: "content",
   scaledOptions: true,
 };

@@ -355,7 +355,7 @@ ComboBox.propTypes = {
   /** Indicates when the component is loading */
   isLoading: PropTypes.bool,
   /**Type ComboBox */
-  type: PropTypes.oneOf(["badge", null]),
+  type: PropTypes.oneOf(["badge", "onlyIcon", null]),
 };
 
 ComboBox.defaultProps = {

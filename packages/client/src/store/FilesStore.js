@@ -1854,7 +1854,7 @@ class FilesStore {
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
-        // "sharing-settings",
+        "sharing-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",

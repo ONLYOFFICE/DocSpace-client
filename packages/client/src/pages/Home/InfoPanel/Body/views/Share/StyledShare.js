@@ -4,7 +4,8 @@ const StyledLinks = styled.div`
   margin-top: 20px;
 
   .title-link {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
+    line-height: 16px;
     color: #a3a9ae;
   }
 
@@ -23,10 +24,14 @@ const StyledLinks = styled.div`
 `;
 
 const StyledLinkRow = styled.div`
-  margin-bottom: 8px;
+  padding: 8px 0;
   display: flex;
   gap: 8px;
   align-items: center;
+
+  .combo-box {
+    padding: 0;
+  }
 
   .combo-button {
     padding-left: 8px;

@@ -1,25 +1,33 @@
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
-import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
-import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
+import { ReactSVG } from "react-svg";
+import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import EmptyContainer from "./EmptyContainer";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import { Text } from "@docspace/components";
-import { ReactSVG } from "react-svg";
+
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
-import Loaders from "@docspace/common/components/Loaders";
-import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
+
+import { CategoryType } from "SRC_DIR/helpers/constants";
 import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+
+import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
+
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
+import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
+
+import EmptyScreenRoleSvgUrl from "PUBLIC_DIR/images/empty_screen_role.svg?url";
+import EmptyScreenRoleDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_role_dark.svg?url";
+import EmptyScreenDoneSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import EmptyScreenDoneDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_done_dark.svg?url";
 
 const EmptyFolderContainer = ({
   t,
@@ -42,14 +50,53 @@ const EmptyFolderContainer = ({
 
   roomType,
   isLoading,
+  folderType,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isDoneFolder = folderType === FolderType.Done;
+  const isInProgressFolder = folderType === FolderType.InProgress;
 
   const isRoom =
     isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
 
   const canInviteUsers = isRoom && editAccess;
+
+  const getHeaderText = useCallback(() => {
+    if (isRoom) return t("RoomCreated");
+
+    if (isDoneFolder) return t("EmptyFormFolderDoneHeaderText");
+
+    if (isInProgressFolder) return t("EmptyFormFolderProgressHeaderText");
+
+    return t("EmptyScreenFolder");
+  }, [isRoom, isDoneFolder, isInProgressFolder, t]);
+
+  const getDescription = useCallback(() => {
+    if (canCreateFiles) return t("EmptyFolderDecription");
+
+    if (isDoneFolder) return t("EmptyFormFolderDoneDescriptionText");
+
+    if (isInProgressFolder) return t("EmptyFormFolderProgressDescriptionText");
+
+    return t("EmptyFolderDescriptionUser");
+  }, [canCreateFiles, isDoneFolder, isInProgressFolder, t]);
+
+  const getImage = useCallback(() => {
+    if (isRoom)
+      return theme.isBase
+        ? EmptyScreenCorporateSvgUrl
+        : EmptyScreenCorporateDarkSvgUrl;
+
+    if (isDoneFolder)
+      return theme.isBase ? EmptyScreenDoneSvgUrl : EmptyScreenDoneDarkSvgUrl;
+
+    if (isInProgressFolder)
+      return theme.isBase ? EmptyScreenRoleSvgUrl : EmptyScreenRoleDarkSvgUrl;
+
+    return theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
+  }, [isRoom, isDoneFolder, isInProgressFolder, theme.isBase]);
 
   const onBackToParentFolder = () => {
     setIsLoading(true);
@@ -178,30 +225,34 @@ const EmptyFolderContainer = ({
         </div>
       )}
     </>
+  ) : isDoneFolder || isInProgressFolder ? (
+    <div className="empty-folder_container-links">
+      <ReactSVG
+        className="empty-folder_container_up-image"
+        src={UpSvgUrl}
+        onClick={onBackToParentFolder}
+      />
+      <Link onClick={onBackToParentFolder} {...linkStyles}>
+        {t("BackToParentFolderButton")}
+      </Link>
+    </div>
   ) : (
     <></>
   );
 
-  const emptyScreenCorporateSvg = theme.isBase
-    ? EmptyScreenCorporateSvgUrl
-    : EmptyScreenCorporateDarkSvgUrl;
-  const emptyScreenAltSvg = theme.isBase
-    ? EmptyScreenAltSvgUrl
-    : EmptyScreenAltSvgDarkUrl;
+  const imageSrc = getImage();
+  const headerText = getHeaderText();
+  const descriptionText = getDescription();
 
   return (
     <EmptyContainer
-      headerText={isRoom ? t("RoomCreated") : t("EmptyScreenFolder")}
-      style={{ gridColumnGap: "39px", marginTop: 32 }}
-      descriptionText={
-        canCreateFiles
-          ? t("EmptyFolderDecription")
-          : t("EmptyFolderDescriptionUser")
-      }
-      imageSrc={isRoom ? emptyScreenCorporateSvg : emptyScreenAltSvg}
       buttons={buttons}
+      imageSrc={imageSrc}
+      headerText={headerText}
       sectionWidth={sectionWidth}
       isEmptyFolderContainer={true}
+      descriptionText={descriptionText}
+      style={{ gridColumnGap: "39px", marginTop: 32 }}
     />
   );
 };

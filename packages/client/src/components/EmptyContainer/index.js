@@ -23,6 +23,7 @@ const EmptyContainer = ({
   isLoading,
   parentId,
   theme,
+  folderType,
 
   sectionWidth,
   isRoomNotFoundOrMoved,
@@ -83,6 +84,7 @@ const EmptyContainer = ({
       sectionWidth={sectionWidth}
       onCreate={onCreate}
       linkStyles={linkStyles}
+      folderType={folderType}
     />
   );
 };
@@ -117,6 +119,7 @@ export default inject(
       isRoomNotFoundOrMoved,
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
+      folderType: selectedFolderStore.folderType,
     };
   }
 )(observer(EmptyContainer));

@@ -48,9 +48,15 @@ map $SERVICE_API $service_api {
     default $SERVICE_API;
 }
 
-map $SERVICE_OAUTH $service_oauth {
+map $SERVICE_OAUTH $service_oauth_api {
     volatile;
     "" 127.0.0.1:9090;
+    default $SERVICE_OAUTH_API;
+}
+
+map $SERVICE_OAUTH $service_oauth {
+    volatile;
+    "" 127.0.0.1:8080;
     default $SERVICE_OAUTH;
 }
 

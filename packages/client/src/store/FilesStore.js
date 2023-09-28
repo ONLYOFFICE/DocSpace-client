@@ -1722,17 +1722,11 @@ class FilesStore {
   };
 
   updateRoomQuota = async (quotaSize, itemsIDs, filter) => {
-    var promise_1 = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        console.log("promise updateRoomQuota", quotaSize, itemsIDs);
-        resolve();
-        // reject(new Error("timeout"));
-      }, [1000]);
-    });
-
-    await promise_1;
+    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, quotaSize);
 
     await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
   };
 
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {

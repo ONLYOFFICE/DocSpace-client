@@ -150,9 +150,11 @@ class UsersStore {
     return users;
   };
   updateUserQuota = async (quotaSize, userIds, filter) => {
-    await api.people.setCustomUserQuota(userIds, quotaSize);
+    const users = await api.people.setCustomUserQuota(userIds, quotaSize);
 
     await this.getUsersList(filter);
+
+    return users;
   };
   updateProfileInUsers = async (updatedProfile) => {
     if (!this.users) {

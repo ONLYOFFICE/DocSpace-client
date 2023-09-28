@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import TableHeader from "@docspace/components/table-container/TableHeader";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
@@ -51,13 +52,13 @@ class PeopleTableHeader extends React.Component {
         onClick: this.onFilter,
       },
       {
-        key: "Storage/Quota",
-        title: "Storage / Quota",
+        key: "Storage",
+        title: t("Common:StorageAndQuota"),
         enable: true,
-        // sortBy: "type",
+        sortBy: SortByFieldName.UsedSpace,
         resizable: true,
         onChange: this.onColumnChange,
-        onClick: () => {},
+        onClick: this.onFilter,
         minWidth: 179,
       },
     ];

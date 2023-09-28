@@ -76,6 +76,16 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
         },
+        {
+          key: "Storage",
+          title: t("Common:StorageAndQuota"),
+          enable: this.props.roomQuotaColumnIsEnable,
+          sortBy: SortByFieldName.UsedSpace,
+          resizable: true,
+          onChange: this.onColumnChange,
+          onClick: this.onRoomsFilter,
+          minWidth: 179,
+        },
       ];
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
@@ -489,6 +499,7 @@ export default inject(
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -537,6 +548,7 @@ export default inject(
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,

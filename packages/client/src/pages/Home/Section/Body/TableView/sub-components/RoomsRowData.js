@@ -8,6 +8,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import { classNames } from "@docspace/components/utils/classNames";
 import { StyledBadgesContainer } from "../StyledTable";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const RoomsRowDataComponent = (props) => {
   const {
@@ -15,6 +16,7 @@ const RoomsRowDataComponent = (props) => {
     roomColumnOwnerIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    roomQuotaColumnIsEnable,
 
     dragStyles,
     selectionProp,
@@ -26,6 +28,8 @@ const RoomsRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
+
+    item,
   } = props;
 
   return (
@@ -122,6 +126,13 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+      {roomQuotaColumnIsEnable ? (
+        <TableCell className={"table-cell_Storage/Quota"}>
+          <SpaceQuota item={item} type="room" />
+        </TableCell>
+      ) : (
+        <div />
+      )}
     </>
   );
 };
@@ -132,9 +143,11 @@ export default inject(({ tableStore }) => {
     roomColumnOwnerIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    roomQuotaColumnIsEnable,
   } = tableStore;
 
   return {
+    roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
     roomColumnTagsIsEnabled,

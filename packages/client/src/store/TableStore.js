@@ -22,6 +22,7 @@ class TableStore {
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
   roomColumnActivityIsEnabled = true;
+  roomQuotaColumnIsEnable = false;
 
   nameColumnIsEnabled = true; // always true
   authorColumnIsEnabled = false;
@@ -59,6 +60,10 @@ class TableStore {
 
   setRoomColumnActivity = (enable) => {
     this.roomColumnActivityIsEnabled = enable;
+  };
+
+  setRoomColumnQuota = (enable) => {
+    this.roomQuotaColumnIsEnable = enable;
   };
 
   setAuthorColumn = (enable) => {
@@ -116,6 +121,7 @@ class TableStore {
         this.setRoomColumnTags(splitColumns.includes("Tags"));
         this.setRoomColumnOwner(splitColumns.includes("Owner"));
         this.setRoomColumnActivity(splitColumns.includes("Activity"));
+        this.setRoomColumnQuota(splitColumns.includes("Storage"));
         return;
       }
 
@@ -204,6 +210,10 @@ class TableStore {
 
       case "Activity":
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
+        return;
+
+      case "Storage":
+        this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
       default:

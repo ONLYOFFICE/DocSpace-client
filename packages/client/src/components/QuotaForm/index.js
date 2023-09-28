@@ -9,6 +9,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 
 import StyledBody from "./StyledComponent";
+import Checkbox from "@docspace/components/checkbox";
 
 const QuotaForm = ({
   isLoading,
@@ -21,11 +22,13 @@ const QuotaForm = ({
   isButtonsEnable = false,
   onSave,
   label,
+  checkboxLabel,
   description,
 }) => {
   const [size, setSize] = useState(initialSize);
   const [power, setPower] = useState(initialPower);
   const [hasError, setHasError] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const { t } = useTranslation(["Common"]);
   const options = [
@@ -36,12 +39,14 @@ const QuotaForm = ({
     { key: 4, label: t("Common:Terabyte") },
   ];
 
+  const getConvertedSize = (value) => {
+    return value.trim() !== "" ? conversionToBytes(value, power) : "";
+  };
   const onChangeTextInput = (e) => {
     const { value, validity } = e.target;
 
     if (validity.valid) {
-      const transmittedSize =
-        value.trim() !== "" ? conversionToBytes(value, power) : "";
+      const transmittedSize = getConvertedSize(value);
 
       onSetQuotaBytesSize && onSetQuotaBytesSize(transmittedSize);
       setSize(value);
@@ -53,6 +58,16 @@ const QuotaForm = ({
 
     onSetQuotaBytesSize && onSetQuotaBytesSize(conversionToBytes(size, key));
     setPower(key);
+  };
+
+  const onChangeCheckbox = () => {
+    const changeСheckbox = !isChecked;
+
+    setIsChecked(changeСheckbox);
+
+    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size);
+
+    onSetQuotaBytesSize && onSetQuotaBytesSize(sizeValue);
   };
   const isSizeError = () => {
     if (size.trim() === "") {
@@ -87,9 +102,13 @@ const QuotaForm = ({
     console.log("onCancel");
   };
 
-  const isDisable = isLoading || isDisabled;
+  const isDisable = isLoading || isDisabled || isChecked;
   return (
-    <StyledBody maxInputWidth={maxInputWidth} label={label}>
+    <StyledBody
+      maxInputWidth={maxInputWidth}
+      isLabel={!!label}
+      isCheckbox={!!checkboxLabel}
+    >
       {label && <Text fontWeight={600}>{label}</Text>}
       {description && (
         <Text fontSize="12px" className="quota_description">
@@ -120,6 +139,14 @@ const QuotaForm = ({
           manualWidth={"fit-content"}
         />
       </div>
+      {checkboxLabel && (
+        <Checkbox
+          label={checkboxLabel}
+          isChecked={isChecked}
+          onChange={onChangeCheckbox}
+        />
+      )}
+
       {isButtonsEnable && (
         <SaveCancelButtons
           isSaving={isLoading}

@@ -20,7 +20,7 @@ const RoomsListComponent = (props) => {
 
   const onClickRooms = () => {
     const newFilter = RoomsFilter.getDefault();
-    newFilter.sortBy = SortByFieldName.RoomType;
+    newFilter.sortBy = SortByFieldName.UsedSpace;
     const urlFilter = newFilter.toUrlParams();
 
     navigate(`/rooms/shared/filter?${urlFilter}`);

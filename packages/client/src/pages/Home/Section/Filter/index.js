@@ -1745,7 +1745,7 @@ const SectionFilterContent = ({
       if (isRooms) {
         const sortByStorage = {
           id: "sort-by_storage",
-          key: SortByFieldName.RoomType,
+          key: SortByFieldName.UsedSpace,
           label: t("Common:Storage"),
           default: true,
         };
@@ -1788,8 +1788,14 @@ const SectionFilterContent = ({
           !hide && commonOptions.push(modifiedDate);
         }
 
-        if (isItemQuotaAvailable && availableSort?.includes("Storage/Quota")) {
-          const idx = availableSort.findIndex((x) => x === "Storage/Quota");
+        console.log("availableSort", availableSort);
+        if (
+          isItemQuotaAvailable &&
+          availableSort?.includes(SortByFieldName.UsedSpace)
+        ) {
+          const idx = availableSort.findIndex(
+            (x) => x === SortByFieldName.UsedSpace
+          );
           const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(sortByStorage);

@@ -329,6 +329,11 @@ class InfoPanelStore {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
     return pathname.indexOf("files/trash") !== -1;
   };
+
+  openShareTab = () => {
+    this.setView("info_share");
+    this.isVisible = true;
+  };
 }
 
 export default InfoPanelStore;

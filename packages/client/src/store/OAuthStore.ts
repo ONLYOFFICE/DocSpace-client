@@ -37,6 +37,9 @@ export interface OAuthStoreProps {
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
 
+  clientsIsLoading: boolean;
+  setClientsIsLoading: (value: boolean) => void;
+
   editClient: (clientId: string) => void;
 
   clients: ClientProps[];
@@ -85,7 +88,7 @@ export interface OAuthStoreProps {
 class OAuthStore implements OAuthStoreProps {
   viewAs: "table" | "row" = "table";
 
-  currentPage: number = 0;
+  currentPage: number = -1;
   totalPages: number = 0;
   totalElements: number = 0;
 
@@ -102,6 +105,8 @@ class OAuthStore implements OAuthStoreProps {
   activeClients: string[] = [];
 
   scopes: Scope[] = [];
+
+  clientsIsLoading: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -133,6 +138,10 @@ class OAuthStore implements OAuthStoreProps {
     if (client) {
       this.bufferSelection = { ...client, scopes: [...client.scopes] };
     }
+  };
+
+  setClientsIsLoading = (value: boolean) => {
+    this.clientsIsLoading = value;
   };
 
   setActiveClient = (clientId: string) => {
@@ -175,10 +184,7 @@ class OAuthStore implements OAuthStoreProps {
 
   fetchClients = async () => {
     try {
-      runInAction(() => {
-        this.currentPage = 1;
-      });
-
+      this.setClientsIsLoading(true);
       const clientList: ClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
@@ -186,14 +192,23 @@ class OAuthStore implements OAuthStoreProps {
 
         this.totalElements = clientList.totalElements;
         this.clients = clientList.content;
+        this.selection = [];
+        this.currentPage = 1;
       });
+      this.setClientsIsLoading(false);
     } catch (e) {
       console.log(e);
     }
   };
 
   fetchNextClients = async (startIndex: number) => {
+    if (this.clientsIsLoading) return;
+    this.setClientsIsLoading(true);
+
     const page = startIndex / PAGE_LIMIT;
+
+    console.log(page);
+
     runInAction(() => {
       this.currentPage = page + 1;
     });
@@ -205,6 +220,8 @@ class OAuthStore implements OAuthStoreProps {
       this.totalElements = clientList.totalElements;
       this.clients = [...this.clients, ...clientList.content];
     });
+
+    this.setClientsIsLoading(false);
   };
 
   //TODO: OAuth, add tenant and other params
@@ -338,21 +355,21 @@ class OAuthStore implements OAuthStoreProps {
     const settingsOption = {
       key: "settings",
       icon: SettingsIcon,
-      label: t("Common:Settings"),
+      label: t("Settings"),
       onClick: () => this.editClient(clientId),
     };
 
     const enableOption = {
       key: "enable",
       icon: EnableReactSvgUrl,
-      label: t("Common:Enable"),
+      label: t("Enable"),
       onClick: () => onEnable(true),
     };
 
     const disableOption = {
       key: "disable",
       icon: RemoveReactSvgUrl,
-      label: t("Common:Disable"),
+      label: t("Disable"),
       onClick: () => onEnable(false),
     };
 
@@ -363,7 +380,7 @@ class OAuthStore implements OAuthStoreProps {
       },
       {
         key: "delete",
-        label: t("Common:Delete"),
+        label: t("Delete"),
         icon: DeleteIcon,
         onClick: () => onDelete(),
       },

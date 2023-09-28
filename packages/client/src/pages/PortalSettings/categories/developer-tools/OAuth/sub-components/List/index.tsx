@@ -11,6 +11,8 @@ import { Consumer } from "@docspace/components/utils/context";
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 import TableView from "./TableView";
+import RowView from "./RowView";
+
 import RegisterNewButton from "../RegisterNewButton";
 
 const StyledContainer = styled.div`
@@ -82,7 +84,12 @@ const List = ({ t, clients, viewAs, setViewAs }: ListProps) => {
                 sectionWidth={context.sectionWidth}
               />
             ) : (
-              <div>row</div>
+              <RowView
+                viewAs={viewAs}
+                setViewAs={setViewAs}
+                items={clients || []}
+                sectionWidth={context.sectionWidth}
+              />
             )}
           </>
         )}

@@ -22,7 +22,7 @@ const Row = (props: RowProps) => {
   } = props;
   const navigate = useNavigate();
 
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const editClient = () => {
     navigate(`${item.clientId}`);

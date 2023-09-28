@@ -42,9 +42,10 @@ const ChangeQuotaEvent = (props) => {
     }
 
     timerId = setTimeout(() => setIsLoading(true), 200);
+    let users;
 
     try {
-      await updateFunction(size);
+      users = await updateFunction(size);
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
@@ -57,7 +58,7 @@ const ChangeQuotaEvent = (props) => {
     setIsLoading(false);
     setIsError(false);
 
-    successCallback && successCallback();
+    successCallback && successCallback(users);
     onClose && onClose();
   };
 

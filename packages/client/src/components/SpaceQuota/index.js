@@ -28,6 +28,7 @@ const SpaceQuota = (props) => {
     updateUserQuota,
     className,
     changeQuota,
+    onSuccess,
   } = props;
 
   const [action, setAction] = useState(
@@ -69,7 +70,8 @@ const SpaceQuota = (props) => {
       action: "default",
     });
 
-  const successCallback = () => {
+  const successCallback = (users) => {
+    onSuccess && onSuccess(users);
     setIsLoading(false);
   };
 

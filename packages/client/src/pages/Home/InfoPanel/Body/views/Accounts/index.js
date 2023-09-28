@@ -218,7 +218,12 @@ const Accounts = ({
           <Text className={"info_field"} noSelect title={"Quota"}>
             {"Quota"}
           </Text>
-          <SpaceQuota type="user" item={selection} className="type-combobox" />
+          <SpaceQuota
+            type="user"
+            item={selection}
+            className="type-combobox"
+            onSuccess={onSuccess}
+          />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}

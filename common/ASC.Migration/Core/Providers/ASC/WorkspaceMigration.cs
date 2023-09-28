@@ -29,7 +29,7 @@ namespace ASC.Migration.Core.Core.Providers;
 [Scope]
 public class WorkspaceMigration : AbstractMigration<WorkspaceMigrationInfo, WorkspaceMigratingUser, WorkspaceMigratingFiles>
 {
-    private string _takeout;
+    private string backup;
     private string _tmpFolder;
     private readonly IServiceProvider _serviceProvider;
     private readonly MigratorMeta _meta;
@@ -51,22 +51,18 @@ public class WorkspaceMigration : AbstractMigration<WorkspaceMigrationInfo, Work
         _logger.Init();
         _cancellationToken = cancellationToken;
         var files = Directory.GetFiles(path);
-        if (!files.Any() || !files.Any(f => f.EndsWith(".gz")))
+        if (!files.Any() || !files.Any(f => f.EndsWith(".gz") || f.EndsWith(".tar")))
         {
-            throw new Exception("Folder must not be empty and should contain only .gz files.");
+            throw new Exception("Folder must not be empty and should contain only .gz or .tar files.");
         }
-        for (var i = 0; i < files.Length; i++)
-        {
-            if (files[i].EndsWith(".gz"))
-            {
-                _takeout = files[i];
-            }
-        }
+
+        backup = files.First(f => f.EndsWith(".gz") || f.EndsWith(".tar"));
 
         _migrationInfo = new WorkspaceMigrationInfo();
         _migrationInfo.MigratorName = _meta.Name;
         _tmpFolder = path;
-        _dataReader = new ZipReadOperator(_takeout, false);
+
+        _dataReader = DataOperatorFactory.GetReadOperator(backup, false);
     }
     public override async Task<MigrationApiInfo> Parse(bool reportProgress = true)
     {

@@ -51,7 +51,7 @@ public class WorkspaceMigratingUser : MigratingUser<WorkspaceMigratingFiles>
         _quotaSocketManager = quotaSocketManager;
     }
 
-    public void Init(string key,WorkspaceUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)
+    public void Init(string key, WorkspaceUser user, string rootFolder, IDataReadOperator dataReader, Action<string, Exception> log)
     {
         Key = key;
         _dataReader = dataReader;

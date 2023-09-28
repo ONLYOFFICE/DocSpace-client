@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { getConvertedQuota } from "@docspace/common/utils";
 import Text from "@docspace/components/text";
 import ComboBox from "@docspace/components/combobox";
+import toastr from "@docspace/components/toast/toastr";
+
 import { StyledBody, StyledText } from "./StyledComponent";
 
 const getSelectedOption = (options, action) => {
@@ -25,10 +27,10 @@ const SpaceQuota = (props) => {
     isDisabledQuotaChange,
     type,
     item,
-    updateUserQuota,
     className,
     changeQuota,
     onSuccess,
+    setUnlimitedQuota,
   } = props;
 
   const [action, setAction] = useState(
@@ -91,13 +93,11 @@ const SpaceQuota = (props) => {
     }
 
     if (action === "no-quota") {
-      if (type === "user") {
-        try {
-          await updateUserQuota(-1, [item.id]);
-          toastr.success(t("Common:StorageQuotaDisabled"));
-        } catch (e) {
-          toastr.error(e);
-        }
+      try {
+        await setUnlimitedQuota(-1, [item.id]);
+        toastr.success(t("Common:StorageQuotaDisabled"));
+      } catch (e) {
+        toastr.error(e);
       }
 
       setAction("no-quota");
@@ -138,20 +138,19 @@ const SpaceQuota = (props) => {
 };
 
 export default inject(
-  ({ dialogsStore, peopleStore, filesActionsStore }, { type }) => {
-    const { setChangeQuotaDialogVisible, changeQuotaDialogVisible } =
-      dialogsStore;
+  ({ peopleStore, filesActionsStore, filesStore }, { type }) => {
     const { changeUserQuota, usersStore } = peopleStore;
     const { updateUserQuota } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
+    const { updateRoomQuota } = filesStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
+    const setUnlimitedQuota =
+      type === "user" ? updateUserQuota : updateRoomQuota;
 
     return {
-      setChangeQuotaDialogVisible,
-      changeQuotaDialogVisible,
-      updateUserQuota,
       changeQuota,
+      setUnlimitedQuota,
     };
   }
 )(observer(SpaceQuota));

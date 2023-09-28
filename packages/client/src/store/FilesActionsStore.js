@@ -1739,7 +1739,7 @@ class FilesActionStore {
 
     window.dispatchEvent(event);
   };
-  disableRoomQuota = async (users) => {
+  disableRoomQuota = async (users, t) => {
     const { updateRoomQuota } = this.filesStore;
 
     const userIDs = users.map((user) => {

@@ -80,11 +80,11 @@ public class FolderDto<T> : FileEntryDto<T>
 
     /// <summary>Quota</summary>
     /// <type>System.Int32, System</type>
-    public long? Quota { get; set; }
+    public long? QuotaLimit { get; set; }
 
     /// <summary>Counter</summary>
     /// <type>System.Int32, System</type>
-    public long? Counter { get; set; }
+    public long? UsedSpace { get; set; }
 
     protected internal override FileEntryType EntryType { get => FileEntryType.Folder; }
 
@@ -179,8 +179,8 @@ public class FolderDtoHelper : FileEntryDtoHelper
             var quotaRoomSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
             if (quotaRoomSettings.EnableQuota)
             {
-                result.Counter = folder.Counter;
-                result.Quota = folder.Quota > -2 ? folder.Quota : quotaRoomSettings.DefaultQuota;
+                result.UsedSpace = folder.Counter;
+                result.QuotaLimit = folder.Quota > -2 ? folder.Quota : quotaRoomSettings.DefaultQuota;
             }
         }
 

@@ -17,8 +17,14 @@ import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 import CheckboxComponent from "./components/Checkbox";
 
-import { CheckboxGroup, Container, InputGroup } from "./ClientForm.styled";
+import {
+  Container,
+  FormContainer,
+  CheckboxGroup,
+  InputGroup,
+} from "./ClientForm.styled";
 import { ClientFormProps } from "./ClientForm.types";
+import Preview from "./components/Preview";
 
 const ClientForm = ({
   id,
@@ -255,160 +261,169 @@ const ClientForm = ({
 
   return (
     <Container>
-      <Block>
-        <BlockHeader header={"Basic info"} helpButtonText="" />
-        <InputGroup>
-          <InputHeader header={"App name"} />
-          <Input
-            value={form.appName}
-            name={"appName"}
-            placeholder={"Enter name"}
-            onChange={onInputChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputHeader header={"App icon"} />
-          <Input
-            value={form.appIcon}
-            name={"appIcon"}
-            placeholder={"Add icon"}
-            onChange={onInputChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputHeader header={"Description"} />
-          <Input
-            value={form.description}
-            name={"description"}
-            placeholder={"Enter description"}
-            onChange={onInputChange}
-          />
-        </InputGroup>
-      </Block>
-
-      {id && (
+      <FormContainer>
         <Block>
-          <BlockHeader header={"Client"} helpButtonText="" />
+          <BlockHeader header={"Basic info"} helpButtonText="" />
           <InputGroup>
-            <InputHeader header={"ID"} />
+            <InputHeader header={"App name"} />
             <Input
-              value={clientId}
-              name={"ID"}
-              placeholder={"Enter id"}
+              value={form.appName}
+              name={"appName"}
+              placeholder={"Enter name"}
               onChange={onInputChange}
-              isReadOnly
-              withCopy
             />
           </InputGroup>
           <InputGroup>
-            <InputHeader header={"Secret"} />
+            <InputHeader header={"App icon"} />
             <Input
-              value={secret}
-              name={"secret"}
-              placeholder={"Enter secret"}
+              value={form.appIcon}
+              name={"appIcon"}
+              placeholder={"Add icon"}
               onChange={onInputChange}
-              isReadOnly
-              isSecret
-              withCopy
-              withButton
-              buttonLabel="Reset"
-              onClickButton={onResetClick}
             />
           </InputGroup>
-
           <InputGroup>
-            <InputHeader header={"Authentication method "} />
+            <InputHeader header={"Description"} />
             <Input
-              value={form.authenticationMethod}
-              name={"authenticationMethod"}
-              placeholder={"Enter secret"}
+              value={form.description}
+              name={"description"}
+              placeholder={"Enter description"}
               onChange={onInputChange}
-              isReadOnly
-              withCopy
             />
           </InputGroup>
         </Block>
-      )}
 
-      <Block>
-        <BlockHeader header={"OAuth URLs"} helpButtonText="" />
-        <InputGroup>
-          <InputHeader header={"Redirect url"} />
-          <Input
-            value={form.redirectUrl}
-            name={"redirectUrl"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputHeader header={"Logout redirect url"} />
-          <Input
-            value={form.logoutRedirectUrl}
-            name={"logoutRedirectUrl"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
-          />
-        </InputGroup>
-      </Block>
-
-      <Block>
-        <BlockHeader header={"Access scopes"} helpButtonText="" />
-        <CheckboxGroup>
-          {scopes.length > 0 &&
-            scopes.map((scope) => (
-              <CheckboxComponent
-                key={`${scope.name}`}
-                isChecked={checkedScopes.includes(scope.name)}
-                onChange={() => onCheckboxChange(scope.name)}
-                label={scope.name}
-                description={scope.description}
+        {id && (
+          <Block>
+            <BlockHeader header={"Client"} helpButtonText="" />
+            <InputGroup>
+              <InputHeader header={"ID"} />
+              <Input
+                value={clientId}
+                name={"ID"}
+                placeholder={"Enter id"}
+                onChange={onInputChange}
+                isReadOnly
+                withCopy
               />
-            ))}
-        </CheckboxGroup>
-      </Block>
+            </InputGroup>
+            <InputGroup>
+              <InputHeader header={"Secret"} />
+              <Input
+                value={secret}
+                name={"secret"}
+                placeholder={"Enter secret"}
+                onChange={onInputChange}
+                isReadOnly
+                isSecret
+                withCopy
+                withButton
+                buttonLabel="Reset"
+                onClickButton={onResetClick}
+              />
+            </InputGroup>
 
-      <Block>
-        <BlockHeader header={"Support & Legal info"} helpButtonText="" />
+            <InputGroup>
+              <InputHeader header={"Authentication method "} />
+              <Input
+                value={form.authenticationMethod}
+                name={"authenticationMethod"}
+                placeholder={"Enter secret"}
+                onChange={onInputChange}
+                isReadOnly
+                withCopy
+              />
+            </InputGroup>
+          </Block>
+        )}
 
-        <InputGroup>
-          <InputHeader header={"Privacy policy URL"} />
-          <Input
-            value={form.privacyURL}
-            name={"privacyURL"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
+        <Block>
+          <BlockHeader header={"OAuth URLs"} helpButtonText="" />
+          <InputGroup>
+            <InputHeader header={"Redirect url"} />
+            <Input
+              value={form.redirectUrl}
+              name={"redirectUrl"}
+              placeholder={"Enter URL"}
+              onChange={onInputChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputHeader header={"Logout redirect url"} />
+            <Input
+              value={form.logoutRedirectUrl}
+              name={"logoutRedirectUrl"}
+              placeholder={"Enter URL"}
+              onChange={onInputChange}
+            />
+          </InputGroup>
+        </Block>
+
+        <Block>
+          <BlockHeader header={"Access scopes"} helpButtonText="" />
+          <CheckboxGroup>
+            {scopes.length > 0 &&
+              scopes.map((scope) => (
+                <CheckboxComponent
+                  key={`${scope.name}`}
+                  isChecked={checkedScopes.includes(scope.name)}
+                  onChange={() => onCheckboxChange(scope.name)}
+                  label={scope.name}
+                  description={scope.description}
+                />
+              ))}
+          </CheckboxGroup>
+        </Block>
+
+        <Block>
+          <BlockHeader header={"Support & Legal info"} helpButtonText="" />
+
+          <InputGroup>
+            <InputHeader header={"Privacy policy URL"} />
+            <Input
+              value={form.privacyURL}
+              name={"privacyURL"}
+              placeholder={"Enter URL"}
+              onChange={onInputChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputHeader header={"Terms of Service URL"} />
+            <Input
+              value={form.termsURL}
+              name={"termsURL"}
+              placeholder={"Enter URL"}
+              onChange={onInputChange}
+            />
+          </InputGroup>
+        </Block>
+
+        <div className="button-container">
+          <Button
+            //@ts-ignore
+            label={"Save"}
+            isDisabled={!isValid}
+            size={"normal"}
+            primary
+            scale={isMobileOnly}
+            onClick={onSaveClick}
           />
-        </InputGroup>
-        <InputGroup>
-          <InputHeader header={"Terms of Service URL"} />
-          <Input
-            value={form.termsURL}
-            name={"termsURL"}
-            placeholder={"Enter URL"}
-            onChange={onInputChange}
+          <Button
+            //@ts-ignore
+            label={"Cancel"}
+            size={"normal"}
+            scale={isMobileOnly}
+            onClick={onCancelClick}
           />
-        </InputGroup>
-      </Block>
-
-      <div className="button-container">
-        <Button
-          //@ts-ignore
-          label={"Save"}
-          isDisabled={!isValid}
-          size={"normal"}
-          primary
-          scale={isMobileOnly}
-          onClick={onSaveClick}
+        </div>
+      </FormContainer>
+      {id && (
+        <Preview
+          clientId={clientId}
+          redirectURI={form.redirectUrl}
+          scopes={checkedScopes}
         />
-        <Button
-          //@ts-ignore
-          label={"Cancel"}
-          size={"normal"}
-          scale={isMobileOnly}
-          onClick={onCancelClick}
-        />
-      </div>
+      )}
     </Container>
   );
 };

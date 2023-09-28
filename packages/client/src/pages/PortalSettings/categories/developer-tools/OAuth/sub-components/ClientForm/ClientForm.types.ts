@@ -54,3 +54,9 @@ export interface ClientFormProps {
 
   regenerateSecret?: (clientId: string) => Promise<string>;
 }
+
+export interface PreviewProps {
+  clientId: string;
+  redirectURI: string;
+  scopes: string[];
+}

@@ -157,7 +157,7 @@ ComboButton.propTypes = {
   modernView: PropTypes.bool,
   tabIndex: PropTypes.number,
   isLoading: PropTypes.bool,
-  type: PropTypes.oneOf(["badge", null]),
+  type: PropTypes.oneOf(["badge", "onlyIcon", null]),
 };
 
 ComboButton.defaultProps = {

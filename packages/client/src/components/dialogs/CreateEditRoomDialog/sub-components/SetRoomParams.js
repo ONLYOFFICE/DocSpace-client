@@ -18,6 +18,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
+import RoomQuota from "./RoomQuota";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -128,6 +129,9 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
         />
       )}
+
+      <RoomQuota setRoomParams={setRoomParams} roomParams={roomParams} />
+
       <div>
         <Text fontWeight={600} className="icon-editor_text">
           {t("Icon")}

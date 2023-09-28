@@ -139,7 +139,7 @@ public class ChunkedUploaderHandlerService
                     return;
 
                 case ChunkedRequestType.Upload:
-                    var resumedSession = await _fileUploader.UploadChunkAsync<T>(request.UploadId, request.ChunkStream, request.ChunkSize);
+                    var resumedSession = await _fileUploader.UploadChunkAsync<T>(request.UploadId, request.ChunkStream, request.ChunkSize, request.ChunkNumber);
 
                     if (resumedSession.BytesUploaded == resumedSession.BytesTotal)
                     {
@@ -239,8 +239,7 @@ public enum ChunkedRequestType
     None,
     Initiate,
     Abort,
-    Upload,
-    Finish
+    Upload
 }
 
 [DebuggerDisplay("{Type} ({UploadId})")]
@@ -261,28 +260,6 @@ public class ChunkedRequestHelper<T>
         if (_request.Query["abort"] == "true" && !string.IsNullOrEmpty(UploadId))
         {
             return ChunkedRequestType.Abort;
-        }
-
-        return !string.IsNullOrEmpty(UploadId)
-                    ? ChunkedRequestType.Upload
-                    : ChunkedRequestType.None;
-    }
-
-    public ChunkedRequestType TypeForAsync()
-    {
-        if (_request.Query["initiate"] == "true")
-        {
-            return ChunkedRequestType.Initiate;
-        }
-
-        if (_request.Query["abort"] == "true" && !string.IsNullOrEmpty(UploadId))
-        {
-            return ChunkedRequestType.Abort;
-        }
-
-        if (_request.Query["finish"] == "true" && !string.IsNullOrEmpty(UploadId))
-        {
-            return ChunkedRequestType.Finish;
         }
 
         return !string.IsNullOrEmpty(UploadId)
@@ -363,9 +340,22 @@ public class ChunkedRequestHelper<T>
     public Stream ChunkStream => File.OpenReadStream();
 
     public bool Encrypted => _request.Query["encrypted"] == "true";
-    public string RelativePath => _request.Query["relativePath"];
 
-    public int ChunkNumber => int.Parse(_request.Query["chunkNumber"]);
+    private int? _chunkNumber;
+    public int? ChunkNumber { 
+        get
+        {
+            if (!_chunkNumber.HasValue)
+            {
+                var result = int.TryParse(_request.Query["fileNumber"], out var i);
+                if (result) 
+                {
+                    _chunkNumber = i;
+                }
+            }
+            return _chunkNumber;
+        }
+    }
 
     private IFormFile File
     {

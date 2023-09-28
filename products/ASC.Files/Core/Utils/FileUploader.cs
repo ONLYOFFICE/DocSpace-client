@@ -307,7 +307,7 @@ public class FileUploader
         return uploadSession;
     }
 
-    public async Task<ChunkedUploadSession<T>> UploadChunkAsync<T>(string uploadId, Stream stream, long chunkLength)
+    public async Task<ChunkedUploadSession<T>> UploadChunkAsync<T>(string uploadId, Stream stream, long chunkLength, int? chunkNumber = null)
     {
         var uploadSession = await _chunkedUploadSessionHolder.GetSessionAsync<T>(uploadId);
         uploadSession.Expired = DateTime.UtcNow + ChunkedUploadSessionHolder.SlidingExpiration;
@@ -332,7 +332,7 @@ public class FileUploader
         }
 
         var dao = _daoFactory.GetFileDao<T>();
-        await dao.UploadChunkAsync(uploadSession, stream, chunkLength);
+        await dao.UploadChunkAsync(uploadSession, stream, chunkLength, chunkNumber);
 
         if (uploadSession.BytesUploaded == uploadSession.BytesTotal || uploadSession.LastChunk)
         {

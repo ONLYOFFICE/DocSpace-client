@@ -51,7 +51,6 @@ public class Startup : BaseStartup
 
         DIHelper.TryAdd<FileHandlerService>();
         DIHelper.TryAdd<ChunkedUploaderHandlerService>();
-        DIHelper.TryAdd<ChunkedUploadAsyncHandlerService>();
         DIHelper.TryAdd<DocuSignHandlerService>();
         DIHelper.TryAdd<ThirdPartyAppHandlerService>();
 
@@ -87,13 +86,6 @@ public class Startup : BaseStartup
             appBranch =>
             {
                 appBranch.UseChunkedUploaderHandler();
-            });
-
-        app.MapWhen(
-                context => context.Request.Path.ToString().EndsWith("ChunkedAsyncUploader.ashx", StringComparison.OrdinalIgnoreCase),
-            appBranch =>
-            {
-                appBranch.UseChunkedUploadAsyncHandler();
             });
 
         app.MapWhen(

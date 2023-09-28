@@ -74,9 +74,9 @@ public class ChunkedUploadSessionHolder
         return result;
     }
 
-    public async Task UploadChunkAsync<T>(ChunkedUploadSession<T> uploadSession, Stream stream, long length)
+    public async Task UploadChunkAsync<T>(ChunkedUploadSession<T> uploadSession, Stream stream, long length, int? chunkNumber = null)
     {
-        await (await CommonSessionHolderAsync()).UploadChunkAsync(uploadSession, stream, length);
+        await (await CommonSessionHolderAsync()).UploadChunkAsync(uploadSession, stream, length, chunkNumber);
     }
 
     public async Task FinalizeUploadSessionAsync<T>(ChunkedUploadSession<T> uploadSession)

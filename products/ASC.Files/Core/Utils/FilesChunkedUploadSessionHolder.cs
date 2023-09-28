@@ -36,7 +36,7 @@ public class FilesChunkedUploadSessionHolder : CommonChunkedUploadSessionHolder
         _daoFactory = daoFactory;
         TempDomain = FileConstant.StorageDomainTmp;
     }
-    public override async Task<string> UploadChunkAsync(CommonChunkedUploadSession uploadSession, Stream stream, long length)
+    public override async Task<string> UploadChunkAsync(CommonChunkedUploadSession uploadSession, Stream stream, long length, int? chunkNumber = null)
     {
         if (uploadSession is ChunkedUploadSession<int>)
         {

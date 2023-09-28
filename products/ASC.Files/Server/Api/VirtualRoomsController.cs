@@ -233,18 +233,20 @@ public abstract class VirtualRoomsController<T> : ApiControllerBase
     /// Reset a room quota limit
     /// </short>
     /// <category>Quota</category>
-    /// <param type="System.Int32, System" method="url" name="id">Room ID</param>
+    /// <param type="ASC.Files.Core.ApiModels.RequestDto.UpdateRoomsQuotaRequestDto, ASC.Files.Core" name="inDto">Request parameters for updating room</param>
     /// <path>api/2.0/files/rooms/{id}/resetquota</path>
     /// <httpMethod>PUT</httpMethod>
-    [HttpPut("rooms/{id}/resetquota")]
-    public async IAsyncEnumerable<FolderDto<T>> ResetRoomQuotaAsync(T id)
+    [HttpPut("rooms/resetquota")]
+    public async IAsyncEnumerable<FolderDto<T>> ResetRoomQuotaAsync(UpdateRoomsQuotaRequestDto<T> inDto)
     {
         ErrorIfNotDocSpace();
 
-        var room = await _fileStorageService.FolderQuotaChangeAsync(id, -2);
+        foreach (var roomId in inDto.RoomIds)
+        {
+            var room = await _fileStorageService.FolderQuotaChangeAsync(roomId, -2);
 
-        yield return await _folderDtoHelper.GetAsync(room);
-        
+            yield return await _folderDtoHelper.GetAsync(room);
+        }
     }
     
 

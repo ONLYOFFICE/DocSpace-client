@@ -1490,8 +1490,27 @@ class FilesStore {
 
         //TODO: for test remove after
         const id = data.current.id;
-        const folderType =
-          id === 9 ? FolderType.Done : id === 10 ? FolderType.InProgress : null;
+        const isDone = id === 9;
+        const inProgress = id === 10;
+
+        if (isDone || inProgress) {
+          const { security, ...rest } = data.current;
+
+          data.current = {
+            ...rest,
+            security: {
+              ...security,
+              Create: false,
+            },
+          };
+        }
+
+        const folderType = isDone
+          ? FolderType.Done
+          : inProgress
+          ? FolderType.InProgress
+          : null;
+        // end
 
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
@@ -2882,16 +2901,49 @@ class FilesStore {
         isArchive,
         tags,
         pinned,
-        security,
+        security: Security,
         viewAccessability,
         mute,
         inRoom = true,
       } = item;
 
+      //TODO: for test remove after
+      const isDone = !fileExst && id === 9;
+      //TODO: for test remove after
+      const isProgress = !fileExst && id === 10;
+
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
         item.providerKey,
         "small"
       );
+
+      let security = { ...Security };
+
+      if (isDone || isProgress) {
+        security = {
+          Copy: true,
+          CopyTo: false,
+          Create: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: false,
+          EditRoom: true,
+          Move: false,
+          MoveTo: false,
+          Mute: false,
+          Pin: false,
+          Read: true,
+          Rename: false,
+        };
+      }
+
+      const folderType = isDone
+        ? FolderType.Done
+        : isProgress
+        ? FolderType.InProgress
+        : "";
+      //end
 
       const providerType =
         RoomsProviderType[
@@ -2904,7 +2956,9 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
-      const contextOptions = this.getFilesContextOptions(item);
+
+      //TODO: for test remove security
+      const contextOptions = this.getFilesContextOptions({ ...item, security });
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       const iconSize = this.viewAs === "table" ? 24 : 32;
@@ -2932,18 +2986,6 @@ class FilesStore {
         : !isFolder
         ? docUrl
         : folderUrl;
-
-      //TODO: for test remove after
-      const isDone = isFolder && id === 9;
-
-      //TODO: for test remove after
-      const isProgress = isFolder && id === 10;
-
-      const folderType = isDone
-        ? FolderType.Done
-        : isProgress
-        ? FolderType.InProgress
-        : "";
 
       const isRoom = !!roomType;
 

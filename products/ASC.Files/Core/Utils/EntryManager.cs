@@ -942,6 +942,18 @@ public class EntryManager
                 return cmp == 0 ? x.Title.EnumerableComparer(y.Title) : cmp;
             }
             ,
+            SortedByType.UsedSpace => (x, y) =>
+            {
+                var cmp = 0;
+                if (x is IFolder x1 && DocSpaceHelper.IsRoom(x1.FolderType)
+                     && y is IFolder x2 && DocSpaceHelper.IsRoom(x2.FolderType))
+                {
+                    cmp = c * ((Folder<T>)x).Counter.CompareTo(((Folder<T>)y).Counter);
+                }
+
+                return cmp == 0 ? x.Title.EnumerableComparer(y.Title) : cmp;
+            }
+            ,
             SortedByType.Size => (x, y) =>
             {
                 var cmp = 0;

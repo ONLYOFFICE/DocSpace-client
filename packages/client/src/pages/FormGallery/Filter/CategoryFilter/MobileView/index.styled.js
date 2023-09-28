@@ -52,7 +52,7 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
 
   .submenu-arrow {
     margin: ${({ theme }) =>
-      theme.interfaceDirection === "ltl" ? `0 0 0 auto` : `0 auto 0 0`};
+      theme.interfaceDirection !== "rtl" ? `0 0 0 auto` : `0 auto 0 0`};
 
     svg {
       height: 12px;

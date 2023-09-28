@@ -6,10 +6,7 @@ import ContextMenu from "@docspace/components/context-menu";
 import Link from "@docspace/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { combineUrl } from "@docspace/common/utils";
-import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   StyledTile,
@@ -18,7 +15,6 @@ import {
   StyledContent,
   StyledOptionButton,
 } from "../StyledTileView";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const Tile = ({
   t,
@@ -28,9 +24,6 @@ const Tile = ({
   onCreateOform,
   getFormGalleryContextOptions,
 
-  setIsInfoPanelVisible,
-  categoryType,
-  isInfoPanelVisible,
   setGallerySelected,
   children,
   contextButtonSpacerWidth,
@@ -151,8 +144,7 @@ export default inject(
     { item }
   ) => {
     const { categoryType } = filesStore;
-    const { gallerySelected, setGallerySelected, getFormContextOptions } =
-      oformsStore;
+    const { gallerySelected, setGallerySelected } = oformsStore;
     const { getIcon } = settingsStore;
     const { isVisible, setIsVisible } = auth.infoPanelStore;
 
@@ -163,7 +155,6 @@ export default inject(
     return {
       isSelected,
       setGallerySelected,
-      getFormContextOptions,
       onCreateOform,
       getFormGalleryContextOptions,
       getIcon,

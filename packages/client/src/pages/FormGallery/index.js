@@ -10,7 +10,6 @@ import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import Dialogs from "./Dialogs";
-import MediaViewer from "./MediaViewer";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 const FormGallery = ({
@@ -35,7 +34,6 @@ const FormGallery = ({
       !isInitLoading &&
       location.search !== `?${oformsFilter.toUrlParams()}`
     ) {
-      console.log("NAVIGATE ");
       navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
     }
   }, [oformsFilter]);
@@ -94,7 +92,6 @@ const FormGallery = ({
         </Section.InfoPanelBody>
       </Section>
 
-      <MediaViewer />
       <Dialogs />
     </>
   );

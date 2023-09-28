@@ -7,6 +7,7 @@ import { getDefaultOformLocale } from "@docspace/common/utils";
 const categoryLocale = getDefaultOformLocale();
 
 const CategorySubList = ({
+  isOpen,
   categoryType,
   categories,
 
@@ -17,6 +18,8 @@ const CategorySubList = ({
     setOformsCurrentCategory(category);
     filterOformsByCategory(categoryType, category.id);
   };
+
+  if (!isOpen) return null;
 
   return categories.map((category) => (
     <StyledSubItemMobile

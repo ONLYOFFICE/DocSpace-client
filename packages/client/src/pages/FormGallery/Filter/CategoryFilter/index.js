@@ -46,29 +46,40 @@ const CategoryFilter = ({
   oformsFilter,
   filterOformsByCategory,
 
-  fetchCategoriesByBranch,
-  fetchCategoriesByType,
-  fetchPopularCategories,
+  fetchCategoryList,
+  fetchCategories,
 }) => {
-  const currentCategoryTitle = getOformCategoryTitle(
-    currentCategory,
-    categoryLocale
-  );
+  const [menuItems, setMenuItems] = useState([]);
 
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
-  const [formsByBranch, setFormsByBranch] = useState([]);
-  const [formsByType, setFormsByType] = useState([]);
-  const [formsByCompilation, setFormsByCompilation] = useState([]);
-
   useEffect(() => {
     (async () => {
-      const branchData = await fetchCategoriesByBranch();
-      setFormsByBranch(branchData);
-      const typeData = await fetchCategoriesByType();
-      setFormsByType(typeData);
-      const compilationData = await fetchPopularCategories();
-      setFormsByCompilation(compilationData);
+      let newMenuItems = await fetchCategoryList();
+
+      const categoryPromises = newMenuItems.map(
+        (item) =>
+          new Promise((res) => res(fetchCategories(item.attributes.categoryId)))
+      );
+
+      Promise.all(categoryPromises)
+        .then(
+          (results) =>
+            (newMenuItems = newMenuItems.map((item, index) => ({
+              key: item.attributes.categoryId,
+              label: item.attributes.name,
+              categories: results[index],
+            })))
+        )
+        .catch((err) => {
+          console.error(err);
+          newMenuItems = newMenuItems.map((item) => ({
+            key: item.attributes.categoryId,
+            label: item.attributes.name,
+            categories: [],
+          }));
+        })
+        .finally(() => setMenuItems(newMenuItems));
     })();
   }, [oformsFilter.locale]);
 
@@ -78,24 +89,17 @@ const CategoryFilter = ({
         className="mobileView"
         currentCategoryTitle={getOformCategoryTitle(currentCategory)}
         onViewAllTemplates={onViewAllTemplates}
-        formsByBranch={formsByBranch}
-        formsByType={formsByType}
-        formsByCompilation={formsByCompilation}
+        menuItems={menuItems}
       />
-      <CategoryFilterDesktop
-        className="desktopView"
-        currentCategory={getOformCategoryTitle(currentCategory)}
-        onViewAllTemplates={onViewAllTemplates}
-        formsByBranch={formsByBranch}
-        formsByType={formsByType}
-        formsByCompilation={formsByCompilation}
-      />
+      <CategoryFilterDesktop className="desktopView" menuItems={menuItems} />
     </StyledCategoryFilterWrapper>
   );
 };
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
 
+  fetchCategoryList: oformsStore.fetchCategoryList,
+  fetchCategories: oformsStore.fetchCategories,
   fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,
   fetchCategoriesByType: oformsStore.fetchCategoriesByType,
   fetchPopularCategories: oformsStore.fetchPopularCategories,

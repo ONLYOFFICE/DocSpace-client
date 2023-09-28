@@ -101,10 +101,10 @@ export const CategoryFilterSubList = styled(DropDown)`
     ${({ theme }) =>
       theme.interfaceDirection !== "rtl"
         ? css`
-            left: -4px;
+            left: -5px;
           `
         : css`
-            right: -4px;
+            right: -5px;
           `};
 
     top: 0;

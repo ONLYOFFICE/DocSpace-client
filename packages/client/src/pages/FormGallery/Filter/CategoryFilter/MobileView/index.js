@@ -1,17 +1,17 @@
 import * as Styled from "./index.styled";
 
 import DropDownItem from "@docspace/components/drop-down-item";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import CategorySubList from "./CategorySubList";
-import { OformCategoryType } from "@docspace/client/src/helpers/constants";
 import Scrollbar from "@docspace/components/scrollbar";
-import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 
 const CategoryFilterMobile = ({
   t,
+
+  menuItems,
 
   onViewAllTemplates,
   formsByBranch,
@@ -25,32 +25,17 @@ const CategoryFilterMobile = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
-  const onCloseDropdown = () => setIsOpen(false);
 
   const [openedCategory, setOpenedCategory] = useState(null);
-  const isBranchOpen = openedCategory === OformCategoryType.Branch;
-  const isTypeOpen = openedCategory === OformCategoryType.Type;
-  const isCompilationOpen = openedCategory === OformCategoryType.Compilation;
+  const onToggleCategory = (category) => {
+    if (openedCategory?.key !== category.key) setOpenedCategory(category);
+    else setOpenedCategory(null);
+  };
 
-  const onToggleBranchCategory = () =>
-    setOpenedCategory(isBranchOpen ? null : OformCategoryType.Branch);
-  const onToggleTypeCategory = () =>
-    setOpenedCategory(isTypeOpen ? null : OformCategoryType.Type);
-  const onToggleCompilationCategory = () =>
-    setOpenedCategory(isCompilationOpen ? null : OformCategoryType.Compilation);
-
-  const wrapperOffsetTop = wrapperRef?.current?.offsetTop;
-  const maxCalculatedHeight = window.innerHeight - wrapperOffsetTop - 64;
   let calculatedHeight =
-    152.2 +
-    36 *
-      (isBranchOpen
-        ? formsByBranch.length
-        : isTypeOpen
-        ? formsByType.length
-        : isCompilationOpen
-        ? formsByCompilation.length
-        : 0);
+    152.2 + (!openedCategory ? 0 : 36 * openedCategory.categories.length);
+  const maxCalculatedHeight =
+    window.innerHeight - wrapperRef?.current?.offsetTop - 64;
   if (calculatedHeight > maxCalculatedHeight)
     calculatedHeight = maxCalculatedHeight;
 
@@ -94,53 +79,22 @@ const CategoryFilterMobile = ({
 
           <DropDownItem isSeparator />
 
-          <Styled.CategoryFilterItemMobile
-            id={"FormsByBranch"}
-            key={"FormsByBranch"}
-            className={`item-by-${OformCategoryType.Branch}`}
-            label={t("FormGallery:FormsByBranch")}
-            isMobileOpen={isBranchOpen}
-            onClick={onToggleBranchCategory}
-            isSubMenu
-          />
-          {isBranchOpen && (
+          {menuItems.map((item) => [
+            <Styled.CategoryFilterItemMobile
+              key={item.key}
+              className={`item-by-${item.key}`}
+              label={item.label}
+              isMobileOpen={openedCategory?.key === item.key}
+              onClick={() => onToggleCategory(item)}
+              isSubMenu
+            />,
             <CategorySubList
-              categoryType={OformCategoryType.Branch}
-              categories={formsByBranch}
-            />
-          )}
-
-          <Styled.CategoryFilterItemMobile
-            id={"FormsByType"}
-            key={"FormsByType"}
-            className={`item-by-${OformCategoryType.Type}`}
-            label={t("FormGallery:FormsByType")}
-            isMobileOpen={isTypeOpen}
-            onClick={onToggleTypeCategory}
-            isSubMenu
-          />
-          {isTypeOpen && (
-            <CategorySubList
-              categoryType={OformCategoryType.Type}
-              categories={formsByType}
-            />
-          )}
-
-          <Styled.CategoryFilterItemMobile
-            id={"PopularCompilations"}
-            key={"PopularCompilations"}
-            className={`item-by-${OformCategoryType.Compilation}`}
-            label={t("FormGallery:PopularCompilations")}
-            isMobileOpen={isCompilationOpen}
-            onClick={onToggleCompilationCategory}
-            isSubMenu
-          />
-          {isCompilationOpen && (
-            <CategorySubList
-              categoryType={OformCategoryType.Compilation}
-              categories={formsByCompilation}
-            />
-          )}
+              key={`${item.key}-sublist`}
+              isOpen={openedCategory?.key === item.key}
+              categoryType={item.key}
+              categories={item.categories}
+            />,
+          ])}
         </Scrollbar>
       </Styled.CategoryFilterMobile>
     </Styled.CategoryFilterMobileWrapper>

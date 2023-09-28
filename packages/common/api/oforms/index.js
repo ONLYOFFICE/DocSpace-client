@@ -11,9 +11,14 @@ export const getCategoryById = async (url, categorizeBy, id, locale) => {
   return res?.data?.data;
 };
 
-export const getCategoryFilterMenuItems = async (url, locale = "en") => {
+export const getCategoryList = async (url, locale = "en") => {
   const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data;
+  return res?.data?.data;
+};
+
+export const getCategories = async (url, locale = "en") => {
+  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
+  return res?.data?.data;
 };
 
 export const getCategoriesByBranch = async (url, locale = "en") => {

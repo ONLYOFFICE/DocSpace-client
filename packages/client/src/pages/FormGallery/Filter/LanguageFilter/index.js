@@ -70,9 +70,6 @@ const LanguageFilter = ({
     return currentOption;
   };
 
-  console.log(selectedOption);
-  console.log(getSelectedOption());
-
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
   const onCloseDropdown = () => setIsOpen(false);

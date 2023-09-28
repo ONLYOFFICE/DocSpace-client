@@ -5,7 +5,8 @@ import { submitToGallery } from "@docspace/common/api/oforms";
 
 import {
   getCategoryById,
-  getCategoryFilterMenuItems,
+  getCategoryList,
+  getCategories,
   getCategoriesByBranch,
   getCategoriesByType,
   getPopularCategories,
@@ -18,7 +19,6 @@ import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 class OformsStore {
   authStore;
-  mediaFormViewerDataStore;
 
   oformFiles = null;
   oformsFilter = OformsFilter.getDefault();
@@ -33,9 +33,8 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore, mediaFormViewerDataStore) {
+  constructor(authStore) {
     this.authStore = authStore;
-    this.mediaFormViewerDataStore = mediaFormViewerDataStore;
     makeAutoObservable(this);
   }
 
@@ -92,66 +91,6 @@ class OformsStore {
     });
   };
 
-  getFormContextOptions = (t, item, navigate) => [
-    {
-      key: "create",
-      label: t("Common:Create"),
-      onClick: () => {
-        this.authStore.infoPanelStore.setIsVisible(false);
-        const filesFilter = FilesFilter.getDefault();
-        filesFilter.folder = this.oformFromFolderId;
-        const filterUrlParams = filesFilter.toUrlParams();
-        const url = getCategoryUrl(
-          CategoryType.Personal,
-          filterUrlParams.folder
-        );
-        navigate(
-          combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
-            config.homepage,
-            `${url}?${filterUrlParams}`
-          )
-        );
-      },
-    },
-    {
-      key: "preview",
-      label: t("Common:Preview"),
-      onClick: () => {
-        this.mediaFormViewerDataStore.setMediaViewerData({
-          visible: true,
-          id: item.id,
-        });
-        this.mediaFormViewerDataStore.saveFirstUrl(
-          `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
-        );
-        this.mediaFormViewerDataStore.changeUrl(item.id);
-      },
-    },
-    {
-      key: "template-info",
-      label: t("FormGallery:TemplateInfo"),
-      onClick: () => {
-        this.authStore.infoPanelStore.setIsVisible(true);
-        this.setGallerySelected(item);
-      },
-    },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    {
-      key: "suggest-changes",
-      label: t("FormGallery:SuggestChanges"),
-      onClick: () => {
-        window.location = `mailto:marketing@onlyoffice.com
-          ?subject=Suggesting changes for ${item.attributes.name_form}
-          &body=Suggesting changes for ${item.attributes.name_form}.
-        `;
-      },
-    },
-  ];
-
   submitToFormGallery = async (file, formName, language, signal = null) => {
     const url = this.authStore.settingsStore.formGallery.uploadUrl;
     const res = await submitToGallery(url, file, formName, language, signal);
@@ -180,11 +119,18 @@ class OformsStore {
     });
   };
 
-  fetchCategoryFilterMenuItems = async () => {
+  fetchCategoryList = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api/menu-translations";
     const locale = getDefaultOformLocale();
-    const menuItems = await getCategoryFilterMenuItems(url, locale);
+    const menuItems = await getCategoryList(url, locale);
     return menuItems;
+  };
+
+  fetchCategories = async (id) => {
+    const url = `https://oforms.onlyoffice.com/dashboard/api/${id}`;
+    const locale = getDefaultOformLocale();
+    const categories = await getCategories(url, locale);
+    return categories;
   };
 
   fetchCategoriesByBranch = async () => {

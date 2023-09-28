@@ -67,7 +67,6 @@ class ContextOptionsStore {
   filesActionsStore;
   filesStore;
   mediaViewerDataStore;
-  mediaFormViewerDataStore;
   treeFoldersStore;
   uploadDataStore;
   versionHistoryStore;
@@ -84,7 +83,6 @@ class ContextOptionsStore {
     filesActionsStore,
     filesStore,
     mediaViewerDataStore,
-    mediaFormViewerDataStore,
     treeFoldersStore,
     uploadDataStore,
     versionHistoryStore,
@@ -99,7 +97,6 @@ class ContextOptionsStore {
     this.filesActionsStore = filesActionsStore;
     this.filesStore = filesStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
-    this.mediaFormViewerDataStore = mediaFormViewerDataStore;
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.versionHistoryStore = versionHistoryStore;
@@ -775,11 +772,11 @@ class ContextOptionsStore {
       filterUrlParams.folder
     );
 
-    this.mediaFormViewerDataStore.removeFirstUrl();
-    this.mediaFormViewerDataStore.setMediaViewerData({
-      visible: false,
-      id: null,
-    });
+    // this.mediaFormViewerDataStore.removeFirstUrl();
+    // this.mediaFormViewerDataStore.setMediaViewerData({
+    //   visible: false,
+    //   id: null,
+    // });
 
     navigate(
       combineUrl(
@@ -790,16 +787,16 @@ class ContextOptionsStore {
     );
   };
 
-  onPreviewOform = (item) => {
-    this.mediaFormViewerDataStore.setMediaViewerData({
-      visible: true,
-      id: item.id,
-    });
-    this.mediaFormViewerDataStore.saveFirstUrl(
-      `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
-    );
-    this.mediaFormViewerDataStore.changeUrl(item.id);
-  };
+  // onPreviewOform = (item) => {
+  //   this.mediaFormViewerDataStore.setMediaViewerData({
+  //     visible: true,
+  //     id: item.id,
+  //   });
+  //   this.mediaFormViewerDataStore.saveFirstUrl(
+  //     `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+  //   );
+  //   this.mediaFormViewerDataStore.changeUrl(item.id);
+  // };
 
   onShowOformTemplateInfo = (item) => {
     this.authStore.infoPanelStore.setIsVisible(true);
@@ -821,11 +818,6 @@ class ContextOptionsStore {
         key: "create",
         label: t("Common:Create"),
         onClick: () => this.onCreateOform(navigate),
-      },
-      {
-        key: "preview",
-        label: t("Common:Preview"),
-        onClick: () => this.onPreviewOform(item),
       },
       {
         key: "template-info",

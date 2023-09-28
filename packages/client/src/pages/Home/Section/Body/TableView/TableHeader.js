@@ -78,7 +78,7 @@ class FilesTableHeader extends React.Component {
         },
         {
           key: "Storage",
-          title: "Storage / Quota",
+          title: t("Common:StorageAndQuota"),
           enable: this.props.roomQuotaColumnIsEnable,
           sortBy: SortByFieldName.UsedSpace,
           resizable: true,

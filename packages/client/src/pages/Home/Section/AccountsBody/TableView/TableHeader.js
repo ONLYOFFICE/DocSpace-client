@@ -53,7 +53,7 @@ class PeopleTableHeader extends React.Component {
       },
       {
         key: "Storage",
-        title: "Storage / Quota",
+        title: t("Common:StorageAndQuota"),
         enable: true,
         sortBy: SortByFieldName.UsedSpace,
         resizable: true,

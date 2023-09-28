@@ -215,8 +215,8 @@ const Accounts = ({
           >
             {statusText}
           </Text>
-          <Text className={"info_field"} noSelect title={"Quota"}>
-            {"Quota"}
+          <Text className={"info_field"} noSelect title={t("Common:Storage")}>
+            {t("Common:Storage")}
           </Text>
           <SpaceQuota
             type="user"

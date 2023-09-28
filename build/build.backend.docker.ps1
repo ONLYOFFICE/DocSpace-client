@@ -57,6 +57,9 @@ if ($args[0] -eq "--community" ) {
   $Env:INSTALLATION_TYPE = "COMMUNITY"
 }
 
+Write-Host "Run OAuth2" -ForegroundColor Green
+docker compose -f "$DockerDir\oauth2.yml" up -d
+
 Set-Location -Path $RootDir
 
 $DotnetVersion = "dev"

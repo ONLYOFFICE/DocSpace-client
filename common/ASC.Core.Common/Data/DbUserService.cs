@@ -290,7 +290,7 @@ public class EFUserService : IUserService
                           .Select(r => r.user);
                 }
             }
-            else if (sortBy == "used_space")
+            else if (sortBy == "usedspace")
             {
                 var q2 = from user in q
                          join quota in userDbContext.QuotaRow.Where(qr => qr.UserId != Guid.Empty) 

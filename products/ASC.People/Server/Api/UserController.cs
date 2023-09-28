@@ -1657,25 +1657,30 @@ public class UserController : PeopleControllerBase
     /// Reset a user quota limit
     /// </short>
     /// <category>Quota</category>
-    /// <param type="System.String, System" method="url" name="userid">User ID</param>
+    /// <param type="ASC.People.ApiModels.RequestDto.UpdateMembersRequestDto, ASC.People" name="inDto">Request parameters for updating user information</param>
     /// <returns type="ASC.Web.Api.Models.EmployeeFullDto, ASC.Api.Core">User detailed information</returns>
-    /// <path>api/2.0/people/{userid}/resetquota</path>
+    /// <path>api/2.0/people/resetquota</path>
     /// <httpMethod>PUT</httpMethod>
-    [HttpPut("{userid}/resetquota")]
-    public async Task<EmployeeFullDto> ResetUserQuota(string userid)
+    [HttpPut("resetquota")]
+    public async IAsyncEnumerable<EmployeeFullDto> ResetUsersQuota(UpdateMembersQuotaRequestDto inDto)
     {
-        var user = await GetUserInfoAsync(userid);
+        var users = await inDto.UserIds.ToAsyncEnumerable()
+            .Where(userId => !_userManager.IsSystemUser(userId))
+            .SelectAwait(async userId => await _userManager.GetUsersAsync(userId))
+            .ToListAsync();
 
-        if (_userManager.IsSystemUser(user.Id))
+        foreach (var user in users)
         {
-            throw new SecurityException();
+            if (_userManager.IsSystemUser(user.Id))
+            {
+                throw new SecurityException();
+            }
+
+            await _settingsManager.SaveAsync(_settingsManager.GetDefault<UserQuotaSettings>(), user);
+
+            yield return await _employeeFullDtoHelper.GetFullAsync(user);
         }
 
-        await _permissionContext.DemandPermissionsAsync(SecutiryConstants.EditPortalSettings);
-
-        await _settingsManager.SaveAsync(_settingsManager.GetDefault<UserQuotaSettings>(), user);
-        return await _employeeFullDtoHelper.GetFullAsync(user);
-        
     }
 
     private async Task UpdateDepartmentsAsync(IEnumerable<Guid> department, UserInfo user)

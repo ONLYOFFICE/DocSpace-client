@@ -208,7 +208,7 @@ class ProfileActionsStore {
       ? {
           key: "user-menu-settings",
           icon: CatalogSettingsReactSvgUrl,
-          label: t("Common:SettingsDocSpace"),
+          label: t("Common:Settings"),
           onClick: () => this.onSettingsClick(settingsUrl),
         }
       : null;
@@ -287,7 +287,7 @@ class ProfileActionsStore {
       //   onClick: this.onVideoGuidesClick,
       // },
       hotkeys,
-      {
+      !isMobile && {
         isSeparator: true,
         key: "separator2",
       },
@@ -305,18 +305,20 @@ class ProfileActionsStore {
         label: t("Common:AboutCompanyTitle"),
         onClick: this.onAboutClick,
       },
-      {
-        isSeparator: true,
-        key: "separator3",
-      },
-      {
+    ];
+
+    if (
+      !window.navigator.userAgent.includes("ZoomWebKit") &&
+      !window.navigator.userAgent.includes("ZoomApps")
+    ) {
+      actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
         label: t("Common:LogoutButton"),
         onClick: this.onLogoutClick,
         isButton: true,
-      },
-    ];
+      });
+    }
 
     if (debugInfo) {
       actions.splice(4, 0, {

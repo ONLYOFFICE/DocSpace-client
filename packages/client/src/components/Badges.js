@@ -1,18 +1,17 @@
-﻿import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+﻿import styled from "styled-components";
+import React, { useState } from "react";
+import { isTablet } from "react-device-detect";
+
+import Badge from "@docspace/components/badge";
+import { Base } from "@docspace/components/themes";
+import HelpButton from "@docspace/components/help-button";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+
+import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
-import React, { useState } from "react";
-import styled from "styled-components";
-import Badge from "@docspace/components/badge";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "react-device-detect";
-import { FileStatus } from "@docspace/common/constants";
-import { Base } from "@docspace/components/themes";
-
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -89,6 +88,7 @@ const Badges = ({
   const isPrivacy = isPrivacyFolder && isDesktopClient;
   const isForm = fileExst === ".oform";
   const isTile = viewAs === "tile";
+  const isViewTable = viewAs === "table";
 
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
 
@@ -196,6 +196,15 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
+      <BadgeWrapper isTile={isTile}>
+        <HelpButton
+          color="#F2675A"
+          place="bottom"
+          size={isViewTable ? 12 : 16}
+          className="bagde_alert icons-group"
+          tooltipContent={t("BadgeAlertDescription")}
+        />
+      </BadgeWrapper>
     </div>
   ) : (
     <>

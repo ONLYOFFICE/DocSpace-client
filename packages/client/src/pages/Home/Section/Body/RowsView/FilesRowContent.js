@@ -21,7 +21,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 0px;
@@ -48,7 +48,7 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .badge-version {
     width: max-content;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: -2px -2px -2px 6px;
@@ -58,11 +58,22 @@ const SimpleFilesRowContent = styled(RowContent)`
           `}
   }
 
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
+  }
+
   .badge-new-version {
     width: max-content;
   }
 
-  ${props =>
+  ${(props) =>
     ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
     css`
       .row-main-container-wrapper {
@@ -82,7 +93,7 @@ const SimpleFilesRowContent = styled(RowContent)`
       .tablet-edit,
       .can-convert {
         margin-top: 6px;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: 24px !important;
@@ -93,7 +104,7 @@ const SimpleFilesRowContent = styled(RowContent)`
       }
 
       .badge-version {
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: 22px;
@@ -103,9 +114,21 @@ const SimpleFilesRowContent = styled(RowContent)`
               `}
       }
 
+      .bagde_alert {
+        margin-top: 5px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 22px;
+              `
+            : css`
+                margin-right: 22px;
+              `};
+      }
+
       .new-items {
         min-width: 16px;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin: 5px 0 0 24px;
@@ -117,7 +140,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     `}
 
   .row-content-link {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 12px 0px 0px 12px;
@@ -177,7 +200,7 @@ const FilesRowContent = ({
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "—";
-        return tags?.map(elem => {
+        return tags?.map((elem) => {
           return elem;
         });
 
@@ -197,7 +220,8 @@ const FilesRowContent = ({
         sectionWidth={sectionWidth}
         isMobile={isMobile}
         isFile={fileExst || contentLength}
-        sideColor={theme.filesSection.rowView.sideColor}>
+        sideColor={theme.filesSection.rowView.sideColor}
+      >
         <Link
           className="row-content-link"
           containerWidth="55%"
@@ -207,7 +231,8 @@ const FilesRowContent = ({
           fontSize="15px"
           target="_blank"
           {...linkStyles}
-          isTextOverflow={true}>
+          isTextOverflow={true}
+        >
           {titleWithoutExt}
         </Link>
         <div className="badges">
@@ -220,7 +245,8 @@ const FilesRowContent = ({
           containerWidth="15%"
           fontSize="12px"
           fontWeight={400}
-          className="row_update-text">
+          className="row_update-text"
+        >
           {contentComponent()}
         </Text>
 
@@ -231,7 +257,8 @@ const FilesRowContent = ({
           className="row-content-text"
           fontSize="12px"
           fontWeight={400}
-          truncate={true}>
+          truncate={true}
+        >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
             : !fileExst && !contentLength && !providerKey && !isMobileOnly

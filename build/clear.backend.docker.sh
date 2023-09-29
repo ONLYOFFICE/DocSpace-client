@@ -25,6 +25,9 @@ then
     echo "Remove docker contatiners 'mysql'"
     docker compose -f "${DockerDir}/db.yml" down --volumes
 
+    echo "Remove docker contatiners 'OAuth'"
+    docker compose -f "${DockerDir}/oauth2.yml" down --volumes
+
     echo "Remove docker volumes"
     docker volume prune -f -a
 

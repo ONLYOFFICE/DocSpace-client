@@ -23,6 +23,9 @@ if ($Containers -or $Images) {
   Write-Host "Remove docker contatiners 'mysql'" -ForegroundColor Blue
   docker compose -f "$DockerDir\db.yml" down --volumes
 
+  Write-Host "Remove docker contatiners 'OAuth'" -ForegroundColor Blue
+  docker compose -f "$DockerDir\oauth2.yml" down --volumes
+
   Write-Host "Remove docker volumes" -ForegroundColor Blue
   docker volume prune -f -a
 

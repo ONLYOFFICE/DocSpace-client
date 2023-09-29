@@ -16,15 +16,11 @@ echo "LOCAL IP: $local_ip"
 doceditor=${local_ip}:5013
 login=${local_ip}:5011
 client=${local_ip}:5001
-oauth_api=${$LocalIp}:9090
-oauth=${$LocalIp}:8080
 portal_url="http://$local_ip"
 
 echo "SERVICE_DOCEDITOR: $doceditor"
 echo "SERVICE_LOGIN: $login"
 echo "SERVICE_CLIENT: $client"
-echo "OAUTH_API: $oauth_api"
-echo "OAUTH: $oauth"
 echo "APP_URL_PORTAL: $portal_url"
 
 force=false
@@ -114,10 +110,6 @@ else
     echo "SKIP build proxy base image (already exists)"
 fi
 
-echo "Run OAuth"
-
-docker compose -f $dockerDir/db.yml up -d
-
 echo "Run migration and services"
 ENV_EXTENSION="dev" \
 INSTALLATION_TYPE=$INSTALLATION_TYPE \
@@ -135,7 +127,11 @@ BUILD_PATH="/var/www" \
 SRC_PATH="$dir/publish/services" \
 DATA_DIR="$dir/Data" \
 APP_URL_PORTAL=$portal_url \
-docker-compose -f $dockerDir/docspace.profiles.yml -f $dockerDir/docspace.overcome.yml --profile migration-runner --profile backend-local up -d
+docker compose -f $dockerDir/docspace.profiles.yml -f $dockerDir/docspace.overcome.yml --profile migration-runner --profile backend-local up -d
+
+echo "Run OAuth"
+DOCSPACE_ADDRESS=$local_ip \
+docker compose -f $dockerDir/oauth2.yml up -d
 
 echo ""
 echo "APP_URL_PORTAL: $portal_url"
@@ -143,6 +139,4 @@ echo "LOCAL IP: $local_ip"
 echo "SERVICE_DOCEDITOR: $doceditor"
 echo "SERVICE_LOGIN: $login"
 echo "SERVICE_CLIENT: $client"
-echo "SERVICE_OAUTH_API: $oauth_api"
-echo "SERVICE_OAUTH: $oauth"
 echo "INSTALLATION_TYPE=$INSTALLATION_TYPE"

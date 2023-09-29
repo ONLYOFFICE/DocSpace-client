@@ -13,8 +13,6 @@ $LocalIp = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Where
 $Doceditor = ($LocalIp + ":5013")
 $Login = ($LocalIp + ":5011")
 $Client = ($LocalIp + ":5001")
-$Oauth_api = ($LocalIp + ":9090")
-$Oauth = ($LocalIp + ":8080")
 $PortalUrl = ("http://" + $LocalIp)
 $ProxyVersion="v1.0.0"
 
@@ -57,9 +55,6 @@ if ($args[0] -eq "--community" ) {
   $Env:INSTALLATION_TYPE = "COMMUNITY"
 }
 
-Write-Host "Run OAuth2" -ForegroundColor Green
-docker compose -f "$DockerDir\oauth2.yml" up -d
-
 Set-Location -Path $RootDir
 
 $DotnetVersion = "dev"
@@ -73,21 +68,21 @@ $ExistsProxy= docker images --format "{{.Repository}}:{{.Tag}}" | findstr "onlyo
 if (!$ExistsDotnet -or $Force) {
     Write-Host "Build dotnet base image from source (apply new dotnet config)" -ForegroundColor Green
     docker build -t "onlyoffice/4testing-docspace-dotnet-runtime:$DotnetVersion"  -f "$DockerDir\Dockerfile.runtime" --target dotnetrun .
-} else { 
+} else {
     Write-Host "SKIP build dotnet base image (already exists)" -ForegroundColor Blue
 }
 
 if (!$ExistsNode -or $Force) {
     Write-Host "Build node base image from source" -ForegroundColor Green
     docker build -t "onlyoffice/4testing-docspace-nodejs-runtime:$NodeVersion"  -f "$DockerDir\Dockerfile.runtime" --target noderun .
-} else { 
+} else {
     Write-Host "SKIP build node base image (already exists)" -ForegroundColor Blue
 }
 
 if (!$ExistsProxy -or $Force) {
     Write-Host "Build proxy base image from source (apply new nginx config)" -ForegroundColor Green
     docker build -t "onlyoffice/4testing-docspace-proxy-runtime:$ProxyVersion"  -f "$DockerDir\Dockerfile.runtime" --target router .
-} else { 
+} else {
     Write-Host "SKIP build proxy base image (already exists)" -ForegroundColor Blue
 }
 
@@ -99,8 +94,6 @@ $Env:Baseimage_Proxy_Run="onlyoffice/4testing-docspace-proxy-runtime:$ProxyVersi
 $Env:SERVICE_DOCEDITOR=$Doceditor
 $Env:SERVICE_LOGIN=$Login
 $Env:SERVICE_CLIENT=$Client
-$Env:SERVICE_OAUTH_API=$Oauth_api
-$Env:SERVICE_OAUTH=$Oauth
 $Env:ROOT_DIR=$RootDir
 $Env:BUILD_PATH="/var/www"
 $Env:SRC_PATH="$RootDir\publish\services"
@@ -108,14 +101,16 @@ $Env:DATA_DIR="$RootDir\Data"
 $Env:APP_URL_PORTAL=$PortalUrl
 docker compose -f "$DockerDir\docspace.profiles.yml" -f "$DockerDir\docspace.overcome.yml" --profile migration-runner --profile backend-local up -d
 
+Write-Host "Run OAuth2" -ForegroundColor Green
+$Env:DOCSPACE_ADDRESS=$LocalIp
+docker compose -f "$DockerDir\oauth2.yml" up -d
+
 Write-Host "== Build params ==" -ForegroundColor Green
 Write-Host "APP_URL_PORTAL: $PortalUrl" -ForegroundColor Blue
 Write-Host "LOCAL IP: $LocalIp" -ForegroundColor Blue
 Write-Host "SERVICE_DOCEDITOR: $Env:SERVICE_DOCEDITOR" -ForegroundColor Blue
 Write-Host "SERVICE_LOGIN: $Env:SERVICE_LOGIN" -ForegroundColor Blue
 Write-Host "SERVICE_CLIENT: $Env:SERVICE_CLIENT" -ForegroundColor Blue
-Write-Host "SERVICE_OAUTH_API: $Env:SERVICE_OAUTH_API" -ForegroundColor Blue
-Write-Host "SERVICE_OAUTH: $Env:SERVICE_OAUTH" -ForegroundColor Blue
 Write-Host "INSTALLATION_TYPE: $Env:INSTALLATION_TYPE" -ForegroundColor Blue
 
 Set-Location -Path $PSScriptRoot

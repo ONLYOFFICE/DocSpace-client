@@ -50,6 +50,7 @@ public class PortalController : ControllerBase
     private readonly AuthContext _authContext;
     private readonly UserManager _userManager;
     private readonly ILogger<PortalController> _log;
+    private readonly QuotaUsageManager _quotaUsageManager;
 
     public PortalController(
         IConfiguration configuration,
@@ -70,7 +71,8 @@ public class PortalController : ControllerBase
         PasswordHasher passwordHasher,
         CoreBaseSettings coreBaseSettings,
         AuthContext authContext,
-        UserManager userManager)
+        UserManager userManager,
+        QuotaUsageManager quotaUsageManager)
     {
         _configuration = configuration;
         _securityContext = securityContext;
@@ -91,6 +93,7 @@ public class PortalController : ControllerBase
         _authContext = authContext;
         _userManager = userManager;
         _log = option;
+        _quotaUsageManager = quotaUsageManager;
     }
 
     #region For TEST api
@@ -441,52 +444,32 @@ public class PortalController : ControllerBase
     [HttpGet("get")]
     [AllowCrossSiteJson]
     [Authorize(AuthenticationSchemes = "auth:allowskip:default,auth:portal")]
-    public async Task<IActionResult> GetPortalsAsync([FromQuery] TenantModel model)
+    public async Task<IActionResult> GetPortalsAsync([FromQuery] TenantModel model, [FromQuery] bool statistics)
     {
+        if (!_coreBaseSettings.Standalone)
+        {
+            return StatusCode(StatusCodes.Status403Forbidden, new
+            {
+                error = "error",
+                message = "Method for server edition only."
+            });
+        }
+
         try
         {
-            var tenants = new List<Tenant>();
-            var empty = true;
-
-            if (!string.IsNullOrWhiteSpace((model.Email ?? "")))
-            {
-                empty = false;
-                tenants.AddRange(await _hostedSolution.FindTenantsAsync((model.Email ?? "").Trim()));
-            }
-
-            if (!string.IsNullOrWhiteSpace((model.PortalName ?? "")))
-            {
-                empty = false;
-                var tenant = (await _hostedSolution.GetTenantAsync((model.PortalName ?? "").Trim()));
-
-                if (tenant != null)
-                {
-                    tenants.Add(tenant);
-                }
-            }
-
-            if (model.TenantId.HasValue)
-            {
-                empty = false;
-                var tenant = await _hostedSolution.GetTenantAsync(model.TenantId.Value);
-
-                if (tenant != null)
-                {
-                    tenants.Add(tenant);
-                }
-            }
-
-            if (empty)
-            {
-                tenants.AddRange((await _hostedSolution.GetTenantsAsync(DateTime.MinValue)).OrderBy(t => t.Id).ToList());
-            }
-
-            var tenantsWrapper = tenants
+            var tenants = (await _commonMethods.GetTenantsAsync(model))
                 .Distinct()
                 .Where(t => t.Status == TenantStatus.Active)
-                .OrderBy(t => t.Id)
-                .Select(_commonMethods.ToTenantWrapper)
-                .ToList();
+                .OrderBy(t => t.Id);
+
+            var tenantsWrapper = new List<object>();
+
+            foreach (var t in tenants)
+            {
+                var quotaUsage = statistics ? (await _quotaUsageManager.Get(t)) : null;
+
+                tenantsWrapper.Add(_commonMethods.ToTenantWrapper(t, quotaUsage));
+            }
 
             return Ok(new
             {
@@ -495,7 +478,7 @@ public class PortalController : ControllerBase
         }
         catch (Exception ex)
         {
-            _log.LogError(ex, "");
+            _log.LogError(ex, "GetPortalsAsync");
 
             return StatusCode(StatusCodes.Status500InternalServerError, new
             {

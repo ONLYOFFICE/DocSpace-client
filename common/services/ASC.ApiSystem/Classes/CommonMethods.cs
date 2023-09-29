@@ -72,7 +72,7 @@ public class CommonMethods
         _hostedSolution = hostedSolution;
     }
 
-    public object ToTenantWrapper(Tenant t)
+    public object ToTenantWrapper(Tenant t, QuotaUsageDto quotaUsage = null)
     {
         return new
         {
@@ -88,6 +88,7 @@ public class CommonMethods
             status = t.Status.ToString(),
             tenantId = t.Id,
             timeZoneName = _timeZoneConverter.GetTimeZone(t.TimeZone).DisplayName,
+            quotaUsage
         };
     }
 
@@ -170,6 +171,47 @@ public class CommonMethods
         }
 
         return (false, tenant);
+    }
+
+    public async Task<List<Tenant>> GetTenantsAsync(TenantModel model)
+    {
+        var tenants = new List<Tenant>();
+        var empty = true;
+
+        if (!string.IsNullOrWhiteSpace((model.Email ?? "")))
+        {
+            empty = false;
+            tenants.AddRange(await _hostedSolution.FindTenantsAsync((model.Email ?? "").Trim()));
+        }
+
+        if (!string.IsNullOrWhiteSpace((model.PortalName ?? "")))
+        {
+            empty = false;
+            var tenant = (await _hostedSolution.GetTenantAsync((model.PortalName ?? "").Trim()));
+
+            if (tenant != null)
+            {
+                tenants.Add(tenant);
+            }
+        }
+
+        if (model.TenantId.HasValue)
+        {
+            empty = false;
+            var tenant = await _hostedSolution.GetTenantAsync(model.TenantId.Value);
+
+            if (tenant != null)
+            {
+                tenants.Add(tenant);
+            }
+        }
+
+        if (empty)
+        {
+            tenants.AddRange((await _hostedSolution.GetTenantsAsync(DateTime.MinValue)).OrderBy(t => t.Id).ToList());
+        }
+
+        return tenants;
     }
 
     public bool IsTestEmail(string email)

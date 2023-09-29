@@ -155,13 +155,11 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
 
         var searchByTags = tags != null && tags.Any() && !withoutTags;
         var searchByTypes = filterType != FilterType.None && filterType != FilterType.FoldersOnly;
-        var searchByQuota = quotaFilter != QuotaFilter.All;
-        var searchByFilter = searchByTypes || searchByQuota;
 
         await using var filesDbContext = _dbContextFactory.CreateDbContext();
         var q = GetFolderQuery(filesDbContext, r => parentsIds.Contains(r.ParentId)).AsNoTracking();
 
-        q = !withSubfolders ? BuildRoomsQuery(filesDbContext, q, filter, tags, subjectId, searchByTags, withoutTags, searchByFilter, false, excludeSubject, subjectFilter, subjectEntriesIds, quotaFilter)
+        q = !withSubfolders ? BuildRoomsQuery(filesDbContext, q, filter, tags, subjectId, searchByTags, withoutTags, searchByTypes, false, excludeSubject, subjectFilter, subjectEntriesIds, quotaFilter)
             : BuildRoomsWithSubfoldersQuery(filesDbContext, parentsIds, filter, tags, searchByTags, searchByTypes, withoutTags, excludeSubject, subjectId, subjectFilter, subjectEntriesIds);
 
         if (!string.IsNullOrEmpty(searchText))
@@ -1439,16 +1437,17 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         if (searchByFilter)
         {
             query = query.Where(f => f.FolderType == filterByType);
-            if(quotaFilter != QuotaFilter.All)
+        }
+
+        if (quotaFilter != QuotaFilter.All)
+        {
+            if (quotaFilter == QuotaFilter.Default)
             {
-                if (quotaFilter == QuotaFilter.Default)
-                {
-                    query = query.Where(f => f.Quota == -2);
-                }
-                else
-                {
-                    query = query.Where(f => f.Quota != -2);
-                }
+                query = query.Where(f => f.Quota == -2);
+            }
+            else
+            {
+                query = query.Where(f => f.Quota != -2);
             }
         }
 

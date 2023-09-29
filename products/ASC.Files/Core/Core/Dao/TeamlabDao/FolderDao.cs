@@ -423,6 +423,7 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                 ModifiedBy = folder.ModifiedBy,
                 FolderType = folder.FolderType,
                 Private = folder.Private,
+                Quota = folder.Quota,
                 TenantId = TenantID
             };
 

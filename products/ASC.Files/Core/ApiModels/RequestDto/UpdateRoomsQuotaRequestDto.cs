@@ -34,7 +34,7 @@ public class UpdateRoomsQuotaRequestDto<T>
     /// <type>System.Collections.Generic.IEnumerable{System.Int32}, System.Collections.Generic</type>
     public IEnumerable<T> RoomIds { get; set; }
 
-    /// <summary>User quota</summary>
+    /// <summary>Room quota</summary>
     /// <type>System.Int64, System</type>
     public long Quota { get; set; }
 

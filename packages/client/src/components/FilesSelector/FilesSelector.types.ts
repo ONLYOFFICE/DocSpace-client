@@ -187,4 +187,6 @@ export type FilesSelectorProps = {
 
   socketHelper: any;
   socketSubscribersId: Set<string>;
+
+  embedded: boolean;
 };

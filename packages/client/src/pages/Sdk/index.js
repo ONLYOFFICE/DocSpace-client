@@ -161,15 +161,11 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          isPanelOpen={true}
+          filterParam={"DOCX"}
+          descriptionText={"Test desc"}
+          embedded
           onSelectFile={onSelectFile}
-          filteredType={selectorType}
-          withSubfolders={false}
-          displayType="aside"
-          embedded={true}
-          searchParam={frameConfig?.filter.search}
-          ByExtension
-          {...onCloseCallback}
+          onClose={onClose}
         />
       );
       break;

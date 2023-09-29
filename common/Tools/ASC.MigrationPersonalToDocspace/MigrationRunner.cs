@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-using ASC.Core;
+using AuthConstants = ASC.Common.Security.Authorizing.AuthConstants;
 
 namespace ASC.Migration.PersonalToDocspace.Runner;
 
@@ -192,7 +192,7 @@ public class MigrationRunner
                 LastModified = DateTime.UtcNow,
                 RefType = ASC.Core.UserGroupRefType.Contains,
                 Removed = false,
-                UserGroupId = ASC.Common.Security.Authorizing.Constants.DocSpaceAdmin.ID,
+                UserGroupId = AuthConstants.DocSpaceAdmin.ID,
                 Userid = tenant.OwnerId.Value
             };
 

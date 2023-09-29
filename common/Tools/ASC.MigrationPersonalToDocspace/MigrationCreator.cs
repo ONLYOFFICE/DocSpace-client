@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+using AuthConstants = ASC.Common.Security.Authorizing.AuthConstants;
+
 namespace ASC.Migration.PersonalToDocspace.Creator;
 
 [Scope]
@@ -192,7 +194,7 @@ public class MigrationCreator
             using var userDbContextToregion = _creatorDbContext.CreateDbContext<UserDbContext>(_toRegion);
             var usersCount = userDbContextToregion.Users
                 .Join(userDbContextToregion.UserGroups, u => u.Id, ug => ug.Userid, (u, ug) => new { u, ug })
-                .Where(q => q.u.TenantId == tenant.Id && q.ug.UserGroupId == Common.Security.Authorizing.Constants.DocSpaceAdmin.ID).Count();
+                .Where(q => q.u.TenantId == tenant.Id && q.ug.UserGroupId == AuthConstants.DocSpaceAdmin.ID).Count();
             if (usersCount > qouta.CountRoomAdmin)
             {
                 throw new ArgumentException("user count exceed");

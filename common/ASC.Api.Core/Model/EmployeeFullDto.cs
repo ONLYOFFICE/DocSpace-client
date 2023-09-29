@@ -158,6 +158,10 @@ public class EmployeeFullDto : EmployeeDto
     /// <type>System.Double, System</type>
     public double UsedSpace { get; set; }
 
+    /// <summary>Specifies if the user has a custom quota or not.</summary>
+    /// <type>System.Boolean, System</type>
+    public bool IsCustomQuota { get; set; }
+
     public static new EmployeeFullDto GetSample()
     {
         return new EmployeeFullDto
@@ -311,6 +315,9 @@ public class EmployeeFullDtoHelper : EmployeeDtoHelper
         {
             result.UsedSpace = Math.Max(0, (await _quotaService.FindUserQuotaRowsAsync(_context.Tenant.Id, userInfo.Id)).Where(r => !string.IsNullOrEmpty(r.Tag)).Sum(r => r.Counter));
             var userQuotaSettings = await _settingsManager.LoadAsync<UserQuotaSettings>(userInfo);
+
+            result.IsCustomQuota = userQuotaSettings != null && userQuotaSettings.UserQuota != userQuotaSettings.GetDefault().UserQuota;
+
             result.QuotaLimit = userQuotaSettings != null ? 
                                 userQuotaSettings.UserQuota != userQuotaSettings.GetDefault().UserQuota ? userQuotaSettings.UserQuota : quotaSettings.DefaultQuota
                                 : quotaSettings.DefaultQuota;

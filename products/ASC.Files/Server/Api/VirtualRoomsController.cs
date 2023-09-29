@@ -234,7 +234,7 @@ public abstract class VirtualRoomsController<T> : ApiControllerBase
     /// </short>
     /// <category>Quota</category>
     /// <param type="ASC.Files.Core.ApiModels.RequestDto.UpdateRoomsQuotaRequestDto, ASC.Files.Core" name="inDto">Request parameters for updating room</param>
-    /// <path>api/2.0/files/rooms/{id}/resetquota</path>
+    /// <path>api/2.0/files/rooms/resetquota</path>
     /// <httpMethod>PUT</httpMethod>
     [HttpPut("rooms/resetquota")]
     public async IAsyncEnumerable<FolderDto<T>> ResetRoomQuotaAsync(UpdateRoomsQuotaRequestDto<T> inDto)

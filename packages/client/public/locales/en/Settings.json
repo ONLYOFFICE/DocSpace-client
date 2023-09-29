@@ -8,7 +8,7 @@
   "AccessRightsUsersFromList": "{{users}} from the list",
   "AccountsWithoutEmails": "We found <1>{{users}} users</1> without emails. You can add necessary data to their accounts on the next step.",
   "AddEmails": "Add emails to incomplete accounts",
-  "AddEmailsWarning": "You don�t have users with emails. Please proceed to the next step to add them.",
+  "AddEmailsWarning": "You don't have users with emails. Please proceed to the next step to add them.",
   "AddAllowedIP": "Add allowed IP address",
   "AdditionalResources": "Additional resources",
   "AdditionalResourcesDescription": "Choose whether you want to display links to additional resources in DocSpace menu.",

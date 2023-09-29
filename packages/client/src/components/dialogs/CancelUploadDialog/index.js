@@ -6,6 +6,7 @@ import ModalDialogContainer from "../ModalDialogContainer";
 
 const CancelUploadDialog = ({
   isFifthStep,
+  isSixthStep,
   visible,
   onClose,
   loading,
@@ -14,12 +15,13 @@ const CancelUploadDialog = ({
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
-  const modalBodyText = isFifthStep
-    ? t("Settings:WantToCancelDataImport")
-    : t("Settings:WantToCancelUpload");
+  const modalBodyText =
+    isFifthStep || isSixthStep
+      ? t("Settings:WantToCancelDataImport")
+      : t("Settings:WantToCancelUpload");
 
   const onCancelProcess = () => {
-    if (isFifthStep) {
+    if (isFifthStep || isSixthStep) {
       navigate(-1);
       cancelMigration();
     } else {

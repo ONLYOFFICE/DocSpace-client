@@ -4,11 +4,17 @@ import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
 import styled from "styled-components";
 
+import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import IconButton from "@docspace/components/icon-button";
+import Link from "@docspace/components/link";
+import Box from "@docspace/components/box";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
-import { mockData } from "../../mockData";
+import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+// import { mockData } from "../../mockData";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
@@ -29,8 +35,17 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
+      background-color: ${(props) =>
+        props.theme.isBase ? "#F8F9F9" : "#282828"};
     }
+  }
+  .clear-icon {
+    margin-right: 8px;
+    margin-top: 2px;
+  }
+
+  .ec-desc {
+    max-width: 618px;
   }
 `;
 
@@ -39,6 +54,7 @@ StyledTableContainer.defaultProps = { theme: Base };
 const TableView = (props) => {
   const {
     t,
+    users,
     userId,
     viewAs,
     setViewAs,
@@ -48,16 +64,24 @@ const TableView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, mockData);
+  const toggleAll = (e) => toggleAllAccounts(e, users);
+
   const handleToggle = (e, id) => {
     e.stopPropagation();
     toggleAccount(id);
   };
+
+  const onClearFilter = () => {
+    setSearchValue("");
+  };
+
+  const isIndeterminate =
+    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -66,8 +90,6 @@ const TableView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-
-    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -75,40 +97,72 @@ const TableView = (props) => {
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      <UsersTableHeader
-        t={t}
-        sectionWidth={sectionWidth}
-        tableRef={tableRef}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        setHideColumns={setHideColumns}
-        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
-        isChecked={checkedAccounts.length === mockData.length}
-        toggleAll={toggleAll}
-      />
-      <TableBody
-        itemHeight={49}
-        useReactWindow
-        infoPanelVisible={false}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={accountsData.length}
-        hasMoreFiles={false}
-        itemCount={accountsData.length}
-        fetchMoreFiles={() => {}}>
-        {accountsData.map((data) => (
-          <UsersTableRow
+      {accountsData.length > 0 ? (
+        <>
+          <UsersTableHeader
             t={t}
-            key={data.id}
-            displayName={data.displayName}
-            email={data.email}
-            isDuplicate={data.isDuplicate}
-            hideColumns={hideColumns}
-            isChecked={isAccountChecked(data.id)}
-            toggleAccount={(e) => handleToggle(e, data.id)}
+            sectionWidth={sectionWidth}
+            tableRef={tableRef}
+            userId={userId}
+            columnStorageName={columnStorageName}
+            columnInfoPanelStorageName={columnInfoPanelStorageName}
+            setHideColumns={setHideColumns}
+            isIndeterminate={isIndeterminate}
+            isChecked={checkedAccounts.length === users.length}
+            toggleAll={toggleAll}
           />
-        ))}
-      </TableBody>
+          <TableBody
+            itemHeight={49}
+            useReactWindow
+            infoPanelVisible={false}
+            columnStorageName={columnStorageName}
+            columnInfoPanelStorageName={columnInfoPanelStorageName}
+            filesLength={accountsData.length}
+            hasMoreFiles={false}
+            itemCount={accountsData.length}
+            fetchMoreFiles={() => {}}
+          >
+            {accountsData.map((data) => (
+              <UsersTableRow
+                t={t}
+                key={data.key}
+                displayName={data.displayName}
+                email={data.email}
+                isDuplicate={data.isDuplicate}
+                hideColumns={hideColumns}
+                isChecked={isAccountChecked(data.key)}
+                toggleAccount={(e) => handleToggle(e, data.key)}
+              />
+            ))}
+          </TableBody>
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={EmptyScreenUserReactSvgUrl}
+          imageAlt="Empty Screen user image"
+          headerText={t("People:NotFoundUsers")}
+          descriptionText={t("People:NotFoundUsersDesc")}
+          buttons={
+            <Box displayProp="flex" alignItems="center">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size="12"
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </Box>
+          }
+        />
+      )}
     </StyledTableContainer>
   );
 };
@@ -117,14 +171,16 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
   const {
+    users,
     checkedAccounts,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   } = importAccountsStore;
 
   return {
+    users,
     viewAs,
     setViewAs,
     userId,
@@ -132,6 +188,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   };
 })(observer(TableView));

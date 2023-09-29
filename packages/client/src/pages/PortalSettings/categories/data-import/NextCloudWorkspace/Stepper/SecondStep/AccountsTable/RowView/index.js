@@ -1,23 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
+import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import IconButton from "@docspace/components/icon-button";
+import Link from "@docspace/components/link";
+import Box from "@docspace/components/box";
 import RowContainer from "@docspace/components/row-container";
-import UsersRow from "./UsersRow";
 import Row from "@docspace/components/row";
+import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
+import UsersRow from "./UsersRow";
+import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { mockData } from "../../mockData";
+// import { mockData } from "../../mockData";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;
+
+  .clear-icon {
+    margin-right: 8px;
+  }
+
+  .ec-desc {
+    max-width: 348px;
+  }
 `;
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
+  height: 40px;
   min-height: 40px;
+
+  .row-header-item {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+  }
+
+  .row-header-title {
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+    font-weight: 600;
+    font-size: 12px;
+  }
 
   @media ${tablet} {
     .row_content {
@@ -37,10 +65,17 @@ const RowView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   } = props;
+  const rowRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts({ target: { checked: !e.target.checked } }, mockData);
+  const toggleAll = (e) => toggleAllAccounts(e, users);
+
+  const handleToggle = (id) => toggleAccount(id);
+
+  const onClearFilter = () => {
+    setSearchValue("");
+  };
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -50,32 +85,62 @@ const RowView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-
-    return cleanCheckedAccounts;
   }, [sectionWidth]);
 
   return (
-    <StyledRowContainer useReactWindow={false}>
-      <StyledRow
-        sectionWidth={sectionWidth}
-        checkbox
-        checked={checkedAccounts.length === mockData.length}
-        onClick={toggleAll}
-        indeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}>
-        <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
-          {t("Common:Name")}
-        </Text>
-      </StyledRow>
-      {accountsData.map((data) => (
-        <UsersRow
-          t={t}
-          key={data.id}
-          data={data}
-          sectionWidth={sectionWidth}
-          toggleAccount={() => toggleAccount(data.id)}
-          isChecked={isAccountChecked(data.id)}
+    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
+      {accountsData.length > 0 ? (
+        <>
+          <StyledRow sectionWidth={sectionWidth}>
+            <div className="row-header-item">
+              {checkedAccounts.length > 0 && (
+                <Checkbox
+                  isChecked={checkedAccounts.length === users.length}
+                  isIndeterminate={isIndeterminate}
+                  onChange={toggleAll}
+                />
+              )}
+              <Text className="row-header-title">{t("Common:Name")}</Text>
+            </div>
+          </StyledRow>
+          {accountsData.map((data) => (
+            <UsersRow
+              t={t}
+              key={data.key}
+              data={data}
+              sectionWidth={sectionWidth}
+              isChecked={isAccountChecked(data.key)}
+              toggleAccount={() => handleToggle(data.key)}
+            />
+          ))}
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={EmptyScreenUserReactSvgUrl}
+          imageAlt="Empty Screen user image"
+          headerText={t("People:NotFoundUsers")}
+          descriptionText={t("People:NotFoundUsersDesc")}
+          buttons={
+            <Box displayProp="flex" alignItems="center">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size="12"
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </Box>
+          }
         />
-      ))}
+      )}
     </StyledRowContainer>
   );
 };
@@ -87,7 +152,7 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   } = importAccountsStore;
 
   return {
@@ -97,6 +162,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    setSearchValue,
   };
 })(observer(RowView));

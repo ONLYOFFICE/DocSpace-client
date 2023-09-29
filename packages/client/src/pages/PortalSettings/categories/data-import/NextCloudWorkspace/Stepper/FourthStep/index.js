@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
-
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../StyledStepper";
-
-import { mockData } from "./mockData";
+// import { mockData } from "./mockData";
 
 const FourthStep = (props) => {
-  const { t, incrementStep, decrementStep } = props;
+  const {
+    t,
+    incrementStep,
+    decrementStep,
+    checkedAccounts,
+    users,
+    searchValue,
+    setSearchValue,
+  } = props;
 
-  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(mockData.slice(leftBoundary, rightBoundary));
+    setDataPortion(users.slice(leftBoundary, rightBoundary));
   };
+
+  const onChangeInput = (value) => {
+    setSearchValue(value);
+  };
+
+  const onClearSearchInput = () => {
+    setSearchValue("");
+  };
+
+  const filteredAccounts = dataPortion.filter(
+    (data) =>
+      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
 
   return (
     <Wrapper>
@@ -32,35 +52,50 @@ const FourthStep = (props) => {
         displaySettings={true}
       />
 
-      <SearchInput
-        id="search-users-input"
-        onChange={() => console.log("changed")}
-        onClearSearch={() => console.log("cleared")}
-        placeholder={t("Common:Search")}
-      />
-      <AccountsTable t={t} accountsData={dataPortion} />
-
-      {mockData.length > 25 && (
-        <AccountsPaging t={t} numberOfItems={mockData.length} setDataPortion={handleDataChange} />
+      {!checkedAccounts.length > 0 && (
+        <SearchInput
+          id="search-users-type-input"
+          placeholder={t("Common:Search")}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
+        />
       )}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={incrementStep}
-        onCancelClick={decrementStep}
-        showReminder={true}
-        saveButtonLabel={t("Settings:NextStep")}
-        cancelButtonLabel={t("Common:Back")}
-        displaySettings={true}
-      />
+      <AccountsTable t={t} accountsData={filteredAccounts} />
+
+      {users.length > 25 && (
+        <AccountsPaging
+          t={t}
+          numberOfItems={users.length}
+          setDataPortion={handleDataChange}
+        />
+      )}
+
+      {filteredAccounts.length > 0 && (
+        <SaveCancelButtons
+          className="save-cancel-buttons"
+          onSaveClick={incrementStep}
+          onCancelClick={decrementStep}
+          showReminder={true}
+          saveButtonLabel={t("Settings:NextStep")}
+          cancelButtonLabel={t("Common:Back")}
+          displaySettings={true}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject(({ setup }) => {
-  const { viewAs } = setup;
+export default inject(({ importAccountsStore }) => {
+  const { checkedAccounts, users, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
-    viewAs,
+    checkedAccounts,
+    users,
+    searchValue,
+    setSearchValue,
   };
 })(observer(FourthStep));

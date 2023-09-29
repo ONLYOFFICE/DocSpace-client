@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
@@ -18,18 +19,52 @@ const ButtonsWrapper = styled.div`
   column-gap: 8px;
 `;
 
-const SeventhStep = ({ t }) => {
+const SeventhStep = ({
+  t,
+  selectedUsers,
+  importedUsers,
+  getMigrationLog,
+  cleanCheckedAccounts,
+  sendWelcomeLetter,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
+
+  const onDownloadLog = async () => {
+    try {
+      await getMigrationLog()
+        .then((response) => new Blob([response]))
+        .then((blob) => {
+          let a = document.createElement("a");
+          const url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = "migration.log";
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
   };
 
+  const onFinishClick = () => {
+    if (isChecked) {
+      sendWelcomeLetter({ isSendWelcomeEmail: true });
+    }
+    setTimeout(() => {
+      navigate(-1);
+      cleanCheckedAccounts();
+    }, 300);
+  };
+
   return (
     <Wrapper>
       <Text fontSize="12px">
-        {t("Settings:ImportedUsers", { selectedUsers: 67, importedUsers: 70 })}
+        {t("Settings:ImportedUsers", { selectedUsers, importedUsers })}
       </Text>
       <Text fontSize="12px" color="#F21C0E" className="mt-8">
         {t("Settings:ErrorsWereFound", { errors: 3 })}
@@ -45,17 +80,43 @@ const SeventhStep = ({ t }) => {
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
+          tooltipContent={
+            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+          }
         />
       </Box>
 
       <ButtonsWrapper>
-        <Button size="small" label={t("Common:Finish")} primary onClick={() => navigate(-1)} />
-        <Button size="small" label={t("Settings:DownloadLog")} />
-        <Button size="small" label={t("Settings:DeleteTemporaryFile")} />
+        <Button
+          size="small"
+          label={t("Common:Finish")}
+          primary
+          onClick={onFinishClick}
+        />
+        <Button
+          size="small"
+          label={t("Settings:DownloadLog")}
+          onClick={onDownloadLog}
+        />
       </ButtonsWrapper>
     </Wrapper>
   );
 };
 
-export default SeventhStep;
+export default inject(({ importAccountsStore }) => {
+  const {
+    users,
+    getMigrationLog,
+    numberOfCheckedAccounts,
+    cleanCheckedAccounts,
+    sendWelcomeLetter,
+  } = importAccountsStore;
+
+  return {
+    importedUsers: users.length,
+    selectedUsers: numberOfCheckedAccounts,
+    getMigrationLog,
+    cleanCheckedAccounts,
+    sendWelcomeLetter,
+  };
+})(observer(SeventhStep));

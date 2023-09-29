@@ -1,4 +1,3 @@
-import React from "react";
 import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
@@ -9,10 +8,12 @@ const UsersRow = (props) => {
     <Row
       sectionWidth={sectionWidth}
       data={data}
-      checked={isChecked}
       checkbox
+      checked={isChecked}
       onClick={toggleAccount}
-      onSelect={toggleAccount}>
+      onSelect={toggleAccount}
+      contextButtonSpacerWidth="0"
+    >
       <UsersRowContent
         t={t}
         sectionWidth={sectionWidth}

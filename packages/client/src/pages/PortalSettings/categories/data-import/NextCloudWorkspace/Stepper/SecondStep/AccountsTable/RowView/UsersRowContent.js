@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
@@ -33,13 +32,21 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ t, sectionWidth, displayName, email, isDuplicate }) => {
+const UsersRowContent = ({
+  t,
+  sectionWidth,
+  displayName,
+  email,
+  isDuplicate,
+}) => {
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <div className="import-accounts-name">
         {displayName}
         {isDuplicate && (
-          <span className="import-account-duplicate">&nbsp;({t("Settings:ExistingAccount")})</span>
+          <span className="import-account-duplicate">
+            &nbsp;({t("Settings:ExistingAccount")})
+          </span>
         )}
       </div>
       <Text fontSize="12px" color="#a3a9ae" className="user-email">

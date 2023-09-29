@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
 
-import AccessRightSelect from "@docspace/components/access-right-select";
+import Text from "@docspace/components/text";
+import Box from "@docspace/components/box";
+import RowContent from "@docspace/components/row-content";
+import ComboBox from "@docspace/components/combobox";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -54,22 +55,22 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ t, sectionWidth, displayName, email, roleSelectorRef }) => {
-  const data = [
-    {
-      key: "role-DocSpace-admin",
-      label: t("Settings:DocSpaceAdmin"),
-    },
-    {
-      key: "role-Room-admin",
-      label: t("Settings:RoomAdmin"),
-    },
-    {
-      key: "role-Power-user",
-      label: t("Settings:PowerUser"),
-    },
-  ];
-  const [selectedType, setSelectedType] = useState(data[2]);
+const UsersRowContent = ({
+  id,
+  sectionWidth,
+  displayName,
+  email,
+  typeOptions,
+  roleSelectorRef,
+  type,
+  changeType,
+}) => {
+  const onSelectUser = (e) => {
+    changeType(id, e.key);
+  };
+
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
@@ -82,18 +83,26 @@ const UsersRowContent = ({ t, sectionWidth, displayName, email, roleSelectorRef 
         </Text>
       </div>
       <div ref={roleSelectorRef}>
-        <AccessRightSelect
-          accessOptions={data}
-          selectedOption={selectedType}
-          scaledOptions={false}
-          scaled={false}
+        <ComboBox
+          className="user-type"
+          selectedOption={selectedOption}
+          options={typeOptions}
+          onSelect={onSelectUser}
+          scaled
+          size="content"
+          displaySelectedOption
+          modernView
           manualWidth="fit-content"
-          className="role-type-selector"
-          onSelect={setSelectedType}
         />
       </div>
     </StyledRowContent>
   );
 };
 
-export default UsersRowContent;
+export default inject(({ importAccountsStore }) => {
+  const { changeType } = importAccountsStore;
+
+  return {
+    changeType,
+  };
+})(observer(UsersRowContent));

@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
+import { useRef } from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
-
-import AccessRightSelect from "@docspace/components/access-right-select";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
+import ComboBox from "@docspace/components/combobox";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
@@ -57,24 +57,24 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const UsersTableRow = ({ t, displayName, email, isChecked, toggleAccount }) => {
-  const data = [
-    {
-      key: "DocSpaceAdmin",
-      label: t("Common:DocSpaceAdmin"),
-    },
-    {
-      key: "RoomAdmin",
-      label: t("Common:RoomAdmin"),
-    },
-    {
-      key: "PowerUser",
-      label: t("Common:PowerUser"),
-    },
-  ];
-
+const UsersTableRow = ({
+  id,
+  displayName,
+  email,
+  typeOptions,
+  isChecked,
+  toggleAccount,
+  type,
+  changeType,
+}) => {
   const roleSelectorRef = useRef();
-  const [selectedType, setSelectedType] = useState(data[2]);
+
+  const onSelectUser = (e) => {
+    changeType(id, e.key);
+  };
+
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
@@ -87,7 +87,7 @@ const UsersTableRow = ({ t, displayName, email, isChecked, toggleAccount }) => {
   return (
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell>
-        <Checkbox onChange={handleAccountToggle} isChecked={isChecked} />
+        <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text fontWeight={600} className="textOverflow">
           {displayName}
         </Text>
@@ -95,19 +95,26 @@ const UsersTableRow = ({ t, displayName, email, isChecked, toggleAccount }) => {
 
       <TableCell>
         <div ref={roleSelectorRef}>
-          <AccessRightSelect
-            accessOptions={data}
-            selectedOption={selectedType}
-            scaledOptions={false}
-            scaled={false}
+          <ComboBox
+            className="user-type"
+            selectedOption={selectedOption}
+            options={typeOptions}
+            onSelect={onSelectUser}
+            scaled
+            size="content"
+            displaySelectedOption
+            modernView
             manualWidth="fit-content"
-            className="role-type-selector"
-            onSelect={setSelectedType}
           />
         </div>
       </TableCell>
       <TableCell>
-        <Text lineHeight="20px" fontWeight={600} color="#A3A9AE" className="textOverflow">
+        <Text
+          lineHeight="20px"
+          fontWeight={600}
+          color="#A3A9AE"
+          className="textOverflow"
+        >
           {email}
         </Text>
       </TableCell>
@@ -115,4 +122,10 @@ const UsersTableRow = ({ t, displayName, email, isChecked, toggleAccount }) => {
   );
 };
 
-export default UsersTableRow;
+export default inject(({ importAccountsStore }) => {
+  const { changeType } = importAccountsStore;
+
+  return {
+    changeType,
+  };
+})(observer(UsersTableRow));

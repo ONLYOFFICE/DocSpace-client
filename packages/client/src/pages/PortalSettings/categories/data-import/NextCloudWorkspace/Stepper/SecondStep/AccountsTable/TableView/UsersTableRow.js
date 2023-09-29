@@ -1,4 +1,3 @@
-import React from "react";
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
@@ -22,7 +21,16 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
+const NOT_EXIST = "—";
+
+const UsersTableRow = ({
+  t,
+  displayName,
+  email,
+  isDuplicate,
+  isChecked,
+  toggleAccount,
+}) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>
@@ -33,7 +41,11 @@ const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAc
       </TableCell>
 
       <TableCell>
-        <Text fontWeight={600} color="#a3a9ae" className="user-email textOverflow">
+        <Text
+          fontWeight={600}
+          color="#a3a9ae"
+          className="user-email textOverflow"
+        >
           {email}
         </Text>
       </TableCell>
@@ -45,7 +57,7 @@ const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAc
           </Text>
         ) : (
           <Text fontWeight={600} color="#a3a9ae" className="textOverflow">
-            -
+            {NOT_EXIST}
           </Text>
         )}
       </TableCell>

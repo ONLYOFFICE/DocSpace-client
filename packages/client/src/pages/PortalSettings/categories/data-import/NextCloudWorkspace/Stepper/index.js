@@ -10,6 +10,8 @@ import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
 
 export const getStepsData = (t, currentStep, setCurrentStep) => {
+  const isSixthStep = currentStep === 6;
+
   const incrementStep = () => {
     if (currentStep !== 6) {
       setCurrentStep((prev) => prev + 1);
@@ -26,17 +28,35 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionNextcloud"),
-      component: <FirstStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <FirstStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
     {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionNextcloud"),
-      component: <SecondStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <SecondStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
     {
       title: t("Settings:AddEmails"),
       description: t("Settings:SelectUsersDescriptionNextcloud"),
-      component: <ThirdStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <ThirdStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
     {
       title: t("Settings:SelectUserTypes"),
@@ -56,22 +76,47 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
           />
         </>
       ),
-      component: <FourthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <FourthStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription"),
-      component: <FifthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <FifthStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
     {
       title: t("Settings:DataImportProcessing"),
       description: t("Settings:ImportProcessingDescription"),
-      component: <SixthStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <SixthStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+          isSixthStep={isSixthStep}
+        />
+      ),
     },
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud"),
-      component: <SeventhStep t={t} incrementStep={incrementStep} decrementStep={decrementStep} />,
+      component: (
+        <SeventhStep
+          t={t}
+          incrementStep={incrementStep}
+          decrementStep={decrementStep}
+        />
+      ),
     },
   ];
 };

@@ -1,67 +1,88 @@
-import React, { useState, useRef, useEffect } from "react";
-
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import ProgressBar from "@docspace/components/progress-bar";
+import { useState, useRef, useEffect } from "react";
+import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import Button from "@docspace/components/button";
-
 import { Wrapper } from "../StyledStepper";
 
-const SixthStep = ({ t, incrementStep, decrementStep }) => {
-  const [isCancelVisible, setIsCancelVisible] = useState(false);
+import ProgressBar from "@docspace/components/progress-bar";
+import Button from "@docspace/components/button";
+
+const PERCENT_STEP = 5;
+
+const SixthStep = ({
+  t,
+  incrementStep,
+  isSixthStep,
+  setIsLoading,
+  migrationFile,
+  cancelMigration,
+  data,
+  toggles,
+}) => {
+  const [isVisble, setIsVisble] = useState(false);
   const [percent, setPercent] = useState(0);
   const percentRef = useRef(0);
 
-  const PERCENT_STEP = 5;
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (percentRef.current < 100) {
-        setPercent((prevPercent) => prevPercent + PERCENT_STEP);
-        percentRef.current += PERCENT_STEP;
-      } else {
-        clearInterval(interval);
-        incrementStep();
-      }
-    }, 200);
-
-    return () => {
-      clearInterval(interval);
-    };
+    try {
+      const interval = setInterval(() => {
+        if (percentRef.current < 100) {
+          setIsLoading(true);
+          setPercent((prev) => prev + PERCENT_STEP);
+          percentRef.current += PERCENT_STEP;
+        } else {
+          clearInterval(interval);
+          setIsLoading(false);
+          incrementStep();
+        }
+      }, 1000);
+      migrationFile({ ...data, ...toggles });
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   }, []);
 
-  const onClickButton = () => {
-    setIsCancelVisible(true);
+  const onCancel = () => {
+    setIsVisble(true);
+    setIsLoading(false);
   };
 
   return (
     <Wrapper>
-      {percent < 102 ? (
+      {percent < 102 && (
         <>
           <ProgressBar percent={percent} className="data-import-progress-bar" />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onClickButton} />
+          <Button
+            size="small"
+            className="cancel-button"
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </>
-      ) : (
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
-          saveButtonLabel={t("Settings:NextStep")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-          showReminder
-        />
       )}
 
-      {isCancelVisible && (
+      {isVisble && (
         <CancelUploadDialog
-          visible={isCancelVisible}
+          visible={isVisble}
           loading={false}
-          onClose={() => setIsCancelVisible(false)}
+          isSixthStep={isSixthStep}
+          cancelMigration={cancelMigration}
+          onClose={() => setIsVisble(false)}
         />
       )}
     </Wrapper>
   );
 };
 
-export default SixthStep;
+export default inject(({ importAccountsStore }) => {
+  const { data, setIsLoading, migrationFile, cancelMigration, toggles } =
+    importAccountsStore;
+
+  return {
+    data,
+    toggles,
+    setIsLoading,
+    migrationFile,
+    cancelMigration,
+  };
+})(observer(SixthStep));

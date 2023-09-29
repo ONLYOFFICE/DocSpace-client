@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
 
-import { inject, observer } from "mobx-react";
-
 import Text from "@docspace/components/text";
-import FileInput from "@docspace/components/file-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import ProgressBar from "@docspace/components/progress-bar";
 import Button from "@docspace/components/button";
-import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-
-import { useSearchParams } from "react-router-dom";
+import FileInput from "@docspace/components/file-input";
+import ProgressBar from "@docspace/components/progress-bar";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -43,19 +41,21 @@ const FirstStep = ({
   t,
   incrementStep,
   decrementStep,
-  cancelUploadDialogVisible,
-  setCancelUploadDialogVisible,
+  cancelDialogVisble,
+  setCancelDialogVisbile,
   initMigrationName,
   singleFileUploading,
   getMigrationStatus,
   setUsers,
+  setData,
   isFileLoading,
   setIsFileLoading,
+  cancelMigration,
 }) => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
-  const [searchParams] = useSearchParams();
-
   const [progress, setProgress] = useState(0);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const onUploadFile = async (file) => {
     await singleFileUploading(file, setProgress);
@@ -64,12 +64,12 @@ const FirstStep = ({
       const res = await getMigrationStatus();
 
       if (!res || res.parseResult.failedArchives.length > 0) {
-        console.error("something went wrong");
         setIsFileLoading(false);
         clearInterval(interval);
       } else if (res.isCompleted) {
         setIsFileLoading(false);
         clearInterval(interval);
+        setData(res);
         setUsers(res);
         setIsSaveDisabled(true);
       }
@@ -87,31 +87,44 @@ const FirstStep = ({
   };
 
   const onCancel = () => {
-    setCancelUploadDialogVisible(true);
+    setCancelDialogVisbile(true);
     setProgress(0);
     setIsFileLoading(false);
   };
 
   return (
     <Wrapper>
-      <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
+      <Text className="choose-backup-file">
+        {t("Settings:ChooseBackupFile")}
+      </Text>
       <FileInput
+        scale
         onInput={onSelectFile}
         className="upload-backup-input"
         placeholder={t("Settings:BackupFile")}
-        scale
+        isDisabled={isFileLoading}
+        accept=".zip"
       />
       {isFileLoading ? (
         <>
-          <Text className="select-file-progress-text">{t("Settings:BackupFileUploading")}</Text>
-          <ProgressBar percent={progress} className="select-file-progress-bar" />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
+          <Text className="select-file-progress-text">
+            {t("Settings:BackupFileUploading")}
+          </Text>
+          <ProgressBar
+            percent={progress}
+            className="select-file-progress-bar"
+          />
+          <Button
+            size="small"
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </>
       ) : (
         <SaveCancelButtons
           className="upload-back-buttons"
           onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
+          onCancelClick={() => navigate(-1)}
           saveButtonLabel={t("Settings:UploadToServer")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings
@@ -120,11 +133,12 @@ const FirstStep = ({
         />
       )}
 
-      {cancelUploadDialogVisible && (
+      {cancelDialogVisble && (
         <CancelUploadDialog
-          visible={cancelUploadDialogVisible}
+          visible={cancelDialogVisble}
           loading={isFileLoading}
-          onClose={() => setCancelUploadDialogVisible(false)}
+          onClose={() => setCancelDialogVisbile(false)}
+          cancelMigration={cancelMigration}
         />
       )}
     </Wrapper>
@@ -137,19 +151,24 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     singleFileUploading,
     getMigrationStatus,
     setUsers,
+    setData,
     isFileLoading,
     setIsFileLoading,
+    cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
-    setUsers,
+    initMigrationName,
     singleFileUploading,
     getMigrationStatus,
-    initMigrationName,
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
+    setUsers,
+    setData,
     isFileLoading,
     setIsFileLoading,
+    cancelMigration,
+    cancelDialogVisble: cancelUploadDialogVisible,
+    setCancelDialogVisbile: setCancelUploadDialogVisible,
   };
 })(observer(FirstStep));

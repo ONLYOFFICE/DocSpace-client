@@ -1,38 +1,57 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import SearchInput from "@docspace/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
+import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import Text from "@docspace/components/text";
 
-import SearchInput from "@docspace/components/search-input";
-
 import { Wrapper } from "../StyledStepper";
-
-import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
-
-import { mockData as nextStepData } from "../ThirdStep/mockData";
-import { mockData } from "./mockData";
+// import { mockData as nextStepData } from "../ThirdStep/mockData";
+// import { mockData } from "./mockData";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 const LICENSE_LIMIT = 100;
 
 const SecondStep = (props) => {
-  const { t, incrementStep, decrementStep, numberOfCheckedAccounts } = props;
+  const {
+    t,
+    incrementStep,
+    decrementStep,
+    numberOfCheckedAccounts,
+    users,
+    searchValue,
+    setSearchValue,
+  } = props;
 
-  const [dataPortion, setDataPortion] = useState(mockData.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(mockData.slice(leftBoundary, rightBoundary));
+    setDataPortion(users.slice(leftBoundary, rightBoundary));
   };
+
+  const onChangeInput = (value) => {
+    setSearchValue(value);
+  };
+
+  const onClearSearchInput = () => {
+    setSearchValue("");
+  };
+
+  const filteredAccounts = dataPortion.filter(
+    (data) =>
+      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+  );
 
   return (
     <Wrapper>
-      {nextStepData.length > 0 && <NoEmailUsersBlock users={nextStepData.length} t={t} />}
+      {users.length > 0 && <NoEmailUsersBlock users={users.length} t={t} />}
 
-      {mockData.length > 0 ? (
+      {users.length > 0 ? (
         <>
           <SaveCancelButtons
             className="save-cancel-buttons"
@@ -48,23 +67,25 @@ const SecondStep = (props) => {
           <UsersInfoBlock
             t={t}
             selectedUsers={numberOfCheckedAccounts}
-            totalUsers={mockData.length}
+            totalUsers={users.length}
             totalLicenceLimit={LICENSE_LIMIT}
           />
 
           <SearchInput
             id="search-users-input"
-            onChange={() => console.log("changed")}
-            onClearSearch={() => console.log("cleared")}
             placeholder={t("Common:Search")}
+            value={searchValue}
+            onChange={onChangeInput}
+            refreshTimeout={100}
+            onClearSearch={onClearSearchInput}
           />
 
-          <AccountsTable accountsData={dataPortion} t={t} />
+          <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {mockData.length > 25 && (
+          {users.length > 25 && (
             <AccountsPaging
               t={t}
-              numberOfItems={mockData.length}
+              numberOfItems={users.length}
               setDataPortion={handleDataChange}
             />
           )}
@@ -75,26 +96,30 @@ const SecondStep = (props) => {
         </Text>
       )}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={incrementStep}
-        onCancelClick={decrementStep}
-        saveButtonLabel={t("Settings:NextStep")}
-        cancelButtonLabel={t("Common:Back")}
-        showReminder
-        displaySettings
-        saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
-      />
+      {filteredAccounts.length > 0 && (
+        <SaveCancelButtons
+          className="save-cancel-buttons"
+          onSaveClick={incrementStep}
+          onCancelClick={decrementStep}
+          saveButtonLabel={t("Settings:NextStep")}
+          cancelButtonLabel={t("Common:Back")}
+          showReminder
+          displaySettings
+          saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
-  const { viewAs } = setup;
-  const { numberOfCheckedAccounts } = importAccountsStore;
+export default inject(({ importAccountsStore }) => {
+  const { numberOfCheckedAccounts, users, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
-    viewAs,
     numberOfCheckedAccounts,
+    users,
+    searchValue,
+    setSearchValue,
   };
 })(observer(SecondStep));

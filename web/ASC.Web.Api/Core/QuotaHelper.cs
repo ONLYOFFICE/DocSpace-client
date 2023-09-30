@@ -32,12 +32,14 @@ public class QuotaHelper
     private readonly TenantManager _tenantManager;
     private readonly IServiceProvider _serviceProvider;
     private readonly CoreBaseSettings _coreBaseSettings;
+    private readonly SettingsManager _settingsManager;
 
-    public QuotaHelper(TenantManager tenantManager, IServiceProvider serviceProvider, CoreBaseSettings coreBaseSettings)
+    public QuotaHelper(TenantManager tenantManager, IServiceProvider serviceProvider, CoreBaseSettings coreBaseSettings, SettingsManager settingsManager)
     {
         _tenantManager = tenantManager;
         _serviceProvider = serviceProvider;
         _coreBaseSettings = coreBaseSettings;
+        _settingsManager = settingsManager;
     }
 
     public async IAsyncEnumerable<QuotaDto> GetQuotasAsync()
@@ -76,7 +78,9 @@ public class QuotaHelper
                 CurrencySymbol = quota.PriceCurrencySymbol
             },
 
-            Features = features
+            Features = features,
+            UsersQuota = await _settingsManager.LoadAsync<TenantUserQuotaSettings>(),
+            RoomsQuota = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>()
         };
     }
 

@@ -13,16 +13,10 @@ const categoryLocale = getDefaultOformLocale();
 const CategoryFilterDesktop = ({
   t,
 
-  fetchCategoryList,
+  menuItems,
 
   currentCategory,
-
   filterOformsByCategory,
-
-  menuItems,
-  formsByBranch,
-  formsByType,
-  formsByCompilation,
 
   ...rest
 }) => {
@@ -103,8 +97,6 @@ const CategoryFilterDesktop = ({
   );
 };
 export default inject(({ oformsStore }) => ({
-  fetchCategoryList: oformsStore.fetchCategoryList,
-
   currentCategory: oformsStore.currentCategory,
 
   fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,

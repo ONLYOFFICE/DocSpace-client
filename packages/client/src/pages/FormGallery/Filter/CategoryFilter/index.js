@@ -37,12 +37,7 @@ export const StyledCategoryFilterWrapper = styled.div`
   `}
 `;
 
-const CategoryFilter = ({
-  oformsFilter,
-
-  fetchCategoryList,
-  fetchCategories,
-}) => {
+const CategoryFilter = ({ fetchCategoryList, fetchCategories }) => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
@@ -82,14 +77,6 @@ const CategoryFilter = ({
   );
 };
 export default inject(({ oformsStore }) => ({
-  currentCategory: oformsStore.currentCategory,
-
   fetchCategoryList: oformsStore.fetchCategoryList,
   fetchCategories: oformsStore.fetchCategories,
-  fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,
-  fetchCategoriesByType: oformsStore.fetchCategoriesByType,
-  fetchPopularCategories: oformsStore.fetchPopularCategories,
-
-  oformsFilter: oformsStore.oformsFilter,
-  filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(observer(CategoryFilter));

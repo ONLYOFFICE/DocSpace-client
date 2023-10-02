@@ -15,12 +15,9 @@ import { CategoryType } from "@docspace/client/src/helpers/constants";
 const FormGallery = ({
   currentCategory,
   fetchCurrentCategory,
-  filterOformsByLocale,
   oformsFilter,
   setOformsFilter,
-  oformFromFolderId,
   getOforms,
-  setOformFiles,
   setOformFromFolderId,
 }) => {
   const location = useLocation();
@@ -100,11 +97,6 @@ export default inject(({ oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
   setOformsFilter: oformsStore.setOformsFilter,
 
-  filterOformsByLocale: oformsStore.filterOformsByLocale,
-
-  oformFromFolderId: oformsStore.oformFromFolderId,
-
   getOforms: oformsStore.getOforms,
-  setOformFiles: oformsStore.setOformFiles,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
 }))(observer(FormGallery));

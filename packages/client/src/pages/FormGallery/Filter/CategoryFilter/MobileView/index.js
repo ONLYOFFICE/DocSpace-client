@@ -2,21 +2,21 @@ import * as Styled from "./index.styled";
 
 import DropDownItem from "@docspace/components/drop-down-item";
 import { useState, useRef } from "react";
-import { inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import CategorySubList from "./CategorySubList";
 import Scrollbar from "@docspace/components/scrollbar";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
+import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
+import { getDefaultOformLocale } from "@docspace/common/utils";
 
 const CategoryFilterMobile = ({
   t,
 
   menuItems,
 
-  onViewAllTemplates,
-  formsByBranch,
-  formsByType,
-  formsByCompilation,
+  currentCategory,
+  filterOformsByCategory,
 
   ...rest
 }) => {
@@ -39,11 +39,15 @@ const CategoryFilterMobile = ({
   if (calculatedHeight > maxCalculatedHeight)
     calculatedHeight = maxCalculatedHeight;
 
+  const onViewAllTemplates = () => filterOformsByCategory("", "");
+
   return (
     <Styled.CategoryFilterMobileWrapper ref={wrapperRef} {...rest}>
       <ComboButton
         selectedOption={{
-          label: t("FormGallery:Categories"),
+          label:
+            getOformCategoryTitle(currentCategory, getDefaultOformLocale()) ||
+            t("FormGallery:Categories"),
         }}
         isOpen={isOpen}
         scaled={true}
@@ -103,11 +107,5 @@ const CategoryFilterMobile = ({
 
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
-
-  fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,
-  fetchCategoriesByType: oformsStore.fetchCategoriesByType,
-  fetchPopularCategories: oformsStore.fetchPopularCategories,
-
-  oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery"])(CategoryFilterMobile));

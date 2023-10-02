@@ -67,7 +67,6 @@ class OformsStore {
       filter.total = paginationData.total;
     }
 
-    console.log(oformData?.data?.data);
     runInAction(() => {
       this.setOformsFilter(filter);
       this.setOformFiles(oformData?.data?.data ?? []);
@@ -162,9 +161,7 @@ class OformsStore {
     this.oformsFilter.categoryId = categoryId;
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => {
-      this.getOforms(newOformsFilter);
-    });
+    runInAction(() => this.getOforms(newOformsFilter));
   };
 
   filterOformsByLocale = async (locale) => {

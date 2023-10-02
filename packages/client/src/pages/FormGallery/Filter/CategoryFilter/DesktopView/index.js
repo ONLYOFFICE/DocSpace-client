@@ -88,7 +88,7 @@ const CategoryFilterDesktop = ({
         }
       />
 
-      {menuItems.map((item, index) => (
+      {menuItems?.map((item, index) => (
         <SubList
           categoryType={item.key}
           categories={item.categories || []}
@@ -112,4 +112,4 @@ export default inject(({ oformsStore }) => ({
 
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(observer(CategoryFilterDesktop)));
+}))(withTranslation(["FormGallery"])(CategoryFilterDesktop));

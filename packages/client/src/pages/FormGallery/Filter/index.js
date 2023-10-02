@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { inject, observer } from "mobx-react";
 
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { smallTablet, tablet } from "@docspace/components/utils/device";
-import { getDefaultOformLocale } from "@docspace/common/utils";
-import OformsFilter from "@docspace/common/api/oforms/filter";
+import { smallTablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 export const StyledFilter = styled.div`
@@ -51,7 +46,7 @@ export const StyledFilter = styled.div`
 
 StyledFilter.defaultProps = { theme: Base };
 
-const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
+const SectionFilterContent = ({}) => {
   return (
     <StyledFilter>
       <div className="form-only-filters">
@@ -66,7 +61,4 @@ const SectionFilterContent = ({ oformsFilter, setOformsFilter }) => {
   );
 };
 
-export default inject(({ oformsStore }) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  setOformsFilter: oformsStore.setOformsFilter,
-}))(SectionFilterContent);
+export default SectionFilterContent;

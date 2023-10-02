@@ -10,16 +10,6 @@ import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import Backdrop from "@docspace/components/backdrop";
 import Text from "@docspace/components/text";
 
-const sortData = [
-  {
-    id: "sort-by_name",
-    key: "name_form",
-    label: "Name",
-    default: false,
-    isSelected: false,
-  },
-];
-
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
@@ -38,6 +28,16 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
     e.stopPropagation();
     onSort(e, newSortBy, oformsFilter.sortOrder === "desc" ? "asc" : "desc");
   };
+
+  const sortData = [
+    {
+      id: "sort-by_name",
+      key: "name_form",
+      label: t("Common:Name"),
+      default: false,
+      isSelected: false,
+    },
+  ];
 
   return (
     <>
@@ -98,4 +98,4 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
 export default inject(({ oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
   sortOforms: oformsStore.sortOforms,
-}))(withTranslation(["FormGallery", "Common"])(SortFilter));
+}))(withTranslation(["Common"])(SortFilter));

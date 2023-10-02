@@ -90,6 +90,7 @@ const CategoryFilterDesktop = ({
 
       {menuItems?.map((item, index) => (
         <SubList
+          key={item.key}
           categoryType={item.key}
           categories={item.categories || []}
           isDropdownOpen={isOpen}

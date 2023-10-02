@@ -55,14 +55,13 @@ const CategoryFilter = ({
       );
 
       Promise.all(categoryPromises)
-        .then(
-          (results) =>
-            (newMenuItems = newMenuItems.map((item, index) => ({
-              key: item.attributes.categoryId,
-              label: item.attributes.name,
-              categories: results[index],
-            })))
-        )
+        .then((results) => {
+          newMenuItems = newMenuItems.map((item, index) => ({
+            key: item.attributes.categoryId,
+            label: item.attributes.name,
+            categories: results[index],
+          }));
+        })
         .catch((err) => {
           console.error(err);
           newMenuItems = newMenuItems.map((item) => ({

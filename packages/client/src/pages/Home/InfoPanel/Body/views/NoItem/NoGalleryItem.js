@@ -9,6 +9,13 @@ const StyledGalleryEmptyScreen = styled.div`
     margin: 0 auto;
     padding: 56px 0 48px 0;
   }
+
+  .info-panel_gallery-empty-screen-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+  }
 `;
 
 const NoGalleryItem = ({ t }) => {
@@ -19,7 +26,7 @@ const NoGalleryItem = ({ t }) => {
         src={FormGallerySearchReactSvgUrl}
         alt="Empty Screen Gallery image"
       />
-      <Text textAlign="center">
+      <Text className="info-panel_gallery-empty-screen-text">
         {t("FormGallery:GalleryEmptyScreenDescription")}
       </Text>
     </StyledGalleryEmptyScreen>

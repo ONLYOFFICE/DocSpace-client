@@ -1,15 +1,7 @@
 import * as Styled from "./index.styled";
 
-import DropDown from "@docspace/components/drop-down";
-import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
-import { ReactSVG } from "react-svg";
-import { useRef, useState, useEffect } from "react";
-import { inject } from "mobx-react";
-import { flagsIcons } from "@docspace/common/utils/image-helpers";
-import { convertToCulture } from "@docspace/common/utils";
-import DropDownItem from "@docspace/components/drop-down-item";
-import ComboBox from "@docspace/components/combobox";
-import { OformCategoryType } from "@docspace/client/src/helpers/constants";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
 
 import DeReactSvgUrl from "PUBLIC_DIR/images/flags/de.react.svg?url";
 import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
@@ -50,25 +42,8 @@ const locales = [
   },
 ];
 
-const LanguageFilter = ({
-  oformsFilter,
-  filterOformsByLocale,
-  currentColorScheme,
-}) => {
-  const dropdownRef = useRef(null);
-
-  const [currentOption] = locales.filter(
-    (locale) => locale.key === oformsFilter.locale
-  );
-
-  const [selectedOption, setSelectedOption] = useState(currentOption);
-
-  const getSelectedOption = () => {
-    const [currentOption] = locales.filter(
-      (locale) => locale.key === oformsFilter.locale
-    );
-    return currentOption;
-  };
+const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
+  const [selectedOption] = locales.filter((l) => l.key === oformsFilter.locale);
 
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -80,13 +55,6 @@ const LanguageFilter = ({
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
   };
-
-  useEffect(() => {
-    const [currentOption] = locales.filter(
-      (locale) => locale.key === oformsFilter.locale
-    );
-    setSelectedOption(currentOption);
-  }, [oformsFilter.locale]);
 
   return (
     <Styled.LanguageFilter>
@@ -127,58 +95,17 @@ const LanguageFilter = ({
         }
       >
         <Styled.LanguageFilterSelectedItem
-          key={currentOption.key}
-          icon={currentOption.icon}
+          key={selectedOption.key}
+          icon={selectedOption.icon}
           fillIcon={false}
         />
       </Styled.LanguangeComboBox>
     </Styled.LanguageFilter>
   );
-
-  // return (
-  //   <Styled.LanguageFilter
-  //     currentColorScheme={currentColorScheme}
-  //     isOpen={isOpen}
-  //   >
-  //     <div className="combobox" onClick={toggleDropdownIsOpen}>
-  //       <img
-  //         className="combobox-icon"
-  //         src={flagsIcons?.get(
-  //           `${convertToCulture(oformsFilter.locale)}.react.svg`
-  //         )}
-  //         alt={oformsFilter.locale}
-  //       />
-  //       <ReactSVG className="combobox-expander" src={ExpanderDownReactSvgUrl} />
-  //     </div>
-  //     <div className="dropdown-wrapper" ref={dropdownRef}>
-  //       <DropDown
-  //         className={"dropdown-container"}
-  //         forwardedRef={dropdownRef}
-  //         open={isOpen}
-  //         clickOutsideAction={toggleDropdownIsOpen}
-  //         directionY={"bottom"}
-  //         directionX={"right"}
-  //         isDefaultMode={false}
-  //         fixedDirection={true}
-  //       >
-  //         {avialableLocales.map((locale) => (
-  //           <Styled.LanguageFilterItem
-  //             key={locale}
-  //             isSelected={locale === oformsFilter.locale}
-  //             className="dropdown-item"
-  //             icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
-  //             onClick={() => onFilterByLocale(locale)}
-  //             fillIcon={false}
-  //           />
-  //         ))}
-  //       </DropDown>
-  //     </div>
-  //   </Styled.LanguageFilter>
-  // );
 };
 
 export default inject(({ auth, oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
   currentColorScheme: auth.settingsStore.currentColorScheme,
-}))(LanguageFilter);
+}))(observer(LanguageFilter));

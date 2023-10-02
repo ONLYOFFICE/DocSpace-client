@@ -52,6 +52,10 @@ export default function withQuickButtons(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
+    onClickShare = () => {
+      console.log("onClickShare");
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -64,6 +68,7 @@ export default function withQuickButtons(WrappedComponent) {
         viewAs,
         folderCategory,
         isPublicRoom,
+        isPersonalRoom,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -76,9 +81,11 @@ export default function withQuickButtons(WrappedComponent) {
           viewAs={viewAs}
           isDisabled={isLoading}
           isPublicRoom={isPublicRoom}
+          isPersonalRoom={isPersonalRoom}
           onClickLock={this.onClickLock}
           onClickDownload={this.onClickDownload}
           onClickFavorite={this.onClickFavorite}
+          onClickShare={this.onClickShare}
           folderCategory={folderCategory}
         />
       );
@@ -102,8 +109,12 @@ export default function withQuickButtons(WrappedComponent) {
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
-      const { isPersonalFolderRoot, isArchiveFolderRoot, isTrashFolder } =
-        treeFoldersStore;
+      const {
+        isPersonalFolderRoot,
+        isArchiveFolderRoot,
+        isTrashFolder,
+        isPersonalRoom,
+      } = treeFoldersStore;
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
@@ -120,6 +131,7 @@ export default function withQuickButtons(WrappedComponent) {
         setSharingPanelVisible,
         folderCategory,
         isPublicRoom,
+        isPersonalRoom,
       };
     }
   )(observer(WithQuickButtons));

@@ -3,6 +3,8 @@ import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
+
 import React from "react";
 import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
@@ -25,9 +27,11 @@ const QuickButtons = (props) => {
     viewAs,
     folderCategory,
     isPublicRoom,
+    onClickShare,
+    isPersonalRoom,
   } = props;
 
-  const { id, locked, fileStatus, title, fileExst } = item;
+  const { id, locked, shared, fileStatus, title, fileExst } = item;
 
   const isFavorite =
     (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
@@ -48,6 +52,10 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
+  const colorShare = shared
+    ? theme.filesQuickButtons.sharedColor
+    : theme.filesQuickButtons.color;
+
   const tabletViewQuickButton =
     (sectionWidth > 500 && sectionWidth <= 1024) || isTablet;
 
@@ -61,6 +69,8 @@ const QuickButtons = (props) => {
     !folderCategory && fileExst && displayBadges && item.security.Lock;
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
+
+  const isAvailableShareFile = isPersonalRoom && item.canShare;
 
   return (
     <div className="badges additional-badges">
@@ -90,6 +100,18 @@ const QuickButtons = (props) => {
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
           title={t("Common:Download")}
+        />
+      )}
+      {isAvailableShareFile && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge icons-group"
+          size={sizeQuickButton}
+          onClick={onClickShare}
+          isDisabled={isDisabled}
+          color={colorShare}
+          title={t("Files:Share")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

@@ -616,6 +616,22 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
                 await filesDbContext.SaveChangesAsync();
                 await tx.CommitAsync();
 
+
+                var toFolder = await GetFolderAsync(toFolderId);
+                var archiveId = await GetFolderIDArchive(true);
+
+                if (DocSpaceHelper.IsRoom(folder.FolderType))
+                {
+                    var archiveFolder = await GetFolderAsync(archiveId);
+                    if (toFolder.FolderType == FolderType.Archive)
+                    {
+                        _ = await ChangeFolderSizeAsync(archiveFolder, archiveFolder.Counter + folder.Counter);
+                    }else if (folder.RootId == archiveId)
+                    {
+                        _ = await ChangeFolderSizeAsync(archiveFolder, archiveFolder.Counter - folder.Counter);
+                    }
+                }
+
                 foreach (var e in recalcFolders)
                 {
                     await RecalculateFoldersCountAsync(e);
@@ -1358,6 +1374,35 @@ internal class FolderDao : AbstractDao, IFolderDao<int>
         return AsyncEnumerable.Empty<Folder<int>>();
     }
 
+    public async Task<(int FolderId, FolderType FolderType)> GetParentFolderInfoFromFileEntryAsync<TTo>(FileEntry<TTo> fileEntry)
+    {
+        var rootFolderType = fileEntry.RootFolderType;
+        var rootFolderId = Convert.ToInt32(fileEntry.RootId);
+        var entryId = Convert.ToInt32(fileEntry.Id);
+
+        if(rootFolderId == entryId && fileEntry.FileEntryType == FileEntryType.Folder)
+        {
+            return (entryId, rootFolderType);
+        }
+        else if(rootFolderId == entryId)
+        {
+            return (-1, FolderType.DEFAULT);
+        }
+
+        var folderId = Convert.ToInt32(fileEntry.ParentId);
+
+        if (rootFolderId == folderId)
+        {
+            return (folderId, fileEntry.RootFolderType);
+        }
+
+        await using var filesDbContext = _dbContextFactory.CreateDbContext();
+
+        var parentFolders = await Queries.ParentIdTypePairAsync(filesDbContext, folderId).ToListAsync();
+
+        return (parentFolders[0].ParentId, parentFolders[0].FolderType);
+    }
+
     public async Task<(int RoomId, string RoomTitle)> GetParentRoomInfoFromFileEntryAsync<TTo>(FileEntry<TTo> fileEntry)
     {
         var rootFolderType = fileEntry.RootFolderType;
@@ -1666,6 +1711,12 @@ public class ParentIdTitlePair
 {
     public int ParentId { get; set; }
     public string Title { get; set; }
+}
+
+public class ParentIdFolderTypePair
+{
+    public int ParentId { get; set; }
+    public FolderType FolderType { get; set; }
 }
 
 public class ParentRoomPair
@@ -2133,4 +2184,13 @@ static file class Queries
                     .Where(r => r.Tree.FolderId == folderId)
                     .OrderByDescending(r => r.Tree.Level)
                     .Select(r => new ParentIdTitlePair { ParentId = r.Tree.ParentId, Title = r.Folders.Title }));
+
+    public static readonly Func<FilesDbContext, int, IAsyncEnumerable<ParentIdFolderTypePair>> ParentIdTypePairAsync =
+        Microsoft.EntityFrameworkCore.EF.CompileAsyncQuery(
+            (FilesDbContext ctx, int folderId) =>
+                ctx.Tree
+                    .Join(ctx.Folders, r => r.ParentId, s => s.Id, (t, f) => new { Tree = t, Folders = f })
+                    .Where(r => r.Tree.FolderId == folderId)
+                    .OrderByDescending(r => r.Tree.Level)
+                    .Select(r => new ParentIdFolderTypePair { ParentId = r.Tree.ParentId, FolderType = r.Folders.FolderType }));
 }

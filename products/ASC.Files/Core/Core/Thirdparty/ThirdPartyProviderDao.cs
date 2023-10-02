@@ -247,7 +247,10 @@ internal abstract class ThirdPartyProviderDao
     {
         throw new NotImplementedException();
     }
-
+    public Task<(int FolderId, FolderType FolderType)> GetParentFolderInfoFromFileEntryAsync<TTo>(FileEntry<TTo> fileEntry)
+    {
+        throw new NotImplementedException();
+    }
     public Task<(int RoomId, string RoomTitle)> GetParentRoomInfoFromFileEntryAsync<TTo>(FileEntry<TTo> fileEntry)
     {
         throw new NotImplementedException();

@@ -525,6 +525,15 @@ internal class FileDao : AbstractDao, IFileDao<int>
                 {
                     await folderDao.ChangeFolderSizeAsync(currentRoom, currentRoom.Counter + file.ContentLength);
                 }
+                else
+                {
+                    var (rootFolderId, rootFolderType) = await folderDao.GetParentFolderInfoFromFileEntryAsync(file);
+                    if (rootFolderType == FolderType.USER)
+                    {
+                        var rootFolder = await folderDao.GetFolderAsync(rootFolderId);
+                        await folderDao.ChangeFolderSizeAsync(rootFolder, rootFolder.Counter + file.ContentLength);
+                    }
+                }
             }
         }
 
@@ -689,17 +698,31 @@ internal class FileDao : AbstractDao, IFileDao<int>
     private async Task SaveFileStreamAsync(File<int> file, Stream stream)
     {
         var folderDao = _daoFactory.GetFolderDao<int>();
-        var curentFolder = await folderDao.GetFolderAsync(file.FolderIdDisplay);
-        var folder = curentFolder.FolderIdDisplay == curentFolder.RootId ? curentFolder : await folderDao.GetFolderAsync(curentFolder.RootId);
-
-        file.RootCreateBy = folder.RootCreateBy;
-        file.RootFolderType = folder.RootFolderType;
 
         await (await _globalStore.GetStoreAsync()).SaveAsync(string.Empty, GetUniqFilePath(file), file.GetFileQuotaOwner(), stream, file.Title);
-        
-        if (DocSpaceHelper.IsRoom(folder.FolderType))
+
+        var curentFolder = await folderDao.GetFolderAsync(file.FolderIdDisplay);
+
+        file.RootCreateBy = curentFolder.RootCreateBy;
+        file.RootFolderType = curentFolder.RootFolderType;
+
+        var (roomId, _) = await folderDao.GetParentRoomInfoFromFileEntryAsync(file);
+
+        if (roomId != -1)
         {
-            await folderDao.ChangeFolderSizeAsync(folder, folder.Counter + file.ContentLength);
+            var currentRoom = await folderDao.GetFolderAsync(roomId);
+
+            await folderDao.ChangeFolderSizeAsync(currentRoom, currentRoom.Counter + file.ContentLength);
+        }
+        else
+        {
+            var (rootFolderId, rootFolderType) = await folderDao.GetParentFolderInfoFromFileEntryAsync(file);
+
+            if (rootFolderType == FolderType.USER)
+            {
+                var rootFolder = await folderDao.GetFolderAsync(rootFolderId);
+                await folderDao.ChangeFolderSizeAsync(rootFolder, rootFolder.Counter + file.ContentLength);
+            }
         }
     }
 
@@ -909,16 +932,11 @@ internal class FileDao : AbstractDao, IFileDao<int>
                 {
                     var oldFolder = await folderDao.GetFolderAsync(oldParentId.Value);
                     
-                    var (oldFolderRoomId, _) = await folderDao.GetParentRoomInfoFromFileEntryAsync(oldFolder);
-                    var (toFolderRoomId, _) = await folderDao.GetParentRoomInfoFromFileEntryAsync(toFolder);
+                    await UpdateUsedRoomSpace(folderDao, 
+                        oldFolder,
+                        toFolder, 
+                        file, fileContentLength, trashId);
 
-                    if ((oldFolderRoomId != -1 || toFolderRoomId != -1) && (oldFolderRoomId != toFolderRoomId))
-                    {
-                        await UpdateUsedRoomSpace(folderDao, 
-                            oldFolderRoomId != -1 ? await folderDao.GetFolderAsync(oldFolderRoomId) : oldFolder,
-                            toFolderRoomId != -1 ? await folderDao.GetFolderAsync(toFolderRoomId) : toFolder, 
-                            file, fileContentLength, trashId);
-                    }
                 }
                 await RecalculateFilesCountAsync(toFolderId);
 
@@ -1106,25 +1124,71 @@ internal class FileDao : AbstractDao, IFileDao<int>
 
     private async Task UpdateUsedRoomSpace(IFolderDao<int> folderDao, Folder<int> fromFolder, Folder<int> toFolder, File<int> file, long size, int trashId)
     {
-        if (DocSpaceHelper.IsRoom(toFolder.FolderType))
+        var (toFolderRoomId, _) = await folderDao.GetParentRoomInfoFromFileEntryAsync(toFolder);
+        var (oldFolderRoomId, _) = await folderDao.GetParentRoomInfoFromFileEntryAsync(fromFolder);
+
+        if (toFolderRoomId != -1)
         {
-            await folderDao.ChangeFolderSizeAsync(toFolder, toFolder.Counter + size);
+            if (toFolderRoomId != toFolder.Id)
+            {
+                var toRoom = await folderDao.GetFolderAsync(toFolderRoomId);
+                await folderDao.ChangeFolderSizeAsync(toRoom, toRoom.Counter + size);
+            }
+            else
+            {
+                await folderDao.ChangeFolderSizeAsync(toFolder, toFolder.Counter + size);
+            }
+
         }
-        if (DocSpaceHelper.IsRoom(fromFolder.FolderType))
+        else
         {
-            await folderDao.ChangeFolderSizeAsync(fromFolder, fromFolder.Counter - size);
+            var (toRootFolderId, toRootFolderType) = await folderDao.GetParentFolderInfoFromFileEntryAsync(toFolder);
+
+            if (toRootFolderType == FolderType.USER || toRootFolderType == FolderType.TRASH)
+            {
+                var toRootFolder = await folderDao.GetFolderAsync(toRootFolderId);
+                await folderDao.ChangeFolderSizeAsync(toRootFolder, toRootFolder.Counter + size);
+            }
         }
-        var tenantId = _tenantManager.GetCurrentTenant().Id;
-       
-        if (toFolder.FolderType == FolderType.USER || toFolder.FolderType == FolderType.DEFAULT)
+
+
+        if (oldFolderRoomId != -1)
         {
-            file.RootCreateBy = toFolder.RootCreateBy;
-            file.RootFolderType = toFolder.FolderType;
-            await _storageFactory.QuotaUsedAddAsync(tenantId, FileConstant.ModuleId, "", WebItemManager.DocumentsProductID.ToString(), size, file.GetFileQuotaOwner());
+            if (oldFolderRoomId != fromFolder.Id)
+            {
+                var fromRoom = await folderDao.GetFolderAsync(oldFolderRoomId);
+                await folderDao.ChangeFolderSizeAsync(fromRoom, fromRoom.Counter - size);
+            }
+            else
+            {
+                await folderDao.ChangeFolderSizeAsync(fromFolder, fromFolder.Counter - size);
+            }
         }
-        if (fromFolder.FolderType == FolderType.USER || fromFolder.FolderType == FolderType.DEFAULT)
+        else
         {
-            await _storageFactory.QuotaUsedDeleteAsync(tenantId, FileConstant.ModuleId, "", WebItemManager.DocumentsProductID.ToString(),size, file.GetFileQuotaOwner());
+            var (fromRootFolderId, fromRootFolderType) = await folderDao.GetParentFolderInfoFromFileEntryAsync(fromFolder);
+
+            if (fromRootFolderType == FolderType.USER || fromRootFolderType == FolderType.TRASH)
+            {
+                var fromRootFolder = await folderDao.GetFolderAsync(fromRootFolderId);
+                await folderDao.ChangeFolderSizeAsync(fromRootFolder, fromRootFolder.Counter - size);
+            }
+        }
+
+        if (toFolderRoomId != -1 || oldFolderRoomId != -1)
+        {
+            var tenantId = _tenantManager.GetCurrentTenant().Id;
+
+            if (toFolder.FolderType == FolderType.USER || toFolder.FolderType == FolderType.DEFAULT)
+            {
+                file.RootCreateBy = toFolder.RootCreateBy;
+                file.RootFolderType = toFolder.FolderType;
+                await _storageFactory.QuotaUsedAddAsync(tenantId, FileConstant.ModuleId, "", WebItemManager.DocumentsProductID.ToString(), size, file.GetFileQuotaOwner());
+            }
+            if (fromFolder.FolderType == FolderType.USER || fromFolder.FolderType == FolderType.DEFAULT)
+            {
+                await _storageFactory.QuotaUsedDeleteAsync(tenantId, FileConstant.ModuleId, "", WebItemManager.DocumentsProductID.ToString(), size, file.GetFileQuotaOwner());
+            }
         }
 
     }

@@ -325,7 +325,19 @@ class FileDeleteOperation<T> : FileOperation<FileDeleteOperationData<T>, T>
                     try
                     {
                         await FileDao.DeleteFileAsync(file.Id, file.GetFileQuotaOwner());
-
+                        var folderDao = scope.ServiceProvider.GetService<IFolderDao<int>>();
+                        if (file.RootFolderType == FolderType.Archive)
+                        {
+                            var archiveId = await folderDao.GetFolderIDArchive(true);
+                            var archiveFolder = await folderDao.GetFolderAsync(archiveId);
+                            _ = await folderDao.ChangeFolderSizeAsync(archiveFolder, archiveFolder.Counter - file.ContentLength);
+                        }
+                        else if (file.RootFolderType == FolderType.TRASH)
+                        {
+                            var trashFolder = await folderDao.GetFolderAsync(_trashId);
+                            _ = await folderDao.ChangeFolderSizeAsync(trashFolder, trashFolder.Counter - file.ContentLength);
+                        }
+                        
                         if (_headers != null)
                         {
                             if (isNeedSendActions)

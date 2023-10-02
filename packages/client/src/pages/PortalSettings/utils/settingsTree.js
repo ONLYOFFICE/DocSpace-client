@@ -352,8 +352,16 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-oauth",
+        id: "portal-settings_catalog-plugins",
         key: "5-3",
+        icon: "",
+        link: "plugins",
+        tKey: "Plugins",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-oauth",
+        key: "5-4",
         icon: "",
         link: "oauth",
         tKey: "OAuth",
@@ -525,12 +533,7 @@ export const settingsTreeFull = [
         icon: "",
         link: "third-party-services",
       },
-      {
-        key: "3-1",
-        icon: "",
-        link: "plugins",
-        tKey: "Plugins",
-      },
+
       {
         title: "SMTP Settings",
         key: "3-1",

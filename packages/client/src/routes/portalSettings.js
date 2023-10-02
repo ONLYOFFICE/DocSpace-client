@@ -310,6 +310,10 @@ const PortalSettingsRoutes = {
       element: <WebhookDetails />,
     },
     {
+      path: "developer-tools/plugins",
+      element: <DeveloperTools />,
+    },
+    {
       path: "developer-tools/oauth",
       element: <DeveloperTools />,
     },

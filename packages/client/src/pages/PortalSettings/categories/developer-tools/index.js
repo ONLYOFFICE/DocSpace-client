@@ -9,9 +9,10 @@ import config from "PACKAGE_FILE";
 
 import { useNavigate } from "react-router-dom";
 import JavascriptSDK from "./JavascriptSDK";
+import Webhooks from "./Webhooks";
+import PluginPage from "./Plugins";
 import Api from "./Api";
 
-import Webhooks from "./Webhooks";
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
@@ -32,7 +33,7 @@ const StyledSubmenu = styled(Submenu)`
 `;
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo } = props;
+  const { loadBaseInfo, enablePlugins } = props;
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +42,7 @@ const DeveloperToolsWrapper = (props) => {
     "JavascriptSdk",
     "Webhooks",
     "Settings",
+    "WebPlugins",
     "OAuth",
   ]);
   const [isPending, startTransition] = useTransition();
@@ -48,6 +50,22 @@ const DeveloperToolsWrapper = (props) => {
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("JavascriptSdk")}
+      <Box>
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#7763F0"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
+    </Box>
+  );
+
+  const pluginLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("WebPlugins:Plugins")}
       <Box>
         <Badge
           label={t("Settings:BetaLabel")}
@@ -77,8 +95,15 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
-    { id: "oauth", name: t("OAuth:OAuth"), content: <OAuth /> },
   ];
+
+  if (enablePlugins) {
+    data.push({
+      id: "plugins",
+      name: pluginLabel,
+      content: <PluginPage />,
+    });
+  }
 
   const [currentTab, setCurrentTab] = useState(
     data.findIndex((item) => location.pathname.includes(item.id))
@@ -119,10 +144,13 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, auth }) => {
   const { initSettings } = setup;
 
+  const { settingsStore } = auth;
+
   return {
+    enablePlugins: settingsStore.enablePlugins,
     loadBaseInfo: async () => {
       await initSettings();
     },

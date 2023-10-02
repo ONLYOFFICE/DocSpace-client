@@ -12,7 +12,7 @@ import {
 import { getCookie } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
 
-import { CategoryType } from "@docspace/client/src/helpers/constants";
+const myDocumentsFolderId = 2;
 
 class OformsStore {
   authStore;
@@ -23,7 +23,7 @@ class OformsStore {
 
   oformsFilter = OformsFilter.getDefault();
 
-  oformFromFolderId = CategoryType.SharedRoom;
+  oformFromFolderId = myDocumentsFolderId;
 
   currentCategory = null;
   // categoryIds = ["categories", "types", "compilations"];

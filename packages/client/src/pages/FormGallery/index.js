@@ -10,7 +10,6 @@ import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import Dialogs from "./Dialogs";
-import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 const FormGallery = ({
   currentCategory,
@@ -39,10 +38,10 @@ const FormGallery = ({
   useEffect(() => {
     if (fromFolderId) setOformFromFolderId(fromFolderId);
     else {
-      const sharedRoomId = CategoryType.SharedRoom;
-      setOformFromFolderId(sharedRoomId);
+      const myDocumentsFolderId = 2;
+      setOformFromFolderId(myDocumentsFolderId);
       navigate(
-        `/form-gallery/${sharedRoomId}/filter?${oformsFilter.toUrlParams()}`
+        `/form-gallery/${myDocumentsFolderId}/filter?${oformsFilter.toUrlParams()}`
       );
     }
   }, [fromFolderId]);

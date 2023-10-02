@@ -225,10 +225,6 @@ export const filterUserRoleOptions = (
   return newOptions;
 };
 
-export const getLocalizedOformCategoryTitle = (category, locale = null) => {
-  if (!category) return "";
-};
-
 export const getOformCategoryTitle = (category, locale = null) => {
   if (!category) return "";
 

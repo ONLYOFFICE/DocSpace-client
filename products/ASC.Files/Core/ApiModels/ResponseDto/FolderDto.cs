@@ -177,9 +177,10 @@ public class FolderDtoHelper : FileEntryDtoHelper
             }
 
             var quotaRoomSettings = await _settingsManager.LoadAsync<TenantRoomQuotaSettings>();
+            result.UsedSpace = folder.Counter;
+
             if (quotaRoomSettings.EnableQuota)
             {
-                result.UsedSpace = folder.Counter;
                 result.QuotaLimit = folder.Quota > -2 ? folder.Quota : quotaRoomSettings.DefaultQuota;
             }
         }

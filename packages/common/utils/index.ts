@@ -205,8 +205,8 @@ export function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
-      name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-      "=([^;]*)"
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)"
     )
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
@@ -275,7 +275,12 @@ export function toCommunityHostname(hostname) {
   return communityHostname;
 }
 
-export function getProviderTranslation(provider, t, linked = false, signUp = false) {
+export function getProviderTranslation(
+  provider,
+  t,
+  linked = false,
+  signUp = false
+) {
   const capitalizeProvider =
     provider.charAt(0).toUpperCase() + provider.slice(1);
   if (linked) {
@@ -286,15 +291,25 @@ export function getProviderTranslation(provider, t, linked = false, signUp = fal
     case "apple":
       return signUp ? t("Common:SignUpWithApple") : t("Common:SignInWithApple");
     case "google":
-      return signUp ? t("Common:SignUpWithGoogle") : t("Common:SignInWithGoogle");
+      return signUp
+        ? t("Common:SignUpWithGoogle")
+        : t("Common:SignInWithGoogle");
     case "facebook":
-      return signUp ? t("Common:SignUpWithFacebook") : t("Common:SignInWithFacebook");
+      return signUp
+        ? t("Common:SignUpWithFacebook")
+        : t("Common:SignInWithFacebook");
     case "twitter":
-      return signUp ? t("Common:SignUpWithTwitter") : t("Common:SignInWithTwitter");
+      return signUp
+        ? t("Common:SignUpWithTwitter")
+        : t("Common:SignInWithTwitter");
     case "linkedin":
-      return signUp ? t("Common:SignUpWithLinkedIn") : t("Common:SignInWithLinkedIn");
+      return signUp
+        ? t("Common:SignUpWithLinkedIn")
+        : t("Common:SignInWithLinkedIn");
     case "microsoft":
-      return signUp ? t("Common:SignUpWithMicrosoft") : t("Common:SignInWithMicrosoft");
+      return signUp
+        ? t("Common:SignUpWithMicrosoft")
+        : t("Common:SignInWithMicrosoft");
     case "sso":
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
@@ -321,12 +336,6 @@ export function getLanguage(lng) {
 
   return lng;
 }
-
-export const getDefaultOformLocale = () => {
-  const avialableLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
-  const userLocale = getCookie(LANGUAGE) || "en";
-  return avialableLocales.includes(userLocale) ? userLocale : "en";
-};
 
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
@@ -442,7 +451,7 @@ export function isElementInViewport(el) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-    (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -652,6 +661,6 @@ export const getSystemTheme = () => {
       : ThemeKeys.BaseStr
     : window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    ? ThemeKeys.DarkStr
+    : ThemeKeys.BaseStr;
 };

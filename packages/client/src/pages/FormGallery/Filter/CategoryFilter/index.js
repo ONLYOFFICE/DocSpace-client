@@ -37,16 +37,21 @@ export const StyledCategoryFilterWrapper = styled.div`
   `}
 `;
 
-const CategoryFilter = ({ fetchCategoryList, fetchCategories }) => {
+const CategoryFilter = ({
+  fetchCategoryTypes,
+  fetchCategoriesOfCategoryType,
+}) => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
     (async () => {
-      let newMenuItems = await fetchCategoryList();
+      let newMenuItems = await fetchCategoryTypes();
 
       const categoryPromises = newMenuItems.map(
         (item) =>
-          new Promise((res) => res(fetchCategories(item.attributes.categoryId)))
+          new Promise((res) =>
+            res(fetchCategoriesOfCategoryType(item.attributes.categoryId))
+          )
       );
 
       Promise.all(categoryPromises)
@@ -77,6 +82,6 @@ const CategoryFilter = ({ fetchCategoryList, fetchCategories }) => {
   );
 };
 export default inject(({ oformsStore }) => ({
-  fetchCategoryList: oformsStore.fetchCategoryList,
-  fetchCategories: oformsStore.fetchCategories,
+  fetchCategoryTypes: oformsStore.fetchCategoryTypes,
+  fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
 }))(observer(CategoryFilter));

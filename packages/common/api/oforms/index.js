@@ -11,27 +11,12 @@ export const getCategoryById = async (url, categorizeBy, id, locale) => {
   return res?.data?.data;
 };
 
-export const getCategoryList = async (url, locale = "en") => {
+export const getCategoryTypes = async (url, locale = "en") => {
   const res = await axios.get(`${url}?populate=*&locale=${locale}`);
   return res?.data?.data;
 };
 
-export const getCategories = async (url, locale = "en") => {
-  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data?.data;
-};
-
-export const getCategoriesByBranch = async (url, locale = "en") => {
-  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data?.data;
-};
-
-export const getCategoriesByType = async (url, locale = "en") => {
-  const res = await axios.get(`${url}?populate=*&locale=${locale}`);
-  return res?.data?.data;
-};
-
-export const getPopularCategories = async (url, locale = "en") => {
+export const getCategoriesOfCategoryType = async (url, locale = "en") => {
   const res = await axios.get(`${url}?populate=*&locale=${locale}`);
   return res?.data?.data;
 };

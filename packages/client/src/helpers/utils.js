@@ -224,23 +224,3 @@ export const filterUserRoleOptions = (
 
   return newOptions;
 };
-
-export const getOformCategoryTitle = (category, locale = null) => {
-  if (!category) return "";
-
-  let categoryType = category.attributes.categorie
-    ? "categorie"
-    : category.attributes.type
-    ? "type"
-    : "compilation";
-
-  const categoryTitle = category.attributes[categoryType];
-  if (!locale) return categoryTitle;
-
-  const [localizedCategory] = category.attributes.localizations?.data.filter(
-    (localization) => localization.attributes.locale === locale
-  );
-  return localizedCategory
-    ? localizedCategory.attributes[categoryType]
-    : categoryTitle;
-};

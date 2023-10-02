@@ -12,9 +12,9 @@ import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
 import {
   StyledGalleryNoThumbnail,
   StyledGalleryThumbnail,
+  StyledGalleryFormDescription,
 } from "../../styles/gallery.js";
 import {
-  StyledDescription,
   StyledLink,
   StyledProperties,
   StyledSubtitle,
@@ -69,10 +69,10 @@ const Gallery = ({
         </Text>
       </StyledSubtitle>
 
-      <StyledDescription>
+      <StyledGalleryFormDescription>
         {gallerySelected?.attributes?.template_desc ||
           gallerySelected?.attributes?.description_card}
-      </StyledDescription>
+      </StyledGalleryFormDescription>
 
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">

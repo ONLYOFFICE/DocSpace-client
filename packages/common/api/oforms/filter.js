@@ -1,4 +1,4 @@
-import { getDefaultOformLocale, toUrlParams } from "../../utils";
+import { toUrlParams } from "../../utils";
 
 const PAGE = "pagination[page]";
 const PAGE_SIZE = "pagination[pageSize]";
@@ -13,7 +13,7 @@ const SORT_ORDER = "sortorder";
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 150;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_LOCALE = getDefaultOformLocale();
+const DEFAULT_LOCALE = null;
 const DEFAULT_SEARCH = "";
 const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";

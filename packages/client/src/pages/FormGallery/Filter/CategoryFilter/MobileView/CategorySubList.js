@@ -1,16 +1,13 @@
 import { StyledSubItemMobile } from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import { getDefaultOformLocale } from "@docspace/common/utils";
-
-const categoryLocale = getDefaultOformLocale();
 
 const CategorySubList = ({
   isOpen,
   categoryType,
   categories,
 
+  getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
@@ -25,13 +22,14 @@ const CategorySubList = ({
     <StyledSubItemMobile
       className="dropdown-item item-mobile"
       key={category.id}
-      label={getOformCategoryTitle(category, categoryLocale)}
+      label={getCategoryTitle(category)}
       onClick={() => onFilterByCategory(category)}
     />
   ));
 };
 
 export default inject(({ oformsStore }) => ({
-  filterOformsByCategory: oformsStore.filterOformsByCategory,
+  getCategoryTitle: oformsStore.getCategoryTitle,
   setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
+  filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery", "Common"])(CategorySubList));

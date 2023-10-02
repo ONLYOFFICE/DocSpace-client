@@ -15,6 +15,7 @@ import { CategoryType } from "@docspace/client/src/helpers/constants";
 const FormGallery = ({
   currentCategory,
   fetchCurrentCategory,
+  defaultOformLocale,
   oformsFilter,
   setOformsFilter,
   getOforms,
@@ -48,8 +49,7 @@ const FormGallery = ({
 
   useEffect(() => {
     const firstLoadFilter = OformsFilter.getFilter(location);
-    if (!firstLoadFilter.locale)
-      firstLoadFilter.locale = getDefaultOformLocale();
+    if (!firstLoadFilter.locale) firstLoadFilter.locale = defaultOformLocale;
 
     setOformsFilter(firstLoadFilter);
     getOforms(firstLoadFilter);
@@ -93,6 +93,8 @@ const FormGallery = ({
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
   fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+
+  defaultOformLocale: oformsStore.defaultOformLocale,
 
   oformsFilter: oformsStore.oformsFilter,
   setOformsFilter: oformsStore.setOformsFilter,

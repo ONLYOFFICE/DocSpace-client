@@ -2045,6 +2045,7 @@ const Dark = {
 
     gallery: {
       borderColor: "#292929",
+      descriptionColor: "#eeeeee",
     },
   },
 

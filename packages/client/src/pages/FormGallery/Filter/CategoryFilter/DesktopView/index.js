@@ -5,10 +5,6 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SubList from "./SubList";
-import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import { getDefaultOformLocale } from "@docspace/common/utils";
-
-const categoryLocale = getDefaultOformLocale();
 
 const CategoryFilterDesktop = ({
   t,
@@ -16,6 +12,7 @@ const CategoryFilterDesktop = ({
   menuItems,
 
   currentCategory,
+  getCategoryTitle,
   filterOformsByCategory,
 
   ...rest
@@ -51,8 +48,7 @@ const CategoryFilterDesktop = ({
         advancedOptionsCount={5}
         selectedOption={{
           label:
-            getOformCategoryTitle(currentCategory, categoryLocale) ||
-            t("FormGallery:Categories"),
+            getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
         }}
         advancedOptions={
           <>
@@ -98,11 +94,6 @@ const CategoryFilterDesktop = ({
 };
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
-
-  fetchCategoriesByBranch: oformsStore.fetchCategoriesByBranch,
-  fetchCategoriesByType: oformsStore.fetchCategoriesByType,
-  fetchPopularCategories: oformsStore.fetchPopularCategories,
-
-  oformsFilter: oformsStore.oformsFilter,
+  getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(CategoryFilterDesktop));
+}))(withTranslation(["FormGallery"])(observer(CategoryFilterDesktop)));

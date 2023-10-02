@@ -173,14 +173,6 @@ const StyledSubtitle = styled.div`
   padding: 24px 0;
 `;
 
-const StyledDescription = styled.div`
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-  color: #657077;
-  white-space: pre-line;
-`;
-
 const StyledProperties = styled.div`
   display: flex;
   flex-direction: column;
@@ -288,5 +280,4 @@ export {
   StyledSubtitle,
   StyledProperties,
   StyledLink,
-  StyledDescription,
 };

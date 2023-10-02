@@ -1,10 +1,10 @@
 ﻿import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import IconButton from "@docspace/components/icon-button";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   StyledContainer,
   StyledHeadline,
@@ -20,16 +20,11 @@ import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.naviga
 import api from "@docspace/common/api";
 import { isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
-import { CategoryType } from "@docspace/client/src/helpers/constants";
-import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import { getDefaultOformLocale } from "@docspace/common/utils";
-
-const categoryLocale = getDefaultOformLocale();
 
 const SectionHeaderContent = ({
   t,
   canSubmitToFormGallery,
-
+  getCategoryTitle,
   oformFromFolderId,
 
   setGallerySelected,
@@ -115,8 +110,7 @@ const SectionHeaderContent = ({
       />
 
       <StyledHeadline type="content" truncate>
-        {getOformCategoryTitle(currentCategory, categoryLocale) ||
-          t("Common:OFORMsGallery")}
+        {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
       </StyledHeadline>
 
       <StyledNavigationDrodown
@@ -161,6 +155,7 @@ export default inject(
   ({ auth, filesStore, oformsStore, accessRightsStore, dialogsStore }) => {
     return {
       categoryType: filesStore.categoryType,
+      getCategoryTitle: oformsStore.getCategoryTitle,
 
       oformFromFolderId: oformsStore.oformFromFolderId,
 

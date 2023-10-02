@@ -3,48 +3,14 @@ import * as Styled from "./index.styled";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import DeReactSvgUrl from "PUBLIC_DIR/images/flags/de.react.svg?url";
-import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
-import EsReactSvgUrl from "PUBLIC_DIR/images/flags/es.react.svg?url";
-import FrReactSvgUrl from "PUBLIC_DIR/images/flags/fr.react.svg?url";
-import ItReactSvgUrl from "PUBLIC_DIR/images/flags/it.react.svg?url";
-import JaJPReactSvgUrl from "PUBLIC_DIR/images/flags/ja-JP.react.svg?url";
-import ZhCNReactSvgUrl from "PUBLIC_DIR/images/flags/zh-CN.react.svg?url";
+import { flagsIcons } from "@docspace/common/utils/image-flags";
+import { convertToCulture } from "@docspace/common/utils";
 
-const locales = [
-  {
-    key: "en",
-    icon: EnUSReactSvgUrl,
-  },
-  {
-    key: "zh",
-    icon: ZhCNReactSvgUrl,
-  },
-  {
-    key: "it",
-    icon: ItReactSvgUrl,
-  },
-  {
-    key: "fr",
-    icon: FrReactSvgUrl,
-  },
-  {
-    key: "es",
-    icon: EsReactSvgUrl,
-  },
-  {
-    key: "de",
-    icon: DeReactSvgUrl,
-  },
-  {
-    key: "ja",
-    icon: JaJPReactSvgUrl,
-  },
-];
-
-const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
-  const [selectedOption] = locales.filter((l) => l.key === oformsFilter.locale);
-
+const LanguageFilter = ({
+  oformsFilter,
+  oformLocales,
+  filterOformsByLocale,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
   const onCloseDropdown = () => setIsOpen(false);
@@ -82,12 +48,12 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
         selectedOption={{}}
         advancedOptions={
           <>
-            {locales.map((locale) => (
+            {oformLocales.map((locale) => (
               <Styled.LanguageFilterItem
-                key={locale.key}
-                isSelected={locale.key === oformsFilter.locale}
-                icon={locale.icon}
-                onClick={() => onFilterByLocale(locale.key)}
+                key={locale}
+                isSelected={locale === oformsFilter.locale}
+                icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
+                onClick={() => onFilterByLocale(locale)}
                 fillIcon={false}
               />
             ))}
@@ -95,8 +61,10 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
         }
       >
         <Styled.LanguageFilterSelectedItem
-          key={selectedOption.key}
-          icon={selectedOption.icon}
+          key={oformsFilter.locale}
+          icon={flagsIcons?.get(
+            `${convertToCulture(oformsFilter.locale)}.react.svg`
+          )}
           fillIcon={false}
         />
       </Styled.LanguangeComboBox>
@@ -106,6 +74,6 @@ const LanguageFilter = ({ oformsFilter, filterOformsByLocale }) => {
 
 export default inject(({ auth, oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
+  oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
 }))(observer(LanguageFilter));

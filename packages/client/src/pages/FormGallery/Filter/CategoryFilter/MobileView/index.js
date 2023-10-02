@@ -7,8 +7,6 @@ import { withTranslation } from "react-i18next";
 import CategorySubList from "./CategorySubList";
 import Scrollbar from "@docspace/components/scrollbar";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
-import { getOformCategoryTitle } from "@docspace/client/src/helpers/utils";
-import { getDefaultOformLocale } from "@docspace/common/utils";
 
 const CategoryFilterMobile = ({
   t,
@@ -16,6 +14,7 @@ const CategoryFilterMobile = ({
   menuItems,
 
   currentCategory,
+  getCategoryTitle,
   filterOformsByCategory,
 
   ...rest
@@ -46,8 +45,7 @@ const CategoryFilterMobile = ({
       <ComboButton
         selectedOption={{
           label:
-            getOformCategoryTitle(currentCategory, getDefaultOformLocale()) ||
-            t("FormGallery:Categories"),
+            getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
         }}
         isOpen={isOpen}
         scaled={true}
@@ -107,5 +105,6 @@ const CategoryFilterMobile = ({
 
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
+  getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
-}))(withTranslation(["FormGallery"])(CategoryFilterMobile));
+}))(withTranslation(["FormGallery"])(observer(CategoryFilterMobile)));

@@ -5,29 +5,31 @@ import { submitToGallery } from "@docspace/common/api/oforms";
 
 import {
   getCategoryById,
-  getCategoryList,
-  getCategories,
-  getCategoriesByBranch,
-  getCategoriesByType,
-  getPopularCategories,
+  getCategoryTypes,
+  getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
-import { combineUrl, getDefaultOformLocale } from "@docspace/common/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
-import config from "PACKAGE_FILE";
+
+import { getCookie } from "@docspace/common/utils";
+import { LANGUAGE } from "@docspace/common/constants";
+
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 class OformsStore {
   authStore;
 
   oformFiles = null;
+  gallerySelected = null;
+  oformsIsLoading = false;
+
   oformsFilter = OformsFilter.getDefault();
-  currentCategory = null;
 
   oformFromFolderId = CategoryType.SharedRoom;
 
-  oformsIsLoading = false;
-  gallerySelected = null;
+  currentCategory = null;
+  // categoryIds = ["categories", "types", "compilations"];
+  categoryTypeTitles = ["categorie", "type", "compilation"];
+
+  oformLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -36,6 +38,11 @@ class OformsStore {
   constructor(authStore) {
     this.authStore = authStore;
     makeAutoObservable(this);
+  }
+
+  get defaultOformLocale() {
+    const userLocale = getCookie(LANGUAGE) || "en";
+    return this.oformLocales.includes(userLocale) ? userLocale : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -90,6 +97,20 @@ class OformsStore {
     });
   };
 
+  getCategoryTitle = (category, locale = this.defaultOformLocale) => {
+    if (!category) return "";
+
+    const categoryType = this.categoryTypeTitles.filter(
+      (categoryTitle) => !!category.attributes[categoryTitle]
+    );
+    const categoryTitle = category.attributes[categoryType];
+
+    const [localizedCategory] = category.attributes.localizations?.data.filter(
+      (localization) => localization.attributes.locale === locale
+    );
+    return localizedCategory?.attributes[categoryType] || categoryTitle;
+  };
+
   submitToFormGallery = async (file, formName, language, signal = null) => {
     const url = this.authStore.settingsStore.formGallery.uploadUrl;
     const res = await submitToGallery(url, file, formName, language, signal);
@@ -99,7 +120,7 @@ class OformsStore {
   fetchCurrentCategory = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api";
     const { categorizeBy, categoryId } = this.oformsFilter;
-    const locale = getDefaultOformLocale();
+    const locale = this.defaultOformLocale;
 
     if (!categorizeBy || !categoryId) {
       this.setOformsCurrentCategory(null);
@@ -118,39 +139,27 @@ class OformsStore {
     });
   };
 
-  fetchCategoryList = async () => {
+  fetchCategoryTypes = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api/menu-translations";
-    const locale = getDefaultOformLocale();
-    const menuItems = await getCategoryList(url, locale);
+    const locale = this.defaultOformLocale;
+
+    const menuItems = await getCategoryTypes(url, locale);
+    // this.categoryTypeTitles = menuItems.map((item) => item.attributes.categoryTitle);
+    // this.locales = menuItems.map((item) => item.attributes.categoryTitle);
+    this.categoryTypeTitles = ["categorie", "type", "compilation"];
+    this.oformLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
+
     return menuItems;
   };
 
-  fetchCategories = async (id) => {
-    const url = `https://oforms.onlyoffice.com/dashboard/api/${id}`;
-    const locale = getDefaultOformLocale();
-    const categories = await getCategories(url, locale);
+  fetchCategoriesOfCategoryType = async (categoryTypeId) => {
+    const url = `https://oforms.onlyoffice.com/dashboard/api/${categoryTypeId}`;
+
+    const categories = await getCategoriesOfCategoryType(
+      url,
+      this.defaultOformLocale
+    );
     return categories;
-  };
-
-  fetchCategoriesByBranch = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/categories";
-    const { locale } = this.oformsFilter;
-    const categoriesByBranch = await getCategoriesByBranch(url, locale);
-    return categoriesByBranch;
-  };
-
-  fetchCategoriesByType = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/types";
-    const { locale } = this.oformsFilter;
-    const categoriesByType = await getCategoriesByType(url, locale);
-    return categoriesByType;
-  };
-
-  fetchPopularCategories = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/compilations";
-    const { locale } = this.oformsFilter;
-    const popularCategories = await getPopularCategories(url, locale);
-    return popularCategories;
   };
 
   filterOformsByCategory = (categorizeBy, categoryId) => {

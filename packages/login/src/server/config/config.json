@@ -1,6 +1,6 @@
 {
   "PORT": "5011",
   "app": {
-    "appsettings": "../../../../build/config"
+    "appsettings": "../../../../buildtools/config"
   }
 }

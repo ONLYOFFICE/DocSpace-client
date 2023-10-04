@@ -74,13 +74,7 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
 
-  constructor(
-    authStore,
-    treeFoldersStore,
-    filesStore,
-    selectedFolderStore,
-    versionHistoryStore
-  ) {
+  constructor(authStore, treeFoldersStore, filesStore, selectedFolderStore, versionHistoryStore) {
     makeAutoObservable(this);
 
     this.treeFoldersStore = treeFoldersStore;
@@ -125,12 +119,7 @@ class DialogsStore {
   setMoveToPanelVisible = (visible) => {
     !visible && this.deselectActiveFiles();
 
-    if (
-      visible &&
-      !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
-    )
-      return;
+    if (visible && !this.filesStore.hasSelection && !this.filesStore.hasBufferSelection) return;
 
     this.moveToPanelVisible = visible;
   };
@@ -142,11 +131,7 @@ class DialogsStore {
   setCopyPanelVisible = (visible) => {
     !visible && this.deselectActiveFiles();
 
-    if (
-      visible &&
-      !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
-    ) {
+    if (visible && !this.filesStore.hasSelection && !this.filesStore.hasBufferSelection) {
       console.log("No files selected");
       return;
     }
@@ -378,11 +363,7 @@ class DialogsStore {
     this.leaveRoomDialogVisible = visible;
   };
 
-  setChangeRoomOwnerIsVisible = (
-    visible,
-    showBackButton = false,
-    setRoomParams
-  ) => {
+  setChangeRoomOwnerIsVisible = (visible, showBackButton = false, setRoomParams) => {
     this.changeRoomOwnerIsVisible = visible;
 
     this.changeRoomOwnerData = {
@@ -406,6 +387,10 @@ class DialogsStore {
 
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
+  };
+
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
   };
 }
 

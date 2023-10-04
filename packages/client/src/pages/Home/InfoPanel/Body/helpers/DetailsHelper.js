@@ -15,6 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
+import { getCookie } from "@docspace/common/utils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 // Property Content Components
@@ -59,7 +60,7 @@ export const decodeString = (str) => {
 };
 
 export const parseAndFormatDate = (date, personal, culture) => {
-  const locale = personal ? localStorage.getItem(LANGUAGE) : culture;
+  const locale = getCookie(LANGUAGE) || culture;
   const correctDate = getCorrectDate(locale, date);
   return correctDate;
 };
@@ -122,7 +123,8 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    return (this.item.isRoom
+    return (
+      this.item.isRoom
         ? [
             "Owner",
             this.item.providerKey && "Storage Type",

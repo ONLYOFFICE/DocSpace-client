@@ -25,10 +25,14 @@ import {
   getPDFContextModel,
 } from "./helpers/contextModel";
 
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+
 function MediaViewer({
   playlistPos,
   nextMedia,
   prevMedia,
+  pluginContextMenuItems,
+  setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
@@ -192,6 +196,54 @@ function MediaViewer({
         onCopyLink,
       });
 
+    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
+      model.unshift({
+        key: "separator-plugin",
+        isSeparator: true,
+        disabled: false,
+      });
+
+      pluginContextMenuItems.forEach((item) => {
+        const onClick = async (): Promise<void> => {
+          props.onClose();
+
+          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+
+          await item.value.onClick(targetFile.id);
+
+          if (item.value.withActiveItem) setActiveFiles([]);
+        };
+
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("image") &&
+          !targetFile.viewAccessability.ImageView
+        )
+          return;
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("video") &&
+          !targetFile.viewAccessability.MediaView
+        )
+          return;
+
+        model.unshift({
+          id: item.key,
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+
+        desktopModel.unshift({
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+      });
+    }
+
     return isMobile
       ? model
       : isImage && !isMobile
@@ -256,7 +308,9 @@ function MediaViewer({
 
   const onKeydown = (event: KeyboardEvent) => {
     const { code, ctrlKey } = event;
-    if (props.deleteDialogVisible) return;
+
+    const someDialogIsOpen = checkDialogsOpen();
+    if (props.deleteDialogVisible || someDialogIsOpen) return;
 
     if (code in KeyboardEventKeys) {
       const includesKeyboardCode = [

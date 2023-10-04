@@ -35,6 +35,16 @@ const PortalRenaming = loadable(() =>
 const WhiteLabel = loadable(() =>
   import("../pages/PortalSettings/categories/common/Branding/whitelabel")
 );
+const CompanyInfoSettings = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
+  )
+);
+const AdditionalResources = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/common/Branding/additionalResources"
+  )
+);
 const SecuritySettings = loadable(() =>
   import("../pages/PortalSettings/categories/security/index.js")
 );
@@ -93,9 +103,25 @@ const ThirdParty = loadable(() =>
     "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
   )
 );
+
+const DocumentService = loadable(() =>
+  import("../pages/PortalSettings/categories/integration/DocumentService")
+);
+
 const SingleSignOn = loadable(() =>
   import("../pages/PortalSettings/categories/integration/SingleSignOn")
 );
+const SPSettings = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
+  )
+);
+const SPMetadata = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
+  )
+);
+
 const DeveloperTools = loadable(() =>
   import("../pages/PortalSettings/categories/developer-tools/index.js")
 );
@@ -150,6 +176,18 @@ const PortalSettingsRoutes = {
       element: <CustomizationSettings />,
     },
     {
+      path: "customization/branding/white-label",
+      element: <WhiteLabel />,
+    },
+    {
+      path: "customization/branding/company-info-settings",
+      element: <CompanyInfoSettings />,
+    },
+    {
+      path: "customization/branding/additional-resources",
+      element: <AdditionalResources />,
+    },
+    {
       path: "customization/appearance",
       element: <CustomizationSettings />,
     },
@@ -168,10 +206,6 @@ const PortalSettingsRoutes = {
     {
       path: "customization/general/portal-renaming",
       element: <PortalRenaming />,
-    },
-    {
-      path: "common/whitelabel",
-      element: <WhiteLabel />,
     },
     {
       path: "security",
@@ -219,7 +253,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration",
-      element: <Integration />,
+      element: <Navigate to="integration/third-party-services" />,
     },
     {
       path: "integration/third-party-services",
@@ -230,7 +264,19 @@ const PortalSettingsRoutes = {
       element: <Integration />,
     },
     {
+      path: "integration/single-sign-on/sp-settings",
+      element: <SPSettings />,
+    },
+    {
+      path: "integration/single-sign-on/sp-metadata",
+      element: <SPMetadata />,
+    },
+    {
       path: "integration/portal-integration",
+      element: <Integration />,
+    },
+    {
+      path: "integration/document-service",
       element: <Integration />,
     },
     {
@@ -276,6 +322,10 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/webhooks/:id/:eventId",
       element: <WebhookDetails />,
+    },
+    {
+      path: "developer-tools/plugins",
+      element: <DeveloperTools />,
     },
     {
       path: "backup",

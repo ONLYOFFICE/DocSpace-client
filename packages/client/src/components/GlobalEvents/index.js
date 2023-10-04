@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback, useRef, memo } from "react";
+
+import { inject, observer } from "mobx-react";
 
 import { FileAction } from "@docspace/common/constants";
 import { Events } from "@docspace/common/constants";
@@ -8,8 +10,9 @@ import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
+import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
-const GlobalEvents = () => {
+const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -49,6 +52,14 @@ const GlobalEvents = () => {
     bodyDescription: null,
     headerTitle: null,
   });
+  const [createPluginFileDialog, setCreatePluginFileProps] = useState({
+    visible: false,
+    props: null,
+    onClose: null,
+  });
+
+  const eventHandlersList = useRef([]);
+
   const onCreate = useCallback((e) => {
     const { payload } = e;
 
@@ -121,10 +132,28 @@ const GlobalEvents = () => {
   const onChangeUserType = useCallback((e) => {
     setChangeUserTypeDialogProps({
       visible: true,
-      onClose: () =>
-        setChangeUserTypeDialogProps({ visible: false, onClose: null }),
+      onClose: () => {
+        setChangeUserTypeDialogProps({ visible: false, onClose: null });
+      },
     });
   }, []);
+
+  const onCreatePluginFileDialog = useCallback(
+    (e) => {
+      if (!enablePlugins) return;
+
+      const { payload } = e;
+      setCreatePluginFileProps({
+        ...payload,
+        visible: true,
+        onClose: () => {
+          payload.onClose && payload.onClose();
+          setCreatePluginFileProps({ visible: false, onClose: null });
+        },
+      });
+    },
+    [enablePlugins]
+  );
 
   const onChangeQuota = useCallback((e) => {
     const { payload } = e;
@@ -158,14 +187,57 @@ const GlobalEvents = () => {
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    if (enablePlugins) {
+      window.addEventListener(
+        Events.CREATE_PLUGIN_FILE,
+        onCreatePluginFileDialog
+      );
+
+      if (eventListenerItemsList) {
+        eventListenerItemsList.forEach((item) => {
+          const eventHandler = (e) => {
+            item.eventHandler(e);
+          };
+
+          eventHandlersList.current.push(eventHandler);
+
+          window.addEventListener(item.eventType, eventHandler);
+        });
+      }
+    }
+
     return () => {
       window.removeEventListener(Events.CREATE, onCreate);
       window.removeEventListener(Events.RENAME, onRename);
       window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
       window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
+
+      if (enablePlugins) {
+        window.removeEventListener(
+          Events.CREATE_PLUGIN_FILE,
+          onCreatePluginFileDialog
+        );
+
+        if (eventListenerItemsList) {
+          eventListenerItemsList.forEach((item, index) => {
+            window.removeEventListener(
+              item.eventType,
+              eventHandlersList.current[index]
+            );
+          });
+        }
+      }
     };
-  }, [onRename, onCreate, onCreateRoom, onEditRoom, onChangeUserType]);
+  }, [
+    onRename,
+    onCreate,
+    onCreateRoom,
+    onEditRoom,
+    onChangeUserType,
+    onCreatePluginFileDialog,
+    enablePlugins,
+  ]);
 
   return [
     createDialogProps.visible && (
@@ -186,10 +258,22 @@ const GlobalEvents = () => {
         {...changeUserTypeDialog}
       />
     ),
+    createPluginFileDialog.visible && (
+      <CreatePluginFile
+        key={Events.CREATE_PLUGIN_FILE}
+        {...createPluginFileDialog}
+      />
+    ),
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
   ];
 };
 
-export default memo(GlobalEvents);
+export default inject(({ auth, pluginStore }) => {
+  const { enablePlugins } = auth.settingsStore;
+
+  const { eventListenerItemsList } = pluginStore;
+
+  return { enablePlugins, eventListenerItemsList };
+})(observer(GlobalEvents));

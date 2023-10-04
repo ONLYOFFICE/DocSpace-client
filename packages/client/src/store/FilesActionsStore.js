@@ -8,6 +8,7 @@ import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -21,6 +22,7 @@ import {
   removeShareFiles,
   createFolder,
   moveToFolder,
+  getFolder,
 } from "@docspace/common/api/files";
 import {
   ConflictResolveType,
@@ -43,7 +45,7 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 import AccountsFilter from "@docspace/common/api/people/filter";
 import { RoomSearchArea } from "@docspace/common/constants";
 import { getObjectByLocation } from "@docspace/common/utils";
-
+import { Events } from "@docspace/common/constants";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/common/api/files/filter";
 import {
@@ -68,6 +70,7 @@ class FilesActionStore {
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
+  processCreatingRoomFromData = false;
 
   constructor(
     authStore,
@@ -80,7 +83,8 @@ class FilesActionStore {
     mediaViewerDataStore,
     accessRightsStore,
     clientLoadingStore,
-    publicRoomStore
+    publicRoomStore,
+    pluginStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -94,6 +98,7 @@ class FilesActionStore {
     this.accessRightsStore = accessRightsStore;
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
+    this.pluginStore = pluginStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -1489,9 +1494,9 @@ class FilesActionStore {
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  setSelectedItems = () => {
-    const selectionLength = this.filesStore.selection.length;
-    const selectionTitle = this.filesStore.selectionTitle;
+  setSelectedItems = (title, length) => {
+    const selectionLength = length ? length : this.filesStore.selection.length;
+    const selectionTitle = title ? title : this.filesStore.selectionTitle;
 
     if (selectionLength !== undefined && selectionTitle) {
       this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(
@@ -1579,6 +1584,10 @@ class FilesActionStore {
         const canDelete = selection.every((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
+      case "create-room":
+        const canCreateRoom = rootFolderType === FolderType.USER;
+
+        return canCreateRoom;
     }
   };
 
@@ -1710,6 +1719,16 @@ class FilesActionStore {
     setIsVisible(true);
   };
 
+  setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
+    this.processCreatingRoomFromData = processCreatingRoomFromData;
+  };
+
+  onClickCreateRoom = () => {
+    this.setProcessCreatingRoomFromData(true);
+    const event = new Event(Events.ROOM_CREATE);
+    window.dispatchEvent(event);
+  };
+
   getOption = (option, t) => {
     const {
       setSharingPanelVisible,
@@ -1738,6 +1757,16 @@ class FilesActionStore {
             label: t("Common:Copy"),
             onClick: () => setCopyPanelVisible(true),
             iconUrl: CopyToReactSvgUrl,
+          };
+
+      case "create-room":
+        if (!this.isAvailableOption("create-room")) return null;
+        else
+          return {
+            id: "menu-create-room",
+            label: t("Files:CreateRoom"),
+            onClick: this.onClickCreateRoom,
+            iconUrl: CatalogRoomsReactSvgUrl,
           };
 
       case "download":
@@ -1879,6 +1908,7 @@ class FilesActionStore {
   };
 
   getAnotherFolderOptions = (itemsCollection, t) => {
+    const createRoom = this.getOption("create-room", t);
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
     const moveTo = this.getOption("moveTo", t);
@@ -1887,6 +1917,7 @@ class FilesActionStore {
     const showInfo = this.getOption("showInfo", t);
 
     itemsCollection
+      .set("createRoom", createRoom)
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("moveTo", moveTo)
@@ -2043,6 +2074,9 @@ class FilesActionStore {
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
 
+    const { fileItemsList } = this.pluginStore;
+    const { enablePlugins } = this.authStore.settingsStore;
+
     const { isLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
@@ -2131,12 +2165,28 @@ class FilesActionStore {
         return;
       }
 
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          currPluginItem.onClick(item);
+
+          return;
+        }
+      }
+
+      return;
+
       return window.open(viewUrl, "_self");
     }
   };
 
   onClickBack = () => {
-    const { roomType } = this.selectedFolderStore;
+    const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles } = this.filesStore;
 
@@ -2181,19 +2231,19 @@ class FilesActionStore {
 
       setSelectedNode(["common"]);
 
-      return navigate(path, { replace: true });
+      return window.DocSpace.navigate(path, { replace: true });
     }
 
     if (categoryType === CategoryType.Accounts) {
       const accountsFilter = AccountsFilter.getDefault();
-      params = accountsFilter.toUrlParams();
+      const params = accountsFilter.toUrlParams();
       const path = getCategoryUrl(CategoryType.Accounts);
 
       clearFiles();
 
       setSelectedNode(["accounts", "filter"]);
 
-      return navigate(`${path}?${params}`, { replace: true });
+      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
   };
 
@@ -2202,13 +2252,22 @@ class FilesActionStore {
 
     const filter = RoomsFilter.getDefault();
 
-    const path = getCategoryUrl(categoryType);
+    const correctCategoryType =
+      categoryType === CategoryType.SharedRoom
+        ? CategoryType.Shared
+        : CategoryType.ArchivedRoom === categoryType
+        ? CategoryType.Archive
+        : categoryType;
+
+    const path = getCategoryUrl(correctCategoryType);
 
     const state = {
       title:
-        this.selectedFolderStore?.navigationPath[
-          this.selectedFolderStore?.navigationPath.length - 1
-        ]?.title || "",
+        (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath[
+            this.selectedFolderStore?.navigationPath?.length - 1
+          ]?.title) ||
+        "",
       isRoot: true,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
@@ -2255,7 +2314,7 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    let id = this.selectedFolderStore.parentId;
+    const id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
@@ -2263,20 +2322,88 @@ class FilesActionStore {
 
     filter.folder = id;
 
+    const categoryType = getCategoryType(window.DocSpace.location);
+    const path = getCategoryUrl(categoryType, id);
+
     const state = {
-      title: navigationPath[0]?.title || "",
+      title: (navigationPath && navigationPath[0]?.title) || "",
       isRoot: navigationPath.length === 1,
       rootFolderType: rootFolderType,
     };
 
-    window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${filter.toUrlParams()}`,
-      { state, replace: true }
-    );
+    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
   };
 
   setGroupMenuBlocked = (blocked) => {
     this.isGroupMenuBlocked = blocked;
+  };
+
+  preparingDataForCopyingToRoom = async (destFolderId, t) => {
+    const { selection, bufferSelection } = this.filesStore;
+
+    let fileIds = [];
+    let folderIds = [];
+
+    const selections =
+      selection.length > 0 && selection[0] != null
+        ? selection
+        : bufferSelection != null
+        ? [bufferSelection]
+        : [];
+
+    if (!selections.length) return;
+    const oneFolder = selections.length === 1 && selections[0].isFolder;
+
+    if (oneFolder) {
+      folderIds = [selections[0].id];
+
+      try {
+        const selectedFolder = await getFolder(selections[0].id);
+        const { folders, files, total } = selectedFolder;
+
+        if (total > 1) this.setSelectedItems(false, total);
+
+        if (total === 1) {
+          const title = !!folders.length ? folders[0].title : files[0].title;
+          this.setSelectedItems(title, total);
+        }
+
+        if (total === 0) {
+          this.filesStore.setSelection([]);
+          this.filesStore.setBufferSelection(null);
+          return;
+        }
+      } catch (err) {
+        toastr.error(err);
+      }
+    }
+
+    !oneFolder &&
+      selections.map((item) => {
+        if (item.fileExst || item.contentLength) fileIds.push(item.id);
+        else folderIds.push(item.id);
+      });
+
+    !oneFolder && this.setSelectedItems();
+    this.filesStore.setSelection([]);
+    this.filesStore.setBufferSelection(null);
+
+    const operationData = {
+      destFolderId,
+      folderIds: folderIds,
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      translations: {
+        copy: t("Common:CopyOperation"),
+      },
+      content: oneFolder,
+    };
+
+    this.uploadDataStore.itemOperationToFolder(operationData);
   };
 }
 

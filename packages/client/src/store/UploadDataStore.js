@@ -14,6 +14,7 @@ import {
   copyToFolder,
   moveToFolder,
   fileCopyAs,
+  getFolder,
 } from "@docspace/common/api/files";
 import toastr from "@docspace/components/toast/toastr";
 import { isMobile } from "react-device-detect";
@@ -1326,7 +1327,8 @@ class UploadDataStore {
     fileIds,
     conflictResolveType,
     deleteAfter,
-    operationId
+    operationId,
+    content
   ) => {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.secondaryProgressDataStore;
@@ -1336,7 +1338,8 @@ class UploadDataStore {
       folderIds,
       fileIds,
       conflictResolveType,
-      deleteAfter
+      deleteAfter,
+      content
     )
       .then((res) => {
         const pbData = { icon: "duplicate", operationId };
@@ -1449,6 +1452,7 @@ class UploadDataStore {
       deleteAfter,
       isCopy,
       translations,
+      content,
     } = data;
     const conflictResolveType = data.conflictResolveType
       ? data.conflictResolveType
@@ -1473,7 +1477,8 @@ class UploadDataStore {
           fileIds,
           conflictResolveType,
           deleteAfter,
-          operationId
+          operationId,
+          content
         )
       : this.moveToAction(
           destFolderId,

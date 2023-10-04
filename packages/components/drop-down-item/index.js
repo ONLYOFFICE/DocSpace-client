@@ -31,10 +31,11 @@ const DropDownItem = (props) => {
     isActiveDescendant,
   } = props;
 
-  const { withToggle, checked, onClick, ...rest } = props;
+  const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
 
   const onClickAction = (e) => {
     onClick && !disabled && onClick(e);
+    onClickSelectedItem && isSelected && onClickSelectedItem();
   };
 
   const stopPropagation = (event) => {
@@ -61,8 +62,8 @@ const DropDownItem = (props) => {
       {icon && (
         <IconWrapper className="drop-down-icon">
           {!withoutIcon ? (
-            !icon.includes("images/") ? (
-              <img src={icon} />
+            !icon.includes("images/") && !icon.includes(".svg") ? (
+              <img className="drop-down-icon_image" src={icon} />
             ) : (
               <ReactSVG
                 src={icon}

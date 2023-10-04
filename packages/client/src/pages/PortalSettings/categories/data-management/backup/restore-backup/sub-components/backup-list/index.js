@@ -170,18 +170,25 @@ const BackupListModalDialog = (props) => {
     setState((val) => ({ ...val, isChecked: !val.isChecked }));
   };
 
-  const { onModalClose, isVisibleDialog, t, isCopyingToLocal, theme, standalone } = props;
+  const {
+    onModalClose,
+    isVisibleDialog,
+    t,
+    isCopyingToLocal,
+    theme,
+    standalone,
+  } = props;
   const { filesList, isLoading, selectedFileIndex, isChecked } = state;
 
-    const helpContent = () => (
-      <>
-        <Text className="restore-backup_warning-description">
-          {t("RestoreBackupWarningText")}{" "}
-          {!standalone && (
-            <Text as="span" className="restore-backup_warning-link">
-              {t("RestoreBackupResetInfoWarningText")}
-            </Text>
-          )}
+  const helpContent = () => (
+    <>
+      <Text className="restore-backup_warning-description">
+        {t("RestoreBackupWarningText")}{" "}
+        {!standalone && (
+          <Text as="span" className="restore-backup_warning-link">
+            {t("RestoreBackupResetInfoWarningText")}
+          </Text>
+        )}
       </Text>
     </>
   );

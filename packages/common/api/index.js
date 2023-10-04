@@ -12,6 +12,7 @@ import * as files from "./files";
 import * as rooms from "./rooms";
 import * as plugins from "./plugins";
 import * as management from "./management";
+import * as oforms from "./oforms";
 
 export default {
   Filter,
@@ -27,5 +28,6 @@ export default {
   files,
   rooms,
   plugins,
+  oforms,
   management,
 };

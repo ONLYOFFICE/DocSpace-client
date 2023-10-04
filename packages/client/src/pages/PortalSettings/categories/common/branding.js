@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
+
 import { inject, observer } from "mobx-react";
-import { isMobile, isDesktop } from "react-device-detect";
-
-import { useIsSmallWindow } from "@docspace/common/utils/useIsSmallWindow";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import AdditionalResources from "./Branding/additionalResources";
-import CompanyInfoSettings from "./Branding/companyInfoSettings";
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
-import Whitelabel from "./Branding/whitelabel";
-
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning/index";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import Whitelabel from "./Branding/whitelabel";
+import CompanyInfoSettings from "./Branding/companyInfoSettings";
+import styled from "styled-components";
+import AdditionalResources from "./Branding/additionalResources";
+
+import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
+
+import MobileView from "./Branding/MobileView";
 
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 import { resetSessionStorage } from "../../utils";
+import { useIsMobileView } from "../../utils/useIsMobileView";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -61,20 +60,14 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
-  initSettings,
 }) => {
-  const isSmallWindow = useIsSmallWindow(795);
-
-  const init = async () => {
-    await initSettings();
-  };
+  const isMobileView = useIsMobileView();
 
   useEffect(() => {
     setDocumentTitle(t("Branding"));
   }, []);
 
   useEffect(() => {
-    init();
     return () => {
       if (!window.location.pathname.includes("customization")) {
         resetSessionStorage();
@@ -82,17 +75,11 @@ const Branding = ({
     };
   }, []);
 
-  if (isSmallWindow)
-    return (
-      <BreakpointWarning sectionName={t("Settings:Branding")} isSmallWindow />
-    );
-
-  if (isMobile)
-    return <BreakpointWarning sectionName={t("Settings:Branding")} />;
+  if (isMobileView) return <MobileView />;
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
-      <Whitelabel isSettingPaid={isSettingPaid} />
+      <Whitelabel />
       {standalone && (
         <>
           <hr />
@@ -103,8 +90,8 @@ const Branding = ({
           ) : (
             <LoaderBrandingDescription />
           )}
-          <CompanyInfoSettings isSettingPaid={isSettingPaid} />
-          <AdditionalResources isSettingPaid={isSettingPaid} />
+          <CompanyInfoSettings />
+          <AdditionalResources />
         </>
       )}
     </StyledComponent>
@@ -114,13 +101,12 @@ const Branding = ({
 export default inject(({ auth, setup, common }) => {
   const { currentQuotaStore, settingsStore } = auth;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData, initSettings } = common;
+  const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone } = settingsStore;
 
   return {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
-    initSettings,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

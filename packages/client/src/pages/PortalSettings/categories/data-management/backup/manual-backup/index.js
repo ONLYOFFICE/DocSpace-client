@@ -105,20 +105,6 @@ class ManualBackup extends React.Component {
 
   componentDidMount() {
     const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
-    const valueFromLocalStorage = getFromLocalStorage("LocalCopyStorageType");
-
-    if (valueFromLocalStorage) {
-      let newStateObj = {};
-      const name = valueFromLocalStorage;
-      newStateObj[name] = true;
-      const newState = this.switches.filter((el) => el !== name);
-      newState.forEach((name) => (newStateObj[name] = false));
-      this.setState({
-        ...newStateObj,
-      });
-    } else {
-      saveToLocalStorage("LocalCopyStorageType", "isCheckedTemporaryStorage");
-    }
 
     if (isNotPaidPeriod) {
       this.setState({
@@ -154,7 +140,7 @@ class ManualBackup extends React.Component {
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
-
+    saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement);
       setDownloadingProgress(1);
@@ -179,7 +165,6 @@ class ManualBackup extends React.Component {
     this.setState({
       ...newStateObj,
     });
-    saveToLocalStorage("LocalCopyStorageType", name);
   };
   onMakeCopy = async (
     selectedFolder,

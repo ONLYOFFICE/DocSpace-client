@@ -12,7 +12,7 @@
     "yarn": ">=3"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build",
+    "build": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run build",
     "bump": "yarn version apply --all",
     "clean": "yarn workspaces foreach -vptiR run clean",
     "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",

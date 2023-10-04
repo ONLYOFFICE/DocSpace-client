@@ -14,7 +14,6 @@ import TableContainer from "@docspace/components/table-container/TableContainer"
 import TableBody from "@docspace/components/table-container/TableBody";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-// import { mockData } from "../../mockData";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
@@ -35,8 +34,7 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
     }
   }
   .clear-icon {
@@ -80,8 +78,7 @@ const TableView = (props) => {
     setSearchValue("");
   };
 
-  const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
+  const isIndeterminate = checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -120,8 +117,7 @@ const TableView = (props) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
-          >
+            fetchMoreFiles={() => {}}>
             {accountsData.map((data) => (
               <UsersTableRow
                 t={t}
@@ -151,12 +147,7 @@ const TableView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

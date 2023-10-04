@@ -28,7 +28,7 @@ const SimpleFilesRowContent = styled(RowContent)`
             margin-left: 0px;
           `
         : css`
-    margin-right: 0px;
+            margin-right: 0px;
           `}
 
     @media ${desktop} {
@@ -55,7 +55,7 @@ const SimpleFilesRowContent = styled(RowContent)`
             margin: -2px -2px -2px 6px;
           `
         : css`
-    margin: -2px 6px -2px -2px;
+            margin: -2px 6px -2px -2px;
           `}
   }
 
@@ -89,7 +89,7 @@ const SimpleFilesRowContent = styled(RowContent)`
                 margin-left: 24px !important;
               `
             : css`
-        margin-right: 24px !important;
+                margin-right: 24px !important;
               `}
       }
 
@@ -100,7 +100,7 @@ const SimpleFilesRowContent = styled(RowContent)`
                 margin-left: 22px;
               `
             : css`
-        margin-right: 22px;
+                margin-right: 22px;
               `}
       }
 
@@ -112,7 +112,7 @@ const SimpleFilesRowContent = styled(RowContent)`
                 margin: 5px 0 0 24px;
               `
             : css`
-        margin: 5px 24px 0 0;
+                margin: 5px 24px 0 0;
               `}
       }
     `}
@@ -124,7 +124,7 @@ const SimpleFilesRowContent = styled(RowContent)`
             padding: 12px 0px 0px 12px;
           `
         : css`
-    padding: 12px 12px 0px 0px;
+            padding: 12px 12px 0px 0px;
           `}
     margin-top: -12px;
   }
@@ -147,6 +147,7 @@ const FilesRowContent = ({
   filterSortBy,
   createdDate,
   fileOwner,
+  isDefaultRoomsQuotaSet,
 }) => {
   const {
     contentLength,
@@ -197,7 +198,12 @@ const FilesRowContent = ({
   const additionalComponent = () => {
     if (isRooms) {
       let value = t(RoomsTypeTranslations[item.roomType]);
-      const spaceQuota = getSpaceQuotaAsText(t, usedSpace, quotaLimit);
+      const spaceQuota = getSpaceQuotaAsText(
+        t,
+        usedSpace,
+        quotaLimit,
+        isDefaultRoomsQuotaSet
+      );
 
       if (!isMobileOnly) value = `${value} | ${spaceQuota}`;
 
@@ -272,11 +278,14 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 
   const isRooms = isRoomsFolder || isArchiveFolder;
   const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+  const { currentQuotaStore } = auth;
 
+  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
   return {
     filterSortBy,
     theme: auth.settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
+    isDefaultRoomsQuotaSet,
   };
 })(
   observer(

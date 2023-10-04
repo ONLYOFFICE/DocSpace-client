@@ -17,6 +17,7 @@ const ItemTitle = ({
   roomsView,
   getIcon,
   getUserContextOptions,
+  setCalendarDay,
 }) => {
   if (!selection) return null;
 
@@ -53,12 +54,14 @@ const ItemTitle = ({
       isSeveralItems={isSeveralItems}
       getIcon={getIcon}
       openHistory={openHistory}
+      setCalendarDay={setCalendarDay}
     />
   );
 };
 
 export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
-  const { selectionParentRoom, roomsView } = auth.infoPanelStore;
+  const { selectionParentRoom, roomsView, setCalendarDay } =
+    auth.infoPanelStore;
   const { getIcon } = settingsStore;
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
   const { gallerySelected } = oformsStore;
@@ -69,5 +72,6 @@ export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
     selectionParentRoom,
     roomsView,
     getIcon,
+    setCalendarDay,
   };
 })(observer(ItemTitle));

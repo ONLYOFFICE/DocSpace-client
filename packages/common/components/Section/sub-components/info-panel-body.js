@@ -30,8 +30,6 @@ const StyledScrollbar = styled(Scrollbar)`
 const SubInfoPanelBody = ({ children, isInfoPanelScrollLocked }) => {
   const content = children?.props?.children;
 
-  console.log("SubInfoPanelBody");
-
   return (
     <StyledScrollbar
       $isScrollLocked={isInfoPanelScrollLocked}

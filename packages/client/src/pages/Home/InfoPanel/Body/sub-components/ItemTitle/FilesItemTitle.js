@@ -22,6 +22,7 @@ const FilesItemTitle = ({
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
+  setCalendarDay,
 }) => {
   const itemTitleRef = useRef();
 
@@ -84,7 +85,9 @@ const FilesItemTitle = ({
         )}
         {selection && (
           <StyledItemOptions>
-            {openHistory && <CalendarComponent />}
+            {openHistory && (
+              <CalendarComponent setCalendarDay={setCalendarDay} />
+            )}
 
             <ItemContextOptions
               t={t}

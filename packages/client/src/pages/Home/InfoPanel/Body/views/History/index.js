@@ -23,6 +23,7 @@ const History = ({
   openUser,
   isVisitor,
   isCollaborator,
+  calendarDay,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
@@ -63,6 +64,37 @@ const History = ({
   }, [selection.id]);
 
   useEffect(() => {
+    if (!calendarDay) return;
+
+    const historyListNode = document.getElementById("history-list-info-panel");
+
+    if (!historyListNode) return;
+
+    const scroll = historyListNode.closest(".scroller");
+    let datesCoincidingWithCalendarDay = [];
+
+    selectionHistory.forEach((item) => {
+      item.feeds.forEach((feed) => {
+        if (feed.json.ModifiedDate.slice(0, 10) === calendarDay)
+          datesCoincidingWithCalendarDay.push(feed.json.ModifiedDate);
+      });
+    });
+
+    if (!datesCoincidingWithCalendarDay.length) return;
+
+    const dayNode = historyListNode.getElementsByClassName(
+      datesCoincidingWithCalendarDay[0]
+    );
+
+    if (!dayNode[0]) return;
+
+    //TODO:const 120
+    const y = dayNode[0].offsetTop - 120;
+
+    scroll.scrollTo(0, y);
+  }, [calendarDay]);
+
+  useEffect(() => {
     return () => {
       abortControllerRef.current?.abort();
       isMount.current = false;
@@ -72,10 +104,8 @@ const History = ({
   if (!selectionHistory) return <Loaders.InfoPanelViewLoader view="history" />;
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
-  console.log("selectionHistory", selectionHistory);
-
   return (
-    <StyledHistoryList id="StyledHistoryList">
+    <StyledHistoryList id="history-list-info-panel">
       {selectionHistory.map(({ day, feeds }) => [
         <StyledHistorySubtitle key={day}>{day}</StyledHistorySubtitle>,
         ...feeds.map((feed, i) => (
@@ -110,6 +140,7 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     selectionParentRoom,
     getInfoPanelItemIcon,
     openUser,
+    calendarDay,
   } = auth.infoPanelStore;
   const { personal, culture } = auth.settingsStore;
 
@@ -134,5 +165,6 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     openUser,
     isVisitor,
     isCollaborator,
+    calendarDay,
   };
 })(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

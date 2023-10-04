@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import moment from "moment";
 import Calendar from "@docspace/components/calendar";
 
 const StyledCalendar = styled.div`
@@ -18,14 +19,15 @@ const StyledCalendar = styled.div`
   }
 `;
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ setCalendarDay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
   const toggleCalendar = () => setIsOpen((open) => !open);
   const onDateSet = (date) => {
-    console.log("date", date);
+    const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);
+    setCalendarDay(formattedDate._i);
     setIsOpen(false);
   };
 

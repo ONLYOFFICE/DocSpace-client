@@ -31,6 +31,7 @@ class InfoPanelStore {
   updateRoomMembers = null;
   isScrollLocked = false;
   historyWithFileList = false;
+  calendarDay = null;
 
   authStore = null;
   settingsStore = null;
@@ -86,6 +87,10 @@ class InfoPanelStore {
 
   setIsScrollLocked = (isScrollLocked) => {
     this.isScrollLocked = isScrollLocked;
+  };
+
+  setCalendarDay = (calendarDay) => {
+    this.calendarDay = calendarDay;
   };
 
   // Selection helpers //

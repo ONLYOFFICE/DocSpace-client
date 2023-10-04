@@ -19,6 +19,7 @@ import InfoPanel from "./sub-components/info-panel";
 import SubInfoPanelBody from "./sub-components/info-panel-body";
 import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
+import SubSectionSubmenu from "./sub-components/section-submenu";
 
 import FloatingButton from "@docspace/components/floating-button";
 
@@ -67,6 +68,7 @@ const Section = (props) => {
   let sectionFooterContent = null;
   let infoPanelBodyContent = null;
   let infoPanelHeaderContent = null;
+  let sectionSubmenuContent = null;
 
   React.Children.forEach(children, (child) => {
     const childType =
@@ -94,6 +96,10 @@ const Section = (props) => {
       case Section.InfoPanelHeader.displayName:
         infoPanelHeaderContent = child;
         break;
+      case Section.SectionSubmenu.displayName:
+        sectionSubmenuContent = child;
+        break;
+
       default:
         break;
     }
@@ -102,6 +108,7 @@ const Section = (props) => {
   const isSectionHeaderAvailable = !!sectionHeaderContent,
     isSectionFilterAvailable = !!sectionFilterContent,
     isSectionPagingAvailable = !!sectionPagingContent,
+    isSectionSubmenuAvailable = !!sectionSubmenuContent,
     isSectionBodyAvailable =
       !!sectionBodyContent ||
       isSectionFilterAvailable ||
@@ -177,6 +184,15 @@ const Section = (props) => {
                   : null}
               </SubSectionHeader>
             )}
+
+            {isSectionSubmenuAvailable && !isMobile && (
+              <SubSectionSubmenu>
+                {sectionSubmenuContent
+                  ? sectionSubmenuContent.props.children
+                  : null}
+              </SubSectionSubmenu>
+            )}
+
             {isSectionFilterAvailable && !isMobile && (
               <>
                 <SubSectionFilter
@@ -214,6 +230,13 @@ const Section = (props) => {
                         ? sectionHeaderContent.props.children
                         : null}
                     </SubSectionHeader>
+                  )}
+                  {isSectionSubmenuAvailable && isMobile && (
+                    <SubSectionSubmenu>
+                      {sectionSubmenuContent
+                        ? sectionSubmenuContent.props.children
+                        : null}
+                    </SubSectionSubmenu>
                   )}
                   {isSectionFilterAvailable && isMobile && (
                     <SubSectionFilter className="section-body_filter">
@@ -338,6 +361,11 @@ Section.InfoPanelHeader = () => {
   return null;
 };
 Section.InfoPanelHeader.displayName = "InfoPanelHeader";
+
+Section.SectionSubmenu = () => {
+  return null;
+};
+Section.SectionSubmenu.displayName = "SectionSubmenu";
 
 Section.propTypes = {
   children: PropTypes.any,

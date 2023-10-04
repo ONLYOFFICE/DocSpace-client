@@ -37,11 +37,17 @@ import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import ReportDialog from "./ReportDialog";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import CancelUploadDialog from "./CancelUploadDialog";
 =======
 import PluginDialog from "./PluginDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 >>>>>>> develop
+=======
+import CancelUploadDialog from "./CancelUploadDialog";
+import PluginDialog from "./PluginDialog";
+import DeletePluginDialog from "./DeletePluginDialog";
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 
 export {
   EmptyTrashDialog,
@@ -83,9 +89,15 @@ export {
   SettingsPluginDialog,
   ReportDialog,
 <<<<<<< HEAD
+<<<<<<< HEAD
   CancelUploadDialog,
 =======
   PluginDialog,
   DeletePluginDialog,
 >>>>>>> develop
+=======
+  CancelUploadDialog,
+  PluginDialog,
+  DeletePluginDialog,
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 };

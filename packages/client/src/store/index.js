@@ -65,16 +65,22 @@ const publicRoomStore = new PublicRoomStore();
 const clientLoadingStore = new ClientLoadingStore();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore, publicRoomStore);
 =======
+=======
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 const settingsStore = new SettingsStore(
   thirdPartyStore,
   treeFoldersStore,
   publicRoomStore,
   pluginStore,
-  authStore
+  authStore,
 );
+<<<<<<< HEAD
 >>>>>>> develop
+=======
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
@@ -87,11 +93,16 @@ const filesStore = new FilesStore(
   accessRightsStore,
   clientLoadingStore,
 <<<<<<< HEAD
+<<<<<<< HEAD
   publicRoomStore,
 =======
   pluginStore,
   publicRoomStore
 >>>>>>> develop
+=======
+  pluginStore,
+  publicRoomStore,
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(filesStore, settingsStore, publicRoomStore);
@@ -133,9 +144,13 @@ const filesActionsStore = new FilesActionsStore(
   clientLoadingStore,
   publicRoomStore,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   pluginStore
 >>>>>>> develop
+=======
+  pluginStore,
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -151,9 +166,13 @@ const contextOptionsStore = new ContextOptionsStore(
   selectedFolderStore,
   publicRoomStore,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   pluginStore
 >>>>>>> develop
+=======
+  pluginStore,
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -163,7 +182,7 @@ const hotkeyStore = new HotkeyStore(
   filesActionsStore,
   treeFoldersStore,
   uploadDataStore,
-  selectedFolderStore
+  selectedFolderStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -173,9 +192,13 @@ const profileActionsStore = new ProfileActionsStore(
   treeFoldersStore,
   selectedFolderStore,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   pluginStore
 >>>>>>> develop
+=======
+  pluginStore,
+>>>>>>> 224609c3719ddb598fdf77375a5d08a1729d3b35
 );
 
 peopleStore.profileActionsStore = profileActionsStore;

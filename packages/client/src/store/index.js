@@ -69,7 +69,7 @@ const settingsStore = new SettingsStore(
   treeFoldersStore,
   publicRoomStore,
   pluginStore,
-  authStore,
+  authStore
 );
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
@@ -82,11 +82,16 @@ const filesStore = new FilesStore(
   thirdPartyStore,
   accessRightsStore,
   clientLoadingStore,
-  pluginStore,
   publicRoomStore,
+  pluginStore,
+  publicRoomStore
 );
 
-const mediaViewerDataStore = new MediaViewerDataStore(filesStore, settingsStore, publicRoomStore);
+const mediaViewerDataStore = new MediaViewerDataStore(
+  filesStore,
+  settingsStore,
+  publicRoomStore
+);
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore);
@@ -96,10 +101,15 @@ const dialogsStore = new DialogsStore(
   treeFoldersStore,
   filesStore,
   selectedFolderStore,
-  versionHistoryStore,
+  versionHistoryStore
 );
 
-const peopleStore = new PeopleStore(authStore, setupStore, accessRightsStore, dialogsStore);
+const peopleStore = new PeopleStore(
+  authStore,
+  setupStore,
+  accessRightsStore,
+  dialogsStore
+);
 
 const uploadDataStore = new UploadDataStore(
   authStore,
@@ -109,7 +119,7 @@ const uploadDataStore = new UploadDataStore(
   secondaryProgressDataStore,
   primaryProgressDataStore,
   dialogsStore,
-  settingsStore,
+  settingsStore
 );
 
 const filesActionsStore = new FilesActionsStore(
@@ -124,7 +134,7 @@ const filesActionsStore = new FilesActionsStore(
   accessRightsStore,
   clientLoadingStore,
   publicRoomStore,
-  pluginStore,
+  pluginStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -139,7 +149,7 @@ const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
   selectedFolderStore,
   publicRoomStore,
-  pluginStore,
+  pluginStore
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -149,7 +159,7 @@ const hotkeyStore = new HotkeyStore(
   filesActionsStore,
   treeFoldersStore,
   uploadDataStore,
-  selectedFolderStore,
+  selectedFolderStore
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -158,7 +168,7 @@ const profileActionsStore = new ProfileActionsStore(
   peopleStore,
   treeFoldersStore,
   selectedFolderStore,
-  pluginStore,
+  pluginStore
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
@@ -181,7 +191,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   authStore.settingsStore,
   authStore.infoPanelStore,
   authStore.currentQuotaStore,
-  clientLoadingStore,
+  clientLoadingStore
 );
 
 const webhooksStore = new WebhooksStore();

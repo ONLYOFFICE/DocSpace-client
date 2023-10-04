@@ -7,9 +7,8 @@ const RoomQuota = (props) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
   const onSetQuotaBytesSize = (size) => {
-    setRoomParams({ ...roomParams, quotaLimit: size });
+    setRoomParams({ ...roomParams, quota: size });
   };
-
   return (
     <QuotaForm
       label={t("Common:StorageQuota")}

@@ -24,6 +24,8 @@ const CreateRoomEvent = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   deleteThirdParty,
+
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -73,18 +75,13 @@ const CreateRoomEvent = ({
       deleteThirdParty={deleteThirdParty}
       fetchThirdPartyProviders={fetchThirdPartyProviders}
       enableThirdParty={enableThirdParty}
+      isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
     />
   );
 };
 
 export default inject(
-  ({
-    createEditRoomStore,
-
-    tagsStore,
-    dialogsStore,
-    settingsStore,
-  }) => {
+  ({ createEditRoomStore, auth, tagsStore, dialogsStore, settingsStore }) => {
     const { fetchTags } = tagsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
@@ -107,6 +104,9 @@ export default inject(
       confirmDialogIsLoading,
     } = createEditRoomStore;
 
+    const { currentQuotaStore } = auth;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
       fetchTags,
       setRoomParams,
@@ -122,6 +122,7 @@ export default inject(
       fetchThirdPartyProviders,
       enableThirdParty,
       deleteThirdParty,
+      isDefaultRoomsQuotaSet,
     };
   }
 )(observer(CreateRoomEvent));

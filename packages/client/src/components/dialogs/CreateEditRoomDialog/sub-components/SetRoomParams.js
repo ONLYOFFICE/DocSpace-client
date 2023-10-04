@@ -1,5 +1,4 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
@@ -80,6 +79,7 @@ const SetRoomParams = ({
   setIsValidTitle,
   onKeyUp,
   enableThirdParty,
+  isDefaultRoomsQuotaSet,
   currentColorScheme,
   setChangeRoomOwnerIsVisible,
   userId,
@@ -205,7 +205,9 @@ const SetRoomParams = ({
         />
       )}
 
-      <RoomQuota setRoomParams={setRoomParams} roomParams={roomParams} />
+      {isDefaultRoomsQuotaSet && (
+        <RoomQuota setRoomParams={setRoomParams} roomParams={roomParams} />
+      )}
 
       <div>
         <Text fontWeight={600} className="icon-editor_text">

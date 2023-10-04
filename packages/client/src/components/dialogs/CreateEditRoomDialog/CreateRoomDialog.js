@@ -45,6 +45,8 @@ const CreateRoomDialog = ({
   deleteThirdParty,
   fetchThirdPartyProviders,
   enableThirdParty,
+
+  isDefaultRoomsQuotaSet,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -164,6 +166,7 @@ const CreateRoomDialog = ({
             setIsValidTitle={setIsValidTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
+            isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
           />
         )}
       </ModalDialog.Body>

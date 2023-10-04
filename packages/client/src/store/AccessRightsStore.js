@@ -172,29 +172,30 @@ class AccessRightsStore {
 
   canChangeQuota = () => {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
 
-    return isOwner || isAdmin;
+    if (!isOwner && !isAdmin) return false;
+
+    return isDefaultUsersQuotaSet;
   };
   canDisableQuota = () => {
-    const { isOwner, isAdmin, quotaLimit } = this.authStore.userStore.user;
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
 
     if (!isOwner && !isAdmin) return false;
 
-    if (quotaLimit === 0) return false;
-
-    return true;
+    return isDefaultUsersQuotaSet;
   };
 
-  canSetDefaultQuota = () => {
-    const {
-      isOwner,
-      isAdmin,
-      isCustomQuota = true,
-    } = this.authStore.userStore.user;
+  caResetCustomQuota = (user) => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    if (!isDefaultUsersQuotaSet) return false;
 
     if (!isOwner && !isAdmin) return false;
 
-    return isCustomQuota;
+    return user.isCustomQuota;
   };
 }
 

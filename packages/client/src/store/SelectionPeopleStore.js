@@ -272,7 +272,7 @@ class SelectionStore {
   get hasUsersToChangeQuota() {
     const { canChangeQuota } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canChangeQuota(x));
+    const users = this.selection.filter(() => canChangeQuota());
 
     return users.length > 0;
   }
@@ -280,13 +280,15 @@ class SelectionStore {
   get hasUsersToDisableQuota() {
     const { canDisableQuota } = this.peopleStore.accessRightsStore;
 
-    return this.selection.every((x) => canDisableQuota(x));
+    const users = this.selection.filter(() => canDisableQuota());
+
+    return users.length > 0;
   }
 
-  get hasUsersToSetDefaultQuota() {
-    const { canSetDefaultQuota } = this.peopleStore.accessRightsStore;
+  get hasUsersToResetQuota() {
+    const { caResetCustomQuota } = this.peopleStore.accessRightsStore;
 
-    return this.selection.every((x) => canSetDefaultQuota(x));
+    return this.selection.every((x) => caResetCustomQuota(x));
   }
 }
 

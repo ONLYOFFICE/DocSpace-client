@@ -181,6 +181,20 @@ class PeopleStore {
       toastr.error(e);
     }
   };
+  resetUserQuota = async (users, t) => {
+    const { resetUserQuota } = this.usersStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      await resetUserQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
 
   onChangeStatus = (status) => {
     const users = [];
@@ -230,9 +244,13 @@ class PeopleStore {
       userSelectionRole,
       hasUsersToChangeQuota,
       hasUsersToDisableQuota,
-      hasUsersToSetDefaultQuota,
+      hasUsersToResetQuota,
       selection,
     } = this.selectionStore;
+    const {
+      setSendInviteDialogVisible,
+      setDeleteDialogVisible,
+    } = this.dialogStore;
 
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.dialogStore;
@@ -337,9 +355,9 @@ class PeopleStore {
         id: "menu-default-quota",
         key: "default-quota",
         label: "Set to default",
-        disabled: !hasUsersToSetDefaultQuota,
+        disabled: !hasUsersToResetQuota,
         iconUrl: DefaultQuotaReactSvgUrl,
-        onClick: () => console.log("set to default", selection),
+        onClick: () => this.resetUserQuota(selection, t),
       },
       {
         id: "menu-disable-quota",

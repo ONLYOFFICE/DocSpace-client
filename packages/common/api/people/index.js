@@ -405,3 +405,15 @@ export function setCustomUserQuota(userIds, quota) {
 
   return request(options);
 }
+export function resetUserQuota(userIds) {
+  const data = {
+    userIds,
+  };
+  const options = {
+    method: "put",
+    url: "/people/resetquota",
+    data,
+  };
+
+  return request(options);
+}

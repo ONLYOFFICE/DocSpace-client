@@ -156,6 +156,15 @@ class UsersStore {
 
     return users;
   };
+
+  resetUserQuota = async (userIds, filter) => {
+    const users = await api.people.resetUserQuota(userIds);
+
+    await this.getUsersList(filter);
+
+    return users;
+  };
+
   updateProfileInUsers = async (updatedProfile) => {
     if (!this.users) {
       return this.getUsersList();
@@ -404,6 +413,7 @@ class UsersStore {
       isSSO,
       quotaLimit,
       usedSpace,
+      isCustomQuota,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
@@ -446,6 +456,7 @@ class UsersStore {
       isSSO,
       quotaLimit,
       usedSpace,
+      isCustomQuota,
     };
   };
 

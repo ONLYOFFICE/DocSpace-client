@@ -39,9 +39,13 @@ import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 import ImportAccountsStore from "./ImportAccountsStore";
 
+import PluginStore from "./PluginStore";
+
 const oformsStore = new OformsStore(authStore);
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
+
+const pluginStore = new PluginStore(authStore, selectedFolderStore);
 
 const paymentStore = new PaymentStore();
 const wizardStore = new WizardStore();
@@ -60,7 +64,13 @@ const publicRoomStore = new PublicRoomStore();
 
 const clientLoadingStore = new ClientLoadingStore();
 
-const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore, publicRoomStore);
+const settingsStore = new SettingsStore(
+  thirdPartyStore,
+  treeFoldersStore,
+  publicRoomStore,
+  pluginStore,
+  authStore,
+);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
@@ -72,6 +82,7 @@ const filesStore = new FilesStore(
   thirdPartyStore,
   accessRightsStore,
   clientLoadingStore,
+  pluginStore,
   publicRoomStore,
 );
 
@@ -113,6 +124,7 @@ const filesActionsStore = new FilesActionsStore(
   accessRightsStore,
   clientLoadingStore,
   publicRoomStore,
+  pluginStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -127,6 +139,7 @@ const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
   selectedFolderStore,
   publicRoomStore,
+  pluginStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -136,7 +149,7 @@ const hotkeyStore = new HotkeyStore(
   filesActionsStore,
   treeFoldersStore,
   uploadDataStore,
-  selectedFolderStore
+  selectedFolderStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -145,6 +158,7 @@ const profileActionsStore = new ProfileActionsStore(
   peopleStore,
   treeFoldersStore,
   selectedFolderStore,
+  pluginStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
@@ -213,6 +227,8 @@ const store = {
   importAccountsStore,
   clientLoadingStore,
   publicRoomStore,
+
+  pluginStore,
 };
 
 export default store;

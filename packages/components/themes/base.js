@@ -3179,6 +3179,11 @@ const Base = {
     backgroundArchive: "#A3A9AE",
     opacityBackground: "1",
   },
+
+  plugins: {
+    borderColor: "#D0D5DA",
+    pluginName: "#5C5C5C",
+  },
 };
 
 export default Base;

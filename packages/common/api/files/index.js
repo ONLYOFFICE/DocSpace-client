@@ -603,7 +603,8 @@ export function copyToFolder(
   folderIds,
   fileIds,
   conflictResolveType,
-  deleteAfter
+  deleteAfter,
+  content = false
 ) {
   const data = {
     destFolderId,
@@ -611,6 +612,7 @@ export function copyToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    content,
   };
   return request({ method: "put", url: "/files/fileops/copy", data });
 }
@@ -1007,11 +1009,17 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
   });
 }
 
-export function getDocumentServiceLocation(version = true) {
+export function getDocumentServiceLocation(version) {
+  const params = {};
+
+  if (version !== undefined) {
+    params.version = version;
+  }
+
   return request({
     method: "get",
     url: `/files/docservice`,
-    params: { version },
+    params,
   });
 }
 

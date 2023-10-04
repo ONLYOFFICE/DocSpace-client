@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import { conversionToBytes } from "@docspace/common/utils";
+import {
+  conversionToBytes,
+  getPowerFromBytes,
+  getSizeFromBytes,
+} from "@docspace/common/utils";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -17,7 +21,6 @@ const QuotaForm = ({
   maxInputWidth,
   onSetQuotaBytesSize,
   initialSize = "",
-  initialPower = 0,
   isError,
   isButtonsEnable = false,
   onSave,
@@ -25,8 +28,8 @@ const QuotaForm = ({
   checkboxLabel,
   description,
 }) => {
-  const [size, setSize] = useState(initialSize);
-  const [power, setPower] = useState(initialPower);
+  const [power, setPower] = useState(getPowerFromBytes(initialSize, 4));
+  const [size, setSize] = useState(getSizeFromBytes(initialSize, power));
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -118,13 +121,13 @@ const QuotaForm = ({
       <div className="quota-container">
         <TextInput
           className="quota_limit"
-          isAutoFocussed={true}
+          isAutoFocussed
           value={size}
           onChange={onChangeTextInput}
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          pattern="[0-9]*"
+          // pattern="^[ 0-9]+$"
           scale
           withBorder
         />

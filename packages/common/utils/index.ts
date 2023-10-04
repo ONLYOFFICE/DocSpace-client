@@ -205,8 +205,8 @@ export function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
-      name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-      "=([^;]*)"
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)"
     )
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
@@ -411,7 +411,7 @@ export function isElementInViewport(el) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-    (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -514,9 +514,8 @@ export const getConvertedSize = (t, bytes) => {
   if (bytes <= 0) return `${"0" + " " + t("Common:Bytes")}`;
 
   if (bytes >= 1024) {
-    power = Math.floor(Math.log(bytes) / Math.log(1024));
-    power = power < sizeNames.length ? power : sizeNames.length - 1;
-    resultSize = parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+    power = getPowerFromBytes(bytes, sizeNames.length - 1);
+    resultSize = getSizeFromBytes(bytes, power);
   }
 
   return resultSize + " " + sizeNames[power];
@@ -534,8 +533,17 @@ export const getSpaceQuotaAsText = (t, usedSpace, quotaLimit) => {
   return `${usedValue} / ${quotaValue}`;
 };
 
-export const conversionToBytes = (size, power) => size * Math.pow(1024, power);
+export const conversionToBytes = (size, power) =>
+  Math.floor(size) * Math.pow(1024, power);
 
+export const getPowerFromBytes = (bytes, maxPower = 6) => {
+  let power = Math.floor(Math.log(bytes) / Math.log(1024));
+  return power <= maxPower ? power : maxPower;
+};
+
+export const getSizeFromBytes = (bytes, power) => {
+  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+};
 export const getBgPattern = (colorSchemeId: number | undefined) => {
   switch (colorSchemeId) {
     case 1:
@@ -635,6 +643,6 @@ export const getSystemTheme = () => {
       : ThemeKeys.BaseStr
     : window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    ? ThemeKeys.DarkStr
+    : ThemeKeys.BaseStr;
 };

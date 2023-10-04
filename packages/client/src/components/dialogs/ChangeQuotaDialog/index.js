@@ -19,6 +19,7 @@ const ChangeQuotaDialog = (props) => {
     onSetQuotaBytesSize,
     isError,
     isLoading,
+    defaultRoomsQuota,
   } = props;
   const { t } = useTranslation("Common");
   return (
@@ -36,6 +37,7 @@ const ChangeQuotaDialog = (props) => {
           onSetQuotaBytesSize={onSetQuotaBytesSize}
           isLoading={isLoading}
           isError={isError}
+          initialSize={defaultRoomsQuota}
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -63,10 +65,12 @@ export default inject(({ auth, dialogsStore }) => {
   const { currentQuotaStore } = auth;
   const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
     dialogsStore;
-  const { setUserQuota } = currentQuotaStore;
+  const { setUserQuota, defaultRoomsQuota } = currentQuotaStore;
+
   return {
     setUserQuota,
     changeQuotaDialogVisible,
     setChangeQuotaDialogVisible,
+    defaultRoomsQuota,
   };
 })(observer(ChangeQuotaDialog));

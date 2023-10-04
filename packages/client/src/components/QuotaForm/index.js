@@ -20,7 +20,7 @@ const QuotaForm = ({
   isDisabled,
   maxInputWidth,
   onSetQuotaBytesSize,
-  initialSize = "",
+  initialSize,
   isError,
   isButtonsEnable = false,
   onSave,
@@ -28,8 +28,11 @@ const QuotaForm = ({
   checkboxLabel,
   description,
 }) => {
-  const [power, setPower] = useState(getPowerFromBytes(initialSize, 4));
-  const [size, setSize] = useState(getSizeFromBytes(initialSize, power));
+  const initPower = initialSize ? getPowerFromBytes(initialSize, 4) : 0;
+  const initSize = initialSize ? getSizeFromBytes(initialSize, initPower) : "";
+
+  const [power, setPower] = useState(initPower);
+  const [size, setSize] = useState(initSize);
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 

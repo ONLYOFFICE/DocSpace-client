@@ -18,7 +18,6 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
-import OAuth from "./OAuth";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -43,7 +42,6 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "WebPlugins",
-    "OAuth",
   ]);
   const [isPending, startTransition] = useTransition();
 
@@ -94,11 +92,6 @@ const DeveloperToolsWrapper = (props) => {
       id: "webhooks",
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
-    },
-    {
-      id: "oauth",
-      name: t("OAuth:OAuth"),
-      content: <OAuth />,
     },
   ];
 

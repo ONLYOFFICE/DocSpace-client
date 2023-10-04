@@ -8,9 +8,8 @@ import {
   getCapabilities,
   getAppearanceTheme,
   getLogoUrls,
-  getCurrentSsoSettings,
+  getCurrentSsoSettings
 } from "@docspace/common/api/settings";
-import { getUser } from "@docspace/common/api/people";
 import { checkIsAuthenticated } from "@docspace/common/api/user";
 import { TenantStatus } from "@docspace/common/constants";
 
@@ -76,9 +75,7 @@ export const getInitialState = async (
   );
 
   if (portalSettings.tenantStatus !== TenantStatus.PortalRestore)
-    [providers, capabilities, isAuth, ssoSettings] = await Promise.all(
-      settings
-    );
+    [providers, capabilities, isAuth, ssoSettings] = await Promise.all(settings);
 
   const currentColorScheme = availableThemes.themes.find((theme) => {
     return availableThemes.selected === theme.id;
@@ -93,31 +90,8 @@ export const getInitialState = async (
     currentColorScheme,
     isAuth,
     logoUrls,
-    ssoSettings,
+    ssoSettings
   };
 
   return initialState;
-};
-
-//TODO: get client by id for links
-export const getOAuthState = async (
-  clientId: string,
-  isAuth?: boolean
-): Promise<IOAuthState> => {
-  const requests = [];
-
-  if (isAuth) requests.push(getUser());
-
-  const [self] = await Promise.all(requests);
-
-  const client: IOAuthClient = {
-    name: "Test",
-    logo: "static/images/logo/leftmenu.svg?hash=c31b569ea8c6322337cd",
-    privacyURL: "https://www.google.com/?hl=RU",
-    termsURL: "https://www.google.com/?hl=RU",
-    scopes: ["accounts:read"],
-    clientId: "1",
-  };
-
-  return { client, self };
 };

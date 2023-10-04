@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import FieldContainer from "@docspace/components/field-container";
 import EmailInput from "@docspace/components/email-input";
 import PasswordInput from "@docspace/components/password-input";
@@ -18,9 +17,7 @@ import { thirdPartyLogin } from "@docspace/common/api/user";
 import { setWithCredentialsStatus } from "@docspace/common/api/client";
 import { isMobileOnly } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
-import { OAuthLinksContainer, StyledCaptcha } from "../StyledLogin";
-import OAuthClientInfo from "./oauth-client-info";
-import SelectUser from "./SelectUser";
+import { StyledCaptcha } from "../StyledLogin";
 
 interface ILoginFormProps {
   isLoading: boolean;
@@ -32,8 +29,6 @@ interface ILoginFormProps {
   enableAdmMess: boolean;
   recaptchaPublicKey: CaptchaPublicKeyType;
   isBaseTheme: boolean;
-  oauth?: IOAuthState;
-  isOAuthPage?: boolean;
 }
 
 const settings = {
@@ -54,16 +49,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   cookieSettingsEnabled,
   recaptchaPublicKey,
   isBaseTheme,
-  oauth,
-  isOAuthPage,
 }) => {
-  const navigate = useNavigate();
-
   const captchaRef = useRef(null);
-
-  const [isOAuthSelectUser, setIsOAuthSelectUser] = useState(
-    isOAuthPage && !!oauth?.self
-  );
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -89,12 +76,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     message: "",
     confirmedEmail: "",
     authError: "",
-  };
-
-  const showLoginForm = () => setIsOAuthSelectUser(false);
-
-  const onOAuthLogin = () => {
-    navigate(`/login/consent?clientId=${oauth?.client.clientId}`);
   };
 
   const authCallback = (profile: string) => {
@@ -210,7 +191,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     if (hasError) return;
 
     setIsLoading(true);
-
     const hash = createPasswordHash(pass, hashSettings);
 
     isDesktop && checkPwd();
@@ -218,9 +198,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
     login(user, hash, session, captchaToken)
       .then((res: string | object) => {
-        if (isOAuthPage) {
-          return onOAuthLogin();
-        }
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath = sessionStorage.getItem("referenceUrl");
         if (redirectPath && !isConfirm) {
@@ -311,165 +288,143 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
   return (
     <form className="auth-form-container">
-      {oauth?.client && isOAuthPage && (
-        <OAuthClientInfo
-          name={oauth?.client.name}
-          logo={oauth.client.logo}
-          isAuth={!!oauth.self}
+      <FieldContainer
+        isVertical={true}
+        labelVisible={false}
+        hasError={isEmailErrorShow}
+        errorMessage={
+          errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
+        } //TODO: Add wrong login server error
+      >
+        <EmailInput
+          id="login_username"
+          name="login"
+          type="email"
+          hasError={isEmailErrorShow}
+          value={identifier}
+          placeholder={t("RegistrationEmailWatermark")}
+          size="large"
+          scale={true}
+          isAutoFocussed={true}
+          tabIndex={1}
+          isDisabled={isLoading}
+          autoComplete="username"
+          onChange={onChangeLogin}
+          onBlur={onBlurEmail}
+          onValidateInput={onValidateEmail}
+          forwardedRef={inputRef}
         />
-      )}
-
-      {isOAuthSelectUser && oauth?.self ? (
-        <SelectUser
-          self={oauth?.self}
-          onOAuthLogin={onOAuthLogin}
-          showLoginForm={showLoginForm}
-        />
-      ) : (
+      </FieldContainer>
+      {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
         <>
           <FieldContainer
             isVertical={true}
             labelVisible={false}
-            hasError={isEmailErrorShow}
-            errorMessage={
-              errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-            } //TODO: Add wrong login server error
+            hasError={!passwordValid}
+            errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
           >
-            <EmailInput
-              id="login_username"
-              name="login"
-              type="email"
-              hasError={isEmailErrorShow}
-              value={identifier}
-              placeholder={t("RegistrationEmailWatermark")}
+            <PasswordInput
+              className="password-input"
+              simpleView={true}
+              passwordSettings={settings}
+              id="login_password"
+              inputName="password"
+              placeholder={t("Common:Password")}
+              type="password"
+              hasError={!passwordValid}
+              inputValue={password}
               size="large"
               scale={true}
-              isAutoFocussed={true}
               tabIndex={1}
               isDisabled={isLoading}
-              autoComplete="username"
-              onChange={onChangeLogin}
-              onBlur={onBlurEmail}
-              onValidateInput={onValidateEmail}
-              forwardedRef={inputRef}
+              autoComplete="current-password"
+              onChange={onChangePassword}
+              onKeyDown={onKeyDown}
             />
           </FieldContainer>
-          {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
-            <>
-              <FieldContainer
-                isVertical={true}
-                labelVisible={false}
-                hasError={!passwordValid}
-                errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
-              >
-                <PasswordInput
-                  className="password-input"
-                  simpleView={true}
-                  passwordSettings={settings}
-                  id="login_password"
-                  inputName="password"
-                  placeholder={t("Common:Password")}
-                  type="password"
-                  hasError={!passwordValid}
-                  inputValue={password}
-                  size="large"
-                  scale={true}
-                  tabIndex={1}
-                  isDisabled={isLoading}
-                  autoComplete="current-password"
-                  onChange={onChangePassword}
-                  onKeyDown={onKeyDown}
-                />
-              </FieldContainer>
 
-              <div className="login-forgot-wrapper">
-                <div className="login-checkbox-wrapper">
-                  <div className="remember-wrapper">
-                    {!cookieSettingsEnabled && (
-                      <Checkbox
-                        id="login_remember"
-                        className="login-checkbox"
-                        isChecked={isChecked}
-                        onChange={onChangeCheckbox}
-                        label={t("Common:Remember")}
-                        helpButton={
-                          !checkIsSSR() && (
-                            <HelpButton
-                              id="login_remember-hint"
-                              className="help-button"
-                              offsetRight={0}
-                              helpButtonHeaderContent={t("CookieSettingsTitle")}
-                              tooltipContent={
-                                <Text fontSize="12px">
-                                  {t("RememberHelper")}
-                                </Text>
-                              }
-                              tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
-                            />
-                          )
-                        }
-                      />
-                    )}
-                  </div>
-
-                  <Link
-                    fontSize="13px"
-                    className="login-link"
-                    type="page"
-                    isHovered={false}
-                    onClick={onClick}
-                    id="login_forgot-password-link"
-                  >
-                    {t("ForgotPassword")}
-                  </Link>
-                </div>
+          <div className="login-forgot-wrapper">
+            <div className="login-checkbox-wrapper">
+              <div className="remember-wrapper">
+                {!cookieSettingsEnabled && (
+                  <Checkbox
+                    id="login_remember"
+                    className="login-checkbox"
+                    isChecked={isChecked}
+                    onChange={onChangeCheckbox}
+                    label={t("Common:Remember")}
+                    helpButton={
+                      !checkIsSSR() && (
+                        <HelpButton
+                          id="login_remember-hint"
+                          className="help-button"
+                          offsetRight={0}
+                          helpButtonHeaderContent={t("CookieSettingsTitle")}
+                          tooltipContent={
+                            <Text fontSize="12px">{t("RememberHelper")}</Text>
+                          }
+                          tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                        />
+                      )
+                    }
+                  />
+                )}
               </div>
 
-              {isDialogVisible && (
-                <ForgotPasswordModalDialog
-                  isVisible={isDialogVisible}
-                  userEmail={identifier}
-                  onDialogClose={onDialogClose}
-                />
-              )}
-              {recaptchaPublicKey && isCaptcha && (
-                <StyledCaptcha isCaptchaError={isCaptchaError}>
-                  <div className="captcha-wrapper">
-                    <ReCAPTCHA
-                      sitekey={recaptchaPublicKey}
-                      ref={captchaRef}
-                      theme={isBaseTheme ? "light" : "dark"}
-                      onChange={onSuccessfullyComplete}
-                    />
-                  </div>
-                  {isCaptchaError && (
-                    <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
-                  )}
-                </StyledCaptcha>
-              )}
-            </>
-          )}
+              <Link
+                fontSize="13px"
+                className="login-link"
+                type="page"
+                isHovered={false}
+                onClick={onClick}
+                id="login_forgot-password-link"
+              >
+                {t("ForgotPassword")}
+              </Link>
+            </div>
+          </div>
 
-          <Button
-            id="login_submit"
-            className="login-button"
-            primary
-            size="medium"
-            scale={true}
-            label={
-              isLoading
-                ? t("Common:LoadingProcessing")
-                : t("Common:LoginButton")
-            }
-            tabIndex={1}
-            isDisabled={isLoading}
-            isLoading={isLoading}
-            onClick={onSubmit}
-          />
+          {isDialogVisible && (
+            <ForgotPasswordModalDialog
+              isVisible={isDialogVisible}
+              userEmail={identifier}
+              onDialogClose={onDialogClose}
+            />
+          )}
+          {recaptchaPublicKey && isCaptcha && (
+            <StyledCaptcha isCaptchaError={isCaptchaError}>
+              <div className="captcha-wrapper">
+                <ReCAPTCHA
+                  sitekey={recaptchaPublicKey}
+                  ref={captchaRef}
+                  theme={isBaseTheme ? "light" : "dark"}
+                  onChange={onSuccessfullyComplete}
+                />
+              </div>
+              {isCaptchaError && (
+                <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
+              )}
+            </StyledCaptcha>
+          )}
         </>
       )}
+
+      <Button
+        id="login_submit"
+        className="login-button"
+        primary
+        size="medium"
+        scale={true}
+        label={
+          isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
+        }
+        tabIndex={1}
+        isDisabled={isLoading}
+        isLoading={isLoading}
+        onClick={onSubmit}
+      />
       {/*Uncomment when add api*/}
-      {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && !isOAuthPage && (
+      {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
         <div className="login-or-access">
           {/*<Link
                   fontWeight="600"
@@ -499,7 +454,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         </div>
       )}
 
-      {IS_ROOMS_MODE && isWithoutPasswordLogin && !isOAuthPage && (
+      {IS_ROOMS_MODE && isWithoutPasswordLogin && (
         <div className="login-link">
           <Link
             fontWeight="600"

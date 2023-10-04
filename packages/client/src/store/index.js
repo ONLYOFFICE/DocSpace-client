@@ -82,7 +82,6 @@ const filesStore = new FilesStore(
   thirdPartyStore,
   accessRightsStore,
   clientLoadingStore,
-  publicRoomStore,
   pluginStore,
   publicRoomStore
 );

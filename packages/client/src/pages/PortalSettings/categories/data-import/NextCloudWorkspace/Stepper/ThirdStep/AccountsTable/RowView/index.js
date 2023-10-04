@@ -9,8 +9,6 @@ import UsersRow from "./UsersRow";
 import Row from "@docspace/components/row";
 import Text from "@docspace/components/text";
 
-import { mockData } from "../../mockData";
-
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;
 `;
@@ -30,6 +28,7 @@ const RowView = (props) => {
   const {
     t,
     viewAs,
+    withoutEmailUsers,
     setViewAs,
     sectionWidth,
     accountsData,
@@ -40,7 +39,8 @@ const RowView = (props) => {
     cleanCheckedAccounts,
   } = props;
 
-  const toggleAll = (e) => toggleAllAccounts({ target: { checked: !e.target.checked } }, mockData);
+  const toggleAll = (e) =>
+    toggleAllAccounts({ target: { checked: !e.target.checked } }, withoutEmailUsers);
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -59,9 +59,11 @@ const RowView = (props) => {
       <StyledRow
         sectionWidth={sectionWidth}
         checkbox
-        checked={checkedAccounts.length === mockData.length}
+        checked={checkedAccounts.length === withoutEmailUsers.length}
         onClick={toggleAll}
-        indeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}>
+        indeterminate={
+          checkedAccounts.length > 0 && checkedAccounts.length !== withoutEmailUsers.length
+        }>
         <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
           {t("Common:Name")}
         </Text>
@@ -83,6 +85,7 @@ const RowView = (props) => {
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
+    withoutEmailUsers,
     checkedAccounts,
     toggleAccount,
     toggleAllAccounts,
@@ -91,6 +94,7 @@ export default inject(({ setup, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
+    withoutEmailUsers,
     viewAs,
     setViewAs,
     checkedAccounts,

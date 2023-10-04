@@ -7,18 +7,9 @@ import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../StyledStepper";
-// import { mockData } from "./mockData";
 
 const FourthStep = (props) => {
-  const {
-    t,
-    incrementStep,
-    decrementStep,
-    checkedAccounts,
-    users,
-    searchValue,
-    setSearchValue,
-  } = props;
+  const { t, incrementStep, decrementStep, users, searchValue, setSearchValue } = props;
 
   const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
 
@@ -37,7 +28,7 @@ const FourthStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   return (
@@ -52,25 +43,19 @@ const FourthStep = (props) => {
         displaySettings={true}
       />
 
-      {!checkedAccounts.length > 0 && (
-        <SearchInput
-          id="search-users-type-input"
-          placeholder={t("Common:Search")}
-          value={searchValue}
-          onChange={onChangeInput}
-          refreshTimeout={100}
-          onClearSearch={onClearSearchInput}
-        />
-      )}
+      <SearchInput
+        id="search-users-type-input"
+        placeholder={t("Common:Search")}
+        value={searchValue}
+        onChange={onChangeInput}
+        refreshTimeout={100}
+        onClearSearch={onClearSearchInput}
+      />
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
       {users.length > 25 && (
-        <AccountsPaging
-          t={t}
-          numberOfItems={users.length}
-          setDataPortion={handleDataChange}
-        />
+        <AccountsPaging t={t} numberOfItems={users.length} setDataPortion={handleDataChange} />
       )}
 
       {filteredAccounts.length > 0 && (
@@ -89,8 +74,7 @@ const FourthStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedAccounts, users, searchValue, setSearchValue } =
-    importAccountsStore;
+  const { checkedAccounts, users, searchValue, setSearchValue } = importAccountsStore;
 
   return {
     checkedAccounts,

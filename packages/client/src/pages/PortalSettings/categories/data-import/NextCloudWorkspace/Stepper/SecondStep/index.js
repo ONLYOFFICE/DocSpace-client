@@ -10,8 +10,6 @@ import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import Text from "@docspace/components/text";
 
 import { Wrapper } from "../StyledStepper";
-// import { mockData as nextStepData } from "../ThirdStep/mockData";
-// import { mockData } from "./mockData";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 const LICENSE_LIMIT = 100;
@@ -25,6 +23,7 @@ const SecondStep = (props) => {
     users,
     searchValue,
     setSearchValue,
+    assignCheckedUsers,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
@@ -44,8 +43,13 @@ const SecondStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
+
+  const handleStepInrement = () => {
+    assignCheckedUsers();
+    incrementStep();
+  };
 
   return (
     <Wrapper>
@@ -55,7 +59,7 @@ const SecondStep = (props) => {
         <>
           <SaveCancelButtons
             className="save-cancel-buttons"
-            onSaveClick={incrementStep}
+            onSaveClick={handleStepInrement}
             onCancelClick={decrementStep}
             saveButtonLabel={t("Settings:NextStep")}
             cancelButtonLabel={t("Common:Back")}
@@ -83,11 +87,7 @@ const SecondStep = (props) => {
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
           {users.length > 25 && (
-            <AccountsPaging
-              t={t}
-              numberOfItems={users.length}
-              setDataPortion={handleDataChange}
-            />
+            <AccountsPaging t={t} numberOfItems={users.length} setDataPortion={handleDataChange} />
           )}
         </>
       ) : (
@@ -99,7 +99,7 @@ const SecondStep = (props) => {
       {filteredAccounts.length > 0 && (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={incrementStep}
+          onSaveClick={handleStepInrement}
           onCancelClick={decrementStep}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
@@ -113,7 +113,7 @@ const SecondStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { numberOfCheckedAccounts, users, searchValue, setSearchValue } =
+  const { numberOfCheckedAccounts, users, searchValue, setSearchValue, assignCheckedUsers } =
     importAccountsStore;
 
   return {
@@ -121,5 +121,6 @@ export default inject(({ importAccountsStore }) => {
     users,
     searchValue,
     setSearchValue,
+    assignCheckedUsers,
   };
 })(observer(SecondStep));

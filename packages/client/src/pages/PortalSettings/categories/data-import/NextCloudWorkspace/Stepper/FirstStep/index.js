@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -9,9 +9,11 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import Box from "@docspace/components/box";
+import Link from "@docspace/components/link";
 
 const Wrapper = styled.div`
-  max-width: 350px;
+  max-width: 700px;
   margin-top: 16px;
 
   .choose-backup-file {
@@ -22,6 +24,7 @@ const Wrapper = styled.div`
 
   .upload-backup-input {
     height: 32px;
+    margin-bottom: 12px;
   }
 
   .upload-back-buttons {
@@ -33,16 +36,38 @@ const Wrapper = styled.div`
   }
 
   .select-file-progress-bar {
-    margin-bottom: 16px;
+    margin: 12px 0 16px;
+  }
+`;
+
+const FileUploadContainer = styled.div`
+  max-width: 350px;
+`;
+
+const ErrorBlock = styled.div`
+  max-width: 700px;
+
+  .complete-progress-bar {
+    margin: 12px 0 16px;
+    max-width: 350px;
+  }
+
+  .error-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  }
+
+  .save-cancel-buttons {
+    margin-top: 16px;
   }
 `;
 
 const FirstStep = ({
   t,
   incrementStep,
-  decrementStep,
-  cancelDialogVisble,
-  setCancelDialogVisbile,
+  cancelDialogVisible,
+  setCancelDialogVisibile,
   initMigrationName,
   singleFileUploading,
   getMigrationStatus,
@@ -52,26 +77,30 @@ const FirstStep = ({
   setIsFileLoading,
   cancelMigration,
 }) => {
-  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
   const [searchParams] = useSearchParams();
+  const [isFileError, setIsFileError] = useState(false);
+  const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
   const onUploadFile = async (file) => {
     await singleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
-    const interval = setInterval(async () => {
+
+    uploadInterval.current = setInterval(async () => {
       const res = await getMigrationStatus();
 
       if (!res || res.parseResult.failedArchives.length > 0) {
+        setIsFileError(true);
         setIsFileLoading(false);
-        clearInterval(interval);
+        clearInterval(uploadInterval.current);
       } else if (res.isCompleted) {
         setIsFileLoading(false);
-        clearInterval(interval);
+        clearInterval(uploadInterval.current);
         setData(res);
         setUsers(res);
-        setIsSaveDisabled(true);
+        setIsSaveDisabled(false);
       }
     }, 1000);
   };
@@ -86,59 +115,97 @@ const FirstStep = ({
     }
   };
 
+  const onDownloadArchives = async () => {
+    try {
+      await getMigrationStatus()
+        .then(
+          (res) =>
+            new Blob([res.parseResult.failedArchives], {
+              type: "text/csv;charset=utf-8",
+            }),
+        )
+        .then((blob) => {
+          let a = document.createElement("a");
+          const url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = "unsupported_archives";
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onCancel = () => {
-    setCancelDialogVisbile(true);
+    setCancelDialogVisibile(true);
     setProgress(0);
     setIsFileLoading(false);
   };
 
+  const handleCancelMigration = () => {
+    clearInterval(uploadInterval.current);
+    cancelMigration();
+  };
+
+  const hideCancelDialog = () => setCancelDialogVisibile(false);
+
   return (
     <Wrapper>
-      <Text className="choose-backup-file">
-        {t("Settings:ChooseBackupFile")}
-      </Text>
-      <FileInput
-        scale
-        onInput={onSelectFile}
-        className="upload-backup-input"
-        placeholder={t("Settings:BackupFile")}
-        isDisabled={isFileLoading}
-        accept=".zip"
-      />
+      <FileUploadContainer>
+        <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
+        <FileInput
+          scale
+          onInput={onSelectFile}
+          className="upload-backup-input"
+          placeholder={t("Settings:BackupFile")}
+          isDisabled={isFileLoading}
+          accept=".zip"
+        />
+      </FileUploadContainer>
       {isFileLoading ? (
-        <>
-          <Text className="select-file-progress-text">
-            {t("Settings:BackupFileUploading")}
-          </Text>
+        <FileUploadContainer>
           <ProgressBar
             percent={progress}
             className="select-file-progress-bar"
+            label={t("Settings:BackupFileUploading")}
           />
-          <Button
-            size="small"
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
-        </>
+          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
+        </FileUploadContainer>
       ) : (
-        <SaveCancelButtons
-          className="upload-back-buttons"
-          onSaveClick={incrementStep}
-          onCancelClick={() => navigate(-1)}
-          saveButtonLabel={t("Settings:UploadToServer")}
-          cancelButtonLabel={t("Common:Back")}
-          displaySettings
-          saveButtonDisabled={!isSaveDisabled}
-          isSaveButtonDisabled
-        />
+        <ErrorBlock>
+          {isFileError && (
+            <Box>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
+              <Link type="action" isHovered fontWeight={600} onClick={onDownloadArchives}>
+                {t("Settings:DownloadUnsupportedArchives")}
+              </Link>
+            </Box>
+          )}
+          <SaveCancelButtons
+            className="upload-back-buttons"
+            onSaveClick={incrementStep}
+            onCancelClick={() => navigate(-1)}
+            saveButtonLabel={t("Settings:UploadToServer")}
+            cancelButtonLabel={t("Common:Back")}
+            displaySettings
+            showReminder
+            saveButtonDisabled={isSaveDisabled}
+          />
+        </ErrorBlock>
       )}
 
-      {cancelDialogVisble && (
+      {cancelDialogVisible && (
         <CancelUploadDialog
-          visible={cancelDialogVisble}
+          visible={cancelDialogVisible}
           loading={isFileLoading}
-          onClose={() => setCancelDialogVisbile(false)}
-          cancelMigration={cancelMigration}
+          onClose={hideCancelDialog}
+          cancelMigration={handleCancelMigration}
         />
       )}
     </Wrapper>
@@ -156,8 +223,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setIsFileLoading,
     cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
 
   return {
     initMigrationName,
@@ -168,7 +234,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
-    cancelDialogVisble: cancelUploadDialogVisible,
-    setCancelDialogVisbile: setCancelUploadDialogVisible,
+    cancelDialogVisible: cancelUploadDialogVisible,
+    setCancelDialogVisibile: setCancelUploadDialogVisible,
   };
 })(observer(FirstStep));

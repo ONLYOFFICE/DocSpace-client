@@ -17,24 +17,22 @@ import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-// import { mockData } from "../../mockData";
-
 const StyledTableContainer = styled(TableContainer)`
   margin: 0 0 20px;
 
   .table-group-menu {
     height: 69px;
-    position: relative;
+    position: absolute;
     z-index: 201;
-    left: -20px;
-    top: 28px;
+    left: 0px;
     width: 100%;
+
+    margin-top: -37.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      border-bottom: ${(props) =>
-        props.theme.client.settings.migration.workspaceBorder};
+      border-bottom: ${(props) => props.theme.client.settings.migration.workspaceBorder};
       box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
     }
 
@@ -60,8 +58,7 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background: ${(props) =>
-        props.theme.client.settings.migration.tableRowHoverColor};
+      background: ${(props) => props.theme.client.settings.migration.tableRowHoverColor};
     }
   }
 
@@ -102,8 +99,7 @@ const TableView = (props) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
+  const isIndeterminate = checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   const toggleAll = (checked) => {
     onCheckAccounts(checked, users);
@@ -144,6 +140,7 @@ const TableView = (props) => {
       {checkedAccounts.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
+            checkboxOptions={[]}
             sectionWidth={sectionWidth}
             headerMenu={headerMenu}
             withoutInfoPanelToggler
@@ -176,8 +173,7 @@ const TableView = (props) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
-          >
+            fetchMoreFiles={() => {}}>
             {users.map((data) => (
               <UsersTableRow
                 key={data.key}
@@ -208,12 +204,7 @@ const TableView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

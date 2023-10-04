@@ -59,9 +59,7 @@ class ImportAccountsStore {
   };
 
   toggleAllAccounts = (e, accounts) => {
-    this.checkedAccounts = e.target.checked
-      ? accounts.map((data) => data.key)
-      : [];
+    this.checkedAccounts = e.target.checked ? accounts.map((data) => data.key) : [];
   };
 
   setUsers = (data) => {
@@ -69,12 +67,16 @@ class ImportAccountsStore {
       this.newUsers = data.parseResult.users;
       this.existUsers = data.parseResult.existUsers.map((user) => ({
         ...user,
-        isDublicate: true,
+        isDuplicate: true,
       }));
       this.users = [...this.newUsers, ...this.existUsers];
       this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
       this.checkedAccounts = this.newUsers.map((item) => item.key);
     });
+  };
+
+  assignCheckedUsers = () => {
+    this.users = this.users.filter((user) => this.checkedAccounts.includes(user.key));
   };
 
   changeTypeGroup = (key) => {
@@ -88,10 +90,7 @@ class ImportAccountsStore {
       }
       return user;
     });
-    const [existUsers, newUsers] = this.partition(
-      this.users,
-      (user) => user.isDublicate
-    );
+    const [existUsers, newUsers] = this.partition(this.users, (user) => user.isDublicate);
     this.data.users = [...newUsers];
     this.data.existUsers = [...existUsers];
   };
@@ -103,7 +102,7 @@ class ImportAccountsStore {
           ? [[...pass, elem], fail]
           : [pass, [...fail, elem]];
       },
-      [[], []]
+      [[], []],
     );
   }
 
@@ -121,10 +120,7 @@ class ImportAccountsStore {
 
   multipleFileUploading = async (files, setProgress) => {
     try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx"
-      );
+      const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
       const requestsDataArray = [];
 
       const res = await axios.post(location + "?Init=true");
@@ -152,7 +148,7 @@ class ImportAccountsStore {
       while (chunk < chunksNumber && this.isFileLoading) {
         await uploadFile(
           location + `?Name=${requestsDataArray[chunk].fileName}`,
-          requestsDataArray[chunk].formData
+          requestsDataArray[chunk].formData,
         );
         const progress = (chunk / chunksNumber) * 100;
         setProgress(Math.ceil(progress));
@@ -165,10 +161,7 @@ class ImportAccountsStore {
 
   singleFileUploading = async (file, setProgress) => {
     try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx"
-      );
+      const location = combineUrl(window.location.origin, "migrationFileUpload.ashx");
       const requestsDataArray = [];
       let chunk = 0;
 
@@ -186,10 +179,7 @@ class ImportAccountsStore {
 
       chunk = 0;
       while (chunk < chunks && this.isFileLoading) {
-        await uploadFile(
-          location + `?Name=${file.name}`,
-          requestsDataArray[chunk]
-        );
+        await uploadFile(location + `?Name=${file.name}`, requestsDataArray[chunk]);
         const progress = (chunk / chunks) * 100;
         setProgress(Math.ceil(progress));
         chunk++;

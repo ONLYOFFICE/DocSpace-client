@@ -9,8 +9,6 @@ import UsersTableRow from "./UsersTableRow";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import { mockData } from "../../mockData.js";
-
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
@@ -41,6 +39,7 @@ const TableView = (props) => {
   const {
     t,
     userId,
+    withoutEmailUsers,
     viewAs,
     setViewAs,
     sectionWidth,
@@ -116,6 +115,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
   const {
+    withoutEmailUsers,
     checkedAccounts,
     toggleAccount,
     toggleAllAccounts,
@@ -125,6 +125,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
 
   return {
     viewAs,
+    withoutEmailUsers,
     setViewAs,
     userId,
     checkedAccounts,

@@ -238,7 +238,7 @@ class PeopleStore {
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
-      hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       hasFreeUsers,
       userSelectionRole,
       hasUsersToChangeQuota,

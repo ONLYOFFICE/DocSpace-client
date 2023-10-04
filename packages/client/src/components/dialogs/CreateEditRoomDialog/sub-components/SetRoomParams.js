@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import TagInput from "./TagInput";
@@ -252,7 +253,7 @@ export default inject(({ auth, dialogsStore }) => {
 })(
   observer(
     withTranslation(["CreateEditRoomDialog", "Translations"])(
-  withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
+      withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
     )
   )
 );

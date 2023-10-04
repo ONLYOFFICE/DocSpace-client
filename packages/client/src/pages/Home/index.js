@@ -14,6 +14,7 @@ import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionSubmenuContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
@@ -294,6 +295,10 @@ const PureHome = (props) => {
             )}
           </Section.SectionHeader>
         )}
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           isAccountsPage) &&

@@ -10,7 +10,7 @@ const StyledBody = styled.div`
   p {
     padding-top: 8px;
     ${(props) =>
-      props.isDisabledQuotaChange &&
+      props.isReadOnly &&
       css`
         white-space: nowrap;
         overflow: hidden;

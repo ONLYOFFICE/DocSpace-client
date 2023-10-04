@@ -324,7 +324,7 @@ class DetailsHelper {
     return (
       <SpaceQuota
         item={this.item}
-        isOnlyUsedSpace={!this.isDefaultRoomsQuotaSet}
+        withoutLimitQuota={!this.isDefaultRoomsQuotaSet}
       />
     );
   };

@@ -224,7 +224,7 @@ const Accounts = ({
             item={selection}
             className="type-combobox"
             onSuccess={onSuccess}
-            isOnlyUsedSpace={!isDefaultUsersQuotaSet}
+            withoutLimitQuota={!isDefaultUsersQuotaSet}
           />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>

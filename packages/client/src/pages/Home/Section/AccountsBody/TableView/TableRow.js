@@ -520,7 +520,7 @@ const PeopleTableRow = (props) => {
             hideColumns={hideColumns}
             item={item}
             type="user"
-            isOnlyUsedSpace={!isDefaultUsersQuotaSet}
+            withoutLimitQuota={!isDefaultUsersQuotaSet}
           />
         </TableCell>
       </StyledPeopleRow>

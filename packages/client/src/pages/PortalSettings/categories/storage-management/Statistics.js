@@ -38,9 +38,7 @@ const StatisticsComponent = (props) => {
       />
     </div>
   );
-  const quotaElement = (item) => (
-    <SpaceQuota isDisabledQuotaChange item={item} />
-  );
+  const quotaElement = (item) => <SpaceQuota isReadOnly item={item} />;
   const textElement = (title) => (
     <div className="row_name">
       <Text fontSize={"12px"} fontWeight={600}>

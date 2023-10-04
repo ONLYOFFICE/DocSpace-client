@@ -133,7 +133,7 @@ const RoomsRowDataComponent = (props) => {
           <SpaceQuota
             item={item}
             type="room"
-            isOnlyUsedSpace={!isDefaultRoomsQuotaSet}
+            withoutLimitQuota={!isDefaultRoomsQuotaSet}
           />
         </TableCell>
       ) : (

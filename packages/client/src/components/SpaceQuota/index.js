@@ -23,14 +23,13 @@ const getSelectedOption = (options, action) => {
 const SpaceQuota = (props) => {
   const {
     hideColumns,
-    isDisabledQuotaChange,
-    isOnlyUsedSpace = false,
-    type,
+    isReadOnly,
+    withoutLimitQuota,
     item,
     className,
     changeQuota,
     onSuccess,
-    setUnlimitedQuota,
+    disableQuota,
     resetQuota,
   } = props;
 
@@ -83,7 +82,6 @@ const SpaceQuota = (props) => {
   };
 
   const onChange = async ({ action }) => {
-    console.log("action", action, "type", type, "item", item);
     if (action === "change") {
       setIsLoading(true);
 
@@ -96,7 +94,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        await setUnlimitedQuota(-1, [item.id]);
+        await disableQuota(-1, [item.id]);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
         toastr.error(e);
@@ -117,11 +115,11 @@ const SpaceQuota = (props) => {
 
   const selectedOption = getSelectedOption(options, action);
 
-  if (isOnlyUsedSpace) {
+  if (withoutLimitQuota) {
     return <StyledText fontWeight={600}>{usedQuota}</StyledText>;
   }
 
-  if (isDisabledQuotaChange) {
+  if (isReadOnly) {
     return (
       <StyledText fontWeight={600}>
         {usedQuota} / {spaceLimited}
@@ -130,10 +128,7 @@ const SpaceQuota = (props) => {
   }
 
   return (
-    <StyledBody
-      hideColumns={hideColumns}
-      isDisabledQuotaChange={isDisabledQuotaChange}
-    >
+    <StyledBody hideColumns={hideColumns} isReadOnly={isReadOnly}>
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
@@ -159,14 +154,13 @@ export default inject(
     const { updateRoomQuota } = filesStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
-    const setUnlimitedQuota =
-      type === "user" ? updateUserQuota : updateRoomQuota;
+    const disableQuota = type === "user" ? updateUserQuota : updateRoomQuota;
 
     const resetQuota = type === "user" ? resetUserQuota : null;
 
     return {
       changeQuota,
-      setUnlimitedQuota,
+      disableQuota,
       resetQuota,
     };
   }

@@ -240,6 +240,7 @@ const store = {
 
   oauthStore,
   pluginStore,
+  oauthStore,
 };
 
 export default store;

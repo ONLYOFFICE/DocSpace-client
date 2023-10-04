@@ -294,16 +294,8 @@ export const settingsTree = [
         ],
       },
       {
-        id: "portal-settings_catalog-plugins",
-        key: "4-2",
-        icon: "",
-        link: "plugins",
-        tKey: "Plugins",
-        isCategory: true,
-      },
-      {
         id: "portal-settings_catalog-document-service",
-        key: "4-3",
+        key: "4-2",
         icon: "",
         link: "document-service",
         tKey: "DocumentService",
@@ -311,7 +303,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-smtp-settings",
-        key: "4-4",
+        key: "4-3",
         icon: "",
         link: "smtp-settings",
         tKey: "SMTPSettings",

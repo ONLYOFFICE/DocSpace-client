@@ -95,6 +95,11 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
+    {
+      id: "oauth",
+      name: t("OAuth:OAuth"),
+      content: <OAuth />,
+    },
   ];
 
   if (enablePlugins) {

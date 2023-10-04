@@ -50,7 +50,10 @@ const Login: React.FC<ILoginProps> = ({
   setTheme,
   logoUrls,
   isBaseTheme,
+  oauth,
 }) => {
+  const isOAuthPage = !!oauth?.client.name;
+
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
 
@@ -241,8 +244,10 @@ const Login: React.FC<ILoginProps> = ({
             {greetingSettings}
           </Text>
           <FormWrapper id="login-form" theme={theme}>
-            {ssoExists() && <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>}
-            {oauthDataExists() && (
+            {ssoExists() && !isOAuthPage && (
+              <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
+            )}
+            {oauthDataExists() && !isOAuthPage && (
               <>
                 <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
                 {providers && providers.length > 2 && (
@@ -260,7 +265,7 @@ const Login: React.FC<ILoginProps> = ({
                 )}
               </>
             )}
-            {(oauthDataExists() || ssoExists()) && (
+            {(oauthDataExists() || ssoExists()) && !isOAuthPage && (
               <div className="line">
                 <Text className="or-label">{t("Or")}</Text>
               </div>
@@ -276,9 +281,12 @@ const Login: React.FC<ILoginProps> = ({
               match={match}
               enableAdmMess={enableAdmMess}
               cookieSettingsEnabled={cookieSettingsEnabled}
+              isOAuthPage={isOAuthPage}
+              oauth={oauth}
             />
           </FormWrapper>
           <Toast />
+
           <MoreLoginModal
             visible={moreAuthVisible}
             onClose={moreAuthClose}
@@ -299,7 +307,7 @@ const Login: React.FC<ILoginProps> = ({
         </ColorTheme>
       </LoginContent>
 
-      {!checkIsSSR() && enabledJoin && (
+      {!checkIsSSR() && !oauth?.self && enabledJoin && (
         <Register
           id="login_register"
           enabledJoin={enabledJoin}

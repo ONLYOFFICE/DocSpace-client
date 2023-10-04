@@ -64,9 +64,6 @@ const Preview = ({ clientId, redirectURI, scopes }: PreviewProps) => {
     </Frame>
   );
 
-<<<<<<< HEAD
-  const codeBlock = "123";
-=======
   const htmlBlock = `<button id="docspace-button" class="docspace-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" class="injected-svg logo-svg"
             data-src="http://192.168.0.15/static/js/../../static/images/logo/leftmenu.svg?hash=c31b569ea8c6322337cd"
@@ -140,16 +137,10 @@ const Preview = ({ clientId, redirectURI, scopes }: PreviewProps) => {
     }
 
   button.addEventListener('click', openOAuthPage)`;
->>>>>>> develop
 
   const code = (
     <>
       <CategorySubHeader className="copy-window-code">
-<<<<<<< HEAD
-        {"Copy window code"}
-      </CategorySubHeader>
-      <Textarea value={codeBlock} />
-=======
         {"Copy HTML code"}
       </CategorySubHeader>
       <Textarea value={htmlBlock} />
@@ -161,7 +152,6 @@ const Preview = ({ clientId, redirectURI, scopes }: PreviewProps) => {
         {"Copy JS code"}
       </CategorySubHeader>
       <Textarea value={scriptCode} />
->>>>>>> develop
     </>
   );
 

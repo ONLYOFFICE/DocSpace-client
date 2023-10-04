@@ -55,6 +55,8 @@ const UserContent = ({
   t,
   theme,
   standalone,
+
+  isDefaultUsersQuotaSet,
 }) => {
   const {
     displayName,
@@ -86,7 +88,12 @@ const UserContent = ({
       : t("Common:RoomAdmin");
 
   const isPaidUser = !standalone && !isVisitor;
-  const spaceQuota = getSpaceQuotaAsText(t, usedSpace, quotaLimit);
+  const spaceQuota = getSpaceQuotaAsText(
+    t,
+    usedSpace,
+    quotaLimit,
+    isDefaultUsersQuotaSet
+  );
 
   return (
     <StyledRowContent

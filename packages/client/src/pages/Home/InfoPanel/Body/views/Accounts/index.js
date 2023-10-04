@@ -20,6 +20,7 @@ const Accounts = ({
   canChangeUserType,
   setSelection,
   getPeopleListItem,
+  isDefaultUsersQuotaSet,
 }) => {
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -223,6 +224,7 @@ const Accounts = ({
             item={selection}
             className="type-combobox"
             onSuccess={onSuccess}
+            isOnlyUsedSpace={!isDefaultUsersQuotaSet}
           />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
@@ -241,6 +243,8 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
   const { canChangeUserType } = accessRightsStore;
 
   const { setSelection } = auth.infoPanelStore;
+  const { currentQuotaStore } = auth;
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
   return {
     isOwner,
@@ -251,6 +255,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
     loading: usersStore.operationRunning,
     getPeopleListItem: usersStore.getPeopleListItem,
     setSelection,
+    isDefaultUsersQuotaSet,
   };
 })(
   withTranslation([

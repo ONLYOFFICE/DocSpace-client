@@ -13,6 +13,7 @@ class PeopleTableHeader extends React.Component {
     super(props);
 
     const { t } = props;
+    const { isDefaultUsersQuotaSet } = this.props;
 
     const defaultColumns = [
       {
@@ -53,7 +54,9 @@ class PeopleTableHeader extends React.Component {
       },
       {
         key: "Storage",
-        title: t("Common:StorageAndQuota"),
+        title: isDefaultUsersQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
         enable: true,
         sortBy: SortByFieldName.UsedSpace,
         resizable: true,
@@ -190,6 +193,8 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
 
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
   const { withPaging } = auth.settingsStore;
+  const { currentQuotaStore } = auth;
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
   return {
     filter,
@@ -198,6 +203,7 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
     userId: auth.userStore.user?.id,
     infoPanelVisible,
     withPaging,
+    isDefaultUsersQuotaSet,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

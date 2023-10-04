@@ -111,6 +111,8 @@ const PeopleRowContainer = ({
   hasMoreAccounts,
   filterTotal,
   withPaging,
+
+  isDefaultUsersQuotaSet,
 }) => {
   useEffect(() => {
     const width = window.innerWidth;
@@ -149,6 +151,7 @@ const PeopleRowContainer = ({
           item={item}
           itemIndex={index}
           sectionWidth={sectionWidth}
+          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
         />
       ))}
     </StyledRowContainer>
@@ -169,6 +172,8 @@ export default inject(({ peopleStore, auth, filesStore }) => {
   const { filterTotal, isFiltered } = filterStore;
 
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+  const { currentQuotaStore } = auth;
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
   return {
     peopleList,
@@ -182,5 +187,7 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     hasMoreAccounts,
     filterTotal,
     isFiltered,
+
+    isDefaultUsersQuotaSet,
   };
 })(observer(PeopleRowContainer));

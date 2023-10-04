@@ -19,7 +19,7 @@ const StyledCalendar = styled.div`
   }
 `;
 
-const CalendarComponent = ({ setCalendarDay }) => {
+const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -39,6 +39,8 @@ const CalendarComponent = ({ setCalendarDay }) => {
           className="calendar"
           setSelectedDate={onDateSet}
           selectedDate={selectedDate}
+          minDate={{ roomCreationDate }}
+          maxDate={new Date()}
         />
       )}
     </StyledCalendar>

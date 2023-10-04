@@ -86,7 +86,10 @@ const FilesItemTitle = ({
         {selection && (
           <StyledItemOptions>
             {openHistory && (
-              <CalendarComponent setCalendarDay={setCalendarDay} />
+              <CalendarComponent
+                roomCreationDate={selection.created}
+                setCalendarDay={setCalendarDay}
+              />
             )}
 
             <ItemContextOptions

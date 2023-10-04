@@ -23,6 +23,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isPublicRoom,
+      isDefaultRoomsQuotaSet,
     } = this.props;
 
     const defaultColumns = [];
@@ -78,7 +79,9 @@ class FilesTableHeader extends React.Component {
         },
         {
           key: "Storage",
-          title: t("Common:StorageAndQuota"),
+          title: isDefaultRoomsQuotaSet
+            ? t("Common:StorageAndQuota")
+            : t("Common:Storage"),
           enable: this.props.roomQuotaColumnIsEnable,
           sortBy: SortByFieldName.UsedSpace,
           resizable: true,
@@ -455,6 +458,9 @@ export default inject(
     publicRoomStore,
     clientLoadingStore,
   }) => {
+    const { currentQuotaStore } = auth;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
 
     const {
@@ -556,6 +562,7 @@ export default inject(
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,
+      isDefaultRoomsQuotaSet,
     };
   }
 )(

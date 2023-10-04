@@ -25,6 +25,7 @@ const SpaceQuota = (props) => {
     hideColumns,
     isCustomQuota = false,
     isDisabledQuotaChange,
+    isOnlyUsedSpace = false,
     type,
     item,
     className,
@@ -106,6 +107,10 @@ const SpaceQuota = (props) => {
   };
 
   const selectedOption = getSelectedOption(options, action);
+
+  if (isOnlyUsedSpace) {
+    return <StyledText fontWeight={600}>{usedQuota}</StyledText>;
+  }
 
   if (isDisabledQuotaChange) {
     return (

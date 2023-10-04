@@ -217,6 +217,22 @@ class QuotasStore {
     return this.currentPortalQuota?.nonProfit;
   }
 
+  get isDefaultRoomsQuotaSet() {
+    return this.currentPortalQuota?.roomsQuota.enableQuota;
+  }
+
+  get isDefaultUsersQuotaSet() {
+    return this.currentPortalQuota?.usersQuota.enableQuota;
+  }
+
+  get defaultRoomsQuota() {
+    return this.currentPortalQuota?.roomsQuota.defaultQuota;
+  }
+
+  get defaultUsersQuota() {
+    return this.currentPortalQuota?.usersQuota.defaultQuota;
+  }
+
   setPortalQuotaValue = (res) => {
     this.currentPortalQuota = res;
     this.currentPortalQuotaFeatures = res.features;

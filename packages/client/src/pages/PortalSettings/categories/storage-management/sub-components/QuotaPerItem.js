@@ -4,13 +4,21 @@ import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
+import toastr from "@docspace/components/toast/toastr";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
-  const { isDisabled, saveQuota, disableQuota, toggleLabel, formLabel } = props;
+  const {
+    isDisabled,
+    saveQuota,
+    disableQuota,
+    toggleLabel,
+    formLabel,
+    getTenantExtra,
+  } = props;
 
   const { t } = useTranslation("Settings");
 
@@ -29,6 +37,12 @@ const QuotaPerItemComponent = (props) => {
 
     await disableQuota();
 
+    try {
+      await getTenantExtra();
+    } catch (e) {
+      toastr.error(e);
+    }
+
     setIsLoading(false);
   };
 
@@ -37,6 +51,12 @@ const QuotaPerItemComponent = (props) => {
     timerId = setTimeout(() => setIsLoading(true), 200);
 
     await saveQuota(size);
+
+    try {
+      await getTenantExtra();
+    } catch (e) {
+      toastr.error(e);
+    }
 
     timerId && clearTimeout(timerId);
     timerId = null;
@@ -75,9 +95,9 @@ const QuotaPerItemComponent = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, getTenantExtra } = auth;
   const { setUserQuota } = currentQuotaStore;
   const { isItemQuotaAvailable } = currentQuotaStore;
 
-  return { setUserQuota, isDisabled: !isItemQuotaAvailable };
+  return { setUserQuota, isDisabled: !isItemQuotaAvailable, getTenantExtra };
 })(observer(QuotaPerItemComponent));

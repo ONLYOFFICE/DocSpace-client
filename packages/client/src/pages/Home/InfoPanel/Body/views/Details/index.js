@@ -21,6 +21,7 @@ const Details = ({
   isVisitor,
   isCollaborator,
   selectTag,
+  isDefaultRoomsQuotaSet,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -39,6 +40,7 @@ const Details = ({
     personal,
     culture,
     selectTag,
+    isDefaultRoomsQuotaSet,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -137,7 +139,7 @@ const Details = ({
 };
 
 export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore } = auth;
+  const { userStore, currentQuotaStore } = auth;
   const { selection, getInfoPanelItemIcon, openUser } = auth.infoPanelStore;
   const { createThumbnail } = filesStore;
   const { personal, culture } = auth.settingsStore;
@@ -147,6 +149,8 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
 
   const isVisitor = user.isVisitor;
   const isCollaborator = user.isCollaborator;
+
+  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   return {
     personal,
@@ -158,5 +162,6 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     isVisitor,
     isCollaborator,
     selectTag,
+    isDefaultRoomsQuotaSet,
   };
 })(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

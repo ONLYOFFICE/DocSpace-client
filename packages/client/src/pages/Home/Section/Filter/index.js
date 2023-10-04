@@ -263,6 +263,7 @@ const SectionFilterContent = ({
   setRoomsFilter,
   standalone,
   isItemQuotaAvailable,
+  isDefaultRoomsQuotaSet,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1489,7 +1490,7 @@ const SectionFilterContent = ({
         filterOptions.push(...thirdPartyOptions);
       }
 
-      filterOptions.push(...quotaFilter);
+      isDefaultRoomsQuotaSet && filterOptions.push(...quotaFilter);
     } else {
       if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
@@ -1788,11 +1789,7 @@ const SectionFilterContent = ({
           !hide && commonOptions.push(modifiedDate);
         }
 
-        console.log("availableSort", availableSort);
-        if (
-          isItemQuotaAvailable &&
-          availableSort?.includes(SortByFieldName.UsedSpace)
-        ) {
+        if (isItemQuotaAvailable && availableSort?.includes("Storage")) {
           const idx = availableSort.findIndex(
             (x) => x === SortByFieldName.UsedSpace
           );
@@ -2187,7 +2184,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isItemQuotaAvailable } = currentQuotaStore;
+    const { isItemQuotaAvailable, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2205,6 +2202,7 @@ export default inject(
 
     return {
       isItemQuotaAvailable,
+      isDefaultRoomsQuotaSet,
 
       user,
       userId: user?.id,

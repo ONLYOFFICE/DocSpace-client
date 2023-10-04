@@ -7,7 +7,7 @@ import ws from "./lib/websocket";
 import fs from "fs";
 import logger from "morgan";
 import winston, { stream } from "./lib/logger";
-import { getAssets, getInitialState } from "./lib/helpers";
+import { getAssets, getInitialState, getOAuthState } from "./lib/helpers";
 import renderApp from "./lib/helpers/render-app";
 import i18nextMiddleware from "i18next-express-middleware";
 import i18next from "./i18n";
@@ -62,12 +62,30 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
 
+    const isOAuth = initialState.match?.type === "oauth2";
+    const oauthClientId = initialState.match?.clientId || "";
+    let isCorrectOAuth = false;
+
     if (hideAuthPage && ssoUrl && query.skipssoredirect !== "true") {
       res.redirect(ssoUrl);
       return next();
     }
 
-    if (initialState.isAuth && url !== "/login/error") {
+    //TODO: get client by id
+    if (isOAuth && oauthClientId) {
+      const oauthState: IOAuthState = await getOAuthState(
+        oauthClientId,
+        initialState?.isAuth
+      );
+
+      isCorrectOAuth = !!oauthState?.client.name;
+
+      if (isCorrectOAuth) {
+        initialState.oauth = oauthState;
+      }
+    }
+
+    if (initialState.isAuth && !isCorrectOAuth && url !== "/login/error") {
       res.redirect("/");
       return next();
     }

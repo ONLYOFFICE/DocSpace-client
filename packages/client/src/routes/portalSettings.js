@@ -122,6 +122,17 @@ const WebhookDetails = loadable(() =>
     "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
   )
 );
+const OAuthCreatePage = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+  )
+);
+const OAuthEditPage = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+  )
+);
+
 const Backup = loadable(() =>
   import("../pages/PortalSettings/categories/data-management/index")
 );
@@ -301,6 +312,18 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/plugins",
       element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/create",
+      element: <OAuthCreatePage />,
+    },
+    {
+      path: "developer-tools/oauth/:id",
+      element: <OAuthEditPage />,
     },
     {
       path: "backup",

@@ -10,6 +10,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
+import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
 
 const ArticleSettings = React.memo(() => {
   return (
@@ -48,6 +49,10 @@ const Layout = ({
 
   const webhookHistoryPath = `/portal-settings/developer-tools/webhooks/${id}`;
   const webhookDetailsPath = `/portal-settings/developer-tools/webhooks/${id}/${eventId}`;
+
+  const oauthCreatePath = "/portal-settings/developer-tools/oauth/create";
+  const oauthEditPath = `/portal-settings/developer-tools/oauth/${id}`;
+
   const currentPath = window.location.pathname;
 
   return (
@@ -56,7 +61,10 @@ const Layout = ({
       {!isGeneralPage && (
         <Section withBodyScroll={true} settingsStudio={true}>
           <Section.SectionHeader>
-            {currentPath === webhookHistoryPath ? (
+            {currentPath === oauthCreatePath ||
+            currentPath === oauthEditPath ? (
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
+            ) : currentPath === webhookHistoryPath ? (
               <HistoryHeader />
             ) : currentPath === webhookDetailsPath ? (
               <DetailsNavigationHeader />

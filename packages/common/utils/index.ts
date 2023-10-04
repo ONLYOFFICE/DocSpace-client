@@ -526,11 +526,18 @@ export const getConvertedQuota = (t, bytes) => {
   return getConvertedSize(t, bytes);
 };
 
-export const getSpaceQuotaAsText = (t, usedSpace, quotaLimit) => {
+export const getSpaceQuotaAsText = (
+  t,
+  usedSpace,
+  quotaLimit,
+  isDefaultQuotaSet
+) => {
   const usedValue = getConvertedQuota(t, usedSpace);
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  return `${usedValue} / ${quotaValue}`;
+  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
+
+  return usedValue;
 };
 
 export const conversionToBytes = (size, power) =>

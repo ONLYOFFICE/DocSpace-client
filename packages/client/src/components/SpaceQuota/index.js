@@ -23,7 +23,6 @@ const getSelectedOption = (options, action) => {
 const SpaceQuota = (props) => {
   const {
     hideColumns,
-    isCustomQuota = false,
     isDisabledQuotaChange,
     isOnlyUsedSpace = false,
     type,
@@ -32,6 +31,7 @@ const SpaceQuota = (props) => {
     changeQuota,
     onSuccess,
     setUnlimitedQuota,
+    resetQuota,
   } = props;
 
   const [action, setAction] = useState(
@@ -65,7 +65,7 @@ const SpaceQuota = (props) => {
     },
   ];
 
-  if (isCustomQuota)
+  if (item.isCustomQuota)
     options?.splice(1, 0, {
       id: "info-account-quota_no-quota",
       key: "default-quota",
@@ -90,6 +90,7 @@ const SpaceQuota = (props) => {
       changeQuota([item], successCallback, abortCallback);
 
       setAction("current-size");
+
       return;
     }
 
@@ -102,7 +103,15 @@ const SpaceQuota = (props) => {
       }
 
       setAction("no-quota");
+
       return;
+    }
+
+    try {
+      await resetQuota([item.id]);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
     }
   };
 
@@ -145,7 +154,7 @@ const SpaceQuota = (props) => {
 export default inject(
   ({ peopleStore, filesActionsStore, filesStore }, { type }) => {
     const { changeUserQuota, usersStore } = peopleStore;
-    const { updateUserQuota } = usersStore;
+    const { updateUserQuota, resetUserQuota } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const { updateRoomQuota } = filesStore;
 
@@ -153,9 +162,12 @@ export default inject(
     const setUnlimitedQuota =
       type === "user" ? updateUserQuota : updateRoomQuota;
 
+    const resetQuota = type === "user" ? resetUserQuota : null;
+
     return {
       changeQuota,
       setUnlimitedQuota,
+      resetQuota,
     };
   }
 )(observer(SpaceQuota));

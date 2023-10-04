@@ -49,7 +49,6 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 import AccountsFilter from "@docspace/common/api/people/filter";
 import { RoomSearchArea } from "@docspace/common/constants";
 import { getObjectByLocation } from "@docspace/common/utils";
-import { Events } from "@docspace/common/constants";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/common/api/files/filter";
 import {
@@ -1730,7 +1729,7 @@ class FilesActionStore {
     setIsVisible(true);
   };
 
- setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
+  setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
@@ -2351,7 +2350,7 @@ class FilesActionStore {
     const state = {
       title:
         (this.selectedFolderStore?.navigationPath &&
-        this.selectedFolderStore?.navigationPath[
+          this.selectedFolderStore?.navigationPath[
             this.selectedFolderStore?.navigationPath?.length - 1
           ]?.title) ||
         "",
@@ -2456,7 +2455,7 @@ class FilesActionStore {
         if (total === 1) {
           const title = !!folders.length ? folders[0].title : files[0].title;
           this.setSelectedItems(title, total);
-}
+        }
 
         if (total === 0) {
           this.filesStore.setSelection([]);

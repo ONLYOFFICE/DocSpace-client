@@ -4,7 +4,6 @@ import { Trans, withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
-import MobileCategoryWrapper from "../../../components/mobile-category";
 
 const MobileView = (props) => {
   const { t } = props;

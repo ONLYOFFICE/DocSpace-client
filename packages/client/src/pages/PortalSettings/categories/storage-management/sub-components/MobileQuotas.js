@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import MobileCategoryWrapper from "../../../components/mobile-category";
+import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation("Settings");

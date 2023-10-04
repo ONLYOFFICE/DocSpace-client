@@ -10,17 +10,11 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
-
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/common/utils";
 
-import {
-  isDesktop,
-  isTablet,
-  isMobile,
-  isMobileOnly,
-} from "react-device-detect";
-import { getProfileMenuItems } from "SRC_DIR/helpers/plugins";
+import { isDesktop, isTablet, isMobile } from "react-device-detect";
+
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
@@ -37,13 +31,13 @@ const PAYMENTS_URL = combineUrl(
 //const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
-
 class ProfileActionsStore {
   authStore = null;
   filesStore = null;
   peopleStore = null;
   treeFoldersStore = null;
   selectedFolderStore = null;
+  pluginStore = null;
   isAboutDialogVisible = false;
   isDebugDialogVisible = false;
   isShowLiveChat = false;
@@ -54,13 +48,15 @@ class ProfileActionsStore {
     filesStore,
     peopleStore,
     treeFoldersStore,
-    selectedFolderStore
+    selectedFolderStore,
+    pluginStore
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.pluginStore = pluginStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -224,7 +220,7 @@ class ProfileActionsStore {
       ? {
           key: "user-menu-settings",
           icon: CatalogSettingsReactSvgUrl,
-          label: t("Common:SettingsDocSpace"),
+          label: t("Common:Settings"),
           onClick: () => this.onSettingsClick(settingsUrl),
         }
       : null;
@@ -341,7 +337,7 @@ class ProfileActionsStore {
       //   onClick: this.onVideoGuidesClick,
       // },
       hotkeys,
-      {
+      !isMobile && {
         isSeparator: true,
         key: "separator2",
       },
@@ -359,18 +355,20 @@ class ProfileActionsStore {
         label: t("Common:AboutCompanyTitle"),
         onClick: this.onAboutClick,
       },
-      {
-        isSeparator: true,
-        key: "separator3",
-      },
-      {
+    ];
+
+    if (
+      !window.navigator.userAgent.includes("ZoomWebKit") &&
+      !window.navigator.userAgent.includes("ZoomApps")
+    ) {
+      actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
         label: t("Common:LogoutButton"),
         onClick: this.onLogoutClick,
         isButton: true,
-      },
-    ];
+      });
+    }
 
     if (debugInfo) {
       actions.splice(4, 0, {
@@ -381,17 +379,13 @@ class ProfileActionsStore {
       });
     }
 
-    if (enablePlugins) {
-      const pluginActions = getProfileMenuItems();
-
-      if (pluginActions) {
-        pluginActions.forEach((option) => {
-          actions.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
+    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
+      this.pluginStore.profileMenuItemsList.forEach((option) => {
+        actions.splice(option.value.position, 0, {
+          key: option.key,
+          ...option.value,
         });
-      }
+      });
     }
 
     return this.checkEnabledActions(actions);

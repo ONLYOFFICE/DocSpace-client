@@ -107,7 +107,7 @@ const SpaceQuota = (props) => {
 
     try {
       await resetQuota([item.id]);
-      toastr.success(t("Common:StorageQuotaDisabled"));
+      toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       toastr.error(e);
     }

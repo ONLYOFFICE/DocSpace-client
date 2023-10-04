@@ -190,7 +190,7 @@ class PeopleStore {
 
     try {
       await resetUserQuota(userIDs);
-      toastr.success(t("Common:StorageQuotaDisabled"));
+      toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       toastr.error(e);
     }
@@ -239,7 +239,6 @@ class PeopleStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
-      hasOnlyOneUserToRemove,
       hasFreeUsers,
       userSelectionRole,
       hasUsersToChangeQuota,
@@ -251,10 +250,6 @@ class PeopleStore {
       setSendInviteDialogVisible,
       setDeleteDialogVisible,
     } = this.dialogStore;
-
-    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.dialogStore;
-    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
     const { isOwner, isAdmin } = this.authStore.userStore.user;
 

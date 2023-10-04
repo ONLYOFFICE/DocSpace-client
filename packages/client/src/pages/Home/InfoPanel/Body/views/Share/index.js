@@ -14,14 +14,14 @@ import LinkRow from "./LinkRow";
 import { StyledLinks } from "./StyledShare";
 
 const Share = (props) => {
-  const { isRooms, setView } = props;
+  const { isRooms, setView, selection } = props;
   const { t } = useTranslation("SharingPanel");
 
   const [generalLink, setGeneralLink] = useState([]);
   const [additionalLinks, setAdditionalLinks] = useState([]);
 
   useEffect(() => {
-    if (isRooms) {
+    if (isRooms || !selection?.canShare) {
       setView("info_details");
     }
   }, []);

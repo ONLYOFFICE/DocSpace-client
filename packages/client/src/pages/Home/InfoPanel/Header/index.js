@@ -99,16 +99,16 @@ const InfoPanelHeaderContent = (props) => {
 
   const roomsSubmenu = [...submenuData];
 
-  const personalSubmenu = [
-    {
+  const personalSubmenu = [submenuData[1], submenuData[2]];
+
+  if (selection?.canShare) {
+    personalSubmenu.unshift({
       id: "info_share",
       name: t("Files:Share"),
       onClick: setShare,
       content: null,
-    },
-    submenuData[1],
-    submenuData[2],
-  ];
+    });
+  }
 
   if (enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = !!selection?.roomType;

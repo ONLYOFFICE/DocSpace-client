@@ -90,6 +90,11 @@ const ThirdParty = loadable(() =>
     "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
   )
 );
+
+const DocumentService = loadable(() =>
+  import("../pages/PortalSettings/categories/integration/DocumentService")
+);
+
 const SingleSignOn = loadable(() =>
   import("../pages/PortalSettings/categories/integration/SingleSignOn")
 );
@@ -258,6 +263,10 @@ const PortalSettingsRoutes = {
       element: <Integration />,
     },
     {
+      path: "integration/document-service",
+      element: <Integration />,
+    },
+    {
       path: "integration/smtp-settings",
       element: <Integration />,
     },
@@ -288,6 +297,10 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/webhooks/:id/:eventId",
       element: <WebhookDetails />,
+    },
+    {
+      path: "developer-tools/plugins",
+      element: <DeveloperTools />,
     },
     {
       path: "backup",

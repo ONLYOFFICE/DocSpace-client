@@ -3024,6 +3024,9 @@ const Dark = {
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: "#A3A9AE",
         errorTextColor: "#E06451",
+        groupMenuBackground: "#333333",
+        groupMenuBorder: "1px solid #474747",
+        groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
       },
     },
 

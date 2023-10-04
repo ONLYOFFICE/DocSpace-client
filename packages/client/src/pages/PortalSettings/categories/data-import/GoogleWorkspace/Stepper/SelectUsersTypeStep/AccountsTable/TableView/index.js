@@ -31,9 +31,12 @@ const StyledTableContainer = styled(TableContainer)`
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
+      background-color: ${(props) =>
+        props.theme.client.settings.migration.groupMenuBackground};
       border-bottom: ${(props) =>
-        props.theme.client.settings.migration.workspaceBorder};
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+        props.theme.client.settings.migration.groupMenuBorder};
+      box-shadow: ${(props) =>
+        props.theme.client.settings.migration.groupMenuBoxShadow};
     }
 
     .table-container_group-menu-checkbox {

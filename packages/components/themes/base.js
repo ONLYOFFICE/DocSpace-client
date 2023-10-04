@@ -3021,6 +3021,9 @@ const Base = {
         importItemDisableTextColor: "#A3A9AE",
         importItemDescription: "#333333",
         errorTextColor: "#F21C0E",
+        groupMenuBackground: "#fff",
+        groupMenuBorder: "1px solid #fff",
+        groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
       },
     },
 

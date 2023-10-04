@@ -302,8 +302,16 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-smtp-settings",
+        id: "portal-settings_catalog-document-service",
         key: "4-3",
+        icon: "",
+        link: "document-service",
+        tKey: "DocumentService",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-smtp-settings",
+        key: "4-4",
         icon: "",
         link: "smtp-settings",
         tKey: "SMTPSettings",
@@ -341,6 +349,14 @@ export const settingsTree = [
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-plugins",
+        key: "5-1",
+        icon: "",
+        link: "plugins",
+        tKey: "Plugins",
         isCategory: true,
       },
     ],
@@ -509,12 +525,7 @@ export const settingsTreeFull = [
         icon: "",
         link: "third-party-services",
       },
-      {
-        key: "3-1",
-        icon: "",
-        link: "plugins",
-        tKey: "Plugins",
-      },
+
       {
         title: "SMTP Settings",
         key: "3-1",

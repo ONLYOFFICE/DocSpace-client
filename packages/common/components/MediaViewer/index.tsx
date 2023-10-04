@@ -25,10 +25,14 @@ import {
   getPDFContextModel,
 } from "./helpers/contextModel";
 
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+
 function MediaViewer({
   playlistPos,
   nextMedia,
   prevMedia,
+  pluginContextMenuItems,
+  setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
@@ -137,7 +141,6 @@ function MediaViewer({
     props.files.length,
     playlistPos,
     props.deleteDialogVisible,
-    props.someDialogIsOpen,
   ]);
 
   const getContextModel = () => {
@@ -192,6 +195,54 @@ function MediaViewer({
         onPreviewClick,
         onCopyLink,
       });
+
+    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
+      model.unshift({
+        key: "separator-plugin",
+        isSeparator: true,
+        disabled: false,
+      });
+
+      pluginContextMenuItems.forEach((item) => {
+        const onClick = async (): Promise<void> => {
+          props.onClose();
+
+          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+
+          await item.value.onClick(targetFile.id);
+
+          if (item.value.withActiveItem) setActiveFiles([]);
+        };
+
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("image") &&
+          !targetFile.viewAccessability.ImageView
+        )
+          return;
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("video") &&
+          !targetFile.viewAccessability.MediaView
+        )
+          return;
+
+        model.unshift({
+          id: item.key,
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+
+        desktopModel.unshift({
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+      });
+    }
 
     return isMobile
       ? model
@@ -257,7 +308,9 @@ function MediaViewer({
 
   const onKeydown = (event: KeyboardEvent) => {
     const { code, ctrlKey } = event;
-    if (props.deleteDialogVisible || props.someDialogIsOpen) return;
+
+    const someDialogIsOpen = checkDialogsOpen();
+    if (props.deleteDialogVisible || someDialogIsOpen) return;
 
     if (code in KeyboardEventKeys) {
       const includesKeyboardCode = [
@@ -397,7 +450,6 @@ function MediaViewer({
           errorTitle={props.t("Common:MediaError")}
           headerIcon={headerIcon}
           audioIcon={audioIcon}
-          someDialogIsOpen={props.someDialogIsOpen}
         />
       )}
     </>

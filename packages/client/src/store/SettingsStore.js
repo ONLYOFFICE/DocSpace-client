@@ -18,6 +18,8 @@ class SettingsStore {
   thirdPartyStore;
   treeFoldersStore;
   publicRoomStore;
+  pluginStore;
+  authStore;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -65,12 +67,20 @@ class SettingsStore {
   html = [".htm", ".mht", ".html"];
   ebook = [".fb2", ".ibk", ".prc", ".epub"];
 
-  constructor(thirdPartyStore, treeFoldersStore, publicRoomStore) {
+  constructor(
+    thirdPartyStore,
+    treeFoldersStore,
+    publicRoomStore,
+    pluginStore,
+    authStore
+  ) {
     makeAutoObservable(this);
 
     this.thirdPartyStore = thirdPartyStore;
     this.treeFoldersStore = treeFoldersStore;
     this.publicRoomStore = publicRoomStore;
+    this.pluginStore = pluginStore;
+    this.authStore = authStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -189,6 +199,15 @@ class SettingsStore {
 
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
+
+  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+
+  changeDocumentServiceLocation = (docServiceUrl, internalUrl, portalUrl) =>
+    api.files.changeDocumentServiceLocation(
+      docServiceUrl,
+      internalUrl,
+      portalUrl
+    );
 
   setForcesave = (val) => (this.forcesave = val);
 
@@ -506,7 +525,23 @@ class SettingsStore {
         path = "docxf.svg";
         break;
       default:
+        const { enablePlugins } = this.authStore.settingsStore;
+
+        if (enablePlugins) {
+          const { fileItemsList } = this.pluginStore;
+
+          if (fileItemsList) {
+            fileItemsList.forEach(({ key, value }) => {
+              if (value.extension === extension && value.fileIcon)
+                path = value.fileIcon;
+            });
+
+            if (path) return path;
+          }
+        }
+
         path = "file.svg";
+
         break;
     }
 

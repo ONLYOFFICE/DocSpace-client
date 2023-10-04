@@ -41,6 +41,10 @@ import ImportAccountsStore from "./ImportAccountsStore";
 
 import PluginStore from "./PluginStore";
 
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore();
+
 const oformsStore = new OformsStore(authStore);
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
@@ -239,6 +243,7 @@ const store = {
   publicRoomStore,
 
   pluginStore,
+  oauthStore,
 };
 
 export default store;

@@ -100,3 +100,12 @@ export const StyledCaptcha = styled.div`
       }
     `}
 `;
+
+export const OAuthLinksContainer = styled.div`
+  margin-top: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+`;

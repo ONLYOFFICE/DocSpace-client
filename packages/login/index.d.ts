@@ -27,6 +27,8 @@ declare global {
     message?: string;
     messageKey?: string;
     authError?: string;
+    type?: string;
+    clientId?: string;
   };
 
   type PasswordHashType = {
@@ -112,6 +114,36 @@ declare global {
     hideAuthPage: boolean;
   }
 
+  interface ISelf {
+    avatarMax: string;
+    avatarMedium: string;
+    avatar: string;
+    avatarSmall: string;
+    hasAvatar: boolean;
+
+    displayName: string;
+    id: string;
+
+    firstName: string;
+    lasName: string;
+    userName: string;
+    email: string;
+  }
+
+  interface IOAuthClient {
+    name: string;
+    logo: string;
+    privacyURL: string;
+    termsURL: string;
+    scopes: string[];
+    clientId: string;
+  }
+
+  interface IOAuthState {
+    client: IOAuthClient;
+    self?: ISelf;
+  }
+
   interface IInitialState {
     portalSettings?: IPortalSettings;
     buildInfo?: IBuildInfo;
@@ -123,6 +155,7 @@ declare global {
     ssoSettings?: ISSOSettings;
     logoUrls: ILogoUrl[];
     error?: IError;
+    oauth?: IOAuthState;
   }
 
   interface DevRequest {

@@ -137,17 +137,44 @@ export const TableDataCell = styled.td`
 
   .session-date {
     position: relative;
-    margin-left: 0 !important;
-    margin-right: 8px;
-    :after {
-      content: "";
-      position: absolute;
-      top: 4px;
-      right: -8px;
-      width: 1px;
-      height: 12px;
-      background: ${(props) => props.theme.activeSessions.sortHeaderColor};
-    }
+
+    ${(props) =>
+      props.theme.interfaceDirection === "ltr"
+        ? css`
+            margin-right: 8px;
+            margin-left: 0 !important;
+            :after {
+              content: "";
+              position: absolute;
+              top: 4px;
+              right: -8px;
+              width: 1px;
+              height: 12px;
+              background: ${(props) =>
+                props.theme.activeSessions.sortHeaderColor};
+            }
+          `
+        : css`
+            margin-left: 8px;
+            margin-right: 0 !important;
+          `}
+  }
+
+  .session-ip {
+    position: relative;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        :after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          right: -8px;
+          width: 1px;
+          height: 12px;
+          background: ${(props) => props.theme.activeSessions.sortHeaderColor};
+        }
+      `}
   }
 
   :last-child {

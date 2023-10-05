@@ -65,8 +65,7 @@ const HistoryTableRow = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const redirectToDetails = () =>
-    navigate(window.location.pathname + `/${item.id}`);
+  const redirectToDetails = () => navigate(window.location.pathname + `/${item.id}`);
   const handleRetryEvent = async () => {
     if (isRetryPending) {
       return;
@@ -98,13 +97,11 @@ const HistoryTableRow = (props) => {
   ];
 
   const formattedDelivery =
-    moment(item.delivery)
-      .locale(i18n.language)
-      .format("MMM D, YYYY, h:mm:ss A") +
+    moment(item.delivery).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") +
     " " +
     t("Common:UTC");
 
-  const onChange = (e) => {
+  const onRowClick = (e) => {
     if (
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
@@ -117,25 +114,18 @@ const HistoryTableRow = (props) => {
     toggleEventId(item.id);
   };
 
+  const onCheckboxClick = () => {
+    toggleEventId(item.id);
+  };
+
   const isChecked = isIdChecked(item.id);
 
   return (
-    <StyledWrapper
-      className={isChecked ? "selected-table-row" : ""}
-      onClick={onChange}
-    >
-      <StyledTableRow
-        contextOptions={contextOptions}
-        checked={isChecked}
-        hideColumns={hideColumns}
-      >
+    <StyledWrapper className={isChecked ? "selected-table-row" : ""} onClick={onRowClick}>
+      <StyledTableRow contextOptions={contextOptions} checked={isChecked} hideColumns={hideColumns}>
         <TableCell>
           <TableCell checked={isChecked} className="checkboxWrapper">
-            <Checkbox
-              className="checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-            />
+            <Checkbox className="checkbox" onChange={onCheckboxClick} isChecked={isChecked} />
           </TableCell>
 
           <Text fontWeight={600}>{item.id}</Text>

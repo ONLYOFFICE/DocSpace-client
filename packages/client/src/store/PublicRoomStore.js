@@ -45,10 +45,12 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
-  deleteExternalLink = (linkId) => {
-    const externalLinks = this.externalLinks.filter(
-      (l) => l.sharedTo.id !== linkId
-    );
+  deleteExternalLink = (link, linkId) => {
+    const externalLinks = JSON.parse(JSON.stringify(this.externalLinks));
+
+    const linkIndex = externalLinks.findIndex((l) => l.sharedTo.id === linkId);
+    externalLinks[linkIndex] = link;
+
     this.externalLinks = externalLinks;
   };
 
@@ -112,6 +114,10 @@ class PublicRoomStore {
 
   validatePublicRoomPassword = (key, passwordHash) => {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
+  };
+
+  getPrimaryLink = (roomId) => {
+    return api.rooms.getPrimaryLink(roomId);
   };
 
   get isPublicRoom() {

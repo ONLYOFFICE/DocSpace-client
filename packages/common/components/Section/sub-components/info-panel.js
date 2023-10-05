@@ -20,7 +20,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   user-select: none;
   height: auto;
   width: auto;
-  background: ${props => props.theme.infoPanel.blurColor};
+  background: ${(props) => props.theme.infoPanel.blurColor};
   backdrop-filter: blur(3px);
   z-index: 300;
   @media ${tablet} {
@@ -48,15 +48,15 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
 const StyledInfoPanel = styled.div`
   height: 100%;
   width: 400px;
-  background-color: ${props => props.theme.infoPanel.backgroundColor};
-  ${props =>
+  background-color: ${(props) => props.theme.infoPanel.backgroundColor};
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          border-right: ${props =>
+          border-right: ${(props) =>
             `1px solid ${props.theme.infoPanel.borderColor}`};
         `
       : css`
-          border-left: ${props =>
+          border-left: ${(props) =>
             `1px solid ${props.theme.infoPanel.borderColor}`};
         `}
   display: flex;
@@ -69,7 +69,7 @@ const StyledInfoPanel = styled.div`
   @media ${tablet} {
     position: absolute;
     border: none;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 0;
@@ -86,7 +86,7 @@ const StyledInfoPanel = styled.div`
     @media ${tablet} {
       position: absolute;
       border: none;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               left: 0;
@@ -124,7 +124,7 @@ const StyledControlContainer = styled.div`
     display: flex;
 
     top: 18px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: -27px;
@@ -139,7 +139,7 @@ const StyledControlContainer = styled.div`
     @media ${tablet} {
       display: flex;
       top: 18px;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               right: -27px;
@@ -154,7 +154,7 @@ const StyledControlContainer = styled.div`
     display: flex;
 
     top: -27px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 10px;
@@ -173,7 +173,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   height: 17px;
   z-index: 455;
   path {
-    fill: ${props => props.theme.catalog.control.fill};
+    fill: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 
@@ -185,12 +185,13 @@ const InfoPanel = ({
   isMobileHidden,
   setIsVisible,
   canDisplay,
+  anotherDialogOpen,
   viewAs,
 }) => {
   const closeInfoPanel = () => setIsVisible(false);
 
   useEffect(() => {
-    const onMouseDown = e => {
+    const onMouseDown = (e) => {
       if (e.target.id === "InfoPanelWrapper") closeInfoPanel();
     };
 
@@ -201,20 +202,20 @@ const InfoPanel = ({
       if (!isDesktop() && isVisible) closeInfoPanel();
     };
 
-    return () => {
-      document.removeEventListener("mousedown", onMouseDown);
-    };
+    return () => document.removeEventListener("mousedown", onMouseDown);
   }, []);
 
   const infoPanelComponent = (
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
-      id="InfoPanelWrapper">
+      id="InfoPanelWrapper"
+    >
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer
           isRowView={viewAs === "row"}
-          onClick={closeInfoPanel}>
+          onClick={closeInfoPanel}
+        >
           <StyledCrossIcon />
         </StyledControlContainer>
 
@@ -231,13 +232,14 @@ const InfoPanel = ({
       <Portal
         element={infoPanelComponent}
         appendTo={rootElement}
-        visible={isVisible && !isMobileHidden}
+        visible={isVisible && !isMobileHidden && !anotherDialogOpen}
       />
     );
   };
 
   return !isVisible ||
     !canDisplay ||
+    anotherDialogOpen ||
     ((isTablet() || isMobile || isMobileUtils()) && isMobileHidden)
     ? null
     : isMobileOnly
@@ -258,16 +260,22 @@ StyledInfoPanelWrapper.defaultProps = { theme: Base };
 StyledInfoPanel.defaultProps = { theme: Base };
 InfoPanel.defaultProps = { theme: Base };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, dialogsStore }) => {
   const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
     auth.infoPanelStore;
 
+  const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
+
   const canDisplay = getCanDisplay();
+
+  const anotherDialogOpen =
+    createRoomDialogVisible || invitePanelOptions.visible;
 
   return {
     isVisible,
     isMobileHidden,
     setIsVisible,
     canDisplay,
+    anotherDialogOpen,
   };
 })(InfoPanel);

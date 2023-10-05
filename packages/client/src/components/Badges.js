@@ -147,6 +147,23 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges">
+      {isForm && (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge-version badge-version-current tablet-badge icons-group"
+            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            label={t("BadgeMyDraftTitle")}
+            title={t("BadgeMyDraftTitle")}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+          />
+        </BadgeWrapper>
+      )}
+
       {isEditing && !isVisitor && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -196,15 +213,17 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
-      <BadgeWrapper isTile={isTile}>
-        <HelpButton
-          color="#F2675A"
-          place="bottom"
-          size={isViewTable ? 12 : 16}
-          className="bagde_alert icons-group"
-          tooltipContent={t("BadgeAlertDescription")}
-        />
-      </BadgeWrapper>
+      {isForm && (
+        <BadgeWrapper isTile={isTile}>
+          <HelpButton
+            color="#F2675A"
+            place="bottom"
+            size={isViewTable ? 12 : 16}
+            className="bagde_alert icons-group"
+            tooltipContent={t("BadgeAlertDescription")}
+          />
+        </BadgeWrapper>
+      )}
     </div>
   ) : (
     <>

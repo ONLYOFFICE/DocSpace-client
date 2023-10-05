@@ -1,5 +1,5 @@
 ﻿import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import Loaders from "@docspace/common/components/Loaders";
 import ContextMenuButton from "@docspace/components/context-menu-button";
 import { isTablet } from "react-device-detect";
@@ -60,7 +60,7 @@ const Preview = (props) => {
     saveToSessionStorage("selectColorAccent", colorPreview);
   }, [colorPreview]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onCheckView();
     window.addEventListener("resize", onCheckView);
 

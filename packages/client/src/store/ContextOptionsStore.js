@@ -1149,17 +1149,10 @@ class ContextOptionsStore {
           this.treeFoldersStore.isArchiveFolder ||
           !item.security.CopySharedLink,
         onClick: async () => {
-          if (this.publicRoomStore.primaryLink) {
-            copy(this.publicRoomStore.primaryLink.sharedTo.shareLink);
-            toastr.success(t("Files:LinkSuccessfullyCopied"));
-            return;
-          }
-
           const primaryLink = await this.publicRoomStore.getPrimaryLink(
             item.id
           );
 
-          this.publicRoomStore.setExternalLinks([primaryLink]);
           copy(primaryLink.sharedTo.shareLink);
           toastr.success(t("Files:LinkSuccessfullyCopied"));
           return;

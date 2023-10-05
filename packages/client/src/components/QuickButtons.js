@@ -1,5 +1,6 @@
 ﻿import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
@@ -8,9 +9,10 @@ import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { isMobile, isTablet } from "react-device-detect";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus, RoomsType } from "@docspace/common/constants";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import copy from "copy-to-clipboard";
 
 const QuickButtons = (props) => {
   const {
@@ -62,6 +64,14 @@ const QuickButtons = (props) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 
+  const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+
+  const onCopyLink = () => {
+    console.log("onCopyLink", item); // TODO:
+    return;
+    copy();
+  };
+
   return (
     <div className="badges additional-badges">
       {isAvailableLockFile && (
@@ -90,6 +100,19 @@ const QuickButtons = (props) => {
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
           title={t("Common:Download")}
+        />
+      )}
+      {isPublicRoomType && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onCopyLink}
+          color={colorLock}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

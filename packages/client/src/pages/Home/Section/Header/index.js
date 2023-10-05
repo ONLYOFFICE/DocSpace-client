@@ -235,7 +235,7 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
-    externalLinks,
+    primaryLink,
     moveToPublicRoom,
   } = props;
 
@@ -612,43 +612,18 @@ const SectionHeaderContent = (props) => {
 
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    const links = externalLinks.filter((l) => !l.sharedTo.disabled);
-    const isMultiExternalLink = links.length > 1;
-
-    const roomLinks = links.map((link) => {
-      return {
-        // id: "option_move-to",
-        key: `external-link_${link.sharedTo.id}`,
-        label: link.sharedTo.title,
-        icon: InvitationLinkReactSvgUrl,
-        onClick: () => {
-          copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
-        },
-        disabled: link.sharedTo.disabled,
-      };
-    });
-
-    const publicAction = links.length
-      ? isMultiExternalLink
-        ? {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            disabled: !isPublicRoomType,
-            items: roomLinks,
-          }
-        : {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            onClick: () => {
-              roomLinks[0]?.onClick();
-            },
-            disabled: !isPublicRoomType || roomLinks[0]?.disabled,
-          }
+    const publicAction = primaryLink
+      ? {
+          id: "header_option_copy-external-link",
+          key: "copy-external-link",
+          label: t("SharingPanel:CopyExternalLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Files:LinkSuccessfullyCopied"));
+          },
+          disabled: !isPublicRoomType || primaryLink.sharedTo.disabled,
+        }
       : {};
 
     if (isArchiveFolder) {
@@ -1305,7 +1280,9 @@ export default inject(
       onClickBack,
       isPublicRoomType,
       isPublicRoom: publicRoomStore.isPublicRoom,
-      externalLinks: publicRoomStore.roomLinks,
+
+      primaryLink: publicRoomStore.primaryLink,
+
       moveToPublicRoom,
 
       getAccountsHeaderMenu,

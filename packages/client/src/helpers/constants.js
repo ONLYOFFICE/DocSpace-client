@@ -64,7 +64,7 @@ export const CategoryType = Object.freeze({
  * @readonly
  */
 export const TableVersions = Object.freeze({
-  Rooms: "1",
+  Rooms: "2",
   Files: "2",
   Accounts: "3",
   Trash: "4",

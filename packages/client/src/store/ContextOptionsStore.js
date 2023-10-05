@@ -1136,15 +1136,16 @@ class ContextOptionsStore {
         label: t("LinkForRoomMembers"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled: item.roomType === RoomsType.PublicRoom,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("SharingPanel:CopyExternalLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         disabled: this.treeFoldersStore.isArchiveFolder,
-        onLoad: () => this.onLoadLinks(t, item),
+        onClick: () => this.onCopyLink(item, t), // TODO:
+        //  onLoad: () => this.onLoadLinks(t, item),
       },
       {
         id: "option_room-info",

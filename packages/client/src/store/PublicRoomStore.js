@@ -126,6 +126,15 @@ class PublicRoomStore {
         l.sharedTo.linkType === LinkType.External
     );
   }
+
+  get primaryLink() {
+    return this.roomLinks.find((l) => l.sharedTo.primary);
+  }
+
+  get additionalLinks() {
+    const additionalLinks = this.roomLinks.filter((l) => !l.sharedTo.primary);
+    return additionalLinks;
+  }
 }
 
 export default PublicRoomStore;

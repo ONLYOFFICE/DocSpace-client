@@ -40,6 +40,7 @@ const Members = ({
   externalLinks,
   members,
   setMembersList,
+  roomType,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
@@ -217,7 +218,7 @@ const Members = ({
 
   return (
     <>
-      {isPublicRoomType && <PublicRoomBlock t={t} />}
+      {isPublicRoomType && <PublicRoomBlock t={t} roomType={roomType} />}
       <MembersList
         loadNextPage={loadNextPage}
         t={t}
@@ -299,6 +300,7 @@ export default inject(
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,
+      roomType,
     };
   }
 )(

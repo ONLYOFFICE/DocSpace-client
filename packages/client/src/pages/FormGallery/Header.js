@@ -42,7 +42,10 @@ const SectionHeaderContent = ({
 }) => {
   const navigate = useNavigate();
 
-  const [checkboxOptions, setCheckboxOptions] = useState(<>{[]}</>);
+  const [checkboxOptions, setCheckboxOptions] = useState({
+    fromFolder: null,
+    viewAll: null,
+  });
 
   const onNavigateBack = () => {
     setGallerySelected(null);
@@ -73,31 +76,37 @@ const SectionHeaderContent = ({
       const prevFolder =
         oformFromFolderId && (await api.files.getFolderInfo(oformFromFolderId));
 
-      const newCheckboxOptions = [];
-      if (oformsFilter.categorizeBy && oformsFilter.categoryId)
-        newCheckboxOptions.push(
-          <DropDownItem
-            id={"view-all"}
-            key={"view-all"}
-            label={t("Common:OFORMsGallery")}
-            data-key={"OFORMs gallery"}
-            onClick={onViewAllTemplates}
-          />
-        );
       if (prevFolder)
-        newCheckboxOptions.push(
-          <DropDownItem
-            id={"fromFolder"}
-            key={"fromFolder"}
-            label={prevFolder.title}
-            data-key={prevFolder.title}
-            onClick={onNavigateBack}
-          />
-        );
-
-      setCheckboxOptions(<>{newCheckboxOptions}</>);
+        setCheckboxOptions((prev) => ({
+          ...prev,
+          fromFolder: (
+            <DropDownItem
+              id={"fromFolder"}
+              key={"fromFolder"}
+              label={prevFolder.title}
+              data-key={prevFolder.title}
+              onClick={onNavigateBack}
+            />
+          ),
+        }));
     })();
-  }, [oformFromFolderId, oformsFilter.categorizeBy, oformsFilter.categoryId]);
+  }, [oformFromFolderId]);
+
+  useEffect(() => {
+    let viewAll = null;
+    if (oformsFilter.categorizeBy && oformsFilter.categoryId)
+      viewAll = (
+        <DropDownItem
+          id={"view-all"}
+          key={"view-all"}
+          label={t("Common:OFORMsGallery")}
+          data-key={"OFORMs gallery"}
+          onClick={onViewAllTemplates}
+        />
+      );
+
+    setCheckboxOptions((prev) => ({ ...prev, viewAll }));
+  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
     <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
@@ -117,7 +126,6 @@ const SectionHeaderContent = ({
         id="oform-header-combobox"
         comboIcon={TriangleNavigationDownReactSvgUrl}
         noBorder
-        advancedOptions={checkboxOptions}
         className="oform-header-combobox not-selectable"
         options={[]}
         selectedOption={{}}
@@ -125,6 +133,12 @@ const SectionHeaderContent = ({
         manualX="-32px"
         title={t("Common:TitleSelectFile")}
         isMobileView={isMobileOnly}
+        advancedOptions={
+          <>
+            {!!checkboxOptions.fromFolder && checkboxOptions.fromFolder}
+            {!!checkboxOptions.viewAll && checkboxOptions.viewAll}
+          </>
+        }
       />
 
       {canSubmitToFormGallery() && (

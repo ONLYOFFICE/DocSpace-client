@@ -4,6 +4,8 @@ import OformsFilter from "@docspace/common/api/oforms/filter";
 import { submitToGallery } from "@docspace/common/api/oforms";
 
 import {
+  getOformLocales,
+  getOforms,
   getCategoryById,
   getCategoryTypes,
   getCategoriesOfCategoryType,
@@ -26,10 +28,9 @@ class OformsStore {
   oformFromFolderId = myDocumentsFolderId;
 
   currentCategory = null;
-  // categoryIds = ["categories", "types", "compilations"];
-  categoryTypeTitles = ["categorie", "type", "compilation"];
+  categoryTitles = [];
 
-  oformLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
+  oformLocales = [];
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -65,8 +66,39 @@ class OformsStore {
     this.authStore.infoPanelStore.setSelection(gallerySelected);
   };
 
-  getOforms = async (filter = OformsFilter.getDefault()) => {
-    const oformData = await this.authStore.getOforms(filter);
+  fetchOformLocales = async () => {
+    const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
+    const fetchedLocales = await getOformLocales(url);
+
+    const localeKeys = fetchedLocales.map((locale) => locale.code);
+    this.oformLocales = localeKeys;
+
+    return oformLocales;
+  };
+
+  getOforms = (filter = OformsFilter.getDefault()) => {
+    const formName = "&fields[0]=name_form";
+    const updatedAt = "&fields[1]=updatedAt";
+    const size = "&fields[2]=file_size";
+    const filePages = "&fields[3]=file_pages";
+    const defaultDescription = "&fields[4]=description_card";
+    const templateDescription = "&fields[5]=template_desc";
+    const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
+    const templateImage = "&populate[template_image][fields][5]=formats";
+
+    const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
+    const params = `?${fields}${filter.toApiUrlParams()}`;
+
+    return new Promise(async (resolve) => {
+      const apiUrl = `${this.authStore.settingsStore.formGallery.url}${params}`;
+      let oforms = await getOforms(apiUrl);
+      console.log(oforms);
+      resolve(oforms);
+    });
+  };
+
+  fetchOforms = async (filter = OformsFilter.getDefault()) => {
+    const oformData = await this.getOforms(filter);
 
     const paginationData = oformData?.data?.meta?.pagination;
     if (paginationData) {
@@ -80,14 +112,14 @@ class OformsStore {
     });
   };
 
-  loadMoreForms = async () => {
+  fetchMoreOforms = async () => {
     if (!this.hasMoreForms || this.oformsIsLoading) return;
     this.setOformsIsLoading(true);
 
     const newOformsFilter = this.oformsFilter.clone();
     newOformsFilter.page += 1;
 
-    const oformData = await this.authStore.getOforms(newOformsFilter, true);
+    const oformData = await this.getOforms(newOformsFilter, true);
     const newForms = oformData?.data?.data ?? [];
 
     runInAction(() => {
@@ -100,7 +132,7 @@ class OformsStore {
   getCategoryTitle = (category, locale = this.defaultOformLocale) => {
     if (!category) return "";
 
-    const categoryType = this.categoryTypeTitles.filter(
+    const categoryType = this.categoryTitles.filter(
       (categoryTitle) => !!category.attributes[categoryTitle]
     );
     const categoryTitle = category.attributes[categoryType];
@@ -123,7 +155,7 @@ class OformsStore {
     const locale = this.defaultOformLocale;
 
     if (!categorizeBy || !categoryId) {
-      this.setOformsCurrentCategory(null);
+      this.currentCategory = null;
       return;
     }
 
@@ -134,9 +166,7 @@ class OformsStore {
       locale
     );
 
-    runInAction(() => {
-      this.setOformsCurrentCategory(fetchedCategory);
-    });
+    this.currentCategory = fetchedCategory;
   };
 
   fetchCategoryTypes = async () => {
@@ -144,10 +174,8 @@ class OformsStore {
     const locale = this.defaultOformLocale;
 
     const menuItems = await getCategoryTypes(url, locale);
-    // this.categoryTypeTitles = menuItems.map((item) => item.attributes.categoryTitle);
-    // this.locales = menuItems.map((item) => item.attributes.categoryTitle);
-    this.categoryTypeTitles = ["categorie", "type", "compilation"];
-    this.oformLocales = ["en", "zh", "it", "fr", "es", "de", "ja"];
+    //ToDo configure after api change
+    this.categoryTitles = ["categorie", "type", "compilation"];
 
     return menuItems;
   };
@@ -170,7 +198,7 @@ class OformsStore {
     this.oformsFilter.categoryId = categoryId;
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => this.getOforms(newOformsFilter));
+    runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
   filterOformsByLocale = async (locale) => {
@@ -184,7 +212,7 @@ class OformsStore {
     this.oformsFilter.categoryId = "";
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => this.getOforms(newOformsFilter));
+    runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
   filterOformsBySearch = (search) => {
@@ -192,7 +220,7 @@ class OformsStore {
     this.oformsFilter.search = search;
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => this.getOforms(newOformsFilter));
+    runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
   sortOforms = (sortBy, sortOrder) => {
@@ -203,13 +231,15 @@ class OformsStore {
     this.oformsFilter.sortOrder = sortOrder;
     const newOformsFilter = this.oformsFilter.clone();
 
-    runInAction(() => this.getOforms(newOformsFilter));
+    runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
   resetFilters = () => {
     this.currentCategory = null;
     const newOformsFilter = OformsFilter.getDefault();
-    runInAction(() => this.getOforms(newOformsFilter));
+    newOformsFilter.locale = this.defaultOformLocale;
+
+    runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
   hideSubmitToGalleryTile = () => {

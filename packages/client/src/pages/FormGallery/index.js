@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Section from "@docspace/common/components/Section";
 import { observer, inject } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -15,9 +15,10 @@ const FormGallery = ({
   currentCategory,
   fetchCurrentCategory,
   defaultOformLocale,
+  fetchOformLocales,
   oformsFilter,
   setOformsFilter,
-  getOforms,
+  fetchOforms,
   setOformFromFolderId,
 }) => {
   const location = useLocation();
@@ -27,13 +28,25 @@ const FormGallery = ({
   const [isInitLoading, setIsInitLoading] = useState(true);
 
   useEffect(() => {
-    if (!isInitLoading && location.search !== `?${oformsFilter.toUrlParams()}`)
+    const firstLoadFilter = OformsFilter.getFilter(location);
+    fetchOforms(firstLoadFilter);
+    fetchOformLocales();
+    setIsInitLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isInitLoading &&
+      location.search !== `?${oformsFilter.toUrlParams()}`
+    ) {
+      if (!oformsFilter.locale) oformsFilter.locale = defaultOformLocale;
       navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+    }
   }, [oformsFilter]);
 
   useEffect(() => {
     if (!currentCategory) fetchCurrentCategory();
-  }, [oformsFilter]);
+  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   useEffect(() => {
     if (fromFolderId) setOformFromFolderId(fromFolderId);
@@ -45,16 +58,6 @@ const FormGallery = ({
       );
     }
   }, [fromFolderId]);
-
-  useEffect(() => {
-    const firstLoadFilter = OformsFilter.getFilter(location);
-    if (!firstLoadFilter.locale) firstLoadFilter.locale = defaultOformLocale;
-
-    setOformsFilter(firstLoadFilter);
-    getOforms(firstLoadFilter);
-
-    setIsInitLoading(false);
-  }, []);
 
   return (
     <>
@@ -94,10 +97,11 @@ export default inject(({ oformsStore }) => ({
   fetchCurrentCategory: oformsStore.fetchCurrentCategory,
 
   defaultOformLocale: oformsStore.defaultOformLocale,
+  fetchOformLocales: oformsStore.fetchOformLocales,
 
   oformsFilter: oformsStore.oformsFilter,
   setOformsFilter: oformsStore.setOformsFilter,
 
-  getOforms: oformsStore.getOforms,
+  fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
 }))(observer(FormGallery));

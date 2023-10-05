@@ -400,7 +400,6 @@ function MediaViewer({
   let isImage = false;
   let isVideo = false;
   let isAudio = false;
-  let isForm = false;
   let isPdf = false;
 
   const archiveRoom =
@@ -450,7 +449,6 @@ function MediaViewer({
           isImage={isImage}
           isAudio={isAudio}
           isVideo={isVideo}
-          isForm={!!props.isFormGalleryViewer}
           isPdf={isPdf}
           isPreviewFile={props.isPreviewFile}
           onDownloadClick={onDownload}

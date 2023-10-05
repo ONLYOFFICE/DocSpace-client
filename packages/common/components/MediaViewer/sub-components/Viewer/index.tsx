@@ -7,7 +7,6 @@ import { StyledViewerContainer } from "../../StyledComponents";
 import NextButton from "../NextButton";
 import PrevButton from "../PrevButton";
 import ImageViewer from "../ImageViewer";
-import OformViewer from "../OformViewer";
 import MobileDetails from "../MobileDetails";
 import DesktopDetails from "../DesktopDetails";
 import ViewerPlayer from "../ViewerPlayer";
@@ -189,7 +188,7 @@ function Viewer(props: ViewerProps) {
         </>
       )}
 
-      {props.isImage && !props.isForm
+      {props.isImage
         ? ReactDOM.createPortal(
             <ImageViewer
               panelVisible={panelVisible}
@@ -243,30 +242,6 @@ function Viewer(props: ViewerProps) {
               removeToolbarVisibleTimer={removeToolbarVisibleTimer}
               removePanelVisibleTimeout={removePanelVisibleTimeout}
               restartToolbarVisibleTimer={restartToolbarVisibleTimer}
-            />,
-            containerRef.current
-          )
-        : props.isForm
-        ? ReactDOM.createPortal(
-            <OformViewer
-              panelVisible={panelVisible}
-              toolbar={props.toolbar}
-              src={isTiff ? props.fileUrl : targetFile.src}
-              isTiff={isTiff}
-              thumbnailSrc={targetFile.thumbnailUrl}
-              imageId={targetFile.fileId}
-              version={targetFile.version}
-              mobileDetails={mobileDetails}
-              onMask={props.onMaskClick}
-              onPrev={props.onPrevClick}
-              onNext={props.onNextClick}
-              isLastImage={!isNotLastElement}
-              isFistImage={!isNotFirstElement}
-              generateContextMenu={props.generateContextMenu}
-              setIsOpenContextMenu={setIsOpenContextMenu}
-              resetToolbarVisibleTimer={resetToolbarVisibleTimer}
-              contextModel={props.contextModel}
-              errorTitle={props.errorTitle}
             />,
             containerRef.current
           )

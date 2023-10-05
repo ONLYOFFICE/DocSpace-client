@@ -105,7 +105,6 @@ function ViewerWrapper(props: ViewerWrapperProps) {
       isImage={props.isImage}
       isAudio={props.isAudio}
       isVideo={props.isVideo}
-      isForm={props.isForm}
       isPdf={props.isPdf}
       visible={props.visible}
       playlist={props.playlist}

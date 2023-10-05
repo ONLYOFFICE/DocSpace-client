@@ -4,6 +4,11 @@ export function getOforms(url) {
   return axios.get(url);
 }
 
+export const getOformLocales = async (url) => {
+  const res = await axios.get(url);
+  return res?.data;
+};
+
 export const getCategoryById = async (url, categorizeBy, id, locale) => {
   const res = await axios.get(
     `${url}/${categorizeBy}/${id}?populate=*&locale=${locale}`

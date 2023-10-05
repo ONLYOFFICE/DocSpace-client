@@ -163,7 +163,7 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
-        ips: ipsObjectArr,
+        ips: ips,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));

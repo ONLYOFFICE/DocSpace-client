@@ -69,11 +69,8 @@ class OformsStore {
   fetchOformLocales = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
     const fetchedLocales = await getOformLocales(url);
-
     const localeKeys = fetchedLocales.map((locale) => locale.code);
     this.oformLocales = localeKeys;
-
-    return oformLocales;
   };
 
   getOforms = (filter = OformsFilter.getDefault()) => {

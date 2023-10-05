@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
 import { Text } from "@docspace/components";
-
+import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
 import ItemContextOptions from "./ItemContextOptions";

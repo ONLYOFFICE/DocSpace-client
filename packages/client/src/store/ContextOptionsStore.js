@@ -91,7 +91,7 @@ class ContextOptionsStore {
     settingsStore,
     selectedFolderStore,
     publicRoomStore,
-    oformsStore
+    oformsStore,
     pluginStore
   ) {
     makeAutoObservable(this);

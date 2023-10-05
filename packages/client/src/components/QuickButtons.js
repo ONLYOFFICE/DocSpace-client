@@ -12,7 +12,6 @@ import { isMobile, isTablet } from "react-device-detect";
 import { FileStatus, RoomsType } from "@docspace/common/constants";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import copy from "copy-to-clipboard";
 
 const QuickButtons = (props) => {
   const {
@@ -22,6 +21,7 @@ const QuickButtons = (props) => {
     sectionWidth,
     onClickLock,
     onClickDownload,
+    onCopyPrimaryLink,
     isDisabled,
     onClickFavorite,
     viewAs,
@@ -66,12 +66,6 @@ const QuickButtons = (props) => {
 
   const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
 
-  const onCopyLink = () => {
-    console.log("onCopyLink", item); // TODO:
-    return;
-    copy();
-  };
-
   return (
     <div className="badges additional-badges">
       {isAvailableLockFile && (
@@ -108,7 +102,7 @@ const QuickButtons = (props) => {
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
-          onClick={onCopyLink}
+          onClick={onCopyPrimaryLink}
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}

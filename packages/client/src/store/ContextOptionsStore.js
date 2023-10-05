@@ -1152,10 +1152,10 @@ class ContextOptionsStore {
           const primaryLink = await this.publicRoomStore.getPrimaryLink(
             item.id
           );
-
-          copy(primaryLink.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
-          return;
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Files:LinkSuccessfullyCopied"));
+          }
         },
         // onLoad: () => this.onLoadLinks(t, item),
       },

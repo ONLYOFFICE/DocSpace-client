@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
+import { hugeMobile } from "../utils/device";
 
 const DateInputStyle = styled.div`
   width: ${(props) => props.theme.datePicker.width};
@@ -16,7 +17,7 @@ const DropDownStyle = styled.div`
     }
     padding: ${(props) => props.theme.datePicker.dropDownPadding};
 
-    @media (max-width: 428px) {
+    @media ${hugeMobile} {
       position: fixed;
       top: unset;
       right: 0;

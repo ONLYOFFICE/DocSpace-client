@@ -9,7 +9,7 @@ import styled, { css, withTheme } from "styled-components";
 import DropDownItem from "@docspace/components/drop-down-item";
 import { isMobileOnly } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet, hugeMobile } from "@docspace/components/utils/device";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import Portal from "@docspace/components/portal";
 
@@ -40,7 +40,7 @@ const StyledDropDown = styled(DropDown)`
         : `right: 16px !important;`}
   }
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     position: fixed;
 
     top: unset !important;
@@ -69,7 +69,7 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 290;
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     display: flex;
   }
 `;
@@ -176,12 +176,11 @@ class ProfileMenu extends React.Component {
       forwardedRef,
       isBannerVisible,
     } = this.props;
-    console.log('Current theme: ', this.props.theme)
+    console.log("Current theme: ", this.props.theme);
 
     return (
       <StyledDropDown
         className={className}
-
         directionX="right"
         open={open}
         clickOutsideAction={clickOutsideAction}

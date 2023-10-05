@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import ComboBox from "../combobox/index.js";
 import Base from "../themes/base";
+import { hugeMobile } from "../utils/device";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
@@ -14,7 +15,7 @@ const StyledWrapper = styled(ComboBox)`
       `}
   }
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     .backdrop-active {
       top: -64px;
       z-index: 560;

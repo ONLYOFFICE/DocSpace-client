@@ -6,7 +6,7 @@ import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
 import { isMobile } from "react-device-detect";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, hugeMobile } from "../utils/device";
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -82,7 +82,7 @@ const StyledAside = styled(Container)`
           `}
   `}
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -160,7 +160,7 @@ const StyledControlContainer = styled.div`
         : `left: -27px;`}
   `}
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     display: flex;
 
     top: -27px;

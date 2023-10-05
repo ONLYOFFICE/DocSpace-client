@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, hugeMobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   .header {
@@ -14,7 +14,7 @@ const StyledLoader = styled.div`
       height: 37px;
     }
 
-    @media (max-width: 428px) {
+    @media ${hugeMobile} {
       width: 273px;
       height: 37px;
       margin-bottom: 18px;
@@ -34,7 +34,7 @@ const StyledLoader = styled.div`
     gap: 20px;
     margin-bottom: 40px;
 
-    @media (max-width: 428px) {
+    @media ${hugeMobile} {
       width: 100%;
     }
 

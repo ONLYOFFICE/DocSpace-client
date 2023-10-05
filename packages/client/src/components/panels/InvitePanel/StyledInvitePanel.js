@@ -401,7 +401,7 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 450;
 
-  @media (max-width: 428px) {
+  @media ${hugeMobile} {
     display: flex;
 
     top: -27px;

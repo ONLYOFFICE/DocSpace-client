@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import {
-  mobile,
+  hugeMobile,
   tablet,
   smallTablet,
   desktop,
@@ -181,7 +181,7 @@ const EmptyContentBody = styled.div`
       }
     }
 
-    @media (max-width: 428px) {
+    @media ${hugeMobile} {
       ${MobileView}
     }
   }

@@ -101,12 +101,10 @@ const StyledComponent = styled.div`
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
-                margin-right: 12px;
                 border-radius: 16px 0px 0px 16px;
                 border-right-style: none;
               `
             : css`
-                margin-left: 12px;
                 border-radius: 0px 16px 16px 0px;
                 border-left-style: none;
               `}

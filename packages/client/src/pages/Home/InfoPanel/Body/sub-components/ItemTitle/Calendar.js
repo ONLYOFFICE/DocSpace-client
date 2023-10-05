@@ -31,6 +31,9 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
     setIsOpen(false);
   };
 
+  const formattedRoomCreationDate =
+    moment(roomCreationDate).format("YYYY/MM/DD");
+
   return (
     <StyledCalendar>
       <div onClick={toggleCalendar}>Calendar</div>
@@ -39,7 +42,7 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
           className="calendar"
           setSelectedDate={onDateSet}
           selectedDate={selectedDate}
-          minDate={{ roomCreationDate }}
+          minDate={new Date(formattedRoomCreationDate)}
           maxDate={new Date()}
         />
       )}

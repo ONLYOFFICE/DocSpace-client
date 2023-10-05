@@ -990,7 +990,11 @@ class UploadDataStore {
       for (let index = 0; index < length; index++) {
         chunksArray.push({
           isActive: false,
-          onUpload: () => uploadFile(location, requestsDataArray[index]),
+          onUpload: () =>
+            uploadFile(
+              location + `&chunkNumber=${index + 1}`,
+              requestsDataArray[index]
+            ),
         });
       }
 
@@ -1198,7 +1202,6 @@ class UploadDataStore {
         while (chunk < chunks) {
           const offset = chunk * chunkUploadSize;
           const formData = new FormData();
-          file.chunkNumber = chunk + 1;
           formData.append("file", file.slice(offset, offset + chunkUploadSize));
           requestsDataArray.push(formData);
           chunk++;

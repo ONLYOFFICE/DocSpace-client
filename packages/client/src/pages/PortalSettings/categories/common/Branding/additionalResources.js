@@ -44,8 +44,6 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    width: max-content;
-
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

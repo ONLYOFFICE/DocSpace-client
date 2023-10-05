@@ -12,6 +12,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React from "react";
 
 import { isMobileOnly } from "react-device-detect";
@@ -26,8 +27,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import MobileView from "./MobileView";
 
 import { Events, EmployeeType } from "@docspace/common/constants";
-import { getMainButtonItems } from "SRC_DIR/helpers/plugins";
-
 import toastr from "@docspace/components/toast/toastr";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
@@ -113,6 +112,7 @@ const ArticleMainButtonContent = (props) => {
     oformsFilter,
 
     enablePlugins,
+    mainButtonItemsList,
 
     currentColorScheme,
 
@@ -260,6 +260,17 @@ const ArticleMainButtonContent = (props) => {
 
   React.useEffect(() => {
     if (isRoomsFolder || isSettingsPage) return;
+
+    const pluginItems = [];
+
+    if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
+      mainButtonItemsList.forEach((option) => {
+        pluginItems.push({
+          key: option.key,
+          ...option.value,
+        });
+      });
+    }
 
     const formActions = [
       {
@@ -418,6 +429,18 @@ const ArticleMainButtonContent = (props) => {
 
     const menuModel = [...actions];
 
+    if (pluginItems.length > 0) {
+      menuModel.push({
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
+      });
+    }
+
     menuModel.push({
       isSeparator: true,
       key: "separator",
@@ -425,19 +448,6 @@ const ArticleMainButtonContent = (props) => {
 
     menuModel.push(...uploadActions);
     setUploadActions(uploadActions);
-
-    if (enablePlugins) {
-      const pluginOptions = getMainButtonItems();
-
-      if (pluginOptions) {
-        pluginOptions.forEach((option) => {
-          menuModel.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
-        });
-      }
-    }
 
     setModel(menuModel);
     setActions(actions);
@@ -448,9 +458,11 @@ const ArticleMainButtonContent = (props) => {
     isAccountsPage,
     isSettingsPage,
     enablePlugins,
+    mainButtonItemsList,
     isRoomsFolder,
     isOwner,
     isAdmin,
+
     onCreate,
     onCreateRoom,
     onInvite,
@@ -565,6 +577,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     oformsStore,
+    pluginStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -597,6 +610,7 @@ export default inject(
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { mainButtonItemsList } = pluginStore;
 
     return {
       isGracePeriod,
@@ -626,6 +640,8 @@ export default inject(
       oformsFilter,
 
       enablePlugins,
+      mainButtonItemsList,
+
       currentColorScheme,
 
       isAdmin,

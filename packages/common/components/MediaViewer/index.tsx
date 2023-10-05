@@ -33,6 +33,8 @@ function MediaViewer({
   playlistPos,
   nextMedia,
   prevMedia,
+  pluginContextMenuItems,
+  setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
   const navigate = useNavigate();
@@ -200,11 +202,53 @@ function MediaViewer({
         onCopyLink,
       });
 
-    if (props.isFormGalleryViewer)
-      return getOformContextModel(t, targetFile, navigate, {
-        onClickCreateOform,
-        onClickSuggestOformChanges,
+    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
+      model.unshift({
+        key: "separator-plugin",
+        isSeparator: true,
+        disabled: false,
       });
+
+      pluginContextMenuItems.forEach((item) => {
+        const onClick = async (): Promise<void> => {
+          props.onClose();
+
+          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+
+          await item.value.onClick(targetFile.id);
+
+          if (item.value.withActiveItem) setActiveFiles([]);
+        };
+
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("image") &&
+          !targetFile.viewAccessability.ImageView
+        )
+          return;
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("video") &&
+          !targetFile.viewAccessability.MediaView
+        )
+          return;
+
+        model.unshift({
+          id: item.key,
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+
+        desktopModel.unshift({
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+      });
+    }
 
     return isMobile
       ? model

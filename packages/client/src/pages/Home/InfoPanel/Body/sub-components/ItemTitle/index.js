@@ -53,7 +53,6 @@ const ItemTitle = ({
       selectionLength={selectionLength}
       selection={filesItemSelection}
       isSeveralItems={isSeveralItems}
-      getIcon={getIcon}
     />
   );
 };

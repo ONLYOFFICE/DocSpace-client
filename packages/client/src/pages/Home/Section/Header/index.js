@@ -47,7 +47,7 @@ import { Consumer } from "@docspace/components/utils/context";
 import toastr from "@docspace/components/toast/toastr";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import { Events, EmployeeType, RoomsType } from "@docspace/common/constants";
-import { getMainButtonItems } from "SRC_DIR/helpers/plugins";
+
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   getCategoryTypeByFolderType,
@@ -151,6 +151,7 @@ const SectionHeaderContent = (props) => {
     isPrivacyFolder,
     isRoomsFolder,
     enablePlugins,
+    mainButtonItemsList,
     security,
     setIsFolderActions,
     setBufferSelection,
@@ -242,8 +243,9 @@ const SectionHeaderContent = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAccountsPage = location.pathname.includes("accounts");
-  const isSettingsPage = location.pathname.includes("settings");
+  const isAccountsPage = location.pathname.includes("/accounts");
+
+  const isSettingsPage = location.pathname.includes("/settings");
 
   const onCreate = (format) => {
     const event = new Event(Events.CREATE);
@@ -438,17 +440,13 @@ const SectionHeaderContent = (props) => {
           },
         ];
 
-    if (enablePlugins) {
-      const pluginOptions = getMainButtonItems();
-
-      if (pluginOptions) {
-        pluginOptions.forEach((option) => {
-          options.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
+    if (mainButtonItemsList && enablePlugins) {
+      mainButtonItemsList.forEach((option) => {
+        options.splice(option.value.position, 0, {
+          key: option.key,
+          ...option.value,
         });
-      }
+      });
     }
 
     return options;
@@ -1088,6 +1086,7 @@ export default inject(
     publicRoomStore,
     contextOptionsStore,
     oformsStore,
+    pluginStore,
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
     const isAdmin = auth.userStore.user?.isAdmin;
@@ -1128,6 +1127,8 @@ export default inject(
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
+
+    const { mainButtonItemsList } = pluginStore;
 
     const {
       setSharingPanelVisible,
@@ -1288,6 +1289,7 @@ export default inject(
       isRoomsFolder,
 
       enablePlugins,
+      mainButtonItemsList,
 
       setRestoreAllPanelVisible,
 

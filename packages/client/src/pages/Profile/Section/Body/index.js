@@ -75,7 +75,12 @@ const SectionBodyContent = (props) => {
   return (
     <Wrapper>
       <MainProfile />
-      <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />
+      <Submenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        size="scale"
+      />
     </Wrapper>
   );
 };

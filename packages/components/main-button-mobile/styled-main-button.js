@@ -307,14 +307,9 @@ const StyledAlertIcon = styled.div`
   z-index: 1010;
   width: 12px;
   height: 12px;
-  right: 26px;
+  top: 10px;
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: 26px;
-      right: 0px;
-    `}
-  top: 6px;
+    props.theme.interfaceDirection === "rtl" ? "left: 10px;" : "right: 10px;"}
 `;
 
 StyledBar.defaultProps = { theme: Base };

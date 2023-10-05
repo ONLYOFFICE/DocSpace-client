@@ -243,7 +243,6 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
       "/profile",
     ];
     this.selectedFolderStore.setSelectedFolder(null);

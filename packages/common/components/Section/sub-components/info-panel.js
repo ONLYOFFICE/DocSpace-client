@@ -186,6 +186,7 @@ const InfoPanel = ({
   isMobileHidden,
   setIsVisible,
   canDisplay,
+  anotherDialogOpen,
   viewAs,
 }) => {
   const closeInfoPanel = () => setIsVisible(false);
@@ -202,9 +203,7 @@ const InfoPanel = ({
       if (!isDesktop() && isVisible) closeInfoPanel();
     };
 
-    return () => {
-      document.removeEventListener("mousedown", onMouseDown);
-    };
+    return () => document.removeEventListener("mousedown", onMouseDown);
   }, []);
 
   const infoPanelComponent = (
@@ -234,13 +233,14 @@ const InfoPanel = ({
       <Portal
         element={infoPanelComponent}
         appendTo={rootElement}
-        visible={isVisible && !isMobileHidden}
+        visible={isVisible && !isMobileHidden && !anotherDialogOpen}
       />
     );
   };
 
   return !isVisible ||
     !canDisplay ||
+    anotherDialogOpen ||
     ((isTablet() || isMobile || isMobileUtils()) && isMobileHidden)
     ? null
     : isMobileOnly
@@ -261,16 +261,22 @@ StyledInfoPanelWrapper.defaultProps = { theme: Base };
 StyledInfoPanel.defaultProps = { theme: Base };
 InfoPanel.defaultProps = { theme: Base };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, dialogsStore }) => {
   const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
     auth.infoPanelStore;
 
+  const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
+
   const canDisplay = getCanDisplay();
+
+  const anotherDialogOpen =
+    createRoomDialogVisible || invitePanelOptions.visible;
 
   return {
     isVisible,
     isMobileHidden,
     setIsVisible,
     canDisplay,
+    anotherDialogOpen,
   };
 })(InfoPanel);

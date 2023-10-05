@@ -1214,6 +1214,13 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("ViewOnlyRooms"),
                 };
+              case RoomsType.PublicRoom:
+                return {
+                  id: "filter_type-public",
+                  key: RoomsType.PublicRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("PublicRoom"),
+                };
               case RoomsType.CustomRoom:
               default:
                 return {

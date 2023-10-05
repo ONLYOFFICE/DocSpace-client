@@ -31,6 +31,7 @@ import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
+  vertical-align: top !important;
   ${commonIconsStyles};
 `;
 
@@ -420,7 +421,7 @@ const MainButtonMobile = (props) => {
 
         {alert && !isOpen && (
           <StyledAlertIcon>
-            <StyledButtonAlertIcon onClick={onAlertClickAction} size="medium" />
+            <StyledButtonAlertIcon onClick={onAlertClickAction} size="small" />
           </StyledAlertIcon>
         )}
       </div>

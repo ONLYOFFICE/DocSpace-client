@@ -112,7 +112,7 @@ const Layout = (props) => {
 
   const onWidthChange = (e) => {
     const { matches } = e;
-    alert(matches);
+
     setIsTabletView(matches);
   };
 

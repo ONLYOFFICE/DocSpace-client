@@ -71,7 +71,9 @@ const StyledTableContainer = styled.div`
   }
 
   @media (hover: hover) {
-    &:has(.table-list-item:first-child .table-container_row:hover) {
+    &:has(#table-container_caption-header:not(.hotkeys-lengthen-header)):has(
+        .table-list-item:first-child .table-container_row:hover
+      ) {
       .table-container_header,
       .table-container_group-menu {
         border-image-source: ${(props) =>

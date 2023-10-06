@@ -93,7 +93,7 @@ const TrustedMail = (props) => {
   }, [type, domains]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("trusted-mail") &&
       navigate("/portal-settings/security/access-portal");
   };

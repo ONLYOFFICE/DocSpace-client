@@ -15,11 +15,7 @@ import Link from "@docspace/components/link";
 import Badge from "@docspace/components/badge";
 import toastr from "@docspace/components/toast/toastr";
 import Button from "@docspace/components/button";
-import {
-  mobile,
-  smallTablet,
-  isSmallTablet,
-} from "@docspace/components/utils/device";
+import { mobile, isMobile } from "@docspace/components/utils/device";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
@@ -64,7 +60,7 @@ const RootContainer = styled(Box)`
     gap: 24px;
     align-items: center;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
       align-items: baseline;
     }
@@ -221,7 +217,7 @@ class ThirdPartyServices extends React.Component {
               size="normal"
               minwidth="138px"
               onClick={submitRequest}
-              scale={isSmallTablet()}
+              scale={isMobile()}
             />
           </Box>
           {!consumers.length ? (

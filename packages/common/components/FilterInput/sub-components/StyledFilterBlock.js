@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 import ToggleButton from "@docspace/components/toggle-button";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -39,7 +39,7 @@ const StyledFilterBlock = styled.div`
     max-width: calc(100% - 69px);
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -335,7 +335,7 @@ const StyledFilterBlockFooter = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
   }
 `;
@@ -371,7 +371,7 @@ const StyledControlContainer = styled.div`
     top: 14px;
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     top: -34px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

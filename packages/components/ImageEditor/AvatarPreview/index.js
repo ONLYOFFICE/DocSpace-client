@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Avatar from "../../avatar";
 import Text from "../../text";
 
-import { hugeMobile } from "../../utils/device";
+import { mobile } from "../../utils/device";
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   gap: 24px;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     display: none;
   }
 

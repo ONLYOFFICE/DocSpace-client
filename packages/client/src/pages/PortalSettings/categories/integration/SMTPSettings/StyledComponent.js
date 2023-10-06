@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .smtp-settings_description {
@@ -15,7 +15,7 @@ const StyledComponent = styled.div`
       margin: auto 0;
     }
     .smtp-settings_help-button {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 4px;
@@ -29,7 +29,7 @@ const StyledComponent = styled.div`
     display: flex;
 
     span {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 2px;
@@ -67,7 +67,7 @@ const ButtonStyledComponent = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     grid-template-columns: 1fr;
   }
 `;

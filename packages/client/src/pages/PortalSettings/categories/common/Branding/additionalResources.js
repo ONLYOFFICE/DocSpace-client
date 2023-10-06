@@ -11,12 +11,12 @@ import toastr from "@docspace/components/toast/toastr";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { smallTablet, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   margin-top: 40px;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     margin-top: 0px;
 
     .header {
@@ -108,7 +108,7 @@ const AdditionalResources = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("additional-resources") &&
       navigate("/portal-settings/customization/branding");
   };

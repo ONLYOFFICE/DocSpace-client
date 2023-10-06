@@ -8,8 +8,7 @@ import Button from "@docspace/components/button";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -128,7 +127,7 @@ const DNSSettings = (props) => {
     setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -144,7 +143,7 @@ const DNSSettings = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isSmallTablet, setIsCustomizationView]);
+  }, [isMobile, setIsCustomizationView]);
 
   const settingsBlock = (
     <div className="settings-block">

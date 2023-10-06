@@ -118,7 +118,7 @@ const IpSecurity = (props) => {
   }, [enable, ips]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("ip") &&
       navigate("/portal-settings/security/access-portal");
   };

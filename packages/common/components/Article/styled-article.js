@@ -5,7 +5,6 @@ import {
   mobile,
   tablet,
   isMobile as isMobileUtils,
-  hugeMobile,
 } from "@docspace/components/utils/device";
 
 import { Base } from "@docspace/components/themes";
@@ -102,10 +101,6 @@ const StyledArticle = styled.article`
     @media ${mobile} {
       height: 100% !important;
       margin-top: 32px;
-    }
-
-    @media ${hugeMobile} {
-      height: 100% !important;
     }
 
     ${isTablet &&

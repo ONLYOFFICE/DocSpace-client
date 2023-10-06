@@ -30,7 +30,7 @@ const StyledBody = styled.div`
     grid-gap: 20px;
     margin-bottom: 20px;
 
-    @media (max-width: ${size.smallTablet + 40}px) {
+    @media (max-width: ${size.mobile + 40}px) {
       grid-template-columns: 1fr;
 
       grid-template-rows: ${(props) => "1fr max-content"};
@@ -281,9 +281,7 @@ const PaymentContainer = (props) => {
     <Consumer>
       {(context) => (
         <StyledBody
-          isChangeView={
-            context.sectionWidth < size.smallTablet && expandArticle
-          }
+          isChangeView={context.sectionWidth < size.mobile && expandArticle}
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()

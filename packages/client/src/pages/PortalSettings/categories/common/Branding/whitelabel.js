@@ -65,7 +65,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
       navigate("/portal-settings/customization/branding");
   };

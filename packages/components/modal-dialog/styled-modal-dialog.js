@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
 import Box from "../box";
-import { smallTablet, tablet } from "../utils/device";
+import { mobile, tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
 const StyledModal = styled.div`
@@ -46,7 +46,7 @@ const Content = styled.div.attrs((props) => ({
             props.autoMaxWidth ? "auto" : props.isLarge ? "520px" : "400px"};
 
           border-radius: 6px;
-          @media ${smallTablet} {
+          @media ${mobile} {
             transform: translateY(${(props) => (props.visible ? "0" : "100%")});
             transition: transform 0.3s ease-in-out;
             position: absolute;
@@ -81,7 +81,7 @@ const Content = styled.div.attrs((props) => ({
 
           transition: transform 0.3s ease-in-out;
 
-          @media ${smallTablet} {
+          @media ${mobile} {
             transform: translateY(${(props) => (props.visible ? "0" : "100%")});
             height: calc(100% - 64px);
             width: 100%;

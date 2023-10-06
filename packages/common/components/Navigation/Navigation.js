@@ -17,7 +17,7 @@ import { ReactSVG } from "react-svg";
 import {
   isTablet as isTabletUtils,
   isDesktop as isDesktopUtils,
-  isSmallTablet as isSmallTabletUtils,
+  isMobile as isMobileUtils,
 } from "@docspace/components/utils/device";
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
@@ -68,8 +68,7 @@ const Navigation = ({
   const dropBoxRef = React.useRef(null);
   const containerRef = React.useRef(null);
 
-  const isDesktop =
-    (!isTabletUtils() && !isSmallTabletUtils()) || isDesktopUtils();
+  const isDesktop = (!isTabletUtils() && !isMobileUtils()) || isDesktopUtils();
 
   const infoPanelIsVisible = React.useMemo(
     () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
@@ -140,7 +139,7 @@ const Navigation = ({
     showRootFolderTitle &&
     navigationItems &&
     navigationItems.length > 1 &&
-    !isSmallTabletUtils() &&
+    !isMobileUtils() &&
     !isMobileOnly;
 
   const navigationTitleNode = (

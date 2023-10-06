@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
 import DropDownItem from "@docspace/components/drop-down-item";
-import { isHugeMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import DomHelpers from "@docspace/components/utils/domHelpers";
 
 const TagDropdown = ({
@@ -97,7 +97,7 @@ const TagDropdown = ({
       const { top: offsetTop } = DomHelpers.getOffset(dropdownRef.current);
       const offsetBottom = window.innerHeight - offsetTop;
       const maxHeight = Math.floor((offsetBottom - 22) / 32) * 32 - 2;
-      const result = isHugeMobile()
+      const result = isMobile()
         ? Math.min(maxHeight, 158)
         : Math.min(maxHeight, 382);
       setDropdownMaxHeight(result);

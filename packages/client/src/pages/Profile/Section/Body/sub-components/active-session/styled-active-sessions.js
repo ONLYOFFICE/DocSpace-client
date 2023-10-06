@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const StyledFooter = styled.div`
   .session-logout {
@@ -103,7 +103,7 @@ export const TableDataCell = styled.td`
     }
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     .session-browser {
       position: relative;
       top: 4px;

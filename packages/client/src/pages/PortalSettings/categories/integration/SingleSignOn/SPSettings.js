@@ -20,7 +20,7 @@ const SPSettings = () => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("sp-settings") &&
       navigate("/portal-settings/integration/single-sign-on");
   };

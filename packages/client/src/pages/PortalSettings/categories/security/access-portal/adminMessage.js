@@ -91,7 +91,7 @@ const AdminMessage = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("admin-message") &&
       navigate("/portal-settings/security/access-portal");
   };

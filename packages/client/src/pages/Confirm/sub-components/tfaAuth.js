@@ -10,7 +10,7 @@ import { inject, observer } from "mobx-react";
 import Box from "@docspace/components/box";
 import toastr from "@docspace/components/toast/toastr";
 import withLoader from "../withLoader";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
@@ -21,7 +21,7 @@ const StyledForm = styled(Box)`
   flex-direction: column;
   flex: 1fr;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     width: 100%;
   }

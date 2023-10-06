@@ -8,8 +8,6 @@ import Text from "@docspace/components/text";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Textarea from "@docspace/components/textarea";
 import FieldContainer from "@docspace/components/field-container";
-import { smallTablet } from "@docspace/components/utils/device";
-import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
 
 const ModalDialogContainer = styled(ModalDialog)`

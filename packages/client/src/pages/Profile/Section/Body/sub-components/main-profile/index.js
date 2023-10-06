@@ -31,7 +31,7 @@ import {
 } from "./styled-main-profile";
 import { HelpButton, Tooltip } from "@docspace/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 
@@ -70,7 +70,7 @@ const MainProfile = (props) => {
   const checkWidth = () => {
     if (!isMobileOnly) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);

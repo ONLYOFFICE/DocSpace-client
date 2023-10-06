@@ -170,7 +170,7 @@ const InvitePanel = ({
 
   const onCheckHeight = () => {
     setScrollAllPanelContent(window.innerHeight < 1024);
-    setIsMobileView(window.innerWidth <= size.hugeMobile);
+    setIsMobileView(window.innerWidth <= size.mobile);
   };
 
   const onClose = () => {

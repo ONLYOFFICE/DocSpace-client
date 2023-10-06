@@ -6,7 +6,7 @@ import { getAccessOptions } from "../utils";
 import { isMobileOnly } from "react-device-detect";
 
 import { StyledAccessSelector } from "../StyledInvitePanel";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 
 const AccessSelector = ({
   t,
@@ -48,7 +48,7 @@ const AccessSelector = ({
   const checkWidth = () => {
     if (!isMobileOnly) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);

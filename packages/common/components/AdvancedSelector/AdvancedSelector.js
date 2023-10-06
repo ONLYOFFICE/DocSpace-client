@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { isMobile } from "react-device-detect";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 import Selector from "./sub-components/Selector";
@@ -38,7 +38,7 @@ const StyledBlock = styled.div`
     max-width: calc(100% - 69px);
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -83,7 +83,7 @@ const StyledControlContainer = styled.div`
     top: 18px;
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     top: -27px;
 
     ${({ theme }) =>

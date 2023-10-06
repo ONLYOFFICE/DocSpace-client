@@ -117,7 +117,7 @@ const BruteForceProtection = (props) => {
   ]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("brute-force-protection") &&
       navigate("/portal-settings/security/access-portal");
   };

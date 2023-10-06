@@ -10,6 +10,11 @@ const StyledWrapper = styled.div`
   display: grid;
   grid-gap: 32px;
 
+  .toggle-btn-wrapper {
+    display: flex;
+    //gap: 8px;
+  }
+
   .toggle-btn {
     height: 20px;
     line-height: 20px;

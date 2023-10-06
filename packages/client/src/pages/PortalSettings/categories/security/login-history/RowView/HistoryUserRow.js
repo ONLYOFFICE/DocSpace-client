@@ -1,6 +1,6 @@
 import React from "react";
 import Row from "@docspace/components/row";
-import { HistoryContent } from "./HistoryContent";
+import HistoryContent from "./HistoryContent";
 
 export const HistoryUserRow = ({ item, sectionWidth }) => {
   return (

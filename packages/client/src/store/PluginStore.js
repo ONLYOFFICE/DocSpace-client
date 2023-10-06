@@ -366,6 +366,8 @@ class PluginStore {
   getUserRole = () => {
     const { user } = this.authStore.userStore;
 
+    if (!user) return PluginUsersType.user;
+
     const { isOwner, isAdmin, isCollaborator, isVisitor } = user;
 
     const userRole = isOwner

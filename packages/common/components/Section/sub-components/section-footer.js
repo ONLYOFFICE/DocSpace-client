@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "@docspace/components/utils/device";
-import { isMobileOnly } from "react-device-detect";
 
 const StyledSectionFooter = styled.div`
   margin-top: 40px;
 
-  @media ${mobile}, ${isMobileOnly} {
+  @media ${mobile} {
     margin-top: 32px;
   }
 `;

@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 //import equal from "fast-deep-equal/react";
 //import { LayoutContextConsumer } from "client/Layout/context";
-import { isMobile, isMobileOnly } from "react-device-detect";
+// import { isMobile, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 import Scrollbar from "@docspace/components/scrollbar";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 import { tablet, desktop, mobile } from "@docspace/components/utils/device";
+import { DeviceType } from "../../../constants";
 
 const settingsStudioStyles = css`
   ${({ settingsStudio }) =>
@@ -31,17 +32,6 @@ const settingsStudioStyles = css`
               `
             : css`
                 padding: 0 0 16px 24px;
-              `}
-      }
-
-      @media ${mobile} {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 8px 24px 16px 0;
-              `
-            : css`
-                padding: 8px 0 16px 24px;
               `}
       }
 
@@ -82,18 +72,6 @@ const paddingStyles = css`
           `}
   }
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 23px 16px 0 !important;
-          `
-        : css`
-            padding: 0 0 16px 23px !important;
-          `}
-  `};
-
   @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -104,18 +82,6 @@ const paddingStyles = css`
             padding: 0px 0 16px 24px;
           `}
   }
-
-  ${isMobileOnly &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 24px 16px 0 !important;
-          `
-        : css`
-            padding: 0px 0 16px 24px !important;
-          `}
-  `};
 `;
 
 const commonStyles = css`
@@ -175,21 +141,24 @@ const commonStyles = css`
     }
 
     .files-tile-container {
-      margin-top: ${isMobile ? "-12px" : "0px"};
+      margin-top: -12px;
+
+      @media ${desktop} {
+        margin-top: 0px;
+      }
     }
 
     .people-row-container,
     .files-row-container {
       margin-top: -22px;
 
-      ${!isMobile &&
-      css`
+      @media ${desktop} {
         margin-top: -17px;
+      }
 
-        @media ${mobile} {
-          margin-top: 0px;
-        }
-      `}
+      @media ${mobile} {
+        margin-top: 0px;
+      }
 
       @media ${desktop} {
         ${(props) =>
@@ -232,19 +201,7 @@ const StyledSectionBody = styled.div`
       }
     `}
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -24px;
-          `
-        : css`
-            margin-left: -24px;
-          `}
-  `}
-
-    .additional-scroll-height {
+  .additional-scroll-height {
     ${({ withScroll }) =>
       !withScroll &&
       css`
@@ -285,23 +242,11 @@ const StyledDropZoneBody = styled(DragAndDrop)`
                 margin-left: -24px;
               `}
       }
-
-      ${isMobile &&
-      css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: -24px;
-              `
-            : css`
-                margin-left: -24px;
-              `}
-      `}
     `}
 `;
 
 const StyledSpacer = styled.div`
-  display: ${isMobile ? "block" : "none"};
+  display: none;
   min-height: 64px;
 
   @media ${tablet} {
@@ -342,6 +287,7 @@ class SectionBody extends React.Component {
       isLoaded,
       isDesktop,
       settingsStudio,
+      currentDeviceType,
     } = this.props;
 
     const focusProps = autoFocus
@@ -363,7 +309,7 @@ class SectionBody extends React.Component {
         className="section-body"
       >
         {withScroll ? (
-          !isMobileOnly ? (
+          currentDeviceType !== DeviceType.mobile ? (
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
@@ -400,7 +346,7 @@ class SectionBody extends React.Component {
         settingsStudio={settingsStudio}
       >
         {withScroll ? (
-          !isMobileOnly ? (
+          currentDeviceType !== DeviceType.mobile ? (
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
@@ -455,9 +401,10 @@ SectionBody.defaultProps = {
 
 export default inject(({ auth }) => {
   const { settingsStore } = auth;
-  const { isDesktopClient: isDesktop } = settingsStore;
+  const { isDesktopClient: isDesktop, currentDeviceType } = settingsStore;
   return {
     isLoaded: auth.isLoaded,
     isDesktop,
+    currentDeviceType,
   };
 })(observer(SectionBody));

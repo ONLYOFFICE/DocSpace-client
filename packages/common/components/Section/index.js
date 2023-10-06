@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes, { element } from "prop-types";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
 import { Provider } from "@docspace/components/utils/context";
 
 import SectionContainer from "./sub-components/section-container";
@@ -21,6 +16,7 @@ import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
 
 import FloatingButton from "@docspace/components/floating-button";
+import { DeviceType } from "../../constants";
 
 const Section = (props) => {
   const {
@@ -50,6 +46,7 @@ const Section = (props) => {
     isInfoPanelScrollLocked,
     isEmptyPage,
     isTrashFolder,
+    currentDeviceType,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState({
@@ -161,34 +158,36 @@ const Section = (props) => {
             settingsStudio={settingsStudio}
             isInfoPanelVisible={isInfoPanelVisible}
           >
-            {isSectionHeaderAvailable && !isMobile && (
-              <SubSectionHeader
-                maintenanceExist={maintenanceExist}
-                snackbarExist={snackbarExist}
-                className="section-header_header"
-                isHeaderVisible={isHeaderVisible}
-                viewAs={viewAs}
-                showText={showText}
-                isEmptyPage={isEmptyPage}
-                isTrashFolder={isTrashFolder}
-              >
-                {sectionHeaderContent
-                  ? sectionHeaderContent.props.children
-                  : null}
-              </SubSectionHeader>
-            )}
-            {isSectionFilterAvailable && !isMobile && (
-              <>
-                <SubSectionFilter
-                  className="section-header_filter"
+            {isSectionHeaderAvailable &&
+              currentDeviceType !== DeviceType.mobile && (
+                <SubSectionHeader
+                  maintenanceExist={maintenanceExist}
+                  snackbarExist={snackbarExist}
+                  className="section-header_header"
+                  isHeaderVisible={isHeaderVisible}
                   viewAs={viewAs}
+                  showText={showText}
+                  isEmptyPage={isEmptyPage}
+                  isTrashFolder={isTrashFolder}
                 >
-                  {sectionFilterContent
-                    ? sectionFilterContent.props.children
+                  {sectionHeaderContent
+                    ? sectionHeaderContent.props.children
                     : null}
-                </SubSectionFilter>
-              </>
-            )}
+                </SubSectionHeader>
+              )}
+            {isSectionFilterAvailable &&
+              currentDeviceType !== DeviceType.mobile && (
+                <>
+                  <SubSectionFilter
+                    className="section-header_filter"
+                    viewAs={viewAs}
+                  >
+                    {sectionFilterContent
+                      ? sectionFilterContent.props.children
+                      : null}
+                  </SubSectionFilter>
+                </>
+              )}
 
             {isSectionBodyAvailable && (
               <>
@@ -196,32 +195,36 @@ const Section = (props) => {
                   onDrop={onDrop}
                   uploadFiles={uploadFiles}
                   withScroll={withBodyScroll}
-                  autoFocus={isMobile || isTabletView ? false : true}
+                  autoFocus={
+                    currentDeviceType !== DeviceType.desktop ? false : true
+                  }
                   viewAs={viewAs}
                   settingsStudio={settingsStudio}
                 >
-                  {isSectionHeaderAvailable && isMobile && (
-                    <SubSectionHeader
-                      className="section-body_header"
-                      isHeaderVisible={isHeaderVisible}
-                      viewAs={viewAs}
-                      showText={showText}
-                      settingsStudio={settingsStudio}
-                      isEmptyPage={isEmptyPage}
-                      isTrashFolder={isTrashFolder}
-                    >
-                      {sectionHeaderContent
-                        ? sectionHeaderContent.props.children
-                        : null}
-                    </SubSectionHeader>
-                  )}
-                  {isSectionFilterAvailable && isMobile && (
-                    <SubSectionFilter className="section-body_filter">
-                      {sectionFilterContent
-                        ? sectionFilterContent.props.children
-                        : null}
-                    </SubSectionFilter>
-                  )}
+                  {isSectionHeaderAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionHeader
+                        className="section-body_header"
+                        isHeaderVisible={isHeaderVisible}
+                        viewAs={viewAs}
+                        showText={showText}
+                        settingsStudio={settingsStudio}
+                        isEmptyPage={isEmptyPage}
+                        isTrashFolder={isTrashFolder}
+                      >
+                        {sectionHeaderContent
+                          ? sectionHeaderContent.props.children
+                          : null}
+                      </SubSectionHeader>
+                    )}
+                  {isSectionFilterAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionFilter className="section-body_filter">
+                        {sectionFilterContent
+                          ? sectionFilterContent.props.children
+                          : null}
+                      </SubSectionFilter>
+                    )}
                   <SubSectionBodyContent>
                     {sectionBodyContent
                       ? sectionBodyContent.props.children
@@ -243,7 +246,7 @@ const Section = (props) => {
               </>
             )}
 
-            {!(isMobile || isMobileUtils() || isTabletUtils()) ? (
+            {currentDeviceType === DeviceType.desktop ? (
               showPrimaryProgressBar && showSecondaryProgressBar ? (
                 <>
                   <FloatingButton
@@ -376,6 +379,7 @@ export default inject(({ auth }) => {
     maintenanceExist,
     snackbarExist,
     showText,
+    currentDeviceType,
   } = settingsStore;
 
   const {
@@ -394,5 +398,6 @@ export default inject(({ auth }) => {
 
     isInfoPanelVisible,
     isInfoPanelScrollLocked,
+    currentDeviceType,
   };
 })(observer(Section));

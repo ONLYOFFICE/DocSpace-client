@@ -1,19 +1,13 @@
 import { Base } from "@docspace/components/themes";
-import {
-  isTablet,
-  isMobile as isMobileUtils,
-  tablet,
-  isDesktop,
-  mobile,
-} from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
 import { Portal } from "@docspace/components";
+import { DeviceType } from "../../../constants";
 
 const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   id: id,
@@ -32,18 +26,6 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
     left: 0;
     right: 0;
   }
-
-  ${isMobile &&
-  css`
-    @media ${tablet} {
-      z-index: 309;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-  `}
 `;
 
 const StyledInfoPanel = styled.div`
@@ -82,24 +64,6 @@ const StyledInfoPanel = styled.div`
     max-width: calc(100vw - 69px);
   }
 
-  ${isMobile &&
-  css`
-    @media ${tablet} {
-      position: absolute;
-      border: none;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              left: 0;
-            `
-          : css`
-              right: 0;
-            `}
-      width: 480px;
-      max-width: calc(100vw - 69px);
-    }
-  `}
-
   @media ${mobile} {
     bottom: 0;
     height: calc(100% - 64px);
@@ -134,22 +98,6 @@ const StyledControlContainer = styled.div`
             left: -27px;
           `}
   }
-
-  ${isMobile &&
-  css`
-    @media ${tablet} {
-      display: flex;
-      top: 18px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: -27px;
-            `
-          : css`
-              left: -27px;
-            `}
-    }
-  `}
 
   @media ${mobile} {
     display: flex;
@@ -188,6 +136,7 @@ const InfoPanel = ({
   canDisplay,
   anotherDialogOpen,
   viewAs,
+  currentDeviceType,
 }) => {
   const closeInfoPanel = () => setIsVisible(false);
 
@@ -196,11 +145,12 @@ const InfoPanel = ({
       if (e.target.id === "InfoPanelWrapper") closeInfoPanel();
     };
 
-    if (viewAs === "row" || isTablet() || isMobile || isMobileUtils())
+    if (viewAs === "row" || currentDeviceType !== DeviceType.desktop)
       document.addEventListener("mousedown", onMouseDown);
 
     window.onpopstate = () => {
-      if (!isDesktop() && isVisible) closeInfoPanel();
+      if (currentDeviceType !== DeviceType.desktop && isVisible)
+        closeInfoPanel();
     };
 
     return () => document.removeEventListener("mousedown", onMouseDown);
@@ -226,7 +176,6 @@ const InfoPanel = ({
   );
 
   const renderPortalInfoPanel = () => {
-    console.log(isMobileHidden);
     const rootElement = document.getElementById("root");
 
     return (
@@ -241,9 +190,9 @@ const InfoPanel = ({
   return !isVisible ||
     !canDisplay ||
     anotherDialogOpen ||
-    ((isTablet() || isMobile || isMobileUtils()) && isMobileHidden)
+    (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : isMobileOnly
+    : currentDeviceType === DeviceType.mobile
     ? renderPortalInfoPanel()
     : infoPanelComponent;
 };
@@ -265,6 +214,8 @@ export default inject(({ auth, dialogsStore }) => {
   const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
     auth.infoPanelStore;
 
+  const { currentDeviceType } = auth.settingsStore;
+
   const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
 
   const canDisplay = getCanDisplay();
@@ -278,5 +229,6 @@ export default inject(({ auth, dialogsStore }) => {
     setIsVisible,
     canDisplay,
     anotherDialogOpen,
+    currentDeviceType,
   };
 })(InfoPanel);

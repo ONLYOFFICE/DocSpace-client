@@ -1,42 +1,15 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { tablet, size, mobile } from "@docspace/components/utils/device";
-import {
-  isIOS,
-  isTablet,
-  isSafari,
-  isChrome,
-  isMobileOnly,
-  isMobile,
-} from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const tabletProps = css`
   .section-body_header {
     position: sticky;
     top: 0;
-    background: ${props => props.theme.section.header.background};
+    background: ${(props) => props.theme.section.header.background};
     z-index: 201;
-
-    ${isMobileOnly &&
-    css`
-      padding: 0 16px;
-      ${props =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-    `}
-
-    ${props =>
-      (props.settingsStudio || props.viewAs == "settings") &&
-      isMobileOnly &&
-      css`
-        background: ${props => props.theme.section.header.backgroundColor};
-      `}
   }
   .section-body_filter {
     display: block;
@@ -45,7 +18,7 @@ const tabletProps = css`
 `;
 
 const StyledSectionContainer = styled.section`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding: 0 20px 0 0;
@@ -64,21 +37,7 @@ const StyledSectionContainer = styled.section`
   @media ${tablet} {
     width: 100%;
     max-width: 100vw !important;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 0;
-          `
-        : css`
-            padding: 0 0 0 16px;
-          `}
-  }
-
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    max-width: 100vw !important;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 0 16px 0 0;
@@ -87,45 +46,50 @@ const StyledSectionContainer = styled.section`
             padding: 0 0 0 16px;
           `}
     ${tabletProps};
-    min-width: 100px;
-  `}
+  }
 
   @media ${mobile} {
     width: 100vw !important;
     max-width: 100vw !important;
   }
 
-  ${isMobileOnly &&
-  css`
-    width: 100vw !important;
-    max-width: 100vw !important;
-  `}
-
   .layout-progress-bar_wrapper {
     position: fixed;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              left: 24px;
+            }
           `
         : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              right: 24px;
+            }
           `}
   }
 
   .layout-progress-bar {
     position: fixed;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              left: 24px;
+            }
           `
         : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              right: 24px;
+            }
           `}
 
     bottom: 24px;
@@ -133,36 +97,48 @@ const StyledSectionContainer = styled.section`
 
   .layout-progress-bar_close-icon {
     position: fixed;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "480px" : "80px"};
+            left: ${(props) => (props.isInfoPanelVisible ? "480px" : "80px")};
+
+            @media ${tablet} {
+              left: 80px;
+            }
           `
         : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "480px" : "80px"};
+            right: ${(props) => (props.isInfoPanelVisible ? "480px" : "80px")};
+
+            @right ${tablet} {
+              left: 80px;
+            }
           `}
 
     bottom: 36px;
   }
   .layout-progress-second-bar {
     position: fixed;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              left: 24px;
+            }
           `
         : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+
+            @media ${tablet} {
+              right: 24px;
+            }
           `}
 
     bottom: 96px;
   }
 
-  ${props =>
+  ${(props) =>
     !props.isSectionHeaderAvailable &&
     css`
       width: 100vw !important;

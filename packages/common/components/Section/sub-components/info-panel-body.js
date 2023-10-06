@@ -1,5 +1,5 @@
 import Scrollbar from "@docspace/components/scrollbar";
-import { tablet } from "@docspace/components/utils/device";
+
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -10,7 +10,7 @@ const StyledScrollbar = styled(Scrollbar)`
       box-sizing: border-box;
       & .scroll-wrapper > .scroller > .scroll-body {
         overflow: hidden !important;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 padding-left: 17px !important;
@@ -34,7 +34,8 @@ const SubInfoPanelBody = ({ children, isInfoPanelScrollLocked }) => {
     <StyledScrollbar
       $isScrollLocked={isInfoPanelScrollLocked}
       scrollclass="section-scroll"
-      stype="mediumBlack">
+      stype="mediumBlack"
+    >
       {content}
     </StyledScrollbar>
   );

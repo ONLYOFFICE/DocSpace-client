@@ -2164,6 +2164,7 @@ const Dark = {
       hoverIconColor: grayMaxLight,
 
       borderImageSource: `linear-gradient(to right,${black} 21px,#474747 21px,#474747 calc(100% - 20px),${black} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${black} 0px,#474747 0px,#474747 100% ,${black} 100%)`,
       lengthenBorderImageSource: `linear-gradient(to right, #474747, #474747)`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 

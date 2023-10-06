@@ -70,10 +70,14 @@ const StyledTableContainer = styled.div`
         : `border-left: 0;`}
   }
 
-  .lengthen-header {
-    border-image-slice: 1;
-    border-image-source: ${(props) =>
-      props.theme.tableContainer.header.lengthenBorderImageSource};
+  @media (hover: hover) {
+    &:has(.table-list-item:first-child .table-container_row:hover) {
+      .table-container_header,
+      .table-container_group-menu {
+        border-image-source: ${(props) =>
+          props.theme.tableContainer.header.borderHoverImageSource};
+      }
+    }
   }
 
   .hotkeys-lengthen-header {

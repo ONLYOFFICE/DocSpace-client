@@ -119,6 +119,7 @@ const ArticleMainButtonContent = (props) => {
     setInvitePanelOptions,
 
     mainButtonMobileVisible,
+    versionHistoryPanelVisible,
     moveToPanelVisible,
     copyPanelVisible,
 
@@ -481,7 +482,7 @@ const ArticleMainButtonContent = (props) => {
 
   if (isMobileOnly) {
     mainButtonVisible =
-      moveToPanelVisible || copyPanelVisible || selectFileDialogVisible
+      moveToPanelVisible || copyPanelVisible || selectFileDialogVisible || versionHistoryPanelVisible
         ? false
         : true;
   }
@@ -570,6 +571,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     pluginStore,
+    versionHistoryStore
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -593,6 +595,7 @@ export default inject(
     } = dialogsStore;
 
     const { enablePlugins, currentColorScheme } = auth.settingsStore;
+    const {isVisible: versionHistoryPanelVisible} = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
@@ -638,6 +641,7 @@ export default inject(
       mainButtonMobileVisible,
       moveToPanelVisible,
       copyPanelVisible,
+      versionHistoryPanelVisible,
       security,
     };
   }

@@ -169,7 +169,6 @@
   "RecoveryFileNotSelected": "Fehler bei der Wiederherstellung. Datei zur Wiederherstellung nicht ausgewählt.",
   "RestoreBackup": "Datenwiederherstellung",
   "RestoreBackupDescription": "Nutzen Sie diese Option, um Ihr Bereich aus der vorher gespeicherten Sicherungsdatei wiederherzustellen.",
-  "RestoreDefaultButton": "Standardmäßige Einstellungen",
   "RoomsModule": "Ersatzraum",
   "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",
   "SelectFileInGZFormat": "Die Datei im GZ-Format auswählen",

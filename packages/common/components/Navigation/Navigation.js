@@ -11,17 +11,13 @@ import { Consumer } from "@docspace/components/utils/context";
 
 import DomHelpers from "@docspace/components/utils/domHelpers";
 import Backdrop from "@docspace/components/backdrop";
-import { isMobileOnly } from "react-device-detect";
 
 import { ReactSVG } from "react-svg";
-import {
-  isTablet as isTabletUtils,
-  isDesktop as isDesktopUtils,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
+import { DeviceType } from "../../constants";
 
 const Navigation = ({
   tReady,
@@ -57,6 +53,7 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  currentDeviceType,
 
   ...rest
 }) => {
@@ -68,7 +65,7 @@ const Navigation = ({
   const dropBoxRef = React.useRef(null);
   const containerRef = React.useRef(null);
 
-  const isDesktop = (!isTabletUtils() && !isMobileUtils()) || isDesktopUtils();
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const infoPanelIsVisible = React.useMemo(
     () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
@@ -139,8 +136,7 @@ const Navigation = ({
     showRootFolderTitle &&
     navigationItems &&
     navigationItems.length > 1 &&
-    !isMobileUtils() &&
-    !isMobileOnly;
+    currentDeviceType !== DeviceType.mobile;
 
   const navigationTitleNode = (
     <div className="title-block">
@@ -206,6 +202,7 @@ const Navigation = ({
                 withLogo={withLogo}
                 burgerLogo={burgerLogo}
                 titleIcon={titleIcon}
+                currentDeviceType={currentDeviceType}
               />
             </>
           )}

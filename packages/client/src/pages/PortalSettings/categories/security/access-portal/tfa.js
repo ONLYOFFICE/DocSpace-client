@@ -87,7 +87,7 @@ const TwoFactorAuth = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("tfa") &&
       navigate("/portal-settings/security/access-portal");
   };

@@ -11,7 +11,7 @@ import Box from "@docspace/components/box";
 import withLoader from "../withLoader";
 import toastr from "@docspace/components/toast/toastr";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Link from "@docspace/components/link";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
@@ -32,7 +32,7 @@ const StyledForm = styled(Box)`
     gap: 32px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     flex-direction: column;
     gap: 0px;
@@ -82,7 +82,7 @@ const StyledForm = styled(Box)`
     border-radius: 6px;
     margin-bottom: 32px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       display: none;
     }
   }

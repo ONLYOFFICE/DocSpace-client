@@ -1663,7 +1663,7 @@ class FilesStore {
                 tags ||
                 withoutTags;
 
-              if (isFiltered) {
+              if (!!isFiltered) {
                 this.setIsEmptyPage(false);
               } else {
                 this.setIsEmptyPage(isEmptyList);
@@ -2914,8 +2914,6 @@ class FilesStore {
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
-    } else if (items.length === 0 && !this.isEmptyPage) {
-      this.setIsEmptyPage(true);
     }
 
     const newItem = items.map((item) => {

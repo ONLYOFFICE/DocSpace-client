@@ -15,7 +15,7 @@ const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
   }, []);
 
   const onCheckView = () => {
-    if (isMobileOnly || window.innerWidth < size.smallTablet) {
+    if (isMobileOnly || window.innerWidth < size.mobile) {
       setViewMobile(true);
     } else {
       setViewMobile(false);
@@ -23,8 +23,7 @@ const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
 
     if (
       isTablet ||
-      (window.innerWidth >= size.smallTablet &&
-        window.innerWidth <= size.tablet)
+      (window.innerWidth >= size.mobile && window.innerWidth <= size.tablet)
     ) {
       setViewTablet(true);
     } else {

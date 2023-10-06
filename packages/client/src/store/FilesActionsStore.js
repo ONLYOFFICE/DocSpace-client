@@ -37,7 +37,10 @@ import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isTablet } from "@docspace/components/utils/device";
+import {
+  isTablet,
+  isMobile as isMobileUtils,
+} from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -1378,6 +1381,9 @@ class FilesActionStore {
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
         url !== window.DocSpace.location.pathname
     );
+
+    if (isTablet() || isMobile || isMobileUtils())
+      this.authStore.infoPanelStore.setIsVisible(false);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };

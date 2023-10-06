@@ -1,8 +1,10 @@
-import RowContent from "@docspace/components/row-content";
 import React from "react";
-import Text from "@docspace/components/text";
-import moment from "moment";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import Text from "@docspace/components/text";
+import RowContent from "@docspace/components/row-content";
+import { convertTime } from "@docspace/common/utils/convertTime";
 
 const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -13,11 +15,9 @@ const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
 `;
 
-export const HistoryContent = ({ sectionWidth, item }) => {
-  const DATE_FORMAT = "YYYY-MM-DD LT";
-  const to = moment(item.date).local();
+const HistoryContent = ({ sectionWidth, item, locale }) => {
+  const dateStr = convertTime(item.date, locale);
 
-  const dateStr = to.format(DATE_FORMAT);
   return (
     <StyledRowContent
       sideColor="#A3A9AE"
@@ -45,3 +45,13 @@ export const HistoryContent = ({ sectionWidth, item }) => {
     </StyledRowContent>
   );
 };
+
+export default inject(({ auth }) => {
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  return {
+    locale,
+  };
+})(observer(HistoryContent));

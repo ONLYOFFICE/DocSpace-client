@@ -6,7 +6,7 @@ import Text from "@docspace/components/text";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Textarea from "@docspace/components/textarea";
 import FieldContainer from "@docspace/components/field-container";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import { sendRecoverRequest } from "@docspace/common/api/settings";
 import toastr from "@docspace/components/toast/toastr";
 import { useTranslation } from "react-i18next";
@@ -27,7 +27,7 @@ const ModalDialogContainer = styled(ModalDialog)`
   }
 
   .recover-button-dialog {
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
     }
   }

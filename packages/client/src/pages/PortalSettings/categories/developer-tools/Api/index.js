@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { isMobileOnly } from "react-device-detect";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import Button from "@docspace/components/button";
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
@@ -20,7 +20,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
     margin-right: 22px;
     margin-top: 22px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       margin-bottom: 22px;
     }
   }

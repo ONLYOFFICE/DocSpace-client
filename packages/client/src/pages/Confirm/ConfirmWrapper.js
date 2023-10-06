@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/common/utils";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>
@@ -38,7 +38,7 @@ const BgBlock = styled.div`
   bottom: 0;
   z-index: -1;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     background-image: none;
   }
 `;

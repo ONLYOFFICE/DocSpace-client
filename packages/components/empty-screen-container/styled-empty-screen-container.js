@@ -1,12 +1,5 @@
 import styled, { css } from "styled-components";
-import {
-  hugeMobile,
-  tablet,
-  smallTablet,
-  desktop,
-  size,
-  hugeDesktop,
-} from "../utils/device";
+import { mobile, tablet, desktop, size, hugeDesktop } from "../utils/device";
 import NoUserSelect from "../utils/commonStyles";
 import { isMobileOnly } from "react-device-detect";
 
@@ -43,7 +36,7 @@ const EmptyPageStyles = css`
 
   @media (max-width: 768px) {
     ${(props) =>
-      props.sectionWidth > size.smallTablet &&
+      props.sectionWidth > size.mobile &&
       css`
         margin: 0 13% !important;
         width: 74%;
@@ -51,7 +44,7 @@ const EmptyPageStyles = css`
       `}
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .ec-header {
       padding-top: 22px;
     }
@@ -181,7 +174,7 @@ const EmptyContentBody = styled.div`
       }
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       ${MobileView}
     }
   }
@@ -191,7 +184,7 @@ const EmptyContentBody = styled.div`
 
   ${(props) =>
     (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.smallTablet &&
+    props.sectionWidth <= size.mobile &&
     !isMobileOnly &&
     css`
       ${MobileView}
@@ -222,7 +215,7 @@ const EmptyContentBody = styled.div`
 
     ${(props) =>
     (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.smallTablet &&
+    props.sectionWidth <= size.mobile &&
     css`
       max-width: none !important;
       width: auto !important;

@@ -23,7 +23,7 @@ const MainContainer = styled.div`
   .password-slider {
     width: 160px;
     height: 8px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: 24px 0px 24px 16px;
@@ -44,7 +44,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const PasswordStrength = props => {
+const PasswordStrength = (props) => {
   const {
     t,
 
@@ -128,16 +128,16 @@ const PasswordStrength = props => {
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("password") &&
       navigate("/portal-settings/security/access-portal");
   };
 
-  const onSliderChange = e => {
+  const onSliderChange = (e) => {
     setPasswordLen(Number(e.target.value));
   };
 
-  const onClickCheckbox = e => {
+  const onClickCheckbox = (e) => {
     switch (e.target.value) {
       case "upperCase":
         setUseUpperCase(e.target.checked);
@@ -206,7 +206,8 @@ const PasswordStrength = props => {
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
-          href={passwordStrengthSettingsUrl}>
+          href={passwordStrengthSettingsUrl}
+        >
           {t("Common:LearnMore")}
         </Link>
       </LearnMoreWrapper>

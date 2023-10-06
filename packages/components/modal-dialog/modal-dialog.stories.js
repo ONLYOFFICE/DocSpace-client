@@ -70,7 +70,6 @@ Default.args = {
   displayTypeDetailed: {
     desktop: "aside",
     tablet: "aside",
-    smallTablet: "modal",
     mobile: "aside",
   },
 };

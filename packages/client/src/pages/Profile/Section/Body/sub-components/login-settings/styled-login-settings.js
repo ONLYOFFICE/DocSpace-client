@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const StyledWrapper = styled.div`
   max-width: 660px;
@@ -18,7 +18,7 @@ export const StyledWrapper = styled.div`
     gap: 16px;
     align-items: center;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       flex-direction: column;
       gap: 12px;
       align-items: flex-start;

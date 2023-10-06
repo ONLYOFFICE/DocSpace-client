@@ -1,9 +1,12 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
-import styled from "styled-components";
-import moment from "moment";
+import { convertTime } from "@docspace/common/utils/convertTime";
+
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledPeopleRow = styled(TableRow)`
@@ -33,13 +36,9 @@ const StyledPeopleRow = styled(TableRow)`
 `;
 
 const PeopleTableRow = (props) => {
-  const { item, contextOptionsProps, isSettingNotPaid } = props;
+  const { item, contextOptionsProps, isSettingNotPaid, locale } = props;
   const { email, position } = item;
-
-  const DATE_FORMAT = "YYYY-MM-DD LT";
-  const to = moment(item.date).local();
-
-  const dateStr = to.format(DATE_FORMAT);
+  const dateStr = convertTime(item.date, locale);
 
   return (
     <StyledPeopleRow
@@ -100,4 +99,12 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default PeopleTableRow;
+export default inject(({ auth }) => {
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  return {
+    locale,
+  };
+})(observer(PeopleTableRow));

@@ -4,7 +4,7 @@ import {
   isMobile as isMobileUtils,
   tablet,
   isDesktop,
-  hugeMobile,
+  mobile,
 } from "@docspace/components/utils/device";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
@@ -100,7 +100,7 @@ const StyledInfoPanel = styled.div`
     }
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     bottom: 0;
     height: calc(100% - 64px);
     width: 100vw;
@@ -151,7 +151,7 @@ const StyledControlContainer = styled.div`
     }
   `}
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     display: flex;
 
     top: -27px;

@@ -10,7 +10,7 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import { isMobile, isMobileOnly } from "react-device-detect";
@@ -30,7 +30,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 70px;
+  min-height: 53px;
   flex-wrap: wrap;
 
   ${() =>
@@ -65,14 +65,20 @@ const HeaderContainer = styled.div`
       `}
 
     svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
     font-size: 18px;
     margin-inline-end: 16px;
+
+    @media ${tablet} {
+      font-size: 21px;
+    }
+    @media ${mobile} {
+      font-size: 18px;
+    }
   }
 
   .table-container_group-menu {
@@ -107,7 +113,7 @@ const HeaderContainer = styled.div`
       css`
         position: absolute;
         height: 48px;
-        margin-block: -35px 0;
+        margin-block: -17px 0;
         margin-inline: -17px 0;
         width: calc(100% + 32px);
       `}
@@ -161,7 +167,7 @@ const HistoryHeader = (props) => {
       });
       toastr.success(
         `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
-        <b>{t("Common:Done")}</b>
+        <b>{t("Common:Done")}</b>,
       );
     } catch (error) {
       console.log(error);
@@ -181,8 +187,7 @@ const HistoryHeader = (props) => {
     },
   ];
 
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
+  const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);

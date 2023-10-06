@@ -23,7 +23,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
       css`
         width: auto;
 
-        @media (min-width: ${size.smallTablet}px) {
+        @media (min-width: ${size.mobile}px) {
           .delete-button,
           .cancel-button {
             width: auto;

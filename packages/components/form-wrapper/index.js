@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 import Base from "../themes/base";
 
@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
     min-width: 416px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     padding: 0;
     border-radius: 0;
     box-shadow: none !important;

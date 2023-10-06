@@ -5,7 +5,7 @@ import DropDownItem from "../drop-down-item";
 import FloatingButton from "../floating-button";
 
 import { isMobileOnly } from "react-device-detect";
-import { mobile, hugeMobile } from "../utils/device";
+import { mobile } from "../utils/device";
 
 const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
@@ -58,7 +58,7 @@ const StyledFloatingButton = styled(FloatingButton)`
 StyledFloatingButton.defaultProps = { theme: Base };
 
 const mobileDropDown = css`
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.width};
   }
 

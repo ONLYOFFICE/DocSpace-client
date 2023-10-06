@@ -9,7 +9,7 @@ import styled, { css, withTheme } from "styled-components";
 import DropDownItem from "@docspace/components/drop-down-item";
 import { isMobileOnly } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
-import { mobile, tablet, hugeMobile } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import Portal from "@docspace/components/portal";
 
@@ -40,7 +40,7 @@ const StyledDropDown = styled(DropDown)`
         : `right: 16px !important;`}
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     position: fixed;
 
     top: unset !important;
@@ -69,7 +69,7 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 290;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     display: flex;
   }
 `;

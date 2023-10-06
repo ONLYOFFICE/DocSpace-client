@@ -371,7 +371,7 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const res = await api.settings.getLoginHistoryReport();
-    window.open(res);
+    setTimeout(() => window.open(res), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
@@ -379,7 +379,7 @@ class SettingsSetupStore {
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      window.open(res);
+      setTimeout(() => window.open(res), 100); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);

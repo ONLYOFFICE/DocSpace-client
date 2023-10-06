@@ -8,13 +8,7 @@ import { inject, observer } from "mobx-react";
 
 import Scrollbar from "@docspace/components/scrollbar";
 import DragAndDrop from "@docspace/components/drag-and-drop";
-import {
-  tablet,
-  desktop,
-  smallTablet,
-  mobile,
-  hugeMobile,
-} from "@docspace/components/utils/device";
+import { tablet, desktop, mobile } from "@docspace/components/utils/device";
 
 const settingsStudioStyles = css`
   ${({ settingsStudio }) =>
@@ -40,7 +34,7 @@ const settingsStudioStyles = css`
               `}
       }
 
-      @media ${smallTablet} {
+      @media ${mobile} {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
@@ -100,7 +94,7 @@ const paddingStyles = css`
           `}
   `};
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -191,6 +185,10 @@ const commonStyles = css`
       ${!isMobile &&
       css`
         margin-top: -17px;
+
+        @media ${mobile} {
+          margin-top: 0px;
+        }
       `}
 
       @media ${desktop} {

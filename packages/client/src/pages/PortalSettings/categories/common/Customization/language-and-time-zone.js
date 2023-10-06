@@ -10,8 +10,7 @@ import { inject, observer } from "mobx-react";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
 import { setCookie } from "@docspace/common/utils";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -373,7 +372,7 @@ const LanguageAndTimeZone = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(

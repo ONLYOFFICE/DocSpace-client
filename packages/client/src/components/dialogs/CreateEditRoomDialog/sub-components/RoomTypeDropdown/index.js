@@ -1,4 +1,4 @@
-import { isHugeMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import React, { useState } from "react";
 import styled from "styled-components";
 import RoomType from "../RoomType";
@@ -53,7 +53,7 @@ const RoomTypeDropdown = ({
         isOpen={isOpen}
         onClick={toggleDropdown}
       />
-      {isHugeMobile() ? (
+      {isMobile() ? (
         <DropdownMobile
           t={t}
           open={isOpen}

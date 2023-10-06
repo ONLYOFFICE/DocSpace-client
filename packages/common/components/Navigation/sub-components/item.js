@@ -14,7 +14,7 @@ import {
   tablet,
   isTablet,
   isMobile as IsMobileUtils,
-  hugeMobile,
+  mobile,
 } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
@@ -59,7 +59,7 @@ const StyledItem = styled.div`
           `}
   `};
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

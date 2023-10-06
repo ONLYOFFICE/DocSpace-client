@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { hugeMobile, mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 export const StyledPage = styled.div`
   display: flex;
@@ -13,25 +13,13 @@ export const StyledPage = styled.div`
     padding: 0 16px;
   }
 
-  @media ${hugeMobile} {
-    margin: 32px 0;
-    ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-            padding: 0 20px 0 8px;
-          `
-      : css`
-            padding: 0 8px 0 20px;
-          `}
-  }
-
   @media ${mobile} {
-    ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding: 0 16px 0 8px;
           `
-      : css`
+        : css`
             padding: 0 8px 0 16px;
           `}
   }
@@ -89,7 +77,7 @@ export const StyledContent = styled.div`
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     justify-content: start;
     min-height: 100%;
   }
@@ -101,7 +89,7 @@ export const StyledBody = styled.div`
   align-items: center;
   margin: 56px auto;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
     margin: 0 auto;
   }

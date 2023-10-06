@@ -13,7 +13,7 @@ import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { useTranslation } from "react-i18next";
 
 import { useParams } from "react-router-dom";
@@ -39,14 +39,21 @@ const HeaderContainer = styled.div`
     }
 
     svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
     font-size: 18px;
     margin-inline-end: 16px;
+
+    @media ${tablet} {
+      font-size: 21px;
+    }
+
+    @media ${mobile} {
+      font-size: 18px;
+    }
   }
 `;
 

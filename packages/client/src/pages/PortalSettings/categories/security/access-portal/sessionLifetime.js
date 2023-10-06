@@ -120,7 +120,7 @@ const SessionLifetime = (props) => {
   }, [type, sessionLifetime]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("lifetime") &&
       navigate("/portal-settings/security/access-portal");
   };

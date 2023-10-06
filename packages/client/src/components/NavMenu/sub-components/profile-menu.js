@@ -106,6 +106,7 @@ export const StyledProfileMenu = styled(DropDownItem)`
   cursor: pointer;
   display: inline-block;
   margin-top: -6px;
+  max-width: 600px;
 `;
 
 export const MenuContainer = styled.div`

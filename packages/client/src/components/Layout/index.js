@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
-import { size } from "@docspace/components/utils/device";
+import { size as deviceSize } from "@docspace/components/utils/device";
 import {
   isIOS,
   isFirefox,
@@ -15,6 +15,7 @@ import {
   isAndroid,
 } from "react-device-detect";
 import { inject, observer } from "mobx-react";
+import { DeviceType } from "@docspace/common/constants";
 
 const StyledContainer = styled.div`
   user-select: none;
@@ -35,7 +36,13 @@ const StyledContainer = styled.div`
 `;
 
 const Layout = (props) => {
-  const { children, isTabletView, setIsTabletView } = props;
+  const {
+    children,
+    isTabletView,
+    setIsTabletView,
+    setWindowWidth,
+    currentDeviceType,
+  } = props;
 
   const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
@@ -56,7 +63,9 @@ const Layout = (props) => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
   useEffect(() => {
-    const isTablet = window.innerWidth <= size.tablet;
+    const isTablet =
+      window.innerWidth <= deviceSize.tablet &&
+      window.innerWidth > deviceSize.mobile;
     setIsTabletView(isTablet);
 
     let mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -70,18 +79,16 @@ const Layout = (props) => {
   }, []);
 
   useEffect(() => {
-    if (isTabletView || isMobile) {
-      if (isIOS && isSafari) window.addEventListener("resize", onResize);
-      else window.addEventListener("orientationchange", onOrientationChange);
+    window.addEventListener("resize", onResize);
+    if (isMobile || isTabletView) {
+      window.addEventListener("orientationchange", onOrientationChange);
+
       changeRootHeight();
     }
 
     return () => {
-      if (isTabletView || isMobile) {
-        if (isIOS && isSafari) window.removeEventListener("resize", onResize);
-        else
-          window.removeEventListener("orientationchange", onOrientationChange);
-      }
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onOrientationChange);
     };
   }, [isTabletView]);
 
@@ -105,13 +112,16 @@ const Layout = (props) => {
 
   const onWidthChange = (e) => {
     const { matches } = e;
+    alert(matches);
     setIsTabletView(matches);
   };
 
   const onResize = () => {
     changeRootHeight();
+    setWindowWidth(window.innerWidth);
   };
   const onOrientationChange = () => {
+    setWindowWidth(window.innerWidth);
     changeRootHeight();
   };
   const changeRootHeight = () => {
@@ -178,7 +188,7 @@ const Layout = (props) => {
   return (
     <StyledContainer
       className="Layout"
-      isTabletView={isTabletView}
+      isTabletView={currentDeviceType === DeviceType.tablet}
       contentHeight={contentHeight}
     >
       {isMobileOnly ? <MobileLayout {...props} /> : children}
@@ -196,5 +206,7 @@ export default inject(({ auth, bannerStore }) => {
   return {
     isTabletView: auth.settingsStore.isTabletView,
     setIsTabletView: auth.settingsStore.setIsTabletView,
+    setWindowWidth: auth.settingsStore.setWindowWidth,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(observer(Layout));

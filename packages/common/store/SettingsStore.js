@@ -1,5 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
+
 import api from "../api";
+
 import {
   combineUrl,
   setCookie,
@@ -13,11 +15,12 @@ import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   TenantStatus,
+  DeviceType,
 } from "../constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
-
+import { size as deviceSize } from "@docspace/components/utils/device";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
@@ -184,6 +187,8 @@ class SettingsStore {
   numberAttempt = null;
   blockingTime = null;
   checkPeriod = null;
+
+  windowWidth = window.innerWidth;
 
   constructor() {
     makeAutoObservable(this);
@@ -1012,6 +1017,36 @@ class SettingsStore {
       toastr.error(e);
     }
   };
+
+  setWindowWidth = (width) => {
+    if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
+      return;
+
+    if (
+      this.windowWidth > deviceSize.mobile &&
+      width > deviceSize.mobile &&
+      this.windowWidth <= deviceSize.tablet &&
+      width <= deviceSize.tablet
+    )
+      return;
+
+    if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
+      return;
+
+    this.windowWidth = width;
+  };
+
+  get currentDeviceType() {
+    if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
+
+    if (
+      this.windowWidth > deviceSize.mobile &&
+      this.windowWidth <= deviceSize.tablet
+    )
+      return DeviceType.tablet;
+
+    return DeviceType.desktop;
+  }
 }
 
 export default SettingsStore;

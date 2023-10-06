@@ -225,10 +225,14 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 

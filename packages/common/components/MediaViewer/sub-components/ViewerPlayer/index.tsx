@@ -537,6 +537,15 @@ function ViewerPlayer({
     if (isPlaying && isVideo) restartToolbarVisibleTimer();
   };
 
+  const hadleError = useCallback(
+    (error: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+      console.error("video error", error);
+      setIsError(true);
+      setIsLoading(false);
+    },
+    []
+  );
+
   const stopPropagation = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       event?.stopPropagation();
@@ -577,18 +586,14 @@ function ViewerPlayer({
             onTimeUpdate={handleTimeUpdate}
             onPlaying={() => setIsWaiting(false)}
             onWaiting={() => setIsWaiting(true)}
-            onError={(error) => {
-              console.error("video error", error);
-              setIsError(true);
-              setIsLoading(false);
-            }}
+            onError={hadleError}
             onLoadedMetadata={handleLoadedMetaDataVideo}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}
             visible={!isPlaying && isVideo && !isError}
           />
-          {isAudio && (
+          {isAudio && !isError && (
             <div className="audio-container">
               <img src={audioIcon} />
             </div>

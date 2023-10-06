@@ -152,7 +152,6 @@
   "RecoveryFileNotSelected": "Napaka pri obnovitvi. Datoteka za obnovitev ni izbrana.",
   "RestoreBackup": "Obnovitev podatkov",
   "RestoreBackupDescription": "S to opcijo obnovite svoj prostor iz predhodno shranjene varnostne kopije.",
-  "RestoreDefaultButton": "Obnovi na privzeto",
   "RoomsModule": "Varnostno kopiranje sobe",
   "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo.",
   "SelectFileInGZFormat": "Izberite datoteko v .GZ formatu",

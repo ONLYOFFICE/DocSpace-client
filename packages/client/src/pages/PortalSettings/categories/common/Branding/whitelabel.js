@@ -488,7 +488,7 @@ const WhiteLabel = (props) => {
         onSaveClick={onSave}
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("RestoreDefaultButton")}
+        cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
         showReminder={isSettingPaid}
         saveButtonDisabled={isEqualLogo && isEqualText}

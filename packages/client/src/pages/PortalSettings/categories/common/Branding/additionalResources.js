@@ -270,7 +270,7 @@ const AdditionalResources = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
+          cancelButtonLabel={t("Common:Restore")}
           displaySettings={true}
           reminderTest={t("YouHaveUnsavedChanges")}
           showReminder={(isSettingPaid && hasChange) || isLoading}

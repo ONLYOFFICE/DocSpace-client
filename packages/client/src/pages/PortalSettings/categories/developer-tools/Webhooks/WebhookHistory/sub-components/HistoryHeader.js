@@ -10,7 +10,7 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import { isMobile, isMobileOnly } from "react-device-detect";
@@ -76,7 +76,7 @@ const HeaderContainer = styled.div`
     @media ${tablet} {
       font-size: 21px;
     }
-    @media ${hugeMobile} {
+    @media ${mobile} {
       font-size: 18px;
     }
   }

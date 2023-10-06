@@ -156,7 +156,6 @@
   "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd.",
   "RestoreBackup": "Dataherstel",
   "RestoreBackupDescription": "Gebruik deze optie om uw ruimte te herstellen vanaf het voorgaande opgeslagen back-up bestand.",
-  "RestoreDefaultButton": "Terugzetten naar Standaardwaarden",
   "RoomsModule": "Backup kamer",
   "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",
   "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat",

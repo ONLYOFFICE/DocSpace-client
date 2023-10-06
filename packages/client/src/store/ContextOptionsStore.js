@@ -225,21 +225,28 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
   showVersionHistory = (id, security) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
+    
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(id + "", security);
     setIsVerHistoryPanel(true);
+    setIsMobileHidden(true);
   };
 
   finalizeVersion = (id) => {

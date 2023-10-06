@@ -450,7 +450,7 @@ const StyledMobilePreview = styled.div`
     align-items: center;
     border: 1px solid;
     border-radius: 3px;
-    padding-left: 8px;
+    padding-inline-start: 8px;
   }
 
   .main-button-preview {
@@ -539,7 +539,7 @@ const StyledMobilePreview = styled.div`
 
   .tablet-tile-name {
     width: 44% !important;
-    margin-left: 16px;
+    margin-inline-start: 16px;
     border-right: none !important;
     border-radius: 12px 0 16px 0 !important;
   }
@@ -565,7 +565,8 @@ const StyledMobilePreview = styled.div`
     display: flex;
     border-top-width: 1px;
     border-top-style: solid;
-    padding: 16px 0px 16px 16px;
+    padding-block: 16px;
+    padding-inline: 16px 0;
   }
 
   .tile-container {
@@ -574,7 +575,7 @@ const StyledMobilePreview = styled.div`
   }
 
   .pin {
-    padding-right: 14px;
+    padding-inline-end: 14px;
 
     path {
       fill: ${(props) =>
@@ -621,17 +622,17 @@ const StyledMobilePreview = styled.div`
         : colorPreview} !important;
   }
   .section-badge {
-    padding-right: 12px;
+    padding-inline-end: 12px;
   }
 
   .tile-icon {
-    padding-right: 12px;
+    padding-inline-end: 12px;
   }
 
   .floating-button {
     position: relative;
-    margin-left: auto;
-    right: 0px;
+    margin-inline-start: auto;
+    inset-inline-end: 0;
     bottom: 48px;
   }
 

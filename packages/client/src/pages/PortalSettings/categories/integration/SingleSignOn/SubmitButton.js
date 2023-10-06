@@ -39,7 +39,7 @@ const SubmitResetButtons = (props) => {
         onCancelClick={isSsoEnabled ? openResetModal : resetForm}
         showReminder={true}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Settings:RestoreDefaultButton")}
+        cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
         hasScroll={false}
         isSaving={isSubmitLoading}

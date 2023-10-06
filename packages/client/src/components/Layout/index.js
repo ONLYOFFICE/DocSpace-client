@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
-import { size } from "@docspace/components/utils/device";
+import { size as deviceSize } from "@docspace/components/utils/device";
 import {
   isIOS,
   isFirefox,
@@ -64,7 +64,8 @@ const Layout = (props) => {
   });
   useEffect(() => {
     const isTablet =
-      window.innerWidth <= size.tablet && window.innerWidth > deviceSize.mobile;
+      window.innerWidth <= deviceSize.tablet &&
+      window.innerWidth > deviceSize.mobile;
     setIsTabletView(isTablet);
 
     let mediaQuery = window.matchMedia("(max-width: 1024px)");

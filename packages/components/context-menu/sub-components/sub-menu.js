@@ -76,9 +76,9 @@ const SubMenu = (props) => {
   };
 
   const position = () => {
-    const parentItem = subMenuRef.current.parentElement;
+    const parentItem = subMenuRef.current?.parentElement;
     const containerOffset = DomHelpers.getOffset(
-      subMenuRef.current.parentElement
+      subMenuRef.current?.parentElement
     );
     const viewport = DomHelpers.getViewport();
     const subListWidth = subMenuRef.current.offsetParent

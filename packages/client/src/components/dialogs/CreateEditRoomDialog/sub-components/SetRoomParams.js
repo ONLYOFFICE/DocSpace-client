@@ -19,9 +19,6 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import Avatar from "@docspace/components/avatar";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
@@ -42,10 +39,6 @@ const StyledSetRoomParams = styled.div`
   }
 `;
 
-const StyledIcon = styled.img`
-  ${NoUserSelect}
-`;
-
 const SetRoomParams = ({
   t,
   roomParams,
@@ -60,9 +53,7 @@ const SetRoomParams = ({
   setIsValidTitle,
   onKeyUp,
   enableThirdParty,
-  currentColorScheme,
   setChangeRoomOwnerIsVisible,
-  userId,
   isAdmin,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
@@ -89,7 +80,7 @@ const SetRoomParams = ({
   console.log(roomParams);
 
   return (
-    <StyledSetRoomParams currentColorScheme={currentColorScheme}>
+    <StyledSetRoomParams>
       {isEdit ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
@@ -189,13 +180,10 @@ const SetRoomParams = ({
 };
 
 export default inject(({ auth, dialogsStore }) => {
-  const { currentColorScheme } = auth.settingsStore;
   const { user } = auth.userStore;
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   return {
-    currentColorScheme,
     setChangeRoomOwnerIsVisible,
-    userId: user.id,
     isAdmin: user.isAdmin || user.isOwner,
   };
 })(

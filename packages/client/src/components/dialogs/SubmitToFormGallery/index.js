@@ -114,7 +114,7 @@ const SubmitToFormGallery = ({
       <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
-        {/* <div>
+        <div>
           <Trans
             t={t}
             i18nKey="SubmitToGalleryDialogGuideInfo"
@@ -124,8 +124,9 @@ const SubmitToFormGallery = ({
             approval in our
             <Link
               color={currentColorScheme.main.accent}
-              href="#"
+              href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
               type={"page"}
+              target={"_blank"}
               isBold
               isHovered
             >
@@ -133,7 +134,7 @@ const SubmitToFormGallery = ({
             </Link>
             .
           </Trans>
-        </div> */}
+        </div>
 
         {formItem && (
           <Styled.FormItem>

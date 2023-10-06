@@ -134,14 +134,14 @@ const DeleteDialogComponent = (props) => {
           <>
             <>{t("DeleteFile")} </>
             <>{t("FilePermanentlyDeleted")} </>
-            <>{t("WantToContinue")}</>
+            <>{t("Common:WantToContinue")}</>
           </>
         )
       ) : (
         <>
           <>{t("DeleteItems")} </>
           <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("WantToContinue")}</>
+          <>{t("Common:WantToContinue")}</>
         </>
       );
     }
@@ -152,20 +152,20 @@ const DeleteDialogComponent = (props) => {
           <>
             <>{t("DeleteFolder")} </>
             <>{t("FolderPermanentlyDeleted")} </>
-            <>{t("WantToContinue")}</>
+            <>{t("Common:WantToContinue")}</>
           </>
         ) : (
           <>
             <>{t("DeleteFile")} </>
             <>{t("FilePermanentlyDeleted")} </>
-            <>{t("WantToContinue")}</>
+            <>{t("Common:WantToContinue")}</>
           </>
         )
       ) : (
         <>
           <>{t("DeleteItems")} </>
           <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("WantToContinue")}</>
+          <>{t("Common:WantToContinue")}</>
         </>
       );
     }
@@ -177,7 +177,7 @@ const DeleteDialogComponent = (props) => {
             <>{t("DeleteFolder")} </>
             <>{t("DeleteSharedNote")} </>
             <>{t("FolderPermanentlyDeleted")} </>
-            <>{t("WantToContinue")}</>
+            <>{t("Common:WantToContinue")}</>
           </>
         ) : (
           t("MoveToTrashFile")
@@ -187,7 +187,7 @@ const DeleteDialogComponent = (props) => {
           <>{t("DeleteItems")} </>
           <>{t("DeleteItemsSharedNote")} </>
           <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("WantToContinue")}</>
+          <>{t("Common:WantToContinue")}</>
         </>
       );
     }

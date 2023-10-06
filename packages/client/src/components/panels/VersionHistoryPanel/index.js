@@ -18,8 +18,9 @@ import config from "PACKAGE_FILE";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
-    const { setIsVerHistoryPanel } = this.props;
+    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
     setIsVerHistoryPanel(false);
+    setInfoPanelIsMobileHidden(false);
   };
 
   componentDidMount() {
@@ -103,6 +104,9 @@ export default inject(({ auth, clientLoadingStore, versionHistoryStore }) => {
   const { isTabletView } = auth.settingsStore;
   const { isLoading } = clientLoadingStore;
   const {
+    setIsMobileHidden: setInfoPanelIsMobileHidden,
+  } = auth.infoPanelStore;
+  const {
     fileId,
     versions,
     setIsVerHistoryPanel,
@@ -120,5 +124,6 @@ export default inject(({ auth, clientLoadingStore, versionHistoryStore }) => {
     showProgressBar,
 
     setIsVerHistoryPanel,
+    setInfoPanelIsMobileHidden
   };
 })(observer(VersionHistoryPanel));

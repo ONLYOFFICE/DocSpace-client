@@ -235,11 +235,14 @@ class ContextOptionsStore {
   showVersionHistory = (id, security) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
+    
+    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(id + "", security);
     setIsVerHistoryPanel(true);
+    setIsMobileHidden(true);
   };
 
   finalizeVersion = (id) => {

@@ -12,7 +12,7 @@ import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 import { useTranslation } from "react-i18next";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 const ListHeader = styled.header`
   display: flex;
@@ -20,7 +20,7 @@ const ListHeader = styled.header`
   align-items: center;
 
   ${() =>
-    isMobileOnly &&
+    isMobile() &&
     css`
       padding-inline-end: 8px;
     `}

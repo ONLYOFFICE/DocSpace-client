@@ -440,7 +440,7 @@ const CompanyInfoSettings = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
+          cancelButtonLabel={t("Common:Restore")}
           reminderTest={t("YouHaveUnsavedChanges")}
           displaySettings={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}

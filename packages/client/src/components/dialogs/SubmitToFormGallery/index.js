@@ -114,7 +114,7 @@ const SubmitToFormGallery = ({
       <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
-        <div>
+        {/* <div>
           <Trans
             t={t}
             i18nKey="SubmitToGalleryDialogGuideInfo"
@@ -133,7 +133,7 @@ const SubmitToFormGallery = ({
             </Link>
             .
           </Trans>
-        </div>
+        </div> */}
 
         {formItem && (
           <Styled.FormItem>

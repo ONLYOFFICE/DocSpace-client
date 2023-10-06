@@ -1,6 +1,5 @@
 import Text from "@docspace/components/text";
 import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import ToggleButton from "@docspace/components/toggle-button";
 import { tablet, mobile } from "@docspace/components/utils/device";
@@ -33,11 +32,6 @@ const StyledFilterBlock = styled.div`
   @media ${tablet} {
     max-width: calc(100% - 69px);
   }
-
-  ${isMobile &&
-  css`
-    max-width: calc(100% - 69px);
-  `}
 
   @media ${mobile} {
     bottom: 0;
@@ -365,11 +359,6 @@ const StyledControlContainer = styled.div`
       : css`
           left: -34px;
         `}
-
-  ${isMobile &&
-  css`
-    top: 14px;
-  `}
 
   @media ${mobile} {
     top: -34px;

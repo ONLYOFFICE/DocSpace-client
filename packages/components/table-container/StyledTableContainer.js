@@ -80,6 +80,12 @@ const StyledTableContainer = styled.div`
     }
   }
 
+  .lengthen-header {
+    border-image-slice: 1;
+    border-image-source: ${(props) =>
+      props.theme.tableContainer.header.lengthenBorderImageSource};
+  }
+
   .hotkeys-lengthen-header {
     border-bottom: ${(props) =>
       props.theme.tableContainer.header.hotkeyBorderBottom};

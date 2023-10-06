@@ -3,12 +3,6 @@ import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 
-import {
-  isDesktop as isDesktopUtils,
-  isTablet as isTabletUtils,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
-
 import SubArticleBackdrop from "./sub-components/article-backdrop";
 import SubArticleHeader from "./sub-components/article-header";
 import SubArticleMainButton from "./sub-components/article-main-button";
@@ -20,6 +14,7 @@ import ArticleApps from "./sub-components/article-apps";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
+import { DeviceType } from "../../constants";
 
 const Article = ({
   showText,
@@ -45,6 +40,7 @@ const Article = ({
   onLogoClickAction,
   theme,
 
+  currentDeviceType,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -61,13 +57,28 @@ const Article = ({
   }, [onMobileBack]);
 
   React.useEffect(() => {
-    window.addEventListener("resize", sizeChangeHandler);
-    return () => window.removeEventListener("resize", sizeChangeHandler);
-  }, []);
+    // const showArticle = JSON.parse(localStorage.getItem("showArticle"));
 
-  React.useEffect(() => {
-    sizeChangeHandler();
-  }, []);
+    if (currentDeviceType === DeviceType.mobile) {
+      setShowText(true);
+      setIsMobileArticle(true);
+
+      return;
+    }
+
+    if (currentDeviceType === DeviceType.tablet) {
+      setIsMobileArticle(true);
+
+      // if (showArticle) return;
+
+      setShowText(false);
+
+      return;
+    }
+
+    setShowText(true);
+    setIsMobileArticle(false);
+  }, [setShowText, setIsMobileArticle, currentDeviceType]);
 
   React.useEffect(() => {
     React.Children.forEach(children, (child) => {
@@ -89,26 +100,6 @@ const Article = ({
       }
     });
   }, [children]);
-
-  const sizeChangeHandler = React.useCallback(() => {
-    const showArticle = JSON.parse(localStorage.getItem("showArticle"));
-
-    if (isMobileOnly || isMobileUtils()) {
-      setShowText(true);
-      setIsMobileArticle(true);
-    }
-    if ((isTabletUtils() || isMobile) && !isMobileOnly) {
-      setIsMobileArticle(true);
-
-      if (showArticle) return;
-
-      setShowText(false);
-    }
-    if (isDesktopUtils() && !isMobile) {
-      setShowText(true);
-      setIsMobileArticle(false);
-    }
-  }, [setShowText, setIsMobileArticle]);
 
   const onMobileBack = React.useCallback(() => {
     //close article
@@ -160,19 +151,20 @@ const Article = ({
         articleOpen={articleOpen}
         $withMainButton={withMainButton}
         correctTabletHeight={correctTabletHeight}
+        isMobile={currentDeviceType === DeviceType.mobile}
         {...rest}
       >
         <SubArticleHeader
           showText={showText}
           onLogoClickAction={onLogoClickAction}
+          currentDeviceType={currentDeviceType}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
 
         {articleMainButtonContent &&
         withMainButton &&
-        !isMobileOnly &&
-        !isMobileUtils() ? (
+        currentDeviceType !== DeviceType.mobile ? (
           <SubArticleMainButton showText={showText}>
             {articleMainButtonContent.props.children}
           </SubArticleMainButton>
@@ -185,8 +177,11 @@ const Article = ({
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
           />
-          {!hideProfileBlock && !isMobileOnly && (
-            <ArticleProfile showText={showText} />
+          {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
+            <ArticleProfile
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
           )}
 
           <ArticleAlerts />
@@ -199,13 +194,13 @@ const Article = ({
           )}
         </SubArticleBody>
       </StyledArticle>
-      {articleOpen && (isMobileOnly || isMobileUtils()) && (
+      {articleOpen && currentDeviceType === DeviceType.mobile && (
         <>
           <SubArticleBackdrop onClick={toggleArticleOpen} />
         </>
       )}
 
-      {articleMainButtonContent && (isMobileOnly || isMobileUtils()) ? (
+      {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
         <SubArticleMainButton showText={showText}>
           {articleMainButtonContent.props.children}
         </SubArticleMainButton>
@@ -215,6 +210,12 @@ const Article = ({
 
   const renderPortalArticle = () => {
     const rootElement = document.getElementById("root");
+
+    // const el = (
+    //   <>
+    //     <div>123</div>
+    //   </>
+    // );
 
     return (
       <Portal
@@ -230,7 +231,9 @@ const Article = ({
   //   withMainButton,
   // });
 
-  return isMobileOnly ? renderPortalArticle() : articleComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortalArticle()
+    : articleComponent;
 };
 
 Article.propTypes = {
@@ -276,6 +279,7 @@ export default inject(({ auth }) => {
     setArticleOpen,
     mainBarVisible,
     theme,
+    currentDeviceType,
   } = settingsStore;
 
   return {
@@ -295,5 +299,6 @@ export default inject(({ auth }) => {
     isLiveChatAvailable,
 
     theme,
+    currentDeviceType,
   };
 })(observer(Article));

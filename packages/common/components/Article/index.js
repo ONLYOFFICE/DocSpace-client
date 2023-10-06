@@ -93,14 +93,11 @@ const Article = ({
   const sizeChangeHandler = React.useCallback(() => {
     const showArticle = JSON.parse(localStorage.getItem("showArticle"));
 
-    if (isMobileOnly || isMobileUtils() || window.innerWidth === 375) {
+    if (isMobileOnly || isMobileUtils()) {
       setShowText(true);
       setIsMobileArticle(true);
     }
-    if (
-      ((isTabletUtils() && window.innerWidth !== 375) || isMobile) &&
-      !isMobileOnly
-    ) {
+    if ((isTabletUtils() || isMobile) && !isMobileOnly) {
       setIsMobileArticle(true);
 
       if (showArticle) return;
@@ -202,7 +199,7 @@ const Article = ({
           )}
         </SubArticleBody>
       </StyledArticle>
-      {articleOpen && (isMobileOnly || window.innerWidth <= 375) && (
+      {articleOpen && (isMobileOnly || isMobileUtils()) && (
         <>
           <SubArticleBackdrop onClick={toggleArticleOpen} />
         </>

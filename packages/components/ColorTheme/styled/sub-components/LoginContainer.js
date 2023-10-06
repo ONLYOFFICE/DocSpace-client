@@ -29,7 +29,8 @@ const LoginContainer = styled.div`
 
   @media ${mobile} {
     margin: 0 auto 0 auto;
-    max-width: 311px;
+    max-width: 100%;
+    width: calc(100% - 32px);
   }
 
   .socialButton {

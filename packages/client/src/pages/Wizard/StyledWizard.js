@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { tablet, mobile } from "@docspace/components/utils/device";
-import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
+import { isIOS, isFirefox } from "react-device-detect";
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
 export const Wrapper = styled.div`
@@ -11,12 +11,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   box-sizing: border-box;
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     height: auto;
     min-height: 100%;
     width: 100%;
-  `}
+  }
 
   .bg-cover {
     background-image: url("${BackgroundPatternReactSvgUrl}");

@@ -122,7 +122,7 @@ const MainProfile = (props) => {
     </Text>
   );
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -293,7 +293,7 @@ const MainProfile = (props) => {
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={false}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
@@ -302,11 +302,11 @@ const MainProfile = (props) => {
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation
-                    : !isMobileOnly
+                    : !isMobile()
                 }
-                withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
-                modernView={!isMobileOnly}
+                modernView={!isMobile()}
               />
             </div>
           </div>
@@ -416,7 +416,7 @@ const MainProfile = (props) => {
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
               isDisabled={false}
-              scaled={isMobileOnly}
+              scaled={isMobile()}
               scaledOptions={false}
               size="content"
               showDisabledItems={true}
@@ -425,11 +425,11 @@ const MainProfile = (props) => {
               isDefaultMode={
                 isMobileHorizontalOrientation
                   ? isMobileHorizontalOrientation
-                  : !isMobileOnly
+                  : !isMobile()
               }
-              withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
-              modernView={!isMobileOnly}
+              modernView={!isMobile()}
             />
           </div>
         </div>

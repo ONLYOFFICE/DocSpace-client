@@ -8,6 +8,7 @@ import { Base } from "@docspace/components/themes";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import UserContent from "./userContent";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -15,23 +16,15 @@ const marginStyles = css`
   padding-left: 24px;
   padding-right: 24px;
 
-  ${isMobile &&
-  css`
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  `}
-
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  @media (max-width: 375px) {
-    ${props =>
+  @media ${mobile} {
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -16px;
@@ -49,7 +42,7 @@ const marginStyles = css`
 `;
 
 const checkedStyle = css`
-  background: ${props => props.theme.filesSection.rowView.checkedBackground};
+  background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
   ${marginStyles}
 `;
 
@@ -58,7 +51,7 @@ const StyledWrapper = styled.div`
     border: 1px solid transparent;
     border-left: none;
     border-right: none;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 0;
@@ -78,7 +71,7 @@ const StyledWrapper = styled.div`
 StyledWrapper.defaultProps = { theme: Base };
 
 const StyledSimpleUserRow = styled(Row)`
-  ${props => (props.checked || props.isActive) && checkedStyle};
+  ${(props) => (props.checked || props.isActive) && checkedStyle};
 
   ${!isMobile &&
   css`
@@ -88,9 +81,9 @@ const StyledSimpleUserRow = styled(Row)`
 
       margin-top: -3px;
       padding-bottom: 1px;
-      border-top: ${props =>
+      border-top: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      border-bottom: ${props =>
+      border-bottom: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
     }
   `}
@@ -101,7 +94,7 @@ const StyledSimpleUserRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 12px;
@@ -112,7 +105,7 @@ const StyledSimpleUserRow = styled(Row)`
   }
 `;
 
-const SimpleUserRow = props => {
+const SimpleUserRow = (props) => {
   const {
     item,
     sectionWidth,
@@ -142,7 +135,8 @@ const SimpleUserRow = props => {
       className={`user-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       }`}
-      value={value}>
+      value={value}
+    >
       <div className="user-item">
         <StyledSimpleUserRow
           key={item.id}
@@ -156,7 +150,8 @@ const SimpleUserRow = props => {
           mode={"modern"}
           className={"user-row"}
           onRowClick={onRowClick}
-          onContextClick={onRowContextClick}>
+          onContextClick={onRowContextClick}
+        >
           <UserContent {...props} />
         </StyledSimpleUserRow>
       </div>

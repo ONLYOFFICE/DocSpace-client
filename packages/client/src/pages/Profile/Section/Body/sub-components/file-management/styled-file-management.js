@@ -1,6 +1,4 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
 
 const StyledWrapper = styled.div`
   max-width: 660px;

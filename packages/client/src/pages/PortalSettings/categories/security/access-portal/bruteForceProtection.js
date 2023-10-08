@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBruteForceProtection } from "../StyledSecurity";
@@ -14,6 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const BruteForceProtection = (props) => {
   const {
@@ -26,6 +27,7 @@ const BruteForceProtection = (props) => {
     initSettings,
     isInit,
     bruteForceProtectionUrl,
+    currentDeviceType,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -228,7 +230,8 @@ const BruteForceProtection = (props) => {
     <div className="error-text">{t("ErrorMessageBruteForceProtection")}</div>
   );
 
-  if (isMobile && !isGetSettingsLoaded) return <BruteForceProtectionLoader />;
+  if (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded)
+    return <BruteForceProtectionLoader />;
 
   return (
     <StyledBruteForceProtection>
@@ -326,6 +329,7 @@ export default inject(({ auth, setup }) => {
     setBruteForceProtection,
     getBruteForceProtection,
     bruteForceProtectionUrl,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -339,5 +343,6 @@ export default inject(({ auth, setup }) => {
     initSettings,
     isInit,
     bruteForceProtectionUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Scrollbar from "@docspace/components/scrollbar";
 import Link from "@docspace/components/link";
 import { desktop, mobile, tablet } from "@docspace/components/utils/device";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
 
 const PanelStyles = css`

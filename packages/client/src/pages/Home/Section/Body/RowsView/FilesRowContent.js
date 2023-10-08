@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
+import { isMobile, isTablet, tablet } from "@docspace/components/utils/device";
 
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
@@ -21,7 +21,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 0px;
@@ -48,7 +48,7 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .badge-version {
     width: max-content;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: -2px -2px -2px 6px;
@@ -62,62 +62,60 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: max-content;
   }
 
-  ${props =>
-    ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
-    css`
-      .row-main-container-wrapper {
-        display: flex;
-        justify-content: space-between;
-        max-width: inherit;
-      }
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
 
-      .badges {
-        flex-direction: row-reverse;
-      }
+    .badges {
+      flex-direction: row-reverse;
+    }
 
-      .tablet-badge {
-        margin-top: 5px;
-      }
+    .tablet-badge {
+      margin-top: 5px;
+    }
 
-      .tablet-edit,
-      .can-convert {
-        margin-top: 6px;
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 24px !important;
-              `
-            : css`
-                margin-right: 24px !important;
-              `}
-      }
+    .tablet-edit,
+    .can-convert {
+      margin-top: 6px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 24px !important;
+            `
+          : css`
+              margin-right: 24px !important;
+            `}
+    }
 
-      .badge-version {
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 22px;
-              `
-            : css`
-                margin-right: 22px;
-              `}
-      }
+    .badge-version {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 22px;
+            `
+          : css`
+              margin-right: 22px;
+            `}
+    }
 
-      .new-items {
-        min-width: 16px;
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin: 5px 0 0 24px;
-              `
-            : css`
-                margin: 5px 24px 0 0;
-              `}
-      }
-    `}
+    .new-items {
+      min-width: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 5px 0 0 24px;
+            `
+          : css`
+              margin: 5px 24px 0 0;
+            `}
+    }
+  }
 
   .row-content-link {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 12px 0px 0px 12px;
@@ -177,7 +175,7 @@ const FilesRowContent = ({
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "—";
-        return tags?.map(elem => {
+        return tags?.map((elem) => {
           return elem;
         });
 
@@ -195,9 +193,10 @@ const FilesRowContent = ({
     <>
       <SimpleFilesRowContent
         sectionWidth={sectionWidth}
-        isMobile={isMobile}
+        isMobile={!isTablet()}
         isFile={fileExst || contentLength}
-        sideColor={theme.filesSection.rowView.sideColor}>
+        sideColor={theme.filesSection.rowView.sideColor}
+      >
         <Link
           className="row-content-link"
           containerWidth="55%"
@@ -207,7 +206,8 @@ const FilesRowContent = ({
           fontSize="15px"
           target="_blank"
           {...linkStyles}
-          isTextOverflow={true}>
+          isTextOverflow={true}
+        >
           {titleWithoutExt}
         </Link>
         <div className="badges">
@@ -220,7 +220,8 @@ const FilesRowContent = ({
           containerWidth="15%"
           fontSize="12px"
           fontWeight={400}
-          className="row_update-text">
+          className="row_update-text"
+        >
           {contentComponent()}
         </Text>
 
@@ -231,10 +232,11 @@ const FilesRowContent = ({
           className="row-content-text"
           fontSize="12px"
           fontWeight={400}
-          truncate={true}>
+          truncate={true}
+        >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobileOnly
+            : !fileExst && !contentLength && !providerKey && !isMobile()
             ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
                 "Translations:Files"
               )}`

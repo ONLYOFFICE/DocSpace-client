@@ -13,8 +13,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -55,6 +56,7 @@ const IpSecurity = (props) => {
     isInit,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -181,7 +183,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <IpSecurityLoader />;
   }
 
@@ -280,6 +282,7 @@ export default inject(({ auth, setup }) => {
     setIpRestrictions,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -293,5 +296,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

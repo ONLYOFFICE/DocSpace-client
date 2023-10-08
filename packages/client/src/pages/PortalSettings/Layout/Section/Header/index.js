@@ -11,7 +11,7 @@ import IconButton from "@docspace/components/icon-button";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import DropDownItem from "@docspace/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, desktop } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Badge from "@docspace/components/badge";
 import {
@@ -21,7 +21,6 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import { combineUrl } from "@docspace/common/utils";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -93,22 +92,14 @@ const HeaderContainer = styled.div`
     }
   }
 
-  ${isTablet &&
-  css`
-    h1 {
-      line-height: 61px;
-      font-size: 21px;
-    }
-  `};
-
-  @media (min-width: 600px) and (max-width: 1024px) {
+  @media ${tablet} {
     h1 {
       line-height: 61px;
       font-size: 21px;
     }
   }
 
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     h1 {
       font-size: 18px;
       line-height: 59px !important;
@@ -133,18 +124,6 @@ const StyledContainer = styled.div`
       margin: 0 -16px;
       width: calc(100% + 32px);
     }
-
-    ${isMobile &&
-    css`
-      margin: 0 -16px;
-      width: calc(100% + 32px);
-    `}
-
-    ${isMobileOnly &&
-    css`
-      margin: 0 -16px;
-      width: calc(100% + 32px);
-    `}
   }
 `;
 

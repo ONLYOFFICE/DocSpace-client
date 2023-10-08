@@ -21,13 +21,13 @@ import Snackbar from "@docspace/components/snackbar";
 import moment from "moment";
 import ReactSmartBanner from "./components/SmartBanner";
 import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
-import { isMobileOnly, isMobile, isIOS, isFirefox } from "react-device-detect";
+import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { IndexedDBStores } from "@docspace/common/constants";
+import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -51,6 +51,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     whiteLabelLogoUrls,
     standalone,
     userId,
+    currentDeviceType,
   } = rest;
 
   useEffect(() => {
@@ -333,23 +334,24 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const rootElement = document.getElementById("root");
 
-  const toast = isMobileOnly ? (
-    <Portal element={<Toast />} appendTo={rootElement} visible={true} />
-  ) : (
-    <Toast />
-  );
+  const toast =
+    currentDeviceType === DeviceType.mobile ? (
+      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+    ) : (
+      <Toast />
+    );
 
   return (
     <Layout>
       {toast}
       <ReactSmartBanner t={t} ready={ready} />
       {isEditor ? <></> : <NavMenu />}
-      {isMobileOnly && <MainBar />}
+      {currentDeviceType === DeviceType.mobile && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && <MainBar />}
+        {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -374,6 +376,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
     setTheme,
     whiteLabelLogoUrls,
     standalone,
+    currentDeviceType,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -416,6 +419,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
     userId: auth?.userStore?.user?.id,
     whiteLabelLogoUrls,
     standalone,
+    currentDeviceType,
   };
 })(observer(Shell));
 

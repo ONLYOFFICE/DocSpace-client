@@ -3,7 +3,6 @@ import { inject, observer } from "mobx-react";
 
 import AccessRightSelect from "@docspace/components/access-right-select";
 import { getAccessOptions } from "../utils";
-import { isMobileOnly } from "react-device-detect";
 
 import { StyledAccessSelector } from "../StyledInvitePanel";
 import { isMobile } from "@docspace/components/utils/device";
@@ -46,7 +45,7 @@ const AccessSelector = ({
   }, []);
 
   const checkWidth = () => {
-    if (!isMobileOnly) return;
+    if (!isMobile()) return;
 
     if (!isMobile()) {
       setHorizontalOrientation(true);
@@ -55,11 +54,11 @@ const AccessSelector = ({
     }
   };
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   return (
     <StyledAccessSelector className="invite-panel_access-selector">
-      {!(isMobileOnly && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) && (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -77,7 +76,7 @@ const AccessSelector = ({
         />
       )}
 
-      {isMobileOnly && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation && (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}

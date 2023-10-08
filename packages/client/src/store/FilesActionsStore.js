@@ -31,16 +31,13 @@ import {
   FolderType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
-import { isMobile } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import {
-  isTablet,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -1382,8 +1379,7 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname
     );
 
-    if (isTablet() || isMobile || isMobileUtils())
-      this.authStore.infoPanelStore.setIsVisible(false);
+    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -1746,7 +1742,7 @@ class FilesActionStore {
 
     switch (option) {
       case "show-info":
-        if (!isTablet() && !isMobile) return null;
+        if (isDesktop()) return null;
         else
           return {
             id: "menu-show-info",

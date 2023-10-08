@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import Loaders from "@docspace/common/components/Loaders";
 import ContextMenuButton from "@docspace/components/context-menu-button";
-import { isTablet } from "react-device-detect";
+
 import {
   StyledComponent,
   StyledFloatingButton,
@@ -12,7 +12,8 @@ import {
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { isMobileOnly, isDesktop } from "react-device-detect";
+
+import { isMobile, isTablet } from "@docspace/components/utils/device";
 
 const Preview = (props) => {
   const {
@@ -30,11 +31,10 @@ const Preview = (props) => {
   const [isSmallWindow, setIsSmallWindow] = useState(false);
 
   const onCheckView = () => {
-    const tablet =
-      isTablet || (window.innerWidth > 600 && window.innerWidth <= 1024);
+    const tablet = isTablet();
     setIsViewTablet(tablet);
 
-    if (isDesktop && window.innerWidth < 600) {
+    if (isMobile()) {
       setIsSmallWindow(true);
     } else {
       setIsSmallWindow(false);
@@ -69,7 +69,7 @@ const Preview = (props) => {
     };
   });
 
-  return isSmallWindow || isMobileOnly ? (
+  return isSmallWindow || isMobile() ? (
     <StyledMobilePreview
       selectThemeId={selectThemeId}
       themePreview={themePreview}

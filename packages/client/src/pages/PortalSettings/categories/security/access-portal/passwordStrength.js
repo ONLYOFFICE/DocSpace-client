@@ -14,8 +14,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import PasswordLoader from "../sub-components/loaders/password-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -54,6 +55,7 @@ const PasswordStrength = (props) => {
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -188,7 +190,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <PasswordLoader />;
   }
 
@@ -277,6 +279,7 @@ export default inject(({ auth, setup }) => {
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -287,5 +290,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

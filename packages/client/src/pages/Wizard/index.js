@@ -3,7 +3,6 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
 
 import Text from "@docspace/components/text";
 import FormWrapper from "@docspace/components/form-wrapper";
@@ -44,6 +43,7 @@ import {
   DEFAULT_SELECT_TIMEZONE,
   DEFAULT_SELECT_LANGUAGE,
 } from "SRC_DIR/helpers/constants";
+import { isMobile } from "@docspace/components/utils/device";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
@@ -404,14 +404,14 @@ const Wizard = (props) => {
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={isCreated}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
                 manualWidth="250px"
-                isDefaultMode={!isMobileOnly}
-                withBlur={isMobileOnly}
+                isDefaultMode={!isMobile()}
+                withBlur={isMobile()}
                 fillIcon={false}
                 modernView={true}
               />
@@ -428,14 +428,14 @@ const Wizard = (props) => {
                 selectedOption={selectedTimezone}
                 onSelect={onTimezoneSelect}
                 isDisabled={isCreated}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
                 manualWidth="350px"
-                isDefaultMode={!isMobileOnly}
-                withBlur={isMobileOnly}
+                isDefaultMode={!isMobile()}
+                withBlur={isMobile()}
                 fillIcon={false}
                 modernView={true}
               />

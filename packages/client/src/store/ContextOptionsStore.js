@@ -45,10 +45,7 @@ import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
 import combineUrl from "@docspace/common/utils/combineUrl";
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { Events } from "@docspace/common/constants";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -225,13 +222,13 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
-    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
-    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
     this.dialogsStore.setCopyPanelVisible(true);
   };
@@ -239,8 +236,8 @@ class ContextOptionsStore {
   showVersionHistory = (id, security) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
-    
-    const {setIsMobileHidden} =  this.authStore.infoPanelStore;
+
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
@@ -852,72 +849,71 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils()
-        ? onlyShowVersionHistory
-          ? [
-              {
-                id: "option_show-version-history",
-                key: "show-version-history",
-                label: t("ShowVersionHistory"),
-                icon: HistoryReactSvgUrl,
-                onClick: () => this.showVersionHistory(item.id, item.security),
-                disabled: false,
-              },
-            ]
-          : [
-              {
-                id: "option_version",
-                key: "version",
-                label: t("VersionHistory"),
-                icon: HistoryFinalizedReactSvgUrl,
-                items: [
-                  {
-                    id: "option_finalize-version",
-                    key: "finalize-version",
-                    label: t("FinalizeVersion"),
-                    icon: HistoryFinalizedReactSvgUrl,
-                    onClick: () =>
-                      isEditing
-                        ? this.onShowEditingToast(t)
-                        : this.finalizeVersion(item.id, item.security),
-                    disabled: false,
-                  },
-                  {
-                    id: "option_version-history",
-                    key: "show-version-history",
-                    label: t("ShowVersionHistory"),
-                    icon: HistoryReactSvgUrl,
-                    onClick: () =>
-                      this.showVersionHistory(item.id, item.security),
-                    disabled: false,
-                  },
-                ],
-              },
-            ]
-        : [
+    const versionActions = isDesktop()
+      ? onlyShowVersionHistory
+        ? [
             {
-              id: "option_finalize-version",
-              key: "finalize-version",
-              label: t("FinalizeVersion"),
-              icon: HistoryFinalizedReactSvgUrl,
-              onClick: () =>
-                isEditing
-                  ? this.onShowEditingToast(t)
-                  : this.finalizeVersion(item.id),
-              disabled: false,
-            },
-            {
-              id: "option_version-history",
+              id: "option_show-version-history",
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
               onClick: () => this.showVersionHistory(item.id, item.security),
               disabled: false,
             },
-          ];
+          ]
+        : [
+            {
+              id: "option_version",
+              key: "version",
+              label: t("VersionHistory"),
+              icon: HistoryFinalizedReactSvgUrl,
+              items: [
+                {
+                  id: "option_finalize-version",
+                  key: "finalize-version",
+                  label: t("FinalizeVersion"),
+                  icon: HistoryFinalizedReactSvgUrl,
+                  onClick: () =>
+                    isEditing
+                      ? this.onShowEditingToast(t)
+                      : this.finalizeVersion(item.id, item.security),
+                  disabled: false,
+                },
+                {
+                  id: "option_version-history",
+                  key: "show-version-history",
+                  label: t("ShowVersionHistory"),
+                  icon: HistoryReactSvgUrl,
+                  onClick: () =>
+                    this.showVersionHistory(item.id, item.security),
+                  disabled: false,
+                },
+              ],
+            },
+          ]
+      : [
+          {
+            id: "option_finalize-version",
+            key: "finalize-version",
+            label: t("FinalizeVersion"),
+            icon: HistoryFinalizedReactSvgUrl,
+            onClick: () =>
+              isEditing
+                ? this.onShowEditingToast(t)
+                : this.finalizeVersion(item.id),
+            disabled: false,
+          },
+          {
+            id: "option_version-history",
+            key: "show-version-history",
+            label: t("ShowVersionHistory"),
+            icon: HistoryReactSvgUrl,
+            onClick: () => this.showVersionHistory(item.id, item.security),
+            disabled: false,
+          },
+        ];
     const moveActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils() && !isInfoPanel
+      isDesktop() && !isInfoPanel
         ? [
             {
               id: "option_move-or-copy",

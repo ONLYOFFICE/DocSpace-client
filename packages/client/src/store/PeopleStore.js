@@ -23,7 +23,6 @@ import {
   isTablet,
   isDesktop,
 } from "@docspace/components/utils/device";
-import { isMobileRDD } from "react-device-detect";
 
 import toastr from "@docspace/components/toast/toastr";
 import { EmployeeStatus, Events } from "@docspace/common/constants";
@@ -48,7 +47,7 @@ class PeopleStore {
   accessRightsStore = null;
   profileActionsStore = null;
   isInit = false;
-  viewAs = isMobileRDD ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
   constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
@@ -253,9 +252,7 @@ class PeopleStore {
         id: "menu-info",
         key: "info",
         label: t("Common:Info"),
-        disabled:
-          isVisible ||
-          !(isTablet() || isMobile() || isMobileRDD || !isDesktop()),
+        disabled: isVisible || !(isTablet() || isMobile() || !isDesktop()),
         onClick: (item) => this.onOpenInfoPanel(item),
         iconUrl: InfoReactSvgUrl,
       },

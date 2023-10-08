@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import toastr from "@docspace/components/toast/toastr";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -196,7 +196,7 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    !isMobile && setIsVisible(true);
+    isDesktop() && setIsVisible(true);
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

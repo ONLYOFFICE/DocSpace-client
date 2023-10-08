@@ -12,11 +12,12 @@ import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/common/utils";
 
-import { isDesktop, isTablet, isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
+import { isDesktop, isTablet } from "@docspace/components/utils/device";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -165,7 +166,7 @@ class ProfileActionsStore {
   };
 
   onAboutClick = () => {
-    if (isDesktop || isTablet) {
+    if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
     } else {
       window.DocSpace.navigate(ABOUT_URL);

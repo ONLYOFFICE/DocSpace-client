@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
 import TileContent from "./sub-components/TileContent";
 import { tablet, desktop } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const FlexBoxStyles = css`
@@ -378,11 +378,6 @@ const StyledTileContainer = styled.div`
         ? `margin-left: -3px;`
         : `margin-right: -3px;`}
   }
-
-  ${isMobile &&
-  css`
-    padding-top: 24px;
-  `}
 `;
 
 StyledTileContainer.defaultProps = { theme: Base };

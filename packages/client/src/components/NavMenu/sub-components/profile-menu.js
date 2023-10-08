@@ -7,20 +7,13 @@ import DropDown from "@docspace/components/drop-down";
 
 import styled, { css, withTheme } from "styled-components";
 import DropDownItem from "@docspace/components/drop-down-item";
-import { isMobileOnly } from "react-device-detect";
+
 import { Base } from "@docspace/components/themes";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import Portal from "@docspace/components/portal";
 
-const StyledWrapper = styled.div`
-  @media (min-width: 428px) {
-    .backdrop-active {
-      background-color: unset;
-      backdrop-filter: unset;
-    }
-  }
-`;
+const StyledWrapper = styled.div``;
 
 const StyledDropDown = styled(DropDown)`
   z-index: 500 !important;
@@ -177,7 +170,7 @@ class ProfileMenu extends React.Component {
       forwardedRef,
       isBannerVisible,
     } = this.props;
-    console.log("Current theme: ", this.props.theme);
+    // console.log("Current theme: ", this.props.theme);
 
     return (
       <StyledDropDown
@@ -187,9 +180,9 @@ class ProfileMenu extends React.Component {
         clickOutsideAction={clickOutsideAction}
         forwardedRef={forwardedRef}
         isDefaultMode={false}
-        withBlur={isMobileOnly}
+        withBlur={true}
         isBannerVisible={isBannerVisible}
-        withPortal={isMobileOnly}
+        withPortal={true}
       >
         <StyledProfileMenu>
           <MenuContainer>
@@ -219,15 +212,11 @@ class ProfileMenu extends React.Component {
 
     const element = this.renderDropDown();
 
-    if (isMobileOnly) {
-      const root = document.getElementById("root");
+    const root = document.getElementById("root");
 
-      const wrapper = <StyledWrapper>{element}</StyledWrapper>;
+    const wrapper = <StyledWrapper>{element}</StyledWrapper>;
 
-      return <>{<Portal element={wrapper} appendTo={root} visible={open} />}</>;
-    }
-
-    return <>{element}</>;
+    return <>{<Portal element={wrapper} appendTo={root} visible={open} />}</>;
   }
 }
 

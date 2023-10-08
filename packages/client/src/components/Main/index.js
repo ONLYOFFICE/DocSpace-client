@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
+import { isIOS, isFirefox } from "react-device-detect";
 
 import { mobile } from "@docspace/components/utils/device";
 
@@ -21,21 +21,11 @@ const StyledMain = styled.main`
     box-sizing: border-box;
   }
 
-  ${!isMobileOnly &&
-  css`
-    @media ${mobile} {
-      height: ${isIOS && !isFirefox
-        ? "calc(var(--vh, 1vh) * 100)"
-        : "calc(100vh - 64px)"};
-    }
-  `}
-
-  ${isMobileOnly &&
-  css`
-    height: auto;
-    max-height: 100%;
-    width: 100%;
-  `}
+  @media ${mobile} {
+    height: ${isIOS && !isFirefox
+      ? "calc(var(--vh, 1vh) * 100)"
+      : "calc(100vh - 64px)"};
+  }
 `;
 
 const Main = React.memo((props) => {

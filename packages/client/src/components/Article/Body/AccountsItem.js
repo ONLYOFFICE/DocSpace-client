@@ -6,8 +6,6 @@ import CatalogItem from "@docspace/components/catalog-item";
 
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 
-import withLoader from "../../../HOCs/withLoader";
-
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const onClickAction = React.useCallback(() => {
     onClick && onClick("accounts");

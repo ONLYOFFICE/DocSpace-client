@@ -13,7 +13,7 @@ import {
 
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
@@ -25,7 +25,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/components/utils/device";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
@@ -62,7 +62,7 @@ class FilesStore {
   pluginStore;
 
   viewAs =
-    isMobile && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
 
   dragging = false;
   privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
@@ -1414,8 +1414,8 @@ class FilesStore {
           } else {
             this.setIsEmptyPage(isEmptyList);
           }
-          this.setFolders(isPrivacyFolder && isMobile ? [] : data.folders);
-          this.setFiles(isPrivacyFolder && isMobile ? [] : data.files);
+          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
+          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
         });
 
         if (clearFilter) {
@@ -2563,7 +2563,7 @@ class FilesStore {
   scrollToTop = () => {
     if (this.authStore.settingsStore.withPaging) return;
 
-    const scrollElm = isMobileOnly
+    const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
       : document.querySelector("#sectionScroll > .scroll-wrapper > .scroller");
 

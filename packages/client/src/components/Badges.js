@@ -8,11 +8,12 @@ import styled from "styled-components";
 import Badge from "@docspace/components/badge";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "react-device-detect";
+
 import { FileStatus } from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { isTablet } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -94,8 +95,7 @@ const Badges = ({
 
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
-  const tabletViewBadge =
-    !isTile && ((sectionWidth > 500 && sectionWidth <= 1024) || isTablet);
+  const tabletViewBadge = !isTile && isTablet();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
 

@@ -11,7 +11,7 @@ import {
 } from "@docspace/common/api/settings";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -19,7 +19,7 @@ class SettingsSetupStore {
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
-  viewAs = isMobile ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
 

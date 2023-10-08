@@ -7,7 +7,14 @@ import TableBody from "@docspace/components/table-container/TableBody";
 
 import { DeviceType } from "@docspace/common/constants";
 
-const Table = ({ historyUsers, sectionWidth, viewAs, setViewAs, theme }) => {
+const Table = ({
+  historyUsers,
+  sectionWidth,
+  viewAs,
+  setViewAs,
+  theme,
+  currentDeviceType,
+}) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -17,7 +24,7 @@ const Table = ({ historyUsers, sectionWidth, viewAs, setViewAs, theme }) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   return historyUsers && historyUsers.length > 0 ? (
     <TableContainer forwardedRef={ref}>

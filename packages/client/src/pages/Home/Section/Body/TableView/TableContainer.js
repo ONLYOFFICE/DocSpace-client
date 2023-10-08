@@ -167,7 +167,7 @@ const Table = ({
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   useEffect(() => {
     return () => {

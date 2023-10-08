@@ -156,7 +156,7 @@ const Table = ({
     } else {
       accountsViewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -213,7 +213,7 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging } = auth.settingsStore;
+    const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
@@ -239,6 +239,7 @@ export default inject(
       filterTotal,
       canChangeUserType,
       isFiltered,
+      currentDeviceType,
     };
   }
 )(observer(Table));

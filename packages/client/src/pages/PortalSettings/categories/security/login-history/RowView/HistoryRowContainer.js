@@ -21,7 +21,7 @@ const HistoryRowContainer = ({
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   return (
     <RowContainer className="history-row-container" useReactWindow={false}>

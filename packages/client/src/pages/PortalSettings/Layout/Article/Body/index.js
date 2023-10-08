@@ -8,6 +8,7 @@ import { isArrayEqual } from "@docspace/components/utils/array";
 
 import { isMobile } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/common/constants";
 
 import {
   //getKeyByLink,

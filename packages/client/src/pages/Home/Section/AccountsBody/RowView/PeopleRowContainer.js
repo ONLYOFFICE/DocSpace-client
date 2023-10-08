@@ -8,7 +8,7 @@ import EmptyScreen from "../EmptyScreen";
 
 import SimpleUserRow from "./SimpleUserRow";
 import withLoader from "SRC_DIR/HOCs/withLoader";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, size, tablet } from "@docspace/components/utils/device";
 import { DeviceType } from "@docspace/common/constants";
 
 const marginStyles = css`
@@ -125,7 +125,7 @@ const PeopleRowContainer = ({
     } else {
       accountsViewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer

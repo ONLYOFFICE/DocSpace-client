@@ -4,6 +4,7 @@ import { mobile } from "@docspace/components/utils/device";
 
 const StyledFilter = styled.div`
   width: 100%;
+  height: 40px;
   display: grid;
   grid-template-columns: 1fr 95px;
   grid-template-rows: 1fr;

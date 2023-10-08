@@ -141,8 +141,6 @@ const commonStyles = css`
     }
 
     .files-tile-container {
-      margin-top: -12px;
-
       @media ${desktop} {
         margin-top: 0px;
       }

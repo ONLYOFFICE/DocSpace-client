@@ -4,8 +4,8 @@ import DropDown from "../drop-down";
 import DropDownItem from "../drop-down-item";
 import FloatingButton from "../floating-button";
 
-import { isMobileOnly } from "react-device-detect";
-import { mobile } from "../utils/device";
+import { isMobile } from "react-device-detect";
+import { mobile, tablet } from "../utils/device";
 
 const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
@@ -100,7 +100,7 @@ const StyledDropDown = styled(DropDown)`
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.bottom};
 
   z-index: ${(props) => props.theme.mainButtonMobile.dropDown.zIndex};
-  height: ${(props) => (props.isMobile ? props.heightProp : "auto")};
+  height: auto;
 
   white-space: nowrap;
   overflow: hidden;
@@ -108,13 +108,16 @@ const StyledDropDown = styled(DropDown)`
 
   padding: 0px;
 
+  @media ${tablet} {
+    height: ${(props) => props.heightProp};
+  }
+
   @media ${mobile} {
     ${mobileDropDown}
   }
 
-  ${isMobileOnly && mobileDropDown}
-
-  .section-scroll, .scroll-body {
+  .section-scroll,
+  .scroll-body {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `padding-left: 0px !important;`
@@ -149,7 +152,7 @@ const StyledDropDown = styled(DropDown)`
 
     &:hover {
       background-color: ${(props) =>
-        isMobileOnly
+        isMobile
           ? props.theme.mainButtonMobile.buttonOptions.backgroundColor
           : props.theme.mainButtonMobile.dropDown.hoverButtonColor};
     }

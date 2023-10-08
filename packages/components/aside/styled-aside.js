@@ -4,8 +4,6 @@ import Base from "../themes/base";
 
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
-import { isMobile } from "react-device-detect";
-
 import { tablet, mobile } from "../utils/device";
 
 /* eslint-disable no-unused-vars */
@@ -63,24 +61,6 @@ const StyledAside = styled(Container)`
             );
           `}
   }
-
-  ${isMobile &&
-  css`
-    max-width: calc(100% - 69px);
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            transform: translateX(
-              ${props.visible ? "0" : props.scale ? "-100%" : "-480px"}
-            );
-          `
-        : css`
-            transform: translateX(
-              ${props.visible ? "0" : props.scale ? "100%" : "480px"}
-            );
-          `}
-  `}
 
   @media ${mobile} {
     bottom: 0;
@@ -147,18 +127,6 @@ const StyledControlContainer = styled.div`
         ? `right: -27px;`
         : `left: -27px;`}
   }
-
-  ${isMobile &&
-  css`
-    display: flex;
-
-    top: 18px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `right: -27px;`
-        : `left: -27px;`}
-  `}
 
   @media ${mobile} {
     display: flex;

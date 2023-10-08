@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+
 import Base from "../themes/base";
 import { tablet } from "../utils/device";
 
@@ -175,9 +175,7 @@ const StyledDropdownItem = styled.div`
       `}
   }
 
-  @media (max-width: 500px) {
-    max-width: 100vw;
-  }
+  max-width: 100%;
 `;
 StyledDropdownItem.defaultProps = { theme: Base };
 

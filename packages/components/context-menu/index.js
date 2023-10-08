@@ -10,8 +10,8 @@ import StyledContextMenu from "./styled-context-menu";
 import SubMenu from "./sub-components/sub-menu";
 import MobileSubMenu from "./sub-components/mobile-sub-menu";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
 import {
+  isMobile,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
@@ -62,7 +62,7 @@ class ContextMenu extends Component {
     this.currentEvent = e;
 
     if (this.state.visible) {
-      !isMobileOnly && this.setState({ reshow: true });
+      !isMobileUtils() && this.setState({ reshow: true });
     } else {
       this.setState({ visible: true }, () => {
         if (this.props.onShow) {
@@ -125,7 +125,9 @@ class ContextMenu extends Component {
   position = (event) => {
     if (event) {
       const rects = this.props.containerRef?.current.getBoundingClientRect();
-      let left = rects ? rects.left - this.props.leftOffset - this.props.rightOffset : event.pageX + 1;
+      let left = rects
+        ? rects.left - this.props.leftOffset - this.props.rightOffset
+        : event.pageX + 1;
       let top = rects ? rects.top : event.pageY + 1;
       let width = this.menuRef.current.offsetParent
         ? this.menuRef.current.offsetWidth
@@ -141,12 +143,12 @@ class ContextMenu extends Component {
       ) {
         left = event.pageX - width + 1;
       }
-      if ((isMobile || isTabletUtils()) && height > 483) {
+      if (isTabletUtils() && height > 483) {
         this.setState({ changeView: true });
         return;
       }
 
-      if ((isMobileOnly || isMobileUtils()) && height > 210) {
+      if (isMobileUtils() && height > 210) {
         this.setState({ changeView: true });
         return;
       }

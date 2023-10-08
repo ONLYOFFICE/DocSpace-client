@@ -138,7 +138,7 @@ const StyledDropdownItem = styled.div`
       break-before: column;
     `}
 
-    @media ${tablet} {
+  @media ${tablet} {
     line-height: ${(props) => props.theme.dropDownItem.tabletLineHeight};
     padding: ${(props) => props.theme.dropDownItem.tabletPadding};
   }

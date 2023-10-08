@@ -1356,7 +1356,7 @@ const Dark = {
     fontWeight: "600",
     fontSize: "13px",
     zIndex: "400",
-    background: "#3D3D3D",
+    background: "#333333",
     borderRadius: "6px",
     boxShadow:
       "0px 16px 16px rgba(0, 0, 0, 0.16), 0px 8.1px 6.975px rgba(0, 0, 0, 0.108), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08), 0px 0.7px 0.925px rgba(0, 0, 0, 0.052)",
@@ -1967,7 +1967,7 @@ const Dark = {
   },
 
   menuContainer: {
-    background: "#3D3D3D",
+    background: "#3d3d3d",
     color: "rgba(255, 255, 255, 0.92)",
   },
 

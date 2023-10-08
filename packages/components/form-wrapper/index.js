@@ -24,8 +24,8 @@ const StyledWrapper = styled.div`
     padding: 0;
     border-radius: 0;
     box-shadow: none !important;
-    max-width: 343px;
-    min-width: 343px;
+    max-width: 100%;
+    min-width: 100%;
     background: transparent !important;
   }
 `;

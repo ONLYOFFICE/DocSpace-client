@@ -14,6 +14,7 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const ConfirmContainer = styled(Box)`
+  width: 100%;
   margin: 56px auto;
   display: flex;
   flex: 1fr 1fr;

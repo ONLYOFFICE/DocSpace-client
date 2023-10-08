@@ -15,6 +15,7 @@ export const StyledPage = styled.div`
   }
 
   @media ${mobile} {
+    width: 100%;
     padding: ${({ theme }) =>
       getCorrectFourValuesStyle("0 8px 0 16px", theme.interfaceDirection)};
   }
@@ -45,6 +46,7 @@ export const StyledContent = styled.div`
   -webkit-box-direction: normal;
 
   @media ${mobile} {
+    width: 100%;
     justify-content: start;
     min-height: 100%;
   }

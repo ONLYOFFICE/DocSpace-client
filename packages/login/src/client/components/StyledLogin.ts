@@ -72,6 +72,7 @@ export const LoginContent = styled.div`
   -webkit-box-direction: normal;
 
   @media ${mobile} {
+    width: 100%;
     min-height: 100%;
     justify-content: start;
   }
@@ -83,8 +84,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-      props.isCaptchaError &&
-      css`
+    props.isCaptchaError &&
+    css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

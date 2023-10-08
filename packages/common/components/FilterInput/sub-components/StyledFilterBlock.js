@@ -116,12 +116,12 @@ const StyledFilterBlockItem = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0 16px 0 15px;
+          padding: 0 16px 0 24px;
         `
       : css`
-          padding: 0 15px 0 16px;
+          padding: 0 24px 0 16px;
         `}
-  max-width: 480px;
+  max-width: 100%;
   box-sizing: border-box;
 
   display: flex;

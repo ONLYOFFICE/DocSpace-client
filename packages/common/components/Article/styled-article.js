@@ -55,7 +55,7 @@ const StyledArticle = styled.article`
       `calc(100% - ${props.$withMainButton ? "190px" : "150px"})`} !important;
 
     @media ${tablet} {
-      height: calc(100% - 126px) !important;
+      height: calc(100% - 184px) !important;
     }
 
     @media ${mobile} {
@@ -65,7 +65,8 @@ const StyledArticle = styled.article`
 
     .article-scroller {
       @media ${tablet} {
-        height: calc(100% - 60px);
+        height: 100%;
+        height: 100% !important;
       }
 
       @media ${mobile} {

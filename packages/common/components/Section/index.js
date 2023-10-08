@@ -159,7 +159,7 @@ const Section = (props) => {
             isInfoPanelVisible={isInfoPanelVisible}
           >
             {isSectionHeaderAvailable &&
-              currentDeviceType !== DeviceType.tablet && (
+              currentDeviceType === DeviceType.desktop && (
                 <SubSectionHeader
                   maintenanceExist={maintenanceExist}
                   snackbarExist={snackbarExist}
@@ -176,7 +176,7 @@ const Section = (props) => {
                 </SubSectionHeader>
               )}
             {isSectionFilterAvailable &&
-              currentDeviceType !== DeviceType.tablet && (
+              currentDeviceType === DeviceType.desktop && (
                 <>
                   <SubSectionFilter
                     className="section-header_filter"

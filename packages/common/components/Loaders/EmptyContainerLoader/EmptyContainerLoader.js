@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loaders from "../../Loaders";
-import { isMobileOnly, isTablet } from "react-device-detect";
-import { size } from "@docspace/components/utils/device";
+
+import { isMobile, isTablet } from "@docspace/components/utils/device";
 
 const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
   const [viewMobile, setViewMobile] = useState(false);
@@ -15,16 +15,13 @@ const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
   }, []);
 
   const onCheckView = () => {
-    if (isMobileOnly || window.innerWidth < size.mobile) {
+    if (isMobile()) {
       setViewMobile(true);
     } else {
       setViewMobile(false);
     }
 
-    if (
-      isTablet ||
-      (window.innerWidth >= size.mobile && window.innerWidth <= size.tablet)
-    ) {
+    if (isTablet()) {
       setViewTablet(true);
     } else {
       setViewTablet(false);

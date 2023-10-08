@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 import SubArticleBackdrop from "./sub-components/article-backdrop";
 import SubArticleHeader from "./sub-components/article-header";
@@ -50,10 +50,8 @@ const Article = ({
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState(null);
 
   React.useEffect(() => {
-    if (isMobileOnly) {
-      window.addEventListener("popstate", onMobileBack);
-      return () => window.removeEventListener("popstate", onMobileBack);
-    }
+    window.addEventListener("popstate", onMobileBack);
+    return () => window.removeEventListener("popstate", onMobileBack);
   }, [onMobileBack]);
 
   React.useEffect(() => {
@@ -104,15 +102,15 @@ const Article = ({
   const onMobileBack = React.useCallback(() => {
     //close article
 
+    if (currentDeviceType !== DeviceType.mobile) return;
     setArticleOpen(false);
-  }, [setArticleOpen]);
+  }, [setArticleOpen, currentDeviceType]);
 
   // TODO: make some better
   const onResize = React.useCallback(() => {
     let correctTabletHeight = window.innerHeight;
 
-    if (mainBarVisible)
-      correctTabletHeight -= window.innerHeight <= 768 ? 62 : 90;
+    if (mainBarVisible) correctTabletHeight -= 64;
 
     const isTouchDevice =
       "ontouchstart" in window ||
@@ -133,11 +131,8 @@ const Article = ({
   }, [mainBarVisible, isBannerVisible]);
 
   React.useEffect(() => {
-    if (isTablet) {
-      onResize();
-      window.addEventListener("resize", onResize);
-    }
-
+    onResize();
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("resize", onResize);
     };
@@ -172,18 +167,6 @@ const Article = ({
 
         <SubArticleBody showText={showText}>
           {articleBodyContent ? articleBodyContent.props.children : null}
-          <HideArticleMenuButton
-            showText={showText}
-            toggleShowText={toggleShowText}
-            currentColorScheme={currentColorScheme}
-          />
-          {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
-            <ArticleProfile
-              showText={showText}
-              currentDeviceType={currentDeviceType}
-            />
-          )}
-
           <ArticleAlerts />
           <ArticleApps showText={showText} theme={theme} />
           {!isMobile && isLiveChatAvailable && (
@@ -193,6 +176,18 @@ const Article = ({
             />
           )}
         </SubArticleBody>
+
+        <HideArticleMenuButton
+          showText={showText}
+          toggleShowText={toggleShowText}
+          currentColorScheme={currentColorScheme}
+        />
+        {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
+          <ArticleProfile
+            showText={showText}
+            currentDeviceType={currentDeviceType}
+          />
+        )}
       </StyledArticle>
       {articleOpen && currentDeviceType === DeviceType.mobile && (
         <>
@@ -210,12 +205,6 @@ const Article = ({
 
   const renderPortalArticle = () => {
     const rootElement = document.getElementById("root");
-
-    // const el = (
-    //   <>
-    //     <div>123</div>
-    //   </>
-    // );
 
     return (
       <Portal

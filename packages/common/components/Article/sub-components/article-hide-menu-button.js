@@ -14,7 +14,7 @@ const StyledHideArticleMenuButton = styled.div`
   align-items: center;
   position: fixed;
   height: 44px;
-  z-index: 209;
+  z-index: 510;
   bottom: 89px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"

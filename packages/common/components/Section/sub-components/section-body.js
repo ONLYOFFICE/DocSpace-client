@@ -65,10 +65,10 @@ const paddingStyles = css`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 19px 24px 16px 0;
+            padding: 0px 24px 16px 0;
           `
         : css`
-            padding: 19px 0 16px 24px;
+            padding: 0px 0 16px 24px;
           `}
   }
 
@@ -76,10 +76,10 @@ const paddingStyles = css`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 0px 24px 16px 0;
+            padding: 0px 24px 16px 8px;
           `
         : css`
-            padding: 0px 0 16px 24px;
+            padding: 0px 8px 16px 24px;
           `}
   }
 `;
@@ -150,7 +150,7 @@ const commonStyles = css`
 
     .people-row-container,
     .files-row-container {
-      margin-top: -22px;
+      margin-top: 0px;
 
       @media ${desktop} {
         margin-top: -17px;

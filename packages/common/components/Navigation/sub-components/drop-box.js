@@ -70,6 +70,7 @@ const StyledBox = styled.div`
   }
 
   @media ${mobile} {
+    width: ${({ dropBoxWidth }) => dropBoxWidth + "px"};
     padding-top: 10px !important;
   }
 `;

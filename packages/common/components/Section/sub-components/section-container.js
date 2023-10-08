@@ -6,14 +6,24 @@ import { Base } from "@docspace/components/themes";
 
 const tabletProps = css`
   .section-body_header {
+    width: 100%;
     position: sticky;
     top: 0;
     background: ${(props) => props.theme.section.header.background};
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0;
+          `
+        : css`
+            padding-right: 0;
+          `}
     z-index: 201;
   }
   .section-body_filter {
     display: block;
-    margin: 4px 0 30px;
+    margin: 0;
   }
 `;
 

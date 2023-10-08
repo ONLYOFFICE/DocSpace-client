@@ -40,6 +40,7 @@ const FilterBlock = ({
   isPersonalRoom,
   isRooms,
   isAccounts,
+  currentDeviceType,
 }) => {
   const [showSelector, setShowSelector] = React.useState({
     show: false,

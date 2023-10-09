@@ -160,13 +160,11 @@ const InfoPanel = ({
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
-      id="InfoPanelWrapper"
-    >
+      id="InfoPanelWrapper">
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer
           isRowView={viewAs === "row"}
-          onClick={closeInfoPanel}
-        >
+          onClick={closeInfoPanel}>
           <StyledCrossIcon />
         </StyledControlContainer>
 

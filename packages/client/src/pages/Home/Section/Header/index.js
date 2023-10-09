@@ -1012,7 +1012,6 @@ const SectionHeaderContent = (props) => {
                 onClose={onClose}
                 onClickFolder={onClickFolder}
                 isTrashFolder={isRecycleBinFolder}
-                isRecycleBinFolder={isRecycleBinFolder || isArchiveFolder}
                 isEmptyFilesList={
                   isArchiveFolder ? isEmptyArchive : isEmptyFilesList
                 }

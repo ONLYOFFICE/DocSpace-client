@@ -752,7 +752,11 @@ class FilesStore {
   };
 
   setIsEmptyPage = (isEmptyPage) => {
-    this.isEmptyPage = isEmptyPage;
+    // this.isEmptyPage = isEmptyPage;
+
+    runInAction(() => {
+      this.isEmptyPage = isEmptyPage;
+    });
   };
 
   setIsLoadedEmptyPage = (isLoadedEmptyPage) => {
@@ -1039,6 +1043,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.PublicRoom}`:
+        return roomType === RoomsType.PublicRoom;
       default:
         return false;
     }
@@ -3154,7 +3160,8 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
-        elem !== `room-${RoomsType.ReadOnlyRoom}`
+        elem !== `room-${RoomsType.ReadOnlyRoom}` &&
+        elem !== `room-${RoomsType.PublicRoom}`
     );
 
     if (hasFiles) cbMenu.push(FilterType.FilesOnly);
@@ -3194,6 +3201,8 @@ class FilesStore {
         return t("Common:Review");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
+      case `room-${RoomsType.PublicRoom}`:
+        return t("PublicRoomLabel");
 
       default:
         return "";
@@ -3230,7 +3239,8 @@ class FilesStore {
         return "selected-only-review-rooms";
       case `room-${RoomsType.ReadOnlyRoom}`:
         return "selected-only-view-rooms";
-
+      case `room-${RoomsType.PublicRoom}`:
+        return "selected-only-public-rooms";
       default:
         return "";
     }

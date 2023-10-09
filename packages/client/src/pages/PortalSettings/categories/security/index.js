@@ -84,6 +84,13 @@ const SecurityWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
     />
   );
 };

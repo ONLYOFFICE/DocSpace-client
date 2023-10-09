@@ -33,7 +33,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
   showFolderInfo,
@@ -213,7 +212,6 @@ const Navigation = ({
             canCreate={canCreate}
             isTabletView={isTabletView}
             isTrashFolder={isTrashFolder}
-            isRecycleBinFolder={isRecycleBinFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
@@ -240,7 +238,6 @@ const Navigation = ({
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
               getContextOptionsPlus={getContextOptionsPlus}
-              isRecycleBinFolder={isRecycleBinFolder}
               isEmptyFilesList={isEmptyFilesList}
               clearTrash={clearTrash}
               toggleInfoPanel={toggleInfoPanel}

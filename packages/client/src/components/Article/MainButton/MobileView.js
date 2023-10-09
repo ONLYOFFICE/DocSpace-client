@@ -10,7 +10,6 @@ import MainButtonMobile from "@docspace/components/main-button-mobile";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
-
   z-index: 200;
 
   ${(props) =>
@@ -21,9 +20,11 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
       : css`
           right: 24px;
         `}
+
   bottom: 24px;
 
   @media ${mobile} {
+    position: absolute;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

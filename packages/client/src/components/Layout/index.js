@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
   height: ${(props) =>
-    isMobileOnly && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
+    isMobile && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
   /* height: ${(props) =>
     (props.isTabletView || isMobileOnly) && !isFirefox
       ? `${props.contentHeight}px`
@@ -61,10 +61,7 @@ const Layout = (props) => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
   useEffect(() => {
-    const isTablet =
-      window.innerWidth <= deviceSize.tablet &&
-      window.innerWidth > deviceSize.mobile;
-    setIsTabletView(isTablet);
+    setIsTabletView(isTabletUtils());
 
     let mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
@@ -78,8 +75,14 @@ const Layout = (props) => {
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
+
     if (isTabletUtils() || isMobileUtils()) {
       window.addEventListener("orientationchange", onOrientationChange);
+
+      if (isMobile) {
+        window?.visualViewport?.addEventListener("resize", onOrientationChange);
+        window.addEventListener("scroll", onScroll);
+      }
 
       changeRootHeight();
     }
@@ -87,6 +90,11 @@ const Layout = (props) => {
     return () => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("orientationchange", onOrientationChange);
+      window?.visualViewport?.removeEventListener(
+        "resize",
+        onOrientationChange
+      );
+      window.removeEventListener("scroll", onScroll);
     };
   }, [isTabletView]);
 
@@ -94,18 +102,8 @@ const Layout = (props) => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    if (isMobileUtils() || (isTabletUtils() && isChrome)) {
-      htmlEl.style.height = bodyEl.style.height = "100%";
-      htmlEl.style.overflow = "hidden";
-    }
-
-    if (isMobileUtils()) {
-      bodyEl.style.overflow = "auto";
-    }
-
-    if (isTabletUtils()) {
-      bodyEl.style.overflow = "hidden";
-    }
+    htmlEl.style.height = bodyEl.style.height = "100%";
+    htmlEl.style.overflow = "hidden";
   }, []);
 
   const onWidthChange = (e) => {
@@ -114,15 +112,24 @@ const Layout = (props) => {
     setIsTabletView(matches);
   };
 
+  const onScroll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.scrollTo(0, 0);
+  };
+
   const onResize = () => {
     changeRootHeight();
     setWindowWidth(window.innerWidth);
   };
-  const onOrientationChange = () => {
+  const onOrientationChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     setWindowWidth(window.innerWidth);
-    changeRootHeight();
+    changeRootHeight(e);
   };
-  const changeRootHeight = () => {
+  const changeRootHeight = (e) => {
     intervalHandler && clearInterval(intervalHandler);
     timeoutHandler && clearTimeout(timeoutHandler);
 
@@ -139,7 +146,7 @@ const Layout = (props) => {
       timeoutHandler = null;
 
       let height = "100vh";
-      const windowHeight = window.innerHeight;
+      let windowHeight = window.innerHeight;
 
       if (isMobileUtils() && isIOS && isChrome) {
         if (window.innerHeight < window.innerWidth && isPortrait) {
@@ -160,8 +167,45 @@ const Layout = (props) => {
       //   }
       // }
 
+      if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
+        const diff = window.innerHeight - e.target.height;
+
+        windowHeight -= diff;
+
+        const root = document.getElementById("root");
+        if (!isMobileUtils()) {
+          const article = document.getElementsByTagName("article")[0];
+        }
+
+        root.style.height = `calc(var(--vh,1vh) * 100)`;
+        root.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
+        root.style.minHeight = `calc(var(--vh,1vh) * 100)`;
+
+        document.body.style.height = `calc(var(--vh,1vh) * 100)`;
+        document.body.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
+        document.body.style.minHeight = `calc(var(--vh,1vh) * 100)`;
+        document.body.style.top = "0px";
+        document.body.style.position = `fixed`;
+        document.body.style.overflow = `hidden`;
+      } else {
+        const root = document.getElementById("root");
+
+        root.style.height = `100%`;
+        root.style.maxHeight = `100%`;
+        root.style.minHeight = `100%`;
+
+        document.body.style.height = `100%`;
+        document.body.style.maxHeight = `100%`;
+        document.body.style.minHeight = `100%`;
+        document.body.style.removeProperty("top");
+        document.body.style.removeProperty("position");
+        document.body.style.removeProperty("overflow");
+      }
+
       let vh = windowHeight * 0.01;
+
       document.documentElement.style.setProperty("--vh", `${vh}px`);
+
       setContentHeight(height);
     };
     intervalHandler = setInterval(() => {

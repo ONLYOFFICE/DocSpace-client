@@ -173,6 +173,7 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room) => {
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
 
     const setIsLoading = (param) => {
@@ -193,6 +194,8 @@ class CreateEditRoomStore {
     setIsLoading(true);
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
+
+    setSelection && setSelection([]);
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 

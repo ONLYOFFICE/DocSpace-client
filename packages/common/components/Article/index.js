@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
 import SubArticleBackdrop from "./sub-components/article-backdrop";
 import SubArticleHeader from "./sub-components/article-header";
@@ -48,6 +48,9 @@ const Article = ({
     React.useState(null);
   const [articleBodyContent, setArticleBodyContent] = React.useState(null);
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState(null);
+  const [isVirtualKeyboardOpen, setIsVirtualKeyboardOpen] =
+    React.useState(false);
+  const updateSizeRef = React.useRef(null);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onMobileBack);
@@ -107,34 +110,58 @@ const Article = ({
   }, [setArticleOpen, currentDeviceType]);
 
   // TODO: make some better
-  const onResize = React.useCallback(() => {
-    let correctTabletHeight = window.innerHeight;
+  const onResize = React.useCallback(
+    (e) => {
+      let correctTabletHeight = window.innerHeight;
 
-    if (mainBarVisible) correctTabletHeight -= 64;
+      if (mainBarVisible) {
+        const mainBar = document.getElementById("main-bar");
 
-    const isTouchDevice =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0;
+        if (!mainBar.offsetHeight)
+          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 
-    const path = window.location.pathname.toLowerCase();
+        correctTabletHeight -= mainBar.offsetHeight;
+      }
 
-    if (
-      isBannerVisible &&
-      isMobile &&
-      isTouchDevice &&
-      (path.includes("rooms") || path.includes("files"))
-    )
-      correctTabletHeight -= 80;
+      const isTouchDevice =
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0;
 
-    setCorrectTabletHeight(correctTabletHeight);
-  }, [mainBarVisible, isBannerVisible]);
+      const path = window.location.pathname.toLowerCase();
+
+      if (
+        isBannerVisible &&
+        isMobile &&
+        isTouchDevice &&
+        (path.includes("rooms") || path.includes("files"))
+      ) {
+        correctTabletHeight -= 80;
+
+        if (e?.target?.height) {
+          const diff = window.innerHeight - e.target.height;
+          setIsVirtualKeyboardOpen(true);
+          correctTabletHeight -= diff;
+        } else {
+          setIsVirtualKeyboardOpen(false);
+        }
+      }
+
+      setCorrectTabletHeight(correctTabletHeight);
+    },
+    [mainBarVisible, isBannerVisible]
+  );
 
   React.useEffect(() => {
     onResize();
     window.addEventListener("resize", onResize);
+    if (isMobile && !isMobileOnly && isIOS) {
+      window?.visualViewport?.addEventListener("resize", onResize);
+    }
     return () => {
       window.removeEventListener("resize", onResize);
+      window?.visualViewport?.removeEventListener("resize", onResize);
+      clearTimeout(updateSizeRef.current);
     };
   }, [onResize]);
 
@@ -181,11 +208,13 @@ const Article = ({
           showText={showText}
           toggleShowText={toggleShowText}
           currentColorScheme={currentColorScheme}
+          isVirtualKeyboardOpen={isVirtualKeyboardOpen}
         />
         {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
           <ArticleProfile
             showText={showText}
             currentDeviceType={currentDeviceType}
+            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}
       </StyledArticle>

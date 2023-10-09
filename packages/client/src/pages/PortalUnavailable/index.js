@@ -8,6 +8,7 @@ import { ReactSVG } from "react-svg";
 import Button from "@docspace/components/button";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -44,7 +45,7 @@ const StyledBody = styled.div`
   .portal-unavailable_text {
     color: ${(props) => props.theme.portalUnavailable.textDescription};
   }
-  @media (max-width: 768px) {
+  @media ${mobile} {
     .portal-unavailable_svg {
       margin-top: 0px;
       background: ${(props) => props.theme.catalog.background};

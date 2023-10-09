@@ -27,7 +27,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -40,7 +40,7 @@ const Footer = styled.div`
 
 const Separator = styled.hr`
   border-top: 1px solid;
-  border-color: ${props => (props.theme.isBase ? "#eceef1" : "#474747")};
+  border-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")};
   margin-bottom: 14px;
 `;
 
@@ -66,7 +66,7 @@ function areArraysEqual(array1, array2) {
   );
 }
 
-const FilterDialog = props => {
+const FilterDialog = (props) => {
   const {
     visible,
     closeModal,
@@ -152,6 +152,7 @@ const FilterDialog = props => {
           <Separator />
           <StatusPicker filters={filters} setFilters={setFilters} />
           <Separator />
+          <h3>test</h3>
         </DialogBodyWrapper>
       </ModalDialog.Body>
       {!areFiltersChanged && (

@@ -20,11 +20,14 @@ import {
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
-import { size as deviceSize } from "@docspace/components/utils/device";
+import {
+  size as deviceSize,
+  isTablet,
+} from "@docspace/components/utils/device";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
-import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
+//import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {
   Dark: Dark,
@@ -1022,13 +1025,7 @@ class SettingsStore {
     if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
       return;
 
-    if (
-      this.windowWidth > deviceSize.mobile &&
-      width > deviceSize.mobile &&
-      this.windowWidth <= deviceSize.tablet &&
-      width <= deviceSize.tablet
-    )
-      return;
+    if (isTablet(width) && isTablet(this.windowWidth)) return;
 
     if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
       return;
@@ -1039,11 +1036,7 @@ class SettingsStore {
   get currentDeviceType() {
     if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
 
-    if (
-      this.windowWidth > deviceSize.mobile &&
-      this.windowWidth <= deviceSize.tablet
-    )
-      return DeviceType.tablet;
+    if (isTablet(this.windowWidth)) return DeviceType.tablet;
 
     return DeviceType.desktop;
   }

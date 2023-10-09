@@ -12,7 +12,7 @@ import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.reac
 const StyledHideArticleMenuButton = styled.div`
   display: flex;
   align-items: center;
-  position: fixed;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 510;
   bottom: 89px;
@@ -112,6 +112,7 @@ const HideArticleMenuButton = ({
   showText,
   toggleShowText,
   currentColorScheme,
+  isVirtualKeyboardOpen,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -120,6 +121,7 @@ const HideArticleMenuButton = ({
       showText={showText}
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
     >
       {showText ? (
         <div

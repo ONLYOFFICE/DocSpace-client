@@ -113,6 +113,11 @@ const StyledDropdownItem = styled.div`
       `}
   }
 
+  &:active {
+    background-color: ${(props) =>
+      props.theme.dropDownItem.hoverBackgroundColor};
+  }
+
   ${(props) =>
     props.isSeparator &&
     css`

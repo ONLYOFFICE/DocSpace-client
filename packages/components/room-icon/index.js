@@ -46,7 +46,6 @@ const RoomIcon = ({
   size = "32px",
   radius = "6px",
 }) => {
-  console.log("title", title);
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
   const secondCharacter =

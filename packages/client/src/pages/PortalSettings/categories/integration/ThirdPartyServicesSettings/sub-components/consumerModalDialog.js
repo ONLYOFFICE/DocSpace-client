@@ -205,6 +205,7 @@ class ConsumerModalDialog extends React.Component {
         visible={dialogVisible}
         onClose={onModalClose}
         displayType="aside"
+        withBodyScroll
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>

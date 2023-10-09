@@ -8,7 +8,6 @@ import Text from "@docspace/components/text";
 import { size, desktop, mobile } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import { HelpButton } from "@docspace/components";
-import { mobile } from "@docspace/components/utils/device";
 
 import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";

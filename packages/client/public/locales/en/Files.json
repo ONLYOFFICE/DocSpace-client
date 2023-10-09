@@ -124,6 +124,7 @@
   "PrivateRoomHeader": "Welcome to ONLYOFFICE private room where every symbol you type is encrypted",
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "PublicRoom": "Public room",
+  "PublicRoomLabel": "Public",
   "RecentEmptyContainerDescription": "Your last viewed or edited docs will be displayed in this section.",
   "RecycleBinAction": "Empty trash",
   "RemovedFromFavorites": "Removed from favorites",

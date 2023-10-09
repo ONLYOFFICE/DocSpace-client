@@ -752,7 +752,11 @@ class FilesStore {
   };
 
   setIsEmptyPage = (isEmptyPage) => {
-    this.isEmptyPage = isEmptyPage;
+    // this.isEmptyPage = isEmptyPage;
+
+    runInAction(() => {
+      this.isEmptyPage = isEmptyPage;
+    });
   };
 
   setIsLoadedEmptyPage = (isLoadedEmptyPage) => {

@@ -8,6 +8,7 @@ import Text from "@docspace/components/text";
 import { size, desktop } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import { HelpButton } from "@docspace/components";
+import { mobile } from "@docspace/components/utils/device";
 
 import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
@@ -30,7 +31,7 @@ const StyledBody = styled.div`
     grid-gap: 20px;
     margin-bottom: 20px;
 
-    @media (max-width: ${size.mobile + 40}px) {
+    @media ${mobile} {
       grid-template-columns: 1fr;
 
       grid-template-rows: ${(props) => "1fr max-content"};
@@ -94,7 +95,6 @@ const PaymentContainer = (props) => {
     theme,
     isNotPaidPeriod,
     payerEmail,
-    user,
     isPaidPeriod,
     currencySymbol,
     startValue,
@@ -281,7 +281,7 @@ const PaymentContainer = (props) => {
     <Consumer>
       {(context) => (
         <StyledBody
-          isChangeView={context.sectionWidth < size.mobile && expandArticle}
+          isChangeView={context.sectionWidth <= size.mobile && expandArticle}
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()
@@ -367,8 +367,6 @@ export default inject(({ auth, payments }) => {
 
   const { isAlreadyPaid } = payments;
 
-  const { user } = userStore;
-
   return {
     paymentDate,
     isAlreadyPaid,
@@ -386,7 +384,7 @@ export default inject(({ auth, payments }) => {
     startValue: planCost.value,
     isNotPaidPeriod,
     payerEmail: customerId,
-    user,
+
     isPaidPeriod,
     currentTariffPlanTitle,
     portalTariffStatus,

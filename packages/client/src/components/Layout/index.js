@@ -61,10 +61,7 @@ const Layout = (props) => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
   useEffect(() => {
-    const isTablet =
-      window.innerWidth <= deviceSize.tablet &&
-      window.innerWidth > deviceSize.mobile;
-    setIsTabletView(isTablet);
+    setIsTabletView(isTabletUtils());
 
     let mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+//import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import LanguageAndTimeZone from "./Customization/language-and-time-zone";
 import WelcomePageSettings from "./Customization/welcome-page-settings";
 import PortalRenaming from "./Customization/portal-renaming";
@@ -13,6 +13,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   width: 100%;
@@ -58,7 +59,7 @@ const StyledComponent = styled.div`
     margin-bottom: 24px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     .settings-block {
       max-width: 350px;
       height: auto;

@@ -134,7 +134,6 @@ const ControlButtons = ({
   canCreate,
   getContextOptionsFolder,
   getContextOptionsPlus,
-  isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
   isInfoPanelVisible,
@@ -156,7 +155,7 @@ const ControlButtons = ({
 
   return (
     <StyledContainer isDropBoxComponent={isDropBoxComponent} isFrame={isFrame}>
-      {!isRootFolder || (isRecycleBinFolder && !isEmptyFilesList) ? (
+      {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
         <>
           {!isMobile && canCreate && (
             <PlusButton

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FooterBlock } from "./StyledProfileFooter";
 import RectangleLoader from "../RectangleLoader";
 import Loaders from "@docspace/common/components/Loaders";
-import { size } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 
 const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -26,7 +26,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth <= size.tablet ? setIsDesktop(false) : setIsDesktop(true);
+    setIsDesktop(isDesktop());
   };
 
   return (

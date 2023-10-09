@@ -72,6 +72,7 @@ const DatePicker = (props) => {
     showCalendarIcon,
     outerDate,
     openDate,
+    isMobile,
   } = props;
 
   const calendarRef = useRef();
@@ -100,9 +101,9 @@ const DatePicker = (props) => {
     handleChange(null);
     setIsCalendarOpen(false);
   };
-
   const CalendarElement = () => (
     <StyledCalendar
+      isMobile={isMobile}
       selectedDate={date}
       setSelectedDate={handleChange}
       onChange={closeCalendar}

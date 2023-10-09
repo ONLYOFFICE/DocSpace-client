@@ -12,7 +12,7 @@ import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.reac
 const StyledHideArticleMenuButton = styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 510;
   bottom: 89px;
@@ -31,7 +31,7 @@ const StyledHideArticleMenuButton = styled.div`
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};
 
   @media ${desktop} {
-    display: none;
+    // display: none;
   }
 
   @media ${mobile} {
@@ -61,7 +61,7 @@ const StyledHideArticleMenuButton = styled.div`
     }
 
     @media ${tablet} {
-      display: ${({ showText }) => (showText ? "flex" : "none")};
+      // display: ${({ showText }) => (showText ? "flex" : "none")};
     }
   }
 
@@ -112,14 +112,18 @@ const HideArticleMenuButton = ({
   showText,
   toggleShowText,
   currentColorScheme,
+  isVirtualKeyboardOpen,
 }) => {
   const { t } = useTranslation("Common");
+
+  console.log(isVirtualKeyboardOpen);
 
   return (
     <StyledHideArticleMenuButton
       showText={showText}
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
     >
       {showText ? (
         <div

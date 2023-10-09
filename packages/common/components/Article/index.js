@@ -48,6 +48,9 @@ const Article = ({
     React.useState(null);
   const [articleBodyContent, setArticleBodyContent] = React.useState(null);
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState(null);
+  const [isVirtualKeyboardOpen, setIsVirtualKeyboardOpen] =
+    React.useState(false);
+  const updateSizeRef = React.useRef(null);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onMobileBack);
@@ -111,7 +114,14 @@ const Article = ({
     (e) => {
       let correctTabletHeight = window.innerHeight;
 
-      if (mainBarVisible) correctTabletHeight -= 64;
+      if (mainBarVisible) {
+        const mainBar = document.getElementById("main-bar");
+        console.log(mainBar.offsetHeight);
+        if (!mainBar.offsetHeight)
+          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
+
+        correctTabletHeight -= mainBar.offsetHeight;
+      }
 
       const isTouchDevice =
         "ontouchstart" in window ||
@@ -130,8 +140,10 @@ const Article = ({
 
         if (e?.target?.height) {
           const diff = window.innerHeight - e.target.height;
-
+          setIsVirtualKeyboardOpen(true);
           correctTabletHeight -= diff;
+        } else {
+          setIsVirtualKeyboardOpen(false);
         }
       }
 
@@ -149,6 +161,7 @@ const Article = ({
     return () => {
       window.removeEventListener("resize", onResize);
       window?.visualViewport?.removeEventListener("resize", onResize);
+      clearTimeout(updateSizeRef.current);
     };
   }, [onResize]);
 
@@ -195,11 +208,13 @@ const Article = ({
           showText={showText}
           toggleShowText={toggleShowText}
           currentColorScheme={currentColorScheme}
+          isVirtualKeyboardOpen={isVirtualKeyboardOpen}
         />
         {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
           <ArticleProfile
             showText={showText}
             currentDeviceType={currentDeviceType}
+            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}
       </StyledArticle>

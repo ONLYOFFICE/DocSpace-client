@@ -84,7 +84,7 @@ export const LearnMoreWrapper = styled.div`
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
-  @media (max-width: 600px) {
+  @media ${mobile} {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -149,7 +149,7 @@ export const StyledBruteForceProtection = styled.div`
       text-decoration: underline;
     }
 
-    @media (max-width: 600px) {
+    @media ${mobile} {
       padding-bottom: 20px;
     }
   }

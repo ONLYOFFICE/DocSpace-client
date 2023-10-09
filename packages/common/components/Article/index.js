@@ -116,7 +116,7 @@ const Article = ({
 
       if (mainBarVisible) {
         const mainBar = document.getElementById("main-bar");
-        console.log(mainBar.offsetHeight);
+
         if (!mainBar.offsetHeight)
           return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 

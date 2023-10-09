@@ -116,8 +116,6 @@ const HideArticleMenuButton = ({
 }) => {
   const { t } = useTranslation("Common");
 
-  console.log(isVirtualKeyboardOpen);
-
   return (
     <StyledHideArticleMenuButton
       showText={showText}

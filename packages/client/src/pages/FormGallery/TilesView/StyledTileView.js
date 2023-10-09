@@ -141,7 +141,7 @@ const StyledContent = styled.div`
     word-break: break-word;
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -226,7 +226,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 
@@ -416,7 +416,7 @@ const MainContainerWrapper = styled.div`
 const MainContainer = styled.div`
   height: 20px;
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     ${truncateCss};
   }
 `;

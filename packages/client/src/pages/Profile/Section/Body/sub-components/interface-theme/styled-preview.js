@@ -25,10 +25,10 @@ export const StyledWrapper = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: 30px !important;
+            left: 80px !important;
           `
         : css`
-            right: 30px !important;
+            right: 80px !important;
           `}
   }
 `;

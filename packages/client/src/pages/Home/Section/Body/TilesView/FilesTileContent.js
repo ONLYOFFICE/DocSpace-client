@@ -10,6 +10,7 @@ import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 
 import { DeviceType } from "@docspace/common/constants";
+import { tablet } from "@docspace/components/utils/device";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -94,7 +95,7 @@ const SimpleFilesTileContent = styled(TileContent)`
       }
     `}
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 

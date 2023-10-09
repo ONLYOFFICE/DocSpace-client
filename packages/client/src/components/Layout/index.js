@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import {
   size as deviceSize,
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
+  tablet,
 } from "@docspace/components/utils/device";
 import {
   isIOS,
@@ -65,7 +66,7 @@ const Layout = (props) => {
       window.innerWidth > deviceSize.mobile;
     setIsTabletView(isTablet);
 
-    let mediaQuery = window.matchMedia("(max-width: 1024px)");
+    let mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
 
     return () => {

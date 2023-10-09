@@ -47,8 +47,7 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
     <StyledWrapper
       onClick={onClick}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+      onMouseLeave={onMouseLeave}>
       {newBadge}
     </StyledWrapper>
   );
@@ -101,7 +100,7 @@ const Badges = ({
 
   const lineHeightBadge = isTile || tabletViewBadge ? "1.46" : "1.34";
 
-  const paddingBadge = isTile || tabletViewBadge ? "0 3px" : "0 5px";
+  const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
 

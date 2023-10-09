@@ -46,7 +46,7 @@ const DataManagementWrapper = (props) => {
               <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
                 {helpInfo}
               </Trans>
-              <Box marginProp="10px 0 0">
+              <Box as={"span"} marginProp="10px 0 0">
                 <Link
                   id="link-tooltip"
                   color="#333333"

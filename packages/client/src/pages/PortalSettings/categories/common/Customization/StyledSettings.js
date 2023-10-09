@@ -5,7 +5,7 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile, desktop, mobileMore } from "@docspace/components/utils/device";
 
 const menuHeight = "48px";
 const sectionHeight = "50px";
@@ -164,7 +164,7 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     .settings-block {
       max-width: 350px;
       height: auto;
@@ -176,7 +176,7 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     .send-request-button {
       height: 32px;
     }

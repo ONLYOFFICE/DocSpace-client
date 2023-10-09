@@ -134,7 +134,7 @@ const Members = ({
   };
 
   const getHasPrevTitle = (array, type) => {
-    return array.findIndex((x) => x.id === type) < -1;
+    return array.findIndex((x) => x.id === type) > -1;
   };
 
   const updateSelectionParentRoomActionSelection = useCallback(async () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
 import SubArticleBackdrop from "./sub-components/article-backdrop";
 import SubArticleHeader from "./sub-components/article-header";
@@ -107,34 +107,48 @@ const Article = ({
   }, [setArticleOpen, currentDeviceType]);
 
   // TODO: make some better
-  const onResize = React.useCallback(() => {
-    let correctTabletHeight = window.innerHeight;
+  const onResize = React.useCallback(
+    (e) => {
+      let correctTabletHeight = window.innerHeight;
 
-    if (mainBarVisible) correctTabletHeight -= 64;
+      if (mainBarVisible) correctTabletHeight -= 64;
 
-    const isTouchDevice =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0;
+      const isTouchDevice =
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0;
 
-    const path = window.location.pathname.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
 
-    if (
-      isBannerVisible &&
-      isMobile &&
-      isTouchDevice &&
-      (path.includes("rooms") || path.includes("files"))
-    )
-      correctTabletHeight -= 80;
+      if (
+        isBannerVisible &&
+        isMobile &&
+        isTouchDevice &&
+        (path.includes("rooms") || path.includes("files"))
+      ) {
+        correctTabletHeight -= 80;
 
-    setCorrectTabletHeight(correctTabletHeight);
-  }, [mainBarVisible, isBannerVisible]);
+        if (e?.target?.height) {
+          const diff = window.innerHeight - e.target.height;
+
+          correctTabletHeight -= diff;
+        }
+      }
+
+      setCorrectTabletHeight(correctTabletHeight);
+    },
+    [mainBarVisible, isBannerVisible]
+  );
 
   React.useEffect(() => {
     onResize();
     window.addEventListener("resize", onResize);
+    if (isMobile && !isMobileOnly && isIOS) {
+      window?.visualViewport?.addEventListener("resize", onResize);
+    }
     return () => {
       window.removeEventListener("resize", onResize);
+      window?.visualViewport?.removeEventListener("resize", onResize);
     };
   }, [onResize]);
 

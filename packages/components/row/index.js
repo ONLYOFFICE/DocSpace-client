@@ -93,6 +93,7 @@ class Row extends React.Component {
         title: children.props.item.title
           ? children.props.item.title
           : children.props.item.displayName,
+        color: children.props.item.logo?.color,
       };
     }
 

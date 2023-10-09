@@ -16,7 +16,7 @@ const flex = "4px";
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
   path {
-    fill: ${props => props.theme.client.settings.common.arrowColor};
+    fill: ${(props) => props.theme.client.settings.common.arrowColor};
   }
 `;
 
@@ -35,7 +35,7 @@ const StyledScrollbar = styled(Scrollbar)`
 
 const StyledSettingsComponent = styled.div`
   .dns-setting_helpbutton {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 4px;
@@ -51,9 +51,9 @@ const StyledSettingsComponent = styled.div`
 
   .dns-textarea {
     textarea {
-      color: ${props => props.theme.text.disableColor};
+      color: ${(props) => props.theme.text.disableColor};
     }
-    ${props => props.standalone && "margin-top: 14px"};
+    ${(props) => props.standalone && "margin-top: 14px"};
   }
 
   .combo-button-label {
@@ -74,7 +74,7 @@ const StyledSettingsComponent = styled.div`
 
   .settings-block-description {
     line-height: 20px;
-    color: ${props => props.theme.client.settings.security.descriptionColor};
+    color: ${(props) => props.theme.client.settings.security.descriptionColor};
     padding-bottom: 12px;
   }
 
@@ -114,12 +114,12 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (max-width: 599px) {
-    ${props =>
+  @media ${mobile} {
+    ${(props) =>
       props.hasScroll &&
       css`
         width: ${isMobileOnly ? "100vw" : "calc(100vw - 52px)"};
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 right: -16px;
@@ -132,7 +132,7 @@ const StyledSettingsComponent = styled.div`
         .settings-block {
           width: ${isMobileOnly ? "calc(100vw - 32px)" : "calc(100vw - 84px)"};
           max-width: none;
-          ${props =>
+          ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
                   padding-right: 16px;
@@ -147,7 +147,7 @@ const StyledSettingsComponent = styled.div`
       box-sizing: border-box;
       position: absolute;
       bottom: 0;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               right: 0;
@@ -182,7 +182,7 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (orientation: landscape) and (max-width: 600px) {
+  @media (orientation: landscape) and ${mobile} {
     ${isMobileOnly &&
     css`
       .settings-block {
@@ -190,7 +190,7 @@ const StyledSettingsComponent = styled.div`
       }
     `}
   }
-  ${props => !props.isSettingPaid && UnavailableStyles}
+  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export { StyledSettingsComponent, StyledScrollbar, StyledArrowRightIcon };

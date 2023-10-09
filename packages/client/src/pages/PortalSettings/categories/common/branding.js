@@ -75,7 +75,7 @@ const Branding = ({
     };
   }, []);
 
-  if (isMobileView) return <MobileView />;
+  if (isMobileView) return <MobileView isSettingPaid={isSettingPaid} />;
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>

@@ -21,7 +21,7 @@ const StyledScrollbar = styled(Scrollbar)`
                 margin-right: 0 !important;
               `}
 
-        padding-bottom: 20px !important;
+        padding-bottom: 0px !important;
         margin-bottom: 0 !important;
       }
     `}
@@ -34,8 +34,7 @@ const SubInfoPanelBody = ({ children, isInfoPanelScrollLocked }) => {
     <StyledScrollbar
       $isScrollLocked={isInfoPanelScrollLocked}
       scrollclass="section-scroll"
-      stype="mediumBlack"
-    >
+      stype="mediumBlack">
       {content}
     </StyledScrollbar>
   );

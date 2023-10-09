@@ -15,6 +15,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const SectionBodyContent = (props) => {
-  const { isProfileLoaded, profile, t } = props;
+  const { isProfileLoaded, profile, currentDeviceType, t } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -80,18 +81,26 @@ const SectionBodyContent = (props) => {
         startSelect={currentTab}
         onSelect={onSelect}
         size="scale"
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
       />
     </Wrapper>
   );
 };
 
-export default inject(({ peopleStore, clientLoadingStore }) => {
+export default inject(({ auth, peopleStore, clientLoadingStore }) => {
   const { isProfileLoaded } = clientLoadingStore;
   const { targetUser: profile } = peopleStore.targetUserStore;
 
   return {
     isProfileLoaded,
     profile,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(
   observer(

@@ -206,6 +206,7 @@ const ArticleBodyContent = (props) => {
     }
 
     setSelectedKeys([value + "-0"]);
+    console.log(currentDeviceType);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
@@ -344,12 +345,12 @@ export default inject(({ auth, common }) => {
     isEnterprise,
     settingsStore,
     isCommunity,
-    currentDeviceType,
   } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen } = settingsStore;
+  const { standalone, showText, toggleArticleOpen, currentDeviceType } =
+    settingsStore;
 
   return {
     standalone,

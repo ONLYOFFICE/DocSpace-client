@@ -29,7 +29,7 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
   .settings-section_header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     .settings-section_badge {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -151,6 +151,12 @@ const SectionHeaderContent = (props) => {
         return isBrandingAndCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
+      case "WhiteLabel":
+        return isBrandingAndCustomizationAvailable;
+      case "CompanyInfoSettings":
+        return isBrandingAndCustomizationAvailable;
+      case "AdditionalResources":
+        return isBrandingAndCustomizationAvailable;
       default:
         return true;
     }

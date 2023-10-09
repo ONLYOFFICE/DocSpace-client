@@ -20,7 +20,7 @@ import Text from "../text";
 import Avatar from "../avatar";
 import IconButton from "../icon-button";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
-
+import RoomIcon from "@docspace/components/room-icon";
 class ContextMenu extends Component {
   constructor(props) {
     super(props);
@@ -324,6 +324,7 @@ class ContextMenu extends Component {
     const isAvatarExist = this.props.header?.avatar;
 
     const withHeader = !!this.props.header?.title;
+    const defaultIcon = !!this.props.header?.color;
 
     return (
       <>
@@ -365,11 +366,18 @@ class ContextMenu extends Component {
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        <img
-                          src={this.props.header.icon}
-                          className="drop-down-item_icon"
-                          alt="drop-down_icon"
-                        />
+                        {defaultIcon ? (
+                          <RoomIcon
+                            color={this.props.header.color}
+                            title={this.props.header.title}
+                          />
+                        ) : (
+                          <img
+                            src={this.props.header.icon}
+                            className="drop-down-item_icon"
+                            alt="drop-down_icon"
+                          />
+                        )}
                       </div>
                     ))}
                   {isAvatarExist && (

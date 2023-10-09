@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { tablet } from "../utils/device";
+import { mobileMore, desktop } from "../utils/device";
 import { isMobileOnly, isTablet } from "react-device-detect";
 
 const displaySettings = css`
@@ -136,11 +136,8 @@ const StyledSaveCancelButtons = styled.div`
 
   ${(props) => props.displaySettings && displaySettings};
 
-  @media (min-width: 600px), isTablet {
+  @media ${mobileMore} {
     ${(props) => props.displaySettings && tabletButtons}
-  }
-
-  @media ${tablet} {
     ${(props) =>
       !props.displaySettings &&
       `
@@ -153,7 +150,7 @@ const StyledSaveCancelButtons = styled.div`
   `}
   }
 
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     ${(props) =>
       props.displaySettings &&
       !isTablet &&

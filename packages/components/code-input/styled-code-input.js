@@ -56,7 +56,7 @@ const InputWrapper = styled.div`
     border: none;
     margin: 0 16px;
 
-    @media (max-width: 768px) {
+    @media ${mobile} {
       margin: 0 4px;
     }
   }

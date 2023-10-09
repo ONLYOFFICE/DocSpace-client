@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
-import { size, desktop } from "@docspace/components/utils/device";
+import { size, desktop, mobile } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import { HelpButton } from "@docspace/components";
 import { mobile } from "@docspace/components/utils/device";
@@ -34,7 +34,7 @@ const StyledBody = styled.div`
     @media ${mobile} {
       grid-template-columns: 1fr;
 
-      grid-template-rows: ${(props) => "1fr max-content"};
+      grid-template-rows: 1fr max-content;
 
       .price-calculation-container,
       .benefits-container {
@@ -49,7 +49,7 @@ const StyledBody = styled.div`
       props.isChangeView &&
       css`
         grid-template-columns: 1fr;
-        grid-template-rows: ${(props) => "1fr max-content"};
+        grid-template-rows: 1fr max-content;
 
         .price-calculation-container,
         .benefits-container {

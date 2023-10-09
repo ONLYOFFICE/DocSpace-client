@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const tabletStyles = css`
   .description {
@@ -11,7 +12,7 @@ const tabletStyles = css`
 `;
 
 const StyledLoader = styled.div`
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     ${tabletStyles}
   }
 `;

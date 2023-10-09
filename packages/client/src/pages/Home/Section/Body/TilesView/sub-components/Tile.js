@@ -641,6 +641,7 @@ class Tile extends React.PureComponent {
     const contextMenuHeader = {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
+      color: children[0].props.item.logo?.color,
     };
 
     const title = item.isFolder

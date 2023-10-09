@@ -17,7 +17,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
     animate,
   } = rest;
 
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktopView, setIsDesktopView] = useState(false);
 
   useEffect(() => {
     checkWidth();
@@ -26,7 +26,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
   }, []);
 
   const checkWidth = () => {
-    setIsDesktop(isDesktop());
+    setIsDesktopView(isDesktop());
   };
 
   return (
@@ -60,7 +60,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
           />
         </div>
 
-        {isDesktop && (
+        {isDesktopView && (
           <div className="table-header">
             <RectangleLoader
               title={title}

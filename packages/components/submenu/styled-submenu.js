@@ -18,7 +18,7 @@ export const StyledSubmenu = styled.div`
 
   .sticky {
     position: sticky;
-    top: 0;
+    top: ${(props) => (props.topProps ? props.topProps : 0)};
     background: ${(props) => props.theme.submenu.backgroundColor};
     z-index: 1;
   }

@@ -22,6 +22,7 @@ const Submenu = (props) => {
     forsedActiveItemId,
     onSelect,
     size,
+    topProps,
     ...rest
   } = props;
   if (!data) return null;
@@ -102,7 +103,7 @@ const Submenu = (props) => {
   }, [submenuItemsRef]);
 
   return (
-    <StyledSubmenu {...rest}>
+    <StyledSubmenu {...rest} topProps={topProps}>
       <div className="sticky">
         <SubmenuRoot>
           <SubmenuScrollbarSize />

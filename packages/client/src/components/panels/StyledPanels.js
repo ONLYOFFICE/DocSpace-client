@@ -897,7 +897,7 @@ const StyledModalRowContainer = styled.div`
           `}
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     .row_content {
       height: 19px;
       overflow: initial;

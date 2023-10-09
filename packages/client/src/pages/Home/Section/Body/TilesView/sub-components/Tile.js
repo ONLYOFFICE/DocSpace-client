@@ -368,7 +368,7 @@ const StyledContent = styled.div`
     margin-left: 12px;
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

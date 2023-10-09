@@ -298,7 +298,7 @@ const StyledUserName = styled.div`
 
 const StyledProfileWrapper = styled.div`
   z-index: 209;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"

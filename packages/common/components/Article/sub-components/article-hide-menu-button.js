@@ -12,7 +12,7 @@ import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.reac
 const StyledHideArticleMenuButton = styled.div`
   display: flex;
   align-items: center;
-  position: fixed;
+  position: absolute;
   height: 44px;
   z-index: 510;
   bottom: 89px;

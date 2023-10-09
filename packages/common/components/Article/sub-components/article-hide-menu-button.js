@@ -31,7 +31,7 @@ const StyledHideArticleMenuButton = styled.div`
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};
 
   @media ${desktop} {
-    // display: none;
+    display: none;
   }
 
   @media ${mobile} {
@@ -61,7 +61,7 @@ const StyledHideArticleMenuButton = styled.div`
     }
 
     @media ${tablet} {
-      // display: ${({ showText }) => (showText ? "flex" : "none")};
+      display: ${({ showText }) => (showText ? "flex" : "none")};
     }
   }
 

@@ -160,7 +160,7 @@ class ProfileActions extends React.PureComponent {
                     href={action.url}
                     onClick={this.onClickItemLink}
                   >
-                    <DropDownItem {...action} />
+                    <DropDownItem {...action} noHover={true} />
                   </Link>
                 ))
             )}

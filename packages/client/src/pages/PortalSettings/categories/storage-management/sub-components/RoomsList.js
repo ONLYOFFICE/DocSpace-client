@@ -27,11 +27,22 @@ const RoomsListComponent = (props) => {
   };
 
   const roomsList = filesList.map((item) => {
-    const { id, icon, fileExst, defaultRoomIcon, isRoom, title } = item;
+    const { id, icon, fileExst, defaultRoomIcon, isRoom, title, logo } = item;
+    const color = logo?.color;
+
     return (
       <StyledSimpleFilesRow key={item.id}>
         <>
-          {iconElement(id, icon, fileExst, isRoom, defaultRoomIcon)}
+          {iconElement(
+            id,
+            icon,
+            fileExst,
+            isRoom,
+            defaultRoomIcon,
+            null,
+            title,
+            color
+          )}
           {textElement(title)}
           {quotaElement(item)}
         </>

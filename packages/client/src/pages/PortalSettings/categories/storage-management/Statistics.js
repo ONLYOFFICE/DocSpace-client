@@ -26,7 +26,9 @@ const StatisticsComponent = (props) => {
     fileExst,
     isRoom,
     defaultRoomIcon,
-    className
+    className,
+    title,
+    color
   ) => (
     <div className={className}>
       <ItemIcon
@@ -35,6 +37,8 @@ const StatisticsComponent = (props) => {
         fileExst={fileExst}
         isRoom={isRoom}
         defaultRoomIcon={defaultRoomIcon}
+        title={title}
+        color={color}
       />
     </div>
   );

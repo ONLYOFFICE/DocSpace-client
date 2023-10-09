@@ -127,7 +127,7 @@ const EmptyContentBody = styled.div`
 
     color: ${(props) => props.theme.emptyContent.header.color};
 
-    @media (max-width: 375px) {
+    @media ${mobile} {
       margin-top: 5px;
     }
   }

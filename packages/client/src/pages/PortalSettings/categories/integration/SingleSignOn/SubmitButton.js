@@ -1,21 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  .save-button {
-    margin-right: 8px;
-  }
-`;
 
 const SubmitResetButtons = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings", "Common"]);
@@ -32,7 +21,7 @@ const SubmitResetButtons = (props) => {
   } = props;
 
   return (
-    <StyledWrapper>
+    <>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={() => saveSsoSettings(t)}
@@ -41,7 +30,7 @@ const SubmitResetButtons = (props) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
-        hasScroll={false}
+        hasScroll={true}
         isSaving={isSubmitLoading}
         saveButtonDisabled={hasErrors || !hasChanges || isLoadingXml}
         cancelEnable={!(isSubmitLoading || isLoadingXml)}
@@ -49,7 +38,7 @@ const SubmitResetButtons = (props) => {
         additionalClassCancelButton="restore-button"
       />
       {confirmationResetModal && <ResetConfirmationModal />}
-    </StyledWrapper>
+    </>
   );
 };
 

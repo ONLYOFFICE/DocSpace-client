@@ -103,7 +103,7 @@ const StyledAsidePanel = styled.div`
     transform: translateX(${(props) => (props.visible ? "0" : "500px")});
     width: 500px;
 
-    @media (max-width: 550px) {
+    @media ${mobile} {
       width: 320px;
       transform: translateX(${(props) => (props.visible ? "0" : "320px")});
     }
@@ -371,7 +371,7 @@ const StyledBody = styled.div`
         .combo-button-label {
           max-width: 435px;
 
-          @media (max-width: 550px) {
+          @media ${mobile} {
             width: 255px;
           }
         }
@@ -381,7 +381,7 @@ const StyledBody = styled.div`
         .option_checkbox {
           width: 440px;
 
-          @media (max-width: 550px) {
+          @media ${mobile} {
             width: 265px;
           }
         }

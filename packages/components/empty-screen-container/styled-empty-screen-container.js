@@ -34,7 +34,7 @@ const EmptyPageStyles = css`
     margin: 0 auto;
   }
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     ${(props) =>
       props.sectionWidth > size.mobile &&
       css`
@@ -166,7 +166,7 @@ const EmptyContentBody = styled.div`
   }
 
   @media (orientation: portrait) {
-    @media (max-width: 768px) {
+    @media ${mobile} {
       padding-top: ${(props) => !props.isEmptyFolderContainer && "0px"};
 
       .ec-image {

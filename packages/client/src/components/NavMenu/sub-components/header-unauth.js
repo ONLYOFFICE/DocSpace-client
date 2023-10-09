@@ -18,10 +18,8 @@ const Header = styled.header`
   .header-items-wrapper {
     width: 960px;
 
-    @media (max-width: 768px) {
-      width: 475px;
-    }
     @media ${mobile} {
+      width: 475px;
       display: flex;
       align-items: center;
       justify-content: center;

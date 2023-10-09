@@ -38,17 +38,22 @@ const BarItem = styled.div`
   padding: 16px;
   flex-basis: 25%;
 
-  /* @media (max-width: 1300px) { */
-  @media (tablet) {
+  @media ${tablet} {
     flex-basis: 50%;
   }
-  @media (mobile) {
+  @media ${mobile} {
     flex-basis: 100%;
   }
 `;
 
 const BarItemHeader = ({ children }) => (
-  <Text as="h3" color="#A3A9AE" fontSize="12px" fontWeight={600} className="barItemHeader">
+  <Text
+    as="h3"
+    color="#A3A9AE"
+    fontSize="12px"
+    fontWeight={600}
+    className="barItemHeader"
+  >
     {children}
   </Text>
 );
@@ -63,7 +68,9 @@ const DetailsBar = ({ eventDetails }) => {
 
   const formatDate = (date) => {
     return (
-      moment(date).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") + " " + t("Common:UTC")
+      moment(date).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") +
+      " " +
+      t("Common:UTC")
     );
   };
 

@@ -10,10 +10,9 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile, isTablet, isMobile } from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
 
 import toastr from "@docspace/components/toast/toastr";
@@ -33,21 +32,17 @@ const HeaderContainer = styled.div`
   min-height: 53px;
   flex-wrap: wrap;
 
-  ${() =>
-    isMobile &&
-    css`
-      margin-bottom: 11px;
-    `}
+  @media ${tablet} {
+    margin-bottom: 11px;
+  }
 
-  ${() =>
-    isMobileOnly &&
-    css`
-      margin-top: 7px;
-      margin-left: -14px;
-      padding-left: 14px;
-      margin-right: -14px;
-      padding-right: 14px;
-    `}
+  @media ${mobile} {
+    margin-top: 7px;
+    margin-left: -14px;
+    padding-left: 14px;
+    margin-right: -14px;
+    padding-right: 14px;
+  }
 
   .arrow-button {
     margin-inline-end: 18.5px;
@@ -58,11 +53,9 @@ const HeaderContainer = styled.div`
       margin-inline-start: -8px;
     }
 
-    ${() =>
-      isMobileOnly &&
-      css`
-        margin-inline-end: 13px;
-      `}
+    @media ${mobile} {
+      margin-inline-end: 13px;
+    }
 
     svg {
       ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
@@ -76,7 +69,7 @@ const HeaderContainer = styled.div`
     @media ${tablet} {
       font-size: 21px;
     }
-    @media ${hugeMobile} {
+    @media ${mobile} {
       font-size: 18px;
     }
   }
@@ -100,23 +93,19 @@ const HeaderContainer = styled.div`
       }
     }
 
-    ${() =>
-      isMobile &&
-      css`
-        height: 60px;
-        margin-block: 0;
-        margin-inline: -16px 0;
-        width: calc(100% + 32px);
-      `}
-    ${() =>
-      isMobileOnly &&
-      css`
-        position: absolute;
-        height: 48px;
-        margin-block: -17px 0;
-        margin-inline: -17px 0;
-        width: calc(100% + 32px);
-      `}
+    @media ${tablet} {
+      height: 60px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+    }
+    @media ${mobile} {
+      position: absolute;
+      height: 48px;
+      margin-block: -17px 0;
+      margin-inline: -17px 0;
+      width: calc(100% + 32px);
+    }
   }
 `;
 
@@ -251,7 +240,7 @@ const HistoryHeader = (props) => {
 
   return (
     <HeaderContainer isDisabled={isRetryPending}>
-      {isMobileOnly ? (
+      {isMobile() ? (
         <>
           {isGroupMenuVisible && <GroupMenu />}
           <NavigationHeader />

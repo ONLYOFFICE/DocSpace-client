@@ -156,7 +156,6 @@
   "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán.",
   "RestoreBackup": "Obnova dat",
   "RestoreBackupDescription": "Použijte tuto možnost pro obnovu Vašeho prostoru z předchozího souboru obnovy.",
-  "RestoreDefaultButton": "Obnovit do původního stavu",
   "RoomsModule": "Záložní místnost",
   "RoomsModuleDescription": "Můžete vytvořit novou místnost speciálně pro zálohu, vybrat jednu z existujících místností nebo uložit kopii do jejich místnosti {{roomName}}.",
   "SelectFileInGZFormat": "Vyberte soubor ve formátu .GZ",

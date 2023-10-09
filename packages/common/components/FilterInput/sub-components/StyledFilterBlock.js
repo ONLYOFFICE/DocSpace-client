@@ -1,9 +1,8 @@
 import Text from "@docspace/components/text";
 import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import ToggleButton from "@docspace/components/toggle-button";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -34,12 +33,7 @@ const StyledFilterBlock = styled.div`
     max-width: calc(100% - 69px);
   }
 
-  ${isMobile &&
-  css`
-    max-width: calc(100% - 69px);
-  `}
-
-  @media ${hugeMobile} {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -122,12 +116,12 @@ const StyledFilterBlockItem = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0 16px 0 15px;
+          padding: 0 16px 0 24px;
         `
       : css`
-          padding: 0 15px 0 16px;
+          padding: 0 24px 0 16px;
         `}
-  max-width: 480px;
+  max-width: 100%;
   box-sizing: border-box;
 
   display: flex;
@@ -335,7 +329,7 @@ const StyledFilterBlockFooter = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
   }
 `;
@@ -366,12 +360,7 @@ const StyledControlContainer = styled.div`
           left: -34px;
         `}
 
-  ${isMobile &&
-  css`
-    top: 14px;
-  `}
-
-  @media ${hugeMobile} {
+  @media ${mobile} {
     top: -34px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

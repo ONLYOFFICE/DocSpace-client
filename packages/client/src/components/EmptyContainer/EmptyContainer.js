@@ -4,11 +4,11 @@ import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import NoUserSelect from "@docspace/components/utils/commonStyles";
 import {
   tablet,
-  smallTablet,
+  mobile,
   desktop,
   size,
 } from "@docspace/components/utils/device";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { classNames } from "@docspace/components/utils/classNames";
 
 const EmptyPageStyles = css`
@@ -22,12 +22,12 @@ const EmptyPageStyles = css`
   }
 
   .empty-folder_link {
-    ${props =>
-  props.theme.interfaceDirection === "rtl"
-    ? css`
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin-left: 9px;
           `
-    : css`
+        : css`
             margin-right: 9px;
           `}
   }
@@ -43,13 +43,13 @@ const EmptyPageStyles = css`
     grid-column-gap: 33px;
   }
 
-  @media ${smallTablet} {
-    ${props =>
-  props.theme.interfaceDirection === "rtl"
-    ? css`
+  @media ${mobile} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding-left: 44px;
           `
-    : css`
+        : css`
             padding-right: 44px;
           `}
   }
@@ -58,12 +58,12 @@ const EmptyPageStyles = css`
 const EmptyFolderWrapper = styled.div`
   .empty-folder_container {
     .empty-folder_link {
-      ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
               margin-left: 7px;
             `
-      : css`
+          : css`
               margin-right: 7px;
             `}
     }
@@ -96,12 +96,12 @@ const EmptyFolderWrapper = styled.div`
 
     .empty-folder_container_up-image,
     .empty-folder_container_plus-image {
-      ${props =>
-  props.theme.interfaceDirection === "rtl"
-    ? css`
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
               margin: 4px 0 0 8px;
             `
-    : css`
+          : css`
               margin: 4px 8px 0 0;
             `}
       cursor: pointer;
@@ -121,12 +121,12 @@ const EmptyFolderWrapper = styled.div`
     .empty-folder_container-icon {
       height: 20px;
       width: 12px;
-      ${props =>
-  props.theme.interfaceDirection === "rtl"
-    ? css`
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
               margin: 4px 0 0 4px;
             `
-    : css`
+          : css`
               margin: 4px 4px 0 0;
             `}
 
@@ -138,33 +138,33 @@ const EmptyFolderWrapper = styled.div`
       bottom: 16px;
     }
 
-    ${props => props.isEmptyPage && `${EmptyPageStyles}`}
+    ${(props) => props.isEmptyPage && `${EmptyPageStyles}`}
 
-    ${props =>
+    ${(props) =>
       props.isEmptyPage &&
       isMobileOnly &&
       css`
-        ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 padding: 20px 11px 64px 42px !important;
               `
-      : css`
+            : css`
                 padding: 20px 42px 64px 11px !important;
               `}
       `}
 
-    ${props =>
+    ${(props) =>
       (props.isEmptyPage || props.isEmptyFolderContainer) &&
-      props.sectionWidth <= size.smallTablet &&
+      props.sectionWidth <= size.mobile &&
       !isMobileOnly &&
       css`
-        ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 padding-right: 12px !important;
               `
-      : css`
+            : css`
                 padding-left: 12px !important;
               `}
 
@@ -179,7 +179,7 @@ const EmptyFolderWrapper = styled.div`
   }
 `;
 
-const EmptyFoldersContainer = props => {
+const EmptyFoldersContainer = (props) => {
   const imageAlt = "Empty folder image";
   const {
     imageSrc,
@@ -200,7 +200,8 @@ const EmptyFoldersContainer = props => {
     <EmptyFolderWrapper
       sectionWidth={sectionWidth}
       isEmptyPage={isEmptyPage}
-      isEmptyFolderContainer={isEmptyFolderContainer}>
+      isEmptyFolderContainer={isEmptyFolderContainer}
+    >
       <EmptyScreenContainer
         sectionWidth={sectionWidth}
         className={classNames("empty-folder_container", className)}

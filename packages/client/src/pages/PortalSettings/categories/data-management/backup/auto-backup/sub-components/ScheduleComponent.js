@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
 import { StyledScheduleComponent } from "../../StyledBackup";
-import { AutoBackupPeriod } from "@docspace/common/constants";
-import { isMobileOnly } from "react-device-detect";
+import { AutoBackupPeriod, DeviceType } from "@docspace/common/constants";
+
 import HelpButton from "@docspace/components/help-button";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
@@ -29,6 +29,7 @@ const ScheduleComponent = ({
   hoursArray,
   maxNumberCopiesArray,
   monthlySchedule,
+  currentDeviceType,
 }) => {
   const { t } = useTranslation("Settings");
   const renderHelpContent = () => (
@@ -116,7 +117,9 @@ const ScheduleComponent = ({
           noBorder={false}
           scaled={false}
           scaledOptions={true}
-          dropDownMaxHeight={isMobileOnly ? 100 : 200}
+          dropDownMaxHeight={
+            currentDeviceType === DeviceType.mobile ? 100 : 200
+          }
           className="schedule-backup_combobox time_options"
           showDisabledItems
         />
@@ -135,7 +138,9 @@ const ScheduleComponent = ({
           noBorder={false}
           scaled={false}
           scaledOptions={true}
-          dropDownMaxHeight={isMobileOnly ? 100 : 200}
+          dropDownMaxHeight={
+            currentDeviceType === DeviceType.mobile ? 100 : 200
+          }
           className="schedule-backup_combobox max_copies"
           showDisabledItems
         />
@@ -144,7 +149,7 @@ const ScheduleComponent = ({
   );
 };
 
-export default inject(({ backup }) => {
+export default inject(({ auth, backup }) => {
   const {
     selectedPeriodLabel,
     selectedWeekdayLabel,
@@ -176,5 +181,6 @@ export default inject(({ backup }) => {
 
     weeklySchedule,
     monthlySchedule,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(observer(ScheduleComponent));

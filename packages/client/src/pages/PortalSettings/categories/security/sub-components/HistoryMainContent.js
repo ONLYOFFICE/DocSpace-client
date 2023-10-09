@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Badge from "@docspace/components/badge";
 
 const StyledTextInput = styled(TextInput)`
@@ -15,7 +15,7 @@ const StyledTextInput = styled(TextInput)`
   margin-bottom: 24px;
   width: 350px;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
   }
 `;
@@ -90,7 +90,7 @@ const DownLoadWrapper = styled.div`
       padding-bottom: 11px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -109,7 +109,7 @@ const DownLoadWrapper = styled.div`
         .downloadReportDescriptionColor};
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     flex-direction: column-reverse;
   }
 `;

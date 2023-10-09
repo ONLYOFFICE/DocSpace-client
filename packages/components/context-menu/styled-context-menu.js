@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "../utils/device";
 import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
 
@@ -77,19 +76,12 @@ const StyledContextMenu = styled.div`
     padding: ${(props) => props.theme.newContextMenu.padding};
 
     @media ${tablet} {
-      ${(props) => props.changeView && !isMobile && styledTabletView}
+      ${(props) => props.changeView && styledTabletView}
     }
 
     @media ${mobile} {
-      ${(props) => props.changeView && !isMobile && styledMobileView}
+      ${(props) => props.changeView && styledMobileView}
     }
-
-    ${(props) =>
-      props.changeView
-        ? isMobileOnly
-          ? styledMobileView
-          : styledTabletView
-        : null}
   }
 
   .contextmenu-header {

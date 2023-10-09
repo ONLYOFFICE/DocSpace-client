@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import { Base } from "@docspace/components/themes";
@@ -8,8 +8,8 @@ import { Button } from "@docspace/components";
 const StyledHeadline = styled(Headline)`
   width: 100%;
   font-weight: 700;
-  font-size: ${isMobile ? "21px !important" : "18px"};
-  line-height: ${isMobile ? "28px !important" : "24px"};
+  font-size: 18px;
+  line-height: 24px;
   @media ${tablet} {
     font-size: 21px;
     line-height: 28px;
@@ -39,22 +39,10 @@ const StyledContainer = styled.div`
     padding: 16px 0 0px;
   }
 
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    padding: 16px 0 0px;
-  `}
-
   @media ${mobile} {
     width: 100%;
     padding: 12px 0 0;
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100% !important;
-    padding: 12px 0 0;
-  `}
 `;
 
 const StyledSubmitToGalleryButton = styled(Button)`

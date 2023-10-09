@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { isMobileOnly } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { isMobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   padding-top: 25px;
@@ -54,7 +55,7 @@ const Loader = () => {
   }, []);
 
   const onCheckView = () => {
-    if (isMobileOnly || window.innerWidth < 600) {
+    if (isMobile()) {
       setViewMobile(true);
     } else {
       setViewMobile(false);

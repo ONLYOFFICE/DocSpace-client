@@ -9,16 +9,11 @@ import RootIcon from "PUBLIC_DIR/images/root.react.svg";
 import DefaultTabletIcon from "PUBLIC_DIR/images/default.tablet.react.svg";
 import RootTabletIcon from "PUBLIC_DIR/images/root.tablet.react.svg";
 
-import { isMobile } from "react-device-detect";
-import {
-  tablet,
-  isTablet,
-  isMobile as IsMobileUtils,
-  hugeMobile,
-} from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { DeviceType } from "../../../constants";
 
 const StyledItem = styled.div`
   height: auto;
@@ -47,19 +42,7 @@ const StyledItem = styled.div`
       `};
   }
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0;
-          `
-        : css`
-            margin-left: 0;
-          `}
-  `};
-
-  @media ${hugeMobile} {
+  @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -91,6 +74,7 @@ const Item = ({
   isRootRoom,
   onClick,
   withLogo,
+  currentDeviceType,
   ...rest
 }) => {
   const onClickAvailable = () => {
@@ -106,7 +90,7 @@ const Item = ({
       {...rest}
     >
       <ColorTheme isRoot={isRoot} themeId={ThemeType.IconWrapper}>
-        {isMobile || isTablet() || IsMobileUtils() ? (
+        {currentDeviceType !== DeviceType.desktop ? (
           isRoot ? (
             <RootTabletIcon />
           ) : (

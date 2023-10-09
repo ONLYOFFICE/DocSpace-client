@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
@@ -89,6 +89,8 @@ const MembersList = (props) => {
     loadNextPage,
   } = props;
 
+  const { interfaceDirection } = useTheme();
+
   const itemsCount = hasNextPage ? members.length + 1 : members.length;
 
   const canInviteUserInRoomAbility = security?.EditAccess;
@@ -155,6 +157,7 @@ const MembersList = (props) => {
 
               return (
                 <List
+                  direction={interfaceDirection}
                   ref={ref}
                   width={listWidth}
                   height={height}

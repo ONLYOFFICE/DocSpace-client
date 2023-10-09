@@ -13,7 +13,7 @@ import {
 
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
@@ -25,7 +25,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/components/utils/device";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
@@ -62,7 +62,7 @@ class FilesStore {
   pluginStore;
 
   viewAs =
-    isMobile && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
 
   dragging = false;
   privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
@@ -752,7 +752,11 @@ class FilesStore {
   };
 
   setIsEmptyPage = (isEmptyPage) => {
-    this.isEmptyPage = isEmptyPage;
+    // this.isEmptyPage = isEmptyPage;
+
+    runInAction(() => {
+      this.isEmptyPage = isEmptyPage;
+    });
   };
 
   setIsLoadedEmptyPage = (isLoadedEmptyPage) => {
@@ -1039,6 +1043,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.PublicRoom}`:
+        return roomType === RoomsType.PublicRoom;
       default:
         return false;
     }
@@ -1414,8 +1420,8 @@ class FilesStore {
           } else {
             this.setIsEmptyPage(isEmptyList);
           }
-          this.setFolders(isPrivacyFolder && isMobile ? [] : data.folders);
-          this.setFiles(isPrivacyFolder && isMobile ? [] : data.files);
+          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
+          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
         });
 
         if (clearFilter) {
@@ -1663,7 +1669,7 @@ class FilesStore {
                 tags ||
                 withoutTags;
 
-              if (isFiltered) {
+              if (!!isFiltered) {
                 this.setIsEmptyPage(false);
               } else {
                 this.setIsEmptyPage(isEmptyList);
@@ -2563,7 +2569,7 @@ class FilesStore {
   scrollToTop = () => {
     if (this.authStore.settingsStore.withPaging) return;
 
-    const scrollElm = isMobileOnly
+    const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
       : document.querySelector("#sectionScroll > .scroll-wrapper > .scroller");
 
@@ -2914,8 +2920,6 @@ class FilesStore {
 
     if (items.length > 0 && this.isEmptyPage) {
       this.setIsEmptyPage(false);
-    } else if (items.length === 0 && !this.isEmptyPage) {
-      this.setIsEmptyPage(true);
     }
 
     const newItem = items.map((item) => {
@@ -3156,7 +3160,8 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
-        elem !== `room-${RoomsType.ReadOnlyRoom}`
+        elem !== `room-${RoomsType.ReadOnlyRoom}` &&
+        elem !== `room-${RoomsType.PublicRoom}`
     );
 
     if (hasFiles) cbMenu.push(FilterType.FilesOnly);
@@ -3196,6 +3201,8 @@ class FilesStore {
         return t("Common:Review");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
+      case `room-${RoomsType.PublicRoom}`:
+        return t("PublicRoomLabel");
 
       default:
         return "";
@@ -3232,7 +3239,8 @@ class FilesStore {
         return "selected-only-review-rooms";
       case `room-${RoomsType.ReadOnlyRoom}`:
         return "selected-only-view-rooms";
-
+      case `room-${RoomsType.PublicRoom}`:
+        return "selected-only-public-rooms";
       default:
         return "";
     }

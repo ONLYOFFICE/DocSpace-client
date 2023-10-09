@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
 
 const StyledTrashWarning = styled.div`
   box-sizing: border-box;
@@ -22,11 +21,9 @@ const StyledTrashWarning = styled.div`
     theme.section.header.trashErasureLabelBackground};
 `;
 
-const TrashWarning = ({ title, isTabletView }) => {
+const TrashWarning = ({ title }) => {
   return (
-    <StyledTrashWarning className="trash-warning" isTabletView={isTabletView}>
-      {title}
-    </StyledTrashWarning>
+    <StyledTrashWarning className="trash-warning">{title}</StyledTrashWarning>
   );
 };
 

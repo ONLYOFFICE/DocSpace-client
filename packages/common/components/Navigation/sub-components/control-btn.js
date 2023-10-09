@@ -2,8 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import ContextMenuButton from "@docspace/components/context-menu-button";
-import IconButton from "@docspace/components/icon-button";
-import { isMobile } from "react-device-detect";
+
 import { tablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 import ToggleInfoPanelButton from "./toggle-infopanel-btn";
@@ -39,11 +38,6 @@ const StyledContainer = styled.div`
     @media ${tablet} {
       display: ${(props) => (props.isFrame ? "flex" : "none")};
     }
-
-    ${isMobile &&
-    css`
-      display: ${(props) => (props.isFrame ? "flex" : "none")};
-    `}
   }
 
   .add-drop-down {
@@ -111,18 +105,6 @@ const StyledInfoPanelToggleWrapper = styled.div`
           `}
   }
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: ${(props) => (props.isRootFolder ? "auto" : "0")};
-          `
-        : css`
-            margin-left: ${(props) => (props.isRootFolder ? "auto" : "0")};
-          `}
-  `}
-
   .info-panel-toggle-bg {
     height: 32px;
     width: 32px;
@@ -165,6 +147,7 @@ const ControlButtons = ({
   isFrame,
   isPublicRoom,
   isTrashFolder,
+  isMobile,
 }) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel && toggleInfoPanel();
@@ -207,6 +190,7 @@ const ControlButtons = ({
             //onPlusClick={onPlusClick}
             title={titles?.actions}
             isTrashFolder={isTrashFolder}
+            isMobile={isMobile}
           />
 
           {!isDesktop && (

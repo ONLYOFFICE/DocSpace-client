@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Button from "@docspace/components/button";
 import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Textarea from "@docspace/components/textarea";
 import FieldContainer from "@docspace/components/field-container";
-import { smallTablet } from "@docspace/components/utils/device";
-import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
+import { tablet } from "@docspace/components/utils/device";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside-footer {
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       width: 90%;
     }
   }

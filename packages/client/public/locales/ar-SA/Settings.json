@@ -150,7 +150,6 @@
   "RecoveryFileNotSelected": "خطأ في الاسترداد. لم يتم تحديد ملف الاسترداد.",
   "RestoreBackup": "استرجاع",
   "RestoreBackupDescription": "استخدم هذا الخيار لاستعادة إستضافتك من ملف النسخ الاحتياطي المحفوظ مسبقًا.",
-  "RestoreDefaultButton": "استعادة الى الافتراضي",
   "RoomsModule": "غرفة النسخ الاحتياطي",
   "RoomsModuleDescription": "يمكنك إنشاء غرفة جديدة خصيصًا للنسخ الاحتياطي ، أو اختيار إحدى الغرف الموجودة ، أو حفظ النسخة في غرفة {{roomName}} الخاصة بهم.",
   "SelectFileInGZFormat": "حدد الملف بتنسيق ملف مضغوط",

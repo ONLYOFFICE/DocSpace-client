@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
 import RowContainer from "@docspace/components/row-container";
 
@@ -9,6 +8,8 @@ import EmptyScreen from "../EmptyScreen";
 
 import SimpleUserRow from "./SimpleUserRow";
 import withLoader from "SRC_DIR/HOCs/withLoader";
+import { mobile, size, tablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -16,23 +17,15 @@ const marginStyles = css`
   padding-left: 24px;
   padding-right: 24px;
 
-  ${isMobile &&
-  css`
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  `}
-
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  @media (max-width: 375px) {
-    ${props =>
+  @media ${mobile} {
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -16px;
@@ -52,7 +45,7 @@ const marginStyles = css`
 const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .user-row {
-      border-top: ${props =>
+      border-top: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
 
@@ -62,7 +55,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-wrapper:not(.row-selected) + .row-selected {
     .user-row {
-      border-top: ${props =>
+      border-top: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
 
@@ -78,7 +71,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-selected:last-child {
     .user-row {
-      border-bottom: ${props =>
+      border-bottom: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       padding-bottom: 1px;
 
@@ -90,7 +83,7 @@ const StyledRowContainer = styled(RowContainer)`
   }
   .row-selected:first-child {
     .user-row {
-      border-top: ${props =>
+      border-top: ${(props) =>
         `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
 
@@ -111,6 +104,7 @@ const PeopleRowContainer = ({
   hasMoreAccounts,
   filterTotal,
   withPaging,
+  currentDeviceType,
 }) => {
   useEffect(() => {
     const width = window.innerWidth;
@@ -120,18 +114,18 @@ const PeopleRowContainer = ({
       !sectionWidth
     )
       return;
-    // 400 - it is desktop info panel width
+
     if (
       (width < 1025 && !infoPanelVisible) ||
       ((width < 625 || (accountsViewAs === "row" && width < 1025)) &&
         infoPanelVisible) ||
-      isMobile
+      currentDeviceType !== DeviceType.desktop
     ) {
       accountsViewAs !== "row" && setViewAs("row");
     } else {
       accountsViewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer
@@ -141,7 +135,8 @@ const PeopleRowContainer = ({
       hasMoreFiles={hasMoreAccounts}
       itemCount={filterTotal}
       filesLength={peopleList.length}
-      itemHeight={58}>
+      itemHeight={58}
+    >
       {peopleList.map((item, index) => (
         <SimpleUserRow
           theme={theme}
@@ -164,7 +159,7 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     viewAs: accountsViewAs,
     setViewAs,
   } = peopleStore;
-  const { theme, withPaging } = auth.settingsStore;
+  const { theme, withPaging, currentDeviceType } = auth.settingsStore;
   const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
   const { filterTotal, isFiltered } = filterStore;
 
@@ -182,5 +177,6 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     hasMoreAccounts,
     filterTotal,
     isFiltered,
+    currentDeviceType,
   };
 })(observer(PeopleRowContainer));

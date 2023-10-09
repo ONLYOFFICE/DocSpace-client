@@ -90,6 +90,7 @@ const FilesSelector = ({
   socketHelper,
   socketSubscribersId,
   setMoveToPublicRoomVisible,
+  setInfoPanelIsMobileHidden
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -292,6 +293,7 @@ const FilesSelector = ({
   };
 
   const onCloseAction = () => {
+    setInfoPanelIsMobileHidden(false);
     if (onClose) {
       onClose();
 
@@ -592,6 +594,10 @@ export default inject(
       setMoveToPublicRoomVisible,
     } = dialogsStore;
 
+    const {
+      setIsMobileHidden: setInfoPanelIsMobileHidden,
+    } = auth.infoPanelStore;
+
     const { theme, socketHelper } = auth.settingsStore;
 
     const {
@@ -654,6 +660,7 @@ export default inject(
       setRestoreAllPanelVisible,
       setIsFolderActions,
       setSelectedItems,
+      setInfoPanelIsMobileHidden,
       includeFolder,
       socketHelper,
       socketSubscribersId,

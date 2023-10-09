@@ -10,7 +10,7 @@ const StyledLoader = styled.div`
     height: 29px;
     margin-bottom: 14px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 184px;
       height: 37px;
     }
@@ -30,7 +30,7 @@ const StyledLoader = styled.div`
     width: 591px;
     margin-bottom: 20px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 100%;
     }
   }
@@ -39,7 +39,7 @@ const StyledLoader = styled.div`
     width: 192px;
     height: 32px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       height: 40px;
     }
   }

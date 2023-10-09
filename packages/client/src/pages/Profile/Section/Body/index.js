@@ -14,7 +14,7 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
 
 const Wrapper = styled.div`
   display: flex;

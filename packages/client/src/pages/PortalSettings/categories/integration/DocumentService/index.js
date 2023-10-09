@@ -257,7 +257,7 @@ const DocumentService = ({
             onClick={onReset}
             className="button"
             size={"small"}
-            label={t("Settings:RestoreDefaultButton")}
+            label={t("Common:Restore")}
             isDisabled={isDefaultSettings || isSaveLoading || isResetLoading}
             isLoading={isResetLoading}
           />

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 
 import Avatar from "@docspace/components/avatar";
 import DropDownItem from "@docspace/components/drop-down-item";
@@ -15,16 +14,6 @@ import Button from "@docspace/components/button";
 const StyledDiv = styled.div`
   width: 32px;
   height: 32px;
-
-  ${isMobileOnly &&
-  css`
-    @media (min-width: 428px) {
-      .backdrop-active {
-        background-color: unset;
-        backdrop-filter: unset;
-      }
-    }
-  `}
 `;
 
 const StyledButtonWrapper = styled.div`

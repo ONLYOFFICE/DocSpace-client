@@ -10,6 +10,8 @@ import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/components/themes";
 import { useTranslation } from "react-i18next";
 
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 const BarWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -36,10 +38,10 @@ const BarItem = styled.div`
   padding: 16px;
   flex-basis: 25%;
 
-  @media (max-width: 1300px) {
+  @media ${tablet} {
     flex-basis: 50%;
   }
-  @media (max-width: 560px) {
+  @media ${mobile} {
     flex-basis: 100%;
   }
 `;

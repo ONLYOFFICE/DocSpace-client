@@ -3,16 +3,9 @@ import {
   commonSettingsStyles,
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
-import globalColors from "@docspace/components/utils/globalColors";
-import { isMobileOnly } from "react-device-detect";
-import {
-  hugeMobile,
-  tablet,
-  mobile,
-  smallTablet,
-} from "@docspace/components/utils/device";
 
-const linkColor = globalColors.black;
+import { isMobileOnly } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -133,7 +126,7 @@ const StyledManualBackup = styled.div`
       }
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       button:first-child {
         max-width: 155px;
       }
@@ -372,7 +365,7 @@ const StyledRestoreBackup = styled.div`
     margin: 16px 0;
     max-width: ${INPUT_LENGTH};
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       max-width: none;
     }
   }
@@ -386,7 +379,7 @@ const StyledRestoreBackup = styled.div`
     margin-bottom: 16px;
   }
   .restore-backup_button {
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
     }
   }

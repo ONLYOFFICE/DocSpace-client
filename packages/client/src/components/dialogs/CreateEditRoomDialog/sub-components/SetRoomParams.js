@@ -19,8 +19,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -38,31 +37,6 @@ const StyledSetRoomParams = styled.div`
     justify-content: start;
     gap: 16px;
   }
-
-  .room-owner-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 8px 0;
-  }
-
-  .owner-display-name-block {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .change-owner-link {
-    color: ${(props) => props.currentColorScheme.main.accent};
-  }
-
-  .me-label {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-`;
-
-const StyledIcon = styled.img`
-  ${NoUserSelect}
 `;
 
 const SetRoomParams = ({
@@ -79,9 +53,7 @@ const SetRoomParams = ({
   setIsValidTitle,
   onKeyUp,
   enableThirdParty,
-  currentColorScheme,
   setChangeRoomOwnerIsVisible,
-  userId,
   isAdmin,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
@@ -105,11 +77,10 @@ const SetRoomParams = ({
     );
   };
 
-  const isMe = userId === roomParams?.roomOwner?.id;
-  const canOwnerChange = isAdmin || isMe;
+  console.log(roomParams);
 
   return (
-    <StyledSetRoomParams currentColorScheme={currentColorScheme}>
+    <StyledSetRoomParams>
       {isEdit ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
@@ -149,6 +120,7 @@ const SetRoomParams = ({
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}
       />
+
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (
         <IsPrivateParam
@@ -158,38 +130,11 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {canOwnerChange && roomParams.roomOwner && (
-        <div>
-          <Text fontWeight={600} fontSize="13px">
-            {t("Files:RoomOwner")}
-          </Text>
-
-          <div className="room-owner-block">
-            <StyledIcon
-              className="react-svg-icon"
-              src={roomParams.roomOwner.avatarSmall}
-            />
-            <div className="owner-display-name-block">
-              <Text fontWeight={600} fontSize="13px">
-                {roomParams.roomOwner.displayName}
-              </Text>
-              {isMe && (
-                <Text className="me-label">({t("Common:MeLabel")})</Text>
-              )}
-            </div>
-          </div>
-
-          <Link
-            isHovered
-            type="action"
-            fontWeight={600}
-            fontSize="13px"
-            className="change-owner-link"
-            onClick={onOwnerChange}
-          >
-            {t("Common:ChangeButton")}
-          </Link>
-        </div>
+      {(isAdmin || isMe) && roomParams.roomOwner && (
+        <ChangeRoomOwner
+          roomOwner={roomParams.roomOwner}
+          onOwnerChange={onOwnerChange}
+        />
       )}
 
       {!isEdit && enableThirdParty && (
@@ -203,6 +148,7 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
         />
       )}
+
       <div>
         <Text fontWeight={600} className="icon-editor_text">
           {t("Icon")}
@@ -234,13 +180,10 @@ const SetRoomParams = ({
 };
 
 export default inject(({ auth, dialogsStore }) => {
-  const { currentColorScheme } = auth.settingsStore;
   const { user } = auth.userStore;
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   return {
-    currentColorScheme,
     setChangeRoomOwnerIsVisible,
-    userId: user.id,
     isAdmin: user.isAdmin || user.isOwner,
   };
 })(

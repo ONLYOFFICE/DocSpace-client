@@ -6,10 +6,9 @@ import { withTranslation } from "react-i18next";
 
 import { isArrayEqual } from "@docspace/components/utils/array";
 
-import { isMobileOnly } from "react-device-detect";
-
 import { isMobile } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/common/constants";
 
 import {
   //getKeyByLink,
@@ -115,6 +114,7 @@ const ArticleBodyContent = (props) => {
     standalone,
     isEnterprise,
     isCommunity,
+    currentDeviceType,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -207,7 +207,7 @@ const ArticleBodyContent = (props) => {
 
     setSelectedKeys([value + "-0"]);
 
-    if (isMobileOnly || isMobile()) {
+    if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
 
@@ -344,6 +344,7 @@ export default inject(({ auth, common }) => {
     isEnterprise,
     settingsStore,
     isCommunity,
+    currentDeviceType,
   } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
@@ -360,6 +361,7 @@ export default inject(({ auth, common }) => {
     isNotPaidPeriod,
     isOwner,
     isCommunity,
+    currentDeviceType,
   };
 })(
   withLoading(

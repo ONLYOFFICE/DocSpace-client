@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
-import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+import { isIOS, isFirefox } from "react-device-detect";
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
 export const Wrapper = styled.div`
@@ -11,12 +11,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   box-sizing: border-box;
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     height: auto;
     min-height: 100%;
     width: 100%;
-  `}
+  }
 
   .bg-cover {
     background-image: url("${BackgroundPatternReactSvgUrl}");
@@ -30,7 +29,7 @@ export const Wrapper = styled.div`
     bottom: 0;
     z-index: -1;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       background-image: none;
     }
   }
@@ -47,7 +46,7 @@ export const StyledContent = styled.div`
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     min-height: 100%;
   }
 `;
@@ -64,7 +63,7 @@ export const WizardContainer = styled.div`
     max-width: 480px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 32px auto;
   }
 
@@ -78,7 +77,7 @@ export const WizardContainer = styled.div`
   .welcome-text {
     padding-bottom: 32px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       max-width: 343px;
     }
   }
@@ -158,7 +157,7 @@ export const StyledInfo = styled.div`
       max-width: 300px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       max-width: 220px;
     }
   }

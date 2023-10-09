@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { isTablet as isTabletUtils } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+
+import { isDesktop } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding-right: 8px;
@@ -33,7 +33,7 @@ const StyledLoader = styled.div`
   }
 
   @media (min-width: 1024px) {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-right: 10px;
@@ -59,7 +59,7 @@ const LoaderArticleBody = () => {
   const [isTabletView, setIsTabletView] = useState(false);
 
   const checkInnerWidth = () => {
-    const isTabletView = window.innerWidth <= 1024 || isTablet;
+    const isTabletView = !isDesktop();
 
     if (isTabletView) {
       setIsTabletView(true);

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+
 import Base from "../themes/base";
 import { tablet } from "../utils/device";
 
@@ -138,7 +138,7 @@ const StyledDropdownItem = styled.div`
       break-before: column;
     `}
 
-    @media ${tablet} {
+  @media ${tablet} {
     line-height: ${(props) => props.theme.dropDownItem.tabletLineHeight};
     padding: ${(props) => props.theme.dropDownItem.tabletPadding};
   }
@@ -175,9 +175,7 @@ const StyledDropdownItem = styled.div`
       `}
   }
 
-  @media (max-width: 500px) {
-    max-width: 100vw;
-  }
+  max-width: 100%;
 `;
 StyledDropdownItem.defaultProps = { theme: Base };
 

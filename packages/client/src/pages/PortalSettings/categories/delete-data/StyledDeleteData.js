@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { smallTablet, mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const DeleteDataLayout = styled.div`
   width: 100%;
@@ -38,14 +38,14 @@ export const ButtonWrapper = styled.div`
     margin-left: 4px;
   }
 
-  @media (${smallTablet}) {
+  @media ${mobile} {
     flex-direction: column-reverse;
     gap: 16px;
     position: absolute;
     bottom: 16px;
     width: calc(100% - 40px);
 
-    @media (${mobile}) {
+    @media ${mobile} {
       width: calc(100% - 32px);
     }
 

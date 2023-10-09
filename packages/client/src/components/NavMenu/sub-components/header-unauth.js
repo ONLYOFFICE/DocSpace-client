@@ -4,9 +4,8 @@ import styled from "styled-components";
 import Box from "@docspace/components/box";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
 import { Base } from "@docspace/components/themes";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const Header = styled.header`
   align-items: left;
@@ -19,10 +18,8 @@ const Header = styled.header`
   .header-items-wrapper {
     width: 960px;
 
-    @media (max-width: 768px) {
+    @media ${mobile} {
       width: 475px;
-    }
-    @media ${hugeMobile} {
       display: flex;
       align-items: center;
       justify-content: center;

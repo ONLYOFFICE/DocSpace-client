@@ -1,12 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
-import {
-  mobile,
-  tablet,
-  isMobile as isMobileUtils,
-  hugeMobile,
-} from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 import { Base } from "@docspace/components/themes";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
@@ -25,8 +19,6 @@ const StyledArticle = styled.article`
 
   user-select: none;
 
-  //padding: 0 20px;
-
   ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? `border-left: ${theme.catalog.verticalLine};`
@@ -38,19 +30,7 @@ const StyledArticle = styled.article`
 
     height: ${(props) =>
       props.correctTabletHeight ? `${props.correctTabletHeight}px` : `100%`};
-
-    //padding: 0 8px;
   }
-
-  ${isTablet &&
-  css`
-    min-width: ${(props) => (props.showText ? "243px" : "60px")};
-    max-width: ${(props) => (props.showText ? "243px" : "60px")};
-    //padding: 0 8px;
-
-    height: ${(props) =>
-      props.correctTabletHeight ? `${props.correctTabletHeight}px` : `100%`};
-  `}
 
   @media ${mobile} {
     display: ${(props) => (props.articleOpen ? "flex" : "none")};
@@ -60,83 +40,38 @@ const StyledArticle = styled.article`
     position: fixed;
     margin: 0;
 
+    border: none;
+
     height: calc(100% - 64px) !important;
 
-    margin-top: 16px;
-    //padding: 0 8px;
+    position: absolute;
+    top: 64px;
   }
 
-  ${isMobileOnly &&
-  css`
-    display: ${(props) => (props.articleOpen ? "flex" : "none")} !important;
-    flex-direction: column;
-
-    min-width: 100% !important;
-    width: 100%;
-    position: fixed;
-    margin: 0;
-    padding: 0;
-    top: 64px;
-    height: calc(100% - 64px) !important;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `border-left: none;`
-        : `border-right: none;`}
-  `}
-
-  z-index: ${(props) =>
-    props.showText && (isMobileOnly || isMobileUtils()) ? "230" : "205"};
+  z-index: ${(props) => (props.showText && props.isMobile ? "230" : "205")};
 
   .article-body__scrollbar {
     height: ${(props) =>
       `calc(100% - ${props.$withMainButton ? "190px" : "150px"})`} !important;
 
-    ${!isMobileOnly &&
-    css`
-      @media ${tablet} {
-        height: calc(100% - 126px) !important;
-      }
-    `}
+    @media ${tablet} {
+      height: calc(100% - 184px) !important;
+    }
 
     @media ${mobile} {
       height: 100% !important;
       margin-top: 32px;
     }
 
-    @media ${hugeMobile} {
-      height: 100% !important;
-    }
-
-    ${isTablet &&
-    css`
-      height: calc(100% - 126px) !important;
-    `}
-
-    ${isMobileOnly &&
-    css`
-      height: 100% !important;
-      margin-top: 32px !important;
-    `}
-
     .article-scroller {
       @media ${tablet} {
-        height: calc(100% - 60px);
+        height: 100%;
+        height: 100% !important;
       }
-
-      ${isTablet &&
-      css`
-        height: calc(100% - 60px);
-      `}
 
       @media ${mobile} {
         height: 100%;
       }
-
-      ${isMobileOnly &&
-      css`
-        height: 100%;
-      `}
     }
 
     .scroll-body {
@@ -152,21 +87,10 @@ const StyledArticle = styled.article`
         padding: 0 8px !important;
       }
 
-      ${isTablet &&
-      css`
-        padding: 0 8px !important;
-      `}
-
       @media ${mobile} {
         display: block;
         padding-bottom: 20px;
       }
-
-      ${isMobileOnly &&
-      css`
-        display: block;
-        padding-bottom: 20px;
-      `}
     }
   }
 `;
@@ -193,29 +117,10 @@ const StyledArticleHeader = styled.div`
     box-sizing: border-box;
   }
 
-  ${isTablet &&
-  css`
-    padding: 18px 8px 19px;
-    margin: 0;
-    justify-content: ${(props) => (props.showText ? "flex-start" : "center")};
-
-    height: 61px;
-    min-height: 61px;
-    max-height: 61px;
-    box-sizing: border-box;
-  `}
-
   @media ${mobile} {
     border-bottom: ${(props) => props.theme.catalog.header.borderBottom};
     padding: 12px 0 12px;
   }
-
-  ${isMobileOnly &&
-  css`
-    border-bottom: ${(props) =>
-      props.theme.catalog.header.borderBottom} !important;
-    padding: 12px 0 12px !important;
-  `}
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
@@ -250,29 +155,12 @@ const StyledHeading = styled.div`
         : `margin-left: 9px;`}
   }
 
-  ${isTablet &&
-  css`
-    display: ${(props) => (props.showText ? "block" : "none")};
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 9px !important;`
-        : `margin-left: 9px !important`}
-  `}
-
   @media ${mobile} {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `margin-right: 0;`
         : `margin-left: 0;`}
   }
-
-  ${isMobileOnly &&
-  css`
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 0 !important;`
-        : `margin-left: 0 !important;`}
-  `}
 `;
 
 const StyledIconBox = styled.div`
@@ -289,19 +177,9 @@ const StyledIconBox = styled.div`
     display: ${(props) => (props.showText ? "none" : "flex")};
   }
 
-  ${isTablet &&
-  css`
-    display: ${(props) => (props.showText ? "none" : "flex")};
-  `}
-
   @media ${mobile} {
     display: none;
   }
-
-  ${isMobileOnly &&
-  css`
-    display: none !important;
-  `}
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`
@@ -326,12 +204,6 @@ const StyledArticleMainButton = styled.div`
     padding: 0;
     margin: 0;
   }
-
-  ${isMobile &&
-  css`
-    padding: 0;
-    margin: 0;
-  `}
 `;
 
 const StyledControlContainer = styled.div`
@@ -380,11 +252,6 @@ const StyledArticleProfile = styled.div`
   @media ${tablet} {
     padding: 16px 14px;
   }
-
-  ${isTablet &&
-  css`
-    padding: 16px 14px;
-  `}
 
   .profile-avatar {
     cursor: pointer;
@@ -449,12 +316,6 @@ const StyledProfileWrapper = styled.div`
     min-width: ${(props) => (props.showText ? "243px" : "60px")};
     max-width: ${(props) => (props.showText ? "243px" : "60px")};
   }
-
-  ${isTablet &&
-  css`
-    min-width: ${(props) => (props.showText ? "243px" : "60px")};
-    max-width: ${(props) => (props.showText ? "243px" : "60px")};
-  `}
 `;
 
 const StyledArticleAlertsComponent = styled.div`

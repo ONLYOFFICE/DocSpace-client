@@ -1,13 +1,12 @@
 import { size } from "../../utils/device";
+import { isMobile } from "react-device-detect";
 
 const getCurrentSizeName = () => {
   const innerWidth = window.innerWidth;
   return innerWidth > size.tablet
     ? "desktop"
-    : innerWidth <= size.tablet && innerWidth > size.smallTablet
+    : !isMobile && innerWidth <= size.tablet && innerWidth > size.mobile
     ? "tablet"
-    : innerWidth <= size.smallTablet && innerWidth > size.mobile
-    ? "smallTablet"
     : "mobile";
 };
 

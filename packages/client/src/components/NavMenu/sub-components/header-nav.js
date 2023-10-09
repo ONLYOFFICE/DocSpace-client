@@ -5,7 +5,7 @@ import ProfileActions from "./profile-actions";
 import { useTranslation } from "react-i18next";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledNav = styled.nav`
@@ -36,24 +36,6 @@ const StyledNav = styled.nav`
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
-
-  ${isMobile &&
-  css`
-    padding: 0 16px 0 16px !important;
-  `}
-
-  @media ${mobile} {
-    padding: 0 16px 0 16px;
-  }
-
-  ${isMobileOnly &&
-  css`
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle(
-        "0 0 0 16px",
-        theme.interfaceDirection
-      )} !important;
-  `}
 `;
 const HeaderNav = ({
   user,

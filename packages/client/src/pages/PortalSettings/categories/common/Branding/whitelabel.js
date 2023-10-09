@@ -490,6 +490,7 @@ const WhiteLabel = (props) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
+        hasScroll={true}
         showReminder={isSettingPaid}
         saveButtonDisabled={isEqualLogo && isEqualText}
         isSaving={isSaving}

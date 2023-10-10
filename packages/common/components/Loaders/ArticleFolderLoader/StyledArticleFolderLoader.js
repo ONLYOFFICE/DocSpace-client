@@ -7,7 +7,7 @@ import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 const StyledContainer = styled.div`
   margin: 0;
 
-  max-width: 211px;
+  max-width: 210px;
   padding: ${({ theme }) =>
     getCorrectFourValuesStyle("0 20px 0 0", theme.interfaceDirection)};
 
@@ -48,7 +48,7 @@ const StyledBlock = styled.div`
 
 const StyledRectangleLoader = styled(RectangleLoader)`
   height: 20px;
-  width: 216px;
+  width: 210px;
   padding: 0 0 16px;
 
   @media ${tablet} {

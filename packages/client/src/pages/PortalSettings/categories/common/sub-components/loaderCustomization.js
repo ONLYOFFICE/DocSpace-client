@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
+import { desktop, mobileMore } from "@docspace/components/utils/device";
 
 const tabletStyles = css`
   .header {
@@ -134,11 +135,11 @@ const StyledLoader = styled.div`
     height: 32px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     ${tabletStyles}
   }
 
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     .save-cancel-buttons {
       width: ${(props) => (props.welcomePage ? "264px" : "192px")};
     }

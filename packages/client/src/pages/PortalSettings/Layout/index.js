@@ -54,7 +54,11 @@ const Layout = ({
     <>
       <ArticleSettings />
       {!isGeneralPage && (
-        <Section withBodyScroll={true} settingsStudio={true}>
+        <Section
+          viewAs={"settings"}
+          withBodyScroll={true}
+          settingsStudio={true}
+        >
           <Section.SectionHeader>
             {currentPath === webhookHistoryPath ? (
               <HistoryHeader />

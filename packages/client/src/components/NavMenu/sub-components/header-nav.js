@@ -30,7 +30,8 @@ const StyledNav = styled.nav`
   }
 
   @media ${tablet} {
-    padding: 0 16px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle("0 0 0 16px", theme.interfaceDirection)};
   }
   .icon-profile-menu {
     cursor: pointer;

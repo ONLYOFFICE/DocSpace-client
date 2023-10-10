@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet, size } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Base from "@docspace/components/themes/base";
 
 const StyledTile = styled.div`
@@ -13,7 +13,7 @@ const StyledTile = styled.div`
     }
   }
 
-  @media (min-width: ${size.mobile}px) and ${tablet} {
+  @media ${tablet} {
     &:nth-of-type(n + 8) {
       display: none;
     }

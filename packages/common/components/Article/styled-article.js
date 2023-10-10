@@ -298,7 +298,7 @@ const StyledUserName = styled.div`
 
 const StyledProfileWrapper = styled.div`
   z-index: 209;
-  position: absolute;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   bottom: 0;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"

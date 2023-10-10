@@ -523,7 +523,9 @@ const StyledBackup = styled.div`
 
     @media ${mobile} {
       ${(props) =>
-        props.isConnectedAccount
+        !props.isMobileScale
+          ? ""
+          : props.isConnectedAccount
           ? "grid-template-columns:minmax(100px,  1fr) 32px"
           : "grid-template-columns:minmax(100px,  1fr)"};
     }

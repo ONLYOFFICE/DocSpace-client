@@ -23,6 +23,7 @@ const ThirdPartyResources = (props) => {
         descriptionText={t("SelectFileInGZFormat")}
         withoutInitPath
         buttonSize={buttonSize}
+        isMobileScale
       />
     </div>
   );

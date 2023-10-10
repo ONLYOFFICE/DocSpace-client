@@ -48,6 +48,7 @@ const DirectThirdPartyConnection = (props) => {
     onSelectFile,
     filterParam,
     descriptionText,
+    isMobileScale,
   } = props;
 
   const { t } = useTranslation("Translations");
@@ -266,12 +267,12 @@ const DirectThirdPartyConnection = (props) => {
 
   const isDisabledSelector = isLoading || isDisabled;
 
-  console.log("folderList", folderList, selectedThirdPartyAccount);
   return (
     <StyledBackup
       isConnectedAccount={
         connectedThirdPartyAccount && isTheSameThirdPartyAccount
       }
+      isMobileScale={isMobileScale}
     >
       <div className="backup_connection">
         <ComboBox
@@ -323,12 +324,7 @@ const DirectThirdPartyConnection = (props) => {
               id={id ? id : folderList.id}
               withoutInitPath={withoutInitPath}
               isError={isError}
-              isDisabled={
-                isLoading ||
-                accounts.length === 0 ||
-                folderList.length === 0 ||
-                isDisabled
-              }
+              isDisabled={isDisabledSelector}
               isThirdParty
             />
           )}

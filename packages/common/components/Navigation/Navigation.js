@@ -251,7 +251,7 @@ const Navigation = ({
               isTrashFolder={isTrashFolder}
             />
           </StyledContainer>
-          {isTrashFolder && !isEmptyPage && (
+          {isDesktop && isTrashFolder && !isEmptyPage && (
             <TrashWarning
               title={titles.trashWarning}
               isTabletView={isTabletView}

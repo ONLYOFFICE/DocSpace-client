@@ -132,10 +132,6 @@ const WelcomePageSettings = (props) => {
       setState((val) => ({ ...val, hasScroll: scrollLngTZSettings }));
     }
 
-    if (greetingSettings !== prevProps.greetingSettings) {
-      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
-    }
-
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
     }
@@ -153,7 +149,6 @@ const WelcomePageSettings = (props) => {
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    greetingSettings,
     getSettings,
     getGreetingSettingsIsDefault,
     state.hasScroll,
@@ -161,6 +156,19 @@ const WelcomePageSettings = (props) => {
     state.isLoadingGreetingSave,
     state.isLoadingGreetingRestore,
   ]);
+
+  React.useEffect(() => {
+    greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
+    const emptyGreetingTitleFromSessionStorage =
+      greetingTitleFromSessionStorage === null ||
+      greetingTitleFromSessionStorage === "none";
+
+    if (!emptyGreetingTitleFromSessionStorage) return;
+
+    if (greetingSettings !== state.greetingTitle) {
+      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
+    }
+  }, [greetingSettings]);
 
   React.useEffect(() => {
     prevProps.current = { isLoaded, tReady, greetingSettings };
@@ -214,8 +222,6 @@ const WelcomePageSettings = (props) => {
       .then(() => {
         setState((val) => ({
           ...val,
-          greetingTitle: greetingSettings,
-          greetingTitleDefault: greetingSettings,
           showReminder: false,
         }));
 

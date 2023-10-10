@@ -38,6 +38,10 @@ const MainContainer = styled.div`
   .save-cancel {
     padding: 0;
     position: static;
+
+    .buttons-flex {
+      padding: 0;
+    }
   }
 
   .login-subheader {
@@ -47,7 +51,7 @@ const MainContainer = styled.div`
 
   .latest-text {
     font-size: 13px;
-    padding: 20px 0;
+    padding: 24px 0;
   }
 
   .storage-label {

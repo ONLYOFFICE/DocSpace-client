@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { mobileMore, desktop } from "../utils/device";
-import { isMobileOnly, isTablet } from "react-device-detect";
+import { mobileMore, mobile } from "../utils/device";
 
 const displaySettings = css`
   position: absolute;
@@ -12,13 +11,6 @@ const displaySettings = css`
     props.hasScroll && !props.showReminder ? "1px solid #ECEEF1" : "none"};
 
   ${(props) =>
-    !props.hasScroll &&
-    !isMobileOnly &&
-    (props.theme.interfaceDirection === "rtl"
-      ? "padding-right: 24px;"
-      : "padding-left: 24px;")}
-
-  ${(props) =>
     props.hasScroll &&
     css`
       bottom: auto;
@@ -27,15 +19,13 @@ const displaySettings = css`
   .buttons-flex {
     display: flex;
     width: 100%;
-  }
 
-  .save-button,
-  .cancel-button {
-    width: 100%;
-    height: auto;
-    line-height: 16px;
-    padding-top: 11px;
-    padding-bottom: 11px;
+    box-sizing: border-box;
+
+    @media ${mobile} {
+      padding: 16px;
+      bottom: 0;
+    }
   }
 
   .unsaved-changes {
@@ -50,6 +40,17 @@ const displaySettings = css`
       props.hasScroll
         ? props.theme.mainButtonMobile.buttonWrapper.background
         : "none"};
+
+    @media ${mobile} {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 16px;
+            `
+          : css`
+              padding-left: 16px;
+            `}
+    }
   }
 
   ${(props) =>
@@ -80,18 +81,11 @@ const tabletButtons = css`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 0;
+
   border-top: none;
 
   .buttons-flex {
     width: auto;
-  }
-
-  .save-button,
-  .cancel-button {
-    width: auto;
-    padding-left: 28px;
-    padding-right: 28px;
   }
 
   .unsaved-changes {
@@ -121,9 +115,6 @@ const StyledSaveCancelButtons = styled.div`
       ? `right: ${props.theme.saveCancelButtons.left};`
       : `left: ${props.theme.saveCancelButtons.left};`}
 
-  padding: ${(props) =>
-    props.displaySettings ? "16px" : props.theme.saveCancelButtons.padding};
-
   .save-button {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -148,21 +139,6 @@ const StyledSaveCancelButtons = styled.div`
           display: none;
         }
   `}
-  }
-
-  @media ${desktop} {
-    ${(props) =>
-      props.displaySettings &&
-      !isTablet &&
-      `
-      .save-button, .cancel-button {
-        font-size: 13px;
-        line-height: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-      }
-
-    `}
   }
 `;
 StyledSaveCancelButtons.defaultProps = { theme: Base };

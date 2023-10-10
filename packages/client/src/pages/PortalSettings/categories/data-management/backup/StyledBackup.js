@@ -63,12 +63,20 @@ const commonStyles = css`
       width: 100%;
       max-width: ${INPUT_LENGTH};
     }
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
   }
   .backup_text-input {
     margin: 4px 0 10px 0;
     width: 100%;
     max-width: ${INPUT_LENGTH};
     font-size: 13px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
   }
   .backup_checkbox {
     margin-top: 8px;
@@ -512,6 +520,15 @@ const StyledBackup = styled.div`
         ? "grid-template-columns:minmax(100px,  310px) 32px"
         : "grid-template-columns:minmax(100px,  350px) 32px"};
     grid-gap: 8px;
+
+    @media ${mobile} {
+      ${(props) =>
+        !props.isMobileScale
+          ? ""
+          : props.isConnectedAccount
+          ? "grid-template-columns:minmax(100px,  1fr) 32px"
+          : "grid-template-columns:minmax(100px,  1fr)"};
+    }
   }
 
   .backup_modules-separation {

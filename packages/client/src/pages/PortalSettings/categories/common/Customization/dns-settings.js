@@ -19,6 +19,7 @@ import toastr from "@docspace/components/toast/toastr";
 import ToggleButton from "@docspace/components/toggle-button";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const toggleStyle = {
   position: "static",
@@ -35,7 +36,6 @@ const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
   primary: true,
-  size: "small",
 };
 let timerId = null;
 const DNSSettings = (props) => {
@@ -59,6 +59,7 @@ const DNSSettings = (props) => {
     enable,
     isDefaultDNS,
     dnsSettingsUrl,
+    currentDeviceType,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -190,6 +191,7 @@ const DNSSettings = (props) => {
   const buttonContainer = standalone ? (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SaveButton")}
       onClick={onSaveSettings}
       isDisabled={isLoading || isDefaultDNS}
@@ -198,6 +200,7 @@ const DNSSettings = (props) => {
   ) : (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SendRequest")}
       onClick={onSendRequest}
       isDisabled={!isSettingPaid}
@@ -247,8 +250,13 @@ const DNSSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { helpLink, currentColorScheme, standalone, dnsSettingsUrl } =
-    auth.settingsStore;
+  const {
+    helpLink,
+    currentColorScheme,
+    standalone,
+    dnsSettingsUrl,
+    currentDeviceType,
+  } = auth.settingsStore;
   const {
     isLoaded,
     setIsLoadedDNSSettings,
@@ -281,5 +289,6 @@ export default inject(({ auth, common }) => {
     setIsEnableDNS,
     saveDNSSettings,
     dnsSettingsUrl,
+    currentDeviceType,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

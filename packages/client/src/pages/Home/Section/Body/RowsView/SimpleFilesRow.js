@@ -187,10 +187,6 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .copy-link {
-    svg path {
-      fill: unset;
-    }
-
     :hover {
       svg path {
         fill: ${({ theme }) => theme.filesQuickButtons.sharedColor};

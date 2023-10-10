@@ -459,10 +459,6 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .copy-link {
-    svg path {
-      fill: unset;
-    }
-
     :hover {
       svg path {
         fill: ${({ theme }) => theme.filesQuickButtons.sharedColor};

@@ -78,11 +78,8 @@ const StyledSettingsComponent = styled.div`
     padding-bottom: 12px;
   }
 
-  .send-request-button {
-    height: 40px;
-  }
-
   .combo-box-settings {
+    padding: 0px;
     .combo-button {
       justify-content: space-between !important;
     }
@@ -173,12 +170,6 @@ const StyledSettingsComponent = styled.div`
 
     .settings-block-description {
       display: none;
-    }
-  }
-
-  @media ${desktop} {
-    .send-request-button {
-      height: 32px;
     }
   }
 

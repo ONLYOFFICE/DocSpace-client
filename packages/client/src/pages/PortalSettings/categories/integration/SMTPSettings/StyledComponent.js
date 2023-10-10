@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 import { mobile } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
+  max-width: 700px;
+
   .smtp-settings_description {
     margin-bottom: 20px;
     max-width: 700px;
@@ -44,6 +46,10 @@ const StyledComponent = styled.div`
     margin-top: 4px;
     max-width: 350px;
 
+    @media ${mobile} {
+      max-width: 100%;
+    }
+
     .field-label-icon {
       display: none;
     }
@@ -62,12 +68,13 @@ const StyledComponent = styled.div`
 
 const ButtonStyledComponent = styled.div`
   margin-top: 20px;
-  max-width: 404px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+
+  display: flex;
   gap: 8px;
 
   @media ${mobile} {
+    display: grid;
+    gap: 8px;
     grid-template-columns: 1fr;
   }
 `;

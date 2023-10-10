@@ -24,7 +24,6 @@ const StyledWrapper = styled.div`
     min-height: 100%;
     width: 100%;
     min-width: 100%;
-    margin-top: 32px;
   }
 `;
 

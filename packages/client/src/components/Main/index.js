@@ -88,8 +88,9 @@ const Main = (props) => {
         }
       }
 
+      // 48 - its nav menu with burger, logo and user avatar
       if (isMobileUtils()) {
-        correctHeight -= 64;
+        correctHeight -= 48;
       }
 
       setMainHeight(correctHeight);

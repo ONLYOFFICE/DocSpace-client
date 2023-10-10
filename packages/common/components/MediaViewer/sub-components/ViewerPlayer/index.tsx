@@ -598,12 +598,14 @@ function ViewerPlayer({
               <img src={audioIcon} />
             </div>
           )}
+          <ViewerLoader
+            isError={isError}
+            onClick={handleClickVideo}
+            withBackground={isWaiting && isPlaying}
+            isLoading={isLoading || (isWaiting && isPlaying)}
+          />
         </VideoWrapper>
-
-        <ViewerLoader
-          isLoading={isLoading || (isWaiting && isPlaying)}
-          isError={isError}
-        />
+        <ViewerLoader isError={isError} isLoading={isLoading} />
       </ContainerPlayer>
       {isError ? (
         <PlayerMessageError

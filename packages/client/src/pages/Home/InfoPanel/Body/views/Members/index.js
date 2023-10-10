@@ -88,7 +88,7 @@ const Members = ({
     });
 
     let hasPrevAdminsTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.administrators, "administration")
         : false;
 
@@ -101,7 +101,7 @@ const Members = ({
     }
 
     let hasPrevUsersTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.users, "user")
         : false;
 
@@ -110,7 +110,7 @@ const Members = ({
     }
 
     let hasPrevExpectedTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.expected, "expected")
         : false;
 
@@ -191,6 +191,7 @@ const Members = ({
     const { users, administrators, expected } = fetchedMembers;
 
     const newMembers = {
+      roomId: roomId,
       administrators: [...members.administrators, ...administrators],
       users: [...members.users, ...users],
       expected: [...members.expected, ...expected],

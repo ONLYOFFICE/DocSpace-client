@@ -314,6 +314,7 @@ const DirectThirdPartyConnection = (props) => {
         <>
           {folderList.id && (
             <FilesSelectorInput
+              className={"restore-backup_input"}
               descriptionText={descriptionText}
               filterParam={filterParam}
               rootThirdPartyId={selectedThirdPartyAccount.id}

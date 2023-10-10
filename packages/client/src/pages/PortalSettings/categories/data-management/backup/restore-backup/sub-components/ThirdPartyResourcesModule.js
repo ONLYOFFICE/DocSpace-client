@@ -17,6 +17,7 @@ const ThirdPartyResources = (props) => {
   return (
     <div className="restore-backup_third-party-module">
       <DirectThirdPartyConnection
+        className="restore-backup_input"
         onSelectFile={onSelectFile}
         filterParam={FilesSelectorFilterTypes.GZ}
         descriptionText={t("SelectFileInGZFormat")}

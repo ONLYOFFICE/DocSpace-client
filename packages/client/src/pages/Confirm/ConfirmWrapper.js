@@ -4,6 +4,7 @@ import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/common/utils";
 import { mobile } from "@docspace/components/utils/device";
+import Scrollbar from "@docspace/components/scrollbar";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>
@@ -49,8 +50,10 @@ const ConfirmWrapper = (props) => {
 
   return (
     <StyledWrapper height={height}>
-      <BgBlock bgPattern={bgPattern} />
-      {children}
+      <Scrollbar>
+        <BgBlock bgPattern={bgPattern} />
+        {children}
+      </Scrollbar>
     </StyledWrapper>
   );
 };

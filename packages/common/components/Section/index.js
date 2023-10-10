@@ -14,6 +14,7 @@ import InfoPanel from "./sub-components/info-panel";
 import SubInfoPanelBody from "./sub-components/info-panel-body";
 import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
+import SectionWarning from "./sub-components/section-warning";
 
 import FloatingButton from "@docspace/components/floating-button";
 import { DeviceType } from "../../constants";
@@ -64,6 +65,7 @@ const Section = (props) => {
   let sectionFooterContent = null;
   let infoPanelBodyContent = null;
   let infoPanelHeaderContent = null;
+  let sectionWarningContent = null;
 
   React.Children.forEach(children, (child) => {
     const childType =
@@ -91,6 +93,8 @@ const Section = (props) => {
       case Section.InfoPanelHeader.displayName:
         infoPanelHeaderContent = child;
         break;
+      case Section.SectionWarning.displayName:
+        sectionWarningContent = child;
       default:
         break;
     }
@@ -217,6 +221,13 @@ const Section = (props) => {
                           : null}
                       </SubSectionHeader>
                     )}
+                  {currentDeviceType !== DeviceType.desktop && (
+                    <SectionWarning>
+                      {sectionWarningContent
+                        ? sectionWarningContent.props.children
+                        : null}
+                    </SectionWarning>
+                  )}
                   {isSectionFilterAvailable &&
                     currentDeviceType !== DeviceType.desktop && (
                       <SubSectionFilter className="section-body_filter">
@@ -341,6 +352,11 @@ Section.InfoPanelHeader = () => {
   return null;
 };
 Section.InfoPanelHeader.displayName = "InfoPanelHeader";
+
+Section.SectionWarning = () => {
+  return null;
+};
+Section.SectionWarning.displayName = "SectionWarning";
 
 Section.propTypes = {
   children: PropTypes.any,

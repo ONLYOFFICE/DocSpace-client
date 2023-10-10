@@ -464,7 +464,7 @@ const FilesSelector = ({
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={210}
+        zIndex={309}
         onClick={onCloseAction}
       />
       <Aside
@@ -544,7 +544,7 @@ const FilesSelector = ({
   );
 
   return currentDeviceType === DeviceType.mobile ? (
-    <Portal visible={isPanelVisible} element={selectorComponent} />
+    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent
   );

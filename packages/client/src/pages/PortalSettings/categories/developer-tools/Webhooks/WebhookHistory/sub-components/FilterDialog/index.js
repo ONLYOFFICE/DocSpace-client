@@ -15,6 +15,12 @@ import { useTranslation } from "react-i18next";
 
 import { Base } from "@docspace/components/themes";
 
+const ModalDialogContainer = styled(ModalDialog)`
+  .modal-body {
+    overflow-y: auto;
+  }
+`;
+
 const DialogBodyWrapper = styled.div`
   margin-top: -4px;
 `;
@@ -118,7 +124,7 @@ const FilterDialog = (props) => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialog withFooterBorder visible={visible} onClose={closeModal} displayType="aside">
+    <ModalDialogContainer withFooterBorder visible={visible} onClose={closeModal} displayType="aside">
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>
@@ -152,7 +158,7 @@ const FilterDialog = (props) => {
           </Footer>
         </ModalDialog.Footer>
       )}
-    </ModalDialog>
+    </ModalDialogContainer>
   );
 };
 

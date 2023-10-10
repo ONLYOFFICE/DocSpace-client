@@ -8,6 +8,12 @@ import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
 
+const ModalDialogContainer = styled(ModalDialog)`
+  .modal-body {
+    overflow-y: auto;
+  }
+`;
+
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
 
@@ -138,7 +144,11 @@ const WebhookDialog = (props) => {
   const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
-    <ModalDialog withFooterBorder visible={visible} onClose={onModalClose} displayType="aside">
+    <ModalDialogContainer
+      withFooterBorder
+      visible={visible}
+      onClose={onModalClose}
+      displayType="aside">
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
@@ -198,7 +208,7 @@ const WebhookDialog = (props) => {
           />
         </Footer>
       </ModalDialog.Footer>
-    </ModalDialog>
+    </ModalDialogContainer>
   );
 };
 

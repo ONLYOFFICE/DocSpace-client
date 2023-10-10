@@ -91,7 +91,7 @@ const MembersList = (props) => {
 
   const { interfaceDirection } = useTheme();
 
-  const itemsCount = hasNextPage ? members.length + 1 : members.length;
+  const itemsCount = members.length;
 
   const canInviteUserInRoomAbility = security?.EditAccess;
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);

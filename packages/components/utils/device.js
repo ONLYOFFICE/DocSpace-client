@@ -12,7 +12,7 @@ export const mobile = `(max-width: ${size.mobile}px)`;
 
 export const mobileMore = `(min-width: ${size.mobile}px)`;
 
-export const tablet = `(min-width: ${size.mobile}px) and (max-width: ${size.desktop}px)`;
+export const tablet = `(max-width: ${size.desktop - 1}px)`;
 
 export const desktop = `(min-width: ${size.desktop}px)`;
 
@@ -24,7 +24,7 @@ export const isMobile = () => {
 
 export const isTablet = (width = undefined) => {
   const checkWidth = width || window.innerWidth;
-  return checkWidth > size.mobile && checkWidth <= size.desktop;
+  return checkWidth > size.mobile && checkWidth <= size.desktop - 1;
 };
 
 export const isDesktop = () => {

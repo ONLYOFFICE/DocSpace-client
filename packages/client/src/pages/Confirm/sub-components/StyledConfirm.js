@@ -17,7 +17,7 @@ export const StyledPage = styled.div`
   @media ${mobile} {
     width: 100%;
     padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 8px 0 16px", theme.interfaceDirection)};
+      getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
   }
 
   .subtitle {

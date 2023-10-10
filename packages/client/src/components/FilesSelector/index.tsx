@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/common/constants";
 
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
+import Portal from "@docspace/components/portal";
 // @ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
@@ -90,7 +92,8 @@ const FilesSelector = ({
   socketHelper,
   socketSubscribersId,
   setMoveToPublicRoomVisible,
-  setInfoPanelIsMobileHidden
+  setInfoPanelIsMobileHidden,
+  currentDeviceType,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -455,13 +458,13 @@ const FilesSelector = ({
     includeFolder
   );
 
-  return (
+  const selectorComponent = (
     <>
       <Backdrop
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={210}
+        zIndex={309}
         onClick={onCloseAction}
       />
       <Aside
@@ -539,6 +542,12 @@ const FilesSelector = ({
       </Aside>
     </>
   );
+
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
+  ) : (
+    selectorComponent
+  );
 };
 
 export default inject(
@@ -594,11 +603,10 @@ export default inject(
       setMoveToPublicRoomVisible,
     } = dialogsStore;
 
-    const {
-      setIsMobileHidden: setInfoPanelIsMobileHidden,
-    } = auth.infoPanelStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
+      auth.infoPanelStore;
 
-    const { theme, socketHelper } = auth.settingsStore;
+    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
 
     const {
       selection,
@@ -665,6 +673,7 @@ export default inject(
       socketHelper,
       socketSubscribersId,
       setMoveToPublicRoomVisible,
+      currentDeviceType,
     };
   }
 )(observer(FilesSelector));

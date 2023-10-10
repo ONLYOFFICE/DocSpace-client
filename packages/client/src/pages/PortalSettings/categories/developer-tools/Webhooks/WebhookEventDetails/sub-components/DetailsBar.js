@@ -16,7 +16,6 @@ const BarWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
   margin-top: 24px;
@@ -34,7 +33,7 @@ BarWrapper.defaultProps = { theme: Base };
 
 const BarItem = styled.div`
   box-sizing: border-box;
-  height: 76px;
+  min-height: 76px;
   padding: 16px;
   flex-basis: 25%;
 
@@ -47,13 +46,7 @@ const BarItem = styled.div`
 `;
 
 const BarItemHeader = ({ children }) => (
-  <Text
-    as="h3"
-    color="#A3A9AE"
-    fontSize="12px"
-    fontWeight={600}
-    className="barItemHeader"
-  >
+  <Text as="h3" color="#A3A9AE" fontSize="12px" fontWeight={600} className="barItemHeader">
     {children}
   </Text>
 );
@@ -68,9 +61,7 @@ const DetailsBar = ({ eventDetails }) => {
 
   const formatDate = (date) => {
     return (
-      moment(date).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") +
-      " " +
-      t("Common:UTC")
+      moment(date).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") + " " + t("Common:UTC")
     );
   };
 

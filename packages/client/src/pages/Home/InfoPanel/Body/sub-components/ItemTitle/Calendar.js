@@ -2,8 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Calendar from "@docspace/components/calendar";
+import Portal from "@docspace/components/portal";
 
-const StyledCalendar = styled.div`
+const StyledCalendarComponent = styled.div`
   position: relative;
 
   .calendar {
@@ -17,6 +18,12 @@ const StyledCalendar = styled.div`
         inset-inline-start: 0;
       `} */
   }
+`;
+
+const StyledCalendar = styled(Calendar)`
+  position: absolute;
+  top: 150px;
+  right: 30px;
 `;
 
 const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
@@ -35,18 +42,23 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
     moment(roomCreationDate).format("YYYY/MM/DD");
 
   return (
-    <StyledCalendar>
-      <div onClick={toggleCalendar}>Calendar</div>
+    <StyledCalendarComponent>
+      <div className="calendar-button" onClick={toggleCalendar}>
+        Calendar
+      </div>
       {isOpen && (
-        <Calendar
-          className="calendar"
-          setSelectedDate={onDateSet}
-          selectedDate={selectedDate}
-          minDate={new Date(formattedRoomCreationDate)}
-          maxDate={new Date()}
+        <Portal
+          element={
+            <StyledCalendar
+              setSelectedDate={onDateSet}
+              selectedDate={selectedDate}
+              minDate={new Date(formattedRoomCreationDate)}
+              maxDate={new Date()}
+            />
+          }
         />
       )}
-    </StyledCalendar>
+    </StyledCalendarComponent>
   );
 };
 

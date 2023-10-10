@@ -23,6 +23,7 @@ import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
 import { isMobile } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Appearance = (props) => {
   const {
@@ -34,6 +35,7 @@ const Appearance = (props) => {
     deleteAppearanceTheme,
     tReady,
     t,
+    currentDeviceType,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
@@ -624,6 +626,9 @@ const Appearance = (props) => {
     );
   };
 
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
+
   return !tReady ? (
     <Loader />
   ) : (
@@ -734,7 +739,7 @@ const Appearance = (props) => {
             label={t("Common:SaveButton")}
             onClick={onSave}
             primary
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledSaveButton}
           />
 
@@ -742,7 +747,7 @@ const Appearance = (props) => {
             className="edit-current-theme button"
             label={t("Common:EditButton")}
             onClick={onClickEdit}
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledEditButton}
           />
           {isShowDeleteButton && (
@@ -750,7 +755,7 @@ const Appearance = (props) => {
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
               onClick={onOpenDialogDelete}
-              size="small"
+              size={buttonSize}
               isDisabled={isDisabledDeleteButton}
             />
           )}
@@ -770,6 +775,7 @@ export default inject(({ auth }) => {
     currentColorScheme,
     deleteAppearanceTheme,
     theme,
+    currentDeviceType,
   } = settingsStore;
 
   return {
@@ -779,6 +785,7 @@ export default inject(({ auth }) => {
     getAppearanceTheme,
     currentColorScheme,
     deleteAppearanceTheme,
+    currentDeviceType,
     theme,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

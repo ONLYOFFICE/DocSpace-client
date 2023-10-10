@@ -16,6 +16,7 @@ import AppLoader from "@docspace/common/components/AppLoader";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
+import { DeviceType } from "@docspace/common/constants";
 
 const DataManagementWrapper = (props) => {
   const { dataBackupUrl, automaticBackupUrl, buttonSize, t, isNotPaidPeriod } =
@@ -123,11 +124,13 @@ export default inject(({ auth, setup }) => {
   const {
     dataBackupUrl,
     automaticBackupUrl,
-    isTabletView,
+
     currentColorScheme,
+    currentDeviceType,
   } = settingsStore;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
   return {
     loadBaseInfo: async () => {
       await initSettings();

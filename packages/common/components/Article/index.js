@@ -15,6 +15,7 @@ import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
 import { DeviceType } from "../../constants";
+import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
 
 const Article = ({
   showText,
@@ -41,6 +42,7 @@ const Article = ({
   theme,
 
   currentDeviceType,
+  showArticleLoader,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -211,11 +213,17 @@ const Article = ({
           isVirtualKeyboardOpen={isVirtualKeyboardOpen}
         />
         {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
-          <ArticleProfile
-            showText={showText}
-            currentDeviceType={currentDeviceType}
-            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
-          />
+          <>
+            {showArticleLoader ? (
+              <ArticleProfileLoader />
+            ) : (
+              <ArticleProfile
+                showText={showText}
+                currentDeviceType={currentDeviceType}
+                isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+              />
+            )}
+          </>
         )}
       </StyledArticle>
       {articleOpen && currentDeviceType === DeviceType.mobile && (

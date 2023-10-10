@@ -14,6 +14,7 @@ import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
@@ -293,6 +294,12 @@ const PureHome = (props) => {
               <SectionHeaderContent />
             )}
           </Section.SectionHeader>
+        )}
+
+        {isRecycleBinFolder && !isEmptyPage && (
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
         )}
 
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||

@@ -176,6 +176,7 @@ const EditLinkPanel = (props) => {
         visible={visible}
         onClose={onClosePanel}
         zIndex={310}
+        withoutBodyScroll
       >
         <div className="edit-link_header">
           <Heading className="edit-link_heading">

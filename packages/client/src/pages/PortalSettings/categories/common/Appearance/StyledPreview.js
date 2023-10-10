@@ -442,7 +442,7 @@ const StyledMobilePreview = styled.div`
     themePreview === "Light" ? "#FFFFFF" : "#333333"};
 
   border: ${({ themePreview }) =>
-    themePreview === "Light" ? "1px solid #d0d5da" : "1px solid transparent"};
+    themePreview === "Light" ? "1px solid #d0d5da" : "1px solid #474747"};
 
   .section-search {
     height: 30px;

@@ -81,6 +81,7 @@ class InfoPanelStore {
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
+    this.setMembersList(null);
     this.updateRoomMembers = updateRoomMembers;
   };
 

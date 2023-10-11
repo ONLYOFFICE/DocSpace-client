@@ -28,6 +28,8 @@ const Item = memo(({ data, index, style }) => {
     setIsScrollLocked,
     canInviteUserInRoomAbility,
     onRepeatInvitation,
+    membersFilter,
+    setMembersFilter,
   } = data;
 
   const user = members[index];
@@ -65,6 +67,8 @@ const Item = memo(({ data, index, style }) => {
         showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
         onRepeatInvitation={onRepeatInvitation}
         setMembers={setMembers}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
       />
     </div>
   );
@@ -87,11 +91,13 @@ const MembersList = (props) => {
     itemCount,
     onRepeatInvitation,
     loadNextPage,
+    membersFilter,
+    setMembersFilter,
   } = props;
 
   const { interfaceDirection } = useTheme();
 
-  const itemsCount = members.length;
+  const itemsCount = hasNextPage ? members.length + 1 : members.length;
 
   const canInviteUserInRoomAbility = security?.EditAccess;
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
@@ -177,6 +183,8 @@ const MembersList = (props) => {
                     setMembers,
                     canInviteUserInRoomAbility,
                     onRepeatInvitation,
+                    membersFilter,
+                    setMembersFilter,
                   }}
                   outerElementType={CustomScrollbarsVirtualList}
                   onItemsRendered={onItemsRendered}

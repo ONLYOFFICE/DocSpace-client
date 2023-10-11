@@ -667,7 +667,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopySharedLink"),
         onClick: onCopyLinkAction,
         disabled: isRecycleBinFolder || isPersonalRoom,
         icon: InvitationLinkReactSvgUrl,

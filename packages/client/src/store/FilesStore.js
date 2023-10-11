@@ -3202,7 +3202,7 @@ class FilesStore {
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
-        return t("PublicRoomLabel");
+        return t("Common:PublicRoomLabel");
 
       default:
         return "";

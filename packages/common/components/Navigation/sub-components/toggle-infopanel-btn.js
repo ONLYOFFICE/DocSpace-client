@@ -25,7 +25,17 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
-      display: none;
+      .info-panel-toggle-bg {
+        height: 30px;
+        width: 30px;
+        background: ${props.theme.backgroundAndSubstrateColor};
+        border: 1px solid ${props.theme.backgroundAndSubstrateColor};
+        border-radius: 50%;
+        .info-panel-toggle {
+          margin: auto;
+          margin-top: 25%;
+        }
+      }
     `}
 
   @media ${tablet} {
@@ -49,6 +59,8 @@ const ToggleInfoPanelButton = ({
   id,
   titles,
 }) => {
+  const onPropClick = isInfoPanelVisible ? {} : { onClick: toggleInfoPanel };
+
   return (
     <StyledInfoPanelToggleColorThemeWrapper
       isRootFolder={isRootFolder}
@@ -62,8 +74,8 @@ const ToggleInfoPanelButton = ({
           iconName={PanelReactSvgUrl}
           size="16"
           isFill={true}
-          onClick={toggleInfoPanel}
           title={titles?.infoPanel}
+          {...onPropClick}
         />
       </div>
     </StyledInfoPanelToggleColorThemeWrapper>

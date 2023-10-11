@@ -62,6 +62,9 @@ class PasswordInput extends React.Component {
     const capitalRegExp = new RegExp(passwordSettings.upperCaseRegexStr);
     const digitalRegExp = new RegExp(passwordSettings.digitsRegexStr);
     const specSymbolsRegExp = new RegExp(passwordSettings.specSymbolsRegexStr);
+    const allowedRegExp = new RegExp(
+      "^" + passwordSettings.allowedCharactersRegexStr + "{1,}$"
+    );
 
     let capital;
     let digits;
@@ -79,7 +82,10 @@ class PasswordInput extends React.Component {
       ? (special = specSymbolsRegExp.test(value))
       : (special = true);
 
+    const allowedCharacters = allowedRegExp.test(value);
+
     return {
+      allowed: allowedCharacters,
       digits: digits,
       capital: capital,
       special: special,
@@ -93,7 +99,8 @@ class PasswordInput extends React.Component {
       passwordValidation.digits &&
       passwordValidation.capital &&
       passwordValidation.special &&
-      passwordValidation.length;
+      passwordValidation.length &&
+      passwordValidation.allowed;
 
     this.props.onValidateInput &&
       this.props.onValidateInput(progressScore, passwordValidation);

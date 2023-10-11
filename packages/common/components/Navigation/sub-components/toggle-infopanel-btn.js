@@ -59,8 +59,6 @@ const ToggleInfoPanelButton = ({
   id,
   titles,
 }) => {
-  const onPropClick = isInfoPanelVisible ? {} : { onClick: toggleInfoPanel };
-
   return (
     <StyledInfoPanelToggleColorThemeWrapper
       isRootFolder={isRootFolder}
@@ -75,7 +73,7 @@ const ToggleInfoPanelButton = ({
           size="16"
           isFill={true}
           title={titles?.infoPanel}
-          {...onPropClick}
+          onClick={toggleInfoPanel}
         />
       </div>
     </StyledInfoPanelToggleColorThemeWrapper>

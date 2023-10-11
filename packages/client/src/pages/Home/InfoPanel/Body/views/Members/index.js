@@ -37,6 +37,7 @@ const Members = ({
 
   setExternalLinks,
   membersFilter,
+  setMembersFilter,
   externalLinks,
   members,
   setMembersList,
@@ -88,7 +89,7 @@ const Members = ({
     });
 
     let hasPrevAdminsTitle =
-      members?.roomId === roomId && !clearFilter
+      members?.roomId === roomId
         ? getHasPrevTitle(members?.administrators, "administration")
         : false;
 
@@ -101,7 +102,7 @@ const Members = ({
     }
 
     let hasPrevUsersTitle =
-      members?.roomId === roomId && !clearFilter
+      members?.roomId === roomId
         ? getHasPrevTitle(members?.users, "user")
         : false;
 
@@ -110,7 +111,7 @@ const Members = ({
     }
 
     let hasPrevExpectedTitle =
-      members?.roomId === roomId && !clearFilter
+      members?.roomId === roomId
         ? getHasPrevTitle(members?.expected, "expected")
         : false;
 
@@ -237,6 +238,8 @@ const Members = ({
         isPublicRoomType={isPublicRoomType}
         withBanner={isPublicRoomType && externalLinks.length > 0}
         setMembers={setMembersList}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
       />
     </>
   );
@@ -263,6 +266,7 @@ export default inject(
       updateRoomMemberRole,
       resendEmailInvitations,
       membersFilter,
+      setMembersFilter,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -297,6 +301,7 @@ export default inject(
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
+      setMembersFilter,
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,

@@ -18,10 +18,16 @@ const StyledDiv = styled.div`
 
 const StyledButtonWrapper = styled.div`
   width: 100%;
-
   padding: 12px 16px;
-
   box-sizing: border-box;
+`;
+
+const StyledDropDownItem = styled(DropDownItem)`
+  padding: 0px 16px;
+  .drop-down-icon {
+    margin-right: 12px;
+    height: 22px;
+  }
 `;
 
 class ProfileActions extends React.PureComponent {
@@ -160,7 +166,7 @@ class ProfileActions extends React.PureComponent {
                     href={action.url}
                     onClick={this.onClickItemLink}
                   >
-                    <DropDownItem {...action} noHover={true} />
+                    <StyledDropDownItem {...action} noHover={true} />
                   </Link>
                 ))
             )}

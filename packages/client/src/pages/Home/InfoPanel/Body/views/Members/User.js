@@ -29,6 +29,8 @@ const User = ({
   isTitle,
   onRepeatInvitation,
   showInviteIcon,
+  membersFilter,
+  setMembersFilter,
 }) => {
   if (!selectionParentRoom) return null;
   if (!user.displayName && !user.email) return null;
@@ -60,18 +62,28 @@ const User = ({
         const administrators = selectionParentRoom.members.administrators;
         const expectedMembers = selectionParentRoom.members.expected;
         if (option.key === "remove") {
-          setMembers({
+          const newMembers = {
             users: users?.filter((m) => m.id !== user.id),
             administrators: administrators?.filter((m) => m.id !== user.id),
             expected: expectedMembers?.filter((m) => m.id !== user.id),
+          } 
+
+          setMembers({
+            users: newMembers.users.length > 1 ? newMembers?.users : [],
+            administrators: newMembers.administrators.length  > 1 ? newMembers?.administrators : [],
+            expected: newMembers.expected.length > 1 ? newMembers?.expected : [],
           });
+
+          const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
+          newMembersFilter.total -= 1;
+          setMembersFilter(newMembersFilter);
 
           setSelectionParentRoom({
             ...selectionParentRoom,
             members: {
-              users: users?.filter((m) => m.id !== user.id),
-              administrators: administrators?.filter((m) => m.id !== user.id),
-              expected: expectedMembers?.filter((m) => m.id !== user.id),
+              users: newMembers.users.length > 1 ? newMembers?.users : [],
+              administrators: newMembers.administrators.length  > 1 ? newMembers?.administrators : [],
+              expected: newMembers.expected.length > 1 ? newMembers?.expected : [],
             },
           });
           //setUserIsRemoved(true);

@@ -8,7 +8,7 @@ import { loadLanguagePath } from "SRC_DIR/helpers/utils";
 const newInstance = i18n.createInstance();
 
 const userLng = getCookie(LANGUAGE) || "en";
-const portalLng = window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings.culture;
+const portalLng = window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings?.culture;
 
 newInstance
   .use(Backend)

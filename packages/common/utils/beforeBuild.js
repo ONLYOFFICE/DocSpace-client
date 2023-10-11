@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
 
-const appSettings = require("../../../config/appsettings.json");
+const appSettings = require("../../../../buildtools/config/appsettings.json");
 
 const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
   async function* getFiles(dir) {

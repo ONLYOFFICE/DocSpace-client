@@ -64,12 +64,17 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  onCreateRoom = async (withConfirm = false) => {
+  onCreateRoom = async (withConfirm = false, t) => {
     const roomParams = this.roomParams;
 
     const { createTag } = this.tagsStore;
     const { id: currentFolderId } = this.selectedFolderStore;
-    const { updateCurrentFolder } = this.filesActionsStore;
+    const {
+      updateCurrentFolder,
+      processCreatingRoomFromData,
+      setProcessCreatingRoomFromData,
+      setSelectedItems,
+    } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
     const { withPaging } = this.settingsStore;
     const {
@@ -80,6 +85,7 @@ class CreateEditRoomStore {
       uploadRoomLogo,
       addLogoToRoom,
     } = this.filesStore;
+    const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
     const createRoomData = {
       roomType: roomParams.type,
@@ -148,6 +154,9 @@ class CreateEditRoomStore {
         });
       } else !withPaging && this.onOpenNewRoom(room);
 
+      if (processCreatingRoomFromData)
+        preparingDataForCopyingToRoom(room.id, t);
+
       this.roomIsCreated = true;
     } catch (err) {
       toastr.error(err);
@@ -157,6 +166,7 @@ class CreateEditRoomStore {
       this.onClose();
       this.roomIsCreated = true;
     } finally {
+      processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
       if (withPaging) await updateCurrentFolder(null, currentFolderId);
     }
   };

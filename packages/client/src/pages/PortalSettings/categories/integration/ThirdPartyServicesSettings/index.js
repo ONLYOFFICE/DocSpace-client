@@ -1,24 +1,30 @@
+import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
+import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
+
 import React from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import { showLoader, hideLoader } from "@docspace/common/utils";
+
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Badge from "@docspace/components/badge";
 import toastr from "@docspace/components/toast/toastr";
 import Button from "@docspace/components/button";
-import { showLoader, hideLoader } from "@docspace/common/utils";
-import ConsumerItem from "./sub-components/consumerItem";
-import ConsumerModalDialog from "./sub-components/consumerModalDialog";
-import { inject, observer } from "mobx-react";
 import {
   mobile,
   smallTablet,
   isSmallTablet,
 } from "@docspace/components/utils/device";
-import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
-import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
+
+import ConsumerItem from "./sub-components/consumerItem";
+import ConsumerModalDialog from "./sub-components/consumerModalDialog";
+
+import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -64,8 +70,12 @@ const RootContainer = styled(Box)`
     }
   }
 
-  .paid-badge {
-    margin-bottom: 8px;
+  .business-plan {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: -4px;
   }
 `;
 
@@ -169,6 +179,13 @@ class ThirdPartyServices extends React.Component {
         consumer.name !== "twilio"
     );
 
+    const freeConsumers = filteredConsumers.filter(
+      (consumer) => consumer.canSet === false
+    );
+    const paidConsumers = filteredConsumers.filter(
+      (consumer) => !freeConsumers.includes(consumer)
+    );
+
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
 
     const submitRequest = () =>
@@ -177,14 +194,6 @@ class ThirdPartyServices extends React.Component {
     return (
       <>
         <RootContainer className="RootContainer">
-          {!isThirdPartyAvailable && (
-            <Badge
-              backgroundColor="#EDC409"
-              label={t("Common:Paid")}
-              className="paid-badge"
-              isPaidBadge={true}
-            />
-          )}
           <Text className="third-party-description">
             {t("ThirdPartyTitleDescription")}
           </Text>
@@ -215,24 +224,56 @@ class ThirdPartyServices extends React.Component {
               scale={isSmallTablet()}
             />
           </Box>
-          <div className="consumers-list-container">
-            {filteredConsumers.map((consumer) => (
-              <Box className="consumer-item-wrapper" key={consumer.name}>
-                <ConsumerItem
-                  consumer={consumer}
-                  dialogVisible={dialogVisible}
-                  isLoading={isLoading}
-                  onChangeLoading={onChangeLoading}
-                  onModalClose={onModalClose}
-                  onModalOpen={onModalOpen}
-                  setConsumer={setConsumer}
-                  updateConsumerProps={updateConsumerProps}
-                  t={t}
-                  isThirdPartyAvailable={isThirdPartyAvailable}
-                />
-              </Box>
-            ))}
-          </div>
+          {!consumers.length ? (
+            <ThirdPartyLoader />
+          ) : (
+            <div className="consumers-list-container">
+              {freeConsumers.map((consumer) => (
+                <Box className="consumer-item-wrapper" key={consumer.name}>
+                  <ConsumerItem
+                    consumer={consumer}
+                    dialogVisible={dialogVisible}
+                    isLoading={isLoading}
+                    onChangeLoading={onChangeLoading}
+                    onModalClose={onModalClose}
+                    onModalOpen={onModalOpen}
+                    setConsumer={setConsumer}
+                    updateConsumerProps={updateConsumerProps}
+                    t={t}
+                    isThirdPartyAvailable={isThirdPartyAvailable}
+                  />
+                </Box>
+              ))}
+              {!isThirdPartyAvailable && (
+                <div className="business-plan">
+                  <Text fontSize="16px" fontWeight={700}>
+                    {t("IncludedInBusiness")}
+                  </Text>
+                  <Badge
+                    backgroundColor="#EDC409"
+                    label={t("Common:Paid")}
+                    isPaidBadge={true}
+                  />
+                </div>
+              )}
+              {paidConsumers.map((consumer) => (
+                <Box className="consumer-item-wrapper" key={consumer.name}>
+                  <ConsumerItem
+                    consumer={consumer}
+                    dialogVisible={dialogVisible}
+                    isLoading={isLoading}
+                    onChangeLoading={onChangeLoading}
+                    onModalClose={onModalClose}
+                    onModalOpen={onModalOpen}
+                    setConsumer={setConsumer}
+                    updateConsumerProps={updateConsumerProps}
+                    t={t}
+                    isThirdPartyAvailable={isThirdPartyAvailable}
+                  />
+                </Box>
+              ))}
+            </div>
+          )}
         </RootContainer>
         {dialogVisible && (
           <ConsumerModalDialog

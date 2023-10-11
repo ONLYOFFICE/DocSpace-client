@@ -24,10 +24,14 @@ import {
   InviteUsersWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
+  SubmitToFormGallery,
   UnsavedChangesDialog,
   DeleteLinkDialog,
   RoomSharingDialog,
   MoveToPublicRoom,
+  SettingsPluginDialog,
+  PluginDialog,
+  DeletePluginDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -35,6 +39,8 @@ import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import FilesSelector from "../FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
+import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 
 const Panels = (props) => {
   const {
@@ -68,12 +74,18 @@ const Panels = (props) => {
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
+    submitToGalleryDialogVisible,
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelIsVisible,
     roomSharingPanelVisible,
     moveToPublicRoomVisible,
+    settingsPluginDialogVisible,
+    pluginDialogVisible,
+    leaveRoomDialogVisible,
+    changeRoomOwnerIsVisible,
+    deletePluginDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -83,6 +95,21 @@ const Panels = (props) => {
   };
 
   return [
+    settingsPluginDialogVisible && (
+      <SettingsPluginDialog
+        isVisible={settingsPluginDialogVisible}
+        key={"settings-plugin-dialog"}
+      />
+    ),
+    deletePluginDialogVisible && (
+      <DeletePluginDialog
+        isVisible={deletePluginDialogVisible}
+        key={"delete-plugin-dialog"}
+      />
+    ),
+    pluginDialogVisible && (
+      <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+    ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     sharingPanelVisible && (
       <SharingPanel
@@ -145,6 +172,9 @@ const Panels = (props) => {
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
     ),
+    submitToGalleryDialogVisible && (
+      <SubmitToFormGallery key="submit-to-form-gallery-dialog" />
+    ),
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     unsavedChangesDialogVisible && (
       <UnsavedChangesDialog key="unsaved-dialog" />
@@ -154,6 +184,10 @@ const Panels = (props) => {
     roomSharingPanelVisible && <RoomSharingDialog key="room-sharing-dialog" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
+    ),
+    leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
+    changeRoomOwnerIsVisible && (
+      <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
   ];
 };
@@ -166,6 +200,7 @@ export default inject(
     versionHistoryStore,
     backup,
     createEditRoomStore,
+    pluginStore,
   }) => {
     const {
       sharingPanelVisible,
@@ -196,11 +231,15 @@ export default inject(
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
+
+      submitToGalleryDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
       roomSharingPanelVisible,
       moveToPublicRoomVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -209,6 +248,12 @@ export default inject(
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = auth.settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
+
+    const {
+      settingsPluginDialogVisible,
+      deletePluginDialogVisible,
+      pluginDialogVisible,
+    } = pluginStore;
 
     return {
       preparationPortalDialogVisible,
@@ -241,12 +286,18 @@ export default inject(
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
+      submitToGalleryDialogVisible,
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
       roomSharingPanelVisible,
       moveToPublicRoomVisible,
+      settingsPluginDialogVisible,
+      pluginDialogVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
+      deletePluginDialogVisible,
     };
   }
 )(observer(Panels));

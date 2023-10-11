@@ -2,7 +2,7 @@ var path = require("path");
 var fs = require("fs");
 var async = require("async");
 
-const config = require("../../../../../config/appsettings.json");
+const config = require("../../../../../../buildtools/config/appsettings.json");
 const cultures = config.web.cultures.split(",");
 
 function getFiles(dirPath, callback) {

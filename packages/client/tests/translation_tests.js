@@ -1,6 +1,6 @@
 const Endpoints = require("./mocking/endpoints.js");
 const changeCulture = require("./helpers/changeCulture.js");
-const config = require("../../../../config/appsettings.json");
+const config = require("../../../../../buildtools/config/appsettings.json");
 const ignoringCultures = require("./ignoringCultures.json");
 
 const isModel = !!process.env.MODEL;

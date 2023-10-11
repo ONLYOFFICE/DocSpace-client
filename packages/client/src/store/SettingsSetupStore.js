@@ -76,6 +76,10 @@ class SettingsSetupStore {
 
   securityLifetime = [];
 
+  sessionsIsInit = false;
+  sessions = [];
+  currentSession = [];
+
   constructor() {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
@@ -443,6 +447,18 @@ class SettingsSetupStore {
     return api.settings.sendOwnerChange(id);
   };
 
+  dataReassignment = (fromUserId, toUserId, deleteProfile) => {
+    return api.settings.dataReassignment(fromUserId, toUserId, deleteProfile);
+  };
+
+  dataReassignmentProgress = (id) => {
+    return api.settings.dataReassignmentProgress(id);
+  };
+
+  dataReassignmentTerminate = (userId) => {
+    return api.settings.dataReassignmentTerminate(userId);
+  };
+
   getCommonThirdPartyList = async () => {
     const res = await api.settings.getCommonThirdPartyList();
 
@@ -472,6 +488,15 @@ class SettingsSetupStore {
   setLogoutVisible = (visible) => (this.logoutVisible = visible);
 
   setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
+
+  getSessions = () => {
+    if (this.sessionsIsInit) return;
+    this.getAllSessions().then((res) => {
+      this.sessions = res.items;
+      this.currentSession = res.loginEvent;
+      this.sessionsIsInit = true;
+    });
+  };
 }
 
 export default SettingsSetupStore;

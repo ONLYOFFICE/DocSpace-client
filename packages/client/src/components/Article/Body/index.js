@@ -13,8 +13,6 @@ import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import AccountsFilter from "@docspace/common/api/people/filter";
 
-import Banner from "./Banner";
-
 import Loaders from "@docspace/common/components/Loaders";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -24,7 +22,6 @@ const ArticleBodyContent = (props) => {
   const {
     isDesktopClient,
     firstLoad,
-    FirebaseHelper,
     theme,
 
     showText,
@@ -51,10 +48,6 @@ const ArticleBodyContent = (props) => {
 
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
-
-  const banners = (localStorage.getItem("docspace_banners") || "")
-    .split(",")
-    .filter((banner) => banner.length > 0);
 
   const isAccounts = location.pathname.includes("accounts/filter");
 
@@ -230,21 +223,13 @@ const ArticleBodyContent = (props) => {
   if (showArticleLoader) return <Loaders.ArticleFolder />;
 
   return (
-    <>
-      <Items
-        onClick={onClick}
-        onBadgeClick={onShowNewFilesPanel}
-        showText={showText}
-        onHide={toggleArticleOpen}
-        activeItemId={activeItemId}
-      />
-
-      {!isDesktopClient &&
-        showText &&
-        (isDesktop || isTablet) &&
-        !firstLoad &&
-        banners.length > 0 && <Banner FirebaseHelper={FirebaseHelper} />}
-    </>
+    <Items
+      onClick={onClick}
+      onBadgeClick={onShowNewFilesPanel}
+      showText={showText}
+      onHide={toggleArticleOpen}
+      activeItemId={activeItemId}
+    />
   );
 };
 
@@ -284,7 +269,6 @@ export default inject(
       toggleArticleOpen,
 
       isDesktopClient,
-      FirebaseHelper,
       theme,
       setIsBurgerLoading,
     } = auth.settingsStore;
@@ -299,7 +283,6 @@ export default inject(
 
       firstLoad,
       isDesktopClient,
-      FirebaseHelper,
       theme,
 
       roomsFolderId,

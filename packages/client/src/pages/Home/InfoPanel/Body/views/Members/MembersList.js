@@ -155,7 +155,7 @@ const MembersList = (props) => {
         {({ height, width }) => (
           <InfiniteLoader
             isItemLoaded={isItemLoaded}
-            itemCount={itemCount}
+            itemCount={hasNextPage ? itemCount + 1 : itemCount}
             loadMoreItems={loadMoreItems}
           >
             {({ onItemsRendered, ref }) => {

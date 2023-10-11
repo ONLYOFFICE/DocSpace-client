@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
@@ -113,11 +113,17 @@ const StyledComponent = styled.div`
 `;
 
 const HexColorPickerComponent = (props) => {
-  const { onCloseHexColorPicker, onAppliedColor, startColor } = props;
+  const { onCloseHexColorPicker, onAppliedColor, appliedColor } = props;
 
-  const [color, setColor] = useState(startColor);
+  const [color, setColor] = useState(appliedColor);
 
   const { t } = useTranslation("Common");
+
+  useEffect(() => {
+    if (color !== appliedColor) {
+      setColor(appliedColor);
+    }
+  }, [appliedColor]);
 
   return (
     <StyledComponent>

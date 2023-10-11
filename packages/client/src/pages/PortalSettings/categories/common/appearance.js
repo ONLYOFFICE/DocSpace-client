@@ -594,7 +594,7 @@ const Appearance = (props) => {
           id="buttons-hex"
           onCloseHexColorPicker={onCloseHexColorPickerButtons}
           onAppliedColor={onAppliedColorButtons}
-          startColor={appliedColorButtons}
+          appliedColor={appliedColorButtons}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -614,7 +614,7 @@ const Appearance = (props) => {
           id="accent-hex"
           onCloseHexColorPicker={onCloseHexColorPickerAccent}
           onAppliedColor={onAppliedColorAccent}
-          startColor={appliedColorAccent}
+          appliedColor={appliedColorAccent}
         />
       </DropDownItem>
     </DropDownContainer>

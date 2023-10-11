@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
+import ArticleBanner from "./article-banner";
 import ArticleTeamTrainingAlert from "./article-team-training";
 import ArticleSubmitToFormGalleryAlert from "./article-submit-to-form-gallery";
 import ArticlePaymentAlert from "./article-payment-alert";
@@ -56,6 +57,8 @@ const ArticleAlerts = ({
   return (
     <StyledArticleAlertsComponent>
       {paymentsAlertsComponent()}
+
+      {showText && <ArticleBanner />}
 
       {isTeamTrainingAlertAvailable &&
         showText &&

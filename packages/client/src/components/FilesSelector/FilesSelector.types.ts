@@ -126,6 +126,7 @@ export type FilesSelectorProps = {
   isMove?: boolean;
   isCopy?: boolean;
   isRestoreAll?: boolean;
+  isSelect?: boolean;
 
   filterParam?: string;
 

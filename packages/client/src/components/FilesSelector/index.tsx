@@ -46,6 +46,7 @@ const FilesSelector = ({
   isMove,
   isCopy,
   isRestoreAll,
+  isSelect,
 
   currentFolderId,
   fromFolderId,
@@ -429,6 +430,7 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
+    isSelect,
     filterParam
   );
 
@@ -437,6 +439,7 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
+    isSelect,
     filterParam
   );
 

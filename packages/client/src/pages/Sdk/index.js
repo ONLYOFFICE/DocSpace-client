@@ -161,9 +161,8 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          filterParam={"DOCX"}
-          descriptionText={"Test desc"}
           embedded
+          isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
         />

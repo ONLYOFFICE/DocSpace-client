@@ -497,7 +497,7 @@ class ContextOptionsStore {
     const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
       this.dialogsStore;
 
-    if (id === this.selectedFolderStore.id) {
+    if (id === this.selectedFolderStore.id && isFolder) {
       this.onClickDeleteSelectedFolder(t, isRoom);
 
       return;

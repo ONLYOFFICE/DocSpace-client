@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
@@ -7,7 +7,7 @@ import { isMobileOnly } from "react-device-detect";
 
 const StyledComponent = styled.div`
   .save-button {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -59,12 +59,12 @@ const StyledComponent = styled.div`
     height: 32px;
     outline: none;
     padding: 6px 8px;
-    border: 1px solid ${props => (props.theme.isBase ? "#d0d5da" : "#474747")};
+    border: 1px solid ${(props) => (props.theme.isBase ? "#d0d5da" : "#474747")};
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-    background: ${props => !props.theme.isBase && "#282828"};
-    color: ${props => !props.theme.isBase && "#5C5C5C"};
+    background: ${(props) => !props.theme.isBase && "#282828"};
+    color: ${(props) => !props.theme.isBase && "#5C5C5C"};
   }
 
   .hex-value-label {
@@ -75,7 +75,7 @@ const StyledComponent = styled.div`
     display: flex;
 
     .apply-button {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: 8px;
@@ -112,8 +112,10 @@ const StyledComponent = styled.div`
   }
 `;
 
-const HexColorPickerComponent = props => {
-  const { onCloseHexColorPicker, onAppliedColor, setColor, color } = props;
+const HexColorPickerComponent = (props) => {
+  const { onCloseHexColorPicker, onAppliedColor, startColor } = props;
+
+  const [color, setColor] = useState(startColor);
 
   const { t } = useTranslation("Common");
 
@@ -140,7 +142,7 @@ const HexColorPickerComponent = props => {
             className="apply-button"
             primary={true}
             scale={true}
-            onClick={onAppliedColor}
+            onClick={() => onAppliedColor(color)}
           />
           <Button
             label={t("Common:CancelButton")}

@@ -86,7 +86,7 @@ class FilesStore {
 
   filter = FilesFilter.getDefault();
   roomsFilter = RoomsFilter.getDefault();
-  membersFilter = { page: 0, pageCount: 100, total: 0 };
+  membersFilter = { page: 0, pageCount: 100, total: 0, startIndex: 0 };
 
   categoryType = getCategoryType(window.location);
 
@@ -2480,25 +2480,27 @@ class FilesStore {
   }
 
   getDefaultMembersFilter = () => {
-    return { page: 0, pageCount: 100, total: 0 };
+    return { page: 0, pageCount: 100, total: 0, startIndex: 0 };
   };
 
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };
 
-  getRoomMembers = (id, clearFilter = true) => {
-    let newFilter = clone(this.membersFilter);
+  getRoomMembers = (id, clearFilter = true, membersFilter) => {
+    let newFilter = membersFilter ? membersFilter : clone(this.membersFilter);
 
     if (clearFilter) {
       newFilter = this.getDefaultMembersFilter();
-    } else {
+    } else if (!membersFilter) {
       newFilter.page += 1;
+      newFilter.pageCount = 100;
+      newFilter.startIndex = newFilter.page * newFilter.pageCount;
+      this.setRoomMembersFilter(newFilter);
     }
-    this.setRoomMembersFilter(newFilter);
 
     const membersFilters = {
-      startIndex: newFilter.page * newFilter.pageCount,
+      startIndex: newFilter.startIndex,
       count: newFilter.pageCount,
       filterType: 0, // 0 (Members)
     };

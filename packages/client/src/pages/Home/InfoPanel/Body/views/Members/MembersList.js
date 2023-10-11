@@ -30,6 +30,8 @@ const Item = memo(({ data, index, style }) => {
     onRepeatInvitation,
     membersFilter,
     setMembersFilter,
+    fetchMembers,
+    hasNextPage,
   } = data;
 
   const user = members[index];
@@ -69,6 +71,8 @@ const Item = memo(({ data, index, style }) => {
         setMembers={setMembers}
         membersFilter={membersFilter}
         setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
+        hasNextPage={hasNextPage}
       />
     </div>
   );
@@ -93,6 +97,7 @@ const MembersList = (props) => {
     loadNextPage,
     membersFilter,
     setMembersFilter,
+    fetchMembers,
   } = props;
 
   const { interfaceDirection } = useTheme();
@@ -185,6 +190,8 @@ const MembersList = (props) => {
                     onRepeatInvitation,
                     membersFilter,
                     setMembersFilter,
+                    fetchMembers,
+                    hasNextPage,
                   }}
                   outerElementType={CustomScrollbarsVirtualList}
                   onItemsRendered={onItemsRendered}

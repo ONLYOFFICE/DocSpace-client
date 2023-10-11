@@ -237,6 +237,7 @@ const SectionHeaderContent = (props) => {
     isPublicRoomType,
     externalLinks,
     moveToPublicRoom,
+    isFrame,
   } = props;
 
   const navigate = useNavigate();
@@ -1059,6 +1060,7 @@ const SectionHeaderContent = (props) => {
                   isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
+                isFrame={isFrame}
               />
             </div>
           )}

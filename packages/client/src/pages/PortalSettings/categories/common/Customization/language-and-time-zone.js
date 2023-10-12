@@ -206,7 +206,7 @@ const LanguageAndTimeZone = (props) => {
         findSelectedItemByKey(timezones, portalTimeZoneId) ||
         rawTimezones[0];
 
-      const timezoneDefault =
+      const timezoneDefault = timezoneDefaultFromSessionStorage ||
         findSelectedItemByKey(timezones, portalTimeZoneId) || timezones[0];
 
       setState((val) => ({ ...val, timezone, timezoneDefault }));

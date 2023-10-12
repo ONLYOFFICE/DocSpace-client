@@ -35,7 +35,16 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
+  setBodyRendered,
 }) => {
+  useEffect(() => {
+    setBodyRendered(true);
+
+    return () => {
+      setBodyRendered(false);
+    };
+  }, []);
+
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
   }, [language, currentProductId, setCurrentProductId]);
@@ -85,7 +94,7 @@ export default inject(({ auth, setup, pluginStore }) => {
   const { language, settingsStore } = auth;
   const { addUsers } = setup.headerAction;
 
-  const { setCurrentProductId, enablePlugins } = settingsStore;
+  const { setCurrentProductId, enablePlugins, setBodyRendered } = settingsStore;
 
   const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
@@ -97,5 +106,6 @@ export default inject(({ auth, setup, pluginStore }) => {
     enablePlugins,
     isInitPlugins,
     initPlugins,
+    setBodyRendered,
   };
 })(withLoading(observer(Layout)));

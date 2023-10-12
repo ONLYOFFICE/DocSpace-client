@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
 import NavMenu from "./components/NavMenu";
@@ -344,11 +344,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <Toast />
     );
 
-  const withList =
-    pathname.includes("rooms") ||
-    pathname.includes("files") ||
-    pathname.includes("accounts");
-
   return (
     <Layout>
       {toast}
@@ -358,7 +353,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
-      {!bodyRendered && showArticleLoader && withList && <AppLoader />}
+      {!bodyRendered && showArticleLoader && <AppLoader />}
       <Main isDesktop={isDesktop}>
         {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">

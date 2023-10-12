@@ -25,7 +25,15 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
+  setBodyRendered,
 }) => {
+  useEffect(() => {
+    setBodyRendered(true);
+    return () => {
+      setBodyRendered(false);
+    };
+  }, []);
+
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
     return () => {
@@ -182,8 +190,14 @@ const Sdk = ({
 
 export default inject(({ auth, settingsStore, peopleStore }) => {
   const { login, logout, userStore } = auth;
-  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-    auth.settingsStore;
+  const {
+    theme,
+    setFrameConfig,
+    frameConfig,
+    getSettings,
+    isLoaded,
+    setBodyRendered,
+  } = auth.settingsStore;
   const { loadCurrentUser, user } = userStore;
   const { updateProfileCulture } = peopleStore.targetUserStore;
   const { getIcon } = settingsStore;
@@ -200,5 +214,6 @@ export default inject(({ auth, settingsStore, peopleStore }) => {
     isLoaded,
     updateProfileCulture,
     user,
+    setBodyRendered,
   };
 })(observer(Sdk));

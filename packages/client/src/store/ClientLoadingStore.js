@@ -43,8 +43,13 @@ class ClientLoadingStore {
     this.firstLoad = firstLoad;
   };
 
-  setIsArticleLoading = (isArticleLoading) => {
-    this.isArticleLoading = isArticleLoading;
+  setIsArticleLoading = (isArticleLoading, withTimer = true) => {
+    if (!withTimer || !this.firstLoad)
+      return (this.isArticleLoading = isArticleLoading);
+
+    setTimeout(() => {
+      this.setIsArticleLoading(isArticleLoading, false);
+    }, MIN_LOADER_TIMER);
   };
 
   updateIsSectionHeaderLoading = (param) => {

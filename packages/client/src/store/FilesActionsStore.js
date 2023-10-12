@@ -1018,7 +1018,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomPinned")));
+          .then(() =>
+            toastr.success(
+              items.length > 1
+                ? t("RoomsPinned", { count: items.length })
+                : t("RoomPinned")
+            )
+          )
+          .catch((error) => console.log(error));
       case "unpin":
         items.forEach((item) => {
           updateRoomPin(item);
@@ -1032,7 +1039,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomUnpinned")));
+          .then(() => {
+            toastr.success(
+              items.length > 1
+                ? t("RoomsUnpinned", { count: items.length })
+                : t("RoomUnpinned")
+            );
+          })
+          .catch((error) => console.log(error));
       default:
         return;
     }

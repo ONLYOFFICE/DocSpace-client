@@ -85,6 +85,8 @@ const Base = {
     color: black,
   },
 
+  backgroundAndSubstrateColor: "#F8F9F9",
+
   button: {
     fontWeight: "600",
     margin: "0",

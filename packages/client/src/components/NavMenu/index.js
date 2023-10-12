@@ -30,13 +30,7 @@ const StyledContainer = styled.header`
     !props.isLoaded
       ? css`
           @media ${mobile} {
-            position: static;
-
-            ${({ theme }) =>
-              theme.interfaceDirection === "rtl"
-                ? `margin-left: -16px;`
-                : `margin-right: -16px;`}/* It is a opposite value of padding-right of custom scroll bar,
-       so that there is no white bar in the header on loading. (padding-right: 16px)*/
+            width: 100vw; // fixes space between header loader and screen edge
           }
         `
       : css`

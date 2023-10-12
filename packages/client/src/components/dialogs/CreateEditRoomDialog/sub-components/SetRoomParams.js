@@ -77,8 +77,6 @@ const SetRoomParams = ({
     );
   };
 
-  console.log(roomParams);
-
   return (
     <StyledSetRoomParams>
       {isEdit ? (

@@ -28,6 +28,10 @@ const Item = memo(({ data, index, style }) => {
     setIsScrollLocked,
     canInviteUserInRoomAbility,
     onRepeatInvitation,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
+    hasNextPage,
   } = data;
 
   const user = members[index];
@@ -65,6 +69,10 @@ const Item = memo(({ data, index, style }) => {
         showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
         onRepeatInvitation={onRepeatInvitation}
         setMembers={setMembers}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
+        hasNextPage={hasNextPage}
       />
     </div>
   );
@@ -87,6 +95,9 @@ const MembersList = (props) => {
     itemCount,
     onRepeatInvitation,
     loadNextPage,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
   } = props;
 
   const { interfaceDirection } = useTheme();
@@ -149,7 +160,7 @@ const MembersList = (props) => {
         {({ height, width }) => (
           <InfiniteLoader
             isItemLoaded={isItemLoaded}
-            itemCount={itemCount}
+            itemCount={hasNextPage ? itemCount + 1 : itemCount}
             loadMoreItems={loadMoreItems}
           >
             {({ onItemsRendered, ref }) => {
@@ -177,6 +188,10 @@ const MembersList = (props) => {
                     setMembers,
                     canInviteUserInRoomAbility,
                     onRepeatInvitation,
+                    membersFilter,
+                    setMembersFilter,
+                    fetchMembers,
+                    hasNextPage,
                   }}
                   outerElementType={CustomScrollbarsVirtualList}
                   onItemsRendered={onItemsRendered}

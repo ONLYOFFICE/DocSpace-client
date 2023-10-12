@@ -34,10 +34,6 @@ const RootContainer = styled(Box)`
     cursor: auto;
   }
 
-  @media ${mobile} {
-    width: calc(100% - 8px);
-  }
-
   .consumers-list-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));

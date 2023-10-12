@@ -21,6 +21,8 @@ import { useParams } from "react-router-dom";
 
 import FloatingButton from "@docspace/components/floating-button";
 
+import Base from "@docspace/components/themes/base";
+
 const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
@@ -88,7 +90,7 @@ const HeaderContainer = styled.div`
     .combo-button_selected-icon {
       svg {
         path {
-          fill: ${(props) => (props.isDisabled ? "#d0d5da" : "#333")};
+          fill: ${(props) => (props.isDisabled ? "#d0d5da" : props.theme.color)};
         }
       }
     }
@@ -108,6 +110,8 @@ const HeaderContainer = styled.div`
     }
   }
 `;
+
+HeaderContainer.defaultProps = { theme: Base };
 
 const HistoryHeader = (props) => {
   const {

@@ -37,6 +37,7 @@ const Members = ({
 
   setExternalLinks,
   membersFilter,
+  setMembersFilter,
   externalLinks,
   members,
   setMembersList,
@@ -46,10 +47,10 @@ const Members = ({
 
   const security = selectionParentRoom ? selectionParentRoom.security : {};
 
-  const fetchMembers = async (roomId, clearFilter = true) => {
+  const fetchMembers = async (roomId, clearFilter = true, membersFilter) => {
     if (isLoading) return;
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter)];
+    const requests = [getRoomMembers(roomId, clearFilter, membersFilter)];
 
     if (isPublic && clearFilter) {
       requests.push(getRoomLinks(roomId));
@@ -191,10 +192,16 @@ const Members = ({
     const { users, administrators, expected } = fetchedMembers;
 
     const newMembers = {
+      roomId: roomId,
       administrators: [...members.administrators, ...administrators],
       users: [...members.users, ...users],
       expected: [...members.expected, ...expected],
     };
+
+    setSelectionParentRoom({
+      ...selection,
+      members: newMembers,
+    });
 
     setMembersList(newMembers);
   };
@@ -236,6 +243,9 @@ const Members = ({
         isPublicRoomType={isPublicRoomType}
         withBanner={isPublicRoomType && externalLinks.length > 0}
         setMembers={setMembersList}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
       />
     </>
   );
@@ -262,6 +272,7 @@ export default inject(
       updateRoomMemberRole,
       resendEmailInvitations,
       membersFilter,
+      setMembersFilter,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -296,6 +307,7 @@ export default inject(
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
+      setMembersFilter,
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,

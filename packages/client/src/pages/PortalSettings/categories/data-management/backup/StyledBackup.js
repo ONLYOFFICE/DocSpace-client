@@ -10,14 +10,6 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
 const commonStyles = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
   .backup_modules-description {
     margin-bottom: 24px;
     margin-top: 8px;

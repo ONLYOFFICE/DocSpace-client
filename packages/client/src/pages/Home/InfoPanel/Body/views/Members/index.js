@@ -47,10 +47,10 @@ const Members = ({
 
   const security = selectionParentRoom ? selectionParentRoom.security : {};
 
-  const fetchMembers = async (roomId, clearFilter = true) => {
+  const fetchMembers = async (roomId, clearFilter = true, membersFilter) => {
     if (isLoading) return;
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter)];
+    const requests = [getRoomMembers(roomId, clearFilter, membersFilter)];
 
     if (isPublic && clearFilter) {
       requests.push(getRoomLinks(roomId));
@@ -198,6 +198,11 @@ const Members = ({
       expected: [...members.expected, ...expected],
     };
 
+    setSelectionParentRoom({
+      ...selection,
+      members: newMembers,
+    });
+
     setMembersList(newMembers);
   };
 
@@ -240,6 +245,7 @@ const Members = ({
         setMembers={setMembersList}
         membersFilter={membersFilter}
         setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
       />
     </>
   );

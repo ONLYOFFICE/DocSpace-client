@@ -79,6 +79,8 @@ const Dark = {
     color: grayMaxLight,
   },
 
+  backgroundAndSubstrateColor: "#282828",
+
   button: {
     fontWeight: "600",
     margin: "0",

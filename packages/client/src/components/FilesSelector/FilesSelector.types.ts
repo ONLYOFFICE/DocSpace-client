@@ -126,6 +126,7 @@ export type FilesSelectorProps = {
   isMove?: boolean;
   isCopy?: boolean;
   isRestoreAll?: boolean;
+  isSelect?: boolean;
 
   filterParam?: string;
 
@@ -196,4 +197,6 @@ export type FilesSelectorProps = {
   socketHelper: any;
   socketSubscribersId: Set<string>;
   currentDeviceType: "mobile" | "tablet" | "desktop";
+
+  embedded: boolean;
 };

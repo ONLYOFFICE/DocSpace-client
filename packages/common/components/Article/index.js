@@ -167,8 +167,6 @@ const Article = ({
     };
   }, [onResize]);
 
-  console.log(showArticleLoader);
-
   const articleComponent = (
     <>
       <StyledArticle

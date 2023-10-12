@@ -349,16 +349,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pathname.includes("files") ||
     pathname.includes("accounts");
 
-  console.log(
-    pathname,
-
-    bodyRendered,
-    showArticleLoader,
-    withList,
-
-    !bodyRendered && showArticleLoader && withList
-  );
-
   return (
     <Layout>
       {toast}

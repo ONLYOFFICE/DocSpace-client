@@ -1,7 +1,7 @@
 import moment from "moment";
 
 import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));

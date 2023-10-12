@@ -361,6 +361,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 };
 
 const ShellWrapper = inject(({ auth, backup }) => {
+  const { i18n } = useTranslation();
+
   const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
 
   const {
@@ -392,7 +394,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
 
   return {
     loadBaseInfo: async () => {
-      await init();
+      await init(false, i18n);
 
       setModuleInfo(config.homepage, "home");
       setProductVersion(config.version);

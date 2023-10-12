@@ -161,7 +161,7 @@ const ArticleBodyContent = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if (tReady) setIsLoadedArticleBody(true);
+    if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
     if (prevLocation.current.pathname !== location.pathname) {
       if (location.pathname.includes("common")) {
@@ -199,7 +199,13 @@ const ArticleBodyContent = (props) => {
         this.setState({ selectedKeys: ["8-0"] });
       }
     }
-  }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
+  }, [
+    tReady,
+    isProfileLoading,
+    setIsLoadedArticleBody,
+    location.pathname,
+    selectedKeys,
+  ]);
 
   const onSelect = (value) => {
     if (isArrayEqual([value], selectedKeys)) {
@@ -207,7 +213,6 @@ const ArticleBodyContent = (props) => {
     }
 
     setSelectedKeys([value + "-0"]);
-    console.log(currentDeviceType);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
@@ -359,7 +364,8 @@ export default inject(({ auth, common, clientLoadingStore }) => {
 
   const isProfileLoading =
     window.location.pathname.includes("profile") &&
-    clientLoadingStore.showProfileLoader;
+    clientLoadingStore.showProfileLoader &&
+    !isLoadedArticleBody;
 
   return {
     standalone,

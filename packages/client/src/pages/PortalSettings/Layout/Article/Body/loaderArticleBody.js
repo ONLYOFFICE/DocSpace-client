@@ -59,7 +59,7 @@ const LoaderArticleBody = () => {
   });
 
   const height = isTabletView ? "28px" : "20px";
-  const width = isTabletView ? "28px" : "190px";
+  const width = isTabletView ? "28px" : "210px";
 
   return (
     <StyledLoader>

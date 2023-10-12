@@ -11,9 +11,9 @@ import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
 
-const ArticleSettings = React.memo(() => {
+const ArticleSettings = React.memo(({ showArticleLoader }) => {
   return (
-    <Article>
+    <Article showArticleLoader={showArticleLoader}>
       <Article.Header>
         <ArticleHeaderContent />
       </Article.Header>
@@ -36,6 +36,7 @@ const Layout = ({
   isInitPlugins,
   initPlugins,
   setBodyRendered,
+  isLoadedArticleBody,
 }) => {
   useEffect(() => {
     setBodyRendered(true);
@@ -61,7 +62,7 @@ const Layout = ({
 
   return (
     <>
-      <ArticleSettings />
+      <ArticleSettings showArticleLoader={!isLoadedArticleBody} />
       {!isGeneralPage && (
         <Section
           viewAs={"settings"}
@@ -94,7 +95,12 @@ export default inject(({ auth, setup, pluginStore }) => {
   const { language, settingsStore } = auth;
   const { addUsers } = setup.headerAction;
 
-  const { setCurrentProductId, enablePlugins, setBodyRendered } = settingsStore;
+  const {
+    setCurrentProductId,
+    enablePlugins,
+    setBodyRendered,
+    isLoadedArticleBody,
+  } = settingsStore;
 
   const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
@@ -107,5 +113,6 @@ export default inject(({ auth, setup, pluginStore }) => {
     isInitPlugins,
     initPlugins,
     setBodyRendered,
+    isLoadedArticleBody,
   };
 })(withLoading(observer(Layout)));

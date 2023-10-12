@@ -193,12 +193,18 @@ class SettingsStore {
 
   windowWidth = window.innerWidth;
 
+  bodyRendered = false;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   setTenantStatus = (tenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setBodyRendered = (value) => {
+    this.bodyRendered = value;
   };
 
   get docspaceSettingsUrl() {

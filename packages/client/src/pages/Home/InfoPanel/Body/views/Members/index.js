@@ -49,15 +49,22 @@ const Members = ({
 
   const fetchMembers = async (roomId, clearFilter = true, membersFilter) => {
     if (isLoading) return;
-    const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter, membersFilter)];
 
-    if (isPublic && clearFilter) {
-      requests.push(getRoomLinks(roomId));
-    }
+    const requests = [
+      new Promise((res) =>
+        res(getRoomMembers(roomId, clearFilter, membersFilter))
+      ),
+    ];
+
+    const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
+    if (isPublic && clearFilter)
+      requests.push(new Promise((res) => res(getRoomLinks(roomId))));
 
     let timerId;
-    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 300);
+    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 1000);
+
+    const res = await Promise.all(requests);
+    console.log(res);
 
     const [data, links] = await Promise.all(requests);
     clearFilter && setIsLoading(false);
@@ -65,10 +72,12 @@ const Members = ({
 
     links && setExternalLinks(links);
 
+    console.log(data);
+
     const users = [];
     const administrators = [];
     const expectedMembers = [];
-    data.map((fetchedMember) => {
+    data?.map((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,

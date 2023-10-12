@@ -2509,7 +2509,8 @@ class FilesStore {
       newFilter.total = res.total;
       this.setMembersFilter(newFilter);
 
-      return res.items;
+      // return res.items;
+      return res;
     });
   };
 

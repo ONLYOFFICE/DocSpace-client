@@ -5,15 +5,6 @@ import Loaders from "@docspace/common/components/Loaders";
 import { isDesktop, desktop } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 8px;
-        `
-      : css`
-          padding-left: 8px;
-        `}
-
   .loader {
     padding-bottom: 12px;
   }
@@ -33,14 +24,6 @@ const StyledLoader = styled.div`
   }
 
   @media ${desktop} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 10px;
-          `
-        : css`
-            padding-left: 10px;
-          `}
     padding-top: 7px;
     display: flex;
     flex-direction: column;
@@ -76,21 +59,10 @@ const LoaderArticleBody = () => {
   });
 
   const height = isTabletView ? "28px" : "20px";
-  const width = isTabletView ? "28px" : "187px";
+  const width = isTabletView ? "28px" : "190px";
 
   return (
     <StyledLoader>
-      {isTabletView ? (
-        <div className="section-name-container">
-          <p className="section-name"></p>
-        </div>
-      ) : (
-        <Loaders.Rectangle
-          width={"42px"}
-          height={"12px"}
-          className="section-name-loader"
-        />
-      )}
       <Loaders.Rectangle width={width} height={height} className="loader" />
       <Loaders.Rectangle width={width} height={height} className="loader" />
       <Loaders.Rectangle width={width} height={height} className="loader" />

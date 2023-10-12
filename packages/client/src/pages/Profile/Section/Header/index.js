@@ -40,8 +40,9 @@ const Header = (props) => {
 
     setDialogData,
 
-    isProfileLoaded,
     profileClicked,
+
+    showProfileLoader,
   } = props;
 
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const Header = (props) => {
     // setFilter(filter);
   };
 
-  if (!isProfileLoaded) return <Loaders.SectionHeader />;
+  if (showProfileLoader) return <Loaders.SectionHeader />;
 
   return (
     <StyledHeader
@@ -177,7 +178,7 @@ export default inject(
 
     const { targetUser, isMe } = targetUserStore;
 
-    const { isProfileLoaded } = clientLoadingStore;
+    const { showProfileLoader } = clientLoadingStore;
 
     const { profileClicked } = profileActionsStore;
 
@@ -205,7 +206,7 @@ export default inject(
 
       setDialogData,
 
-      isProfileLoaded,
+      showProfileLoader,
       profileClicked,
     };
   }

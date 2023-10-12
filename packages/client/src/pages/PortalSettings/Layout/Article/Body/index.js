@@ -115,6 +115,7 @@ const ArticleBodyContent = (props) => {
     isEnterprise,
     isCommunity,
     currentDeviceType,
+    isProfileLoading,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -334,10 +335,14 @@ const ArticleBodyContent = (props) => {
 
   const items = catalogItems();
 
-  return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
+  return !isLoadedArticleBody || isProfileLoading ? (
+    <LoaderArticleBody />
+  ) : (
+    <>{items}</>
+  );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ auth, common, clientLoadingStore }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
   const {
     currentTariffStatusStore,
@@ -352,6 +357,10 @@ export default inject(({ auth, common }) => {
   const { standalone, showText, toggleArticleOpen, currentDeviceType } =
     settingsStore;
 
+  const isProfileLoading =
+    window.location.pathname.includes("profile") &&
+    clientLoadingStore.showProfileLoader;
+
   return {
     standalone,
     isEnterprise,
@@ -363,6 +372,7 @@ export default inject(({ auth, common }) => {
     isOwner,
     isCommunity,
     currentDeviceType,
+    isProfileLoading,
   };
 })(
   withLoading(

@@ -29,7 +29,6 @@ class ClientLoadingStore {
     header: null,
     filter: null,
     body: null,
-    profile: new Date(),
   };
 
   constructor() {
@@ -202,21 +201,9 @@ class ClientLoadingStore {
   };
 
   setIsProfileLoaded = (isProfileLoaded) => {
-    if (this.startLoadingTime.profile) {
-      const currentDate = new Date();
-
-      const ms = Math.abs(
-        this.startLoadingTime.profile.getTime() - currentDate.getTime()
-      );
-
-      if (ms < MIN_LOADER_TIMER)
-        return setTimeout(() => {
-          this.updateIsProfileLoaded(isProfileLoaded);
-          this.startLoadingTime.profile = null;
-        }, MIN_LOADER_TIMER - ms);
-    }
-
-    this.updateIsProfileLoaded(isProfileLoaded);
+    setTimeout(() => {
+      this.updateIsProfileLoaded(isProfileLoaded);
+    }, MIN_LOADER_TIMER);
   };
 
   hideLoaders = () => {

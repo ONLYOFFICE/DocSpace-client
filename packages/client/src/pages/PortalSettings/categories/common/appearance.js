@@ -460,36 +460,40 @@ const Appearance = (props) => {
     return textColor;
   };
 
-  const onAppliedColorAccent = useCallback(() => {
-    if (appliedColorAccent.toUpperCase() !== currentColorAccent) {
-      setChangeCurrentColorAccent(true);
-    }
+  const onAppliedColorAccent = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorAccent) {
+        setChangeCurrentColorAccent(true);
+      }
 
-    setCurrentColorAccent(appliedColorAccent);
-    saveToSessionStorage("selectColorAccent", appliedColorAccent);
+      setCurrentColorAccent(color);
+      saveToSessionStorage("selectColorAccent", color);
 
-    setOpenHexColorPickerAccent(false);
-  }, [
-    appliedColorAccent,
-    currentColorAccent,
-    setChangeCurrentColorAccent,
-    setOpenHexColorPickerAccent,
-  ]);
+      setOpenHexColorPickerAccent(false);
+    },
+    [
+      currentColorAccent,
+      setChangeCurrentColorAccent,
+      setOpenHexColorPickerAccent,
+    ]
+  );
 
-  const onAppliedColorButtons = useCallback(() => {
-    if (appliedColorButtons.toUpperCase() !== currentColorButtons) {
-      setChangeCurrentColorButtons(true);
-    }
+  const onAppliedColorButtons = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorButtons) {
+        setChangeCurrentColorButtons(true);
+      }
 
-    setCurrentColorButtons(appliedColorButtons);
+      setCurrentColorButtons(color);
 
-    setOpenHexColorPickerButtons(false);
-  }, [
-    appliedColorButtons,
-    currentColorButtons,
-    setChangeCurrentColorButtons,
-    setOpenHexColorPickerButtons,
-  ]);
+      setOpenHexColorPickerButtons(false);
+    },
+    [
+      currentColorButtons,
+      setChangeCurrentColorButtons,
+      setOpenHexColorPickerButtons,
+    ]
+  );
 
   const onSaveNewThemes = useCallback(
     async (theme) => {
@@ -590,8 +594,7 @@ const Appearance = (props) => {
           id="buttons-hex"
           onCloseHexColorPicker={onCloseHexColorPickerButtons}
           onAppliedColor={onAppliedColorButtons}
-          color={appliedColorButtons}
-          setColor={setAppliedColorButtons}
+          appliedColor={appliedColorButtons}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -611,8 +614,7 @@ const Appearance = (props) => {
           id="accent-hex"
           onCloseHexColorPicker={onCloseHexColorPickerAccent}
           onAppliedColor={onAppliedColorAccent}
-          color={appliedColorAccent}
-          setColor={setAppliedColorAccent}
+          appliedColor={appliedColorAccent}
         />
       </DropDownItem>
     </DropDownContainer>

@@ -61,6 +61,10 @@ const StyledHotkeysPanel = styled.div`
     max-width: 320px;
     width: 100%;
 
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+
     @media ${mobile} {
       max-width: 140px;
       word-wrap: break-word;

@@ -167,6 +167,8 @@ const Article = ({
     };
   }, [onResize]);
 
+  console.log(showArticleLoader);
+
   const articleComponent = (
     <>
       <StyledArticle
@@ -196,22 +198,28 @@ const Article = ({
 
         <SubArticleBody showText={showText}>
           {articleBodyContent ? articleBodyContent.props.children : null}
-          <ArticleAlerts />
-          <ArticleApps showText={showText} theme={theme} />
-          {!isMobile && isLiveChatAvailable && (
-            <ArticleLiveChat
-              currentColorScheme={currentColorScheme}
-              withMainButton={withMainButton && !!articleMainButtonContent}
-            />
+          {!showArticleLoader && (
+            <>
+              <ArticleAlerts />
+              <ArticleApps showText={showText} theme={theme} />
+              {!isMobile && isLiveChatAvailable && (
+                <ArticleLiveChat
+                  currentColorScheme={currentColorScheme}
+                  withMainButton={withMainButton && !!articleMainButtonContent}
+                />
+              )}
+            </>
           )}
         </SubArticleBody>
+        {!showArticleLoader && (
+          <HideArticleMenuButton
+            showText={showText}
+            toggleShowText={toggleShowText}
+            currentColorScheme={currentColorScheme}
+            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+          />
+        )}
 
-        <HideArticleMenuButton
-          showText={showText}
-          toggleShowText={toggleShowText}
-          currentColorScheme={currentColorScheme}
-          isVirtualKeyboardOpen={isVirtualKeyboardOpen}
-        />
         {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
           <>
             {showArticleLoader ? (

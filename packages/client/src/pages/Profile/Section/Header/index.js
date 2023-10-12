@@ -43,6 +43,7 @@ const Header = (props) => {
     profileClicked,
 
     showProfileLoader,
+    setIsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -111,6 +112,8 @@ const Header = (props) => {
     roomsFilter.searchArea = RoomSearchArea.Active;
     const urlParams = roomsFilter.toUrlParams();
     const backUrl = `/rooms/shared/filter?${urlParams}`;
+
+    setIsLoading();
 
     navigate(backUrl);
     // setFilter(filter);

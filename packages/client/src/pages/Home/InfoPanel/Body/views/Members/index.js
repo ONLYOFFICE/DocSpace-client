@@ -37,7 +37,6 @@ const Members = ({
 
   setExternalLinks,
   membersFilter,
-  setMembersFilter,
   externalLinks,
   members,
   setMembersList,
@@ -47,32 +46,23 @@ const Members = ({
 
   const security = selectionParentRoom ? selectionParentRoom.security : {};
 
-  const fetchMembers = async (roomId, clearFilter = true, membersFilter) => {
+  const fetchMembers = async (roomId, clearFilter = true) => {
     if (isLoading) return;
-
-    const requests = [
-      new Promise((res) =>
-        res(getRoomMembers(roomId, clearFilter, membersFilter))
-      ),
-    ];
-
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    if (isPublic && clearFilter)
-      requests.push(new Promise((res) => res(getRoomLinks(roomId))));
+    const requests = [getRoomMembers(roomId, clearFilter)];
+
+    if (isPublic && clearFilter) {
+      requests.push(getRoomLinks(roomId));
+    }
 
     let timerId;
-    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 1000);
-
-    const res = await Promise.all(requests);
-    console.log(res);
+    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 300);
 
     const [data, links] = await Promise.all(requests);
     clearFilter && setIsLoading(false);
     clearTimeout(timerId);
 
     links && setExternalLinks(links);
-
-    console.log(data);
 
     const users = [];
     const administrators = [];
@@ -98,7 +88,7 @@ const Members = ({
     });
 
     let hasPrevAdminsTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.administrators, "administration")
         : false;
 
@@ -111,7 +101,7 @@ const Members = ({
     }
 
     let hasPrevUsersTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.users, "user")
         : false;
 
@@ -120,7 +110,7 @@ const Members = ({
     }
 
     let hasPrevExpectedTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.expected, "expected")
         : false;
 
@@ -207,11 +197,6 @@ const Members = ({
       expected: [...members.expected, ...expected],
     };
 
-    setSelectionParentRoom({
-      ...selection,
-      members: newMembers,
-    });
-
     setMembersList(newMembers);
   };
 
@@ -252,9 +237,6 @@ const Members = ({
         isPublicRoomType={isPublicRoomType}
         withBanner={isPublicRoomType && externalLinks.length > 0}
         setMembers={setMembersList}
-        membersFilter={membersFilter}
-        setMembersFilter={setMembersFilter}
-        fetchMembers={fetchMembers}
       />
     </>
   );
@@ -281,7 +263,6 @@ export default inject(
       updateRoomMemberRole,
       resendEmailInvitations,
       membersFilter,
-      setMembersFilter,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -316,7 +297,6 @@ export default inject(
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
-      setMembersFilter,
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,

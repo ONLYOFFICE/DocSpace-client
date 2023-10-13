@@ -35,7 +35,9 @@ newInstance
     },
 
     ns: [
+      "ArchiveDialog",
       "InfoPanel",
+      "InviteDialog",
       "FormGallery",
       "DownloadDialog",
       "DeleteDialog",
@@ -43,9 +45,14 @@ newInstance
       "ConvertDialog",
       "ConnectDialog",
       "ConflictResolveDialog",
+      "CreateEditRoomDialog",
       "DeleteThirdPartyDialog",
       "PortalUnavailable",
+      "RoomSelector",
+      "UploadPanel",
+      "Files",
       "Errors",
+      "Translations",
     ],
 
     backend: {

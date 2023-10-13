@@ -77,10 +77,11 @@ class InfoPanelStore {
     this.roomsView = view;
     this.fileView = view === "info_members" ? "info_history" : view;
     this.isScrollLocked = false;
-    this.setMembersList(null);
+    if (view !== "info_members") this.setMembersList(null);
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
+    this.setMembersList(null);
     this.updateRoomMembers = updateRoomMembers;
   };
 
@@ -243,7 +244,6 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
       "/profile",
     ];
     this.selectedFolderStore.setSelectedFolder(null);

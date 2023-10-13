@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledInputWrapper = styled.div`
   width: 100%;
   max-width: ${(props) => props.maxWidth || "520px"};
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     max-width: 100%;
   }
 

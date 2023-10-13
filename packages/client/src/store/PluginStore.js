@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
 import { cloneDeep } from "lodash";
-import { isMobileOnly, isTablet } from "react-device-detect";
 
 import api from "@docspace/common/api";
 
@@ -10,7 +9,6 @@ import {
   PluginFileType,
   PluginScopes,
   PluginUsersType,
-  PluginDevices,
   PluginStatus,
 } from "SRC_DIR/helpers/plugins/constants";
 import { getPluginUrl, messageActions } from "SRC_DIR/helpers/plugins/utils";
@@ -366,6 +364,8 @@ class PluginStore {
   getUserRole = () => {
     const { user } = this.authStore.userStore;
 
+    if (!user) return PluginUsersType.user;
+
     const { isOwner, isAdmin, isCollaborator, isVisitor } = user;
 
     const userRole = isOwner
@@ -382,13 +382,9 @@ class PluginStore {
   };
 
   getCurrentDevice = () => {
-    const device = isTablet
-      ? PluginDevices.tablet
-      : isMobileOnly
-      ? PluginDevices.mobile
-      : PluginDevices.desktop;
+    const { currentDeviceType } = this.authStore.settingsStore;
 
-    return device;
+    return currentDeviceType;
   };
 
   getContextMenuKeysByType = (type, fileExst) => {

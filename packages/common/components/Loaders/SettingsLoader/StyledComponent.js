@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledSMTPContent = styled.div`
   .rectangle-loader_description {
@@ -32,7 +32,7 @@ const StyledSMTPContent = styled.div`
     grid-template-columns: 86px 1fr 1fr;
     gap: 8px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       grid-template-columns: 1fr;
     }
   }

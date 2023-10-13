@@ -250,16 +250,6 @@ class TableHeader extends React.Component {
 
     if (!container) return;
 
-    // // 400 - it is desktop info panel width
-    // const minSize = infoPanelVisible ? size.tablet - 400 : size.tablet;
-
-    // if (
-    //   !container ||
-    //   +container.clientWidth + containerMargin <= minSize ||
-    //   sectionWidth <= minSize
-    // )
-    //   return;
-
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 

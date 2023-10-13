@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Button from "../button";
 import DropDown from "../drop-down";
 import DropDownItem from "../drop-down-item";
-import { mobile, tablet, hugeMobile } from "../utils/device";
+import { mobile, tablet } from "../utils/device";
 import { Base } from "../themes";
 import { isChrome, browserVersion } from "react-device-detect";
 
@@ -81,7 +81,7 @@ const StyledButton = styled(Button)`
       gap: 4px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       margin-top: 4px;
     }
 
@@ -110,7 +110,7 @@ const StyledButton = styled(Button)`
     }
   }
 
-  @media ${mobile}, ${hugeMobile} {
+  @media ${mobile} {
     padding: 0 16px;
     font-size: 0;
     line-height: 0;

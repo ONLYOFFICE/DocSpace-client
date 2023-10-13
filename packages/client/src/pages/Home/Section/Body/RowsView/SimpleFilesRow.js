@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 import Row from "@docspace/components/row";
 import FilesRowContent from "./FilesRowContent";
-import { isTablet, isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";

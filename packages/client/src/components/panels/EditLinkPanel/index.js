@@ -21,8 +21,9 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { isMobileOnly } from "react-device-detect";
 import { RoomsType } from "@docspace/common/constants";
+
+import { DeviceType } from "@docspace/common/constants";
 
 const EditLinkPanel = (props) => {
   const {
@@ -43,6 +44,7 @@ const EditLinkPanel = (props) => {
     date,
     language,
     isPublic,
+    currentDeviceType,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -177,6 +179,7 @@ const EditLinkPanel = (props) => {
         visible={visible}
         onClose={onClosePanel}
         zIndex={310}
+        withoutBodyScroll
       >
         <div className="edit-link_header">
           <Heading className="edit-link_heading">
@@ -268,7 +271,9 @@ const EditLinkPanel = (props) => {
     );
   };
 
-  return isMobileOnly ? renderPortal() : editLinkPanelComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortal()
+    : editLinkPanelComponent;
 };
 
 export default inject(({ auth, dialogsStore, publicRoomStore }) => {
@@ -308,6 +313,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     link,
     language: auth.language,
     isPublic,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(
   withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel))

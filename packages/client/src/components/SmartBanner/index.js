@@ -15,8 +15,6 @@ const ReactSmartBanner = (props) => {
   const force = isIOS ? "ios" : "android";
   const location = useLocation();
 
-  const [isDocuments, setIsDocuments] = useState(false);
-
   const getCookie = (name) => {
     let matches = document.cookie.match(
       new RegExp(
@@ -28,23 +26,26 @@ const ReactSmartBanner = (props) => {
     return matches ? decodeURIComponent(matches[1]) : undefined;
   };
 
-  const hideBanner = () => {
-    setIsBannerVisible(false);
+  const checkBanner = () => {
+    const cookieClosed = getCookie("smartbanner-closed");
+    const cookieInstalled = getCookie("smartbanner-installed");
+    const path = window.location.pathname.toLowerCase();
+    if (
+      (path.includes("rooms") || path.includes("files")) &&
+      !(cookieClosed || cookieInstalled)
+    ) {
+      setIsBannerVisible(true);
+    } else {
+      setIsBannerVisible(false);
+    }
   };
 
   useEffect(() => {
-    const cookieClosed = getCookie("smartbanner-closed");
-    const cookieInstalled = getCookie("smartbanner-installed");
-    if (cookieClosed || cookieInstalled) hideBanner();
+    checkBanner();
   }, []);
 
   useEffect(() => {
-    const path = window.location.pathname.toLowerCase();
-    if (path.includes("rooms") || path.includes("files")) {
-      setIsDocuments(true);
-    } else {
-      setIsDocuments(false);
-    }
+    checkBanner();
   }, [location]);
 
   const storeText = {
@@ -73,19 +74,15 @@ const ReactSmartBanner = (props) => {
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0;
 
-  return isMobile &&
-    isBannerVisible &&
-    ready &&
-    isTouchDevice &&
-    isDocuments ? (
+  return isMobile && isBannerVisible && ready && isTouchDevice ? (
     <Wrapper>
       <SmartBanner
         title={t("SmartBanner:AppName")}
         author="Ascensio System SIA"
         button={t("Common:View")}
         force={force}
-        onClose={hideBanner}
-        onInstall={hideBanner}
+        onClose={() => setIsBannerVisible(false)}
+        onInstall={() => setIsBannerVisible(false)}
         storeText={storeText}
         price={priceText}
         appMeta={appMeta}

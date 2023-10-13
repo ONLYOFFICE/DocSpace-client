@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
-import { desktop } from "@docspace/components/utils/device";
+import { desktop, tablet } from "@docspace/components/utils/device";
 
 const StyledContainer = styled.div`
   display: grid;
@@ -28,7 +28,7 @@ const StyledContainer = styled.div`
         theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
 
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
           ? css`

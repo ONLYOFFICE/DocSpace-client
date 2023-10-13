@@ -11,8 +11,9 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import TfaLoader from "../sub-components/loaders/tfa-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -30,6 +31,7 @@ const TwoFactorAuth = (props) => {
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState("none");
 
@@ -87,7 +89,7 @@ const TwoFactorAuth = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("tfa") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -126,7 +128,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <TfaLoader />;
   }
 
@@ -209,7 +211,8 @@ export default inject(({ auth, setup }) => {
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
-  const { currentColorScheme, tfaSettingsUrl } = auth.settingsStore;
+  const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
+    auth.settingsStore;
 
   return {
     setTfaSettings,
@@ -222,5 +225,6 @@ export default inject(({ auth, setup }) => {
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

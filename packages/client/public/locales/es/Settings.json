@@ -160,7 +160,6 @@
   "RecoveryFileNotSelected": "Error de recuperación. No se ha seleccionado el archivo de recuperación.",
   "RestoreBackup": "Restauración de datos",
   "RestoreBackupDescription": "Use esta opción para restaurar su espacio de la copia de seguridad guardada anteriormente.",
-  "RestoreDefaultButton": "Restablecer como predeterminado",
   "RoomsModule": "Sala de copia de seguridad",
   "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}.",
   "SelectFileInGZFormat": "Seleccione el archivo en formato .GZ",

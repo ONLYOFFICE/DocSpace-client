@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { tablet } from "@docspace/components/utils/device";
 
 const StyledRow = styled.div`
   width: 688px;
@@ -15,7 +16,7 @@ const StyledRow = styled.div`
   justify-items: center;
   align-items: center;
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     height: 67px;
     width: 100%;
 

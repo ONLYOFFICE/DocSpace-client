@@ -145,6 +145,8 @@
   "RoomPinned": "Room pinned",
   "RoomRemoved": "Room removed",
   "RoomsRemoved": "Rooms removed",
+  "RoomsPinned": "Rooms pinned: {{count}}",
+  "RoomsUnpinned": "Rooms unpinned: {{count}}",
   "RoomUnpinned": "Room unpinned",
   "SearchByContent": "Search by file contents",
   "SelectorEmptyScreenHeader": "No files and folders here yet",

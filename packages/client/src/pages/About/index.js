@@ -8,7 +8,12 @@ import { inject, observer } from "mobx-react";
 import AboutHeader from "./AboutHeader";
 import AboutContent from "./AboutContent";
 
-const Body = ({ t, personal, buildVersionInfo, theme }) => {
+const Body = ({ t, personal, buildVersionInfo, theme, setBodyRendered }) => {
+  useEffect(() => {
+    setBodyRendered(true);
+    return () => setBodyRendered(false);
+  }, []);
+
   useEffect(() => {
     setDocumentTitle(t("Common:About"));
   }, [t]);
@@ -23,11 +28,13 @@ const Body = ({ t, personal, buildVersionInfo, theme }) => {
 };
 
 const BodyWrapper = inject(({ auth }) => {
-  const { personal, buildVersionInfo, theme } = auth.settingsStore;
+  const { personal, buildVersionInfo, theme, setBodyRendered } =
+    auth.settingsStore;
   return {
     personal,
     buildVersionInfo,
     theme,
+    setBodyRendered,
   };
 })(withTranslation(["About", "Common"])(withLoader(observer(Body))));
 

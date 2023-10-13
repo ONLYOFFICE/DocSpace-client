@@ -19,7 +19,7 @@ import i18n from "./i18n";
 
 import Snackbar from "@docspace/components/snackbar";
 import moment from "moment";
-import ReactSmartBanner from "./components/SmartBanner";
+//import ReactSmartBanner from "./components/SmartBanner";
 import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
@@ -103,7 +103,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
   }, [socketHelper]);
 
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+  const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
   let snackTimer = null;
   let fbInterval = null;
@@ -344,7 +344,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      <ReactSmartBanner t={t} ready={ready} />
+      {/* <ReactSmartBanner t={t} ready={ready} /> */}
       {isEditor ? <></> : <NavMenu />}
       {currentDeviceType === DeviceType.mobile && <MainBar />}
       <IndicatorLoader />
@@ -361,6 +361,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 };
 
 const ShellWrapper = inject(({ auth, backup }) => {
+  const { i18n } = useTranslation();
+
   const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
 
   const {
@@ -392,7 +394,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
 
   return {
     loadBaseInfo: async () => {
-      await init();
+      await init(false, i18n);
 
       setModuleInfo(config.homepage, "home");
       setProductVersion(config.version);

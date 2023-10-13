@@ -24,14 +24,14 @@ const StyledNav = styled.nav`
 
   & > div {
     margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 0 0 16px", theme.interfaceDirection)};
+      getCorrectFourValuesStyle("0 4px 0 16px", theme.interfaceDirection)};
     padding: 0;
     min-width: 24px;
   }
 
   @media ${tablet} {
     padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 0 0 16px", theme.interfaceDirection)};
+      getCorrectFourValuesStyle("0 4px 0 16px", theme.interfaceDirection)};
   }
   .icon-profile-menu {
     cursor: pointer;

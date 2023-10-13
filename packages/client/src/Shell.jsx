@@ -353,7 +353,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
-      {!bodyRendered && <AppLoader />}
+      {/* {!bodyRendered && <AppLoader />} */}
       <Main isDesktop={isDesktop}>
         {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">

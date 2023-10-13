@@ -86,7 +86,9 @@ const useFiles = ({
 
   React.useEffect(() => {
     if (isAccountsPage || isSettingsPage) return;
-    setIsLoading(true);
+
+    if (location.pathname === "/") setIsLoading(true, true, true);
+    else setIsLoading(true, false, false);
 
     if (!window.location.href.includes("#preview")) {
       // localStorage.removeItem("isFirstUrl");
@@ -271,7 +273,7 @@ const useFiles = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [location.pathname, location.search, isAccountsPage, isSettingsPage]);
+  }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);
 
   return { onDrop };
 };

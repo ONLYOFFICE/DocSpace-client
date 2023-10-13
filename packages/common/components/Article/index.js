@@ -15,6 +15,7 @@ import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
 import { DeviceType } from "../../constants";
+import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
 
 const Article = ({
   showText,
@@ -41,6 +42,7 @@ const Article = ({
   theme,
 
   currentDeviceType,
+  showArticleLoader,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -194,28 +196,40 @@ const Article = ({
 
         <SubArticleBody showText={showText}>
           {articleBodyContent ? articleBodyContent.props.children : null}
-          <ArticleAlerts />
-          <ArticleApps showText={showText} theme={theme} />
-          {!isMobile && isLiveChatAvailable && (
-            <ArticleLiveChat
-              currentColorScheme={currentColorScheme}
-              withMainButton={withMainButton && !!articleMainButtonContent}
-            />
+          {!showArticleLoader && (
+            <>
+              <ArticleAlerts />
+              <ArticleApps showText={showText} theme={theme} />
+              {!isMobile && isLiveChatAvailable && (
+                <ArticleLiveChat
+                  currentColorScheme={currentColorScheme}
+                  withMainButton={withMainButton && !!articleMainButtonContent}
+                />
+              )}
+            </>
           )}
         </SubArticleBody>
-
-        <HideArticleMenuButton
-          showText={showText}
-          toggleShowText={toggleShowText}
-          currentColorScheme={currentColorScheme}
-          isVirtualKeyboardOpen={isVirtualKeyboardOpen}
-        />
-        {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
-          <ArticleProfile
+        {!showArticleLoader && (
+          <HideArticleMenuButton
             showText={showText}
-            currentDeviceType={currentDeviceType}
+            toggleShowText={toggleShowText}
+            currentColorScheme={currentColorScheme}
             isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
+        )}
+
+        {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
+          <>
+            {showArticleLoader ? (
+              <ArticleProfileLoader />
+            ) : (
+              <ArticleProfile
+                showText={showText}
+                currentDeviceType={currentDeviceType}
+                isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+              />
+            )}
+          </>
         )}
       </StyledArticle>
       {articleOpen && currentDeviceType === DeviceType.mobile && (

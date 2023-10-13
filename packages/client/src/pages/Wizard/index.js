@@ -71,6 +71,7 @@ const Wizard = (props) => {
     setLicense,
     licenseUpload,
     resetLicenseUploaded,
+    setBodyRendered,
   } = props;
 
   const navigate = useNavigate();
@@ -99,6 +100,13 @@ const Wizard = (props) => {
     : culture;
 
   const convertedCulture = convertLanguage(userCulture);
+
+  useEffect(() => {
+    setBodyRendered(true);
+    return () => {
+      setBodyRendered(false);
+    };
+  }, []);
 
   const mapTimezonesToArray = (timezones) => {
     return timezones.map((timezone) => {
@@ -497,6 +505,7 @@ export default inject(({ auth, wizard }) => {
     getPortalTimezones,
     getPortalPasswordSettings,
     theme,
+    setBodyRendered,
   } = auth.settingsStore;
 
   const { language } = auth;
@@ -535,5 +544,6 @@ export default inject(({ auth, wizard }) => {
     setPortalOwner,
     setLicense,
     resetLicenseUploaded,
+    setBodyRendered,
   };
 })(withCultureNames(observer(Wizard)));

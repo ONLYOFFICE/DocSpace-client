@@ -22,6 +22,7 @@ const PublicRoom = (props) => {
     getFilesSettings,
     setPublicRoomKey,
     setIsArticleLoading,
+    setBodyRendered,
   } = props;
 
   const navigate = useNavigate();
@@ -60,6 +61,13 @@ const PublicRoom = (props) => {
   useEffect(() => {
     if (isLoaded) fetchRoomFiles();
   }, [isLoaded]);
+
+  useEffect(() => {
+    setBodyRendered(true);
+    return () => {
+      setBodyRendered(false);
+    };
+  }, []);
 
   const renderLoader = () => {
     return (
@@ -102,7 +110,7 @@ export default inject(
       publicRoomStore;
 
     const { getFilesSettings } = settingsStore;
-    const { setPublicRoomKey } = auth.settingsStore;
+    const { setPublicRoomKey, setBodyRendered } = auth.settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
 
     return {
@@ -116,6 +124,7 @@ export default inject(
       validatePublicRoomKey,
       setPublicRoomKey,
       setIsArticleLoading,
+      setBodyRendered,
     };
   }
 )(observer(PublicRoom));

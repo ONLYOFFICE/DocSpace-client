@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
     height: auto;
     min-height: 100%;
     width: 100%;
+    min-width: 100%;
   }
 
   .bg-cover {
@@ -48,6 +49,8 @@ export const StyledContent = styled.div`
 
   @media ${mobile} {
     min-height: 100%;
+    width: calc(100% - 32px);
+    justify-content: start;
   }
 `;
 
@@ -64,6 +67,7 @@ export const WizardContainer = styled.div`
   }
 
   @media ${mobile} {
+    max-width: 100%;
     margin: 32px auto;
   }
 

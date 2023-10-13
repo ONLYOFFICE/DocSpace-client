@@ -47,6 +47,11 @@ const StyledContainer = styled.div`
 
 const StyledSubmitToGalleryButton = styled(Button)`
   margin-left: auto;
+
+  @media ${mobile} {
+    display: none;
+  }
+
   ${(props) =>
     props.theme.interfaceDirection === "ltr"
       ? css`

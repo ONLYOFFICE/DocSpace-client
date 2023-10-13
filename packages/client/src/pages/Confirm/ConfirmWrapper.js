@@ -47,13 +47,16 @@ const BgBlock = styled.div`
 const ConfirmWrapper = (props) => {
   const { children, currentColorScheme, height } = props;
   const bgPattern = getBgPattern(currentColorScheme?.id);
+  const content = (
+    <>
+      <BgBlock bgPattern={bgPattern} />
+      {children}
+    </>
+  );
 
   return (
     <StyledWrapper height={height}>
-      <Scrollbar>
-        <BgBlock bgPattern={bgPattern} />
-        {children}
-      </Scrollbar>
+      {!!height ? content : <Scrollbar>{content}</Scrollbar>}
     </StyledWrapper>
   );
 };

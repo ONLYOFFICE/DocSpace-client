@@ -50,7 +50,7 @@ const StyledContainer = styled.header`
               -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
             }
 
-            width: 100%;
+            width: 100vw;
 
             margin-bottom: 48px;
           }

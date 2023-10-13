@@ -155,7 +155,8 @@ const Layout = (props) => {
       }
 
       if (isMobileUtils() && isAndroid && isChrome) {
-        height = `calc(100vh - ${correctorMobileChrome}px)`;
+        // height = `calc(100vh - ${correctorMobileChrome}px)`;
+        height = `100%`;
       }
 
       // if (isTablet && isIOS && isSafari) {

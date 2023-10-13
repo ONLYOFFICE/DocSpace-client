@@ -100,13 +100,15 @@ const HeaderContainer = styled.div`
       margin-block: 0;
       margin-inline: -16px 0;
       width: calc(100% + 32px);
+      top: 5px;
     }
     @media ${mobile} {
       position: absolute;
       height: 48px;
       margin-block: -17px 0;
       margin-inline: -17px 0;
-      width: calc(100% + 32px);
+      width: 100%;
+      top: 10px;
     }
   }
 `;

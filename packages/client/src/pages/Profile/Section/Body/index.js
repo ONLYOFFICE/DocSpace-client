@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const SectionBodyContent = (props) => {
-  const { isProfileLoaded, profile, currentDeviceType, t } = props;
+  const { showProfileLoader, profile, currentDeviceType, t } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -72,7 +72,7 @@ const SectionBodyContent = (props) => {
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
   };
 
-  if (!isProfileLoaded) return <Loaders.ProfileView />;
+  if (showProfileLoader) return <Loaders.ProfileView />;
   return (
     <Wrapper>
       <MainProfile />
@@ -94,13 +94,13 @@ const SectionBodyContent = (props) => {
 };
 
 export default inject(({ auth, peopleStore, clientLoadingStore }) => {
-  const { isProfileLoaded } = clientLoadingStore;
+  const { showProfileLoader } = clientLoadingStore;
   const { targetUser: profile } = peopleStore.targetUserStore;
 
   return {
-    isProfileLoaded,
     profile,
     currentDeviceType: auth.settingsStore.currentDeviceType,
+    showProfileLoader,
   };
 })(
   observer(

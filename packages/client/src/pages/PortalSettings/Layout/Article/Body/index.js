@@ -115,6 +115,7 @@ const ArticleBodyContent = (props) => {
     isEnterprise,
     isCommunity,
     currentDeviceType,
+    isProfileLoading,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -160,7 +161,7 @@ const ArticleBodyContent = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if (tReady) setIsLoadedArticleBody(true);
+    if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
     if (prevLocation.current.pathname !== location.pathname) {
       if (location.pathname.includes("common")) {
@@ -198,7 +199,13 @@ const ArticleBodyContent = (props) => {
         this.setState({ selectedKeys: ["8-0"] });
       }
     }
-  }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
+  }, [
+    tReady,
+    isProfileLoading,
+    setIsLoadedArticleBody,
+    location.pathname,
+    selectedKeys,
+  ]);
 
   const onSelect = (value) => {
     if (isArrayEqual([value], selectedKeys)) {
@@ -206,7 +213,6 @@ const ArticleBodyContent = (props) => {
     }
 
     setSelectedKeys([value + "-0"]);
-    console.log(currentDeviceType);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
@@ -334,10 +340,14 @@ const ArticleBodyContent = (props) => {
 
   const items = catalogItems();
 
-  return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
+  return !isLoadedArticleBody || isProfileLoading ? (
+    <LoaderArticleBody />
+  ) : (
+    <>{items}</>
+  );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ auth, common, clientLoadingStore }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
   const {
     currentTariffStatusStore,
@@ -352,6 +362,11 @@ export default inject(({ auth, common }) => {
   const { standalone, showText, toggleArticleOpen, currentDeviceType } =
     settingsStore;
 
+  const isProfileLoading =
+    window.location.pathname.includes("profile") &&
+    clientLoadingStore.showProfileLoader &&
+    !isLoadedArticleBody;
+
   return {
     standalone,
     isEnterprise,
@@ -363,6 +378,7 @@ export default inject(({ auth, common }) => {
     isOwner,
     isCommunity,
     currentDeviceType,
+    isProfileLoading,
   };
 })(
   withLoading(

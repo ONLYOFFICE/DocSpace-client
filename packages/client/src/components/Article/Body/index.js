@@ -121,6 +121,7 @@ const ArticleBodyContent = (props) => {
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
+          withTimer = false;
           if (activeItemId === "accounts" && isAccounts) return;
 
           break;

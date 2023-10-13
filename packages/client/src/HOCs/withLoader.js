@@ -20,7 +20,12 @@ const withLoader = (WrappedComponent) => (Loader) => {
       showBodyLoader,
       isLoadingFilesFind,
       accountsViewAs,
+      setBodyRendered,
     } = props;
+
+    React.useEffect(() => {
+      setBodyRendered(true);
+    }, []);
 
     const location = useLocation();
 
@@ -61,7 +66,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
       const { firstLoad, isLoading, showBodyLoader } = clientLoadingStore;
       const { settingsStore } = auth;
-      const { setIsBurgerLoading } = settingsStore;
+      const { setIsBurgerLoading, setBodyRendered } = settingsStore;
       const { isPublicRoom } = publicRoomStore;
 
       return {
@@ -74,6 +79,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
         isInit: isPublicRoom ? true : isInit,
         showBodyLoader,
         accountsViewAs,
+        setBodyRendered,
       };
     }
   )(observer(withLoader));

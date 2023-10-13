@@ -14,6 +14,10 @@ const StyledHeadline = styled(Headline)`
     font-size: 21px;
     line-height: 28px;
   }
+  @media ${mobile} {
+    font-size: 18px;
+    line-height: 24px;
+  }
 `;
 
 const StyledContainer = styled.div`
@@ -36,12 +40,12 @@ const StyledContainer = styled.div`
 
   @media ${tablet} {
     width: 100%;
-    padding: 16px 0 0px;
+    padding: 16px 0 16px;
   }
 
   @media ${mobile} {
     width: 100%;
-    padding: 12px 0 0;
+    padding: 12px 0 12px;
   }
 `;
 

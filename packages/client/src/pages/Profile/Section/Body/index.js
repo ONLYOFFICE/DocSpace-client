@@ -80,7 +80,6 @@ const SectionBodyContent = (props) => {
         data={data}
         startSelect={currentTab}
         onSelect={onSelect}
-        size="scale"
         topProps={
           currentDeviceType === DeviceType.desktop
             ? 0

@@ -16,6 +16,7 @@ import CloseButton from "../components/CloseButton";
 import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
+import FormWrapper from "../components/FormWrapper";
 
 const Modal = ({
   id,
@@ -41,6 +42,7 @@ const Modal = ({
   isDoubleFooterLine,
   isCloseable,
   embedded,
+  withForm,
 }) => {
   const headerComponent = header ? header.props.children : null;
   const bodyComponent = body ? body.props.children : null;
@@ -111,7 +113,7 @@ const Modal = ({
                 currentDisplayType !== "modal" ? (
                   <>{containerComponent}</>
                 ) : (
-                  <>
+                  <FormWrapper withForm={withForm}>
                     {header && (
                       <StyledHeader
                         id="modal-header-swipe"
@@ -172,7 +174,7 @@ const Modal = ({
                         {footerComponent}
                       </StyledFooter>
                     )}
-                  </>
+                  </FormWrapper>
                 )}
               </>
             )}

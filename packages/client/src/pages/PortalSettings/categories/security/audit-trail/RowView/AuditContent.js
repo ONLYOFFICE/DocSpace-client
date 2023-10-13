@@ -1,8 +1,11 @@
-import RowContent from "@docspace/components/row-content";
 import React from "react";
-import Text from "@docspace/components/text";
-import moment from "moment";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import Text from "@docspace/components/text";
+import RowContent from "@docspace/components/row-content";
+import { convertTime } from "@docspace/common/utils/convertTime";
+
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledRowContent = styled(RowContent)`
@@ -15,18 +18,16 @@ const StyledRowContent = styled(RowContent)`
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;
 
-export const AuditContent = ({ sectionWidth, item, isSettingNotPaid }) => {
-  const DATE_FORMAT = "YYYY-MM-DD LT";
-  const to = moment(item.date).local();
-
-  const dateStr = to.format(DATE_FORMAT);
+const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
+  const dateStr = convertTime(item.date, locale);
 
   return (
     <StyledRowContent
       sideColor="#A3A9AE"
       nameColor="#D0D5DA"
       sectionWidth={sectionWidth}
-      isSettingNotPaid={isSettingNotPaid}>
+      isSettingNotPaid={isSettingNotPaid}
+    >
       <div className="user-container-wrapper">
         <Text fontWeight={600} fontSize="14px" isTextOverflow={true}>
           {item.user}
@@ -38,16 +39,28 @@ export const AuditContent = ({ sectionWidth, item, isSettingNotPaid }) => {
         fontSize="12px"
         fontWeight={600}
         truncate={true}
-        className="settings_unavailable">
+        className="settings_unavailable"
+      >
         {dateStr}
       </Text>
       <Text
         fontSize="12px"
         as="div"
         fontWeight={600}
-        className="settings_unavailable">
+        className="settings_unavailable"
+      >
         {`${item.context ? item.context + " |" : ""} ${item.action}`}
       </Text>
     </StyledRowContent>
   );
 };
+
+export default inject(({ auth }) => {
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  return {
+    locale,
+  };
+})(observer(AuditContent));

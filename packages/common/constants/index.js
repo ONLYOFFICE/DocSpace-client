@@ -498,3 +498,9 @@ export const RtlLanguages = [
   "ur",
   "yi",
 ];
+
+export const DeviceType = Object.freeze({
+  mobile: "mobile",
+  tablet: "tablet",
+  desktop: "desktop",
+});

@@ -25,12 +25,11 @@ import styled from "styled-components";
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "../utils/common-icons-style";
 
-import { isMobileOnly } from "react-device-detect";
-
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
+  vertical-align: top !important;
   ${commonIconsStyles};
 `;
 
@@ -250,7 +249,7 @@ const MainButtonMobile = (props) => {
     }
   }, [progressOptions]);
 
-  const noHover = isMobileOnly ? true : false;
+  const noHover = isMobile ? true : false;
 
   const renderItems = () => {
     return (
@@ -420,7 +419,7 @@ const MainButtonMobile = (props) => {
 
         {alert && !isOpen && (
           <StyledAlertIcon>
-            <StyledButtonAlertIcon onClick={onAlertClickAction} size="medium" />
+            <StyledButtonAlertIcon onClick={onAlertClickAction} size="small" />
           </StyledAlertIcon>
         )}
       </div>

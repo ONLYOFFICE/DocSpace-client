@@ -74,29 +74,6 @@ const StyledCatalogItemHeaderContainer = styled.div`
         }
       `}
   }
-
-  ${isMobile &&
-  css`
-    padding: ${(props) => (props.showText ? "0px 12px 12px" : "4px 12px 19px")};
-
-    margin-top: ${(props) => (props.isFirstHeader ? "0" : "16px")};
-
-    ${(props) =>
-      !props.showText &&
-      css`
-        display: flex;
-        justify-content: center;
-
-        .catalog-item__header-text {
-          width: 20px;
-
-          line-height: 1px;
-          height: 1px;
-
-          background: #d0d5da;
-        }
-      `}
-  `}
 `;
 
 const StyledCatalogItemBadgeWrapper = styled.div`
@@ -130,19 +107,6 @@ const StyledCatalogItemBadgeWrapper = styled.div`
     margin-right: ${(props) =>
       props.theme.catalogItem.badgeWrapper.tablet.marginRight};
   }
-
-  ${isMobile &&
-  css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
-    min-width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
-    height: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.height};
-    margin-right: ${(props) =>
-      props.theme.catalogItem.badgeWrapper.tablet.marginRight};
-  `}
 
   ${(props) => !props.showText && badgeWithoutText}
 
@@ -202,15 +166,6 @@ const StyledCatalogItemInitialText = styled(Text)`
     font-size: ${(props) =>
       props.theme.catalogItem.initialText.tablet.fontSize};
   }
-
-  ${isMobile &&
-  css`
-    width: ${(props) => props.theme.catalogItem.initialText.tablet.width};
-    line-height: ${(props) =>
-      props.theme.catalogItem.initialText.tablet.lineHeight};
-    font-size: ${(props) =>
-      props.theme.catalogItem.initialText.tablet.fontSize};
-  `}
 `;
 
 StyledCatalogItemInitialText.defaultProps = { theme: Base };
@@ -252,14 +207,6 @@ const StyledCatalogItemText = styled(Text)`
     font-size: ${(props) => props.theme.catalogItem.text.tablet.fontSize};
     font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
   }
-
-  ${isMobile &&
-  css`
-    margin-left: ${(props) => props.theme.catalogItem.text.tablet.marginLeft};
-    line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
-    font-size: ${(props) => props.theme.catalogItem.text.tablet.fontSize};
-    font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
-  `}
 `;
 
 StyledCatalogItemText.defaultProps = { theme: Base };
@@ -302,15 +249,6 @@ const StyledCatalogItemImg = styled.div`
       height: ${(props) => props.theme.catalogItem.img.svg.tablet.height};
     }
   }
-
-  ${isMobile &&
-  css`
-    height: ${(props) => props.theme.catalogItem.img.svg.tablet.height};
-    svg {
-      width: ${(props) => props.theme.catalogItem.img.svg.tablet.width};
-      height: ${(props) => props.theme.catalogItem.img.svg.tablet.height};
-    }
-  `}
 `;
 
 StyledCatalogItemImg.defaultProps = { theme: Base };
@@ -360,12 +298,6 @@ const StyledCatalogItemSibling = styled.div`
     max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
   }
 
-  ${isMobile &&
-  css`
-    min-height: ${(props) => props.theme.catalogItem.container.tablet.height};
-    max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
-  `}
-
   ${(props) => props.isDragging && draggingSiblingCss}
 
   ${(props) =>
@@ -407,18 +339,6 @@ const StyledCatalogItemContainer = styled.div`
       props.isEndOfBlock &&
       props.theme.catalogItem.container.tablet.marginBottom};
   }
-
-  ${isMobile &&
-  css`
-    min-height: ${(props) => props.theme.catalogItem.container.tablet.height};
-    max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
-
-    padding: ${(props) =>
-      props.showText && props.theme.catalogItem.container.tablet.padding};
-    margin-bottom: ${(props) =>
-      props.isEndOfBlock &&
-      props.theme.catalogItem.container.tablet.marginBottom};
-  `}
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .payments_file-input {
@@ -19,7 +19,7 @@ const StyledButtonComponent = styled.div`
 
       height: 40px;
     }
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -31,7 +31,7 @@ const StyledContactComponent = styled.div`
     display: flex;
     width: 100%;
     p {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: 4px;
@@ -70,9 +70,9 @@ const StyledTitleComponent = styled.div`
     align-items: baseline;
     .title {
       line-height: 16px;
-      ${props => props.limitedWidth && "max-width: 376px"};
+      ${(props) => props.limitedWidth && "max-width: 376px"};
       span:first-child {
-        ${props => props.isLicenseDateExpired && "margin-top: 5px"};
+        ${(props) => props.isLicenseDateExpired && "margin-top: 5px"};
       }
     }
   }
@@ -80,12 +80,12 @@ const StyledTitleComponent = styled.div`
   .payments_subscription-expired {
     max-width: fit-content;
     border: 1px solid
-      ${props =>
+      ${(props) =>
         props.theme.client.settings.payment[
           props.isLicenseDateExpired ? "warningColor" : "color"
         ]};
     border-radius: 3px;
-    color: ${props =>
+    color: ${(props) =>
       props.theme.client.settings.payment[
         props.isLicenseDateExpired ? "warningColor" : "color"
       ]};
@@ -97,12 +97,12 @@ const StyledTitleComponent = styled.div`
 const StyledBenefitsBody = styled.div`
   margin: 20px 0;
   border-radius: 12px;
-  border: ${props => props.theme.client.settings.payment.border};
+  border: ${(props) => props.theme.client.settings.payment.border};
   max-width: 660px;
 
   padding: 23px;
 
-  background: ${props =>
+  background: ${(props) =>
     props.theme.client.settings.payment.backgroundBenefitsColor};
 
   .benefits-title {

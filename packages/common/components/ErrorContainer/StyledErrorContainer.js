@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Base } from "@docspace/components/themes";
+import { desktop, mobile } from "@docspace/components/utils/device";
 
 const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};
@@ -52,7 +53,7 @@ const StyledErrorContainer = styled.div`
     color: ${(props) => props.theme.errorContainer.bodyText};
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and ${desktop} {
     body {
       padding: 24px 24px 0 24px;
     }
@@ -62,7 +63,7 @@ const StyledErrorContainer = styled.div`
     }
   }
 
-  @media screen and (max-width: 620px) {
+  @media screen and ${mobile} {
     body {
       padding: 18px 18px 0 18px;
     }

@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { isMobileOnly } from "react-device-detect";
 
 export const StyledSubmenu = styled.div`
   display: flex;
@@ -19,17 +18,10 @@ export const StyledSubmenu = styled.div`
 
   .sticky {
     position: sticky;
-    top: 0;
+    top: ${(props) => (props.topProps ? props.topProps : 0)};
     background: ${(props) => props.theme.submenu.backgroundColor};
     z-index: 1;
   }
-
-  ${isMobileOnly &&
-  css`
-    .sticky {
-      top: 52px;
-    }
-  `}
 
   .sticky-indent {
     height: 20px;
@@ -128,13 +120,6 @@ export const SubmenuScroller = styled.div`
   }
   overflow-x: auto;
   overflow-y: hidden;
-
-  ${(props) =>
-    props.size !== "scale" &&
-    css`
-      display: grid;
-      flex: 0 1 auto;
-    `}
 `;
 
 export const SubmenuRoot = styled.div`

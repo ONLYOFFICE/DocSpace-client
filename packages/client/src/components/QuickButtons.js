@@ -7,7 +7,7 @@ import React from "react";
 import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isMobile, isTablet } from "react-device-detect";
+import { isTablet } from "@docspace/components/utils/device";
 import { FileStatus } from "@docspace/common/constants";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
@@ -48,8 +48,7 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
-  const tabletViewQuickButton =
-    (sectionWidth > 500 && sectionWidth <= 1024) || isTablet;
+  const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
 

@@ -37,6 +37,7 @@ const Members = ({
 
   setExternalLinks,
   membersFilter,
+  setMembersFilter,
   externalLinks,
   members,
   setMembersList,
@@ -231,6 +232,8 @@ const Members = ({
         setSelectionParentRoom={setSelectionParentRoom}
         changeUserType={changeUserType}
         setIsScrollLocked={setIsScrollLocked}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
         hasNextPage={membersList.length - headersCount < membersFilter.total}
         itemCount={membersFilter.total + headersCount}
         onRepeatInvitation={onRepeatInvitation}
@@ -263,6 +266,7 @@ export default inject(
       updateRoomMemberRole,
       resendEmailInvitations,
       membersFilter,
+      setMembersFilter,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -297,6 +301,7 @@ export default inject(
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
+      setMembersFilter,
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,

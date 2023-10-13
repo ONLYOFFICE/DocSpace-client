@@ -84,6 +84,8 @@ class CreateEditRoomStore {
       calculateRoomLogoParams,
       uploadRoomLogo,
       addLogoToRoom,
+      selection,
+      bufferSelection,
     } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
@@ -154,8 +156,16 @@ class CreateEditRoomStore {
         });
       } else !withPaging && this.onOpenNewRoom(room);
 
-      if (processCreatingRoomFromData)
-        preparingDataForCopyingToRoom(room.id, t);
+      if (processCreatingRoomFromData) {
+        const selections =
+          selection.length > 0 && selection[0] != null
+            ? selection
+            : bufferSelection != null
+            ? [bufferSelection]
+            : [];
+
+        preparingDataForCopyingToRoom(room.id, selections, t);
+      }
 
       this.roomIsCreated = true;
     } catch (err) {

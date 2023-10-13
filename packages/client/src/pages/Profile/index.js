@@ -24,7 +24,11 @@ class Profile extends React.Component {
       selectedTreeNode,
       setSelectedNode,
       setIsProfileLoaded,
+
+      setBodyRendered,
     } = this.props;
+
+    setBodyRendered(true);
     const userId = "@self";
 
     setIsEditTargetUser(false);
@@ -75,16 +79,25 @@ class Profile extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { setBodyRendered } = this.props;
+
+    setBodyRendered(false);
+  }
+
   render() {
     // console.log("Profile render");
 
-    const { profile, showCatalog } = this.props;
+    const { profile, showCatalog, setIsLoading } = this.props;
 
     return (
       <>
         <Section withBodyAutoFocus viewAs="profile">
           <Section.SectionHeader>
-            <SectionHeaderContent profile={profile} />
+            <SectionHeaderContent
+              profile={profile}
+              setIsLoading={setIsLoading}
+            />
           </Section.SectionHeader>
 
           <Section.SectionBody>
@@ -107,7 +120,18 @@ export default inject(
   ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
     const { setDocumentTitle, language } = auth;
 
-    const { setIsProfileLoaded } = clientLoadingStore;
+    const {
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
+    } = clientLoadingStore;
+
+    const setIsLoading = () => {
+      setIsSectionHeaderLoading(true, false);
+      setIsSectionFilterLoading(true, false);
+      setIsSectionBodyLoading(true, false);
+    };
 
     const { targetUserStore } = peopleStore;
     const {
@@ -128,10 +152,12 @@ export default inject(
       setIsEditTargetUser,
 
       showCatalog: auth.settingsStore.showCatalog,
+      setBodyRendered: auth.settingsStore.setBodyRendered,
       selectedTreeNode,
       setSelectedNode,
       isVisitor: auth.userStore.user.isVisitor,
       setIsProfileLoaded,
+      setIsLoading,
     };
   }
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

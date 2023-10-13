@@ -21,6 +21,14 @@ const withLoading = (WrappedComponent) => {
     const [mobileView, setMobileView] = useState(true);
 
     useEffect(() => {
+      if (window.location.pathname.includes("profile")) {
+        if (!isLoadedArticleBody) {
+          setIsBurgerLoading(true);
+        } else {
+          setIsBurgerLoading(false);
+        }
+      }
+
       if (isLoadedArticleBody) {
         setIsBurgerLoading(false);
       } else {

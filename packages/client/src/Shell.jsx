@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
 import NavMenu from "./components/NavMenu";
@@ -28,6 +28,7 @@ import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
+import AppLoader from "@docspace/common/components/AppLoader";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -52,6 +53,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     standalone,
     userId,
     currentDeviceType,
+    bodyRendered,
+    showArticleLoader,
   } = rest;
 
   useEffect(() => {
@@ -350,6 +353,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
+      {/* {!bodyRendered && <AppLoader />} */}
       <Main isDesktop={isDesktop}>
         {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">
@@ -360,7 +364,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup }) => {
+const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
   const { i18n } = useTranslation();
 
   const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
@@ -379,6 +383,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
+    bodyRendered,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -422,6 +427,8 @@ const ShellWrapper = inject(({ auth, backup }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
+    bodyRendered,
+    showArticleLoader: clientLoadingStore.showArticleLoader,
   };
 })(observer(Shell));
 

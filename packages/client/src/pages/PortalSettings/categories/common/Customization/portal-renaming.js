@@ -6,8 +6,7 @@ import TextInput from "@docspace/components/text-input";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -240,7 +239,7 @@ const PortalRenaming = (props) => {
   };
 
   const checkInnerWidth = useCallback(() => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -255,7 +254,7 @@ const PortalRenaming = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isSmallTablet, setIsCustomizationView]);
+  }, [isMobile, setIsCustomizationView]);
 
   const onOpenModal = () => {
     setIsShowModal(true);

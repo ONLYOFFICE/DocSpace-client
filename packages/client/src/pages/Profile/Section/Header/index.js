@@ -40,8 +40,10 @@ const Header = (props) => {
 
     setDialogData,
 
-    isProfileLoaded,
     profileClicked,
+
+    showProfileLoader,
+    setIsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -111,11 +113,13 @@ const Header = (props) => {
     const urlParams = roomsFilter.toUrlParams();
     const backUrl = `/rooms/shared/filter?${urlParams}`;
 
+    setIsLoading();
+
     navigate(backUrl);
     // setFilter(filter);
   };
 
-  if (!isProfileLoaded) return <Loaders.SectionHeader />;
+  if (showProfileLoader) return <Loaders.SectionHeader />;
 
   return (
     <StyledHeader
@@ -177,7 +181,7 @@ export default inject(
 
     const { targetUser, isMe } = targetUserStore;
 
-    const { isProfileLoaded } = clientLoadingStore;
+    const { showProfileLoader } = clientLoadingStore;
 
     const { profileClicked } = profileActionsStore;
 
@@ -205,7 +209,7 @@ export default inject(
 
       setDialogData,
 
-      isProfileLoaded,
+      showProfileLoader,
       profileClicked,
     };
   }

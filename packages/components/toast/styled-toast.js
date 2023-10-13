@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
-import { tablet } from "../utils/device";
+import { tablet, mobile } from "../utils/device";
 import Base from "../themes/base";
 
 const StyledToastContainer = styled(ToastContainer)`
@@ -187,7 +187,7 @@ const StyledToastContainer = styled(ToastContainer)`
       `}
   }
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and ${mobile} {
     left: 0;
     margin: auto;
     right: 0;

@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import Text from "@docspace/components/text";
 import { inject, observer } from "mobx-react";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     max-width: 520px;
   }
 
@@ -34,7 +34,7 @@ const StyledBody = styled.div`
     .payment_price_month-text {
       margin: auto 0;
       margin-bottom: 9px;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 8px;
@@ -45,7 +45,7 @@ const StyledBody = styled.div`
     }
     .payment_price_month-text,
     .payment_price_price-text {
-      ${props =>
+      ${(props) =>
         props.isDisabled &&
         css`
           color: ${props.theme.client.settings.payment.priceContainer
@@ -77,7 +77,8 @@ const TotalTariffContainer = ({
             fontSize={"14"}
             textAlign="center"
             fontWeight={600}
-            className="total-tariff_description">
+            className="total-tariff_description"
+          >
             <Trans t={t} i18nKey="BusinessRequestDescription" ns="Payments">
               {{ peopleNumber: maxAvailableManagersCount }}
             </Trans>
@@ -92,7 +93,8 @@ const TotalTariffContainer = ({
                 textAlign={"center"}
                 fontWeight={600}
                 className="payment_price_price-text"
-                noSelect>
+                noSelect
+              >
                 {{ currencySymbol }}
               </Text>
               <Text
@@ -100,7 +102,8 @@ const TotalTariffContainer = ({
                 as="span"
                 fontWeight={600}
                 className="payment_price_price-text"
-                noSelect>
+                noSelect
+              >
                 {{ price: totalPrice }}
               </Text>
               <Text
@@ -108,7 +111,8 @@ const TotalTariffContainer = ({
                 fontWeight={600}
                 fontSize="16px"
                 className="payment_price_month-text"
-                noSelect>
+                noSelect
+              >
                 /month
               </Text>
             </Trans>

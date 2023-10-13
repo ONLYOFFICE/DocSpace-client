@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/common/constants";
 
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
+import Portal from "@docspace/components/portal";
 // @ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
@@ -91,6 +93,8 @@ const FilesSelector = ({
   socketHelper,
   socketSubscribersId,
   setMoveToPublicRoomVisible,
+  setInfoPanelIsMobileHidden,
+  currentDeviceType,
 
   embedded,
 }: FilesSelectorProps) => {
@@ -295,6 +299,7 @@ const FilesSelector = ({
   };
 
   const onCloseAction = () => {
+    setInfoPanelIsMobileHidden(false);
     if (onClose) {
       onClose();
 
@@ -521,7 +526,7 @@ const FilesSelector = ({
     />
   );
 
-  return embedded ? (
+  const selectorComponent = embedded ? (
     SelectorBody
   ) : (
     <>
@@ -529,7 +534,7 @@ const FilesSelector = ({
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={210}
+        zIndex={309}
         onClick={onCloseAction}
       />
       <Aside
@@ -541,6 +546,12 @@ const FilesSelector = ({
         {SelectorBody}
       </Aside>
     </>
+  );
+
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
+  ) : (
+    selectorComponent
   );
 };
 
@@ -597,7 +608,10 @@ export default inject(
       setMoveToPublicRoomVisible,
     } = dialogsStore;
 
-    const { theme, socketHelper } = auth.settingsStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
+      auth.infoPanelStore;
+
+    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
 
     const {
       selection,
@@ -659,10 +673,12 @@ export default inject(
       setRestoreAllPanelVisible,
       setIsFolderActions,
       setSelectedItems,
+      setInfoPanelIsMobileHidden,
       includeFolder,
       socketHelper,
       socketSubscribersId,
       setMoveToPublicRoomVisible,
+      currentDeviceType,
     };
   }
 )(observer(FilesSelector));

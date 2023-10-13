@@ -12,8 +12,7 @@ import Text from "@docspace/components/text";
 import IconButton from "@docspace/components/icon-button";
 
 import { Base } from "@docspace/components/themes";
-import { desktop, tablet, hugeMobile } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledArticleApps = styled.div`
   display: flex;
@@ -34,7 +33,7 @@ const StyledArticleApps = styled.div`
       `}
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     position: relative;
     bottom: 0px;
     margin-top: 32px;

@@ -7,11 +7,7 @@ import { useTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 
-import {
-  smallTablet,
-  hugeMobile,
-  size,
-} from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 import MetadataUrlField from "./sub-components/MetadataUrlField";
 import { useIsMobileView } from "../../../utils/useIsMobileView";
@@ -21,7 +17,7 @@ const StyledWrapper = styled.div`
     margin-top: 24px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .button-wrapper {
       box-sizing: border-box;
       position: absolute;
@@ -39,7 +35,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  @media ${hugeMobile}{
+  @media ${mobile}{
     .button-wrapper {
       padding: 16px;
     }
@@ -64,7 +60,7 @@ const ProviderMetadata = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("sp-metadata") &&
       navigate("/portal-settings/integration/single-sign-on");
   };

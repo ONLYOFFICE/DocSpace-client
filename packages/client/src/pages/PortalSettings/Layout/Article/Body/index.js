@@ -6,10 +6,9 @@ import { withTranslation } from "react-i18next";
 
 import { isArrayEqual } from "@docspace/components/utils/array";
 
-import { isMobileOnly } from "react-device-detect";
-
 import { isMobile } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/common/constants";
 
 import {
   //getKeyByLink,
@@ -115,6 +114,8 @@ const ArticleBodyContent = (props) => {
     standalone,
     isEnterprise,
     isCommunity,
+    currentDeviceType,
+    isProfileLoading,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -160,7 +161,7 @@ const ArticleBodyContent = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if (tReady) setIsLoadedArticleBody(true);
+    if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
     if (prevLocation.current.pathname !== location.pathname) {
       if (location.pathname.includes("common")) {
@@ -198,7 +199,13 @@ const ArticleBodyContent = (props) => {
         this.setState({ selectedKeys: ["8-0"] });
       }
     }
-  }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
+  }, [
+    tReady,
+    isProfileLoading,
+    setIsLoadedArticleBody,
+    location.pathname,
+    selectedKeys,
+  ]);
 
   const onSelect = (value) => {
     if (isArrayEqual([value], selectedKeys)) {
@@ -207,7 +214,7 @@ const ArticleBodyContent = (props) => {
 
     setSelectedKeys([value + "-0"]);
 
-    if (isMobileOnly || isMobile()) {
+    if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
 
@@ -333,10 +340,14 @@ const ArticleBodyContent = (props) => {
 
   const items = catalogItems();
 
-  return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
+  return !isLoadedArticleBody || isProfileLoading ? (
+    <LoaderArticleBody />
+  ) : (
+    <>{items}</>
+  );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ auth, common, clientLoadingStore }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
   const {
     currentTariffStatusStore,
@@ -348,7 +359,13 @@ export default inject(({ auth, common }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen } = settingsStore;
+  const { standalone, showText, toggleArticleOpen, currentDeviceType } =
+    settingsStore;
+
+  const isProfileLoading =
+    window.location.pathname.includes("profile") &&
+    clientLoadingStore.showProfileLoader &&
+    !isLoadedArticleBody;
 
   return {
     standalone,
@@ -360,6 +377,8 @@ export default inject(({ auth, common }) => {
     isNotPaidPeriod,
     isOwner,
     isCommunity,
+    currentDeviceType,
+    isProfileLoading,
   };
 })(
   withLoading(

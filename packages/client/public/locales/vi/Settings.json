@@ -156,7 +156,6 @@
   "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn.",
   "RestoreBackup": "Khôi phục dữ liệu",
   "RestoreBackupDescription": "Sử dụng tùy chọn này để khôi phục lại không gian của bạn từ tập tin đã sao lưu trước đó.",
-  "RestoreDefaultButton": "Khôi phục về mặc định",
   "RoomsModule": "Phòng dự phòng",
   "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
   "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ",

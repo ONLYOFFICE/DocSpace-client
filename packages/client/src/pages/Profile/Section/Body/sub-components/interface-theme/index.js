@@ -10,7 +10,7 @@ import toastr from "@docspace/components/toast/toastr";
 
 import { ThemeKeys } from "@docspace/common/constants";
 
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import { showLoader, getSystemTheme } from "@docspace/common/utils";
 
 import ThemePreview from "./theme-preview";
@@ -52,7 +52,7 @@ const StyledWrapper = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -60,7 +60,7 @@ const StyledWrapper = styled.div`
   .mobile-themes-container {
     display: none;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: flex;
       padding-left: 30px;
     }

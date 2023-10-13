@@ -10,7 +10,7 @@ import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
 import ToggleButton from "@docspace/components/toggle-button";
 import { isMobileOnly, isTablet } from "react-device-detect";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
@@ -28,7 +28,7 @@ const fillAvailableWidth = css`
 `;
 
 const StyledInvitePanel = styled.div`
-  @media ${hugeMobile} {
+  @media ${mobile} {
     user-select: none;
     height: auto;
     width: auto;
@@ -401,7 +401,7 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 450;
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     display: flex;
 
     top: -27px;

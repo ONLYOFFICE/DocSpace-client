@@ -27,6 +27,7 @@ const FilesSelectorInput = (props) => {
 
     filterParam,
     descriptionText,
+    className,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -78,7 +79,7 @@ const FilesSelectorInput = (props) => {
   };
 
   return (
-    <StyledBodyWrapper maxWidth={maxWidth}>
+    <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
         onClick={onClick}
         fromStorage

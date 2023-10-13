@@ -9,7 +9,7 @@ import Text from "@docspace/components/text";
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
-import RoomIcon from "@docspace/client/src/components/RoomIcon";
+import RoomIcon from "@docspace/components/room-icon";
 const Details = ({
   t,
   selection,

@@ -37,7 +37,6 @@ const Members = ({
 
   setExternalLinks,
   membersFilter,
-  setMembersFilter,
   externalLinks,
   members,
   setMembersList,
@@ -47,10 +46,10 @@ const Members = ({
 
   const security = selectionParentRoom ? selectionParentRoom.security : {};
 
-  const fetchMembers = async (roomId, clearFilter = true, membersFilter) => {
+  const fetchMembers = async (roomId, clearFilter = true) => {
     if (isLoading) return;
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter, membersFilter)];
+    const requests = [getRoomMembers(roomId, clearFilter)];
 
     if (isPublic && clearFilter) {
       requests.push(getRoomLinks(roomId));
@@ -68,7 +67,7 @@ const Members = ({
     const users = [];
     const administrators = [];
     const expectedMembers = [];
-    data.map((fetchedMember) => {
+    data?.map((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,
@@ -89,7 +88,7 @@ const Members = ({
     });
 
     let hasPrevAdminsTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.administrators, "administration")
         : false;
 
@@ -102,7 +101,7 @@ const Members = ({
     }
 
     let hasPrevUsersTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.users, "user")
         : false;
 
@@ -111,7 +110,7 @@ const Members = ({
     }
 
     let hasPrevExpectedTitle =
-      members?.roomId === roomId
+      members?.roomId === roomId && !clearFilter
         ? getHasPrevTitle(members?.expected, "expected")
         : false;
 
@@ -198,11 +197,6 @@ const Members = ({
       expected: [...members.expected, ...expected],
     };
 
-    setSelectionParentRoom({
-      ...selection,
-      members: newMembers,
-    });
-
     setMembersList(newMembers);
   };
 
@@ -243,9 +237,6 @@ const Members = ({
         isPublicRoomType={isPublicRoomType}
         withBanner={isPublicRoomType && externalLinks.length > 0}
         setMembers={setMembersList}
-        membersFilter={membersFilter}
-        setMembersFilter={setMembersFilter}
-        fetchMembers={fetchMembers}
       />
     </>
   );
@@ -272,7 +263,6 @@ export default inject(
       updateRoomMemberRole,
       resendEmailInvitations,
       membersFilter,
-      setMembersFilter,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -307,7 +297,6 @@ export default inject(
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
-      setMembersFilter,
       externalLinks: roomLinks,
       members: membersList,
       setMembersList,

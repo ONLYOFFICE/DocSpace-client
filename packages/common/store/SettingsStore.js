@@ -5,7 +5,6 @@ import api from "../api";
 import {
   combineUrl,
   setCookie,
-  getCookie,
   frameCallEvent,
   getSystemTheme,
 } from "../utils";
@@ -20,6 +19,7 @@ import {
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
+import { getCookie } from "@docspace/components/utils/cookie";
 import {
   size as deviceSize,
   isTablet,

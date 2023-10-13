@@ -28,13 +28,18 @@ class UserStore {
     return user;
   };
 
-  init = async () => {
+  init = async (i18n) => {
     if (this.isLoaded) return;
 
     this.setIsLoading(true);
 
     try {
-      await this.loadCurrentUser();
+      const user = await this.loadCurrentUser();
+
+      if (i18n && user.cultureName !== i18n.language) {
+        console.log({ i18n, user });
+        i18n.changeLanguage(user.cultureName);
+      }
     } catch (e) {
       console.error(e);
     }

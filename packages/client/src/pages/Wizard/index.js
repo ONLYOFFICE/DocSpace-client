@@ -126,7 +126,8 @@ const Wizard = (props) => {
           const select = getSelectZone(zones, userTimezone);
 
           setTimezones(zones);
-          if (!select) {
+
+          if (select.length === 0) {
             setSelectedTimezone(DEFAULT_SELECT_TIMEZONE);
           } else {
             setSelectedTimezone(select[0]);
@@ -138,7 +139,7 @@ const Wizard = (props) => {
           (lang) => lang.key === convertedCulture
         );
 
-        if (!select) {
+        if (select.length === 0) {
           setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
         } else {
           setSelectedLanguage(select[0]);

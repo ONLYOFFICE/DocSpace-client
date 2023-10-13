@@ -87,7 +87,7 @@ const InvitePanel = ({
 
   const getInfo = () => {
     getRoomSecurityInfo(roomId).then((links) => {
-      const link = links[0];
+      const link = links && links[0];
       if (link) {
         const { shareLink, id, title, expirationDate } = link.sharedTo;
 

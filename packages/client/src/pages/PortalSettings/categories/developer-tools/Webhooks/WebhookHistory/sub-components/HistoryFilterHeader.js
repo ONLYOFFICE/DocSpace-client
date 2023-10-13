@@ -23,6 +23,7 @@ const ListHeader = styled.header`
     isMobile() &&
     css`
       padding-inline-end: 8px;
+      margin-top: 8px;
     `}
 `;
 

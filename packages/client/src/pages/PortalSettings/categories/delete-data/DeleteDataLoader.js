@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const StyledLoader = styled.div`
     height: 22px;
     margin-bottom: 8px;
 
-    @media (${hugeMobile}) {
+    @media ${mobile} {
       width: 171px;
     }
   }
@@ -22,7 +22,7 @@ const StyledLoader = styled.div`
     height: 16px;
     margin-bottom: 16px;
 
-    @media (${hugeMobile}) {
+    @media ${mobile} {
       width: 100%;
     }
   }

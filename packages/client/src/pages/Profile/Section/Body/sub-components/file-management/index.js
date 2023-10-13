@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import ToggleButton from "@docspace/components/toggle-button";
 import Box from "@docspace/components/box";
+import Text from "@docspace/components/text";
 import Loaders from "@docspace/common/components/Loaders";
 
 import StyledWrapper from "./styled-file-management";
@@ -105,34 +106,42 @@ const FileManagement = ({
           style={{ display: "none" }}
         />
         {!isVisitor && (
-          <ToggleButton
-            className="ask-again toggle-btn"
-            label={t("Common:DontAskAgain")}
-            onChange={onChangeKeepNewFileName}
-            isChecked={keepNewFileName}
-          />
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="ask-again toggle-btn"
+              onChange={onChangeKeepNewFileName}
+              isChecked={keepNewFileName}
+            />
+            <Text>{t("Common:DontAskAgain")}</Text>
+          </div>
         )}
-        <ToggleButton
-          className="save-copy-original toggle-btn"
-          label={t("OriginalCopy")}
-          onChange={onChangeOriginalCopy}
-          isChecked={storeOriginalFiles}
-        />
-        {!isVisitor && (
+        <div className="toggle-btn-wrapper">
           <ToggleButton
-            className="display-notification toggle-btn"
-            label={t("DisplayNotification")}
-            onChange={onChangeDeleteConfirm}
-            isChecked={confirmDelete}
+            className="save-copy-original toggle-btn"
+            onChange={onChangeOriginalCopy}
+            isChecked={storeOriginalFiles}
           />
+          <Text>{t("OriginalCopy")}</Text>
+        </div>
+        {!isVisitor && (
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="display-notification toggle-btn"
+              onChange={onChangeDeleteConfirm}
+              isChecked={confirmDelete}
+            />
+            <Text>{t("DisplayNotification")}</Text>
+          </div>
         )}
         {!isVisitor && (
-          <ToggleButton
-            className="toggle-btn"
-            label={t("UpdateOrCreate")}
-            onChange={onChangeUpdateIfExist}
-            isChecked={updateIfExist}
-          />
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="toggle-btn"
+              onChange={onChangeUpdateIfExist}
+              isChecked={updateIfExist}
+            />
+            <Text>{t("UpdateOrCreate")}</Text>
+          </div>
         )}
       </Box>
 

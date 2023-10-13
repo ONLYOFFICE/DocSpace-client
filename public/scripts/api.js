@@ -26,7 +26,6 @@
       sortorder: "descending", //TODO: ["descending", "ascending"]
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
-      roomId: null,
       withSubfolders: true,
     },
     keysForReload: [

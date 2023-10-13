@@ -2,16 +2,10 @@ import React from "react";
 import { StyledInfoPanelHeader } from "./StyledInfoPanelHeaderLoader";
 import RectangleLoader from "../RectangleLoader";
 
-import { isMobile as isMobileRDD } from "react-device-detect";
-import {
-  isDesktop as isDesktopUtils,
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+import { isDesktop as isDesktopUtils } from "@docspace/components/utils/device";
 
 const InfoPanelHeaderLoader = () => {
-  const isTablet =
-    isTabletUtils() || isMobileUtils() || isMobileRDD || !isDesktopUtils();
+  const isTablet = !isDesktopUtils();
 
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={false}>

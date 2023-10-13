@@ -18,10 +18,11 @@ import {
   FolderType,
   ShareAccessRights,
   FolderNames,
+  DeviceType,
 } from "@docspace/common/constants";
 import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/components/drag-and-drop";
-import { isMobile } from "react-device-detect";
+
 import SettingsItem from "./SettingsItem";
 import AccountsItem from "./AccountsItem";
 import BonusItem from "./BonusItem";
@@ -186,6 +187,7 @@ const Items = ({
 
   isCommunity,
   isPaymentPageAvailable,
+  currentDeviceType,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -311,7 +313,7 @@ const Items = ({
   }, [deleteAction]);
 
   const onEmptyTrashAction = () => {
-    isMobile && onHide();
+    currentDeviceType === DeviceType.mobile && onHide();
     setEmptyTrashDialogVisible(true);
   };
 
@@ -425,7 +427,12 @@ export default inject(
     dialogsStore,
     clientLoadingStore,
   }) => {
-    const { settingsStore, isCommunity, isPaymentPageAvailable } = auth;
+    const {
+      settingsStore,
+      isCommunity,
+      isPaymentPageAvailable,
+      currentDeviceType,
+    } = auth;
     const { showText, docSpace } = settingsStore;
 
     const {
@@ -486,6 +493,7 @@ export default inject(
       emptyTrashInProgress,
       isCommunity,
       isPaymentPageAvailable,
+      currentDeviceType,
     };
   }
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

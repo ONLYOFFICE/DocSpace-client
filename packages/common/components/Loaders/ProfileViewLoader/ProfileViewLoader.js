@@ -10,8 +10,9 @@ import {
 } from "./StyledProfileView";
 import RectangleLoader from "../RectangleLoader";
 import CircleLoader from "../CircleLoader";
-import { isMobileOnly } from "react-device-detect";
+
 import MobileViewLoader from "./MobileView";
+import { isMobile } from "@docspace/components/utils/device";
 
 const ProfileViewLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -25,7 +26,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
     animate,
   } = rest;
 
-  if (isMobileOnly)
+  if (isMobile())
     return (
       <div id={id} className={className} style={style}>
         <MobileViewLoader {...rest} />

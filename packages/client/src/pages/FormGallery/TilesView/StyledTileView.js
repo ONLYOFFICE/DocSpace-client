@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
 import TileContent from "./sub-components/TileContent";
 import { tablet, desktop } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const FlexBoxStyles = css`
@@ -141,7 +141,7 @@ const StyledContent = styled.div`
     word-break: break-word;
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -226,7 +226,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 
@@ -378,11 +378,6 @@ const StyledTileContainer = styled.div`
         ? `margin-left: -3px;`
         : `margin-right: -3px;`}
   }
-
-  ${isMobile &&
-  css`
-    padding-top: 24px;
-  `}
 `;
 
 StyledTileContainer.defaultProps = { theme: Base };
@@ -421,7 +416,7 @@ const MainContainerWrapper = styled.div`
 const MainContainer = styled.div`
   height: 20px;
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     ${truncateCss};
   }
 `;

@@ -5,7 +5,7 @@ export const useIsMobileView = () => {
   const [isMobileView, setIsMobileView] = useState(false);
 
   const onCheckView = () => {
-    window.innerWidth <= size.smallTablet
+    window.innerWidth <= size.mobile
       ? setIsMobileView(true)
       : setIsMobileView(false);
   };

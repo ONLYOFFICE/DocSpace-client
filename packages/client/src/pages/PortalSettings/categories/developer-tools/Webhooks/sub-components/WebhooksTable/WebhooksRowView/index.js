@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 import RowContainer from "@docspace/components/row-container";
 
@@ -18,7 +18,7 @@ const WebhooksRowView = (props) => {
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
 
-    if (sectionWidth < 1025 || isMobile) {
+    if (sectionWidth < 1025 || isMobile()) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");

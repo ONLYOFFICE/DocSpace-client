@@ -9,7 +9,7 @@ import {
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
 import toastr from "@docspace/components/toast/toastr";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
-import { BackupStorageType } from "@docspace/common/constants";
+import { BackupStorageType, DeviceType } from "@docspace/common/constants";
 import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 
@@ -268,7 +268,7 @@ const RestoreBackup = (props) => {
 
 export default inject(({ auth, backup }) => {
   const { settingsStore, currentQuotaStore } = auth;
-  const { isTabletView, standalone } = settingsStore;
+  const { currentDeviceType, standalone } = settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {
     getProgress,
@@ -279,7 +279,8 @@ export default inject(({ auth, backup }) => {
     setRestoreResource,
   } = backup;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
   return {
     standalone,

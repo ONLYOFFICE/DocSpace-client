@@ -4,7 +4,7 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 export const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 213px 0 213px;
+
   width: 320px;
 
   @media ${tablet} {
@@ -84,8 +84,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-    props.isCaptchaError &&
-    css`
+      props.isCaptchaError &&
+      css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

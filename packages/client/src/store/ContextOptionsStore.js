@@ -652,6 +652,58 @@ class ContextOptionsStore {
     return promise;
   };
 
+  onLoadPlugins = (item) => {
+    const { contextOptions } = item;
+    const { enablePlugins } = this.authStore.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        if (contextOptions.includes(option.key)) {
+          const value = option.value;
+
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
+
+              setActiveFiles([item.id]);
+
+              await value.onClick(item.id);
+
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
+            }
+          };
+
+          if (value.fileExt) {
+            if (value.fileExt.includes(item.fileExst)) {
+              pluginItems.push({
+                key: option.key,
+                label: value.label,
+                icon: value.icon,
+                onClick,
+              });
+            }
+          } else {
+            pluginItems.push({
+              key: option.key,
+              label: value.label,
+              icon: value.icon,
+              onClick,
+            });
+          }
+        }
+      });
+    }
+
+    this.setLoaderTimer(false);
+
+    return pluginItems;
+  };
+
   onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
 
@@ -822,8 +874,6 @@ class ContextOptionsStore {
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
 
-    const { enablePlugins } = this.authStore.settingsStore;
-
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
@@ -985,48 +1035,6 @@ class ContextOptionsStore {
     );
 
     const withOpen = item.id !== this.selectedFolderStore.id;
-
-    const pluginItems = [];
-
-    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
-      this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
-
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
-
-              setActiveFiles([item.id]);
-
-              await value.onClick(item.id);
-
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
-              label: value.label,
-              icon: value.icon,
-              onClick,
-            });
-          }
-        }
-      });
-    }
 
     const optionsModel = [
       {
@@ -1350,6 +1358,8 @@ class ContextOptionsStore {
 
     const options = this.filterModel(optionsModel, contextOptions);
 
+    const pluginItems = this.onLoadPlugins(item);
+
     if (pluginItems.length > 0) {
       options.splice(1, 0, {
         id: "option_plugin-actions",
@@ -1357,10 +1367,10 @@ class ContextOptionsStore {
         label: t("Common:Actions"),
         icon: PluginActionsSvgUrl,
         disabled: false,
-        items: pluginItems,
+
+        onLoad: () => this.onLoadPlugins(item),
       });
     }
-
     return options;
   };
 

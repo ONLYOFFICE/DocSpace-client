@@ -309,12 +309,14 @@ const RootFolderContainer = (props) => {
 
   const trashButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container-image"
-        src={PersonSvgUrl}
-        alt="person_icon"
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
       />
+
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("GoToPersonal")}
       </Link>
@@ -323,12 +325,14 @@ const RootFolderContainer = (props) => {
 
   const roomsButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container_plus-image"
-        src={PlusSvgUrl}
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onCreateRoom}
-        alt="plus_icon"
+        iconName={PlusSvgUrl}
+        isFill
       />
+
       <Link onClick={onCreateRoom} {...linkStyles}>
         {t("CreateRoom")}
       </Link>
@@ -383,7 +387,6 @@ const RootFolderContainer = (props) => {
         headerText={headerText}
         isEmptyPage={isEmptyPage}
         sectionWidth={sectionWidth}
-        style={{ marginTop: 32 }}
         {...emptyFolderProps}
       />
     )

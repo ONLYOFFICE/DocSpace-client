@@ -20,6 +20,7 @@ import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
 import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import IconButton from "@docspace/components/icon-button";
 
 const EmptyFolderContainer = ({
   t,
@@ -110,11 +111,13 @@ const EmptyFolderContainer = ({
   const buttons = canCreateFiles ? (
     <>
       <div className="empty-folder_container-links">
-        <ReactSVG
-          className="empty-folder_container_plus-image"
-          src={PlusSvgUrl}
+        <IconButton
           data-format="docx"
+          className="empty-folder_container-icon"
+          size={12}
           onClick={onCreate}
+          iconName={PlusSvgUrl}
+          isFill
         />
         <Box className="flex-wrapper_container">
           <Link data-format="docx" onClick={onCreate} {...linkStyles}>
@@ -133,10 +136,12 @@ const EmptyFolderContainer = ({
       </div>
 
       <div className="empty-folder_container-links">
-        <ReactSVG
-          className="empty-folder_container_plus-image"
+        <IconButton
+          className="empty-folder_container-icon"
+          size={12}
           onClick={onCreate}
-          src={PlusSvgUrl}
+          iconName={PlusSvgUrl}
+          isFill
         />
         <Link {...linkStyles} onClick={onCreate}>
           {t("Folder")}
@@ -146,17 +151,19 @@ const EmptyFolderContainer = ({
       {isRoom ? (
         canInviteUsers ? (
           <>
-            <div className="empty-folder_container-links second-description">
+            <div className="second-description">
               <Text as="span" color="#6A7378" fontSize="12px" noSelect>
                 {t("AddMembersDescription")}
               </Text>
             </div>
 
             <div className="empty-folder_container-links">
-              <ReactSVG
-                className="empty-folder_container_plus-image"
+              <IconButton
+                className="empty-folder_container-icon"
+                size={12}
                 onClick={onInviteUsersClick}
-                src={PlusSvgUrl}
+                iconName={PlusSvgUrl}
+                isFill
               />
               <Link onClick={onInviteUsersClick} {...linkStyles}>
                 {t("InviteUsersInRoom")}
@@ -168,10 +175,12 @@ const EmptyFolderContainer = ({
         )
       ) : (
         <div className="empty-folder_container-links">
-          <ReactSVG
-            className="empty-folder_container_up-image"
-            src={UpSvgUrl}
+          <IconButton
+            className="empty-folder_container-icon"
+            size={12}
             onClick={onBackToParentFolder}
+            iconName={UpSvgUrl}
+            isFill={false}
           />
           <Link onClick={onBackToParentFolder} {...linkStyles}>
             {t("BackToParentFolderButton")}
@@ -193,7 +202,6 @@ const EmptyFolderContainer = ({
   return (
     <EmptyContainer
       headerText={isRoom ? t("RoomCreated") : t("EmptyScreenFolder")}
-      style={{ gridColumnGap: "39px", marginTop: 32 }}
       descriptionText={
         canCreateFiles
           ? t("EmptyFolderDecription")
@@ -202,7 +210,6 @@ const EmptyFolderContainer = ({
       imageSrc={isRoom ? emptyScreenCorporateSvg : emptyScreenAltSvg}
       buttons={buttons}
       sectionWidth={sectionWidth}
-      isEmptyFolderContainer={true}
     />
   );
 };

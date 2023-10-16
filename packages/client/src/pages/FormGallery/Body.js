@@ -16,15 +16,7 @@ const SectionBodyContent = ({
   setGallerySelected,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
-  setBodyRendered,
 }) => {
-  useEffect(() => {
-    setBodyRendered(true);
-    return () => {
-      setBodyRendered(false);
-    };
-  }, []);
-
   const onMouseDown = (e) => {
     if (
       e.target.closest(".scroll-body") &&
@@ -72,5 +64,4 @@ export default inject(({ accessRightsStore, oformsStore, auth }) => ({
   setGallerySelected: oformsStore.setGallerySelected,
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-  setBodyRendered: auth.settingsStore.setBodyRendered,
 }))(withTranslation("FormGallery")(observer(SectionBodyContent)));

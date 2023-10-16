@@ -29,6 +29,7 @@ import {
   FileAction,
   FileStatus,
   FolderType,
+  RoomsType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
@@ -2093,12 +2094,12 @@ class FilesActionStore {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.authStore.settingsStore;
 
-    const { isLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { roomType, title: currentTitle } = this.selectedFolderStore;
 
     if (this.publicRoomStore.isPublicRoom && item.isFolder)
       return this.moveToPublicRoom(item.id);
@@ -2120,7 +2121,7 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
-      const { isRoom, rootFolderType, title } = item;
+      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
       setIsLoading(true);
 
@@ -2132,7 +2133,14 @@ class FilesActionStore {
       const filter = FilesFilter.getDefault();
       filter.folder = id;
 
-      const state = { title, isRoot: false, rootFolderType, isRoom };
+      const state = {
+        title,
+        isRoot: false,
+        rootFolderType,
+        isRoom,
+        rootRoomTitle: !!roomType ? currentTitle : "",
+        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+      };
 
       setSelection([]);
 
@@ -2285,6 +2293,7 @@ class FilesActionStore {
           ]?.title) ||
         "",
       isRoot: true,
+      isPublicRoomType: false,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
@@ -2324,12 +2333,6 @@ class FilesActionStore {
   backToParentFolder = () => {
     if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
-
     const id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
@@ -2341,10 +2344,17 @@ class FilesActionStore {
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
 
+    const isRoot = navigationPath.length === 1;
+
     const state = {
       title: (navigationPath && navigationPath[0]?.title) || "",
-      isRoot: navigationPath.length === 1,
+      isRoom: navigationPath[0]?.isRoom,
+      isRoot,
       rootFolderType: rootFolderType,
+      isPublicRoomType: navigationPath[0]?.isRoom
+        ? navigationPath[0]?.roomType === RoomsType.PublicRoom
+        : false,
+      rootRoomTitle: "",
     };
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {

@@ -952,9 +952,11 @@ const SectionHeaderContent = (props) => {
   const stateTitle = location?.state?.title;
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
 
   const isRoot =
-    isLoading && stateIsRoot
+    isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
       : isRootFolder || isAccountsPage || isSettingsPage;
 
@@ -966,13 +968,26 @@ const SectionHeaderContent = (props) => {
     ? stateTitle
     : title;
 
-  const isCurrentRoom = isLoading && stateIsRoom ? stateIsRoom : isRoom;
+  const currentRootRoomTitle =
+    isLoading && stateRootRoomTitle
+      ? stateRootRoomTitle
+      : navigationPath?.length > 1 &&
+        navigationPath[navigationPath?.length - 2].title;
+
+  const currentIsPublicRoomType =
+    isLoading && typeof stateIsPublicRoomType === "boolean"
+      ? stateIsPublicRoomType
+      : isPublicRoomType;
+
+  const isCurrentRoom =
+    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
   if (showHeaderLoader) return <Loaders.SectionHeader />;
 
   const insideTheRoom =
-    categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Archive;
+    (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Archive) &&
+    !isCurrentRoom;
 
   const logo = !theme.isBase
     ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
@@ -1001,6 +1016,7 @@ const SectionHeaderContent = (props) => {
                   !isSettingsPage &&
                   !isPublicRoom
                 }
+                rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
                 isDesktop={isDesktop}
                 isTabletView={isTabletView}
@@ -1038,7 +1054,7 @@ const SectionHeaderContent = (props) => {
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={
-                  isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
+                  currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}

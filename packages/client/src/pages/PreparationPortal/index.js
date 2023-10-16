@@ -23,23 +23,11 @@ let timerId = null,
   prevProgress;
 
 const PreparationPortal = (props) => {
-  const {
-    multiplicationFactor,
-    t,
-    withoutHeader,
-    style,
-    clearLocalStorage,
-    setBodyRendered,
-  } = props;
+  const { multiplicationFactor, t, withoutHeader, style, clearLocalStorage } =
+    props;
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    setBodyRendered(true);
-
-    return () => setBodyRendered(false);
-  });
 
   const clearAllIntervals = () => {
     clearInterval(timerId);
@@ -253,7 +241,6 @@ const PreparationPortalWrapper = inject(({ auth, backup }) => {
   return {
     clearLocalStorage,
     multiplicationFactor,
-    setBodyRendered: auth.settingsStore.setBodyRendered,
   };
 })(
   withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal))

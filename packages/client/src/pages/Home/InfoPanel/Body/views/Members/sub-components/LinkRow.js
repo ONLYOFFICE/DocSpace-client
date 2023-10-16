@@ -9,7 +9,6 @@ import IconButton from "@docspace/components/icon-button";
 import ContextMenuButton from "@docspace/components/context-menu-button";
 import { toastr } from "@docspace/components";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
@@ -174,7 +173,7 @@ const LinkRow = (props) => {
     <StyledLinkRow {...rest} isExpired={isExpired} isPrimary={primary}>
       <Avatar
         size="min"
-        source={primary ? UniverseReactSvgUrl : EyeReactSvgUrl}
+        source={UniverseReactSvgUrl}
         roleIcon={expiryDate ? <ClockReactSvg /> : null}
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}

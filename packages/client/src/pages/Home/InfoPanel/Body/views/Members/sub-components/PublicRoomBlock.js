@@ -58,77 +58,71 @@ const PublicRoomBlock = (props) => {
         />
       )}
       <>
-        {isArchiveFolder ? (
+        <div className="primary-link-block">
+          {(!isArchiveFolder || primaryLink) && (
+            <LinksBlock>
+              <Text fontSize="14px" fontWeight={600}>
+                {t("Files:PrimaryLink")}
+              </Text>
+            </LinksBlock>
+          )}
+          {primaryLink ? (
+            <LinkRow link={primaryLink} />
+          ) : (
+            !isArchiveFolder && (
+              <StyledLinkRow onClick={onAddNewLink}>
+                <Avatar size="min" source={PlusReactSvgUrl} />
+                <Link
+                  isHovered
+                  type="action"
+                  fontSize="14px"
+                  fontWeight={600}
+                  className="external-row-link"
+                >
+                  {t("Files:CreateAndCopy")}
+                </Link>
+              </StyledLinkRow>
+            )
+          )}
+        </div>
+
+        {(primaryLink && !isArchiveFolder) || externalLinks.length ? (
           <LinksBlock>
             <Text fontSize="14px" fontWeight={600}>
-              {t("Files:Links")}: {externalLinks.length}
+              {t("Files:AdditionalLinks")}
             </Text>
+
+            {!isArchiveFolder && (
+              <div
+                data-tooltip-id="emailTooltip"
+                data-tooltip-content={t(
+                  "Files:MaximumNumberOfExternalLinksCreated"
+                )}
+              >
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={onAddNewLink}
+                  size={16}
+                  isDisabled={externalLinks.length >= LINKS_LIMIT_COUNT}
+                  title={t("Files:AddNewExternalLink")}
+                />
+
+                {externalLinks.length >= LINKS_LIMIT_COUNT && (
+                  <Tooltip
+                    float
+                    id="emailTooltip"
+                    getContent={({ content }) => (
+                      <Text fontSize="12px">{content}</Text>
+                    )}
+                    place="bottom"
+                  />
+                )}
+              </div>
+            )}
           </LinksBlock>
         ) : (
-          <>
-            <div className="primary-link-block">
-              <LinksBlock>
-                <Text fontSize="14px" fontWeight={600}>
-                  {t("Files:PrimaryLink")}
-                </Text>
-              </LinksBlock>
-              {primaryLink ? (
-                <LinkRow link={primaryLink} />
-              ) : (
-                <StyledLinkRow onClick={onAddNewLink}>
-                  <Avatar size="min" source={PlusReactSvgUrl} />
-                  <Link
-                    isHovered
-                    type="action"
-                    fontSize="14px"
-                    fontWeight={600}
-                    className="external-row-link"
-                  >
-                    {t("Files:CreateAndCopy")}
-                  </Link>
-                </StyledLinkRow>
-              )}
-            </div>
-
-            {primaryLink || externalLinks.length ? (
-              <LinksBlock>
-                <Text fontSize="14px" fontWeight={600}>
-                  {externalLinks.length
-                    ? t("LinksToViewingIcon")
-                    : t("Files:AdditionalLinks")}
-                </Text>
-
-                <div
-                  data-tooltip-id="emailTooltip"
-                  data-tooltip-content={t(
-                    "Files:MaximumNumberOfExternalLinksCreated"
-                  )}
-                >
-                  <IconButton
-                    className="link-to-viewing-icon"
-                    iconName={LinksToViewingIconUrl}
-                    onClick={onAddNewLink}
-                    size={16}
-                    isDisabled={externalLinks.length >= LINKS_LIMIT_COUNT}
-                    title={t("Files:AddNewExternalLink")}
-                  />
-
-                  {externalLinks.length >= LINKS_LIMIT_COUNT && (
-                    <Tooltip
-                      float
-                      id="emailTooltip"
-                      getContent={({ content }) => (
-                        <Text fontSize="12px">{content}</Text>
-                      )}
-                      place="bottom"
-                    />
-                  )}
-                </div>
-              </LinksBlock>
-            ) : (
-              <></>
-            )}
-          </>
+          <></>
         )}
       </>
 
@@ -136,7 +130,8 @@ const PublicRoomBlock = (props) => {
         ? externalLinks.map((link) => (
             <LinkRow link={link} key={link?.sharedTo?.id} />
           ))
-        : primaryLink && (
+        : !isArchiveFolder &&
+          primaryLink && (
             <StyledLinkRow className="additional-link" onClick={onAddNewLink}>
               <Avatar size="min" source={PlusReactSvgUrl} />
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/components/utils/device";
 
 export const StyledPage = styled.div`

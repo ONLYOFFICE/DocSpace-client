@@ -8,13 +8,19 @@ const styledTabletView = css`
   width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  left: ${(props) => props.theme.newContextMenu.devices.left};
+  left: ${(props) =>
+    props.articleWidth
+      ? `${props.articleWidth}px`
+      : props.theme.newContextMenu.devices.left};
   right: ${(props) => props.theme.newContextMenu.devices.right};
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
       left: ${(props) => props.theme.newContextMenu.devices.right};
-      right: ${(props) => props.theme.newContextMenu.devices.left};
+      right: ${(props) =>
+        props.articleWidth
+          ? `${props.articleWidth}px`
+          : props.theme.newContextMenu.devices.left};
     `}
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   margin: ${(props) => props.theme.newContextMenu.devices.margin};

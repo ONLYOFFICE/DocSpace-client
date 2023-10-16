@@ -11,7 +11,7 @@ import {
 } from "@docspace/common/api/settings";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -19,7 +19,7 @@ class SettingsSetupStore {
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
-  viewAs = isMobile ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
 
@@ -371,7 +371,7 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const res = await api.settings.getLoginHistoryReport();
-    window.open(res);
+    setTimeout(() => window.open(res), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
@@ -379,7 +379,7 @@ class SettingsSetupStore {
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      window.open(res);
+      setTimeout(() => window.open(res), 100); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);

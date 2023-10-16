@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { hugeMobile } from "../../utils/device";
+import { mobile } from "../../utils/device";
 
 import { Base } from "../../themes";
 
@@ -52,7 +52,7 @@ const StyledDropzone = styled.div`
           props.theme.createEditRoomDialog.dropzone.linkSecondaryColor};
       }
 
-      @media ${hugeMobile} {
+      @media ${mobile} {
         &-secondary {
           display: none;
         }

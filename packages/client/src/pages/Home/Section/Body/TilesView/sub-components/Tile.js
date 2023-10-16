@@ -368,7 +368,7 @@ const StyledContent = styled.div`
     margin-left: 12px;
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -641,6 +641,7 @@ class Tile extends React.PureComponent {
     const contextMenuHeader = {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
+      color: children[0].props.item.logo?.color,
     };
 
     const title = item.isFolder

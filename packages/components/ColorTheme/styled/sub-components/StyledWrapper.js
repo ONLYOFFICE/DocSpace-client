@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+
+import { mobile } from "../../../utils/device";
 
 const StyledWrapper = styled.div`
   #ipl-progress-indicator {
@@ -15,10 +16,9 @@ const StyledWrapper = styled.div`
     -webkit-border-radius: 1px;
     border-radius: 1px;
 
-    ${isMobileOnly &&
-    css`
+    @media ${mobile} {
       top: 48px;
-    `}
+    }
   }
 `;
 

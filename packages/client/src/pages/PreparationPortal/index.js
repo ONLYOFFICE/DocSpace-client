@@ -29,10 +29,17 @@ const PreparationPortal = (props) => {
     withoutHeader,
     style,
     clearLocalStorage,
+    setBodyRendered,
   } = props;
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setBodyRendered(true);
+
+    return () => setBodyRendered(false);
+  });
 
   const clearAllIntervals = () => {
     clearInterval(timerId);
@@ -236,7 +243,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ backup }) => {
+const PreparationPortalWrapper = inject(({ auth, backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize
@@ -246,6 +253,7 @@ const PreparationPortalWrapper = inject(({ backup }) => {
   return {
     clearLocalStorage,
     multiplicationFactor,
+    setBodyRendered: auth.settingsStore.setBodyRendered,
   };
 })(
   withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal))

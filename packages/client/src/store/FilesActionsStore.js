@@ -31,13 +31,13 @@ import {
   FolderType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
-import { isMobile } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isTablet } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -1018,7 +1018,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomPinned")));
+          .then(() =>
+            toastr.success(
+              items.length > 1
+                ? t("RoomsPinned", { count: items.length })
+                : t("RoomPinned")
+            )
+          )
+          .catch((error) => console.log(error));
       case "unpin":
         items.forEach((item) => {
           updateRoomPin(item);
@@ -1032,7 +1039,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomUnpinned")));
+          .then(() => {
+            toastr.success(
+              items.length > 1
+                ? t("RoomsUnpinned", { count: items.length })
+                : t("RoomUnpinned")
+            );
+          })
+          .catch((error) => console.log(error));
       default:
         return;
     }
@@ -1378,6 +1392,8 @@ class FilesActionStore {
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
         url !== window.DocSpace.location.pathname
     );
+
+    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -1740,7 +1756,7 @@ class FilesActionStore {
 
     switch (option) {
       case "show-info":
-        if (!isTablet() && !isMobile) return null;
+        if (isDesktop()) return null;
         else
           return {
             id: "menu-show-info",
@@ -2341,18 +2357,9 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, t) => {
-    const { selection, bufferSelection } = this.filesStore;
-
+  preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
     let fileIds = [];
     let folderIds = [];
-
-    const selections =
-      selection.length > 0 && selection[0] != null
-        ? selection
-        : bufferSelection != null
-        ? [bufferSelection]
-        : [];
 
     if (!selections.length) return;
     const oneFolder = selections.length === 1 && selections[0].isFolder;
@@ -2364,18 +2371,14 @@ class FilesActionStore {
         const selectedFolder = await getFolder(selections[0].id);
         const { folders, files, total } = selectedFolder;
 
-        if (total > 1) this.setSelectedItems(false, total);
-
-        if (total === 1) {
-          const title = !!folders.length ? folders[0].title : files[0].title;
-          this.setSelectedItems(title, total);
-        }
-
         if (total === 0) {
           this.filesStore.setSelection([]);
           this.filesStore.setBufferSelection(null);
           return;
         }
+
+        const title = !!folders.length ? folders[0].title : files[0].title;
+        this.setSelectedItems(title, total);
       } catch (err) {
         toastr.error(err);
       }
@@ -2387,7 +2390,7 @@ class FilesActionStore {
         else folderIds.push(item.id);
       });
 
-    !oneFolder && this.setSelectedItems();
+    !oneFolder && this.setSelectedItems(selections[0].title, selections.length);
     this.filesStore.setSelection([]);
     this.filesStore.setBufferSelection(null);
 

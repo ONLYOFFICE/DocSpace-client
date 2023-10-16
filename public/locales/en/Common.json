@@ -239,6 +239,7 @@
   "Profile": "Profile",
   "ProviderLoginError": "Authorization error",
   "ProviderNotConnected": "Provider is not connected to your account",
+  "PublicRoomLabel": "Public",
   "PunycodeDomain": "Punycode domains are not supported",
   "PunycodeLocalPart": "Punycode local part is not supported",
   "QuotaPaidUserLimitError": "The paid user limit has been reached.",

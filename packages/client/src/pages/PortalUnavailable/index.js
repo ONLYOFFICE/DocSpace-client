@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
@@ -8,6 +8,7 @@ import { ReactSVG } from "react-svg";
 import Button from "@docspace/components/button";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -44,7 +45,7 @@ const StyledBody = styled.div`
   .portal-unavailable_text {
     color: ${(props) => props.theme.portalUnavailable.textDescription};
   }
-  @media (max-width: 768px) {
+  @media ${mobile} {
     .portal-unavailable_svg {
       margin-top: 0px;
       background: ${(props) => props.theme.catalog.background};
@@ -59,13 +60,24 @@ const StyledBody = styled.div`
   }
 `;
 
-const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
+const PortalUnavailable = ({
+  theme,
+  logoUrl,
+  onLogoutClick,
+  setBodyRendered,
+}) => {
   const { t, ready } = useTranslation([
     "Errors",
     "PortalUnavailable",
     "Common",
   ]);
   const [isVisible, setIsVisible] = useState();
+
+  useEffect(() => {
+    setBodyRendered(true);
+
+    return () => setBodyRendered(false);
+  }, []);
 
   const onClick = () => {
     onLogoutClick();
@@ -124,10 +136,6 @@ const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
 
 export default inject(({ auth, profileActionsStore }) => {
   const { onLogoutClick } = profileActionsStore;
-  const { theme, logoUrl } = auth.settingsStore;
-  return {
-    logoUrl,
-    theme,
-    onLogoutClick,
-  };
+  const { theme, logoUrl, setBodyRendered } = auth.settingsStore;
+  return { setBodyRendered, logoUrl, theme, onLogoutClick };
 })(observer(PortalUnavailable));

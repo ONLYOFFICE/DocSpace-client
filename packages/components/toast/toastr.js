@@ -15,12 +15,15 @@ import {
   StyledIconButton,
 } from "./styled-toastr";
 import commonIconsStyles from "../utils/common-icons-style";
+import { getCookie } from "../utils/cookie";
 
 const getTitle = (type) => {
+  const lang = getCookie("asc_language") ?? "en";
+
   const commonKeys =
     (window.i18n &&
       Object.getOwnPropertyNames(window.i18n.loaded).filter(
-        (k) => k.indexOf("/Common.json") > -1
+        (k) => k.indexOf(`${lang}/Common.json`) > -1
       )) ||
     [];
 

@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 213px 0 213px;
+
   width: 320px;
 
   @media ${tablet} {
@@ -38,7 +38,7 @@ export const LoginFormWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     height: calc(100vh - 48px);
   }
 
@@ -53,7 +53,7 @@ export const LoginFormWrapper = styled.div`
     left: 0;
     bottom: 0;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       background-image: none;
     }
   }
@@ -71,7 +71,8 @@ export const LoginContent = styled.div`
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
+    width: 100%;
     min-height: 100%;
     justify-content: start;
   }

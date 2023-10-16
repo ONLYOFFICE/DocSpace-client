@@ -17,6 +17,12 @@ const ConfirmRoute = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    props.setBodyRendered(true);
+
+    return () => props.setBodyRendered(false);
+  }, []);
+
+  React.useEffect(() => {
     const { forUnauthorized, isAuthenticated } = props;
 
     if (forUnauthorized && isAuthenticated) {
@@ -135,5 +141,6 @@ export default inject(({ auth }) => {
   return {
     isAuthenticated,
     logout,
+    setBodyRendered: auth.settingsStore.setBodyRendered,
   };
 })(observer(ConfirmRoute));

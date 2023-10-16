@@ -14,6 +14,7 @@ import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
@@ -295,6 +296,12 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         )}
 
+        {isRecycleBinFolder && !isEmptyPage && (
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
+        )}
+
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           isAccountsPage) &&
           !isSettingsPage && (
@@ -352,6 +359,7 @@ export default inject(
 
     const {
       firstLoad,
+      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -359,9 +367,10 @@ export default inject(
       showFilterLoader,
     } = clientLoadingStore;
 
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
+    const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
+      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      setIsSectionFilterLoading(param, !withoutTimer);
+      setIsSectionBodyLoading(param, !withoutTimer);
     };
 
     const {

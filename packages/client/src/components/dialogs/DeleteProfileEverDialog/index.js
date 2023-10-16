@@ -11,7 +11,7 @@ import ModalDialogContainer from "../ModalDialogContainer";
 import Link from "@docspace/components/link";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { size } from "@docspace/components/utils/device";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const { deleteUser } = api.people;
 const { Filter } = api;
@@ -23,7 +23,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
       css`
         width: auto;
 
-        @media (min-width: ${size.smallTablet}px) {
+        @media ${mobileMore} {
           .delete-button,
           .cancel-button {
             width: auto;

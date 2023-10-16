@@ -11,10 +11,17 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
+import { DeviceType } from "@docspace/common/constants";
 
 const IntegrationWrapper = (props) => {
-  const { t, tReady, enablePlugins, toDefault, isSSOAvailable, standalone } =
-    props;
+  const {
+    t,
+    tReady,
+    currentDeviceType,
+    toDefault,
+    isSSOAvailable,
+    standalone,
+  } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,20 +78,33 @@ const IntegrationWrapper = (props) => {
     );
   };
 
-  return <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />;
+  return (
+    <Submenu
+      data={data}
+      startSelect={currentTab}
+      onSelect={onSelect}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
+    />
+  );
 };
 
 export default inject(({ auth, ssoStore }) => {
   const { standalone } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
-  const { enablePlugins } = auth.settingsStore;
+  const { currentDeviceType } = auth.settingsStore;
   const { isSSOAvailable } = auth.currentQuotaStore;
 
   return {
-    enablePlugins,
     toDefault,
     isSSOAvailable,
     standalone,
+    currentDeviceType,
   };
 })(
   withTranslation(["Settings", "SingleSignOn", "Translations"])(

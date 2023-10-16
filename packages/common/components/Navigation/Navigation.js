@@ -11,17 +11,13 @@ import { Consumer } from "@docspace/components/utils/context";
 
 import DomHelpers from "@docspace/components/utils/domHelpers";
 import Backdrop from "@docspace/components/backdrop";
-import { isMobileOnly } from "react-device-detect";
 
 import { ReactSVG } from "react-svg";
-import {
-  isTablet as isTabletUtils,
-  isDesktop as isDesktopUtils,
-  isSmallTablet as isSmallTabletUtils,
-} from "@docspace/components/utils/device";
+
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
+import { DeviceType } from "../../constants";
 
 const Navigation = ({
   tReady,
@@ -37,7 +33,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
   showFolderInfo,
@@ -57,6 +52,8 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  currentDeviceType,
+  rootRoomTitle,
 
   ...rest
 }) => {
@@ -68,8 +65,7 @@ const Navigation = ({
   const dropBoxRef = React.useRef(null);
   const containerRef = React.useRef(null);
 
-  const isDesktop =
-    (!isTabletUtils() && !isSmallTabletUtils()) || isDesktopUtils();
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const infoPanelIsVisible = React.useMemo(
     () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
@@ -137,11 +133,10 @@ const Navigation = ({
   }, [onBackToParentFolder]);
 
   const showRootFolderNavigation =
+    !isRootFolder &&
     showRootFolderTitle &&
-    navigationItems &&
-    navigationItems.length > 1 &&
-    !isSmallTabletUtils() &&
-    !isMobileOnly;
+    ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
+    currentDeviceType !== DeviceType.mobile;
 
   const navigationTitleNode = (
     <div className="title-block">
@@ -158,7 +153,9 @@ const Navigation = ({
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
       <Text
-        title={navigationItems[navigationItems.length - 2].title}
+        title={
+          rootRoomTitle || navigationItems[navigationItems.length - 2].title
+        }
         isOpen={false}
         isRootFolder={isRootFolder}
         isRootFolderTitle
@@ -207,6 +204,7 @@ const Navigation = ({
                 withLogo={withLogo}
                 burgerLogo={burgerLogo}
                 titleIcon={titleIcon}
+                currentDeviceType={currentDeviceType}
               />
             </>
           )}
@@ -217,7 +215,6 @@ const Navigation = ({
             canCreate={canCreate}
             isTabletView={isTabletView}
             isTrashFolder={isTrashFolder}
-            isRecycleBinFolder={isRecycleBinFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
@@ -244,7 +241,6 @@ const Navigation = ({
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
               getContextOptionsPlus={getContextOptionsPlus}
-              isRecycleBinFolder={isRecycleBinFolder}
               isEmptyFilesList={isEmptyFilesList}
               clearTrash={clearTrash}
               toggleInfoPanel={toggleInfoPanel}
@@ -258,7 +254,7 @@ const Navigation = ({
               isTrashFolder={isTrashFolder}
             />
           </StyledContainer>
-          {isTrashFolder && !isEmptyPage && (
+          {isDesktop && isTrashFolder && !isEmptyPage && (
             <TrashWarning
               title={titles.trashWarning}
               isTabletView={isTabletView}

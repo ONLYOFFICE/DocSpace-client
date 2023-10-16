@@ -46,8 +46,9 @@ const EmptyFolderContainer = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isRoom =
-    isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
+  // const isRoom =
+  //   isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
+  const isRoom = !!roomType;
 
   const canInviteUsers = isRoom && editAccess;
 

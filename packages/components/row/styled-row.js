@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { tablet } from "../utils/device";
+import { desktop, mobile, tablet } from "../utils/device";
 import Base from "../themes/base";
 import { isMobile } from "react-device-detect";
 import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
@@ -157,13 +157,13 @@ const StyledOptionButton = styled.div`
         ? `margin-left: 0px;`
         : `margin-right: 0px;`}
 
-    @media (min-width: 1024px) {
+    @media ${desktop} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
           ? `margin-left: -1px;`
           : `margin-right: -1px;`}
     }
-    @media (max-width: 516px) {
+    @media ${mobile} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
           ? `padding-right: 10px;`

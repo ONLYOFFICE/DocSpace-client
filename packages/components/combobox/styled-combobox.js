@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
+import { mobile } from "../utils/device";
 
 const StyledComboBox = styled.div`
   width: ${(props) =>
@@ -30,7 +31,7 @@ const StyledComboBox = styled.div`
     ${(props) =>
       !props.disableMobileView &&
       css`
-        @media (max-width: 428px) {
+        @media ${mobile} {
           position: fixed;
           top: unset !important;
           right: 0;

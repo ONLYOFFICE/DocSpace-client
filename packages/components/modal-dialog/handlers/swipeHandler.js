@@ -1,9 +1,9 @@
-import { isSmallTablet, isTouchDevice } from "../../utils/device";
+import { isMobile, isTouchDevice } from "../../utils/device";
 
 let y1 = null;
 
 export const handleTouchStart = (e) => {
-  if (!(isTouchDevice && isSmallTablet())) {
+  if (!(isTouchDevice && isMobile())) {
     y1 = null;
     return false;
   }

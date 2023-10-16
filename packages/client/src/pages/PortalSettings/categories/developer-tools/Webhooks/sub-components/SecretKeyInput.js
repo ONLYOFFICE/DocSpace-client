@@ -31,7 +31,7 @@ const Header = styled.p`
   margin-bottom: 5px;
 
   img {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 4px;
@@ -48,7 +48,7 @@ const StyledInfoIcon = styled.img`
   }
 `;
 
-const SecretKeyInput = props => {
+const SecretKeyInput = (props) => {
   const {
     isResetVisible,
     name,
@@ -68,10 +68,9 @@ const SecretKeyInput = props => {
 
   const secretKeyInputRef = useRef(null);
 
-  const toggleHint = () =>
-    setIsHintVisible(prevIsHintVisible => !prevIsHintVisible);
+  const toggleHint = () => setIsHintVisible((prevIsHintVisible) => !prevIsHintVisible);
 
-  const handleInputValidation = isValid => {
+  const handleInputValidation = (isValid) => {
     setIsPasswordValid(isValid);
   };
 
@@ -83,7 +82,7 @@ const SecretKeyInput = props => {
     toggleHint();
   };
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     onChange({ target: { name, value: e.target.value } });
   };
 
@@ -175,8 +174,8 @@ const SecretKeyInput = props => {
   );
 };
 
-export default inject(({ settingsStore, auth }) => {
-  const { passwordSettings } = settingsStore;
+export default inject(({ auth }) => {
+  const { passwordSettings } = auth.settingsStore;
   const { webhooksGuideUrl } = auth.settingsStore;
 
   return {

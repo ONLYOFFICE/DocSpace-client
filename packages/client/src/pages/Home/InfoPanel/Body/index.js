@@ -155,7 +155,7 @@ const InfoPanelBodyContent = ({
   if (!selection && !isGallery) return null;
 
   return (
-    <StyledInfoPanelBody isAccounts={isAccounts}>
+    <StyledInfoPanelBody>
       {!isNoItem && (
         <ItemTitle {...defaultProps} selectionLength={selectedItems.length} />
       )}

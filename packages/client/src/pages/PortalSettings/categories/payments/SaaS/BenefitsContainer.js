@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Text from "@docspace/components/text";
 import { inject, observer } from "mobx-react";
-import { smallTablet } from "@docspace/components/utils/device";
 
 const StyledBody = styled.div`
   border-radius: 12px;

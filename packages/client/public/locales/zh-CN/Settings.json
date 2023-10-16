@@ -156,7 +156,6 @@
   "RecoveryFileNotSelected": "恢复错误。未选择恢复文件",
   "RestoreBackup": "数据恢复",
   "RestoreBackupDescription": "设置此选项，从之前保存的备份文件中恢复门户数据。",
-  "RestoreDefaultButton": "恢复至默认",
   "RoomsModule": "备份房间",
   "RoomsModuleDescription": "您可为备份专门新建一个房间，也可选择现有房间或将副本保存在其 {{roomName}} 房间中。",
   "SelectFileInGZFormat": "选择 .GZ 格式的文件",

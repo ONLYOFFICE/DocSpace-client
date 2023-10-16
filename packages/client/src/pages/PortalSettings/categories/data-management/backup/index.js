@@ -10,6 +10,7 @@ import { inject, observer } from "mobx-react";
 import AutoBackup from "./auto-backup";
 import ManualBackup from "./manual-backup";
 import config from "PACKAGE_FILE";
+import { DeviceType } from "@docspace/common/constants";
 
 const Backup = ({
   automaticBackupUrl,
@@ -90,10 +91,11 @@ export default inject(({ auth }) => {
   const { settingsStore, currentTariffStatusStore } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
-  const { automaticBackupUrl, isTabletView, currentColorScheme } =
+  const { automaticBackupUrl, currentDeviceType, currentColorScheme } =
     settingsStore;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
 
   return {
     automaticBackupUrl,

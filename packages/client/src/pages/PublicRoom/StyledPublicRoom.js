@@ -1,18 +1,18 @@
 import styled, { css } from "styled-components";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 
 const StyledHeadline = styled(Headline)`
   font-weight: 700;
-  font-size: ${isMobile ? "21px !important" : "18px"};
-  line-height: ${isMobile ? "28px !important" : "24px"};
-  ${props =>
+  font-size: 18px;
+  line-height: 24px;
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 18px;
         `
-    : css`
+      : css`
           margin-left: 18px;
         `}
 
@@ -30,13 +30,13 @@ const StyledContainer = styled.div`
   align-items: center;
 
   .public-room-header_separator {
-    ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin: 0 15px 0 16px;
             border-right: 1px solid #dfe2e3;
           `
-      : css`
+        : css`
             margin: 0 16px 0 15px;
             border-left: 1px solid #dfe2e3;
           `}
@@ -48,22 +48,10 @@ const StyledContainer = styled.div`
     padding: 16px 0 0px;
   }
 
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    padding: 16px 0 0px;
-  `}
-
   @media ${mobile} {
     width: 100%;
     padding: 12px 0 0;
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100% !important;
-    padding: 12px 0 0;
-  `}
 `;
 
 export { StyledHeadline, StyledContainer };

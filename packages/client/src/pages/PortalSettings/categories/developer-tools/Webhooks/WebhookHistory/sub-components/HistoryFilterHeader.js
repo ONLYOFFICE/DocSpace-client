@@ -12,7 +12,7 @@ import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 import { useTranslation } from "react-i18next";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 const ListHeader = styled.header`
   display: flex;
@@ -20,15 +20,9 @@ const ListHeader = styled.header`
   align-items: center;
 
   ${() =>
-    isMobile &&
+    isMobile() &&
     css`
-      margin-top: 9px;
-    `}
-  ${() =>
-    isMobileOnly &&
-    css`
-      margin-top: 35px;
-      padding-inline-end: 8px;
+      margin-top: 8px;
     `}
 `;
 
@@ -54,8 +48,7 @@ const FilterButton = styled.div`
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
   border: 1px solid;
-  border-color: ${(props) =>
-    props.theme.isBase ? "#d0d5da" : "rgb(71, 71, 71)"};
+  border-color: ${(props) => (props.theme.isBase ? "#d0d5da" : "rgb(71, 71, 71)")};
   border-radius: 3px;
   cursor: pointer;
 
@@ -111,8 +104,7 @@ const HistoryFilterHeader = (props) => {
         <FilterButton
           id="filter-button"
           onClick={openFiltersModal}
-          isGroupMenuVisible={isGroupMenuVisible}
-        >
+          isGroupMenuVisible={isGroupMenuVisible}>
           <IconButton iconName={FilterReactSvrUrl} size={16} />
           <span hidden={historyFilters === null}></span>
         </FilterButton>

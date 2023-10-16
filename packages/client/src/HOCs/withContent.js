@@ -14,7 +14,7 @@ import config from "PACKAGE_FILE";
 import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
 //import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 //import ItemIcon from "../components/ItemIcon";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 export default function withContent(WrappedContent) {
   class WithContent extends React.Component {

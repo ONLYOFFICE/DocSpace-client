@@ -15,8 +15,12 @@ const ThirdPartyLoader = () => {
 
   return (
     <StyledLoader>
-      {rectangles.map((_) => (
-        <Loaders.Rectangle height="120px" borderRadius="6px" />
+      {rectangles.map((_, index) => (
+        <Loaders.Rectangle
+          key={`third-party-loader-${index}`}
+          height="120px"
+          borderRadius="6px"
+        />
       ))}
     </StyledLoader>
   );

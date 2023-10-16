@@ -6,7 +6,7 @@ import IconButton from "@docspace/components/icon-button";
 import Text from "@docspace/components/text";
 import ItemContextOptions from "./ItemContextOptions";
 import { StyledTitle } from "../../styles/common";
-import RoomIcon from "@docspace/client/src/components/RoomIcon";
+import RoomIcon from "@docspace/components/room-icon";
 
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 

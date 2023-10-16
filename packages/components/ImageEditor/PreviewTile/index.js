@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Tags from "../../tags";
 
-import { smallTablet } from "../../utils/device";
+import { mobile } from "../../utils/device";
 import Tag from "../../tag";
 import { Base } from "../../themes";
 
@@ -16,7 +16,7 @@ const StyledPreviewTile = styled.div`
   height: 120px;
   border-radius: 12px;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     display: none;
   }
 

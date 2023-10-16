@@ -58,7 +58,7 @@ const SectionBodyContent = ({
   );
 };
 
-export default inject(({ accessRightsStore, oformsStore }) => ({
+export default inject(({ accessRightsStore, oformsStore, auth }) => ({
   oformFiles: oformsStore.oformFiles,
   hasGalleryFiles: oformsStore.hasGalleryFiles,
   setGallerySelected: oformsStore.setGallerySelected,

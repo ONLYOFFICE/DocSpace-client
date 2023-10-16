@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import Base from "@docspace/components/themes/base";
 
 const LoginContainer = styled.div`
@@ -27,9 +27,10 @@ const LoginContainer = styled.div`
     max-width: 480px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto 0 auto;
-    max-width: 311px;
+    max-width: 100%;
+    width: calc(100% - 32px);
   }
 
   .socialButton {
@@ -57,7 +58,7 @@ const LoginContainer = styled.div`
     min-height: 32px;
     color: ${(props) => props.theme.login.headerColor};
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       padding-top: 32px;
     }
   }
@@ -82,7 +83,7 @@ const LoginContainer = styled.div`
       width: 416px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 311px;
     }
   }
@@ -254,7 +255,7 @@ const LoginContainer = styled.div`
       }
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -263,7 +264,7 @@ const LoginContainer = styled.div`
     color: ${(props) => props.theme.login.titleColor};
     margin-bottom: 16px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       margin-top: 32px;
     }
   }

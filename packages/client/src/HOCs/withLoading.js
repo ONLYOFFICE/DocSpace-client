@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 
 const withLoading = (WrappedComponent) => {
   const withLoading = (props) => {
@@ -21,6 +21,14 @@ const withLoading = (WrappedComponent) => {
     const [mobileView, setMobileView] = useState(true);
 
     useEffect(() => {
+      if (window.location.pathname.includes("profile")) {
+        if (!isLoadedArticleBody) {
+          setIsBurgerLoading(true);
+        } else {
+          setIsBurgerLoading(false);
+        }
+      }
+
       if (isLoadedArticleBody) {
         setIsBurgerLoading(false);
       } else {
@@ -35,7 +43,7 @@ const withLoading = (WrappedComponent) => {
     }, []);
 
     const checkInnerWidth = () => {
-      if (isSmallTablet()) {
+      if (isMobile()) {
         setMobileView(true);
       } else {
         setMobileView(false);
@@ -46,7 +54,7 @@ const withLoading = (WrappedComponent) => {
     const index = pathname.lastIndexOf("/");
     const setting = pathname.slice(index + 1);
 
-    const viewMobile = !!(isSmallTablet() && mobileView);
+    const viewMobile = !!(isMobile() && mobileView);
 
     const isLoadedCustomizationSettings =
       isLoadedCustomization &&

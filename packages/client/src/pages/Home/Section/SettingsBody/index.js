@@ -10,7 +10,6 @@ import Submenu from "@docspace/components/submenu";
 import PersonalSettings from "./CommonSettings";
 import GeneralSettings from "./AdminSettings";
 import { tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
 
 const StyledContainer = styled.div`
   margin-top: -22px;
@@ -18,11 +17,6 @@ const StyledContainer = styled.div`
   @media ${tablet} {
     margin-top: 0px;
   }
-
-  ${isMobile &&
-  css`
-    margin-top: 0px;
-  `}
 `;
 
 const SectionBodyContent = ({ isErrorSettings, user }) => {

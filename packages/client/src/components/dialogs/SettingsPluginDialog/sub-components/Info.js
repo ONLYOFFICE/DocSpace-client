@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import { LANGUAGE } from "@docspace/common/constants";
 
 import Text from "@docspace/components/text";

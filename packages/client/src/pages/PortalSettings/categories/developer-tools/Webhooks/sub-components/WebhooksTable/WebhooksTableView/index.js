@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 import styled from "styled-components";
 
@@ -55,7 +55,7 @@ const WebhooksTableView = (props) => {
 
   useEffect(() => {
     if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
+    if (sectionWidth < 1025 || isMobile()) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");

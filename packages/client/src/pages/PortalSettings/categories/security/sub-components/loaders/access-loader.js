@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   .header {
@@ -9,12 +9,12 @@ const StyledLoader = styled.div`
     height: 29px;
     margin-bottom: 14px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 184px;
       height: 37px;
     }
 
-    @media (max-width: 428px) {
+    @media ${mobile} {
       width: 273px;
       height: 37px;
       margin-bottom: 18px;
@@ -34,13 +34,13 @@ const StyledLoader = styled.div`
     gap: 20px;
     margin-bottom: 40px;
 
-    @media (max-width: 428px) {
+    @media ${mobile} {
       width: 100%;
     }
 
     .header {
       height: 40px;
-      @media (${tablet}) {
+      @media ${tablet} {
         height: 60px;
       }
     }
@@ -53,7 +53,7 @@ const StyledLoader = styled.div`
 
     .description {
       width: 700px;
-      @media (${tablet}) {
+      @media ${tablet} {
         width: 100%;
       }
     }

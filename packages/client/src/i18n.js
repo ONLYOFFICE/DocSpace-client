@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "@docspace/common/utils/i18next-http-backend";
 import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 import { loadLanguagePath } from "./helpers/utils";
 
@@ -35,7 +35,9 @@ newInstance
     },
 
     ns: [
+      "ArchiveDialog",
       "InfoPanel",
+      "InviteDialog",
       "FormGallery",
       "DownloadDialog",
       "DeleteDialog",
@@ -43,9 +45,14 @@ newInstance
       "ConvertDialog",
       "ConnectDialog",
       "ConflictResolveDialog",
+      "CreateEditRoomDialog",
       "DeleteThirdPartyDialog",
       "PortalUnavailable",
+      "RoomSelector",
+      "UploadPanel",
+      "Files",
       "Errors",
+      "Translations",
     ],
 
     backend: {

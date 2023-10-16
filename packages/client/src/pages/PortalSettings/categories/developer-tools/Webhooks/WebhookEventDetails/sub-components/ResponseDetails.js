@@ -6,7 +6,7 @@ import Text from "@docspace/components/text";
 import { inject, observer } from "mobx-react";
 
 import json_beautifier from "csvjson-json_beautifier";
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 import { useTranslation } from "react-i18next";
 
 const DetailsWrapper = styled.div`
@@ -45,7 +45,7 @@ const LargePayloadStub = styled.div`
   border: 1px solid #eceef1;
   border-radius: 3px;
 
-  ${isMobileOnly &&
+  ${isMobile() &&
   css`
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -79,9 +79,7 @@ const ResponseDetails = ({ eventDetails }) => {
   const openRawPayload = () => {
     const rawPayload = window.open("");
     isJSON(responsePayload)
-      ? rawPayload.document.write(
-          beautifiedJSON.replace(/(?:\r\n|\r|\n)/g, "<br/>")
-        )
+      ? rawPayload.document.write(beautifiedJSON.replace(/(?:\r\n|\r|\n)/g, "<br/>"))
       : rawPayload.document.write(responsePayload);
     rawPayload.focus();
   };
@@ -102,11 +100,7 @@ const ResponseDetails = ({ eventDetails }) => {
           copyInfoText={t("ResponseHeaderCopied")}
         />
       ) : (
-        <Textarea
-          value={eventDetails.responseHeaders}
-          heightScale
-          className="textareaBody"
-        />
+        <Textarea value={eventDetails.responseHeaders} heightScale className="textareaBody" />
       )}
       <Text as="h3" fontWeight={600} className="mb-4 mt-16">
         {t("ResponsePostBody")}
@@ -121,7 +115,7 @@ const ResponseDetails = ({ eventDetails }) => {
             size="small"
             onClick={openRawPayload}
             label={t("ViewRawPayload")}
-            scale={isMobileOnly}
+            scale={isMobile()}
           />
         </LargePayloadStub>
       ) : responsePayload === "" ? (

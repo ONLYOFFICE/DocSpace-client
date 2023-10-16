@@ -7,7 +7,7 @@ import {
   EmptyContentImage,
 } from "./styled-empty-screen-container";
 
-import { isMobile } from "react-device-detect";
+import { isTablet } from "../utils/device";
 
 const EmptyScreenContainer = (props) => {
   const {
@@ -25,7 +25,7 @@ const EmptyScreenContainer = (props) => {
       <EmptyContentImage
         imageSrc={imageSrc}
         imageAlt={imageAlt}
-        style={!isMobile ? imageStyle : {}}
+        style={!isTablet() ? imageStyle : {}}
         className="ec-image"
       />
 

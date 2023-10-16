@@ -146,7 +146,7 @@ const StyledEditLinkPanel = styled.div`
 const StyledScrollbar = styled(Scrollbar)`
   position: relative;
   padding: 16px 0;
-  height: calc(100vh - 87px) !important;
+  height: calc(100% - 150px) !important;
 `;
 
 const StyledButtons = styled(Box)`

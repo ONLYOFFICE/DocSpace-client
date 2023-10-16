@@ -25,6 +25,7 @@ const SectionHeaderContent = (props) => {
     setGallerySelected,
     categoryType,
     setSubmitToGalleryDialogVisible,
+    setIsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -42,6 +43,8 @@ const SectionHeaderContent = (props) => {
     const url = getCategoryUrl(categoryType, filter.folder);
 
     const pathname = `${url}?${filterParamsStr}`;
+
+    setIsLoading();
 
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, pathname)
@@ -94,12 +97,30 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ auth, accessRightsStore, filesStore, dialogsStore, oformsStore }) => {
+  ({
+    auth,
+    accessRightsStore,
+    filesStore,
+    dialogsStore,
+    oformsStore,
+    clientLoadingStore,
+  }) => {
     const { isVisible, setIsVisible } = auth.infoPanelStore;
     const { canSubmitToFormGallery } = accessRightsStore;
     const { categoryType } = filesStore;
     const { setGallerySelected } = oformsStore;
     const { setSubmitToGalleryDialogVisible } = dialogsStore;
+    const {
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
+    } = clientLoadingStore;
+
+    const setIsLoading = () => {
+      setIsSectionHeaderLoading(true, false);
+      setIsSectionFilterLoading(true, false);
+      setIsSectionBodyLoading(true, false);
+    };
     return {
       isInfoPanelVisible: isVisible,
       canSubmitToFormGallery,
@@ -107,6 +128,7 @@ export default inject(
       setGallerySelected,
       categoryType,
       setSubmitToGalleryDialogVisible,
+      setIsLoading,
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

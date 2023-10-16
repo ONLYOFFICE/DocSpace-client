@@ -1,4 +1,4 @@
-﻿import { smallTablet } from "@docspace/components/utils/device";
+﻿import { mobile } from "@docspace/components/utils/device";
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import styled, { css } from "styled-components";
 
@@ -80,7 +80,7 @@ const StyledComponent = styled.div`
               margin-right: 8px;
             `}
     }
-    @media ${smallTablet} {
+    @media ${mobile} {
       .button {
         width: 100%;
       }
@@ -89,7 +89,7 @@ const StyledComponent = styled.div`
     ${({ isShowDeleteButton }) =>
       isShowDeleteButton &&
       css`
-        @media ${smallTablet} {
+        @media ${mobile} {
           flex-direction: column;
           gap: 8px;
           margin: 0;

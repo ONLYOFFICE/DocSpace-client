@@ -15,8 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
-import { getCookie } from "@docspace/common/utils";
-
+import { getCookie } from "@docspace/components/utils/cookie";
 // Property Content Components
 
 const text = (text) => (

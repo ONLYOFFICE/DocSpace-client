@@ -50,6 +50,10 @@ export const LocationForm = styled.form`
     width: 100%;
     max-width: 350px;
 
+    @media ${mobile} {
+      max-width: 100%;
+    }
+
     display: flex;
     flex-direction: column;
     gap: 16px;

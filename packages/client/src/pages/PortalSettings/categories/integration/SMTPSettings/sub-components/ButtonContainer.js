@@ -10,6 +10,7 @@ import {
 
 import { ButtonStyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
+import { DeviceType } from "@docspace/common/constants";
 
 const {
   HOST,
@@ -35,6 +36,7 @@ const ButtonContainer = (props) => {
     isDefaultSettings,
     isSMTPInitialSettings,
     setSMTPErrors,
+    currentDeviceType,
   } = props;
 
   const [buttonOperation, setButtonOperation] = useState({
@@ -179,35 +181,41 @@ const ButtonContainer = (props) => {
     setButtonOperation({ ...buttonOperation, reset: false });
   };
 
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
+
   return (
     <ButtonStyledComponent>
       <Button
         label={t("Common:SaveButton")}
-        size="small"
+        size={buttonSize}
         primary
         onClick={onClick}
         isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}
         isLoading={buttonOperation.save}
+        scale={currentDeviceType === DeviceType.mobile}
       />
       <Button
         label={t("Settings:DefaultSettings")}
-        size="small"
+        size={buttonSize}
         onClick={onClickDefaultSettings}
         isLoading={buttonOperation.reset}
         isDisabled={isLoading || isDefaultSettings}
+        scale={currentDeviceType === DeviceType.mobile}
       />
       <Button
         label={t("SendTestMail")}
-        size="small"
+        size={buttonSize}
         onClick={onClickSendTestMail}
         isDisabled={isLoading || !isSMTPInitialSettings}
         isLoading={buttonOperation.send}
+        scale={currentDeviceType === DeviceType.mobile}
       />
     </ButtonStyledComponent>
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ auth, setup }) => {
   const {
     integration,
     setSMTPSettingsLoading,
@@ -218,6 +226,9 @@ export default inject(({ setup }) => {
   } = setup;
   const { smtpSettings } = integration;
   const { settings, isLoading, isDefaultSettings } = smtpSettings;
+
+  const { currentDeviceType } = auth.settingsStore;
+
   return {
     isSMTPInitialSettings,
     isDefaultSettings,
@@ -227,5 +238,6 @@ export default inject(({ setup }) => {
     resetSMTPSettings,
     isLoading,
     setSMTPErrors,
+    currentDeviceType,
   };
 })(observer(ButtonContainer));

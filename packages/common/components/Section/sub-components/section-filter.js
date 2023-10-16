@@ -5,16 +5,16 @@ import { isMobile } from "react-device-detect";
 import { tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledSectionFilter = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-left: ${isMobile ? "16px" : "20px"};
+          margin-left: 20px;
         `
       : css`
-          margin-right: ${isMobile ? "16px" : "20px"};
+          margin-right: 20px;
         `}
   @media ${tablet} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 16px;

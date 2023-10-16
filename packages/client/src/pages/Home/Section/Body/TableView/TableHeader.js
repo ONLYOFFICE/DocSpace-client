@@ -256,7 +256,7 @@ class FilesTableHeader extends React.Component {
 
   componentDidMount() {
     this.customScrollElm = document.getElementsByClassName("section-scroll")[0];
-    this.customScrollElm.addEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.addEventListener("scroll", this.onBeginScroll);
   }
 
   onBeginScroll = () => {
@@ -319,7 +319,7 @@ class FilesTableHeader extends React.Component {
   }
 
   componentWillUnmount() {
-    this.customScrollElm.removeEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.removeEventListener("scroll", this.onBeginScroll);
   }
 
   onColumnChange = (key) => {

@@ -25,6 +25,7 @@ const Dialog = ({
   extension,
   keepNewFileName,
   setKeepNewFileName,
+  withForm,
 }) => {
   const [value, setValue] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -47,7 +48,8 @@ const Dialog = ({
   const onKeyUpHandler = useCallback(
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
-      if (e.keyCode === 13) onSaveAction(e);
+
+      if (e.keyCode === 13 && !withForm) onSaveAction(e);
     },
     [value]
   );
@@ -109,6 +111,7 @@ const Dialog = ({
 
   return (
     <ModalDialog
+      withForm={withForm}
       visible={visible}
       displayType={"modal"}
       scale={true}
@@ -119,7 +122,7 @@ const Dialog = ({
         <TextInput
           id="create-text-input"
           name="create"
-          type="text"
+          type="search"
           scale={true}
           value={value}
           isAutoFocussed={true}
@@ -155,6 +158,7 @@ const Dialog = ({
           key="GlobalSendBtn"
           label={isCreateDialog ? t("Common:Create") : t("Common:SaveButton")}
           size="normal"
+          type="submit"
           scale
           primary
           isLoading={isDisabled}

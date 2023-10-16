@@ -12,7 +12,7 @@ import Text from "@docspace/components/text";
 import SsoTextInput from "./SsoTextInput";
 import FileInput from "@docspace/components/file-input";
 import { Base } from "@docspace/components/themes";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     gap: 9px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
 
       .upload-xml-input {
@@ -45,7 +45,7 @@ const StyledWrapper = styled.div`
       position: static;
     }
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
 
       button {
@@ -60,7 +60,7 @@ const StyledWrapper = styled.div`
     overflow: inherit;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     flex-direction: column;
     gap: 8px;
   }

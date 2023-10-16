@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 import DropDown from "@docspace/components/drop-down";
 import { Base } from "@docspace/components/themes";
@@ -28,7 +28,7 @@ const StyledDropDown = styled(DropDown)`
     max-width: 446px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     width: calc(100vw - 34px);
     max-width: calc(100vw - 34px);
     div {

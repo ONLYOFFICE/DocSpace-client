@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "@docspace/common/utils/i18next-http-backend";
 import { LANGUAGE } from "@docspace/common/constants";
 import config from "PACKAGE_FILE";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import { loadLanguagePath } from "SRC_DIR/helpers/utils";
 
 const newInstance = i18n.createInstance();

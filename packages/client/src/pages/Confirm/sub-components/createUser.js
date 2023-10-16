@@ -363,7 +363,10 @@ const CreateUserForm = (props) => {
         <SocialButton
           iconName={SsoReactSvgUrl}
           className="socialButton"
-          label={capabilities?.ssoLabel || getProviderTranslation("sso", t, false, true)}
+          label={
+            capabilities?.ssoLabel ||
+            getProviderTranslation("sso", t, false, true)
+          }
           onClick={() => (window.location.href = capabilities?.ssoUrl)}
         />
       </div>

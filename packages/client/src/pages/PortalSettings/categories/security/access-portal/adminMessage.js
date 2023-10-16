@@ -12,8 +12,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
-import { isMobile } from "react-device-detect";
+
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ const AdminMessage = (props) => {
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
@@ -91,7 +93,7 @@ const AdminMessage = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("admin-message") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -118,7 +120,7 @@ const AdminMessage = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <AdmMsgLoader />;
   }
 
@@ -187,6 +189,7 @@ export default inject(({ auth, setup }) => {
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -197,5 +200,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

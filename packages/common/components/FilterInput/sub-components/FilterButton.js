@@ -24,6 +24,7 @@ const FilterButton = ({
   isAccounts,
   id,
   title,
+  currentDeviceType,
 }) => {
   const [showFilterBlock, setShowFilterBlock] = React.useState(false);
 
@@ -52,6 +53,7 @@ const FilterButton = ({
           isPersonalRoom={isPersonalRoom}
           isRooms={isRooms}
           isAccounts={isAccounts}
+          currentDeviceType={currentDeviceType}
         />
       )}
     </>

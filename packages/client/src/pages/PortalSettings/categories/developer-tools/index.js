@@ -18,21 +18,16 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
+import { DeviceType } from "@docspace/common/constants";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
-    margin-top: ${() => (isMobile ? "0" : "4px")};
     z-index: 201;
-    ${() =>
-      isMobileOnly &&
-      css`
-        top: 58px;
-      `}
   }
 `;
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo, enablePlugins } = props;
+  const { loadBaseInfo, currentDeviceType, enablePlugins } = props;
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,16 +43,6 @@ const DeveloperToolsWrapper = (props) => {
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("JavascriptSdk")}
-      <Box>
-        <Badge
-          label={t("Settings:BetaLabel")}
-          backgroundColor="#7763F0"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
-      </Box>
     </Box>
   );
 
@@ -137,7 +122,18 @@ const DeveloperToolsWrapper = (props) => {
 
   return (
     <Suspense fallback={loaders[currentTab] || <AppLoader />}>
-      <StyledSubmenu data={data} startSelect={currentTab} onSelect={onSelect} />
+      <StyledSubmenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
+      />
     </Suspense>
   );
 };
@@ -149,6 +145,7 @@ export default inject(({ setup, auth }) => {
 
   return {
     enablePlugins: settingsStore.enablePlugins,
+    currentDeviceType: settingsStore.currentDeviceType,
     loadBaseInfo: async () => {
       await initSettings();
     },

@@ -23,7 +23,12 @@ import {
 } from "./components/Article";
 
 const ClientArticle = React.memo(
-  ({ withMainButton, setIsHeaderLoading, setIsFilterLoading }) => {
+  ({
+    withMainButton,
+    setIsHeaderLoading,
+    setIsFilterLoading,
+    showArticleLoader,
+  }) => {
     return (
       <Article
         withMainButton={withMainButton}
@@ -31,6 +36,7 @@ const ClientArticle = React.memo(
           setIsFilterLoading(true, false);
           setIsHeaderLoading(true, false);
         }}
+        showArticleLoader={showArticleLoader}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -69,6 +75,7 @@ const ClientContent = (props) => {
     setIsHeaderLoading,
     isDesktopClientInit,
     setIsDesktopClientInit,
+    showArticleLoader,
   } = props;
 
   const location = useLocation();
@@ -143,6 +150,7 @@ const ClientContent = (props) => {
             withMainButton={withMainButton}
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
+            showArticleLoader={showArticleLoader}
           />
         )
       ) : (
@@ -171,8 +179,12 @@ const Client = inject(
 
     const { isVisitor } = auth.userStore.user;
 
-    const { isLoading, setIsSectionFilterLoading, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      isLoading,
+      setIsSectionFilterLoading,
+      setIsSectionHeaderLoading,
+      showArticleLoader,
+    } = clientLoadingStore;
 
     const withMainButton = !isVisitor;
 
@@ -195,6 +207,7 @@ const Client = inject(
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
       setEncryptionKeys: setEncryptionKeys,
+      showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
         actions.push(filesStore.initFiles());

@@ -17,6 +17,7 @@ export const getHeaderLabel = (
   isCopy?: boolean,
   isRestoreAll?: boolean,
   isMove?: boolean,
+  isSelect?: boolean,
   filterParam?: string
 ) => {
   if (isMove) return t("Common:MoveTo");
@@ -25,6 +26,7 @@ export const getHeaderLabel = (
   if (filterParam === FilesSelectorFilterTypes.DOCX)
     return t("Translations:CreateMasterFormFromFile");
   if (!!filterParam) return t("Common:SelectFile");
+  if (isSelect) return t("Common:SelectFile");
 
   return t("Common:SaveButton");
 };
@@ -34,6 +36,7 @@ export const getAcceptButtonLabel = (
   isCopy?: boolean,
   isRestoreAll?: boolean,
   isMove?: boolean,
+  isSelect?: boolean,
   filterParam?: string
 ) => {
   if (isMove) return t("Translations:MoveHere");
@@ -42,6 +45,7 @@ export const getAcceptButtonLabel = (
   if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
   // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t("Common:SubmitToGallery");
   if (!!filterParam) return t("Common:SaveButton");
+  if (isSelect) return t("Common:SelectAction");
 
   return t("Common:SaveHereButton");
 };

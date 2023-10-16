@@ -60,6 +60,7 @@ export const convertRoomsToItems = (rooms: any) => {
       rootFolderType,
       isFolder: true,
       roomType,
+      color: logo.color,
     };
   });
 

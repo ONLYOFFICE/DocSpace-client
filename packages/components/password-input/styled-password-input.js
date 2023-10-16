@@ -124,7 +124,7 @@ PasswordProgress.defaultProps = { theme: Base };
 const TooltipStyle = styled.div`
   width: 294px;
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     width: 320px;
   }
 

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const StyledBreakpointWarning = styled.div`
   padding: ${({ theme }) =>
@@ -33,7 +34,7 @@ const StyledBreakpointWarning = styled.div`
     height: 72px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     flex-direction: row;
 
     padding: ${({ theme }) =>

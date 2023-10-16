@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 const StyledAccountsItemTitle = styled.div`
   min-height: 80px;
@@ -12,7 +12,7 @@ const StyledAccountsItemTitle = styled.div`
   gap: 16px;
   position: fixed;
   margin-top: -80px;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: -20px;
@@ -23,7 +23,7 @@ const StyledAccountsItemTitle = styled.div`
           padding: 24px 0 24px 20px;
         `}
   width: calc(100% - 40px);
-  background: ${props => props.theme.infoPanel.backgroundColor};
+  background: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 100;
 
   @media ${tablet} {
@@ -31,9 +31,9 @@ const StyledAccountsItemTitle = styled.div`
     padding: 24px 20px 24px 20px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: calc(100vw - 32px);
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 24px 16px 24px 0;
@@ -61,7 +61,7 @@ const StyledAccountsItemTitle = styled.div`
 
     .badges {
       height: 22px;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 8px;
@@ -81,7 +81,7 @@ const StyledAccountsItemTitle = styled.div`
       font-weight: 600;
       font-size: 13px;
       line-height: 20px;
-      color: ${props => props.theme.text.disableColor};
+      color: ${(props) => props.theme.text.disableColor};
       user-select: text;
     }
 
@@ -92,7 +92,7 @@ const StyledAccountsItemTitle = styled.div`
 
   .context-button {
     padding-top: 24px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: auto;
@@ -106,7 +106,7 @@ const StyledAccountsItemTitle = styled.div`
 StyledAccountsItemTitle.defaultProps = { theme: Base };
 
 const StyledAccountContent = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin: 80px 0 0 auto;
@@ -134,7 +134,7 @@ const StyledAccountContent = styled.div`
     align-items: center;
 
     .type-combobox {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: -8px;
@@ -144,7 +144,7 @@ const StyledAccountContent = styled.div`
             `}
 
       .combo-button {
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 padding-right: 8px;

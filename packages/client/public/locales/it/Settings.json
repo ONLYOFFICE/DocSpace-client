@@ -169,7 +169,6 @@
   "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato.",
   "RestoreBackup": "Ripristino dati",
   "RestoreBackupDescription": "Utilizza questa opzione per ripristinare il tuo spazio dal file di backup precedentemente salvato.",
-  "RestoreDefaultButton": "Ripristina le impostazioni predefinite",
   "RoomsModule": "Stanza di backup",
   "RoomsModuleDescription": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella loro stanza {{roomName}}.",
   "SelectFileInGZFormat": "Selezionare il file in formato .GZ",

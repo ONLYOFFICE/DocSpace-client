@@ -65,7 +65,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
       navigate("/portal-settings/customization/branding");
   };
@@ -488,8 +488,9 @@ const WhiteLabel = (props) => {
         onSaveClick={onSave}
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("RestoreDefaultButton")}
+        cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
+        hasScroll={true}
         showReminder={isSettingPaid}
         saveButtonDisabled={isEqualLogo && isEqualText}
         isSaving={isSaving}

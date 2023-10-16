@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import TileLoader from "../TileLoader";
 import RectangleLoader from "../RectangleLoader";
-import { smallTablet, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 const StyledTilesLoader = styled.div`
   display: grid;
@@ -16,7 +16,7 @@ const StyledTilesLoader = styled.div`
     grid-template-columns: repeat(auto-fill, 214px);
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
   }
 `;

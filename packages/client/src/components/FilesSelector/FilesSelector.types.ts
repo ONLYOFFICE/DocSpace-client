@@ -126,6 +126,7 @@ export type FilesSelectorProps = {
   isMove?: boolean;
   isCopy?: boolean;
   isRestoreAll?: boolean;
+  isSelect?: boolean;
 
   filterParam?: string;
 
@@ -160,7 +161,10 @@ export type FilesSelectorProps = {
 
   onSetBaseFolderPath?: (value: number | string | undefined) => void;
   onSetNewFolderPath?: (value: number | string | undefined) => void;
-  onSelectFolder?: (value: number | string | undefined) => void;
+  onSelectFolder?: (
+    value: number | string | undefined,
+    breadCrumbs: BreadCrumb[]
+  ) => void;
   onSelectTreeNode?: (treeNode: any) => void;
   onSave?: (
     e: any,
@@ -168,11 +172,16 @@ export type FilesSelectorProps = {
     fileTitle: string,
     openNewTab: boolean
   ) => void;
-  onSelectFile?: (fileInfo: {
-    id: string | number;
-    title: string;
-    path?: string[];
-  }) => void;
+  onSelectFile?: (
+    fileInfo: {
+      id: string | number;
+      title: string;
+      path?: string[];
+    },
+    breadCrumbs: BreadCrumb[]
+  ) => void;
+
+  setInfoPanelIsMobileHidden: (arg: boolean) => void;
 
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
@@ -187,4 +196,7 @@ export type FilesSelectorProps = {
 
   socketHelper: any;
   socketSubscribersId: Set<string>;
+  currentDeviceType: "mobile" | "tablet" | "desktop";
+
+  embedded: boolean;
 };

@@ -41,8 +41,9 @@ const convertToItems = (folders) => {
     const { id, title, roomType, logo } = folder;
 
     const icon = logo.medium ? logo.medium : getRoomLogo(roomType);
+    const color = logo.color;
 
-    return { id, label: title, icon };
+    return { id, label: title, icon, color };
   });
 
   return items;

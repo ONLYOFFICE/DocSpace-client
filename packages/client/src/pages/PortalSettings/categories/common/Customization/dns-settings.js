@@ -8,8 +8,7 @@ import Button from "@docspace/components/button";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -20,6 +19,7 @@ import toastr from "@docspace/components/toast/toastr";
 import ToggleButton from "@docspace/components/toggle-button";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const toggleStyle = {
   position: "static",
@@ -36,7 +36,6 @@ const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
   primary: true,
-  size: "small",
 };
 let timerId = null;
 const DNSSettings = (props) => {
@@ -60,6 +59,7 @@ const DNSSettings = (props) => {
     enable,
     isDefaultDNS,
     dnsSettingsUrl,
+    currentDeviceType,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -128,7 +128,7 @@ const DNSSettings = (props) => {
     setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -144,7 +144,7 @@ const DNSSettings = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isSmallTablet, setIsCustomizationView]);
+  }, [isMobile, setIsCustomizationView]);
 
   const settingsBlock = (
     <div className="settings-block">
@@ -191,6 +191,7 @@ const DNSSettings = (props) => {
   const buttonContainer = standalone ? (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SaveButton")}
       onClick={onSaveSettings}
       isDisabled={isLoading || isDefaultDNS}
@@ -199,6 +200,7 @@ const DNSSettings = (props) => {
   ) : (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SendRequest")}
       onClick={onSendRequest}
       isDisabled={!isSettingPaid}
@@ -248,8 +250,13 @@ const DNSSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { helpLink, currentColorScheme, standalone, dnsSettingsUrl } =
-    auth.settingsStore;
+  const {
+    helpLink,
+    currentColorScheme,
+    standalone,
+    dnsSettingsUrl,
+    currentDeviceType,
+  } = auth.settingsStore;
   const {
     isLoaded,
     setIsLoadedDNSSettings,
@@ -282,5 +289,6 @@ export default inject(({ auth, common }) => {
     setIsEnableDNS,
     saveDNSSettings,
     dnsSettingsUrl,
+    currentDeviceType,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

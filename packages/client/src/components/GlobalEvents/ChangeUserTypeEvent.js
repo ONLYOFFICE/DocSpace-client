@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { ChangeUserTypeDialog } from "../dialogs";
 import toastr from "@docspace/components/toast/toastr";
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import { combineUrl } from "@docspace/common/utils";
-import { useNavigate } from "react-router-dom";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -25,6 +25,8 @@ const ChangeUserTypeEvent = ({
   const { toType, fromType, userIDs, successCallback, abortCallback } =
     peopleDialogData;
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
+
+  const navigate = useNavigate();
 
   const onKeyUpHandler = (e) => {
     if (e.keyCode === 27) onCloseAction();

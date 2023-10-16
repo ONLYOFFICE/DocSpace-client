@@ -3,16 +3,19 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { mobile } from "../../utils/device";
 
+const backdropFilter = (props) =>
+  `${
+    props.modalSwipeOffset
+      ? `blur(${
+          props.modalSwipeOffset < 0 && 8 - props.modalSwipeOffset * -0.0667
+        }px)`
+      : "blur(8px)"
+  }`;
+
 const StyledModalBackdrop = styled.div.attrs((props) => ({
   style: {
-    backdropFilter: `${
-      props.modalSwipeOffset
-        ? `blur(${
-            props.modalSwipeOffset < 0 && 8 - props.modalSwipeOffset * -0.0667
-          }px)`
-        : "blur(8px)"
-    }`,
-
+    backdropFilter: backdropFilter(props),
+    WebkitBackdropFilter: backdropFilter(props),
     background: `${
       props.modalSwipeOffset
         ? `rgba(6, 22, 38, ${

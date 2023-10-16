@@ -14,6 +14,7 @@ import EmptyScreen from "../EmptyScreen";
 import StyledBody from "./StyledBody";
 import { BodyProps } from "./Body.types";
 import BreadCrumbs from "../BreadCrumbs";
+import Scrollbar from "../../../scrollbar";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -155,7 +156,7 @@ const Body = ({
       ) : null}
 
       {isLoading ? (
-        rowLoader
+        <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch && !!value}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
+import { mobile } from "../utils/device";
 
 const StyledPaging = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const StyledOnPage = styled.div`
     }
   }
 
-  @media (max-width: 450px) {
+  @media ${mobile} {
     display: none;
   }
 `;

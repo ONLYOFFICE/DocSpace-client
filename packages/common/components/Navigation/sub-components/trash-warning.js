@@ -20,13 +20,15 @@ const StyledTrashWarning = styled.div`
   color: ${({ theme }) => theme.section.header.trashErasureLabelText};
   background: ${({ theme }) =>
     theme.section.header.trashErasureLabelBackground};
+
+  @media ${tablet} {
+    margin-bottom: 16px;
+  }
 `;
 
-const TrashWarning = ({ title, isTabletView }) => {
+const TrashWarning = ({ title }) => {
   return (
-    <StyledTrashWarning className="trash-warning" isTabletView={isTabletView}>
-      {title}
-    </StyledTrashWarning>
+    <StyledTrashWarning className="trash-warning">{title}</StyledTrashWarning>
   );
 };
 

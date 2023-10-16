@@ -14,7 +14,8 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const SectionBodyContent = (props) => {
-  const { isProfileLoaded, profile, t } = props;
+  const { showProfileLoader, profile, currentDeviceType, t } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -71,22 +72,34 @@ const SectionBodyContent = (props) => {
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
   };
 
-  if (!isProfileLoaded) return <Loaders.ProfileView />;
+  if (showProfileLoader) return <Loaders.ProfileView />;
   return (
     <Wrapper>
       <MainProfile />
-      <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />
+      <Submenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
+      />
     </Wrapper>
   );
 };
 
-export default inject(({ peopleStore, clientLoadingStore }) => {
-  const { isProfileLoaded } = clientLoadingStore;
+export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+  const { showProfileLoader } = clientLoadingStore;
   const { targetUser: profile } = peopleStore.targetUserStore;
 
   return {
-    isProfileLoaded,
     profile,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
+    showProfileLoader,
   };
 })(
   observer(

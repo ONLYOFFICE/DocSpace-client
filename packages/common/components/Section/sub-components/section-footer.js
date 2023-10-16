@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { smallTablet } from "@docspace/components/utils/device";
-import { isMobileOnly } from "react-device-detect";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledSectionFooter = styled.div`
   margin-top: 40px;
 
-  @media ${smallTablet}, ${isMobileOnly} {
+  @media ${mobile} {
     margin-top: 32px;
   }
 `;

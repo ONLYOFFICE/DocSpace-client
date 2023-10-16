@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { isTouchDevice } from "@docspace/components/utils/device";
+import { isDesktop, isTouchDevice } from "@docspace/components/utils/device";
 import Scrollbar from "@docspace/components/scrollbar";
 import { LayoutContextProvider } from "./context";
 import { getBannerAttribute } from "@docspace/components/utils/banner";
@@ -53,7 +53,7 @@ class MobileLayout extends Component {
       this.customScrollElm.scrollTop > 0 ? this.customScrollElm.scrollTop : 0;
 
     if (
-      isTablet &&
+      !isDesktop() &&
       document.getElementsByClassName("backdrop-active").length > 0 &&
       !this.props.isArticleVisibleOnUnpin
     ) {

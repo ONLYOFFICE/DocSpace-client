@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import RowContainer from "@docspace/components/row-container";
-import { isMobile } from "react-device-detect";
+
 import { HistoryUserRow } from "./HistoryUserRow";
+import { DeviceType } from "@docspace/common/constants";
 
 const HistoryRowContainer = ({
   viewAs,
@@ -10,16 +11,17 @@ const HistoryRowContainer = ({
   historyUsers,
   theme,
   sectionWidth,
+  currentDeviceType,
 }) => {
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
 
-    if (sectionWidth < 1025 || isMobile) {
+    if (sectionWidth < 1025 || currentDeviceType !== DeviceType.desktop) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   return (
     <RowContainer className="history-row-container" useReactWindow={false}>
@@ -37,12 +39,13 @@ const HistoryRowContainer = ({
 
 export default inject(({ setup, auth }) => {
   const { viewAs, setViewAs, security } = setup;
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   return {
     viewAs,
     setViewAs,
     historyUsers: security.loginHistory.users,
     theme,
+    currentDeviceType,
   };
 })(observer(HistoryRowContainer));

@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
 
 import ModalDialog from "@docspace/components/modal-dialog";
 import Text from "@docspace/components/text";
@@ -19,6 +18,7 @@ import {
   downloadJson,
   getCurrentDate,
 } from "SRC_DIR/helpers/crashReport";
+import { DeviceType } from "@docspace/common/constants";
 
 const ModalDialogContainer = styled(ModalDialog)`
   #modal-dialog {
@@ -55,7 +55,15 @@ const ModalDialogContainer = styled(ModalDialog)`
 
 const ReportDialog = (props) => {
   const { t, ready } = useTranslation(["Common"]);
-  const { visible, onClose, error, user, version, FirebaseHelper } = props;
+  const {
+    visible,
+    onClose,
+    error,
+    user,
+    version,
+    FirebaseHelper,
+    currentDeviceType,
+  } = props;
   const [report, setReport] = useState({});
   const [description, setDescription] = useState("");
 
@@ -138,14 +146,14 @@ const ReportDialog = (props) => {
           label={t("SendButton")}
           size="normal"
           primary
-          scale={isMobileOnly}
+          scale={currentDeviceType === DeviceType.mobile}
           onClick={onClickSend}
         />
         <Button
           key="CancelButton"
           label={t("CancelButton")}
           size="normal"
-          scale={isMobileOnly}
+          scale={currentDeviceType === DeviceType.mobile}
           onClick={onCloseAction}
         />
       </ModalDialog.Footer>
@@ -154,7 +162,7 @@ const ReportDialog = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const { user } = auth.userStore;
+  const { user, currentDeviceType } = auth.userStore;
   const { firebaseHelper } = auth.settingsStore;
 
   return {

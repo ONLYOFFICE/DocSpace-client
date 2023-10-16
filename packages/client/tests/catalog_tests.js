@@ -170,7 +170,7 @@ Scenario("Catalog actions", ({ I }) => {
     }
   }
 
-  if (deviceType === "tablet" || deviceType === "smallTablet") {
+  if (deviceType === "tablet") {
     I.saveScreenshot(`catalog.close.png`);
     if (!isModel) {
       I.seeVisualDiff(`catalog.close.png`, {

@@ -1,5 +1,5 @@
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -7,36 +7,11 @@ const marginStyles = css`
   padding-left: 24px;
   padding-right: 24px;
 
-  ${isMobile &&
-  css`
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  `}
-
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
-  }
-
-  @media (max-width: 375px) {
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -16px;
-            margin-left: -8px;
-            padding-right: 16px;
-            padding-left: 8px;
-          `
-        : css`
-            margin-left: -16px;
-            margin-right: -8px;
-            padding-left: 16px;
-            padding-right: 8px;
-          `}
   }
 `;
 

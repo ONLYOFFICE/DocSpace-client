@@ -1,12 +1,5 @@
 import styled, { css } from "styled-components";
-import {
-  mobile,
-  tablet,
-  smallTablet,
-  desktop,
-  size,
-  hugeDesktop,
-} from "../utils/device";
+import { mobile, tablet, desktop, size, hugeDesktop } from "../utils/device";
 import NoUserSelect from "../utils/commonStyles";
 import { isMobileOnly } from "react-device-detect";
 
@@ -41,9 +34,9 @@ const EmptyPageStyles = css`
     margin: 0 auto;
   }
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     ${(props) =>
-      props.sectionWidth > size.smallTablet &&
+      props.sectionWidth > size.mobile &&
       css`
         margin: 0 13% !important;
         width: 74%;
@@ -51,7 +44,7 @@ const EmptyPageStyles = css`
       `}
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .ec-header {
       padding-top: 22px;
     }
@@ -134,7 +127,7 @@ const EmptyContentBody = styled.div`
 
     color: ${(props) => props.theme.emptyContent.header.color};
 
-    @media (max-width: 375px) {
+    @media ${mobile} {
       margin-top: 5px;
     }
   }
@@ -173,7 +166,7 @@ const EmptyContentBody = styled.div`
   }
 
   @media (orientation: portrait) {
-    @media (max-width: 768px) {
+    @media ${mobile} {
       padding-top: ${(props) => !props.isEmptyFolderContainer && "0px"};
 
       .ec-image {
@@ -181,7 +174,7 @@ const EmptyContentBody = styled.div`
       }
     }
 
-    @media (max-width: 428px) {
+    @media ${mobile} {
       ${MobileView}
     }
   }
@@ -191,7 +184,7 @@ const EmptyContentBody = styled.div`
 
   ${(props) =>
     (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.smallTablet &&
+    props.sectionWidth <= size.mobile &&
     !isMobileOnly &&
     css`
       ${MobileView}
@@ -222,7 +215,7 @@ const EmptyContentBody = styled.div`
 
     ${(props) =>
     (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.smallTablet &&
+    props.sectionWidth <= size.mobile &&
     css`
       max-width: none !important;
       width: auto !important;

@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isDesktop, isTablet, isMobileOnly } from "react-device-detect";
+
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
 import Items from "./Items";
-import { isMobile, tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
@@ -41,6 +41,7 @@ const ArticleBodyContent = (props) => {
     showArticleLoader,
     setIsBurgerLoading,
     setSelection,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const ArticleBodyContent = (props) => {
       const state = {
         title,
         isRoot: true,
+        isPublicRoomType: false,
         rootFolderType,
       };
 
@@ -105,6 +107,7 @@ const ArticleBodyContent = (props) => {
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
+          withTimer = false;
           if (activeItemId === "accounts" && isAccounts) return;
 
           break;
@@ -114,7 +117,7 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Settings);
           navigate(path);
 
-          if (isMobileOnly || isMobile()) {
+          if (currentDeviceType === DeviceType.mobile) {
             toggleArticleOpen();
           }
           return;
@@ -134,7 +137,7 @@ const ArticleBodyContent = (props) => {
 
       navigate(path, { state });
 
-      if (isMobileOnly || isMobile()) {
+      if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();
       }
     },
@@ -271,6 +274,7 @@ export default inject(
       isDesktopClient,
       theme,
       setIsBurgerLoading,
+      currentDeviceType,
     } = auth.settingsStore;
 
     return {
@@ -297,6 +301,7 @@ export default inject(
       selectedFolderId,
       setIsBurgerLoading,
       setSelection,
+      currentDeviceType,
     };
   }
 )(withTranslation([])(observer(ArticleBodyContent)));

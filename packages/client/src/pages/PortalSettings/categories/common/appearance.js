@@ -15,7 +15,6 @@ import DropDownItem from "@docspace/components/drop-down-item";
 import DropDownContainer from "@docspace/components/drop-down";
 
 import HexColorPickerComponent from "./sub-components/hexColorPicker";
-import { isMobileOnly, isDesktop } from "react-device-detect";
 
 import Loader from "./sub-components/loaderAppearance";
 
@@ -23,6 +22,8 @@ import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
+import { isMobile } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Appearance = (props) => {
   const {
@@ -34,6 +35,7 @@ const Appearance = (props) => {
     deleteAppearanceTheme,
     tReady,
     t,
+    currentDeviceType,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
@@ -287,7 +289,7 @@ const Appearance = (props) => {
   );
 
   const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 600) {
+    if (isMobile()) {
       setIsSmallWindow(true);
     } else {
       setIsSmallWindow(false);
@@ -458,36 +460,40 @@ const Appearance = (props) => {
     return textColor;
   };
 
-  const onAppliedColorAccent = useCallback(() => {
-    if (appliedColorAccent.toUpperCase() !== currentColorAccent) {
-      setChangeCurrentColorAccent(true);
-    }
+  const onAppliedColorAccent = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorAccent) {
+        setChangeCurrentColorAccent(true);
+      }
 
-    setCurrentColorAccent(appliedColorAccent);
-    saveToSessionStorage("selectColorAccent", appliedColorAccent);
+      setCurrentColorAccent(color);
+      saveToSessionStorage("selectColorAccent", color);
 
-    setOpenHexColorPickerAccent(false);
-  }, [
-    appliedColorAccent,
-    currentColorAccent,
-    setChangeCurrentColorAccent,
-    setOpenHexColorPickerAccent,
-  ]);
+      setOpenHexColorPickerAccent(false);
+    },
+    [
+      currentColorAccent,
+      setChangeCurrentColorAccent,
+      setOpenHexColorPickerAccent,
+    ]
+  );
 
-  const onAppliedColorButtons = useCallback(() => {
-    if (appliedColorButtons.toUpperCase() !== currentColorButtons) {
-      setChangeCurrentColorButtons(true);
-    }
+  const onAppliedColorButtons = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorButtons) {
+        setChangeCurrentColorButtons(true);
+      }
 
-    setCurrentColorButtons(appliedColorButtons);
+      setCurrentColorButtons(color);
 
-    setOpenHexColorPickerButtons(false);
-  }, [
-    appliedColorButtons,
-    currentColorButtons,
-    setChangeCurrentColorButtons,
-    setOpenHexColorPickerButtons,
-  ]);
+      setOpenHexColorPickerButtons(false);
+    },
+    [
+      currentColorButtons,
+      setChangeCurrentColorButtons,
+      setOpenHexColorPickerButtons,
+    ]
+  );
 
   const onSaveNewThemes = useCallback(
     async (theme) => {
@@ -588,8 +594,7 @@ const Appearance = (props) => {
           id="buttons-hex"
           onCloseHexColorPicker={onCloseHexColorPickerButtons}
           onAppliedColor={onAppliedColorButtons}
-          color={appliedColorButtons}
-          setColor={setAppliedColorButtons}
+          appliedColor={appliedColorButtons}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -609,8 +614,7 @@ const Appearance = (props) => {
           id="accent-hex"
           onCloseHexColorPicker={onCloseHexColorPickerAccent}
           onAppliedColor={onAppliedColorAccent}
-          color={appliedColorAccent}
-          setColor={setAppliedColorAccent}
+          appliedColor={appliedColorAccent}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -623,6 +627,9 @@ const Appearance = (props) => {
       </Text>
     );
   };
+
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
 
   return !tReady ? (
     <Loader />
@@ -734,7 +741,7 @@ const Appearance = (props) => {
             label={t("Common:SaveButton")}
             onClick={onSave}
             primary
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledSaveButton}
           />
 
@@ -742,7 +749,7 @@ const Appearance = (props) => {
             className="edit-current-theme button"
             label={t("Common:EditButton")}
             onClick={onClickEdit}
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledEditButton}
           />
           {isShowDeleteButton && (
@@ -750,7 +757,7 @@ const Appearance = (props) => {
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
               onClick={onOpenDialogDelete}
-              size="small"
+              size={buttonSize}
               isDisabled={isDisabledDeleteButton}
             />
           )}
@@ -770,6 +777,7 @@ export default inject(({ auth }) => {
     currentColorScheme,
     deleteAppearanceTheme,
     theme,
+    currentDeviceType,
   } = settingsStore;
 
   return {
@@ -779,6 +787,7 @@ export default inject(({ auth }) => {
     getAppearanceTheme,
     currentColorScheme,
     deleteAppearanceTheme,
+    currentDeviceType,
     theme,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

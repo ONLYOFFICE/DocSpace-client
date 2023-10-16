@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { smallTablet, tablet, size } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Base from "@docspace/components/themes/base";
 
 const StyledTile = styled.div`
@@ -7,13 +7,13 @@ const StyledTile = styled.div`
   display: grid;
   width: 100%;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     &:nth-of-type(n + 3) {
       display: none;
     }
   }
 
-  @media (min-width: ${size.smallTablet}px) and ${tablet} {
+  @media ${tablet} {
     &:nth-of-type(n + 8) {
       display: none;
     }

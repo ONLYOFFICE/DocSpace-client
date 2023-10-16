@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
 import Box from "../box";
-import { isMobile } from "react-device-detect";
+
+import { tablet } from "../utils/device";
 
 const StyledIframe = styled.iframe`
   border: none;
   height: 60px;
   width: 100%;
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     min-width: ${(props) => props.sectionWidth + 40 + "px"};
-  `};
+  }
 `;
 
 const StyledSnackBar = styled(Box)`
@@ -116,10 +116,9 @@ const StyledAction = styled.div`
   color: "#333";
   cursor: pointer;
   text-decoration: underline;
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     right: 14px;
-  `};
+  }
 `;
 
 export { StyledAction, StyledSnackBar, StyledIframe };

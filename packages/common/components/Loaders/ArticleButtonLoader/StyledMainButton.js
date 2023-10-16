@@ -1,5 +1,5 @@
 import { tablet } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -9,8 +9,6 @@ const StyledContainer = styled.div`
   @media ${tablet} {
     display: none;
   }
-
-  ${isTablet && "display: none"}
 `;
 
 export default StyledContainer;

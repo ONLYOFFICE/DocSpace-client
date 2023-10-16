@@ -5,8 +5,6 @@ import { useLocation } from "react-router-dom";
 import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyFolderContainer from "./EmptyFolderContainer";
-import { FileAction } from "@docspace/common/constants";
-import { isMobile } from "react-device-detect";
 import { Events } from "@docspace/common/constants";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
@@ -71,7 +69,7 @@ const EmptyContainer = ({
 
   return isFiltered ? (
     <EmptyFilterContainer linkStyles={linkStyles} />
-  ) : isRootEmptyPage ? (
+  ) : parentId === 0 ? (
     <RootFolderContainer
       onCreate={onCreate}
       linkStyles={linkStyles}

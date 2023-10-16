@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile, smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledGroup = styled.div`
   width: 400px;
@@ -8,7 +8,7 @@ const StyledGroup = styled.div`
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-row-gap: 14px;
 
-  @media ${mobile}, ${smallTablet} {
+  @media ${mobile} {
     width: 100%;
   }
 `;

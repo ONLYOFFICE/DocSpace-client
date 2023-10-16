@@ -9,7 +9,7 @@ import Button from "@docspace/components/button";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
-import { isMobileOnly } from "react-device-detect";
+
 import { ReactSVG } from "react-svg";
 import {
   StyledAsidePanel,
@@ -30,6 +30,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
+import { DeviceType } from "@docspace/common/constants";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -48,6 +49,7 @@ const NewFilesPanel = (props) => {
     t,
     visible,
     isLoading,
+    currentDeviceType,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -310,7 +312,11 @@ const NewFilesPanel = (props) => {
     </StyledAsidePanel>
   );
 
-  return isMobileOnly ? <Portal element={element} /> : element;
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal element={element} />
+  ) : (
+    element
+  );
 };
 
 export default inject(
@@ -364,6 +370,7 @@ export default inject(
       hasNew,
       refreshFiles,
       setIsLoading,
+      currentDeviceType: auth.settingsStore.currentDeviceType,
     };
   }
 )(

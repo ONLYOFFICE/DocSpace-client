@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const StyledWrapper = styled.div`
   max-width: 660px;
@@ -13,7 +13,7 @@ export const StyledWrapper = styled.div`
     grid-column-gap: 20px;
     grid-row-gap: 12px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       grid-template-columns: 1fr;
     }
   }

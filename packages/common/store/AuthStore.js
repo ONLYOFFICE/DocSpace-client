@@ -8,7 +8,8 @@ import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
 import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie, getCookie } from "../utils";
+import { isAdmin, setCookie } from "../utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
@@ -84,7 +85,7 @@ class AuthStore {
 
     this.setIsUpdatingTariff(false);
   };
-  init = async (skipRequest = false) => {
+  init = async (skipRequest = false, i18n) => {
     if (this.isInit) return;
     this.isInit = true;
 
@@ -106,7 +107,7 @@ class AuthStore {
     ) {
       !isPortalDeactivated &&
         requests.push(
-          this.userStore.init().then(() => {
+          this.userStore.init(i18n).then(() => {
             if (this.isQuotaAvailable && !isPortalRestore) {
               this.getTenantExtra();
             }

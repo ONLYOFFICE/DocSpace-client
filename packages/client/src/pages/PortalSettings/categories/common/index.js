@@ -11,6 +11,7 @@ import Appearance from "./appearance";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderSubmenu from "./sub-components/loaderSubmenu";
 import { resetSessionStorage } from "../../utils";
+import { DeviceType } from "@docspace/common/constants";
 
 const SubmenuCommon = (props) => {
   const {
@@ -21,6 +22,7 @@ const SubmenuCommon = (props) => {
     loadBaseInfo,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
+    currentDeviceType,
   } = props;
   const navigate = useNavigate();
 
@@ -85,11 +87,18 @@ const SubmenuCommon = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
     />
   );
 };
 
-export default inject(({ common }) => {
+export default inject(({ auth, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -105,5 +114,6 @@ export default inject(({ common }) => {
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

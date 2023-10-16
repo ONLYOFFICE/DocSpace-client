@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { isMobileOnly } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { isMobile, mobileMore } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   padding-top: 25px;
@@ -31,7 +32,7 @@ const StyledLoader = styled.div`
     display: block;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     flex-direction: row;
     padding: ${({ theme }) =>
       getCorrectFourValuesStyle("65px 0 0 104px", theme.interfaceDirection)};
@@ -54,7 +55,7 @@ const Loader = () => {
   }, []);
 
   const onCheckView = () => {
-    if (isMobileOnly || window.innerWidth < 600) {
+    if (isMobile()) {
       setViewMobile(true);
     } else {
       setViewMobile(false);

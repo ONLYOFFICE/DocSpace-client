@@ -11,10 +11,10 @@ import Checkbox from "@docspace/components/checkbox";
 import ComboBox from "@docspace/components/combobox";
 import TabContainer from "@docspace/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
+
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import Loaders from "@docspace/common/components/Loaders";
 import HelpButton from "@docspace/components/help-button";
@@ -77,7 +77,7 @@ const CategorySubHeader = styled.div`
     }
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     &:first-of-type {
       margin-top: 0;
     }
@@ -183,7 +183,7 @@ const GetCodeButtonWrapper = styled.div`
   margin-top: 32px;
   background-color: ${({ theme }) => theme.backgroundColor};
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     position: fixed;
     padding-inline: 16px;
     inset-inline: 0;

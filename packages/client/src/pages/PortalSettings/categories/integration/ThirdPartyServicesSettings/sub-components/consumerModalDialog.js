@@ -12,12 +12,12 @@ import Link from "@docspace/components/link";
 import toastr from "@docspace/components/toast/toastr";
 import ModalDialogContainer from "./modalDialogContainer";
 import { showLoader, hideLoader } from "@docspace/common/utils";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 const StyledBox = styled(Box)`
   padding: 20px 0 8px;
-  @media ${hugeMobile} {
+  @media ${mobile} {
     padding-top: 0;
   }
 `;
@@ -189,13 +189,8 @@ class ConsumerModalDialog extends React.Component {
   );
 
   render() {
-    const {
-      selectedConsumer,
-      onModalClose,
-      dialogVisible,
-      isLoading,
-      t,
-    } = this.props;
+    const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
+      this.props;
     const {
       state,
       onChangeHandler,
@@ -210,6 +205,7 @@ class ConsumerModalDialog extends React.Component {
         visible={dialogVisible}
         onClose={onModalClose}
         displayType="aside"
+        withBodyScroll
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>

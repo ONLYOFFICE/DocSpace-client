@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import TableBody from "@docspace/components/table-container/TableBody";
-import { isMobile } from "react-device-detect";
+import { DeviceType } from "@docspace/common/constants";
 
 const Table = ({
   auditTrailUsers,
@@ -13,11 +13,12 @@ const Table = ({
   setViewAs,
   theme,
   isSettingNotPaid,
+  currentDeviceType,
 }) => {
   const ref = useRef(null);
   useEffect(() => {
     if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
+    if (sectionWidth < 1025 || currentDeviceType !== DeviceType.desktop) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");
@@ -45,12 +46,13 @@ const Table = ({
 
 export default inject(({ auth, setup }) => {
   const { security, viewAs, setViewAs } = setup;
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   return {
     auditTrailUsers: security.auditTrail.users,
     theme,
     viewAs,
     setViewAs,
+    currentDeviceType,
   };
 })(observer(Table));

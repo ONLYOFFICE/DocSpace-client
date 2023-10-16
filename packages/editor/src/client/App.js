@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import Editor from "./components/Editor.js";
 import { useSSR } from "react-i18next";
 import useMfScripts from "./helpers/useMfScripts";
-import {
-  combineUrl,
-  isRetina,
-  getCookie,
-  setCookie,
-} from "@docspace/common/utils";
+import { combineUrl, isRetina, setCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
+
 import initDesktop from "./helpers/initDesktop";
 import ErrorBoundary from "./components/ErrorBoundary";
 import store from "client/store";

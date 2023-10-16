@@ -239,6 +239,8 @@ class SelectionArea extends React.Component {
   };
 
   redrawSelectionArea = () => {
+    if (!this.areaRect || !this.areaRef?.current) return;
+
     const { x, y, width, height } = this.areaRect;
     const { style } = this.areaRef.current;
 

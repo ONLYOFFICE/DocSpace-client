@@ -1,14 +1,11 @@
-import { size } from "../../utils/device";
+import { isMobile, isTablet } from "../../utils/device";
 
 const getCurrentSizeName = () => {
-  const innerWidth = window.innerWidth;
-  return innerWidth > size.tablet
-    ? "desktop"
-    : innerWidth <= size.tablet && innerWidth > size.smallTablet
-    ? "tablet"
-    : innerWidth <= size.smallTablet && innerWidth > size.mobile
-    ? "smallTablet"
-    : "mobile";
+  if (isMobile()) return "mobile";
+
+  if (isTablet()) return "tablet";
+
+  return "desktop";
 };
 
 export const getCurrentDisplayType = (

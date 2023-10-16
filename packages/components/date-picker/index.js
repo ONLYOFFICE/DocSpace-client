@@ -8,10 +8,9 @@ import SelectorAddButton from "@docspace/components/selector-add-button";
 import SelectedItem from "@docspace/components/selected-item";
 import Calendar from "@docspace/components/calendar";
 
-import { isMobileOnly } from "react-device-detect";
-
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
+import { tablet } from "../utils/device";
 
 const Wrapper = styled.div`
   .selectedItem {
@@ -52,13 +51,12 @@ const SelectedLabel = styled.span`
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  ${(props) =>
-    props.isMobile &&
-    css`
-      position: fixed;
-      bottom: 0;
-      left: 0;
-    `}
+
+  @media ${tablet} {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 `;
 
 const DatePicker = (props) => {
@@ -74,6 +72,7 @@ const DatePicker = (props) => {
     showCalendarIcon,
     outerDate,
     openDate,
+    isMobile,
   } = props;
 
   const calendarRef = useRef();
@@ -102,13 +101,12 @@ const DatePicker = (props) => {
     handleChange(null);
     setIsCalendarOpen(false);
   };
-
   const CalendarElement = () => (
     <StyledCalendar
+      isMobile={isMobile}
       selectedDate={date}
       setSelectedDate={handleChange}
       onChange={closeCalendar}
-      isMobile={isMobileOnly}
       forwardedRef={calendarRef}
       minDate={minDate}
       maxDate={maxDate}

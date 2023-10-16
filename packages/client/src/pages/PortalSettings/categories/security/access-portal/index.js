@@ -37,7 +37,7 @@ const AccessPortal = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth <= size.smallTablet
+    window.innerWidth <= size.mobile
       ? setIsMobileView(true)
       : setIsMobileView(false);
   };

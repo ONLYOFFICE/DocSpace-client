@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
@@ -28,6 +28,10 @@ const Item = memo(({ data, index, style }) => {
     setIsScrollLocked,
     canInviteUserInRoomAbility,
     onRepeatInvitation,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
+    hasNextPage,
   } = data;
 
   const user = members[index];
@@ -65,6 +69,10 @@ const Item = memo(({ data, index, style }) => {
         showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
         onRepeatInvitation={onRepeatInvitation}
         setMembers={setMembers}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
+        hasNextPage={hasNextPage}
       />
     </div>
   );
@@ -87,7 +95,12 @@ const MembersList = (props) => {
     itemCount,
     onRepeatInvitation,
     loadNextPage,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
   } = props;
+
+  const { interfaceDirection } = useTheme();
 
   const itemsCount = hasNextPage ? members.length + 1 : members.length;
 
@@ -147,7 +160,7 @@ const MembersList = (props) => {
         {({ height, width }) => (
           <InfiniteLoader
             isItemLoaded={isItemLoaded}
-            itemCount={itemCount}
+            itemCount={hasNextPage ? itemCount + 1 : itemCount}
             loadMoreItems={loadMoreItems}
           >
             {({ onItemsRendered, ref }) => {
@@ -155,6 +168,7 @@ const MembersList = (props) => {
 
               return (
                 <List
+                  direction={interfaceDirection}
                   ref={ref}
                   width={listWidth}
                   height={height}
@@ -174,6 +188,10 @@ const MembersList = (props) => {
                     setMembers,
                     canInviteUserInRoomAbility,
                     onRepeatInvitation,
+                    membersFilter,
+                    setMembersFilter,
+                    fetchMembers,
+                    hasNextPage,
                   }}
                   outerElementType={CustomScrollbarsVirtualList}
                   onItemsRendered={onItemsRendered}

@@ -1,10 +1,4 @@
 import React from "react";
-import { isMobile, isMobileOnly } from "react-device-detect";
-
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
 
 import ViewSelector from "@docspace/components/view-selector";
 import Link from "@docspace/components/link";
@@ -14,6 +8,7 @@ import SortButton from "./sub-components/SortButton";
 import SelectedItem from "@docspace/components/selected-item";
 import { useTheme } from "styled-components";
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
+import { DeviceType } from "../../constants";
 
 const FilterInput = React.memo(
   ({
@@ -51,6 +46,7 @@ const FilterInput = React.memo(
 
     onSortButtonClick,
     onClearFilter,
+    currentDeviceType,
   }) => {
     const [viewSettings, setViewSettings] = React.useState([]);
     const [inputValue, setInputValue] = React.useState("");
@@ -95,9 +91,9 @@ const FilterInput = React.memo(
 
       const newSelectedItems = [];
 
-      value.forEach(item => {
+      value.forEach((item) => {
         if (item.isMultiSelect) {
-          const newKeys = item.key.map(oldKey => ({
+          const newKeys = item.key.map((oldKey) => ({
             key: oldKey.key ? oldKey.key : oldKey,
             group: item.group,
             label: oldKey.label ? oldKey.label : oldKey,
@@ -119,8 +115,8 @@ const FilterInput = React.memo(
     const removeSelectedItemAction = React.useCallback(
       (key, label, group) => {
         const newItems = selectedItems
-          .map(item => ({ ...item }))
-          .filter(item => item.key != key);
+          .map((item) => ({ ...item }))
+          .filter((item) => item.key != key);
 
         setSelectedItems(newItems);
 
@@ -157,6 +153,7 @@ const FilterInput = React.memo(
             isRooms={isRooms}
             isAccounts={isAccounts}
             title={filterTitle}
+            currentDeviceType={currentDeviceType}
           />
           {!isRecentFolder && (
             <SortButton
@@ -173,17 +170,15 @@ const FilterInput = React.memo(
               viewSelectorVisible={
                 viewSettings &&
                 viewSelectorVisible &&
-                (isMobile || isMobileUtils() || isTabletUtils())
+                currentDeviceType !== DeviceType.desktop
               }
               title={sortByTitle}
             />
           )}
 
           {((viewSettings &&
-            !isMobile &&
-            viewSelectorVisible &&
-            !isMobileUtils() &&
-            !isTabletUtils()) ||
+            currentDeviceType === DeviceType.desktop &&
+            viewSelectorVisible) ||
             isRecentFolder) && (
             <ViewSelector
               id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
@@ -197,7 +192,7 @@ const FilterInput = React.memo(
         </div>
         {selectedItems && selectedItems.length > 0 && (
           <div className="filter-input_selected-row">
-            {selectedItems.map(item => (
+            {selectedItems.map((item) => (
               <SelectedItem
                 key={`${item.key}_${item.group}`}
                 propKey={item.key}
@@ -207,14 +202,15 @@ const FilterInput = React.memo(
                 onClick={removeSelectedItemAction}
               />
             ))}
-            {selectedItems.filter(item => item.label).length > 1 && (
+            {selectedItems.filter((item) => item.label).length > 1 && (
               <Link
                 className={"clear-all-link"}
                 isHovered
                 fontWeight={600}
                 isSemitransparent
                 type="action"
-                onClick={clearAll}>
+                onClick={clearAll}
+              >
                 {t("Common:ClearAll")}
               </Link>
             )}

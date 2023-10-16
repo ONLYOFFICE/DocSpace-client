@@ -8,11 +8,12 @@ import styled from "styled-components";
 import Badge from "@docspace/components/badge";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "react-device-detect";
+
 import { FileStatus } from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { isTablet } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -46,8 +47,7 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
     <StyledWrapper
       onClick={onClick}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+      onMouseLeave={onMouseLeave}>
       {newBadge}
     </StyledWrapper>
   );
@@ -94,14 +94,13 @@ const Badges = ({
 
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
-  const tabletViewBadge =
-    !isTile && ((sectionWidth > 500 && sectionWidth <= 1024) || isTablet);
+  const tabletViewBadge = !isTile && isTablet();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
 
   const lineHeightBadge = isTile || tabletViewBadge ? "1.46" : "1.34";
 
-  const paddingBadge = isTile || tabletViewBadge ? "0 3px" : "0 5px";
+  const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
 

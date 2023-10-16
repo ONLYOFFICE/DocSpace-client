@@ -216,6 +216,7 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
+    isCustomRoomType,
     primaryLink,
     moveToPublicRoom,
     currentDeviceType,
@@ -599,7 +600,7 @@ const SectionHeaderContent = (props) => {
       ? {
           id: "header_option_copy-external-link",
           key: "copy-external-link",
-          label: t("SharingPanel:CopyExternalLink"),
+          label: t("Files:CopyPrimaryLink"),
           icon: CopyToReactSvgUrl,
           onClick: () => {
             copy(primaryLink.sharedTo.shareLink);
@@ -652,7 +653,11 @@ const SectionHeaderContent = (props) => {
         key: "link-for-room-members",
         label: t("Files:CopySharedLink"),
         onClick: onCopyLinkAction,
-        disabled: isRecycleBinFolder || isPersonalRoom,
+        disabled:
+          isRecycleBinFolder ||
+          isPersonalRoom ||
+          isPublicRoomType ||
+          isCustomRoomType,
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -1138,6 +1143,7 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
+    const isCustomRoomType = roomType === RoomsType.CustomRoom;
 
     const {
       onClickEditRoom,
@@ -1268,6 +1274,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
+      isCustomRoomType,
       isPublicRoom: publicRoomStore.isPublicRoom,
 
       primaryLink: publicRoomStore.primaryLink,

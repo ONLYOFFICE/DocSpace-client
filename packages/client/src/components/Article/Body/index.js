@@ -77,6 +77,7 @@ const ArticleBodyContent = (props) => {
       const state = {
         title,
         isRoot: true,
+        isPublicRoomType: false,
         rootFolderType,
       };
 

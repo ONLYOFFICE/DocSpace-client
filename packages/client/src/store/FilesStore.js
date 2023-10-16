@@ -1492,6 +1492,7 @@ class FilesStore {
               id: folderId,
               title,
               isRoom: !!roomType,
+              roomType,
               isRootRoom,
             };
           })

@@ -53,6 +53,7 @@ const Navigation = ({
   isPublicRoom,
   titleIcon,
   currentDeviceType,
+  rootRoomTitle,
 
   ...rest
 }) => {
@@ -132,9 +133,9 @@ const Navigation = ({
   }, [onBackToParentFolder]);
 
   const showRootFolderNavigation =
+    !isRootFolder &&
     showRootFolderTitle &&
-    navigationItems &&
-    navigationItems.length > 1 &&
+    ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
     currentDeviceType !== DeviceType.mobile;
 
   const navigationTitleNode = (
@@ -152,7 +153,9 @@ const Navigation = ({
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
       <Text
-        title={navigationItems[navigationItems.length - 2].title}
+        title={
+          rootRoomTitle || navigationItems[navigationItems.length - 2].title
+        }
         isOpen={false}
         isRootFolder={isRootFolder}
         isRootFolderTitle

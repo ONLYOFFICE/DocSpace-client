@@ -31,10 +31,10 @@ const ImportProcessingStep = ({
   onNextStep,
   isFifthStep,
   setIsLoading,
-  migrationFile,
+  proceedFileMigration,
   cancelMigration,
   data,
-  toggles,
+  importOptions,
 }) => {
   const [isVisble, setIsVisble] = useState(false);
   const [percent, setPercent] = useState(0);
@@ -53,7 +53,7 @@ const ImportProcessingStep = ({
           onNextStep();
         }
       }, 1000);
-      migrationFile({ ...data, ...toggles });
+      proceedFileMigration({ ...data, ...importOptions });
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -93,14 +93,14 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsLoading, migrationFile, cancelMigration, toggles } =
+  const { data, setIsLoading, proceedFileMigration, cancelMigration, importOptions } =
     importAccountsStore;
 
   return {
     data,
-    toggles,
+    importOptions,
     setIsLoading,
-    migrationFile,
+    proceedFileMigration,
     cancelMigration,
   };
 })(observer(ImportProcessingStep));

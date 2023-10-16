@@ -36,7 +36,7 @@ const RowView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   } = props;
 
   const toggleAll = (e) =>
@@ -51,7 +51,7 @@ const RowView = (props) => {
       viewAs !== "table" && setViewAs("table");
     }
 
-    return cleanCheckedAccounts;
+    return clearCheckedAccounts;
   }, [sectionWidth]);
 
   return (
@@ -90,7 +90,7 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   } = importAccountsStore;
 
   return {
@@ -101,6 +101,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   };
 })(observer(RowView));

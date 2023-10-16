@@ -49,7 +49,7 @@ const ImportCompleteStep = ({
   selectedUsers,
   importedUsers,
   getMigrationLog,
-  cleanCheckedAccounts,
+  clearCheckedAccounts,
   sendWelcomeLetter,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -82,7 +82,7 @@ const ImportCompleteStep = ({
     }
     setTimeout(() => {
       navigate(-1);
-      cleanCheckedAccounts();
+      clearCheckedAccounts();
     }, 300);
   };
 
@@ -132,7 +132,7 @@ export default inject(({ importAccountsStore }) => {
     users,
     getMigrationLog,
     numberOfCheckedAccounts,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
     sendWelcomeLetter,
   } = importAccountsStore;
 
@@ -140,7 +140,7 @@ export default inject(({ importAccountsStore }) => {
     importedUsers: users.length,
     selectedUsers: numberOfCheckedAccounts,
     getMigrationLog,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
     sendWelcomeLetter,
   };
 })(observer(ImportCompleteStep));

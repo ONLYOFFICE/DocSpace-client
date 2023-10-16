@@ -21,14 +21,14 @@ const FifthStep = ({
   t,
   incrementStep,
   decrementStep,
-  toggles,
-  setToggles,
+  importOptions,
+  setImportOptions,
 }) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const onChange = (e, name) => {
     const checked = e.target.checked;
-    setToggles({ [name]: checked });
+    setImportOptions({ [name]: checked });
   };
 
   const users =
@@ -50,7 +50,7 @@ const FifthStep = ({
         isDisabled
       />
       <ImportSection
-        isChecked={toggles.importPersonalFiles}
+        isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:PersonalFilesDescription", {
@@ -67,7 +67,7 @@ const FifthStep = ({
         }}
       />
       <ImportSection
-        isChecked={toggles.importSharedFiles}
+        isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesDescription", {
@@ -98,10 +98,10 @@ const FifthStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { toggles, setToggles } = importAccountsStore;
+  const { importOptions, setImportOptions } = importAccountsStore;
 
   return {
-    toggles,
-    setToggles,
+    importOptions,
+    setImportOptions,
   };
 })(observer(FifthStep));

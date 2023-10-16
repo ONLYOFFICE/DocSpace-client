@@ -19,11 +19,14 @@ class ImportAccountsStore {
   users = [];
   existUsers = [];
   withoutEmailUsers = [];
+
   isFileLoading = false;
   isLoading = false;
+
   data = {};
   searchValue = "";
-  toggles = {
+
+  importOptions = {
     importPersonalFiles: true,
     importSharedFiles: true,
   };
@@ -44,8 +47,8 @@ class ImportAccountsStore {
     this.searchValue = value;
   };
 
-  setToggles = (value) => {
-    this.toggles = { ...this.toggles, ...value };
+  setImportOptions = (value) => {
+    this.importOptions = { ...this.importOptions, ...value };
   };
 
   toggleAccount = (id) => {
@@ -201,7 +204,7 @@ class ImportAccountsStore {
     return migrationName(name);
   };
 
-  migrationFile = (data) => {
+  proceedFileMigration = (data) => {
     return migrateFile(data);
   };
 

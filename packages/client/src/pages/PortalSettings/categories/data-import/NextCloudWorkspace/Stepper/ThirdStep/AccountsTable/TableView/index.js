@@ -39,7 +39,6 @@ const TableView = (props) => {
   const {
     t,
     userId,
-    withoutEmailUsers,
     viewAs,
     setViewAs,
     sectionWidth,
@@ -48,7 +47,7 @@ const TableView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
@@ -67,7 +66,7 @@ const TableView = (props) => {
       viewAs !== "table" && setViewAs("table");
     }
 
-    return cleanCheckedAccounts;
+    return clearCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -120,7 +119,7 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   } = importAccountsStore;
 
   return {
@@ -132,6 +131,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    cleanCheckedAccounts,
+    clearCheckedAccounts,
   };
 })(observer(TableView));

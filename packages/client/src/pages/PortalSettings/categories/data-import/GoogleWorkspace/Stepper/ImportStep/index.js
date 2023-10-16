@@ -22,19 +22,18 @@ const ImportStep = ({
   onNextStep,
   onPrevStep,
   showReminder,
-  toggles,
-  setToggles,
+  importOptions,
+  setImportOptions,
 }) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const onChange = (e, name) => {
     const checked = e.target.checked;
-    setToggles({ [name]: checked });
+    setImportOptions({ [name]: checked });
   };
 
   const serviceName = "Google Workspace";
-  const users =
-    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+  const users = t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   return (
     <Wrapper>
@@ -52,7 +51,7 @@ const ImportStep = ({
         isDisabled
       />
       <ImportSection
-        isChecked={toggles.importPersonalFiles}
+        isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:PersonalFilesDescription", { serviceName })}
@@ -67,7 +66,7 @@ const ImportStep = ({
         }}
       />
       <ImportSection
-        isChecked={toggles.importSharedFiles}
+        isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesDescription", { serviceName })}
@@ -96,10 +95,10 @@ const ImportStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { toggles, setToggles } = importAccountsStore;
+  const { importOptions, setImportOptions } = importAccountsStore;
 
   return {
-    toggles,
-    setToggles,
+    importOptions,
+    setImportOptions,
   };
 })(observer(ImportStep));

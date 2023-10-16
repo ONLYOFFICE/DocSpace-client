@@ -63,7 +63,10 @@ const QuickButtons = (props) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 
-  const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+  const showCopyLinkIcon =
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom) &&
+    item.security.CopySharedLink;
 
   return (
     <div className="badges additional-badges">
@@ -95,7 +98,7 @@ const QuickButtons = (props) => {
           title={t("Common:Download")}
         />
       )}
-      {isPublicRoomType && (
+      {showCopyLinkIcon && (
         <ColorTheme
           themeId={ThemeType.IconButton}
           iconName={LinkReactSvgUrl}
@@ -105,7 +108,7 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopySharedLink")}
+          title={t("Files:CopyPrimaryLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

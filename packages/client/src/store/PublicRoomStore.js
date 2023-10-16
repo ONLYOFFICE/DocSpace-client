@@ -46,10 +46,16 @@ class PublicRoomStore {
   };
 
   deleteExternalLink = (link, linkId) => {
-    const externalLinks = JSON.parse(JSON.stringify(this.externalLinks));
+    let externalLinks = JSON.parse(JSON.stringify(this.externalLinks));
 
-    const linkIndex = externalLinks.findIndex((l) => l.sharedTo.id === linkId);
-    externalLinks[linkIndex] = link;
+    if (link) {
+      const linkIndex = externalLinks.findIndex(
+        (l) => l.sharedTo.id === linkId
+      );
+      externalLinks[linkIndex] = link;
+    } else {
+      externalLinks = externalLinks.filter((l) => l.sharedTo.id !== linkId);
+    }
 
     this.externalLinks = externalLinks;
   };
@@ -125,12 +131,16 @@ class PublicRoomStore {
   }
 
   get roomLinks() {
-    return this.externalLinks.filter(
-      (l) =>
-        l.sharedTo.shareLink &&
-        !l.sharedTo.isTemplate &&
-        l.sharedTo.linkType === LinkType.External
-    );
+    if (this.externalLinks && this.externalLinks.length) {
+      return this.externalLinks.filter(
+        (l) =>
+          l.sharedTo.shareLink &&
+          !l.sharedTo.isTemplate &&
+          l.sharedTo.linkType === LinkType.External
+      );
+    } else {
+      return [];
+    }
   }
 
   get primaryLink() {

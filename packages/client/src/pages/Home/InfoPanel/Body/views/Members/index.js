@@ -220,7 +220,13 @@ const Members = ({
 
   return (
     <>
-      {isPublicRoomType && <PublicRoomBlock t={t} roomType={roomType} />}
+      {isPublicRoomType && (
+        <PublicRoomBlock
+          t={t}
+          roomType={roomType}
+          roomId={selectionParentRoom.id}
+        />
+      )}
       <MembersList
         loadNextPage={loadNextPage}
         t={t}

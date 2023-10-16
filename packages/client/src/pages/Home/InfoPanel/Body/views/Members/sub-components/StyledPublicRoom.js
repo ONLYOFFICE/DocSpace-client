@@ -3,7 +3,13 @@ import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 
 const StyledPublicRoomBlock = styled.div`
+  margin-bottom: -8px;
+
   .primary-link-block {
+    margin-bottom: 10px;
+  }
+
+  .additional-link {
     margin-bottom: 10px;
   }
 `;

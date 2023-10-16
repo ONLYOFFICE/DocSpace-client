@@ -49,7 +49,9 @@ const EditLinkPanel = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [linkNameValue, setLinkNameValue] = useState("");
+  const [linkNameValue, setLinkNameValue] = useState(
+    link?.sharedTo?.title || ""
+  );
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
   const isExpiredDate = expirationDate

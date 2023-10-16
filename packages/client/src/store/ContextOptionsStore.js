@@ -1146,11 +1146,9 @@ class ContextOptionsStore {
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("Files:CopySharedLink"),
+        label: t("Files:CopyPrimaryLink"),
         icon: CopyToReactSvgUrl,
-        disabled:
-          this.treeFoldersStore.isArchiveFolder ||
-          !item.security.CopySharedLink,
+        disabled: this.treeFoldersStore.isArchiveFolder,
         onClick: async () => {
           const primaryLink = await this.publicRoomStore.getPrimaryLink(
             item.id

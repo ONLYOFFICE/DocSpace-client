@@ -188,7 +188,7 @@ const Section = (props) => {
               )}
 
             {isSectionSubmenuAvailable &&
-              currentDeviceType !== DeviceType.mobile && (
+              currentDeviceType === DeviceType.desktop && (
                 <SubSectionSubmenu>
                   {sectionSubmenuContent
                     ? sectionSubmenuContent.props.children

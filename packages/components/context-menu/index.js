@@ -33,6 +33,7 @@ class ContextMenu extends Component {
       changeView: false,
       showMobileMenu: false,
       onLoad: null,
+      articleWidth: 0,
     };
 
     this.menuRef = React.createRef();
@@ -81,6 +82,7 @@ class ContextMenu extends Component {
           reshow: false,
           resetMenu: true,
           changeView: false,
+          articleWidth: 0,
         },
         () => this.show(event)
       );
@@ -96,6 +98,7 @@ class ContextMenu extends Component {
       reshow: false,
       changeView: false,
       showMobileMenu: false,
+      articleWidth: 0,
     });
   };
 
@@ -144,12 +147,19 @@ class ContextMenu extends Component {
         left = event.pageX - width + 1;
       }
       if (isTabletUtils() && height > 483) {
-        this.setState({ changeView: true });
+        const article = document.getElementById("article-container");
+
+        let articleWidth = 0;
+        if (article) {
+          articleWidth = article.offsetWidth;
+        }
+
+        this.setState({ changeView: true, articleWidth });
         return;
       }
 
       if (isMobileUtils() && height > 210) {
-        this.setState({ changeView: true });
+        this.setState({ changeView: true, articleWidth: 0 });
         return;
       }
 
@@ -320,6 +330,7 @@ class ContextMenu extends Component {
     );
 
     const changeView = this.state.changeView;
+    const articleWidth = this.state.articleWidth;
     const isIconExist = this.props.header?.icon;
     const isAvatarExist = this.props.header?.avatar;
 
@@ -330,6 +341,7 @@ class ContextMenu extends Component {
       <>
         <StyledContextMenu
           changeView={changeView}
+          articleWidth={articleWidth}
           isRoom={this.props.isRoom}
           fillIcon={this.props.fillIcon}
           isIconExist={isIconExist}

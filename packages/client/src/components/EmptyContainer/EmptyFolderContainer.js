@@ -43,6 +43,7 @@ const EmptyFolderContainer = ({
 
   roomType,
   isLoading,
+  isArchiveFolderRoot,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,6 +51,7 @@ const EmptyFolderContainer = ({
   // const isRoom =
   //   isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
   const isRoom = !!roomType;
+  const displayRoomCondition = isRoom && !isArchiveFolderRoot;
 
   const canInviteUsers = isRoom && editAccess;
 
@@ -148,7 +150,7 @@ const EmptyFolderContainer = ({
         </Link>
       </div>
 
-      {isRoom ? (
+      {displayRoomCondition ? (
         canInviteUsers ? (
           <>
             <div className="second-description">
@@ -201,13 +203,17 @@ const EmptyFolderContainer = ({
 
   return (
     <EmptyContainer
-      headerText={isRoom ? t("RoomCreated") : t("EmptyScreenFolder")}
+      headerText={
+        displayRoomCondition ? t("RoomCreated") : t("EmptyScreenFolder")
+      }
       descriptionText={
         canCreateFiles
           ? t("EmptyFolderDecription")
           : t("EmptyFolderDescriptionUser")
       }
-      imageSrc={isRoom ? emptyScreenCorporateSvg : emptyScreenAltSvg}
+      imageSrc={
+        displayRoomCondition ? emptyScreenCorporateSvg : emptyScreenAltSvg
+      }
       buttons={buttons}
       sectionWidth={sectionWidth}
     />
@@ -218,7 +224,7 @@ export default inject(
   ({
     auth,
     accessRightsStore,
-
+    treeFoldersStore,
     selectedFolderStore,
     contextOptionsStore,
     clientLoadingStore,
@@ -233,7 +239,7 @@ export default inject(
       rootFolderType,
       roomType,
     } = selectedFolderStore;
-
+    const { isArchiveFolderRoot } = treeFoldersStore;
     let id;
     if (navigationPath?.length) {
       const elem = navigationPath[0];
@@ -265,6 +271,7 @@ export default inject(
       folderId,
 
       theme: auth.settingsStore.theme,
+      isArchiveFolderRoot,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(EmptyFolderContainer)));

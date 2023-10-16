@@ -1,65 +1,6 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet, desktop, size, hugeDesktop } from "../utils/device";
+import { mobile, tablet } from "../utils/device";
 import NoUserSelect from "../utils/commonStyles";
-import { isMobileOnly } from "react-device-detect";
-
-const EmptyPageStyles = css`
-  grid-row-gap: 9px;
-
-  .ec-image {
-    height: 100px;
-  }
-
-  .ec-desc {
-    max-width: 348px;
-    line-height: 16px;
-    margin-top: 0;
-  }
-
-  .empty-folder_container-links {
-    align-items: start;
-    margin: 16px 0 !important;
-  }
-
-  max-width: 800px;
-
-  @media ${hugeDesktop} {
-    margin: 0 13%;
-    width: 74%;
-    min-width: 480px;
-  }
-
-  @media ${tablet} {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  @media ${mobile} {
-    ${(props) =>
-      props.sectionWidth > size.mobile &&
-      css`
-        margin: 0 13% !important;
-        width: 74%;
-        min-width: auto;
-      `}
-  }
-
-  @media ${mobile} {
-    .ec-header {
-      padding-top: 22px;
-    }
-  }
-
-  @media ${desktop} {
-    .ec-desc {
-      max-width: 618px;
-    }
-
-    .ec-buttons {
-      max-width: none;
-    }
-  }
-`;
 
 const MobileView = css`
   grid-template-areas:
@@ -72,35 +13,36 @@ const MobileView = css`
       `"descriptionText descriptionText descriptionText"`}
     "button button button";
 
+  padding-left: 28px;
+  padding-right: 28px;
+  max-width: 100%;
+  margin: 0;
+
   .ec-header {
-    padding-top: 0px;
-  }
-  .ec-header,
-  .ec-subheading,
-  .ec-desc,
-  .ec-image,
-  .ec-buttons {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? "padding-right: 16px;"
-        : "padding-left: 16px;"}
+    padding-top: 24px;
   }
 
   .ec-image {
     height: 75px;
+    width: 75px;
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? "margin-right: 0;"
         : "margin-left: 0;"}
   }
+
+  .ec-buttons {
+    max-width: 274px;
+  }
 `;
 
 const EmptyContentBody = styled.div`
   margin: 0 auto;
 
-  padding: ${(props) => (props.isEmptyFolderContainer ? "37px 0" : "64px 0")};
-  grid-template-columns: 150px 1fr;
+  padding-top: 80px;
+
+  grid-template-columns: 100px 1fr;
 
   display: grid;
   grid-template-areas:
@@ -109,14 +51,17 @@ const EmptyContentBody = styled.div`
     ${(props) => props.descriptionText && `"img descriptionText"`}
     "img button";
 
-  grid-column-gap: 16px;
+  grid-column-gap: 40px;
   grid-row-gap: 10px;
   max-width: 800px;
 
   grid-template-rows: max-content;
+
   .ec-image {
     grid-area: img;
     margin: 16px 0 0 auto;
+    height: 100px;
+    width: 100px;
     ${NoUserSelect}
   }
 
@@ -126,10 +71,6 @@ const EmptyContentBody = styled.div`
     padding-top: 16px;
 
     color: ${(props) => props.theme.emptyContent.header.color};
-
-    @media ${mobile} {
-      margin-top: 5px;
-    }
   }
 
   .ec-subheading {
@@ -161,67 +102,15 @@ const EmptyContentBody = styled.div`
   }
 
   @media ${tablet} {
-    grid-template-columns: none;
+    grid-column-gap: 32px;
     max-width: 480px;
   }
 
-  @media (orientation: portrait) {
-    @media ${mobile} {
-      padding-top: ${(props) => !props.isEmptyFolderContainer && "0px"};
+  @media ${mobile} {
+    padding-top: 40px;
 
-      .ec-image {
-        max-height: 100px;
-      }
-    }
-
-    @media ${mobile} {
-      ${MobileView}
-    }
+    ${MobileView}
   }
-
-  ${(props) =>
-    (props.isEmptyPage || props.isEmptyFolderContainer) && `${EmptyPageStyles}`}
-
-  ${(props) =>
-    (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.mobile &&
-    !isMobileOnly &&
-    css`
-      ${MobileView}
-
-      .ec-desc {
-        max-width: none;
-      }
-
-      .ec-header {
-        padding-top: 22px;
-      }
-
-      .ec-image {
-        height: 100px !important;
-      }
-    `}
-
-    ${(props) =>
-    (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    isMobileOnly &&
-    css`
-      .ec-image {
-        margin-top: ${(props) => props.isEmptyFolderContainer && "0px"};
-        height: ${(props) => props.isEmptyPage && "72px !important"};
-      }
-    `}
-
-
-    ${(props) =>
-    (props.isEmptyPage || props.isEmptyFolderContainer) &&
-    props.sectionWidth <= size.mobile &&
-    css`
-      max-width: none !important;
-      width: auto !important;
-      min-width: auto !important;
-      margin: 0 !important;
-    `}
 `;
 
 const EmptyContentImage = styled.img.attrs((props) => ({

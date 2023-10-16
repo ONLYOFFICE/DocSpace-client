@@ -326,7 +326,7 @@ const InviteInput = ({
           : t("AddManuallyDescriptionRoom")}
       </StyledDescription>
       <StyledInviteLanguage>
-        Invitation language:
+        {t("InvitationLanguage")}:
         <div className="language-combo-box-wrapper">
           <ComboBox
             className="language-combo-box"
@@ -352,7 +352,7 @@ const InviteInput = ({
             type="action"
             isHovered
             onClick={onResetLangMail}>
-            Reset change
+            {t("ResetChange")}
           </StyledLink>
         )}
       </StyledInviteLanguage>

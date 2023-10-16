@@ -52,6 +52,7 @@ const InviteInput = ({
   culture,
   cultureNames,
   i18n,
+  setCultureKey,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
@@ -63,6 +64,20 @@ const InviteInput = ({
 
   const searchRef = useRef();
 
+  const language = i18n.language;
+  const selectedLanguage = cultureNames.find((item) => item.key === language) ||
+    cultureNames.find((item) => item.key === culture) || {
+      key: language,
+      label: "",
+    };
+
+  const [selectedLanguageNew, setSelectLang] = useState({
+    key: selectedLanguage.key,
+    label: selectedLanguage.label,
+  });
+  useEffect(() => {
+    setCultureKey(selectedLanguageNew.key);
+  }, [selectedLanguageNew.key]);
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
     const uid = () => Math.random().toString(36).slice(-6);
@@ -274,7 +289,6 @@ const InviteInput = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
   const onLanguageSelect = (language) => {
-    console.log(language, "===================================");
     setSelectLang(language);
     if (language.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
@@ -286,16 +300,7 @@ const InviteInput = ({
     });
     setIsChangeLangMail(false);
   };
-  const language = i18n.language;
-  const selectedLanguage = cultureNames.find((item) => item.key === language) ||
-    cultureNames.find((item) => item.key === culture) || {
-      key: language,
-      label: "",
-    };
-  const [selectedLanguageNew, setSelectLang] = useState({
-    key: selectedLanguage.key,
-    label: selectedLanguage.label,
-  });
+
   const cultureNamesNew = cultureNames.map((item) => ({
     label: item.label,
     key: item.key,

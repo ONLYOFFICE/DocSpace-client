@@ -22,7 +22,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
-import { LinkType } from "../../../helpers/constants";
 
 import InfoBar from "./sub-components/InfoBar";
 import { DeviceType } from "@docspace/common/constants";
@@ -63,6 +62,8 @@ const InvitePanel = ({
   const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
+
+  const [cultureKey, setCultureKey] = useState("en-US");
 
   const onCloseBar = () => setInfoBarIsVisible(false);
 
@@ -207,8 +208,8 @@ const InvitePanel = ({
 
     const data = {
       invitations,
+      culture: cultureKey,
     };
-
     if (roomId !== -1) {
       data.notify = true;
       data.message = "Invitation message";
@@ -262,6 +263,7 @@ const InvitePanel = ({
         <InviteInput
           t={t}
           onClose={onClose}
+          setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
           addUsersPanelVisible={addUsersPanelVisible}

@@ -69,7 +69,7 @@ const EmptyContainer = ({
 
   return isFiltered ? (
     <EmptyFilterContainer linkStyles={linkStyles} />
-  ) : isRootEmptyPage ? (
+  ) : parentId === 0 ? (
     <RootFolderContainer
       onCreate={onCreate}
       linkStyles={linkStyles}

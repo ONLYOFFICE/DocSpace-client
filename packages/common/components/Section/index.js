@@ -187,13 +187,14 @@ const Section = (props) => {
                 </SubSectionHeader>
               )}
 
-            {isSectionSubmenuAvailable && !isMobile && (
-              <SubSectionSubmenu>
-                {sectionSubmenuContent
-                  ? sectionSubmenuContent.props.children
-                  : null}
-              </SubSectionSubmenu>
-            )}
+            {isSectionSubmenuAvailable &&
+              currentDeviceType !== DeviceType.mobile && (
+                <SubSectionSubmenu>
+                  {sectionSubmenuContent
+                    ? sectionSubmenuContent.props.children
+                    : null}
+                </SubSectionSubmenu>
+              )}
 
             {isSectionFilterAvailable &&
               currentDeviceType === DeviceType.desktop && (
@@ -244,13 +245,14 @@ const Section = (props) => {
                         : null}
                     </SectionWarning>
                   )}
-                  {isSectionSubmenuAvailable && isMobile && (
-                    <SubSectionSubmenu>
-                      {sectionSubmenuContent
-                        ? sectionSubmenuContent.props.children
-                        : null}
-                    </SubSectionSubmenu>
-                  )}
+                  {isSectionSubmenuAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionSubmenu>
+                        {sectionSubmenuContent
+                          ? sectionSubmenuContent.props.children
+                          : null}
+                      </SubSectionSubmenu>
+                    )}
                   {isSectionFilterAvailable &&
                     currentDeviceType !== DeviceType.desktop && (
                       <SubSectionFilter className="section-body_filter">

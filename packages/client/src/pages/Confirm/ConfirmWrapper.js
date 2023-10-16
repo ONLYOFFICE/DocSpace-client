@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/common/utils";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
+import Scrollbar from "@docspace/components/scrollbar";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>
@@ -18,12 +19,12 @@ const StyledWrapper = styled.div`
   flex-direction: row;
   box-sizing: border-box;
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     height: auto;
     min-height: 100%;
     width: 100%;
-  `}
+    min-width: 100%;
+  }
 `;
 
 const BgBlock = styled.div`
@@ -38,7 +39,7 @@ const BgBlock = styled.div`
   bottom: 0;
   z-index: -1;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     background-image: none;
   }
 `;
@@ -46,11 +47,16 @@ const BgBlock = styled.div`
 const ConfirmWrapper = (props) => {
   const { children, currentColorScheme, height } = props;
   const bgPattern = getBgPattern(currentColorScheme?.id);
+  const content = (
+    <>
+      <BgBlock bgPattern={bgPattern} />
+      {children}
+    </>
+  );
 
   return (
     <StyledWrapper height={height}>
-      <BgBlock bgPattern={bgPattern} />
-      {children}
+      {!!height ? content : <Scrollbar>{content}</Scrollbar>}
     </StyledWrapper>
   );
 };

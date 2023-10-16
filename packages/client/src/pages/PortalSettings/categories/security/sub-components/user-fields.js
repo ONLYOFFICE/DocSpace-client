@@ -6,6 +6,7 @@ import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import Link from "@docspace/components/link";
 import TextInput from "@docspace/components/text-input";
 import { Base } from "@docspace/components/themes";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledPlusIcon = styled(PlusIcon)`
   ${commonIconsStyles}
@@ -33,7 +34,7 @@ const StyledInputWrapper = styled.div`
   margin-bottom: 8px;
   width: 350px;
 
-  @media (max-width: 375px) {
+  @media ${mobile} {
     width: 100%;
   }
 `;

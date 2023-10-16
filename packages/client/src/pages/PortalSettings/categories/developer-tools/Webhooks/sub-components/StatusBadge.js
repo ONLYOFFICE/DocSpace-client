@@ -41,6 +41,7 @@ const StatusBadge = (props) => {
       color={badgeColorScheme.color}
       label={status === 0 ? t("NotSent") : status.toString()}
       fontSize="9px"
+      maxWidth="80px"
       fontWeight={700}
       noHover
     />

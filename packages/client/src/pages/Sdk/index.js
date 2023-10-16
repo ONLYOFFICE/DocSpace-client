@@ -25,7 +25,15 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
+  setBodyRendered,
 }) => {
+  useEffect(() => {
+    setBodyRendered(true);
+    return () => {
+      setBodyRendered(false);
+    };
+  }, []);
+
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
     return () => {
@@ -161,15 +169,10 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          isPanelOpen={true}
+          embedded
+          isSelect={true}
           onSelectFile={onSelectFile}
-          filteredType={selectorType}
-          withSubfolders={false}
-          displayType="aside"
-          embedded={true}
-          searchParam={frameConfig?.filter.search}
-          ByExtension
-          {...onCloseCallback}
+          onClose={onClose}
         />
       );
       break;
@@ -182,8 +185,14 @@ const Sdk = ({
 
 export default inject(({ auth, settingsStore, peopleStore }) => {
   const { login, logout, userStore } = auth;
-  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-    auth.settingsStore;
+  const {
+    theme,
+    setFrameConfig,
+    frameConfig,
+    getSettings,
+    isLoaded,
+    setBodyRendered,
+  } = auth.settingsStore;
   const { loadCurrentUser, user } = userStore;
   const { updateProfileCulture } = peopleStore.targetUserStore;
   const { getIcon } = settingsStore;
@@ -200,5 +209,6 @@ export default inject(({ auth, settingsStore, peopleStore }) => {
     isLoaded,
     updateProfileCulture,
     user,
+    setBodyRendered,
   };
 })(observer(Sdk));

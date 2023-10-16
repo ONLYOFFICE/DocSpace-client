@@ -10,7 +10,7 @@ import TimePicker from "@docspace/components/time-picker";
 import SelectorAddButton from "@docspace/components/selector-add-button";
 import SelectedItem from "@docspace/components/selected-item";
 
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Selectors = styled.div`
   position: relative;
@@ -112,7 +112,7 @@ const DeliveryDatePicker = ({
       selectedDate={filters.deliveryDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
-      isMobile={isMobileOnly}
+      isMobile={isMobile()}
       forwardedRef={calendarRef}
       locale={i18n.language}
     />
@@ -176,6 +176,7 @@ const DeliveryDatePicker = ({
         ) : (
           <DatePicker
             outerDate={filters.deliveryDate}
+            isMobile={isMobile()}
             onChange={onDateSet}
             selectedDateText={t("SelectDate")}
             showCalendarIcon={false}
@@ -191,8 +192,7 @@ const DeliveryDatePicker = ({
                   isInline
                   fontWeight={600}
                   color="#A3A9AE"
-                  className="mr-8"
-                >
+                  className="mr-8">
                   {t("From")}
                 </Text>
                 <TimePicker

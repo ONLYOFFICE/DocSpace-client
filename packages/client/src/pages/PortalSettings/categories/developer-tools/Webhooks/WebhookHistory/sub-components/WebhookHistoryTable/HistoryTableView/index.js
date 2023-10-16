@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import styled from "styled-components";
 
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -34,14 +34,12 @@ const TableWrapper = styled(TableContainer)`
   .table-list-item {
     cursor: pointer;
     &:hover {
-      background-color: ${(props) =>
-        props.theme.isBase ? "#f3f4f4" : "#282828"};
+      background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#282828")};
     }
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+    background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#282828")};
   }
 `;
 
@@ -72,7 +70,7 @@ const HistoryTableView = (props) => {
 
   useEffect(() => {
     if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
+    if (sectionWidth < 1025 || isMobile()) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");
@@ -93,8 +91,7 @@ const HistoryTableView = (props) => {
       style={{
         gridTemplateColumns: "300px 100px 400px 24px",
       }}
-      useReactWindow
-    >
+      useReactWindow>
       <HistoryTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
@@ -111,8 +108,7 @@ const HistoryTableView = (props) => {
         filesLength={historyItems.length}
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasMoreItems}
-        itemCount={totalItems}
-      >
+        itemCount={totalItems}>
         {historyItems.map((item) => (
           <HistoryTableRow
             key={item.id}
@@ -127,14 +123,8 @@ const HistoryTableView = (props) => {
 
 export default inject(({ setup, webhooksStore, auth }) => {
   const { viewAs, setViewAs } = setup;
-  const {
-    historyItems,
-    fetchMoreItems,
-    hasMoreItems,
-    totalItems,
-    formatFilters,
-    historyFilters,
-  } = webhooksStore;
+  const { historyItems, fetchMoreItems, hasMoreItems, totalItems, formatFilters, historyFilters } =
+    webhooksStore;
   const { id: userId } = auth.userStore.user;
 
   return {

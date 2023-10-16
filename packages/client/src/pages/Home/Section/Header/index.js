@@ -31,7 +31,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -46,7 +46,12 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import toastr from "@docspace/components/toast/toastr";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import { Events, EmployeeType, RoomsType } from "@docspace/common/constants";
+import {
+  Events,
+  EmployeeType,
+  RoomsType,
+  DeviceType,
+} from "@docspace/common/constants";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
@@ -74,7 +79,7 @@ const StyledContainer = styled.div`
     height: 68px;
 
     @media ${tablet} {
-      height: 60px;
+      height: 61px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
@@ -85,23 +90,9 @@ const StyledContainer = styled.div`
             `}
       width: calc(100% + 32px);
     }
-
-    ${isMobile &&
-    css`
-      height: 60px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-      width: calc(100% + 32px);
-    `}
 
     @media ${mobile} {
-      height: 52px;
+      height: 52px !important;
 
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -113,20 +104,6 @@ const StyledContainer = styled.div`
             `}
       width: calc(100% + 32px);
     }
-
-    ${isMobileOnly &&
-    css`
-      height: 52px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-      width: calc(100% + 32px);
-    `}
   }
 
   .header-container {
@@ -138,7 +115,11 @@ const StyledContainer = styled.div`
       display: none;}`}
 
     @media ${tablet} {
-      height: 60px;
+      height: 61px;
+    }
+
+    @media ${mobile} {
+      height: 53px;
     }
   }
 `;
@@ -237,6 +218,8 @@ const SectionHeaderContent = (props) => {
     isPublicRoomType,
     externalLinks,
     moveToPublicRoom,
+    currentDeviceType,
+    isFrame,
   } = props;
 
   const navigate = useNavigate();
@@ -947,7 +930,7 @@ const SectionHeaderContent = (props) => {
     headerMenu,
     isInfoPanelVisible,
     toggleInfoPanel: onToggleInfoPanel,
-    isMobileView: isMobileOnly,
+    isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
   if (isAccountsPage) {
@@ -1030,7 +1013,6 @@ const SectionHeaderContent = (props) => {
                 onClose={onClose}
                 onClickFolder={onClickFolder}
                 isTrashFolder={isRecycleBinFolder}
-                isRecycleBinFolder={isRecycleBinFolder || isArchiveFolder}
                 isEmptyFilesList={
                   isArchiveFolder ? isEmptyArchive : isEmptyFilesList
                 }
@@ -1059,6 +1041,8 @@ const SectionHeaderContent = (props) => {
                   isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
+                currentDeviceType={currentDeviceType}
+                isFrame={isFrame}
               />
             </div>
           )}
@@ -1168,8 +1152,13 @@ export default inject(
 
     const selectedFolder = { ...selectedFolderStore };
 
-    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } =
-      auth.settingsStore;
+    const {
+      enablePlugins,
+      theme,
+      whiteLabelLogoUrls,
+      isFrame,
+      currentDeviceType,
+    } = auth.settingsStore;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;
@@ -1328,6 +1317,7 @@ export default inject(
       whiteLabelLogoUrls,
       setRoomSharingPanelVisible,
       isFrame,
+      currentDeviceType,
     };
   }
 )(

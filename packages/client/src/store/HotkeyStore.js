@@ -1,5 +1,5 @@
 import { combineUrl } from "@docspace/common/utils";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/components/utils/device";
 import { makeAutoObservable } from "mobx";
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -42,7 +42,11 @@ class HotkeyStore {
 
   scrollToCaret = () => {
     const { offsetTop, item } = this.getItemOffset();
-    const scroll = document.getElementsByClassName("section-scroll")[0];
+
+    const scroll = isMobile()
+      ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
+      : document.getElementsByClassName("section-scroll")[0];
+
     const scrollRect = scroll?.getBoundingClientRect();
 
     if (item && item[0]) {
@@ -75,7 +79,9 @@ class HotkeyStore {
       infiniteLoaderComponent.tabIndex = -1;
     }
 
-    const someDialogIsOpen = checkDialogsOpen();
+    const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
+
+    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen;
 
     if (
       someDialogIsOpen ||
@@ -157,10 +163,13 @@ class HotkeyStore {
 
     if (filesList.length) {
       // scroll to first element
-      const scroll = document.querySelector(
-        "#sectionScroll > .scroll-wrapper > .scroller"
-      );
-      scroll.scrollTo(0, 0);
+      const scroll = isMobile()
+        ? document.querySelector(
+            "#customScrollBar > .scroll-wrapper > .scroller"
+          )
+        : document.getElementsByClassName("section-scroll")[0];
+
+      scroll?.scrollTo(0, 0);
 
       this.filesStore.setSelection([filesList[0]]);
       this.setCaret(filesList[0]);
@@ -175,12 +184,8 @@ class HotkeyStore {
   };
 
   selectFile = () => {
-    const {
-      selection,
-      setSelection,
-      hotkeyCaret,
-      setHotkeyCaretStart,
-    } = this.filesStore;
+    const { selection, setSelection, hotkeyCaret, setHotkeyCaretStart } =
+      this.filesStore;
 
     const index = selection.findIndex(
       (f) => f.id === hotkeyCaret?.id && f.isFolder === hotkeyCaret?.isFolder
@@ -221,13 +226,8 @@ class HotkeyStore {
   };
 
   selectLeft = () => {
-    const {
-      hotkeyCaret,
-      filesList,
-      setHotkeyCaretStart,
-      selection,
-      viewAs,
-    } = this.filesStore;
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
     if (viewAs !== "tile") return;
 
     if (!hotkeyCaret && !selection.length) {
@@ -240,13 +240,8 @@ class HotkeyStore {
   };
 
   selectRight = () => {
-    const {
-      hotkeyCaret,
-      filesList,
-      setHotkeyCaretStart,
-      selection,
-      viewAs,
-    } = this.filesStore;
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
     if (viewAs !== "tile") return;
 
     if (!hotkeyCaret && !selection.length) {
@@ -501,12 +496,8 @@ class HotkeyStore {
   };
 
   selectAll = () => {
-    const {
-      filesList,
-      hotkeyCaret,
-      setHotkeyCaretStart,
-      setSelected,
-    } = this.filesStore;
+    const { filesList, hotkeyCaret, setHotkeyCaretStart, setSelected } =
+      this.filesStore;
 
     setSelected("all");
     if (!hotkeyCaret) {

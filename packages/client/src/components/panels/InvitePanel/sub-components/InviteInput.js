@@ -345,6 +345,7 @@ const InviteInput = ({
             showDisabledItems={true}
             dropDownMaxHeight={364}
             withBlur={isMobileView}
+            isDefaultMode={!isMobileView}
             fillIcon={false}
             modernView={!isMobileView}
           />

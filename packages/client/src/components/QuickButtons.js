@@ -27,6 +27,7 @@ const QuickButtons = (props) => {
     viewAs,
     folderCategory,
     isPublicRoom,
+    isArchiveFolder,
   } = props;
 
   const { id, locked, fileStatus, title, fileExst } = item;
@@ -66,7 +67,8 @@ const QuickButtons = (props) => {
   const showCopyLinkIcon =
     (item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom) &&
-    item.security.CopySharedLink;
+    item.shared &&
+    !isArchiveFolder;
 
   return (
     <div className="badges additional-badges">

@@ -74,6 +74,7 @@ export default function withQuickButtons(WrappedComponent) {
         viewAs,
         folderCategory,
         isPublicRoom,
+        isArchiveFolder,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -91,6 +92,7 @@ export default function withQuickButtons(WrappedComponent) {
           onClickFavorite={this.onClickFavorite}
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
+          isArchiveFolder={isArchiveFolder}
         />
       );
 
@@ -113,8 +115,13 @@ export default function withQuickButtons(WrappedComponent) {
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
-      const { isPersonalFolderRoot, isArchiveFolderRoot, isTrashFolder } =
-        treeFoldersStore;
+      const {
+        isPersonalFolderRoot,
+        isArchiveFolderRoot,
+        isTrashFolder,
+        isArchiveFolder,
+      } = treeFoldersStore;
+
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
@@ -132,6 +139,7 @@ export default function withQuickButtons(WrappedComponent) {
         folderCategory,
         isPublicRoom,
         getPrimaryLink,
+        isArchiveFolder,
       };
     }
   )(observer(WithQuickButtons));

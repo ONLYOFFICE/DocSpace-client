@@ -77,6 +77,7 @@ const Item = memo(({ data, index, style }) => {
   );
 }, areEqual);
 
+const itemSize = 48;
 const MembersList = (props) => {
   const {
     t,
@@ -139,7 +140,7 @@ const MembersList = (props) => {
   );
 
   return (
-    <StyledMembersList id="infoPanelMembersList" height={itemsCount * 48}>
+    <StyledMembersList id="infoPanelMembersList" height={itemsCount * itemSize}>
       <AutoSizer>
         {({ height, width }) => (
           <InfiniteLoader
@@ -158,7 +159,7 @@ const MembersList = (props) => {
                   width={listWidth}
                   height={height}
                   itemCount={itemsCount}
-                  itemSize={48}
+                  itemSize={itemSize}
                   itemData={{
                     t,
                     security,

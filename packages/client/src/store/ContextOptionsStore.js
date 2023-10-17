@@ -1136,7 +1136,7 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("Files:CopySharedLink"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:

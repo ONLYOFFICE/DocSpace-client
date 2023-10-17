@@ -2017,6 +2017,7 @@ const Dark = {
     links: {
       iconColor: "#858585",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#ADADAD",
     },
 
     members: {

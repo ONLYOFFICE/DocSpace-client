@@ -65,6 +65,7 @@ const StyledEditLinkPanel = styled.div`
         display: flex;
         padding-top: 20px;
         padding-bottom: 8px;
+        gap: 8px;
 
         .edit-link-toggle {
           ${(props) =>

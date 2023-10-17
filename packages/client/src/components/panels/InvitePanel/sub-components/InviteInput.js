@@ -290,7 +290,6 @@ const InviteInput = ({
   const onLanguageSelect = (language) => {
     setSelectLang(language);
     setCultureKey(language.key);
-    console.log(language.key);
     if (language.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };

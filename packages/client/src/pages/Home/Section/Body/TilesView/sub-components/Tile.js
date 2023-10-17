@@ -305,12 +305,16 @@ const StyledFileTileTop = styled.div`
     bottom: 16px;
   }
 
-  .temporary-icon {
-    svg {
-      width: 96px;
-      height: 96px;
-    }
-  }
+  ${(props) =>
+    props.isPlugin &&
+    css`
+      .temporary-icon {
+        svg {
+          width: 96px;
+          height: 96px;
+        }
+      }
+    `}
 
   ${(props) =>
     props.isHighlight &&

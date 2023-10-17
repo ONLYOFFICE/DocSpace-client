@@ -45,10 +45,18 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
-  deleteExternalLink = (linkId) => {
-    const externalLinks = this.externalLinks.filter(
-      (l) => l.sharedTo.id !== linkId
-    );
+  deleteExternalLink = (link, linkId) => {
+    let externalLinks = JSON.parse(JSON.stringify(this.externalLinks));
+
+    if (link) {
+      const linkIndex = externalLinks.findIndex(
+        (l) => l.sharedTo.id === linkId
+      );
+      externalLinks[linkIndex] = link;
+    } else {
+      externalLinks = externalLinks.filter((l) => l.sharedTo.id !== linkId);
+    }
+
     this.externalLinks = externalLinks;
   };
 
@@ -114,17 +122,34 @@ class PublicRoomStore {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
   };
 
+  getPrimaryLink = (roomId) => {
+    return api.rooms.getPrimaryLink(roomId);
+  };
+
   get isPublicRoom() {
     return this.isLoaded && window.location.pathname === "/rooms/share";
   }
 
   get roomLinks() {
-    return this.externalLinks.filter(
-      (l) =>
-        l.sharedTo.shareLink &&
-        !l.sharedTo.isTemplate &&
-        l.sharedTo.linkType === LinkType.External
-    );
+    if (this.externalLinks && this.externalLinks.length) {
+      return this.externalLinks.filter(
+        (l) =>
+          l.sharedTo.shareLink &&
+          !l.sharedTo.isTemplate &&
+          l.sharedTo.linkType === LinkType.External
+      );
+    } else {
+      return [];
+    }
+  }
+
+  get primaryLink() {
+    return this.roomLinks.find((l) => l.sharedTo.primary);
+  }
+
+  get additionalLinks() {
+    const additionalLinks = this.roomLinks.filter((l) => !l.sharedTo.primary);
+    return additionalLinks;
   }
 }
 

@@ -2143,7 +2143,10 @@ class FilesStore {
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
 
-      const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+      const isPublicRoomType =
+        item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.CustomRoom;
+      const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
       let roomOptions = [
         "select",
@@ -2243,7 +2246,7 @@ class FilesStore {
         }
       }
 
-      if (!isPublicRoomType || fromInfoPanel) {
+      if ((!isPublicRoomType && !isCustomRoomType) || fromInfoPanel) {
         roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 

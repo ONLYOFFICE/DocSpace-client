@@ -216,7 +216,8 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
-    externalLinks,
+    isCustomRoomType,
+    primaryLink,
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
@@ -595,43 +596,18 @@ const SectionHeaderContent = (props) => {
 
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    const links = externalLinks.filter((l) => !l.sharedTo.disabled);
-    const isMultiExternalLink = links.length > 1;
-
-    const roomLinks = links.map((link) => {
-      return {
-        // id: "option_move-to",
-        key: `external-link_${link.sharedTo.id}`,
-        label: link.sharedTo.title,
-        icon: InvitationLinkReactSvgUrl,
-        onClick: () => {
-          copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
-        },
-        disabled: link.sharedTo.disabled,
-      };
-    });
-
-    const publicAction = links.length
-      ? isMultiExternalLink
-        ? {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            disabled: !isPublicRoomType,
-            items: roomLinks,
-          }
-        : {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            onClick: () => {
-              roomLinks[0]?.onClick();
-            },
-            disabled: !isPublicRoomType || roomLinks[0]?.disabled,
-          }
+    const publicAction = primaryLink
+      ? {
+          id: "header_option_copy-external-link",
+          key: "copy-external-link",
+          label: t("Files:CopyPrimaryLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Files:LinkSuccessfullyCopied"));
+          },
+          disabled: !isPublicRoomType || primaryLink.sharedTo.disabled,
+        }
       : {};
 
     if (isArchiveFolder) {
@@ -675,9 +651,13 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyPrimaryLink"),
         onClick: onCopyLinkAction,
-        disabled: isRecycleBinFolder || isPersonalRoom,
+        disabled:
+          isRecycleBinFolder ||
+          isPersonalRoom ||
+          isPublicRoomType ||
+          isCustomRoomType,
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -1179,6 +1159,7 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
+    const isCustomRoomType = roomType === RoomsType.CustomRoom;
 
     const {
       onClickEditRoom,
@@ -1309,8 +1290,11 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
+      isCustomRoomType,
       isPublicRoom: publicRoomStore.isPublicRoom,
-      externalLinks: publicRoomStore.roomLinks,
+
+      primaryLink: publicRoomStore.primaryLink,
+
       moveToPublicRoom,
 
       getAccountsHeaderMenu,

@@ -76,9 +76,7 @@ const InviteInput = ({
     key: selectedLanguage.key,
     label: selectedLanguage.label,
   });
-  useEffect(() => {
-    setCultureKey(selectedLanguageNew.key);
-  }, [selectedLanguageNew.key]);
+
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
     const uid = () => Math.random().toString(36).slice(-6);
@@ -291,6 +289,8 @@ const InviteInput = ({
   });
   const onLanguageSelect = (language) => {
     setSelectLang(language);
+    setCultureKey(language.key);
+    console.log(language.key);
     if (language.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };

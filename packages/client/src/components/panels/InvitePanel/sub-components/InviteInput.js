@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
-
+import { convertLanguage } from "@docspace/common/utils";
 import Avatar from "@docspace/components/avatar";
 import TextInput from "@docspace/components/text-input";
 import DropDownItem from "@docspace/components/drop-down-item";
@@ -37,7 +37,7 @@ const searchUsersThreshold = 2;
 
 const InviteInput = ({
   defaultAccess,
-  getUsersByQuery,
+  setInviteLanguage,
   hideSelector,
   inviteItems,
   onClose,
@@ -45,12 +45,13 @@ const InviteInput = ({
   roomType,
   setInviteItems,
   t,
+  culture,
+  language,
   isOwner,
   inputsRef,
   addUsersPanelVisible,
   setAddUsersPanelVisible,
   isMobileView,
-  culture,
   cultureNames,
   i18n,
   setCultureKey,
@@ -65,17 +66,19 @@ const InviteInput = ({
 
   const searchRef = useRef();
 
-  const language = i18n.language;
   const selectedLanguage = cultureNames.find((item) => item.key === language) ||
     cultureNames.find((item) => item.key === culture) || {
       key: language,
       label: "",
     };
 
-  const [selectedLanguageNew, setSelectLang] = useState({
-    key: selectedLanguage.key,
-    label: selectedLanguage.label,
-  });
+  useEffect(() => {
+    console.log("useEffect");
+    setInviteLanguage({
+      key: selectedLanguage.key,
+      label: selectedLanguage.label,
+    });
+  }, []);
 
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
@@ -288,13 +291,13 @@ const InviteInput = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
   const onLanguageSelect = (language) => {
-    setSelectLang(language);
+    setInviteLanguage(language);
     setCultureKey(language.key);
     if (language.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };
   const onResetLangMail = () => {
-    setSelectLang({
+    setInviteLanguage({
       key: selectedLanguage.key,
       label: selectedLanguage.label,
     });
@@ -305,6 +308,7 @@ const InviteInput = ({
     label: item.label,
     key: item.key,
   }));
+
   return (
     <>
       <StyledSubHeader>
@@ -332,7 +336,7 @@ const InviteInput = ({
             className="language-combo-box"
             directionY={"both"}
             options={cultureNamesNew}
-            selectedOption={selectedLanguageNew}
+            selectedOption={culture}
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
@@ -421,11 +425,21 @@ const InviteInput = ({
 
 export default inject(({ auth, dialogsStore }) => {
   const { isOwner } = auth.userStore.user;
-  const { invitePanelOptions, setInviteItems, inviteItems } = dialogsStore;
-
-  return {
+  const {
+    invitePanelOptions,
     setInviteItems,
     inviteItems,
+    setInviteLanguage,
+    culture,
+  } = dialogsStore;
+  const { settingsStore } = auth;
+
+  return {
+    language: settingsStore.culture,
+    setInviteLanguage,
+    setInviteItems,
+    inviteItems,
+    culture,
     roomId: invitePanelOptions.roomId,
     hideSelector: invitePanelOptions.hideSelector,
     defaultAccess: invitePanelOptions.defaultAccess,

@@ -63,7 +63,7 @@ const InvitePanel = ({
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
-  const [cultureKey, setCultureKey] = useState("en-US");
+  const [cultureKey, setCultureKey] = useState();
 
   const onCloseBar = () => setInfoBarIsVisible(false);
 

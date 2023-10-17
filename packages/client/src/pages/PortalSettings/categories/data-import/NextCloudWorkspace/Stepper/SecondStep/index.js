@@ -6,13 +6,13 @@ import SearchInput from "@docspace/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
+// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import Text from "@docspace/components/text";
 
 import { Wrapper } from "../StyledStepper";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
-const LICENSE_LIMIT = 100;
+// const LICENSE_LIMIT = 100;
 
 const SecondStep = (props) => {
   const {
@@ -65,15 +65,15 @@ const SecondStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+            // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
           />
 
-          <UsersInfoBlock
+          {/* <UsersInfoBlock
             t={t}
             selectedUsers={numberOfCheckedAccounts}
             totalUsers={users.length}
             totalLicenceLimit={LICENSE_LIMIT}
-          />
+          /> */}
 
           <SearchInput
             id="search-users-input"
@@ -105,7 +105,7 @@ const SecondStep = (props) => {
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
       )}
     </Wrapper>

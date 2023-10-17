@@ -25,6 +25,7 @@
   "CopyItem": "<strong>{{title}}</strong> скопирован",
   "CopyItems": "Скопировано элементов: <strong>{{qty}}</strong>",
   "CopyLinkPassword": "Скопировать пароль для ссылки",
+  "CopyPrimaryLink": "Скопировать основную ссылку",
   "CopyPassword": "Скопировать пароль",
   "CreateRoom": "Создание комнаты",
   "CustomRooms": "Пользовательская",

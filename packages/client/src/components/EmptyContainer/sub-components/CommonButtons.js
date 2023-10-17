@@ -12,6 +12,7 @@ import { Text } from "@docspace/components";
 import IconButton from "@docspace/components/icon-button";
 import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
+import FilesFilter from "@docspace/common/api/files/filter";
 
 import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -144,6 +145,7 @@ const CommonButtons = (props) => {
     setIsLoading,
     folderId,
     onClickInviteUsers,
+    parentId,
   } = props;
 
   const navigate = useNavigate();

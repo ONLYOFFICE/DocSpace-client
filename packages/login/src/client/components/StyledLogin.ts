@@ -38,10 +38,6 @@ export const LoginFormWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
 
-  @media ${mobile} {
-    height: calc(100vh - 48px);
-  }
-
   .bg-cover {
     background-image: ${(props) => props.bgPattern};
     background-repeat: no-repeat;
@@ -84,8 +80,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-      props.isCaptchaError &&
-      css`
+    props.isCaptchaError &&
+    css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

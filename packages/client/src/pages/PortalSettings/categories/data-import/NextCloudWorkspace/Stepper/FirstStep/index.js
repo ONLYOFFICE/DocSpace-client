@@ -72,7 +72,6 @@ const FirstStep = ({
   singleFileUploading,
   getMigrationStatus,
   setUsers,
-  setData,
   isFileLoading,
   setIsFileLoading,
   cancelMigration,
@@ -98,7 +97,6 @@ const FirstStep = ({
       } else if (res.isCompleted) {
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
-        setData(res);
         setUsers(res);
         setIsSaveDisabled(false);
       }
@@ -218,7 +216,6 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     singleFileUploading,
     getMigrationStatus,
     setUsers,
-    setData,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
@@ -230,7 +227,6 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     singleFileUploading,
     getMigrationStatus,
     setUsers,
-    setData,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,

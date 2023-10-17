@@ -20,10 +20,17 @@ class ImportAccountsStore {
   existUsers = [];
   withoutEmailUsers = [];
 
+  // users = {
+  //   noEmail: [],
+  //   existing: [],
+  //   new: [],
+  //   withEmailChecked: [],
+  //   withoutEmailChecked: []
+  // }
+
   isFileLoading = false;
   isLoading = false;
 
-  data = {};
   searchValue = "";
 
   importOptions = {
@@ -109,13 +116,9 @@ class ImportAccountsStore {
     );
   }
 
-  setData = (data) => {
-    this.data = data.parseResult;
-  };
-
   isAccountChecked = (id) => this.checkedAccounts.includes(id);
 
-  cleanCheckedAccounts = () => (this.checkedAccounts = []);
+  clearCheckedAccounts = () => (this.checkedAccounts = []);
 
   get numberOfCheckedAccounts() {
     return this.checkedAccounts.length;

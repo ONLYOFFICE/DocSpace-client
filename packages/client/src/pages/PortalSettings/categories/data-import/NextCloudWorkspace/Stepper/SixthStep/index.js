@@ -15,31 +15,27 @@ const SixthStep = ({
   setIsLoading,
   proceedFileMigration,
   cancelMigration,
-  data,
   importOptions,
+  users,
 }) => {
   const [isVisble, setIsVisble] = useState(false);
   const [percent, setPercent] = useState(0);
-  const percentRef = useRef(0);
 
-  useEffect(() => {
+  const handleFileMigration = async () => {
     try {
-      const interval = setInterval(() => {
-        if (percentRef.current < 100) {
-          setIsLoading(true);
-          setPercent((prev) => prev + PERCENT_STEP);
-          percentRef.current += PERCENT_STEP;
-        } else {
-          clearInterval(interval);
-          setIsLoading(false);
-          incrementStep();
-        }
-      }, 1000);
-      proceedFileMigration({ ...data, ...importOptions });
+      await proceedFileMigration({ users, migratorName: "Nextcloud", ...importOptions });
+
+      setPercent(100);
+      setIsLoading(false);
+      incrementStep();
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    handleFileMigration();
   }, []);
 
   const onCancel = () => {
@@ -49,7 +45,7 @@ const SixthStep = ({
 
   return (
     <Wrapper>
-      {percent < 102 && (
+      {percent < 100 && (
         <>
           <ProgressBar percent={percent} className="data-import-progress-bar" />
           <Button
@@ -75,14 +71,14 @@ const SixthStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsLoading, proceedFileMigration, cancelMigration, importOptions } =
+  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, users } =
     importAccountsStore;
 
   return {
-    data,
     importOptions,
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
+    users,
   };
 })(observer(SixthStep));

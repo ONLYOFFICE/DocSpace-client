@@ -1349,7 +1349,15 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
-        filterData.total = data.total;
+        let newTotal = data.total;
+
+        // fixed row loader if total and items length is different
+        const itemsLength = data.folders.length + data.files.length;
+        if (itemsLength < filterData.pageCount) {
+          newTotal = itemsLength + this.files.length + this.folders.length;
+        }
+
+        filterData.total = newTotal;
 
         if (
           data.current.roomType === RoomsType.PublicRoom &&

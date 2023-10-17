@@ -135,7 +135,7 @@ const StyledDescription = styled(Text)`
   padding-right: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 
   font-weight: 400;
   font-size: 12px;
@@ -412,6 +412,7 @@ const StyledControlContainer = styled.div`
 const StyledInviteLanguage = styled.div`
   padding-left: 16px;
   padding-right: 16px;
+  margin-top: -12px;
   display: flex;
   align-items: center;
   justify-content: start;

@@ -9,6 +9,8 @@ import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights } from "@docspace/common/constants";
 import { parseAddresses } from "@docspace/components/utils/email";
 
+import { withTranslation } from "react-i18next";
+
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import ComboBox from "@docspace/components/combobox";
 
@@ -42,7 +44,6 @@ const InviteInput = ({
   roomId,
   roomType,
   setInviteItems,
-  roomUsers,
   t,
   isOwner,
   inputsRef,
@@ -420,7 +421,6 @@ const InviteInput = ({
 };
 
 export default inject(({ auth, dialogsStore }) => {
-  const { theme } = auth.settingsStore;
   const { isOwner } = auth.userStore.user;
   const { invitePanelOptions, setInviteItems, inviteItems } = dialogsStore;
 
@@ -432,4 +432,4 @@ export default inject(({ auth, dialogsStore }) => {
     defaultAccess: invitePanelOptions.defaultAccess,
     isOwner,
   };
-})(withCultureNames(observer(InviteInput)));
+})(withCultureNames(withTranslation(["InviteDialog"])(observer(InviteInput))));

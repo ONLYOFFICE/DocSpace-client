@@ -73,11 +73,11 @@ const InviteInput = ({
     };
 
   useEffect(() => {
-    console.log("useEffect");
-    setInviteLanguage({
-      key: selectedLanguage.key,
-      label: selectedLanguage.label,
-    });
+    !culture.key &&
+      setInviteLanguage({
+        key: language,
+        label: selectedLanguage.label,
+      });
   }, []);
 
   const toUserItems = (query) => {

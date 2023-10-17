@@ -116,7 +116,7 @@
   "PrivateRoomSupport": "Работа в Приватной комнате доступна через десктопное приложение {{organizationName}}. <3>Инструкции</3>",
   "PublicRoom": "Публичная комната",
   "RecentEmptyContainerDescription": "В этом разделе будут отображаться ваши последние просмотренные или отредактированные документы.",
-  "RecycleBinAction": "Пустая корзина",
+  "RecycleBinAction": "Очистить корзину",
   "RemovedFromFavorites": "Удалено из избранного",
   "RemoveFromFavorites": "Удалить из избранного",
   "RemoveFromList": "Убрать из списка",

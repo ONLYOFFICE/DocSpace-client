@@ -952,7 +952,8 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileIcon}`;
+      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
+      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
 
       const onClick = async (item) => {
         if (!value.onClick) return;
@@ -987,6 +988,7 @@ class PluginStore {
         ...value,
         onClick,
         fileIcon,
+        fileIconTile,
         pluginId: plugin.id,
         pluginName: plugin.name,
         pluginSystem: plugin.system,

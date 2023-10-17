@@ -939,24 +939,23 @@ class PluginStore {
     if (!items) return;
 
     const userRole = this.getUserRole();
-    const device = this.getCurrentDevice();
 
     Array.from(items).map(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
 
-      const correctDevice = value.devices
-        ? value.devices.includes(device)
-        : true;
-
-      if (!correctUserType || !correctDevice) return;
+      if (!correctUserType) return;
 
       const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
       const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
 
       const onClick = async (item) => {
-        if (!value.onClick) return;
+        const device = this.getCurrentDevice();
+        const correctDevice = value.devices
+          ? value.devices.includes(device)
+          : true;
+        if (!value.onClick || !correctDevice) return;
 
         const message = await value.onClick(item);
 

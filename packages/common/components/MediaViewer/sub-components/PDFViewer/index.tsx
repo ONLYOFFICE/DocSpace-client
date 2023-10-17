@@ -9,7 +9,7 @@ import { isDesktop, isMobile } from "react-device-detect";
 
 import { loadScript, combineUrl } from "@docspace/common/utils";
 //@ts-ignore
-import api from "@docspace/common/api";
+import { getDocumentServiceLocation } from "@docspace/common/api/files";
 
 import PDFViewerProps, { BookMark } from "./PDFViewer.props";
 import ViewerLoader from "../ViewerLoader";
@@ -189,7 +189,7 @@ function PDFViewer({
 
   const loadViewerScript = useCallback(async () => {
     const path = window.DocSpaceConfig.pdfViewerUrl;
-    const { docServiceUrl } = await api.files.getDocumentServiceLocation();
+    const { docServiceUrl } = await getDocumentServiceLocation();
 
     setIsLoadingScript(true);
     loadScript(

@@ -611,7 +611,7 @@ class ContextOptionsStore {
   //             label: title,
   //             onClick: () => {
   //               copy(shareLink);
-  //               toastr.success(t("Files:LinkSuccessfullyCopied"));
+  //               toastr.success(t("Translations:LinkCopySuccess"));
   //             },
   //           });
   //         }
@@ -1136,26 +1136,33 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.CustomRoom,
+          (item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+          !this.treeFoldersStore.isArchiveFolder,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
         onClick: async () => {
-          const primaryLink = await this.publicRoomStore.getPrimaryLink(
-            item.id
-          );
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
           if (primaryLink) {
             copy(primaryLink.sharedTo.shareLink);
-            toastr.success(t("Files:LinkSuccessfullyCopied"));
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+            this.publicRoomStore.setExternalLink(primaryLink);
           }
         },
         // onLoad: () => this.onLoadLinks(t, item),

@@ -1363,7 +1363,8 @@ class FilesStore {
         filterData.total = newTotal;
 
         if (
-          data.current.roomType === RoomsType.PublicRoom &&
+          (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
@@ -2261,7 +2262,7 @@ class FilesStore {
         }
       }
 
-      if ((!isPublicRoomType && !isCustomRoomType) || fromInfoPanel) {
+      if (fromInfoPanel) {
         roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 
@@ -3901,6 +3902,23 @@ class FilesStore {
     this.hotkeysClipboard = hotkeysClipboard
       ? hotkeysClipboard
       : this.selection;
+  };
+
+  getPrimaryLink = async (roomId) => {
+    const link = await api.rooms.getPrimaryLink(roomId);
+    if (link) {
+      this.setRoomShared(roomId, true);
+    }
+
+    return link;
+  };
+
+  setRoomShared = (roomId, shared) => {
+    const roomIndex = this.folders.findIndex((r) => r.id === roomId);
+
+    if (roomIndex !== -1) {
+      this.folders[roomIndex].shared = shared;
+    }
   };
 
   get isFiltered() {

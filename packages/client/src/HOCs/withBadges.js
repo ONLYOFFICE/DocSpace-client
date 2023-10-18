@@ -5,6 +5,9 @@ import { combineUrl } from "@docspace/common/utils";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
+import copy from "copy-to-clipboard";
+import toastr from "@docspace/components/toast/toastr";
+import { isMobileOnly } from "react-device-detect";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -73,6 +76,17 @@ export default function withBadges(WrappedComponent) {
       this.props.setConvertDialogVisible(true);
     };
 
+    onCopyPrimaryLink = async () => {
+      if (isMobileOnly) return;
+
+      const { t, item, getPrimaryLink } = this.props;
+      const primaryLink = await getPrimaryLink(item.id);
+      if (primaryLink) {
+        copy(primaryLink.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
+      }
+    };
+
     render() {
       const {
         t,
@@ -88,6 +102,7 @@ export default function withBadges(WrappedComponent) {
         viewAs,
         isMutedBadge,
         isArchiveFolderRoot,
+        isArchiveFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -122,6 +137,8 @@ export default function withBadges(WrappedComponent) {
           onFilesClick={onFilesClick}
           viewAs={viewAs}
           isMutedBadge={isMutedBadge}
+          onCopyPrimaryLink={this.onCopyPrimaryLink}
+          isArchiveFolder={isArchiveFolder}
         />
       );
 
@@ -140,11 +157,16 @@ export default function withBadges(WrappedComponent) {
         versionHistoryStore,
         dialogsStore,
         filesStore,
+        publicRoomStore,
       },
       { item }
     ) => {
-      const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolderRoot } =
-        treeFoldersStore;
+      const {
+        isRecycleBinFolder,
+        isPrivacyFolder,
+        isArchiveFolderRoot,
+        isArchiveFolder,
+      } = treeFoldersStore;
       const { markAsRead, setPinAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
@@ -158,6 +180,7 @@ export default function withBadges(WrappedComponent) {
 
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
+      const { getPrimaryLink } = publicRoomStore;
 
       return {
         isArchiveFolderRoot,
@@ -178,6 +201,8 @@ export default function withBadges(WrappedComponent) {
         isDesktopClient,
         setPinAction,
         isMutedBadge,
+        getPrimaryLink,
+        isArchiveFolder,
       };
     }
   )(observer(WithBadges));

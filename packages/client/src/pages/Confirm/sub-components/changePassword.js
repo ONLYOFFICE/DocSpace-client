@@ -70,7 +70,7 @@ const ChangePasswordForm = (props) => {
       setIsLoading(false);
       toastr.success(t("ChangePasswordSuccess"));
 
-      login(email, hash, true, "").then((res) => {
+      login(email, hash).then((res) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath = sessionStorage.getItem("referenceUrl");
         if (redirectPath && !isConfirm) {

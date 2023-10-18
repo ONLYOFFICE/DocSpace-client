@@ -1,6 +1,6 @@
 import React from "react";
 import Row from "@docspace/components/row";
-import { AuditContent } from "./AuditContent";
+import AuditContent from "./AuditContent";
 
 export const AuditUserRow = ({ item, sectionWidth, isSettingNotPaid }) => {
   return (

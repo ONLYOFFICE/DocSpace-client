@@ -1,11 +1,6 @@
 import styled, { css } from "styled-components";
-import { isMobile, isMobileOnly } from "react-device-detect";
-import {
-  tablet,
-  mobile,
-  hugeMobile,
-  smallTablet,
-} from "@docspace/components/utils/device";
+
+import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
@@ -17,6 +12,21 @@ const calculateContainerGridColumns = (isRootFolder, isInfoPanelVisible) => {
   if (!isInfoPanelVisible) result += " 52px";
   return result;
 };
+
+const StyledHeadline = styled(Headline)`
+  width: 100%;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  @media ${tablet} {
+    font-size: 21px;
+    line-height: 28px;
+  }
+  @media ${mobile} {
+    font-size: 18px;
+    line-height: 24px;
+  }
+`;
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -41,34 +51,27 @@ const StyledContainer = styled.div`
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    padding: 16px 0 0px;
-  `}
+  @media ${tablet} {
+    width: 100%;
+    padding: 16px 0 16px;
+  }
 
   @media ${mobile} {
     width: 100%;
-    padding: 12px 0 0;
-  }
-
-  ${isMobileOnly &&
-  css`
-    width: 100% !important;
-    padding: 12px 0 0;
-  `}
-`;
-
-const StyledHeadline = styled(Headline)`
-  width: fit-content;
-  font-weight: 700;
-  font-size: ${isMobile ? "21px !important" : "18px"};
-  line-height: ${isMobile ? "28px !important" : "24px"};
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
+    padding: 12px 0 12px;
   }
 `;
+
+// const StyledHeadline = styled(Headline)`
+//   width: fit-content;
+//   font-weight: 700;
+//   font-size: ${isMobile ? "21px !important" : "18px"};
+//   line-height: ${isMobile ? "28px !important" : "24px"};
+//   @media ${tablet} {
+//     font-size: 21px;
+//     line-height: 28px;
+//   }
+// `;
 
 const StyledNavigationDrodown = styled(ComboBox)`
   width: 12px;
@@ -77,9 +80,12 @@ const StyledNavigationDrodown = styled(ComboBox)`
   background: transparent;
 `;
 const StyledSubmitToGalleryButton = styled(Button)`
-  @media ${smallTablet} {
+  margin-left: auto;
+
+  @media ${mobile} {
     display: none;
   }
+
   ${(props) =>
     props.theme.interfaceDirection === "ltr"
       ? css`

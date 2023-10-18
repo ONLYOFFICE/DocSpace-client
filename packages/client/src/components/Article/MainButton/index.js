@@ -15,7 +15,6 @@ import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React from "react";
 
-import { isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 import MainButton from "@docspace/components/main-button";
@@ -26,7 +25,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
 
-import { Events, EmployeeType } from "@docspace/common/constants";
+import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
@@ -122,12 +121,14 @@ const ArticleMainButtonContent = (props) => {
     setInvitePanelOptions,
 
     mainButtonMobileVisible,
+    versionHistoryPanelVisible,
     moveToPanelVisible,
     copyPanelVisible,
 
     security,
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -486,9 +487,12 @@ const ArticleMainButtonContent = (props) => {
 
   let mainButtonVisible = true;
 
-  if (isMobileOnly) {
+  if (currentDeviceType === DeviceType.mobile) {
     mainButtonVisible =
-      moveToPanelVisible || copyPanelVisible || selectFileDialogVisible
+      moveToPanelVisible ||
+      copyPanelVisible ||
+      selectFileDialogVisible ||
+      versionHistoryPanelVisible
         ? false
         : true;
   }
@@ -578,6 +582,7 @@ export default inject(
     clientLoadingStore,
     oformsStore,
     pluginStore,
+    versionHistoryStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -600,7 +605,9 @@ export default inject(
       selectFileDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme } = auth.settingsStore;
+    const { enablePlugins, currentColorScheme, currentDeviceType } =
+      auth.settingsStore;
+    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
@@ -650,7 +657,9 @@ export default inject(
       mainButtonMobileVisible,
       moveToPanelVisible,
       copyPanelVisible,
+      versionHistoryPanelVisible,
       security,
+      currentDeviceType,
     };
   }
 )(

@@ -65,6 +65,7 @@ const StyledEditLinkPanel = styled.div`
         display: flex;
         padding-top: 20px;
         padding-bottom: 8px;
+        gap: 8px;
 
         .edit-link-toggle {
           ${(props) =>
@@ -146,7 +147,7 @@ const StyledEditLinkPanel = styled.div`
 const StyledScrollbar = styled(Scrollbar)`
   position: relative;
   padding: 16px 0;
-  height: calc(100vh - 87px) !important;
+  height: calc(100% - 150px) !important;
 `;
 
 const StyledButtons = styled(Box)`

@@ -122,6 +122,10 @@ class MediaViewerDataStore {
     this.changeUrl(fileId);
   };
 
+  get isViewerOpen() {
+    return this.visible && this.playlist.length > 0;
+  }
+
   get currentPostionIndex() {
     if (this.playlist.length === 0) {
       return 0;

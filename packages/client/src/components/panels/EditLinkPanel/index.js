@@ -21,7 +21,9 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { isMobileOnly } from "react-device-detect";
+import { RoomsType } from "@docspace/common/constants";
+
+import { DeviceType } from "@docspace/common/constants";
 
 const EditLinkPanel = (props) => {
   const {
@@ -41,12 +43,15 @@ const EditLinkPanel = (props) => {
     link,
     date,
     language,
+    isPublic,
+    currentDeviceType,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const linkTitle = link?.sharedTo?.title ?? "";
-  const [linkNameValue, setLinkNameValue] = useState(linkTitle);
+  const [linkNameValue, setLinkNameValue] = useState(
+    link?.sharedTo?.title || ""
+  );
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
   const isExpiredDate = expirationDate
@@ -151,7 +156,7 @@ const EditLinkPanel = (props) => {
     window.addEventListener("keydown", onKeyPress);
 
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [unsavedChangesDialogVisible]);
+  }, [onKeyPress]);
 
   const linkNameIsValid = !!linkNameValue.trim();
 
@@ -160,6 +165,8 @@ const EditLinkPanel = (props) => {
     : expirationDate
     ? `${t("Files:LinkValidUntil")}:`
     : t("Files:ChooseExpirationDate");
+
+  const isPrimary = link?.sharedTo?.primary;
 
   const editLinkPanelComponent = (
     <StyledEditLinkPanel isExpired={isExpired}>
@@ -174,10 +181,17 @@ const EditLinkPanel = (props) => {
         visible={visible}
         onClose={onClosePanel}
         zIndex={310}
+        withoutBodyScroll
       >
         <div className="edit-link_header">
           <Heading className="edit-link_heading">
-            {isEdit ? t("Files:EditLink") : t("Files:CreateNewLink")}
+            {isEdit
+              ? isPrimary
+                ? t("Files:EditPrimaryLink")
+                : isPublic
+                ? t("Files:EditAdditionalLink")
+                : t("Files:EditLink")
+              : t("Files:CreateNewLink")}
           </Heading>
         </div>
         <StyledScrollbar stype="mediumBlack">
@@ -211,16 +225,18 @@ const EditLinkPanel = (props) => {
               isChecked={denyDownload}
               onChange={onDenyDownloadChange}
             />
-            <LimitTimeBlock
-              isExpired={isExpired}
-              isLoading={isLoading}
-              headerText={t("Files:LimitByTimePeriod")}
-              bodyText={expiredLinkText}
-              expirationDate={expirationDate}
-              setExpirationDate={setExpirationDate}
-              setIsExpired={setIsExpired}
-              language={language}
-            />
+            {!isPrimary && (
+              <LimitTimeBlock
+                isExpired={isExpired}
+                isLoading={isLoading}
+                headerText={t("Files:LimitByTimePeriod")}
+                bodyText={expiredLinkText}
+                expirationDate={expirationDate}
+                setExpirationDate={setExpirationDate}
+                setIsExpired={setIsExpired}
+                language={language}
+              />
+            )}
           </div>
         </StyledScrollbar>
 
@@ -257,7 +273,9 @@ const EditLinkPanel = (props) => {
     );
   };
 
-  return isMobileOnly ? renderPortal() : editLinkPanelComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortal()
+    : editLinkPanelComponent;
 };
 
 export default inject(({ auth, dialogsStore, publicRoomStore }) => {
@@ -276,6 +294,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
   const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
   const shareLink = link?.sharedTo?.shareLink;
+  const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
 
   return {
     visible: editLinkPanelIsVisible,
@@ -295,6 +314,8 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     setUnsavedChangesDialog,
     link,
     language: auth.language,
+    isPublic,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(
   withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel))

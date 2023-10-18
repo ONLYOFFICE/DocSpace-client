@@ -32,13 +32,14 @@ const SectionHeaderContent = ({
   setSubmitToGalleryDialogVisible,
 
   currentCategory,
-  fetchCurrentCategory,
 
   oformsFilter,
   filterOformsByCategory,
 
   isInfoPanelVisible,
   setIsInfoPanelVisible,
+
+  setIsLoading,
 }) => {
   const navigate = useNavigate();
 
@@ -54,6 +55,8 @@ const SectionHeaderContent = ({
     filter.folder = oformFromFolderId;
     const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
+
+    setIsLoading();
 
     navigate(
       combineUrl(
@@ -166,7 +169,14 @@ const SectionHeaderContent = ({
 };
 
 export default inject(
-  ({ auth, filesStore, oformsStore, accessRightsStore, dialogsStore }) => {
+  ({
+    auth,
+    filesStore,
+    oformsStore,
+    accessRightsStore,
+    dialogsStore,
+    clientLoadingStore,
+  }) => {
     return {
       categoryType: filesStore.categoryType,
       getCategoryTitle: oformsStore.getCategoryTitle,
@@ -187,6 +197,12 @@ export default inject(
 
       isInfoPanelVisible: auth.infoPanelStore.isVisible,
       setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
+
+      setIsLoading: () => {
+        clientLoadingStore.setIsSectionHeaderLoading(true, false);
+        clientLoadingStore.setIsSectionFilterLoading(true, false);
+        clientLoadingStore.setIsSectionBodyLoading(true, false);
+      },
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

@@ -31,7 +31,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -46,7 +46,12 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import toastr from "@docspace/components/toast/toastr";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import { Events, EmployeeType, RoomsType } from "@docspace/common/constants";
+import {
+  Events,
+  EmployeeType,
+  RoomsType,
+  DeviceType,
+} from "@docspace/common/constants";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
@@ -74,7 +79,7 @@ const StyledContainer = styled.div`
     height: 68px;
 
     @media ${tablet} {
-      height: 60px;
+      height: 61px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
@@ -85,23 +90,9 @@ const StyledContainer = styled.div`
             `}
       width: calc(100% + 32px);
     }
-
-    ${isMobile &&
-    css`
-      height: 60px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-      width: calc(100% + 32px);
-    `}
 
     @media ${mobile} {
-      height: 52px;
+      height: 52px !important;
 
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -113,20 +104,6 @@ const StyledContainer = styled.div`
             `}
       width: calc(100% + 32px);
     }
-
-    ${isMobileOnly &&
-    css`
-      height: 52px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-      width: calc(100% + 32px);
-    `}
   }
 
   .header-container {
@@ -138,7 +115,11 @@ const StyledContainer = styled.div`
       display: none;}`}
 
     @media ${tablet} {
-      height: 60px;
+      height: 61px;
+    }
+
+    @media ${mobile} {
+      height: 53px;
     }
   }
 `;
@@ -236,8 +217,11 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
-    externalLinks,
+    isCustomRoomType,
+    primaryLink,
     moveToPublicRoom,
+    currentDeviceType,
+    isFrame,
   } = props;
 
   const navigate = useNavigate();
@@ -616,43 +600,18 @@ const SectionHeaderContent = (props) => {
 
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    const links = externalLinks.filter((l) => !l.sharedTo.disabled);
-    const isMultiExternalLink = links.length > 1;
-
-    const roomLinks = links.map((link) => {
-      return {
-        // id: "option_move-to",
-        key: `external-link_${link.sharedTo.id}`,
-        label: link.sharedTo.title,
-        icon: InvitationLinkReactSvgUrl,
-        onClick: () => {
-          copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
-        },
-        disabled: link.sharedTo.disabled,
-      };
-    });
-
-    const publicAction = links.length
-      ? isMultiExternalLink
-        ? {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            disabled: !isPublicRoomType,
-            items: roomLinks,
-          }
-        : {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            onClick: () => {
-              roomLinks[0]?.onClick();
-            },
-            disabled: !isPublicRoomType || roomLinks[0]?.disabled,
-          }
+    const publicAction = primaryLink
+      ? {
+          id: "header_option_copy-external-link",
+          key: "copy-external-link",
+          label: t("Files:CopyPrimaryLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Files:LinkSuccessfullyCopied"));
+          },
+          disabled: !isPublicRoomType || primaryLink.sharedTo.disabled,
+        }
       : {};
 
     if (isArchiveFolder) {
@@ -696,9 +655,13 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyPrimaryLink"),
         onClick: onCopyLinkAction,
-        disabled: isRecycleBinFolder || isPersonalRoom,
+        disabled:
+          isRecycleBinFolder ||
+          isPersonalRoom ||
+          isPublicRoomType ||
+          isCustomRoomType,
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -951,7 +914,7 @@ const SectionHeaderContent = (props) => {
     headerMenu,
     isInfoPanelVisible,
     toggleInfoPanel: onToggleInfoPanel,
-    isMobileView: isMobileOnly,
+    isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
   if (isAccountsPage) {
@@ -973,9 +936,11 @@ const SectionHeaderContent = (props) => {
   const stateTitle = location?.state?.title;
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
 
   const isRoot =
-    isLoading && stateIsRoot
+    isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
       : isRootFolder || isAccountsPage || isSettingsPage;
 
@@ -987,13 +952,26 @@ const SectionHeaderContent = (props) => {
     ? stateTitle
     : title;
 
-  const isCurrentRoom = isLoading && stateIsRoom ? stateIsRoom : isRoom;
+  const currentRootRoomTitle =
+    isLoading && stateRootRoomTitle
+      ? stateRootRoomTitle
+      : navigationPath?.length > 1 &&
+        navigationPath[navigationPath?.length - 2].title;
+
+  const currentIsPublicRoomType =
+    isLoading && typeof stateIsPublicRoomType === "boolean"
+      ? stateIsPublicRoomType
+      : isPublicRoomType;
+
+  const isCurrentRoom =
+    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
   if (showHeaderLoader) return <Loaders.SectionHeader />;
 
   const insideTheRoom =
-    categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Archive;
+    (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Archive) &&
+    !isCurrentRoom;
 
   const logo = !theme.isBase
     ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
@@ -1022,6 +1000,7 @@ const SectionHeaderContent = (props) => {
                   !isSettingsPage &&
                   !isPublicRoom
                 }
+                rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
                 isDesktop={isDesktop}
                 isTabletView={isTabletView}
@@ -1034,7 +1013,6 @@ const SectionHeaderContent = (props) => {
                 onClose={onClose}
                 onClickFolder={onClickFolder}
                 isTrashFolder={isRecycleBinFolder}
-                isRecycleBinFolder={isRecycleBinFolder || isArchiveFolder}
                 isEmptyFilesList={
                   isArchiveFolder ? isEmptyArchive : isEmptyFilesList
                 }
@@ -1060,9 +1038,11 @@ const SectionHeaderContent = (props) => {
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={
-                  isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
+                  currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
+                currentDeviceType={currentDeviceType}
+                isFrame={isFrame}
               />
             </div>
           )}
@@ -1175,12 +1155,18 @@ export default inject(
 
     const selectedFolder = { ...selectedFolderStore };
 
-    const { enablePlugins, theme, whiteLabelLogoUrls, isFrame } =
-      auth.settingsStore;
+    const {
+      enablePlugins,
+      theme,
+      whiteLabelLogoUrls,
+      isFrame,
+      currentDeviceType,
+    } = auth.settingsStore;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
+    const isCustomRoomType = roomType === RoomsType.CustomRoom;
 
     const {
       onClickEditRoom,
@@ -1312,8 +1298,11 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
+      isCustomRoomType,
       isPublicRoom: publicRoomStore.isPublicRoom,
-      externalLinks: publicRoomStore.roomLinks,
+
+      primaryLink: publicRoomStore.primaryLink,
+
       moveToPublicRoom,
 
       getAccountsHeaderMenu,
@@ -1336,6 +1325,7 @@ export default inject(
       whiteLabelLogoUrls,
       setRoomSharingPanelVisible,
       isFrame,
+      currentDeviceType,
     };
   }
 )(

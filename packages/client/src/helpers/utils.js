@@ -104,7 +104,11 @@ export const getPasswordErrorMessage = (t, settings) => {
     settings ? settings?.minLength : 8
   } ${settings?.digits ? t("Common:PasswordLimitDigits") : ""} ${
     settings?.upperCase ? t("Common:PasswordLimitUpperCase") : ""
-  } ${settings?.specSymbols ? t("Common:PasswordLimitSpecialSymbols") : ""}`;
+  } ${
+    settings?.specSymbols
+      ? `${t("Common:PasswordLimitSpecialSymbols")} (!@#$%^&*)`
+      : ""
+  }`;
 };
 
 export const getCategoryType = (location) => {

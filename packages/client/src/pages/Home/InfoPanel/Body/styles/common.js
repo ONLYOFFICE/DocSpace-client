@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/components/themes";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -28,7 +28,7 @@ const StyledInfoPanelBody = styled.div`
     margin-top: 116.56px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -141,7 +141,7 @@ const StyledTitle = styled.div`
     padding: 24px 20px 24px 20px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: calc(100vw - 32px);
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

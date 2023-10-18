@@ -29,7 +29,7 @@ const BodyWrapper = inject(({ auth }) => {
     buildVersionInfo,
     theme,
   };
-})(withTranslation(["About", "Common"])(withLoader(observer(Body))));
+})(withTranslation(["About", "Common"])(observer(Body)));
 
 const About = (props) => {
   return (

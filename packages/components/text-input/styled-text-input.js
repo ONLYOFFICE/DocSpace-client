@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import commonInputStyles from "./common-input-styles";
 import Input from "./input";
 import Base from "../themes/base";
-import { isMobile } from "react-device-detect";
+
 import NoUserSelect from "../utils/commonStyles";
 /* eslint-enable react/prop-types, no-unused-vars */
 const StyledTextInput = styled(Input).attrs((props) => ({

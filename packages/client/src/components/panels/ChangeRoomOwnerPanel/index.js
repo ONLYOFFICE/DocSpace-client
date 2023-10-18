@@ -8,6 +8,8 @@ import { withTranslation } from "react-i18next";
 import Filter from "@docspace/common/api/people/filter";
 import { EmployeeType, ShareAccessRights } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
+import { DeviceType } from "@docspace/common/constants";
+import Portal from "@docspace/components/portal";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -51,6 +53,7 @@ const ChangeRoomOwner = (props) => {
     removeFiles,
     folders,
     setFolders,
+    currentDeviceType,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -124,7 +127,7 @@ const ChangeRoomOwner = (props) => {
 
   const backClickProp = showBackButton ? { onBackClick } : {};
 
-  return (
+  const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
       <Backdrop
         onClick={onClose}
@@ -133,6 +136,7 @@ const ChangeRoomOwner = (props) => {
         isAside={true}
       />
       <Aside
+        currentDeviceType={currentDeviceType}
         className="header_aside-panel"
         visible={visible}
         onClose={onClose}
@@ -154,6 +158,12 @@ const ChangeRoomOwner = (props) => {
       </Aside>
     </StyledChangeRoomOwner>
   );
+
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal visible={visible} element={asideComponent} />
+  ) : (
+    asideComponent
+  );
 };
 
 export default inject(
@@ -163,6 +173,8 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
+    const { settingsStore } = auth;
+
     const { user } = auth.userStore;
     const {
       setRoomOwner,
@@ -181,6 +193,8 @@ export default inject(
       ? bufferSelection.id
       : selectedFolderStore.id;
 
+    const { currentDeviceType } = settingsStore;
+
     return {
       visible: changeRoomOwnerIsVisible,
       setIsVisible: setChangeRoomOwnerIsVisible,
@@ -195,6 +209,7 @@ export default inject(
       removeFiles,
       folders,
       setFolders,
+      currentDeviceType,
     };
   }
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

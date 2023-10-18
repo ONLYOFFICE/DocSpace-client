@@ -46,10 +46,7 @@ import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
 import combineUrl from "@docspace/common/utils/combineUrl";
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { Events } from "@docspace/common/constants";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -230,10 +227,14 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
@@ -241,10 +242,13 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(id + "", security);
     setIsVerHistoryPanel(true);
+    setIsMobileHidden(true);
   };
 
   finalizeVersion = (id) => {
@@ -502,7 +506,7 @@ class ContextOptionsStore {
     const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
       this.dialogsStore;
 
-    if (id === this.selectedFolderStore.id) {
+    if (id === this.selectedFolderStore.id && isFolder) {
       this.onClickDeleteSelectedFolder(t, isRoom);
 
       return;
@@ -593,65 +597,65 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onLoadLinks = async (t, item) => {
-    const promise = new Promise(async (resolve, reject) => {
-      let linksArray = [];
+  // onLoadLinks = async (t, item) => {
+  //   const promise = new Promise(async (resolve, reject) => {
+  //     let linksArray = [];
 
-      this.setLoaderTimer(true);
-      try {
-        const links = await this.publicRoomStore.fetchExternalLinks(item.id);
+  //     this.setLoaderTimer(true);
+  //     try {
+  //       const links = await this.publicRoomStore.fetchExternalLinks(item.id);
 
-        for (let link of links) {
-          const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
+  //       for (let link of links) {
+  //         const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
 
-          if (!disabled && !isExpired) {
-            linksArray.push({
-              icon: InvitationLinkReactSvgUrl,
-              id,
-              key: `external-link_${id}`,
-              label: title,
-              onClick: () => {
-                copy(shareLink);
-                toastr.success(t("Files:LinkSuccessfullyCopied"));
-              },
-            });
-          }
-        }
+  //         if (!disabled && !isExpired) {
+  //           linksArray.push({
+  //             icon: InvitationLinkReactSvgUrl,
+  //             id,
+  //             key: `external-link_${id}`,
+  //             label: title,
+  //             onClick: () => {
+  //               copy(shareLink);
+  //               toastr.success(t("Files:LinkSuccessfullyCopied"));
+  //             },
+  //           });
+  //         }
+  //       }
 
-        if (!linksArray.length) {
-          linksArray = [
-            {
-              id: "no-external-links-option",
-              key: "no-external-links",
-              label: !links.length
-                ? t("Files:NoExternalLinks")
-                : t("Files:AllLinksAreDisabled"),
-              disableColor: true,
-            },
-            !isMobile && {
-              key: "separator0",
-              isSeparator: true,
-            },
-            {
-              icon: SettingsReactSvgUrl,
-              id: "manage-option",
-              key: "manage-links",
-              label: t("Notifications:ManageNotifications"),
-              onClick: () => this.onShowInfoPanel(item, "info_members"),
-            },
-          ];
-        }
+  //       if (!linksArray.length) {
+  //         linksArray = [
+  //           {
+  //             id: "no-external-links-option",
+  //             key: "no-external-links",
+  //             label: !links.length
+  //               ? t("Files:NoExternalLinks")
+  //               : t("Files:AllLinksAreDisabled"),
+  //             disableColor: true,
+  //           },
+  //           !isMobile && {
+  //             key: "separator0",
+  //             isSeparator: true,
+  //           },
+  //           {
+  //             icon: SettingsReactSvgUrl,
+  //             id: "manage-option",
+  //             key: "manage-links",
+  //             label: t("Notifications:ManageNotifications"),
+  //             onClick: () => this.onShowInfoPanel(item, "info_members"),
+  //           },
+  //         ];
+  //       }
 
-        this.setLoaderTimer(false, () => resolve(linksArray));
-      } catch (error) {
-        toastr.error(error);
-        this.setLoaderTimer(false);
-        return reject(linksArray);
-      }
-    });
+  //       this.setLoaderTimer(false, () => resolve(linksArray));
+  //     } catch (error) {
+  //       toastr.error(error);
+  //       this.setLoaderTimer(false);
+  //       return reject(linksArray);
+  //     }
+  //   });
 
-    return promise;
-  };
+  //   return promise;
+  // };
 
   onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
@@ -925,72 +929,71 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils()
-        ? onlyShowVersionHistory
-          ? [
-              {
-                id: "option_show-version-history",
-                key: "show-version-history",
-                label: t("ShowVersionHistory"),
-                icon: HistoryReactSvgUrl,
-                onClick: () => this.showVersionHistory(item.id, item.security),
-                disabled: false,
-              },
-            ]
-          : [
-              {
-                id: "option_version",
-                key: "version",
-                label: t("VersionHistory"),
-                icon: HistoryFinalizedReactSvgUrl,
-                items: [
-                  {
-                    id: "option_finalize-version",
-                    key: "finalize-version",
-                    label: t("FinalizeVersion"),
-                    icon: HistoryFinalizedReactSvgUrl,
-                    onClick: () =>
-                      isEditing
-                        ? this.onShowEditingToast(t)
-                        : this.finalizeVersion(item.id, item.security),
-                    disabled: false,
-                  },
-                  {
-                    id: "option_version-history",
-                    key: "show-version-history",
-                    label: t("ShowVersionHistory"),
-                    icon: HistoryReactSvgUrl,
-                    onClick: () =>
-                      this.showVersionHistory(item.id, item.security),
-                    disabled: false,
-                  },
-                ],
-              },
-            ]
-        : [
+    const versionActions = isDesktop()
+      ? onlyShowVersionHistory
+        ? [
             {
-              id: "option_finalize-version",
-              key: "finalize-version",
-              label: t("FinalizeVersion"),
-              icon: HistoryFinalizedReactSvgUrl,
-              onClick: () =>
-                isEditing
-                  ? this.onShowEditingToast(t)
-                  : this.finalizeVersion(item.id),
-              disabled: false,
-            },
-            {
-              id: "option_version-history",
+              id: "option_show-version-history",
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
               onClick: () => this.showVersionHistory(item.id, item.security),
               disabled: false,
             },
-          ];
+          ]
+        : [
+            {
+              id: "option_version",
+              key: "version",
+              label: t("VersionHistory"),
+              icon: HistoryFinalizedReactSvgUrl,
+              items: [
+                {
+                  id: "option_finalize-version",
+                  key: "finalize-version",
+                  label: t("FinalizeVersion"),
+                  icon: HistoryFinalizedReactSvgUrl,
+                  onClick: () =>
+                    isEditing
+                      ? this.onShowEditingToast(t)
+                      : this.finalizeVersion(item.id, item.security),
+                  disabled: false,
+                },
+                {
+                  id: "option_version-history",
+                  key: "show-version-history",
+                  label: t("ShowVersionHistory"),
+                  icon: HistoryReactSvgUrl,
+                  onClick: () =>
+                    this.showVersionHistory(item.id, item.security),
+                  disabled: false,
+                },
+              ],
+            },
+          ]
+      : [
+          {
+            id: "option_finalize-version",
+            key: "finalize-version",
+            label: t("FinalizeVersion"),
+            icon: HistoryFinalizedReactSvgUrl,
+            onClick: () =>
+              isEditing
+                ? this.onShowEditingToast(t)
+                : this.finalizeVersion(item.id),
+            disabled: false,
+          },
+          {
+            id: "option_version-history",
+            key: "show-version-history",
+            label: t("ShowVersionHistory"),
+            icon: HistoryReactSvgUrl,
+            onClick: () => this.showVersionHistory(item.id, item.security),
+            disabled: false,
+          },
+        ];
     const moveActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils() && !isInfoPanel
+      isDesktop() && !isInfoPanel
         ? [
             {
               id: "option_move-or-copy",
@@ -1213,18 +1216,29 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyPrimaryLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.CustomRoom,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("SharingPanel:CopyExternalLink"),
+        label: t("Files:CopyPrimaryLink"),
         icon: CopyToReactSvgUrl,
         disabled: this.treeFoldersStore.isArchiveFolder,
-        onLoad: () => this.onLoadLinks(t, item),
+        onClick: async () => {
+          const primaryLink = await this.publicRoomStore.getPrimaryLink(
+            item.id
+          );
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Files:LinkSuccessfullyCopied"));
+          }
+        },
+        // onLoad: () => this.onLoadLinks(t, item),
       },
       {
         id: "option_room-info",

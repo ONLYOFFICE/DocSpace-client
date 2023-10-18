@@ -5,11 +5,7 @@ import Avatar from "@docspace/components/avatar";
 import Text from "@docspace/components/text";
 import ContextMenuButton from "@docspace/components/context-menu-button";
 import ContextMenu from "@docspace/components/context-menu";
-import {
-  isTablet as isTabletUtils,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
-import { isTablet, isMobileOnly } from "react-device-detect";
+
 import {
   StyledArticleProfile,
   StyledUserName,
@@ -17,16 +13,24 @@ import {
 } from "../styled-article";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { useTheme } from 'styled-components'
+import { useTheme } from "styled-components";
+import { DeviceType } from "../../../constants";
 const ArticleProfile = (props) => {
-  const { user, showText, getUserRole, getActions, onProfileClick } = props;
+  const {
+    user,
+    showText,
+    getUserRole,
+    getActions,
+    onProfileClick,
+    currentDeviceType,
+    isVirtualKeyboardOpen,
+  } = props;
   const { t } = useTranslation("Common");
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const menuRef = useRef(null);
 
-  const isTabletView =
-    (isTabletUtils() || isTablet) && !isMobileOnly && !isMobileUtils();
+  const isTabletView = currentDeviceType === DeviceType.tablet;
   const avatarSize = isTabletView ? "min" : "base";
   const userRole = getUserRole(user);
 
@@ -49,14 +53,17 @@ const ArticleProfile = (props) => {
 
   const model = getActions(t);
   const username = user.displayName.split(" ");
-  const { interfaceDirection } = useTheme()
-  const isRtl = interfaceDirection === 'rtl'
+  const { interfaceDirection } = useTheme();
+  const isRtl = interfaceDirection === "rtl";
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
 
-  if (!isMobileOnly && isMobileUtils()) return <></>;
+  if (currentDeviceType === DeviceType.mobile) return <></>;
 
   return (
-    <StyledProfileWrapper showText={showText}>
+    <StyledProfileWrapper
+      showText={showText}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+    >
       <StyledArticleProfile showText={showText} tablet={isTabletView}>
         <div ref={ref}>
           <Avatar

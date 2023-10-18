@@ -7,7 +7,7 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
 import ItemContextOptions from "./ItemContextOptions";
 import { StyledTitle } from "../../styles/common";
-import RoomIcon from "@docspace/client/src/components/RoomIcon";
+import RoomIcon from "@docspace/components/room-icon";
 
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 

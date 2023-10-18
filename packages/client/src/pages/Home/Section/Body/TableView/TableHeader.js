@@ -76,6 +76,13 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
         },
+        {
+          key: "QuickButtons",
+          title: "",
+          enable: this.props.roomColumnQuickButtonsIsEnabled,
+          defaultSize: 75,
+          resizable: false,
+        },
       ];
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
@@ -256,7 +263,7 @@ class FilesTableHeader extends React.Component {
 
   componentDidMount() {
     this.customScrollElm = document.getElementsByClassName("section-scroll")[0];
-    this.customScrollElm.addEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.addEventListener("scroll", this.onBeginScroll);
   }
 
   onBeginScroll = () => {
@@ -319,7 +326,7 @@ class FilesTableHeader extends React.Component {
   }
 
   componentWillUnmount() {
-    this.customScrollElm.removeEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.removeEventListener("scroll", this.onBeginScroll);
   }
 
   onColumnChange = (key) => {
@@ -488,6 +495,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,
@@ -536,6 +544,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,

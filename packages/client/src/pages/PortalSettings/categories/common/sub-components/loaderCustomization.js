@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
-import { isTablet } from "react-device-detect";
+import { desktop, mobileMore } from "@docspace/components/utils/device";
 
 const tabletStyles = css`
   .header {
-    display: ${props => !props.dnsSettings && "block"};
-    width: ${props =>
+    display: ${(props) => !props.dnsSettings && "block"};
+    width: ${(props) =>
       props.lngTZSettings
         ? "283px"
         : props.welcomePage
@@ -23,7 +23,7 @@ const tabletStyles = css`
 
   .title {
     display: block;
-    width: ${props =>
+    width: ${(props) =>
       props.lngTZSettings
         ? "61px"
         : props.welcomePage
@@ -47,7 +47,7 @@ const tabletStyles = css`
   .save-cancel-buttons {
     display: block;
     position: static;
-    width: ${props => (props.welcomePage ? "274px" : "197px")};
+    width: ${(props) => (props.welcomePage ? "274px" : "197px")};
     padding: 8px 0 0;
   }
 
@@ -73,7 +73,7 @@ const StyledLoader = styled.div`
   }
 
   .title {
-    width: ${props => (props.portalRenaming ? "109px" : "61px")};
+    width: ${(props) => (props.portalRenaming ? "109px" : "61px")};
   }
 
   .title-long {
@@ -98,7 +98,7 @@ const StyledLoader = styled.div`
     position: absolute;
     bottom: 0;
     width: calc(100% - 32px);
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: 0;
@@ -121,7 +121,7 @@ const StyledLoader = styled.div`
   }
 
   .padding-right {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 8px;
@@ -135,18 +135,13 @@ const StyledLoader = styled.div`
     height: 32px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     ${tabletStyles}
   }
 
-  ${isTablet &&
-  `
-    ${tabletStyles}
-  `}
-
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     .save-cancel-buttons {
-      width: ${props => (props.welcomePage ? "264px" : "192px")};
+      width: ${(props) => (props.welcomePage ? "264px" : "192px")};
     }
   }
 `;
@@ -193,7 +188,8 @@ const LoaderCustomization = ({
       portalRenaming={portalRenaming}
       welcomePage={welcomePage}
       dnsSettings={dnsSettings}
-      className="category-item-wrapper">
+      className="category-item-wrapper"
+    >
       <Loaders.Rectangle height="22px" className="header" />
 
       {portalRenaming && (

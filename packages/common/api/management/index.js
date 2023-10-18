@@ -100,7 +100,7 @@ export const getAllPortals = async () => {
   const res = await request({
     baseURL,
     method: "get",
-    url: `/portal/get`,
+    url: `/portal/get?statistics=true`,
   });
   return res;
 };

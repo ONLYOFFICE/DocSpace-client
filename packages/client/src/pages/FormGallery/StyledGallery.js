@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  hugeDesktop,
+  desktop,
+} from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
@@ -12,21 +17,6 @@ const calculateContainerGridColumns = (isRootFolder, isInfoPanelVisible) => {
   if (!isInfoPanelVisible) result += " 52px";
   return result;
 };
-
-const StyledHeadline = styled(Headline)`
-  width: 100%;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-  @media ${mobile} {
-    font-size: 18px;
-    line-height: 24px;
-  }
-`;
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -51,14 +41,34 @@ const StyledContainer = styled.div`
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
+  height: 69px;
+  box-sizing: border-box;
+
   @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 16px;
+    height: 69px;
+    padding: 0;
   }
 
   @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 12px;
+    height: 53px;
+    padding: 0;
+  }
+`;
+
+const StyledHeadline = styled(Headline)`
+  width: 100%;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  box-sizing: border-box;
+
+  @media ${tablet} {
+    font-size: 21px;
+    line-height: 28px;
+  }
+  @media ${mobile} {
+    font-size: 18px;
+    line-height: 24px;
   }
 `;
 

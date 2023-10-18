@@ -65,8 +65,9 @@ const FormGallery = ({
         // withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={false}
+        isFormGallery
       >
-        <Section.SectionHeader>
+        <Section.SectionHeader isFormGallery>
           <SectionHeaderContent />
         </Section.SectionHeader>
 

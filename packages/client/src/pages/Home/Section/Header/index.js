@@ -1097,6 +1097,7 @@ export default inject(
 
       clearFiles,
       categoryType,
+      getPrimaryLink,
     } = filesStore;
 
     const {
@@ -1214,8 +1215,7 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
-    const { isPublicRoom, primaryLink, getPrimaryLink, setExternalLink } =
-      publicRoomStore;
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
     return {
       isGracePeriod,

@@ -1150,13 +1150,12 @@ class ContextOptionsStore {
         icon: CopyToReactSvgUrl,
         disabled: this.treeFoldersStore.isArchiveFolder,
         onClick: async () => {
-          const primaryLink = await this.publicRoomStore.getPrimaryLink(
-            item.id
-          );
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
           if (primaryLink) {
             copy(primaryLink.sharedTo.shareLink);
             item.shared
-              ? toastr.success(t("Translations:LinkCopySuccess"))
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
             this.publicRoomStore.setExternalLink(primaryLink);

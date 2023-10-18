@@ -105,7 +105,7 @@ const LinkRow = (props) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Files:LinkSuccessfullyCopied"));
   };
 
   const getData = () => {

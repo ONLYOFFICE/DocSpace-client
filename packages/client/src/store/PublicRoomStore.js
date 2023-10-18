@@ -122,10 +122,6 @@ class PublicRoomStore {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
   };
 
-  getPrimaryLink = (roomId) => {
-    return api.rooms.getPrimaryLink(roomId);
-  };
-
   get isPublicRoom() {
     return this.isLoaded && window.location.pathname === "/rooms/share";
   }

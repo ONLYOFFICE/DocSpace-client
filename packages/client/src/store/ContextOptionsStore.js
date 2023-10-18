@@ -224,6 +224,8 @@ class ContextOptionsStore {
   onMoveAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
+    this.filesStore.setBufferSelection(this.selectedFolderStore);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 

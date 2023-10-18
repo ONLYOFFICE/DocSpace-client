@@ -4,7 +4,7 @@ import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 export const StyledFilter = styled.div`
@@ -32,7 +32,7 @@ export const StyledFilter = styled.div`
     gap: 8px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     height: 72px;
 
     flex-direction: ${({ theme }) =>

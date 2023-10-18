@@ -14,6 +14,16 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
 
+  const sortData = [
+    {
+      id: "sort-by_name",
+      key: "name_form",
+      label: t("Common:Name"),
+      default: false,
+      isSelected: false,
+    },
+  ];
+
   const onSort = (e, newSortBy, newSortOrder = "asc") => {
     e.stopPropagation();
     if (
@@ -28,16 +38,6 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
     e.stopPropagation();
     onSort(e, newSortBy, oformsFilter.sortOrder === "desc" ? "asc" : "desc");
   };
-
-  const sortData = [
-    {
-      id: "sort-by_name",
-      key: "name_form",
-      label: t("Common:Name"),
-      default: false,
-      isSelected: false,
-    },
-  ];
 
   return (
     <>
@@ -78,7 +78,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
                   isSelected={oformsFilter.sortBy === item.key}
                   isDescending={oformsFilter.sortOrder === "desc"}
                 >
-                  <Text fontWeight={600}>{t(`Common:${item.label}`)}</Text>
+                  <Text fontWeight={600}>{item.label}</Text>
                   <SortDesc
                     onClick={(e) => onToggleSortOrder(e, item.key)}
                     className="sortorder-arrow"

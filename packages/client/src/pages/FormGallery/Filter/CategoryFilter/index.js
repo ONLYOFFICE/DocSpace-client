@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
-import { smallTablet } from "@docspace/components/utils/device";
-import { isMobileOnly } from "react-device-detect";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
@@ -17,7 +16,7 @@ export const StyledCategoryFilterWrapper = styled.div`
     display: block;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .mobileView {
       display: block;
     }
@@ -25,16 +24,6 @@ export const StyledCategoryFilterWrapper = styled.div`
       display: none;
     }
   }
-
-  ${isMobileOnly &&
-  css`
-    .mobileView {
-      display: block;
-    }
-    .desktopView {
-      display: none;
-    }
-  `}
 `;
 
 const CategoryFilter = ({

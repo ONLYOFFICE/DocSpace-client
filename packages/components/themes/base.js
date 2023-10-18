@@ -2021,6 +2021,7 @@ const Base = {
     links: {
       iconColor: "#3B72A7",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
     },
 
     members: {

@@ -24,11 +24,8 @@ class Profile extends React.Component {
       selectedTreeNode,
       setSelectedNode,
       setIsProfileLoaded,
-
-      setBodyRendered,
     } = this.props;
 
-    setBodyRendered(true);
     const userId = "@self";
 
     setIsEditTargetUser(false);
@@ -77,12 +74,6 @@ class Profile extends React.Component {
         this.documentElement[i].style.transition = "";
       }
     }
-  }
-
-  componentWillUnmount() {
-    const { setBodyRendered } = this.props;
-
-    setBodyRendered(false);
   }
 
   render() {
@@ -152,7 +143,7 @@ export default inject(
       setIsEditTargetUser,
 
       showCatalog: auth.settingsStore.showCatalog,
-      setBodyRendered: auth.settingsStore.setBodyRendered,
+
       selectedTreeNode,
       setSelectedNode,
       isVisitor: auth.userStore.user.isVisitor,

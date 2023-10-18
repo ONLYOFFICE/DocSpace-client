@@ -161,7 +161,7 @@ const FilesRowContent = ({
   const contentComponent = () => {
     switch (filterSortBy) {
       case SortByFieldName.Size:
-        if (!contentLength) return "—";
+        if (!contentLength) return "";
         return contentLength;
 
       case SortByFieldName.CreationDate:
@@ -174,7 +174,7 @@ const FilesRowContent = ({
         return getFileTypeName(fileType);
 
       case SortByFieldName.Tags:
-        if (tags?.length === 0) return "—";
+        if (tags?.length === 0) return "";
         return tags?.map((elem) => {
           return elem;
         });

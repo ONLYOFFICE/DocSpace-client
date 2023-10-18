@@ -1357,7 +1357,7 @@ class FilesStore {
           newTotal =
             filterData.page > 0
               ? itemsLength + this.files.length + this.folders.length
-              : itemsLength + this.files.length;
+              : itemsLength;
         }
 
         filterData.total = newTotal;

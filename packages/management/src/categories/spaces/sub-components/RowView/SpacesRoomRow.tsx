@@ -58,7 +58,7 @@ const SpacesRoomRow = ({ item }: TRow) => {
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),
     },
     {
-      label: t("Common:SettingsDocSpace"),
+      label: t("Common:Settings"),
       key: "space_settings",
       icon: CatalogSettingsReactSvgUrl,
       onClick: () =>

@@ -118,7 +118,7 @@ const CreatePortalDialog = () => {
             placeholder={t("EnterName")}
             className="create-docspace-input"
           />
-          <div style={{ marginTop: "6px" }}>
+          <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
             <Text
               fontSize="12px"
               fontWeight="400"

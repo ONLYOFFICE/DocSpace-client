@@ -22,7 +22,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
-import { LinkType } from "../../../helpers/constants";
 
 import InfoBar from "./sub-components/InfoBar";
 import { DeviceType } from "@docspace/common/constants";
@@ -49,6 +48,7 @@ const InvitePanel = ({
   reloadSelectionParentRoom,
   setUpdateRoomMembers,
   roomsView,
+  setInviteLanguage,
   getUsersList,
   filter,
   currentDeviceType,
@@ -63,6 +63,8 @@ const InvitePanel = ({
   const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
+
+  const [cultureKey, setCultureKey] = useState();
 
   const onCloseBar = () => setInfoBarIsVisible(false);
 
@@ -175,6 +177,7 @@ const InvitePanel = ({
   };
 
   const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
       visible: false,
@@ -207,8 +210,8 @@ const InvitePanel = ({
 
     const data = {
       invitations,
+      culture: cultureKey,
     };
-
     if (roomId !== -1) {
       data.notify = true;
       data.message = "Invitation message";
@@ -262,6 +265,7 @@ const InvitePanel = ({
         <InviteInput
           t={t}
           onClose={onClose}
+          setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
           addUsersPanelVisible={addUsersPanelVisible}
@@ -343,8 +347,7 @@ const InvitePanel = ({
       id="InvitePanelWrapper"
       hasInvitedUsers={hasInvitedUsers}
       scrollAllPanelContent={scrollAllPanelContent}
-      addUsersPanelVisible={addUsersPanelVisible}
-    >
+      addUsersPanelVisible={addUsersPanelVisible}>
       {isMobileView ? (
         <div className="invite_panel">
           <StyledControlContainer onClick={onClose}>
@@ -365,8 +368,7 @@ const InvitePanel = ({
             visible={visible}
             onClose={onClose}
             withoutBodyScroll
-            zIndex={310}
-          >
+            zIndex={310}>
             {invitePanelNode}
           </Aside>
         </>
@@ -417,6 +419,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     invitePanelOptions,
     setInviteItems,
     setInvitePanelOptions,
+    setInviteLanguage,
   } = dialogsStore;
 
   const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -424,6 +427,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
 
   return {
     folders,
+    setInviteLanguage,
     getUsersByQuery,
     getRoomSecurityInfo,
     inviteItems,

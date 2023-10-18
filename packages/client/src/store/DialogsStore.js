@@ -30,9 +30,12 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
-
   isFolderActions = false;
   roomCreation = false;
+  culture = {
+    key: "",
+    label: "",
+  };
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
@@ -88,7 +91,9 @@ class DialogsStore {
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
   }
-
+  setInviteLanguage = (culture) => {
+    this.culture = culture;
+  };
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };

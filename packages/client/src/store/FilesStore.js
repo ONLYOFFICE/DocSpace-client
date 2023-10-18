@@ -1354,7 +1354,10 @@ class FilesStore {
         // fixed row loader if total and items length is different
         const itemsLength = data.folders.length + data.files.length;
         if (itemsLength < filterData.pageCount) {
-          newTotal = itemsLength + this.files.length + this.folders.length;
+          newTotal =
+            filterData.page > 0
+              ? itemsLength + this.files.length + this.folders.length
+              : itemsLength;
         }
 
         filterData.total = newTotal;

@@ -183,7 +183,7 @@ class InfoPanelStore {
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
-      this.selectedFolderStore.pathParts[1];
+      this.selectedFolderStore.pathParts[1].id;
     const prevRoomId = this.selectionParentRoom?.id;
 
     if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;

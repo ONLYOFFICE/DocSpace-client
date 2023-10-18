@@ -11,6 +11,7 @@ import ArticleProfile from "./sub-components/article-profile";
 import ArticleAlerts from "./sub-components/article-alerts";
 import ArticleLiveChat from "./sub-components/article-live-chat";
 import ArticleApps from "./sub-components/article-apps";
+import ArticleDevToolsBar from "./sub-components/article-dev-tools-bar";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
@@ -167,6 +168,8 @@ const Article = ({
     };
   }, [onResize]);
 
+  const withDevTools = !window.location.pathname.includes("portal-settings");
+
   const articleComponent = (
     <>
       <StyledArticle
@@ -199,7 +202,14 @@ const Article = ({
           {!showArticleLoader && (
             <>
               <ArticleAlerts />
-              <ArticleApps showText={showText} theme={theme} />
+              {withDevTools && (
+                <ArticleDevToolsBar showText={showText} theme={theme} />
+              )}
+              <ArticleApps
+                withDevTools={withDevTools}
+                showText={showText}
+                theme={theme}
+              />
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}

@@ -11,7 +11,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
 import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { classNames } from "@docspace/components/utils/classNames";
 const checkedStyle = css`
@@ -263,6 +263,21 @@ const StyledSimpleFilesRow = styled(Row)`
                 padding-left: 0 !important;
               `}
       `}
+  }
+
+  @media ${mobile} {
+    .badges {
+      margin-top: 0px;
+      gap: 8px;
+    }
+
+    .badge {
+      margin: 0 2px;
+    }
+    .additional-badges {
+      margin-right: 8px;
+      margin-top: 1px;
+    }
   }
 `;
 

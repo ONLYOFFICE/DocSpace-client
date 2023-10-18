@@ -2,7 +2,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { isMobile, isTablet, tablet } from "@docspace/components/utils/device";
+import {
+  isMobile,
+  isTablet,
+  mobile,
+  tablet,
+} from "@docspace/components/utils/device";
 
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
@@ -83,10 +88,10 @@ const SimpleFilesRowContent = styled(RowContent)`
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
-              margin-left: 24px !important;
+              margin-left: 24px;
             `
           : css`
-              margin-right: 24px !important;
+              margin-right: 24px;
             `}
     }
 
@@ -111,6 +116,26 @@ const SimpleFilesRowContent = styled(RowContent)`
           : css`
               margin: 5px 24px 0 0;
             `}
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .additional-badges {
+      margin-top: 0;
+    }
+
+    .tablet-edit,
+    .new-items,
+    .tablet-badge {
+      margin: 0;
+    }
+
+    .can-convert {
+      margin: 0 1px;
     }
   }
 

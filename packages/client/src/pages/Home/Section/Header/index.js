@@ -864,8 +864,17 @@ const SectionHeaderContent = (props) => {
     const state = {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === 0,
-
+      isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
       rootFolderType: rootFolderType,
+      isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
+        ? selectedFolder.navigationPath[itemIdx]?.roomType ===
+          RoomsType.PublicRoom
+        : false,
+      rootRoomTitle:
+        selectedFolder.navigationPath.length > 1 &&
+        selectedFolder.navigationPath[1]?.isRoom
+          ? selectedFolder.navigationPath[1].title
+          : "",
     };
 
     setIsLoading(true);

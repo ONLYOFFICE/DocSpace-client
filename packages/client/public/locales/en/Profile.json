@@ -5,6 +5,8 @@
   "ConnectSocialNetworks": "Connect your social networks",
   "DarkTheme": "Dark theme",
   "DescriptionForSecurity": "For more security, you need to change your password.",
+  "DesktopTheme": "Sync with desktop Editor settings",
+  "DesktopThemeDescription": "Automatically switch between light and dark themes when your desktop editor.",
   "EditPhoto": "Edit photo",
   "EmailNotVerified": "Email is not verified",
   "FileManagement": "File management",

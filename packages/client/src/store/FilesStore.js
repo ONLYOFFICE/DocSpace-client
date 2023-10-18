@@ -1349,7 +1349,18 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
-        filterData.total = data.total;
+        let newTotal = data.total;
+
+        // fixed row loader if total and items length is different
+        const itemsLength = data.folders.length + data.files.length;
+        if (itemsLength < filterData.pageCount) {
+          newTotal =
+            filterData.page > 0
+              ? itemsLength + this.files.length + this.folders.length
+              : itemsLength;
+        }
+
+        filterData.total = newTotal;
 
         if (
           data.current.roomType === RoomsType.PublicRoom &&
@@ -2143,7 +2154,10 @@ class FilesStore {
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
 
-      const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+      const isPublicRoomType =
+        item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.CustomRoom;
+      const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
       let roomOptions = [
         "select",
@@ -2243,7 +2257,7 @@ class FilesStore {
         }
       }
 
-      if (!isPublicRoomType || fromInfoPanel) {
+      if ((!isPublicRoomType && !isCustomRoomType) || fromInfoPanel) {
         roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 

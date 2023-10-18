@@ -232,6 +232,8 @@ class ContextOptionsStore {
   onCopyAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
+    this.filesStore.setBufferSelection(this.selectedFolderStore);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 

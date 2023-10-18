@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import RowContent from "@docspace/components/row-content";
 import Text from "@docspace/components/text";
 import styled from "styled-components";
+import { getConvertedSize } from "@docspace/common/utils";
 
 const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
@@ -16,9 +17,11 @@ const StyledRowContent = styled(RowContent)`
 export const RoomContent = ({ item, isCurrentPortal }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  // const { rooms, users, storage } = item?.data;
-  // const gb = t("Common:Gigabyte");
-  // const translateStorage = `${storage} ${gb}/50 ${gb}`;
+  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize
+  } = item?.quotaUsage;
+
+ const maxStorage = getConvertedSize(t, storageSize);
+ const usedStorage = getConvertedSize(t, usedSize);
 
   return (
     <StyledRowContent
@@ -41,14 +44,15 @@ export const RoomContent = ({ item, isCurrentPortal }) => {
         color="#A3A9AE"
         className="spaces_row-current"
       >
-        {/** TODO: add display current space */}
         {isCurrentPortal && t("CurrentSpace")}
       </Text>
       <Text fontSize="12px" as="div" fontWeight={600}>
-        {/* {`${t("PortalStats", {
-          roomCount: rooms,
-          userCount: users,
-        })} ${translateStorage}`} */}
+        {`${t("PortalStats", {
+          roomCount: roomsCount,
+          userCount: roomAdminCount + usersCount,
+          usedStorage,
+          maxStorage
+        })}`}
       </Text>
     </StyledRowContent>
   );

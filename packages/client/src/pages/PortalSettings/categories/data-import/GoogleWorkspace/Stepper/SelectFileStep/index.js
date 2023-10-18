@@ -64,7 +64,6 @@ const ErrorBlock = styled.div`
 const SelectFileStep = ({
   t,
   onNextStep,
-  onPrevStep,
   showReminder,
   setShowReminder,
   cancelDialogVisble,

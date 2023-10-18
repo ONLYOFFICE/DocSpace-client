@@ -6,8 +6,6 @@ import { Wrapper } from "../StyledStepper";
 import ProgressBar from "@docspace/components/progress-bar";
 import Button from "@docspace/components/button";
 
-const PERCENT_STEP = 5;
-
 const SixthStep = ({
   t,
   incrementStep,

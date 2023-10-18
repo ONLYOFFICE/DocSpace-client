@@ -203,7 +203,13 @@ const Article = ({
             <>
               <ArticleAlerts />
               {withDevTools && (
-                <ArticleDevToolsBar showText={showText} theme={theme} />
+                <ArticleDevToolsBar
+                  articleOpen={articleOpen}
+                  currentDeviceType={currentDeviceType}
+                  toggleArticleOpen={toggleArticleOpen}
+                  showText={showText}
+                  theme={theme}
+                />
               )}
               <ArticleApps
                 withDevTools={withDevTools}

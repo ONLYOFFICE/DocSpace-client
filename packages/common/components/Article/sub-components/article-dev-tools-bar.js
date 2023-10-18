@@ -9,6 +9,8 @@ import { ReactSVG } from "react-svg";
 import Text from "@docspace/components/text";
 import { mobile } from "@docspace/components/utils/device";
 
+import { DeviceType } from "../../../constants";
+
 const StyledWrapper = styled.div`
   cursor: pointer;
   position: relative;
@@ -46,12 +48,20 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const ArticleDevToolsBar = ({ showText }) => {
+const ArticleDevToolsBar = ({
+  showText,
+  articleOpen,
+  currentDeviceType,
+  toggleArticleOpen,
+}) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
 
   const onClick = () => {
     navigate("/portal-settings/developer-tools");
+    articleOpen &&
+      currentDeviceType === DeviceType.mobile &&
+      toggleArticleOpen();
   };
 
   if (!showText) return <></>;

@@ -1149,7 +1149,10 @@ class ContextOptionsStore {
         key: "external-link",
         label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
         onClick: async () => {
           const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 

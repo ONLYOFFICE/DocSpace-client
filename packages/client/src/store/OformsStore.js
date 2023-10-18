@@ -80,11 +80,11 @@ class OformsStore {
     const filePages = "&fields[3]=file_pages";
     const defaultDescription = "&fields[4]=description_card";
     const templateDescription = "&fields[5]=template_desc";
-    const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
-    const templateImage = "&populate[template_image][fields][5]=formats";
+    const cardPrewiew = "&populate[card_prewiew][fields][6]=url";
+    const templateImage = "&populate[template_image][fields][7]=formats";
 
     const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
-    const params = `?${fields}${filter.toApiUrlParams()}`;
+    const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     return new Promise(async (resolve) => {
       const apiUrl = `${this.authStore.settingsStore.formGallery.url}${params}`;

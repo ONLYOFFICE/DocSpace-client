@@ -21,7 +21,7 @@ TextInput.propTypes = {
   /** Used as HTML `name` property */
   name: PropTypes.string,
   /** Supported type of the input fields. */
-  type: PropTypes.oneOf(["text", "password", "email", "tel"]),
+  type: PropTypes.oneOf(["text", "password", "email", "tel", "search"]),
   /** Value of the input */
   value: PropTypes.string.isRequired,
   /** Default maxLength value of the input */

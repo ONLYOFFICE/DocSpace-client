@@ -2070,6 +2070,10 @@ const Dark = {
       color: "#818b91",
       linkColor: "#DDDDDD",
     },
+    devTools: {
+      border: "1px solid #474747",
+      color: "#858585",
+    },
   },
 
   peopleArticleBody: {

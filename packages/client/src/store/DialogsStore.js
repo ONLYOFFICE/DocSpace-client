@@ -213,8 +213,17 @@ class DialogsStore {
     const { pathParts } = this.selectedFolderStore;
 
     const id = visible && !newId ? item.id : newId;
-    const newIds = newId ? [newId] : pathParts;
-    item && pathParts.push(item.id);
+    const newIds = newId
+      ? [newId]
+      : pathParts
+      ? pathParts.map((p) => p.id)
+      : [];
+    item &&
+      pathParts.push({
+        id: item.id,
+        title: item.title,
+        roomType: item.roomType,
+      });
 
     let newFilesPanelVisible = visible;
 

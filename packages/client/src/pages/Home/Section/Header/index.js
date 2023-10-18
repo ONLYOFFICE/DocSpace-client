@@ -207,7 +207,7 @@ const SectionHeaderContent = (props) => {
     isEmptyPage,
 
     isLoading,
-    pathParts,
+
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
@@ -1219,7 +1219,7 @@ export default inject(
       title,
       isRoom,
       currentFolderId: id,
-      pathParts: pathParts,
+
       navigationPath: folderPath,
 
       setIsInfoPanelVisible: setIsVisible,

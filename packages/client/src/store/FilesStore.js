@@ -1458,10 +1458,10 @@ class FilesStore {
         }
 
         const navigationPath = await Promise.all(
-          data.pathParts.map(async (folder) => {
+          data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
 
-            let folderId = folder;
+            let folderId = folder.id;
 
             if (
               data.current.providerKey &&
@@ -1471,26 +1471,28 @@ class FilesStore {
               folderId = this.treeFoldersStore.myRoomsId;
             }
 
-            const folderInfo =
-              data.current.id === folderId
-                ? data.current
-                : await api.files.getFolderInfo(folderId);
+            const isCurrentFolder = data.current.id === folderId;
 
-            const {
-              id,
-              title,
-              roomType,
-              rootFolderId,
-              rootFolderType,
-              parentId,
-              mute,
-            } = folderInfo;
+            const folderInfo = isCurrentFolder
+              ? data.current
+              : { ...folder, id: folderId };
+
+            const { title, roomType } = folderInfo;
 
             const isRootRoom =
-              rootFolderId === id &&
-              (rootFolderType === Rooms || rootFolderType === Archive);
+              idx === 0 &&
+              (data.current.rootFolderType === Rooms ||
+                data.current.rootFolderType === Archive);
 
-            if (parentId === rootFolderId) {
+            if (idx === 1) {
+              let room = data.current;
+
+              if (!isCurrentFolder) {
+                room = await api.files.getFolderInfo(folderId);
+              }
+
+              const { mute } = room;
+
               runInAction(() => {
                 this.isMuteCurrentRoomNotifications = mute;
               });
@@ -1506,7 +1508,9 @@ class FilesStore {
           })
         ).then((res) => {
           return res
-            .filter((item, index) => index !== res.length - 1)
+            .filter((item, index) => {
+              return index !== res.length - 1;
+            })
             .reverse();
         });
 
@@ -1514,7 +1518,7 @@ class FilesStore {
           folders: data.folders,
           ...data.current,
           pathParts: data.pathParts,
-          navigationPath: navigationPath,
+          navigationPath,
           ...{ new: data.new },
         });
 
@@ -2823,7 +2827,7 @@ class FilesStore {
       this.treeFoldersStore.commonFolder &&
       this.selectedFolderStore.pathParts &&
       this.treeFoldersStore.commonFolder.id ===
-        this.selectedFolderStore.pathParts[0]
+        this.selectedFolderStore.pathParts[0].id
     );
   }
 

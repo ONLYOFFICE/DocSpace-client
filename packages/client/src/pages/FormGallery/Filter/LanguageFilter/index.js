@@ -8,6 +8,7 @@ import { convertToCulture } from "@docspace/common/utils";
 
 const LanguageFilter = ({
   oformsFilter,
+  defaultOformLocale,
   oformLocales,
   filterOformsByLocale,
 }) => {
@@ -63,7 +64,9 @@ const LanguageFilter = ({
         <Styled.LanguageFilterSelectedItem
           key={oformsFilter.locale}
           icon={flagsIcons?.get(
-            `${convertToCulture(oformsFilter.locale)}.react.svg`
+            `${convertToCulture(
+              oformsFilter.locale || defaultOformLocale
+            )}.react.svg`
           )}
           fillIcon={false}
         />
@@ -72,8 +75,9 @@ const LanguageFilter = ({
   );
 };
 
-export default inject(({ auth, oformsStore }) => ({
+export default inject(({ oformsStore }) => ({
   oformsFilter: oformsStore.oformsFilter,
+  defaultOformLocale: oformsStore.defaultOformLocale,
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
 }))(observer(LanguageFilter));

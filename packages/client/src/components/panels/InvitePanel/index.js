@@ -48,6 +48,7 @@ const InvitePanel = ({
   reloadSelectionParentRoom,
   setUpdateRoomMembers,
   roomsView,
+  setInviteLanguage,
   getUsersList,
   filter,
   currentDeviceType,
@@ -176,6 +177,7 @@ const InvitePanel = ({
   };
 
   const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
       visible: false,
@@ -417,6 +419,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     invitePanelOptions,
     setInviteItems,
     setInvitePanelOptions,
+    setInviteLanguage,
   } = dialogsStore;
 
   const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -424,6 +427,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
 
   return {
     folders,
+    setInviteLanguage,
     getUsersByQuery,
     getRoomSecurityInfo,
     inviteItems,

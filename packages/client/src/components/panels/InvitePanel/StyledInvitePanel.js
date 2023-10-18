@@ -409,7 +409,36 @@ const StyledControlContainer = styled.div`
     left: unset;
   }
 `;
-
+const StyledInviteLanguage = styled.div`
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: -12px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 4px;
+  height: 28px;
+  color: ${(props) =>
+    props.theme.createEditRoomDialog.commonParam.descriptionColor};
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  .link-list {
+    font-size: 13px;
+    color: var(--light-gray-dark);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+  }
+  .language-combo-box {
+    .combo-button {
+      padding-left: 6px;
+      padding-right: 0px;
+    }
+  }
+`;
 const StyledCrossIconMobile = styled(CrossIconMobile)`
   width: 17px;
   height: 17px;
@@ -443,6 +472,7 @@ export {
   StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
+  StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
 };

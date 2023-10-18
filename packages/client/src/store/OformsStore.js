@@ -171,8 +171,9 @@ class OformsStore {
     const locale = this.defaultOformLocale;
 
     const menuItems = await getCategoryTypes(url, locale);
-    //ToDo configure after api change
-    this.categoryTitles = ["categorie", "type", "compilation"];
+    this.categoryTitles = menuItems.map(
+      (item) => item.attributes.categoryTitle
+    );
 
     return menuItems;
   };

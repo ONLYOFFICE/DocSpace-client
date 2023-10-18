@@ -199,7 +199,7 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone, portals, baseDomain } =
+    const { enablePlugins, standalone, portals, baseDomain, tenantAlias } =
       this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
@@ -233,6 +233,7 @@ class ProfileActionsStore {
         label: portal.domain,
         onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
         disabled: false,
+        checked: tenantAlias === portal.portalName
       };
     });
 

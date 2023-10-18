@@ -1140,8 +1140,9 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.CustomRoom,
+          (item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+          !this.treeFoldersStore.isArchiveFolder,
       },
       {
         id: "option_copy-external-link",

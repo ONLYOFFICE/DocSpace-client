@@ -187,7 +187,7 @@ const EditLinkPanel = (props) => {
           <Heading className="edit-link_heading">
             {isEdit
               ? isPrimary
-                ? t("Files:EditPrimaryLink")
+                ? t("Files:EditGeneralLink")
                 : isPublic
                 ? t("Files:EditAdditionalLink")
                 : t("Files:EditLink")

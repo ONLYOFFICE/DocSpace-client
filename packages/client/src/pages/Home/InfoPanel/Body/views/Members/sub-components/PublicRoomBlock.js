@@ -44,7 +44,7 @@ const PublicRoomBlock = (props) => {
       getPrimaryLink(roomId).then((link) => {
         setExternalLink(link);
         copy(link.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        toastr.success(t("Translations:LinkCopySuccess"));
       });
     }
   };
@@ -62,7 +62,7 @@ const PublicRoomBlock = (props) => {
           {(!isArchiveFolder || primaryLink) && (
             <LinksBlock>
               <Text fontSize="14px" fontWeight={600}>
-                {t("Files:PrimaryLink")}
+                {t("Files:GeneralLink")}
               </Text>
             </LinksBlock>
           )}

@@ -49,7 +49,7 @@ const DeleteLinkDialogComponent = (props) => {
         deleteExternalLink(res, newLink.sharedTo.id);
 
         if (link.sharedTo.primary) {
-          toastr.success(t("Files:PrimaryLinkDeletedSuccessfully"));
+          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
       .catch((err) => toastr.error(err?.message))
@@ -70,7 +70,7 @@ const DeleteLinkDialogComponent = (props) => {
         <div className="modal-dialog-content-body">
           <Text noSelect>
             {link.sharedTo.primary
-              ? t("Files:DeletePrimaryLink")
+              ? t("Files:DeleteGeneralLink")
               : t("Files:DeleteLinkNote")}
           </Text>
         </div>

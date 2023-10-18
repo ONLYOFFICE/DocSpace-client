@@ -1363,7 +1363,8 @@ class FilesStore {
         filterData.total = newTotal;
 
         if (
-          data.current.roomType === RoomsType.PublicRoom &&
+          (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);

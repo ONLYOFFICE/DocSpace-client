@@ -71,7 +71,7 @@ const QuickButtons = (props) => {
     !isArchiveFolder;
 
   return (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeType.IconButton}

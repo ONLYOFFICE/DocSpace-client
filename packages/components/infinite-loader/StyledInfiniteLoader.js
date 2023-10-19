@@ -55,8 +55,7 @@ const rowStyles = css`
   }
 
   // !important styles override inline styles from react-virtualized
-  .row-list-item,
-  .row-loader {
+  .row-list-item {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" &&
       `left: unset !important;

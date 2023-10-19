@@ -181,8 +181,7 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badges {
-    margin-top: ${(props) =>
-      props.isSmallContainer ? "1px" : props.isRooms ? "4px" : "2px"};
+    margin-top: ${(props) => (props.isRooms ? "4px" : "2px")};
     margin-bottom: 0px;
   }
 
@@ -270,12 +269,20 @@ const StyledSimpleFilesRow = styled(Row)`
               margin-left: 8px;
             `}
     }
+    .room__badges:empty,
+    .file__badges:empty,
+    .folder__badges:empty,
+    .badges__quickButtons:empty {
+      display: none;
+    }
+
+    .badges,
+    .folder__badges,
     .room__badges,
     .file__badges {
       margin-top: 0px;
-    }
-    .folder__badges {
-      margin-top: 2px;
+      align-items: center;
+      height: 100%;
     }
   }
 `;

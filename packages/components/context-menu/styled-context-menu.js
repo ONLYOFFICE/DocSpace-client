@@ -24,6 +24,11 @@ const styledTabletView = css`
     `}
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   margin: ${(props) => props.theme.newContextMenu.devices.margin};
+
+  .scroller,
+  .scroll-wrapper {
+    overflow: unset !important;
+  }
 `;
 
 const styledMobileView = css`

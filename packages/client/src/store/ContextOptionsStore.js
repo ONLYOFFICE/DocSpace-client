@@ -224,12 +224,25 @@ class ContextOptionsStore {
   onMoveAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
+    const { getSelectedFolder } = this.selectedFolderStore;
+    const { setBufferSelection } = this.filesStore;
+    const selectedFolder = getSelectedFolder();
+
+    setBufferSelection(selectedFolder);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
+    const { getSelectedFolder } = this.selectedFolderStore;
+    const { setBufferSelection } = this.filesStore;
+
+    const selectedFolder = getSelectedFolder();
+
+    setBufferSelection(selectedFolder);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
@@ -592,65 +605,65 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onLoadLinks = async (t, item) => {
-    const promise = new Promise(async (resolve, reject) => {
-      let linksArray = [];
+  // onLoadLinks = async (t, item) => {
+  //   const promise = new Promise(async (resolve, reject) => {
+  //     let linksArray = [];
 
-      this.setLoaderTimer(true);
-      try {
-        const links = await this.publicRoomStore.fetchExternalLinks(item.id);
+  //     this.setLoaderTimer(true);
+  //     try {
+  //       const links = await this.publicRoomStore.fetchExternalLinks(item.id);
 
-        for (let link of links) {
-          const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
+  //       for (let link of links) {
+  //         const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
 
-          if (!disabled && !isExpired) {
-            linksArray.push({
-              icon: InvitationLinkReactSvgUrl,
-              id,
-              key: `external-link_${id}`,
-              label: title,
-              onClick: () => {
-                copy(shareLink);
-                toastr.success(t("Files:LinkSuccessfullyCopied"));
-              },
-            });
-          }
-        }
+  //         if (!disabled && !isExpired) {
+  //           linksArray.push({
+  //             icon: InvitationLinkReactSvgUrl,
+  //             id,
+  //             key: `external-link_${id}`,
+  //             label: title,
+  //             onClick: () => {
+  //               copy(shareLink);
+  //               toastr.success(t("Translations:LinkCopySuccess"));
+  //             },
+  //           });
+  //         }
+  //       }
 
-        if (!linksArray.length) {
-          linksArray = [
-            {
-              id: "no-external-links-option",
-              key: "no-external-links",
-              label: !links.length
-                ? t("Files:NoExternalLinks")
-                : t("Files:AllLinksAreDisabled"),
-              disableColor: true,
-            },
-            !isMobile && {
-              key: "separator0",
-              isSeparator: true,
-            },
-            {
-              icon: SettingsReactSvgUrl,
-              id: "manage-option",
-              key: "manage-links",
-              label: t("Notifications:ManageNotifications"),
-              onClick: () => this.onShowInfoPanel(item, "info_members"),
-            },
-          ];
-        }
+  //       if (!linksArray.length) {
+  //         linksArray = [
+  //           {
+  //             id: "no-external-links-option",
+  //             key: "no-external-links",
+  //             label: !links.length
+  //               ? t("Files:NoExternalLinks")
+  //               : t("Files:AllLinksAreDisabled"),
+  //             disableColor: true,
+  //           },
+  //           !isMobile && {
+  //             key: "separator0",
+  //             isSeparator: true,
+  //           },
+  //           {
+  //             icon: SettingsReactSvgUrl,
+  //             id: "manage-option",
+  //             key: "manage-links",
+  //             label: t("Notifications:ManageNotifications"),
+  //             onClick: () => this.onShowInfoPanel(item, "info_members"),
+  //           },
+  //         ];
+  //       }
 
-        this.setLoaderTimer(false, () => resolve(linksArray));
-      } catch (error) {
-        toastr.error(error);
-        this.setLoaderTimer(false);
-        return reject(linksArray);
-      }
-    });
+  //       this.setLoaderTimer(false, () => resolve(linksArray));
+  //     } catch (error) {
+  //       toastr.error(error);
+  //       this.setLoaderTimer(false);
+  //       return reject(linksArray);
+  //     }
+  //   });
 
-    return promise;
-  };
+  //   return promise;
+  // };
 
   onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
@@ -1136,18 +1149,36 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          (item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+          !this.treeFoldersStore.isArchiveFolder,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("SharingPanel:CopyExternalLink"),
+        label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
-        onLoad: () => this.onLoadLinks(t, item),
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
+        onClick: async () => {
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+            this.publicRoomStore.setExternalLink(primaryLink);
+          }
+        },
+        // onLoad: () => this.onLoadLinks(t, item),
       },
       {
         id: "option_room-info",

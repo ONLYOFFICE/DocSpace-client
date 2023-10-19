@@ -20,7 +20,7 @@ const PublicRoomBar = (props) => {
             {headerText}
           </Text>
         </div>
-        <Text className="text-container_body" fontWeight={400}>
+        <Text className="text-container_body" fontSize="12px" fontWeight={400}>
           {bodyText}
         </Text>
       </div>

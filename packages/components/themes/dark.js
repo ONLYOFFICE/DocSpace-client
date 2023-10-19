@@ -2017,6 +2017,7 @@ const Dark = {
     links: {
       iconColor: "#858585",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#ADADAD",
     },
 
     members: {
@@ -2068,6 +2069,10 @@ const Dark = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: "#DDDDDD",
+    },
+    devTools: {
+      border: "1px solid #474747",
+      color: "#858585",
     },
   },
 

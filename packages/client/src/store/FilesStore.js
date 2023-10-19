@@ -1349,10 +1349,22 @@ class FilesStore {
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
-        filterData.total = data.total;
+        let newTotal = data.total;
+
+        // fixed row loader if total and items length is different
+        const itemsLength = data.folders.length + data.files.length;
+        if (itemsLength < filterData.pageCount) {
+          newTotal =
+            filterData.page > 0
+              ? itemsLength + this.files.length + this.folders.length
+              : itemsLength;
+        }
+
+        filterData.total = newTotal;
 
         if (
-          data.current.roomType === RoomsType.PublicRoom &&
+          (data.current.roomType === RoomsType.PublicRoom ||
+            data.current.roomType === RoomsType.CustomRoom) &&
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
@@ -1450,10 +1462,10 @@ class FilesStore {
         }
 
         const navigationPath = await Promise.all(
-          data.pathParts.map(async (folder) => {
+          data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
 
-            let folderId = folder;
+            let folderId = folder.id;
 
             if (
               data.current.providerKey &&
@@ -1463,26 +1475,28 @@ class FilesStore {
               folderId = this.treeFoldersStore.myRoomsId;
             }
 
-            const folderInfo =
-              data.current.id === folderId
-                ? data.current
-                : await api.files.getFolderInfo(folderId);
+            const isCurrentFolder = data.current.id === folderId;
 
-            const {
-              id,
-              title,
-              roomType,
-              rootFolderId,
-              rootFolderType,
-              parentId,
-              mute,
-            } = folderInfo;
+            const folderInfo = isCurrentFolder
+              ? data.current
+              : { ...folder, id: folderId };
+
+            const { title, roomType } = folderInfo;
 
             const isRootRoom =
-              rootFolderId === id &&
-              (rootFolderType === Rooms || rootFolderType === Archive);
+              idx === 0 &&
+              (data.current.rootFolderType === Rooms ||
+                data.current.rootFolderType === Archive);
 
-            if (parentId === rootFolderId) {
+            if (idx === 1) {
+              let room = data.current;
+
+              if (!isCurrentFolder) {
+                room = await api.files.getFolderInfo(folderId);
+              }
+
+              const { mute } = room;
+
               runInAction(() => {
                 this.isMuteCurrentRoomNotifications = mute;
               });
@@ -1498,7 +1512,9 @@ class FilesStore {
           })
         ).then((res) => {
           return res
-            .filter((item, index) => index !== res.length - 1)
+            .filter((item, index) => {
+              return index !== res.length - 1;
+            })
             .reverse();
         });
 
@@ -1506,7 +1522,7 @@ class FilesStore {
           folders: data.folders,
           ...data.current,
           pathParts: data.pathParts,
-          navigationPath: navigationPath,
+          navigationPath,
           ...{ new: data.new },
         });
 
@@ -2143,7 +2159,10 @@ class FilesStore {
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
 
-      const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+      const isPublicRoomType =
+        item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.CustomRoom;
+      const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
       let roomOptions = [
         "select",
@@ -2243,7 +2262,7 @@ class FilesStore {
         }
       }
 
-      if (!isPublicRoomType || fromInfoPanel) {
+      if (fromInfoPanel) {
         roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 
@@ -2812,7 +2831,7 @@ class FilesStore {
       this.treeFoldersStore.commonFolder &&
       this.selectedFolderStore.pathParts &&
       this.treeFoldersStore.commonFolder.id ===
-        this.selectedFolderStore.pathParts[0]
+        this.selectedFolderStore.pathParts[0].id
     );
   }
 
@@ -3883,6 +3902,23 @@ class FilesStore {
     this.hotkeysClipboard = hotkeysClipboard
       ? hotkeysClipboard
       : this.selection;
+  };
+
+  getPrimaryLink = async (roomId) => {
+    const link = await api.rooms.getPrimaryLink(roomId);
+    if (link) {
+      this.setRoomShared(roomId, true);
+    }
+
+    return link;
+  };
+
+  setRoomShared = (roomId, shared) => {
+    const roomIndex = this.folders.findIndex((r) => r.id === roomId);
+
+    if (roomIndex !== -1) {
+      this.folders[roomIndex].shared = shared;
+    }
   };
 
   get isFiltered() {

@@ -342,7 +342,7 @@ export default inject(
       mediaViewerDataStore;
     const { getIcon, getFolderIcon } = settingsStore;
     const { markAsRead } = filesActionsStore;
-    const { pathParts, id: currentFolderId } = selectedFolderStore;
+    const { id: currentFolderId } = selectedFolderStore;
 
     const {
       setNewFilesPanelVisible,
@@ -352,7 +352,6 @@ export default inject(
     } = dialogsStore;
 
     return {
-      pathParts,
       visible,
       newFiles,
       newFilesIds,

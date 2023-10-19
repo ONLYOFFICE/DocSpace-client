@@ -58,6 +58,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   } = rest;
 
   useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname)) {
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+    }
+  }, []);
+
+  useEffect(() => {
     try {
       loadBaseInfo();
     } catch (err) {

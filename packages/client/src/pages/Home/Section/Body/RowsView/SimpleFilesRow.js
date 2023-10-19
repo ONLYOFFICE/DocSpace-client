@@ -172,10 +172,10 @@ const StyledSimpleFilesRow = styled(Row)`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-left: 0px;
+            margin-left: 24px;
           `
         : css`
-            margin-right: 0px;
+            margin-right: 24px;
           `}
   }
 
@@ -206,14 +206,6 @@ const StyledSimpleFilesRow = styled(Row)`
     margin-top: ${(props) =>
       props.isSmallContainer ? "1px" : props.isRooms ? "4px" : "2px"};
     margin-bottom: 0px;
-
-    ${(props) =>
-      props.isSmallContainer &&
-      css`
-        .tablet-pinned {
-          margin-top: 2px;
-        }
-      `}
   }
 
   .temp-badges {
@@ -268,15 +260,29 @@ const StyledSimpleFilesRow = styled(Row)`
   @media ${mobile} {
     .badges {
       margin-top: 0px;
-      gap: 8px;
+      height: 100%;
+
+      .tablet-pinned {
+        margin-top: 2px;
+      }
+
+      :has(> :not(.additional-badges)) {
+        gap: 8px;
+      }
     }
 
     .badge {
       margin: 0 2px;
     }
     .additional-badges {
-      margin-right: 8px;
       margin-top: 1px;
+      gap: 8px;
+      :not(:empty) {
+        margin-right: 8px;
+      }
+      :first-child {
+        margin-right: 16px;
+      }
     }
   }
 `;

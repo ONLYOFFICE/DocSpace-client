@@ -67,6 +67,18 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: max-content;
   }
 
+  .row-content-link {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 12px 0px 0px 12px;
+          `
+        : css`
+            padding: 12px 12px 0px 0px;
+          `}
+    margin-top: -12px;
+  }
+
   @media ${tablet} {
     .row-main-container-wrapper {
       display: flex;
@@ -137,18 +149,10 @@ const SimpleFilesRowContent = styled(RowContent)`
     .can-convert {
       margin: 0 1px;
     }
-  }
 
-  .row-content-link {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 0px 12px;
-          `
-        : css`
-            padding: 12px 12px 0px 0px;
-          `}
-    margin-top: -12px;
+    .row-content-link {
+      padding: 12px 0px 0px 0px;
+    }
   }
 `;
 

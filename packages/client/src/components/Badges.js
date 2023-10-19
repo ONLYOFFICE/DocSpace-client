@@ -15,6 +15,7 @@ import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import { isTablet } from "@docspace/components/utils/device";
+import { classNames } from "@docspace/components/utils/classNames";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -87,6 +88,7 @@ const Badges = ({
     isEditing,
     isRoom,
     pinned,
+    isFolder,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -155,7 +157,7 @@ const Badges = ({
     !isArchiveFolder;
 
   return fileExst ? (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges file__badges">
       {isEditing && !isVisitor && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -207,7 +209,12 @@ const Badges = ({
       )}
     </div>
   ) : (
-    <>
+    <div
+      className={classNames("badges", {
+        ["folder__badges"]: isFolder && !isRoom,
+        ["room__badges"]: isRoom,
+      })}
+    >
       {showCopyLinkIcon && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -237,7 +244,7 @@ const Badges = ({
           onClick={onBadgeClick}
         />
       )}
-    </>
+    </div>
   );
 };
 

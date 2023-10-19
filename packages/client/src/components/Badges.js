@@ -2,6 +2,7 @@
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -9,7 +10,7 @@ import Badge from "@docspace/components/badge";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus, RoomsType } from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
@@ -47,7 +48,8 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
     <StyledWrapper
       onClick={onClick}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}>
+      onMouseLeave={onMouseLeave}
+    >
       {newBadge}
     </StyledWrapper>
   );
@@ -73,6 +75,8 @@ const Badges = ({
   isMutedBadge,
   isArchiveFolderRoot,
   isVisitor,
+  onCopyPrimaryLink,
+  isArchiveFolder,
 }) => {
   const {
     id,
@@ -144,6 +148,12 @@ const Badges = ({
     ? { onClick: onShowVersionHistory }
     : {};
 
+  const showCopyLinkIcon =
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom) &&
+    item.shared &&
+    !isArchiveFolder;
+
   return fileExst ? (
     <div className="badges additional-badges">
       {isEditing && !isVisitor && (
@@ -198,6 +208,17 @@ const Badges = ({
     </div>
   ) : (
     <>
+      {showCopyLinkIcon && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge row-copy-link icons-group tablet-badge"
+          size={sizeBadge}
+          onClick={onCopyPrimaryLink}
+          title={t("Files:CopyPrimaryLink")}
+        />
+      )}
+
       {isRoom && pinned && (
         <ColorTheme
           themeId={ThemeType.IconButtonPin}

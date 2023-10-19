@@ -11,7 +11,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
 import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { classNames } from "@docspace/components/utils/classNames";
 const checkedStyle = css`
@@ -183,6 +183,26 @@ const StyledSimpleFilesRow = styled(Row)`
     cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
     svg {
       height: 12px;
+    }
+  }
+
+  @media ${tablet} {
+    .tablet-row-copy-link {
+      display: block;
+    }
+
+    .row-copy-link {
+      display: none;
+    }
+  }
+
+  @media ${mobile} {
+    .tablet-row-copy-link {
+      display: none;
+    }
+
+    .row-copy-link {
+      display: block;
     }
   }
 

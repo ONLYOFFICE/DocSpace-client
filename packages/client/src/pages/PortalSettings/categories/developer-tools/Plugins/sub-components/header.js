@@ -30,7 +30,7 @@ const StyledHeader = styled.div`
   }
 `;
 
-const Header = ({ t, currentColorScheme, learnMoreLink }) => {
+const Header = ({ t, currentColorScheme, withUpload, learnMoreLink }) => {
   return (
     <StyledHeader>
       <div className="header-container">
@@ -45,7 +45,7 @@ const Header = ({ t, currentColorScheme, learnMoreLink }) => {
       </div>
       <div>
         <Text>
-          {t("Description")}{" "}
+          {withUpload && t("Description")}{" "}
           <Link
             color={currentColorScheme?.main?.accent}
             type={"page"}

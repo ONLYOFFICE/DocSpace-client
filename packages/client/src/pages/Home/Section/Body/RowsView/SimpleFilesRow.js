@@ -164,6 +164,26 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 
+  @media ${tablet} {
+    .tablet-row-copy-link {
+      display: block;
+    }
+
+    .row-copy-link {
+      display: none;
+    }
+  }
+
+  @media ${mobile} {
+    .tablet-row-copy-link {
+      display: none;
+    }
+
+    .row-copy-link {
+      display: block;
+    }
+  }
+
   .favorite {
     cursor: pointer;
     margin-top: 1px;

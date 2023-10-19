@@ -68,7 +68,8 @@ const QuickButtons = (props) => {
     (item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom) &&
     item.shared &&
-    !isArchiveFolder;
+    !isArchiveFolder &&
+    !isTile;
 
   return (
     <div className="badges additional-badges  badges__quickButtons">

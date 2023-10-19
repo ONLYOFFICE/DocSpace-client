@@ -157,28 +157,6 @@ const StyledSimpleFilesRow = styled(Row)`
     margin-bottom: 26px;
   }
 
-  .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
-  }
-
-  .badge:first-child {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
-  }
-
   .lock-file {
     cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
     svg {
@@ -212,19 +190,6 @@ const StyledSimpleFilesRow = styled(Row)`
     margin-top: 0px;
   }
 
-  .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: ${(props) =>
-              props.isSmallContainer ? "8px" : "24px"};
-          `
-        : css`
-            margin-right: ${(props) =>
-              props.isSmallContainer ? "8px" : "24px"};
-          `}
-  }
-
   .lock-file {
     svg {
       height: 16px;
@@ -235,10 +200,12 @@ const StyledSimpleFilesRow = styled(Row)`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: ${(props) => (!props.folderCategory ? "6px" : "0")};
+            margin-right: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
           `
         : css`
-            margin-left: ${(props) => (!props.folderCategory ? "6px" : "0")};
+            margin-left: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
           `}
     padding-top: 0px;
   }
@@ -257,32 +224,58 @@ const StyledSimpleFilesRow = styled(Row)`
       `}
   }
 
+  @media ${tablet} {
+    .badges {
+      gap: 24px;
+    }
+
+    .badges__quickButtons:not(:empty) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 24px;
+            `
+          : css`
+              margin-left: 24px;
+            `}
+    }
+
+    .file__badges {
+      > div {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .folder__badges {
+      margin-top: 4px;
+    }
+    .room__badges {
+      margin-top: 2px;
+    }
+  }
+
   @media ${mobile} {
     .badges {
-      margin-top: 0px;
-      height: 100%;
-
-      .tablet-pinned {
-        margin-top: 2px;
-      }
-
-      :has(> :not(.additional-badges)) {
-        gap: 8px;
-      }
-    }
-
-    .badge {
-      margin: 0 2px;
-    }
-    .additional-badges {
-      margin-top: 1px;
       gap: 8px;
-      :not(:empty) {
-        margin-right: 8px;
-      }
-      :first-child {
-        margin-right: 16px;
-      }
+    }
+
+    .badges__quickButtons:not(:empty) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
+    }
+    .room__badges,
+    .file__badges {
+      margin-top: 0px;
+    }
+    .folder__badges {
+      margin-top: 2px;
     }
   }
 `;

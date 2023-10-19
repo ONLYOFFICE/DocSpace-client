@@ -26,6 +26,7 @@ const EmptyFolderWrapper = styled.div`
 
     .second-description {
       margin: 32px 0 24px;
+      text-align: center;
     }
 
     .empty-folder_container-image {

@@ -265,7 +265,7 @@ const FilesRowContent = ({
         >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobile()
+            : !fileExst && !contentLength && !providerKey
             ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
                 "Translations:Files"
               )}`

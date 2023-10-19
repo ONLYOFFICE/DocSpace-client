@@ -168,14 +168,14 @@ const StyledSimpleFilesRow = styled(Row)`
           `}
   }
 
-  .badge:last-child {
+  .badge:first-child {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-left: 24px;
+            margin-left: 8px;
           `
         : css`
-            margin-right: 24px;
+            margin-right: 8px;
           `}
   }
 

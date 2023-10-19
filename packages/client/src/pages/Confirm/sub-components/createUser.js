@@ -566,6 +566,7 @@ const CreateUserForm = (props) => {
                         isDisabled={isLoading}
                         onChange={onChangeFname}
                         onKeyDown={onKeyPress}
+                        maxLength={40}
                       />
                     </FieldContainer>
 
@@ -591,6 +592,7 @@ const CreateUserForm = (props) => {
                         isDisabled={isLoading}
                         onChange={onChangeSname}
                         onKeyDown={onKeyPress}
+                        maxLength={40}
                       />
                     </FieldContainer>
 

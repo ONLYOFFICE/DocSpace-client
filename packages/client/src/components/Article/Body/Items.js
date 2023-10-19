@@ -269,7 +269,8 @@ const Items = ({
       if (isAdmin) {
         if (
           (item.pathParts &&
-            (item.pathParts[0] === myId || item.pathParts[0] === commonId)) ||
+            (item.pathParts[0].id === myId ||
+              item.pathParts[0].id === commonId)) ||
           item.rootFolderType === FolderType.USER ||
           item.rootFolderType === FolderType.COMMON ||
           (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
@@ -278,7 +279,7 @@ const Items = ({
         }
       } else {
         if (
-          (item.pathParts && item.pathParts[0] === myId) ||
+          (item.pathParts && item.pathParts[0].id === myId) ||
           item.rootFolderType === FolderType.USER
         ) {
           return true;

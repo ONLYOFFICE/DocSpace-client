@@ -41,6 +41,13 @@ const TimeInput = styled.div`
   input:last-of-type {
     text-align: end;
   }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
 `;
 
 TimeInput.defaultProps = { theme: Base };
@@ -193,6 +200,8 @@ const TimePicker = ({
 
   const focusInput = () => setIsInputFocused(true);
 
+  const preventDefaultContext = (e) => e.preventDefault();
+
   return (
     <TimeInput
       onClick={focusHoursInput}
@@ -210,6 +219,10 @@ const TimePicker = ({
         onBlur={onHoursBlur}
         tabIndex={tabIndex}
         onFocus={focusInput}
+        type="search"
+        onContextMenu={preventDefaultContext}
+        autocomplete="off"
+        inputmode="numeric"
       />
       :
       <TextInput
@@ -221,6 +234,10 @@ const TimePicker = ({
         onClick={focusMinutesInput}
         onBlur={onMinutesBlur}
         onFocus={focusInput}
+        type="search"
+        onContextMenu={preventDefaultContext}
+        autocomplete="off"
+        inputmode="numeric"
       />
     </TimeInput>
   );

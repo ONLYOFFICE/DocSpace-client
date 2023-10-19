@@ -388,6 +388,10 @@ const StyledBadgesContainer = styled.div`
     margin: 0 -2px -2px -2px;
   }
 
+  .row-copy-link {
+    display: none;
+  }
+
   .badge-version {
     width: max-content;
     ${props =>

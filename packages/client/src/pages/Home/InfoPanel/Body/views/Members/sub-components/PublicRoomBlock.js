@@ -44,7 +44,7 @@ const PublicRoomBlock = (props) => {
       getPrimaryLink(roomId).then((link) => {
         setExternalLink(link);
         copy(link.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
       });
     }
   };
@@ -62,7 +62,7 @@ const PublicRoomBlock = (props) => {
           {(!isArchiveFolder || primaryLink) && (
             <LinksBlock>
               <Text fontSize="14px" fontWeight={600}>
-                {t("Files:PrimaryLink")}
+                {t("Files:GeneralLink")}
               </Text>
             </LinksBlock>
           )}
@@ -150,19 +150,20 @@ const PublicRoomBlock = (props) => {
   );
 };
 
-export default inject(({ publicRoomStore, treeFoldersStore, dialogsStore }) => {
-  const { primaryLink, additionalLinks, getPrimaryLink, setExternalLink } =
-    publicRoomStore;
-  const { isArchiveFolder } = treeFoldersStore;
-  const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+export default inject(
+  ({ publicRoomStore, treeFoldersStore, dialogsStore, filesStore }) => {
+    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { isArchiveFolder } = treeFoldersStore;
+    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
-  return {
-    externalLinks: additionalLinks,
-    isArchiveFolder,
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    primaryLink,
-    getPrimaryLink,
-    setExternalLink,
-  };
-})(observer(PublicRoomBlock));
+    return {
+      externalLinks: additionalLinks,
+      isArchiveFolder,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      primaryLink,
+      getPrimaryLink: filesStore.getPrimaryLink,
+      setExternalLink,
+    };
+  }
+)(observer(PublicRoomBlock));

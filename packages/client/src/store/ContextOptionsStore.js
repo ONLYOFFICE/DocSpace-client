@@ -225,11 +225,6 @@ class ContextOptionsStore {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
 
-    const { getSelectedFolder } = this.selectedFolderStore;
-    const { setBufferSelection } = this.filesStore;
-    const selectedFolder = getSelectedFolder();
-
-    setBufferSelection(selectedFolder);
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
@@ -237,12 +232,6 @@ class ContextOptionsStore {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
 
-    const { getSelectedFolder } = this.selectedFolderStore;
-    const { setBufferSelection } = this.filesStore;
-
-    const selectedFolder = getSelectedFolder();
-
-    setBufferSelection(selectedFolder);
     this.dialogsStore.setCopyPanelVisible(true);
   };
 

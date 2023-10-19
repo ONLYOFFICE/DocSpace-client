@@ -364,6 +364,7 @@ class PasswordInput extends React.Component {
       maxLength,
       id,
       autoComplete,
+      forwardedRef,
     } = this.props;
 
     const { type, inputValue } = this.state;
@@ -396,6 +397,7 @@ class PasswordInput extends React.Component {
           tabIndex={tabIndex}
           maxLength={maxLength}
           autoComplete={autoComplete}
+          forwardedRef={forwardedRef}
         ></InputBlock>
 
         <Tooltip

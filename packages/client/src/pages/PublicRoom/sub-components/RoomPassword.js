@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import PasswordInput from "@docspace/components/password-input";
@@ -22,6 +22,14 @@ const RoomPassword = (props) => {
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -129,6 +137,7 @@ const RoomPassword = (props) => {
                   onKeyDown={onKeyPress}
                   isDisabled={isLoading}
                   isDisableTooltip
+                  forwardedRef={inputRef}
                 />
               </FieldContainer>
             </div>

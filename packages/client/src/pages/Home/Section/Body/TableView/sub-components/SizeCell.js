@@ -2,14 +2,9 @@ import React from "react";
 import { StyledText } from "./CellStyles";
 
 const SizeCell = ({ t, item, sideColor }) => {
-  const {
-    fileExst,
-    contentLength,
-    providerKey,
-    filesCount,
-    foldersCount,
-  } = item;
-  const date = fileExst || contentLength ? contentLength : "—";
+  const { fileExst, contentLength, providerKey, filesCount, foldersCount } =
+    item;
+  const date = fileExst || contentLength ? contentLength : "";
 
   return (
     <StyledText

@@ -56,8 +56,6 @@ export const LoginFormWrapper = styled.div`
 `;
 
 export const LoginContent = styled.div`
-  min-height: ${(props: ILoginContentProps) =>
-    props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
   flex: 1 0 auto;
   flex-direction: column;
   display: flex;
@@ -69,7 +67,6 @@ export const LoginContent = styled.div`
 
   @media ${mobile} {
     width: 100%;
-    min-height: 100%;
     justify-content: start;
   }
 `;

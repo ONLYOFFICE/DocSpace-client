@@ -2,74 +2,36 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "../utils/device";
 import NoUserSelect from "../utils/commonStyles";
 
-const MobileView = css`
-  grid-template-areas:
-    "img img img"
-    "headerText headerText headerText"
-    ${(props) =>
-      props.subheadingText && `"subheadingText subheadingText subheadingText"`}
-    ${(props) =>
-      props.descriptionText &&
-      `"descriptionText descriptionText descriptionText"`}
-    "button button button";
-
-  padding-left: 28px;
-  padding-right: 28px;
-  max-width: 100%;
-  margin: 0;
-
-  .ec-header {
-    padding-top: 24px;
-  }
-
-  .ec-image {
-    height: 75px;
-    width: 75px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? "margin-right: 0;"
-        : "margin-left: 0;"}
-  }
-
-  .ec-buttons {
-    max-width: 274px;
-  }
-`;
-
 const EmptyContentBody = styled.div`
   margin: 0 auto;
-
   padding-top: 80px;
-
-  grid-template-columns: 100px 1fr;
-
+  grid-template-columns: 1fr;
   display: grid;
+
   grid-template-areas:
-    "img headerText"
-    ${(props) => props.subheadingText && `"img subheadingText"`}
-    ${(props) => props.descriptionText && `"img descriptionText"`}
-    "img button";
+    "img"
+    "headerText"
+    ${(props) => props.subheadingText && `"subheadingText"`}
+    ${(props) => props.descriptionText && `"descriptionText"`}
+    "button";
 
-  grid-column-gap: 40px;
-  grid-row-gap: 10px;
-  max-width: 800px;
-
+  gap: 0px;
+  max-width: 640px;
+  width: fit-content;
   grid-template-rows: max-content;
+  justify-items: center;
 
   .ec-image {
     grid-area: img;
-    margin: 16px 0 0 auto;
     height: 100px;
     width: 100px;
+    margin-bottom: 32px;
     ${NoUserSelect}
   }
 
   .ec-header {
     grid-area: headerText;
     font-size: 16px;
-    padding-top: 16px;
-
     color: ${(props) => props.theme.emptyContent.header.color};
   }
 
@@ -80,13 +42,19 @@ const EmptyContentBody = styled.div`
   .ec-desc {
     grid-area: descriptionText;
     line-height: 18px;
-    margin-top: 2px;
-
+    margin-top: 8px;
     color: ${(props) => props.theme.emptyContent.description.color};
+    text-align: center;
   }
 
   .ec-buttons {
     grid-area: button;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+
     svg {
       path {
         fill: ${(props) => props.theme.emptyContent.button.colorLink};
@@ -102,14 +70,23 @@ const EmptyContentBody = styled.div`
   }
 
   @media ${tablet} {
-    grid-column-gap: 32px;
     max-width: 480px;
   }
 
   @media ${mobile} {
     padding-top: 40px;
+    max-width: 343px;
+    padding-left: 28px;
+    padding-right: 28px;
 
-    ${MobileView}
+    .ec-image {
+      height: 75px;
+      width: 75px;
+    }
+
+    .ec-buttons {
+      max-width: 274px;
+    }
   }
 `;
 

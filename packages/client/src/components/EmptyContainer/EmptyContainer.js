@@ -8,7 +8,6 @@ const EmptyFolderWrapper = styled.div`
   .empty-folder_container {
     .empty-folder_container-links {
       display: grid;
-      margin: 16px 0;
       grid-template-columns: 12px 1fr;
       grid-column-gap: 8px;
 
@@ -17,6 +16,7 @@ const EmptyFolderWrapper = styled.div`
         flex-wrap: wrap;
         row-gap: 16px;
         column-gap: 8px;
+        justify-content: center;
       }
     }
 
@@ -25,7 +25,7 @@ const EmptyFolderWrapper = styled.div`
     }
 
     .second-description {
-      margin: 32px 0 26px;
+      margin: 32px 0 24px;
     }
 
     .empty-folder_container-image {
@@ -59,7 +59,6 @@ const EmptyFoldersContainer = (props) => {
     subheadingText,
     descriptionText,
     buttons,
-    style,
     imageStyle,
     buttonStyle,
     isEmptyPage,

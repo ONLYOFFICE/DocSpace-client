@@ -116,7 +116,7 @@ const EditLinkPanel = (props) => {
         } else {
           copy(link?.sharedTo?.shareLink);
 
-          toastr.success(t("Files:LinkCreatedSuccessfully"));
+          toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
       })
       .catch((err) => toastr.error(err?.message))
@@ -131,6 +131,7 @@ const EditLinkPanel = (props) => {
     expirationDate: date,
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
+    linkNameValue: link?.sharedTo?.title || "",
   };
 
   useEffect(() => {
@@ -139,6 +140,7 @@ const EditLinkPanel = (props) => {
       expirationDate,
       passwordAccessIsChecked,
       denyDownload,
+      linkNameValue,
     };
 
     if (!isEqual(data, initState)) {
@@ -187,7 +189,7 @@ const EditLinkPanel = (props) => {
           <Heading className="edit-link_heading">
             {isEdit
               ? isPrimary
-                ? t("Files:EditPrimaryLink")
+                ? t("Files:EditGeneralLink")
                 : isPublic
                 ? t("Files:EditAdditionalLink")
                 : t("Files:EditLink")

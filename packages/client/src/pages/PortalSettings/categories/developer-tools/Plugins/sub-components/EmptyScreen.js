@@ -27,7 +27,7 @@ const EmptyScreen = ({
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {t("Description")}{" "}
+          {withUpload && t("Description")}
           <Link
             color={currentColorScheme?.main?.accent}
             type={"page"}

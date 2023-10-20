@@ -11,7 +11,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
 import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { classNames } from "@docspace/components/utils/classNames";
 const checkedStyle = css`
@@ -157,32 +157,30 @@ const StyledSimpleFilesRow = styled(Row)`
     margin-bottom: 26px;
   }
 
-  .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
-  }
-
-  .badge:last-child {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
-  }
-
   .lock-file {
     cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
     svg {
       height: 12px;
+    }
+  }
+
+  @media ${tablet} {
+    .tablet-row-copy-link {
+      display: block;
+    }
+
+    .row-copy-link {
+      display: none;
+    }
+  }
+
+  @media ${mobile} {
+    .tablet-row-copy-link {
+      display: none;
+    }
+
+    .row-copy-link {
+      display: block;
     }
   }
 
@@ -203,34 +201,12 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badges {
-    margin-top: ${(props) =>
-      props.isSmallContainer ? "1px" : props.isRooms ? "4px" : "2px"};
+    margin-top: ${(props) => (props.isRooms ? "4px" : "2px")};
     margin-bottom: 0px;
-
-    ${(props) =>
-      props.isSmallContainer &&
-      css`
-        .tablet-pinned {
-          margin-top: 2px;
-        }
-      `}
   }
 
   .temp-badges {
     margin-top: 0px;
-  }
-
-  .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: ${(props) =>
-              props.isSmallContainer ? "8px" : "24px"};
-          `
-        : css`
-            margin-right: ${(props) =>
-              props.isSmallContainer ? "8px" : "24px"};
-          `}
   }
 
   .lock-file {
@@ -243,10 +219,12 @@ const StyledSimpleFilesRow = styled(Row)`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: ${(props) => (!props.folderCategory ? "6px" : "0")};
+            margin-right: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
           `
         : css`
-            margin-left: ${(props) => (!props.folderCategory ? "6px" : "0")};
+            margin-left: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
           `}
     padding-top: 0px;
   }
@@ -263,6 +241,69 @@ const StyledSimpleFilesRow = styled(Row)`
                 padding-left: 0 !important;
               `}
       `}
+  }
+
+  @media ${tablet} {
+    .badges {
+      gap: 24px;
+    }
+
+    .badges__quickButtons:not(:empty) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 24px;
+            `
+          : css`
+              margin-left: 24px;
+            `}
+    }
+
+    .file__badges {
+      > div {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .folder__badges {
+      margin-top: 4px;
+    }
+    .room__badges {
+      margin-top: 2px;
+    }
+  }
+
+  @media ${mobile} {
+    .badges {
+      gap: 8px;
+    }
+
+    .badges__quickButtons:not(:empty) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
+    }
+    .room__badges:empty,
+    .file__badges:empty,
+    .folder__badges:empty,
+    .badges__quickButtons:empty {
+      display: none;
+    }
+
+    .badges,
+    .folder__badges,
+    .room__badges,
+    .file__badges {
+      margin-top: 0px;
+      align-items: center;
+      height: 100%;
+    }
   }
 `;
 

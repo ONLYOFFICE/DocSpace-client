@@ -68,7 +68,7 @@ export const getPDFContextModel = (
     {
       id: "option_link-for-room-members",
       key: "link-for-room-members",
-      label: t("Files:CopyPrimaryLink"),
+      label: t("Files:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink(item, t),
       disabled: false,

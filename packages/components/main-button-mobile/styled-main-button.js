@@ -172,6 +172,10 @@ StyledDropDown.defaultProps = { theme: Base };
 
 const StyledDropDownItem = styled(DropDownItem)`
   padding: 6px 23px;
+
+  .drop-down-icon {
+    height: 22px;
+  }
 `;
 
 const StyledButtonOptions = styled.div`

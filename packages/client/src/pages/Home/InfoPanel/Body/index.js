@@ -120,7 +120,7 @@ const InfoPanelBodyContent = ({
     const currentFolderRoomId =
       selectedFolder?.pathParts &&
       selectedFolder?.pathParts?.length > 1 &&
-      selectedFolder.pathParts[1];
+      selectedFolder.pathParts[1].id;
 
     const storeRoomId = selectionParentRoom?.id;
     if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;

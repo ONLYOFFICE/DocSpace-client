@@ -2073,6 +2073,10 @@ const Base = {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
     },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
+    },
   },
 
   peopleArticleBody: {

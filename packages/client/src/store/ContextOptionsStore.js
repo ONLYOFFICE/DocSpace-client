@@ -229,12 +229,14 @@ class ContextOptionsStore {
   onMoveAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
@@ -616,7 +618,7 @@ class ContextOptionsStore {
   //             label: title,
   //             onClick: () => {
   //               copy(shareLink);
-  //               toastr.success(t("Files:LinkSuccessfullyCopied"));
+  //               toastr.success(t("Translations:LinkCopySuccess"));
   //             },
   //           });
   //         }
@@ -656,6 +658,58 @@ class ContextOptionsStore {
 
   //   return promise;
   // };
+
+  onLoadPlugins = (item) => {
+    const { contextOptions } = item;
+    const { enablePlugins } = this.authStore.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        if (contextOptions.includes(option.key)) {
+          const value = option.value;
+
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
+
+              setActiveFiles([item.id]);
+
+              await value.onClick(item.id);
+
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
+            }
+          };
+
+          if (value.fileExt) {
+            if (value.fileExt.includes(item.fileExst)) {
+              pluginItems.push({
+                key: option.key,
+                label: value.label,
+                icon: value.icon,
+                onClick,
+              });
+            }
+          } else {
+            pluginItems.push({
+              key: option.key,
+              label: value.label,
+              icon: value.icon,
+              onClick,
+            });
+          }
+        }
+      });
+    }
+
+    this.setLoaderTimer(false);
+
+    return pluginItems;
+  };
 
   onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
@@ -902,8 +956,6 @@ class ContextOptionsStore {
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
 
-    const { enablePlugins } = this.authStore.settingsStore;
-
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
@@ -1066,48 +1118,6 @@ class ContextOptionsStore {
 
     const withOpen = item.id !== this.selectedFolderStore.id;
 
-    const pluginItems = [];
-
-    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
-      this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
-
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
-
-              setActiveFiles([item.id]);
-
-              await value.onClick(item.id);
-
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
-              label: value.label,
-              icon: value.icon,
-              onClick,
-            });
-          }
-        }
-      });
-    }
-
     const optionsModel = [
       {
         id: "option_select",
@@ -1216,26 +1226,33 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.CustomRoom,
+          (item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+          !this.treeFoldersStore.isArchiveFolder,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
         onClick: async () => {
-          const primaryLink = await this.publicRoomStore.getPrimaryLink(
-            item.id
-          );
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
           if (primaryLink) {
             copy(primaryLink.sharedTo.shareLink);
-            toastr.success(t("Files:LinkSuccessfullyCopied"));
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+            this.publicRoomStore.setExternalLink(primaryLink);
           }
         },
         // onLoad: () => this.onLoadLinks(t, item),
@@ -1441,6 +1458,8 @@ class ContextOptionsStore {
 
     const options = this.filterModel(optionsModel, contextOptions);
 
+    const pluginItems = this.onLoadPlugins(item);
+
     if (pluginItems.length > 0) {
       options.splice(1, 0, {
         id: "option_plugin-actions",
@@ -1448,10 +1467,10 @@ class ContextOptionsStore {
         label: t("Common:Actions"),
         icon: PluginActionsSvgUrl,
         disabled: false,
-        items: pluginItems,
+
+        onLoad: () => this.onLoadPlugins(item),
       });
     }
-
     return options;
   };
 

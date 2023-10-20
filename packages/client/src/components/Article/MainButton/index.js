@@ -428,10 +428,18 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
-    const menuModel = [...actions];
-
     if (pluginItems.length > 0) {
-      menuModel.push({
+      // menuModel.push({
+      //   id: "actions_more-plugins",
+      //   className: "main-button_drop-down",
+      //   icon: PluginMoreReactSvgUrl,
+      //   label: t("Common:More"),
+      //   disabled: false,
+      //   key: "more-plugins",
+      //   items: pluginItems,
+      // });
+
+      actions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
         icon: PluginMoreReactSvgUrl,
@@ -441,6 +449,8 @@ const ArticleMainButtonContent = (props) => {
         items: pluginItems,
       });
     }
+
+    const menuModel = [...actions];
 
     menuModel.push({
       isSeparator: true,

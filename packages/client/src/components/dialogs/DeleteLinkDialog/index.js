@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
+import { RoomsType } from "@docspace/common/constants";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -17,6 +18,8 @@ const DeleteLinkDialogComponent = (props) => {
     roomId,
     deleteExternalLink,
     editExternalLink,
+    isPublicRoomType,
+    setRoomShared,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -46,10 +49,11 @@ const DeleteLinkDialogComponent = (props) => {
 
     editExternalLink(roomId, newLink)
       .then((res) => {
+        setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
-        if (link.sharedTo.primary) {
-          toastr.success(t("Files:PrimaryLinkDeletedSuccessfully"));
+        if (link.sharedTo.primary && isPublicRoomType) {
+          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
       .catch((err) => toastr.error(err?.message))
@@ -69,8 +73,8 @@ const DeleteLinkDialogComponent = (props) => {
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
           <Text noSelect>
-            {link.sharedTo.primary
-              ? t("Files:DeletePrimaryLink")
+            {link.sharedTo.primary && isPublicRoomType
+              ? t("Files:DeleteGeneralLink")
               : t("Files:DeleteLinkNote")}
           </Text>
         </div>
@@ -104,7 +108,7 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent
 );
 
-export default inject(({ auth, dialogsStore, publicRoomStore }) => {
+export default inject(({ auth, dialogsStore, publicRoomStore, filesStore }) => {
   const { selectionParentRoom } = auth.infoPanelStore;
   const {
     deleteLinkDialogVisible: visible,
@@ -120,5 +124,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     link: linkParams.link,
     editExternalLink,
     deleteExternalLink,
+    isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+    setRoomShared: filesStore.setRoomShared,
   };
 })(observer(DeleteLinkDialog));

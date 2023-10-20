@@ -24,7 +24,7 @@ const ChangeDomainDialogComponent = () => {
   const { spacesStore, authStore } = useStore();
 
   const {
-    setPortalSettings,
+    setDomainName,
     getPortalDomain,
     setChangeDomainDialogVisible,
     domainDialogVisible: visible,
@@ -41,7 +41,7 @@ const ChangeDomainDialogComponent = () => {
   };
 
   const onClickDomainChange = async () => {
-    await setPortalSettings(domain);
+    await setDomainName(domain);
     await authStore.settingsStore.getAllPortals();
     await getPortalDomain();
     onClose();

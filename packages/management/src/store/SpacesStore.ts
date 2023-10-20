@@ -51,16 +51,16 @@ class SpacesStore {
     return getLogoFromPath(logos[2]?.path?.light);
   }
 
-  setPortalSettings = async (domain: string, portalName: string) => {
-    const dmn = await setDomainName(domain);
-    const { settings } = dmn;
+  setPortalName = async (portalName: string) => {
+    const res = await setPortalName(portalName);
+    return res;
+  }
 
+  setDomainName = async (domain: string) => {
+    const res = await setDomainName(domain);
+    const { settings } = res;
     this.authStore.settingsStore.setPortalDomain(settings);
-
-    if (!portalName) return;
-
-    await setPortalName(portalName);
-  };
+  }
 
   checkDomain = async (domain) => {
     const res = await checkDomain(domain);

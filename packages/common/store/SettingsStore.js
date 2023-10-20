@@ -628,6 +628,7 @@ class SettingsStore {
   getAllPortals = async () => {
     const res = await api.management.getAllPortals();
     this.setPortals(res.tenants);
+    return res;
   };
 
   getPortals = async () => {

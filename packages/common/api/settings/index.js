@@ -252,6 +252,13 @@ export function setWhiteLabelSettings(data) {
   return request(options);
 }
 
+export function getIsDefaultWhiteLabel() {
+  return request({
+    method: "get",
+    url: `/settings/whitelabel/logos/isdefault`,
+  });
+}
+
 export function restoreWhiteLabelSettings(isDefault) {
   return request({
     method: "put",

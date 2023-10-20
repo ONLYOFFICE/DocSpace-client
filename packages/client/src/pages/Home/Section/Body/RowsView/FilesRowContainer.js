@@ -1,13 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import RowContainer from "@docspace/components/row-container";
-import SimpleFilesRow from "./SimpleFilesRow";
+import React, { useEffect, useMemo } from "react";
 
-import styled, { css } from "styled-components";
-import marginStyles from "./CommonStyles";
-import { isTablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
 import { DeviceType } from "@docspace/common/constants";
+
+import { Base } from "@docspace/components/themes";
+import RowContainer from "@docspace/components/row-container";
+import { isTablet, isMobile } from "@docspace/components/utils/device";
+
+import marginStyles from "./CommonStyles";
+import SimpleFilesRow from "./SimpleFilesRow";
 
 const StyledRowContainer = styled(RowContainer)`
   .row-list-item:first-child {
@@ -88,14 +90,10 @@ const FilesRowContainer = ({
   currentDeviceType,
 }) => {
   useEffect(() => {
-    const width = window.innerWidth;
-
     if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
-    // 400 - it is desktop info panel width
+
     if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (viewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
+      (isTablet() || isMobile()) &&
       currentDeviceType !== DeviceType.desktop
     ) {
       viewAs !== "row" && setViewAs("row");

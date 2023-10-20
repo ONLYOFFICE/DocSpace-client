@@ -12,10 +12,12 @@ const ConfigurationSection = ({ t }) => {
   const [domain, setDomain] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [portalNameError, setPortalNameError] = React.useState<null | string>(null);
+  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
 
   const { spacesStore, authStore } = useStore();
 
-  const { checkDomain, setPortalSettings } = spacesStore;
+  const { checkDomain, setDomainName, setPortalName } = spacesStore;
 
   const onConfigurationPortal = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
@@ -27,19 +29,33 @@ const ConfigurationSection = ({ t }) => {
         return toastr.error("Введенное доменное имя не зарегистрировано"); // TODO: add translation
     }
 
-    await setPortalSettings(domain, name);
+    let parsed = parseAddress("test@" + domain);
+    if (parsed?.parseErrors.length > 0) {
+      setDomainNameError(parsed.parseErrors);
+    }
+    
+    const isValidDomain = parsed.isValid();
+    
+    if (!isValidDomain) return;
+ 
+    await setPortalName(name)
+    .then(async () => await setDomainName(domain))
+    .catch(err => {
+      setPortalNameError(err?.response?.data?.error?.message);
+    });
     await authStore.settingsStore.getAllPortals();
   };
 
-  const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDomainNameError(null);
     setDomain(e.target.value);
+  }
 
-  const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPortalNameError(null);
     setName(e.target.value);
+  }
 
-  let parsed = parseAddress("test@" + domain);
-  const isDomainError = domain.length > 0 && !parsed.isValid();
-  const isNameError = name.length > 0 && (name.length > 100 || name.length < 6);
 
   return (
     <ConfigurationWrapper>
@@ -65,29 +81,36 @@ const ConfigurationSection = ({ t }) => {
           </div>
 
           <TextInput
-            hasError={isDomainError}
+            hasError={!!domainNameError}
             onChange={onHandleDomain}
             value={domain}
             placeholder={t("EnterDomain")}
             className="spaces-input"
           />
+            <div>
+              {domainNameError && domainNameError.map((err, index) => (
+                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err.message}</Text>
+              ))}
+            </div>
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
             {t("DocSpaceName")}
           </Text>
           <TextInput
-            hasError={isNameError}
+            hasError={!!portalNameError}
             onChange={onHandleName}
             value={name}
             placeholder={t("Common:EnterName")}
             className="spaces-input"
           />
+            <div>
+              <Text fontSize="12px" fontWeight="400" color="#F24724">{portalNameError}</Text>
+            </div>
         </div>
       </div>
 
       <Button
-        isDisabled={!(name && domain) || isDomainError || isNameError}
         isLoading={isLoading}
         size="normal"
         className="spaces-button"

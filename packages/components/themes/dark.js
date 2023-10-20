@@ -2366,6 +2366,7 @@ const Dark = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#858585",
     },
 
     roomType: {

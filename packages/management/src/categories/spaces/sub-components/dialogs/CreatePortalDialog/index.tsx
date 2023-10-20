@@ -39,6 +39,7 @@ const StyledModal = styled(ModalDialogContainer)`
 const CreatePortalDialog = () => {
   const [visit, setVisit] = React.useState<boolean>(false);
   const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<null | string>(null);
 
   const { spacesStore, authStore } = useStore();
   const { tenantAlias, baseDomain } = authStore.settingsStore;
@@ -55,6 +56,7 @@ const CreatePortalDialog = () => {
 
   const onHandleName = (e) => {
     setName(e.target.value);
+    setError(null);
   };
 
   const onHandleClick = async () => {
@@ -67,32 +69,34 @@ const CreatePortalDialog = () => {
       portalName: name,
       limitedAccessSpace: restrictAccess,
     };
-    try {
-      const res = await createNewPortal(data);
-      const protocol = window?.location?.protocol;
 
-      if (visit) {
-        return window.open(`${protocol}//${res?.tenant?.domain}/`, "_self");
-      }
+    const protocol = window?.location?.protocol;
+    const host = `${tenantAlias}.${baseDomain}`;
 
-      const host = `${tenantAlias}.${baseDomain}`;
+      await createNewPortal(data)
+      .then( async (data) => {
+        const {tenant} = data;
+        if (visit || window.location.hostname !== host) {
+          const portalUrl = `${protocol}//${tenant?.domain}/`;
+          
+          return window.open(portalUrl, "_self");
+        }
 
-      if (window.location.hostname !== host)
-        return window.open(`${protocol}//${res?.tenant?.domain}/`, "_self");
+        await authStore.settingsStore.getAllPortals()
+        onClose();
 
-      await authStore.settingsStore.getAllPortals();
-    } catch (error) {
-      toastr.error(t("PortalExists"));
-    }
+      })
+      .catch((error) => {
+        toastr.error(error?.response?.data?.message);
+        setError(error?.response?.data?.message);
+      })
 
-    onClose();
   };
 
   const onClose = () => {
     setCreatePortalDialogVisible(false);
   };
 
-  const isNameError = name.length > 0 && (name.length > 100 || name.length < 6);
   return (
     <StyledModal
       isLarge
@@ -113,8 +117,8 @@ const CreatePortalDialog = () => {
           </Text>
           <TextInput
             onChange={onHandleName}
-            hasError={isNameError}
             value={name}
+            hasError={error}
             placeholder={t("EnterName")}
             className="create-docspace-input"
           />
@@ -147,7 +151,6 @@ const CreatePortalDialog = () => {
           label={t("Common:Create")}
           size="normal"
           scale
-          isDisabled={isNameError || name.length === 0}
           primary
           onClick={onHandleClick}
         />

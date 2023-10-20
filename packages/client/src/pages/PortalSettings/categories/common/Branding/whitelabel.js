@@ -41,6 +41,7 @@ const WhiteLabel = (props) => {
     getWhiteLabelLogoText,
     getWhiteLabelLogoUrlsAction,
     initSettings,
+    enableRestoreButton,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -493,6 +494,7 @@ const WhiteLabel = (props) => {
         hasScroll={true}
         showReminder={isSettingPaid}
         saveButtonDisabled={isEqualLogo && isEqualText}
+        disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"
         additionalClassCancelButton="white-label-cancel"
@@ -512,6 +514,7 @@ export default inject(({ setup, auth, common }) => {
     restoreWhiteLabelSettings,
     getWhiteLabelLogoUrls: getWhiteLabelLogoUrlsAction,
     initSettings,
+    enableRestoreButton,
   } = common;
 
   const {
@@ -533,5 +536,6 @@ export default inject(({ setup, auth, common }) => {
     getWhiteLabelLogoUrlsAction,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     initSettings,
+    enableRestoreButton,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

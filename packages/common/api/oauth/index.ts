@@ -14,12 +14,10 @@ import {
 } from "../../utils/oauth/interfaces";
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: "/api",
+  baseURL: "/api/2.0",
   responseType: "json",
   timeout: 0,
   withCredentials: true,
-  // TODO: OAuth, remove X-Tenant into API
-  headers: { "X-API-Version": "1", "X-Tenant": "1" },
 };
 
 const client = axios.create(axiosConfig);

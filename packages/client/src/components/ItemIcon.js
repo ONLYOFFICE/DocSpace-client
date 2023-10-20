@@ -1,4 +1,4 @@
-﻿import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+﻿import SecuritySvgUrl from "PUBLIC_DIR/images/security.background.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -44,26 +44,26 @@ const EncryptedFileIcon = styled.div`
   height: 16px;
   position: absolute;
   width: 16px;
-  margin-top: 14px;
+  margin-top: ${(props) => (props.showDefaultRoomIcon ? "20px" : "14px")};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-right: 12px;
+          margin-right: ${props.showDefaultRoomIcon ? "20px" : "12px"};
         `
       : css`
-          margin-left: 12px;
-        `}
+          margin-left: ${props.showDefaultRoomIcon ? "20px" : "12px"};
+        `};
 `;
 
 const ItemIcon = ({
   icon,
-  fileExst,
-  isPrivacy,
+
   isRoom,
   title,
   logo,
   color,
   isArchive,
+  isPrivate,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -81,7 +81,12 @@ const ItemIcon = ({
           />
         )}
       </IconWrapper>
-      {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
+      {isPrivate && (
+        <EncryptedFileIcon
+          showDefaultRoomIcon={showDefaultRoomIcon}
+          isEdit={false}
+        />
+      )}
     </>
   );
 };

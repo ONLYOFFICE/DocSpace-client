@@ -7,6 +7,7 @@ import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyFolderContainer from "./EmptyFolderContainer";
 import { Events } from "@docspace/common/constants";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
+import PrivateFolderContainer from "./PrivateFolderContainer";
 
 const linkStyles = {
   isHovered: true,
@@ -26,6 +27,7 @@ const EmptyContainer = ({
   isRoomNotFoundOrMoved,
   isGracePeriod,
   setInviteUsersWarningDialogVisible,
+  isPrivateRoom,
 }) => {
   const location = useLocation();
 
@@ -69,6 +71,12 @@ const EmptyContainer = ({
 
   return isFiltered ? (
     <EmptyFilterContainer linkStyles={linkStyles} />
+  ) : isPrivateRoom ? (
+    <PrivateFolderContainer
+      onCreate={onCreate}
+      linkStyles={linkStyles}
+      sectionWidth={sectionWidth}
+    />
   ) : isRootEmptyPage ? (
     <RootFolderContainer
       onCreate={onCreate}
@@ -112,6 +120,7 @@ export default inject(
       isLoading,
 
       parentId: selectedFolderStore.parentId,
+      isPrivateRoom: selectedFolderStore.private,
       isRoomNotFoundOrMoved,
       isGracePeriod,
       setInviteUsersWarningDialogVisible,

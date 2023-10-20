@@ -15,6 +15,7 @@ import { inject, observer, Provider as MobxProvider } from "mobx-react";
 import ThemeProvider from "@docspace/components/theme-provider";
 
 const isDesktopEditor = window["AscDesktopEditor"] !== undefined;
+import PrivacyDeepLink from "./components/PrivacyDeepLink";
 
 import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico";
 import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico";
@@ -88,26 +89,36 @@ const App = ({
   }, []);
 
   const onError = () => {
-    window.open(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        rest.personal ? "sign-in" : "/login"
-      ),
-      "_self"
-    );
+    // window.open(
+    //   combineUrl(
+    //     window.DocSpaceConfig?.proxy?.url,
+    //     rest.personal ? "sign-in" : "/login"
+    //   ),
+    //   "_self"
+    // );
   };
+
+  const showDeepLink = !isDesktopEditor && rest?.config?.file?.encrypted;
 
   return (
     <ErrorBoundary onError={onError}>
       <GlobalStyle />
-      <Editor
-        mfReady={isInitialized}
-        mfFailed={isErrorLoading}
-        isDesktopEditor={isDesktopEditor}
-        initDesktop={initDesktop}
-        currentColorScheme={currentColorScheme}
-        {...rest}
-      />
+      {showDeepLink ? (
+        <PrivacyDeepLink
+          fileId={rest?.config?.file?.id}
+          currentColorScheme={rest?.currentColorScheme}
+          whiteLabelLogoUrls={rest?.logoUrls}
+        />
+      ) : (
+        <Editor
+          mfReady={isInitialized}
+          mfFailed={isErrorLoading}
+          isDesktopEditor={isDesktopEditor}
+          initDesktop={initDesktop}
+          currentColorScheme={currentColorScheme}
+          {...rest}
+        />
+      )}
     </ErrorBoundary>
   );
 };

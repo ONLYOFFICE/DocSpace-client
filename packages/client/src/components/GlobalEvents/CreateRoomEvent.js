@@ -28,6 +28,7 @@ const CreateRoomEvent = ({
   const [fetchedTags, setFetchedTags] = useState([]);
 
   const onCreate = (roomParams) => {
+    console.log(roomParams);
     setRoomParams(roomParams);
     setOnClose(onClose);
 

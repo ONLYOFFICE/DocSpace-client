@@ -10,7 +10,7 @@ import RoomType from "./RoomType";
 import PermanentSettings from "./PermanentSettings";
 import InputParam from "./Params/InputParam";
 import ThirdPartyStorage from "./ThirdPartyStorage";
-// import IsPrivateParam from "./IsPrivateParam";
+import IsPrivateParam from "./IsPrivateParam";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
@@ -119,14 +119,13 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
       />
 
-      {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (
         <IsPrivateParam
           t={t}
           isPrivate={roomParams.isPrivate}
           onChangeIsPrivate={onChangeIsPrivate}
         />
-      )} */}
+      )}
 
       {(isAdmin || isMe) && roomParams.roomOwner && (
         <ChangeRoomOwner

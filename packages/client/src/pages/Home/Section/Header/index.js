@@ -27,6 +27,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -220,6 +221,7 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    isPrivateRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -385,7 +387,7 @@ const SectionHeaderContent = (props) => {
                 label: t("Translations:SubNewFormFile"),
                 icon: FormFileReactSvgUrl,
                 onClick: createFormFromFile,
-                disabled: isPrivacyFolder,
+                disabled: isPrivateRoom,
               },
               {
                 id: "personal_template_oforms-gallery",
@@ -393,7 +395,7 @@ const SectionHeaderContent = (props) => {
                 label: t("Common:OFORMsGallery"),
                 icon: FormGalleryReactSvgUrl,
                 onClick: onShowGallery,
-                disabled: isPrivacyFolder || (isMobile && isTablet),
+                disabled: isPrivateRoom || (isMobile && isTablet),
               },
             ],
           },
@@ -402,6 +404,7 @@ const SectionHeaderContent = (props) => {
             key: "new-folder",
             label: t("Common:NewFolder"),
             onClick: createFolder,
+            disabled: isPrivateRoom,
             icon: CatalogFolderReactSvgUrl,
           },
           { key: "separator", isSeparator: true },
@@ -415,11 +418,12 @@ const SectionHeaderContent = (props) => {
             key: "upload-folder",
             label: t("Article:UploadFolder"),
             onClick: () => onUploadAction("folder"),
+            disabled: isPrivateRoom,
             icon: ActionsUploadReactSvgUrl,
           },
         ];
 
-    if (mainButtonItemsList && enablePlugins) {
+    if (mainButtonItemsList && enablePlugins && !isPrivateRoom) {
       mainButtonItemsList.forEach((option) => {
         options.splice(option.value.position, 0, {
           key: option.key,
@@ -1038,7 +1042,9 @@ const SectionHeaderContent = (props) => {
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={
-                  isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
+                  isPrivateRoom
+                    ? SecuritySvgUrl
+                    : isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
@@ -1147,8 +1153,15 @@ export default inject(
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
-    const { title, id, roomType, pathParts, navigationPath, security } =
-      selectedFolderStore;
+    const {
+      title,
+      id,
+      roomType,
+      pathParts,
+      navigationPath,
+      security,
+      private: isPrivateRoom,
+    } = selectedFolderStore;
 
     const selectedFolder = { ...selectedFolderStore };
 
@@ -1211,6 +1224,7 @@ export default inject(
       : pathParts?.length === 1;
 
     return {
+      isPrivateRoom,
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
       showText: auth.settingsStore.showText,

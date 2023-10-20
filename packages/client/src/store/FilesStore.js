@@ -2908,6 +2908,7 @@ class FilesStore {
 
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.authStore.settingsStore;
+    const { private: isPrivateRoom } = this.selectedFolderStore;
 
     const newFolders = [...this.folders];
 
@@ -2972,6 +2973,7 @@ class FilesStore {
         viewAccessability,
         mute,
         inRoom = true,
+        private: isPrivate,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3118,6 +3120,7 @@ class FilesStore {
         viewAccessability,
         fileTypeName,
         inRoom,
+        isPrivate: isPrivateRoom || isPrivate || encrypted,
       };
     });
 
@@ -3862,6 +3865,12 @@ class FilesStore {
       isRecentFolder
     );
   }
+
+  updatePrivateFile = (fileId) => {
+    const idx = this.files.findIndex((f) => f.id === fileId);
+
+    this.files[idx].encrypted = true;
+  };
 
   get roomsForRestore() {
     return this.folders.filter((f) => f.security.Move);

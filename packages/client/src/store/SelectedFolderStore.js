@@ -31,6 +31,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
+  private = null;
 
   socketSubscribersId = new Set();
 
@@ -71,6 +72,7 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
+    this.private = null;
     this.socketSubscribersId = new Set();
   };
 

@@ -126,6 +126,10 @@ const ArticleMainButtonContent = (props) => {
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
     currentDeviceType,
+
+    isPrivateRoom,
+    isDesktopClient,
+    isEncryptionSupport,
   } = props;
 
   const navigate = useNavigate();
@@ -181,7 +185,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onUploadFileClick = React.useCallback(() => {
-    if (isPrivacy) {
+    if (isPrivateRoom) {
       encryptionUploadDialog((encryptedFile, encrypted) => {
         encryptedFile.encrypted = encrypted;
         startUpload([encryptedFile], null, t);
@@ -190,7 +194,7 @@ const ArticleMainButtonContent = (props) => {
       inputFilesElement.current.click();
     }
   }, [
-    isPrivacy,
+    isPrivateRoom,
     encrypted,
     encryptedFile,
     encryptionUploadDialog,
@@ -289,7 +293,7 @@ const ArticleMainButtonContent = (props) => {
             icon: FormFileReactSvgUrl,
             label: t("Translations:SubNewFormFile"),
             onClick: onShowSelectFileDialog,
-            disabled: isPrivacy,
+            disabled: isPrivateRoom,
             key: "form-file",
           },
           {
@@ -298,7 +302,7 @@ const ArticleMainButtonContent = (props) => {
             icon: FormGalleryReactSvgUrl,
             label: t("Common:OFORMsGallery"),
             onClick: onShowGallery,
-            disabled: isPrivacy,
+            disabled: isPrivateRoom,
             key: "form-gallery",
           },
         ],
@@ -384,6 +388,7 @@ const ArticleMainButtonContent = (props) => {
             className: "main-button_drop-down",
             icon: CatalogFolderReactSvgUrl,
             label: t("Files:Folder"),
+            disabled: isPrivateRoom,
             onClick: onCreate,
             key: "new-folder",
           },
@@ -415,7 +420,7 @@ const ArticleMainButtonContent = (props) => {
             className: "main-button_drop-down",
             icon: ActionsUploadReactSvgUrl,
             label: t("UploadFolder"),
-            disabled: isPrivacy,
+            disabled: isPrivateRoom,
             onClick: onUploadFolderClick,
             key: "upload-folder",
           },
@@ -423,7 +428,7 @@ const ArticleMainButtonContent = (props) => {
 
     const menuModel = [...actions];
 
-    if (pluginItems.length > 0) {
+    if (pluginItems.length > 0 && !isPrivateRoom) {
       menuModel.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
@@ -447,7 +452,7 @@ const ArticleMainButtonContent = (props) => {
     setActions(actions);
   }, [
     t,
-    isPrivacy,
+    isPrivateRoom,
     currentFolderId,
     isAccountsPage,
     isSettingsPage,
@@ -470,7 +475,12 @@ const ArticleMainButtonContent = (props) => {
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled = isSettingsPage
+  const canCreateEncrypted =
+    isDesktopClient && isEncryptionSupport && security?.Create;
+
+  const isDisabled = isPrivateRoom
+    ? !canCreateEncrypted
+    : isSettingsPage
     ? isSettingsPage
     : isAccountsPage
     ? !isAccountsPage
@@ -497,19 +507,20 @@ const ArticleMainButtonContent = (props) => {
     <>
       {isMobileArticle ? (
         <>
-          {!isProfile && (security?.Create || isAccountsPage) && (
-            <MobileView
-              t={t}
-              titleProp={t("Upload")}
-              actionOptions={actions}
-              buttonOptions={uploadActions}
-              isRooms={isRoomsFolder}
-              mainButtonMobileVisible={
-                mainButtonMobileVisible && mainButtonVisible
-              }
-              onMainButtonClick={onCreateRoom}
-            />
-          )}
+          {!isProfile &&
+            (security?.Create || isAccountsPage || canCreateEncrypted) && (
+              <MobileView
+                t={t}
+                titleProp={t("Upload")}
+                actionOptions={actions}
+                buttonOptions={uploadActions}
+                isRooms={isRoomsFolder}
+                mainButtonMobileVisible={
+                  mainButtonMobileVisible && mainButtonVisible
+                }
+                onMainButtonClick={onCreateRoom}
+              />
+            )}
         </>
       ) : isRoomsFolder ? (
         <StyledButton
@@ -549,17 +560,19 @@ const ArticleMainButtonContent = (props) => {
         ref={inputFilesElement}
         style={{ display: "none" }}
       />
-      <input
-        id="customFolderInput"
-        className="custom-file-input"
-        webkitdirectory=""
-        mozdirectory=""
-        type="file"
-        onChange={onFileChange}
-        onClick={onInputClick}
-        ref={inputFolderElement}
-        style={{ display: "none" }}
-      />
+      {isPrivateRoom && (
+        <input
+          id="customFolderInput"
+          className="custom-file-input"
+          webkitdirectory=""
+          mozdirectory=""
+          type="file"
+          onChange={onFileChange}
+          onClick={onInputClick}
+          ref={inputFolderElement}
+          style={{ display: "none" }}
+        />
+      )}
     </>
   );
 };
@@ -597,12 +610,17 @@ export default inject(
       selectFileDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme, currentDeviceType } =
-      auth.settingsStore;
+    const {
+      enablePlugins,
+      currentColorScheme,
+      currentDeviceType,
+      isDesktopClient,
+      isEncryptionSupport,
+    } = auth.settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
-
+    const isPrivateRoom = selectedFolderStore.private;
     const currentFolderId = selectedFolderStore.id;
 
     const { isAdmin, isOwner } = auth.userStore.user;
@@ -648,6 +666,9 @@ export default inject(
       versionHistoryPanelVisible,
       security,
       currentDeviceType,
+      isPrivateRoom,
+      isDesktopClient,
+      isEncryptionSupport,
     };
   }
 )(

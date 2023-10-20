@@ -100,6 +100,8 @@ const CreateRoomDialog = ({
   };
 
   const onCreateRoom = async () => {
+    console.log(roomParams);
+
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
       return;

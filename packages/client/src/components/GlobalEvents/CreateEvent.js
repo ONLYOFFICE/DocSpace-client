@@ -33,7 +33,8 @@ const CreateEvent = ({
 
   parentId,
 
-  isPrivacy,
+  isPrivateFolder,
+  updatePrivateFile,
   isDesktop,
   completeAction,
 
@@ -50,6 +51,7 @@ const CreateEvent = ({
   eventDialogVisible,
   keepNewFileName,
   setPortalTariff,
+  isPrivateRoom,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -243,13 +245,13 @@ const CreateEvent = ({
             setCreatedItem({ id: createdFileId, type: "file" });
             addActiveItems([file.id]);
 
-            if (isPrivacy) {
+            if (isPrivateRoom) {
               return setEncryptionAccess(file).then((encryptedFile) => {
                 if (!encryptedFile) return Promise.resolve();
                 toastr.info(t("Translations:EncryptedFileSaving"));
 
                 return replaceFileStream(
-                  file.id,
+                  item.id,
                   encryptedFile,
                   true,
                   false
@@ -257,9 +259,9 @@ const CreateEvent = ({
                   () => open && openDocEditor(file.id, file.providerKey, tab)
                 );
               });
+            } else {
+              return open && openDocEditor(file.id, file.providerKey, tab);
             }
-
-            return open && openDocEditor(file.id, file.providerKey, tab);
           })
           .then(() => completeAction(item, type))
           .catch((e) => {
@@ -269,7 +271,7 @@ const CreateEvent = ({
           .finally(() => {
             const fileIds = [+id];
             createdFileId && fileIds.push(createdFileId);
-
+            isPrivateFolder && updatePrivateFile(item.id);
             clearActiveOperations(fileIds);
             onCloseAction();
             return setIsLoading(false);
@@ -320,6 +322,7 @@ export default inject(
       openDocEditor,
       setIsUpdatingRowItem,
       setCreatedItem,
+      updatePrivateFile,
     } = filesStore;
 
     const { gallerySelected, setGallerySelected } = oformsStore;
@@ -328,9 +331,9 @@ export default inject(
 
     const { clearActiveOperations, fileCopyAs } = uploadDataStore;
 
-    const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
+    const { isRecycleBinFolder } = treeFoldersStore;
 
-    const { id: parentId } = selectedFolderStore;
+    const { id: parentId, private: isPrivateRoom } = selectedFolderStore;
 
     const { replaceFileStream, setEncryptionAccess, currentTariffStatusStore } =
       auth;
@@ -365,7 +368,7 @@ export default inject(
       parentId,
 
       isDesktop: isDesktopClient,
-      isPrivacy: isPrivacyFolder,
+
       isTrashFolder: isRecycleBinFolder,
       completeAction,
 
@@ -379,6 +382,8 @@ export default inject(
       setEncryptionAccess,
 
       keepNewFileName,
+      isPrivateRoom,
+      updatePrivateFile,
     };
   }
 )(observer(CreateEvent));

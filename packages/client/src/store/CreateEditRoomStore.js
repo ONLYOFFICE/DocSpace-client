@@ -92,6 +92,7 @@ class CreateEditRoomStore {
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
+      private: roomParams.isPrivate,
     };
 
     const createTagsData = roomParams.tags

@@ -5,6 +5,10 @@ import * as fakePeople from "./fake";
 import { Encoder } from "../../utils/encoder";
 import { checkFilterInstance } from "../../utils";
 
+export function getUserTheme() {
+  return request({ method: "get", url: "/people/theme.json" });
+}
+
 export function getUserList(filter = Filter.getDefault(), fake = false) {
   let params = "";
   if (fake) {

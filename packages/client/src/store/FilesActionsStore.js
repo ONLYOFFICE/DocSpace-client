@@ -2114,8 +2114,7 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessability?.WebEdit;
     const canViewedDocs = item.viewAccessability?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
-    if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
+    const { id, viewUrl, providerKey, fileStatus, isFolder } = item;
 
     if (isRecycleBinFolder || isLoading) return;
 

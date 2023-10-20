@@ -53,6 +53,7 @@ const FilesTableRow = (props) => {
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isPrivate={item.isPrivate}
     />
   );
 

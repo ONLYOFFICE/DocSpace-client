@@ -113,7 +113,6 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
-    return e;
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);

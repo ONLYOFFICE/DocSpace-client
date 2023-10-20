@@ -55,8 +55,12 @@ const SetRoomParams = ({
   enableThirdParty,
   setChangeRoomOwnerIsVisible,
   isAdmin,
+  userId,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
+
+  const isMe = userId === roomParams?.roomOwner?.id;
+  const canChangeRoomOwner = (isAdmin || isMe) && roomParams.roomOwner;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -128,7 +132,7 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {(isAdmin || isMe) && roomParams.roomOwner && (
+      {isEdit && canChangeRoomOwner && (
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
@@ -183,6 +187,7 @@ export default inject(({ auth, dialogsStore }) => {
   return {
     setChangeRoomOwnerIsVisible,
     isAdmin: user.isAdmin || user.isOwner,
+    userId: user.id,
   };
 })(
   observer(

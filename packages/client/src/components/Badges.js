@@ -224,7 +224,7 @@ const Badges = ({
           className="badge row-copy-link icons-group tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopyPrimaryLink")}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
 
@@ -235,7 +235,7 @@ const Badges = ({
           className="badge tablet-row-copy-link icons-group  tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopyPrimaryLink")}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
 

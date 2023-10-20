@@ -4,7 +4,7 @@ import Base from "../themes/base";
 
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
-import { tablet, mobile } from "../utils/device";
+import { tablet, mobile, mobileFooterHeight } from "../utils/device";
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -69,7 +69,9 @@ const StyledAside = styled(Container)`
     bottom: 0;
     top: unset;
     height: ${({ asideHeight }) =>
-      asideHeight ? `calc(${asideHeight} - 64px)` : "calc(100% - 64px)"};
+      asideHeight
+        ? `calc(${asideHeight} - ${mobileFooterHeight})`
+        : `calc(100% - ${mobileFooterHeight})`};
 
     width: 100%;
     max-width: 100%;

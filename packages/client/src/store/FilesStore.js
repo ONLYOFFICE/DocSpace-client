@@ -3064,12 +3064,17 @@ class FilesStore {
           )
         : undefined;
 
-      let fileTypeName = null;
+      const pluginOptions = {};
 
       if (enablePlugins && fileItemsList) {
         fileItemsList.forEach(({ key, value }) => {
-          if (value.extension === fileExst && value.fileTypeName)
-            fileTypeName = value.fileTypeName;
+          if (value.extension === fileExst) {
+            if (value.fileTypeName)
+              pluginOptions.fileTypeName = value.fileTypeName;
+            pluginOptions.isPlugin = true;
+            if (value.fileIconTile)
+              pluginOptions.fileTileIcon = value.fileIconTile;
+          }
         });
       }
 
@@ -3136,7 +3141,7 @@ class FilesStore {
         providerType,
         security,
         viewAccessability,
-        fileTypeName,
+        ...pluginOptions,
         inRoom,
       };
     });

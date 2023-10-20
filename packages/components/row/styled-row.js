@@ -35,7 +35,7 @@ const StyledRow = styled.div`
   align-items: center;
   align-content: center;
 
-  .row-loader {
+  .row-progress-loader {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `margin-right: 9px;`

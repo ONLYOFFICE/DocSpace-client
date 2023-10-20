@@ -74,18 +74,10 @@ const LoginContainer = styled.div`
 
   .line {
     display: flex;
-    width: 320px;
+    width: 100%;
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
-
-    @media ${tablet} {
-      width: 416px;
-    }
-
-    @media ${mobile} {
-      width: 311px;
-    }
   }
 
   .line:before,

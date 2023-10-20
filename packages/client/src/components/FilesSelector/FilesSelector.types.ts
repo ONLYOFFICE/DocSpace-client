@@ -151,6 +151,7 @@ export type FilesSelectorProps = {
   setRestoreAllPanelVisible: (value: boolean) => void;
   setIsFolderActions: (value: boolean) => void;
   setMovingInProgress: (value: boolean) => void;
+  setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
   setConflictDialogData: (conflicts: any, operationData: any) => void;
   itemOperationToFolder: (operationData: any) => Promise<void>;
   clearActiveOperations: (

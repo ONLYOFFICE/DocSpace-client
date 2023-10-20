@@ -127,8 +127,6 @@ class DialogsStore {
   };
 
   setMoveToPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
@@ -144,8 +142,6 @@ class DialogsStore {
   };
 
   setCopyPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
@@ -181,7 +177,6 @@ class DialogsStore {
   };
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
-    !deleteDialogVisible && this.deselectActiveFiles();
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
@@ -190,7 +185,6 @@ class DialogsStore {
   };
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
-    !downloadDialogVisible && this.deselectActiveFiles();
     this.downloadDialogVisible = downloadDialogVisible;
   };
 

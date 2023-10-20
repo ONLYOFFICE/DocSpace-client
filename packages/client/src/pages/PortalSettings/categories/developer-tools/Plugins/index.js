@@ -31,7 +31,7 @@ const PluginPage = ({
     setDocumentTitle(t("Plugins"));
   }, []);
 
-  const learnMoreLink = "/";
+  const learnMoreLink = "https://api.onlyoffice.com/docspace/pluginssdk/";
 
   return (
     <>
@@ -50,6 +50,7 @@ const PluginPage = ({
             t={t}
             currentColorScheme={currentColorScheme}
             learnMoreLink={learnMoreLink}
+            withUpload={withUpload}
           />
           {withUpload && <UploadButton t={t} addPlugin={addPlugin} />}
           <PluginListContainer>

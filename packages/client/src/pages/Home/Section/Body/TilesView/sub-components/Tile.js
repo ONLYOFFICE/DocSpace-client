@@ -306,6 +306,17 @@ const StyledFileTileTop = styled.div`
   }
 
   ${(props) =>
+    props.isPlugin &&
+    css`
+      .temporary-icon {
+        svg {
+          width: 96px;
+          height: 96px;
+        }
+      }
+    `}
+
+  ${(props) =>
     props.isHighlight &&
     css`
       ${animationStyles}
@@ -500,10 +511,13 @@ class Tile extends React.PureComponent {
   };
 
   getIconFile = () => {
-    const { temporaryIcon, thumbnailClick, thumbnail } = this.props;
+    const { temporaryIcon, thumbnailClick, thumbnail, item } = this.props;
 
-    const icon =
-      thumbnail && !this.state.errorLoadSrc ? thumbnail : temporaryIcon;
+    const icon = item.isPlugin
+      ? item.fileTileIcon
+      : thumbnail && !this.state.errorLoadSrc
+      ? thumbnail
+      : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
@@ -865,6 +879,7 @@ class Tile extends React.PureComponent {
                 item?.viewAccessability?.ImageView ||
                 item?.viewAccessability?.MediaView
               }
+              isPlugin={item.isPlugin}
             >
               {icon}
             </StyledFileTileTop>

@@ -3,6 +3,7 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -15,6 +16,7 @@ import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import { isTablet } from "@docspace/components/utils/device";
+import { classNames } from "@docspace/components/utils/classNames";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -87,6 +89,7 @@ const Badges = ({
     isEditing,
     isRoom,
     pinned,
+    isFolder,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -152,10 +155,11 @@ const Badges = ({
     (item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom) &&
     item.shared &&
-    !isArchiveFolder;
+    !isArchiveFolder &&
+    !isTile;
 
   return fileExst ? (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges file__badges">
       {isEditing && !isVisitor && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -207,7 +211,12 @@ const Badges = ({
       )}
     </div>
   ) : (
-    <>
+    <div
+      className={classNames("badges", {
+        ["folder__badges"]: isFolder && !isRoom,
+        ["room__badges"]: isRoom,
+      })}
+    >
       {showCopyLinkIcon && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -215,7 +224,18 @@ const Badges = ({
           className="badge row-copy-link icons-group tablet-badge"
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopyPrimaryLink")}
+          title={t("Files:CopyGeneralLink")}
+        />
+      )}
+
+      {showCopyLinkIcon && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={TabletLinkReactSvgUrl}
+          className="badge tablet-row-copy-link icons-group  tablet-badge"
+          size={sizeBadge}
+          onClick={onCopyPrimaryLink}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
 
@@ -237,7 +257,7 @@ const Badges = ({
           onClick={onBadgeClick}
         />
       )}
-    </>
+    </div>
   );
 };
 

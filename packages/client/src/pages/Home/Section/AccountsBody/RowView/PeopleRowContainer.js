@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
 import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
+
+import { useViewEffect } from "@docspace/common/hooks";
 
 import RowContainer from "@docspace/components/row-container";
+import { tablet } from "@docspace/components/utils/device";
 
 import EmptyScreen from "../EmptyScreen";
-
 import SimpleUserRow from "./SimpleUserRow";
-import withLoader from "SRC_DIR/HOCs/withLoader";
-import { mobile, size, tablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -89,26 +88,11 @@ const PeopleRowContainer = ({
   withPaging,
   currentDeviceType,
 }) => {
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if (
-      (accountsViewAs !== "table" && accountsViewAs !== "row") ||
-      !sectionWidth
-    )
-      return;
-
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (accountsViewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      currentDeviceType !== DeviceType.desktop
-    ) {
-      accountsViewAs !== "row" && setViewAs("row");
-    } else {
-      accountsViewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: accountsViewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer

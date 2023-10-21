@@ -5,6 +5,7 @@ import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 
 import { DeviceType } from "@docspace/common/constants";
+import { useViewEffect } from "@docspace/common/hooks";
 
 import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
@@ -155,18 +156,11 @@ const Table = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
-
-    if (
-      (isTablet() || isMobile()) &&
-      currentDeviceType !== DeviceType.desktop
-    ) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   useEffect(() => {
     return () => {

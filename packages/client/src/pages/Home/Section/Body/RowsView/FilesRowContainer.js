@@ -1,12 +1,11 @@
 import styled from "styled-components";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import React, { useEffect, useMemo } from "react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { useViewEffect } from "@docspace/common/hooks";
 
 import { Base } from "@docspace/components/themes";
 import RowContainer from "@docspace/components/row-container";
-import { isTablet, isMobile } from "@docspace/components/utils/device";
 
 import marginStyles from "./CommonStyles";
 import SimpleFilesRow from "./SimpleFilesRow";
@@ -89,18 +88,11 @@ const FilesRowContainer = ({
   highlightFile,
   currentDeviceType,
 }) => {
-  useEffect(() => {
-    if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
-
-    if (
-      (isTablet() || isMobile()) &&
-      currentDeviceType !== DeviceType.desktop
-    ) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (

@@ -2090,7 +2090,7 @@ class FilesActionStore {
 
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
-
+    const { currentDeviceType } = this.authStore.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.authStore.settingsStore;
 
@@ -2197,13 +2197,12 @@ class FilesActionStore {
         });
 
         if (currPluginItem) {
-          currPluginItem.onClick(item);
-
-          return;
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
         }
       }
-
-      return;
 
       return window.open(viewUrl, "_self");
     }

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
 import Avatar from "@docspace/components/avatar";
+import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import DropDownItem from "@docspace/components/drop-down-item";
 import toastr from "@docspace/components/toast/toastr";
@@ -27,6 +28,7 @@ import {
   SearchItemText,
   StyledDescription,
   StyledInviteLanguage,
+  ResetLink,
 } from "../StyledInvitePanel";
 
 import Filter from "@docspace/common/api/people/filter";
@@ -188,7 +190,8 @@ const InviteInput = ({
         onClick={addUser}
         disabled={shared}
         height={48}
-        className="list-item">
+        className="list-item"
+      >
         <Avatar size="min" role="user" source={avatar} />
         <div>
           <SearchItemText primary disabled={shared}>
@@ -257,7 +260,8 @@ const InviteInput = ({
       style={{ width: "inherit" }}
       textOverflow
       onClick={addEmail}
-      height={48}>
+      height={48}
+    >
       {t("Common:AddButton")} «{inputValue}»
     </DropDownItem>
   );
@@ -318,7 +322,8 @@ const InviteInput = ({
             fontWeight="600"
             type="action"
             isHovered
-            onClick={openUsersPanel}>
+            onClick={openUsersPanel}
+          >
             {t("Translations:ChooseFromList")}
           </StyledLink>
         )}
@@ -329,7 +334,7 @@ const InviteInput = ({
           : t("AddManuallyDescriptionRoom")}
       </StyledDescription>
       <StyledInviteLanguage>
-        {t("InvitationLanguage")}:
+        <Text className="invitation-language">{t("InvitationLanguage")}:</Text>
         <div className="language-combo-box-wrapper">
           <ComboBox
             className="language-combo-box"
@@ -346,20 +351,33 @@ const InviteInput = ({
             withBlur={isMobileView}
             isDefaultMode={!isMobileView}
             fillIcon={false}
-            modernView={!isMobileView}
+            modernView
           />
         </div>
-        {isChangeLangMail && (
+        {isChangeLangMail && !isMobileView && (
           <StyledLink
-            className="link-list"
+            className="list-link"
             fontWeight="600"
             type="action"
             isHovered
-            onClick={onResetLangMail}>
+            onClick={onResetLangMail}
+          >
             {t("ResetChange")}
           </StyledLink>
         )}
       </StyledInviteLanguage>
+      {isChangeLangMail && isMobileView && (
+        <ResetLink
+          className="reset-link"
+          fontWeight="600"
+          type="action"
+          isHovered
+          onClick={onResetLangMail}
+        >
+          {t("ResetChange")}
+        </ResetLink>
+      )}
+
       <StyledInviteInputContainer ref={inputsRef}>
         <StyledInviteInput ref={searchRef}>
           <TextInput
@@ -386,7 +404,8 @@ const InviteInput = ({
             showDisabledItems
             clickOutsideAction={closeInviteInputPanel}
             eventTypes="click"
-            {...dropDownMaxHeight}>
+            {...dropDownMaxHeight}
+          >
             {!!usersList.length ? foundUsers : addEmailPanel}
           </StyledDropDown>
         )}

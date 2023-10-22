@@ -6,7 +6,7 @@ import { desktop, mobile } from "@docspace/components/utils/device";
 const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
-  width: 100%;
+  width: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

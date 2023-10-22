@@ -154,12 +154,13 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             type="email"
             size="base"
             scale={true}
-            tabIndex={3}
+            tabIndex={1}
             isDisabled={loading}
             value={email}
             onChange={onChangeEmail}
             onValidateInput={onValidateEmail}
             onBlur={onBlurEmail}
+            autoComplete="username"
           />
         </FieldContainer>
         <FieldContainer
@@ -175,7 +176,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             heightScale={false}
             hasError={descErr}
             placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
-            tabIndex={3}
+            tabIndex={2}
             value={description}
             onChange={onChangeDescription}
             isDisabled={loading}
@@ -205,7 +206,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
           onClick={onRecoverModalClose}
           isLoading={loading}
           isDisabled={loading}
-          tabIndex={3}
+          tabIndex={4}
         />
       </ModalDialog.Footer>
     </ModalDialogContainer>

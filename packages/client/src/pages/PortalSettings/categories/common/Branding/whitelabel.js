@@ -492,7 +492,8 @@ const WhiteLabel = (props) => {
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
         hasScroll={true}
-        showReminder={isSettingPaid}
+        showReminder={!isEqualLogo || !isEqualText}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo && isEqualText}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}

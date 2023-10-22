@@ -202,7 +202,8 @@ const Members = ({
     setMembersList(newMembers);
   };
 
-  if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
+  if (isLoading || selection?.id !== selectionParentRoom?.id)
+    return <Loaders.InfoPanelViewLoader view="members" />;
   else if (!members) return <></>;
 
   const [currentMember] = members.administrators.filter(

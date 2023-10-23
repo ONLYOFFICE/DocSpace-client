@@ -481,10 +481,6 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  getAllSettings = () => {
-    return api.settings.getSettings();
-  };
-
   setLogoutVisible = (visible) => (this.logoutVisible = visible);
 
   setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);

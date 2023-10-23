@@ -45,8 +45,7 @@ class CommonStore {
       settingsStore.getPortalTimezones(),
       settingsStore.getPortalCultures(),
       this.getWhiteLabelLogoUrls(),
-      this.getWhiteLabelLogoText(),
-      this.getGreetingSettingsIsDefault()
+      this.getWhiteLabelLogoText()
     );
 
     if (standalone) {

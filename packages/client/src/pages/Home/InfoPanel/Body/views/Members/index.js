@@ -219,6 +219,8 @@ const Members = ({
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
   const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
 
+  if (!dataReadyMembersList) return <></>;
+
   return (
     <>
       {isPublicRoomType && (
@@ -226,32 +228,29 @@ const Members = ({
           t={t}
           roomType={roomType}
           roomId={selectionParentRoom.id}
-          dataReadyMembersList={dataReadyMembersList}
         />
       )}
-      {dataReadyMembersList && (
-        <MembersList
-          loadNextPage={loadNextPage}
-          t={t}
-          security={security}
-          members={membersList}
-          membersHelper={membersHelper}
-          currentMember={currentMember}
-          updateRoomMemberRole={updateRoomMemberRole}
-          selectionParentRoom={selectionParentRoom}
-          setSelectionParentRoom={setSelectionParentRoom}
-          changeUserType={changeUserType}
-          setIsScrollLocked={setIsScrollLocked}
-          membersFilter={membersFilter}
-          setMembersFilter={setMembersFilter}
-          hasNextPage={membersList.length - headersCount < membersFilter.total}
-          itemCount={membersFilter.total + headersCount}
-          onRepeatInvitation={onRepeatInvitation}
-          isPublicRoomType={isPublicRoomType}
-          withBanner={isPublicRoomType && externalLinks.length > 0}
-          setMembers={setMembersList}
-        />
-      )}
+      <MembersList
+        loadNextPage={loadNextPage}
+        t={t}
+        security={security}
+        members={membersList}
+        membersHelper={membersHelper}
+        currentMember={currentMember}
+        updateRoomMemberRole={updateRoomMemberRole}
+        selectionParentRoom={selectionParentRoom}
+        setSelectionParentRoom={setSelectionParentRoom}
+        changeUserType={changeUserType}
+        setIsScrollLocked={setIsScrollLocked}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
+        hasNextPage={membersList.length - headersCount < membersFilter.total}
+        itemCount={membersFilter.total + headersCount}
+        onRepeatInvitation={onRepeatInvitation}
+        isPublicRoomType={isPublicRoomType}
+        withBanner={isPublicRoomType && externalLinks.length > 0}
+        setMembers={setMembersList}
+      />
     </>
   );
 };

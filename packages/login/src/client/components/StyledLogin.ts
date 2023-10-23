@@ -28,15 +28,14 @@ interface IStyledCaptchaProps {
 }
 
 export const LoginFormWrapper = styled.div`
-  display: grid;
-  grid-template-rows: ${(props: ILoginFormWrapperProps) =>
-    props.enabledJoin
-      ? props.isDesktop
-        ? css`1fr 10px`
-        : css`1fr 68px`
-      : css`1fr`};
   width: 100%;
+  height: ${props => props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
+
   box-sizing: border-box;
+
+  @media ${mobile}{
+    height: 100%;
+  }
 
   .bg-cover {
     background-image: ${(props) => props.bgPattern};
@@ -64,6 +63,7 @@ export const LoginContent = styled.div`
   margin: 0 auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  height: 100%;
 
   @media ${mobile} {
     width: 100%;

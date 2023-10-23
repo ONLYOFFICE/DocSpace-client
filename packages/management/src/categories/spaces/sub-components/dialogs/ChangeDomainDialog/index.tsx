@@ -7,8 +7,8 @@ import ModalDialog from "@docspace/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { TextInput, Checkbox } from "@docspace/components";
-import { parseAddress } from "@docspace/components/utils/email";
 import { useStore } from "SRC_DIR/store";
+import { parseDomain } from "SRC_DIR/utils";
 
 const StyledModal = styled(ModalDialogContainer)`
   .create-docspace-input-block {
@@ -22,6 +22,7 @@ const StyledModal = styled(ModalDialogContainer)`
 const ChangeDomainDialogComponent = () => {
   const { t } = useTranslation(["Management", "Common"]);
   const { spacesStore, authStore } = useStore();
+  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
 
   const {
     setDomainName,
@@ -41,14 +42,17 @@ const ChangeDomainDialogComponent = () => {
   };
 
   const onClickDomainChange = async () => {
+
+    const isValidDomain = parseDomain(domain, setDomainNameError);
+
+    if (!isValidDomain) return;
+
     await setDomainName(domain);
     await authStore.settingsStore.getAllPortals();
     await getPortalDomain();
     onClose();
   };
 
-  let parsed = parseAddress("test@" + domain);
-  const isDomainError = domain.length > 0 && !parsed.isValid();
   return (
     <StyledModal
       visible={visible}
@@ -70,19 +74,23 @@ const ChangeDomainDialogComponent = () => {
             {t("DomainName")}
           </Text>
           <TextInput
-            hasError={isDomainError}
+            hasError={!!domainNameError}
             onChange={onHandleDomain}
             value={domain}
             placeholder={t("EnterDomain")}
             className="create-docspace-input"
           />
+             <div>
+              {domainNameError && domainNameError.map((err, index) => (
+                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err.message}</Text>
+              ))}
+            </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="CreateButton"
           label={t("Common:ChangeButton")}
-          isDisabled={isDomainError || domain.length === 0}
           onClick={onClickDomainChange}
           size="normal"
           primary

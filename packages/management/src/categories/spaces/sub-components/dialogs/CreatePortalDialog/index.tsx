@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
 import Text from "@docspace/components/text";
@@ -6,7 +6,6 @@ import Button from "@docspace/components/button";
 import ModalDialog from "@docspace/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import toastr from "@docspace/components/toast/toastr";
 import { TextInput, Checkbox } from "@docspace/components";
 import { useStore } from "SRC_DIR/store";
 
@@ -39,7 +38,7 @@ const StyledModal = styled(ModalDialogContainer)`
 const CreatePortalDialog = () => {
   const [visit, setVisit] = React.useState<boolean>(false);
   const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
-  const [error, setError] = React.useState<null | string>(null);
+  const [registerError, setRegisterError] = React.useState<null | string>(null);
 
   const { spacesStore, authStore } = useStore();
   const { tenantAlias, baseDomain } = authStore.settingsStore;
@@ -56,7 +55,7 @@ const CreatePortalDialog = () => {
 
   const onHandleName = (e) => {
     setName(e.target.value);
-    setError(null);
+    if (registerError) setRegisterError(null);
   };
 
   const onHandleClick = async () => {
@@ -87,8 +86,7 @@ const CreatePortalDialog = () => {
 
       })
       .catch((error) => {
-        toastr.error(error?.response?.data?.message);
-        setError(error?.response?.data?.message);
+        setRegisterError(error?.response?.data?.message);
       })
 
   };
@@ -118,10 +116,13 @@ const CreatePortalDialog = () => {
           <TextInput
             onChange={onHandleName}
             value={name}
-            hasError={error}
+            hasError={!!registerError}
             placeholder={t("EnterName")}
             className="create-docspace-input"
           />
+          <div>
+              <Text fontSize="12px" fontWeight="400" color="#F24724">{registerError}</Text>
+          </div>
           <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
             <Text
               fontSize="12px"

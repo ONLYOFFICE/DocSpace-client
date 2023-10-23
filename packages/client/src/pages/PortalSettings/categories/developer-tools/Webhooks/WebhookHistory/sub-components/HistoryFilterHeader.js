@@ -31,6 +31,9 @@ const ListHeading = styled(Text)`
   line-height: 22px;
   font-weight: 700;
   margin: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const FilterButton = styled.div`
@@ -42,6 +45,8 @@ const FilterButton = styled.div`
   align-items: center;
 
   box-sizing: border-box;
+
+  flex-shrink: 0;
 
   width: 32px;
   height: 32px;
@@ -117,7 +122,7 @@ const HistoryFilterHeader = (props) => {
     <div>
       <Suspense fallback={<HistoryHeaderLoader />}>
         <ListHeader>
-          <ListHeading fontWeight={700} fontSize="16px">
+          <ListHeading title={configName} fontWeight={700} fontSize="16px">
             {configName}
           </ListHeading>
 

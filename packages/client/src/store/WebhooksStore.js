@@ -11,6 +11,8 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
+  authStore;
+
   webhooks = [];
   checkedEventIds = [];
   historyFilters = null;
@@ -23,8 +25,10 @@ class WebhooksStore {
   isRetryPending = false;
   configName = "";
 
-  constructor() {
+  constructor(authStore) {
     makeAutoObservable(this);
+
+    this.authStore = authStore;
   }
 
   setRetryPendingFalse = () => {
@@ -40,8 +44,14 @@ class WebhooksStore {
   };
 
   loadWebhooks = async () => {
+    const { passwordSettings, getPortalPasswordSettings } =
+      this.authStore.settingsStore;
+
     try {
       const webhooksData = await getAllWebhooks();
+      if (!passwordSettings) {
+        await getPortalPasswordSettings();
+      }
       runInAction(() => {
         this.webhooks = webhooksData.map((data) => ({
           id: data.configs.id,

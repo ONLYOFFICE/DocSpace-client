@@ -125,6 +125,7 @@ const PublicRoomBlock = (props) => {
           <></>
         )}
       </>
+
       {externalLinks.length
         ? externalLinks.map((link) => (
             <LinkRow link={link} key={link?.sharedTo?.id} />

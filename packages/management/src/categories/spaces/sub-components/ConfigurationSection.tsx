@@ -5,8 +5,8 @@ import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
 import toastr from "@docspace/components/toast/toastr";
 import { ConfigurationWrapper } from "../StyledSpaces";
-import { parseAddress } from "@docspace/components/utils/email";
 import { useStore } from "SRC_DIR/store";
+import { parseDomain } from "SRC_DIR/utils";
 
 const ConfigurationSection = ({ t }) => {
   const [domain, setDomain] = React.useState<string>("");
@@ -22,22 +22,22 @@ const ConfigurationSection = ({ t }) => {
   const onConfigurationPortal = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
-      const res = await checkDomain(domain).finally(() => setIsLoading(false));
+      const res = await checkDomain(`${name}.${domain}`).finally(() => setIsLoading(false));
       const isValidDomain = res?.value;
 
-      if (!isValidDomain)
-        return toastr.error("Введенное доменное имя не зарегистрировано"); // TODO: add translation
+      if (!isValidDomain) {
+        const error = "Домен не найден, пожалуйста, проверьте А запись в настройках DNS"
+        toastr.error(error); // TODO: add translation
+        return setDomainNameError([{message: error}])
+      }
+
+        
     }
 
-    let parsed = parseAddress("test@" + domain);
-    if (parsed?.parseErrors.length > 0) {
-      setDomainNameError(parsed.parseErrors);
-    }
-    
-    const isValidDomain = parsed.isValid();
+    const isValidDomain = parseDomain(domain, setDomainNameError);
     
     if (!isValidDomain) return;
- 
+
     await setPortalName(name)
     .then(async () => await setDomainName(domain))
     .catch(err => {
@@ -47,12 +47,12 @@ const ConfigurationSection = ({ t }) => {
   };
 
   const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDomainNameError(null);
+    if (domainNameError)setDomainNameError(null);
     setDomain(e.target.value);
   }
 
   const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPortalNameError(null);
+    if (portalNameError) setPortalNameError(null);
     setName(e.target.value);
   }
 

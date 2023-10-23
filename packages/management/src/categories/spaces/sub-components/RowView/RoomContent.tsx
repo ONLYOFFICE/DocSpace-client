@@ -10,7 +10,6 @@ const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
-    width: min-content;
   }
 `;
 
@@ -31,7 +30,7 @@ export const RoomContent = ({ item, isCurrentPortal }) => {
       className="spaces_row-content"
     >
       <div className="user-container-wrapper">
-        <Text fontWeight={600} fontSize="14px" isTextOverflow={true}>
+        <Text fontWeight={600} fontSize="14px" truncate={true}>
           {`${item.domain}`}
         </Text>
       </div>
@@ -46,7 +45,7 @@ export const RoomContent = ({ item, isCurrentPortal }) => {
       >
         {isCurrentPortal && t("CurrentSpace")}
       </Text>
-      <Text fontSize="12px" as="div" fontWeight={600}>
+      <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
         {`${t("PortalStats", {
           roomCount: roomsCount,
           userCount: roomAdminCount + usersCount,

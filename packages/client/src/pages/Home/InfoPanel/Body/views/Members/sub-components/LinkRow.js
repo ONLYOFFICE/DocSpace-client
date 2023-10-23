@@ -226,6 +226,7 @@ const LinkRow = (props) => {
             getData={getData}
             isDisabled={isLoading}
             title={t("Files:ShowLinkActions")}
+            directionY="both"
           />
         )}
       </div>

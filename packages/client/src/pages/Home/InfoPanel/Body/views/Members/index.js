@@ -202,8 +202,7 @@ const Members = ({
     setMembersList(newMembers);
   };
 
-  if (isLoading || selection?.id !== selectionParentRoom?.id)
-    return <Loaders.InfoPanelViewLoader view="members" />;
+  if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
   else if (!members) return <></>;
 
   const [currentMember] = members.administrators.filter(
@@ -218,6 +217,7 @@ const Members = ({
   const expectedTitleCount = expected.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
 
   return (
     <>
@@ -228,27 +228,29 @@ const Members = ({
           roomId={selectionParentRoom.id}
         />
       )}
-      <MembersList
-        loadNextPage={loadNextPage}
-        t={t}
-        security={security}
-        members={membersList}
-        membersHelper={membersHelper}
-        currentMember={currentMember}
-        updateRoomMemberRole={updateRoomMemberRole}
-        selectionParentRoom={selectionParentRoom}
-        setSelectionParentRoom={setSelectionParentRoom}
-        changeUserType={changeUserType}
-        setIsScrollLocked={setIsScrollLocked}
-        membersFilter={membersFilter}
-        setMembersFilter={setMembersFilter}
-        hasNextPage={membersList.length - headersCount < membersFilter.total}
-        itemCount={membersFilter.total + headersCount}
-        onRepeatInvitation={onRepeatInvitation}
-        isPublicRoomType={isPublicRoomType}
-        withBanner={isPublicRoomType && externalLinks.length > 0}
-        setMembers={setMembersList}
-      />
+      {dataReadyMembersList && (
+        <MembersList
+          loadNextPage={loadNextPage}
+          t={t}
+          security={security}
+          members={membersList}
+          membersHelper={membersHelper}
+          currentMember={currentMember}
+          updateRoomMemberRole={updateRoomMemberRole}
+          selectionParentRoom={selectionParentRoom}
+          setSelectionParentRoom={setSelectionParentRoom}
+          changeUserType={changeUserType}
+          setIsScrollLocked={setIsScrollLocked}
+          membersFilter={membersFilter}
+          setMembersFilter={setMembersFilter}
+          hasNextPage={membersList.length - headersCount < membersFilter.total}
+          itemCount={membersFilter.total + headersCount}
+          onRepeatInvitation={onRepeatInvitation}
+          isPublicRoomType={isPublicRoomType}
+          withBanner={isPublicRoomType && externalLinks.length > 0}
+          setMembers={setMembersList}
+        />
+      )}
     </>
   );
 };

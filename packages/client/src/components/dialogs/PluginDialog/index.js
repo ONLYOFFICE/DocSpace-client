@@ -1,11 +1,27 @@
 import React from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import ModalDialog from "@docspace/components/modal-dialog";
+import Portal from "@docspace/components/portal";
+import { Base } from "@docspace/components/themes";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+
+const StyledFullScreen = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  background: ${(props) => props.theme.backgroundColor};
+
+  width: 100%;
+  height: 100%;
+`;
+
+StyledFullScreen.defaultProps = { theme: Base };
 
 const PluginDialog = ({
   isVisible,
@@ -15,6 +31,8 @@ const PluginDialog = ({
   onClose,
   onLoad,
   eventListeners,
+
+  fullScreen,
 
   pluginId,
   pluginName,
@@ -119,19 +137,34 @@ const PluginDialog = ({
   }, []);
 
   const onLoadAction = React.useCallback(async () => {
-    // if (onLoad) {
-    //   const res = await onLoad();
-    //   setDialogHeaderProps(res.newDialogHeader);
-    //   setDialogBodyProps(res.newDialogBody);
-    //   setDialogFooterProps(res.newDialogFooter);
-    // }
+    if (onLoad) {
+      const res = await onLoad();
+      setDialogHeaderProps(res.newDialogHeader);
+      setDialogBodyProps(res.newDialogBody);
+      setDialogFooterProps(res.newDialogFooter);
+    }
   }, [onLoad]);
 
   React.useEffect(() => {
     onLoadAction();
   }, [onLoadAction]);
 
-  return (
+  const rootElement = document.getElementById("root");
+
+  const dialog = fullScreen ? (
+    <StyledFullScreen>
+      <WrappedComponent
+        pluginId={pluginId}
+        pluginName={pluginName}
+        pluginSystem={pluginSystem}
+        component={{
+          component: PluginComponents.box,
+          props: dialogBodyProps,
+        }}
+        setModalRequestRunning={setModalRequestRunning}
+      />
+    </StyledFullScreen>
+  ) : (
     <ModalDialog visible={isVisible} onClose={onCloseAction} {...rest}>
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -162,6 +195,8 @@ const PluginDialog = ({
       )}
     </ModalDialog>
   );
+
+  return <Portal element={dialog} appendTo={rootElement} visible={isVisible} />;
 };
 
 export default inject(({ pluginStore }) => {

@@ -11,7 +11,6 @@ import SubMenu from "./sub-components/sub-menu";
 import MobileSubMenu from "./sub-components/mobile-sub-menu";
 
 import {
-  isMobile,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
@@ -438,18 +437,27 @@ class ContextMenu extends Component {
 
   render() {
     const element = this.renderContextMenu();
-    return (
+
+    const isMobile = isMobileUtils();
+
+    const contextMenu = (
       <>
         {this.props.withBackdrop && (
           <Backdrop
             visible={this.state.visible}
-            withBackground={false}
-            withoutBlur={true}
+            withBackground={isMobile}
+            withoutBlur={!isMobile}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />
       </>
     );
+
+    const root = document.getElementById("root");
+
+    const portal = <Portal element={contextMenu} appendTo={root} />;
+
+    return isMobile && root ? portal : contextMenu;
   }
 }
 

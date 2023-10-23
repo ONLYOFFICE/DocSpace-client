@@ -207,7 +207,7 @@ const SectionHeaderContent = (props) => {
     isEmptyPage,
 
     isLoading,
-    pathParts,
+
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
@@ -218,6 +218,8 @@ const SectionHeaderContent = (props) => {
     isPublicRoomType,
     isCustomRoomType,
     primaryLink,
+    getPrimaryLink,
+    setExternalLink,
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
@@ -596,20 +598,6 @@ const SectionHeaderContent = (props) => {
 
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    const publicAction = primaryLink
-      ? {
-          id: "header_option_copy-external-link",
-          key: "copy-external-link",
-          label: t("Files:CopyPrimaryLink"),
-          icon: CopyToReactSvgUrl,
-          onClick: () => {
-            copy(primaryLink.sharedTo.shareLink);
-            toastr.success(t("Files:LinkSuccessfullyCopied"));
-          },
-          disabled: !isPublicRoomType || primaryLink.sharedTo.disabled,
-        }
-      : {};
-
     if (isArchiveFolder) {
       return [
         {
@@ -651,7 +639,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyLink"),
         onClick: onCopyLinkAction,
         disabled:
           isRecycleBinFolder ||
@@ -700,7 +688,26 @@ const SectionHeaderContent = (props) => {
         onClick: () => onClickEditRoom(selectedFolder),
         disabled: !isRoom || !security?.EditRoom,
       },
-      publicAction,
+      {
+        id: "header_option_copy-external-link",
+        key: "copy-external-link",
+        label: t("Files:CopyGeneralLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: async () => {
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Translations:LinkCopySuccess"));
+          } else {
+            const link = await getPrimaryLink(currentFolderId);
+            if (link) {
+              copy(link.sharedTo.shareLink);
+              toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+              setExternalLink(link);
+            }
+          }
+        },
+        disabled: !isPublicRoomType && !isCustomRoomType,
+      },
       {
         id: "header_option_invite-users-to-room",
         key: "invite-users-to-room",
@@ -864,8 +871,17 @@ const SectionHeaderContent = (props) => {
     const state = {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === 0,
-
+      isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
       rootFolderType: rootFolderType,
+      isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
+        ? selectedFolder.navigationPath[itemIdx]?.roomType ===
+          RoomsType.PublicRoom
+        : false,
+      rootRoomTitle:
+        selectedFolder.navigationPath.length > 1 &&
+        selectedFolder.navigationPath[1]?.isRoom
+          ? selectedFolder.navigationPath[1].title
+          : "",
     };
 
     setIsLoading(true);
@@ -1090,6 +1106,7 @@ export default inject(
 
       clearFiles,
       categoryType,
+      getPrimaryLink,
     } = filesStore;
 
     const {
@@ -1207,6 +1224,8 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1219,7 +1238,7 @@ export default inject(
       title,
       isRoom,
       currentFolderId: id,
-      pathParts: pathParts,
+
       navigationPath: folderPath,
 
       setIsInfoPanelVisible: setIsVisible,
@@ -1291,9 +1310,10 @@ export default inject(
       onClickBack,
       isPublicRoomType,
       isCustomRoomType,
-      isPublicRoom: publicRoomStore.isPublicRoom,
-
-      primaryLink: publicRoomStore.primaryLink,
+      isPublicRoom,
+      primaryLink,
+      getPrimaryLink,
+      setExternalLink,
 
       moveToPublicRoom,
 

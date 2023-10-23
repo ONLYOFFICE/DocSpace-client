@@ -2070,6 +2070,10 @@ const Dark = {
       color: "#818b91",
       linkColor: "#DDDDDD",
     },
+    devTools: {
+      border: "1px solid #474747",
+      color: "#858585",
+    },
   },
 
   peopleArticleBody: {
@@ -2362,6 +2366,7 @@ const Dark = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#858585",
     },
 
     roomType: {

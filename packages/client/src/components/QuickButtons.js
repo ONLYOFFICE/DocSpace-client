@@ -68,10 +68,11 @@ const QuickButtons = (props) => {
     (item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom) &&
     item.shared &&
-    !isArchiveFolder;
+    !isArchiveFolder &&
+    !isTile;
 
   return (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -110,7 +111,7 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyPrimaryLink")}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

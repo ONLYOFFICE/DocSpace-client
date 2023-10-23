@@ -116,10 +116,10 @@ const LinkRow = (props) => {
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
-      {
-        key: "edit-link-separator",
-        isSeparator: true,
-      },
+      // {
+      //   key: "edit-link-separator",
+      //   isSeparator: true,
+      // },
       // {
       //   key: "share-key",
       //   label: t("Files:Share"),
@@ -135,7 +135,7 @@ const LinkRow = (props) => {
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: t("Files:CopyPrimaryLink"),
+        label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
@@ -216,7 +216,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("Files:CopyPrimaryLink")}
+              title={t("Files:CopyGeneralLink")}
             />
           </>
         )}
@@ -226,6 +226,7 @@ const LinkRow = (props) => {
             getData={getData}
             isDisabled={isLoading}
             title={t("Files:ShowLinkActions")}
+            directionY="both"
           />
         )}
       </div>

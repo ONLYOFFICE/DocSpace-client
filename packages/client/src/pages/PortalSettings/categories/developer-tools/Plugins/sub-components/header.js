@@ -30,22 +30,23 @@ const StyledHeader = styled.div`
   }
 `;
 
-const Header = ({ t, currentColorScheme, learnMoreLink }) => {
+const Header = ({ t, currentColorScheme, withUpload, learnMoreLink }) => {
   return (
     <StyledHeader>
       <div className="header-container">
         <Heading className={"plugin-list-header"}>{t("Plugins")}</Heading>
-        <HelpButton
+        {/* <HelpButton
           offsetBottom={0}
           offsetLeft={0}
           offsetRight={0}
           offsetTop={0}
           tooltipContent={t("PluginsHelp")}
-        />
+        /> */}
       </div>
       <div>
         <Text>
-          {t("Description")}{" "}
+          {withUpload ? t("Description") : t("PluginsHelp")}
+          <br />
           <Link
             color={currentColorScheme?.main?.accent}
             type={"page"}

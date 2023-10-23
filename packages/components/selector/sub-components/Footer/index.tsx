@@ -85,7 +85,7 @@ const Footer = React.memo(
           </StyledNewNameContainer>
         )}
 
-        {withFooterCheckbox && (
+        {withFooterCheckbox && !withFooterInput && (
           <Checkbox
             label={footerCheckboxLabel}
             isChecked={isFooterCheckboxChecked}

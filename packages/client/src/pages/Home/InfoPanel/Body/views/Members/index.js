@@ -226,6 +226,7 @@ const Members = ({
           t={t}
           roomType={roomType}
           roomId={selectionParentRoom.id}
+          dataReadyMembersList={dataReadyMembersList}
         />
       )}
       {dataReadyMembersList && (

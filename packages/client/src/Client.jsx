@@ -103,15 +103,15 @@ const ClientContent = (props) => {
   React.useEffect(() => {
     if (isAuthenticated && !isDesktopClientInit && isDesktop && isLoaded) {
       setIsDesktopClientInit(true);
-      regDesktop(
-        user,
-        isEncryption,
-        encryptionKeys,
-        setEncryptionKeys,
-        isEditor,
-        null,
-        t
-      );
+      // regDesktop(
+      //   user,
+      //   isEncryption,
+      //   encryptionKeys,
+      //   setEncryptionKeys,
+      //   isEditor,
+      //   null,
+      //   t
+      // );
       //   console.log(
       //     "%c%s",
       //     "color: green; font: 1.2em bold;",

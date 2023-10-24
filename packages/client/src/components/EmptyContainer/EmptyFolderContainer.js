@@ -21,6 +21,7 @@ const EmptyFolderContainer = ({
   roomType,
   //isLoading,
   isArchiveFolderRoot,
+  isEmptyPage,
 }) => {
   //const location = useLocation();
 
@@ -53,6 +54,7 @@ const EmptyFolderContainer = ({
       }
       buttons={buttons}
       sectionWidth={sectionWidth}
+      isEmptyPage={isEmptyPage}
     />
   );
 };
@@ -64,6 +66,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     treeFoldersStore,
+    filesStore,
   }) => {
     const { roomType } = selectedFolderStore;
 
@@ -71,6 +74,9 @@ export default inject(
 
     const { isLoading } = clientLoadingStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
+
+    const { isEmptyPage } = filesStore;
+
     return {
       isLoading,
 
@@ -78,6 +84,7 @@ export default inject(
       canCreateFiles,
       isArchiveFolderRoot,
       theme: auth.settingsStore.theme,
+      isEmptyPage,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(EmptyFolderContainer)));

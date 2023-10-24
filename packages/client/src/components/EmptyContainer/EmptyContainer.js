@@ -62,10 +62,9 @@ const EmptyFoldersContainer = (props) => {
     buttons,
     imageStyle,
     buttonStyle,
-    isEmptyPage,
     sectionWidth,
-    isEmptyFolderContainer,
     className,
+    isEmptyPage,
   } = props;
 
   return (
@@ -81,8 +80,7 @@ const EmptyFoldersContainer = (props) => {
         subheadingText={subheadingText}
         descriptionText={descriptionText}
         buttons={buttons}
-        isEmptyPage={isEmptyPage}
-        isEmptyFolderContainer={isEmptyFolderContainer}
+        withoutFilter={isEmptyPage}
       />
     </EmptyFolderWrapper>
   );

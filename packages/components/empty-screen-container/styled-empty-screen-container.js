@@ -4,7 +4,11 @@ import NoUserSelect from "../utils/commonStyles";
 
 const EmptyContentBody = styled.div`
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: ${(props) =>
+    props.withoutFilter
+      ? "91px" //calculated without section body padding and without filter
+      : "52px"}; //calculated without section body padding, margin of filter
+
   grid-template-columns: 1fr;
   display: grid;
 
@@ -16,8 +20,8 @@ const EmptyContentBody = styled.div`
     "button";
 
   gap: 0px;
-  max-width: 640px;
-  width: fit-content;
+  width: 640px;
+
   grid-template-rows: max-content;
   justify-items: center;
 
@@ -70,11 +74,19 @@ const EmptyContentBody = styled.div`
   }
 
   @media ${tablet} {
-    max-width: 480px;
+    padding-top: ${(props) =>
+      props.withoutFilter
+        ? "109px" //calculated without section body padding and without filter
+        : "71px"}; //calculated without section body padding, margin of filter
+    width: 480px;
   }
 
   @media ${mobile} {
-    padding-top: 40px;
+    padding-top: 31px;
+    padding-top: ${(props) =>
+      props.withoutFilter
+        ? "69px" //calculated without section body padding and without filter
+        : "31px"}; //calculated without section body padding, margin of filter
     max-width: 343px;
     padding-left: 28px;
     padding-right: 28px;

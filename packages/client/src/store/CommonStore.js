@@ -5,8 +5,10 @@ import { setDNSSettings } from "@docspace/common/api/settings";
 import toastr from "@docspace/components/toast/toastr";
 
 class CommonStore {
-  whiteLabelLogoUrls = [];
+  logoUrlsWhiteLabel = [];
   whiteLabelLogoText = null;
+  defaultLogoTextWhiteLabel = null;
+
   dnsSettings = {
     defaultObj: {},
     customObj: {},
@@ -54,16 +56,48 @@ class CommonStore {
     return Promise.all(requests).finally(() => this.setIsLoaded(true));
   };
 
-  setLogoUrls = (urls) => {
-    this.whiteLabelLogoUrls = urls;
+  setLogoUrlsWhiteLabel = (urls) => {
+    this.logoUrlsWhiteLabel = urls;
   };
 
   setLogoText = (text) => {
     this.whiteLabelLogoText = text;
   };
 
+  setWhiteLabelSettings = async (data) => {
+    const response = await api.settings.setWhiteLabelSettings(data);
+    return Promise.resolve(response);
+  };
+
+  getWhiteLabelLogoUrls = async () => {
+    const { settingsStore } = authStore;
+    const { whiteLabelLogoUrls } = settingsStore;
+    const logos = JSON.parse(JSON.stringify(whiteLabelLogoUrls));
+    this.setLogoUrlsWhiteLabel(Object.values(logos));
+  };
+
+  getWhiteLabelLogoText = async () => {
+    const res = await api.settings.getLogoText();
+    this.setLogoText(res);
+    this.defaultLogoTextWhiteLabel = res;
+    return res;
+  };
+
+  saveWhiteLabelSettings = async (data) => {
+    const { settingsStore } = authStore;
+    const { getWhiteLabelLogoUrls } = settingsStore;
+
+    await this.setWhiteLabelSettings(data);
+    await getWhiteLabelLogoUrls();
+    this.getWhiteLabelLogoUrls();
+  };
+
   restoreWhiteLabelSettings = async (isDefault) => {
-    const res = await api.settings.restoreWhiteLabelSettings(isDefault);
+    const { settingsStore } = authStore;
+    const { getWhiteLabelLogoUrls } = settingsStore;
+
+    await api.settings.restoreWhiteLabelSettings(isDefault);
+    await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
   };
 
@@ -125,17 +159,6 @@ class CommonStore {
 
   getDNSSettings = async () => {
     this.getMappedDomain();
-  };
-
-  getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls();
-    this.setLogoUrls(Object.values(res));
-  };
-
-  getWhiteLabelLogoText = async () => {
-    const res = await api.settings.getLogoText();
-    this.setLogoText(res);
-    return res;
   };
 
   setIsLoadedArticleBody = (isLoadedArticleBody) => {

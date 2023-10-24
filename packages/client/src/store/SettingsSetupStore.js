@@ -319,11 +319,6 @@ class SettingsSetupStore {
     this.setFilter(filterData);
   };
 
-  setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(data);
-    return Promise.resolve(response);
-  };
-
   setLanguageAndTime = async (lng, timeZoneID) => {
     return api.settings.setLanguageAndTime(lng, timeZoneID);
   };

@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { useViewEffect } from "@docspace/common/hooks";
+
+import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import EmptyScreen from "../EmptyScreen";
-
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import { Base } from "@docspace/components/themes";
+import EmptyScreen from "../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
-import { DeviceType } from "@docspace/common/constants";
 
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.Accounts}`;
@@ -136,27 +136,11 @@ const Table = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if (
-      accountsViewAs !== "tile" &&
-      ((accountsViewAs !== "table" && accountsViewAs !== "row") ||
-        !sectionWidth)
-    )
-      return;
-
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (accountsViewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      currentDeviceType !== DeviceType.desktop
-    ) {
-      accountsViewAs !== "row" && setViewAs("row");
-    } else {
-      accountsViewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: accountsViewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;

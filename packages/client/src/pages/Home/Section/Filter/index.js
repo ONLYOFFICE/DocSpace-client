@@ -6,6 +6,7 @@ import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/common/utils";
@@ -522,8 +523,8 @@ const SectionFilterContent = ({
     (view) => {
       if (view === "row") {
         if (
-          (sectionWidth < 1025 && !infoPanelVisible) ||
-          (sectionWidth < 625 && infoPanelVisible) ||
+          isMobile() ||
+          isTablet() ||
           currentDeviceType !== DeviceType.desktop
         ) {
           setViewAs("row");

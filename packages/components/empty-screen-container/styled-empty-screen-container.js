@@ -37,6 +37,7 @@ const EmptyContentBody = styled.div`
     grid-area: headerText;
     font-size: 16px;
     color: ${(props) => props.theme.emptyContent.header.color};
+    text-align: center;
   }
 
   .ec-subheading {
@@ -90,7 +91,7 @@ const EmptyContentBody = styled.div`
     max-width: 343px;
     padding-left: 28px;
     padding-right: 28px;
-
+    width: fit-content;
     .ec-image {
       height: 75px;
       width: 75px;

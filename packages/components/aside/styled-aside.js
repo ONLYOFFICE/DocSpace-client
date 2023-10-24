@@ -4,7 +4,7 @@ import Base from "../themes/base";
 
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
-import { tablet, mobile } from "../utils/device";
+import { tablet, mobile, mobileFooterHeight } from "../utils/device";
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -20,7 +20,10 @@ const Container = ({
 
 const StyledAside = styled(Container)`
   background-color: ${(props) => props.theme.aside.backgroundColor};
-  height: ${(props) => props.theme.aside.height};
+  height: ${({ asideHeight, theme }) =>
+    asideHeight ? asideHeight : theme.aside.height};
+  margin-bottom: ${({ keyboardHeight }) =>
+    keyboardHeight ? `${keyboardHeight}px` : 0};
 
   position: fixed;
   top: ${(props) => props.theme.aside.top};
@@ -65,7 +68,11 @@ const StyledAside = styled(Container)`
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: calc(100% - 64px);
+    height: ${({ asideHeight }) =>
+      asideHeight
+        ? `calc(${asideHeight} - ${mobileFooterHeight})`
+        : `calc(100% - ${mobileFooterHeight})`};
+
     width: 100%;
     max-width: 100%;
 

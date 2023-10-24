@@ -10,6 +10,7 @@ import PluginItem from "./sub-components/plugin";
 
 import { PluginListContainer, StyledContainer } from "./StyledPlugins";
 import EmptyScreen from "./sub-components/EmptyScreen";
+import ListLoader from "./sub-components/ListLoader";
 
 const PluginPage = ({
   withUpload,
@@ -24,6 +25,8 @@ const PluginPage = ({
 
   currentColorScheme,
   theme,
+  isLoading,
+  isEmptyList,
 }) => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
@@ -35,7 +38,11 @@ const PluginPage = ({
 
   return (
     <>
-      {pluginList.length === 0 ? (
+      {isLoading || (!isEmptyList && pluginList.length === 0) ? (
+        <StyledContainer>
+          <ListLoader withUpload={withUpload} />
+        </StyledContainer>
+      ) : isEmptyList ? (
         <EmptyScreen
           t={t}
           theme={theme}
@@ -81,6 +88,9 @@ export default inject(({ auth, pluginStore }) => {
     setSettingsPluginDialogVisible,
 
     addPlugin,
+
+    isLoading,
+    isEmptyList,
   } = pluginStore;
 
   const openSettingsDialog = (pluginId, pluginName, pluginSystem) => {
@@ -101,5 +111,7 @@ export default inject(({ auth, pluginStore }) => {
 
     currentColorScheme,
     theme,
+    isLoading,
+    isEmptyList,
   };
 })(observer(PluginPage));

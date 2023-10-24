@@ -317,6 +317,10 @@ export const useFilesHelper = ({
           case FilesSelectorFilterTypes.DOCXF:
             filter.filterType = FilterType.OFormTemplateOnly;
             break;
+
+          case FilesSelectorFilterTypes.XLSX:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
         }
       }
 

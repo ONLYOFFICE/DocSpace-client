@@ -30,6 +30,7 @@ const FilesItemTitle = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = selectionParentRoom ? selectionParentRoom.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
+  const isRoom = selection?.isRoom;
 
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
@@ -69,7 +70,7 @@ const FilesItemTitle = ({
       </div>
       <Text className="text">{selection.title}</Text>
       <div className="info_title-icons">
-        {canInviteUserInRoomAbility && (
+        {canInviteUserInRoomAbility && isRoom && (
           <IconButton
             id="info_add-user"
             className={"icon"}

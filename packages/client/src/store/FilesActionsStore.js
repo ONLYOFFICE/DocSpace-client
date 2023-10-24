@@ -558,6 +558,7 @@ class FilesActionStore {
       label,
       alert: false,
       operationId,
+      isDownload: true,
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);

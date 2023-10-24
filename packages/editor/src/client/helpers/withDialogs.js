@@ -19,11 +19,12 @@ const withDialogs = (WrappedComponent) => {
     //const [isVisible, setIsVisible] = useState(false);
     const [filesType, setFilesType] = useState("");
     const [isFileDialogVisible, setIsFileDialogVisible] = useState(false);
-    const [typeInsertImageAction, setTypeInsertImageAction] = useState();
     const [isFolderDialogVisible, setIsFolderDialogVisible] = useState(false);
     const [titleSelectorFolder, setTitleSelectorFolder] = useState("");
     const [urlSelectorFolder, setUrlSelectorFolder] = useState("");
     const [extension, setExtension] = useState();
+
+    const [actionEvent, setActionEvent] = useState();
 
     const { t } = useTranslation(["Editor", "Common"]);
 
@@ -79,20 +80,26 @@ const withDialogs = (WrappedComponent) => {
 
     const onCloseFileDialog = () => {
       setIsFileDialogVisible(false);
+      setActionEvent(null);
     };
 
-    const onSDKRequestCompareFile = () => {
+    const onSDKRequestSelectDocument = (event) => {
+      console.log("onSDKRequestSelectDocument", { event });
+      setActionEvent(event);
       setFilesType(compareFilesAction);
       setIsFileDialogVisible(true);
     };
 
-    const onSDKRequestMailMergeRecipients = () => {
+    const onSDKRequestSelectSpreadsheet = (event) => {
+      console.log("onSDKRequestSelectSpreadsheet", { event });
+      setActionEvent(event);
       setFilesType(mailMergeAction);
       setIsFileDialogVisible(true);
     };
 
     const onSDKRequestInsertImage = (event) => {
-      setTypeInsertImageAction(event.data);
+      console.log("onSDKRequestInsertImage", { event });
+      setActionEvent(event);
       setFilesType(insertImageAction);
       setIsFileDialogVisible(true);
     };
@@ -104,7 +111,7 @@ const withDialogs = (WrappedComponent) => {
         typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
       docEditor?.insertImage({
-        ...typeInsertImageAction,
+        ...actionEvent.data,
         fileType: link.filetype,
         ...(token && { token }),
         url: link.url,
@@ -117,7 +124,8 @@ const withDialogs = (WrappedComponent) => {
       const docEditor =
         typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-      docEditor?.setMailMergeRecipients({
+      docEditor?.setRequestedSpreadsheet({
+        ...actionEvent.data,
         fileType: link.filetype,
         ...(token && { token }),
         url: link.url,
@@ -130,34 +138,32 @@ const withDialogs = (WrappedComponent) => {
       const docEditor =
         typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-      docEditor?.setRevisedFile({
+      docEditor?.setRequestedDocument({
+        ...actionEvent.data,
         fileType: link.filetype,
         ...(token && { token }),
         url: link.url,
       });
     };
 
-    const insertImageActionProps = {
-      filterParam: FilesSelectorFilterTypes.IMG,
-    };
-
-    const mailMergeActionProps = {
-      isTablesOnly: true,
-      searchParam: ".xlsx",
-    };
-    const compareFilesActionProps = {
-      isDocumentsOnly: true,
-    };
-
     const fileTypeDetection = () => {
       if (filesType === insertImageAction) {
-        return insertImageActionProps;
+        return {
+          isSelect: true,
+          filterParam: FilesSelectorFilterTypes.IMG,
+        };
       }
       if (filesType === mailMergeAction) {
-        return mailMergeActionProps;
+        return {
+          isSelect: true,
+          filterParam: FilesSelectorFilterTypes.XLSX,
+        };
       }
       if (filesType === compareFilesAction) {
-        return compareFilesActionProps;
+        return {
+          isSelect: true,
+          filterParam: FilesSelectorFilterTypes.DOCX,
+        };
       }
     };
 
@@ -287,8 +293,8 @@ const withDialogs = (WrappedComponent) => {
         //isVisible={isVisible}
         selectFileDialog={selectFileDialog}
         onSDKRequestInsertImage={onSDKRequestInsertImage}
-        onSDKRequestMailMergeRecipients={onSDKRequestMailMergeRecipients}
-        onSDKRequestCompareFile={onSDKRequestCompareFile}
+        onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+        onSDKRequestSelectDocument={onSDKRequestSelectDocument}
         isFileDialogVisible={isFileDialogVisible}
         selectFolderDialog={selectFolderDialog}
         onSDKRequestSaveAs={onSDKRequestSaveAs}

@@ -144,7 +144,14 @@ const ClientContent = (props) => {
       <GlobalEvents />
       {!isFormGallery ? (
         isFrame ? (
-          showMenu && <ClientArticle />
+          showMenu && (
+            <ClientArticle
+              withMainButton={withMainButton}
+              setIsHeaderLoading={setIsHeaderLoading}
+              setIsFilterLoading={setIsFilterLoading}
+              showArticleLoader={showArticleLoader}
+            />
+          )
         ) : (
           <ClientArticle
             withMainButton={withMainButton}

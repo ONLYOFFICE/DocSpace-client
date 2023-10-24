@@ -33,7 +33,7 @@ const ChangeRoomOwner = ({
           <Text fontWeight={600} fontSize="13px">
             {roomOwner.displayName}
           </Text>
-          {roomOwner?.id === currentUserId && (
+          {roomOwner.id === currentUserId && (
             <Text className="me-label">({t("Common:MeLabel")})</Text>
           )}
         </div>

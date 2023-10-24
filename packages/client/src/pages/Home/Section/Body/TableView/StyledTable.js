@@ -388,7 +388,8 @@ const StyledBadgesContainer = styled.div`
     margin: 0 -2px -2px -2px;
   }
 
-  .row-copy-link {
+  .row-copy-link,
+  .tablet-row-copy-link {
     display: none;
   }
 

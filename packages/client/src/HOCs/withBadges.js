@@ -175,12 +175,12 @@ export default function withBadges(WrappedComponent) {
         setConvertDialogVisible,
         setConvertItem,
       } = dialogsStore;
-      const { setIsLoading, isMuteCurrentRoomNotifications } = filesStore;
+      const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
+        filesStore;
       const { roomType, mute } = item;
 
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
-      const { getPrimaryLink } = publicRoomStore;
 
       return {
         isArchiveFolderRoot,

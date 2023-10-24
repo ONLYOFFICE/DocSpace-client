@@ -24,6 +24,7 @@ class Profile extends React.Component {
       selectedTreeNode,
       setSelectedNode,
       setIsProfileLoaded,
+      getTfaType,
     } = this.props;
 
     const userId = "@self";
@@ -46,6 +47,9 @@ class Profile extends React.Component {
     // if (linkParams.email_change && linkParams.email_change === "success") {
     //   toastr.success(t("ChangeEmailSuccess"));
     // }
+
+    getTfaType();
+
     if (!profile || profile.userName !== userId) {
       fetchProfile(userId).finally(() => {
         setIsProfileLoaded(true);
@@ -109,7 +113,7 @@ Profile.propTypes = {
 
 export default inject(
   ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language } = auth;
+    const { setDocumentTitle, language, tfaStore } = auth;
 
     const {
       setIsProfileLoaded,
@@ -133,6 +137,9 @@ export default inject(
     } = targetUserStore;
 
     const { selectedTreeNode, setSelectedNode } = treeFoldersStore;
+
+    const { getTfaType } = tfaStore;
+
     return {
       setDocumentTitle,
       language,
@@ -149,6 +156,7 @@ export default inject(
       isVisitor: auth.userStore.user.isVisitor,
       setIsProfileLoaded,
       setIsLoading,
+      getTfaType,
     };
   }
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

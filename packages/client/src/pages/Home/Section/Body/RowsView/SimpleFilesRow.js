@@ -164,6 +164,10 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 
+  .tablet-row-copy-link {
+    display: none;
+  }
+
   @media ${tablet} {
     .tablet-row-copy-link {
       display: block;
@@ -259,10 +263,19 @@ const StyledSimpleFilesRow = styled(Row)`
             `}
     }
 
-    .file__badges {
+    .file__badges,
+    .room__badges,
+    .folder__badges {
       > div {
         margin-left: 0;
         margin-right: 0;
+      }
+    }
+
+    .room__badges,
+    .folder__badges {
+      > div {
+        margin-top: 3px;
       }
     }
 
@@ -303,6 +316,13 @@ const StyledSimpleFilesRow = styled(Row)`
       margin-top: 0px;
       align-items: center;
       height: 100%;
+    }
+
+    .room__badges,
+    .folder__badges {
+      > div {
+        margin-top: 0px;
+      }
     }
   }
 `;

@@ -90,8 +90,8 @@ function Editor({
   // isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
-  onSDKRequestMailMergeRecipients,
-  onSDKRequestCompareFile,
+  onSDKRequestSelectSpreadsheet,
+  onSDKRequestSelectDocument,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -778,8 +778,8 @@ function Editor({
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
-        onRequestMailMergeRecipients,
-        onRequestCompareFile,
+        onRequestSelectSpreadsheet,
+        onRequestSelectDocument,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
@@ -833,8 +833,8 @@ function Editor({
 
       if (successAuth) {
         onRequestInsertImage = onSDKRequestInsertImage;
-        onRequestMailMergeRecipients = onSDKRequestMailMergeRecipients;
-        onRequestCompareFile = onSDKRequestCompareFile;
+        onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
+        onRequestSelectDocument = onSDKRequestSelectDocument;
       }
 
       if (userAccessRights.EditHistory) {
@@ -874,8 +874,8 @@ function Editor({
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
           onRequestSaveAs,
-          onRequestMailMergeRecipients,
-          onRequestCompareFile,
+          onRequestSelectSpreadsheet,
+          onRequestSelectDocument,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,

@@ -164,6 +164,10 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 
+  .tablet-row-copy-link {
+    display: none;
+  }
+
   @media ${tablet} {
     .tablet-row-copy-link {
       display: block;

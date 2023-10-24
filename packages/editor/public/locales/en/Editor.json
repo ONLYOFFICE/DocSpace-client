@@ -6,5 +6,6 @@
   "MailMergeFileType": "Select .XLSX file",
   "OpenSavedDocument": "Open saved document in new tab",
   "SelectFilesType": "Select files type: {{fileType}}",
-  "UsersWithoutAccess": "Some users whom you want to mention don't have access to the room: {{users}}"
+  "UsersWithoutAccess": "Some users whom you want to mention don't have access to the room: {{users}}",
+  "ErrorConnectionLost": "Connection is lost"
 }

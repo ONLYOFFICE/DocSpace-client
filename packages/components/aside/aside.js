@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
+import { isMobile } from "react-device-detect";
 import Scrollbar from "../scrollbar";
 import {
   StyledAside,
@@ -20,6 +20,36 @@ const Aside = React.memo((props) => {
     onClose,
   } = props;
 
+  const [defaultAsideHeight, setDefaultAsideHeight] = useState(
+    window?.visualViewport?.height ?? null
+  );
+
+  const [asideHeight, setAsideHeight] = useState(
+    window?.visualViewport?.height ?? null
+  );
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  const onOrientationChange = () => {
+    const viewportHeight = window?.visualViewport?.height;
+    const keyboardHeight =
+      defaultAsideHeight !== viewportHeight
+        ? defaultAsideHeight - viewportHeight
+        : 0;
+
+    setKeyboardHeight(keyboardHeight);
+    setAsideHeight(defaultAsideHeight - keyboardHeight);
+  };
+
+  useEffect(() => {
+    isMobile &&
+      window?.visualViewport?.addEventListener("resize", onOrientationChange);
+
+    return () => {
+      isMobile &&
+        window.removeEventListener("orientationchange", onOrientationChange);
+    };
+  });
+
   return (
     <StyledAside
       visible={visible}
@@ -27,6 +57,8 @@ const Aside = React.memo((props) => {
       zIndex={zIndex}
       contentPaddingBottom={contentPaddingBottom}
       className={`${className} not-selectable aside`}
+      asideHeight={asideHeight + "px"}
+      keyboardHeight={keyboardHeight}
     >
       {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
       {withoutBodyScroll ? (

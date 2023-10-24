@@ -110,6 +110,10 @@ class SelectedFolderStore {
     this.parentId = parentId;
   };
 
+  setRoomType = (roomType) => {
+    this.roomType = roomType;
+  };
+
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
     this.title = title;
     this.tags = tags;

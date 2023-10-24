@@ -21,6 +21,7 @@ class WebhooksStore {
   eventDetails = {};
   FETCH_COUNT = 100;
   isRetryPending = false;
+  configName = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -112,6 +113,20 @@ class WebhooksStore {
 
   retryWebhookEvents = async (ids) => {
     return await retryWebhooks(ids);
+  };
+
+  fetchConfigName = async (params) => {
+    const historyData = await getWebhooksJournal({
+      ...params,
+      startIndex: 0,
+      count: 1,
+    });
+
+    this.configName = historyData.items[0].configName;
+  };
+
+  clearConfigName = () => {
+    this.configName = "";
   };
 
   fetchHistoryItems = async (params) => {

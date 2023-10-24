@@ -7,7 +7,7 @@ describe("<MainButton />", () => {
     const wrapper = mount(
       <SaveCancelButtons
         showReminder={true}
-        reminderTest="You have unsaved changes"
+        reminderText="You have unsaved changes"
         saveButtonLabel="Save"
         cancelButtonLabel="Cancel"
       />
@@ -20,7 +20,7 @@ describe("<MainButton />", () => {
     const wrapper = mount(
       <SaveCancelButtons
         showReminder={true}
-        reminderTest="You have unsaved changes"
+        reminderText="You have unsaved changes"
         saveButtonLabel="Save"
         cancelButtonLabel="Cancel"
         id="testId"
@@ -34,7 +34,7 @@ describe("<MainButton />", () => {
     const wrapper = mount(
       <SaveCancelButtons
         showReminder={true}
-        reminderTest="You have unsaved changes"
+        reminderText="You have unsaved changes"
         saveButtonLabel="Save"
         cancelButtonLabel="Cancel"
         className="test"

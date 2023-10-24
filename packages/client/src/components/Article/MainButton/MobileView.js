@@ -54,6 +54,7 @@ const MobileView = ({
   clearPrimaryProgressData,
   secondaryProgressDataStoreVisible,
   secondaryProgressDataStorePercent,
+  secondaryProgressDataStoreIsDownload,
   secondaryProgressDataStoreCurrentFile,
   secondaryProgressDataStoreCurrentFilesCount,
   clearSecondaryProgressData,
@@ -108,6 +109,12 @@ const MobileView = ({
         secondaryProgressDataStorePercent) /
       100;
 
+    const secondaryProgressStatus = secondaryProgressDataStoreIsDownload
+      ? `${Math.floor(secondaryProgressDataStorePercent)}%`
+      : `${Math.floor(
+          currentSecondaryProgressItem
+        )}/${secondaryProgressDataStoreCurrentFilesCount}`;
+
     const newProgressOptions = [
       {
         key: "primary-progress",
@@ -128,9 +135,7 @@ const MobileView = ({
         label: t("Common:OtherOperations"),
         icon: MobileActionsRemoveReactSvgUrl,
         percent: secondaryProgressDataStorePercent,
-        status: `${Math.round(
-          currentSecondaryProgressItem
-        )}/${secondaryProgressDataStoreCurrentFilesCount}`,
+        status: secondaryProgressStatus,
         onCancel: clearSecondaryProgressData,
       },
     ];
@@ -163,6 +168,7 @@ const MobileView = ({
     primaryProgressDataErrors,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
   ]);
@@ -216,6 +222,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     currentFile: secondaryProgressDataStoreCurrentFile,
     filesCount: secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,
+    isDownload: secondaryProgressDataStoreIsDownload,
   } = secondaryProgressDataStore;
 
   return {
@@ -230,6 +237,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     clearPrimaryProgressData,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,

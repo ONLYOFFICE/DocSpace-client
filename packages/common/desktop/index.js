@@ -73,7 +73,7 @@ export function regDesktop(
             break;
           }
           case "relogin": {
-            toastr.info(t("Common:EncryptionKeysReload"));
+            // toastr.info(t("Common:EncryptionKeysReload"));
             //relogin();
             break;
           }

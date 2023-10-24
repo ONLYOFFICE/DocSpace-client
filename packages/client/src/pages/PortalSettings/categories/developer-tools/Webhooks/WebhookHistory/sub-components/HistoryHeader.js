@@ -165,7 +165,7 @@ const HistoryHeader = (props) => {
         <b>{t("Common:Done")}</b>,
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastr.error(error);
     } finally {
       setRetryPendingFalse();

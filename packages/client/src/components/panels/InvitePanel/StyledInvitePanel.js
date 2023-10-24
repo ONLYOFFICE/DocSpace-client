@@ -376,6 +376,17 @@ const StyledLink = styled(Link)`
     theme.interfaceDirection === "rtl" ? `left` : `right`};
 `;
 
+const ResetLink = styled(Link)`
+  float: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `right` : `left`};
+  padding: 0 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
+  font-style: normal;
+  line-height: 15px;
+`;
+
 StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
@@ -416,26 +427,45 @@ const StyledInviteLanguage = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 4px;
   height: 28px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
-  .link-list {
-    font-size: 13px;
-    color: var(--light-gray-dark);
-    font-style: normal;
-    font-weight: 600;
-    line-height: 15px;
+  .list-link {
+    margin-left: 4px;
+    color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
+  }
+  @media ${mobile} {
+    justify-content: space-between;
+  }
+  .invitation-language {
+    margin-right: 4px;
+    color: ${(props) =>
+      props.theme.createEditRoomDialog.commonParam.descriptionColor};
+    @media ${mobile} {
+      margin-right: 0;
+    }
   }
   .language-combo-box {
     .combo-button {
       padding-left: 6px;
       padding-right: 0px;
+    }
+    .combo-button-label {
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+    }
+    .combo-buttons_arrow-icon {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+        }
+      }
     }
   }
 `;
@@ -468,6 +498,7 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
+  ResetLink,
   ScrollList,
   StyledAccessSelector,
   StyledToggleButton,

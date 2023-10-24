@@ -20,6 +20,7 @@ const FilesItemTitle = ({
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
+  roomsView,
 }) => {
   const itemTitleRef = useRef();
 
@@ -30,7 +31,7 @@ const FilesItemTitle = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = selectionParentRoom ? selectionParentRoom.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
-  const isRoom = selection?.isRoom;
+  const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
 
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
@@ -70,7 +71,7 @@ const FilesItemTitle = ({
       </div>
       <Text className="text">{selection.title}</Text>
       <div className="info_title-icons">
-        {canInviteUserInRoomAbility && isRoom && (
+        {canInviteUserInRoomAbility && showInviteUserIcon && (
           <IconButton
             id="info_add-user"
             className={"icon"}
@@ -94,7 +95,8 @@ const FilesItemTitle = ({
 };
 
 export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
-  const { selectionParentRoom, setIsMobileHidden } = auth.infoPanelStore;
+  const { selectionParentRoom, setIsMobileHidden, roomsView } =
+    auth.infoPanelStore;
   const { isGracePeriod } = auth.currentTariffStatusStore;
 
   const { setInvitePanelOptions, setInviteUsersWarningDialogVisible } =
@@ -113,6 +115,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
     setInvitePanelOptions,
     setInviteUsersWarningDialogVisible,
     isPublicRoomType,
+    roomsView,
   };
 })(
   withTranslation([

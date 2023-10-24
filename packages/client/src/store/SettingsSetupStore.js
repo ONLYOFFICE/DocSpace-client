@@ -91,7 +91,6 @@ class SettingsSetupStore {
 
     if (authStore.isAuthenticated) {
       await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.tfaStore.getTfaType();
       await authStore.settingsStore.getIpRestrictionsEnable();
       await authStore.settingsStore.getIpRestrictions();
       await authStore.settingsStore.getSessionLifetime();

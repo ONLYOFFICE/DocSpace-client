@@ -32,6 +32,10 @@ const TwoFactorAuth = (props) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
+    getTfaType,
+    smsAvailable,
+    appAvailable,
+    tfaSettings,
   } = props;
   const [type, setType] = useState("none");
 
@@ -45,7 +49,6 @@ const TwoFactorAuth = (props) => {
   const location = useLocation();
 
   const getSettings = () => {
-    const { tfaSettings, smsAvailable, appAvailable } = props;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
 
     saveToSessionStorage("defaultTfaSettings", tfaSettings);
@@ -60,6 +63,10 @@ const TwoFactorAuth = (props) => {
     setAppDisabled(appAvailable);
   };
 
+  const getTfaTypeFn = async () => {
+    await getTfaType();
+  };
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
@@ -69,6 +76,10 @@ const TwoFactorAuth = (props) => {
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  useEffect(() => {
+    if (smsAvailable === null || appAvailable === null) getTfaTypeFn();
+  }, [smsAvailable, appAvailable]);
 
   useEffect(() => {
     if (!isInit) return;
@@ -208,6 +219,7 @@ export default inject(({ auth, setup }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
+    getTfaType,
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
@@ -226,5 +238,6 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
+    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

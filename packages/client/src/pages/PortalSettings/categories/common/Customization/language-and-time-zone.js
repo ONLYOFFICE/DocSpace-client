@@ -206,8 +206,10 @@ const LanguageAndTimeZone = (props) => {
         findSelectedItemByKey(timezones, portalTimeZoneId) ||
         rawTimezones[0];
 
-      const timezoneDefault = timezoneDefaultFromSessionStorage ||
-        findSelectedItemByKey(timezones, portalTimeZoneId) || timezones[0];
+      const timezoneDefault =
+        timezoneDefaultFromSessionStorage ||
+        findSelectedItemByKey(timezones, portalTimeZoneId) ||
+        timezones[0];
 
       setState((val) => ({ ...val, timezone, timezoneDefault }));
     }
@@ -502,7 +504,7 @@ const LanguageAndTimeZone = (props) => {
         onSaveClick={onSaveLngTZSettings}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}

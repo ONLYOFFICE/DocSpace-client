@@ -27,6 +27,7 @@ class CommonStore {
   isLoadedCompanyInfoSettingsData = false;
 
   greetingSettingsIsDefault = true;
+  enableRestoreButton = false;
 
   constructor() {
     this.authStore = authStore;
@@ -61,6 +62,12 @@ class CommonStore {
 
   setLogoText = (text) => {
     this.whiteLabelLogoText = text;
+  };
+
+  getIsDefaultWhiteLabel = async () => {
+    const res = await api.settings.getIsDefaultWhiteLabel();
+    const enableRestoreButton = res.map((item) => item.default).includes(false);
+    this.enableRestoreButton = enableRestoreButton;
   };
 
   restoreWhiteLabelSettings = async (isDefault) => {
@@ -131,6 +138,7 @@ class CommonStore {
   getWhiteLabelLogoUrls = async () => {
     const res = await api.settings.getLogoUrls();
     this.setLogoUrls(Object.values(res));
+    this.getIsDefaultWhiteLabel();
   };
 
   getWhiteLabelLogoText = async () => {

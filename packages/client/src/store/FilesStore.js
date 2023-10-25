@@ -1370,7 +1370,7 @@ class FilesStore {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }
 
-        if (data.total > 0) {
+        if (newTotal > 0) {
           const lastPage = filterData.getLastPage();
 
           if (filterData.page > lastPage) {

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
 
 import {
   TabletSideInfo,

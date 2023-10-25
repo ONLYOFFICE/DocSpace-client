@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import { getLogoFromPath } from "@docspace/common/utils";
 
 const StyledNav = styled.div`
@@ -16,7 +16,7 @@ const StyledNav = styled.div`
       fill: ${(props) => props.theme.client?.home?.logoColor};
     }
   }
-  @media ${hugeMobile} {
+  @media ${mobile} {
     display: flex;
   }
 `;

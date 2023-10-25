@@ -80,6 +80,7 @@ export const FilesSelectorFilterTypes = Object.freeze({
   IMG: "IMG",
   GZ: "GZ",
   DOCXF: "DOCXF",
+  XLSX: "XLSX",
 });
 /**
  * Enum for filter subject.
@@ -497,3 +498,9 @@ export const RtlLanguages = [
   "ur",
   "yi",
 ];
+
+export const DeviceType = Object.freeze({
+  mobile: "mobile",
+  tablet: "tablet",
+  desktop: "desktop",
+});

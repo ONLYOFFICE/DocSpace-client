@@ -4,17 +4,14 @@ import { withTranslation } from "react-i18next";
 import FieldContainer from "@docspace/components/field-container";
 import toastr from "@docspace/components/toast/toastr";
 import TextInput from "@docspace/components/text-input";
-import HelpButton from "@docspace/components/help-button";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Text from "@docspace/components/text";
@@ -135,10 +132,6 @@ const WelcomePageSettings = (props) => {
       setState((val) => ({ ...val, hasScroll: scrollLngTZSettings }));
     }
 
-    if (greetingSettings !== prevProps.greetingSettings) {
-      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
-    }
-
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
     }
@@ -156,7 +149,6 @@ const WelcomePageSettings = (props) => {
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    greetingSettings,
     getSettings,
     getGreetingSettingsIsDefault,
     state.hasScroll,
@@ -164,6 +156,19 @@ const WelcomePageSettings = (props) => {
     state.isLoadingGreetingSave,
     state.isLoadingGreetingRestore,
   ]);
+
+  React.useEffect(() => {
+    greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
+    const emptyGreetingTitleFromSessionStorage =
+      greetingTitleFromSessionStorage === null ||
+      greetingTitleFromSessionStorage === "none";
+
+    if (!emptyGreetingTitleFromSessionStorage) return;
+
+    if (greetingSettings !== state.greetingTitle) {
+      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
+    }
+  }, [greetingSettings]);
 
   React.useEffect(() => {
     prevProps.current = { isLoaded, tReady, greetingSettings };
@@ -217,8 +222,6 @@ const WelcomePageSettings = (props) => {
       .then(() => {
         setState((val) => ({
           ...val,
-          greetingTitle: greetingSettings,
-          greetingTitleDefault: greetingSettings,
           showReminder: false,
         }));
 
@@ -262,7 +265,7 @@ const WelcomePageSettings = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(
@@ -342,7 +345,7 @@ const WelcomePageSettings = (props) => {
         onSaveClick={onSaveGreetingSettings}
         onCancelClick={onRestoreGreetingSettings}
         showReminder={state.showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}

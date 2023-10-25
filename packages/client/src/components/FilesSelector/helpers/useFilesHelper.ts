@@ -21,6 +21,7 @@ import {
   FilterType,
   FolderType,
 } from "@docspace/common/constants";
+//@ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
 const getIconUrl = (extension: string, isImage: boolean, isMedia: boolean) => {
@@ -316,6 +317,10 @@ export const useFilesHelper = ({
           case FilesSelectorFilterTypes.DOCXF:
             filter.filterType = FilterType.OFormTemplateOnly;
             break;
+
+          case FilesSelectorFilterTypes.XLSX:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
         }
       }
 
@@ -323,7 +328,10 @@ export const useFilesHelper = ({
 
       filter.folder = id.toString();
 
-      const setSettings = async (folderId, isErrorPath = false) => {
+      const setSettings = async (
+        folderId: string | number,
+        isErrorPath = false
+      ) => {
         if (isInit && getRootData) {
           const folder = await getFolderInfo(folderId);
 
@@ -331,7 +339,7 @@ export const useFilesHelper = ({
             folder.rootFolderType === FolderType.TRASH ||
             folder.rootFolderType === FolderType.Archive
           ) {
-            if (isRoomsOnly) {
+            if (isRoomsOnly && getRoomList) {
               await getRoomList(0, true, null, true);
               toastr.error(
                 t("Files:ArchivedRoomAction", { name: folder.title })
@@ -366,20 +374,28 @@ export const useFilesHelper = ({
           setSelectedTreeNode({ ...current, path: pathParts });
 
         if (isInit) {
-          const breadCrumbs: BreadCrumb[] = await Promise.all(
-            pathParts.map(async (folderId: number | string) => {
-              const folderInfo: any = await getFolderInfo(folderId);
+          const breadCrumbs: BreadCrumb[] = pathParts.map(
+            ({
+              id,
+              title,
+              roomType,
+            }: {
+              id: number | string;
+              title: string;
+              roomType?: number;
+            }) => {
+              // const folderInfo: any = await getFolderInfo(folderId);
 
-              const { title, id, parentId, rootFolderType, roomType } =
-                folderInfo;
+              // const { title, id, parentId, rootFolderType, roomType } =
+              //   folderInfo;
 
               return {
                 label: title,
                 id: id,
-                isRoom: parentId === 0 && rootFolderType === FolderType.Rooms,
+                isRoom: !!roomType,
                 roomType,
               };
-            })
+            }
           );
 
           !isThirdParty &&
@@ -409,14 +425,14 @@ export const useFilesHelper = ({
       try {
         await setSettings(id);
       } catch (e) {
-        if (isThirdParty) {
+        if (isThirdParty && rootThirdPartyId) {
           await setSettings(rootThirdPartyId, true);
 
           toastr.error(e);
           return;
         }
 
-        if (isRoomsOnly) {
+        if (isRoomsOnly && getRoomList) {
           await getRoomList(0, true, null, true);
 
           toastr.error(e);

@@ -17,6 +17,7 @@ import { removeLocalStorage } from "../../utils";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
+import { DeviceType } from "@docspace/common/constants";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -62,7 +63,7 @@ const DataManagementWrapper = (props) => {
               <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
                 {helpInfo}
               </Trans>
-              <Box marginProp="10px 0 0">
+              <Box as={"span"} marginProp="10px 0 0">
                 <Link
                   id="link-tooltip"
                   color="#333333"
@@ -138,11 +139,13 @@ export default inject(({ auth, setup, backup }) => {
   const {
     dataBackupUrl,
     automaticBackupUrl,
-    isTabletView,
+
     currentColorScheme,
+    currentDeviceType,
   } = settingsStore;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
   return {
     loadBaseInfo: async () => {
       await initSettings();

@@ -14,7 +14,8 @@ import Scrollbar from "../../scrollbar";
 import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
 import Loaders from "@docspace/common/components/Loaders";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
+import { isMobile } from "../../utils/device";
 
 const SubMenu = (props) => {
   const {
@@ -35,7 +36,7 @@ const SubMenu = (props) => {
   const theme = useTheme();
 
   const onItemMouseEnter = (e, item) => {
-    if (item.disabled || isMobileOnly) {
+    if (item.disabled || isMobile()) {
       e.preventDefault();
       return;
     }
@@ -46,9 +47,9 @@ const SubMenu = (props) => {
   const onItemClick = (e, item) => {
     if (item.onLoad) {
       e.preventDefault();
-      if (!isMobileOnly) return;
+      if (!isMobile()) return;
 
-      if (isMobileOnly) onMobileItemClick(e, item.onLoad);
+      if (isMobile()) onMobileItemClick(e, item.onLoad);
       else onLeafClick(e);
       return;
     }
@@ -77,9 +78,9 @@ const SubMenu = (props) => {
   };
 
   const position = () => {
-    const parentItem = subMenuRef.current.parentElement;
+    const parentItem = subMenuRef.current?.parentElement;
     const containerOffset = DomHelpers.getOffset(
-      subMenuRef.current.parentElement
+      subMenuRef.current?.parentElement
     );
     const viewport = DomHelpers.getViewport();
     const subListWidth = subMenuRef.current.offsetParent

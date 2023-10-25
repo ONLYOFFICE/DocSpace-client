@@ -1,6 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
+
+import { DeviceType } from "@docspace/common/constants";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -79,6 +80,7 @@ export default function withFileActions(WrappedFileItem) {
         inProgress,
         isSelected,
         setSelection,
+        currentDeviceType,
       } = this.props;
 
       const { isThirdPartyFolder } = item;
@@ -97,9 +99,8 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder ||
         isArchiveFolder ||
         (!draggable && !isFileName && !isActive) ||
-        window.innerWidth < 1025 ||
+        currentDeviceType !== DeviceType.desktop ||
         notSelectable ||
-        isMobile ||
         isThirdPartyFolder ||
         inProgress
       ) {
@@ -176,6 +177,7 @@ export default function withFileActions(WrappedFileItem) {
         item,
         openFileAction,
         setParentId,
+        setRoomType,
         isTrashFolder,
         isArchiveFolder,
       } = this.props;
@@ -198,6 +200,7 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
+        setRoomType(item.roomType);
       }
 
       openFileAction(item);
@@ -230,6 +233,7 @@ export default function withFileActions(WrappedFileItem) {
         isFolder,
 
         itemIndex,
+        currentDeviceType,
       } = this.props;
       const { access, id } = item;
 
@@ -249,7 +253,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const isShareable = allowShareIn && item.canShare;
 
-      const isMobileView = sectionWidth < 500;
+      const isMobileView = currentDeviceType === DeviceType.mobile;
 
       const displayShareButton = isMobileView
         ? "26px"
@@ -289,6 +293,7 @@ export default function withFileActions(WrappedFileItem) {
   return inject(
     (
       {
+        auth,
         filesActionsStore,
         dialogsStore,
         treeFoldersStore,
@@ -404,6 +409,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected: !!selectedItem,
         //parentFolder: selectedFolderStore.parentId,
         setParentId: selectedFolderStore.setParentId,
+        setRoomType: selectedFolderStore.setRoomType,
         isTrashFolder: isRecycleBinFolder,
         getFolderInfo,
         viewAs,
@@ -420,6 +426,7 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
 
         setSelection,
+        currentDeviceType: auth.settingsStore.currentDeviceType,
       };
     }
   )(observer(WithFileActions));

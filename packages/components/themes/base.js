@@ -85,6 +85,8 @@ const Base = {
     color: black,
   },
 
+  backgroundAndSubstrateColor: "#F8F9F9",
+
   button: {
     fontWeight: "600",
     margin: "0",
@@ -2023,6 +2025,7 @@ const Base = {
     links: {
       iconColor: "#3B72A7",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
     },
 
     members: {
@@ -2072,6 +2075,10 @@ const Base = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
+    },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
     },
   },
 
@@ -2170,6 +2177,8 @@ const Base = {
       hoverIconColor: grayMain,
 
       borderImageSource: `linear-gradient(to right,${white} 21px,${grayLightMid} 21px,${grayLightMid} calc(100% - 20px),${white} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${white} 0px,${grayLightMid} 0px,${grayLightMid} 100% ,${white} 100%)`,
+
       lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
@@ -2358,6 +2367,7 @@ const Base = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#657077",
     },
 
     roomType: {

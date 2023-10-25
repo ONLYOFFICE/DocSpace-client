@@ -93,6 +93,7 @@ class Row extends React.Component {
         title: children.props.item.title
           ? children.props.item.title
           : children.props.item.displayName,
+        color: children.props.item.logo?.color,
       };
     }
 
@@ -111,7 +112,7 @@ class Row extends React.Component {
         withoutBorder={withoutBorder}
       >
         {inProgress ? (
-          <Loader className="row-loader" type="oval" size="16px" />
+          <Loader className="row-progress-loader" type="oval" size="16px" />
         ) : (
           <>
             {mode == "default" && renderCheckbox && (

@@ -1,13 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
-
-import {
-  isDesktop as isDesktopUtils,
-  isTablet as isTabletUtils,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
 import SubArticleBackdrop from "./sub-components/article-backdrop";
 import SubArticleHeader from "./sub-components/article-header";
@@ -17,9 +11,12 @@ import ArticleProfile from "./sub-components/article-profile";
 import ArticleAlerts from "./sub-components/article-alerts";
 import ArticleLiveChat from "./sub-components/article-live-chat";
 import ArticleApps from "./sub-components/article-apps";
+import ArticleDevToolsBar from "./sub-components/article-dev-tools-bar";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
+import { DeviceType } from "../../constants";
+import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
 
 const Article = ({
   showText,
@@ -33,7 +30,6 @@ const Article = ({
   withMainButton,
 
   hideProfileBlock,
-  hideAppsBlock,
 
   currentColorScheme,
   setArticleOpen,
@@ -46,33 +42,48 @@ const Article = ({
   onLogoClickAction,
   theme,
 
-  withCustomArticleHeader,
-
+  currentDeviceType,
+  showArticleLoader,
+  isAdmin,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
-  const [
-    articleMainButtonContent,
-    setArticleMainButtonContent,
-  ] = React.useState(null);
+  const [articleMainButtonContent, setArticleMainButtonContent] =
+    React.useState(null);
   const [articleBodyContent, setArticleBodyContent] = React.useState(null);
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState(null);
+  const [isVirtualKeyboardOpen, setIsVirtualKeyboardOpen] =
+    React.useState(false);
+  const updateSizeRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (isMobileOnly) {
-      window.addEventListener("popstate", onMobileBack);
-      return () => window.removeEventListener("popstate", onMobileBack);
-    }
+    window.addEventListener("popstate", onMobileBack);
+    return () => window.removeEventListener("popstate", onMobileBack);
   }, [onMobileBack]);
 
   React.useEffect(() => {
-    window.addEventListener("resize", sizeChangeHandler);
-    return () => window.removeEventListener("resize", sizeChangeHandler);
-  }, []);
+    // const showArticle = JSON.parse(localStorage.getItem("showArticle"));
 
-  React.useEffect(() => {
-    sizeChangeHandler();
-  }, []);
+    if (currentDeviceType === DeviceType.mobile) {
+      setShowText(true);
+      setIsMobileArticle(true);
+
+      return;
+    }
+
+    if (currentDeviceType === DeviceType.tablet) {
+      setIsMobileArticle(true);
+
+      // if (showArticle) return;
+
+      setShowText(false);
+
+      return;
+    }
+
+    setShowText(true);
+    setIsMobileArticle(false);
+  }, [setShowText, setIsMobileArticle, currentDeviceType]);
 
   React.useEffect(() => {
     React.Children.forEach(children, (child) => {
@@ -95,70 +106,71 @@ const Article = ({
     });
   }, [children]);
 
-  const sizeChangeHandler = React.useCallback(() => {
-    const showArticle = JSON.parse(localStorage.getItem("showArticle"));
-
-    if (isMobileOnly || isMobileUtils() || window.innerWidth === 375) {
-      setShowText(true);
-      setIsMobileArticle(true);
-    }
-    if (
-      ((isTabletUtils() && window.innerWidth !== 375) || isMobile) &&
-      !isMobileOnly
-    ) {
-      setIsMobileArticle(true);
-
-      if (showArticle) return;
-
-      setShowText(false);
-    }
-    if (isDesktopUtils() && !isMobile) {
-      setShowText(true);
-      setIsMobileArticle(false);
-    }
-  }, [setShowText, setIsMobileArticle]);
-
   const onMobileBack = React.useCallback(() => {
     //close article
 
+    if (currentDeviceType !== DeviceType.mobile) return;
     setArticleOpen(false);
-  }, [setArticleOpen]);
+  }, [setArticleOpen, currentDeviceType]);
 
   // TODO: make some better
-  const onResize = React.useCallback(() => {
-    let correctTabletHeight = window.innerHeight;
+  const onResize = React.useCallback(
+    (e) => {
+      let correctTabletHeight = window.innerHeight;
 
-    if (mainBarVisible)
-      correctTabletHeight -= window.innerHeight <= 768 ? 62 : 90;
+      if (mainBarVisible) {
+        const mainBar = document.getElementById("main-bar");
 
-    const isTouchDevice =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0;
+        if (!mainBar.offsetHeight)
+          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 
-    const path = window.location.pathname.toLowerCase();
+        correctTabletHeight -= mainBar.offsetHeight;
+      }
 
-    if (
-      isBannerVisible &&
-      isMobile &&
-      isTouchDevice &&
-      (path.includes("rooms") || path.includes("files"))
-    )
-      correctTabletHeight -= 80;
+      const isTouchDevice =
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0;
 
-    setCorrectTabletHeight(correctTabletHeight);
-  }, [mainBarVisible, isBannerVisible]);
+      const path = window.location.pathname.toLowerCase();
+
+      if (
+        isBannerVisible &&
+        isMobile &&
+        isTouchDevice &&
+        (path.includes("rooms") || path.includes("files"))
+      ) {
+        correctTabletHeight -= 80;
+
+        if (e?.target?.height) {
+          const diff = window.innerHeight - e.target.height;
+          setIsVirtualKeyboardOpen(true);
+          correctTabletHeight -= diff;
+        } else {
+          setIsVirtualKeyboardOpen(false);
+        }
+      }
+
+      setCorrectTabletHeight(correctTabletHeight);
+    },
+    [mainBarVisible, isBannerVisible]
+  );
 
   React.useEffect(() => {
-    if (isTablet) {
-      onResize();
-      window.addEventListener("resize", onResize);
+    onResize();
+    window.addEventListener("resize", onResize);
+    if (isMobile && !isMobileOnly && isIOS) {
+      window?.visualViewport?.addEventListener("resize", onResize);
     }
-
     return () => {
       window.removeEventListener("resize", onResize);
+      window?.visualViewport?.removeEventListener("resize", onResize);
+      clearTimeout(updateSizeRef.current);
     };
   }, [onResize]);
+
+  const withDevTools =
+    !window.location.pathname.includes("portal-settings") && isAdmin;
 
   const articleComponent = (
     <>
@@ -168,20 +180,20 @@ const Article = ({
         articleOpen={articleOpen}
         $withMainButton={withMainButton}
         correctTabletHeight={correctTabletHeight}
+        isMobile={currentDeviceType === DeviceType.mobile}
         {...rest}
       >
         <SubArticleHeader
           showText={showText}
           onLogoClickAction={onLogoClickAction}
-          withCustomArticleHeader={withCustomArticleHeader}
+          currentDeviceType={currentDeviceType}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
 
         {articleMainButtonContent &&
         withMainButton &&
-        !isMobileOnly &&
-        !isMobileUtils() ? (
+        currentDeviceType !== DeviceType.mobile ? (
           <SubArticleMainButton showText={showText}>
             {articleMainButtonContent.props.children}
           </SubArticleMainButton>
@@ -189,33 +201,62 @@ const Article = ({
 
         <SubArticleBody showText={showText}>
           {articleBodyContent ? articleBodyContent.props.children : null}
+          {!showArticleLoader && (
+            <>
+              <ArticleAlerts />
+              {withDevTools && (
+                <ArticleDevToolsBar
+                  articleOpen={articleOpen}
+                  currentDeviceType={currentDeviceType}
+                  toggleArticleOpen={toggleArticleOpen}
+                  showText={showText}
+                  theme={theme}
+                />
+              )}
+              <ArticleApps
+                withDevTools={withDevTools}
+                showText={showText}
+                theme={theme}
+              />
+              {!isMobile && isLiveChatAvailable && (
+                <ArticleLiveChat
+                  currentColorScheme={currentColorScheme}
+                  withMainButton={withMainButton && !!articleMainButtonContent}
+                />
+              )}
+            </>
+          )}
+        </SubArticleBody>
+        {!showArticleLoader && (
           <HideArticleMenuButton
             showText={showText}
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
-            hideProfileBlock={hideProfileBlock}
+            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
-          {!hideProfileBlock && !isMobileOnly && (
-            <ArticleProfile showText={showText} />
-          )}
+        )}
 
-          <ArticleAlerts />
-          {!hideAppsBlock && <ArticleApps showText={showText} theme={theme} />}
-          {!isMobile && isLiveChatAvailable && (
-            <ArticleLiveChat
-              currentColorScheme={currentColorScheme}
-              withMainButton={withMainButton && !!articleMainButtonContent}
-            />
-          )}
-        </SubArticleBody>
+        {!hideProfileBlock && currentDeviceType !== DeviceType.mobile && (
+          <>
+            {showArticleLoader ? (
+              <ArticleProfileLoader />
+            ) : (
+              <ArticleProfile
+                showText={showText}
+                currentDeviceType={currentDeviceType}
+                isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+              />
+            )}
+          </>
+        )}
       </StyledArticle>
-      {articleOpen && (isMobileOnly || window.innerWidth <= 375) && (
+      {articleOpen && currentDeviceType === DeviceType.mobile && (
         <>
           <SubArticleBackdrop onClick={toggleArticleOpen} />
         </>
       )}
 
-      {articleMainButtonContent && (isMobileOnly || isMobileUtils()) ? (
+      {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
         <SubArticleMainButton showText={showText}>
           {articleMainButtonContent.props.children}
         </SubArticleMainButton>
@@ -240,7 +281,9 @@ const Article = ({
   //   withMainButton,
   // });
 
-  return isMobileOnly ? renderPortalArticle() : articleComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortalArticle()
+    : articleComponent;
 };
 
 Article.propTypes = {
@@ -271,9 +314,11 @@ Article.Body.displayName = "Body";
 export default inject(({ auth }) => {
   const { settingsStore, userStore, isLiveChatAvailable, bannerStore } = auth;
 
-  const { withSendAgain } = userStore;
+  const { withSendAgain, user } = userStore;
 
   const { isBannerVisible } = bannerStore;
+
+  const isAdmin = user?.isAdmin;
 
   const {
     showText,
@@ -286,6 +331,7 @@ export default inject(({ auth }) => {
     setArticleOpen,
     mainBarVisible,
     theme,
+    currentDeviceType,
   } = settingsStore;
 
   return {
@@ -305,5 +351,8 @@ export default inject(({ auth }) => {
     isLiveChatAvailable,
 
     theme,
+    currentDeviceType,
+
+    isAdmin,
   };
 })(observer(Article));

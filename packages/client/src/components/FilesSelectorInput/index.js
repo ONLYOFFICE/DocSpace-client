@@ -27,6 +27,7 @@ const FilesSelectorInput = (props) => {
 
     filterParam,
     descriptionText,
+    className,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -47,22 +48,17 @@ const FilesSelectorInput = (props) => {
   };
 
   const onSetBasePath = (folders) => {
-    console.log("onSetBasePath", withoutInitPath);
     !withoutInitPath && setBasePath(folders);
     isLoading && setIsLoading(false);
   };
 
   const onSelectFolder = (folderId, folders) => {
-    console.log("onSelectFolder", folderId, folders);
-
     setSelectedFolder && setSelectedFolder(folderId);
 
     folders && setNewPath(folders);
   };
 
   const onSelectFile = (fileInfo, folders) => {
-    console.log("onSelectFile", fileInfo, folders);
-
     setSelectedFile && setSelectedFile(fileInfo);
     folders && setNewPath(folders, fileInfo?.title);
   };
@@ -78,7 +74,7 @@ const FilesSelectorInput = (props) => {
   };
 
   return (
-    <StyledBodyWrapper maxWidth={maxWidth}>
+    <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
         onClick={onClick}
         fromStorage

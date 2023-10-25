@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 
 import Avatar from "@docspace/components/avatar";
 import DropDownItem from "@docspace/components/drop-down-item";
@@ -15,24 +14,20 @@ import Button from "@docspace/components/button";
 const StyledDiv = styled.div`
   width: 32px;
   height: 32px;
-
-  ${isMobileOnly &&
-  css`
-    @media (min-width: 428px) {
-      .backdrop-active {
-        background-color: unset;
-        backdrop-filter: unset;
-      }
-    }
-  `}
 `;
 
 const StyledButtonWrapper = styled.div`
   width: 100%;
-
   padding: 12px 16px;
-
   box-sizing: border-box;
+`;
+
+const StyledDropDownItem = styled(DropDownItem)`
+  padding: 0px 16px;
+  .drop-down-icon {
+    margin-right: 12px;
+    height: 22px;
+  }
 `;
 
 class ProfileActions extends React.PureComponent {
@@ -171,7 +166,7 @@ class ProfileActions extends React.PureComponent {
                     href={action.url}
                     onClick={this.onClickItemLink}
                   >
-                    <DropDownItem {...action} />
+                    <StyledDropDownItem {...action} noHover={true} />
                   </Link>
                 ))
             )}

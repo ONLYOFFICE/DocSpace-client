@@ -10,7 +10,7 @@ import toastr from "@docspace/components/toast/toastr";
 
 import { ThemeKeys } from "@docspace/common/constants";
 
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import { showLoader, getSystemTheme } from "@docspace/common/utils";
 
 import ThemePreview from "./theme-preview";
@@ -52,7 +52,7 @@ const StyledWrapper = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -60,7 +60,7 @@ const StyledWrapper = styled.div`
   .mobile-themes-container {
     display: none;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: flex;
       padding-left: 30px;
     }
@@ -69,7 +69,13 @@ const StyledWrapper = styled.div`
 
 const InterfaceTheme = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { theme, changeTheme, currentColorScheme, selectedThemeId } = props;
+  const {
+    theme,
+    changeTheme,
+    currentColorScheme,
+    selectedThemeId,
+    isDesktopClient,
+  } = props;
   const [currentTheme, setCurrentTheme] = useState(theme);
 
   const themeChange = async (theme) => {
@@ -103,18 +109,25 @@ const InterfaceTheme = (props) => {
   const isSystemTheme = currentTheme === ThemeKeys.SystemStr;
   const systemThemeValue = getSystemTheme();
 
+  const systemThemeLabel = isDesktopClient
+    ? t("DesktopTheme")
+    : t("SystemTheme");
+  const systemThemeDescriptionLabel = isDesktopClient
+    ? t("DesktopThemeDescription")
+    : t("SystemThemeDescription");
+
   return (
     <StyledWrapper>
       <div>
         <Checkbox
           className="system-theme-checkbox"
           value={ThemeKeys.SystemStr}
-          label={t("SystemTheme")}
+          label={systemThemeLabel}
           isChecked={isSystemTheme}
           onChange={onChangeSystemTheme}
         />
         <Text as="div" className="system-theme-description">
-          {t("SystemThemeDescription")}
+          {systemThemeDescriptionLabel}
         </Text>
       </div>
       <div className="themes-container">
@@ -168,12 +181,14 @@ export default inject(({ auth }) => {
   const { userStore, settingsStore } = auth;
 
   const { changeTheme, user } = userStore;
-  const { currentColorScheme, selectedThemeId } = settingsStore;
+  const { currentColorScheme, selectedThemeId, isDesktopClient } =
+    settingsStore;
 
   return {
     changeTheme,
     theme: user.theme || "System",
     currentColorScheme,
     selectedThemeId,
+    isDesktopClient,
   };
 })(observer(InterfaceTheme));

@@ -44,6 +44,7 @@ const ModalDialog = ({
   isDoubleFooterLine,
   isCloseable,
   embedded,
+  withForm,
 }) => {
   const onCloseEvent = () => {
     if (embedded) return;
@@ -96,6 +97,7 @@ const ModalDialog = ({
     <Portal
       element={
         <ModalAside
+          withForm={withForm}
           isDoubleFooterLine={isDoubleFooterLine}
           id={id}
           style={style}
@@ -153,41 +155,41 @@ ModalDialog.propTypes = {
   /** Sets the displayed dialog to be closed or open */
   isCloseable: PropTypes.bool,
 
-  /** **`MODAL-ONLY`**  
+  /** **`MODAL-ONLY`**
 
   Sets `width: 520px` and `max-hight: 400px`*/
   isLarge: PropTypes.bool,
 
-  /** **`MODAL-ONLY`**  
+  /** **`MODAL-ONLY`**
 
   Sets `max-width: auto`*/
   autoMaxWidth: PropTypes.bool,
 
-  /** **`MODAL-ONLY`**  
+  /** **`MODAL-ONLY`**
 
   Sets `max-height: auto`*/
   autoMaxHeight: PropTypes.bool,
 
-  /** **`MODAL-ONLY`**  
+  /** **`MODAL-ONLY`**
 
   Displays border betweeen body and footer`*/
   withFooterBorder: PropTypes.bool,
 
-  /** **`ASIDE-ONLY`**  
+  /** **`ASIDE-ONLY`**
 
   Enables Body scroll */
   withBodyScroll: PropTypes.bool,
 
-  /** **`ASIDE-ONLY`**  
+  /** **`ASIDE-ONLY`**
 
   Enables body scroll */
   isScrollLocked: PropTypes.bool,
 
-  /** **`ASIDE-ONLY`**  
+  /** **`ASIDE-ONLY`**
 
   Sets modal dialog size equal to window */
   scale: PropTypes.bool,
-  /** **`ASIDE-ONLY`**  
+  /** **`ASIDE-ONLY`**
 
   Allows you to embed a modal window as an aside dialog inside the parent container without applying a dialog layout to it */
   containerVisible: PropTypes.bool,

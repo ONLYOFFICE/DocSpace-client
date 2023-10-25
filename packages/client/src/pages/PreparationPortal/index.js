@@ -23,13 +23,8 @@ let timerId = null,
   prevProgress;
 
 const PreparationPortal = (props) => {
-  const {
-    multiplicationFactor,
-    t,
-    withoutHeader,
-    style,
-    clearLocalStorage,
-  } = props;
+  const { multiplicationFactor, t, withoutHeader, style, clearLocalStorage } =
+    props;
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -236,7 +231,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ backup }) => {
+const PreparationPortalWrapper = inject(({ auth, backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize

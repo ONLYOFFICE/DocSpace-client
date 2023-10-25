@@ -16,5 +16,6 @@
   "PortalStats": "Комнаты: {{roomCount}} | Пользователи: {{userCount}} | Используемое место для хранения: {{usedStorage}}/{{maxStorage}}",
   "PortalExists": "Портал уже существует",
   "EnterName": "Введите название пространства",
-  "CurrentSpace": "Текущее пространство"
+  "CurrentSpace": "Текущее пространство",
+  "DomainNotFound": "Домен не найден, проверьте настройки DNS"
 }

@@ -16,5 +16,6 @@
   "PortalStats": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{usedStorage}}/{{maxStorage}}",
   "PortalExists": "Portal already exists",
   "EnterName": "Enter space name",
-  "CurrentSpace": "Current space"
+  "CurrentSpace": "Current space",
+  "DomainNotFound": "Domain not found, please check in DNS settings"
 }

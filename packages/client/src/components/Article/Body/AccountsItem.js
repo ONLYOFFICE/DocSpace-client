@@ -2,20 +2,24 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { FolderType } from "@docspace/common/constants";
+
 import CatalogItem from "@docspace/components/catalog-item";
 
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import { getCatalogIconByFolderType } from "./Items.helper";
 
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const onClickAction = React.useCallback(() => {
     onClick && onClick("accounts");
   }, [onClick]);
 
+  const icon = getCatalogIconByFolderType(FolderType.Account);
+
   return (
     <CatalogItem
       key="accounts"
       text={t("Accounts")}
-      icon={CatalogAccountsReactSvgUrl}
+      icon={icon}
       showText={showText}
       onClick={onClickAction}
       isActive={isActive}

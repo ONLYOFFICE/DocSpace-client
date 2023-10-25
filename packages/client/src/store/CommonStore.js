@@ -48,7 +48,8 @@ class CommonStore {
       settingsStore.getPortalTimezones(),
       settingsStore.getPortalCultures(),
       this.getWhiteLabelLogoUrls(),
-      this.getWhiteLabelLogoText()
+      this.getWhiteLabelLogoText(),
+      this.getIsDefaultWhiteLabel()
     );
 
     if (standalone) {
@@ -91,6 +92,7 @@ class CommonStore {
     await this.setWhiteLabelSettings(data);
     await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
+    this.getIsDefaultWhiteLabel();
   };
 
   getIsDefaultWhiteLabel = async () => {
@@ -106,6 +108,7 @@ class CommonStore {
     await api.settings.restoreWhiteLabelSettings(isDefault);
     await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
+    this.getIsDefaultWhiteLabel();
   };
 
   getGreetingSettingsIsDefault = async () => {

@@ -691,8 +691,6 @@ class Tile extends React.PureComponent {
       });
     }
 
-    console.log(item);
-
     return (
       <StyledTile
         ref={this.tile}

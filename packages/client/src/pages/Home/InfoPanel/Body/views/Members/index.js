@@ -217,6 +217,9 @@ const Members = ({
   const expectedTitleCount = expected.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
+
+  if (!dataReadyMembersList) return <></>;
 
   return (
     <>

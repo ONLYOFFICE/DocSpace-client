@@ -436,7 +436,30 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
   }
+  return key;
+}
 
+export function convertToLanguage(key: string) {
+  switch (key) {
+    case "en-US":
+      return "en";
+    case "el-GR":
+      return "el";
+    case "hy-AM":
+      return "hy";
+    case "ko-KR":
+      return "ko";
+    case "lo-LA":
+      return "lo";
+    case "pt-BR":
+      return "pt";
+    case "uk-UA":
+      return "uk";
+    case "ja-JP":
+      return "ja";
+    case "zh-CN":
+      return "zh";
+  }
   return key;
 }
 

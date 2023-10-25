@@ -11,7 +11,7 @@ import {
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
 
-import { getCookie } from "@docspace/common/utils";
+import { convertToLanguage, getCookie } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
 
 const myDocumentsFolderId = 2;
@@ -42,7 +42,8 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale = getCookie(LANGUAGE) || "en";
+    const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
+    console.log(userLocale);
     return this.oformLocales.includes(userLocale) ? userLocale : "en";
   }
 
@@ -69,7 +70,10 @@ class OformsStore {
   fetchOformLocales = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
     const fetchedLocales = await getOformLocales(url);
-    const localeKeys = fetchedLocales.map((locale) => locale.code);
+    const localeKeys = fetchedLocales.map((locale) =>
+      convertToLanguage(locale.code)
+    );
+    console.log(localeKeys);
     this.oformLocales = localeKeys;
   };
 

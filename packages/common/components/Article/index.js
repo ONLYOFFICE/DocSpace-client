@@ -44,6 +44,7 @@ const Article = ({
 
   currentDeviceType,
   showArticleLoader,
+  isAdmin,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -168,7 +169,8 @@ const Article = ({
     };
   }, [onResize]);
 
-  const withDevTools = !window.location.pathname.includes("portal-settings");
+  const withDevTools =
+    !window.location.pathname.includes("portal-settings") && isAdmin;
 
   const articleComponent = (
     <>
@@ -312,9 +314,11 @@ Article.Body.displayName = "Body";
 export default inject(({ auth }) => {
   const { settingsStore, userStore, isLiveChatAvailable, bannerStore } = auth;
 
-  const { withSendAgain } = userStore;
+  const { withSendAgain, user } = userStore;
 
   const { isBannerVisible } = bannerStore;
+
+  const isAdmin = user?.isAdmin;
 
   const {
     showText,
@@ -348,5 +352,7 @@ export default inject(({ auth }) => {
 
     theme,
     currentDeviceType,
+
+    isAdmin,
   };
 })(observer(Article));

@@ -332,7 +332,7 @@ const WelcomePageSettings = (props) => {
         onSaveClick={onSaveGreetingSettings}
         onCancelClick={onRestoreGreetingSettings}
         showReminder={state.showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}

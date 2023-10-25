@@ -34,6 +34,7 @@ const ChangeDomainDialogComponent = () => {
   const [domain, setDomain] = React.useState("");
 
   const onHandleDomain = (e) => {
+    if (domainNameError) setDomainNameError(null);
     setDomain(e.target.value);
   };
 

@@ -14,6 +14,11 @@ const ConfigurationSection = ({ t }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [portalNameError, setPortalNameError] = React.useState<null | string>(null);
   const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
+  const [checkDomainError, setCheckDomainError] = React.useState<null | string>(null);
+  const [error, setError] = React.useState({
+    index: 0,
+    message: null
+  })
 
   const { spacesStore, authStore } = useStore();
 
@@ -26,9 +31,7 @@ const ConfigurationSection = ({ t }) => {
       const isValidDomain = res?.value;
 
       if (!isValidDomain) {
-        const error = "Домен не найден, пожалуйста, проверьте А запись в настройках DNS"
-        toastr.error(error); // TODO: add translation
-        return setDomainNameError([{message: error}])
+        return setCheckDomainError(t("DomainNotFound"))
       }
 
         
@@ -47,11 +50,13 @@ const ConfigurationSection = ({ t }) => {
   };
 
   const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checkDomainError) setCheckDomainError(null);
     if (domainNameError)setDomainNameError(null);
     setDomain(e.target.value);
   }
 
   const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checkDomainError) setCheckDomainError(null);
     if (portalNameError) setPortalNameError(null);
     setName(e.target.value);
   }
@@ -81,7 +86,7 @@ const ConfigurationSection = ({ t }) => {
           </div>
 
           <TextInput
-            hasError={!!domainNameError}
+            hasError={!!(domainNameError || checkDomainError)}
             onChange={onHandleDomain}
             value={domain}
             placeholder={t("EnterDomain")}
@@ -98,14 +103,14 @@ const ConfigurationSection = ({ t }) => {
             {t("DocSpaceName")}
           </Text>
           <TextInput
-            hasError={!!portalNameError}
+            hasError={!!(portalNameError|| checkDomainError)}
             onChange={onHandleName}
             value={name}
             placeholder={t("Common:EnterName")}
             className="spaces-input"
           />
             <div>
-              <Text fontSize="12px" fontWeight="400" color="#F24724">{portalNameError}</Text>
+              <Text fontSize="12px" fontWeight="400" color="#F24724">{portalNameError || checkDomainError}</Text>
             </div>
         </div>
       </div>

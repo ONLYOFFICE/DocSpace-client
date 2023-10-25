@@ -697,7 +697,7 @@ function Editor({
     if (!fileInfo) return;
     const search = window.location.search;
     const shareIndex = search.indexOf("share=");
-    const key = search.substring(shareIndex + 6);
+    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
 
     let backUrl = "";
 

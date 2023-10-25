@@ -34,7 +34,7 @@ const CategoryFilterMobile = ({
   let calculatedHeight =
     152.2 + (!openedCategory ? 0 : 36 * openedCategory.categories.length);
   const maxCalculatedHeight =
-    window.innerHeight - wrapperRef?.current?.offsetTop - 64;
+    window.innerHeight - wrapperRef?.current?.offsetTop - 64 - 48;
   if (calculatedHeight > maxCalculatedHeight)
     calculatedHeight = maxCalculatedHeight;
 

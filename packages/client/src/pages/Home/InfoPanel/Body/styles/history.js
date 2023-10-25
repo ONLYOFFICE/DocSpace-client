@@ -128,6 +128,7 @@ const StyledHistoryBlockMessage = styled.div`
   .main-message {
     width: max-content;
     max-width: 100%;
+    min-width: max-content;
   }
 
   strong {

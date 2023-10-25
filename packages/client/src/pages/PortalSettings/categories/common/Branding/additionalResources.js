@@ -272,7 +272,7 @@ const AdditionalResources = (props) => {
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
           displaySettings={true}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          reminderText={t("YouHaveUnsavedChanges")}
           showReminder={(isSettingPaid && hasChange) || isLoading}
           disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
           additionalClassSaveButton="additional-resources-save"

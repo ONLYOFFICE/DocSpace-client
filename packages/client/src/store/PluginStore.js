@@ -48,6 +48,9 @@ class PluginStore {
   deletePluginDialogVisible = false;
   deletePluginDialogProps = null;
 
+  isLoading = true;
+  isEmptyList = false;
+
   constructor(authStore, selectedFolderStore) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
@@ -63,6 +66,14 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setIsLoading = (value) => {
+    this.isLoading = value;
+  };
+
+  setIsEmptyList = (value) => {
+    this.isEmptyList = value;
+  };
 
   setCurrentSettingsDialogPlugin = (value) => {
     this.currentSettingsDialogPlugin = value;
@@ -166,6 +177,7 @@ class PluginStore {
 
   updatePlugins = async () => {
     const { isAdmin, isOwner } = this.authStore.userStore.user;
+    this.setIsLoading(true);
 
     try {
       this.plugins = [];
@@ -174,7 +186,12 @@ class PluginStore {
         !isAdmin && !isOwner ? true : null
       );
 
+      this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin));
+
+      setTimeout(() => {
+        this.setIsLoading(false);
+      }, 500);
     } catch (e) {
       console.log(e);
     }

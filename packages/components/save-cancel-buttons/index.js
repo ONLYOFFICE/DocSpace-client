@@ -43,7 +43,7 @@ class SaveCancelButtons extends React.Component {
       onCancelClick,
       displaySettings,
       showReminder,
-      reminderTest,
+      reminderText,
       saveButtonLabel,
       cancelButtonLabel,
       hasScroll,
@@ -109,8 +109,8 @@ class SaveCancelButtons extends React.Component {
             scale={isMobile()}
           />
         </div>
-        {showReminder && reminderTest && (
-          <Text className="unsaved-changes">{reminderTest}</Text>
+        {showReminder && reminderText && (
+          <Text className="unsaved-changes">{reminderText}</Text>
         )}
       </StyledSaveCancelButtons>
     );
@@ -123,7 +123,7 @@ SaveCancelButtons.propTypes = {
   /** Accepts css class */
   className: PropTypes.string,
   /** Message text that notifies of the unsaved changes */
-  reminderTest: PropTypes.string,
+  reminderText: PropTypes.string,
   /** Save button label */
   saveButtonLabel: PropTypes.string,
   /** Cancel button label  */

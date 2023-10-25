@@ -71,6 +71,11 @@ let documentserverUrl =
 let userAccessRights = {};
 let isArchiveFolderRoot = true;
 let usersInRoom = [];
+let isZoom =
+  typeof window !== "undefined" &&
+  (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
+    window?.navigator?.userAgent?.includes("ZoomApps"));
+
 function Editor({
   config,
   //personal,
@@ -85,8 +90,8 @@ function Editor({
   // isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
-  onSDKRequestMailMergeRecipients,
-  onSDKRequestCompareFile,
+  onSDKRequestSelectSpreadsheet,
+  onSDKRequestSelectDocument,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -315,6 +320,33 @@ function Editor({
     );
 
     docEditor.setReferenceData(referenceData);
+  };
+
+  const onSDKRequestOpen = async (event) => {
+    const windowName = event.data.windowName;
+    const reference = event.data;
+
+    try {
+      const data = {
+        fileKey: reference.referenceData ? reference.referenceData.fileKey : "",
+        instanceId: reference.referenceData
+          ? reference.referenceData.instanceId
+          : "",
+        fileId,
+        path: reference.path || "",
+      };
+
+      const result = await getReferenceData(data);
+
+      if (result.error) throw new Error(result.error);
+
+      var link = result.link;
+      window.open(link, windowName);
+    } catch (e) {
+      var winEditor = window.open("", windowName);
+      winEditor.close();
+      docEditor.showMessage(e?.message || t("ErrorConnectionLost"));
+    }
   };
 
   const onMakeActionLink = (event) => {
@@ -618,7 +650,7 @@ function Editor({
         users,
       });
     } catch (e) {
-      docEditor.showMessage(e?.message || "Connection is lost");
+      docEditor.showMessage(e?.message || t("ErrorConnectionLost"));
     }
   };
 
@@ -665,7 +697,7 @@ function Editor({
     if (!fileInfo) return;
     const search = window.location.search;
     const shareIndex = search.indexOf("share=");
-    const key = search.substring(shareIndex + 6);
+    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
 
     let backUrl = "";
 
@@ -746,11 +778,12 @@ function Editor({
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
-        onRequestMailMergeRecipients,
-        onRequestCompareFile,
+        onRequestSelectSpreadsheet,
+        onRequestSelectDocument,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
+        onRequestOpen,
         onRequestUsers,
         onRequestSendNotify,
         onRequestCreateNew,
@@ -800,8 +833,8 @@ function Editor({
 
       if (successAuth) {
         onRequestInsertImage = onSDKRequestInsertImage;
-        onRequestMailMergeRecipients = onSDKRequestMailMergeRecipients;
-        onRequestCompareFile = onSDKRequestCompareFile;
+        onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
+        onRequestSelectDocument = onSDKRequestSelectDocument;
       }
 
       if (userAccessRights.EditHistory) {
@@ -810,6 +843,10 @@ function Editor({
 
       if (!fileInfo?.providerKey) {
         onRequestReferenceData = onSDKRequestReferenceData;
+
+        if (!isZoom) {
+          onRequestOpen = onSDKRequestOpen;
+        }
       }
 
       if (fileInfo?.rootFolderType !== FolderType.USER) {
@@ -824,6 +861,7 @@ function Editor({
       const events = {
         events: {
           onRequestReferenceData,
+          onRequestOpen,
           onAppReady: onSDKAppReady,
           onDocumentStateChange: onDocumentStateChange,
           onMetaChange: onMetaChange,
@@ -836,8 +874,8 @@ function Editor({
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
           onRequestSaveAs,
-          onRequestMailMergeRecipients,
-          onRequestCompareFile,
+          onRequestSelectSpreadsheet,
+          onRequestSelectDocument,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,

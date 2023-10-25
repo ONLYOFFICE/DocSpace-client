@@ -14,7 +14,7 @@ const StyledHideArticleMenuButton = styled.div`
   align-items: center;
   position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
-  z-index: 510;
+  z-index: 209;
   bottom: 89px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"

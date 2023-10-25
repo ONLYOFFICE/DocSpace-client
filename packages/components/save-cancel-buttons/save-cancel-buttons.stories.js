@@ -51,7 +51,7 @@ const Template = ({ onSaveClick, onCancelClick, ...args }) => {
 export const Default = Template.bind({});
 Default.args = {
   showReminder: false,
-  reminderTest: "You have unsaved changes",
+  reminderText: "You have unsaved changes",
   saveButtonLabel: "Save",
   cancelButtonLabel: "Cancel",
 };

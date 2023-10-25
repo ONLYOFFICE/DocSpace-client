@@ -43,7 +43,7 @@ const Section = (props) => {
     isInfoPanelAvailable,
     settingsStudio,
     clearUploadedFilesHistory,
-    isInfoPanelVisible,
+
     isInfoPanelScrollLocked,
     isEmptyPage,
     isTrashFolder,
@@ -144,6 +144,8 @@ const Section = (props) => {
     }, 100);
   }, []);
 
+  const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
+
   return (
     <>
       {isSectionAvailable && (
@@ -160,7 +162,7 @@ const Section = (props) => {
             maintenanceExist={maintenanceExist}
             isSectionHeaderAvailable={isSectionHeaderAvailable}
             settingsStudio={settingsStudio}
-            isInfoPanelVisible={isInfoPanelVisible}
+            showTwoProgress={showTwoProgress}
           >
             {isSectionHeaderAvailable &&
               currentDeviceType === DeviceType.desktop && (
@@ -258,8 +260,8 @@ const Section = (props) => {
             )}
 
             {currentDeviceType === DeviceType.desktop ? (
-              showPrimaryProgressBar && showSecondaryProgressBar ? (
-                <>
+              showTwoProgress ? (
+                <div className="progress-bar_container">
                   <FloatingButton
                     className="layout-progress-bar"
                     icon={primaryProgressBarIcon}
@@ -273,27 +275,29 @@ const Section = (props) => {
                     icon={secondaryProgressBarIcon}
                     percent={secondaryProgressBarValue}
                     alert={showSecondaryButtonAlert}
-                    showTwoProgress={
-                      showPrimaryProgressBar && showSecondaryProgressBar
-                    }
+                    showTwoProgress={showTwoProgress}
                   />
-                </>
+                </div>
               ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
+                <div className="progress-bar_container">
+                  <FloatingButton
+                    className="layout-progress-bar"
+                    icon={primaryProgressBarIcon}
+                    percent={primaryProgressBarValue}
+                    alert={showPrimaryButtonAlert}
+                    onClick={onOpenUploadPanel}
+                    clearUploadedFilesHistory={clearUploadedFilesHistory}
+                  />
+                </div>
               ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                />
+                <div className="progress-bar_container">
+                  <FloatingButton
+                    className="layout-progress-bar"
+                    icon={secondaryProgressBarIcon}
+                    percent={secondaryProgressBarValue}
+                    alert={showSecondaryButtonAlert}
+                  />
+                </div>
               ) : (
                 <></>
               )
@@ -398,10 +402,7 @@ export default inject(({ auth }) => {
     currentDeviceType,
   } = settingsStore;
 
-  const {
-    isVisible: isInfoPanelVisible,
-    isScrollLocked: isInfoPanelScrollLocked,
-  } = auth.infoPanelStore;
+  const { isScrollLocked: isInfoPanelScrollLocked } = auth.infoPanelStore;
 
   return {
     isTabletView,
@@ -412,7 +413,6 @@ export default inject(({ auth }) => {
 
     showText,
 
-    isInfoPanelVisible,
     isInfoPanelScrollLocked,
     currentDeviceType,
   };

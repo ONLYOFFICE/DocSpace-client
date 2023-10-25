@@ -328,7 +328,7 @@ const PortalRenaming = (props) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         displaySettings={true}
         hasScroll={hasScroll}
         additionalClassSaveButton="portal-renaming-save"

@@ -1,3 +1,19 @@
+
+
+type TQuotaUsage = {
+  tenantId: number,
+  tenantAlias: string,
+  tenantDomain: string,
+  storageSize: number,
+  usedSize: number,
+  maxRoomAdminsCount: number,
+  roomAdminCount: number,
+  maxUsers: number,
+  usersCount: number,
+  maxRoomsCount: number
+  roomsCount: number
+}
+
 export type TPortals = {
   created: string;
   domain: string;
@@ -9,6 +25,7 @@ export type TPortals = {
   status: string;
   tenantId: number;
   timeZoneName: string;
+  quotaUsage: TQuotaUsage
 };
 
 export type TNewPortalData = {
@@ -17,3 +34,5 @@ export type TNewPortalData = {
   email: string;
   portalName: string;
 };
+
+export type TranslationType = (key: string, opt?: object) => string;

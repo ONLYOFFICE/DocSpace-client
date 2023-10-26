@@ -138,9 +138,6 @@ const TwoFactorAuth = (props) => {
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription")}
         </Text>
-        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="TwoFactorAuthNote" />
-        </Text>
         <Link
           className="link-learn-more"
           color={currentColorScheme.main.accent}

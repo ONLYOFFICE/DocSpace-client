@@ -22,7 +22,7 @@ const ItemContextOptions = ({
 
   const contextMenuRef = useRef();
 
-  const onContextMenu = e => {
+  const onContextMenu = (e) => {
     e.button === 2;
     if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
     contextMenuRef.current.show(e);
@@ -63,7 +63,8 @@ const ItemContextOptions = ({
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
-        withBackdrop={false}
+        withBackdrop={true}
+        baseZIndex={310}
       />
       {options?.length > 0 && (
         <ContextMenuButton

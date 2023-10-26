@@ -32,6 +32,7 @@ const PublicRoomBlock = (props) => {
     getPrimaryLink,
     roomId,
     setExternalLink,
+    setIsScrollLocked,
   } = props;
 
   const isPublicRoom = roomType === RoomsType.PublicRoom;
@@ -67,7 +68,7 @@ const PublicRoomBlock = (props) => {
             </LinksBlock>
           )}
           {primaryLink ? (
-            <LinkRow link={primaryLink} />
+            <LinkRow link={primaryLink} setIsScrollLocked={setIsScrollLocked} />
           ) : (
             !isArchiveFolder && (
               <StyledLinkRow onClick={onAddNewLink}>
@@ -128,7 +129,11 @@ const PublicRoomBlock = (props) => {
 
       {externalLinks.length
         ? externalLinks.map((link) => (
-            <LinkRow link={link} key={link?.sharedTo?.id} />
+            <LinkRow
+              link={link}
+              key={link?.sharedTo?.id}
+              setIsScrollLocked={setIsScrollLocked}
+            />
           ))
         : !isArchiveFolder &&
           primaryLink && (
@@ -153,12 +158,12 @@ const PublicRoomBlock = (props) => {
 export default inject(
   ({ publicRoomStore, treeFoldersStore, dialogsStore, filesStore }) => {
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
     return {
       externalLinks: additionalLinks,
-      isArchiveFolder,
+      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
       primaryLink,

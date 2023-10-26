@@ -22,6 +22,7 @@ import {
   getOAuthToken,
   getLoginLink,
 } from "@docspace/common/utils";
+import { login } from "@docspace/common/utils/loginUtils";
 import { providersData } from "@docspace/common/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
@@ -188,31 +189,24 @@ const CreateUserForm = (props) => {
 
     const headerKey = linkData.confirmHeader;
 
-    createConfirmUser(personalData, loginData, headerKey)
-      .then(() => {
-        const url = roomData.roomId
-          ? `/rooms/shared/filter?folder=${roomData.roomId}`
-          : defaultPage;
-        window.location.replace(url);
-      })
-      .catch((error) => {
-        let errorMessage = "";
-        if (typeof error === "object") {
-          errorMessage =
-            error?.response?.data?.error?.message ||
-            error?.statusText ||
-            error?.message ||
-            "";
-        } else {
-          errorMessage = error;
-        }
+    createConfirmUser(personalData, loginData, headerKey).catch((error) => {
+      let errorMessage = "";
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else {
+        errorMessage = error;
+      }
 
-        console.error("confirm error", errorMessage);
-        setIsEmailErrorShow(true);
-        setEmailErrorText(errorMessage);
-        setEmailValid(false);
-        setIsLoading(false);
-      });
+      console.error("confirm error", errorMessage);
+      setIsEmailErrorShow(true);
+      setEmailErrorText(errorMessage);
+      setEmailValid(false);
+      setIsLoading(false);
+    });
   };
 
   const authCallback = (profile) => {
@@ -238,7 +232,6 @@ const CreateUserForm = (props) => {
   };
 
   const createConfirmUser = async (registerData, loginData, key) => {
-    const { login } = props;
     const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
 
     const data = Object.assign(
@@ -249,11 +242,27 @@ const CreateUserForm = (props) => {
 
     const user = await createUser(data, key);
 
+    //console.log({ user });
+
     const { userName, passwordHash } = loginData;
 
-    const response = await login(userName, passwordHash);
+    const res = await login(userName, passwordHash);
 
-    return user;
+    //console.log({ res });
+
+    const finalUrl = roomData.roomId
+      ? `/rooms/shared/filter?folder=${roomData.roomId}`
+      : defaultPage;
+
+    const isConfirm = typeof res === "string" && res.includes("confirm");
+
+    if (isConfirm) {
+      sessionStorage.setItem("referenceUrl", finalUrl);
+
+      return window.location.replace(typeof res === "string" ? res : "/");
+    }
+
+    window.location.replace(finalUrl);
   };
 
   const moreAuthOpen = () => {
@@ -699,7 +708,6 @@ const CreateUserForm = (props) => {
 
 export default inject(({ auth }) => {
   const {
-    login,
     logout,
     isAuthenticated,
     settingsStore,
@@ -723,7 +731,6 @@ export default inject(({ auth }) => {
     hashSettings,
     defaultPage,
     isAuthenticated,
-    login,
     logout,
     getSettings,
     getPortalPasswordSettings,

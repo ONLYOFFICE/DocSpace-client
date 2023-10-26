@@ -124,13 +124,16 @@ function Editor({
     const deepLinkUrl = portalSettings?.deepLink?.url;
 
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
+    const params = new URLSearchParams(window.location.search);
+    const withoutRedirect = params.get("without_redirect");
 
     if (
       isMobileOnly &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
-      deepLinkUrl
+      deepLinkUrl &&
+      !withoutRedirect
     ) {
       setIsShowDeepLink(true);
     }
@@ -697,7 +700,7 @@ function Editor({
     if (!fileInfo) return;
     const search = window.location.search;
     const shareIndex = search.indexOf("share=");
-    const key = search.substring(shareIndex + 6);
+    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
 
     let backUrl = "";
 

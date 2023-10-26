@@ -128,7 +128,7 @@ const CreateUserForm = (props) => {
   }, [props.isAuthenticated]);
 
   const onSubmit = () => {
-    const { defaultPage, linkData, hashSettings } = props;
+    const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
 
     setIsLoading(true);
@@ -232,6 +232,8 @@ const CreateUserForm = (props) => {
   };
 
   const createConfirmUser = async (registerData, loginData, key) => {
+    const { defaultPage } = props;
+
     const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
 
     const data = Object.assign(
@@ -240,9 +242,7 @@ const CreateUserForm = (props) => {
       loginData
     );
 
-    const user = await createUser(data, key);
-
-    //console.log({ user });
+    await createUser(data, key);
 
     const { userName, passwordHash } = loginData;
 

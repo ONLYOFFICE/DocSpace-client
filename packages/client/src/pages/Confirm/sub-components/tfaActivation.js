@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "@docspace/components/button";
@@ -107,8 +106,6 @@ const TfaActivationForm = withLoader((props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
-
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
@@ -128,7 +125,7 @@ const TfaActivationForm = withLoader((props) => {
         sessionStorage.removeItem("referenceUrl");
       }
 
-      navigate(referenceUrl || defaultPage);
+      window.location.replace(referenceUrl || defaultPage);
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {

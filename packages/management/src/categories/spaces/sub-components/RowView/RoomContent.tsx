@@ -4,6 +4,7 @@ import RowContent from "@docspace/components/row-content";
 import Text from "@docspace/components/text";
 import styled from "styled-components";
 import { getConvertedSize } from "@docspace/common/utils";
+import { TPortals } from "SRC_DIR/types/spaces";
 
 const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
@@ -13,7 +14,12 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-export const RoomContent = ({ item, isCurrentPortal }) => {
+type TRoomContent = {
+  item: TPortals,
+  isCurrentPortal: boolean
+}
+
+export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize

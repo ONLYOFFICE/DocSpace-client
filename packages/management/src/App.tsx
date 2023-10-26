@@ -19,7 +19,7 @@ import Layout from "client/Layout";
 import Main from "client/Main";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
-
+import Error403 from "client/Error403";
 import i18n from "./i18n";
 
 const App = observer(() => {
@@ -50,6 +50,9 @@ const App = observer(() => {
   ) : (
     <Toast />
   );
+
+
+  if (userStore?.user &&  !userStore?.user?.isAdmin) return <Error403 />
 
   return (
     <ThemeProvider

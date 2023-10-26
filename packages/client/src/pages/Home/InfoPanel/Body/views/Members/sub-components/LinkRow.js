@@ -261,7 +261,7 @@ export default inject(
       setLinkParams,
     } = dialogsStore;
     const { editExternalLink, setExternalLink } = publicRoomStore;
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
     return {
       setLinkParams,
@@ -271,7 +271,7 @@ export default inject(
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
-      isArchiveFolder,
+      isArchiveFolder: isArchiveFolderRoot,
       theme,
     };
   }

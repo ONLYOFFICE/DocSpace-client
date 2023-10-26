@@ -50,6 +50,7 @@ const CreateUserForm = (props) => {
     roomData,
     capabilities,
     currentColorScheme,
+    defaultPage,
   } = props;
   const inputRef = React.useRef(null);
 
@@ -128,7 +129,7 @@ const CreateUserForm = (props) => {
   }, [props.isAuthenticated]);
 
   const onSubmit = () => {
-    const { defaultPage, linkData, hashSettings } = props;
+    const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
 
     setIsLoading(true);
@@ -210,8 +211,6 @@ const CreateUserForm = (props) => {
   };
 
   const authCallback = (profile) => {
-    const { defaultPage } = props;
-
     const signupAccount = {
       EmployeeType: linkData.emplType || null,
       Email: linkData.email,

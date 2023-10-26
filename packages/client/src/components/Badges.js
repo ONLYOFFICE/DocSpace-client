@@ -5,6 +5,7 @@ import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import React, { useState } from "react";
 import styled from "styled-components";
 import Badge from "@docspace/components/badge";
@@ -15,7 +16,7 @@ import { FileStatus, RoomsType } from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet } from "@docspace/components/utils/device";
+import { isTablet, isDesktop } from "@docspace/components/utils/device";
 import { classNames } from "@docspace/components/utils/classNames";
 
 const StyledWrapper = styled.div`
@@ -102,6 +103,7 @@ const Badges = ({
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
   const tabletViewBadge = !isTile && isTablet();
+  const desktopView = !isTile && isDesktop();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
 
@@ -116,7 +118,7 @@ const Badges = ({
 
   const iconEdit = !isForm ? FileActionsConvertEditDocReactSvgUrl : iconForm;
 
-  const iconRefresh = RefreshReactSvgUrl;
+  const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
   const iconPin = UnpinReactSvgUrl;
 

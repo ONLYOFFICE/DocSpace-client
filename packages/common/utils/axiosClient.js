@@ -1,4 +1,6 @@
 import axios from "axios";
+
+import { setCookie } from "./";
 import combineUrl from "./combineUrl";
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -25,6 +27,8 @@ class AxiosClient {
         "Access-Control-Allow-Credentials": true,
       };
     }
+
+    setCookie("x-docspace-address", origin, {}, true);
 
     const lastKeySymbol = location.search.indexOf("&");
     const lastIndex =
@@ -72,6 +76,9 @@ class AxiosClient {
     const origin = apiOrigin || `${proto}://${host}`;
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
+
+    if (!headers.cookie.includes(origin))
+      headers.cookie = `${headers.cookie};x-docspace-address=${origin}`;
 
     const axiosConfig = {
       baseURL: apiBaseURL,
@@ -123,7 +130,9 @@ class AxiosClient {
 
       if (response.request.responseType === "text") return response.data;
 
-      return response.data.response;
+      return typeof response.data.response !== "undefined"
+        ? response.data.response
+        : response.data;
     };
 
     const onError = (error) => {

@@ -38,9 +38,6 @@ const TwoFactorAuth = (props) => {
     tfaSettings,
   } = props;
   const [type, setType] = useState("none");
-
-  const [smsDisabled, setSmsDisabled] = useState(false);
-  const [appDisabled, setAppDisabled] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -48,7 +45,7 @@ const TwoFactorAuth = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getSettings = () => {
+  const getSettings = async () => {
     const currentSettings = getFromSessionStorage("currentTfaSettings");
 
     saveToSessionStorage("defaultTfaSettings", tfaSettings);
@@ -58,9 +55,7 @@ const TwoFactorAuth = (props) => {
     } else {
       setType(tfaSettings);
     }
-
-    setSmsDisabled(smsAvailable);
-    setAppDisabled(appAvailable);
+    setIsLoading(true);
   };
 
   const getTfaTypeFn = async () => {
@@ -70,10 +65,6 @@ const TwoFactorAuth = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) initSettings().then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
@@ -82,9 +73,8 @@ const TwoFactorAuth = (props) => {
   }, [smsAvailable, appAvailable]);
 
   useEffect(() => {
-    if (!isInit) return;
-    getSettings();
-  }, [isLoading]);
+    tfaSettings && getSettings();
+  }, [tfaSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -181,13 +171,13 @@ const TwoFactorAuth = (props) => {
             id: "by-sms",
             label: t("BySms"),
             value: "sms",
-            disabled: !smsDisabled,
+            disabled: !smsAvailable,
           },*/
           {
             id: "by-app",
             label: t("ByApp"),
             value: "app",
-            disabled: !appDisabled,
+            disabled: !appAvailable,
           },
         ]}
         selected={type}

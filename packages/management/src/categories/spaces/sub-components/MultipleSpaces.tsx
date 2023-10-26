@@ -23,7 +23,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
     <StyledMultipleSpaces>
       <div className="multiple-spaces-section">
         <Button
-          size="small"
+          size="normal"
           label={t("NewSpace")}
           className="spaces-button"
           primary={true}
@@ -52,7 +52,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
 
           <Button
             className="spaces-button"
-            size="small"
+            size="normal"
             label={t("Common:EditButton")}
             primary={true}
             onClick={() => setChangeDomainDialogVisible(true)}

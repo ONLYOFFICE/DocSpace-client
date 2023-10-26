@@ -1,12 +1,17 @@
 import React from "react";
 import RowContainer from "@docspace/components/row-container";
 import SpacesRoomRow from "./SpacesRoomRow";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Base from "@docspace/components/themes/base";
 import { TPortals } from "SRC_DIR/types/spaces";
 
+import { desktop } from "@docspace/components/utils/device";
+
 const StyledRowContainer = styled(RowContainer)`
-  max-width: 620px;
+  @media ${desktop} {
+    max-width: 620px;
+  }
+  max-width: 100%;
   border-width: 1px;
   border-style: solid;
   border-color: ${(props) => props.theme.rowContainer.borderColor};

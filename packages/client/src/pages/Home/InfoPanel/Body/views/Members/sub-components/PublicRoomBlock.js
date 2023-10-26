@@ -153,12 +153,12 @@ const PublicRoomBlock = (props) => {
 export default inject(
   ({ publicRoomStore, treeFoldersStore, dialogsStore, filesStore }) => {
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
     return {
       externalLinks: additionalLinks,
-      isArchiveFolder,
+      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
       primaryLink,

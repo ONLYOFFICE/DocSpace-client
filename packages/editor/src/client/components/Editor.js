@@ -22,14 +22,12 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent } from "@docspace/common/utils";
+import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
 import toastr from "@docspace/components/toast/toastr";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import DeepLink from "./DeepLink";
 import { getDeepLink } from "../helpers/deepLinkHelper";
-
-import { getEditorTheme } from "../helpers/utils";
 
 toast.configure();
 

@@ -124,10 +124,7 @@ class AuthStore {
 
       if (!this.settingsStore.passwordSettings) {
         if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(
-            this.settingsStore.getPortalPasswordSettings(),
-            this.settingsStore.getCompanyInfoSettings()
-          );
+          requests.push(this.settingsStore.getCompanyInfoSettings());
         }
       }
     }

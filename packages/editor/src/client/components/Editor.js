@@ -124,13 +124,16 @@ function Editor({
     const deepLinkUrl = portalSettings?.deepLink?.url;
 
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
+    const params = new URLSearchParams(window.location.search);
+    const withoutRedirect = params.get("without_redirect");
 
     if (
       isMobileOnly &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
-      deepLinkUrl
+      deepLinkUrl &&
+      !withoutRedirect
     ) {
       setIsShowDeepLink(true);
     }

@@ -910,6 +910,10 @@ class UploadDataStore {
       newPercent = this.getFilesPercent(uploadedSize);
     }
 
+    if (isAsyncUpload && !uploaded && newPercent >= 100) {
+      newPercent = 99;
+    }
+
     const percentCurrentFile = ((index + 1) / length) * 100;
 
     const fileIndex = this.uploadedFilesHistory.findIndex(

@@ -335,10 +335,9 @@ export const useFilesHelper = ({
         if (isInit && getRootData) {
           const folder = await getFolderInfo(folderId);
 
-          if (
-            folder.rootFolderType === FolderType.TRASH ||
-            folder.rootFolderType === FolderType.Archive
-          ) {
+          const isArchive = folder.rootFolderType === FolderType.Archive;
+
+          if (folder.rootFolderType === FolderType.TRASH || isArchive) {
             if (isRoomsOnly && getRoomList) {
               await getRoomList(0, true, null, true);
               toastr.error(
@@ -347,6 +346,14 @@ export const useFilesHelper = ({
               return;
             }
             await getRootData();
+
+            if (onSetBaseFolderPath && isArchive) {
+              onSetBaseFolderPath && onSetBaseFolderPath([]);
+              toastr.error(
+                t("Files:ArchivedRoomAction", { name: folder.title })
+              );
+            }
+
             return;
           }
         }
@@ -438,7 +445,13 @@ export const useFilesHelper = ({
           toastr.error(e);
           return;
         }
+
         getRootData && getRootData();
+
+        if (onSetBaseFolderPath) {
+          onSetBaseFolderPath([]);
+          toastr.error(e);
+        }
       }
     },
     [selectedItemId, searchValue, isFirstLoad, disabledItems]

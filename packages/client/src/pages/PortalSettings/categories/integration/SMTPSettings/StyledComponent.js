@@ -64,6 +64,10 @@ const StyledComponent = styled.div`
       position: static;
     }
   }
+
+  .smtp_settings_checkbox {
+    width: fit-content;
+  }
 `;
 
 const ButtonStyledComponent = styled.div`

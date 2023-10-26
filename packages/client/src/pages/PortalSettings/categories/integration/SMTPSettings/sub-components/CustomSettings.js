@@ -119,6 +119,7 @@ const CustomSettings = (props) => {
       />
 
       <Checkbox
+        className="smtp_settings_checkbox"
         name={USE_NTLM}
         label={t("AuthViaNTLM")}
         isChecked={settings[USE_NTLM]}
@@ -201,6 +202,7 @@ const CustomSettings = (props) => {
       </FieldContainer>
 
       <Checkbox
+        className="smtp_settings_checkbox"
         isDisabled={isLoading}
         name={ENABLE_SSL}
         label={t("EnableSSL")}

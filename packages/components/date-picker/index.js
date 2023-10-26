@@ -10,7 +10,7 @@ import Calendar from "@docspace/components/calendar";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
-import { tablet } from "../utils/device";
+import { mobile, tablet } from "../utils/device";
 
 const Wrapper = styled.div`
   .selectedItem {
@@ -52,7 +52,7 @@ const SelectedLabel = styled.span`
 const StyledCalendar = styled(Calendar)`
   position: absolute;
 
-  @media ${tablet} {
+  @media ${mobile} {
     position: fixed;
     bottom: 0;
     left: 0;

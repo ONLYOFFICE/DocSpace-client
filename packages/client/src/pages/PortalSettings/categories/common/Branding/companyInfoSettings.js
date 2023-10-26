@@ -441,7 +441,7 @@ const CompanyInfoSettings = (props) => {
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}

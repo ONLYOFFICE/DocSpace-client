@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { isMobileOnly } from "react-device-detect"
 
 const SpaceContainer = styled.div`
   max-width: 700px;
@@ -70,4 +71,44 @@ const StyledMultipleSpaces = styled.div`
   }
 `;
 
-export { SpaceContainer, ConfigurationWrapper, StyledMultipleSpaces };
+
+const StyledLoader = styled.div`
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+
+  .button {
+    margin: 20px 0;
+    max-width: 100px;
+    ${isMobileOnly &&
+    css`
+      max-width: 100%;
+    `}
+  }
+
+  .portals {
+    margin-bottom: 24px;
+  }
+
+  .domain-header {
+    max-width: 130px;
+    margin-bottom: 16px;
+  }
+
+  .configuration-header {
+    max-width: 225px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  .input {
+    max-width: 350px;
+  }
+
+  .configuration-input {
+    max-width: 350px;
+    margin-top: 16px;
+  }
+`;
+
+export { SpaceContainer, ConfigurationWrapper, StyledMultipleSpaces, StyledLoader };

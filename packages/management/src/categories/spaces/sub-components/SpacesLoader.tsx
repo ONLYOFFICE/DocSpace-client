@@ -1,48 +1,12 @@
 import React from "react";
 import Loaders from "@docspace/common/components/Loaders";
-import { isMobileOnly } from "react-device-detect";
-import styled, { css } from "styled-components";
+import {StyledLoader} from "../StyledSpaces";
 
-const StyledLoader = styled.div`
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
+type TSpacesLoader = {
+  isConfigurationSection: boolean;
+}
 
-  .button {
-    margin: 20px 0;
-    max-width: 100px;
-    ${isMobileOnly &&
-    css`
-      max-width: 100%;
-    `}
-  }
-
-  .portals {
-    margin-bottom: 24px;
-  }
-
-  .domain-header {
-    max-width: 130px;
-    margin-bottom: 16px;
-  }
-
-  .configuration-header {
-    max-width: 225px;
-    margin-top: 20px;
-    margin-bottom: 8px;
-  }
-
-  .input {
-    max-width: 350px;
-  }
-
-  .configuration-input {
-    max-width: 350px;
-    margin-top: 16px;
-  }
-`;
-
-export const SpacesLoader = ({ isConfigurationSection }) => {
+export const SpacesLoader = ({isConfigurationSection}: TSpacesLoader): JSX.Element => {
   return (
     <StyledLoader>
       <Loaders.Rectangle height="22px" className="subheader" />

@@ -5,8 +5,13 @@ import Text from "@docspace/components/text";
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
+import { TranslationType } from "SRC_DIR/types/spaces";
 
-const MultipleSpaces = ({ t }) => {
+type TMultipleSpaces = {
+  t: TranslationType
+}
+
+const MultipleSpaces = ({ t }: TMultipleSpaces) => {
   const { spacesStore, authStore } = useStore();
 
   const { setChangeDomainDialogVisible, setCreatePortalDialogVisible } =

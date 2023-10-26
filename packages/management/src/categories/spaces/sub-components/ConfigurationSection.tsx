@@ -3,25 +3,27 @@ import { observer } from "mobx-react";
 import Button from "@docspace/components/button";
 import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
-import toastr from "@docspace/components/toast/toastr";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain } from "SRC_DIR/utils";
 
-const ConfigurationSection = ({ t }) => {
+import { TranslationType } from "SRC_DIR/types/spaces";
+
+type TConfigurationSection = {
+  t: TranslationType
+}
+
+const ConfigurationSection = ({t}: TConfigurationSection): JSX.Element => {
+
   const [domain, setDomain] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   const [portalNameError, setPortalNameError] = React.useState<null | string>(null);
-  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
   const [checkDomainError, setCheckDomainError] = React.useState<null | string>(null);
-  const [error, setError] = React.useState({
-    index: 0,
-    message: null
-  })
+  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
 
   const { spacesStore, authStore } = useStore();
-
   const { checkDomain, setDomainName, setPortalName } = spacesStore;
 
   const onConfigurationPortal = async () => {

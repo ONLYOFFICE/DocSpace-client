@@ -1001,7 +1001,7 @@ class UploadDataStore {
     }
     const chunkObjIndex = this.asyncUploadObj[
       operationId
-    ].chunksArray.findIndex((x) => !x.isActive);
+    ].chunksArray.findIndex((x) => !x.isActive && !x.isFinalize);
 
     if (chunkObjIndex !== -1) {
       this.asyncUploadObj[operationId].chunksArray[
@@ -1012,6 +1012,10 @@ class UploadDataStore {
         const res = await this.asyncUploadObj[operationId].chunksArray[
           chunkObjIndex
         ].onUpload();
+
+        this.asyncUploadObj[operationId].chunksArray[
+          chunkObjIndex
+        ].isFinished = true;
 
         if (!res.data.data && res.data.message) {
           delete this.asyncUploadObj[operationId];
@@ -1036,6 +1040,38 @@ class UploadDataStore {
           reject,
           true
         );
+
+        const finalizeChunk = this.asyncUploadObj[
+          operationId
+        ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+
+        if (finalizeChunk === -1) {
+          const finalizeChunkIndex = this.asyncUploadObj[
+            operationId
+          ].chunksArray.findIndex((x) => x.isFinalize);
+
+          if (finalizeChunkIndex > -1) {
+            const finalizeRes = await this.asyncUploadObj[
+              operationId
+            ].chunksArray[finalizeChunkIndex].onUpload();
+
+            const finalizeIndex =
+              this.asyncUploadObj[operationId].chunksArray.length - 1;
+
+            this.checkChunkUpload(
+              t,
+              finalizeRes,
+              fileSize,
+              finalizeIndex,
+              indexOfFile,
+              path,
+              length,
+              resolve,
+              reject,
+              true
+            );
+          }
+        }
       } catch (error) {
         return reject(error);
       }
@@ -1061,13 +1097,21 @@ class UploadDataStore {
       for (let index = 0; index < length; index++) {
         chunksArray.push({
           isActive: false,
+          isFinished: false,
+          isFinalize: false,
           onUpload: () =>
             uploadFile(
-              location + `&chunkNumber=${index + 1}`,
+              location + `&chunkNumber=${index + 1}&upload=true`,
               requestsDataArray[index]
             ),
         });
       }
+      chunksArray.push({
+        isActive: false,
+        isFinished: false,
+        isFinalize: true,
+        onUpload: () => uploadFile(location + "&finalize=true"),
+      });
 
       if (!this.asyncUploadObj[operationId]) {
         this.asyncUploadObj[operationId] = { chunksArray: [] };

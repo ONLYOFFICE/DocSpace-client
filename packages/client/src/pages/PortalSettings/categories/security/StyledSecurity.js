@@ -110,10 +110,8 @@ export const StyledBruteForceProtection = styled.div`
     max-width: 350px;
   }
 
-  .error-text {
-    position: absolute;
+  .error-label {
     font-size: 10px;
-    color: #f21c0e;
   }
 
   .save-cancel-buttons {

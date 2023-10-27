@@ -155,9 +155,9 @@ const PreparationPortal = (props) => {
       if (typeof error !== "object") return error;
 
       return (
-        err?.response?.data?.error?.message ||
-        err?.statusText ||
-        err?.message ||
+        error?.response?.data?.error?.message ||
+        error?.statusText ||
+        error?.message ||
         t("Common:ErrorInternalServer")
       );
     };

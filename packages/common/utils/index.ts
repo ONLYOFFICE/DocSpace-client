@@ -630,8 +630,6 @@ export const getSystemTheme = () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ? ThemeKeys.DarkStr
     : ThemeKeys.BaseStr;
-<<<<<<< HEAD
-=======
 };
 
 export const getEditorTheme = (theme) => {
@@ -647,5 +645,4 @@ export const getEditorTheme = (theme) => {
     default:
       return "default-dark";
   }
->>>>>>> develop
 };

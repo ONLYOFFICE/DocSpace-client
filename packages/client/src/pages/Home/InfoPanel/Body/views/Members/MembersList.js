@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
 import InfiniteLoader from "react-window-infinite-loader";
 import User from "./User";
 import { isMobile } from "@docspace/components/utils/device";
@@ -10,7 +9,7 @@ import throttle from "lodash/throttle";
 import Loaders from "@docspace/common/components/Loaders";
 
 const StyledMembersList = styled.div`
-  height: ${({ offsetTop }) => `calc(100vh - ${offsetTop})`};
+  height: ${(props) => props.height + "px"};
 `;
 
 const Item = memo(({ data, index, style }) => {
@@ -28,6 +27,10 @@ const Item = memo(({ data, index, style }) => {
     setIsScrollLocked,
     canInviteUserInRoomAbility,
     onRepeatInvitation,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
+    hasNextPage,
   } = data;
 
   const user = members[index];
@@ -65,11 +68,16 @@ const Item = memo(({ data, index, style }) => {
         showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
         onRepeatInvitation={onRepeatInvitation}
         setMembers={setMembers}
+        membersFilter={membersFilter}
+        setMembersFilter={setMembersFilter}
+        fetchMembers={fetchMembers}
+        hasNextPage={hasNextPage}
       />
     </div>
   );
 }, areEqual);
 
+const itemSize = 48;
 const MembersList = (props) => {
   const {
     t,
@@ -87,7 +95,12 @@ const MembersList = (props) => {
     itemCount,
     onRepeatInvitation,
     loadNextPage,
+    membersFilter,
+    setMembersFilter,
+    fetchMembers,
   } = props;
+
+  const { interfaceDirection } = useTheme();
 
   const itemsCount = hasNextPage ? members.length + 1 : members.length;
 
@@ -95,25 +108,10 @@ const MembersList = (props) => {
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
-  const [offsetTop, setOffsetTop] = useState(0);
-
   const onResize = throttle(() => {
     const isMobileView = isMobile();
     setIsMobileView(isMobileView);
-    setOffset();
   }, 300);
-
-  const setOffset = () => {
-    const rect = document
-      .getElementById("infoPanelMembersList")
-      ?.getBoundingClientRect();
-
-    setOffsetTop(Math.ceil(rect?.top) + 2 + "px");
-  };
-
-  useEffect(() => {
-    setOffset();
-  }, [members]);
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -142,12 +140,12 @@ const MembersList = (props) => {
   );
 
   return (
-    <StyledMembersList id="infoPanelMembersList" offsetTop={offsetTop}>
+    <StyledMembersList id="infoPanelMembersList" height={itemsCount * itemSize}>
       <AutoSizer>
         {({ height, width }) => (
           <InfiniteLoader
             isItemLoaded={isItemLoaded}
-            itemCount={itemCount}
+            itemCount={hasNextPage ? itemCount + 1 : itemCount}
             loadMoreItems={loadMoreItems}
           >
             {({ onItemsRendered, ref }) => {
@@ -155,11 +153,13 @@ const MembersList = (props) => {
 
               return (
                 <List
+                  style={{ overflow: "hidden" }}
+                  direction={interfaceDirection}
                   ref={ref}
                   width={listWidth}
                   height={height}
                   itemCount={itemsCount}
-                  itemSize={48}
+                  itemSize={itemSize}
                   itemData={{
                     t,
                     security,
@@ -174,8 +174,11 @@ const MembersList = (props) => {
                     setMembers,
                     canInviteUserInRoomAbility,
                     onRepeatInvitation,
+                    membersFilter,
+                    setMembersFilter,
+                    fetchMembers,
+                    hasNextPage,
                   }}
-                  outerElementType={CustomScrollbarsVirtualList}
                   onItemsRendered={onItemsRendered}
                 >
                   {Item}

@@ -24,6 +24,8 @@ import TopLoaderService from "@docspace/components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
+
+import { getCookie } from "@docspace/components/utils/cookie";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";
@@ -200,17 +202,6 @@ export const getUserRole = (user) => {
 };
 
 export const combineUrl = combineUrlFunc;
-
-export function getCookie(name) {
-  let matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
-    )
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
 
 export function setCookie(name, value, options = {}, disableEncoding = false) {
   options = {
@@ -639,4 +630,22 @@ export const getSystemTheme = () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ? ThemeKeys.DarkStr
     : ThemeKeys.BaseStr;
+<<<<<<< HEAD
+=======
+};
+
+export const getEditorTheme = (theme) => {
+  switch (theme) {
+    case ThemeKeys.BaseStr:
+      return "default-light";
+    case ThemeKeys.DarkStr:
+      return "default-dark";
+    case ThemeKeys.SystemStr: {
+      const uiTheme = getSystemTheme();
+      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    }
+    default:
+      return "default-dark";
+  }
+>>>>>>> develop
 };

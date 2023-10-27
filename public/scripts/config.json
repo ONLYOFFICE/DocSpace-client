@@ -10,7 +10,7 @@
   "wrongPortalNameUrl": "",
   "thumbnails1280x720": false,
   "pdfViewer": true,
-  "pdfViewerUrl": "ds-vpath/sdkjs/pdf/src/engine/viewer.js",
+  "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": false,
   "editor": {
     "openOnNewPage": true,

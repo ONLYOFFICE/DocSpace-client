@@ -31,7 +31,7 @@ import {
 } from "./styled-main-profile";
 import { HelpButton, Tooltip } from "@docspace/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 
@@ -70,7 +70,7 @@ const MainProfile = (props) => {
   const checkWidth = () => {
     if (!isMobileOnly) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);
@@ -101,8 +101,7 @@ const MainProfile = (props) => {
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}
-        >
+          color={theme.profileInfo.tooltipLinkColor}>
           {{ supportEmail: documentationEmail }}
         </Link>
         to take part in the translation and get up to 1 year free of charge."
@@ -114,15 +113,14 @@ const MainProfile = (props) => {
           color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
-          target="_blank"
-        >
+          target="_blank">
           {t("Common:LearnMore")}
         </Link>
       </Box>
     </Text>
   );
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -172,8 +170,7 @@ const MainProfile = (props) => {
       </StyledAvatarWrapper>
       <StyledInfo
         withActivationBar={withActivationBar}
-        currentColorScheme={currentColorScheme}
-      >
+        currentColorScheme={currentColorScheme}>
         <div className="rows-container">
           <div className="profile-block">
             <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
@@ -184,16 +181,14 @@ const MainProfile = (props) => {
 
             <StyledLabel
               as="div"
-              marginTopProp={withActivationBar ? "34px" : "16px"}
-            >
+              marginTopProp={withActivationBar ? "34px" : "16px"}>
               {t("Common:Password")}
             </StyledLabel>
 
             <StyledLabel
               as="div"
               className="profile-language"
-              marginTopProp="15px"
-            >
+              marginTopProp="15px">
               {t("Common:Language")}
               <HelpButton
                 size={12}
@@ -238,8 +233,7 @@ const MainProfile = (props) => {
                   data-tooltip-content={t("EmailNotVerified")}
                   as="div"
                   className="email-text-container"
-                  fontWeight={600}
-                >
+                  fontWeight={600}>
                   {profile.email}
                 </Text>
                 {withActivationBar && (
@@ -264,8 +258,7 @@ const MainProfile = (props) => {
               {withActivationBar && (
                 <div
                   className="send-again-container"
-                  onClick={sendActivationLinkAction}
-                >
+                  onClick={sendActivationLinkAction}>
                   <ReactSVG
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
@@ -293,7 +286,7 @@ const MainProfile = (props) => {
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={false}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
@@ -302,11 +295,11 @@ const MainProfile = (props) => {
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation
-                    : !isMobileOnly
+                    : !isMobile()
                 }
-                withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
-                modernView={!isMobileOnly}
+                modernView={!isMobile()}
               />
             </div>
           </div>
@@ -320,8 +313,7 @@ const MainProfile = (props) => {
               <Text
                 className="mobile-profile-label-field"
                 fontWeight={600}
-                truncate
-              >
+                truncate>
                 {profile.displayName}
               </Text>
             </div>
@@ -344,8 +336,7 @@ const MainProfile = (props) => {
                     data-tooltip-content={t("EmailNotVerified")}
                     as="div"
                     className="email-text-container"
-                    fontWeight={600}
-                  >
+                    fontWeight={600}>
                     {profile.email}
                   </Text>
                 </div>
@@ -363,8 +354,7 @@ const MainProfile = (props) => {
               {withActivationBar && (
                 <div
                   className="send-again-container"
-                  onClick={sendActivationLinkAction}
-                >
+                  onClick={sendActivationLinkAction}>
                   <ReactSVG
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
@@ -416,7 +406,7 @@ const MainProfile = (props) => {
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
               isDisabled={false}
-              scaled={isMobileOnly}
+              scaled={isMobile()}
               scaledOptions={false}
               size="content"
               showDisabledItems={true}
@@ -425,11 +415,11 @@ const MainProfile = (props) => {
               isDefaultMode={
                 isMobileHorizontalOrientation
                   ? isMobileHorizontalOrientation
-                  : !isMobileOnly
+                  : !isMobile()
               }
-              withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
-              modernView={!isMobileOnly}
+              modernView={!isMobile()}
             />
           </div>
         </div>
@@ -461,7 +451,6 @@ export default inject(({ auth, peopleStore }) => {
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
-
   const { setDialogData } = peopleStore.dialogStore;
 
   return {

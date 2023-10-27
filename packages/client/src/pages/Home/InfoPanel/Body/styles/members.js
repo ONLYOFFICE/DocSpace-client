@@ -17,7 +17,7 @@ const StyledUserTypeHeader = styled.div`
   }
 
   .icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 `;
 
@@ -84,7 +84,7 @@ const StyledUser = styled.div`
       color: ${(props) =>
         props.theme.infoPanel.members.disabledRoleSelectorColor};
 
-      margin-right: 16px;
+      margin-inline-end: 16px;
     }
   }
 

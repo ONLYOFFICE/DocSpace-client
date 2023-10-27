@@ -29,6 +29,7 @@ const PreparationPortal = (props) => {
     withoutHeader,
     style,
     clearLocalStorage,
+    isDialog,
   } = props;
 
   const [percent, setPercent] = useState(0);
@@ -204,7 +205,7 @@ const PreparationPortal = (props) => {
     : t("Common:PreparationPortalTitle");
 
   return (
-    <StyledPreparationPortal errorMessage={errorMessage}>
+    <StyledPreparationPortal errorMessage={errorMessage} isDialog={isDialog}>
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
@@ -236,7 +237,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ backup }) => {
+const PreparationPortalWrapper = inject(({ auth, backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize
@@ -253,10 +254,12 @@ const PreparationPortalWrapper = inject(({ backup }) => {
 
 PreparationPortal.propTypes = {
   withoutHeader: PropTypes.bool,
+  isDialog: PropTypes.bool,
 };
 
 PreparationPortal.defaultProps = {
   withoutHeader: false,
+  isDialog: false,
 };
 
 export default (props) => <PreparationPortalWrapper {...props} />;

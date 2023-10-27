@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/common/constants";
 
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
+import Portal from "@docspace/components/portal";
 // @ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
@@ -46,6 +48,7 @@ const FilesSelector = ({
   isMove,
   isCopy,
   isRestoreAll,
+  isSelect,
 
   currentFolderId,
   fromFolderId,
@@ -90,6 +93,10 @@ const FilesSelector = ({
   socketHelper,
   socketSubscribersId,
   setMoveToPublicRoomVisible,
+  setInfoPanelIsMobileHidden,
+  currentDeviceType,
+
+  embedded,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -148,6 +155,7 @@ const FilesSelector = ({
     treeFolders,
     setHasNextPage,
     setIsNextPageLoading,
+    onSetBaseFolderPath,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -292,6 +300,7 @@ const FilesSelector = ({
   };
 
   const onCloseAction = () => {
+    setInfoPanelIsMobileHidden(false);
     if (onClose) {
       onClose();
 
@@ -427,6 +436,7 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
+    isSelect,
     filterParam
   );
 
@@ -435,6 +445,7 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
+    isSelect,
     filterParam
   );
 
@@ -453,13 +464,78 @@ const FilesSelector = ({
     includeFolder
   );
 
-  return (
+  const SelectorBody = (
+    <Selector
+      headerLabel={headerLabel}
+      withoutBackButton
+      searchPlaceholder={t("Common:Search")}
+      searchValue={searchValue}
+      onSearch={onSearchAction}
+      onClearSearch={onClearSearchAction}
+      items={items ? items : []}
+      onSelect={onSelectAction}
+      acceptButtonLabel={acceptButtonLabel}
+      onAccept={onAcceptAction}
+      withCancelButton
+      cancelButtonLabel={t("Common:CancelButton")}
+      onCancel={onCloseAction}
+      emptyScreenImage={
+        theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+      }
+      emptyScreenHeader={t("SelectorEmptyScreenHeader")}
+      emptyScreenDescription=""
+      searchEmptyScreenImage={
+        theme.isBase
+          ? EmptyScreenFilterAltSvgUrl
+          : EmptyScreenFilterAltDarkSvgUrl
+      }
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
+      withBreadCrumbs
+      breadCrumbs={breadCrumbs}
+      onSelectBreadCrumb={onClickBreadCrumb}
+      isLoading={showLoader}
+      isBreadCrumbsLoading={showBreadCrumbsLoader}
+      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      rowLoader={
+        <Loaders.SelectorRowLoader
+          isMultiSelect={false}
+          isUser={isRoot}
+          isContainer={showLoader}
+        />
+      }
+      searchLoader={<Loaders.SelectorSearchLoader />}
+      breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
+      alwaysShowFooter={true}
+      isNextPageLoading={isNextPageLoading}
+      hasNextPage={hasNextPage}
+      totalItems={total}
+      loadNextPage={
+        isRoot ? null : selectedItemType === "rooms" ? getRoomList : getFileList
+      }
+      disableAcceptButton={isDisabled}
+      withFooterInput={withFooterInput}
+      withFooterCheckbox={withFooterCheckbox}
+      footerInputHeader={footerInputHeader}
+      currentFooterInputValue={currentFooterInputValue}
+      footerCheckboxLabel={footerCheckboxLabel}
+      descriptionText={
+        !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
+      }
+      acceptButtonId={isMove || isCopy ? "select-file-modal-submit" : ""}
+      cancelButtonId={isMove || isCopy ? "select-file-modal-cancel" : ""}
+    />
+  );
+
+  const selectorComponent = embedded ? (
+    SelectorBody
+  ) : (
     <>
       <Backdrop
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={210}
+        zIndex={309}
         onClick={onCloseAction}
       />
       <Aside
@@ -468,74 +544,15 @@ const FilesSelector = ({
         zIndex={310}
         onClose={onCloseAction}
       >
-        <Selector
-          headerLabel={headerLabel}
-          withoutBackButton
-          searchPlaceholder={t("Common:Search")}
-          searchValue={searchValue}
-          onSearch={onSearchAction}
-          onClearSearch={onClearSearchAction}
-          items={items ? items : []}
-          onSelect={onSelectAction}
-          acceptButtonLabel={acceptButtonLabel}
-          onAccept={onAcceptAction}
-          withCancelButton
-          cancelButtonLabel={t("Common:CancelButton")}
-          onCancel={onCloseAction}
-          emptyScreenImage={
-            theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
-          }
-          emptyScreenHeader={t("SelectorEmptyScreenHeader")}
-          emptyScreenDescription=""
-          searchEmptyScreenImage={
-            theme.isBase
-              ? EmptyScreenFilterAltSvgUrl
-              : EmptyScreenFilterAltDarkSvgUrl
-          }
-          searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-          searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
-          withBreadCrumbs
-          breadCrumbs={breadCrumbs}
-          onSelectBreadCrumb={onClickBreadCrumb}
-          isLoading={showLoader}
-          isBreadCrumbsLoading={showBreadCrumbsLoader}
-          withSearch={
-            !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad
-          }
-          rowLoader={
-            <Loaders.SelectorRowLoader
-              isMultiSelect={false}
-              isUser={isRoot}
-              isContainer={showLoader}
-            />
-          }
-          searchLoader={<Loaders.SelectorSearchLoader />}
-          breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
-          alwaysShowFooter={true}
-          isNextPageLoading={isNextPageLoading}
-          hasNextPage={hasNextPage}
-          totalItems={total}
-          loadNextPage={
-            isRoot
-              ? null
-              : selectedItemType === "rooms"
-              ? getRoomList
-              : getFileList
-          }
-          disableAcceptButton={isDisabled}
-          withFooterInput={withFooterInput}
-          withFooterCheckbox={withFooterCheckbox}
-          footerInputHeader={footerInputHeader}
-          currentFooterInputValue={currentFooterInputValue}
-          footerCheckboxLabel={footerCheckboxLabel}
-          descriptionText={
-            !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
-          }
-          acceptButtonId={isMove || isCopy ? "select-file-modal-submit" : ""}
-          cancelButtonId={isMove || isCopy ? "select-file-modal-cancel" : ""}
-        />
+        {SelectorBody}
       </Aside>
     </>
+  );
+
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
+  ) : (
+    selectorComponent
   );
 };
 
@@ -592,7 +609,10 @@ export default inject(
       setMoveToPublicRoomVisible,
     } = dialogsStore;
 
-    const { theme, socketHelper } = auth.settingsStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
+      auth.infoPanelStore;
+
+    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
 
     const {
       selection,
@@ -654,10 +674,12 @@ export default inject(
       setRestoreAllPanelVisible,
       setIsFolderActions,
       setSelectedItems,
+      setInfoPanelIsMobileHidden,
       includeFolder,
       socketHelper,
       socketSubscribersId,
       setMoveToPublicRoomVisible,
+      currentDeviceType,
     };
   }
 )(observer(FilesSelector));

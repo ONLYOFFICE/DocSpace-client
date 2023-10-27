@@ -6,7 +6,7 @@ import Link from "@docspace/components/link";
 import Button from "@docspace/components/button";
 import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
-import { smallTablet, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { I18nextProvider, Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
@@ -49,7 +49,7 @@ const StyledPrivacyPage = styled.div`
         ? `text-align: right;`
         : `text-align: left;`}
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       text-align: center;
     }
   }
@@ -58,7 +58,7 @@ const StyledPrivacyPage = styled.div`
     display: flex;
     flex-direction: row;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
     }
   }
@@ -98,7 +98,7 @@ const StyledPrivacyPage = styled.div`
           : `padding-left: 74px;`}
     }
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       padding: 0px;
       text-align: center;
     }

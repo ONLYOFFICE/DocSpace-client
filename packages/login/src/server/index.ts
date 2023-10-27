@@ -15,6 +15,7 @@ import cookieParser from "cookie-parser";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
 import { getLanguage } from "@docspace/common/utils";
 import { initSSR } from "@docspace/common/api/client";
+import { checkIsAuthenticated } from "@docspace/common/api/user";
 import dns from "dns";
 import { xss } from "express-xss-sanitizer";
 
@@ -58,6 +59,13 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
   initSSR(headers);
 
   try {
+    const isAuth = await checkIsAuthenticated();
+
+    if (isAuth && url !== "/login/error") {
+      res.redirect("/");
+      return next();
+    }
+
     initialState = await getInitialState(query);
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
@@ -66,7 +74,7 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
     const oauthClientState = initialState.match?.state || "";
 
     const isOAuth = initialState.match?.type === "oauth2" && !!oauthClientId;
-    const isConsent = initialState.isAuth && isOAuth;
+    const isConsent = isAuth && isOAuth;
 
     if (hideAuthPage && ssoUrl && query.skipssoredirect !== "true") {
       res.redirect(ssoUrl);
@@ -78,7 +86,7 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
     if (isOAuth) {
       const oauthState: IOAuthState = await getOAuthState(
         oauthClientId,
-        initialState?.isAuth || false
+        isAuth
       );
 
       oauthState.state = oauthClientState;

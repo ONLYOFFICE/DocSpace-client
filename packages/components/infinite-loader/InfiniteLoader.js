@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isMobileOnly } from "react-device-detect";
+
 import ListComponent from "./List";
 import GridComponent from "./Grid";
+import { isMobile } from "../utils/device";
 
 const InfiniteLoaderComponent = (props) => {
   const { viewAs, isLoading } = props;
 
-  const scroll = isMobileOnly
+  const scroll = isMobile()
     ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
     : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
 

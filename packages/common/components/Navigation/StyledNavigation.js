@@ -1,11 +1,6 @@
 import styled, { css } from "styled-components";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
-import {
-  tablet,
-  mobile,
-  desktop,
-  hugeMobile,
-} from "@docspace/components/utils/device";
+
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledContainer = styled.div`
   ${(props) =>
@@ -78,19 +73,9 @@ const StyledContainer = styled.div`
         display: flex;
       }
 
-      ${isTablet &&
-      css`
-        display: flex;
-      `}
-
       @media ${mobile} {
         display: none;
       }
-
-      ${isMobileOnly &&
-      css`
-        display: none !important;
-      `}
     }
   }
 
@@ -134,7 +119,7 @@ const StyledContainer = styled.div`
   }
 
   .navigation-header-separator {
-    display: ${isMobileOnly ? "none" : "block"};
+    display: block;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

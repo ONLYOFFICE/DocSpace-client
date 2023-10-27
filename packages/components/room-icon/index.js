@@ -41,7 +41,7 @@ StyledIcon.defaultProps = { theme: Base };
 
 const RoomIcon = ({
   title,
-  isArchive,
+  isArchive = false,
   color,
   size = "32px",
   radius = "6px",

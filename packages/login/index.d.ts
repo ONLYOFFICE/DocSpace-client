@@ -152,7 +152,6 @@ declare global {
     capabilities?: ICapabilities;
     match?: MatchType;
     currentColorScheme?: ITheme;
-    isAuth?: boolean;
     ssoSettings?: ISSOSettings;
     logoUrls: ILogoUrl[];
     error?: IError;

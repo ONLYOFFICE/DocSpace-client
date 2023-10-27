@@ -24,7 +24,9 @@ class Profile extends React.Component {
       selectedTreeNode,
       setSelectedNode,
       setIsProfileLoaded,
+      getTfaType,
     } = this.props;
+
     const userId = "@self";
 
     setIsEditTargetUser(false);
@@ -45,6 +47,9 @@ class Profile extends React.Component {
     // if (linkParams.email_change && linkParams.email_change === "success") {
     //   toastr.success(t("ChangeEmailSuccess"));
     // }
+
+    getTfaType();
+
     if (!profile || profile.userName !== userId) {
       fetchProfile(userId).finally(() => {
         setIsProfileLoaded(true);
@@ -78,13 +83,16 @@ class Profile extends React.Component {
   render() {
     // console.log("Profile render");
 
-    const { profile, showCatalog } = this.props;
+    const { profile, showCatalog, setIsLoading } = this.props;
 
     return (
       <>
         <Section withBodyAutoFocus viewAs="profile">
           <Section.SectionHeader>
-            <SectionHeaderContent profile={profile} />
+            <SectionHeaderContent
+              profile={profile}
+              setIsLoading={setIsLoading}
+            />
           </Section.SectionHeader>
 
           <Section.SectionBody>
@@ -105,9 +113,20 @@ Profile.propTypes = {
 
 export default inject(
   ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language } = auth;
+    const { setDocumentTitle, language, tfaStore } = auth;
 
-    const { setIsProfileLoaded } = clientLoadingStore;
+    const {
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
+    } = clientLoadingStore;
+
+    const setIsLoading = () => {
+      setIsSectionHeaderLoading(true, false);
+      setIsSectionFilterLoading(true, false);
+      setIsSectionBodyLoading(true, false);
+    };
 
     const { targetUserStore } = peopleStore;
     const {
@@ -118,6 +137,9 @@ export default inject(
     } = targetUserStore;
 
     const { selectedTreeNode, setSelectedNode } = treeFoldersStore;
+
+    const { getTfaType } = tfaStore;
+
     return {
       setDocumentTitle,
       language,
@@ -128,10 +150,13 @@ export default inject(
       setIsEditTargetUser,
 
       showCatalog: auth.settingsStore.showCatalog,
+
       selectedTreeNode,
       setSelectedNode,
       isVisitor: auth.userStore.user.isVisitor,
       setIsProfileLoaded,
+      setIsLoading,
+      getTfaType,
     };
   }
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

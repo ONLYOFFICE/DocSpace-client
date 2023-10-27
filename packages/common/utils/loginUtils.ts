@@ -1,10 +1,7 @@
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
-export async function login(
-  user: string,
-  hash: string,
-  session = true,
-  captchaToken: string
+
+export async function login(user: string, hash: string, session = true, captchaToken: string = ""
 ): Promise<string | object> {
   try {
     const response = await api.user.login(user, hash, session, captchaToken);

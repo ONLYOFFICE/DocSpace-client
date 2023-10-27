@@ -10,10 +10,9 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile, isTablet, isMobile } from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
 
 import toastr from "@docspace/components/toast/toastr";
@@ -21,6 +20,8 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import FloatingButton from "@docspace/components/floating-button";
+
+import Base from "@docspace/components/themes/base";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -30,24 +31,20 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 70px;
+  min-height: 53px;
   flex-wrap: wrap;
 
-  ${() =>
-    isMobile &&
-    css`
-      margin-bottom: 11px;
-    `}
+  @media ${tablet} {
+    margin-bottom: 11px;
+  }
 
-  ${() =>
-    isMobileOnly &&
-    css`
-      margin-top: 7px;
-      margin-left: -14px;
-      padding-left: 14px;
-      margin-right: -14px;
-      padding-right: 14px;
-    `}
+  @media ${mobile} {
+    margin-top: 7px;
+    margin-left: -14px;
+    padding-left: 14px;
+    margin-right: -14px;
+    padding-right: 14px;
+  }
 
   .arrow-button {
     margin-inline-end: 18.5px;
@@ -58,21 +55,25 @@ const HeaderContainer = styled.div`
       margin-inline-start: -8px;
     }
 
-    ${() =>
-      isMobileOnly &&
-      css`
-        margin-inline-end: 13px;
-      `}
+    @media ${mobile} {
+      margin-inline-end: 13px;
+    }
 
     svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
     font-size: 18px;
     margin-inline-end: 16px;
+
+    @media ${tablet} {
+      font-size: 21px;
+    }
+    @media ${mobile} {
+      font-size: 18px;
+    }
   }
 
   .table-container_group-menu {
@@ -89,30 +90,30 @@ const HeaderContainer = styled.div`
     .combo-button_selected-icon {
       svg {
         path {
-          fill: ${(props) => (props.isDisabled ? "#d0d5da" : "#333")};
+          fill: ${(props) => (props.isDisabled ? "#d0d5da" : props.theme.color)};
         }
       }
     }
 
-    ${() =>
-      isMobile &&
-      css`
-        height: 60px;
-        margin-block: 0;
-        margin-inline: -16px 0;
-        width: calc(100% + 32px);
-      `}
-    ${() =>
-      isMobileOnly &&
-      css`
-        position: absolute;
-        height: 48px;
-        margin-block: -35px 0;
-        margin-inline: -17px 0;
-        width: calc(100% + 32px);
-      `}
+    @media ${tablet} {
+      height: 60px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+      top: 5px;
+    }
+    @media ${mobile} {
+      position: absolute;
+      height: 48px;
+      margin-block: -17px 0;
+      margin-inline: -17px 0;
+      width: 100%;
+      top: 10px;
+    }
   }
 `;
+
+HeaderContainer.defaultProps = { theme: Base };
 
 const HistoryHeader = (props) => {
   const {
@@ -161,10 +162,10 @@ const HistoryHeader = (props) => {
       });
       toastr.success(
         `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
-        <b>{t("Common:Done")}</b>
+        <b>{t("Common:Done")}</b>,
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastr.error(error);
     } finally {
       setRetryPendingFalse();
@@ -181,8 +182,7 @@ const HistoryHeader = (props) => {
     },
   ];
 
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
+  const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);
@@ -246,7 +246,7 @@ const HistoryHeader = (props) => {
 
   return (
     <HeaderContainer isDisabled={isRetryPending}>
-      {isMobileOnly ? (
+      {isMobile() ? (
         <>
           {isGroupMenuVisible && <GroupMenu />}
           <NavigationHeader />

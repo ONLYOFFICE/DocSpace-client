@@ -17,11 +17,11 @@ const RoomsModule = (props) => {
 
   return (
     <FilesSelectorInput
+      className="restore-backup_input"
       isDisabled={!isEnableRestore}
       onSelectFile={onSelectFile}
       filterParam={FilesSelectorFilterTypes.GZ}
       descriptionText={t("SelectFileInGZFormat")}
-      isRoomsOnly
     />
   );
 };

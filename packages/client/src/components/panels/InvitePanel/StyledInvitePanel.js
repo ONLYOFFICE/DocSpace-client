@@ -10,7 +10,7 @@ import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
 import ToggleButton from "@docspace/components/toggle-button";
 import { isMobileOnly, isTablet } from "react-device-detect";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
@@ -28,7 +28,7 @@ const fillAvailableWidth = css`
 `;
 
 const StyledInvitePanel = styled.div`
-  @media ${hugeMobile} {
+  @media ${mobile} {
     user-select: none;
     height: auto;
     width: auto;
@@ -376,6 +376,17 @@ const StyledLink = styled(Link)`
     theme.interfaceDirection === "rtl" ? `left` : `right`};
 `;
 
+const ResetLink = styled(Link)`
+  float: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `right` : `left`};
+  padding: 0 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
+  font-style: normal;
+  line-height: 15px;
+`;
+
 StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
@@ -401,7 +412,7 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 450;
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     display: flex;
 
     top: -27px;
@@ -409,7 +420,55 @@ const StyledControlContainer = styled.div`
     left: unset;
   }
 `;
-
+const StyledInviteLanguage = styled.div`
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: -12px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 28px;
+  color: ${(props) =>
+    props.theme.createEditRoomDialog.commonParam.descriptionColor};
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  .list-link {
+    margin-left: 4px;
+    color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
+  }
+  @media ${mobile} {
+    justify-content: space-between;
+  }
+  .invitation-language {
+    margin-right: 4px;
+    color: ${(props) =>
+      props.theme.createEditRoomDialog.commonParam.descriptionColor};
+    @media ${mobile} {
+      margin-right: 0;
+    }
+  }
+  .language-combo-box {
+    .combo-button {
+      padding-left: 6px;
+      padding-right: 0px;
+    }
+    .combo-button-label {
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+    }
+    .combo-buttons_arrow-icon {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+        }
+      }
+    }
+  }
+`;
 const StyledCrossIconMobile = styled(CrossIconMobile)`
   width: 17px;
   height: 17px;
@@ -439,10 +498,12 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
+  ResetLink,
   ScrollList,
   StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
+  StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
 };

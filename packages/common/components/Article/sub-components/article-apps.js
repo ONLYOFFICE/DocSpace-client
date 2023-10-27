@@ -12,15 +12,14 @@ import Text from "@docspace/components/text";
 import IconButton from "@docspace/components/icon-button";
 
 import { Base } from "@docspace/components/themes";
-import { desktop, tablet, hugeMobile } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledArticleApps = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
   position: relative;
-  margin-top: auto;
+  margin-top: ${(props) => (props.withDevTools ? "0" : "auto")};
   margin-bottom: 16px;
 
   @media ${tablet} {
@@ -34,10 +33,10 @@ const StyledArticleApps = styled.div`
       `}
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     position: relative;
     bottom: 0px;
-    margin-top: 32px;
+    margin-top: ${(props) => (props.withDevTools ? "16px" : "32px")};
   }
 
   .download-app-text {
@@ -52,7 +51,7 @@ const StyledArticleApps = styled.div`
 
 StyledArticleApps.defaultProps = { theme: Base };
 
-const ArticleApps = React.memo(({ theme, showText }) => {
+const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
   const { t } = useTranslation(["Translations"]);
 
   const desktopLink = "https://www.onlyoffice.com/desktop.aspx";
@@ -62,7 +61,7 @@ const ArticleApps = React.memo(({ theme, showText }) => {
   if (!showText) return <></>;
 
   return (
-    <StyledArticleApps showText={showText}>
+    <StyledArticleApps showText={showText} withDevTools={withDevTools}>
       <Text className="download-app-text" fontSize="14px" noSelect={true}>
         {t("Translations:DownloadApps")}
       </Text>

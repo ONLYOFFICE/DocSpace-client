@@ -9,6 +9,8 @@ import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment";
 import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
 
+import Base from "../themes/base";
+
 const Selectors = styled.div`
   position: relative;
   margin-top: 8px;
@@ -37,7 +39,7 @@ const TimeCell = styled.span`
   width: 73px;
   height: 32px;
 
-  background-color: #eceef1;
+  background-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#242424")};
   border-radius: 3px;
 
   padding: 6px 8px;
@@ -57,6 +59,8 @@ const TimeCell = styled.span`
       color: red;
     `}
 `;
+
+TimeCell.defaultProps = { theme: Base };
 
 const TimeSelector = styled.span`
   ${({ theme }) =>

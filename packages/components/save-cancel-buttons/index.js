@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Button from "../button";
 import Text from "../text";
 import StyledSaveCancelButtons from "./styled-save-cancel-buttons";
+import { isDesktop, isMobile } from "../utils/device";
 
 const ButtonKeys = Object.freeze({
   enter: 13,
@@ -42,7 +43,7 @@ class SaveCancelButtons extends React.Component {
       onCancelClick,
       displaySettings,
       showReminder,
-      reminderTest,
+      reminderText,
       saveButtonLabel,
       cancelButtonLabel,
       hasScroll,
@@ -74,6 +75,8 @@ class SaveCancelButtons extends React.Component {
       ? `cancel-button ` + additionalClassCancelButton
       : `cancel-button`;
 
+    const buttonSize = isDesktop() ? "small" : "normal";
+
     return (
       <StyledSaveCancelButtons
         className={className}
@@ -86,26 +89,28 @@ class SaveCancelButtons extends React.Component {
           <Button
             tabIndex={tabIndexSaveButton}
             className={classNameSave}
-            size="normal"
+            size={buttonSize}
             isDisabled={!showReminder || saveButtonDisabled}
             primary
             onClick={onSaveClick}
             label={saveButtonLabel}
             minwidth={displaySettings && "auto"}
             isLoading={isSaving}
+            scale={isMobile()}
           />
           <Button
             tabIndex={tabIndexCancelButton}
             className={classNameCancel}
-            size="normal"
+            size={buttonSize}
             isDisabled={cancelButtonDisabled || isSaving}
             onClick={onCancelClick}
             label={cancelButtonLabel}
             minwidth={displaySettings && "auto"}
+            scale={isMobile()}
           />
         </div>
-        {showReminder && reminderTest && (
-          <Text className="unsaved-changes">{reminderTest}</Text>
+        {showReminder && reminderText && (
+          <Text className="unsaved-changes">{reminderText}</Text>
         )}
       </StyledSaveCancelButtons>
     );
@@ -118,7 +123,7 @@ SaveCancelButtons.propTypes = {
   /** Accepts css class */
   className: PropTypes.string,
   /** Message text that notifies of the unsaved changes */
-  reminderTest: PropTypes.string,
+  reminderText: PropTypes.string,
   /** Save button label */
   saveButtonLabel: PropTypes.string,
   /** Cancel button label  */

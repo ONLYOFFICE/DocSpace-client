@@ -1,19 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-
 import styled from "styled-components";
-
-import { isMobile } from "react-device-detect";
-
-import TableContainer from "@docspace/components/table-container/TableContainer";
-import TableBody from "@docspace/components/table-container/TableBody";
-import HistoryTableHeader from "./HistoryTableHeader";
-import HistoryTableRow from "./HistoryTableRow";
-
 import { useParams } from "react-router-dom";
-
 import { inject, observer } from "mobx-react";
+import React, { useState, useRef } from "react";
 
 import { Base } from "@docspace/components/themes";
+import TableBody from "@docspace/components/table-container/TableBody";
+import TableContainer from "@docspace/components/table-container/TableContainer";
+
+import HistoryTableRow from "./HistoryTableRow";
+import HistoryTableHeader from "./HistoryTableHeader";
+import { useViewEffect } from "@docspace/common/hooks";
 
 const TableWrapper = styled(TableContainer)`
   margin-top: 0;
@@ -63,6 +59,7 @@ const HistoryTableView = (props) => {
     formatFilters,
     historyFilters,
     userId,
+    currentDeviceType,
   } = props;
 
   const tableRef = useRef(null);
@@ -70,14 +67,11 @@ const HistoryTableView = (props) => {
 
   const { id } = useParams();
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const fetchMoreFiles = () => {
     const params = historyFilters === null ? {} : formatFilters(historyFilters);
@@ -136,6 +130,7 @@ export default inject(({ setup, webhooksStore, auth }) => {
     historyFilters,
   } = webhooksStore;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     viewAs,
@@ -147,5 +142,6 @@ export default inject(({ setup, webhooksStore, auth }) => {
     formatFilters,
     historyFilters,
     userId,
+    currentDeviceType,
   };
 })(observer(HistoryTableView));

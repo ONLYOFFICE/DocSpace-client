@@ -196,7 +196,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   clientLoadingStore
 );
 
-const webhooksStore = new WebhooksStore();
+const webhooksStore = new WebhooksStore(authStore);
 
 const store = {
   auth: authStore,

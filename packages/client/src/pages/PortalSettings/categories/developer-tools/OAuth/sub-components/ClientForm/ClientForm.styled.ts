@@ -1,48 +1,18 @@
 import styled from "styled-components";
 
-//@ts-ignore
-import Box from "@docspace/components/box";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
-
-  display: grid;
-  grid-template-columns: 350px 350px;
-
-  gap: 16px;
-
-  .preview-container {
-    margin-top: 16px;
-
-    width: fit-content;
-    min-width: 350px;
-    height: fit-content;
-
-    border: 1px solid #a3aeae;
-    border-radius: 6px;
-
-    padding: 16px;
-  }
-`;
-
-const FormContainer = styled.div`
-  max-width: 350px;
+  max-width: 660px;
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
 
-  .button-container {
-    width: 100;
-    display: flex;
-
-    flex-direction: raw;
-    gap: 8px;
-  }
+  gap: 24px;
 `;
 
-const BlockContainer = styled.div`
+const StyledBlock = styled.div`
   width: 100%;
   height: auto;
 
@@ -51,11 +21,11 @@ const BlockContainer = styled.div`
   gap: 12px;
 `;
 
-const HeaderRaw = styled.div`
+const StyledHeaderRow = styled.div`
   width: 100%;
 
   display: flex;
-  flex-direction: raw;
+  flex-direction: row;
   gap: 4px;
 
   align-items: center;
@@ -65,20 +35,64 @@ const HeaderRaw = styled.div`
   }
 `;
 
-const InputGroup = styled.div`
+const StyledInputBlock = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 16px;
+
+  @media ${mobile} {
+    display: flex;
+
+    flex-direction: column;
+  }
+`;
+
+const StyledInputGroup = styled.div`
   width: 100%;
   height: auto;
 
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  svg {
+    cursor: pointer;
+  }
+
+  .select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+
+    .logo {
+      max-width: 32px;
+      max-height: 32px;
+      width: 32px;
+      height: 32px;
+
+      border-radius: 3px;
+    }
+
+    p {
+      color: #a3a9ae;
+    }
+  }
+
+  .description {
+    color: #a3a9ae;
+  }
 `;
 
-const InputRaw = styled.div`
+const StyledInputRow = styled.div`
   width: 100%;
 
   display: flex;
-  flex-direction: raw;
+  flex-direction: row;
   justify-content: space-between;
 
   gap: 8px;
@@ -88,74 +102,139 @@ const InputRaw = styled.div`
   }
 `;
 
-const CheckboxGroup = styled.div`
+const StyledChipsContainer = styled.div`
   width: 100%;
-  height: auto;
 
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+
+  gap: 4px;
+`;
+
+const StyledChips = styled.div`
+  background: #eceef1;
+
+  padding: 6px 8px;
+
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   gap: 8px;
 `;
 
-const CheckboxRaw = styled.div`
+// const CheckboxGroup = styled.div`
+//   width: 100%;
+//   height: auto;
+
+//   display: flex;
+//   flex-direction: column;
+//   gap: 8px;
+// `;
+
+// const CheckboxRaw = styled.div`
+//   width: 100%;
+//   height: auto;
+
+//   display: flex;
+//   flex-direction: raw;
+//   align-items: center;
+//   gap: 8px;
+
+//   .checkbox {
+//     margin-right: 0px;
+//   }
+// `;
+
+// const CategorySubHeader = styled.div`
+//   margin-top: 8px;
+//   margin-bottom: 8px;
+//   font-size: 15px;
+//   font-style: normal;
+//   font-weight: 600;
+//   line-height: 16px;
+
+//   @media ${tablet} {
+//     &:not(&.copy-window-code) {
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   @media ${hugeMobile} {
+//     &:first-of-type {
+//       margin-top: 0;
+//     }
+//   }
+// `;
+
+const StyledScopesContainer = styled.div`
   width: 100%;
-  height: auto;
+
+  display: grid;
+  grid-template-columns: 1fr max-content max-content;
+
+  align-items: center;
+
+  gap: 16px 0;
+
+  .header {
+    padding-bottom: 8px;
+
+    padding-right: 24px;
+    margin-right: -12px;
+
+    border-bottom: 1px solid #474747;
+  }
+
+  .header-last {
+    margin-right: 0px;
+    padding-right: 0px;
+  }
+
+  .checkbox-read {
+    margin-right: 12px;
+  }
+`;
+
+const StyledScopesName = styled.div`
+  display: flex;
+
+  flex-direction: column;
+
+  .scope-name {
+    margin-bottom: 2px;
+  }
+
+  .scope-desc {
+    color: #858585;
+  }
+`;
+
+const StyledScopesCheckbox = styled.div`
+  width: 100%;
+  height: 100%;
 
   display: flex;
-  flex-direction: raw;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-end;
 
   .checkbox {
     margin-right: 0px;
   }
 `;
 
-const Frame = styled(Box)`
-  margin-top: 16px;
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-
-  button {
-    width: auto;
-    max-width: auto;
-
-    padding: 0 20px;
-  }
-`;
-
-const CategorySubHeader = styled.div`
-  margin-top: 8px;
-  margin-bottom: 8px;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
-
-  @media ${tablet} {
-    &:not(&.copy-window-code) {
-      margin-bottom: 0;
-    }
-  }
-
-  @media ${hugeMobile} {
-    &:first-of-type {
-      margin-top: 0;
-    }
-  }
-`;
-
 export {
-  Container,
-  FormContainer,
-  BlockContainer,
-  HeaderRaw,
-  InputGroup,
-  InputRaw,
-  CheckboxGroup,
-  CheckboxRaw,
-  Frame,
-  CategorySubHeader,
+  StyledContainer,
+  StyledBlock,
+  StyledHeaderRow,
+  StyledInputBlock,
+  StyledInputGroup,
+  StyledInputRow,
+  StyledChipsContainer,
+  StyledChips,
+  StyledScopesContainer,
+  StyledScopesName,
+  StyledScopesCheckbox,
 };

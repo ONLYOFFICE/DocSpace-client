@@ -1,8 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-//@ts-ignore
-import { getPortal } from "@docspace/common/api/portal";
-
 import {
   addClient,
   getClient,
@@ -16,9 +13,10 @@ import {
 } from "@docspace/common/api/oauth";
 
 import {
-  ClientListProps,
-  ClientProps,
-  Scope,
+  IClientListProps,
+  IClientProps,
+  IClientReqDTO,
+  IScope,
 } from "@docspace/common/utils/oauth/interfaces";
 
 import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
@@ -26,13 +24,13 @@ import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
-const PAGE_LIMIT = 20;
+const PAGE_LIMIT = 100;
 
 export type ViewAsType = "table" | "row";
 
 export interface OAuthStoreProps {
   viewAs: ViewAsType;
-  setViewAs: (value: "table" | "row") => void;
+  setViewAs: (value: ViewAsType) => void;
 
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
@@ -42,14 +40,19 @@ export interface OAuthStoreProps {
 
   editClient: (clientId: string) => void;
 
-  clients: ClientProps[];
-  fetchClient: (clientId: string) => Promise<ClientProps | undefined>;
+  clients: IClientProps[];
+  fetchClient: (clientId: string) => Promise<IClientProps | undefined>;
   fetchClients: () => Promise<void>;
   fetchNextClients: (startIndex: number) => Promise<void>;
-  saveClient: (client: ClientProps) => Promise<void>;
-  updateClient: (clientId: string, client: ClientProps) => Promise<void>;
+
+  saveClient: (client: IClientReqDTO) => Promise<void>;
+
+  updateClient: (clientId: string, client: IClientProps) => Promise<void>;
+
   changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
+
   regenerateSecret: (clientId: string) => Promise<string | undefined>;
+
   deleteClient: (clientId: string) => Promise<void>;
 
   currentPage: number;
@@ -59,34 +62,31 @@ export interface OAuthStoreProps {
   selection: string[];
   setSelection: (clientId: string) => void;
 
-  bufferSelection: ClientProps | null;
+  bufferSelection: IClientProps | null;
   setBufferSelection: (clientId: string) => void;
-
-  tenant: number;
-  fetchTenant: () => Promise<number>;
 
   activeClients: string[];
   setActiveClient: (clientId: string) => void;
 
-  scopes: Scope[];
-  fetchScope: (name: string) => Promise<Scope | undefined>;
+  scopes: IScope[];
+  fetchScope: (name: string) => Promise<IScope>;
   fetchScopes: () => Promise<void>;
 
   getContextMenuItems: (
     t: any,
-    item: ClientProps
+    item: IClientProps
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
 
-  clientList: ClientProps[];
+  clientList: IClientProps[];
   isEmptyClientList: boolean;
   hasNextPage: boolean;
-  scopeList: Scope[];
+  scopeList: IScope[];
 }
 
 class OAuthStore implements OAuthStoreProps {
-  viewAs: "table" | "row" = "table";
+  viewAs: ViewAsType = "table";
 
   currentPage: number = -1;
   totalPages: number = 0;
@@ -96,15 +96,13 @@ class OAuthStore implements OAuthStoreProps {
 
   selection: string[] = [];
 
-  bufferSelection: ClientProps | null = null;
+  bufferSelection: IClientProps | null = null;
 
-  tenant: number = -1;
-
-  clients: ClientProps[] = [];
+  clients: IClientProps[] = [];
 
   activeClients: string[] = [];
 
-  scopes: Scope[] = [];
+  scopes: IScope[] = [];
 
   clientsIsLoading: boolean = true;
 
@@ -112,7 +110,7 @@ class OAuthStore implements OAuthStoreProps {
     makeAutoObservable(this);
   }
 
-  setViewAs = (value: "table" | "row") => {
+  setViewAs = (value: ViewAsType) => {
     this.viewAs = value;
   };
 
@@ -163,15 +161,6 @@ class OAuthStore implements OAuthStoreProps {
     );
   };
 
-  fetchTenant = async () => {
-    if (this.tenant > -1) return this.tenant;
-
-    const { tenant } = await getPortal();
-
-    this.tenant = tenant;
-    return tenant;
-  };
-
   fetchClient = async (clientId: string) => {
     try {
       const client = await getClient(clientId);
@@ -185,7 +174,7 @@ class OAuthStore implements OAuthStoreProps {
   fetchClients = async () => {
     try {
       this.setClientsIsLoading(true);
-      const clientList: ClientListProps = await getClientList(0, PAGE_LIMIT);
+      const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
         this.totalPages = clientList.totalPages;
@@ -291,6 +280,7 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
+  // COMPLETE
   fetchScope = async (name: string) => {
     try {
       const scope = await getScope(name);
@@ -298,9 +288,12 @@ class OAuthStore implements OAuthStoreProps {
       return scope;
     } catch (e) {
       console.log(e);
+
+      return {} as IScope;
     }
   };
 
+  // COMPLETE
   fetchScopes = async () => {
     try {
       const scopes = await getScopeList();

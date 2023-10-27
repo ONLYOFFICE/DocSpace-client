@@ -12,6 +12,7 @@ import * as files from "./files";
 import * as rooms from "./rooms";
 import * as plugins from "./plugins";
 import * as oforms from "./oforms";
+import * as oauth from "./oauth";
 
 export default {
   Filter,
@@ -28,4 +29,5 @@ export default {
   rooms,
   plugins,
   oforms,
+  oauth,
 };

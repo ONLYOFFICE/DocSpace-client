@@ -103,6 +103,12 @@ export const getScopeTKeyDescription = (group: ScopeGroup, type: ScopeType) => {
   return tKey;
 };
 
+export const getScopeTKeyName = (group: ScopeGroup) => {
+  const tKey = `OAuth${group.replace(/^./, group[0].toUpperCase())}Name`;
+
+  return tKey;
+};
+
 export const filterScopeByGroup = (
   checkedScopes: string[],
   scopes: IScope[]

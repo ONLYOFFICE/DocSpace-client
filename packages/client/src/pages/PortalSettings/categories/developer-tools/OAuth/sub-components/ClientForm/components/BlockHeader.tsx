@@ -2,12 +2,21 @@ import Text from "@docspace/components/text";
 //@ts-ignore
 import HelpButton from "@docspace/components/help-button";
 
-import { HeaderRaw } from "../ClientForm.styled";
-import { BlockHeaderProps } from "../ClientForm.types";
+import { StyledHeaderRow } from "../ClientForm.styled";
 
-const BlockHeader = ({ header, helpButtonText }: BlockHeaderProps) => {
+interface BlockHeaderProps {
+  header: string;
+  helpButtonText?: string;
+  className?: string;
+}
+
+const BlockHeader = ({
+  header,
+  helpButtonText,
+  className,
+}: BlockHeaderProps) => {
   return (
-    <HeaderRaw>
+    <StyledHeaderRow className={className}>
       <Text
         fontSize={"16px"}
         fontWeight={700}
@@ -20,8 +29,8 @@ const BlockHeader = ({ header, helpButtonText }: BlockHeaderProps) => {
       >
         {header}
       </Text>
-      <HelpButton tooltipContent={helpButtonText} />
-    </HeaderRaw>
+      {helpButtonText && <HelpButton tooltipContent={helpButtonText} />}
+    </StyledHeaderRow>
   );
 };
 

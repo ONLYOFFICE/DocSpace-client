@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+//@ts-ignore
+import { request } from "../client";
 
 import {
   transformToClientProps,
@@ -6,42 +7,34 @@ import {
 } from "./../../utils/oauth/index";
 
 import {
-  ClientProps,
-  ClientResDTO,
-  ClientListProps,
-  ClientListDTO,
-  Scope,
+  IClientProps,
+  IClientResDTO,
+  IClientListProps,
+  IClientListDTO,
+  IScope,
+  INoAuthClientProps,
 } from "../../utils/oauth/interfaces";
 
-const axiosConfig: AxiosRequestConfig = {
-  baseURL: "/api/2.0",
-  responseType: "json",
-  timeout: 0,
-  withCredentials: true,
-};
+export const getClient = async (
+  clientId: string,
+  isAuth: boolean = true
+): Promise<IClientProps | INoAuthClientProps> => {
+  if (!isAuth) {
+    const client: IClientResDTO = await request({
+      method: "get",
+      url: `/clients/${clientId}/info`,
+    });
 
-const client = axios.create(axiosConfig);
+    return {
+      ...client,
+      websiteUrl: client.website_url,
+    };
+  }
 
-const request = (options: any): Promise<any> => {
-  const onSuccess = (response: any) => {
-    return response.data;
-  };
-
-  const onError = (error: any) => {
-    return error;
-  };
-
-  return client(options).then(onSuccess).catch(onError);
-};
-
-export const getClient = async (clientId: string): Promise<ClientProps> => {
-  const client: ClientResDTO = await request({
+  const client: IClientResDTO = await request({
     method: "get",
     url: `/clients/${clientId}`,
-    headers: {},
   });
-
-  client.enabled = true;
 
   return transformToClientProps(client);
 };
@@ -49,19 +42,16 @@ export const getClient = async (clientId: string): Promise<ClientProps> => {
 export const getClientList = async (
   page: number,
   limit: number
-): Promise<ClientListProps> => {
-  const { data }: { data: ClientListDTO } = await request({
+): Promise<IClientListProps> => {
+  const data: IClientListDTO = await request({
     method: "get",
     url: `/clients?page=${page}&limit=${limit}`,
   });
 
-  const clients = { ...data, content: [] as ClientProps[] };
+  const clients: IClientListProps = { ...data, content: [] as IClientProps[] };
 
-  data.content.forEach((item) => {
+  data.data.forEach((item) => {
     const client = transformToClientProps(item);
-
-    // TODO: OAuth, get it from request
-    client.enabled = true;
 
     clients.content.push({ ...client });
   });
@@ -69,24 +59,21 @@ export const getClientList = async (
   return clients;
 };
 
-export const addClient = async (data: ClientProps): Promise<ClientProps> => {
-  const client: ClientResDTO = await request({
+export const addClient = async (data: IClientProps): Promise<IClientProps> => {
+  const client: IClientResDTO = await request({
     method: "post",
     url: `/clients`,
     data: transformToClientReqDTO(data),
   });
-
-  // TODO: OAuth, get it from request
-  client.enabled = true;
 
   return transformToClientProps(client);
 };
 
 export const updateClient = async (
   clientId: string,
-  data: ClientProps
-): Promise<ClientProps> => {
-  const client: ClientResDTO = await request({
+  data: IClientProps
+): Promise<IClientProps> => {
+  const client: IClientResDTO = await request({
     method: "put",
     url: `/clients/${clientId}`,
     data: transformToClientReqDTO(data),
@@ -125,8 +112,8 @@ export const deleteClient = async (clientId: string): Promise<void> => {
   });
 };
 
-export const getScope = async (name: string): Promise<Scope> => {
-  const scope: Scope = await request({
+export const getScope = async (name: string): Promise<IScope> => {
+  const scope: IScope = await request({
     method: "get",
     url: `/scopes/${name}`,
   });
@@ -134,11 +121,41 @@ export const getScope = async (name: string): Promise<Scope> => {
   return scope;
 };
 
-export const getScopeList = async (): Promise<Scope[]> => {
-  const scopeList: Scope[] = await request({
+export const getScopeList = async (): Promise<IScope[]> => {
+  const scopeList: IScope[] = await request({
     method: "get",
     url: `/scopes`,
   });
 
   return scopeList;
+};
+
+export const onOAuthLogin = () => {
+  const formData = new FormData();
+
+  return request({
+    method: "post",
+    url: `/oauth2/login`,
+    data: formData,
+  });
+};
+
+export const onOAuthSubmit = (
+  clientId: string,
+  clientState: string,
+  scope: string[]
+) => {
+  const formData = new FormData();
+
+  // console.log(window.location.search);
+
+  formData.append("client_id", clientId);
+  formData.append("state", clientState);
+  formData.append("scope", scope.join(","));
+
+  return request({
+    method: "post",
+    url: `/oauth2/authorize`,
+    data: formData,
+  });
 };

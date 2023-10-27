@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+//@ts-ignore
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import OAuthEmptyScreen from "./sub-components/EmptyScreen";
 import List from "./sub-components/List";
@@ -47,6 +49,10 @@ const OAuth = ({
     startLoadingRef.current = new Date();
     getClientList();
   }, [getClientList]);
+
+  React.useEffect(() => {
+    setDocumentTitle(t("OAuth"));
+  }, []);
 
   return (
     <OAuthContainer>

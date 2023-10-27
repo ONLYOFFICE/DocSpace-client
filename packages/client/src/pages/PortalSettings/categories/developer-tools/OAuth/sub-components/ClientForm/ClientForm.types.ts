@@ -1,4 +1,4 @@
-import { ClientProps, Scope } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
 
 export interface InputProps {
   value: string;
@@ -25,32 +25,24 @@ export interface CheckboxProps {
   description: string;
 }
 
-export interface BlockHeaderProps {
-  header: string;
-  helpButtonText: string;
-}
-
 export interface BlockProps {
   children: React.ReactNode;
 }
 
 export interface ClientFormProps {
   id?: string;
-  client?: ClientProps;
+  client?: IClientProps;
 
-  tenant?: number;
-  fetchTenant?: () => Promise<number>;
+  scopeList?: IScope[];
 
-  scopeList?: Scope[];
-
-  fetchClient?: (clientId: string) => Promise<ClientProps>;
+  fetchClient?: (clientId: string) => Promise<IClientProps>;
   fetchScopes?: () => Promise<void>;
 
-  saveClient?: (client: ClientProps) => Promise<ClientProps>;
+  saveClient?: (client: IClientProps) => Promise<IClientProps>;
   updateClient?: (
     clientId: string,
-    client: ClientProps
-  ) => Promise<ClientProps>;
+    client: IClientProps
+  ) => Promise<IClientProps>;
 
   regenerateSecret?: (clientId: string) => Promise<string>;
 }

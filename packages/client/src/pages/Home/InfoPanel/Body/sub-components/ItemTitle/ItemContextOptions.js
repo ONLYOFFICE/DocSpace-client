@@ -32,11 +32,6 @@ const ItemContextOptions = ({
 
   const contextMenuRef = useRef();
 
-  const [contextHelper, setContextHelper] = useState(null);
-
-  const options = contextHelper?.getItemContextOptions();
-  const getData = () => options;
-
   const onContextMenu = (e) => {
     e.button === 2;
     if (!contextMenuRef?.current.menuRef.current)
@@ -62,7 +57,8 @@ const ItemContextOptions = ({
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
-        withBackdrop={false}
+        withBackdrop={true}
+        baseZIndex={310}
       />
       {options?.length > 0 && (
         <ContextMenuButton

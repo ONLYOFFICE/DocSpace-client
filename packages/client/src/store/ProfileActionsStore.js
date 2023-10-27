@@ -157,9 +157,9 @@ class ProfileActionsStore {
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
 
-  // onVideoGuidesClick = () => {
-  //   window.open(VIDEO_GUIDES_URL, "_blank");
-  // };
+  //onVideoGuidesClick = () => {
+  //  window.open(VIDEO_GUIDES_URL, "_blank");
+  //};
 
   onHotkeysClick = () => {
     this.authStore.settingsStore.setHotkeyPanelVisible(true);
@@ -259,6 +259,14 @@ class ProfileActionsStore {
       };
     }
 
+    const feedbackAndSupportEnabled =
+      this.authStore.settingsStore.additionalResourcesData
+        ?.feedbackAndSupportEnabled;
+    const videoGuidesEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
+    const helpCenterEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
+
     const actions = [
       {
         key: "user-menu-profile",
@@ -278,25 +286,25 @@ class ProfileActionsStore {
         isSeparator: true,
         key: "separator1",
       },
-      {
+      helpCenterEnabled && {
         key: "user-menu-help-center",
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
       },
-      // {
-      //   key: "user-menu-video",
-      //   icon: VideoGuidesReactSvgUrl,
-      //   label: "VideoGuides",
-      //   onClick: this.onVideoGuidesClick,
-      // },
+      /*videoGuidesEnabled && {
+        key: "user-menu-video",
+        icon: VideoGuidesReactSvgUrl,
+        label: "VideoGuides",
+        onClick: this.onVideoGuidesClick,
+      },*/
       hotkeys,
       !isMobile && {
         isSeparator: true,
         key: "separator2",
       },
       liveChat,
-      {
+      feedbackAndSupportEnabled && {
         key: "user-menu-support",
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
@@ -342,49 +350,7 @@ class ProfileActionsStore {
       });
     }
 
-    return this.checkEnabledActions(actions);
-  };
-
-  checkEnabledActions = (actions) => {
-    const actionsArray = actions;
-
-    if (!this.authStore.settingsStore.additionalResourcesData) {
-      return actionsArray;
-    }
-
-    const feedbackAndSupportEnabled =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportEnabled;
-    const videoGuidesEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
-    const helpCenterEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
-
-    if (!feedbackAndSupportEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-support"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!videoGuidesEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-video"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!helpCenterEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-help-center"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    return actionsArray;
+    return actions;
   };
 }
 

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -135,6 +135,10 @@ const StyledTitle = styled.div`
       border-bottom: ${(props) =>
         `solid 1px ${props.theme.infoPanel.borderColor}`};
     `}
+
+  @media ${desktop} {
+    max-width: 360px;
+  }
 
   @media ${tablet} {
     width: 440px;

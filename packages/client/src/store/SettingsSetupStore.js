@@ -91,7 +91,6 @@ class SettingsSetupStore {
 
     if (authStore.isAuthenticated) {
       await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.tfaStore.getTfaType();
       await authStore.settingsStore.getIpRestrictionsEnable();
       await authStore.settingsStore.getIpRestrictions();
       await authStore.settingsStore.getSessionLifetime();
@@ -320,11 +319,6 @@ class SettingsSetupStore {
     this.setFilter(filterData);
   };
 
-  setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(data);
-    return Promise.resolve(response);
-  };
-
   setLanguageAndTime = async (lng, timeZoneID) => {
     return api.settings.setLanguageAndTime(lng, timeZoneID);
   };
@@ -479,10 +473,6 @@ class SettingsSetupStore {
 
   removeSession = (id) => {
     return api.settings.removeActiveSession(id);
-  };
-
-  getAllSettings = () => {
-    return api.settings.getSettings();
   };
 
   setLogoutVisible = (visible) => (this.logoutVisible = visible);

@@ -82,9 +82,6 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
         </Text>
-        <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="TwoFactorAuthNote" />
-        </Text>
         <Link
           className="link-learn-more"
           target="_blank"

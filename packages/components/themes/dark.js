@@ -2964,6 +2964,7 @@ const Dark = {
           toggleContentBackground: "#474747",
           iconButton: white,
           iconButtonDisabled: "#333",
+          border: "1px solid #474747",
         },
 
         smtp: {

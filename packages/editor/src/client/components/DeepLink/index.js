@@ -46,6 +46,7 @@ const DeepLink = ({
 
   const onStayBrowserClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
+    window.location.replace(window.location.search + "&without_redirect=true");
     setIsShowDeepLink(false);
   };
 

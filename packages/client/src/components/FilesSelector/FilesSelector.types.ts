@@ -66,6 +66,9 @@ export type useRootHelperProps = {
   treeFolders?: Item[];
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
 };
 
 export type useRoomsHelperProps = {

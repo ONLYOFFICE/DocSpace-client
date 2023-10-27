@@ -1,5 +1,9 @@
 import { Base } from "@docspace/components/themes";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  infoPanelWidth,
+} from "@docspace/components/utils/device";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
@@ -30,7 +34,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
 
 const StyledInfoPanel = styled.div`
   height: 100%;
-  width: 400px;
+  width: ${infoPanelWidth}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -160,11 +164,13 @@ const InfoPanel = ({
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
-      id="InfoPanelWrapper">
+      id="InfoPanelWrapper"
+    >
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer
           isRowView={viewAs === "row"}
-          onClick={closeInfoPanel}>
+          onClick={closeInfoPanel}
+        >
           <StyledCrossIcon />
         </StyledControlContainer>
 

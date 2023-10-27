@@ -64,6 +64,7 @@ const Base = {
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
   interfaceDirection: "ltr",
+  separatorColor: "#eceef1",
 
   text: {
     color: black,

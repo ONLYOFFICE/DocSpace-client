@@ -58,6 +58,7 @@ const Dark = {
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
   interfaceDirection: "ltr",
+  separatorColor: "#474747",
 
   text: {
     color: grayMaxLight,

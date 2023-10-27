@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledPublicRoomBlock = styled.div`
   margin-bottom: -8px;
@@ -11,6 +12,14 @@ const StyledPublicRoomBlock = styled.div`
 
   .additional-link {
     margin-bottom: 10px;
+  }
+
+  @media ${desktop} {
+    max-width: 360px;
+  }
+
+  @media ${tablet} {
+    max-width: 440px;
   }
 `;
 

@@ -36,6 +36,7 @@ const LinkRow = (props) => {
     setEmbeddingPanelIsVisible,
     isArchiveFolder,
     theme,
+    setIsScrollLocked,
     ...rest
   } = props;
 
@@ -62,6 +63,7 @@ const LinkRow = (props) => {
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
     setLinkParams({ isEdit: true, link });
+    onCloseContextMenu();
   };
 
   const onDisableLink = () => {
@@ -96,16 +98,27 @@ const LinkRow = (props) => {
   const onEmbeddingClick = () => {
     setLinkParams({ link, roomId });
     setEmbeddingPanelIsVisible(true);
+    onCloseContextMenu();
   };
 
   const onDeleteLink = () => {
     setLinkParams({ link });
     setDeleteLinkDialogVisible(true);
+    onCloseContextMenu();
   };
 
   const onCopyExternalLink = () => {
     copy(shareLink);
     toastr.success(t("Files:LinkSuccessfullyCopied"));
+    onCloseContextMenu();
+  };
+
+  const onOpenContextMenu = () => {
+    setIsScrollLocked(true);
+  };
+
+  const onCloseContextMenu = () => {
+    setIsScrollLocked(false);
   };
 
   const getData = () => {
@@ -227,6 +240,8 @@ const LinkRow = (props) => {
             isDisabled={isLoading}
             title={t("Files:ShowLinkActions")}
             directionY="both"
+            onClick={onOpenContextMenu}
+            onClose={onCloseContextMenu}
           />
         )}
       </div>
@@ -246,7 +261,7 @@ export default inject(
       setLinkParams,
     } = dialogsStore;
     const { editExternalLink, setExternalLink } = publicRoomStore;
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
     return {
       setLinkParams,
@@ -256,7 +271,7 @@ export default inject(
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
-      isArchiveFolder,
+      isArchiveFolder: isArchiveFolderRoot,
       theme,
     };
   }

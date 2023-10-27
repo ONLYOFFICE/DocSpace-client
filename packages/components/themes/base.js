@@ -2962,6 +2962,7 @@ const Base = {
           toggleContentBackground: grayLight,
           iconButton: black,
           iconButtonDisabled: gray,
+          border: "1px solid #eceef1",
         },
 
         smtp: {

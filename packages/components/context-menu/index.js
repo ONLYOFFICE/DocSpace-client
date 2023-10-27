@@ -444,9 +444,10 @@ class ContextMenu extends Component {
       <>
         {this.props.withBackdrop && (
           <Backdrop
-            visible={this.state.visible}
+            visible={this.state.visible && this.state.changeView}
             withBackground={isMobile}
             withoutBlur={!isMobile}
+            zIndex={this.props.baseZIndex}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />

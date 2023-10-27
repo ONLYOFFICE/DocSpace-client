@@ -102,6 +102,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
     hideTrackTimer,
     scrollclass,
     stype,
+    noScrollY,
     ...rest
   } = props;
 
@@ -170,6 +171,12 @@ const Scrollbar = React.forwardRef((props, ref) => {
     return () => clearTimeout(timerId.current);
   }, []);
 
+  const disableScrolling = noScrollY
+    ? {
+        height: "0",
+      }
+    : {};
+
   return (
     <StyledScrollbar
       {...rest}
@@ -205,6 +212,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
           ...tracksAutoHideStyles,
           marginLeft: isRtl ? "1px" : "0",
           marginRight: isRtl ? "0" : "1px",
+          ...disableScrolling,
         },
         ...tracksAutoHideHandlers,
       }}

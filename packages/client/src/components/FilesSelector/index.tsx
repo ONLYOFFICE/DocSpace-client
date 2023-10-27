@@ -155,6 +155,7 @@ const FilesSelector = ({
     treeFolders,
     setHasNextPage,
     setIsNextPageLoading,
+    onSetBaseFolderPath,
   });
 
   const { getRoomList } = useRoomsHelper({

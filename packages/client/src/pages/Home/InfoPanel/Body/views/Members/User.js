@@ -268,8 +268,7 @@ const User = ({
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"
-              //Uncomment when scroll lock will work
-              // onToggle={onToggle}
+              onToggle={onToggle}
               displaySelectedOption
             />
           ) : (

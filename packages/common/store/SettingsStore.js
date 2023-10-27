@@ -168,6 +168,7 @@ class SettingsStore {
 
   enablePlugins = false;
   pluginOptions = [];
+  domainValidator = null;
 
   additionalResourcesData = null;
   additionalResourcesIsDefault = true;
@@ -489,6 +490,10 @@ class SettingsStore {
 
     if (origSettings?.tenantAlias) {
       this.setTenantAlias(origSettings.tenantAlias);
+    }
+
+    if (origSettings?.domainValidator) {
+      this.domainValidator = origSettings.domainValidator;
     }
   };
 

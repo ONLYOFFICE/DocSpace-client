@@ -196,12 +196,8 @@ class BackupStore {
 
   setDefaultOptions = (t, periodObj, weekdayArr) => {
     if (this.backupSchedule) {
-      const {
-        storageType,
-        cronParams,
-        backupsStored,
-        storageParams,
-      } = this.backupSchedule;
+      const { storageType, cronParams, backupsStored, storageParams } =
+        this.backupSchedule;
 
       const { folderId, module } = storageParams;
       const { period, day, hour } = cronParams;
@@ -645,11 +641,20 @@ class BackupStore {
     try {
       const url = "/backupFileUpload.ashx";
 
+      const getExst = (fileName) => {
+        if (fileName.endsWith("." + "tar.gz")) {
+          return "tar.gz";
+        }
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
+      };
+
+      const extension = getExst(this.restoreResource.name);
+
       const res = await uploadBackup(
         combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           config.homepage,
-          `${url}?init=true&totalSize=${this.restoreResource.size}`
+          `${url}?init=true&totalSize=${this.restoreResource.size}&extension=${extension}`
         )
       );
 

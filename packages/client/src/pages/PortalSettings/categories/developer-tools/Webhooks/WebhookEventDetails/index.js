@@ -19,15 +19,20 @@ const EventDetailsHeader = styled.header`
 `;
 
 const WebhookEventDetails = (props) => {
-  const { fetchEventData } = props;
+  const { fetchEventData, fetchConfigName, configName } = props;
   const { id, eventId } = useParams();
 
   const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    startTransition(() => {
-      fetchEventData(eventId);
+  const handleDataFetch = async () => {
+    fetchConfigName({
+      configId: id,
     });
+    fetchEventData(eventId);
+  };
+
+  useEffect(() => {
+    startTransition(handleDataFetch);
   }, []);
 
   return (
@@ -35,7 +40,7 @@ const WebhookEventDetails = (props) => {
       <DetailsWrapper>
         <main>
           <EventDetailsHeader>
-            <Text fontWeight={600}>Webhook {id}</Text>
+            <Text fontWeight={600}>{configName}</Text>
             <DetailsBar />
           </EventDetailsHeader>
           <MessagesDetails />
@@ -46,7 +51,7 @@ const WebhookEventDetails = (props) => {
 };
 
 export default inject(({ webhooksStore }) => {
-  const { fetchEventData } = webhooksStore;
+  const { fetchEventData, fetchConfigName, configName } = webhooksStore;
 
-  return { fetchEventData };
+  return { fetchEventData, fetchConfigName, configName };
 })(observer(WebhookEventDetails));

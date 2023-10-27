@@ -20,9 +20,10 @@ import Link from "@docspace/components/link";
 import Avatar from "@docspace/components/avatar";
 //@ts-ignore
 import { Base } from "@docspace/components/themes";
+//@ts-ignore
+import { getCookie } from "@docspace/components/utils/cookie";
 
 import OAuthClientInfo from "./oauth-client-info";
-import { getCookie } from "@docspace/common/utils";
 
 const StyledFormWrapper = styled(FormWrapper)`
   width: 416px;

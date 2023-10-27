@@ -61,7 +61,13 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
   try {
     const isAuth = await checkIsAuthenticated();
 
-    if (isAuth && url !== "/login/error") {
+    const oauthClientId = (query.client_id as string) || "";
+    const oauthClientState = (query.state as string) || "";
+
+    const isOAuth = query.type === "oauth2" && !!oauthClientId;
+    const isConsent = isAuth && isOAuth && oauthClientState;
+
+    if (isAuth && !isOAuth && url !== "/login/error") {
       res.redirect("/");
       return next();
     }
@@ -69,12 +75,6 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
     initialState = await getInitialState(query);
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
-
-    const oauthClientId = initialState.match?.client_id || "";
-    const oauthClientState = initialState.match?.state || "";
-
-    const isOAuth = initialState.match?.type === "oauth2" && !!oauthClientId;
-    const isConsent = isAuth && isOAuth;
 
     if (hideAuthPage && ssoUrl && query.skipssoredirect !== "true") {
       res.redirect(ssoUrl);
@@ -97,11 +97,6 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
       if (isCorrectOAuth) {
         initialState.oauth = oauthState;
       }
-    }
-
-    if (initialState.isAuth && !isCorrectOAuth && url !== "/login/error") {
-      res.redirect("/");
-      return next();
     }
 
     if (initialState?.portalSettings?.wizardToken) {

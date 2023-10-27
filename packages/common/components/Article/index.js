@@ -30,6 +30,7 @@ const Article = ({
   withMainButton,
 
   hideProfileBlock,
+  hideAppsBlock,
 
   currentColorScheme,
   setArticleOpen,
@@ -45,6 +46,7 @@ const Article = ({
   currentDeviceType,
   showArticleLoader,
   isAdmin,
+  withCustomArticleHeader,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -170,7 +172,9 @@ const Article = ({
   }, [onResize]);
 
   const withDevTools =
-    !window.location.pathname.includes("portal-settings") && isAdmin;
+    !window.location.pathname.includes("portal-settings") &&
+    !window.location.pathname.includes("management") &&
+    isAdmin;
 
   const articleComponent = (
     <>
@@ -187,6 +191,7 @@ const Article = ({
           showText={showText}
           onLogoClickAction={onLogoClickAction}
           currentDeviceType={currentDeviceType}
+          withCustomArticleHeader={withCustomArticleHeader}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -213,11 +218,13 @@ const Article = ({
                   theme={theme}
                 />
               )}
-              <ArticleApps
-                withDevTools={withDevTools}
-                showText={showText}
-                theme={theme}
-              />
+              {!hideAppsBlock && (
+                <ArticleApps
+                  withDevTools={withDevTools}
+                  showText={showText}
+                  theme={theme}
+                />
+              )}
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
@@ -232,6 +239,7 @@ const Article = ({
             showText={showText}
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
+            hideProfileBlock={hideProfileBlock}
             isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}

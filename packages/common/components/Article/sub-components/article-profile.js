@@ -51,8 +51,8 @@ const ArticleProfile = (props) => {
 
   const username = user.displayName.split(" ").filter((name) => name.trim().length > 0);
 
-  const firstName = username.pop();
-  const lastName = username.join(" ");
+  const lastName = username.shift();
+  const firstName = username.join(" ");
 
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";

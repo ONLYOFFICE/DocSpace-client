@@ -130,7 +130,7 @@ export const settingsTree = [
             key: "1-0-0",
             icon: "",
             link: "password",
-            tKey: "SettingPasswordStrength",
+            tKey: "SettingPasswordTittle",
           },
           {
             id: "portal-settings_catalog-two-factor-auth",

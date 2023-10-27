@@ -7,6 +7,7 @@ import initLoginStore from "../store";
 import { Provider as MobxProvider } from "mobx-react";
 import SimpleNav from "../client/components/sub-components/SimpleNav";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
+import Consent from "./components/Consent";
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
@@ -35,6 +36,15 @@ const App: React.FC<ILoginProps> = (props) => {
     <MobxProvider {...loginStore}>
       <SimpleNav {...props} />
       <Routes>
+        <Route
+          path="/login/consent"
+          element={
+            <Login
+              isConsent={props.isAuth && !!props.oauth?.state}
+              {...props}
+            />
+          }
+        />
         <Route path="/login/error" element={<InvalidRoute {...props} />} />
         <Route path="/login/code" element={<CodeLogin {...props} />} />
         <Route path="/login" element={<Login {...props} />} />

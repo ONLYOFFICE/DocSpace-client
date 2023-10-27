@@ -1,3 +1,8 @@
+import {
+  IClientProps,
+  INoAuthClientProps,
+  IScope,
+} from "@docspace/common/utils/oauth/interfaces";
 import { Request } from "express";
 
 type WindowI18nType = {
@@ -28,7 +33,8 @@ declare global {
     messageKey?: string;
     authError?: string;
     type?: string;
-    clientId?: string;
+    client_id?: string;
+    state?: string;
   };
 
   type PasswordHashType = {
@@ -130,18 +136,13 @@ declare global {
     email: string;
   }
 
-  interface IOAuthClient {
-    name: string;
-    logo: string;
-    privacyURL: string;
-    termsURL: string;
-    scopes: string[];
-    clientId: string;
-  }
-
   interface IOAuthState {
-    client: IOAuthClient;
+    client: IClientProps | INoAuthClientProps;
+    clientId: string;
+    state: string;
     self?: ISelf;
+    scopes?: IScope[];
+    isConsent: boolean;
   }
 
   interface IInitialState {

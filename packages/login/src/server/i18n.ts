@@ -22,7 +22,7 @@ i18next.init({
   load: "currentOnly",
 
   saveMissing: true,
-  ns: ["Login", "Errors", "Common"],
+  ns: ["Login", "Errors", "Consent", "Common"],
   defaultNS: "Login",
 
   resources,

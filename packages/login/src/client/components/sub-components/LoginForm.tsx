@@ -10,7 +10,11 @@ import Link from "@docspace/components/link";
 import { useTranslation } from "react-i18next";
 import ForgotPasswordModalDialog from "./forgot-password-modal-dialog";
 import Button from "@docspace/components/button";
-import { checkIsSSR, createPasswordHash } from "@docspace/common/utils";
+import {
+  checkIsSSR,
+  createPasswordHash,
+  setCookie,
+} from "@docspace/common/utils";
 import { checkPwd } from "@docspace/common/desktop";
 import { login } from "@docspace/common/utils/loginUtils";
 import toastr from "@docspace/components/toast/toastr";
@@ -21,6 +25,14 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { OAuthLinksContainer, StyledCaptcha } from "../StyledLogin";
 import OAuthClientInfo from "./oauth-client-info";
 import SelectUser from "./SelectUser";
+import {
+  getClient,
+  getScopeList,
+  loginWithOAuth,
+} from "@docspace/common/api/oauth";
+import { getUser } from "@docspace/common/api/people";
+import { onOAuthLogin } from "@docspace/common/api/oauth";
+import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
 
 interface ILoginFormProps {
   isLoading: boolean;
@@ -34,6 +46,10 @@ interface ILoginFormProps {
   isBaseTheme: boolean;
   oauth?: IOAuthState;
   isOAuthPage?: boolean;
+  setIsConsentPage?: (val: boolean) => void;
+  setScopes: (val: IScope[]) => void;
+  setOAuthClient: (val: IClientProps) => void;
+  setSelf: (val: ISelf) => void;
 }
 
 const settings = {
@@ -56,14 +72,14 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   isBaseTheme,
   oauth,
   isOAuthPage,
+  setIsConsentPage,
+  setScopes,
+  setOAuthClient,
+  setSelf,
 }) => {
   const navigate = useNavigate();
 
   const captchaRef = useRef(null);
-
-  const [isOAuthSelectUser, setIsOAuthSelectUser] = useState(
-    isOAuthPage && !!oauth?.self
-  );
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -83,18 +99,12 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { t, ready } = useTranslation(["Login", "Common"]);
+  const { t, ready } = useTranslation(["Login", "Common", "Consent"]);
 
   const { message, confirmedEmail, authError } = match || {
     message: "",
     confirmedEmail: "",
     authError: "",
-  };
-
-  const showLoginForm = () => setIsOAuthSelectUser(false);
-
-  const onOAuthLogin = () => {
-    navigate(`/login/consent?clientId=${oauth?.client.clientId}`);
   };
 
   const authCallback = (profile: string) => {
@@ -219,18 +229,34 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     login(user, hash, session, captchaToken)
       .then((res: string | object) => {
         if (isOAuthPage) {
-          return onOAuthLogin();
-        }
-        const isConfirm = typeof res === "string" && res.includes("confirm");
-        const redirectPath = sessionStorage.getItem("referenceUrl");
-        if (redirectPath && !isConfirm) {
-          sessionStorage.removeItem("referenceUrl");
-          window.location.href = redirectPath;
-          return;
-        }
+          const requests = [];
 
-        if (typeof res === "string") window.location.replace(res);
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+          setCookie("client_id", oauth?.clientId);
+
+          requests.push(getClient(oauth?.clientId || ""));
+          requests.push(getScopeList());
+          requests.push(getUser());
+          requests.push(onOAuthLogin());
+
+          Promise.all(requests).then(([client, scopes, self]) => {
+            setOAuthClient(client);
+            setScopes(scopes);
+            setSelf(self);
+            setIsConsentPage && setIsConsentPage(true);
+            setIsLoading(false);
+          });
+        } else {
+          const isConfirm = typeof res === "string" && res.includes("confirm");
+          const redirectPath = sessionStorage.getItem("referenceUrl");
+          if (redirectPath && !isConfirm) {
+            sessionStorage.removeItem("referenceUrl");
+            window.location.href = redirectPath;
+            return;
+          }
+
+          if (typeof res === "string") window.location.replace(res);
+          else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        }
       })
       .catch((error) => {
         let errorMessage = "";
@@ -313,161 +339,149 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     <form className="auth-form-container">
       {oauth?.client && isOAuthPage && (
         <OAuthClientInfo
-          name={oauth?.client.name}
+          t={t}
+          name={oauth.client.name}
           logo={oauth.client.logo}
-          isAuth={!!oauth.self}
+          websiteUrl={oauth.client.websiteUrl}
         />
       )}
-
-      {isOAuthSelectUser && oauth?.self ? (
-        <SelectUser
-          self={oauth?.self}
-          onOAuthLogin={onOAuthLogin}
-          showLoginForm={showLoginForm}
-        />
-      ) : (
-        <>
-          <FieldContainer
-            isVertical={true}
-            labelVisible={false}
+      <>
+        <FieldContainer
+          isVertical={true}
+          labelVisible={false}
+          hasError={isEmailErrorShow}
+          errorMessage={
+            errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
+          } //TODO: Add wrong login server error
+        >
+          <EmailInput
+            id="login_username"
+            name="login"
+            type="email"
             hasError={isEmailErrorShow}
-            errorMessage={
-              errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-            } //TODO: Add wrong login server error
-          >
-            <EmailInput
-              id="login_username"
-              name="login"
-              type="email"
-              hasError={isEmailErrorShow}
-              value={identifier}
-              placeholder={t("RegistrationEmailWatermark")}
-              size="large"
-              scale={true}
-              isAutoFocussed={true}
-              tabIndex={1}
-              isDisabled={isLoading}
-              autoComplete="username"
-              onChange={onChangeLogin}
-              onBlur={onBlurEmail}
-              onValidateInput={onValidateEmail}
-              forwardedRef={inputRef}
-            />
-          </FieldContainer>
-          {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
-            <>
-              <FieldContainer
-                isVertical={true}
-                labelVisible={false}
-                hasError={!passwordValid}
-                errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
-              >
-                <PasswordInput
-                  className="password-input"
-                  simpleView={true}
-                  passwordSettings={settings}
-                  id="login_password"
-                  inputName="password"
-                  placeholder={t("Common:Password")}
-                  type="password"
-                  hasError={!passwordValid}
-                  inputValue={password}
-                  size="large"
-                  scale={true}
-                  tabIndex={1}
-                  isDisabled={isLoading}
-                  autoComplete="current-password"
-                  onChange={onChangePassword}
-                  onKeyDown={onKeyDown}
-                />
-              </FieldContainer>
-
-              <div className="login-forgot-wrapper">
-                <div className="login-checkbox-wrapper">
-                  <div className="remember-wrapper">
-                    {!cookieSettingsEnabled && (
-                      <Checkbox
-                        id="login_remember"
-                        className="login-checkbox"
-                        isChecked={isChecked}
-                        onChange={onChangeCheckbox}
-                        label={t("Common:Remember")}
-                        helpButton={
-                          !checkIsSSR() && (
-                            <HelpButton
-                              id="login_remember-hint"
-                              className="help-button"
-                              offsetRight={0}
-                              helpButtonHeaderContent={t("CookieSettingsTitle")}
-                              tooltipContent={
-                                <Text fontSize="12px">
-                                  {t("RememberHelper")}
-                                </Text>
-                              }
-                              tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
-                            />
-                          )
-                        }
-                      />
-                    )}
-                  </div>
-
-                  <Link
-                    fontSize="13px"
-                    className="login-link"
-                    type="page"
-                    isHovered={false}
-                    onClick={onClick}
-                    id="login_forgot-password-link"
-                  >
-                    {t("ForgotPassword")}
-                  </Link>
-                </div>
-              </div>
-
-              {isDialogVisible && (
-                <ForgotPasswordModalDialog
-                  isVisible={isDialogVisible}
-                  userEmail={identifier}
-                  onDialogClose={onDialogClose}
-                />
-              )}
-              {recaptchaPublicKey && isCaptcha && (
-                <StyledCaptcha isCaptchaError={isCaptchaError}>
-                  <div className="captcha-wrapper">
-                    <ReCAPTCHA
-                      sitekey={recaptchaPublicKey}
-                      ref={captchaRef}
-                      theme={isBaseTheme ? "light" : "dark"}
-                      onChange={onSuccessfullyComplete}
-                    />
-                  </div>
-                  {isCaptchaError && (
-                    <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
-                  )}
-                </StyledCaptcha>
-              )}
-            </>
-          )}
-
-          <Button
-            id="login_submit"
-            className="login-button"
-            primary
-            size="medium"
+            value={identifier}
+            placeholder={t("RegistrationEmailWatermark")}
+            size="large"
             scale={true}
-            label={
-              isLoading
-                ? t("Common:LoadingProcessing")
-                : t("Common:LoginButton")
-            }
+            isAutoFocussed={true}
             tabIndex={1}
             isDisabled={isLoading}
-            isLoading={isLoading}
-            onClick={onSubmit}
+            autoComplete="username"
+            onChange={onChangeLogin}
+            onBlur={onBlurEmail}
+            onValidateInput={onValidateEmail}
+            forwardedRef={inputRef}
           />
-        </>
-      )}
+        </FieldContainer>
+        {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
+          <>
+            <FieldContainer
+              isVertical={true}
+              labelVisible={false}
+              hasError={!passwordValid}
+              errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
+            >
+              <PasswordInput
+                className="password-input"
+                simpleView={true}
+                passwordSettings={settings}
+                id="login_password"
+                inputName="password"
+                placeholder={t("Common:Password")}
+                type="password"
+                hasError={!passwordValid}
+                inputValue={password}
+                size="large"
+                scale={true}
+                tabIndex={1}
+                isDisabled={isLoading}
+                autoComplete="current-password"
+                onChange={onChangePassword}
+                onKeyDown={onKeyDown}
+              />
+            </FieldContainer>
+
+            <div className="login-forgot-wrapper">
+              <div className="login-checkbox-wrapper">
+                <div className="remember-wrapper">
+                  {!cookieSettingsEnabled && (
+                    <Checkbox
+                      id="login_remember"
+                      className="login-checkbox"
+                      isChecked={isChecked}
+                      onChange={onChangeCheckbox}
+                      label={t("Common:Remember")}
+                      helpButton={
+                        !checkIsSSR() && (
+                          <HelpButton
+                            id="login_remember-hint"
+                            className="help-button"
+                            offsetRight={0}
+                            helpButtonHeaderContent={t("CookieSettingsTitle")}
+                            tooltipContent={
+                              <Text fontSize="12px">{t("RememberHelper")}</Text>
+                            }
+                            tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                          />
+                        )
+                      }
+                    />
+                  )}
+                </div>
+
+                <Link
+                  fontSize="13px"
+                  className="login-link"
+                  type="page"
+                  isHovered={false}
+                  onClick={onClick}
+                  id="login_forgot-password-link"
+                >
+                  {t("ForgotPassword")}
+                </Link>
+              </div>
+            </div>
+
+            {isDialogVisible && (
+              <ForgotPasswordModalDialog
+                isVisible={isDialogVisible}
+                userEmail={identifier}
+                onDialogClose={onDialogClose}
+              />
+            )}
+            {recaptchaPublicKey && isCaptcha && (
+              <StyledCaptcha isCaptchaError={isCaptchaError}>
+                <div className="captcha-wrapper">
+                  <ReCAPTCHA
+                    sitekey={recaptchaPublicKey}
+                    ref={captchaRef}
+                    theme={isBaseTheme ? "light" : "dark"}
+                    onChange={onSuccessfullyComplete}
+                  />
+                </div>
+                {isCaptchaError && (
+                  <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
+                )}
+              </StyledCaptcha>
+            )}
+          </>
+        )}
+
+        <Button
+          id="login_submit"
+          className="login-button"
+          primary
+          size="medium"
+          scale={true}
+          label={
+            isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
+          }
+          tabIndex={1}
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          onClick={onSubmit}
+        />
+      </>
       {/*Uncomment when add api*/}
       {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && !isOAuthPage && (
         <div className="login-or-access">
@@ -498,7 +512,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           )}
         </div>
       )}
-
       {IS_ROOMS_MODE && isWithoutPasswordLogin && !isOAuthPage && (
         <div className="login-link">
           <Link

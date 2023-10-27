@@ -12,7 +12,13 @@ import {
 } from "@docspace/common/api/settings";
 import { getUser } from "@docspace/common/api/people";
 import { checkIsAuthenticated } from "@docspace/common/api/user";
+import { getClient, getScopeList } from "@docspace/common/api/oauth";
 import { TenantStatus } from "@docspace/common/constants";
+import {
+  IClientProps,
+  INoAuthClientProps,
+  IScope,
+} from "@docspace/common/utils/oauth/interfaces";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(
@@ -102,22 +108,32 @@ export const getInitialState = async (
 //TODO: get client by id for links
 export const getOAuthState = async (
   clientId: string,
-  isAuth?: boolean
+  isAuth: boolean
 ): Promise<IOAuthState> => {
   const requests = [];
 
-  if (isAuth) requests.push(getUser());
+  requests.push(getClient(clientId, isAuth));
 
-  const [self] = await Promise.all(requests);
+  if (isAuth) {
+    requests.push(getUser());
+    requests.push(getScopeList());
+  }
 
-  const client: IOAuthClient = {
-    name: "Test",
-    logo: "static/images/logo/leftmenu.svg?hash=c31b569ea8c6322337cd",
-    privacyURL: "https://www.google.com/?hl=RU",
-    termsURL: "https://www.google.com/?hl=RU",
-    scopes: ["accounts:read"],
-    clientId: "1",
+  const [client, ...rest] = await Promise.all(requests);
+
+  const state: IOAuthState = {
+    clientId,
+    state: "",
+    isConsent: false,
+    client,
+    self: undefined,
+    scopes: undefined,
   };
 
-  return { client, self };
+  if (isAuth) {
+    state.self = rest[0] as ISelf;
+    state.scopes = rest[1] as IScope[];
+  }
+
+  return state;
 };

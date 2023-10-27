@@ -62,21 +62,27 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
 
-    const isOAuth = initialState.match?.type === "oauth2";
-    const oauthClientId = initialState.match?.clientId || "";
-    let isCorrectOAuth = false;
+    const oauthClientId = initialState.match?.client_id || "";
+    const oauthClientState = initialState.match?.state || "";
+
+    const isOAuth = initialState.match?.type === "oauth2" && !!oauthClientId;
+    const isConsent = initialState.isAuth && isOAuth;
 
     if (hideAuthPage && ssoUrl && query.skipssoredirect !== "true") {
       res.redirect(ssoUrl);
       return next();
     }
 
-    //TODO: get client by id
-    if (isOAuth && oauthClientId) {
+    let isCorrectOAuth = false;
+
+    if (isOAuth) {
       const oauthState: IOAuthState = await getOAuthState(
         oauthClientId,
-        initialState?.isAuth
+        initialState?.isAuth || false
       );
+
+      oauthState.state = oauthClientState;
+      oauthState.isConsent = !!isConsent;
 
       isCorrectOAuth = !!oauthState?.client.name;
 

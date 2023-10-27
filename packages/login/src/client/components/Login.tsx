@@ -26,6 +26,8 @@ import { getBgPattern } from "@docspace/common/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
 import { TenantStatus } from "@docspace/common/constants";
+import Consent from "./sub-components/Consent";
+import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
 
 const themes = {
   Dark: Dark,
@@ -37,6 +39,7 @@ interface ILoginProps extends IInitialState {
   theme: IUserTheme;
   setTheme: (theme: IUserTheme) => void;
   isBaseTheme: boolean;
+  isConsent?: boolean;
 }
 
 const Login: React.FC<ILoginProps> = ({
@@ -51,6 +54,7 @@ const Login: React.FC<ILoginProps> = ({
   logoUrls,
   isBaseTheme,
   oauth,
+  isConsent,
 }) => {
   const isOAuthPage = !!oauth?.client.name;
 
@@ -60,9 +64,18 @@ const Login: React.FC<ILoginProps> = ({
   useEffect(() => {
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
+
   const [isLoading, setIsLoading] = useState(false);
   const [moreAuthVisible, setMoreAuthVisible] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
+  const [isConsentPage, setIsConsentPage] = useState(
+    isConsent || oauth?.isConsent
+  );
+  const [scopes, setScopes] = useState(oauth?.scopes || ([] as IScope[]));
+  const [oauthClient, setOAuthClient] = useState(
+    oauth?.client || ({} as IClientProps)
+  );
+  const [self, setSelf] = useState(oauth?.self || ({} as ISelf));
 
   const {
     enabledJoin,
@@ -243,67 +256,79 @@ const Login: React.FC<ILoginProps> = ({
           >
             {greetingSettings}
           </Text>
-          <FormWrapper id="login-form" theme={theme}>
-            {ssoExists() && !isOAuthPage && (
-              <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
-            )}
-            {oauthDataExists() && !isOAuthPage && (
-              <>
-                <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
-                {providers && providers.length > 2 && (
-                  <Link
-                    isHovered
-                    type="action"
-                    fontSize="13px"
-                    fontWeight="600"
-                    color={currentColorScheme?.main?.accent}
-                    className="more-label"
-                    onClick={moreAuthOpen}
-                  >
-                    {t("Common:ShowMore")}
-                  </Link>
-                )}
-              </>
-            )}
-            {(oauthDataExists() || ssoExists()) && !isOAuthPage && (
-              <div className="line">
-                <Text className="or-label">{t("Or")}</Text>
-              </div>
-            )}
-            <LoginForm
-              isBaseTheme={isBaseTheme}
-              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
-              isDesktop={!!isDesktopEditor}
-              isLoading={isLoading}
-              hashSettings={portalSettings?.passwordHash}
-              setIsLoading={setIsLoading}
-              openRecoverDialog={openRecoverDialog}
-              match={match}
-              enableAdmMess={enableAdmMess}
-              cookieSettingsEnabled={cookieSettingsEnabled}
-              isOAuthPage={isOAuthPage}
-              oauth={oauth}
+          {isConsentPage && isOAuthPage ? (
+            <Consent
+              oauth={{ ...oauth, scopes, client: oauthClient, self }}
+              theme={theme}
+              setIsConsentScreen={setIsConsentPage}
             />
-          </FormWrapper>
-          <Toast />
-
-          <MoreLoginModal
-            visible={moreAuthVisible}
-            onClose={moreAuthClose}
-            providers={providers}
-            onSocialLoginClick={onSocialButtonClick}
-            ssoLabel={ssoLabel}
-            ssoUrl={ssoUrl}
-            t={t}
-          />
-
-          <RecoverAccessModalDialog
-            visible={recoverDialogVisible}
-            onClose={closeRecoverDialog}
-            textBody={t("RecoverTextBody")}
-            emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
-            id="recover-access-modal"
-          />
+          ) : (
+            <>
+              <FormWrapper id="login-form" theme={theme}>
+                {ssoExists() && !isOAuthPage && (
+                  <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
+                )}
+                {oauthDataExists() && !isOAuthPage && (
+                  <>
+                    <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
+                    {providers && providers.length > 2 && (
+                      <Link
+                        isHovered
+                        type="action"
+                        fontSize="13px"
+                        fontWeight="600"
+                        color={currentColorScheme?.main?.accent}
+                        className="more-label"
+                        onClick={moreAuthOpen}
+                      >
+                        {t("Common:ShowMore")}
+                      </Link>
+                    )}
+                  </>
+                )}
+                {(oauthDataExists() || ssoExists()) && !isOAuthPage && (
+                  <div className="line">
+                    <Text className="or-label">{t("Or")}</Text>
+                  </div>
+                )}
+                <LoginForm
+                  isBaseTheme={isBaseTheme}
+                  recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
+                  isDesktop={!!isDesktopEditor}
+                  isLoading={isLoading}
+                  hashSettings={portalSettings?.passwordHash}
+                  setIsLoading={setIsLoading}
+                  openRecoverDialog={openRecoverDialog}
+                  match={match}
+                  enableAdmMess={enableAdmMess}
+                  cookieSettingsEnabled={cookieSettingsEnabled}
+                  isOAuthPage={isOAuthPage}
+                  oauth={oauth}
+                  setIsConsentPage={setIsConsentPage}
+                  setScopes={setScopes}
+                  setOAuthClient={setOAuthClient}
+                  setSelf={setSelf}
+                />
+              </FormWrapper>
+              <Toast />
+              <MoreLoginModal
+                visible={moreAuthVisible}
+                onClose={moreAuthClose}
+                providers={providers}
+                onSocialLoginClick={onSocialButtonClick}
+                ssoLabel={ssoLabel}
+                ssoUrl={ssoUrl}
+                t={t}
+              />
+              <RecoverAccessModalDialog
+                visible={recoverDialogVisible}
+                onClose={closeRecoverDialog}
+                textBody={t("RecoverTextBody")}
+                emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
+                id="recover-access-modal"
+              />
+            </>
+          )}
         </ColorTheme>
       </LoginContent>
 

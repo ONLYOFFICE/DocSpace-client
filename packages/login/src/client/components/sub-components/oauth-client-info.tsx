@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Trans } from "react-i18next";
 
 //@ts-ignore
 import Text from "@docspace/components/text";
@@ -14,13 +15,13 @@ const StyledOAuthContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  gap: 8px;
+  gap: 12px;
 
-  margin-bottom: 20px;
+  margin-bottom: 32px;
 
   img {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 
   .row {
@@ -36,27 +37,72 @@ const StyledOAuthContainer = styled.div`
 interface IOAuthClientInfo {
   name: string;
   logo: string;
-  isAuth: boolean;
+  websiteUrl: string;
+
+  isConsentScreen?: boolean;
+  t: any;
 }
 
-const OAuthClientInfo = ({ name, logo, isAuth }: IOAuthClientInfo) => {
+const OAuthClientInfo = ({
+  name,
+  logo,
+  websiteUrl,
+
+  isConsentScreen,
+
+  t,
+}: IOAuthClientInfo) => {
   return (
     <StyledOAuthContainer>
-      <img src={logo} alt={"client-logo"} />
-      <Text className={"row"} fontSize={"20px"} lineHeight={"30px"}>
-        {isAuth ? "Selected account" : "Sign in"}{" "}
+      <Text
+        className={"row"}
+        fontWeight={600}
+        fontSize={"16px"}
+        lineHeight={"22px"}
+      >
+        {isConsentScreen ? <>{t("Consent")}</> : <>{t("Common:LoginButton")}</>}
       </Text>
-      <Text className={"row"}>
-        to continue to{" "}
-        <Link
-          className={"login-link"}
-          type="page"
-          fontWeight="600"
-          isHovered={false}
-          noHover
-        >
-          {name}
-        </Link>
+      <img src={logo} alt={"client-logo"} />
+      <Text
+        className={"row"}
+        fontWeight={isConsentScreen ? 400 : 600}
+        fontSize={"16px"}
+        lineHeight={"22px"}
+      >
+        {isConsentScreen ? (
+          <Trans t={t} i18nKey={"ConsentSubHeader"} ns="Consent">
+            <Link
+              className={"login-link"}
+              type="page"
+              isHovered={false}
+              href={websiteUrl}
+              target={"_blank"}
+              noHover
+              fontWeight={600}
+              fontSize={"16px"}
+            >
+              {{ name }}
+            </Link>{" "}
+            would like the ability to access the following data in{" "}
+            <strong>your DocSpace account</strong>:
+          </Trans>
+        ) : (
+          <>
+            {t("Consent:ToContinue")}{" "}
+            <Link
+              className={"login-link"}
+              type="page"
+              isHovered={false}
+              href={websiteUrl}
+              target={"_blank"}
+              noHover
+              fontWeight={600}
+              fontSize={"16px"}
+            >
+              {name}
+            </Link>
+          </>
+        )}
       </Text>
     </StyledOAuthContainer>
   );

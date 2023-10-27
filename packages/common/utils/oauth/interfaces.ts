@@ -1,57 +1,80 @@
-export type Scope = {
-  name: string;
-  description: string;
-};
+import { ScopeGroup, ScopeType } from "./enums";
 
-export interface ClientProps {
+export interface IScope {
+  name: string;
+  group: ScopeGroup;
+  type: ScopeType;
+  tKey?: string;
+}
+
+export interface IFilteredScopes {
+  [key: string]: {
+    isChecked: boolean;
+    checkedType?: ScopeType;
+    read: IScope;
+    write: IScope;
+  };
+}
+
+export interface INoAuthClientProps {
+  name: string;
+  logo: string;
+  websiteUrl: string;
+  policyUrl?: string;
+  termsUrl?: string;
+  scopes?: string[];
+}
+
+export interface IClientProps {
+  name: string;
   clientId: string;
-  secret: string;
-
-  name: string;
+  clientSecret: string;
   description: string;
-  logoUrl?: string;
-
-  redirectUri: string;
   policyUrl: string;
   termsUrl: string;
-  logoutRedirectUri: string;
-
+  logo: string;
   authenticationMethod: string;
-
-  scopes: string[];
-
-  enabled: boolean;
   tenant: number;
-  invalidated?: boolean;
+  redirectUris: string[];
+  logoutRedirectUris: string[];
+  enabled: boolean;
+  invalidated: boolean;
+  scopes: string[];
+  createdOn: Date;
+  modifiedOn: Date;
+  createdBy: string;
+  modifiedBy: string;
+  websiteUrl: string;
+  allowedOrigins: string[];
 }
 
-export interface ClientReqDTO {
+export interface IClientReqDTO {
   name: string;
   description: string;
-  logo_url?: string;
-
-  redirect_uri: string;
-  policy_url: string;
+  logo: string;
+  authentication_method: string;
   terms_url: string;
-  logout_redirect_uri: string;
-
+  policy_url: string;
+  redirect_uris: string[];
+  logout_redirect_uris: string[];
   scopes: string[];
-
-  tenant: number;
+  website_url: string;
+  allowed_origins: string[];
 }
 
-export interface ClientResDTO {
+export interface IClientResDTO {
+  name: string;
+
   client_id: string;
   client_secret: string;
 
-  name: string;
   description: string;
-  logo_url?: string;
+  logo: string;
 
-  redirect_uri: string;
+  redirect_uris: string[];
   terms_url: string;
   policy_url: string;
-  logout_redirect_uri: string;
+  logout_redirect_uris: string[];
 
   authentication_method: string;
 
@@ -59,63 +82,29 @@ export interface ClientResDTO {
 
   enabled: boolean;
   tenant: number;
-  invalidated?: boolean;
+  invalidated: boolean;
+  created_on: Date;
+  modified_on: Date;
+  created_by: string;
+  modified_by: string;
+  website_url: string;
+  allowed_origins: string[];
 }
 
-export interface ClientListProps {
-  content: ClientProps[];
-  empty: boolean;
-  first: boolean;
-  last: true;
-  number: number;
-  numberOfElements: number;
-  pageable: {
-    offset: number;
-    pageNumber: number;
-    pageSize: number;
-    paged: boolean;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    unpaged: boolean;
-  };
-  size: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  totalElements: number;
-  totalPages: number;
+export interface IClientListProps {
+  content: IClientProps[];
+  page: number;
+  limit: number;
 }
 
-export type ClientListDTO = {
-  content: ClientResDTO[];
-  empty: boolean;
-  first: boolean;
-  last: true;
-  number: number;
-  numberOfElements: number;
-  pageable: {
-    offset: number;
-    pageNumber: number;
-    pageSize: number;
-    paged: boolean;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    unpaged: boolean;
-  };
-  size: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  totalElements: number;
-  totalPages: number;
-};
+export interface IClientListDTO {
+  data: IClientResDTO[];
+  page: number;
+  limit: number;
+}
+
+export interface ISubmitReqDTO {
+  client_id: string;
+  state: string;
+  scopes: string[];
+}

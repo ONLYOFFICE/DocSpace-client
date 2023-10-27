@@ -1,75 +1,145 @@
-import { ClientResDTO, ClientReqDTO, ClientProps } from "./interfaces";
+import { ScopeGroup, ScopeType } from "./enums";
+import {
+  IClientResDTO,
+  IClientReqDTO,
+  IClientProps,
+  IScope,
+  IFilteredScopes,
+} from "./interfaces";
 
 export const transformToClientProps = (
-  clientDto: ClientResDTO
-): ClientProps => {
+  clientDto: IClientResDTO
+): IClientProps => {
   const {
     client_id,
     client_secret,
     description,
     terms_url,
     policy_url,
-    logo_url,
+    logo,
     authentication_method,
-    redirect_uri,
-    logout_redirect_uri,
+    redirect_uris,
+    logout_redirect_uris,
     scopes,
     tenant,
     invalidated,
     name,
     enabled,
+    created_on,
+    created_by,
+    modified_by,
+    modified_on,
+    website_url,
+    allowed_origins,
   } = clientDto;
 
-  const client: ClientProps = {
+  const client: IClientProps = {
     clientId: client_id,
-    secret: client_secret,
+    clientSecret: client_secret,
     description,
     termsUrl: terms_url,
     policyUrl: policy_url,
-    logoUrl: logo_url,
+    logo,
     authenticationMethod: authentication_method,
-    redirectUri: redirect_uri,
-    logoutRedirectUri: logout_redirect_uri,
+    redirectUris: redirect_uris,
+    logoutRedirectUris: logout_redirect_uris,
     scopes,
     tenant,
     invalidated,
     name,
     enabled,
+    createdBy: created_by,
+    createdOn: created_on,
+    modifiedBy: modified_by,
+    modifiedOn: modified_on,
+    websiteUrl: website_url,
+    allowedOrigins: allowed_origins,
   };
 
   return client;
 };
 
 export const transformToClientReqDTO = (
-  clientProps: ClientProps
-): ClientReqDTO => {
+  clientProps: IClientProps
+): IClientReqDTO => {
   const {
     name,
     description,
     termsUrl: terms_url,
     policyUrl: policy_url,
-    logoUrl: logo_url,
+    logo,
     authenticationMethod,
-    redirectUri: redirect_uri,
-    logoutRedirectUri: logout_redirect_uri,
+    redirectUris: redirect_uris,
+    logoutRedirectUris: logout_redirect_uris,
     scopes,
-    tenant,
+    websiteUrl,
+    allowedOrigins,
   } = clientProps;
 
-  const client: ClientReqDTO = {
+  const client: IClientReqDTO = {
     name,
     description,
-    logo_url,
-
-    redirect_uri,
-    logout_redirect_uri,
+    logo,
+    redirect_uris,
+    logout_redirect_uris,
     terms_url,
     policy_url,
 
     scopes,
-
-    tenant,
+    authentication_method: authenticationMethod,
+    website_url: websiteUrl,
+    allowed_origins: allowedOrigins,
   };
 
   return client;
+};
+
+export const getScopeTKeyDescription = (group: ScopeGroup, type: ScopeType) => {
+  const tKey = `OAuth${group.replace(
+    /^./,
+    group[0].toUpperCase()
+  )}${type.replace(/^./, type[0].toUpperCase())}Description`;
+
+  return tKey;
+};
+
+export const filterScopeByGroup = (
+  checkedScopes: string[],
+  scopes: IScope[]
+) => {
+  const filteredScopes: IFilteredScopes = {};
+
+  scopes.forEach((scope) => {
+    const isChecked = checkedScopes.includes(scope.name);
+    const isRead = ScopeType.read === scope.type;
+
+    const tKey = getScopeTKeyDescription(scope.group, scope.type);
+    const read = isRead ? { ...scope, tKey } : ({} as IScope);
+    const write = !isRead ? { ...scope, tKey } : ({} as IScope);
+
+    if (filteredScopes[scope.group]) {
+      if (isRead) {
+        filteredScopes[scope.group].read = read;
+        if (!filteredScopes[scope.group].isChecked && isChecked) {
+          filteredScopes[scope.group].isChecked = isChecked;
+          filteredScopes[scope.group].checkedType = ScopeType.read;
+        }
+      } else {
+        filteredScopes[scope.group].write = write;
+        if (isChecked) {
+          filteredScopes[scope.group].isChecked = isChecked;
+          filteredScopes[scope.group].checkedType = ScopeType.write;
+        }
+      }
+    } else {
+      filteredScopes[scope.group] = {
+        isChecked,
+        checkedType: isChecked ? scope.type : undefined,
+        read,
+        write,
+      };
+    }
+  });
+
+  return filteredScopes;
 };

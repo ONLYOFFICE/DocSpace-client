@@ -197,6 +197,23 @@ export const FileAction = Object.freeze({
   Create: 0,
   Rename: 1,
 });
+
+/**
+ * @readonly
+ */
+
+export const SettingsPageType = Object.freeze({
+  customization: "customization",
+  security: "security",
+  backup: "backup",
+  restore: "restore",
+  integration: "integration",
+  developerTools: "developerTools",
+  portalDeletion: "portalDeletion",
+  payments: "payments",
+  bonus: "bonus",
+});
+
 /**
  * Enum for root folders type.
  * @readonly

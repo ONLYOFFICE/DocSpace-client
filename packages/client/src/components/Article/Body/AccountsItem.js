@@ -3,17 +3,16 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { FolderType } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import CatalogItem from "@docspace/components/catalog-item";
-
-import { getCatalogIconByFolderType } from "./Items.helper";
 
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const onClickAction = React.useCallback(() => {
     onClick && onClick("accounts");
   }, [onClick]);
 
-  const icon = getCatalogIconByFolderType(FolderType.Account);
+  const icon = getCatalogIconUrlByType(FolderType.Account);
 
   return (
     <CatalogItem

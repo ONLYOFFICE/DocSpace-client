@@ -10,13 +10,13 @@ import {
   FolderNames,
   DeviceType,
 } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import CatalogItem from "@docspace/components/catalog-item";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 
 import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
-import { getCatalogIconByFolderType } from "./Items.helper";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 
@@ -197,7 +197,7 @@ const Items = ({
   );
 
   const getFolderIcon = React.useCallback((item) => {
-    return getCatalogIconByFolderType(item.rootFolderType);
+    return getCatalogIconUrlByType(item.rootFolderType);
   }, []);
 
   const showDragItems = React.useCallback(

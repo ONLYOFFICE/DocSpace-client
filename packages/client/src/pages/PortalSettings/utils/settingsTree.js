@@ -1,13 +1,5 @@
-﻿import CommonSettingsSvgUrl from "PUBLIC_DIR/images/common-settings.svg?url";
+﻿import { SettingsPageType } from "@docspace/common/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
-import SecuritySettingsIconUrl from "PUBLIC_DIR/images/security-settings.svg?url";
-import IntegrationSettingsIconUrl from "PUBLIC_DIR/images/integration-settings.svg?url";
-import PaymentIconUrl from "PUBLIC_DIR/images/payment.react.svg?url";
-import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?url";
-import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
-import TrashIconUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 /**
  * Array for generation current settings tree.
  */
@@ -16,7 +8,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-customization",
     key: "0",
-    icon: CommonSettingsSvgUrl,
+    type: SettingsPageType.customization,
     link: "customization",
     tKey: "Customization",
     isHeader: true,
@@ -112,7 +104,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-security",
     key: "1",
-    icon: SecuritySettingsIconUrl,
+    type: SettingsPageType.security,
     link: "security",
     tKey: "ManagementCategorySecurity",
     isHeader: true,
@@ -213,7 +205,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-backup",
     key: "2",
-    icon: DataManagementIconUrl,
+    type: SettingsPageType.backup,
     link: "backup",
     tKey: "Backup",
     isHeader: true,
@@ -239,7 +231,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-restore",
     key: "3",
-    icon: RestoreIconUrl,
+    type: SettingsPageType.restore,
     link: "restore",
     tKey: "RestoreBackup",
     isHeader: true,
@@ -256,7 +248,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-integration",
     key: "4",
-    icon: IntegrationSettingsIconUrl,
+    type: SettingsPageType.integration,
     link: "integration",
     tKey: "ManagementCategoryIntegration",
     isHeader: true,
@@ -322,7 +314,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-developer-tools",
     key: "5",
-    icon: DeveloperReactSvgUrl,
+    type: SettingsPageType.developerTools,
     link: "developer-tools",
     tKey: "DeveloperTools",
     isHeader: true,
@@ -364,7 +356,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-delete",
     key: "6",
-    icon: TrashIconUrl,
+    type: SettingsPageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
@@ -388,7 +380,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-payments",
     key: "7",
-    icon: PaymentIconUrl,
+    type: SettingsPageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
@@ -406,7 +398,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-bonus",
     key: "8",
-    icon: GiftReactSvgUrl,
+    type: SettingsPageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
     isHeader: true,

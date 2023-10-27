@@ -1,14 +1,15 @@
 import React from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
 import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+
+import { DeviceType } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import { isArrayEqual } from "@docspace/components/utils/array";
-
 import { isMobile } from "@docspace/components/utils/device";
+
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { DeviceType } from "@docspace/common/constants";
 
 import {
   //getKeyByLink,
@@ -315,11 +316,12 @@ const ArticleBodyContent = (props) => {
     if (selectedKeys.length === 0) return <></>;
 
     resultTree.map((item) => {
+      const icon = getCatalogIconUrlByType(item.type);
       items.push(
         <CatalogItem
           key={item.key}
           id={item.key}
-          icon={item.icon}
+          icon={icon}
           showText={showText}
           text={mapKeys(item.tKey)}
           value={item.link}

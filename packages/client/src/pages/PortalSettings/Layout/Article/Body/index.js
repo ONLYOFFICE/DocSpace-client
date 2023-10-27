@@ -1,13 +1,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import { isArrayEqual } from "@docspace/components/utils/array";
-import { isMobile } from "@docspace/components/utils/device";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -21,86 +20,6 @@ import {
 
 import CatalogItem from "@docspace/components/catalog-item";
 import LoaderArticleBody from "./loaderArticleBody";
-
-const getTreeItems = (data, path, t) => {
-  const maptKeys = (tKey) => {
-    switch (tKey) {
-      case "AccessRights":
-        return t("AccessRights");
-      case "ManagementCategoryCommon":
-        return t("Customization");
-      case "SettingsGeneral":
-        return t("SettingsGeneral");
-      case "StudioTimeLanguageSettings":
-        return t("StudioTimeLanguageSettings");
-      case "CustomTitles":
-        return t("CustomTitles");
-      case "ManagementCategorySecurity":
-        return t("ManagementCategorySecurity");
-      case "PortalAccess":
-        return t("PortalAccess");
-      case "TwoFactorAuth":
-        return t("TwoFactorAuth");
-      case "ManagementCategoryIntegration":
-        return t("ManagementCategoryIntegration");
-      case "ThirdPartyAuthorization":
-        return t("ThirdPartyAuthorization");
-      case "Migration":
-        return t("Migration");
-      case "Backup":
-        return t("Backup");
-      case "PortalDeletion":
-        return t("PortalDeletion");
-      case "Common:PaymentsTitle":
-        return t("Common:PaymentsTitle");
-      case "DocumentService":
-        return t("DocumentService");
-      case "SingleSignOn":
-        return t("SingleSignOn");
-      case "SMTPSettings":
-        return t("SMTPSettings");
-      case "DeveloperTools":
-        return t("DeveloperTools");
-      case "Bonus":
-        return t("Common:Bonus");
-      case "FreeProFeatures":
-        return "Common:FreeProFeatures";
-      default:
-        throw new Error("Unexpected translation key");
-    }
-  };
-  return data.map((item) => {
-    if (item.children && item.children.length && !item.isCategory) {
-      return (
-        <TreeNode
-          title={
-            <Text className="inherit-title-link header">
-              {maptKeys(item.tKey)}
-            </Text>
-          }
-          key={item.key}
-          icon={item.icon && <ReactSVG className="tree_icon" src={item.icon} />}
-          disableSwitch={true}
-        >
-          {getTreeItems(item.children, path, t)}
-        </TreeNode>
-      );
-    }
-    const link = path + getSelectedLinkByKey(item.key, settingsTree);
-    return (
-      <TreeNode
-        key={item.key}
-        title={
-          <Link className="inherit-title-link" href={link}>
-            {maptKeys(item.tKey)}
-          </Link>
-        }
-        icon={item.icon && <ReactSVG src={item.icon} className="tree_icon" />}
-        disableSwitch={true}
-      />
-    );
-  });
-};
 
 const ArticleBodyContent = (props) => {
   const {

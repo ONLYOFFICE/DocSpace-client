@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
@@ -16,10 +17,64 @@ const StyledModalDialog = styled(ModalDialog)`
     max-width: 733px;
     height: auto;
     width: auto;
+
+    /* Light theme. */
+    --color-canvas-default: #ffffff;
+    --color-canvas-subtle: #f6f8fa;
+    --color-border-default: #d0d7de;
+    --color-border-muted: hsla(210, 18%, 87%, 1);
+
+    .modal-footer {
+      padding-right: 4px;
+    }
   }
 
   .markdown-wrapper {
     width: 100%;
+  }
+
+  /* Dark theme. */
+  @media (prefers-color-scheme: dark) {
+    #modal-dialog {
+      --color-canvas-default: #0d1117;
+      --color-canvas-subtle: #161b22;
+      --color-border-default: #30363d;
+      --color-border-muted: #21262d;
+    }
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 16px;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  tr {
+    background-color: var(--color-canvas-default);
+    border-top: 1px solid var(--color-border-muted);
+  }
+
+  tr:nth-child(2n) {
+    background-color: var(--color-canvas-subtle);
+  }
+
+  td,
+  th {
+    padding: 6px 13px;
+    border: 1px solid var(--color-border-default);
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  table img {
+    background-color: transparent;
   }
 `;
 
@@ -69,7 +124,25 @@ const DebugInfoDialog = (props) => {
           heightProp={"362px"}
         >
           <Scrollbar stype="mediumBlack">
-            {md && <ReactMarkdown children={md} />}
+            {md && (
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: ({ node, href, children, ...props }) => (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      {...props}
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              >
+                {md}
+              </ReactMarkdown>
+            )}
           </Scrollbar>
         </Box>
       </ModalDialog.Footer>

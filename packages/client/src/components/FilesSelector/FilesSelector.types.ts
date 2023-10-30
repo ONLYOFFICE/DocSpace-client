@@ -50,7 +50,7 @@ export type setTotalCallback = (value: number) => number;
 
 export type useSocketHelperProps = {
   socketHelper: any;
-  socketSubscribersId: Set<string>;
+  socketSubscribers: Set<string>;
   setItems: (callback: setItemsCallback) => void;
   setBreadCrumbs: (callback: setBreadCrumbsCallback) => void;
   setTotal: (callback: setTotalCallback) => void;
@@ -204,7 +204,7 @@ export type FilesSelectorProps = {
   includeFolder?: boolean;
 
   socketHelper: any;
-  socketSubscribersId: Set<string>;
+  socketSubscribers: Set<string>;
   currentDeviceType: "mobile" | "tablet" | "desktop";
 
   embedded: boolean;

@@ -13,6 +13,8 @@ const Container = ({
   scale,
   zIndex,
   contentPaddingBottom,
+  asideHeight,
+  keyboardHeight,
   ...props
 }) => <aside {...props} />;
 /* eslint-enable react/prop-types */

@@ -62,6 +62,7 @@ const TableRow = (props) => {
           ></ContextMenu>
           {renderContext ? (
             <ContextMenuButton
+              isFill
               className="expandButton"
               getData={getOptions}
               directionX="right"

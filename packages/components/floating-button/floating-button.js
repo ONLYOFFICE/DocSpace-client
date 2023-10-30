@@ -37,7 +37,7 @@ const icons = {
   move: <ButtonMoveIcon />,
   plus: <ButtonPlusIcon />,
   minus: <ButtonMinusIcon />,
-  icon: <RefreshIcon />,
+  refresh: <RefreshIcon />,
 };
 
 const FloatingButton = (props) => {

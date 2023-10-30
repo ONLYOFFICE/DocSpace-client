@@ -12,7 +12,35 @@ const StyledOuter = styled.div`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   ${(props) =>
+    props.isStroke &&
+    css`
+      svg {
+        &:not(:root) {
+          width: 100%;
+          height: 100%;
+        }
+        path {
+          stroke: ${(props) =>
+            props.color ? props.color : props.theme.iconButton.color};
+        }
+      }
+      &:hover {
+        svg {
+          path {
+            stroke: ${(props) =>
+              props.isDisabled
+                ? props.theme.iconButton.color
+                : props.color
+                ? props.color
+                : props.theme.iconButton.hoverColor};
+          }
+        }
+      }
+    `}
+
+  ${(props) =>
     props.isFill &&
+    !props.isStroke &&
     css`
       svg {
         &:not(:root) {

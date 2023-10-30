@@ -1,4 +1,4 @@
-﻿import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+﻿import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -157,13 +157,13 @@ const InfoPanelHeaderContent = (props) => {
         {!isTablet && (
           <div className="info-panel-toggle-bg">
             <IconButton
-              id="info-panel-toggle--close"
-              className="info-panel-toggle"
-              iconName={CrossReactSvgUrl}
-              size="16"
-              isFill={true}
+              isStroke
+              size="17"
               onClick={closeInfoPanel}
+              iconName={CrossReactSvgUrl}
               title={t("Common:InfoPanel")}
+              className="info-panel-toggle"
+              id="info-panel-toggle--close"
             />
           </div>
         )}

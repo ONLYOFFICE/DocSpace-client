@@ -174,7 +174,8 @@ class FilesStore {
     const { socketHelper } = authStore.settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
+
       if (opt && opt.data) {
         const data = JSON.parse(opt.data);
 
@@ -224,7 +225,7 @@ class FilesStore {
     });
 
     socketHelper.on("refresh-folder", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
       const pathParts = `DIR-${id}`;
 
       if (!socketSubscribersId.has(pathParts)) return;
@@ -245,7 +246,7 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
       const pathParts = `DIR-${folderId}`;
 
       if (!socketSubscribersId.has(pathParts)) return;
@@ -263,7 +264,7 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-file", ({ fileId, count }) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
       const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribersId.has(pathParts)) return;
@@ -285,7 +286,7 @@ class FilesStore {
 
     //WAIT FOR RESPONSES OF EDITING FILE
     socketHelper.on("s:start-edit-file", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
       const pathParts = `FILE-${id}`;
 
       if (!socketSubscribersId.has(pathParts)) return;
@@ -308,7 +309,7 @@ class FilesStore {
     });
 
     socketHelper.on("s:stop-edit-file", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribersId } = socketHelper;
       const pathParts = `FILE-${id}`;
 
       if (!socketSubscribersId.has(pathParts)) return;
@@ -870,14 +871,10 @@ class FilesStore {
 
   setFiles = (files) => {
     const { socketHelper } = this.authStore.settingsStore;
-    const { addSocketSubscribersId, deleteSocketSubscribersId } =
-      this.selectedFolderStore;
+
     if (files.length === 0 && this.files.length === 0) return;
 
     if (this.files?.length > 0) {
-      this.files.forEach((f) => {
-        deleteSocketSubscribersId(`FILE-${f.id}`);
-      });
       socketHelper.emit({
         command: "unsubscribe",
         data: {
@@ -890,10 +887,6 @@ class FilesStore {
     this.files = files;
 
     if (this.files?.length > 0) {
-      this.files.forEach((f) => {
-        addSocketSubscribersId(`FILE-${f.id}`);
-      });
-
       socketHelper.emit({
         command: "subscribe",
         data: {
@@ -911,8 +904,6 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
-    const { addSocketSubscribersId, deleteSocketSubscribersId } =
-      this.selectedFolderStore;
     const { socketHelper } = this.authStore.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
@@ -933,9 +924,6 @@ class FilesStore {
     this.folders = folders;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) => {
-        addSocketSubscribersId(`DIR-${f.id}`);
-      });
       socketHelper.emit({
         command: "subscribe",
         data: {

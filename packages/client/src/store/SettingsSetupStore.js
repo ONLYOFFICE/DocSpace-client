@@ -482,10 +482,14 @@ class SettingsSetupStore {
   getSessions = () => {
     if (this.sessionsIsInit) return;
     this.getAllSessions().then((res) => {
-      this.sessions = res.items;
+      this.setSessions(res.items);
       this.currentSession = res.loginEvent;
       this.sessionsIsInit = true;
     });
+  };
+
+  setSessions = (sessions) => {
+    this.sessions = sessions;
   };
 }
 

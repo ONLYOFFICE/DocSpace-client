@@ -151,6 +151,8 @@
   "In": "in",
   "IncorrectDomain": "Incorrect domain",
   "IncorrectEmail": "Incorrect email",
+  "IncorrectFirstName": "Incorrect first name",
+  "IncorrectLastName": "Incorrect last name",
   "IncorrectLocalPart": "Incorrect local part",
   "IncorrectPassword": "Incorrect password",
   "Info": "Info",

@@ -1907,7 +1907,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig.pdfViewer) {
+      if (!isPdf || !window.DocSpaceConfig.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2588,6 +2588,7 @@ class FilesStore {
 
   addItem = (item, isFolder) => {
     const { socketHelper } = this.authStore.settingsStore;
+    const { addSocketSubscribersId } = this.selectedFolderStore;
 
     if (isFolder) {
       const foundIndex = this.folders.findIndex((x) => x.id === item?.id);
@@ -2596,6 +2597,8 @@ class FilesStore {
       this.folders.unshift(item);
 
       console.log("[WS] subscribe to folder changes", item.id, item.title);
+
+      addSocketSubscribersId(`DIR-${item.id}`);
 
       socketHelper.emit({
         command: "subscribe",
@@ -2609,6 +2612,8 @@ class FilesStore {
       if (foundIndex > -1) return;
 
       console.log("[WS] subscribe to file changes", item.id, item.title);
+
+      addSocketSubscribersId(`FILE-${item.id}`);
 
       socketHelper.emit({
         command: "subscribe",

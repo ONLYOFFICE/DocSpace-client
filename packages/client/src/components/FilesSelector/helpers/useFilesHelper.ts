@@ -182,6 +182,7 @@ export const convertFoldersToItems = (
     const {
       id,
       title,
+      roomType,
       filesCount,
       foldersCount,
       security,
@@ -190,6 +191,7 @@ export const convertFoldersToItems = (
     }: {
       id: number;
       title: string;
+      roomType: number;
       filesCount: number;
       foldersCount: number;
       security: Security;
@@ -210,6 +212,7 @@ export const convertFoldersToItems = (
       parentId,
       rootFolderType,
       isFolder: true,
+      roomType,
       isDisabled: !!filterParam ? false : disabledItems.includes(id),
     };
   });

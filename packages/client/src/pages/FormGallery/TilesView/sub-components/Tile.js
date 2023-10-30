@@ -14,7 +14,10 @@ import {
   StyledFileTileBottom,
   StyledContent,
   StyledOptionButton,
+  StyledContextMenu,
 } from "../StyledTileView";
+import Backdrop from "@docspace/components/backdrop";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Tile = ({
   t,
@@ -51,7 +54,7 @@ const Tile = ({
   const getOptions = () =>
     getFormGalleryContextOptions(item, t, navigate).map((item) => item.key);
 
-  const onContextMenu = (e) => {
+  const onOpenContextMenu = (e) => {
     tileContextClick && tileContextClick();
     if (!cm.current.menuRef.current) tile.current.click(e); //TODO: need fix context menu to global
     cm.current.show(e);
@@ -63,7 +66,7 @@ const Tile = ({
     <StyledTile
       ref={tile}
       isSelected={isSelected}
-      onContextMenu={onContextMenu}
+      onContextMenu={onOpenContextMenu}
       isActive={isActive}
       showHotkeyBorder={showHotkeyBorder}
       onDoubleClick={onCreateForm}
@@ -100,16 +103,18 @@ const Tile = ({
         </div>
 
         <StyledContent>{children}</StyledContent>
+
         <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
           <ContextMenuButton
             className="expandButton"
             directionX="right"
             getData={getOptions}
             displayType="toggle"
-            onClick={onContextMenu}
+            onClick={onOpenContextMenu}
             title={title}
           />
-          <ContextMenu
+          <StyledContextMenu
+            ignoreChangeView={isMobile()}
             getContextModel={getContextModel}
             ref={cm}
             withBackdrop={true}

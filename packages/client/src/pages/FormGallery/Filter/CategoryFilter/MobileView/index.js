@@ -7,6 +7,8 @@ import { withTranslation } from "react-i18next";
 import CategorySubList from "./CategorySubList";
 import Scrollbar from "@docspace/components/scrollbar";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
+import Backdrop from "@docspace/components/backdrop";
+import { isMobile } from "@docspace/components/utils/device";
 
 const CategoryFilterMobile = ({
   t,
@@ -14,97 +16,143 @@ const CategoryFilterMobile = ({
   menuItems,
 
   currentCategory,
+  getTypeOfCategory,
   getCategoryTitle,
   filterOformsByCategory,
+  setOformsCurrentCategory,
 
   ...rest
 }) => {
-  const wrapperRef = useRef();
+  console.log(menuItems);
   const scrollRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
-  const toggleDropdownIsOpen = () => setIsOpen(!isOpen);
-
-  const [openedCategory, setOpenedCategory] = useState(null);
-  const onToggleCategory = (category) => {
-    if (openedCategory?.key !== category.key) setOpenedCategory(category);
-    else setOpenedCategory(null);
+  const onCloseDropdown = () => {
+    setIsOpen(false);
+    setOpenedMenuItem(null);
+  };
+  const onToggleDropdown = () => {
+    if (isOpen) setOpenedMenuItem(null);
+    else setIsOpen(!isOpen);
   };
 
-  let calculatedHeight =
-    152.2 + (!openedCategory ? 0 : 36 * openedCategory.categories.length);
-  const maxCalculatedHeight =
-    window.innerHeight - wrapperRef?.current?.offsetTop - 64 - 48;
-  if (calculatedHeight > maxCalculatedHeight)
-    calculatedHeight = maxCalculatedHeight;
+  const onViewAllTemplates = () => {
+    filterOformsByCategory("", "");
+    onCloseDropdown();
+  };
 
-  const onViewAllTemplates = () => filterOformsByCategory("", "");
+  const [openedMenuItem, setOpenedMenuItem] = useState(null);
+  const onOpenMenuItem = (category) => setOpenedMenuItem(category);
+  const onHeaderArrowClick = () => setOpenedMenuItem(null);
+
+  const onFilterByCategory = (category) => {
+    filterOformsByCategory(openedMenuItem.key, category.id);
+
+    setOformsCurrentCategory(category);
+    setOpenedMenuItem(null);
+    setIsOpen(false);
+  };
+
+  let height = 0;
+  const maxCalculatedHeight = 385;
+
+  let calculatedHeight =
+    48 +
+    (!openedMenuItem
+      ? 36 + 13 + menuItems.length * 36
+      : openedMenuItem.categories.length * 36);
+
+  if (calculatedHeight > maxCalculatedHeight) height = maxCalculatedHeight;
+  else height = calculatedHeight;
 
   return (
-    <Styled.CategoryFilterMobileWrapper ref={wrapperRef} {...rest}>
-      <ComboButton
-        selectedOption={{
-          label:
-            getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
-        }}
-        isOpen={isOpen}
-        scaled={true}
-        onClick={toggleDropdownIsOpen}
-        tabIndex={1}
+    <>
+      <Backdrop
+        visible={isOpen}
+        withBackground={isMobile()}
+        onClick={onCloseDropdown}
+        withoutBlur={!isMobile()}
       />
 
-      <Styled.CategoryFilterMobile
-        open={isOpen}
-        withBackdrop={false}
-        manualWidth={"100%"}
-        directionY="bottom"
-        directionX="right"
-        isMobile={true}
-        fixedDirection={true}
-        isDefaultMode={false}
-        className="mainBtnDropdown"
-        forcedHeight={`${calculatedHeight}px`}
-      >
-        <Scrollbar
-          style={{ position: "absolute" }}
-          scrollclass="section-scroll"
-          stype="mediumBlack"
-          ref={scrollRef}
+      <Styled.CategoryFilterMobileWrapper {...rest}>
+        <ComboButton
+          selectedOption={{
+            label:
+              getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
+          }}
+          isOpen={isOpen}
+          scaled={true}
+          onClick={onToggleDropdown}
+          tabIndex={1}
+        />
+
+        <Styled.CategoryFilterMobile
+          open={isOpen}
+          withBackdrop={false}
+          manualWidth={"100%"}
+          directionY="bottom"
+          directionX="right"
+          isMobile={true}
+          fixedDirection={true}
+          isDefaultMode={false}
+          className="mainBtnDropdown"
+          forsedHeight={`${height}px`}
         >
-          <Styled.CategoryFilterItemMobile
-            id={"ViewAllTemplates"}
-            key={"ViewAllTemplates"}
-            className="dropdown-item"
-            label={t("FormGallery:ViewAllTemplates")}
-            onClick={onViewAllTemplates}
-          />
+          <Scrollbar
+            style={{ position: "absolute" }}
+            scrollclass="section-scroll"
+            stype="mediumBlack"
+            ref={scrollRef}
+          >
+            <DropDownItem
+              isHeader
+              withHeaderArrow={!!openedMenuItem}
+              onHeaderArrowClick={onHeaderArrowClick}
+              label={openedMenuItem?.label || t("Categories")}
+            />
 
-          <DropDownItem isSeparator />
+            {!openedMenuItem && [
+              <Styled.CategoryFilterItemMobile
+                key={"view-all"}
+                className="dropdown-item"
+                label={t("FormGallery:ViewAllTemplates")}
+                onClick={onViewAllTemplates}
+              />,
+              <DropDownItem
+                isSeparator
+                key={"separator"}
+                className={"huge-separator"}
+              />,
+            ]}
 
-          {menuItems.map((item) => [
-            <Styled.CategoryFilterItemMobile
-              key={item.key}
-              className={`item-by-${item.key}`}
-              label={item.label}
-              isMobileOpen={openedCategory?.key === item.key}
-              onClick={() => onToggleCategory(item)}
-              isSubMenu
-            />,
-            <CategorySubList
-              key={`${item.key}-sublist`}
-              isOpen={openedCategory?.key === item.key}
-              categoryType={item.key}
-              categories={item.categories}
-            />,
-          ])}
-        </Scrollbar>
-      </Styled.CategoryFilterMobile>
-    </Styled.CategoryFilterMobileWrapper>
+            {!openedMenuItem
+              ? menuItems.map((item) => (
+                  <Styled.CategoryFilterItemMobile
+                    key={item.key}
+                    className={`item-by-${item.key}`}
+                    label={item.label}
+                    onClick={() => onOpenMenuItem(item)}
+                    isSubMenu
+                  />
+                ))
+              : openedMenuItem.categories.map((category) => (
+                  <Styled.CategoryFilterItemMobile
+                    key={category.id}
+                    label={getCategoryTitle(category)}
+                    onClick={() => onFilterByCategory(category)}
+                  />
+                ))}
+          </Scrollbar>
+        </Styled.CategoryFilterMobile>
+      </Styled.CategoryFilterMobileWrapper>
+    </>
   );
 };
 
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
+  getTypeOfCategory: oformsStore.getTypeOfCategory,
   getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
+  setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
 }))(withTranslation(["FormGallery"])(observer(CategoryFilterMobile)));

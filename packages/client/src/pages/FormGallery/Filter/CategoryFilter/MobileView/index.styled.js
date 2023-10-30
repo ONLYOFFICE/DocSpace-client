@@ -4,10 +4,15 @@ import DropDown from "@docspace/components/drop-down";
 import DropDownItem from "@docspace/components/drop-down-item";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 import { Base } from "@docspace/components/themes";
+import { mobile } from "@docspace/components/utils/device";
 
 export const CategoryFilterMobileWrapper = styled.div`
   width: 100%;
   position: relative;
+
+  @media ${mobile} {
+    position: static;
+  }
 
   .combo-button-label {
     font-weight: 400;
@@ -23,11 +28,19 @@ export const CategoryFilterMobile = styled(DropDown)`
   width: 100%;
 
   padding: 6px 0;
-  height: ${({ forcedHeight }) => forcedHeight};
+  height: ${({ forsedHeight }) => forsedHeight};
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media ${mobile} {
+    top: auto;
+    bottom: 0;
+  }
 
   .section-scroll,
   .scroll-body {
@@ -47,8 +60,13 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
   font-weight: 600;
   line-height: 20px;
 
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 16px;
+
+  ${({ isSeparator }) =>
+    isSeparator &&
+    css`
+      margin: 6px 16px;
+    `}
 
   .submenu-arrow {
     margin: ${({ theme }) =>

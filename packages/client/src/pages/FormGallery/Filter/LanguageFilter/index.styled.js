@@ -2,6 +2,7 @@ import DropDownItem from "@docspace/components/drop-down-item";
 import styled, { css } from "styled-components";
 import Base from "@docspace/components/themes/base";
 import ComboBox from "@docspace/components/combobox";
+import { mobile } from "@docspace/components/utils/device";
 
 export const LanguageFilter = styled.div`
   width: 41px;
@@ -65,7 +66,6 @@ export const LanguageFilterSelectedItem = styled(DropDownItem)`
 `;
 
 export const LanguageFilterItem = styled(DropDownItem)`
-  width: 100%;
   height: 32px;
   width: 41px;
   box-sizing: border-box;
@@ -87,5 +87,13 @@ export const LanguageFilterItem = styled(DropDownItem)`
     height: 16px;
     line-height: 0 !important;
   }
+
+  @media ${mobile} {
+    height: 36px;
+    width: 100%;
+    justify-content: start;
+    gap: 8px;
+  }
 `;
+
 LanguageFilterItem.defaultProps = { theme: Base };

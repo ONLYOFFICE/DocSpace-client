@@ -1,12 +1,17 @@
 import * as Styled from "./index.styled";
 
+import { withTranslation } from "react-i18next";
+
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/common/utils/image-flags";
 import { convertToCulture } from "@docspace/common/utils";
+import Backdrop from "@docspace/components/backdrop";
+import { isMobile } from "@docspace/components/utils/device";
 
 const LanguageFilter = ({
+  t,
   oformsFilter,
   defaultOformLocale,
   oformLocales,
@@ -18,6 +23,7 @@ const LanguageFilter = ({
 
   const onFilterByLocale = async (newLocale) => {
     await filterOformsByLocale(newLocale);
+    onCloseDropdown();
 
     const [sectionScroll] = document.getElementsByClassName("section-scroll");
     sectionScroll.scrollTop = 0;
@@ -25,6 +31,12 @@ const LanguageFilter = ({
 
   return (
     <Styled.LanguageFilter>
+      <Backdrop
+        visible={isOpen}
+        withBackground={isMobile()}
+        onClick={onCloseDropdown}
+        withoutBlur={!isMobile()}
+      />
       <Styled.LanguangeComboBox
         id="comboBoxLanguage"
         tabIndex={1}
@@ -51,9 +63,13 @@ const LanguageFilter = ({
           <>
             {oformLocales.map((locale) => (
               <Styled.LanguageFilterItem
+                className={"language-item"}
                 key={locale}
                 isSelected={locale === oformsFilter.locale}
                 icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
+                label={
+                  isMobile() && t(`Common:Culture_${convertToCulture(locale)}`)
+                }
                 onClick={() => onFilterByLocale(locale)}
                 fillIcon={false}
               />
@@ -80,4 +96,4 @@ export default inject(({ oformsStore }) => ({
   defaultOformLocale: oformsStore.defaultOformLocale,
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
-}))(observer(LanguageFilter));
+}))(withTranslation(["Common"])(observer(LanguageFilter)));

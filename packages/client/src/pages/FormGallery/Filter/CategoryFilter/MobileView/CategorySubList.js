@@ -4,18 +4,12 @@ import { withTranslation } from "react-i18next";
 
 const CategorySubList = ({
   isOpen,
-  categoryType,
   categories,
+  categoryType,
 
   getCategoryTitle,
-  filterOformsByCategory,
-  setOformsCurrentCategory,
+  onFilterByCategory,
 }) => {
-  const onFilterByCategory = (category) => {
-    setOformsCurrentCategory(category);
-    filterOformsByCategory(categoryType, category.id);
-  };
-
   if (!isOpen) return null;
 
   return categories.map((category) => (
@@ -23,13 +17,11 @@ const CategorySubList = ({
       className="dropdown-item item-mobile"
       key={category.id}
       label={getCategoryTitle(category)}
-      onClick={() => onFilterByCategory(category)}
+      onClick={() => onFilterByCategory(categoryType, category)}
     />
   ));
 };
 
 export default inject(({ oformsStore }) => ({
   getCategoryTitle: oformsStore.getCategoryTitle,
-  setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
-  filterOformsByCategory: oformsStore.filterOformsByCategory,
 }))(withTranslation(["FormGallery", "Common"])(CategorySubList));

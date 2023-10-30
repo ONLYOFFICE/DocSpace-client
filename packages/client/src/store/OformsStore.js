@@ -130,12 +130,20 @@ class OformsStore {
     });
   };
 
+  getTypeOfCategory = (category) => {
+    if (!category) return;
+
+    const [categoryType] = this.categoryTitles.filter(
+      (categoryTitle) => !!category.attributes[categoryTitle]
+    );
+
+    return categoryType;
+  };
+
   getCategoryTitle = (category, locale = this.defaultOformLocale) => {
     if (!category) return "";
 
-    const categoryType = this.categoryTitles.filter(
-      (categoryTitle) => !!category.attributes[categoryTitle]
-    );
+    const categoryType = this.getTypeOfCategory(category);
     const categoryTitle = category.attributes[categoryType];
 
     const [localizedCategory] = category.attributes.localizations?.data.filter(

@@ -9,6 +9,7 @@ import ComboBox from "@docspace/components/combobox";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import Backdrop from "@docspace/components/backdrop";
 import Text from "@docspace/components/text";
+import { isMobile } from "@docspace/components/utils/device";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,57 +23,62 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
       default: false,
       isSelected: false,
     },
+    {
+      id: "sort-by_updatedAt",
+      key: "updatedAt",
+      label: t("Common:LastModifiedDate"),
+      default: false,
+      isSelected: false,
+    },
   ];
 
-  const onSort = (e, newSortBy, newSortOrder = "asc") => {
-    e.stopPropagation();
-    if (
-      oformsFilter.sortBy === newSortBy &&
-      oformsFilter.sortOrder === newSortOrder
-    )
-      return;
-    sortOforms(newSortBy, newSortOrder);
-  };
+  const onSort = (newSortBy) => {
+    if (oformsFilter.sortBy === newSortBy)
+      sortOforms(newSortBy, oformsFilter.sortOrder === "asc" ? "desc" : "asc");
+    else sortOforms(newSortBy, "desc");
 
-  const onToggleSortOrder = (e, newSortBy) => {
-    e.stopPropagation();
-    onSort(e, newSortBy, oformsFilter.sortOrder === "desc" ? "asc" : "desc");
+    setIsOpen(false);
   };
 
   return (
     <>
-      <Backdrop
+      <Styled.SortBackdrop
         visible={isOpen}
-        withBackground={false}
         onClick={onToggleCombobox}
-        withoutBlur={true}
+        withBackground={isMobile()}
+        withoutBlur={!isMobile()}
       />
+
       <Styled.SortButton
         id={"oform-sort"}
         title={"Sort"}
         onClick={onToggleCombobox}
       >
-        <ComboBox
+        <Styled.SortComboBox
+          id="comboBoxSort"
+          tabIndex={1}
           opened={isOpen}
           onToggle={onToggleCombobox}
           className={"sort-combo-box"}
-          options={[]}
-          selectedOption={{}}
           directionX={"right"}
           directionY={"both"}
           scaled={true}
           size={"content"}
-          advancedOptionsCount={sortData.length}
           disableIconClick={false}
           disableItemClick={true}
           isDefaultMode={false}
           manualY={"102%"}
+          fixedDirection={true}
+          advancedOptionsCount={sortData.length}
+          fillIcon={false}
+          options={[]}
+          selectedOption={{}}
           advancedOptions={
             <>
               {sortData?.map((item) => (
                 <Styled.SortDropdownItem
                   id={item.id}
-                  onClick={(e) => onSort(e, item.key)}
+                  onClick={() => onSort(item.key)}
                   key={item.key}
                   data-value={item.key}
                   isSelected={oformsFilter.sortBy === item.key}
@@ -80,7 +86,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
                 >
                   <Text fontWeight={600}>{item.label}</Text>
                   <SortDesc
-                    onClick={(e) => onToggleSortOrder(e, item.key)}
+                    // onClick={(e) => onToggleSortOrder(e, item.key)}
                     className="sortorder-arrow"
                   />
                 </Styled.SortDropdownItem>
@@ -89,7 +95,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           }
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
-        </ComboBox>
+        </Styled.SortComboBox>
       </Styled.SortButton>
     </>
   );

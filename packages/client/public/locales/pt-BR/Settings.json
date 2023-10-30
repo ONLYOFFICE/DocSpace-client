@@ -86,7 +86,6 @@
   "DNSSettingsTooltipStandalone": "Marque a caixa 'Personalizar nome do domínio' e especifique seu próprio nome do domínio para o espaço ONLYOFFICE no campo abaixo. Para que os parâmetros que você definiu tenham efeito, clique no botão 'Salvar' na parte inferior da seção.",
   "DocumentService": "Serviço de documento",
   "DocumentServiceLocationHeader": "Localização de serviço de documento",
-  "DocumentServiceLocationHeaderHelp": "Document Service é o serviço servidor que permite realizar a edição de documentos e permite converter o arquivo de documentos para o formato OfficeOpen XML apropriado.",
   "DocumentServiceLocationHeaderInfo": "Localização de serviço de documento especifica o endereço do servidor com os serviços de documentos instalados. ",
   "DocumentServiceLocationUrlApi": "Endereço de serviço de edição de documento",
   "DocumentServiceLocationUrlInternal": "Endereço de serviço de documentos para solicitações do DocSpace",

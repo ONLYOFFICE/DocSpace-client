@@ -105,8 +105,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
   const roomType =
     selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
 
-  const isPublicRoomType =
-    roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   return {
     selectionParentRoom,

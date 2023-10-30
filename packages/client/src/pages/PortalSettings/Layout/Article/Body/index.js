@@ -235,7 +235,9 @@ const ArticleBodyContent = (props) => {
     if (selectedKeys.length === 0) return <></>;
 
     resultTree.map((item) => {
-      const icon = getCatalogIconUrlByType(item.type);
+      const icon = getCatalogIconUrlByType(item.type, {
+        isSettingsCatalog: true,
+      });
       items.push(
         <CatalogItem
           key={item.key}

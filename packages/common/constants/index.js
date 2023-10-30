@@ -202,7 +202,8 @@ export const FileAction = Object.freeze({
  * @readonly
  */
 
-export const SettingsPageType = Object.freeze({
+export const PageType = Object.freeze({
+  account: "account",
   customization: "customization",
   security: "security",
   backup: "backup",
@@ -232,7 +233,6 @@ export const FolderType = Object.freeze({
   Privacy: 13,
   Rooms: 14,
   Archive: 20,
-  Account: 30,
 });
 
 // extends FolderType keys

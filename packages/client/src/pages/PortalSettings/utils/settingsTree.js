@@ -1,4 +1,4 @@
-﻿import { SettingsPageType } from "@docspace/common/constants";
+﻿import { PageType } from "@docspace/common/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -8,7 +8,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-customization",
     key: "0",
-    type: SettingsPageType.customization,
+    type: PageType.customization,
     link: "customization",
     tKey: "Customization",
     isHeader: true,
@@ -104,7 +104,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-security",
     key: "1",
-    type: SettingsPageType.security,
+    type: PageType.security,
     link: "security",
     tKey: "ManagementCategorySecurity",
     isHeader: true,
@@ -205,7 +205,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-backup",
     key: "2",
-    type: SettingsPageType.backup,
+    type: PageType.backup,
     link: "backup",
     tKey: "Backup",
     isHeader: true,
@@ -231,7 +231,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-restore",
     key: "3",
-    type: SettingsPageType.restore,
+    type: PageType.restore,
     link: "restore",
     tKey: "RestoreBackup",
     isHeader: true,
@@ -248,7 +248,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-integration",
     key: "4",
-    type: SettingsPageType.integration,
+    type: PageType.integration,
     link: "integration",
     tKey: "ManagementCategoryIntegration",
     isHeader: true,
@@ -314,7 +314,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-developer-tools",
     key: "5",
-    type: SettingsPageType.developerTools,
+    type: PageType.developerTools,
     link: "developer-tools",
     tKey: "DeveloperTools",
     isHeader: true,
@@ -356,7 +356,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-delete",
     key: "6",
-    type: SettingsPageType.portalDeletion,
+    type: PageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
@@ -380,7 +380,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-payments",
     key: "7",
-    type: SettingsPageType.payments,
+    type: PageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
@@ -398,7 +398,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-bonus",
     key: "8",
-    type: SettingsPageType.bonus,
+    type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
     isHeader: true,

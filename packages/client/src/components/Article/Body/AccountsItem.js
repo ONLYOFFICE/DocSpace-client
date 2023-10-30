@@ -2,7 +2,7 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/common/constants";
+import { PageType } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import CatalogItem from "@docspace/components/catalog-item";
@@ -12,7 +12,7 @@ const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
     onClick && onClick("accounts");
   }, [onClick]);
 
-  const icon = getCatalogIconUrlByType(FolderType.Account);
+  const icon = getCatalogIconUrlByType(PageType.account);
 
   return (
     <CatalogItem

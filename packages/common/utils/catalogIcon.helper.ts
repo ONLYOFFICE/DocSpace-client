@@ -1,4 +1,4 @@
-import { FolderType, SettingsPageType } from "@docspace/common/constants";
+import { FolderType, PageType } from "@docspace/common/constants";
 
 import { isMobile, isTablet } from "@docspace/components/utils/device";
 
@@ -45,8 +45,7 @@ import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cata
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
 
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
-type SettingsPageUnionType =
-  (typeof SettingsPageType)[keyof typeof SettingsPageType];
+type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];
 
 type PageType = FolderUnionType | SettingsPageUnionType;
 type SizeType = 16 | 20;
@@ -70,17 +69,17 @@ const icons: Record<SizeType, Partial<Record<PageType, string>>> = {
     [FolderType.Recent]: CatalogRecentReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivateReactSvgUrl,
     [FolderType.TRASH]: CatalogTrashReactSvgUrl,
-    [FolderType.Account]: CatalogAccountsReactSvgUrl,
 
-    [SettingsPageType.customization]: CatalogSettingsCommonReactSvgUrl,
-    [SettingsPageType.security]: CatalogSettingsSecurityReactSvgUrl,
-    [SettingsPageType.backup]: CatalogSettingsDataManagementReactSvgUrl,
-    [SettingsPageType.restore]: CatalogSettingsRestoreReactSvgUrl,
-    [SettingsPageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
-    [SettingsPageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
-    [SettingsPageType.portalDeletion]: CatalogTrashReactSvgUrl,
-    [SettingsPageType.payments]: CatalogSettingsPaymentReactSvgUrl,
-    [SettingsPageType.bonus]: CatalogSettingsGiftReactSvgUrl,
+    [PageType.account]: CatalogAccountsReactSvgUrl,
+    [PageType.customization]: CatalogSettingsCommonReactSvgUrl,
+    [PageType.security]: CatalogSettingsSecurityReactSvgUrl,
+    [PageType.backup]: CatalogSettingsDataManagementReactSvgUrl,
+    [PageType.restore]: CatalogSettingsRestoreReactSvgUrl,
+    [PageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
+    [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
+    [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
+    [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
   },
   20: {
     [FolderType.USER]: CatalogUser20ReactSvgUrl,
@@ -92,17 +91,17 @@ const icons: Record<SizeType, Partial<Record<PageType, string>>> = {
     [FolderType.Recent]: CatalogRecent20ReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivate20ReactSvgUrl,
     [FolderType.TRASH]: CatalogTrash20ReactSvgUrl,
-    [FolderType.Account]: CatalogAccounts20ReactSvgUrl,
 
-    [SettingsPageType.customization]: CatalogSettingsCommon20ReactSvgUrl,
-    [SettingsPageType.security]: CatalogSettingsSecurity20ReactSvgUrl,
-    [SettingsPageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,
-    [SettingsPageType.restore]: CatalogSettingsRestore20ReactSvgUrl,
-    [SettingsPageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
-    [SettingsPageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
-    [SettingsPageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
-    [SettingsPageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
-    [SettingsPageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
+    [PageType.account]: CatalogAccounts20ReactSvgUrl,
+    [PageType.customization]: CatalogSettingsCommon20ReactSvgUrl,
+    [PageType.security]: CatalogSettingsSecurity20ReactSvgUrl,
+    [PageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,
+    [PageType.restore]: CatalogSettingsRestore20ReactSvgUrl,
+    [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
+    [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
+    [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
+    [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
   },
 };
 
@@ -123,7 +122,7 @@ export const getCatalogIconUrlByType = (
   const size: SizeType =
     isMobile() || isTablet() ? MobileIconSize : DesktopIconSize;
 
-  const defaultIconUrl = isSettingsCatalog(pageType)
+  const defaultIconUrl = options?.isSettingsCatalog
     ? NullURL
     : defaultIcon[size];
 

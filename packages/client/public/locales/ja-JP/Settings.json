@@ -29,7 +29,6 @@
   "AuditSubheader": "サブセクションでは、DocSpace内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。",
   "AuditTrailNav": "監査証跡",
   "AutoBackup": "自動バックアップ",
-  "AutoBackupDescription": "DocSpaceデータを自動的にバックアップするためにこの操作を使用してください。",
   "AutoBackupHelp": "<strong>自動バックアップ</strong>オプションは、DocSpaceデータのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするために使用します。",
   "AutoBackupHelpNote": "データのためのストレージ、自動バックアップ期間、保存されるコピーの最大数を選択してください。<br/>　<strong>ご注意してください：</strong>バックアップを保存する前に、第三者サービスのアカウント（DropBox、Box.com、OneDriveまたはGoogle Drive）を{{organizationName}}「共通文書」フォルダーに接続する必要です。",
   "AutoSavePeriod": "自動保存期間",

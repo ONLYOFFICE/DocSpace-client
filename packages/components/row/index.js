@@ -166,6 +166,7 @@ class Row extends React.Component {
           )}
           {renderContext ? (
             <ContextMenuButton
+              isFill
               className="expandButton"
               getData={getOptions}
               directionX="right"

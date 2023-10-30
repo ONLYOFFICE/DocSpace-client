@@ -193,7 +193,7 @@ const InfoPanel = ({
 
   return !isVisible ||
     !canDisplay ||
-    anotherDialogOpen ||
+    (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
     : currentDeviceType === DeviceType.mobile

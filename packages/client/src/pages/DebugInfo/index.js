@@ -19,28 +19,20 @@ const StyledModalDialog = styled(ModalDialog)`
     width: auto;
 
     /* Light theme. */
-    --color-canvas-default: #ffffff;
-    --color-canvas-subtle: #f6f8fa;
     --color-border-default: #d0d7de;
     --color-border-muted: hsla(210, 18%, 87%, 1);
 
     .modal-footer {
       padding-right: 4px;
     }
+
+    a {
+      color: #4781d1;
+    }
   }
 
   .markdown-wrapper {
     width: 100%;
-  }
-
-  /* Dark theme. */
-  @media (prefers-color-scheme: dark) {
-    #modal-dialog {
-      --color-canvas-default: #0d1117;
-      --color-canvas-subtle: #161b22;
-      --color-border-default: #30363d;
-      --color-border-muted: #21262d;
-    }
   }
 
   table {
@@ -55,12 +47,7 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 
   tr {
-    background-color: var(--color-canvas-default);
     border-top: 1px solid var(--color-border-muted);
-  }
-
-  tr:nth-child(2n) {
-    background-color: var(--color-canvas-subtle);
   }
 
   td,

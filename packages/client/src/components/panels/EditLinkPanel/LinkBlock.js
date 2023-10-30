@@ -22,7 +22,7 @@ const LinkBlock = (props) => {
 
   return (
     <div className="edit-link_link-block">
-      <Text className="edit-link-text" fontSize="13px" fontWeight={600}>
+      <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
         {t("LinkName")}
       </Text>
       <Text className="edit-link_required-icon" color="#F24724">

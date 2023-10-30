@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
-import Heading from "@docspace/components/heading";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
-
-import {
-  StyledEditLinkPanel,
-  StyledScrollbar,
-  StyledButtons,
-} from "./StyledEditLinkPanel";
+import ModalDialog from "@docspace/components/modal-dialog";
+import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
@@ -171,95 +164,87 @@ const EditLinkPanel = (props) => {
   const isPrimary = link?.sharedTo?.primary;
 
   const editLinkPanelComponent = (
-    <StyledEditLinkPanel isExpired={isExpired}>
-      <Backdrop
-        onClick={onClosePanel}
-        visible={visible}
-        isAside={true}
-        zIndex={310}
-      />
-      <Aside
-        className="edit-link-panel"
-        visible={visible}
-        onClose={onClosePanel}
-        zIndex={310}
-        withoutBodyScroll
-      >
-        <div className="edit-link_header">
-          <Heading className="edit-link_heading">
-            {isEdit
-              ? isPrimary
-                ? t("Files:EditGeneralLink")
-                : isPublic
-                ? t("Files:EditAdditionalLink")
-                : t("Files:EditLink")
-              : t("Files:CreateNewLink")}
-          </Heading>
+    <StyledEditLinkPanel
+      isExpired={isExpired}
+      displayType="aside"
+      visible={visible}
+      onClose={onClose}
+      isLarge
+      zIndex={310}
+      withBodyScroll={true}
+      withFooterBorder={true}
+    >
+      <ModalDialog.Header>
+        {isEdit
+          ? isPrimary
+            ? t("Files:EditGeneralLink")
+            : isPublic
+            ? t("Files:EditAdditionalLink")
+            : t("Files:EditLink")
+          : t("Files:CreateNewLink")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <div className="edit-link_body">
+          <LinkBlock
+            t={t}
+            isEdit={isEdit}
+            isLoading={isLoading}
+            shareLink={shareLink}
+            linkNameValue={linkNameValue}
+            setLinkNameValue={setLinkNameValue}
+            linkValue={linkValue}
+            setLinkValue={setLinkValue}
+          />
+          <PasswordAccessBlock
+            t={t}
+            isLoading={isLoading}
+            headerText={t("Files:PasswordAccess")}
+            bodyText={t("Files:PasswordLink")}
+            isChecked={passwordAccessIsChecked}
+            isPasswordValid={isPasswordValid}
+            passwordValue={passwordValue}
+            setPasswordValue={setPasswordValue}
+            setIsPasswordValid={setIsPasswordValid}
+            onChange={onPasswordAccessChange}
+          />
+          <ToggleBlock
+            isLoading={isLoading}
+            headerText={t("Files:DisableDownload")}
+            bodyText={t("Files:PreventDownloadFilesAndFolders")}
+            isChecked={denyDownload}
+            onChange={onDenyDownloadChange}
+          />
+          {!isPrimary && (
+            <LimitTimeBlock
+              isExpired={isExpired}
+              isLoading={isLoading}
+              headerText={t("Files:LimitByTimePeriod")}
+              bodyText={expiredLinkText}
+              expirationDate={expirationDate}
+              setExpirationDate={setExpirationDate}
+              setIsExpired={setIsExpired}
+              language={language}
+            />
+          )}
         </div>
-        <StyledScrollbar stype="mediumBlack">
-          <div className="edit-link_body">
-            <LinkBlock
-              t={t}
-              isEdit={isEdit}
-              isLoading={isLoading}
-              shareLink={shareLink}
-              linkNameValue={linkNameValue}
-              setLinkNameValue={setLinkNameValue}
-              linkValue={linkValue}
-              setLinkValue={setLinkValue}
-            />
-            <PasswordAccessBlock
-              t={t}
-              isLoading={isLoading}
-              headerText={t("Files:PasswordAccess")}
-              bodyText={t("Files:PasswordLink")}
-              isChecked={passwordAccessIsChecked}
-              isPasswordValid={isPasswordValid}
-              passwordValue={passwordValue}
-              setPasswordValue={setPasswordValue}
-              setIsPasswordValid={setIsPasswordValid}
-              onChange={onPasswordAccessChange}
-            />
-            <ToggleBlock
-              isLoading={isLoading}
-              headerText={t("Files:DisableDownload")}
-              bodyText={t("Files:PreventDownloadFilesAndFolders")}
-              isChecked={denyDownload}
-              onChange={onDenyDownloadChange}
-            />
-            {!isPrimary && (
-              <LimitTimeBlock
-                isExpired={isExpired}
-                isLoading={isLoading}
-                headerText={t("Files:LimitByTimePeriod")}
-                bodyText={expiredLinkText}
-                expirationDate={expirationDate}
-                setExpirationDate={setExpirationDate}
-                setIsExpired={setIsExpired}
-                language={language}
-              />
-            )}
-          </div>
-        </StyledScrollbar>
-
-        <StyledButtons>
-          <Button
-            scale
-            primary
-            size="normal"
-            label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
-            isDisabled={isLoading || !linkNameIsValid || isExpired}
-            onClick={onSave}
-          />
-          <Button
-            scale
-            size="normal"
-            label={t("Common:CancelButton")}
-            isDisabled={isLoading}
-            onClick={onClose}
-          />
-        </StyledButtons>
-      </Aside>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          scale
+          primary
+          size="normal"
+          label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
+          isDisabled={isLoading || !linkNameIsValid || isExpired}
+          onClick={onSave}
+        />
+        <Button
+          scale
+          size="normal"
+          label={t("Common:CancelButton")}
+          isDisabled={isLoading}
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
     </StyledEditLinkPanel>
   );
 

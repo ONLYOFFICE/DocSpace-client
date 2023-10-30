@@ -6,9 +6,17 @@ import Aside from "@docspace/components/aside";
 import { withTranslation } from "react-i18next";
 import { StyledEmbeddingPanel, StyledScrollbar } from "./StyledEmbeddingPanel";
 import EmbeddingBody from "./EmbeddingBody";
-
+import { DeviceType } from "@docspace/common/constants";
+import Portal from "@docspace/components/portal";
 const EmbeddingPanelComponent = (props) => {
-  const { t, link, roomId, visible, setEmbeddingPanelIsVisible } = props;
+  const {
+    t,
+    link,
+    roomId,
+    visible,
+    setEmbeddingPanelIsVisible,
+    currentDeviceType,
+  } = props;
 
   const scrollRef = useRef(null);
 
@@ -27,15 +35,20 @@ const EmbeddingPanelComponent = (props) => {
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
-  return (
+  const embeddingPanelComponent = (
     <StyledEmbeddingPanel>
       <Backdrop
         onClick={onClose}
         visible={visible}
         isAside={true}
-        zIndex={210}
+        zIndex={310}
       />
-      <Aside className="embedding-panel" visible={visible} onClose={onClose}>
+      <Aside
+        className="embedding-panel"
+        visible={visible}
+        onClose={onClose}
+        withoutBodyScroll={true}
+      >
         <div className="embedding_header">
           <Heading className="hotkeys_heading">
             {t("Files:EmbeddingSettings")}
@@ -47,9 +60,25 @@ const EmbeddingPanelComponent = (props) => {
       </Aside>
     </StyledEmbeddingPanel>
   );
+
+  const renderPortal = () => {
+    const rootElement = document.getElementById("root");
+
+    return (
+      <Portal
+        element={embeddingPanelComponent}
+        appendTo={rootElement}
+        visible={visible}
+      />
+    );
+  };
+
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortal()
+    : embeddingPanelComponent;
 };
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, auth }) => {
   const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
     dialogsStore;
 
@@ -58,6 +87,7 @@ export default inject(({ dialogsStore }) => {
     setEmbeddingPanelIsVisible,
     link: linkParams?.link?.sharedTo?.shareLink,
     roomId: linkParams?.roomId,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(
   withTranslation(["Files", "EmbeddingPanel"])(

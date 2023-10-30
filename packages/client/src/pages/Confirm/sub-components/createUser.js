@@ -50,6 +50,7 @@ const CreateUserForm = (props) => {
     roomData,
     capabilities,
     currentColorScheme,
+    userNameRegex,
     defaultPage,
   } = props;
   const inputRef = React.useRef(null);
@@ -98,6 +99,8 @@ const CreateUserForm = (props) => {
     setShowGreeting(false);
   };
 
+  const nameRegex = new RegExp(userNameRegex, "gu");
+
   /*useEffect(() => {
     window.addEventListener("resize", onCheckGreeting);
     return () => window.removeEventListener("resize", onCheckGreeting);
@@ -138,12 +141,12 @@ const CreateUserForm = (props) => {
 
     let hasError = false;
 
-    if (!fname.trim()) {
+    if (!fname.trim() || !fnameValid) {
       hasError = true;
       setFnameValid(!hasError);
     }
 
-    if (!sname.trim()) {
+    if (!sname.trim() || !snameValid) {
       hasError = true;
       setSnameValid(!hasError);
     }
@@ -175,8 +178,8 @@ const CreateUserForm = (props) => {
     };
 
     const personalData = {
-      firstname: fname,
-      lastname: sname,
+      firstname: fname.trim(),
+      lastname: sname.trim(),
       email: email,
     };
 
@@ -235,11 +238,7 @@ const CreateUserForm = (props) => {
 
     const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
 
-    const data = Object.assign(
-      { fromInviteLink: fromInviteLink },
-      registerData,
-      loginData
-    );
+    const data = Object.assign({ fromInviteLink: fromInviteLink }, registerData, loginData);
 
     await createUser(data, key);
 
@@ -279,13 +278,13 @@ const CreateUserForm = (props) => {
 
   const onChangeFname = (e) => {
     setFname(e.target.value);
-    setFnameValid(true);
+    setFnameValid(nameRegex.test(e.target.value.trim()));
     setErrorText("");
   };
 
   const onChangeSname = (e) => {
     setSname(e.target.value);
-    setSnameValid(true);
+    setSnameValid(nameRegex.test(e.target.value.trim()));
     setErrorText("");
   };
 
@@ -318,7 +317,7 @@ const CreateUserForm = (props) => {
         : window.open(
             url,
             "login",
-            "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no"
+            "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
           );
 
       getOAuthToken(tokenGetterWin).then((code) => {
@@ -327,7 +326,7 @@ const CreateUserForm = (props) => {
             auth: providerName,
             mode: "popup",
             callback: "authCallback",
-          })
+          }),
         );
 
         tokenGetterWin.location.href = getLoginLink(token, code);
@@ -344,8 +343,7 @@ const CreateUserForm = (props) => {
         if (!providersData[item.provider]) return;
         if (index > 1) return;
 
-        const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+        const { icon, label, iconOptions, className } = providersData[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -371,10 +369,7 @@ const CreateUserForm = (props) => {
         <SocialButton
           iconName={SsoReactSvgUrl}
           className="socialButton"
-          label={
-            capabilities?.ssoLabel ||
-            getProviderTranslation("sso", t, false, true)
-          }
+          label={capabilities?.ssoLabel || getProviderTranslation("sso", t, false, true)}
           onClick={() => (window.location.href = capabilities?.ssoUrl)}
         />
       </div>
@@ -424,12 +419,7 @@ const CreateUserForm = (props) => {
         <ConfirmContainer>
           <GreetingContainer>
             <DocspaceLogo className="docspace-logo" />
-            <Text
-              fontSize="23px"
-              fontWeight={700}
-              textAlign="left"
-              className="greeting-title"
-            >
+            <Text fontSize="23px" fontWeight={700} textAlign="left" className="greeting-title">
               {greetingTitle}
             </Text>
 
@@ -437,11 +427,7 @@ const CreateUserForm = (props) => {
               <>
                 {user && (
                   <div className="greeting-block">
-                    <Avatar
-                      className="avatar"
-                      role="user"
-                      source={userAvatar}
-                    />
+                    <Avatar className="avatar" role="user" source={userAvatar} />
                     <div className="user-info">
                       <Text fontSize="15px" fontWeight={600}>
                         {user.firstName} {user.lastName}
@@ -456,12 +442,7 @@ const CreateUserForm = (props) => {
                 <div className="tooltip">
                   <p className="tooltiptext">
                     {roomName ? (
-                      <Trans
-                        t={t}
-                        i18nKey="WelcomeToRoom"
-                        ns="Confirm"
-                        key={roomName}
-                      >
+                      <Trans t={t} i18nKey="WelcomeToRoom" ns="Confirm" key={roomName}>
                         Welcome to the <strong>{{ roomName }}</strong> room!
                       </Trans>
                     ) : (
@@ -484,9 +465,7 @@ const CreateUserForm = (props) => {
             <RegisterContainer>
               {!emailFromLink && (
                 <>
-                  {ssoExists() && (
-                    <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
-                  )}
+                  {ssoExists() && <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>}
 
                   {oauthDataExists() && (
                     <>
@@ -499,8 +478,7 @@ const CreateUserForm = (props) => {
                           fontWeight="600"
                           color={currentColorScheme?.main?.accent}
                           className="more-label"
-                          onClick={moreAuthOpen}
-                        >
+                          onClick={moreAuthOpen}>
                           {t("Common:ShowMore")}
                         </Link>
                       )}
@@ -526,11 +504,8 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={isEmailErrorShow && !emailValid}
                       errorMessage={
-                        emailErrorText
-                          ? t(`Common:${emailErrorText}`)
-                          : t("Common:RequiredField")
-                      }
-                    >
+                        emailErrorText ? t(`Common:${emailErrorText}`) : t("Common:RequiredField")
+                      }>
                       <EmailInput
                         id="login"
                         name="login"
@@ -558,9 +533,12 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={!fnameValid}
                       errorMessage={
-                        errorText ? errorText : t("Common:RequiredField")
-                      }
-                    >
+                        errorText
+                          ? errorText
+                          : fname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectFirstName")
+                      }>
                       <TextInput
                         id="first-name"
                         name="first-name"
@@ -583,9 +561,12 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={!snameValid}
                       errorMessage={
-                        errorText ? errorText : t("Common:RequiredField")
-                      }
-                    >
+                        errorText
+                          ? errorText
+                          : sname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectLastName")
+                      }>
                       <TextInput
                         id="last-name"
                         name="last-name"
@@ -607,10 +588,10 @@ const CreateUserForm = (props) => {
                       isVertical={true}
                       labelVisible={false}
                       hasError={isPasswordErrorShow && !passwordValid}
-                      errorMessage={`${t(
-                        "Common:PasswordLimitMessage"
-                      )}: ${getPasswordErrorMessage(t, settings)}`}
-                    >
+                      errorMessage={`${t("Common:PasswordLimitMessage")}: ${getPasswordErrorMessage(
+                        t,
+                        settings,
+                      )}`}>
                       <PasswordInput
                         simpleView={false}
                         hideNewPasswordButton
@@ -631,21 +612,13 @@ const CreateUserForm = (props) => {
                         onBlur={onBlurPassword}
                         onKeyDown={onKeyPress}
                         onValidateInput={onValidatePassword}
-                        tooltipPasswordTitle={`${t(
-                          "Common:PasswordLimitMessage"
-                        )}:`}
-                        tooltipPasswordLength={`${t(
-                          "Common:PasswordMinimumLength"
-                        )}: ${settings ? settings.minLength : 8}`}
-                        tooltipPasswordDigits={`${t(
-                          "Common:PasswordLimitDigits"
-                        )}`}
-                        tooltipPasswordCapital={`${t(
-                          "Common:PasswordLimitUpperCase"
-                        )}`}
-                        tooltipPasswordSpecial={`${t(
-                          "Common:PasswordLimitSpecialSymbols"
-                        )}`}
+                        tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
+                        tooltipPasswordLength={`${t("Common:PasswordMinimumLength")}: ${
+                          settings ? settings.minLength : 8
+                        }`}
+                        tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
+                        tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
+                        tooltipPasswordSpecial={`${t("Common:PasswordLimitSpecialSymbols")}`}
                         generatePasswordTitle={t("Wizard:GeneratePassword")}
                       />
                     </FieldContainer>
@@ -655,11 +628,7 @@ const CreateUserForm = (props) => {
                       primary
                       size="medium"
                       scale={true}
-                      label={
-                        isLoading
-                          ? t("Common:LoadingProcessing")
-                          : t("LoginRegistryButton")
-                      }
+                      label={isLoading ? t("Common:LoadingProcessing") : t("LoginRegistryButton")}
                       tabIndex={1}
                       isDisabled={isLoading}
                       isLoading={isLoading}
@@ -675,11 +644,7 @@ const CreateUserForm = (props) => {
                   primary
                   size="medium"
                   scale={true}
-                  label={
-                    isLoading
-                      ? t("Common:LoadingProcessing")
-                      : t("LoginRegistryButton")
-                  }
+                  label={isLoading ? t("Common:LoadingProcessing") : t("LoginRegistryButton")}
                   tabIndex={1}
                   isDisabled={isLoading}
                   isLoading={isLoading}
@@ -722,6 +687,7 @@ export default inject(({ auth }) => {
     getSettings,
     getPortalPasswordSettings,
     currentColorScheme,
+    userNameRegex,
   } = settingsStore;
 
   return {
@@ -737,9 +703,6 @@ export default inject(({ auth }) => {
     providers,
     capabilities,
     currentColorScheme,
+    userNameRegex,
   };
-})(
-  withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(CreateUserForm))
-  )
-);
+})(withTranslation(["Confirm", "Common", "Wizard"])(withLoader(observer(CreateUserForm))));

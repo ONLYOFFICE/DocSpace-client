@@ -2,6 +2,7 @@
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
+    requestToken: null,
     width: "100%",
     height: "100%",
     name: "frameDocSpace",
@@ -52,7 +53,7 @@
   };
 
   const getConfigFromParams = () => {
-    const src = document.currentScript.src;
+    const src = decodeURIComponent(document.currentScript.src);
 
     if (!src || !src.length) return null;
 
@@ -105,7 +106,9 @@
             const filterString = new URLSearchParams(config.filter).toString();
             path = `${config.rootPath}${
               config.id ? config.id + "/" : ""
-            }filter?${filterString}`;
+            }filter?${filterString}${
+              config.requestToken ? `&key=${config.requestToken}` : ""
+            }`;
           }
           break;
         }

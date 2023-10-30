@@ -2,6 +2,7 @@ import io from "socket.io-client";
 
 let client = null;
 let callbacks = [];
+const subscribers = new Set();
 
 class SocketIOHelper {
   socketUrl = null;
@@ -49,8 +50,27 @@ class SocketIOHelper {
     return this.socketUrl !== null;
   }
 
+  get socketSubscribers() {
+    return subscribers;
+  }
+
   emit = ({ command, data, room = null }) => {
     if (!this.isEnabled) return;
+
+    const ids =
+      typeof data.roomParts === "object" ? data.roomParts : [data.roomParts];
+
+    ids.forEach((id) => {
+      if (command === "subscribe") {
+        if (subscribers.has(id)) return;
+
+        subscribers.add(id);
+      }
+
+      if (command === "unsubscribe") {
+        subscribers.delete(id);
+      }
+    });
 
     if (!client.connected) {
       client.on("connect", () => {

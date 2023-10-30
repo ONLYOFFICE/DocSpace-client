@@ -7,7 +7,7 @@ import RowContent from "@docspace/components/row-content";
 import Link from "@docspace/components/link";
 
 import Badges from "../Badges";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -41,6 +41,21 @@ const StyledRowContent = styled(RowContent)`
                 margin-left: 8px;
                 margin-right: 0px;
               `}
+      }
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .badges {
+      margin-top: 0px;
+      gap: 8px;
+
+      .paid-badge {
+        margin: 0px;
       }
     }
   }

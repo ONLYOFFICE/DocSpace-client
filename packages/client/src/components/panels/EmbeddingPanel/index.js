@@ -6,13 +6,13 @@ import Aside from "@docspace/components/aside";
 import { withTranslation } from "react-i18next";
 import { StyledEmbeddingPanel, StyledScrollbar } from "./StyledEmbeddingPanel";
 import EmbeddingBody from "./EmbeddingBody";
-import Portal from "@docspace/components/portal";
 import { DeviceType } from "@docspace/common/constants";
-
+import Portal from "@docspace/components/portal";
 const EmbeddingPanelComponent = (props) => {
   const {
     t,
     link,
+    requestToken,
     roomId,
     visible,
     setEmbeddingPanelIsVisible,
@@ -44,14 +44,24 @@ const EmbeddingPanelComponent = (props) => {
         isAside={true}
         zIndex={310}
       />
-      <Aside className="embedding-panel" visible={visible} onClose={onClose}>
+      <Aside
+        className="embedding-panel"
+        visible={visible}
+        onClose={onClose}
+        withoutBodyScroll={true}
+      >
         <div className="embedding_header">
           <Heading className="hotkeys_heading">
             {t("Files:EmbeddingSettings")}
           </Heading>
         </div>
         <StyledScrollbar ref={scrollRef} stype="mediumBlack">
-          <EmbeddingBody t={t} link={link} roomId={roomId} />
+          <EmbeddingBody
+            t={t}
+            link={link}
+            requestToken={requestToken}
+            roomId={roomId}
+          />
         </StyledScrollbar>
       </Aside>
     </StyledEmbeddingPanel>
@@ -74,7 +84,7 @@ const EmbeddingPanelComponent = (props) => {
     : embeddingPanelComponent;
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ dialogsStore, auth }) => {
   const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
     dialogsStore;
   const { currentDeviceType } = auth.settingsStore;
@@ -83,6 +93,7 @@ export default inject(({ auth, dialogsStore }) => {
     visible: embeddingPanelIsVisible,
     setEmbeddingPanelIsVisible,
     link: linkParams?.link?.sharedTo?.shareLink,
+    requestToken: linkParams?.link?.sharedTo?.requestToken,
     roomId: linkParams?.roomId,
     currentDeviceType,
   };

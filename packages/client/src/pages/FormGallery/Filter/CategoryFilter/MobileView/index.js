@@ -23,7 +23,6 @@ const CategoryFilterMobile = ({
 
   ...rest
 }) => {
-  console.log(menuItems);
   const scrollRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);

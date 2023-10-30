@@ -4,20 +4,25 @@ import DropDown from "@docspace/components/drop-down";
 import DropDownItem from "@docspace/components/drop-down-item";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 export const CategoryFilterMobileWrapper = styled.div`
   width: 100%;
+  max-width: 280px;
   position: relative;
-
-  @media ${mobile} {
-    position: static;
-  }
 
   .combo-button-label {
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;
+  }
+
+  @media ${tablet} {
+    max-width: 100%;
+  }
+
+  @media ${mobile} {
+    position: static;
   }
 `;
 

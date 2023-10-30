@@ -43,7 +43,6 @@ class OformsStore {
 
   get defaultOformLocale() {
     const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    console.log(userLocale);
     return this.oformLocales.includes(userLocale) ? userLocale : "en";
   }
 
@@ -73,7 +72,6 @@ class OformsStore {
     const localeKeys = fetchedLocales.map((locale) =>
       convertToLanguage(locale.code)
     );
-    console.log(localeKeys);
     this.oformLocales = localeKeys;
   };
 
@@ -93,7 +91,6 @@ class OformsStore {
     return new Promise(async (resolve) => {
       const apiUrl = `${this.authStore.settingsStore.formGallery.url}${params}`;
       let oforms = await getOforms(apiUrl);
-      console.log(oforms);
       resolve(oforms);
     });
   };

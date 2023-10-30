@@ -1,62 +1,66 @@
 import styled, { css } from "styled-components";
 
-import {
-  tablet,
-  mobile,
-  hugeDesktop,
-  desktop,
-} from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
 
-const calculateContainerGridColumns = (isRootFolder, isInfoPanelVisible) => {
-  let result = "min-content 12px auto";
-  if (!isRootFolder) result = "29px " + result;
-  if (!isInfoPanelVisible) result += " 52px";
-  return result;
-};
-
 const StyledContainer = styled.div`
+  height: 69px;
   width: 100%;
-  height: 32px;
+  max-width: 100%;
+  box-sizing: border-box;
+
   display: grid;
-
-  grid-template-columns: ${({ isRootFolder, isInfoPanelVisible }) =>
-    calculateContainerGridColumns(isRootFolder, isInfoPanelVisible)};
-
-  @media ${tablet} {
-    grid-template-columns: ${({ isRootFolder }) =>
-      isRootFolder ? "min-content 12px auto" : "29px min-content 12px auto"};
-  }
-
   align-items: center;
+  grid-template-columns: ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible
+      ? "29px min-content auto"
+      : "29px min-content auto 52px"};
 
   .arrow-button {
     width: 17px;
     min-width: 17px;
-
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
-  height: 69px;
-  box-sizing: border-box;
-
   @media ${tablet} {
     height: 69px;
     padding: 0;
+    grid-template-columns: 29px min-content auto;
   }
 
   @media ${mobile} {
     height: 53px;
     padding: 0;
+    display: flex;
+  }
+`;
+
+const StyledHeading = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  @media ${tablet} {
+    width: 100%;
+    max-width: calc(100vw - 286px);
+  }
+
+  @media ${mobile} {
+    margin-left: 12px;
+    width: 100%;
+    max-width: calc(100vw - 68px);
   }
 `;
 
 const StyledHeadline = styled(Headline)`
   width: 100%;
+  max-width: min-content;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
@@ -66,22 +70,12 @@ const StyledHeadline = styled(Headline)`
     font-size: 21px;
     line-height: 28px;
   }
+
   @media ${mobile} {
     font-size: 18px;
     line-height: 24px;
   }
 `;
-
-// const StyledHeadline = styled(Headline)`
-//   width: fit-content;
-//   font-weight: 700;
-//   font-size: ${isMobile ? "21px !important" : "18px"};
-//   line-height: ${isMobile ? "28px !important" : "24px"};
-//   @media ${tablet} {
-//     font-size: 21px;
-//     line-height: 28px;
-//   }
-// `;
 
 const StyledNavigationDrodown = styled(ComboBox)`
   width: 12px;
@@ -89,6 +83,7 @@ const StyledNavigationDrodown = styled(ComboBox)`
   box-sizing: border-box;
   background: transparent;
 `;
+
 const StyledSubmitToGalleryButton = styled(Button)`
   margin-left: auto;
 
@@ -152,6 +147,7 @@ const StyledInfoPanelToggleWrapper = styled.div`
 StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
 export {
+  StyledHeading,
   StyledHeadline,
   StyledContainer,
   StyledNavigationDrodown,

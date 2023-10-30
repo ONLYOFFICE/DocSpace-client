@@ -8,6 +8,9 @@ import styled from "styled-components";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
+  @media ${mobile} {
+    max-width: calc(100% - 49px);
+  }
 
   .mobileView {
     display: none;

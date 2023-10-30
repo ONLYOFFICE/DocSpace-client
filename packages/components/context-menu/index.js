@@ -139,7 +139,6 @@ class ContextMenu extends Component {
         ? this.menuRef.current.offsetHeight
         : DomHelpers.getHiddenElementOuterHeight(this.menuRef.current);
       let viewport = DomHelpers.getViewport();
-      console.log(height);
       if (
         this.props.theme.interfaceDirection === "rtl" &&
         !rects &&

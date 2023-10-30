@@ -7,6 +7,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
   StyledContainer,
+  StyledHeading,
   StyledHeadline,
   StyledNavigationDrodown,
   StyledSubmitToGalleryButton,
@@ -112,7 +113,10 @@ const SectionHeaderContent = ({
   }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
-    <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
+    <StyledContainer
+      className="CONTEATNER"
+      isInfoPanelVisible={isInfoPanelVisible}
+    >
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
@@ -121,28 +125,30 @@ const SectionHeaderContent = ({
         className="arrow-button"
       />
 
-      <StyledHeadline type="content" truncate>
-        {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
-      </StyledHeadline>
+      <StyledHeading className="oform-header">
+        <StyledHeadline type="content" truncate>
+          {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
+        </StyledHeadline>
 
-      <StyledNavigationDrodown
-        id="oform-header-combobox"
-        comboIcon={TriangleNavigationDownReactSvgUrl}
-        noBorder
-        className="oform-header-combobox not-selectable"
-        options={[]}
-        selectedOption={{}}
-        manualY="42px"
-        manualX="-32px"
-        title={t("Common:TitleSelectFile")}
-        isMobileView={isMobileOnly}
-        advancedOptions={
-          <>
-            {!!checkboxOptions.fromFolder && checkboxOptions.fromFolder}
-            {!!checkboxOptions.viewAll && checkboxOptions.viewAll}
-          </>
-        }
-      />
+        <StyledNavigationDrodown
+          id="oform-header-combobox"
+          comboIcon={TriangleNavigationDownReactSvgUrl}
+          noBorder
+          className="oform-header-combobox not-selectable"
+          options={[]}
+          selectedOption={{}}
+          manualY="42px"
+          manualX="-32px"
+          title={t("Common:TitleSelectFile")}
+          isMobileView={isMobileOnly}
+          advancedOptions={
+            <>
+              {!!checkboxOptions.fromFolder && checkboxOptions.fromFolder}
+              {!!checkboxOptions.viewAll && checkboxOptions.viewAll}
+            </>
+          }
+        />
+      </StyledHeading>
 
       {canSubmitToFormGallery() && (
         <StyledSubmitToGalleryButton

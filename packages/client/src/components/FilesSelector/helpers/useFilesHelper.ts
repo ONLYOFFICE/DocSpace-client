@@ -336,7 +336,7 @@ export const useFilesHelper = ({
         isErrorPath = false
       ) => {
         if (isInit && getRootData) {
-          const folder = await getFolderInfo(folderId);
+          const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
 
@@ -435,6 +435,7 @@ export const useFilesHelper = ({
       try {
         await setSettings(id);
       } catch (e) {
+        sessionStorage.removeItem("filesSelectorPath");
         if (isThirdParty && rootThirdPartyId) {
           await setSettings(rootThirdPartyId, true);
 

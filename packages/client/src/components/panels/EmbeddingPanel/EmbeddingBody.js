@@ -11,7 +11,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import { StyledBody } from "./StyledEmbeddingPanel";
 import { objectToGetParams } from "@docspace/common/utils";
 
-const EmbeddingBody = ({ t, link, roomId }) => {
+const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const [size, setSize] = useState("auto");
   const [widthValue, setWidthValue] = useState("100%");
   const [heightValue, setHeightValue] = useState("100%");
@@ -27,6 +27,7 @@ const EmbeddingBody = ({ t, link, roomId }) => {
     showFilter: true,
     rootPath: "/rooms/shared/",
     id: roomId,
+    requestToken,
   };
 
   const scriptUrl = `${window.location.origin}/static/scripts/api.js`;

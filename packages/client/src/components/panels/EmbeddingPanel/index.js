@@ -13,6 +13,7 @@ const EmbeddingPanelComponent = (props) => {
   const {
     t,
     link,
+    requestToken,
     roomId,
     visible,
     setEmbeddingPanelIsVisible,
@@ -51,7 +52,12 @@ const EmbeddingPanelComponent = (props) => {
           </Heading>
         </div>
         <StyledScrollbar ref={scrollRef} stype="mediumBlack">
-          <EmbeddingBody t={t} link={link} roomId={roomId} />
+          <EmbeddingBody
+            t={t}
+            link={link}
+            requestToken={requestToken}
+            roomId={roomId}
+          />
         </StyledScrollbar>
       </Aside>
     </StyledEmbeddingPanel>
@@ -83,6 +89,7 @@ export default inject(({ auth, dialogsStore }) => {
     visible: embeddingPanelIsVisible,
     setEmbeddingPanelIsVisible,
     link: linkParams?.link?.sharedTo?.shareLink,
+    requestToken: linkParams?.link?.sharedTo?.requestToken,
     roomId: linkParams?.roomId,
     currentDeviceType,
   };

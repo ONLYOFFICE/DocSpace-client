@@ -91,7 +91,7 @@ const FilesSelector = ({
   includeFolder,
 
   socketHelper,
-  socketSubscribersId,
+  socketSubscribers,
   setMoveToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
   currentDeviceType,
@@ -129,7 +129,7 @@ const FilesSelector = ({
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
-    socketSubscribersId,
+    socketSubscribers,
     setItems,
     setBreadCrumbs,
     setTotal,
@@ -609,7 +609,7 @@ export default inject(
 
     const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
 
-    const socketSubscribesId = socketHelper.socketSubscribersId;
+    const socketSubscribesId = socketHelper.socketSubscribers;
 
     const {
       selection,
@@ -674,7 +674,7 @@ export default inject(
       setInfoPanelIsMobileHidden,
       includeFolder,
       socketHelper,
-      socketSubscribersId: socketSubscribesId,
+      socketSubscribers: socketSubscribesId,
       setMoveToPublicRoomVisible,
       currentDeviceType,
     };

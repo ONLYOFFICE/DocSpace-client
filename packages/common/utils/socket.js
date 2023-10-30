@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 let client = null;
 let callbacks = [];
-const subscribesId = new Set();
+const subscribers = new Set();
 
 class SocketIOHelper {
   socketUrl = null;
@@ -50,8 +50,8 @@ class SocketIOHelper {
     return this.socketUrl !== null;
   }
 
-  get socketSubscribersId() {
-    return subscribesId;
+  get socketSubscribers() {
+    return subscribers;
   }
 
   emit = ({ command, data, room = null }) => {
@@ -62,13 +62,13 @@ class SocketIOHelper {
 
     ids.forEach((id) => {
       if (command === "subscribe") {
-        if (subscribesId.has(id)) return;
+        if (subscribers.has(id)) return;
 
-        subscribesId.add(id);
+        subscribers.add(id);
       }
 
       if (command === "unsubscribe") {
-        subscribesId.delete(id);
+        subscribers.delete(id);
       }
     });
 

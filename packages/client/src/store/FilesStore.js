@@ -174,7 +174,7 @@ class FilesStore {
     const { socketHelper } = authStore.settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
 
       if (opt && opt.data) {
         const data = JSON.parse(opt.data);
@@ -184,8 +184,8 @@ class FilesStore {
           : `DIR-${data.parentId}`;
 
         if (
-          !socketSubscribersId.has(pathParts) &&
-          !socketSubscribersId.has(`DIR-${data.id}`)
+          !socketSubscribers.has(pathParts) &&
+          !socketSubscribers.has(`DIR-${data.id}`)
         )
           return;
       }
@@ -225,10 +225,10 @@ class FilesStore {
     });
 
     socketHelper.on("refresh-folder", (id) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `DIR-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       if (!id || this.clientLoadingStore.isLoading) return;
 
@@ -246,10 +246,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `DIR-${folderId}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-folder ${folderId}:${count}`);
 
@@ -264,10 +264,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-file", ({ fileId, count }) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${fileId}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-file ${fileId}:${count}`);
 
@@ -286,10 +286,10 @@ class FilesStore {
 
     //WAIT FOR RESPONSES OF EDITING FILE
     socketHelper.on("s:start-edit-file", (id) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
@@ -309,10 +309,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:stop-edit-file", (id) => {
-      const { socketSubscribersId } = socketHelper;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
@@ -908,10 +908,6 @@ class FilesStore {
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) => {
-        deleteSocketSubscribersId(`DIR-${f.id}`);
-      });
-
       socketHelper.emit({
         command: "unsubscribe",
         data: {

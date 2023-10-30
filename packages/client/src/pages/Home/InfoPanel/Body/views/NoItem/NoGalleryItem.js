@@ -1,5 +1,4 @@
-﻿import FormGallerySearchReactSvgUrl from "PUBLIC_DIR/images/form-gallery-search.react.svg?url";
-import React from "react";
+﻿import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/form-gallery-empty-info.react.svg?url";
 import styled from "styled-components";
 import Text from "@docspace/components/text";
 
@@ -7,13 +6,13 @@ const StyledGalleryEmptyScreen = styled.div`
   .info-panel_gallery-empty-screen-img {
     display: block;
     margin: 0 auto;
-    padding: 56px 0 48px 0;
+    padding: 80px 0 32px 0;
   }
 
   .info-panel_gallery-empty-screen-text {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
     text-align: center;
   }
 `;
@@ -23,11 +22,11 @@ const NoGalleryItem = ({ t }) => {
     <StyledGalleryEmptyScreen className="info-panel_gallery-empty-screen">
       <img
         className="info-panel_gallery-empty-screen-img"
-        src={FormGallerySearchReactSvgUrl}
+        src={FormGalleryEmptyInfoReactSvgUrl}
         alt="Empty Screen Gallery image"
       />
       <Text className="info-panel_gallery-empty-screen-text">
-        {t("FormGallery:GalleryEmptyScreenDescription")}
+        {t("InfoPanel:GalleryEmptyScreenText")}
       </Text>
     </StyledGalleryEmptyScreen>
   );

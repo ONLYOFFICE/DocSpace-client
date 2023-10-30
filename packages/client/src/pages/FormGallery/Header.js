@@ -125,7 +125,10 @@ const SectionHeaderContent = ({
         className="arrow-button"
       />
 
-      <StyledHeading className="oform-header">
+      <StyledHeading
+        className="oform-header"
+        isInfoPanelVisible={isInfoPanelVisible}
+      >
         <StyledHeadline type="content" truncate>
           {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
         </StyledHeadline>

@@ -46,9 +46,15 @@ const StyledHeading = styled.div`
   align-items: center;
   justify-content: flex-start;
 
+  ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible &&
+    css`
+      max-width: calc(100vw - 320px - 440px);
+    `};
+
   @media ${tablet} {
     width: 100%;
-    max-width: calc(100vw - 286px);
+    max-width: calc(100vw - 320px);
   }
 
   @media ${mobile} {

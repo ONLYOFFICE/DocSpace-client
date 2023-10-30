@@ -19,15 +19,17 @@ const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const config = {
     width: `${widthValue}`,
     height: `${heightValue}`,
-    frameId: "ds-frame",
+    frameId: "ds-frame-embedding",
+    mode: "manager",
     init: true,
     showHeader: true,
     showTitle: true,
     showMenu: false,
     showFilter: true,
-    rootPath: "/rooms/shared/",
+    rootPath: "/rooms/share",
     id: roomId,
     requestToken,
+    withSubfolders: false,
   };
 
   const scriptUrl = `${window.location.origin}/static/scripts/api.js`;

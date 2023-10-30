@@ -38,6 +38,7 @@ const icons = {
   plus: <ButtonPlusIcon />,
   minus: <ButtonMinusIcon />,
   refresh: <RefreshIcon />,
+  duplicate: <ButtonDuplicateIcon />,
 };
 
 const FloatingButton = (props) => {
@@ -79,7 +80,7 @@ const FloatingButton = (props) => {
   }, [percent, setAnimationCompleted]);
 
   const iconComponent = useMemo(() => {
-    return icons[icon] ?? <ButtonDuplicateIcon />;
+    return icons[icon] ?? icons.duplicate;
   }, [icon]);
 
   return (

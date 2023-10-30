@@ -226,7 +226,14 @@ const ClientRoutes = [
           },*/
         ],
       },
-
+      {
+        path: "/accounts/view/@self/notification",
+        element: (
+          <PrivateRoute>
+            <Navigate to="/profile/notifications" replace />
+          </PrivateRoute>
+        ),
+      },
       ...generalRoutes,
     ],
   },

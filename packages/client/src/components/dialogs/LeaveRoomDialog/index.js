@@ -56,7 +56,7 @@ const LeaveRoomDialog = (props) => {
       })
         .then(() => {
           if (!isAdmin) {
-            if (isRoot) {
+            if (!isRoot) {
               const filter = RoomsFilter.getDefault();
               navigate(`rooms/shared/filter?${filter.toUrlParams()}`);
             } else {

@@ -12,6 +12,7 @@ const EmbeddingPanelComponent = (props) => {
   const {
     t,
     link,
+    requestToken,
     roomId,
     visible,
     setEmbeddingPanelIsVisible,
@@ -55,7 +56,12 @@ const EmbeddingPanelComponent = (props) => {
           </Heading>
         </div>
         <StyledScrollbar ref={scrollRef} stype="mediumBlack">
-          <EmbeddingBody t={t} link={link} roomId={roomId} />
+          <EmbeddingBody
+            t={t}
+            link={link}
+            requestToken={requestToken}
+            roomId={roomId}
+          />
         </StyledScrollbar>
       </Aside>
     </StyledEmbeddingPanel>
@@ -81,13 +87,15 @@ const EmbeddingPanelComponent = (props) => {
 export default inject(({ dialogsStore, auth }) => {
   const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
     dialogsStore;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     visible: embeddingPanelIsVisible,
     setEmbeddingPanelIsVisible,
     link: linkParams?.link?.sharedTo?.shareLink,
+    requestToken: linkParams?.link?.sharedTo?.requestToken,
     roomId: linkParams?.roomId,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType,
   };
 })(
   withTranslation(["Files", "EmbeddingPanel"])(

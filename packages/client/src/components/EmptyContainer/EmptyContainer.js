@@ -7,16 +7,20 @@ import { classNames } from "@docspace/components/utils/classNames";
 const EmptyFolderWrapper = styled.div`
   .empty-folder_container {
     .empty-folder_container-links {
-      display: grid;
-      grid-template-columns: 12px 1fr;
-      grid-column-gap: 8px;
-
+      display: flex;
       .flex-wrapper_container {
         display: flex;
         flex-wrap: wrap;
         row-gap: 16px;
         column-gap: 8px;
         justify-content: center;
+
+        .first-button {
+          display: flex;
+          .empty-folder_container-icon {
+            margin-right: 8px;
+          }
+        }
       }
     }
 

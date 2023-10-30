@@ -139,7 +139,7 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest(".search-input-block")
+      e.target.closest("#filter_search-input")
     ) {
       setSelection([]);
       setBufferSelection(null);

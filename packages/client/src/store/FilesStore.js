@@ -1919,7 +1919,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig.pdfViewer) {
+      if (!isPdf || !window.DocSpaceConfig.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 

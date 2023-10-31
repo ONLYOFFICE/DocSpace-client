@@ -173,28 +173,13 @@ const Layout = (props) => {
 
         windowHeight -= diff;
 
-        const root = document.getElementById("root");
-        if (!isMobileUtils()) {
-          const article = document.getElementsByTagName("article")[0];
-        }
-
-        root.style.height = `calc(var(--vh,1vh) * 100)`;
-        root.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
-        root.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-
         document.body.style.height = `calc(var(--vh,1vh) * 100)`;
         document.body.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
         document.body.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.top = "0px";
+        document.body.style.bottom = `${diff}px`;
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
       } else {
-        const root = document.getElementById("root");
-
-        root.style.height = `100%`;
-        root.style.maxHeight = `100%`;
-        root.style.minHeight = `100%`;
-
         document.body.style.height = `100%`;
         document.body.style.maxHeight = `100%`;
         document.body.style.minHeight = `100%`;

@@ -61,6 +61,7 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,9 +100,12 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -454,7 +458,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -484,6 +488,7 @@ export default inject(({ auth, common }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

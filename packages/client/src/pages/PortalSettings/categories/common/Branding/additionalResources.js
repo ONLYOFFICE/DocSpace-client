@@ -67,6 +67,7 @@ const AdditionalResources = (props) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -109,9 +110,12 @@ const AdditionalResources = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("additional-resources") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -285,7 +289,7 @@ const AdditionalResources = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
@@ -309,6 +313,7 @@ export default inject(({ auth, common }) => {
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

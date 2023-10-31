@@ -83,6 +83,7 @@ export const StyledInfo = styled.div`
     .profile-block {
       display: flex;
       flex-direction: column;
+      overflow: hidden;
 
       .profile-block-field {
         display: flex;

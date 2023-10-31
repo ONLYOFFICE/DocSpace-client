@@ -12,7 +12,8 @@ import HistoryTableHeader from "./HistoryTableHeader";
 import { useViewEffect } from "@docspace/common/hooks";
 
 const TableWrapper = styled(TableContainer)`
-  margin-top: 0;
+  margin-top: 2px;
+  margin-left: 2px;
 
   .table-container_header {
     position: absolute;

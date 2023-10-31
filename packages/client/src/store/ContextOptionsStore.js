@@ -1392,7 +1392,17 @@ class ContextOptionsStore {
         onLoad: () => this.onLoadPlugins(item),
       });
     }
-    return options;
+
+    const filteredOptions = this.removeSeparatorFirstInList(options);
+    return filteredOptions;
+  };
+
+  removeSeparatorFirstInList = (options) => {
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1")
+    );
+
+    return newOptions;
   };
 
   getGroupContextOptions = (t) => {

@@ -18,7 +18,7 @@ const BarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 24px;
+  margin-top: 25px;
 
   background: ${(props) => (props.theme.isBase ? "#f8f9f9" : "#3D3D3D")};
   border-radius: 3px;

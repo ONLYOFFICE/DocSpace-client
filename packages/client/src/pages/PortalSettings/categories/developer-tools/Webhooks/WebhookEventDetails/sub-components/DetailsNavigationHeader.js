@@ -28,6 +28,14 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
   min-height: 69px;
 
+  @media ${tablet} {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
+  @media ${mobile} {
+    margin-top: -9px;
+  }
+
   .arrow-button {
     margin-inline-end: 18.5px;
 
@@ -36,6 +44,9 @@ const HeaderContainer = styled.div`
       padding-inline: 8px 0;
 
       margin-inline-start: -8px;
+    }
+    @media ${mobile} {
+      margin-inline-end: 13px;
     }
 
     svg {

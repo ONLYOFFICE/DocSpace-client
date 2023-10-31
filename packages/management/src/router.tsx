@@ -5,6 +5,9 @@ import App from "./App";
 
 import Spaces from "./categories/spaces";
 import Branding from "./categories/branding";
+import WhiteLabelPage from "client/WhiteLabelPage";
+import CompanyInfoPage from "client/CompanyInfoPage";
+import AdditionalResPage from "client/AdditionalResPage";
 import Backup from "./categories/backup";
 import Restore from "./categories/restore";
 import Payments from "./categories/payments";
@@ -32,6 +35,19 @@ const routes = [
         path: "branding",
         element: <Branding />,
       },
+      {
+        path: "branding/white-label",
+        element: <WhiteLabelPage />,
+      },
+      {
+        path: "branding/company-info-settings",
+        element: <CompanyInfoPage />,
+      },
+      {
+        path: "branding/additional-resources",
+        element: <AdditionalResPage />,
+      },
+
       {
         path: "backup",
         element: <Navigate to="data-backup" />,

@@ -242,10 +242,12 @@ export function getLogoUrls(headers = null) {
   return request(options);
 }
 
-export function setWhiteLabelSettings(data) {
+export function setWhiteLabelSettings(data, isManagement) {
+  const url = "/settings/whitelabel/save";
+
   const options = {
     method: "post",
-    url: "/settings/whitelabel/save",
+    url: isManagement ? `${url}?isDefault=true` : url,
     data,
   };
 
@@ -259,10 +261,12 @@ export function getIsDefaultWhiteLabel() {
   });
 }
 
-export function restoreWhiteLabelSettings(isDefault) {
+export function restoreWhiteLabelSettings(isDefault, isManagement) {
+  const url = "/settings/whitelabel/restore";
+
   return request({
     method: "put",
-    url: "/settings/whitelabel/restore",
+    url: isManagement ? `${url}?isDefault=true` : url,
     data: { isDefault },
   });
 }

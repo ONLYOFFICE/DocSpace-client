@@ -10,18 +10,22 @@ import { parseDomain } from "SRC_DIR/utils";
 import { TranslationType } from "SRC_DIR/types/spaces";
 
 type TConfigurationSection = {
-  t: TranslationType
-}
+  t: TranslationType;
+};
 
-const ConfigurationSection = ({t}: TConfigurationSection): JSX.Element => {
-
+const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   const [domain, setDomain] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const [portalNameError, setPortalNameError] = React.useState<null | string>(null);
-  const [checkDomainError, setCheckDomainError] = React.useState<null | string>(null);
-  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
+  const [portalNameError, setPortalNameError] = React.useState<null | string>(
+    null
+  );
+  const [checkDomainError, setCheckDomainError] = React.useState<null | string>(
+    null
+  );
+  const [domainNameError, setDomainNameError] =
+    React.useState<null | Array<object>>(null);
 
   const { spacesStore, authStore } = useStore();
   const { checkDomain, setDomainName, setPortalName } = spacesStore;
@@ -29,40 +33,39 @@ const ConfigurationSection = ({t}: TConfigurationSection): JSX.Element => {
   const onConfigurationPortal = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
-      const res = await checkDomain(`${name}.${domain}`).finally(() => setIsLoading(false));
+      const res = await checkDomain(`${name}.${domain}`).finally(() =>
+        setIsLoading(false)
+      );
       const isValidDomain = res?.value;
 
       if (!isValidDomain) {
-        return setCheckDomainError(t("DomainNotFound"))
+        return setCheckDomainError(t("DomainNotFound"));
       }
-
-        
     }
 
     const isValidDomain = parseDomain(domain, setDomainNameError);
-    
+
     if (!isValidDomain) return;
 
     await setPortalName(name)
-    .then(async () => await setDomainName(domain))
-    .catch(err => {
-      setPortalNameError(err?.response?.data?.error?.message);
-    });
+      .then(async () => await setDomainName(domain))
+      .catch((err) => {
+        setPortalNameError(err?.response?.data?.error?.message);
+      });
     await authStore.settingsStore.getAllPortals();
   };
 
   const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkDomainError) setCheckDomainError(null);
-    if (domainNameError)setDomainNameError(null);
+    if (domainNameError) setDomainNameError(null);
     setDomain(e.target.value);
-  }
+  };
 
   const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkDomainError) setCheckDomainError(null);
     if (portalNameError) setPortalNameError(null);
     setName(e.target.value);
-  }
-
+  };
 
   return (
     <ConfigurationWrapper>
@@ -93,27 +96,39 @@ const ConfigurationSection = ({t}: TConfigurationSection): JSX.Element => {
             value={domain}
             placeholder={t("EnterDomain")}
             className="spaces-input"
+            tabIndex={1}
           />
-            <div>
-              {domainNameError && domainNameError.map((err, index) => (
-                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err.message}</Text>
+          <div>
+            {domainNameError &&
+              domainNameError.map((err, index) => (
+                <Text
+                  key={index}
+                  fontSize="12px"
+                  fontWeight="400"
+                  color="#F24724"
+                >
+                  {err.message}
+                </Text>
               ))}
-            </div>
+          </div>
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
             {t("DocSpaceName")}
           </Text>
           <TextInput
-            hasError={!!(portalNameError|| checkDomainError)}
+            hasError={!!(portalNameError || checkDomainError)}
             onChange={onHandleName}
             value={name}
             placeholder={t("Common:EnterName")}
             className="spaces-input"
+            tabIndex={2}
           />
-            <div>
-              <Text fontSize="12px" fontWeight="400" color="#F24724">{portalNameError || checkDomainError}</Text>
-            </div>
+          <div>
+            <Text fontSize="12px" fontWeight="400" color="#F24724">
+              {portalNameError || checkDomainError}
+            </Text>
+          </div>
         </div>
       </div>
 
@@ -124,6 +139,7 @@ const ConfigurationSection = ({t}: TConfigurationSection): JSX.Element => {
         label={t("Common:Connect")}
         onClick={onConfigurationPortal}
         primary={true}
+        tabIndex={3}
       />
     </ConfigurationWrapper>
   );

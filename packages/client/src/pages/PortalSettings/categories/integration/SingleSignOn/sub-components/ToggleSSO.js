@@ -24,11 +24,7 @@ const ToggleSSO = (props) => {
 
   return (
     <>
-      <Text
-        className="intro-text settings_unavailable"
-        lineHeight="20px"
-        noSelect
-      >
+      <Text className="intro-text settings_unavailable" noSelect>
         {t("SsoIntro")}
       </Text>
 

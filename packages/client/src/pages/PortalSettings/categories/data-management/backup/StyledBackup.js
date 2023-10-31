@@ -12,16 +12,12 @@ const TEXT_LENGTH = "700px";
 
 const commonStyles = css`
   .backup_modules-description {
-    margin-bottom: 24px;
-    margin-top: 8px;
+    margin-bottom: 8px;
     max-width: ${TEXT_LENGTH};
-    @media ${mobile} {
-      margin-bottom: 8px;
-    }
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .backup_modules-header_wrapper {
-    display: flex;
     svg {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -31,6 +27,11 @@ const commonStyles = css`
           : css`
               margin: 5px 0px 0px 4px;
             `}
+    }
+    .link-learn-more {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
   }
 
@@ -338,8 +339,9 @@ const StyledRestoreBackup = styled.div`
 
   .restore-description {
     max-width: ${TEXT_LENGTH};
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 13px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
   }
 
   .restore-backup_warning {
@@ -388,7 +390,7 @@ const StyledRestoreBackup = styled.div`
   }
 
   .restore-description {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .restore-backup_modules {
@@ -556,10 +558,6 @@ const StyledBackup = styled.div`
   }
   .layout-progress-bar {
     ${!isMobileOnly && "cursor: default;"}
-  }
-  .backup_modules-description {
-    margin-bottom: 24px;
-    max-width: ${TEXT_LENGTH};
   }
   .backup-section_wrapper {
     margin-bottom: 27px;

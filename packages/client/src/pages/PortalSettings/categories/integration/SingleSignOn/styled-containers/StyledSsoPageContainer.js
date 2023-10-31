@@ -9,7 +9,8 @@ const StyledSsoPage = styled.div`
     width: 100%;
     max-width: 700px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    padding-bottom: 18px;
+    margin-bottom: 20px;
+    line-height: 20px;
   }
 
   .toggle {

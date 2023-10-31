@@ -1,3 +1,5 @@
+//@ts-ignore
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
 
 export interface InputProps {
@@ -45,10 +47,11 @@ export interface ClientFormProps {
   ) => Promise<IClientProps>;
 
   regenerateSecret?: (clientId: string) => Promise<string>;
+
+  currentDeviceType?: string;
 }
 
-export interface PreviewProps {
-  clientId: string;
-  redirectURI: string;
-  scopes: string[];
+export interface ClientStore {
+  auth: { settingsStore: { currentDeviceType: string } };
+  oauthStore: OAuthStoreProps;
 }

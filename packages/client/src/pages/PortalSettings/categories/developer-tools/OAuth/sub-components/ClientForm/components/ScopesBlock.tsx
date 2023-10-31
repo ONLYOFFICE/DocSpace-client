@@ -24,7 +24,7 @@ import {
 interface IScopesBlockProps {
   scopes: IScope[];
   selectedScopes: string[];
-  onAddScope: (scope: string[]) => void;
+  onAddScope: (name: string, scope: string) => void;
   t: any;
 }
 
@@ -82,6 +82,8 @@ const ScopesBlock = ({
 
       setCheckedScopes((val) => val.filter((v) => v !== name));
     }
+
+    onAddScope("scopes", name);
   };
 
   const getRenderedScopeList = () => {

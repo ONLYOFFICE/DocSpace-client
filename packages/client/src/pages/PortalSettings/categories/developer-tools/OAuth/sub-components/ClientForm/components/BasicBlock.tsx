@@ -25,13 +25,6 @@ const BasicBlock = ({
   descriptionValue,
   changeValue,
 }: BasicBlockProps) => {
-  const [value, setValue] = React.useState<{ [key: string]: string }>({
-    name: nameValue,
-    websiteUrl: websiteUrlValue,
-    logo: logoValue,
-    description: descriptionValue,
-  });
-
   const [error, setError] = React.useState({
     name: "",
     websiteUrl: "",
@@ -41,12 +34,6 @@ const BasicBlock = ({
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
-
-    setValue((value) => {
-      value[target.name] = target.value;
-
-      return { ...value };
-    });
 
     changeValue(target.name, target.value);
   };
@@ -62,7 +49,6 @@ const BasicBlock = ({
       reader.onload = () => {
         const result = reader.result as string;
 
-        setValue((v) => ({ ...v, logo: result }));
         changeValue("logo", result);
       };
     }
@@ -76,21 +62,21 @@ const BasicBlock = ({
           label={"App name"}
           name={"name"}
           placeholder={"Enter name"}
-          value={value.name}
+          value={nameValue}
           error={error.name}
           onChange={onChange}
         />
         <InputGroup
           label={"Website URL"}
-          name={"websiteUrl"}
+          name={"website_url"}
           placeholder={"Enter URL"}
-          value={value.websiteUrl}
+          value={websiteUrlValue}
           error={error.websiteUrl}
           onChange={onChange}
         />
         <SelectGroup
           label={"App icon"}
-          value={value.logo}
+          value={logoValue}
           selectLabel={"Select new image"}
           description={"JPG, PNG or SVG, 32x32"}
           onSelect={onSelect}
@@ -99,7 +85,7 @@ const BasicBlock = ({
           label={"Description"}
           name={"description"}
           placeholder={"Enter description"}
-          value={value.description}
+          value={descriptionValue}
           error={error.description}
           onChange={onChange}
         />

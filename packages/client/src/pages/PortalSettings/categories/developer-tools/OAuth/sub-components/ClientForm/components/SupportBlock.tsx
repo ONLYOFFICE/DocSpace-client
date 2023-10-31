@@ -3,8 +3,6 @@ import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
-import TextAreaGroup from "./TextAreaGroup";
-import SelectGroup from "./SelectGroup";
 
 interface SupportBlockProps {
   t: any;
@@ -22,11 +20,6 @@ const SupportBlock = ({
 
   changeValue,
 }: SupportBlockProps) => {
-  const [value, setValue] = React.useState<{ [key: string]: string }>({
-    policyUrl: policyUrlValue,
-    termsUrl: termsUrlValue,
-  });
-
   const [error, setError] = React.useState({
     policyUrl: "",
     termsUrl: "",
@@ -35,22 +28,18 @@ const SupportBlock = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
-    setValue((value) => {
-      value[target.name] = target.value;
-
-      return { ...value };
-    });
+    changeValue(target.name, target.value);
   };
 
   return (
     <StyledBlock>
-      <BlockHeader header={"Basic info"} />
+      <BlockHeader header={"Support & Legal info"} />
       <StyledInputBlock>
         <InputGroup
           label={"Privacy policy URL"}
-          name={"policyUrl"}
+          name={"policy_url"}
           placeholder={"Enter URL"}
-          value={value.policyUrl}
+          value={policyUrlValue}
           error={error.policyUrl}
           onChange={onChange}
           helpButtonText={
@@ -59,9 +48,9 @@ const SupportBlock = ({
         />
         <InputGroup
           label={"Terms of Service URL"}
-          name={"termsUrl"}
+          name={"terms_url"}
           placeholder={"Enter URL"}
-          value={value.termsUrl}
+          value={termsUrlValue}
           error={error.termsUrl}
           onChange={onChange}
           helpButtonText={"Terms of service help"}

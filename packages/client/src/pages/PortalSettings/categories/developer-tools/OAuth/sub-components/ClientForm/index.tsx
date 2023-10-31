@@ -9,18 +9,16 @@ import {
   IScope,
 } from "@docspace/common/utils/oauth/interfaces";
 
-// @ts-ignore
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-
 import BasicBlock from "./components/BasicBlock";
 import ClientBlock from "./components/ClientBlock";
 import SupportBlock from "./components/SupportBlock";
+import OAuthBlock from "./components/OAuthBlock";
+import ScopesBlock from "./components/ScopesBlock";
+import ButtonsBlock from "./components/ButtonsBlock";
 
 import { StyledContainer } from "./ClientForm.styled";
 
-import { ClientFormProps } from "./ClientForm.types";
-import OAuthBlock from "./components/OAuthBlock";
-import ScopesBlock from "./components/ScopesBlock";
+import { ClientFormProps, ClientStore } from "./ClientForm.types";
 
 const ClientForm = ({
   id,
@@ -36,11 +34,15 @@ const ClientForm = ({
   updateClient,
 
   regenerateSecret,
+
+  currentDeviceType,
 }: ClientFormProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isRequestRunning, setIsRequestRunning] =
+    React.useState<boolean>(false);
 
   const [initClient, setInitClient] = React.useState<IClientProps | null>(null);
 
@@ -50,16 +52,16 @@ const ClientForm = ({
     website_url: "",
     description: "",
 
-    redirect_uris: [""],
-    allowed_origins: [""],
-    logout_redirect_uris: [""],
+    redirect_uris: [],
+    allowed_origins: [],
+    logout_redirect_uris: [],
 
     terms_url: "",
     policy_url: "",
 
     authentication_method: "",
 
-    scopes: [""],
+    scopes: [],
   });
 
   const [clientId, setClientId] = React.useState<string>("");
@@ -174,8 +176,19 @@ const ClientForm = ({
     setForm((val) => {
       const newVal = { ...val };
 
-      if (typeof newVal[name as keyof IClientReqDTO]) {
-        typeof newVal[name as keyof IClientReqDTO] === value;
+      if (newVal[name as keyof IClientReqDTO] instanceof Array) {
+        if (newVal[name as keyof IClientReqDTO].includes(value)) {
+          newVal[name as keyof IClientReqDTO] = newVal[
+            name as keyof IClientReqDTO
+            //@ts-ignore
+          ].filter((v: string) => v !== value);
+        } else {
+          //@ts-ignore
+          newVal[name as keyof IClientReqDTO].push(value);
+        }
+      } else {
+        //@ts-ignore
+        newVal[name as keyof IClientReqDTO] = value;
       }
 
       return { ...newVal };
@@ -197,6 +210,7 @@ const ClientForm = ({
   }, [id, scopeList, getScopeList, fetchScopes]);
 
   // React.useEffect(() => {
+
   //   if (id) {
   //     setClientId(id);
   //     if (!client) {
@@ -207,69 +221,58 @@ const ClientForm = ({
   //   }
   // }, [id, client, fetchClient, getClient, setClient]);
 
-  // const compareAndValidate = () => {
-  //   let isValid = false;
+  const compareAndValidate = () => {
+    let isValid = true;
 
-  //   for (let key in form) {
-  //     if (!!form[key] || key === "appIcon" || key === "authenticationMethod") {
-  //       if (initClient) {
-  //         switch (key) {
-  //           case "appName":
-  //             isValid = isValid || initClient.name !== form[key];
+    for (let key in form) {
+      switch (key) {
+        case "name":
+          isValid = isValid && !!form[key];
 
-  //             break;
-  //           case "appIcon":
-  //             isValid = isValid || initClient.name !== form[key];
+          break;
+        case "logo":
+          isValid = isValid && !!form[key];
 
-  //             break;
-  //           case "description":
-  //             isValid = isValid || initClient.description !== form[key];
+          break;
+        case "description":
+          isValid = isValid && !!form[key];
 
-  //             break;
-  //           case "redirectUrl":
-  //             isValid = isValid || initClient.redirectUri !== form[key];
+          break;
+        case "website_url":
+          isValid = isValid && !!form[key];
 
-  //             break;
-  //           case "logoutRedirectUrl":
-  //             isValid = isValid || initClient.logoutRedirectUri !== form[key];
+          break;
+        case "redirect_uris":
+          isValid = isValid && form[key].length > 0;
 
-  //             break;
-  //           case "privacyUrl":
-  //             isValid = isValid || initClient.policyUrl !== form[key];
+          break;
+        case "allowed_origins":
+          isValid = isValid && form[key].length > 0;
 
-  //             break;
+          break;
+        case "logout_redirect_uris":
+          isValid = isValid;
 
-  //           case "termsUrl":
-  //             isValid = isValid || initClient.termsUrl !== form[key];
+          break;
+        case "terms_url":
+          isValid = isValid && !!form[key];
+          break;
+        case "policy_url":
+          isValid = isValid && !!form[key];
+          break;
+        case "authentication_method":
+          isValid = isValid;
+          break;
+        case "scopes":
+          isValid = isValid && form[key].length > 0;
+          break;
+      }
+    }
 
-  //             break;
-  //         }
-  //       }
-  //       isValid = true;
-  //     } else {
-  //       isValid = false;
-  //     }
-  //   }
+    return isValid;
+  };
 
-  //   if (checkedScopes.length > 0) {
-  //     if (initClient) {
-  //       let isSame = checkedScopes.length === initClient?.scopes.length;
-  //       if (isSame) {
-  //         checkedScopes.forEach((scope) => {
-  //           if (!initClient?.scopes.includes(scope)) isSame = false;
-  //         });
-  //       }
-
-  //       isValid = isValid || !isSame;
-  //     }
-  //   } else {
-  //     isValid = false;
-  //   }
-
-  //   return isValid;
-  // };
-
-  // const isValid = compareAndValidate();
+  const isValid = compareAndValidate();
 
   return (
     <StyledContainer>
@@ -292,23 +295,29 @@ const ClientForm = ({
             t={t}
             redirectUrisValue={form.redirect_uris}
             allowedOriginsValue={form.allowed_origins}
-            changeValue={(name: string, value: string) => {
-              console.log(name, value);
-            }}
+            changeValue={onChangeForm}
           />
           <ScopesBlock
             t={t}
             scopes={scopeList || []}
             selectedScopes={[]}
-            onAddScope={() => {}}
+            onAddScope={onChangeForm}
           />
           <SupportBlock
             t={t}
             policyUrlValue={form.policy_url}
             termsUrlValue={form.terms_url}
-            changeValue={(name: string, value: string) => {
-              console.log(name, value);
-            }}
+            changeValue={onChangeForm}
+          />
+          <ButtonsBlock
+            saveLabel={"Save"}
+            cancelLabel={"Cancel"}
+            onSaveClick={() => {}}
+            onCancelClick={() => {}}
+            isRequestRunning={isRequestRunning}
+            saveButtonDisabled={!isValid}
+            cancelButtonDisabled={isRequestRunning}
+            currentDeviceType={currentDeviceType || ""}
           />
         </>
       )}
@@ -317,10 +326,7 @@ const ClientForm = ({
 };
 
 export default inject(
-  (
-    { oauthStore }: { oauthStore: OAuthStoreProps },
-    { id }: ClientFormProps
-  ) => {
+  ({ oauthStore, auth }: ClientStore, { id }: ClientFormProps) => {
     const {
       clientList,
       scopeList,
@@ -334,6 +340,8 @@ export default inject(
       regenerateSecret,
     } = oauthStore;
 
+    const { currentDeviceType } = auth.settingsStore;
+
     const props: ClientFormProps = {
       scopeList,
 
@@ -344,6 +352,7 @@ export default inject(
       updateClient,
 
       regenerateSecret,
+      currentDeviceType,
     };
 
     if (id) {

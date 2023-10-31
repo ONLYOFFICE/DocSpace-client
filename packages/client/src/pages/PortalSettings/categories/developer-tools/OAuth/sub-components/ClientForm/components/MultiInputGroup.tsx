@@ -6,6 +6,8 @@ import InputBlock from "@docspace/components/input-block";
 import HelpButton from "@docspace/components/help-button";
 //@ts-ignore
 import SelectorAddButton from "@docspace/components/selector-add-button";
+//@ts-ignore
+import SelectedItem from "@docspace/components/selected-item";
 
 import {
   StyledChipsContainer,
@@ -21,8 +23,7 @@ interface MultiInputGroupProps {
   placeholder: string;
   currentValue: string[];
 
-  onAdd: (name: string, value: string) => void;
-  onRemove: (name: string, value: string) => void;
+  onAdd: (name: string, value: string, remove?: boolean) => void;
 
   helpButtonText?: string;
 }
@@ -33,7 +34,7 @@ const MultiInputGroup = ({
   placeholder,
   currentValue,
   onAdd,
-  onRemove,
+
   helpButtonText,
 }: MultiInputGroupProps) => {
   const [value, setValue] = React.useState("");
@@ -71,9 +72,23 @@ const MultiInputGroup = ({
           tabIndex={0}
           maxLength={255}
         />
-        <SelectorAddButton />
+        <SelectorAddButton
+          onClick={() => {
+            onAdd(name, value);
+            setValue("");
+          }}
+        />
       </StyledInputRow>
-      <StyledChipsContainer></StyledChipsContainer>
+      <StyledChipsContainer>
+        {currentValue.map((v, index) => (
+          <SelectedItem
+            key={`${v}-${index}`}
+            isInline
+            label={v}
+            onClose={() => onAdd(name, v)}
+          />
+        ))}
+      </StyledChipsContainer>
     </StyledInputGroup>
   );
 };

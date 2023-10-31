@@ -111,64 +111,6 @@ const StyledChipsContainer = styled.div`
   gap: 4px;
 `;
 
-const StyledChips = styled.div`
-  background: #eceef1;
-
-  padding: 6px 8px;
-
-  border-radius: 3px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 8px;
-`;
-
-// const CheckboxGroup = styled.div`
-//   width: 100%;
-//   height: auto;
-
-//   display: flex;
-//   flex-direction: column;
-//   gap: 8px;
-// `;
-
-// const CheckboxRaw = styled.div`
-//   width: 100%;
-//   height: auto;
-
-//   display: flex;
-//   flex-direction: raw;
-//   align-items: center;
-//   gap: 8px;
-
-//   .checkbox {
-//     margin-right: 0px;
-//   }
-// `;
-
-// const CategorySubHeader = styled.div`
-//   margin-top: 8px;
-//   margin-bottom: 8px;
-//   font-size: 15px;
-//   font-style: normal;
-//   font-weight: 600;
-//   line-height: 16px;
-
-//   @media ${tablet} {
-//     &:not(&.copy-window-code) {
-//       margin-bottom: 0;
-//     }
-//   }
-
-//   @media ${hugeMobile} {
-//     &:first-of-type {
-//       margin-top: 0;
-//     }
-//   }
-// `;
-
 const StyledScopesContainer = styled.div`
   width: 100%;
 
@@ -225,6 +167,20 @@ const StyledScopesCheckbox = styled.div`
   }
 `;
 
+const StyledButtonContainer = styled.div`
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 8px;
+
+  @media ${mobile} {
+    width: 100%;
+  }
+`;
+
 export {
   StyledContainer,
   StyledBlock,
@@ -233,8 +189,8 @@ export {
   StyledInputGroup,
   StyledInputRow,
   StyledChipsContainer,
-  StyledChips,
   StyledScopesContainer,
   StyledScopesName,
   StyledScopesCheckbox,
+  StyledButtonContainer,
 };

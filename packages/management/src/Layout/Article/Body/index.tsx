@@ -22,7 +22,7 @@ const ArticleBodyContent = () => {
 
   const { authStore } = useStore();
   const { settingsStore } = authStore;
-  const { toggleArticleOpen } = settingsStore;
+  const { toggleArticleOpen, setIsBurgerLoading } = settingsStore;
 
   const [selectedKey, setSelectedKey] = useState("0");
 
@@ -30,6 +30,7 @@ const ArticleBodyContent = () => {
     const path = location.pathname;
     const item = getItemByLink(path);
     setSelectedKey(item.key);
+    setIsBurgerLoading(false);
   }, []);
 
   const onClickItem = (item: TSettingsTreeItem) => {

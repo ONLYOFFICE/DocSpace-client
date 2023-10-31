@@ -31,8 +31,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
-
-  socketSubscribersId = new Set();
+  inRoom = true;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -68,6 +67,7 @@ class SelectedFolderStore {
       tags: this.tags,
       rootFolderId: this.rootFolderId,
       security: this.security,
+      inRoom: this.inRoom,
     };
   };
 
@@ -103,7 +103,7 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
-    this.socketSubscribersId = new Set();
+    this.inRoom = true;
   };
 
   setParentId = (parentId) => {
@@ -151,14 +151,6 @@ class SelectedFolderStore {
     };
   };
 
-  addSocketSubscribersId = (path) => {
-    this.socketSubscribersId.add(path);
-  };
-
-  deleteSocketSubscribersId = (path) => {
-    this.socketSubscribersId.delete(path);
-  };
-
   setSelectedFolder = (selectedFolder) => {
     const { socketHelper } = this.settingsStore;
 
@@ -167,8 +159,6 @@ class SelectedFolderStore {
         command: "unsubscribe",
         data: { roomParts: `DIR-${this.id}`, individual: true },
       });
-
-      this.deleteSocketSubscribersId(`DIR-${this.id}`);
     }
 
     if (selectedFolder) {
@@ -176,8 +166,6 @@ class SelectedFolderStore {
         command: "subscribe",
         data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
       });
-
-      this.addSocketSubscribersId(`DIR-${selectedFolder.id}`);
     }
 
     if (!selectedFolder) {

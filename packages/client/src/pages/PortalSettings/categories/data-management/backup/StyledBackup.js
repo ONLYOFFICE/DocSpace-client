@@ -10,6 +10,13 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
 
+const floatingButtonStyles = css`
+  .layout-progress-bar {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+  }
+`;
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 8px;
@@ -98,6 +105,9 @@ const commonStyles = css`
 
 const StyledManualBackup = styled.div`
   ${commonStyles}
+
+  ${floatingButtonStyles}
+
   .manual-backup_buttons {
     margin-top: 16px;
     ${(props) =>
@@ -191,6 +201,8 @@ const StyledManualBackup = styled.div`
 
 const StyledAutoBackup = styled.div`
   ${commonStyles}
+
+  ${floatingButtonStyles}
   .auto-backup_third-party-module {
     margin-top: 16px;
     ${(props) =>
@@ -329,6 +341,8 @@ const StyledStoragesModule = styled.div`
 `;
 const StyledRestoreBackup = styled.div`
   ${commonStyles}
+  ${floatingButtonStyles}
+
   .restore-backup_third-party-module {
     margin-top: 16px;
 

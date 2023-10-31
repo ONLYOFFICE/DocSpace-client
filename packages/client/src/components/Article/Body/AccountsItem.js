@@ -2,20 +2,23 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { PageType } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import CatalogItem from "@docspace/components/catalog-item";
 
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const onClickAction = React.useCallback(() => {
     onClick && onClick("accounts");
   }, [onClick]);
 
+  const icon = getCatalogIconUrlByType(PageType.account);
+
   return (
     <CatalogItem
       key="accounts"
       text={t("Accounts")}
-      icon={CatalogAccountsReactSvgUrl}
+      icon={icon}
       showText={showText}
       onClick={onClickAction}
       isActive={isActive}

@@ -1,10 +1,14 @@
 import { Base } from "@docspace/components/themes";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  infoPanelWidth,
+} from "@docspace/components/utils/device";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import { Portal } from "@docspace/components";
 import { DeviceType } from "../../../constants";
@@ -30,7 +34,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
 
 const StyledInfoPanel = styled.div`
   height: 100%;
-  width: 400px;
+  width: ${infoPanelWidth}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -122,7 +126,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   height: 17px;
   z-index: 455;
   path {
-    fill: ${(props) => props.theme.catalog.control.fill};
+    stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 
@@ -160,11 +164,13 @@ const InfoPanel = ({
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
-      id="InfoPanelWrapper">
+      id="InfoPanelWrapper"
+    >
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer
           isRowView={viewAs === "row"}
-          onClick={closeInfoPanel}>
+          onClick={closeInfoPanel}
+        >
           <StyledCrossIcon />
         </StyledControlContainer>
 
@@ -187,7 +193,7 @@ const InfoPanel = ({
 
   return !isVisible ||
     !canDisplay ||
-    anotherDialogOpen ||
+    (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
     : currentDeviceType === DeviceType.mobile

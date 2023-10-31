@@ -51,6 +51,7 @@ const ActiveSessions = ({
   getSessions,
   sessions,
   currentSession,
+  setSessions,
 }) => {
   const [modalData, setModalData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -267,6 +268,7 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
   } = setup;
   return {
     locale,
@@ -282,5 +284,6 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
   };
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

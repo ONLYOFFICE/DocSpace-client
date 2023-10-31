@@ -23,18 +23,20 @@ const OptionsComponent = (props) => {
   return (
     <>
       <div className="empty-folder_container-links">
-        <IconButton
-          data-format="docx"
-          className="empty-folder_container-icon"
-          size={12}
-          onClick={onCreate}
-          iconName={PlusSvgUrl}
-          isFill
-        />
         <Box className="flex-wrapper_container">
-          <Link data-format="docx" onClick={onCreate} {...linkStyles}>
-            {t("Document")},
-          </Link>
+          <div className="first-button">
+            <IconButton
+              data-format="docx"
+              className="empty-folder_container-icon"
+              size={12}
+              onClick={onCreate}
+              iconName={PlusSvgUrl}
+              isFill
+            />
+            <Link data-format="docx" onClick={onCreate} {...linkStyles}>
+              {t("Document")},
+            </Link>
+          </div>
           <Link data-format="xlsx" onClick={onCreate} {...linkStyles}>
             {t("Spreadsheet")},
           </Link>

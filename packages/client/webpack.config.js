@@ -311,6 +311,12 @@ module.exports = (env, argv) => {
           "./src/components/PeopleSelector/sub-components/UserTooltip.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
+        "./WhiteLabelPage":
+          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
+        "./AdditionalResPage":
+          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
+        "./CompanyInfoPage":
+          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
         "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
         "./RestorePage":
           "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",

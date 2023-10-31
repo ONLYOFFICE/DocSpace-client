@@ -201,6 +201,7 @@ const StyledProperties = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  padding-bottom: 20px;
 
   .property {
     width: 100%;

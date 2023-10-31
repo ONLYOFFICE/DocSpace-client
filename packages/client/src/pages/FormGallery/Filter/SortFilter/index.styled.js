@@ -30,8 +30,6 @@ export const SortButton = styled.div`
       bottom: auto;
       min-width: 200px;
       margin-top: 3px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
 
       @media ${mobile} {
         position: absolute;
@@ -39,6 +37,8 @@ export const SortButton = styled.div`
         bottom: 0;
         left: 0;
         top: auto;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
 

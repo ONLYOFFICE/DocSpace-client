@@ -5,9 +5,7 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
-import ComboBox from "@docspace/components/combobox";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import Backdrop from "@docspace/components/backdrop";
 import Text from "@docspace/components/text";
 import { isMobile } from "@docspace/components/utils/device";
 

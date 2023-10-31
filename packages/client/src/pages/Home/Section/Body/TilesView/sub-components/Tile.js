@@ -754,6 +754,7 @@ class Tile extends React.PureComponent {
                 <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                   {renderContext ? (
                     <ContextMenuButton
+                      isFill
                       className="expandButton"
                       directionX="right"
                       getData={getOptions}
@@ -847,6 +848,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX={contextMenuDirection}
                     getData={getOptions}
@@ -927,6 +929,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX="left"
                     getData={getOptions}

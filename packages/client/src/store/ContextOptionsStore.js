@@ -31,6 +31,7 @@ import MuteReactSvgUrl from "PUBLIC_DIR/images/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
@@ -1238,7 +1239,7 @@ class ContextOptionsStore {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopyGeneralLink"),
-        icon: CopyToReactSvgUrl,
+        icon: TabletLinkReactSvgUrl,
         disabled:
           this.treeFoldersStore.isArchiveFolder ||
           (item.roomType !== RoomsType.PublicRoom &&
@@ -1471,7 +1472,17 @@ class ContextOptionsStore {
         onLoad: () => this.onLoadPlugins(item),
       });
     }
-    return options;
+
+    const filteredOptions = this.removeSeparatorFirstInList(options);
+    return filteredOptions;
+  };
+
+  removeSeparatorFirstInList = (options) => {
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1")
+    );
+
+    return newOptions;
   };
 
   getGroupContextOptions = (t) => {

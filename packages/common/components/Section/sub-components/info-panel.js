@@ -8,7 +8,7 @@ import { inject } from "mobx-react";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import { Portal } from "@docspace/components";
 import { DeviceType } from "../../../constants";
@@ -126,7 +126,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   height: 17px;
   z-index: 455;
   path {
-    fill: ${(props) => props.theme.catalog.control.fill};
+    stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 
@@ -193,7 +193,7 @@ const InfoPanel = ({
 
   return !isVisible ||
     !canDisplay ||
-    anotherDialogOpen ||
+    (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
     : currentDeviceType === DeviceType.mobile

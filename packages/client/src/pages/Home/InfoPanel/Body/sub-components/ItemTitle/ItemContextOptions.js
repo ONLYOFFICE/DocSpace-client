@@ -12,6 +12,7 @@ const ItemContextOptions = ({
   getContextOptions,
   getContextOptionActions,
   getUserContextOptions,
+  setBufferSelection,
 
   isUser = false,
   itemTitleRef,
@@ -22,7 +23,7 @@ const ItemContextOptions = ({
 
   const contextMenuRef = useRef();
 
-  const onContextMenu = e => {
+  const onContextMenu = (e) => {
     e.button === 2;
     if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
     contextMenuRef.current.show(e);
@@ -37,20 +38,14 @@ const ItemContextOptions = ({
       t,
       isUser,
       selection,
+      setBufferSelection,
       getContextOptions,
       getContextOptionActions,
       getUserContextOptions,
     });
 
     setContextHelper(contextHelper);
-  }, [
-    t,
-    isUser,
-    selection,
-    getContextOptions,
-    getContextOptionActions,
-    getUserContextOptions,
-  ]);
+  }, [isUser, selection]);
 
   const options = contextHelper?.getItemContextOptions();
 

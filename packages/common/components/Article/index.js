@@ -47,6 +47,7 @@ const Article = ({
   showArticleLoader,
   isAdmin,
   withCustomArticleHeader,
+  hideAlerts,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -208,7 +209,7 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
-              <ArticleAlerts />
+              {!hideAlerts && <ArticleAlerts />}
               {withDevTools && (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}

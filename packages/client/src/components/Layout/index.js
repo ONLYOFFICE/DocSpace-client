@@ -24,12 +24,9 @@ import { inject, observer } from "mobx-react";
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
+
   height: ${(props) =>
     isMobile && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
-  /* height: ${(props) =>
-    (props.isTabletView || isMobileOnly) && !isFirefox
-      ? `${props.contentHeight}px`
-      : "100vh"}; */
 
   #customScrollBar {
     z-index: 0;
@@ -155,18 +152,8 @@ const Layout = (props) => {
       }
 
       if (isMobileUtils() && isAndroid && isChrome) {
-        // height = `calc(100vh - ${correctorMobileChrome}px)`;
         height = `100%`;
       }
-
-      // if (isTablet && isIOS && isSafari) {
-      //   if (
-      //     window.innerHeight < window.innerWidth &&
-      //     window.innerWidth > 1024
-      //   ) {
-      //     height = window.screen.availHeight - correctorTabletSafari;
-      //   }
-      // }
 
       if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
         const diff = window.innerHeight - e.target.height;
@@ -179,13 +166,21 @@ const Layout = (props) => {
         document.body.style.bottom = `${diff}px`;
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
-      } else {
+      } else if (isMobile && isIOS) {
         document.body.style.height = `100%`;
         document.body.style.maxHeight = `100%`;
         document.body.style.minHeight = `100%`;
-        document.body.style.removeProperty("top");
+        document.body.style.removeProperty("bottom");
         document.body.style.removeProperty("position");
         document.body.style.removeProperty("overflow");
+      }
+
+      if (isMobile) {
+        const root = document.getElementById("root");
+
+        root.style.height = `100%`;
+        root.style.maxHeight = `100%`;
+        root.style.minHeight = `100%`;
       }
 
       let vh = windowHeight * 0.01;
@@ -212,6 +207,8 @@ const Layout = (props) => {
       updateHeight();
     }, endTimeout);
   };
+
+  console.log(contentHeight);
 
   return (
     <StyledContainer

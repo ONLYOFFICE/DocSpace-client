@@ -68,7 +68,9 @@ const LanguageFilter = ({
                 isSelected={locale === oformsFilter.locale}
                 icon={flagsIcons?.get(`${convertToCulture(locale)}.react.svg`)}
                 label={
-                  isMobile() && t(`Common:Culture_${convertToCulture(locale)}`)
+                  isMobile()
+                    ? t(`Common:Culture_${convertToCulture(locale)}`)
+                    : undefined
                 }
                 onClick={() => onFilterByLocale(locale)}
                 fillIcon={false}

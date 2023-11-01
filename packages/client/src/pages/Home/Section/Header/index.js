@@ -27,6 +27,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -427,11 +428,23 @@ const SectionHeaderContent = (props) => {
         ];
 
     if (mainButtonItemsList && enablePlugins) {
+      const pluginItems = [];
+
       mainButtonItemsList.forEach((option) => {
-        options.splice(option.value.position, 0, {
+        pluginItems.push({
           key: option.key,
           ...option.value,
         });
+      });
+
+      options.splice(5, 0, {
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
       });
     }
 

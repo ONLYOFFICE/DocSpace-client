@@ -3058,8 +3058,8 @@ const Dark = {
 
   tag: {
     color: white,
-    background: black,
-    hoverBackground: "#333333",
+    background: "#474747",
+    hoverBackground: "#282828",
     disabledBackground: "#858585",
     defaultTagColor: white,
     newTagBackground: "#333333",

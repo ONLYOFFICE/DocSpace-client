@@ -392,6 +392,10 @@ const StyledTableRow = styled.div`
     }
   }
 
+  .table-container_header-settings {
+    justify-self: flex-end;
+  }
+
   .droppable-hover {
     background: ${(props) =>
       props.dragging
@@ -456,7 +460,7 @@ StyledTableCell.defaultProps = {
 
 const StyledTableSettings = styled.div`
   margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("14px 0 0px 2px", theme.interfaceDirection)};
+    getCorrectFourValuesStyle("14px 2px 0px 0px", theme.interfaceDirection)};
   display: inline-block;
   position: relative;
   cursor: pointer;

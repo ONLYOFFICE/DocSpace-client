@@ -405,6 +405,8 @@ export function convertLanguage(key) {
 
 export function convertToCulture(key: string) {
   switch (key) {
+    case "ar":
+      return "ar-SA";
     case "en":
       return "en-US";
     case "el":
@@ -428,26 +430,9 @@ export function convertToCulture(key: string) {
 }
 
 export function convertToLanguage(key: string) {
-  switch (key) {
-    case "en-US":
-      return "en";
-    case "el-GR":
-      return "el";
-    case "hy-AM":
-      return "hy";
-    case "ko-KR":
-      return "ko";
-    case "lo-LA":
-      return "lo";
-    case "pt-BR":
-      return "pt";
-    case "uk-UA":
-      return "uk";
-    case "ja-JP":
-      return "ja";
-    case "zh-CN":
-      return "zh";
-  }
+  const splittedKey = key.split("-");
+  if (splittedKey.length > 1) return splittedKey[0];
+
   return key;
 }
 

@@ -3067,7 +3067,7 @@ const Dark = {
 
   profile: {
     main: {
-      background: "#1f1f1f",
+      background: "#3D3D3D",
       textColor: white,
 
       descriptionTextColor: "#858585",

@@ -78,6 +78,7 @@ const Layout = (props) => {
 
       if (isMobile) {
         window?.visualViewport?.addEventListener("resize", onOrientationChange);
+        window?.visualViewport?.addEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);
       }
 
@@ -110,6 +111,7 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
+    console.log(e);
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);
@@ -160,12 +162,18 @@ const Layout = (props) => {
 
         windowHeight -= diff;
 
-        document.body.style.height = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.bottom = `${diff}px`;
+        document.body.style.height = `${e.target.height + e.target.offsetTop}`;
+        document.body.style.maxHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+        document.body.style.minHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+
+        document.body.style.top = `0px`;
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
+        document.body.style.scroll = `hidden`;
       } else if (isMobile && isIOS) {
         document.body.style.height = `100%`;
         document.body.style.maxHeight = `100%`;
@@ -175,7 +183,7 @@ const Layout = (props) => {
         document.body.style.removeProperty("overflow");
       }
 
-      if (isMobile) {
+      if (isMobile && !isIOS) {
         const root = document.getElementById("root");
 
         root.style.height = `100%`;
@@ -207,8 +215,6 @@ const Layout = (props) => {
       updateHeight();
     }, endTimeout);
   };
-
-  console.log(contentHeight);
 
   return (
     <StyledContainer

@@ -137,7 +137,7 @@ const StyledTitle = styled.div`
   }
 
   @media ${mobile} {
-    width: calc(100vw - 32px);
+    width: calc(100vw - 24px);
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

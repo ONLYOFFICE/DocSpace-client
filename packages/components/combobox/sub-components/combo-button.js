@@ -12,7 +12,6 @@ import {
 
 import Text from "../../text";
 
-
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import Badge from "@docspace/components/badge";
 
@@ -67,6 +66,7 @@ const ComboButton = (props) => {
           isDisabled={isDisabled}
           defaultOption={defaultOption}
           isLoading={isLoading}
+          fillIcon={fillIcon}
         >
           {innerContainer}
         </StyledOptionalItem>
@@ -78,6 +78,7 @@ const ComboButton = (props) => {
           defaultOption={defaultOption}
           isSelected={isSelected}
           isLoading={isLoading}
+          fillIcon={fillIcon}
         >
           <ReactSVG
             src={selectedOption.icon}

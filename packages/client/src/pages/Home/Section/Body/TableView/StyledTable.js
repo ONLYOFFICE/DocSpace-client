@@ -133,7 +133,7 @@ const StyledTableRow = styled(TableRow)`
   .table-container_element-wrapper,
   .table-container_row-loader {
     min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
-
+    border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

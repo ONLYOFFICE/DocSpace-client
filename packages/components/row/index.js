@@ -40,6 +40,7 @@ class Row extends React.Component {
       isRoom,
       withoutBorder,
       contextTitle,
+      isArchive,
     } = this.props;
 
     const { onRowClick, inProgress, mode, onContextClick, ...rest } =
@@ -185,6 +186,7 @@ class Row extends React.Component {
             withBackdrop={true}
             onHide={rowContextClose}
             isRoom={isRoom}
+            isArchive={isArchive}
           ></ContextMenu>
         </StyledOptionButton>
       </StyledRow>

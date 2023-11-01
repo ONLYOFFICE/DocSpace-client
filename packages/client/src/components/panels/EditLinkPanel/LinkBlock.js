@@ -33,11 +33,11 @@ const LinkBlock = (props) => {
         scale
         size="base"
         withBorder
-        isAutoFocussed={false}
+        isAutoFocussed
         className="edit-link_name-input"
         value={linkNameValue}
         onChange={onChangeLinkName}
-        placeholder={t("ExternalLink")}
+        placeholder={t("LinkName")}
         isDisabled={isLoading}
       />
 
@@ -50,7 +50,7 @@ const LinkBlock = (props) => {
           isReadOnly
           className="edit-link_link-input"
           value={linkValue}
-          placeholder={t("ExternalLink")}
+          placeholder={t("LinkName")}
         />
       )}
     </div>

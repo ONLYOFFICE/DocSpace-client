@@ -105,7 +105,7 @@ const CategoryFilterMobile = ({
             <DropDownItem
               isHeader
               withHeaderArrow={!!openedMenuItem}
-              onHeaderArrowClick={onHeaderArrowClick}
+              headerArrowAction={onHeaderArrowClick}
               label={openedMenuItem?.label || t("Categories")}
             />
 

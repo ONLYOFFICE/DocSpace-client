@@ -89,7 +89,7 @@ const Tile = ({
         ) : (
           <ReactSVG
             className="temporary-icon"
-            src={previewSrc}
+            src={previewSrc || ""}
             loading={previewLoader}
           />
         )}

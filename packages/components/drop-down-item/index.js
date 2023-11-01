@@ -18,7 +18,7 @@ const DropDownItem = (props) => {
     isSeparator,
     isHeader,
     withHeaderArrow,
-    onHeaderArrowClick,
+    headerArrowAction,
     label,
     icon,
     children,
@@ -67,7 +67,7 @@ const DropDownItem = (props) => {
       {isHeader && withHeaderArrow && (
         <IconWrapper
           className="drop-down-icon back-arrow"
-          onClick={onHeaderArrowClick}
+          onClick={headerArrowAction}
         >
           <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
         </IconWrapper>
@@ -122,7 +122,7 @@ DropDownItem.propTypes = {
   /** Enables header arrow icon */
   withHeaderArrow: PropTypes.bool,
   /** Sets an action that will be triggered when the header arrow is clicked */
-  onHeaderArrowClick: PropTypes.func,
+  headerArrowAction: PropTypes.func,
   /** Accepts tab-index */
   tabIndex: PropTypes.number,
   /** Dropdown item text */

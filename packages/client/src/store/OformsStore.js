@@ -66,13 +66,15 @@ class OformsStore {
     this.authStore.infoPanelStore.setSelection(gallerySelected);
   };
 
+  setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
+
   fetchOformLocales = async () => {
     const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
     const fetchedLocales = await getOformLocales(url);
     const localeKeys = fetchedLocales.map((locale) =>
       convertToLanguage(locale.code)
     );
-    this.oformLocales = localeKeys;
+    this.setOformLocales(localeKeys);
   };
 
   getOforms = (filter = OformsFilter.getDefault()) => {

@@ -759,7 +759,7 @@ const SectionHeaderContent = (props) => {
         key: "download",
         label: t("Common:Download"),
         onClick: onDownloadAction,
-        disabled: isDisabled,
+        disabled: !isRoom || !security?.Download,
         icon: DownloadReactSvgUrl,
       },
       {

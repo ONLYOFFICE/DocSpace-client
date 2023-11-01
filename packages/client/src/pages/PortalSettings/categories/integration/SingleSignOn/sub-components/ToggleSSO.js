@@ -24,11 +24,7 @@ const ToggleSSO = (props) => {
 
   return (
     <>
-      <Text
-        className="intro-text settings_unavailable"
-        lineHeight="20px"
-        noSelect
-      >
+      <Text className="intro-text settings_unavailable" noSelect>
         {t("SsoIntro")}
       </Text>
 
@@ -64,6 +60,7 @@ const ToggleSSO = (props) => {
               <Badge
                 backgroundColor="#EDC409"
                 label={t("Common:Paid")}
+                fontWeight="700"
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}
               />

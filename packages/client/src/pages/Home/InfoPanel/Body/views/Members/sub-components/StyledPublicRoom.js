@@ -64,8 +64,10 @@ const StyledCrossIcon = styled(CrossReactSvg)`
 
 const LinksBlock = styled.div`
   display: flex;
+  height: 100%;
+  padding-top: 3px;
+  align-items: center;
   justify-content: space-between;
-  padding: 8px 0px 12px 0px;
 
   p {
     color: ${({ theme }) => theme.text.disableColor};
@@ -84,7 +86,7 @@ const StyledLinkRow = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 0px;
+  height: 100%;
   position: relative;
   background: ${(props) => props.theme.backgroundColor};
   z-index: 1;

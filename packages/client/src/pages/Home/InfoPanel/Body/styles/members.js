@@ -67,10 +67,12 @@ const StyledUser = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
+            margin-left: -12px;
             padding-right: 8px;
             margin-right: auto;
           `
         : css`
+            margin-right: -12px;
             padding-left: 8px;
             margin-left: auto;
           `}

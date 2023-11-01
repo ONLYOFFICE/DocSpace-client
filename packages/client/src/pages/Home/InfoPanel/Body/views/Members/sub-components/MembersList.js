@@ -1,16 +1,13 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
+import React, { useState, useCallback, useEffect, useRef, memo } from "react";
 import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
-import { isMobile } from "@docspace/components/utils/device";
-import throttle from "lodash/throttle";
 import Loaders from "@docspace/common/components/Loaders";
 import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { isMobile } from "@docspace/components/utils/device";
 
 const StyledMembersList = styled.div`
-  height: 100vh;
-  height: calc(100vh - 333px);
+  height: 100%;
 `;
 
 const Item = memo(({ data, index, style }) => {
@@ -53,33 +50,44 @@ const MembersList = (props) => {
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
-  const [offsetTop, setOffsetTop] = useState(0);
+  const [bodyHeight, setBodyHeight] = useState(0);
+  const bodyRef = useRef(null);
 
-  const onResize = throttle(() => {
-    const isMobileView = isMobile();
-    setIsMobileView(isMobileView);
-    setOffset();
-  }, 300);
+  const onBodyResize = useCallback(
+    (firstRender = false) => {
+      if (bodyRef && bodyRef.current) {
+        const infoPanelContainer =
+          document.getElementsByClassName("info-panel-scroll");
 
-  const setOffset = () => {
-    const rect = document
-      .getElementById("infoPanelMembersList")
-      ?.getBoundingClientRect();
+        const containerHeight = infoPanelContainer[0]?.clientHeight ?? 0;
+        const offsetTop = bodyRef?.current?.offsetTop ?? 0;
+        const bodyHeight = firstRender
+          ? containerHeight - offsetTop - 2
+          : containerHeight - offsetTop;
 
-    setOffsetTop(Math.ceil(rect?.top) + 2 + "px");
-  };
+        setBodyHeight(bodyHeight);
+      }
+
+      if (isMobile()) {
+        setIsMobileView(true);
+      } else {
+        setIsMobileView(false);
+      }
+    },
+
+    [bodyRef?.current?.offsetHeight]
+  );
 
   useEffect(() => {
-    setOffset();
-  }, [list]);
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-
+    window.addEventListener("resize", onBodyResize);
     return () => {
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", onBodyResize);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    onBodyResize(true);
+  }, []);
 
   const isItemLoaded = useCallback(
     (index) => {
@@ -100,36 +108,34 @@ const MembersList = (props) => {
   );
 
   return (
-    <StyledMembersList id="infoPanelMembersList">
-      <AutoSizer>
-        {({ height, width }) => (
-          <InfiniteLoader
-            isItemLoaded={isItemLoaded}
-            itemCount={hasNextPage ? itemCount + 1 : itemCount}
-            loadMoreItems={loadMoreItems}
-          >
-            {({ onItemsRendered, ref }) => {
-              const listWidth = isMobileView ? width + 16 : width + 20; // for scroll
+    <StyledMembersList ref={bodyRef}>
+      <InfiniteLoader
+        isItemLoaded={isItemLoaded}
+        itemCount={hasNextPage ? itemCount + 1 : itemCount}
+        loadMoreItems={loadMoreItems}
+      >
+        {({ onItemsRendered, ref }) => {
+          const listWidth = isMobileView
+            ? "calc(100% + 16px)"
+            : "calc(100% + 20px)"; // for scroll
 
-              return (
-                <List
-                  direction={interfaceDirection}
-                  ref={ref}
-                  width={listWidth}
-                  height={height}
-                  itemCount={itemsCount}
-                  itemSize={itemSize}
-                  itemData={list}
-                  outerElementType={CustomScrollbarsVirtualList}
-                  onItemsRendered={onItemsRendered}
-                >
-                  {Item}
-                </List>
-              );
-            }}
-          </InfiniteLoader>
-        )}
-      </AutoSizer>
+          return (
+            <List
+              direction={interfaceDirection}
+              ref={ref}
+              width={listWidth}
+              height={bodyHeight}
+              itemCount={itemsCount}
+              itemSize={itemSize}
+              itemData={list}
+              outerElementType={CustomScrollbarsVirtualList}
+              onItemsRendered={onItemsRendered}
+            >
+              {Item}
+            </List>
+          );
+        }}
+      </InfiniteLoader>
     </StyledMembersList>
   );
 };

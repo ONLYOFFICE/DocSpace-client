@@ -379,7 +379,7 @@ const Members = ({
         />
       )}
 
-      <TestInfo
+      <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={membersList.length - headersCount < membersFilter.total}
         itemCount={membersFilter.total + headersCount + publicRoomItems.length}
@@ -415,7 +415,7 @@ const Members = ({
             />
           );
         })}
-      </TestInfo>
+      </MembersList>
     </>
   );
 };

@@ -23,7 +23,7 @@ const StyledGalleryNoThumbnail = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   .no-thumbnail-img {
     height: 96px;
     width: 96px;

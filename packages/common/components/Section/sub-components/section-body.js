@@ -328,7 +328,6 @@ class SectionBody extends React.Component {
       currentDeviceType,
     } = this.props;
 
-    console.log(isFormGallery);
     const focusProps = autoFocus
       ? {
           ref: this.focusRef,

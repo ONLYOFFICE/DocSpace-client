@@ -266,7 +266,7 @@ const Section = (props) => {
               showTwoProgress ? (
                 <div className="progress-bar_container">
                   <FloatingButton
-                    className="layout-progress-bar"
+                    className="1 layout-progress-bar"
                     icon={primaryProgressBarIcon}
                     percent={primaryProgressBarValue}
                     alert={showPrimaryButtonAlert}
@@ -274,7 +274,7 @@ const Section = (props) => {
                     clearUploadedFilesHistory={clearUploadedFilesHistory}
                   />
                   <FloatingButton
-                    className="layout-progress-second-bar"
+                    className="2 layout-progress-second-bar"
                     icon={secondaryProgressBarIcon}
                     percent={secondaryProgressBarValue}
                     alert={showSecondaryButtonAlert}
@@ -284,7 +284,7 @@ const Section = (props) => {
               ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
                 <div className="progress-bar_container">
                   <FloatingButton
-                    className="layout-progress-bar"
+                    className="3 layout-progress-bar"
                     icon={primaryProgressBarIcon}
                     percent={primaryProgressBarValue}
                     alert={showPrimaryButtonAlert}
@@ -295,7 +295,7 @@ const Section = (props) => {
               ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
                 <div className="progress-bar_container">
                   <FloatingButton
-                    className="layout-progress-bar"
+                    className="4 layout-progress-bar"
                     icon={secondaryProgressBarIcon}
                     percent={secondaryProgressBarValue}
                     alert={showSecondaryButtonAlert}

@@ -28,7 +28,6 @@
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
       withSubfolders: true,
-      locale: "en",
     },
     keysForReload: [
       "src",

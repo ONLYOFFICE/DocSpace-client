@@ -835,12 +835,6 @@ class ContextOptionsStore {
       filterUrlParams.folder
     );
 
-    // this.mediaFormViewerDataStore.removeFirstUrl();
-    // this.mediaFormViewerDataStore.setMediaViewerData({
-    //   visible: false,
-    //   id: null,
-    // });
-
     navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
@@ -849,17 +843,6 @@ class ContextOptionsStore {
       )
     );
   };
-
-  // onPreviewOform = (item) => {
-  //   this.mediaFormViewerDataStore.setMediaViewerData({
-  //     visible: true,
-  //     id: item.id,
-  //   });
-  //   this.mediaFormViewerDataStore.saveFirstUrl(
-  //     `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
-  //   );
-  //   this.mediaFormViewerDataStore.changeUrl(item.id);
-  // };
 
   onShowOformTemplateInfo = (item) => {
     this.authStore.infoPanelStore.setIsVisible(true);

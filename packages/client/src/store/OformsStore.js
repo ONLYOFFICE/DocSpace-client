@@ -11,8 +11,9 @@ import {
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
 
-import { convertToLanguage, getCookie } from "@docspace/common/utils";
+import { convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 const myDocumentsFolderId = 2;
 
@@ -54,7 +55,6 @@ class OformsStore {
     (this.currentCategory = currentCategory);
 
   setOformFromFolderId = (oformFromFolderId) => {
-    if (!oformFromFolderId) return;
     this.oformFromFolderId = oformFromFolderId;
   };
 

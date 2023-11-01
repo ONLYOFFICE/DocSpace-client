@@ -113,10 +113,7 @@ const SectionHeaderContent = ({
   }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
-    <StyledContainer
-      className="CONTEATNER"
-      isInfoPanelVisible={isInfoPanelVisible}
-    >
+    <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"

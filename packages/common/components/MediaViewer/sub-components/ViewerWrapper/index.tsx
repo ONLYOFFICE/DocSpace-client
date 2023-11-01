@@ -102,11 +102,11 @@ function ViewerWrapper(props: ViewerWrapperProps) {
     <Viewer
       title={props.title}
       fileUrl={props.fileUrl}
-      isImage={props.isImage}
       isAudio={props.isAudio}
       isVideo={props.isVideo}
       isPdf={props.isPdf}
       visible={props.visible}
+      isImage={props.isImage}
       playlist={props.playlist}
       inactive={props.inactive}
       audioIcon={props.audioIcon}

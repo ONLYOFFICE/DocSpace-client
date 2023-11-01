@@ -140,12 +140,6 @@ export const LinkType = Object.freeze({
   External: 1,
 });
 
-export const OformCategoryType = Object.freeze({
-  Branch: "categories",
-  Type: "types",
-  Compilation: "compilations",
-});
-
 export const SSO_LABEL = "SSO";
 
 export const ARTICLE_ALERTS = Object.freeze({

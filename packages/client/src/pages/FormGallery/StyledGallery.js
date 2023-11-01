@@ -58,7 +58,8 @@ const StyledHeading = styled.div`
   }
 
   @media ${mobile} {
-    margin-left: 12px;
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 12px 0 0 " : "0 0 0 12px"};
     width: 100%;
     max-width: calc(100vw - 68px);
   }
@@ -85,26 +86,25 @@ const StyledHeadline = styled(Headline)`
 
 const StyledNavigationDrodown = styled(ComboBox)`
   width: 12px;
-  margin-left: 4px;
+  margin: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? "0 4px 0 0 " : "0 0 0 4px"};
   box-sizing: border-box;
   background: transparent;
 `;
 
 const StyledSubmitToGalleryButton = styled(Button)`
-  margin-left: auto;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
 
   @media ${mobile} {
     display: none;
   }
-
-  ${(props) =>
-    props.theme.interfaceDirection === "ltr"
-      ? css`
-          margin-left: auto;
-        `
-      : css`
-          margin-right: auto;
-        `}
 `;
 StyledSubmitToGalleryButton.defaultProps = { theme: Base };
 

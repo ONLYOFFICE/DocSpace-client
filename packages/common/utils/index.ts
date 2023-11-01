@@ -25,7 +25,7 @@ import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
 
-// import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/components/utils/cookie";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";
@@ -76,7 +76,6 @@ export function getObjectByLocation(location) {
   if (!location.search || !location.search.length) return null;
 
   const searchUrl = location.search.substring(1);
-  console.log(searchUrl);
   const decodedString = decodeURIComponent(searchUrl)
     .replace(/\["/g, '["')
     .replace(/"\]/g, '"]')
@@ -202,17 +201,6 @@ export const getUserRole = (user) => {
 };
 
 export const combineUrl = combineUrlFunc;
-
-export function getCookie(name) {
-  let matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
-    )
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
 
 export function setCookie(name, value, options = {}) {
   options = {
@@ -440,30 +428,6 @@ export function convertToCulture(key: string) {
 }
 
 export function convertToLanguage(key: string) {
-  switch (key) {
-    case "en-US":
-      return "en";
-    case "el-GR":
-      return "el";
-    case "hy-AM":
-      return "hy";
-    case "ko-KR":
-      return "ko";
-    case "lo-LA":
-      return "lo";
-    case "pt-BR":
-      return "pt";
-    case "uk-UA":
-      return "uk";
-    case "ja-JP":
-      return "ja";
-    case "zh-CN":
-      return "zh";
-  }
-  return key;
-}
-
-export function getLanguageTranslation(t: (key: string) => { ress: string }) {
   switch (key) {
     case "en-US":
       return "en";

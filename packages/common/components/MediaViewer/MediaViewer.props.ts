@@ -1,4 +1,3 @@
-import { NavigateFunction } from "react-router";
 import {
   ContextMenuAction,
   IFile,
@@ -9,8 +8,6 @@ import {
 } from "./types";
 export interface MediaViewerProps {
   t: TranslationType;
-
-  isFormGalleryViewer?: boolean;
 
   userAccess: boolean;
   currentFileId: NumberOrString;
@@ -66,8 +63,6 @@ export interface MediaViewerProps {
   onClickLinkEdit: OmitSecondArg<ContextMenuAction>;
   onPreviewClick: OmitSecondArg<ContextMenuAction>;
   onCopyLink: ContextMenuAction;
-  onClickCreateOform: (navigate: NavigateFunction) => {};
-  onClickSuggestOformChanges: (item: any) => {};
 
   nextMedia: VoidFunction;
   prevMedia: VoidFunction;

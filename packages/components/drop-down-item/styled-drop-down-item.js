@@ -140,6 +140,9 @@ const StyledDropdownItem = styled.div`
 
   .back-arrow {
     cursor: pointer;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   ${({ isHeader, theme }) =>

@@ -188,23 +188,6 @@ const SortButton = ({
   onSortButtonClick,
   title,
 }) => {
-  console.log(
-    id,
-    getSortData(),
-    getSelectedSortData(),
-
-    onChangeViewAs(),
-    view,
-    viewAs,
-    viewSettings,
-
-    onSort,
-    viewSelectorVisible,
-
-    onSortButtonClick(),
-    title
-  );
-
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [sortData, setSortData] = React.useState([]);

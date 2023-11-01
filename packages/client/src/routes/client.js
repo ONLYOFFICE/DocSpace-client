@@ -263,16 +263,6 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/form-gallery/filter",
-    element: (
-      <PrivateRoute>
-        <ErrorBoundary>
-          <FormGallery />
-        </ErrorBoundary>
-      </PrivateRoute>
-    ),
-  },
-  {
     path: "/form-gallery/:fromFolderId/filter",
     element: (
       <PrivateRoute>

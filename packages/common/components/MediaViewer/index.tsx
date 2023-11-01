@@ -22,12 +22,10 @@ import { getFileExtension } from "@docspace/common/utils";
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
-  getOformContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
 
 import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
-import { useNavigate } from "react-router";
 
 function MediaViewer({
   playlistPos,
@@ -37,8 +35,6 @@ function MediaViewer({
   setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
-  const navigate = useNavigate();
-
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
 
   const [title, setTitle] = useState<string>("");
@@ -161,8 +157,6 @@ function MediaViewer({
       onCopyAction,
       onDuplicate,
       onCopyLink,
-      onClickCreateOform,
-      onClickSuggestOformChanges,
     } = props;
 
     if (!targetFile) return [];
@@ -396,10 +390,10 @@ function MediaViewer({
   const audioIcon = useMemo(() => props.getIcon(96, ext), [ext]);
   const headerIcon = useMemo(() => props.getIcon(24, ext), [ext]);
 
-  let canOpen = true;
-  let isImage = false;
   let isVideo = false;
   let isAudio = false;
+  let canOpen = true;
+  let isImage = false;
   let isPdf = false;
 
   const archiveRoom =

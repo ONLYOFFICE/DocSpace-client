@@ -30,7 +30,11 @@ const ItemContextOptions = ({
 }) => {
   if (!selection) return null;
 
+  const [contextHelper, setContextHelper] = useState(null);
   const contextMenuRef = useRef();
+
+  const options = contextHelper?.getItemContextOptions();
+  const getData = () => options;
 
   const onContextMenu = (e) => {
     e.button === 2;
@@ -41,7 +45,7 @@ const ItemContextOptions = ({
 
   useEffect(() => {
     contextMenuRef?.current.hide();
-    const contextHelper = new ContextHelper({
+    const newContextHelper = new ContextHelper({
       t,
       selection,
       isUser,
@@ -49,8 +53,8 @@ const ItemContextOptions = ({
       getContextOptionActions,
       getUserContextOptions,
     });
-    setContextHelper(contextHelper);
-  }, [selection]);
+    setContextHelper(newContextHelper);
+  }, [selection, isUser]);
 
   return (
     <StyledItemContextOptions withLabel={withLabel}>
@@ -81,11 +85,8 @@ const ItemContextOptions = ({
 
 export default inject(({ filesStore, peopleStore, contextOptionsStore }) => {
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const {
-    categoryType,
-    setBufferSelection,
-    getFilesContextOptions: getContextOptions,
-  } = filesStore;
+  const { setBufferSelection, getFilesContextOptions: getContextOptions } =
+    filesStore;
   const { getFilesContextOptions: getContextOptionActions } =
     contextOptionsStore;
   return {
@@ -93,6 +94,5 @@ export default inject(({ filesStore, peopleStore, contextOptionsStore }) => {
     getContextOptions,
     getContextOptionActions,
     getUserContextOptions,
-    categoryType,
   };
 })(observer(ItemContextOptions));

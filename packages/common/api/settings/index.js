@@ -752,15 +752,6 @@ export function getMetadata() {
   return axios.get("/sso/metadata");
 }
 
-export function submitToGallery(url, file, formName, language) {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("formName", formName);
-  formData.append("language", language);
-
-  return axios.post(url, formData);
-}
-
 export function getStorageRegions() {
   const options = {
     method: "get",

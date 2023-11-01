@@ -73,13 +73,10 @@ class MediaViewerDataStore {
     localStorage.removeItem(FirstUrlKey);
   };
 
-  changeUrl = (id, isForm = false, formFromFolderId = 2) => {
+  changeUrl = (id) => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const url = !isForm
-      ? "/products/files/#preview/" + id
-      : `/form-gallery/${formFromFolderId}/#preview/${id}`;
-
+    const url = "/products/files/#preview/" + id;
     window.DocSpace.navigate(url);
   };
 
@@ -221,8 +218,6 @@ class MediaViewerDataStore {
     if (itemsWithoutThumb.length > 0) {
       this.filesStore.createThumbnails(itemsWithoutThumb);
     }
-
-    console.log(playlist);
 
     return playlist;
   }

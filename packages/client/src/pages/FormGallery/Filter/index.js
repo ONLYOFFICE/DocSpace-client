@@ -4,7 +4,7 @@ import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { hugeDesktop, mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 export const StyledFilter = styled.div`
@@ -30,10 +30,6 @@ export const StyledFilter = styled.div`
     align-items: center;
     justify-content: end;
     gap: 8px;
-  }
-
-  @media ${hugeDesktop} {
-    padding-bottom: 5px;
   }
 
   @media ${tablet} {

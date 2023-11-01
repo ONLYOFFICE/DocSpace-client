@@ -1,3 +1,6 @@
+import moment from "moment";
+
 export const convertTime = (date, locale) => {
-  return new Date(date).toLocaleString(locale);
+  console.log(date);
+  return moment(date).locale(locale).format("L, LTS");
 };

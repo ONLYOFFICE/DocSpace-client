@@ -74,7 +74,7 @@ const RoomPassword = (props) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      toastr.error(error);
       setIsLoading(false);
     }
   };

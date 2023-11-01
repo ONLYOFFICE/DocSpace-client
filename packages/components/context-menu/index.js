@@ -382,6 +382,7 @@ class ContextMenu extends Component {
                           <RoomIcon
                             color={this.props.header.color}
                             title={this.props.header.title}
+                            isArchive={this.props.isArchive}
                           />
                         ) : (
                           <img

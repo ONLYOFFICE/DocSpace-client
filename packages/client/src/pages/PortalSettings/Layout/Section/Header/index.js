@@ -317,6 +317,7 @@ const SectionHeaderContent = (props) => {
                 <Badge
                   backgroundColor="#EDC409"
                   label={t("Common:Paid")}
+                  fontWeight="700"
                   className="settings-section_badge"
                   isPaidBadge={true}
                 />

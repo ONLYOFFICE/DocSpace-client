@@ -54,7 +54,7 @@ const StyledRow = styled.div`
         display: ${(props) => (props.checked ? "flex" : "none")};
 
         padding: ${getCorrectFourValuesStyle(
-          "10px 0px 10px 8px",
+          "10px 1px 10px 8px",
           props.theme.interfaceDirection
         )};
         ${props.theme.interfaceDirection === "rtl"

@@ -225,19 +225,9 @@ const StyledAutoBackup = styled.div`
   }
   .backup_toggle-btn {
     position: static;
+    margin-top: 1px;
   }
-  .backup_toggle-btn-description {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 37px;
-          `
-        : css`
-            margin-left: 37px;
-          `}
 
-    max-width: 1024px;
-  }
   .toggle-button-text {
     font-weight: 600;
     margin-bottom: 4px;
@@ -299,31 +289,39 @@ const StyledAutoBackup = styled.div`
           `}
   }
   .backup_toggle-wrapper {
+    display: flex;
     margin-bottom: 16px;
+    border-radius: 6px;
     background-color: ${(props) =>
       props.theme.client.settings.backup.rectangleBackgroundColor};
     padding: 12px;
     max-width: 724px;
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: minmax(100px, 724px);
   }
   .auto-backup_buttons {
     ${!isMobileOnly && "margin-bottom: 24px"}
   }
 
-  .auto-backup_badge {
-    height: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
-    cursor: auto;
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .auto-backup_badge {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 4px;
+              `
+            : css`
+                margin-left: 4px;
+              `}
+        cursor: auto;
+      }
+    }
   }
+
   ${(props) => !props.isEnableAuto && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`

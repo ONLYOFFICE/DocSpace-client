@@ -60,6 +60,7 @@ const ToggleSSO = (props) => {
               <Badge
                 backgroundColor="#EDC409"
                 label={t("Common:Paid")}
+                fontWeight="700"
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}
               />

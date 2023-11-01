@@ -452,27 +452,40 @@ class AutomaticBackup extends React.PureComponent {
           >
             {t("Common:LearnMore")}
           </Link>
-          {!isEnableAuto && (
-            <Badge
-              backgroundColor="#EDC409"
-              label={t("Common:Paid")}
-              className="auto-backup_badge"
-              isPaidBadge={true}
-            />
-          )}
         </div>
 
         <div className="backup_toggle-wrapper">
           <ToggleButton
             className="enable-automatic-backup backup_toggle-btn"
-            label={t("EnableAutomaticBackup")}
             onChange={this.onClickPermissions}
             isChecked={selectedEnableSchedule}
             isDisabled={isLoadingData || !isEnableAuto}
           />
-          <Text className="backup_toggle-btn-description settings_unavailable">
-            {t("EnableAutomaticBackupDescription")}
-          </Text>
+
+          <div className="toggle-caption">
+            <div className="toggle-caption_title">
+              <Text
+                fontWeight={600}
+                lineHeight="20px"
+                noSelect
+                className="settings_unavailable"
+              >
+                {t("EnableAutomaticBackup")}
+              </Text>
+              {!isEnableAuto && (
+                <Badge
+                  backgroundColor="#EDC409"
+                  label={t("Common:Paid")}
+                  fontWeight="700"
+                  className="auto-backup_badge"
+                  isPaidBadge={true}
+                />
+              )}
+            </div>
+            <Text className="backup_toggle-btn-description settings_unavailable">
+              {t("EnableAutomaticBackupDescription")}
+            </Text>
+          </div>
         </div>
         {selectedEnableSchedule && isEnableAuto && (
           <div className="backup_modules">

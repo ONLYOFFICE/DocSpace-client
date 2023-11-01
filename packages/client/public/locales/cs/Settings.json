@@ -29,7 +29,6 @@
   "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru DocSpace.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatická záloha",
-  "AutoBackupDescription": "Použijte tuto možnost pro automatické zálohování prostorových dat.",
   "AutoBackupHelp": "Možnost <strong>Automatického zálohování</strong> se používá pro automatizaci procesu zálohování dat DocSpace, aby je bylo možné později obnovit z místního serveru.",
   "AutoBackupHelpNote": "Vyberte si místo uložení, periodu automatického zálohování a maximální počet uložených kopií.<br/><strong>Poznámka:</strong>před tím, než uložíte svojí zálohu na účet třetí strany (DropBox, Box.com, OneDrive nebo Google Drive), musíte připojit tento účet  ke složce Běžné Dokumenty {{organizationName}}.",
   "AutoSavePeriod": "Doba automatického ukládání",

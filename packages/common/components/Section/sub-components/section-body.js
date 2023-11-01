@@ -144,8 +144,8 @@ const commonStyles = css`
         isFormGallery &&
         css`
           padding: ${theme.interfaceDirection === "rtl"
-            ? "0px 20px 20px 1px"
-            : "0px 1px 20px 20px"} !important;
+            ? "0 16px 20px 0"
+            : "0 0    20px 16px"} !important;
         `}
     }
 

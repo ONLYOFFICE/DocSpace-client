@@ -34,8 +34,6 @@ const Gallery = ({
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
       ?.small?.url;
 
-  console.log(gallerySelected);
-
   const formTitle = gallerySelected?.attributes?.name_form;
 
   return (

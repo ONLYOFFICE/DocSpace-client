@@ -1,13 +1,8 @@
-import Backdrop from "@docspace/components/backdrop";
 import DropDownItem from "@docspace/components/drop-down-item";
 import { mobile } from "@docspace/components/utils/device";
 import styled, { css } from "styled-components";
 import DropDown from "@docspace/components/drop-down";
 import ComboBox from "@docspace/components/combobox";
-
-export const SortBackdrop = styled(Backdrop)`
-  /* position: relative; */
-`;
 
 export const SortButton = styled.div`
   .combo-button {
@@ -58,8 +53,6 @@ export const SortButton = styled.div`
     }
   }
 `;
-
-export const SortDropDown = styled(DropDown)``;
 
 export const SortComboBox = styled(ComboBox)`
   @media ${mobile} {

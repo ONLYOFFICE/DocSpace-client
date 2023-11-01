@@ -66,8 +66,6 @@ const SectionBodyContent = ({
     };
   }, [onMouseDown]);
 
-  // return <Loaders.Tiles foldersCount={0} withTitle={false} />;
-
   return !tReady || !oformFiles ? (
     <Loaders.Tiles foldersCount={0} withTitle={false} />
   ) : !hasGalleryFiles ? (

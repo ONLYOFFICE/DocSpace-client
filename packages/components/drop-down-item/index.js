@@ -14,7 +14,6 @@ import ToggleButton from "../toggle-button";
 import IconButton from "../icon-button";
 
 const DropDownItem = (props) => {
-  //console.log("DropDownItem render");
   const {
     isSeparator,
     isHeader,

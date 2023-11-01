@@ -83,10 +83,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
                   isDescending={oformsFilter.sortOrder === "desc"}
                 >
                   <Text fontWeight={600}>{item.label}</Text>
-                  <SortDesc
-                    // onClick={(e) => onToggleSortOrder(e, item.key)}
-                    className="sortorder-arrow"
-                  />
+                  <SortDesc className="sortorder-arrow" />
                 </Styled.SortDropdownItem>
               ))}
             </>

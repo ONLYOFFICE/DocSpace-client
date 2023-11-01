@@ -3,7 +3,12 @@ import { Base } from "@docspace/components/themes";
 import TileContent from "./sub-components/TileContent";
 import ContextMenu from "@docspace/components/context-menu";
 
-import { tablet, desktop, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  desktop,
+  mobile,
+  mobileMore,
+} from "@docspace/components/utils/device";
 
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
@@ -281,6 +286,10 @@ const StyledGridWrapper = styled.div`
 const StyledTileContainer = styled.div`
   position: relative;
   height: 100%;
+
+  @media ${tablet} {
+    margin-right: 0px !important;
+  }
 
   .tile-item-wrapper {
     position: relative;

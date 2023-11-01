@@ -74,7 +74,7 @@ const FormGallery = ({
           <SectionFilterContent />
         </Section.SectionFilter>
 
-        <Section.SectionBody>
+        <Section.SectionBody isFormGallery>
           <SectionBodyContent />
         </Section.SectionBody>
 

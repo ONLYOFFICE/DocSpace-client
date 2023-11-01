@@ -8,7 +8,12 @@ import { inject, observer } from "mobx-react";
 
 import Scrollbar from "@docspace/components/scrollbar";
 import DragAndDrop from "@docspace/components/drag-and-drop";
-import { tablet, desktop, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  desktop,
+  mobile,
+  mobileMore,
+} from "@docspace/components/utils/device";
 import { DeviceType } from "../../../constants";
 
 const settingsStudioStyles = css`
@@ -132,7 +137,27 @@ const commonStyles = css`
         @media ${tablet} {
           padding-top: 0;
         }
-      `}
+      `};
+
+    @media ${`${mobileMore} and ${tablet}`} {
+      ${({ isFormGallery, theme }) =>
+        isFormGallery &&
+        css`
+          padding: ${theme.interfaceDirection === "rtl"
+            ? "0px 20px 20px 1px"
+            : "0px 1px 20px 20px"} !important;
+        `}
+    }
+
+    @media ${mobile} {
+      ${({ isFormGallery, theme }) =>
+        isFormGallery &&
+        css`
+          padding: ${theme.interfaceDirection === "rtl"
+            ? "0px 16px 16px 16px"
+            : "0px 16px 16px 16px"} !important;
+        `}
+    }
 
     .section-wrapper {
       display: flex;
@@ -196,6 +221,20 @@ const StyledSectionBody = styled.div`
             : css`
                 margin-left: -24px;
               `}
+      }
+    `}
+
+  ${({ isFormGallery }) =>
+    isFormGallery &&
+    css`
+      @media ${tablet} {
+        margin: ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? "0 -16px 0 0 "
+            : "0 0 0 -16px"};
+
+        padding: ${(props) =>
+          props.theme.interfaceDirection === "rtl" ? "0 0 0 0 " : "0 0 0 0"};
       }
     `}
 
@@ -276,6 +315,7 @@ class SectionBody extends React.Component {
   render() {
     //console.log(" SectionBody render" );
     const {
+      isFormGallery,
       autoFocus,
       children,
       onDrop,
@@ -288,6 +328,7 @@ class SectionBody extends React.Component {
       currentDeviceType,
     } = this.props;
 
+    console.log(isFormGallery);
     const focusProps = autoFocus
       ? {
           ref: this.focusRef,
@@ -342,6 +383,7 @@ class SectionBody extends React.Component {
         isLoaded={isLoaded}
         isDesktop={isDesktop}
         settingsStudio={settingsStudio}
+        isFormGallery={isFormGallery}
       >
         {withScroll ? (
           currentDeviceType !== DeviceType.mobile ? (

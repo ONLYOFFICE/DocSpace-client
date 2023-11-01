@@ -208,6 +208,7 @@ const Section = (props) => {
                   }
                   viewAs={viewAs}
                   settingsStudio={settingsStudio}
+                  isFormGallery={isFormGallery}
                 >
                   {isSectionHeaderAvailable &&
                     currentDeviceType !== DeviceType.desktop && (

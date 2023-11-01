@@ -45,8 +45,7 @@ export const MainContainer = styled.div`
       font-weight: 600;
     }
 
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
@@ -79,8 +78,7 @@ export const LearnMoreWrapper = styled.div`
     font-weight: 600;
   }
 
-  p,
-  a {
+  p {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 

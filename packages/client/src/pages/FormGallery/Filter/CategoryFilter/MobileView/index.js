@@ -4,7 +4,6 @@ import DropDownItem from "@docspace/components/drop-down-item";
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import CategorySubList from "./CategorySubList";
 import Scrollbar from "@docspace/components/scrollbar";
 import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 import Backdrop from "@docspace/components/backdrop";

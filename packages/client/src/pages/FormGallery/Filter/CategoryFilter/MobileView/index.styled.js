@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 import DropDown from "@docspace/components/drop-down";
 import DropDownItem from "@docspace/components/drop-down-item";
-import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
 import { Base } from "@docspace/components/themes";
 import { mobile, tablet } from "@docspace/components/utils/device";
 

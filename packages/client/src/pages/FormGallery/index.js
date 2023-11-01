@@ -17,7 +17,6 @@ const FormGallery = ({
   defaultOformLocale,
   fetchOformLocales,
   oformsFilter,
-  setOformsFilter,
   fetchOforms,
   setOformFromFolderId,
 }) => {

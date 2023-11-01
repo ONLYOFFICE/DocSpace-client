@@ -1,7 +1,6 @@
 import DropDownItem from "@docspace/components/drop-down-item";
 import { mobile } from "@docspace/components/utils/device";
 import styled, { css } from "styled-components";
-import DropDown from "@docspace/components/drop-down";
 import ComboBox from "@docspace/components/combobox";
 
 export const SortButton = styled.div`

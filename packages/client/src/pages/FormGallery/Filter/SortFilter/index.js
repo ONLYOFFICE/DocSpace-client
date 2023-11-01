@@ -8,6 +8,7 @@ import IconButton from "@docspace/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import Text from "@docspace/components/text";
 import { isMobile } from "@docspace/components/utils/device";
+import Backdrop from "@docspace/components/backdrop";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
 
   return (
     <>
-      <Styled.SortBackdrop
+      <Backdrop
         visible={isOpen}
         onClick={onToggleCombobox}
         withBackground={isMobile()}

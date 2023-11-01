@@ -315,9 +315,9 @@ const Dark = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -3068,7 +3068,7 @@ const Dark = {
 
   profile: {
     main: {
-      background: "#1f1f1f",
+      background: "#3D3D3D",
       textColor: white,
 
       descriptionTextColor: "#858585",

@@ -27,7 +27,7 @@ const disabledAndHeaderStyle = css`
 const WrapperToggle = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 36px;
 
   & label {

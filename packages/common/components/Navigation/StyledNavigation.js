@@ -116,6 +116,10 @@ const StyledContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    .room-title {
+      cursor: pointer;
+    }
   }
 
   .navigation-header-separator {

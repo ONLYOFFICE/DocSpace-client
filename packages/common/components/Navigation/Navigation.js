@@ -143,7 +143,7 @@ const Navigation = ({
       {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
       <Text
         title={title}
-        isOpen={false}
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
       />
@@ -153,12 +153,22 @@ const Navigation = ({
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
       <Text
+        className="room-title"
         title={
           rootRoomTitle || navigationItems[navigationItems.length - 2].title
         }
-        isOpen={false}
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         isRootFolderTitle
+        onClick={() => {
+          {
+            onClickFolder(
+              navigationItems[navigationItems.length - 2].id,
+              false
+            );
+            setIsOpen(false);
+          }
+        }}
       />
       {navigationTitleNode}
     </div>
@@ -205,6 +215,7 @@ const Navigation = ({
                 burgerLogo={burgerLogo}
                 titleIcon={titleIcon}
                 currentDeviceType={currentDeviceType}
+                navigationTitleContainerNode={navigationTitleContainerNode}
               />
             </>
           )}

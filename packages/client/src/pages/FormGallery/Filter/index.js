@@ -40,7 +40,7 @@ export const StyledFilter = styled.div`
     height: 72px;
 
     flex-direction: ${({ theme }) =>
-      theme.interfaceDirection === "ltl" ? `column-reverse` : `column`};
+      theme.interfaceDirection === "rtl" ? `column` : `column-reverse`};
 
     .form-only-filters {
       width: 100%;

@@ -47,6 +47,7 @@ const Section = (props) => {
     isInfoPanelScrollLocked,
     isEmptyPage,
     isTrashFolder,
+    isFormGallery,
     currentDeviceType,
   } = props;
 
@@ -175,6 +176,7 @@ const Section = (props) => {
                   showText={showText}
                   isEmptyPage={isEmptyPage}
                   isTrashFolder={isTrashFolder}
+                  isFormGallery={isFormGallery}
                 >
                   {sectionHeaderContent
                     ? sectionHeaderContent.props.children
@@ -206,6 +208,7 @@ const Section = (props) => {
                   }
                   viewAs={viewAs}
                   settingsStudio={settingsStudio}
+                  isFormGallery={isFormGallery}
                 >
                   {isSectionHeaderAvailable &&
                     currentDeviceType !== DeviceType.desktop && (
@@ -217,6 +220,7 @@ const Section = (props) => {
                         settingsStudio={settingsStudio}
                         isEmptyPage={isEmptyPage}
                         isTrashFolder={isTrashFolder}
+                        isFormGallery={isFormGallery}
                       >
                         {sectionHeaderContent
                           ? sectionHeaderContent.props.children

@@ -18,6 +18,31 @@ const StyledGalleryThumbnail = styled.div`
   }
 `;
 
-StyledGalleryThumbnail.defaultProps = { theme: Base };
+const StyledGalleryNoThumbnail = styled.div`
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  .no-thumbnail-img {
+    height: 96px;
+    width: 96px;
+  }
+`;
 
-export { StyledGalleryThumbnail };
+const StyledGalleryFormDescription = styled.div`
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: ${(props) => props.theme.infoPanel.gallery.descriptionColor};
+  white-space: pre-line;
+`;
+
+StyledGalleryThumbnail.defaultProps = { theme: Base };
+StyledGalleryFormDescription.defaultProps = { theme: Base };
+
+export {
+  StyledGalleryThumbnail,
+  StyledGalleryNoThumbnail,
+  StyledGalleryFormDescription,
+};

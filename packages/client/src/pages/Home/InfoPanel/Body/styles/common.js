@@ -8,10 +8,10 @@ const StyledInfoPanelBody = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0px 20px 0 3px;
+          padding: 0px 20px 24px 3px;
         `
       : css`
-          padding: 0px 3px 0 20px;
+          padding: 0px 3px 24px 20px;
         `}
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
@@ -110,6 +110,15 @@ const StyledTitle = styled.div`
     -webkit-line-clamp: 2;
   }
 
+  .free-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
+  }
+
   ${(props) =>
     props.withBottomBorder &&
     css`
@@ -164,6 +173,21 @@ const StyledTitle = styled.div`
   }
 `;
 
+const StyledLink = styled.div`
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  a,
+  .link {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 15px;
+  }
+`;
+
 const StyledSubtitle = styled.div`
   display: flex;
   flex-direction: row;
@@ -177,6 +201,7 @@ const StyledProperties = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  padding-bottom: 20px;
 
   .property {
     width: 100%;
@@ -273,4 +298,10 @@ const StyledProperties = styled.div`
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
 
-export { StyledInfoPanelBody, StyledTitle, StyledSubtitle, StyledProperties };
+export {
+  StyledInfoPanelBody,
+  StyledTitle,
+  StyledSubtitle,
+  StyledProperties,
+  StyledLink,
+};

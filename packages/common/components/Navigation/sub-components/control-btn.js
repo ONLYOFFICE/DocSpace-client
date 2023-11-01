@@ -236,7 +236,6 @@ const ControlButtons = ({
               id="header_optional-button"
               zIndex={402}
               className="option-button"
-              directionX="right"
               iconName={VerticalDotsReactSvgUrl}
               size={15}
               isFill

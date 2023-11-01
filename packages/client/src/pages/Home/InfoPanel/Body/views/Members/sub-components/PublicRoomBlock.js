@@ -18,7 +18,7 @@ import { RoomsType } from "@docspace/common/constants";
 import Avatar from "@docspace/components/avatar";
 import copy from "copy-to-clipboard";
 
-const LINKS_LIMIT_COUNT = 10;
+const LINKS_LIMIT_COUNT = 5;
 
 const PublicRoomBlock = (props) => {
   const {

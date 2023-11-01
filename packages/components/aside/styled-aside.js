@@ -13,8 +13,6 @@ const Container = ({
   scale,
   zIndex,
   contentPaddingBottom,
-  asideHeight,
-  keyboardHeight,
   ...props
 }) => <aside {...props} />;
 /* eslint-enable react/prop-types */
@@ -22,10 +20,7 @@ const Container = ({
 
 const StyledAside = styled(Container)`
   background-color: ${(props) => props.theme.aside.backgroundColor};
-  height: ${({ asideHeight, theme }) =>
-    asideHeight ? asideHeight : theme.aside.height};
-  margin-bottom: ${({ keyboardHeight }) =>
-    keyboardHeight ? `${keyboardHeight}px` : 0};
+  height: ${(props) => props.theme.aside.height};
 
   position: fixed;
   top: ${(props) => props.theme.aside.top};
@@ -70,10 +65,7 @@ const StyledAside = styled(Container)`
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: ${({ asideHeight }) =>
-      asideHeight
-        ? `calc(${asideHeight} - ${mobileFooterHeight})`
-        : `calc(100% - ${mobileFooterHeight})`};
+    height: ${`calc(100% - ${mobileFooterHeight})`};
 
     width: 100%;
     max-width: 100%;

@@ -145,7 +145,7 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const isRoot = selection.length || bufferSelection ? false : true;
+    const isRoot = selectedFolderStore.isRootFolder;
 
     return {
       visible,

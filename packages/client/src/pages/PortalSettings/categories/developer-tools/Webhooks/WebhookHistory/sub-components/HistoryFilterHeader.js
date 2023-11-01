@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useTransition, Suspense } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 
@@ -13,18 +13,16 @@ import StatusBar from "./StatusBar";
 
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const ListHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  ${() =>
-    isMobile() &&
-    css`
-      margin-top: 8px;
-    `}
+  @media ${tablet} {
+    margin-top: -4px;
+  }
 `;
 
 const ListHeading = styled(Text)`

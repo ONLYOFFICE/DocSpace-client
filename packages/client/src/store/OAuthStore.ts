@@ -16,6 +16,7 @@ import {
   IClientListProps,
   IClientProps,
   IClientReqDTO,
+  INoAuthClientProps,
   IScope,
 } from "@docspace/common/utils/oauth/interfaces";
 
@@ -41,7 +42,9 @@ export interface OAuthStoreProps {
   editClient: (clientId: string) => void;
 
   clients: IClientProps[];
-  fetchClient: (clientId: string) => Promise<IClientProps | undefined>;
+  fetchClient: (
+    clientId: string
+  ) => Promise<IClientProps | INoAuthClientProps | undefined>;
   fetchClients: () => Promise<void>;
   fetchNextClients: (startIndex: number) => Promise<void>;
 
@@ -56,8 +59,8 @@ export interface OAuthStoreProps {
   deleteClient: (clientId: string) => Promise<void>;
 
   currentPage: number;
-  totalPages: number;
-  totalElements: number;
+  nextPage: number | null;
+  itemCount: number;
 
   selection: string[];
   setSelection: (clientId: string) => void;
@@ -88,9 +91,9 @@ export interface OAuthStoreProps {
 class OAuthStore implements OAuthStoreProps {
   viewAs: ViewAsType = "table";
 
-  currentPage: number = -1;
-  totalPages: number = 0;
-  totalElements: number = 0;
+  currentPage: number = 0;
+  nextPage: number | null = null;
+  itemCount: number = 0;
 
   deleteDialogVisible: boolean = false;
 
@@ -177,12 +180,15 @@ class OAuthStore implements OAuthStoreProps {
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
-        this.totalPages = clientList.totalPages;
-
-        this.totalElements = clientList.totalElements;
         this.clients = clientList.content;
         this.selection = [];
-        this.currentPage = 1;
+        this.currentPage = clientList.page;
+        this.nextPage = clientList.next || null;
+        if (clientList.next) {
+          this.itemCount = clientList.content.length + 2;
+        } else {
+          this.itemCount = clientList.content.length;
+        }
       });
       this.setClientsIsLoading(false);
     } catch (e) {
@@ -192,22 +198,23 @@ class OAuthStore implements OAuthStoreProps {
 
   fetchNextClients = async (startIndex: number) => {
     if (this.clientsIsLoading) return;
+
     this.setClientsIsLoading(true);
 
     const page = startIndex / PAGE_LIMIT;
 
-    console.log(page);
-
     runInAction(() => {
       this.currentPage = page + 1;
     });
-    const clientList: ClientListProps = await getClientList(page, PAGE_LIMIT);
+
+    const clientList: IClientListProps = await getClientList(page, PAGE_LIMIT);
 
     runInAction(() => {
-      this.totalPages = clientList.totalPages;
-
-      this.totalElements = clientList.totalElements;
+      this.currentPage = clientList.page;
+      this.nextPage = clientList.next || null;
       this.clients = [...this.clients, ...clientList.content];
+
+      this.itemCount += clientList.content.length;
     });
 
     this.setClientsIsLoading(false);
@@ -304,7 +311,7 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  getContextMenuItems = (t: any, item: ClientProps) => {
+  getContextMenuItems = (t: any, item: IClientProps) => {
     const { clientId } = item;
 
     const isGroupContext = this.selection.length;
@@ -416,7 +423,7 @@ class OAuthStore implements OAuthStoreProps {
   }
 
   get hasNextPage() {
-    return this.totalPages - this.currentPage !== 0;
+    return !!this.nextPage;
   }
 
   get scopeList() {

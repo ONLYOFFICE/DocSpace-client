@@ -151,7 +151,8 @@ export const onOAuthSubmit = (
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
-  formData.append("scope", scope.join(","));
+  formData.append("scope", "accounts:write");
+  // formData.append("scope", scope.join(","));
 
   return request({
     method: "post",

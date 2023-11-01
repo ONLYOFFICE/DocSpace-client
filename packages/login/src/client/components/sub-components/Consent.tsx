@@ -81,10 +81,22 @@ const Consent = ({ oauth, theme, setIsConsentScreen }: IConsentProps) => {
 
   const onAllowClick = () => {
     const clientId = oauth.clientId;
-    const clientState = oauth.state || getCookie("client_state");
+
+    let clientState = oauth.state;
     const scope = oauth.client.scopes;
 
-    api.oauth.onOAuthSubmit(clientId, clientState, scope);
+    const cookie = document.cookie.split(";");
+
+    if (!clientState) {
+      console.log(document.cookie);
+      cookie.forEach((c) => {
+        if (c.includes("client_state")) clientState = c.split("=")[1];
+      });
+    }
+
+    console.log(clientState);
+
+    // api.oauth.onOAuthSubmit(clientId, clientState, scope);
   };
 
   const onDenyClick = () => {

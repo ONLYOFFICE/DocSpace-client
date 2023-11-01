@@ -5,7 +5,7 @@ import { DeviceType } from "../constants";
 import { Context } from "@docspace/components/utils/context";
 import { isTablet, isMobile } from "@docspace/components/utils/device";
 
-type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
+export type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
 
 type useViewEffectProps = {
   view: string;

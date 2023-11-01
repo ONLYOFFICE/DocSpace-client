@@ -1,12 +1,17 @@
 //@ts-ignore
-import { ClientProps } from "@docspace/common/utils/oauth/dto";
+import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface OAuthProps {
   viewAs: ViewAsType;
-  clientList: ClientProps[];
+  setViewAs: (viewAs: ViewAsType) => void;
+
+  clientList: IClientProps[];
   isEmptyClientList: boolean;
   fetchClients: () => Promise<void>;
+
+  currentDeviceType: DeviceUnionType;
 }

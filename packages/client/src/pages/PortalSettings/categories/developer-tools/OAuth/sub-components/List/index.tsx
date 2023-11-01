@@ -39,11 +39,10 @@ const StyledContainer = styled.div`
 interface ListProps {
   t: any;
   clients: ClientProps[];
-  viewAs?: ViewAsType;
-  setViewAs?: (value: ViewAsType) => void;
+  viewAs: ViewAsType;
 }
 
-const List = ({ t, clients, viewAs, setViewAs }: ListProps) => {
+const List = ({ t, clients, viewAs }: ListProps) => {
   return (
     <StyledContainer>
       <Text
@@ -78,15 +77,11 @@ const List = ({ t, clients, viewAs, setViewAs }: ListProps) => {
           <>
             {viewAs === "table" ? (
               <TableView
-                viewAs={viewAs}
-                setViewAs={setViewAs}
                 items={clients || []}
                 sectionWidth={context.sectionWidth}
               />
             ) : (
               <RowView
-                viewAs={viewAs}
-                setViewAs={setViewAs}
                 items={clients || []}
                 sectionWidth={context.sectionWidth}
               />

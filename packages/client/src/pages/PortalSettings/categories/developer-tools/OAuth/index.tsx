@@ -2,6 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { useViewEffect } from "@docspace/common/hooks";
+
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 //@ts-ignore
@@ -19,7 +21,9 @@ const OAuth = ({
   clientList,
   viewAs,
   isEmptyClientList,
+  setViewAs,
   fetchClients,
+  currentDeviceType,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -45,6 +49,12 @@ const OAuth = ({
     setIsLoading(false);
   }, []);
 
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
+
   React.useEffect(() => {
     startLoadingRef.current = new Date();
     getClientList();
@@ -67,7 +77,18 @@ const OAuth = ({
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
-  const { viewAs, clientList, isEmptyClientList, fetchClients } = oauthStore;
-  return { viewAs, clientList, isEmptyClientList, fetchClients };
-})(observer(OAuth));
+export default inject(
+  ({ oauthStore, auth }: { oauthStore: OAuthStoreProps; auth: any }) => {
+    const { currentDeviceType } = auth.settingsStore;
+    const { viewAs, setViewAs, clientList, isEmptyClientList, fetchClients } =
+      oauthStore;
+    return {
+      viewAs,
+      setViewAs,
+      clientList,
+      isEmptyClientList,
+      fetchClients,
+      currentDeviceType,
+    };
+  }
+)(observer(OAuth));

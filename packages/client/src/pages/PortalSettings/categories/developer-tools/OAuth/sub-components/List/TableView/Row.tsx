@@ -10,6 +10,7 @@ import NameCell from "./columns/name";
 
 import { StyledRowWrapper, StyledTableRow } from "./TableView.styled";
 import { RowProps } from "./TableView.types";
+import CreatorCell from "./columns/creator";
 
 const Row = (props: RowProps) => {
   const {
@@ -65,11 +66,17 @@ const Row = (props: RowProps) => {
           <TableCell className={"table-container_file-name-cell"}>
             <NameCell
               name={item.name}
-              icon={item.logoUrl}
+              icon={item.logo}
               isChecked={isChecked}
               inProgress={inProgress}
               clientId={item.clientId}
               setSelection={setSelection}
+            />
+          </TableCell>
+          <TableCell>
+            <CreatorCell
+              avatar={item.creatorAvatar || ""}
+              displayName={item.creatorDisplayName || ""}
             />
           </TableCell>
           <TableCell>

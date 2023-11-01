@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
 //@ts-ignore
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -19,8 +18,6 @@ const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
 const TableView = ({
   items,
   sectionWidth,
-  viewAs,
-  setViewAs,
   selection,
   activeClients,
   setSelection,
@@ -28,19 +25,10 @@ const TableView = ({
   changeClientStatus,
   userId,
   hasNextPage,
-  totalElements,
+  itemCount,
   fetchNextClients,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (!sectionWidth || !setViewAs) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, viewAs, setViewAs]);
 
   const clickOutside = React.useCallback(
     (e: any) => {
@@ -87,7 +75,7 @@ const TableView = ({
           stopIndex: number;
         }) => fetchNextClients && fetchNextClients(startIndex)}
         hasMoreFiles={hasNextPage}
-        itemCount={totalElements}
+        itemCount={itemCount}
       >
         {items.map((item) => (
           <Row
@@ -109,6 +97,8 @@ export default inject(
   ({ auth, oauthStore }: { auth: any; oauthStore: OAuthStoreProps }) => {
     const { id: userId } = auth.userStore.user;
 
+    const { currentDeviceType } = auth.settingsStore;
+
     const {
       viewAs,
       setViewAs,
@@ -119,7 +109,7 @@ export default inject(
       getContextMenuItems,
       activeClients,
       hasNextPage,
-      totalElements,
+      itemCount,
       fetchNextClients,
     } = oauthStore;
 
@@ -134,8 +124,9 @@ export default inject(
       activeClients,
       getContextMenuItems,
       hasNextPage,
-      totalElements,
+      itemCount,
       fetchNextClients,
+      currentDeviceType,
     };
   }
 )(observer(TableView));

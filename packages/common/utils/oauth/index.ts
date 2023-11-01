@@ -31,6 +31,8 @@ export const transformToClientProps = (
     modified_on,
     website_url,
     allowed_origins,
+    creator_avatar,
+    creator_display_name,
   } = clientDto;
 
   const client: IClientProps = {
@@ -54,6 +56,8 @@ export const transformToClientProps = (
     modifiedOn: modified_on,
     websiteUrl: website_url,
     allowedOrigins: allowed_origins,
+    creatorAvatar: creator_avatar,
+    creatorDisplayName: creator_display_name,
   };
 
   return client;

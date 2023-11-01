@@ -40,12 +40,15 @@ export interface IClientProps {
   enabled: boolean;
   invalidated: boolean;
   scopes: string[];
-  createdOn: Date;
-  modifiedOn: Date;
-  createdBy: string;
-  modifiedBy: string;
   websiteUrl: string;
   allowedOrigins: string[];
+
+  createdOn?: Date;
+  modifiedOn?: Date;
+  createdBy?: string;
+  modifiedBy?: string;
+  creatorAvatar?: string;
+  creatorDisplayName?: string;
 }
 
 export interface IClientReqDTO {
@@ -83,23 +86,30 @@ export interface IClientResDTO {
   enabled: boolean;
   tenant: number;
   invalidated: boolean;
-  created_on: Date;
-  modified_on: Date;
-  created_by: string;
-  modified_by: string;
   website_url: string;
   allowed_origins: string[];
+
+  created_on?: Date;
+  modified_on?: Date;
+  created_by?: string;
+  modified_by?: string;
+  creator_avatar?: string;
+  creator_display_name?: string;
 }
 
 export interface IClientListProps {
   content: IClientProps[];
   page: number;
+  next?: number;
+  previous?: number;
   limit: number;
 }
 
 export interface IClientListDTO {
   data: IClientResDTO[];
   page: number;
+  next?: number;
+  previous?: number;
   limit: number;
 }
 

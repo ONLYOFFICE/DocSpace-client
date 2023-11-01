@@ -1,26 +1,22 @@
-import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
-
-//@ts-ignore
-import { ViewAsType } from "SRC_DIR/store/OAuthStore";
+import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 export interface TableViewProps {
-  items: ClientProps[];
+  items: IClientProps[];
   sectionWidth: number;
-  viewAs?: ViewAsType;
-  setViewAs?: (value: ViewAsType) => void;
+
   userId?: string;
   selection?: string[];
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
     t: any,
-    item: ClientProps
+    item: IClientProps
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
-  bufferSelection?: ClientProps | null;
+  bufferSelection?: IClientProps | null;
   activeClients?: string[];
   hasNextPage?: boolean;
-  totalElements?: number;
+  itemCount?: number;
   fetchNextClients?: (startIndex: number) => Promise<void>;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }
@@ -32,12 +28,12 @@ export interface HeaderProps {
 }
 
 export interface RowProps {
-  item: ClientProps;
+  item: IClientProps;
   isChecked: boolean;
   inProgress: boolean;
   getContextMenuItems?: (
     t: any,
-    item: ClientProps
+    item: IClientProps
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];

@@ -97,6 +97,7 @@ const FilesSelector = ({
   currentDeviceType,
 
   embedded,
+  withHeader,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -117,6 +118,7 @@ const FilesSelector = ({
     id: number | string;
     title: string;
     path?: string[];
+    fileExst?: string;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -222,7 +224,11 @@ const FilesSelector = ({
         getFileList(0, item.id, false, null);
       }
     } else {
-      setSelectedFileInfo({ id: item.id, title: item.title });
+      setSelectedFileInfo({
+        id: item.id,
+        title: item.title,
+        fileExst: item.fileExst,
+      });
     }
   };
 
@@ -466,6 +472,7 @@ const FilesSelector = ({
 
   const SelectorBody = (
     <Selector
+      withHeader={withHeader}
       headerLabel={headerLabel}
       withoutBackButton
       searchPlaceholder={t("Common:Search")}
@@ -549,7 +556,7 @@ const FilesSelector = ({
     </>
   );
 
-  return currentDeviceType === DeviceType.mobile ? (
+  return currentDeviceType === DeviceType.mobile && !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent

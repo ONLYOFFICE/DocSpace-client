@@ -28,6 +28,7 @@ export type Item = {
   isDisabled?: boolean;
   security: Security;
   roomType: number;
+  fileExst?: string;
 };
 
 export type BreadCrumb = {
@@ -208,4 +209,5 @@ export type FilesSelectorProps = {
   currentDeviceType: "mobile" | "tablet" | "desktop";
 
   embedded: boolean;
+  withHeader: boolean;
 };

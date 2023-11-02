@@ -252,9 +252,7 @@ const InviteInput = ({
 
   const foundUsers = usersList.map((user) => getItemContent(user));
 
-  const addEmailPanel = isAddEmailPanelBlocked ? (
-    <></>
-  ) : (
+  const addEmailPanel = (
     <DropDownItem
       className="add-item"
       style={{ width: "inherit" }}
@@ -399,7 +397,11 @@ const InviteInput = ({
           <StyledDropDown
             width={searchRef?.current?.offsetWidth}
             isDefaultMode={false}
-            open={searchPanelVisible}
+            open={
+              !!usersList.length
+                ? searchPanelVisible
+                : searchPanelVisible && !isAddEmailPanelBlocked
+            }
             manualX="16px"
             showDisabledItems
             clickOutsideAction={closeInviteInputPanel}

@@ -8,14 +8,16 @@ import { observer } from "mobx-react";
 import { useStore } from "SRC_DIR/store";
 import ChangeDomainDialog from "./sub-components/dialogs/ChangeDomainDialog";
 import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
+import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
+
 
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { spacesStore, authStore } = useStore();
 
-  const { isConnected, domainDialogVisible, createPortalDialogVisible } =
+  const { isConnected, domainDialogVisible, createPortalDialogVisible, deletePortalDialogVisible } =
     spacesStore;
   const { setDocumentTitle } = authStore;
   const { portals } = authStore.settingsStore;
@@ -29,6 +31,7 @@ const Spaces = () => {
 
   return (
     <SpaceContainer>
+      {deletePortalDialogVisible && <DeletePortalDialog key="delete-portal-dialog" />}
       {domainDialogVisible && <ChangeDomainDialog key="change-domain-dialog" />}
       {createPortalDialogVisible && (
         <CreatePortalDialog key="create-portal-dialog" />

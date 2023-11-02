@@ -1,6 +1,6 @@
 import UploadIcon from "PUBLIC_DIR/images/actions.upload.react.svg";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -81,13 +81,36 @@ const UploadXML = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
   const { enableSso, uploadXmlUrl, isLoadingXml, uploadByUrl, uploadXml } =
     props;
+  const [isValidXmlUrl, setIsValidXmlUrl] = useState(true);
 
   const isDisabledProp = {
-    disabled: !enableSso || uploadXmlUrl.trim().length === 0 || isLoadingXml,
+    disabled:
+      !enableSso ||
+      uploadXmlUrl.trim().length === 0 ||
+      isLoadingXml ||
+      !isValidXmlUrl,
+  };
+
+  const isValidHttpUrl = (url) => {
+    try {
+      const newUrl = new URL(url);
+      return newUrl.protocol === "http:" || newUrl.protocol === "https:";
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const onFocus = () => {
+    setIsValidXmlUrl(true);
   };
 
   const onUploadClick = () => {
-    uploadByUrl(t);
+    if (isValidHttpUrl(uploadXmlUrl)) {
+      setIsValidXmlUrl(true);
+      uploadByUrl(t);
+    } else {
+      setIsValidXmlUrl(false);
+    }
   };
 
   return (
@@ -106,13 +129,18 @@ const UploadXML = (props) => {
             placeholder={t("UploadXMLPlaceholder")}
             tabIndex={1}
             value={uploadXmlUrl}
+            hasError={!isValidXmlUrl}
+            onFocus={onFocus}
           />
 
           <Button
             className="upload-button"
             icon={<StyledUploadIcon {...isDisabledProp} />}
             isDisabled={
-              !enableSso || uploadXmlUrl.trim().length === 0 || isLoadingXml
+              !enableSso ||
+              uploadXmlUrl.trim().length === 0 ||
+              isLoadingXml ||
+              !isValidXmlUrl
             }
             onClick={onUploadClick}
             tabIndex={2}

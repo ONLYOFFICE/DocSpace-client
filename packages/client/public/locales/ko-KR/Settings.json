@@ -29,7 +29,6 @@
   "AuditSubheader": "하위 섹션에서는 사용자가 DocSpace 내의 항목(방, 기회, 파일 등)에 대해 수행한 최신 변경 사항(생성, 수정, 삭제 등) 목록을 검색할 수 있습니다.",
   "AuditTrailNav": "감사 추적",
   "AutoBackup": "자동 백업",
-  "AutoBackupDescription": "DocSpace 데이터 자동 백업에 대해 이 옵션을 사용하세요.",
   "AutoBackupHelp": "<strong>자동 백업</strong> 옵션은 DocSpace 데이터 백업 프로세스를 자동화하여 후에 로컬 서버로 복원할 수 있도록 하는 데 사용됩니다.",
   "AutoBackupHelpNote": "데이터 저장소, 자동 백업 기간, 최대 저장 복사본 수를 선택하세요.<br/><strong>참고:</strong> 백업 데이터를 타사 계정(DropBox, Box.com, OneDrive, Google Drive)에 저장하기 전에 이 계정을 {{organizationName}} 공유 폴더에 연결해야 합니다.",
   "AutoSavePeriod": "자동 저장 기간",

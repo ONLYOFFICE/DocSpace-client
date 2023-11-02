@@ -91,6 +91,10 @@ const CategorySubHeader = styled.div`
 const CategoryDescription = styled(Box)`
   margin-top: 5px;
   max-width: 700px;
+  .sdk-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+  }
 `;
 
 const ControlsGroup = styled(Box)`
@@ -441,7 +445,7 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        {t("SDKDescription")}{" "}
+        <Text className="sdk-description">{t("SDKDescription")}</Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="12px"

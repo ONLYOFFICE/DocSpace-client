@@ -317,9 +317,9 @@ const Base = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -2053,6 +2053,7 @@ const Base = {
 
     gallery: {
       borderColor: "#d0d5da",
+      descriptionColor: "#657077",
     },
   },
 

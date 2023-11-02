@@ -109,7 +109,7 @@ const SocialNetworks = (props) => {
             label={getProviderTranslation(label, t, item.linked)}
             $iconOptions={iconOptions}
             onClick={onClick}
-            size="small"
+            size="base"
             isConnect={item.linked}
           />
         </div>

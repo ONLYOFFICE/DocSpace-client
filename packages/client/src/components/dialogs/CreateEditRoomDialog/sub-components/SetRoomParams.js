@@ -51,11 +51,14 @@ const SetRoomParams = ({
   isDisabled,
   isValidTitle,
   setIsValidTitle,
+  isWrongTitle,
+  setIsWrongTitle,
   onKeyUp,
   enableThirdParty,
   setChangeRoomOwnerIsVisible,
   isAdmin,
   userId,
+  folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
 
@@ -64,6 +67,12 @@ const SetRoomParams = ({
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
+    if (e.target.value.match(folderFormValidation)) {
+      setIsWrongTitle(true);
+      // toastr.warning(t("Files:ContainsSpecCharacter"));
+    } else {
+      setIsWrongTitle(false);
+    }
     setRoomParams({ ...roomParams, title: e.target.value });
   };
 
@@ -112,7 +121,12 @@ const SetRoomParams = ({
         onChange={onChangeName}
         isDisabled={isDisabled}
         isValidTitle={isValidTitle}
-        errorMessage={t("Common:RequiredField")}
+        isWrongTitle={isWrongTitle}
+        errorMessage={
+          isWrongTitle
+            ? t("Files:ContainsSpecCharacter")
+            : t("Common:RequiredField")
+        }
         onKeyUp={onKeyUp}
         isAutoFocussed={true}
       />
@@ -184,7 +198,9 @@ const SetRoomParams = ({
 export default inject(({ auth, dialogsStore }) => {
   const { user } = auth.userStore;
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
+  const { folderFormValidation } = auth.settingsStore;
   return {
+    folderFormValidation,
     setChangeRoomOwnerIsVisible,
     isAdmin: user.isAdmin || user.isOwner,
     userId: user.id,

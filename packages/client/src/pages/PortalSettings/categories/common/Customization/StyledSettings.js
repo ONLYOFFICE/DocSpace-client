@@ -101,8 +101,7 @@ const StyledSettingsComponent = styled.div`
   }
 
   .category-item-description {
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 

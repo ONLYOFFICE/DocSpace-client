@@ -7,57 +7,74 @@
   },
   "tasks": [
     {
-      "label": "Frontend | Start",
+      "label": "Backend | build",
+      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/build.backend.docker.py",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start"
-    },
-    {
-      "label": "Backend  | Build",
-      "type": "shell",
-      "command": "${workspaceFolder}/build/build.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\build.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
       }
     },
     {
-      "label": "Backend  | Start",
+      "label": "Backend | stop",
+      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/stop.backend.docker.py",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/start.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\start.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
       }
     },
     {
-      "label": "Backend  | Restart",
+      "label": "Backend | start",
+      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/start.backend.docker.py",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/restart.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\restart.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
       }
     },
     {
-      "label": "Backend  | Stop",
+      "label": "Backend | restart",
+      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/restart.backend.docker.py",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/stop.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\stop.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
       }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "start-param",
-      "description": "Command",
-      "default": "Start",
-      "type": "pickString",
-      "options": ["Start", "Restart", "Stop"]
     },
     {
-      "id": "local-docker",
-      "description": "Manipulation",
-      "default": "Local",
-      "type": "pickString",
-      "options": ["Local", "Docker"]
+      "label": "Frontend | start",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      }
     }
   ]
 }

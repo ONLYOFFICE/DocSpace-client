@@ -29,7 +29,6 @@ const InfoPanelHeaderContent = (props) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
-    isRootFolder,
     infoPanelItemsList,
     enablePlugins,
   } = props;
@@ -41,7 +40,8 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem = isRootFolder && selection?.isSelectedFolder;
+  const isNoItem =
+    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
@@ -190,7 +190,7 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, selectedFolderStore, pluginStore }) => {
+export default inject(({ auth, pluginStore }) => {
   const { infoPanelItemsList } = pluginStore;
 
   const {
@@ -209,11 +209,6 @@ export default inject(({ auth, selectedFolderStore, pluginStore }) => {
 
   const { enablePlugins } = auth.settingsStore;
 
-  const {
-    isRootFolder,
-    // rootFolderType
-  } = selectedFolderStore;
-
   return {
     selection,
     setIsVisible,
@@ -225,8 +220,6 @@ export default inject(({ auth, selectedFolderStore, pluginStore }) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
-
-    isRootFolder,
 
     infoPanelItemsList,
     enablePlugins,

@@ -90,7 +90,10 @@ class ContextHelper {
       );
     }
 
-    if (this.selection.isSelectedFolder)
+    if (
+      this.selection.isSelectedFolder &&
+      this.selection.id !== this.selection.rootFolderId
+    )
       this.setBufferSelection(this.selection);
     return this.getContextOptionActions(this.selection, this.t, true);
   };

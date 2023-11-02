@@ -92,10 +92,7 @@ class InfoPanelStore {
   // Selection helpers //
 
   getSelectedItems = () => {
-    const {
-      selection: filesStoreSelection,
-      bufferSelection: filesStoreBufferSelection,
-    } = this.filesStore;
+    const { selection: filesStoreSelection } = this.filesStore;
 
     const {
       selection: peopleStoreSelection,
@@ -110,13 +107,12 @@ class InfoPanelStore {
         : []
       : filesStoreSelection?.length > 0
       ? [...filesStoreSelection]
-      : filesStoreBufferSelection
-      ? [filesStoreBufferSelection]
       : [];
   };
 
   getSelectedFolder = () => {
     const selectedFolderStore = { ...this.selectedFolderStore };
+
     return {
       ...selectedFolderStore,
       isFolder: true,

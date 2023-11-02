@@ -55,8 +55,9 @@ const ItemContextOptions = ({
       getContextOptionActions,
       getUserContextOptions,
     });
+
     setContextHelper(newContextHelper);
-  }, [selection, isUser]);
+  }, [selection]);
 
   return (
     <StyledItemContextOptions withLabel={withLabel}>

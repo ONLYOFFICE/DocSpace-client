@@ -35,12 +35,10 @@ const InfoPanelBodyContent = ({
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
-  const isNoItem = isGallery
-    ? !gallerySelected
-    : (!selection?.title && !isSeveralItems && !isAccounts) ||
-      ((isRootFolder || isAccounts) &&
-        selection?.isSelectedFolder &&
-        !selection?.wasContextMenuSelection);
+  const isNoItemGallery = isGallery && !gallerySelected;
+  const itemIsRoot =
+    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isNoItem = !isSeveralItems && (isNoItemGallery || itemIsRoot);
 
   const defaultProps = {
     selection,
@@ -48,7 +46,7 @@ const InfoPanelBodyContent = ({
     isRooms,
     isAccounts,
     isGallery,
-    isRootFolder,
+    isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
   };
 

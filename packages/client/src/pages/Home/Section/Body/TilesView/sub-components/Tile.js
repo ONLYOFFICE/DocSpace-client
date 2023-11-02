@@ -421,10 +421,10 @@ const StyledOptionButton = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 8px 8px 8px 21px;
+            padding: 8px 12px 8px 21px;
           `
         : css`
-            padding: 8px 21px 8px 8px;
+            padding: 8px 21px 8px 12px;
           `}
   }
 `;

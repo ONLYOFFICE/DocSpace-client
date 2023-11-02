@@ -41,11 +41,11 @@ const contextCss = css`
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
-          padding-left: 18px;
+          padding-left: 20px;
         `
       : css`
           margin-right: -20px;
-          padding-right: 18px;
+          padding-right: 20px;
         `}
 
   ${marginCss}

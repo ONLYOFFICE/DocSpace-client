@@ -1,4 +1,3 @@
-import React from "react";
 import Tile from "./sub-components/Tile";
 import { SimpleFilesTileContent } from "./StyledTileView";
 import Link from "@docspace/components/link";

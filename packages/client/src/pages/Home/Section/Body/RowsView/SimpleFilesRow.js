@@ -450,6 +450,7 @@ const SimpleFilesRow = (props) => {
           getContextModel={getContextModel}
           showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
+          isArchive={item.isArchive}
           isDragOver={isDragOver}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}

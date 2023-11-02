@@ -27,7 +27,7 @@ const disabledAndHeaderStyle = css`
 const WrapperToggle = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 36px;
 
   & label {
@@ -101,6 +101,7 @@ const StyledDropdownItem = styled.div`
   &:hover {
     ${(props) =>
       !props.noHover &&
+      !props.isHeader &&
       css`
         background-color: ${(props) =>
           props.theme.dropDownItem.hoverBackgroundColor};
@@ -114,8 +115,11 @@ const StyledDropdownItem = styled.div`
   }
 
   &:active {
-    background-color: ${(props) =>
-      props.theme.dropDownItem.hoverBackgroundColor};
+    ${({ isHeader, theme }) =>
+      !isHeader &&
+      css`
+        background-color: ${theme.dropDownItem.hoverBackgroundColor};
+      `}
   }
 
   ${(props) =>
@@ -134,13 +138,28 @@ const StyledDropdownItem = styled.div`
       }
     `}
 
-  ${(props) =>
-    props.isHeader &&
-    css`
-      ${disabledAndHeaderStyle}
+  .back-arrow {
+    cursor: pointer;
 
-      text-transform: uppercase;
-      break-before: column;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+  }
+
+  ${({ isHeader, theme }) =>
+    isHeader &&
+    css`
+      align-items: center;
+      height: 48px;
+      padding: 13px 16px 18.2px 16px;
+      margin: 0 0 6px 0;
+      border-bottom: ${theme.dropDownItem.separator.borderBottom};
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 16px !important;
+      cursor: default;
+      &:hover {
+        background-color: none !important;
+      }
     `}
 
   @media ${tablet} {

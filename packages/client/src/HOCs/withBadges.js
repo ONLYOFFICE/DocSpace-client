@@ -71,6 +71,19 @@ export default function withBadges(WrappedComponent) {
       });
     };
 
+    onUnmuteClick = (e) => {
+      const { t, setMuteAction } = this.props;
+      const elem = e.target.closest(".is-mute");
+      const data = elem.dataset;
+      const { id, rootfolderid } = data;
+      
+      setMuteAction(
+        "unmute",
+        { id, rootFolderId: rootfolderid, new: data.new },
+        t
+      );
+    };
+
     setConvertDialogVisible = () => {
       this.props.setConvertItem(this.props.item);
       this.props.setConvertDialogVisible(true);
@@ -133,6 +146,7 @@ export default function withBadges(WrappedComponent) {
           onShowVersionHistory={this.onShowVersionHistory}
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
+          onUnmuteClick={this.onUnmuteClick}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
@@ -167,7 +181,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
       } = treeFoldersStore;
-      const { markAsRead, setPinAction } = filesActionsStore;
+      const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
@@ -200,6 +214,7 @@ export default function withBadges(WrappedComponent) {
         setConvertItem,
         isDesktopClient,
         setPinAction,
+        setMuteAction,
         isMutedBadge,
         getPrimaryLink,
         isArchiveFolder,

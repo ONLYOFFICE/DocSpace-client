@@ -35,7 +35,8 @@ const Item = memo(({ data, index, style }) => {
 const itemSize = 48;
 
 const MembersList = (props) => {
-  const { hasNextPage, itemCount, loadNextPage, children } = props;
+  const { hasNextPage, itemCount, loadNextPage, showPublicRoomBar, children } =
+    props;
 
   const list = [];
 
@@ -53,30 +54,25 @@ const MembersList = (props) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const bodyRef = useRef(null);
 
-  const onBodyResize = useCallback(
-    (firstRender = false) => {
-      if (bodyRef && bodyRef.current) {
-        const infoPanelContainer =
-          document.getElementsByClassName("info-panel-scroll");
+  const onBodyResize = useCallback(() => {
+    if (bodyRef && bodyRef.current) {
+      const infoPanelContainer =
+        document.getElementsByClassName("info-panel-scroll");
 
-        const containerHeight = infoPanelContainer[0]?.clientHeight ?? 0;
-        const offsetTop = bodyRef?.current?.offsetTop ?? 0;
-        const bodyHeight = firstRender
-          ? containerHeight - offsetTop - 2
-          : containerHeight - offsetTop;
+      const containerHeight = infoPanelContainer[0]?.clientHeight ?? 0;
+      const offsetTop = bodyRef?.current?.offsetTop ?? 0;
+      const containerMargin = 2;
+      const bodyHeight = containerHeight - offsetTop - containerMargin;
 
-        setBodyHeight(bodyHeight);
-      }
+      setBodyHeight(bodyHeight);
+    }
 
-      if (isMobile()) {
-        setIsMobileView(true);
-      } else {
-        setIsMobileView(false);
-      }
-    },
-
-    [bodyRef?.current?.offsetHeight]
-  );
+    if (isMobile()) {
+      setIsMobileView(true);
+    } else {
+      setIsMobileView(false);
+    }
+  }, [bodyRef?.current?.offsetHeight]);
 
   useEffect(() => {
     window.addEventListener("resize", onBodyResize);
@@ -86,8 +82,8 @@ const MembersList = (props) => {
   }, []);
 
   useEffect(() => {
-    onBodyResize(true);
-  }, []);
+    onBodyResize();
+  }, [showPublicRoomBar, list.length]);
 
   const isItemLoaded = useCallback(
     (index) => {

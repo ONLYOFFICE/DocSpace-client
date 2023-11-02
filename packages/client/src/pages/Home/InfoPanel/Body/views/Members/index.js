@@ -64,7 +64,6 @@ const Members = ({
   setLinkParams,
   setEditLinkPanelIsVisible,
   getPrimaryLink,
-  roomId,
   setExternalLink,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -252,7 +251,7 @@ const Members = ({
       setLinkParams({ isEdit: false });
       setEditLinkPanelIsVisible(true);
     } else {
-      getPrimaryLink(roomId).then((link) => {
+      getPrimaryLink(selectionParentRoom.id).then((link) => {
         setExternalLink(link);
         copy(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -370,9 +369,11 @@ const Members = ({
     }
   }
 
+  const showPublicRoomBar = (primaryLink && !isArchiveFolder) || isPublicRoom;
+
   return (
     <>
-      {((primaryLink && !isArchiveFolder) || isPublicRoom) && (
+      {showPublicRoomBar && (
         <PublicRoomBar
           headerText={t("Files:RoomAvailableViaExternalLink")}
           bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
@@ -383,6 +384,7 @@ const Members = ({
         loadNextPage={loadNextPage}
         hasNextPage={membersList.length - headersCount < membersFilter.total}
         itemCount={membersFilter.total + headersCount + publicRoomItems.length}
+        showPublicRoomBar={showPublicRoomBar}
       >
         {publicRoomItems}
         {membersList.map((user) => {

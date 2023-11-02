@@ -9,7 +9,6 @@ import Button from "@docspace/components/button";
 import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
 import ToggleButton from "@docspace/components/toggle-button";
-import { isMobileOnly, isTablet } from "react-device-detect";
 import { mobile } from "@docspace/components/utils/device";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
@@ -75,9 +74,7 @@ const StyledInvitePanel = styled.div`
       css`
         .trackYVisible {
           .scroller {
-            margin-right: ${isMobileOnly || isTablet
-              ? `-20px !important`
-              : `-17px !important`};
+            margin-right: -20px !important;
           }
         }
       `}

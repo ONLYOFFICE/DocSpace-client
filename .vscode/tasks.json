@@ -1,14 +1,10 @@
 {
   "version": "2.0.0",
   "problemMatcher": [],
-  "presentation": {
-    "focus": true,
-    "close": true
-  },
   "tasks": [
     {
-      "label": "Backend | build",
-      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/build.backend.docker.py",
+      "label": "Backend | build EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -17,12 +13,43 @@
       "presentation": {
         "reveal": "always",
         "panel": "new",
-        "focus": true
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build CE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build SAAS",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
       "label": "Backend | clear",
-      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/clear.backend.docker.py",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/clear.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -31,12 +58,13 @@
       "presentation": {
         "reveal": "always",
         "panel": "new",
-        "focus": true
+        "focus": true,
+        "close": false
       }
     },
     {
       "label": "Backend | stop",
-      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/stop.backend.docker.py",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/stop.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -45,12 +73,13 @@
       "presentation": {
         "reveal": "always",
         "panel": "new",
-        "focus": true
+        "focus": true,
+        "close": false
       }
     },
     {
       "label": "Backend | start",
-      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/start.backend.docker.py",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/start.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -59,7 +88,8 @@
       "presentation": {
         "reveal": "always",
         "panel": "new",
-        "focus": true
+        "focus": true,
+        "close": false
       }
     },
     {
@@ -73,7 +103,8 @@
       "presentation": {
         "reveal": "always",
         "panel": "new",
-        "focus": true
+        "focus": true,
+        "close": true
       }
     }
   ]

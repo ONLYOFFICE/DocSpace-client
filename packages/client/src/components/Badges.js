@@ -96,6 +96,7 @@ const Badges = ({
   const showEditBadge = !locked || item.access === 0;
   const isPrivacy = isPrivacyFolder && isDesktopClient;
   const isForm = fileExst === ".oform";
+  const isPdf = fileExst === ".pdf";
   const isTile = viewAs === "tile";
 
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
@@ -162,7 +163,7 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {isEditing && !isVisitor && (
+      {isEditing && !isVisitor && !isPdf && (
         <ColorTheme
           themeId={ThemeType.IconButton}
           isEditing={isEditing}

@@ -3,6 +3,13 @@ import { isMobileOnly } from "react-device-detect";
 
 import { Base } from "@docspace/components/themes";
 
+const StyledEmptyContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+`;
+
 const StyledContainer = styled.div`
   width: 100%;
   max-width: 700px;
@@ -108,6 +115,7 @@ const StyledPluginHeader = styled.div`
 `;
 
 export {
+  StyledEmptyContainer,
   StyledContainer,
   PluginListContainer,
   StyledPluginItem,

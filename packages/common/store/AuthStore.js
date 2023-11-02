@@ -124,10 +124,7 @@ class AuthStore {
 
       if (!this.settingsStore.passwordSettings) {
         if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(
-            this.settingsStore.getPortalPasswordSettings(),
-            this.settingsStore.getCompanyInfoSettings()
-          );
+          requests.push(this.settingsStore.getCompanyInfoSettings());
         }
       }
     }
@@ -430,41 +427,6 @@ class AuthStore {
 
   setCapabilities = (capabilities) => {
     this.capabilities = capabilities;
-  };
-
-  getOforms = (filter) => {
-    const culture =
-      this.userStore.user.cultureName || this.settingsStore.culture;
-
-    const formName = "&fields[0]=name_form";
-    const updatedAt = "&fields[1]=updatedAt";
-    const size = "&fields[2]=file_size";
-    const filePages = "&fields[3]=file_pages";
-    const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
-    const templateImage = "&populate[template_image][fields][5]=formats";
-
-    const fields = `${formName}${updatedAt}${size}${filePages}${cardPrewiew}${templateImage}`;
-
-    const params = `?${filter.toUrlParams()}${fields}`;
-
-    const promise = new Promise(async (resolve, reject) => {
-      let oforms = await api.oforms.getOforms(
-        combineUrl(
-          this.settingsStore.formGallery.url,
-          `${params}&locale=${culture}`
-        )
-      );
-
-      if (!oforms?.data?.data.length) {
-        oforms = await api.oforms.getOforms(
-          combineUrl(this.settingsStore.formGallery.url, `${params}&locale=en`)
-        );
-      }
-
-      resolve(oforms);
-    });
-
-    return promise;
   };
 
   getAuthProviders = async () => {

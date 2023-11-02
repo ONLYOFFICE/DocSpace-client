@@ -22,7 +22,7 @@ const PreparationPortalDialog = (props) => {
       <ModalDialog.Header>{t("PortalRestoring")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>
-          <PreparationPortal withoutHeader style={{ padding: "0" }} />
+          <PreparationPortal withoutHeader style={{ padding: "0" }} isDialog />
         </StyledPreparationPortalDialog>
       </ModalDialog.Body>
     </ModalDialog>

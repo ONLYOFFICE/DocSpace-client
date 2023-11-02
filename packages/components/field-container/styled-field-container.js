@@ -6,7 +6,8 @@ function getHorizontalCss(labelWidth) {
     display: flex;
     flex-direction: row;
     align-items: start;
-    margin: ${(props) => props.theme.fieldContainer.horizontal.margin};
+    margin: ${(props) =>
+      props.removeMargin ? 0 : props.theme.fieldContainer.horizontal.margin};
 
     .field-label {
       line-height: ${(props) =>
@@ -45,7 +46,8 @@ function getVerticalCss() {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: ${(props) => props.theme.fieldContainer.vertical.margin};
+    margin: ${(props) =>
+      props.removeMargin ? 0 : props.theme.fieldContainer.vertical.margin};
 
     .field-label {
       line-height: ${(props) =>

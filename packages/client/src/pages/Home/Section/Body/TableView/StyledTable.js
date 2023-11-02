@@ -11,7 +11,7 @@ const hotkeyBorderStyle = css`
 `;
 
 const rowCheckboxDraggingStyle = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: -20px;
@@ -24,12 +24,12 @@ const rowCheckboxDraggingStyle = css`
 
   border-bottom: 1px solid;
   border-image-slice: 1;
-  border-image-source: ${props => `linear-gradient(to right, 
+  border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
 `;
 
 const contextMenuWrapperDraggingStyle = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
@@ -42,12 +42,12 @@ const contextMenuWrapperDraggingStyle = css`
 
   border-bottom: 1px solid;
   border-image-slice: 1;
-  border-image-source: ${props => `linear-gradient(to left,
+  border-image-source: ${(props) => `linear-gradient(to left,
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
 `;
 
 const StyledTableRow = styled(TableRow)`
-  ${props =>
+  ${(props) =>
     props.isRoom &&
     css`
       .table-container_cell {
@@ -55,26 +55,26 @@ const StyledTableRow = styled(TableRow)`
         max-height: 48px;
       }
     `}
-  ${props =>
+  ${(props) =>
     !props.isDragging &&
     css`
       :hover {
         .table-container_cell {
           cursor: pointer;
-          background: ${props =>
+          background: ${(props) =>
             `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
 
-          margin-top: ${props => (props.showHotkeyBorder ? "-2px" : "-1px")};
+          margin-top: ${(props) => (props.showHotkeyBorder ? "-2px" : "-1px")};
 
-          ${props =>
+          ${(props) =>
             !props.showHotkeyBorder &&
             css`
-              border-top: ${props =>
+              border-top: ${(props) =>
                 `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
             `}
         }
         .table-container_file-name-cell {
-          ${props =>
+          ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-right: -24px;
@@ -86,7 +86,7 @@ const StyledTableRow = styled(TableRow)`
                 `}
         }
         .table-container_row-context-menu-wrapper {
-          ${props =>
+          ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-left: -20px;
@@ -100,27 +100,27 @@ const StyledTableRow = styled(TableRow)`
       }
     `}
   .table-container_cell {
-    background: ${props =>
+    background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-    cursor: ${props =>
+    cursor: ${(props) =>
       !props.isThirdPartyFolder &&
       (props.checked || props.isActive) &&
       `url(${CursorPalmSvgUrl}), auto !important`};
 
-    ${props =>
+    ${(props) =>
       props.inProgress &&
       css`
         pointer-events: none;
         /* cursor: wait; */
       `}
 
-    ${props => props.showHotkeyBorder && "border-color: #2DA7DB"}
+    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"}
   }
 
   .table-container_element-wrapper,
   .table-container_quick-buttons-wrapper {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 0px;
@@ -132,9 +132,9 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_element-wrapper,
   .table-container_row-loader {
-    min-width: ${props => (props.isRoom ? "40px" : "36px")};
-
-    ${props =>
+    min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
+    border-bottom: unset;
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -20px;
@@ -157,7 +157,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_row-loader {
     svg {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 4px;
@@ -173,10 +173,10 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .table-container_file-name-cell {
-    ${props =>
+    ${(props) =>
       props.showHotkeyBorder &&
       css`
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-right: -24px;
@@ -189,11 +189,11 @@ const StyledTableRow = styled(TableRow)`
 
         ${hotkeyBorderStyle}
       `};
-    ${props => props.dragging && rowCheckboxDraggingStyle};
+    ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
 
   .table-container_row-context-menu-wrapper {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 0px;
@@ -202,11 +202,11 @@ const StyledTableRow = styled(TableRow)`
             padding-right: 0px;
           `}
 
-    ${props => props.dragging && contextMenuWrapperDraggingStyle};
-    ${props =>
+    ${(props) => props.dragging && contextMenuWrapperDraggingStyle};
+    ${(props) =>
       props.showHotkeyBorder &&
       css`
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
@@ -229,17 +229,10 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 12px 12px;
-          `
-        : css`
-            padding: 12px 12px 12px 0px;
-          `}
+    padding: 12px 0;
   }
 
-  ${props =>
+  ${(props) =>
     props.showHotkeyBorder &&
     css`
       .table-container_cell {
@@ -265,7 +258,7 @@ const StyledTableRow = styled(TableRow)`
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.isHighlight &&
     css`
       .table-container_cell:not(.table-container_element-wrapper) {
@@ -273,7 +266,7 @@ const StyledTableRow = styled(TableRow)`
 
         @keyframes Highlight {
           0% {
-            background: ${props => props.theme.filesSection.animationColor};
+            background: ${(props) => props.theme.filesSection.animationColor};
           }
 
           100% {
@@ -286,18 +279,18 @@ const StyledTableRow = styled(TableRow)`
           .table-container_element-wrapper,
           .table-container_file-name-cell
         ) {
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
-                padding-left: ${props => props.hideColumns && `0px`};
+                padding-left: ${(props) => props.hideColumns && `0px`};
               `
             : css`
-                padding-right: ${props => props.hideColumns && `0px`};
+                padding-right: ${(props) => props.hideColumns && `0px`};
               `}
       }
 
       .table-container_file-name-cell {
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-right: -24px;
@@ -309,7 +302,7 @@ const StyledTableRow = styled(TableRow)`
               `}
       }
       .table-container_row-context-menu-wrapper {
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
@@ -328,7 +321,7 @@ const StyledDragAndDrop = styled(DragAndDrop)`
 `;
 
 const StyledBadgesContainer = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 8px;
@@ -340,7 +333,7 @@ const StyledBadgesContainer = styled.div`
   display: flex;
   align-items: center;
 
-  ${props =>
+  ${(props) =>
     props.showHotkeyBorder &&
     css`
       margin-top: 1px;
@@ -349,7 +342,7 @@ const StyledBadgesContainer = styled.div`
   .badges {
     display: flex;
     align-items: center;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 12px;
@@ -360,7 +353,7 @@ const StyledBadgesContainer = styled.div`
   }
 
   .badges:last-child {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 0px;
@@ -372,7 +365,7 @@ const StyledBadgesContainer = styled.div`
 
   .badge {
     cursor: pointer;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 8px;
@@ -395,7 +388,7 @@ const StyledBadgesContainer = styled.div`
 
   .badge-version {
     width: max-content;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: 0 -2px -2px 5px;
@@ -405,7 +398,7 @@ const StyledBadgesContainer = styled.div`
           `}
 
     > div {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               padding: 0 4px 0 3.3px;
@@ -436,7 +429,7 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .badge {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 14px;
@@ -447,7 +440,7 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .badge:last-child {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -470,7 +463,8 @@ const StyledQuickButtonsContainer = styled.div`
   .share-button-icon:hover {
     cursor: pointer;
     path {
-      fill: ${props => props.theme.filesSection.tableView.row.shareHoverColor};
+      fill: ${(props) =>
+        props.theme.filesSection.tableView.row.shareHoverColor};
     }
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }

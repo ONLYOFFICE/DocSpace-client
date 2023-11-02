@@ -19,6 +19,7 @@ const EditRoomDialog = ({
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
+  const [isWrongTitle, setIsWrongTitle] = useState(false);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
@@ -86,7 +87,9 @@ const EditRoomDialog = ({
           isEdit
           isDisabled={isLoading}
           isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
+          setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
         />
       </ModalDialog.Body>
@@ -99,6 +102,7 @@ const EditRoomDialog = ({
           primary
           scale
           onClick={onEditRoom}
+          isDisabled={isWrongTitle}
           isLoading={isLoading}
         />
         <Button

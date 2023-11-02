@@ -48,6 +48,10 @@ const Controls = styled(Box)`
   .label {
     min-width: fit-content;
   }
+
+  .checkbox {
+    max-width: fit-content;
+  }
 `;
 
 const CategoryHeader = styled.div`
@@ -87,6 +91,10 @@ const CategorySubHeader = styled.div`
 const CategoryDescription = styled(Box)`
   margin-top: 5px;
   max-width: 700px;
+  .sdk-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+  }
 `;
 
 const ControlsGroup = styled(Box)`
@@ -437,7 +445,7 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        {t("SDKDescription")}{" "}
+        <Text className="sdk-description">{t("SDKDescription")}</Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
@@ -512,16 +520,19 @@ const PortalIntegration = (props) => {
           <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
+              className="checkbox"
               label={t("Menu")}
               onChange={onChangeShowMenu}
               isChecked={config.showMenu}
             />
             <Checkbox
+              className="checkbox"
               label={t("Header")}
               onChange={onChangeShowHeader}
               isChecked={config.showHeader}
             />
             <Checkbox
+              className="checkbox"
               label={t("Filter")}
               onChange={onChangeShowFilter}
               isChecked={config.showFilter}
@@ -563,6 +574,7 @@ const PortalIntegration = (props) => {
                 tabIndex={5}
               />
               <Checkbox
+                className="checkbox"
                 label={t("Files:WithSubfolders")}
                 onChange={onChangeWithSubfolders}
                 isChecked={withSubfolders}

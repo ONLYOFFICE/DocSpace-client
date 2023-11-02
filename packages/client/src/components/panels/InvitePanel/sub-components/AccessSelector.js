@@ -93,6 +93,7 @@ const AccessSelector = ({
           manualY={"0px"}
           withoutBackground={isMobileView}
           withBackground={!isMobileView}
+          withBlur={isMobileView}
         />
       )}
     </StyledAccessSelector>

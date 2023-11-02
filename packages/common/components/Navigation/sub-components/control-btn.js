@@ -14,10 +14,10 @@ const StyledContainer = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-right: 20px;
+          margin-right: 16px;
         `
       : css`
-          margin-left: 20px;
+          margin-left: 16px;
         `}
   display: flex;
   align-items: center;
@@ -236,7 +236,6 @@ const ControlButtons = ({
               id="header_optional-button"
               zIndex={402}
               className="option-button"
-              directionX="right"
               iconName={VerticalDotsReactSvgUrl}
               size={15}
               isFill

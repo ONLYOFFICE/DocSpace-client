@@ -1,9 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 import Badge from "@docspace/components/badge";
 
 import { useTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
+
+const StyledBadge = styled(Badge)`
+  p {
+    background-color: transparent;
+  }
+`;
 
 const StatusBadge = (props) => {
   const { status, theme } = props;
@@ -35,7 +42,7 @@ const StatusBadge = (props) => {
   }
 
   return (
-    <Badge
+    <StyledBadge
       id="webhook-status"
       backgroundColor={badgeColorScheme.backgroundColor}
       color={badgeColorScheme.color}

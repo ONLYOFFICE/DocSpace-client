@@ -1,7 +1,14 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
 import TileContent from "./sub-components/TileContent";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import ContextMenu from "@docspace/components/context-menu";
+
+import {
+  tablet,
+  desktop,
+  mobile,
+  mobileMore,
+} from "@docspace/components/utils/device";
 
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
@@ -61,6 +68,18 @@ const StyledTile = styled.div`
             margin-right: 8px;
           `}
   }
+
+  .p-contextmenu {
+    @media ${mobile} {
+      z-index: 2000 !important;
+      height: auto;
+      position: fixed;
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      left: 0;
+    }
+  }
 `;
 
 const StyledFileTileTop = styled.div`
@@ -73,6 +92,10 @@ const StyledFileTileTop = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 6px 6px 0 0;
+
+  @media ${mobile} {
+    position: static;
+  }
 
   .thumbnail-image-link {
     margin: 0 auto;
@@ -264,6 +287,10 @@ const StyledTileContainer = styled.div`
   position: relative;
   height: 100%;
 
+  @media ${tablet} {
+    margin-right: 0px !important;
+  }
+
   .tile-item-wrapper {
     position: relative;
     width: 100%;
@@ -439,6 +466,17 @@ const StyledItem = styled.div`
   ${paddingCss};
 `;
 
+const StyledContextMenu = styled(ContextMenu)`
+  @media ${mobile} {
+    position: fixed;
+    height: min-content;
+    top: auto !important;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+`;
+
 export {
   StyledTile,
   StyledFileTileTop,
@@ -454,4 +492,5 @@ export {
   MainContainer,
   StyledCard,
   StyledItem,
+  StyledContextMenu,
 };

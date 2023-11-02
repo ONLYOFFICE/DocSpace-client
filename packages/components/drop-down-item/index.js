@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ReactSVG } from "react-svg";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
+import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import {
   StyledDropdownItem,
@@ -10,11 +11,14 @@ import {
   WrapperToggle,
 } from "./styled-drop-down-item";
 import ToggleButton from "../toggle-button";
+import IconButton from "../icon-button";
 
 const DropDownItem = (props) => {
-  //console.log("DropDownItem render");
   const {
     isSeparator,
+    isHeader,
+    withHeaderArrow,
+    headerArrowAction,
     label,
     icon,
     children,
@@ -55,12 +59,22 @@ const DropDownItem = (props) => {
       onClick={onClickAction}
       disabled={disabled}
       isActive={isActive}
+      isHeader={isHeader}
       isSelected={isSelected}
       withToggle={withToggle}
       isActiveDescendant={isActiveDescendant}
     >
+      {isHeader && withHeaderArrow && (
+        <IconWrapper
+          className="drop-down-icon back-arrow"
+          onClick={headerArrowAction}
+        >
+          <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
+        </IconWrapper>
+      )}
+
       {icon && (
-        <IconWrapper className="drop-down-icon">
+        <IconWrapper className="drop-down-icon ">
           {!withoutIcon ? (
             !icon.includes("images/") && !icon.includes(".svg") ? (
               <img className="drop-down-icon_image" src={icon} />
@@ -105,6 +119,10 @@ DropDownItem.propTypes = {
   isSeparator: PropTypes.bool,
   /** Sets the dropdown to display as a header */
   isHeader: PropTypes.bool,
+  /** Enables header arrow icon */
+  withHeaderArrow: PropTypes.bool,
+  /** Sets an action that will be triggered when the header arrow is clicked */
+  headerArrowAction: PropTypes.func,
   /** Accepts tab-index */
   tabIndex: PropTypes.number,
   /** Dropdown item text */

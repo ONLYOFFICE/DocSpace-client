@@ -24,12 +24,9 @@ import { inject, observer } from "mobx-react";
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
+
   height: ${(props) =>
     isMobile && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
-  /* height: ${(props) =>
-    (props.isTabletView || isMobileOnly) && !isFirefox
-      ? `${props.contentHeight}px`
-      : "100vh"}; */
 
   #customScrollBar {
     z-index: 0;
@@ -81,6 +78,7 @@ const Layout = (props) => {
 
       if (isMobile) {
         window?.visualViewport?.addEventListener("resize", onOrientationChange);
+        window?.visualViewport?.addEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);
       }
 
@@ -113,6 +111,7 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
+    console.log(e);
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);
@@ -155,52 +154,41 @@ const Layout = (props) => {
       }
 
       if (isMobileUtils() && isAndroid && isChrome) {
-        // height = `calc(100vh - ${correctorMobileChrome}px)`;
         height = `100%`;
       }
-
-      // if (isTablet && isIOS && isSafari) {
-      //   if (
-      //     window.innerHeight < window.innerWidth &&
-      //     window.innerWidth > 1024
-      //   ) {
-      //     height = window.screen.availHeight - correctorTabletSafari;
-      //   }
-      // }
 
       if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
         const diff = window.innerHeight - e.target.height;
 
         windowHeight -= diff;
 
-        const root = document.getElementById("root");
-        if (!isMobileUtils()) {
-          const article = document.getElementsByTagName("article")[0];
-        }
+        document.body.style.height = `${e.target.height + e.target.offsetTop}`;
+        document.body.style.maxHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+        document.body.style.minHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
 
-        root.style.height = `calc(var(--vh,1vh) * 100)`;
-        root.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
-        root.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-
-        document.body.style.height = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.top = "0px";
+        document.body.style.top = `0px`;
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
-      } else {
+        document.body.style.scroll = `hidden`;
+      } else if (isMobile && isIOS) {
+        document.body.style.height = `100%`;
+        document.body.style.maxHeight = `100%`;
+        document.body.style.minHeight = `100%`;
+        document.body.style.removeProperty("bottom");
+        document.body.style.removeProperty("position");
+        document.body.style.removeProperty("overflow");
+      }
+
+      if (isMobile && !isIOS) {
         const root = document.getElementById("root");
 
         root.style.height = `100%`;
         root.style.maxHeight = `100%`;
         root.style.minHeight = `100%`;
-
-        document.body.style.height = `100%`;
-        document.body.style.maxHeight = `100%`;
-        document.body.style.minHeight = `100%`;
-        document.body.style.removeProperty("top");
-        document.body.style.removeProperty("position");
-        document.body.style.removeProperty("overflow");
       }
 
       let vh = windowHeight * 0.01;

@@ -23,8 +23,14 @@ let timerId = null,
   prevProgress;
 
 const PreparationPortal = (props) => {
-  const { multiplicationFactor, t, withoutHeader, style, clearLocalStorage } =
-    props;
+  const {
+    multiplicationFactor,
+    t,
+    withoutHeader,
+    style,
+    clearLocalStorage,
+    isDialog,
+  } = props;
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -149,9 +155,9 @@ const PreparationPortal = (props) => {
       if (typeof error !== "object") return error;
 
       return (
-        err?.response?.data?.error?.message ||
-        err?.statusText ||
-        err?.message ||
+        error?.response?.data?.error?.message ||
+        error?.statusText ||
+        error?.message ||
         t("Common:ErrorInternalServer")
       );
     };
@@ -199,7 +205,7 @@ const PreparationPortal = (props) => {
     : t("Common:PreparationPortalTitle");
 
   return (
-    <StyledPreparationPortal errorMessage={errorMessage}>
+    <StyledPreparationPortal errorMessage={errorMessage} isDialog={isDialog}>
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
@@ -248,10 +254,12 @@ const PreparationPortalWrapper = inject(({ auth, backup }) => {
 
 PreparationPortal.propTypes = {
   withoutHeader: PropTypes.bool,
+  isDialog: PropTypes.bool,
 };
 
 PreparationPortal.defaultProps = {
   withoutHeader: false,
+  isDialog: false,
 };
 
 export default (props) => <PreparationPortalWrapper {...props} />;

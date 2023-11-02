@@ -17,6 +17,13 @@ const StyledSectionHeader = styled.div`
     height: 61px;
     min-height: 61px;
 
+    ${({ isFormGallery }) =>
+      isFormGallery &&
+      css`
+        height: 69px;
+        min-height: 69px;
+      `}
+
     .header-container {
       margin-bottom: 1px;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -85,6 +92,7 @@ const SectionHeader = (props) => {
     className,
     isEmptyPage,
     isTrashFolder,
+    isFormGallery,
     ...rest
   } = props;
 
@@ -95,6 +103,7 @@ const SectionHeader = (props) => {
       viewAs={viewAs}
       settingsStudio={settingsStudio}
       isTrashFolder={isTrashFolder}
+      isFormGallery={isFormGallery}
       {...rest}
     />
   );

@@ -17,8 +17,8 @@ import ButtonMoveIcon from "PUBLIC_DIR/images/button.move.react.svg";
 import ButtonDuplicateIcon from "PUBLIC_DIR/images/button.duplicate.react.svg";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
-import ButtonMinusIcon from "PUBLIC_DIR/images/actions.button.minus.react.svg";
+import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
+import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
 import RefreshIcon from "PUBLIC_DIR/images/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 
@@ -29,6 +29,18 @@ const StyledButtonAlertIcon = styled(ButtonAlertIcon)`
 `;
 
 const Delay = 1000;
+
+const icons = {
+  upload: <ButtonUploadIcon />,
+  file: <ButtonFileIcon />,
+  trash: <ButtonTrashIcon />,
+  move: <ButtonMoveIcon />,
+  plus: <ButtonPlusIcon />,
+  minus: <ButtonMinusIcon />,
+  refresh: <RefreshIcon />,
+  duplicate: <ButtonDuplicateIcon />,
+};
+
 const FloatingButton = (props) => {
   const {
     id,
@@ -67,6 +79,10 @@ const FloatingButton = (props) => {
     };
   }, [percent, setAnimationCompleted]);
 
+  const iconComponent = useMemo(() => {
+    return icons[icon] ?? icons.duplicate;
+  }, [icon]);
+
   return (
     <StyledFloatingButtonWrapper
       showTwoProgress={showTwoProgress}
@@ -92,25 +108,7 @@ const FloatingButton = (props) => {
           </div>
 
           <StyledFloatingButton className="circle__background" color={color}>
-            <IconBox className="icon-box">
-              {icon == "upload" ? (
-                <ButtonUploadIcon />
-              ) : icon == "file" ? (
-                <ButtonFileIcon />
-              ) : icon == "trash" ? (
-                <ButtonTrashIcon />
-              ) : icon == "move" ? (
-                <ButtonMoveIcon />
-              ) : icon == "plus" ? (
-                <ButtonPlusIcon />
-              ) : icon == "minus" ? (
-                <ButtonMinusIcon />
-              ) : icon == "refresh" ? (
-                <RefreshIcon />
-              ) : (
-                <ButtonDuplicateIcon />
-              )}
-            </IconBox>
+            <IconBox className="icon-box">{iconComponent}</IconBox>
             <StyledAlertIcon>
               {alert ? <StyledButtonAlertIcon size="medium" /> : <></>}
             </StyledAlertIcon>

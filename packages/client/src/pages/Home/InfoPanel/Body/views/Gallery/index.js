@@ -9,14 +9,32 @@ import Loaders from "@docspace/common/components/Loaders/index.js";
 import Text from "@docspace/components/text";
 
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
-import { StyledGalleryThumbnail } from "../../styles/gallery.js";
-import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
+import {
+  StyledGalleryNoThumbnail,
+  StyledGalleryThumbnail,
+  StyledGalleryFormDescription,
+} from "../../styles/gallery.js";
+import {
+  StyledLink,
+  StyledProperties,
+  StyledSubtitle,
+} from "../../styles/common.js";
+import Link from "@docspace/components/link/index.js";
 
-const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
+const Gallery = ({
+  t,
+  gallerySelected,
+  getIcon,
+  culture,
+  personal,
+  currentColorScheme,
+}) => {
   const thumbnailBlank = getIcon(96, ".docxf");
   const thumbnailUrl =
-    gallerySelected?.attributes?.template_image?.data.attributes?.formats?.small
-      ?.url;
+    gallerySelected?.attributes?.template_image?.data?.attributes?.formats
+      ?.small?.url;
+
+  const formTitle = gallerySelected?.attributes?.name_form;
 
   return (
     <>
@@ -25,14 +43,38 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
           <img className="info-panel_gallery-img" src={thumbnailUrl} alt="" />
         </StyledGalleryThumbnail>
       ) : (
-        <div className="no-thumbnail-img-wrapper">
+        <StyledGalleryNoThumbnail className="no-thumbnail-img-wrapper">
           <ReactSVG className="no-thumbnail-img" src={thumbnailBlank} />
-        </div>
+        </StyledGalleryNoThumbnail>
       )}
+
+      <StyledLink>
+        <Link
+          className="link"
+          href={`mailto:marketing@onlyoffice.com?subject=Suggesting changes for ${formTitle}&body=Suggesting changes for ${formTitle}.`}
+          target="_blank"
+          type="action"
+          isHovered
+          color={currentColorScheme.main.accent}
+        >
+          {t("FormGallery:SuggestChanges")}
+        </Link>
+      </StyledLink>
 
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
-          {t("InfoPanel:SystemProperties")}
+          {t("Description")}
+        </Text>
+      </StyledSubtitle>
+
+      <StyledGalleryFormDescription>
+        {gallerySelected?.attributes?.template_desc ||
+          gallerySelected?.attributes?.description_card}
+      </StyledGalleryFormDescription>
+
+      <StyledSubtitle>
+        <Text fontWeight="600" fontSize="14px">
+          {t("Properties")}
         </Text>
       </StyledSubtitle>
 
@@ -65,7 +107,7 @@ const Gallery = ({ t, gallerySelected, getIcon, culture, personal }) => {
 };
 
 export default inject(({ auth, settingsStore, oformsStore }) => {
-  const { personal, culture } = auth.settingsStore;
+  const { personal, culture, currentColorScheme } = auth.settingsStore;
   const { gallerySelected } = oformsStore;
   const { getIcon } = settingsStore;
   return {
@@ -73,6 +115,7 @@ export default inject(({ auth, settingsStore, oformsStore }) => {
     gallerySelected,
     personal,
     culture,
+    currentColorScheme,
   };
 })(
   withTranslation(["InfoPanel", "FormGallery", "Common", "Translations"])(

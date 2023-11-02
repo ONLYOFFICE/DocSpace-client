@@ -20,10 +20,12 @@ const SsoTextInput = (props) => {
     setError,
     hideError,
     className,
+    onFocus,
   } = props;
 
-  const onFocus = (e) => {
+  const onFocusFn = (e) => {
     hideError(e.target.name);
+    onFocus && onFocus();
   };
 
   const onBlur = (e) => {
@@ -42,7 +44,7 @@ const SsoTextInput = (props) => {
         isDisabled={isDisabled ?? (!enableSso || isLoadingXml)}
         name={name}
         onBlur={onBlur}
-        onFocus={onFocus}
+        onFocus={onFocusFn}
         onChange={setInput}
         placeholder={placeholder}
         scale

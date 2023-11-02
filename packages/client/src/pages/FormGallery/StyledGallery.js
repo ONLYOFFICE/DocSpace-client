@@ -2,72 +2,97 @@ import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
+import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
 
+const StyledContainer = styled.div`
+  height: 69px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  align-items: center;
+  grid-template-columns: ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible
+      ? "29px min-content auto"
+      : "29px min-content auto 52px"};
+
+  .arrow-button {
+    width: 17px;
+    min-width: 17px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+  }
+
+  @media ${tablet} {
+    height: 69px;
+    padding: 0;
+    grid-template-columns: 29px min-content auto;
+  }
+
+  @media ${mobile} {
+    height: 53px;
+    padding: 0;
+    display: flex;
+  }
+`;
+
+const StyledHeading = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible &&
+    css`
+      max-width: calc(100vw - 320px - 440px);
+    `};
+
+  @media ${tablet} {
+    width: 100%;
+    max-width: calc(100vw - 320px);
+  }
+
+  @media ${mobile} {
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 12px 0 0 " : "0 0 0 12px"};
+    width: 100%;
+    max-width: calc(100vw - 68px);
+  }
+`;
+
 const StyledHeadline = styled(Headline)`
   width: 100%;
+  max-width: min-content;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
+  box-sizing: border-box;
+
   @media ${tablet} {
     font-size: 21px;
     line-height: 28px;
   }
+
   @media ${mobile} {
     font-size: 18px;
     line-height: 24px;
   }
 `;
 
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 32px;
-  display: grid;
-
-  grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto auto" : "29px 1fr auto auto"};
-
-  align-items: center;
-
-  .arrow-button {
-    width: 17px;
-    min-width: 17px;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-  }
-
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 16px;
-  }
-
-  @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 12px;
-  }
+const StyledNavigationDrodown = styled(ComboBox)`
+  width: 12px;
+  margin: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? "0 4px 0 0 " : "0 0 0 4px"};
+  box-sizing: border-box;
+  background: transparent;
 `;
 
 const StyledSubmitToGalleryButton = styled(Button)`
-  margin-left: auto;
-
-  @media ${mobile} {
-    display: none;
-  }
-
-  ${(props) =>
-    props.theme.interfaceDirection === "ltr"
-      ? css`
-          margin-right: 12px;
-        `
-      : css`
-          margin-left: 12px;
-        `}
-`;
-StyledSubmitToGalleryButton.defaultProps = { theme: Base };
-
-const StyledInfoPanelToggleWrapper = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -77,17 +102,30 @@ const StyledInfoPanelToggleWrapper = styled.div`
           margin-left: auto;
         `}
 
+  @media ${mobile} {
+    display: none;
+  }
+`;
+StyledSubmitToGalleryButton.defaultProps = { theme: Base };
+
+const StyledInfoPanelToggleWrapper = styled.div`
+  box-sizing: border-box;
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
   align-items: center;
   justify-content: center;
+  width: 16px;
+  height: 16px;
+
+  margin: ${({ theme }) =>
+    theme.interfaceDirection !== "rtl" ? "0 8px 0 28px" : "0 28px 0 8px"};
 
   @media ${tablet} {
     display: none;
   }
 
   .info-panel-toggle-bg {
-    height: 32px;
-    width: 32px;
+    height: 16px;
+    width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,8 +153,10 @@ const StyledInfoPanelToggleWrapper = styled.div`
 StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
 export {
+  StyledHeading,
   StyledHeadline,
   StyledContainer,
+  StyledNavigationDrodown,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

@@ -111,7 +111,7 @@ class AxiosClient {
     }
   };
 
-  request = (options) => {
+  request = (options, isSelector = false) => {
     const onSuccess = (response) => {
       const error = this.getResponseError(response);
       if (error) throw new Error(error);
@@ -161,6 +161,7 @@ class AxiosClient {
             }
             break;
           case 403:
+            if (isSelector) return;
             const pathname = window.location.pathname;
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 

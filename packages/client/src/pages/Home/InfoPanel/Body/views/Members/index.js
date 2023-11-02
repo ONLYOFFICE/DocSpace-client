@@ -228,6 +228,7 @@ const Members = ({
           t={t}
           roomType={roomType}
           roomId={selectionParentRoom.id}
+          setIsScrollLocked={setIsScrollLocked}
         />
       )}
       <MembersList

@@ -35,8 +35,6 @@ const WelcomePageSettings = (props) => {
     isMobileView,
     isLoadedPage,
     greetingSettingsIsDefault,
-
-    getSettings,
     getGreetingSettingsIsDefault,
     currentColorScheme,
     welcomePageSettingsUrl,
@@ -135,22 +133,10 @@ const WelcomePageSettings = (props) => {
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
     }
-
-    if (
-      (state.isLoadingGreetingSave !== prevState.isLoadingGreetingSave &&
-        state.isLoadingGreetingSave === false) ||
-      (state.isLoadingGreetingRestore !== prevState.isLoadingGreetingRestore &&
-        state.isLoadingGreetingRestore === false)
-    ) {
-      getSettings();
-      getGreetingSettingsIsDefault();
-    }
   }, [
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    getSettings,
-    getGreetingSettingsIsDefault,
     state.hasScroll,
     state.greetingTitle,
     state.isLoadingGreetingSave,
@@ -183,6 +169,7 @@ const WelcomePageSettings = (props) => {
 
   const onChangeGreetingTitle = (e) => {
     setState((val) => ({ ...val, greetingTitle: e.target.value }));
+    getGreetingSettingsIsDefault();
 
     if (settingIsEqualInitialValue("greetingTitle", e.target.value)) {
       saveToSessionStorage("greetingTitle", "none");
@@ -345,7 +332,7 @@ const WelcomePageSettings = (props) => {
         onSaveClick={onSaveGreetingSettings}
         onCancelClick={onRestoreGreetingSettings}
         showReminder={state.showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
@@ -363,7 +350,6 @@ export default inject(({ auth, setup, common }) => {
     greetingSettings,
     organizationName,
     theme,
-    getSettings,
     currentColorScheme,
     welcomePageSettingsUrl,
   } = auth.settingsStore;
@@ -376,6 +362,7 @@ export default inject(({ auth, setup, common }) => {
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
   } = common;
+
   return {
     theme,
     greetingSettings,
@@ -386,7 +373,6 @@ export default inject(({ auth, setup, common }) => {
     setIsLoadedWelcomePageSettings,
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
-    getSettings,
     initSettings,
     setIsLoaded,
     currentColorScheme,

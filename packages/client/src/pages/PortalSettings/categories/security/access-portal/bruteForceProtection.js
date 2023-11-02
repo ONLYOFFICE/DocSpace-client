@@ -226,10 +226,6 @@ const BruteForceProtection = (props) => {
     setShowReminder(false);
   };
 
-  const errorNode = (
-    <div className="error-text">{t("ErrorMessageBruteForceProtection")}</div>
-  );
-
   if (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded)
     return <BruteForceProtectionLoader />;
 
@@ -255,6 +251,9 @@ const BruteForceProtection = (props) => {
         className="input-container"
         labelText={t("NumberOfAttempts")}
         isVertical={true}
+        place="top"
+        hasError={hasErrorNumberAttempt}
+        errorMessage={t("ErrorMessageBruteForceProtection")}
       >
         <TextInput
           className="brute-force-protection-input"
@@ -265,13 +264,15 @@ const BruteForceProtection = (props) => {
           placeholder={t("EnterNumber")}
           hasError={hasErrorNumberAttempt}
         />
-        {hasErrorNumberAttempt && errorNode}
       </FieldContainer>
 
       <FieldContainer
         className="input-container"
         labelText={t("BlockingTime")}
         isVertical={true}
+        place="top"
+        hasError={hasErrorBlockingTime}
+        errorMessage={t("ErrorMessageBruteForceProtection")}
       >
         <TextInput
           className="brute-force-protection-input"
@@ -282,13 +283,15 @@ const BruteForceProtection = (props) => {
           placeholder={t("EnterTime")}
           hasError={hasErrorBlockingTime}
         />
-        {hasErrorBlockingTime && errorNode}
       </FieldContainer>
 
       <FieldContainer
         className="input-container"
         labelText={t("CheckPeriod")}
         isVertical={true}
+        place="top"
+        hasError={hasErrorCheckPeriod}
+        errorMessage={t("ErrorMessageBruteForceProtection")}
       >
         <TextInput
           className="brute-force-protection-input"
@@ -299,24 +302,22 @@ const BruteForceProtection = (props) => {
           placeholder={t("EnterTime")}
           hasError={hasErrorCheckPeriod}
         />
-        {hasErrorCheckPeriod && errorNode}
-
-        <SaveCancelButtons
-          className="save-cancel-buttons"
-          tabIndex={4}
-          onSaveClick={onSaveClick}
-          onCancelClick={onCancelClick}
-          showReminder={showReminder}
-          reminderTest={t("YouHaveUnsavedChanges")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          displaySettings={true}
-          hasScroll={false}
-          additionalClassSaveButton="brute-force-protection-save"
-          additionalClassCancelButton="brute-force-protection-cancel"
-          isSaving={isLoadingSave}
-        />
       </FieldContainer>
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        tabIndex={4}
+        onSaveClick={onSaveClick}
+        onCancelClick={onCancelClick}
+        showReminder={showReminder}
+        reminderText={t("YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        displaySettings={true}
+        hasScroll={false}
+        additionalClassSaveButton="brute-force-protection-save"
+        additionalClassCancelButton="brute-force-protection-cancel"
+        isSaving={isLoadingSave}
+      />
     </StyledBruteForceProtection>
   );
 };

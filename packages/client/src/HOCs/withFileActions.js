@@ -177,6 +177,7 @@ export default function withFileActions(WrappedFileItem) {
         item,
         openFileAction,
         setParentId,
+        setRoomType,
         isTrashFolder,
         isArchiveFolder,
       } = this.props;
@@ -199,6 +200,7 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
+        setRoomType(item.roomType);
       }
 
       openFileAction(item);
@@ -407,6 +409,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected: !!selectedItem,
         //parentFolder: selectedFolderStore.parentId,
         setParentId: selectedFolderStore.setParentId,
+        setRoomType: selectedFolderStore.setRoomType,
         isTrashFolder: isRecycleBinFolder,
         getFolderInfo,
         viewAs,

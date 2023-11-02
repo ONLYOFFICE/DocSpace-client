@@ -127,7 +127,7 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onSelectFormat = (e) => {
-    const { format, type, fileId } = e.target.dataset;
+    const { format, type, fileId } = e.currentTarget.dataset;
     const files = this.state[type].files;
 
     this.setState((prevState) => {

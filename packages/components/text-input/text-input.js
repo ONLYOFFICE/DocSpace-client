@@ -18,6 +18,8 @@ class TextInput extends React.Component {
 TextInput.propTypes = {
   /** Used as HTML `id` property */
   id: PropTypes.string,
+  /** Forwarded ref */
+  forwardedRef: PropTypes.object,
   /** Used as HTML `name` property */
   name: PropTypes.string,
   /** Supported type of the input fields. */

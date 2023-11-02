@@ -14,6 +14,7 @@ import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
+
 import Backdrop from "../backdrop";
 import Text from "../text";
 import Avatar from "../avatar";
@@ -381,6 +382,7 @@ class ContextMenu extends Component {
                           <RoomIcon
                             color={this.props.header.color}
                             title={this.props.header.title}
+                            isArchive={this.props.isArchive}
                           />
                         ) : (
                           <img
@@ -444,9 +446,13 @@ class ContextMenu extends Component {
       <>
         {this.props.withBackdrop && (
           <Backdrop
-            visible={this.state.visible}
-            withBackground={isMobile}
-            withoutBlur={!isMobile}
+            visible={
+              this.state.visible &&
+              (this.state.changeView || this.props.ignoreChangeView)
+            }
+            withBackground={true}
+            withoutBlur={false}
+            zIndex={this.props.baseZIndex}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />
@@ -476,6 +482,8 @@ ContextMenu.propTypes = {
   global: PropTypes.bool,
   /** Sets the context menu to be rendered with a backdrop */
   withBackdrop: PropTypes.bool,
+  /** Ignores changeView restrictions for rendering backdrop */
+  ignoreChangeView: PropTypes.bool,
   /** Sets zIndex layering value automatically */
   autoZIndex: PropTypes.bool,
   /** Sets automatic layering management */

@@ -315,9 +315,9 @@ const Dark = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -2048,6 +2048,7 @@ const Dark = {
 
     gallery: {
       borderColor: "#292929",
+      descriptionColor: "#eeeeee",
     },
   },
 
@@ -2963,6 +2964,7 @@ const Dark = {
           toggleContentBackground: "#474747",
           iconButton: white,
           iconButtonDisabled: "#333",
+          border: "1px solid #474747",
         },
 
         smtp: {
@@ -3057,8 +3059,8 @@ const Dark = {
 
   tag: {
     color: white,
-    background: black,
-    hoverBackground: "#333333",
+    background: "#474747",
+    hoverBackground: "#282828",
     disabledBackground: "#858585",
     defaultTagColor: white,
     newTagBackground: "#333333",
@@ -3066,7 +3068,7 @@ const Dark = {
 
   profile: {
     main: {
-      background: "#1f1f1f",
+      background: "#3D3D3D",
       textColor: white,
 
       descriptionTextColor: "#858585",

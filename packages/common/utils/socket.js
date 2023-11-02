@@ -58,7 +58,11 @@ class SocketIOHelper {
     if (!this.isEnabled) return;
 
     const ids =
-      typeof data.roomParts === "object" ? data.roomParts : [data.roomParts];
+      !data || !data.roomParts
+        ? []
+        : typeof data.roomParts === "object"
+        ? data.roomParts
+        : [data.roomParts];
 
     ids.forEach((id) => {
       if (command === "subscribe") {

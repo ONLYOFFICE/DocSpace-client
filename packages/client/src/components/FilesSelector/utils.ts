@@ -23,7 +23,9 @@ export const getHeaderLabel = (
   if (isMove) return t("Common:MoveTo");
   if (isCopy) return t("Common:Copy");
   if (isRestoreAll) return t("Common:Restore");
-  if (isSelect) return t("Common:SelectFile");
+  if (isSelect) {
+    return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
+  }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
     return t("Translations:CreateMasterFormFromFile");

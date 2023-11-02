@@ -559,7 +559,7 @@ const PortalIntegration = (props) => {
               />
             </LabelGroup>
             <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFolderId} />
+              <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
             </FilesSelectorInputWrapper>
           </ControlsGroup>
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>

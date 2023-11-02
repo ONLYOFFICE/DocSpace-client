@@ -11,6 +11,8 @@ interface SupportBlockProps {
   termsUrlValue: string;
 
   changeValue: (name: string, value: string) => void;
+
+  isEdit: boolean;
 }
 
 const SupportBlock = ({
@@ -19,6 +21,8 @@ const SupportBlock = ({
   termsUrlValue,
 
   changeValue,
+
+  isEdit,
 }: SupportBlockProps) => {
   const [error, setError] = React.useState({
     policyUrl: "",
@@ -45,6 +49,7 @@ const SupportBlock = ({
           helpButtonText={
             "Provide a URL link to your Privacy Policy that must comply with applicable laws and regulations and that make clear how you collect, use, share, retain and otherwise process personal information."
           }
+          disabled={isEdit}
         />
         <InputGroup
           label={"Terms of Service URL"}
@@ -54,6 +59,7 @@ const SupportBlock = ({
           error={error.termsUrl}
           onChange={onChange}
           helpButtonText={"Terms of service help"}
+          disabled={isEdit}
         />
       </StyledInputBlock>
     </StyledBlock>

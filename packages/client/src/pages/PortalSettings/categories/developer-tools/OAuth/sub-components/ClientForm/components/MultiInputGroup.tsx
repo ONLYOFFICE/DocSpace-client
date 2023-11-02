@@ -26,6 +26,8 @@ interface MultiInputGroupProps {
   onAdd: (name: string, value: string, remove?: boolean) => void;
 
   helpButtonText?: string;
+
+  isDisabled?: boolean;
 }
 
 const MultiInputGroup = ({
@@ -36,6 +38,7 @@ const MultiInputGroup = ({
   onAdd,
 
   helpButtonText,
+  isDisabled,
 }: MultiInputGroupProps) => {
   const [value, setValue] = React.useState("");
 
@@ -71,12 +74,15 @@ const MultiInputGroup = ({
           scale
           tabIndex={0}
           maxLength={255}
+          isDisabled={isDisabled}
         />
         <SelectorAddButton
           onClick={() => {
+            if (isDisabled) return;
             onAdd(name, value);
             setValue("");
           }}
+          isDisabled={isDisabled}
         />
       </StyledInputRow>
       <StyledChipsContainer>
@@ -85,7 +91,9 @@ const MultiInputGroup = ({
             key={`${v}-${index}`}
             isInline
             label={v}
-            onClose={() => onAdd(name, v)}
+            onClose={() => {
+              !isDisabled && onAdd(name, v);
+            }}
           />
         ))}
       </StyledChipsContainer>

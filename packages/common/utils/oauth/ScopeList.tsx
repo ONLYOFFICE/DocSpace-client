@@ -63,8 +63,10 @@ const ScopeList = ({ selectedScopes, scopes, t }: IScopeListProps) => {
     for (let key in filteredScopes) {
       if (filteredScopes[key].isChecked) {
         if (filteredScopes[key].checkedType === ScopeType.read) {
+          //@ts-ignore
           result.push(filteredScopes[key].read.tKey || "");
         } else {
+          //@ts-ignore
           result.push(filteredScopes[key].write.tKey || "");
         }
       }

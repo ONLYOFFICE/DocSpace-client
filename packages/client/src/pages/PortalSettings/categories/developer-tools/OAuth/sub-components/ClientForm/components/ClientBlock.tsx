@@ -9,9 +9,16 @@ interface ClientBlockProps {
 
   idValue: string;
   secretValue: string;
+
+  onResetClick: () => void;
 }
 
-const ClientBlock = ({ t, idValue, secretValue }: ClientBlockProps) => {
+const ClientBlock = ({
+  t,
+  idValue,
+  secretValue,
+  onResetClick,
+}: ClientBlockProps) => {
   const [value, setValue] = React.useState<{ [key: string]: string }>({
     id: idValue,
     secret: secretValue,
@@ -46,6 +53,7 @@ Note: Any enterprise admin who knows the app's client ID will be able to retriev
           withCopy
           isPassword
           buttonLabel={"Reset"}
+          onButtonClick={onResetClick}
         />
       </StyledInputBlock>
     </StyledBlock>

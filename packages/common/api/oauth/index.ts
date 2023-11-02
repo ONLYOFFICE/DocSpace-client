@@ -82,28 +82,27 @@ export const updateClient = async (
     data: transformToClientReqDTO(data),
   });
 
-  // TODO: OAuth, get it from request
-  client.enabled = true;
-
   return transformToClientProps(client);
 };
 
 export const changeClientStatus = async (
   clientId: string,
   status: boolean
-): Promise<boolean> => {
-  console.log(`Change client:${clientId} status to ${status}`);
-
-  return !status;
+): Promise<void> => {
+  await request({
+    method: "patch",
+    url: `/clients/${clientId}/activation`,
+    data: { body: status },
+  });
 };
 
-export const regenerateSecret = async (clientId: string): Promise<string> => {
-  const clientSecret: string = (
-    await request({
-      method: "patch",
-      url: `/clients/${clientId}`,
-    })
-  ).client_secret;
+export const regenerateSecret = async (
+  clientId: string
+): Promise<{ client_secret: string }> => {
+  const clientSecret: { client_secret: string } = await request({
+    method: "patch",
+    url: `/clients/${clientId}/regenerate`,
+  });
 
   return clientSecret;
 };

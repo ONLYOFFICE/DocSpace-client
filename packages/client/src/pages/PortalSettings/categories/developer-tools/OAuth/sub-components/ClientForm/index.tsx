@@ -44,8 +44,9 @@ const ClientForm = ({
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
 
-  const [initClient, setInitClient] = React.useState<IClientProps | null>(null);
-
+  const [initialClient, setInitialClient] = React.useState<IClientProps>(
+    {} as IClientProps
+  );
   const [form, setForm] = React.useState<IClientReqDTO>({
     name: "",
     logo: "",
@@ -67,7 +68,7 @@ const ClientForm = ({
   const [clientId, setClientId] = React.useState<string>("");
   const [clientSecret, setClientSecret] = React.useState<string>("");
 
-  const isEdit = !!id || !!client;
+  const isEdit = !!id;
 
   // const onInputChange = React.useCallback(
   //   (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +99,7 @@ const ClientForm = ({
   const onSaveClick = async () => {
     if (!id) {
       if (!saveClient) return;
+      setIsRequestRunning(true);
 
       await saveClient(form);
 
@@ -115,47 +117,12 @@ const ClientForm = ({
     navigate("/portal-settings/developer-tools/oauth");
   };
 
-  // const onResetClick = React.useCallback(async () => {
-  //   if (!regenerateSecret) return;
-  //   const newSecret = await regenerateSecret(clientId);
+  const onResetClick = React.useCallback(async () => {
+    if (!regenerateSecret) return;
+    const newSecret = await regenerateSecret(clientId);
 
-  //   setSecret(newSecret);
-  // }, [clientId, regenerateSecret]);
-
-  // const getClient = React.useCallback(async () => {
-  //   if (!fetchClient || !id) return;
-
-  //   const client = await fetchClient(id);
-
-  //   setClient(client);
-  // }, [id, fetchClient]);
-
-  // const setClient = React.useCallback(async (client: ClientProps) => {
-  //   setForm({
-  //     appName: client.name,
-  //     appIcon: client.logoUrl || "",
-  //     description: client.description,
-
-  //     redirectUrl: client.redirectUri,
-  //     privacyURL: client.policyUrl,
-  //     termsUrl: client.termsUrl,
-  //     logoutRedirectUrl: client.logoutRedirectUri,
-
-  //     authenticationMethod: client.authenticationMethod,
-  //   });
-
-  //   setSecret(client.secret);
-
-  //   setCheckedScopes([...client.scopes]);
-
-  //   setInitClient({ ...client, scopes: [...client.scopes] });
-
-  //   setIsLoading(false);
-  // }, []);
-
-  // React.useEffect(() => {
-  //   setIsLoading(true);
-  // }, []);
+    setClientSecret(newSecret);
+  }, [clientId, regenerateSecret]);
 
   const onChangeForm = (name: string, value: string) => {
     setForm((val) => {
@@ -180,34 +147,63 @@ const ClientForm = ({
     });
   };
 
-  const getScopeList = React.useCallback(async () => {
-    if (!fetchScopes) return;
+  const getClientData = React.useCallback(async () => {
+    if (!fetchScopes || !fetchClient) return;
 
-    await fetchScopes();
+    const actions = [];
+
+    if (id && !client) {
+      actions.push(fetchClient(id));
+    }
+
+    actions.push(fetchScopes());
+
+    const [fetchedClient, ...rest] = await Promise.all(actions);
+
+    if (id && fetchedClient) {
+      setForm({
+        name: fetchedClient.name,
+        logo: fetchedClient.logo,
+        website_url: fetchedClient.websiteUrl,
+        description: fetchedClient.description,
+
+        redirect_uris: fetchedClient.redirectUris,
+        allowed_origins: fetchedClient.allowedOrigins,
+        logout_redirect_uri: fetchedClient.logoutRedirectUri,
+
+        terms_url: fetchedClient.termsUrl,
+        policy_url: fetchedClient.policyUrl,
+
+        authentication_method: fetchedClient.authenticationMethod,
+
+        scopes: fetchedClient.scopes,
+      });
+      setClientId(fetchedClient.clientId);
+      setClientSecret(fetchedClient.clientSecret);
+
+      setInitialClient(fetchedClient);
+    }
+
     setIsLoading(false);
-  }, [fetchScopes]);
+  }, [id, client, fetchScopes]);
 
   React.useEffect(() => {
     if (scopeList && scopeList?.length !== 0) return;
 
     setIsLoading(true);
-    getScopeList();
-  }, [id, scopeList, getScopeList, fetchScopes]);
-
-  // React.useEffect(() => {
-
-  //   if (id) {
-  //     setClientId(id);
-  //     if (!client) {
-  //       getClient();
-  //     } else {
-  //       setClient(client);
-  //     }
-  //   }
-  // }, [id, client, fetchClient, getClient, setClient]);
+    getClientData();
+  }, [id, scopeList, client, getClientData, fetchScopes]);
 
   const compareAndValidate = () => {
     let isValid = true;
+
+    if (isEdit) {
+      return (
+        form.name !== initialClient.name ||
+        form.logo !== initialClient.logo ||
+        form.description !== initialClient.description
+      );
+    }
 
     for (let key in form) {
       switch (key) {
@@ -272,27 +268,36 @@ const ClientForm = ({
             descriptionValue={form.description}
             logoValue={form.logo}
             changeValue={onChangeForm}
+            isEdit={isEdit}
           />
           {isEdit && (
-            <ClientBlock t={t} idValue={clientId} secretValue={clientSecret} />
+            <ClientBlock
+              t={t}
+              idValue={clientId}
+              secretValue={clientSecret}
+              onResetClick={onResetClick}
+            />
           )}
           <OAuthBlock
             t={t}
             redirectUrisValue={form.redirect_uris}
             allowedOriginsValue={form.allowed_origins}
             changeValue={onChangeForm}
+            isEdit={isEdit}
           />
           <ScopesBlock
             t={t}
             scopes={scopeList || []}
-            selectedScopes={[]}
+            selectedScopes={form.scopes}
             onAddScope={onChangeForm}
+            isEdit={isEdit}
           />
           <SupportBlock
             t={t}
             policyUrlValue={form.policy_url}
             termsUrlValue={form.terms_url}
             changeValue={onChangeForm}
+            isEdit={isEdit}
           />
           <ButtonsBlock
             saveLabel={"Save"}

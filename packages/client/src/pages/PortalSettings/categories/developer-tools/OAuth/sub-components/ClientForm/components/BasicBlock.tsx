@@ -15,6 +15,8 @@ interface BasicBlockProps {
   descriptionValue: string;
 
   changeValue: (name: string, value: string) => void;
+
+  isEdit: boolean;
 }
 
 const BasicBlock = ({
@@ -24,6 +26,8 @@ const BasicBlock = ({
   logoValue,
   descriptionValue,
   changeValue,
+
+  isEdit,
 }: BasicBlockProps) => {
   const [error, setError] = React.useState({
     name: "",
@@ -73,6 +77,7 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error={error.websiteUrl}
           onChange={onChange}
+          disabled={isEdit}
         />
         <SelectGroup
           label={"App icon"}

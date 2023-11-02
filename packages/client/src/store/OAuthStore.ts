@@ -24,6 +24,8 @@ import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -235,7 +237,7 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  updateClient = async (clientId: string, client: ClientProps) => {
+  updateClient = async (clientId: string, client: IClientProps) => {
     try {
       const newClient = await updateClient(clientId, client);
 
@@ -269,9 +271,9 @@ class OAuthStore implements OAuthStoreProps {
 
   regenerateSecret = async (clientId: string) => {
     try {
-      const secret = await regenerateSecret(clientId);
+      const { client_secret } = await regenerateSecret(clientId);
 
-      return secret;
+      return client_secret;
     } catch (e) {
       console.log(e);
     }
@@ -336,8 +338,6 @@ class OAuthStore implements OAuthStoreProps {
             this.activeClients = [];
             this.selection = [];
           });
-
-          //TODO OAuth, show toast
         } catch (e) {}
       } else {
         this.setActiveClient(clientId);
@@ -348,11 +348,25 @@ class OAuthStore implements OAuthStoreProps {
       }
     };
 
-    const settingsOption = {
-      key: "settings",
-      icon: SettingsIcon,
-      label: t("Settings"),
+    const editOption = {
+      key: "edit",
+      icon: PencilReactSvgUrl,
+      label: t("Edit"),
       onClick: () => this.editClient(clientId),
+    };
+
+    const authButtonOption = {
+      key: "auth-button",
+      icon: CodeReactSvgUrl,
+      label: "Auth button",
+      onClick: () => console.log(clientId),
+    };
+
+    const infoOption = {
+      key: "info",
+      icon: SettingsIcon,
+      label: "Info",
+      onClick: () => console.log(clientId),
     };
 
     const enableOption = {
@@ -404,7 +418,9 @@ class OAuthStore implements OAuthStoreProps {
         contextOptions.unshift(enableOption);
       }
 
-      contextOptions.unshift(settingsOption);
+      contextOptions.unshift(infoOption);
+      contextOptions.unshift(authButtonOption);
+      contextOptions.unshift(editOption);
     }
 
     return contextOptions;

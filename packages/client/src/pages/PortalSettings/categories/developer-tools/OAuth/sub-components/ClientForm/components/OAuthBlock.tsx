@@ -11,6 +11,8 @@ interface OAuthBlockProps {
   allowedOriginsValue: string[];
 
   changeValue: (name: string, value: string) => void;
+
+  isEdit: boolean;
 }
 
 const OAuthBlock = ({
@@ -19,6 +21,8 @@ const OAuthBlock = ({
   allowedOriginsValue,
 
   changeValue,
+
+  isEdit,
 }: OAuthBlockProps) => {
   return (
     <StyledBlock>
@@ -31,6 +35,7 @@ const OAuthBlock = ({
           onAdd={changeValue}
           currentValue={redirectUrisValue}
           helpButtonText={"Redirect uris"}
+          isDisabled={isEdit}
         />
         <MultiInputGroup
           label={"Allowed origins"}
@@ -39,6 +44,7 @@ const OAuthBlock = ({
           onAdd={changeValue}
           currentValue={allowedOriginsValue}
           helpButtonText={"Allowed origins"}
+          isDisabled={isEdit}
         />
       </StyledInputBlock>
     </StyledBlock>

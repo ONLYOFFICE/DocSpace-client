@@ -26,6 +26,7 @@ interface IScopesBlockProps {
   selectedScopes: string[];
   onAddScope: (name: string, scope: string) => void;
   t: any;
+  isEdit: boolean;
 }
 
 const ScopesBlock = ({
@@ -33,6 +34,7 @@ const ScopesBlock = ({
   selectedScopes,
   onAddScope,
   t,
+  isEdit,
 }: IScopesBlockProps) => {
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
   const [filteredScopes, setFilteredScopes] = React.useState<IFilteredScopes>(
@@ -152,7 +154,7 @@ const ScopesBlock = ({
             <Checkbox
               className="checkbox-read"
               isChecked={isReadChecked}
-              isDisabled={isReadDisabled}
+              isDisabled={isReadDisabled || isEdit}
               onChange={() =>
                 onAddCheckedScope(
                   key as ScopeGroup,
@@ -165,6 +167,7 @@ const ScopesBlock = ({
           <StyledScopesCheckbox>
             <Checkbox
               isChecked={isReadDisabled}
+              isDisabled={isEdit}
               onChange={() =>
                 onAddCheckedScope(
                   key as ScopeGroup,

@@ -33,6 +33,8 @@ interface InputGroupProps {
   withCopy?: boolean;
   onCopyClick?: (name: string) => void;
   isPassword?: boolean;
+
+  disabled?: boolean;
 }
 
 const InputGroup = ({
@@ -54,6 +56,7 @@ const InputGroup = ({
   withCopy,
   onCopyClick,
   isPassword,
+  disabled,
 }: InputGroupProps) => {
   return (
     <StyledInputGroup>
@@ -82,7 +85,7 @@ const InputGroup = ({
           tabIndex={0}
           maxLength={255}
           isReadOnly={withCopy}
-          isDisabled={withCopy}
+          isDisabled={withCopy || disabled}
           iconName={withCopy ? CopyReactSvgUrl : null}
           onIconClick={withCopy && onCopyClick}
           type={isPassword ? "password" : "text"}

@@ -14,6 +14,7 @@ class SpacesStore {
   authStore = null;
 
   createPortalDialogVisible = false;
+  deletePortalDialogVisible = false;
   domainDialogVisible = false;
 
   constructor(authStore) {
@@ -78,6 +79,10 @@ class SpacesStore {
 
   setChangeDomainDialogVisible = (domainDialogVisible: boolean) => {
     this.domainDialogVisible = domainDialogVisible;
+  };
+
+  setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
+    this.deletePortalDialogVisible = deletePortalDialogVisible;
   };
 }
 

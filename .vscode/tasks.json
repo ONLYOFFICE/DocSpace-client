@@ -21,6 +21,20 @@
       }
     },
     {
+      "label": "Backend | clear",
+      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/clear.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      }
+    },
+    {
       "label": "Backend | stop",
       "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/stop.backend.docker.py",
       "type": "shell",
@@ -37,20 +51,6 @@
     {
       "label": "Backend | start",
       "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/start.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true
-      }
-    },
-    {
-      "label": "Backend | restart",
-      "command": "${command:python.interpreterPath} ${workspaceFolder}/../buildtools/start/restart.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",

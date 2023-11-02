@@ -379,6 +379,16 @@ const StyledContent = styled.div`
     margin-left: 12px;
   }
 
+  .badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    > div {
+      margin: 0;
+    }
+  }
+
   @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;

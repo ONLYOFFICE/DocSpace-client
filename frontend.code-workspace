@@ -41,13 +41,57 @@
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "VsCodeTaskButtons.tasks": [
+      {
+        "label": "S:Build-EE",
+        "task": "Backend | build EE",
+        "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+      },
+      {
+        "label": "S:Build-CE",
+        "task": "Backend | build CE",
+        "tooltip": "🛠️ Start the \"backend docker build CE\" task"
+      },
+      {
+        "label": "S:Build-SAAS",
+        "task": "Backend | build SAAS",
+        "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
+      },
+      {
+        "label": "S:Clear",
+        "task": "Backend | clear",
+        "tooltip": "🛠️ Start the \"backend docker clear\" task"
+      },
+      {
+        "label": "S:Stop",
+        "task": "Backend | stop",
+        "tooltip": "🛠️ Start the \"backend docker stop\" task"
+      },
+      {
+        "label": "S:Start",
+        "task": "Backend | start",
+        "tooltip": "🛠️ Start the \"backend docker start\" task"
+      },
+      {
+        "label": "C:Start",
+        "task": "Frontend | start",
+        "tooltip": "🛠️ Start the \"frontend start\" task"
+      }
+    ]
   },
   "extensions": {
     "recommendations": [
       "folke.vscode-monorepo-workspace",
       "orta.vscode-jest",
-      "firsttris.vscode-jest-runner"
+      "firsttris.vscode-jest-runner",
+      "spencerwmiles.vscode-task-buttons",
+      "esbenp.prettier-vscode",
+      "formulahendry.auto-close-tag",
+      "formulahendry.auto-complete-tag",
+      "formulahendry.auto-rename-tag",
+      "mrmlnc.vscode-duplicate",
+      "ms-python.python"
     ]
   }
 }

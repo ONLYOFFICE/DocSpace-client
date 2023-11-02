@@ -61,7 +61,7 @@ const MembersList = (props) => {
 
       const containerHeight = infoPanelContainer[0]?.clientHeight ?? 0;
       const offsetTop = bodyRef?.current?.offsetTop ?? 0;
-      const containerMargin = 2;
+      const containerMargin = 26; //
       const bodyHeight = containerHeight - offsetTop - containerMargin;
 
       setBodyHeight(bodyHeight);

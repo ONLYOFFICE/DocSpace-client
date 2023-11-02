@@ -46,7 +46,7 @@ const PluginPage = ({
         <StyledContainer>
           <ListLoader withUpload={withUpload} />
         </StyledContainer>
-      ) : isEmptyList || true ? (
+      ) : isEmptyList ? (
         <StyledEmptyContainer>
           <EmptyScreen
             t={t}

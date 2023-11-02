@@ -29,7 +29,6 @@
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından DocSpace'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AutoBackup": "Otomatik yedekleme",
-  "AutoBackupDescription": "DocSpace verilerinin otomatik olarak yedeklenmesi için bu seçeneği kullanın.",
   "AutoBackupHelp": "<strong>Otomatik yedekleme</strong> seçeneği yerel bir sunucudan geri yükleme yapılmak istediğinde kullanılabilmesi için DocSpace veri yedekleme sürecinin otomasyonu için kullanılır.",
   "AutoBackupHelpNote": "Veri depolama, otomatik yedekleme periyodu ve en yüksek kaydedilen kopya sayısını seçebilirsiniz.<br/><strong>Not:</strong> yedekleme verilerini üçüncü bir hesaba (DropBox, Box.com, OneDrive veya Google Drive) kaydetmeden önce bu hesabı {{organizationName}} Ortak Belgeler klasörüne bağlamanız gerekir.",
   "AutoSavePeriod": "Otomatik kaydetme süresi",

@@ -22,7 +22,7 @@ const MobileView = (props) => {
   return (
     <MainContainer>
       <MobileCategoryWrapper
-        title={t("SettingPasswordStrength")}
+        title={t("SettingPasswordTittle")}
         subtitle={
           <Trans
             i18nKey="SettingPasswordStrengthMobileDescription"

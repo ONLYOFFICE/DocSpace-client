@@ -10,6 +10,7 @@ import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url
 import { useRootHelperProps, Item } from "../FilesSelector.types";
 
 import { defaultBreadCrumb } from "../utils";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 const useRootHelper = ({
   setBreadCrumbs,
@@ -37,6 +38,8 @@ const useRootHelper = ({
     }
 
     currentTree?.forEach((folder) => {
+      const avatar = getCatalogIconUrlByType(folder.rootFolderType);
+
       if (
         folder.rootFolderType === FolderType.Rooms ||
         folder.rootFolderType === FolderType.USER
@@ -51,11 +54,7 @@ const useRootHelper = ({
           foldersCount: folder.foldersCount,
           security: folder.security,
           isFolder: true,
-
-          avatar:
-            folder.rootFolderType === FolderType.Rooms
-              ? CatalogFolderReactSvgUrl
-              : CatalogUserReactSvgUrl,
+          avatar,
         });
       }
     });

@@ -29,6 +29,8 @@ const MainContainer = styled.div`
 
   .paid-badge {
     cursor: auto;
+    margin-bottom: 8px;
+    margin-left: -2px;
   }
 
   .login-history-description {
@@ -269,6 +271,7 @@ const HistoryMainContent = (props) => {
       {isSettingNotPaid && (
         <Badge
           className="paid-badge"
+          fontWeight="700"
           backgroundColor="#EDC409"
           label={t("Common:Paid")}
           isPaidBadge={true}

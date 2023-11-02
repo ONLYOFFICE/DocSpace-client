@@ -26,6 +26,7 @@ const MobileCategoryWrapper = (props) => {
             label={badgeLabel}
             isPaidBadge={true}
             className="paid-badge"
+            fontWeight="700"
           />
         )}
         <StyledArrowRightIcon className="settings_unavailable" size="small" />

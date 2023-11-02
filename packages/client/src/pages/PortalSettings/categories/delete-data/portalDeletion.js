@@ -66,10 +66,7 @@ const PortalDeletion = (props) => {
 
   return (
     <MainContainer>
-      <Text fontSize="16px" fontWeight="700" className="header">
-        {t("DeleteDocSpace")}
-      </Text>
-      <Text fontSize="12px" className="description">
+      <Text fontSize="13px" className="description">
         {t("PortalDeletionDescription")}
       </Text>
       <Text className="helper">{t("PortalDeletionHelper")}</Text>

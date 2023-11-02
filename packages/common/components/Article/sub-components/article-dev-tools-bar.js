@@ -34,7 +34,12 @@ const StyledWrapper = styled.div`
 
   .arrow {
     height: 16px;
-    margin-left: auto;
+    margin-inline-start: auto;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
   }
 
   .label {

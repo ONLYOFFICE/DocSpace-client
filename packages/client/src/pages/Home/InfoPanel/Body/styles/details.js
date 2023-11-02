@@ -9,6 +9,7 @@ const StyledThumbnail = styled.div`
   width: 100%;
   height: ${isMobile ? (isTablet ? "240" : "188") : "200"}px;
   img {
+    box-sizing: border-box;
     border: ${(props) => `solid 1px ${props.theme.infoPanel.borderColor}`};
     border-radius: 6px;
     width: 100%;

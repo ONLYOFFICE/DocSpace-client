@@ -27,6 +27,7 @@ import FieldContainer from "@docspace/components/field-container";
 | `id`                      |     `string`      |    -     |   -    |     -     | Accepts id                                       |
 | `isRequired`              |      `bool`       |    -     |   -    |  `false`  | Indicates that the field is required to fill     |
 | `isVertical`              |      `bool`       |    -     |   -    |  `false`  | Vertical or horizontal alignment                 |
+| `removeMargin`            |      `bool`       |    -     |   -    |  `false`  | Remove default margin property                   |
 | `labelText`               |     `string`      |    -     |   -    |     -     | Field label text                                 |
 | `labelVisible`            |      `bool`       |    -     |   -    |  `true`   | Sets visibility of field label section           |
 | `maxLabelWidth`           |     `string`      |    -     |   -    |  `110px`  | Max label width in horizontal alignment          |

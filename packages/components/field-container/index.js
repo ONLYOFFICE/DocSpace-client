@@ -35,6 +35,7 @@ class FieldContainer extends React.Component {
       offsetRight,
       tooltipMaxWidth,
       tooltipClass,
+      removeMargin,
     } = this.props;
 
     return (
@@ -45,6 +46,7 @@ class FieldContainer extends React.Component {
         id={id}
         style={style}
         maxwidth={errorMessageWidth}
+        removeMargin={removeMargin}
       >
         {labelVisible &&
           (!inlineHelpButton ? (
@@ -107,6 +109,8 @@ FieldContainer.displayName = "FieldContainer";
 FieldContainer.propTypes = {
   /** Vertical or horizontal alignment */
   isVertical: PropTypes.bool,
+  /** Remove default margin property */
+  removeMargin: PropTypes.bool,
   /** Accepts class */
   className: PropTypes.string,
   /** Indicates that the field is required to fill */
@@ -156,6 +160,7 @@ FieldContainer.defaultProps = {
   maxLabelWidth: "110px",
   errorMessageWidth: "293px",
   offsetRight: 0,
+  removeMargin: false,
 };
 
 export default FieldContainer;

@@ -223,6 +223,10 @@ const Members = ({
     };
 
     setMembersList(newMembers);
+    setSelectionParentRoom({
+      ...selectionParentRoom,
+      members: newMembers,
+    });
   };
 
   if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;

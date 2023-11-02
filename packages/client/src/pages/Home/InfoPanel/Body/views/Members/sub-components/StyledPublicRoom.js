@@ -3,26 +3,6 @@ import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { tablet, desktop } from "@docspace/components/utils/device";
 
-const StyledPublicRoomBlock = styled.div`
-  margin-bottom: -8px;
-
-  .primary-link-block {
-    margin-bottom: 10px;
-  }
-
-  .additional-link {
-    margin-bottom: 10px;
-  }
-
-  @media ${desktop} {
-    max-width: 360px;
-  }
-
-  @media ${tablet} {
-    max-width: 440px;
-  }
-`;
-
 const StyledPublicRoomBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBlock.background};
@@ -84,8 +64,10 @@ const StyledCrossIcon = styled(CrossReactSvg)`
 
 const LinksBlock = styled.div`
   display: flex;
+  height: 100%;
+  padding-top: 3px;
+  align-items: center;
   justify-content: space-between;
-  padding: 8px 0px 12px 0px;
 
   p {
     color: ${({ theme }) => theme.text.disableColor};
@@ -104,7 +86,10 @@ const StyledLinkRow = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 0px;
+  height: 100%;
+  position: relative;
+  background: ${(props) => props.theme.backgroundColor};
+  z-index: 1;
 
   .external-row-link {
     white-space: nowrap;
@@ -145,10 +130,4 @@ const StyledLinkRow = styled.div`
   }
 `;
 
-export {
-  StyledPublicRoomBlock,
-  StyledPublicRoomBar,
-  StyledCrossIcon,
-  LinksBlock,
-  StyledLinkRow,
-};
+export { StyledPublicRoomBar, StyledCrossIcon, LinksBlock, StyledLinkRow };

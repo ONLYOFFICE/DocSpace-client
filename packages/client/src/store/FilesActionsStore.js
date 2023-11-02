@@ -1059,12 +1059,12 @@ class FilesActionStore {
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
 
-    const muteStatus = action === "mute" ? true : false;
+    const muteStatus = action === "mute";
 
-    const folderIndex = id && folders.findIndex((x) => x.id === id);
+    const folderIndex = id && folders.findIndex((x) => x.id == id);
     if (folderIndex) updateRoomMute(folderIndex, muteStatus);
 
-    const treeIndex = treeFolders.findIndex((x) => x.id === rootFolderId);
+    const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
       if (muteStatus) {

@@ -6,6 +6,9 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
+import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
+import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import Badge from "@docspace/components/badge";
@@ -75,6 +78,7 @@ const Badges = ({
   setConvertDialogVisible,
   viewAs,
   onUnpinClick,
+  onUnmuteClick,
   isMutedBadge,
   isArchiveFolderRoot,
   isVisitor,
@@ -91,6 +95,9 @@ const Badges = ({
     isRoom,
     pinned,
     isFolder,
+    mute,
+    rootFolderId,
+    new: newCount,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -121,6 +128,8 @@ const Badges = ({
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
   const iconPin = UnpinReactSvgUrl;
+  const iconMute =
+    sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
 
   const unpinIconProps = {
     "data-id": id,
@@ -148,7 +157,11 @@ const Badges = ({
     lineHeight: "12px",
     "data-id": id,
   };
-
+  const unmuteIconProps = {
+    "data-id": id,
+    "data-rootfolderid": rootFolderId,
+    "data-new": newCount,
+  };
   const onShowVersionHistoryProp = item.security?.ReadHistory
     ? { onClick: onShowVersionHistory }
     : {};
@@ -241,6 +254,16 @@ const Badges = ({
         />
       )}
 
+      {isRoom && mute && (
+        <ColorTheme
+          themeId={ThemeType.IconButtonMute}
+          onClick={onUnmuteClick}
+          iconName={iconMute}
+          size={sizeBadge}
+          className="badge  is-mute tablet-badge"
+          {...unmuteIconProps}
+        />
+      )}
       {isRoom && pinned && (
         <ColorTheme
           themeId={ThemeType.IconButtonPin}

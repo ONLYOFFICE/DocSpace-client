@@ -31,6 +31,7 @@ import {
   IndicatorLoaderTheme,
   ProgressTheme,
   MobileProgressBarTheme,
+  IconButtonMuteTheme,
 } from "./styled";
 import { ThemeType } from "./constants";
 
@@ -123,6 +124,15 @@ const ColorTheme = forwardRef(
       case ThemeType.IconButtonPin: {
         return (
           <IconButtonPinTheme
+            {...props}
+            $currentColorScheme={currentColorScheme}
+            ref={ref}
+          />
+        );
+      }
+      case ThemeType.IconButtonMute: {
+        return (
+          <IconButtonMuteTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

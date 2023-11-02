@@ -1,10 +1,10 @@
-import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface RowViewProps {
-  items: ClientProps[];
+  items: IClientProps[];
   sectionWidth: number;
   viewAs?: ViewAsType;
   setViewAs?: (value: ViewAsType) => void;
@@ -12,25 +12,25 @@ export interface RowViewProps {
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
     t: any,
-    item: ClientProps
+    item: IClientProps
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
   activeClients?: string[];
   hasNextPage?: boolean;
-  totalElements?: number;
+  itemCount?: number;
   fetchNextClients?: (startIndex: number) => Promise<void>;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }
 
 export interface RowProps {
-  item: ClientProps;
+  item: IClientProps;
   isChecked: boolean;
   inProgress: boolean;
   sectionWidth: number;
   getContextMenuItems?: (
     t: any,
-    item: ClientProps
+    item: IClientProps
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
@@ -40,7 +40,7 @@ export interface RowProps {
 
 export interface RowContentProps {
   sectionWidth: number;
-  item: ClientProps;
+  item: IClientProps;
   isChecked: boolean;
   inProgress: boolean;
   handleToggleEnabled: () => void;

@@ -3,14 +3,20 @@ import { useTranslation } from "react-i18next";
 
 //@ts-ignore
 import TableCell from "@docspace/components/table-container/TableCell";
+//@ts-ignore
+import Tags from "@docspace/components/tags";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
+//@ts-ignore
+import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+//@ts-ignore
+import { getCookie } from "@docspace/components/utils/cookie";
 
 import NameCell from "./columns/name";
+import CreatorCell from "./columns/creator";
 
 import { StyledRowWrapper, StyledTableRow } from "./TableView.styled";
 import { RowProps } from "./TableView.types";
-import CreatorCell from "./columns/creator";
 
 const Row = (props: RowProps) => {
   const {
@@ -20,6 +26,7 @@ const Row = (props: RowProps) => {
     inProgress,
     getContextMenuItems,
     setSelection,
+    tagCount,
   } = props;
   const navigate = useNavigate();
 
@@ -38,6 +45,8 @@ const Row = (props: RowProps) => {
     if (
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
+      e.target.closest(".advanced-tag") ||
+      e.target.closest(".tag") ||
       e.detail === 0
     ) {
       return;
@@ -55,6 +64,9 @@ const Row = (props: RowProps) => {
   };
 
   const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
+
+  const local = getCookie("asc_language");
+  const modifiedDate = getCorrectDate(local, item.modifiedOn);
 
   return (
     <>
@@ -81,8 +93,26 @@ const Row = (props: RowProps) => {
           </TableCell>
           <TableCell>
             {/* @ts-ignore */}
-            <Text as="span" fontWeight={400} className="mr-8 textOverflow">
-              {item.description}
+            <Text
+              as="span"
+              fontWeight={400}
+              className="mr-8 textOverflow description-text"
+            >
+              {modifiedDate}
+            </Text>
+          </TableCell>
+          <TableCell>
+            {/* @ts-ignore */}
+            <Text
+              as="span"
+              fontWeight={400}
+              className="mr-8 textOverflow description-text"
+            >
+              <Tags
+                tags={item.scopes}
+                columnCount={tagCount}
+                onSelectTag={() => {}}
+              />
             </Text>
           </TableCell>
           <TableCell>

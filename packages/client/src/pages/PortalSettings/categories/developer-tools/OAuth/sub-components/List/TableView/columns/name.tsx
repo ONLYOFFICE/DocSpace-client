@@ -20,6 +20,8 @@ const StyledContainer = styled.div`
 const StyledImage = styled.img`
   width: 32px;
   height: 32px;
+
+  border-radius: 3px;
 `;
 
 interface NameCellProps {

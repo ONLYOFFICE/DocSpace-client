@@ -39,6 +39,10 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
+  .description-text {
+    color: #858585;
+  }
+
   .toggleButton {
     display: contents;
 

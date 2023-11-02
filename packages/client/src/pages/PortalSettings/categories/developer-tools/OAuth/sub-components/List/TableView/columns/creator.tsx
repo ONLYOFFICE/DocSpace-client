@@ -2,21 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-//@ts-ignore
-import TableCell from "@docspace/components/table-container/TableCell";
-import Loader from "@docspace/components/loader";
 import Avatar from "@docspace/components/avatar";
-
-const StyledContainer = styled.div`
-  .table-container_row-checkbox {
-    margin-left: -8px;
-
-    width: 16px;
-
-    padding: 16px 8px 16px 16px;
-  }
-`;
 
 const StyledAvatar = styled(Avatar)`
   width: 16px;
@@ -39,8 +25,8 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
 
       {/* @ts-ignore */}
       <Text
+        className={"description-text"}
         type="page"
-        title={name}
         fontWeight="600"
         fontSize="13px"
         isTextOverflow

@@ -24,19 +24,9 @@ const RowView = (props: RowViewProps) => {
     activeClients,
     getContextMenuItems,
     hasNextPage,
-    totalElements,
+    itemCount,
     fetchNextClients,
   } = props;
-
-  React.useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs && setViewAs("table");
-    }
-  }, [viewAs, setViewAs, sectionWidth]);
 
   return (
     <StyledRowContainer
@@ -49,7 +39,7 @@ const RowView = (props: RowViewProps) => {
         stopIndex: number;
       }) => fetchNextClients && fetchNextClients(startIndex)}
       hasMoreFiles={hasNextPage}
-      itemCount={totalElements}
+      itemCount={itemCount}
       useReactWindow={true}
     >
       {items.map((item) => (
@@ -79,7 +69,7 @@ export default inject(
       getContextMenuItems,
       activeClients,
       hasNextPage,
-      totalElements,
+      itemCount,
       fetchNextClients,
     } = oauthStore;
 
@@ -92,7 +82,7 @@ export default inject(
       activeClients,
       getContextMenuItems,
       hasNextPage,
-      totalElements,
+      itemCount,
       fetchNextClients,
     };
   }

@@ -53,7 +53,9 @@ export const OAuthRow = (props: RowProps) => {
 
   const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
 
-  const element = <img src={item.logoUrl} alt={"App logo"} />;
+  const element = (
+    <img style={{ borderRadius: "3px" }} src={item.logo} alt={"App logo"} />
+  );
 
   return (
     <>

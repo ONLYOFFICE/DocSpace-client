@@ -6,8 +6,8 @@ import TableHeader from "@docspace/components/table-container/TableHeader";
 import { HeaderProps } from "./TableView.types";
 
 const Header = (props: HeaderProps) => {
-  const { sectionWidth, tableRef, columnStorageName } = props;
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
+  const { t } = useTranslation(["Common"]);
 
   const defaultColumns: {
     [key: string]:
@@ -44,11 +44,12 @@ const Header = (props: HeaderProps) => {
       title: "Scopes",
       resizable: true,
       enable: true,
+      withTagRef: true,
       minWidth: 150,
     },
     {
-      key: "Enable",
-      title: "Enable",
+      key: "State",
+      title: "State",
       enable: true,
       resizable: false,
       defaultSize: 64,
@@ -66,6 +67,7 @@ const Header = (props: HeaderProps) => {
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}
+      tagRef={tagRef}
     />
   );
 };

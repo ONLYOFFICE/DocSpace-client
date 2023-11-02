@@ -1,5 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+//@ts-ignore
+import elementResizeDetectorMaker from "element-resize-detector";
 
 //@ts-ignore
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -15,6 +17,11 @@ import { TableWrapper } from "./TableView.styled";
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
 
+const elementResizeDetector = elementResizeDetectorMaker({
+  strategy: "scroll",
+  callOnAdd: false,
+});
+
 const TableView = ({
   items,
   sectionWidth,
@@ -29,6 +36,42 @@ const TableView = ({
   fetchNextClients,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
+  const tagRef = React.useRef<HTMLDivElement>(null);
+
+  const [tagCount, setTagCount] = React.useState(0);
+
+  React.useEffect(() => {
+    return () => {
+      if (!tagRef?.current) return;
+
+      elementResizeDetector.uninstall(tagRef.current);
+    };
+  }, []);
+
+  const onResize = React.useCallback(
+    (node: HTMLDivElement) => {
+      const element = tagRef?.current ? tagRef?.current : node;
+
+      if (element) {
+        const { width } = element.getBoundingClientRect();
+
+        const columns = Math.floor(width / 100);
+
+        if (columns != tagCount) setTagCount(columns);
+      }
+    },
+    [tagCount]
+  );
+
+  const onSetTagRef = React.useCallback((node: HTMLDivElement) => {
+    if (node) {
+      //@ts-ignore
+      tagRef.current = node;
+      onResize(node);
+
+      elementResizeDetector.listenTo(node, onResize);
+    }
+  }, []);
 
   const clickOutside = React.useCallback(
     (e: any) => {
@@ -62,6 +105,7 @@ const TableView = ({
         //@ts-ignore
         tableRef={tableRef}
         columnStorageName={columnStorageName}
+        tagRef={onSetTagRef}
       />
       <TableBody
         itemHeight={49}
@@ -86,6 +130,7 @@ const TableView = ({
             setSelection={setSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
+            tagCount={tagCount}
           />
         ))}
       </TableBody>
@@ -96,8 +141,6 @@ const TableView = ({
 export default inject(
   ({ auth, oauthStore }: { auth: any; oauthStore: OAuthStoreProps }) => {
     const { id: userId } = auth.userStore.user;
-
-    const { currentDeviceType } = auth.settingsStore;
 
     const {
       viewAs,
@@ -126,7 +169,6 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
-      currentDeviceType,
     };
   }
 )(observer(TableView));

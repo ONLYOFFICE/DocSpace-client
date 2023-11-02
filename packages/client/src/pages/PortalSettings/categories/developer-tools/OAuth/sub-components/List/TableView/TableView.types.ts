@@ -25,12 +25,14 @@ export interface HeaderProps {
   sectionWidth: number;
   tableRef: HTMLDivElement;
   columnStorageName: string;
+  tagRef: (node: HTMLDivElement) => void;
 }
 
 export interface RowProps {
   item: IClientProps;
   isChecked: boolean;
   inProgress: boolean;
+  tagCount: number;
   getContextMenuItems?: (
     t: any,
     item: IClientProps

@@ -1,6 +1,10 @@
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
+import {
+  IClientProps,
+  IClientReqDTO,
+  IScope,
+} from "@docspace/common/utils/oauth/interfaces";
 
 export interface InputProps {
   value: string;
@@ -40,7 +44,7 @@ export interface ClientFormProps {
   fetchClient?: (clientId: string) => Promise<IClientProps>;
   fetchScopes?: () => Promise<void>;
 
-  saveClient?: (client: IClientProps) => Promise<IClientProps>;
+  saveClient?: (client: IClientReqDTO) => Promise<IClientProps>;
   updateClient?: (
     clientId: string,
     client: IClientProps

@@ -54,12 +54,12 @@ const ClientForm = ({
 
     redirect_uris: [],
     allowed_origins: [],
-    logout_redirect_uris: [],
+    logout_redirect_uri: "",
 
     terms_url: "",
     policy_url: "",
 
-    authentication_method: "",
+    authentication_method: "zxc",
 
     scopes: [],
   });
@@ -95,40 +95,25 @@ const ClientForm = ({
   //   [checkedScopes]
   // );
 
-  // const onSaveClick = async () => {
-  //   const newClient: ClientProps = client ? { ...client } : ({} as ClientProps);
+  const onSaveClick = async () => {
+    if (!id) {
+      if (!saveClient) return;
 
-  //   newClient.name = form.appName;
-  //   newClient.logoUrl = form.appIcon;
-  //   newClient.description = form.description;
-  //   newClient.redirectUri = form.redirectUrl;
-  //   newClient.logoutRedirectUri = form.logoutRedirectUrl;
-  //   newClient.policyUrl = form.privacyURL;
-  //   newClient.clientId = clientId;
-  //   newClient.secret = secret;
-  //   newClient.scopes = [...checkedScopes];
+      await saveClient(form);
 
-  //   if (!id) {
-  //     if (!saveClient) return;
+      onCancelClick();
+    }
+    // } else {
+    //   if (!updateClient) return;
+    //   await updateClient(clientId, newClient);
+    // }
 
-  //     if (tenant === -1 && fetchTenant) {
-  //       const t = await fetchTenant();
+    // onCancelClick();
+  };
 
-  //       newClient.tenant = t;
-  //     }
-
-  //     await saveClient(newClient);
-  //   } else {
-  //     if (!updateClient) return;
-  //     await updateClient(clientId, newClient);
-  //   }
-
-  //   onCancelClick();
-  // };
-
-  // const onCancelClick = () => {
-  //   navigate("/portal-settings/developer-tools/oauth");
-  // };
+  const onCancelClick = () => {
+    navigate("/portal-settings/developer-tools/oauth");
+  };
 
   // const onResetClick = React.useCallback(async () => {
   //   if (!regenerateSecret) return;
@@ -312,8 +297,8 @@ const ClientForm = ({
           <ButtonsBlock
             saveLabel={"Save"}
             cancelLabel={"Cancel"}
-            onSaveClick={() => {}}
-            onCancelClick={() => {}}
+            onSaveClick={onSaveClick}
+            onCancelClick={onCancelClick}
             isRequestRunning={isRequestRunning}
             saveButtonDisabled={!isValid}
             cancelButtonDisabled={isRequestRunning}

@@ -36,7 +36,7 @@ export interface IClientProps {
   authenticationMethod: string;
   tenant: number;
   redirectUris: string[];
-  logoutRedirectUris: string[];
+  logoutRedirectUri: string;
   enabled: boolean;
   invalidated: boolean;
   scopes: string[];
@@ -59,7 +59,7 @@ export interface IClientReqDTO {
   terms_url: string;
   policy_url: string;
   redirect_uris: string[];
-  logout_redirect_uris: string[];
+  logout_redirect_uri: string;
   scopes: string[];
   website_url: string;
   allowed_origins: string[];
@@ -77,7 +77,7 @@ export interface IClientResDTO {
   redirect_uris: string[];
   terms_url: string;
   policy_url: string;
-  logout_redirect_uris: string[];
+  logout_redirect_uri: string;
 
   authentication_method: string;
 

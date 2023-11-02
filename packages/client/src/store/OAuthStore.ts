@@ -207,7 +207,10 @@ class OAuthStore implements OAuthStoreProps {
       this.currentPage = page + 1;
     });
 
-    const clientList: IClientListProps = await getClientList(page, PAGE_LIMIT);
+    const clientList: IClientListProps = await getClientList(
+      this.nextPage || page,
+      PAGE_LIMIT
+    );
 
     runInAction(() => {
       this.currentPage = clientList.page;
@@ -220,17 +223,12 @@ class OAuthStore implements OAuthStoreProps {
     this.setClientsIsLoading(false);
   };
 
-  //TODO: OAuth, add tenant and other params
-  saveClient = async (client: ClientProps) => {
+  saveClient = async (client: IClientReqDTO) => {
     try {
-      client.tenant = 1;
-      client.authenticationMethod = "zxc";
-      client.termsUrl = "zxc";
-
       const newClient = await addClient(client);
 
       runInAction(() => {
-        this.clients.push(newClient);
+        this.clients.unshift(newClient);
       });
     } catch (e) {
       console.log(e);
@@ -287,7 +285,6 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  // COMPLETE
   fetchScope = async (name: string) => {
     try {
       const scope = await getScope(name);
@@ -300,7 +297,6 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  // COMPLETE
   fetchScopes = async () => {
     try {
       const scopes = await getScopeList();

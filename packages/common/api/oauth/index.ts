@@ -13,6 +13,7 @@ import {
   IClientListDTO,
   IScope,
   INoAuthClientProps,
+  IClientReqDTO,
 } from "../../utils/oauth/interfaces";
 
 export const getClient = async (
@@ -59,11 +60,13 @@ export const getClientList = async (
   return clients;
 };
 
-export const addClient = async (data: IClientProps): Promise<IClientProps> => {
+export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
+  data.logout_redirect_uri = data.website_url;
+
   const client: IClientResDTO = await request({
     method: "post",
     url: `/clients`,
-    data: transformToClientReqDTO(data),
+    data,
   });
 
   return transformToClientProps(client);

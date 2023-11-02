@@ -44,6 +44,9 @@ class SocketIOHelper {
       console.log("socket connect error", err)
     );
     client.on("disconnect", () => console.log("socket is disconnected"));
+
+    // DEV tests
+    //window.socketHelper = this;
   }
 
   get isEnabled() {

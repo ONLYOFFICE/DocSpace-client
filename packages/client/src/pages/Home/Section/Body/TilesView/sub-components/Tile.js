@@ -383,7 +383,10 @@ const StyledContent = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-inline-start: 12px;
+
+    :not(:empty) {
+      margin-inline-start: 12px;
+    }
 
     > div {
       margin: 0;

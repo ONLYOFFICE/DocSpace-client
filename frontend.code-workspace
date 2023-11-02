@@ -6,23 +6,23 @@
     },
     {
       "name": "🚀 @docspace/client",
-      "path": "packages\\client"
+      "path": "packages/client"
     },
     {
       "name": "🔑 @docspace/login",
-      "path": "packages\\login"
+      "path": "packages/login"
     },
     {
       "name": "📄 @docspace/editor",
-      "path": "packages\\editor"
+      "path": "packages/editor"
     },
     {
       "name": "📦 @docspace/common",
-      "path": "packages\\common"
+      "path": "packages/common"
     },
     {
       "name": "📦 @docspace/components",
-      "path": "packages\\components"
+      "path": "packages/components"
     }
   ],
   "settings": {

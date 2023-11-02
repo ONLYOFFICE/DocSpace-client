@@ -29,4 +29,5 @@ export const ThemeType = {
   IndicatorLoader: "indicatorLoader",
   Progress: "progress",
   MobileProgressBar: "mobileProgressBar",
+  IconButtonMute: "iconButtonMute",
 };

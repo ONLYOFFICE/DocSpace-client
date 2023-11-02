@@ -26,8 +26,7 @@ const TableWrapper = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#3D3D3D")};
     }
   }
 `;
@@ -81,8 +80,7 @@ const WebhooksTableView = (props) => {
         filesLength={webhooks.length}
         fetchMoreFiles={loadWebhooks}
         hasMoreFiles={false}
-        itemCount={webhooks.length}
-      >
+        itemCount={webhooks.length}>
         {webhooks.map((webhook, index) => (
           <WebhooksTableRow
             key={webhook.id}

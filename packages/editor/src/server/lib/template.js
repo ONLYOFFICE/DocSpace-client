@@ -35,11 +35,12 @@ export default function template(
 
   const initialEditorStateStringify = JSON.stringify(initialEditorState);
 
-  const initialEditorStateString = initialEditorStateStringify.includes(
-    "</script>"
-  )
-    ? initialEditorStateStringify.replaceAll("</script>", "<\\/script>")
-    : initialEditorStateStringify;
+  const lt = /</g,
+    gt = />/g;
+
+  const initialEditorStateString = initialEditorStateStringify
+    .replace(lt, "&lt;")
+    .replace(gt, "&gt;");
 
   const scripts = `   
     <script id="__ASC_INITIAL_EDITOR_STATE__">

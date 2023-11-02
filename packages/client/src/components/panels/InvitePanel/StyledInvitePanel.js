@@ -298,7 +298,7 @@ const SearchItemText = styled(Text)`
   color: ${(props) =>
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
-      : props.theme.text.disableColor};
+      : props.theme.text.emailColor};
   ${(props) => props.info && `margin-left: auto`}
 `;
 

@@ -62,6 +62,7 @@ const Dark = {
   text: {
     color: grayMaxLight,
     disableColor: "#5c5c5c",
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },

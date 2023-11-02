@@ -69,18 +69,7 @@ const StyledAside = styled(Container)`
 
     width: 100%;
     max-width: 100%;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            transform: translateX(
-              ${(props) => (props.visible ? "0" : "-100%")}
-            );
-          `
-        : css`
-            transform: translateX(${(props) => (props.visible ? "0" : "100%")});
-          `}
-
+    transform: translateY(${(props) => (props.visible ? "0" : "100%")});
     aside:not(:first-child) {
       height: 100%;
     }

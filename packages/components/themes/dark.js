@@ -62,6 +62,7 @@ const Dark = {
   text: {
     color: grayMaxLight,
     disableColor: "#5c5c5c",
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -1714,6 +1715,7 @@ const Dark = {
     disabledArrow: "#474747",
     weekdayColor: "#858585",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
   },
 
   datePicker: {

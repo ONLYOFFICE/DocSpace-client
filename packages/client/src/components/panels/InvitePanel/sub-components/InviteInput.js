@@ -190,10 +190,11 @@ const InviteInput = ({
         onClick={addUser}
         disabled={shared}
         height={48}
+        heightTablet={48}
         className="list-item"
       >
         <Avatar size="min" role="user" source={avatar} />
-        <div>
+        <div className="list-item_content">
           <SearchItemText primary disabled={shared}>
             {displayName}
           </SearchItemText>

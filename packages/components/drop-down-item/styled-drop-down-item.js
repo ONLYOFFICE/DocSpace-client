@@ -197,6 +197,15 @@ const StyledDropdownItem = styled.div`
         transform: rotate(90deg);
         height: auto;
       `}
+    width:12px;
+    height: 12px;
+    margin-inline-end: 0;
+    align-self: center;
+    line-height: normal;
+
+    .drop-down-item_icon {
+      height: 12px;
+    }
   }
 
   max-width: 100%;

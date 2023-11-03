@@ -14,7 +14,7 @@ import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
+
 import { Base } from "@docspace/components/themes";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
@@ -294,7 +294,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 })(
   observer(
     withTranslation(["Files", "Translations", "Notifications"])(
-      withContent(withBadges(FilesRowContent))
+      withContent(FilesRowContent)
     )
   )
 );

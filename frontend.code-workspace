@@ -74,6 +74,11 @@
         "tooltip": "🛠️ Start the \"backend docker start\" task"
       },
       {
+        "label": "S:Restart",
+        "task": "Backend | restart",
+        "tooltip": "🛠️ Start the \"backend docker restart\" task"
+      },
+      {
         "label": "C:Start",
         "task": "Frontend | start",
         "tooltip": "🛠️ Start the \"frontend start\" task"

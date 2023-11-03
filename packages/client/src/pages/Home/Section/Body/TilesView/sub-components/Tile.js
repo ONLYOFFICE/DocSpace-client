@@ -379,6 +379,20 @@ const StyledContent = styled.div`
     margin-left: 12px;
   }
 
+  .badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    :not(:empty) {
+      margin-inline-start: 12px;
+    }
+
+    > div {
+      margin: 0;
+    }
+  }
+
   @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
@@ -411,10 +425,10 @@ const StyledOptionButton = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 8px 8px 8px 21px;
+            padding: 8px 12px 8px 21px;
           `
         : css`
-            padding: 8px 21px 8px 8px;
+            padding: 8px 21px 8px 12px;
           `}
   }
 `;

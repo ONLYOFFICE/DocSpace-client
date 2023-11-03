@@ -47,7 +47,7 @@ import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
 type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];
 
-type PageType = FolderUnionType | SettingsPageUnionType;
+type PageUnionType = FolderUnionType | SettingsPageUnionType;
 type SizeType = 16 | 20;
 type OptionsType = {
   [P in string]: any;
@@ -58,7 +58,7 @@ const defaultIcon: Record<SizeType, string> = {
   20: CatalogFolder20ReactSvgUrl,
 };
 
-const icons: Record<SizeType, Partial<Record<PageType, string>>> = {
+const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
   16: {
     [FolderType.USER]: CatalogUserReactSvgUrl,
     [FolderType.Rooms]: CatalogRoomsReactSvgUrl,
@@ -110,13 +110,13 @@ const DesktopIconSize = 16;
 const NullURL = "";
 
 const isSettingsCatalog = (
-  pageType: PageType
+  pageType: PageUnionType
 ): pageType is SettingsPageUnionType => {
   return typeof pageType === "string";
 };
 
 export const getCatalogIconUrlByType = (
-  pageType: PageType,
+  pageType: PageUnionType,
   options?: OptionsType
 ): string => {
   const size: SizeType =

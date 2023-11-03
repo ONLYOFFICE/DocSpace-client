@@ -2034,8 +2034,7 @@ class FilesActionStore {
   };
 
   getRecycleBinFolderOptions = (itemsCollection, t) => {
-    const { setEmptyTrashDialogVisible, setMoveToPanelVisible } =
-      this.dialogsStore;
+    const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -2048,7 +2047,7 @@ class FilesActionStore {
       .set("restore", {
         id: "menu-restore",
         label: t("Common:Restore"),
-        onClick: () => setMoveToPanelVisible(true),
+        onClick: () => setRestorePanelVisible(true),
         iconUrl: MoveReactSvgUrl,
       })
       .set("delete", deleteOption)

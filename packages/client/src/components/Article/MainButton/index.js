@@ -123,6 +123,7 @@ const ArticleMainButtonContent = (props) => {
     mainButtonMobileVisible,
     versionHistoryPanelVisible,
     moveToPanelVisible,
+    restorePanelVisible,
     copyPanelVisible,
 
     security,
@@ -500,6 +501,7 @@ const ArticleMainButtonContent = (props) => {
   if (currentDeviceType === DeviceType.mobile) {
     mainButtonVisible =
       moveToPanelVisible ||
+      restorePanelVisible ||
       copyPanelVisible ||
       selectFileDialogVisible ||
       versionHistoryPanelVisible
@@ -612,6 +614,7 @@ export default inject(
       setInviteUsersWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       selectFileDialogVisible,
     } = dialogsStore;
 
@@ -666,6 +669,7 @@ export default inject(
 
       mainButtonMobileVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       copyPanelVisible,
       versionHistoryPanelVisible,
       security,

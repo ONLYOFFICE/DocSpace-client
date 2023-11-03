@@ -64,6 +64,16 @@ const Modal = ({
 
   const onResize = (e) => {
     if (!contentRef.current) return;
+
+    if (currentDisplayType === "modal") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+
+      return;
+    }
     if (e?.type === "resize") {
       let diff = windowHeight - e.target.height - e.target.pageTop;
 

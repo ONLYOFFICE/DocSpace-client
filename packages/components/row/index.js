@@ -163,7 +163,7 @@ class Row extends React.Component {
           className="row_context-menu-wrapper"
           spacerWidth={contextButtonSpacerWidth}
         >
-          {!!badgesComponent && badgesComponent}
+          {badgesComponent && badgesComponent}
           {renderContentElement && (
             <StyledContentElement>{contentElement}</StyledContentElement>
           )}

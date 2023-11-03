@@ -249,7 +249,10 @@ class PeopleStore {
         id: "menu-info",
         key: "info",
         label: t("Common:Info"),
-        disabled: isVisible || !(isTablet() || isMobile() || !isDesktop()),
+        disabled:
+          isVisible ||
+          !(isTablet() || isMobile() || !isDesktop()) ||
+          selection.length > 1,
         onClick: (item) => this.onOpenInfoPanel(item),
         iconUrl: InfoReactSvgUrl,
       },

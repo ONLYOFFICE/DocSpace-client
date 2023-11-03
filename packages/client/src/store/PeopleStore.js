@@ -1,4 +1,4 @@
-﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
@@ -82,7 +82,6 @@ class PeopleStore {
     this.isInit = true;
 
     //this.authStore.settingsStore.setModuleInfo(config.homepage, config.id);
-
   };
 
   reset = () => {

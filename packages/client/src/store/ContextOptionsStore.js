@@ -234,6 +234,13 @@ class ContextOptionsStore {
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
+  onRestoreAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+    console.log("Click");
+    this.dialogsStore.setRestorePanelVisible(true);
+  };
+
   onCopyAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
@@ -1368,7 +1375,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: false,
       },
       {
@@ -1680,7 +1687,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: !isRecycleBinFolder || !restoreItems,
       },
       {

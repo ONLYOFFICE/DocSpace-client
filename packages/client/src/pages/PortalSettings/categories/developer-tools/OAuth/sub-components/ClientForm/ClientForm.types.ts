@@ -47,8 +47,8 @@ export interface ClientFormProps {
   saveClient?: (client: IClientReqDTO) => Promise<IClientProps>;
   updateClient?: (
     clientId: string,
-    client: IClientProps
-  ) => Promise<IClientProps>;
+    client: IClientReqDTO
+  ) => Promise<IClientReqDTO>;
 
   regenerateSecret?: (clientId: string) => Promise<string>;
 

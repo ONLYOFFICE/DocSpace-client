@@ -24,6 +24,10 @@ const ClientBlock = ({
     secret: secretValue,
   });
 
+  React.useEffect(() => {
+    setValue({ id: idValue, secret: secretValue });
+  }, [idValue, secretValue]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
   return (

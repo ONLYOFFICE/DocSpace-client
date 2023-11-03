@@ -46,7 +46,7 @@ const ScopesBlock = ({
 
     setCheckedScopes([...selectedScopes]);
     setFilteredScopes({ ...filtered });
-  }, []);
+  }, [selectedScopes]);
 
   const onAddCheckedScope = (
     group: ScopeGroup,

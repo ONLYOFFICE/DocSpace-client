@@ -52,7 +52,7 @@ export interface OAuthStoreProps {
 
   saveClient: (client: IClientReqDTO) => Promise<void>;
 
-  updateClient: (clientId: string, client: IClientProps) => Promise<void>;
+  updateClient: (clientId: string, client: IClientReqDTO) => Promise<void>;
 
   changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
 
@@ -237,7 +237,7 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  updateClient = async (clientId: string, client: IClientProps) => {
+  updateClient = async (clientId: string, client: IClientReqDTO) => {
     try {
       const newClient = await updateClient(clientId, client);
 
@@ -245,7 +245,13 @@ class OAuthStore implements OAuthStoreProps {
 
       if (idx > -1) {
         runInAction(() => {
-          this.clients[idx] = newClient;
+          this.clients[idx] = {
+            ...newClient,
+            creatorAvatar: this.clients[idx].creatorAvatar,
+            creatorDisplayName: this.clients[idx].creatorDisplayName,
+          };
+
+          console.log(this.clients[idx]);
         });
       }
     } catch (e) {

@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import {
   IClientProps,
   IClientReqDTO,
-  IScope,
 } from "@docspace/common/utils/oauth/interfaces";
 
 import BasicBlock from "./components/BasicBlock";
@@ -70,47 +69,16 @@ const ClientForm = ({
 
   const isEdit = !!id;
 
-  // const onInputChange = React.useCallback(
-  //   (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const { name, value } = e.target;
-
-  //     setForm((v) => {
-  //       v[name] = value;
-
-  //       return { ...v };
-  //     });
-  //   },
-  //   []
-  // );
-
-  // const onCheckboxChange = React.useCallback(
-  //   (name: string) => {
-  //     const idx = checkedScopes.findIndex((scope) => scope === name);
-
-  //     if (idx === -1) {
-  //       setCheckedScopes((val) => [...val, name]);
-  //     } else {
-  //       setCheckedScopes((val) => val.filter((scope) => scope !== name));
-  //     }
-  //   },
-  //   [checkedScopes]
-  // );
-
   const onSaveClick = async () => {
     if (!id) {
-      if (!saveClient) return;
       setIsRequestRunning(true);
 
-      await saveClient(form);
-
-      onCancelClick();
+      await saveClient?.(form);
+    } else {
+      await updateClient?.(clientId, form);
     }
-    // } else {
-    //   if (!updateClient) return;
-    //   await updateClient(clientId, newClient);
-    // }
 
-    // onCancelClick();
+    onCancelClick();
   };
 
   const onCancelClick = () => {
@@ -156,43 +124,50 @@ const ClientForm = ({
       actions.push(fetchClient(id));
     }
 
-    actions.push(fetchScopes());
+    if (scopeList?.length === 0) actions.push(fetchScopes());
 
     const [fetchedClient, ...rest] = await Promise.all(actions);
 
-    if (id && fetchedClient) {
+    if (id) {
       setForm({
-        name: fetchedClient.name,
-        logo: fetchedClient.logo,
-        website_url: fetchedClient.websiteUrl,
-        description: fetchedClient.description,
+        name: fetchedClient?.name || client?.name || "",
+        logo: fetchedClient?.logo || client?.logo || "",
+        website_url: fetchedClient?.websiteUrl || client?.websiteUrl || "",
+        description: fetchedClient?.description || client?.description || "",
 
-        redirect_uris: fetchedClient.redirectUris,
-        allowed_origins: fetchedClient.allowedOrigins,
-        logout_redirect_uri: fetchedClient.logoutRedirectUri,
+        redirect_uris:
+          fetchedClient?.redirectUris || client?.redirectUris || [],
+        allowed_origins:
+          fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
+        logout_redirect_uri:
+          fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
-        terms_url: fetchedClient.termsUrl,
-        policy_url: fetchedClient.policyUrl,
+        terms_url: fetchedClient?.termsUrl || client?.termsUrl || "",
+        policy_url: fetchedClient?.policyUrl || client?.policyUrl || "",
 
-        authentication_method: fetchedClient.authenticationMethod,
+        authentication_method:
+          fetchedClient?.authenticationMethod ||
+          client?.authenticationMethod ||
+          "",
 
-        scopes: fetchedClient.scopes,
+        scopes: fetchedClient?.scopes || client?.scopes || [],
       });
-      setClientId(fetchedClient.clientId);
-      setClientSecret(fetchedClient.clientSecret);
 
-      setInitialClient(fetchedClient);
+      setClientId(fetchedClient?.clientId || client?.clientId || "");
+      setClientSecret(
+        fetchedClient?.clientSecret || client?.clientSecret || ""
+      );
+
+      setInitialClient(client || fetchedClient || ({} as IClientProps));
     }
 
     setIsLoading(false);
-  }, [id, client, fetchScopes]);
+  }, [id, fetchScopes]);
 
   React.useEffect(() => {
-    if (scopeList && scopeList?.length !== 0) return;
-
     setIsLoading(true);
     getClientData();
-  }, [id, scopeList, client, getClientData, fetchScopes]);
+  }, [getClientData, fetchScopes]);
 
   const compareAndValidate = () => {
     let isValid = true;

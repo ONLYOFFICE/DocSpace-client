@@ -14,10 +14,15 @@ import { StyledDropDownItem } from "../StyledDropDownItem";
 import ViewerWrapperProps from "./ViewerWrapper.props";
 
 function ViewerWrapper(props: ViewerWrapperProps) {
-  const onClickContextItem = useCallback((item: ContextMenuModel) => {
-    if (isSeparator(item)) return;
-    item.onClick();
-  }, []);
+  const onClickContextItem = useCallback(
+    (item: ContextMenuModel) => {
+      if (isSeparator(item)) return;
+
+      props.onSetSelectionFile();
+      item.onClick();
+    },
+    [props.onSetSelectionFile]
+  );
 
   const generateContextMenu = (
     isOpen: boolean,

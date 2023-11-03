@@ -27,6 +27,7 @@ import commonIconsStyles from "../utils/common-icons-style";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import SubmenuItem from "./sub-components/SubmenuItem";
+import { classNames } from "../utils/classNames";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
@@ -280,9 +281,9 @@ const MainButtonMobile = (props) => {
                 id={option.id}
                 key={option.key}
                 label={option.label}
-                className={`${option.className} ${
-                  option.isSeparator && "is-separator"
-                }`}
+                className={classNames(option.className, {
+                  "is-separator": option.isSeparator,
+                })}
                 onClick={optionOnClickAction}
                 icon={option.icon ? option.icon : ""}
                 action={option.action}

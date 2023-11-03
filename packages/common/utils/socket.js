@@ -44,6 +44,9 @@ class SocketIOHelper {
       console.log("socket connect error", err)
     );
     client.on("disconnect", () => console.log("socket is disconnected"));
+
+    // DEV tests
+    //window.socketHelper = this;
   }
 
   get isEnabled() {
@@ -58,7 +61,11 @@ class SocketIOHelper {
     if (!this.isEnabled) return;
 
     const ids =
-      typeof data.roomParts === "object" ? data.roomParts : [data.roomParts];
+      !data || !data.roomParts
+        ? []
+        : typeof data.roomParts === "object"
+        ? data.roomParts
+        : [data.roomParts];
 
     ids.forEach((id) => {
       if (command === "subscribe") {

@@ -357,7 +357,7 @@ const StyledFileTileBottom = styled.div`
 const StyledContent = styled.div`
   display: flex;
   align-items: center;
-
+  gap: 8px;
   flex-basis: 100%;
 
   a {

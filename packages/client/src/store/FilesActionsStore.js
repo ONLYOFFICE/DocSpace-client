@@ -1563,6 +1563,7 @@ class FilesActionStore {
       this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
+    const canDownload = selection.every((s) => s.security?.Download);
 
     switch (option) {
       case "copy":
@@ -1571,11 +1572,13 @@ class FilesActionStore {
         return hasSelection && canCopy;
       case "showInfo":
       case "download":
-        const canDownload = selection.every((s) => s.security?.Download);
-
         return hasSelection && canDownload;
       case "downloadAs":
-        return canConvertSelected && !this.publicRoomStore.isPublicRoom;
+        return (
+          canDownload &&
+          canConvertSelected &&
+          !this.publicRoomStore.isPublicRoom
+        );
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 
@@ -2031,8 +2034,7 @@ class FilesActionStore {
   };
 
   getRecycleBinFolderOptions = (itemsCollection, t) => {
-    const { setEmptyTrashDialogVisible, setMoveToPanelVisible } =
-      this.dialogsStore;
+    const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -2045,7 +2047,7 @@ class FilesActionStore {
       .set("restore", {
         id: "menu-restore",
         label: t("Common:Restore"),
-        onClick: () => setMoveToPanelVisible(true),
+        onClick: () => setRestorePanelVisible(true),
         iconUrl: MoveReactSvgUrl,
       })
       .set("delete", deleteOption)

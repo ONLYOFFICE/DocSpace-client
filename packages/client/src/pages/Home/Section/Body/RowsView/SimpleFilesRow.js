@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 import Row from "@docspace/components/row";
 import FilesRowContent from "./FilesRowContent";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { isMobile as isMobileUtile } from "@docspace/components/utils/device";
 
@@ -187,6 +187,15 @@ const StyledSimpleFilesRow = styled(Row)`
 
     .row-copy-link {
       display: block;
+
+      ${isMobileOnly &&
+      css`
+        :hover {
+          svg path {
+            fill: ${({ theme }) => theme.iconButton.color};
+          }
+        }
+      `}
     }
   }
 

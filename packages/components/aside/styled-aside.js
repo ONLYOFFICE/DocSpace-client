@@ -13,8 +13,9 @@ const Container = ({
   scale,
   zIndex,
   contentPaddingBottom,
+  forwardRef,
   ...props
-}) => <aside {...props} />;
+}) => <aside ref={forwardRef} {...props} />;
 /* eslint-enable react/prop-types */
 /* eslint-enable no-unused-vars */
 

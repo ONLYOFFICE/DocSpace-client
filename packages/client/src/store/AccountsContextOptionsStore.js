@@ -14,7 +14,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import { makeAutoObservable } from "mobx";
 import toastr from "@docspace/components/toast/toastr";

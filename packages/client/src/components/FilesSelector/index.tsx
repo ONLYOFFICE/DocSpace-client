@@ -47,6 +47,7 @@ const FilesSelector = ({
 
   isMove,
   isCopy,
+  isRestore,
   isRestoreAll,
   isSelect,
 
@@ -69,6 +70,7 @@ const FilesSelector = ({
   clearActiveOperations,
   setMovingInProgress,
   setMoveToPanelVisible,
+  setRestorePanelVisible,
   setCopyPanelVisible,
   setRestoreAllPanelVisible,
 
@@ -318,6 +320,8 @@ const FilesSelector = ({
       setIsFolderActions(false);
     } else if (isRestoreAll) {
       setRestoreAllPanelVisible(false);
+    } else if (isRestore) {
+      setRestorePanelVisible(false);
     } else {
       setMoveToPanelVisible(false);
     }
@@ -357,7 +361,7 @@ const FilesSelector = ({
       breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
       -1;
 
-    if ((isMove || isCopy || isRestoreAll) && !isEditorDialog) {
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       let fileIds: any[] = [];
@@ -443,7 +447,8 @@ const FilesSelector = ({
     isRestoreAll,
     isMove,
     isSelect,
-    filterParam
+    filterParam,
+    isRestore
   );
 
   const acceptButtonLabel = getAcceptButtonLabel(
@@ -452,7 +457,8 @@ const FilesSelector = ({
     isRestoreAll,
     isMove,
     isSelect,
-    filterParam
+    filterParam,
+    isRestore
   );
 
   const isDisabled = getIsDisabled(
@@ -467,7 +473,8 @@ const FilesSelector = ({
     selectedItemSecurity,
     filterParam,
     !!selectedFileInfo,
-    includeFolder
+    includeFolder,
+    isRestore
   );
 
   const SelectorBody = (
@@ -529,8 +536,12 @@ const FilesSelector = ({
       descriptionText={
         !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
       }
-      acceptButtonId={isMove || isCopy ? "select-file-modal-submit" : ""}
-      cancelButtonId={isMove || isCopy ? "select-file-modal-cancel" : ""}
+      acceptButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
+      }
+      cancelButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
+      }
     />
   );
 
@@ -574,7 +585,7 @@ export default inject(
       dialogsStore,
       filesStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isPanelVisible, id }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
@@ -592,13 +603,15 @@ export default inject(
       : selectedId;
 
     const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestoreAll)
+      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
         ? +sessionPath
         : fromFolderId;
 
     const { treeFolders } = treeFoldersStore;
 
     const {
+      restorePanelVisible,
+      setRestorePanelVisible,
       moveToPanelVisible,
       setMoveToPanelVisible,
       copyPanelVisible,
@@ -627,7 +640,7 @@ export default inject(
     } = filesStore;
 
     const selections =
-      isMove || isCopy || isRestoreAll
+      isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
           : selection.length > 0 && selection[0] != null
@@ -662,9 +675,13 @@ export default inject(
       treeFolders,
       isPanelVisible: isPanelVisible
         ? isPanelVisible
-        : (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) &&
+        : (moveToPanelVisible ||
+            copyPanelVisible ||
+            restorePanelVisible ||
+            restoreAllPanelVisible) &&
           !conflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       theme,
       selection: selectionsWithoutEditing,
       disabledItems,

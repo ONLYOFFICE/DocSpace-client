@@ -14,6 +14,7 @@ class DialogsStore {
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
+  restorePanelVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
@@ -137,6 +138,19 @@ class DialogsStore {
       return;
 
     this.moveToPanelVisible = visible;
+  };
+
+  setRestorePanelVisible = (visible) => {
+    !visible && this.deselectActiveFiles();
+
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection
+    )
+      return;
+
+    this.restorePanelVisible = visible;
   };
 
   setRestoreAllPanelVisible = (visible) => {

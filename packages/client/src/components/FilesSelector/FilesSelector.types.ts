@@ -133,6 +133,7 @@ export type FilesSelectorProps = {
 
   isMove?: boolean;
   isCopy?: boolean;
+  isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
 
@@ -151,6 +152,7 @@ export type FilesSelectorProps = {
   disabledItems: string[] | number[];
   isFolderActions?: boolean;
   setMoveToPanelVisible: (value: boolean) => void;
+  setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setIsFolderActions: (value: boolean) => void;

@@ -28,7 +28,7 @@ import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import AppLoader from "@docspace/common/components/AppLoader";
+import { getRestoreProgress } from "@docspace/common/api/portal";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -112,7 +112,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       });
 
     socketHelper.on("restore-backup", () => {
-      setPreparationPortalDialogVisible(true);
+      getRestoreProgress()
+        .then((response) => {
+          if (!response) {
+            console.log(
+              "Skip show <PreparationPortalDialog /> - empty progress response"
+            );
+            return;
+          }
+          setPreparationPortalDialogVisible(true);
+        })
+        .catch((e) => {
+          console.error("getRestoreProgress", e);
+        });
     });
   }, [socketHelper]);
 

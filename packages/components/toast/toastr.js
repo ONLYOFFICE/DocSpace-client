@@ -153,14 +153,7 @@ function error(data, title, timeout, withCross, centerPosition) {
       data;
   }
 
-  // const message =
-  //   dataType === "string"
-  //     ? data
-  //     : dataType === "object" && data.statusText
-  //     ? data.statusText
-  //     : dataType === "object" && data.message
-  //     ? data.message
-  //     : "";
+  //console.trace("Error", message);
 
   return notify(
     "error",

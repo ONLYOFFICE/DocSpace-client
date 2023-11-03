@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobile, isIOS } from "react-device-detect";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
@@ -78,11 +79,27 @@ const Body = ({
     }
   }, [listOptionsRef.current]);
 
-  const onBodyResize = React.useCallback(() => {
-    if (bodyRef && bodyRef.current) {
-      setBodyHeight(bodyRef.current.offsetHeight);
-    }
-  }, [bodyRef?.current?.offsetHeight]);
+  const onBodyResize = React.useCallback(
+    (e) => {
+      if (e?.target?.height && isMobile && isIOS) {
+        let height = e?.target?.height - 64 - HEADER_HEIGHT;
+
+        if (footerVisible) {
+          height -= withFooterCheckbox
+            ? FOOTER_WITH_CHECKBOX_HEIGHT
+            : withFooterInput
+            ? FOOTER_WITH_NEW_NAME_HEIGHT
+            : FOOTER_HEIGHT;
+        }
+        setBodyHeight(height);
+        return;
+      }
+      if (bodyRef && bodyRef.current) {
+        setBodyHeight(bodyRef.current.offsetHeight);
+      }
+    },
+    [bodyRef?.current?.offsetHeight]
+  );
 
   const isItemLoaded = React.useCallback(
     (index: number) => {
@@ -93,8 +110,11 @@ const Body = ({
 
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
+    if (isMobile && isIOS)
+      window.visualViewport?.addEventListener("resize", onBodyResize);
     return () => {
       window.removeEventListener("resize", onBodyResize);
+      window.visualViewport?.removeEventListener("resize", onBodyResize);
     };
   }, []);
 

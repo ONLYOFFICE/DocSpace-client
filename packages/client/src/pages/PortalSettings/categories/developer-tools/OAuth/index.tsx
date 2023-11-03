@@ -14,6 +14,7 @@ import List from "./sub-components/List";
 
 import { OAuthContainer } from "./StyledOAuth";
 import { OAuthProps } from "./OAuth.types";
+import InfoDialog from "./sub-components/InfoDialog";
 
 const MIN_LOADER_TIME = 500;
 
@@ -23,15 +24,21 @@ const OAuth = ({
   isEmptyClientList,
   setViewAs,
   fetchClients,
+  fetchScopes,
   currentDeviceType,
+  infoDialogVisible,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const startLoadingRef = React.useRef<null | Date>(null);
 
-  const getClientList = React.useCallback(async () => {
-    await fetchClients();
+  const getData = React.useCallback(async () => {
+    const actions = [];
+
+    actions.push(fetchScopes(), fetchClients());
+
+    await Promise.all(actions);
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -57,8 +64,8 @@ const OAuth = ({
 
   React.useEffect(() => {
     startLoadingRef.current = new Date();
-    getClientList();
-  }, [getClientList]);
+    getData();
+  }, [getData]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
@@ -66,13 +73,16 @@ const OAuth = ({
 
   return (
     <OAuthContainer>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : isEmptyClientList ? (
-        <OAuthEmptyScreen t={t} />
-      ) : (
-        <List t={t} clients={clientList} viewAs={viewAs} />
-      )}
+      <>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : isEmptyClientList ? (
+          <OAuthEmptyScreen t={t} />
+        ) : (
+          <List t={t} clients={clientList} viewAs={viewAs} />
+        )}
+      </>
+      {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
     </OAuthContainer>
   );
 };
@@ -80,8 +90,15 @@ const OAuth = ({
 export default inject(
   ({ oauthStore, auth }: { oauthStore: OAuthStoreProps; auth: any }) => {
     const { currentDeviceType } = auth.settingsStore;
-    const { viewAs, setViewAs, clientList, isEmptyClientList, fetchClients } =
-      oauthStore;
+    const {
+      viewAs,
+      setViewAs,
+      clientList,
+      isEmptyClientList,
+      fetchClients,
+      fetchScopes,
+      infoDialogVisible,
+    } = oauthStore;
     return {
       viewAs,
       setViewAs,
@@ -89,6 +106,8 @@ export default inject(
       isEmptyClientList,
       fetchClients,
       currentDeviceType,
+      infoDialogVisible,
+      fetchScopes,
     };
   }
 )(observer(OAuth));

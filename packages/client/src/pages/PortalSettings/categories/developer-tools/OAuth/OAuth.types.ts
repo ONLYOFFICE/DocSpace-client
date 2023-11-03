@@ -12,6 +12,9 @@ export interface OAuthProps {
   clientList: IClientProps[];
   isEmptyClientList: boolean;
   fetchClients: () => Promise<void>;
+  fetchScopes: () => Promise<void>;
 
   currentDeviceType: DeviceUnionType;
+
+  infoDialogVisible?: boolean;
 }

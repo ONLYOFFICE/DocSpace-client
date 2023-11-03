@@ -65,6 +65,7 @@ const Base = {
   fontSize: "13px",
   interfaceDirection: "ltr",
   separatorColor: "#eceef1",
+  mainText: black,
 
   text: {
     color: black,

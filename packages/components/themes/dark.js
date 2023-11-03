@@ -59,6 +59,7 @@ const Dark = {
   fontSize: "13px",
   interfaceDirection: "ltr",
   separatorColor: "#474747",
+  mainText: white,
 
   text: {
     color: grayMaxLight,

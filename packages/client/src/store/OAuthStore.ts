@@ -35,6 +35,9 @@ export interface OAuthStoreProps {
   viewAs: ViewAsType;
   setViewAs: (value: ViewAsType) => void;
 
+  infoDialogVisible: boolean;
+  setInfoDialogVisible: (value: boolean) => void;
+
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
 
@@ -79,7 +82,8 @@ export interface OAuthStoreProps {
 
   getContextMenuItems: (
     t: any,
-    item: IClientProps
+    item: IClientProps,
+    isInfo?: boolean
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
@@ -97,6 +101,7 @@ class OAuthStore implements OAuthStoreProps {
   nextPage: number | null = null;
   itemCount: number = 0;
 
+  infoDialogVisible: boolean = false;
   deleteDialogVisible: boolean = false;
 
   selection: string[] = [];
@@ -117,6 +122,10 @@ class OAuthStore implements OAuthStoreProps {
 
   setViewAs = (value: ViewAsType) => {
     this.viewAs = value;
+  };
+
+  setInfoDialogVisible = (value: boolean) => {
+    this.infoDialogVisible = value;
   };
 
   setDeleteDialogVisible = (value: boolean) => {
@@ -160,6 +169,7 @@ class OAuthStore implements OAuthStoreProps {
   };
 
   editClient = (clientId: string) => {
+    this.setInfoDialogVisible(false);
     //@ts-ignore
     window?.DocSpace?.navigate(
       `/portal-settings/developer-tools/oauth/${clientId}`
@@ -315,12 +325,13 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  getContextMenuItems = (t: any, item: IClientProps) => {
+  getContextMenuItems = (t: any, item: IClientProps, isInfo?: boolean) => {
     const { clientId } = item;
 
     const isGroupContext = this.selection.length;
 
     const onDelete = () => {
+      this.setInfoDialogVisible(false);
       if (!isGroupContext) {
         this.setBufferSelection(clientId);
       }
@@ -328,7 +339,13 @@ class OAuthStore implements OAuthStoreProps {
       this.setDeleteDialogVisible(true);
     };
 
+    const onShowInfo = () => {
+      this.setBufferSelection(clientId);
+      this.setInfoDialogVisible(true);
+    };
+
     const onEnable = async (status: boolean) => {
+      this.setInfoDialogVisible(false);
       if (isGroupContext) {
         try {
           const actions: Promise<void>[] = [];
@@ -372,7 +389,8 @@ class OAuthStore implements OAuthStoreProps {
       key: "info",
       icon: SettingsIcon,
       label: "Info",
-      onClick: () => console.log(clientId),
+      onClick: onShowInfo,
+      isDisabled: isInfo,
     };
 
     const enableOption = {
@@ -424,7 +442,7 @@ class OAuthStore implements OAuthStoreProps {
         contextOptions.unshift(enableOption);
       }
 
-      contextOptions.unshift(infoOption);
+      if (!isInfo) contextOptions.unshift(infoOption);
       contextOptions.unshift(authButtonOption);
       contextOptions.unshift(editOption);
     }

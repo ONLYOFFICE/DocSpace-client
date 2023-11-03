@@ -65,8 +65,9 @@ const Row = (props: RowProps) => {
 
   const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
 
-  const local = getCookie("asc_language");
-  const modifiedDate = getCorrectDate(local, item.modifiedOn);
+  const locale = getCookie("asc_language");
+
+  const modifiedDate = getCorrectDate(locale, item.modifiedOn);
 
   return (
     <>

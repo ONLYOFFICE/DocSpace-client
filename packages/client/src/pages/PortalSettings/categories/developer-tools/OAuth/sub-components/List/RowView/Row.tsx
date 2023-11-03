@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 //@ts-ignore
 import Row from "@docspace/components/row";
-import ToggleButton from "@docspace/components/toggle-button";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";

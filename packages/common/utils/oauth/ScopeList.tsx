@@ -36,7 +36,7 @@ const StyledScopeItem = styled.div`
 
     border-radius: 50%;
 
-    background-color: ${(props) => props.theme.mainText};
+    background: ${(props) => props.theme.mainText};
   }
 `;
 

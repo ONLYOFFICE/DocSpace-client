@@ -238,8 +238,8 @@ export const FolderType = Object.freeze({
   Rooms: 14,
   Archive: 20,
 
-  Done: 24,
-  InProgress: 25,
+  Done: 25,
+  InProgress: 26,
 });
 
 // extends FolderType keys

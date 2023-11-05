@@ -1,51 +1,42 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { tablet, size, mobile } from "@docspace/components/utils/device";
-import {
-  isIOS,
-  isTablet,
-  isSafari,
-  isChrome,
-  isMobileOnly,
-  isMobile,
-} from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const tabletProps = css`
   .section-body_header {
+    width: 100%;
     position: sticky;
     top: 0;
-    background: ${props => props.theme.section.header.background};
+    background: ${(props) =>
+      props.viewAs === "profile" || props.viewAs === "settings"
+        ? props.theme.section.header.backgroundColor
+        : props.theme.section.header.background};
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0;
+          `
+        : css`
+            padding-right: 0;
+          `}
     z-index: 201;
-
-    ${isMobileOnly &&
-    css`
-      padding: 0 16px;
-      ${props =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
-    `}
-
-    ${props =>
-      (props.settingsStudio || props.viewAs == "settings") &&
-      isMobileOnly &&
-      css`
-        background: ${props => props.theme.section.header.backgroundColor};
-      `}
   }
   .section-body_filter {
     display: block;
-    margin: 4px 0 30px;
+    margin: 0;
   }
 `;
 
+const closeIconSize = "24px";
+const sizeBetweenIcons = "8px";
+
 const StyledSectionContainer = styled.section`
-  ${props =>
+  position: relative;
+
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding: 0 20px 0 0;
@@ -64,21 +55,7 @@ const StyledSectionContainer = styled.section`
   @media ${tablet} {
     width: 100%;
     max-width: 100vw !important;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 0;
-          `
-        : css`
-            padding: 0 0 0 16px;
-          `}
-  }
-
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    max-width: 100vw !important;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 0 16px 0 0;
@@ -87,82 +64,78 @@ const StyledSectionContainer = styled.section`
             padding: 0 0 0 16px;
           `}
     ${tabletProps};
-    min-width: 100px;
-  `}
+  }
 
   @media ${mobile} {
     width: 100vw !important;
     max-width: 100vw !important;
   }
 
-  ${isMobileOnly &&
-  css`
-    width: 100vw !important;
-    max-width: 100vw !important;
-  `}
+  .progress-bar_container {
+    position: absolute;
+    bottom: 0;
 
-  .layout-progress-bar_wrapper {
-    position: fixed;
-    ${props =>
+    display: grid;
+    grid-gap: 24px;
+    margin-bottom: 24px;
+
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            margin-left: 24px;
+            left: 0;
           `
         : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-          `}
-  }
-
-  .layout-progress-bar {
-    position: fixed;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-          `
-        : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+            margin-right: 24px;
+            right: 0;
           `}
 
-    bottom: 24px;
-  }
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
 
-  .layout-progress-bar_close-icon {
-    position: fixed;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "480px" : "80px"};
-          `
-        : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "480px" : "80px"};
+      .layout-progress-bar,
+      .layout-progress-second-bar {
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
+              : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
           `}
+      }
 
-    bottom: 36px;
-  }
-  .layout-progress-second-bar {
-    position: fixed;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-          `
-        : css`
-            right: ${props =>
-              props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: ${closeIconSize};
+        height: ${closeIconSize};
+
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: ${sizeBetweenIcons};
+              `
+            : css`
+                margin-right: ${sizeBetweenIcons};
+              `}
+
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-left:-${closeIconSize}`
+              : `margin-right:-${closeIconSize}`}
           `}
-
-    bottom: 96px;
+      }
+    }
   }
 
-  ${props =>
+  ${(props) =>
     !props.isSectionHeaderAvailable &&
     css`
       width: 100vw !important;

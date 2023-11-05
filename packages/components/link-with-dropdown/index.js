@@ -67,7 +67,7 @@ class LinkWithDropdown extends React.Component {
   }
 
   onClickDropDownItem = (e) => {
-    const { key } = e.target.dataset;
+    const { key } = e.currentTarget.dataset;
     const item = this.props.data.find((x) => x.key === key);
     this.setIsOpen(!this.state.isOpen);
     item && item.onClick && item.onClick(e);
@@ -110,8 +110,8 @@ class LinkWithDropdown extends React.Component {
       ...rest
     } = this.props;
 
-    const showScroll =
-      hasScroll && isMobileOnly && this.state.orientation === 90;
+    const showScroll = hasScroll && isMobileOnly;
+    const scrollHeight = this.state.orientation === 90 ? 100 : 250;
 
     const dropDownItem = data.map((item) => (
       <DropDownItem
@@ -183,7 +183,7 @@ class LinkWithDropdown extends React.Component {
             <Scrollbar
               className="scroll-drop-down-item"
               style={{
-                height: 108,
+                height: scrollHeight,
               }}
             >
               {dropDownItem}

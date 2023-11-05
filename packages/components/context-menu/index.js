@@ -10,17 +10,17 @@ import StyledContextMenu from "./styled-context-menu";
 import SubMenu from "./sub-components/sub-menu";
 import MobileSubMenu from "./sub-components/mobile-sub-menu";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
 import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
+
 import Backdrop from "../backdrop";
 import Text from "../text";
 import Avatar from "../avatar";
 import IconButton from "../icon-button";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
-
+import RoomIcon from "@docspace/components/room-icon";
 class ContextMenu extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +33,7 @@ class ContextMenu extends Component {
       changeView: false,
       showMobileMenu: false,
       onLoad: null,
+      articleWidth: 0,
     };
 
     this.menuRef = React.createRef();
@@ -62,7 +63,7 @@ class ContextMenu extends Component {
     this.currentEvent = e;
 
     if (this.state.visible) {
-      !isMobileOnly && this.setState({ reshow: true });
+      !isMobileUtils() && this.setState({ reshow: true });
     } else {
       this.setState({ visible: true }, () => {
         if (this.props.onShow) {
@@ -81,6 +82,7 @@ class ContextMenu extends Component {
           reshow: false,
           resetMenu: true,
           changeView: false,
+          articleWidth: 0,
         },
         () => this.show(event)
       );
@@ -96,6 +98,7 @@ class ContextMenu extends Component {
       reshow: false,
       changeView: false,
       showMobileMenu: false,
+      articleWidth: 0,
     });
   };
 
@@ -125,7 +128,9 @@ class ContextMenu extends Component {
   position = (event) => {
     if (event) {
       const rects = this.props.containerRef?.current.getBoundingClientRect();
-      let left = rects ? rects.left - this.props.leftOffset - this.props.rightOffset : event.pageX + 1;
+      let left = rects
+        ? rects.left - this.props.leftOffset - this.props.rightOffset
+        : event.pageX + 1;
       let top = rects ? rects.top : event.pageY + 1;
       let width = this.menuRef.current.offsetParent
         ? this.menuRef.current.offsetWidth
@@ -141,13 +146,20 @@ class ContextMenu extends Component {
       ) {
         left = event.pageX - width + 1;
       }
-      if ((isMobile || isTabletUtils()) && height > 483) {
-        this.setState({ changeView: true });
+      if (isTabletUtils() && height > 483) {
+        const article = document.getElementById("article-container");
+
+        let articleWidth = 0;
+        if (article) {
+          articleWidth = article.offsetWidth;
+        }
+
+        this.setState({ changeView: true, articleWidth });
         return;
       }
 
-      if ((isMobileOnly || isMobileUtils()) && height > 210) {
-        this.setState({ changeView: true });
+      if (isMobileUtils() && height > 210) {
+        this.setState({ changeView: true, articleWidth: 0 });
         return;
       }
 
@@ -318,15 +330,18 @@ class ContextMenu extends Component {
     );
 
     const changeView = this.state.changeView;
+    const articleWidth = this.state.articleWidth;
     const isIconExist = this.props.header?.icon;
     const isAvatarExist = this.props.header?.avatar;
 
     const withHeader = !!this.props.header?.title;
+    const defaultIcon = !!this.props.header?.color;
 
     return (
       <>
         <StyledContextMenu
           changeView={changeView}
+          articleWidth={articleWidth}
           isRoom={this.props.isRoom}
           fillIcon={this.props.fillIcon}
           isIconExist={isIconExist}
@@ -363,11 +378,19 @@ class ContextMenu extends Component {
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        <img
-                          src={this.props.header.icon}
-                          className="drop-down-item_icon"
-                          alt="drop-down_icon"
-                        />
+                        {defaultIcon ? (
+                          <RoomIcon
+                            color={this.props.header.color}
+                            title={this.props.header.title}
+                            isArchive={this.props.isArchive}
+                          />
+                        ) : (
+                          <img
+                            src={this.props.header.icon}
+                            className="drop-down-item_icon"
+                            alt="drop-down_icon"
+                          />
+                        )}
                       </div>
                     ))}
                   {isAvatarExist && (
@@ -416,18 +439,31 @@ class ContextMenu extends Component {
 
   render() {
     const element = this.renderContextMenu();
-    return (
+
+    const isMobile = isMobileUtils();
+
+    const contextMenu = (
       <>
         {this.props.withBackdrop && (
           <Backdrop
-            visible={this.state.visible}
-            withBackground={false}
-            withoutBlur={true}
+            visible={
+              this.state.visible &&
+              (this.state.changeView || this.props.ignoreChangeView)
+            }
+            withBackground={true}
+            withoutBlur={false}
+            zIndex={this.props.baseZIndex}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />
       </>
     );
+
+    const root = document.getElementById("root");
+
+    const portal = <Portal element={contextMenu} appendTo={root} />;
+
+    return isMobile && root ? portal : contextMenu;
   }
 }
 
@@ -446,6 +482,8 @@ ContextMenu.propTypes = {
   global: PropTypes.bool,
   /** Sets the context menu to be rendered with a backdrop */
   withBackdrop: PropTypes.bool,
+  /** Ignores changeView restrictions for rendering backdrop */
+  ignoreChangeView: PropTypes.bool,
   /** Sets zIndex layering value automatically */
   autoZIndex: PropTypes.bool,
   /** Sets automatic layering management */

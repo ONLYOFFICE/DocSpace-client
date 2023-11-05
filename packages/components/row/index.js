@@ -15,7 +15,7 @@ import {
 import Loader from "../loader";
 
 import { isMobile } from "react-device-detect"; //TODO: isDesktop=true for IOS(Firefox & Safari)
-
+import { isMobile as isMobileUtils } from "../utils/device";
 class Row extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +40,8 @@ class Row extends React.Component {
       isRoom,
       withoutBorder,
       contextTitle,
+      badgesComponent,
+      isArchive,
     } = this.props;
 
     const { onRowClick, inProgress, mode, onContextClick, ...rest } =
@@ -93,6 +95,7 @@ class Row extends React.Component {
         title: children.props.item.title
           ? children.props.item.title
           : children.props.item.displayName,
+        color: children.props.item.logo?.color,
       };
     }
 
@@ -111,7 +114,7 @@ class Row extends React.Component {
         withoutBorder={withoutBorder}
       >
         {inProgress ? (
-          <Loader className="row-loader" type="oval" size="16px" />
+          <Loader className="row-progress-loader" type="oval" size="16px" />
         ) : (
           <>
             {mode == "default" && renderCheckbox && (
@@ -160,11 +163,13 @@ class Row extends React.Component {
           className="row_context-menu-wrapper"
           spacerWidth={contextButtonSpacerWidth}
         >
+          {badgesComponent && badgesComponent}
           {renderContentElement && (
             <StyledContentElement>{contentElement}</StyledContentElement>
           )}
           {renderContext ? (
             <ContextMenuButton
+              isFill
               className="expandButton"
               getData={getOptions}
               directionX="right"
@@ -180,9 +185,10 @@ class Row extends React.Component {
             model={contextData.contextOptions}
             ref={this.cm}
             header={contextMenuHeader}
-            withBackdrop={true}
+            withBackdrop={isMobileUtils()}
             onHide={rowContextClose}
             isRoom={isRoom}
+            isArchive={isArchive}
           ></ContextMenu>
         </StyledOptionButton>
       </StyledRow>

@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
 import { cloneDeep } from "lodash";
-import { isMobileOnly, isTablet } from "react-device-detect";
 
 import api from "@docspace/common/api";
 
@@ -10,7 +9,6 @@ import {
   PluginFileType,
   PluginScopes,
   PluginUsersType,
-  PluginDevices,
   PluginStatus,
 } from "SRC_DIR/helpers/plugins/constants";
 import { getPluginUrl, messageActions } from "SRC_DIR/helpers/plugins/utils";
@@ -50,6 +48,9 @@ class PluginStore {
   deletePluginDialogVisible = false;
   deletePluginDialogProps = null;
 
+  isLoading = true;
+  isEmptyList = false;
+
   constructor(authStore, selectedFolderStore) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
@@ -65,6 +66,14 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setIsLoading = (value) => {
+    this.isLoading = value;
+  };
+
+  setIsEmptyList = (value) => {
+    this.isEmptyList = value;
+  };
 
   setCurrentSettingsDialogPlugin = (value) => {
     this.currentSettingsDialogPlugin = value;
@@ -168,6 +177,7 @@ class PluginStore {
 
   updatePlugins = async () => {
     const { isAdmin, isOwner } = this.authStore.userStore.user;
+    this.setIsLoading(true);
 
     try {
       this.plugins = [];
@@ -176,7 +186,12 @@ class PluginStore {
         !isAdmin && !isOwner ? true : null
       );
 
+      this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin));
+
+      setTimeout(() => {
+        this.setIsLoading(false);
+      }, 500);
     } catch (e) {
       console.log(e);
     }
@@ -366,6 +381,8 @@ class PluginStore {
   getUserRole = () => {
     const { user } = this.authStore.userStore;
 
+    if (!user) return PluginUsersType.user;
+
     const { isOwner, isAdmin, isCollaborator, isVisitor } = user;
 
     const userRole = isOwner
@@ -382,13 +399,9 @@ class PluginStore {
   };
 
   getCurrentDevice = () => {
-    const device = isTablet
-      ? PluginDevices.tablet
-      : isMobileOnly
-      ? PluginDevices.mobile
-      : PluginDevices.desktop;
+    const { currentDeviceType } = this.authStore.settingsStore;
 
-    return device;
+    return currentDeviceType;
   };
 
   getContextMenuKeysByType = (type, fileExst) => {
@@ -943,23 +956,23 @@ class PluginStore {
     if (!items) return;
 
     const userRole = this.getUserRole();
-    const device = this.getCurrentDevice();
 
     Array.from(items).map(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
 
-      const correctDevice = value.devices
-        ? value.devices.includes(device)
-        : true;
+      if (!correctUserType) return;
 
-      if (!correctUserType || !correctDevice) return;
-
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileIcon}`;
+      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
+      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
 
       const onClick = async (item) => {
-        if (!value.onClick) return;
+        const device = this.getCurrentDevice();
+        const correctDevice = value.devices
+          ? value.devices.includes(device)
+          : true;
+        if (!value.onClick || !correctDevice) return;
 
         const message = await value.onClick(item);
 
@@ -991,6 +1004,7 @@ class PluginStore {
         ...value,
         onClick,
         fileIcon,
+        fileIconTile,
         pluginId: plugin.id,
         pluginName: plugin.name,
         pluginSystem: plugin.system,

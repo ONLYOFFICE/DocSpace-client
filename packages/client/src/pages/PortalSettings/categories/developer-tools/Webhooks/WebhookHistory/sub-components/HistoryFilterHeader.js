@@ -1,41 +1,37 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useEffect, useTransition, Suspense } from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import { useParams } from "react-router-dom";
 
 import { Base } from "@docspace/components/themes";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
 import Text from "@docspace/components/text";
 
-import { useParams } from "react-router-dom";
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
-import { useTranslation } from "react-i18next";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
+
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const ListHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  ${() =>
-    isMobile &&
-    css`
-      margin-top: 9px;
-    `}
-  ${() =>
-    isMobileOnly &&
-    css`
-      margin-top: 35px;
-      padding-inline-end: 8px;
-    `}
+  @media ${tablet} {
+    margin-top: -4px;
+  }
 `;
 
 const ListHeading = styled(Text)`
   line-height: 22px;
   font-weight: 700;
   margin: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const FilterButton = styled.div`
@@ -48,14 +44,15 @@ const FilterButton = styled.div`
 
   box-sizing: border-box;
 
+  flex-shrink: 0;
+
   width: 32px;
   height: 32px;
 
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
   border: 1px solid;
-  border-color: ${(props) =>
-    props.theme.isBase ? "#d0d5da" : "rgb(71, 71, 71)"};
+  border-color: ${(props) => (props.theme.isBase ? "#d0d5da" : "rgb(71, 71, 71)")};
   border-radius: 3px;
   cursor: pointer;
 
@@ -87,11 +84,18 @@ const FilterButton = styled.div`
 FilterButton.defaultProps = { theme: Base };
 
 const HistoryFilterHeader = (props) => {
-  const { applyFilters, historyFilters, isGroupMenuVisible } = props;
-  const { t } = useTranslation(["Webhooks"]);
-  const { id } = useParams();
+  const {
+    applyFilters,
+    historyFilters,
+    isGroupMenuVisible,
+    fetchConfigName,
+    configName,
+    clearConfigName,
+  } = props;
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const { id } = useParams();
 
   const openFiltersModal = () => {
     setIsFiltersVisible(true);
@@ -101,22 +105,34 @@ const HistoryFilterHeader = (props) => {
     setIsFiltersVisible(false);
   };
 
+  const handleConfigFetch = async () => {
+    await fetchConfigName({
+      configId: id,
+    });
+  };
+
+  useEffect(() => {
+    startTransition(handleConfigFetch);
+    return clearConfigName;
+  }, []);
+
   return (
     <div>
-      <ListHeader>
-        <ListHeading fontWeight={700} fontSize="16px">
-          {t("Webhook")} {id}
-        </ListHeading>
+      <Suspense fallback={<HistoryHeaderLoader />}>
+        <ListHeader>
+          <ListHeading title={configName} fontWeight={700} fontSize="16px">
+            {configName}
+          </ListHeading>
 
-        <FilterButton
-          id="filter-button"
-          onClick={openFiltersModal}
-          isGroupMenuVisible={isGroupMenuVisible}
-        >
-          <IconButton iconName={FilterReactSvrUrl} size={16} />
-          <span hidden={historyFilters === null}></span>
-        </FilterButton>
-      </ListHeader>
+          <FilterButton
+            id="filter-button"
+            onClick={openFiltersModal}
+            isGroupMenuVisible={isGroupMenuVisible}>
+            <IconButton iconName={FilterReactSvrUrl} size={16} />
+            <span hidden={historyFilters === null}></span>
+          </FilterButton>
+        </ListHeader>
+      </Suspense>
       {historyFilters !== null && <StatusBar applyFilters={applyFilters} />}
       <FilterDialog
         visible={isFiltersVisible}
@@ -128,9 +144,13 @@ const HistoryFilterHeader = (props) => {
 };
 
 export default inject(({ webhooksStore }) => {
-  const { historyFilters, isGroupMenuVisible } = webhooksStore;
+  const { historyFilters, isGroupMenuVisible, fetchConfigName, configName, clearConfigName } =
+    webhooksStore;
   return {
     historyFilters,
     isGroupMenuVisible,
+    fetchConfigName,
+    configName,
+    clearConfigName,
   };
 })(observer(HistoryFilterHeader));

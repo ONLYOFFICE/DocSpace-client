@@ -15,6 +15,7 @@ import cookieParser from "cookie-parser";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
 import { getLanguage } from "@docspace/common/utils";
 import { initSSR } from "@docspace/common/api/client";
+import { checkIsAuthenticated } from "@docspace/common/api/user";
 import dns from "dns";
 import { xss } from "express-xss-sanitizer";
 
@@ -58,17 +59,19 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
   initSSR(headers);
 
   try {
+    const isAuth = await checkIsAuthenticated();
+
+    if (isAuth && url !== "/login/error") {
+      res.redirect("/");
+      return next();
+    }
+
     initialState = await getInitialState(query);
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
 
     if (hideAuthPage && ssoUrl && query.skipssoredirect !== "true") {
       res.redirect(ssoUrl);
-      return next();
-    }
-
-    if (initialState.isAuth && url !== "/login/error") {
-      res.redirect("/");
       return next();
     }
 

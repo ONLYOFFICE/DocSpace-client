@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
+import { RoomsType } from "@docspace/common/constants";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -17,6 +18,8 @@ const DeleteLinkDialogComponent = (props) => {
     roomId,
     deleteExternalLink,
     editExternalLink,
+    isPublicRoomType,
+    setRoomShared,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -45,9 +48,13 @@ const DeleteLinkDialogComponent = (props) => {
     newLink.access = 0;
 
     editExternalLink(roomId, newLink)
-      .then(() => {
-        deleteExternalLink(newLink.sharedTo.id);
-        toastr.success(t("Files:LinkDeletedSuccessfully"));
+      .then((res) => {
+        setRoomShared(roomId, !!res);
+        deleteExternalLink(res, newLink.sharedTo.id);
+
+        if (link.sharedTo.primary && isPublicRoomType) {
+          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
+        } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
       .catch((err) => toastr.error(err?.message))
       .finally(() => {
@@ -65,7 +72,11 @@ const DeleteLinkDialogComponent = (props) => {
       <ModalDialog.Header>{t("Files:DeleteLink")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Files:DeleteLinkNote")}</Text>
+          <Text noSelect>
+            {link.sharedTo.primary && isPublicRoomType
+              ? t("Files:DeleteGeneralLink")
+              : t("Files:DeleteLinkNote")}
+          </Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -97,7 +108,7 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent
 );
 
-export default inject(({ auth, dialogsStore, publicRoomStore }) => {
+export default inject(({ auth, dialogsStore, publicRoomStore, filesStore }) => {
   const { selectionParentRoom } = auth.infoPanelStore;
   const {
     deleteLinkDialogVisible: visible,
@@ -113,5 +124,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     link: linkParams.link,
     editExternalLink,
     deleteExternalLink,
+    isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+    setRoomShared: filesStore.setRoomShared,
   };
 })(observer(DeleteLinkDialog));

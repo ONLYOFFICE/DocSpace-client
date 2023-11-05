@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { isMobile } from "react-device-detect";
+import { tablet } from "@docspace/components/utils/device";
 
 const StyledPreparationPortal = styled.div`
   width: 100%;
-  ${isMobile &&
-  `
-    margin-top: 48px;
-  `}
+  @media ${tablet} {
+    margin-top: ${(props) => (props.isDialog ? "0px" : "48px")};
+  }
 
   #header {
     font-size: 23px;

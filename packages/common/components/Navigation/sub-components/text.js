@@ -7,8 +7,8 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import Heading from "@docspace/components/heading";
 
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile, isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const StyledTextContainer = styled.div`
@@ -53,17 +53,10 @@ const StyledHeading = styled(Heading)`
     line-height: 28px;
   }
 
-  ${isMobile &&
-  css`
-    font-size: 18px !important;
-    line-height: 24px !important;
-  `}
-
-  ${isTablet &&
-  css`
-    font-size: 21px;
-    line-height: 28px;
-  `}
+  @media ${mobile} {
+    font-size: 18px;
+    line-height: 24px;
+  }
 `;
 
 const StyledExpanderDownIcon = styled(ExpanderDownIcon)`

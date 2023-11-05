@@ -12,11 +12,12 @@ import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/common/utils";
 
-import { isDesktop, isTablet, isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
+import { isDesktop, isTablet } from "@docspace/components/utils/device";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -156,16 +157,16 @@ class ProfileActionsStore {
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
 
-  // onVideoGuidesClick = () => {
-  //   window.open(VIDEO_GUIDES_URL, "_blank");
-  // };
+  //onVideoGuidesClick = () => {
+  //  window.open(VIDEO_GUIDES_URL, "_blank");
+  //};
 
   onHotkeysClick = () => {
     this.authStore.settingsStore.setHotkeyPanelVisible(true);
   };
 
   onAboutClick = () => {
-    if (isDesktop || isTablet) {
+    if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
     } else {
       window.DocSpace.navigate(ABOUT_URL);
@@ -258,6 +259,14 @@ class ProfileActionsStore {
       };
     }
 
+    const feedbackAndSupportEnabled =
+      this.authStore.settingsStore.additionalResourcesData
+        ?.feedbackAndSupportEnabled;
+    const videoGuidesEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
+    const helpCenterEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
+
     const actions = [
       {
         key: "user-menu-profile",
@@ -277,25 +286,25 @@ class ProfileActionsStore {
         isSeparator: true,
         key: "separator1",
       },
-      {
+      helpCenterEnabled && {
         key: "user-menu-help-center",
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
       },
-      // {
-      //   key: "user-menu-video",
-      //   icon: VideoGuidesReactSvgUrl,
-      //   label: "VideoGuides",
-      //   onClick: this.onVideoGuidesClick,
-      // },
+      /*videoGuidesEnabled && {
+        key: "user-menu-video",
+        icon: VideoGuidesReactSvgUrl,
+        label: "VideoGuides",
+        onClick: this.onVideoGuidesClick,
+      },*/
       hotkeys,
       !isMobile && {
         isSeparator: true,
         key: "separator2",
       },
       liveChat,
-      {
+      feedbackAndSupportEnabled && {
         key: "user-menu-support",
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
@@ -341,49 +350,7 @@ class ProfileActionsStore {
       });
     }
 
-    return this.checkEnabledActions(actions);
-  };
-
-  checkEnabledActions = (actions) => {
-    const actionsArray = actions;
-
-    if (!this.authStore.settingsStore.additionalResourcesData) {
-      return actionsArray;
-    }
-
-    const feedbackAndSupportEnabled =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportEnabled;
-    const videoGuidesEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
-    const helpCenterEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
-
-    if (!feedbackAndSupportEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-support"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!videoGuidesEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-video"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!helpCenterEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-help-center"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    return actionsArray;
+    return actions;
   };
 }
 

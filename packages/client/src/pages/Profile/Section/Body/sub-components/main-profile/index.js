@@ -31,7 +31,7 @@ import {
 } from "./styled-main-profile";
 import { HelpButton, Tooltip } from "@docspace/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 
@@ -70,7 +70,7 @@ const MainProfile = (props) => {
   const checkWidth = () => {
     if (!isMobileOnly) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);
@@ -101,7 +101,7 @@ const MainProfile = (props) => {
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}
+          color={currentColorScheme?.main?.accent}
         >
           {{ supportEmail: documentationEmail }}
         </Link>
@@ -122,7 +122,7 @@ const MainProfile = (props) => {
     </Text>
   );
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -206,7 +206,7 @@ const MainProfile = (props) => {
 
           <div className="profile-block">
             <div className="profile-block-field">
-              <Text fontWeight={600} truncate>
+              <Text fontWeight={600} truncate title={profile.displayName}>
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
@@ -293,7 +293,7 @@ const MainProfile = (props) => {
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={false}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
@@ -302,11 +302,11 @@ const MainProfile = (props) => {
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation
-                    : !isMobileOnly
+                    : !isMobile()
                 }
-                withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
-                modernView={!isMobileOnly}
+                modernView={!isMobile()}
               />
             </div>
           </div>
@@ -416,7 +416,7 @@ const MainProfile = (props) => {
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
               isDisabled={false}
-              scaled={isMobileOnly}
+              scaled={isMobile()}
               scaledOptions={false}
               size="content"
               showDisabledItems={true}
@@ -425,11 +425,11 @@ const MainProfile = (props) => {
               isDefaultMode={
                 isMobileHorizontalOrientation
                   ? isMobileHorizontalOrientation
-                  : !isMobileOnly
+                  : !isMobile()
               }
-              withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
-              modernView={!isMobileOnly}
+              modernView={!isMobile()}
             />
           </div>
         </div>
@@ -461,7 +461,6 @@ export default inject(({ auth, peopleStore }) => {
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
-
   const { setDialogData } = peopleStore.dialogStore;
 
   return {

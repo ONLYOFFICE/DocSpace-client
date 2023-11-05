@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "@docspace/components/button";
@@ -10,7 +10,7 @@ import { inject, observer } from "mobx-react";
 import Box from "@docspace/components/box";
 import toastr from "@docspace/components/toast/toastr";
 import withLoader from "../withLoader";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
@@ -21,7 +21,7 @@ const StyledForm = styled(Box)`
   flex-direction: column;
   flex: 1fr;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     width: 100%;
   }
@@ -54,23 +54,28 @@ const TfaAuthForm = withLoader((props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData } = props;
+      const { linkData, defaultPage } = props;
 
       setIsLoading(true);
 
       if (user && hash) {
-        const url = await loginWithCode(user, hash, code);
-        navigate(url || "/");
+        await loginWithCode(user, hash, code);
       } else {
-        const url = await loginWithCodeAndCookie(code, linkData.confirmHeader);
-        navigate(url || "/");
+        await loginWithCodeAndCookie(code, linkData.confirmHeader);
       }
+
+      const referenceUrl = sessionStorage.getItem("referenceUrl");
+
+      if (referenceUrl) {
+        sessionStorage.removeItem("referenceUrl");
+      }
+
+      window.location.replace(referenceUrl || defaultPage);
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -177,4 +182,5 @@ export default inject(({ auth, confirm }) => ({
   setIsLoading: confirm.setIsLoading,
   loginWithCode: auth.loginWithCode,
   loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
+  defaultPage: auth.settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));

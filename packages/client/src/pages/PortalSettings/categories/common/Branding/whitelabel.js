@@ -32,25 +32,22 @@ const WhiteLabel = (props) => {
     t,
     isSettingPaid,
     logoText,
-    logoUrls,
     setLogoText,
     restoreWhiteLabelSettings,
-    getWhiteLabelLogoUrls,
-    setWhiteLabelSettings,
+    saveWhiteLabelSettings,
     defaultWhiteLabelLogoUrls,
     getWhiteLabelLogoText,
-    getWhiteLabelLogoUrlsAction,
     initSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
   const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
-  const [defaultLogoTextWhiteLabel, setDefaultLogoTextWhiteLabel] =
-    useState("");
-
-  const [logoUrlsWhiteLabel, setLogoUrlsWhiteLabel] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
   const init = async () => {
@@ -65,7 +62,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
       navigate("/portal-settings/customization/branding");
   };
@@ -85,14 +82,7 @@ const WhiteLabel = (props) => {
   }, [logoText]);
 
   useEffect(() => {
-    if (logoUrls) {
-      setLogoUrlsWhiteLabel(logoUrls);
-    }
-  }, [logoUrls]);
-
-  useEffect(() => {
     if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setDefaultLogoTextWhiteLabel(logoText);
       setIsLoadedData(true);
     }
   }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
@@ -104,8 +94,6 @@ const WhiteLabel = (props) => {
   };
 
   const onChangeCompanyName = (e) => {
-    console.log(defaultLogoTextWhiteLabel);
-
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
     saveToSessionStorage("companyName", value);
@@ -143,8 +131,6 @@ const WhiteLabel = (props) => {
   const onRestoreDefault = async () => {
     try {
       await restoreWhiteLabelSettings(true);
-      await getWhiteLabelLogoUrls();
-      await getWhiteLabelLogoUrlsAction(); //TODO: delete duplicate request
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -206,11 +192,8 @@ const WhiteLabel = (props) => {
 
     try {
       setIsSaving(true);
-      await setWhiteLabelSettings(data);
-      await getWhiteLabelLogoUrls();
-      await getWhiteLabelLogoUrlsAction();
+      await saveWhiteLabelSettings(data);
       setLogoText(data.logoText);
-      //TODO: delete duplicate request
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -235,6 +218,7 @@ const WhiteLabel = (props) => {
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
+            fontWeight="700"
             backgroundColor="#EDC409"
             label={t("Common:Paid")}
             isPaidBadge={true}
@@ -488,10 +472,13 @@ const WhiteLabel = (props) => {
         onSaveClick={onSave}
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("RestoreDefaultButton")}
+        cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
-        showReminder={isSettingPaid}
+        hasScroll={true}
+        showReminder={!isEqualLogo || !isEqualText}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo && isEqualText}
+        disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"
         additionalClassCancelButton="white-label-cancel"
@@ -501,36 +488,35 @@ const WhiteLabel = (props) => {
 };
 
 export default inject(({ setup, auth, common }) => {
-  const { setWhiteLabelSettings } = setup;
-
   const {
     setLogoText,
     whiteLabelLogoText,
     getWhiteLabelLogoText,
-    whiteLabelLogoUrls,
     restoreWhiteLabelSettings,
-    getWhiteLabelLogoUrls: getWhiteLabelLogoUrlsAction,
     initSettings,
+    saveWhiteLabelSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
   } = common;
 
-  const {
-    getWhiteLabelLogoUrls,
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-  } = auth.settingsStore;
+  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls } = auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
 
   return {
     setLogoText,
     theme: auth.settingsStore.theme,
     logoText: whiteLabelLogoText,
-    logoUrls: whiteLabelLogoUrls,
     getWhiteLabelLogoText,
-    getWhiteLabelLogoUrls,
-    setWhiteLabelSettings,
+    saveWhiteLabelSettings,
     restoreWhiteLabelSettings,
     defaultWhiteLabelLogoUrls,
-    getWhiteLabelLogoUrlsAction,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     initSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

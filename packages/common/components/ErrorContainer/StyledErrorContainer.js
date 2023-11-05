@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
 import { Base } from "@docspace/components/themes";
+import { desktop, mobile } from "@docspace/components/utils/device";
 
 const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
-  width: 100%;
+  width: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 16px;
+  margin: 0 auto;
   padding-top: 36px;
   border: 0;
   box-sizing: border-box;
@@ -23,22 +24,23 @@ const StyledErrorContainer = styled.div`
 
   #container {
     position: relative;
-    margin: 12px 0 60px 0;
+    margin: 12px 16px 60px 16px;
   }
 
   #header {
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 41px;
-    margin: 0 0 24px 0;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    margin: 8px 0 20px 0;
     text-align: center;
   }
 
   #text {
-    font-size: 16px;
-    line-height: 22px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
     text-align: center;
-    margin: 0 0 24px 0;
+    margin-bottom: 24px;
     max-width: 560px;
     padding: 0;
   }
@@ -52,33 +54,27 @@ const StyledErrorContainer = styled.div`
     color: ${(props) => props.theme.errorContainer.bodyText};
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and ${desktop} {
     body {
       padding: 24px 24px 0 24px;
     }
 
     #container {
-      margin: 12px 0 48px 0;
+      margin: 12px 16px 48px 16px;
     }
   }
 
-  @media screen and (max-width: 620px) {
+  @media screen and ${mobile} {
     body {
       padding: 18px 18px 0 18px;
     }
 
-    #container {
-      margin: 12px 0 36px 0;
-    }
-
     #header {
-      font-size: 18px;
-      line-height: 25px;
+      margin-top: 12px;
     }
 
-    #text {
-      font-size: 13px;
-      line-height: 18px;
+    #container {
+      margin: 12px 16px 36px 16px;
     }
 
     #button-container {

@@ -120,7 +120,7 @@ const InfoPanelBodyContent = ({
     const currentFolderRoomId =
       selectedFolder?.pathParts &&
       selectedFolder?.pathParts?.length > 1 &&
-      selectedFolder.pathParts[1];
+      selectedFolder.pathParts[1].id;
 
     const storeRoomId = selectionParentRoom?.id;
     if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
@@ -136,26 +136,21 @@ const InfoPanelBodyContent = ({
     updateSelectionParentRoomAction();
   }, [selectedFolder, updateSelectionParentRoomAction]);
 
-  //////////////////////////////////////////////////////////
-
   // Setting selection after selectedItems or selectedFolder update
   useEffect(() => {
     setSelection(calculateSelection());
   }, [selectedItems, selectedFolder]);
 
-  //////////////////////////////////////////////////////////
-
+  // * DEV-ONLY - Logs selection change
   // useEffect(() => {
   //   console.log("\nfor-dev  Selected items: ", selectedItems);
   //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
   // }, [selectedItems, selectedFolder]);
 
-  //////////////////////////////////////////////////////////
-
   if (!selection && !isGallery) return null;
 
   return (
-    <StyledInfoPanelBody isAccounts={isAccounts}>
+    <StyledInfoPanelBody>
       {!isNoItem && (
         <ItemTitle {...defaultProps} selectionLength={selectedItems.length} />
       )}

@@ -1,21 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
-import { useParams } from "react-router-dom";
+import { useViewEffect } from "@docspace/common/hooks";
 
+import { isMobile } from "@docspace/components/utils/device";
 import RowContainer from "@docspace/components/row-container";
-import HistoryRow from "./HistoryRow";
-
 import { Base } from "@docspace/components/themes";
+
+import HistoryRow from "./HistoryRow";
 
 const StyledRowContainer = styled(RowContainer)`
   margin-top: 11px;
 
   .row-list-item {
     cursor: pointer;
-    padding-inline-end: ${() => (isMobileOnly ? "5px" : "15px")};
+    padding-inline-end: ${() => (isMobile() ? "5px" : "15px")};
   }
   .row-item::after {
     bottom: -3px;
@@ -23,7 +24,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-list-item:has(.selected-row-item) {
     background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+      props.theme.isBase ? "#f3f4f4" : "#3D3D3D"};
   }
 `;
 
@@ -40,18 +41,15 @@ const HistoryRowView = (props) => {
     fetchMoreItems,
     historyFilters,
     formatFilters,
+    currentDeviceType,
   } = props;
   const { id } = useParams();
 
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const fetchMoreFiles = () => {
     const params = historyFilters === null ? {} : formatFilters(historyFilters);
@@ -79,7 +77,7 @@ const HistoryRowView = (props) => {
   );
 };
 
-export default inject(({ setup, webhooksStore }) => {
+export default inject(({ setup, webhooksStore, auth }) => {
   const { viewAs, setViewAs } = setup;
   const {
     historyItems,
@@ -89,6 +87,8 @@ export default inject(({ setup, webhooksStore }) => {
     historyFilters,
     formatFilters,
   } = webhooksStore;
+
+  const { currentDeviceType } = auth.settingsStore;
   return {
     viewAs,
     setViewAs,
@@ -98,5 +98,6 @@ export default inject(({ setup, webhooksStore }) => {
     totalItems,
     historyFilters,
     formatFilters,
+    currentDeviceType,
   };
 })(observer(HistoryRowView));

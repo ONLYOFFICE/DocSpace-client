@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
-import { size } from "@docspace/components/utils/device";
+import {
+  size as deviceSize,
+  isTablet as isTabletUtils,
+  isMobile as isMobileUtils,
+  tablet,
+} from "@docspace/components/utils/device";
 import {
   isIOS,
   isFirefox,
@@ -19,12 +24,9 @@ import { inject, observer } from "mobx-react";
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
+
   height: ${(props) =>
-    isMobileOnly && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
-  /* height: ${(props) =>
-    (props.isTabletView || isMobileOnly) && !isFirefox
-      ? `${props.contentHeight}px`
-      : "100vh"}; */
+    isMobile && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
 
   #customScrollBar {
     z-index: 0;
@@ -35,7 +37,7 @@ const StyledContainer = styled.div`
 `;
 
 const Layout = (props) => {
-  const { children, isTabletView, setIsTabletView } = props;
+  const { children, isTabletView, setIsTabletView, setWindowWidth } = props;
 
   const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
@@ -56,10 +58,9 @@ const Layout = (props) => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
   useEffect(() => {
-    const isTablet = window.innerWidth <= size.tablet;
-    setIsTabletView(isTablet);
+    setIsTabletView(isTabletUtils());
 
-    let mediaQuery = window.matchMedia("(max-width: 1024px)");
+    let mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
 
     return () => {
@@ -70,18 +71,28 @@ const Layout = (props) => {
   }, []);
 
   useEffect(() => {
-    if (isTabletView || isMobile) {
-      if (isIOS && isSafari) window.addEventListener("resize", onResize);
-      else window.addEventListener("orientationchange", onOrientationChange);
+    window.addEventListener("resize", onResize);
+
+    if (isTabletUtils() || isMobileUtils()) {
+      window.addEventListener("orientationchange", onOrientationChange);
+
+      if (isMobile) {
+        window?.visualViewport?.addEventListener("resize", onOrientationChange);
+        window?.visualViewport?.addEventListener("scroll", onScroll);
+        window.addEventListener("scroll", onScroll);
+      }
+
       changeRootHeight();
     }
 
     return () => {
-      if (isTabletView || isMobile) {
-        if (isIOS && isSafari) window.removeEventListener("resize", onResize);
-        else
-          window.removeEventListener("orientationchange", onOrientationChange);
-      }
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onOrientationChange);
+      window?.visualViewport?.removeEventListener(
+        "resize",
+        onOrientationChange
+      );
+      window.removeEventListener("scroll", onScroll);
     };
   }, [isTabletView]);
 
@@ -89,32 +100,34 @@ const Layout = (props) => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    if (isMobileOnly || (isTablet && isChrome)) {
-      htmlEl.style.height = bodyEl.style.height = "100%";
-      htmlEl.style.overflow = "hidden";
-    }
-
-    if (isMobileOnly) {
-      bodyEl.style.overflow = "auto";
-    }
-
-    if (isTablet) {
-      bodyEl.style.overflow = "hidden";
-    }
+    htmlEl.style.height = bodyEl.style.height = "100%";
+    htmlEl.style.overflow = "hidden";
   }, []);
 
   const onWidthChange = (e) => {
     const { matches } = e;
+
     setIsTabletView(matches);
+  };
+
+  const onScroll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.scrollTo(0, 0);
   };
 
   const onResize = () => {
     changeRootHeight();
+    setWindowWidth(window.innerWidth);
   };
-  const onOrientationChange = () => {
-    changeRootHeight();
+  const onOrientationChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setWindowWidth(window.innerWidth);
+    changeRootHeight(e);
   };
-  const changeRootHeight = () => {
+  const changeRootHeight = (e) => {
     intervalHandler && clearInterval(intervalHandler);
     timeoutHandler && clearTimeout(timeoutHandler);
 
@@ -131,29 +144,56 @@ const Layout = (props) => {
       timeoutHandler = null;
 
       let height = "100vh";
-      const windowHeight = window.innerHeight;
+      let windowHeight = window.innerHeight;
 
-      if (isMobileOnly && isIOS && isChrome) {
+      if (isMobileUtils() && isIOS && isChrome) {
         if (window.innerHeight < window.innerWidth && isPortrait) {
           height = window.screen.availWidth - correctorMobileChrome + "px";
         }
       }
 
-      if (isMobileOnly && isAndroid && isChrome) {
-        height = `calc(100vh - ${correctorMobileChrome}px)`;
+      if (isMobileUtils() && isAndroid && isChrome) {
+        height = `100%`;
       }
 
-      // if (isTablet && isIOS && isSafari) {
-      //   if (
-      //     window.innerHeight < window.innerWidth &&
-      //     window.innerWidth > 1024
-      //   ) {
-      //     height = window.screen.availHeight - correctorTabletSafari;
-      //   }
-      // }
+      if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
+        const diff = window.innerHeight - e.target.height;
+
+        windowHeight -= diff;
+
+        document.body.style.height = `${e.target.height + e.target.offsetTop}`;
+        document.body.style.maxHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+        document.body.style.minHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+
+        document.body.style.top = `0px`;
+        document.body.style.position = `fixed`;
+        document.body.style.overflow = `hidden`;
+        document.body.style.scroll = `hidden`;
+      } else if (isMobile && isIOS) {
+        document.body.style.height = `100%`;
+        document.body.style.maxHeight = `100%`;
+        document.body.style.minHeight = `100%`;
+        document.body.style.removeProperty("bottom");
+        document.body.style.removeProperty("position");
+        document.body.style.removeProperty("overflow");
+      }
+
+      if (isMobile && !isIOS) {
+        const root = document.getElementById("root");
+
+        root.style.height = `100%`;
+        root.style.maxHeight = `100%`;
+        root.style.minHeight = `100%`;
+      }
 
       let vh = windowHeight * 0.01;
+
       document.documentElement.style.setProperty("--vh", `${vh}px`);
+
       setContentHeight(height);
     };
     intervalHandler = setInterval(() => {
@@ -178,10 +218,10 @@ const Layout = (props) => {
   return (
     <StyledContainer
       className="Layout"
-      isTabletView={isTabletView}
+      isTabletView={isTabletUtils()}
       contentHeight={contentHeight}
     >
-      {isMobileOnly ? <MobileLayout {...props} /> : children}
+      {isMobileUtils() ? <MobileLayout {...props} /> : children}
     </StyledContainer>
   );
 };
@@ -196,5 +236,6 @@ export default inject(({ auth, bannerStore }) => {
   return {
     isTabletView: auth.settingsStore.isTabletView,
     setIsTabletView: auth.settingsStore.setIsTabletView,
+    setWindowWidth: auth.settingsStore.setWindowWidth,
   };
 })(observer(Layout));

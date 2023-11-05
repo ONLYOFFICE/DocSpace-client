@@ -14,7 +14,7 @@ import Link from "@docspace/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { smallTablet, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .link {
@@ -40,7 +40,7 @@ const StyledComponent = styled.div`
     padding-bottom: 16px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .header {
       display: none;
     }
@@ -99,7 +99,7 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
       navigate("/portal-settings/customization/branding");
   };
@@ -440,8 +440,8 @@ const CompanyInfoSettings = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          cancelButtonLabel={t("Common:Restore")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}

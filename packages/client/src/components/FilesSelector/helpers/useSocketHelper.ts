@@ -11,7 +11,7 @@ import { convertRoomsToItems } from "./useRoomsHelper";
 
 const useSocketHelper = ({
   socketHelper,
-  socketSubscribersId,
+  socketSubscribers,
   setItems,
   setBreadCrumbs,
   setTotal,
@@ -23,9 +23,9 @@ const useSocketHelper = ({
   const subscribe = (id: number) => {
     const roomParts = `DIR-${id}`;
 
-    if (socketSubscribersId.has(roomParts)) return (subscribedId.current = id);
+    if (socketSubscribers.has(roomParts)) return (subscribedId.current = id);
 
-    if (subscribedId.current && !socketSubscribersId.has(roomParts)) {
+    if (subscribedId.current && !socketSubscribers.has(roomParts)) {
       unsubscribe(subscribedId.current, false);
     }
 
@@ -45,7 +45,7 @@ const useSocketHelper = ({
       subscribedId.current = null;
     }
 
-    if (id && !socketSubscribersId.has(`DIR-${id}`)) {
+    if (id && !socketSubscribers.has(`DIR-${id}`)) {
       socketHelper.emit({
         command: "unsubscribe",
         data: {

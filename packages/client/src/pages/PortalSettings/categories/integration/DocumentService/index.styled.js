@@ -8,36 +8,19 @@ export const Location = styled.div`
 `;
 
 export const LocationHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 5px 0 2px 0;
-
   .main {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-
-    .heading {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 22px;
-    }
-
-    .help-button-wrapper {
-      width: 12px;
-      height: 12px;
-    }
-  }
-
-  .secondary {
     width: 100%;
     max-width: 700px;
     font-size: 13px;
     font-weight: 400;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
     line-height: 20px;
+    margin-bottom: 8px;
+  }
+
+  .third-party-link {
+    display: inline-block;
+    font-weight: 600;
   }
 `;
 
@@ -49,6 +32,10 @@ export const LocationForm = styled.form`
   .form-inputs {
     width: 100%;
     max-width: 350px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
 
     display: flex;
     flex-direction: column;

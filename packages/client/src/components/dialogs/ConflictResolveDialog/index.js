@@ -16,6 +16,10 @@ const StyledModalDialog = styled(ModalDialog)`
 
   .message {
     margin-bottom: 16px;
+
+    .bold {
+      font-weight: 600;
+    }
   }
 
   .select-action {
@@ -68,6 +72,7 @@ const ConflictResolveDialog = (props) => {
     setActiveFiles,
     updateActiveFiles,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
@@ -93,6 +98,7 @@ const ConflictResolveDialog = (props) => {
   const onClosePanels = () => {
     setConflictResolveDialogVisible(false);
     setMoveToPanelVisible(false);
+    setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
@@ -162,7 +168,6 @@ const ConflictResolveDialog = (props) => {
         <div>
           <Text className="radio-option-title">{t("OverwriteTitle")}</Text>
           <Text className="radio-option-description">
-            {" "}
             {t("OverwriteDescription")}
           </Text>
         </div>
@@ -196,12 +201,6 @@ const ConflictResolveDialog = (props) => {
     },
   ];
 
-  const filesCount = items.length;
-  const singleFile = filesCount === 1;
-  const file = items[0].title;
-
-  const obj = { file, folder: folderTitle };
-
   return (
     <StyledModalDialog
       isLoading={!tReady}
@@ -213,20 +212,22 @@ const ConflictResolveDialog = (props) => {
       <ModalDialog.Header>{t("ConflictResolveTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text className="message">
-          {singleFile ? (
+          {items.length === 1 ? (
             <Trans
               t={t}
-              i18nKey="ConflictResolveDescription"
               ns="ConflictResolveDialog"
-              values={obj}
-            ></Trans>
+              i18nKey="ConflictResolveDescription"
+              values={{ file: items[0].title, folder: folderTitle }}
+              components={{ 1: <span className="bold" /> }}
+            />
           ) : (
             <Trans
               t={t}
-              i18nKey="ConflictResolveDescriptionFiles"
               ns="ConflictResolveDialog"
-              values={{ filesCount, folder: folderTitle }}
-            ></Trans>
+              i18nKey="ConflictResolveDescriptionFiles"
+              values={{ filesCount: items.length, folder: folderTitle }}
+              components={{ 1: <span className="bold" /> }}
+            />
           )}
         </Text>
         <Text className="select-action">
@@ -269,6 +270,7 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     conflictResolveDialogData,
     conflictResolveDialogItems: items,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,
@@ -289,6 +291,7 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     setActiveFiles,
     updateActiveFiles,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,

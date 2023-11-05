@@ -306,6 +306,17 @@ const StyledFileTileTop = styled.div`
   }
 
   ${(props) =>
+    props.isPlugin &&
+    css`
+      .temporary-icon {
+        svg {
+          width: 96px;
+          height: 96px;
+        }
+      }
+    `}
+
+  ${(props) =>
     props.isHighlight &&
     css`
       ${animationStyles}
@@ -346,7 +357,7 @@ const StyledFileTileBottom = styled.div`
 const StyledContent = styled.div`
   display: flex;
   align-items: center;
-
+  gap: 8px;
   flex-basis: 100%;
 
   a {
@@ -368,7 +379,21 @@ const StyledContent = styled.div`
     margin-left: 12px;
   }
 
-  @media (max-width: 1024px) {
+  .badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    :not(:empty) {
+      margin-inline-start: 12px;
+    }
+
+    > div {
+      margin: 0;
+    }
+  }
+
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -400,10 +425,10 @@ const StyledOptionButton = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 8px 8px 8px 21px;
+            padding: 8px 12px 8px 21px;
           `
         : css`
-            padding: 8px 21px 8px 8px;
+            padding: 8px 21px 8px 12px;
           `}
   }
 `;
@@ -500,10 +525,13 @@ class Tile extends React.PureComponent {
   };
 
   getIconFile = () => {
-    const { temporaryIcon, thumbnailClick, thumbnail } = this.props;
+    const { temporaryIcon, thumbnailClick, thumbnail, item } = this.props;
 
-    const icon =
-      thumbnail && !this.state.errorLoadSrc ? thumbnail : temporaryIcon;
+    const icon = item.isPlugin
+      ? item.fileTileIcon
+      : thumbnail && !this.state.errorLoadSrc
+      ? thumbnail
+      : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
@@ -641,6 +669,7 @@ class Tile extends React.PureComponent {
     const contextMenuHeader = {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
+      color: children[0].props.item.logo?.color,
     };
 
     const title = item.isFolder
@@ -739,6 +768,7 @@ class Tile extends React.PureComponent {
                 <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                   {renderContext ? (
                     <ContextMenuButton
+                      isFill
                       className="expandButton"
                       directionX="right"
                       getData={getOptions}
@@ -832,6 +862,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX={contextMenuDirection}
                     getData={getOptions}
@@ -864,6 +895,7 @@ class Tile extends React.PureComponent {
                 item?.viewAccessability?.ImageView ||
                 item?.viewAccessability?.MediaView
               }
+              isPlugin={item.isPlugin}
             >
               {icon}
             </StyledFileTileTop>
@@ -911,6 +943,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX="left"
                     getData={getOptions}

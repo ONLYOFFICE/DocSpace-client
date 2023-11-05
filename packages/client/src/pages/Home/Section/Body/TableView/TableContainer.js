@@ -1,23 +1,28 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import elementResizeDetectorMaker from "element-resize-detector";
-import TableContainer from "@docspace/components/table-container";
 import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
+import elementResizeDetectorMaker from "element-resize-detector";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
+
+import { DeviceType } from "@docspace/common/constants";
+import { useViewEffect } from "@docspace/common/hooks";
+
+import { Base } from "@docspace/components/themes";
+import TableContainer from "@docspace/components/table-container";
+import TableBody from "@docspace/components/table-container/TableBody";
+import { isTablet, isMobile } from "@docspace/components/utils/device";
+
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import TableBody from "@docspace/components/table-container/TableBody";
-import { isMobile } from "react-device-detect";
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
 
 const marginCss = css`
   margin-top: -1px;
-  border-top: ${props =>
+  border-top: ${(props) =>
     `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 `;
 
 const fileNameCss = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: -24px;
@@ -32,15 +37,15 @@ const fileNameCss = css`
 `;
 
 const contextCss = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
-          padding-left: 18px;
+          padding-left: 20px;
         `
       : css`
           margin-right: -20px;
-          padding-right: 18px;
+          padding-right: 20px;
         `}
 
   ${marginCss}
@@ -70,13 +75,13 @@ const StyledTableContainer = styled(TableContainer)`
         border-left: 0; //for Safari macOS
         border-right: 0; //for Safari macOS
 
-        border-image-source: ${props => `linear-gradient(to right, 
+        border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
       .table-container_row-context-menu-wrapper {
         ${contextCss}
 
-        border-image-source: ${props => `linear-gradient(to left,
+        border-image-source: ${(props) => `linear-gradient(to left,
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
     }
@@ -108,7 +113,7 @@ const StyledTableContainer = styled(TableContainer)`
 
       .table-container_file-name-cell,
       .table-container_row-context-menu-wrapper {
-        border-bottom: ${props =>
+        border-bottom: ${(props) =>
           `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
       }
     }
@@ -140,6 +145,7 @@ const Table = ({
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
+  currentDeviceType,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -150,22 +156,11 @@ const Table = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if ((viewAs !== "table" && viewAs !== "row") || !setViewAs) return;
-    // 400 - it is desktop info panel width
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (viewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      isMobile
-    ) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   useEffect(() => {
     return () => {
@@ -176,7 +171,7 @@ const Table = ({
   }, []);
 
   const onResize = useCallback(
-    node => {
+    (node) => {
       const element = tagRef?.current ? tagRef?.current : node;
 
       if (element) {
@@ -190,7 +185,7 @@ const Table = ({
     [tagCount]
   );
 
-  const onSetTagRef = useCallback(node => {
+  const onSetTagRef = useCallback((node) => {
     if (node) {
       tagRef.current = node;
       onResize(node);
@@ -258,7 +253,8 @@ const Table = ({
         useReactWindow={!withPaging}
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        itemHeight={49}>
+        itemHeight={49}
+      >
         {filesListNode}
       </TableBody>
     </StyledTableContainer>
@@ -286,7 +282,7 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     highlightFile,
   } = filesStore;
 
-  const { withPaging, theme } = auth.settingsStore;
+  const { withPaging, theme, currentDeviceType } = auth.settingsStore;
 
   return {
     filesList,
@@ -306,5 +302,6 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     columnStorageName,
     columnInfoPanelStorageName,
     highlightFile,
+    currentDeviceType,
   };
 })(observer(Table));

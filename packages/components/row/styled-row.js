@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { tablet } from "../utils/device";
+import { desktop, mobile, tablet } from "../utils/device";
 import Base from "../themes/base";
 import { isMobile } from "react-device-detect";
 import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
@@ -35,7 +35,7 @@ const StyledRow = styled.div`
   align-items: center;
   align-content: center;
 
-  .row-loader {
+  .row-progress-loader {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `margin-right: 9px;`
@@ -54,7 +54,7 @@ const StyledRow = styled.div`
         display: ${(props) => (props.checked ? "flex" : "none")};
 
         padding: ${getCorrectFourValuesStyle(
-          "10px 0px 10px 8px",
+          "10px 1px 10px 8px",
           props.theme.interfaceDirection
         )};
         ${props.theme.interfaceDirection === "rtl"
@@ -136,14 +136,29 @@ const StyledElement = styled.div`
 StyledElement.defaultProps = { theme: Base };
 
 const StyledContentElement = styled.div`
-  margin-top: 6px;
+  margin-top: 0px;
   user-select: none;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 24px;
+        `
+      : css`
+          margin-left: 24px;
+        `}
+
+  :empty, :has(.badges__quickButtons:empty) {
+    display: none;
+  }
 `;
 
 const StyledOptionButton = styled.div`
   display: flex;
   width: ${(props) => props.spacerWidth && props.spacerWidth};
   justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 
   .expandButton > div:first-child {
     padding: ${({ theme }) =>
@@ -157,13 +172,13 @@ const StyledOptionButton = styled.div`
         ? `margin-left: 0px;`
         : `margin-right: 0px;`}
 
-    @media (min-width: 1024px) {
+    @media ${desktop} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
           ? `margin-left: -1px;`
           : `margin-right: -1px;`}
     }
-    @media (max-width: 516px) {
+    @media ${mobile} {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"
           ? `padding-right: 10px;`

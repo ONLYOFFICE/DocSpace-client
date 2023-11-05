@@ -1,11 +1,12 @@
 ﻿import React, { useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/common/utils";
@@ -26,6 +27,7 @@ import {
   EmployeeStatus,
   PaymentsType,
   AccountLoginType,
+  DeviceType,
 } from "@docspace/common/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
@@ -251,6 +253,7 @@ const SectionFilterContent = ({
   publicRoomKey,
   setRoomsFilter,
   standalone,
+  currentDeviceType,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -520,9 +523,9 @@ const SectionFilterContent = ({
     (view) => {
       if (view === "row") {
         if (
-          (sectionWidth < 1025 && !infoPanelVisible) ||
-          (sectionWidth < 625 && infoPanelVisible) ||
-          isMobile
+          isMobile() ||
+          isTablet() ||
+          currentDeviceType !== DeviceType.desktop
         ) {
           setViewAs("row");
         } else {
@@ -532,7 +535,7 @@ const SectionFilterContent = ({
         setViewAs(view);
       }
     },
-    [sectionWidth, infoPanelVisible, setViewAs]
+    [sectionWidth, infoPanelVisible, setViewAs, currentDeviceType]
   );
 
   const getSelectedInputValue = React.useCallback(() => {
@@ -1220,6 +1223,13 @@ const SectionFilterContent = ({
                   key: RoomsType.FormRoom,
                   group: FilterGroups.roomFilterType,
                   label: t("FormRoom"),
+                };
+              case RoomsType.PublicRoom:
+                return {
+                  id: "filter_type-public",
+                  key: RoomsType.PublicRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("PublicRoom"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1974,7 +1984,7 @@ const SectionFilterContent = ({
   );
 
   const onSortButtonClick = (isOpen) => {
-    if (isMobileOnly) {
+    if (currentDeviceType === DeviceType.mobile) {
       setMainButtonMobileVisible(isOpen);
     }
   };
@@ -2039,6 +2049,7 @@ const SectionFilterContent = ({
       clearSearch={clearSearch}
       setClearSearch={setClearSearch}
       onSortButtonClick={onSortButtonClick}
+      currentDeviceType={currentDeviceType}
     />
   );
 };
@@ -2076,7 +2087,7 @@ export default inject(
     const { fetchTags } = tagsStore;
 
     const { user } = auth.userStore;
-    const { personal, standalone } = auth.settingsStore;
+    const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2151,6 +2162,7 @@ export default inject(
       publicRoomKey,
       setRoomsFilter,
       standalone,
+      currentDeviceType,
     };
   }
 )(

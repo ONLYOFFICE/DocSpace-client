@@ -77,7 +77,6 @@ class MediaViewerDataStore {
     if (this.publicRoomStore.isPublicRoom) return;
 
     const url = "/products/files/#preview/" + id;
-
     window.DocSpace.navigate(url);
   };
 
@@ -119,6 +118,10 @@ class MediaViewerDataStore {
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
+
+  get isViewerOpen() {
+    return this.visible && this.playlist.length > 0;
+  }
 
   get currentPostionIndex() {
     if (this.playlist.length === 0) {

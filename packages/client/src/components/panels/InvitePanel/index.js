@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
-import { size } from "@docspace/components/utils/device";
+import { isDesktop, isMobile, size } from "@docspace/components/utils/device";
 
 import {
   StyledBlock,
@@ -23,9 +22,9 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
-import { LinkType } from "../../../helpers/constants";
 
 import InfoBar from "./sub-components/InfoBar";
+import { DeviceType } from "@docspace/common/constants";
 
 const InvitePanel = ({
   folders,
@@ -49,8 +48,10 @@ const InvitePanel = ({
   reloadSelectionParentRoom,
   setUpdateRoomMembers,
   roomsView,
+  setInviteLanguage,
   getUsersList,
   filter,
+  currentDeviceType,
 }) => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -61,7 +62,9 @@ const InvitePanel = ({
   const [activeLink, setActiveLink] = useState({});
   const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(isMobileOnly);
+  const [isMobileView, setIsMobileView] = useState(isMobile());
+
+  const [cultureKey, setCultureKey] = useState();
 
   const onCloseBar = () => setInfoBarIsVisible(false);
 
@@ -86,7 +89,7 @@ const InvitePanel = ({
 
   const getInfo = () => {
     getRoomSecurityInfo(roomId).then((links) => {
-      const link = links[0];
+      const link = links && links[0];
       if (link) {
         const { shareLink, id, title, expirationDate } = link.sharedTo;
 
@@ -169,11 +172,12 @@ const InvitePanel = ({
   };
 
   const onCheckHeight = () => {
-    setScrollAllPanelContent(window.innerHeight < 1024);
-    setIsMobileView(window.innerWidth <= size.hugeMobile);
+    setScrollAllPanelContent(!isDesktop());
+    setIsMobileView(isMobile());
   };
 
   const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
       visible: false,
@@ -206,8 +210,8 @@ const InvitePanel = ({
 
     const data = {
       invitations,
+      culture: cultureKey,
     };
-
     if (roomId !== -1) {
       data.notify = true;
       data.message = "Invitation message";
@@ -261,6 +265,7 @@ const InvitePanel = ({
         <InviteInput
           t={t}
           onClose={onClose}
+          setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
           addUsersPanelVisible={addUsersPanelVisible}
@@ -342,8 +347,7 @@ const InvitePanel = ({
       id="InvitePanelWrapper"
       hasInvitedUsers={hasInvitedUsers}
       scrollAllPanelContent={scrollAllPanelContent}
-      addUsersPanelVisible={addUsersPanelVisible}
-    >
+      addUsersPanelVisible={addUsersPanelVisible}>
       {isMobileView ? (
         <div className="invite_panel">
           <StyledControlContainer onClick={onClose}>
@@ -357,15 +361,14 @@ const InvitePanel = ({
             onClick={onClose}
             visible={visible}
             isAside={true}
-            zIndex={isMobileOnly ? 10 : 210}
+            zIndex={currentDeviceType === DeviceType.mobile ? 10 : 210}
           />
           <Aside
             className="invite_panel"
             visible={visible}
             onClose={onClose}
             withoutBodyScroll
-            zIndex={310}
-          >
+            zIndex={310}>
             {invitePanelNode}
           </Aside>
         </>
@@ -385,11 +388,13 @@ const InvitePanel = ({
     );
   };
 
-  return isMobileOnly ? renderPortalInvitePanel() : invitePanelComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortalInvitePanel()
+    : invitePanelComponent;
 };
 
 export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   const { getUsersByQuery, inviteUsers, getUsersList } = peopleStore.usersStore;
   const { filter } = peopleStore.filterStore;
@@ -414,6 +419,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     invitePanelOptions,
     setInviteItems,
     setInvitePanelOptions,
+    setInviteLanguage,
   } = dialogsStore;
 
   const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -421,6 +427,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
 
   return {
     folders,
+    setInviteLanguage,
     getUsersByQuery,
     getRoomSecurityInfo,
     inviteItems,
@@ -444,6 +451,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     roomsView,
     getUsersList,
     filter,
+    currentDeviceType,
   };
 })(
   withTranslation([

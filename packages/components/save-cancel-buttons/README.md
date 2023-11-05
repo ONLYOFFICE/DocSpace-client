@@ -13,7 +13,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-button";
   onSaveClick={() => SomeFunction()}
   onCancelClick={() => SomeFunction()}
   showReminder={false}
-  reminderTest="You have unsaved changes"
+  reminderText="You have unsaved changes"
   saveButtonLabel="Save"
   cancelButtonLabel="Cancel"
 />

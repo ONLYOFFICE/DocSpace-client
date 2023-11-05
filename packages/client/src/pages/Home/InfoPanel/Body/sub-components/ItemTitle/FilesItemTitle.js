@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
-import { inject, observer } from "mobx-react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+
+import { Text } from "@docspace/components";
+import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
 import ItemContextOptions from "./ItemContextOptions";
 import { StyledTitle } from "../../styles/common";
-import RoomIcon from "@docspace/client/src/components/RoomIcon";
+import RoomIcon from "@docspace/components/room-icon";
 
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
@@ -20,16 +21,18 @@ const FilesItemTitle = ({
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
+  roomsView,
 }) => {
   const itemTitleRef = useRef();
 
-  if (isSeveralItems) return <></>;
+  if (isSeveralItems) return null;
 
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = selectionParentRoom ? selectionParentRoom.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
+  const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
 
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
@@ -69,7 +72,7 @@ const FilesItemTitle = ({
       </div>
       <Text className="text">{selection.title}</Text>
       <div className="info_title-icons">
-        {canInviteUserInRoomAbility && (
+        {canInviteUserInRoomAbility && showInviteUserIcon && (
           <IconButton
             id="info_add-user"
             className={"icon"}
@@ -93,7 +96,8 @@ const FilesItemTitle = ({
 };
 
 export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
-  const { selectionParentRoom, setIsMobileHidden } = auth.infoPanelStore;
+  const { selectionParentRoom, setIsMobileHidden, roomsView } =
+    auth.infoPanelStore;
   const { isGracePeriod } = auth.currentTariffStatusStore;
 
   const { setInvitePanelOptions, setInviteUsersWarningDialogVisible } =
@@ -102,8 +106,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
   const roomType =
     selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
 
-  const isPublicRoomType =
-    roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   return {
     selectionParentRoom,
@@ -112,6 +115,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
     setInvitePanelOptions,
     setInviteUsersWarningDialogVisible,
     isPublicRoomType,
+    roomsView,
   };
 })(
   withTranslation([

@@ -123,6 +123,8 @@ class MembersHelper {
           options.formFiller,
           ...deleteOption,
         ];
+      case RoomsType.PublicRoom:
+        return [options.roomAdmin, options.collaborator, ...deleteOption];
       default:
         return [];
     }

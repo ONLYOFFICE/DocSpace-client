@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
+import React, { useState, useRef } from "react";
 
-import TableContainer from "@docspace/components/table-container/TableContainer";
+import { useViewEffect } from "@docspace/common/hooks";
+
+import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";
+import TableContainer from "@docspace/components/table-container/TableContainer";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";
-
-import { Base } from "@docspace/components/themes";
 
 const TableWrapper = styled(TableContainer)`
   margin-top: 16px;
@@ -27,7 +26,7 @@ const TableWrapper = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
+      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#3D3D3D")};
     }
   }
 `;
@@ -48,19 +47,17 @@ const WebhooksTableView = (props) => {
     openSettingsModal,
     openDeleteModal,
     userId,
+    currentDeviceType,
   } = props;
 
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -104,6 +101,7 @@ export default inject(({ webhooksStore, setup, auth }) => {
 
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     webhooks,
@@ -111,5 +109,6 @@ export default inject(({ webhooksStore, setup, auth }) => {
     setViewAs,
     loadWebhooks,
     userId,
+    currentDeviceType,
   };
 })(observer(WebhooksTableView));

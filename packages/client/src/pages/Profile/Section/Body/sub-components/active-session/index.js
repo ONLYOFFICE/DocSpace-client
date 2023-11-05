@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
@@ -51,6 +51,7 @@ const ActiveSessions = ({
   getSessions,
   sessions,
   currentSession,
+  setSessions,
 }) => {
   const [modalData, setModalData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -111,7 +112,7 @@ const ActiveSessions = ({
     return new Date(date).toLocaleString(locale);
   };
   const tableCell = (platform, browser) =>
-    interfaceDirection === "rtl" && !isMobile ? (
+    interfaceDirection === "rtl" && isDesktop() ? (
       <>
         <span className="session-browser">
           <span>{browser}</span>
@@ -156,7 +157,7 @@ const ActiveSessions = ({
           }
         />
       </Box>
-      {isMobile ? (
+      {!isDesktop() ? (
         <Table>
           <TableBody>
             {sessions.map((session) => (
@@ -267,6 +268,7 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
   } = setup;
   return {
     locale,
@@ -282,5 +284,6 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
   };
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

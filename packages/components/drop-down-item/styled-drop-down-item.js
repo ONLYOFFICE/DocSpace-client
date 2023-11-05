@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+
 import Base from "../themes/base";
 import { tablet } from "../utils/device";
 
@@ -27,7 +27,7 @@ const disabledAndHeaderStyle = css`
 const WrapperToggle = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 36px;
 
   & label {
@@ -101,6 +101,7 @@ const StyledDropdownItem = styled.div`
   &:hover {
     ${(props) =>
       !props.noHover &&
+      !props.isHeader &&
       css`
         background-color: ${(props) =>
           props.theme.dropDownItem.hoverBackgroundColor};
@@ -110,6 +111,14 @@ const StyledDropdownItem = styled.div`
           css`
             text-align: right;
           `}
+      `}
+  }
+
+  &:active {
+    ${({ isHeader, theme }) =>
+      !isHeader &&
+      css`
+        background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}
   }
 
@@ -129,16 +138,31 @@ const StyledDropdownItem = styled.div`
       }
     `}
 
-  ${(props) =>
-    props.isHeader &&
-    css`
-      ${disabledAndHeaderStyle}
+  .back-arrow {
+    cursor: pointer;
 
-      text-transform: uppercase;
-      break-before: column;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+  }
+
+  ${({ isHeader, theme }) =>
+    isHeader &&
+    css`
+      align-items: center;
+      height: 48px;
+      padding: 13px 16px 18.2px 16px;
+      margin: 0 0 6px 0;
+      border-bottom: ${theme.dropDownItem.separator.borderBottom};
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 16px !important;
+      cursor: default;
+      &:hover {
+        background-color: none !important;
+      }
     `}
 
-    @media ${tablet} {
+  @media ${tablet} {
     line-height: ${(props) => props.theme.dropDownItem.tabletLineHeight};
     padding: ${(props) => props.theme.dropDownItem.tabletPadding};
   }
@@ -173,11 +197,18 @@ const StyledDropdownItem = styled.div`
         transform: rotate(90deg);
         height: auto;
       `}
+    width:12px;
+    height: 12px;
+    margin-inline-end: 0;
+    align-self: center;
+    line-height: normal;
+
+    .drop-down-item_icon {
+      height: 12px;
+    }
   }
 
-  @media (max-width: 500px) {
-    max-width: 100vw;
-  }
+  max-width: 100%;
 `;
 StyledDropdownItem.defaultProps = { theme: Base };
 

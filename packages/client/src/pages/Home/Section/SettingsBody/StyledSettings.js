@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
 
 const StyledSettings = styled.div`
   margin-top: ${(props) =>
@@ -20,11 +19,6 @@ const StyledSettings = styled.div`
         padding-top: 8px;
       `}
   }
-
-  ${isMobile &&
-  css`
-    margin-top: 8px;
-  `}
 
   width: 100%;
 

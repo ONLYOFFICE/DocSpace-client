@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
 import NavMenu from "./components/NavMenu";
@@ -19,15 +19,16 @@ import i18n from "./i18n";
 
 import Snackbar from "@docspace/components/snackbar";
 import moment from "moment";
-import ReactSmartBanner from "./components/SmartBanner";
+//import ReactSmartBanner from "./components/SmartBanner";
 import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
-import { isMobileOnly, isMobile, isIOS, isFirefox } from "react-device-detect";
+import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { IndexedDBStores } from "@docspace/common/constants";
+import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
+import { getRestoreProgress } from "@docspace/common/api/portal";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -51,7 +52,20 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     whiteLabelLogoUrls,
     standalone,
     userId,
+    currentDeviceType,
+
+    showArticleLoader,
   } = rest;
+
+  useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname)) {
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -98,11 +112,23 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       });
 
     socketHelper.on("restore-backup", () => {
-      setPreparationPortalDialogVisible(true);
+      getRestoreProgress()
+        .then((response) => {
+          if (!response) {
+            console.log(
+              "Skip show <PreparationPortalDialog /> - empty progress response"
+            );
+            return;
+          }
+          setPreparationPortalDialogVisible(true);
+        })
+        .catch((e) => {
+          console.error("getRestoreProgress", e);
+        });
     });
   }, [socketHelper]);
 
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+  const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
   let snackTimer = null;
   let fbInterval = null;
@@ -333,23 +359,25 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const rootElement = document.getElementById("root");
 
-  const toast = isMobileOnly ? (
-    <Portal element={<Toast />} appendTo={rootElement} visible={true} />
-  ) : (
-    <Toast />
-  );
+  const toast =
+    currentDeviceType === DeviceType.mobile ? (
+      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+    ) : (
+      <Toast />
+    );
 
   return (
     <Layout>
       {toast}
-      <ReactSmartBanner t={t} ready={ready} />
+      {/* <ReactSmartBanner t={t} ready={ready} /> */}
       {isEditor ? <></> : <NavMenu />}
-      {isMobileOnly && <MainBar />}
+      {currentDeviceType === DeviceType.mobile && <MainBar />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
+
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && <MainBar />}
+        {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -358,7 +386,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup }) => {
+const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
+  const { i18n } = useTranslation();
+
   const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
 
   const {
@@ -374,6 +404,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
     setTheme,
     whiteLabelLogoUrls,
     standalone,
+    currentDeviceType,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -389,7 +420,7 @@ const ShellWrapper = inject(({ auth, backup }) => {
 
   return {
     loadBaseInfo: async () => {
-      await init();
+      await init(false, i18n);
 
       setModuleInfo(config.homepage, "home");
       setProductVersion(config.version);
@@ -416,6 +447,9 @@ const ShellWrapper = inject(({ auth, backup }) => {
     userId: auth?.userStore?.user?.id,
     whiteLabelLogoUrls,
     standalone,
+    currentDeviceType,
+
+    showArticleLoader: clientLoadingStore.showArticleLoader,
   };
 })(observer(Shell));
 

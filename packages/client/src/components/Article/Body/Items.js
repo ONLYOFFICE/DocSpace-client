@@ -1,30 +1,24 @@
-﻿import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
-import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
-import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/catalog.archive.react.svg?url";
-import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
-import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
-import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/catalog.favorites.react.svg?url";
-import CatalogRecentReactSvgUrl from "PUBLIC_DIR/images/catalog.recent.react.svg?url";
-import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/catalog.private.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
-import React, { useState } from "react";
+﻿import PropTypes from "prop-types";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import CatalogItem from "@docspace/components/catalog-item";
+import { withTranslation } from "react-i18next";
+
 import {
   FolderType,
   ShareAccessRights,
   FolderNames,
+  DeviceType,
 } from "@docspace/common/constants";
-import { withTranslation } from "react-i18next";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+
+import CatalogItem from "@docspace/components/catalog-item";
 import DragAndDrop from "@docspace/components/drag-and-drop";
-import { isMobile } from "react-device-detect";
-import SettingsItem from "./SettingsItem";
-import AccountsItem from "./AccountsItem";
+
 import BonusItem from "./BonusItem";
+import AccountsItem from "./AccountsItem";
+
+import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -186,6 +180,7 @@ const Items = ({
 
   isCommunity,
   isPaymentPageAvailable,
+  currentDeviceType,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -202,41 +197,7 @@ const Items = ({
   );
 
   const getFolderIcon = React.useCallback((item) => {
-    let iconUrl = CatalogFolderReactSvgUrl;
-
-    switch (item.rootFolderType) {
-      case FolderType.USER:
-        iconUrl = CatalogUserReactSvgUrl;
-        break;
-      case FolderType.Rooms:
-        iconUrl = CatalogRoomsReactSvgUrl;
-        break;
-      case FolderType.Archive:
-        iconUrl = CatalogArchiveReactSvgUrl;
-        break;
-      case FolderType.SHARE:
-        iconUrl = CatalogSharedReactSvgUrl;
-        break;
-      case FolderType.COMMON:
-        iconUrl = CatalogPortfolioReactSvgUrl;
-        break;
-      case FolderType.Favorites:
-        iconUrl = CatalogFavoritesReactSvgUrl;
-        break;
-      case FolderType.Recent:
-        iconUrl = CatalogRecentReactSvgUrl;
-        break;
-      case FolderType.Privacy:
-        iconUrl = CatalogPrivateReactSvgUrl;
-        break;
-      case FolderType.TRASH:
-        iconUrl = CatalogTrashReactSvgUrl;
-        break;
-      default:
-        break;
-    }
-
-    return iconUrl;
+    return getCatalogIconUrlByType(item.rootFolderType);
   }, []);
 
   const showDragItems = React.useCallback(
@@ -267,7 +228,8 @@ const Items = ({
       if (isAdmin) {
         if (
           (item.pathParts &&
-            (item.pathParts[0] === myId || item.pathParts[0] === commonId)) ||
+            (item.pathParts[0].id === myId ||
+              item.pathParts[0].id === commonId)) ||
           item.rootFolderType === FolderType.USER ||
           item.rootFolderType === FolderType.COMMON ||
           (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
@@ -276,7 +238,7 @@ const Items = ({
         }
       } else {
         if (
-          (item.pathParts && item.pathParts[0] === myId) ||
+          (item.pathParts && item.pathParts[0].id === myId) ||
           item.rootFolderType === FolderType.USER
         ) {
           return true;
@@ -311,7 +273,7 @@ const Items = ({
   }, [deleteAction]);
 
   const onEmptyTrashAction = () => {
-    isMobile && onHide();
+    currentDeviceType === DeviceType.mobile && onHide();
     setEmptyTrashDialogVisible(true);
   };
 
@@ -425,7 +387,12 @@ export default inject(
     dialogsStore,
     clientLoadingStore,
   }) => {
-    const { settingsStore, isCommunity, isPaymentPageAvailable } = auth;
+    const {
+      settingsStore,
+      isCommunity,
+      isPaymentPageAvailable,
+      currentDeviceType,
+    } = auth;
     const { showText, docSpace } = settingsStore;
 
     const {
@@ -486,6 +453,7 @@ export default inject(
       emptyTrashInProgress,
       isCommunity,
       isPaymentPageAvailable,
+      currentDeviceType,
     };
   }
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

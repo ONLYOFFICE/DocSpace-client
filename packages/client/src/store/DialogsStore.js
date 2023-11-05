@@ -14,6 +14,7 @@ class DialogsStore {
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
+  restorePanelVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
@@ -30,9 +31,12 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
-
   isFolderActions = false;
   roomCreation = false;
+  culture = {
+    key: "",
+    label: "",
+  };
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
@@ -88,7 +92,9 @@ class DialogsStore {
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
   }
-
+  setInviteLanguage = (culture) => {
+    this.culture = culture;
+  };
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };
@@ -132,6 +138,19 @@ class DialogsStore {
       return;
 
     this.moveToPanelVisible = visible;
+  };
+
+  setRestorePanelVisible = (visible) => {
+    !visible && this.deselectActiveFiles();
+
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection
+    )
+      return;
+
+    this.restorePanelVisible = visible;
   };
 
   setRestoreAllPanelVisible = (visible) => {
@@ -213,8 +232,17 @@ class DialogsStore {
     const { pathParts } = this.selectedFolderStore;
 
     const id = visible && !newId ? item.id : newId;
-    const newIds = newId ? [newId] : pathParts;
-    item && pathParts.push(item.id);
+    const newIds = newId
+      ? [newId]
+      : pathParts
+      ? pathParts.map((p) => p.id)
+      : [];
+    item &&
+      pathParts.push({
+        id: item.id,
+        title: item.title,
+        roomType: item.roomType,
+      });
 
     let newFilesPanelVisible = visible;
 

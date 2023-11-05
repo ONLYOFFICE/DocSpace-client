@@ -1,24 +1,20 @@
-﻿import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+﻿import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile as isMobileRDD } from "react-device-detect";
 
 import IconButton from "@docspace/components/icon-button";
 import Text from "@docspace/components/text";
-import Loaders from "@docspace/common/components/Loaders";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+
 import Submenu from "@docspace/components/submenu";
 import {
   isDesktop as isDesktopUtils,
-  isSmallTablet as isSmallTabletUtils,
+  isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "@docspace/components/utils/device";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-
 import { StyledInfoPanelHeader } from "./styles/common";
-import { FolderType } from "@docspace/common/constants";
+
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
 const InfoPanelHeaderContent = (props) => {
@@ -58,8 +54,7 @@ const InfoPanelHeaderContent = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const isTablet =
-      isTabletUtils() || isSmallTabletUtils() || !isDesktopUtils();
+    const isTablet = isTabletUtils() || isMobileUtils() || !isDesktopUtils();
 
     setIsTablet(isTablet);
   };
@@ -162,13 +157,13 @@ const InfoPanelHeaderContent = (props) => {
         {!isTablet && (
           <div className="info-panel-toggle-bg">
             <IconButton
-              id="info-panel-toggle--close"
-              className="info-panel-toggle"
-              iconName={CrossReactSvgUrl}
-              size="16"
-              isFill={true}
+              isStroke
+              size="17"
               onClick={closeInfoPanel}
+              iconName={CrossReactSvgUrl}
               title={t("Common:InfoPanel")}
+              className="info-panel-toggle"
+              id="info-panel-toggle--close"
             />
           </div>
         )}
@@ -181,14 +176,12 @@ const InfoPanelHeaderContent = (props) => {
               style={{ width: "100%" }}
               data={roomsSubmenu}
               forsedActiveItemId={roomsView}
-              size="scale"
             />
           ) : (
             <Submenu
               style={{ width: "100%" }}
               data={personalSubmenu}
               forsedActiveItemId={fileView}
-              size="scale"
             />
           )}
         </div>

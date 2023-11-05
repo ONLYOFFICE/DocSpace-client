@@ -90,11 +90,11 @@ const StyledTableRow = styled(TableRow)`
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-left: -20px;
-                  padding-left: 18px;
+                  padding-left: 20px;
                 `
               : css`
                   margin-right: -20px;
-                  padding-right: 18px;
+                  padding-right: 20px;
                 `}
         }
       }
@@ -133,7 +133,7 @@ const StyledTableRow = styled(TableRow)`
   .table-container_element-wrapper,
   .table-container_row-loader {
     min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
-
+    border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -201,6 +201,7 @@ const StyledTableRow = styled(TableRow)`
         : css`
             padding-right: 0px;
           `}
+    justify-content:flex-end;
 
     ${(props) => props.dragging && contextMenuWrapperDraggingStyle};
     ${(props) =>
@@ -210,11 +211,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
 
         ${hotkeyBorderStyle}
@@ -229,14 +230,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 12px 12px;
-          `
-        : css`
-            padding: 12px 12px 12px 0px;
-          `}
+    padding: 12px 0;
   }
 
   ${(props) =>
@@ -313,11 +307,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
       }
     `}
@@ -386,6 +380,11 @@ const StyledBadgesContainer = styled.div`
     min-width: 12px;
     width: max-content;
     margin: 0 -2px -2px -2px;
+  }
+
+  .row-copy-link,
+  .tablet-row-copy-link {
+    display: none;
   }
 
   .badge-version {

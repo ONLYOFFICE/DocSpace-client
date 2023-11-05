@@ -2,17 +2,10 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
-import {
-  Link,
-  Button,
-  Heading,
-  HelpButton,
-  InputBlock,
-  Label,
-  Text,
-} from "@docspace/components";
+import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 import Loaders from "@docspace/common/components/Loaders";
+import { DeviceType } from "@docspace/common/constants";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
@@ -22,6 +15,7 @@ const DocumentService = ({
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
+  currentDeviceType,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -133,33 +127,25 @@ const DocumentService = ({
 
   if (isLoading || !ready) return <Loaders.SettingsDSConnect />;
 
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
+
   return (
     <Styled.Location>
       <Styled.LocationHeader>
         <div className="main">
-          <Heading className={"heading"} isInline level={3}>
-            {t("Settings:DocumentServiceLocationHeader")}
-          </Heading>
-          <div className="help-button-wrapper">
-            <HelpButton
-              tooltipContent={t("Settings:DocumentServiceLocationHeaderHelp")}
-            />
-          </div>
+          {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
-        <div className="secondary">
-          {t("Settings:DocumentServiceLocationHeaderInfo")}
-        </div>
-        <div>
-          <Link
-            className="third-party-link"
-            color={currentColorScheme.main.accent}
-            isHovered
-            target="_blank"
-            href={integrationSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        </div>
+
+        <Link
+          className="third-party-link"
+          color={currentColorScheme.main.accent}
+          isHovered
+          target="_blank"
+          href={integrationSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
@@ -242,7 +228,7 @@ const DocumentService = ({
             onClick={onSubmit}
             className="button"
             primary
-            size={"small"}
+            size={buttonSize}
             label={t("Common:SaveButton")}
             isDisabled={
               isFormEmpty ||
@@ -256,8 +242,8 @@ const DocumentService = ({
           <Button
             onClick={onReset}
             className="button"
-            size={"small"}
-            label={t("Settings:RestoreDefaultButton")}
+            size={buttonSize}
+            label={t("Common:Restore")}
             isDisabled={isDefaultSettings || isSaveLoading || isResetLoading}
             isLoading={isResetLoading}
           />
@@ -268,7 +254,8 @@ const DocumentService = ({
 };
 
 export default inject(({ auth, settingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl } = auth.settingsStore;
+  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
+    auth.settingsStore;
   const { getDocumentServiceLocation, changeDocumentServiceLocation } =
     settingsStore;
   return {
@@ -276,5 +263,6 @@ export default inject(({ auth, settingsStore }) => {
     changeDocumentServiceLocation,
     currentColorScheme,
     integrationSettingsUrl,
+    currentDeviceType,
   };
 })(observer(DocumentService));

@@ -1,9 +1,10 @@
 import React from "react";
-import { isMobileOnly } from "react-device-detect";
+
 import { getLogoFromPath } from "@docspace/common/utils";
 
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Logo = (props) => {
   const {
@@ -21,7 +22,7 @@ const Logo = (props) => {
   const currentLogo = getLogoFromPath(src);
 
   const onLogoClick = () => {
-    isMobileOnly && document.getElementById(inputId).click();
+    isMobile() && document.getElementById(inputId).click();
   };
 
   return (

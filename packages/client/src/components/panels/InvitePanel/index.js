@@ -120,10 +120,9 @@ const InvitePanel = ({
   };
 
   useEffect(() => {
-    setInvitePanelIsLoading(true);
-
     if (roomId === -1) {
       if (!userLink || !guestLink || !adminLink || !collaboratorLink) {
+        setInvitePanelIsLoading(true);
         getPortalInviteLinks().finally(() => {
           disableInvitePanelLoader();
         });
@@ -159,6 +158,7 @@ const InvitePanel = ({
       return;
     }
 
+    setInvitePanelIsLoading(true);
     Promise.all([selectRoom(), getInfo()]).finally(() => {
       disableInvitePanelLoader(false);
     });

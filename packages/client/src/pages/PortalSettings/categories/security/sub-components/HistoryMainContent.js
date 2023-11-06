@@ -53,6 +53,11 @@ const MainContainer = styled.div`
 
   .latest-text {
     font-size: 13px;
+    padding: 20px 0 16px;
+  }
+
+  .download-text {
+    font-size: 13px;
     padding: 24px 0;
   }
 
@@ -336,7 +341,9 @@ const HistoryMainContent = (props) => {
             />
           </>
         )}
-        <Text className="latest-text settings_unavailable">{downloadText}</Text>
+        <Text className="download-text settings_unavailable">
+          {downloadText}
+        </Text>
       </div>
       {content}
       <DownLoadWrapper>

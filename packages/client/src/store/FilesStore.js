@@ -1504,37 +1504,13 @@ class FilesStore {
             .reverse();
         });
 
-        //TODO: for test remove after
-        const id = data.current.id;
-        const isDone = id === 9;
-        const inProgress = id === 10;
-
-        if (isDone || inProgress) {
-          const { security, ...rest } = data.current;
-
-          data.current = {
-            ...rest,
-            security: {
-              ...security,
-              Create: false,
-            },
-          };
-        }
-
-        const folderType = isDone
-          ? FolderType.Done
-          : inProgress
-          ? FolderType.InProgress
-          : null;
-        // end
-
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
-          folderType,
+          // type,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -2984,6 +2960,7 @@ class FilesStore {
         rootFolderId,
         shared,
         title,
+        type,
         updated,
         updatedBy,
         version,
@@ -2999,49 +2976,16 @@ class FilesStore {
         isArchive,
         tags,
         pinned,
-        security: Security,
+        security,
         viewAccessability,
         mute,
         inRoom = true,
       } = item;
 
-      //TODO: for test remove after
-      const isDone = !fileExst && id === 9;
-      //TODO: for test remove after
-      const isProgress = !fileExst && id === 10;
-
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
         item.providerKey,
         "small"
       );
-
-      let security = { ...Security };
-
-      if (isDone || isProgress) {
-        security = {
-          Copy: true,
-          CopyTo: false,
-          Create: false,
-          Delete: false,
-          Download: true,
-          Duplicate: false,
-          EditAccess: false,
-          EditRoom: true,
-          Move: false,
-          MoveTo: false,
-          Mute: false,
-          Pin: false,
-          Read: true,
-          Rename: false,
-        };
-      }
-
-      const folderType = isDone
-        ? FolderType.Done
-        : isProgress
-        ? FolderType.InProgress
-        : "";
-      //end
 
       const providerType =
         RoomsProviderType[
@@ -3055,8 +2999,7 @@ class FilesStore {
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
 
-      //TODO: for test remove security
-      const contextOptions = this.getFilesContextOptions({ ...item, security });
+      const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       const iconSize = this.viewAs === "table" ? 24 : 32;
@@ -3097,7 +3040,7 @@ class FilesStore {
               contentLength,
               roomType,
               isArchive,
-              folderType
+              type
             );
 
       const defaultRoomIcon = isRoom
@@ -3108,7 +3051,7 @@ class FilesStore {
             contentLength,
             roomType,
             isArchive,
-            folderType
+            type
           )
         : undefined;
 
@@ -3191,7 +3134,7 @@ class FilesStore {
         viewAccessability,
         ...pluginOptions,
         inRoom,
-        folderType,
+        type,
       };
     });
 

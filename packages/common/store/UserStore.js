@@ -37,7 +37,7 @@ class UserStore {
       const user = await this.loadCurrentUser();
 
       if (i18n && user.cultureName !== i18n.language) {
-        console.log({ i18n, user });
+        //console.log({ i18n, user });
         i18n.changeLanguage(user.cultureName);
       }
     } catch (e) {

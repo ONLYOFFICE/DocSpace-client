@@ -248,16 +248,6 @@ const StyledAutoBackup = styled.div`
             margin-right: 8px;
           `}
   }
-  .backup_modules {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 37px;
-          `
-        : css`
-            margin-left: 37px;
-          `}
-  }
   .auto-backup_storages-module {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

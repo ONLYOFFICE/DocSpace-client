@@ -49,6 +49,7 @@ const Panels = (props) => {
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
+    restorePanelVisible,
     thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
@@ -118,11 +119,15 @@ const Panels = (props) => {
       />
     ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
-    (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) && (
+    (moveToPanelVisible ||
+      copyPanelVisible ||
+      restorePanelVisible ||
+      restoreAllPanelVisible) && (
       <FilesSelector
         key="files-selector"
         isMove={moveToPanelVisible}
         isCopy={copyPanelVisible}
+        isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
       />
     ),
@@ -207,6 +212,7 @@ export default inject(
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
@@ -262,6 +268,7 @@ export default inject(
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
       deleteThirdPartyDialogVisible,

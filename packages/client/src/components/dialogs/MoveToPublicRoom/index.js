@@ -17,6 +17,7 @@ const MoveToPublicRoomComponent = (props) => {
     setIsVisible,
     setConflictResolveDialogVisible,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     moveToPublicRoomData,
@@ -56,6 +57,7 @@ const MoveToPublicRoomComponent = (props) => {
     setConflictResolveDialogVisible(false);
     setSelected("none");
     setMoveToPanelVisible(false);
+    setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
   };
@@ -152,6 +154,7 @@ export default inject(
       setMoveToPublicRoomVisible,
       setConflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       moveToPublicRoomData,
@@ -166,6 +169,7 @@ export default inject(
       setIsVisible: setMoveToPublicRoomVisible,
       setConflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       moveToPublicRoomData,

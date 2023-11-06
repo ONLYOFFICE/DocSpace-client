@@ -31,6 +31,7 @@ const InfoPanelHeaderContent = (props) => {
     getIsTrash,
     infoPanelItemsList,
     enablePlugins,
+    resetView,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -50,7 +51,10 @@ const InfoPanelHeaderContent = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+      resetView();
+    };
   }, []);
 
   const checkWidth = () => {
@@ -204,6 +208,7 @@ export default inject(({ auth, pluginStore }) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
+    resetView,
     //selectionParentRoom,
   } = auth.infoPanelStore;
 
@@ -223,6 +228,7 @@ export default inject(({ auth, pluginStore }) => {
 
     infoPanelItemsList,
     enablePlugins,
+    resetView,
 
     //  rootFolderType,
 

@@ -27,7 +27,7 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
-import MuteReactSvgUrl from "PUBLIC_DIR/images/mute.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
@@ -232,6 +232,13 @@ class ContextOptionsStore {
     setIsMobileHidden(true);
 
     this.dialogsStore.setMoveToPanelVisible(true);
+  };
+
+  onRestoreAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+    console.log("Click");
+    this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {
@@ -1368,7 +1375,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: false,
       },
       {
@@ -1680,7 +1687,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: !isRecycleBinFolder || !restoreItems,
       },
       {

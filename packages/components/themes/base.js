@@ -68,6 +68,7 @@ const Base = {
   text: {
     color: black,
     disableColor: gray,
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -544,7 +545,7 @@ const Base = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -1717,6 +1718,7 @@ const Base = {
     disabledArrow: "#A3A9AE",
     weekdayColor: "#A3A9AE",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
   },
 
   datePicker: {

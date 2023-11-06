@@ -44,7 +44,7 @@ export const getPDFContextModel = (
       label: t("Common:EditButton"),
       icon: AccessEditReactSvgUrl,
       onClick: () => funcs.onClickLinkEdit(item),
-      disabled: !item.security.Edit,
+      disabled: !item.viewAccessability.WebEdit,
     },
     {
       id: "option_preview",

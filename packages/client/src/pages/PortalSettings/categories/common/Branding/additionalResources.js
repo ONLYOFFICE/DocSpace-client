@@ -248,14 +248,14 @@ const AdditionalResources = (props) => {
             onChange={onChangeFeedback}
           />
 
-          <Checkbox
+          {/*<Checkbox
             tabIndex={13}
             className="show-video-guides checkbox"
             isDisabled={!isSettingPaid}
             label={t("ShowVideoGuides")}
             isChecked={videoGuidesEnabled}
             onChange={onChangeVideoGuides}
-          />
+  />*/}
           <Checkbox
             tabIndex={14}
             className="show-help-center checkbox"

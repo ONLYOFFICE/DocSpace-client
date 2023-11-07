@@ -40,6 +40,7 @@ class Row extends React.Component {
       isRoom,
       withoutBorder,
       contextTitle,
+      badgesComponent,
       isArchive,
     } = this.props;
 
@@ -162,6 +163,7 @@ class Row extends React.Component {
           className="row_context-menu-wrapper"
           spacerWidth={contextButtonSpacerWidth}
         >
+          {badgesComponent && badgesComponent}
           {renderContentElement && (
             <StyledContentElement>{contentElement}</StyledContentElement>
           )}

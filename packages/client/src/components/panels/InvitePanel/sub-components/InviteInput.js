@@ -343,6 +343,7 @@ const InviteInput = ({
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
+            textOverflow
             scaledOptions={false}
             size="content"
             showDisabledItems={true}

@@ -90,11 +90,11 @@ const StyledTableRow = styled(TableRow)`
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-left: -20px;
-                  padding-left: 18px;
+                  padding-left: 20px;
                 `
               : css`
                   margin-right: -20px;
-                  padding-right: 18px;
+                  padding-right: 20px;
                 `}
         }
       }
@@ -201,6 +201,7 @@ const StyledTableRow = styled(TableRow)`
         : css`
             padding-right: 0px;
           `}
+    justify-content:flex-end;
 
     ${(props) => props.dragging && contextMenuWrapperDraggingStyle};
     ${(props) =>
@@ -210,11 +211,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
 
         ${hotkeyBorderStyle}
@@ -306,11 +307,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
       }
     `}

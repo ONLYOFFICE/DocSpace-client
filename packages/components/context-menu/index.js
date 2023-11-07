@@ -11,7 +11,6 @@ import SubMenu from "./sub-components/sub-menu";
 import MobileSubMenu from "./sub-components/mobile-sub-menu";
 
 import {
-  isMobile,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
@@ -33,6 +32,7 @@ class ContextMenu extends Component {
       changeView: false,
       showMobileMenu: false,
       onLoad: null,
+      articleWidth: 0,
     };
 
     this.menuRef = React.createRef();
@@ -81,6 +81,7 @@ class ContextMenu extends Component {
           reshow: false,
           resetMenu: true,
           changeView: false,
+          articleWidth: 0,
         },
         () => this.show(event)
       );
@@ -96,6 +97,7 @@ class ContextMenu extends Component {
       reshow: false,
       changeView: false,
       showMobileMenu: false,
+      articleWidth: 0,
     });
   };
 
@@ -144,12 +146,19 @@ class ContextMenu extends Component {
         left = event.pageX - width + 1;
       }
       if (isTabletUtils() && height > 483) {
-        this.setState({ changeView: true });
+        const article = document.getElementById("article-container");
+
+        let articleWidth = 0;
+        if (article) {
+          articleWidth = article.offsetWidth;
+        }
+
+        this.setState({ changeView: true, articleWidth });
         return;
       }
 
       if (isMobileUtils() && height > 210) {
-        this.setState({ changeView: true });
+        this.setState({ changeView: true, articleWidth: 0 });
         return;
       }
 
@@ -320,6 +329,7 @@ class ContextMenu extends Component {
     );
 
     const changeView = this.state.changeView;
+    const articleWidth = this.state.articleWidth;
     const isIconExist = this.props.header?.icon;
     const isAvatarExist = this.props.header?.avatar;
 
@@ -330,6 +340,7 @@ class ContextMenu extends Component {
       <>
         <StyledContextMenu
           changeView={changeView}
+          articleWidth={articleWidth}
           isRoom={this.props.isRoom}
           fillIcon={this.props.fillIcon}
           isIconExist={isIconExist}
@@ -426,18 +437,28 @@ class ContextMenu extends Component {
 
   render() {
     const element = this.renderContextMenu();
-    return (
+
+    const isMobile = isMobileUtils();
+
+    const contextMenu = (
       <>
         {this.props.withBackdrop && (
           <Backdrop
-            visible={this.state.visible}
-            withBackground={false}
-            withoutBlur={true}
+            visible={this.state.visible && this.state.changeView}
+            withBackground={isMobile}
+            withoutBlur={!isMobile}
+            zIndex={this.props.baseZIndex}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />
       </>
     );
+
+    const root = document.getElementById("root");
+
+    const portal = <Portal element={contextMenu} appendTo={root} />;
+
+    return isMobile && root ? portal : contextMenu;
   }
 }
 

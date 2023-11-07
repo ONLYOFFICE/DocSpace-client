@@ -18,6 +18,8 @@ export const desktop = `(min-width: ${size.desktop}px)`;
 
 export const hugeDesktop = `(max-width: ${size.hugeDesktop}px)`;
 
+export const mobileFooterHeight = "64px";
+
 export const isMobile = () => {
   return window.innerWidth <= size.mobile;
 };

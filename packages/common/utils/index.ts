@@ -630,3 +630,18 @@ export const getSystemTheme = () => {
     ? ThemeKeys.DarkStr
     : ThemeKeys.BaseStr;
 };
+
+export const getEditorTheme = (theme) => {
+  switch (theme) {
+    case ThemeKeys.BaseStr:
+      return "default-light";
+    case ThemeKeys.DarkStr:
+      return "default-dark";
+    case ThemeKeys.SystemStr: {
+      const uiTheme = getSystemTheme();
+      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    }
+    default:
+      return "default-dark";
+  }
+};

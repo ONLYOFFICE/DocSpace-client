@@ -224,12 +224,14 @@ class ContextOptionsStore {
   onMoveAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onCopyAction = () => {
     const { setIsMobileHidden } = this.authStore.infoPanelStore;
     setIsMobileHidden(true);
+
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
@@ -592,64 +594,116 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onLoadLinks = async (t, item) => {
-    const promise = new Promise(async (resolve, reject) => {
-      let linksArray = [];
+  // onLoadLinks = async (t, item) => {
+  //   const promise = new Promise(async (resolve, reject) => {
+  //     let linksArray = [];
 
-      this.setLoaderTimer(true);
-      try {
-        const links = await this.publicRoomStore.fetchExternalLinks(item.id);
+  //     this.setLoaderTimer(true);
+  //     try {
+  //       const links = await this.publicRoomStore.fetchExternalLinks(item.id);
 
-        for (let link of links) {
-          const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
+  //       for (let link of links) {
+  //         const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
 
-          if (!disabled && !isExpired) {
-            linksArray.push({
-              icon: InvitationLinkReactSvgUrl,
-              id,
-              key: `external-link_${id}`,
-              label: title,
-              onClick: () => {
-                copy(shareLink);
-                toastr.success(t("Files:LinkSuccessfullyCopied"));
-              },
+  //         if (!disabled && !isExpired) {
+  //           linksArray.push({
+  //             icon: InvitationLinkReactSvgUrl,
+  //             id,
+  //             key: `external-link_${id}`,
+  //             label: title,
+  //             onClick: () => {
+  //               copy(shareLink);
+  //               toastr.success(t("Translations:LinkCopySuccess"));
+  //             },
+  //           });
+  //         }
+  //       }
+
+  //       if (!linksArray.length) {
+  //         linksArray = [
+  //           {
+  //             id: "no-external-links-option",
+  //             key: "no-external-links",
+  //             label: !links.length
+  //               ? t("Files:NoExternalLinks")
+  //               : t("Files:AllLinksAreDisabled"),
+  //             disableColor: true,
+  //           },
+  //           !isMobile && {
+  //             key: "separator0",
+  //             isSeparator: true,
+  //           },
+  //           {
+  //             icon: SettingsReactSvgUrl,
+  //             id: "manage-option",
+  //             key: "manage-links",
+  //             label: t("Notifications:ManageNotifications"),
+  //             onClick: () => this.onShowInfoPanel(item, "info_members"),
+  //           },
+  //         ];
+  //       }
+
+  //       this.setLoaderTimer(false, () => resolve(linksArray));
+  //     } catch (error) {
+  //       toastr.error(error);
+  //       this.setLoaderTimer(false);
+  //       return reject(linksArray);
+  //     }
+  //   });
+
+  //   return promise;
+  // };
+
+  onLoadPlugins = (item) => {
+    const { contextOptions } = item;
+    const { enablePlugins } = this.authStore.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        if (contextOptions.includes(option.key)) {
+          const value = option.value;
+
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
+
+              setActiveFiles([item.id]);
+
+              await value.onClick(item.id);
+
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
+            }
+          };
+
+          if (value.fileExt) {
+            if (value.fileExt.includes(item.fileExst)) {
+              pluginItems.push({
+                key: option.key,
+                label: value.label,
+                icon: value.icon,
+                onClick,
+              });
+            }
+          } else {
+            pluginItems.push({
+              key: option.key,
+              label: value.label,
+              icon: value.icon,
+              onClick,
             });
           }
         }
+      });
+    }
 
-        if (!linksArray.length) {
-          linksArray = [
-            {
-              id: "no-external-links-option",
-              key: "no-external-links",
-              label: !links.length
-                ? t("Files:NoExternalLinks")
-                : t("Files:AllLinksAreDisabled"),
-              disableColor: true,
-            },
-            !isMobile && {
-              key: "separator0",
-              isSeparator: true,
-            },
-            {
-              icon: SettingsReactSvgUrl,
-              id: "manage-option",
-              key: "manage-links",
-              label: t("Notifications:ManageNotifications"),
-              onClick: () => this.onShowInfoPanel(item, "info_members"),
-            },
-          ];
-        }
+    this.setLoaderTimer(false);
 
-        this.setLoaderTimer(false, () => resolve(linksArray));
-      } catch (error) {
-        toastr.error(error);
-        this.setLoaderTimer(false);
-        return reject(linksArray);
-      }
-    });
-
-    return promise;
+    return pluginItems;
   };
 
   onClickInviteUsers = (e, roomType) => {
@@ -822,8 +876,6 @@ class ContextOptionsStore {
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
 
-    const { enablePlugins } = this.authStore.settingsStore;
-
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
@@ -986,48 +1038,6 @@ class ContextOptionsStore {
 
     const withOpen = item.id !== this.selectedFolderStore.id;
 
-    const pluginItems = [];
-
-    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
-      this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
-
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
-
-              setActiveFiles([item.id]);
-
-              await value.onClick(item.id);
-
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
-              label: value.label,
-              icon: value.icon,
-              onClick,
-            });
-          }
-        }
-      });
-    }
-
     const optionsModel = [
       {
         id: "option_select",
@@ -1136,18 +1146,36 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          (item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+          !this.treeFoldersStore.isArchiveFolder,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("SharingPanel:CopyExternalLink"),
+        label: t("Files:CopyGeneralLink"),
         icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
-        onLoad: () => this.onLoadLinks(t, item),
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
+        onClick: async () => {
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+            this.publicRoomStore.setExternalLink(primaryLink);
+          }
+        },
+        // onLoad: () => this.onLoadLinks(t, item),
       },
       {
         id: "option_room-info",
@@ -1350,6 +1378,8 @@ class ContextOptionsStore {
 
     const options = this.filterModel(optionsModel, contextOptions);
 
+    const pluginItems = this.onLoadPlugins(item);
+
     if (pluginItems.length > 0) {
       options.splice(1, 0, {
         id: "option_plugin-actions",
@@ -1357,10 +1387,10 @@ class ContextOptionsStore {
         label: t("Common:Actions"),
         icon: PluginActionsSvgUrl,
         disabled: false,
-        items: pluginItems,
+
+        onLoad: () => this.onLoadPlugins(item),
       });
     }
-
     return options;
   };
 

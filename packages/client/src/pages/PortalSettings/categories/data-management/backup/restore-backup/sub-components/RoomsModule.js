@@ -22,7 +22,6 @@ const RoomsModule = (props) => {
       onSelectFile={onSelectFile}
       filterParam={FilesSelectorFilterTypes.GZ}
       descriptionText={t("SelectFileInGZFormat")}
-      isRoomsOnly
     />
   );
 };

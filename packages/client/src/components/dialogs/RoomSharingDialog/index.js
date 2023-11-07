@@ -37,7 +37,7 @@ const RoomSharingDialog = ({ t, tReady, visible, setIsVisible }) => {
 
   const onCopy = () => {
     copy(roomHref);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Translations:LinkCopySuccess"));
     onClose();
   };
 

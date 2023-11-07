@@ -168,6 +168,7 @@ class SettingsStore {
 
   enablePlugins = false;
   pluginOptions = [];
+  domainValidator = null;
 
   additionalResourcesData = null;
   additionalResourcesIsDefault = true;
@@ -193,18 +194,12 @@ class SettingsStore {
 
   windowWidth = window.innerWidth;
 
-  bodyRendered = false;
-
   constructor() {
     makeAutoObservable(this);
   }
 
   setTenantStatus = (tenantStatus) => {
     this.tenantStatus = tenantStatus;
-  };
-
-  setBodyRendered = (value) => {
-    this.bodyRendered = value;
   };
 
   get docspaceSettingsUrl() {
@@ -486,6 +481,10 @@ class SettingsStore {
 
     if (origSettings?.tenantAlias) {
       this.setTenantAlias(origSettings.tenantAlias);
+    }
+
+    if (origSettings?.domainValidator) {
+      this.domainValidator = origSettings.domainValidator;
     }
   };
 

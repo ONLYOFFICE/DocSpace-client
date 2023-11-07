@@ -39,6 +39,38 @@ class SelectedFolderStore {
     this.settingsStore = settingsStore;
   }
 
+  getSelectedFolder = () => {
+    return {
+      folders: this.folders,
+      parentId: this.parentId,
+      filesCount: this.filesCount,
+      foldersCount: this.foldersCount,
+      isShareable: this.isShareable,
+      new: this.new,
+      id: this.id,
+      title: this.title,
+      access: this.access,
+      shared: this.shared,
+      created: this.created,
+      createdBy: this.createdBy,
+      updated: this.updated,
+      updatedBy: this.updatedBy,
+      rootFolderType: this.rootFolderType,
+      pathParts: this.pathParts,
+      navigationPath: this.navigationPath,
+      providerItem: this.providerItem,
+      providerKey: this.providerKey,
+      providerId: this.providerId,
+      roomType: this.roomType,
+      pinned: this.pinned,
+      isRoom: this.isRoom,
+      logo: this.logo,
+      tags: this.tags,
+      rootFolderId: this.rootFolderId,
+      security: this.security,
+    };
+  };
+
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
   }
@@ -76,6 +108,10 @@ class SelectedFolderStore {
 
   setParentId = (parentId) => {
     this.parentId = parentId;
+  };
+
+  setRoomType = (roomType) => {
+    this.roomType = roomType;
   };
 
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {

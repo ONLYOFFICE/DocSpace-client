@@ -48,6 +48,10 @@ const Controls = styled(Box)`
   .label {
     min-width: fit-content;
   }
+
+  .checkbox {
+    max-width: fit-content;
+  }
 `;
 
 const CategoryHeader = styled.div`
@@ -512,16 +516,19 @@ const PortalIntegration = (props) => {
           <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
+              className="checkbox"
               label={t("Menu")}
               onChange={onChangeShowMenu}
               isChecked={config.showMenu}
             />
             <Checkbox
+              className="checkbox"
               label={t("Header")}
               onChange={onChangeShowHeader}
               isChecked={config.showHeader}
             />
             <Checkbox
+              className="checkbox"
               label={t("Filter")}
               onChange={onChangeShowFilter}
               isChecked={config.showFilter}
@@ -563,6 +570,7 @@ const PortalIntegration = (props) => {
                 tabIndex={5}
               />
               <Checkbox
+                className="checkbox"
                 label={t("Files:WithSubfolders")}
                 onChange={onChangeWithSubfolders}
                 isChecked={withSubfolders}

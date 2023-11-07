@@ -9,6 +9,7 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
+
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 24px;
@@ -18,6 +19,7 @@ const commonStyles = css`
       margin-bottom: 8px;
     }
   }
+
   .backup_modules-header_wrapper {
     display: flex;
     svg {
@@ -31,6 +33,7 @@ const commonStyles = css`
             `}
     }
   }
+
   .radio-button_text {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -43,9 +46,11 @@ const commonStyles = css`
     font-size: 13px;
     font-weight: 600;
   }
+
   .backup_radio-button {
     margin-bottom: 4px;
   }
+
   .backup_combo {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -60,6 +65,7 @@ const commonStyles = css`
       max-width: 100%;
     }
   }
+
   .backup_text-input {
     margin: 4px 0 10px 0;
     width: 100%;
@@ -70,16 +76,19 @@ const commonStyles = css`
       max-width: 100%;
     }
   }
+
   .backup_checkbox {
     margin-top: 8px;
     margin-bottom: 16px;
   }
+
   .backup_radio-button-settings {
     margin-top: 8px;
     margin-bottom: 16px;
   }
+
   .backup_radio-button {
-    max-width: ${TEXT_LENGTH};
+    max-width: fit-content;
     font-size: 12px;
     line-height: 15px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -326,11 +335,13 @@ const StyledRestoreBackup = styled.div`
       margin-bottom: 16px;
     }
   }
+
   .restore-description {
     max-width: ${TEXT_LENGTH};
     font-size: 12px;
     line-height: 15px;
   }
+
   .restore-backup_warning {
     font-weight: 600;
     margin-top: 24px;
@@ -338,19 +349,24 @@ const StyledRestoreBackup = styled.div`
     font-size: 16px;
     color: ${(props) => props.theme.client.settings.backup.warningColor};
   }
+
   .restore-backup_warning-link {
     margin-top: 16px;
     max-width: ${TEXT_LENGTH};
   }
+
   .restore-backup_warning-description {
     max-width: ${TEXT_LENGTH};
   }
+
   .restore-backup-checkbox {
+    max-width: fit-content;
     margin: 24px 0;
   }
   .restore-backup-checkbox_notification {
+    max-width: fit-content;
     margin-top: 11px;
-    max-width: ${TEXT_LENGTH};
+
     .checkbox-text {
       white-space: normal;
     }
@@ -361,6 +377,7 @@ const StyledRestoreBackup = styled.div`
     cursor: ${(props) => (props.isEnableRestore ? "pointer" : "cursor")};
     font-weight: 600;
   }
+
   .restore-backup_input {
     margin: 16px 0;
     max-width: ${INPUT_LENGTH};
@@ -369,15 +386,19 @@ const StyledRestoreBackup = styled.div`
       max-width: none;
     }
   }
+
   .restore-description {
     margin-bottom: 24px;
   }
+
   .restore-backup_modules {
     margin-top: 24px;
   }
+
   .backup_radio-button {
     margin-bottom: 16px;
   }
+
   .restore-backup_button {
     @media ${mobile} {
       width: 100%;

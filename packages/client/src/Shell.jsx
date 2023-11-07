@@ -53,9 +53,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     standalone,
     userId,
     currentDeviceType,
-    bodyRendered,
+
     showArticleLoader,
   } = rest;
+
+  useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname)) {
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -353,7 +363,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
-      {/* {!bodyRendered && <AppLoader />} */}
+
       <Main isDesktop={isDesktop}>
         {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">
@@ -383,7 +393,6 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
-    bodyRendered,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -427,7 +436,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
-    bodyRendered,
+
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
 })(observer(Shell));

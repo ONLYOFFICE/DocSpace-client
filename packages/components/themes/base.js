@@ -2021,6 +2021,7 @@ const Base = {
     links: {
       iconColor: "#3B72A7",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
     },
 
     members: {
@@ -2070,6 +2071,10 @@ const Base = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
+    },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
     },
   },
 
@@ -2358,6 +2363,7 @@ const Base = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#657077",
     },
 
     roomType: {
@@ -2952,6 +2958,7 @@ const Base = {
           toggleContentBackground: grayLight,
           iconButton: black,
           iconButtonDisabled: gray,
+          border: "1px solid #eceef1",
         },
 
         smtp: {

@@ -29,17 +29,11 @@ const PreparationPortal = (props) => {
     withoutHeader,
     style,
     clearLocalStorage,
-    setBodyRendered,
+    isDialog,
   } = props;
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    setBodyRendered(true);
-
-    return () => setBodyRendered(false);
-  });
 
   const clearAllIntervals = () => {
     clearInterval(timerId);
@@ -211,7 +205,7 @@ const PreparationPortal = (props) => {
     : t("Common:PreparationPortalTitle");
 
   return (
-    <StyledPreparationPortal errorMessage={errorMessage}>
+    <StyledPreparationPortal errorMessage={errorMessage} isDialog={isDialog}>
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
@@ -253,7 +247,6 @@ const PreparationPortalWrapper = inject(({ auth, backup }) => {
   return {
     clearLocalStorage,
     multiplicationFactor,
-    setBodyRendered: auth.settingsStore.setBodyRendered,
   };
 })(
   withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal))
@@ -261,10 +254,12 @@ const PreparationPortalWrapper = inject(({ auth, backup }) => {
 
 PreparationPortal.propTypes = {
   withoutHeader: PropTypes.bool,
+  isDialog: PropTypes.bool,
 };
 
 PreparationPortal.defaultProps = {
   withoutHeader: false,
+  isDialog: false,
 };
 
 export default (props) => <PreparationPortalWrapper {...props} />;

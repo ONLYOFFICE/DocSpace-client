@@ -66,6 +66,9 @@ export type useRootHelperProps = {
   treeFolders?: Item[];
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
 };
 
 export type useRoomsHelperProps = {
@@ -79,7 +82,9 @@ export type useRoomsHelperProps = {
   setIsRoot: (value: boolean) => void;
   searchValue?: string;
   isRoomsOnly: boolean;
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
 };
 
 export type useFilesHelpersProps = {
@@ -100,7 +105,9 @@ export type useFilesHelpersProps = {
   setSelectedTreeNode: (treeNode: any) => void;
   filterParam?: string;
   getRootData?: () => Promise<void>;
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
   isRoomsOnly: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
@@ -159,7 +166,9 @@ export type FilesSelectorProps = {
     fileIds: string[] | number[]
   ) => Promise<any>;
 
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
   onSetNewFolderPath?: (value: number | string | undefined) => void;
   onSelectFolder?: (
     value: number | string | undefined,

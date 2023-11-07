@@ -12,8 +12,7 @@ import HistoryTableHeader from "./HistoryTableHeader";
 import { useViewEffect } from "@docspace/common/hooks";
 
 const TableWrapper = styled(TableContainer)`
-  margin-top: 2px;
-  margin-left: 2px;
+  margin-top: -2px;
 
   .table-container_header {
     position: absolute;
@@ -30,13 +29,33 @@ const TableWrapper = styled(TableContainer)`
 
   .table-list-item {
     cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
-      background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#3D3D3D")};
+      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#3D3D3D")};
+    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
   }
 `;
 

@@ -44,44 +44,71 @@
     },
     "VsCodeTaskButtons.tasks": [
       {
-        "label": "S:Build-EE",
-        "task": "Backend | build EE",
-        "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+        "label": "Server",
+        "tasks": [
+          {
+            "label": "Docker : Build-EE",
+            "task": "Backend | build EE",
+            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+          },
+          {
+            "label": "Docker : Build-CE",
+            "task": "Backend | build CE",
+            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
+          },
+          {
+            "label": "Docker : Build-SAAS",
+            "task": "Backend | build SAAS",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
+          },
+          {
+            "label": "Docker : Clear",
+            "task": "Backend | clear",
+            "tooltip": "🛠️ Start the \"backend docker clear\" task"
+          },
+          {
+            "label": "Docker : Stop",
+            "task": "Backend | stop",
+            "tooltip": "🛠️ Start the \"backend docker stop\" task"
+          },
+          {
+            "label": "Docker : Start",
+            "task": "Backend | start",
+            "tooltip": "🛠️ Start the \"backend docker start\" task"
+          },
+          {
+            "label": "Docker : Restart",
+            "task": "Backend | restart",
+            "tooltip": "🛠️ Start the \"backend docker restart\" task"
+          }
+        ],
+        "tooltip": "🛠️ Server tasks"
       },
       {
-        "label": "S:Build-CE",
-        "task": "Backend | build CE",
-        "tooltip": "🛠️ Start the \"backend docker build CE\" task"
-      },
-      {
-        "label": "S:Build-SAAS",
-        "task": "Backend | build SAAS",
-        "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
-      },
-      {
-        "label": "S:Clear",
-        "task": "Backend | clear",
-        "tooltip": "🛠️ Start the \"backend docker clear\" task"
-      },
-      {
-        "label": "S:Stop",
-        "task": "Backend | stop",
-        "tooltip": "🛠️ Start the \"backend docker stop\" task"
-      },
-      {
-        "label": "S:Start",
-        "task": "Backend | start",
-        "tooltip": "🛠️ Start the \"backend docker start\" task"
-      },
-      {
-        "label": "S:Restart",
-        "task": "Backend | restart",
-        "tooltip": "🛠️ Start the \"backend docker restart\" task"
-      },
-      {
-        "label": "C:Start",
-        "task": "Frontend | start",
-        "tooltip": "🛠️ Start the \"frontend start\" task"
+        "label": "Client",
+        "tasks": [
+          {
+            "label": "Install",
+            "task": "Frontend | install",
+            "tooltip": "🛠️ Start the \"frontend install packages\" task"
+          },
+          {
+            "label": "Build",
+            "task": "Frontend | build",
+            "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Start",
+            "task": "Frontend | start",
+            "tooltip": "🛠️ Start the \"frontend start\" task"
+          },
+          {
+            "label": "Start prod",
+            "task": "Frontend | start-prod",
+            "tooltip": "🛠️ Start the \"frontend start production\" task"
+          }
+        ],
+        "tooltip": "🛠️ Client tasks"
       }
     ]
   },

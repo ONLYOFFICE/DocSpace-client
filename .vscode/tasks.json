@@ -108,6 +108,36 @@
       }
     },
     {
+      "label": "Frontend | install",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start",
@@ -119,7 +149,22 @@
         "reveal": "always",
         "panel": "new",
         "focus": true,
-        "close": true
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     }
   ]

@@ -8,7 +8,7 @@ import { Base } from "@docspace/components/themes";
 import ToggleInfoPanelButton from "./toggle-infopanel-btn";
 import PlusButton from "./plus-btn";
 import ContextButton from "./context-btn";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 
 const StyledContainer = styled.div`
   ${(props) =>
@@ -45,26 +45,27 @@ const StyledContainer = styled.div`
   }
 
   .option-button {
-    ${(props) =>
+    min-width: 17px;
+
+    /* ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 16px;
           `
         : css`
             margin-right: 16px;
-          `}
-    min-width: 15px;
+          `} */
 
-    @media ${tablet} {
+    /* @media ${tablet} {
       ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 9px;
-            `
-          : css`
-              margin-right: 9px;
-            `}
-    }
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 9px;
+          `
+        : css`
+            margin-right: 9px;
+          `}
+    } */
   }
 
   .trash-button {
@@ -237,7 +238,7 @@ const ControlButtons = ({
               zIndex={402}
               className="option-button"
               iconName={VerticalDotsReactSvgUrl}
-              size={15}
+              size={17}
               isFill
               getData={getContextOptionsFolder}
               isDisabled={false}

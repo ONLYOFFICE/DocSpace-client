@@ -52,15 +52,15 @@ class AutomaticBackup extends React.PureComponent {
     this.periodsObject = [
       {
         key: 0,
-        label: t("EveryDay"),
+        label: t("Common:EveryDay"),
       },
       {
         key: 1,
-        label: t("EveryWeek"),
+        label: t("Common:EveryWeek"),
       },
       {
         key: 2,
-        label: t("EveryMonth"),
+        label: t("Common:EveryMonth"),
       },
     ];
     this.timerId = null;

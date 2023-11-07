@@ -282,12 +282,19 @@ const StyledDropDown = styled(DropDown)`
     align-items: center;
     gap: 8px;
     height: 48px;
+
+    .list-item_content {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 `;
 
 const SearchItemText = styled(Text)`
   line-height: 16px;
 
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: ${(props) =>
     props.primary ? "14px" : props.info ? "11px" : "12px"};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
@@ -436,16 +443,11 @@ const StyledInviteLanguage = styled.div`
     margin-left: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
-  @media ${mobile} {
-    justify-content: space-between;
-  }
+
   .invitation-language {
     margin-right: 4px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.commonParam.descriptionColor};
-    @media ${mobile} {
-      margin-right: 0;
-    }
   }
   .language-combo-box {
     .combo-button {

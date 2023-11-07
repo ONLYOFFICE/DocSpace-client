@@ -235,7 +235,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
         .info-panel-toggle {
           margin: auto;
           margin-top: 25%;
-          margin-inline-end: 8px;
         }
       }
     `}

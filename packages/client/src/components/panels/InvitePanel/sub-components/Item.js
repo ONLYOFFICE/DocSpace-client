@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 
 import { parseAddresses } from "@docspace/components/utils/email";
 import { getAccessOptions } from "../utils";
+import { getUserRole } from "@docspace/common/utils";
 
 import {
   StyledEditInput,
@@ -35,6 +36,7 @@ const Item = ({
 
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
+  const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -168,7 +170,7 @@ const Item = ({
 
   return (
     <>
-      <Avatar size="min" role="user" source={source} />
+      <Avatar size="min" role={role} source={source} />
       {edit ? editBody : displayBody}
     </>
   );

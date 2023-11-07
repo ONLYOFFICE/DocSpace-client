@@ -125,19 +125,6 @@ export const StyledInfo = styled.div`
           height: 36px;
           margin-top: 7px;
         }
-
-        .language-combo-box {
-          .combo-button {
-            ${(props) =>
-              props.theme.interfaceDirection === "rtl"
-                ? css`
-                    margin-right: -16px;
-                  `
-                : css`
-                    margin-left: -16px;
-                  `}
-          }
-        }
       }
     }
   }

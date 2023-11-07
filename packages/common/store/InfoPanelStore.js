@@ -16,6 +16,10 @@ const observedKeys = [
   "comment",
 ];
 
+const infoMembers = "info_members";
+const infoHistory = "info_history";
+// const infoDetails = "info_details";
+
 class InfoPanelStore {
   isVisible = false;
   isMobileHidden = false;
@@ -25,8 +29,8 @@ class InfoPanelStore {
   selectionParentRoom = null;
   selectionHistory = null;
 
-  roomsView = "info_details";
-  fileView = "info_history";
+  roomsView = infoMembers;
+  fileView = infoHistory;
 
   updateRoomMembers = null;
   isScrollLocked = false;
@@ -47,7 +51,7 @@ class InfoPanelStore {
   // Setters
 
   setIsVisible = (bool) => {
-    this.setView("info_details");
+    this.setView(infoMembers);
     this.isVisible = bool;
     this.isScrollLocked = false;
   };
@@ -73,11 +77,15 @@ class InfoPanelStore {
     this.historyWithFileList = this.selection.isFolder || this.selection.isRoom;
   };
 
+  resetView = () => {
+    this.roomsView = infoMembers;
+    this.fileView = infoHistory;
+  };
   setView = (view) => {
     this.roomsView = view;
-    this.fileView = view === "info_members" ? "info_history" : view;
+    this.fileView = view === infoMembers ? infoHistory : view;
     this.isScrollLocked = false;
-    if (view !== "info_members") this.setMembersList(null);
+    if (view !== infoMembers) this.setMembersList(null);
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
@@ -183,7 +191,7 @@ class InfoPanelStore {
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
-      this.selectedFolderStore.pathParts[1].id;
+      this.selectedFolderStore.pathParts[1]?.id;
     const prevRoomId = this.selectionParentRoom?.id;
 
     if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;

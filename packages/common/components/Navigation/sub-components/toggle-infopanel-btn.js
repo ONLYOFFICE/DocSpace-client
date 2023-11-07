@@ -22,6 +22,10 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   margin-bottom: 1px;
   padding: 0;
 
+  .info-panel-toggle {
+    margin-inline-end: 8px;
+  }
+
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -34,6 +38,7 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
         .info-panel-toggle {
           margin: auto;
           margin-top: 25%;
+          margin-inline-end: 8px;
         }
       }
     `}

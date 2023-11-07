@@ -14,6 +14,7 @@ const observedKeys = [
   "thumbnailUrl",
   "version",
   "comment",
+  "rootFolderId",
 ];
 
 const infoMembers = "info_members";

@@ -22,7 +22,6 @@ const ItemContextOptions = ({
   getContextOptions,
   getContextOptionActions,
   getUserContextOptions,
-  setBufferSelection,
 
   isUser = false,
   itemTitleRef,
@@ -49,7 +48,6 @@ const ItemContextOptions = ({
     const newContextHelper = new ContextHelper({
       t,
       selection,
-      setBufferSelection,
       isUser,
       getContextOptions,
       getContextOptionActions,
@@ -88,12 +86,10 @@ const ItemContextOptions = ({
 
 export default inject(({ filesStore, peopleStore, contextOptionsStore }) => {
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const { setBufferSelection, getFilesContextOptions: getContextOptions } =
-    filesStore;
+  const { getFilesContextOptions: getContextOptions } = filesStore;
   const { getFilesContextOptions: getContextOptionActions } =
     contextOptionsStore;
   return {
-    setBufferSelection,
     getContextOptions,
     getContextOptionActions,
     getUserContextOptions,

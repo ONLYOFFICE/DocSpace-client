@@ -645,6 +645,8 @@ export default inject(
       setSelected,
     } = filesStore;
 
+    const { selection: infoPanelSelection } = auth.infoPanelStore;
+
     const selections =
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
@@ -653,6 +655,8 @@ export default inject(
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
+          : infoPanelSelection != null
+          ? [infoPanelSelection]
           : []
         : [];
 

@@ -9,7 +9,6 @@ class ContextHelper {
     this.isUser = props.isUser;
     this.selection = props.selection;
     this.setBufferSelection = props.setBufferSelection;
-    this.getContextOptions = props.getContextOptions;
     this.getUserContextOptions = props.getUserContextOptions;
     this.getContextOptionActions = props.getContextOptionActions;
 
@@ -90,11 +89,6 @@ class ContextHelper {
       );
     }
 
-    if (
-      this.selection.isSelectedFolder &&
-      this.selection.id !== this.selection.rootFolderId
-    )
-      this.setBufferSelection(this.selection);
     return this.getContextOptionActions(this.selection, this.t, true);
   };
 }

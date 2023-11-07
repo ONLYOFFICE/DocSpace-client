@@ -207,7 +207,7 @@ const InfoDialog = ({
             Creator
           </Text>
           <div className="creator-block">
-            <Avatar source={client?.creatorAvatar} size={"small"} />
+            <Avatar source={client?.creatorAvatar} size={"min"} />
             {/* @ts-ignore */}
             <Text
               fontSize={"14px"}

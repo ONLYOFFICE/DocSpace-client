@@ -55,6 +55,7 @@ const ActiveSessions = ({
   currentDeviceType,
 }) => {
   const isDesktop = currentDeviceType === DeviceType.desktop;
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const [modalData, setModalData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -115,7 +116,7 @@ const ActiveSessions = ({
     return new Date(date).toLocaleString(locale);
   };
   const tableCell = (platform, browser) =>
-    interfaceDirection === "rtl" && isDesktop ? (
+    interfaceDirection === "rtl" && !isMobile ? (
       <>
         <span className="session-browser">
           <span>{browser}</span>

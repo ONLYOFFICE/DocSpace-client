@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import commonTextStyles from "./common-text-styles";
 import Base from "../themes/base";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import NoUserSelect from "SRC_DIR/utils/commonStyles";
 const styleCss = css`
   font-size: ${(props) => props.fontSizeProp};
   outline: 0 !important;

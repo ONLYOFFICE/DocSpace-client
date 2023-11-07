@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Text from "../text";
 import { NavItem, Label, StyledScrollbar } from "./styled-tabs-container";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 
 class TabContainer extends Component {
   constructor(props) {

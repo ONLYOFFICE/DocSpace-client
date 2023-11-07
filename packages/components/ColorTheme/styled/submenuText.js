@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import StyledText from "@docspace/components/text/styled-text";
-import Base from "@docspace/components/themes/base";
+import StyledText from "SRC_DIR/text/styled-text";
+import Base from "SRC_DIR/themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, isActive, theme }) =>
   $currentColorScheme &&

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { DateItem } from "@docspace/components/calendar/styled-components";
+import { DateItem } from "SRC_DIR/calendar/styled-components";
 
 const getDefaultStyles = ({ $currentColorScheme }) =>
   $currentColorScheme &&
@@ -22,7 +22,8 @@ const getDefaultStyles = ({ $currentColorScheme }) =>
         : props.focused
         ? $currentColorScheme.main.accent
         : props.theme.calendar.color};
-    border-color: ${(props) => (props.focused ? $currentColorScheme.main.accent : "transparent")};
+    border-color: ${(props) =>
+      props.focused ? $currentColorScheme.main.accent : "transparent"};
   `;
 
 export default styled(DateItem)(getDefaultStyles);

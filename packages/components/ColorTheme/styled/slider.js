@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { StyledSlider } from "@docspace/components/slider/styled-slider";
+import { StyledSlider } from "SRC_DIR/slider/styled-slider";
 
 const getDefaultStyles = ({
   $currentColorScheme,

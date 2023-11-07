@@ -8,6 +8,8 @@ module.exports = ({ config }) => {
 
   config.resolve.alias = {
     PUBLIC_DIR: path.resolve(__dirname, "../../../public"),
+    SRC_DIR: path.resolve(__dirname, ".."),
+    COMMON_DIR: path.resolve(__dirname, "../../common/"),
   };
 
   const fileLoaderRule = rules.find((rule) => rule.test.test(".svg"));

@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
-import TimePicker from "@docspace/components/time-picker";
-import DatePicker from "@docspace/components/date-picker";
+import TimePicker from "SRC_DIR/time-picker";
+import DatePicker from "SRC_DIR/date-picker";
 
 import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment";

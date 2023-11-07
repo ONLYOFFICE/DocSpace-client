@@ -3,7 +3,7 @@ import {
   Container,
   CurrentDateItem,
   HeaderActionIcon,
-} from "@docspace/components/calendar/styled-components";
+} from "SRC_DIR/calendar/styled-components";
 
 const getDefaultStyles = ({ $currentColorScheme }) =>
   $currentColorScheme &&

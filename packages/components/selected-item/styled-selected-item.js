@@ -1,8 +1,8 @@
 import React from "react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "SRC_DIR/themes";
 import styled, { css } from "styled-components";
 
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import NoUserSelect from "SRC_DIR/utils/commonStyles";
 
 const StyledSelectedItem = styled.div`
   width: ${(props) => (props.isInline ? "fit-content" : "100%")};
@@ -39,9 +39,9 @@ const StyledSelectedItem = styled.div`
 const StyledLabel = styled.div`
   line-height: 20px;
   ${({ theme }) =>
-          theme.interfaceDirection === "rtl"
-                  ? `margin-left: 10px;`
-                  : `margin-right: 10px;`}
+    theme.interfaceDirection === "rtl"
+      ? `margin-left: 10px;`
+      : `margin-right: 10px;`}
   max-width: 23ch;
   color: ${(props) => props.isDisabled && props.theme.text.disableColor};
 

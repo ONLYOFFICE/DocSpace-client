@@ -1,4 +1,4 @@
-import Box from "@docspace/components/box";
+import Box from "SRC_DIR/box";
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
 

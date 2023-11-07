@@ -4,7 +4,7 @@ import { mobile, tablet } from "../utils/device";
 import IconButton from "../icon-button";
 import Scrollbar from "../scrollbar";
 
-import { ColorTheme } from "@docspace/components/ColorTheme";
+import { ColorTheme } from "SRC_DIR/ColorTheme";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,

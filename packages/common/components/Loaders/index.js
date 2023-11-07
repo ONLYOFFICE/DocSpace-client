@@ -1,4 +1,4 @@
-import Rectangle from "./RectangleLoader";
+import Rectangle from "@docspace/components/skeletons/rectangle";
 import Circle from "./CircleLoader";
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
@@ -10,8 +10,7 @@ import ArticleGroup from "./ArticleGroupsLoader";
 import TreeFolders from "./TreeFolderLoader";
 import NewTreeFolders from "./NewTreeFolderLoader";
 import TreeSettingsLoader from "./TreeSettingsLoader";
-import Row from "./RowLoader";
-import Rows from "./RowsLoader";
+
 import Text from "./TextLoader";
 import Filter from "./FilterLoader";
 import FilterBlock from "./FilterBlockLoader";
@@ -23,7 +22,7 @@ import Group from "./GroupLoader";
 import HistoryRows from "./HistoryRowsLoader";
 import Tile from "./TileLoader";
 import Tiles from "./TilesLoader";
-import TableLoader from "./TableLoader";
+
 import DialogLoader from "./DialogLoader";
 import DialogAsideLoader from "./DialogAsideLoader";
 import ListLoader from "./ListLoader";
@@ -52,7 +51,6 @@ import SettingsCommon from "./SettingsLoader/SettingsCommonLoader";
 import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
-import ContextMenuLoader from "./ContextMenuLoader";
 
 export default {
   Rectangle,
@@ -63,8 +61,7 @@ export default {
   ArticleProfileLoader,
   TreeFolders,
   TreeSettingsLoader,
-  Row,
-  Rows,
+
   Text,
   Filter,
   FilterBlock,
@@ -75,7 +72,7 @@ export default {
   HistoryRows,
   Tile,
   Tiles,
-  TableLoader,
+
   DialogLoader,
   DialogAsideLoader,
   ArticleButton,
@@ -110,5 +107,4 @@ export default {
 
   EmptyContainerLoader,
   Notifications,
-  ContextMenuLoader,
 };

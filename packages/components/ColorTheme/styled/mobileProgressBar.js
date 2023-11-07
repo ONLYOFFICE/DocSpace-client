@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { StyledBar } from "@docspace/components/main-button-mobile/styled-main-button";
+import { StyledBar } from "SRC_DIR/main-button-mobile/styled-main-button";
 
 const getDefaultStyles = ({ $currentColorScheme, theme, error }) =>
   $currentColorScheme &&

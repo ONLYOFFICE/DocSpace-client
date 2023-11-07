@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { StyledInputGroup } from "@docspace/components/input-block/styled-input-block";
-import Base from "@docspace/components/themes/base";
+import { StyledInputGroup } from "SRC_DIR/input-block/styled-input-block";
+import Base from "SRC_DIR/themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, hasError, theme }) =>
   $currentColorScheme &&

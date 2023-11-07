@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import IconButton from "../icon-button";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
-import { ThemeType } from "@docspace/components/ColorTheme";
+import { ThemeType } from "SRC_DIR/ColorTheme";
 
 const TableGroupMenu = (props) => {
   const {

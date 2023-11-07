@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { StyledScrollbar } from "@docspace/components/textarea/styled-textarea";
-import Base from "@docspace/components/themes/base";
+import { StyledScrollbar } from "SRC_DIR/textarea/styled-textarea";
+import Base from "SRC_DIR/themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, hasError, theme }) =>
   $currentColorScheme &&

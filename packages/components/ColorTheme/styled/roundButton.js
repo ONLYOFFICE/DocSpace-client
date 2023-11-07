@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { RoundButton } from "@docspace/components/calendar/styled-components";
+import { RoundButton } from "SRC_DIR/calendar/styled-components";
 
 const getDefaultStyles = ({ $currentColorScheme }) =>
   $currentColorScheme &&
@@ -11,7 +11,9 @@ const getDefaultStyles = ({ $currentColorScheme }) =>
           : `2px solid ${$currentColorScheme.main.accent}`};
       span {
         border-color: ${(props) =>
-          props.disabled ? props.theme.calendar.disabledArrow : $currentColorScheme.main.accent};
+          props.disabled
+            ? props.theme.calendar.disabledArrow
+            : $currentColorScheme.main.accent};
       }
     }
   `;

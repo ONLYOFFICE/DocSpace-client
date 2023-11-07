@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { StyledMainButton } from "@docspace/components/main-button/styled-main-button";
-import Base from "@docspace/components/themes/base";
+import { StyledMainButton } from "SRC_DIR/main-button/styled-main-button";
+import Base from "SRC_DIR/themes/base";
 
 const disableStyles = css`
   opacity: 0.6;

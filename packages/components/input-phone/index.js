@@ -8,14 +8,14 @@ import { StyledBox } from "./styled-input-phone";
 
 import InvalidSvgUrl from "PUBLIC_DIR/images/phoneFlags/invalid.svg?url";
 import CustomScrollbarsVirtualList from "../scrollbar/custom-scrollbars-virtual-list";
-import Box from "@docspace/components/box";
-import ComboBox from "@docspace/components/combobox";
-import Label from "@docspace/components/label";
-import TextInput from "@docspace/components/text-input";
-import SearchInput from "@docspace/components/search-input";
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
-import Text from "@docspace/components/text";
+import Box from "SRC_DIR/box";
+import ComboBox from "SRC_DIR/combobox";
+import Label from "SRC_DIR/label";
+import TextInput from "SRC_DIR/text-input";
+import SearchInput from "SRC_DIR/search-input";
+import DropDown from "SRC_DIR/drop-down";
+import DropDownItem from "SRC_DIR/drop-down-item";
+import Text from "SRC_DIR/text";
 
 const PLUS = "+";
 

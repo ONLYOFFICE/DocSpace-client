@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { desktop, isDesktop } from "@docspace/components/utils/device";
-import { StyledContextMenuLoader } from "./StyledContextMenuLoader";
+import { isDesktop } from "@docspace/components/utils/device";
+import StyledContextMenu from "./styled";
 import RectangleLoader from "../RectangleLoader";
 
-const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
+const ContextMenuSkeleton = ({
+  id,
+  className,
+  style,
+  isRectangle,
+  ...rest
+}) => {
   const {
     title,
     borderRadius,
@@ -19,7 +25,7 @@ const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const isDesktopView = isDesktop();
 
   return (
-    <StyledContextMenuLoader id={id} className={className} style={style}>
+    <StyledContextMenu id={id} className={className} style={style}>
       <RectangleLoader
         className="rectangle-content"
         title={title}
@@ -46,22 +52,22 @@ const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-    </StyledContextMenuLoader>
+    </StyledContextMenu>
   );
 };
 
-ContextMenuLoader.propTypes = {
+ContextMenuSkeleton.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
   isRectangle: PropTypes.bool,
 };
 
-ContextMenuLoader.defaultProps = {
+ContextMenuSkeleton.defaultProps = {
   id: undefined,
   className: undefined,
   style: undefined,
   isRectangle: true,
 };
 
-export default ContextMenuLoader;
+export default ContextMenuSkeleton;

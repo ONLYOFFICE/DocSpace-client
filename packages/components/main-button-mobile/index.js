@@ -17,7 +17,7 @@ import {
 import IconButton from "../icon-button";
 import Button from "../button";
 import Text from "../text";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "SRC_DIR/scrollbar";
 import { isIOS, isMobile } from "react-device-detect";
 import Backdrop from "../backdrop";
 
@@ -25,7 +25,7 @@ import styled from "styled-components";
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "../utils/common-icons-style";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 import SubmenuItem from "./sub-components/SubmenuItem";
 import { classNames } from "../utils/classNames";
 

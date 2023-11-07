@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { FooterBlock } from "./StyledProfileFooter";
 import RectangleLoader from "../RectangleLoader";
 import Loaders from "@docspace/common/components/Loaders";
+import RowsSkeleton from "@docspace/components/skeletons/rows";
+
 import { isDesktop } from "@docspace/components/utils/device";
 
 const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
@@ -103,7 +105,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
           </div>
         )}
 
-        <Loaders.Rows count={3} />
+        <RowsSkeleton count={3} />
       </FooterBlock>
     </div>
   );

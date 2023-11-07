@@ -1,36 +1,51 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 import PropTypes from "prop-types";
-import { LoaderStyle } from "../../../constants";
+import { LoaderStyle } from "../../utils/constants";
 
-const CircleLoader = ({ title, x, y, radius, width, height, ...rest }) => (
+const RectangleSkeleton = ({
+  title,
+  x,
+  y,
+  borderRadius,
+  width,
+  height,
+  ...rest
+}) => (
   <ContentLoader title={title} width={width} height={height} {...rest}>
-    <circle cx={x} cy={y} r={radius} />
+    <rect
+      x={x}
+      y={y}
+      rx={borderRadius}
+      ry={borderRadius}
+      width={width}
+      height={height}
+    />
   </ContentLoader>
 );
 
-CircleLoader.propTypes = {
+RectangleLoader.propTypes = {
   title: PropTypes.string,
   x: PropTypes.string,
   y: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
-  radius: PropTypes.string,
+  borderRadius: PropTypes.string,
   backgroundColor: PropTypes.string,
   foregroundColor: PropTypes.string,
   backgroundOpacity: PropTypes.number,
   foregroundOpacity: PropTypes.number,
   speed: PropTypes.number,
-  animate: PropTypes.bool,
+  animate: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
 };
 
-CircleLoader.defaultProps = {
+RectangleSkeleton.defaultProps = {
   title: LoaderStyle.title,
-  x: "3",
-  y: "12",
-  radius: "12",
+  x: "0",
+  y: "0",
   width: "100%",
-  height: "100%",
+  height: "32",
+  borderRadius: LoaderStyle.borderRadius,
   backgroundColor: LoaderStyle.backgroundColor,
   foregroundColor: LoaderStyle.foregroundColor,
   backgroundOpacity: LoaderStyle.backgroundOpacity,
@@ -39,4 +54,4 @@ CircleLoader.defaultProps = {
   animate: LoaderStyle.animate,
 };
 
-export default CircleLoader;
+export default RectangleSkeleton;

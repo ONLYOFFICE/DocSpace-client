@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import Text from "@docspace/components/text";
+import Base from "SRC_DIR/themes/base";
+import Text from "SRC_DIR/text";
 
 const StyledIcon = styled.div`
   display: flex;

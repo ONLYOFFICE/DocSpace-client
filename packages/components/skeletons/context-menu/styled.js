@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { tablet } from "../../utils/device";
+import { getCorrectFourValuesStyle } from "../../utils/rtlUtils";
 
-const StyledContextMenuLoader = styled.div`
+export const StyledContextMenu = styled.div`
   width: 100%;
   height: 32px;
   display: grid;
@@ -30,5 +30,3 @@ const StyledContextMenuLoader = styled.div`
           `}
   }
 `;
-
-export { StyledContextMenuLoader };

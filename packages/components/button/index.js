@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Base from "../themes/base";
 import Loader from "../loader";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 
 // eslint-disable-next-line no-unused-vars, react/prop-types
 const Button = React.forwardRef((props, ref) => {

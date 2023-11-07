@@ -16,7 +16,7 @@ import {
   StyledCatalogItemInitialText,
   StyledCatalogItemHeaderContainer,
 } from "./styled-catalog-item";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 const getInitial = (text) => text.substring(0, 1).toUpperCase();
 
 const CatalogItem = (props) => {

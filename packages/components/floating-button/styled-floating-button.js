@@ -1,6 +1,6 @@
-import Base from "@docspace/components/themes/base";
+import Base from "SRC_DIR/themes/base";
 import styled, { keyframes, css } from "styled-components";
-import { desktop, tablet } from "@docspace/components/utils/device";
+import { desktop, tablet } from "SRC_DIR/utils/device";
 
 const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "SRC_DIR/themes";
 
 const FillingStatusContainer = styled.div`
   width: 100%;

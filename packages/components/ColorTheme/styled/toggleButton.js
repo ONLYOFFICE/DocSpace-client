@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import {
   Container,
   ToggleButtonContainer,
-} from "@docspace/components/toggle-button/styled-toggle-button";
+} from "SRC_DIR/toggle-button/styled-toggle-button";
 
 const getDefaultStyles = ({
   $currentColorScheme,

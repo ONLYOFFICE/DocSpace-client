@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { StyledComboButton } from "@docspace/components/combobox/sub-components/styled-combobutton";
-import Base from "@docspace/components/themes/base";
+import { StyledComboButton } from "SRC_DIR/combobox/sub-components/styled-combobutton";
+import Base from "SRC_DIR/themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, isOpen, theme }) =>
   $currentColorScheme &&

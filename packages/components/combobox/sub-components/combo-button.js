@@ -12,8 +12,8 @@ import {
 
 import Text from "../../text";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Badge from "@docspace/components/badge";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import Badge from "SRC_DIR/badge";
 
 const ComboButton = (props) => {
   const {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { StyledBadge, StyledInner, StyledText } from "./styled-badge";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 
 const Badge = (props) => {
   //console.log("Badge render");

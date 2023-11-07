@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import IconButton from "@docspace/components/icon-button";
+import commonIconsStyles from "SRC_DIR/utils/common-icons-style";
+import IconButton from "SRC_DIR/icon-button";
 
 const StyledMuteIcon = styled(IconButton)`
   ${commonIconsStyles}

@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import { getCalendarDays } from "./getCalendarDays";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
 
 export const getDayElements = (
   observedDate,

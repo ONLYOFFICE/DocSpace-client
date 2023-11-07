@@ -140,10 +140,10 @@ const InfoPanelBodyContent = ({
   }, [selectedItems, selectedFolder]);
 
   // * DEV-ONLY - Logs selection change
-  // useEffect(() => {
-  //   console.log("\nfor-dev  Selected items: ", selectedItems);
-  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  // }, [selectedItems, selectedFolder]);
+  useEffect(() => {
+    console.log("\nfor-dev  Selected items: ", selectedItems);
+    console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  }, [selectedItems, selectedFolder]);
 
   if (!selection && !isGallery) return null;
 

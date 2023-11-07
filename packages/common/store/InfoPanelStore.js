@@ -14,6 +14,7 @@ const observedKeys = [
   "thumbnailUrl",
   "version",
   "comment",
+  "roomType",
   "rootFolderId",
 ];
 
@@ -82,6 +83,7 @@ class InfoPanelStore {
     this.roomsView = infoMembers;
     this.fileView = infoHistory;
   };
+
   setView = (view) => {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoHistory : view;

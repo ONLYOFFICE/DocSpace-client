@@ -38,11 +38,11 @@ const DeletePortalDialog = () => {
      
       const onDelete = () => {
         const protocol = window?.location?.protocol;
-        if (id === user.id) {
-          return window.open(`${protocol}//${domain}/portal-settings/delete-data/deletion`, "_self");
+        if (id !== user.id) {
+          logout();
         }
-       logout().then(() => window.open(`${protocol}//${domain}`, "_self"));
-    }
+        return window.open(`${protocol}//${domain}/portal-settings/delete-data/deletion`, "_self");
+      }
 
     return (
         <ModalDialogContainer 

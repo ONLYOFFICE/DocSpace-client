@@ -164,7 +164,7 @@ const CopyIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.backgroundColor};
+  // background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 CopyIconWrapper.defaultProps = { theme: Base };

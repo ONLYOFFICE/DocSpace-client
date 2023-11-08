@@ -105,7 +105,7 @@ const Textarea = ({
       isJSONField={isJSONField}
       onFocus={enableCopy ? onTextareaClick : undefined}
     >
-      {isJSONField && (
+      {(isJSONField || enableCopy) && (
         <CopyIconWrapper
           className={classNameCopyIcon}
           isJSONField={isJSONField}

@@ -41,9 +41,6 @@ export interface OAuthStoreProps {
   previewDialogVisible: boolean;
   setPreviewDialogVisible: (value: boolean) => void;
 
-  deleteDialogVisible: boolean;
-  setDeleteDialogVisible: (value: boolean) => void;
-
   clientsIsLoading: boolean;
   setClientsIsLoading: (value: boolean) => void;
 
@@ -64,7 +61,7 @@ export interface OAuthStoreProps {
 
   regenerateSecret: (clientId: string) => Promise<string | undefined>;
 
-  deleteClient: (clientId: string) => Promise<void>;
+  deleteClient: (clientId: string[]) => Promise<void>;
 
   currentPage: number;
   nextPage: number | null;
@@ -106,7 +103,6 @@ class OAuthStore implements OAuthStoreProps {
 
   infoDialogVisible: boolean = false;
   previewDialogVisible: boolean = false;
-  deleteDialogVisible: boolean = false;
 
   selection: string[] = [];
 
@@ -134,10 +130,6 @@ class OAuthStore implements OAuthStoreProps {
 
   setPreviewDialogVisible = (value: boolean) => {
     this.previewDialogVisible = value;
-  };
-
-  setDeleteDialogVisible = (value: boolean) => {
-    this.deleteDialogVisible = value;
   };
 
   setSelection = (clientId: string) => {
@@ -301,9 +293,24 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  deleteClient = async (clientId: string) => {
+  deleteClient = async (clientsId: string[]) => {
     try {
-      await deleteClient(clientId);
+      const requests: Promise<void>[] = [];
+
+      clientsId.forEach((id) => {
+        this.setActiveClient(id);
+        requests.push(deleteClient(id));
+      });
+
+      await Promise.all(requests);
+
+      runInAction(() => {
+        this.clients = this.clients.filter(
+          (c) => !clientsId.includes(c.clientId)
+        );
+      });
+
+      this.setActiveClient("");
     } catch (e) {
       console.log(e);
     }
@@ -339,11 +346,12 @@ class OAuthStore implements OAuthStoreProps {
     const onDelete = () => {
       this.setInfoDialogVisible(false);
       this.setPreviewDialogVisible(false);
-      if (!isGroupContext) {
-        this.setBufferSelection(clientId);
-      }
 
-      this.setDeleteDialogVisible(true);
+      if (!isGroupContext) {
+        this.deleteClient([clientId]);
+      } else {
+        this.deleteClient(this.selection);
+      }
     };
 
     const onShowInfo = () => {
@@ -361,6 +369,7 @@ class OAuthStore implements OAuthStoreProps {
     const onEnable = async (status: boolean) => {
       this.setInfoDialogVisible(false);
       this.setPreviewDialogVisible(false);
+
       if (isGroupContext) {
         try {
           const actions: Promise<void>[] = [];

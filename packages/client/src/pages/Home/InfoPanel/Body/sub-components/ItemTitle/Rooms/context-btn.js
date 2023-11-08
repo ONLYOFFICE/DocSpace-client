@@ -28,7 +28,6 @@ const RoomsContextBtn = ({
   if (!selection) return null;
 
   const onContextMenu = (e) => {
-    e.button === 2;
     if (!contextMenuRef?.current.menuRef.current)
       itemTitleRef?.current.click(e);
     contextMenuRef?.current.show(e);
@@ -78,27 +77,25 @@ const RoomsContextBtn = ({
 
   return (
     <StyledItemContextOptions>
+      <ContextMenuButton
+        id="info-options"
+        className="expandButton"
+        title={
+          selection.isFolder
+            ? t("Translations:TitleShowFolderActions")
+            : t("Translations:TitleShowActions")
+        }
+        onClick={onContextMenu}
+        getData={getData}
+        directionX="right"
+        displayType="toggle"
+      />
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
         withBackdrop={true}
         baseZIndex={310}
       />
-      {true && (
-        <ContextMenuButton
-          id="info-options"
-          className="expandButton"
-          title={
-            selection.isFolder
-              ? t("Translations:TitleShowFolderActions")
-              : t("Translations:TitleShowActions")
-          }
-          onClick={onContextMenu}
-          getData={getData}
-          directionX="right"
-          displayType="toggle"
-        />
-      )}
     </StyledItemContextOptions>
   );
 };

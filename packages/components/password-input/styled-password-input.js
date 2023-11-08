@@ -28,6 +28,9 @@ const StyledInput = styled(SimpleInput)`
     width: calc(100% - 40px);
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? "right" : "left"};
+    &::-ms-reveal {
+      display: none;
+    }
   }
 
   .input-relative {

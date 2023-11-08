@@ -29,6 +29,8 @@ const LanguageFilter = ({
     sectionScroll.scrollTop = 0;
   };
 
+  if (oformLocales.length === 0) return null;
+
   return (
     <Styled.LanguageFilter>
       <Backdrop

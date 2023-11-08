@@ -10,6 +10,7 @@ import {
   getCategoryTypes,
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
+import toastr from "@docspace/components/toast/toastr";
 
 import { convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
@@ -74,7 +75,9 @@ class OformsStore {
 
     const url = `${uploadDomain}${uploadDashboard}/i18n/locales`;
 
-    const fetchedLocales = await getOformLocales(url);
+    const fetchedLocales = await getOformLocales(url).catch((err) =>
+      toastr.error(err.message)
+    );
     const localeKeys = fetchedLocales.map((locale) =>
       convertToLanguage(locale.code)
     );
@@ -203,7 +206,9 @@ class OformsStore {
     const url = `${uploadDomain}${uploadDashboard}/menu-translations`;
     const locale = this.defaultOformLocale;
 
-    const menuItems = await getCategoryTypes(url, locale);
+    const menuItems = await getCategoryTypes(url, locale).catch((err) =>
+      toastr.error(err.message)
+    );
     this.categoryTitles = menuItems.map(
       (item) => item.attributes.categoryTitle
     );

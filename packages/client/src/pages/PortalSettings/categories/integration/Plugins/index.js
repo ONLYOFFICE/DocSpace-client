@@ -59,12 +59,12 @@ const PluginPage = ({
         </StyledEmptyContainer>
       ) : (
         <StyledContainer>
-          <Header
+          {/* <Header
             t={t}
             currentColorScheme={currentColorScheme}
             learnMoreLink={learnMoreLink}
             withUpload={withUpload}
-          />
+          /> */}
           {withUpload && <UploadButton t={t} addPlugin={addPlugin} />}
           <PluginListContainer>
             {pluginList.map((plugin) => (

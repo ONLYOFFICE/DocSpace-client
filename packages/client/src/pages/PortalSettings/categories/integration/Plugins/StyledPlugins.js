@@ -21,8 +21,6 @@ const StyledContainer = styled.div`
 `;
 
 const PluginListContainer = styled.div`
-  margin-top: 8px;
-
   width: 100%;
 
   display: grid;
@@ -53,6 +51,8 @@ const StyledPluginItem = styled.div`
   .plugin-logo {
     width: 48px;
     height: 48px;
+
+    border-radius: 4px;
   }
 
   .plugin-info {

@@ -98,6 +98,7 @@ class ComboBox extends React.Component {
     //console.log("ComboBox render");
     const {
       dropDownMaxHeight,
+      dropdownStyle,
       directionX,
       directionY,
       scaled,
@@ -220,7 +221,11 @@ class ComboBox extends React.Component {
             open={isOpen}
             forwardedRef={this.ref}
             clickOutsideAction={this.handleClickOutside}
-            style={advancedOptions && { padding: "6px 0px" }}
+            style={
+              advancedOptions
+                ? { padding: "6px 0px", ...dropdownStyle }
+                : dropdownStyle
+            }
             {...dropDownMaxHeightProp}
             {...dropDownManualWidthProp}
             showDisabledItems={showDisabledItems}
@@ -316,6 +321,8 @@ ComboBox.propTypes = {
   size: PropTypes.oneOf(["base", "middle", "big", "huge", "content"]),
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  /** Accepts css style for dropdown*/
+  dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   /** The event is triggered by clicking on a component when `displayType: toggle` */
   onToggle: PropTypes.func,
   /** Accepts css text-overflow */

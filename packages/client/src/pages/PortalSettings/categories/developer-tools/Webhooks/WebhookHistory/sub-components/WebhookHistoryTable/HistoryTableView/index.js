@@ -24,12 +24,13 @@ const TableWrapper = styled(TableContainer)`
 
   .checkboxWrapper {
     padding: 0;
+    padding-inline-start: 8px;
   }
 
   .table-list-item {
     cursor: pointer;
 
-    padding-left: 28px;
+    padding-left: 20px;
 
     &:hover {
       background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
@@ -40,6 +41,10 @@ const TableWrapper = styled(TableContainer)`
 
         margin-left: -24px;
         padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
       }
 
       .table-container_row-context-menu-wrapper {

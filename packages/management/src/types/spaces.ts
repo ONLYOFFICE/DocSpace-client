@@ -14,6 +14,12 @@ type TQuotaUsage = {
   roomsCount: number
 }
 
+type TOwner = {
+  displayName: string,
+  email: string,
+  id: string
+}
+
 export type TPortals = {
   created: string;
   domain: string;
@@ -24,6 +30,7 @@ export type TPortals = {
   portalName: string;
   status: string;
   tenantId: number;
+  owner: TOwner,
   timeZoneName: string;
   quotaUsage: TQuotaUsage
 };

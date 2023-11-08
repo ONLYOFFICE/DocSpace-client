@@ -57,6 +57,7 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
+  filterUserId,
 }) => {
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
@@ -138,6 +139,9 @@ const PeopleSelector = ({
   };
 
   const removeCurrentUserFromList = (listUser) => {
+    if (filterUserId) {
+      return listUser.filter((user) => user.id !== filterUserId);
+    }
     return listUser.filter((user) => user.id !== currentUserId);
   };
 

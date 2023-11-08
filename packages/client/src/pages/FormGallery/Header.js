@@ -21,7 +21,6 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import api from "@docspace/common/api";
 import { isMobileOnly } from "react-device-detect";
-import DropDownItem from "@docspace/components/drop-down-item";
 
 const SectionHeaderContent = ({
   t,

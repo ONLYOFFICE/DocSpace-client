@@ -126,7 +126,7 @@ class ProfileActionsStore {
 
   onSpacesClick = () => {
     this.selectedFolderStore.setSelectedFolder(null);
-    window.location = SPACES_URL;
+    window.open(SPACES_URL, "_blank");
   };
 
   onPaymentsClick = () => {

@@ -40,7 +40,7 @@ export const MainContainer = styled.div`
     max-width: 700px;
 
     .link-learn-more {
-      display: block;
+      display: inline-block;
       margin: 4px 0 16px 0;
       font-weight: 600;
     }

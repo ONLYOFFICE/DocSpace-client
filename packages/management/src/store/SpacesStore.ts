@@ -16,20 +16,12 @@ class SpacesStore {
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
+  currentPortal = false;
 
   constructor(authStore) {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
-
-  deletePortal = async (portalName: string) => {
-    const data = {
-      portalName,
-    };
-
-    const res = await deletePortal(data);
-    return res;
-  };
 
   getPortalDomain = async () => {
     const res = await getDomainName();
@@ -72,6 +64,10 @@ class SpacesStore {
     const register = await createNewPortal(data);
     return register;
   };
+
+  setCurrentPortal = (portal) => {
+    this.currentPortal = portal;
+  }
 
   setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {
     this.createPortalDialogVisible = createPortalDialogVisible;

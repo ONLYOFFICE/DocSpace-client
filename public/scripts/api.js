@@ -175,7 +175,6 @@
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
       iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("onmousewheel", "");
       iframe.setAttribute("allow", "autoplay");
 
       if (config.type == "mobile") {

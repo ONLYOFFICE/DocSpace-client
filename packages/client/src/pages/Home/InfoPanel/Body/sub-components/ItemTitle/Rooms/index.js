@@ -5,16 +5,14 @@ import { Text } from "@docspace/components";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
-import ItemContextOptions from "./ItemContextOptions";
-import { StyledTitle } from "../../styles/common";
+import { StyledTitle } from "../../../styles/common";
 import RoomIcon from "@docspace/components/room-icon";
-
+import RoomsContextBtn from "./context-btn";
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
-const FilesItemTitle = ({
+const RoomsItemHeader = ({
   t,
   selection,
-  isSeveralItems,
   selectionParentRoom,
   setIsMobileHidden,
   isGracePeriod,
@@ -25,7 +23,7 @@ const FilesItemTitle = ({
 }) => {
   const itemTitleRef = useRef();
 
-  if (isSeveralItems) return null;
+  if (!selection) return null;
 
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
@@ -70,7 +68,9 @@ const FilesItemTitle = ({
           />
         )}
       </div>
+
       <Text className="text">{selection.title}</Text>
+
       <div className="info_title-icons">
         {canInviteUserInRoomAbility && showInviteUserIcon && (
           <IconButton
@@ -83,39 +83,50 @@ const FilesItemTitle = ({
             size={16}
           />
         )}
-        {selection && (
-          <ItemContextOptions
-            t={t}
-            itemTitleRef={itemTitleRef}
-            selection={selection}
-          />
-        )}
+
+        <RoomsContextBtn selection={selection} itemTitleRef={itemTitleRef} />
       </div>
     </StyledTitle>
   );
 };
 
 export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
-  const { selectionParentRoom, setIsMobileHidden, roomsView } =
-    auth.infoPanelStore;
-  const { isGracePeriod } = auth.currentTariffStatusStore;
+  const {
+    selection: selectionItem,
+    selectionParentRoom,
+    getIsRooms,
+    roomsView,
+  } = auth.infoPanelStore;
 
-  const { setInvitePanelOptions, setInviteUsersWarningDialogVisible } =
-    dialogsStore;
+  const isShowParentRoom =
+    getIsRooms() &&
+    roomsView === "info_members" &&
+    !selectionItem.isRoom &&
+    !!selectionParentRoom;
 
-  const roomType =
-    selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
-
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
+  const selection =
+    selectionItem.length > 1
+      ? null
+      : isShowParentRoom
+      ? selectionParentRoom
+      : selectionItem;
 
   return {
-    selectionParentRoom,
-    setIsMobileHidden,
-    isGracePeriod,
-    setInvitePanelOptions,
-    setInviteUsersWarningDialogVisible,
-    isPublicRoomType,
-    roomsView,
+    selection,
+    roomsView: auth.infoPanelStore.roomType,
+    selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
+    setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+
+    isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
+
+    setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
+    setInviteUsersWarningDialogVisible:
+      dialogsStore.setInviteUsersWarningDialogVisible,
+
+    isPublicRoomType:
+      (selectedFolderStore.roomType ??
+        auth.infoPanelStore.selectionParentRoom?.roomType) ===
+      RoomsType.PublicRoom,
   };
 })(
   withTranslation([
@@ -124,5 +135,5 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
     "Translations",
     "InfoPanel",
     "SharingPanel",
-  ])(observer(FilesItemTitle))
+  ])(observer(RoomsItemHeader))
 );

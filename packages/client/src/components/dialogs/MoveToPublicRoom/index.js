@@ -27,6 +27,7 @@ const MoveToPublicRoomComponent = (props) => {
     itemOperationToFolder,
     clearActiveOperations,
     setSelectedItems,
+    setSelected,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +55,7 @@ const MoveToPublicRoomComponent = (props) => {
   const onClosePanels = () => {
     setIsVisible(false);
     setConflictResolveDialogVisible(false);
+    setSelected("none");
     setMoveToPanelVisible(false);
     setRestorePanelVisible(false);
     setCopyPanelVisible(false);
@@ -145,7 +147,7 @@ const MoveToPublicRoomDialog = withTranslation([
 
 export default inject(
   ({ dialogsStore, filesActionsStore, filesStore, uploadDataStore }) => {
-    const { setMovingInProgress } = filesStore;
+    const { setMovingInProgress, setSelected } = filesStore;
 
     const {
       moveToPublicRoomVisible,
@@ -177,6 +179,7 @@ export default inject(
       itemOperationToFolder,
       clearActiveOperations,
       setSelectedItems,
+      setSelected,
     };
   }
 )(observer(MoveToPublicRoomDialog));

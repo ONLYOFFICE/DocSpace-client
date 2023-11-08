@@ -61,7 +61,9 @@ const InvitePanel = ({
   filter,
   currentDeviceType,
 }) => {
-  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(false);
+  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
+    !userLink || !guestLink || !adminLink || !collaboratorLink || roomId !== -1
+  );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);

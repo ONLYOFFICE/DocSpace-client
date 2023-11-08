@@ -69,7 +69,11 @@ class OformsStore {
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
 
   fetchOformLocales = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = `${uploadDomain}${uploadDashboard}/i18n/locales`;
+
     const fetchedLocales = await getOformLocales(url);
     const localeKeys = fetchedLocales.map((locale) =>
       convertToLanguage(locale.code)
@@ -78,6 +82,8 @@ class OformsStore {
   };
 
   getOforms = (filter = OformsFilter.getDefault()) => {
+    const { domain, path } = this.authStore.settingsStore.formGallery;
+
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
     const size = "&fields[2]=file_size";
@@ -90,8 +96,10 @@ class OformsStore {
     const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
+    console.log(this.authStore.settingsStore.formGallery);
+
     return new Promise(async (resolve) => {
-      const apiUrl = `${this.authStore.settingsStore.formGallery.url}${params}`;
+      const apiUrl = `${domain}${path}${params}`;
       let oforms = await getOforms(apiUrl);
       resolve(oforms);
     });
@@ -152,14 +160,25 @@ class OformsStore {
   };
 
   submitToFormGallery = async (file, formName, language, signal = null) => {
-    const url = this.authStore.settingsStore.formGallery.uploadUrl;
-    const res = await submitToGallery(url, file, formName, language, signal);
+    const { uploadDomain, uploadPath } =
+      this.authStore.settingsStore.formGallery;
+
+    const res = await submitToGallery(
+      `${uploadDomain}${uploadPath}`,
+      file,
+      formName,
+      language,
+      signal
+    );
     return res;
   };
 
   fetchCurrentCategory = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api";
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
     const { categorizeBy, categoryId } = this.oformsFilter;
+
+    const url = `${uploadDomain}${uploadDashboard}`;
     const locale = this.defaultOformLocale;
 
     if (!categorizeBy || !categoryId) {
@@ -178,7 +197,10 @@ class OformsStore {
   };
 
   fetchCategoryTypes = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/menu-translations";
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = `${uploadDomain}${uploadDashboard}/menu-translations`;
     const locale = this.defaultOformLocale;
 
     const menuItems = await getCategoryTypes(url, locale);
@@ -190,7 +212,10 @@ class OformsStore {
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {
-    const url = `https://oforms.onlyoffice.com/dashboard/api/${categoryTypeId}`;
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = `${uploadDomain}${uploadDashboard}/${categoryTypeId}`;
 
     const categories = await getCategoriesOfCategoryType(
       url,

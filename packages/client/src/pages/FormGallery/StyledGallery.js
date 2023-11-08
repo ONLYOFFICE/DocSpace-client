@@ -5,6 +5,7 @@ import Headline from "@docspace/common/components/Headline";
 import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
+import DropDownItem from "@docspace/components/drop-down-item";
 
 const StyledContainer = styled.div`
   height: 69px;
@@ -92,6 +93,13 @@ const StyledNavigationDrodown = styled(ComboBox)`
   background: transparent;
 `;
 
+const StyledNavigationDrodownItem = styled(DropDownItem)`
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 30px;
+`;
+
 const StyledSubmitToGalleryButton = styled(Button)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -157,6 +165,7 @@ export {
   StyledHeadline,
   StyledContainer,
   StyledNavigationDrodown,
+  StyledNavigationDrodownItem,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

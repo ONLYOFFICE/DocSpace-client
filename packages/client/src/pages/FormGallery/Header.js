@@ -10,6 +10,7 @@ import {
   StyledHeading,
   StyledHeadline,
   StyledNavigationDrodown,
+  StyledNavigationDrodownItem,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
@@ -84,7 +85,7 @@ const SectionHeaderContent = ({
         setCheckboxOptions((prev) => ({
           ...prev,
           fromFolder: (
-            <DropDownItem
+            <StyledNavigationDrodownItem
               id={"fromFolder"}
               key={"fromFolder"}
               label={prevFolder.title}
@@ -100,7 +101,7 @@ const SectionHeaderContent = ({
     let viewAll = null;
     if (oformsFilter.categorizeBy && oformsFilter.categoryId)
       viewAll = (
-        <DropDownItem
+        <StyledNavigationDrodownItem
           id={"view-all"}
           key={"view-all"}
           label={t("Common:OFORMsGallery")}
@@ -135,12 +136,13 @@ const SectionHeaderContent = ({
           comboIcon={TriangleNavigationDownReactSvgUrl}
           noBorder
           className="oform-header-combobox not-selectable"
-          options={[]}
           selectedOption={{}}
-          manualY="42px"
-          manualX="-32px"
+          dropdownStyle={{ margin: "4px 0 0 4px", padding: "4px 0" }}
+          manualWidth="fit-content"
           title={t("Common:TitleSelectFile")}
           isMobileView={isMobileOnly}
+          directionX={"right"}
+          options={[]}
           advancedOptions={
             <>
               {!!checkboxOptions.fromFolder && checkboxOptions.fromFolder}

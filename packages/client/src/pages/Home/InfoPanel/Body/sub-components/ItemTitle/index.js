@@ -7,6 +7,7 @@ import RoomsItemHeader from "./Rooms";
 const ItemTitle = ({
   selection,
   gallerySelected,
+  isNoItem,
   isAccounts,
   isGallery,
   isSeveralItems,
@@ -16,6 +17,7 @@ const ItemTitle = ({
   getUserContextOptions,
 }) => {
   if (!selection) return null;
+  if (isNoItem) return null;
 
   if (isAccounts)
     return (

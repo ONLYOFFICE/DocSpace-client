@@ -32,6 +32,8 @@ const InfoPanelHeaderContent = (props) => {
     infoPanelItemsList,
     enablePlugins,
     resetView,
+    myRoomsId,
+    archiveRoomsId,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -175,7 +177,8 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {selection?.rootFolderId === 2 || selection?.rootFolderId === 4 ? (
+          {selection?.rootFolderId === myRoomsId ||
+          selection?.rootFolderId === archiveRoomsId ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}
@@ -194,7 +197,7 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, pluginStore }) => {
+export default inject(({ auth, treeFoldersStore, pluginStore }) => {
   const { infoPanelItemsList } = pluginStore;
 
   const {
@@ -212,6 +215,8 @@ export default inject(({ auth, pluginStore }) => {
     //selectionParentRoom,
   } = auth.infoPanelStore;
 
+  const { myRoomsId, archiveRoomsId } = treeFoldersStore;
+
   const { enablePlugins } = auth.settingsStore;
 
   return {
@@ -225,10 +230,13 @@ export default inject(({ auth, pluginStore }) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
-
     infoPanelItemsList,
-    enablePlugins,
     resetView,
+
+    myRoomsId,
+    archiveRoomsId,
+
+    enablePlugins,
 
     //  rootFolderType,
 

@@ -99,8 +99,6 @@ class OformsStore {
     const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
-    console.log(this.authStore.settingsStore.formGallery);
-
     return new Promise(async (resolve) => {
       const apiUrl = `${domain}${path}${params}`;
       let oforms = await getOforms(apiUrl);

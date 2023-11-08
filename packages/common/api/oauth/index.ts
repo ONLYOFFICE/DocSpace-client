@@ -92,7 +92,7 @@ export const changeClientStatus = async (
   await request({
     method: "patch",
     url: `/clients/${clientId}/activation`,
-    data: { body: status },
+    data: { status },
   });
 };
 
@@ -149,12 +149,9 @@ export const onOAuthSubmit = (
 ) => {
   const formData = new FormData();
 
-  // console.log(window.location.search);
-
   formData.append("client_id", clientId);
   formData.append("state", clientState);
-  formData.append("scope", "accounts:write");
-  // formData.append("scope", scope.join(","));
+  formData.append("scope", scope.join(","));
 
   return request({
     method: "post",

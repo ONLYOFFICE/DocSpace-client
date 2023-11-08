@@ -15,6 +15,7 @@ import List from "./sub-components/List";
 import { OAuthContainer } from "./StyledOAuth";
 import { OAuthProps } from "./OAuth.types";
 import InfoDialog from "./sub-components/InfoDialog";
+import PreviewDialog from "./sub-components/PreviewDialog";
 
 const MIN_LOADER_TIME = 500;
 
@@ -27,6 +28,7 @@ const OAuth = ({
   fetchScopes,
   currentDeviceType,
   infoDialogVisible,
+  previewDialogVisible,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -83,6 +85,7 @@ const OAuth = ({
         )}
       </>
       {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
+      {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}
     </OAuthContainer>
   );
 };
@@ -98,6 +101,7 @@ export default inject(
       fetchClients,
       fetchScopes,
       infoDialogVisible,
+      previewDialogVisible,
     } = oauthStore;
     return {
       viewAs,
@@ -107,6 +111,7 @@ export default inject(
       fetchClients,
       currentDeviceType,
       infoDialogVisible,
+      previewDialogVisible,
       fetchScopes,
     };
   }

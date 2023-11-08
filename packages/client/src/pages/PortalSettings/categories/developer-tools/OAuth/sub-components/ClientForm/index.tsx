@@ -70,15 +70,19 @@ const ClientForm = ({
   const isEdit = !!id;
 
   const onSaveClick = async () => {
-    if (!id) {
-      setIsRequestRunning(true);
+    try {
+      if (!id) {
+        setIsRequestRunning(true);
 
-      await saveClient?.(form);
-    } else {
-      await updateClient?.(clientId, form);
+        await saveClient?.(form);
+      } else {
+        await updateClient?.(clientId, form);
+      }
+
+      onCancelClick();
+    } catch (e) {
+      console.log(e);
     }
-
-    onCancelClick();
   };
 
   const onCancelClick = () => {

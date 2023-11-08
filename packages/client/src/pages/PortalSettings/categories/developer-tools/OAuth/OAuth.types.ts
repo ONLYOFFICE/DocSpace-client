@@ -17,4 +17,5 @@ export interface OAuthProps {
   currentDeviceType: DeviceUnionType;
 
   infoDialogVisible?: boolean;
+  previewDialogVisible?: boolean;
 }

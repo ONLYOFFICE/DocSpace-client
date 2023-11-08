@@ -38,6 +38,9 @@ export interface OAuthStoreProps {
   infoDialogVisible: boolean;
   setInfoDialogVisible: (value: boolean) => void;
 
+  previewDialogVisible: boolean;
+  setPreviewDialogVisible: (value: boolean) => void;
+
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
 
@@ -102,6 +105,7 @@ class OAuthStore implements OAuthStoreProps {
   itemCount: number = 0;
 
   infoDialogVisible: boolean = false;
+  previewDialogVisible: boolean = false;
   deleteDialogVisible: boolean = false;
 
   selection: string[] = [];
@@ -126,6 +130,10 @@ class OAuthStore implements OAuthStoreProps {
 
   setInfoDialogVisible = (value: boolean) => {
     this.infoDialogVisible = value;
+  };
+
+  setPreviewDialogVisible = (value: boolean) => {
+    this.previewDialogVisible = value;
   };
 
   setDeleteDialogVisible = (value: boolean) => {
@@ -240,7 +248,7 @@ class OAuthStore implements OAuthStoreProps {
       const newClient = await addClient(client);
 
       runInAction(() => {
-        this.clients.unshift(newClient);
+        this.clients = [{ ...newClient }, ...this.clients];
       });
     } catch (e) {
       console.log(e);
@@ -260,8 +268,6 @@ class OAuthStore implements OAuthStoreProps {
             creatorAvatar: this.clients[idx].creatorAvatar,
             creatorDisplayName: this.clients[idx].creatorDisplayName,
           };
-
-          console.log(this.clients[idx]);
         });
       }
     } catch (e) {
@@ -332,6 +338,7 @@ class OAuthStore implements OAuthStoreProps {
 
     const onDelete = () => {
       this.setInfoDialogVisible(false);
+      this.setPreviewDialogVisible(false);
       if (!isGroupContext) {
         this.setBufferSelection(clientId);
       }
@@ -341,11 +348,19 @@ class OAuthStore implements OAuthStoreProps {
 
     const onShowInfo = () => {
       this.setBufferSelection(clientId);
+      this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(true);
+    };
+
+    const onShowPreview = () => {
+      this.setBufferSelection(clientId);
+      this.setInfoDialogVisible(false);
+      this.setPreviewDialogVisible(true);
     };
 
     const onEnable = async (status: boolean) => {
       this.setInfoDialogVisible(false);
+      this.setPreviewDialogVisible(false);
       if (isGroupContext) {
         try {
           const actions: Promise<void>[] = [];
@@ -382,7 +397,7 @@ class OAuthStore implements OAuthStoreProps {
       key: "auth-button",
       icon: CodeReactSvgUrl,
       label: "Auth button",
-      onClick: () => console.log(clientId),
+      onClick: onShowPreview,
     };
 
     const infoOption = {

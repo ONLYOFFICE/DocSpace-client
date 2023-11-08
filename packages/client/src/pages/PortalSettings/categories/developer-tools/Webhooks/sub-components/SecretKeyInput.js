@@ -57,7 +57,7 @@ const SecretKeyInput = (props) => {
     name,
     value,
     onChange,
-    passwordSettings,
+    PASSWORD_SETTINGS,
     isPasswordValid,
     setIsPasswordValid,
     setIsResetVisible,
@@ -149,7 +149,7 @@ const SecretKeyInput = (props) => {
           isDisableTooltip={true}
           inputType="password"
           isFullWidth={true}
-          passwordSettings={passwordSettings}
+          passwordSettings={PASSWORD_SETTINGS}
           key={passwordInputKey}
         />
         <Link
@@ -166,12 +166,12 @@ const SecretKeyInput = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { passwordSettings } = auth.settingsStore;
+export default inject(({ auth, webhooksStore }) => {
   const { webhooksGuideUrl } = auth.settingsStore;
+  const { PASSWORD_SETTINGS } = webhooksStore;
 
   return {
-    passwordSettings,
     webhooksGuideUrl,
+    PASSWORD_SETTINGS,
   };
 })(observer(SecretKeyInput));

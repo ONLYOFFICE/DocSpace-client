@@ -37,8 +37,14 @@ type TRow = {
 };
 const SpacesRoomRow = ({ item }: TRow) => {
   const { spacesStore, authStore } = useStore();
-  const { deletePortal, setDeletePortalDialogVisible, faviconLogo } = spacesStore;
+  const { setDeletePortalDialogVisible, faviconLogo, setCurrentPortal } = spacesStore;
   const { tenantAlias } = authStore.settingsStore;
+
+
+  const onDelete = () => {
+    setCurrentPortal(item);
+    setDeletePortalDialogVisible(true)
+  }
 
   const { t } = useTranslation(["Common", "Files", "Settings"]);
 
@@ -72,7 +78,7 @@ const SpacesRoomRow = ({ item }: TRow) => {
       label: t("Common:Delete"),
       key: "space_delete",
       icon: DeleteReactSvgUrl,
-       onClick: () => setDeletePortalDialogVisible(true),
+      onClick: onDelete,
     },
   ];
 

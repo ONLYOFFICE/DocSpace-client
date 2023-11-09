@@ -12,7 +12,7 @@ import {
 } from "@docspace/common/api/oforms";
 import toastr from "@docspace/components/toast/toastr";
 
-import { convertToLanguage } from "@docspace/common/utils";
+import { combineUrl, convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
 import { getCookie } from "@docspace/components/utils/cookie";
 
@@ -73,7 +73,7 @@ class OformsStore {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
 
-    const url = `${uploadDomain}${uploadDashboard}/i18n/locales`;
+    const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
     const fetchedLocales = await getOformLocales(url).catch((err) =>
       toastr.error(err.message)
@@ -100,7 +100,7 @@ class OformsStore {
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     return new Promise(async (resolve) => {
-      const apiUrl = `${domain}${path}${params}`;
+      const apiUrl = combineUrl(domain, path, params);
       let oforms = await getOforms(apiUrl);
       resolve(oforms);
     });
@@ -165,7 +165,7 @@ class OformsStore {
       this.authStore.settingsStore.formGallery;
 
     const res = await submitToGallery(
-      `${uploadDomain}${uploadPath}`,
+      combineUrl(uploadDomain, uploadPath),
       file,
       formName,
       language,
@@ -178,8 +178,6 @@ class OformsStore {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
     const { categorizeBy, categoryId } = this.oformsFilter;
-
-    const url = `${uploadDomain}${uploadDashboard}`;
     const locale = this.defaultOformLocale;
 
     if (!categorizeBy || !categoryId) {
@@ -188,7 +186,7 @@ class OformsStore {
     }
 
     const fetchedCategory = await getCategoryById(
-      url,
+      combineUrl(uploadDomain, uploadDashboard),
       categorizeBy,
       categoryId,
       locale
@@ -201,7 +199,7 @@ class OformsStore {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
 
-    const url = `${uploadDomain}${uploadDashboard}/menu-translations`;
+    const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
 
     const menuItems = await getCategoryTypes(url, locale).catch((err) =>
@@ -218,7 +216,7 @@ class OformsStore {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
 
-    const url = `${uploadDomain}${uploadDashboard}/${categoryTypeId}`;
+    const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 
     const categories = await getCategoriesOfCategoryType(
       url,

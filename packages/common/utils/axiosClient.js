@@ -121,7 +121,12 @@ class AxiosClient {
   request = (options) => {
     const onSuccess = (response) => {
       const error = this.getResponseError(response);
+
       if (error) throw new Error(error);
+
+      if (response.headers["x-redirect-uri"] && options.withRedirect) {
+        return window.location.replace(response.headers["x-redirect-uri"]);
+      }
 
       if (!response || !response.data || response.isAxiosError) return null;
 

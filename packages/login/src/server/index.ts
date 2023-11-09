@@ -59,13 +59,12 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
   initSSR(headers);
 
   try {
-    const isAuth = await checkIsAuthenticated();
-
     const oauthClientId = (query.client_id as string) || "";
-    const oauthClientState = (query.state as string) || "";
+    let oauthClientState = (query.state as string) || "";
 
     const isOAuth = query.type === "oauth2" && !!oauthClientId;
-    const isConsent = isAuth && isOAuth && oauthClientState;
+
+    const isAuth = await checkIsAuthenticated();
 
     if (isAuth && !isOAuth && url !== "/login/error") {
       res.redirect("/");
@@ -89,7 +88,19 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
         isAuth
       );
 
-      oauthState.state = oauthClientState;
+      if (isAuth && !oauthClientState) {
+        const cookieState = headers.cookie
+          ?.split(";")
+          .find((c) => c.includes("client_state"))
+          ?.replace("client_state=", "")
+          .trim();
+
+        if (cookieState) oauthClientState = cookieState;
+      }
+
+      const isConsent = isAuth && isOAuth;
+
+      oauthState.state = oauthClientState || "";
       oauthState.isConsent = !!isConsent;
 
       isCorrectOAuth = !!oauthState?.client.name;

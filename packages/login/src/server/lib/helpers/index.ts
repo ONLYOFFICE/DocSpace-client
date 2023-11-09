@@ -14,11 +14,7 @@ import { getUser } from "@docspace/common/api/people";
 import { checkIsAuthenticated } from "@docspace/common/api/user";
 import { getClient, getScopeList } from "@docspace/common/api/oauth";
 import { TenantStatus } from "@docspace/common/constants";
-import {
-  IClientProps,
-  INoAuthClientProps,
-  IScope,
-} from "@docspace/common/utils/oauth/interfaces";
+import { IScope } from "@docspace/common/utils/oauth/interfaces";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(

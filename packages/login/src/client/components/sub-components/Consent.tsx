@@ -79,24 +79,30 @@ const Consent = ({ oauth, theme, setIsConsentScreen }: IConsentProps) => {
 
   const { t } = useTranslation(["Consent", "Common"]);
 
-  const onAllowClick = () => {
+  const onAllowClick = async () => {
     const clientId = oauth.clientId;
 
     let clientState = oauth.state;
     const scope = oauth.client.scopes;
 
-    const cookie = document.cookie.split(";");
-
     if (!clientState) {
-      console.log(document.cookie);
-      cookie.forEach((c) => {
-        if (c.includes("client_state")) clientState = c.split("=")[1];
-      });
+      const getCookie = () => {
+        const cookie = document.cookie.split(";");
+
+        cookie.forEach((c) => {
+          if (c.includes("client_state"))
+            clientState = c.replace("client_state=", "").trim();
+        });
+      };
+
+      getCookie();
+
+      if (!clientState) await api.oauth.onOAuthLogin();
+
+      getCookie();
     }
 
-    console.log(clientState);
-
-    // api.oauth.onOAuthSubmit(clientId, clientState, scope);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
   };
 
   const onDenyClick = () => {

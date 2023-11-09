@@ -157,5 +157,6 @@ export const onOAuthSubmit = (
     method: "post",
     url: `/oauth2/authorize`,
     data: formData,
+    withRedirect: true,
   });
 };

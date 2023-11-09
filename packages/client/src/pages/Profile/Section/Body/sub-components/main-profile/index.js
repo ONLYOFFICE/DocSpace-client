@@ -101,7 +101,8 @@ const MainProfile = (props) => {
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}>
+          color={currentColorScheme?.main?.accent}
+        >
           {{ supportEmail: documentationEmail }}
         </Link>
         to take part in the translation and get up to 1 year free of charge."
@@ -113,7 +114,8 @@ const MainProfile = (props) => {
           color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
-          target="_blank">
+          target="_blank"
+        >
           {t("Common:LearnMore")}
         </Link>
       </Box>
@@ -170,7 +172,8 @@ const MainProfile = (props) => {
       </StyledAvatarWrapper>
       <StyledInfo
         withActivationBar={withActivationBar}
-        currentColorScheme={currentColorScheme}>
+        currentColorScheme={currentColorScheme}
+      >
         <div className="rows-container">
           <div className="profile-block">
             <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
@@ -181,14 +184,16 @@ const MainProfile = (props) => {
 
             <StyledLabel
               as="div"
-              marginTopProp={withActivationBar ? "34px" : "16px"}>
+              marginTopProp={withActivationBar ? "34px" : "16px"}
+            >
               {t("Common:Password")}
             </StyledLabel>
 
             <StyledLabel
               as="div"
               className="profile-language"
-              marginTopProp="15px">
+              marginTopProp="15px"
+            >
               {t("Common:Language")}
               <HelpButton
                 size={12}
@@ -201,7 +206,7 @@ const MainProfile = (props) => {
 
           <div className="profile-block">
             <div className="profile-block-field">
-              <Text fontWeight={600} truncate>
+              <Text fontWeight={600} truncate title={profile.displayName}>
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
@@ -233,7 +238,8 @@ const MainProfile = (props) => {
                   data-tooltip-content={t("EmailNotVerified")}
                   as="div"
                   className="email-text-container"
-                  fontWeight={600}>
+                  fontWeight={600}
+                >
                   {profile.email}
                 </Text>
                 {withActivationBar && (
@@ -258,7 +264,8 @@ const MainProfile = (props) => {
               {withActivationBar && (
                 <div
                   className="send-again-container"
-                  onClick={sendActivationLinkAction}>
+                  onClick={sendActivationLinkAction}
+                >
                   <ReactSVG
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
@@ -313,7 +320,8 @@ const MainProfile = (props) => {
               <Text
                 className="mobile-profile-label-field"
                 fontWeight={600}
-                truncate>
+                truncate
+              >
                 {profile.displayName}
               </Text>
             </div>
@@ -336,7 +344,8 @@ const MainProfile = (props) => {
                     data-tooltip-content={t("EmailNotVerified")}
                     as="div"
                     className="email-text-container"
-                    fontWeight={600}>
+                    fontWeight={600}
+                  >
                     {profile.email}
                   </Text>
                 </div>
@@ -354,7 +363,8 @@ const MainProfile = (props) => {
               {withActivationBar && (
                 <div
                   className="send-again-container"
-                  onClick={sendActivationLinkAction}>
+                  onClick={sendActivationLinkAction}
+                >
                   <ReactSVG
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}

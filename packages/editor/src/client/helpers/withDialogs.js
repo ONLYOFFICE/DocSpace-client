@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPresignedUri } from "@docspace/common/api/files";
+import { getRestoreProgress } from "@docspace/common/api/portal";
 import {
   EDITOR_ID,
   FilesSelectorFilterTypes,
@@ -51,12 +52,22 @@ const withDialogs = (WrappedComponent) => {
         data: { roomParts: "backup-restore" },
       });
       socketHelper.on("restore-backup", () => {
-        const message = t("Common:PreparationPortalTitle");
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
+        getRestoreProgress()
+          .then((response) => {
+            if (!response) {
+              console.log("Skip denyEditingRights - empty progress response");
+              return;
+            }
+            const message = t("Common:PreparationPortalTitle");
+            const docEditor =
+              typeof window !== "undefined" &&
+              window.DocEditor?.instances[EDITOR_ID];
 
-        docEditor?.denyEditingRights(message);
+            docEditor?.denyEditingRights(message);
+          })
+          .catch((e) => {
+            console.error("getRestoreProgress", e);
+          });
       });
     };
 

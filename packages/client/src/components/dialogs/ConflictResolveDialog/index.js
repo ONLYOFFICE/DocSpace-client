@@ -71,7 +71,9 @@ const ConflictResolveDialog = (props) => {
     activeFiles,
     setActiveFiles,
     updateActiveFiles,
+    setSelected,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
@@ -97,6 +99,7 @@ const ConflictResolveDialog = (props) => {
   const onClosePanels = () => {
     setConflictResolveDialogVisible(false);
     setMoveToPanelVisible(false);
+    setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
@@ -139,7 +142,11 @@ const ConflictResolveDialog = (props) => {
     }
 
     updateActiveFiles(newActiveFiles);
-    if (!folderIds.length && !newFileIds.length) return onClosePanels();
+    if (!folderIds.length && !newFileIds.length) {
+      setSelected("none");
+      onClosePanels();
+      return;
+    }
 
     const data = {
       destFolderId,
@@ -151,6 +158,7 @@ const ConflictResolveDialog = (props) => {
       translations,
     };
 
+    setSelected("none");
     onClosePanels();
     try {
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
@@ -268,13 +276,15 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     conflictResolveDialogData,
     conflictResolveDialogItems: items,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,
   } = dialogsStore;
 
   const { itemOperationToFolder } = uploadDataStore;
-  const { activeFiles, setActiveFiles, updateActiveFiles } = filesStore;
+  const { activeFiles, setActiveFiles, updateActiveFiles, setSelected } =
+    filesStore;
   const { settingsStore } = auth;
   const { theme } = settingsStore;
   return {
@@ -287,7 +297,9 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     activeFiles,
     setActiveFiles,
     updateActiveFiles,
+    setSelected,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,

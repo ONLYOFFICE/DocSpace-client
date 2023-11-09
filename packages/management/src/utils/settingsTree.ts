@@ -1,8 +1,8 @@
 import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import BrandingSvgUrl from "PUBLIC_DIR/images/branding.react.svg?url";
-import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?url";
-import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
-import PaymentIconUrl from "PUBLIC_DIR/images/payment.react.svg?url";
+import DataManagementIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
+import RestoreIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
+import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 
 export const settingsTree = [
     {

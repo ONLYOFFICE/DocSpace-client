@@ -13,17 +13,15 @@ const Container = ({
   scale,
   zIndex,
   contentPaddingBottom,
+  forwardRef,
   ...props
-}) => <aside {...props} />;
+}) => <aside ref={forwardRef} {...props} />;
 /* eslint-enable react/prop-types */
 /* eslint-enable no-unused-vars */
 
 const StyledAside = styled(Container)`
   background-color: ${(props) => props.theme.aside.backgroundColor};
-  height: ${({ asideHeight, theme }) =>
-    asideHeight ? asideHeight : theme.aside.height};
-  margin-bottom: ${({ keyboardHeight }) =>
-    keyboardHeight ? `${keyboardHeight}px` : 0};
+  height: ${(props) => props.theme.aside.height};
 
   position: fixed;
   top: ${(props) => props.theme.aside.top};
@@ -68,25 +66,11 @@ const StyledAside = styled(Container)`
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: ${({ asideHeight }) =>
-      asideHeight
-        ? `calc(${asideHeight} - ${mobileFooterHeight})`
-        : `calc(100% - ${mobileFooterHeight})`};
+    height: ${`calc(100% - ${mobileFooterHeight})`};
 
     width: 100%;
     max-width: 100%;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            transform: translateX(
-              ${(props) => (props.visible ? "0" : "-100%")}
-            );
-          `
-        : css`
-            transform: translateX(${(props) => (props.visible ? "0" : "100%")});
-          `}
-
+    transform: translateY(${(props) => (props.visible ? "0" : "100%")});
     aside:not(:first-child) {
       height: 100%;
     }

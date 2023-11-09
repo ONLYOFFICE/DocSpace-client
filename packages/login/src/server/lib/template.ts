@@ -51,11 +51,12 @@ const template: Template = (
 
   const initialLoginStateStringify = JSON.stringify(initLoginState);
 
-  const initialLoginStateString = initialLoginStateStringify.includes(
-    "</script>"
-  )
-    ? initialLoginStateStringify.replace(/<\/script>/g, "<\\/script>")
-    : initialLoginStateStringify;
+  const lt = /</g,
+    gt = />/g;
+
+  const initialLoginStateString = initialLoginStateStringify
+    .replace(lt, "&lt;")
+    .replace(gt, "&gt;");
 
   const scripts = `   
     <script id="__ASC_INITIAL_LOGIN_STATE__">

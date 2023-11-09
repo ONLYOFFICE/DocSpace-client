@@ -77,7 +77,7 @@ const StyledHideArticleMenuButton = styled.div`
 
   .article-hide-menu-icon_svg,
   .article-show-menu-icon_svg {
-    height: 28px;
+    height: 20px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`

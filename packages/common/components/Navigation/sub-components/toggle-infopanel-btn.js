@@ -22,6 +22,10 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   margin-bottom: 1px;
   padding: 0;
 
+  .info-panel-toggle {
+    margin-inline-end: 8px;
+  }
+
   ${(props) =>
     props.isInfoPanelVisible &&
     css`

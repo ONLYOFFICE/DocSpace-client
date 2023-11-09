@@ -436,7 +436,7 @@ class BackupStore {
             return;
           }
 
-          if (progress !== this.downloadingProgress) {
+          if (progress > 0 && progress !== this.downloadingProgress) {
             this.downloadingProgress = progress;
           }
 

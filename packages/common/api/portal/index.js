@@ -8,41 +8,13 @@ export function getShortenedLink(link) {
   });
 }
 
-const GUEST_INVITE_LINK = "guestInvitationLink";
-const USER_INVITE_LINK = "userInvitationLink";
-const INVITE_LINK_TTL = "localStorageLinkTtl";
-const LINKS_TTL = 6 * 3600 * 1000;
-
 export function getInvitationLink(type) {
-  const curLinksTtl = localStorage.getItem(INVITE_LINK_TTL);
-  const now = +new Date();
-
-  if (!curLinksTtl) {
-    localStorage.setItem(INVITE_LINK_TTL, now);
-  } else if (now - curLinksTtl > LINKS_TTL) {
-    localStorage.removeItem(GUEST_INVITE_LINK);
-    localStorage.removeItem(USER_INVITE_LINK);
-    localStorage.setItem(INVITE_LINK_TTL, now);
-  }
-
-  const link = localStorage.getItem(
-    type === 2 ? GUEST_INVITE_LINK : USER_INVITE_LINK
-  );
-
-  return link && type !== 3 && type !== 4
-    ? Promise.resolve(link)
-    : request({
-        method: "get",
-        url: `/portal/users/invite/${type}`,
-      }).then((link) => {
-        if (type !== 3 && type !== 4) {
-          localStorage.setItem(
-            type === 2 ? GUEST_INVITE_LINK : USER_INVITE_LINK,
-            link
-          );
-        }
-        return Promise.resolve(link);
-      });
+  return request({
+    method: "get",
+    url: `/portal/users/invite/${type}`,
+  }).then((link) => {
+    return Promise.resolve(link);
+  });
 }
 
 export function getInvitationLinks() {

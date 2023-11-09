@@ -12,7 +12,7 @@ import HistoryTableHeader from "./HistoryTableHeader";
 import { useViewEffect } from "@docspace/common/hooks";
 
 const TableWrapper = styled(TableContainer)`
-  margin-top: 0;
+  margin-top: -2px;
 
   .table-container_header {
     position: absolute;
@@ -29,15 +29,33 @@ const TableWrapper = styled(TableContainer)`
 
   .table-list-item {
     cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
-      background-color: ${(props) =>
-        props.theme.isBase ? "#f3f4f4" : "#282828"};
+      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
   }
 `;
 
@@ -87,8 +105,7 @@ const HistoryTableView = (props) => {
       style={{
         gridTemplateColumns: "300px 100px 400px 24px",
       }}
-      useReactWindow
-    >
+      useReactWindow>
       <HistoryTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
@@ -105,8 +122,7 @@ const HistoryTableView = (props) => {
         filesLength={historyItems.length}
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasMoreItems}
-        itemCount={totalItems}
-      >
+        itemCount={totalItems}>
         {historyItems.map((item) => (
           <HistoryTableRow
             key={item.id}
@@ -121,14 +137,8 @@ const HistoryTableView = (props) => {
 
 export default inject(({ setup, webhooksStore, auth }) => {
   const { viewAs, setViewAs } = setup;
-  const {
-    historyItems,
-    fetchMoreItems,
-    hasMoreItems,
-    totalItems,
-    formatFilters,
-    historyFilters,
-  } = webhooksStore;
+  const { historyItems, fetchMoreItems, hasMoreItems, totalItems, formatFilters, historyFilters } =
+    webhooksStore;
   const { id: userId } = auth.userStore.user;
   const { currentDeviceType } = auth.settingsStore;
 

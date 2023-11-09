@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { mobile, tablet } from "../utils/device";
+import styled from "styled-components";
+import { mobile, tablet, transitionalScreenSize } from "../utils/device";
 import NoUserSelect from "../utils/commonStyles";
 
 const EmptyContentBody = styled.div`
@@ -73,13 +73,17 @@ const EmptyContentBody = styled.div`
       color: ${(props) => props.theme.emptyContent.button.colorText};
     }
   }
+  @media ${transitionalScreenSize} {
+    width: fit-content;
+    max-width: 640px;
+  }
 
   @media ${tablet} {
     padding-top: ${(props) =>
       props.withoutFilter
         ? "109px" //calculated without section body padding and without filter
         : "71px"}; //calculated without section body padding, margin of filter
-    width: 480px;
+    max-width: 480px;
   }
 
   @media ${mobile} {

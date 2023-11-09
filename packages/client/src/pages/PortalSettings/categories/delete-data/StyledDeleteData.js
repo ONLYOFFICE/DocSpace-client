@@ -15,15 +15,13 @@ export const MainContainer = styled.div`
   max-width: 700px;
   white-space: pre-line;
 
-  .header {
-    margin-bottom: 8px;
-  }
-
   .description {
     margin-bottom: 16px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .helper {
+    line-height: 20px;
     margin-bottom: 24px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }

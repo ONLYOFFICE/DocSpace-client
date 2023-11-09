@@ -226,7 +226,14 @@ const ClientRoutes = [
           },*/
         ],
       },
-
+      {
+        path: "/accounts/view/@self/notification",
+        element: (
+          <PrivateRoute>
+            <Navigate to="/profile/notifications" replace />
+          </PrivateRoute>
+        ),
+      },
       ...generalRoutes,
     ],
   },
@@ -236,7 +243,27 @@ const ClientRoutes = [
     element: <Navigate to="/rooms/shared" replace />,
   },
   {
-    path: "/form-gallery/:folderId",
+    path: "/form-gallery",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <FormGallery />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/form-gallery/:fromFolderId",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <FormGallery />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/form-gallery/:fromFolderId/filter",
     element: (
       <PrivateRoute>
         <ErrorBoundary>

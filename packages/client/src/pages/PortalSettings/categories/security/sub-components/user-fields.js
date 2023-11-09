@@ -40,12 +40,12 @@ const StyledInputWrapper = styled.div`
 `;
 
 const StyledAddWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   gap: 6px;
   align-items: center;
   cursor: pointer;
-  margin-top: ${(props) => (props.inputsLength > 0 ? "16px" : "0px")};
+  margin-top: ${(props) => (props.inputsLength > 0 ? "8px" : "0px")};
 `;
 
 const usePrevious = (value) => {

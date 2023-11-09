@@ -77,7 +77,6 @@ class MediaViewerDataStore {
     if (this.publicRoomStore.isPublicRoom) return;
 
     const url = "/products/files/#preview/" + id;
-
     window.DocSpace.navigate(url);
   };
 

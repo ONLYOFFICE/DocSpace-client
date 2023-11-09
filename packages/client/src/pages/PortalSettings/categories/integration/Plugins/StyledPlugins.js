@@ -3,6 +3,13 @@ import { isMobileOnly } from "react-device-detect";
 
 import { Base } from "@docspace/components/themes";
 
+const StyledEmptyContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+`;
+
 const StyledContainer = styled.div`
   width: 100%;
   max-width: 700px;
@@ -14,8 +21,6 @@ const StyledContainer = styled.div`
 `;
 
 const PluginListContainer = styled.div`
-  margin-top: 8px;
-
   width: 100%;
 
   display: grid;
@@ -32,20 +37,20 @@ const StyledPluginItem = styled.div`
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 48px 1fr;
 
   gap: 20px;
 
   border: 1px solid ${(props) => props.theme.plugins.borderColor};
   border-radius: 12px;
 
-  padding: 24px;
+  padding: 20px;
 
   box-sizing: border-box;
 
   .plugin-logo {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
 
     border-radius: 4px;
   }
@@ -108,6 +113,7 @@ const StyledPluginHeader = styled.div`
 `;
 
 export {
+  StyledEmptyContainer,
   StyledContainer,
   PluginListContainer,
   StyledPluginItem,

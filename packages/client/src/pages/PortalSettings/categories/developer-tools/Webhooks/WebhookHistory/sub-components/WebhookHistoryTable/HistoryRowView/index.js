@@ -12,7 +12,7 @@ import { Base } from "@docspace/components/themes";
 import HistoryRow from "./HistoryRow";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin-top: 11px;
+  margin-top: 12px;
 
   .row-list-item {
     cursor: pointer;
@@ -24,7 +24,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-list-item:has(.selected-row-item) {
     background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+      props.theme.isBase ? "#f3f4f4" : "#3D3D3D"};
   }
 `;
 

@@ -1,63 +1,186 @@
 {
   "version": "2.0.0",
   "problemMatcher": [],
-  "presentation": {
-    "focus": true,
-    "close": true
-  },
   "tasks": [
     {
-      "label": "Frontend | Start",
+      "label": "Backend | build EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start"
-    },
-    {
-      "label": "Backend  | Build",
-      "type": "shell",
-      "command": "${workspaceFolder}/build/build.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\build.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Start",
+      "label": "Backend | build CE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/start.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\start.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Restart",
+      "label": "Backend | build SAAS",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/restart.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\restart.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Stop",
+      "label": "Backend | build +DNS",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/stop.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\stop.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "start-param",
-      "description": "Command",
-      "default": "Start",
-      "type": "pickString",
-      "options": ["Start", "Restart", "Stop"]
     },
     {
-      "id": "local-docker",
-      "description": "Manipulation",
-      "default": "Local",
-      "type": "pickString",
-      "options": ["Local", "Docker"]
+      "label": "Backend | clear",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/clear.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | stop",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/stop.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | restart",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/restart.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | start",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/start.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | install",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

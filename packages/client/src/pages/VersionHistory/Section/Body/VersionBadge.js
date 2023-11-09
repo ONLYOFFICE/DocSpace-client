@@ -46,7 +46,6 @@ const VersionBadge = ({
     displayProp="flex"
     isVersion={true}
     theme={theme}
-    index={index}
     {...rest}
   >
     <VersionMarkIcon

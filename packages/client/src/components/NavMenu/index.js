@@ -133,19 +133,16 @@ const NavMenu = (props) => {
   } = props;
 
   const isAsideAvailable = !!asideContent;
-  const hideHeader = isDesktop || (!showHeader && isFrame);
+  const hideHeader = !showHeader && isFrame;
 
-  if (currentDeviceType !== DeviceType.mobile || !isMobile()) return <></>;
+  if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
+    return <></>;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
   return (
     <LayoutContextConsumer>
       {(value) => (
-        <StyledContainer
-          isLoaded={isLoaded}
-          isVisible={value.isVisible}
-          isDesktop={hideHeader}
-        >
+        <StyledContainer isLoaded={isLoaded} isVisible={value.isVisible}>
           <Backdrop
             visible={isBackdropVisible}
             onClick={backdropClick}

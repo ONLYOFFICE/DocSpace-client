@@ -182,6 +182,7 @@ export const convertFoldersToItems = (
     const {
       id,
       title,
+      roomType,
       filesCount,
       foldersCount,
       security,
@@ -190,6 +191,7 @@ export const convertFoldersToItems = (
     }: {
       id: number;
       title: string;
+      roomType: number;
       filesCount: number;
       foldersCount: number;
       security: Security;
@@ -210,6 +212,7 @@ export const convertFoldersToItems = (
       parentId,
       rootFolderType,
       isFolder: true,
+      roomType,
       isDisabled: !!filterParam ? false : disabledItems.includes(id),
     };
   });
@@ -246,6 +249,7 @@ export const convertFilesToItems = (files: any, filterParam?: string) => {
       rootFolderType,
       isFolder: false,
       isDisabled: !filterParam,
+      fileExst,
     };
   });
   return items;
@@ -321,6 +325,10 @@ export const useFilesHelper = ({
           case FilesSelectorFilterTypes.XLSX:
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.FilesOnly;
+            break;
         }
       }
 
@@ -333,7 +341,7 @@ export const useFilesHelper = ({
         isErrorPath = false
       ) => {
         if (isInit && getRootData) {
-          const folder = await getFolderInfo(folderId);
+          const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
 
@@ -432,6 +440,7 @@ export const useFilesHelper = ({
       try {
         await setSettings(id);
       } catch (e) {
+        sessionStorage.removeItem("filesSelectorPath");
         if (isThirdParty && rootThirdPartyId) {
           await setSettings(rootThirdPartyId, true);
 

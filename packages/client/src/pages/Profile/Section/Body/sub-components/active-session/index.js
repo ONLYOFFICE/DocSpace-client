@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { isDesktop } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
@@ -28,6 +27,7 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
+import { DeviceType } from "@docspace/common/constants";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -51,7 +51,12 @@ const ActiveSessions = ({
   getSessions,
   sessions,
   currentSession,
+  setSessions,
+  currentDeviceType,
 }) => {
+  const isDesktop = currentDeviceType === DeviceType.desktop;
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
   const [modalData, setModalData] = useState({});
   const [loading, setLoading] = useState(false);
   const { interfaceDirection } = useTheme();
@@ -111,7 +116,7 @@ const ActiveSessions = ({
     return new Date(date).toLocaleString(locale);
   };
   const tableCell = (platform, browser) =>
-    interfaceDirection === "rtl" && isDesktop() ? (
+    interfaceDirection === "rtl" && !isMobile ? (
       <>
         <span className="session-browser">
           <span>{browser}</span>
@@ -156,7 +161,7 @@ const ActiveSessions = ({
           }
         />
       </Box>
-      {!isDesktop() ? (
+      {!isDesktop ? (
         <Table>
           <TableBody>
             {sessions.map((session) => (
@@ -250,7 +255,7 @@ const ActiveSessions = ({
 };
 
 export default inject(({ auth, setup }) => {
-  const { culture } = auth.settingsStore;
+  const { culture, currentDeviceType } = auth.settingsStore;
   const { user } = auth.userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
@@ -267,6 +272,7 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
   } = setup;
   return {
     locale,
@@ -282,5 +288,7 @@ export default inject(({ auth, setup }) => {
     sessions,
     currentSession,
     getSessions,
+    setSessions,
+    currentDeviceType,
   };
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

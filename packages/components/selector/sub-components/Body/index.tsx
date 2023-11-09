@@ -165,7 +165,7 @@ const Body = ({
         )
       ) : null}
 
-      {isSearchLoading ? (
+      {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
       ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
         <Search

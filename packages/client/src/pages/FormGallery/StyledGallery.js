@@ -85,21 +85,6 @@ const StyledHeadline = styled(Headline)`
   }
 `;
 
-const StyledNavigationDrodown = styled(ComboBox)`
-  width: 12px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 4px 0 0 " : "0 0 0 4px"};
-  box-sizing: border-box;
-  background: transparent;
-`;
-
-const StyledNavigationDrodownItem = styled(DropDownItem)`
-  height: 30px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 30px;
-`;
-
 const StyledSubmitToGalleryButton = styled(Button)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -164,8 +149,6 @@ export {
   StyledHeading,
   StyledHeadline,
   StyledContainer,
-  StyledNavigationDrodown,
-  StyledNavigationDrodownItem,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

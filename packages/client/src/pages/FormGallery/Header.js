@@ -9,8 +9,6 @@ import {
   StyledContainer,
   StyledHeading,
   StyledHeadline,
-  StyledNavigationDrodown,
-  StyledNavigationDrodownItem,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
@@ -18,9 +16,6 @@ import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { combineUrl } from "@docspace/common/utils";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
-import api from "@docspace/common/api";
-import { isMobileOnly } from "react-device-detect";
 
 const SectionHeaderContent = ({
   t,
@@ -34,20 +29,12 @@ const SectionHeaderContent = ({
 
   currentCategory,
 
-  oformsFilter,
-  filterOformsByCategory,
-
   isInfoPanelVisible,
   setIsInfoPanelVisible,
 
   setIsLoading,
 }) => {
   const navigate = useNavigate();
-
-  const [checkboxOptions, setCheckboxOptions] = useState({
-    fromFolder: null,
-    viewAll: null,
-  });
 
   const onNavigateBack = () => {
     setGallerySelected(null);
@@ -68,49 +55,10 @@ const SectionHeaderContent = ({
     );
   };
 
-  const onViewAllTemplates = () => filterOformsByCategory("", "");
-
   const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
 
   const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
-
-  useEffect(() => {
-    (async () => {
-      const prevFolder =
-        oformFromFolderId && (await api.files.getFolderInfo(oformFromFolderId));
-
-      if (prevFolder)
-        setCheckboxOptions((prev) => ({
-          ...prev,
-          fromFolder: (
-            <StyledNavigationDrodownItem
-              id={"fromFolder"}
-              key={"fromFolder"}
-              label={prevFolder.title}
-              data-key={prevFolder.title}
-              onClick={onNavigateBack}
-            />
-          ),
-        }));
-    })();
-  }, [oformFromFolderId]);
-
-  useEffect(() => {
-    let viewAll = null;
-    if (oformsFilter.categorizeBy && oformsFilter.categoryId)
-      viewAll = (
-        <StyledNavigationDrodownItem
-          id={"view-all"}
-          key={"view-all"}
-          label={t("Common:OFORMsGallery")}
-          data-key={"OFORMs gallery"}
-          onClick={onViewAllTemplates}
-        />
-      );
-
-    setCheckboxOptions((prev) => ({ ...prev, viewAll }));
-  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   return (
     <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
@@ -129,26 +77,6 @@ const SectionHeaderContent = ({
         <StyledHeadline type="content" truncate>
           {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
         </StyledHeadline>
-
-        <StyledNavigationDrodown
-          id="oform-header-combobox"
-          comboIcon={TriangleNavigationDownReactSvgUrl}
-          noBorder
-          className="oform-header-combobox not-selectable"
-          selectedOption={{}}
-          dropdownStyle={{ margin: "4px 0 0 4px", padding: "4px 0" }}
-          manualWidth="fit-content"
-          title={t("Common:TitleSelectFile")}
-          isMobileView={isMobileOnly}
-          directionX={"right"}
-          options={[]}
-          advancedOptions={
-            <>
-              {!!checkboxOptions.fromFolder && checkboxOptions.fromFolder}
-              {!!checkboxOptions.viewAll && checkboxOptions.viewAll}
-            </>
-          }
-        />
       </StyledHeading>
 
       {canSubmitToFormGallery() && (
@@ -192,9 +120,6 @@ export default inject(
 
       currentCategory: oformsStore.currentCategory,
       fetchCurrentCategory: oformsStore.fetchCurrentCategory,
-
-      oformsFilter: oformsStore.oformsFilter,
-      filterOformsByCategory: oformsStore.filterOformsByCategory,
 
       setGallerySelected: oformsStore.setGallerySelected,
 

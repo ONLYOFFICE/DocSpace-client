@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
-import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
 
@@ -84,14 +83,6 @@ const StyledHeadline = styled(Headline)`
   }
 `;
 
-const StyledNavigationDrodown = styled(ComboBox)`
-  width: 12px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 4px 0 0 " : "0 0 0 4px"};
-  box-sizing: border-box;
-  background: transparent;
-`;
-
 const StyledSubmitToGalleryButton = styled(Button)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -156,7 +147,6 @@ export {
   StyledHeading,
   StyledHeadline,
   StyledContainer,
-  StyledNavigationDrodown,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

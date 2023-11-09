@@ -13,18 +13,24 @@ export const StyledFilter = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  height: 32px;
   padding: 0 0 8px 0;
 
   .form-only-filters {
+    height: 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
+
+    &:empty {
+      display: none;
+    }
   }
 
   .general-filters {
+    height: 32px;
     width: 100%;
+    max-width: 693px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,18 +38,24 @@ export const StyledFilter = styled.div`
     gap: 8px;
   }
 
+  .form-only-filters:empty + .general-filters {
+    justify-content: space-between;
+    max-width: 100%;
+  }
+
   @media ${tablet} {
     padding-bottom: 16px;
   }
 
   @media ${mobile} {
-    height: 72px;
-
     flex-direction: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `column` : `column-reverse`};
 
     .form-only-filters {
       width: 100%;
+    }
+    .general-filters {
+      max-width: 100%;
     }
   }
 `;

@@ -173,8 +173,8 @@ const LinkRow = (props) => {
       },
       {
         key: "delete-link-key",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+        label: t("Files:RevokeLink"),
+        icon: OutlineReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];

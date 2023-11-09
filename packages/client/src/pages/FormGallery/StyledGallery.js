@@ -2,10 +2,8 @@ import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
-import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
-import DropDownItem from "@docspace/components/drop-down-item";
 
 const StyledContainer = styled.div`
   height: 69px;

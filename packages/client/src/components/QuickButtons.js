@@ -4,7 +4,6 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
-import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 
 import React from "react";
 import styled from "styled-components";

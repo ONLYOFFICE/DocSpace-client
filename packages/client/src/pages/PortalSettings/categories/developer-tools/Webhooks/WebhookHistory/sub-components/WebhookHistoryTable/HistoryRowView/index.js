@@ -12,7 +12,7 @@ import { Base } from "@docspace/components/themes";
 import HistoryRow from "./HistoryRow";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin-top: 11px;
+  margin-top: 12px;
 
   .row-list-item {
     cursor: pointer;

@@ -4,21 +4,11 @@ import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  size as deviceSize,
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
   tablet,
 } from "@docspace/components/utils/device";
-import {
-  isIOS,
-  isFirefox,
-  isSafari,
-  isMobile,
-  isMobileOnly,
-  isChrome,
-  isTablet,
-  isAndroid,
-} from "react-device-detect";
+import { isIOS, isMobile, isChrome, isAndroid } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 const StyledContainer = styled.div`
@@ -216,11 +206,7 @@ const Layout = (props) => {
   };
 
   return (
-    <StyledContainer
-      className="Layout"
-      isTabletView={isTabletUtils()}
-      contentHeight={contentHeight}
-    >
+    <StyledContainer className="Layout" contentHeight={contentHeight}>
       {isMobileUtils() ? <MobileLayout {...props} /> : children}
     </StyledContainer>
   );
@@ -233,9 +219,12 @@ Layout.propTypes = {
 };
 
 export default inject(({ auth, bannerStore }) => {
+  const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
+    auth.settingsStore;
   return {
-    isTabletView: auth.settingsStore.isTabletView,
-    setIsTabletView: auth.settingsStore.setIsTabletView,
-    setWindowWidth: auth.settingsStore.setWindowWidth,
+    isTabletView,
+    setIsTabletView,
+    setWindowWidth,
+    isFrame,
   };
 })(observer(Layout));

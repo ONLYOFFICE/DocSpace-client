@@ -10,8 +10,9 @@ import {
   getCategoryTypes,
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
+import toastr from "@docspace/components/toast/toastr";
 
-import { convertToLanguage } from "@docspace/common/utils";
+import { combineUrl, convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/common/constants";
 import { getCookie } from "@docspace/components/utils/cookie";
 
@@ -31,7 +32,7 @@ class OformsStore {
   currentCategory = null;
   categoryTitles = [];
 
-  oformLocales = [];
+  oformLocales = null;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -44,7 +45,7 @@ class OformsStore {
 
   get defaultOformLocale() {
     const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    return this.oformLocales.includes(userLocale) ? userLocale : "en";
+    return this.oformLocales?.includes(userLocale) ? userLocale : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -69,8 +70,14 @@ class OformsStore {
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
 
   fetchOformLocales = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/i18n/locales";
-    const fetchedLocales = await getOformLocales(url);
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
+
+    const fetchedLocales = await getOformLocales(url).catch((err) =>
+      toastr.error(err.message)
+    );
     const localeKeys = fetchedLocales.map((locale) =>
       convertToLanguage(locale.code)
     );
@@ -78,6 +85,8 @@ class OformsStore {
   };
 
   getOforms = (filter = OformsFilter.getDefault()) => {
+    const { domain, path } = this.authStore.settingsStore.formGallery;
+
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
     const size = "&fields[2]=file_size";
@@ -91,7 +100,7 @@ class OformsStore {
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     return new Promise(async (resolve) => {
-      const apiUrl = `${this.authStore.settingsStore.formGallery.url}${params}`;
+      const apiUrl = combineUrl(domain, path, params);
       let oforms = await getOforms(apiUrl);
       resolve(oforms);
     });
@@ -152,13 +161,22 @@ class OformsStore {
   };
 
   submitToFormGallery = async (file, formName, language, signal = null) => {
-    const url = this.authStore.settingsStore.formGallery.uploadUrl;
-    const res = await submitToGallery(url, file, formName, language, signal);
+    const { uploadDomain, uploadPath } =
+      this.authStore.settingsStore.formGallery;
+
+    const res = await submitToGallery(
+      combineUrl(uploadDomain, uploadPath),
+      file,
+      formName,
+      language,
+      signal
+    );
     return res;
   };
 
   fetchCurrentCategory = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api";
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
     const { categorizeBy, categoryId } = this.oformsFilter;
     const locale = this.defaultOformLocale;
 
@@ -168,7 +186,7 @@ class OformsStore {
     }
 
     const fetchedCategory = await getCategoryById(
-      url,
+      combineUrl(uploadDomain, uploadDashboard),
       categorizeBy,
       categoryId,
       locale
@@ -178,10 +196,15 @@ class OformsStore {
   };
 
   fetchCategoryTypes = async () => {
-    const url = "https://oforms.onlyoffice.com/dashboard/api/menu-translations";
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
 
-    const menuItems = await getCategoryTypes(url, locale);
+    const menuItems = await getCategoryTypes(url, locale).catch((err) =>
+      toastr.error(err.message)
+    );
     this.categoryTitles = menuItems.map(
       (item) => item.attributes.categoryTitle
     );
@@ -190,7 +213,10 @@ class OformsStore {
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {
-    const url = `https://oforms.onlyoffice.com/dashboard/api/${categoryTypeId}`;
+    const { uploadDomain, uploadDashboard } =
+      this.authStore.settingsStore.formGallery;
+
+    const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 
     const categories = await getCategoriesOfCategoryType(
       url,

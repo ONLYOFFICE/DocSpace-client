@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -55,7 +61,11 @@ const InvitePanel = ({
   filter,
   currentDeviceType,
 }) => {
-  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(false);
+  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
+    () =>
+      ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
+      roomId !== -1
+  );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
@@ -73,6 +83,9 @@ const InvitePanel = ({
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
+  const invitePanelWrapper = useRef(null);
+  const invitePanelRef = useRef(null);
+  const windowHeight = useRef(window.innerHeight);
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -121,7 +134,7 @@ const InvitePanel = ({
 
   useEffect(() => {
     if (roomId === -1) {
-      if (!userLink || !guestLink || !adminLink || !collaboratorLink) {
+      if ((!userLink || !guestLink || !collaboratorLink) && !adminLink) {
         setInvitePanelIsLoading(true);
         getPortalInviteLinks().finally(() => {
           disableInvitePanelLoader();
@@ -182,6 +195,25 @@ const InvitePanel = ({
   useEffect(() => {
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
+
+  useEffect(() => {
+    window.visualViewport.addEventListener("resize", onResize);
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = useCallback((e) => {
+    const diff = windowHeight.current - e.target.height;
+
+    if (invitePanelRef.current) {
+      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
+      // invitePanelRef.current.style.bottom = `${diff}px`;
+      invitePanelWrapper.current.style.height = `${e.target.height}px`;
+      invitePanelWrapper.current.style.bottom = `${diff}px`;
+    }
+  }, []);
 
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();
@@ -368,9 +400,10 @@ const InvitePanel = ({
       hasInvitedUsers={hasInvitedUsers}
       scrollAllPanelContent={scrollAllPanelContent}
       addUsersPanelVisible={addUsersPanelVisible}
+      ref={invitePanelWrapper}
     >
       {isMobileView ? (
-        <div className="invite_panel">
+        <div className="invite_panel" ref={invitePanelRef}>
           <StyledControlContainer onClick={onClose}>
             <StyledCrossIconMobile />
           </StyledControlContainer>

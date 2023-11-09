@@ -21,8 +21,6 @@ const StyledContainer = styled.div`
 `;
 
 const PluginListContainer = styled.div`
-  margin-top: 8px;
-
   width: 100%;
 
   display: grid;
@@ -39,20 +37,20 @@ const StyledPluginItem = styled.div`
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 48px 1fr;
 
   gap: 20px;
 
   border: 1px solid ${(props) => props.theme.plugins.borderColor};
   border-radius: 12px;
 
-  padding: 24px;
+  padding: 20px;
 
   box-sizing: border-box;
 
   .plugin-logo {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
 
     border-radius: 4px;
   }

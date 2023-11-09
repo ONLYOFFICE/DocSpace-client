@@ -1,24 +1,23 @@
 import { inject, observer } from "mobx-react";
 
 import AccountsItemTitle from "./AccountsItemTitle";
-import FilesItemTitle from "./FilesItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
+import RoomsItemHeader from "./Rooms";
 
 const ItemTitle = ({
   selection,
   gallerySelected,
-  isRooms,
+  isNoItem,
   isAccounts,
   isGallery,
   isSeveralItems,
   selectionLength,
-  selectionParentRoom,
-  roomsView,
   currentColorScheme,
   getIcon,
   getUserContextOptions,
 }) => {
   if (!selection) return null;
+  if (isNoItem) return null;
 
   if (isAccounts)
     return (
@@ -39,27 +38,11 @@ const ItemTitle = ({
       />
     );
 
-  const filesItemSelection =
-    isRooms &&
-    !isSeveralItems &&
-    roomsView === "info_members" &&
-    !selection.isRoom &&
-    !!selectionParentRoom
-      ? selectionParentRoom
-      : selection;
-
-  return (
-    <FilesItemTitle
-      selectionLength={selectionLength}
-      selection={filesItemSelection}
-      isSeveralItems={isSeveralItems}
-    />
-  );
+  return <RoomsItemHeader />;
 };
 
 export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
   const { currentColorScheme } = auth.settingsStore;
-  const { selectionParentRoom, roomsView } = auth.infoPanelStore;
   const { getIcon } = settingsStore;
   const { getUserContextOptions } = peopleStore.contextOptionsStore;
   const { gallerySelected } = oformsStore;
@@ -68,8 +51,6 @@ export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
     currentColorScheme,
     gallerySelected,
     getUserContextOptions,
-    selectionParentRoom,
-    roomsView,
     getIcon,
   };
 })(observer(ItemTitle));

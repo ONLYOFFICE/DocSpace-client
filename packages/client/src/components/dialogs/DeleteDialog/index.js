@@ -13,6 +13,7 @@ const DeleteDialogComponent = (props) => {
     deleteAction,
     unsubscribeAction,
     setBufferSelection,
+    setSelected,
     setRemoveMediaItem,
     setDeleteDialogVisible,
     visible,
@@ -56,6 +57,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDelete = () => {
+    setSelected("none");
     onClose();
 
     const translations = {
@@ -72,6 +74,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onUnsubscribe = () => {
+    setSelected("none");
     onClose();
 
     if (!selection.length) return;
@@ -95,6 +98,7 @@ const DeleteDialogComponent = (props) => {
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
 
+    setSelected("none");
     onClose();
 
     const itemsIdDeleteHaveRights = selection
@@ -261,8 +265,13 @@ const DeleteDialog = withTranslation([
 
 export default inject(
   ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore, auth }) => {
-    const { selection, isLoading, bufferSelection, setBufferSelection } =
-      filesStore;
+    const {
+      selection,
+      isLoading,
+      bufferSelection,
+      setBufferSelection,
+      setSelected,
+    } = filesStore;
     const { deleteAction, unsubscribeAction, deleteRoomsAction } =
       filesActionsStore;
     const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
@@ -296,6 +305,7 @@ export default inject(
 
       setRemoveMediaItem,
       setBufferSelection,
+      setSelected,
 
       isRoomDelete,
       setIsRoomDelete,

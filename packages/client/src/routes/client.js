@@ -330,11 +330,11 @@ const ClientRoutes = [
   {
     path: "/unavailable",
     element: (
-      <PrivateRoute>
+      <PublicRoute>
         <ErrorBoundary>
           <ErrorUnavailable />
         </ErrorBoundary>
-      </PrivateRoute>
+      </PublicRoute>
     ),
   },
   {

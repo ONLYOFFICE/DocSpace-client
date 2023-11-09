@@ -21,7 +21,10 @@ const ListHeader = styled.header`
   align-items: center;
 
   @media ${tablet} {
-    margin-top: -4px;
+    margin-top: -5px;
+  }
+  @media ${mobile} {
+    margin-top: 8px;
   }
 `;
 

@@ -381,6 +381,7 @@ const StyledContent = styled.div`
 
   .badges {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 12px;
 

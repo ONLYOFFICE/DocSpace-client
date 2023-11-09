@@ -95,6 +95,7 @@ class SearchInput extends React.Component {
         theme={this.props.theme}
         className={this.props.className}
         style={this.props.style}
+        scale={this.props.scale}
       >
         <InputBlock
           theme={this.props.theme}

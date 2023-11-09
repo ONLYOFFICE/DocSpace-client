@@ -73,7 +73,7 @@ const AuditTrail = (props) => {
           securityLifetime={securityLifetime}
           lifetime={securityLifetime.auditTrailLifeTime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
+          content={isAuditAvailable && getContent()}
           downloadReport={t("DownloadReportBtnText")}
           downloadReportDescription={t("DownloadReportDescription")}
           getReport={getAuditTrailReport}

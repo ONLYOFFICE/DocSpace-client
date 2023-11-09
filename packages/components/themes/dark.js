@@ -59,6 +59,18 @@ const Dark = {
   fontSize: "13px",
   interfaceDirection: "ltr",
 
+  increaseValue: 2,
+
+  getCorrectFontSize: function (currentValue) {
+    if (!currentValue || this.interfaceDirection !== "rtl") return currentValue;
+
+    const cleanValue = currentValue.replace("px", "");
+
+    if (cleanValue === 0) return "0px";
+
+    return Number(cleanValue) + this.increaseValue + "px";
+  },
+
   text: {
     color: grayMaxLight,
     disableColor: "#5c5c5c",

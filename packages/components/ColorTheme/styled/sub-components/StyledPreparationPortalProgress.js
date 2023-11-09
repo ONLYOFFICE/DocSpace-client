@@ -24,7 +24,7 @@ const StyledPreparationPortalProgress = styled.div`
     }
     .preparation-portal_percent {
       position: absolute;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       font-weight: 600;
       color: ${(props) =>
         props.percent > 50

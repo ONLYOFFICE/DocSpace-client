@@ -32,7 +32,7 @@ const displaySettings = css`
     position: absolute;
     padding-top: 16px;
     padding-bottom: 16px;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     font-weight: 600;
     width: calc(100% - 32px);
     bottom: 56px;

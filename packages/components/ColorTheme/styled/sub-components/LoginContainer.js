@@ -109,7 +109,7 @@ const LoginContainer = styled.div`
     padding: 14px 12px;
     text-align: center;
     font-weight: 600;
-    font-size: 11px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
     line-height: 12px;
     color: #333;
     svg {

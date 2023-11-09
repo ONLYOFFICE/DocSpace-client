@@ -82,7 +82,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
     props.theme.interfaceDirection === "rtl"
       ? `padding-right: ${props.paddingLeftProp};`
       : `padding-left: ${props.paddingLeftProp};`}
-  font-size: ${(props) => props.fontSize + "px"};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
 
@@ -174,14 +174,15 @@ const Wrapper = styled.div`
   max-width: 1200px;
 
   .scroll-wrapper {
-    margin-right: ${(props) => (props.enableCopy ? props.isJSONField ? "36px" : "8px" : "0")};
+    margin-right: ${(props) =>
+      props.enableCopy ? (props.isJSONField ? "36px" : "8px") : "0"};
   }
 `;
 
 const Numeration = styled.pre`
   display: block;
   position: absolute;
-  font-size: ${(props) => props.fontSize + "px"};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

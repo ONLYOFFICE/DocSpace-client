@@ -157,7 +157,7 @@ export const showEmailActivationToast = (email) => {
   //console.log("showEmailActivationToast", { email });
   toastr.success(
     <Trans i18nKey="MessageEmailActivationInstuctionsSentOnEmail" ns="People">
-      The email activation instructions have been sent to the
+      The email activation instructions have been sent to the{" "}
       <strong>{{ email }}</strong> email address
     </Trans>
   );

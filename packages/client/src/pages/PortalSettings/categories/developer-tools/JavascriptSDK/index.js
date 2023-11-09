@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
 import Textarea from "@docspace/components/textarea";
@@ -14,6 +14,7 @@ import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
+import { isMobile } from "react-device-detect";
 
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import Loaders from "@docspace/common/components/Loaders";
@@ -31,6 +32,11 @@ const SDKContainer = styled(Box)`
   @media ${tablet} {
     width: 100%;
   }
+
+  ${isMobile &&
+  css`
+    width: 100%;
+  `}
 `;
 
 const Controls = styled(Box)`
@@ -44,6 +50,11 @@ const Controls = styled(Box)`
   @media ${tablet} {
     min-width: 0;
   }
+
+  ${isMobile &&
+  css`
+    min-width: 0;
+  `}
 
   .label {
     min-width: fit-content;
@@ -65,6 +76,11 @@ const CategoryHeader = styled.div`
   @media ${tablet} {
     margin-top: 24px;
   }
+
+  ${isMobile &&
+  css`
+    margin-top: 24px;
+  `}
 `;
 
 const CategorySubHeader = styled.div`
@@ -80,6 +96,13 @@ const CategorySubHeader = styled.div`
       margin-bottom: 0;
     }
   }
+
+  ${isMobile &&
+  css`
+    &:not(&.copy-window-code) {
+      margin-bottom: 0;
+    }
+  `}
 
   @media ${mobile} {
     &:first-of-type {
@@ -105,6 +128,11 @@ const ControlsGroup = styled(Box)`
   @media ${tablet} {
     gap: 4px;
   }
+
+  ${isMobile &&
+  css`
+    gap: 4px;
+  `}
 `;
 
 const LabelGroup = styled(Box)`
@@ -127,6 +155,11 @@ const Frame = styled(Box)`
   @media ${tablet} {
     margin-top: 4px;
   }
+
+  ${isMobile &&
+  css`
+    margin-top: 4px;
+  `}
 
   ${(props) =>
     props.targetId &&
@@ -151,6 +184,11 @@ const Container = styled(Box)`
   @media ${tablet} {
     flex-direction: column;
   }
+
+  ${isMobile &&
+  css`
+    flex-direction: column;
+  `}
 `;
 
 const RowContainer = styled(Box)`
@@ -182,6 +220,11 @@ const Preview = styled(Box)`
     margin-top: 0;
     min-width: 0;
   }
+  ${isMobile &&
+  css`
+    margin-top: 0;
+    min-width: 0;
+  `}
 `;
 
 const GetCodeButtonWrapper = styled.div`

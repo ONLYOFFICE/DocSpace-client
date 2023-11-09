@@ -139,12 +139,12 @@ const LinkRow = (props) => {
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      !isExpired && {
-        key: "embedding-settings-key",
-        label: t("Files:EmbeddingSettings"),
-        icon: CodeReactSvgUrl,
-        onClick: onEmbeddingClick,
-      },
+      // !isExpired && {
+      //   key: "embedding-settings-key",
+      //   label: t("Files:EmbeddingSettings"),
+      //   icon: CodeReactSvgUrl,
+      //   onClick: onEmbeddingClick,
+      // },
 
       !disabled && {
         key: "copy-link-settings-key",

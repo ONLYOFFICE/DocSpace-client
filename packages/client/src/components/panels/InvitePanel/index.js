@@ -62,7 +62,12 @@ const InvitePanel = ({
   currentDeviceType,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
-    !userLink || !guestLink || !adminLink || !collaboratorLink || roomId !== -1
+    () =>
+      !userLink ||
+      !guestLink ||
+      !adminLink ||
+      !collaboratorLink ||
+      roomId !== -1
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);

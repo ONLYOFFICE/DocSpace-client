@@ -30,7 +30,7 @@ const StyledTextInput = styled(Input).attrs((props) => ({
     css`
       background-color: ${(props) => props.theme.input.backgroundColor};
       -webkit-text-fill-color: ${(props) =>
-        props?.value.length > 0
+        props?.value?.length > 0
           ? props.theme.text.color
           : props.theme.textInput.placeholderColor} !important;
       caret-color: ${(props) => props.theme.text.color};

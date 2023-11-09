@@ -10,6 +10,7 @@ import {
   getClientList,
   getScope,
   getScopeList,
+  getConsentList,
 } from "@docspace/common/api/oauth";
 
 import {
@@ -26,6 +27,7 @@ import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -52,6 +54,9 @@ export interface OAuthStoreProps {
   ) => Promise<IClientProps | INoAuthClientProps | undefined>;
   fetchClients: () => Promise<void>;
   fetchNextClients: (startIndex: number) => Promise<void>;
+
+  consents: IClientProps[];
+  fetchConsents: () => Promise<void>;
 
   saveClient: (client: IClientReqDTO) => Promise<void>;
 
@@ -83,7 +88,8 @@ export interface OAuthStoreProps {
   getContextMenuItems: (
     t: any,
     item: IClientProps,
-    isInfo?: boolean
+    isInfo?: boolean,
+    isSettings?: boolean
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
@@ -115,6 +121,8 @@ class OAuthStore implements OAuthStoreProps {
   scopes: IScope[] = [];
 
   clientsIsLoading: boolean = true;
+
+  consents: IClientProps[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -149,6 +157,11 @@ class OAuthStore implements OAuthStoreProps {
 
     if (client) {
       this.bufferSelection = { ...client, scopes: [...client.scopes] };
+    } else {
+      const consent = this.consents.find((c) => c.clientId === clientId);
+
+      if (consent)
+        this.bufferSelection = { ...consent, scopes: [...consent.scopes] };
     }
   };
 
@@ -170,6 +183,7 @@ class OAuthStore implements OAuthStoreProps {
 
   editClient = (clientId: string) => {
     this.setInfoDialogVisible(false);
+    this.setPreviewDialogVisible(false);
     //@ts-ignore
     window?.DocSpace?.navigate(
       `/portal-settings/developer-tools/oauth/${clientId}`
@@ -203,6 +217,20 @@ class OAuthStore implements OAuthStoreProps {
         }
       });
       this.setClientsIsLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  fetchConsents = async () => {
+    try {
+      const consentList: IClientProps[] = await getConsentList();
+
+      console.log(consentList);
+
+      runInAction(() => {
+        this.consents = [...consentList];
+      });
     } catch (e) {
       console.log(e);
     }
@@ -338,10 +366,45 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
-  getContextMenuItems = (t: any, item: IClientProps, isInfo?: boolean) => {
+  getContextMenuItems = (
+    t: any,
+    item: IClientProps,
+    isInfo?: boolean,
+    isSettings?: boolean
+  ) => {
     const { clientId } = item;
 
     const isGroupContext = this.selection.length;
+
+    const onShowInfo = () => {
+      this.setBufferSelection(clientId);
+      this.setPreviewDialogVisible(false);
+      this.setInfoDialogVisible(true);
+    };
+
+    const openOption = {
+      key: "open",
+      icon: ExternalLinkReactSvgUrl,
+      label: "Open",
+      onClick: () => window.open(item.websiteUrl, "_blank"),
+      isDisabled: isInfo,
+    };
+
+    const infoOption = {
+      key: "info",
+      icon: SettingsIcon,
+      label: "Info",
+      onClick: onShowInfo,
+      isDisabled: isInfo,
+    };
+
+    if (!isSettings) {
+      const items: any = [openOption];
+
+      if (!isInfo) items.push(infoOption);
+
+      return items;
+    }
 
     const onDelete = () => {
       this.setInfoDialogVisible(false);
@@ -352,12 +415,6 @@ class OAuthStore implements OAuthStoreProps {
       } else {
         this.deleteClient(this.selection);
       }
-    };
-
-    const onShowInfo = () => {
-      this.setBufferSelection(clientId);
-      this.setPreviewDialogVisible(false);
-      this.setInfoDialogVisible(true);
     };
 
     const onShowPreview = () => {
@@ -407,14 +464,6 @@ class OAuthStore implements OAuthStoreProps {
       icon: CodeReactSvgUrl,
       label: "Auth button",
       onClick: onShowPreview,
-    };
-
-    const infoOption = {
-      key: "info",
-      icon: SettingsIcon,
-      label: "Info",
-      onClick: onShowInfo,
-      isDisabled: isInfo,
     };
 
     const enableOption = {

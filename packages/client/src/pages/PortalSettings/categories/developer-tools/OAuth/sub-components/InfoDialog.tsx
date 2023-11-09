@@ -121,12 +121,14 @@ interface InfoDialogProps {
   getContextMenuItems?: (
     t: any,
     item: IClientProps,
-    isInfo?: boolean
+    isInfo?: boolean,
+    isSettings?: boolean
   ) => {
     [key: string]: any | string | boolean | ((clientId: string) => void);
   }[];
 
   client?: IClientProps;
+  isProfile?: boolean;
 }
 
 const InfoDialog = ({
@@ -137,6 +139,8 @@ const InfoDialog = ({
 
   setInfoDialogVisible,
   getContextMenuItems,
+
+  isProfile,
 }: InfoDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -157,7 +161,9 @@ const InfoDialog = ({
 
   const getContextOptions = () => {
     const contextOptions =
-      client && getContextMenuItems && getContextMenuItems(t, client, true);
+      client &&
+      getContextMenuItems &&
+      getContextMenuItems(t, client, true, !isProfile);
 
     return contextOptions;
   };
@@ -195,66 +201,74 @@ const InfoDialog = ({
 
             <ContextMenuButton getData={getContextOptions} />
           </div>
-          {/* @ts-ignore */}
-          <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"16px"}
-            fontWeight={"600"}
-            noSelect
-            truncate
-          >
-            Creator
-          </Text>
-          <div className="creator-block">
-            <Avatar source={client?.creatorAvatar} size={"min"} />
-            {/* @ts-ignore */}
-            <Text
-              fontSize={"14px"}
-              lineHeight={"16px"}
-              fontWeight={"600"}
-              noSelect
-              truncate
-            >
-              {client?.creatorDisplayName}
-            </Text>
-          </div>
-          {/* @ts-ignore */}
-          <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"16px"}
-            fontWeight={"600"}
-            noSelect
-            truncate
-          >
-            Description
-          </Text>
-          {/* @ts-ignore */}
-          <Text
-            id={"client-info-description-text"}
-            className={"description"}
-            fontSize={"13px"}
-            lineHeight={"20px"}
-            fontWeight={"400"}
-            noSelect
-          >
-            {client?.description}
-          </Text>
-          {withShowText && (
+          {!isProfile && (
             <>
               {/* @ts-ignore */}
-              <Link
-                className={"desc-link"}
-                fontSize={"13px"}
-                lineHeight={"15px"}
+              <Text
+                className={"block-header"}
+                fontSize={"14px"}
+                lineHeight={"16px"}
                 fontWeight={"600"}
-                isHovered
-                onClick={() => setShowDescription((val) => !val)}
-                type={"action"}
+                noSelect
+                truncate
               >
-                {showDescription ? "Hide" : "Show more"}
-              </Link>
+                Creator
+              </Text>
+              <div className="creator-block">
+                <Avatar source={client?.creatorAvatar} size={"min"} />
+                {/* @ts-ignore */}
+                <Text
+                  fontSize={"14px"}
+                  lineHeight={"16px"}
+                  fontWeight={"600"}
+                  noSelect
+                  truncate
+                >
+                  {client?.creatorDisplayName}
+                </Text>
+              </div>
+            </>
+          )}
+          {!isProfile && (
+            <>
+              {/* @ts-ignore */}
+              <Text
+                className={"block-header"}
+                fontSize={"14px"}
+                lineHeight={"16px"}
+                fontWeight={"600"}
+                noSelect
+                truncate
+              >
+                Description
+              </Text>
+              {/* @ts-ignore */}
+              <Text
+                id={"client-info-description-text"}
+                className={"description"}
+                fontSize={"13px"}
+                lineHeight={"20px"}
+                fontWeight={"400"}
+                noSelect
+              >
+                {client?.description}
+              </Text>
+              {withShowText && (
+                <>
+                  {/* @ts-ignore */}
+                  <Link
+                    className={"desc-link"}
+                    fontSize={"13px"}
+                    lineHeight={"15px"}
+                    fontWeight={"600"}
+                    isHovered
+                    onClick={() => setShowDescription((val) => !val)}
+                    type={"action"}
+                  >
+                    {showDescription ? "Hide" : "Show more"}
+                  </Link>
+                </>
+              )}
             </>
           )}
           {/* @ts-ignore */}
@@ -296,6 +310,31 @@ const InfoDialog = ({
             scopes={scopeList || []}
             t={t}
           />
+          {isProfile && (
+            <>
+              {/* @ts-ignore */}
+              <Text
+                className={"block-header"}
+                fontSize={"14px"}
+                lineHeight={"16px"}
+                fontWeight={"600"}
+                noSelect
+                truncate
+              >
+                Access granted
+              </Text>
+              {/* @ts-ignore */}
+              <Text
+                fontSize={"13px"}
+                lineHeight={"20px"}
+                fontWeight={"600"}
+                noSelect
+                truncate
+              >
+                {modifiedDate}
+              </Text>
+            </>
+          )}
           {/* @ts-ignore */}
           <Text
             className={"block-header"}
@@ -342,27 +381,31 @@ const InfoDialog = ({
               Terms of Service
             </Link>
           </Text>
-          {/* @ts-ignore */}
-          <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"16px"}
-            fontWeight={"600"}
-            noSelect
-            truncate
-          >
-            Last modified
-          </Text>
-          {/* @ts-ignore */}
-          <Text
-            fontSize={"13px"}
-            lineHeight={"20px"}
-            fontWeight={"600"}
-            noSelect
-            truncate
-          >
-            {modifiedDate}
-          </Text>
+          {!isProfile && (
+            <>
+              {/* @ts-ignore */}
+              <Text
+                className={"block-header"}
+                fontSize={"14px"}
+                lineHeight={"16px"}
+                fontWeight={"600"}
+                noSelect
+                truncate
+              >
+                Last modified
+              </Text>
+              {/* @ts-ignore */}
+              <Text
+                fontSize={"13px"}
+                lineHeight={"20px"}
+                fontWeight={"600"}
+                noSelect
+                truncate
+              >
+                {modifiedDate}
+              </Text>
+            </>
+          )}
         </StyledContainer>
       </ModalDialog.Body>
     </ModalDialog>

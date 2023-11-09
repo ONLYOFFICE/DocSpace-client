@@ -16,6 +16,7 @@ import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/components/utils/device";
 import { DeviceType } from "@docspace/common/constants";
+import AuthorizedApps from "./sub-components/authorized-apps";
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,6 +48,11 @@ const SectionBodyContent = (props) => {
       id: "interface-theme",
       name: t("InterfaceTheme"),
       content: <InterfaceTheme />,
+    },
+    {
+      id: "authorized-apps",
+      name: "Authorized apps",
+      content: <AuthorizedApps />,
     },
   ];
 

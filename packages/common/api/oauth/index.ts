@@ -160,3 +160,20 @@ export const onOAuthSubmit = (
     withRedirect: true,
   });
 };
+
+export const getConsentList = async (): Promise<IClientProps[]> => {
+  const clients: any = await request({
+    method: "get",
+    url: "/clients/consents",
+  });
+
+  const consents: IClientProps[] = [];
+
+  clients.forEach((item: any) => {
+    const client = transformToClientProps(item.client);
+
+    consents.push({ ...client, modifiedOn: item.modified_at });
+  });
+
+  return consents;
+};

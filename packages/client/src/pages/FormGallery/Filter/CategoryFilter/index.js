@@ -40,9 +40,11 @@ const CategoryFilter = ({
   fetchCategoriesOfCategoryType,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
 
       const categoryPromises = newMenuItems.map(
@@ -68,11 +70,14 @@ const CategoryFilter = ({
             categories: [],
           }));
         })
-        .finally(() => setMenuItems(newMenuItems));
+        .finally(() => {
+          setMenuItems(newMenuItems);
+          setIsLoading(false);
+        });
     })();
   }, []);
 
-  if (menuItems.length === 0) return null;
+  if (!isLoading && menuItems.length === 0) return null;
 
   return (
     <StyledCategoryFilterWrapper
@@ -85,7 +90,8 @@ const CategoryFilter = ({
   );
 };
 export default inject(({ oformsStore }) => ({
-  noLocales: oformsStore.oformLocales.length === 0,
+  noLocales:
+    oformsStore.oformLocales !== null && oformsStore.oformLocales?.length === 0,
   fetchCategoryTypes: oformsStore.fetchCategoryTypes,
   fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
 }))(observer(CategoryFilter));

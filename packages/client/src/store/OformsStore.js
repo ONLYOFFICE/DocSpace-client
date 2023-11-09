@@ -32,7 +32,7 @@ class OformsStore {
   currentCategory = null;
   categoryTitles = [];
 
-  oformLocales = [];
+  oformLocales = null;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -45,7 +45,7 @@ class OformsStore {
 
   get defaultOformLocale() {
     const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    return this.oformLocales.includes(userLocale) ? userLocale : "en";
+    return this.oformLocales?.includes(userLocale) ? userLocale : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);

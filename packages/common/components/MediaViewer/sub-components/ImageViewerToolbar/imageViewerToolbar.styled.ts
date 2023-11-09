@@ -7,7 +7,7 @@ export const ImageViewerToolbarWrapper = styled.div`
 
   position: fixed;
   bottom: 24px;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           right: 50%;
@@ -44,14 +44,14 @@ export const ToolbarItem = styled.li<{
   align-items: center;
 
   height: 48px;
-  width: ${props => (props.$isSeparator ? "33px" : "48px")};
+  width: ${(props) => (props.$isSeparator ? "33px" : "48px")};
 
   &:hover {
-    cursor: ${props => (props.$isSeparator ? "default" : "pointer")};
+    cursor: ${(props) => (props.$isSeparator ? "default" : "pointer")};
   }
 
   .zoomPercent {
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
     font-weight: 700;
     user-select: none;
   }
@@ -61,7 +61,7 @@ export const ToolbarItem = styled.li<{
     height: 16px;
     path,
     rect {
-      ${props => (props.$percent !== 25 ? "fill: #fff;" : "fill: #BEBEBE;")}
+      ${(props) => (props.$percent !== 25 ? "fill: #fff;" : "fill: #BEBEBE;")}
     }
   }
 

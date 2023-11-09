@@ -40,7 +40,7 @@ export const MainContainer = styled.div`
     max-width: 700px;
 
     .link-learn-more {
-      display: block;
+      display: inline-block;
       margin: 4px 0 16px 0;
       font-weight: 600;
     }
@@ -109,7 +109,7 @@ export const StyledBruteForceProtection = styled.div`
   }
 
   .error-label {
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
   }
 
   .save-cancel-buttons {

@@ -7,10 +7,10 @@ const PlayerDurationWrapper = styled.div`
   width: 102px;
   color: #fff;
   user-select: none;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   font-weight: 700;
 
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 10px;
@@ -20,7 +20,7 @@ const PlayerDurationWrapper = styled.div`
         `}
 
   @media ${mobile} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 0;

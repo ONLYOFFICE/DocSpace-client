@@ -12,7 +12,7 @@ export const CategoryFilterMobileWrapper = styled.div`
 
   .combo-button-label {
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
   }
 
@@ -60,7 +60,7 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
   height: 36px;
   box-sizing: border-box;
 
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   font-weight: 600;
   line-height: 20px;
 

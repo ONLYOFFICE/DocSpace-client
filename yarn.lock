@@ -3278,6 +3278,7 @@ __metadata:
     rc-tree: ^5.7.3
     react: ^18.2.0
     react-autosize-textarea: ^7.1.0
+    react-content-loader: ^5.1.4
     react-countdown: 2.3.5
     react-custom-scrollbars: ^4.2.1
     react-device-detect: ^1.17.0

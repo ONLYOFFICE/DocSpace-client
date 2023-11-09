@@ -465,6 +465,8 @@ const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
     currentColorScheme = settingsStore.currentColorScheme || false;
   }
 
+  window.theme = theme;
+
   return {
     theme: { ...theme, interfaceDirection: i18n.dir() },
     currentColorScheme,

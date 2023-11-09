@@ -29,10 +29,11 @@ const InfoPanelHeaderContent = (props) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
-    isRootFolder,
     infoPanelItemsList,
     enablePlugins,
     resetView,
+    myRoomsId,
+    archiveRoomsId,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -42,7 +43,8 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem = isRootFolder && selection?.isSelectedFolder;
+  const isNoItem =
+    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
@@ -175,7 +177,8 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {isRooms ? (
+          {selection?.rootFolderId === myRoomsId ||
+          selection?.rootFolderId === archiveRoomsId ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}
@@ -194,7 +197,7 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, selectedFolderStore, pluginStore }) => {
+export default inject(({ auth, treeFoldersStore, pluginStore }) => {
   const { infoPanelItemsList } = pluginStore;
 
   const {
@@ -212,12 +215,9 @@ export default inject(({ auth, selectedFolderStore, pluginStore }) => {
     //selectionParentRoom,
   } = auth.infoPanelStore;
 
-  const { enablePlugins } = auth.settingsStore;
+  const { myRoomsId, archiveRoomsId } = treeFoldersStore;
 
-  const {
-    isRootFolder,
-    // rootFolderType
-  } = selectedFolderStore;
+  const { enablePlugins } = auth.settingsStore;
 
   return {
     selection,
@@ -230,12 +230,13 @@ export default inject(({ auth, selectedFolderStore, pluginStore }) => {
     getIsGallery,
     getIsAccounts,
     getIsTrash,
-
-    isRootFolder,
-
     infoPanelItemsList,
-    enablePlugins,
     resetView,
+
+    myRoomsId,
+    archiveRoomsId,
+
+    enablePlugins,
 
     //  rootFolderType,
 

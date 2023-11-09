@@ -15,7 +15,7 @@ const TableWrapper = styled(TableContainer)`
   margin-top: 16px;
 
   .header-container-text {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
   .table-container_header {
@@ -26,7 +26,22 @@ const TableWrapper = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#3D3D3D")};
+      background-color: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 `;
@@ -80,7 +95,8 @@ const WebhooksTableView = (props) => {
         filesLength={webhooks.length}
         fetchMoreFiles={loadWebhooks}
         hasMoreFiles={false}
-        itemCount={webhooks.length}>
+        itemCount={webhooks.length}
+      >
         {webhooks.map((webhook, index) => (
           <WebhooksTableRow
             key={webhook.id}

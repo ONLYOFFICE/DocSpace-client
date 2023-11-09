@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const StyledNoItemContainer = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin: 80px 0 0 auto;
@@ -17,14 +17,14 @@ const StyledNoItemContainer = styled.div`
 
   .no-item-text {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
     text-align: center;
   }
 
   .no-history-text {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     text-align: center;
   }

@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     ${(props: IGlobalStyleProps) => props?.fonts}
     font-family: 'Open Sans', sans-serif, Arial;
-    font-size: 13px;
+    font-size: ${(props) => props.theme?.getCorrectFontSize("13px")};
     overscroll-behavior: none;
   }
 

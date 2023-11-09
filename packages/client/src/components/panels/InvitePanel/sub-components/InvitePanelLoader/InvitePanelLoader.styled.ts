@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "@docspace/components/utils/device";
 
 export const InvitePanelLoaderWrapper = styled.div``;
 
@@ -11,6 +12,17 @@ export const ExternalLinksLoaderWrapper = styled.div`
   padding: 16px;
 
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+  .external-links-loader__description {
+    width: 80%;
+
+    grid-column: 1/-1;
+  }
+
+  @media ${mobile} {
+    .external-links-loader__description {
+      width: 90%;
+    }
+  }
 `;
 
 export const InviteInputLoaderWrapper = styled.div`
@@ -32,4 +44,6 @@ export const InviteInputLoaderFooterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+
+  margin-top: 8px;
 `;

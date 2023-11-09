@@ -17,7 +17,10 @@ function InvitePanelLoader() {
       <ExternalLinksLoaderWrapper>
         <RectangleSkeleton width="50%" height="22px" />
         <RectangleSkeleton width="28px" height="16px" />
-        <RectangleSkeleton width="90%" height="16px" />
+        <RectangleSkeleton
+          className="external-links-loader__description"
+          height="16px"
+        />
       </ExternalLinksLoaderWrapper>
       <InviteInputLoaderWrapper>
         <InviteInputLoaderHeaderWrapper>
@@ -25,7 +28,6 @@ function InvitePanelLoader() {
           <RectangleSkeleton width="100px" height="19px" />
         </InviteInputLoaderHeaderWrapper>
         <RectangleSkeleton width="100%" height="32px" />
-        <RectangleSkeleton width="70%" height="20px" />
         <InviteInputLoaderFooterWrapper>
           <RectangleSkeleton height="32px" />
           <RectangleSkeleton width="90px" height="32px" />

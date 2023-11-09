@@ -14,6 +14,8 @@ const observedKeys = [
   "thumbnailUrl",
   "version",
   "comment",
+  "roomType",
+  "rootFolderId",
 ];
 
 const infoMembers = "info_members";
@@ -81,6 +83,7 @@ class InfoPanelStore {
     this.roomsView = infoMembers;
     this.fileView = infoHistory;
   };
+
   setView = (view) => {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoHistory : view;
@@ -109,7 +112,6 @@ class InfoPanelStore {
       selection: peopleStoreSelection,
       bufferSelection: peopleStoreBufferSelection,
     } = this.peopleStore.selectionStore;
-
     return this.getIsAccounts()
       ? peopleStoreSelection.length
         ? [...peopleStoreSelection]
@@ -125,6 +127,7 @@ class InfoPanelStore {
 
   getSelectedFolder = () => {
     const selectedFolderStore = { ...this.selectedFolderStore };
+
     return {
       ...selectedFolderStore,
       isFolder: true,
@@ -191,7 +194,7 @@ class InfoPanelStore {
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
-      this.selectedFolderStore.pathParts[1].id;
+      this.selectedFolderStore.pathParts[1]?.id;
     const prevRoomId = this.selectionParentRoom?.id;
 
     if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;

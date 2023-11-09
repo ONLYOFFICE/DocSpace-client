@@ -3,7 +3,7 @@ import commonTextStyles from "./common-text-styles";
 import Base from "../themes/base";
 import NoUserSelect from "SRC_DIR/utils/commonStyles";
 const styleCss = css`
-  font-size: ${(props) => props.fontSizeProp};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSizeProp)};
   outline: 0 !important;
   margin: 0;
   font-weight: ${(props) =>

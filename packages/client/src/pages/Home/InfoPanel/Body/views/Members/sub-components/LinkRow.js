@@ -139,16 +139,16 @@ const LinkRow = (props) => {
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      !isExpired && {
-        key: "embedding-settings-key",
-        label: t("Files:EmbeddingSettings"),
-        icon: CodeReactSvgUrl,
-        onClick: onEmbeddingClick,
-      },
+      // !isExpired && {
+      //   key: "embedding-settings-key",
+      //   label: t("Files:EmbeddingSettings"),
+      //   icon: CodeReactSvgUrl,
+      //   onClick: onEmbeddingClick,
+      // },
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: t("Files:CopyGeneralLink"),
+        label: primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
@@ -173,8 +173,8 @@ const LinkRow = (props) => {
       },
       {
         key: "delete-link-key",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+        label: t("Files:RevokeLink"),
+        icon: OutlineReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];

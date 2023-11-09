@@ -17,7 +17,7 @@ const StyledBreakpointWarning = styled.div`
 
   .text-breakpoint {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     padding-bottom: 8px;
     max-width: 348px;
@@ -25,7 +25,7 @@ const StyledBreakpointWarning = styled.div`
 
   .text-prompt {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
   }
 

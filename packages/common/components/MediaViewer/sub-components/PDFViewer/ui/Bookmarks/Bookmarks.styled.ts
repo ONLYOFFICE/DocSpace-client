@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const List = styled.ul`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding-right: 16px;
@@ -23,7 +23,7 @@ export const Item = styled.li`
   color: #ffffff;
   padding: 1px 16px 0 16px;
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
   cursor: pointer;

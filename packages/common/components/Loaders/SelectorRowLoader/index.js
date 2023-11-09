@@ -46,6 +46,12 @@ const StyledItem = styled.div`
   }
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  margin: 12px 16px;
+  border-bottom: ${(props) => props.theme.selector.border};
+`;
+
 const SelectorRowLoader = ({
   id,
   className,
@@ -53,6 +59,8 @@ const SelectorRowLoader = ({
   isMultiSelect,
   isContainer,
   isUser,
+  withAllSelect,
+  count = 5,
   ...rest
 }) => {
   const getRowItem = (key) => {
@@ -81,7 +89,7 @@ const SelectorRowLoader = ({
 
   const getRowItems = () => {
     const rows = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < count; i++) {
       rows.push(getRowItem(i));
     }
 
@@ -90,6 +98,12 @@ const SelectorRowLoader = ({
 
   return isContainer ? (
     <StyledContainer id={id} className={className} style={style} {...rest}>
+      {withAllSelect && (
+        <>
+          {getRowItem(-1)}
+          <Divider />
+        </>
+      )}
       {getRowItems()}
     </StyledContainer>
   ) : (

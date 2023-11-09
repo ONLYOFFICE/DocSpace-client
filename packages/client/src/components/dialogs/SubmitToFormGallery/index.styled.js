@@ -39,7 +39,7 @@ export const FormItem = styled.div`
   .item-title {
     margin: 8px 0;
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
     display: flex;
     min-width: 0;

@@ -76,7 +76,8 @@ const StyledMainButton = styled.div`
 
   .main-button_text {
     display: inline;
-    font-size: ${(props) => props.theme.mainButton.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.mainButton.fontSize)};
     font-weight: ${(props) => props.theme.mainButton.fontWeight};
     color: ${(props) =>
       !props.isDisabled

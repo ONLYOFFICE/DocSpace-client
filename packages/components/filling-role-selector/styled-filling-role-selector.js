@@ -34,7 +34,7 @@ const StyledUserRow = styled.div`
 
 const StyledNumber = styled.div`
   font-weight: 600;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
   line-height: 16px;
   color: #a3a9ae;
 `;
@@ -65,7 +65,7 @@ const StyledEveryoneRoleIcon = styled(EveryoneRoleIcon)`
 
 const StyledRole = styled.div`
   font-weight: 600;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
   line-height: 16px;
 `;
 
@@ -97,7 +97,7 @@ const StyledEveryoneRoleContainer = styled.div`
 
   .role-description {
     font-weight: 400;
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
     line-height: 14px;
     color: #657077;
   }
@@ -108,7 +108,7 @@ const StyledTooltip = styled.div`
   color: #333;
   border-radius: 6px;
   font-weight: 400;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
   padding: 8px 12px;
   height: 48px;

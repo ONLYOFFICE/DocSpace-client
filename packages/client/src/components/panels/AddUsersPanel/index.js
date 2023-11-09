@@ -110,25 +110,22 @@ const AddUsersPanel = ({
     timer = null;
   };
 
-  useEffect(() => {
-    loadNextPage(0);
-  }, []);
-
-  useEffect(() => {
-    if (isLoading) {
+  const setIsLoadingWithTimeout = (arg) => {
+    if (arg) {
       cleanTimer();
       timer = setTimeout(() => {
         setIsLoading(true);
-      }, 100);
+      }, 300);
     } else {
       cleanTimer();
       setIsLoading(false);
     }
+  };
 
-    return () => {
-      cleanTimer();
-    };
-  }, [isLoading]);
+  useEffect(() => {
+    loadNextPage(0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const onSearch = (value) => {
     setSearchValue(value);
@@ -178,7 +175,7 @@ const AddUsersPanel = ({
     setIsNextPageLoading(true);
 
     if (startIndex === 0) {
-      setIsLoading(true);
+      setIsLoadingWithTimeout(true);
     }
 
     const currentFilter = getFilterWithOutDisabledUser();
@@ -207,7 +204,7 @@ const AddUsersPanel = ({
         setTotal(newTotal);
 
         setIsNextPageLoading(false);
-        setIsLoading(false);
+        setIsLoadingWithTimeout(false);
       })
       .catch((error) => console.log(error));
   };
@@ -264,11 +261,14 @@ const AddUsersPanel = ({
           totalItems={total}
           isLoading={isLoading}
           searchLoader={<Loaders.SelectorSearchLoader />}
+          isSearchLoading={isLoading}
           rowLoader={
             <Loaders.SelectorRowLoader
-              isMultiSelect={false}
+              isUser
+              count={15}
+              withAllSelect
               isContainer={isLoading}
-              isUser={true}
+              isMultiSelect={isMultiSelect}
             />
           }
         />

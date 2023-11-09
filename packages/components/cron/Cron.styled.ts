@@ -8,7 +8,7 @@ export const CronWrapper = styled.div`
 `;
 
 export const Suffix = styled.span`
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
   font-weight: 400;
 `;

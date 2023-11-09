@@ -63,10 +63,7 @@ const InvitePanel = ({
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     () =>
-      !userLink ||
-      !guestLink ||
-      !adminLink ||
-      !collaboratorLink ||
+      ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
       roomId !== -1
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -137,7 +134,7 @@ const InvitePanel = ({
 
   useEffect(() => {
     if (roomId === -1) {
-      if (!userLink || !guestLink || !adminLink || !collaboratorLink) {
+      if ((!userLink || !guestLink || !collaboratorLink) && !adminLink) {
         setInvitePanelIsLoading(true);
         getPortalInviteLinks().finally(() => {
           disableInvitePanelLoader();

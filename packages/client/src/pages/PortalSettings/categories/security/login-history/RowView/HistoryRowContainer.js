@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
+
+import { useViewEffect } from "@docspace/common/hooks";
+
 import RowContainer from "@docspace/components/row-container";
 
 import { HistoryUserRow } from "./HistoryUserRow";
-import { DeviceType } from "@docspace/common/constants";
 
 const HistoryRowContainer = ({
   viewAs,
@@ -13,15 +15,11 @@ const HistoryRowContainer = ({
   sectionWidth,
   currentDeviceType,
 }) => {
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || currentDeviceType !== DeviceType.desktop) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return (
     <RowContainer className="history-row-container" useReactWindow={false}>

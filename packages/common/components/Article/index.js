@@ -11,6 +11,7 @@ import ArticleProfile from "./sub-components/article-profile";
 import ArticleAlerts from "./sub-components/article-alerts";
 import ArticleLiveChat from "./sub-components/article-live-chat";
 import ArticleApps from "./sub-components/article-apps";
+import ArticleDevToolsBar from "./sub-components/article-dev-tools-bar";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import Portal from "@docspace/components/portal";
@@ -43,6 +44,7 @@ const Article = ({
 
   currentDeviceType,
   showArticleLoader,
+  isAdmin,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -167,6 +169,9 @@ const Article = ({
     };
   }, [onResize]);
 
+  const withDevTools =
+    !window.location.pathname.includes("portal-settings") && isAdmin;
+
   const articleComponent = (
     <>
       <StyledArticle
@@ -199,7 +204,20 @@ const Article = ({
           {!showArticleLoader && (
             <>
               <ArticleAlerts />
-              <ArticleApps showText={showText} theme={theme} />
+              {withDevTools && (
+                <ArticleDevToolsBar
+                  articleOpen={articleOpen}
+                  currentDeviceType={currentDeviceType}
+                  toggleArticleOpen={toggleArticleOpen}
+                  showText={showText}
+                  theme={theme}
+                />
+              )}
+              <ArticleApps
+                withDevTools={withDevTools}
+                showText={showText}
+                theme={theme}
+              />
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
@@ -296,9 +314,11 @@ Article.Body.displayName = "Body";
 export default inject(({ auth }) => {
   const { settingsStore, userStore, isLiveChatAvailable, bannerStore } = auth;
 
-  const { withSendAgain } = userStore;
+  const { withSendAgain, user } = userStore;
 
   const { isBannerVisible } = bannerStore;
+
+  const isAdmin = user?.isAdmin;
 
   const {
     showText,
@@ -332,5 +352,7 @@ export default inject(({ auth }) => {
 
     theme,
     currentDeviceType,
+
+    isAdmin,
   };
 })(observer(Article));

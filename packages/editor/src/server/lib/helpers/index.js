@@ -153,7 +153,7 @@ export const initDocEditor = async (req) => {
 
     // needed to reset rtl language in Editor
     config.editorConfig.lang = getLtrLanguageForEditor(
-      user.cultureName || "en",
+      user?.cultureName || "en",
       settings.culture,
       true
     );

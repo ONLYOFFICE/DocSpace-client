@@ -121,6 +121,7 @@ const DropBox = React.forwardRef(
       burgerLogo,
       titleIcon,
       currentDeviceType,
+      navigationTitleContainerNode,
     },
     ref
   ) => {
@@ -156,26 +157,6 @@ const DropBox = React.forwardRef(
           : currentHeight
       );
     }, [sectionHeight, currentDeviceType]);
-
-    const navigationTitleNode = (
-      <div className="title-block">
-        {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
-        <Text title={title} isOpen={true} onClick={toggleDropBox} />
-      </div>
-    );
-
-    const navigationTitleContainerNode = showRootFolderNavigation ? (
-      <div className="title-container">
-        <Text
-          title={navigationItems[navigationItems.length - 2].title}
-          isOpen={true}
-          isRootFolderTitle
-        />
-        {navigationTitleNode}
-      </div>
-    ) : (
-      navigationTitleNode
-    );
 
     const isTabletView = currentDeviceType === DeviceType.tablet;
 

@@ -11,6 +11,7 @@ export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
 export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
+export const LINKS_LIMIT_COUNT = 5;
 
 /**
  * Enum for employee activation status.
@@ -80,6 +81,8 @@ export const FilesSelectorFilterTypes = Object.freeze({
   IMG: "IMG",
   GZ: "GZ",
   DOCXF: "DOCXF",
+  XLSX: "XLSX",
+  ALL: "ALL",
 });
 /**
  * Enum for filter subject.
@@ -196,6 +199,24 @@ export const FileAction = Object.freeze({
   Create: 0,
   Rename: 1,
 });
+
+/**
+ * @readonly
+ */
+
+export const PageType = Object.freeze({
+  account: "account",
+  customization: "customization",
+  security: "security",
+  backup: "backup",
+  restore: "restore",
+  integration: "integration",
+  developerTools: "developerTools",
+  portalDeletion: "portalDeletion",
+  payments: "payments",
+  bonus: "bonus",
+});
+
 /**
  * Enum for root folders type.
  * @readonly

@@ -20,7 +20,6 @@ import toastr from "@docspace/components/toast/toastr";
 
 const MainWrapper = styled.div`
   width: 100%;
-  margin-top: 5px;
 
   .toggleButton {
     display: flex;

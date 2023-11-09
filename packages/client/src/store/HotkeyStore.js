@@ -491,7 +491,11 @@ class HotkeyStore {
 
   openItem = () => {
     const { selection } = this.filesStore;
+
+    const someDialogIsOpen = checkDialogsOpen();
+
     selection.length === 1 &&
+      !someDialogIsOpen &&
       this.filesActionsStore.openFileAction(selection[0]);
   };
 

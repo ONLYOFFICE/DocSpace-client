@@ -617,6 +617,7 @@ class SsoFormStore {
       }
 
       const newCertificates = await this.validateCertificate(data);
+      this.idpCertificates = [];
 
       newCertificates.data.map((cert) => {
         if (newCertificates.data.length > 1) {

@@ -1,11 +1,11 @@
 import { Button } from "@docspace/components";
 import styled, { css } from "styled-components";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexToRgba from "hex-to-rgba";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 export const StyledSubmitToGalleryTile = styled.div`
   position: relative;

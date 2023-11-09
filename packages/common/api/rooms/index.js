@@ -381,6 +381,13 @@ export function getExternalLinks(roomId, type) {
   });
 }
 
+export function getPrimaryLink(roomId) {
+  return request({
+    method: "get",
+    url: `files/rooms/${roomId}/link`,
+  });
+}
+
 export function validatePublicRoomKey(key) {
   return request({
     method: "get",

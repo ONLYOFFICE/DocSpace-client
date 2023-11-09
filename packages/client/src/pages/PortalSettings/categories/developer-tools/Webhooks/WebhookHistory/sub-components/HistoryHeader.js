@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
@@ -34,12 +35,7 @@ const HeaderContainer = styled.div`
   min-height: 53px;
   flex-wrap: wrap;
 
-  @media ${tablet} {
-    margin-bottom: 11px;
-  }
-
   @media ${mobile} {
-    margin-top: 7px;
     margin-left: -14px;
     padding-left: 14px;
     margin-right: -14px;
@@ -47,7 +43,7 @@ const HeaderContainer = styled.div`
   }
 
   .arrow-button {
-    margin-inline-end: 18.5px;
+    margin-inline-end: 17px;
 
     @media ${tablet} {
       padding-block: 8px;
@@ -165,7 +161,7 @@ const HistoryHeader = (props) => {
         <b>{t("Common:Done")}</b>,
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastr.error(error);
     } finally {
       setRetryPendingFalse();
@@ -257,7 +253,7 @@ const HistoryHeader = (props) => {
         <NavigationHeader />
       )}
 
-      {isPendingVisible && <FloatingButton icon="refresh" />}
+      {isPendingVisible && createPortal(<FloatingButton icon="refresh" />, document.body)}
     </HeaderContainer>
   );
 };

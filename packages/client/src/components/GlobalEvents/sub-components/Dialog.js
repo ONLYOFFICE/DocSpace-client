@@ -8,6 +8,7 @@ import Button from "@docspace/components/button";
 import ComboBox from "@docspace/components/combobox";
 import Checkbox from "@docspace/components/checkbox";
 import Box from "@docspace/components/box";
+import FieldContainer from "@docspace/components/field-container";
 
 const Dialog = ({
   t,
@@ -28,6 +29,8 @@ const Dialog = ({
   withForm,
 }) => {
   const [value, setValue] = useState("");
+
+  const [isError, setIsError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
@@ -66,10 +69,15 @@ const Dialog = ({
     let newValue = e.target.value;
 
     if (newValue.match(folderFormValidation)) {
-      toastr.warning(t("Files:ContainsSpecCharacter"));
+      setIsError(true);
+      // toastr.warning(t("Files:ContainsSpecCharacter"));
+    } else {
+      setIsError(false);
     }
 
-    newValue = newValue.replace(folderFormValidation, "_");
+    // newValue = newValue.replace(folderFormValidation, "_");
+
+    // console.log(folderFormValidation);
 
     setValue(newValue);
     setIsChanged(true);
@@ -119,19 +127,27 @@ const Dialog = ({
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <TextInput
-          id="create-text-input"
-          name="create"
-          type="text"
-          scale={true}
-          value={value}
-          isAutoFocussed={true}
-          tabIndex={1}
-          onChange={onChange}
-          onFocus={onFocus}
-          isDisabled={isDisabled}
-          maxLength={165}
-        />
+        <FieldContainer
+          hasError={isError}
+          labelVisible={false}
+          errorMessageWidth={"100%"}
+          errorMessage={t("Files:ContainsSpecCharacter")}
+          removeMargin
+        >
+          <TextInput
+            id="create-text-input"
+            name="create"
+            type="search"
+            scale={true}
+            value={value}
+            isAutoFocussed={true}
+            tabIndex={1}
+            onChange={onChange}
+            onFocus={onFocus}
+            isDisabled={isDisabled}
+            maxLength={165}
+          />
+        </FieldContainer>
         {isCreateDialog && extension && (
           <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
             <Checkbox
@@ -162,7 +178,7 @@ const Dialog = ({
           scale
           primary
           isLoading={isDisabled}
-          isDisabled={isDisabled}
+          isDisabled={isDisabled || isError}
           onClick={onSaveAction}
         />
         <Button

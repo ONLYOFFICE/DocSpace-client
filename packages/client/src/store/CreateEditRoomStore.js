@@ -4,6 +4,7 @@ import { isDesktop } from "@docspace/components/utils/device";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { RoomsType } from "@docspace/common/constants";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -195,7 +196,8 @@ class CreateEditRoomStore {
     const state = {
       isRoot: false,
       title: room.title,
-
+      isRoom: true,
+      isPublicRoomType: room.roomType === RoomsType.PublicRoom,
       rootFolderType: room.rootFolderType,
     };
 

@@ -40,8 +40,6 @@ import ClientLoadingStore from "./ClientLoadingStore";
 
 import PluginStore from "./PluginStore";
 
-const oformsStore = new OformsStore(authStore);
-
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
 const pluginStore = new PluginStore(authStore, selectedFolderStore);
@@ -90,6 +88,9 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   settingsStore,
   publicRoomStore
 );
+
+const oformsStore = new OformsStore(authStore);
+
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore);
@@ -147,6 +148,7 @@ const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
   selectedFolderStore,
   publicRoomStore,
+  oformsStore,
   pluginStore
 );
 
@@ -192,7 +194,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   clientLoadingStore
 );
 
-const webhooksStore = new WebhooksStore();
+const webhooksStore = new WebhooksStore(authStore);
 
 const store = {
   auth: authStore,

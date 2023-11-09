@@ -6,25 +6,17 @@ const StyledComponent = styled.div`
   max-width: 700px;
 
   .smtp-settings_description {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     max-width: 700px;
-    margin-top: 4px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
   }
 
   .smtp-settings_main-title {
-    display: flex;
-    div {
-      margin: auto 0;
-    }
-    .smtp-settings_help-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+    .link-learn-more {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
   }
   .smtp-settings_title {
@@ -63,6 +55,10 @@ const StyledComponent = styled.div`
     .smtp-settings_toggle {
       position: static;
     }
+  }
+
+  .smtp_settings_checkbox {
+    width: fit-content;
   }
 `;
 

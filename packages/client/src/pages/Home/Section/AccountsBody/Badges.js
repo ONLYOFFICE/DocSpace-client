@@ -91,13 +91,13 @@ const Badges = ({
         <StyledPaidBadge
           className="paid-badge"
           label={t("Paid")}
-          color={"#FFFFFF"}
           backgroundColor={"#EDC409"}
           fontSize={"9px"}
           fontWeight={800}
           lineHeight={"13px"}
           noHover
           onClick={onClickPaid}
+          isPaidBadge
         />
       )}
       {statusType === "pending" && (

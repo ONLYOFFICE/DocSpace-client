@@ -107,6 +107,9 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
+    setOformFromFolderId,
+    oformsFilter,
+
     enablePlugins,
     mainButtonItemsList,
 
@@ -120,6 +123,7 @@ const ArticleMainButtonContent = (props) => {
     mainButtonMobileVisible,
     versionHistoryPanelVisible,
     moveToPanelVisible,
+    restorePanelVisible,
     copyPanelVisible,
 
     security,
@@ -204,7 +208,11 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    setOformFromFolderId(currentFolderId);
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const onInvite = React.useCallback((e) => {
@@ -421,10 +429,18 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
-    const menuModel = [...actions];
-
     if (pluginItems.length > 0) {
-      menuModel.push({
+      // menuModel.push({
+      //   id: "actions_more-plugins",
+      //   className: "main-button_drop-down",
+      //   icon: PluginMoreReactSvgUrl,
+      //   label: t("Common:More"),
+      //   disabled: false,
+      //   key: "more-plugins",
+      //   items: pluginItems,
+      // });
+
+      actions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
         icon: PluginMoreReactSvgUrl,
@@ -434,6 +450,8 @@ const ArticleMainButtonContent = (props) => {
         items: pluginItems,
       });
     }
+
+    const menuModel = [...actions];
 
     menuModel.push({
       isSeparator: true,
@@ -483,6 +501,7 @@ const ArticleMainButtonContent = (props) => {
   if (currentDeviceType === DeviceType.mobile) {
     mainButtonVisible =
       moveToPanelVisible ||
+      restorePanelVisible ||
       copyPanelVisible ||
       selectFileDialogVisible ||
       versionHistoryPanelVisible
@@ -573,6 +592,7 @@ export default inject(
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    oformsStore,
     pluginStore,
     versionHistoryStore,
   }) => {
@@ -594,6 +614,7 @@ export default inject(
       setInviteUsersWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       selectFileDialogVisible,
     } = dialogsStore;
 
@@ -608,6 +629,7 @@ export default inject(
     const { isAdmin, isOwner } = auth.userStore.user;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
+    const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     return {
@@ -634,6 +656,9 @@ export default inject(
 
       currentFolderId,
 
+      setOformFromFolderId,
+      oformsFilter,
+
       enablePlugins,
       mainButtonItemsList,
 
@@ -644,6 +669,7 @@ export default inject(
 
       mainButtonMobileVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       copyPanelVisible,
       versionHistoryPanelVisible,
       security,

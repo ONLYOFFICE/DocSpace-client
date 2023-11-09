@@ -40,13 +40,12 @@ export const MainContainer = styled.div`
     max-width: 700px;
 
     .link-learn-more {
-      display: block;
+      display: inline-block;
       margin: 4px 0 16px 0;
       font-weight: 600;
     }
 
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
@@ -79,8 +78,7 @@ export const LearnMoreWrapper = styled.div`
     font-weight: 600;
   }
 
-  p,
-  a {
+  p {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
@@ -110,10 +108,8 @@ export const StyledBruteForceProtection = styled.div`
     max-width: 350px;
   }
 
-  .error-text {
-    position: absolute;
+  .error-label {
     font-size: 10px;
-    color: #f21c0e;
   }
 
   .save-cancel-buttons {

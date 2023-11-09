@@ -143,9 +143,9 @@ export default function withFileActions(WrappedFileItem) {
       }
 
       if (
-        e.target.tagName === "INPUT" ||
-        e.target.tagName === "SPAN" ||
-        e.target.tagName === "A" ||
+        e.target?.tagName === "INPUT" ||
+        e.target?.tagName === "SPAN" ||
+        e.target?.tagName === "A" ||
         e.target.closest(".checkbox") ||
         e.target.closest(".table-container_row-checkbox") ||
         e.button !== 0 ||
@@ -158,7 +158,7 @@ export default function withFileActions(WrappedFileItem) {
         return;
 
       if (viewAs === "tile") {
-        if (e.target.closest(".edit-button") || e.target.tagName === "IMG")
+        if (e.target.closest(".edit-button") || e.target?.tagName === "IMG")
           return;
         if (e.detail === 1) this.fileContextClick();
       } else this.fileContextClick();
@@ -177,12 +177,13 @@ export default function withFileActions(WrappedFileItem) {
         item,
         openFileAction,
         setParentId,
+        setRoomType,
         isTrashFolder,
         isArchiveFolder,
       } = this.props;
 
       if (
-        (e && e.target.tagName === "INPUT") ||
+        (e && e.target?.tagName === "INPUT") ||
         !!e.target.closest(".lock-file") ||
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
@@ -199,6 +200,7 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
+        setRoomType(item.roomType);
       }
 
       openFileAction(item);
@@ -407,6 +409,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected: !!selectedItem,
         //parentFolder: selectedFolderStore.parentId,
         setParentId: selectedFolderStore.setParentId,
+        setRoomType: selectedFolderStore.setRoomType,
         isTrashFolder: isRecycleBinFolder,
         getFolderInfo,
         viewAs,

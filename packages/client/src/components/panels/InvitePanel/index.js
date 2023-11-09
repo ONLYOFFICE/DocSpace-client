@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -22,10 +28,11 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
-import { LinkType } from "../../../helpers/constants";
 
 import InfoBar from "./sub-components/InfoBar";
 import { DeviceType } from "@docspace/common/constants";
+import InvitePanelLoader from "./sub-components/InvitePanelLoader";
+import { TIMEOUT } from "../../../helpers/filesConstants";
 
 const InvitePanel = ({
   folders,
@@ -49,10 +56,14 @@ const InvitePanel = ({
   reloadSelectionParentRoom,
   setUpdateRoomMembers,
   roomsView,
+  setInviteLanguage,
   getUsersList,
   filter,
   currentDeviceType,
 }) => {
+  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
+    !userLink || !guestLink || !adminLink || !collaboratorLink || roomId !== -1
+  );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
@@ -64,10 +75,15 @@ const InvitePanel = ({
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
+  const [cultureKey, setCultureKey] = useState();
+
   const onCloseBar = () => setInfoBarIsVisible(false);
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
+  const invitePanelWrapper = useRef(null);
+  const invitePanelRef = useRef(null);
+  const windowHeight = useRef(window.innerHeight);
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -78,15 +94,16 @@ const InvitePanel = ({
 
     if (room) {
       setSelectedRoom(room);
+      return Promise.resolve();
     } else {
-      getFolderInfo(roomId).then((info) => {
+      return getFolderInfo(roomId).then((info) => {
         setSelectedRoom(info);
       });
     }
   };
 
   const getInfo = () => {
-    getRoomSecurityInfo(roomId).then((links) => {
+    return getRoomSecurityInfo(roomId).then((links) => {
       const link = links && links[0];
       if (link) {
         const { shareLink, id, title, expirationDate } = link.sharedTo;
@@ -107,10 +124,20 @@ const InvitePanel = ({
     });
   };
 
+  const disableInvitePanelLoader = () => {
+    setTimeout(() => {
+      setInvitePanelIsLoading(false);
+    }, TIMEOUT);
+  };
+
   useEffect(() => {
     if (roomId === -1) {
-      if (!userLink || !guestLink || !adminLink || !collaboratorLink)
-        getPortalInviteLinks();
+      if (!userLink || !guestLink || !adminLink || !collaboratorLink) {
+        setInvitePanelIsLoading(true);
+        getPortalInviteLinks().finally(() => {
+          disableInvitePanelLoader();
+        });
+      }
 
       setShareLinks([
         {
@@ -142,8 +169,10 @@ const InvitePanel = ({
       return;
     }
 
-    selectRoom();
-    getInfo();
+    setInvitePanelIsLoading(true);
+    Promise.all([selectRoom(), getInfo()]).finally(() => {
+      disableInvitePanelLoader(false);
+    });
   }, [roomId, userLink, guestLink, adminLink, collaboratorLink]);
 
   useEffect(() => {
@@ -165,6 +194,25 @@ const InvitePanel = ({
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
 
+  useEffect(() => {
+    window.visualViewport.addEventListener("resize", onResize);
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = useCallback((e) => {
+    const diff = windowHeight.current - e.target.height;
+
+    if (invitePanelRef.current) {
+      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
+      // invitePanelRef.current.style.bottom = `${diff}px`;
+      invitePanelWrapper.current.style.height = `${e.target.height}px`;
+      invitePanelWrapper.current.style.bottom = `${diff}px`;
+    }
+  }, []);
+
   const onMouseDown = (e) => {
     if (e.target.id === "InvitePanelWrapper") onClose();
   };
@@ -175,6 +223,7 @@ const InvitePanel = ({
   };
 
   const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
       visible: false,
@@ -207,8 +256,8 @@ const InvitePanel = ({
 
     const data = {
       invitations,
+      culture: cultureKey,
     };
-
     if (roomId !== -1) {
       data.notify = true;
       data.message = "Invitation message";
@@ -262,6 +311,7 @@ const InvitePanel = ({
         <InviteInput
           t={t}
           onClose={onClose}
+          setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
           addUsersPanelVisible={addUsersPanelVisible}
@@ -304,36 +354,40 @@ const InvitePanel = ({
       <StyledBlock>
         <StyledHeading>{t("Common:InviteUsers")}</StyledHeading>
       </StyledBlock>
-
-      {scrollAllPanelContent ? (
-        <div className="invite-panel-body" ref={invitePanelBodyRef}>
-          <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
-        </div>
+      {invitePanelIsLoding ? (
+        <InvitePanelLoader />
       ) : (
-        bodyInvitePanel
-      )}
-
-      {hasInvitedUsers && (
-        <StyledButtons>
-          <Button
-            className="send-invitation"
-            scale={true}
-            size={"normal"}
-            isDisabled={hasErrors}
-            primary
-            onClick={onClickSend}
-            label={t("SendInvitation")}
-            isLoading={isLoading}
-          />
-          <Button
-            className="cancel-button"
-            scale={true}
-            size={"normal"}
-            onClick={onClose}
-            label={t("Common:CancelButton")}
-            isDisabled={isLoading}
-          />
-        </StyledButtons>
+        <>
+          {scrollAllPanelContent ? (
+            <div className="invite-panel-body" ref={invitePanelBodyRef}>
+              <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
+            </div>
+          ) : (
+            bodyInvitePanel
+          )}
+          {hasInvitedUsers && (
+            <StyledButtons>
+              <Button
+                className="send-invitation"
+                scale={true}
+                size={"normal"}
+                isDisabled={hasErrors}
+                primary
+                onClick={onClickSend}
+                label={t("SendInvitation")}
+                isLoading={isLoading}
+              />
+              <Button
+                className="cancel-button"
+                scale={true}
+                size={"normal"}
+                onClick={onClose}
+                label={t("Common:CancelButton")}
+                isDisabled={isLoading}
+              />
+            </StyledButtons>
+          )}
+        </>
       )}
     </>
   );
@@ -344,9 +398,10 @@ const InvitePanel = ({
       hasInvitedUsers={hasInvitedUsers}
       scrollAllPanelContent={scrollAllPanelContent}
       addUsersPanelVisible={addUsersPanelVisible}
+      ref={invitePanelWrapper}
     >
       {isMobileView ? (
-        <div className="invite_panel">
+        <div className="invite_panel" ref={invitePanelRef}>
           <StyledControlContainer onClick={onClose}>
             <StyledCrossIconMobile />
           </StyledControlContainer>
@@ -417,6 +472,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     invitePanelOptions,
     setInviteItems,
     setInvitePanelOptions,
+    setInviteLanguage,
   } = dialogsStore;
 
   const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -424,6 +480,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
 
   return {
     folders,
+    setInviteLanguage,
     getUsersByQuery,
     getRoomSecurityInfo,
     inviteItems,

@@ -30,7 +30,12 @@ const tabletProps = css`
   }
 `;
 
+const closeIconSize = "24px";
+const sizeBetweenIcons = "8px";
+
 const StyledSectionContainer = styled.section`
+  position: relative;
+
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -66,89 +71,68 @@ const StyledSectionContainer = styled.section`
     max-width: 100vw !important;
   }
 
-  .layout-progress-bar_wrapper {
-    position: fixed;
+  .progress-bar_container {
+    position: absolute;
+    bottom: 0;
+
+    display: grid;
+    grid-gap: 24px;
+    margin-bottom: 24px;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
-
-            @media ${tablet} {
-              left: 24px;
-            }
+            margin-left: 24px;
+            left: 0;
           `
         : css`
-            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
-
-            @media ${tablet} {
-              right: 24px;
-            }
-          `}
-  }
-
-  .layout-progress-bar {
-    position: fixed;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
-
-            @media ${tablet} {
-              left: 24px;
-            }
-          `
-        : css`
-            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
-
-            @media ${tablet} {
-              right: 24px;
-            }
+            margin-right: 24px;
+            right: 0;
           `}
 
-    bottom: 24px;
-  }
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
 
-  .layout-progress-bar_close-icon {
-    position: fixed;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${(props) => (props.isInfoPanelVisible ? "480px" : "80px")};
-
-            @media ${tablet} {
-              left: 80px;
-            }
-          `
-        : css`
-            right: ${(props) => (props.isInfoPanelVisible ? "480px" : "80px")};
-
-            @right ${tablet} {
-              left: 80px;
-            }
+      .layout-progress-bar,
+      .layout-progress-second-bar {
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
+              : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
           `}
+      }
 
-    bottom: 36px;
-  }
-  .layout-progress-second-bar {
-    position: fixed;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: ${closeIconSize};
+        height: ${closeIconSize};
 
-            @media ${tablet} {
-              left: 24px;
-            }
-          `
-        : css`
-            right: ${(props) => (props.isInfoPanelVisible ? "424px" : "24px")};
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: ${sizeBetweenIcons};
+              `
+            : css`
+                margin-right: ${sizeBetweenIcons};
+              `}
 
-            @media ${tablet} {
-              right: 24px;
-            }
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-left:-${closeIconSize}`
+              : `margin-right:-${closeIconSize}`}
           `}
-
-    bottom: 96px;
+      }
+    }
   }
 
   ${(props) =>

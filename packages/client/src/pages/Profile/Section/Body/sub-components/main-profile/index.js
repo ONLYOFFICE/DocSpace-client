@@ -101,7 +101,7 @@ const MainProfile = (props) => {
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}
+          color={currentColorScheme?.main?.accent}
         >
           {{ supportEmail: documentationEmail }}
         </Link>
@@ -206,7 +206,7 @@ const MainProfile = (props) => {
 
           <div className="profile-block">
             <div className="profile-block-field">
-              <Text fontWeight={600} truncate>
+              <Text fontWeight={600} truncate title={profile.displayName}>
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
@@ -461,7 +461,6 @@ export default inject(({ auth, peopleStore }) => {
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
-
   const { setDialogData } = peopleStore.dialogStore;
 
   return {

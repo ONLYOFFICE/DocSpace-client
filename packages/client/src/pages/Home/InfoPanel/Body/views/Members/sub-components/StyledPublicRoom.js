@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
@@ -63,8 +64,14 @@ const StyledCrossIcon = styled(CrossReactSvg)`
 
 const LinksBlock = styled.div`
   display: flex;
+  height: 100%;
+  padding-top: 3px;
+  align-items: center;
   justify-content: space-between;
-  padding: 8px 0px 12px 0px;
+
+  p {
+    color: ${({ theme }) => theme.text.disableColor};
+  }
 
   .link-to-viewing-icon {
     svg {
@@ -78,19 +85,35 @@ const StyledLinkRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 8px 0px;
+  gap: 12px;
+  height: 100%;
+  position: relative;
+  background: ${(props) => props.theme.backgroundColor};
+  z-index: 1;
 
   .external-row-link {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
   }
 
   .external-row-icons {
     margin-left: auto;
     display: flex;
     gap: 16px;
+  }
+
+  .avatar-wrapper {
+    ${({ isPrimary, theme }) =>
+      isPrimary &&
+      css`
+        svg {
+          path {
+            fill: ${theme.infoPanel.links.primaryColor} !important;
+          }
+        }
+      `}
   }
 
   .avatar_role-wrapper {

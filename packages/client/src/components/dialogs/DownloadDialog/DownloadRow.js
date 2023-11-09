@@ -5,6 +5,7 @@ import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import LinkWithDropdown from "@docspace/components/link-with-dropdown";
 import DropDownItem from "@docspace/components/drop-down-item";
+import { isMobile } from "@docspace/components/utils/device";
 
 const DownloadRow = (props) => {
   const {
@@ -76,10 +77,10 @@ const DownloadRow = (props) => {
             containerMinWidth="fit-content"
             data={dropdownItems}
             directionX="left"
-            directionY="bottom"
+            directionY={isMobile() ? "both" : "bottom"}
             fontSize="13px"
             fontWeight={600}
-            hasScroll={true}
+            hasScroll={isMobile()}
             withExpander
           >
             {file.format || t("OriginalFormat")}

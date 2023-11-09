@@ -1,5 +1,6 @@
 ﻿import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
@@ -10,7 +11,7 @@ import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { isTablet } from "@docspace/components/utils/device";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus, RoomsType } from "@docspace/common/constants";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
@@ -22,6 +23,7 @@ const QuickButtons = (props) => {
     sectionWidth,
     onClickLock,
     onClickDownload,
+    onCopyPrimaryLink,
     isDisabled,
     onClickFavorite,
     viewAs,
@@ -29,6 +31,7 @@ const QuickButtons = (props) => {
     isPublicRoom,
     onClickShare,
     isPersonalRoom,
+    isArchiveFolder,
   } = props;
 
   const { id, locked, shared, fileStatus, title, fileExst } = item;
@@ -70,9 +73,15 @@ const QuickButtons = (props) => {
     isPublicRoom && item.security.Download && viewAs === "tile";
 
   const isAvailableShareFile = isPersonalRoom && item.canShare;
+  const showCopyLinkIcon =
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom) &&
+    item.shared &&
+    !isArchiveFolder &&
+    !isTile;
 
   return (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -101,16 +110,17 @@ const QuickButtons = (props) => {
           title={t("Common:Download")}
         />
       )}
-      {isAvailableShareFile && (
+      {showCopyLinkIcon && (
         <ColorTheme
           themeId={ThemeType.IconButton}
           iconName={LinkReactSvgUrl}
-          className="badge icons-group"
+          className="badge copy-link icons-group"
           size={sizeQuickButton}
-          onClick={onClickShare}
+          onClick={onCopyPrimaryLink}
+          color={colorLock}
           isDisabled={isDisabled}
-          color={colorShare}
-          title={t("Files:Share")}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

@@ -47,6 +47,7 @@ const FilesSelector = ({
 
   isMove,
   isCopy,
+  isRestore,
   isRestoreAll,
   isSelect,
 
@@ -68,7 +69,9 @@ const FilesSelector = ({
   itemOperationToFolder,
   clearActiveOperations,
   setMovingInProgress,
+  setSelected,
   setMoveToPanelVisible,
+  setRestorePanelVisible,
   setCopyPanelVisible,
   setRestoreAllPanelVisible,
 
@@ -91,12 +94,13 @@ const FilesSelector = ({
   includeFolder,
 
   socketHelper,
-  socketSubscribersId,
+  socketSubscribers,
   setMoveToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
   currentDeviceType,
 
   embedded,
+  withHeader,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -117,6 +121,7 @@ const FilesSelector = ({
     id: number | string;
     title: string;
     path?: string[];
+    fileExst?: string;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -129,7 +134,7 @@ const FilesSelector = ({
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
-    socketSubscribersId,
+    socketSubscribers,
     setItems,
     setBreadCrumbs,
     setTotal,
@@ -155,6 +160,7 @@ const FilesSelector = ({
     treeFolders,
     setHasNextPage,
     setIsNextPageLoading,
+    onSetBaseFolderPath,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -221,7 +227,11 @@ const FilesSelector = ({
         getFileList(0, item.id, false, null);
       }
     } else {
-      setSelectedFileInfo({ id: item.id, title: item.title });
+      setSelectedFileInfo({
+        id: item.id,
+        title: item.title,
+        fileExst: item.fileExst,
+      });
     }
   };
 
@@ -300,9 +310,9 @@ const FilesSelector = ({
 
   const onCloseAction = () => {
     setInfoPanelIsMobileHidden(false);
+
     if (onClose) {
       onClose();
-
       return;
     }
 
@@ -311,9 +321,16 @@ const FilesSelector = ({
       setIsFolderActions(false);
     } else if (isRestoreAll) {
       setRestoreAllPanelVisible(false);
+    } else if (isRestore) {
+      setRestorePanelVisible(false);
     } else {
       setMoveToPanelVisible(false);
     }
+  };
+
+  const onCloseAndDeselectAction = () => {
+    setSelected("none");
+    onCloseAction();
   };
 
   const onSearchAction = (value: string) => {
@@ -350,7 +367,7 @@ const FilesSelector = ({
       breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
       -1;
 
-    if ((isMove || isCopy || isRestoreAll) && !isEditorDialog) {
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       let fileIds: any[] = [];
@@ -401,7 +418,7 @@ const FilesSelector = ({
               setIsRequestRunning(false);
             } else {
               setIsRequestRunning(false);
-              onCloseAction();
+              onCloseAndDeselectAction();
               const move = !isCopy;
               if (move) setMovingInProgress(move);
               sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
@@ -425,7 +442,7 @@ const FilesSelector = ({
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
       onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAction();
+      onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
@@ -436,7 +453,8 @@ const FilesSelector = ({
     isRestoreAll,
     isMove,
     isSelect,
-    filterParam
+    filterParam,
+    isRestore
   );
 
   const acceptButtonLabel = getAcceptButtonLabel(
@@ -445,7 +463,8 @@ const FilesSelector = ({
     isRestoreAll,
     isMove,
     isSelect,
-    filterParam
+    filterParam,
+    isRestore
   );
 
   const isDisabled = getIsDisabled(
@@ -460,11 +479,13 @@ const FilesSelector = ({
     selectedItemSecurity,
     filterParam,
     !!selectedFileInfo,
-    includeFolder
+    includeFolder,
+    isRestore
   );
 
   const SelectorBody = (
     <Selector
+      withHeader={withHeader}
       headerLabel={headerLabel}
       withoutBackButton
       searchPlaceholder={t("Common:Search")}
@@ -521,8 +542,12 @@ const FilesSelector = ({
       descriptionText={
         !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
       }
-      acceptButtonId={isMove || isCopy ? "select-file-modal-submit" : ""}
-      cancelButtonId={isMove || isCopy ? "select-file-modal-cancel" : ""}
+      acceptButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
+      }
+      cancelButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
+      }
     />
   );
 
@@ -548,7 +573,7 @@ const FilesSelector = ({
     </>
   );
 
-  return currentDeviceType === DeviceType.mobile ? (
+  return currentDeviceType === DeviceType.mobile && !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent
@@ -566,14 +591,9 @@ export default inject(
       dialogsStore,
       filesStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isPanelVisible, id }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
   ) => {
-    const {
-      id: selectedId,
-      parentId,
-      rootFolderType,
-      socketSubscribersId,
-    } = selectedFolderStore;
+    const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
@@ -589,13 +609,15 @@ export default inject(
       : selectedId;
 
     const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestoreAll)
+      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
         ? +sessionPath
         : fromFolderId;
 
     const { treeFolders } = treeFoldersStore;
 
     const {
+      restorePanelVisible,
+      setRestorePanelVisible,
       moveToPanelVisible,
       setMoveToPanelVisible,
       copyPanelVisible,
@@ -613,22 +635,29 @@ export default inject(
 
     const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
 
+    const socketSubscribesId = socketHelper.socketSubscribers;
+
     const {
       selection,
       bufferSelection,
       filesList,
-
       setMovingInProgress,
+      setSelected,
     } = filesStore;
 
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      auth.infoPanelStore;
+
     const selections =
-      isMove || isCopy || isRestoreAll
+      isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
           : selection.length > 0 && selection[0] != null
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
+          : infoPanelIsVisible && infoPanelSelection != null
+          ? [infoPanelSelection]
           : []
         : [];
 
@@ -657,9 +686,13 @@ export default inject(
       treeFolders,
       isPanelVisible: isPanelVisible
         ? isPanelVisible
-        : (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) &&
+        : (moveToPanelVisible ||
+            copyPanelVisible ||
+            restorePanelVisible ||
+            restoreAllPanelVisible) &&
           !conflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       theme,
       selection: selectionsWithoutEditing,
       disabledItems,
@@ -669,6 +702,7 @@ export default inject(
       itemOperationToFolder,
       clearActiveOperations,
       setMovingInProgress,
+      setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       setIsFolderActions,
@@ -676,7 +710,7 @@ export default inject(
       setInfoPanelIsMobileHidden,
       includeFolder,
       socketHelper,
-      socketSubscribersId,
+      socketSubscribers: socketSubscribesId,
       setMoveToPublicRoomVisible,
       currentDeviceType,
     };

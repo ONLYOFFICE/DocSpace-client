@@ -68,6 +68,7 @@ const Base = {
   text: {
     color: black,
     disableColor: gray,
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -317,9 +318,9 @@ const Base = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -544,7 +545,7 @@ const Base = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -1717,6 +1718,7 @@ const Base = {
     disabledArrow: "#A3A9AE",
     weekdayColor: "#A3A9AE",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
   },
 
   datePicker: {
@@ -2021,6 +2023,7 @@ const Base = {
     links: {
       iconColor: "#3B72A7",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
     },
 
     members: {
@@ -2051,6 +2054,7 @@ const Base = {
 
     gallery: {
       borderColor: "#d0d5da",
+      descriptionColor: "#657077",
     },
   },
 
@@ -2070,6 +2074,10 @@ const Base = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
+    },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
     },
   },
 
@@ -2358,6 +2366,7 @@ const Base = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#657077",
     },
 
     roomType: {
@@ -2952,6 +2961,7 @@ const Base = {
           toggleContentBackground: grayLight,
           iconButton: black,
           iconButtonDisabled: gray,
+          border: "1px solid #eceef1",
         },
 
         smtp: {

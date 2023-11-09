@@ -4,7 +4,7 @@ import { mobile, tablet } from "@docspace/components/utils/device";
 
 import { Base } from "@docspace/components/themes";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledArticle = styled.article`
@@ -228,7 +228,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   width: 17px;
   height: 17px;
   path {
-    fill: ${(props) => props.theme.catalog.control.fill};
+    stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 

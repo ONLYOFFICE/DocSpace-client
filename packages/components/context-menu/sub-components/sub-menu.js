@@ -73,6 +73,8 @@ const SubMenu = (props) => {
 
     if (!items) {
       onLeafClick(e);
+    } else {
+      e.stopPropagation();
     }
   };
 

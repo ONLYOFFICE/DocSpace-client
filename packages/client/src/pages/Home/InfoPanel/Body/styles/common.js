@@ -65,7 +65,15 @@ const StyledTitle = styled.div`
 
   .info_title-icons {
     display: flex;
-    margin-left: auto;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
+    /* theme.interfaceDirection */
     gap: 14px;
     .icon {
       cursor: pointer;

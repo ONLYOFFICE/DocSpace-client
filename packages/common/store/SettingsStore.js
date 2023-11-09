@@ -2,7 +2,12 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "../api";
 
-import { combineUrl, setCookie, frameCallEvent, getSystemTheme } from "../utils";
+import {
+  combineUrl,
+  setCookie,
+  frameCallEvent,
+  getSystemTheme,
+} from "../utils";
 import FirebaseHelper from "../utils/firebase";
 import {
   ThemeKeys,
@@ -15,7 +20,10 @@ import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
 import { getCookie } from "@docspace/components/utils/cookie";
-import { size as deviceSize, isTablet } from "@docspace/components/utils/device";
+import {
+  size as deviceSize,
+  isTablet,
+} from "@docspace/components/utils/device";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
@@ -39,7 +47,10 @@ const initArticleAlertsData = () => {
     available: articleAlertsArray,
   };
 
-  localStorage.setItem("articleAlertsData", JSON.stringify(defaultArticleAlertsData));
+  localStorage.setItem(
+    "articleAlertsData",
+    JSON.stringify(defaultArticleAlertsData)
+  );
 
   return defaultArticleAlertsData;
 };
@@ -411,7 +422,10 @@ class SettingsStore {
     else newSettings = await api.settings.getSettings(true);
 
     if (window["AscDesktopEditor"] !== undefined || this.personal) {
-      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, "/products/files/");
+      const dp = combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        "/products/files/"
+      );
       this.setDefaultPage(dp);
     }
 
@@ -421,7 +435,7 @@ class SettingsStore {
           key,
           key === "defaultPage"
             ? combineUrl(window.DocSpaceConfig?.proxy?.url, newSettings[key])
-            : newSettings[key],
+            : newSettings[key]
         );
         if (key === "culture") {
           if (newSettings.wizardToken) return;
@@ -457,7 +471,7 @@ class SettingsStore {
         const url = new URL(wrongPortalNameUrl);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
-        // return window.location.replace(url);
+        return window.location.replace(url);
       }
     });
 
@@ -486,7 +500,7 @@ class SettingsStore {
     requests.push(
       this.getPortalSettings(),
       this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls(),
+      this.getWhiteLabelLogoUrls()
     );
 
     await Promise.all(requests);
@@ -526,12 +540,12 @@ class SettingsStore {
   setAdditionalResources = async (
     feedbackAndSupportEnabled,
     videoGuidesEnabled,
-    helpCenterEnabled,
+    helpCenterEnabled
   ) => {
     return await api.settings.setAdditionalResources(
       feedbackAndSupportEnabled,
       videoGuidesEnabled,
-      helpCenterEnabled,
+      helpCenterEnabled
     );
   };
 
@@ -578,7 +592,13 @@ class SettingsStore {
   };
 
   setCompanyInfoSettings = async (address, companyName, email, phone, site) => {
-    return api.settings.setCompanyInfoSettings(address, companyName, email, phone, site);
+    return api.settings.setCompanyInfoSettings(
+      address,
+      companyName,
+      email,
+      phone,
+      site
+    );
   };
 
   setLogoUrl = (url) => {
@@ -637,11 +657,15 @@ class SettingsStore {
   };
 
   getLoginLink = (token, code) => {
-    return combineUrl(window.DocSpaceConfig?.proxy?.url, `/login.ashx?p=${token}&code=${code}`);
+    return combineUrl(
+      window.DocSpaceConfig?.proxy?.url,
+      `/login.ashx?p=${token}&code=${code}`
+    );
   };
 
   setModuleInfo = (homepage, productId) => {
-    if (this.homepage === homepage || this.currentProductId === productId) return;
+    if (this.homepage === homepage || this.currentProductId === productId)
+      return;
 
     console.log(`setModuleInfo('${homepage}', '${productId}')`);
 
@@ -687,12 +711,17 @@ class SettingsStore {
     this.setPasswordSettings(settings);
   };
 
-  setPortalPasswordSettings = async (minLength, upperCase, digits, specSymbols) => {
+  setPortalPasswordSettings = async (
+    minLength,
+    upperCase,
+    digits,
+    specSymbols
+  ) => {
     const settings = await api.settings.setPortalPasswordSettings(
       minLength,
       upperCase,
       digits,
-      specSymbols,
+      specSymbols
     );
     this.setPasswordSettings(settings);
   };
@@ -749,7 +778,8 @@ class SettingsStore {
   };
 
   get socketHelper() {
-    const socketUrl = this.isPublicRoom && !this.publicRoomKey ? null : this.socketUrl;
+    const socketUrl =
+      this.isPublicRoom && !this.publicRoomKey ? null : this.socketUrl;
 
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }
@@ -769,7 +799,8 @@ class SettingsStore {
       ...versionInfo,
     };
 
-    if (!this.buildVersionInfo.documentServer) this.buildVersionInfo.documentServer = "6.4.1";
+    if (!this.buildVersionInfo.documentServer)
+      this.buildVersionInfo.documentServer = "6.4.1";
   };
 
   setTheme = (key) => {
@@ -787,7 +818,8 @@ class SettingsStore {
       case ThemeKeys.SystemStr:
       default:
         theme =
-          window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
             ? ThemeKeys.DarkStr
             : ThemeKeys.BaseStr;
         theme = getSystemTheme();
@@ -867,7 +899,11 @@ class SettingsStore {
   };
 
   setBruteForceProtection = async (AttemptCount, BlockTime, CheckPeriod) => {
-    return api.settings.setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod);
+    return api.settings.setBruteForceProtection(
+      AttemptCount,
+      BlockTime,
+      CheckPeriod
+    );
   };
 
   setIsBurgerLoading = (isBurgerLoading) => {
@@ -937,7 +973,10 @@ class SettingsStore {
       current: current || this.articleAlertsData.current,
       available: available || this.articleAlertsData.available,
     };
-    localStorage.setItem("articleAlertsData", JSON.stringify(this.articleAlertsData));
+    localStorage.setItem(
+      "articleAlertsData",
+      JSON.stringify(this.articleAlertsData)
+    );
   };
 
   incrementIndexOfArticleAlertsData = () => {
@@ -954,7 +993,9 @@ class SettingsStore {
 
   removeAlertFromArticleAlertsData = (alertToRemove) => {
     const { available } = this.articleAlertsData;
-    const filteredAvailable = available.filter((alert) => alert !== alertToRemove);
+    const filteredAvailable = available.filter(
+      (alert) => alert !== alertToRemove
+    );
     this.updateArticleAlertsData({ available: filteredAvailable });
   };
 
@@ -987,11 +1028,13 @@ class SettingsStore {
   };
 
   setWindowWidth = (width) => {
-    if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile) return;
+    if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
+      return;
 
     if (isTablet(width) && isTablet(this.windowWidth)) return;
 
-    if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop) return;
+    if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
+      return;
 
     this.windowWidth = width;
   };

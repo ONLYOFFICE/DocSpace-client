@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -58,24 +59,13 @@ const {
 } = globalColors;
 
 const Base = {
+  ...CommonTheme,
+
   isBase: true,
   color: black,
   backgroundColor: white,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
-  interfaceDirection: "ltr",
-
-  increaseValue: 2,
-
-  getCorrectFontSize: function (currentValue) {
-    if (!currentValue || this.interfaceDirection !== "rtl") return currentValue;
-
-    const cleanValue = currentValue.replace("px", "");
-
-    if (cleanValue === 0) return "0px";
-
-    return Number(cleanValue) + this.increaseValue + "px";
-  },
 
   text: {
     color: black,

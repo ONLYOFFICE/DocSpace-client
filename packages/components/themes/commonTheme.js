@@ -11,8 +11,16 @@ export const CommonTheme = {
       return currentValue;
     }
 
-    const cleanValue = currentValue.replace("px", "");
+    let numberValue = 0;
 
-    return Number(cleanValue) + this.rtlFontIncreaseValue + "px";
+    if (typeof currentValue === "string") {
+      numberValue = +currentValue.replace("px", "");
+    }
+
+    if (typeof currentValue === "number") {
+      numberValue = currentValue;
+    }
+
+    return numberValue + this.rtlFontIncreaseValue + "px";
   },
 };

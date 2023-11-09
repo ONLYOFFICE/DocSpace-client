@@ -65,6 +65,7 @@ const Members = ({
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
+  isVisitor,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
@@ -265,7 +266,7 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType) {
+  if (isPublicRoomType && !isVisitor) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
@@ -373,7 +374,8 @@ const Members = ({
     }
   }
 
-  const showPublicRoomBar = (primaryLink && !isArchiveFolder) || isPublicRoom;
+  const showPublicRoomBar =
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) && !isVisitor;
 
   return (
     <>
@@ -457,7 +459,7 @@ export default inject(
       membersFilter,
       setMembersFilter,
     } = filesStore;
-    const { id: selfId } = auth.userStore.user;
+    const { id: selfId, isVisitor } = auth.userStore.user;
 
     const { changeType: changeUserType } = peopleStore;
     const {
@@ -516,6 +518,7 @@ export default inject(
       primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
+      isVisitor,
     };
   }
 )(

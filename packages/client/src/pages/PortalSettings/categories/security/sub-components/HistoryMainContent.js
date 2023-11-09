@@ -66,8 +66,8 @@ const MainContainer = styled.div`
   }
 
   .content-wrapper {
-    margin-top: ${(props) => (props.content ? "16px" : "0")};
-    margin-bottom: ${(props) => (props.content ? "24px" : "0")};
+    margin-top: 16px;
+    margin-bottom: 24px;
     .table-container_header {
       position: absolute;
       z-index: 1 !important;
@@ -272,7 +272,7 @@ const HistoryMainContent = (props) => {
   };
 
   return (
-    <MainContainer isSettingNotPaid={isSettingNotPaid} content={content}>
+    <MainContainer isSettingNotPaid={isSettingNotPaid}>
       {isSettingNotPaid && (
         <Badge
           className="paid-badge"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -25,8 +25,23 @@ const EditRoomDialog = ({
     ...fetchedRoomParams,
   });
 
-  const setRoomTags = (newTags) =>
-    setRoomParams({ ...roomParams, tags: newTags });
+  const prevRoomParams = useRef(
+    Object.freeze({
+      ...roomParams,
+    }),
+  );
+
+  const compareRoomParams = (prevParams, currentParams) => {
+    return (
+      prevParams.title === currentParams.title &&
+      prevParams.roomOwner.id === currentParams.roomOwner.id &&
+      prevParams.tags.sort().toString() === currentParams.tags.sort().toString() &&
+      ((prevParams.icon.uploadedFile === "" && currentParams.icon.uploadedFile === null) ||
+        prevParams.icon.uploadedFile === currentParams.icon.uploadedFile)
+    );
+  };
+
+  const setRoomTags = (newTags) => setRoomParams({ ...roomParams, tags: newTags });
 
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
@@ -50,11 +65,16 @@ const EditRoomDialog = ({
   };
 
   useEffect(() => {
-    if (fetchedImage)
+    if (fetchedImage) {
       setRoomParams({
         ...roomParams,
         icon: { ...roomParams.icon, uploadedFile: fetchedImage },
       });
+      prevRoomParams.current = {
+        ...roomParams,
+        icon: { ...roomParams.icon, uploadedFile: fetchedImage },
+      };
+    }
   }, [fetchedImage]);
 
   const onCloseAction = () => {
@@ -70,8 +90,7 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
-      withFooterBorder
-    >
+      withFooterBorder>
       <ModalDialog.Header>
         <DialogHeader isEdit />
       </ModalDialog.Header>
@@ -102,7 +121,7 @@ const EditRoomDialog = ({
           primary
           scale
           onClick={onEditRoom}
-          isDisabled={isWrongTitle}
+          isDisabled={isWrongTitle || compareRoomParams(prevRoomParams.current, roomParams)}
           isLoading={isLoading}
         />
         <Button

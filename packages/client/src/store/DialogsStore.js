@@ -128,12 +128,11 @@ class DialogsStore {
   };
 
   setMoveToPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
     )
       return;
 
@@ -158,12 +157,11 @@ class DialogsStore {
   };
 
   setCopyPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
     ) {
       console.log("No files selected");
       return;
@@ -195,7 +193,6 @@ class DialogsStore {
   };
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
-    !deleteDialogVisible && this.deselectActiveFiles();
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
@@ -204,7 +201,6 @@ class DialogsStore {
   };
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
-    !downloadDialogVisible && this.deselectActiveFiles();
     this.downloadDialogVisible = downloadDialogVisible;
   };
 

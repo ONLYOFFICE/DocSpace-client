@@ -114,6 +114,10 @@ class SelectedFolderStore {
     this.roomType = roomType;
   };
 
+  setCreatedBy = (createdBy) => {
+    this.createdBy = createdBy;
+  };
+
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
     this.title = title;
     this.tags = tags;

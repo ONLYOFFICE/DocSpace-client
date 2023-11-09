@@ -75,12 +75,6 @@ const StyledTileContainer = styled.div`
     &.folder {
       padding: 0;
     }
-
-    .room__badges {
-      display: flex;
-      flex-direction: row;
-      gap: 8px;
-    }
   }
 
   .tile-items-heading {

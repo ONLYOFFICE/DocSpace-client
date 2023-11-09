@@ -68,7 +68,7 @@ const StyledSettingsComponent = styled.div`
 
   .errorText {
     position: absolute;
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
     color: #f21c0e;
   }
 
@@ -87,7 +87,7 @@ const StyledSettingsComponent = styled.div`
   .settings-dns_toggle-button {
     .toggle-button-text {
       font-weight: 600;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     }
     svg {
       margin-top: 1px;

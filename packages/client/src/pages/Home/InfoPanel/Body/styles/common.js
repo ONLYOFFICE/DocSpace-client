@@ -99,7 +99,7 @@ const StyledTitle = styled.div`
 
   .text {
     font-weight: 600;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
@@ -111,7 +111,7 @@ const StyledTitle = styled.div`
   }
 
   .free-label {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 600;
     line-height: 16px;
 
@@ -182,7 +182,7 @@ const StyledLink = styled.div`
 
   a,
   .link {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
     line-height: 15px;
   }
@@ -210,14 +210,14 @@ const StyledProperties = styled.div`
     grid-column-gap: 24px;
 
     .property-title {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }
 
     .property-content {
       max-width: 100%;
       margin: auto 0;
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

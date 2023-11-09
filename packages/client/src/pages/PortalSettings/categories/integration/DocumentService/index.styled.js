@@ -11,7 +11,7 @@ export const LocationHeader = styled.div`
   .main {
     width: 100%;
     max-width: 700px;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 400;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
     line-height: 20px;

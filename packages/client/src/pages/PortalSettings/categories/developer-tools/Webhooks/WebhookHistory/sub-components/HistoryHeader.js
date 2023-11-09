@@ -11,7 +11,12 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet, mobile, isTablet, isMobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  isTablet,
+  isMobile,
+} from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import DropDownItem from "@docspace/components/drop-down-item";
@@ -56,19 +61,20 @@ const HeaderContainer = styled.div`
     }
 
     svg {
-      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
     @media ${mobile} {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 
@@ -86,7 +92,8 @@ const HeaderContainer = styled.div`
     .combo-button_selected-icon {
       svg {
         path {
-          fill: ${(props) => (props.isDisabled ? "#d0d5da" : props.theme.color)};
+          fill: ${(props) =>
+            props.isDisabled ? "#d0d5da" : props.theme.color};
         }
       }
     }
@@ -158,7 +165,7 @@ const HistoryHeader = (props) => {
       });
       toastr.success(
         `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
-        <b>{t("Common:Done")}</b>,
+        <b>{t("Common:Done")}</b>
       );
     } catch (error) {
       console.error(error);
@@ -178,7 +185,8 @@ const HistoryHeader = (props) => {
     },
   ];
 
-  const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);
@@ -253,7 +261,8 @@ const HistoryHeader = (props) => {
         <NavigationHeader />
       )}
 
-      {isPendingVisible && createPortal(<FloatingButton icon="refresh" />, document.body)}
+      {isPendingVisible &&
+        createPortal(<FloatingButton icon="refresh" />, document.body)}
     </HeaderContainer>
   );
 };

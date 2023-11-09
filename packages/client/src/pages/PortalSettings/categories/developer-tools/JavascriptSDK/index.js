@@ -57,7 +57,7 @@ const Controls = styled(Box)`
 const CategoryHeader = styled.div`
   margin-top: 40px;
   margin-bottom: 24px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -70,7 +70,7 @@ const CategoryHeader = styled.div`
 const CategorySubHeader = styled.div`
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 15px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
   font-style: normal;
   font-weight: 600;
   line-height: 16px;

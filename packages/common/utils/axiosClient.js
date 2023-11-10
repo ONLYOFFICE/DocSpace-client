@@ -117,7 +117,7 @@ class AxiosClient {
     }
   };
 
-  request = (options, isSelector = false) => {
+  request = (options, isSkipRedirect = false) => {
     const onSuccess = (response) => {
       const error = this.getResponseError(response);
       if (error) throw new Error(error);
@@ -167,14 +167,13 @@ class AxiosClient {
             }
             break;
           case 403:
-            
             const pathname = window.location.pathname;
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !isSelector) {
+            if (isRooms && !isSkipRedirect) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);

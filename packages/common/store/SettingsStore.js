@@ -478,6 +478,7 @@ class SettingsStore {
         //access to the portal is restricted
         window.DocSpace.navigate("/access-restricted", {
           state: { isRestrictionError: true },
+          replace: true,
         });
       }
     });

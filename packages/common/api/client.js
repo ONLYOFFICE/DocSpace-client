@@ -6,8 +6,8 @@ export const initSSR = (headers) => {
   client.initSSR(headers);
 };
 
-export const request = (options, isSelector = false) => {
-  return client.request(options, isSelector);
+export const request = (options, isSkipRedirect = false) => {
+  return client.request(options, isSkipRedirect);
 };
 
 export const setWithCredentialsStatus = (state) => {

@@ -49,13 +49,13 @@ export function getReferenceData(object) {
   return request(options);
 }
 
-export function getFolderInfo(folderId, isSelector = false) {
+export function getFolderInfo(folderId, isSkipRedirect = false) {
   const options = {
     method: "get",
     url: `/files/folder/${folderId}`,
   };
 
-  return request(options, isSelector);
+  return request(options, isSkipRedirect);
 }
 
 export function getFolderPath(folderId) {

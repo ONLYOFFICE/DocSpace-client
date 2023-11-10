@@ -38,7 +38,7 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "OAuth",
-=======
+  ]);
   const [isPending, startTransition] = useTransition();
 
   const sdkLabel = (

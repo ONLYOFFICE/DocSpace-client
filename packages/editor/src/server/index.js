@@ -211,6 +211,10 @@ if (IS_DEVELOPMENT) {
       assets
     );
 
+    if (initialEditorState.isSettingsError) {
+      res.redirect("/access-restricted");
+    }
+
     res.send(htmlString);
   });
 

@@ -1,16 +1,14 @@
-import React from "react";
-
-import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { PluginListContainer } from "../StyledPlugins";
 
 const ListLoader = ({ widthUpload }) => {
   return (
     <>
-      {widthUpload && <RectangleLoader width={"144px"} height={"32px"} />}
+      {widthUpload && <RectangleSkeleton width={"144px"} height={"32px"} />}
       <PluginListContainer>
-        <RectangleLoader width={"340px"} height={"135px"} />
-        <RectangleLoader width={"340px"} height={"135px"} />
-        <RectangleLoader width={"340px"} height={"135px"} />
+        <RectangleSkeleton width={"340px"} height={"135px"} />
+        <RectangleSkeleton width={"340px"} height={"135px"} />
+        <RectangleSkeleton width={"340px"} height={"135px"} />
       </PluginListContainer>
     </>
   );

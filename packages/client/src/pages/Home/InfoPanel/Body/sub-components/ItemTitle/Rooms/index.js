@@ -113,7 +113,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
 
   return {
     selection,
-    roomsView: auth.infoPanelStore.roomType,
+    roomsView,
     selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
     setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
 

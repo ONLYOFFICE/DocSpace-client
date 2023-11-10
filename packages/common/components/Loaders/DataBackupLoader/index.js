@@ -1,6 +1,7 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledDataBackup from "./StyledDataBackup";
+
 const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const {
     title,
@@ -16,7 +17,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
   return (
     <StyledDataBackup>
       <div className="data-backup-loader_main">
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_title"
           title={title}
           width="100%"
@@ -30,7 +31,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
 
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_title-description"
           title={title}
           width="100%"
@@ -46,7 +47,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
       </div>
 
       <div className="data-backup-loader">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -58,7 +59,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_menu"
           title={title}
           width="100%"
@@ -72,7 +73,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
         <div></div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_menu-description"
           title={title}
           width="100%"
@@ -85,7 +86,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -97,7 +98,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_menu"
           title={title}
           width="100%"
@@ -110,7 +111,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -122,7 +123,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_menu-higher"
           title={title}
           width="100%"
@@ -135,7 +136,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -147,7 +148,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="data-backup-loader_menu-last"
           title={title}
           width="100%"

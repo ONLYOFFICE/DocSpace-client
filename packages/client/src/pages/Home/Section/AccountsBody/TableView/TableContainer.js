@@ -54,6 +54,18 @@ const contextCss = css`
 `;
 
 const StyledTableContainer = styled(TableContainer)`
+  :has(
+      .table-container_body
+        .table-list-item:first-child:first-child
+        > .table-row-selected
+    ) {
+    .table-container_header {
+      border-image-slice: 1;
+      border-image-source: ${(props) =>
+        props.theme.tableContainer.header.lengthenBorderImageSource};
+    }
+  }
+
   .table-row-selected {
     .table-container_user-name-cell {
       ${userNameCss}

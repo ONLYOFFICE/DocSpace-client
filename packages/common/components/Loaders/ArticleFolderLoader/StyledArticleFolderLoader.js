@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import RectangleLoader from "../RectangleLoader";
+import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
@@ -46,7 +46,7 @@ const StyledBlock = styled.div`
   }
 `;
 
-const StyledRectangleLoader = styled(RectangleLoader)`
+const StyledRectangleLoader = styled(RectangleSkeleton)`
   height: 20px;
   width: 210px;
   padding: 0 0 16px;

@@ -28,6 +28,7 @@ import {
   TableDataCell,
 } from "./styled-active-sessions";
 import { DeviceType } from "@docspace/common/constants";
+import moment from "moment";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -113,7 +114,7 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return new Date(date).toLocaleString(locale);
+    return moment(date).locale(locale).format("L, LTS");
   };
   const tableCell = (platform, browser) =>
     interfaceDirection === "rtl" && !isMobile ? (
@@ -174,7 +175,9 @@ const ActiveSessions = ({
                     <span className="session-date">
                       {convertTime(session.date)}
                     </span>
-                    <span className="session-ip">{session.ip}</span>
+                    <span className="session-ip" dir="ltr">
+                      {session.ip}
+                    </span>
                   </Box>
                 </TableDataCell>
 

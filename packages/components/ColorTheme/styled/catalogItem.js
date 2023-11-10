@@ -4,9 +4,9 @@ import {
   StyledCatalogItemContainer,
   StyledCatalogItemImg,
   StyledCatalogItemText,
-} from "@docspace/components/catalog-item/styled-catalog-item";
+} from "../../catalog-item/styled-catalog-item";
 
-import Base from "@docspace/components/themes/base";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, isActive, theme }) =>
   $currentColorScheme &&

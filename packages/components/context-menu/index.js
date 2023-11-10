@@ -20,7 +20,8 @@ import Text from "../text";
 import Avatar from "../avatar";
 import IconButton from "../icon-button";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
-import RoomIcon from "@docspace/components/room-icon";
+import RoomIcon from "../room-icon";
+
 class ContextMenu extends Component {
   constructor(props) {
     super(props);

@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { desktop, isDesktop } from "@docspace/components/utils/device";
-import { StyledContextMenuLoader } from "./StyledContextMenuLoader";
-import RectangleLoader from "../RectangleLoader";
+import { isDesktop } from "../../utils/device";
+import {StyledContextMenu} from "../context-menu/styled";
+import RectangleSkeleton from "../rectangle";
 
-const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
+const ContextMenuSkeleton = ({
+  id,
+  className,
+  style,
+  isRectangle,
+  ...rest
+}) => {
   const {
     title,
     borderRadius,
@@ -19,8 +25,8 @@ const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const isDesktopView = isDesktop();
 
   return (
-    <StyledContextMenuLoader id={id} className={className} style={style}>
-      <RectangleLoader
+    <StyledContextMenu id={id} className={className} style={style}>
+      <RectangleSkeleton
         className="rectangle-content"
         title={title}
         width="16px"
@@ -33,7 +39,7 @@ const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="context-menu-rectangle"
         title={title}
         width={isDesktopView ? "97px" : "102px"}
@@ -46,22 +52,22 @@ const ContextMenuLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-    </StyledContextMenuLoader>
+    </StyledContextMenu>
   );
 };
 
-ContextMenuLoader.propTypes = {
+ContextMenuSkeleton.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
   isRectangle: PropTypes.bool,
 };
 
-ContextMenuLoader.defaultProps = {
+ContextMenuSkeleton.defaultProps = {
   id: undefined,
   className: undefined,
   style: undefined,
   isRectangle: true,
 };
 
-export default ContextMenuLoader;
+export default ContextMenuSkeleton;

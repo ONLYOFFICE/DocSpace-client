@@ -1,4 +1,4 @@
-import { checkIsSSR } from "@docspace/common/utils";
+import { checkIsSSR } from "COMMON_DIR/utils";
 
 export const size = {
   mobile: 600,

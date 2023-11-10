@@ -8,7 +8,9 @@ const displaySettings = css`
   flex-direction: column-reverse;
   align-items: flex-start;
   border-top: ${(props) =>
-    props.hasScroll && !props.showReminder ? "1px solid #ECEEF1" : "none"};
+    props.hasScroll && !props.showReminder && !props.hideBorder
+      ? "1px solid #ECEEF1"
+      : "none"};
 
   ${(props) =>
     props.hasScroll &&

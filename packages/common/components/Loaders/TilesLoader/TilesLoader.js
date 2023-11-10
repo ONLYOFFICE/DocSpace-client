@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import TileLoader from "../TileLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { mobile, tablet } from "@docspace/components/utils/device";
 
 const StyledTilesLoader = styled.div`
@@ -48,7 +48,7 @@ const TilesLoader = ({
   return (
     <StyledWrapper>
       {foldersCount > 0 ? (
-        <RectangleLoader
+        <RectangleSkeleton
           height="22px"
           width="78px"
           className="folders"
@@ -60,7 +60,7 @@ const TilesLoader = ({
 
       {filesCount > 0
         ? withTitle && (
-            <RectangleLoader
+            <RectangleSkeleton
               height="22px"
               width="103px"
               className="files"

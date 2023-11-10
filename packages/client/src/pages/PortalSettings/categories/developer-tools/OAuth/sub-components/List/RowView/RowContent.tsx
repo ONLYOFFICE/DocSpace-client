@@ -4,8 +4,6 @@ import Text from "@docspace/components/text";
 
 import ToggleButton from "@docspace/components/toggle-button";
 
-import { isMobileOnly } from "react-device-detect";
-
 import {
   StyledRowContent,
   ContentWrapper,

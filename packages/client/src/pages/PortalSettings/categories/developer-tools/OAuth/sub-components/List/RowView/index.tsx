@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";

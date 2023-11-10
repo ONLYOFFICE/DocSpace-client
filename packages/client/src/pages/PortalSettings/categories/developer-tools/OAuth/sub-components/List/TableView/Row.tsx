@@ -30,7 +30,7 @@ const Row = (props: RowProps) => {
   } = props;
   const navigate = useNavigate();
 
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
   const editClient = () => {
     navigate(`${item.clientId}`);

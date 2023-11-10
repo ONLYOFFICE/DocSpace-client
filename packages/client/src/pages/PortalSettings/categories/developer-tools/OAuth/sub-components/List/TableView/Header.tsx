@@ -7,7 +7,7 @@ import { HeaderProps } from "./TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Oauth", "Files", "Webhooks", "Common"]);
 
   const defaultColumns: {
     [key: string]:
@@ -27,21 +27,21 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "Creator",
-      title: "Creator",
+      title: t("Creator"),
       resizable: true,
       enable: true,
       minWidth: 150,
     },
     {
       key: "Modified",
-      title: "Modified",
+      title: t("Files:ByLastModified"),
       resizable: true,
       enable: true,
       minWidth: 150,
     },
     {
       key: "Scopes",
-      title: "Scopes",
+      title: t("Scopes"),
       resizable: true,
       enable: true,
       withTagRef: true,
@@ -49,7 +49,7 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "State",
-      title: "State",
+      title: t("Webhooks:State"),
       enable: true,
       resizable: false,
       defaultSize: 64,

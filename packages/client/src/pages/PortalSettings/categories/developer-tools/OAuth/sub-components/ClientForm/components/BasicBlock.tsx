@@ -63,33 +63,33 @@ const BasicBlock = ({
       <BlockHeader header={"Basic info"} />
       <StyledInputBlock>
         <InputGroup
-          label={"App name"}
+          label={t("AppName")}
           name={"name"}
-          placeholder={"Enter name"}
+          placeholder={t("EnterName")}
           value={nameValue}
           error={error.name}
           onChange={onChange}
         />
         <InputGroup
-          label={"Website URL"}
+          label={t("WebsiteUrl")}
           name={"website_url"}
-          placeholder={"Enter URL"}
+          placeholder={t("EnterURL")}
           value={websiteUrlValue}
           error={error.websiteUrl}
           onChange={onChange}
           disabled={isEdit}
         />
         <SelectGroup
-          label={"App icon"}
+          label={t("AppIcon")}
           value={logoValue}
           selectLabel={"Select new image"}
-          description={"JPG, PNG or SVG, 32x32"}
+          description={t("IconDescription")}
           onSelect={onSelect}
         />
         <TextAreaGroup
-          label={"Description"}
+          label={t("Common:Description")}
           name={"description"}
-          placeholder={"Enter description"}
+          placeholder={t("EnterDescription")}
           value={descriptionValue}
           error={error.description}
           onChange={onChange}

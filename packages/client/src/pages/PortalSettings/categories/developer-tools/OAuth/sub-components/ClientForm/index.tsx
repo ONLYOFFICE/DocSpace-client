@@ -36,7 +36,6 @@ const ClientForm = ({
 
   currentDeviceType,
 }: ClientFormProps) => {
-  const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -63,6 +62,7 @@ const ClientForm = ({
 
     scopes: [],
   });
+  const { t } = useTranslation(["OAuth", "Common"]);
 
   const [clientId, setClientId] = React.useState<string>("");
   const [clientSecret, setClientSecret] = React.useState<string>("");
@@ -279,8 +279,8 @@ const ClientForm = ({
             isEdit={isEdit}
           />
           <ButtonsBlock
-            saveLabel={"Save"}
-            cancelLabel={"Cancel"}
+            saveLabel={t("Common:SaveButton")}
+            cancelLabel={t("Common:CancelButton")}
             onSaveClick={onSaveClick}
             onCancelClick={onCancelClick}
             isRequestRunning={isRequestRunning}

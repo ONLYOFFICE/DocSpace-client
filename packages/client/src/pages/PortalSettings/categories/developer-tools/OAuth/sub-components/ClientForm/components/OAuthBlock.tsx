@@ -26,24 +26,24 @@ const OAuthBlock = ({
 }: OAuthBlockProps) => {
   return (
     <StyledBlock>
-      <BlockHeader header={"OAuth URLs"} />
+      <BlockHeader header={t("OAuthHeaderBlock")} />
       <StyledInputBlock>
         <MultiInputGroup
-          label={"Redirect URLs"}
-          placeholder={"Enter URL"}
+          label={t("RedirectsURLS")}
+          placeholder={t("EnterURL")}
           name={"redirect_uris"}
           onAdd={changeValue}
           currentValue={redirectUrisValue}
-          helpButtonText={"Redirect uris"}
+          helpButtonText={t("RedirectsURLSHelpButton")}
           isDisabled={isEdit}
         />
         <MultiInputGroup
-          label={"Allowed origins"}
-          placeholder={"Enter URL"}
+          label={t("AllowedOrigins")}
+          placeholder={t("EnterURL")}
           name={"allowed_origins"}
           onAdd={changeValue}
           currentValue={allowedOriginsValue}
-          helpButtonText={"Allowed origins"}
+          helpButtonText={t("AllowedOriginsHelpButton")}
           isDisabled={isEdit}
         />
       </StyledInputBlock>

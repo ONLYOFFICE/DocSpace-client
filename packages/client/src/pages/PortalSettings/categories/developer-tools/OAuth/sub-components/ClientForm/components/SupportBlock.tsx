@@ -37,28 +37,26 @@ const SupportBlock = ({
 
   return (
     <StyledBlock>
-      <BlockHeader header={"Support & Legal info"} />
+      <BlockHeader header={t("SupportAndLegalInfo")} />
       <StyledInputBlock>
         <InputGroup
-          label={"Privacy policy URL"}
+          label={t("PrivacyPolicyURL")}
           name={"policy_url"}
-          placeholder={"Enter URL"}
+          placeholder={t("EnterURL")}
           value={policyUrlValue}
           error={error.policyUrl}
           onChange={onChange}
-          helpButtonText={
-            "Provide a URL link to your Privacy Policy that must comply with applicable laws and regulations and that make clear how you collect, use, share, retain and otherwise process personal information."
-          }
+          helpButtonText={t("PrivacyPolicyURLHelpButton")}
           disabled={isEdit}
         />
         <InputGroup
-          label={"Terms of Service URL"}
+          label={t("TermsOfServiceURL")}
           name={"terms_url"}
-          placeholder={"Enter URL"}
+          placeholder={t("EnterURL")}
           value={termsUrlValue}
           error={error.termsUrl}
           onChange={onChange}
-          helpButtonText={"Terms of service help"}
+          helpButtonText={t("TermsOfServiceURLHelpButton")}
           disabled={isEdit}
         />
       </StyledInputBlock>

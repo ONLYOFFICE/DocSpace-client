@@ -12,7 +12,7 @@ const OAuthEmptyScreen = ({ t }: EmptyScreenProps) => {
       imageSrc={EmptyScreenOauthSvgUrl}
       imageAlt={"Empty oauth list"}
       headerText={t("NoOAuthAppHeader")}
-      subheadingText={t("NoOAuthAppDescription")}
+      subheadingText={t("OAuthAppDescription")}
       buttons={<RegisterNewButton t={t} />}
     />
   );

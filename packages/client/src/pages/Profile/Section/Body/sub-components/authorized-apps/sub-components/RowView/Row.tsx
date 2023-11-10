@@ -19,11 +19,7 @@ export const OAuthRow = (props: RowProps) => {
   } = props;
   const navigate = useNavigate();
 
-  const { t } = useTranslation(["Common"]);
-
-  const editClient = () => {
-    navigate(`${item.clientId}`);
-  };
+  const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
   const contextOptions =
     getContextMenuItems && getContextMenuItems(t, item, false, false);

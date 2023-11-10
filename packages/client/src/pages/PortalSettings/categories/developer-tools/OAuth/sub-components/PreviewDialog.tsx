@@ -157,6 +157,8 @@ const PreviewDialog = ({
   client,
   theme,
 }: PreviewDialogProps) => {
+  const { t } = useTranslation(["OAuth"]);
+
   const onClose = () => setPreviewDialogVisible?.(false);
 
   const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
@@ -193,7 +195,7 @@ const PreviewDialog = ({
           <StyledPreviewContainer>
             <SocialButton
               className={"social-button"}
-              label={"Sign in with DocSpace"}
+              label={t("SignIn")}
               IconComponent={icon}
               onClick={() => {
                 window.open(link, "login", linkParams);

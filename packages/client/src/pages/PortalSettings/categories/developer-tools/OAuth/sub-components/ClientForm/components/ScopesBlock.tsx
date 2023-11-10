@@ -201,7 +201,7 @@ const ScopesBlock = ({
         fontWeight={600}
         lineHeight={"22px"}
       >
-        Read
+        {t("Read")}
       </Text>
       {/* @ts-ignore */}
       <Text
@@ -210,7 +210,7 @@ const ScopesBlock = ({
         fontWeight={600}
         lineHeight={"22px"}
       >
-        Write
+        {t("Write")}
       </Text>
       {list.map((item) => item)}
     </StyledScopesContainer>

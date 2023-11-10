@@ -7,7 +7,7 @@ import { HeaderProps } from "./TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "OAuth"]);
 
   const defaultColumns: {
     [key: string]:
@@ -18,7 +18,7 @@ const Header = (props: HeaderProps) => {
   }[] = [
     {
       key: "App",
-      title: "Applications",
+      title: t("Apps"),
       resizable: true,
       enable: true,
       default: true,
@@ -27,14 +27,14 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "Website",
-      title: "Website",
+      title: t("Website"),
       resizable: true,
       enable: true,
       minWidth: 150,
     },
     {
       key: "Access granted",
-      title: "Access granted",
+      title: t("AccessGranted"),
       resizable: true,
       enable: true,
       minWidth: 150,

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 //@ts-ignore
 import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
@@ -42,22 +43,11 @@ interface ListProps {
   viewAs: ViewAsType;
 }
 
-const List = ({ t, clients, viewAs }: ListProps) => {
+const List = ({ clients, viewAs }: ListProps) => {
+  const { t } = useTranslation(["OAuth", "Common"]);
+
   return (
     <StyledContainer>
-      <Text
-        fontSize={"16px"}
-        fontWeight={700}
-        lineHeight={"22px"}
-        title={"OAuth applications"}
-        tag={""}
-        as={"p"}
-        color={""}
-        textAlign={""}
-        className="header"
-      >
-        {"OAuth applications"}
-      </Text>
       <Text
         fontSize={"12px"}
         fontWeight={400}
@@ -69,7 +59,7 @@ const List = ({ t, clients, viewAs }: ListProps) => {
         textAlign={""}
         className="description"
       >
-        {"OAuth description"}
+        {t("OAuthAppDescription")}
       </Text>
       <RegisterNewButton t={t} />
       <Consumer>

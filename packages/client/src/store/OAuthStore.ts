@@ -385,7 +385,7 @@ class OAuthStore implements OAuthStoreProps {
     const openOption = {
       key: "open",
       icon: ExternalLinkReactSvgUrl,
-      label: "Open",
+      label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       isDisabled: isInfo,
     };
@@ -393,7 +393,7 @@ class OAuthStore implements OAuthStoreProps {
     const infoOption = {
       key: "info",
       icon: SettingsIcon,
-      label: "Info",
+      label: t("Common:Info"),
       onClick: onShowInfo,
       isDisabled: isInfo,
     };
@@ -455,28 +455,28 @@ class OAuthStore implements OAuthStoreProps {
     const editOption = {
       key: "edit",
       icon: PencilReactSvgUrl,
-      label: t("Edit"),
+      label: t("Common:Edit"),
       onClick: () => this.editClient(clientId),
     };
 
     const authButtonOption = {
       key: "auth-button",
       icon: CodeReactSvgUrl,
-      label: "Auth button",
+      label: t("AuthButton"),
       onClick: onShowPreview,
     };
 
     const enableOption = {
       key: "enable",
       icon: EnableReactSvgUrl,
-      label: t("Enable"),
+      label: t("Common:Enable"),
       onClick: () => onEnable(true),
     };
 
     const disableOption = {
       key: "disable",
       icon: RemoveReactSvgUrl,
-      label: t("Disable"),
+      label: t("Common:Disable"),
       onClick: () => onEnable(false),
     };
 
@@ -487,7 +487,7 @@ class OAuthStore implements OAuthStoreProps {
       },
       {
         key: "delete",
-        label: t("Delete"),
+        label: t("Common:Delete"),
         icon: DeleteIcon,
         onClick: () => onDelete(),
       },

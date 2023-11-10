@@ -33,13 +33,12 @@ const ClientBlock = ({
   return (
     <StyledBlock>
       <BlockHeader
-        header={"Client"}
-        helpButtonText="Credentials for using OAth 2.0 as your Authentication type.
-Note: Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI."
+        header={t("Client")}
+        helpButtonText={t("ClientHelpButton")}
       />
       <StyledInputBlock>
         <InputGroup
-          label={"ID"}
+          label={t("ID")}
           name={""}
           placeholder={""}
           value={value.id}
@@ -48,7 +47,7 @@ Note: Any enterprise admin who knows the app's client ID will be able to retriev
           withCopy
         />
         <InputGroup
-          label={"Secret"}
+          label={t("Secret")}
           name={""}
           placeholder={""}
           value={value.secret}
@@ -56,7 +55,7 @@ Note: Any enterprise admin who knows the app's client ID will be able to retriev
           onChange={onChange}
           withCopy
           isPassword
-          buttonLabel={"Reset"}
+          buttonLabel={t("Reset")}
           onButtonClick={onResetClick}
         />
       </StyledInputBlock>

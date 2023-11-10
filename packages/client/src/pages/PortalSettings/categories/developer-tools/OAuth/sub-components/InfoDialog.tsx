@@ -142,7 +142,7 @@ const InfoDialog = ({
 
   isProfile,
 }: InfoDialogProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["OAuth", "Common"]);
 
   const [showDescription, setShowDescription] = React.useState(false);
   const [isRender, setIsRender] = React.useState(false);
@@ -212,7 +212,7 @@ const InfoDialog = ({
                 noSelect
                 truncate
               >
-                Creator
+                {t("Creator")}
               </Text>
               <div className="creator-block">
                 <Avatar source={client?.creatorAvatar} size={"min"} />
@@ -240,7 +240,7 @@ const InfoDialog = ({
                 noSelect
                 truncate
               >
-                Description
+                {t("Common:Description")}
               </Text>
               {/* @ts-ignore */}
               <Text
@@ -280,7 +280,7 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            Website
+            {t("Common:Website")}
           </Text>
           {/* @ts-ignore */}
           <Link
@@ -303,7 +303,7 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            Access
+            {t("Access")}
           </Text>
           <ScopeList
             selectedScopes={client?.scopes || []}
@@ -321,7 +321,7 @@ const InfoDialog = ({
                 noSelect
                 truncate
               >
-                Access granted
+                {t("AccessGranted")}
               </Text>
               {/* @ts-ignore */}
               <Text
@@ -344,7 +344,7 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            Support & Legal info
+            {t("SupportAndLegalInfo")}
           </Text>
           {/* @ts-ignore */}
           <Text
@@ -365,7 +365,7 @@ const InfoDialog = ({
               type={"action"}
               target={"_blank"}
             >
-              Privacy policy
+              {t("PrivacyPolicy")}
             </Link>
             <span className="separator"></span>
             {/* @ts-ignore */}
@@ -378,7 +378,7 @@ const InfoDialog = ({
               type={"action"}
               target={"_blank"}
             >
-              Terms of Service
+              {t("Terms of Service")}
             </Link>
           </Text>
           {!isProfile && (
@@ -392,7 +392,7 @@ const InfoDialog = ({
                 noSelect
                 truncate
               >
-                Last modified
+                {t("LastModified")}
               </Text>
               {/* @ts-ignore */}
               <Text

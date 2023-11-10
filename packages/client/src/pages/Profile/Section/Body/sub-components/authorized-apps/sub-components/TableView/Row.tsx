@@ -26,7 +26,7 @@ const Row = (props: RowProps) => {
     setSelection,
   } = props;
 
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
   const contextOptions =
     getContextMenuItems && getContextMenuItems(t, item, false, false);

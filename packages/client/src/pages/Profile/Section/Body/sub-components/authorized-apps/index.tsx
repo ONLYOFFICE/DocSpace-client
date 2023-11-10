@@ -1,5 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 import { useViewEffect } from "@docspace/common/hooks";
@@ -41,6 +42,8 @@ const AuthorizedApps = ({
   infoDialogVisible,
   fetchScopes,
 }: AuthorizedAppsProps) => {
+  const { t } = useTranslation(["OAuth"]);
+
   const getConsentList = React.useCallback(async () => {
     fetchScopes?.();
     await fetchConsents?.();
@@ -62,8 +65,7 @@ const AuthorizedApps = ({
     <StyledContainer>
       {/* @ts-ignore */}
       <Text fontSize={"12px"} fontWeight={"400"} lineHeight={"16px"}>
-        Here you can check the apps info to which you have granted the auth
-        access, and revoke consent if needed.
+        {t("ProfileDescription")}
       </Text>
       <Consumer>
         {(context: { sectionWidth: number; sectionHeight: number }) => (

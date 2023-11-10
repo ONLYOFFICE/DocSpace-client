@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import StyledTextInput from "SRC_DIR/text-input/styled-text-input";
-import Base from "SRC_DIR/themes/base";
+import StyledTextInput from "../../text-input/styled-text-input";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({
   $currentColorScheme,

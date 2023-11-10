@@ -4,7 +4,7 @@ import { ReactSVG } from "react-svg";
 import Text from "../text";
 import { GroupMainButton } from "./styled-main-button";
 import ContextMenu from "../context-menu";
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 

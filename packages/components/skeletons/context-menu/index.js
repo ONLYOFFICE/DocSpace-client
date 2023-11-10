@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isDesktop } from "@docspace/components/utils/device";
-import StyledContextMenu from "./styled";
-import RectangleLoader from "../RectangleLoader";
+import { isDesktop } from "../../utils/device";
+import {StyledContextMenu} from "../context-menu/styled";
+import RectangleSkeleton from "../rectangle";
 
 const ContextMenuSkeleton = ({
   id,
@@ -26,7 +26,7 @@ const ContextMenuSkeleton = ({
 
   return (
     <StyledContextMenu id={id} className={className} style={style}>
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-content"
         title={title}
         width="16px"
@@ -39,7 +39,7 @@ const ContextMenuSkeleton = ({
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="context-menu-rectangle"
         title={title}
         width={isDesktopView ? "97px" : "102px"}

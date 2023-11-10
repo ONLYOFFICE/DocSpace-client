@@ -3,8 +3,8 @@ import {
   StyledBadge,
   StyledInner,
   StyledText,
-} from "SRC_DIR/badge/styled-badge";
-import Base from "SRC_DIR/themes/base";
+} from "../../badge/styled-badge";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({
   $currentColorScheme,

@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 import moment from "moment";
 
 import { Days, Months, Years } from "./sub-components";
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 import { getValidDates } from "./utils";
 

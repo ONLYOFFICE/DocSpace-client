@@ -7,7 +7,7 @@ import Loader from "../../loader";
 
 import { toastr } from "../../";
 
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../../ColorTheme";
 import StyledDropzone from "./StyledDropzone";
 
 const ONE_MEGABYTE = 1024 * 1024;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Base from "SRC_DIR/themes/base";
+import Base from "../../themes/base";
 import StyledWrapper from "./sub-components/StyledWrapper";
 
 const getDefaultStyles = ({ $currentColorScheme, theme }) =>

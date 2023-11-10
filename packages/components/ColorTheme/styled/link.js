@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import StyledText from "SRC_DIR/link/styled-link";
+import StyledText from "../../link/styled-link";
 
 const getDefaultStyles = ({ $currentColorScheme, noHover }) =>
   $currentColorScheme &&

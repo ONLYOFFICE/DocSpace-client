@@ -24,7 +24,7 @@ const RectangleSkeleton = ({
   </ContentLoader>
 );
 
-RectangleLoader.propTypes = {
+RectangleSkeleton.propTypes = {
   title: PropTypes.string,
   x: PropTypes.string,
   y: PropTypes.string,

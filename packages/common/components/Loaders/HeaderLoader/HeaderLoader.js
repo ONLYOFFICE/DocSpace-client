@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledHeader, StyledSpacer } from "./StyledHeaderLoader";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader/index";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import CircleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const HeaderLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -18,7 +18,7 @@ const HeaderLoader = ({ id, className, style, ...rest }) => {
 
   return (
     <StyledHeader id={id} className={className} style={style}>
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width="208"
         height="24"
@@ -31,7 +31,7 @@ const HeaderLoader = ({ id, className, style, ...rest }) => {
         animate={animate}
       />
       <StyledSpacer />
-      <CircleLoader
+      <CircleSkeleton
         x="18"
         y="18"
         radius="18"

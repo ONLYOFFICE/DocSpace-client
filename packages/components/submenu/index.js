@@ -13,7 +13,7 @@ import {
   SubmenuScrollbarSize,
 } from "./styled-submenu";
 
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const Submenu = (props) => {
   const {

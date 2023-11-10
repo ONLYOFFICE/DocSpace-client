@@ -8,9 +8,9 @@ import {
   Wrapper,
   Numeration,
 } from "./styled-textarea";
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
-import Toast from "SRC_DIR/toast";
-import toastr from "SRC_DIR/toast/toastr";
+import { ColorTheme, ThemeType } from "../ColorTheme";
+import Toast from "../toast";
+import toastr from "../toast/toastr";
 import { isJSON, beautifyJSON } from "./utils";
 
 import copy from "copy-to-clipboard";

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import Base from "SRC_DIR/themes/base";
-import Text from "SRC_DIR/text";
+import Base from "../themes/base";
+import Text from "../text";
 
 const StyledIcon = styled.div`
   display: flex;

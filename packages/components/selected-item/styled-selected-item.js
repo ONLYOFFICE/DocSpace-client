@@ -1,8 +1,7 @@
-import React from "react";
-import { Base } from "SRC_DIR/themes";
+import { Base } from "../themes";
 import styled, { css } from "styled-components";
 
-import NoUserSelect from "SRC_DIR/utils/commonStyles";
+import NoUserSelect from "../utils/commonStyles";
 
 const StyledSelectedItem = styled.div`
   width: ${(props) => (props.isInline ? "fit-content" : "100%")};

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
-import { mobile, tablet } from "SRC_DIR/utils/device";
+import { mobile, tablet } from "../utils/device";
 
 const InputWrapper = styled.div`
   display: flex;

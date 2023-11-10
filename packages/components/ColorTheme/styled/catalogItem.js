@@ -4,9 +4,9 @@ import {
   StyledCatalogItemContainer,
   StyledCatalogItemImg,
   StyledCatalogItemText,
-} from "SRC_DIR/catalog-item/styled-catalog-item";
+} from "../../catalog-item/styled-catalog-item";
 
-import Base from "SRC_DIR/themes/base";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, isActive, theme }) =>
   $currentColorScheme &&

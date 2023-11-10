@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { tablet, mobile } from "SRC_DIR/utils/device";
-import Base from "SRC_DIR/themes/base";
+import { tablet, mobile } from "../../../utils/device";
+import Base from "../../../themes/base";
 
 const LoginContainer = styled.div`
   user-select: none;

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { tablet } from "../../utils/device";
 import { getCorrectFourValuesStyle } from "../../utils/rtlUtils";
 
-export const StyledContextMenu = styled.div`
+const StyledContextMenu = styled.div`
   width: 100%;
   height: 32px;
   display: grid;
@@ -30,3 +30,5 @@ export const StyledContextMenu = styled.div`
           `}
   }
 `;
+
+export {StyledContextMenu};

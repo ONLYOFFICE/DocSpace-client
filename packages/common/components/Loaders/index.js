@@ -1,5 +1,4 @@
-import Rectangle from "@docspace/components/skeletons/rectangle";
-import Circle from "./CircleLoader";
+
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
 import ArticleHeader from "./ArticleHeaderLoader";
@@ -53,8 +52,7 @@ import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
 export default {
-  Rectangle,
-  Circle,
+
   Header,
   SectionHeader,
   ArticleHeader,

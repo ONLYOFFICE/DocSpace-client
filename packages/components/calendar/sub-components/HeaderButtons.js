@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonsContainer, ArrowIcon } from "../styled-components";
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../../ColorTheme";
 import { useTheme } from "styled-components";
 
 export const HeaderButtons = ({

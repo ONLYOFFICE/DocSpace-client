@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { StyledMainButton } from "SRC_DIR/main-button/styled-main-button";
-import Base from "SRC_DIR/themes/base";
+import { StyledMainButton } from "../../main-button/styled-main-button";
+import Base from "../../themes/base";
 
 const disableStyles = css`
   opacity: 0.6;

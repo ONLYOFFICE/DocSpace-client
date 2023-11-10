@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { tablet, mobile } from "SRC_DIR/utils/device";
+import { tablet, mobile } from "../utils/device";
 
 import Base from "../themes/base";
 

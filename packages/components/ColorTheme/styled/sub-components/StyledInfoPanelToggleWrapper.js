@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Base from "SRC_DIR/themes/base";
-import { tablet } from "SRC_DIR/utils/device";
+import Base from "../../../themes/base";
+import { tablet } from "../../../utils/device";
 
 const StyledInfoPanelToggleWrapper = styled.div`
   display: flex;

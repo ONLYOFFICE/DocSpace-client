@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Base from "SRC_DIR/themes/base";
+import Base from  "../../../themes/base";
 
 const StyledPreparationPortalProgress = styled.div`
   .preparation-portal_progress {

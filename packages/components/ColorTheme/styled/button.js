@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import StyledButton from "SRC_DIR/button/styled-button";
-import Base from "SRC_DIR/themes/base";
+import StyledButton from "../../button/styled-button";
+import Base from "../../themes/base";
 
 const activeCss = css`
   border-color: ${(props) => props.$currentColorScheme.main?.buttons};

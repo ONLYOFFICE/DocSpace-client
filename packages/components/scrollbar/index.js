@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { classNames } from "../utils/classNames";
-import { isMobile } from "SRC_DIR/utils/device";
+import { isMobile } from "../utils/device";
 import StyledScrollbar from "./styled-scrollbar";
 import { useTheme } from "styled-components";
 

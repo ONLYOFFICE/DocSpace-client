@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { RoundButton } from "SRC_DIR/calendar/styled-components";
+import { RoundButton } from "../../calendar/styled-components";
 
 const getDefaultStyles = ({ $currentColorScheme }) =>
   $currentColorScheme &&

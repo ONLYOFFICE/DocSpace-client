@@ -11,7 +11,7 @@ import {
   StyledItem,
   StyledButtons,
 } from "./StyledSharingPanel";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const SharingPanelLoaderModal = ({
   id,
@@ -23,29 +23,29 @@ const SharingPanelLoaderModal = ({
   return (
     <StyledContainer>
       <StyledHeader isPersonal={true}>
-        <RectangleLoader width={"283px"} height={"16px"} />
+        <RectangleSkeleton width={"283px"} height={"16px"} />
       </StyledHeader>
 
       <StyledExternalLink isPersonal={true}>
-        <RectangleLoader
+        <RectangleSkeleton
           className="rectangle-loader"
           width={"146px"}
           height={"22px"}
         />
         {isShared && (
           <>
-            <RectangleLoader
+            <RectangleSkeleton
               className="rectangle-loader"
               width={"368px"}
               height={"32px"}
             />
-            <RectangleLoader width={"184px"} height={"20px"} />
+            <RectangleSkeleton width={"184px"} height={"20px"} />
           </>
         )}
       </StyledExternalLink>
       <StyledButtons>
-        <RectangleLoader width={"100%"} height={"40px"} />
-        <RectangleLoader width={"100%"} height={"40px"} />
+        <RectangleSkeleton width={"100%"} height={"40px"} />
+        <RectangleSkeleton width={"100%"} height={"40px"} />
       </StyledButtons>
     </StyledContainer>
   );

@@ -3,14 +3,14 @@ import moment from "moment";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
-import Text from "SRC_DIR/text";
-import SelectorAddButton from "SRC_DIR/selector-add-button";
-import SelectedItem from "SRC_DIR/selected-item";
-import Calendar from "SRC_DIR/calendar";
+import Text from "../text";
+import SelectorAddButton from "../selector-add-button";
+import SelectedItem from "../selected-item";
+import Calendar from "../calendar";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
-import { mobile, tablet } from "../utils/device";
+import { mobile } from "../utils/device";
 
 const Wrapper = styled.div`
   .selectedItem {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "SRC_DIR/themes";
+import { Base } from "../themes";
 
 const FillingStatusContainer = styled.div`
   width: 100%;

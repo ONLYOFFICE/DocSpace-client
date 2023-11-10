@@ -16,13 +16,13 @@ import ButtonTrashIcon from "PUBLIC_DIR/images/button.trash.react.svg";
 import ButtonMoveIcon from "PUBLIC_DIR/images/button.move.react.svg";
 import ButtonDuplicateIcon from "PUBLIC_DIR/images/button.duplicate.react.svg";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
-import commonIconsStyles from "SRC_DIR/utils/common-icons-style";
+import commonIconsStyles from "../utils/common-icons-style";
 import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
 import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
 import RefreshIcon from "PUBLIC_DIR/images/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 
-import { ColorTheme, ThemeType } from "SRC_DIR/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const StyledButtonAlertIcon = styled(ButtonAlertIcon)`
   ${commonIconsStyles}

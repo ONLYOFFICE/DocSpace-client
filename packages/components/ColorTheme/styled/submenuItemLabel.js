@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { StyledSubmenuItemLabel } from "SRC_DIR/submenu/styled-submenu";
+import { StyledSubmenuItemLabel } from "../../submenu/styled-submenu";
 
 const getDefaultStyles = ({ $currentColorScheme, isActive }) =>
   $currentColorScheme &&

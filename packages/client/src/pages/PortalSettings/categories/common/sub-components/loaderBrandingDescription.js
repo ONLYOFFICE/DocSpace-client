@@ -1,5 +1,4 @@
-import React from "react";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import styled from "styled-components";
 
 const StyledLoader = styled.div`
@@ -14,12 +13,12 @@ const StyledLoader = styled.div`
 const LoaderBrandingDescription = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle
+      <RectangleSkeleton
         width="700px"
         height="16px"
         className="loader-description"
       />
-      <Loaders.Rectangle width="93px" height="16px" />
+      <RectangleSkeleton width="93px" height="16px" />
     </StyledLoader>
   );
 };

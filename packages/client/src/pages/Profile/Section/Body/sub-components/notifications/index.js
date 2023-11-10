@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 import { NotificationsType } from "@docspace/common/constants";
 import { getNotificationSubscription } from "@docspace/common/api/settings";
 import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import toastr from "@docspace/components/toast/toastr";
 
 import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
@@ -75,7 +76,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     <>
       <StyledTextContent>
         {isLoadingContent ? (
-          <Loaders.Rectangle height={"22px"} width={"57px"} />
+          <RectangleSkeleton height={"22px"} width={"57px"} />
         ) : (
           <Text fontSize={"14px"} fontWeight={600}>
             {t("Badges")}
@@ -100,7 +101,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     <>
       <StyledTextContent>
         {isLoadingContent ? (
-          <Loaders.Rectangle height={"22px"} width={"57px"} />
+          <RectangleSkeleton height={"22px"} width={"57px"} />
         ) : (
           <Text fontSize={"14px"} fontWeight={600} className="email-title">
             {t("Common:Email")}

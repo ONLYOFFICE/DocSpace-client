@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -74,10 +74,10 @@ const SelectorRowLoader = ({
         key={key}
         {...rest}
       >
-        <RectangleLoader className={"avatar"} width={"32px"} height={"32px"} />
-        <RectangleLoader width={"212px"} height={"16px"} />
+        <RectangleSkeleton className={"avatar"} width={"32px"} height={"32px"} />
+        <RectangleSkeleton width={"212px"} height={"16px"} />
         {isMultiSelect && (
-          <RectangleLoader
+          <RectangleSkeleton
             className={"checkbox"}
             width={"16px"}
             height={"16px"}

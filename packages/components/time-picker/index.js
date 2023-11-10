@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import styled, { css } from "styled-components";
 
-import TextInput from "@docspace/components/text-input";
+import TextInput from "../text-input";
 import Base from "../themes/base";
 
 const TimeInput = styled.div`

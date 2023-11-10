@@ -1,7 +1,5 @@
-import React from "react";
-
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const LoaderWrapper = styled.div`
   width: 100%;
@@ -37,28 +35,28 @@ const HistoryRowWrapper = styled.div`
 export const WebhookHistoryLoader = () => {
   const HistoryRowLoader = () => (
     <HistoryRowWrapper>
-      <Loaders.Rectangle
+      <RectangleSkeleton
         width="20px"
         height="20px"
         className="historyIconLoader"
       />
-      <Loaders.Rectangle height="20px" className="historyContentLoader" />
+      <RectangleSkeleton height="20px" className="historyContentLoader" />
     </HistoryRowWrapper>
   );
 
   return (
     <LoaderWrapper>
       <NavContainerLoader>
-        <Loaders.Rectangle width="118px" height="22px" />
-        <Loaders.Rectangle width="32px" height="22px" />
+        <RectangleSkeleton width="118px" height="22px" />
+        <RectangleSkeleton width="32px" height="22px" />
       </NavContainerLoader>
 
       <HistoryHeaderLoader>
-        <Loaders.Rectangle width="51px" height="16px" />
-        <Loaders.Rectangle width="60px" height="16px" />
-        <Loaders.Rectangle width="60px" height="16px" />
-        <Loaders.Rectangle width="62px" height="16px" />
-        <Loaders.Rectangle width="16px" height="16px" />
+        <RectangleSkeleton width="51px" height="16px" />
+        <RectangleSkeleton width="60px" height="16px" />
+        <RectangleSkeleton width="60px" height="16px" />
+        <RectangleSkeleton width="62px" height="16px" />
+        <RectangleSkeleton width="16px" height="16px" />
       </HistoryHeaderLoader>
 
       <HistoryRowLoader />

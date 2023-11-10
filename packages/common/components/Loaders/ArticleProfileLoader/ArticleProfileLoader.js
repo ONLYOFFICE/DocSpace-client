@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import {
   StyledContainer,
   StyledBlock,
-  StyledRectangleLoader,
 } from "./StyledArticleProfileLoader";
 import { inject, observer } from "mobx-react";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";;
 
 const ArticleProfileLoader = ({
   id,
@@ -26,24 +25,24 @@ const ArticleProfileLoader = ({
       <StyledBlock showText={showText}>
         {showText ? (
           <>
-            <RectangleLoader
+            <RectangleSkeleton
               width={"40px"}
               height={"40px"}
               borderRadius={"50%"}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               width={"131px"}
               height={"18px"}
               className={"title"}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               width={"16px"}
               height={"16px"}
               className={"option-button"}
             />
           </>
         ) : (
-          <RectangleLoader
+          <RectangleSkeleton
             width={"32px"}
             height={"32px"}
             borderRadius={"50%"}

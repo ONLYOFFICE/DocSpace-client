@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -25,31 +24,31 @@ const SelectorBreadCrumbsLoader = ({
 }) => {
   return (
     <StyledContainer>
-      <RectangleLoader
+      <RectangleSkeleton
         width={"80px"}
         height={"22px"}
         style={{ ...style }}
         {...rest}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         width={"12px"}
         height={"12px"}
         style={{ ...style }}
         {...rest}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         width={"80px"}
         height={"22px"}
         style={{ ...style }}
         {...rest}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         width={"12px"}
         height={"12px"}
         style={{ ...style }}
         {...rest}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         width={"80px"}
         height={"22px"}
         style={{ ...style }}

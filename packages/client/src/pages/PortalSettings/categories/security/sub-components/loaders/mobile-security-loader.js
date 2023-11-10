@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   .header {
@@ -25,32 +24,32 @@ const StyledLoader = styled.div`
 const MobileSecurityLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="37px" />
+      <RectangleSkeleton className="header" height="37px" />
       <div className="submenu">
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
       </div>
 
       <div className="category">
-        <Loaders.Rectangle height="22px" width="236px" />
-        <Loaders.Rectangle height="60px" />
+        <RectangleSkeleton height="22px" width="236px" />
+        <RectangleSkeleton height="60px" />
       </div>
 
       <div className="category">
-        <Loaders.Rectangle height="22px" width="227px" />
-        <Loaders.Rectangle height="120px" />
+        <RectangleSkeleton height="22px" width="227px" />
+        <RectangleSkeleton height="120px" />
       </div>
 
       <div className="category">
-        <Loaders.Rectangle height="22px" />
-        <Loaders.Rectangle height="40px" />
+        <RectangleSkeleton height="22px" />
+        <RectangleSkeleton height="40px" />
       </div>
 
       <div className="category">
-        <Loaders.Rectangle height="22px" width="101px" />
-        <Loaders.Rectangle height="40px" />
+        <RectangleSkeleton height="22px" width="101px" />
+        <RectangleSkeleton height="40px" />
       </div>
     </StyledLoader>
   );

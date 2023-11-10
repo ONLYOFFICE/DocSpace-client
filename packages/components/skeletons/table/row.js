@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledRow, StyledBox1, StyledBox2 } from "./StyledTabletRow";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader";
+import { StyledRow, StyledBox1, StyledBox2 } from "./styled";
+import RectangleSkeleton from "../rectangle";
 
 const TableRow = ({ id, className, style, isRectangle, ...rest }) => {
   const {
@@ -24,7 +23,7 @@ const TableRow = ({ id, className, style, isRectangle, ...rest }) => {
       gap={isRectangle ? "8px" : "16px"}
     >
       <StyledBox1>
-        <RectangleLoader
+        <RectangleSkeleton
           className="rectangle-content"
           title={title}
           width="100%"
@@ -39,7 +38,7 @@ const TableRow = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </StyledBox1>
       <StyledBox2 className="row-content">
-        <RectangleLoader
+        <RectangleSkeleton
           className="first-row-content__mobile"
           title={title}
           height="16px"
@@ -51,7 +50,7 @@ const TableRow = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="second-row-content__mobile"
           title={title}
           height="12px"
@@ -64,7 +63,7 @@ const TableRow = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
       </StyledBox2>
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width="16"
         height="16"

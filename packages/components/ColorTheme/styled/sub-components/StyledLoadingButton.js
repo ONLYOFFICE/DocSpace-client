@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "../../../themes";
 
 const rotate360 = keyframes`
   from {

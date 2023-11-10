@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   padding-right: 8px;
@@ -24,26 +24,26 @@ const StyledLoader = styled.div`
 const BruteForceProtectionLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="80px" />
+      <RectangleSkeleton className="header" height="80px" />
 
       <div className="content">
         <div>
-          <Loaders.Rectangle width="140px" height="20px" />
-          <Loaders.Rectangle height="32px" />
+          <RectangleSkeleton width="140px" height="20px" />
+          <RectangleSkeleton height="32px" />
         </div>
 
         <div>
-          <Loaders.Rectangle width="117px" height="20px" />
-          <Loaders.Rectangle height="32px" />
+          <RectangleSkeleton width="117px" height="20px" />
+          <RectangleSkeleton height="32px" />
         </div>
 
         <div>
-          <Loaders.Rectangle width="117px" height="20px" />
-          <Loaders.Rectangle height="32px" />
+          <RectangleSkeleton width="117px" height="20px" />
+          <RectangleSkeleton height="32px" />
         </div>
       </div>
 
-      <Loaders.Rectangle className="buttons" height="40px" />
+      <RectangleSkeleton className="buttons" height="40px" />
     </StyledLoader>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
-
+import TableSkeleton from "@docspace/components/skeletons/table";
+import RowsSkeleton from "@docspace/components/skeletons/rows";
 import Loaders from "@docspace/common/components/Loaders";
 
 const pathname = window.location.pathname.toLowerCase();
@@ -39,9 +40,9 @@ const withLoader = (WrappedComponent) => (Loader) => {
       ) : currentViewAs === "tile" ? (
         <Loaders.Tiles />
       ) : currentViewAs === "table" ? (
-        <Loaders.TableLoader />
+        <TableSkeleton />
       ) : (
-        <Loaders.Rows />
+        <RowsSkeleton />
       )
     ) : (
       <WrappedComponent {...props} />

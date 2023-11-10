@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledGroup, StyledLastRow, StyledSpacer } from "./StyledGroupLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const GroupLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -17,7 +17,7 @@ const GroupLoader = ({ id, className, style, ...rest }) => {
 
   return (
     <StyledGroup id={id} className={className} style={style}>
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
@@ -27,7 +27,7 @@ const GroupLoader = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
@@ -37,7 +37,7 @@ const GroupLoader = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
@@ -49,7 +49,7 @@ const GroupLoader = ({ id, className, style, ...rest }) => {
       />
       <StyledSpacer />
       <StyledLastRow>
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="100"
           height="36"
@@ -61,7 +61,7 @@ const GroupLoader = ({ id, className, style, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="100"
           height="36"

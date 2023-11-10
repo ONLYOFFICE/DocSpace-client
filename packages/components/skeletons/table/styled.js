@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { desktop } from "@docspace/components/utils/device";
+import { desktop } from "../../utils/device";
 
 const StyledRow = styled.div`
   width: 100%;

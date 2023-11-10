@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledAutoBackup from "./StyledAutoBackup";
 const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const {
@@ -16,7 +16,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
   return (
     <StyledAutoBackup>
       <div className="auto-backup-loader_main">
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_title"
           title={title}
           width="100%"
@@ -30,7 +30,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
 
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_title-description"
           title={title}
           width="100%"
@@ -44,7 +44,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
 
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_toggle"
           title={title}
           width="100%"
@@ -60,7 +60,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
       </div>
 
       <div className="auto-backup-loader_menu">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -72,7 +72,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_option"
           title={title}
           width="100%"
@@ -86,7 +86,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
         <div></div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_option-description"
           title={title}
           width="100%"
@@ -100,7 +100,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
         <div></div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_option-description-second"
           title={title}
           width="100%"
@@ -114,7 +114,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
         <div></div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_option-description-third"
           title={title}
           width="100%"
@@ -128,7 +128,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           animate={animate}
         />
         <div></div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="auto-backup-loader_option-description-fourth"
           title={title}
           width="100%"

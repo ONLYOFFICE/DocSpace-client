@@ -1,8 +1,8 @@
 import React from "react";
-import TableRow from "../TableRow";
+import TableRow from "./row";
 import PropTypes from "prop-types";
 
-const TableLoader = ({ count, ...props }) => {
+const TableSkeleton = ({ count, ...props }) => {
   const items = [];
 
   for (var i = 0; i < count; i++) {
@@ -11,11 +11,11 @@ const TableLoader = ({ count, ...props }) => {
   return <div>{items}</div>;
 };
 
-TableLoader.propTypes = {
+TableSkeleton.propTypes = {
   count: PropTypes.number,
 };
 
-TableLoader.defaultProps = {
+TableSkeleton.defaultProps = {
   count: 25,
 };
-export default TableLoader;
+export default TableSkeleton;

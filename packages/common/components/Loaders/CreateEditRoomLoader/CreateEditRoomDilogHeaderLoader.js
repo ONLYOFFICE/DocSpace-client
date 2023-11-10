@@ -1,9 +1,8 @@
 import React from "react";
-
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const CreateEditRoomDilogHeaderLoader = () => {
-  return <RectangleLoader width={"250"} height={"21"} borderRadius={"3"} />;
+  return <RectangleSkeleton width={"250"} height={"21"} borderRadius={"3"} />;
 };
 
 export default CreateEditRoomDilogHeaderLoader;

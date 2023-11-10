@@ -67,23 +67,25 @@ const AuthorizedApps = ({
       <Text fontSize={"12px"} fontWeight={"400"} lineHeight={"16px"}>
         {t("ProfileDescription")}
       </Text>
-      <Consumer>
-        {(context: { sectionWidth: number; sectionHeight: number }) => (
-          <>
-            {viewAs === "table" ? (
-              <TableView
-                items={consents || []}
-                sectionWidth={context.sectionWidth}
-              />
-            ) : (
-              <RowView
-                items={consents || []}
-                sectionWidth={context.sectionWidth}
-              />
-            )}
-          </>
-        )}
-      </Consumer>
+      {consents && consents?.length > 0 && (
+        <Consumer>
+          {(context: { sectionWidth: number; sectionHeight: number }) => (
+            <>
+              {viewAs === "table" ? (
+                <TableView
+                  items={consents || []}
+                  sectionWidth={context.sectionWidth}
+                />
+              ) : (
+                <RowView
+                  items={consents || []}
+                  sectionWidth={context.sectionWidth}
+                />
+              )}
+            </>
+          )}
+        </Consumer>
+      )}
       {infoDialogVisible && (
         <InfoDialog visible={infoDialogVisible} isProfile />
       )}

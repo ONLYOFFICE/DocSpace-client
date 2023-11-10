@@ -226,8 +226,6 @@ class OAuthStore implements OAuthStoreProps {
     try {
       const consentList: IClientProps[] = await getConsentList();
 
-      console.log(consentList);
-
       runInAction(() => {
         this.consents = [...consentList];
       });
@@ -370,7 +368,7 @@ class OAuthStore implements OAuthStoreProps {
     t: any,
     item: IClientProps,
     isInfo?: boolean,
-    isSettings?: boolean
+    isSettings: boolean = true
   ) => {
     const { clientId } = item;
 
@@ -438,15 +436,16 @@ class OAuthStore implements OAuthStoreProps {
 
           await Promise.all(actions);
 
-          runInAction(() => {
-            this.activeClients = [];
-            this.selection = [];
-          });
+          this.setActiveClient("");
+          this.setSelection("");
         } catch (e) {}
       } else {
         this.setActiveClient(clientId);
 
         await this.changeClientStatus(clientId, status);
+
+        this.setActiveClient("");
+        this.setSelection("");
 
         //TODO OAuth, show toast
       }

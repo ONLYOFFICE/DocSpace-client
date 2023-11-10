@@ -128,7 +128,7 @@ const ScopesBlock = ({
               >
                 {scope.read.name}
               </Text>{" "}
-              — {t(`${scope.read.tKey}`)}
+              — {t(`Common:${scope.read.tKey}`)}
             </Text>
             {/* @ts-ignore */}
             <Text
@@ -147,7 +147,7 @@ const ScopesBlock = ({
               >
                 {scope.write.name}
               </Text>
-              — {t(`${scope.write.tKey}`)}
+              — {t(`Common:${scope.write.tKey}`)}
             </Text>
           </StyledScopesName>
           <StyledScopesCheckbox>

@@ -21,6 +21,10 @@ export const PublicRoute = ({ children, ...rest }) => {
     //   return <AppLoader />;
     // }
 
+    if (location?.state?.isRestrictionError) {
+      return children;
+    }
+
     if (location.pathname === "/rooms/share") {
       return children;
     }

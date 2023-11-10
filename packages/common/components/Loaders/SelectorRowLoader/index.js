@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -46,6 +46,12 @@ const StyledItem = styled.div`
   }
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  margin: 12px 16px;
+  border-bottom: ${(props) => props.theme.selector.border};
+`;
+
 const SelectorRowLoader = ({
   id,
   className,
@@ -53,6 +59,8 @@ const SelectorRowLoader = ({
   isMultiSelect,
   isContainer,
   isUser,
+  withAllSelect,
+  count = 5,
   ...rest
 }) => {
   const getRowItem = (key) => {
@@ -66,10 +74,10 @@ const SelectorRowLoader = ({
         key={key}
         {...rest}
       >
-        <RectangleLoader className={"avatar"} width={"32px"} height={"32px"} />
-        <RectangleLoader width={"212px"} height={"16px"} />
+        <RectangleSkeleton className={"avatar"} width={"32px"} height={"32px"} />
+        <RectangleSkeleton width={"212px"} height={"16px"} />
         {isMultiSelect && (
-          <RectangleLoader
+          <RectangleSkeleton
             className={"checkbox"}
             width={"16px"}
             height={"16px"}
@@ -81,7 +89,7 @@ const SelectorRowLoader = ({
 
   const getRowItems = () => {
     const rows = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < count; i++) {
       rows.push(getRowItem(i));
     }
 
@@ -90,6 +98,12 @@ const SelectorRowLoader = ({
 
   return isContainer ? (
     <StyledContainer id={id} className={className} style={style} {...rest}>
+      {withAllSelect && (
+        <>
+          {getRowItem(-1)}
+          <Divider />
+        </>
+      )}
       {getRowItems()}
     </StyledContainer>
   ) : (

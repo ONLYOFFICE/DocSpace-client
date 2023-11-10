@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledRow } from "./StyledListLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const ListItemLoader = ({
   id,
@@ -31,7 +31,7 @@ const ListItemLoader = ({
       withoutLastRectangle={withoutLastRectangle}
     >
       {!withoutFirstRectangle && (
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -46,7 +46,7 @@ const ListItemLoader = ({
         />
       )}
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="list-loader_rectangle-content"
         title={title}
         width="100%"
@@ -60,7 +60,7 @@ const ListItemLoader = ({
         animate={animate}
       />
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="list-loader_rectangle-row"
         title={title}
         height="16px"
@@ -74,7 +74,7 @@ const ListItemLoader = ({
       />
 
       {!withoutLastRectangle && (
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"

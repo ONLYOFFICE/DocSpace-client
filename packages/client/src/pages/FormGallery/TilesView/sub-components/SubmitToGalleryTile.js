@@ -1,11 +1,11 @@
 import { Button } from "@docspace/components";
 import styled, { css } from "styled-components";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexToRgba from "hex-to-rgba";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 export const StyledSubmitToGalleryTile = styled.div`
   position: relative;
@@ -37,12 +37,12 @@ export const StyledSubmitToGalleryTile = styled.div`
     .title {
       color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
       font-weight: 600;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       line-height: 16px;
     }
     .body {
       font-weight: 400;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
       color: ${({ theme }) => theme.submitToGalleryTile.bodyText};
     }

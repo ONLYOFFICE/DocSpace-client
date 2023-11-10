@@ -11,6 +11,7 @@ export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
 export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
+export const LINKS_LIMIT_COUNT = 5;
 
 /**
  * Enum for employee activation status.
@@ -81,6 +82,7 @@ export const FilesSelectorFilterTypes = Object.freeze({
   GZ: "GZ",
   DOCXF: "DOCXF",
   XLSX: "XLSX",
+  ALL: "ALL",
 });
 /**
  * Enum for filter subject.
@@ -302,19 +304,6 @@ export const providersData = Object.freeze({
     icon: ShareZoomReactSvgUrl,
   },
 });
-export const LoaderStyle = {
-  title: "",
-  width: "100%",
-  height: "32",
-  backgroundColor: "#000000",
-  foregroundColor: "#000000",
-  backgroundOpacity: 0.1,
-  foregroundOpacity: 0.15,
-  borderRadius: "3",
-  radius: "3",
-  speed: 2,
-  animate: true,
-};
 
 /**
  * Enum for third-party storages.

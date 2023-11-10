@@ -252,6 +252,7 @@ const StyledVersionRow = styled(Row)`
     overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    white-space: inherit;
   }
 
   .version-comment-wrapper {

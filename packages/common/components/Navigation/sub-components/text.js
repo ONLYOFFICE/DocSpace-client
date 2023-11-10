@@ -39,7 +39,7 @@ const StyledTextContainer = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
 
   margin: 0;
@@ -49,12 +49,12 @@ const StyledHeading = styled(Heading)`
     `color: ${props.theme.navigation.rootFolderTitleColor}`};
 
   @media ${tablet} {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 
   @media ${mobile} {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     line-height: 24px;
   }
 `;

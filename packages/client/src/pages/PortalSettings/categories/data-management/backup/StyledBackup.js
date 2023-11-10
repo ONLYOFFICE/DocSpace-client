@@ -19,16 +19,12 @@ const floatingButtonStyles = css`
 `;
 const commonStyles = css`
   .backup_modules-description {
-    margin-bottom: 24px;
-    margin-top: 8px;
+    margin-bottom: 8px;
     max-width: ${TEXT_LENGTH};
-    @media ${mobile} {
-      margin-bottom: 8px;
-    }
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .backup_modules-header_wrapper {
-    display: flex;
     svg {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -38,6 +34,11 @@ const commonStyles = css`
           : css`
               margin: 5px 0px 0px 4px;
             `}
+    }
+    .link-learn-more {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
   }
 
@@ -50,7 +51,7 @@ const commonStyles = css`
         : css`
             margin-right: 7px;
           `}
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
   }
 
@@ -77,7 +78,7 @@ const commonStyles = css`
     margin: 4px 0 10px 0;
     width: 100%;
     max-width: ${INPUT_LENGTH};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
 
     @media ${mobile} {
       max-width: 100%;
@@ -96,7 +97,7 @@ const commonStyles = css`
 
   .backup_radio-button {
     max-width: fit-content;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 15px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
@@ -219,24 +220,14 @@ const StyledAutoBackup = styled.div`
   .automatic-backup_main {
     margin-bottom: 30px;
     .radio-button_text {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }
   }
   .backup_toggle-btn {
     position: static;
+    margin-top: 1px;
   }
-  .backup_toggle-btn-description {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 37px;
-          `
-        : css`
-            margin-left: 37px;
-          `}
 
-    max-width: 1024px;
-  }
   .toggle-button-text {
     font-weight: 600;
     margin-bottom: 4px;
@@ -255,16 +246,6 @@ const StyledAutoBackup = styled.div`
           `
         : css`
             margin-right: 8px;
-          `}
-  }
-  .backup_modules {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 37px;
-          `
-        : css`
-            margin-left: 37px;
           `}
   }
   .auto-backup_storages-module {
@@ -298,31 +279,39 @@ const StyledAutoBackup = styled.div`
           `}
   }
   .backup_toggle-wrapper {
+    display: flex;
     margin-bottom: 16px;
+    border-radius: 6px;
     background-color: ${(props) =>
       props.theme.client.settings.backup.rectangleBackgroundColor};
     padding: 12px;
     max-width: 724px;
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: minmax(100px, 724px);
   }
   .auto-backup_buttons {
     ${!isMobileOnly && "margin-bottom: 24px"}
   }
 
-  .auto-backup_badge {
-    height: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
-    cursor: auto;
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .auto-backup_badge {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 4px;
+              `
+            : css`
+                margin-left: 4px;
+              `}
+        cursor: auto;
+      }
+    }
   }
+
   ${(props) => !props.isEnableAuto && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`
@@ -352,15 +341,16 @@ const StyledRestoreBackup = styled.div`
 
   .restore-description {
     max-width: ${TEXT_LENGTH};
-    font-size: 12px;
-    line-height: 15px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
   }
 
   .restore-backup_warning {
     font-weight: 600;
     margin-top: 24px;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     color: ${(props) => props.theme.client.settings.backup.warningColor};
   }
 
@@ -402,7 +392,7 @@ const StyledRestoreBackup = styled.div`
   }
 
   .restore-description {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .restore-backup_modules {
@@ -564,16 +554,12 @@ const StyledBackup = styled.div`
       props.theme.client.settings.backup.separatorBorder};
   }
   .backup_modules-header {
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     font-weight: bold;
     padding-bottom: 8px;
   }
   .layout-progress-bar {
     ${!isMobileOnly && "cursor: default;"}
-  }
-  .backup_modules-description {
-    margin-bottom: 24px;
-    max-width: ${TEXT_LENGTH};
   }
   .backup-section_wrapper {
     margin-bottom: 27px;
@@ -582,7 +568,7 @@ const StyledBackup = styled.div`
       margin-bottom: 8px;
       .backup-section_text {
         font-weight: 700;
-        font-size: 16px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
         line-height: 22px;
       }
       .backup-section_arrow-button {

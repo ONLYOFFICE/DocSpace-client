@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Base } from "@docspace/components/themes";
 
-import RectangleLoader from "../../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledHistoryLoader = styled.div`
   width: 100%;
@@ -63,32 +63,32 @@ const HistoryLoader = ({}) => {
   return (
     <StyledHistoryLoader>
       <StyledSubtitleLoader>
-        <RectangleLoader width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleLoader width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
       </StyledSubtitleLoader>
 
       {[...Array(5).keys()].map((i) => (
         <StyledHistoryBlockLoader key={i}>
           <div className="content">
-            <RectangleLoader
+            <RectangleSkeleton
               className="avatar"
               width={"32px"}
               height={"32px"}
               borderRadius={"50%"}
             />
             <div className="message">
-              <RectangleLoader
+              <RectangleSkeleton
                 width={"107px"}
                 height={"16px"}
                 borderRadius={"3px"}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 width={"176px"}
                 height={"16px"}
                 borderRadius={"3px"}
               />
             </div>
-            <RectangleLoader
+            <RectangleSkeleton
               className="date"
               width={"107px"}
               height={"16px"}

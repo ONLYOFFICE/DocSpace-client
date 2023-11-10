@@ -110,7 +110,7 @@ const StyledChipValue = styled.div`
   text-overflow: ellipsis;
 
   font-weight: normal;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
 
   color: ${(props) =>
     props.isValid ? props.theme.selectedItem.text.color : "#333"};

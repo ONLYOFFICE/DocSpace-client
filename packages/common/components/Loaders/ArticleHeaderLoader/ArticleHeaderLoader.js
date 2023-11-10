@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 
 import StyledContainer from "./StyledArticleHeader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const ArticleHeaderLoader = ({ id, className, style, showText, ...rest }) => {
   const {
@@ -25,7 +25,7 @@ const ArticleHeaderLoader = ({ id, className, style, showText, ...rest }) => {
       style={style}
       showText={showText}
     >
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width={width}
         height={height}

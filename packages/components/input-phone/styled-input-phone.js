@@ -1,4 +1,4 @@
-import Box from "@docspace/components/box";
+import Box from "../box";
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
 
@@ -55,7 +55,7 @@ export const StyledBox = styled(Box)`
     top: 0;
     left: 12px;
 
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 400;
   }
 

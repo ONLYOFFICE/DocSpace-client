@@ -5,13 +5,27 @@ import toastr from "@docspace/components/toast/toastr";
 
 import {
   EmployeeActivationStatus,
+  LINKS_LIMIT_COUNT,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/common/constants";
 import Loaders from "@docspace/common/components/Loaders";
 import MembersHelper from "../../helpers/MembersHelper";
-import PublicRoomBlock from "./sub-components/PublicRoomBlock";
-import MembersList from "./MembersList";
+import MembersList from "./sub-components/MembersList";
+import User from "./User";
+import PublicRoomBar from "./sub-components/PublicRoomBar";
+import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+
+import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
+import IconButton from "@docspace/components/icon-button";
+import Tooltip from "@docspace/components/tooltip";
+import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
+
+import Avatar from "@docspace/components/avatar";
+import copy from "copy-to-clipboard";
+import LinkRow from "./sub-components/LinkRow";
 
 const Members = ({
   t,
@@ -42,6 +56,16 @@ const Members = ({
   members,
   setMembersList,
   roomType,
+  primaryLink,
+  isArchiveFolder,
+  isPublicRoom,
+
+  additionalLinks,
+  setLinkParams,
+  setEditLinkPanelIsVisible,
+  getPrimaryLink,
+  setExternalLink,
+  isVisitor,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
@@ -200,6 +224,10 @@ const Members = ({
     };
 
     setMembersList(newMembers);
+    setSelectionParentRoom({
+      ...selectionParentRoom,
+      members: newMembers,
+    });
   };
 
   if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
@@ -221,43 +249,195 @@ const Members = ({
 
   if (!dataReadyMembersList) return <></>;
 
-  return (
-    <>
-      {isPublicRoomType && (
-        <PublicRoomBlock
-          t={t}
-          roomType={roomType}
-          roomId={selectionParentRoom.id}
+  const canInviteUserInRoomAbility = security?.EditAccess;
+
+  const onAddNewLink = async () => {
+    if (isPublicRoom || primaryLink) {
+      setLinkParams({ isEdit: false });
+      setEditLinkPanelIsVisible(true);
+    } else {
+      getPrimaryLink(selectionParentRoom.id).then((link) => {
+        setExternalLink(link);
+        copy(link.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+      });
+    }
+  };
+
+  const publicRoomItems = [];
+
+  if (isPublicRoomType && !isVisitor) {
+    if (!isArchiveFolder || primaryLink) {
+      publicRoomItems.push(
+        <LinksBlock key="general-link_header">
+          <Text fontSize="14px" fontWeight={600}>
+            {t("Files:GeneralLink")}
+          </Text>
+        </LinksBlock>
+      );
+    }
+
+    if (primaryLink) {
+      publicRoomItems.push(
+        <LinkRow
+          key="general-link"
+          link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
         />
+      );
+    } else if (!isArchiveFolder) {
+      publicRoomItems.push(
+        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
+          <Avatar size="min" source={PlusReactSvgUrl} />
+          <Link
+            isHovered
+            type="action"
+            fontSize="14px"
+            fontWeight={600}
+            className="external-row-link"
+          >
+            {t("Files:CreateAndCopy")}
+          </Link>
+        </StyledLinkRow>
+      );
+    }
+
+    if ((primaryLink && !isArchiveFolder) || additionalLinks.length) {
+      publicRoomItems.push(
+        <LinksBlock key="additional-link_header">
+          <Text fontSize="14px" fontWeight={600}>
+            {t("Files:AdditionalLinks")}
+          </Text>
+
+          {!isArchiveFolder && (
+            <div
+              data-tooltip-id="emailTooltip"
+              data-tooltip-content={t(
+                "Files:MaximumNumberOfExternalLinksCreated"
+              )}
+            >
+              <IconButton
+                className="link-to-viewing-icon"
+                iconName={LinksToViewingIconUrl}
+                onClick={onAddNewLink}
+                size={16}
+                isDisabled={additionalLinks.length >= LINKS_LIMIT_COUNT}
+                title={t("Files:AddNewLink")}
+              />
+
+              {additionalLinks.length >= LINKS_LIMIT_COUNT && (
+                <Tooltip
+                  float
+                  id="emailTooltip"
+                  getContent={({ content }) => (
+                    <Text fontSize="12px">{content}</Text>
+                  )}
+                  place="bottom"
+                />
+              )}
+            </div>
+          )}
+        </LinksBlock>
+      );
+    }
+
+    if (additionalLinks.length) {
+      additionalLinks.map((link) => {
+        publicRoomItems.push(
+          <LinkRow
+            link={link}
+            key={link?.sharedTo?.id}
+            setIsScrollLocked={setIsScrollLocked}
+          />
+        );
+      });
+    } else if (!isArchiveFolder && primaryLink) {
+      publicRoomItems.push(
+        <StyledLinkRow
+          key="create-additional-link"
+          className="additional-link"
+          onClick={onAddNewLink}
+        >
+          <Avatar size="min" source={PlusReactSvgUrl} />
+
+          <Link
+            isHovered
+            type="action"
+            fontSize="14px"
+            fontWeight={600}
+            className="external-row-link"
+          >
+            {t("Files:CreateNewLink")}
+          </Link>
+        </StyledLinkRow>
+      );
+    }
+  }
+
+  const showPublicRoomBar =
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) && !isVisitor;
+
+  return (
+    <>
+      {showPublicRoomBar && (
+        <PublicRoomBar
+          headerText={t("Files:RoomAvailableViaExternalLink")}
+          bodyText={t("CreateEditRoomDialog:PublicRoomBarDescription")}
+        />
       )}
+
       <MembersList
         loadNextPage={loadNextPage}
-        t={t}
-        security={security}
-        members={membersList}
-        membersHelper={membersHelper}
-        currentMember={currentMember}
-        updateRoomMemberRole={updateRoomMemberRole}
-        selectionParentRoom={selectionParentRoom}
-        setSelectionParentRoom={setSelectionParentRoom}
-        changeUserType={changeUserType}
-        setIsScrollLocked={setIsScrollLocked}
-        membersFilter={membersFilter}
-        setMembersFilter={setMembersFilter}
         hasNextPage={membersList.length - headersCount < membersFilter.total}
-        itemCount={membersFilter.total + headersCount}
-        onRepeatInvitation={onRepeatInvitation}
-        isPublicRoomType={isPublicRoomType}
-        withBanner={isPublicRoomType && externalLinks.length > 0}
-        setMembers={setMembersList}
-      />
+        itemCount={membersFilter.total + headersCount + publicRoomItems.length}
+        showPublicRoomBar={showPublicRoomBar}
+      >
+        {publicRoomItems}
+        {membersList.map((user) => {
+          return (
+            <User
+              t={t}
+              user={user}
+              key={user.id}
+              security={security}
+              membersHelper={membersHelper}
+              currentMember={currentMember}
+              updateRoomMemberRole={updateRoomMemberRole}
+              roomId={selectionParentRoom.id}
+              roomType={selectionParentRoom.roomType}
+              selectionParentRoom={selectionParentRoom}
+              setSelectionParentRoom={setSelectionParentRoom}
+              changeUserType={changeUserType}
+              setIsScrollLocked={setIsScrollLocked}
+              isTitle={user.isTitle}
+              isExpect={user.isExpect}
+              showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
+              onRepeatInvitation={onRepeatInvitation}
+              setMembers={setMembersList}
+              membersFilter={membersFilter}
+              setMembersFilter={setMembersFilter}
+              fetchMembers={fetchMembers}
+              hasNextPage={
+                membersList.length - headersCount < membersFilter.total
+              }
+            />
+          );
+        })}
+      </MembersList>
     </>
   );
 };
 
 export default inject(
-  ({ auth, filesStore, peopleStore, selectedFolderStore, publicRoomStore }) => {
+  ({
+    auth,
+    filesStore,
+    peopleStore,
+    selectedFolderStore,
+    publicRoomStore,
+    treeFoldersStore,
+    dialogsStore,
+  }) => {
     const {
       selectionParentRoom,
       setSelectionParentRoom,
@@ -279,16 +459,26 @@ export default inject(
       membersFilter,
       setMembersFilter,
     } = filesStore;
-    const { id: selfId } = auth.userStore.user;
+    const { id: selfId, isVisitor } = auth.userStore.user;
 
     const { changeType: changeUserType } = peopleStore;
-    const { roomLinks, setExternalLinks } = publicRoomStore;
+    const {
+      roomLinks,
+      setExternalLinks,
+      primaryLink,
+      additionalLinks,
+      setExternalLink,
+    } = publicRoomStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
+    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
+
+    const isPublicRoom = roomType === RoomsType.PublicRoom;
 
     return {
       setView,
@@ -317,6 +507,18 @@ export default inject(
       members: membersList,
       setMembersList,
       roomType,
+      primaryLink,
+      isArchiveFolder: isArchiveFolderRoot,
+      isPublicRoom,
+
+      additionalLinks: additionalLinks,
+      isArchiveFolder: isArchiveFolderRoot,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      primaryLink,
+      getPrimaryLink: filesStore.getPrimaryLink,
+      setExternalLink,
+      isVisitor,
     };
   }
 )(

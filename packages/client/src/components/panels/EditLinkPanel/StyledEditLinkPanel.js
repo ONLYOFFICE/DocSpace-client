@@ -135,7 +135,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
 
     .edit-link_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 

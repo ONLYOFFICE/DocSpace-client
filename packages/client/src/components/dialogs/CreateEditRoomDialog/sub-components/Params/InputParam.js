@@ -29,6 +29,7 @@ const InputParam = React.forwardRef(
       onBlur,
       isDisabled,
       isValidTitle,
+      isWrongTitle,
       errorMessage,
       isAutoFocussed,
       onKeyUp,
@@ -49,8 +50,9 @@ const InputParam = React.forwardRef(
         <FieldContainer
           isVertical={true}
           labelVisible={false}
-          hasError={!isValidTitle}
+          hasError={!isValidTitle || isWrongTitle}
           errorMessage={errorMessage}
+          errorMessageWidth={"100%"}
         >
           <TextInput
             forwardedRef={ref}

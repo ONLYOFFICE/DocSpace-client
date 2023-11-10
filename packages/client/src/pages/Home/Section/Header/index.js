@@ -27,6 +27,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -154,6 +155,7 @@ const SectionHeaderContent = (props) => {
     isHeaderChecked,
     isHeaderIndeterminate,
     showText,
+    oformsFilter,
 
     isEmptyArchive,
 
@@ -268,7 +270,10 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const createFolder = () => onCreate();
@@ -423,11 +428,23 @@ const SectionHeaderContent = (props) => {
         ];
 
     if (mainButtonItemsList && enablePlugins) {
+      const pluginItems = [];
+
       mainButtonItemsList.forEach((option) => {
-        options.splice(option.value.position, 0, {
+        pluginItems.push({
           key: option.key,
           ...option.value,
         });
+      });
+
+      options.splice(5, 0, {
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
       });
     }
 
@@ -746,7 +763,7 @@ const SectionHeaderContent = (props) => {
         key: "download",
         label: t("Common:Download"),
         onClick: onDownloadAction,
-        disabled: isDisabled,
+        disabled: !isRoom || !security?.Download,
         icon: DownloadReactSvgUrl,
       },
       {
@@ -1077,6 +1094,7 @@ export default inject(
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
+    oformsStore,
     pluginStore,
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
@@ -1157,6 +1175,8 @@ export default inject(
       emptyTrashInProgress,
       moveToPublicRoom,
     } = filesActionsStore;
+
+    const { oformsFilter } = oformsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
@@ -1240,6 +1260,7 @@ export default inject(
       currentFolderId: id,
 
       navigationPath: folderPath,
+      oformsFilter,
 
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,

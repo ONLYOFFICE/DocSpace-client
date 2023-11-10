@@ -69,7 +69,11 @@ const DeleteLinkDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
     >
-      <ModalDialog.Header>{t("Files:DeleteLink")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {link.sharedTo.primary && isPublicRoomType
+          ? t("Files:RevokeLink")
+          : t("Files:DeleteLink")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
           <Text noSelect>

@@ -39,7 +39,7 @@ const BreadCrumbs = ({
       items.forEach((item) =>
         oldItems.push({
           ...item,
-          id: item.id.toString(),
+          id: item.id?.toString(),
         })
       );
       if (itemsLength > 0) {

@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
-import {
-  Link,
-  Button,
-  Heading,
-  HelpButton,
-  InputBlock,
-  Label,
-  Text,
-} from "@docspace/components";
+import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 import Loaders from "@docspace/common/components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
@@ -142,29 +134,18 @@ const DocumentService = ({
     <Styled.Location>
       <Styled.LocationHeader>
         <div className="main">
-          <Heading className={"heading"} isInline level={3}>
-            {t("Settings:DocumentServiceLocationHeader")}
-          </Heading>
-          <div className="help-button-wrapper">
-            <HelpButton
-              tooltipContent={t("Settings:DocumentServiceLocationHeaderHelp")}
-            />
-          </div>
+          {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
-        <div className="secondary">
-          {t("Settings:DocumentServiceLocationHeaderInfo")}
-        </div>
-        <div>
-          <Link
-            className="third-party-link"
-            color={currentColorScheme.main.accent}
-            isHovered
-            target="_blank"
-            href={integrationSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        </div>
+
+        <Link
+          className="third-party-link"
+          color={currentColorScheme.main.accent}
+          isHovered
+          target="_blank"
+          href={integrationSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>

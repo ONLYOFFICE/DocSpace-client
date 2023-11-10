@@ -92,7 +92,8 @@ const StyledDropdownItem = styled.div`
   ${fontStyle}
 
   font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
-  font-size: ${(props) => props.theme.dropDownItem.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.dropDownItem.fontSize)};
   color: ${(props) => props.theme.dropDownItem.color};
   text-transform: none;
 
@@ -101,6 +102,7 @@ const StyledDropdownItem = styled.div`
   &:hover {
     ${(props) =>
       !props.noHover &&
+      !props.isHeader &&
       css`
         background-color: ${(props) =>
           props.theme.dropDownItem.hoverBackgroundColor};
@@ -114,8 +116,11 @@ const StyledDropdownItem = styled.div`
   }
 
   &:active {
-    background-color: ${(props) =>
-      props.theme.dropDownItem.hoverBackgroundColor};
+    ${({ isHeader, theme }) =>
+      !isHeader &&
+      css`
+        background-color: ${theme.dropDownItem.hoverBackgroundColor};
+      `}
   }
 
   ${(props) =>
@@ -134,13 +139,28 @@ const StyledDropdownItem = styled.div`
       }
     `}
 
-  ${(props) =>
-    props.isHeader &&
-    css`
-      ${disabledAndHeaderStyle}
+  .back-arrow {
+    cursor: pointer;
 
-      text-transform: uppercase;
-      break-before: column;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+  }
+
+  ${({ isHeader, theme }) =>
+    isHeader &&
+    css`
+      align-items: center;
+      height: 48px;
+      padding: 13px 16px 18.2px 16px;
+      margin: 0 0 6px 0;
+      border-bottom: ${theme.dropDownItem.separator.borderBottom};
+      font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+      font-weight: 600;
+      line-height: 16px !important;
+      cursor: default;
+      &:hover {
+        background-color: none !important;
+      }
     `}
 
   @media ${tablet} {
@@ -178,6 +198,15 @@ const StyledDropdownItem = styled.div`
         transform: rotate(90deg);
         height: auto;
       `}
+    width:12px;
+    height: 12px;
+    margin-inline-end: 0;
+    align-self: center;
+    line-height: normal;
+
+    .drop-down-item_icon {
+      height: 12px;
+    }
   }
 
   max-width: 100%;

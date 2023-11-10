@@ -4,32 +4,19 @@ import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  size as deviceSize,
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
   tablet,
 } from "@docspace/components/utils/device";
-import {
-  isIOS,
-  isFirefox,
-  isSafari,
-  isMobile,
-  isMobileOnly,
-  isChrome,
-  isTablet,
-  isAndroid,
-} from "react-device-detect";
+import { isIOS, isMobile, isChrome, isAndroid } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 const StyledContainer = styled.div`
   user-select: none;
   width: 100%;
+
   height: ${(props) =>
     isMobile && isIOS ? "calc(var(--vh, 1vh) * 100)" : props.contentHeight};
-  /* height: ${(props) =>
-    (props.isTabletView || isMobileOnly) && !isFirefox
-      ? `${props.contentHeight}px`
-      : "100vh"}; */
 
   #customScrollBar {
     z-index: 0;
@@ -81,6 +68,7 @@ const Layout = (props) => {
 
       if (isMobile) {
         window?.visualViewport?.addEventListener("resize", onOrientationChange);
+        window?.visualViewport?.addEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);
       }
 
@@ -155,37 +143,41 @@ const Layout = (props) => {
       }
 
       if (isMobileUtils() && isAndroid && isChrome) {
-        // height = `calc(100vh - ${correctorMobileChrome}px)`;
         height = `100%`;
       }
-
-      // if (isTablet && isIOS && isSafari) {
-      //   if (
-      //     window.innerHeight < window.innerWidth &&
-      //     window.innerWidth > 1024
-      //   ) {
-      //     height = window.screen.availHeight - correctorTabletSafari;
-      //   }
-      // }
 
       if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
         const diff = window.innerHeight - e.target.height;
 
         windowHeight -= diff;
 
-        document.body.style.height = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.maxHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.minHeight = `calc(var(--vh,1vh) * 100)`;
-        document.body.style.bottom = `${diff}px`;
+        document.body.style.height = `${e.target.height + e.target.offsetTop}`;
+        document.body.style.maxHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+        document.body.style.minHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+
+        document.body.style.top = `0px`;
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
-      } else {
+        document.body.style.scroll = `hidden`;
+      } else if (isMobile && isIOS) {
         document.body.style.height = `100%`;
         document.body.style.maxHeight = `100%`;
         document.body.style.minHeight = `100%`;
-        document.body.style.removeProperty("top");
+        document.body.style.removeProperty("bottom");
         document.body.style.removeProperty("position");
         document.body.style.removeProperty("overflow");
+      }
+
+      if (isMobile && !isIOS) {
+        const root = document.getElementById("root");
+
+        root.style.height = `100%`;
+        root.style.maxHeight = `100%`;
+        root.style.minHeight = `100%`;
       }
 
       let vh = windowHeight * 0.01;
@@ -214,11 +206,7 @@ const Layout = (props) => {
   };
 
   return (
-    <StyledContainer
-      className="Layout"
-      isTabletView={isTabletUtils()}
-      contentHeight={contentHeight}
-    >
+    <StyledContainer className="Layout" contentHeight={contentHeight}>
       {isMobileUtils() ? <MobileLayout {...props} /> : children}
     </StyledContainer>
   );
@@ -231,9 +219,12 @@ Layout.propTypes = {
 };
 
 export default inject(({ auth, bannerStore }) => {
+  const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
+    auth.settingsStore;
   return {
-    isTabletView: auth.settingsStore.isTabletView,
-    setIsTabletView: auth.settingsStore.setIsTabletView,
-    setWindowWidth: auth.settingsStore.setWindowWidth,
+    isTabletView,
+    setIsTabletView,
+    setWindowWidth,
+    isFrame,
   };
 })(observer(Layout));

@@ -31,7 +31,7 @@ const StyledComponent = styled.div`
 
   .category-item-description {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     max-width: 1024px;
   }
 
@@ -43,7 +43,7 @@ const StyledComponent = styled.div`
 
   .category-item-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

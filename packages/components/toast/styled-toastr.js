@@ -44,13 +44,15 @@ const StyledDiv = styled.div`
     margin-bottom: ${(props) => props.theme.toastr.title.marginBottom};
     line-height: ${(props) => props.theme.toastr.title.lineHeight};
     color: ${(props) => props.theme.toastr.title.color[props.type]};
-    font-size: ${(props) => props.theme.toastr.title.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.toastr.title.fontSize)};
   }
 
   .toast-text {
     line-height: ${(props) => props.theme.toastr.text.lineHeight};
     align-self: center;
-    font-size: ${(props) => props.theme.toastr.text.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.toastr.text.fontSize)};
     color: ${(props) => props.theme.toastr.text.color};
     word-break: break-word;
   }

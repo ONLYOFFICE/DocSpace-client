@@ -23,15 +23,15 @@ const StyledPeopleRow = styled(TableRow)`
   :hover {
     .table-container_cell {
       cursor: pointer;
-      background: ${props =>
+      background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${props =>
+      border-top: ${(props) =>
         `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
       margin-top: -1px;
     }
 
     .table-container_user-name-cell {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: -24px;
@@ -43,15 +43,15 @@ const StyledPeopleRow = styled(TableRow)`
             `}
     }
     .table-container_row-context-menu-wrapper {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: -20px;
-              padding-left: 18px;
+              padding-left: 20px;
             `
           : css`
               margin-right: -20px;
-              padding-right: 18px;
+              padding-right: 20px;
             `}
     }
   }
@@ -60,13 +60,13 @@ const StyledPeopleRow = styled(TableRow)`
     height: 48px;
     max-height: 48px;
 
-    background: ${props =>
+    background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
   }
 
   .table-container_row-checkbox-wrapper {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 0px;
@@ -77,7 +77,7 @@ const StyledPeopleRow = styled(TableRow)`
     min-width: 48px;
 
     .table-container_row-checkbox {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: -4px;
@@ -91,7 +91,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .link-with-dropdown-group {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 12px;
@@ -102,7 +102,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-cell_username {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 12px;
@@ -113,7 +113,9 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-context-menu-wrapper {
-    ${props =>
+    justify-content: flex-end;
+
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 0px;
@@ -125,7 +127,7 @@ const StyledPeopleRow = styled(TableRow)`
 
   .table-cell_type,
   .table-cell_room {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -8px;
@@ -136,8 +138,8 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .type-combobox {
-    visibility: ${props => (props.hideColumns ? "hidden" : "visible")};
-    opacity: ${props => (props.hideColumns ? 0 : 1)};
+    visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
+    opacity: ${(props) => (props.hideColumns ? 0 : 1)};
 
     & > div {
       max-width: fit-content;
@@ -146,7 +148,7 @@ const StyledPeopleRow = styled(TableRow)`
 
   .type-combobox,
   .room-combobox {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-right: 8px;
@@ -156,7 +158,7 @@ const StyledPeopleRow = styled(TableRow)`
           `}
     overflow: hidden;
     .combo-button {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               padding-right: 8px;
@@ -168,7 +170,7 @@ const StyledPeopleRow = styled(TableRow)`
             `}
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 600;
       }
     }
@@ -194,7 +196,7 @@ const fakeRooms = [
   },
 ];
 
-const PeopleTableRow = props => {
+const PeopleTableRow = (props) => {
   const {
     t,
     item,
@@ -315,7 +317,7 @@ const PeopleTableRow = props => {
   //   return <>{options.map((option) => option)}</>;
   // }, []);
 
-  const getUserTypeLabel = React.useCallback(role => {
+  const getUserTypeLabel = React.useCallback((role) => {
     switch (role) {
       case "owner":
         return t("Common:Owner");
@@ -340,7 +342,9 @@ const PeopleTableRow = props => {
     const combobox = (
       <ComboBox
         className="type-combobox"
-        selectedOption={typesOptions.find(option => option.key === role) || {}}
+        selectedOption={
+          typesOptions.find((option) => option.key === role) || {}
+        }
         options={typesOptions}
         onSelect={onTypeChange}
         scaled
@@ -361,7 +365,8 @@ const PeopleTableRow = props => {
         color={sideInfoColor}
         truncate
         noSelect
-        style={{ paddingLeft: "8px" }}>
+        style={{ paddingLeft: "8px" }}
+      >
         {typeLabel}
       </Text>
     );
@@ -373,7 +378,7 @@ const PeopleTableRow = props => {
 
   const typeCell = renderTypeCell();
 
-  const onChange = e => {
+  const onChange = (e) => {
     //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
@@ -383,7 +388,7 @@ const PeopleTableRow = props => {
     onContentRowClick && onContentRowClick(!isChecked, item, false);
   }, [isChecked, item, onContentRowClick]);
 
-  const onRowClick = e => {
+  const onRowClick = (e) => {
     if (
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
@@ -406,7 +411,8 @@ const PeopleTableRow = props => {
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
       }`}
-      value={value}>
+      value={value}
+    >
       <StyledPeopleRow
         key={item.id}
         className="table-row"
@@ -416,12 +422,14 @@ const PeopleTableRow = props => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}>
+        {...contextOptionsProps}
+      >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell
             hasAccess={true}
             className="table-container_row-checkbox-wrapper"
-            checked={isChecked}>
+            checked={isChecked}
+          >
             <div className="table-container_element">{element}</div>
             <Checkbox
               className="table-container_row-checkbox"
@@ -438,7 +446,8 @@ const PeopleTableRow = props => {
             color={nameColor}
             isTextOverflow
             className="table-cell_username"
-            noHover>
+            noHover
+          >
             {statusType === "pending"
               ? email
               : displayName?.trim()
@@ -500,7 +509,8 @@ const PeopleTableRow = props => {
             color={sideInfoColor}
             onClick={onEmailClick}
             isTextOverflow
-            enableUserSelect>
+            enableUserSelect
+          >
             {email}
           </Link>
         </TableCell>

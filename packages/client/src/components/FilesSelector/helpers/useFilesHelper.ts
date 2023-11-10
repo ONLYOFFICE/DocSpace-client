@@ -249,6 +249,7 @@ export const convertFilesToItems = (files: any, filterParam?: string) => {
       rootFolderType,
       isFolder: false,
       isDisabled: !filterParam,
+      fileExst,
     };
   });
   return items;
@@ -323,6 +324,10 @@ export const useFilesHelper = ({
 
           case FilesSelectorFilterTypes.XLSX:
             filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.FilesOnly;
             break;
         }
       }

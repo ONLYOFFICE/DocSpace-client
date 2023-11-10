@@ -9,7 +9,6 @@ import Button from "@docspace/components/button";
 import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
 import ToggleButton from "@docspace/components/toggle-button";
-import { isMobileOnly, isTablet } from "react-device-detect";
 import { mobile } from "@docspace/components/utils/device";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
@@ -75,9 +74,7 @@ const StyledInvitePanel = styled.div`
       css`
         .trackYVisible {
           .scroller {
-            margin-right: ${isMobileOnly || isTablet
-              ? `-20px !important`
-              : `-17px !important`};
+            margin-right: -20px !important;
           }
         }
       `}
@@ -111,12 +108,12 @@ StyledBlock.defaultProps = { theme: Base };
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
 `;
 
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   padding-left: 16px;
   padding-right: 16px;
   margin: 16px 0 8px 0;
@@ -138,7 +135,7 @@ const StyledDescription = styled(Text)`
   margin-bottom: 16px;
 
   font-weight: 400;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 `;
 
@@ -165,7 +162,7 @@ const StyledRow = styled.div`
 
   a {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
   }
 
@@ -285,20 +282,29 @@ const StyledDropDown = styled(DropDown)`
     align-items: center;
     gap: 8px;
     height: 48px;
+
+    .list-item_content {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 `;
 
 const SearchItemText = styled(Text)`
   line-height: 16px;
 
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
+    props.theme.getCorrectFontSize(
+      props.primary ? "14px" : props.info ? "11px" : "12px"
+    )};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
   color: ${(props) =>
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
-      : props.theme.text.disableColor};
+      : props.theme.text.emailColor};
   ${(props) => props.info && `margin-left: auto`}
 `;
 
@@ -381,7 +387,7 @@ const ResetLink = styled(Link)`
     theme.interfaceDirection === "rtl" ? `right` : `left`};
   padding: 0 16px;
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   font-style: normal;
   line-height: 15px;
@@ -431,7 +437,7 @@ const StyledInviteLanguage = styled.div`
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 4px;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
@@ -439,16 +445,11 @@ const StyledInviteLanguage = styled.div`
     margin-left: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
-  @media ${mobile} {
-    justify-content: space-between;
-  }
+
   .invitation-language {
     margin-right: 4px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.commonParam.descriptionColor};
-    @media ${mobile} {
-      margin-right: 0;
-    }
   }
   .language-combo-box {
     .combo-button {

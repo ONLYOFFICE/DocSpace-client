@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Loaders from "@docspace/common/components/Loaders";
+import DialogSkeleton from "../../skeletons/dialog";
+import DialogAsideSkeleton from "../../skeletons/dialog/aside";
 
 import Heading from "../../heading";
 import {
@@ -17,6 +18,7 @@ import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
 import FormWrapper from "../components/FormWrapper";
+import { isIOS, isMobile } from "react-device-detect";
 
 const Modal = ({
   id,
@@ -44,6 +46,58 @@ const Modal = ({
   embedded,
   withForm,
 }) => {
+  const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+
+  const visualPageTop = React.useRef(0);
+  const diffRef = React.useRef(0);
+  const contentRef = React.useRef(0);
+
+  React.useEffect(() => {
+    if (isMobile && isIOS) {
+      window.visualViewport.addEventListener("resize", onResize);
+      window.visualViewport.addEventListener("scroll", onResize);
+    }
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+      window.visualViewport.removeEventListener("scroll", onResize);
+    };
+  }, []);
+
+  const onResize = (e) => {
+    if (!contentRef.current) return;
+
+    if (currentDisplayType === "modal") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+
+      return;
+    }
+    if (e?.type === "resize") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+      contentRef.current.style.height = `${
+        e.target.height - 64 + e.target.pageTop
+      }px`;
+      contentRef.current.style.position = "fixed";
+
+      diffRef.current = diff;
+    } else if (e?.type === "scroll") {
+      const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
+
+      contentRef.current.style.bottom = `${diffRef.current + diff}px`;
+      contentRef.current.style.height = `${
+        window.visualViewport.height - 64 + diff
+      }px`;
+      contentRef.current.style.position = "fixed";
+    }
+  };
+
   const headerComponent = header ? header.props.children : null;
   const bodyComponent = body ? body.props.children : null;
   const footerComponent = footer ? footer.props.children : null;
@@ -86,6 +140,7 @@ const Modal = ({
             autoMaxWidth={autoMaxWidth}
             modalSwipeOffset={modalSwipeOffset}
             embedded={embedded}
+            ref={contentRef}
           >
             {isCloseable && (
               <CloseButton
@@ -96,12 +151,12 @@ const Modal = ({
             )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
-                <Loaders.DialogLoader
+                <DialogSkeleton
                   isLarge={isLarge}
                   withFooterBorder={withFooterBorder}
                 />
               ) : (
-                <Loaders.DialogAsideLoader
+                <DialogAsideSkeleton
                   withoutAside
                   withFooterBorder={withFooterBorder}
                 />

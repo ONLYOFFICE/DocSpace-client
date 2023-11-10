@@ -28,6 +28,7 @@ export type Item = {
   isDisabled?: boolean;
   security: Security;
   roomType: number;
+  fileExst?: string;
 };
 
 export type BreadCrumb = {
@@ -132,6 +133,7 @@ export type FilesSelectorProps = {
 
   isMove?: boolean;
   isCopy?: boolean;
+  isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
 
@@ -150,10 +152,12 @@ export type FilesSelectorProps = {
   disabledItems: string[] | number[];
   isFolderActions?: boolean;
   setMoveToPanelVisible: (value: boolean) => void;
+  setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setIsFolderActions: (value: boolean) => void;
   setMovingInProgress: (value: boolean) => void;
+  setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
   setConflictDialogData: (conflicts: any, operationData: any) => void;
   itemOperationToFolder: (operationData: any) => Promise<void>;
   clearActiveOperations: (
@@ -208,4 +212,5 @@ export type FilesSelectorProps = {
   currentDeviceType: "mobile" | "tablet" | "desktop";
 
   embedded: boolean;
+  withHeader: boolean;
 };

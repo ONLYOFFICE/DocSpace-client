@@ -90,11 +90,11 @@ const StyledTableRow = styled(TableRow)`
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-left: -20px;
-                  padding-left: 18px;
+                  padding-left: 20px;
                 `
               : css`
                   margin-right: -20px;
-                  padding-right: 18px;
+                  padding-right: 20px;
                 `}
         }
       }
@@ -133,7 +133,7 @@ const StyledTableRow = styled(TableRow)`
   .table-container_element-wrapper,
   .table-container_row-loader {
     min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
-
+    border-bottom: unset;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -201,6 +201,7 @@ const StyledTableRow = styled(TableRow)`
         : css`
             padding-right: 0px;
           `}
+    justify-content:flex-end;
 
     ${(props) => props.dragging && contextMenuWrapperDraggingStyle};
     ${(props) =>
@@ -210,11 +211,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
 
         ${hotkeyBorderStyle}
@@ -306,11 +307,11 @@ const StyledTableRow = styled(TableRow)`
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
-                padding-left: 18px;
+                padding-left: 20px;
               `
             : css`
                 margin-right: -20px;
-                padding-right: 18px;
+                padding-right: 20px;
               `}
       }
     `}
@@ -408,7 +409,7 @@ const StyledBadgesContainer = styled.div`
             `}
       p {
         letter-spacing: 0.5px;
-        font-size: 9px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("9px")};
         font-weight: 800;
       }
     }

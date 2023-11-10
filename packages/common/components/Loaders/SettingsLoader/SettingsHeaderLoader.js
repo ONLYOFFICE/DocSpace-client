@@ -1,11 +1,11 @@
 import React from "react";
-import { LoaderStyle } from "../../../constants";
-import RectangleLoader from "../RectangleLoader";
+import { LoaderStyle } from "@docspace/components/utils/constants";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const speed = 2;
 
 const SettingsHeaderLoader = () => (
-  <RectangleLoader
+  <RectangleSkeleton
     height="24"
     width="140"
     backgroundColor={LoaderStyle.backgroundColor}

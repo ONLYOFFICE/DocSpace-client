@@ -18,13 +18,7 @@ const InfoText = styled(Text)`
   white-space: break-spaces;
   margin: 0 0 8px 0;
   line-height: 20px;
-
-  color: ${(props) =>
-    props.theme.isBase ? "#657077" : "rgba(255, 255, 255, 0.6)"};
-  &:hover {
-    color: ${(props) =>
-      props.theme.isBase ? "#657077" : "rgba(255, 255, 255, 0.6)"};
-  }
+  color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;
 
 InfoText.defaultProps = { theme: Base };

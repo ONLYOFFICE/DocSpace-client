@@ -65,7 +65,7 @@ const StyledFacebookButton = styled(ButtonWrapper).attrs((props) => ({
     font-family: Roboto, "Open Sans", sans-serif, Arial;
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 14px;
     color: ${(props) => props.theme.facebookButton.color};
     margin: 0 11px;

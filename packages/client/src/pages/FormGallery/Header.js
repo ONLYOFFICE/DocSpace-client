@@ -1,13 +1,14 @@
 ﻿import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import IconButton from "@docspace/components/icon-button";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  StyledHeadline,
   StyledContainer,
+  StyledHeading,
+  StyledHeadline,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
@@ -16,62 +17,68 @@ import FilesFilter from "@docspace/common/api/files/filter";
 import { combineUrl } from "@docspace/common/utils";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-const SectionHeaderContent = (props) => {
-  const {
-    t,
-    canSubmitToFormGallery,
-    isInfoPanelVisible,
-    setIsInfoPanelVisible,
-    setGallerySelected,
-    categoryType,
-    setSubmitToGalleryDialogVisible,
-    setIsLoading,
-  } = props;
+const SectionHeaderContent = ({
+  t,
+  canSubmitToFormGallery,
+  getCategoryTitle,
+  oformFromFolderId,
 
+  setGallerySelected,
+  categoryType,
+  setSubmitToGalleryDialogVisible,
+
+  currentCategory,
+
+  isInfoPanelVisible,
+  setIsInfoPanelVisible,
+
+  setIsLoading,
+}) => {
   const navigate = useNavigate();
-  const params = useParams();
 
-  const onBackToFiles = () => {
+  const onNavigateBack = () => {
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
-
-    filter.folder = params.folderId;
-
+    filter.folder = oformFromFolderId;
+    const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
-
-    const url = getCategoryUrl(categoryType, filter.folder);
-
-    const pathname = `${url}?${filterParamsStr}`;
 
     setIsLoading();
 
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, pathname)
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterParamsStr}`
+      )
     );
   };
 
-  const onOpenSubmitToGalleryDialog = () => {
+  const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
-  };
 
-  const toggleInfoPanel = () => {
-    setIsInfoPanelVisible(!isInfoPanelVisible);
-  };
+  const onToggleInfoPanel = () => setIsInfoPanelVisible(!isInfoPanelVisible);
 
   return (
-    <StyledContainer>
+    <StyledContainer isInfoPanelVisible={isInfoPanelVisible}>
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
         isFill
-        onClick={onBackToFiles}
+        onClick={onNavigateBack}
         className="arrow-button"
       />
 
-      <StyledHeadline type="content" truncate>
-        {t("Common:OFORMsGallery")}
-      </StyledHeadline>
+      <StyledHeading
+        className="oform-header"
+        isInfoPanelVisible={isInfoPanelVisible}
+      >
+        <StyledHeadline type="content" truncate>
+          {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
+        </StyledHeadline>
+      </StyledHeading>
+
       {canSubmitToFormGallery() && (
         <StyledSubmitToGalleryButton
           primary
@@ -87,7 +94,7 @@ const SectionHeaderContent = (props) => {
             iconName={PanelReactSvgUrl}
             size="16"
             isFill={true}
-            onClick={toggleInfoPanel}
+            onClick={onToggleInfoPanel}
             title={t("Common:InfoPanel")}
           />
         </div>
@@ -99,36 +106,35 @@ const SectionHeaderContent = (props) => {
 export default inject(
   ({
     auth,
-    accessRightsStore,
     filesStore,
-    dialogsStore,
     oformsStore,
+    accessRightsStore,
+    dialogsStore,
     clientLoadingStore,
   }) => {
-    const { isVisible, setIsVisible } = auth.infoPanelStore;
-    const { canSubmitToFormGallery } = accessRightsStore;
-    const { categoryType } = filesStore;
-    const { setGallerySelected } = oformsStore;
-    const { setSubmitToGalleryDialogVisible } = dialogsStore;
-    const {
-      setIsSectionHeaderLoading,
-      setIsSectionBodyLoading,
-      setIsSectionFilterLoading,
-    } = clientLoadingStore;
-
-    const setIsLoading = () => {
-      setIsSectionHeaderLoading(true, false);
-      setIsSectionFilterLoading(true, false);
-      setIsSectionBodyLoading(true, false);
-    };
     return {
-      isInfoPanelVisible: isVisible,
-      canSubmitToFormGallery,
-      setIsInfoPanelVisible: setIsVisible,
-      setGallerySelected,
-      categoryType,
-      setSubmitToGalleryDialogVisible,
-      setIsLoading,
+      categoryType: filesStore.categoryType,
+      getCategoryTitle: oformsStore.getCategoryTitle,
+
+      oformFromFolderId: oformsStore.oformFromFolderId,
+
+      currentCategory: oformsStore.currentCategory,
+      fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+
+      setGallerySelected: oformsStore.setGallerySelected,
+
+      canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+      setSubmitToGalleryDialogVisible:
+        dialogsStore.setSubmitToGalleryDialogVisible,
+
+      isInfoPanelVisible: auth.infoPanelStore.isVisible,
+      setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
+
+      setIsLoading: () => {
+        clientLoadingStore.setIsSectionHeaderLoading(true, false);
+        clientLoadingStore.setIsSectionFilterLoading(true, false);
+        clientLoadingStore.setIsSectionBodyLoading(true, false);
+      },
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

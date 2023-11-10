@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, Route, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import AppLoader from "../AppLoader";
@@ -27,12 +27,23 @@ const PrivateRoute = ({ children, ...rest }) => {
     standalone,
     isCommunity,
     isEnterprise,
+    isPortalDeactivate,
   } = rest;
 
   const location = useLocation();
 
   const renderComponent = () => {
-    if (!user && isAuthenticated) return null;
+    if (!user && isAuthenticated) {
+      if (isPortalDeactivate) {
+        window.location.replace(
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+        );
+
+        return null;
+      }
+
+      return null;
+    }
 
     const isPortalUrl = location.pathname === "/preparation-portal";
 
@@ -50,6 +61,13 @@ const PrivateRoute = ({ children, ...rest }) => {
     const isBonusPage = location.pathname === "/portal-settings/bonus";
 
     if (isLoaded && !isAuthenticated) {
+      if (isPortalDeactivate) {
+        window.location.replace(
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+        );
+
+        return null;
+      }
       // console.log("PrivateRoute render Redirect to login", rest);x
       const redirectPath = wizardCompleted ? "/login" : "/wizard";
 
@@ -135,7 +153,8 @@ const PrivateRoute = ({ children, ...rest }) => {
 
     // if (!isLoaded) {
     //   return <AppLoader />;
-    if (tenantStatus === TenantStatus.PortalDeactivate) {
+
+    if (isPortalDeactivate && location.pathname !== "/unavailable") {
       return (
         <Navigate
           to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
@@ -200,10 +219,17 @@ export default inject(({ auth }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
 
-  const { setModuleInfo, wizardCompleted, personal, tenantStatus, standalone } =
-    settingsStore;
+  const {
+    setModuleInfo,
+    wizardCompleted,
+    personal,
+    tenantStatus,
+    standalone,
+    isPortalDeactivate,
+  } = settingsStore;
 
   return {
+    isPortalDeactivate,
     isCommunity,
     isNotPaidPeriod,
     user,

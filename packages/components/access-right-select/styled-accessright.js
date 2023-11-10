@@ -47,7 +47,7 @@ StyledItem.defaultProps = { theme: Base };
 const StyledItemDescription = styled.div`
   margin: 1px 0px;
 
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   font-style: normal;
   font-weight: 400;
   line-height: 16px;

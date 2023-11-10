@@ -1,3 +1,4 @@
+import { EmployeeType } from "../../constants";
 import { request } from "../client";
 
 export function getShortenedLink(link) {
@@ -19,10 +20,10 @@ export function getInvitationLink(type) {
 
 export function getInvitationLinks() {
   return Promise.all([
-    getInvitationLink(1),
-    getInvitationLink(2),
-    getInvitationLink(3),
-    getInvitationLink(4),
+    getInvitationLink(EmployeeType.User),
+    getInvitationLink(EmployeeType.Guest),
+    getInvitationLink(EmployeeType.Admin),
+    getInvitationLink(EmployeeType.Collaborator),
   ]).then(
     ([
       userInvitationLinkResp,

@@ -181,7 +181,8 @@ const SubMenu = (props) => {
 
     const icon =
       item.icon &&
-      (!item.icon.includes("images/") && !item.icon.includes(".svg") ? (
+      ((!item.icon.includes("images/") && !item.icon.includes(".svg")) ||
+      item.icon.includes("webplugins") ? (
         <img src={item.icon} className={iconClassName} />
       ) : (
         <ReactSVG wrapper="span" className={iconClassName} src={item.icon} />

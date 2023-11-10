@@ -67,7 +67,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   a {

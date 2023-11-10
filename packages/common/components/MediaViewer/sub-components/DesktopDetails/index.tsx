@@ -26,7 +26,7 @@ const DesktopDetailsContainer = styled.div`
 
   position: fixed;
   top: 0;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           right: 0;
@@ -40,11 +40,11 @@ const DesktopDetailsContainer = styled.div`
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 20px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("20px")};
     font-weight: 600;
     text-overflow: ellipsis;
     width: calc(100% - 50px);
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-right: 16px;
@@ -53,7 +53,7 @@ const DesktopDetailsContainer = styled.div`
             padding-left: 16px;
           `}
     box-sizing: border-box;
-    color: ${props => props.theme.mediaViewer.titleColor};
+    color: ${(props) => props.theme.mediaViewer.titleColor};
   }
 `;
 

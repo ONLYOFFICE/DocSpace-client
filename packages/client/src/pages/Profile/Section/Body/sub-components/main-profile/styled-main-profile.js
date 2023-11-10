@@ -263,7 +263,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label {
           min-width: 100%;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
           white-space: nowrap;
           color: rgb(163, 169, 174);
@@ -272,7 +273,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label-field {
           padding-left: 0px;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px;
         }
 
@@ -302,7 +304,8 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-password {
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
         }
       }

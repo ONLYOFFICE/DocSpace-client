@@ -29,6 +29,8 @@ const LanguageFilter = ({
     sectionScroll.scrollTop = 0;
   };
 
+  if (oformLocales !== null && oformLocales?.length === 0) return null;
+
   return (
     <Styled.LanguageFilter>
       <Backdrop
@@ -61,7 +63,7 @@ const LanguageFilter = ({
         selectedOption={{}}
         advancedOptions={
           <>
-            {oformLocales.map((locale) => (
+            {oformLocales?.map((locale) => (
               <Styled.LanguageFilterItem
                 className={"language-item"}
                 key={locale}

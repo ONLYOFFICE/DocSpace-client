@@ -45,7 +45,7 @@ const StyledPreviewTile = styled.div`
     }
     &-title {
       font-weight: 600;
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
       white-space: nowrap;
       overflow: hidden;

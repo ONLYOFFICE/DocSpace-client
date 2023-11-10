@@ -29,7 +29,7 @@ const StyledComponent = styled.div`
   }
 
   .text-input {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   .save-cancel-buttons {

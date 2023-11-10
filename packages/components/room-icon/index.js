@@ -23,7 +23,7 @@ const StyledIcon = styled.div`
   }
 
   .room-title {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 700;
     line-height: 16px;
     color: #ffffff;

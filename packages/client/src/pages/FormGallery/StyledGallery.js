@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
-import ComboBox from "@docspace/components/combobox";
 import { Base } from "@docspace/components/themes";
 import { Button } from "@docspace/components";
 
@@ -69,27 +68,19 @@ const StyledHeadline = styled(Headline)`
   width: 100%;
   max-width: min-content;
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
   box-sizing: border-box;
 
   @media ${tablet} {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 
   @media ${mobile} {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     line-height: 24px;
   }
-`;
-
-const StyledNavigationDrodown = styled(ComboBox)`
-  width: 12px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 4px 0 0 " : "0 0 0 4px"};
-  box-sizing: border-box;
-  background: transparent;
 `;
 
 const StyledSubmitToGalleryButton = styled(Button)`
@@ -156,7 +147,6 @@ export {
   StyledHeading,
   StyledHeadline,
   StyledContainer,
-  StyledNavigationDrodown,
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 };

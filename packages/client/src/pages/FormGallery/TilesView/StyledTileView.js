@@ -374,7 +374,7 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: 12px;
+          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
@@ -418,7 +418,7 @@ const truncateCss = css`
 const commonCss = css`
   margin: 0;
   font-family: "Open Sans";
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   font-style: normal;
   font-weight: 600;
 `;

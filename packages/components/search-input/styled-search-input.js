@@ -1,15 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Base from "../themes/base";
 
 const StyledSearchInput = styled.div`
   font-family: Open Sans;
   font-style: normal;
 
+  ${({ scale }) =>
+    scale &&
+    css`
+      width: 100%;
+    `}
+
   .search-input-block {
     max-height: 32px;
 
     & > input {
-      font-size: ${(props) => props.theme.searchInput.fontSize};
+      font-size: ${(props) =>
+        props.theme.getCorrectFontSize(props.theme.searchInput.fontSize)};
       font-weight: ${(props) => props.theme.searchInput.fontWeight};
     }
   }

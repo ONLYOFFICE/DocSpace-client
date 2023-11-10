@@ -12,7 +12,7 @@ const StyledHeader = styled.div`
   flex-direction: column;
 
   .plugin-list-header {
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     font-weight: 700;
     lien-height: 22px;
 

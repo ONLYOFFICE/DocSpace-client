@@ -92,7 +92,8 @@ const StyledDropdownItem = styled.div`
   ${fontStyle}
 
   font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
-  font-size: ${(props) => props.theme.dropDownItem.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.dropDownItem.fontSize)};
   color: ${(props) => props.theme.dropDownItem.color};
   text-transform: none;
 
@@ -153,7 +154,7 @@ const StyledDropdownItem = styled.div`
       padding: 13px 16px 18.2px 16px;
       margin: 0 0 6px 0;
       border-bottom: ${theme.dropDownItem.separator.borderBottom};
-      font-size: 15px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
       font-weight: 600;
       line-height: 16px !important;
       cursor: default;

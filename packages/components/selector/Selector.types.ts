@@ -66,7 +66,7 @@ export type SelectorProps = {
   onSelectBreadCrumb?: (item: any) => void;
   breadCrumbsLoader?: any;
   isBreadCrumbsLoading?: boolean;
-
+  isSearchLoading?: boolean;
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   footerInputHeader?: string;

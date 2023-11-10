@@ -18,6 +18,21 @@
       }
     },
     {
+      "label": "Backend | rebuild EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
       "type": "shell",
@@ -33,8 +48,8 @@
       }
     },
     {
-      "label": "Backend | build SAAS",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s",
+      "label": "Backend | build SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -48,7 +63,7 @@
       }
     },
     {
-      "label": "Backend | build +DNS",
+      "label": "Backend | build EE + dnsmasq",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d",
       "type": "shell",
       "group": {

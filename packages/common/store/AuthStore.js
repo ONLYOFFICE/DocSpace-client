@@ -106,16 +106,16 @@ class AuthStore {
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
-      !this.settingsStore.isPublicRoom
+      !this.settingsStore.isPublicRoom &&
+      !isPortalDeactivated
     ) {
-      !isPortalDeactivated &&
-        requests.push(
-          this.userStore.init(i18n).then(() => {
-            if (this.isQuotaAvailable && !isPortalRestore) {
-              this.getTenantExtra();
-            }
-          })
-        );
+      requests.push(
+        this.userStore.init(i18n).then(() => {
+          if (this.isQuotaAvailable && !isPortalRestore) {
+            this.getTenantExtra();
+          }
+        })
+      );
     } else {
       this.userStore.setIsLoaded(true);
     }

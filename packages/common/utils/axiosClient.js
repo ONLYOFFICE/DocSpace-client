@@ -117,7 +117,7 @@ class AxiosClient {
     }
   };
 
-  request = (options, isSkipRedirect = false) => {
+  request = (options, skipRedirect = false) => {
     const onSuccess = (response) => {
       const error = this.getResponseError(response);
       if (error) throw new Error(error);
@@ -173,7 +173,7 @@ class AxiosClient {
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !isSkipRedirect) {
+            if (isRooms && !skipRedirect) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);

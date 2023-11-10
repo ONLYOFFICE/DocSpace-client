@@ -9,9 +9,9 @@ export function getSettings(withPassword = false, headers = null) {
 
   if (headers) options.headers = headers;
 
-  const isSkipRedirect = true;
+  const skipRedirect = true;
 
-  return request(options, isSkipRedirect);
+  return request(options, skipRedirect);
 }
 
 export function getPortalCultures() {
@@ -208,9 +208,9 @@ export function getAppearanceTheme(headers = null) {
 
   if (headers) options.headers = headers;
 
-  const isSkipRedirect = true;
+  const skipRedirect = true;
 
-  return request(options, isSkipRedirect);
+  return request(options, skipRedirect);
 }
 
 export function sendAppearanceTheme(data) {
@@ -243,9 +243,9 @@ export function getLogoUrls(headers = null) {
 
   if (headers) options.headers = headers;
 
-  const isSkipRedirect = true;
+  const skipRedirect = true;
 
-  return request(options, isSkipRedirect);
+  return request(options, skipRedirect);
 }
 
 export function setWhiteLabelSettings(data) {

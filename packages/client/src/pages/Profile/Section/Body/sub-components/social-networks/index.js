@@ -70,12 +70,19 @@ const SocialNetworks = (props) => {
   };
 
   const loginCallback = (profile) => {
-    linkOAuth(profile).then((resp) => {
-      getAuthProviders().then((providers) => {
-        setProviders(providers);
-        toastr.success(t("ProviderSuccessfullyConnected"));
+    linkOAuth(profile)
+      .then((resp) => {
+        getAuthProviders().then((providers) => {
+          setProviders(providers);
+          toastr.success(t("ProviderSuccessfullyConnected"));
+        });
+      })
+      .catch((error) => {
+        const message = error?.response?.data?.error?.message;
+        const data =
+          message === "ErrorAccountAlreadyUse" ? t(message) : message;
+        toastr.error(data);
       });
-    });
   };
 
   useEffect(() => {

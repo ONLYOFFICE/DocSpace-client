@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { StyledBadge, StyledInner, StyledText } from "./styled-badge";
+import { StyledInner, StyledText } from "./styled-badge";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const Badge = (props) => {
   //console.log("Badge render");

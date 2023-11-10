@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StyledFilter from "./StyledFilterLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const FilterLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -18,7 +18,7 @@ const FilterLoader = ({ id, className, style, ...rest }) => {
 
   return (
     <StyledFilter id={id} className={className} style={style}>
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         height={height}
         borderRadius={borderRadius}
@@ -29,7 +29,7 @@ const FilterLoader = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         height={height}
         borderRadius={borderRadius}

@@ -42,6 +42,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         return null;
       }
 
+      console.log("PrivateRoute returned null");
       return null;
     }
 

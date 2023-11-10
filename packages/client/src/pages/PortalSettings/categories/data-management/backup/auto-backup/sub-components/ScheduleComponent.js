@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
 import { StyledScheduleComponent } from "../../StyledBackup";
-import { AutoBackupPeriod, DeviceType } from "@docspace/common/constants";
+import { AutoBackupPeriod } from "@docspace/common/constants";
 
 import HelpButton from "@docspace/components/help-button";
 
@@ -29,7 +29,6 @@ const ScheduleComponent = ({
   hoursArray,
   maxNumberCopiesArray,
   monthlySchedule,
-  currentDeviceType,
 }) => {
   const { t } = useTranslation("Settings");
   const renderHelpContent = () => (
@@ -68,9 +67,10 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
+          scaledOptions
           className="schedule-backup_combobox days_option"
           showDisabledItems
+          directionY="both"
         />
         {weeklySchedule && (
           <ComboBox
@@ -82,11 +82,12 @@ const ScheduleComponent = ({
             onSelect={setWeekday}
             isDisabled={isLoadingData}
             noBorder={false}
-            scaled={false}
-            scaledOptions={true}
-            dropDownMaxHeight={400}
+            scaled
+            scaledOptions
+            dropDownMaxHeight={300}
             className="schedule-backup_combobox weekly_option"
             showDisabledItems
+            directionY="both"
           />
         )}
         {monthlySchedule && (
@@ -100,10 +101,11 @@ const ScheduleComponent = ({
             isDisabled={isLoadingData}
             noBorder={false}
             scaled={false}
-            scaledOptions={true}
-            dropDownMaxHeight={400}
+            scaledOptions
+            dropDownMaxHeight={300}
             className="schedule-backup_combobox month_options"
             showDisabledItems
+            directionY="both"
           />
         )}
         <ComboBox
@@ -116,12 +118,11 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
-          dropDownMaxHeight={
-            currentDeviceType === DeviceType.mobile ? 100 : 200
-          }
+          scaledOptions
+          dropDownMaxHeight={300}
           className="schedule-backup_combobox time_options"
           showDisabledItems
+          directionY="both"
         />
       </div>
       <div className="maxCopiesOption">
@@ -137,19 +138,18 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
-          dropDownMaxHeight={
-            currentDeviceType === DeviceType.mobile ? 100 : 200
-          }
+          scaledOptions
+          dropDownMaxHeight={300}
           className="schedule-backup_combobox max_copies"
           showDisabledItems
+          directionY="both"
         />
       </div>
     </StyledScheduleComponent>
   );
 };
 
-export default inject(({ auth, backup }) => {
+export default inject(({ backup }) => {
   const {
     selectedPeriodLabel,
     selectedWeekdayLabel,
@@ -181,6 +181,5 @@ export default inject(({ auth, backup }) => {
 
     weeklySchedule,
     monthlySchedule,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(observer(ScheduleComponent));

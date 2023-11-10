@@ -125,7 +125,6 @@ const StyledVersionHistoryPanel = styled.div`
   }
 
   .version-history-panel-header {
-    margin-bottom: 12px;
     height: 53px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

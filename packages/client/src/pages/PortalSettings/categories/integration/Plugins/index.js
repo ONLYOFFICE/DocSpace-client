@@ -8,7 +8,11 @@ import Header from "./sub-components/header";
 import UploadButton from "./sub-components/button";
 import PluginItem from "./sub-components/plugin";
 
-import { PluginListContainer, StyledContainer } from "./StyledPlugins";
+import {
+  PluginListContainer,
+  StyledContainer,
+  StyledEmptyContainer,
+} from "./StyledPlugins";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
 
@@ -43,22 +47,24 @@ const PluginPage = ({
           <ListLoader withUpload={withUpload} />
         </StyledContainer>
       ) : isEmptyList ? (
-        <EmptyScreen
-          t={t}
-          theme={theme}
-          onAddAction={addPlugin}
-          currentColorScheme={currentColorScheme}
-          learnMoreLink={learnMoreLink}
-          withUpload={withUpload}
-        />
-      ) : (
-        <StyledContainer>
-          <Header
+        <StyledEmptyContainer>
+          <EmptyScreen
             t={t}
+            theme={theme}
+            onAddAction={addPlugin}
             currentColorScheme={currentColorScheme}
             learnMoreLink={learnMoreLink}
             withUpload={withUpload}
           />
+        </StyledEmptyContainer>
+      ) : (
+        <StyledContainer>
+          {/* <Header
+            t={t}
+            currentColorScheme={currentColorScheme}
+            learnMoreLink={learnMoreLink}
+            withUpload={withUpload}
+          /> */}
           {withUpload && <UploadButton t={t} addPlugin={addPlugin} />}
           <PluginListContainer>
             {pluginList.map((plugin) => (

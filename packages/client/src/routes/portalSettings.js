@@ -278,6 +278,10 @@ const PortalSettingsRoutes = {
       element: <Integration />,
     },
     {
+      path: "integration/plugins",
+      element: <Integration />,
+    },
+    {
       path: "integration/smtp-settings",
       element: <Integration />,
     },
@@ -310,10 +314,6 @@ const PortalSettingsRoutes = {
       element: <WebhookDetails />,
     },
     {
-      path: "developer-tools/plugins",
-      element: <DeveloperTools />,
-    },
-    {
       path: "developer-tools/oauth",
       element: <DeveloperTools />,
     },
@@ -324,18 +324,6 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/oauth/:id",
       element: <OAuthEditPage />,
-    },
-    {
-      path: "backup",
-      element: <Navigate to="backup/data-backup" />,
-    },
-    {
-      path: "backup/data-backup",
-      element: <Backup />,
-    },
-    {
-      path: "backup/auto-backup",
-      element: <Backup />,
     },
     {
       path: "delete-data",

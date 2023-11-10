@@ -149,6 +149,8 @@
   "In": "в",
   "IncorrectDomain": "Некорректный домен",
   "IncorrectEmail": "Некорректный email",
+  "IncorrectFirstName": "Некорректное имя",
+  "IncorrectLastName": "Некорректная фамилия",
   "IncorrectLocalPart": "Некорректное имя почтового ящика",
   "IncorrectPassword": "Неправильный пароль",
   "Info": "Информация",

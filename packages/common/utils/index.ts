@@ -92,7 +92,6 @@ export function getObjectByLocation(location) {
 
   try {
     const object = JSON.parse(`{"${decodedString}"}`);
-
     return object;
   } catch (e) {
     return {};
@@ -401,6 +400,39 @@ export function convertLanguage(key) {
     case "fr-FR":
       return "fr";
   }
+
+  return key;
+}
+
+export function convertToCulture(key: string) {
+  switch (key) {
+    case "ar":
+      return "ar-SA";
+    case "en":
+      return "en-US";
+    case "el":
+      return "el-GR";
+    case "hy":
+      return "hy-AM";
+    case "ko":
+      return "ko-KR";
+    case "lo":
+      return "lo-LA";
+    case "pt":
+      return "pt-BR";
+    case "uk":
+      return "uk-UA";
+    case "ja":
+      return "ja-JP";
+    case "zh":
+      return "zh-CN";
+  }
+  return key;
+}
+
+export function convertToLanguage(key: string) {
+  const splittedKey = key.split("-");
+  if (splittedKey.length > 1) return splittedKey[0];
 
   return key;
 }

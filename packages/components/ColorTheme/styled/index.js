@@ -23,6 +23,7 @@ export { default as TabsContainerTheme } from "./tabsContainer";
 export { default as IconButtonTheme } from "./iconButton";
 
 export { default as IconButtonPinTheme } from "./iconButtonPin";
+export { default as IconButtonMuteTheme } from "./iconButtonMute";
 
 export { default as IndicatorFilterButtonTheme } from "./indicatorFilterButton";
 

@@ -70,6 +70,7 @@ const Base = {
   text: {
     color: black,
     disableColor: gray,
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -319,9 +320,9 @@ const Base = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -546,7 +547,7 @@ const Base = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -1719,6 +1720,7 @@ const Base = {
     disabledArrow: "#A3A9AE",
     weekdayColor: "#A3A9AE",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
   },
 
   datePicker: {
@@ -2054,6 +2056,7 @@ const Base = {
 
     gallery: {
       borderColor: "#d0d5da",
+      descriptionColor: "#657077",
     },
   },
 

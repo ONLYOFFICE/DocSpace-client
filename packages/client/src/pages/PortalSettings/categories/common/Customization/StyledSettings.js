@@ -95,14 +95,13 @@ const StyledSettingsComponent = styled.div`
   }
 
   .link-learn-more {
-    display: block;
+    display: inline-block;
     margin: 4px 0 16px 0;
     font-weight: 600;
   }
 
   .category-item-description {
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 

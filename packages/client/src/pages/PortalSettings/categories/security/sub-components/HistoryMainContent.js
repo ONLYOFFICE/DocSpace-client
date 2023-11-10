@@ -29,6 +29,8 @@ const MainContainer = styled.div`
 
   .paid-badge {
     cursor: auto;
+    margin-bottom: 8px;
+    margin-left: -2px;
   }
 
   .login-history-description {
@@ -50,6 +52,11 @@ const MainContainer = styled.div`
   }
 
   .latest-text {
+    font-size: 13px;
+    padding: 20px 0 16px;
+  }
+
+  .download-text {
     font-size: 13px;
     padding: 24px 0;
   }
@@ -269,6 +276,7 @@ const HistoryMainContent = (props) => {
       {isSettingNotPaid && (
         <Badge
           className="paid-badge"
+          fontWeight="700"
           backgroundColor="#EDC409"
           label={t("Common:Paid")}
           isPaidBadge={true}
@@ -333,7 +341,9 @@ const HistoryMainContent = (props) => {
             />
           </>
         )}
-        <Text className="latest-text settings_unavailable">{downloadText}</Text>
+        <Text className="download-text settings_unavailable">
+          {downloadText}
+        </Text>
       </div>
       {content}
       <DownLoadWrapper>

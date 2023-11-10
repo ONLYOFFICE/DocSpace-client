@@ -29,7 +29,6 @@
   "AuditSubheader": "A subsecção permite-lhe navegar através da lista das últimas alterações (criação, modificação, eliminação, etc.) feitas pelos utilizadores às entidades (salas, oportunidades, ficheiros, etc.) dentro do seu DocSpace.",
   "AuditTrailNav": "Auditar o Rastro",
   "AutoBackup": "Cópia de segurança automática",
-  "AutoBackupDescription": "Utilize esta opção para fazer uma cópia de segurança automática dos dados do DocSpace.",
   "AutoBackupHelp": "A opção de <strong>Cópia de Segurança Automática</strong> é utilizada para automatizar a criação da cópia de segurança para que possa posteriormente restaurá-la num servidor local.",
   "AutoBackupHelpNote": "Escolha o armazenamento de dados, o período de criação de cópias de segurança e o número máximo de cópias guardadas.<br/><strong>Nota:</strong> antes de poder guardar para uma conta de terceiros (DropBox, Box.com, OneDrive ou Google Drive), irá precisar de ligar a conta à Pasta Comum da {{organizationName}}.",
   "AutoSavePeriod": "Período para Guardar Automaticamente",

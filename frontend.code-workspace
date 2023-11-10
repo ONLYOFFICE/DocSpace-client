@@ -6,23 +6,23 @@
     },
     {
       "name": "🚀 @docspace/client",
-      "path": "packages\\client"
+      "path": "packages/client"
     },
     {
       "name": "🔑 @docspace/login",
-      "path": "packages\\login"
+      "path": "packages/login"
     },
     {
       "name": "📄 @docspace/editor",
-      "path": "packages\\editor"
+      "path": "packages/editor"
     },
     {
       "name": "📦 @docspace/common",
-      "path": "packages\\common"
+      "path": "packages/common"
     },
     {
       "name": "📦 @docspace/components",
-      "path": "packages\\components"
+      "path": "packages/components"
     }
   ],
   "settings": {
@@ -41,13 +41,89 @@
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "VsCodeTaskButtons.tasks": [
+      {
+        "label": "Server",
+        "tasks": [
+          {
+            "label": "Docker : Build-EE",
+            "task": "Backend | build EE",
+            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+          },
+          {
+            "label": "Docker : Build-CE",
+            "task": "Backend | build CE",
+            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
+          },
+          {
+            "label": "Docker : Build-SAAS",
+            "task": "Backend | build SAAS",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
+          },
+          {
+            "label": "Docker : Clear",
+            "task": "Backend | clear",
+            "tooltip": "🛠️ Start the \"backend docker clear\" task"
+          },
+          {
+            "label": "Docker : Stop",
+            "task": "Backend | stop",
+            "tooltip": "🛠️ Start the \"backend docker stop\" task"
+          },
+          {
+            "label": "Docker : Start",
+            "task": "Backend | start",
+            "tooltip": "🛠️ Start the \"backend docker start\" task"
+          },
+          {
+            "label": "Docker : Restart",
+            "task": "Backend | restart",
+            "tooltip": "🛠️ Start the \"backend docker restart\" task"
+          }
+        ],
+        "tooltip": "🛠️ Server tasks"
+      },
+      {
+        "label": "Client",
+        "tasks": [
+          {
+            "label": "Install",
+            "task": "Frontend | install",
+            "tooltip": "🛠️ Start the \"frontend install packages\" task"
+          },
+          {
+            "label": "Build",
+            "task": "Frontend | build",
+            "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Start",
+            "task": "Frontend | start",
+            "tooltip": "🛠️ Start the \"frontend start\" task"
+          },
+          {
+            "label": "Start prod",
+            "task": "Frontend | start-prod",
+            "tooltip": "🛠️ Start the \"frontend start production\" task"
+          }
+        ],
+        "tooltip": "🛠️ Client tasks"
+      }
+    ]
   },
   "extensions": {
     "recommendations": [
       "folke.vscode-monorepo-workspace",
       "orta.vscode-jest",
-      "firsttris.vscode-jest-runner"
+      "firsttris.vscode-jest-runner",
+      "spencerwmiles.vscode-task-buttons",
+      "esbenp.prettier-vscode",
+      "formulahendry.auto-close-tag",
+      "formulahendry.auto-complete-tag",
+      "formulahendry.auto-rename-tag",
+      "mrmlnc.vscode-duplicate",
+      "ms-python.python"
     ]
   }
 }

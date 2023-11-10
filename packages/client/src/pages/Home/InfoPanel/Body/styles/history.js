@@ -11,7 +11,7 @@ const StyledHistorySubtitle = styled.div`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
-  z-index: 100;
+  z-index: 99;
 
   padding: 8px 0 12px;
   font-weight: 600;

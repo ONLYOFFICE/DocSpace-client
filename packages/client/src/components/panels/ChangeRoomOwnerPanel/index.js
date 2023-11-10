@@ -54,6 +54,9 @@ const ChangeRoomOwner = (props) => {
     folders,
     setFolders,
     currentDeviceType,
+    roomOwnerId,
+    isRootFolder,
+    setCreatedBy,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -93,17 +96,17 @@ const ChangeRoomOwner = (props) => {
       });
   };
 
-  const onChangeRoomOwner = (
-    user,
-    selectedAccess,
-    newFooterInputValue,
-    isChecked
-  ) => {
+  const onChangeRoomOwner = (user, isChecked) => {
     setIsLoading(true);
 
     setRoomOwner(user[0].id, [roomId])
       .then(async (res) => {
-        setFolder(res[0]);
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+        }
+
         if (isChecked) await onLeaveRoom();
         else toastr.success(t("Files:AppointNewOwner"));
         setRoomParams && setRoomParams(res[0].createdBy);
@@ -154,6 +157,8 @@ const ChangeRoomOwner = (props) => {
           withFooterCheckbox={!showBackButton}
           footerCheckboxLabel={t("Files:LeaveTheRoom")}
           isChecked={!showBackButton}
+          withOutCurrentAuthorizedUser
+          filterUserId={roomOwnerId}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -187,11 +192,11 @@ export default inject(
       setFolders,
     } = filesStore;
 
-    const roomId = selection.length
-      ? selection[0].id
+    const room = selection.length
+      ? selection[0]
       : bufferSelection
-      ? bufferSelection.id
-      : selectedFolderStore.id;
+      ? bufferSelection
+      : selectedFolderStore;
 
     const { currentDeviceType } = settingsStore;
 
@@ -202,7 +207,10 @@ export default inject(
       setRoomParams: changeRoomOwnerData.setRoomParams,
       setRoomOwner,
       userId: user.id,
-      roomId,
+      roomId: room.id,
+      roomOwnerId: room?.createdBy?.id,
+      isRootFolder: selectedFolderStore.isRootFolder,
+      setCreatedBy: selectedFolderStore.setCreatedBy,
       setFolder,
       updateRoomMemberRole,
       isAdmin: user.isOwner || user.isAdmin,

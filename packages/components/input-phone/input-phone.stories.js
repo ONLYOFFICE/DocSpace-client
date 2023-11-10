@@ -29,12 +29,12 @@ const Template = ({ onChange, value, ...args }) => {
 export const Default = Template.bind({});
 Default.args = {
   defaultCountry: {
-    locale: options[182].code, // default locale RU
-    dialCode: options[182].dialCode, // default dialCode +7
-    mask: options[182].mask, // default Russia mask
-    icon: options[182].flag, // default Russia flag
+    locale: options[236].code, // default locale US
+    dialCode: options[236].dialCode, // default dialCode +1
+    mask: options[236].mask, // default US mask
+    icon: options[236].flag, // default US flag
   },
-  phonePlaceholderText: "7 XXX XXX-XX-XX",
+  phonePlaceholderText: "1 XXX XXX-XXXX",
   searchPlaceholderText: "Search",
   scaled: false,
   searchEmptyMessage: "Nothing found",

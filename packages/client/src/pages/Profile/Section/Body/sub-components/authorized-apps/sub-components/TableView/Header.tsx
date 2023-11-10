@@ -34,7 +34,7 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "Access granted",
-      title: t("AccessGranted"),
+      title: t("OAuth:AccessGranted"),
       resizable: true,
       enable: true,
       minWidth: 150,

@@ -178,14 +178,18 @@ const WhiteLabelWrapper = styled.div`
     display: none;
   }
 
-  .save-cancel-buttons {
-    margin-top: 24px;
+  .spacer {
+    height: 24px;
   }
 
   @media ${mobile} {
     .subtitle,
     .header-container {
       display: none;
+    }
+
+    .spacer {
+      height: ${(props) => (props.showReminder ? "64px" : "24px")};
     }
   }
 `;

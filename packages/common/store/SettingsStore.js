@@ -482,6 +482,14 @@ class SettingsStore {
         url.searchParams.append("ref", window.location.href);
         return window.location.replace(url);
       }
+
+      if (err?.response?.status === 403) {
+        //access to the portal is restricted
+        window.DocSpace.navigate("/access-restricted", {
+          state: { isRestrictionError: true },
+          replace: true,
+        });
+      }
     });
 
     if (origSettings?.plugins?.enabled) {

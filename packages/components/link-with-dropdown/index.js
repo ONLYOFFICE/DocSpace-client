@@ -12,7 +12,7 @@ import {
   Caret,
 } from "./styled-link-with-dropdown";
 import { isMobileOnly } from "react-device-detect";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "../scrollbar";
 import { ReactSVG } from "react-svg";
 import { classNames } from "../utils/classNames";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";

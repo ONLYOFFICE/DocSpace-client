@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
@@ -338,7 +338,7 @@ const ComponentPure = ({
       }
 
       case PluginComponents.skeleton: {
-        return <RectangleLoader {...elementProps} />;
+        return <RectangleSkeleton {...elementProps} />;
       }
     }
   };

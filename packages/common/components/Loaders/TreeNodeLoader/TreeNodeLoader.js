@@ -1,6 +1,6 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import CircleSkeleton from "@docspace/components/skeletons/circle";
 
 const TreeNodeLoader = ({
   title,
@@ -15,7 +15,7 @@ const TreeNodeLoader = ({
 }) => {
   return (
     <>
-      <CircleLoader
+      <CircleSkeleton
         title={title}
         height="32"
         radius="3"
@@ -28,7 +28,7 @@ const TreeNodeLoader = ({
       />
 
       {withRectangle && (
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -43,7 +43,7 @@ const TreeNodeLoader = ({
         />
       )}
 
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width="100%"
         height="24"

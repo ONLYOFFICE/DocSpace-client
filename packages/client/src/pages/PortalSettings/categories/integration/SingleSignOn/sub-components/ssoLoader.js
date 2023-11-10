@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 const StyledLoader = styled.div`
@@ -30,16 +29,16 @@ const SSOLoader = (props) => {
     <StyledLoader>
       {!isToggleSSO && (
         <div className="submenu">
-          <Loaders.Rectangle className="item" height="28px" />
-          <Loaders.Rectangle className="item" height="28px" />
+          <RectangleSkeleton className="item" height="28px" />
+          <RectangleSkeleton className="item" height="28px" />
         </div>
       )}
-      <Loaders.Rectangle className="description" height="60px" />
-      <Loaders.Rectangle height="64px" />
+      <RectangleSkeleton className="description" height="60px" />
+      <RectangleSkeleton height="64px" />
 
-      <Loaders.Rectangle className="category" height="22px" />
+      <RectangleSkeleton className="category" height="22px" />
       <StyledSettingsSeparator />
-      <Loaders.Rectangle className="category" height="22px" />
+      <RectangleSkeleton className="category" height="22px" />
     </StyledLoader>
   );
 };

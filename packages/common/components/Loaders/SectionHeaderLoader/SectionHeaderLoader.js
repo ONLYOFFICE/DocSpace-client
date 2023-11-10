@@ -6,7 +6,7 @@ import {
   StyledBox2,
   StyledSpacer,
 } from "./StyledSectionHeaderLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -23,7 +23,7 @@ const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
   return (
     <StyledContainer id={id} className={className} style={style}>
       <StyledBox1>
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="100%"
           height="100%"
@@ -38,7 +38,7 @@ const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
       </StyledBox1>
       <StyledSpacer />
       <StyledBox2>
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="17"
           height="17"

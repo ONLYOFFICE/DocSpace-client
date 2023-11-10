@@ -13,7 +13,7 @@ import CheckEditIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import Scrollbar from "../../scrollbar";
 import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
-import Loaders from "@docspace/common/components/Loaders";
+import ContextMenuSkeleton from "../../skeletons/context-menu";
 
 import { isMobile } from "../../utils/device";
 
@@ -144,7 +144,7 @@ const SubMenu = (props) => {
       id: "link-loader-option",
       key: "link-loader",
       isLoader: true,
-      label: <Loaders.ContextMenuLoader />,
+      label: <ContextMenuSkeleton />,
     };
 
     if (item.items || item.onLoad) {

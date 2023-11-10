@@ -34,6 +34,7 @@ const StyledComponent = styled.div`
 
   .save-cancel-buttons {
     margin-top: 24px;
+    bottom: 0;
   }
 
   .description {
@@ -43,6 +44,12 @@ const StyledComponent = styled.div`
   @media ${mobile} {
     .header {
       display: none;
+    }
+  }
+
+  @media (max-height: 700px) {
+    .save-cancel-buttons {
+      bottom: auto;
     }
   }
 `;
@@ -447,6 +454,8 @@ const CompanyInfoSettings = (props) => {
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          hasScroll={true}
+          hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"

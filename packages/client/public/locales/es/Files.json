@@ -149,7 +149,5 @@
   "ViewList": "Lista",
   "ViewOnlyRooms": "Solo lectura",
   "ViewTiles": "Iconos",
-  "WantToRestoreTheRoom": "Todos los enlaces externos de esta sala se activarán, y su contenido estará disponible para todos los que tengan el enlace. ¿Desea restaurar la sala?",
-  "WantToRestoreTheRooms": "Todos los enlaces externos de las salas restauradas se activarán, y su contenido estará disponible para todos los que tengan el enlace a la sala. ¿Desea restaurar las salas?",
   "WithSubfolders": "Con subcarpetas"
 }

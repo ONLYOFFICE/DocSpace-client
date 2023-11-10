@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import NoUserSelect from "../utils/commonStyles";
 import commonTextStyles from "../text/common-text-styles";
 import Base from "../themes/base";
 

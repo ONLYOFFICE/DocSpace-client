@@ -76,6 +76,17 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
+    moment.updateLocale("ar-sa", {
+      longDateFormat: {
+        LT: "h:mm a",
+        LTS: "h:mm:ss a",
+      },
+    });
+
+    moment.locale(language);
+  }, []);
+
+  useEffect(() => {
     if (!whiteLabelLogoUrls) return;
     const favicon = getLogoFromPath(whiteLabelLogoUrls[2]?.path?.light);
 

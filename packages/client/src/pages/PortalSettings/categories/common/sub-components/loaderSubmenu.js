@@ -1,6 +1,5 @@
-import React from "react";
 import styled, { css } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { mobileMore } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
@@ -25,8 +24,8 @@ const StyledLoader = styled.div`
 const LoaderSubmenu = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle width="100px" height="28px" className="loader" />
-      <Loaders.Rectangle width="100px" height="28px" />
+      <RectangleSkeleton width="100px" height="28px" className="loader" />
+      <RectangleSkeleton width="100px" height="28px" />
     </StyledLoader>
   );
 };

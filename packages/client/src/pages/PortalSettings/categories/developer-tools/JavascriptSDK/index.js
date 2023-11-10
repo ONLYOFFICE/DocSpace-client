@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import styled, { css } from "styled-components";
@@ -16,11 +16,9 @@ import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
-import Badge from "@docspace/components/badge";
 
 import GetCodeDialog from "./sub-components/GetCodeDialog";
 import CSP from "./sub-components/csp";
@@ -459,7 +457,7 @@ const PortalIntegration = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <Loaders.Rectangle height={height} borderRadius="6px" />
+      <RectangleSkeleton height={height} borderRadius="6px" />
     </Frame>
   );
 

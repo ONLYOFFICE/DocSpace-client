@@ -5,7 +5,7 @@ import Base from "../themes/base";
 import { tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
-import Text from "@docspace/components/text";
+import Text from "../text";
 
 const badgeWithoutText = css`
   position: absolute;

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledRow, StyledBox } from "./StyledRowLoader";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader";
+import { StyledRow, StyledBox } from "./styled";
+import RectangleSkeleton from "../rectangle";
+import CircleSkeleton from "../circle";
 
-const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
+const RowSkeleton = ({ id, className, style, isRectangle, ...rest }) => {
   const {
     title,
     borderRadius,
@@ -20,7 +20,7 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
     <StyledRow id={id} className={className} style={style}>
       <>
         {isRectangle ? (
-          <RectangleLoader
+          <RectangleSkeleton
             className="rectangle-content"
             title={title}
             width="32px"
@@ -34,7 +34,7 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
             animate={animate}
           />
         ) : (
-          <CircleLoader
+          <CircleSkeleton
             title={title}
             x="16"
             y="16"
@@ -51,7 +51,7 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
         )}
       </>
       <StyledBox className="row-content">
-        <RectangleLoader
+        <RectangleSkeleton
           className="first-row-content__mobile"
           title={title}
           borderRadius={borderRadius}
@@ -62,7 +62,7 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="second-row-content__mobile"
           title={title}
           height="16px"
@@ -76,7 +76,7 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </StyledBox>
 
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width="16"
         height="16"
@@ -92,18 +92,18 @@ const RowLoader = ({ id, className, style, isRectangle, ...rest }) => {
   );
 };
 
-RowLoader.propTypes = {
+RowSkeleton.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
   isRectangle: PropTypes.bool,
 };
 
-RowLoader.defaultProps = {
+RowSkeleton.defaultProps = {
   id: undefined,
   className: undefined,
   style: undefined,
   isRectangle: true,
 };
 
-export default RowLoader;
+export default RowSkeleton;

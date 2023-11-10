@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loaders from "../../Loaders";
+import RowsSkeleton from "@docspace/components/skeletons/rows";
 
 import { isMobile, isTablet } from "@docspace/components/utils/device";
 
@@ -37,7 +37,7 @@ const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
           <Loaders.Tiles />
         )
       ) : (
-        <Loaders.Rows count={(viewMobile && 8) || (viewTablet && 12) || 9} />
+        <RowsSkeleton count={(viewMobile && 8) || (viewTablet && 12) || 9} />
       )}
     </div>
   );

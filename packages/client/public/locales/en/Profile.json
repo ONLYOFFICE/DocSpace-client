@@ -8,6 +8,7 @@
   "DesktopTheme": "Sync with desktop Editor settings",
   "DesktopThemeDescription": "Automatically switch between light and dark themes when your desktop editor.",
   "EditPhoto": "Edit photo",
+  "ErrorAccountAlreadyUse": "Linked account already in use by another user",
   "EmailNotVerified": "Email is not verified",
   "FileManagement": "File management",
   "InterfaceTheme": "Interface theme",

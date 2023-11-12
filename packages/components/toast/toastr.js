@@ -18,7 +18,9 @@ import commonIconsStyles from "../utils/common-icons-style";
 import { getCookie } from "../utils/cookie";
 
 const getTitle = (type) => {
-  const lang = getCookie("asc_language") ?? "en";
+  const cookieLang = getCookie("asc_language");
+  const lang =
+    cookieLang == "en-US" || cookieLang == "en-GB" ? "en" : cookieLang;
 
   const commonKeys =
     (window.i18n &&

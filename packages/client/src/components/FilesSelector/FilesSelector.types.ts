@@ -117,6 +117,7 @@ export type useFilesHelpersProps = {
     search?: string | null,
     isErrorPath?: boolean
   ) => void;
+  getIcon: (size: number, fileExst: string) => string;
   t: any;
 };
 
@@ -213,4 +214,5 @@ export type FilesSelectorProps = {
 
   embedded: boolean;
   withHeader: boolean;
+  settings: any;
 };

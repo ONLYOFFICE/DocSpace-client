@@ -24,155 +24,6 @@ import {
 //@ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
-const getIconUrl = (extension: string, isImage: boolean, isMedia: boolean) => {
-  // if (extension !== iconPath) return iconSize32.get(iconPath);
-  let path = "";
-
-  switch (extension) {
-    case ".avi":
-      path = "avi.svg";
-      break;
-    case ".csv":
-      path = "csv.svg";
-      break;
-    case ".djvu":
-      path = "djvu.svg";
-      break;
-    case ".doc":
-      path = "doc.svg";
-      break;
-    case ".docm":
-      path = "docm.svg";
-      break;
-    case ".docx":
-      path = "docx.svg";
-      break;
-    case ".dotx":
-      path = "dotx.svg";
-      break;
-    case ".dvd":
-      path = "dvd.svg";
-      break;
-    case ".epub":
-      path = "epub.svg";
-      break;
-    case ".pb2":
-    case ".fb2":
-      path = "fb2.svg";
-      break;
-    case ".flv":
-      path = "flv.svg";
-      break;
-    case ".fodt":
-      path = "fodt.svg";
-      break;
-    case ".iaf":
-      path = "iaf.svg";
-      break;
-    case ".ics":
-      path = "ics.svg";
-      break;
-    case ".m2ts":
-      path = "m2ts.svg";
-      break;
-    case ".mht":
-      path = "mht.svg";
-      break;
-    case ".mkv":
-      path = "mkv.svg";
-      break;
-    case ".mov":
-      path = "mov.svg";
-      break;
-    case ".mp4":
-      path = "mp4.svg";
-      break;
-    case ".mpg":
-      path = "mpg.svg";
-      break;
-    case ".odp":
-      path = "odp.svg";
-      break;
-    case ".ods":
-      path = "ods.svg";
-      break;
-    case ".odt":
-      path = "odt.svg";
-      break;
-    case ".otp":
-      path = "otp.svg";
-      break;
-    case ".ots":
-      path = "ots.svg";
-      break;
-    case ".ott":
-      path = "ott.svg";
-      break;
-    case ".pdf":
-      path = "pdf.svg";
-      break;
-    case ".pot":
-      path = "pot.svg";
-      break;
-    case ".pps":
-      path = "pps.svg";
-      break;
-    case ".ppsx":
-      path = "ppsx.svg";
-      break;
-    case ".ppt":
-      path = "ppt.svg";
-      break;
-    case ".pptm":
-      path = "pptm.svg";
-      break;
-    case ".pptx":
-      path = "pptx.svg";
-      break;
-    case ".rtf":
-      path = "rtf.svg";
-      break;
-    case ".svg":
-      path = "svg.svg";
-      break;
-    case ".txt":
-      path = "txt.svg";
-      break;
-    case ".webm":
-      path = "webm.svg";
-      break;
-    case ".xls":
-      path = "xls.svg";
-      break;
-    case ".xlsm":
-      path = "xlsm.svg";
-      break;
-    case ".xlsx":
-      path = "xlsx.svg";
-      break;
-    case ".xps":
-      path = "xps.svg";
-      break;
-    case ".xml":
-      path = "xml.svg";
-      break;
-    case ".oform":
-      path = "oform.svg";
-      break;
-    case ".docxf":
-      path = "docxf.svg";
-      break;
-    default:
-      path = "file.svg";
-      break;
-  }
-
-  if (isMedia) path = "sound.svg";
-  if (isImage) path = "image.svg";
-
-  return iconSize32.get(path);
-};
-
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
@@ -220,7 +71,11 @@ export const convertFoldersToItems = (
   return items;
 };
 
-export const convertFilesToItems = (files: any, filterParam?: string) => {
+export const convertFilesToItems = (
+  files: any,
+  filterParam?: string,
+  getIcon: (size: number, fileExst: string) => string
+) => {
   const items = files.map((file: any) => {
     const {
       id,
@@ -232,12 +87,7 @@ export const convertFilesToItems = (files: any, filterParam?: string) => {
       fileExst,
     } = file;
 
-    const isImage = file.viewAccessability.ImageView;
-    const isMedia = file.viewAccessability.MediaView;
-
-    let icon = getIconUrl(fileExst, isImage, isMedia);
-
-    // if(filterParam)
+    let icon = getIcon(32, fileExst);
 
     return {
       id,
@@ -277,6 +127,7 @@ export const useFilesHelper = ({
   isRoomsOnly,
   rootThirdPartyId,
   getRoomList,
+  getIcon,
   t,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
@@ -379,7 +230,11 @@ export const useFilesHelper = ({
           filterParam
         );
 
-        const filesList: Item[] = convertFilesToItems(files, filterParam);
+        const filesList: Item[] = convertFilesToItems(
+          files,
+          filterParam,
+          getIcon
+        );
 
         const itemList = [...foldersList, ...filesList];
 

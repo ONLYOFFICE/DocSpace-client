@@ -307,7 +307,7 @@ export const useFilesHelper = ({
         filter.applyFilterOption = ApplyFilterOption.Files;
         switch (filterParam) {
           case FilesSelectorFilterTypes.DOCX:
-            filter.filterType = FilterType.DocumentsOnly;
+            filter.extension = FilesSelectorFilterTypes.DOCX;
             break;
 
           case FilesSelectorFilterTypes.IMG:
@@ -315,7 +315,7 @@ export const useFilesHelper = ({
             break;
 
           case FilesSelectorFilterTypes.GZ:
-            filter.filterType = FilterType.ArchiveOnly;
+            filter.extension = FilesSelectorFilterTypes.GZ;
             break;
 
           case FilesSelectorFilterTypes.DOCXF:

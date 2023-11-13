@@ -17,6 +17,7 @@ const useSocketHelper = ({
   setTotal,
   disabledItems,
   filterParam,
+  getIcon,
 }: useSocketHelperProps) => {
   const subscribedId = React.useRef<null | number>(null);
 
@@ -71,7 +72,7 @@ const useSocketHelper = ({
     let item: null | Item = null;
 
     if (opt?.type === "file") {
-      item = convertFilesToItems([data], filterParam)[0];
+      item = convertFilesToItems([data], filterParam, getIcon)[0];
     } else if (opt?.type === "folder") {
       item = !!data.roomType
         ? convertRoomsToItems([data])[0]
@@ -126,7 +127,7 @@ const useSocketHelper = ({
     let item: null | Item = null;
 
     if (opt?.type === "file") {
-      item = convertFilesToItems([data], filterParam)[0];
+      item = convertFilesToItems([data], filterParam, getIcon)[0];
     } else if (opt?.type === "folder") {
       item = !!data.roomType
         ? convertRoomsToItems([data])[0]

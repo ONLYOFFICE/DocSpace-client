@@ -1574,11 +1574,7 @@ class FilesActionStore {
       case "download":
         return hasSelection && canDownload;
       case "downloadAs":
-        return (
-          canDownload &&
-          canConvertSelected &&
-          !this.publicRoomStore.isPublicRoom
-        );
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 

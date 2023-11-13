@@ -298,7 +298,7 @@ const MainProfile = (props) => {
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
-                manualWidth="250px"
+                manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation

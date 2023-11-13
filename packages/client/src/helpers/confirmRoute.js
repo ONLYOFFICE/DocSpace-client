@@ -34,8 +34,6 @@ const ConfirmRoute = (props) => {
     const key = queryParams?.key || getCookie(`${ASC_CONFIRM_KEY}${type}`);
     const confirmLinkData = Object.assign({ type, key }, queryParams);
 
-    console.log("queryParams", queryParams);
-    console.log("confirmLinkData", confirmLinkData);
     let path = "";
     if (!isAuthenticated) {
       path = "/login";

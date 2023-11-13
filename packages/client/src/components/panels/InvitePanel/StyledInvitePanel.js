@@ -447,20 +447,20 @@ const StyledInviteLanguage = styled.div`
   }
 
   .invitation-language {
-    margin-right: 4px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.commonParam.descriptionColor};
   }
   .language-combo-box {
     .combo-button {
       padding-left: 6px;
-      padding-right: 0px;
+      padding-right: 6px;
     }
     .combo-button-label {
       color: ${(props) =>
         props.theme.createEditRoomDialog.commonParam.descriptionColor};
     }
     .combo-buttons_arrow-icon {
+      margin-left: 0px;
       svg {
         path {
           fill: ${(props) =>

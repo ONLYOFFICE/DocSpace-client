@@ -1,4 +1,4 @@
-import React, {
+import {
   useState,
   useEffect,
   Dispatch,
@@ -10,10 +10,12 @@ import React, {
 function useLoadingWithTimeout<S = undefined>(
   timeout: number
 ): [S | undefined, Dispatch<SetStateAction<S | undefined>>];
+
 function useLoadingWithTimeout<S extends boolean>(
   timeout: number,
   initialState: S | (() => S)
 ): [S, Dispatch<SetStateAction<S>>];
+
 function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
   timeout: number,
   initialState?: S | (() => S)
@@ -46,4 +48,4 @@ function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
   return [state, setStateWithTimeout];
 }
 
-export { useLoadingWithTimeout };
+export default useLoadingWithTimeout;

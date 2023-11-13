@@ -101,6 +101,7 @@ const FilesSelector = ({
 
   embedded,
   withHeader,
+  getIcon,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -140,6 +141,7 @@ const FilesSelector = ({
     setTotal,
     disabledItems,
     filterParam,
+    getIcon,
   });
 
   const {
@@ -199,6 +201,7 @@ const FilesSelector = ({
     isRoomsOnly,
     rootThirdPartyId,
     getRoomList,
+    getIcon,
     t,
   });
 
@@ -643,8 +646,9 @@ export default inject(
       filesList,
       setMovingInProgress,
       setSelected,
+      filesSettingsStore,
     } = filesStore;
-
+    const { getIcon } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
       auth.infoPanelStore;
 
@@ -713,6 +717,7 @@ export default inject(
       socketSubscribers: socketSubscribesId,
       setMoveToPublicRoomVisible,
       currentDeviceType,
+      getIcon,
     };
   }
 )(observer(FilesSelector));

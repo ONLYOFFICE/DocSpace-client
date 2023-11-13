@@ -447,7 +447,14 @@ const StyledInviteLanguage = styled.div`
   }
 
   .invitation-language {
-    margin-right: 4px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 4px;
+          `
+        : css`
+            margin-right: 4px;
+          `}
     color: ${(props) =>
       props.theme.createEditRoomDialog.commonParam.descriptionColor};
   }

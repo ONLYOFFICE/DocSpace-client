@@ -9,7 +9,6 @@ import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Textarea from "@docspace/components/textarea";
 import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
@@ -37,7 +36,7 @@ const VersionRow = (props) => {
     culture,
     isVersion,
     t,
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     onSetRestoreProcess,
@@ -51,21 +50,28 @@ const VersionRow = (props) => {
     onClose,
     setIsVisible,
   } = props;
+
+  const navigate = useNavigate();
+
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [commentValue, setCommentValue] = useState(info.comment);
   const [isSavingComment, setIsSavingComment] = useState(false);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (commentValue !== info.comment) {
+      setCommentValue(info.comment);
+    }
+  }, [info.comment]);
 
   const versionDate = `${moment(info.updated)
     .locale(culture)
     .format("L, LTS")}`;
-  const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
-  const linkStyles = { isHovered: true, type: "action" };
+  const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
     window.open(`${info.viewUrl}&version=${info.version}`, "_self");
+
   const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);
 
   const onChange = (e) => {
@@ -113,11 +119,11 @@ const VersionRow = (props) => {
       });
   };
 
-  const onVersionClick = () => {
-    markAsVersion(info.id, isVersion, info.version).catch((err) =>
-      toastr.error(err)
-    );
-  };
+  // const onVersionClick = () => {
+  //   markAsVersion(info.id, isVersion, info.version).catch((err) =>
+  //     toastr.error(err)
+  //   );
+  // };
 
   const contextOptions = [
     {
@@ -289,7 +295,7 @@ export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
   const language = (user && user.cultureName) || culture || "en";
 
   const {
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     isEditing,
@@ -304,7 +310,7 @@ export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
     theme: auth.settingsStore.theme,
     culture: language,
     isTabletView,
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     isEditing: isEdit,

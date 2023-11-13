@@ -141,6 +141,7 @@ const FilesSelector = ({
     setTotal,
     disabledItems,
     filterParam,
+    getIcon,
   });
 
   const {

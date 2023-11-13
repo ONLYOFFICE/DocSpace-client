@@ -57,6 +57,7 @@ export type useSocketHelperProps = {
   setTotal: (callback: setTotalCallback) => void;
   disabledItems: string[] | number[];
   filterParam?: string;
+  getIcon: (size: number, fileExst: string) => string;
 };
 
 export type useRootHelperProps = {

@@ -57,6 +57,7 @@ const onSDKError = (event) => {
 const ErrorContainerBody = styled(ErrorContainer)`
   position: absolute;
   height: 100%;
+  width: 100%;
 `;
 
 let documentIsReady = false;

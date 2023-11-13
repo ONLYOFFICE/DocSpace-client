@@ -5,8 +5,8 @@ const StyledSearchInput = styled.div`
   font-family: Open Sans;
   font-style: normal;
 
-  ${({ scale }) =>
-    scale &&
+  ${({ isScale }) =>
+    isScale &&
     css`
       width: 100%;
     `}

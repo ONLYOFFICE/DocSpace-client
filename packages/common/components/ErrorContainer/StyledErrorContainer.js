@@ -7,6 +7,7 @@ const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: auto;
+  height: 100vh;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

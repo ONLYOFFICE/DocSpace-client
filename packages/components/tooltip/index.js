@@ -51,6 +51,7 @@ const Tooltip = (props) => {
         positionStrategy="fixed"
         openOnClick={openOnClick}
         anchorSelect={anchorSelect}
+        closeEvents={["click", "mouseleave"]}
         className="__react_component_tooltip"
         middlewares={[
           offset(props.offset ?? defaultOffset),

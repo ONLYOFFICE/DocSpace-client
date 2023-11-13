@@ -264,6 +264,8 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+  config.devtool = "source-map";
+
   if (argv.mode === "production") {
     config.mode = "production";
     config.optimization = {
@@ -271,8 +273,6 @@ module.exports = (env, argv) => {
       minimize: !env.minimize,
       minimizer: [new TerserPlugin()],
     };
-  } else {
-    config.devtool = "cheap-module-source-map";
   }
 
   const remotes = {

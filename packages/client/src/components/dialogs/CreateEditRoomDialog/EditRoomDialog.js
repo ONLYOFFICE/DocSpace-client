@@ -28,20 +28,23 @@ const EditRoomDialog = ({
   const prevRoomParams = useRef(
     Object.freeze({
       ...roomParams,
-    }),
+    })
   );
 
   const compareRoomParams = (prevParams, currentParams) => {
     return (
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
-      prevParams.tags.sort().toString() === currentParams.tags.sort().toString() &&
-      ((prevParams.icon.uploadedFile === "" && currentParams.icon.uploadedFile === null) ||
+      prevParams.tags.sort().toString() ===
+        currentParams.tags.sort().toString() &&
+      ((prevParams.icon.uploadedFile === "" &&
+        currentParams.icon.uploadedFile === null) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile)
     );
   };
 
-  const setRoomTags = (newTags) => setRoomParams({ ...roomParams, tags: newTags });
+  const setRoomTags = (newTags) =>
+    setRoomParams({ ...roomParams, tags: newTags });
 
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
@@ -52,6 +55,7 @@ const EditRoomDialog = ({
     }));
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onEditRoom();
   };
 
@@ -90,7 +94,8 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
-      withFooterBorder>
+      withFooterBorder
+    >
       <ModalDialog.Header>
         <DialogHeader isEdit />
       </ModalDialog.Header>
@@ -121,7 +126,10 @@ const EditRoomDialog = ({
           primary
           scale
           onClick={onEditRoom}
-          isDisabled={isWrongTitle || compareRoomParams(prevRoomParams.current, roomParams)}
+          isDisabled={
+            isWrongTitle ||
+            compareRoomParams(prevRoomParams.current, roomParams)
+          }
           isLoading={isLoading}
         />
         <Button

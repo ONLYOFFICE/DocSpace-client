@@ -65,7 +65,7 @@ const BasicBlock = ({
         <InputGroup
           label={t("AppName")}
           name={"name"}
-          placeholder={t("EnterName")}
+          placeholder={t("Common:EnterName")}
           value={nameValue}
           error={error.name}
           onChange={onChange}

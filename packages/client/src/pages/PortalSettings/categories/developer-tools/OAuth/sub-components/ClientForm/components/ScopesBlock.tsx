@@ -109,7 +109,7 @@ const ScopesBlock = ({
               fontWeight={600}
               lineHeight={"16px"}
             >
-              {t(`${name}`)}
+              {t(`Common:${name}`)}
             </Text>
             {/* @ts-ignore */}
             <Text

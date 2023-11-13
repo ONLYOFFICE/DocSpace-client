@@ -346,6 +346,7 @@ const InviteInput = ({
             textOverflow
             scaledOptions={false}
             size="content"
+            manualWidth="280px"
             showDisabledItems={true}
             dropDownMaxHeight={364}
             withBlur={isMobileView}

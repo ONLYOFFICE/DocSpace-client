@@ -18,4 +18,6 @@ export interface OAuthProps {
 
   infoDialogVisible?: boolean;
   previewDialogVisible?: boolean;
+  isInit: boolean;
+  setIsInit: (value: boolean) => void;
 }

@@ -58,7 +58,7 @@ const ClientForm = ({
     terms_url: "",
     policy_url: "",
 
-    authentication_method: "zxc",
+    authentication_method: "123",
 
     scopes: [],
   });

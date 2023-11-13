@@ -42,7 +42,7 @@ import PluginStore from "./PluginStore";
 
 import OAuthStore from "./OAuthStore";
 
-const oauthStore = new OAuthStore();
+const oauthStore = new OAuthStore(authStore);
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 

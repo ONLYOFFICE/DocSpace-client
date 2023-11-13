@@ -29,6 +29,8 @@ const OAuth = ({
   currentDeviceType,
   infoDialogVisible,
   previewDialogVisible,
+  isInit,
+  setIsInit,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -36,6 +38,7 @@ const OAuth = ({
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
+    if (isInit) return;
     const actions = [];
 
     actions.push(fetchScopes(), fetchClients());
@@ -52,11 +55,13 @@ const OAuth = ({
       if (ms < MIN_LOADER_TIME)
         return setTimeout(() => {
           setIsLoading(false);
+          setIsInit(true);
         }, MIN_LOADER_TIME - ms);
     }
 
     setIsLoading(false);
-  }, []);
+    setIsInit(true);
+  }, [isInit, setIsInit]);
 
   useViewEffect({
     view: viewAs,
@@ -65,9 +70,11 @@ const OAuth = ({
   });
 
   React.useEffect(() => {
+    console.log(isInit);
+    if (isInit) return setIsLoading(false);
     startLoadingRef.current = new Date();
     getData();
-  }, [getData]);
+  }, [getData, setIsInit, isInit]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
@@ -102,6 +109,8 @@ export default inject(
       fetchScopes,
       infoDialogVisible,
       previewDialogVisible,
+      isInit,
+      setIsInit,
     } = oauthStore;
     return {
       viewAs,
@@ -113,6 +122,8 @@ export default inject(
       infoDialogVisible,
       previewDialogVisible,
       fetchScopes,
+      isInit,
+      setIsInit,
     };
   }
 )(observer(OAuth));

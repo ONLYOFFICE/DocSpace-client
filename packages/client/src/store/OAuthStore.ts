@@ -34,6 +34,9 @@ const PAGE_LIMIT = 100;
 export type ViewAsType = "table" | "row";
 
 export interface OAuthStoreProps {
+  isInit: boolean;
+  setIsInit: (value: boolean) => void;
+
   viewAs: ViewAsType;
   setViewAs: (value: ViewAsType) => void;
 
@@ -68,6 +71,8 @@ export interface OAuthStoreProps {
 
   deleteClient: (clientId: string[]) => Promise<void>;
 
+  authStore: any;
+
   currentPage: number;
   nextPage: number | null;
   itemCount: number;
@@ -101,6 +106,8 @@ export interface OAuthStoreProps {
 }
 
 class OAuthStore implements OAuthStoreProps {
+  authStore: any = null;
+
   viewAs: ViewAsType = "table";
 
   currentPage: number = 0;
@@ -124,9 +131,16 @@ class OAuthStore implements OAuthStoreProps {
 
   consents: IClientProps[] = [];
 
-  constructor() {
+  isInit: boolean = false;
+
+  constructor(authStore: any) {
+    this.authStore = authStore;
     makeAutoObservable(this);
   }
+
+  setIsInit = (value: boolean) => {
+    this.isInit = value;
+  };
 
   setViewAs = (value: ViewAsType) => {
     this.viewAs = value;
@@ -206,7 +220,7 @@ class OAuthStore implements OAuthStoreProps {
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
       runInAction(() => {
-        this.clients = clientList.content;
+        this.clients = [...this.clients, ...clientList.content];
         this.selection = [];
         this.currentPage = clientList.page;
         this.nextPage = clientList.next || null;
@@ -265,8 +279,14 @@ class OAuthStore implements OAuthStoreProps {
     try {
       const newClient = await addClient(client);
 
+      const creatorDisplayName = this.authStore.userStore.user.displayName;
+      const creatorAvatar = this.authStore.userStore.user.avatarSmall;
+
       runInAction(() => {
-        this.clients = [{ ...newClient }, ...this.clients];
+        this.clients = [
+          { ...newClient, enabled: true, creatorDisplayName, creatorAvatar },
+          ...this.clients,
+        ];
       });
     } catch (e) {
       console.log(e);

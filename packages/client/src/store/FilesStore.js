@@ -3069,6 +3069,8 @@ class FilesStore {
         });
       }
 
+      const isForm = fileExst === ".oform";
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -3135,6 +3137,7 @@ class FilesStore {
         ...pluginOptions,
         inRoom,
         type,
+        isForm,
       };
     });
 

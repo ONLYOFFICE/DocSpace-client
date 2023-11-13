@@ -47,12 +47,17 @@ const MainContainer = styled.div`
   }
 
   .login-subheader {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: #657077;
   }
 
   .latest-text {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    padding: 20px 0 16px;
+  }
+
+  .download-text {
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     padding: 24px 0;
   }
 
@@ -84,13 +89,13 @@ const DownLoadWrapper = styled.div`
   .download-report_button {
     width: auto;
     height: auto;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    line-height: ${(props) => props.theme.getCorrectFontSize("20px")};
     padding-top: 5px;
     padding-bottom: 5px;
 
     @media ${tablet} {
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       line-height: 16px;
       padding-top: 11px;
       padding-bottom: 11px;
@@ -104,7 +109,7 @@ const DownLoadWrapper = styled.div`
   .download-report_description {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
 
     height: 16px;
@@ -336,7 +341,9 @@ const HistoryMainContent = (props) => {
             />
           </>
         )}
-        <Text className="latest-text settings_unavailable">{downloadText}</Text>
+        <Text className="download-text settings_unavailable">
+          {downloadText}
+        </Text>
       </div>
       {content}
       <DownLoadWrapper>

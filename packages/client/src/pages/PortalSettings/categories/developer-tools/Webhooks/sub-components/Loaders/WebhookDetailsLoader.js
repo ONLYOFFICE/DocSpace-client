@@ -1,7 +1,5 @@
-import React from "react";
-
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const LoaderWrapper = styled.div`
   width: 100%;
@@ -48,23 +46,23 @@ const DetailsItemWrapper = styled.div`
 export const WebhookDetailsLoader = () => {
   const DetailsItemLoader = () => (
     <DetailsItemWrapper>
-      <Loaders.Rectangle
+      <RectangleSkeleton
         width="37px"
         height="16px"
         className="mb-5 display-block"
       />
-      <Loaders.Rectangle width="180px" height="20px" />
+      <RectangleSkeleton width="180px" height="20px" />
     </DetailsItemWrapper>
   );
 
   const MessageHeader = () => (
-    <Loaders.Rectangle width="130px" height="20px" className="mb-4" />
+    <RectangleSkeleton width="130px" height="20px" className="mb-4" />
   );
 
   return (
     <LoaderWrapper>
       <DetailsWrapperLoader>
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="80px"
           height="20px"
           className="mb-24 display-block"
@@ -75,15 +73,15 @@ export const WebhookDetailsLoader = () => {
         <DetailsItemLoader />
       </DetailsWrapperLoader>
       <div className=" mb-23">
-        <Loaders.Rectangle width="43px" height="32px" className="mr-20" />
-        <Loaders.Rectangle width="64px" height="32px" />
+        <RectangleSkeleton width="43px" height="32px" className="mr-20" />
+        <RectangleSkeleton width="64px" height="32px" />
       </div>
 
       <MessageHeader />
-      <Loaders.Rectangle width="100%" height="212px" className="mb-16" />
+      <RectangleSkeleton width="100%" height="212px" className="mb-16" />
 
       <MessageHeader />
-      <Loaders.Rectangle width="100%" height="469px" />
+      <RectangleSkeleton width="100%" height="469px" />
     </LoaderWrapper>
   );
 };

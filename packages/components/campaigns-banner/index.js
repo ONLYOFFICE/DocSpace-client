@@ -4,7 +4,7 @@ import BannerWrapper from "./styled-campaigns-banner";
 
 import Button from "../button";
 import Text from "../text";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "../skeletons/rectangle";
 
 const onButtonClick = (url) => {
   window.open(url, "_blank");
@@ -42,7 +42,7 @@ const CampaignsBanner = (props) => {
           onMouseDown={onMouseDown}
           onLoad={handleImageLoaded}
         />
-        {!imageLoad && <Loaders.Rectangle height="140px" borderRadius="5px" />}
+        {!imageLoad && <RectangleSkeleton height="140px" borderRadius="5px" />}
       </a>
 
       <Button

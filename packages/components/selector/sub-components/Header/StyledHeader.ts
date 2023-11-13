@@ -29,7 +29,7 @@ const StyledHeader = styled.div`
 
   .heading-text {
     font-weight: 700;
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 `;

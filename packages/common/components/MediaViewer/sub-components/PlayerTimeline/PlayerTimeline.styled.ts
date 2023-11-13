@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 export const HoverProgress = styled.div`
   display: none;
   position: absolute;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           right: 2px;
@@ -79,7 +79,7 @@ export const PlayerTimelineWrapper = styled.div`
   time {
     display: none;
     position: absolute;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: 50%;
@@ -88,7 +88,7 @@ export const PlayerTimelineWrapper = styled.div`
             left: 50%;
           `}
     top: -25px;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: #fff;
     pointer-events: none;
     transform: translateX(-50%);

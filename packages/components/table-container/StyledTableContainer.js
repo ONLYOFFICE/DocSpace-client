@@ -4,7 +4,7 @@ import { mobile, tablet } from "../utils/device";
 import IconButton from "../icon-button";
 import Scrollbar from "../scrollbar";
 
-import { ColorTheme } from "@docspace/components/ColorTheme";
+import { ColorTheme } from "../ColorTheme";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
@@ -235,7 +235,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
         .info-panel-toggle {
           margin: auto;
           margin-top: 25%;
-          margin-inline-end: 8px;
         }
       }
     `}

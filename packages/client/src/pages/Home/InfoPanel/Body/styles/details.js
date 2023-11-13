@@ -37,7 +37,7 @@ const StyledNoThumbnail = styled.div`
   }
 
   .room-title {
-    font-size: 41px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("41px")};
     font-weight: 700;
     line-height: 56px;
   }

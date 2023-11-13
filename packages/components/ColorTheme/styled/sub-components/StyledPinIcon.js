@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import IconButton from "@docspace/components/icon-button";
+import commonIconsStyles from "../../../utils/common-icons-style";
+import IconButton from "../../../icon-button";
 
 const StyledPinIcon = styled(IconButton)`
   ${commonIconsStyles}

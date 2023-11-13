@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Loaders from "@docspace/common/components/Loaders";
+import DialogSkeleton from "../../skeletons/dialog";
+import DialogAsideSkeleton from "../../skeletons/dialog/aside";
 
 import Heading from "../../heading";
 import {
@@ -150,12 +151,12 @@ const Modal = ({
             )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
-                <Loaders.DialogLoader
+                <DialogSkeleton
                   isLarge={isLarge}
                   withFooterBorder={withFooterBorder}
                 />
               ) : (
-                <Loaders.DialogAsideLoader
+                <DialogAsideSkeleton
                   withoutAside
                   withFooterBorder={withFooterBorder}
                 />

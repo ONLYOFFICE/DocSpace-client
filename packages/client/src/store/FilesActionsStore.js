@@ -2173,7 +2173,11 @@ class FilesActionStore {
               )
             : null;
 
-        return openDocEditor(id, providerKey, tab, null, !item.security.Edit);
+        const isPreview = item.isForm
+          ? !item.security.FillForms
+          : !item.security.Edit;
+
+        return openDocEditor(id, providerKey, tab, null, isPreview);
       }
 
       if (isMediaOrImage) {

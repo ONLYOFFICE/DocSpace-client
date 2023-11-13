@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
-import RectangleLoader from "../RectangleLoader";
+import { tablet } from "@docspace/components/utils/device";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledContainer = styled.div`
   z-index: 209;

@@ -2,7 +2,7 @@ import React from "react";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
 import { StyledSelectedItem, StyledLabel } from "./styled-selected-item";
 import PropTypes from "prop-types";
-import IconButton from "@docspace/components/icon-button";
+import IconButton from "../icon-button";
 
 const SelectedItem = (props) => {
   const {

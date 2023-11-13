@@ -20,6 +20,7 @@ import toastr from "@docspace/components/toast/toastr";
 import { Encoder } from "@docspace/common/utils/encoder";
 import { Base } from "@docspace/components/themes";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import moment from "moment";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -56,7 +57,9 @@ const VersionRow = (props) => {
 
   const navigate = useNavigate();
 
-  const versionDate = `${new Date(info.updated).toLocaleString(culture)}`;
+  const versionDate = `${moment(info.updated)
+    .locale(culture)
+    .format("L, LTS")}`;
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const linkStyles = { isHovered: true, type: "action" };

@@ -42,7 +42,7 @@ const StyledProgress = styled.div`
   }
 
   .progress-section-text {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 600;
     line-height: 16px;
   }
@@ -65,7 +65,7 @@ const StyledProgress = styled.div`
   }
 
   .status {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
   }
 

@@ -18,7 +18,7 @@ export const PageCountWrapper = styled.div<{ isPanelOpen: boolean }>`
   background: rgba(0, 0, 0, 0.4);
 
   color: white;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 
   box-sizing: border-box;

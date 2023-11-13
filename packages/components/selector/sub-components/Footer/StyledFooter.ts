@@ -73,7 +73,7 @@ const StyledComboBox = styled(Combobox)`
 
   .combo-button-label,
   .combo-button-label:hover {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     text-decoration: none;
   }
 `;

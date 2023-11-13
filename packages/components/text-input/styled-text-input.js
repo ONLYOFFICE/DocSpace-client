@@ -30,7 +30,7 @@ const StyledTextInput = styled(Input).attrs((props) => ({
     css`
       background-color: ${(props) => props.theme.input.backgroundColor};
       -webkit-text-fill-color: ${(props) =>
-        props?.value.length > 0
+        props?.value?.length > 0
           ? props.theme.text.color
           : props.theme.textInput.placeholderColor} !important;
       caret-color: ${(props) => props.theme.text.color};
@@ -48,11 +48,13 @@ const StyledTextInput = styled(Input).attrs((props) => ({
     (props.size === "huge" && props.theme.textInput.lineHeight.huge) ||
     (props.size === "large" && props.theme.textInput.lineHeight.large)};
   font-size: ${(props) =>
-    (props.size === "base" && props.theme.textInput.fontSize.base) ||
-    (props.size === "middle" && props.theme.textInput.fontSize.middle) ||
-    (props.size === "big" && props.theme.textInput.fontSize.big) ||
-    (props.size === "huge" && props.theme.textInput.fontSize.huge) ||
-    (props.size === "large" && props.theme.textInput.fontSize.large)};
+    props.theme.getCorrectFontSize(
+      (props.size === "base" && props.theme.textInput.fontSize.base) ||
+        (props.size === "middle" && props.theme.textInput.fontSize.middle) ||
+        (props.size === "big" && props.theme.textInput.fontSize.big) ||
+        (props.size === "huge" && props.theme.textInput.fontSize.huge) ||
+        (props.size === "large" && props.theme.textInput.fontSize.large)
+    )};
 
   font-weight: ${(props) =>
     props.fontWeight

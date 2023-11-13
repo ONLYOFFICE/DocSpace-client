@@ -8,7 +8,7 @@ const StyledComponent = styled.div`
 
   .header {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
   }
 
@@ -21,7 +21,7 @@ const StyledComponent = styled.div`
   }
 
   .theme-name {
-    font-size: 15px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
     line-height: 16px;
     font-weight: 600;
   }

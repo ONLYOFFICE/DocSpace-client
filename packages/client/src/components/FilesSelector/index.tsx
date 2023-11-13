@@ -69,6 +69,7 @@ const FilesSelector = ({
   itemOperationToFolder,
   clearActiveOperations,
   setMovingInProgress,
+  setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
   setCopyPanelVisible,
@@ -309,9 +310,9 @@ const FilesSelector = ({
 
   const onCloseAction = () => {
     setInfoPanelIsMobileHidden(false);
+
     if (onClose) {
       onClose();
-
       return;
     }
 
@@ -325,6 +326,11 @@ const FilesSelector = ({
     } else {
       setMoveToPanelVisible(false);
     }
+  };
+
+  const onCloseAndDeselectAction = () => {
+    setSelected("none");
+    onCloseAction();
   };
 
   const onSearchAction = (value: string) => {
@@ -412,7 +418,7 @@ const FilesSelector = ({
               setIsRequestRunning(false);
             } else {
               setIsRequestRunning(false);
-              onCloseAction();
+              onCloseAndDeselectAction();
               const move = !isCopy;
               if (move) setMovingInProgress(move);
               sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
@@ -436,7 +442,7 @@ const FilesSelector = ({
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
       onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAction();
+      onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
@@ -635,9 +641,12 @@ export default inject(
       selection,
       bufferSelection,
       filesList,
-
       setMovingInProgress,
+      setSelected,
     } = filesStore;
+
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      auth.infoPanelStore;
 
     const selections =
       isMove || isCopy || isRestoreAll || isRestore
@@ -647,6 +656,8 @@ export default inject(
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
+          : infoPanelIsVisible && infoPanelSelection != null
+          ? [infoPanelSelection]
           : []
         : [];
 
@@ -691,6 +702,7 @@ export default inject(
       itemOperationToFolder,
       clearActiveOperations,
       setMovingInProgress,
+      setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       setIsFolderActions,

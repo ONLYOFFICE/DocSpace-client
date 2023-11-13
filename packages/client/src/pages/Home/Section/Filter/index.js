@@ -444,18 +444,28 @@ const SectionFilterContent = ({
 
   const onSearch = React.useCallback(
     (data = "") => {
+      const searchValue = data?.trim() ?? "";
+
+      if (
+        !filter.search &&
+        !roomsFilter.filterValue &&
+        !accountsFilter.search &&
+        searchValue.length === 0
+      )
+        return;
+
       setIsLoading(true);
       if (isAccountsPage) {
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
-        newFilter.search = data;
+        newFilter.search = searchValue;
 
         navigate(`accounts/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
-        newFilter.filterValue = data;
+        newFilter.filterValue = searchValue;
 
         const path =
           newFilter.searchArea === RoomSearchArea.Active
@@ -466,7 +476,7 @@ const SectionFilterContent = ({
       } else {
         const newFilter = filter.clone();
         newFilter.page = 0;
-        newFilter.search = data;
+        newFilter.search = searchValue;
 
         const path = location.pathname.split("/filter")[0];
 

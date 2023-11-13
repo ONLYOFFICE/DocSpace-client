@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { isDesktop } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
@@ -28,6 +27,8 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
+import { DeviceType } from "@docspace/common/constants";
+import moment from "moment";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -52,7 +53,11 @@ const ActiveSessions = ({
   sessions,
   currentSession,
   setSessions,
+  currentDeviceType,
 }) => {
+  const isDesktop = currentDeviceType === DeviceType.desktop;
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
   const [modalData, setModalData] = useState({});
   const [loading, setLoading] = useState(false);
   const { interfaceDirection } = useTheme();
@@ -109,10 +114,10 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return new Date(date).toLocaleString(locale);
+    return moment(date).locale(locale).format("L, LTS");
   };
   const tableCell = (platform, browser) =>
-    interfaceDirection === "rtl" && isDesktop() ? (
+    interfaceDirection === "rtl" && !isMobile ? (
       <>
         <span className="session-browser">
           <span>{browser}</span>
@@ -157,7 +162,7 @@ const ActiveSessions = ({
           }
         />
       </Box>
-      {!isDesktop() ? (
+      {!isDesktop ? (
         <Table>
           <TableBody>
             {sessions.map((session) => (
@@ -170,7 +175,9 @@ const ActiveSessions = ({
                     <span className="session-date">
                       {convertTime(session.date)}
                     </span>
-                    <span className="session-ip">{session.ip}</span>
+                    <span className="session-ip" dir="ltr">
+                      {session.ip}
+                    </span>
                   </Box>
                 </TableDataCell>
 
@@ -251,7 +258,7 @@ const ActiveSessions = ({
 };
 
 export default inject(({ auth, setup }) => {
-  const { culture } = auth.settingsStore;
+  const { culture, currentDeviceType } = auth.settingsStore;
   const { user } = auth.userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
@@ -285,5 +292,6 @@ export default inject(({ auth, setup }) => {
     currentSession,
     getSessions,
     setSessions,
+    currentDeviceType,
   };
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

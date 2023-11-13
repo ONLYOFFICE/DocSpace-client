@@ -246,7 +246,7 @@ const InviteInput = ({
   };
 
   const closeInviteInputPanel = (e) => {
-    if (e?.target.tagName.toUpperCase() === "INPUT") return;
+    if (e?.target?.tagName?.toUpperCase() === "INPUT") return;
 
     setSearchPanelVisible(false);
   };
@@ -343,6 +343,7 @@ const InviteInput = ({
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
+            textOverflow
             scaledOptions={false}
             size="content"
             showDisabledItems={true}

@@ -10,113 +10,113 @@ import {
   StyledBody,
   StyledItem,
 } from "./StyledSharingPanel";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const SharingPanelLoader = ({ id, className, style, ...rest }) => {
   return (
     <StyledContainer>
       <StyledHeader>
-        <RectangleLoader width={"283px"} height={"29px"} />
-        <RectangleLoader width={"48px"} height={"29px"} />
+        <RectangleSkeleton width={"283px"} height={"29px"} />
+        <RectangleSkeleton width={"48px"} height={"29px"} />
       </StyledHeader>
 
       <StyledExternalLink>
-        <RectangleLoader
+        <RectangleSkeleton
           className="rectangle-loader"
           width={"146px"}
           height={"22px"}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="rectangle-loader"
           width={"448px"}
           height={"32px"}
         />
-        <RectangleLoader width={"184px"} height={"20px"} />
+        <RectangleSkeleton width={"184px"} height={"20px"} />
       </StyledExternalLink>
 
       <StyledInternalLink>
-        <RectangleLoader width={"99px"} height={"22px"} />
-        <RectangleLoader width={"30px"} height={"22px"} />
+        <RectangleSkeleton width={"99px"} height={"22px"} />
+        <RectangleSkeleton width={"30px"} height={"22px"} />
       </StyledInternalLink>
 
       <StyledOwner>
         <div className="owner-info">
-          <RectangleLoader
+          <RectangleSkeleton
             width={"32px"}
             height={"32px"}
             borderRadius={"1000px"}
           />
-          <RectangleLoader width={"91px"} height={"16px"} />
+          <RectangleSkeleton width={"91px"} height={"16px"} />
         </div>
-        <RectangleLoader width={"91px"} height={"16px"} />
+        <RectangleSkeleton width={"91px"} height={"16px"} />
       </StyledOwner>
 
       <StyledBody>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
         <StyledItem>
           <div className="item-info">
-            <RectangleLoader
+            <RectangleSkeleton
               width={"32px"}
               height={"32px"}
               borderRadius={"1000px"}
             />
-            <RectangleLoader width={"91px"} height={"16px"} />
+            <RectangleSkeleton width={"91px"} height={"16px"} />
           </div>
-          <RectangleLoader width={"45px"} height={"32px"} />
+          <RectangleSkeleton width={"45px"} height={"32px"} />
         </StyledItem>
       </StyledBody>
     </StyledContainer>

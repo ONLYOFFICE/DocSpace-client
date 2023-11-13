@@ -10,7 +10,7 @@ const StyledTooltip = styled.div`
   z-index: 250;
   background: ${(props) => props.theme.filesDragTooltip.background};
   border-radius: 6px;
-  font-size: 15px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
   font-weight: 600;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;

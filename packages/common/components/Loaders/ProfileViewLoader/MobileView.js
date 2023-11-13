@@ -1,7 +1,7 @@
 import React from "react";
 import { MobileView } from "./StyledProfileView";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import CircleSkeleton from "@docspace/components/skeletons/circle";
 
 const MobileViewLoader = ({ ...rest }) => {
   const {
@@ -17,7 +17,7 @@ const MobileViewLoader = ({ ...rest }) => {
 
   return (
     <MobileView>
-      <CircleLoader
+      <CircleSkeleton
         className="avatar"
         title={title}
         x="62"
@@ -31,7 +31,7 @@ const MobileViewLoader = ({ ...rest }) => {
         animate={animate}
       />
       <div className="info">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           height="58"
           borderRadius={borderRadius}
@@ -42,7 +42,7 @@ const MobileViewLoader = ({ ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           height="58"
           borderRadius={borderRadius}
@@ -53,7 +53,7 @@ const MobileViewLoader = ({ ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           height="58"
           borderRadius={borderRadius}
@@ -66,7 +66,7 @@ const MobileViewLoader = ({ ...rest }) => {
         />
       </div>
       <div className="block">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="78"
           height="20"
@@ -78,7 +78,7 @@ const MobileViewLoader = ({ ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           height="32"
           borderRadius={borderRadius}
@@ -92,7 +92,7 @@ const MobileViewLoader = ({ ...rest }) => {
       </div>
 
       <div className="notifications">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="101"
           height="22"
@@ -105,7 +105,7 @@ const MobileViewLoader = ({ ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           height="32"
           borderRadius={borderRadius}
@@ -119,7 +119,7 @@ const MobileViewLoader = ({ ...rest }) => {
       </div>
 
       <div className="theme">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           className="theme-title"
           width="129"
@@ -134,7 +134,7 @@ const MobileViewLoader = ({ ...rest }) => {
         />
 
         <div className="flex">
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="16"
             height="16"
@@ -148,7 +148,7 @@ const MobileViewLoader = ({ ...rest }) => {
             animate={animate}
           />
 
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="124"
             height="20"
@@ -163,7 +163,7 @@ const MobileViewLoader = ({ ...rest }) => {
         </div>
 
         <div className="theme-selection">
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="291"
             height="32"
@@ -179,7 +179,7 @@ const MobileViewLoader = ({ ...rest }) => {
 
           <div className="check-box-container">
             <div className="flex">
-              <CircleLoader
+              <CircleSkeleton
                 title={title}
                 className="check-box"
                 x="8"
@@ -192,7 +192,7 @@ const MobileViewLoader = ({ ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="124"
                 height="20"
@@ -206,7 +206,7 @@ const MobileViewLoader = ({ ...rest }) => {
               />
             </div>
             <div className="flex">
-              <CircleLoader
+              <CircleSkeleton
                 title={title}
                 className="check-box"
                 x="8"
@@ -219,7 +219,7 @@ const MobileViewLoader = ({ ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="124"
                 height="20"

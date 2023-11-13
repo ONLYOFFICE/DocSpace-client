@@ -12,6 +12,7 @@ const ArticleLiveChat = ({
   withMainButton,
   isMobileArticle,
   zendeskKey,
+  showProgress,
 }) => {
   const { t, ready } = useTranslation("Common");
   useEffect(() => {
@@ -20,9 +21,12 @@ const ArticleLiveChat = ({
       offset:
         withMainButton && isMobileArticle
           ? { horizontal: "68px", vertical: "11px" }
-          : { horizontal: "4px", vertical: "11px" },
+          : {
+              horizontal: showProgress ? "90px" : "4px",
+              vertical: "11px",
+            },
     });
-  }, [withMainButton, isMobileArticle]);
+  }, [withMainButton, isMobileArticle, showProgress]);
 
   useEffect(() => {
     //console.log("Zendesk useEffect", { languageBaseName });
@@ -85,12 +89,21 @@ const ArticleLiveChat = ({
 
 ArticleLiveChat.displayName = "LiveChat";
 
-export default inject(({ auth }) => {
+export default inject(({ auth, uploadDataStore }) => {
   const { settingsStore, languageBaseName, userStore } = auth;
   const { theme, zendeskKey, isMobileArticle } = settingsStore;
 
   const { user } = userStore;
   const { email, displayName } = user;
+  const { primaryProgressDataStore, secondaryProgressDataStore } =
+    uploadDataStore;
+
+  const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
+  const { visible: secondaryProgressDataStoreVisible } =
+    secondaryProgressDataStore;
+
+  const showProgress =
+    primaryProgressDataVisible || secondaryProgressDataStoreVisible;
 
   return {
     email,
@@ -99,5 +112,6 @@ export default inject(({ auth }) => {
     theme,
     zendeskKey,
     isMobileArticle,
+    showProgress,
   };
 })(observer(ArticleLiveChat));

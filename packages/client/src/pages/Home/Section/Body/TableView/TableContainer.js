@@ -4,13 +4,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 
-import { DeviceType } from "@docspace/common/constants";
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";
-import { isTablet, isMobile } from "@docspace/components/utils/device";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

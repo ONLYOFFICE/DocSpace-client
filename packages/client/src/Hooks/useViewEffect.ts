@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 
-import { DeviceType } from "../constants";
+import { DeviceType } from "@docspace/common/constants";
 //@ts-ignore
 import { Context } from "@docspace/components/utils/context";
 import { isTablet, isMobile } from "@docspace/components/utils/device";
@@ -18,11 +18,11 @@ type ContextType = {
   sectionHeight: number;
 };
 
-export function useViewEffect({
+const useViewEffect = ({
   view,
   setView,
   currentDeviceType,
-}: useViewEffectProps) {
+}: useViewEffectProps) => {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   useEffect(() => {
@@ -40,4 +40,6 @@ export function useViewEffect({
       isNotTableView && setView("table");
     }
   }, [sectionWidth, currentDeviceType]);
-}
+};
+
+export default useViewEffect;

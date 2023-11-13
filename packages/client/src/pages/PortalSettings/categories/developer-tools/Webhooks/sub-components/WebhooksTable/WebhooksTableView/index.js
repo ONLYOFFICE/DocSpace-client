@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import React, { useState, useRef } from "react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import { useState, useRef } from "react";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";

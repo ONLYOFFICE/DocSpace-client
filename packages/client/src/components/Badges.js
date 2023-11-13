@@ -97,6 +97,7 @@ const Badges = ({
     mute,
     rootFolderId,
     new: newCount,
+    hasDraft,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
@@ -176,7 +177,7 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {isForm && (
+      {isForm && hasDraft && (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover
@@ -241,7 +242,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
-      {isForm && (
+      {/* {isForm  && ( 
         <BadgeWrapper isTile={isTile}>
           <HelpButton
             color="#F2675A"
@@ -251,7 +252,7 @@ const Badges = ({
             tooltipContent={t("BadgeAlertDescription")}
           />
         </BadgeWrapper>
-      )}
+      )} */}
     </div>
   ) : (
     <div

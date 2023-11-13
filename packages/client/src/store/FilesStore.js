@@ -2961,6 +2961,7 @@ class FilesStore {
         shared,
         title,
         type,
+        hasDraft,
         updated,
         updatedBy,
         version,
@@ -3137,6 +3138,7 @@ class FilesStore {
         ...pluginOptions,
         inRoom,
         type,
+        hasDraft,
         isForm,
       };
     });

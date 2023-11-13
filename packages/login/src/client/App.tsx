@@ -38,12 +38,7 @@ const App: React.FC<ILoginProps> = (props) => {
       <Routes>
         <Route
           path="/login/consent"
-          element={
-            <Login
-              isConsent={props.isAuth && !!props.oauth?.state}
-              {...props}
-            />
-          }
+          element={<Login isConsent={props.isAuth} {...props} />}
         />
         <Route path="/login/error" element={<InvalidRoute {...props} />} />
         {/*<Route path="/login/code" element={<CodeLogin {...props} />} />*/}

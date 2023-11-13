@@ -20,10 +20,9 @@ import Link from "@docspace/components/link";
 import Avatar from "@docspace/components/avatar";
 //@ts-ignore
 import { Base } from "@docspace/components/themes";
-//@ts-ignore
-import { getCookie } from "@docspace/components/utils/cookie";
 
 import OAuthClientInfo from "./oauth-client-info";
+import { deleteCookie, setCookie } from "@docspace/common/utils";
 
 const StyledFormWrapper = styled(FormWrapper)`
   width: 416px;
@@ -82,30 +81,29 @@ const Consent = ({ oauth, theme, setIsConsentScreen }: IConsentProps) => {
   const onAllowClick = async () => {
     const clientId = oauth.clientId;
 
-    let clientState = oauth.state;
+    let clientState = "";
     const scope = oauth.client.scopes;
 
-    if (!clientState) {
-      const getCookie = () => {
-        const cookie = document.cookie.split(";");
+    setCookie("client_id", clientId);
 
-        cookie.forEach((c) => {
-          if (c.includes("client_state"))
-            clientState = c.replace("client_state=", "").trim();
-        });
-      };
+    await api.oauth.onOAuthLogin();
 
-      getCookie();
+    const cookie = document.cookie.split(";");
 
-      if (!clientState) await api.oauth.onOAuthLogin();
+    cookie.forEach((c) => {
+      if (c.includes("client_state"))
+        clientState = c.replace("client_state=", "").trim();
+    });
 
-      getCookie();
-    }
+    deleteCookie("client_id");
+    deleteCookie("client_state");
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
   };
 
   const onDenyClick = () => {
+    deleteCookie("client_id");
+    deleteCookie("client_state");
     window.location.href = oauth.client.websiteUrl;
   };
 

@@ -60,7 +60,6 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
 
   try {
     const oauthClientId = (query.client_id as string) || "";
-    let oauthClientState = (query.state as string) || "";
 
     const isOAuth = query.type === "oauth2" && !!oauthClientId;
 
@@ -88,19 +87,8 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
         isAuth
       );
 
-      if (isAuth && !oauthClientState) {
-        const cookieState = headers.cookie
-          ?.split(";")
-          .find((c) => c.includes("client_state"))
-          ?.replace("client_state=", "")
-          .trim();
+      const isConsent = isAuth;
 
-        if (cookieState) oauthClientState = cookieState;
-      }
-
-      const isConsent = isAuth && isOAuth;
-
-      oauthState.state = oauthClientState || "";
       oauthState.isConsent = !!isConsent;
 
       isCorrectOAuth = !!oauthState?.client.name;

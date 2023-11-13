@@ -3155,9 +3155,14 @@ const Base = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#555F65",
-    closeIconFill: "#657077",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#555F65",
+    },
+    submitToGalleryTile: {
+      bodyText: "#555F65",
+      closeIconFill: "#657077",
+    },
   },
 
   infoBlock: {

@@ -24,6 +24,7 @@ class OformsStore {
   oformFiles = null;
   gallerySelected = null;
   oformsIsLoading = false;
+  oformsLoadError = false;
 
   oformsFilter = OformsFilter.getDefault();
 
@@ -101,7 +102,12 @@ class OformsStore {
 
     return new Promise(async (resolve) => {
       const apiUrl = combineUrl(domain, path, params);
-      let oforms = await getOforms(apiUrl);
+      let oforms = await getOforms(apiUrl).catch((err) => {
+        const errStatus = err.response.status;
+        const oformLoadFail = errStatus === 404 || errStatus === 500;
+        if (oformLoadFail) this.oformsLoadError = true;
+        else this.oformsLoadError = false;
+      });
       resolve(oforms);
     });
   };

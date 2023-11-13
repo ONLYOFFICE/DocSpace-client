@@ -3,6 +3,10 @@
 
   "Categories": "Категории",
   "ViewAllTemplates": "Все шаблоны",
+  "EmptyFormGalleryScreenDescription": "Не удалось найти результатов, соответствующих вашему запросу",
+
+  "ErrorViewHeader": "Галерея форм временно недоступна",
+  "ErrorViewSubHeader": "Пожалуйста, повторите попытку позже",
 
   "Free": "Бесплатно",
   "SuggestChanges": "Предложить изменения",

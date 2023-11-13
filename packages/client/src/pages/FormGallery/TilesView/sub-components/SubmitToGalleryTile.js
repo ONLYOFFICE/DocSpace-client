@@ -44,7 +44,7 @@ export const StyledSubmitToGalleryTile = styled.div`
       font-weight: 400;
       font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
-      color: ${({ theme }) => theme.submitToGalleryTile.bodyText};
+      color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.bodyText};
     }
   }
 `;
@@ -67,7 +67,8 @@ const StyledCloseIcon = styled(CrossIcon)`
         `}
 
   path {
-    fill: ${({ theme }) => theme.submitToGalleryTile.closeIconFill};
+    fill: ${({ theme }) =>
+      theme.oformGallery.submitToGalleryTile.closeIconFill};
   }
 `;
 

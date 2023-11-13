@@ -4,9 +4,12 @@
   "Categories": "Categories",
   "ViewAllTemplates": "View all templates",
   "EmptyFormGalleryScreenDescription": "No results matching your query could be found",
+
+  "ErrorViewHeader": "Form gallery is temporarily unavailable",
+  "ErrorViewSubHeader": "Please try again later",
+
   "Free": "Free",
   "SuggestChanges": "Suggest changes",
-
   "SelectForm": "Select Form",
   "SubmitToGalleryBlockBody": "Submit your templates to share them with the ONLYOFFICE community.",
   "SubmitToGalleryBlockHeader": "ONLYOFFICE Form Gallery",

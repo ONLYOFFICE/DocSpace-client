@@ -11,9 +11,7 @@ const StyledTooltip = styled.div`
     box-shadow: ${(props) => props.theme.tooltip.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.tooltip.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.tooltip.boxShadow};
-    opacity: ${(props) => props.theme.tooltip.opacity};
     padding: ${(props) => props.theme.tooltip.padding};
-    pointer-events: ${(props) => props.theme.tooltip.pointerEvents};
     max-width: ${(props) =>
       `min(100vw, ${
         props.maxWidth ? props.maxWidth : props.theme.tooltip.maxWidth

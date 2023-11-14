@@ -75,13 +75,16 @@ class OformsStore {
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
-    const fetchedLocales = await getOformLocales(url).catch((err) =>
-      toastr.error(err.message)
-    );
-    const localeKeys = fetchedLocales.map((locale) =>
-      convertToLanguage(locale.code)
-    );
-    this.setOformLocales(localeKeys);
+    try {
+      const fetchedLocales = await getOformLocales(url);
+      const localeKeys = fetchedLocales.map((locale) =>
+        convertToLanguage(locale.code)
+      );
+      this.setOformLocales(localeKeys);
+    } catch (err) {
+      this.setOformLocales([]);
+      toastr.error(err.message);
+    }
   };
 
   getOforms = (filter = OformsFilter.getDefault()) => {
@@ -202,14 +205,15 @@ class OformsStore {
     const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
 
-    const menuItems = await getCategoryTypes(url, locale).catch((err) =>
-      toastr.error(err.message)
-    );
-    this.categoryTitles = menuItems.map(
-      (item) => item.attributes.categoryTitle
-    );
-
-    return menuItems;
+    try {
+      const menuItems = await getCategoryTypes(url, locale);
+      this.categoryTitles = menuItems.map(
+        (item) => item.attributes.categoryTitle
+      );
+      return menuItems;
+    } catch (err) {
+      toastr.error(err.message);
+    }
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {

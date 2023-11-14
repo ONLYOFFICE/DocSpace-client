@@ -71,6 +71,7 @@ const StyledInvitePanel = styled.div`
 
     ${(props) =>
       !props.addUsersPanelVisible &&
+      props.theme.interfaceDirection !== "rtl" &&
       css`
         .trackYVisible {
           .scroller {

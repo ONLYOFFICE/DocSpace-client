@@ -18,6 +18,7 @@ import ButtonsBlock from "./components/ButtonsBlock";
 import { StyledContainer } from "./ClientForm.styled";
 
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
+import ClientFormLoader from "./Loader";
 
 const ClientForm = ({
   id,
@@ -237,7 +238,10 @@ const ClientForm = ({
   return (
     <StyledContainer>
       {isLoading ? (
-        <div> Loading...</div>
+        <ClientFormLoader
+          isEdit={isEdit}
+          currentDeviceType={currentDeviceType}
+        />
       ) : (
         <>
           <BasicBlock

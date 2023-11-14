@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -10,6 +10,20 @@ const StyledContainer = styled.div`
   flex-direction: column;
 
   gap: 24px;
+
+  .loader {
+    rect {
+      width: 100%;
+    }
+  }
+
+  .scope-name-loader {
+    margin-bottom: 4px;
+  }
+
+  .scope-desc-loader {
+    margin-bottom: 2px;
+  }
 `;
 
 const StyledBlock = styled.div`

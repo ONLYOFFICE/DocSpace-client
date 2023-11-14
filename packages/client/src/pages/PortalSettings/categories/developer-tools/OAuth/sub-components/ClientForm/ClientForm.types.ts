@@ -5,6 +5,7 @@ import {
   IClientReqDTO,
   IScope,
 } from "@docspace/common/utils/oauth/interfaces";
+import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
 
 export interface InputProps {
   value: string;
@@ -52,10 +53,10 @@ export interface ClientFormProps {
 
   regenerateSecret?: (clientId: string) => Promise<string>;
 
-  currentDeviceType?: string;
+  currentDeviceType?: DeviceUnionType;
 }
 
 export interface ClientStore {
-  auth: { settingsStore: { currentDeviceType: string } };
+  auth: { settingsStore: { currentDeviceType: DeviceUnionType } };
   oauthStore: OAuthStoreProps;
 }

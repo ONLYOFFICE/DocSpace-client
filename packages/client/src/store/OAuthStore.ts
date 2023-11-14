@@ -11,6 +11,7 @@ import {
   getScope,
   getScopeList,
   getConsentList,
+  revokeUserClient,
 } from "@docspace/common/api/oauth";
 
 import {
@@ -28,6 +29,7 @@ import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -70,6 +72,8 @@ export interface OAuthStoreProps {
   regenerateSecret: (clientId: string) => Promise<string | undefined>;
 
   deleteClient: (clientId: string[]) => Promise<void>;
+
+  revokeClient: (clientId: string[]) => Promise<void>;
 
   authStore: any;
 
@@ -384,6 +388,29 @@ class OAuthStore implements OAuthStoreProps {
     }
   };
 
+  revokeClient = async (clientsId: string[]) => {
+    try {
+      const requests: Promise<void>[] = [];
+
+      clientsId.forEach((id) => {
+        this.setActiveClient(id);
+        requests.push(revokeUserClient(id));
+      });
+
+      await Promise.all(requests);
+
+      runInAction(() => {
+        this.consents = this.consents.filter(
+          (c) => !clientsId.includes(c.clientId)
+        );
+      });
+
+      this.setActiveClient("");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   getContextMenuItems = (
     t: any,
     item: IClientProps,
@@ -398,6 +425,14 @@ class OAuthStore implements OAuthStoreProps {
       this.setBufferSelection(clientId);
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(true);
+    };
+
+    const onRevoke = () => {
+      if (!isGroupContext) {
+        this.revokeClient([clientId]);
+      } else {
+        this.revokeClient(this.selection);
+      }
     };
 
     const openOption = {
@@ -416,10 +451,31 @@ class OAuthStore implements OAuthStoreProps {
       isDisabled: isInfo,
     };
 
-    if (!isSettings) {
-      const items: any = [openOption];
+    const revokeOptions = [
+      {
+        key: "revoke",
+        icon: OauthRevokeSvgUrl,
+        label: t("Revoke"),
+        onClick: onRevoke,
+        isDisabled: false,
+      },
+    ];
 
-      if (!isInfo) items.push(infoOption);
+    if (!isSettings) {
+      const items: any = [];
+
+      if (!isGroupContext) {
+        items.push(openOption);
+
+        if (!isInfo) items.push(infoOption);
+
+        items.push({
+          key: "separator",
+          isSeparator: true,
+        });
+      }
+
+      items.push(...revokeOptions);
 
       return items;
     }

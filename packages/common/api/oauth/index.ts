@@ -175,8 +175,16 @@ export const getConsentList = async (): Promise<IClientProps[]> => {
   clients.forEach((item: any) => {
     const client = transformToClientProps(item.client);
 
-    consents.push({ ...client, modifiedOn: item.modified_at });
+    if (!item.invalidated)
+      consents.push({ ...client, modifiedOn: item.modified_at });
   });
 
   return consents;
+};
+
+export const revokeUserClient = async (clientId: string): Promise<void> => {
+  await request({
+    method: "delete",
+    url: `/clients/${clientId}/revoke`,
+  });
 };

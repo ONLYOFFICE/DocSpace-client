@@ -55,7 +55,7 @@ const TableView = ({
       if (element) {
         const { width } = element.getBoundingClientRect();
 
-        const columns = Math.floor(width / 100);
+        const columns = Math.floor(width / 120);
 
         if (columns != tagCount) setTagCount(columns);
       }

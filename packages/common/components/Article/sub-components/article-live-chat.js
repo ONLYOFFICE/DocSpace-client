@@ -3,6 +3,7 @@ import Zendesk, { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 const ArticleLiveChat = ({
   languageBaseName,
@@ -15,6 +16,7 @@ const ArticleLiveChat = ({
   showProgress,
 }) => {
   const { t, ready } = useTranslation("Common");
+  const { interfaceDirection } = useTheme();
   useEffect(() => {
     //console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     ZendeskAPI("webWidget", "updateSettings", {
@@ -67,6 +69,12 @@ const ArticleLiveChat = ({
       },
     });
   }, [email, displayName]);
+
+  useEffect(() => {
+    ZendeskAPI("webWidget", "updateSettings", {
+      position: { horizontal: interfaceDirection === "ltr" ? "right" : "left" },
+    });
+  }, [interfaceDirection]);
 
   const onZendeskLoaded = () => {
     const isShowLiveChat =

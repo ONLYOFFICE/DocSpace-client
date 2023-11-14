@@ -46,6 +46,10 @@ const CategoryFilter = ({
     (async () => {
       setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
+      if (!newMenuItems) {
+        setIsLoading(false);
+        return;
+      }
 
       const categoryPromises = newMenuItems.map(
         (item) =>

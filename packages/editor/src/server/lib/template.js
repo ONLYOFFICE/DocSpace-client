@@ -56,7 +56,7 @@ export default function template(
       tempElm.style.backgroundColor =
         localStorage.theme === "Dark" ? "#333333" : "#f4f4f4";
       console.log("It's Editor INIT");
-      fetch("/static/scripts/config.json")
+      fetch("${CONFIG_URL}")
       .then((response) => {
         if (!response.ok) {
           throw new Error("HTTP error " + response.status);
@@ -415,7 +415,7 @@ export default function template(
           </div>
           <div id="root">${appComponent}</div>
           <noscript> You need to enable JavaScript to run this app. </noscript>
-          <script src="/static/scripts/browserDetector.js"></script>
+          <script src=${BROWSER_DETECTOR_URL}></script>
           ${scripts}
         </body>
       </html>

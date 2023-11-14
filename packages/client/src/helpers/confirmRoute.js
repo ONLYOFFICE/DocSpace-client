@@ -5,8 +5,6 @@ import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
 import { checkConfirmLink } from "@docspace/common/api/user"; //TODO: Move AuthStore
 import { combineUrl, getObjectByLocation } from "@docspace/common/utils";
-import { getCookie } from "@docspace/components/utils/cookie";
-import { ASC_CONFIRM_KEY } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 
 const ConfirmRoute = (props) => {
@@ -31,8 +29,7 @@ const ConfirmRoute = (props) => {
     const url = location.pathname;
     const posSeparator = url.lastIndexOf("/");
     const type = url.slice(posSeparator + 1);
-    const key = queryParams?.key || getCookie(`${ASC_CONFIRM_KEY}${type}`);
-    const confirmLinkData = Object.assign({ type, key }, queryParams);
+    const confirmLinkData = Object.assign({ type }, queryParams);
 
     let path = "";
     if (!isAuthenticated) {

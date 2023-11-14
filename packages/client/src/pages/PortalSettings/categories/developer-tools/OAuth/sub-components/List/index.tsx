@@ -15,22 +15,20 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import RegisterNewButton from "../RegisterNewButton";
+import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   width: 100%;
 
   display: flex;
   flex-direction: column;
 
-  .header {
-    margin-bottom: 8px;
-  }
-
   .description {
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+    max-width: 700px;
   }
 
-  button {
+  .add-button {
     width: fit-content;
 
     margin-bottom: 12px;
@@ -41,9 +39,10 @@ interface ListProps {
   t: any;
   clients: ClientProps[];
   viewAs: ViewAsType;
+  currentDeviceType: DeviceUnionType;
 }
 
-const List = ({ clients, viewAs }: ListProps) => {
+const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
   return (
@@ -61,7 +60,7 @@ const List = ({ clients, viewAs }: ListProps) => {
       >
         {t("OAuthAppDescription")}
       </Text>
-      <RegisterNewButton t={t} />
+      <RegisterNewButton t={t} currentDeviceType={currentDeviceType} />
       <Consumer>
         {(context: { sectionWidth: number; sectionHeight: number }) => (
           <>

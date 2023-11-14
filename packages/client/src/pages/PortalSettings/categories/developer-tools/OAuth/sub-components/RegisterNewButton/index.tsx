@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
 import Button from "@docspace/components/button";
 
 import { RegisterNewButtonProps } from "./RegisterNewButton.types";
 
-const RegisterNewButton = ({ t }: RegisterNewButtonProps) => {
+const RegisterNewButton = ({
+  t,
+  currentDeviceType,
+}: RegisterNewButtonProps) => {
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -15,7 +17,8 @@ const RegisterNewButton = ({ t }: RegisterNewButtonProps) => {
   return (
     <Button
       //@ts-ignore
-      size={isMobile ? "normal" : "small"}
+      className="add-button"
+      size={currentDeviceType !== "desktop" ? "normal" : "small"}
       label={t("RegisterNewApp")}
       primary={true}
       onClick={onClick}

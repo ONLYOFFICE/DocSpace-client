@@ -16,6 +16,7 @@ import { OAuthContainer } from "./StyledOAuth";
 import { OAuthProps } from "./OAuth.types";
 import InfoDialog from "./sub-components/InfoDialog";
 import PreviewDialog from "./sub-components/PreviewDialog";
+import OAuthLoader from "./sub-components/List/Loader";
 
 const MIN_LOADER_TIME = 500;
 
@@ -70,7 +71,6 @@ const OAuth = ({
   });
 
   React.useEffect(() => {
-    console.log(isInit);
     if (isInit) return setIsLoading(false);
     startLoadingRef.current = new Date();
     getData();
@@ -84,11 +84,16 @@ const OAuth = ({
     <OAuthContainer>
       <>
         {isLoading ? (
-          <div>Loading...</div>
+          <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
         ) : isEmptyClientList ? (
           <OAuthEmptyScreen t={t} />
         ) : (
-          <List t={t} clients={clientList} viewAs={viewAs} />
+          <List
+            t={t}
+            clients={clientList}
+            viewAs={viewAs}
+            currentDeviceType={currentDeviceType}
+          />
         )}
       </>
       {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}

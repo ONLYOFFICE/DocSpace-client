@@ -9,22 +9,23 @@ const BundleAnalyzerPlugin =
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const combineUrl = require("@docspace/common/utils/combineUrl");
+//const combineUrl = require("@docspace/common/utils/combineUrl");
 const minifyJson = require("@docspace/common/utils/minifyJson");
-const beforeBuild = require("@docspace/common/utils/beforeBuild");
+//const beforeBuild = require("@docspace/common/utils/beforeBuild");
 const sharedDeps = require("@docspace/common/constants/sharedDependencies");
-const fs = require("fs");
-const { readdir } = require("fs").promises;
+//const fs = require("fs");
+//const { readdir } = require("fs").promises;
 
 const path = require("path");
 
 const pkg = require("./package.json");
+const runtime = require("../runtime.json");
 const deps = pkg.dependencies || {};
 const homepage = pkg.homepage; //combineUrl(window.DocSpaceConfig?.proxy?.url, pkg.homepage);
 const title = pkg.title;
 const version = pkg.version;
-
-const isAlreadyBuilding = false;
+const dateHash = runtime?.date || "";
+//const isAlreadyBuilding = false;
 
 const config = {
   entry: "./src/index",
@@ -349,6 +350,15 @@ module.exports = (env, argv) => {
         publicPath: homepage,
         title: title,
         base: `${homepage}/`,
+        browserDetectorUrl: `/static/scripts/browserDetector.js?hash=${
+          runtime.checksums["browserDetector.js"] || dateHash
+        }`,
+        configUrl: `/static/scripts/config.json?hash=${
+          runtime.checksums["config.json"] || dateHash
+        }`,
+        tiffUrl: `/static/scripts/tiff.min.js?hash=${
+          runtime.checksums["tiff.min.js"] || dateHash
+        }`,
       })
     );
   }
@@ -361,6 +371,7 @@ module.exports = (env, argv) => {
       return JSON.stringify(today.toISOString().split(".")[0] + "Z");
     }, true),
     IS_PERSONAL: env.personal || false,
+    API_JS_HASH: JSON.stringify(runtime.checksums["api.js"] || dateHash),
   };
 
   config.plugins.push(new DefinePlugin(defines));

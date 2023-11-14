@@ -34,11 +34,12 @@ export const StyledHeadline = styled(Headline)`
 
   font-size: 23px;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 30px;
   text-align: center;
 
   @media ${mobile} {
     font-size: 21px;
+    line-height: 28px;
   }
 `;
 

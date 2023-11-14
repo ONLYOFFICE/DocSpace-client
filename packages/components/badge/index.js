@@ -50,7 +50,6 @@ const Badge = (props) => {
       >
         <StyledText
           textAlign="center"
-          backgroundColor={backgroundColor}
           fontWeight={fontWeight}
           borderRadius={borderRadius}
           color={color}

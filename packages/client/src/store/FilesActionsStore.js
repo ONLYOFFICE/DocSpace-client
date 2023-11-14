@@ -617,10 +617,18 @@ class FilesActionStore {
 
   downloadAction = (label, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : [bufferSelection];
+      : bufferSelection != null
+      ? [bufferSelection]
+      : infoPanelIsVisible && infoPanelSelection != null
+      ? [infoPanelSelection]
+      : null;
+
+    if (!selection.length) return;
 
     let fileIds = [];
     let folderIds = [];

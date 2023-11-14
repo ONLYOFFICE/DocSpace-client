@@ -18,6 +18,7 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import Button from "@docspace/components/button";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -157,7 +158,7 @@ const PreviewDialog = ({
   client,
   theme,
 }: PreviewDialogProps) => {
-  const { t } = useTranslation(["OAuth"]);
+  const { t } = useTranslation(["OAuth", "Common"]);
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
@@ -188,7 +189,12 @@ const PreviewDialog = ({
 </script>`;
 
   return (
-    <ModalDialog visible={visible} displayType={"aside"} onClose={onClose}>
+    <ModalDialog
+      visible={visible}
+      displayType={"aside"}
+      onClose={onClose}
+      withFooterBorder
+    >
       <ModalDialog.Header>Auth button</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer>
@@ -260,6 +266,15 @@ const PreviewDialog = ({
           </StyledBlocksContainer>
         </StyledContainer>
       </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          // @ts-ignore
+          size={"normal"}
+          scale
+          label={t("Common:OkButton")}
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
     </ModalDialog>
   );
 };

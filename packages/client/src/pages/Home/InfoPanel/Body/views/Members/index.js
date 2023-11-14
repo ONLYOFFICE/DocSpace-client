@@ -65,6 +65,7 @@ const Members = ({
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
+  withPublicRoomBlock,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
@@ -76,7 +77,7 @@ const Members = ({
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
     const requests = [getRoomMembers(roomId, clearFilter)];
 
-    if (isPublic && clearFilter) {
+    if (isPublic && clearFilter && withPublicRoomBlock) {
       requests.push(getRoomLinks(roomId));
     }
 
@@ -264,9 +265,6 @@ const Members = ({
   };
 
   const publicRoomItems = [];
-  const withPublicRoomBlock =
-    selectionParentRoom?.access === ShareAccessRights.RoomManager ||
-    selectionParentRoom?.access === ShareAccessRights.None;
 
   if (isPublicRoomType && withPublicRoomBlock) {
     if (!isArchiveFolder || primaryLink) {
@@ -460,6 +458,8 @@ export default inject(
       resendEmailInvitations,
       membersFilter,
       setMembersFilter,
+      selection,
+      bufferSelection,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
@@ -481,6 +481,18 @@ export default inject(
       roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
+
+    const room = selectionParentRoom
+      ? selectionParentRoom
+      : selection.length
+      ? selection[0]
+      : bufferSelection
+      ? bufferSelection
+      : null;
+
+    const withPublicRoomBlock =
+      room?.access === ShareAccessRights.RoomManager ||
+      room?.access === ShareAccessRights.None;
 
     return {
       setView,
@@ -520,6 +532,7 @@ export default inject(
       primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
+      withPublicRoomBlock,
     };
   }
 )(

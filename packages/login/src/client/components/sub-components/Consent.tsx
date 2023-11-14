@@ -69,10 +69,18 @@ StyledFormWrapper.defaultProps = { theme: Base };
 interface IConsentProps {
   oauth: IOAuthState;
   theme: IUserTheme;
+  hashSettings: null | PasswordHashType;
+  setHashSettings: (hashSettings: PasswordHashType | null) => void;
   setIsConsentScreen: (value: boolean) => void;
 }
 
-const Consent = ({ oauth, theme, setIsConsentScreen }: IConsentProps) => {
+const Consent = ({
+  oauth,
+  theme,
+  setIsConsentScreen,
+  hashSettings,
+  setHashSettings,
+}: IConsentProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -107,8 +115,16 @@ const Consent = ({ oauth, theme, setIsConsentScreen }: IConsentProps) => {
     window.location.href = oauth.client.websiteUrl;
   };
 
-  const onChangeUserClick = () => {
-    api.user.logout();
+  const onChangeUserClick = async () => {
+    await api.user.logout();
+    if (!hashSettings) {
+      const portalSettings = await api.settings.getSettings();
+
+      console.log(portalSettings);
+
+      setHashSettings(portalSettings.passwordHash);
+    }
+
     setIsConsentScreen(false);
     navigate(`/login/${location.search}`);
   };

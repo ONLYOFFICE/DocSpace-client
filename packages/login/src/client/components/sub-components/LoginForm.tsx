@@ -37,7 +37,7 @@ import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
 interface ILoginFormProps {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
-  hashSettings: PasswordHashType;
+  hashSettings: PasswordHashType | null;
   isDesktop: boolean;
   match: MatchType;
   openRecoverDialog: () => void;
@@ -221,6 +221,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
     setIsLoading(true);
 
+    console.log(pass, hashSettings);
     const hash = createPasswordHash(pass, hashSettings);
 
     isDesktop && checkPwd();

@@ -76,6 +76,9 @@ const Login: React.FC<ILoginProps> = ({
     oauth?.client || ({} as IClientProps)
   );
   const [self, setSelf] = useState(oauth?.self || ({} as ISelf));
+  const [hashSettings, setHashSettings] = useState<null | PasswordHashType>(
+    null
+  );
 
   const {
     enabledJoin,
@@ -237,6 +240,8 @@ const Login: React.FC<ILoginProps> = ({
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
 
+  console.log(portalSettings);
+
   return (
     <LoginFormWrapper
       id="login-page"
@@ -260,6 +265,8 @@ const Login: React.FC<ILoginProps> = ({
             <Consent
               oauth={{ ...oauth, scopes, client: oauthClient, self }}
               theme={theme}
+              hashSettings={portalSettings?.passwordHash || hashSettings}
+              setHashSettings={setHashSettings}
               setIsConsentScreen={setIsConsentPage}
             />
           ) : (
@@ -296,7 +303,7 @@ const Login: React.FC<ILoginProps> = ({
                   recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
                   isDesktop={!!isDesktopEditor}
                   isLoading={isLoading}
-                  hashSettings={portalSettings?.passwordHash}
+                  hashSettings={portalSettings?.passwordHash || hashSettings}
                   setIsLoading={setIsLoading}
                   openRecoverDialog={openRecoverDialog}
                   match={match}

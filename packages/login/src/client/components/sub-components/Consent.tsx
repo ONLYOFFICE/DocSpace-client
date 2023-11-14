@@ -120,8 +120,6 @@ const Consent = ({
     if (!hashSettings) {
       const portalSettings = await api.settings.getSettings();
 
-      console.log(portalSettings);
-
       setHashSettings(portalSettings.passwordHash);
     }
 

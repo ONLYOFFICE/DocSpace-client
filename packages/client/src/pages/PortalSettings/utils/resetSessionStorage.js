@@ -1,4 +1,5 @@
-import { saveToSessionStorage, getFromSessionStorage } from "../utils";
+import { getFromSessionStorage } from "./getFromLocalStorage";
+import { saveToSessionStorage } from "./saveToSessionStorage";
 
 export const resetSessionStorage = () => {
   const portalNameFromSessionStorage = getFromSessionStorage("portalName");

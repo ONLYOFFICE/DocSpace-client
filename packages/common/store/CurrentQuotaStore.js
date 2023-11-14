@@ -3,7 +3,6 @@ import toastr from "@docspace/components/toast/toastr";
 
 import api from "../api";
 import { PortalFeaturesLimitations } from "../constants";
-import authStore from "./AuthStore";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";

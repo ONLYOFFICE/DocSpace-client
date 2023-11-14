@@ -1471,9 +1471,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder && el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 

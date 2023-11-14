@@ -80,6 +80,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       longDateFormat: {
         LT: "h:mm a",
         LTS: "h:mm:ss a",
+        L: "YYYY/MM/DD",
+        LL: "YYYY MMMM D",
+        LLL: "h:mm a YYYY MMMM D",
+        LLLL: "h:mm a YYYY MMMM D dddd",
       },
     });
 

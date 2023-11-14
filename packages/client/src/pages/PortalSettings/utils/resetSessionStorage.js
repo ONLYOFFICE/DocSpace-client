@@ -1,4 +1,4 @@
-import { getFromSessionStorage } from "./getFromLocalStorage";
+import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 
 export const resetSessionStorage = () => {

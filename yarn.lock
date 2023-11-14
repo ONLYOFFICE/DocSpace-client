@@ -3203,7 +3203,7 @@ __metadata:
     react-player: ^1.15.3
     react-router: ^6.10.0
     react-router-dom: ^6.10.0
-    react-tooltip: ^5.21.1
+    react-tooltip: ^5.23.0
     react-viewer: ^3.2.2
     react-virtualized-auto-sizer: ^1.0.7
     react-window: ^1.8.8
@@ -3304,7 +3304,7 @@ __metadata:
     react-svg: ^12.1.0
     react-text-mask: ^5.5.0
     react-toastify: ^7.0.4
-    react-tooltip: ^5.21.1
+    react-tooltip: ^5.23.0
     react-transition-group: ^4.4.5
     react-values: ^0.3.3
     react-virtualized: ^9.22.3
@@ -22783,16 +22783,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-tooltip@npm:^5.21.1":
-  version: 5.22.0
-  resolution: "react-tooltip@npm:5.22.0"
+"react-tooltip@npm:^5.23.0":
+  version: 5.23.0
+  resolution: "react-tooltip@npm:5.23.0"
   dependencies:
     "@floating-ui/dom": ^1.0.0
     classnames: ^2.3.0
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 8b93473a55bbc657966e5f8c129ca1c498ff5ae2688d8a9f44ad171c6f0761f45b6bea06ffd86d1931753b2148e2230eb2cf08635c7d619adcf4998647ffa720
+  checksum: 03db3e7c1ccade26d95ec2418c0374f510e3ae7620be871900e02f5f749d539df688035867c89fcd480c5636d3048b6d580554bd291f708371d057aac54894a4
   languageName: node
   linkType: hard
 

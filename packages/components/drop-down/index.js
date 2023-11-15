@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import onClickOutside from "react-onclickoutside";
-import { isIOS, isMobile } from "react-device-detect";
+import { isIOS, isMobileOnly, isMobile } from "react-device-detect";
 import Portal from "../portal";
 import DomHelpers from "../utils/domHelpers";
 
@@ -344,7 +344,7 @@ class DropDown extends React.PureComponent {
 
     if (
       isIOS &&
-      isMobile &&
+      isMobileOnly &&
       container?.height !== window.visualViewport.height
     ) {
       const rects = this.dropDownRef?.current?.getBoundingClientRect();

@@ -1,5 +1,5 @@
 import React from "react";
-import { isMobile, isIOS } from "react-device-detect";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import PropTypes from "prop-types";
 import Scrollbar from "../scrollbar";
 import {
@@ -25,7 +25,7 @@ const Aside = React.memo((props) => {
   const visualPageTop = React.useRef(0);
 
   React.useEffect(() => {
-    if (isMobile && isIOS) {
+    if (isMobileOnly && isIOS) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }

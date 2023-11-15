@@ -1,0 +1,10 @@
+{
+  "date": "20231115_15376",
+  "checksums": {
+    "api.js": "47b1c3ac53feb3667b3f0b42cacf8038",
+    "api.poly.js": "586ce6831fa68f6bc33486e2cebc856e",
+    "browserDetector.js": "965560573181ee0d643d9a91d3014f39",
+    "config.json": "1a5613e4029a95b738179f30501700b6",
+    "tiff.min.js": "90496a3b99551fee464b40e26523e84d"
+  }
+}

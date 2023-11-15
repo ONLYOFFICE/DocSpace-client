@@ -4,7 +4,8 @@ import Base from "../../themes/base";
 export const DateItem = styled.button`
   font-family: "Open Sans";
   font-weight: 600;
-  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
   border-radius: 50%;
 
   border: 2px solid;

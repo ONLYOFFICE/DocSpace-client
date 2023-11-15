@@ -61,6 +61,7 @@ const Body = ({
   breadCrumbsLoader,
   withSearch,
   isBreadCrumbsLoading,
+  isSearchLoading,
   withFooterInput,
   withFooterCheckbox,
   descriptionText,
@@ -164,7 +165,7 @@ const Body = ({
         )
       ) : null}
 
-      {isBreadCrumbsLoading ? (
+      {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
       ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
         <Search

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import NoUserSelect from "../utils/commonStyles";
 import Base from "../themes/base";
 import DropDown from "../drop-down";
 
@@ -76,7 +76,8 @@ const StyledMainButton = styled.div`
 
   .main-button_text {
     display: inline;
-    font-size: ${(props) => props.theme.mainButton.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.mainButton.fontSize)};
     font-weight: ${(props) => props.theme.mainButton.fontWeight};
     color: ${(props) =>
       !props.isDisabled

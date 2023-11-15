@@ -109,7 +109,7 @@ export const StyledBruteForceProtection = styled.div`
   }
 
   .error-label {
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
   }
 
   .save-cancel-buttons {

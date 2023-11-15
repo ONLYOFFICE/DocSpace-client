@@ -448,7 +448,7 @@ const badgesPosition = css`
 
   .badges {
     display: grid;
-    grid-template-columns: repeat(3, fit-content(50px));
+    grid-template-columns: repeat(3, fit-content(60px));
     grid-template-rows: 32px;
     grid-gap: 7px;
 

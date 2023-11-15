@@ -1,1 +1,0 @@
-export { useViewEffect } from "./useViewEffect";

@@ -8,7 +8,9 @@ const displaySettings = css`
   flex-direction: column-reverse;
   align-items: flex-start;
   border-top: ${(props) =>
-    props.hasScroll && !props.showReminder ? "1px solid #ECEEF1" : "none"};
+    props.hasScroll && !props.showReminder && !props.hideBorder
+      ? "1px solid #ECEEF1"
+      : "none"};
 
   ${(props) =>
     props.hasScroll &&
@@ -32,7 +34,7 @@ const displaySettings = css`
     position: absolute;
     padding-top: 16px;
     padding-bottom: 16px;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     font-weight: 600;
     width: calc(100% - 32px);
     bottom: 56px;

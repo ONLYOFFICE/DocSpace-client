@@ -23,7 +23,7 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
 
   .empty-header {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
 
     margin: 0;
@@ -31,7 +31,7 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
 
   .empty-description {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
 
     text-align: center;

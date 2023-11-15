@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
+import Base from "../../themes/base";
 import { StyledCircleWrap } from "../../floating-button/styled-floating-button";
 
 const getDefaultStyles = ({ $currentColorScheme, color, displayProgress }) =>

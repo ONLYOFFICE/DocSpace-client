@@ -170,7 +170,7 @@ const StyledPeopleRow = styled(TableRow)`
             `}
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 600;
       }
     }

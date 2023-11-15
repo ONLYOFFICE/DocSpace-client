@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import StyledText from "@docspace/components/link/styled-link";
+import StyledText from "../../link/styled-link";
 
 const getDefaultStyles = ({ $currentColorScheme, noHover }) =>
   $currentColorScheme &&

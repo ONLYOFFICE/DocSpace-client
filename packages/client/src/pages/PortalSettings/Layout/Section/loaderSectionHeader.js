@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { isTablet, isDesktop } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
@@ -62,10 +62,10 @@ const LoaderSectionHeader = () => {
   return (
     <StyledLoader isTabletView={isTabletView} isDesktopView={isDesktopView}>
       {levelSettings === 4 && (
-        <Loaders.Rectangle width="17" height="17" className="arrow" />
+        <RectangleSkeleton width="17" height="17" className="arrow" />
       )}
 
-      <Loaders.Rectangle width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
     </StyledLoader>
   );
 };

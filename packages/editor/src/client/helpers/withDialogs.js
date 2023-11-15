@@ -292,6 +292,7 @@ const withDialogs = (WrappedComponent) => {
         onClickSaveSelectFolder={onClickSaveSelectFolder}
         titleSelectorFolder={titleSelectorFolder}
         mfReady={mfReady}
+        settings={props.filesSettings}
       />
     );
 

@@ -96,6 +96,7 @@ const CreateRoomDialog = ({
   const isRoomTitleChanged = roomParams.title.trim() !== "" ? false : true;
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
 

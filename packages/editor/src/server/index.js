@@ -76,7 +76,18 @@ app.use(
     cacheControl: false,
   })
 );
-app.use(logger("dev", { stream: winston.stream }));
+
+app.use(logger("dev", { 
+  stream: winston.stream,
+  skip: function (req, res) {
+    if (req.url == '/health') {
+        return true;
+    } else {
+        return false;
+    }
+  }
+}));
+
 
 if (IS_DEVELOPMENT) {
   app.use(devMiddleware);
@@ -199,6 +210,10 @@ if (IS_DEVELOPMENT) {
       finalLng,
       assets
     );
+
+    if (initialEditorState.isSettingsError) {
+      res.redirect("/access-restricted");
+    }
 
     res.send(htmlString);
   });

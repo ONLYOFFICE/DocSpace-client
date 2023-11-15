@@ -1,7 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
-
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const SelectorSearchLoader = ({
   id,
@@ -11,7 +9,7 @@ const SelectorSearchLoader = ({
   ...rest
 }) => {
   return (
-    <RectangleLoader
+    <RectangleSkeleton
       width={"calc(100% - 16px)"}
       height={"32px"}
       style={{ padding: "0 0 0 16px", marginBottom: "8px", ...style }}

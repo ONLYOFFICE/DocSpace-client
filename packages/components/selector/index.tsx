@@ -27,6 +27,7 @@ const Selector = ({
 
   withSearch,
   searchLoader,
+  isSearchLoading,
   searchPlaceholder,
   searchValue,
   onSearch,
@@ -344,6 +345,7 @@ const Selector = ({
         onSelectBreadCrumb={onSelectBreadCrumb}
         breadCrumbsLoader={breadCrumbsLoader}
         isBreadCrumbsLoading={isBreadCrumbsLoading}
+        isSearchLoading={isSearchLoading}
         withSearch={withSearch}
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}

@@ -233,16 +233,14 @@ const ControlButtons = ({
           )}
 
           {isPublicRoom && (
-            <ContextMenuButton
+            <ContextButton
               id="header_optional-button"
-              zIndex={402}
               className="option-button"
-              iconName={VerticalDotsReactSvgUrl}
-              size={17}
-              isFill
               getData={getContextOptionsFolder}
-              isDisabled={false}
+              withMenu={withMenu}
               title={titles?.contextMenu}
+              isTrashFolder={isTrashFolder}
+              isMobile={isMobile}
             />
           )}
         </>

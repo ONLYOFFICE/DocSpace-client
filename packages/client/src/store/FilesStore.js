@@ -1539,8 +1539,6 @@ class FilesStore {
         }
       })
       .catch((err) => {
-        console.error(err);
-
         if (err?.response?.status === 402)
           this.authStore.currentTariffStatusStore.setPortalTariff();
 

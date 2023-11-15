@@ -8,11 +8,11 @@ const StyledPreparationPortal = styled.div`
   }
 
   #header {
-    font-size: 23px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
   }
   #text {
     color: #a3a9ae;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
     max-width: 480px;
   }

@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -52,14 +53,12 @@ const {
 } = globalColors;
 
 const Dark = {
+  ...CommonTheme,
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
-  interfaceDirection: "ltr",
-  separatorColor: "#474747",
-  mainText: white,
 
   text: {
     color: grayMaxLight,

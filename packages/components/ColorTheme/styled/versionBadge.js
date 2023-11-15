@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
+import Box from "../../box";
 
 const getDefaultStyles = ({ $currentColorScheme, $isVersion, theme }) =>
   $currentColorScheme &&

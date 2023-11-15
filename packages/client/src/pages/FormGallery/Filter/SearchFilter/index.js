@@ -2,7 +2,7 @@ import { inject } from "mobx-react";
 import { useState, useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
-import * as Styled from "./index.styled";
+import SearchInput from "@docspace/components/search-input";
 
 const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
   const [value, setValue] = useState(oformsFilter.search);
@@ -26,9 +26,9 @@ const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
   }, [ref]);
 
   return (
-    <Styled.SearchFilter
+    <SearchInput
       forwardedRef={ref}
-      className="first-name"
+      scale
       tabIndex={1}
       placeholder={t("Common:Search")}
       value={value}

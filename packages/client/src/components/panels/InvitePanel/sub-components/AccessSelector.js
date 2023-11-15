@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import AccessRightSelect from "@docspace/components/access-right-select";
 import { getAccessOptions } from "../utils";
-
 import { StyledAccessSelector } from "../StyledInvitePanel";
+
 import { isMobile } from "@docspace/components/utils/device";
+import AccessRightSelect from "@docspace/components/access-right-select";
 
 const AccessSelector = ({
   t,
@@ -23,7 +23,13 @@ const AccessSelector = ({
   noBorder = false,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-  const width = containerRef?.current?.offsetWidth - 32;
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!containerRef?.current?.offsetWidth) return;
+
+    setWidth(containerRef?.current?.offsetWidth - 32);
+  }, [containerRef?.current?.offsetWidth]);
 
   const accessOptions = getAccessOptions(
     t,

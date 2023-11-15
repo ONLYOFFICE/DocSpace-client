@@ -2,15 +2,20 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
-  @media ${mobile} {
-    max-width: calc(100% - 49px);
-  }
+
+  ${({ noLocales }) =>
+    !noLocales &&
+    css`
+      @media ${mobile} {
+        max-width: calc(100% - 49px);
+      }
+    `}
 
   .mobileView {
     display: none;
@@ -30,13 +35,16 @@ export const StyledCategoryFilterWrapper = styled.div`
 `;
 
 const CategoryFilter = ({
+  noLocales,
   fetchCategoryTypes,
   fetchCategoriesOfCategoryType,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
 
       const categoryPromises = newMenuItems.map(
@@ -62,18 +70,28 @@ const CategoryFilter = ({
             categories: [],
           }));
         })
-        .finally(() => setMenuItems(newMenuItems));
+        .finally(() => {
+          setMenuItems(newMenuItems);
+          setIsLoading(false);
+        });
     })();
   }, []);
 
+  if (!isLoading && menuItems.length === 0) return null;
+
   return (
-    <StyledCategoryFilterWrapper className="categoryFilterWrapper">
+    <StyledCategoryFilterWrapper
+      noLocales={noLocales}
+      className="categoryFilterWrapper"
+    >
       <CategoryFilterMobile className="mobileView" menuItems={menuItems} />
       <CategoryFilterDesktop className="desktopView" menuItems={menuItems} />
     </StyledCategoryFilterWrapper>
   );
 };
 export default inject(({ oformsStore }) => ({
+  noLocales:
+    oformsStore.oformLocales !== null && oformsStore.oformLocales?.length === 0,
   fetchCategoryTypes: oformsStore.fetchCategoryTypes,
   fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
 }))(observer(CategoryFilter));

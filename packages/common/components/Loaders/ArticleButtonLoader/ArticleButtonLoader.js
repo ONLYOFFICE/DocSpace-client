@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StyledContainer from "./StyledMainButton";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const ArticleButtonLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -18,7 +18,7 @@ const ArticleButtonLoader = ({ id, className, style, ...rest }) => {
   } = rest;
   return (
     <StyledContainer id={id} className={className} style={style}>
-      <RectangleLoader
+      <RectangleSkeleton
         title={title}
         width={width}
         height={height}

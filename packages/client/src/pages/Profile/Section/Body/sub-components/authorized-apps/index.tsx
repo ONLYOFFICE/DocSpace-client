@@ -3,9 +3,11 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
-import { useViewEffect } from "@docspace/common/hooks";
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
 
+//@ts-ignore
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+//@ts-ignore
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 //@ts-ignore
 import { Consumer } from "@docspace/components/utils/context";
 import Text from "@docspace/components/text";

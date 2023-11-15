@@ -1,8 +1,9 @@
 import React from "react";
 
 //@ts-ignore
-import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import RectangleLoader from "@docspace/components/skeletons/rectangle";
+//@ts-ignore
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 //@ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
 
@@ -21,9 +22,6 @@ const OAuthLoader = ({
 }) => {
   const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
 
-  const listLoader =
-    viewAs === "table" ? <Loaders.TableLoader /> : <Loaders.Rows />;
-
   return (
     <OAuthContainer>
       <StyledContainer>
@@ -37,7 +35,7 @@ const OAuthLoader = ({
           width={"220px"}
           height={buttonHeight}
         />
-        {listLoader}
+        {/* {viewAs === "table" ? <Loaders.TableLoader /> : <Loaders.Rows />} */}
       </StyledContainer>
     </OAuthContainer>
   );

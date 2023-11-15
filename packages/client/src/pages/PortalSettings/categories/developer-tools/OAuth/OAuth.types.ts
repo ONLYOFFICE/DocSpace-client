@@ -1,5 +1,5 @@
 //@ts-ignore
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 //@ts-ignore

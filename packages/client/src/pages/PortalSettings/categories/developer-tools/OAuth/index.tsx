@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-
-import { useViewEffect } from "@docspace/common/hooks";
+//@ts-ignore
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";

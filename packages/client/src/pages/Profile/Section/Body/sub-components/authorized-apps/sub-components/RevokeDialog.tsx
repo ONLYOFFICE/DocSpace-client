@@ -5,7 +5,7 @@ import { useTranslation, Trans } from "react-i18next";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
 
 interface RevokeDialogProps {

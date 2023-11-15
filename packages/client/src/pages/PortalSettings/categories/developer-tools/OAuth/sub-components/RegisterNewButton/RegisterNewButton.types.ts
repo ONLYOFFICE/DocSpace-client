@@ -1,4 +1,4 @@
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 export interface RegisterNewButtonProps {
   t: any;

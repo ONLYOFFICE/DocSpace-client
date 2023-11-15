@@ -1,8 +1,9 @@
 import React from "react";
 
 //@ts-ignore
-import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import RectangleLoader from "@docspace/components/skeletons/rectangle";
+//@ts-ignore
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 import {
   StyledBlock,

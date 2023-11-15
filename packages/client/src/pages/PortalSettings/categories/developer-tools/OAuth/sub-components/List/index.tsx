@@ -15,7 +15,7 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import RegisterNewButton from "../RegisterNewButton";
-import { DeviceUnionType } from "@docspace/common/hooks/useViewEffect";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 export const StyledContainer = styled.div`
   width: 100%;

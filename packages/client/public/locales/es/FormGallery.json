@@ -1,10 +1,7 @@
 {
   "Categories": "Categorías",
   "EmptyFormGalleryScreenDescription": "No se han encontrado resultados que coincidan con la búsqueda",
-  "EmptyScreenDescription": "Por favor, compruebe su conexión a Internet y actualice la página o inténtelo más tarde.",
   "Free": "Gratis",
-  "GalleryEmptyScreenDescription": "Seleccione cualquier plantilla de formulario para ver los detalles",
-  "GalleryEmptyScreenHeader": "Error al cargar las plantillas de formulario",
   "SuggestChanges": "Sugerir cambios",
   "TemplateInfo": "Información sobre la plantilla",
   "ViewAllTemplates": "Ver todas las plantillas"

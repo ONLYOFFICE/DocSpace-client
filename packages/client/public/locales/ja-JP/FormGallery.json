@@ -1,10 +1,7 @@
 {
   "Categories": "カテゴリー",
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした。",
-  "EmptyScreenDescription": "インターネット接続をご確認のうえ、ページを更新するか、後でお試しください",
   "Free": "無料",
-  "GalleryEmptyScreenDescription": "フォームテンプレートを選択すると、詳細が表示されます",
-  "GalleryEmptyScreenHeader": "フォームテンプレートの読み込みに失敗しました",
   "SuggestChanges": "変更点のご提案",
   "TemplateInfo": "テンプレート情報",
   "ViewAllTemplates": "テンプレート一覧を見る"

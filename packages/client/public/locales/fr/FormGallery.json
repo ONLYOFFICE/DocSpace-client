@@ -1,10 +1,7 @@
 {
   "Categories": "Catégories",
   "EmptyFormGalleryScreenDescription": "Aucun résultat correspondant à votre requête n'a pu être trouvé",
-  "EmptyScreenDescription": "Veuillez vérifier votre connexion Internet et actualisez la page ou réessayez ultérieurement.",
   "Free": "Gratuit",
-  "GalleryEmptyScreenDescription": "Sélectionnez un modèle de formulaire pour voir les détails",
-  "GalleryEmptyScreenHeader": "Chargement des modèles de formulaire a échoué",
   "SuggestChanges": "Proposer des modifications",
   "TemplateInfo": "Informations sur le modèle",
   "ViewAllTemplates": "Afficher tous les formulaires"

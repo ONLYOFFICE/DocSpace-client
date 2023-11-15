@@ -91,8 +91,6 @@ class OformsStore {
   getOforms = (filter = OformsFilter.getDefault()) => {
     const { domain, path } = this.authStore.settingsStore.formGallery;
 
-    console.log("getoforms");
-
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
     const size = "&fields[2]=file_size";

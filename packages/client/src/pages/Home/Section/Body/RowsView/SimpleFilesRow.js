@@ -357,15 +357,16 @@ const SimpleFilesRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
-
     folderCategory,
     isHighlight,
     badgesComponent,
+    onDragOver,
+    onDragLeave,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
-  const [isDragOver, setIsDragOver] = React.useState(false);
+  const [isDragActive, setIsDragActive] = React.useState(false);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -383,14 +384,18 @@ const SimpleFilesRow = (props) => {
     />
   );
 
-  const onDragOver = (dragOver) => {
-    if (dragOver !== isDragOver) {
-      setIsDragOver(dragOver);
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
-    setIsDragOver(false);
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
+    setIsDragActive(false);
   };
 
   const dragStyles =
@@ -426,8 +431,8 @@ const SimpleFilesRow = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         style={dragStyles}
       >
         <StyledSimpleFilesRow
@@ -460,7 +465,7 @@ const SimpleFilesRow = (props) => {
           showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
           isArchive={item.isArchive}
-          isDragOver={isDragOver}
+          isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}

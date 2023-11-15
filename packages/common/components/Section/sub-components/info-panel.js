@@ -4,7 +4,7 @@ import {
   mobile,
   infoPanelWidth,
 } from "@docspace/components/utils/device";
-import { isMobile, isIOS } from "react-device-detect";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
 import React, { useEffect, useState, useRef, useCallback } from "react";
@@ -164,7 +164,7 @@ const InfoPanel = ({
   }, []);
 
   useEffect(() => {
-    if (isMobile && isIOS) {
+    if (isMobileOnly && isIOS) {
       window.visualViewport.addEventListener("resize", onResize);
     }
 

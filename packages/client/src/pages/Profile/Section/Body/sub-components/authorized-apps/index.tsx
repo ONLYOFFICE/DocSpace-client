@@ -19,6 +19,7 @@ import { StyledContainer } from "./styled-authorized-apps";
 
 import TableView from "./sub-components/TableView";
 import RowView from "./sub-components/RowView";
+import RevokeDialog from "./sub-components/RevokeDialog";
 
 interface AuthorizedAppsProps {
   consents?: IClientProps[];
@@ -31,6 +32,12 @@ interface AuthorizedAppsProps {
 
   infoDialogVisible: boolean;
   fetchScopes?: () => Promise<void>;
+
+  revokeDialogVisible: boolean;
+  setRevokeDialogVisible: (value: boolean) => void;
+  selection: string[];
+  bufferSelection: IClientProps;
+  revokeClient: (value: string[]) => Promise<void>;
 }
 
 const AuthorizedApps = ({
@@ -41,6 +48,11 @@ const AuthorizedApps = ({
   currentDeviceType,
   infoDialogVisible,
   fetchScopes,
+  revokeDialogVisible,
+  setRevokeDialogVisible,
+  selection,
+  bufferSelection,
+  revokeClient,
 }: AuthorizedAppsProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -89,6 +101,16 @@ const AuthorizedApps = ({
       {infoDialogVisible && (
         <InfoDialog visible={infoDialogVisible} isProfile />
       )}
+      {revokeDialogVisible && (
+        <RevokeDialog
+          visible={revokeDialogVisible}
+          onClose={() => setRevokeDialogVisible(false)}
+          currentDeviceType={currentDeviceType}
+          onRevoke={revokeClient}
+          selection={selection}
+          bufferSelection={bufferSelection}
+        />
+      )}
     </StyledContainer>
   );
 };
@@ -102,6 +124,12 @@ export default inject(
       viewAs,
       setViewAs,
       infoDialogVisible,
+      revokeDialogVisible,
+      setRevokeDialogVisible,
+
+      selection,
+      bufferSelection,
+      revokeClient,
     } = oauthStore;
 
     const { currentDeviceType } = auth.settingsStore;
@@ -114,6 +142,11 @@ export default inject(
       currentDeviceType,
       infoDialogVisible,
       fetchScopes,
+      revokeDialogVisible,
+      setRevokeDialogVisible,
+      selection,
+      bufferSelection,
+      revokeClient,
     };
   }
 )(observer(AuthorizedApps));

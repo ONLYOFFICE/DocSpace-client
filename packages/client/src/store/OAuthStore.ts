@@ -45,6 +45,9 @@ export interface OAuthStoreProps {
   infoDialogVisible: boolean;
   setInfoDialogVisible: (value: boolean) => void;
 
+  revokeDialogVisible: boolean;
+  setRevokeDialogVisible: (value: boolean) => void;
+
   previewDialogVisible: boolean;
   setPreviewDialogVisible: (value: boolean) => void;
 
@@ -137,10 +140,16 @@ class OAuthStore implements OAuthStoreProps {
 
   isInit: boolean = false;
 
+  revokeDialogVisible: boolean = false;
+
   constructor(authStore: any) {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
+
+  setRevokeDialogVisible = (value: boolean) => {
+    this.revokeDialogVisible = value;
+  };
 
   setIsInit = (value: boolean) => {
     this.isInit = value;
@@ -419,7 +428,7 @@ class OAuthStore implements OAuthStoreProps {
   ) => {
     const { clientId } = item;
 
-    const isGroupContext = this.selection.length;
+    const isGroupContext = this.selection.length > 1;
 
     const onShowInfo = () => {
       this.setBufferSelection(clientId);
@@ -428,11 +437,10 @@ class OAuthStore implements OAuthStoreProps {
     };
 
     const onRevoke = () => {
-      if (!isGroupContext) {
-        this.revokeClient([clientId]);
-      } else {
-        this.revokeClient(this.selection);
-      }
+      if (!isGroupContext) this.setBufferSelection(clientId);
+      this.setPreviewDialogVisible(false);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(true);
     };
 
     const openOption = {

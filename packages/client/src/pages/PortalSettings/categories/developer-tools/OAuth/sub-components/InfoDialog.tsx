@@ -181,7 +181,7 @@ const InfoDialog = ({
 
   return (
     <ModalDialog visible={visible} displayType={"aside"} onClose={onClose}>
-      <ModalDialog.Header>Info</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer
           showDescription={showDescription}

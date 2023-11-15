@@ -1,12 +1,11 @@
 {
+  "Categories": "Kategorien",
+  "EmptyFormGalleryScreenDescription": "Es konnten keine Ergebnisse gefunden werden, die Ihrer Anfrage entsprechen",
   "EmptyScreenDescription": "Bitte überprüfen Sie Ihre Internetverbindung und laden Sie die Seite neu oder versuchen Sie es später.",
+  "Free": "Kostenlos",
   "GalleryEmptyScreenDescription": "Wählen Sie eine beliebige Formularvorlage aus, um die Details zu sehen",
   "GalleryEmptyScreenHeader": "Formularvorlagen konnten nicht geladen werden",
+  "SuggestChanges": "Änderungen vorschlagen",
   "TemplateInfo": "Informationen zur Vorlage",
-
-  "Categories": "Kategorien",
-  "ViewAllTemplates": "Alle Vorlagen ansehen",
-  "EmptyFormGalleryScreenDescription": "Es konnten keine Ergebnisse gefunden werden, die Ihrer Anfrage entsprechen",
-  "Free": "Kostenlos",
-  "SuggestChanges": "Änderungen vorschlagen"
+  "ViewAllTemplates": "Alle Vorlagen ansehen"
 }

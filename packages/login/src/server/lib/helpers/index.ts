@@ -69,7 +69,7 @@ export const getInitialState = async (
   const settings = [
     getAuthProviders(),
     getCapabilities(),
-    getCurrentSsoSettings(),
+    // getCurrentSsoSettings(),
   ];
 
   [portalSettings, buildInfo, availableThemes, logoUrls] = await Promise.all(

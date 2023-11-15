@@ -132,7 +132,6 @@
   "Path": "Ceļš",
   "PleaseNote": "Lūdzu, ņemiet vērā",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: jūsu vecā vietas adrese kļūs nepieejama jaunajiem lietotājiem, tiklīdz noklikšķināsit uz pogas <2>{{save}}</2>.",
-  "Plugins": "Spraudņi",
   "PortalAccess": "Piekļuve DocSpace",
   "PortalAccessSubTitle": "Šī sadaļa ļauj lietotājiem nodrošināt drošus un ērtus veidus, kā piekļūt portālam.",
   "PortalDeactivation": "Deaktivizēt DocSpace",

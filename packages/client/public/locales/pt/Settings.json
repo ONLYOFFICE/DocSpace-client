@@ -127,7 +127,6 @@
   "Path": "Destino",
   "PleaseNote": "Por favor, note",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: o seu antigo endereço DocSpace ficará disponível para novos utilizadores assim que clicar no botão <2>{{save}}</2>.",
-  "Plugins": "Plugins",
   "PortalAccess": "Acesso ao DocSpace",
   "PortalAccessSubTitle": "Esta secção permite-lhe fornecer aos utilizadores formas seguras e convenientes de aceder ao espaço.",
   "PortalDeactivation": "Desativar o DocSpace",

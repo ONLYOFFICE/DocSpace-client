@@ -91,6 +91,8 @@ class OformsStore {
   getOforms = (filter = OformsFilter.getDefault()) => {
     const { domain, path } = this.authStore.settingsStore.formGallery;
 
+    console.log("getoforms");
+
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
     const size = "&fields[2]=file_size";
@@ -103,16 +105,26 @@ class OformsStore {
     const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
-    return new Promise(async (resolve) => {
-      const apiUrl = combineUrl(domain, path, params);
-      let oforms = await getOforms(apiUrl).catch((err) => {
-        const errStatus = err.response.status;
-        const oformLoadFail = errStatus === 404 || errStatus === 500;
-        if (oformLoadFail) this.oformsLoadError = true;
-        else this.oformsLoadError = false;
-      });
-      resolve(oforms);
+    const apiUrl = combineUrl(domain, path, params);
+
+    const resPromise = new Promise(async (resolve, reject) => {
+      try {
+        const oforms = await getOforms(apiUrl);
+        this.oformsLoadError = false;
+        resolve(oforms);
+      } catch (err) {
+        if (err.response) {
+          const status = err.response.status;
+          const isApiError = status === 404 || status === 500;
+          if (isApiError) this.oformsLoadError = true;
+        } else {
+          this.setOformFiles(null);
+        }
+        reject(err);
+      }
     });
+
+    return resPromise;
   };
 
   fetchOforms = async (filter = OformsFilter.getDefault()) => {

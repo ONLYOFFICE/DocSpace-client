@@ -104,21 +104,21 @@ export const getOAuthState = async (
   const requests = [];
 
   try {
-    getClient(clientId, isAuth);
+    await getClient(clientId, isAuth);
   } catch (e) {
     console.log("get client");
     console.log(e);
   }
 
   try {
-    getUser();
+    await getUser();
   } catch (e) {
     console.log("get user");
     console.log(e);
   }
 
   try {
-    getScopeList();
+    await getScopeList();
   } catch (e) {
     console.log("get scopes");
     console.log(e);

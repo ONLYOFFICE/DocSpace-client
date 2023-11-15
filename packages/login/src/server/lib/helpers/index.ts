@@ -15,7 +15,7 @@ import { checkIsAuthenticated } from "@docspace/common/api/user";
 import { getClient, getScopeList } from "@docspace/common/api/oauth";
 import { TenantStatus } from "@docspace/common/constants";
 import { IScope } from "@docspace/common/utils/oauth/interfaces";
-import winston, { stream } from "./logger";
+import winston, { stream } from "../logger";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(

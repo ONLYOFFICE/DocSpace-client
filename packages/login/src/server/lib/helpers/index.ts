@@ -103,6 +103,27 @@ export const getOAuthState = async (
 ): Promise<IOAuthState> => {
   const requests = [];
 
+  try {
+    getClient(clientId, isAuth);
+  } catch (e) {
+    console.log("get client");
+    console.log(e);
+  }
+
+  try {
+    getUser();
+  } catch (e) {
+    console.log("get user");
+    console.log(e);
+  }
+
+  try {
+    getScopeList();
+  } catch (e) {
+    console.log("get scopes");
+    console.log(e);
+  }
+
   requests.push(getClient(clientId, isAuth));
 
   if (isAuth) {

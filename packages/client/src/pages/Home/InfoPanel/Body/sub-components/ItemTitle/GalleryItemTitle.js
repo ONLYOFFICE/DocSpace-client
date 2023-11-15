@@ -47,7 +47,7 @@ const GalleryItemTitle = ({
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
       <Text color={currentColorScheme.main.accent} className="free-label">
-        {t("FormGallery:Free")}
+        {t("Common:Free")}
       </Text>
       {gallerySelected && (
         <StyledGalleryContextOptions>

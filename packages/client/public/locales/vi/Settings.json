@@ -131,7 +131,6 @@
   "Path": "Đường dẫn",
   "PleaseNote": "Xin hãy lưu ý",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: địa chỉ không gian cũ của bạn sẽ có thể không khả dụng cho người dùng mới khi bạn nhấp vào nút <2>{{save}}</2> button.",
-  "Plugins": "Plugins",
   "PortalAccess": "Truy cập DocSpace",
   "PortalAccessSubTitle": "Phần này cho phép bạn cung cấp cho người dùng những cách an toàn và thuận tiện để truy cập không gian.",
   "PortalDeactivation": "Vô hiệu hóa DocSpace",

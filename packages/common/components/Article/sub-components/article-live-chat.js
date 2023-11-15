@@ -5,6 +5,15 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
+const baseConfig = {
+  webWidget: {
+    zIndex: 201,
+    chat: {
+      menuOptions: { emailTranscript: false },
+    },
+  },
+};
+
 const ArticleLiveChat = ({
   languageBaseName,
   email,
@@ -88,7 +97,7 @@ const ArticleLiveChat = ({
       defer
       zendeskKey={zendeskKey}
       onLoaded={onZendeskLoaded}
-      zIndex={201}
+      config={baseConfig}
     />
   ) : (
     <></>

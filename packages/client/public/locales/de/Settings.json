@@ -143,7 +143,6 @@
   "Path": "Pfad",
   "PleaseNote": "Sei bemerkt",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: sobald Sie auf die Schaltfläche <2>{{save}}</2> klicken, ist Ihre alte Space-Adresse für neue Benutzer nicht mehr verfügbar.",
-  "Plugins": "Plugins",
   "PortalAccess": "Zugang zu DocSpace",
   "PortalAccessSubTitle": "In diesem Bereich können Sie den Benutzern einen sicheren und nahtlosen Zugang zum Bereich gewähren.",
   "PortalDeactivation": "DocSpace deaktivieren",

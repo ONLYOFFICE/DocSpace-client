@@ -126,7 +126,6 @@
   "Path": "مسار",
   "PleaseNote": "يرجى الملاحظة",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: سيصبح عنوان إستضافتك القديم غير متاح للمستخدمين الجدد بمجرد النقر فوق الزر <2>{{save}}</2>.",
-  "Plugins": "الإضافات",
   "PortalAccess": "الوصول إلى DocSpace",
   "PortalDeactivation": "قم بإلغاء تنشيط DocSpace",
   "PortalDeactivationDescription": "استخدم هذا الخيار لإلغاء تنشيط إستضافتك مؤقتًا.",

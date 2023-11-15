@@ -133,7 +133,6 @@
   "Path": "パス",
   "PleaseNote": "ご注意ください",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>：旧スペースアドレスは、<2>{{save}}</2>ボタンをクリックすると、新しいユーザーは利用できなくなります。",
-  "Plugins": "プラグイン",
   "PortalAccess": "DocSpaceアクセス",
   "PortalAccessSubTitle": "このセクションでは、ユーザーがスペースにアクセスするための安全で便利な方法を提供することができます。",
   "PortalDeactivation": "DocSpaceを停止する",

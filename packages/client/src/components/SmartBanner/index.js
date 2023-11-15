@@ -56,8 +56,8 @@ const ReactSmartBanner = (props) => {
   };
 
   const priceText = {
-    ios: t("SmartBanner:Price"),
-    android: t("SmartBanner:Price"),
+    ios: t("Common:Free"),
+    android: t("Common:Free"),
     windows: "",
     kindle: "",
   };

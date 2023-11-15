@@ -127,7 +127,6 @@
   "Path": "Cale",
   "PleaseNote": "Vă rugăm să rețineți",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: adresa dvs de spaţiu vechi va deveni indisponibilă pentru utilizatorii noi odată ce faceţi clic pe butonul <2>{{save}}</2>.",
-  "Plugins": "Pluginuri",
   "PortalAccess": "Accesul la spațiu DocSpace",
   "PortalAccessSubTitle": "Această secțiune va permite să le oferă utilizatorilor accesul sigur și convenabil la spațiu.",
   "PortalDeactivation": "Dezactivare DocSpace",

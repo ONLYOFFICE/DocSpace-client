@@ -141,13 +141,6 @@ const StyledVersionRow = styled(Row)`
             margin-left: 0;
           `}
 
-    .version_badge-text {
-      position: absolute;
-
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" ? `right: 6px;` : `left: 6px;`}
-    }
-
     svg {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}

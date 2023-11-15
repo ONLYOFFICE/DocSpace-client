@@ -219,6 +219,21 @@ export default function withFileActions(WrappedFileItem) {
       return getModel(item, t);
     };
 
+    onDragOver = (e) => {
+      if (
+        e.dataTransfer.items.length > 0 &&
+        e.dataTransfer.dropEffect !== "none"
+      ) {
+        this.props.setDragging(true);
+      }
+    };
+
+    onDragLeave = (e) => {
+      if (!e.relatedTarget || !e.dataTransfer.items.length) {
+        this.props.setDragging(false);
+      }
+    };
+
     render() {
       const {
         item,
@@ -284,6 +299,8 @@ export default function withFileActions(WrappedFileItem) {
           checkedProps={checkedProps}
           dragging={dragging}
           getContextModel={this.getContextModel}
+          onDragOver={this.onDragOver}
+          onDragLeave={this.onDragLeave}
           {...this.props}
         />
       );

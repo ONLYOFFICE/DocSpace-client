@@ -19,11 +19,12 @@ import { StyledWrapper } from "./styled-social-networks";
 
 const SocialNetworks = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { providers, setProviders, isOAuthAvailable } = props;
+  const { providers, setProviders, isOAuthAvailable, setPortalQuota } = props;
 
   const fetchData = async () => {
     try {
       const data = await getAuthProviders();
+      if (typeof isOAuthAvailable === "undefined") await setPortalQuota();
       setProviders(data);
     } catch (e) {
       console.error(e);
@@ -99,8 +100,6 @@ const SocialNetworks = (props) => {
       const { icon, label, iconOptions } = providersData[item.provider];
       if (!icon || !label) return <></>;
 
-      console.log(item);
-
       const onClick = (e) => {
         if (item.linked) {
           unlinkAccount(item.provider);
@@ -140,11 +139,12 @@ export default inject(({ auth, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
   const { currentQuotaStore } = auth;
-  const { isOAuthAvailable } = currentQuotaStore;
+  const { isOAuthAvailable, setPortalQuota } = currentQuotaStore;
 
   return {
     providers,
     setProviders,
     isOAuthAvailable,
+    setPortalQuota,
   };
 })(observer(SocialNetworks));

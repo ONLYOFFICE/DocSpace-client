@@ -1,12 +1,8 @@
 {
-  "EmptyScreenDescription": "请检查您的互联网连接，刷新页面或稍后再试",
-  "GalleryEmptyScreenDescription": "选择任何表单模板来查看细节、",
-  "GalleryEmptyScreenHeader": "表单模板加载失败、",
-  "TemplateInfo": "模板信息",
-
   "Categories": "类别",
-  "ViewAllTemplates": "查看模板大全",
   "EmptyFormGalleryScreenDescription": "没有找到匹配查询的结果",
   "Free": "免费",
-  "SuggestChanges": "提出修改建议"
+  "SuggestChanges": "提出修改建议",
+  "TemplateInfo": "模板信息",
+  "ViewAllTemplates": "查看模板大全"
 }

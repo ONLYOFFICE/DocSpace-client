@@ -1,12 +1,8 @@
 {
-  "EmptyScreenDescription": "インターネット接続をご確認のうえ、ページを更新するか、後でお試しください",
-  "GalleryEmptyScreenDescription": "フォームテンプレートを選択すると、詳細が表示されます",
-  "GalleryEmptyScreenHeader": "フォームテンプレートの読み込みに失敗しました",
-  "TemplateInfo": "テンプレート情報",
-
   "Categories": "カテゴリー",
-  "ViewAllTemplates": "テンプレート一覧を見る",
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした。",
   "Free": "無料",
-  "SuggestChanges": "変更点のご提案"
+  "SuggestChanges": "変更点のご提案",
+  "TemplateInfo": "テンプレート情報",
+  "ViewAllTemplates": "テンプレート一覧を見る"
 }

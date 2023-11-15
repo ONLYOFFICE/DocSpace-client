@@ -1,12 +1,8 @@
 {
-  "EmptyScreenDescription": "Veuillez vérifier votre connexion Internet et actualisez la page ou réessayez ultérieurement.",
-  "GalleryEmptyScreenDescription": "Sélectionnez un modèle de formulaire pour voir les détails",
-  "GalleryEmptyScreenHeader": "Chargement des modèles de formulaire a échoué",
-  "TemplateInfo": "Informations sur le modèle",
-
   "Categories": "Catégories",
-  "ViewAllTemplates": "Afficher tous les formulaires",
   "EmptyFormGalleryScreenDescription": "Aucun résultat correspondant à votre requête n'a pu être trouvé",
   "Free": "Gratuit",
-  "SuggestChanges": "Proposer des modifications"
+  "SuggestChanges": "Proposer des modifications",
+  "TemplateInfo": "Informations sur le modèle",
+  "ViewAllTemplates": "Afficher tous les formulaires"
 }

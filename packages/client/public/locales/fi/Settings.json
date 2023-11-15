@@ -131,7 +131,6 @@
   "Path": "Polku",
   "PleaseNote": "Huomaa",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: vanhan tilasi osoite ei ole enää saatavilla uusille käyttäjille, kun klikkaat  <2>{{save}}</2> painiketta.",
-  "Plugins": "Kytkennät",
   "PortalAccess": "Pääsy DocSpaceen",
   "PortalAccessSubTitle": "Tämän osan avulla voit tarjota käyttäjille turvallisia ja käteviä tapoja käyttää tilaa.",
   "PortalDeactivation": "Poista DocSpace käytöstä",

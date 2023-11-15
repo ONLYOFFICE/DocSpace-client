@@ -131,7 +131,6 @@
   "Path": "Сesta",
   "PleaseNote": "Upozornění",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: vaše stará adresa prostoru se stane nedostupnou pro nové uživatele, jakmile kliknete na tlačítko <2>{{save}}</2>.",
-  "Plugins": "Zásuvné moduly",
   "PortalAccess": "Přístup k DocSpace",
   "PortalAccessSubTitle": "Tato sekce umožňuje poskytnout uživatelům bezpečný a pohodlný způsob přístupu k prostoru.",
   "PortalDeactivation": "Deaktivace DocSpace",

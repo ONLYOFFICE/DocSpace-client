@@ -131,7 +131,6 @@
   "Path": "Ścieżka",
   "PleaseNote": "Uwaga",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: Twój stary adres obszaru stanie się niedostępny dla nowych użytkowników, gdy klikniesz przycisk <2>{{save}}</2>.",
-  "Plugins": "Wtyczki",
   "PortalAccess": "Dostęp do portalu",
   "PortalAccessSubTitle": "Dana sekcja umożliwia zapewnienie użytkownikom bezpiecznych i wygodnych metod dostępu do portalu.",
   "PortalDeactivation": "Dezaktywuj DocSpace",

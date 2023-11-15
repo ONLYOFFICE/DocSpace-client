@@ -131,7 +131,6 @@
   "Path": "路径",
   "PleaseNote": "请注意",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: ：点击<2>{{save}}</2> 按钮之后，新用户无法访问以前的空间地址。",
-  "Plugins": "插件",
   "PortalAccess": "协作空间访问权限",
   "PortalAccessSubTitle": "让用户即安全又方便地访问协作空间",
   "PortalDeactivation": "停用协作空间",

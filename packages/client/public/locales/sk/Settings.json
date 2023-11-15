@@ -131,7 +131,6 @@
   "Path": "Cesta",
   "PleaseNote": "Upozornenie",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: po kliknutí na tlačidlo <2>{{save}}</2> vaša stará adresa priestoru bude nedostupná pre nových používateľov.",
-  "Plugins": "Pluginy",
   "PortalAccess": "Prístup k DocSpace",
   "PortalAccessSubTitle": "Tu môžete vytvoriť pre používateľov bezpečné a pohodlné spôsoby prístupu do priestoru.",
   "PortalDeactivation": "Deaktivovať DocSpace",

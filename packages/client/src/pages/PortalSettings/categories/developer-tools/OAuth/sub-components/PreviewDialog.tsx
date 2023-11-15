@@ -19,6 +19,7 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import Button from "@docspace/components/button";
+import { Base } from "@docspace/components/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -37,7 +38,7 @@ const StyledPreviewContainer = styled.div`
 
   box-sizing: border-box;
 
-  border: 1px solid #242424;
+  border: ${(props) => props.theme.oauth.previewDialog.border};
 
   border-radius: 6px;
 
@@ -61,6 +62,8 @@ const StyledPreviewContainer = styled.div`
     }
   }
 `;
+
+StyledPreviewContainer.defaultProps = { theme: Base };
 
 const StyledBlocksContainer = styled.div`
   width: 100%;

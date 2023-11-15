@@ -40,7 +40,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .description-text {
-    color: #858585;
+    color: ${(props) => props.theme.oauth.list.descriptionColor};
   }
 
   .toggleButton {

@@ -3175,6 +3175,25 @@ const Base = {
     borderColor: "#D0D5DA",
     pluginName: "#5C5C5C",
   },
+
+  oauth: {
+    previewDialog: {
+      border: "1px solid #eceef1",
+    },
+    infoDialog: {
+      descLinkColor: "#657077",
+      blockHeaderColor: "#a3a9ae",
+      separatorColor: "#333333",
+    },
+    list: {
+      descriptionColor: "#a3a9ae",
+    },
+    clientForm: {
+      descriptionColor: "#a3a9ae",
+      headerBorder: "1px solid #d0d5da",
+      scopeDesc: "#a3a9ae",
+    },
+  },
 };
 
 export default Base;

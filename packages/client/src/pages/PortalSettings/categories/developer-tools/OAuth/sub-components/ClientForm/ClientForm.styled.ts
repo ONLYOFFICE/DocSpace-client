@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { mobile } from "@docspace/components/utils/device";
+import { Base } from "@docspace/components/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -93,14 +94,16 @@ const StyledInputGroup = styled.div`
     }
 
     p {
-      color: #a3a9ae;
+      color: ${(props) => props.theme.oauth.clientForm.descriptionColor};
     }
   }
 
   .description {
-    color: #a3a9ae;
+    color: ${(props) => props.theme.oauth.clientForm.descriptionColor};
   }
 `;
+
+StyledInputGroup.defaultProps = { theme: Base };
 
 const StyledInputRow = styled.div`
   width: 100%;
@@ -141,7 +144,7 @@ const StyledScopesContainer = styled.div`
     padding-right: 24px;
     margin-right: -12px;
 
-    border-bottom: 1px solid #474747;
+    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
   }
 
   .header-last {
@@ -154,6 +157,8 @@ const StyledScopesContainer = styled.div`
   }
 `;
 
+StyledScopesContainer.defaultProps = { theme: Base };
+
 const StyledScopesName = styled.div`
   display: flex;
 
@@ -164,9 +169,11 @@ const StyledScopesName = styled.div`
   }
 
   .scope-desc {
-    color: #858585;
+    color: ${(props) => props.theme.oauth.clientForm.scopeDesc};
   }
 `;
+
+StyledScopesName.defaultProps = { theme: Base };
 
 const StyledScopesCheckbox = styled.div`
   width: 100%;

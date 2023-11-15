@@ -18,6 +18,7 @@ import ContextMenuButton from "@docspace/components/context-menu-button";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import Avatar from "@docspace/components/avatar";
 import Link from "@docspace/components/link";
+import { Base } from "@docspace/components/themes";
 
 const StyledContainer = styled.div<{
   showDescription: boolean;
@@ -75,14 +76,14 @@ const StyledContainer = styled.div<{
   }
 
   .desc-link {
-    color: #adadad;
+    color: ${(props) => props.theme.oauth.infoDialog.descLinkColor};
   }
 
   .block-header {
     margin-top: 20px;
     margin-bottom: 12px;
 
-    color: #858585;
+    color: ${(props) => props.theme.oauth.infoDialog.blockHeaderColor};
   }
 
   .creator-block {
@@ -108,10 +109,12 @@ const StyledContainer = styled.div<{
 
       margin: 0 8px;
 
-      background: #ffffff;
+      background: ${(props) => props.theme.oauth.infoDialog.separatorColor};
     }
   }
 `;
+
+StyledContainer.defaultProps = { theme: Base };
 
 interface InfoDialogProps {
   visible: boolean;

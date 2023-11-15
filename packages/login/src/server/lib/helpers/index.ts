@@ -15,6 +15,7 @@ import { checkIsAuthenticated } from "@docspace/common/api/user";
 import { getClient, getScopeList } from "@docspace/common/api/oauth";
 import { TenantStatus } from "@docspace/common/constants";
 import { IScope } from "@docspace/common/utils/oauth/interfaces";
+import winston, { stream } from "./logger";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(
@@ -108,6 +109,7 @@ export const getOAuthState = async (
   } catch (e) {
     console.log("get client");
     console.log(e);
+    winston.error(e);
   }
 
   try {
@@ -115,6 +117,7 @@ export const getOAuthState = async (
   } catch (e) {
     console.log("get user");
     console.log(e);
+    winston.error(e);
   }
 
   try {
@@ -122,6 +125,7 @@ export const getOAuthState = async (
   } catch (e) {
     console.log("get scopes");
     console.log(e);
+    winston.error(e);
   }
 
   requests.push(getClient(clientId, isAuth));

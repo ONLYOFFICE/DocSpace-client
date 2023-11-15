@@ -1471,9 +1471,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder && el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 
@@ -1574,11 +1578,7 @@ class FilesActionStore {
       case "download":
         return hasSelection && canDownload;
       case "downloadAs":
-        return (
-          canDownload &&
-          canConvertSelected &&
-          !this.publicRoomStore.isPublicRoom
-        );
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 

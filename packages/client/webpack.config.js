@@ -86,6 +86,7 @@ const config = {
       ASSETS_DIR: path.resolve(__dirname, "./public"),
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
+      COMMON_DIR: path.resolve(__dirname, "../common"),
     },
   },
 
@@ -263,6 +264,8 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+  config.devtool = "source-map";
+
   if (argv.mode === "production") {
     config.mode = "production";
     config.optimization = {
@@ -270,8 +273,6 @@ module.exports = (env, argv) => {
       minimize: !env.minimize,
       minimizer: [new TerserPlugin()],
     };
-  } else {
-    config.devtool = "cheap-module-source-map";
   }
 
   const remotes = {

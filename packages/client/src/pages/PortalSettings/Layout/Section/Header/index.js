@@ -95,13 +95,13 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
       line-height: 59px !important;
     }
   }

@@ -37,7 +37,7 @@ const LoadingWrapper = styled.div`
   align-items: baseline;
 
   color: ${(props) => props.color};
-  font-size: ${(props) => props.size}px;
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.size)};
 `;
 
 const LoadingLabel = styled.span`

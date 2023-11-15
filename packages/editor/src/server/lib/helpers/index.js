@@ -60,14 +60,20 @@ export const initDocEditor = async (req) => {
 
     const baseSettings = [
       getUser(null, headers),
-      getSettings(false, headers),
       getAppearanceTheme(headers),
       getLogoUrls(headers),
     ];
+    let settings;
 
-    [user, settings, appearanceTheme, logoUrls] = await Promise.all(
-      baseSettings
-    );
+    try {
+      settings = await getSettings(false, headers);
+    } catch (err) {
+      console.error("initDocEditor settings failed", err);
+
+      return { isSettingsError: true };
+    }
+
+    [user, appearanceTheme, logoUrls] = await Promise.all(baseSettings);
 
     if (settings.tenantStatus === TenantStatus.PortalRestore) {
       error = "restore-backup";

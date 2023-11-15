@@ -20,6 +20,7 @@ import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment";
+import { RoomsType } from "@docspace/common/constants";
 
 import { StyledLinkRow } from "./StyledPublicRoom";
 
@@ -37,6 +38,7 @@ const LinkRow = (props) => {
     isArchiveFolder,
     theme,
     setIsScrollLocked,
+    isPublicRoomType,
     ...rest
   } = props;
 
@@ -139,12 +141,12 @@ const LinkRow = (props) => {
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      !isExpired && {
-        key: "embedding-settings-key",
-        label: t("Files:EmbeddingSettings"),
-        icon: CodeReactSvgUrl,
-        onClick: onEmbeddingClick,
-      },
+      // !isExpired && {
+      //   key: "embedding-settings-key",
+      //   label: t("Files:EmbeddingSettings"),
+      //   icon: CodeReactSvgUrl,
+      //   onClick: onEmbeddingClick,
+      // },
 
       !disabled && {
         key: "copy-link-settings-key",
@@ -173,8 +175,12 @@ const LinkRow = (props) => {
       },
       {
         key: "delete-link-key",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+        label:
+          primary && isPublicRoomType
+            ? t("Files:RevokeLink")
+            : t("Common:Delete"),
+        icon:
+          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
@@ -273,6 +279,7 @@ export default inject(
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
+      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
     };
   }
 )(

@@ -5,7 +5,7 @@ import Base from "../themes/base";
 import { tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
-import Text from "@docspace/components/text";
+import Text from "../text";
 
 const badgeWithoutText = css`
   position: absolute;
@@ -48,7 +48,7 @@ const StyledCatalogItemHeaderContainer = styled.div`
   .catalog-item__header-text {
     font-style: normal;
     font-weight: 600;
-    font-size: 11px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
     line-height: 14px;
     color: #a3a9ae;
   }
@@ -155,7 +155,10 @@ const StyledCatalogItemInitialText = styled(Text)`
   line-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
   max-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
   color: ${(props) => props.theme.catalogItem.initialText.color};
-  font-size: ${(props) => props.theme.catalogItem.initialText.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(
+      props.theme.catalogItem.initialText.fontSize
+    )};
   font-weight: ${(props) => props.theme.catalogItem.initialText.fontWeight};
   pointer-events: none;
 
@@ -164,7 +167,9 @@ const StyledCatalogItemInitialText = styled(Text)`
     line-height: ${(props) =>
       props.theme.catalogItem.initialText.tablet.lineHeight};
     font-size: ${(props) =>
-      props.theme.catalogItem.initialText.tablet.fontSize};
+      props.theme.getCorrectFontSize(
+        props.theme.catalogItem.initialText.tablet.fontSize
+      )};
   }
 `;
 
@@ -195,7 +200,8 @@ const StyledCatalogItemText = styled(Text)`
       ? props.theme.catalogItem.text.isActiveColor
       : props.theme.catalogItem.text.color};
 
-  font-size: ${(props) => props.theme.catalogItem.text.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.catalogItem.text.fontSize)};
   font-weight: ${(props) => props.theme.catalogItem.text.fontWeight};
   white-space: nowrap;
   overflow: hidden;
@@ -204,7 +210,10 @@ const StyledCatalogItemText = styled(Text)`
   @media ${tablet} {
     margin-left: ${(props) => props.theme.catalogItem.text.tablet.marginLeft};
     line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
-    font-size: ${(props) => props.theme.catalogItem.text.tablet.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(
+        props.theme.catalogItem.text.tablet.fontSize
+      )};
     font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
   }
 `;

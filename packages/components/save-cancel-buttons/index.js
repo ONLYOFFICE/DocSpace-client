@@ -56,6 +56,7 @@ class SaveCancelButtons extends React.Component {
       saveButtonDisabled,
       additionalClassSaveButton,
       additionalClassCancelButton,
+      hideBorder,
     } = this.props;
 
     const cancelButtonDisabled = cancelEnable
@@ -84,6 +85,7 @@ class SaveCancelButtons extends React.Component {
         displaySettings={displaySettings}
         showReminder={showReminder}
         hasScroll={hasScroll}
+        hideBorder={hideBorder}
       >
         <div className="buttons-flex">
           <Button
@@ -148,6 +150,8 @@ SaveCancelButtons.propTypes = {
   cancelEnable: PropTypes.bool,
   /** Accepts css tab-index */
   tabIndex: PropTypes.number,
+  /** Hide top border */
+  hideBorder: PropTypes.bool,
 };
 
 SaveCancelButtons.defaultProps = {

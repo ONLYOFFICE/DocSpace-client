@@ -12,7 +12,7 @@ const SelectFolderDialog = ({
   titleSelectorFolder,
 
   extension,
-
+  settings,
   mfReady,
 }) => {
   const { t } = useTranslation(["Editor", "Common"]);
@@ -37,6 +37,7 @@ const SelectFolderDialog = ({
         footerInputHeader={t("FileName")}
         currentFooterInputValue={titleSelectorFolder}
         footerCheckboxLabel={t("OpenSavedDocument")}
+        settings={settings}
       />
     )) ||
     null

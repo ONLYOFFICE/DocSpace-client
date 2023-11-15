@@ -7,6 +7,7 @@ const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: auto;
+  height: 100vh;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@ const StyledErrorContainer = styled.div`
 
   .error_description_link {
     color: #2da7db;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
   }
 
@@ -29,7 +30,7 @@ const StyledErrorContainer = styled.div`
 
   #header {
     font-weight: 700;
-    font-size: 23px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
     line-height: 28px;
     margin: 8px 0 20px 0;
     text-align: center;
@@ -37,7 +38,7 @@ const StyledErrorContainer = styled.div`
 
   #text {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
     text-align: center;
     margin-bottom: 24px;

@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../../ColorTheme";
 
 export const getYearElements = (
   years,

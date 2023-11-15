@@ -52,14 +52,24 @@
             "tooltip": "🛠️ Start the \"backend docker build EE\" task"
           },
           {
+            "label": "Docker : ReBuild-EE",
+            "task": "Backend | rebuild EE",
+            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
+          },
+          {
             "label": "Docker : Build-CE",
             "task": "Backend | build CE",
             "tooltip": "🛠️ Start the \"backend docker build CE\" task"
           },
           {
-            "label": "Docker : Build-SAAS",
-            "task": "Backend | build SAAS",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
+            "label": "Docker : Build-SAAS + dnsmasq",
+            "task": "Backend | build SAAS + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
+          },
+          {
+            "label": "Docker : Build-EE + dnsmasq",
+            "task": "Backend | build EE + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
           },
           {
             "label": "Docker : Clear",

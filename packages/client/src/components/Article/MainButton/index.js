@@ -35,7 +35,7 @@ import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 

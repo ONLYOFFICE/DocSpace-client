@@ -44,7 +44,16 @@ app.use(
   })
 );
 
-app.use(logger("dev", { stream: stream }));
+app.use(logger("dev", { 
+  stream: stream,
+  skip: function (req, res) {
+    if (req.url == '/health') {
+        return true;
+    } else {
+        return false;
+    }
+  }
+}));
 
 app.get("*", async (req: ILoginRequest, res: Response, next) => {
   const { i18n, cookies, headers, query, t, url } = req;

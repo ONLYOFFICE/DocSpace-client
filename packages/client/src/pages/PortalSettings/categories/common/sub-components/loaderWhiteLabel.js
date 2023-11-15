@@ -1,6 +1,5 @@
-import React from "react";
-import Loaders from "@docspace/common/components/Loaders";
 import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   display: flex;
@@ -24,11 +23,11 @@ const StyledLoader = styled.div`
 const LoaderWhiteLabel = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle height="20px" className="description_loader" />
-      <Loaders.Rectangle height="22px" width="95px" className="header_loader" />
-      <Loaders.Rectangle height="16px" className="description_loader" />
-      <Loaders.Rectangle height="20px" width="291px" />
-      <Loaders.Rectangle
+      <RectangleSkeleton height="20px" className="description_loader" />
+      <RectangleSkeleton height="22px" width="95px" className="header_loader" />
+      <RectangleSkeleton height="16px" className="description_loader" />
+      <RectangleSkeleton height="20px" width="291px" />
+      <RectangleSkeleton
         height="32px"
         width="350px"
         className="text-input_loader"

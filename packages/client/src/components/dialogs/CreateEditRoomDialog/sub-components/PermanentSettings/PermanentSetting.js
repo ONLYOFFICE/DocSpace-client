@@ -56,7 +56,7 @@ const StyledPermanentSetting = styled.div`
 
     &-title {
       font-weight: 600;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
     }
   }
@@ -71,7 +71,7 @@ const StyledPermanentSetting = styled.div`
 
   .permanent_setting-secondary-info {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.permanentSettings.descriptionColor};

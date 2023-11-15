@@ -264,8 +264,11 @@ const Members = ({
   };
 
   const publicRoomItems = [];
+  const withPublicRoomBlock =
+    selectionParentRoom?.access === ShareAccessRights.RoomManager ||
+    selectionParentRoom?.access === ShareAccessRights.None;
 
-  if (isPublicRoomType) {
+  if (isPublicRoomType && withPublicRoomBlock) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
@@ -373,7 +376,8 @@ const Members = ({
     }
   }
 
-  const showPublicRoomBar = (primaryLink && !isArchiveFolder) || isPublicRoom;
+  const showPublicRoomBar =
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
 
   return (
     <>

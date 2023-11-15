@@ -133,7 +133,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props) => ({
   position: relative;
   direction: ${(props) => props.interfaceDirection && "rtl"};
   height: ${(props) => heightStyle(props)};
-  font-size: ${(props) => fontSizeStyle(props)};
+  font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
 
   color: ${(props) =>
     !props.primary

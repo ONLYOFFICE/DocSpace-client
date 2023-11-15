@@ -21,6 +21,7 @@ const TableBody = (props) => {
     <StyledTableBody
       useReactWindow={useReactWindow}
       className="table-container_body"
+      infoPanelVisible={infoPanelVisible}
     >
       <InfiniteLoaderComponent
         className="TableList"

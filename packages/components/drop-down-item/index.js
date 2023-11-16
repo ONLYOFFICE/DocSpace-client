@@ -11,7 +11,6 @@ import {
   WrapperToggle,
 } from "./styled-drop-down-item";
 import ToggleButton from "../toggle-button";
-import IconButton from "../icon-button";
 
 const DropDownItem = (props) => {
   const {

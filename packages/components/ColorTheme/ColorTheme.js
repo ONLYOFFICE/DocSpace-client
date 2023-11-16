@@ -10,7 +10,6 @@ import {
   BadgeTheme,
   SubmenuTextTheme,
   SubmenuItemLabelTheme,
-  ToggleButtonTheme,
   TabsContainerTheme,
   IconButtonTheme,
   IconButtonPinTheme,
@@ -24,7 +23,6 @@ import {
   ComboButtonTheme,
   LinkForgotPasswordTheme,
   LoadingButtonTheme,
-  FloatingButtonTheme,
   InfoPanelToggleTheme,
   LinkTheme,
   SliderTheme,
@@ -33,6 +31,7 @@ import {
   MobileProgressBarTheme,
   IconButtonMuteTheme,
 } from "./styled";
+
 import { ThemeType } from "./constants";
 
 const ColorTheme = forwardRef(
@@ -88,15 +87,6 @@ const ColorTheme = forwardRef(
       case ThemeType.SubmenuItemLabel: {
         return (
           <SubmenuItemLabelTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.ToggleButton: {
-        return (
-          <ToggleButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}
@@ -251,15 +241,6 @@ const ColorTheme = forwardRef(
       case ThemeType.LoadingButton: {
         return (
           <LoadingButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.FloatingButton: {
-        return (
-          <FloatingButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

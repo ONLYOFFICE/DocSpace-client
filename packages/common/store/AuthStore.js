@@ -16,7 +16,6 @@ import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
 import { getPortalTenantExtra } from "../api/portal";
-import { combineUrl } from "@docspace/common/utils";
 
 class AuthStore {
   userStore = null;
@@ -43,7 +42,7 @@ class AuthStore {
     this.tfaStore = new TfaStore();
     this.infoPanelStore = new InfoPanelStore();
     this.currentQuotaStore = new CurrentQuotasStore();
-    this.currentTariffStatusStore = new CurrentTariffStatusStore();
+    this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();
     this.bannerStore = new BannerStore();
 

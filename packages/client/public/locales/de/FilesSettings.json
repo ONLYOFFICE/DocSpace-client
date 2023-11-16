@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Zusätzliche Bereiche",
-  "ConnectEmpty": "Nichts gefunden",
   "DisplayFavorites": "Favoriten anzeigen",
   "DisplayNotification": "Benachrichtigung beim Verschieben in den Papierkorb anzeigen",
   "DisplayRecent": "Neuste anzeigen",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Speicherung von Dateiversionen",
   "ThirdPartyAccounts": "Konten von Drittanbietern",
   "ThirdPartyBtn": "Verbindung von Drittspeichern zulassen",
-  "UpdateOrCreate": "Die Version dieser Datei mit demselben Namen erneuern. Ansonsten wird eine Kopie erstellt.",
-  "UploadPluginsHere": "Plugins hier hochladen"
+  "UpdateOrCreate": "Die Version dieser Datei mit demselben Namen erneuern. Ansonsten wird eine Kopie erstellt."
 }

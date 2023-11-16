@@ -4,7 +4,6 @@ import {
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
 
-import { isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
 const INPUT_LENGTH = "350px";
@@ -288,9 +287,6 @@ const StyledAutoBackup = styled.div`
     max-width: 724px;
     box-sizing: border-box;
   }
-  .auto-backup_buttons {
-    ${!isMobileOnly && "margin-bottom: 24px"}
-  }
 
   .toggle-caption {
     display: flex;
@@ -443,6 +439,12 @@ const StyledScheduleComponent = styled.div`
       css`
         max-width: 138px;
       `};
+
+    @media ${mobile} {
+      grid-area: time;
+      max-width: ${INPUT_LENGTH};
+      width: 100%;
+    }
   }
   .additional_options {
     max-width: ${INPUT_LENGTH};
@@ -455,7 +457,11 @@ const StyledScheduleComponent = styled.div`
   .month_options {
     grid-area: weekly-monthly;
     width: 100%;
-    max-width: ${(props) => (!props.isMobileOnly ? "124px" : INPUT_LENGTH)};
+    max-width: "124px";
+
+    @media ${mobile} {
+      max-width: ${INPUT_LENGTH};
+    }
   }
   .schedule-backup_combobox {
     display: inline-block;
@@ -463,38 +469,32 @@ const StyledScheduleComponent = styled.div`
   }
   .main_options {
     max-width: 363px;
+
+    max-width: ${INPUT_LENGTH};
+    display: grid;
+    ${(props) =>
+      props.weeklySchedule || props.monthlySchedule
+        ? css`
+            grid-template-areas: "days weekly-monthly time";
+            grid-template-columns: 1fr 1fr 1fr;
+          `
+        : css`
+            grid-template-areas: "days  time";
+            grid-template-columns: 1fr 1fr;
+          `};
+    grid-gap: 8px;
+
+    @media ${mobile} {
+      display: block;
+    }
   }
-  ${!isMobileOnly
-    ? css`
-        .main_options {
-          max-width: ${INPUT_LENGTH};
-          display: grid;
-          ${(props) =>
-            props.weeklySchedule || props.monthlySchedule
-              ? css`
-                  grid-template-areas: "days weekly-monthly time";
-                  grid-template-columns: 1fr 1fr 1fr;
-                `
-              : css`
-                  grid-template-areas: "days  time";
-                  grid-template-columns: 1fr 1fr;
-                `};
-          grid-gap: 8px;
-        }
-      `
-    : css`
-        .days_option {
-          grid-area: time;
-          max-width: ${INPUT_LENGTH};
-          width: 100%;
-        }
-      `}
+
   .time_options {
     grid-area: time;
-    ${isMobileOnly &&
-    css`
+
+    @media ${mobile} {
       max-width: ${INPUT_LENGTH};
-    `};
+    }
     width: 100%;
   }
   .max_copies {
@@ -559,7 +559,7 @@ const StyledBackup = styled.div`
     padding-bottom: 8px;
   }
   .layout-progress-bar {
-    ${!isMobileOnly && "cursor: default;"}
+    cursor: default;
   }
   .backup-section_wrapper {
     margin-bottom: 27px;

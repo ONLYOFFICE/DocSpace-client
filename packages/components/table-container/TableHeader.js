@@ -32,8 +32,6 @@ class TableHeader extends React.Component {
   }
 
   componentWillUnmount() {
-    const { columnStorageName } = this.props;
-    localStorage.removeItem(columnStorageName);
     window.removeEventListener("resize", this.throttledResize);
   }
 
@@ -227,6 +225,14 @@ class TableHeader extends React.Component {
     window.addEventListener("mouseup", this.onMouseUp);
   };
 
+  checkingForUnfixedSize = (item, defaultColumnSize) => {
+    return (
+      item !== `${settingsSize}px` &&
+      item !== `${defaultColumnSize}px` &&
+      item !== "0px"
+    );
+  };
+
   onResize = () => {
     const {
       containerRef,
@@ -302,13 +308,41 @@ class TableHeader extends React.Component {
       let hideColumns = false;
 
       if (infoPanelVisible) {
+        let contentColumnsCount = 0;
+        let contentColumnsCountInfoPanel = 0;
+
         const storageInfoPanelSize = localStorage.getItem(
           columnInfoPanelStorageName
         );
 
-        const tableInfoPanelContainer = storageInfoPanelSize
-          ? storageInfoPanelSize.split(" ")
-          : tableContainer;
+        if (storageInfoPanelSize) {
+          storageInfoPanelSize.split(" ").forEach((item) => {
+            const isContentItem = this.checkingForUnfixedSize(
+              item,
+              defaultSize
+            );
+
+            if (isContentItem) contentColumnsCountInfoPanel++;
+          });
+
+          tableContainer.forEach((item) => {
+            const isContentItem = this.checkingForUnfixedSize(
+              item,
+              defaultSize
+            );
+
+            if (isContentItem) contentColumnsCount++;
+          });
+        }
+
+        let incorrectNumberColumns =
+          contentColumnsCountInfoPanel < contentColumnsCount &&
+          !this.state.hideColumns;
+
+        const tableInfoPanelContainer =
+          storageInfoPanelSize && !incorrectNumberColumns
+            ? storageInfoPanelSize.split(" ")
+            : tableContainer;
 
         let containerMinWidth = containerWidth - defaultSize - settingsSize;
 

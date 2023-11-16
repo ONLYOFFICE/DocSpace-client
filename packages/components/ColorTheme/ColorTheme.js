@@ -33,6 +33,7 @@ import {
   MobileProgressBarTheme,
   IconButtonMuteTheme,
 } from "./styled";
+
 import { ThemeType } from "./constants";
 
 const ColorTheme = forwardRef(

@@ -15,9 +15,9 @@ const StyledContainer = styled.div`
 
 const Footer = ({
   t,
-  id,
+
   pluginName,
-  pluginSystem,
+
   saveButtonProps,
   modalRequestRunning,
   setModalRequestRunning,
@@ -40,9 +40,7 @@ const Footer = ({
             onCloseAction,
           },
         }}
-        pluginId={id}
         pluginName={pluginName}
-        pluginSystem={pluginSystem}
       />
       <Button
         scale={true}

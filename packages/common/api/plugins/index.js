@@ -19,46 +19,24 @@ export const addPlugin = async (data) => {
   });
 };
 
-export const getPlugin = async (id) => {
+export const getPlugin = async (name) => {
   return request({
     method: "GET",
-    url: `/settings/webplugins/${id}`,
+    url: `/settings/webplugins/${name}`,
   });
 };
 
-export const activatePlugin = async (id, enabled) => {
+export const activatePlugin = async (name, enabled, settings = "") => {
   return request({
     method: "PUT",
-    url: `/settings/webplugins/${id}`,
-    data: { enabled },
+    url: `/settings/webplugins/${name}`,
+    data: { enabled, settings },
   });
 };
 
-export const deletePlugin = async (id) => {
+export const deletePlugin = async (name) => {
   request({
     method: "DELETE",
-    url: `/settings/webplugins/${id}`,
-  });
-};
-
-export const getSystemPlugin = async (name) => {
-  return request({
-    method: "GET",
-    url: `/settings/webplugins/system/${name}`,
-  });
-};
-
-export const activateSystemPlugin = async (name, enabled) => {
-  return request({
-    method: "PUT",
-    url: `/settings/webplugins/system/${name}`,
-    data: { enabled },
-  });
-};
-
-export const deleteSystemPlugin = async (name) => {
-  request({
-    method: "DELETE",
-    url: `/settings/webplugins/system/${name}`,
+    url: `/settings/webplugins/${name}`,
   });
 };

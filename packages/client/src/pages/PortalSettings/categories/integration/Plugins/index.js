@@ -99,9 +99,9 @@ export default inject(({ auth, pluginStore }) => {
     isEmptyList,
   } = pluginStore;
 
-  const openSettingsDialog = (pluginId, pluginName, pluginSystem) => {
+  const openSettingsDialog = (pluginName) => {
     setSettingsPluginDialogVisible(true);
-    setCurrentSettingsDialogPlugin({ pluginId, pluginName, pluginSystem });
+    setCurrentSettingsDialogPlugin({ pluginName });
   };
 
   return {

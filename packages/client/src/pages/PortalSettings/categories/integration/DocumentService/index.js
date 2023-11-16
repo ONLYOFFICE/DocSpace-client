@@ -8,6 +8,7 @@ import Loaders from "@docspace/common/components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
+const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 
 const DocumentService = ({
@@ -212,7 +213,7 @@ const DocumentService = ({
               iconButtonClassName={"icon-button"}
               value={portalUrl}
               onChange={onChangePortalUrl}
-              placeholder={"http://<docspace-dns-name>/"}
+              placeholder={DNS_PLACEHOLDER}
               hasError={!portalUrlIsValid}
               isDisabled={isSaveLoading || isResetLoading}
             />

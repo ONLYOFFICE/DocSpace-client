@@ -22,7 +22,6 @@ export const ThemeType = {
   ComboButton: "comboButton",
   LinkForgotPassword: "linkForgotPassword",
   LoadingButton: "loadingButton",
-  FloatingButton: "floatingButton",
   InfoPanelToggle: "infoPanelToggle",
   Link: "link",
   Slider: "slider",

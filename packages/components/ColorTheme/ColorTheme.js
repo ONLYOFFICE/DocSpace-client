@@ -24,7 +24,6 @@ import {
   ComboButtonTheme,
   LinkForgotPasswordTheme,
   LoadingButtonTheme,
-  FloatingButtonTheme,
   InfoPanelToggleTheme,
   LinkTheme,
   SliderTheme,
@@ -252,15 +251,6 @@ const ColorTheme = forwardRef(
       case ThemeType.LoadingButton: {
         return (
           <LoadingButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.FloatingButton: {
-        return (
-          <FloatingButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

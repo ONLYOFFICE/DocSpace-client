@@ -1,57 +1,39 @@
 import { mobile } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import { ReactSVG } from "react-svg";
-import Headline from "@docspace/common/components/Headline";
-import { Base } from "@docspace/components/themes";
+import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 
-export const ErrorView = styled.div`
-  padding-top: 56px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+export const ErrorView = styled(EmptyScreenContainer)`
+  padding: 56px 0 0 0;
+  position: relative;
+  box-sizing: border-box;
 
   @media ${mobile} {
-    padding-top: 16px;
+    padding: 16px 0 0 0;
+    width: 100%;
+    max-width: 100%;
   }
-`;
 
-export const ErrorImage = styled(ReactSVG)`
-  svg {
-    height: 360px;
-    width: 360px;
-
+  img {
+    margin-bottom: 40px;
+    height: 360px !important;
+    width: 360px !important;
     @media ${mobile} {
-      height: 210px;
-      width: 210px;
+      height: 210px !important;
+      width: 210px !important;
     }
   }
-`;
 
-export const StyledHeadline = styled(Headline)`
-  margin: 40px 0 8px 0;
+  .ec-header {
+    font-size: 23px;
+    line-height: 30px;
+    @media ${mobile} {
+      font-size: 21px;
+      line-height: 28px;
+    }
+  }
 
-  font-size: 23px;
-  font-weight: 700;
-  line-height: 30px;
-  text-align: center;
-
-  @media ${mobile} {
-    font-size: 21px;
-    line-height: 28px;
+  .ec-buttons {
+    width: 100%;
+    max-width: 100%;
   }
 `;
-
-export const SubHeading = styled.div`
-  margin: 0 0 24px 0;
-
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  text-align: center;
-
-  color: ${({ theme }) => theme.oformGallery.errorView.subHeaderTextColor};
-`;
-
-SubHeading.defaultProps = { theme: Base };

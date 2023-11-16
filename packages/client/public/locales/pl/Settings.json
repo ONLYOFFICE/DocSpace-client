@@ -27,8 +27,6 @@
   "AuditSubheader": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć itp.) wprowadzonych przez użytkowników w poszczególnych elementach (pokojach, możliwościach, plikach itp.) w DocSpace.",
   "AuditTrailNav": "Szlak audytu",
   "AutoBackup": "Automatyczna kopia zapasowa",
-  "AutoBackupHelp": "Opcja <strong>Automatyczna kopia zapasowa</strong> służy do automatyzacji procesu tworzenia kopii zapasowych danych DocSpace, aby móc ją później przywrócić na lokalnym serwerze.",
-  "AutoBackupHelpNote": "Wybierz pamięć danych, okres automatycznego tworzenia kopii zapasowych i maksymalną liczbę zapisanych kopii.<br/><strong>Uwaga:</strong> przed zapisaniem danych kopii zapasowej na konto osób trzecich (DropBox, Box.com, OneDrive lub Dysk Google) , musisz połączyć to konto z folderem Wspólne dokumenty {{organizationName}}.",
   "AutoSavePeriod": "Częstotliwość autozapisywania",
   "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w DocSpace.",
   "Backup": "Kopia zapasowa",

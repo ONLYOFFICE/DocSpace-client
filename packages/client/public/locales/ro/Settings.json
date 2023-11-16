@@ -27,8 +27,6 @@
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul DocSpace.",
   "AuditTrailNav": "Lanţ de audit",
   "AutoBackup": "Copiere de rezervă automată",
-  "AutoBackupHelp": "Opțiunea <strong>Copiere de rezervă automată</strong> permite automatizarea procesului de copiere a datelor din spațiu DocSpace pentru a fi restaurate ulterior pe un server local.",
-  "AutoBackupHelpNote": "Alegeți varianta de stocare a datelor, intervalul de timp pentru executarea copiei de rezervă și numărul maxim de copii.<br/><strong>Mențiune:</strong> înainte de a crea o copie de rezervă a datelor cu un cont de stocare de la terți (DropBox, Box.com, OneDrive sau Google Drive), trebuie să vă conectați cu acest cont la folderul Comun al {{organizationName}}.",
   "AutoSavePeriod": "Interval de timp pentru salvarea automată",
   "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în DocSpace.",
   "Backup": "Copie de siguranță",

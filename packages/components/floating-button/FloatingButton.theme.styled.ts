@@ -1,8 +1,19 @@
 import styled, { css } from "styled-components";
-import Base from "../../themes/base";
-import { StyledCircleWrap } from "../../floating-button/styled-floating-button";
 
-const getDefaultStyles = ({ $currentColorScheme, color, displayProgress }) =>
+import { Base } from "../themes";
+import { StyledCircleWrap } from "./styled-floating-button";
+
+export interface DefaultStylesProps {
+  color?: string;
+  displayProgress: boolean;
+  $currentColorScheme: any;
+}
+
+const getDefaultStyles = ({
+  $currentColorScheme,
+  color,
+  displayProgress,
+}: DefaultStylesProps) =>
   $currentColorScheme &&
   css`
     background: ${color || $currentColorScheme.main.accent} !important;
@@ -28,4 +39,6 @@ const getDefaultStyles = ({ $currentColorScheme, color, displayProgress }) =>
 
 StyledCircleWrap.defaultProps = { theme: Base };
 
-export default styled(StyledCircleWrap)(getDefaultStyles);
+const StyledFloatingButtonTheme = styled(StyledCircleWrap)(getDefaultStyles);
+
+export default StyledFloatingButtonTheme;

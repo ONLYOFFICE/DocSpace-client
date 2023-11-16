@@ -1,22 +1,23 @@
-import { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
+import { useState, useCallback, useEffect, useRef } from "react";
+
 import Avatar from "@docspace/components/avatar";
 import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import DropDownItem from "@docspace/components/drop-down-item";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
 import { parseAddresses } from "@docspace/components/utils/email";
-
-import { withTranslation } from "react-i18next";
-
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import ComboBox from "@docspace/components/combobox";
 
-import { AddUsersPanel } from "../../index";
-import { getAccessOptions } from "../utils";
+import Filter from "@docspace/common/api/people/filter";
+import { getMembersList } from "@docspace/common/api/people";
+import { ShareAccessRights } from "@docspace/common/constants";
+import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
+import AddUsersPanel from "../../AddUsersPanel";
+import { getAccessOptions } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -30,9 +31,6 @@ import {
   StyledInviteLanguage,
   ResetLink,
 } from "../StyledInvitePanel";
-
-import Filter from "@docspace/common/api/people/filter";
-import { getMembersList } from "@docspace/common/api/people";
 
 const searchUsersThreshold = 2;
 

@@ -262,7 +262,7 @@ const MainProfile = (props) => {
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}
                     size="12"
-                    onClick={() => onChangeEmailClick()}
+                    onClick={onChangeEmailClick}
                   />
                 )}
               </div>
@@ -384,7 +384,7 @@ const MainProfile = (props) => {
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size="12"
-              onClick={() => onChangeEmailClick()}
+              onClick={onChangeEmailClick}
             />
           </div>
           <div className="mobile-profile-row">

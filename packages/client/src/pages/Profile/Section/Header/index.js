@@ -69,14 +69,14 @@ const Header = (props) => {
       {
         key: "change-email",
         label: t("PeopleTranslations:EmailChangeButton"),
-        onClick: () => onChangeEmailClick(),
+        onClick: onChangeEmailClick,
         disabled: false,
         icon: EmailReactSvgUrl,
       },
       {
         key: "change-password",
         label: t("PeopleTranslations:PasswordChangeButton"),
-        onClick: () => onChangePasswordClick(),
+        onClick: onChangePasswordClick,
         disabled: false,
         icon: SecurityReactSvgUrl,
       },

@@ -31,6 +31,8 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
+  backupToPublicRoomVisible = false;
+  backupToPublicRoomData = null;
   isFolderActions = false;
   roomCreation = false;
   culture = {
@@ -426,7 +428,10 @@ class DialogsStore {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
   };
-
+  setBackupToPublicRoomVisible = (visible, data = null) => {
+    this.backupToPublicRoomVisible = visible;
+    this.backupToPublicRoomData = data;
+  };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };

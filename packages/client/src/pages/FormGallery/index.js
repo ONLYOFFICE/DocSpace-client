@@ -30,9 +30,12 @@ const FormGallery = ({
 
   useEffect(() => {
     const firstLoadFilter = OformsFilter.getFilter(location);
-    fetchOforms(firstLoadFilter);
-    fetchOformLocales();
-    setIsInitLoading(false);
+
+    Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
+      () => {
+        setIsInitLoading(false);
+      }
+    );
   }, []);
 
   useEffect(() => {

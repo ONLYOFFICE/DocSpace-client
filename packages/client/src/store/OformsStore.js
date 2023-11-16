@@ -84,11 +84,12 @@ class OformsStore {
       this.setOformLocales(localeKeys);
     } catch (err) {
       this.setOformLocales([]);
-      toastr.error(err.message);
+
+      err?.message !== "Network Error" && toastr.error(err);
     }
   };
 
-  getOforms = (filter = OformsFilter.getDefault()) => {
+  getOforms = async (filter = OformsFilter.getDefault()) => {
     const { domain, path } = this.authStore.settingsStore.formGallery;
 
     const formName = "&fields[0]=name_form";
@@ -105,24 +106,22 @@ class OformsStore {
 
     const apiUrl = combineUrl(domain, path, params);
 
-    const resPromise = new Promise(async (resolve, reject) => {
-      try {
-        const oforms = await getOforms(apiUrl);
-        this.oformsLoadError = false;
-        resolve(oforms);
-      } catch (err) {
-        if (err.response) {
-          const status = err.response.status;
-          const isApiError = status === 404 || status === 500;
-          if (isApiError) this.oformsLoadError = true;
-        } else {
-          this.setOformFiles(null);
-        }
-        reject(err);
+    try {
+      const oforms = await getOforms(apiUrl);
+      this.oformsLoadError = false;
+      return oforms;
+    } catch (err) {
+      const status = err?.response?.status;
+      const isApiError = status === 404 || status === 500;
+      //console.log({ err, isApiError });
+      if (isApiError) {
+        this.oformsLoadError = true;
+      } else {
+        toastr.error(err);
       }
-    });
+    }
 
-    return resPromise;
+    return null;
   };
 
   fetchOforms = async (filter = OformsFilter.getDefault()) => {
@@ -228,8 +227,10 @@ class OformsStore {
       );
       return menuItems;
     } catch (err) {
-      toastr.error(err.message);
+      err?.message !== "Network Error" && toastr.error(err);
     }
+
+    return null;
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {

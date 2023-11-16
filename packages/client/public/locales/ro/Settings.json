@@ -71,8 +71,6 @@
   "DNSSettings": "Setări DNS",
   "DNSSettingsDescription": "Setări DNS este o modalitate de setare a adresei URL alternative pentru spaţiul dvs.",
   "DNSSettingsMobile": "Trimiteţi solicitarea către echipa noastră de asistenţă, care este gata să vă ajute cu setarea.",
-  "DNSSettingsTooltipMain": "Setări DNS vă permit să setați o adresă URL alternativă pentru spaţiul dvs. {{ organizationName }}.",
-  "DNSSettingsTooltipStandalone": "Bifați caseta Nume de domeniu particularizat și în câmpul de mai jos introduceți numele de domeniu propriu pentru spațiul ONLYOFFICE; Pentru ca setările actualizate să intre în vigoare, faceți clic pe butonul Salvare în partea de jos a secțiunii.",
   "DownloadCopy": "Descărcare copie",
   "DownloadReportBtnText": "Descărcare raport",
   "DownloadReportDescription": "Raportul va fi salvat în Documentele mele",

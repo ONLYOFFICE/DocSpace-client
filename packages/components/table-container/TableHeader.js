@@ -32,6 +32,8 @@ class TableHeader extends React.Component {
   }
 
   componentWillUnmount() {
+    const { columnStorageName } = this.props;
+    localStorage.removeItem(columnStorageName);
     window.removeEventListener("resize", this.throttledResize);
   }
 

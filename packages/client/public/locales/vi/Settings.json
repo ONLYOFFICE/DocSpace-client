@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "Thiết lập DNS là một cách để thiết lập một URL thay thế cho không gian của bạn.",
   "DNSSettingsMobile": "Gửi yêu cầu của bạn đến nhóm hỗ trợ của chúng tôi và các chuyên gia của chúng tôi sẽ giúp bạn cài đặt.",
   "DocumentService": "Dịch vụ Tài liệu",
-  "DocumentServiceLocationHeader": "Địa điểm Dịch vụ Tài liệu",
-  "DocumentServiceLocationHeaderInfo": "Địa điểm dịch vụ tài liệu chỉ rõ địa chỉ server của dịch vụ tài liệu được cài đặt. ",
   "DocumentServiceLocationUrlApi": "Địa chỉ Dịch vụ Chỉnh sửa Tài liệu",
   "DownloadCopy": "Tải xuống bản sao",
   "DownloadReportBtnText": "Tải báo cáo xuống",

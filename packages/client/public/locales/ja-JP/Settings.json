@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "DNS設定は、自分のスペースの代替URLを設定する方法です。",
   "DNSSettingsMobile": "弊社サポートチームまでご連絡いただければ、専門スタッフが設定をお手伝いさせていただきます。",
   "DocumentService": "文書サービス",
-  "DocumentServiceLocationHeader": "文書サービス位置",
-  "DocumentServiceLocationHeaderInfo": "文書サービス位置は文書サービスがインストルしたサーバアドレスを指定しています。",
   "DocumentServiceLocationUrlApi": "文書編集サービスアドレス",
   "DocumentServiceLocationUrlInternal": "コミュニティ・サーバーからの要求に対するのための文書サービスアドレス",
   "DocumentServiceLocationUrlPortal": "文書サービスからの要求に対するのためのコミュニティ・サーバー・アドレス",

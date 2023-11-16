@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "DNS 设置是一种为空间设置替代 URL 的方式。",
   "DNSSettingsMobile": "您可向我们的支持团队发送请求，我们将有专员帮助您进行设置。",
   "DocumentService": "文件服务",
-  "DocumentServiceLocationHeader": "文件服务位置",
-  "DocumentServiceLocationHeaderInfo": "文档服务位置指定安装了文档服务服务器的地址。 ",
   "DocumentServiceLocationUrlApi": "文件编辑服务地址",
   "DownloadCopy": "下载副本",
   "DownloadReportBtnText": "下载报告",

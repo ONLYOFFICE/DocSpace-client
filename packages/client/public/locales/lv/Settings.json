@@ -71,8 +71,6 @@
   "DNSSettingsDescription": "DNS iestatījumi ir veids, kā iestatīt alternatīvu vietrādi URL jūsu telpai.",
   "DNSSettingsMobile": "Nosūtiet savu pieprasījumu mūsu atbalsta komandai, un mūsu speciālisti palīdzēs jums ar iestatījumiem.",
   "DocumentService": "Dokumentu apkalpošana",
-  "DocumentServiceLocationHeader": "Dokumentu apkalpošanas izvietojums",
-  "DocumentServiceLocationHeaderInfo": "Dokumentu servisa atrašanās vieta norāda servera adresi ar instalētiem dokumenta pakalpojumiem. ",
   "DocumentServiceLocationUrlApi": "Dokumentu rediģēšanas servisa adrese",
   "DocumentServiceLocationUrlInternal": "Dokumentu apkalpošanas adrese pieprasījumiem no Kopējā darba servera",
   "DocumentServiceLocationUrlPortal": "Kopienas servera adrese Document Service pieprasījumiem",

@@ -73,8 +73,6 @@
   "DNSSettingsDescription": "As configurações de DNS são uma maneira de definir uma URL alternativa para o seu espaço.",
   "DNSSettingsMobile": "Envie sua solicitação para nossa equipe de suporte e nossos especialistas o ajudarão com as configurações.",
   "DocumentService": "Serviço de documento",
-  "DocumentServiceLocationHeader": "Localização de serviço de documento",
-  "DocumentServiceLocationHeaderInfo": "Localização de serviço de documento especifica o endereço do servidor com os serviços de documentos instalados. ",
   "DocumentServiceLocationUrlApi": "Endereço de serviço de edição de documento",
   "DocumentServiceLocationUrlInternal": "Endereço de serviço de documentos para solicitações do DocSpace",
   "DocumentServiceLocationUrlPortal": "Endereço do DocSpace para solicitações do serviço de documentos",

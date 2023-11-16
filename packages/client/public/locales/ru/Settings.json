@@ -78,8 +78,6 @@
   "DNSSettingsDescription": "Настройки DNS - это способ задать альтернативный URL-адрес для вашего портала.",
   "DNSSettingsMobile": "Отправьте запрос в нашу службу поддержки, и наши специалисты помогут вам с настройками.",
   "DocumentService": "Служба документов",
-  "DocumentServiceLocationHeader": "Расположение службы документов",
-  "DocumentServiceLocationHeaderInfo": "Расположение службы документов определяет адрес сервера с установленными службами документов. ",
   "DocumentServiceLocationUrlApi": "Адрес службы редактирования документов",
   "DocumentServiceLocationUrlInternal": "Адрес Службы документов для запросов от DocSpace",
   "DocumentServiceLocationUrlPortal": "Адрес DocSpace для запросов от Службы документов",

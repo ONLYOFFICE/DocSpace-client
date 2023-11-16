@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "Nastavenia DNS predstavujú spôsob, ako nastaviť alternatívnu adresu URL pre váš priestor.",
   "DNSSettingsMobile": "Pošlite svoju požiadavku nášmu tímu podpory a naši špecialisti vám pomôžu s nastavením.",
   "DocumentService": "Dokumentová služba",
-  "DocumentServiceLocationHeader": "Umiestnenie Dokumentovej služby",
-  "DocumentServiceLocationHeaderInfo": "Umiestnenie Dokumentovej služby určuje adresu servera s nainštalovanou dokumentovou službou. ",
   "DocumentServiceLocationUrlApi": "Adresa editovacej služby Dokumentu",
   "DownloadCopy": "Stiahnuť si kópiu",
   "DownloadReportBtnText": "Stiahnuť správu",

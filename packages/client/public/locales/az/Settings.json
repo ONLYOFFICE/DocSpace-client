@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "DNS Parametrləri domeniniz üçün alternativ URL ",
   "DNSSettingsMobile": "Sorğunuzu dəstək komandamıza göndərin və mütəxəssislərimiz sizə parametrlərdə kömək edəcəklər.",
   "DocumentService": "Sənəd Xidməti",
-  "DocumentServiceLocationHeader": "Sənəd Xidməti Yeri",
-  "DocumentServiceLocationHeaderInfo": "Sənəd xidmətinin yeri quraşdırılmış sənəd xidmətləri ilə serverin ünvanını müəyyən edir. ",
   "DocumentServiceLocationUrlApi": "Sənəd Redaktə Xidmətinin Ünvanı",
   "DocumentServiceLocationUrlInternal": "İcma Serverindən sorğular üçün DocSpace ünvanı",
   "DocumentServiceLocationUrlPortal": "Sənəd Xidmətindən sorğular üçün İcma Server ünvanı",

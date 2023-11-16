@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "DNS Ayarları, alanınız için alternatif bir URL belirlemenin bir yoludur.",
   "DNSSettingsMobile": "İsteğinizi destek ekibimize gönderin, uzmanlarımız ayarlar konusunda size yardımcı olacaktır.",
   "DocumentService": "Belge Servisi",
-  "DocumentServiceLocationHeader": "Belge Servis Konumu",
-  "DocumentServiceLocationHeaderInfo": "Belge servis konumu belge servislerinin yüklü olduğu sunucunun adresini belirler. ",
   "DocumentServiceLocationUrlApi": "Belge Düzenleme Servisi Adresi",
   "DownloadCopy": "Kopyayı indir",
   "DownloadReportBtnText": "Raporu indir",

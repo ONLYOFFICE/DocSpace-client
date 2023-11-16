@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "Параметри DNS — це спосіб установити альтернативну URL-адресу для вашого простору.",
   "DNSSettingsMobile": "Надішліть запит до нашої служби підтримки, і наші спеціалісти допоможуть вам із параметрами.",
   "DocumentService": "Сервіс документів",
-  "DocumentServiceLocationHeader": "Місцезнаходження служби документів",
-  "DocumentServiceLocationHeaderInfo": "Місцезнаходження служби документа визначає адресу сервера за встановленими службами документа. ",
   "DocumentServiceLocationUrlApi": "Сервісна адреса редагування документів",
   "DownloadCopy": "Завантажити копію",
   "DownloadReportBtnText": "Завантажити звіт",

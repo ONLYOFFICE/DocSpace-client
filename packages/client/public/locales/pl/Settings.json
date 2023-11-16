@@ -72,8 +72,6 @@
   "DNSSettingsDescription": "Ustawienia DNS to sposób, by skonfigurować alternatywny URL dla Twojego obszaru roboczego.",
   "DNSSettingsMobile": "Wyślij prośbę do naszego zespołu obsługi klienta, a nasi specjaliści pomogą Ci w konfiguracji.",
   "DocumentService": "Usługi dokumentacyjne",
-  "DocumentServiceLocationHeader": "Lokalizacja usługi dokumentowej",
-  "DocumentServiceLocationHeaderInfo": "Lokalizacja usługi dokumentów określa adres serwera z zainstalowanymi usługami dokumentacji. ",
   "DocumentServiceLocationUrlApi": "Adres usługi edycji dokumentu",
   "DownloadCopy": "Pobierz kopię",
   "DownloadReportBtnText": "Pobierz raport",

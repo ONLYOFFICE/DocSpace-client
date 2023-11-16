@@ -72,7 +72,7 @@ const SocialNetworks = (props) => {
 
   const loginCallback = (profile) => {
     linkOAuth(profile)
-      .then((resp) => {
+      .then(() => {
         getAuthProviders().then((providers) => {
           setProviders(providers);
           toastr.success(t("ProviderSuccessfullyConnected"));
@@ -81,7 +81,9 @@ const SocialNetworks = (props) => {
       .catch((error) => {
         const message = error?.response?.data?.error?.message;
         const data =
-          message === "ErrorAccountAlreadyUse" ? t(message) : message;
+          message === "ErrorAccountAlreadyUse"
+            ? t("ErrorAccountAlreadyUse")
+            : message;
         toastr.error(data);
       });
   };

@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Pridať dôveryhodnú doménu",
   "Admins": "Administrátori",
   "AdminsMessage": "Nastavenia správ administrátora",
-  "AdminsMessageDescription": "<1>Nastavenia správ správcovi</1> je spôsob, ako kontaktovať správcu DocSpace. <br> Zapnite túto možnosť, ak chcete zobraziť kontaktný formulár na <2>Prihlasovacej</2> stránke, aby ľudia mohli poslať správu správcovi priestoru v prípade, že majú problémy s prístupom do priestoru. <br> Ak chcete uložiť parametre, ktoré ste nastavili, kliknite na tlačidlo <3>Uložiť</3> v dolnej časti sekcie.",
-  "AdminsMessageHelper": "Zapnite túto možnosť, ak chcete zobraziť kontaktný formulár na Prihlasovacej stránke, aby ľudia mohli poslať správu správcovi priestoru v prípade, že majú problémy s prístupom do DocSpace.",
   "AllDomains": "Všetky domény",
   "AmazonBucketTip": "Zadajte jedinečný názov košíka Amazon S3, do ktorého chcete ukladať svoje zálohy.",
   "AmazonCSE": "Šifrovanie na strane klienta",

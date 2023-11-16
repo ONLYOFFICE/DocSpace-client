@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Güvenilen alan adı ekle",
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
-  "AdminsMessageDescription": "<1>Yönetici Mesaj Ayarları</1> Docspace yöneticisiyle iletişime geçmenin bir yoludur. <br> Bu opsiyonu etkinleştirerek <2>Giriş</2> sayfasında iletişim formunu görüntüleyebilirsiniz, böylece insanlar alana erişimde sorun yaşadıklarında alan yöneticisine mesaj atabilirler. <br> Değiştirdiğiniz parametrelerin çalışmaya başlaması için bölümün sonundaki <3>Kaydet</3> tuşuna tıklayınız.",
-  "AdminsMessageHelper": "Kişilerin DocSpace'inize erişimde sorun yaşamaları durumunda mesajı yöneticiye gönderebilmeleri adına, Oturum Aç sayfasında iletişim formunu görüntülemek için bu seçeneği etkinleştirin.",
   "AllDomains": "Herhangi bir alan adı",
   "AmazonBucketTip": "Yedeklerinizi depolamak istediğiniz Amazon S3 klasörünün benzersiz adını girin.",
   "AmazonCSE": "İstemci Tarafında Şifreleme",

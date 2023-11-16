@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Lisää luotettu verkkotunnus",
   "Admins": "Järjestelmänvalvojat",
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
-  "AdminsMessageDescription": "<1>Järjestelmänvalvojan viestiasetusten</1> avulla käyttäjät voivat ottaa yhteyttä DocSpacen jäjestelmänvalvojiin. <br> Ottamalla tämän ominaisuuden käyttöön käyttäjät näkevät yhteydenottolomakkeen <2>kirjautumissivulla</2> ja voivat lähettää viestin järjestelmänvalvojille, jos heillä on vaikeuksia sivustolle pääsemisessä. <br> Ota tekemäsi asetukset käyttöön klikkaamalla <3>Tallenna</3> painiketta.",
-  "AdminsMessageHelper": "Ottamalla tämän ominaisuuden käyttöön käyttäjät näkevät yhteydenottolomakkeen kirjautumissivulla ja voivat lähettää viestin järjestelmänvalvojalle, jos heillä on vaikeuksia DocSpaceen pääsemisessä.",
   "AllDomains": "Kaikki verkkotunnukset",
   "AmazonBucketTip": "Syötä sen Amazon S3- säiliön uniikki nimi, johon haluat säilöä varmuuskopiosi.",
   "AmazonCSE": "Asiakkaan puolen salaus",

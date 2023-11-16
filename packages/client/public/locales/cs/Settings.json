@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Přidat důvěryhodné domény",
   "Admins": "Administrátoři",
   "AdminsMessage": "Nastavení zpráv administrátora",
-  "AdminsMessageDescription": "<1>Nastavení správce zpráv</1> je způsob, jak kontaktovat administrátora portálu DocSpace. <br> Povolit možnost pro zobrazení kontaktního formuláře na <2>Přihlašovací</2> stránce, takže lidé mohou poslat zprávu administrátorovi prostoru i v případě, když mají problém s přístupem do prostoru. <br> Nastavené parametry začnou fungovat poté, co kliknete na tlačítko <3>Uložit</3> v dolní části.",
-  "AdminsMessageHelper": "Povolte tuto možnost, aby se na přihlašovací stránce zobrazil kontaktní formulář a lidé mohli poslat zprávu správci v případě, že mají potíže s přístupem do vašeho DocSpace.",
   "AllDomains": "Libovolné domény",
   "AmazonBucketTip": "Zadejte jedinečný název kbelíku Amazon S3, do kterého chcete ukládat zálohy.",
   "AmazonCSE": "Šifrování na straně klienta",

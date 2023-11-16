@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Adicionar domínio confiável",
   "Admins": "Administradores",
   "AdminsMessage": "Definições de Mensagens para Administrador",
-  "AdminsMessageDescription": "<1>As Definições da Mensagem de Administrador</1> são uma forma de contactar o administrador do DocSpace. <br> Ative esta opção visualizar o formulário de contacto na página de <2>Login</2> para que as pessoas possam enviar mensagens ao administrador do espaço no caso de encontrarem problemas ao tentar aceder ao mesmo. <br> Para que os parâmetros que acabou de definir entrem em vigor, clique no botão <3>Guardar</3> no final da secção.",
-  "AdminsMessageHelper": "Ative esta opção para mostrar o formulário de contacto na página de Autenticação para que as pessoas possam enviar a mensagem ao administrador caso tenham problemas a aceder ao DocSpace.",
   "AllDomains": "Todos os domínios",
   "AmazonBucketTip": "Introduza o nome único do bucket Amazon S3 onde pretende guardar as suas cópias de segurança.",
   "AmazonCSE": "Encriptação do lado do Cliente",

@@ -11,8 +11,6 @@
   "AddTrustedDomain": "İnanılmış domen əlavə et",
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator Mesaj Parametrləri",
-  "AdminsMessageDescription": "<1>Admin Mesaj Parametrləri</1> DocSpace administratoru ilə əlaqə qurmağın bir yoludur. <br> <2>Daxil ol</2> səhifəsində əlaqə formasını göstərmək üçün bu seçimi aktiv edin ki, insanlar domenə daxil olub problem yarandıqda domen administratoruna mesaj göndərə bilsinlər. <br> Qüvvəyə minməsi üçün təyin etdiyiniz parametrlər üçün bölmənin altındakı <3>Saxla</3> düyməsini klikləyin.",
-  "AdminsMessageHelper": "Giriş səhifəsində əlaqə formasını göstərmək üçün bu seçimi aktivləşdirin ki, insanlar DocSpace-ə daxil olmaqda problemlə üzləşdikdə mesajı administratora göndərə bilsinlər.",
   "AllDomains": "Hər hansı bir domen adı",
   "AmazonBucketTip": "Ehtiyat nüsxələrinizi saxlamaq istədiyiniz Amazon S3 səbətinin unikal adını daxil edin.",
   "AmazonCSE": "Müştəri tərəfinin şifrələməsi",

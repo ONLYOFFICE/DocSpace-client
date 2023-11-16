@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
-  "AdminsMessageDescription": "<1>Nastavitve sporočil administratorja</1> je način, kako kontaktirati administratorja portala DocSpace. <br> To možnost omogočite za prikaz kontaktnega obrazca na strain <2>Vpiši se</2>, da ljudje administratorju prostora lahko pošljejo sporočilo v primeru, da imajo težave z dostopanjem do prostora. <br> Za delovanje parametrov, ki ste jih nastavili, pritisnite gumb <3>shrani</3> na dnu tega oddelka.",
-  "AdminsMessageHelper": "To možnost omogočite za prikaz kontaktnega obrazca na strani Vpiši se, da ljudje administratorju lahko pošljejo sporočilo v primeru, da imajo težave z dostopanjem DocSpace.",
   "AllDomains": "Kakršna koli domena",
   "AmazonBucketTip": "Vnesite edinstveno ime košarice Amazon S3, kamor želite shraniti svoje varnostne kopije.",
   "AmazonCSE": "Šifriranje na strani odjemalca",

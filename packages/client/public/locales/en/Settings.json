@@ -12,8 +12,6 @@
   "AddTrustedDomain": "Add trusted domain",
   "Admins": "Admins",
   "AdminsMessage": "Administrator Message Settings",
-  "AdminsMessageDescription": "<1>Administrator Message Settings</1> is a way to contact the DocSpace administrator. <br> Enable this option to display the contact form on the <2>Sign In</2> page so that people could send the message to the space administrator in case they have troubles accessing the space. <br> To make the parameters you set take effect click the <3>Save</3> button at the bottom of the section.",
-  "AdminsMessageHelper": "Enable this option to display the contact form on the Sign In page so that people could send the message to the administrator in case they have troubles accessing your DocSpace.",
   "AdminsMessageMobileDescription": "Administrator Message Settings is a way to contact the portal administrator.",
   "AdminsMessageSave": "Click the <strong>Save</strong> button at the bottom to apply.",
   "AdminsMessageSettingDescription": "Enable this option to display the DocSpace administrator contact form on the Sign In page.",

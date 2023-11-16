@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Thêm tên miền được tin cậy",
   "Admins": "Quản trị viên",
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
-  "AdminsMessageDescription": "<1> Thiết lập Tin nhắn Quản trị </1> là hình thức liên lạc  với quản trị viên DocSpace. <br> Bật tùy chọn này để hiển thị mẫu liên hệ trên trang <2>Đăng nhập </2>để mọi người có thể gửi tin nhắn tới quản trị viên không gian trong trường hợp gặp sự cố khi truy cập không gian. <br> Để các thông số bạn thiết lập có hiệu lực, hãy nhấp vào nút <3>Lưu</3> ở cuối phần.",
-  "AdminsMessageHelper": "Bật tùy chọn này để hiển thị biểu mẫu liên hệ trên trang Đăng nhập để mọi người có thể gửi tin nhắn cho quản trị viên trong trường hợp họ gặp sự cố khi truy cập DocSpace của bạn.",
   "AllDomains": "Tên miền bất kỳ",
   "AmazonBucketTip": "Nhập tên riêng của Amazon bucket S3 nơi bạn muốn lưu trữ các bản sao lưu của mình.",
   "AmazonCSE": "Mã hóa phía máy khách",

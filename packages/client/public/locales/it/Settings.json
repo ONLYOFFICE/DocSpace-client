@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Aggiungi dominio affidabile",
   "Admins": "Amministratori",
   "AdminsMessage": "Impostazioni dei Messaggi dell’Amministratore",
-  "AdminsMessageDescription": "<1>Impostazioni di contatti amministratore</1> è il modo di contattare l'amministratore di DocSpace. <br> Attiva questa opzione per far visualizzare il modulo di contatto nella pagina <2>Accesso</2> per permettere a tutti di inviare il messaggio all'amministratore dello spazio in caso di necessità. <br> Per applicare i parametri impostati clicca su <3>Salva</3> nella parte inferiore della sezione.",
-  "AdminsMessageHelper": "Attiva questa opzione per far visualizzare il modulo di contatto nella pagina Accesso per permettere a tutti di inviare il messaggio all'amministratore di DocSpace in caso di necessità.",
   "AllDomains": "Tutti i domini",
   "AmazonBucketTip": "Inserisci il nome univoco del bucket Amazon S3 dove desideri archiviare i backup.",
   "AmazonCSE": "Crittografia sul lato client",

@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Dodaj zaufaną domenę",
   "Admins": "Administratorzy",
   "AdminsMessage": "Ustawienia wiadomości administratora",
-  "AdminsMessageDescription": "<1>Ustawienia wiadomości administratora</1> to sposób na skontaktowanie się z administratorem DocSpace. <br> Włącz tę opcję, aby wyświetlać formularz kontaktowy na stronie <2>logowania</2>. Dzięki temu użytkownicy będą w stanie wysyłać wiadomości administratorowi obszaru w razie problemów z uzyskaniem do niego dostępu. <br> Aby aktywować wybrane parametry, kliknij przycisk <3>Zapisz</3> u dołu sekcji.",
-  "AdminsMessageHelper": "Włącz tę opcję, aby wyświetlać formularz kontaktowy na stronie logowania, co umożliwi użytkownikom kontakt z administratorem w razie problemów z dostępem do DocSpace.",
   "AllDomains": "Wszystkie domeny",
   "AmazonBucketTip": "Wpisz unikatową nazwę bucketu Amazon S3, w którym chcesz przechowywać swoje kopie zapasowe.",
   "AmazonCSE": "Szyfrowanie po stronie klienta",

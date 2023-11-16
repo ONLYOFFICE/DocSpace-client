@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Sichere Domain hinzufügen",
   "Admins": "Administratoren",
   "AdminsMessage": "Einstellungen von Nachrichten für Administrator",
-  "AdminsMessageDescription": "Dank den <1>Einstellungen der Adminnachrichten</1> können Sie den DocSpace-Administrator kontaktieren. <br> Aktivieren Sie diese Option, damit das Kontaktformular auf der <2>Loginseite</2> angezeigt wird, so dass die Benutzer eine Nachricht an den DocSpace-Administrator senden könnten, wenn sie Schwierigkeiten mit dem Zugriff auf DocSpace haben. <br> Damit die Änderungen übernommen werden, klicken Sie auf den Button <3>Speichern</3> im unteren Bereich der Sektion.",
-  "AdminsMessageHelper": "Aktivieren Sie diese Option, um das Kontaktformular auf der Anmeldeseite anzuzeigen, damit die Benutzer eine Nachricht an den Administrator senden können, falls sie Probleme beim Zugriff auf Ihren DocSpace haben.",
   "AllDomains": "Alle Domains",
   "AmazonBucketTip": "Geben Sie den eindeutigen Namen des Amazon S3-Buckets ein, in dem Sie Ihre Backups speichern möchten.",
   "AmazonCSE": "Clientseitige Verschlüsselung",

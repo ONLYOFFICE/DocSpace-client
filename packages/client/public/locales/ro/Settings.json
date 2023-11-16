@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Adăugare domeniu de încredere",
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
-  "AdminsMessageDescription": "<1>Setări mesagerie de administrator</1> este o modalitate de a contacta administratorul DocSpace. <br> Activați această opţiune pentru a afişa formularul de contact pe pagina de <2>Conectare</2> pentru ca utilizatorii care întâmpină probleme de conectare la DocSpace pot trimite mesaje administratorului. <br> Pentru ca setările actualizate să intre în vigoare, faceți clic pe butonul <3>Salvare</3> în partea de jos a secțiunii.",
-  "AdminsMessageHelper": "Activați această opţiune pentru a afişa formularul de contact pe pagina de conectare pentru ca utilizatorii care întâmpină probleme de conectare la DocSpace pot trimite mesaje administratorului.",
   "AllDomains": "Orice domeniu",
   "AmazonBucketTip": "Introduceţi numele unic de găleată Amazon S3 pentru stocarea copiilor dvs de rezervă.",
   "AmazonCSE": "Criptare executată la client",

@@ -11,8 +11,6 @@
   "AddTrustedDomain": "Voeg vertrouwd domein toe",
   "Admins": "Beheerders",
   "AdminsMessage": "Beheerder Bericht Instellingen",
-  "AdminsMessageDescription": "<1>Bericht Instellingen voor Beheerders</1> is een manier om contact op te nemen met de DocSpace beheerder.<br> Schakel deze optie in om het contactformulier te tonen op de <2>Aanmelden</2> pagina, zodat mensen een bericht kunnen sturen naar de ruimte beheerder in het geval dat ze problemen hebben met toegang tot de ruimte.<br> Om de parameters die u hebt ingesteld in werking te laten treden, klikt u op de <3>Opslaan</3> knop onderaan de sectie.",
-  "AdminsMessageHelper": "Schakel deze optie in om het contactformulier weer te geven op de aanmeldingspagina, zodat mensen een bericht naar de beheerder kunnen sturen als zij problemen hebben met de toegang tot uw DocSpace.",
   "AllDomains": "Alle domeinen",
   "AmazonBucketTip": "Voer de unieke naam in van de Amazon S3 bucket waar u uw back-ups wilt opslaan.",
   "AmazonCSE": "Versleuteling aan de klantzijde",

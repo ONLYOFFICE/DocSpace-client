@@ -317,7 +317,7 @@ class PluginStore {
 
       if (!currentSettings) currentSettings = oldPlugin.settings || "";
 
-      if (typeof currentStatus !== "boolean") currentStatus = oldPlugin.enabled;
+      if (typeof status !== "boolean") currentStatus = true;
 
       const plugin = await api.plugins.updatePlugin(
         name,

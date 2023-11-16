@@ -22,6 +22,7 @@ const Footer = ({
   modalRequestRunning,
   setModalRequestRunning,
   onCloseAction,
+  updatePlugin,
 }) => {
   return (
     <StyledContainer>
@@ -41,6 +42,7 @@ const Footer = ({
           },
         }}
         pluginName={pluginName}
+        updatePlugin={updatePlugin}
       />
       <Button
         scale={true}

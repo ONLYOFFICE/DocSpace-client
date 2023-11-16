@@ -26,7 +26,7 @@ export const getPlugin = async (name) => {
   });
 };
 
-export const activatePlugin = async (name, enabled, settings = "") => {
+export const updatePlugin = async (name, enabled, settings = "") => {
   return request({
     method: "PUT",
     url: `/settings/webplugins/${name}`,

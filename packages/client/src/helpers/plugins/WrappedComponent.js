@@ -36,6 +36,7 @@ const ComponentPure = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updatePlugin,
 }) => {
   const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -244,7 +245,9 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
+
+            updatePlugin
           );
 
           setIsRequestRunning && setIsRequestRunning(false);

@@ -18,7 +18,7 @@ const PluginItem = ({
   description,
 
   enabled,
-  changePluginStatus,
+  updatePlugin,
 
   scopes,
   openSettingsDialog,
@@ -31,7 +31,8 @@ const PluginItem = ({
   const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
-    changePluginStatus && changePluginStatus(name, !enabled);
+    console.log(name, enabled);
+    updatePlugin && updatePlugin(name, !enabled);
   };
 
   const onOpenSettingsDialog = () => {

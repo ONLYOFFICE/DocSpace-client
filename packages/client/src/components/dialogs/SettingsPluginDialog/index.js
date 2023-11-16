@@ -24,6 +24,7 @@ const SettingsPluginDialog = ({
 
   onClose,
   onDelete,
+  updatePlugin,
 
   ...rest
 }) => {
@@ -104,6 +105,7 @@ const SettingsPluginDialog = ({
           setModalRequestRunning={setModalRequestRunning}
           onCloseAction={onCloseAction}
           modalRequestRunning={modalRequestRunning}
+          updatePlugin={updatePlugin}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -119,6 +121,7 @@ export default inject(({ auth, pluginStore }) => {
     setCurrentSettingsDialogPlugin,
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
+    updatePlugin,
   } = pluginStore;
 
   const { pluginOptions } = auth.settingsStore;
@@ -146,6 +149,7 @@ export default inject(({ auth, pluginStore }) => {
     withDelete,
     ...pluginSettings,
     settingsPluginDialogVisible,
+    updatePlugin,
 
     onClose,
     onDelete,

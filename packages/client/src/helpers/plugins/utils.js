@@ -25,7 +25,9 @@ export const messageActions = (
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
-  updateFileItems
+  updateFileItems,
+
+  updatePlugin
 ) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -158,6 +160,11 @@ export const messageActions = (
         }
 
         break;
+
+      case PluginActions.saveSettings:
+        if (!message.settings) return;
+
+        updatePlugin(pluginName, null, message.settings);
     }
   });
 };

@@ -265,6 +265,10 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
+    if (plugin.scopes.includes(PluginScopes.Settings)) {
+      plugin.setAdminPluginSettingsValue(plugin.settings || null);
+    }
+
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI && plugin.setAPI(origin, proxy, prefix);
     }
@@ -304,9 +308,24 @@ class PluginStore {
     }
   };
 
-  changePluginStatus = async (name, status) => {
+  updatePlugin = async (name, status, settings) => {
     try {
-      const plugin = await api.plugins.activatePlugin(name, status);
+      let currentSettings = settings;
+      let currentStatus = status;
+
+      const oldPlugin = this.pluginList.find((p) => p.name === name);
+
+      if (!currentSettings) currentSettings = oldPlugin.settings || "";
+
+      if (typeof currentStatus !== "boolean") currentStatus = oldPlugin.enabled;
+
+      const plugin = await api.plugins.updatePlugin(
+        name,
+        currentStatus,
+        currentSettings
+      );
+
+      if (typeof status !== "boolean") return plugin;
 
       if (status) {
         this.activatePlugin(name);
@@ -315,7 +334,9 @@ class PluginStore {
       }
 
       return plugin;
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   activatePlugin = async (name) => {

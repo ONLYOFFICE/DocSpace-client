@@ -407,7 +407,7 @@ class PluginStore {
     return currentDeviceType;
   };
 
-  getContextMenuKeysByType = (type, fileExst) => {
+  getContextMenuKeysByType = (type, fileExst, security) => {
     if (!this.contextMenuItems) return;
 
     const userRole = this.getUserRole();
@@ -434,7 +434,16 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctFileExt && correctUserType && correctDevice)
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (
+              correctFileExt &&
+              correctUserType &&
+              correctDevice &&
+              correctSecurity
+            )
               keys.push(item.key);
           }
         });
@@ -452,7 +461,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item?.security?.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -469,7 +483,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -490,7 +509,16 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice && correctFileExt)
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (
+              correctUserType &&
+              correctDevice &&
+              correctFileExt &&
+              correctSecurity
+            )
               keys.push(item.key);
           }
         });
@@ -508,7 +536,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -524,7 +557,12 @@ class PluginStore {
             ? item.devices.includes(device)
             : true;
 
-          if (correctUserType && correctDevice) keys.push(item.key);
+          const correctSecurity = item.security
+            ? item.security.every((key) => security?.[key])
+            : true;
+
+          if (correctUserType && correctDevice && correctSecurity)
+            keys.push(item.key);
         });
     }
 

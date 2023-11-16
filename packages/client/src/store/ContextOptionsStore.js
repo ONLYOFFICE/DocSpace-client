@@ -676,7 +676,6 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        console.log(option);
         if (contextOptions.includes(option.key)) {
           const value = option.value;
 

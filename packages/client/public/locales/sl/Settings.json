@@ -127,7 +127,6 @@
   "Path": "Pot",
   "PleaseNote": "Zavedajte se",
   "PleaseNoteDescription": "<0>{{pleaseNote}}</0>: vaš stari naslov prostora ne bo na voljo novim uporabnikom, če kliknete gumb <2>{{save}}</2>.",
-  "Plugins": "Vtičniki",
   "PortalAccess": "Dostop do prostora",
   "PortalAccessSubTitle": "Ta razdelek omogoča uporabnikom varne in udobne načine za dostop do prostora.",
   "PortalDeactivation": "Deaktiviraj DocSpace",

@@ -89,8 +89,6 @@
   "DayOfTheWeek": "День недели",
   "DEC": "Дек",
   "Delete": "Удалить",
-  "DescriptionOfTheEveryoneRole": "Форма доступна для заполнения всеми участниками этой комнаты.",
-  "DescriptionOfTheRoleQueue": "Каждая форма, заполненная пользователями с первой ролью, будет передана по очереди следующим пользователям, указанным ниже.",
   "Disconnect": "Отключить",
   "DocSpaceAdmin": "Администратор DocSpace",
   "DocSpaceOwner": "Владелец DocSpace",

@@ -82,8 +82,6 @@
   "Culture_zh-CN": "中文（简体，中国）",
   "Date": "Päivämäärä",
   "Delete": "Poista",
-  "DescriptionOfTheEveryoneRole": "Lomakkeen voivat täyttää kaikki tämän huoneen osallistujat.",
-  "DescriptionOfTheRoleQueue": "Jokainen ensimmäisen roolin käyttäjien täyttämä lomake siirtyy vuorotellen alla luetelluille käyttäjille.",
   "Disconnect": "Katkaise",
   "DocSpaceAdmin": "DocSpace- järjestelmänvalvoja",
   "DocSpaceOwner": "DocSpace omistaja",

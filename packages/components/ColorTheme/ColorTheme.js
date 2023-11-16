@@ -10,7 +10,6 @@ import {
   BadgeTheme,
   SubmenuTextTheme,
   SubmenuItemLabelTheme,
-  ToggleButtonTheme,
   TabsContainerTheme,
   IconButtonTheme,
   IconButtonPinTheme,
@@ -88,15 +87,6 @@ const ColorTheme = forwardRef(
       case ThemeType.SubmenuItemLabel: {
         return (
           <SubmenuItemLabelTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.ToggleButton: {
-        return (
-          <ToggleButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

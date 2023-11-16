@@ -5,7 +5,6 @@ export const ThemeType = {
   Badge: "badge",
   SubmenuText: "submenuText",
   SubmenuItemLabel: "submenuItemLabel",
-  ToggleButton: "toggleButton",
   TabsContainer: "tabsContainer",
   IconButton: "iconButton",
   IconButtonPin: "iconButtonPin",

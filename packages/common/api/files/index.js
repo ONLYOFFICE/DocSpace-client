@@ -1038,3 +1038,33 @@ export function changeDocumentServiceLocation(
     },
   });
 }
+
+export function getExternalLinks(fileId, startIndex = 0, count = 5) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/links${linkParams}`,
+  });
+}
+
+export function getPrimaryLink(fileId) {
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/link`,
+  });
+}
+
+export function editExternalLink(fileId, linkId, access, primary, internal) {
+  return request({
+    method: "put",
+
+    url: `/files/files/${fileId}/links`,
+    data: {
+      linkId,
+      access,
+      primary,
+      internal,
+    },
+  });
+}

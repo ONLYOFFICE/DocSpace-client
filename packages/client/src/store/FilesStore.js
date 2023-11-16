@@ -2659,6 +2659,7 @@ class FilesStore {
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
+        this.setTempActionFoldersIds([]);
       });
 
       return;
@@ -2694,6 +2695,7 @@ class FilesStore {
         .finally(() => {
           this.setOperationAction(false);
           this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
         });
     } else {
       api.files
@@ -2726,6 +2728,7 @@ class FilesStore {
         .finally(() => {
           this.setOperationAction(false);
           this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
         });
     }
   };

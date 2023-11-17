@@ -3,6 +3,8 @@ import { cloneDeep } from "lodash";
 
 import api from "@docspace/common/api";
 
+import toastr from "@docspace/components/toast/toastr";
+
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import {
@@ -200,6 +202,8 @@ class PluginStore {
       this.initPlugin(plugin);
     } catch (e) {
       console.log(e);
+
+      toastr.error(e.response.data.error.message);
     }
   };
 

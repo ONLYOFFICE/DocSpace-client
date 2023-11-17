@@ -38,8 +38,6 @@ const PluginPage = ({
     setDocumentTitle(t("Common:Plugins"));
   }, []);
 
-  const learnMoreLink = "https://api.onlyoffice.com/docspace/pluginssdk/";
-
   return (
     <>
       {isLoading || (!isEmptyList && pluginList.length === 0) ? (

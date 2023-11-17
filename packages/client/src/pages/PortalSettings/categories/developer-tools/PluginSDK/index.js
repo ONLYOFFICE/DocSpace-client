@@ -11,6 +11,8 @@ import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";
 
 import { StyledContainer } from "./StyledPluginSDK";
 
+const LEARN_MORE_LINK = "https://api.onlyoffice.com/docspace/pluginssdk/";
+
 const PluginSDK = ({
   systemPluginList,
   currentDeviceType,
@@ -102,6 +104,7 @@ const PluginSDK = ({
         primary
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
+        onClick={() => window.open(LEARN_MORE_LINK, "_blank")}
       ></Button>
       {!isEmptyList && (
         <>

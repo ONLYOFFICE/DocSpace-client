@@ -45,7 +45,6 @@
   "UnselectAll": "Unselect all",
   "URL": "URL",
   "ViewRawPayload": "View raw payload",
-  "Webhook": "Webhook",
   "WebhookCreationHint": "This webhook will be assigned to all events in DocSpace",
   "WebhookDetails": "Webhook details",
   "WebhookEditedSuccessfully": "Webhook configuration edited successfully",

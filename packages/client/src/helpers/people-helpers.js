@@ -156,9 +156,12 @@ export function toEmployeeWrapper(profile) {
 export const showEmailActivationToast = (email) => {
   //console.log("showEmailActivationToast", { email });
   toastr.success(
-    <Trans i18nKey="MessageEmailActivationInstuctionsSentOnEmail" ns="People">
-      The email activation instructions have been sent to the{" "}
-      <strong>{{ email }}</strong> email address
-    </Trans>
+    <Trans
+      i18nKey="MessageEmailActivationInstuctionsSentOnEmail"
+      ns="People"
+      defaults="The email activation instructions have been sent to the <strong>{{email}}</strong> email address"
+      values={{ email }}
+      components={{ 1: <strong /> }}
+    />
   );
 };

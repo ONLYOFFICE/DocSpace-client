@@ -35,7 +35,7 @@ const PluginPage = ({
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
   React.useEffect(() => {
-    setDocumentTitle(t("Plugins"));
+    setDocumentTitle(t("Common:Plugins"));
   }, []);
 
   const learnMoreLink = "https://api.onlyoffice.com/docspace/pluginssdk/";

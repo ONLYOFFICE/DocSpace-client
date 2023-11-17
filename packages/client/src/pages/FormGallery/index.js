@@ -10,8 +10,10 @@ import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/common/api/oforms/filter";
 import Dialogs from "./Dialogs";
+import ErrorView from "./ErrorView";
 
 const FormGallery = ({
+  oformsLoadError,
   currentCategory,
   fetchCurrentCategory,
   defaultOformLocale,
@@ -28,9 +30,12 @@ const FormGallery = ({
 
   useEffect(() => {
     const firstLoadFilter = OformsFilter.getFilter(location);
-    fetchOforms(firstLoadFilter);
-    fetchOformLocales();
-    setIsInitLoading(false);
+
+    Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
+      () => {
+        setIsInitLoading(false);
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -70,12 +75,14 @@ const FormGallery = ({
           <SectionHeaderContent />
         </Section.SectionHeader>
 
-        <Section.SectionFilter>
-          <SectionFilterContent />
-        </Section.SectionFilter>
+        {!oformsLoadError && (
+          <Section.SectionFilter>
+            <SectionFilterContent />
+          </Section.SectionFilter>
+        )}
 
         <Section.SectionBody isFormGallery>
-          <SectionBodyContent />
+          {!oformsLoadError ? <SectionBodyContent /> : <ErrorView />}
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -93,6 +100,8 @@ const FormGallery = ({
 };
 
 export default inject(({ oformsStore }) => ({
+  oformsLoadError: oformsStore.oformsLoadError,
+
   currentCategory: oformsStore.currentCategory,
   fetchCurrentCategory: oformsStore.fetchCurrentCategory,
 

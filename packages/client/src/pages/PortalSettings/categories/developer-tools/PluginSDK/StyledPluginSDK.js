@@ -46,7 +46,7 @@ export const StyledContainer = styled.div`
       gap: 12px;
 
       border: 1px solid ${(props) => props.theme.plugins.borderColor};
-
+      border-radius: 6px;
       .plugin-list__item-info {
         display: flex;
         flex-direction: row;
@@ -63,6 +63,12 @@ export const StyledContainer = styled.div`
           flex-direction: column;
           gap: 2px;
         }
+      }
+      .description-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
       }
     }
   }

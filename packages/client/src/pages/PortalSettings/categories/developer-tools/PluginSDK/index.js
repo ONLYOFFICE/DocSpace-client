@@ -2,27 +2,71 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { StyledContainer } from "./StyledPluginSDK";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
-const PluginSDK = ({ systemPluginList, currentDeviceType }) => {
-  const { t } = useTranslation(["WebPlugins", "Common"]);
+import GithubLight from "PUBLIC_DIR/images/github.light.react.svg";
+import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";
+
+import { StyledContainer } from "./StyledPluginSDK";
+
+const PluginSDK = ({
+  systemPluginList,
+  currentDeviceType,
+  isLoading,
+  isEmptyList,
+  theme,
+}) => {
+  const { t } = useTranslation(["WebPlugins", "VersionHistory", "Common"]);
 
   const isMobile = currentDeviceType === "mobile";
 
+  const icon = !theme.isBase ? <GithubLight /> : <GithubDark />;
+
   const getPluginList = () => {
+    if (isLoading) {
+      return [
+        <RectangleSkeleton
+          key={"plugin-1"}
+          width={"100%"}
+          height={"164px"}
+          borderRadius={"6px"}
+        />,
+        <RectangleSkeleton
+          key={"plugin-2"}
+          width={"100%"}
+          height={"164px"}
+          borderRadius={"6px"}
+        />,
+        <RectangleSkeleton
+          key={"plugin-3"}
+          width={"100%"}
+          height={"164px"}
+          borderRadius={"6px"}
+        />,
+      ];
+    }
+
     const list = systemPluginList.map((p) => (
-      <div className="plugin-list__item">
+      <div key={p.name} className="plugin-list__item">
         <div className="plugin-list__item-info">
-          <img className="plugin-logo" />
+          <img className="plugin-logo" src={`${p.iconUrl}/assets/${p.image}`} />
           <div className="plugin-info-container">
-            <Text></Text>
-            <Text></Text>
+            <Text>{p.name}</Text>
+            <Text className={"description"}>
+              {t("VersionHistory:Version")} {p.version}
+            </Text>
           </div>
         </div>
-        <Text>123</Text>
-        <Button />
+        <Text className={"description-text"}>{p.description}</Text>
+        <Button
+          icon={icon}
+          onClick={() => window.open(p.homePage, "_blank")}
+          scale
+          label={t("GoToRepo")}
+          size={"small"}
+        />
       </div>
     ));
 
@@ -31,7 +75,6 @@ const PluginSDK = ({ systemPluginList, currentDeviceType }) => {
 
   const list = getPluginList();
 
-  console.log(currentDeviceType);
   return (
     <StyledContainer>
       <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
@@ -60,17 +103,23 @@ const PluginSDK = ({ systemPluginList, currentDeviceType }) => {
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
       ></Button>
-      <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
-        {t("PluginSamples")}
-      </Text>
-      <div className="plugin-list">{list}</div>
+      {!isEmptyList && (
+        <>
+          <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
+            {t("PluginSamples")}
+          </Text>
+          <div className="plugin-list">{list}</div>
+        </>
+      )}
     </StyledContainer>
   );
 };
 
 export default inject(({ pluginStore, auth }) => {
-  const { currentDeviceType } = auth.settingsStore;
-  const { systemPluginList } = pluginStore;
+  const { currentDeviceType, theme } = auth.settingsStore;
+  const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
-  return { currentDeviceType, systemPluginList };
+  console.log(isLoading, isEmptyList);
+
+  return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };
 })(observer(PluginSDK));

@@ -4,6 +4,7 @@
   "DeletePluginTitle": "Delete plugin?",
   "Description": "You can add plugins to extend the functionality of DocSpace with extra features. Click Upload plugin and select the plugin file in the ZIP archive.",
   "ExpandFunctionality": "Expand functionality using Plugin SDK",
+  "GoToRepo": "Go to repository",
   "Metadata": "Metadata",
   "NeedSettings": "Need enter settings",
   "NoPlugins": "No plugins added",

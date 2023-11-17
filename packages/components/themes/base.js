@@ -3179,6 +3179,7 @@ const Base = {
   plugins: {
     borderColor: "#D0D5DA",
     pluginName: "#5C5C5C",
+    descriptionColor: "#657077",
   },
 };
 

@@ -72,7 +72,7 @@ const Layout = (props) => {
     if (isTabletUtils() || isMobileUtils()) {
       window.addEventListener("orientationchange", onOrientationChange);
 
-      if (isMobile) {
+      if (isMobileOnly) {
         window?.visualViewport?.addEventListener("resize", onOrientationChange);
         window?.visualViewport?.addEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);

@@ -23,7 +23,7 @@ const PluginPage = ({
 
   openSettingsDialog,
 
-  changePluginStatus,
+  updatePlugin,
 
   addPlugin,
 
@@ -68,7 +68,7 @@ const PluginPage = ({
               <PluginItem
                 key={`plugin-${plugin.name}-${plugin.version}`}
                 openSettingsDialog={openSettingsDialog}
-                changePluginStatus={changePluginStatus}
+                updatePlugin={updatePlugin}
                 {...plugin}
               />
             ))}
@@ -86,7 +86,7 @@ export default inject(({ auth, pluginStore }) => {
 
   const {
     pluginList,
-    changePluginStatus,
+    updatePlugin,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
 
@@ -96,9 +96,9 @@ export default inject(({ auth, pluginStore }) => {
     isEmptyList,
   } = pluginStore;
 
-  const openSettingsDialog = (pluginId, pluginName, pluginSystem) => {
+  const openSettingsDialog = (pluginName) => {
     setSettingsPluginDialogVisible(true);
-    setCurrentSettingsDialogPlugin({ pluginId, pluginName, pluginSystem });
+    setCurrentSettingsDialogPlugin({ pluginName });
   };
 
   return {
@@ -106,7 +106,7 @@ export default inject(({ auth, pluginStore }) => {
 
     pluginList,
 
-    changePluginStatus,
+    updatePlugin,
 
     openSettingsDialog,
 

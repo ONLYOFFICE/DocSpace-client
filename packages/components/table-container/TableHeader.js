@@ -261,6 +261,7 @@ class TableHeader extends React.Component {
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    //TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
 
@@ -316,23 +317,15 @@ class TableHeader extends React.Component {
         );
 
         if (storageInfoPanelSize) {
-          storageInfoPanelSize.split(" ").forEach((item) => {
-            const isContentItem = this.checkingForUnfixedSize(
-              item,
-              defaultSize
-            );
+          contentColumnsCountInfoPanel = storageInfoPanelSize
+            .split(" ")
+            .filter((item) =>
+              this.checkingForUnfixedSize(item, defaultSize)
+            ).length;
 
-            if (isContentItem) contentColumnsCountInfoPanel++;
-          });
-
-          tableContainer.forEach((item) => {
-            const isContentItem = this.checkingForUnfixedSize(
-              item,
-              defaultSize
-            );
-
-            if (isContentItem) contentColumnsCount++;
-          });
+          contentColumnsCount = tableContainer.filter((item) =>
+            this.checkingForUnfixedSize(item, defaultSize)
+          ).length;
         }
 
         let incorrectNumberColumns =

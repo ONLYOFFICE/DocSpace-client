@@ -37,7 +37,11 @@ const DesktopDetailsContainer = styled.div`
     font-weight: 600;
     text-overflow: ellipsis;
     width: calc(100% - 50px);
-    padding-left: 16px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 16px;`
+        : `padding-left: 16px;`}
     box-sizing: border-box;
     color: ${(props) => props.theme.mediaViewer.titleColor};
   }

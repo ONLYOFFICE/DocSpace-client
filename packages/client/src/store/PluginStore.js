@@ -232,6 +232,10 @@ class PluginStore {
 
       this.installPlugin(newPlugin);
 
+      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+        newPlugin.setAdminPluginSettingsValue(plugin.settings || null);
+      }
+
       callback && callback(newPlugin);
     };
 
@@ -264,10 +268,6 @@ class PluginStore {
     }
 
     if (!plugin || !plugin.enabled) return;
-
-    if (plugin.scopes.includes(PluginScopes.Settings)) {
-      plugin.setAdminPluginSettingsValue(plugin.settings || null);
-    }
 
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI && plugin.setAPI(origin, proxy, prefix);
@@ -317,7 +317,7 @@ class PluginStore {
 
       if (!currentSettings) currentSettings = oldPlugin.settings || "";
 
-      if (typeof status !== "boolean") currentStatus = true;
+      if (typeof status !== "boolean") currentStatus = oldPlugin.enabled;
 
       const plugin = await api.plugins.updatePlugin(
         name,

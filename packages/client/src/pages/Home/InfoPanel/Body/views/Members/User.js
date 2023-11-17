@@ -5,7 +5,7 @@ import Avatar from "@docspace/components/avatar";
 import ComboBox from "@docspace/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import toastr from "@docspace/components/toast/toastr";
-import { isMobileOnly } from "react-device-detect";
+import { isMobileOnly, isTablet } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
 import { getUserRole } from "@docspace/common/utils";
@@ -260,7 +260,7 @@ const User = ({
               options={userRoleOptions}
               onSelect={onOptionClick}
               scaled={false}
-              withBackdrop={isMobileOnly}
+              withBackdrop={isMobileOnly || isTablet}
               size="content"
               modernView
               title={t("Common:Role")}

@@ -61,7 +61,7 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
       text-align: center;
       white-space: nowrap;
       overflow: hidden;
-      font-size: ${(props) => props.theme.getCorrectFontSize("20px")};
+      font-size: 20px;
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);

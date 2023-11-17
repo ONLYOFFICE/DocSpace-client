@@ -7,14 +7,7 @@ export const PlayerFullSceenWrapper = styled.div`
   min-width: 48px;
   height: 48px;
 
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 10px;
-        `
-      : css`
-          padding-left: 10px;
-        `}
+  padding-left: 10px;
 
   &:hover {
     cursor: pointer;

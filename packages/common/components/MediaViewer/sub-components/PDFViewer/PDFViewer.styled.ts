@@ -22,6 +22,8 @@ export const PDFViewerWrapper = styled.div`
   inset: 0;
 
   display: flex;
+  flex-direction: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `row-reverse` : `row`};
 
   background: rgba(55, 55, 55, 0.6);
 
@@ -33,11 +35,21 @@ export const PDFViewerWrapper = styled.div`
   }
   #id_viewer {
     background: none !important;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" &&
+      css`
+        left: unset !important;
+        right: 0 !important;
+      `}
   }
   .block_elem {
     position: absolute;
     padding: 0;
     margin: 0;
+  }
+  #id_vertical_scroll {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "left: 0 !important;"}
   }
 `;
 
@@ -62,52 +74,49 @@ export const ErrorMessage = styled.p`
 
 export const DesktopTopBar = styled(DesktopDetails)<Panel>`
   display: flex;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          right: ${props => (props.isPanelOpen ? "306px" : 0)};
+          right: ${props.isPanelOpen ? "306px" : 0};
         `
       : css`
-          left: ${props => (props.isPanelOpen ? "306px" : 0)};
+          left: ${props.isPanelOpen ? "306px" : 0};
         `}
-  width: ${props => (props.isPanelOpen ? "calc(100%  - 306px)" : "100%")};
+  width: ${(props) => (props.isPanelOpen ? "calc(100%  - 306px)" : "100%")};
 
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 12px;
-          `
-        : css`
-            right: 12px;
-          `}
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `left: 12px;` : `right: 12px;`}
     height: 17px;
     &:hover {
       background-color: transparent;
     }
     svg {
       path {
-        fill: ${props => props.theme.mediaViewer.iconColor};
+        fill: ${(props) => props.theme.mediaViewer.iconColor};
       }
     }
   }
 
   .title {
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 16px;
-          `
-        : css`
-            padding-right: 16px;
-          `}
+    padding-right: 16px;
   }
 `;
 
 export const PDFToolbar = styled(ImageViewerToolbar)<Panel>`
-  left: ${({ isPanelOpen }) => `calc(50% + ${isPanelOpen ? 306 / 2 : 0}px)`};
+  left: ${({ theme, isPanelOpen }) => {
+    const value = isPanelOpen ? 306 / 2 : 0;
+    const operator = theme.interfaceDirection === "rtl" ? "-" : "+";
+
+    return `calc(50% ${operator} ${value}px)`;
+  }};
+
+  .panelToggle {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+  }
 
   transition: background 0.26s ease-out 0s;
 `;

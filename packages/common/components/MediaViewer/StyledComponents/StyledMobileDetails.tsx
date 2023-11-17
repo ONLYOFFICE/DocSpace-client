@@ -24,27 +24,13 @@ const StyledMobileDetails = styled.div`
 
   .mobile-close {
     position: fixed;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 21px;
-          `
-        : css`
-            left: 21px;
-          `}
+    left: 21px;
     top: 22px;
   }
 
   .mobile-context {
     position: fixed;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 22px;
-          `
-        : css`
-            right: 22px;
-          `}
+    right: 22px;
     top: 22px;
   }
 

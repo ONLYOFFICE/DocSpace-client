@@ -26,32 +26,18 @@ const DesktopDetailsContainer = styled.div`
 
   position: fixed;
   top: 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 0;
-        `
-      : css`
-          left: 0;
-        `}
+  left: 0;
   z-index: 307;
 
   .title {
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
-    font-size: ${(props) => props.theme.getCorrectFontSize("20px")};
+    font-size: 20px;
     font-weight: 600;
     text-overflow: ellipsis;
     width: calc(100% - 50px);
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 16px;
-          `
-        : css`
-            padding-left: 16px;
-          `}
+    padding-left: 16px;
     box-sizing: border-box;
     color: ${(props) => props.theme.mediaViewer.titleColor};
   }
@@ -64,7 +50,7 @@ function DesktopDetails({
 }: DesktopDetailsProps) {
   return (
     <DesktopDetailsContainer className={className}>
-      <Text isBold fontSize="14px" className="title">
+      <Text dir="auto" isBold fontSize="14px" className="title">
         {title}
       </Text>
       <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">

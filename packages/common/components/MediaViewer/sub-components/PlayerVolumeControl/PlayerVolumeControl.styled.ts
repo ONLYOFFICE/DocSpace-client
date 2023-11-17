@@ -5,14 +5,7 @@ import styled, { css } from "styled-components";
 export const PlayerVolumeControlWrapper = styled.div`
   display: flex;
   align-items: center;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 10px;
-        `
-      : css`
-          margin-left: 10px;
-        `}
+  margin-left: 10px;
 `;
 
 export const IconWrapper = styled.div`
@@ -67,24 +60,10 @@ export const VolumeWrapper = styled.div`
   height: 28px;
   display: flex;
   align-items: center;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 9px;
-        `
-      : css`
-          padding-left: 9px;
-        `}
+  padding-left: 9px;
 
   input {
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 15px;
-          `
-        : css`
-            margin-right: 15px;
-          `}
+    margin-right: 15px;
     width: 80%;
     height: 4px;
 

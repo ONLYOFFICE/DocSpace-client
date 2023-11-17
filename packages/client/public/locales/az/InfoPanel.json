@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "İstifadəçi detallarına burada baxın",
+  "Administration": "İdarəetmə",
   "AndMoreLabel": "və <strong>{{count}} daha çox</strong>",
   "CreationDate": "Yaradılma tarixi",
   "Data": "Məlumat",
   "DateModified": "Değiştirilme tarihi",
+  "ExpectUsers": "İstifadəçiləri gözləyin",
   "FeedCreateFileSeveral": "Fayllar əlavə edildi",
   "FeedCreateFileSingle": "Fayl yaradıldı",
   "FeedCreateFolderSeveral": "Qovluqlar əlavə edildi",
@@ -27,6 +29,7 @@
   "FileExtension": "Fayl uzantısı",
   "FilesEmptyScreenText": "Fayl və qovluq detallarına burada baxın",
   "HistoryEmptyScreenText": "Hərəkət tarixçəsi burada göstəriləcək",
+  "InfoBanner": "Dəvət olunmuş istifadəçilərin siyahısına bütün otaqlara tam girişi olan bu DocSpace-in sahibi və/yaxud administratoru daxildir. Sahib və/yaxud administratora başqa heç bir giriş hüququ verilə bilməz. Onlar otağa əlavə edildikdən sonra hər hansı dəyişiklik barədə məlumatlandırılacaqlar.",
   "ItemsSelected": "Seçilmiş elementlər",
   "LastModifiedBy": "tərəfindən Son Dəyişiklik",
   "PendingInvitations": "Gözləyən dəvətlər",
@@ -37,6 +40,7 @@
   "SubmenuDetails": "Detallar",
   "SubmenuHistory": "Tarixçə",
   "SystemProperties": "Sistem xüsusiyyətləri",
+  "Users": "İstifadəçilər",
   "UsersInRoom": "Otaqdakı istifadəçilər",
   "Versions": "Versiyalar"
 }

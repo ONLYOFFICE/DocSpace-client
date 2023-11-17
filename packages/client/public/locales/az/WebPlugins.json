@@ -1,1 +1,13 @@
-{}
+{
+  "DeletePlugin": "Plagini silin",
+  "DeletePluginDescription": "Bu plagin artıq DocSpace istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
+  "DeletePluginTitle": "Plagin silinsin?",
+  "Description": "DocSpace-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini quraşdırıb üzərinə klikləyin və ZIP arxivində plagin faylını seçin.",
+  "Metadata": "Metadata",
+  "NeedSettings": "Parametrləri daxil etməlisiniz",
+  "NoPlugins": "Heç bir plagin əlavə edilməyib",
+  "NotNeedSettings": "Parametrləri daxil etməlisiniz",
+  "Plugins": "Plaginlər",
+  "PluginsHelp": "Plaginlər DocSpace-in funksionallığını genişləndirməyə imkan verir",
+  "UploadPlugin": "Plagini quraşdırın"
+}

@@ -2,5 +2,10 @@
   "EmptyScreenDescription": "Lütfən, internet bağlantınızı yoxlayın və səhifəni yeniləyin, yaxud da bir qədər sonra yenidən yoxlayın.",
   "GalleryEmptyScreenDescription": "Detalları görmək üçün istənilən forma şablonunu seçin",
   "GalleryEmptyScreenHeader": "Forma şablonlarının yüklənməsi uğursuz oldu",
+  "SelectForm": "Formanı seçin",
+  "SubmitToGalleryBlockBody": "ONLYOFFICE icması ilə paylaşmaq üçün şablonlarınızı təqdim edin.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Forma Qalereyası",
+  "SubmitToGalleryDialogGuideInfo": "Mükəmməl formalar yaratmağı və təsdiq şansınızı artırmağı bizim <1>bələdçimizdən</1> öyrənin.",
+  "SubmitToGalleryDialogMainInfo": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
   "TemplateInfo": "Şablon məlumatı"
 }

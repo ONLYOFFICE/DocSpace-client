@@ -1,1 +1,13 @@
-{}
+{
+  "DeletePlugin": "Supprimer le module complémentaire",
+  "DeletePluginDescription": "Ce module complémentaire ne sera plus disponible pour les utilisateurs de DocSpace. Etes-vous sûr de vouloir continuer ?",
+  "DeletePluginTitle": "Supprimer le module complémentaire ?",
+  "Description": "Vous pouvez ajouter des modules complémentaires pour étendre la fonctionnalité de DocSpace avec des fonctions supplémentaires. Cliquez sur Télécharger un module et sélectionnez le fichier du module dans l'archive ZIP.",
+  "Metadata": "Métadonnées",
+  "NeedSettings": "Il est nécessaire de saisir les paramètres",
+  "NoPlugins": "Aucun module complémentaire n'a été ajouté",
+  "NotNeedSettings": "Il n'est pas nécessaire de saisir les paramètres",
+  "Plugins": "Modules complémentaires",
+  "PluginsHelp": "Les modules complémentaires vous permettent d'étendre les fonctionnalités de DocSpace",
+  "UploadPlugin": "Charger le module complémentaire"
+}

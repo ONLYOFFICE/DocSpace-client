@@ -2,5 +2,10 @@
   "EmptyScreenDescription": "Bitte überprüfen Sie Ihre Internetverbindung und laden Sie die Seite neu oder versuchen Sie es später.",
   "GalleryEmptyScreenDescription": "Wählen Sie eine beliebige Formularvorlage aus, um die Details zu sehen",
   "GalleryEmptyScreenHeader": "Formularvorlagen konnten nicht geladen werden",
+  "SelectForm": "Formular auswählen",
+  "SubmitToGalleryBlockBody": "Reichen Sie Ihre Vorlagen ein, um sie mit der ONLYOFFICE Gemeinschaft zu teilen.",
+  "SubmitToGalleryBlockHeader": "Formulargalerie von ONLYOFFICE",
+  "SubmitToGalleryDialogGuideInfo": "Erfahren Sie in unserem <1>Leitfaden</1>, wie Sie perfekte Formulare erstellen und Ihre Chancen auf eine Genehmigung erhöhen können.",
+  "SubmitToGalleryDialogMainInfo": "Reichen Sie Ihr Formular in der öffentlichen Galerie ein, damit andere es für ihre Arbeit verwenden können. Sobald das Formular die Moderation bestanden hat, werden Sie benachrichtigt und für Ihren Beitrag belohnt.",
   "TemplateInfo": "Informationen zur Vorlage"
 }

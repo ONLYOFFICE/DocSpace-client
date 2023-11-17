@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Vedi i dettagli degli utenti qui",
+  "Administration": "Amministrazione",
   "AndMoreLabel": "e <strong>{{count}} in più</strong>",
   "CreationDate": "Data di creazione",
   "Data": "Dati",
   "DateModified": "Data modificata",
+  "ExpectUsers": "Aspetta gli utenti",
   "FeedCreateFileSeveral": "File aggiunti",
   "FeedCreateFileSingle": "File creato",
   "FeedCreateFolderSeveral": "Cartelle aggiunte",
@@ -27,6 +29,7 @@
   "FileExtension": "Estensione di file",
   "FilesEmptyScreenText": "Vedi i dettagli di file e cartelle qui",
   "HistoryEmptyScreenText": "La cronologia delle attività verrà visualizzata qui",
+  "InfoBanner": "L'elenco degli utenti invitati include il proprietario e/o gli amministratori di questo DocSpace con accesso completo a tutte le stanze. Al proprietario e/o all'amministratore non possono essere assegnati altri diritti di accesso. Una volta aggiunti alla stanza, verranno informati di tutte le modifiche.",
   "ItemsSelected": "Elementi selezionati",
   "LastModifiedBy": "Ultima modifica di",
   "PendingInvitations": "Inviti in sospeso",
@@ -37,6 +40,7 @@
   "SubmenuDetails": "Dettagli",
   "SubmenuHistory": "Cronologia",
   "SystemProperties": "Proprietà di sistema",
+  "Users": "Utenti",
   "UsersInRoom": "Utenti in stanza",
   "Versions": "Versioni"
 }

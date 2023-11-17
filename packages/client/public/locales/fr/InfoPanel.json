@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Voir les détails des utilisateurs ici",
+  "Administration": "Administration",
   "AndMoreLabel": "et <strong>{{count}} plus</strong>",
   "CreationDate": "Date de création",
   "Data": "Données",
   "DateModified": "Date de modification",
+  "ExpectUsers": "Attendez les utilisateurs",
   "FeedCreateFileSeveral": "Fichiers ajoutés",
   "FeedCreateFileSingle": "Fichier créé",
   "FeedCreateFolderSeveral": "Dossier ajouté",
@@ -27,6 +29,7 @@
   "FileExtension": "Extension de fichier",
   "FilesEmptyScreenText": "Voir ici les détails des fichiers et des dossiers",
   "HistoryEmptyScreenText": "L'historique des activités sera affiché ici",
+  "InfoBanner": "La liste des utilisateurs invités comprend le propriétaire et/ou les administrateurs de ce DocSpace avec un accès complet à toutes les salles. Le propriétaire et/ou l'administrateur ne peuvent se voir attribuer d'autres droits d'accès. Une fois ajoutés à la salle, ils seront informés de tous les changements.",
   "ItemsSelected": "Éléments sélectionnés",
   "LastModifiedBy": "Dernière modification par",
   "PendingInvitations": "Invitations en attente",
@@ -37,6 +40,7 @@
   "SubmenuDetails": "Détails",
   "SubmenuHistory": "Historique",
   "SystemProperties": "Propriétés du système",
+  "Users": "Utilisateurs",
   "UsersInRoom": "Utilisateurs dans la salle",
   "Versions": "Versions"
 }

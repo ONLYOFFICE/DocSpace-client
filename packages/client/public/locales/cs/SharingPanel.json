@@ -9,6 +9,7 @@
   "ExternalLink": "Externí odkaz",
   "FormFilling": "Vyplňování formuláře",
   "InternalLink": "Interní odkaz",
+  "LinkName": "Název odkazu",
   "Notify users": "Upozornit uživatele",
   "ReadOnly": "Pouze pro čtení",
   "ShareEmailBody": "Byl vám udělen přístup k dokumentu {{itemName}}. Kliknutím na níže uvedený odkaz dokument právě teď otevřete: {{shareLink}}.",

@@ -1,1 +1,19 @@
-{}
+{
+  "AbortTransfer": "Keskeytä siirto",
+  "AllDataTransferred": "Kaikki tiedot siirretty",
+  "DataReassignment": "Tietojen siirto",
+  "DeleteProfileIsFinished": "Poista profiili, kun tietojen siirto on suoritettu",
+  "DescriptionDataReassignment": "Siirrämme käyttäjän luomat huoneet ja  käyttäjän huoneisiin tallennetut asiakirjat.",
+  "InProgress": "Käynnissä",
+  "Interrupted": "Keskeytetty, osa tiedoista voitiin siirtää",
+  "MoreAboutDataTransfer": "Enemmän tiedonsiirrosta",
+  "NewDataOwner": "Uusien tietojen omistaja",
+  "NoteDataReassignment": "Huom: tätä toimintoa ei voi perua.",
+  "ProcessComplete": "Voit sulkea tämän sivun. Kun toiminto on suoritettu, vastuullinen järjestelmänvalvoja saa siitä sähköpostin.",
+  "Reassign": "Siirrä",
+  "ReassignData": "Siirrä tiedot",
+  "ReassigningDataToAnother": "Tietojen siirtotoiminto käyttäjältä  <0>{{fromUser}}</0> käyttäjälle <1>{{toUser}}</1> on alkanut. Ole hyvä ja huomioi, että tämä saattaa kestää jonkin aikaa. ",
+  "ReassigningDataToItself": "Toimintojen siirtotoiminto käyttäjältä <0>{{fromUser}}</0> käyttäjälle <1>{{toUser}}</1> <2>{{you}}</2> on alkanut. Ole hyvä ja huomioi, että tämä saattaa kestää jonkin aikaa.",
+  "StartTransferAgain": "Aloita siirto uudelleen",
+  "UserToWhomTheDataWillBeTransferred": "Käyttäjä, jolle tiedot siirretään"
+}

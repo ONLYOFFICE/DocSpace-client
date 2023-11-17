@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { useTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import Slider from "@docspace/components/slider";
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
@@ -167,7 +166,6 @@ const StyledBody = styled.div`
 
 const SelectUsersCountContainer = ({
   managersCount,
-  theme,
   isDisabled,
   isLoading,
   minAvailableManagersValue,
@@ -254,7 +252,6 @@ const SelectUsersCountContainer = ({
   return (
     <StyledBody
       className="select-users-count-container"
-      theme={theme}
       isDisabled={isDisabled || isUpdatingTariff}
     >
       <Text noSelect fontWeight={600} className="payment-users_text">
@@ -318,7 +315,7 @@ const SelectUsersCountContainer = ({
 
 export default inject(({ auth, payments }) => {
   const { paymentQuotasStore } = auth;
-  const { theme } = auth.settingsStore;
+
   const {
     isLoading,
     minAvailableManagersValue,
@@ -336,7 +333,6 @@ export default inject(({ auth, payments }) => {
 
   return {
     isAlreadyPaid,
-    theme,
     isLoading,
     minAvailableManagersValue,
     managersCount,

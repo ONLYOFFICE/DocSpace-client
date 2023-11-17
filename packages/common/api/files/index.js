@@ -1059,7 +1059,7 @@ export function editExternalLink(fileId, linkId, access, primary, internal) {
   return request({
     method: "put",
 
-    url: `/files/files/${fileId}/links`,
+    url: `/files/file/${fileId}/links`,
     data: {
       linkId,
       access,

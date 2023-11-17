@@ -34,7 +34,7 @@ const PluginHeader = ({
   name,
   enabled,
   system,
-  changePluginStatus,
+  updatePlugin,
   withDelete,
   showModalPluginSettings,
   openSettingsDialog,
@@ -43,8 +43,8 @@ const PluginHeader = ({
 }) => {
   const badgeLabel = enabled ? "enabled" : "disabled";
 
-  const changePluginStatusAction = () => {
-    changePluginStatus && changePluginStatus(id, enabled ? "false" : "true");
+  const updatePluginAction = () => {
+    updatePlugin && updatePlugin(id, enabled ? "false" : "true");
   };
 
   const getOptions = () => {
@@ -53,7 +53,7 @@ const PluginHeader = ({
     const enabledOpt = {
       key: "enable-plugin",
       label: enabledOptLabel,
-      onClick: changePluginStatusAction,
+      onClick: updatePluginAction,
     };
 
     const deleteOpt = {

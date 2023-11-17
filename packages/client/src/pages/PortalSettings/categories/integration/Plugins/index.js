@@ -51,7 +51,6 @@ const PluginPage = ({
             theme={theme}
             onAddAction={addPlugin}
             currentColorScheme={currentColorScheme}
-            learnMoreLink={learnMoreLink}
             withUpload={withUpload}
           />
         </StyledEmptyContainer>
@@ -60,7 +59,7 @@ const PluginPage = ({
           {/* <Header
             t={t}
             currentColorScheme={currentColorScheme}
-            learnMoreLink={learnMoreLink}
+           
             withUpload={withUpload}
           /> */}
           {withUpload && <UploadButton t={t} addPlugin={addPlugin} />}

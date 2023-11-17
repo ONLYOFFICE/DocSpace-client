@@ -15,7 +15,7 @@ const EmptyScreen = ({
   onAddAction,
   theme,
   currentColorScheme,
-  learnMoreLink,
+
   withUpload,
 }) => {
   const imageSrc = theme.isBase
@@ -25,19 +25,7 @@ const EmptyScreen = ({
   return (
     <EmptyFolderContainer
       headerText={t("NoPlugins")}
-      descriptionText={
-        <Text>
-          {withUpload && t("Description")}
-          <Link
-            color={currentColorScheme?.main?.accent}
-            type={"page"}
-            target={"_blank"}
-            href={learnMoreLink}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        </Text>
-      }
+      descriptionText={<Text>{withUpload && t("Description")}</Text>}
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}

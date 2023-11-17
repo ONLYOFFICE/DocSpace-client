@@ -1808,6 +1808,7 @@ class FilesStore {
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
+    const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.authStore.settingsStore;
 
@@ -1819,7 +1820,8 @@ class FilesStore {
     const { isDesktopClient } = this.authStore.settingsStore;
 
     const pluginAllKeys =
-      enablePlugins && this.pluginStore.getContextMenuKeysByType();
+      enablePlugins &&
+      this.pluginStore.getContextMenuKeysByType(null, null, security);
 
     const canRenameItem = item.security?.Rename;
 
@@ -2044,7 +2046,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Files,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2059,7 +2062,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Image,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2074,7 +2078,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Video,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2234,7 +2239,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms
+            PluginFileType.Rooms,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2332,7 +2339,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Folders
+            PluginFileType.Folders,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2659,6 +2668,7 @@ class FilesStore {
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
+        this.setTempActionFoldersIds([]);
       });
 
       return;
@@ -2668,38 +2678,68 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
 
-    api.files
-      .getFolder(newFilter.folder, newFilter)
-      .then((res) => {
-        const files = fileIds
-          ? this.files.filter((x) => !fileIds.includes(x.id))
-          : this.files;
-        const folders = folderIds
-          ? this.folders.filter((x) => !folderIds.includes(x.id))
-          : this.folders;
+    if (isRooms) {
+      return api.rooms
+        .getRooms(newFilter)
+        .then((res) => {
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        const newFiles = [...files, ...res.files];
-        const newFolders = [...folders, ...res.folders];
+          const newFolders = [...folders, ...res.folders];
 
-        const filter = this.filter.clone();
-        filter.total = res.total;
+          const roomsFilter = this.roomsFilter.clone();
+          roomsFilter.total = res.total;
 
-        runInAction(() => {
-          this.setFilter(filter);
-          this.setFiles(newFiles);
-          this.setFolders(newFolders);
+          runInAction(() => {
+            this.setRoomsFilter(roomsFilter);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
         });
+    } else {
+      api.files
+        .getFolder(newFilter.folder, newFilter)
+        .then((res) => {
+          const files = fileIds
+            ? this.files.filter((x) => !fileIds.includes(x.id))
+            : this.files;
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        showToast && showToast();
-      })
-      .catch((err) => {
-        toastr.error(err);
-        console.log("Need page reload");
-      })
-      .finally(() => {
-        this.setOperationAction(false);
-        this.setTempActionFilesIds([]);
-      });
+          const newFiles = [...files, ...res.files];
+          const newFolders = [...folders, ...res.folders];
+
+          const filter = this.filter.clone();
+          filter.total = res.total;
+
+          runInAction(() => {
+            this.setFilter(filter);
+            this.setFiles(newFiles);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
+        });
+    }
   };
 
   updateFile = (fileId, title) => {

@@ -58,6 +58,7 @@ const FileNameCell = ({
         color={theme.filesSection.tableView.fileName.linkColor}
         isTextOverflow
         className="item-file-name"
+        dir="auto"
       >
         {titleWithoutExt}
       </Link>

@@ -652,7 +652,7 @@ const SectionFilterContent = ({
           label:
             PaymentsType.Paid === accountsFilter.payments.toString()
               ? t("Common:Paid")
-              : t("SmartBanner:Price"),
+              : t("Common:Free"),
           group: "filter-account",
         });
       }
@@ -1074,7 +1074,7 @@ const SectionFilterContent = ({
         {
           key: PaymentsType.Free,
           group: "filter-account",
-          label: t("SmartBanner:Price"),
+          label: t("Common:Free"),
         },
       ];
 

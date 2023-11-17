@@ -225,6 +225,14 @@ class TableHeader extends React.Component {
     window.addEventListener("mouseup", this.onMouseUp);
   };
 
+  checkingForUnfixedSize = (item, defaultColumnSize) => {
+    return (
+      item !== `${settingsSize}px` &&
+      item !== `${defaultColumnSize}px` &&
+      item !== "0px"
+    );
+  };
+
   onResize = () => {
     const {
       containerRef,
@@ -253,6 +261,7 @@ class TableHeader extends React.Component {
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    //TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
 
@@ -300,13 +309,33 @@ class TableHeader extends React.Component {
       let hideColumns = false;
 
       if (infoPanelVisible) {
+        let contentColumnsCount = 0;
+        let contentColumnsCountInfoPanel = 0;
+
         const storageInfoPanelSize = localStorage.getItem(
           columnInfoPanelStorageName
         );
 
-        const tableInfoPanelContainer = storageInfoPanelSize
-          ? storageInfoPanelSize.split(" ")
-          : tableContainer;
+        if (storageInfoPanelSize) {
+          contentColumnsCountInfoPanel = storageInfoPanelSize
+            .split(" ")
+            .filter((item) =>
+              this.checkingForUnfixedSize(item, defaultSize)
+            ).length;
+
+          contentColumnsCount = tableContainer.filter((item) =>
+            this.checkingForUnfixedSize(item, defaultSize)
+          ).length;
+        }
+
+        let incorrectNumberColumns =
+          contentColumnsCountInfoPanel < contentColumnsCount &&
+          !this.state.hideColumns;
+
+        const tableInfoPanelContainer =
+          storageInfoPanelSize && !incorrectNumberColumns
+            ? storageInfoPanelSize.split(" ")
+            : tableContainer;
 
         let containerMinWidth = containerWidth - defaultSize - settingsSize;
 

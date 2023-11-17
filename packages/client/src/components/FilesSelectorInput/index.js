@@ -29,6 +29,7 @@ const FilesSelectorInput = (props) => {
     descriptionText,
     className,
     isSelect,
+    isRoomBackup,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -87,6 +88,7 @@ const FilesSelectorInput = (props) => {
       />
 
       <FilesSelector
+        isRoomBackup={isRoomBackup}
         descriptionText={descriptionText}
         filterParam={filterParam}
         rootThirdPartyId={rootThirdPartyId}

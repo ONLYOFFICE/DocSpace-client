@@ -19,9 +19,7 @@ const CreatePluginFile = ({
   onSelect,
   extension,
 
-  pluginId,
   pluginName,
-  pluginSystem,
 
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
@@ -47,9 +45,7 @@ const CreatePluginFile = ({
       message,
       null,
 
-      pluginId,
       pluginName,
-      pluginSystem,
 
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
@@ -81,9 +77,7 @@ const CreatePluginFile = ({
       message,
       null,
 
-      pluginId,
       pluginName,
-      pluginSystem,
 
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,

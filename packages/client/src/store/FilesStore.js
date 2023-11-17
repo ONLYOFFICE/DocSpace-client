@@ -1104,9 +1104,12 @@ class FilesStore {
         const selectableFolder = this.filesList.find(
           (f) => f.id == id && f.isFolder
         );
-        selectableFolder.isFolder = true;
 
-        newSelections.push(selectableFolder);
+        if (selectableFolder) {
+          selectableFolder.isFolder = true;
+
+          newSelections.push(selectableFolder);
+        }
       }
     }
 

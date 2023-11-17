@@ -3156,9 +3156,14 @@ const Dark = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#ADADAD",
-    closeIconFill: "#a9a9a9",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#ADADAD",
+    },
+    submitToGalleryTile: {
+      bodyText: "#ADADAD",
+      closeIconFill: "#a9a9a9",
+    },
   },
 
   infoBlock: {
@@ -3175,6 +3180,7 @@ const Dark = {
   plugins: {
     borderColor: "#474747",
     pluginName: "#A3A9AE",
+    descriptionColor: "#ADADAD",
   },
 };
 

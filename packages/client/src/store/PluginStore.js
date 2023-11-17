@@ -1048,6 +1048,10 @@ class PluginStore {
     return this.plugins.filter((p) => p.enabled);
   }
 
+  get systemPluginList() {
+    return this.plugins.filter((p) => p.system);
+  }
+
   get contextMenuItemsList() {
     const items = [];
 

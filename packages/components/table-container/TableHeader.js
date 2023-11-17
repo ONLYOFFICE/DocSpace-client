@@ -278,9 +278,21 @@ class TableHeader extends React.Component {
       }
     }
 
+    const containerGridTemplateColumns =
+      container.style.gridTemplateColumns.split(" ");
+
     const tableContainer = storageSize
       ? storageSize.split(" ")
-      : container.style.gridTemplateColumns.split(" ");
+      : containerGridTemplateColumns;
+
+    if (containerGridTemplateColumns.length === 1 && !this.state.hideColumns) {
+      const hasContent = !!storageSize.split(" ").find((item, index) => {
+        if (index === 0) return;
+        return this.checkingForUnfixedSize(item, defaultSize);
+      });
+
+      if (!hasContent) return this.resetColumns(true);
+    }
 
     // columns.length + 1 - its settings column
     if (tableContainer.length !== columns.length + 1) {

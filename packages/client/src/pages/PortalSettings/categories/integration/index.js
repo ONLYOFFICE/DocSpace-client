@@ -68,16 +68,15 @@ const IntegrationWrapper = (props) => {
     const pluginLabel = (
       <Box displayProp="flex" style={{ gap: "8px" }}>
         {t("Common:Plugins")}
-        <Box>
-          <Badge
-            label={t("Settings:BetaLabel")}
-            backgroundColor="#7763F0"
-            fontSize="9px"
-            borderRadius="50px"
-            noHover={true}
-            isHovered={false}
-          />
-        </Box>
+
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
       </Box>
     );
 

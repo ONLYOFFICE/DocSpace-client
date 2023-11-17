@@ -88,7 +88,6 @@ const StyledLinkRow = styled.div`
   gap: 12px;
   height: 100%;
   background: ${(props) => props.theme.backgroundColor};
-  z-index: 1;
 
   .external-row-link {
     white-space: nowrap;

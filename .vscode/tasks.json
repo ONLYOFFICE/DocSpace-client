@@ -196,6 +196,51 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Test | frontend-translations",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck-force-save",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py -f",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

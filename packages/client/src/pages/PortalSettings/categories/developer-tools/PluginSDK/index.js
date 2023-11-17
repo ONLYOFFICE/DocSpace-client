@@ -119,7 +119,5 @@ export default inject(({ pluginStore, auth }) => {
   const { currentDeviceType, theme } = auth.settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
-  console.log(isLoading, isEmptyList);
-
   return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };
 })(observer(PluginSDK));

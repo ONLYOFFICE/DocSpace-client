@@ -44,16 +44,18 @@ app.use(
   })
 );
 
-app.use(logger("dev", { 
-  stream: stream,
-  skip: function (req, res) {
-    if (req.url == '/health') {
+app.use(
+  logger("dev", {
+    stream: stream,
+    skip: function (req, res) {
+      if (req.url == "/health") {
         return true;
-    } else {
+      } else {
         return false;
-    }
-  }
-}));
+      }
+    },
+  })
+);
 
 app.get("*", async (req: ILoginRequest, res: Response, next) => {
   const { i18n, cookies, headers, query, t, url } = req;
@@ -79,7 +81,7 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
       return next();
     }
 
-    initialState = await getInitialState(query);
+    initialState = await getInitialState(query, isAuth);
     const hideAuthPage = initialState?.ssoSettings?.hideAuthPage;
     const ssoUrl = initialState?.capabilities?.ssoUrl;
 

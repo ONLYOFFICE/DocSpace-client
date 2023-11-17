@@ -15,7 +15,6 @@ import { checkIsAuthenticated } from "@docspace/common/api/user";
 import { getClient, getScopeList } from "@docspace/common/api/oauth";
 import { TenantStatus } from "@docspace/common/constants";
 import { IScope } from "@docspace/common/utils/oauth/interfaces";
-import winston, { stream } from "../logger";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(
@@ -49,7 +48,8 @@ export const loadPath = (language: string, nameSpace: string): string => {
 };
 
 export const getInitialState = async (
-  query: MatchType
+  query: MatchType,
+  isAuth: boolean
 ): Promise<IInitialState> => {
   let portalSettings: IPortalSettings,
     buildInfo: IBuildInfo,
@@ -66,11 +66,9 @@ export const getInitialState = async (
     getLogoUrls(),
   ];
 
-  const settings = [
-    getAuthProviders(),
-    getCapabilities(),
-    // getCurrentSsoSettings(),
-  ];
+  const settings = [getAuthProviders(), getCapabilities()];
+
+  if (!isAuth) settings.push(getCurrentSsoSettings());
 
   [portalSettings, buildInfo, availableThemes, logoUrls] = await Promise.all(
     baseSettings
@@ -103,30 +101,6 @@ export const getOAuthState = async (
   isAuth: boolean
 ): Promise<IOAuthState> => {
   const requests = [];
-
-  try {
-    await getClient(clientId, isAuth);
-  } catch (e) {
-    console.log("get client");
-    console.log(e);
-    winston.error(e);
-  }
-
-  try {
-    await getUser();
-  } catch (e) {
-    console.log("get user");
-    console.log(e);
-    winston.error(e);
-  }
-
-  try {
-    await getScopeList();
-  } catch (e) {
-    console.log("get scopes");
-    console.log(e);
-    winston.error(e);
-  }
 
   requests.push(getClient(clientId, isAuth));
 

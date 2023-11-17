@@ -51,16 +51,15 @@ const DeveloperToolsWrapper = (props) => {
   const pluginLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("WebPlugins:PluginSDK")}
-      <Box>
-        <Badge
-          label={t("Settings:BetaLabel")}
-          backgroundColor="#533ED1"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
-      </Box>
+
+      <Badge
+        label={t("Settings:BetaLabel")}
+        backgroundColor="#533ED1"
+        fontSize="9px"
+        borderRadius="50px"
+        noHover={true}
+        isHovered={false}
+      />
     </Box>
   );
 

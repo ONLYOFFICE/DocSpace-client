@@ -67,6 +67,11 @@
             "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
           },
           {
+            "label": "Docker : ReBuild-SAAS + dnsmasq",
+            "task": "Backend | rebuild SAAS + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
+          },
+          {
             "label": "Docker : Build-EE + dnsmasq",
             "task": "Backend | build EE + dnsmasq",
             "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"

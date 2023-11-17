@@ -241,7 +241,7 @@ class OformsStore {
 
     const categories = await getCategoriesOfCategoryType(
       url,
-      this.defaultOformLocale
+      this.oformsFilter.locale
     );
     return categories;
   };

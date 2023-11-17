@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Secţiuni suplimentare",
-  "ConnectEmpty": "Nu este nimic aici",
   "DisplayFavorites": "Afișare Preferințe",
   "DisplayNotification": "Afișează notificare când elemente sunt mutate în Coșul de gunoi",
   "DisplayRecent": "Afișează recente",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Stocarea versiunilor fișierelor",
   "ThirdPartyAccounts": "Conturi de la terţi",
   "ThirdPartyBtn": "Se permite conectarea la servicii terțe de stocare",
-  "UpdateOrCreate": "Actualizați versiunea fișierului pentru fișierul existent cu același nume. În caz contrar, copia fișierului nu va fi creată.",
-  "UploadPluginsHere": "Încărcați pluginuri aici"
+  "UpdateOrCreate": "Actualizați versiunea fișierului pentru fișierul existent cu același nume. În caz contrar, copia fișierului nu va fi creată."
 }

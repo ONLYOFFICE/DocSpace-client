@@ -8,7 +8,13 @@ import {
   isMobile as isMobileUtils,
   tablet,
 } from "@docspace/components/utils/device";
-import { isIOS, isMobile, isChrome, isAndroid } from "react-device-detect";
+import {
+  isIOS,
+  isMobile,
+  isChrome,
+  isMobileOnly,
+  isAndroid,
+} from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 const StyledContainer = styled.div`
@@ -146,7 +152,7 @@ const Layout = (props) => {
         height = `100%`;
       }
 
-      if (isIOS && isMobile && e?.type === "resize" && e?.target?.height) {
+      if (isIOS && isMobileOnly && e?.type === "resize" && e?.target?.height) {
         const diff = window.innerHeight - e.target.height;
 
         windowHeight -= diff;
@@ -163,7 +169,7 @@ const Layout = (props) => {
         document.body.style.position = `fixed`;
         document.body.style.overflow = `hidden`;
         document.body.style.scroll = `hidden`;
-      } else if (isMobile && isIOS) {
+      } else if (isMobileOnly && isIOS) {
         document.body.style.height = `100%`;
         document.body.style.maxHeight = `100%`;
         document.body.style.minHeight = `100%`;

@@ -539,6 +539,39 @@ class SettingsStore {
       case ".docxf":
         path = "docxf.svg";
         break;
+      case ".sxc":
+        path = "sxc.svg";
+        break;
+      case ".et":
+        path = "et.svg";
+        break;
+      case ".ett":
+        path = "ett.svg";
+        break;
+      case ".sxw":
+        path = "sxw.svg";
+        break;
+      case ".stw":
+        path = "stw.svg";
+        break;
+      case ".wps":
+        path = "wps.svg";
+        break;
+      case ".wpt":
+        path = "wpt.svg";
+        break;
+      case ".mhtml":
+        path = "mhtml.svg";
+        break;
+      case ".dps":
+        path = "dps.svg";
+        break;
+      case ".dpt":
+        path = "dpt.svg";
+        break;
+      case ".sxi":
+        path = "sxi.svg";
+        break;
       default:
         const { enablePlugins } = this.authStore.settingsStore;
 

@@ -385,6 +385,14 @@ const StyledTableBody = styled.div`
   display: contents;
 
   ${({ useReactWindow }) => useReactWindow && reactWindowBodyStyles}
+
+  .table-container_cell {
+    ${({ infoPanelVisible }) =>
+      infoPanelVisible &&
+      css`
+        padding: 0;
+      `}
+  }
 `;
 
 const StyledTableRow = styled.div`

@@ -1,9 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { isMobile } from "@docspace/components/utils/device";
 import RowContainer from "@docspace/components/row-container";

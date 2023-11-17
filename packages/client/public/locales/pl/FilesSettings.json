@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Dodatkowe sekcje",
-  "ConnectEmpty": "Nic tu nie ma",
   "DisplayFavorites": "Wyświetlaj ulubione",
   "DisplayNotification": "Wyświetlaj powiadomienia podczas przenoszenia elementów do kosza",
   "DisplayRecent": "Wyświetlaj ostatnie",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Przechowywanie wersji pliku",
   "ThirdPartyAccounts": "Konta podmiotów trzecich",
   "ThirdPartyBtn": "Zezwalaj na podłączanie pamięci podmiotów trzecich",
-  "UpdateOrCreate": "Zaktualizuj wersję pliku dla istniejącego pliku o tej samej nazwie. W przeciwnym razie zostanie utworzona kopia pliku.",
-  "UploadPluginsHere": "Prześlij wtyczki tutaj"
+  "UpdateOrCreate": "Zaktualizuj wersję pliku dla istniejącego pliku o tej samej nazwie. W przeciwnym razie zostanie utworzona kopia pliku."
 }

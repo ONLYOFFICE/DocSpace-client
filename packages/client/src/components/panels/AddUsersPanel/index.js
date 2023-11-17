@@ -12,7 +12,7 @@ import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/common/api/people";
-import { useLoadingWithTimeout } from "@docspace/common/hooks";
+import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 import { ShareAccessRights } from "@docspace/common/constants";
 
 import withLoader from "../../../HOCs/withLoader";

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import Heading from "@docspace/components/heading";
-import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 
@@ -34,7 +33,9 @@ const Header = ({ t, currentColorScheme, withUpload, learnMoreLink }) => {
   return (
     <StyledHeader>
       <div className="header-container">
-        <Heading className={"plugin-list-header"}>{t("Plugins")}</Heading>
+        <Heading className={"plugin-list-header"}>
+          {t("Common:Plugins")}
+        </Heading>
         {/* <HelpButton
           offsetBottom={0}
           offsetLeft={0}

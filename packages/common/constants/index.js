@@ -279,7 +279,7 @@ export const ConflictResolveType = Object.freeze({
   Duplicate: 2,
 });
 export const providersData = Object.freeze({
-  apple: {
+  appleid: {
     label: "apple",
     icon: ShareAppleReactSvgUrl,
   },

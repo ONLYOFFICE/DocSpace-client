@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Seções adicionais",
-  "ConnectEmpty": "Não há nada aqui",
   "DisplayFavorites": "Mostrar Favoritos",
   "DisplayNotification": "Exibir notificação ao mover itens para a Lixeira",
   "DisplayRecent": "Mostrar Recentes",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Armazenamento de versões de arquivo",
   "ThirdPartyAccounts": "Contas de terceiros",
   "ThirdPartyBtn": "Permitir conexão de armazenamentos de terceiros",
-  "UpdateOrCreate": "Atualizar a versão de arquivo para o arquivo existente com o mesmo nome. Caso contrário, será criada uma cópia do arquivo.",
-  "UploadPluginsHere": "Carregar plug-ins aqui"
+  "UpdateOrCreate": "Atualizar a versão de arquivo para o arquivo existente com o mesmo nome. Caso contrário, será criada uma cópia do arquivo."
 }

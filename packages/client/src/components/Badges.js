@@ -154,7 +154,7 @@ const Badges = ({
     color: theme.filesBadges.color,
     fontSize: "9px",
     fontWeight: 800,
-    maxWidth: "50px",
+    maxWidth: "60px",
     padding: isTile || tabletViewBadge ? "2px 5px" : "0 4px",
     lineHeight: "12px",
     "data-id": id,

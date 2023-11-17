@@ -87,7 +87,8 @@ const SimpleFilesRowContent = styled(RowContent)`
         : css`
             padding: 12px 12px 0px 0px;
           `}
-    margin-top: -12px;
+    margin-top: ${(props) =>
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
   }
 
   @media ${tablet} {
@@ -247,6 +248,7 @@ const FilesRowContent = ({
           target="_blank"
           {...linkStyles}
           isTextOverflow={true}
+          dir="auto"
         >
           {titleWithoutExt}
         </Link>

@@ -59,19 +59,24 @@ const Header = (props) => {
     setChangePasswordVisible(true);
   };
 
+  const onChangeEmailClick = () => {
+    setDialogData(profile);
+    setChangeEmailVisible(true);
+  };
+
   const getUserContextOptions = () => {
     const options = [
       {
         key: "change-email",
         label: t("PeopleTranslations:EmailChangeButton"),
-        onClick: () => setChangeEmailVisible(true),
+        onClick: onChangeEmailClick,
         disabled: false,
         icon: EmailReactSvgUrl,
       },
       {
         key: "change-password",
         label: t("PeopleTranslations:PasswordChangeButton"),
-        onClick: () => onChangePasswordClick(),
+        onClick: onChangePasswordClick,
         disabled: false,
         icon: SecurityReactSvgUrl,
       },
@@ -185,13 +190,10 @@ export default inject(
 
     const { profileClicked } = profileActionsStore;
 
-    const {
-      setChangeEmailVisible,
-      setChangePasswordVisible,
-      setChangeAvatarVisible,
-    } = targetUserStore;
+    const { setChangePasswordVisible, setChangeAvatarVisible } =
+      targetUserStore;
 
-    const { setDialogData } = dialogStore;
+    const { setDialogData, setChangeEmailVisible } = dialogStore;
 
     return {
       isAdmin,

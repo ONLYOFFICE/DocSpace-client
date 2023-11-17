@@ -83,6 +83,11 @@ const MainProfile = (props) => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);
   };
 
+  const onChangeEmailClick = () => {
+    setDialogData(profile);
+    setChangeEmailVisible(true);
+  };
+
   const onChangePasswordClick = () => {
     const email = profile.email;
     setDialogData({ email });
@@ -257,7 +262,7 @@ const MainProfile = (props) => {
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}
                     size="12"
-                    onClick={() => setChangeEmailVisible(true)}
+                    onClick={onChangeEmailClick}
                   />
                 )}
               </div>
@@ -298,7 +303,7 @@ const MainProfile = (props) => {
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
-                manualWidth="250px"
+                manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation
@@ -379,7 +384,7 @@ const MainProfile = (props) => {
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size="12"
-              onClick={() => setChangeEmailVisible(true)}
+              onClick={onChangeEmailClick}
             />
           </div>
           <div className="mobile-profile-row">
@@ -454,14 +459,13 @@ export default inject(({ auth, peopleStore }) => {
 
   const {
     targetUser: profile,
-    setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
     changeAvatarVisible,
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
-  const { setDialogData } = peopleStore.dialogStore;
+  const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
 
   return {
     theme,

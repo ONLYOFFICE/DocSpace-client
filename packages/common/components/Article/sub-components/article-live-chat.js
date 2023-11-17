@@ -3,6 +3,16 @@ import Zendesk, { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+const baseConfig = {
+  webWidget: {
+    zIndex: 201,
+    chat: {
+      menuOptions: { emailTranscript: false },
+    },
+  },
+};
 
 const ArticleLiveChat = ({
   languageBaseName,
@@ -12,17 +22,22 @@ const ArticleLiveChat = ({
   withMainButton,
   isMobileArticle,
   zendeskKey,
+  showProgress,
 }) => {
   const { t, ready } = useTranslation("Common");
+  const { interfaceDirection } = useTheme();
   useEffect(() => {
     //console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     ZendeskAPI("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
           ? { horizontal: "68px", vertical: "11px" }
-          : { horizontal: "4px", vertical: "11px" },
+          : {
+              horizontal: showProgress ? "90px" : "4px",
+              vertical: "11px",
+            },
     });
-  }, [withMainButton, isMobileArticle]);
+  }, [withMainButton, isMobileArticle, showProgress]);
 
   useEffect(() => {
     //console.log("Zendesk useEffect", { languageBaseName });
@@ -64,6 +79,12 @@ const ArticleLiveChat = ({
     });
   }, [email, displayName]);
 
+  useEffect(() => {
+    ZendeskAPI("webWidget", "updateSettings", {
+      position: { horizontal: interfaceDirection === "ltr" ? "right" : "left" },
+    });
+  }, [interfaceDirection]);
+
   const onZendeskLoaded = () => {
     const isShowLiveChat =
       localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true" || false;
@@ -76,7 +97,7 @@ const ArticleLiveChat = ({
       defer
       zendeskKey={zendeskKey}
       onLoaded={onZendeskLoaded}
-      zIndex={201}
+      config={baseConfig}
     />
   ) : (
     <></>
@@ -85,12 +106,21 @@ const ArticleLiveChat = ({
 
 ArticleLiveChat.displayName = "LiveChat";
 
-export default inject(({ auth }) => {
+export default inject(({ auth, uploadDataStore }) => {
   const { settingsStore, languageBaseName, userStore } = auth;
   const { theme, zendeskKey, isMobileArticle } = settingsStore;
 
   const { user } = userStore;
   const { email, displayName } = user;
+  const { primaryProgressDataStore, secondaryProgressDataStore } =
+    uploadDataStore;
+
+  const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
+  const { visible: secondaryProgressDataStoreVisible } =
+    secondaryProgressDataStore;
+
+  const showProgress =
+    primaryProgressDataVisible || secondaryProgressDataStoreVisible;
 
   return {
     email,
@@ -99,5 +129,6 @@ export default inject(({ auth }) => {
     theme,
     zendeskKey,
     isMobileArticle,
+    showProgress,
   };
 })(observer(ArticleLiveChat));

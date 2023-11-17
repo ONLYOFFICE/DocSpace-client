@@ -67,7 +67,7 @@ const IntegrationWrapper = (props) => {
   if (enablePlugins) {
     const pluginLabel = (
       <Box displayProp="flex" style={{ gap: "8px" }}>
-        {t("WebPlugins:Plugins")}
+        {t("Common:Plugins")}
         <Box>
           <Badge
             label={t("Settings:BetaLabel")}

@@ -11,7 +11,7 @@ import Filter from "@docspace/common/api/people/filter";
 import { getUserList } from "@docspace/common/api/people";
 import Loaders from "@docspace/common/components/Loaders";
 import { EmployeeStatus } from "@docspace/common/constants";
-import { useLoadingWithTimeout } from "@docspace/common/hooks";
+import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 

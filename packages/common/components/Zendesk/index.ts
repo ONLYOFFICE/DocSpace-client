@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-let waitingChanges: array<string[]>[] = [];
+let waitingChanges: string[][] = [];
 
 const canUseDOM = (): boolean =>
   typeof window?.document?.createElement !== "undefined";
@@ -18,10 +18,10 @@ interface Props {
   zendeskKey: string;
   defer?: boolean;
   onLoaded?: () => void;
-  other?: any;
+  config?: any;
 }
 
-const Zendesk = ({ zendeskKey, defer, onLoaded, ...other }: Props) => {
+const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
   const onScriptLoaded = () => {
     if (waitingChanges.length > 0) {
       waitingChanges.forEach((v) => ZendeskAPI(...v));
@@ -49,7 +49,8 @@ const Zendesk = ({ zendeskKey, defer, onLoaded, ...other }: Props) => {
   useEffect(() => {
     if (canUseDOM() && !window?.zE) {
       insertScript(zendeskKey, defer);
-      window.zESettings = other;
+
+      window.zESettings = { ...(config || {}) };
     }
 
     return () => {

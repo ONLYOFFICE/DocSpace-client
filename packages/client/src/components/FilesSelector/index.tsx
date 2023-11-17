@@ -96,11 +96,14 @@ const FilesSelector = ({
   socketHelper,
   socketSubscribers,
   setMoveToPublicRoomVisible,
+  setBackupToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
   currentDeviceType,
 
   embedded,
   withHeader,
+  getIcon,
+  isRoomBackup,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -140,6 +143,7 @@ const FilesSelector = ({
     setTotal,
     disabledItems,
     filterParam,
+    getIcon,
   });
 
   const {
@@ -199,6 +203,7 @@ const FilesSelector = ({
     isRoomsOnly,
     rootThirdPartyId,
     getRoomList,
+    getIcon,
     t,
   });
 
@@ -434,6 +439,16 @@ const FilesSelector = ({
         toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
+      if (isRoomBackup && isPublic) {
+        setBackupToPublicRoomVisible(true, {
+          selectedItemId,
+          breadCrumbs,
+          onSelectFolder,
+          onClose,
+        });
+
+        return;
+      }
       //setIsRequestRunning(true);
       //onSetNewFolderPath && onSetNewFolderPath(breadCrumbs);
       onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
@@ -628,6 +643,7 @@ export default inject(
       isFolderActions,
       setIsFolderActions,
       setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
     } = dialogsStore;
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
@@ -643,8 +659,9 @@ export default inject(
       filesList,
       setMovingInProgress,
       setSelected,
+      filesSettingsStore,
     } = filesStore;
-
+    const { getIcon } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
       auth.infoPanelStore;
 
@@ -712,7 +729,9 @@ export default inject(
       socketHelper,
       socketSubscribers: socketSubscribesId,
       setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
       currentDeviceType,
+      getIcon,
     };
   }
 )(observer(FilesSelector));

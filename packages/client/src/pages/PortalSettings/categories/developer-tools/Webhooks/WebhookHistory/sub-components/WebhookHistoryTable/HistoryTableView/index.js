@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -9,7 +9,7 @@ import TableContainer from "@docspace/components/table-container/TableContainer"
 
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 const TableWrapper = styled(TableContainer)`
   margin-top: -2px;

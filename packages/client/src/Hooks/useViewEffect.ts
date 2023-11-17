@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 
-import { DeviceType } from "../constants";
+import { DeviceType } from "@docspace/common/constants";
 //@ts-ignore
 import { Context } from "@docspace/components/utils/context";
 import { isTablet, isMobile } from "@docspace/components/utils/device";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
 
@@ -18,11 +19,11 @@ type ContextType = {
   sectionHeight: number;
 };
 
-export function useViewEffect({
+const useViewEffect = ({
   view,
   setView,
   currentDeviceType,
-}: useViewEffectProps) {
+}: useViewEffectProps) => {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   useEffect(() => {
@@ -32,12 +33,14 @@ export function useViewEffect({
     if ((isNotTableView && isNotRowView) || !sectionWidth) return;
 
     if (
-      (isTablet() || isMobile()) &&
-      currentDeviceType !== DeviceType.desktop
+      isMobileDevice ||
+      ((isTablet() || isMobile()) && currentDeviceType !== DeviceType.desktop)
     ) {
       isNotRowView && setView("row");
     } else {
       isNotTableView && setView("table");
     }
   }, [sectionWidth, currentDeviceType]);
-}
+};
+
+export default useViewEffect;

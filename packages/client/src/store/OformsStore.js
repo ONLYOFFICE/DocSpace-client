@@ -24,6 +24,7 @@ class OformsStore {
   oformFiles = null;
   gallerySelected = null;
   oformsIsLoading = false;
+  oformsLoadError = false;
 
   oformsFilter = OformsFilter.getDefault();
 
@@ -75,16 +76,20 @@ class OformsStore {
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
-    const fetchedLocales = await getOformLocales(url).catch((err) =>
-      toastr.error(err.message)
-    );
-    const localeKeys = fetchedLocales.map((locale) =>
-      convertToLanguage(locale.code)
-    );
-    this.setOformLocales(localeKeys);
+    try {
+      const fetchedLocales = await getOformLocales(url);
+      const localeKeys = fetchedLocales.map((locale) =>
+        convertToLanguage(locale.code)
+      );
+      this.setOformLocales(localeKeys);
+    } catch (err) {
+      this.setOformLocales([]);
+
+      err?.message !== "Network Error" && toastr.error(err);
+    }
   };
 
-  getOforms = (filter = OformsFilter.getDefault()) => {
+  getOforms = async (filter = OformsFilter.getDefault()) => {
     const { domain, path } = this.authStore.settingsStore.formGallery;
 
     const formName = "&fields[0]=name_form";
@@ -99,11 +104,24 @@ class OformsStore {
     const fields = `${formName}${updatedAt}${size}${filePages}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
-    return new Promise(async (resolve) => {
-      const apiUrl = combineUrl(domain, path, params);
-      let oforms = await getOforms(apiUrl);
-      resolve(oforms);
-    });
+    const apiUrl = combineUrl(domain, path, params);
+
+    try {
+      const oforms = await getOforms(apiUrl);
+      this.oformsLoadError = false;
+      return oforms;
+    } catch (err) {
+      const status = err?.response?.status;
+      const isApiError = status === 404 || status === 500;
+      //console.log({ err, isApiError });
+      if (isApiError) {
+        this.oformsLoadError = true;
+      } else {
+        toastr.error(err);
+      }
+    }
+
+    return null;
   };
 
   fetchOforms = async (filter = OformsFilter.getDefault()) => {
@@ -202,14 +220,17 @@ class OformsStore {
     const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
 
-    const menuItems = await getCategoryTypes(url, locale).catch((err) =>
-      toastr.error(err.message)
-    );
-    this.categoryTitles = menuItems.map(
-      (item) => item.attributes.categoryTitle
-    );
+    try {
+      const menuItems = await getCategoryTypes(url, locale);
+      this.categoryTitles = menuItems.map(
+        (item) => item.attributes.categoryTitle
+      );
+      return menuItems;
+    } catch (err) {
+      err?.message !== "Network Error" && toastr.error(err);
+    }
 
-    return menuItems;
+    return null;
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {

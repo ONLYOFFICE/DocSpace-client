@@ -71,7 +71,7 @@ const IntegrationWrapper = (props) => {
         <Box>
           <Badge
             label={t("Settings:BetaLabel")}
-            backgroundColor="#7763F0"
+            backgroundColor="#533ED1"
             fontSize="9px"
             borderRadius="50px"
             noHover={true}

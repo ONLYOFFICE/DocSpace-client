@@ -19,6 +19,8 @@ import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
+import PluginSDK from "./PluginSDK";
+import Badge from "@docspace/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -36,12 +38,29 @@ const DeveloperToolsWrapper = (props) => {
     "JavascriptSdk",
     "Webhooks",
     "Settings",
+    "WebPlugins",
   ]);
   const [isPending, startTransition] = useTransition();
 
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("JavascriptSdk")}
+    </Box>
+  );
+
+  const pluginLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("WebPlugins:PluginSDK")}
+      <Box>
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
     </Box>
   );
 
@@ -55,6 +74,11 @@ const DeveloperToolsWrapper = (props) => {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
+    },
+    {
+      id: "plugin-sdk",
+      name: pluginLabel,
+      content: <PluginSDK />,
     },
     {
       id: "webhooks",

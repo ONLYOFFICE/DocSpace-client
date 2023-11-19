@@ -6,6 +6,11 @@ import { FolderType } from "@docspace/common/constants";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";
 import { getRoomInfo } from "../api/rooms";
+import {
+  getPrimaryLink,
+  getExternalLinks,
+  editExternalLink,
+} from "../api/files";
 
 const observedKeys = [
   "id",
@@ -350,6 +355,28 @@ class InfoPanelStore {
   openShareTab = () => {
     this.setView("info_share");
     this.isVisible = true;
+  };
+
+  getPrimaryFileLink = async (fileId) => {
+    const res = await getPrimaryLink(fileId);
+    return res;
+  };
+
+  getAdditionalFileLinks = async (fileId) => {
+    const res = await getExternalLinks(fileId);
+    return res;
+  };
+
+  editFileLink = async (fileId, linkId, access, primary, internal) => {
+    const res = await editExternalLink(
+      fileId,
+      linkId,
+      access,
+      primary,
+      internal
+    );
+    console.log(res);
+    return res;
   };
 }
 

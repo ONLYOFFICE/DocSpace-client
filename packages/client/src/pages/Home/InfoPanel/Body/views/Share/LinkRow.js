@@ -9,25 +9,30 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
+import copy from "copy-to-clipboard";
 
 import Avatar from "@docspace/components/avatar";
 import Link from "@docspace/components/link";
 import ComboBox from "@docspace/components/combobox";
 import IconButton from "@docspace/components/icon-button";
+import toastr from "@docspace/components/toast/toastr";
 
 import { StyledLinkRow } from "./StyledShare";
 
-const LinkRow = ({ onAddClick, links }) => {
-  const { t } = useTranslation(["SharingPanel"]);
+const LinkRow = ({ onAddClick, links, fileId, editFileLink }) => {
+  const { t } = useTranslation(["SharingPanel", "Files"]);
 
   const shareOptions = [
     {
+      internal: false,
       key: "anyone",
       label: t("AnyoneWithLink"),
     },
     {
+      internal: true,
       key: "users",
       label: t("DoсSpaceUsersOnly"),
     },
@@ -35,26 +40,31 @@ const LinkRow = ({ onAddClick, links }) => {
 
   const accessOptions = [
     {
+      access: 10,
       key: "editing",
       label: "Editing",
       icon: AccessEditReactSvgUrl,
     },
     {
+      access: 8,
       key: "custom-filter",
       label: "Custom filter",
       icon: CustomFilterReactSvgUrl,
     },
     {
+      access: 6,
       key: "commenting",
       label: "Commenting",
       icon: AccessCommentReactSvgUrl,
     },
     {
+      access: 2,
       key: "viewing",
       label: "Viewing",
       icon: EyeReactSvgUrl,
     },
     {
+      access: 3,
       key: "deny-access",
       label: "Deny access",
       icon: EyeOffReactSvgUrl,
@@ -64,13 +74,37 @@ const LinkRow = ({ onAddClick, links }) => {
       isSeparator: true,
     },
     {
+      access: 0,
       key: "remove",
       label: "Remove",
       icon: RemoveReactSvgUrl,
     },
   ];
 
-  const onCopyLink = () => {};
+  const onCopyLink = (link) => {
+    copy(link.sharedTo.shareLink);
+    toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+  };
+
+  const changeShareOption = async (item, link) => {
+    await editFileLink(
+      fileId,
+      link.sharedTo.id,
+      link.access,
+      link.sharedTo.primary,
+      item.internal
+    );
+  };
+
+  const changeAccessOption = async (item, link) => {
+    await editFileLink(
+      fileId,
+      link.sharedTo.id,
+      item.access,
+      link.sharedTo.primary,
+      link.internal
+    );
+  };
 
   return (
     <>
@@ -89,7 +123,11 @@ const LinkRow = ({ onAddClick, links }) => {
       ) : (
         links.map((link, index) => {
           const selected = shareOptions.find(
-            (option) => option.key === link.type
+            (option) => option.internal === link.sharedTo.internal
+          );
+
+          const access = accessOptions.find(
+            (option) => option.access === link.access
           );
 
           return (
@@ -102,7 +140,7 @@ const LinkRow = ({ onAddClick, links }) => {
                 directionY={"both"}
                 options={shareOptions}
                 selectedOption={selected}
-                //onSelect={onSelect}
+                onSelect={(item) => changeShareOption(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems={true}
@@ -116,14 +154,14 @@ const LinkRow = ({ onAddClick, links }) => {
                 <IconButton
                   size={16}
                   iconName={CopyIcon}
-                  onClick={onCopyLink}
+                  onClick={() => onCopyLink(link)}
                   title={t("CreateAndCopy")}
                 />
                 <ComboBox
                   directionY={"both"}
                   options={accessOptions}
-                  selectedOption={accessOptions[0]}
-                  //onSelect={onSelect}
+                  selectedOption={access}
+                  onSelect={(item) => changeAccessOption(item, link)}
                   scaled={false}
                   scaledOptions={false}
                   showDisabledItems={true}
@@ -143,4 +181,10 @@ const LinkRow = ({ onAddClick, links }) => {
   );
 };
 
-export default LinkRow;
+export default inject(({ auth }) => {
+  const { editFileLink } = auth.infoPanelStore;
+
+  return {
+    editFileLink,
+  };
+})(observer(LinkRow));

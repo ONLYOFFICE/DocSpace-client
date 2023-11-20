@@ -309,9 +309,9 @@ class SettingsStore {
   getIconByFolderType = (folderType, size = 32) => {
     switch (folderType) {
       case FolderType.Done:
-        return this.getIconBySize(size, "folderDone.svg");
+        return this.getIconBySize(size, "done.svg");
       case FolderType.InProgress:
-        return this.getIconBySize(size, "folderInProgress.svg");
+        return this.getIconBySize(size, "inProgress.svg");
       default:
         return this.getIconBySize(size, "folder.svg");
     }

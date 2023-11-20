@@ -1123,9 +1123,7 @@
   }
   </style>`;
 
-    const version = browserInfo.version;
-
-    const title = `You are using an old version of the app ${version}. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
+    const title = `You are using an old version of the app. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
     const header = `Can’t connect to ${window.location.host}`;
 
     const body = ` 
@@ -1189,7 +1187,7 @@
 `;
 
     document.head.innerHTML += styles;
-    document.title = `You are using an old version of the app ${version}. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
+    document.title = `You are using an old version of the app. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
     document.body.innerHTML = body;
 
     return;

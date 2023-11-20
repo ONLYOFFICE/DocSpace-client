@@ -12,7 +12,7 @@ import {
   Caret,
 } from "./styled-link-with-dropdown";
 import { isMobileOnly } from "react-device-detect";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "../scrollbar";
 import { ReactSVG } from "react-svg";
 import { classNames } from "../utils/classNames";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
@@ -110,8 +110,8 @@ class LinkWithDropdown extends React.Component {
       ...rest
     } = this.props;
 
-    const showScroll =
-      hasScroll && isMobileOnly && this.state.orientation === 90;
+    const showScroll = hasScroll && isMobileOnly;
+    const scrollHeight = this.state.orientation === 90 ? 100 : 250;
 
     const dropDownItem = data.map((item) => (
       <DropDownItem
@@ -183,7 +183,7 @@ class LinkWithDropdown extends React.Component {
             <Scrollbar
               className="scroll-drop-down-item"
               style={{
-                height: 108,
+                height: scrollHeight,
               }}
             >
               {dropDownItem}

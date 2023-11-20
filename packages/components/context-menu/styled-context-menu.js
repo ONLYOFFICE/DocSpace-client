@@ -159,7 +159,10 @@ const StyledContextMenu = styled.div`
 
     .text {
       width: 100%;
-      font-size: ${(props) => props.theme.menuItem.text.header.fontSize};
+      font-size: ${(props) =>
+        props.theme.getCorrectFontSize(
+          props.theme.menuItem.text.header.fontSize
+        )};
       font-weight: 600;
       ${(props) =>
         props.isIconExist &&
@@ -228,7 +231,8 @@ const StyledContextMenu = styled.div`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
-    font-size: ${(props) => props.theme.dropDownItem.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.dropDownItem.fontSize)};
     color: ${(props) => props.theme.dropDownItem.color};
     text-transform: none;
 

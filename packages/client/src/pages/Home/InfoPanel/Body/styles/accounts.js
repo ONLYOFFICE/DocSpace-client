@@ -73,13 +73,13 @@ const StyledAccountsItemTitle = styled.div`
 
     .info-text__name {
       font-weight: 700;
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
     }
 
     .info-text__email {
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       line-height: 20px;
       color: ${(props) => props.theme.text.disableColor};
       user-select: text;
@@ -121,7 +121,7 @@ const StyledAccountContent = styled.div`
 
     .header__text {
       font-weight: 600;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       line-height: 16px;
     }
   }

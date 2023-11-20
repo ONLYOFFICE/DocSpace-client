@@ -134,6 +134,10 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            "table-container_quick-buttons-wrapper"
+          )}
         >
           <StyledQuickButtonsContainer>
             {quickButtonsComponent}

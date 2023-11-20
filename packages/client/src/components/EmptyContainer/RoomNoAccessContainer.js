@@ -78,7 +78,6 @@ const RoomNoAccessContainer = (props) => {
     <EmptyContainer
       isEmptyPage={isEmptyPage}
       sectionWidth={sectionWidth}
-      imageStyle={{ marginRight: "20px" }}
       className="empty-folder_room-not-found"
       {...propsRoomNotFoundOrMoved}
     />

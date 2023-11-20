@@ -39,6 +39,11 @@ const SsoComboBox = (props) => {
           selectedOption={currentOption}
           showDisabledItems
           tabIndex={tabIndex}
+          size="content"
+          dropDownMaxHeight={364}
+          manualWidth="100%"
+          directionY="both"
+          textOverflow={true}
         />
       </StyledInputWrapper>
     </FieldContainer>

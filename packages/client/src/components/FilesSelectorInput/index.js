@@ -28,6 +28,8 @@ const FilesSelectorInput = (props) => {
     filterParam,
     descriptionText,
     className,
+    isSelect,
+    isRoomBackup,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -86,6 +88,7 @@ const FilesSelectorInput = (props) => {
       />
 
       <FilesSelector
+        isRoomBackup={isRoomBackup}
         descriptionText={descriptionText}
         filterParam={filterParam}
         rootThirdPartyId={rootThirdPartyId}
@@ -94,6 +97,7 @@ const FilesSelectorInput = (props) => {
         id={id}
         onClose={onClose}
         isPanelVisible={isPanelVisible}
+        isSelect={isSelect}
         {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
       />
     </StyledBodyWrapper>

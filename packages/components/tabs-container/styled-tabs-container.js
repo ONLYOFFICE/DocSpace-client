@@ -26,9 +26,9 @@ const Label = styled.div`
   .title_style {
     text-align: center;
     margin: ${(props) => props.theme.tabsContainer.label.title.margin};
-    overflow: ${(props) => props.theme.tabsContainer.label.title.overflow};
-
-    ${NoUserSelect}
+    overflow: ${(props) =>
+      props.theme.interfaceDirection === "rtl" ? "visible" : "hidden"};
+    ${NoUserSelect};
   }
 
   ${(props) =>

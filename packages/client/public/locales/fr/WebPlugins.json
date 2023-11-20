@@ -7,7 +7,6 @@
   "NeedSettings": "Il est nécessaire de saisir les paramètres",
   "NoPlugins": "Aucun module complémentaire n'a été ajouté",
   "NotNeedSettings": "Il n'est pas nécessaire de saisir les paramètres",
-  "Plugins": "Modules complémentaires",
   "PluginsHelp": "Les modules complémentaires vous permettent d'étendre les fonctionnalités de DocSpace",
   "UploadPlugin": "Charger le module complémentaire"
 }

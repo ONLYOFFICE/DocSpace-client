@@ -10,7 +10,7 @@ import DropDownItem from "@docspace/components/drop-down-item";
 
 import { Base } from "@docspace/components/themes";
 import { mobile, tablet } from "@docspace/components/utils/device";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 import Portal from "@docspace/components/portal";
 
 const StyledWrapper = styled.div``;
@@ -70,10 +70,10 @@ const StyledControlContainer = styled.div`
 StyledControlContainer.defaultProps = { theme: Base };
 
 const StyledCrossIcon = styled(CrossIcon)`
-  width: 12px;
-  height: 12px;
+  width: 17px;
+  height: 17px;
   path {
-    fill: ${(props) => props.theme.catalog.control.fill};
+    stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 
@@ -133,7 +133,7 @@ export const MenuContainer = styled.div`
 MenuContainer.defaultProps = { theme: Base };
 
 export const MainLabelContainer = styled.div`
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   line-height: 28px;
 
   width: auto;
@@ -149,7 +149,7 @@ MainLabelContainer.defaultProps = { theme: Base };
 
 export const LabelContainer = styled.div`
   font-weight: normal;
-  font-size: 11px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
   line-height: 16px;
 
   ${commonStyle}

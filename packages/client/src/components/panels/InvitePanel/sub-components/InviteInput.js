@@ -1,22 +1,23 @@
-import { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
+import { useState, useCallback, useEffect, useRef } from "react";
+
 import Avatar from "@docspace/components/avatar";
 import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import DropDownItem from "@docspace/components/drop-down-item";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
 import { parseAddresses } from "@docspace/components/utils/email";
-
-import { withTranslation } from "react-i18next";
-
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import ComboBox from "@docspace/components/combobox";
 
-import { AddUsersPanel } from "../../index";
-import { getAccessOptions } from "../utils";
+import Filter from "@docspace/common/api/people/filter";
+import { getMembersList } from "@docspace/common/api/people";
+import { ShareAccessRights } from "@docspace/common/constants";
+import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
+import AddUsersPanel from "../../AddUsersPanel";
+import { getAccessOptions } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -30,9 +31,6 @@ import {
   StyledInviteLanguage,
   ResetLink,
 } from "../StyledInvitePanel";
-
-import Filter from "@docspace/common/api/people/filter";
-import { getMembersList } from "@docspace/common/api/people";
 
 const searchUsersThreshold = 2;
 
@@ -190,10 +188,11 @@ const InviteInput = ({
         onClick={addUser}
         disabled={shared}
         height={48}
+        heightTablet={48}
         className="list-item"
       >
         <Avatar size="min" role="user" source={avatar} />
-        <div>
+        <div className="list-item_content">
           <SearchItemText primary disabled={shared}>
             {displayName}
           </SearchItemText>
@@ -245,16 +244,14 @@ const InviteInput = ({
   };
 
   const closeInviteInputPanel = (e) => {
-    if (e?.target.tagName.toUpperCase() === "INPUT") return;
+    if (e?.target?.tagName?.toUpperCase() === "INPUT") return;
 
     setSearchPanelVisible(false);
   };
 
   const foundUsers = usersList.map((user) => getItemContent(user));
 
-  const addEmailPanel = isAddEmailPanelBlocked ? (
-    <></>
-  ) : (
+  const addEmailPanel = (
     <DropDownItem
       className="add-item"
       style={{ width: "inherit" }}
@@ -344,8 +341,10 @@ const InviteInput = ({
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
+            textOverflow
             scaledOptions={false}
             size="content"
+            manualWidth="280px"
             showDisabledItems={true}
             dropDownMaxHeight={364}
             withBlur={isMobileView}
@@ -399,7 +398,11 @@ const InviteInput = ({
           <StyledDropDown
             width={searchRef?.current?.offsetWidth}
             isDefaultMode={false}
-            open={searchPanelVisible}
+            open={
+              !!usersList.length
+                ? searchPanelVisible
+                : searchPanelVisible && !isAddEmailPanelBlocked
+            }
             manualX="16px"
             showDisabledItems
             clickOutsideAction={closeInviteInputPanel}

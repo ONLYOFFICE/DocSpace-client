@@ -23,7 +23,12 @@ import { Trans } from "react-i18next";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
-import { StyledWrapper, StyledInfo, StyledLabel, StyledAvatarWrapper } from "./styled-main-profile";
+import {
+  StyledWrapper,
+  StyledInfo,
+  StyledLabel,
+  StyledAvatarWrapper,
+} from "./styled-main-profile";
 import { HelpButton, Tooltip } from "@docspace/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isMobile } from "@docspace/components/utils/device";
@@ -78,23 +83,31 @@ const MainProfile = (props) => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);
   };
 
+  const onChangeEmailClick = () => {
+    setDialogData(profile);
+    setChangeEmailVisible(true);
+  };
+
   const onChangePasswordClick = () => {
     const email = profile.email;
     setDialogData({ email });
     setChangePasswordVisible(true);
   };
 
-  const userAvatar = profile.hasAvatar ? profile.avatarMax : DefaultUserAvatarMax;
+  const userAvatar = profile.hasAvatar
+    ? profile.avatarMax
+    : DefaultUserAvatarMax;
 
   const tooltipLanguage = (
     <Text as="div" fontSize="12px" color="#333333">
       <Trans t={t} i18nKey="NotFoundLanguage" ns="Common">
-        "In case you cannot find your language in the list of the available ones, feel free to write
-        to us at
+        "In case you cannot find your language in the list of the available
+        ones, feel free to write to us at
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}>
+          color={currentColorScheme?.main?.accent}
+        >
           {{ supportEmail: documentationEmail }}
         </Link>
         to take part in the translation and get up to 1 year free of charge."
@@ -106,7 +119,8 @@ const MainProfile = (props) => {
           color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
-          target="_blank">
+          target="_blank"
+        >
           {t("Common:LearnMore")}
         </Link>
       </Box>
@@ -161,7 +175,10 @@ const MainProfile = (props) => {
           </div>
         )}
       </StyledAvatarWrapper>
-      <StyledInfo withActivationBar={withActivationBar} currentColorScheme={currentColorScheme}>
+      <StyledInfo
+        withActivationBar={withActivationBar}
+        currentColorScheme={currentColorScheme}
+      >
         <div className="rows-container">
           <div className="profile-block">
             <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
@@ -170,11 +187,18 @@ const MainProfile = (props) => {
               {t("Common:Email")}
             </StyledLabel>
 
-            <StyledLabel as="div" marginTopProp={withActivationBar ? "34px" : "16px"}>
+            <StyledLabel
+              as="div"
+              marginTopProp={withActivationBar ? "34px" : "16px"}
+            >
               {t("Common:Password")}
             </StyledLabel>
 
-            <StyledLabel as="div" className="profile-language" marginTopProp="15px">
+            <StyledLabel
+              as="div"
+              className="profile-language"
+              marginTopProp="15px"
+            >
               {t("Common:Language")}
               <HelpButton
                 size={12}
@@ -219,14 +243,17 @@ const MainProfile = (props) => {
                   data-tooltip-content={t("EmailNotVerified")}
                   as="div"
                   className="email-text-container"
-                  fontWeight={600}>
+                  fontWeight={600}
+                >
                   {profile.email}
                 </Text>
                 {withActivationBar && (
                   <Tooltip
                     float
                     id="emailTooltip"
-                    getContent={({ content }) => <Text fontSize="12px">{content}</Text>}
+                    getContent={({ content }) => (
+                      <Text fontSize="12px">{content}</Text>
+                    )}
                     place="bottom"
                   />
                 )}
@@ -235,13 +262,19 @@ const MainProfile = (props) => {
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}
                     size="12"
-                    onClick={() => setChangeEmailVisible(true)}
+                    onClick={onChangeEmailClick}
                   />
                 )}
               </div>
               {withActivationBar && (
-                <div className="send-again-container" onClick={sendActivationLinkAction}>
-                  <ReactSVG className="send-again-icon" src={SendClockReactSvgUrl} />
+                <div
+                  className="send-again-container"
+                  onClick={sendActivationLinkAction}
+                >
+                  <ReactSVG
+                    className="send-again-icon"
+                    src={SendClockReactSvgUrl}
+                  />
                   <Text className="send-again-text" fontWeight={600} noSelect>
                     {t("SendAgain")}
                   </Text>
@@ -270,9 +303,11 @@ const MainProfile = (props) => {
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
-                manualWidth="250px"
+                manualWidth="280px"
                 isDefaultMode={
-                  isMobileHorizontalOrientation ? isMobileHorizontalOrientation : !isMobile()
+                  isMobileHorizontalOrientation
+                    ? isMobileHorizontalOrientation
+                    : !isMobile()
                 }
                 withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
@@ -287,7 +322,11 @@ const MainProfile = (props) => {
               <Text className="mobile-profile-label" as="div">
                 {t("Common:Name")}
               </Text>
-              <Text className="mobile-profile-label-field" fontWeight={600} truncate>
+              <Text
+                className="mobile-profile-label-field"
+                fontWeight={600}
+                truncate
+              >
                 {profile.displayName}
               </Text>
             </div>
@@ -310,7 +349,8 @@ const MainProfile = (props) => {
                     data-tooltip-content={t("EmailNotVerified")}
                     as="div"
                     className="email-text-container"
-                    fontWeight={600}>
+                    fontWeight={600}
+                  >
                     {profile.email}
                   </Text>
                 </div>
@@ -318,14 +358,22 @@ const MainProfile = (props) => {
                   <Tooltip
                     float
                     id="emailTooltip"
-                    getContent={({ content }) => <Text fontSize="12px">{content}</Text>}
+                    getContent={({ content }) => (
+                      <Text fontSize="12px">{content}</Text>
+                    )}
                     place="bottom"
                   />
                 )}
               </div>
               {withActivationBar && (
-                <div className="send-again-container" onClick={sendActivationLinkAction}>
-                  <ReactSVG className="send-again-icon" src={SendClockReactSvgUrl} />
+                <div
+                  className="send-again-container"
+                  onClick={sendActivationLinkAction}
+                >
+                  <ReactSVG
+                    className="send-again-icon"
+                    src={SendClockReactSvgUrl}
+                  />
                   <Text className="send-again-text" fontWeight={600} noSelect>
                     {t("SendAgain")}
                   </Text>
@@ -336,7 +384,7 @@ const MainProfile = (props) => {
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size="12"
-              onClick={() => setChangeEmailVisible(true)}
+              onClick={onChangeEmailClick}
             />
           </div>
           <div className="mobile-profile-row">
@@ -380,7 +428,9 @@ const MainProfile = (props) => {
               dropDownMaxHeight={364}
               manualWidth="250px"
               isDefaultMode={
-                isMobileHorizontalOrientation ? isMobileHorizontalOrientation : !isMobile()
+                isMobileHorizontalOrientation
+                  ? isMobileHorizontalOrientation
+                  : !isMobile()
               }
               withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
@@ -404,18 +454,18 @@ const MainProfile = (props) => {
 
 export default inject(({ auth, peopleStore }) => {
   const { withActivationBar, sendActivationLink } = auth.userStore;
-  const { theme, helpLink, culture, currentColorScheme, documentationEmail } = auth.settingsStore;
+  const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
+    auth.settingsStore;
 
   const {
     targetUser: profile,
-    setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
     changeAvatarVisible,
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
-  const { setDialogData } = peopleStore.dialogStore;
+  const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
 
   return {
     theme,

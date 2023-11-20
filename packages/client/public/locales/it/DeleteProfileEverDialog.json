@@ -1,5 +1,4 @@
 {
-  "DeleteGroupUsersSuccessMessage": "Gli utenti sono stati eliminati con successo.",
   "DeleteMyDocumentsUser": "Tutti i file e le cartelle personali nella sezione I miei documenti di questo utente verranno eliminati definitivamente.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Le stanze create da questo utente e i documenti archiviati in queste stanze verranno riassegnati automaticamente a un amministratore che esegue l'eliminazione: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Riassegna manualmente i dati per scegliere un altro utente per la riassegnazione.",
   "DeleteUser": "Elimina utente",

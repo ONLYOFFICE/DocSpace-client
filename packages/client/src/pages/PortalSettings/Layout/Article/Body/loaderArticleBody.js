@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import { isDesktop, desktop } from "@docspace/components/utils/device";
 
@@ -63,13 +63,13 @@ const LoaderArticleBody = () => {
 
   return (
     <StyledLoader>
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
     </StyledLoader>
   );
 };

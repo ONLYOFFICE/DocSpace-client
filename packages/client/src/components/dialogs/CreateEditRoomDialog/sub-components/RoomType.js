@@ -41,19 +41,19 @@ const StyledRoomType = styled.div`
       align-items: center;
       .choose_room-title-text {
         font-weight: 600;
-        font-size: 14px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
         line-height: 16px;
       }
     }
     .choose_room-description {
       font-weight: 400;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
     }
   }
 
   .choose_room-forward_btn {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: auto;
@@ -70,53 +70,53 @@ const StyledRoomType = styled.div`
 `;
 
 const StyledListItem = styled(StyledRoomType)`
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.listItem.background};
   border: 1px solid
-    ${props => props.theme.createEditRoomDialog.roomType.listItem.borderColor};
+    ${(props) => props.theme.createEditRoomDialog.roomType.listItem.borderColor};
   border-radius: 6px;
 
   .choose_room-description {
-    color: ${props =>
+    color: ${(props) =>
       props.theme.createEditRoomDialog.roomType.listItem.descriptionText};
   }
 `;
 
 const StyledDropdownButton = styled(StyledRoomType)`
   border-radius: 6px;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.dropdownButton.background};
   border: 1px solid
-    ${props =>
+    ${(props) =>
       props.isOpen
         ? props.theme.createEditRoomDialog.roomType.dropdownButton
             .isOpenBorderColor
         : props.theme.createEditRoomDialog.roomType.dropdownButton.borderColor};
 
   .choose_room-description {
-    color: ${props =>
+    color: ${(props) =>
       props.theme.createEditRoomDialog.roomType.dropdownButton.descriptionText};
   }
 
   .choose_room-forward_btn {
     &.dropdown-button {
-      transform: ${props =>
+      transform: ${(props) =>
         props.isOpen ? "rotate(-90deg)" : "rotate(90deg)"};
     }
   }
 `;
 
 const StyledDropdownItem = styled(StyledRoomType)`
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.dropdownItem.background};
 
   &:hover {
-    background-color: ${props =>
+    background-color: ${(props) =>
       props.theme.createEditRoomDialog.roomType.dropdownItem.hoverBackground};
   }
 
   .choose_room-description {
-    color: ${props =>
+    color: ${(props) =>
       props.theme.createEditRoomDialog.roomType.dropdownItem.descriptionText};
   }
 
@@ -127,15 +127,15 @@ const StyledDropdownItem = styled(StyledRoomType)`
 
 const StyledDisplayItem = styled(StyledRoomType)`
   cursor: default;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.displayItem.background};
   border: 1px solid
-    ${props =>
+    ${(props) =>
       props.theme.createEditRoomDialog.roomType.displayItem.borderColor};
   border-radius: 6px;
 
   .choose_room-description {
-    color: ${props =>
+    color: ${(props) =>
       props.theme.createEditRoomDialog.roomType.displayItem.descriptionText};
   }
 
@@ -202,7 +202,8 @@ const RoomType = ({
       title={t(room.title)}
       onClick={onClick}
       isOpen={isOpen}
-      data-selected-id={selectedId}>
+      data-selected-id={selectedId}
+    >
       {content}
     </StyledDropdownButton>
   ) : type === "dropdownItem" ? (
@@ -211,14 +212,16 @@ const RoomType = ({
       title={t(room.title)}
       onClick={onClick}
       isOpen={isOpen}
-      data-selected-id={selectedId}>
+      data-selected-id={selectedId}
+    >
       {content}
     </StyledDropdownItem>
   ) : (
     <StyledDisplayItem
       id={id}
       title={t(room.title)}
-      data-selected-id={selectedId}>
+      data-selected-id={selectedId}
+    >
       {content}
     </StyledDisplayItem>
   );

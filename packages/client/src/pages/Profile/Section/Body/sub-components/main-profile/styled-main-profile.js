@@ -83,6 +83,7 @@ export const StyledInfo = styled.div`
     .profile-block {
       display: flex;
       flex-direction: column;
+      overflow: hidden;
 
       .profile-block-field {
         display: flex;
@@ -123,19 +124,6 @@ export const StyledInfo = styled.div`
         @media ${tablet} {
           height: 36px;
           margin-top: 7px;
-        }
-
-        .language-combo-box {
-          .combo-button {
-            ${(props) =>
-              props.theme.interfaceDirection === "rtl"
-                ? css`
-                    margin-right: -16px;
-                  `
-                : css`
-                    margin-left: -16px;
-                  `}
-          }
         }
       }
     }
@@ -275,7 +263,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label {
           min-width: 100%;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
           white-space: nowrap;
           color: rgb(163, 169, 174);
@@ -284,7 +273,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label-field {
           padding-left: 0px;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px;
         }
 
@@ -314,7 +304,8 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-password {
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
         }
       }

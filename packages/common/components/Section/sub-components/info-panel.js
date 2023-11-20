@@ -4,9 +4,10 @@ import {
   mobile,
   infoPanelWidth,
 } from "@docspace/components/utils/device";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
@@ -142,6 +143,8 @@ const InfoPanel = ({
   viewAs,
   currentDeviceType,
 }) => {
+  const infoPanelRef = useRef(null);
+
   const closeInfoPanel = () => setIsVisible(false);
 
   useEffect(() => {
@@ -160,11 +163,27 @@ const InfoPanel = ({
     return () => document.removeEventListener("mousedown", onMouseDown);
   }, []);
 
+  useEffect(() => {
+    if (isMobileOnly && isIOS) {
+      window.visualViewport.addEventListener("resize", onResize);
+    }
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = useCallback((e) => {
+    if (infoPanelRef?.current)
+      infoPanelRef.current.style.height = `${e.target.height}px`;
+  }, []);
+
   const infoPanelComponent = (
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
       id="InfoPanelWrapper"
+      ref={infoPanelRef}
     >
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer

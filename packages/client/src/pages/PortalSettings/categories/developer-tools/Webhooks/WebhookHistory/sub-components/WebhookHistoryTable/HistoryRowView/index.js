@@ -1,9 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { isMobile } from "@docspace/components/utils/device";
 import RowContainer from "@docspace/components/row-container";
@@ -12,7 +10,7 @@ import { Base } from "@docspace/components/themes";
 import HistoryRow from "./HistoryRow";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin-top: 11px;
+  margin-top: 12px;
 
   .row-list-item {
     cursor: pointer;
@@ -24,7 +22,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-list-item:has(.selected-row-item) {
     background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+      props.theme.isBase ? "#f3f4f4" : "#3D3D3D"};
   }
 `;
 

@@ -1,6 +1,5 @@
 {
   "LblInviteAgain": "ادعوه مرة أخرى",
-  "MessageEmailActivationInstuctionsSentOnEmail": "The email activation instructions have been sent to the <strong>{{email}}</strong> email address.",
   "NotFoundUsers": "لم يتم العثور على مستخدمين",
   "UserStatus": "الحالة"
 }

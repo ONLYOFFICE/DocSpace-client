@@ -28,6 +28,7 @@ export type Item = {
   isDisabled?: boolean;
   security: Security;
   roomType: number;
+  fileExst?: string;
 };
 
 export type BreadCrumb = {
@@ -56,6 +57,7 @@ export type useSocketHelperProps = {
   setTotal: (callback: setTotalCallback) => void;
   disabledItems: string[] | number[];
   filterParam?: string;
+  getIcon: (size: number, fileExst: string) => string;
 };
 
 export type useRootHelperProps = {
@@ -116,6 +118,7 @@ export type useFilesHelpersProps = {
     search?: string | null,
     isErrorPath?: boolean
   ) => void;
+  getIcon: (size: number, fileExst: string) => string;
   t: any;
 };
 
@@ -125,13 +128,16 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
+  setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 
   onClose?: () => void;
 
   isMove?: boolean;
   isCopy?: boolean;
+  isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
 
@@ -150,10 +156,12 @@ export type FilesSelectorProps = {
   disabledItems: string[] | number[];
   isFolderActions?: boolean;
   setMoveToPanelVisible: (value: boolean) => void;
+  setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setIsFolderActions: (value: boolean) => void;
   setMovingInProgress: (value: boolean) => void;
+  setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
   setConflictDialogData: (conflicts: any, operationData: any) => void;
   itemOperationToFolder: (operationData: any) => Promise<void>;
   clearActiveOperations: (
@@ -208,4 +216,6 @@ export type FilesSelectorProps = {
   currentDeviceType: "mobile" | "tablet" | "desktop";
 
   embedded: boolean;
+  withHeader: boolean;
+  settings: any;
 };

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FooterBlock } from "./StyledProfileFooter";
-import RectangleLoader from "../RectangleLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import RowsSkeleton from "@docspace/components/skeletons/rows";
+
 import { isDesktop } from "@docspace/components/utils/device";
 
 const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
@@ -33,7 +34,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
     <div id={id} className={className} style={style}>
       <FooterBlock>
         <div className="header">
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="129"
             height="22"
@@ -46,7 +47,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
             animate={animate}
           />
 
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="213"
             height="20"
@@ -62,7 +63,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
 
         {isDesktopView && (
           <div className="table-header">
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="51"
               height="16"
@@ -75,7 +76,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
               animate={animate}
             />
 
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="60"
               height="16"
@@ -88,7 +89,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
               animate={animate}
             />
 
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="62"
               height="16"
@@ -103,7 +104,7 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
           </div>
         )}
 
-        <Loaders.Rows count={3} />
+        <RowsSkeleton count={3} />
       </FooterBlock>
     </div>
   );

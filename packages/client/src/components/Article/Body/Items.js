@@ -33,6 +33,7 @@ const Item = ({
   item,
   dragging,
   getFolderIcon,
+  setBufferSelection,
   isActive,
   getEndOfBlock,
   showText,
@@ -102,6 +103,7 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (folderId) => {
+      setBufferSelection(null);
       onClick && onClick(folderId, item.title, item.rootFolderType);
     },
     [onClick, item.title, item.rootFolderType]
@@ -162,6 +164,7 @@ const Items = ({
   commonId,
   currentId,
   draggableItems,
+  setBufferSelection,
 
   moveDragItems,
 
@@ -297,6 +300,7 @@ const Items = ({
             startUpload={startUpload}
             uploadEmptyFolders={uploadEmptyFolders}
             item={item}
+            setBufferSelection={setBufferSelection}
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
@@ -398,6 +402,7 @@ export default inject(
     const {
       selection,
       bufferSelection,
+      setBufferSelection,
       dragging,
       setDragging,
       trashIsEmpty,
@@ -442,6 +447,7 @@ export default inject(
       dragging,
       setDragging,
       moveDragItems,
+      setBufferSelection,
       deleteAction,
       startUpload,
       uploadEmptyFolders,

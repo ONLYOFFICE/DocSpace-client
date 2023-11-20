@@ -32,15 +32,12 @@
   "InfoBanner": "Kutsuttujen käyttäjien lista sisältää tämän DocSpacen omistajan ja/tai järjestelmänvalvojat, joilla on täysi pääsy kaikkiin huoneisiin. Omistaja ja/tai järjestelmänvalvojalle ei voi antaa muita pääsyoikeuksia. Heille ilmoitetaan kaikista muutoksista, kun heidät on lisätty huoneeseen.",
   "ItemsSelected": "Valitut kohteet",
   "LastModifiedBy": "Viimeksi muokannut",
-  "PendingInvitations": "Odottavat kutsut",
   "Properties": "Ominaisuudet",
   "RoomsEmptyScreenTent": "Katso huonetiedot täältä",
   "SelectedUsers": "Valitut tilit",
   "StorageType": "Muistityyppi",
   "SubmenuDetails": "Yksityiskohdat",
   "SubmenuHistory": "Historia",
-  "SystemProperties": "Järjestelmän ominaisuudet",
   "Users": "Käyttäjät",
-  "UsersInRoom": "Huoneen käyttäjät",
   "Versions": "Versiot"
 }

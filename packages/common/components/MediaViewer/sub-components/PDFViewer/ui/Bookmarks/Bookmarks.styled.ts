@@ -1,16 +1,8 @@
 import styled, { css } from "styled-components";
 
 export const List = styled.ul`
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-          padding-left: 30px;
-        `
-      : css`
-          padding-left: 16px;
-          padding-right: 30px;
-        `}
+  padding-left: 16px;
+  padding-right: 30px;
 
   list-style: none;
   margin-top: 0px;

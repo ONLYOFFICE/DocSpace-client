@@ -16,7 +16,7 @@ const HistoryBlockMessage = ({
 }) => {
   const message = getBlockMessageTranslation(
     t,
-    action.Action,
+    action.hasOwnProperty("Action") ? action.Action : action.Actions,
     action.Item,
     action.Item === FeedItemTypes.File || action.Item === FeedItemTypes.Folder
       ? !!groupedActions.length

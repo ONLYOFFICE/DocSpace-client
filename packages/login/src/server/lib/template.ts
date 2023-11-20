@@ -51,11 +51,12 @@ const template: Template = (
 
   const initialLoginStateStringify = JSON.stringify(initLoginState);
 
-  const initialLoginStateString = initialLoginStateStringify.includes(
-    "</script>"
-  )
-    ? initialLoginStateStringify.replace(/<\/script>/g, "<\\/script>")
-    : initialLoginStateStringify;
+  const lt = /</g,
+    gt = />/g;
+
+  const initialLoginStateString = initialLoginStateStringify
+    .replace(lt, "&lt;")
+    .replace(gt, "&gt;");
 
   const scripts = `   
     <script id="__ASC_INITIAL_LOGIN_STATE__">
@@ -68,7 +69,7 @@ const template: Template = (
     ${clientScripts}
     <script>
       console.log("It's Login INIT");
-      fetch("/static/scripts/config.json")
+      fetch("${CONFIG_URL}")
       .then((response) => {
         if (!response.ok) {
           throw new Error("HTTP error " + response.status);
@@ -124,7 +125,7 @@ const template: Template = (
       <body>
         <noscript> You need to enable JavaScript to run this app. </noscript>
         <div id="root">${appComponent}</div>
-        <script src="/static/scripts/browserDetector.js"></script>
+        <script src=${BROWSER_DETECTOR_URL}></script>
         ${scripts}
       </body>
     </html>

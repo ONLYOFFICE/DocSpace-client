@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
 import Submenu from "@docspace/components/submenu";
-import Badge from "@docspace/components/badge";
+
 import Box from "@docspace/components/box";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
@@ -10,7 +10,7 @@ import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
-import PluginPage from "./Plugins";
+
 import Api from "./Api";
 
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,8 @@ import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
+import PluginSDK from "./PluginSDK";
+import Badge from "@docspace/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -27,7 +29,7 @@ const StyledSubmenu = styled(Submenu)`
 `;
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo, currentDeviceType, enablePlugins } = props;
+  const { loadBaseInfo, currentDeviceType } = props;
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,17 +50,16 @@ const DeveloperToolsWrapper = (props) => {
 
   const pluginLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
-      {t("WebPlugins:Plugins")}
-      <Box>
-        <Badge
-          label={t("Settings:BetaLabel")}
-          backgroundColor="#7763F0"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
-      </Box>
+      {t("WebPlugins:PluginSDK")}
+
+      <Badge
+        label={t("Settings:BetaLabel")}
+        backgroundColor="#533ED1"
+        fontSize="9px"
+        borderRadius="50px"
+        noHover={true}
+        isHovered={false}
+      />
     </Box>
   );
 
@@ -74,19 +75,16 @@ const DeveloperToolsWrapper = (props) => {
       content: <JavascriptSDK />,
     },
     {
+      id: "plugin-sdk",
+      name: pluginLabel,
+      content: <PluginSDK />,
+    },
+    {
       id: "webhooks",
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
   ];
-
-  if (enablePlugins) {
-    data.push({
-      id: "plugins",
-      name: pluginLabel,
-      content: <PluginPage />,
-    });
-  }
 
   const [currentTab, setCurrentTab] = useState(
     data.findIndex((item) => location.pathname.includes(item.id))
@@ -144,7 +142,6 @@ export default inject(({ setup, auth }) => {
   const { settingsStore } = auth;
 
   return {
-    enablePlugins: settingsStore.enablePlugins,
     currentDeviceType: settingsStore.currentDeviceType,
     loadBaseInfo: async () => {
       await initSettings();

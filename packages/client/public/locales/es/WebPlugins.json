@@ -7,7 +7,6 @@
   "NeedSettings": "Es necesario introducir ajustes",
   "NoPlugins": "Sin plugins añadidos",
   "NotNeedSettings": "No es necesario introducir ajustes",
-  "Plugins": "Plugins",
   "PluginsHelp": "Los plugins permiten ampliar la funcionalidad de DocSpace",
   "UploadPlugin": "Cargar plugin"
 }

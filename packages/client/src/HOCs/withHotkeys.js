@@ -115,7 +115,6 @@ const withHotkeys = (Component) => {
     };
 
     const onPaste = async (e) => {
-      e.preventDefault();
       uploadClipboardFiles(t, e);
     };
 

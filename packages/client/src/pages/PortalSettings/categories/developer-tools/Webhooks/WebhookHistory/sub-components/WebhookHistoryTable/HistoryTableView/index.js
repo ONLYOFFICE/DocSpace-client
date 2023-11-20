@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -9,17 +9,17 @@ import TableContainer from "@docspace/components/table-container/TableContainer"
 
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 const TableWrapper = styled(TableContainer)`
-  margin-top: 0;
+  margin-top: -2px;
 
   .table-container_header {
     position: absolute;
   }
 
   .header-container-text {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
   .checkboxWrapper {
@@ -29,15 +29,36 @@ const TableWrapper = styled(TableContainer)`
 
   .table-list-item {
     cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
       background-color: ${(props) =>
-        props.theme.isBase ? "#f3f4f4" : "#282828"};
+        props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 
   .table-list-item:has(.selected-table-row) {
     background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#282828"};
+      props.theme.filesSection.tableView.row.backgroundActive};
   }
 `;
 

@@ -28,7 +28,7 @@ import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import AppLoader from "@docspace/common/components/AppLoader";
+import { getRestoreProgress } from "@docspace/common/api/portal";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -76,6 +76,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
+    moment.updateLocale("ar-sa", {
+      longDateFormat: {
+        LT: "h:mm a",
+        LTS: "h:mm:ss a",
+        L: "YYYY/MM/DD",
+        LL: "YYYY MMMM D",
+        LLL: "h:mm a YYYY MMMM D",
+        LLLL: "h:mm a YYYY MMMM D dddd",
+      },
+    });
+
+    moment.locale(language);
+  }, []);
+
+  useEffect(() => {
     if (!whiteLabelLogoUrls) return;
     const favicon = getLogoFromPath(whiteLabelLogoUrls[2]?.path?.light);
 
@@ -112,7 +127,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       });
 
     socketHelper.on("restore-backup", () => {
-      setPreparationPortalDialogVisible(true);
+      getRestoreProgress()
+        .then((response) => {
+          if (!response) {
+            console.log(
+              "Skip show <PreparationPortalDialog /> - empty progress response"
+            );
+            return;
+          }
+          setPreparationPortalDialogVisible(true);
+        })
+        .catch((e) => {
+          console.error("getRestoreProgress", e);
+        });
     });
   }, [socketHelper]);
 
@@ -452,6 +479,8 @@ const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
   } else if (auth) {
     currentColorScheme = settingsStore.currentColorScheme || false;
   }
+
+  window.theme = theme;
 
   return {
     theme: { ...theme, interfaceDirection: i18n.dir() },

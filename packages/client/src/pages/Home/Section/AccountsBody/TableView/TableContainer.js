@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
@@ -43,17 +43,29 @@ const contextCss = css`
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
-          padding-left: 18px;
+          padding-left: 20px;
         `
       : css`
           margin-right: -20px;
-          padding-right: 18px;
+          padding-right: 20px;
         `}
 
   ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
+  :has(
+      .table-container_body
+        .table-list-item:first-child:first-child
+        > .table-row-selected
+    ) {
+    .table-container_header {
+      border-image-slice: 1;
+      border-image-source: ${(props) =>
+        props.theme.tableContainer.header.lengthenBorderImageSource};
+    }
+  }
+
   .table-row-selected {
     .table-container_user-name-cell {
       ${userNameCss}

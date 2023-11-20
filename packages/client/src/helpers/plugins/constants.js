@@ -46,6 +46,8 @@ export const PluginActions = Object.freeze({
   updateEventListenerItems: "update-event-listener-items",
 
   sendPostMessage: "send-post-message",
+
+  saveSettings: "save-settings",
 });
 
 export const PluginToastType = Object.freeze({

@@ -48,7 +48,7 @@ const CreateRoomDialog = ({
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
-
+  const [isWrongTitle, setIsWrongTitle] = useState(false);
   const isMountRef = React.useRef(true);
 
   React.useEffect(() => {
@@ -96,6 +96,7 @@ const CreateRoomDialog = ({
   const isRoomTitleChanged = roomParams.title.trim() !== "" ? false : true;
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
 
@@ -161,7 +162,9 @@ const CreateRoomDialog = ({
             setIsScrollLocked={setIsScrollLocked}
             isDisabled={isLoading}
             isValidTitle={isValidTitle}
+            isWrongTitle={isWrongTitle}
             setIsValidTitle={setIsValidTitle}
+            setIsWrongTitle={setIsWrongTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
           />
@@ -178,7 +181,7 @@ const CreateRoomDialog = ({
             primary
             scale
             onClick={onCreateRoom}
-            isDisabled={isRoomTitleChanged}
+            isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
           />
           <Button

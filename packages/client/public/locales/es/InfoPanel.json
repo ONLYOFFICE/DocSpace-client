@@ -32,15 +32,12 @@
   "InfoBanner": "La lista de usuarios invitados incluye al propietario y/o administrador de este DocSpace con acceso completo a todas las salas. Al propietario y/o administrador no se le pueden asignar otros permisos de acceso. Una vez añadidos a la sala, se les notificarán todos los cambios.",
   "ItemsSelected": "Elementos seleccionados",
   "LastModifiedBy": "Ultima modificación por",
-  "PendingInvitations": "Invitaciones pendientes",
   "Properties": "Propiedades",
   "RoomsEmptyScreenTent": "Vea los detalles de las salas aquí",
   "SelectedUsers": "Cuentas seleccionadas",
   "StorageType": "Tipo de almacenamiento",
   "SubmenuDetails": "Detalles",
   "SubmenuHistory": "Historial",
-  "SystemProperties": "Propiedades del sistema",
   "Users": "Usuarios",
-  "UsersInRoom": "Usuarios en la sala",
   "Versions": "Versiones"
 }

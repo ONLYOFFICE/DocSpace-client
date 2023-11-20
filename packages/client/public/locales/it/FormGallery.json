@@ -1,11 +1,12 @@
 {
-  "EmptyScreenDescription": "Ti preghiamo di controllare la tua connessione Internet e aggiorna la pagina o riprova più tardi.",
-  "GalleryEmptyScreenDescription": "Seleziona qualsiasi modello di modulo per vedere i dettagli",
-  "GalleryEmptyScreenHeader": "Impossibile caricare i modelli di modulo",
+  "Categories": "Categorie",
+  "EmptyFormGalleryScreenDescription": "Non è stato possibile trovare alcun risultato corrispondente alla tua ricerca",
   "SelectForm": "Seleziona modulo",
   "SubmitToGalleryBlockBody": "Invia i tuoi modelli per condividerli con la community di ONLYOFFICE.",
   "SubmitToGalleryBlockHeader": "Galleria dei moduli di ONLYOFFICE",
   "SubmitToGalleryDialogGuideInfo": "Scopri come creare moduli perfetti e aumentare le tue possibilità di ottenere l'approvazione nella nostra <1>guida</1>.",
   "SubmitToGalleryDialogMainInfo": "Invia il tuo modulo alla galleria pubblica per consentire ad altri di utilizzarlo nel loro lavoro. Una volta che il modulo avrà superato la moderazione, riceverai una notifica e sarai ricompensato per il tuo contributo.",
-  "TemplateInfo": "Informazioni sul modello"
+  "SuggestChanges": "Suggerire modifiche",
+  "TemplateInfo": "Informazioni sul modello",
+  "ViewAllTemplates": "Visualizzare tutti i modelli"
 }

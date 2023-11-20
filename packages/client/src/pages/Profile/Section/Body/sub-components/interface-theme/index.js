@@ -11,7 +11,11 @@ import toastr from "@docspace/components/toast/toastr";
 import { ThemeKeys } from "@docspace/common/constants";
 
 import { mobile } from "@docspace/components/utils/device";
-import { showLoader, getSystemTheme } from "@docspace/common/utils";
+import {
+  showLoader,
+  getSystemTheme,
+  getEditorTheme,
+} from "@docspace/common/utils";
 
 import ThemePreview from "./theme-preview";
 
@@ -39,7 +43,7 @@ const StyledWrapper = styled.div`
   }
 
   .system-theme-description {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     font-weight: 400;
     line-height: 16px;
     padding-left: 24px;
@@ -83,6 +87,12 @@ const InterfaceTheme = (props) => {
 
     try {
       setCurrentTheme(theme);
+
+      if (isDesktopClient) {
+        const editorTheme = getEditorTheme(theme);
+        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+      }
+
       await changeTheme(theme);
     } catch (error) {
       console.error(error);

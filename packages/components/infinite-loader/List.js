@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, createRef } from "react";
 import { InfiniteLoader, WindowScroller } from "react-virtualized";
-import Loaders from "@docspace/common/components/Loaders";
+import TableSkeleton from "../skeletons/table";
+import RowsSkeleton from "../skeletons/rows";
 import { StyledList } from "./StyledInfiniteLoader";
 
 const ListComponent = ({
@@ -63,7 +64,7 @@ const ListComponent = ({
     switch (viewAs) {
       case "table":
         return (
-          <Loaders.TableLoader
+          <TableSkeleton
             key={key}
             style={style}
             className="table-container_body-loader"
@@ -72,7 +73,7 @@ const ListComponent = ({
         );
       case "row":
         return (
-          <Loaders.Rows
+          <RowsSkeleton
             key={key}
             style={style}
             className="row-loader"

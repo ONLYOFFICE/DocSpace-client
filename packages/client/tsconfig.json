@@ -14,6 +14,7 @@
     "allowJs": true,
     "paths": {
       "PUBLIC_DIR": ["../../public"],
+      "COMMON_DIR": ["../common"],
       "SRC_DIR": ["./src"]
     }
   }

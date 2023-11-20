@@ -58,7 +58,7 @@ const StyledStorageLocation = styled.div`
 
       &-text {
         font-weight: 400;
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         line-height: 20px;
       }
 
@@ -91,7 +91,7 @@ const StyledStorageLocation = styled.div`
       }
       .checkbox-text {
         font-weight: 400;
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         line-height: 20px;
       }
     }

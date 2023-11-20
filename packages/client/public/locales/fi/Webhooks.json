@@ -45,7 +45,6 @@
   "UnselectAll": "Poista valinta",
   "URL": "URL",
   "ViewRawPayload": "Näytä raaka tietosisältö",
-  "Webhook": "Webhook",
   "WebhookCreationHint": "Tämä webhook liitetään kaikkin DocSpacen tapahtumiin",
   "WebhookDetails": "Webhookin yksityiskohdat",
   "WebhookEditedSuccessfully": "Webhook-konfiguraatio muokattu onnistuneesti",

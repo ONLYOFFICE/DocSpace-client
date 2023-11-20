@@ -1,15 +1,14 @@
-import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-import InfoIcon from "PUBLIC_DIR/images/info.react.svg?url";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Label from "@docspace/components/label";
+import HelpButton from "@docspace/components/help-button";
+import Text from "@docspace/components/text";
 
-import { Hint } from "../styled-components";
 import { useTranslation } from "react-i18next";
 
-const Header = styled.p`
+const Header = styled.h4`
   font-weight: 600;
   margin-top: 22px;
   margin-bottom: 10px;
@@ -17,8 +16,14 @@ const Header = styled.p`
   display: flex;
   align-items: center;
 
+  cursor: default;
+
+  .verificationHelpButton {
+    margin-left: 4px;
+  }
+
   img {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 4px;
@@ -29,40 +34,26 @@ const Header = styled.p`
   }
 `;
 
-const StyledInfoIcon = styled.img`
-  :hover {
-    cursor: pointer;
-  }
-`;
-
 export const SSLVerification = ({ onChange, value }) => {
-  const [isHintVisible, setIsHintVisible] = useState(false);
   const { t } = useTranslation(["Webhooks"]);
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     onChange({
       target: { name: e.target.name, value: e.target.value === "true" },
     });
   };
 
-  const toggleHint = () =>
-    setIsHintVisible(prevIsHintVisible => !prevIsHintVisible);
   return (
-    <Label
-      text={
-        <Header>
-          {t("SSLVerification")}{" "}
-          <StyledInfoIcon
-            className="ssl-verification-tooltip"
-            src={InfoIcon}
-            alt="infoIcon"
-            onClick={toggleHint}
-          />
-        </Header>
-      }>
-      <Hint isTooltip hidden={!isHintVisible} onClick={toggleHint}>
-        {t("SSLHint")}
-      </Hint>
+    <div>
+      <Header>
+        {t("SSLVerification")}{" "}
+        <HelpButton
+          className="verificationHelpButton"
+          iconName={InfoReactSvgUrl}
+          tooltipContent={<Text fontSize="12px">{t("SSLHint")}</Text>}
+          place="bottom"
+        />
+      </Header>
       <RadioButtonGroup
         fontSize="13px"
         fontWeight="400"
@@ -85,6 +76,6 @@ export const SSLVerification = ({ onChange, value }) => {
         orientation="vertical"
         spacing="8px"
       />
-    </Label>
+    </div>
   );
 };

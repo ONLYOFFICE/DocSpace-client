@@ -6,12 +6,12 @@ type StyledViewerContainerProps = {
 };
 
 const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
-  color: ${props => props.theme.mediaViewer.color};
-  display: ${props => (props.visible ? "block" : "none")};
+  color: ${(props) => props.theme.mediaViewer.color};
+  display: ${(props) => (props.visible ? "block" : "none")};
   overflow: hidden;
   span {
     position: fixed;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 0;
@@ -33,7 +33,7 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     line-height: 19px;
     svg {
       path {
-        fill: ${props => props.theme.mediaViewer.fill};
+        fill: ${(props) => props.theme.mediaViewer.fill};
       }
     }
   }
@@ -49,7 +49,7 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     );
     position: fixed;
     top: 0;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: 0;
@@ -65,7 +65,7 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               padding-right: 16px;
@@ -74,13 +74,13 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
               padding-left: 16px;
             `}
       box-sizing: border-box;
-      color: ${props => props.theme.mediaViewer.titleColor};
+      color: ${(props) => props.theme.mediaViewer.titleColor};
     }
   }
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 12px;
@@ -94,7 +94,7 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     }
     svg {
       path {
-        fill: ${props => props.theme.mediaViewer.iconColor};
+        fill: ${(props) => props.theme.mediaViewer.iconColor};
       }
     }
   }

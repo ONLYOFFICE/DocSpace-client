@@ -143,7 +143,7 @@
   "PortalNameIncorrect": "Nom de compte incorrect",
   "PortalNameLength": "Le nom du compte doit comporter entre {{minLength}} et {{maxLength}} caractères",
   "PortalRenaming": "Changement de nom de DocSpace",
-  "PortalRenamingDescriptionText": "Modifiez l'adresse de l'espace qui apparaît à côté de {{ domaine }}.",
+  "PortalRenamingDescriptionText": "Modifiez l'adresse de l'espace qui apparaît à côté de {{ domain }}.",
   "PortalRenamingLabelText": "Nouveau nom de l’espace",
   "PortalRenamingModalText": "Vous êtes sur le point de renommer votre portail. Êtes-vous sûr de vouloir continuer?",
   "PortalRenamingNavDescription": "Vous pouvez modifier l'adresse de votre portail ici.",

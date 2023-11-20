@@ -12,8 +12,8 @@
   "ProcessComplete": "Vous pouvez fermer cette page. Une fois la procédure terminée, l'administrateur responsable sera informé par e-mail.",
   "Reassign": "Réaffecter",
   "ReassignData": "Réaffecter les données",
-  "ReassigningDataToAnother": "Le processus de réaffectation des données de l'utilisateur <0>{{fromUser}}</0> à l'utilisateur <1>{toUser}}</1> a commencé. Veuillez noter que cela peut prendre un certain temps.",
-  "ReassigningDataToItself": "Le processus de réaffectation des données de l'utilisateur <0>{{fromUser}}</0> à l'utilisateur <1>{toUser}}</1> <2>{{you}}</2> a commencé. Veuillez noter que cela peut prendre un certain temps.",
+  "ReassigningDataToAnother": "Le processus de réaffectation des données de l'utilisateur <0>{{fromUser}}</0> à l'utilisateur <1>{{toUser}}</1> a commencé. Veuillez noter que cela peut prendre un certain temps.",
+  "ReassigningDataToItself": "Le processus de réaffectation des données de l'utilisateur <0>{{fromUser}}</0> à l'utilisateur <1>{{toUser}}</1> <2>{{you}}</2> a commencé. Veuillez noter que cela peut prendre un certain temps.",
   "StartTransferAgain": "Recommencer le transfert",
   "UserToWhomTheDataWillBeTransferred": "Utilisateur auquel les données seront transférées"
 }

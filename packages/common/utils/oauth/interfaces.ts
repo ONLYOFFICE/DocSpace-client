@@ -41,7 +41,7 @@ export interface IClientProps {
   invalidated: boolean;
   scopes: string[];
   websiteUrl: string;
-  allowedOrigins: string[];
+  // allowedOrigins: string[];
 
   createdOn?: Date;
   modifiedOn?: Date;
@@ -62,7 +62,7 @@ export interface IClientReqDTO {
   logout_redirect_uri: string;
   scopes: string[];
   website_url: string;
-  allowed_origins: string[];
+  // allowed_origins: string[];
 }
 
 export interface IClientResDTO {
@@ -87,7 +87,7 @@ export interface IClientResDTO {
   tenant: number;
   invalidated: boolean;
   website_url: string;
-  allowed_origins: string[];
+  // allowed_origins: string[];
 
   created_on?: Date;
   modified_on?: Date;

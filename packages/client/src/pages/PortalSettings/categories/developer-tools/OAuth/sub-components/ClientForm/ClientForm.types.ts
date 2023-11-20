@@ -5,6 +5,7 @@ import {
   IClientReqDTO,
   IScope,
 } from "@docspace/common/utils/oauth/interfaces";
+//@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 export interface InputProps {

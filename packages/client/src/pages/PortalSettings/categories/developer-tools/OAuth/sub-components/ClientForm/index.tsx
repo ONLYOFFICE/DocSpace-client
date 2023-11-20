@@ -53,7 +53,7 @@ const ClientForm = ({
     description: "",
 
     redirect_uris: [],
-    allowed_origins: [],
+    // allowed_origins: [],
     logout_redirect_uri: "",
 
     terms_url: "",
@@ -142,8 +142,8 @@ const ClientForm = ({
 
         redirect_uris:
           fetchedClient?.redirectUris || client?.redirectUris || [],
-        allowed_origins:
-          fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
+        // allowed_origins:
+        //   fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
         logout_redirect_uri:
           fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
@@ -207,10 +207,10 @@ const ClientForm = ({
           isValid = isValid && form[key].length > 0;
 
           break;
-        case "allowed_origins":
-          isValid = isValid && form[key].length > 0;
+        // case "allowed_origins":
+        //   isValid = isValid && form[key].length > 0;
 
-          break;
+        //   break;
         case "logout_redirect_uris":
           isValid = isValid;
 
@@ -264,7 +264,7 @@ const ClientForm = ({
           <OAuthBlock
             t={t}
             redirectUrisValue={form.redirect_uris}
-            allowedOriginsValue={form.allowed_origins}
+            // allowedOriginsValue={form.allowed_origins}
             changeValue={onChangeForm}
             isEdit={isEdit}
           />

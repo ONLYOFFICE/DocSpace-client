@@ -29,14 +29,11 @@
   "HistoryEmptyScreenText": "Toimintahistoria näytetään tässä",
   "ItemsSelected": "Valitut kohteet",
   "LastModifiedBy": "Viimeksi muokannut",
-  "PendingInvitations": "Odottavat kutsut",
   "Properties": "Ominaisuudet",
   "RoomsEmptyScreenTent": "Katso huonetiedot täältä",
   "SelectedUsers": "Valitut tilit",
   "StorageType": "Muistityyppi",
   "SubmenuDetails": "Yksityiskohdat",
   "SubmenuHistory": "Historia",
-  "SystemProperties": "Järjestelmän ominaisuudet",
-  "UsersInRoom": "Huoneen käyttäjät",
   "Versions": "Versiot"
 }

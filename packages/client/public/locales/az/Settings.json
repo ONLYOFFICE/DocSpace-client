@@ -198,7 +198,7 @@
   "TwoFactorAuth": "İki faktorlu avtorizasiya",
   "TwoFactorAuthEnableDescription": "İstifadəçilərə daha təhlükəsiz DocSpace girişi üçün iki mərhələli təsdiqləməni aktivləşdirin.",
   "TwoFactorAuthMobileDescription": "İki mərhələli təsdiqləmə istifadəçilərin portala daxil olması üçün daha təhlükəsiz üsuldur. İstifadəçi məlumatlarını daxil etdikdən sonra mobil telefonuna göndərilən SMS-dəki kodu, portala ilk dəfə daxil olarkən göstərilən nömrənin aldığı kodu və ya təsdiqləmə proqramından alınan kodu daxil etməlidir.",
-  "TwoFactorAuthSave": "Tətbiq etmək üçün aşağıdakı <güclü>Saxla</güclü> düyməsinə klikləyin.",
+  "TwoFactorAuthSave": "Tətbiq etmək üçün aşağıdakı <strong>Saxla</strong> düyməsinə klikləyin.",
   "UnsavedChangesBody": "Bağlantı parametrləri menyusunu dərhal bağlasanız, dəyişiklikləriniz yadda saxlanmayacaq.",
   "UseAsLogoButton": "Loqo kimi istifadə edin",
   "UseDigits": "Rəqəmləri işlət",

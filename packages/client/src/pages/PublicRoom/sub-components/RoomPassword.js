@@ -60,12 +60,10 @@ const RoomPassword = (props) => {
         }
         // case ValidationResult.Invalid: {
         //   setErrorMessage(""); // Invalid
-        //   toastr.error("Invalid");
         //   return;
         // }
         // case ValidationResult.Expired: {
         //   setErrorMessage(""); // Expired
-        //   toastr.error("Expired");
         //   return;
         // }
         case ValidationResult.InvalidPassword: {

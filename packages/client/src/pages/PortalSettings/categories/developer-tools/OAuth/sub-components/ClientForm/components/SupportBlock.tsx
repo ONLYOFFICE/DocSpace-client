@@ -13,6 +13,7 @@ interface SupportBlockProps {
   changeValue: (name: string, value: string) => void;
 
   isEdit: boolean;
+  errorFields: string[];
 }
 
 const SupportBlock = ({
@@ -23,12 +24,8 @@ const SupportBlock = ({
   changeValue,
 
   isEdit,
+  errorFields,
 }: SupportBlockProps) => {
-  const [error, setError] = React.useState({
-    policyUrl: "",
-    termsUrl: "",
-  });
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
@@ -44,20 +41,24 @@ const SupportBlock = ({
           name={"policy_url"}
           placeholder={t("EnterURL")}
           value={policyUrlValue}
-          error={error.policyUrl}
+          error={t("ErrorWrongURL")}
           onChange={onChange}
           helpButtonText={t("PrivacyPolicyURLHelpButton")}
           disabled={isEdit}
+          isRequired
+          isError={errorFields.includes("policy_url")}
         />
         <InputGroup
           label={t("TermsOfServiceURL")}
           name={"terms_url"}
           placeholder={t("EnterURL")}
           value={termsUrlValue}
-          error={error.termsUrl}
+          error={t("ErrorWrongURL")}
           onChange={onChange}
           helpButtonText={t("TermsOfServiceURLHelpButton")}
           disabled={isEdit}
+          isRequired
+          isError={errorFields.includes("terms_url")}
         />
       </StyledInputBlock>
     </StyledBlock>

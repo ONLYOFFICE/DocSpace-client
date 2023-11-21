@@ -13,8 +13,6 @@ interface TextAreaProps {
   value: string;
   placeholder: string;
 
-  error: string;
-
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -24,8 +22,6 @@ const TextAreaGroup = ({
   name,
   value,
   placeholder,
-
-  error,
 
   onChange,
 }: TextAreaProps) => {

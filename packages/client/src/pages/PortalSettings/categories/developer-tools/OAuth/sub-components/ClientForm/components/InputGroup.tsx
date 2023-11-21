@@ -5,6 +5,8 @@ import InputBlock from "@docspace/components/input-block";
 import Button from "@docspace/components/button";
 //@ts-ignore
 import HelpButton from "@docspace/components/help-button";
+//@ts-ignore
+import FieldContainer from "@docspace/components/field-container";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
@@ -35,6 +37,9 @@ interface InputGroupProps {
   isPassword?: boolean;
 
   disabled?: boolean;
+  isRequired?: boolean;
+  isError?: boolean;
+  children?: React.ReactNode;
 }
 
 const InputGroup = ({
@@ -57,48 +62,52 @@ const InputGroup = ({
   onCopyClick,
   isPassword,
   disabled,
+  isRequired,
+  isError,
+  children,
 }: InputGroupProps) => {
   return (
     <StyledInputGroup>
-      <StyledHeaderRow>
-        <Text
-          fontSize={"13px"}
-          fontWeight={600}
-          lineHeight={"20px"}
-          title={""}
-          tag={""}
-          as={"p"}
-          color={""}
-          textAlign={""}
-        >
-          {label}
-        </Text>
-        {helpButtonText && <HelpButton tooltipContent={helpButtonText} />}
-      </StyledHeaderRow>
-      <StyledInputRow>
-        <InputBlock
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          scale
-          tabIndex={0}
-          maxLength={255}
-          isReadOnly={withCopy}
-          isDisabled={withCopy || disabled}
-          iconName={withCopy ? CopyReactSvgUrl : null}
-          onIconClick={withCopy && onCopyClick}
-          type={isPassword ? "password" : "text"}
-        />
-        {buttonLabel && (
-          <Button
-            //@ts-ignore
-            label={buttonLabel}
-            size={"small"}
-            onClick={onButtonClick}
-          />
+      <FieldContainer
+        isVertical
+        isRequired={isRequired}
+        labelVisible
+        labelText={label}
+        tooltipContent={helpButtonText}
+        errorMessage={error}
+        removeMargin
+        hasError={isError}
+      >
+        {children ? (
+          children
+        ) : (
+          <>
+            {" "}
+            <InputBlock
+              name={name}
+              value={value}
+              placeholder={placeholder}
+              onChange={onChange}
+              scale
+              tabIndex={0}
+              maxLength={255}
+              isReadOnly={withCopy}
+              isDisabled={withCopy || disabled}
+              iconName={withCopy ? CopyReactSvgUrl : null}
+              onIconClick={withCopy && onCopyClick}
+              type={isPassword ? "password" : "text"}
+            />
+            {buttonLabel && (
+              <Button
+                //@ts-ignore
+                label={buttonLabel}
+                size={"small"}
+                onClick={onButtonClick}
+              />
+            )}
+          </>
         )}
-      </StyledInputRow>
+      </FieldContainer>
     </StyledInputGroup>
   );
 };

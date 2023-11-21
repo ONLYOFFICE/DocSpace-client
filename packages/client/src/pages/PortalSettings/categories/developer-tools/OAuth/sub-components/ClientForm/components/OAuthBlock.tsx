@@ -29,6 +29,7 @@ const OAuthBlock = ({
       <BlockHeader header={t("OAuthHeaderBlock")} />
       <StyledInputBlock>
         <MultiInputGroup
+          t={t}
           label={t("RedirectsURLS")}
           placeholder={t("EnterURL")}
           name={"redirect_uris"}

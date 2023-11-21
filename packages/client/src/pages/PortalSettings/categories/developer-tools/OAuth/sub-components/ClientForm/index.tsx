@@ -2,6 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { debounce } from "lodash";
 
 import {
   IClientProps,
@@ -19,6 +20,9 @@ import { StyledContainer } from "./ClientForm.styled";
 
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import ClientFormLoader from "./Loader";
+
+export const WEBSITE_REGEXP =
+  /(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
 
 const ClientForm = ({
   id,
@@ -63,6 +67,14 @@ const ClientForm = ({
 
     scopes: [],
   });
+
+  const nameTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
+  const websiteTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
+  const policyTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
+  const termsTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
+
+  const [errorFields, setErrorFields] = React.useState<string[]>([]);
+
   const { t } = useTranslation(["OAuth", "Common"]);
 
   const [clientId, setClientId] = React.useState<string>("");
@@ -190,6 +202,31 @@ const ClientForm = ({
         case "name":
           isValid = isValid && !!form[key];
 
+          if (
+            form[key] &&
+            !errorFields.includes(key) &&
+            (form[key].length < 3 || form[key].length > 256)
+          ) {
+            isValid = false;
+
+            nameTimer.current = setTimeout(() => {
+              setErrorFields((value) => {
+                return [...value, key];
+              });
+            }, 300);
+          }
+
+          if (
+            errorFields.includes(key) &&
+            (!form[key] || (form[key].length > 2 && form[key].length < 256))
+          ) {
+            setErrorFields((value) => {
+              return value.filter((n) => n !== key);
+            });
+            if (nameTimer.current) clearTimeout(nameTimer.current);
+            nameTimer.current = null;
+          }
+
           break;
         case "logo":
           isValid = isValid && !!form[key];
@@ -201,6 +238,33 @@ const ClientForm = ({
           break;
         case "website_url":
           isValid = isValid && !!form[key];
+
+          if (
+            form[key] &&
+            !errorFields.includes(key) &&
+            !WEBSITE_REGEXP.test(form[key])
+          ) {
+            isValid = false;
+
+            websiteTimer.current = setTimeout(
+              () =>
+                setErrorFields((value) => {
+                  return [...value, key];
+                }),
+              300
+            );
+          }
+
+          if (
+            errorFields.includes(key) &&
+            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+          ) {
+            setErrorFields((value) => {
+              return value.filter((n) => n !== key);
+            });
+            if (websiteTimer.current) clearTimeout(websiteTimer.current);
+            websiteTimer.current = null;
+          }
 
           break;
         case "redirect_uris":
@@ -217,9 +281,65 @@ const ClientForm = ({
           break;
         case "terms_url":
           isValid = isValid && !!form[key];
+
+          if (
+            form[key] &&
+            !errorFields.includes(key) &&
+            !WEBSITE_REGEXP.test(form[key])
+          ) {
+            isValid = false;
+
+            termsTimer.current = setTimeout(
+              () =>
+                setErrorFields((value) => {
+                  return [...value, key];
+                }),
+              300
+            );
+          }
+
+          if (
+            errorFields.includes(key) &&
+            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+          ) {
+            setErrorFields((value) => {
+              return value.filter((n) => n !== key);
+            });
+            if (termsTimer.current) clearTimeout(termsTimer.current);
+            termsTimer.current = null;
+          }
+
           break;
         case "policy_url":
           isValid = isValid && !!form[key];
+
+          if (
+            form[key] &&
+            !errorFields.includes(key) &&
+            !WEBSITE_REGEXP.test(form[key])
+          ) {
+            isValid = false;
+
+            policyTimer.current = setTimeout(
+              () =>
+                setErrorFields((value) => {
+                  return [...value, key];
+                }),
+              300
+            );
+          }
+
+          if (
+            errorFields.includes(key) &&
+            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+          ) {
+            setErrorFields((value) => {
+              return value.filter((n) => n !== key);
+            });
+            if (policyTimer.current) clearTimeout(policyTimer.current);
+            policyTimer.current = null;
+          }
+
           break;
         case "authentication_method":
           isValid = isValid;
@@ -252,6 +372,7 @@ const ClientForm = ({
             logoValue={form.logo}
             changeValue={onChangeForm}
             isEdit={isEdit}
+            errorFields={errorFields}
           />
           {isEdit && (
             <ClientBlock
@@ -281,6 +402,7 @@ const ClientForm = ({
             termsUrlValue={form.terms_url}
             changeValue={onChangeForm}
             isEdit={isEdit}
+            errorFields={errorFields}
           />
           <ButtonsBlock
             saveLabel={t("Common:SaveButton")}

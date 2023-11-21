@@ -17,6 +17,7 @@ interface BasicBlockProps {
   changeValue: (name: string, value: string) => void;
 
   isEdit: boolean;
+  errorFields: string[];
 }
 
 const BasicBlock = ({
@@ -28,14 +29,8 @@ const BasicBlock = ({
   changeValue,
 
   isEdit,
+  errorFields,
 }: BasicBlockProps) => {
-  const [error, setError] = React.useState({
-    name: "",
-    websiteUrl: "",
-    logo: "",
-    description: "",
-  });
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
@@ -67,22 +62,26 @@ const BasicBlock = ({
           name={"name"}
           placeholder={t("Common:EnterName")}
           value={nameValue}
-          error={error.name}
+          error={`${t("ErrorName")} 3`}
           onChange={onChange}
+          isRequired
+          isError={errorFields.includes("name")}
         />
         <InputGroup
           label={t("WebsiteUrl")}
           name={"website_url"}
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
-          error={error.websiteUrl}
+          error={`${t("ErrorWrongURL")}`}
           onChange={onChange}
           disabled={isEdit}
+          isRequired
+          isError={errorFields.includes("website_url")}
         />
         <SelectGroup
           label={t("AppIcon")}
           value={logoValue}
-          selectLabel={"Select new image"}
+          selectLabel={t("SelectNewImage")}
           description={t("IconDescription")}
           onSelect={onSelect}
         />
@@ -91,7 +90,6 @@ const BasicBlock = ({
           name={"description"}
           placeholder={t("EnterDescription")}
           value={descriptionValue}
-          error={error.description}
           onChange={onChange}
         />
       </StyledInputBlock>

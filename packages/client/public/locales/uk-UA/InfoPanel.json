@@ -29,14 +29,11 @@
   "HistoryEmptyScreenText": "Тут буде показано історію активності",
   "ItemsSelected": "Вибрані елементи",
   "LastModifiedBy": "Автор останньої зміни",
-  "PendingInvitations": "Запрошення в очікуванні",
   "Properties": "Властивості",
   "RoomsEmptyScreenTent": "Див. інформацію про кімнати тут",
   "SelectedUsers": "Вибрані облікові записи",
   "StorageType": "Тип сховища",
   "SubmenuDetails": "Подробиці",
   "SubmenuHistory": "Історія",
-  "SystemProperties": "Властивості системи",
-  "UsersInRoom": "Користувачі в кімнаті",
   "Versions": "Версії"
 }

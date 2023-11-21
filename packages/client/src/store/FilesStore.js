@@ -1104,9 +1104,12 @@ class FilesStore {
         const selectableFolder = this.filesList.find(
           (f) => f.id == id && f.isFolder
         );
-        selectableFolder.isFolder = true;
 
-        newSelections.push(selectableFolder);
+        if (selectableFolder) {
+          selectableFolder.isFolder = true;
+
+          newSelections.push(selectableFolder);
+        }
       }
     }
 
@@ -1808,6 +1811,7 @@ class FilesStore {
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
+    const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.authStore.settingsStore;
 
@@ -1819,7 +1823,8 @@ class FilesStore {
     const { isDesktopClient } = this.authStore.settingsStore;
 
     const pluginAllKeys =
-      enablePlugins && this.pluginStore.getContextMenuKeysByType();
+      enablePlugins &&
+      this.pluginStore.getContextMenuKeysByType(null, null, security);
 
     const canRenameItem = item.security?.Rename;
 
@@ -2044,7 +2049,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Files,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2059,7 +2065,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Image,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2074,7 +2081,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Video,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2234,7 +2242,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms
+            PluginFileType.Rooms,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2332,7 +2342,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Folders
+            PluginFileType.Folders,
+            null,
+            security
           );
 
           pluginAllKeys &&

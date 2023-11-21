@@ -49,6 +49,9 @@ const VersionRow = (props) => {
     openUser,
     onClose,
     setIsVisible,
+    fileItemsList,
+    enablePlugins,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -104,11 +107,40 @@ const VersionRow = (props) => {
     setCommentValue(info.comment);
     setShowEditPanel(!showEditPanel);
   };
-  const onOpenFile = () =>
+  const onOpenFile = () => {
+    const { MediaView, ImageView } = info?.viewAccessability;
+
+    if (MediaView || ImageView) {
+      return window.open(
+        "/products/files/#preview/" + info.id,
+        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
+      );
+    }
+
+    if (fileItemsList && enablePlugins) {
+      let currPluginItem = null;
+
+      fileItemsList.forEach((i) => {
+        if (i.key === info.fileExst) currPluginItem = i.value;
+      });
+
+      if (currPluginItem) {
+        const correctDevice = currPluginItem.devices
+          ? currPluginItem.devices.includes(currentDeviceType)
+          : true;
+        if (correctDevice)
+          return currPluginItem.onClick({
+            ...info,
+            viewUrl: `${info.viewUrl}&version=${info.version}`,
+          });
+      }
+    }
+
     window.open(
       info.webUrl,
       window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
     );
+  };
 
   const onRestoreClick = () => {
     onSetRestoreProcess(true);
@@ -288,11 +320,14 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
+export default inject(({ auth, versionHistoryStore, pluginStore }) => {
   const { user } = auth.userStore;
   const { openUser, setIsVisible } = auth.infoPanelStore;
-  const { culture, isTabletView } = auth.settingsStore;
+  const { culture, isTabletView, enablePlugins, currentDeviceType } =
+    auth.settingsStore;
   const language = (user && user.cultureName) || culture || "en";
+
+  const { fileItemsList } = pluginStore;
 
   const {
     // markAsVersion,
@@ -307,6 +342,9 @@ export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
   const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
   return {
+    currentDeviceType,
+    fileItemsList,
+    enablePlugins,
     theme: auth.settingsStore.theme,
     culture: language,
     isTabletView,

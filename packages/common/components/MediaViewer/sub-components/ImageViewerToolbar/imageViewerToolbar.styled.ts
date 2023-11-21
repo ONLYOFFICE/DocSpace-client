@@ -7,14 +7,7 @@ export const ImageViewerToolbarWrapper = styled.div`
 
   position: fixed;
   bottom: 24px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 50%;
-        `
-      : css`
-          left: 50%;
-        `}
+  left: 50%;
   z-index: 307;
 
   transform: translateX(-50%);
@@ -51,7 +44,7 @@ export const ToolbarItem = styled.li<{
   }
 
   .zoomPercent {
-    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
+    font-size: 10px;
     font-weight: 700;
     user-select: none;
   }

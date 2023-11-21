@@ -348,6 +348,7 @@ const PeopleTableRow = (props) => {
         options={typesOptions}
         onSelect={onTypeChange}
         scaled
+        directionY="both"
         size="content"
         displaySelectedOption
         modernView

@@ -42,6 +42,7 @@ const VersionBadgeText = styled(Text)`
   display: flex;
   justify-content: flex-start;
   ${({ reverse }) => reverse && `flex-direction: row-reverse;`}
+  gap: 3px;
 
   span:first-child {
     overflow: hidden;
@@ -87,7 +88,8 @@ const VersionBadge = ({
       >
         {isVersion && (
           <>
-            <span>{t("Version")}</span>&nbsp;<span>{versionGroup}</span>
+            <span>{t("Version")}</span>
+            <span>{versionGroup}</span>
           </>
         )}
       </VersionBadgeText>

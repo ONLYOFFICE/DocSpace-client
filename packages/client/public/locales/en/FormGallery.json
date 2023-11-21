@@ -1,8 +1,8 @@
 {
   "Categories": "Categories",
   "EmptyFormGalleryScreenDescription": "No results matching your query could be found",
-  "ErrorViewHeader": "Form gallery is temporarily unavailable",
   "ErrorViewDescription": "Please try again later",
+  "ErrorViewHeader": "Form gallery is temporarily unavailable",
   "SelectForm": "Select Form",
   "SubmitToGalleryBlockBody": "Submit your templates to share them with the ONLYOFFICE community.",
   "SubmitToGalleryBlockHeader": "ONLYOFFICE Form Gallery",

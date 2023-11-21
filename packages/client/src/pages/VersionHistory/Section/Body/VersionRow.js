@@ -108,6 +108,15 @@ const VersionRow = (props) => {
     setShowEditPanel(!showEditPanel);
   };
   const onOpenFile = () => {
+    const { MediaView, ImageView } = info?.viewAccessability;
+
+    if (MediaView || ImageView) {
+      return window.open(
+        "/products/files/#preview/" + info.id,
+        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
+      );
+    }
+
     if (fileItemsList && enablePlugins) {
       let currPluginItem = null;
 

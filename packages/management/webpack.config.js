@@ -85,6 +85,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       CLIENT_PUBLIC_DIR: path.resolve(__dirname, "../client/public"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
+      COMMON_DIR: path.resolve(__dirname, "../common"),
     },
   },
 

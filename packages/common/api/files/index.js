@@ -1039,7 +1039,7 @@ export function changeDocumentServiceLocation(
   });
 }
 
-export function getExternalLinks(fileId, startIndex = 0, count = 5) {
+export function getExternalLinks(fileId, startIndex = 0, count = 50) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
   return request({
@@ -1058,13 +1058,15 @@ export function getPrimaryLink(fileId) {
 export function editExternalLink(fileId, linkId, access, primary, internal) {
   return request({
     method: "put",
-
     url: `/files/file/${fileId}/links`,
-    data: {
-      linkId,
-      access,
-      primary,
-      internal,
-    },
+    data: { linkId, access, primary, internal },
+  });
+}
+
+export function addExternalLink(fileId, access, primary, internal) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal },
   });
 }

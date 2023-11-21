@@ -10,6 +10,7 @@ import {
   getPrimaryLink,
   getExternalLinks,
   editExternalLink,
+  addExternalLink,
 } from "../api/files";
 
 const observedKeys = [
@@ -362,7 +363,7 @@ class InfoPanelStore {
     return res;
   };
 
-  getAdditionalFileLinks = async (fileId) => {
+  getFileLinks = async (fileId) => {
     const res = await getExternalLinks(fileId);
     return res;
   };
@@ -375,7 +376,11 @@ class InfoPanelStore {
       primary,
       internal
     );
-    console.log(res);
+    return res;
+  };
+
+  addFileLink = async (fileId, access, primary, internal) => {
+    const res = await addExternalLink(fileId, access, primary, internal);
     return res;
   };
 }

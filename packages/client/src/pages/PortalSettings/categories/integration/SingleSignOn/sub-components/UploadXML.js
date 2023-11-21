@@ -152,7 +152,7 @@ const UploadXML = (props) => {
 
         <FileInput
           idButton="select-file"
-          accept=".xml"
+          accept={[".xml"]}
           buttonLabel={t("Common:SelectFile")}
           className="xml-upload-file"
           isDisabled={!enableSso || isLoadingXml}

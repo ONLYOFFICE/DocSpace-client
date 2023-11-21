@@ -66,7 +66,7 @@ const CategoryFilterDesktop = ({
               <Styled.CategoryFilterItem
                 id={item.key}
                 key={item.key}
-                title={t("FormGallery:FormsByBranch")}
+                title={item.label}
                 className={`item-by-${item.key}`}
                 label={item.label}
                 onMouseEnter={() => setHoveredSub(item.key)}

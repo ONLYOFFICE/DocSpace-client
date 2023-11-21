@@ -9,7 +9,7 @@
   },
   "wrongPortalNameUrl": "",
   "thumbnails1280x720": false,
-  "pdfViewer": true,
+  "pdfViewer": false,
   "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": false,
   "editor": {

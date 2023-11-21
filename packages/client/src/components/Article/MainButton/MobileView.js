@@ -33,7 +33,6 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
         : css`
             right: 16px;
           `}
-    bottom: 16px;
   }
 `;
 

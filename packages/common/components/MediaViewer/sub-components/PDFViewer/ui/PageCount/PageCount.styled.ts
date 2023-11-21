@@ -8,7 +8,12 @@ export const PageCountWrapper = styled.div<{ isPanelOpen: boolean }>`
 
   position: fixed;
   bottom: ${isMobile ? "12px" : "108px"};
-  left: ${({ isPanelOpen }) => `calc(50% + ${isPanelOpen ? 306 / 2 : 0}px)`};
+  left: ${({ theme, isPanelOpen }) => {
+    const value = isPanelOpen ? 306 / 2 : 0;
+    const operator = theme.interfaceDirection === "rtl" ? "-" : "+";
+
+    return `calc(50% ${operator} ${value}px)`;
+  }};
   z-index: 307;
 
   transform: translateX(-50%);
@@ -18,7 +23,7 @@ export const PageCountWrapper = styled.div<{ isPanelOpen: boolean }>`
   background: rgba(0, 0, 0, 0.4);
 
   color: white;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  font-size: 12px;
   line-height: 16px;
 
   box-sizing: border-box;

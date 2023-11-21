@@ -6,7 +6,11 @@ import Text from "@docspace/components/text";
 import IconButton from "@docspace/components/icon-button";
 import ContextMenu from "@docspace/components/context-menu";
 
-import { StyledArticleProfile, StyledUserName, StyledProfileWrapper } from "../styled-article";
+import {
+  StyledArticleProfile,
+  StyledUserName,
+  StyledProfileWrapper,
+} from "../styled-article";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { useTheme } from "styled-components";
@@ -53,7 +57,9 @@ const ArticleProfile = (props) => {
 
   const model = getActions(t);
 
-  const username = user.displayName.split(" ").filter((name) => name.trim().length > 0);
+  const username = user.displayName
+    .split(" ")
+    .filter((name) => name.trim().length > 0);
 
   const lastName = username.shift();
   const firstName = username.join(" ");
@@ -65,7 +71,10 @@ const ArticleProfile = (props) => {
   if (currentDeviceType === DeviceType.mobile) return <></>;
 
   return (
-    <StyledProfileWrapper showText={showText} isVirtualKeyboardOpen={isVirtualKeyboardOpen}>
+    <StyledProfileWrapper
+      showText={showText}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+    >
       <StyledArticleProfile showText={showText} tablet={isTabletView}>
         <div ref={ref}>
           <Avatar
@@ -89,12 +98,15 @@ const ArticleProfile = (props) => {
         </div>
         {(!isTabletView || showText) && (
           <>
-            <StyledUserName length={user.displayName.length} onClick={onProfileClick}>
-              <Text fontWeight={600} noSelect truncate>
+            <StyledUserName
+              length={user.displayName.length}
+              onClick={onProfileClick}
+            >
+              <Text fontWeight={600} noSelect truncate dir="auto">
                 {lastName}
-                &nbsp;
               </Text>
-              <Text fontWeight={600} noSelect truncate>
+              &nbsp;
+              <Text fontWeight={600} noSelect truncate dir="auto">
                 {firstName}
               </Text>
             </StyledUserName>

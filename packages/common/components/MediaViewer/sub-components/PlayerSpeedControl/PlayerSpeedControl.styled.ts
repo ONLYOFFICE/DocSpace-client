@@ -41,14 +41,7 @@ export const DropDown = styled.div`
   color: #fff;
   background: #333;
   text-align: center;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          border-radius: 7px 0px 0px 7px;
-        `
-      : css`
-          border-radius: 7px 7px 0px 0px;
-        `}
+  border-radius: 7px 7px 0px 0px;
 `;
 
 export const DropDownItem = styled.div`
@@ -67,14 +60,7 @@ export const ToastSpeed = styled.div`
   position: fixed;
 
   top: 50%;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 50%;
-        `
-      : css`
-          left: 50%;
-        `}
+  left: 50%;
 
   display: flex;
   justify-content: center;

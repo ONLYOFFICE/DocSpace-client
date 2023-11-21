@@ -57,6 +57,7 @@ export type useSocketHelperProps = {
   setTotal: (callback: setTotalCallback) => void;
   disabledItems: string[] | number[];
   filterParam?: string;
+  getIcon: (size: number, fileExst: string) => string;
 };
 
 export type useRootHelperProps = {
@@ -117,6 +118,7 @@ export type useFilesHelpersProps = {
     search?: string | null,
     isErrorPath?: boolean
   ) => void;
+  getIcon: (size: number, fileExst: string) => string;
   t: any;
 };
 
@@ -126,8 +128,10 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
+  setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 
   onClose?: () => void;
 
@@ -213,4 +217,5 @@ export type FilesSelectorProps = {
 
   embedded: boolean;
   withHeader: boolean;
+  settings: any;
 };

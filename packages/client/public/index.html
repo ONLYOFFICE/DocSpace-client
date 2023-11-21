@@ -69,10 +69,11 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script src="/static/scripts/browserDetector.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.browserDetectorUrl %>"></script>
+    <script async src="<%= htmlWebpackPlugin.options.tiffUrl %>"></script>
     <script>
       console.log("It's WEB CLIENT INIT");
-      fetch("/static/scripts/config.json")
+      fetch("<%= htmlWebpackPlugin.options.configUrl %>")
         .then((response) => {
           if (!response.ok) {
             throw new Error("HTTP error " + response.status);
@@ -84,10 +85,13 @@
             ...config,
           };
 
-          if (window.navigator.userAgent.includes("ZoomWebKit") || window.navigator.userAgent.includes("ZoomApps")) {
+          if (
+            window.navigator.userAgent.includes("ZoomWebKit") ||
+            window.navigator.userAgent.includes("ZoomApps")
+          ) {
             window.DocSpaceConfig.editor = {
               openOnNewPage: false,
-              requestClose: true
+              requestClose: true,
             };
           }
 

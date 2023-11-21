@@ -42,7 +42,7 @@ import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
@@ -402,7 +402,7 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
-    if (this.isPwa()) {
+    if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
       xhr.responseType = "blob";
@@ -1367,7 +1367,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !item.security?.Download || this.publicRoomStore.isPublicRoom,
+        disabled: !item.security?.Download,
       },
       ...moveActions,
       {

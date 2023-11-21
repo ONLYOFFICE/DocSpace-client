@@ -29,14 +29,11 @@
   "HistoryEmptyScreenText": "ປະຫວັດການເຄື່ອນໄຫວຈະປາກົດຢູ່ບ່ອນນີ້",
   "ItemsSelected": "ລາຍການທີ່ເລືອກ",
   "LastModifiedBy": "ດັດແກ້ຫຼ້າສຸດໂດຍ",
-  "PendingInvitations": "ການເຊີນທີ່ລໍຖ້າຢູ່",
   "Properties": "ຄຸນສົມບັດ",
   "RoomsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຫ້ອງຢູ່ທີ່ນີ້",
   "SelectedUsers": "ບັນຊີທີ່ເລືອກ",
   "StorageType": "ປະເພດການເກັບຮັກສາ",
   "SubmenuDetails": "ລາຍລະອຽດ",
   "SubmenuHistory": "ປະຫວັດ",
-  "SystemProperties": "ຄຸນສົມບັດຂອງລະບົບ",
-  "UsersInRoom": "ຜູ້ໃຊ້ຢູ່ໃນຫ້ອງ",
   "Versions": "ຮຸ່ນ"
 }

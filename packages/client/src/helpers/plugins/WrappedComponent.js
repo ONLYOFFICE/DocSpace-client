@@ -21,9 +21,9 @@ const PropsContext = React.createContext({});
 
 const ComponentPure = ({
   component,
-  pluginId,
+
   pluginName,
-  pluginSystem,
+
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
   updatePluginStatus,
@@ -36,6 +36,7 @@ const ComponentPure = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updatePlugin,
 }) => {
   const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -71,9 +72,7 @@ const ComponentPure = ({
             <PluginComponent
               key={`box-${index}-${item.component}`}
               component={item}
-              pluginId={pluginId}
               pluginName={pluginName}
-              pluginSystem={pluginSystem}
             />
           )
         );
@@ -97,9 +96,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -128,9 +125,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -159,9 +154,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -190,9 +183,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -240,9 +231,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -256,7 +245,9 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
+
+            updatePlugin
           );
 
           setIsRequestRunning && setIsRequestRunning(false);
@@ -301,9 +292,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -380,9 +369,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
 })(observer(ComponentPure));
 
 const WrappedComponent = ({
-  pluginId,
   pluginName,
-  pluginSystem,
 
   component,
 
@@ -416,12 +403,7 @@ const WrappedComponent = ({
         setModalRequestRunning,
       }}
     >
-      <PluginComponent
-        component={component}
-        pluginId={pluginId}
-        pluginName={pluginName}
-        pluginSystem={pluginSystem}
-      />
+      <PluginComponent component={component} pluginName={pluginName} />
     </PropsContext.Provider>
   );
 };

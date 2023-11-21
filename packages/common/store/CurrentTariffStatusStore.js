@@ -6,14 +6,16 @@ import { getDaysLeft, getDaysRemaining } from "@docspace/common/utils";
 import api from "../api";
 import { TariffState } from "../constants";
 import { getUserByEmail } from "../api/people";
-import authStore from "./AuthStore";
+
 class CurrentTariffStatusStore {
   portalTariffStatus = {};
   isLoaded = false;
   payerInfo = null;
+  authStore;
 
-  constructor() {
+  constructor(authStore) {
     makeAutoObservable(this);
+    this.authStore = authStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -73,7 +75,7 @@ class CurrentTariffStatusStore {
   };
 
   get paymentDate() {
-    moment.locale(authStore.language);
+    moment.locale(this.authStore.language);
     if (this.dueDate === null) return "";
     return moment(this.dueDate).format("LL");
   }
@@ -92,19 +94,19 @@ class CurrentTariffStatusStore {
     return moment() > moment(this.dueDate);
   }
   get gracePeriodEndDate() {
-    moment.locale(authStore.language);
+    moment.locale(this.authStore.language);
     if (this.delayDueDate === null) return "";
     return moment(this.delayDueDate).format("LL");
   }
 
   get delayDaysCount() {
-    moment.locale(authStore.language);
+    moment.locale(this.authStore.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !authStore.isEnterprise) return;
+    if (!this.dueDate || !this.authStore.isEnterprise) return;
 
     const days = getDaysLeft(this.dueDate);
 

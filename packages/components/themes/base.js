@@ -2649,8 +2649,8 @@ const Base = {
       width: "16px",
       height: "16px",
       header: {
-        width: "24px",
-        height: "24px",
+        width: "auto",
+        height: "auto",
       },
     },
     separator: {
@@ -3159,9 +3159,14 @@ const Base = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#555F65",
-    closeIconFill: "#657077",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#555F65",
+    },
+    submitToGalleryTile: {
+      bodyText: "#555F65",
+      closeIconFill: "#657077",
+    },
   },
 
   infoBlock: {
@@ -3178,6 +3183,7 @@ const Base = {
   plugins: {
     borderColor: "#D0D5DA",
     pluginName: "#5C5C5C",
+    descriptionColor: "#657077",
   },
 };
 

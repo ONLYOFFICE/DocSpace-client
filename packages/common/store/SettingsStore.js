@@ -1080,6 +1080,10 @@ class SettingsStore {
 
     return DeviceType.desktop;
   }
+
+  get enablePortalRename() {
+    return this.standalone && this.baseDomain !== "localhost";
+  }
 }
 
 export default SettingsStore;

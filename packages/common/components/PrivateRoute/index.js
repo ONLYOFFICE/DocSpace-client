@@ -28,6 +28,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     isCommunity,
     isEnterprise,
     isPortalDeactivate,
+    enablePortalRename,
   } = rest;
 
   const location = useLocation();
@@ -60,6 +61,10 @@ const PrivateRoute = ({ children, ...rest }) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
+
+    const isPortalRenameUrl =
+      location.pathname ===
+      "/portal-settings/customization/general/portal-renaming";
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -184,6 +189,10 @@ const PrivateRoute = ({ children, ...rest }) => {
     //   );
     // }
 
+    if (isPortalRenameUrl && !enablePortalRename) {
+      return <Navigate replace to={"/error404"} />;
+    }
+
     if (
       !restricted ||
       isAdmin ||
@@ -227,6 +236,7 @@ export default inject(({ auth }) => {
     tenantStatus,
     standalone,
     isPortalDeactivate,
+    enablePortalRename,
   } = settingsStore;
 
   return {
@@ -244,5 +254,6 @@ export default inject(({ auth }) => {
     isLogout,
     standalone,
     isEnterprise,
+    enablePortalRename,
   };
 })(observer(PrivateRoute));

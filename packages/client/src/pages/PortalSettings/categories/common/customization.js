@@ -78,6 +78,7 @@ const Customization = (props) => {
     isLoadedPage,
     viewMobile,
     isSettingPaid,
+    enablePortalRename,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
@@ -112,13 +113,14 @@ const Customization = (props) => {
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />
-      <PortalRenaming isMobileView={viewMobile} />
+      {enablePortalRename && <PortalRenaming isMobileView={viewMobile} />}
     </StyledComponent>
   );
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, settingsStore } = auth;
+  const { enablePortalRename } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoaded, setIsLoadedCustomization } = common;
 
@@ -126,6 +128,7 @@ export default inject(({ auth, common }) => {
     isLoaded,
     setIsLoadedCustomization,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    enablePortalRename,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization)))

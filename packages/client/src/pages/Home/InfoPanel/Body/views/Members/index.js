@@ -65,7 +65,7 @@ const Members = ({
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
-  isVisitor,
+  withPublicRoomBlock,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
@@ -77,7 +77,7 @@ const Members = ({
     const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
     const requests = [getRoomMembers(roomId, clearFilter)];
 
-    if (isPublic && clearFilter) {
+    if (isPublic && clearFilter && withPublicRoomBlock) {
       requests.push(getRoomLinks(roomId));
     }
 
@@ -266,7 +266,7 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType && !isVisitor) {
+  if (isPublicRoomType && withPublicRoomBlock) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
@@ -375,7 +375,7 @@ const Members = ({
   }
 
   const showPublicRoomBar =
-    ((primaryLink && !isArchiveFolder) || isPublicRoom) && !isVisitor;
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
 
   return (
     <>
@@ -458,8 +458,10 @@ export default inject(
       resendEmailInvitations,
       membersFilter,
       setMembersFilter,
+      selection,
+      bufferSelection,
     } = filesStore;
-    const { id: selfId, isVisitor } = auth.userStore.user;
+    const { id: selfId } = auth.userStore.user;
 
     const { changeType: changeUserType } = peopleStore;
     const {
@@ -479,6 +481,18 @@ export default inject(
       roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
+
+    const room = selectionParentRoom
+      ? selectionParentRoom
+      : selection.length
+      ? selection[0]
+      : bufferSelection
+      ? bufferSelection
+      : null;
+
+    const withPublicRoomBlock =
+      room?.access === ShareAccessRights.RoomManager ||
+      room?.access === ShareAccessRights.None;
 
     return {
       setView,
@@ -518,7 +532,7 @@ export default inject(
       primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
-      isVisitor,
+      withPublicRoomBlock,
     };
   }
 )(

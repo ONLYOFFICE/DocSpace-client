@@ -80,7 +80,8 @@ const DeleteProfileEverDialogComponent = (props) => {
   } = props;
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const needReassignData = user.isRoomAdmin || user.isOwner || user.isAdmin;
+  const needReassignData =
+    user.isRoomAdmin || user.isOwner || user.isAdmin || user.isCollaborator;
 
   const deleteMessage = (
     <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>

@@ -67,6 +67,10 @@ const commonInputStyle = css`
       &[type="tel"]:placeholder-shown {
         direction: ltr;
       }
+
+      &[type="search"] {
+        unicode-bidi: plaintext;
+      }
     `}
 `;
 

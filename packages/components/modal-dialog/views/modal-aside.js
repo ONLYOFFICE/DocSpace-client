@@ -18,7 +18,7 @@ import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
 import FormWrapper from "../components/FormWrapper";
-import { isIOS, isMobile } from "react-device-detect";
+import { isIOS, isMobileOnly } from "react-device-detect";
 
 const Modal = ({
   id,
@@ -53,7 +53,7 @@ const Modal = ({
   const contentRef = React.useRef(0);
 
   React.useEffect(() => {
-    if (isMobile && isIOS) {
+    if (isMobileOnly && isIOS) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }

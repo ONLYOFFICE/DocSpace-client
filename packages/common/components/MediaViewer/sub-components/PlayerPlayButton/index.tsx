@@ -15,14 +15,7 @@ const WrapperPlayerPlayButton = styled.div`
   align-items: center;
   width: 48px;
   height: 48px;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -10px;
-        `
-      : css`
-          margin-left: -10px;
-        `}
+  margin-left: -10px;
 
   cursor: pointer;
 `;

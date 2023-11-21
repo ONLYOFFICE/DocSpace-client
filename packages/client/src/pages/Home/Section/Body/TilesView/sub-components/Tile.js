@@ -14,6 +14,7 @@ import { Base } from "@docspace/components/themes";
 import Tags from "@docspace/components/tags";
 import Tag from "@docspace/components/tag";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
+import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -448,7 +449,7 @@ const badgesPosition = css`
 
   .badges {
     display: grid;
-    grid-template-columns: repeat(3, fit-content(50px));
+    grid-template-columns: repeat(3, fit-content(60px));
     grid-template-rows: 32px;
     grid-gap: 7px;
 
@@ -959,7 +960,7 @@ class Tile extends React.PureComponent {
                   getContextModel={getContextModel}
                   ref={this.cm}
                   header={contextMenuHeader}
-                  withBackdrop={true}
+                  withBackdrop={isMobileUtils()}
                   onHide={hideContextMenu}
                 />
               </StyledOptionButton>

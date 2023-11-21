@@ -617,10 +617,18 @@ class FilesActionStore {
 
   downloadAction = (label, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : [bufferSelection];
+      : bufferSelection != null
+      ? [bufferSelection]
+      : infoPanelIsVisible && infoPanelSelection != null
+      ? [infoPanelSelection]
+      : null;
+
+    if (!selection.length) return;
 
     let fileIds = [];
     let folderIds = [];
@@ -1471,9 +1479,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder && el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 
@@ -1574,11 +1586,7 @@ class FilesActionStore {
       case "download":
         return hasSelection && canDownload;
       case "downloadAs":
-        return (
-          canDownload &&
-          canConvertSelected &&
-          !this.publicRoomStore.isPublicRoom
-        );
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 

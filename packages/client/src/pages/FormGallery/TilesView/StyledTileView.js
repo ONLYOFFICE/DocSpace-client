@@ -409,45 +409,6 @@ const StyledTileContainer = styled.div`
 
 StyledTileContainer.defaultProps = { theme: Base };
 
-const truncateCss = css`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const commonCss = css`
-  margin: 0;
-  font-family: "Open Sans";
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
-  font-style: normal;
-  font-weight: 600;
-`;
-
-const StyledTileContent = styled.div`
-  width: 100%;
-  display: inline-flex;
-`;
-
-const MainContainerWrapper = styled.div`
-  ${commonCss};
-
-  display: flex;
-  align-self: center;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: auto;`
-      : `margin-right: auto;`}
-`;
-
-const MainContainer = styled.div`
-  height: 20px;
-
-  @media ${tablet} {
-    ${truncateCss};
-  }
-`;
-
 const StyledCard = styled.div`
   display: block;
   height: ${({ cardHeight }) => `${cardHeight}px`};
@@ -487,9 +448,6 @@ export {
   SimpleFilesTileContent,
   StyledGridWrapper,
   StyledTileContainer,
-  StyledTileContent,
-  MainContainerWrapper,
-  MainContainer,
   StyledCard,
   StyledItem,
   StyledContextMenu,

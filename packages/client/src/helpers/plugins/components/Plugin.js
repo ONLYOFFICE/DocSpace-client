@@ -43,7 +43,7 @@ const Plugin = ({
 
   scopes,
 
-  changePluginStatus,
+  updatePlugin,
 
   withDelete,
 
@@ -66,7 +66,7 @@ const Plugin = ({
         name={name}
         enabled={enabled}
         system={system}
-        changePluginStatus={changePluginStatus}
+        updatePlugin={updatePlugin}
         isUserSettings={isUserSettings}
         withDelete={withDelete}
         showModalPluginSettings={showModalPluginSettings}

@@ -84,7 +84,7 @@ const StyledInputGroup = styled.div`
     gap: 8px;
     margin: 4px 0;
 
-    .logo {
+    .client-logo {
       max-width: 32px;
       max-height: 32px;
       width: 32px;

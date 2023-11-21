@@ -239,7 +239,7 @@ const ClientForm = ({
 
           break;
         case "description":
-          isValid = isValid && !!form[key];
+          // isValid = isValid && !!form[key];
 
           break;
         case "website_url":

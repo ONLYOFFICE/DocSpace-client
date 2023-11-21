@@ -20,6 +20,41 @@ interface BasicBlockProps {
   errorFields: string[];
 }
 
+function getImageDimensions(
+  image: any
+): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    image.onload = function (e: any) {
+      const width = this.width;
+      const height = this.height;
+      resolve({ height, width });
+    };
+  });
+}
+
+function compressImage(
+  image: HTMLImageElement,
+  scale: number,
+  initalWidth: number,
+  initalHeight: number
+): any {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+
+    canvas.width = scale * initalWidth;
+    canvas.height = scale * initalHeight;
+
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      ctx.canvas.toBlob((blob) => {
+        resolve(blob);
+      }, "image/png");
+    }
+  });
+}
+
 const BasicBlock = ({
   t,
   nameValue,
@@ -37,13 +72,43 @@ const BasicBlock = ({
     changeValue(target.name, target.value);
   };
 
-  const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file =
       e.target.files && e.target.files?.length > 0 && e.target.files[0];
 
     if (file) {
+      const imgEl = document.getElementsByClassName(
+        "client-logo"
+      )[0] as HTMLImageElement;
+
+      imgEl.src = URL.createObjectURL(file);
+
+      const { height, width } = await getImageDimensions(imgEl);
+
+      const MAX_WIDTH = 32; //if we resize by width, this is the max width of compressed image
+      const MAX_HEIGHT = 32; //if we resize by height, this is the max height of the compressed image
+
+      const widthRatioBlob = await compressImage(
+        imgEl,
+        MAX_WIDTH / width,
+        width,
+        height
+      );
+      const heightRatioBlob = await compressImage(
+        imgEl,
+        MAX_HEIGHT / height,
+        width,
+        height
+      );
+
+      //pick the smaller blob between both
+      const compressedBlob =
+        widthRatioBlob.size > heightRatioBlob.size
+          ? heightRatioBlob
+          : widthRatioBlob;
+
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(compressedBlob);
 
       reader.onload = () => {
         const result = reader.result as string;

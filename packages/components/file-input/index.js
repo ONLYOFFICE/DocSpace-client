@@ -94,8 +94,8 @@ class FileInput extends Component {
     return (
       <Dropzone
         onDrop={this.onDrop}
-        {...(accept && { accept: [accept] })}
         noClick={isDisabled || isLoading}
+        accept={accept}
       >
         {({ getRootProps, getInputProps }) => (
           <StyledFileInput

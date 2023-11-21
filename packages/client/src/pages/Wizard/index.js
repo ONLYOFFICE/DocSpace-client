@@ -379,7 +379,7 @@ const Wizard = (props) => {
                 <FileInput
                   scale
                   size="large"
-                  accept=".lic"
+                  accept={[".lic"]}
                   placeholder={t("PlaceholderLicense")}
                   onInput={onLicenseFileHandler}
                   hasError={hasErrorLicense}

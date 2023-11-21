@@ -1,6 +1,4 @@
-import React from "react";
 import { inject, observer } from "mobx-react";
-
 import FileInput from "@docspace/components/file-input";
 
 const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
@@ -14,6 +12,7 @@ const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
       scale
       className="restore-backup_input"
       isDisabled={!isEnableRestore}
+      accept={[".tar", ".tar.gz"]}
     />
   );
 };

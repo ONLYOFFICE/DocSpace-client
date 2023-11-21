@@ -14,7 +14,7 @@ import Submenu from "@docspace/components/submenu";
       name: "File Input",
       content: (
         <FileInput
-          accept=".doc, .docx"
+          accept={[".doc", ".docx"]}
           id="file-input-id"
           name="demoFileInputName"
           onInput={function noRefCheck() {}}
@@ -53,7 +53,7 @@ import Submenu from "@docspace/components/submenu";
   name: "File Input",
   content: (
     <FileInput
-      accept=".doc, .docx"
+      accept={[".doc", ".docx"]}
       id="file-input-id"
       name="demoFileInputName"
       onInput={function noRefCheck() {}}

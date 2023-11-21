@@ -168,6 +168,21 @@
       }
     },
     {
+      "label": "Frontend | update yarn.lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn wipe && yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build",
@@ -201,6 +216,21 @@
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build && yarn start-prod",
       "group": {
         "kind": "build",
         "isDefault": true

@@ -9,7 +9,6 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import copy from "copy-to-clipboard";
@@ -22,7 +21,12 @@ import toastr from "@docspace/components/toast/toastr";
 
 import { StyledLinkRow } from "./StyledShare";
 
-const LinkRow = ({ onAddClick, links, fileId, editFileLink }) => {
+const LinkRow = ({
+  onAddClick,
+  links,
+  changeShareOption,
+  changeAccessOption,
+}) => {
   const { t } = useTranslation(["SharingPanel", "Files"]);
 
   const shareOptions = [
@@ -84,26 +88,6 @@ const LinkRow = ({ onAddClick, links, fileId, editFileLink }) => {
   const onCopyLink = (link) => {
     copy(link.sharedTo.shareLink);
     toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-  };
-
-  const changeShareOption = async (item, link) => {
-    await editFileLink(
-      fileId,
-      link.sharedTo.id,
-      link.access,
-      link.sharedTo.primary,
-      item.internal
-    );
-  };
-
-  const changeAccessOption = async (item, link) => {
-    await editFileLink(
-      fileId,
-      link.sharedTo.id,
-      item.access,
-      link.sharedTo.primary,
-      link.internal
-    );
   };
 
   return (
@@ -181,10 +165,4 @@ const LinkRow = ({ onAddClick, links, fileId, editFileLink }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { editFileLink } = auth.infoPanelStore;
-
-  return {
-    editFileLink,
-  };
-})(observer(LinkRow));
+export default LinkRow;

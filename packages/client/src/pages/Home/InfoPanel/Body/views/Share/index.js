@@ -21,39 +21,65 @@ const Share = (props) => {
     setView,
     selection,
     getPrimaryFileLink,
-    getAdditionalFileLinks,
+    getFileLinks,
+    editFileLink,
+    addFileLink,
   } = props;
   const { t } = useTranslation(["SharingPanel", "Files"]);
-  const [primaryFileLink, setPrimaryFileLink] = useState(null);
-  const [additionalFileLinks, setAdditionalFileLinks] = useState(null);
+  const [primaryFileLink, setPrimaryFileLink] = useState([]);
+  const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
 
   useEffect(() => {
     if (isRooms || !selection?.canShare) {
       setView("info_details");
     }
-
-    if (selection?.shared) {
-      fetchLinks();
-    }
+    fetchLinks();
   }, []);
 
   const fetchLinks = async () => {
-    const link = await getPrimaryFileLink(selection.id);
-    setPrimaryFileLink([link]);
-    //const links = await getAdditionalFileLinks(selection.id);
-    //setAdditionalFileLinks(links.items);
+    const res = await getFileLinks(selection.id);
+    const primaryLink = res.items.filter(
+      (item) => item.sharedTo.primary === true
+    );
+    const additionalLinks = res.items.filter(
+      (item) => item.sharedTo.primary !== true
+    );
+
+    setPrimaryFileLink(primaryLink);
+    setAdditionalFileLinks(additionalLinks);
   };
 
   const addGeneralLink = async () => {
     const link = await getPrimaryFileLink(selection.id);
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+    toastr.success(t("Files:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
-    const links = await getAdditionalFileLinks(selection.id);
-    setAdditionalFileLinks(links.items);
+    const newLink = await addFileLink(selection.id, 10, false, false);
+    setAdditionalFileLinks([...additionalFileLinks, ...[newLink]]);
+  };
+
+  const changeShareOption = async (item, link) => {
+    const res = await editFileLink(
+      selection.id,
+      link.sharedTo.id,
+      link.access,
+      link.sharedTo.primary,
+      item.internal
+    );
+  };
+
+  const changeAccessOption = async (item, link) => {
+    const res = await editFileLink(
+      selection.id,
+      link.sharedTo.id,
+      item.access,
+      link.sharedTo.primary,
+      link.internal
+    );
+    //setPrimaryFileLink(res ? [res] : []);
   };
 
   return (
@@ -70,7 +96,8 @@ const Share = (props) => {
         <LinkRow
           onAddClick={addGeneralLink}
           links={primaryFileLink}
-          fileId={selection.id}
+          changeShareOption={changeShareOption}
+          changeAccessOption={changeAccessOption}
         />
       </StyledLinks>
 
@@ -90,7 +117,8 @@ const Share = (props) => {
           <LinkRow
             onAddClick={addAdditionalLinks}
             links={additionalFileLinks}
-            fileId={selection.id}
+            changeShareOption={changeShareOption}
+            changeAccessOption={changeAccessOption}
           />
         </StyledLinks>
       )}
@@ -99,12 +127,19 @@ const Share = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const { setView, getPrimaryFileLink, getAdditionalFileLinks } =
-    auth.infoPanelStore;
+  const {
+    setView,
+    getPrimaryFileLink,
+    getFileLinks,
+    editFileLink,
+    addFileLink,
+  } = auth.infoPanelStore;
 
   return {
     setView,
     getPrimaryFileLink,
-    getAdditionalFileLinks,
+    getFileLinks,
+    editFileLink,
+    addFileLink,
   };
 })(observer(Share));

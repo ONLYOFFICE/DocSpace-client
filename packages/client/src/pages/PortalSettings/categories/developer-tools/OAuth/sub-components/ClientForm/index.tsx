@@ -21,8 +21,14 @@ import { StyledContainer } from "./ClientForm.styled";
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import ClientFormLoader from "./Loader";
 
-export const WEBSITE_REGEXP =
-  /(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
+export function isValidUrl(url: string) {
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
 
 const ClientForm = ({
   id,
@@ -242,7 +248,7 @@ const ClientForm = ({
           if (
             form[key] &&
             !errorFields.includes(key) &&
-            !WEBSITE_REGEXP.test(form[key])
+            !isValidUrl(form[key])
           ) {
             isValid = false;
 
@@ -257,7 +263,7 @@ const ClientForm = ({
 
           if (
             errorFields.includes(key) &&
-            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+            (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
@@ -285,7 +291,7 @@ const ClientForm = ({
           if (
             form[key] &&
             !errorFields.includes(key) &&
-            !WEBSITE_REGEXP.test(form[key])
+            !isValidUrl(form[key])
           ) {
             isValid = false;
 
@@ -300,7 +306,7 @@ const ClientForm = ({
 
           if (
             errorFields.includes(key) &&
-            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+            (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
@@ -316,7 +322,7 @@ const ClientForm = ({
           if (
             form[key] &&
             !errorFields.includes(key) &&
-            !WEBSITE_REGEXP.test(form[key])
+            !isValidUrl(form[key])
           ) {
             isValid = false;
 
@@ -331,7 +337,7 @@ const ClientForm = ({
 
           if (
             errorFields.includes(key) &&
-            (!form[key] || WEBSITE_REGEXP.test(form[key]))
+            (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);

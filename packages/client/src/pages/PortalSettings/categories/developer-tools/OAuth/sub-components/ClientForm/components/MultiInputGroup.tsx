@@ -11,12 +11,11 @@ import SelectedItem from "@docspace/components/selected-item";
 
 import {
   StyledChipsContainer,
-  StyledHeaderRow,
   StyledInputGroup,
   StyledInputRow,
 } from "../ClientForm.styled";
 import InputGroup from "./InputGroup";
-import { WEBSITE_REGEXP } from "..";
+import { isValidUrl } from "..";
 
 interface MultiInputGroupProps {
   t: any;
@@ -58,10 +57,9 @@ const MultiInputGroup = ({
     if (timer.current) {
       clearTimeout(timer.current);
     }
-    console.log(value, "call");
+
     if (value) {
-      console.log(value);
-      if (WEBSITE_REGEXP.test(value)) {
+      if (isValidUrl(value)) {
         setIsError(false);
       } else {
         timer.current = setTimeout(() => {
@@ -73,7 +71,6 @@ const MultiInputGroup = ({
     }
   }, [value]);
 
-  console.log(WEBSITE_REGEXP.test(value));
   return (
     <StyledInputGroup>
       <InputGroup

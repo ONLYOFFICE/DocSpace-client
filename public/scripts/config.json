@@ -17,6 +17,6 @@
     "requestClose": false
   },
   "management": {
-    "checkDomain": true
+    "checkDomain": false
   }
 }

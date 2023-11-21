@@ -139,13 +139,9 @@ const Progress = ({
 
   const you = `${`(` + t("Common:You") + `)`}`;
 
-  const reassigningDataStart = (
+  const reassigningDataStart = isReassignCurrentUser ? (
     <Trans
-      i18nKey={
-        isReassignCurrentUser
-          ? "ReassigningDataToItself"
-          : "ReassigningDataToAnother"
-      }
+      i18nKey="ReassigningDataToItself"
       ns="DataReassignmentDialog"
       t={t}
       fromUser={fromUser}
@@ -154,10 +150,21 @@ const Progress = ({
     >
       <div className="user"> {{ fromUser }}</div>
       <div className="user"> {{ toUser }}</div>
-      {isReassignCurrentUser ? <div className="user"> {{ you }}</div> : ""}
+      <div className="user"> {{ you }}</div>
+    </Trans>
+  ) : (
+    <Trans
+      i18nKey="ReassigningDataToAnother"
+      ns="DataReassignmentDialog"
+      t={t}
+      fromUser={fromUser}
+      toUser={toUser}
+      you={you}
+    >
+      <div className="user"> {{ fromUser }}</div>
+      <div className="user"> {{ toUser }}</div>
     </Trans>
   );
-
   return (
     <StyledProgress>
       <div className="data-start"> {reassigningDataStart}</div>

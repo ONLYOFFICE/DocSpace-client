@@ -34,7 +34,7 @@ const Share = (props) => {
       setView("info_details");
     }
     fetchLinks();
-  }, []);
+  }, [selection]);
 
   const fetchLinks = async () => {
     const res = await getFileLinks(selection.id);
@@ -79,7 +79,7 @@ const Share = (props) => {
       link.sharedTo.primary,
       link.internal
     );
-    //setPrimaryFileLink(res ? [res] : []);
+    fetchLinks();
   };
 
   return (

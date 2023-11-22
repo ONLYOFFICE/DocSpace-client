@@ -86,18 +86,19 @@ const QuickButtons = (props) => {
     !isTile;
 
   //const showLifetimeIcon = item.lifetime < item.lifetime * 0.1
+  const showLifetimeIcon = true;
 
-  //TODO:
+  const fileDeleteDate = "22.02 12:08 PM"; // TODO:
+
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
-      The file will be deleted after 1 day and 2 hours.
+      {t("Files:FileWillBeDeleted", { date: fileDeleteDate })}.
     </Text>
   );
 
   return (
     <StyledQuickButtons className="badges additional-badges  badges__quickButtons">
-      {/*  */}
-      {isAvailableLockFile && (
+      {showLifetimeIcon && (
         <>
           <ColorTheme
             themeId={ThemeType.IconButton}
@@ -118,7 +119,6 @@ const QuickButtons = (props) => {
           />
         </>
       )}
-      {/*  */}
 
       {isAvailableLockFile && (
         <ColorTheme

@@ -177,5 +177,6 @@
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
-  "RoomFilesLifetime": "The file lifetime is set to {{days}} days in this room"
+  "RoomFilesLifetime": "The file lifetime is set to {{days}} days in this room",
+  "FileWillBeDeleted": "The file will be deleted {{date}}"
 }

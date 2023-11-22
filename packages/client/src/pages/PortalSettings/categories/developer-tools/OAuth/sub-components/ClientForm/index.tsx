@@ -196,10 +196,47 @@ const ClientForm = ({
     let isValid = true;
 
     if (isEdit) {
+      for (let key in form) {
+        switch (key) {
+          case "name":
+            isValid = isValid && !!form[key];
+
+            if (
+              form[key] &&
+              !errorFields.includes(key) &&
+              (form[key].length < 3 || form[key].length > 256)
+            ) {
+              isValid = false;
+
+              nameTimer.current = setTimeout(() => {
+                setErrorFields((value) => {
+                  return [...value, key];
+                });
+              }, 300);
+            }
+
+            if (
+              errorFields.includes(key) &&
+              (!form[key] || (form[key].length > 2 && form[key].length < 256))
+            ) {
+              setErrorFields((value) => {
+                return value.filter((n) => n !== key);
+              });
+              if (nameTimer.current) clearTimeout(nameTimer.current);
+              nameTimer.current = null;
+            }
+
+            break;
+        }
+      }
+
       return (
-        form.name !== initialClient.name ||
-        form.logo !== initialClient.logo ||
-        form.description !== initialClient.description
+        isValid &&
+        form.name &&
+        form.logo &&
+        (form.name !== initialClient.name ||
+          form.logo !== initialClient.logo ||
+          form.description !== initialClient.description)
       );
     }
 

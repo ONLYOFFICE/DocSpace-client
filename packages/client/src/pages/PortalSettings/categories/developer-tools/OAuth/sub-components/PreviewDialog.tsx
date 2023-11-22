@@ -20,11 +20,7 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import Button from "@docspace/components/button";
 import { Base } from "@docspace/components/themes";
-import {
-  generateCodeChallenge,
-  generatePKCEPair,
-  generateRandomString,
-} from "@docspace/common/utils/oauth";
+import { generatePKCEPair } from "@docspace/common/utils/oauth";
 
 const StyledContainer = styled.div`
   width: 100%;

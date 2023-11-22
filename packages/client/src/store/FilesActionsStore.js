@@ -2122,7 +2122,7 @@ class FilesActionStore {
     const isMediaOrImage =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
     const canConvert =
-      item.viewAccessibility?.Convert && item.security?.Convert;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 

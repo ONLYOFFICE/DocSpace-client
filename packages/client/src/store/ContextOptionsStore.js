@@ -347,7 +347,7 @@ class ContextOptionsStore {
   onClickLinkEdit = (item) => {
     const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
     const canConvert =
-      item.viewAccessibility?.Convert && item.security?.Convert;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });

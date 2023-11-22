@@ -3049,7 +3049,7 @@ class FilesStore {
 
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
 
-      const needConvert = item.viewAccessibility?.Convert;
+      const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
@@ -3483,7 +3483,9 @@ class FilesStore {
       (x) => x.viewAccessibility?.WebCustomFilterEditing
     );
 
-    const webNeedConvert = selection.find((x) => x.viewAccessibility?.Convert);
+    const webNeedConvert = selection.find(
+      (x) => x.viewAccessibility?.MustConvert
+    );
 
     if ((webEdit && !webNeedConvert) || !externalAccess)
       AccessOptions.push("FullAccess");

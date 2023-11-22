@@ -238,7 +238,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.viewAccessibility?.Convert &&
+        fileInfo?.viewAccessibility?.MustConvert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -321,7 +321,10 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.viewAccessibility?.Convert && fileInfo?.security?.Convert) {
+      if (
+        fileInfo?.viewAccessibility?.MustConvert &&
+        fileInfo?.security?.Convert
+      ) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;

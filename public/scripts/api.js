@@ -2,6 +2,7 @@
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
+    requestToken: null,
     width: "100%",
     height: "100%",
     name: "frameDocSpace",
@@ -51,7 +52,7 @@
   };
 
   const getConfigFromParams = () => {
-    const src = document.currentScript.src;
+    const src = decodeURIComponent(document.currentScript.src);
 
     if (!src || !src.length) return null;
 
@@ -101,10 +102,18 @@
         case "manager": {
           if (config.filter) {
             if (config.id) config.filter.folder = config.id;
-            const filterString = new URLSearchParams(config.filter).toString();
+
+            const params = config.requestToken
+              ? { key: config.requestToken, ...config.filter }
+              : config.filter;
+
+            const urlParams = new URLSearchParams(params).toString();
+
             path = `${config.rootPath}${
-              config.id ? config.id + "/" : ""
-            }filter?${filterString}`;
+              config.requestToken
+                ? `?${urlParams}`
+                : `${config.id ? config.id + "/" : ""}filter?${urlParams}`
+            }`;
           }
           break;
         }
@@ -166,7 +175,6 @@
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
       iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("onmousewheel", "");
       iframe.setAttribute("allow", "autoplay");
 
       if (config.type == "mobile") {

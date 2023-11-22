@@ -11,16 +11,17 @@ import SubMenu from "./sub-components/sub-menu";
 import MobileSubMenu from "./sub-components/mobile-sub-menu";
 
 import {
-  isMobile,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "../utils/device";
+
 import Backdrop from "../backdrop";
 import Text from "../text";
 import Avatar from "../avatar";
 import IconButton from "../icon-button";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
-import RoomIcon from "@docspace/components/room-icon";
+import RoomIcon from "../room-icon";
+
 class ContextMenu extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +34,7 @@ class ContextMenu extends Component {
       changeView: false,
       showMobileMenu: false,
       onLoad: null,
+      articleWidth: 0,
     };
 
     this.menuRef = React.createRef();
@@ -81,6 +83,7 @@ class ContextMenu extends Component {
           reshow: false,
           resetMenu: true,
           changeView: false,
+          articleWidth: 0,
         },
         () => this.show(event)
       );
@@ -96,6 +99,7 @@ class ContextMenu extends Component {
       reshow: false,
       changeView: false,
       showMobileMenu: false,
+      articleWidth: 0,
     });
   };
 
@@ -144,12 +148,19 @@ class ContextMenu extends Component {
         left = event.pageX - width + 1;
       }
       if (isTabletUtils() && height > 483) {
-        this.setState({ changeView: true });
+        const article = document.getElementById("article-container");
+
+        let articleWidth = 0;
+        if (article) {
+          articleWidth = article.offsetWidth;
+        }
+
+        this.setState({ changeView: true, articleWidth });
         return;
       }
 
       if (isMobileUtils() && height > 210) {
-        this.setState({ changeView: true });
+        this.setState({ changeView: true, articleWidth: 0 });
         return;
       }
 
@@ -320,6 +331,7 @@ class ContextMenu extends Component {
     );
 
     const changeView = this.state.changeView;
+    const articleWidth = this.state.articleWidth;
     const isIconExist = this.props.header?.icon;
     const isAvatarExist = this.props.header?.avatar;
 
@@ -330,6 +342,7 @@ class ContextMenu extends Component {
       <>
         <StyledContextMenu
           changeView={changeView}
+          articleWidth={articleWidth}
           isRoom={this.props.isRoom}
           fillIcon={this.props.fillIcon}
           isIconExist={isIconExist}
@@ -370,6 +383,7 @@ class ContextMenu extends Component {
                           <RoomIcon
                             color={this.props.header.color}
                             title={this.props.header.title}
+                            isArchive={this.props.isArchive}
                           />
                         ) : (
                           <img
@@ -426,18 +440,31 @@ class ContextMenu extends Component {
 
   render() {
     const element = this.renderContextMenu();
-    return (
+
+    const isMobile = isMobileUtils();
+
+    const contextMenu = (
       <>
         {this.props.withBackdrop && (
           <Backdrop
-            visible={this.state.visible}
-            withBackground={false}
-            withoutBlur={true}
+            visible={
+              this.state.visible &&
+              (this.state.changeView || this.props.ignoreChangeView)
+            }
+            withBackground={true}
+            withoutBlur={false}
+            zIndex={this.props.baseZIndex}
           />
         )}
         <Portal element={element} appendTo={this.props.appendTo} />
       </>
     );
+
+    const root = document.getElementById("root");
+
+    const portal = <Portal element={contextMenu} appendTo={root} />;
+
+    return isMobile && root ? portal : contextMenu;
   }
 }
 
@@ -456,6 +483,8 @@ ContextMenu.propTypes = {
   global: PropTypes.bool,
   /** Sets the context menu to be rendered with a backdrop */
   withBackdrop: PropTypes.bool,
+  /** Ignores changeView restrictions for rendering backdrop */
+  ignoreChangeView: PropTypes.bool,
   /** Sets zIndex layering value automatically */
   autoZIndex: PropTypes.bool,
   /** Sets automatic layering management */

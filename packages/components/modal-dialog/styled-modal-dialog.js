@@ -5,6 +5,14 @@ import { mobile, tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
 const StyledModal = styled.div`
+  #create-text-input::-webkit-search-decoration,
+  #create-text-input::-webkit-search-cancel-button,
+  #create-text-input::-webkit-search-results-button,
+  #create-text-input::-webkit-search-results-decoration {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
   pointer-events: none;
   &.modal-active {
     pointer-events: all;
@@ -107,7 +115,7 @@ const StyledHeader = styled.div`
     font-family: "Open Sans";
     color: ${(props) => props.theme.modalDialog.textColor};
     font-weight: 700;
-    font-size: "21px";
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
   }
 `;
 

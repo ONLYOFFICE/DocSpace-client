@@ -29,6 +29,7 @@ import {
   FileAction,
   FileStatus,
   FolderType,
+  RoomsType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
@@ -557,6 +558,7 @@ class FilesActionStore {
       label,
       alert: false,
       operationId,
+      isDownload: true,
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
@@ -615,10 +617,18 @@ class FilesActionStore {
 
   downloadAction = (label, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : [bufferSelection];
+      : bufferSelection != null
+      ? [bufferSelection]
+      : infoPanelIsVisible && infoPanelSelection != null
+      ? [infoPanelSelection]
+      : null;
+
+    if (!selection.length) return;
 
     let fileIds = [];
     let folderIds = [];
@@ -1057,12 +1067,12 @@ class FilesActionStore {
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
 
-    const muteStatus = action === "mute" ? true : false;
+    const muteStatus = action === "mute";
 
-    const folderIndex = id && folders.findIndex((x) => x.id === id);
+    const folderIndex = id && folders.findIndex((x) => x.id == id);
     if (folderIndex) updateRoomMute(folderIndex, muteStatus);
 
-    const treeIndex = treeFolders.findIndex((x) => x.id === rootFolderId);
+    const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
       if (muteStatus) {
@@ -1469,9 +1479,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder && el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 
@@ -1561,6 +1575,7 @@ class FilesActionStore {
       this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
+    const canDownload = selection.every((s) => s.security?.Download);
 
     switch (option) {
       case "copy":
@@ -1569,11 +1584,9 @@ class FilesActionStore {
         return hasSelection && canCopy;
       case "showInfo":
       case "download":
-        const canDownload = selection.every((s) => s.security?.Download);
-
         return hasSelection && canDownload;
       case "downloadAs":
-        return canConvertSelected && !this.publicRoomStore.isPublicRoom;
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 
@@ -2029,8 +2042,7 @@ class FilesActionStore {
   };
 
   getRecycleBinFolderOptions = (itemsCollection, t) => {
-    const { setEmptyTrashDialogVisible, setMoveToPanelVisible } =
-      this.dialogsStore;
+    const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -2043,7 +2055,7 @@ class FilesActionStore {
       .set("restore", {
         id: "menu-restore",
         label: t("Common:Restore"),
-        onClick: () => setMoveToPanelVisible(true),
+        onClick: () => setRestorePanelVisible(true),
         iconUrl: MoveReactSvgUrl,
       })
       .set("delete", deleteOption)
@@ -2089,16 +2101,16 @@ class FilesActionStore {
 
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
-
+    const { currentDeviceType } = this.authStore.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.authStore.settingsStore;
 
-    const { isLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { roomType, title: currentTitle } = this.selectedFolderStore;
 
     if (this.publicRoomStore.isPublicRoom && item.isFolder)
       return this.moveToPublicRoom(item.id);
@@ -2120,7 +2132,7 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
-      const { isRoom, rootFolderType, title } = item;
+      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
       setIsLoading(true);
 
@@ -2132,7 +2144,14 @@ class FilesActionStore {
       const filter = FilesFilter.getDefault();
       filter.folder = id;
 
-      const state = { title, isRoot: false, rootFolderType, isRoom };
+      const state = {
+        title,
+        isRoot: false,
+        rootFolderType,
+        isRoom,
+        rootRoomTitle: !!roomType ? currentTitle : "",
+        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+      };
 
       setSelection([]);
 
@@ -2162,7 +2181,11 @@ class FilesActionStore {
               )
             : null;
 
-        return openDocEditor(id, providerKey, tab, null, !item.security.Edit);
+        const isPreview = item.isForm
+          ? !item.security.FillForms
+          : !item.security.Edit;
+
+        return openDocEditor(id, providerKey, tab, null, isPreview);
       }
 
       if (isMediaOrImage) {
@@ -2189,13 +2212,12 @@ class FilesActionStore {
         });
 
         if (currPluginItem) {
-          currPluginItem.onClick(item);
-
-          return;
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
         }
       }
-
-      return;
 
       return window.open(viewUrl, "_self");
     }
@@ -2285,6 +2307,7 @@ class FilesActionStore {
           ]?.title) ||
         "",
       isRoot: true,
+      isPublicRoomType: false,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
@@ -2324,12 +2347,6 @@ class FilesActionStore {
   backToParentFolder = () => {
     if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
-
     const id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
@@ -2341,10 +2358,17 @@ class FilesActionStore {
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
 
+    const isRoot = navigationPath.length === 1;
+
     const state = {
       title: (navigationPath && navigationPath[0]?.title) || "",
-      isRoot: navigationPath.length === 1,
+      isRoom: navigationPath[0]?.isRoom,
+      isRoot,
       rootFolderType: rootFolderType,
+      isPublicRoomType: navigationPath[0]?.isRoom
+        ? navigationPath[0]?.roomType === RoomsType.PublicRoom
+        : false,
+      rootRoomTitle: "",
     };
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {

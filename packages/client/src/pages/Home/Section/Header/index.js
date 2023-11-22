@@ -27,6 +27,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -154,6 +155,7 @@ const SectionHeaderContent = (props) => {
     isHeaderChecked,
     isHeaderIndeterminate,
     showText,
+    oformsFilter,
 
     isEmptyArchive,
 
@@ -207,7 +209,7 @@ const SectionHeaderContent = (props) => {
     isEmptyPage,
 
     isLoading,
-    pathParts,
+
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
@@ -216,7 +218,10 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
-    externalLinks,
+    isCustomRoomType,
+    primaryLink,
+    getPrimaryLink,
+    setExternalLink,
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
@@ -265,7 +270,10 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const createFolder = () => onCreate();
@@ -420,11 +428,23 @@ const SectionHeaderContent = (props) => {
         ];
 
     if (mainButtonItemsList && enablePlugins) {
+      const pluginItems = [];
+
       mainButtonItemsList.forEach((option) => {
-        options.splice(option.value.position, 0, {
+        pluginItems.push({
           key: option.key,
           ...option.value,
         });
+      });
+
+      options.splice(5, 0, {
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
       });
     }
 
@@ -595,45 +615,6 @@ const SectionHeaderContent = (props) => {
 
     const isDisabled = isRecycleBinFolder || isRoom;
 
-    const links = externalLinks.filter((l) => !l.sharedTo.disabled);
-    const isMultiExternalLink = links.length > 1;
-
-    const roomLinks = links.map((link) => {
-      return {
-        // id: "option_move-to",
-        key: `external-link_${link.sharedTo.id}`,
-        label: link.sharedTo.title,
-        icon: InvitationLinkReactSvgUrl,
-        onClick: () => {
-          copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
-        },
-        disabled: link.sharedTo.disabled,
-      };
-    });
-
-    const publicAction = links.length
-      ? isMultiExternalLink
-        ? {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            disabled: !isPublicRoomType,
-            items: roomLinks,
-          }
-        : {
-            id: "header_option_copy-external-link",
-            key: "copy-external-link",
-            label: t("SharingPanel:CopyExternalLink"),
-            icon: CopyToReactSvgUrl,
-            onClick: () => {
-              roomLinks[0]?.onClick();
-            },
-            disabled: !isPublicRoomType || roomLinks[0]?.disabled,
-          }
-      : {};
-
     if (isArchiveFolder) {
       return [
         {
@@ -675,9 +656,13 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyLink"),
         onClick: onCopyLinkAction,
-        disabled: isRecycleBinFolder || isPersonalRoom,
+        disabled:
+          isRecycleBinFolder ||
+          isPersonalRoom ||
+          isPublicRoomType ||
+          isCustomRoomType,
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -720,7 +705,26 @@ const SectionHeaderContent = (props) => {
         onClick: () => onClickEditRoom(selectedFolder),
         disabled: !isRoom || !security?.EditRoom,
       },
-      publicAction,
+      {
+        id: "header_option_copy-external-link",
+        key: "copy-external-link",
+        label: t("Files:CopyGeneralLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: async () => {
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            toastr.success(t("Translations:LinkCopySuccess"));
+          } else {
+            const link = await getPrimaryLink(currentFolderId);
+            if (link) {
+              copy(link.sharedTo.shareLink);
+              toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+              setExternalLink(link);
+            }
+          }
+        },
+        disabled: !isPublicRoomType && !isCustomRoomType,
+      },
       {
         id: "header_option_invite-users-to-room",
         key: "invite-users-to-room",
@@ -759,7 +763,7 @@ const SectionHeaderContent = (props) => {
         key: "download",
         label: t("Common:Download"),
         onClick: onDownloadAction,
-        disabled: isDisabled,
+        disabled: !isRoom || !security?.Download,
         icon: DownloadReactSvgUrl,
       },
       {
@@ -884,8 +888,17 @@ const SectionHeaderContent = (props) => {
     const state = {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === 0,
-
+      isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
       rootFolderType: rootFolderType,
+      isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
+        ? selectedFolder.navigationPath[itemIdx]?.roomType ===
+          RoomsType.PublicRoom
+        : false,
+      rootRoomTitle:
+        selectedFolder.navigationPath.length > 1 &&
+        selectedFolder.navigationPath[1]?.isRoom
+          ? selectedFolder.navigationPath[1].title
+          : "",
     };
 
     setIsLoading(true);
@@ -952,9 +965,11 @@ const SectionHeaderContent = (props) => {
   const stateTitle = location?.state?.title;
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
 
   const isRoot =
-    isLoading && stateIsRoot
+    isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
       : isRootFolder || isAccountsPage || isSettingsPage;
 
@@ -966,13 +981,26 @@ const SectionHeaderContent = (props) => {
     ? stateTitle
     : title;
 
-  const isCurrentRoom = isLoading && stateIsRoom ? stateIsRoom : isRoom;
+  const currentRootRoomTitle =
+    isLoading && stateRootRoomTitle
+      ? stateRootRoomTitle
+      : navigationPath?.length > 1 &&
+        navigationPath[navigationPath?.length - 2].title;
+
+  const currentIsPublicRoomType =
+    isLoading && typeof stateIsPublicRoomType === "boolean"
+      ? stateIsPublicRoomType
+      : isPublicRoomType;
+
+  const isCurrentRoom =
+    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
   if (showHeaderLoader) return <Loaders.SectionHeader />;
 
   const insideTheRoom =
-    categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Archive;
+    (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Archive) &&
+    !isCurrentRoom;
 
   const logo = !theme.isBase
     ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
@@ -1001,6 +1029,7 @@ const SectionHeaderContent = (props) => {
                   !isSettingsPage &&
                   !isPublicRoom
                 }
+                rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
                 isDesktop={isDesktop}
                 isTabletView={isTabletView}
@@ -1038,7 +1067,7 @@ const SectionHeaderContent = (props) => {
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={
-                  isPublicRoomType && !isPublicRoom && PublicRoomIconUrl
+                  currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
@@ -1065,6 +1094,7 @@ export default inject(
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
+    oformsStore,
     pluginStore,
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
@@ -1094,6 +1124,7 @@ export default inject(
 
       clearFiles,
       categoryType,
+      getPrimaryLink,
     } = filesStore;
 
     const {
@@ -1145,6 +1176,8 @@ export default inject(
       moveToPublicRoom,
     } = filesActionsStore;
 
+    const { oformsFilter } = oformsStore;
+
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
     const { title, id, roomType, pathParts, navigationPath, security } =
@@ -1163,6 +1196,7 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
+    const isCustomRoomType = roomType === RoomsType.CustomRoom;
 
     const {
       onClickEditRoom,
@@ -1210,6 +1244,8 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -1222,8 +1258,9 @@ export default inject(
       title,
       isRoom,
       currentFolderId: id,
-      pathParts: pathParts,
+
       navigationPath: folderPath,
+      oformsFilter,
 
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,
@@ -1293,8 +1330,12 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
-      isPublicRoom: publicRoomStore.isPublicRoom,
-      externalLinks: publicRoomStore.roomLinks,
+      isCustomRoomType,
+      isPublicRoom,
+      primaryLink,
+      getPrimaryLink,
+      setExternalLink,
+
       moveToPublicRoom,
 
       getAccountsHeaderMenu,

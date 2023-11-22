@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
@@ -63,21 +62,21 @@ const StyledLoader = styled.div`
 const AccessLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="100%" />
+      <RectangleSkeleton className="header" height="100%" />
       <div className="submenu">
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
       </div>
       <div className="owner">
-        <Loaders.Rectangle className="header" height="100%" />
-        <Loaders.Rectangle height="82px" />
+        <RectangleSkeleton className="header" height="100%" />
+        <RectangleSkeleton height="82px" />
       </div>
       <div className="admins">
-        <Loaders.Rectangle height="22px" width="77px" />
-        <Loaders.Rectangle height="20px" width="56px" />
-        <Loaders.Rectangle className="description" height="40px" />
+        <RectangleSkeleton height="22px" width="77px" />
+        <RectangleSkeleton height="20px" width="56px" />
+        <RectangleSkeleton className="description" height="40px" />
       </div>
     </StyledLoader>
   );

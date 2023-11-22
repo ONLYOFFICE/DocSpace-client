@@ -96,7 +96,7 @@ const WebhookDialog = (props) => {
     }
   };
 
-  const handleSubmitClick = () => {
+  const validateForm = () => {
     const isUrlValid = validateUrl(webhookInfo.uri);
     setIsValid(() => ({
       uri: isUrlValid,
@@ -104,13 +104,16 @@ const WebhookDialog = (props) => {
       secretKey: isPasswordValid,
     }));
 
-    if (isUrlValid && (isPasswordValid || isResetVisible)) {
-      submitButtonRef.current.click();
-    }
+    return isUrlValid && (isPasswordValid || isResetVisible);
+  };
+
+  const handleSubmitClick = () => {
+    validateForm() && submitButtonRef.current.click();
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     onSubmit(webhookInfo);
     setWebhookInfo({
       id: webhook ? webhook.id : 0,
@@ -119,6 +122,7 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: true,
     });
+    setIsPasswordValid(false);
     setPasswordInputKey((prevKey) => prevKey + 1);
     onModalClose();
   };

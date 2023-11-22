@@ -25,15 +25,7 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
-  setBodyRendered,
 }) => {
-  useEffect(() => {
-    setBodyRendered(true);
-    return () => {
-      setBodyRendered(false);
-    };
-  }, []);
-
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
     return () => {
@@ -158,7 +150,7 @@ const Sdk = ({
     case "room-selector":
       component = (
         <RoomSelector
-          withCancelButton
+          withCancelButton={true}
           withHeader={false}
           onAccept={onSelectRoom}
           onCancel={onClose}
@@ -169,10 +161,12 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          embedded
+          embedded={true}
+          withHeader={false}
           isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
+          filterParam={"ALL"}
         />
       );
       break;
@@ -185,14 +179,8 @@ const Sdk = ({
 
 export default inject(({ auth, settingsStore, peopleStore }) => {
   const { login, logout, userStore } = auth;
-  const {
-    theme,
-    setFrameConfig,
-    frameConfig,
-    getSettings,
-    isLoaded,
-    setBodyRendered,
-  } = auth.settingsStore;
+  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+    auth.settingsStore;
   const { loadCurrentUser, user } = userStore;
   const { updateProfileCulture } = peopleStore.targetUserStore;
   const { getIcon } = settingsStore;
@@ -209,6 +197,5 @@ export default inject(({ auth, settingsStore, peopleStore }) => {
     isLoaded,
     updateProfileCulture,
     user,
-    setBodyRendered,
   };
 })(observer(Sdk));

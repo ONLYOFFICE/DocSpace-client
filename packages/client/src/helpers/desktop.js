@@ -1,26 +1,9 @@
-import filesStore from "../store";
-import store from "client/store";
+import store from "../store";
 import { desktopConstants } from "@docspace/common/desktop";
+import { encryptionUploadDialog as encryptionUploadDialogHelper } from "./encryptionUploadDialog";
 
 export function encryptionUploadDialog(callback) {
-  const filter = filesStore.settingsStore.extsWebEncrypt
-    .map((f) => "*" + f)
-    .join(" ");
-
-  const data = {
-    cryptoEngineId: desktopConstants.cryptoEngineId,
-    filter: filter,
-  };
-
-  window.AscDesktopEditor.cloudCryptoCommand("upload", data, function (obj) {
-    let bytes = obj.bytes;
-    let filename = obj.name;
-    let file = new File([bytes], filename);
-
-    if (typeof callback == "function") {
-      callback(file, obj.isCrypto !== false);
-    }
-  });
+  encryptionUploadDialogHelper(store.settingsStore.extsWebEncrypt, callback);
 }
 
 export function setEncryptionAccess(file) {

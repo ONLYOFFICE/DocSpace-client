@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import { tablet, mobile } from "@docspace/components/utils/device";
 
@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledRectangleLoader = styled(RectangleLoader)`
+const StyledRectangleLoader = styled(RectangleSkeleton)`
   height: 20px;
   width: 216px;
   padding: 0 0 16px;

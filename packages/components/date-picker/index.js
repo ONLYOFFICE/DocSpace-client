@@ -3,14 +3,14 @@ import moment from "moment";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
-import Calendar from "@docspace/components/calendar";
+import Text from "../text";
+import SelectorAddButton from "../selector-add-button";
+import SelectedItem from "../selected-item";
+import Calendar from "../calendar";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
-import { tablet } from "../utils/device";
+import { mobile } from "../utils/device";
 
 const Wrapper = styled.div`
   .selectedItem {
@@ -52,7 +52,7 @@ const SelectedLabel = styled.span`
 const StyledCalendar = styled(Calendar)`
   position: absolute;
 
-  @media ${tablet} {
+  @media ${mobile} {
     position: fixed;
     bottom: 0;
     left: 0;

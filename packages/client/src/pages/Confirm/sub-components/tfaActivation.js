@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "@docspace/components/button";
@@ -107,22 +106,26 @@ const TfaActivationForm = withLoader((props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
-
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData } = props;
+      const { linkData, defaultPage } = props;
 
       setIsLoading(true);
 
       if (user && hash) {
-        const url = await loginWithCode(user, hash, code);
-        navigate(url || "/");
+        await loginWithCode(user, hash, code);
       } else {
-        const url = await loginWithCodeAndCookie(code, linkData.confirmHeader);
-        navigate("/");
+        await loginWithCodeAndCookie(code, linkData.confirmHeader);
       }
+
+      const referenceUrl = sessionStorage.getItem("referenceUrl");
+
+      if (referenceUrl) {
+        sessionStorage.removeItem("referenceUrl");
+      }
+
+      window.location.replace(referenceUrl || defaultPage);
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -309,4 +312,5 @@ export default inject(({ auth, confirm }) => ({
   tfaIosAppUrl: auth.tfaStore.tfaIosAppUrl,
   tfaWinAppUrl: auth.tfaStore.tfaWinAppUrl,
   currentColorScheme: auth.settingsStore.currentColorScheme,
+  defaultPage: auth.settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

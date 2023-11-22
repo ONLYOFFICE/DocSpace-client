@@ -28,7 +28,7 @@ import MainBar from "./components/MainBar";
 import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import AppLoader from "@docspace/common/components/AppLoader";
+import { getRestoreProgress } from "@docspace/common/api/portal";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -53,9 +53,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     standalone,
     userId,
     currentDeviceType,
-    bodyRendered,
+
     showArticleLoader,
   } = rest;
+
+  useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname)) {
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -63,6 +73,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     } catch (err) {
       toastr.error(err);
     }
+  }, []);
+
+  useEffect(() => {
+    moment.updateLocale("ar-sa", {
+      longDateFormat: {
+        LT: "h:mm a",
+        LTS: "h:mm:ss a",
+        L: "YYYY/MM/DD",
+        LL: "YYYY MMMM D",
+        LLL: "h:mm a YYYY MMMM D",
+        LLLL: "h:mm a YYYY MMMM D dddd",
+      },
+    });
+
+    moment.locale(language);
   }, []);
 
   useEffect(() => {
@@ -102,7 +127,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       });
 
     socketHelper.on("restore-backup", () => {
-      setPreparationPortalDialogVisible(true);
+      getRestoreProgress()
+        .then((response) => {
+          if (!response) {
+            console.log(
+              "Skip show <PreparationPortalDialog /> - empty progress response"
+            );
+            return;
+          }
+          setPreparationPortalDialogVisible(true);
+        })
+        .catch((e) => {
+          console.error("getRestoreProgress", e);
+        });
     });
   }, [socketHelper]);
 
@@ -353,7 +390,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
-      {/* {!bodyRendered && <AppLoader />} */}
+
       <Main isDesktop={isDesktop}>
         {currentDeviceType !== DeviceType.mobile && <MainBar />}
         <div className="main-container">
@@ -383,7 +420,6 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
-    bodyRendered,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -427,7 +463,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
-    bodyRendered,
+
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
 })(observer(Shell));
@@ -443,6 +479,8 @@ const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
   } else if (auth) {
     currentColorScheme = settingsStore.currentColorScheme || false;
   }
+
+  window.theme = theme;
 
   return {
     theme: { ...theme, interfaceDirection: i18n.dir() },

@@ -29,14 +29,11 @@
   "HistoryEmptyScreenText": "활동 내역이 여기에 표시됩니다",
   "ItemsSelected": "선택된 항목",
   "LastModifiedBy": "최종 편집자",
-  "PendingInvitations": "보류 중인 초대장",
   "Properties": "속성",
   "RoomsEmptyScreenTent": "여기에서 방 세부 정보를 확인하세요",
   "SelectedUsers": "선택된 계정",
   "StorageType": "스토리지 유형",
   "SubmenuDetails": "세부 정보",
   "SubmenuHistory": "기록",
-  "SystemProperties": "시스템 속성",
-  "UsersInRoom": "방 안의 사용자",
   "Versions": "버전"
 }

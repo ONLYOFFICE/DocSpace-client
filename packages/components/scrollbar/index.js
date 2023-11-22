@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { classNames } from "../utils/classNames";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "../utils/device";
 import StyledScrollbar from "./styled-scrollbar";
 import { useTheme } from "styled-components";
 
@@ -102,6 +102,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
     hideTrackTimer,
     scrollclass,
     stype,
+    noScrollY,
     ...rest
   } = props;
 
@@ -170,6 +171,12 @@ const Scrollbar = React.forwardRef((props, ref) => {
     return () => clearTimeout(timerId.current);
   }, []);
 
+  const disableScrolling = noScrollY
+    ? {
+        height: "0",
+      }
+    : {};
+
   return (
     <StyledScrollbar
       {...rest}
@@ -205,6 +212,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
           ...tracksAutoHideStyles,
           marginLeft: isRtl ? "1px" : "0",
           marginRight: isRtl ? "0" : "1px",
+          ...disableScrolling,
         },
         ...tracksAutoHideHandlers,
       }}

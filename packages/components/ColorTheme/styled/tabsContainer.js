@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { Label } from "@docspace/components/tabs-container/styled-tabs-container";
-import Base from "@docspace/components/themes/base";
+import { Label } from "../../tabs-container/styled-tabs-container";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({ $currentColorScheme, selected, theme }) =>
   $currentColorScheme &&

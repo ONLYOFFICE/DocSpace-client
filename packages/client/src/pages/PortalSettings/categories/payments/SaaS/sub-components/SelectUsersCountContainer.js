@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { useTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import Slider from "@docspace/components/slider";
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
@@ -21,7 +20,7 @@ const StyledBody = styled.div`
     display: flex;
     position: relative;
     margin-top: -8px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -3px;
@@ -33,13 +32,13 @@ const StyledBody = styled.div`
 
     .slider-track-value_min,
     .slider-track-value_max {
-      color: ${props =>
+      color: ${(props) =>
         props.theme.client.settings.payment.priceContainer.trackNumberColor};
     }
 
     .slider-track-value_max {
       position: absolute;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               left: 0;
@@ -50,7 +49,7 @@ const StyledBody = styled.div`
     }
     .slider-track-value_min {
       position: absolute;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               right: 0;
@@ -64,13 +63,13 @@ const StyledBody = styled.div`
   .payment-operations_input {
     width: 101px;
     height: 60px;
-    font-size: 44px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("44px")};
     text-align: center;
     margin-left: 20px;
     margin-right: 20px;
     padding: 0;
     font-weight: 700;
-    ${props =>
+    ${(props) =>
       props.isDisabled &&
       css`
         color: ${props.theme.client.settings.payment.priceContainer
@@ -85,7 +84,7 @@ const StyledBody = styled.div`
     width: max-content;
     .payment-score {
       path {
-        ${props =>
+        ${(props) =>
           props.isDisabled &&
           css`
             fill: ${props.theme.text.disableColor};
@@ -95,14 +94,14 @@ const StyledBody = styled.div`
 
     .payment-score,
     .circle {
-      cursor: ${props => (props.isDisabled ? "default" : "pointer")};
+      cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
     }
     .circle {
       position: relative;
-      background: ${props =>
+      background: ${(props) =>
         props.theme.client.settings.payment.rectangleColor};
       border: 1px solid
-        ${props => props.theme.client.settings.payment.rectangleColor};
+        ${(props) => props.theme.client.settings.payment.rectangleColor};
       border-radius: 50%;
       width: 38px;
       height: 38px;
@@ -110,7 +109,7 @@ const StyledBody = styled.div`
       svg {
         position: absolute;
         path {
-          fill: ${props =>
+          fill: ${(props) =>
             props.isDisabled
               ? props.theme.client.settings.payment.priceContainer.disableColor
               : props.theme.text.color};
@@ -121,7 +120,7 @@ const StyledBody = styled.div`
     .minus-icon {
       svg {
         top: 44%;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 right: 28%;
@@ -134,7 +133,7 @@ const StyledBody = styled.div`
     .plus-icon {
       svg {
         top: 30%;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 right: 27%;
@@ -156,7 +155,7 @@ const StyledBody = styled.div`
     margin-bottom: 4px;
     text-align: center;
 
-    ${props =>
+    ${(props) =>
       props.isDisabled &&
       css`
         color: ${props.theme.client.settings.payment.priceContainer
@@ -167,7 +166,6 @@ const StyledBody = styled.div`
 
 const SelectUsersCountContainer = ({
   managersCount,
-  theme,
   isDisabled,
   isLoading,
   minAvailableManagersValue,
@@ -180,7 +178,7 @@ const SelectUsersCountContainer = ({
   addedManagersCountTitle,
   isNeedPlusSign,
 }) => {
-  const onSliderChange = e => {
+  const onSliderChange = (e) => {
     const count = parseFloat(e.target.value);
     if (count > minAvailableManagersValue) {
       setManagersCount(count);
@@ -191,7 +189,7 @@ const SelectUsersCountContainer = ({
     }
   };
 
-  const onClickOperations = e => {
+  const onClickOperations = (e) => {
     const operation = e.currentTarget.dataset.operation;
 
     let value = +managersCount;
@@ -216,7 +214,7 @@ const SelectUsersCountContainer = ({
       setTotalPrice(value);
     }
   };
-  const onChangeNumber = e => {
+  const onChangeNumber = (e) => {
     const { target } = e;
     let value = target.value;
 
@@ -254,8 +252,8 @@ const SelectUsersCountContainer = ({
   return (
     <StyledBody
       className="select-users-count-container"
-      theme={theme}
-      isDisabled={isDisabled || isUpdatingTariff}>
+      isDisabled={isDisabled || isUpdatingTariff}
+    >
       <Text noSelect fontWeight={600} className="payment-users_text">
         {addedManagersCountTitle}
       </Text>
@@ -264,7 +262,8 @@ const SelectUsersCountContainer = ({
         <div
           className="circle minus-icon"
           {...onClickProp}
-          data-operation={"minus"}>
+          data-operation={"minus"}
+        >
           <MinusIcon {...onClickProp} className="payment-score" />
         </div>
 
@@ -278,7 +277,8 @@ const SelectUsersCountContainer = ({
         <div
           className="circle plus-icon"
           {...onClickProp}
-          data-operation={"plus"}>
+          data-operation={"plus"}
+        >
           <PlusIcon {...onClickProp} className="payment-score" />
         </div>
       </div>
@@ -315,7 +315,7 @@ const SelectUsersCountContainer = ({
 
 export default inject(({ auth, payments }) => {
   const { paymentQuotasStore } = auth;
-  const { theme } = auth.settingsStore;
+
   const {
     isLoading,
     minAvailableManagersValue,
@@ -333,7 +333,6 @@ export default inject(({ auth, payments }) => {
 
   return {
     isAlreadyPaid,
-    theme,
     isLoading,
     minAvailableManagersValue,
     managersCount,

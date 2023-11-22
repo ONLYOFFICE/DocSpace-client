@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import TableContainer from "@docspace/components/table-container";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
+import TableContainer from "@docspace/components/table-container";
+import TableBody from "@docspace/components/table-container/TableBody";
+
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import TableBody from "@docspace/components/table-container/TableBody";
-import { DeviceType } from "@docspace/common/constants";
 
 const Table = ({
   auditTrailUsers,
@@ -16,14 +19,12 @@ const Table = ({
   currentDeviceType,
 }) => {
   const ref = useRef(null);
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || currentDeviceType !== DeviceType.desktop) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return auditTrailUsers && auditTrailUsers.length > 0 ? (
     <TableContainer forwardedRef={ref}>

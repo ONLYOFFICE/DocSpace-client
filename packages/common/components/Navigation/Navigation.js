@@ -53,6 +53,7 @@ const Navigation = ({
   isPublicRoom,
   titleIcon,
   currentDeviceType,
+  rootRoomTitle,
 
   ...rest
 }) => {
@@ -94,6 +95,7 @@ const Navigation = ({
   );
 
   const toggleDropBox = () => {
+    if (navigationItems.length === 0) return;
     if (isRootFolder) return setIsOpen(false);
     setIsOpen((prev) => !prev);
 
@@ -132,9 +134,9 @@ const Navigation = ({
   }, [onBackToParentFolder]);
 
   const showRootFolderNavigation =
+    !isRootFolder &&
     showRootFolderTitle &&
-    navigationItems &&
-    navigationItems.length > 1 &&
+    ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
     currentDeviceType !== DeviceType.mobile;
 
   const navigationTitleNode = (
@@ -142,7 +144,7 @@ const Navigation = ({
       {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
       <Text
         title={title}
-        isOpen={false}
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
       />
@@ -152,10 +154,22 @@ const Navigation = ({
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
       <Text
-        title={navigationItems[navigationItems.length - 2].title}
-        isOpen={false}
+        className="room-title"
+        title={
+          rootRoomTitle || navigationItems[navigationItems.length - 2].title
+        }
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         isRootFolderTitle
+        onClick={() => {
+          {
+            onClickFolder(
+              navigationItems[navigationItems.length - 2].id,
+              false
+            );
+            setIsOpen(false);
+          }
+        }}
       />
       {navigationTitleNode}
     </div>
@@ -202,6 +216,7 @@ const Navigation = ({
                 burgerLogo={burgerLogo}
                 titleIcon={titleIcon}
                 currentDeviceType={currentDeviceType}
+                navigationTitleContainerNode={navigationTitleContainerNode}
               />
             </>
           )}

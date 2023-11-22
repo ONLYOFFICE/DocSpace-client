@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "../utils/device";
 
 const InputWrapper = styled.div`
   display: flex;
@@ -18,18 +18,18 @@ const InputWrapper = styled.div`
     border-radius: 8px;
     margin: 0 4px;
     text-align: center;
-    font-size: 72px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("72px")};
 
     @media ${tablet} {
       height: 76px;
       width: 64px;
-      font-size: 48px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("48px")};
     }
 
     @media ${mobile} {
       height: 48px;
       width: 40px;
-      font-size: 32px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("32px")};
     }
 
     &:last-child {

@@ -18,8 +18,6 @@ const StyledSelectAll = styled.div`
 
   padding: 8px 16px 20px;
 
-  margin-bottom: 12px;
-
   .select-all_avatar {
     min-width: 32px;
   }

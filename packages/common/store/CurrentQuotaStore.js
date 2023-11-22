@@ -3,7 +3,6 @@ import toastr from "@docspace/components/toast/toastr";
 
 import api from "../api";
 import { PortalFeaturesLimitations } from "../constants";
-import authStore from "./AuthStore";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";
@@ -222,11 +221,13 @@ class QuotasStore {
       if (elem.id === featureId && elem.used) elem.used.value = value;
     });
   };
+
   updateQuotaFeatureValue = (featureId, value) => {
     this.currentPortalQuotaFeatures.forEach((elem) => {
       if (elem.id === featureId) elem.value = value;
     });
   };
+
   setPortalQuota = async () => {
     try {
       const res = await api.portal.getPortalQuota();

@@ -6,6 +6,6 @@ export const SelectWrapper = styled.div`
   gap: 8px;
 
   & > span {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 `;

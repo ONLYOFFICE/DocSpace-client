@@ -2,14 +2,19 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { isMobile, isTablet, tablet } from "@docspace/components/utils/device";
+import {
+  isMobile,
+  isTablet,
+  mobile,
+  tablet,
+} from "@docspace/components/utils/device";
 
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
+
 import { Base } from "@docspace/components/themes";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
@@ -62,6 +67,19 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: max-content;
   }
 
+  .row-content-link {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 12px 0px 0px 12px;
+          `
+        : css`
+            padding: 12px 12px 0px 0px;
+          `}
+    margin-top: ${(props) =>
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
+  }
+
   @media ${tablet} {
     .row-main-container-wrapper {
       display: flex;
@@ -83,10 +101,10 @@ const SimpleFilesRowContent = styled(RowContent)`
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
-              margin-left: 24px !important;
+              margin-left: 24px;
             `
           : css`
-              margin-right: 24px !important;
+              margin-right: 24px;
             `}
     }
 
@@ -114,16 +132,28 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
   }
 
-  .row-content-link {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 0px 12px;
-          `
-        : css`
-            padding: 12px 12px 0px 0px;
-          `}
-    margin-top: -12px;
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .additional-badges {
+      margin-top: 0;
+    }
+
+    .tablet-edit,
+    .new-items,
+    .tablet-badge {
+      margin: 0;
+    }
+
+    .can-convert {
+      margin: 0 1px;
+    }
+
+    .row-content-link {
+      padding: 12px 0px 0px 0px;
+    }
   }
 `;
 
@@ -161,7 +191,7 @@ const FilesRowContent = ({
   const contentComponent = () => {
     switch (filterSortBy) {
       case SortByFieldName.Size:
-        if (!contentLength) return "—";
+        if (!contentLength) return "";
         return contentLength;
 
       case SortByFieldName.CreationDate:
@@ -174,7 +204,7 @@ const FilesRowContent = ({
         return getFileTypeName(fileType);
 
       case SortByFieldName.Tags:
-        if (tags?.length === 0) return "—";
+        if (tags?.length === 0) return "";
         return tags?.map((elem) => {
           return elem;
         });
@@ -207,6 +237,7 @@ const FilesRowContent = ({
           target="_blank"
           {...linkStyles}
           isTextOverflow={true}
+          dir="auto"
         >
           {titleWithoutExt}
         </Link>
@@ -236,7 +267,7 @@ const FilesRowContent = ({
         >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobile()
+            : !fileExst && !contentLength && !providerKey
             ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
                 "Translations:Files"
               )}`
@@ -265,7 +296,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 })(
   observer(
     withTranslation(["Files", "Translations", "Notifications"])(
-      withContent(withBadges(FilesRowContent))
+      withContent(FilesRowContent)
     )
   )
 );

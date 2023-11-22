@@ -5,6 +5,9 @@ import { combineUrl } from "@docspace/common/utils";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
+import copy from "copy-to-clipboard";
+import toastr from "@docspace/components/toast/toastr";
+import { isMobileOnly } from "react-device-detect";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -68,9 +71,33 @@ export default function withBadges(WrappedComponent) {
       });
     };
 
+    onUnmuteClick = (e) => {
+      const { t, setMuteAction } = this.props;
+      const elem = e.target.closest(".is-mute");
+      const data = elem.dataset;
+      const { id, rootfolderid } = data;
+      
+      setMuteAction(
+        "unmute",
+        { id, rootFolderId: rootfolderid, new: data.new },
+        t
+      );
+    };
+
     setConvertDialogVisible = () => {
       this.props.setConvertItem(this.props.item);
       this.props.setConvertDialogVisible(true);
+    };
+
+    onCopyPrimaryLink = async () => {
+      if (isMobileOnly) return;
+
+      const { t, item, getPrimaryLink } = this.props;
+      const primaryLink = await getPrimaryLink(item.id);
+      if (primaryLink) {
+        copy(primaryLink.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
+      }
     };
 
     render() {
@@ -88,6 +115,7 @@ export default function withBadges(WrappedComponent) {
         viewAs,
         isMutedBadge,
         isArchiveFolderRoot,
+        isArchiveFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -118,10 +146,13 @@ export default function withBadges(WrappedComponent) {
           onShowVersionHistory={this.onShowVersionHistory}
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
+          onUnmuteClick={this.onUnmuteClick}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
           isMutedBadge={isMutedBadge}
+          onCopyPrimaryLink={this.onCopyPrimaryLink}
+          isArchiveFolder={isArchiveFolder}
         />
       );
 
@@ -140,12 +171,17 @@ export default function withBadges(WrappedComponent) {
         versionHistoryStore,
         dialogsStore,
         filesStore,
+        publicRoomStore,
       },
       { item }
     ) => {
-      const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolderRoot } =
-        treeFoldersStore;
-      const { markAsRead, setPinAction } = filesActionsStore;
+      const {
+        isRecycleBinFolder,
+        isPrivacyFolder,
+        isArchiveFolderRoot,
+        isArchiveFolder,
+      } = treeFoldersStore;
+      const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
@@ -153,7 +189,8 @@ export default function withBadges(WrappedComponent) {
         setConvertDialogVisible,
         setConvertItem,
       } = dialogsStore;
-      const { setIsLoading, isMuteCurrentRoomNotifications } = filesStore;
+      const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
+        filesStore;
       const { roomType, mute } = item;
 
       const isRoom = !!roomType;
@@ -177,7 +214,10 @@ export default function withBadges(WrappedComponent) {
         setConvertItem,
         isDesktopClient,
         setPinAction,
+        setMuteAction,
         isMutedBadge,
+        getPrimaryLink,
+        isArchiveFolder,
       };
     }
   )(observer(WithBadges));

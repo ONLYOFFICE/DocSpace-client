@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   padding-right: 8px;
@@ -38,20 +37,20 @@ const StyledLoader = styled.div`
 const SessionLifetimeLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="37px" />
-      <Loaders.Rectangle className="description" height="20px" />
+      <RectangleSkeleton className="header" height="37px" />
+      <RectangleSkeleton className="description" height="20px" />
 
       <div className="checkboxs">
-        <Loaders.Rectangle height="20px" />
-        <Loaders.Rectangle height="20px" />
+        <RectangleSkeleton height="20px" />
+        <RectangleSkeleton height="20px" />
       </div>
 
       <div className="input">
-        <Loaders.Rectangle height="20px" width="95px" />
-        <Loaders.Rectangle height="32px" />
+        <RectangleSkeleton height="20px" width="95px" />
+        <RectangleSkeleton height="32px" />
       </div>
 
-      <Loaders.Rectangle className="buttons" height="40px" />
+      <RectangleSkeleton className="buttons" height="40px" />
     </StyledLoader>
   );
 };

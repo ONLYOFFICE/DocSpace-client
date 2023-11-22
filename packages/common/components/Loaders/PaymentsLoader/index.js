@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledPaymentsLoader from "./StyledPaymentsLoader";
 const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const {
@@ -15,7 +15,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
 
   return (
     <StyledPaymentsLoader>
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_title"
         title={title}
         width="163"
@@ -29,7 +29,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         animate={animate}
       />
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="248"
           height="22"
@@ -43,7 +43,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </div>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="payments-loader_description"
           title={title}
           width="100%"
@@ -58,7 +58,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </div>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="222"
           height="22"
@@ -72,7 +72,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </div>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="payments-loader_plan-description"
           title={title}
           width="222"
@@ -87,7 +87,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </div>
       <div className="payments-loader_main">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="100%"
           height="100%"
@@ -99,7 +99,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="100%"
           height="100%"
@@ -113,7 +113,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
         />
       </div>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="payments-loader_plan-description"
           title={title}
           width="222"

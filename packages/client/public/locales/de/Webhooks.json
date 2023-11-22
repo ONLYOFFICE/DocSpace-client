@@ -45,7 +45,6 @@
   "UnselectAll": "Alle abwählen",
   "URL": "URL",
   "ViewRawPayload": "Rohen Nutzlast anzeigen",
-  "Webhook": "Webhook",
   "WebhookCreationHint": "Dieser Webhook wird allen Ereignissen in DocSpace zugewiesen",
   "WebhookDetails": "Webhook-Details",
   "WebhookEditedSuccessfully": "Webhook-Konfiguration erfolgreich bearbeitet",

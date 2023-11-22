@@ -96,13 +96,13 @@ const HeaderContainer = styled.div`
   @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
   }
 
   @media ${desktop} {
     h1 {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
       line-height: 59px !important;
     }
   }
@@ -319,6 +319,7 @@ const SectionHeaderContent = (props) => {
                 <Badge
                   backgroundColor="#EDC409"
                   label={t("Common:Paid")}
+                  fontWeight="700"
                   className="settings-section_badge"
                   isPaidBadge={true}
                 />

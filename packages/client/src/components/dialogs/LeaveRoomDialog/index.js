@@ -56,7 +56,7 @@ const LeaveRoomDialog = (props) => {
       })
         .then(() => {
           if (!isAdmin) {
-            if (isRoot) {
+            if (!isRoot) {
               const filter = RoomsFilter.getDefault();
               navigate(`rooms/shared/filter?${filter.toUrlParams()}`);
             } else {
@@ -145,7 +145,7 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const isRoot = selection.length || bufferSelection ? false : true;
+    const isRoot = selectedFolderStore.isRootFolder;
 
     return {
       visible,

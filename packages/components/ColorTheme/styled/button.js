@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import StyledButton from "@docspace/components/button/styled-button";
-import Base from "@docspace/components/themes/base";
+import StyledButton from "../../button/styled-button";
+import Base from "../../themes/base";
 
 const activeCss = css`
   border-color: ${(props) => props.$currentColorScheme.main?.buttons};

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -19,10 +19,29 @@ const EditRoomDialog = ({
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
+  const [isWrongTitle, setIsWrongTitle] = useState(false);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
+
+  const prevRoomParams = useRef(
+    Object.freeze({
+      ...roomParams,
+    })
+  );
+
+  const compareRoomParams = (prevParams, currentParams) => {
+    return (
+      prevParams.title === currentParams.title &&
+      prevParams.roomOwner.id === currentParams.roomOwner.id &&
+      prevParams.tags.sort().toString() ===
+        currentParams.tags.sort().toString() &&
+      ((prevParams.icon.uploadedFile === "" &&
+        currentParams.icon.uploadedFile === null) ||
+        prevParams.icon.uploadedFile === currentParams.icon.uploadedFile)
+    );
+  };
 
   const setRoomTags = (newTags) =>
     setRoomParams({ ...roomParams, tags: newTags });
@@ -36,6 +55,7 @@ const EditRoomDialog = ({
     }));
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onEditRoom();
   };
 
@@ -49,11 +69,16 @@ const EditRoomDialog = ({
   };
 
   useEffect(() => {
-    if (fetchedImage)
+    if (fetchedImage) {
       setRoomParams({
         ...roomParams,
         icon: { ...roomParams.icon, uploadedFile: fetchedImage },
       });
+      prevRoomParams.current = {
+        ...roomParams,
+        icon: { ...roomParams.icon, uploadedFile: fetchedImage },
+      };
+    }
   }, [fetchedImage]);
 
   const onCloseAction = () => {
@@ -86,7 +111,9 @@ const EditRoomDialog = ({
           isEdit
           isDisabled={isLoading}
           isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
+          setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
         />
       </ModalDialog.Body>
@@ -99,6 +126,10 @@ const EditRoomDialog = ({
           primary
           scale
           onClick={onEditRoom}
+          isDisabled={
+            isWrongTitle ||
+            compareRoomParams(prevRoomParams.current, roomParams)
+          }
           isLoading={isLoading}
         />
         <Button

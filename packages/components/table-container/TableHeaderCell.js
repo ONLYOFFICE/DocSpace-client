@@ -45,12 +45,11 @@ const TableHeaderCell = ({
       data-enable={enable}
       data-min-width={minWidth}
       data-default-size={defaultSize}
-      onClick={onClick}
       sortingVisible={sortingVisible}
       ref={tagRef}
     >
       <div className="table-container_header-item">
-        <div className="header-container-text-wrapper">
+        <div className="header-container-text-wrapper" onClick={onClick}>
           <Text fontWeight={600} className="header-container-text">
             {enable ? title : ""}
           </Text>
@@ -84,11 +83,10 @@ const TableHeaderCell = ({
       data-enable={enable}
       data-min-width={minWidth}
       data-default-size={defaultSize}
-      onClick={onClick}
       sortingVisible={sortingVisible}
     >
       <div className="table-container_header-item">
-        <div className="header-container-text-wrapper">
+        <div className="header-container-text-wrapper" onClick={onClick}>
           {checkbox && (checkbox.isIndeterminate || checkbox.value) && (
             <Checkbox
               onChange={checkbox.onChange}

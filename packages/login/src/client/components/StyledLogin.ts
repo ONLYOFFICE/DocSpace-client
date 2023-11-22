@@ -28,18 +28,13 @@ interface IStyledCaptchaProps {
 }
 
 export const LoginFormWrapper = styled.div`
-  display: grid;
-  grid-template-rows: ${(props: ILoginFormWrapperProps) =>
-    props.enabledJoin
-      ? props.isDesktop
-        ? css`1fr 10px`
-        : css`1fr 68px`
-      : css`1fr`};
   width: 100%;
+  height: ${props => props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
+
   box-sizing: border-box;
 
-  @media ${mobile} {
-    height: calc(100vh - 48px);
+  @media ${mobile}{
+    height: 100%;
   }
 
   .bg-cover {
@@ -60,8 +55,6 @@ export const LoginFormWrapper = styled.div`
 `;
 
 export const LoginContent = styled.div`
-  min-height: ${(props: ILoginContentProps) =>
-    props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
   flex: 1 0 auto;
   flex-direction: column;
   display: flex;
@@ -70,10 +63,10 @@ export const LoginContent = styled.div`
   margin: 0 auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  height: 100%;
 
   @media ${mobile} {
     width: 100%;
-    min-height: 100%;
     justify-content: start;
   }
 `;
@@ -84,8 +77,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-      props.isCaptchaError &&
-      css`
+    props.isCaptchaError &&
+    css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

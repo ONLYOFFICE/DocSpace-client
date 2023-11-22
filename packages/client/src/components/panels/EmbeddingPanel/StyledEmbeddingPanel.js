@@ -5,7 +5,7 @@ import { Base } from "@docspace/components/themes";
 const StyledEmbeddingPanel = styled.div`
   .embedding-panel {
     .scroll-body {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               padding-left: 0 !important;
@@ -18,11 +18,11 @@ const StyledEmbeddingPanel = styled.div`
 
   .embedding_header {
     padding: 0 16px;
-    border-bottom: ${props => props.theme.filesPanels.sharing.borderBottom};
+    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 
     .hotkeys_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 `;
@@ -45,7 +45,7 @@ const StyledBody = styled.div`
     .embedding-panel_link {
       box-sizing: border-box;
 
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: 8px;
@@ -73,7 +73,7 @@ const StyledBody = styled.div`
     margin-top: 16px;
 
     .embedding-panel_input {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: 8px;
@@ -98,7 +98,7 @@ const StyledBody = styled.div`
     position: absolute;
     z-index: 1;
     margin: 8px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 16px;

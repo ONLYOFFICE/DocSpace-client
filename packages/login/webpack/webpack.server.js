@@ -4,6 +4,8 @@ const path = require("path");
 const DefinePlugin = require("webpack").DefinePlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const runtime = require("../../runtime.json");
+const dateHash = runtime?.date || "";
 
 const serverConfig = {
   target: "node",
@@ -74,6 +76,16 @@ module.exports = (env, argv) => {
       PORT: process.env.PORT || 5011,
       IS_PERSONAL: env.personal || false,
       IS_ROOMS_MODE: env.rooms || false,
+      BROWSER_DETECTOR_URL: JSON.stringify(
+        `/static/scripts/browserDetector.js?hash=${
+          runtime.checksums["browserDetector.js"] || dateHash
+        }`
+      ),
+      CONFIG_URL: JSON.stringify(
+        `/static/scripts/config.json?hash=${
+          runtime.checksums["config.json"] || dateHash
+        }`
+      ),
     }),
   ];
 

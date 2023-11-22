@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const RoundedButton = styled(Button)`
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   font-weight: 400;
   padding: 13.5px 15px;
 

@@ -24,11 +24,9 @@ class Profile extends React.Component {
       selectedTreeNode,
       setSelectedNode,
       setIsProfileLoaded,
-
-      setBodyRendered,
+      getTfaType,
     } = this.props;
 
-    setBodyRendered(true);
     const userId = "@self";
 
     setIsEditTargetUser(false);
@@ -49,6 +47,9 @@ class Profile extends React.Component {
     // if (linkParams.email_change && linkParams.email_change === "success") {
     //   toastr.success(t("ChangeEmailSuccess"));
     // }
+
+    getTfaType();
+
     if (!profile || profile.userName !== userId) {
       fetchProfile(userId).finally(() => {
         setIsProfileLoaded(true);
@@ -77,12 +78,6 @@ class Profile extends React.Component {
         this.documentElement[i].style.transition = "";
       }
     }
-  }
-
-  componentWillUnmount() {
-    const { setBodyRendered } = this.props;
-
-    setBodyRendered(false);
   }
 
   render() {
@@ -118,7 +113,7 @@ Profile.propTypes = {
 
 export default inject(
   ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language } = auth;
+    const { setDocumentTitle, language, tfaStore } = auth;
 
     const {
       setIsProfileLoaded,
@@ -142,6 +137,9 @@ export default inject(
     } = targetUserStore;
 
     const { selectedTreeNode, setSelectedNode } = treeFoldersStore;
+
+    const { getTfaType } = tfaStore;
+
     return {
       setDocumentTitle,
       language,
@@ -152,12 +150,13 @@ export default inject(
       setIsEditTargetUser,
 
       showCatalog: auth.settingsStore.showCatalog,
-      setBodyRendered: auth.settingsStore.setBodyRendered,
+
       selectedTreeNode,
       setSelectedNode,
       isVisitor: auth.userStore.user.isVisitor,
       setIsProfileLoaded,
       setIsLoading,
+      getTfaType,
     };
   }
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

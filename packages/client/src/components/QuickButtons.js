@@ -122,6 +122,19 @@ const QuickButtons = (props) => {
           title={t("Files:CopyGeneralLink")}
         />
       )}
+      {isAvailableShareFile && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onClickShare}
+          color={colorShare}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopyGeneralLink")}
+        />
+      )}
       {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
           themeId={ThemeType.IconButton}

@@ -53,8 +53,13 @@ export default function withQuickButtons(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
-    onClickShare = () => {
-      console.log("onClickShare");
+    onClickShare = async () => {
+      const { t, item, getPrimaryFileLink } = this.props;
+      const primaryLink = await getPrimaryFileLink(item.id);
+      if (primaryLink) {
+        copy(primaryLink.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
+      }
     };
 
     onCopyPrimaryLink = async () => {
@@ -137,6 +142,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
 
       const { isPublicRoom } = publicRoomStore;
+      const { getPrimaryFileLink } = auth.infoPanelStore;
 
       return {
         theme: auth.settingsStore.theme,
@@ -150,6 +156,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         getPrimaryLink: filesStore.getPrimaryLink,
         isArchiveFolder,
+        getPrimaryFileLink,
       };
     }
   )(observer(WithQuickButtons));

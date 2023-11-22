@@ -20,5 +20,3 @@ jobs:
           -H "Accept: application/vnd.github.everest-preview+json" \
           --data '{"event_type": "client-trigger-action", "client_payload": { "branches": ["'"${GITHUB_REF_NAME}"'"]}}'
 
-          
-

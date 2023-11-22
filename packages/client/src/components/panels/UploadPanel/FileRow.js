@@ -441,8 +441,8 @@ export default inject(
       mediaViewerDataStore;
 
     const isMedia =
-      item.fileInfo?.viewAccessability?.ImageView ||
-      item.fileInfo?.viewAccessability?.MediaView;
+      item.fileInfo?.ViewAccessibility?.ImageView ||
+      item.fileInfo?.ViewAccessibility?.MediaView;
 
     const isMediaActive =
       playlist.findIndex((el) => el.fileId === item.fileId) !== -1;

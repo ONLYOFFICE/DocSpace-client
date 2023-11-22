@@ -217,13 +217,13 @@ function MediaViewer({
         if (
           item.value.fileType &&
           item.value.fileType.includes("image") &&
-          !targetFile.viewAccessability.ImageView
+          !targetFile.ViewAccessibility.ImageView
         )
           return;
         if (
           item.value.fileType &&
           item.value.fileType.includes("video") &&
-          !targetFile.viewAccessability.MediaView
+          !targetFile.ViewAccessibility.MediaView
         )
           return;
 

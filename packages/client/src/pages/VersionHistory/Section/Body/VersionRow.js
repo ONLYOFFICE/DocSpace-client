@@ -108,7 +108,7 @@ const VersionRow = (props) => {
     setShowEditPanel(!showEditPanel);
   };
   const onOpenFile = () => {
-    const { MediaView, ImageView } = info?.viewAccessability;
+    const { MediaView, ImageView } = info?.ViewAccessibility;
 
     if (MediaView || ImageView) {
       return window.open(

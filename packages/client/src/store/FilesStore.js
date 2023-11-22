@@ -1840,7 +1840,7 @@ class FilesStore {
     const canDownload = item.security?.Download;
 
     if (isFile) {
-      const shouldFillForm = item.viewAccessability.WebRestrictedEditing;
+      const shouldFillForm = item.ViewAccessibility.WebRestrictedEditing;
       const canLockFile = item.security?.Lock;
       const canChangeVersionFileHistory =
         !isEditing && item.security?.EditHistory;
@@ -1850,10 +1850,10 @@ class FilesStore {
 
       const canSubmitToFormGallery = item.security?.SubmitToFormGallery;
 
-      const canEditFile = item.security.Edit && item.viewAccessability.WebEdit;
+      const canEditFile = item.security.Edit && item.ViewAccessibility.WebEdit;
       const canOpenPlayer =
-        item.viewAccessability.ImageView || item.viewAccessability.MediaView;
-      const canViewFile = item.viewAccessability.WebView;
+        item.ViewAccessibility.ImageView || item.ViewAccessibility.MediaView;
+      const canViewFile = item.ViewAccessibility.WebView;
 
       const isMasterForm = item.fileExst === ".docxf";
       const isPdf = item.fileExst === ".pdf";
@@ -2044,8 +2044,8 @@ class FilesStore {
 
         if (enablePlugins) {
           if (
-            !item.viewAccessability.MediaView &&
-            !item.viewAccessability.ImageView
+            !item.ViewAccessibility.MediaView &&
+            !item.ViewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Files,
@@ -2060,8 +2060,8 @@ class FilesStore {
           }
 
           if (
-            !item.viewAccessability.MediaView &&
-            item.viewAccessability.ImageView
+            !item.ViewAccessibility.MediaView &&
+            item.ViewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Image,
@@ -2076,8 +2076,8 @@ class FilesStore {
           }
 
           if (
-            item.viewAccessability.MediaView &&
-            !item.viewAccessability.ImageView
+            item.ViewAccessibility.MediaView &&
+            !item.ViewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Video,
@@ -3014,7 +3014,7 @@ class FilesStore {
         tags,
         pinned,
         security,
-        viewAccessability,
+        ViewAccessibility,
         mute,
         inRoom = true,
       } = item;
@@ -3030,7 +3030,7 @@ class FilesStore {
         ];
 
       const canOpenPlayer =
-        item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+        item.ViewAccessibility?.ImageView || item.ViewAccessibility?.MediaView;
 
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
@@ -3049,7 +3049,7 @@ class FilesStore {
 
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
 
-      const needConvert = item.viewAccessability?.Convert;
+      const needConvert = item.ViewAccessibility?.Convert;
       const isEditing =
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
@@ -3167,7 +3167,7 @@ class FilesStore {
         thirdPartyIcon,
         providerType,
         security,
-        viewAccessability,
+        ViewAccessibility,
         ...pluginOptions,
         inRoom,
         isForm,
@@ -3200,9 +3200,9 @@ class FilesStore {
         cbMenu.push(FilterType.PresentationsOnly);
       else if (isSpreadsheet(item.fileExst))
         cbMenu.push(FilterType.SpreadsheetsOnly);
-      else if (item.viewAccessability?.ImageView)
+      else if (item.ViewAccessibility?.ImageView)
         cbMenu.push(FilterType.ImagesOnly);
-      else if (item.viewAccessability?.MediaView)
+      else if (item.ViewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
     }
@@ -3408,7 +3408,7 @@ class FilesStore {
   get isViewedSelected() {
     return this.selection.some((selected) => {
       if (selected.isFolder === true || !selected.fileExst) return false;
-      return selected.viewAccessability?.WebView;
+      return selected.ViewAccessibility?.WebView;
     });
   }
 
@@ -3416,8 +3416,8 @@ class FilesStore {
     return this.selection.some((selected) => {
       if (selected.isFolder === true || !selected.fileExst) return false;
       return (
-        selected.viewAccessability?.ImageView ||
-        selected.viewAccessability?.MediaView
+        selected.ViewAccessibility?.ImageView ||
+        selected.ViewAccessibility?.MediaView
       );
     });
   }
@@ -3469,21 +3469,21 @@ class FilesStore {
 
     AccessOptions.push("ReadOnly", "DenyAccess");
 
-    const webEdit = selection.find((x) => x.viewAccessability?.WebEdit);
+    const webEdit = selection.find((x) => x.ViewAccessibility?.WebEdit);
 
-    const webComment = selection.find((x) => x.viewAccessability?.WebComment);
+    const webComment = selection.find((x) => x.ViewAccessibility?.WebComment);
 
-    const webReview = selection.find((x) => x.viewAccessability?.WebReview);
+    const webReview = selection.find((x) => x.ViewAccessibility?.WebReview);
 
     const formFillingDocs = selection.find(
-      (x) => x.viewAccessability?.WebRestrictedEditing
+      (x) => x.ViewAccessibility?.WebRestrictedEditing
     );
 
     const webFilter = selection.find(
-      (x) => x.viewAccessability?.WebCustomFilterEditing
+      (x) => x.ViewAccessibility?.WebCustomFilterEditing
     );
 
-    const webNeedConvert = selection.find((x) => x.viewAccessability?.Convert);
+    const webNeedConvert = selection.find((x) => x.ViewAccessibility?.Convert);
 
     if ((webEdit && !webNeedConvert) || !externalAccess)
       AccessOptions.push("FullAccess");

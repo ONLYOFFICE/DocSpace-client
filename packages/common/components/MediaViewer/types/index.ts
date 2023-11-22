@@ -94,7 +94,7 @@ export interface IFile {
   updatedBy: CreatedType;
   version: number;
   versionGroup: number;
-  viewAccessability: ViewAccessabilityType;
+  ViewAccessibility: ViewAccessabilityType;
   viewUrl: string;
   webUrl: string;
 }

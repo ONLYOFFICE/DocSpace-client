@@ -13,20 +13,26 @@ import {
 } from "@docspace/common/api/settings";
 
 class ImportAccountsStore {
-  checkedAccounts = [];
   services = [];
-  newUsers = [];
-  users = [];
-  existUsers = [];
-  withoutEmailUsers = [];
 
-  // users = {
-  //   noEmail: [],
-  //   existing: [],
-  //   new: [],
-  //   withEmailChecked: [],
-  //   withoutEmailChecked: []
-  // }
+  users = {
+    new: [],
+    existing: [],
+    withoutEmail: [],
+    result: [],
+  };
+
+  checkedUsers = {
+    withEmail: [],
+    withoutEmail: [],
+    result: [],
+  };
+
+  UserTypes = {
+    DocSpaceAdmin: "DocSpaceAdmin",
+    RoomAdmin: "RoomAdmin",
+    User: "User",
+  };
 
   isFileLoading = false;
   isLoading = false;
@@ -42,6 +48,49 @@ class ImportAccountsStore {
     makeAutoObservable(this);
   }
 
+  get withEmailUsers() {
+    return [
+      ...this.users.existing.map((user) => ({ ...user, isDuplicate: true })),
+      ...this.users.new.map((user) => ({ ...user, isDuplicate: false })),
+    ];
+  }
+
+  get finalUsers() {
+    const checkedIds = this.checkedUsers.result.map((checkedUser) => checkedUser.key);
+    return this.users.result.filter((user) => checkedIds.includes(user.key));
+  }
+
+  get areCheckedUsersEmpty() {
+    return this.checkedUsers.withEmail.length + this.checkedUsers.withoutEmail.length === 0;
+  }
+
+  setResultUsers = () => {
+    const checkedIds = this.checkedUsers.withoutEmail.map((checkedUser) => checkedUser.key);
+    this.users = {
+      ...this.users,
+      result: [
+        ...this.checkedUsers.withEmail,
+        ...this.users.withoutEmail.filter((user) => checkedIds.includes(user.key)),
+      ],
+    };
+  };
+
+  setUsers = (data) => {
+    runInAction(() => {
+      this.users = {
+        new: data.users,
+        existing: data.existUsers,
+        withoutEmail: data.withoutEmailUsers,
+        result: [],
+      };
+      this.checkedUsers = {
+        withEmail: [...data.users],
+        withoutEmail: [],
+        result: [],
+      };
+    });
+  };
+
   setIsFileLoading = (isLoading) => {
     this.isFileLoading = isLoading;
   };
@@ -54,75 +103,65 @@ class ImportAccountsStore {
     this.searchValue = value;
   };
 
-  setImportOptions = (value) => {
-    this.importOptions = { ...this.importOptions, ...value };
+  changeEmail = (key, email) => {
+    this.users = {
+      ...this.users,
+      withoutEmail: this.users.withoutEmail.map((user) =>
+        user.key === key ? { ...user, email } : user,
+      ),
+    };
   };
 
-  toggleAccount = (id) => {
-    this.checkedAccounts = this.checkedAccounts.includes(id)
-      ? this.checkedAccounts.filter((itemId) => itemId !== id)
-      : [...this.checkedAccounts, id];
+  toggleAccount = (account, checkedAccountType) => {
+    this.checkedUsers = this.checkedUsers[checkedAccountType].some(
+      (user) => user.key === account.key,
+    )
+      ? {
+          ...this.checkedUsers,
+          [checkedAccountType]: this.checkedUsers[checkedAccountType].filter(
+            (user) => user.key !== account.key,
+          ),
+        }
+      : {
+          ...this.checkedUsers,
+          [checkedAccountType]: [...this.checkedUsers[checkedAccountType], account],
+        };
   };
 
-  onCheckAccounts = (checked, accounts) => {
-    this.checkedAccounts = checked ? accounts.map((data) => data.key) : [];
+  toggleAllAccounts = (isChecked, accounts, checkedAccountType) => {
+    this.checkedUsers = isChecked
+      ? { ...this.checkedUsers, [checkedAccountType]: [...accounts] }
+      : { ...this.checkedUsers, [checkedAccountType]: [] };
   };
 
-  toggleAllAccounts = (e, accounts) => {
-    this.checkedAccounts = e.target.checked ? accounts.map((data) => data.key) : [];
+  isAccountChecked = (key, checkedAccountType) =>
+    this.checkedUsers[checkedAccountType].some((user) => user.key === key);
+
+  clearCheckedAccounts = (checkedAccountType) =>
+    (this.checkedUsers = { ...this.checkedUsers, [checkedAccountType]: [] });
+
+  changeUserType = (key, type) => {
+    this.users = {
+      ...this.users,
+      result: this.users.result.map((user) =>
+        user.key === key ? { ...user, userType: type } : user,
+      ),
+    };
   };
 
-  setUsers = (data) => {
-    runInAction(() => {
-      this.newUsers = data.parseResult.users;
-      this.existUsers = data.parseResult.existUsers.map((user) => ({
-        ...user,
-        isDuplicate: true,
-      }));
-      this.users = [...this.newUsers, ...this.existUsers];
-      this.withoutEmailUsers = data.parseResult.withoutEmailUsers;
-      this.checkedAccounts = this.newUsers.map((item) => item.key);
-    });
+  changeGroupType = (type) => {
+    const checkedKeys = this.checkedUsers.result.map((checkedUser) => checkedUser.key);
+    this.users = {
+      ...this.users,
+      result: this.users.result.map((user) =>
+        checkedKeys.includes(user.key) ? { ...user, userType: type } : user,
+      ),
+    };
   };
 
-  assignCheckedUsers = () => {
-    this.users = this.users.filter((user) => this.checkedAccounts.includes(user.key));
-  };
-
-  changeTypeGroup = (key) => {
-    this.checkedAccounts.map((item) => this.changeType(item, key));
-  };
-
-  changeType = (id, optionKey) => {
-    this.users = this.users.map((user) => {
-      if (id === user.key) {
-        return { ...user, userType: optionKey };
-      }
-      return user;
-    });
-    const [existUsers, newUsers] = this.partition(this.users, (user) => user.isDublicate);
-    this.data.users = [...newUsers];
-    this.data.existUsers = [...existUsers];
-  };
-
-  partition(array, predicate) {
-    return array.reduce(
-      ([pass, fail], elem, currentIndex, array) => {
-        return predicate(elem, currentIndex, array)
-          ? [[...pass, elem], fail]
-          : [pass, [...fail, elem]];
-      },
-      [[], []],
-    );
-  }
-
-  isAccountChecked = (id) => this.checkedAccounts.includes(id);
-
-  clearCheckedAccounts = () => (this.checkedAccounts = []);
-
-  get numberOfCheckedAccounts() {
-    return this.checkedAccounts.length;
-  }
+  // get numberOfCheckedAccounts() {
+  //   return this.checkedAccounts.length;
+  // }
 
   multipleFileUploading = async (files, setProgress) => {
     try {
@@ -193,6 +232,10 @@ class ImportAccountsStore {
     } catch (e) {
       console.error(e);
     }
+  };
+
+  setImportOptions = (value) => {
+    this.importOptions = { ...this.importOptions, ...value };
   };
 
   setServices = (service) => {

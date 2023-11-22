@@ -3136,10 +3136,12 @@ __metadata:
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.21.0
     "@svgr/webpack": ^5.5.0
+    "@types/crypto-js": ^4.2.1
     babel-loader: ^8.3.0
     clean-webpack-plugin: ^4.0.0
     copy-to-clipboard: ^3.3.3
     copy-webpack-plugin: ^9.1.0
+    crypto-js: ^4.2.0
     css-loader: ^6.7.3
     element-resize-detector: ^1.2.4
     external-remotes-plugin: ^1.0.0
@@ -8235,6 +8237,13 @@ __metadata:
   dependencies:
     "@types/express": "*"
   checksum: b1bbb17bc4189c0e953d4996b3b58bfa20161c27db21f98353e237032e7559aec733735d8902c283300e0a4cded20e62b1a5086af608608ef30a45387e080360
+  languageName: node
+  linkType: hard
+
+"@types/crypto-js@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "@types/crypto-js@npm:4.2.1"
+  checksum: 2111fb39a879e6c346a657cd4994534b8ff54d34dbfe45f82587e84165af0d9a3b8448c0d9a8ddabc81b5875295ea049462e7b969dbeb7cf24ae205e66dcf15a
   languageName: node
   linkType: hard
 

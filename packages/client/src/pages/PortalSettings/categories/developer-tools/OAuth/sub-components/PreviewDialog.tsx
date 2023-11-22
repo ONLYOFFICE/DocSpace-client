@@ -20,6 +20,11 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import Button from "@docspace/components/button";
 import { Base } from "@docspace/components/themes";
+import {
+  generateCodeChallenge,
+  generatePKCEPair,
+  generateRandomString,
+} from "@docspace/common/utils/oauth";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -163,6 +168,9 @@ const PreviewDialog = ({
 }: PreviewDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
+  const [codeVerifier, setCodeVerifier] = React.useState("");
+  const [codeChallenge, setCodeChallenge] = React.useState("");
+
   const onClose = () => setPreviewDialogVisible?.(false);
 
   const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
@@ -171,8 +179,19 @@ const PreviewDialog = ({
 
   const encodingScopes = encodeURI(scopesString || "");
 
+  const getData = React.useCallback(() => {
+    const { verifier, challenge } = generatePKCEPair();
+
+    setCodeVerifier(verifier);
+    setCodeChallenge(challenge);
+  }, []);
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   const getLink = () => {
-    return `${window.location.origin}/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${client?.redirectUris[0]}&scope=${encodingScopes}&code_challenge_method=S256&code_challenge=ZX8YUY6qL0EweJXhjDug0S2XuKI8beOWb1LGujmgfuQ`;
+    return `${window.location.origin}/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${client?.redirectUris[0]}&scope=${encodingScopes}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
   };
 
   const link = getLink();
@@ -267,6 +286,24 @@ const PreviewDialog = ({
               />
             </div>
           </StyledBlocksContainer>
+          <div className="block-container">
+            {/* @ts-ignore */}
+            <Text
+              fontWeight={600}
+              lineHeight={"20px"}
+              fontSize={"13px"}
+              noSelect
+            >
+              Code verifier
+            </Text>
+            <Textarea
+              heightTextArea={64}
+              enableCopy
+              isReadOnly
+              isDisabled
+              value={codeVerifier}
+            />
+          </div>
         </StyledContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>

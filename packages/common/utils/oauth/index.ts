@@ -1,3 +1,6 @@
+import crypto from "crypto-js";
+import sha256 from "crypto-js/sha256";
+
 import { ScopeGroup, ScopeType } from "./enums";
 import {
   IClientResDTO,
@@ -153,3 +156,13 @@ export const filterScopeByGroup = (
 
   return filteredScopes;
 };
+
+export function generatePKCEPair() {
+  const NUM_OF_BYTES = 36; // Total of 44 characters (1 Bytes = 2 char) (standard states that: 43 chars <= verifier <= 128 chars)
+  const HASH_ALG = "sha256";
+
+  const randomVerifier = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
+  const hash = sha256(randomVerifier).toString(crypto.enc.Base64);
+
+  return { verifier: randomVerifier, challenge: hash };
+}

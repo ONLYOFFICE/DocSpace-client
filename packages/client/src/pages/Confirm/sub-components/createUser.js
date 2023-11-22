@@ -1,11 +1,10 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import PropTypes from "prop-types";
 import { createUser, signupOAuth } from "@docspace/common/api/people";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
-import { isDesktop as isDesktopUtil } from "@docspace/components/utils/device";
+import { useSearchParams } from "react-router-dom";
 import Avatar from "@docspace/components/avatar";
 import Button from "@docspace/components/button";
 import TextInput from "@docspace/components/text-input";
@@ -22,6 +21,7 @@ import {
   getOAuthToken,
   getLoginLink,
 } from "@docspace/common/utils";
+import { login } from "@docspace/common/utils/loginUtils";
 import { providersData } from "@docspace/common/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
@@ -49,6 +49,8 @@ const CreateUserForm = (props) => {
     roomData,
     capabilities,
     currentColorScheme,
+    userNameRegex,
+    defaultPage,
   } = props;
   const inputRef = React.useRef(null);
 
@@ -79,6 +81,7 @@ const CreateUserForm = (props) => {
 
   const [showForm, setShowForm] = useState(true);
   const [showGreeting, setShowGreeting] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const focusInput = () => {
     if (inputRef) {
@@ -95,6 +98,8 @@ const CreateUserForm = (props) => {
     setShowForm(true);
     setShowGreeting(false);
   };
+
+  const nameRegex = new RegExp(userNameRegex, "gu");
 
   /*useEffect(() => {
     window.addEventListener("resize", onCheckGreeting);
@@ -116,7 +121,6 @@ const CreateUserForm = (props) => {
         const user = await getUserFromConfirm(uid, confirmKey);
         setUser(user);
       }
-
       window.authCallback = authCallback;
 
       onCheckGreeting();
@@ -127,21 +131,21 @@ const CreateUserForm = (props) => {
   }, [props.isAuthenticated]);
 
   const onSubmit = () => {
-    const { defaultPage, linkData, hashSettings } = props;
+    const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
-
+    const culture = searchParams.get("culture");
     setIsLoading(true);
 
     setErrorText("");
 
     let hasError = false;
 
-    if (!fname.trim()) {
+    if (!fname.trim() || !fnameValid) {
       hasError = true;
       setFnameValid(!hasError);
     }
 
-    if (!sname.trim()) {
+    if (!sname.trim() || !snameValid) {
       hasError = true;
       setSnameValid(!hasError);
     }
@@ -173,9 +177,10 @@ const CreateUserForm = (props) => {
     };
 
     const personalData = {
-      firstname: fname,
-      lastname: sname,
+      firstname: fname.trim(),
+      lastname: sname.trim(),
       email: email,
+      culture: culture,
     };
 
     if (!!type) {
@@ -188,36 +193,27 @@ const CreateUserForm = (props) => {
 
     const headerKey = linkData.confirmHeader;
 
-    createConfirmUser(personalData, loginData, headerKey)
-      .then(() => {
-        const url = roomData.roomId
-          ? `/rooms/shared/filter?folder=${roomData.roomId}`
-          : defaultPage;
-        window.location.replace(url);
-      })
-      .catch((error) => {
-        let errorMessage = "";
-        if (typeof error === "object") {
-          errorMessage =
-            error?.response?.data?.error?.message ||
-            error?.statusText ||
-            error?.message ||
-            "";
-        } else {
-          errorMessage = error;
-        }
+    createConfirmUser(personalData, loginData, headerKey).catch((error) => {
+      let errorMessage = "";
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else {
+        errorMessage = error;
+      }
 
-        console.error("confirm error", errorMessage);
-        setIsEmailErrorShow(true);
-        setEmailErrorText(errorMessage);
-        setEmailValid(false);
-        setIsLoading(false);
-      });
+      console.error("confirm error", errorMessage);
+      setIsEmailErrorShow(true);
+      setEmailErrorText(errorMessage);
+      setEmailValid(false);
+      setIsLoading(false);
+    });
   };
 
   const authCallback = (profile) => {
-    const { defaultPage } = props;
-
     const signupAccount = {
       EmployeeType: linkData.emplType || null,
       Email: linkData.email,
@@ -238,7 +234,8 @@ const CreateUserForm = (props) => {
   };
 
   const createConfirmUser = async (registerData, loginData, key) => {
-    const { login } = props;
+    const { defaultPage } = props;
+
     const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
 
     const data = Object.assign(
@@ -247,13 +244,27 @@ const CreateUserForm = (props) => {
       loginData
     );
 
-    const user = await createUser(data, key);
+    await createUser(data, key);
 
     const { userName, passwordHash } = loginData;
 
-    const response = await login(userName, passwordHash);
+    const res = await login(userName, passwordHash);
 
-    return user;
+    //console.log({ res });
+
+    const finalUrl = roomData.roomId
+      ? `/rooms/shared/filter?folder=${roomData.roomId}`
+      : defaultPage;
+
+    const isConfirm = typeof res === "string" && res.includes("confirm");
+
+    if (isConfirm) {
+      sessionStorage.setItem("referenceUrl", finalUrl);
+
+      return window.location.replace(typeof res === "string" ? res : "/");
+    }
+
+    window.location.replace(finalUrl);
   };
 
   const moreAuthOpen = () => {
@@ -271,13 +282,13 @@ const CreateUserForm = (props) => {
 
   const onChangeFname = (e) => {
     setFname(e.target.value);
-    setFnameValid(true);
+    setFnameValid(nameRegex.test(e.target.value.trim()));
     setErrorText("");
   };
 
   const onChangeSname = (e) => {
     setSname(e.target.value);
-    setSnameValid(true);
+    setSnameValid(nameRegex.test(e.target.value.trim()));
     setErrorText("");
   };
 
@@ -420,8 +431,7 @@ const CreateUserForm = (props) => {
               fontSize="23px"
               fontWeight={700}
               textAlign="left"
-              className="greeting-title"
-            >
+              className="greeting-title">
               {greetingTitle}
             </Text>
 
@@ -452,8 +462,7 @@ const CreateUserForm = (props) => {
                         t={t}
                         i18nKey="WelcomeToRoom"
                         ns="Confirm"
-                        key={roomName}
-                      >
+                        key={roomName}>
                         Welcome to the <strong>{{ roomName }}</strong> room!
                       </Trans>
                     ) : (
@@ -491,8 +500,7 @@ const CreateUserForm = (props) => {
                           fontWeight="600"
                           color={currentColorScheme?.main?.accent}
                           className="more-label"
-                          onClick={moreAuthOpen}
-                        >
+                          onClick={moreAuthOpen}>
                           {t("Common:ShowMore")}
                         </Link>
                       )}
@@ -521,8 +529,7 @@ const CreateUserForm = (props) => {
                         emailErrorText
                           ? t(`Common:${emailErrorText}`)
                           : t("Common:RequiredField")
-                      }
-                    >
+                      }>
                       <EmailInput
                         id="login"
                         name="login"
@@ -550,9 +557,12 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={!fnameValid}
                       errorMessage={
-                        errorText ? errorText : t("Common:RequiredField")
-                      }
-                    >
+                        errorText
+                          ? errorText
+                          : fname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectFirstName")
+                      }>
                       <TextInput
                         id="first-name"
                         name="first-name"
@@ -575,9 +585,12 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={!snameValid}
                       errorMessage={
-                        errorText ? errorText : t("Common:RequiredField")
-                      }
-                    >
+                        errorText
+                          ? errorText
+                          : sname.trim().length === 0
+                          ? t("Common:RequiredField")
+                          : t("Common:IncorrectLastName")
+                      }>
                       <TextInput
                         id="last-name"
                         name="last-name"
@@ -601,8 +614,7 @@ const CreateUserForm = (props) => {
                       hasError={isPasswordErrorShow && !passwordValid}
                       errorMessage={`${t(
                         "Common:PasswordLimitMessage"
-                      )}: ${getPasswordErrorMessage(t, settings)}`}
-                    >
+                      )}: ${getPasswordErrorMessage(t, settings)}`}>
                       <PasswordInput
                         simpleView={false}
                         hideNewPasswordButton
@@ -699,7 +711,6 @@ const CreateUserForm = (props) => {
 
 export default inject(({ auth }) => {
   const {
-    login,
     logout,
     isAuthenticated,
     settingsStore,
@@ -715,15 +726,14 @@ export default inject(({ auth }) => {
     getSettings,
     getPortalPasswordSettings,
     currentColorScheme,
+    userNameRegex,
   } = settingsStore;
-
   return {
     settings: passwordSettings,
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
     isAuthenticated,
-    login,
     logout,
     getSettings,
     getPortalPasswordSettings,
@@ -731,6 +741,7 @@ export default inject(({ auth }) => {
     providers,
     capabilities,
     currentColorScheme,
+    userNameRegex,
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(

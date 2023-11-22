@@ -1,22 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { isMobile } from "@docspace/components/utils/device";
-
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useState, useRef } from "react";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import TableContainer from "@docspace/components/table-container/TableContainer";
+import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";
+import TableContainer from "@docspace/components/table-container/TableContainer";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";
-
-import { Base } from "@docspace/components/themes";
 
 const TableWrapper = styled(TableContainer)`
   margin-top: 16px;
 
   .header-container-text {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
   .table-container_header {
@@ -27,7 +25,22 @@ const TableWrapper = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
+      background-color: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 `;
@@ -48,19 +61,17 @@ const WebhooksTableView = (props) => {
     openSettingsModal,
     openDeleteModal,
     userId,
+    currentDeviceType,
   } = props;
 
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile()) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -83,7 +94,8 @@ const WebhooksTableView = (props) => {
         filesLength={webhooks.length}
         fetchMoreFiles={loadWebhooks}
         hasMoreFiles={false}
-        itemCount={webhooks.length}>
+        itemCount={webhooks.length}
+      >
         {webhooks.map((webhook, index) => (
           <WebhooksTableRow
             key={webhook.id}
@@ -104,6 +116,7 @@ export default inject(({ webhooksStore, setup, auth }) => {
 
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     webhooks,
@@ -111,5 +124,6 @@ export default inject(({ webhooksStore, setup, auth }) => {
     setViewAs,
     loadWebhooks,
     userId,
+    currentDeviceType,
   };
 })(observer(WebhooksTableView));

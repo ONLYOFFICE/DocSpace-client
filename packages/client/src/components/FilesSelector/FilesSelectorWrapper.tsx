@@ -1,16 +1,19 @@
 import React from "react";
-import { Provider as MobxProvider, inject, observer } from "mobx-react";
+import { Provider as MobxProvider } from "mobx-react";
 import { I18nextProvider } from "react-i18next";
 // @ts-ignore
 import store from "client/store";
 import FilesSelector from "./";
 import i18n from "./i18n";
 import { FilesSelectorProps } from "./FilesSelector.types";
-const { auth: authStore } = store;
+const { auth: authStore, settingsStore } = store;
 
 const FilesSelectorWrapper = (props: FilesSelectorProps) => {
   React.useEffect(() => {
+    const { setFilesSettings } = settingsStore;
+    const { settings } = props;
     authStore.init(true);
+    settings && setFilesSettings(settings);
   }, []);
 
   return (

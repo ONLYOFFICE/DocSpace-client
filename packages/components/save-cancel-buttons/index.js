@@ -43,7 +43,7 @@ class SaveCancelButtons extends React.Component {
       onCancelClick,
       displaySettings,
       showReminder,
-      reminderTest,
+      reminderText,
       saveButtonLabel,
       cancelButtonLabel,
       hasScroll,
@@ -56,6 +56,7 @@ class SaveCancelButtons extends React.Component {
       saveButtonDisabled,
       additionalClassSaveButton,
       additionalClassCancelButton,
+      hideBorder,
     } = this.props;
 
     const cancelButtonDisabled = cancelEnable
@@ -84,6 +85,7 @@ class SaveCancelButtons extends React.Component {
         displaySettings={displaySettings}
         showReminder={showReminder}
         hasScroll={hasScroll}
+        hideBorder={hideBorder}
       >
         <div className="buttons-flex">
           <Button
@@ -109,8 +111,8 @@ class SaveCancelButtons extends React.Component {
             scale={isMobile()}
           />
         </div>
-        {showReminder && reminderTest && (
-          <Text className="unsaved-changes">{reminderTest}</Text>
+        {showReminder && reminderText && (
+          <Text className="unsaved-changes">{reminderText}</Text>
         )}
       </StyledSaveCancelButtons>
     );
@@ -123,7 +125,7 @@ SaveCancelButtons.propTypes = {
   /** Accepts css class */
   className: PropTypes.string,
   /** Message text that notifies of the unsaved changes */
-  reminderTest: PropTypes.string,
+  reminderText: PropTypes.string,
   /** Save button label */
   saveButtonLabel: PropTypes.string,
   /** Cancel button label  */
@@ -148,6 +150,8 @@ SaveCancelButtons.propTypes = {
   cancelEnable: PropTypes.bool,
   /** Accepts css tab-index */
   tabIndex: PropTypes.number,
+  /** Hide top border */
+  hideBorder: PropTypes.bool,
 };
 
 SaveCancelButtons.defaultProps = {

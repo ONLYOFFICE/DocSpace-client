@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import Base from "../themes/base";
 
 import Text from "../text";
+import { tablet } from "../utils/device";
 
 const hoveredCss = css`
   border-color: ${(props) =>
@@ -16,7 +17,7 @@ const highCss = css`
   border-radius: 6px;
 
   p {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 400;
   }
 `;
@@ -48,6 +49,10 @@ const StyledBadge = styled.div`
     ${(props) => !props.noHover && hoveredCss};
   }
   ${(props) => !props.noHover && props.isHovered && hoveredCss};
+
+  @media ${tablet} {
+    ${({ isVersionBadge }) => isVersionBadge && `width: auto;`}
+  }
 `;
 StyledBadge.defaultProps = { theme: Base };
 

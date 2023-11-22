@@ -11,7 +11,10 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
+import PluginPage from "./Plugins";
 import { DeviceType } from "@docspace/common/constants";
+import Badge from "@docspace/components/badge";
+import Box from "@docspace/components/box";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -21,6 +24,7 @@ const IntegrationWrapper = (props) => {
     toDefault,
     isSSOAvailable,
     standalone,
+    enablePlugins,
   } = props;
   const navigate = useNavigate();
 
@@ -60,6 +64,29 @@ const IntegrationWrapper = (props) => {
     data.push(documentServiceData);
   }
 
+  if (enablePlugins) {
+    const pluginLabel = (
+      <Box displayProp="flex" style={{ gap: "8px" }}>
+        {t("Common:Plugins")}
+
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
+    );
+
+    data.splice(1, 0, {
+      id: "plugins",
+      name: pluginLabel,
+      content: <PluginPage />,
+    });
+  }
+
   const getCurrentTab = () => {
     const path = location.pathname;
     const currentTab = data.findIndex((item) => path.includes(item.id));
@@ -95,7 +122,7 @@ const IntegrationWrapper = (props) => {
 };
 
 export default inject(({ auth, ssoStore }) => {
-  const { standalone } = auth.settingsStore;
+  const { standalone, enablePlugins } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
   const { currentDeviceType } = auth.settingsStore;
   const { isSSOAvailable } = auth.currentQuotaStore;
@@ -105,9 +132,10 @@ export default inject(({ auth, ssoStore }) => {
     isSSOAvailable,
     standalone,
     currentDeviceType,
+    enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations"])(
+  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
     observer(IntegrationWrapper)
   )
 );

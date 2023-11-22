@@ -4,14 +4,7 @@ export const StyledMediaError = styled.div`
   position: fixed;
   z-index: 1006;
 
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 50%;
-        `
-      : css`
-          left: 50%;
-        `}
+  left: 50%;
   top: 50%;
 
   transform: translate(-50%, -50%);
@@ -30,14 +23,7 @@ export const StyledMediaError = styled.div`
 export const StyledErrorToolbar = styled.div`
   position: fixed;
   bottom: 24px;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 50%;
-        `
-      : css`
-          left: 50%;
-        `}
+  left: 50%;
   z-index: 1006;
 
   transform: translateX(-50%);

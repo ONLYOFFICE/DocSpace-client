@@ -66,7 +66,7 @@ class RoomsModule extends React.Component {
             {...(selectedFolder && { id: selectedFolder })}
             withoutInitPath={!selectedFolder}
             isDisabled={isModuleDisabled}
-            isRoomsOnly
+            isRoomBackup
           />
         </div>
         <div className="manual-backup_buttons">

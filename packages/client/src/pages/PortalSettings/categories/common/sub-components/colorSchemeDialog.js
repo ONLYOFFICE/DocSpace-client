@@ -10,7 +10,7 @@ const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
     width: 100%;
     bottom: 0 !important;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: 0;
@@ -33,7 +33,7 @@ const StyledComponent = styled(ModalDialog)`
 
   .name-color {
     font-weight: 700;
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     line-height: 24px;
   }
 
@@ -42,7 +42,7 @@ const StyledComponent = styled(ModalDialog)`
   }
 
   .accent-box {
-    background: ${props =>
+    background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent
         : props.theme.isBase
@@ -51,7 +51,7 @@ const StyledComponent = styled(ModalDialog)`
   }
 
   .buttons-box {
-    background: ${props =>
+    background: ${(props) =>
       props.currentColorButtons
         ? props.currentColorButtons
         : props.theme.isBase
@@ -85,7 +85,7 @@ const StyledComponent = styled(ModalDialog)`
   }
 `;
 
-const ColorSchemeDialog = props => {
+const ColorSchemeDialog = (props) => {
   const {
     visible,
     onClose,
@@ -101,7 +101,8 @@ const ColorSchemeDialog = props => {
     currentColorButtons,
   } = props;
 
-  const onKeyPress = e => (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onClose();
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);

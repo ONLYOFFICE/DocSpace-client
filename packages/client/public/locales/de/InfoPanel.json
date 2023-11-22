@@ -29,15 +29,11 @@
   "HistoryEmptyScreenText": "Aktivitätsverlauf wird hier angezeigt",
   "ItemsSelected": "Ausgewählte Elemente",
   "LastModifiedBy": "Zuletzt geändert von",
-  "LinksToViewingIcon": "Links zur Ansicht",
-  "PendingInvitations": "Ausstehende Einladungen",
   "Properties": "Eigenschaften",
   "RoomsEmptyScreenTent": "Siehe Details von Räumen hier",
   "SelectedUsers": "Ausgewählte Konten",
   "StorageType": "Art des Speicherplatzes",
   "SubmenuDetails": "Details",
   "SubmenuHistory": "Geschichte",
-  "SystemProperties": "Eigenschaften des Systems",
-  "UsersInRoom": "Benutzer im Raum",
   "Versions": "Versionen"
 }

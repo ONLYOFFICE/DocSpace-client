@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   padding-right: 8px;
@@ -46,23 +45,23 @@ const StyledLoader = styled.div`
 const PasswordLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="37px" />
-      <Loaders.Rectangle className="description" height="80px" />
+      <RectangleSkeleton className="header" height="37px" />
+      <RectangleSkeleton className="description" height="80px" />
       <div className="link">
-        <Loaders.Rectangle height="20px" width="57px" />
+        <RectangleSkeleton height="20px" width="57px" />
       </div>
-      <Loaders.Rectangle className="subheader" height="16px" width="171px" />
+      <RectangleSkeleton className="subheader" height="16px" width="171px" />
       <div className="slider">
-        <Loaders.Rectangle height="24px" width="160px" />
-        <Loaders.Rectangle height="20px" width="75px" />
+        <RectangleSkeleton height="24px" width="160px" />
+        <RectangleSkeleton height="20px" width="75px" />
       </div>
       <div className="checkboxs">
-        <Loaders.Rectangle height="20px" />
-        <Loaders.Rectangle height="20px" />
-        <Loaders.Rectangle height="20px" />
+        <RectangleSkeleton height="20px" />
+        <RectangleSkeleton height="20px" />
+        <RectangleSkeleton height="20px" />
       </div>
 
-      <Loaders.Rectangle className="buttons" height="40px" />
+      <RectangleSkeleton className="buttons" height="40px" />
     </StyledLoader>
   );
 };

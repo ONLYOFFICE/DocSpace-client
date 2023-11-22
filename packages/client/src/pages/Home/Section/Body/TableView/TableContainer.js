@@ -1,15 +1,17 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import elementResizeDetectorMaker from "element-resize-detector";
-import TableContainer from "@docspace/components/table-container";
 import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import TableRow from "./TableRow";
-import TableHeader from "./TableHeader";
+import elementResizeDetectorMaker from "element-resize-detector";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
+import { Base } from "@docspace/components/themes";
+import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { DeviceType } from "@docspace/common/constants";
+import TableRow from "./TableRow";
+import TableHeader from "./TableHeader";
 
 const marginCss = css`
   margin-top: -1px;
@@ -37,11 +39,11 @@ const contextCss = css`
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
-          padding-left: 18px;
+          padding-left: 20px;
         `
       : css`
           margin-right: -20px;
-          padding-right: 18px;
+          padding-right: 20px;
         `}
 
   ${marginCss}
@@ -152,22 +154,11 @@ const Table = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if ((viewAs !== "table" && viewAs !== "row") || !setViewAs) return;
-    // 400 - it is desktop info panel width
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (viewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      currentDeviceType !== DeviceType.desktop
-    ) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth, currentDeviceType]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   useEffect(() => {
     return () => {

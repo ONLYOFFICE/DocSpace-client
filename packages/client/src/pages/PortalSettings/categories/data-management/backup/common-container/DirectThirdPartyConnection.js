@@ -72,12 +72,6 @@ const DirectThirdPartyConnection = (props) => {
     }
   };
 
-  useEffect(() => {
-    selectedThirdPartyAccount === null &&
-      !isInitialLoading &&
-      updateAccountsInfo();
-  }, [selectedThirdPartyAccount === null]);
-
   const [state, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     initialState
@@ -225,7 +219,7 @@ const DirectThirdPartyConnection = (props) => {
         provider_id
       );
 
-      setSelectedThirdPartyAccount(null);
+      updateAccountsInfo();
     } catch (e) {
       setState({ isLoading: false, isUpdatingInfo: false });
       toastr.error(e);

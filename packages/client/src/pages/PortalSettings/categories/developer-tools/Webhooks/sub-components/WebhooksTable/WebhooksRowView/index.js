@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { isMobile } from "@docspace/components/utils/device";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import RowContainer from "@docspace/components/row-container";
 
@@ -13,17 +12,21 @@ const StyledRowContainer = styled(RowContainer)`
 `;
 
 const WebhooksRowView = (props) => {
-  const { webhooks, sectionWidth, viewAs, setViewAs, openSettingsModal, openDeleteModal } = props;
+  const {
+    webhooks,
+    sectionWidth,
+    viewAs,
+    setViewAs,
+    openSettingsModal,
+    openDeleteModal,
+    currentDeviceType,
+  } = props;
 
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile()) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return (
     <StyledRowContainer useReactWindow={false}>
@@ -40,14 +43,15 @@ const WebhooksRowView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup }) => {
+export default inject(({ webhooksStore, setup, auth }) => {
   const { webhooks } = webhooksStore;
-
+  const { currentDeviceType } = auth.settingsStore;
   const { viewAs, setViewAs } = setup;
 
   return {
     webhooks,
     viewAs,
     setViewAs,
+    currentDeviceType,
   };
 })(observer(WebhooksRowView));

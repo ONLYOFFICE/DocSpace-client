@@ -42,7 +42,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
 
   .text-warning {
     color: #f24724;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     font-weight: 700;
     line-height: 22px;
   }
@@ -80,7 +80,8 @@ const DeleteProfileEverDialogComponent = (props) => {
   } = props;
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const needReassignData = user.isRoomAdmin || user.isOwner || user.isAdmin;
+  const needReassignData =
+    user.isRoomAdmin || user.isOwner || user.isAdmin || user.isCollaborator;
 
   const deleteMessage = (
     <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>

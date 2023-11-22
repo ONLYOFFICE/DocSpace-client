@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Box from "@docspace/components/box";
 import TextInput from "@docspace/components/text-input";
 import Textarea from "@docspace/components/textarea";
@@ -14,12 +14,11 @@ import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
+import { isMobile } from "react-device-detect";
 
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
-import Badge from "@docspace/components/badge";
 
 import GetCodeDialog from "./sub-components/GetCodeDialog";
 import CSP from "./sub-components/csp";
@@ -31,6 +30,11 @@ const SDKContainer = styled(Box)`
   @media ${tablet} {
     width: 100%;
   }
+
+  ${isMobile &&
+  css`
+    width: 100%;
+  `}
 `;
 
 const Controls = styled(Box)`
@@ -45,15 +49,24 @@ const Controls = styled(Box)`
     min-width: 0;
   }
 
+  ${isMobile &&
+  css`
+    min-width: 0;
+  `}
+
   .label {
     min-width: fit-content;
+  }
+
+  .checkbox {
+    max-width: fit-content;
   }
 `;
 
 const CategoryHeader = styled.div`
   margin-top: 40px;
   margin-bottom: 24px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -61,12 +74,17 @@ const CategoryHeader = styled.div`
   @media ${tablet} {
     margin-top: 24px;
   }
+
+  ${isMobile &&
+  css`
+    margin-top: 24px;
+  `}
 `;
 
 const CategorySubHeader = styled.div`
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 15px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
   font-style: normal;
   font-weight: 600;
   line-height: 16px;
@@ -76,6 +94,13 @@ const CategorySubHeader = styled.div`
       margin-bottom: 0;
     }
   }
+
+  ${isMobile &&
+  css`
+    &:not(&.copy-window-code) {
+      margin-bottom: 0;
+    }
+  `}
 
   @media ${mobile} {
     &:first-of-type {
@@ -87,6 +112,10 @@ const CategorySubHeader = styled.div`
 const CategoryDescription = styled(Box)`
   margin-top: 5px;
   max-width: 700px;
+  .sdk-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+  }
 `;
 
 const ControlsGroup = styled(Box)`
@@ -97,6 +126,11 @@ const ControlsGroup = styled(Box)`
   @media ${tablet} {
     gap: 4px;
   }
+
+  ${isMobile &&
+  css`
+    gap: 4px;
+  `}
 `;
 
 const LabelGroup = styled(Box)`
@@ -119,6 +153,11 @@ const Frame = styled(Box)`
   @media ${tablet} {
     margin-top: 4px;
   }
+
+  ${isMobile &&
+  css`
+    margin-top: 4px;
+  `}
 
   ${(props) =>
     props.targetId &&
@@ -143,6 +182,11 @@ const Container = styled(Box)`
   @media ${tablet} {
     flex-direction: column;
   }
+
+  ${isMobile &&
+  css`
+    flex-direction: column;
+  `}
 `;
 
 const RowContainer = styled(Box)`
@@ -174,6 +218,11 @@ const Preview = styled(Box)`
     margin-top: 0;
     min-width: 0;
   }
+  ${isMobile &&
+  css`
+    margin-top: 0;
+    min-width: 0;
+  `}
 `;
 
 const GetCodeButtonWrapper = styled.div`
@@ -235,6 +284,7 @@ const PortalIntegration = (props) => {
   );
 
   const [config, setConfig] = useState({
+    hash: `${API_JS_HASH}`,
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
@@ -408,7 +458,7 @@ const PortalIntegration = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <Loaders.Rectangle height={height} borderRadius="6px" />
+      <RectangleSkeleton height={height} borderRadius="6px" />
     </Frame>
   );
 
@@ -437,7 +487,7 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        {t("SDKDescription")}{" "}
+        <Text className="sdk-description">{t("SDKDescription")}</Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
@@ -512,16 +562,19 @@ const PortalIntegration = (props) => {
           <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
+              className="checkbox"
               label={t("Menu")}
               onChange={onChangeShowMenu}
               isChecked={config.showMenu}
             />
             <Checkbox
+              className="checkbox"
               label={t("Header")}
               onChange={onChangeShowHeader}
               isChecked={config.showHeader}
             />
             <Checkbox
+              className="checkbox"
               label={t("Filter")}
               onChange={onChangeShowFilter}
               isChecked={config.showFilter}
@@ -548,7 +601,7 @@ const PortalIntegration = (props) => {
               />
             </LabelGroup>
             <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFolderId} />
+              <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
             </FilesSelectorInputWrapper>
           </ControlsGroup>
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
@@ -563,6 +616,7 @@ const PortalIntegration = (props) => {
                 tabIndex={5}
               />
               <Checkbox
+                className="checkbox"
                 label={t("Files:WithSubfolders")}
                 onChange={onChangeWithSubfolders}
                 isChecked={withSubfolders}

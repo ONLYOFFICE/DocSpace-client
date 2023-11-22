@@ -59,7 +59,12 @@ const HotkeyPanel = ({
         isAside={true}
         zIndex={210}
       />
-      <Aside className="hotkeys-panel" visible={visible} onClose={onClose}>
+      <Aside
+        className="hotkeys-panel"
+        visible={visible}
+        onClose={onClose}
+        withoutBodyScroll={true}
+      >
         <div className="hotkeys_header">
           <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
         </div>
@@ -145,11 +150,8 @@ const HotkeyPanel = ({
 HotkeyPanel.defaultProps = { theme: Base };
 
 export default inject(({ auth, publicRoomStore }) => {
-  const {
-    hotkeyPanelVisible,
-    setHotkeyPanelVisible,
-    theme,
-  } = auth.settingsStore;
+  const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } =
+    auth.settingsStore;
 
   return {
     visible: hotkeyPanelVisible,

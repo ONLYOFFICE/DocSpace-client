@@ -56,6 +56,7 @@ const PasswordStrength = (props) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -93,6 +94,16 @@ const PasswordStrength = (props) => {
       setUseSpecialSymbols(passwordSettings.specSymbols);
     }
   };
+
+  const getPasswordSettings = async () => {
+    setIsLoading(true);
+    await getPortalPasswordSettings();
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (!passwordSettings) getPasswordSettings();
+  }, [passwordSettings]);
 
   useEffect(() => {
     checkWidth();
@@ -260,7 +271,7 @@ const PasswordStrength = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -280,6 +291,7 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -291,5 +303,6 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

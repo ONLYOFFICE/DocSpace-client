@@ -1,29 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
-
 import styled from "styled-components";
-
-import { isMobile } from "@docspace/components/utils/device";
-
-import TableContainer from "@docspace/components/table-container/TableContainer";
-import TableBody from "@docspace/components/table-container/TableBody";
-import HistoryTableHeader from "./HistoryTableHeader";
-import HistoryTableRow from "./HistoryTableRow";
-
 import { useParams } from "react-router-dom";
-
 import { inject, observer } from "mobx-react";
+import { useState, useRef } from "react";
 
 import { Base } from "@docspace/components/themes";
+import TableBody from "@docspace/components/table-container/TableBody";
+import TableContainer from "@docspace/components/table-container/TableContainer";
+
+import HistoryTableRow from "./HistoryTableRow";
+import HistoryTableHeader from "./HistoryTableHeader";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 const TableWrapper = styled(TableContainer)`
-  margin-top: 0;
+  margin-top: -2px;
 
   .table-container_header {
     position: absolute;
   }
 
   .header-container-text {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
   .checkboxWrapper {
@@ -33,13 +29,36 @@ const TableWrapper = styled(TableContainer)`
 
   .table-list-item {
     cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
-      background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#282828")};
+      background-color: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) => (props.theme.isBase ? "#f3f4f4" : "#282828")};
+    background-color: ${(props) =>
+      props.theme.filesSection.tableView.row.backgroundActive};
   }
 `;
 
@@ -61,6 +80,7 @@ const HistoryTableView = (props) => {
     formatFilters,
     historyFilters,
     userId,
+    currentDeviceType,
   } = props;
 
   const tableRef = useRef(null);
@@ -68,14 +88,11 @@ const HistoryTableView = (props) => {
 
   const { id } = useParams();
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile()) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const fetchMoreFiles = () => {
     const params = historyFilters === null ? {} : formatFilters(historyFilters);
@@ -91,7 +108,8 @@ const HistoryTableView = (props) => {
       style={{
         gridTemplateColumns: "300px 100px 400px 24px",
       }}
-      useReactWindow>
+      useReactWindow
+    >
       <HistoryTableHeader
         sectionWidth={sectionWidth}
         tableRef={tableRef}
@@ -108,7 +126,8 @@ const HistoryTableView = (props) => {
         filesLength={historyItems.length}
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasMoreItems}
-        itemCount={totalItems}>
+        itemCount={totalItems}
+      >
         {historyItems.map((item) => (
           <HistoryTableRow
             key={item.id}
@@ -123,9 +142,16 @@ const HistoryTableView = (props) => {
 
 export default inject(({ setup, webhooksStore, auth }) => {
   const { viewAs, setViewAs } = setup;
-  const { historyItems, fetchMoreItems, hasMoreItems, totalItems, formatFilters, historyFilters } =
-    webhooksStore;
+  const {
+    historyItems,
+    fetchMoreItems,
+    hasMoreItems,
+    totalItems,
+    formatFilters,
+    historyFilters,
+  } = webhooksStore;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     viewAs,
@@ -137,5 +163,6 @@ export default inject(({ setup, webhooksStore, auth }) => {
     formatFilters,
     historyFilters,
     userId,
+    currentDeviceType,
   };
 })(observer(HistoryTableView));

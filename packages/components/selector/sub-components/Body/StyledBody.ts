@@ -29,7 +29,7 @@ const StyledBody = styled.div<{
   }
 
   .body-description-text {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 12px;

@@ -25,6 +25,7 @@ const CustomizationNavbar = ({
   setIsLoadedCustomizationNavbar,
   isLoadedPage,
   isSettingPaid,
+  enablePortalRename,
 }) => {
   const isLoadedSetting = isLoaded && tReady;
   const navigate = useNavigate();
@@ -62,21 +63,25 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      <MobileCategoryWrapper
-        title={t("PortalRenaming")}
-        subtitle={t("PortalRenamingNavDescription")}
-        url="/portal-settings/customization/general/portal-renaming"
-        onClickLink={onClickLink}
-      />
+      {enablePortalRename && (
+        <MobileCategoryWrapper
+          title={t("PortalRenaming")}
+          subtitle={t("PortalRenamingNavDescription")}
+          url="/portal-settings/customization/general/portal-renaming"
+          onClickLink={onClickLink}
+        />
+      )}
     </StyledComponent>
   );
 };
 
-export default inject(({ common }) => {
+export default inject(({ common, auth }) => {
+  const { enablePortalRename } = auth.settingsStore;
   const { isLoaded, setIsLoadedCustomizationNavbar } = common;
   return {
     isLoaded,
     setIsLoadedCustomizationNavbar,
+    enablePortalRename,
   };
 })(
   withCultureNames(

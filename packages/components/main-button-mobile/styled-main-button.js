@@ -163,7 +163,7 @@ const StyledDropDown = styled(DropDown)`
     background-color: ${(props) =>
       props.theme.mainButtonMobile.dropDown.backgroundActionMobile};
     border-radius: 3px;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     display: block;
   }
 `;
@@ -172,6 +172,10 @@ StyledDropDown.defaultProps = { theme: Base };
 
 const StyledDropDownItem = styled(DropDownItem)`
   padding: 6px 23px;
+
+  .drop-down-icon {
+    height: 22px;
+  }
 `;
 
 const StyledButtonOptions = styled.div`

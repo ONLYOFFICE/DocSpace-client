@@ -75,7 +75,6 @@ class ClientLoadingStore {
       this.startLoadingTime.header = new Date();
       if (withTimer && !this.firstLoad) {
         return (this.sectionHeaderTimer = setTimeout(() => {
-          this.sectionHeaderTimer = null;
           this.updateIsSectionHeaderLoading(isSectionHeaderLoading);
         }, SHOW_LOADER_TIMER));
       }
@@ -85,11 +84,11 @@ class ClientLoadingStore {
       if (this.startLoadingTime.header) {
         const currentDate = new Date();
 
-        const ms = Math.abs(
+        let ms = Math.abs(
           this.startLoadingTime.header.getTime() - currentDate.getTime()
         );
         if (this.sectionHeaderTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
           clearTimeout(this.sectionHeaderTimer);
           this.sectionHeaderTimer = null;
         }
@@ -97,6 +96,7 @@ class ClientLoadingStore {
         if (ms < MIN_LOADER_TIMER)
           return setTimeout(() => {
             this.updateIsSectionHeaderLoading(false);
+            this.sectionHeaderTimer = null;
             this.startLoadingTime.header = null;
           }, MIN_LOADER_TIMER - ms);
       }
@@ -110,8 +110,6 @@ class ClientLoadingStore {
   };
 
   setIsSectionFilterLoading = (isSectionFilterLoading, withTimer = true) => {
-    const id = Math.ceil(Math.random() * 10);
-
     if (isSectionFilterLoading) {
       if (this.pendingSectionLoaders.filter || this.isSectionFilterLoading)
         return;
@@ -124,7 +122,6 @@ class ClientLoadingStore {
       if (withTimer && !this.firstLoad) {
         return (this.sectionFilterTimer = setTimeout(() => {
           this.updateIsSectionFilterLoading(isSectionFilterLoading);
-          this.sectionFilterTimer = null;
         }, SHOW_LOADER_TIMER));
       }
 
@@ -139,7 +136,7 @@ class ClientLoadingStore {
         );
 
         if (this.sectionFilterTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.sectionFilterTimer);
           this.sectionFilterTimer = null;
@@ -174,7 +171,6 @@ class ClientLoadingStore {
       this.startLoadingTime.body = new Date();
       if (withTimer && !this.firstLoad) {
         return (this.sectionBodyTimer = setTimeout(() => {
-          this.sectionBodyTimer = null;
           this.updateIsSectionBodyLoading(isSectionBodyLoading);
         }, SHOW_LOADER_TIMER));
       }
@@ -189,7 +185,7 @@ class ClientLoadingStore {
         );
 
         if (this.sectionBodyTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.sectionBodyTimer);
           this.sectionBodyTimer = null;

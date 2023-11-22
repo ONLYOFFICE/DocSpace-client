@@ -92,7 +92,6 @@ export function getObjectByLocation(location) {
 
   try {
     const object = JSON.parse(`{"${decodedString}"}`);
-
     return object;
   } catch (e) {
     return {};
@@ -404,6 +403,39 @@ export function convertLanguage(key) {
   return key;
 }
 
+export function convertToCulture(key: string) {
+  switch (key) {
+    case "ar":
+      return "ar-SA";
+    case "en":
+      return "en-US";
+    case "el":
+      return "el-GR";
+    case "hy":
+      return "hy-AM";
+    case "ko":
+      return "ko-KR";
+    case "lo":
+      return "lo-LA";
+    case "pt":
+      return "pt-BR";
+    case "uk":
+      return "uk-UA";
+    case "ja":
+      return "ja-JP";
+    case "zh":
+      return "zh-CN";
+  }
+  return key;
+}
+
+export function convertToLanguage(key: string) {
+  const splittedKey = key.split("-");
+  if (splittedKey.length > 1) return splittedKey[0];
+
+  return key;
+}
+
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -629,4 +661,19 @@ export const getSystemTheme = () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ? ThemeKeys.DarkStr
     : ThemeKeys.BaseStr;
+};
+
+export const getEditorTheme = (theme) => {
+  switch (theme) {
+    case ThemeKeys.BaseStr:
+      return "default-light";
+    case ThemeKeys.DarkStr:
+      return "default-dark";
+    case ThemeKeys.SystemStr: {
+      const uiTheme = getSystemTheme();
+      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    }
+    default:
+      return "default-dark";
+  }
 };

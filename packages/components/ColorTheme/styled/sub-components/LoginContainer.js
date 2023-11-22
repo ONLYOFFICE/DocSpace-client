@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import Base from "@docspace/components/themes/base";
+import { tablet, mobile } from "../../../utils/device";
+import Base from "../../../themes/base";
 
 const LoginContainer = styled.div`
   user-select: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 56px auto 0 auto;
+  //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
 
@@ -74,18 +74,10 @@ const LoginContainer = styled.div`
 
   .line {
     display: flex;
-    width: 320px;
+    width: 100%;
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
-
-    @media ${tablet} {
-      width: 416px;
-    }
-
-    @media ${mobile} {
-      width: 311px;
-    }
   }
 
   .line:before,
@@ -117,7 +109,7 @@ const LoginContainer = styled.div`
     padding: 14px 12px;
     text-align: center;
     font-weight: 600;
-    font-size: 11px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
     line-height: 12px;
     color: #333;
     svg {

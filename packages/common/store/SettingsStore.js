@@ -152,7 +152,6 @@ class SettingsStore {
   debugInfo = false;
   socketUrl = "";
 
-  userFormValidation = /^[\p{L}\p{M}'\-]+$/gu;
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
   tenantStatus = null;
@@ -168,6 +167,7 @@ class SettingsStore {
 
   enablePlugins = false;
   pluginOptions = [];
+  domainValidator = null;
 
   additionalResourcesData = null;
   additionalResourcesIsDefault = true;
@@ -191,9 +191,9 @@ class SettingsStore {
   blockingTime = null;
   checkPeriod = null;
 
-  windowWidth = window.innerWidth;
+  userNameRegex = "";
 
-  bodyRendered = false;
+  windowWidth = window.innerWidth;
 
   constructor() {
     makeAutoObservable(this);
@@ -201,10 +201,6 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus) => {
     this.tenantStatus = tenantStatus;
-  };
-
-  setBodyRendered = (value) => {
-    this.bodyRendered = value;
   };
 
   get docspaceSettingsUrl() {
@@ -475,7 +471,15 @@ class SettingsStore {
         const url = new URL(wrongPortalNameUrl);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
-        // return window.location.replace(url);
+        return window.location.replace(url);
+      }
+
+      if (err?.response?.status === 403) {
+        //access to the portal is restricted
+        window.DocSpace.navigate("/access-restricted", {
+          state: { isRestrictionError: true },
+          replace: true,
+        });
       }
     });
 
@@ -486,6 +490,10 @@ class SettingsStore {
 
     if (origSettings?.tenantAlias) {
       this.setTenantAlias(origSettings.tenantAlias);
+    }
+
+    if (origSettings?.domainValidator) {
+      this.domainValidator = origSettings.domainValidator;
     }
   };
 
@@ -1045,6 +1053,10 @@ class SettingsStore {
     if (isTablet(this.windowWidth)) return DeviceType.tablet;
 
     return DeviceType.desktop;
+  }
+
+  get enablePortalRename() {
+    return this.standalone && this.baseDomain !== "localhost";
   }
 }
 

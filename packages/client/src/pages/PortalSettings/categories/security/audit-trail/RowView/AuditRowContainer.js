@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
 import RowContainer from "@docspace/components/row-container";
 
 import { AuditUserRow } from "./AuditUserRow";
-import { DeviceType } from "@docspace/common/constants";
 
 const AuditRowContainer = ({
   viewAs,
@@ -14,15 +15,11 @@ const AuditRowContainer = ({
   isAuditAvailable,
   currentDeviceType,
 }) => {
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || currentDeviceType !== DeviceType.desktop) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return (
     <RowContainer className="history-row-container" useReactWindow={false}>

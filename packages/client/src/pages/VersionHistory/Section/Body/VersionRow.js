@@ -9,7 +9,6 @@ import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Textarea from "@docspace/components/textarea";
 import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
@@ -20,6 +19,7 @@ import toastr from "@docspace/components/toast/toastr";
 import { Encoder } from "@docspace/common/utils/encoder";
 import { Base } from "@docspace/components/themes";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import moment from "moment";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -36,7 +36,7 @@ const VersionRow = (props) => {
     culture,
     isVersion,
     t,
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     onSetRestoreProcess,
@@ -49,20 +49,32 @@ const VersionRow = (props) => {
     openUser,
     onClose,
     setIsVisible,
+    fileItemsList,
+    enablePlugins,
+    currentDeviceType,
   } = props;
+
+  const navigate = useNavigate();
+
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [commentValue, setCommentValue] = useState(info.comment);
   const [isSavingComment, setIsSavingComment] = useState(false);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (commentValue !== info.comment) {
+      setCommentValue(info.comment);
+    }
+  }, [info.comment]);
 
-  const versionDate = `${new Date(info.updated).toLocaleString(culture)}`;
+  const versionDate = `${moment(info.updated)
+    .locale(culture)
+    .format("L, LTS")}`;
+
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
-
-  const linkStyles = { isHovered: true, type: "action" };
 
   const onDownloadAction = () =>
     window.open(`${info.viewUrl}&version=${info.version}`, "_self");
+
   const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);
 
   const onChange = (e) => {
@@ -95,11 +107,31 @@ const VersionRow = (props) => {
     setCommentValue(info.comment);
     setShowEditPanel(!showEditPanel);
   };
-  const onOpenFile = () =>
+  const onOpenFile = () => {
+    if (fileItemsList && enablePlugins) {
+      let currPluginItem = null;
+
+      fileItemsList.forEach((i) => {
+        if (i.key === info.fileExst) currPluginItem = i.value;
+      });
+
+      if (currPluginItem) {
+        const correctDevice = currPluginItem.devices
+          ? currPluginItem.devices.includes(currentDeviceType)
+          : true;
+        if (correctDevice)
+          return currPluginItem.onClick({
+            ...info,
+            viewUrl: `${info.viewUrl}&version=${info.version}`,
+          });
+      }
+    }
+
     window.open(
       info.webUrl,
       window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
     );
+  };
 
   const onRestoreClick = () => {
     onSetRestoreProcess(true);
@@ -110,11 +142,11 @@ const VersionRow = (props) => {
       });
   };
 
-  const onVersionClick = () => {
-    markAsVersion(info.id, isVersion, info.version).catch((err) =>
-      toastr.error(err)
-    );
-  };
+  // const onVersionClick = () => {
+  //   markAsVersion(info.id, isVersion, info.version).catch((err) =>
+  //     toastr.error(err)
+  //   );
+  // };
 
   const contextOptions = [
     {
@@ -279,14 +311,17 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
+export default inject(({ auth, versionHistoryStore, pluginStore }) => {
   const { user } = auth.userStore;
   const { openUser, setIsVisible } = auth.infoPanelStore;
-  const { culture, isTabletView } = auth.settingsStore;
+  const { culture, isTabletView, enablePlugins, currentDeviceType } =
+    auth.settingsStore;
   const language = (user && user.cultureName) || culture || "en";
 
+  const { fileItemsList } = pluginStore;
+
   const {
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     isEditing,
@@ -298,10 +333,13 @@ export default inject(({ auth, versionHistoryStore, selectedFolderStore }) => {
   const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
   return {
+    currentDeviceType,
+    fileItemsList,
+    enablePlugins,
     theme: auth.settingsStore.theme,
     culture: language,
     isTabletView,
-    markAsVersion,
+    // markAsVersion,
     restoreVersion,
     updateCommentVersion,
     isEditing: isEdit,

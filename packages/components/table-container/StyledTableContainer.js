@@ -4,7 +4,7 @@ import { mobile, tablet } from "../utils/device";
 import IconButton from "../icon-button";
 import Scrollbar from "../scrollbar";
 
-import { ColorTheme } from "@docspace/components/ColorTheme";
+import { ColorTheme } from "../ColorTheme";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
@@ -219,6 +219,10 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   height: 100%;
   width: auto;
 
+  .info-panel-toggle {
+    margin-inline-end: 8px;
+  }
+
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -381,6 +385,14 @@ const StyledTableBody = styled.div`
   display: contents;
 
   ${({ useReactWindow }) => useReactWindow && reactWindowBodyStyles}
+
+  .table-container_cell {
+    ${({ infoPanelVisible }) =>
+      infoPanelVisible &&
+      css`
+        padding: 0;
+      `}
+  }
 `;
 
 const StyledTableRow = styled.div`
@@ -390,6 +402,10 @@ const StyledTableRow = styled.div`
     svg {
       margin: 0;
     }
+  }
+
+  .table-container_header-settings {
+    justify-self: flex-end;
   }
 
   .droppable-hover {
@@ -456,7 +472,7 @@ StyledTableCell.defaultProps = {
 
 const StyledTableSettings = styled.div`
   margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("14px 0 0px 2px", theme.interfaceDirection)};
+    getCorrectFourValuesStyle("14px 2px 0px 0px", theme.interfaceDirection)};
   display: inline-block;
   position: relative;
   cursor: pointer;

@@ -125,18 +125,20 @@ class SettingsStore {
         if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
           return;
 
-        return axios
-          .all([
-            api.files.getThirdPartyCapabilities(),
-            api.files.getThirdPartyList(),
-          ])
-          .then(([capabilities, providers]) => {
-            for (let item of capabilities) {
-              item.splice(1, 1);
-            }
-            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
-            this.thirdPartyStore.setThirdPartyProviders(providers);
-          });
+        // TODO: enable after supporting third-party
+
+        // return axios
+        //   .all([
+        //     api.files.getThirdPartyCapabilities(),
+        //     api.files.getThirdPartyList(),
+        //   ])
+        //   .then(([capabilities, providers]) => {
+        //     for (let item of capabilities) {
+        //       item.splice(1, 1);
+        //     }
+        //     this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+        //     this.thirdPartyStore.setThirdPartyProviders(providers);
+        //   });
       })
       .catch(() => this.setIsErrorSettings(true));
   };
@@ -523,6 +525,39 @@ class SettingsStore {
         break;
       case ".docxf":
         path = "docxf.svg";
+        break;
+      case ".sxc":
+        path = "sxc.svg";
+        break;
+      case ".et":
+        path = "et.svg";
+        break;
+      case ".ett":
+        path = "ett.svg";
+        break;
+      case ".sxw":
+        path = "sxw.svg";
+        break;
+      case ".stw":
+        path = "stw.svg";
+        break;
+      case ".wps":
+        path = "wps.svg";
+        break;
+      case ".wpt":
+        path = "wpt.svg";
+        break;
+      case ".mhtml":
+        path = "mhtml.svg";
+        break;
+      case ".dps":
+        path = "dps.svg";
+        break;
+      case ".dpt":
+        path = "dpt.svg";
+        break;
+      case ".sxi":
+        path = "sxi.svg";
         break;
       default:
         const { enablePlugins } = this.authStore.settingsStore;

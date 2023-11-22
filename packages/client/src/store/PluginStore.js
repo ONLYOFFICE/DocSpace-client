@@ -3,6 +3,8 @@ import { cloneDeep } from "lodash";
 
 import api from "@docspace/common/api";
 
+import toastr from "@docspace/components/toast/toastr";
+
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import {
@@ -48,6 +50,9 @@ class PluginStore {
   deletePluginDialogVisible = false;
   deletePluginDialogProps = null;
 
+  isLoading = true;
+  isEmptyList = false;
+
   constructor(authStore, selectedFolderStore) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
@@ -63,6 +68,14 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setIsLoading = (value) => {
+    this.isLoading = value;
+  };
+
+  setIsEmptyList = (value) => {
+    this.isEmptyList = value;
+  };
 
   setCurrentSettingsDialogPlugin = (value) => {
     this.currentSettingsDialogPlugin = value;
@@ -88,16 +101,12 @@ class PluginStore {
     this.deletePluginDialogProps = value;
   };
 
-  updatePluginStatus = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updatePluginStatus = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     const newStatus = plugin.getStatus();
 
-    const pluginIdx = system
-      ? this.plugins.findIndex((p) => p.name === name)
-      : this.plugins.findIndex((p) => p.id === id);
+    const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     if (pluginIdx !== -1) {
       if (this.plugins[pluginIdx].status === newStatus) return;
@@ -109,29 +118,29 @@ class PluginStore {
         this.plugins[pluginIdx].enabled
       ) {
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ContextMenu)) {
-          this.updateContextMenuItems(id, name, system);
+          this.updateContextMenuItems(name);
         }
 
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.InfoPanel)) {
-          this.updateInfoPanelItems(id, name, system);
+          this.updateInfoPanelItems(name);
         }
 
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.MainButton)) {
-          this.updateMainButtonItems(id, name, system);
+          this.updateMainButtonItems(name);
         }
 
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ProfileMenu)) {
-          this.updateProfileMenuItems(id, name, system);
+          this.updateProfileMenuItems(name);
         }
 
         if (
           this.plugins[pluginIdx].scopes.includes(PluginScopes.EventListener)
         ) {
-          this.updateEventListenerItems(id, name, system);
+          this.updateEventListenerItems(name);
         }
 
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
-          this.updateFileItems(id, name, system);
+          this.updateFileItems(name);
         }
       }
     }
@@ -166,6 +175,7 @@ class PluginStore {
 
   updatePlugins = async () => {
     const { isAdmin, isOwner } = this.authStore.userStore.user;
+    this.setIsLoading(true);
 
     try {
       this.plugins = [];
@@ -174,7 +184,12 @@ class PluginStore {
         !isAdmin && !isOwner ? true : null
       );
 
+      this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin));
+
+      setTimeout(() => {
+        this.setIsLoading(false);
+      }, 500);
     } catch (e) {
       console.log(e);
     }
@@ -187,22 +202,18 @@ class PluginStore {
       this.initPlugin(plugin);
     } catch (e) {
       console.log(e);
+
+      toastr.error(e.response.data.error.message);
     }
   };
 
-  uninstallPlugin = async (id, name, system) => {
-    const pluginIdx = system
-      ? this.plugins.findIndex((p) => p.name === name)
-      : this.plugins.findIndex((p) => p.id === id);
+  uninstallPlugin = async (name) => {
+    const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     try {
-      if (system) {
-        await api.plugins.deleteSystemPlugin(name);
-      } else {
-        await api.plugins.deletePlugin(id);
-      }
+      await api.plugins.deletePlugin(name);
 
-      this.deactivatePlugin(id, name, system);
+      this.deactivatePlugin(name);
 
       if (pluginIdx !== -1) {
         this.plugins.splice(pluginIdx, 1);
@@ -225,6 +236,10 @@ class PluginStore {
 
       this.installPlugin(newPlugin);
 
+      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+        newPlugin.setAdminPluginSettingsValue(plugin.settings || null);
+      }
+
       callback && callback(newPlugin);
     };
 
@@ -234,7 +249,7 @@ class PluginStore {
 
     const script = frameDoc.createElement("script");
     script.setAttribute("type", "text/javascript");
-    script.setAttribute("id", `${plugin.name}-${plugin.id}`);
+    script.setAttribute("id", `${plugin.name}`);
 
     if (onLoad) script.onload = onLoad.bind(this);
     if (onError) script.onerror = onError.bind(this);
@@ -246,12 +261,8 @@ class PluginStore {
   };
 
   installPlugin = async (plugin, addToList = true) => {
-    const { system } = plugin;
-
     if (addToList) {
-      const idx = system
-        ? this.plugins.findIndex((p) => p.name === plugin.name)
-        : this.plugins.findIndex((p) => p.id === plugin.id);
+      const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
       if (idx === -1) {
         this.plugins.unshift(plugin);
@@ -266,59 +277,74 @@ class PluginStore {
       plugin.setAPI && plugin.setAPI(origin, proxy, prefix);
     }
 
+    const { name } = plugin;
+
     if (plugin.onLoadCallback) {
       await plugin.onLoadCallback();
 
-      this.updatePluginStatus(plugin.id, plugin.name, system);
+      this.updatePluginStatus(name);
     }
 
     if (plugin.status === PluginStatus.hide) return;
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
-      this.updateContextMenuItems(plugin.id, plugin.name, system);
+      this.updateContextMenuItems(name);
     }
 
     if (plugin.scopes.includes(PluginScopes.InfoPanel)) {
-      this.updateInfoPanelItems(plugin.id, plugin.name, system);
+      this.updateInfoPanelItems(name);
     }
 
     if (plugin.scopes.includes(PluginScopes.MainButton)) {
-      this.updateMainButtonItems(plugin.id, plugin.name, system);
+      this.updateMainButtonItems(name);
     }
 
     if (plugin.scopes.includes(PluginScopes.ProfileMenu)) {
-      this.updateProfileMenuItems(plugin.id, plugin.name, system);
+      this.updateProfileMenuItems(name);
     }
 
     if (plugin.scopes.includes(PluginScopes.EventListener)) {
-      this.updateEventListenerItems(plugin.id, plugin.name, system);
+      this.updateEventListenerItems(name);
     }
 
     if (plugin.scopes.includes(PluginScopes.File)) {
-      this.updateFileItems(plugin.id, plugin.name, system);
+      this.updateFileItems(name);
     }
   };
 
-  changePluginStatus = async (id, name, status, system) => {
+  updatePlugin = async (name, status, settings) => {
     try {
-      const plugin = system
-        ? await api.plugins.activateSystemPlugin(name, status)
-        : await api.plugins.activatePlugin(id, status);
+      let currentSettings = settings;
+      let currentStatus = status;
+
+      const oldPlugin = this.pluginList.find((p) => p.name === name);
+
+      if (!currentSettings) currentSettings = oldPlugin.settings || "";
+
+      if (typeof status !== "boolean") currentStatus = oldPlugin.enabled;
+
+      const plugin = await api.plugins.updatePlugin(
+        name,
+        currentStatus,
+        currentSettings
+      );
+
+      if (typeof status !== "boolean") return plugin;
 
       if (status) {
-        this.activatePlugin(id, name, system);
+        this.activatePlugin(name);
       } else {
-        this.deactivatePlugin(id, name, system);
+        this.deactivatePlugin(name);
       }
 
       return plugin;
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  activatePlugin = async (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  activatePlugin = async (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin) return;
 
@@ -327,10 +353,8 @@ class PluginStore {
     this.installPlugin(plugin, false);
   };
 
-  deactivatePlugin = async (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  deactivatePlugin = async (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin) return;
 
@@ -387,7 +411,7 @@ class PluginStore {
     return currentDeviceType;
   };
 
-  getContextMenuKeysByType = (type, fileExst) => {
+  getContextMenuKeysByType = (type, fileExst, security) => {
     if (!this.contextMenuItems) return;
 
     const userRole = this.getUserRole();
@@ -414,7 +438,16 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctFileExt && correctUserType && correctDevice)
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (
+              correctFileExt &&
+              correctUserType &&
+              correctDevice &&
+              correctSecurity
+            )
               keys.push(item.key);
           }
         });
@@ -432,7 +465,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item?.security?.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -449,7 +487,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -470,7 +513,16 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice && correctFileExt)
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (
+              correctUserType &&
+              correctDevice &&
+              correctFileExt &&
+              correctSecurity
+            )
               keys.push(item.key);
           }
         });
@@ -488,7 +540,12 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
-            if (correctUserType && correctDevice) keys.push(item.key);
+            const correctSecurity = item.security
+              ? item.security.every((key) => security?.[key])
+              : true;
+
+            if (correctUserType && correctDevice && correctSecurity)
+              keys.push(item.key);
           }
         });
         break;
@@ -504,7 +561,12 @@ class PluginStore {
             ? item.devices.includes(device)
             : true;
 
-          if (correctUserType && correctDevice) keys.push(item.key);
+          const correctSecurity = item.security
+            ? item.security.every((key) => security?.[key])
+            : true;
+
+          if (correctUserType && correctDevice && correctSecurity)
+            keys.push(item.key);
         });
     }
 
@@ -513,10 +575,8 @@ class PluginStore {
     return keys;
   };
 
-  updateContextMenuItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateContextMenuItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -534,9 +594,7 @@ class PluginStore {
           message,
           null,
 
-          plugin.id,
           plugin.name,
-          plugin.system,
 
           this.setSettingsPluginDialogVisible,
           this.setCurrentSettingsDialogPlugin,
@@ -557,9 +615,9 @@ class PluginStore {
       this.contextMenuItems.set(key, {
         ...value,
         onClick,
-        pluginId: plugin.id,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
+
         icon: `${plugin.iconUrl}/assets/${value.icon}`,
       });
     });
@@ -577,10 +635,8 @@ class PluginStore {
     });
   };
 
-  updateInfoPanelItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateInfoPanelItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -612,9 +668,7 @@ class PluginStore {
             message,
             null,
 
-            plugin.id,
             plugin.name,
-            plugin.system,
 
             this.setSettingsPluginDialogVisible,
             this.setCurrentSettingsDialogPlugin,
@@ -638,9 +692,8 @@ class PluginStore {
       this.infoPanelItems.set(key, {
         ...value,
         subMenu: submenu,
-        pluginId: plugin.id,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
       });
     });
   };
@@ -657,10 +710,8 @@ class PluginStore {
     });
   };
 
-  updateMainButtonItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateMainButtonItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -692,9 +743,7 @@ class PluginStore {
               message,
               null,
 
-              plugin.id,
               plugin.name,
-              plugin.system,
 
               this.setSettingsPluginDialogVisible,
               this.setCurrentSettingsDialogPlugin,
@@ -729,9 +778,7 @@ class PluginStore {
           message,
           null,
 
-          plugin.id,
           plugin.name,
-          plugin.system,
 
           this.setSettingsPluginDialogVisible,
           this.setCurrentSettingsDialogPlugin,
@@ -752,9 +799,9 @@ class PluginStore {
       this.mainButtonItems.set(key, {
         ...value,
         onClick,
-        pluginId: plugin.id,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
+
         icon: `${plugin.iconUrl}/assets/${value.icon}`,
         items: newItems.length > 0 ? newItems : null,
       });
@@ -773,10 +820,8 @@ class PluginStore {
     });
   };
 
-  updateProfileMenuItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateProfileMenuItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -807,9 +852,7 @@ class PluginStore {
           message,
           null,
 
-          plugin.id,
           plugin.name,
-          plugin.system,
 
           this.setSettingsPluginDialogVisible,
           this.setCurrentSettingsDialogPlugin,
@@ -830,9 +873,9 @@ class PluginStore {
       this.profileMenuItems.set(key, {
         ...value,
         onClick,
-        pluginId: plugin.id,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
+
         icon: `${plugin.iconUrl}/assets/${value.icon}`,
       });
     });
@@ -850,10 +893,8 @@ class PluginStore {
     });
   };
 
-  updateEventListenerItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateEventListenerItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -884,9 +925,7 @@ class PluginStore {
           message,
           null,
 
-          plugin.id,
           plugin.name,
-          plugin.system,
 
           this.setSettingsPluginDialogVisible,
           this.setCurrentSettingsDialogPlugin,
@@ -907,9 +946,8 @@ class PluginStore {
       this.eventListenerItems.set(key, {
         ...value,
         eventHandler,
-        pluginId: plugin.id,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
       });
     });
   };
@@ -927,10 +965,8 @@ class PluginStore {
     });
   };
 
-  updateFileItems = (id, name, system) => {
-    const plugin = system
-      ? this.plugins.find((p) => p.name === name)
-      : this.plugins.find((p) => p.id === id);
+  updateFileItems = (name) => {
+    const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
@@ -939,23 +975,23 @@ class PluginStore {
     if (!items) return;
 
     const userRole = this.getUserRole();
-    const device = this.getCurrentDevice();
 
     Array.from(items).map(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
 
-      const correctDevice = value.devices
-        ? value.devices.includes(device)
-        : true;
+      if (!correctUserType) return;
 
-      if (!correctUserType || !correctDevice) return;
-
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileIcon}`;
+      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
+      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
 
       const onClick = async (item) => {
-        if (!value.onClick) return;
+        const device = this.getCurrentDevice();
+        const correctDevice = value.devices
+          ? value.devices.includes(device)
+          : true;
+        if (!value.onClick || !correctDevice) return;
 
         const message = await value.onClick(item);
 
@@ -963,9 +999,7 @@ class PluginStore {
           message,
           null,
 
-          plugin.id,
           plugin.name,
-          plugin.system,
 
           this.setSettingsPluginDialogVisible,
           this.setCurrentSettingsDialogPlugin,
@@ -987,9 +1021,9 @@ class PluginStore {
         ...value,
         onClick,
         fileIcon,
-        pluginId: plugin.id,
+        fileIconTile,
+
         pluginName: plugin.name,
-        pluginSystem: plugin.system,
       });
     });
   };
@@ -1012,6 +1046,10 @@ class PluginStore {
 
   get enabledPluginList() {
     return this.plugins.filter((p) => p.enabled);
+  }
+
+  get systemPluginList() {
+    return this.plugins.filter((p) => p.system);
   }
 
   get contextMenuItemsList() {

@@ -35,17 +35,9 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
-  setBodyRendered,
+
   isLoadedArticleBody,
 }) => {
-  useEffect(() => {
-    setBodyRendered(true);
-
-    return () => {
-      setBodyRendered(false);
-    };
-  }, []);
-
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
   }, [language, currentProductId, setCurrentProductId]);
@@ -98,7 +90,7 @@ export default inject(({ auth, setup, pluginStore }) => {
   const {
     setCurrentProductId,
     enablePlugins,
-    setBodyRendered,
+
     isLoadedArticleBody,
   } = settingsStore;
 
@@ -112,7 +104,7 @@ export default inject(({ auth, setup, pluginStore }) => {
     enablePlugins,
     isInitPlugins,
     initPlugins,
-    setBodyRendered,
+
     isLoadedArticleBody,
   };
 })(withLoading(observer(Layout)));

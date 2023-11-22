@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
 import FileLifetime from "./FileLifetime";
-import { hugeMobile } from "@docspace/components/utils/device";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
@@ -23,10 +22,7 @@ const StyledVirtualDataRoomBlock = styled.div`
     }
     .virtual-data-room-block_description {
       max-width: 420px;
-
-      @media ${hugeMobile} {
-        max-width: 315px;
-      }
+      margin-right: 28px;
 
       color: ${({ theme }) => theme.editLink.text.color};
     }

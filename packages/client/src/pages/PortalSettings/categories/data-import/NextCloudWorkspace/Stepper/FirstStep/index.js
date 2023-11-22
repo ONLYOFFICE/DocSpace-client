@@ -100,7 +100,6 @@ const FirstStep = ({
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
         setUsers(res.parseResult);
-        // setUsers(mockRes);
         setIsSaveDisabled(false);
       }
     }, 1000);

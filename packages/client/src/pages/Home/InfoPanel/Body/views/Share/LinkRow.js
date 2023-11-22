@@ -87,7 +87,7 @@ const LinkRow = ({
 
   const onCopyLink = (link) => {
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+    toastr.success(t("Files:LinkSuccessfullyCopied"));
   };
 
   return (

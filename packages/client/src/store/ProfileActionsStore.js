@@ -126,7 +126,7 @@ class ProfileActionsStore {
 
   onSpacesClick = () => {
     this.selectedFolderStore.setSelectedFolder(null);
-    window.location = SPACES_URL;
+    window.open(SPACES_URL, "_blank");
   };
 
   onPaymentsClick = () => {
@@ -200,7 +200,7 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone, portals, baseDomain, tenantAlias } =
+    const { enablePlugins, standalone, portals, baseDomain, tenantAlias, limitedAccessSpace } =
       this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
@@ -239,7 +239,7 @@ class ProfileActionsStore {
     });
 
     const management =
-      isAdmin && standalone
+      isAdmin && standalone && !limitedAccessSpace
         ? {
             key: "spaces-management-settings",
             id: "spaces",

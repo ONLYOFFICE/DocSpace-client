@@ -159,40 +159,6 @@ const SetRoomParams = ({
 
       {isVDRRoom && <VirtualDataRoomBlock t={t} />}
 
-      {canOwnerChange && roomParams.roomOwner && (
-        <div>
-          <Text fontWeight={600} fontSize="13px">
-            {t("Files:RoomOwner")}
-          </Text>
-
-          <div className="room-owner-block">
-            <StyledIcon
-              className="react-svg-icon"
-              src={roomParams.roomOwner.avatarSmall}
-            />
-            <div className="owner-display-name-block">
-              <Text fontWeight={600} fontSize="13px">
-                {roomParams.roomOwner.displayName}
-              </Text>
-              {isMe && (
-                <Text className="me-label">({t("Common:MeLabel")})</Text>
-              )}
-            </div>
-          </div>
-
-          <Link
-            isHovered
-            type="action"
-            fontWeight={600}
-            fontSize="13px"
-            className="change-owner-link"
-            onClick={onOwnerChange}
-          >
-            {t("Common:ChangeButton")}
-          </Link>
-        </div>
-      )}
-
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
           t={t}

@@ -330,7 +330,7 @@ class ContextOptionsStore {
     const needConvert = canConvert(item.fileExst);
 
     const canOpenPlayer =
-      item.ViewAccessibility?.ImageView || item.ViewAccessibility?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const url = getItemUrl(
       item.id,
@@ -347,7 +347,7 @@ class ContextOptionsStore {
   onClickLinkEdit = (item) => {
     const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
     const canConvert =
-      item.ViewAccessibility?.Convert && item.security?.Convert;
+      item.viewAccessibility?.Convert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
@@ -953,7 +953,7 @@ class ContextOptionsStore {
     const isShareable = item.canShare;
 
     const isMedia =
-      item.ViewAccessibility?.ImageView || item.ViewAccessibility?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const hasInfoPanel = contextOptions.includes("show-info");
 

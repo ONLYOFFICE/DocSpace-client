@@ -2120,11 +2120,11 @@ class FilesActionStore {
     };
 
     const isMediaOrImage =
-      item.ViewAccessibility?.ImageView || item.ViewAccessibility?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
     const canConvert =
-      item.ViewAccessibility?.Convert && item.security?.Convert;
-    const canWebEdit = item.ViewAccessibility?.WebEdit;
-    const canViewedDocs = item.ViewAccessibility?.WebView;
+      item.viewAccessibility?.Convert && item.security?.Convert;
+    const canWebEdit = item.viewAccessibility?.WebEdit;
+    const canViewedDocs = item.viewAccessibility?.WebView;
 
     const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);

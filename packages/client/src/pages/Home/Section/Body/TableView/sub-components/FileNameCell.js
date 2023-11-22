@@ -15,13 +15,13 @@ const FileNameCell = ({
   t,
   inProgress,
 }) => {
-  const { title, ViewAccessibility } = item;
+  const { title, viewAccessibility } = item;
 
   const onChange = (e) => {
     onContentSelect && onContentSelect(e.target.checked, item);
   };
 
-  const isMedia = ViewAccessibility?.ImageView || ViewAccessibility?.MediaView;
+  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
   return (
     <>

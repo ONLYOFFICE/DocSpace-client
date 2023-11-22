@@ -894,8 +894,8 @@ class Tile extends React.PureComponent {
               isHighlight={isHighlight}
               thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
-                item?.ViewAccessibility?.ImageView ||
-                item?.ViewAccessibility?.MediaView
+                item?.viewAccessibility?.ImageView ||
+                item?.viewAccessibility?.MediaView
               }
               isPlugin={item.isPlugin}
             >

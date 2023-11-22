@@ -75,8 +75,8 @@ const Details = ({
       {selection.thumbnailUrl && !isThumbnailError ? (
         <StyledThumbnail
           isImageOrMedia={
-            selection?.ViewAccessibility?.ImageView ||
-            selection?.ViewAccessibility?.MediaView
+            selection?.viewAccessibility?.ImageView ||
+            selection?.viewAccessibility?.MediaView
           }
         >
           <img

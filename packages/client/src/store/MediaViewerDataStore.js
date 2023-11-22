@@ -166,8 +166,8 @@ class MediaViewerDataStore {
     if (filesList.length > 0) {
       filesList.forEach((file) => {
         const canOpenPlayer =
-          file.ViewAccessibility.ImageView ||
-          file.ViewAccessibility.MediaView ||
+          file.viewAccessibility.ImageView ||
+          file.viewAccessibility.MediaView ||
           (file.fileExst === ".pdf" && window.DocSpaceConfig.pdfViewer);
 
         if (canOpenPlayer) {
@@ -187,7 +187,7 @@ class MediaViewerDataStore {
             file.thumbnailStatus === thumbnailStatuses.WAITING;
 
           const isVideoOrImage =
-            file.ViewAccessibility.ImageView || isVideo(file.fileExst);
+            file.viewAccessibility.ImageView || isVideo(file.fileExst);
 
           if (thumbnailIsNotCreated && isVideoOrImage)
             itemsWithoutThumb.push(file);
@@ -210,7 +210,7 @@ class MediaViewerDataStore {
         thumbnailUrl: this.previewFile.thumbnailUrl,
       });
 
-      if (this.previewFile.ViewAccessibility.ImageView) {
+      if (this.previewFile.viewAccessibility.ImageView) {
         itemsWithoutThumb.push(this.previewFile);
       }
     }

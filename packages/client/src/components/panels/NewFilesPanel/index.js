@@ -171,8 +171,8 @@ const NewFilesPanel = (props) => {
       const isMediaActive = playlist.findIndex((el) => el.fileId === id) !== -1;
 
       const isMedia =
-        item?.ViewAccessibility?.ImageView ||
-        item?.ViewAccessibility?.MediaView;
+        item?.viewAccessibility?.ImageView ||
+        item?.viewAccessibility?.MediaView;
 
       if (canEdit && providerKey) {
         return addFileToRecentlyViewed(id)

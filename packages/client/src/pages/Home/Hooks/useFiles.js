@@ -109,8 +109,8 @@ const useFiles = ({
         getFileInfo(fileId)
           .then((data) => {
             const canOpenPlayer =
-              data.ViewAccessibility.ImageView ||
-              data.ViewAccessibility.MediaView;
+              data.viewAccessibility.ImageView ||
+              data.viewAccessibility.MediaView;
             const file = { ...data, canOpenPlayer };
             setToPreviewFile(file, true);
             setIsPreview(true);

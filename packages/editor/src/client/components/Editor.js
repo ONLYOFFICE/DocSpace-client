@@ -202,7 +202,7 @@ function Editor({
     if (
       !view &&
       fileInfo &&
-      fileInfo.ViewAccessibility.WebRestrictedEditing &&
+      fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
@@ -238,7 +238,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.ViewAccessibility?.Convert &&
+        fileInfo?.viewAccessibility?.Convert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -321,7 +321,7 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.ViewAccessibility?.Convert && fileInfo?.security?.Convert) {
+      if (fileInfo?.viewAccessibility?.Convert && fileInfo?.security?.Convert) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;

@@ -28,6 +28,7 @@ import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -123,6 +124,21 @@ const StyledContainer = styled.div`
       height: 53px;
     }
   }
+
+  ${(props) =>
+    props.isVirtualDataRoomType &&
+    css`
+      .title-icon {
+        svg {
+          path {
+            fill: ${({ theme }) =>
+              theme.navigation.lifetimeIconFill} !important;
+            stroke: ${({ theme }) =>
+              theme.navigation.lifetimeIconStroke} !important;
+          }
+        }
+      }
+    `}
 `;
 
 const SectionHeaderContent = (props) => {
@@ -218,6 +234,7 @@ const SectionHeaderContent = (props) => {
     setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
+    isVirtualDataRoomType,
     isCustomRoomType,
     primaryLink,
     getPrimaryLink,
@@ -1009,12 +1026,19 @@ const SectionHeaderContent = (props) => {
     ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
 
+  const titleIcon =
+    (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
+    (isVirtualDataRoomType && LifetimeRoomIconUrl);
+
+  const titleIconTooltip = t("Files:RoomFilesLifetime", { days: 12 }); // TODO: days
+
   return (
     <Consumer key="header">
       {(context) => (
         <StyledContainer
           isRecycleBinFolder={isRecycleBinFolder}
           hideContextMenuInsideArchiveRoom={hideContextMenuInsideArchiveRoom}
+          isVirtualDataRoomType={isVirtualDataRoomType}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu {...tableGroupMenuProps} />
@@ -1066,9 +1090,8 @@ const SectionHeaderContent = (props) => {
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
-                titleIcon={
-                  currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
-                }
+                titleIcon={titleIcon}
+                titleIconTooltip={titleIconTooltip}
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
@@ -1196,6 +1219,7 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
+    const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
 
     const {
@@ -1330,6 +1354,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
+      isVirtualDataRoomType,
       isCustomRoomType,
       isPublicRoom,
       primaryLink,

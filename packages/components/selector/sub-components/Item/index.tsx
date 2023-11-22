@@ -7,6 +7,9 @@ import RoomIcon from "../../../room-icon";
 import StyledItem from "./StyledItem";
 
 import { ItemProps, Data, Item as ItemType } from "./Item.types";
+import { ReactSVG } from "react-svg";
+import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import Tooltip from "../../../tooltip";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -82,6 +85,37 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         ) : (
           <img className="room-logo" src={icon} alt="room logo" />
         )}
+        <div className="selector-item_name">
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize={"14px"}
+            noSelect
+            truncate
+          >
+            {label}
+          </Text>
+
+          {true && (
+            <>
+              <ReactSVG
+                data-tooltip-id="iconTooltip"
+                className="title-icon"
+                src={LifetimeRoomIconUrl}
+              />
+              <Tooltip
+                id="iconTooltip"
+                place="bottom"
+                getContent={() => (
+                  <Text fontSize="12px" fontWeight={400} noSelect>
+                    aaaaaaaaaa
+                  </Text>
+                )}
+                maxWidth="300px"
+              />
+            </>
+          )}
+        </div>
 
         <Text
           className="label"

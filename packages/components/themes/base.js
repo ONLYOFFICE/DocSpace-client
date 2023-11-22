@@ -1948,6 +1948,8 @@ const Base = {
     background: white,
     rootFolderTitleColor: "#A3A9AE",
     publicIcon: black,
+    lifetimeIconFill: "#f2675a",
+    lifetimeIconStroke: "#f2675a",
 
     icon: {
       fill: "#316DAA",

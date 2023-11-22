@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import StyledContainer from "./StyledNavigation";
 import ArrowButton from "./sub-components/arrow-btn";
-import Text from "./sub-components/text";
+import NavigationText from "./sub-components/text";
 import ControlButtons from "./sub-components/control-btn";
 import DropBox from "./sub-components/drop-box";
 
@@ -17,6 +17,8 @@ import { ReactSVG } from "react-svg";
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
+import Tooltip from "@docspace/components/tooltip";
+import Text from "@docspace/components/text";
 import { DeviceType } from "../../constants";
 
 const Navigation = ({
@@ -52,9 +54,9 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  titleIconTooltip,
   currentDeviceType,
   rootRoomTitle,
-
   ...rest
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -141,10 +143,30 @@ const Navigation = ({
 
   const navigationTitleNode = (
     <div className="title-block">
-      {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
-      <Text
+      {titleIcon && (
+        <ReactSVG
+          data-tooltip-id="iconTooltip"
+          className="title-icon"
+          src={titleIcon}
+        />
+      )}
+
+      {titleIconTooltip && (
+        <Tooltip
+          id="iconTooltip"
+          place="bottom"
+          getContent={() => (
+            <Text fontSize="12px" fontWeight={400} noSelect>
+              {titleIconTooltip}
+            </Text>
+          )}
+          maxWidth="300px"
+        />
+      )}
+
+      <NavigationText
         title={title}
-        isOpen={isOpen}
+        isOpen={false}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
       />
@@ -153,7 +175,7 @@ const Navigation = ({
 
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
-      <Text
+      <NavigationText
         className="room-title"
         title={
           rootRoomTitle || navigationItems[navigationItems.length - 2].title
@@ -217,6 +239,7 @@ const Navigation = ({
                 titleIcon={titleIcon}
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
+                titleIconTooltip={titleIconTooltip}
               />
             </>
           )}

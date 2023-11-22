@@ -1943,6 +1943,8 @@ const Dark = {
     background: black,
     rootFolderTitleColor: "#858585",
     publicIcon: "#858585",
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: "#657077",
 
     icon: {
       fill: "#E06A1B",

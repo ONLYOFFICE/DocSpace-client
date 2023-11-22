@@ -65,6 +65,20 @@ const StyledItem = styled.div<{
             }
           }
         `}
+
+  .selector-item_name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    svg {
+      path {
+        fill: ${({ theme }) => theme.navigation.lifetimeIconFill} !important;
+        stroke: ${({ theme }) =>
+          theme.navigation.lifetimeIconStroke} !important;
+      }
+    }
+  }
 `;
 
 StyledItem.defaultProps = { theme: Base };

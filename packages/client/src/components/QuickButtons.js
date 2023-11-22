@@ -4,14 +4,28 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
-import React from "react";
+import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import styled from "styled-components";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { isTablet } from "@docspace/components/utils/device";
 import { FileStatus, RoomsType } from "@docspace/common/constants";
-
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import Tooltip from "@docspace/components/tooltip";
+import Text from "@docspace/components/text";
+
+const StyledQuickButtons = styled.div`
+  .file-lifetime {
+    svg {
+      rect {
+        fill: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
+      }
+
+      circle,
+      path {
+        stroke: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
+      }
+    }
+  }
+`;
 
 const QuickButtons = (props) => {
   const {
@@ -71,8 +85,41 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
+  //const showLifetimeIcon = item.lifetime < item.lifetime * 0.1
+
+  //TODO:
+  const getTooltipContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      The file will be deleted after 1 day and 2 hours.
+    </Text>
+  );
+
   return (
-    <div className="badges additional-badges  badges__quickButtons">
+    <StyledQuickButtons className="badges additional-badges  badges__quickButtons">
+      {/*  */}
+      {isAvailableLockFile && (
+        <>
+          <ColorTheme
+            themeId={ThemeType.IconButton}
+            iconName={LifetimeReactSvgUrl}
+            className="badge file-lifetime icons-group"
+            size={sizeQuickButton}
+            isClickable
+            isDisabled={isDisabled}
+            data-tooltip-id="lifetimeTooltip"
+            color={theme.filesQuickButtons.lifeTimeColor}
+          />
+
+          <Tooltip
+            id="lifetimeTooltip"
+            place="bottom"
+            getContent={getTooltipContent}
+            maxWidth="300px"
+          />
+        </>
+      )}
+      {/*  */}
+
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -128,7 +175,7 @@ const QuickButtons = (props) => {
           hoverColor={theme.filesQuickButtons.hoverColor}
         />
       )} */}
-    </div>
+    </StyledQuickButtons>
   );
 };
 

@@ -96,7 +96,6 @@ const PrivateRoute = ({ children, ...rest }) => {
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
         (!user.isOwner && isPortalDeletionUrl) ||
-        (standalone && isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {

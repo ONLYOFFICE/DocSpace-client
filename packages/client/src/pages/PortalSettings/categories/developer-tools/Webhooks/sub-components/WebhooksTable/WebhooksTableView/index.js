@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import React, { useState, useRef } from "react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import { useState, useRef } from "react";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/components/themes";
 import TableBody from "@docspace/components/table-container/TableBody";
@@ -15,7 +14,7 @@ const TableWrapper = styled(TableContainer)`
   margin-top: 16px;
 
   .header-container-text {
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
   .table-container_header {
@@ -27,7 +26,21 @@ const TableWrapper = styled(TableContainer)`
     &:hover {
       cursor: pointer;
       background-color: ${(props) =>
-        props.theme.isBase ? "#F8F9F9" : "#282828"};
+        props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
   }
 `;

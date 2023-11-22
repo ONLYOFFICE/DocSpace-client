@@ -14,6 +14,7 @@ import { Base } from "@docspace/components/themes";
 import Tags from "@docspace/components/tags";
 import Tag from "@docspace/components/tag";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
+import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -357,7 +358,7 @@ const StyledFileTileBottom = styled.div`
 const StyledContent = styled.div`
   display: flex;
   align-items: center;
-
+  gap: 8px;
   flex-basis: 100%;
 
   a {
@@ -377,6 +378,21 @@ const StyledContent = styled.div`
 
   .new-items {
     margin-left: 12px;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+
+    :not(:empty) {
+      margin-inline-start: 12px;
+    }
+
+    > div {
+      margin: 0;
+    }
   }
 
   @media ${tablet} {
@@ -411,10 +427,10 @@ const StyledOptionButton = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 8px 8px 8px 21px;
+            padding: 8px 12px 8px 21px;
           `
         : css`
-            padding: 8px 21px 8px 8px;
+            padding: 8px 21px 8px 12px;
           `}
   }
 `;
@@ -433,7 +449,7 @@ const badgesPosition = css`
 
   .badges {
     display: grid;
-    grid-template-columns: repeat(3, fit-content(50px));
+    grid-template-columns: repeat(3, fit-content(60px));
     grid-template-rows: 32px;
     grid-gap: 7px;
 
@@ -754,6 +770,7 @@ class Tile extends React.PureComponent {
                 <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                   {renderContext ? (
                     <ContextMenuButton
+                      isFill
                       className="expandButton"
                       directionX="right"
                       getData={getOptions}
@@ -847,6 +864,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX={contextMenuDirection}
                     getData={getOptions}
@@ -927,6 +945,7 @@ class Tile extends React.PureComponent {
               <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
                 {renderContext ? (
                   <ContextMenuButton
+                    isFill
                     className="expandButton"
                     directionX="left"
                     getData={getOptions}
@@ -941,7 +960,7 @@ class Tile extends React.PureComponent {
                   getContextModel={getContextModel}
                   ref={this.cm}
                   header={contextMenuHeader}
-                  withBackdrop={true}
+                  withBackdrop={isMobileUtils()}
                   onHide={hideContextMenu}
                 />
               </StyledOptionButton>

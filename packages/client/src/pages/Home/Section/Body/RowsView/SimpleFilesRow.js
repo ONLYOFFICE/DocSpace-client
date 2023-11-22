@@ -4,10 +4,13 @@ import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 import Row from "@docspace/components/row";
 import FilesRowContent from "./FilesRowContent";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
+
+import { isMobile as isMobileUtile } from "@docspace/components/utils/device";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
+import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
 import { Base } from "@docspace/components/themes";
@@ -154,7 +157,6 @@ const StyledSimpleFilesRow = styled(Row)`
   .badges {
     display: flex;
     align-items: center;
-    margin-bottom: 26px;
   }
 
   .lock-file {
@@ -185,6 +187,15 @@ const StyledSimpleFilesRow = styled(Row)`
 
     .row-copy-link {
       display: block;
+
+      ${isMobileOnly &&
+      css`
+        :hover {
+          svg path {
+            fill: ${({ theme }) => theme.iconButton.color};
+          }
+        }
+      `}
     }
   }
 
@@ -205,7 +216,7 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badges {
-    margin-top: ${(props) => (props.isRooms ? "4px" : "2px")};
+    margin-top: 0px;
     margin-bottom: 0px;
   }
 
@@ -249,18 +260,8 @@ const StyledSimpleFilesRow = styled(Row)`
 
   @media ${tablet} {
     .badges {
+      flex-direction: row-reverse;
       gap: 24px;
-    }
-
-    .badges__quickButtons:not(:empty) {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 24px;
-            `
-          : css`
-              margin-left: 24px;
-            `}
     }
 
     .file__badges,
@@ -272,18 +273,18 @@ const StyledSimpleFilesRow = styled(Row)`
       }
     }
 
+    .file__badges,
     .room__badges,
     .folder__badges {
       > div {
-        margin-top: 3px;
+        margin-top: 0px;
       }
     }
 
-    .folder__badges {
-      margin-top: 4px;
-    }
+    .file__badges,
+    .folder__badges,
     .room__badges {
-      margin-top: 2px;
+      margin-top: 0px;
     }
   }
 
@@ -356,12 +357,16 @@ const SimpleFilesRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
-
     folderCategory,
     isHighlight,
+    badgesComponent,
+    onDragOver,
+    onDragLeave,
   } = props;
 
-  const [isDragOver, setIsDragOver] = React.useState(false);
+  const isMobileDevice = isMobileUtile();
+
+  const [isDragActive, setIsDragActive] = React.useState(false);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -379,14 +384,18 @@ const SimpleFilesRow = (props) => {
     />
   );
 
-  const onDragOver = (dragOver) => {
-    if (dragOver !== isDragOver) {
-      setIsDragOver(dragOver);
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
-    setIsDragOver(false);
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
+    setIsDragActive(false);
   };
 
   const dragStyles =
@@ -422,8 +431,8 @@ const SimpleFilesRow = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         style={dragStyles}
       >
         <StyledSimpleFilesRow
@@ -436,6 +445,7 @@ const SimpleFilesRow = (props) => {
           contentElement={
             isSmallContainer || isRooms ? null : quickButtonsComponent
           }
+          badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -454,7 +464,8 @@ const SimpleFilesRow = (props) => {
           getContextModel={getContextModel}
           showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
-          isDragOver={isDragOver}
+          isArchive={item.isArchive}
+          isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
@@ -468,6 +479,7 @@ const SimpleFilesRow = (props) => {
               isSmallContainer || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
+            badgesComponent={isMobileDevice && badgesComponent}
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>
@@ -480,4 +492,4 @@ export default withTranslation([
   "Translations",
   "InfoPanel",
   "Notifications",
-])(withFileActions(withQuickButtons(SimpleFilesRow)));
+])(withFileActions(withQuickButtons(withBadges(SimpleFilesRow))));

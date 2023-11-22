@@ -1,10 +1,15 @@
 import { Base } from "@docspace/components/themes";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  infoPanelWidth,
+} from "@docspace/components/utils/device";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled, { css } from "styled-components";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import { Portal } from "@docspace/components";
 import { DeviceType } from "../../../constants";
@@ -30,7 +35,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
 
 const StyledInfoPanel = styled.div`
   height: 100%;
-  width: 400px;
+  width: ${infoPanelWidth}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -122,7 +127,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   height: 17px;
   z-index: 455;
   path {
-    fill: ${(props) => props.theme.catalog.control.fill};
+    stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 
@@ -138,6 +143,8 @@ const InfoPanel = ({
   viewAs,
   currentDeviceType,
 }) => {
+  const infoPanelRef = useRef(null);
+
   const closeInfoPanel = () => setIsVisible(false);
 
   useEffect(() => {
@@ -156,15 +163,33 @@ const InfoPanel = ({
     return () => document.removeEventListener("mousedown", onMouseDown);
   }, []);
 
+  useEffect(() => {
+    if (isMobileOnly && isIOS) {
+      window.visualViewport.addEventListener("resize", onResize);
+    }
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = useCallback((e) => {
+    if (infoPanelRef?.current)
+      infoPanelRef.current.style.height = `${e.target.height}px`;
+  }, []);
+
   const infoPanelComponent = (
     <StyledInfoPanelWrapper
       isRowView={viewAs === "row"}
       className="info-panel"
-      id="InfoPanelWrapper">
+      id="InfoPanelWrapper"
+      ref={infoPanelRef}
+    >
       <StyledInfoPanel isRowView={viewAs === "row"}>
         <StyledControlContainer
           isRowView={viewAs === "row"}
-          onClick={closeInfoPanel}>
+          onClick={closeInfoPanel}
+        >
           <StyledCrossIcon />
         </StyledControlContainer>
 
@@ -187,7 +212,7 @@ const InfoPanel = ({
 
   return !isVisible ||
     !canDisplay ||
-    anotherDialogOpen ||
+    (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
     : currentDeviceType === DeviceType.mobile

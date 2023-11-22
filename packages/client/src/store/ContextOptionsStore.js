@@ -27,20 +27,22 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
-import MuteReactSvgUrl from "PUBLIC_DIR/images/mute.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
@@ -52,6 +54,7 @@ import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helper
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
 import { FolderType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/common/api/files/filter";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -69,6 +72,7 @@ class ContextOptionsStore {
   settingsStore;
   selectedFolderStore;
   publicRoomStore;
+  oformsStore;
   pluginStore;
 
   linksIsLoading = false;
@@ -85,6 +89,7 @@ class ContextOptionsStore {
     settingsStore,
     selectedFolderStore,
     publicRoomStore,
+    oformsStore,
     pluginStore
   ) {
     makeAutoObservable(this);
@@ -99,6 +104,7 @@ class ContextOptionsStore {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
+    this.oformsStore = oformsStore;
     this.pluginStore = pluginStore;
   }
 
@@ -226,6 +232,13 @@ class ContextOptionsStore {
     setIsMobileHidden(true);
 
     this.dialogsStore.setMoveToPanelVisible(true);
+  };
+
+  onRestoreAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+    console.log("Click");
+    this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {
@@ -389,7 +402,7 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
-    if (this.isPwa()) {
+    if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
       xhr.responseType = "blob";
@@ -819,6 +832,63 @@ class ContextOptionsStore {
     }
   };
 
+  onCreateOform = (navigate) => {
+    this.authStore.infoPanelStore.setIsVisible(false);
+    const filesFilter = FilesFilter.getDefault();
+    filesFilter.folder = this.oformsStore.oformFromFolderId;
+    const filterUrlParams = filesFilter.toUrlParams();
+    const url = getCategoryUrl(
+      this.filesStore.categoryType,
+      filterUrlParams.folder
+    );
+
+    navigate(
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterUrlParams}`
+      )
+    );
+  };
+
+  onShowOformTemplateInfo = (item) => {
+    this.authStore.infoPanelStore.setIsVisible(true);
+    this.oformsStore.setGallerySelected(item);
+  };
+
+  onSuggestOformChanges = (item) => {
+    const formTitle = item.attributes ? item.attributes.name_form : item.title;
+
+    window.location = `mailto:marketing@onlyoffice.com
+    ?subject=Suggesting changes for ${formTitle}
+    &body=Suggesting changes for ${formTitle}.
+  `;
+  };
+
+  getFormGalleryContextOptions = (item, t, navigate) => {
+    return [
+      {
+        key: "create",
+        label: t("Common:Create"),
+        onClick: () => this.onCreateOform(navigate),
+      },
+      {
+        key: "template-info",
+        label: t("FormGallery:TemplateInfo"),
+        onClick: () => this.onShowOformTemplateInfo(item),
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        key: "suggest-changes",
+        label: t("FormGallery:SuggestChanges"),
+        onClick: () => this.onSuggestOformChanges(item),
+      },
+    ];
+  };
+
   getRoomsRootContextOptions = (item, t) => {
     const { id, rootFolderId } = this.selectedFolderStore;
     const isRootRoom = item.isRoom && rootFolderId === id;
@@ -873,6 +943,7 @@ class ContextOptionsStore {
 
     return { pinOptions, muteOptions };
   };
+
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
 
@@ -1111,7 +1182,7 @@ class ContextOptionsStore {
         icon: FormFileReactSvgUrl,
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,
-        disabled: !item.security.SubmitToFormGallery,
+        disabled: !item.security?.SubmitToFormGallery,
       },
       {
         key: "separator-SubmitToGallery",
@@ -1158,7 +1229,7 @@ class ContextOptionsStore {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopyGeneralLink"),
-        icon: CopyToReactSvgUrl,
+        icon: TabletLinkReactSvgUrl,
         disabled:
           this.treeFoldersStore.isArchiveFolder ||
           (item.roomType !== RoomsType.PublicRoom &&
@@ -1288,7 +1359,7 @@ class ContextOptionsStore {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security.Download,
+        disabled: !item.security?.Download,
       },
       {
         id: "option_download-as",
@@ -1296,7 +1367,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !item.security.Download || this.publicRoomStore.isPublicRoom,
+        disabled: !item.security?.Download,
       },
       ...moveActions,
       {
@@ -1304,7 +1375,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: false,
       },
       {
@@ -1391,7 +1462,17 @@ class ContextOptionsStore {
         onLoad: () => this.onLoadPlugins(item),
       });
     }
-    return options;
+
+    const filteredOptions = this.removeSeparatorFirstInList(options);
+    return filteredOptions;
+  };
+
+  removeSeparatorFirstInList = (options) => {
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1")
+    );
+
+    return newOptions;
   };
 
   getGroupContextOptions = (t) => {
@@ -1606,7 +1687,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: !isRecycleBinFolder || !restoreItems,
       },
       {

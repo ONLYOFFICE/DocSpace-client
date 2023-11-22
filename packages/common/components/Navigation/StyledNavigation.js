@@ -116,6 +116,10 @@ const StyledContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    .room-title {
+      cursor: pointer;
+    }
   }
 
   .navigation-header-separator {
@@ -157,10 +161,10 @@ const StyledContainer = styled.div`
     gap: 8px;
 
     .title-icon {
-      min-width: 16px;
-      min-height: 16px;
-      width: 16px;
-      height: 16px;
+      min-width: 17px;
+      min-height: 17px;
+      width: 17px;
+      height: 17px;
 
       svg {
         path,

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
 import Scrollbar from "../scrollbar";
 import {
   StyledAside,
@@ -19,36 +19,47 @@ const Aside = React.memo((props) => {
     withoutBodyScroll,
     onClose,
   } = props;
+  const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+  const contentRef = React.useRef(null);
+  const diffRef = React.useRef(null);
+  const visualPageTop = React.useRef(0);
 
-  const [defaultAsideHeight, setDefaultAsideHeight] = useState(
-    window?.visualViewport?.height ?? null
-  );
-
-  const [asideHeight, setAsideHeight] = useState(
-    window?.visualViewport?.height ?? null
-  );
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
-
-  const onOrientationChange = () => {
-    const viewportHeight = window?.visualViewport?.height;
-    const keyboardHeight =
-      defaultAsideHeight !== viewportHeight
-        ? defaultAsideHeight - viewportHeight
-        : 0;
-
-    setKeyboardHeight(keyboardHeight);
-    setAsideHeight(defaultAsideHeight - keyboardHeight);
-  };
-
-  useEffect(() => {
-    isMobile &&
-      window?.visualViewport?.addEventListener("resize", onOrientationChange);
-
+  React.useEffect(() => {
+    if (isMobileOnly && isIOS) {
+      window.visualViewport.addEventListener("resize", onResize);
+      window.visualViewport.addEventListener("scroll", onResize);
+    }
     return () => {
-      isMobile &&
-        window.removeEventListener("orientationchange", onOrientationChange);
+      window.visualViewport.removeEventListener("resize", onResize);
+      window.visualViewport.removeEventListener("scroll", onResize);
     };
-  });
+  }, []);
+
+  const onResize = (e) => {
+    if (!contentRef.current) return;
+
+    if (e?.type === "resize") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+      contentRef.current.style.height = `${
+        e.target.height - 64 + e.target.pageTop
+      }px`;
+      contentRef.current.style.position = "fixed";
+
+      diffRef.current = diff;
+    } else if (e?.type === "scroll") {
+      const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
+
+      contentRef.current.style.bottom = `${diffRef.current + diff}px`;
+      contentRef.current.style.height = `${
+        window.visualViewport.height - 64 + diff
+      }px`;
+      contentRef.current.style.position = "fixed";
+    }
+  };
 
   return (
     <StyledAside
@@ -57,8 +68,7 @@ const Aside = React.memo((props) => {
       zIndex={zIndex}
       contentPaddingBottom={contentPaddingBottom}
       className={`${className} not-selectable aside`}
-      asideHeight={asideHeight + "px"}
-      keyboardHeight={keyboardHeight}
+      forwardRef={contentRef}
     >
       {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
       {withoutBodyScroll ? (

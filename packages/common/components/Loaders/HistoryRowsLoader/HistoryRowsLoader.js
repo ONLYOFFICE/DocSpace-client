@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StyledRow from "./StyledHistoryRowsLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const HistoryRow = ({ id, className, style, ...rest }) => {
   const {
@@ -17,7 +17,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
 
   return (
     <StyledRow id={id} className={className} style={style} gap="16px">
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-file-link"
         title={title}
         width="100%"
@@ -30,7 +30,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-file-date"
         title={title}
         width="100%"
@@ -43,7 +43,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-options"
         title={title}
         width="100%"
@@ -57,7 +57,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
         animate={animate}
       />
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-comment"
         title={title}
         width="100%"
@@ -70,7 +70,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-restore-btn"
         title={title}
         width="100%"
@@ -83,7 +83,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="history-loader-download-btn"
         title={title}
         width="100%"

@@ -9,6 +9,7 @@ export type Item = {
   email?: string;
   isDisabled?: boolean;
   color?: string;
+  fileExst?: string;
 };
 
 export type Data = {

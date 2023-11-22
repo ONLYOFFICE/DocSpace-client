@@ -5,6 +5,10 @@ import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
+import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
+import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import Badge from "@docspace/components/badge";
@@ -15,7 +19,7 @@ import { FileStatus, RoomsType } from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet } from "@docspace/components/utils/device";
+import { isTablet, isDesktop } from "@docspace/components/utils/device";
 import { classNames } from "@docspace/components/utils/classNames";
 
 const StyledWrapper = styled.div`
@@ -74,6 +78,7 @@ const Badges = ({
   setConvertDialogVisible,
   viewAs,
   onUnpinClick,
+  onUnmuteClick,
   isMutedBadge,
   isArchiveFolderRoot,
   isVisitor,
@@ -90,11 +95,15 @@ const Badges = ({
     isRoom,
     pinned,
     isFolder,
+    mute,
+    rootFolderId,
+    new: newCount,
   } = item;
 
   const showEditBadge = !locked || item.access === 0;
   const isPrivacy = isPrivacyFolder && isDesktopClient;
   const isForm = fileExst === ".oform";
+  const isPdf = fileExst === ".pdf";
   const isTile = viewAs === "tile";
 
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
@@ -102,6 +111,7 @@ const Badges = ({
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
   const tabletViewBadge = !isTile && isTablet();
+  const desktopView = !isTile && isDesktop();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
 
@@ -116,9 +126,11 @@ const Badges = ({
 
   const iconEdit = !isForm ? FileActionsConvertEditDocReactSvgUrl : iconForm;
 
-  const iconRefresh = RefreshReactSvgUrl;
+  const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
   const iconPin = UnpinReactSvgUrl;
+  const iconMute =
+    sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
 
   const unpinIconProps = {
     "data-id": id,
@@ -141,12 +153,16 @@ const Badges = ({
     color: theme.filesBadges.color,
     fontSize: "9px",
     fontWeight: 800,
-    maxWidth: "50px",
+    maxWidth: "60px",
     padding: isTile || tabletViewBadge ? "2px 5px" : "0 4px",
     lineHeight: "12px",
     "data-id": id,
   };
-
+  const unmuteIconProps = {
+    "data-id": id,
+    "data-rootfolderid": rootFolderId,
+    "data-new": newCount,
+  };
   const onShowVersionHistoryProp = item.security?.ReadHistory
     ? { onClick: onShowVersionHistory }
     : {};
@@ -160,7 +176,7 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {isEditing && !isVisitor && (
+      {isEditing && !isVisitor && !isPdf && (
         <ColorTheme
           themeId={ThemeType.IconButton}
           isEditing={isEditing}
@@ -239,6 +255,16 @@ const Badges = ({
         />
       )}
 
+      {isRoom && mute && (
+        <ColorTheme
+          themeId={ThemeType.IconButtonMute}
+          onClick={onUnmuteClick}
+          iconName={iconMute}
+          size={sizeBadge}
+          className="badge  is-mute tablet-badge"
+          {...unmuteIconProps}
+        />
+      )}
       {isRoom && pinned && (
         <ColorTheme
           themeId={ThemeType.IconButtonPin}

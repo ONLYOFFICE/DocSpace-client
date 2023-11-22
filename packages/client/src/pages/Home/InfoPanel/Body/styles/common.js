@@ -8,10 +8,10 @@ const StyledInfoPanelBody = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0px 20px 0 3px;
+          padding: 0px 20px 24px 3px;
         `
       : css`
-          padding: 0px 3px 0 20px;
+          padding: 0px 3px 24px 20px;
         `}
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
@@ -65,7 +65,15 @@ const StyledTitle = styled.div`
 
   .info_title-icons {
     display: flex;
-    margin-left: auto;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
+    /* theme.interfaceDirection */
     gap: 14px;
     .icon {
       cursor: pointer;
@@ -99,7 +107,7 @@ const StyledTitle = styled.div`
 
   .text {
     font-weight: 600;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
@@ -108,6 +116,15 @@ const StyledTitle = styled.div`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+
+  .free-label {
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-weight: 600;
+    line-height: 16px;
+
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
   }
 
   ${(props) =>
@@ -137,7 +154,7 @@ const StyledTitle = styled.div`
   }
 
   @media ${mobile} {
-    width: calc(100vw - 32px);
+    width: calc(100vw - 24px);
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -164,6 +181,21 @@ const StyledTitle = styled.div`
   }
 `;
 
+const StyledLink = styled.div`
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  a,
+  .link {
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-weight: 600;
+    line-height: 15px;
+  }
+`;
+
 const StyledSubtitle = styled.div`
   display: flex;
   flex-direction: row;
@@ -177,6 +209,7 @@ const StyledProperties = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  padding-bottom: 20px;
 
   .property {
     width: 100%;
@@ -185,14 +218,14 @@ const StyledProperties = styled.div`
     grid-column-gap: 24px;
 
     .property-title {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }
 
     .property-content {
       max-width: 100%;
       margin: auto 0;
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -273,4 +306,10 @@ const StyledProperties = styled.div`
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
 
-export { StyledInfoPanelBody, StyledTitle, StyledSubtitle, StyledProperties };
+export {
+  StyledInfoPanelBody,
+  StyledTitle,
+  StyledSubtitle,
+  StyledProperties,
+  StyledLink,
+};

@@ -482,9 +482,7 @@ const FilterBlock = ({
     );
   };
 
-  return currentDeviceType === DeviceType.mobile
-    ? renderPortalFilterBlock()
-    : filterBlockComponent;
+  return renderPortalFilterBlock();
 };
 
 export default React.memo(withTranslation("Common")(FilterBlock));

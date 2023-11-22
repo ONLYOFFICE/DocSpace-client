@@ -26,17 +26,15 @@
   "FeedUpdateUser": "назначена роль {{role}}",
   "FileExtension": "Расширение файла",
   "FilesEmptyScreenText": "Здесь будут представлены свойства файлов и папок",
+  "GalleryEmptyScreenText": "Здесь будут представлены подробности о шаблонах форм",
   "HistoryEmptyScreenText": "Здесь будет отображаться история активности",
   "ItemsSelected": "Выбрано элементов",
   "LastModifiedBy": "Автор последнего корректива",
-  "PendingInvitations": "Приглашения в ожидании",
   "Properties": "Cвойства",
   "RoomsEmptyScreenTent": "Здесь будут представлены подробности о комнатах",
   "SelectedUsers": "Выбрано пользователей",
   "StorageType": "Тип хранилища",
   "SubmenuDetails": "Детали",
   "SubmenuHistory": "История",
-  "SystemProperties": "Системные свойства",
-  "UsersInRoom": "Пользователей в комнате",
   "Versions": "Версии"
 }

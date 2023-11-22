@@ -1,7 +1,6 @@
 import React from "react";
-import FileInput from "@docspace/components/file-input";
-import Row from "@docspace/components/row";
-import Textarea from "@docspace/components/textarea";
+import FileInput from "../file-input";
+import Row from "../row";
 import Text from "../text";
 
 export const data = [

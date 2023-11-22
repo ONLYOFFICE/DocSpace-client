@@ -204,11 +204,12 @@ const WhiteLabel = (props) => {
 
   const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
+  const showReminder = !isEqualLogo || !isEqualText;
 
   return !isLoadedData ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper>
+    <WhiteLabelWrapper showReminder={showReminder}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
 
       <div className="header-container">
@@ -218,6 +219,7 @@ const WhiteLabel = (props) => {
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
+            fontWeight="700"
             backgroundColor="#EDC409"
             label={t("Common:Paid")}
             isPaidBadge={true}
@@ -465,6 +467,8 @@ const WhiteLabel = (props) => {
         </div>
       </div>
 
+      <div className="spacer"></div>
+
       <SaveCancelButtons
         tabIndex={3}
         className="save-cancel-buttons"
@@ -474,7 +478,8 @@ const WhiteLabel = (props) => {
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
         hasScroll={true}
-        showReminder={!isEqualLogo || !isEqualText}
+        hideBorder={true}
+        showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo && isEqualText}
         disableRestoreToDefault={!enableRestoreButton}

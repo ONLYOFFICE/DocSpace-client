@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";

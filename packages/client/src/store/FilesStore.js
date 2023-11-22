@@ -174,7 +174,8 @@ class FilesStore {
     const { socketHelper } = authStore.settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
+
       if (opt && opt.data) {
         const data = JSON.parse(opt.data);
 
@@ -183,8 +184,8 @@ class FilesStore {
           : `DIR-${data.parentId}`;
 
         if (
-          !socketSubscribersId.has(pathParts) &&
-          !socketSubscribersId.has(`DIR-${data.id}`)
+          !socketSubscribers.has(pathParts) &&
+          !socketSubscribers.has(`DIR-${data.id}`)
         )
           return;
       }
@@ -224,10 +225,10 @@ class FilesStore {
     });
 
     socketHelper.on("refresh-folder", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `DIR-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       if (!id || this.clientLoadingStore.isLoading) return;
 
@@ -245,10 +246,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `DIR-${folderId}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-folder ${folderId}:${count}`);
 
@@ -263,10 +264,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:markasnew-file", ({ fileId, count }) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${fileId}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-file ${fileId}:${count}`);
 
@@ -285,10 +286,10 @@ class FilesStore {
 
     //WAIT FOR RESPONSES OF EDITING FILE
     socketHelper.on("s:start-edit-file", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
@@ -308,10 +309,10 @@ class FilesStore {
     });
 
     socketHelper.on("s:stop-edit-file", (id) => {
-      const { socketSubscribersId } = this.selectedFolderStore;
+      const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
-      if (!socketSubscribersId.has(pathParts)) return;
+      if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
@@ -870,14 +871,10 @@ class FilesStore {
 
   setFiles = (files) => {
     const { socketHelper } = this.authStore.settingsStore;
-    const { addSocketSubscribersId, deleteSocketSubscribersId } =
-      this.selectedFolderStore;
+
     if (files.length === 0 && this.files.length === 0) return;
 
     if (this.files?.length > 0) {
-      this.files.forEach((f) => {
-        deleteSocketSubscribersId(`FILE-${f.id}`);
-      });
       socketHelper.emit({
         command: "unsubscribe",
         data: {
@@ -890,10 +887,6 @@ class FilesStore {
     this.files = files;
 
     if (this.files?.length > 0) {
-      this.files.forEach((f) => {
-        addSocketSubscribersId(`FILE-${f.id}`);
-      });
-
       socketHelper.emit({
         command: "subscribe",
         data: {
@@ -911,16 +904,10 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
-    const { addSocketSubscribersId, deleteSocketSubscribersId } =
-      this.selectedFolderStore;
     const { socketHelper } = this.authStore.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) => {
-        deleteSocketSubscribersId(`DIR-${f.id}`);
-      });
-
       socketHelper.emit({
         command: "unsubscribe",
         data: {
@@ -933,9 +920,6 @@ class FilesStore {
     this.folders = folders;
 
     if (this.folders?.length > 0) {
-      this.folders.forEach((f) => {
-        addSocketSubscribersId(`DIR-${f.id}`);
-      });
       socketHelper.emit({
         command: "subscribe",
         data: {
@@ -1120,9 +1104,12 @@ class FilesStore {
         const selectableFolder = this.filesList.find(
           (f) => f.id == id && f.isFolder
         );
-        selectableFolder.isFolder = true;
 
-        newSelections.push(selectableFolder);
+        if (selectableFolder) {
+          selectableFolder.isFolder = true;
+
+          newSelections.push(selectableFolder);
+        }
       }
     }
 
@@ -1555,8 +1542,6 @@ class FilesStore {
         }
       })
       .catch((err) => {
-        console.error(err);
-
         if (err?.response?.status === 402)
           this.authStore.currentTariffStatusStore.setPortalTariff();
 
@@ -1826,6 +1811,7 @@ class FilesStore {
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
+    const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.authStore.settingsStore;
 
@@ -1837,7 +1823,8 @@ class FilesStore {
     const { isDesktopClient } = this.authStore.settingsStore;
 
     const pluginAllKeys =
-      enablePlugins && this.pluginStore.getContextMenuKeysByType();
+      enablePlugins &&
+      this.pluginStore.getContextMenuKeysByType(null, null, security);
 
     const canRenameItem = item.security?.Rename;
 
@@ -1919,7 +1906,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || !window.DocSpaceConfig.pdfViewer) {
+      if (!isPdf || !window.DocSpaceConfig.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -2062,7 +2049,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Files,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2077,7 +2065,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Image,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2092,7 +2081,8 @@ class FilesStore {
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Video,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2252,7 +2242,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms
+            PluginFileType.Rooms,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2350,7 +2342,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Folders
+            PluginFileType.Folders,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2677,6 +2671,7 @@ class FilesStore {
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
+        this.setTempActionFoldersIds([]);
       });
 
       return;
@@ -2686,38 +2681,68 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
 
-    api.files
-      .getFolder(newFilter.folder, newFilter)
-      .then((res) => {
-        const files = fileIds
-          ? this.files.filter((x) => !fileIds.includes(x.id))
-          : this.files;
-        const folders = folderIds
-          ? this.folders.filter((x) => !folderIds.includes(x.id))
-          : this.folders;
+    if (isRooms) {
+      return api.rooms
+        .getRooms(newFilter)
+        .then((res) => {
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        const newFiles = [...files, ...res.files];
-        const newFolders = [...folders, ...res.folders];
+          const newFolders = [...folders, ...res.folders];
 
-        const filter = this.filter.clone();
-        filter.total = res.total;
+          const roomsFilter = this.roomsFilter.clone();
+          roomsFilter.total = res.total;
 
-        runInAction(() => {
-          this.setFilter(filter);
-          this.setFiles(newFiles);
-          this.setFolders(newFolders);
+          runInAction(() => {
+            this.setRoomsFilter(roomsFilter);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
         });
+    } else {
+      api.files
+        .getFolder(newFilter.folder, newFilter)
+        .then((res) => {
+          const files = fileIds
+            ? this.files.filter((x) => !fileIds.includes(x.id))
+            : this.files;
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        showToast && showToast();
-      })
-      .catch((err) => {
-        toastr.error(err);
-        console.log("Need page reload");
-      })
-      .finally(() => {
-        this.setOperationAction(false);
-        this.setTempActionFilesIds([]);
-      });
+          const newFiles = [...files, ...res.files];
+          const newFolders = [...folders, ...res.folders];
+
+          const filter = this.filter.clone();
+          filter.total = res.total;
+
+          runInAction(() => {
+            this.setFilter(filter);
+            this.setFiles(newFiles);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
+        });
+    }
   };
 
   updateFile = (fileId, title) => {
@@ -3078,6 +3103,8 @@ class FilesStore {
         });
       }
 
+      const isForm = fileExst === ".oform";
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -3143,6 +3170,7 @@ class FilesStore {
         viewAccessability,
         ...pluginOptions,
         inRoom,
+        isForm,
       };
     });
 

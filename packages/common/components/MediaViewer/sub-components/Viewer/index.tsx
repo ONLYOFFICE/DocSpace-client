@@ -35,6 +35,7 @@ function Viewer(props: ViewerProps) {
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
   useEffect(() => {
     document.body.appendChild(containerRef.current);
+    containerRef.current.style.direction = "ltr";
 
     return () => {
       document.body.removeChild(containerRef.current);

@@ -11,7 +11,8 @@ const truncateCss = css`
 const commonCss = css`
   margin: ${(props) => props.theme.rowContent.margin};
   font-family: "Open Sans";
-  font-size: ${(props) => props.theme.rowContent.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.rowContent.fontSize)};
   font-style: ${(props) => props.theme.rowContent.fontStyle};
   font-weight: ${(props) => props.theme.rowContent.fontWeight};
 `;

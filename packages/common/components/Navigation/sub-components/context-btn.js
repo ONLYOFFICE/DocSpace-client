@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
 import ContextMenu from "@docspace/components/context-menu";
 
@@ -33,7 +33,7 @@ const ContextButton = (props) => {
         onClick={onClick}
         iconName={VerticalDotsReactSvgUrl}
         id={props.id}
-        size={15}
+        size={17}
         isFill
       />
       <ContextMenu

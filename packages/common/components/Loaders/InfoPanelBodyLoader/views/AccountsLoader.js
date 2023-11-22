@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleLoader from "../../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledAccountsLoader = styled.div`
   width: 100%;
@@ -74,19 +74,19 @@ const AccountsLoader = () => {
   return (
     <StyledAccountsLoader>
       <StyledSubtitleLoader>
-        <RectangleLoader width={"71px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"71px"} height={"16px"} borderRadius={"3px"} />
       </StyledSubtitleLoader>
 
       <StyledProperty>
         {propertyDimensions.map((property) => [
-          <RectangleLoader
+          <RectangleSkeleton
             key={property.titleKey}
             className="property-title"
             width={property.propertyTitle}
             height={"20px"}
             borderRadius={"3px"}
           />,
-          <RectangleLoader
+          <RectangleSkeleton
             key={property.contentKey}
             className="property-content"
             width={property.propertyContent}

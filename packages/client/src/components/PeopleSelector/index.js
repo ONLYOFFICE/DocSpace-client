@@ -1,23 +1,23 @@
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
-import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-
-import React, { useState, useEffect, useRef } from "react";
-import { inject, observer } from "mobx-react";
-import PropTypes from "prop-types";
-import { I18nextProvider, withTranslation } from "react-i18next";
 import i18n from "./i18n";
+import PropTypes from "prop-types";
+import { inject, observer } from "mobx-react";
+import React, { useState, useEffect } from "react";
+import { I18nextProvider, withTranslation } from "react-i18next";
 
 import Selector from "@docspace/components/selector";
-import Filter from "@docspace/common/api/people/filter";
 
+import { getUserRole } from "@docspace/common/utils";
+import Filter from "@docspace/common/api/people/filter";
 import { getUserList } from "@docspace/common/api/people";
 import Loaders from "@docspace/common/components/Loaders";
-import { getUserRole } from "@docspace/common/utils";
 import { EmployeeStatus } from "@docspace/common/constants";
+import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 
-let timer = null;
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 const PeopleSelector = ({
   acceptButtonLabel,
@@ -57,38 +57,18 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
+  filterUserId,
 }) => {
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
   const [total, setTotal] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const cleanTimer = () => {
-    timer && clearTimeout(timer);
-    timer = null;
-  };
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(100, false);
 
   useEffect(() => {
     loadNextPage(0);
   }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      cleanTimer();
-      timer = setTimeout(() => {
-        setIsLoading(true);
-      }, 100);
-    } else {
-      cleanTimer();
-      setIsLoading(false);
-    }
-
-    return () => {
-      cleanTimer();
-    };
-  }, [isLoading]);
 
   const toListItem = (item) => {
     const {
@@ -138,6 +118,9 @@ const PeopleSelector = ({
   };
 
   const removeCurrentUserFromList = (listUser) => {
+    if (filterUserId) {
+      return listUser.filter((user) => user.id !== filterUserId);
+    }
     return listUser.filter((user) => user.id !== currentUserId);
   };
 
@@ -259,13 +242,8 @@ const PeopleSelector = ({
       footerCheckboxLabel={footerCheckboxLabel}
       isChecked={isChecked}
       searchLoader={<Loaders.SelectorSearchLoader />}
-      rowLoader={
-        <Loaders.SelectorRowLoader
-          isMultiSelect={false}
-          isContainer={isLoading}
-          isUser={true}
-        />
-      }
+      isSearchLoading={isLoading}
+      rowLoader={<Loaders.SelectorRowLoader isUser isContainer={isLoading} />}
     />
   );
 };

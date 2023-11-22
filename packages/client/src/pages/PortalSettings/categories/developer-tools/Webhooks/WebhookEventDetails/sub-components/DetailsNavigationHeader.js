@@ -28,6 +28,20 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
   min-height: 69px;
 
+  @media ${tablet} {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
+  @media ${mobile} {
+    margin-top: 0;
+    justify-content: space-between;
+  }
+
+  .headerNavigation {
+    display: flex;
+    align-items: center;
+  }
+
   .arrow-button {
     margin-inline-end: 18.5px;
 
@@ -37,22 +51,26 @@ const HeaderContainer = styled.div`
 
       margin-inline-start: -8px;
     }
+    @media ${mobile} {
+      margin-inline-end: 13px;
+    }
 
     svg {
-      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
 
     @media ${mobile} {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 `;
@@ -72,27 +90,31 @@ const DetailsNavigationHeader = (props) => {
   };
 
   return (
-    <HeaderContainer>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill={true}
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Headline type="content" truncate={true} className="headline">
-        {t("WebhookDetails")}
-      </Headline>
-      <IconButton
-        className="retry"
-        iconName={RetryIcon}
-        size="17"
-        isFill={true}
-        onClick={handleRetryEvent}
-      />
+    <>
+      <HeaderContainer>
+        <div className="headerNavigation">
+          <IconButton
+            iconName={ArrowPathReactSvgUrl}
+            size="17"
+            isFill={true}
+            onClick={onBack}
+            className="arrow-button"
+          />
+          <Headline type="content" truncate={true} className="headline">
+            {t("WebhookDetails")}
+          </Headline>
+        </div>
 
+        <IconButton
+          className="retry"
+          iconName={RetryIcon}
+          size="17"
+          isFill={true}
+          onClick={handleRetryEvent}
+        />
+      </HeaderContainer>
       <NoBoxShadowToast />
-    </HeaderContainer>
+    </>
   );
 };
 

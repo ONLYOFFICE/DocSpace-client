@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import Box from "@docspace/components/box";
 import Scrollbar from "@docspace/components/scrollbar";
+import ModalDialog from "@docspace/components/modal-dialog";
 
-const StyledEditLinkPanel = styled.div`
+const StyledEditLinkPanel = styled(ModalDialog)`
   .edit-link-panel {
     .scroll-body {
       ${(props) =>
@@ -16,19 +17,23 @@ const StyledEditLinkPanel = styled.div`
     }
   }
 
+  .modal-body {
+    padding: 0px 0px 8px;
+  }
+
   .field-label-icon {
     display: none;
   }
 
   .edit-link_body {
-    padding: 22px 0px 20px;
+    padding: 4px 0px 0px;
 
     .edit-link_link-block {
       padding: 0px 16px 20px 16px;
 
       .edit-link-text {
         display: inline-flex;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
       }
 
       .edit-link_required-icon {
@@ -130,7 +135,7 @@ const StyledEditLinkPanel = styled.div`
 
     .edit-link_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 

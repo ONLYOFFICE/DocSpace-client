@@ -91,7 +91,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     isRooms &&
     css`
       .item-file-name {
-        font-size: 16px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       }
     `}
 

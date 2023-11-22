@@ -116,7 +116,7 @@ const TreeNodeMenu = styled(TreeNode)`
   font-family: Open Sans;
   font-style: normal;
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 24px;
 
   position: relative;

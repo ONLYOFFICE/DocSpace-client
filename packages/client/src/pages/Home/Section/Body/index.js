@@ -139,7 +139,7 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest(".search-input-block")
+      e.target.closest("#filter_search-input")
     ) {
       setSelection([]);
       setBufferSelection(null);
@@ -217,8 +217,8 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setDragging(false);
       setStartDrag(false);
+      setTimeout(() => setDragging(false), 0);
       isDragActive = false;
       return;
     }
@@ -226,7 +226,7 @@ const SectionBodyContent = (props) => {
     const folderId = value ? value.split("_")[1] : treeValue;
 
     setStartDrag(false);
-    setDragging(false);
+    setTimeout(() => setDragging(false), 0);
     onMoveTo(folderId, title);
     isDragActive = false;
     return;

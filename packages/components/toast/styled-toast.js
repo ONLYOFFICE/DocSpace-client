@@ -35,7 +35,8 @@ const StyledToastContainer = styled(ToastContainer)`
   .Toastify__close-button {
     color: ${(props) => props.theme.toast.closeButton.color};
     font-weight: ${(props) => props.theme.toast.closeButton.fontWeight};
-    font-size: ${(props) => props.theme.toast.closeButton.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.toast.closeButton.fontSize)};
     background: ${(props) => props.theme.toast.closeButton.background};
     outline: none;
     border: none;

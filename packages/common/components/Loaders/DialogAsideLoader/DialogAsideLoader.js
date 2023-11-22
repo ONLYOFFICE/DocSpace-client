@@ -1,5 +1,5 @@
 import React from "react";
-import Loaders from "../../Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledDialogAsideLoader from "./StyledDialogAsideLoader";
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
@@ -19,15 +19,15 @@ const DialogAsideLoader = ({
         visible
       >
         <div className="dialog-loader-header">
-          <Loaders.Rectangle height="29px" />
+          <RectangleSkeleton height="29px" />
         </div>
         <div className="dialog-loader-body">
-          <Loaders.Rectangle height="200px" />
+          <RectangleSkeleton height="200px" />
         </div>
 
         <div className="dialog-loader-footer">
-          <Loaders.Rectangle height="40px" />
-          <Loaders.Rectangle height="40px" />
+          <RectangleSkeleton height="40px" />
+          <RectangleSkeleton height="40px" />
         </div>
       </StyledDialogAsideLoader>
     );

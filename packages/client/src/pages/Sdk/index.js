@@ -150,7 +150,7 @@ const Sdk = ({
     case "room-selector":
       component = (
         <RoomSelector
-          withCancelButton
+          withCancelButton={true}
           withHeader={false}
           onAccept={onSelectRoom}
           onCancel={onClose}
@@ -161,10 +161,12 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          embedded
+          embedded={true}
+          withHeader={false}
           isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
+          filterParam={"ALL"}
         />
       );
       break;

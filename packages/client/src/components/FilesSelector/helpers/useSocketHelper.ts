@@ -11,21 +11,22 @@ import { convertRoomsToItems } from "./useRoomsHelper";
 
 const useSocketHelper = ({
   socketHelper,
-  socketSubscribersId,
+  socketSubscribers,
   setItems,
   setBreadCrumbs,
   setTotal,
   disabledItems,
   filterParam,
+  getIcon,
 }: useSocketHelperProps) => {
   const subscribedId = React.useRef<null | number>(null);
 
   const subscribe = (id: number) => {
     const roomParts = `DIR-${id}`;
 
-    if (socketSubscribersId.has(roomParts)) return (subscribedId.current = id);
+    if (socketSubscribers.has(roomParts)) return (subscribedId.current = id);
 
-    if (subscribedId.current && !socketSubscribersId.has(roomParts)) {
+    if (subscribedId.current && !socketSubscribers.has(roomParts)) {
       unsubscribe(subscribedId.current, false);
     }
 
@@ -45,7 +46,7 @@ const useSocketHelper = ({
       subscribedId.current = null;
     }
 
-    if (id && !socketSubscribersId.has(`DIR-${id}`)) {
+    if (id && !socketSubscribers.has(`DIR-${id}`)) {
       socketHelper.emit({
         command: "unsubscribe",
         data: {
@@ -71,7 +72,7 @@ const useSocketHelper = ({
     let item: null | Item = null;
 
     if (opt?.type === "file") {
-      item = convertFilesToItems([data], filterParam)[0];
+      item = convertFilesToItems([data], filterParam, getIcon)[0];
     } else if (opt?.type === "folder") {
       item = !!data.roomType
         ? convertRoomsToItems([data])[0]
@@ -126,7 +127,7 @@ const useSocketHelper = ({
     let item: null | Item = null;
 
     if (opt?.type === "file") {
-      item = convertFilesToItems([data], filterParam)[0];
+      item = convertFilesToItems([data], filterParam, getIcon)[0];
     } else if (opt?.type === "folder") {
       item = !!data.roomType
         ? convertRoomsToItems([data])[0]

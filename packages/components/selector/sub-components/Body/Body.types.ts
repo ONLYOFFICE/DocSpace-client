@@ -37,6 +37,7 @@ export type BodyProps = {
   onSelectBreadCrumb?: (item: BreadCrumb) => void;
   breadCrumbsLoader?: any;
   isBreadCrumbsLoading?: boolean;
+  isSearchLoading?: boolean;
 
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;

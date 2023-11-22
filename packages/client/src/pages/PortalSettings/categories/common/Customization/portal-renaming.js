@@ -108,7 +108,7 @@ const PortalRenaming = (props) => {
     setIsLoadingPortalNameSave(true);
 
     setPortalRename(portalName)
-      .then((res) => {
+      .then((confirmUrl) => {
         onCloseModal();
         toastr.success(t("SuccessfullySavePortalNameMessage"));
 
@@ -116,7 +116,7 @@ const PortalRenaming = (props) => {
         setPortalNameDefault(portalName);
         sessionStorage.clear();
 
-        navigate(res);
+        window.location.replace(confirmUrl);
       })
       .catch((error) => {
         let errorMessage = "";

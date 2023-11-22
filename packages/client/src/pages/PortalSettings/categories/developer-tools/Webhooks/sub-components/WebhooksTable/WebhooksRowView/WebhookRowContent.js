@@ -7,11 +7,17 @@ import ToggleButton from "@docspace/components/toggle-button";
 
 import StatusBadge from "../../StatusBadge";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile, tablet } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
   padding-bottom: 10px;
+
+  .row-main-container-wrapper {
+    @media ${tablet} {
+      width: 100%;
+    }
+  }
 
   .rowMainContainer {
     height: 100%;
@@ -20,6 +26,7 @@ const StyledRowContent = styled(RowContent)`
 
   .mainIcons {
     min-width: 76px;
+    display: flex;
   }
 `;
 

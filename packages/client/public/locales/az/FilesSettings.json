@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Əlavə bölmələr",
-  "ConnectEmpty": "Burada heç nə yoxdur",
   "DisplayFavorites": "Ən çox istifadə olunanları göstər",
   "DisplayNotification": "Zibil qutusuna atılan zaman bildirişi göstər",
   "DisplayRecent": "Son istifadə olunanları göstər",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Fayl versiyaları saxla",
   "ThirdPartyAccounts": "Üçüncü tərəf hesabları",
   "ThirdPartyBtn": "Üçüncü tərəf yaddaşının quraşdırılmasına icazə verin",
-  "UpdateOrCreate": "Eyni adı olan mövcud faylın fayl versiyasını yeniləyin. Əks halda, faylın bir nüsxəsi yaradılacaq. ",
-  "UploadPluginsHere": "Pluginləri buradan yükləyin"
+  "UpdateOrCreate": "Eyni adı olan mövcud faylın fayl versiyasını yeniləyin. Əks halda, faylın bir nüsxəsi yaradılacaq. "
 }

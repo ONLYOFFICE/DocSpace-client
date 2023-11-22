@@ -38,7 +38,6 @@ const PluginSettings = ({
   return (
     <StyledPluginSettings>
       <WrappedComponent
-        pluginId={id}
         component={{
           component: PluginComponents.box,
           props: customSettingsProps,

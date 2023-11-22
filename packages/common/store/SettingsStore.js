@@ -152,7 +152,6 @@ class SettingsStore {
   debugInfo = false;
   socketUrl = "";
 
-  userFormValidation = /^[\p{L}\p{M}'\-]+$/gu;
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
   tenantStatus = null;
@@ -191,6 +190,8 @@ class SettingsStore {
   numberAttempt = null;
   blockingTime = null;
   checkPeriod = null;
+
+  userNameRegex = "";
 
   windowWidth = window.innerWidth;
 
@@ -470,7 +471,15 @@ class SettingsStore {
         const url = new URL(wrongPortalNameUrl);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
-        // return window.location.replace(url);
+        return window.location.replace(url);
+      }
+
+      if (err?.response?.status === 403) {
+        //access to the portal is restricted
+        window.DocSpace.navigate("/access-restricted", {
+          state: { isRestrictionError: true },
+          replace: true,
+        });
       }
     });
 
@@ -1044,6 +1053,10 @@ class SettingsStore {
     if (isTablet(this.windowWidth)) return DeviceType.tablet;
 
     return DeviceType.desktop;
+  }
+
+  get enablePortalRename() {
+    return this.standalone && this.baseDomain !== "localhost";
   }
 }
 

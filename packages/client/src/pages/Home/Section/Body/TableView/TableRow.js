@@ -40,6 +40,8 @@ const FilesTableRow = (props) => {
     isTrashFolder,
     isHighlight,
     hideColumns,
+    onDragOver,
+    onDragLeave,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -74,13 +76,17 @@ const FilesTableRow = (props) => {
     },
   };
 
-  const onDragOver = (dragActive) => {
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
     if (dragActive !== isDragActive) {
       setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
     setIsDragActive(false);
   };
 
@@ -115,8 +121,8 @@ const FilesTableRow = (props) => {
       onDrop={onDrop}
       onMouseDown={onMouseDown}
       dragging={dragging && isDragging}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
+      onDragOver={onDragOverEvent}
+      onDragLeave={onDragLeaveEvent}
     >
       <StyledTableRow
         className="table-row"

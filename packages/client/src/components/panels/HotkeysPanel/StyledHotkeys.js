@@ -23,13 +23,13 @@ const StyledHotkeysPanel = styled.div`
 
     .hotkeys_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 
   .hotkeys_sub-header {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

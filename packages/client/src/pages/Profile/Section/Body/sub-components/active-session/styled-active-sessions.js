@@ -3,7 +3,7 @@ import { mobile } from "@docspace/components/utils/device";
 
 export const StyledFooter = styled.div`
   .session-logout {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
   }
   .icon-button {
@@ -25,7 +25,7 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 `;
 
@@ -69,7 +69,7 @@ export const TableHeaderCell = styled.th`
 `;
 
 export const TableBody = styled.tbody`
-  font-size: 11px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
 `;
 
 export const TableDataCell = styled.td`
@@ -120,7 +120,7 @@ export const TableDataCell = styled.td`
   }
 
   :first-child {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: ${(props) => props.theme.activeSessions.color};
     span {
       color: #a3a9ae;

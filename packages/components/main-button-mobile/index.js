@@ -15,9 +15,8 @@ import {
   StyledRenderItem,
 } from "./styled-main-button";
 import IconButton from "../icon-button";
-import Button from "../button";
 import Text from "../text";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "../scrollbar";
 import { isIOS, isMobile } from "react-device-detect";
 import Backdrop from "../backdrop";
 
@@ -25,8 +24,9 @@ import styled from "styled-components";
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "../utils/common-icons-style";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 import SubmenuItem from "./sub-components/SubmenuItem";
+import { classNames } from "../utils/classNames";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
@@ -280,9 +280,9 @@ const MainButtonMobile = (props) => {
                 id={option.id}
                 key={option.key}
                 label={option.label}
-                className={`${option.className} ${
-                  option.isSeparator && "is-separator"
-                }`}
+                className={classNames(option.className, {
+                  "is-separator": option.isSeparator,
+                })}
                 onClick={optionOnClickAction}
                 icon={option.icon ? option.icon : ""}
                 action={option.action}

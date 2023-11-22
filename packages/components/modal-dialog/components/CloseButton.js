@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import styled, { css } from "styled-components";
 import { mobile } from "../../utils/device";
 import IconButton from "../../icon-button";
@@ -59,7 +59,7 @@ const StyledCloseButtonWrapper = styled.div`
   .close-button, .close-button:hover {
     cursor: pointer;
     path {
-      fill: ${(props) => props.theme.modalDialog.closeButton.fillColor};
+      stroke: ${(props) => props.theme.modalDialog.closeButton.fillColor};
     }
   }
 `;

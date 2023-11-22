@@ -160,7 +160,7 @@ const RowView = (props) => {
               sectionWidth={sectionWidth}
               typeOptions={typeOptions}
               isChecked={isAccountChecked(data.key)}
-              toggleAccount={() => toggleAccount(data.key)}
+              toggleAccount={() => toggleAccount(data)}
             />
           ))}
         </>

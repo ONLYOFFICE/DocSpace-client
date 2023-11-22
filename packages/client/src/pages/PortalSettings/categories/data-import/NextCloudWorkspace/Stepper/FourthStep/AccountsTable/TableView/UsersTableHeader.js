@@ -36,7 +36,6 @@ const UsersTableHeader = (props) => {
     setHideColumns,
     isIndeterminate,
     isChecked,
-    toggleAll,
   } = props;
 
   const defaultColumns = [
@@ -48,11 +47,6 @@ const UsersTableHeader = (props) => {
       default: true,
       active: true,
       minWidth: 180,
-      checkbox: {
-        value: isChecked,
-        isIndeterminate,
-        onChange: toggleAll,
-      },
       onChange: onColumnChange,
     },
     {

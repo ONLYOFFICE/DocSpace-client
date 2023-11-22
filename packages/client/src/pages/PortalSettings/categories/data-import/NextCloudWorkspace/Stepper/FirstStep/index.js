@@ -11,6 +11,7 @@ import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
+import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -88,7 +89,8 @@ const FirstStep = ({
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      const res = await getMigrationStatus();
+      // const res = await getMigrationStatus();
+      const res = { parseResult: mockRes, failedArchives: [], isCompleted: true };
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);
@@ -97,7 +99,8 @@ const FirstStep = ({
       } else if (res.isCompleted) {
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
-        setUsers(res);
+        setUsers(res.parseResult);
+        // setUsers(mockRes);
         setIsSaveDisabled(false);
       }
     }, 1000);

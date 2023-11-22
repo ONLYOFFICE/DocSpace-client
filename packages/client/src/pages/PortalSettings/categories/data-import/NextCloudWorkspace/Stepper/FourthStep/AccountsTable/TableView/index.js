@@ -78,19 +78,22 @@ const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
 
+const checkedAccountType = "result";
+
 const TableView = (props) => {
   const {
     t,
-    users,
     userId,
     viewAs,
     setViewAs,
     sectionWidth,
     accountsData,
     typeOptions,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
-    onCheckAccounts,
+    toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
   } = props;
@@ -99,15 +102,14 @@ const TableView = (props) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  const isIndeterminate = checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
+  const isIndeterminate =
+    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
 
-  const toggleAll = (checked) => {
-    onCheckAccounts(checked, users);
-  };
+  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
-  const handleToggle = (e, id) => {
+  const handleToggle = (e, user) => {
     e.stopPropagation();
-    toggleAccount(id);
+    toggleAccount(user, checkedAccountType);
   };
 
   const onClearFilter = () => {
@@ -137,7 +139,7 @@ const TableView = (props) => {
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedAccounts.length > 0 && (
+      {checkedUsers.result.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
             checkboxOptions={[]}
@@ -146,7 +148,7 @@ const TableView = (props) => {
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.result.length === users.result.length}
             onChange={toggleAll}
           />
         </div>
@@ -160,7 +162,7 @@ const TableView = (props) => {
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.result.length === users.result.length}
             toggleAll={toggleAll}
             setHideColumns={setHideColumns}
           />
@@ -174,7 +176,7 @@ const TableView = (props) => {
             hasMoreFiles={false}
             itemCount={accountsData.length}
             fetchMoreFiles={() => {}}>
-            {users.map((data) => (
+            {accountsData.map((data) => (
               <UsersTableRow
                 key={data.key}
                 id={data.key}
@@ -183,8 +185,8 @@ const TableView = (props) => {
                 email={data.email}
                 typeOptions={typeOptions}
                 hideColumns={hideColumns}
-                isChecked={isAccountChecked(data.key)}
-                toggleAccount={(e) => handleToggle(e, data.key)}
+                isChecked={isAccountChecked(data.key, checkedAccountType)}
+                toggleAccount={(e) => handleToggle(e, data)}
               />
             ))}
           </TableBody>
@@ -220,24 +222,23 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
   const {
     users,
-    checkedAccounts,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   } = importAccountsStore;
 
   return {
-    users,
     viewAs,
     setViewAs,
     userId,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   };
 })(observer(TableView));

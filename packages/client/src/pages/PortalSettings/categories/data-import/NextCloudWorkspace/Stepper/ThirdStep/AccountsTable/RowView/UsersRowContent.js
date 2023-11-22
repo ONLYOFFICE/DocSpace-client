@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
@@ -66,21 +69,31 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ t, sectionWidth, displayName, emailInputRef, emailTextRef }) => {
-  const [email, setEmail] = useState("");
+const UsersRowContent = ({ sectionWidth, displayName, email, id, emailInputRef, emailTextRef }) => {
+  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+
+  const [prevEmail, setPrevEmail] = useState(email);
+  const [tempEmail, setTempEmail] = useState(email);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setTempEmail(e.target.value);
   };
 
   const clearEmail = () => {
-    setEmail("");
+    setTempEmail(prevEmail);
     setIsEmailOpen(false);
   };
 
   const openEmail = () => setIsEmailOpen(true);
-  const closeEmail = () => setIsEmailOpen(false);
+
+  const handleSaveEmail = () => {
+    setPrevEmail(tempEmail);
+    changeEmail(id, tempEmail);
+    setIsEmailOpen(false);
+  };
+
+  if (!ready) return <></>;
 
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
@@ -89,7 +102,7 @@ const UsersRowContent = ({ t, sectionWidth, displayName, emailInputRef, emailTex
           {displayName}
         </Text>
         <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
-          {email === "" ? t("Settings:NoEmail") : email}
+          {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
         </Text>
       </div>
       {isEmailOpen ? (
@@ -101,7 +114,7 @@ const UsersRowContent = ({ t, sectionWidth, displayName, emailInputRef, emailTex
             onChange={handleEmailChange}
           />
 
-          <DecisionButton onClick={closeEmail}>
+          <DecisionButton onClick={handleSaveEmail}>
             <CheckSvg />
           </DecisionButton>
           <DecisionButton onClick={clearEmail}>
@@ -117,4 +130,10 @@ const UsersRowContent = ({ t, sectionWidth, displayName, emailInputRef, emailTex
   );
 };
 
-export default UsersRowContent;
+export default inject(({ importAccountsStore }) => {
+  const { changeEmail } = importAccountsStore;
+
+  return {
+    changeEmail,
+  };
+})(observer(UsersRowContent));

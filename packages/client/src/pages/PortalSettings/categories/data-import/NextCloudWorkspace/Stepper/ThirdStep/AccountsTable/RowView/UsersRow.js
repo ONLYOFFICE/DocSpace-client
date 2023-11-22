@@ -17,14 +17,10 @@ const UsersRow = (props) => {
   };
 
   return (
-    <Row
-      sectionWidth={sectionWidth}
-      data={data}
-      checked={isChecked}
-      checkbox
-      onClick={handleAccountToggle}>
+    <Row sectionWidth={sectionWidth} data={data} checked={isChecked} onClick={handleAccountToggle}>
       <UsersRowContent
         t={t}
+        id={data.key}
         sectionWidth={sectionWidth}
         displayName={data.displayName}
         email={data.email}

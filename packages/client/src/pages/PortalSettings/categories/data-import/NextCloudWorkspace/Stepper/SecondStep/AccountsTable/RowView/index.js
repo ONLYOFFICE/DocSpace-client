@@ -16,8 +16,6 @@ import UsersRow from "./UsersRow";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-// import { mockData } from "../../mockData";
-
 const StyledRowContainer = styled(RowContainer)`
   margin: 20px 0;
 
@@ -35,24 +33,14 @@ const StyledRow = styled(Row)`
   height: 40px;
   min-height: 40px;
 
-  .row-header-item {
-    display: flex;
-    align-items: center;
-    margin-left: 7px;
-  }
-
-  .row-header-title {
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-    font-weight: 600;
-    font-size: 12px;
-  }
-
   @media ${tablet} {
     .row_content {
       height: auto;
     }
   }
 `;
+
+const checkedAccountType = "withEmail";
 
 const RowView = (props) => {
   const {
@@ -61,21 +49,23 @@ const RowView = (props) => {
     setViewAs,
     sectionWidth,
     accountsData,
-    checkedAccounts,
+
+    checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
   } = props;
-  const rowRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, users);
+  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
 
-  const handleToggle = (id) => toggleAccount(id);
+  const handleToggle = (user) => toggleAccount(user, checkedAccountType);
 
-  const onClearFilter = () => {
-    setSearchValue("");
-  };
+  const onClearFilter = () => setSearchValue("");
+
+  const isIndeterminate =
+    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -88,29 +78,27 @@ const RowView = (props) => {
   }, [sectionWidth]);
 
   return (
-    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
+    <StyledRowContainer useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
-          <StyledRow sectionWidth={sectionWidth}>
-            <div className="row-header-item">
-              {checkedAccounts.length > 0 && (
-                <Checkbox
-                  isChecked={checkedAccounts.length === users.length}
-                  isIndeterminate={isIndeterminate}
-                  onChange={toggleAll}
-                />
-              )}
-              <Text className="row-header-title">{t("Common:Name")}</Text>
-            </div>
+          <StyledRow
+            sectionWidth={sectionWidth}
+            checked={checkedUsers.withEmail.length === withEmailUsers.length}
+            onSelect={toggleAll}
+            indeterminate={isIndeterminate}>
+            <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
+              {t("Common:Name")}
+            </Text>
           </StyledRow>
+
           {accountsData.map((data) => (
             <UsersRow
               t={t}
               key={data.key}
               data={data}
               sectionWidth={sectionWidth}
-              isChecked={isAccountChecked(data.key)}
-              toggleAccount={() => handleToggle(data.key)}
+              isChecked={isAccountChecked(data.key, checkedAccountType)}
+              toggleAccount={() => handleToggle(data)}
             />
           ))}
         </>
@@ -129,12 +117,7 @@ const RowView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>
@@ -148,7 +131,8 @@ const RowView = (props) => {
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
-    checkedAccounts,
+    checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
@@ -158,7 +142,9 @@ export default inject(({ setup, importAccountsStore }) => {
   return {
     viewAs,
     setViewAs,
-    checkedAccounts,
+
+    checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,

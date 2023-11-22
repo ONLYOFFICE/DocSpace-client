@@ -21,15 +21,17 @@ const ThirdStep = (props) => {
     incrementStep,
     decrementStep,
     numberOfCheckedAccounts,
-    withoutEmailUsers,
+    users,
     searchValue,
     setSearchValue,
+    setResultUsers,
+    areCheckedUsersEmpty,
   } = props;
 
-  const [dataPortion, setDataPortion] = useState(withoutEmailUsers.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(users.withoutEmail.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(withoutEmailUsers.slice(leftBoundary, rightBoundary));
+    setDataPortion(users.withoutEmail.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -46,27 +48,35 @@ const ThirdStep = (props) => {
       data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
+  const handleStepIncrement = () => {
+    setResultUsers();
+    incrementStep();
+  };
+
   return (
     <Wrapper>
-      {withoutEmailUsers.length > 0 && <NoEmailUsersBlock users={withoutEmailUsers.length} t={t} />}
+      {users.withoutEmail.length > 0 && (
+        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />
+      )}
 
-      {withoutEmailUsers.length > 0 ? (
+      {users.withoutEmail.length > 0 ? (
         <>
           <SaveCancelButtons
             className="save-cancel-buttons"
-            onSaveClick={incrementStep}
+            onSaveClick={handleStepIncrement}
             onCancelClick={decrementStep}
             saveButtonLabel={t("Settings:NextStep")}
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
+            saveButtonDisabled={areCheckedUsersEmpty}
             // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
           />
 
           {/* <UsersInfoBlock
             t={t}
             selectedUsers={numberOfCheckedAccounts}
-            totalUsers={withoutEmailUsers.length}
+            totalUsers={users.withoutEmail.length}
             totalLicenceLimit={LICENSE_LIMIT}
           /> */}
 
@@ -81,10 +91,10 @@ const ThirdStep = (props) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {withoutEmailUsers.length > 25 && (
+          {users.withoutEmail.length > 25 && (
             <AccountsPaging
               t={t}
-              numberOfItems={withoutEmailUsers.length}
+              numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
             />
           )}
@@ -97,12 +107,13 @@ const ThirdStep = (props) => {
 
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={incrementStep}
+        onSaveClick={handleStepIncrement}
         onCancelClick={decrementStep}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         showReminder
         displaySettings
+        saveButtonDisabled={areCheckedUsersEmpty}
         // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
     </Wrapper>
@@ -111,14 +122,22 @@ const ThirdStep = (props) => {
 
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs } = setup;
-  const { numberOfCheckedAccounts, searchValue, setSearchValue, withoutEmailUsers } =
-    importAccountsStore;
+  const {
+    numberOfCheckedAccounts,
+    searchValue,
+    setSearchValue,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
+  } = importAccountsStore;
 
   return {
     viewAs,
     numberOfCheckedAccounts,
     searchValue,
     setSearchValue,
-    withoutEmailUsers,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
   };
 })(observer(ThirdStep));

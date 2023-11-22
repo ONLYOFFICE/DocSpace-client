@@ -14,14 +14,18 @@ const SixthStep = ({
   proceedFileMigration,
   cancelMigration,
   importOptions,
-  users,
+  finalUsers,
 }) => {
-  const [isVisble, setIsVisble] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
 
   const handleFileMigration = async () => {
     try {
-      await proceedFileMigration({ users, migratorName: "Nextcloud", ...importOptions });
+      await proceedFileMigration({
+        users: finalUsers,
+        migratorName: "Nextcloud",
+        ...importOptions,
+      });
 
       setPercent(100);
       setIsLoading(false);
@@ -32,14 +36,16 @@ const SixthStep = ({
     }
   };
 
+  const hideCancelDialog = () => setIsVisible(false);
+
+  const onCancel = () => {
+    setIsVisible(true);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     handleFileMigration();
   }, []);
-
-  const onCancel = () => {
-    setIsVisble(true);
-    setIsLoading(false);
-  };
 
   return (
     <Wrapper>
@@ -55,13 +61,13 @@ const SixthStep = ({
         </>
       )}
 
-      {isVisble && (
+      {isVisible && (
         <CancelUploadDialog
-          visible={isVisble}
+          visible={isVisible}
           loading={false}
           isSixthStep={isSixthStep}
           cancelMigration={cancelMigration}
-          onClose={() => setIsVisble(false)}
+          onClose={hideCancelDialog}
         />
       )}
     </Wrapper>
@@ -69,7 +75,7 @@ const SixthStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, users } =
+  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, finalUsers } =
     importAccountsStore;
 
   return {
@@ -77,6 +83,6 @@ export default inject(({ importAccountsStore }) => {
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
-    users,
+    finalUsers,
   };
 })(observer(SixthStep));

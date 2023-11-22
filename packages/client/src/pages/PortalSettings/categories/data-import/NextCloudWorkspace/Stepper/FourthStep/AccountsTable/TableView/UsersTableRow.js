@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
@@ -65,16 +65,15 @@ const UsersTableRow = ({
   isChecked,
   toggleAccount,
   type,
-  changeType,
+  changeUserType,
 }) => {
   const roleSelectorRef = useRef();
 
   const onSelectUser = (e) => {
-    changeType(id, e.key);
+    changeUserType(id, e.key);
   };
 
-  const selectedOption =
-    typeOptions.find((option) => option.key === type) || {};
+  const selectedOption = typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
@@ -109,12 +108,7 @@ const UsersTableRow = ({
         </div>
       </TableCell>
       <TableCell>
-        <Text
-          lineHeight="20px"
-          fontWeight={600}
-          color="#A3A9AE"
-          className="textOverflow"
-        >
+        <Text lineHeight="20px" fontWeight={600} color="#A3A9AE" className="textOverflow">
           {email}
         </Text>
       </TableCell>
@@ -123,9 +117,9 @@ const UsersTableRow = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { changeType } = importAccountsStore;
+  const { changeUserType } = importAccountsStore;
 
   return {
-    changeType,
+    changeUserType,
   };
 })(observer(UsersTableRow));

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
-const UserskRow = (props) => {
+const UsersRow = (props) => {
   const { data, sectionWidth, typeOptions, isChecked, toggleAccount } = props;
 
   const roleSelectorRef = useRef();
@@ -38,4 +38,4 @@ const UserskRow = (props) => {
   );
 };
 
-export default UserskRow;
+export default UsersRow;

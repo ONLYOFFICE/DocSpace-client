@@ -24,23 +24,31 @@ const StyledRow = styled(Row)`
   }
 `;
 
+const checkedAccountType = "withoutEmail";
+
 const RowView = (props) => {
   const {
     t,
     viewAs,
-    withoutEmailUsers,
     setViewAs,
     sectionWidth,
     accountsData,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    clearCheckedAccounts,
   } = props;
 
-  const toggleAll = (e) =>
-    toggleAllAccounts({ target: { checked: !e.target.checked } }, withoutEmailUsers);
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, users.withoutEmail, checkedAccountType);
+
+  const handleToggle = (user) => toggleAccount(user, checkedAccountType);
+
+  const isIndeterminate =
+    checkedUsers.withoutEmail.length > 0 &&
+    checkedUsers.withoutEmail.length !== users.withoutEmail.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -50,20 +58,15 @@ const RowView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-
-    return clearCheckedAccounts;
   }, [sectionWidth]);
 
   return (
     <StyledRowContainer useReactWindow={false}>
       <StyledRow
         sectionWidth={sectionWidth}
-        checkbox
-        checked={checkedAccounts.length === withoutEmailUsers.length}
-        onClick={toggleAll}
-        indeterminate={
-          checkedAccounts.length > 0 && checkedAccounts.length !== withoutEmailUsers.length
-        }>
+        checked={checkedUsers.withoutEmail.length === users.withoutEmail.length}
+        onSelect={toggleAll}
+        indeterminate={isIndeterminate}>
         <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
           {t("Common:Name")}
         </Text>
@@ -71,11 +74,11 @@ const RowView = (props) => {
       {accountsData.map((data) => (
         <UsersRow
           t={t}
-          key={data.id}
+          key={data.key}
           data={data}
           sectionWidth={sectionWidth}
-          toggleAccount={() => toggleAccount(data.id)}
-          isChecked={isAccountChecked(data.id)}
+          toggleAccount={() => handleToggle(data)}
+          isChecked={isAccountChecked(data.key, checkedAccountType)}
         />
       ))}
     </StyledRowContainer>
@@ -84,23 +87,17 @@ const RowView = (props) => {
 
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
-  const {
-    withoutEmailUsers,
-    checkedAccounts,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    clearCheckedAccounts,
-  } = importAccountsStore;
+  const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
+    importAccountsStore;
 
   return {
-    withoutEmailUsers,
     viewAs,
     setViewAs,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    clearCheckedAccounts,
   };
 })(observer(RowView));

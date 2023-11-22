@@ -35,6 +35,8 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
+const checkedAccountType = "withoutEmail";
+
 const TableView = (props) => {
   const {
     t,
@@ -43,19 +45,22 @@ const TableView = (props) => {
     setViewAs,
     sectionWidth,
     accountsData,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    clearCheckedAccounts,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
+  const [openedEmailKey, setOpenedEmailKey] = useState(null);
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, mockData);
-  const handleToggle = (e, id) => {
+  const toggleAll = (e) =>
+    toggleAllAccounts(e.target.checked, users.withoutEmail, checkedAccountType);
+  const handleToggle = (e, user) => {
     e.stopPropagation();
-    toggleAccount(id);
+    toggleAccount(user, checkedAccountType);
   };
 
   useEffect(() => {
@@ -65,8 +70,6 @@ const TableView = (props) => {
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-
-    return clearCheckedAccounts;
   }, [sectionWidth]);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -81,8 +84,11 @@ const TableView = (props) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         setHideColumns={setHideColumns}
-        isIndeterminate={checkedAccounts.length > 0 && checkedAccounts.length !== mockData.length}
-        isChecked={checkedAccounts.length === mockData.length}
+        isIndeterminate={
+          checkedUsers.withoutEmail.length > 0 &&
+          checkedUsers.withoutEmail.length !== users.withoutEmail.length
+        }
+        isChecked={checkedUsers.withoutEmail.length === users.withoutEmail.length}
         toggleAll={toggleAll}
       />
       <TableBody
@@ -98,11 +104,13 @@ const TableView = (props) => {
         {accountsData.map((data) => (
           <UsersTableRow
             t={t}
-            key={data.id}
+            key={data.key}
+            id={data.key}
+            email={data.email}
             displayName={data.displayName}
             hideColumns={hideColumns}
-            isChecked={isAccountChecked(data.id)}
-            toggleAccount={(e) => handleToggle(e, data.id)}
+            isChecked={isAccountChecked(data.key, checkedAccountType)}
+            toggleAccount={(e) => handleToggle(e, data)}
           />
         ))}
       </TableBody>
@@ -113,24 +121,18 @@ const TableView = (props) => {
 export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
-  const {
-    withoutEmailUsers,
-    checkedAccounts,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    clearCheckedAccounts,
-  } = importAccountsStore;
+  const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
+    importAccountsStore;
 
   return {
     viewAs,
-    withoutEmailUsers,
     setViewAs,
     userId,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    clearCheckedAccounts,
   };
 })(observer(TableView));

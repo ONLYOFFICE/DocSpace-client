@@ -6,27 +6,27 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 const AccountsTable = (props) => {
-  const { t, viewAs, accountsData, changeTypeGroup } = props;
+  const { t, viewAs, accountsData, changeGroupType, UserTypes } = props;
 
-  const onChangeType = (key) => {
-    changeTypeGroup(key);
-  };
+  const setTypeDocspaceAdmin = () => changeGroupType(UserTypes.DocSpaceAdmin);
+  const setTypeRoomAdmin = () => changeGroupType(UserTypes.RoomAdmin);
+  const setTypeUser = () => changeGroupType(UserTypes.User);
 
   const typeOptions = [
     {
-      key: "DocSpaceAdmin",
-      label: t("Common:DocSpaceAdmin"),
-      onClick: () => onChangeType("DocSpaceAdmin"),
+      key: UserTypes.DocSpaceAdmin,
+      label: t(`Common:${UserTypes.DocSpaceAdmin}`),
+      onClick: setTypeDocspaceAdmin,
     },
     {
-      key: "RoomAdmin",
-      label: t("Common:RoomAdmin"),
-      onClick: () => onChangeType("RoomAdmin"),
+      key: UserTypes.RoomAdmin,
+      label: t(`Common:${UserTypes.RoomAdmin}`),
+      onClick: setTypeRoomAdmin,
     },
     {
-      key: "User",
-      label: t("Common:PowerUser"),
-      onClick: () => onChangeType("User"),
+      key: UserTypes.User,
+      label: t(`Common:PowerUser`),
+      onClick: setTypeUser,
     },
   ];
 
@@ -54,12 +54,11 @@ const AccountsTable = (props) => {
 };
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs } = setup;
-  const { changeTypeGroup } = importAccountsStore;
+  const { changeGroupType, UserTypes } = importAccountsStore;
 
   return {
     viewAs,
-    changeTypeGroup,
+    changeGroupType,
+    UserTypes,
   };
-})(
-  withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable))
-);
+})(withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable)));

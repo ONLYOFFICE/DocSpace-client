@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
@@ -66,24 +68,32 @@ const DecisionButton = styled.div`
 
 DecisionButton.defaultProps = { theme: Base };
 
-const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
-  const [email, setEmail] = useState("");
+const UsersTableRow = ({ displayName, isChecked, toggleAccount, email, id, changeEmail }) => {
+  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+
+  const [prevEmail, setPrevEmail] = useState(email);
+  const [tempEmail, setTempEmail] = useState(email);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
 
   const emailInputRef = useRef();
   const emailTextRef = useRef();
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setTempEmail(e.target.value);
   };
 
   const clearEmail = () => {
-    setEmail("");
+    setTempEmail(prevEmail);
     setIsEmailOpen(false);
   };
 
   const openEmail = () => setIsEmailOpen(true);
-  const closeEmail = () => setIsEmailOpen(false);
+
+  const handleSaveEmail = () => {
+    setPrevEmail(tempEmail);
+    changeEmail(id, tempEmail);
+    setIsEmailOpen(false);
+  };
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
@@ -92,6 +102,8 @@ const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
       emailTextRef.current?.contains(e.target) ||
       toggleAccount(e);
   };
+
+  if (!ready) return <></>;
 
   return (
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
@@ -106,13 +118,13 @@ const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
         {isEmailOpen ? (
           <EmailInputWrapper ref={emailInputRef}>
             <TextInput
-              placeholder={t("SMTPSettings:EnterEmail")}
+              placeholder={t("Settings:NoEmail")}
               className="email-input"
-              value={email}
+              value={tempEmail}
               onChange={handleEmailChange}
             />
 
-            <DecisionButton onClick={closeEmail}>
+            <DecisionButton onClick={handleSaveEmail}>
               <CheckSvg />
             </DecisionButton>
             <DecisionButton onClick={clearEmail}>
@@ -123,7 +135,7 @@ const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
             <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
-              {email !== "" ? email : t("Settings:NoEmail")}
+              {tempEmail !== "" ? tempEmail : t("EnterEmail")}
             </Text>
           </span>
         )}
@@ -132,4 +144,10 @@ const UsersTableRow = ({ t, displayName, isChecked, toggleAccount }) => {
   );
 };
 
-export default UsersTableRow;
+export default inject(({ importAccountsStore }) => {
+  const { changeEmail } = importAccountsStore;
+
+  return {
+    changeEmail,
+  };
+})(observer(UsersTableRow));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -11,10 +11,12 @@ import { Wrapper } from "../StyledStepper";
 const FourthStep = (props) => {
   const { t, incrementStep, decrementStep, users, searchValue, setSearchValue } = props;
 
-  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
+  const [boundaries, setBoundaries] = useState([0, 25]);
+  const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(users.slice(leftBoundary, rightBoundary));
+    setBoundaries([leftBoundary, rightBoundary]);
+    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -31,6 +33,10 @@ const FourthStep = (props) => {
       data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
+  useEffect(() => {
+    setDataPortion(users.result.slice(...boundaries));
+  }, [users]);
+
   return (
     <Wrapper>
       <SaveCancelButtons
@@ -44,7 +50,7 @@ const FourthStep = (props) => {
       />
 
       <SearchInput
-        id="search-users-type-input"
+        id="search-checkedUsers-type-input"
         placeholder={t("Common:Search")}
         value={searchValue}
         onChange={onChangeInput}
@@ -54,8 +60,12 @@ const FourthStep = (props) => {
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.length > 25 && (
-        <AccountsPaging t={t} numberOfItems={users.length} setDataPortion={handleDataChange} />
+      {users.result.length > 25 && (
+        <AccountsPaging
+          t={t}
+          numberOfItems={users.result.length}
+          setDataPortion={handleDataChange}
+        />
       )}
 
       {filteredAccounts.length > 0 && (
@@ -74,10 +84,9 @@ const FourthStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedAccounts, users, searchValue, setSearchValue } = importAccountsStore;
+  const { users, searchValue, setSearchValue } = importAccountsStore;
 
   return {
-    checkedAccounts,
     users,
     searchValue,
     setSearchValue,

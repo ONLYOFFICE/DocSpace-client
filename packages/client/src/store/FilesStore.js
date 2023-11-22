@@ -1805,7 +1805,8 @@ class FilesStore {
     const isThirdPartyItem = !!item.providerKey;
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
-    const canConvert = this.filesSettingsStore.extsConvertible[item.fileExst];
+    const canConvert = item.viewAccessibility?.CanConvert;
+    const mustConvert = item.viewAccessibility?.MustConvert;
     const isEncrypted = item.encrypted;
     const isDocuSign = false; //TODO: need this prop;
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
@@ -1984,7 +1985,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download-as"]);
       }
 
-      if (!canConvert || isEncrypted) {
+      if (!mustConvert || isEncrypted) {
         fileOptions = this.removeOptions(fileOptions, ["convert"]);
       }
 
@@ -3302,13 +3303,8 @@ class FilesStore {
   };
 
   get sortedFiles() {
-    const {
-      extsConvertible,
-      isSpreadsheet,
-      isPresentation,
-      isDocument,
-      isMasterFormExtension,
-    } = this.filesSettingsStore;
+    const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =
+      this.filesSettingsStore;
 
     let sortedFiles = {
       documents: [],
@@ -3330,9 +3326,7 @@ class FilesStore {
       item.checked = true;
       item.format = null;
 
-      const canConvert = extsConvertible[item.fileExst];
-
-      if (item.fileExst && canConvert) {
+      if (item.fileExst && item.viewAccessibility?.CanConvert) {
         if (isSpreadsheet(item.fileExst)) {
           sortedFiles.spreadsheets.push(item);
         } else if (isPresentation(item.fileExst)) {
@@ -3390,8 +3384,6 @@ class FilesStore {
   }
 
   get canConvertSelected() {
-    const { extsConvertible } = this.filesSettingsStore;
-
     const selection = this.selection.length
       ? this.selection
       : this.bufferSelection
@@ -3399,9 +3391,14 @@ class FilesStore {
       : [];
 
     return selection.some((selected) => {
-      if (selected.isFolder === true || !selected.fileExst) return false;
-      const array = extsConvertible[selected.fileExst];
-      return array;
+      if (
+        selected.isFolder === true ||
+        !selected.fileExst ||
+        !selected.viewAccessibility
+      )
+        return false;
+
+      return selected.viewAccessibility?.CanConvert;
     });
   }
 

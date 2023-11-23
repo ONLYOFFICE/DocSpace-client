@@ -79,6 +79,10 @@ const StyledItem = styled.div<{
       }
     }
   }
+
+  .title-icon {
+    cursor: pointer;
+  }
 `;
 
 StyledItem.defaultProps = { theme: Base };

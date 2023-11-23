@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -8,7 +8,8 @@ import TableCell from "@docspace/components/table-container/TableCell";
 
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
-import TextInput from "@docspace/components/text-input";
+import EmailInput from "@docspace/components/email-input";
+import Button from "@docspace/components/button";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
@@ -36,7 +37,7 @@ const StyledTableRow = styled(TableRow)`
     }
   }
 
-  .email-input {
+  .import-email-input {
     width: 357.67px;
   }
 
@@ -47,33 +48,29 @@ const StyledTableRow = styled(TableRow)`
   }
 `;
 
-const DecisionButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
-  border-radius: 3px;
-  border: 1px solid #d0d5da;
-
-  &:hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.iconButton.hoverColor};
-      }
-    }
-    border-color: ${(props) => props.theme.iconButton.hoverColor};
-  }
 `;
 
 DecisionButton.defaultProps = { theme: Base };
 
-const UsersTableRow = ({ displayName, isChecked, toggleAccount, email, id, changeEmail }) => {
+const UsersTableRow = ({
+  displayName,
+  isChecked,
+  toggleAccount,
+  email,
+  id,
+  changeEmail,
+  isEmailOpen,
+  setOpenedEmailKey,
+}) => {
   const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
 
   const [prevEmail, setPrevEmail] = useState(email);
   const [tempEmail, setTempEmail] = useState(email);
-  const [isEmailOpen, setIsEmailOpen] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPrevEmailValid, setIsPrevEmailValid] = useState(false);
 
   const emailInputRef = useRef();
   const emailTextRef = useRef();
@@ -84,31 +81,46 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount, email, id, chang
 
   const clearEmail = () => {
     setTempEmail(prevEmail);
-    setIsEmailOpen(false);
+    setOpenedEmailKey(null);
   };
 
-  const openEmail = () => setIsEmailOpen(true);
+  const openEmail = () => setOpenedEmailKey(id);
 
   const handleSaveEmail = () => {
     setPrevEmail(tempEmail);
     changeEmail(id, tempEmail);
-    setIsEmailOpen(false);
+    setOpenedEmailKey(null);
+    setIsPrevEmailValid(true);
+    !isChecked && toggleAccount();
   };
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    emailInputRef.current?.contains(e.target) ||
+    !isPrevEmailValid ||
+      emailInputRef.current?.contains(e.target) ||
       emailTextRef.current?.contains(e.target) ||
-      toggleAccount(e);
+      toggleAccount();
   };
+
+  const onValidateEmail = (res) => {
+    setIsEmailValid(res.isValid);
+  };
+
+  useEffect(() => {
+    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail);
+  }, [isEmailOpen]);
 
   if (!ready) return <></>;
 
   return (
-    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
+    <StyledTableRow onClick={handleAccountToggle} isDisabled={!isPrevEmailValid}>
       <TableCell>
-        <Checkbox onChange={handleAccountToggle} isChecked={isChecked} />
+        <Checkbox
+          onChange={handleAccountToggle}
+          isChecked={isChecked}
+          isDisabled={!isPrevEmailValid}
+        />
         <Text fontWeight={600} className="textOverflow">
           {displayName}
         </Text>
@@ -117,25 +129,27 @@ const UsersTableRow = ({ displayName, isChecked, toggleAccount, email, id, chang
       <TableCell>
         {isEmailOpen ? (
           <EmailInputWrapper ref={emailInputRef}>
-            <TextInput
+            <EmailInput
               placeholder={t("Settings:NoEmail")}
-              className="email-input"
+              className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
+              type="email"
+              onValidateInput={onValidateEmail}
             />
 
-            <DecisionButton onClick={handleSaveEmail}>
-              <CheckSvg />
-            </DecisionButton>
-            <DecisionButton onClick={clearEmail}>
-              <CrossSvg />
-            </DecisionButton>
+            <DecisionButton
+              icon={<CheckSvg />}
+              onClick={handleSaveEmail}
+              isDisabled={!isEmailValid}
+            />
+            <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
           </EmailInputWrapper>
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
             <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
-              {tempEmail !== "" ? tempEmail : t("EnterEmail")}
+              {prevEmail !== "" ? prevEmail : t("EnterEmail")}
             </Text>
           </span>
         )}

@@ -56,12 +56,10 @@ const TableView = (props) => {
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
   const tableRef = useRef(null);
 
+  const usersWithFilledEmails = users.withoutEmail.filter((user) => user.email.length > 0);
+
   const toggleAll = (e) =>
-    toggleAllAccounts(e.target.checked, users.withoutEmail, checkedAccountType);
-  const handleToggle = (e, user) => {
-    e.stopPropagation();
-    toggleAccount(user, checkedAccountType);
-  };
+    toggleAllAccounts(e.target.checked, usersWithFilledEmails, checkedAccountType);
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -86,9 +84,12 @@ const TableView = (props) => {
         setHideColumns={setHideColumns}
         isIndeterminate={
           checkedUsers.withoutEmail.length > 0 &&
-          checkedUsers.withoutEmail.length !== users.withoutEmail.length
+          checkedUsers.withoutEmail.length !== usersWithFilledEmails.length
         }
-        isChecked={checkedUsers.withoutEmail.length === users.withoutEmail.length}
+        isChecked={
+          usersWithFilledEmails.length > 0 &&
+          checkedUsers.withoutEmail.length === usersWithFilledEmails.length
+        }
         toggleAll={toggleAll}
       />
       <TableBody
@@ -110,7 +111,9 @@ const TableView = (props) => {
             displayName={data.displayName}
             hideColumns={hideColumns}
             isChecked={isAccountChecked(data.key, checkedAccountType)}
-            toggleAccount={(e) => handleToggle(e, data)}
+            toggleAccount={() => toggleAccount(data, checkedAccountType)}
+            isEmailOpen={openedEmailKey === data.key}
+            setOpenedEmailKey={setOpenedEmailKey}
           />
         ))}
       </TableBody>

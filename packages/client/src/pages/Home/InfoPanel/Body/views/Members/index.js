@@ -526,10 +526,8 @@ export default inject(
       isPublicRoom,
 
       additionalLinks: additionalLinks,
-      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
-      primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,

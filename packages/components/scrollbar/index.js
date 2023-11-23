@@ -103,6 +103,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
     scrollclass,
     stype,
     noScrollY,
+    fixedSize,
     ...rest
   } = props;
 
@@ -182,6 +183,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
       {...rest}
       id={id}
       disableTracksWidthCompensation
+      $fixedSize={fixedSize}
       rtl={isRtl}
       ref={ref}
       {...scrollAutoHideHandlers}
@@ -198,15 +200,16 @@ const Scrollbar = React.forwardRef((props, ref) => {
         },
       }}
       thumbYProps={{
-        className: "nav-thumb-vertical",
+        className: "thumb thumb-vertical",
         style: scrollbarType.thumbV,
       }}
       thumbXProps={{
-        className: "nav-thumb-horizontal",
+        className: "thumb thumb-horizontal",
         style: scrollbarType.thumbH,
       }}
       // Add 1px margin to vertical track to avoid scrollbar lib crashing when event.clientX equals 0
       trackYProps={{
+        className: "track track-vertical",
         style: {
           ...scrollbarType.trackV,
           ...tracksAutoHideStyles,
@@ -217,6 +220,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
         ...tracksAutoHideHandlers,
       }}
       trackXProps={{
+        className: "track track-horizontal",
         style: {
           ...scrollbarType.trackH,
           ...tracksAutoHideStyles,
@@ -241,12 +245,15 @@ Scrollbar.propTypes = {
   autoHide: PropTypes.bool,
   /** Track auto hiding delay in ms.  */
   hideTrackTimer: PropTypes.number,
+  /** Fix scrollbar size. */
+  fixedSize: PropTypes.bool,
 };
 
 Scrollbar.defaultProps = {
   stype: "mediumBlack",
   autoHide: false,
   hideTrackTimer: 500,
+  fixedSize: false,
 };
 
 export default Scrollbar;

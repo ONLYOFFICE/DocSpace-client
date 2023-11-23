@@ -1484,7 +1484,7 @@ class FilesActionStore {
       : this.filesStore.selection;
 
     selection = selection.filter(
-      (el) => !el.isFolder && el.id !== destFolderId
+      (el) => !el.isFolder || el.id !== destFolderId
     );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;

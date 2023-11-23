@@ -41,6 +41,7 @@ import CatalogSettingsSecurity20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cat
 import CatalogSettingsDataManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
+import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
@@ -100,7 +101,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,
     [PageType.restore]: CatalogSettingsRestore20ReactSvgUrl,
     [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
-    [PageType.dataImport]: CatalogSettingsDataReactSvgUrl, //substitute with 20x20 icon
+    [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
@@ -112,22 +113,14 @@ const MobileIconSize = 20;
 const DesktopIconSize = 16;
 const NullURL = "";
 
-const isSettingsCatalog = (
-  pageType: PageUnionType
-): pageType is SettingsPageUnionType => {
+const isSettingsCatalog = (pageType: PageUnionType): pageType is SettingsPageUnionType => {
   return typeof pageType === "string";
 };
 
-export const getCatalogIconUrlByType = (
-  pageType: PageUnionType,
-  options?: OptionsType
-): string => {
-  const size: SizeType =
-    isMobile() || isTablet() ? MobileIconSize : DesktopIconSize;
+export const getCatalogIconUrlByType = (pageType: PageUnionType, options?: OptionsType): string => {
+  const size: SizeType = isMobile() || isTablet() ? MobileIconSize : DesktopIconSize;
 
-  const defaultIconUrl = options?.isSettingsCatalog
-    ? NullURL
-    : defaultIcon[size];
+  const defaultIconUrl = options?.isSettingsCatalog ? NullURL : defaultIcon[size];
 
   return icons[size]?.[pageType] ?? defaultIconUrl;
 };

@@ -42,6 +42,7 @@ import FilesSelector from "../FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
+import LifetimeDialog from "../dialogs/LifetimeDialog";
 
 const Panels = (props) => {
   const {
@@ -56,6 +57,7 @@ const Panels = (props) => {
     deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
+    lifetimeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
     newFilesPanelVisible,
@@ -141,6 +143,7 @@ const Panels = (props) => {
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
@@ -222,6 +225,7 @@ export default inject(
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
       newFilesPanelVisible,
@@ -280,6 +284,7 @@ export default inject(
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
       newFilesPanelVisible,

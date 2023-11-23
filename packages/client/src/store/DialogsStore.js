@@ -20,6 +20,7 @@ class DialogsStore {
   connectDialogVisible = false;
   thirdPartyMoveDialogVisible = false;
   deleteDialogVisible = false;
+  lifetimeDialogVisible = false;
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
   newFilesPanelVisible = false;
@@ -196,6 +197,10 @@ class DialogsStore {
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
     this.deleteDialogVisible = deleteDialogVisible;
+  };
+
+  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+    this.lifetimeDialogVisible = lifetimeDialogVisible;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {

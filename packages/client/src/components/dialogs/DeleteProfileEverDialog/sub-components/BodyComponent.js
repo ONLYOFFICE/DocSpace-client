@@ -12,7 +12,7 @@ const BodyComponent = (props) => {
     onClickReassignData,
     t,
     userPerformedDeletion,
-    user,
+    users,
     onlyOneUser,
   } = props;
 
@@ -38,7 +38,7 @@ const BodyComponent = (props) => {
   const deleteMessage = (
     <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
       {{ userCaption: t("Common:User") }}
-      <strong>{{ user: user.displayName }}</strong>
+      <strong>{{ user: users[0].displayName }}</strong>
     </Trans>
   );
 

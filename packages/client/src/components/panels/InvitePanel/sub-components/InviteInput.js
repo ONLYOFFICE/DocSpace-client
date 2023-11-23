@@ -32,7 +32,7 @@ import {
   ResetLink,
 } from "../StyledInvitePanel";
 
-const searchUsersThreshold = 2;
+const minSearchValue = 2;
 
 const InviteInput = ({
   defaultAccess,
@@ -107,7 +107,7 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length >= searchUsersThreshold) {
+    if (query.length >= minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
@@ -135,14 +135,14 @@ const InviteInput = ({
 
     setInputValue(value);
 
-    if (clearValue.length < searchUsersThreshold) {
+    if (clearValue.length < minSearchValue) {
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
       return;
     }
 
     if (
-      (!!usersList.length || clearValue.length >= searchUsersThreshold) &&
+      (!!usersList.length || clearValue.length >= minSearchValue) &&
       !searchPanelVisible
     ) {
       openInviteInputPanel();
@@ -398,7 +398,7 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= searchUsersThreshold &&
+        {inputValue.length >= minSearchValue &&
           (isAddEmailPanelBlocked ? (
             <></>
           ) : (

@@ -1,4 +1,5 @@
 {
   "DeleteUser": "Διαγραφή χρήστη",
+  "DeleteGroupUsersSuccessMessage": "Οι χρήστες έχουν διαγραφεί επιτυχώς.",
   "SuccessfullyDeleteUserInfoMessage": "Ο χρήστης έχει διαγραφεί επιτυχώς"
 }

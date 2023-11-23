@@ -31,11 +31,13 @@ class SpacesStore {
   };
 
   get isConnected() {
-    return (
-      this.authStore.settingsStore.baseDomain &&
-      this.authStore.settingsStore.baseDomain !== "localhost"
-    );
+    return this.authStore.settingsStore.baseDomain &&
+    this.authStore.settingsStore.baseDomain !== "localhost" && 
+    this.authStore.settingsStore.tenantAlias &&
+    this.authStore.settingsStore.tenantAlias !== "localhost"
   }
+
+
 
   get faviconLogo() {
     const logos = this.authStore.settingsStore.whiteLabelLogoUrls;
@@ -45,14 +47,24 @@ class SpacesStore {
   }
 
   setPortalName = async (portalName: string) => {
-    const res = await setPortalName(portalName);
-    return res;
+    try {
+      const res = await setPortalName(portalName);
+      this.authStore.settingsStore.setTenantAlias(portalName);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   setDomainName = async (domain: string) => {
-    const res = await setDomainName(domain);
-    const { settings } = res;
-    this.authStore.settingsStore.setPortalDomain(settings);
+    try {
+      const res = await setDomainName(domain);
+      const { settings } = res;
+      this.authStore.settingsStore.setPortalDomain(settings);
+    } catch(error) {
+      console.log(error);
+    }
+    
   }
 
   checkDomain = async (domain) => {

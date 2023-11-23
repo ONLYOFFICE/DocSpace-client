@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
   "DeleteUser": "Dzēst lietotāju",
   "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts"
 }

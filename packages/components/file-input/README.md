@@ -11,7 +11,7 @@ import FileInput from "@docspace/components/file-input";
 ```jsx
 <FileInput
   placeholder="Input file"
-  accept=".doc, .docx"
+  accept={[".doc", ".docx"]}
   onInput={(file) => {
     console.log(
       file,

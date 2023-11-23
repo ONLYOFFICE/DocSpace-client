@@ -379,7 +379,7 @@ const Wizard = (props) => {
                 <FileInput
                   scale
                   size="large"
-                  accept=".lic"
+                  accept={[".lic"]}
                   placeholder={t("PlaceholderLicense")}
                   onInput={onLicenseFileHandler}
                   hasError={hasErrorLicense}
@@ -401,8 +401,8 @@ const Wizard = (props) => {
               <ComboBox
                 withoutPadding
                 directionY="both"
-                options={cultureNames}
-                selectedOption={selectedLanguage}
+                options={cultureNames || []}
+                selectedOption={selectedLanguage || {}}
                 onSelect={onLanguageSelect}
                 isDisabled={isCreated}
                 scaled={isMobile()}
@@ -425,8 +425,8 @@ const Wizard = (props) => {
                 textOverflow
                 withoutPadding
                 directionY="both"
-                options={timezones}
-                selectedOption={selectedTimezone}
+                options={timezones || []}
+                selectedOption={selectedTimezone || {}}
                 onSelect={onTimezoneSelect}
                 isDisabled={isCreated}
                 scaled={isMobile()}

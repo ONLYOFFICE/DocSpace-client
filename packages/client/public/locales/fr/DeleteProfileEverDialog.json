@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Les utilisateurs ont été supprimés avec succès.",
   "DeleteMyDocumentsUser": "Tous les fichiers et dossiers personnels de la section Mes documents de cet utilisateur seront définitivement supprimés.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Les salles créées par cet utilisateur et les documents stockés dans ces salles seront automatiquement réaffectés à l'administrateur chargé de la suppression : <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Réaffectez les données manuellement pour choisir un autre utilisateur de destination pour la réaffectation.",
   "DeleteUser": "Supprimer l'utilisateur",

@@ -123,16 +123,6 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           )}
         </div>
 
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize={"14px"}
-          noSelect
-          truncate
-        >
-          {label}
-        </Text>
-
         {isMultiSelect && (
           <Checkbox
             className="checkbox"

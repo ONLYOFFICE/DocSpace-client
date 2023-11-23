@@ -281,25 +281,43 @@ const PreviewDialog = ({
                 value={scriptBlock}
               />
             </div>
+            <div className="block-container">
+              {/* @ts-ignore */}
+              <Text
+                fontWeight={600}
+                lineHeight={"20px"}
+                fontSize={"13px"}
+                noSelect
+              >
+                Authorize link
+              </Text>
+              <Textarea
+                heightTextArea={64}
+                enableCopy
+                isReadOnly
+                isDisabled
+                value={link}
+              />
+            </div>
+            <div className="block-container">
+              {/* @ts-ignore */}
+              <Text
+                fontWeight={600}
+                lineHeight={"20px"}
+                fontSize={"13px"}
+                noSelect
+              >
+                Code verifier
+              </Text>
+              <Textarea
+                heightTextArea={64}
+                enableCopy
+                isReadOnly
+                isDisabled
+                value={codeVerifier}
+              />
+            </div>
           </StyledBlocksContainer>
-          <div className="block-container">
-            {/* @ts-ignore */}
-            <Text
-              fontWeight={600}
-              lineHeight={"20px"}
-              fontSize={"13px"}
-              noSelect
-            >
-              Code verifier
-            </Text>
-            <Textarea
-              heightTextArea={64}
-              enableCopy
-              isReadOnly
-              isDisabled
-              value={codeVerifier}
-            />
-          </div>
         </StyledContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>

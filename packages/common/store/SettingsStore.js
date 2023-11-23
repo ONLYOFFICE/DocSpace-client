@@ -1082,7 +1082,9 @@ class SettingsStore {
   }
 
   get enablePortalRename() {
-    return this.standalone && this.baseDomain !== "localhost";
+    return (
+      !this.standalone || (this.standalone && this.baseDomain !== "localhost")
+    );
   }
 }
 

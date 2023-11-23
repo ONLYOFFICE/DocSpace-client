@@ -59,8 +59,10 @@ const MainProfile = (props) => {
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+  const [dimension, setDimension] = useState(window.innerHeight);
   const { interfaceDirection } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
@@ -68,6 +70,7 @@ const MainProfile = (props) => {
   }, []);
 
   const checkWidth = () => {
+    setDimension(innerHeight);
     if (!isMobileOnly) return;
 
     if (!isMobile()) {
@@ -302,7 +305,7 @@ const MainProfile = (props) => {
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
-                dropDownMaxHeight={364}
+                dropDownMaxHeight={dimension < 620 ? 200 : 364}
                 manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation

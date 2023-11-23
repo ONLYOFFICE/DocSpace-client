@@ -42,5 +42,5 @@ Default.args = {
   name: "demoFileInputName",
   hasError: false,
   hasWarning: false,
-  accept: ".doc, .docx",
+  accept: [".doc", ".docx"],
 };

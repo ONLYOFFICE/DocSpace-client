@@ -150,7 +150,11 @@ const InviteInput = ({
 
     if (roomId !== -1) {
       debouncedSearch(clearValue);
+
+      return;
     }
+
+    setIsAddEmailPanelBlocked(false);
   };
 
   const removeExist = (items) => {
@@ -394,24 +398,23 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= searchUsersThreshold && (
-          <StyledDropDown
-            width={searchRef?.current?.offsetWidth}
-            isDefaultMode={false}
-            open={
-              !!usersList.length
-                ? searchPanelVisible
-                : searchPanelVisible && !isAddEmailPanelBlocked
-            }
-            manualX="16px"
-            showDisabledItems
-            clickOutsideAction={closeInviteInputPanel}
-            eventTypes="click"
-            {...dropDownMaxHeight}
-          >
-            {!!usersList.length ? foundUsers : addEmailPanel}
-          </StyledDropDown>
-        )}
+        {inputValue.length >= searchUsersThreshold &&
+          (isAddEmailPanelBlocked ? (
+            <></>
+          ) : (
+            <StyledDropDown
+              width={searchRef?.current?.offsetWidth}
+              isDefaultMode={false}
+              open={searchPanelVisible}
+              manualX="16px"
+              showDisabledItems
+              clickOutsideAction={closeInviteInputPanel}
+              eventTypes="click"
+              {...dropDownMaxHeight}
+            >
+              {!!usersList.length ? foundUsers : addEmailPanel}
+            </StyledDropDown>
+          ))}
 
         <AccessSelector
           className="add-manually-access"

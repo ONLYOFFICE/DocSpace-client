@@ -220,7 +220,7 @@ export default inject(({ peopleStore }) => {
 
   const onlyUsers = selection.every((el) => el.role === "user");
   const deleteWithoutReassign = selection.length > 1 && !onlyUsers;
-  const onlyOneUser = selection.length === 1;
+  const onlyOneUser = selection.length <= 1;
 
   return {
     setDataReassignmentDialogVisible,

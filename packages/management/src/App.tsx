@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, Provider as MobxProvider } from "mobx-react";
 import { I18nextProvider, useTranslation } from "react-i18next";
+import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
 import { Outlet } from "react-router-dom";
 
 import { isMobileOnly } from "react-device-detect";
@@ -27,7 +28,7 @@ const App = observer(() => {
 
   const { authStore } = useStore();
   const { init, settingsStore, userStore } = authStore;
-  const { theme, setTheme, currentColorScheme } = settingsStore;
+  const { theme, setTheme, currentColorScheme, limitedAccessSpace } = settingsStore;
 
   const userTheme = userStore?.user?.theme ? userStore?.user?.theme : "Dark";
 
@@ -51,8 +52,8 @@ const App = observer(() => {
     <Toast />
   );
 
-
-  if (userStore?.user &&  !userStore?.user?.isAdmin) return <Error403 />
+  if (userStore?.user && !userStore?.user?.isAdmin || limitedAccessSpace) return <Error403 />
+  if (userStore?.isLoaded && !userStore?.user) return tryRedirectTo(window.location.origin);
 
   return (
     <ThemeProvider

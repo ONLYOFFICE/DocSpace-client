@@ -66,6 +66,7 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+  titleIconTooltip,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -224,6 +225,7 @@ const Body = ({
                     isMultiSelect,
                     rowLoader,
                     isItemLoaded,
+                    titleIconTooltip,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

@@ -18,6 +18,7 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: any;
+  titleIconTooltip?: string;
 };
 
 export type ItemProps = {

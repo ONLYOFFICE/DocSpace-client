@@ -31,8 +31,14 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
 };
 
 const Item = React.memo(({ index, style, data }: ItemProps) => {
-  const { items, onSelect, isMultiSelect, isItemLoaded, rowLoader }: Data =
-    data;
+  const {
+    items,
+    onSelect,
+    isMultiSelect,
+    isItemLoaded,
+    rowLoader,
+    titleIconTooltip,
+  }: Data = data;
 
   const isLoaded = isItemLoaded(index);
 
@@ -96,7 +102,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             {label}
           </Text>
 
-          {true && (
+          {titleIconTooltip && (
             <>
               <ReactSVG
                 data-tooltip-id="iconTooltip"
@@ -108,7 +114,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
                 place="bottom"
                 getContent={() => (
                   <Text fontSize="12px" fontWeight={400} noSelect>
-                    aaaaaaaaaa
+                    {titleIconTooltip}
                   </Text>
                 )}
                 maxWidth="300px"

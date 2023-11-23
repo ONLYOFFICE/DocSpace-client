@@ -43,4 +43,5 @@ export type BodyProps = {
   withFooterCheckbox?: boolean;
 
   descriptionText?: string;
+  titleIconTooltip?: string;
 };

@@ -498,6 +498,8 @@ const FilesSelector = ({
     isRestore
   );
 
+  const titleIconTooltip = t("Files:RoomFilesLifetime", { days: 12 }); // TODO: days
+
   const SelectorBody = (
     <Selector
       withHeader={withHeader}
@@ -563,6 +565,7 @@ const FilesSelector = ({
       cancelButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
+      titleIconTooltip={titleIconTooltip}
     />
   );
 

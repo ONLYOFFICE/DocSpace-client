@@ -70,9 +70,15 @@ app.get("*", async (req: ILoginRequest, res: Response, next) => {
   initSSR(headers);
 
   try {
-    const oauthClientId = (query.client_id as string) || "";
+    const oauthClientId =
+      (query.client_id as string) || (query.clientId as string) || "";
 
     const isOAuth = query.type === "oauth2" && !!oauthClientId;
+
+    if (isOAuth && oauthClientId === "error") {
+      res.redirect("/login/error");
+      return next();
+    }
 
     const isAuth = await checkIsAuthenticated();
 

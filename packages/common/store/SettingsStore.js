@@ -130,6 +130,7 @@ class SettingsStore {
   nameSchemaId = null;
   owner = {};
   wizardToken = null;
+  limitedAccessSpace = null;
   passwordSettings = null;
   hasShortenService = false;
   withPaging = false;

@@ -44,7 +44,7 @@ const ChangeDomainDialogComponent = () => {
 
   const onClickDomainChange = async () => {
 
-    const isValidDomain = parseDomain(domain, setDomainNameError);
+    const isValidDomain = parseDomain(domain, setDomainNameError, t);
 
     if (!isValidDomain) return;
 
@@ -83,7 +83,7 @@ const ChangeDomainDialogComponent = () => {
           />
              <div>
               {domainNameError && domainNameError.map((err, index) => (
-                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err.message}</Text>
+                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err}</Text>
               ))}
             </div>
         </div>

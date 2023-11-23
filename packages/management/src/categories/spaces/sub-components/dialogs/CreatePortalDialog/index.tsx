@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { TextInput, Checkbox } from "@docspace/components";
 import { useStore } from "SRC_DIR/store";
+import { validatePortalName } from "SRC_DIR/utils";
 
 const StyledModal = styled(ModalDialogContainer)`
   #modal-dialog {
@@ -41,7 +42,7 @@ const CreatePortalDialog = () => {
   const [registerError, setRegisterError] = React.useState<null | string>(null);
 
   const { spacesStore, authStore } = useStore();
-  const { tenantAlias, baseDomain } = authStore.settingsStore;
+  const { tenantAlias, baseDomain, domainValidator } = authStore.settingsStore;
 
   const {
     createPortalDialogVisible: visible,
@@ -72,6 +73,9 @@ const CreatePortalDialog = () => {
     const protocol = window?.location?.protocol;
     const host = `${tenantAlias}.${baseDomain}`;
 
+    const isValidPortalName = validatePortalName(name, domainValidator, setRegisterError, t)
+
+    if (isValidPortalName) {
       await createNewPortal(data)
       .then( async (data) => {
         const {tenant} = data;
@@ -88,7 +92,7 @@ const CreatePortalDialog = () => {
       .catch((error) => {
         setRegisterError(error?.response?.data?.message);
       })
-
+    }
   };
 
   const onClose = () => {

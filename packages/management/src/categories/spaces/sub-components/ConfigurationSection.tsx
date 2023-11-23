@@ -5,7 +5,8 @@ import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
-import { parseDomain } from "SRC_DIR/utils";
+import { parseDomain, validatePortalName } from "SRC_DIR/utils";
+import toastr from "@docspace/components/toast/toastr";
 
 import { TranslationType } from "SRC_DIR/types/spaces";
 
@@ -33,26 +34,32 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   const onConfigurationPortal = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
-      const res = await checkDomain(`${name}.${domain}`).finally(() =>
+      const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(() =>
         setIsLoading(false)
       );
-      const isValidDomain = res?.value;
+      const isValidDomain = checkDomainResult?.value;
 
       if (!isValidDomain) {
         return setCheckDomainError(t("DomainNotFound"));
       }
     }
 
-    const isValidDomain = parseDomain(domain, setDomainNameError);
+    const nameValidator = authStore.settingsStore.domainValidator;
 
-    if (!isValidDomain) return;
+    const isValidDomain = parseDomain(domain, setDomainNameError, t);
+    const isValidPortalName = validatePortalName(name, nameValidator, setPortalNameError, t)
 
-    await setPortalName(name)
-      .then(async () => await setDomainName(domain))
-      .catch((err) => {
-        setPortalNameError(err?.response?.data?.error?.message);
-      });
-    await authStore.settingsStore.getAllPortals();
+    if (isValidDomain && isValidPortalName) {
+
+      try {
+        await setDomainName(domain);
+        await setPortalName(name);
+        await authStore.settingsStore.getAllPortals();
+        
+      } catch (err) {
+        toastr.error(err);
+      }
+    }
   };
 
   const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +114,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
                   fontWeight="400"
                   color="#F24724"
                 >
-                  {err.message}
+                  {err}
                 </Text>
               ))}
           </div>

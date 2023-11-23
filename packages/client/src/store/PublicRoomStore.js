@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/common/api";
 import FilesFilter from "@docspace/common/api/files/filter";
-import { LinkType, ValidationResult } from "../helpers/constants";
+import { LinkType, ValidationStatus } from "../helpers/constants";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
@@ -32,7 +32,7 @@ class PublicRoomStore {
     this.roomStatus = status;
     this.roomType = roomType;
 
-    if (status === ValidationResult.Ok) this.isLoaded = true;
+    if (status === ValidationStatus.Ok) this.isLoaded = true;
   };
 
   fetchExternalLinks = (roomId) => {

@@ -6,26 +6,23 @@ const StyledScrollbar = styled(Scrollbar)`
   .scroll-body {
     position: relative;
   }
-  .nav-thumb-vertical {
+  .nav-thumb-vertical,
+  .nav-thumb-horizontal {
     background-color: ${(props) =>
-      props.color
-        ? props.color
-        : props.theme.scrollbar.backgroundColorVertical} !important;
+      props.color ? props.color : props.theme.scrollbar.bgColor} !important;
     z-index: 201;
     position: relative;
 
-    :hover,
+    :hover {
+      background-color: ${(props) =>
+        props.theme.scrollbar.hoverBgColor} !important;
+    }
+
     :active,
     &.dragging {
       background-color: ${(props) =>
-        props.theme.scrollbar.hoverBackgroundColorVertical} !important;
+        props.theme.scrollbar.pressBgColor} !important;
     }
-  }
-  .nav-thumb-horizontal {
-    background-color: ${(props) =>
-      props.color
-        ? props.color
-        : props.theme.scrollbar.backgroundColorHorizontal} !important;
   }
 `;
 

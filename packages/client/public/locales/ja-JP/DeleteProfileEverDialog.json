@@ -1,4 +1,5 @@
 {
   "DeleteUser": "ユーザーを削除します",
+  "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。"
 }

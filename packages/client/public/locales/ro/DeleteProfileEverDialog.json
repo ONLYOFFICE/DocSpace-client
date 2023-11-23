@@ -1,4 +1,5 @@
 {
   "DeleteUser": "Șterge utilizatorul",
+  "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",
   "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes"
 }

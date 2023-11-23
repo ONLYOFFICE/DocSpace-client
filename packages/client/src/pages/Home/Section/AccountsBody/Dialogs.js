@@ -70,7 +70,7 @@ const Dialogs = ({
         <DeleteProfileEverDialog
           visible={deleteProfileEver}
           onClose={closeDialogs}
-          user={data}
+          users={data}
         />
       )}
       {changeUserTypeDialogVisible && (

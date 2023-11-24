@@ -5,7 +5,7 @@
 import emailAddresses, { ParsedGroup, ParsedMailbox } from "email-addresses";
 import punycode from "punycode";
 
-import { ErrorKeys, ParseErrorTypes } from "enums";
+import { ErrorKeys, ParseErrorTypes } from "../../enums";
 
 import { EmailSettings } from "./emailSettings";
 
@@ -14,7 +14,10 @@ import { EmailSettings } from "./emailSettings";
  * @param {String} str
  * @return {Email} result
  */
-export const parseAddress = (str: string, options = new EmailSettings()) => {
+export const parseAddress = (
+  str: string,
+  options: EmailSettings | { [key: string]: boolean } = new EmailSettings(),
+) => {
   const parsedEmails = parseAddresses(str, options);
 
   if (!parsedEmails.length) {
@@ -43,20 +46,20 @@ export const parseAddress = (str: string, options = new EmailSettings()) => {
 };
 
 export class Email {
-  email: string;
+  email?: string;
 
-  name: string;
+  name?: string;
 
-  parseErrors: {
+  parseErrors?: {
     message: string | null;
     type: ParseErrorTypes;
     errorKey: ErrorKeys;
   }[];
 
   constructor(
-    name: string | null,
-    email: string,
-    parseErrors: {
+    name?: string | null,
+    email?: string,
+    parseErrors?: {
       message: string;
       type: ParseErrorTypes;
       errorKey: ErrorKeys;
@@ -68,10 +71,10 @@ export class Email {
   }
 
   isValid = () => {
-    return this.parseErrors.length === 0;
+    return this.parseErrors?.length === 0;
   };
 
-  equals(this: any, addr: Email | string) {
+  equals(this: any, addr: { [key: string]: string } | string | Email) {
     if (typeof addr === "object" && addr instanceof Email) {
       return (
         "email" in this && this?.email === addr.email && this.name === addr.name
@@ -295,7 +298,10 @@ const parseOneAddress = (str: string, options: EmailSettings) => {
  * @param {String} str
  * @return {Array} result with array of Email objects
  */
-export const parseAddresses = (str: string, options = new EmailSettings()) => {
+export const parseAddresses = (
+  str: string,
+  options: EmailSettings | { [key: string]: boolean } = new EmailSettings(),
+) => {
   if (!(options instanceof EmailSettings))
     throw new TypeError("Invalid options");
 

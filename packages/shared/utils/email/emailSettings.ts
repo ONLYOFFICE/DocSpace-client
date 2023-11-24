@@ -12,8 +12,8 @@ export class EmailSettings {
   }
 
   static equals = (
-    settings1: { [key: string]: string },
-    settings2: { [key: string]: string },
+    settings1: { [key: string]: boolean | string },
+    settings2: { [key: string]: boolean | string },
   ) => {
     const instance1 = EmailSettings.parse(settings1);
     const instance2 = EmailSettings.parse(settings2);
@@ -157,13 +157,13 @@ export class EmailSettings {
     this.allowLocalDomainName = true;
   }
 
-  static parse = (settings: { [key: string]: string }) => {
+  static parse = (settings: { [key: string]: string | boolean }) => {
     if (settings instanceof EmailSettings) return settings;
 
     if (typeof settings !== "object") throw new Error("Invalid argument");
 
     const defaultSettings = new EmailSettings();
-    Object.keys(settings).forEach((key: string) => {
+    Object.keys(settings).forEach((key: string | boolean) => {
       // @ts-expect-error Need review this
       if (!(key in defaultSettings) || defaultSettings[key] === settings[key])
         return;

@@ -248,7 +248,9 @@ const AddUsersPanel = ({
           emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
           searchEmptyScreenImage={emptyScreenImage}
           searchEmptyScreenHeader={t("People:NotFoundUsers")}
-          searchEmptyScreenDescription={t("SearchEmptyDescription")}
+          searchEmptyScreenDescription={t(
+            "PeopleSelector:SearchEmptyDescription"
+          )}
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}

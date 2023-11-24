@@ -1,6 +1,7 @@
 import Scrollbar from "react-scrollbars-custom";
 import styled from "styled-components";
 import Base from "../themes/base";
+import { desktop, mobile, tablet } from "../utils/device";
 
 const StyledScrollbar = styled(Scrollbar)`
   .scroll-body {
@@ -13,13 +14,23 @@ const StyledScrollbar = styled(Scrollbar)`
     padding: 4px;
     border-radius: 8px !important;
 
-    &:hover {
-      .thumb-vertical {
-        width: 8px !important;
-      }
+    @media ${desktop} {
+      &:hover {
+        .thumb-vertical {
+          width: 8px !important;
+        }
 
-      .thumb-horizontal {
-        height: 8px !important;
+        .thumb-horizontal {
+          height: 8px !important;
+        }
+      }
+    }
+
+    @media ${tablet} {
+      pointer-events: none;
+
+      .thumb {
+        pointer-events: all;
       }
     }
   }
@@ -75,8 +86,14 @@ const StyledScrollbar = styled(Scrollbar)`
     width: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: width linear 0.1s;
 
-    &:active {
-      width: 8px !important;
+    @media ${desktop} {
+      &:active {
+        width: 8px !important;
+      }
+    }
+
+    @media ${tablet} {
+      width: 4px !important;
     }
   }
 
@@ -84,8 +101,14 @@ const StyledScrollbar = styled(Scrollbar)`
     height: ${({ $fixedSize }) => ($fixedSize ? "8px" : "4px")} !important;
     transition: height linear 0.1s;
 
-    &:active {
-      height: 8px !important;
+    @media ${desktop} {
+      &:active {
+        height: 8px !important;
+      }
+    }
+
+    @media ${tablet} {
+      height: 4px !important;
     }
   }
 `;

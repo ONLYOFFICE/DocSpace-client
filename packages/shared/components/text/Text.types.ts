@@ -1,32 +1,41 @@
 export interface TextProps {
   /** Sets the tag through which the component is rendered */
-  as: string;
+  as?: React.ElementType;
   /** Accepts the tag id */
-  tag: string;
+  tag?: string;
   /** Sets background color */
-  backgroundColor: string;
+  backgroundColor?: string;
   /** Specifies the text color */
-  color: string;
+  color?: string;
   /** Sets the 'display' property */
-  display: string;
+  display?: string;
   /** Sets the font size */
-  fontSize: string;
+  fontSize?: string;
   /** Sets the font weight */
-  fontWeight: number | string;
+  fontWeight?: number | string;
   /** Sets font weight value to bold */
-  isBold: boolean;
-  /** Sets the 'display: inline-block' property */
-  isInline: boolean;
+  isBold?: boolean;
+  /** Sets the 'display?: inline-block' property */
+  isInline?: boolean;
   /** Sets the font style */
-  isItalic: boolean;
+  isItalic?: boolean;
   /** Sets the line height */
-  lineHeight: string;
+  lineHeight?: string;
   /** Disables text selection */
-  noSelect: boolean;
+  noSelect?: boolean;
   /** Sets the 'text-align' property */
-  textAlign: string;
+  textAlign?: string;
   /** Title */
-  title: string;
+  title?: string;
   /** Disables word wrapping */
-  truncate: boolean;
+  truncate?: boolean;
+
+  children?: React.ReactNode;
+}
+
+export interface StyledTextProps {
+  fontSizeProp?: string;
+  fontWeightProp?: string;
+  colorProp?: string;
+  textAlign?: string;
 }

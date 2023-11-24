@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import StyledText from "./styled-text";
 
+import StyledText from "./Text.styled";
 import { TextProps } from "./Text.types";
 
-const Text = ({
+const TextPure = ({
   title,
   tag,
   as,
@@ -22,15 +21,13 @@ const Text = ({
       textAlign={textAlign}
       as={!as && tag ? tag : as}
       title={title}
+      data-testid="text"
       {...rest}
     />
   );
 };
 
-Text.propTypes = {};
-
-Text.defaultProps = {
-  title: null,
+TextPure.defaultProps = {
   textAlign: "left",
   fontSize: "13px",
   truncate: false,
@@ -40,4 +37,6 @@ Text.defaultProps = {
   noSelect: false,
 };
 
-export default React.memo(Text);
+const Text = React.memo<TextProps>(TextPure);
+
+export { Text };

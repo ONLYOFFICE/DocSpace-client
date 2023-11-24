@@ -5,7 +5,7 @@ Component that displays plain text
 ## Usage
 
 ```js
-import Text from "@docspace/components/text";
+import Text from "@docspace/shared/components";
 ```
 
 ```jsx

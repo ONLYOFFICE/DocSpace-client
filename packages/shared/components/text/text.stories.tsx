@@ -1,9 +1,13 @@
 import React from "react";
-import Text from "./";
+import type { Meta, StoryObj } from "@storybook/react";
 
-const textTags = ["p", "span", "div"];
+import { Text } from "./index";
 
-export default {
+type TextPropsAndCustomArgs = React.ComponentProps<typeof Text> & {
+  exampleText?: string;
+};
+
+const meta = {
   title: "Components/Text",
   component: Text,
   parameters: {
@@ -16,36 +20,34 @@ export default {
   argTypes: {
     color: { control: "color" },
     backgroundColor: { control: "color" },
-    exampleText: {
-      table: {
-        disable: true,
-      },
-    },
+    // exampleText: {
+    //   table: {
+    //     disable: true,
+    //   },
+    // },
   },
-};
+} satisfies Meta<TextPropsAndCustomArgs>;
 
-const Template = ({
-  exampleText,
-  ...args
-}: any) => {
-  return (
+type Story = StoryObj<TextPropsAndCustomArgs>;
+
+export default meta;
+
+export const Default: Story = {
+  render: (args) => (
     <div style={{ width: "100%" }}>
-      <Text {...args}>{exampleText}</Text>
+      <Text {...args}>{args.exampleText}</Text>
     </div>
-  );
-};
-
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ example... Remove this comment to see the full error message
-Default.args = {
-  title: "",
-  as: "p",
-  fontSize: "13px",
-  fontWeight: "400",
-  truncate: false,
-  backgroundColor: "",
-  isBold: false,
-  isItalic: false,
-  isInline: false,
-  exampleText: "Sample text",
+  ),
+  args: {
+    title: "",
+    as: "p",
+    fontSize: "13px",
+    fontWeight: "400",
+    truncate: false,
+    backgroundColor: "",
+    isBold: false,
+    isItalic: false,
+    isInline: false,
+    exampleText: "Sample text",
+  },
 };

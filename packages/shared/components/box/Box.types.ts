@@ -66,5 +66,4 @@ export interface BoxProps {
   widthProp?: string;
 
   children?: React.ReactNode;
-  testId?: string;
 }

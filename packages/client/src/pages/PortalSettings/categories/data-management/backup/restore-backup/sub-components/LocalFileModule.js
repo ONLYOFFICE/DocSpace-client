@@ -12,7 +12,7 @@ const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
       scale
       className="restore-backup_input"
       isDisabled={!isEnableRestore}
-      accept={[".tar", ".tar.gz"]}
+      accept={[".tar", ".gz"]}
     />
   );
 };

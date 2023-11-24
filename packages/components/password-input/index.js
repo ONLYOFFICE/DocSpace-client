@@ -430,7 +430,7 @@ class PasswordInput extends React.Component {
             ref={this.refTooltip}
             offsetTop={this.props.tooltipOffsetTop}
             offsetLeft={this.props.tooltipOffsetLeft}
-            anchorSelect="div[id='tooltipContent'] input"
+            anchorSelect="div[id='tooltipContent']"
           >
             {this.renderTooltipContent()}
           </Tooltip>

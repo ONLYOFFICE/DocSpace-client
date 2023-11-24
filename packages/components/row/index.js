@@ -42,6 +42,7 @@ class Row extends React.Component {
       contextTitle,
       badgesComponent,
       isArchive,
+      isDisabled,
     } = this.props;
 
     const { onRowClick, inProgress, mode, onContextClick, ...rest } =
@@ -124,6 +125,7 @@ class Row extends React.Component {
                   isChecked={checked}
                   isIndeterminate={indeterminate}
                   onChange={changeCheckbox}
+                  isDisabled={isDisabled}
                 />
               </StyledCheckbox>
             )}
@@ -144,6 +146,7 @@ class Row extends React.Component {
                   isChecked={checked}
                   isIndeterminate={indeterminate}
                   onChange={changeCheckbox}
+                  isDisabled={isDisabled}
                 />
               </StyledCheckbox>
             )}
@@ -238,6 +241,8 @@ Row.propTypes = {
   mode: PropTypes.string,
   /** Removes the borders */
   withoutBorder: PropTypes.bool,
+  /** Disables checkbox */
+  isDisabled: PropTypes.bool,
 };
 
 Row.defaultProps = {
@@ -245,6 +250,7 @@ Row.defaultProps = {
   mode: "default",
   data: {},
   withoutBorder: false,
+  isDisabled: false,
 };
 
 export default Row;

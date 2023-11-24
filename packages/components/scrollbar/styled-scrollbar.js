@@ -35,8 +35,22 @@ const StyledScrollbar = styled(Scrollbar)`
   .track-horizontal {
     width: 100% !important;
     height: 16px !important;
-    left: 0 !important;
     align-items: flex-end;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `left: unset !important; right: 0 !important;`
+        : `left: 0 !important;`}
+  }
+
+  &.trackYVisible.trackXVisible {
+    .track-vertical {
+      height: calc(100% - 16px) !important;
+    }
+
+    .track-horizontal {
+      width: calc(100% - 16px) !important;
+    }
   }
 
   .thumb {

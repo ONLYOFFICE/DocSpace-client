@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
+import { DefaultTheme, useTheme } from "styled-components";
 
-import { classNames } from "../utils/classNames";
-import { isMobile } from "../utils/device";
-import StyledScrollbar from "./styled-scrollbar";
-import { useTheme } from "styled-components";
+import { classNames, isMobile } from "../../utils/index";
+
+import StyledScrollbar from "./Scrollbar.styled";
+import { ScrollbarType } from "./Scrollbar.enums";
+import { ScrollbarProps } from "./Scrollbar.types";
+
+export { ScrollbarType };
 
 const scrollbarTypes = {
   smallWhite: {
@@ -94,46 +97,38 @@ const scrollbarTypes = {
   },
 };
 
-const Scrollbar = React.forwardRef((props, ref) => {
+const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
   const {
-    // @ts-expect-error TS(2339): Property 'id' does not exist on type '{}'.
     id,
-    // @ts-expect-error TS(2339): Property 'onScroll' does not exist on type '{}'.
     onScroll,
-    // @ts-expect-error TS(2339): Property 'autoHide' does not exist on type '{}'.
     autoHide,
-    // @ts-expect-error TS(2339): Property 'hideTrackTimer' does not exist on type '... Remove this comment to see the full error message
     hideTrackTimer,
-    // @ts-expect-error TS(2339): Property 'scrollclass' does not exist on type '{}'... Remove this comment to see the full error message
-    scrollclass,
-    // @ts-expect-error TS(2339): Property 'stype' does not exist on type '{}'.
+    scrollClass,
     stype,
-    // @ts-expect-error TS(2339): Property 'noScrollY' does not exist on type '{}'.
     noScrollY,
     ...rest
   } = props;
 
-  // @ts-expect-error TS(2339): Property 'interfaceDirection' does not exist on ty... Remove this comment to see the full error message
-  const { interfaceDirection } = useTheme();
-  const [isScrolling, setIsScrolling] = useState();
-  const [isMouseOver, setIsMouseOver] = useState();
-  const timerId = useRef();
+  const defaultTheme: DefaultTheme = useTheme();
+
+  const interfaceDirection: string = defaultTheme?.interfaceDirection;
+
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
+  const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
 
   const isRtl = interfaceDirection === "rtl";
 
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const scrollbarType = scrollbarTypes[stype] ?? {};
 
   const showTrack = () => {
-    clearTimeout(timerId.current);
-    // @ts-expect-error TS(2345): Argument of type 'true' is not assignable to param... Remove this comment to see the full error message
+    if (timerId.current) clearTimeout(timerId.current);
+
     setIsScrolling(true);
   };
 
   const hideTrack = () => {
-    // @ts-expect-error TS(2322): Type 'Timeout' is not assignable to type 'undefine... Remove this comment to see the full error message
     timerId.current = setTimeout(() => {
-      // @ts-expect-error TS(2345): Argument of type 'false' is not assignable to para... Remove this comment to see the full error message
       setIsScrolling(false);
     }, hideTrackTimer);
   };
@@ -147,13 +142,13 @@ const Scrollbar = React.forwardRef((props, ref) => {
 
   const onMouseEnter = () => {
     showTrack();
-    // @ts-expect-error TS(2345): Argument of type 'true' is not assignable to param... Remove this comment to see the full error message
+
     setIsMouseOver(true);
   };
 
   const onMouseLeave = () => {
     hideTrack();
-    // @ts-expect-error TS(2345): Argument of type 'false' is not assignable to para... Remove this comment to see the full error message
+
     setIsMouseOver(false);
   };
 
@@ -169,12 +164,14 @@ const Scrollbar = React.forwardRef((props, ref) => {
     : {};
 
   // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
-  const renderScroller = (libProps: any) => {
+  const renderScroller = (libProps: {
+    elementRef: React.RefObject<HTMLDivElement>;
+  }) => {
     const { elementRef, ...restLibProps } = libProps;
     return (
       <div
         {...restLibProps}
-        className={classNames("scroller", scrollclass)}
+        className={classNames("scroller", scrollClass || "") || "scroller"}
         ref={elementRef}
         onScroll={onScroll}
       />
@@ -182,7 +179,9 @@ const Scrollbar = React.forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    return () => clearTimeout(timerId.current);
+    return () => {
+      if (timerId.current) clearTimeout(timerId.current);
+    };
   }, []);
 
   const disableScrolling = noScrollY
@@ -195,6 +194,7 @@ const Scrollbar = React.forwardRef((props, ref) => {
     <StyledScrollbar
       {...rest}
       id={id}
+      data-testid="scrollbar"
       disableTracksWidthCompensation
       rtl={isRtl}
       ref={ref}
@@ -242,27 +242,12 @@ const Scrollbar = React.forwardRef((props, ref) => {
   );
 });
 
-Scrollbar.propTypes = {
-  /** Scrollbar style type */
-  // @ts-expect-error TS(2322): Type '{ stype: PropTypes.Requireable<string>; clas... Remove this comment to see the full error message
-  stype: PropTypes.string,
-  /** Accepts class */
-  className: PropTypes.string,
-  /** Accepts id  */
-  id: PropTypes.string,
-  /** Accepts css style  */
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** Enable tracks auto hiding.  */
-  autoHide: PropTypes.bool,
-  /** Track auto hiding delay in ms.  */
-  hideTrackTimer: PropTypes.number,
-};
+Scrollbar.displayName = "Scrollbar";
 
 Scrollbar.defaultProps = {
-  // @ts-expect-error TS(2322): Type '{ stype: string; autoHide: boolean; hideTrac... Remove this comment to see the full error message
-  stype: "mediumBlack",
+  stype: ScrollbarType.mediumBlack,
   autoHide: false,
   hideTrackTimer: 500,
 };
 
-export default Scrollbar;
+export { Scrollbar };

@@ -1,7 +1,8 @@
 import React from "react";
-import Scrollbar from "./";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Scrollbar, ScrollbarType } from ".";
 
-export default {
+const meta = {
   title: "Components/Scrollbar",
   component: Scrollbar,
   parameters: {
@@ -11,10 +12,13 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof Scrollbar>;
+type Story = StoryObj<typeof Scrollbar>;
 
-const Template = (args: any) => {
-  return (
+export default meta;
+
+export const Default: Story = {
+  render: (args) => (
     <Scrollbar {...args}>
       ================================================================ Lorem
       ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -32,12 +36,9 @@ const Template = (args: any) => {
       est laborum.
       ================================================================
     </Scrollbar>
-  );
-};
-
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-Default.args = {
-  stype: "mediumBlack",
-  style: { width: 300, height: 200 },
+  ),
+  args: {
+    stype: ScrollbarType.mediumBlack,
+    style: { width: 300, height: 200 },
+  },
 };

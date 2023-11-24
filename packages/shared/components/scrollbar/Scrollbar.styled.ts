@@ -1,6 +1,6 @@
 import Scrollbar from "react-scrollbars-custom";
 import styled from "styled-components";
-import Base from "../themes/base";
+import { Base } from "../../themes";
 
 const StyledScrollbar = styled(Scrollbar)`
   .scroll-body {

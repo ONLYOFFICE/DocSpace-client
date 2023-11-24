@@ -18,18 +18,17 @@ import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-// import { mockData } from "../../mockData";
-
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .table-group-menu {
-    height: 60px;
-    position: relative;
+    height: 69px;
+    position: absolute;
     z-index: 201;
-    left: -20px;
-    top: 25px;
+    left: -16px;
     width: 100%;
+
+    margin-top: -37.5px;
 
     .table-container_group-menu {
       padding: 0px 20px;
@@ -48,8 +47,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .table-container_header {
@@ -82,33 +80,33 @@ const StyledRow = styled(Row)`
   }
 `;
 
+const checkedAccountType = "result";
+
 const RowView = (props) => {
   const {
     t,
-    users,
-    sectionWidth,
     viewAs,
     setViewAs,
+    sectionWidth,
     accountsData,
     typeOptions,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
+    toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   } = props;
-  const rowRef = useRef(null);
 
-  const toggleAll = (checked) => {
-    onCheckAccounts(checked, users);
-  };
+  const isIndeterminate =
+    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
+
+  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
   };
-
-  const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -133,8 +131,8 @@ const RowView = (props) => {
   ];
 
   return (
-    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
-      {checkedAccounts.length > 0 && (
+    <StyledRowContainer useReactWindow={false}>
+      {checkedUsers.result.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
             sectionWidth={sectionWidth}
@@ -142,25 +140,25 @@ const RowView = (props) => {
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.result.length === users.result.length}
             onChange={toggleAll}
           />
         </div>
       )}
       {accountsData.length > 0 ? (
         <>
-          <StyledRow key="Name" sectionWidth={sectionWidth} onClick={toggleAll}>
+          <StyledRow key="Name" sectionWidth={sectionWidth}>
             <Text className="row-header-title">{t("Common:Name")}</Text>
           </StyledRow>
 
-          {users.map((data) => (
+          {accountsData.map((data) => (
             <UsersRow
               key={data.key}
               data={data}
               sectionWidth={sectionWidth}
               typeOptions={typeOptions}
-              isChecked={isAccountChecked(data.key)}
-              toggleAccount={() => toggleAccount(data)}
+              isChecked={isAccountChecked(data.key, checkedAccountType)}
+              toggleAccount={() => toggleAccount(data, checkedAccountType)}
             />
           ))}
         </>
@@ -179,12 +177,7 @@ const RowView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>
@@ -199,23 +192,22 @@ export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
     users,
-    checkedAccounts,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   } = importAccountsStore;
 
   return {
-    users,
     viewAs,
     setViewAs,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   };
 })(observer(RowView));

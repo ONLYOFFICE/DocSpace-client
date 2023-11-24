@@ -12,7 +12,7 @@ const UsersRow = (props) => {
     e.stopPropagation();
     e.target.closest(".dropdown-container") ||
       roleSelectorRef.current?.contains(e.target) ||
-      toggleAccount(e);
+      toggleAccount();
   };
 
   return (
@@ -21,7 +21,6 @@ const UsersRow = (props) => {
       key={data.key}
       data={data}
       checked={isChecked}
-      checkbox={isChecked}
       onClick={handleAccountToggle}
       contextButtonSpacerWidth="0"
     >

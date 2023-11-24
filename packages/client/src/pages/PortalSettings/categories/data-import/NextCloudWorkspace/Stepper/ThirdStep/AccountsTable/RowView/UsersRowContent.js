@@ -6,7 +6,8 @@ import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
-import TextInput from "@docspace/components/text-input";
+import EmailInput from "@docspace/components/email-input";
+import Button from "@docspace/components/button";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
@@ -19,23 +20,9 @@ const EmailInputWrapper = styled.div`
   gap: 8px;
 `;
 
-const DecisionButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
-  border-radius: 3px;
-  border: 1px solid #d0d5da;
-
-  &:hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.iconButton.hoverColor};
-      }
-    }
-    border-color: ${(props) => props.theme.iconButton.hoverColor};
-  }
 `;
 
 DecisionButton.defaultProps = { theme: Base };
@@ -69,12 +56,26 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const UsersRowContent = ({ sectionWidth, displayName, email, id, emailInputRef, emailTextRef }) => {
+const UsersRowContent = ({
+  sectionWidth,
+  displayName,
+  email,
+  id,
+  emailInputRef,
+  emailTextRef,
+
+  toggleAccount,
+  changeEmail,
+  isChecked,
+  isEmailOpen,
+  setOpenedEmailKey,
+  setIsPrevEmailValid,
+}) => {
   const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
 
   const [prevEmail, setPrevEmail] = useState(email);
   const [tempEmail, setTempEmail] = useState(email);
-  const [isEmailOpen, setIsEmailOpen] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   const handleEmailChange = (e) => {
     setTempEmail(e.target.value);
@@ -82,15 +83,21 @@ const UsersRowContent = ({ sectionWidth, displayName, email, id, emailInputRef, 
 
   const clearEmail = () => {
     setTempEmail(prevEmail);
-    setIsEmailOpen(false);
+    setOpenedEmailKey(null);
   };
 
-  const openEmail = () => setIsEmailOpen(true);
+  const openEmail = () => setOpenedEmailKey(id);
 
   const handleSaveEmail = () => {
     setPrevEmail(tempEmail);
     changeEmail(id, tempEmail);
-    setIsEmailOpen(false);
+    setOpenedEmailKey(null);
+    setIsPrevEmailValid(true);
+    !isChecked && toggleAccount();
+  };
+
+  const onValidateEmail = (res) => {
+    setIsEmailValid(res.isValid);
   };
 
   if (!ready) return <></>;
@@ -107,19 +114,21 @@ const UsersRowContent = ({ sectionWidth, displayName, email, id, emailInputRef, 
       </div>
       {isEmailOpen ? (
         <EmailInputWrapper ref={emailInputRef}>
-          <TextInput
-            placeholder={t("SMTPSettings:EnterEmail")}
-            className="email-input"
-            value={email}
+          <EmailInput
+            placeholder={t("Settings:NoEmail")}
+            className="import-email-input"
+            value={tempEmail}
             onChange={handleEmailChange}
+            type="email"
+            onValidateInput={onValidateEmail}
           />
 
-          <DecisionButton onClick={handleSaveEmail}>
-            <CheckSvg />
-          </DecisionButton>
-          <DecisionButton onClick={clearEmail}>
-            <CrossSvg />
-          </DecisionButton>
+          <DecisionButton
+            icon={<CheckSvg />}
+            onClick={handleSaveEmail}
+            isDisabled={!isEmailValid}
+          />
+          <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
         </EmailInputWrapper>
       ) : (
         <span onClick={openEmail} className="user-email" ref={emailTextRef}>

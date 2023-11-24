@@ -17,8 +17,6 @@ import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.reac
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin: 20px 0;
-
   .clear-icon {
     margin-right: 8px;
   }

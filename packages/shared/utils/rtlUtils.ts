@@ -3,7 +3,7 @@ import { TInterfaceDirection } from "../types";
 /* Returns correct text-align value depending on interface direction (ltr/rtl) */
 export const getCorrectTextAlign = (
   currentTextAlign: string,
-  interfaceDirection: TInterfaceDirection,
+  interfaceDirection: TInterfaceDirection | string,
 ) => {
   if (!currentTextAlign) return interfaceDirection === "rtl" ? "right" : "left";
 

@@ -120,6 +120,7 @@
     "postcss": "^7.0.39",
     "prettier": "^3.1.0",
     "react": "^18.2.0",
+    "react-docgen-typescript-plugin": "^1.0.5",
     "react-dom": "^18.2.0",
     "react-json-pretty": "^2.2.0",
     "react-values": "^0.3.3",

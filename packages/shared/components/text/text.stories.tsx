@@ -1,11 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Text } from "./index";
-
-type TextPropsAndCustomArgs = React.ComponentProps<typeof Text> & {
-  exampleText?: string;
-};
+import { Text } from ".";
 
 const meta = {
   title: "Components/Text",
@@ -26,16 +22,16 @@ const meta = {
     //   },
     // },
   },
-} satisfies Meta<TextPropsAndCustomArgs>;
+} satisfies Meta<typeof Text>;
 
-type Story = StoryObj<TextPropsAndCustomArgs>;
+type Story = StoryObj<typeof Text>;
 
 export default meta;
 
 export const Default: Story = {
   render: (args) => (
     <div style={{ width: "100%" }}>
-      <Text {...args}>{args.exampleText}</Text>
+      <Text {...args}>Test text</Text>
     </div>
   ),
   args: {
@@ -48,6 +44,5 @@ export const Default: Story = {
     isBold: false,
     isItalic: false,
     isInline: false,
-    exampleText: "Sample text",
   },
 };

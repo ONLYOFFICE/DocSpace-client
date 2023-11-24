@@ -1,6 +1,7 @@
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
-
+const ReactDocgenTypescriptPlugin =
+  require("react-docgen-typescript-plugin").default;
 const pathToAssets = path.resolve(__dirname, "../../../public/images");
 
 module.exports = ({ config }) => {
@@ -12,6 +13,8 @@ module.exports = ({ config }) => {
 
   const fileLoaderRule = rules.find((rule) => rule.test.test(".svg"));
   fileLoaderRule.exclude = /\.svg$/;
+
+  config.plugins.push(new ReactDocgenTypescriptPlugin());
 
   config.output.assetModuleFilename = (pathData) => {
     //console.log({ pathData });

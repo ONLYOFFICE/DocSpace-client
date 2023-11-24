@@ -21,7 +21,8 @@ const commonTextStyles = css<TextProps & StyledTextProps>`
 `;
 
 const styleCss = css<TextProps & StyledTextProps>`
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSizeProp)};
+  font-size: ${(props) =>
+    props.fontSizeProp && props.theme.getCorrectFontSize(props.fontSizeProp)};
   outline: 0 !important;
   margin: 0;
   font-weight: ${(props) =>

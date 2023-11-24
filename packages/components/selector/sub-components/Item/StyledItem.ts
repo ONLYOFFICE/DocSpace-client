@@ -70,6 +70,11 @@ const StyledItem = styled.div<{
     display: flex;
     align-items: center;
     gap: 6px;
+    width: 100%;
+
+    .label {
+      width: unset;
+    }
 
     svg {
       path {

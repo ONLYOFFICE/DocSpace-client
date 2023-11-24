@@ -107,11 +107,6 @@ const TableView = (props) => {
 
   const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
-  const handleToggle = (e, user) => {
-    e.stopPropagation();
-    toggleAccount(user, checkedAccountType);
-  };
-
   const onClearFilter = () => {
     setSearchValue("");
   };
@@ -186,7 +181,7 @@ const TableView = (props) => {
                 typeOptions={typeOptions}
                 hideColumns={hideColumns}
                 isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={(e) => handleToggle(e, data)}
+                toggleAccount={() => toggleAccount(data, checkedAccountType)}
               />
             ))}
           </TableBody>

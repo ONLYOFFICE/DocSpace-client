@@ -104,19 +104,23 @@ const Selector = ({
     onBackClick && onBackClick();
   }, [onBackClick]);
 
-  const onSearchAction = React.useCallback(
-    (value: string) => {
-      onSearch && onSearch(value);
-
-      setIsSearch(true);
-    },
-    [onSearch]
-  );
-
   const onClearSearchAction = React.useCallback(() => {
     onClearSearch && onClearSearch();
     setIsSearch(false);
   }, [onClearSearch]);
+
+  const onSearchAction = React.useCallback(
+    (value: string) => {
+      const searchValue = value.trim();
+
+      if (searchValue === "") return onClearSearchAction();
+
+      onSearch && onSearch(searchValue);
+
+      setIsSearch(true);
+    },
+    [onSearch, onClearSearchAction]
+  );
 
   const onSelectAction = (item: Item) => {
     onSelect &&

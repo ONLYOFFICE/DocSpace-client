@@ -117,15 +117,15 @@ const AddUsersPanel = ({
   }, []);
 
   const onSearch = (value) => {
+    if (value === searchValue) return;
+
     setIsLoadingSearch(true);
     setSearchValue(value);
     loadNextPage(0, value);
   };
 
   const onClearSearch = () => {
-    setIsLoadingSearch(true);
-    setSearchValue("");
-    loadNextPage(0, "");
+    onSearch("");
   };
 
   const toListItem = (item) => {

@@ -3,7 +3,7 @@ export const getDeepLink = (location, email, file, url) => {
     portal: location,
     email: email,
     file: {
-      id: file.fileId,
+      id: file.id,
     },
     folder: {
       id: file.folderId,

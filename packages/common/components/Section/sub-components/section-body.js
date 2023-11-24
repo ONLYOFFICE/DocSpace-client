@@ -352,6 +352,7 @@ class SectionBody extends React.Component {
               id="sectionScroll"
               scrollclass="section-scroll"
               stype="mediumBlack"
+              fixedSize
             >
               <div className="section-wrapper">
                 <div className="section-wrapper-content" {...focusProps}>
@@ -390,6 +391,7 @@ class SectionBody extends React.Component {
               id="sectionScroll"
               scrollclass="section-scroll"
               stype="mediumBlack"
+              fixedSize
             >
               <div className="section-wrapper">
                 <div className="section-wrapper-content" {...focusProps}>

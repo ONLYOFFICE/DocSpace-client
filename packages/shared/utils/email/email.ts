@@ -1,37 +1,121 @@
-/* eslint-disable no-useless-escape, no-control-regex */
-import emailAddresses from "email-addresses";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-control-regex */
+import emailAddresses, { ParsedGroup, ParsedMailbox } from "email-addresses";
 import punycode from "punycode";
-import { parseErrorTypes, errorKeys } from "../../constants";
+
+import { ErrorKeys, ParseErrorTypes } from "enums";
+
 import { EmailSettings } from "./emailSettings";
 
-const getParts = (str: any) => {
+/**
+ * Parse address from string
+ * @param {String} str
+ * @return {Email} result
+ */
+export const parseAddress = (str: string, options = new EmailSettings()) => {
+  const parsedEmails = parseAddresses(str, options);
+
+  if (!parsedEmails.length) {
+    return new Email("", str, [
+      {
+        message: "No one email parsed",
+        type: ParseErrorTypes.EmptyRecipients,
+        errorKey: ErrorKeys.EmptyEmail,
+      },
+    ]);
+  }
+
+  if (parsedEmails.length > 1) {
+    return new Email("", str, [
+      {
+        message: "Too many email parsed",
+        type: ParseErrorTypes.IncorrectEmail,
+        errorKey: ErrorKeys.ManyEmails,
+      },
+    ]);
+  }
+
+  const resultEmail = parsedEmails[0];
+
+  return resultEmail;
+};
+
+export class Email {
+  email: string;
+
+  name: string;
+
+  parseErrors: {
+    message: string | null;
+    type: ParseErrorTypes;
+    errorKey: ErrorKeys;
+  }[];
+
+  constructor(
+    name: string | null,
+    email: string,
+    parseErrors: {
+      message: string;
+      type: ParseErrorTypes;
+      errorKey: ErrorKeys;
+    }[],
+  ) {
+    this.name = name || "";
+    this.email = email;
+    this.parseErrors = parseErrors;
+  }
+
+  isValid = () => {
+    return this.parseErrors.length === 0;
+  };
+
+  equals(this: any, addr: Email | string) {
+    if (typeof addr === "object" && addr instanceof Email) {
+      return (
+        "email" in this && this?.email === addr.email && this.name === addr.name
+      );
+    }
+
+    if (typeof addr === "string") {
+      const parsed = parseAddress(addr);
+      return this.email === parsed.email && this.name === parsed.name;
+    }
+
+    return false;
+  }
+}
+
+const getParts = (str: string) => {
   const parts = [];
-  let newStr = str.replace(/[\s,;]*$/, ",");
+  const newStr = str.replace(/[\s,;]*$/, ",");
   const n = newStr.length;
-  let flag = false,
-    boundaryIndex = 0,
-    index;
-  for (index = 0; index < n; index++) {
+  let flag = false;
+  let boundaryIndex = 0;
+  let index;
+  for (index = 0; index < n; index += 1) {
     switch (newStr.charAt(index)) {
       case ",":
       case ";":
-        if (flag) continue;
-
-        let part = newStr.substring(boundaryIndex, index);
-        part = part.trim();
-        if (part) {
-          parts.push(part);
+        if (!flag) {
+          let part = newStr.substring(boundaryIndex, index);
+          part = part.trim();
+          if (part) {
+            parts.push(part);
+          }
+          boundaryIndex = index + 1;
         }
-        boundaryIndex = index + 1;
-
         break;
       case '"':
         if (
-          "\\" !== newStr.charAt(index - 1) &&
-          '"' !== newStr.charAt(index + 1)
+          newStr.charAt(index - 1) !== "\\" &&
+          newStr.charAt(index + 1) !== '"'
         ) {
           flag = !flag;
         }
+        break;
+      default:
     }
   }
 
@@ -42,12 +126,13 @@ const getParts = (str: any) => {
   return parts;
 };
 
-const normalizeString = (str: any) => {
-  let r1 = /^"(.*)"\s*<([^>]+)>$/,
-    r2 = /^(.*)<([^>]+)>$/,
-    match = str.match(r1) || str.match(r2);
+const normalizeString = (str: string) => {
+  const r1 = /^"(.*)"\s*<([^>]+)>$/;
+  const r2 = /^(.*)<([^>]+)>$/;
+  const match = str.match(r1) || str.match(r2);
 
-  let name, email;
+  let name;
+  let email;
 
   if (match) {
     name = match[1].replace(/\\"/g, '"').replace(/\\\\/g, "\\").trim();
@@ -63,18 +148,22 @@ const normalizeString = (str: any) => {
   return result;
 };
 
-const checkErrors = (parsedAddress: any, options: any) => {
+const checkErrors = (
+  parsedAddress: ParsedGroup | ParsedMailbox,
+  options: EmailSettings,
+) => {
   const errors = [];
 
   if (
-    !options.allowLocalDomainName &&
+    !options?.allowLocalDomainName &&
+    "domain" in parsedAddress &&
     parsedAddress.domain.indexOf(".") === -1
   ) {
     errors.push({
       message: "Local domains are not supported",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.LocalDomain,
+      errorKey: ErrorKeys.LocalDomain,
     });
   }
 
@@ -84,96 +173,102 @@ const checkErrors = (parsedAddress: any, options: any) => {
       options.allowDomainPunycode ||
       options.allowLocalDomainName
     ) &&
+    "domain" in parsedAddress &&
     !/(^((?!-)[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}\.?$)/.test(
-      parsedAddress.domain
+      parsedAddress.domain,
     )
   ) {
     errors.push({
       message: "Incorrect domain",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.IncorrectDomain,
+      errorKey: ErrorKeys.IncorrectDomain,
     });
   }
 
   if (
     !options.allowDomainIp &&
+    "domain" in parsedAddress &&
     parsedAddress.domain.indexOf("[") === 0 &&
     parsedAddress.domain.indexOf("]") === parsedAddress.domain.length - 1
   ) {
     errors.push({
       message: "Domains as ip address are not supported",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.DomainIpAddress,
+      errorKey: ErrorKeys.DomainIpAddress,
     });
   }
 
   if (
     !options.allowDomainPunycode &&
+    "domain" in parsedAddress &&
     !/^[\x00-\x7F]+$/.test(punycode.toUnicode(parsedAddress.domain))
   ) {
     errors.push({
       message: "Punycode domains are not supported",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.PunycodeDomain,
+      errorKey: ErrorKeys.PunycodeDomain,
     });
   }
 
   if (
     !options.allowLocalPartPunycode &&
+    "local" in parsedAddress &&
     parsedAddress.local.length > 0 &&
     !/^[\x00-\x7F]+$/.test(punycode.toUnicode(parsedAddress.local))
   ) {
     errors.push({
       message: "Punycode local part are not supported",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.PunycodeLocalPart,
+      errorKey: ErrorKeys.PunycodeLocalPart,
     });
   }
 
   if (
     options.allowStrictLocalPart &&
+    "local" in parsedAddress &&
     (!/^[\x00-\x7F]+$/.test(parsedAddress.local) ||
       !/^([a-zA-Z0-9]+)([_\-\.\+][a-zA-Z0-9]+)*$/.test(parsedAddress.local))
   ) {
     errors.push({
       message: "Incorrect localpart",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.IncorrectLocalPart,
+      errorKey: ErrorKeys.IncorrectLocalPart,
     });
   }
 
   if (
     !options.allowSpaces &&
+    "local" in parsedAddress &&
     (/\s+/.test(parsedAddress.local) ||
       parsedAddress.local !== parsedAddress.parts.local.tokens)
   ) {
     errors.push({
       message: "Incorrect, localpart contains spaces",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.SpacesInLocalPart,
+      errorKey: ErrorKeys.SpacesInLocalPart,
     });
   }
 
-  if (parsedAddress.local.length > 64) {
+  if ("local" in parsedAddress && parsedAddress.local.length > 64) {
     errors.push({
       message:
         "The maximum total length of a user name or other local-part is 64 characters. See RFC2821",
-      type: parseErrorTypes.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
       errorItem: parsedAddress,
-      errorKey: errorKeys.MaxLengthExceeded,
+      errorKey: ErrorKeys.MaxLengthExceeded,
     });
   }
 
   return errors;
 };
 
-const parseOneAddress = (str: any, options: any) => {
+const parseOneAddress = (str: string, options: EmailSettings) => {
   const normalizedStr = normalizeString(str);
   const parsedAddress = emailAddresses.parseOneAddress(normalizedStr);
 
@@ -182,17 +277,16 @@ const parseOneAddress = (str: any, options: any) => {
   if (!parsedAddress || (parsedAddress.name && !options.allowName)) {
     errors.push({
       message: "Incorrect email",
-      type: parseErrorTypes.IncorrectEmail,
-      errorKey: errorKeys.IncorrectEmail,
+      type: ParseErrorTypes.IncorrectEmail,
+      errorKey: ErrorKeys.IncorrectEmail,
     });
   } else {
     const checkOptionErrors = checkErrors(parsedAddress, options);
-    checkOptionErrors.length && errors.push(...checkOptionErrors);
+    if (checkOptionErrors.length) errors.push(...checkOptionErrors);
   }
 
-  return parsedAddress
-    ? // @ts-expect-error TS(2339): Property 'address' does not exist on type 'ParsedM... Remove this comment to see the full error message
-      new Email(parsedAddress.name, parsedAddress.address, errors)
+  return parsedAddress && "name" in parsedAddress && "address" in parsedAddress
+    ? new Email(parsedAddress.name, parsedAddress.address, errors)
     : new Email(null, str, errors);
 };
 
@@ -201,11 +295,11 @@ const parseOneAddress = (str: any, options: any) => {
  * @param {String} str
  * @return {Array} result with array of Email objects
  */
-export const parseAddresses = (str: any, options = new EmailSettings()) => {
+export const parseAddresses = (str: string, options = new EmailSettings()) => {
   if (!(options instanceof EmailSettings))
     throw new TypeError("Invalid options");
 
-  const resultEmails: any = [];
+  const resultEmails: Email[] = [];
 
   if (!str || !str.trim()) {
     return resultEmails;
@@ -213,9 +307,10 @@ export const parseAddresses = (str: any, options = new EmailSettings()) => {
 
   const parts = getParts(str);
 
-  let i,
-    n = parts.length;
-  for (i = 0; i < n; i++) {
+  let i;
+  const n = parts.length;
+
+  for (i = 0; i < n; i += 1) {
     resultEmails.push(parseOneAddress(parts[i], options));
   }
 
@@ -223,48 +318,20 @@ export const parseAddresses = (str: any, options = new EmailSettings()) => {
 };
 
 /**
- * Parse address from string
- * @param {String} str
- * @return {Email} result
- */
-export const parseAddress = (str: any, options = new EmailSettings()) => {
-  const parsedEmails = parseAddresses(str, options);
-
-  if (!parsedEmails.length) {
-    return new Email("", str, [
-      {
-        message: "No one email parsed",
-        type: parseErrorTypes.EmptyRecipients,
-        errorKey: errorKeys.EmptyEmail,
-      },
-    ]);
-  }
-
-  if (parsedEmails.length > 1) {
-    return new Email("", str, [
-      {
-        message: "Too many email parsed",
-        type: parseErrorTypes.IncorrectEmail,
-        errorKey: errorKeys.ManyEmails,
-      },
-    ]);
-  }
-
-  const resultEmail = parsedEmails[0];
-
-  return resultEmail;
-};
-
-/**
  * Check domain validity
  * @param {String} domain
  * @return {Bool} result
  */
-export const isValidDomainName = (domain: any) => {
-  let parsed = emailAddresses.parseOneAddress("test@" + domain);
+export const isValidDomainName = (domain: string) => {
+  const parsed = emailAddresses.parseOneAddress(`test@${domain}`);
   if (!parsed) return false;
-  // @ts-expect-error TS(2339): Property 'domain' does not exist on type 'ParsedMa... Remove this comment to see the full error message
-  return parsed && parsed.domain === domain && domain.indexOf(".") !== -1;
+
+  return (
+    parsed &&
+    "domain" in parsed &&
+    parsed.domain === domain &&
+    domain.indexOf(".") !== -1
+  );
 };
 
 /**
@@ -273,7 +340,7 @@ export const isValidDomainName = (domain: any) => {
  * @param {String}/{Object} email2
  * @return {Bool} result
  */
-export const isEqualEmail = (email1: any, email2: any) => {
+export const isEqualEmail = (email1: string, email2: string) => {
   const emailSettings = new EmailSettings();
   emailSettings.disableAllSettings();
 
@@ -286,29 +353,3 @@ export const isEqualEmail = (email1: any, email2: any) => {
 
   return parsed1.email === parsed2.email;
 };
-
-export class Email {
-  email: any;
-  name: any;
-  parseErrors: any;
-  constructor(name: any, email: any, parseErrors: any) {
-    this.name = name || "";
-    this.email = email;
-    this.parseErrors = parseErrors;
-  }
-
-  isValid = () => {
-    return this.parseErrors.length === 0;
-  };
-
-  equals = function (this: any, addr: any) {
-    if (typeof addr === "object" && addr instanceof Email) {
-      return this.email === addr.email && this.name === addr.name;
-    } else if (typeof addr === "string") {
-      const parsed = parseAddress(addr);
-      return this.email === parsed.email && this.name === parsed.name;
-    }
-
-    return false;
-  };
-}

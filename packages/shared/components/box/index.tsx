@@ -2,9 +2,10 @@ import React from "react";
 import { BoxProps } from "./Box.types";
 import { StyledBox } from "./Box.styled";
 
-const Box = (props: BoxProps) => (
-  <StyledBox {...props} as={props.as || "div"} data-testid={props.testId} />
-);
+function Box(props: BoxProps) {
+  const { as, testId } = props;
+  return <StyledBox {...props} as={as || "div"} data-testid={testId} />;
+}
 
 Box.defaultProps = {
   displayProp: "block",

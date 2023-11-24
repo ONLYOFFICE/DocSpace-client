@@ -1,26 +1,25 @@
 export function classNames(...args: string[] | number[] | {}[]) {
   if (args) {
-    let classes: any = [];
+    let classes: (string | number)[] = [];
 
-    for (let i = 0; i < args.length; i++) {
-      let className = args[i];
+    for (let i = 0; i < args.length; i += 1) {
+      const className = args[i];
 
-      if (!className) continue;
+      if (className) {
+        if (typeof className === "string" || typeof className === "number") {
+          classes.push(className);
+        }
+        if (typeof className === "object") {
+          const objClasses = Array.isArray(className)
+            ? className
+            : Object.entries(className).map(([key, value]) =>
+                value ? key : null,
+              );
 
-      const type = typeof className;
-
-      if (type === "string" || type === "number") {
-        classes.push(className);
-      } else if (type === "object") {
-        const _classes = Array.isArray(className)
-          ? className
-          : Object.entries(className).map(([key, value]) =>
-              !!value ? key : null
-            );
-
-        classes = _classes.length
-          ? classes.concat(_classes.filter((c) => !!c))
-          : classes;
+          classes = objClasses.length
+            ? classes.concat(objClasses.filter((c) => !!c))
+            : classes;
+        }
       }
     }
 

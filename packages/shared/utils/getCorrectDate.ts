@@ -6,7 +6,7 @@ export default function getCorrectDate(locale: string, date: string) {
   const curDate = moment(date).locale(locale).format("L");
   const curTime = moment(date).locale(locale).format("LT");
 
-  const correctDate = curDate + " " + curTime;
+  const correctDate = `${curDate} ${curTime}`;
 
   return correctDate;
 }

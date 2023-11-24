@@ -19,7 +19,7 @@ const borderStyle = (
   borderProp:
     | string
     | { style: string; width: string; color: string; radius?: string },
-  interfaceDirection: TInterfaceDirection = "ltr"
+  interfaceDirection: TInterfaceDirection = "ltr",
 ) => {
   const styles = [];
 
@@ -31,32 +31,32 @@ const borderStyle = (
     styles.push(
       `border-style: ${getCorrectFourValuesStyle(
         borderProp.style,
-        interfaceDirection
-      )};`
+        interfaceDirection,
+      )};`,
     );
 
   if (borderProp.width)
     styles.push(
       `border-width: ${getCorrectFourValuesStyle(
         borderProp.width,
-        interfaceDirection
-      )};`
+        interfaceDirection,
+      )};`,
     );
 
   if (borderProp.color)
     styles.push(
       `border-color: ${getCorrectFourValuesStyle(
         borderProp.color,
-        interfaceDirection
-      )};`
+        interfaceDirection,
+      )};`,
     );
 
   if (borderProp.radius)
     styles.push(
       `border-radius: ${getCorrectBorderRadius(
         borderProp.radius,
-        interfaceDirection
-      )};`
+        interfaceDirection,
+      )};`,
     );
 
   return styles.join("\n");
@@ -119,8 +119,8 @@ const StyledBox = styled.div<BoxProps>`
     marginStyle(
       getCorrectFourValuesStyle(
         props.marginProp,
-        props.theme.interfaceDirection
-      )
+        props.theme.interfaceDirection,
+      ),
     )}
   outline: none;
 
@@ -130,13 +130,13 @@ const StyledBox = styled.div<BoxProps>`
     paddingStyle(
       getCorrectFourValuesStyle(
         props.paddingProp,
-        props.theme.interfaceDirection
-      )
+        props.theme.interfaceDirection,
+      ),
     )}
   ${(props) =>
     props.textAlign &&
     textAlignStyle(
-      getCorrectTextAlign(props.textAlign, props.theme.interfaceDirection)
+      getCorrectTextAlign(props.textAlign, props.theme.interfaceDirection),
     )}
   
   ${(props) => props.widthProp && widthStyle(props.widthProp)}

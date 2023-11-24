@@ -3,7 +3,7 @@ import { TInterfaceDirection } from "../types";
 /* Returns correct text-align value depending on interface direction (ltr/rtl) */
 export const getCorrectTextAlign = (
   currentTextAlign: string,
-  interfaceDirection: TInterfaceDirection
+  interfaceDirection: TInterfaceDirection,
 ) => {
   if (!currentTextAlign) return interfaceDirection === "rtl" ? "right" : "left";
 
@@ -23,7 +23,7 @@ export const getCorrectTextAlign = (
  * Not suitable for border-radius! */
 export const getCorrectFourValuesStyle = (
   styleStr: string,
-  interfaceDirection: TInterfaceDirection
+  interfaceDirection: TInterfaceDirection,
 ) => {
   if (interfaceDirection === "ltr") return styleStr;
 
@@ -42,7 +42,7 @@ export const getCorrectFourValuesStyle = (
 /* Returns correct border-radius value depending on interface direction (ltr/rtl) */
 export const getCorrectBorderRadius = (
   borderRadiusStr: string,
-  interfaceDirection: TInterfaceDirection
+  interfaceDirection: TInterfaceDirection,
 ) => {
   if (interfaceDirection === "ltr") return borderRadiusStr;
 
@@ -69,6 +69,7 @@ export const getCorrectBorderRadius = (
       borderRadiusArr.splice(2, 0, borderRadiusArr.splice(3, 1)[0]);
       break;
     }
+    default:
   }
 
   return borderRadiusArr.join(" ");

@@ -1,20 +1,22 @@
 export default class DomHelpers {
   static calculatedScrollbarWidth: number | null = null;
+
   static zIndex: number;
+
   static getViewport() {
-    let win = window,
-      d = document,
-      e = d.documentElement,
-      g = d.getElementsByTagName("body")[0],
-      w = win.innerWidth || e.clientWidth || g.clientWidth,
-      h = win.innerHeight || e.clientHeight || g.clientHeight;
+    const win = window;
+    const d = document;
+    const e = d.documentElement;
+    const g = d.getElementsByTagName("body")[0];
+    const w = win.innerWidth || e.clientWidth || g.clientWidth;
+    const h = win.innerHeight || e.clientHeight || g.clientHeight;
 
     return { width: w, height: h };
   }
 
-  static getOffset(el: any) {
+  static getOffset(el: HTMLElement) {
     if (el) {
-      let rect = el.getBoundingClientRect();
+      const rect = el.getBoundingClientRect();
 
       return {
         top:
@@ -38,12 +40,12 @@ export default class DomHelpers {
     };
   }
 
-  static getOuterWidth(el: any, margin: any) {
+  static getOuterWidth(el: HTMLElement, margin: string) {
     if (el) {
       let width = el.offsetWidth;
 
       if (margin) {
-        let style = getComputedStyle(el);
+        const style = getComputedStyle(el);
         width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
       }
 
@@ -52,11 +54,11 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterWidth(element: any) {
+  static getHiddenElementOuterWidth(element: HTMLElement) {
     if (element) {
       element.style.visibility = "hidden";
       element.style.display = "block";
-      let elementWidth = element.offsetWidth;
+      const elementWidth = element.offsetWidth;
       element.style.display = "none";
       element.style.visibility = "visible";
 
@@ -65,11 +67,11 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterHeight(element: any) {
+  static getHiddenElementOuterHeight(element: HTMLElement) {
     if (element) {
       element.style.visibility = "hidden";
       element.style.display = "block";
-      let elementHeight = element.offsetHeight;
+      const elementHeight = element.offsetHeight;
       element.style.display = "none";
       element.style.visibility = "visible";
 
@@ -78,40 +80,41 @@ export default class DomHelpers {
     return 0;
   }
 
-  static calculateScrollbarWidth(el: any) {
+  static calculateScrollbarWidth(el: HTMLElement) {
     if (el) {
-      let style = getComputedStyle(el);
+      const style = getComputedStyle(el);
       return (
         el.offsetWidth -
         el.clientWidth -
         parseFloat(style.borderLeftWidth) -
         parseFloat(style.borderRightWidth)
       );
-    } else {
-      if (this.calculatedScrollbarWidth != null)
-        return this.calculatedScrollbarWidth;
-
-      let scrollDiv = document.createElement("div");
-      scrollDiv.className = "p-scrollbar-measure";
-      document.body.appendChild(scrollDiv);
-
-      let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      document.body.removeChild(scrollDiv);
-
-      this.calculatedScrollbarWidth = scrollbarWidth;
-
-      return scrollbarWidth;
     }
+    if (this.calculatedScrollbarWidth != null)
+      return this.calculatedScrollbarWidth;
+
+    const scrollDiv = document.createElement("div");
+    scrollDiv.className = "p-scrollbar-measure";
+    document.body.appendChild(scrollDiv);
+
+    const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+
+    this.calculatedScrollbarWidth = scrollbarWidth;
+
+    return scrollbarWidth;
   }
 
   static generateZIndex() {
     this.zIndex = this.zIndex || 1000;
 
-    return ++this.zIndex;
+    this.zIndex += 1;
+
+    return this.zIndex;
   }
 
   static revertZIndex() {
-    this.zIndex = 1000 < this.zIndex ? --this.zIndex : 1000;
+    this.zIndex = this.zIndex > 1000 ? this.zIndex - 1 : 1000;
   }
 
   static getCurrentZIndex() {

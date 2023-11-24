@@ -24,14 +24,17 @@ import {
   isTablet,
   isDesktop,
   isTouchDevice,
+  checkIsSSR,
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, { IconSizeType } from "./common-icons-style";
 import { classNames } from "./classNames";
-import { getBannerAttribute } from "./banner";
+import { getBannerAttribute, getLanguage } from "./banner";
 
 export {
+  checkIsSSR,
+  getLanguage,
   isArrayEqual,
   getBannerAttribute,
   classNames,
@@ -62,30 +65,6 @@ export {
   DomHelpers,
   ObjectUtils,
 };
-
-export function checkIsSSR() {
-  return typeof window === "undefined";
-}
-
-export function getLanguage(lng: string) {
-  try {
-    if (!lng) return lng;
-
-    let language = lng == "en-US" || lng == "en-GB" ? "en" : lng;
-
-    const splitted = lng.split("-");
-
-    if (splitted.length == 2 && splitted[0] == splitted[1].toLowerCase()) {
-      language = splitted[0];
-    }
-
-    return language;
-  } catch (error) {
-    console.error(error);
-  }
-
-  return lng;
-}
 
 export const getModalType = () => {
   return window.innerWidth < size.desktop ? "aside" : "modal";

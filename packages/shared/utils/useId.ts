@@ -1,28 +1,35 @@
 import React from "react";
 
 let ID = 0;
-const genId = () => ID++;
+const genId = () => {
+  ID += 1;
+};
 let serverHandoffComplete = false;
 
-const usePassiveLayoutEffect =
-  React[
-    typeof document !== "undefined" && document.createElement !== void 0
-      ? "useLayoutEffect"
-      : "useEffect"
-  ];
+const hook =
+  typeof document !== "undefined" && document.createElement !== undefined
+    ? "useLayoutEffect"
+    : "useEffect";
 
-const useId = (fallbackId: any, prefix = "prefix") => {
-  const [id, setId] = React.useState(serverHandoffComplete ? genId : void 0);
+const usePassiveLayoutEffect = React[hook];
+
+const useId = (fallbackId?: string | number, prefix = "prefix") => {
+  const [id, setId] = React.useState<number | void | undefined>(
+    serverHandoffComplete ? genId : undefined,
+  );
 
   usePassiveLayoutEffect(() => {
-    if (id === void 0) {
-      setId(ID++);
+    if (id === undefined) {
+      ID += 1;
+      setId(ID);
     }
 
     serverHandoffComplete = true;
   }, []);
 
-  return fallbackId ? fallbackId : id === void 0 ? id : prefix + id;
+  const calcId = id === undefined ? id : prefix + id;
+
+  return fallbackId || calcId;
 };
 
 export default useId;

@@ -2,11 +2,11 @@ export const CommonTheme = {
   rtlFontIncreaseValue: 2,
   interfaceDirection: "ltr",
 
-  getCorrectFontSize: function (currentValue: any) {
+  getCorrectFontSize(currentValue: string) {
     if (
       !currentValue ||
       currentValue === "0px" ||
-      this.interfaceDirection !== "rtl"
+      (this && this?.interfaceDirection !== "rtl")
     ) {
       return currentValue;
     }
@@ -21,6 +21,6 @@ export const CommonTheme = {
       numberValue = currentValue;
     }
 
-    return numberValue + this.rtlFontIncreaseValue + "px";
+    return `${numberValue + this.rtlFontIncreaseValue}px`;
   },
 };

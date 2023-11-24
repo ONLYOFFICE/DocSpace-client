@@ -2,13 +2,13 @@
  * Enum for type of email value errors.
  * @readonly
  */
-export const enum parseErrorTypes {
+export const enum ParseErrorTypes {
   None = 0,
   EmptyRecipients = 1,
   IncorrectEmail = 2,
 }
 
-export const enum errorKeys {
+export const enum ErrorKeys {
   LocalDomain = "LocalDomain",
   IncorrectDomain = "IncorrectDomain",
   DomainIpAddress = "DomainIpAddress",

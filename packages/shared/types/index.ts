@@ -15,6 +15,6 @@ export type TColorScheme = {
 
 declare global {
   interface Window {
-    firebaseHelper: any;
+    firebaseHelper: { config: { authDomain: string } };
   }
 }

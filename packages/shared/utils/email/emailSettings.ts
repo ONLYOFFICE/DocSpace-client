@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 export class EmailSettings {
   constructor() {
     this.allowDomainPunycode = false;
@@ -9,7 +11,10 @@ export class EmailSettings {
     this.allowLocalDomainName = false;
   }
 
-  static equals = (settings1: any, settings2: any) => {
+  static equals = (
+    settings1: { [key: string]: string },
+    settings2: { [key: string]: string },
+  ) => {
     const instance1 = EmailSettings.parse(settings1);
     const instance2 = EmailSettings.parse(settings2);
     const comparedProperties = [
@@ -22,9 +27,9 @@ export class EmailSettings {
       "allowLocalDomainName",
     ];
     const propLength = comparedProperties.length;
-    for (let i = 0; i < propLength; i++) {
+    for (let i = 0; i < propLength; i += 1) {
       const comparedProp = comparedProperties[i];
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      // @ts-expect-error Need review this
       if (instance1[comparedProp] !== instance2[comparedProp]) {
         return false;
       }
@@ -41,7 +46,7 @@ export class EmailSettings {
       this._allowDomainPunycode = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowDomainPunycode option. Use boolean value`
+        `Invalid value ${value} for allowDomainPunycode option. Use boolean value`,
       );
     }
   }
@@ -55,7 +60,7 @@ export class EmailSettings {
       this._allowLocalPartPunycode = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowLocalPartPunycode option. Use boolean value`
+        `Invalid value ${value} for allowLocalPartPunycode option. Use boolean value`,
       );
     }
   }
@@ -69,7 +74,7 @@ export class EmailSettings {
       this._allowDomainIp = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowDomainIp option. Use boolean value`
+        `Invalid value ${value} for allowDomainIp option. Use boolean value`,
       );
     }
   }
@@ -83,7 +88,7 @@ export class EmailSettings {
       this._allowStrictLocalPart = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowStrictLocalPart option. Use boolean value`
+        `Invalid value ${value} for allowStrictLocalPart option. Use boolean value`,
       );
     }
   }
@@ -97,7 +102,7 @@ export class EmailSettings {
       this._allowSpaces = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowSpaces option. Use boolean value`
+        `Invalid value ${value} for allowSpaces option. Use boolean value`,
       );
     }
   }
@@ -111,7 +116,7 @@ export class EmailSettings {
       this._allowName = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowName option. Use boolean value`
+        `Invalid value ${value} for allowName option. Use boolean value`,
       );
     }
   }
@@ -125,7 +130,7 @@ export class EmailSettings {
       this._allowLocalDomainName = value;
     } else {
       throw new TypeError(
-        `Invalid value ${value} for allowLocalDomainName option. Use boolean value`
+        `Invalid value ${value} for allowLocalDomainName option. Use boolean value`,
       );
     }
   }
@@ -152,28 +157,35 @@ export class EmailSettings {
     this.allowLocalDomainName = true;
   }
 
-  static parse = (settings: any) => {
+  static parse = (settings: { [key: string]: string }) => {
     if (settings instanceof EmailSettings) return settings;
 
     if (typeof settings !== "object") throw new Error("Invalid argument");
 
     const defaultSettings = new EmailSettings();
-    Object.keys(settings).map((key) => {
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    Object.keys(settings).forEach((key: string) => {
+      // @ts-expect-error Need review this
       if (!(key in defaultSettings) || defaultSettings[key] === settings[key])
         return;
 
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      // @ts-expect-error Need review this
       defaultSettings[key] = settings[key];
     });
 
     return defaultSettings;
   };
-  _allowDomainIp: any;
-  _allowDomainPunycode: any;
-  _allowLocalDomainName: any;
-  _allowLocalPartPunycode: any;
-  _allowName: any;
-  _allowSpaces: any;
-  _allowStrictLocalPart: any;
+
+  _allowDomainIp: unknown;
+
+  _allowDomainPunycode: unknown;
+
+  _allowLocalDomainName: unknown;
+
+  _allowLocalPartPunycode: unknown;
+
+  _allowName: unknown;
+
+  _allowSpaces: unknown;
+
+  _allowStrictLocalPart: unknown;
 }

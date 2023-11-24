@@ -52,7 +52,7 @@ export const Default: Story = {
 };
 
 export const Example: Story = {
-  render: (args) => (
+  render: () => (
     <Box {...containerProps}>
       <Box {...rowProps}>
         <Box {...commonBoxProps} backgroundProp="gray">

@@ -1,18 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 
 export const useClickOutside = (
   ref: { current: HTMLElement },
   handler: () => void,
-  ...deps: any[]
+  ...deps: unknown[]
 ) => {
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent) => {
       e.stopPropagation();
-      if (ref.current && !ref.current.contains(e.target)) handler();
+      const target = e.target as HTMLElement;
+      if (ref.current && !ref.current.contains(target)) handler();
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref, ...deps]);
+  }, [ref, handler, ...deps]);
 };

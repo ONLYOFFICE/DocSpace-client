@@ -1,8 +1,8 @@
 import globalColors from "./globalColors";
-import GlobalStyle from "./globalStyles";
+
 import NoUserSelect from "./commonStyles";
 
-export { globalColors, GlobalStyle, NoUserSelect };
+export { globalColors, NoUserSelect };
 
 export const LoaderStyle = Object.freeze({
   title: "",

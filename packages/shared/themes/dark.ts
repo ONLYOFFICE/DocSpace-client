@@ -605,7 +605,8 @@ const Dark: ThemeType = {
     },
 
     closeButton: {
-      //backgroundColor: "#9A9EA3",
+      // backgroundColor: "#9A9EA3",
+
       fillColor: "#9A9EA3",
     },
   },
@@ -2003,7 +2004,7 @@ const Dark: ThemeType = {
 
     links: {
       iconColor: "#858585",
-      iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
       primaryColor: "#ADADAD",
     },
 

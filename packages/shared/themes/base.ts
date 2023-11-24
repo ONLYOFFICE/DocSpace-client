@@ -54,7 +54,7 @@ const {
   lightErrorStatus,
 } = globalColors;
 
-const getBaseTheme = () => {
+export const getBaseTheme = () => {
   return {
     ...CommonTheme,
 
@@ -624,7 +624,7 @@ const getBaseTheme = () => {
       },
 
       closeButton: {
-        //backgroundColor: "#9a9ea3",
+        // backgroundColor: "#9a9ea3",
         fillColor: white,
       },
     },
@@ -2021,7 +2021,7 @@ const getBaseTheme = () => {
 
       links: {
         iconColor: "#3B72A7",
-        iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+        iconErrorColor: "rgba(242, 28, 14, 0.5)", // "#F21C0E",
         primaryColor: "#555F65",
       },
 

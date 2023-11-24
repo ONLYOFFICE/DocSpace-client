@@ -1,5 +1,8 @@
 import { INFO_PANEL_WIDTH } from "../constants";
-import { checkIsSSR } from "./index";
+
+export function checkIsSSR() {
+  return typeof window === "undefined";
+}
 
 export const size = {
   mobile: 600,
@@ -31,7 +34,8 @@ export const isTablet = (width = undefined) => {
 export const isDesktop = () => {
   if (!checkIsSSR()) {
     return window.innerWidth >= size.desktop;
-  } else return false;
+  }
+  return false;
 };
 
 export const isTouchDevice = !!(

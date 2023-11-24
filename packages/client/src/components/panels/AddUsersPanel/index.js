@@ -23,6 +23,8 @@ import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
+const TIMEOUT = 100;
+
 const AddUsersPanel = ({
   isEncrypted,
   defaultAccess,
@@ -104,18 +106,24 @@ const AddUsersPanel = ({
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(100, false);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(TIMEOUT, false);
+  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
+    TIMEOUT,
+    false
+  );
 
   useEffect(() => {
     loadNextPage(0);
   }, []);
 
   const onSearch = (value) => {
+    setIsLoadingSearch(true);
     setSearchValue(value);
     loadNextPage(0, value);
   };
 
   const onClearSearch = () => {
+    setIsLoadingSearch(true);
     setSearchValue("");
     loadNextPage(0, "");
   };
@@ -187,9 +195,12 @@ const AddUsersPanel = ({
         setTotal(newTotal);
 
         setIsNextPageLoading(false);
-        setIsLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+        setIsLoadingSearch(false);
+      });
   };
 
   const emptyScreenImage = theme.isBase
@@ -244,14 +255,14 @@ const AddUsersPanel = ({
           totalItems={total}
           isLoading={isLoading}
           searchLoader={<Loaders.SelectorSearchLoader />}
-          isSearchLoading={isLoading}
+          isSearchLoading={isLoading && !isLoadingSearch}
           rowLoader={
             <Loaders.SelectorRowLoader
               isUser
               count={15}
-              withAllSelect
               isContainer={isLoading}
               isMultiSelect={isMultiSelect}
+              withAllSelect={!isLoadingSearch}
             />
           }
         />

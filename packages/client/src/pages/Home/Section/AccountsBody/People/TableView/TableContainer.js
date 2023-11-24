@@ -11,7 +11,7 @@ import TableBody from "@docspace/components/table-container/TableBody";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import EmptyScreen from "../EmptyScreen";
+import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
@@ -54,6 +54,7 @@ const contextCss = css`
 `;
 
 const StyledTableContainer = styled(TableContainer)`
+  margin-top: 0px;
   :has(
       .table-container_body
         .table-list-item:first-child:first-child

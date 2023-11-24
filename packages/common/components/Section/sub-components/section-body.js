@@ -66,6 +66,12 @@ const paddingStyles = css`
 
   ${settingsStudioStyles};
 
+  ${({ isAccounts }) =>
+    isAccounts &&
+    css`
+      padding-top: 0px;
+    `}
+
   @media ${tablet} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -316,6 +322,7 @@ class SectionBody extends React.Component {
     //console.log(" SectionBody render" );
     const {
       isFormGallery,
+      isAccounts,
       autoFocus,
       children,
       onDrop,
@@ -383,6 +390,7 @@ class SectionBody extends React.Component {
         isDesktop={isDesktop}
         settingsStudio={settingsStudio}
         isFormGallery={isFormGallery}
+        isAccounts={isAccounts}
       >
         {withScroll ? (
           currentDeviceType !== DeviceType.mobile ? (

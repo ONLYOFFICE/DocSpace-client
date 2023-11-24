@@ -25,7 +25,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
     const location = useLocation();
 
-    const currentViewAs = location.pathname.includes("/accounts/filter")
+    const currentViewAs = location.pathname.includes("/accounts")
       ? accountsViewAs
       : viewAs;
 

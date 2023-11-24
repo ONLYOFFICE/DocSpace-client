@@ -180,7 +180,15 @@ const ClientRoutes = [
             path: "accounts",
             element: (
               <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/filter" replace />
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
           },
@@ -189,7 +197,7 @@ const ClientRoutes = [
             element: (
               <PrivateRoute restricted withManager>
                 <Navigate
-                  to="/accounts/filter"
+                  to="/accounts/people/filter"
                   state={{ openChangeOwnerDialog: true }}
                   replace
                 />
@@ -197,7 +205,31 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "accounts/filter",
+            path: "accounts/people",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/people/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/filter",
             element: (
               <PrivateRoute restricted withManager>
                 <AccountsView />

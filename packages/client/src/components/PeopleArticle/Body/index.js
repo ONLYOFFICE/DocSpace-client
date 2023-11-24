@@ -60,7 +60,7 @@ const ArticleBodyContent = ({
 
       changeTitleDocument(groupId);
 
-      if (window.location.pathname.indexOf("/accounts/filter") > 0) {
+      if (window.location.pathname.indexOf("/accounts") > 0) {
         selectGroup(groupId);
         if (isMobileOnly || isMobile()) toggleArticleOpen();
       } else {
@@ -72,7 +72,7 @@ const ArticleBodyContent = ({
         const url = combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           config.homepage,
-          `/accounts/filter?${urlFilter}`
+          `/accounts/people/filter?${urlFilter}`
         );
         navigate(url);
         if (isMobileOnly || isMobile()) toggleArticleOpen();

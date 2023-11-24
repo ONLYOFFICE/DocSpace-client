@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 import RowContent from "@docspace/components/row-content";
 import Link from "@docspace/components/link";
 
-import Badges from "../Badges";
+import Badges from "../../Badges";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`

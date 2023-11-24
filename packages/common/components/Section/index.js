@@ -48,6 +48,7 @@ const Section = (props) => {
     isEmptyPage,
     isTrashFolder,
     isFormGallery,
+    isAccounts,
     currentDeviceType,
   } = props;
 
@@ -209,6 +210,7 @@ const Section = (props) => {
                   viewAs={viewAs}
                   settingsStudio={settingsStudio}
                   isFormGallery={isFormGallery}
+                  isAccounts={isAccounts}
                 >
                   {isSectionHeaderAvailable &&
                     currentDeviceType !== DeviceType.desktop && (

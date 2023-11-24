@@ -18,14 +18,19 @@ class FilterStore {
 
   setFilterUrl = (filter) => {
     const urlFilter = filter.toUrlParams();
+
+    const isPeople = window.location.pathname.includes("/accounts/people");
+    const module = isPeople ? "people" : "groups";
+    const newPath = combineUrl(`/accounts/${module}/filter?${urlFilter}`);
+
+    console.log(window.location.pathname + window.location.search === newPath);
+
+    if (window.location.pathname + window.location.search === newPath) return;
+
     window.history.replaceState(
       "",
       "",
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/accounts/filter?${urlFilter}`
-      )
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
     );
   };
 

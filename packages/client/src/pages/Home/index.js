@@ -243,6 +243,7 @@ const PureHome = (props) => {
       firstLoad,
       isLoaded: !firstLoad,
       viewAs: accountsViewAs,
+      isAccounts: isAccountsPage,
     };
 
     if (!isAccountsPage) {
@@ -258,6 +259,8 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+    } else {
+      sectionProps.isAccounts = isAccountsPage;
     }
   }
 
@@ -287,7 +290,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <Section {...sectionProps} isAccounts={isAccountsPage}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
             {isFrame ? (
@@ -316,7 +319,7 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody>
+        <Section.SectionBody isAccounts={isAccountsPage}>
           <Outlet />
         </Section.SectionBody>
 

@@ -1,36 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { Consumer } from "@docspace/components/utils/context";
+import Tabs from "./Tabs";
+import People from "./People";
+import Groups from "./Groups";
 
-import withLoader from "SRC_DIR/HOCs/withLoader";
-
-import PeopleRowContainer from "./RowView/PeopleRowContainer";
-import TableView from "./TableView/TableContainer";
-
-const SectionBodyContent = (props) => {
-  const {
-    tReady,
-    accountsViewAs,
-    setSelection,
-    setBufferSelection,
-    setChangeOwnerDialogVisible,
-  } = props;
+const SectionBodyContent = ({
+  setSelection,
+  setBufferSelection,
+  setChangeOwnerDialogVisible,
+}) => {
   const location = useLocation();
-
-  useEffect(() => {
-    window.addEventListener("mousedown", onMouseDown);
-
-    if (location?.state?.openChangeOwnerDialog) {
-      setChangeOwnerDialogVisible(true);
-    }
-
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-    };
-  }, []);
 
   const onMouseDown = (e) => {
     if (
@@ -49,40 +30,25 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDown);
+    if (location?.state?.openChangeOwnerDialog)
+      setChangeOwnerDialogVisible(true);
+
+    return () => window.removeEventListener("mousedown", onMouseDown);
+  }, []);
+
   return (
-    <Consumer>
-      {(context) =>
-        accountsViewAs === "table" ? (
-          <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
-          </>
-        ) : (
-          <>
-            <PeopleRowContainer
-              sectionWidth={context.sectionWidth}
-              tReady={tReady}
-            />
-          </>
-        )
-      }
-    </Consumer>
+    <>
+      <Tabs />
+      {location.pathname.includes("/accounts/people") ? <People /> : <Groups />}
+    </>
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs } = peopleStore;
-
-  const { setSelection, setBufferSelection } = peopleStore.selectionStore;
-  const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
-
-  return {
-    accountsViewAs,
-    setSelection,
-    setBufferSelection,
-    setChangeOwnerDialogVisible,
-  };
-})(
-  withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))()
-  )
-);
+export default inject(({ peopleStore }) => ({
+  setSelection: peopleStore.selectionStore.setSelection,
+  setBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  setChangeOwnerDialogVisible:
+    peopleStore.dialogStore.setChangeOwnerDialogVisible,
+}))(observer(SectionBodyContent));

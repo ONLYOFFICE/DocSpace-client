@@ -12,7 +12,7 @@ import DropDownItem from "@docspace/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import Badges from "../Badges";
+import Badges from "../../Badges";
 import { Base } from "@docspace/components/themes";
 
 const StyledWrapper = styled.div`

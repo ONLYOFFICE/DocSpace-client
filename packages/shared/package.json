@@ -13,7 +13,9 @@
     "storybook-serve": "serve storybook-static -p 8082",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@react-spring/web": "^9.7.1",

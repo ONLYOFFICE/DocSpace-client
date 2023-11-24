@@ -1,3 +1,5 @@
+import { ThemeType } from "../themes";
+
 export type TInterfaceDirection = "rtl" | "ltr";
 
 export type TColorScheme = {
@@ -13,6 +15,9 @@ export type TColorScheme = {
   };
 };
 
+declare module "styled-components" {
+  export interface DefaultTheme extends ThemeType {}
+}
 declare global {
   interface Window {
     firebaseHelper: { config: { authDomain: string } };

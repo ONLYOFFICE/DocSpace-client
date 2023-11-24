@@ -261,6 +261,7 @@ const Selector = ({
 
   const loadMoreItems = React.useCallback(
     (startIndex: number) => {
+      if (startIndex === 1) return; //fix double fetch of the first page
       !isNextPageLoading && loadNextPage && loadNextPage(startIndex - 1);
     },
     [isNextPageLoading, loadNextPage]

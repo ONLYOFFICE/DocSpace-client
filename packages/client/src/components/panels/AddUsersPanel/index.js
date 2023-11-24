@@ -13,7 +13,7 @@ import Filter from "@docspace/common/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/common/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -22,8 +22,6 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-
-const TIMEOUT = 100;
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -106,9 +104,9 @@ const AddUsersPanel = ({
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(TIMEOUT, false);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(LOADER_TIMEOUT, true);
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
-    TIMEOUT,
+    LOADER_TIMEOUT,
     false
   );
 

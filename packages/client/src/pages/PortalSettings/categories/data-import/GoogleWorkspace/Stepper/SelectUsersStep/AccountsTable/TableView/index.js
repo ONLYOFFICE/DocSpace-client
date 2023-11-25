@@ -131,7 +131,7 @@ const TableView = (props) => {
                 key={data.key}
                 displayName={data.displayName}
                 email={data.email}
-                isDublicate={data.isDublicate}
+                isDuplicate={data.isDuplicate}
                 isChecked={isAccountChecked(data.key, checkedAccountType)}
                 toggleAccount={(e) => handleToggle(e, data)}
               />

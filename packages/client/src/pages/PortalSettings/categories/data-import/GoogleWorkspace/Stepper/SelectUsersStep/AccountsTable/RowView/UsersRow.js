@@ -20,7 +20,7 @@ const UsersRow = (props) => {
           sectionWidth={sectionWidth}
           displayName={data.displayName}
           email={data.email}
-          isDublicate={data.isDublicate}
+          isDuplicate={data.isDuplicate}
         />
       </Row>
     </>

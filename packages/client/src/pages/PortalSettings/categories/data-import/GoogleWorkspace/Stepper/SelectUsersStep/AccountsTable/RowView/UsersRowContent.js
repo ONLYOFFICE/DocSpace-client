@@ -38,14 +38,14 @@ const UsersRowContent = ({
   sectionWidth,
   displayName,
   email,
-  isDublicate,
+  isDuplicate,
 }) => {
   const contentData = [
     <>
       <Text className="username">{displayName}</Text>
       <Box displayProp="flex">
         <Text className="user-email">{email}</Text>
-        {isDublicate && (
+        {isDuplicate && (
           <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
         )}
       </Box>

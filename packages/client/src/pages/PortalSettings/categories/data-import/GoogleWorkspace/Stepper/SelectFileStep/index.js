@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
 
@@ -73,15 +73,49 @@ const SelectFileStep = ({
   singleFileUploading,
   getMigrationStatus,
   setUsers,
-  setData,
   isFileLoading,
   setIsFileLoading,
   cancelMigration,
 }) => {
-  const [searchParams] = useSearchParams();
   const [progress, setProgress] = useState(0);
+  const [searchParams] = useSearchParams();
   const [isFileError, setIsFileError] = useState(false);
+  const uploadInterval = useRef(null);
   const navigate = useNavigate();
+
+  const onUploadFile = async (file) => {
+    if (file.length) {
+      await multipleFileUploading(file, setProgress);
+    } else {
+      await singleFileUploading(file, setProgress);
+    }
+    await initMigrationName(searchParams.get("service"));
+
+    uploadInterval.current = setInterval(async () => {
+      const res = await getMigrationStatus();
+
+      if (!res || res.parseResult.failedArchives.length > 0) {
+        setIsFileError(true);
+        setIsFileLoading(false);
+        clearInterval(uploadInterval.current);
+      } else if (res.isCompleted) {
+        setIsFileLoading(false);
+        clearInterval(uploadInterval.current);
+        setUsers(res.parseResult);
+        setShowReminder(true);
+      }
+    }, 1000);
+  };
+
+  const onSelectFile = (file) => {
+    setIsFileLoading(true);
+    try {
+      onUploadFile(file);
+    } catch (error) {
+      console.log(error);
+      setIsFileLoading(false);
+    }
+  };
 
   const onDownloadArchives = async () => {
     try {
@@ -105,44 +139,15 @@ const SelectFileStep = ({
     }
   };
 
-  const onUploadFile = async (file) => {
-    if (file.length) {
-      await multipleFileUploading(file, setProgress);
-    } else {
-      await singleFileUploading(file, setProgress);
-    }
-    await initMigrationName(searchParams.get("service"));
-    const interval = setInterval(async () => {
-      const res = await getMigrationStatus();
-
-      if (!res || res.parseResult.failedArchives.length > 0) {
-        setIsFileError(true);
-        setIsFileLoading(false);
-        clearInterval(interval);
-      } else if (res.isCompleted) {
-        setIsFileLoading(false);
-        clearInterval(interval);
-        setData(res);
-        setUsers(res);
-        setShowReminder(true);
-      }
-    }, 1000);
-  };
-
-  const onSelectFile = (file) => {
-    setIsFileLoading(true);
-    try {
-      onUploadFile(file);
-    } catch (error) {
-      console.log(error);
-      setIsFileLoading(false);
-    }
-  };
-
   const onCancel = () => {
     setCancelDialogVisbile(true);
     setProgress(0);
     setIsFileLoading(false);
+  };
+
+  const handleCancelMigration = () => {
+    clearInterval(uploadInterval.current);
+    cancelMigration();
   };
 
   return (
@@ -214,7 +219,7 @@ const SelectFileStep = ({
           visible={cancelDialogVisble}
           loading={isFileLoading}
           onClose={() => setCancelDialogVisbile(false)}
-          cancelMigration={cancelMigration}
+          cancelMigration={handleCancelMigration}
         />
       )}
     </>
@@ -228,7 +233,6 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     multipleFileUploading,
     getMigrationStatus,
     setUsers,
-    setData,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
@@ -242,7 +246,6 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     multipleFileUploading,
     getMigrationStatus,
     setUsers,
-    setData,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,

@@ -6,24 +6,23 @@ import SearchInput from "@docspace/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
+// import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-const LICENSE_LIMIT = 100;
+// const LICENSE_LIMIT = 100;
 
 const SelectUsersStep = ({
   t,
   onNextStep,
   onPrevStep,
   showReminder,
-  numberOfCheckedAccounts,
-  users,
+  withEmailUsers,
   searchValue,
   setSearchValue,
 }) => {
-  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(users.slice(leftBoundary, rightBoundary));
+    setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -50,19 +49,20 @@ const SelectUsersStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
-        saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+        // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
 
-      <UsersInfoBlock
+      {/* <UsersInfoBlock
         t={t}
-        selectedUsers={numberOfCheckedAccounts}
-        totalUsers={users.length}
+        selectedUsers={100}
+        totalUsers={withEmailUsers.length}
         totalLicenceLimit={LICENSE_LIMIT}
-      />
+      /> */}
 
       <SearchInput
-        id="search-users-input"
+        id="search-withEmailUsers-input"
         placeholder={t("Common:Search")}
+        style={{ marginTop: "16px" }}
         value={searchValue}
         onChange={onChangeInput}
         refreshTimeout={100}
@@ -71,10 +71,10 @@ const SelectUsersStep = ({
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.length > 25 && (
+      {withEmailUsers.length > 25 && (
         <AccountsPaging
           t={t}
-          numberOfItems={users.length}
+          numberOfItems={withEmailUsers.length}
           setDataPortion={handleDataChange}
         />
       )}
@@ -88,7 +88,7 @@ const SelectUsersStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
-          saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
       )}
     </>
@@ -96,11 +96,15 @@ const SelectUsersStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { numberOfCheckedAccounts, users, searchValue, setSearchValue } =
-    importAccountsStore;
+  const {
+    numberOfCheckedAccounts,
+    withEmailUsers,
+    searchValue,
+    setSearchValue,
+  } = importAccountsStore;
 
   return {
-    users,
+    withEmailUsers,
     searchValue,
     setSearchValue,
     numberOfCheckedAccounts,

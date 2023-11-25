@@ -51,16 +51,18 @@ const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
+const checkedAccountType = "withEmail";
+
 const TableView = (props) => {
   const {
     t,
-    users,
+    withEmailUsers,
     userId,
     viewAs,
     setViewAs,
     sectionWidth,
     accountsData,
-    checkedAccounts,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
@@ -68,11 +70,13 @@ const TableView = (props) => {
   } = props;
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e, users);
+  const toggleAll = (e) => {
+    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  };
 
-  const handleToggle = (e, id) => {
+  const handleToggle = (e, user) => {
     e.stopPropagation();
-    toggleAccount(id);
+    toggleAccount(user, checkedAccountType);
   };
 
   const onClearFilter = () => {
@@ -80,7 +84,8 @@ const TableView = (props) => {
   };
 
   const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -106,7 +111,7 @@ const TableView = (props) => {
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.withEmail.length === withEmailUsers.length}
             toggleAll={toggleAll}
           />
           <TableBody
@@ -118,6 +123,7 @@ const TableView = (props) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
+            fetchMoreFiles={() => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow
@@ -126,8 +132,8 @@ const TableView = (props) => {
                 displayName={data.displayName}
                 email={data.email}
                 isDublicate={data.isDublicate}
-                isChecked={isAccountChecked(data.key)}
-                toggleAccount={(e) => handleToggle(e, data.key)}
+                isChecked={isAccountChecked(data.key, checkedAccountType)}
+                toggleAccount={(e) => handleToggle(e, data)}
               />
             ))}
           </TableBody>
@@ -167,8 +173,8 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
   const {
-    users,
-    checkedAccounts,
+    withEmailUsers,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
@@ -176,11 +182,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    users,
+    withEmailUsers,
     viewAs,
     setViewAs,
     userId,
-    checkedAccounts,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,

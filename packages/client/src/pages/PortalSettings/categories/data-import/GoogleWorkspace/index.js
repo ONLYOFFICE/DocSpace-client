@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { isMobileOnly, isDesktop } from "react-device-detect";
-import { getStepTitle, getStepDescription } from "../../../utils";
+import { getStepTitle, getGoogleStepDescription } from "../../../utils";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
@@ -136,7 +136,7 @@ const GoogleWorkspace = ({ t }) => {
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Text className="step-description">
-          {getStepDescription(t, currentStep, renderTooltip)}
+          {getGoogleStepDescription(t, currentStep, renderTooltip)}
         </Text>
         <StepContent
           t={t}

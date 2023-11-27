@@ -26,6 +26,7 @@ class PasswordInput extends React.Component {
 
     this.ref = React.createRef();
     this.refTooltip = React.createRef();
+    this.refTooltipContent = React.createRef();
 
     this.state = {
       type: inputType,
@@ -40,9 +41,28 @@ class PasswordInput extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside = (event) => {
+    if (
+      !this.refTooltip.current.isOpen ||
+      !this.refTooltip.current ||
+      this.refTooltipContent.current?.parentElement.contains(event.target) ||
+      this.refTooltip.current.activeAnchor.contains(event.target)
+    )
+      return;
+
+    this.refTooltip.current.close();
+  };
+
   onBlur = (e) => {
     e.persist();
-    this.refTooltip.current?.close?.(e);
     if (this.props.onBlur) this.props.onBlur(e);
   };
 
@@ -311,7 +331,7 @@ class PasswordInput extends React.Component {
   };
 
   renderTooltipContent = () => (
-    <TooltipStyle>
+    <TooltipStyle ref={this.refTooltipContent}>
       <StyledTooltipContainer
         forwardedAs="div"
         fontSize="12px"

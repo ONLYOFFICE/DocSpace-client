@@ -10,6 +10,10 @@ import { desktop } from "@docspace/components/utils/device";
 const StyledRowContainer = styled(RowContainer)`
   @media ${desktop} {
     max-width: 620px;
+
+    .row_content {
+      max-width: 508px;
+    }
   }
   max-width: 100%;
   border-width: 1px;

@@ -37,7 +37,7 @@ const Spaces = () => {
         <CreatePortalDialog key="create-portal-dialog" />
       )}
       <div className="spaces-header">
-        <Text>{t("Subheader")}</Text>
+        <Text fontSize="12px" fontWeight={400} >{t("Subheader")}</Text>
       </div>
       {isConnected && portals.length > 0 ? (
         <MultipleSpaces t={t} />

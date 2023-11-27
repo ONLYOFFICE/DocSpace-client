@@ -2,15 +2,24 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import RowContent from "@docspace/components/row-content";
 import Text from "@docspace/components/text";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+import { isMobileOnly } from "react-device-detect";
 import { getConvertedSize } from "@docspace/common/utils";
 import { TPortals } from "SRC_DIR/types/spaces";
 
 const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
   .row-main-container-wrapper {
+    ${isMobileOnly &&
+    css`
+      margin-top: 14px;
+    `}
     display: flex;
     justify-content: flex-start;
+  }
+
+  .mainIcons {
+    height: 20px;
   }
 `;
 

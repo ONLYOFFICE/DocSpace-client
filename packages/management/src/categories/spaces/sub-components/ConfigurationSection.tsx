@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain, validatePortalName } from "SRC_DIR/utils";
+import { isMobile } from "react-device-detect";
 import toastr from "@docspace/components/toast/toastr";
 
 import { TranslationType } from "SRC_DIR/types/spaces";
@@ -82,14 +83,14 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             {t("ConfigurationHeader")}
           </Text>
         </div>
-        <Text>{t("ConfigurationDescription")}</Text>
+        <Text fontSize="12px" lineHeight="16px" fontWeight={400}>{t("ConfigurationDescription")}</Text>
       </div>
       <div className="spaces-input-wrapper">
         <div className="spaces-input-block">
           <div className="spaces-text-wrapper">
             <Text
               fontSize="13px"
-              fontWeight="600"
+              fontWeight={600}
               className="spaces-domain-text"
             >
               {t("Domain")}
@@ -105,7 +106,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             className="spaces-input"
             tabIndex={1}
           />
-          <div>
+          <div style={{"marginTop": "5px"}}>
             {domainNameError &&
               domainNameError.map((err, index) => (
                 <Text
@@ -141,11 +142,12 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
 
       <Button
         isLoading={isLoading}
-        size="normal"
+        size={isMobile ? "normal" : "small"}
         className="spaces-button"
         label={t("Common:Connect")}
         onClick={onConfigurationPortal}
         primary={true}
+        style={{"marginTop": "2px"}}
         tabIndex={3}
       />
     </ConfigurationWrapper>

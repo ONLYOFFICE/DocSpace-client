@@ -6,7 +6,7 @@ import styled from "styled-components";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import DefaultLogoUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
+import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 import { useTranslation } from "react-i18next";
 import { TPortals } from "SRC_DIR/types/spaces";
 
@@ -27,8 +27,8 @@ const StyledRoomRow = styled(Row)`
   .row_context-menu-wrapper {
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+        ? `margin-left: 18px;`
+        : `margin-right: 18px;`}
   }
 `;
 

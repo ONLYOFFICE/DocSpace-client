@@ -2,6 +2,7 @@ import React from "react";
 import { Button, TextInput } from "@docspace/components";
 import { observer } from "mobx-react";
 import Text from "@docspace/components/text";
+import { isMobile } from "react-device-detect";
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
@@ -19,11 +20,13 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
 
   const { portals, baseDomain } = authStore.settingsStore;
 
+  const buttonSize = isMobile ? "normal" : "small";
+
   return (
     <StyledMultipleSpaces>
       <div className="multiple-spaces-section">
         <Button
-          size="normal"
+          size={buttonSize}
           label={t("NewSpace")}
           className="spaces-button"
           primary={true}
@@ -52,7 +55,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
 
           <Button
             className="spaces-button"
-            size="normal"
+            size={buttonSize}
             label={t("Common:EditButton")}
             primary={true}
             onClick={() => setChangeDomainDialogVisible(true)}

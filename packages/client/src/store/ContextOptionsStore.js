@@ -469,7 +469,8 @@ class ContextOptionsStore {
       this.dialogsStore;
     const { confirmDelete } = this.settingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
-    const { id: selectedFolderId } = this.selectedFolderStore;
+    const { id: selectedFolderId, getSelectedFolder } =
+      this.selectedFolderStore;
     const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
       this.filesStore;
 
@@ -504,8 +505,10 @@ class ContextOptionsStore {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [this.selectedFolderStore], true).catch(
-        (err) => toastr.error(err)
+      const selectedFolder = getSelectedFolder();
+
+      deleteAction(translations, [selectedFolder], true).catch((err) =>
+        toastr.error(err)
       );
     }
   };

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { ValidationResult } from "./../helpers/constants";
 import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
@@ -16,6 +16,28 @@ const ConfirmRoute = (props) => {
 
   const location = useLocation();
 
+  const getData = React.useCallback(() => {
+    const queryParams = getObjectByLocation(location);
+    const url = location.pathname;
+    const posSeparator = url.lastIndexOf("/");
+    console.log(posSeparator);
+    const type = !!posSeparator ? url?.slice(posSeparator + 1) : "";
+    const confirmLinkData = Object.assign({ type }, queryParams);
+
+    return { type, confirmLinkData };
+  }, [location.pathname]);
+
+  const { type, confirmLinkData } = getData();
+
+  console.log(type, confirmLinkData);
+
+  console.log(type);
+
+  if (!type)
+    return (
+      <Navigate to={`/confirm/${confirmLinkData.type}${location.search}`} />
+    );
+
   React.useEffect(() => {
     const { forUnauthorized, isAuthenticated } = props;
 
@@ -25,11 +47,7 @@ const ConfirmRoute = (props) => {
 
     const { search } = location;
 
-    const queryParams = getObjectByLocation(location);
-    const url = location.pathname;
-    const posSeparator = url.lastIndexOf("/");
-    const type = url.slice(posSeparator + 1);
-    const confirmLinkData = Object.assign({ type }, queryParams);
+    const { confirmLinkData } = getData();
 
     let path = "";
     if (!isAuthenticated) {
@@ -112,7 +130,7 @@ const ConfirmRoute = (props) => {
           "/error"
         );
       });
-  }, []);
+  }, [getData]);
 
   // console.log(`ConfirmRoute render`, this.props, this.state);
 

@@ -10,7 +10,6 @@ import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
-import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 import UsersRow from "./UsersRow";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
@@ -100,6 +99,7 @@ const RowView = (props) => {
           >
             <Text className="row-header-title">{t("Common:Name")}</Text>
           </StyledRow>
+
           {accountsData.map((data) => (
             <UsersRow
               t={t}

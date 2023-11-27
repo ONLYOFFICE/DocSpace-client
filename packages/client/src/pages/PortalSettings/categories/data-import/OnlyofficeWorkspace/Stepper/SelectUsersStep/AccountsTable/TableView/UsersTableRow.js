@@ -48,7 +48,9 @@ const UsersTableRow = ({
   isDuplicate,
   isChecked,
   toggleAccount,
+  data,
 }) => {
+  console.log(data);
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell>

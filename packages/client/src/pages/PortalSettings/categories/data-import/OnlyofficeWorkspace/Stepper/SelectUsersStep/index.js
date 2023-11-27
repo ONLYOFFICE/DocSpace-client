@@ -54,15 +54,15 @@ const SelectUsersStep = ({
 
       {/* <UsersInfoBlock
         t={t}
-        selectedUsers={100}
-        totalUsers={withEmailUsers.length}
+        selectedUsers={numberOfCheckedAccounts}
+        totalUsers={users.length}
         totalLicenceLimit={LICENSE_LIMIT}
       /> */}
 
       <SearchInput
-        id="search-withEmailUsers-input"
+        id="search-users-input"
         placeholder={t("Common:Search")}
-        style={{ marginTop: "16px" }}
+        style={{ marginTop: "20px" }}
         value={searchValue}
         onChange={onChangeInput}
         refreshTimeout={100}
@@ -96,17 +96,11 @@ const SelectUsersStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    numberOfCheckedAccounts,
-    withEmailUsers,
-    searchValue,
-    setSearchValue,
-  } = importAccountsStore;
+  const { withEmailUsers, searchValue, setSearchValue } = importAccountsStore;
 
   return {
     withEmailUsers,
     searchValue,
     setSearchValue,
-    numberOfCheckedAccounts,
   };
 })(observer(SelectUsersStep));

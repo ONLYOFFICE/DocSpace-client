@@ -11,6 +11,7 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -29,7 +30,8 @@ const Wrapper = styled.div`
     .icon-button_svg {
       svg {
         path {
-          fill: ${(props) => props.theme.client.settings.migration.fileInputIconColor};
+          fill: ${(props) =>
+            props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
@@ -68,7 +70,6 @@ const SelectFileStep = ({
   cancelDialogVisble,
   setCancelDialogVisbile,
   initMigrationName,
-  multipleFileUploading,
   singleFileUploading,
   getMigrationStatus,
   setUsers,
@@ -77,21 +78,23 @@ const SelectFileStep = ({
   cancelMigration,
 }) => {
   const [progress, setProgress] = useState(0);
-  const [searchParams] = useSearchParams();
   const [isFileError, setIsFileError] = useState(false);
+  const [searchParams] = useSearchParams();
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
   const onUploadFile = async (file) => {
-    if (file.length) {
-      await multipleFileUploading(file, setProgress);
-    } else {
-      await singleFileUploading(file, setProgress);
-    }
+    await singleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      const res = await getMigrationStatus();
+      // const res = await getMigrationStatus();
+
+      const res = {
+        parseResult: mockRes,
+        failedArchives: [],
+        isCompleted: true,
+      };
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);
@@ -106,16 +109,6 @@ const SelectFileStep = ({
     }, 1000);
   };
 
-  const onSelectFile = (file) => {
-    setIsFileLoading(true);
-    try {
-      onUploadFile(file);
-    } catch (error) {
-      console.log(error);
-      setIsFileLoading(false);
-    }
-  };
-
   const onDownloadArchives = async () => {
     try {
       await getMigrationStatus()
@@ -123,7 +116,7 @@ const SelectFileStep = ({
           (res) =>
             new Blob([res.parseResult.failedArchives], {
               type: "text/csv;charset=utf-8",
-            }),
+            })
         )
         .then((blob) => {
           let a = document.createElement("a");
@@ -135,6 +128,16 @@ const SelectFileStep = ({
         });
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const onSelectFile = (file) => {
+    setIsFileLoading(true);
+    try {
+      onUploadFile(file);
+    } catch (error) {
+      console.log(error);
+      setIsFileLoading(false);
     }
   };
 
@@ -152,7 +155,9 @@ const SelectFileStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="select-file-title">{t("Settings:ChooseBackupFile")}</Text>
+        <Text className="select-file-title">
+          {t("Settings:ChooseBackupFile")}
+        </Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -170,7 +175,11 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
+          <Button
+            size="small"
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </Wrapper>
       ) : (
         <ErrorBlock>
@@ -181,8 +190,15 @@ const SelectFileStep = ({
                 className="complete-progress-bar"
                 label={t("Common:LoadingIsComplete")}
               />
-              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
-              <Link type="action" isHovered fontWeight={600} onClick={onDownloadArchives}>
+              <Text className="error-text">
+                {t("Settings:UnsupportedArchivesDescription")}
+              </Text>
+              <Link
+                type="action"
+                isHovered
+                fontWeight={600}
+                onClick={onDownloadArchives}
+              >
                 {t("Settings:DownloadUnsupportedArchives")}
               </Link>
             </Box>
@@ -216,19 +232,18 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
   const {
     initMigrationName,
     singleFileUploading,
-    multipleFileUploading,
     getMigrationStatus,
     setUsers,
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
     initMigrationName,
     singleFileUploading,
-    multipleFileUploading,
     getMigrationStatus,
     setUsers,
     isFileLoading,

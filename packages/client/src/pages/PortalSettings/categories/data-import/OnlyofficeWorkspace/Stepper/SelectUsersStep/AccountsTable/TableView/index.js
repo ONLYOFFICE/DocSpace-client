@@ -70,9 +70,8 @@ const TableView = (props) => {
   } = props;
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => {
+  const toggleAll = (e) =>
     toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
-  };
 
   const handleToggle = (e, user) => {
     e.stopPropagation();
@@ -132,6 +131,7 @@ const TableView = (props) => {
                 displayName={data.displayName}
                 email={data.email}
                 isDuplicate={data.isDuplicate}
+                data={data}
                 isChecked={isAccountChecked(data.key, checkedAccountType)}
                 toggleAccount={(e) => handleToggle(e, data)}
               />

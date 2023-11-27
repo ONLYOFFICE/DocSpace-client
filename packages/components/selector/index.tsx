@@ -105,8 +105,7 @@ const Selector = ({
   }, [onBackClick]);
 
   const onClearSearchAction = React.useCallback(() => {
-    onClearSearch && onClearSearch();
-    setIsSearch(false);
+    onClearSearch && onClearSearch(() => setIsSearch(false));
   }, [onClearSearch]);
 
   const onSearchAction = React.useCallback(
@@ -115,9 +114,7 @@ const Selector = ({
 
       if (searchValue === "") return onClearSearchAction();
 
-      onSearch && onSearch(searchValue);
-
-      setIsSearch(true);
+      onSearch && onSearch(searchValue, () => setIsSearch(true));
     },
     [onSearch, onClearSearchAction]
   );
@@ -275,7 +272,7 @@ const Selector = ({
     if (!!selectedAccessRight) setSelectedAccess({ ...selectedAccessRight });
   }, [selectedAccessRight]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (items && selectedItems) {
       if (selectedItems.length === 0 || !isMultiSelect) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));

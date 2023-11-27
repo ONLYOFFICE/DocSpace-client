@@ -74,6 +74,8 @@ const Body = ({
 
   const itemsCount = hasNextPage ? items.length + 1 : items.length;
 
+  console.log({ itemsCount, isLoading });
+
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
       listOptionsRef.current.resetloadMoreItemsCache(true);

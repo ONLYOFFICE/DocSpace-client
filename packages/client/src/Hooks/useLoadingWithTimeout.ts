@@ -23,13 +23,12 @@ function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
 
   const setStateWithTimeout: Dispatch<S | undefined> = useCallback((value) => {
     cleanTimer();
-
     if (value) {
-      setState(value);
-    } else {
       timerRef.current = window.setTimeout(() => {
         setState(value);
       }, timeout);
+    } else {
+      setState(value);
     }
   }, []);
 

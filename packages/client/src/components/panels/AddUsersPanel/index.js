@@ -104,7 +104,7 @@ const AddUsersPanel = ({
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(LOADER_TIMEOUT, true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
     false
@@ -114,16 +114,16 @@ const AddUsersPanel = ({
     loadNextPage(0);
   }, []);
 
-  const onSearch = (value) => {
+  const onSearch = (value, callback) => {
     if (value === searchValue) return;
 
     setIsLoadingSearch(true);
     setSearchValue(value);
-    loadNextPage(0, value);
+    loadNextPage(0, value, callback);
   };
 
-  const onClearSearch = () => {
-    onSearch("");
+  const onClearSearch = (callback) => {
+    onSearch("", callback);
   };
 
   const toListItem = (item) => {
@@ -158,7 +158,7 @@ const AddUsersPanel = ({
     };
   };
 
-  const loadNextPage = (startIndex, search = searchValue) => {
+  const loadNextPage = (startIndex, search = searchValue, callback) => {
     const pageCount = 100;
 
     setIsNextPageLoading(true);
@@ -196,6 +196,7 @@ const AddUsersPanel = ({
       })
       .catch((error) => console.log(error))
       .finally(() => {
+        callback?.();
         setIsLoading(false);
         setIsLoadingSearch(false);
       });

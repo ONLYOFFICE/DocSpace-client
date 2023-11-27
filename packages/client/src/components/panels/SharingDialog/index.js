@@ -49,7 +49,7 @@ const SharingDialog = ({
   setSelection,
   isVisible,
 }) => {
-  const { t } = useTranslation(["Files", "Common"]);
+  const { t } = useTranslation(["Files", "SharingPanel", "Common"]);
 
   useEffect(() => {
     setSelection([sharingObject]);
@@ -71,7 +71,7 @@ const SharingDialog = ({
             <Text className="share-file_heading">{t("Files:Share")}</Text>
           </div>
           <div className="share-file_body">
-            <Share />
+            <Share selection={sharingObject} />
           </div>
           <div className="share-file_footer">
             <Button

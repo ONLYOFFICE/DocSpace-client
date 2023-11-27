@@ -20,7 +20,7 @@ const ConfirmRoute = (props) => {
     const queryParams = getObjectByLocation(location);
     const url = location.pathname;
     const posSeparator = url.lastIndexOf("/");
-    console.log(posSeparator);
+
     const type = !!posSeparator ? url?.slice(posSeparator + 1) : "";
     const confirmLinkData = Object.assign({ type }, queryParams);
 
@@ -28,10 +28,6 @@ const ConfirmRoute = (props) => {
   }, [location.pathname]);
 
   const { type, confirmLinkData } = getData();
-
-  console.log(type, confirmLinkData);
-
-  console.log(type);
 
   if (!type && confirmLinkData.type)
     return (

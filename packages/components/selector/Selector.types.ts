@@ -24,8 +24,8 @@ export type SelectorProps = {
   withSearch?: boolean;
   searchPlaceholder?: string;
   searchValue?: string;
-  onSearch?: (value: string) => void;
-  onClearSearch?: () => void;
+  onSearch?: (value: string, callback?: Function) => void;
+  onClearSearch?: (callback?: Function) => void;
   items: Item[];
   onSelect: (item: any) => void;
   isMultiSelect?: boolean;

@@ -79,7 +79,7 @@ const CreatePortalDialog = () => {
       await createNewPortal(data)
       .then( async (data) => {
         const {tenant} = data;
-        if (visit || window.location.hostname !== host) {
+        if (visit) {
           const portalUrl = `${protocol}//${tenant?.domain}/`;
           
           return window.open(portalUrl, "_self");

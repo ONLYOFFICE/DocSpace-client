@@ -165,8 +165,8 @@ export const useFilesHelper = ({
             filter.filterType = FilterType.ImagesOnly;
             break;
 
-          case FilesSelectorFilterTypes.GZ:
-            filter.extension = FilesSelectorFilterTypes.GZ;
+          case FilesSelectorFilterTypes.BackupOnly:
+            filter.filterType = FilesSelectorFilterTypes.BackupOnly;
             break;
 
           case FilesSelectorFilterTypes.DOCXF:

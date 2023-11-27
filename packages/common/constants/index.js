@@ -84,6 +84,7 @@ export const FilesSelectorFilterTypes = Object.freeze({
   DOCXF: "DOCXF",
   XLSX: "XLSX",
   ALL: "ALL",
+  BackupOnly: "BackupOnly",
 });
 /**
  * Enum for filter subject.

@@ -1251,7 +1251,7 @@ export default inject(
       isDesktop: auth.settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
-      isRootFolder: isRoot,
+      isRootFolder: isPublicRoom ? true : isRoot,
       isPersonalRoom,
       title,
       isRoom,

@@ -51,10 +51,10 @@ class PasswordInput extends React.Component {
 
   handleClickOutside = (event) => {
     if (
-      !this.refTooltip.current.isOpen ||
       !this.refTooltip.current ||
-      this.refTooltipContent.current?.parentElement.contains(event.target) ||
-      this.refTooltip.current.activeAnchor.contains(event.target)
+      !this.refTooltip.current.isOpen ||
+      this.refTooltip.current.activeAnchor.contains(event.target) ||
+      this.refTooltipContent.current?.parentElement.contains(event.target)
     )
       return;
 

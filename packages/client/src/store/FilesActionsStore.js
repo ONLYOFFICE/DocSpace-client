@@ -337,13 +337,6 @@ class FilesActionStore {
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
 
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
-
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
 
@@ -622,7 +615,7 @@ class FilesActionStore {
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : bufferSelection != null
+      : bufferSelection
       ? [bufferSelection]
       : infoPanelIsVisible && infoPanelSelection != null
       ? [infoPanelSelection]
@@ -647,14 +640,6 @@ class FilesActionStore {
         folderIds.push(item.id);
         items.push({ id: item.id });
       }
-    }
-
-    if (this.dialogsStore.isFolderActions) {
-      fileIds = [];
-      folderIds = [];
-
-      folderIds.push(bufferSelection);
-      this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);

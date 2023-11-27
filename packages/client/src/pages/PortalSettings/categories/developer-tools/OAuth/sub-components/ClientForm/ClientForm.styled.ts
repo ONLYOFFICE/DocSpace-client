@@ -101,6 +101,14 @@ const StyledInputGroup = styled.div`
   .description {
     color: ${(props) => props.theme.oauth.clientForm.descriptionColor};
   }
+
+  .field-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+  }
 `;
 
 StyledInputGroup.defaultProps = { theme: Base };

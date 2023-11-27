@@ -112,6 +112,8 @@ const MultiInputGroup = ({
             key={`${v}-${index}`}
             isInline
             label={v}
+            isDisabled={isDisabled}
+            hideCross={isDisabled}
             onClose={() => {
               !isDisabled && onAdd(name, v);
             }}

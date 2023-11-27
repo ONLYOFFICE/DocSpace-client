@@ -17,6 +17,7 @@ const SelectedItem = (props) => {
     group,
     forwardedRef,
     classNameCloseButton,
+    hideCross,
   } = props;
   if (!label) return <></>;
 
@@ -48,14 +49,16 @@ const SelectedItem = (props) => {
       >
         {label}
       </StyledLabel>
-      <IconButton
-        className={"selected-tag-removed " + classNameCloseButton}
-        iconName={CrossReactSvgUrl}
-        size={12}
-        onClick={onCloseClick}
-        isFill
-        isDisabled={isDisabled}
-      />
+      {!hideCross && (
+        <IconButton
+          className={"selected-tag-removed " + classNameCloseButton}
+          iconName={CrossReactSvgUrl}
+          size={12}
+          onClick={onCloseClick}
+          isFill
+          isDisabled={isDisabled}
+        />
+      )}
     </StyledSelectedItem>
   );
 };
@@ -65,6 +68,8 @@ SelectedItem.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Sets the 'width: fit-content' property */
   isInline: PropTypes.bool,
+  /** Hide cross icon */
+  hideCross: PropTypes.bool,
   /** Sets a callback function that is triggered when the cross icon is clicked */
   onClose: PropTypes.func.isRequired,
   /** Sets a callback function that is triggered when the selected item is clicked */
@@ -87,6 +92,7 @@ SelectedItem.propTypes = {
 
 SelectedItem.defaultProps = {
   isInline: true,
+  hideCross: false,
   isDisabled: false,
 };
 

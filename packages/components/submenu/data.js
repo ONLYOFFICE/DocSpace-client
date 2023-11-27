@@ -9,7 +9,7 @@ export const data = [
     name: "Overview",
     content: (
       <FileInput
-        accept=".doc, .docx"
+        accept={[".doc", ".docx"]}
         id="file-input-id"
         name="demoFileInputName"
         onInput={() => {}}

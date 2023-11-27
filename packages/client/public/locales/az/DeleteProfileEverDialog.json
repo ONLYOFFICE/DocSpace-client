@@ -1,4 +1,5 @@
 {
   "DeleteUser": "İstifadəçini sil",
+  "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir"
 }

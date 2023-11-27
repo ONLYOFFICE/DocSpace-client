@@ -21,6 +21,7 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
   setSelection,
   needResetUserSelection,
+  isRoomAdmin,
 }) => {
   const { toType, fromType, userIDs, successCallback, abortCallback } =
     peopleDialogData;
@@ -78,9 +79,11 @@ const ChangeUserTypeEvent = ({
         toastr.error(
           <>
             <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-            <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
-              {t("Common:PaymentsTitle")}
-            </Link>
+            {!isRoomAdmin && (
+              <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
+                {t("Common:PaymentsTitle")}
+              </Link>
+            )}
           </>,
           false,
           0,
@@ -140,7 +143,8 @@ export default inject(({ auth, dialogsStore, peopleStore }) => {
     changeUserTypeDialogVisible: visible,
     setChangeUserTypeDialogVisible: setVisible,
   } = dialogsStore;
-  const { setSelection } = auth.infoPanelStore;
+  const { isRoomAdmin, infoPanelStore } = auth;
+  const { setSelection } = infoPanelStore;
   const { dialogStore, filterStore, usersStore } = peopleStore;
 
   const { data: peopleDialogData } = dialogStore;
@@ -153,6 +157,7 @@ export default inject(({ auth, dialogsStore, peopleStore }) => {
   } = usersStore;
   const { setSelected } = peopleStore.selectionStore;
   return {
+    isRoomAdmin,
     needResetUserSelection,
     getPeopleListItem,
     setSelection,

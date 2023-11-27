@@ -36,6 +36,7 @@
           temp = agent.match(
             /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/
           );
+
           const userOS =
             agent.search("Linux") !== -1 && agent.search("X11") !== -1
               ? "Linux"
@@ -45,7 +46,7 @@
             return {
               name: temp[1].replace("OPR", "Opera"),
               version: temp[2],
-              chromeVersion: match[2],
+              chromeVersion: match[2] || 70,
               userOS,
             };
           }
@@ -64,12 +65,16 @@
         }
 
         if ((temp = agent.match(/mobile/i)) != null) {
-          if ((temp = agent.match(/chrome\/?\s*(\d+)/i))) {
+          if ((temp = agent.match(/chrome\/?\s*(\d+)/i)) != null) {
             match[1] = temp[1];
           }
         }
 
-        return { name: match[0], version: match[1] };
+        return {
+          name: match[0],
+          version: match[1],
+          chromeVersion: match[1] || 70,
+        };
       })();
     }
 
@@ -83,7 +88,8 @@
           return false;
 
         if (
-          +this.browser.version < this.unsupportedBrowsers[this.browser.name]
+          +this.browser.version < this.unsupportedBrowsers[this.browser.name] &&
+          +this.browser.chromeVersion < this.unsupportedBrowsers.Chrome
         ) {
           return false;
         }
@@ -1123,9 +1129,7 @@
   }
   </style>`;
 
-    const version = browserInfo.version;
-
-    const title = `You are using an old version of the app ${version}. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
+    const title = `You are using an old version of the app. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
     const header = `Can’t connect to ${window.location.host}`;
 
     const body = ` 
@@ -1189,7 +1193,7 @@
 `;
 
     document.head.innerHTML += styles;
-    document.title = `You are using an old version of the app ${version}. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
+    document.title = `You are using an old version of the app. Please update ONLYOFFICE Desktop Editors to the latest version to connect to DocSpace.`;
     document.body.innerHTML = body;
 
     return;

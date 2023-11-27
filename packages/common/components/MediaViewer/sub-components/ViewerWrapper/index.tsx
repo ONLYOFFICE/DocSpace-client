@@ -12,8 +12,12 @@ import { ContextMenuModel } from "../../types";
 import { StyledDropDown } from "../StyledDropDown";
 import { StyledDropDownItem } from "../StyledDropDownItem";
 import ViewerWrapperProps from "./ViewerWrapper.props";
+import { useTheme } from "styled-components";
 
 function ViewerWrapper(props: ViewerWrapperProps) {
+  const { interfaceDirection } = useTheme();
+  const isRtl = interfaceDirection === "rtl";
+
   const onClickContextItem = useCallback(
     (item: ContextMenuModel) => {
       if (isSeparator(item)) return;
@@ -33,10 +37,11 @@ function ViewerWrapper(props: ViewerWrapperProps) {
 
     return (
       <StyledDropDown
+        dir={interfaceDirection}
         open={isOpen}
         isDefaultMode={false}
         directionY="top"
-        directionX="right"
+        directionX={isRtl ? "left" : "right"}
         fixedDirection={true}
         withBackdrop={false}
         manualY={(bottom || "63") + "px"}

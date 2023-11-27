@@ -240,8 +240,6 @@ const Login: React.FC<ILoginProps> = ({
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
 
-  console.log(portalSettings);
-
   return (
     <LoginFormWrapper
       id="login-page"

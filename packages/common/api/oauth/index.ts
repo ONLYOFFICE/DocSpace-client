@@ -28,7 +28,7 @@ export const getClient = async (
 
     return {
       ...client,
-      websiteUrl: client.website_url,
+      websiteUrl: client?.website_url || "",
     };
   }
 
@@ -155,6 +155,20 @@ export const onOAuthSubmit = (
   scope.forEach((s) => {
     formData.append("scope", s);
   });
+
+  return request({
+    method: "post",
+    url: `/oauth2/authorize`,
+    data: formData,
+    withRedirect: true,
+  });
+};
+
+export const onOAuthCancel = (clientId: string, clientState: string) => {
+  const formData = new FormData();
+
+  formData.append("client_id", clientId);
+  formData.append("state", clientState);
 
   return request({
     method: "post",

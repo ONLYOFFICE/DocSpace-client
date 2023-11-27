@@ -221,7 +221,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
     setIsLoading(true);
 
-    console.log(pass, hashSettings);
     const hash = createPasswordHash(pass, hashSettings);
 
     isDesktop && checkPwd();

@@ -103,16 +103,34 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    deleteCookie("client_id");
-    deleteCookie("client_state");
+    console.log(clientState);
+
+    // deleteCookie("client_id");
+    // deleteCookie("client_state");
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
   };
 
-  const onDenyClick = () => {
+  const onDenyClick = async () => {
+    const clientId = oauth.clientId;
+
+    let clientState = "";
+
+    setCookie("client_id", clientId);
+
+    await api.oauth.onOAuthLogin();
+
+    const cookie = document.cookie.split(";");
+
+    cookie.forEach((c) => {
+      if (c.includes("client_state"))
+        clientState = c.replace("client_state=", "").trim();
+    });
+
     deleteCookie("client_id");
     deleteCookie("client_state");
-    window.location.href = oauth.client.websiteUrl;
+
+    await api.oauth.onOAuthCancel(clientId, clientState);
   };
 
   const onChangeUserClick = async () => {

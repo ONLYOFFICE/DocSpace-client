@@ -8,6 +8,9 @@ import React, {
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { DeviceType } from "@docspace/common/constants";
+import { LOADER_TIMEOUT } from "@docspace/common/constants";
+
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 import Button from "@docspace/components/button";
@@ -30,9 +33,7 @@ import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
-import { DeviceType } from "@docspace/common/constants";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
-import { TIMEOUT } from "../../../helpers/filesConstants";
 
 const InvitePanel = ({
   folders,
@@ -86,6 +87,7 @@ const InvitePanel = ({
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
   const windowHeight = useRef(window.innerHeight);
+  const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -126,10 +128,17 @@ const InvitePanel = ({
     });
   };
 
+  const clearLoaderTimeout = () => {
+    clearTimeout(loaderRef.current);
+    loaderRef.current = undefined;
+  };
+
   const disableInvitePanelLoader = () => {
-    setTimeout(() => {
+    if (loaderRef.current) return;
+
+    loaderRef.current = setTimeout(() => {
       setInvitePanelIsLoading(false);
-    }, TIMEOUT);
+    }, LOADER_TIMEOUT);
   };
 
   useEffect(() => {
@@ -189,6 +198,7 @@ const InvitePanel = ({
     return () => {
       window.removeEventListener("resize", onCheckHeight);
       window.removeEventListener("mousedown", onMouseDown);
+      clearLoaderTimeout();
     };
   }, []);
 

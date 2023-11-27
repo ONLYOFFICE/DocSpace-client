@@ -101,8 +101,6 @@ const RoomSelector = ({
 
   const [items, setItems] = React.useState([]);
 
-  const timeoutRef = React.useRef(null);
-
   const onSearchAction = React.useCallback(
     (value) => {
       onSearch && onSearch(value);

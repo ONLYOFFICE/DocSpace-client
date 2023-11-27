@@ -379,7 +379,7 @@ const FilesSelector = ({
         if (item.fileExst || item.contentLength) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("Translations:MoveToFolderMessage"));
+          toastr.error(t("MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }

@@ -79,6 +79,7 @@ function Select({
     <SelectWrapper>
       <span>{prefix}</span>
       <ComboBox
+        // @ts-expect-error TS(2322): Type '{ scaledOptions: true; size: string; scaled:... Remove this comment to see the full error message
         scaledOptions
         size="content"
         scaled={false}

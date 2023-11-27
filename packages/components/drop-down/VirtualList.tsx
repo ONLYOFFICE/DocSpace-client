@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { VariableSizeList } from "react-window";
 import Scrollbar from "../scrollbar";
 
@@ -112,7 +113,8 @@ function VirtualList({
   return (
     <>
       {isNoFixedHeightOptions ? (
-        //@ts-ignore
+
+        // @ts-expect-error TS(2322): Type '{ children: ReactElement<any, string | JSXEl... Remove this comment to see the full error message
         <Scrollbar style={{ height: maxHeight }} stype="mediumBlack">
           {cleanChildren}
         </Scrollbar>

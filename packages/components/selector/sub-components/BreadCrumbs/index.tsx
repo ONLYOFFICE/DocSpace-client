@@ -24,7 +24,7 @@ const BreadCrumbs = ({
   );
 
   const onClickItem = React.useCallback(
-    (e, open, item: BreadCrumb) => {
+    (e: any, open: any, item: BreadCrumb) => {
       if (isLoading) return;
       onSelectBreadCrumb && onSelectBreadCrumb(item);
     },
@@ -164,6 +164,7 @@ const BreadCrumbs = ({
         item.isList ? (
           <ContextMenuButton
             key={`bread-crumb-item-${item.id}-${index}`}
+            // @ts-expect-error TS(2322): Type '{ key: string; className: string; getData: (... Remove this comment to see the full error message
             className="context-menu-button"
             getData={() => item.listItems}
           />

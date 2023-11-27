@@ -79,6 +79,7 @@
     "@svgr/webpack": "^5.5.0",
     "@testing-library/react": "^9.5.0",
     "@types/jest": "^24.9.1",
+    "@types/lodash": "^4.14.202",
     "@types/luxon": "^3.3.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "babel-eslint": "^10.1.0",
@@ -115,6 +116,8 @@
     "storybook-dark-mode": "^3.0.0",
     "style-loader": "^3.3.2",
     "styled-components": "^5.3.9",
-    "svg-inline-loader": "^0.8.2"
+    "svg-inline-loader": "^0.8.2",
+    "ts-migrate": "^0.1.35",
+    "ts-node": "^10.9.1"
   }
 }

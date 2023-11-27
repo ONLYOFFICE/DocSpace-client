@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import Selector from ".";
+// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/icons/32/roo... Remove this comment to see the full error message
 import CustomSvgUrl from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
+// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/room.archive... Remove this comment to see the full error message
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
+// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/empty_screen... Remove this comment to see the full error message
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
 import { Item } from "./sub-components/Item/Item.types";
 
@@ -127,7 +130,7 @@ const selectedAccessRight = accessRights[1];
 const renderedItems = items.slice(0, 100);
 const totalItems = items.length;
 
-const Template = (args) => {
+const Template = (args: any) => {
   const [rendItems, setRendItems] = React.useState(renderedItems);
 
   const loadNextPage = (index: number) => {
@@ -163,6 +166,7 @@ export const BreadCrumbs = Template.bind({});
 
 export const NewName = Template.bind({});
 
+// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 Default.args = {
   height: "485px", // container height
   headerLabel: "Room list",
@@ -170,11 +174,11 @@ Default.args = {
   searchPlaceholder: "Search",
   searchValue: "",
   items: renderedItems,
-  onSelect: (item) => {},
+  onSelect: (item: any) => {},
   isMultiSelect: false,
   selectedItems: selectedItems,
   acceptButtonLabel: "Add",
-  onAccept: (items, access) => {},
+  onAccept: (items: any, access: any) => {},
   withSelectAll: false,
   selectAllLabel: "All accounts",
   selectAllIcon: ArchiveSvgUrl,
@@ -182,7 +186,7 @@ Default.args = {
   withAccessRights: false,
   accessRights,
   selectedAccessRight,
-  onAccessRightsChange: (access) => {},
+  onAccessRightsChange: (access: any) => {},
   withCancelButton: false,
   cancelButtonLabel: "Cancel",
   onCancel: () => {},
@@ -200,7 +204,7 @@ Default.args = {
   isLoading: false,
   withBreadCrumbs: false,
   breadCrumbs: [],
-  onSelectBreadCrumb: (item) => {},
+  onSelectBreadCrumb: (item: any) => {},
   breadCrumbsLoader: <StyledBreadCrumbsLoader />,
   withoutBackButton: false,
   withSearch: false,
@@ -210,6 +214,7 @@ Default.args = {
   descriptionText: "",
 };
 
+// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 BreadCrumbs.args = {
   height: "485px", // container height
   headerLabel: "Room list",
@@ -217,11 +222,11 @@ BreadCrumbs.args = {
   searchPlaceholder: "Search",
   searchValue: "",
   items: renderedItems,
-  onSelect: (item) => {},
+  onSelect: (item: any) => {},
   isMultiSelect: false,
   selectedItems: selectedItems,
   acceptButtonLabel: "Add",
-  onAccept: (items, access) => {},
+  onAccept: (items: any, access: any) => {},
   withSelectAll: false,
   selectAllLabel: "All accounts",
   selectAllIcon: ArchiveSvgUrl,
@@ -229,7 +234,7 @@ BreadCrumbs.args = {
   withAccessRights: false,
   accessRights,
   selectedAccessRight,
-  onAccessRightsChange: (access) => {},
+  onAccessRightsChange: (access: any) => {},
   withCancelButton: false,
   cancelButtonLabel: "Cancel",
   onCancel: () => {},
@@ -253,7 +258,7 @@ BreadCrumbs.args = {
     { id: 4, label: "32222222222222222222222222222222222222" },
     { id: 5, label: "4222222222222222222222222222222222222" },
   ],
-  onSelectBreadCrumb: (item) => {},
+  onSelectBreadCrumb: (item: any) => {},
   breadCrumbsLoader: <StyledBreadCrumbsLoader />,
   withoutBackButton: false,
   withSearch: false,
@@ -267,6 +272,7 @@ BreadCrumbs.args = {
   descriptionText: "",
 };
 
+// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 NewName.args = {
   height: "485px", // container height
   headerLabel: "Room list",
@@ -274,11 +280,11 @@ NewName.args = {
   searchPlaceholder: "Search",
   searchValue: "",
   items: renderedItems,
-  onSelect: (item) => {},
+  onSelect: (item: any) => {},
   isMultiSelect: false,
   selectedItems: selectedItems,
   acceptButtonLabel: "Add",
-  onAccept: (items, access) => {},
+  onAccept: (items: any, access: any) => {},
   withSelectAll: false,
   selectAllLabel: "All accounts",
   selectAllIcon: ArchiveSvgUrl,
@@ -286,7 +292,7 @@ NewName.args = {
   withAccessRights: false,
   accessRights,
   selectedAccessRight,
-  onAccessRightsChange: (access) => {},
+  onAccessRightsChange: (access: any) => {},
   withCancelButton: false,
   cancelButtonLabel: "Cancel",
   onCancel: () => {},
@@ -308,7 +314,7 @@ NewName.args = {
     { id: 2, label: "1111111" },
     { id: 3, label: "21222222222" },
   ],
-  onSelectBreadCrumb: (item) => {},
+  onSelectBreadCrumb: (item: any) => {},
   breadCrumbsLoader: <StyledBreadCrumbsLoader />,
   withoutBackButton: false,
   withSearch: false,

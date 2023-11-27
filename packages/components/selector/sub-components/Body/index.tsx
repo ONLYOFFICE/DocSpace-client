@@ -1,6 +1,8 @@
 import React from "react";
 import { isMobileOnly, isIOS } from "react-device-detect";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import InfiniteLoader from "react-window-infinite-loader";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FixedSizeList as List } from "react-window";
 
 import CustomScrollbarsVirtualList from "../../../scrollbar/custom-scrollbars-virtual-list";
@@ -81,7 +83,7 @@ const Body = ({
   }, [listOptionsRef.current]);
 
   const onBodyResize = React.useCallback(
-    (e) => {
+    (e: any) => {
       if (e?.target?.height && isMobileOnly && isIOS) {
         let height = e?.target?.height - 64 - HEADER_HEIGHT;
 
@@ -120,6 +122,7 @@ const Body = ({
   }, []);
 
   React.useEffect(() => {
+    // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
     onBodyResize();
   }, [isLoading, footerVisible]);
 
@@ -177,6 +180,7 @@ const Body = ({
       ) : null}
 
       {isLoading ? (
+        // @ts-expect-error TS(2322): Type '{ children: any; style: { height: number; };... Remove this comment to see the full error message
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
@@ -191,6 +195,7 @@ const Body = ({
       ) : (
         <>
           {!!descriptionText && (
+            // @ts-expect-error TS(2322): Type '{ children: string; className: string; }' is... Remove this comment to see the full error message
             <Text className="body-description-text">{descriptionText}</Text>
           )}
           {isMultiSelect && withSelectAll && !isSearch && (
@@ -212,7 +217,10 @@ const Body = ({
               itemCount={totalItems}
               loadMoreItems={loadMoreItems}
             >
-              {({ onItemsRendered, ref }) => (
+              {({
+                onItemsRendered,
+                ref
+              }: any) => (
                 <List
                   className="items-list"
                   height={listHeight}

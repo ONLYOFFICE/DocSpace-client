@@ -1,0 +1,2 @@
+// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/copy.react.s... Remove this comment to see the full error message
+export { default as CopyIcon } from "PUBLIC_DIR/images/copy.react.svg";

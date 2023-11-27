@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/arrow.right.... Remove this comment to see the full error message
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import Text from "../../../text";

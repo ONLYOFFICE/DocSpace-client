@@ -96,6 +96,7 @@ const Footer = React.memo(
 
         <StyledButtonContainer>
           <Button
+            // @ts-expect-error TS(2322): Type '{ id: string | undefined; className: string;... Remove this comment to see the full error message
             id={acceptButtonId}
             className={"button accept-button"}
             label={label}
@@ -123,6 +124,7 @@ const Footer = React.memo(
 
           {withCancelButton && (
             <Button
+              // @ts-expect-error TS(2322): Type '{ id: string | undefined; className: string;... Remove this comment to see the full error message
               id={cancelButtonId}
               className={"button cancel-button"}
               label={cancelButtonLabel}

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import Header from "./sub-components/Header";
 import Body from "./sub-components/Body";

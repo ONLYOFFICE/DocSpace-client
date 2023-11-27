@@ -78,11 +78,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             size={"min"}
           />
         ) : defaultIcon ? (
+          // @ts-expect-error TS(2786): 'RoomIcon' cannot be used as a JSX component.
           <RoomIcon color={color} title={label} />
         ) : (
           <img className="room-logo" src={icon} alt="room logo" />
         )}
 
+        // @ts-expect-error TS(2322): Type '{ children: string; className: string; fontW... Remove this comment to see the full error message
         <Text
           className="label"
           fontWeight={600}

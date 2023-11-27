@@ -1,3 +1,4 @@
+// @ts-expect-error TS(2305): Module '"react-i18next"' has no exported member 'T... Remove this comment to see the full error message
 import type { TFunction as TranslationFunction } from "react-i18next";
 
 export type PeriodType = "Year" | "Month" | "Week" | "Day" | "Hour" | "Minute";

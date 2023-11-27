@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
+// @ts-expect-error TS(7016): Could not find a declaration file for module '../.... Remove this comment to see the full error message
 import i18nextStoryDecorator from "../.storybook/decorators/i18nextStoryDecorator";
 
 import Cron, { getNextSynchronization } from ".";
@@ -109,12 +110,14 @@ export const Default: Story = {
           }}
         >
           <TextInput
+            // @ts-expect-error TS(2769): No overload matches this call.
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e: any) => setInput(e.target.value)}
             hasError={!!error}
             scale={false}
           />
-          {/*@ts-ignore*/}
+
+          // @ts-expect-error TS(2322): Type '{ size: string; primary: true; label: string... Remove this comment to see the full error message
           <Button size="small" primary label={"Set value"} onClick={onClick} />
         </div>
 

@@ -1,0 +1,401 @@
+import styled, { css } from "styled-components";
+
+import Base from "../themes/base";
+
+import { tablet } from "../utils/device";
+import { isMobile } from "react-device-detect";
+
+import Text from "../text";
+
+const badgeWithoutText = css`
+  position: absolute;
+
+  top: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
+  right: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      left: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
+      right: auto;
+    `}
+  border-radius: 1000px;
+
+  background-color: ${(props) =>
+    props.theme.catalogItem.badgeWithoutText.backgroundColor};
+
+  width: ${(props) => props.theme.catalogItem.badgeWithoutText.size} !important;
+  min-width: ${(props) =>
+    props.theme.catalogItem.badgeWithoutText.size} !important;
+  height: ${(props) =>
+    props.theme.catalogItem.badgeWithoutText.size} !important;
+  min-height: ${(props) =>
+    props.theme.catalogItem.badgeWithoutText.size} !important;
+
+  margin: 0 !important;
+`;
+
+const StyledCatalogItemHeaderContainer = styled.div`
+  width: 100%;
+
+  height: 24px;
+
+  padding: 7px 12px 4px;
+
+  box-sizing: border-box;
+
+  // @ts-expect-error TS(2339): Property 'isFirstHeader' does not exist on type 'T... Remove this comment to see the full error message
+  margin-top: ${(props) => (props.isFirstHeader ? "0" : "8px")};
+
+  .catalog-item__header-text {
+    font-style: normal;
+    font-weight: 600;
+    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
+    line-height: 14px;
+    color: #a3a9ae;
+  }
+
+  @media ${tablet} {
+    // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+    padding: ${(props) => (props.showText ? "0px 9px 12px" : "4px 12px 19px")};
+
+    // @ts-expect-error TS(2339): Property 'isFirstHeader' does not exist on type 'T... Remove this comment to see the full error message
+    margin-top: ${(props) => (props.isFirstHeader ? "0" : "16px")};
+
+    ${(props) =>
+      // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+      !props.showText &&
+      css`
+        display: flex;
+        justify-content: center;
+
+        .catalog-item__header-text {
+          width: 20px;
+
+          line-height: 1px;
+          height: 1px;
+
+          background: #d0d5da;
+        }
+      `}
+  }
+`;
+
+const StyledCatalogItemBadgeWrapper = styled.div`
+  z-index: 3;
+
+  margin-left: ${(props) => props.theme.catalogItem.badgeWrapper.marginLeft};
+  margin-right: ${(props) => props.theme.catalogItem.badgeWrapper.marginRight};
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      margin-right: ${(props) =>
+        props.theme.catalogItem.badgeWrapper.marginLeft};
+      margin-left: ${(props) =>
+        props.theme.catalogItem.badgeWrapper.marginRight};
+    `}
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  @media ${tablet} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
+    min-width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
+    height: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.height};
+    margin-right: ${(props) =>
+      props.theme.catalogItem.badgeWrapper.tablet.marginRight};
+  }
+
+  // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+  ${(props) => !props.showText && badgeWithoutText}
+
+  .catalog-item__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    //width: ${(props) => props.theme.catalogItem.badgeWrapper.size};
+    min-width: ${(props) => props.theme.catalogItem.badgeWrapper.size};
+    height: ${(props) => props.theme.catalogItem.badgeWrapper.size};
+    min-height: ${(props) => props.theme.catalogItem.badgeWrapper.size};
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: ${(props) => props.theme.catalogItem.badgeWrapper.size};
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        line-height: 16px;
+      }
+    }
+  }
+`;
+
+StyledCatalogItemBadgeWrapper.defaultProps = { theme: Base };
+
+const StyledCatalogItemInitialText = styled(Text)`
+  position: absolute;
+  top: 2px;
+  left: 0;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      left: auto;
+      right: 0;
+    `}
+  text-align: center;
+  width: ${(props) => props.theme.catalogItem.initialText.width};
+  line-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
+  max-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
+  color: ${(props) => props.theme.catalogItem.initialText.color};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(
+      props.theme.catalogItem.initialText.fontSize
+    )};
+  font-weight: ${(props) => props.theme.catalogItem.initialText.fontWeight};
+  pointer-events: none;
+
+  @media ${tablet} {
+    width: ${(props) => props.theme.catalogItem.initialText.tablet.width};
+    line-height: ${(props) =>
+      props.theme.catalogItem.initialText.tablet.lineHeight};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(
+        props.theme.catalogItem.initialText.tablet.fontSize
+      )};
+  }
+`;
+
+StyledCatalogItemInitialText.defaultProps = { theme: Base };
+
+const StyledCatalogItemText = styled(Text)`
+  width: ${(props) => props.theme.catalogItem.text.width};
+
+  margin-left: ${(props) => props.theme.catalogItem.text.marginLeft};
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      margin-left: 0;
+      margin-right: ${(props) => props.theme.catalogItem.text.marginLeft};
+    `}
+
+  line-height: ${(props) => props.theme.catalogItem.text.lineHeight};
+
+  z-index: 1;
+
+  align-items: center;
+
+  pointer-events: none;
+
+  color: ${(props) =>
+    props.isActive
+      ? props.theme.catalogItem.text.isActiveColor
+      : props.theme.catalogItem.text.color};
+
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.catalogItem.text.fontSize)};
+  font-weight: ${(props) => props.theme.catalogItem.text.fontWeight};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media ${tablet} {
+    margin-left: ${(props) => props.theme.catalogItem.text.tablet.marginLeft};
+    line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(
+        props.theme.catalogItem.text.tablet.fontSize
+      )};
+    font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
+  }
+`;
+
+StyledCatalogItemText.defaultProps = { theme: Base };
+
+const StyledCatalogItemImg = styled.div`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  height: ${(props) => props.theme.catalogItem.img.svg.height};
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    width: ${(props) => props.theme.catalogItem.img.svg.width};
+    height: ${(props) => props.theme.catalogItem.img.svg.height};
+    path,
+    circle {
+      fill: ${(props) =>
+        // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
+        props.isActive
+          ? props.theme.catalogItem.img.svg.isActiveFill
+          : props.theme.catalogItem.img.svg.fill};
+    }
+  }
+
+  @media ${tablet} {
+    height: ${(props) => props.theme.catalogItem.img.svg.tablet.height};
+    svg {
+      width: ${(props) => props.theme.catalogItem.img.svg.tablet.width};
+      height: ${(props) => props.theme.catalogItem.img.svg.tablet.height};
+    }
+  }
+`;
+
+StyledCatalogItemImg.defaultProps = { theme: Base };
+
+const draggingSiblingCss = css`
+  background: ${(props) => props.theme.dragAndDrop.background} !important;
+
+  &:hover {
+    background: ${(props) =>
+      props.theme.dragAndDrop.acceptBackground} !important;
+  }
+`;
+
+const StyledCatalogItemSibling = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      left: auto;
+      right: 0;
+    `}
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 3px;
+
+  min-height: ${(props) => props.theme.catalogItem.container.height};
+  max-height: ${(props) => props.theme.catalogItem.container.height};
+
+  background-color: ${(props) =>
+    // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
+    props.isActive && props.theme.catalogItem.sibling.active.background};
+
+  ${!isMobile &&
+  css`
+    &:hover {
+      background-color: ${(props) =>
+        props.theme.catalogItem.sibling.hover.background};
+    }
+  `}
+
+  @media ${tablet} {
+    min-height: ${(props) => props.theme.catalogItem.container.tablet.height};
+    max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
+  }
+
+  // @ts-expect-error TS(2339): Property 'isDragging' does not exist on type 'Them... Remove this comment to see the full error message
+  ${(props) => props.isDragging && draggingSiblingCss}
+
+  ${(props) =>
+    // @ts-expect-error TS(2339): Property 'isDragActive' does not exist on type 'Th... Remove this comment to see the full error message
+    props.isDragActive &&
+    css`
+      background: ${(props) =>
+        props.theme.dragAndDrop.acceptBackground} !important;
+    `}
+`;
+
+StyledCatalogItemSibling.defaultProps = { theme: Base };
+
+const StyledCatalogItemContainer = styled.div`
+  display: flex;
+  // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+  justify-content: ${(props) => (props.showText ? "space-between" : "center")};
+  align-items: center;
+
+  min-width: ${(props) => props.theme.catalogItem.container.width};
+  min-height: ${(props) => props.theme.catalogItem.container.height};
+  max-height: ${(props) => props.theme.catalogItem.container.height};
+
+  position: relative;
+  box-sizing: border-box;
+
+  padding: ${(props) =>
+    // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+    props.showText && props.theme.catalogItem.container.padding};
+  margin-bottom: ${(props) =>
+    // @ts-expect-error TS(2339): Property 'isEndOfBlock' does not exist on type 'Th... Remove this comment to see the full error message
+    props.isEndOfBlock && props.theme.catalogItem.container.marginBottom};
+
+  cursor: pointer;
+
+  @media ${tablet} {
+    min-height: ${(props) => props.theme.catalogItem.container.tablet.height};
+    max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
+
+    padding: ${(props) =>
+      // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
+      props.showText && props.theme.catalogItem.container.tablet.padding};
+    margin-bottom: ${(props) =>
+      // @ts-expect-error TS(2339): Property 'isEndOfBlock' does not exist on type 'Th... Remove this comment to see the full error message
+      props.isEndOfBlock &&
+      props.theme.catalogItem.container.tablet.marginBottom};
+  }
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  .catalog-item__icon {
+    display: none;
+  }
+
+  .catalog-item__icon:target {
+    display: flex;
+  }
+
+  .catalog-item__icon {
+    svg {
+      path {
+        fill: ${(props) => props.theme.catalogItem.trashIconFill};
+      }
+    }
+  }
+
+  :hover {
+    .catalog-item__icon {
+      display: flex;
+    }
+  }
+`;
+
+StyledCatalogItemContainer.defaultProps = { theme: Base };
+
+export {
+  StyledCatalogItemContainer,
+  StyledCatalogItemImg,
+  StyledCatalogItemInitialText,
+  StyledCatalogItemText,
+  StyledCatalogItemSibling,
+  StyledCatalogItemBadgeWrapper,
+  StyledCatalogItemHeaderContainer,
+};

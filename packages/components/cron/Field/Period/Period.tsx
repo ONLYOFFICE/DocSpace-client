@@ -18,6 +18,7 @@ function Period({ period = "Hour", setPeriod, t }: PeriodProps) {
 
   return (
     <ComboBox
+      // @ts-expect-error TS(2322): Type '{ scaledOptions: true; size: string; scaled:... Remove this comment to see the full error message
       scaledOptions
       size="content"
       scaled={false}

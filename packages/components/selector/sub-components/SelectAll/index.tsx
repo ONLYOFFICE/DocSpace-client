@@ -37,6 +37,7 @@ const SelectAll = React.memo(
               size={"min"}
             />
 
+            // @ts-expect-error TS(2322): Type '{ children: string | undefined; className: s... Remove this comment to see the full error message
             <Text
               className="label"
               fontWeight={600}

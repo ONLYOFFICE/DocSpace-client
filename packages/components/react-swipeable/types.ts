@@ -1,3 +1,4 @@
+// @ts-expect-error TS(2440): Import declaration conflicts with local declaratio... Remove this comment to see the full error message
 import { Point } from './types';
 import * as React from "react";
 

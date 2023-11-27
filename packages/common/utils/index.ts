@@ -307,26 +307,6 @@ export function getProviderTranslation(
   }
 }
 
-export function getLanguage(lng) {
-  try {
-    if (!lng) return lng;
-
-    let language = lng == "en-US" || lng == "en-GB" ? "en" : lng;
-
-    const splitted = lng.split("-");
-
-    if (splitted.length == 2 && splitted[0] == splitted[1].toLowerCase()) {
-      language = splitted[0];
-    }
-
-    return language;
-  } catch (error) {
-    console.error(error);
-  }
-
-  return lng;
-}
-
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -498,10 +478,6 @@ export function getLoginLink(token: string, code: string) {
     window.DocSpaceConfig?.proxy?.url,
     `/login.ashx?p=${token}&code=${code}`
   );
-}
-
-export function checkIsSSR() {
-  return typeof window === "undefined";
 }
 
 export const frameCallbackData = (methodReturnData: any) => {

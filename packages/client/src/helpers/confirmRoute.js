@@ -33,7 +33,7 @@ const ConfirmRoute = (props) => {
 
   console.log(type);
 
-  if (!type)
+  if (!type && confirmLinkData.type)
     return (
       <Navigate to={`/confirm/${confirmLinkData.type}${location.search}`} />
     );

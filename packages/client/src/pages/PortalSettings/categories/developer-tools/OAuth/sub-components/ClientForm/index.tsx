@@ -2,7 +2,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { debounce } from "lodash";
 
 import {
   IClientProps,
@@ -20,6 +19,7 @@ import { StyledContainer } from "./ClientForm.styled";
 
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import ClientFormLoader from "./Loader";
+import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
 
 export function isValidUrl(url: string) {
   try {
@@ -63,13 +63,13 @@ const ClientForm = ({
     description: "",
 
     redirect_uris: [],
-    // allowed_origins: [],
+    allowed_origins: [],
     logout_redirect_uri: "",
 
     terms_url: "",
     policy_url: "",
 
-    authentication_method: "client_secret_post",
+    authentication_method: AuthenticationMethod.client_secret_post,
 
     scopes: [],
   });
@@ -160,8 +160,8 @@ const ClientForm = ({
 
         redirect_uris:
           fetchedClient?.redirectUris || client?.redirectUris || [],
-        // allowed_origins:
-        //   fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
+        allowed_origins:
+          fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
         logout_redirect_uri:
           fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
@@ -171,7 +171,7 @@ const ClientForm = ({
         authentication_method:
           fetchedClient?.authenticationMethod ||
           client?.authenticationMethod ||
-          "",
+          AuthenticationMethod.client_secret_post,
 
         scopes: fetchedClient?.scopes || client?.scopes || [],
       });
@@ -314,10 +314,10 @@ const ClientForm = ({
           isValid = isValid && form[key].length > 0;
 
           break;
-        // case "allowed_origins":
-        //   isValid = isValid && form[key].length > 0;
+        case "allowed_origins":
+          isValid = isValid && form[key].length > 0;
 
-        //   break;
+          break;
         case "logout_redirect_uris":
           isValid = isValid;
 
@@ -428,7 +428,7 @@ const ClientForm = ({
           <OAuthBlock
             t={t}
             redirectUrisValue={form.redirect_uris}
-            // allowedOriginsValue={form.allowed_origins}
+            allowedOriginsValue={form.allowed_origins}
             changeValue={onChangeForm}
             isEdit={isEdit}
           />

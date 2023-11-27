@@ -8,7 +8,7 @@ interface OAuthBlockProps {
   t: any;
 
   redirectUrisValue: string[];
-  // allowedOriginsValue: string[];
+  allowedOriginsValue: string[];
 
   changeValue: (name: string, value: string) => void;
 
@@ -18,7 +18,7 @@ interface OAuthBlockProps {
 const OAuthBlock = ({
   t,
   redirectUrisValue,
-  // allowedOriginsValue,
+  allowedOriginsValue,
 
   changeValue,
 
@@ -38,7 +38,8 @@ const OAuthBlock = ({
           helpButtonText={t("RedirectsURLSHelpButton")}
           isDisabled={isEdit}
         />
-        {/* <MultiInputGroup
+        <MultiInputGroup
+          t={t}
           label={t("AllowedOrigins")}
           placeholder={t("EnterURL")}
           name={"allowed_origins"}
@@ -46,7 +47,7 @@ const OAuthBlock = ({
           currentValue={allowedOriginsValue}
           helpButtonText={t("AllowedOriginsHelpButton")}
           isDisabled={isEdit}
-        /> */}
+        />
       </StyledInputBlock>
     </StyledBlock>
   );

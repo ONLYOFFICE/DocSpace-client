@@ -51,7 +51,7 @@ const ScopesBlock = ({
   const onAddCheckedScope = (
     group: ScopeGroup,
     type: ScopeType,
-    name: string
+    name: string = ""
   ) => {
     const isChecked = checkedScopes.includes(name);
 
@@ -73,7 +73,9 @@ const ScopesBlock = ({
         });
       } else {
         setFilteredScopes((val) => {
-          const isReadChecked = checkedScopes.includes(val[group].read.name);
+          const isReadChecked = checkedScopes.includes(
+            val[group].read?.name || ""
+          );
 
           val[group].isChecked = isReadChecked;
           val[group].checkedType = isReadChecked ? ScopeType.read : undefined;
@@ -111,25 +113,29 @@ const ScopesBlock = ({
             >
               {t(`Common:${name}`)}
             </Text>
-            {/* @ts-ignore */}
-            <Text
-              className={"scope-desc"}
-              fontSize={"12px"}
-              fontWeight={400}
-              lineHeight={"16px"}
-            >
-              {/* @ts-ignore */}
+
+            {scope.read?.name && (
+              // @ts-ignore
               <Text
                 className={"scope-desc"}
-                as={"span"}
                 fontSize={"12px"}
-                fontWeight={600}
+                fontWeight={400}
                 lineHeight={"16px"}
               >
-                {scope.read.name}
-              </Text>{" "}
-              — {t(`Common:${scope.read.tKey}`)}
-            </Text>
+                {/* @ts-ignore */}
+                <Text
+                  className={"scope-desc"}
+                  as={"span"}
+                  fontSize={"12px"}
+                  fontWeight={600}
+                  lineHeight={"16px"}
+                >
+                  {scope.read?.name}
+                </Text>{" "}
+                — {t(`Common:${scope.read?.tKey}`)}
+              </Text>
+            )}
+
             {/* @ts-ignore */}
             <Text
               className={"scope-desc"}
@@ -151,18 +157,22 @@ const ScopesBlock = ({
             </Text>
           </StyledScopesName>
           <StyledScopesCheckbox>
-            <Checkbox
-              className="checkbox-read"
-              isChecked={isReadChecked}
-              isDisabled={isReadDisabled || isEdit}
-              onChange={() =>
-                onAddCheckedScope(
-                  key as ScopeGroup,
-                  ScopeType.read,
-                  scope.read.name
-                )
-              }
-            />
+            {scope.read?.name ? (
+              <Checkbox
+                className="checkbox-read"
+                isChecked={isReadChecked}
+                isDisabled={isReadDisabled || isEdit}
+                onChange={() =>
+                  onAddCheckedScope(
+                    key as ScopeGroup,
+                    ScopeType.read,
+                    scope.read?.name
+                  )
+                }
+              />
+            ) : (
+              <></>
+            )}
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
             <Checkbox

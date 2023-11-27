@@ -33,7 +33,7 @@ export const transformToClientProps = (
     modified_by,
     modified_on,
     website_url,
-    // allowed_origins,
+    allowed_origins,
     creator_avatar,
     creator_display_name,
   } = clientDto;
@@ -58,7 +58,7 @@ export const transformToClientProps = (
     modifiedBy: modified_by,
     modifiedOn: modified_on,
     websiteUrl: website_url,
-    // allowedOrigins: allowed_origins,
+    allowedOrigins: allowed_origins,
     creatorAvatar: creator_avatar,
     creatorDisplayName: creator_display_name,
   };
@@ -80,7 +80,7 @@ export const transformToClientReqDTO = (
     logoutRedirectUri: logout_redirect_uri,
     scopes,
     websiteUrl,
-    // allowedOrigins,
+    allowedOrigins,
   } = clientProps;
 
   const client: IClientReqDTO = {
@@ -95,7 +95,7 @@ export const transformToClientReqDTO = (
     scopes,
     authentication_method: authenticationMethod,
     website_url: websiteUrl,
-    // allowed_origins: allowedOrigins,
+    allowed_origins: allowedOrigins,
   };
 
   return client;
@@ -129,6 +129,17 @@ export const filterScopeByGroup = (
     const tKey = getScopeTKeyDescription(scope.group, scope.type);
     const read = isRead ? { ...scope, tKey } : ({} as IScope);
     const write = !isRead ? { ...scope, tKey } : ({} as IScope);
+
+    if (scope.group === ScopeGroup.openid) {
+      filteredScopes[scope.group] = {
+        isChecked,
+        checkedType: isChecked ? scope.type : undefined,
+        read: undefined,
+        write,
+      };
+
+      return;
+    }
 
     if (filteredScopes[scope.group]) {
       if (isRead) {

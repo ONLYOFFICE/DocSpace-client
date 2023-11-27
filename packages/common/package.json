@@ -44,6 +44,7 @@
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
     "@welldone-software/why-did-you-render": "^6.2.3"
   }
 }

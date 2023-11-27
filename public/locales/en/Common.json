@@ -213,6 +213,8 @@
   "OAuthFilesName": "Files & Folders",
   "OAuthFilesReadDescription": "View all files and folders",
   "OAuthFilesWriteDescription": "View and manage all files and folders",
+  "OAuthOpenIDName": "Open ID",
+  "OAuthOpenIDWriteDescription": "View and manage your personal data",
   "OAuthProfilesName": "Profile",
   "OAuthProfilesReadDescription": "View basic information about your profile",
   "OAuthProfilesWriteDescription": "View and manage basic information about your profile",

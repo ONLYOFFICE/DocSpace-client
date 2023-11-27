@@ -1,4 +1,4 @@
-import { ScopeGroup, ScopeType } from "./enums";
+import { AuthenticationMethod, ScopeGroup, ScopeType } from "./enums";
 
 export interface IScope {
   name: string;
@@ -11,7 +11,7 @@ export interface IFilteredScopes {
   [key: string]: {
     isChecked: boolean;
     checkedType?: ScopeType;
-    read: IScope;
+    read?: IScope;
     write: IScope;
   };
 }
@@ -33,7 +33,7 @@ export interface IClientProps {
   policyUrl: string;
   termsUrl: string;
   logo: string;
-  authenticationMethod: string;
+  authenticationMethod: AuthenticationMethod;
   tenant: number;
   redirectUris: string[];
   logoutRedirectUri: string;
@@ -41,7 +41,7 @@ export interface IClientProps {
   invalidated: boolean;
   scopes: string[];
   websiteUrl: string;
-  // allowedOrigins: string[];
+  allowedOrigins: string[];
 
   createdOn?: Date;
   modifiedOn?: Date;
@@ -55,14 +55,14 @@ export interface IClientReqDTO {
   name: string;
   description: string;
   logo: string;
-  authentication_method: string;
+  authentication_method: AuthenticationMethod;
   terms_url: string;
   policy_url: string;
   redirect_uris: string[];
   logout_redirect_uri: string;
   scopes: string[];
   website_url: string;
-  // allowed_origins: string[];
+  allowed_origins: string[];
 }
 
 export interface IClientResDTO {
@@ -79,7 +79,7 @@ export interface IClientResDTO {
   policy_url: string;
   logout_redirect_uri: string;
 
-  authentication_method: string;
+  authentication_method: AuthenticationMethod;
 
   scopes: string[];
 
@@ -87,7 +87,7 @@ export interface IClientResDTO {
   tenant: number;
   invalidated: boolean;
   website_url: string;
-  // allowed_origins: string[];
+  allowed_origins: string[];
 
   created_on?: Date;
   modified_on?: Date;

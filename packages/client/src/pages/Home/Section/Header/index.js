@@ -460,20 +460,17 @@ const SectionHeaderContent = (props) => {
   };
 
   const onMoveAction = () => {
-    setIsFolderActions(true);
     setBufferSelection(selectedFolder);
     return setMoveToPanelVisible(true);
   };
 
   const onCopyAction = () => {
-    setIsFolderActions(true);
-    setBufferSelection(currentFolderId);
+    setBufferSelection(selectedFolder);
     return setCopyPanelVisible(true);
   };
 
   const onDownloadAction = () => {
-    setBufferSelection(currentFolderId);
-    setIsFolderActions(true);
+    setBufferSelection(selectedFolder);
     downloadAction(t("Translations:ArchivingData"), [currentFolderId]).catch(
       (err) => toastr.error(err)
     );
@@ -488,7 +485,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onOpenSharingPanel = () => {
-    setBufferSelection(currentFolderId);
+    setBufferSelection(selectedFolder);
     setIsFolderActions(true);
     return setSharingPanelVisible(true);
   };
@@ -561,7 +558,6 @@ const SectionHeaderContent = (props) => {
 
   const onDownloadAll = () => {
     onDownloadAction();
-    // downloadAction(t("Translations:ArchivingData"), currentFolderId);
   };
 
   const onShareRoom = () => {

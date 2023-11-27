@@ -84,6 +84,8 @@ const FirstStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
+  const goBack = () => navigate(-1);
+
   const onUploadFile = async (file) => {
     await singleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
@@ -190,7 +192,7 @@ const FirstStep = ({
           <SaveCancelButtons
             className="upload-back-buttons"
             onSaveClick={incrementStep}
-            onCancelClick={() => navigate(-1)}
+            onCancelClick={goBack}
             saveButtonLabel={t("Settings:UploadToServer")}
             cancelButtonLabel={t("Common:Back")}
             displaySettings

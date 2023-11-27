@@ -37,7 +37,7 @@ type TRow = {
 };
 const SpacesRoomRow = ({ item }: TRow) => {
   const { spacesStore, authStore } = useStore();
-  const { setDeletePortalDialogVisible, faviconLogo, setCurrentPortal } = spacesStore;
+  const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
   const { tenantAlias } = authStore.settingsStore;
 
 
@@ -48,11 +48,8 @@ const SpacesRoomRow = ({ item }: TRow) => {
 
   const { t } = useTranslation(["Common", "Files", "Settings"]);
 
-  const logoElement = faviconLogo ? (
-    <img id={item.key} width={"32px"} height={"32px"} src={faviconLogo} />
-  ) : (
-    <ReactSVG id={item.key} src={DefaultLogoUrl} />
-  );
+  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />
+  
 
   const protocol = window?.location?.protocol;
 

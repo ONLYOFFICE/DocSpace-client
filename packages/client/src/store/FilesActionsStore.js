@@ -337,13 +337,6 @@ class FilesActionStore {
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
 
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
-
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
 

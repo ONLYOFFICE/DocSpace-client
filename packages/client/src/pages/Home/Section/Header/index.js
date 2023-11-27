@@ -460,11 +460,13 @@ const SectionHeaderContent = (props) => {
   };
 
   const onMoveAction = () => {
+    setIsFolderActions(true);
     setBufferSelection(selectedFolder);
     return setMoveToPanelVisible(true);
   };
 
   const onCopyAction = () => {
+    setIsFolderActions(true);
     setBufferSelection(selectedFolder);
     return setCopyPanelVisible(true);
   };
@@ -506,7 +508,7 @@ const SectionHeaderContent = (props) => {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [currentFolderId], true).catch((err) =>
+      deleteAction(translations, [selectedFolder], true).catch((err) =>
         toastr.error(err)
       );
     }

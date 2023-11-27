@@ -504,8 +504,8 @@ class ContextOptionsStore {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [selectedFolderId], true).catch((err) =>
-        toastr.error(err)
+      deleteAction(translations, [this.selectedFolderStore], true).catch(
+        (err) => toastr.error(err)
       );
     }
   };

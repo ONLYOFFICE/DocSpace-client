@@ -53,7 +53,7 @@ const Share = (props) => {
     const link = await getPrimaryFileLink(selection.id);
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:GeneralAccessLinkCopied"));
+    toastr.success(t("SharingPanel:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
@@ -62,23 +62,35 @@ const Share = (props) => {
   };
 
   const changeShareOption = async (item, link) => {
-    const res = await editFileLink(
-      selection.id,
-      link.sharedTo.id,
-      link.access,
-      link.sharedTo.primary,
-      item.internal
-    );
+    try {
+      const res = await editFileLink(
+        selection.id,
+        link.sharedTo.id,
+        link.access,
+        link.sharedTo.primary,
+        item.internal
+      );
+      copy(link.sharedTo.shareLink);
+      toastr.success(t("Files:LinkSuccessfullyCopied"));
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   const changeAccessOption = async (item, link) => {
-    const res = await editFileLink(
-      selection.id,
-      link.sharedTo.id,
-      item.access,
-      link.sharedTo.primary,
-      link.internal
-    );
+    try {
+      const res = await editFileLink(
+        selection.id,
+        link.sharedTo.id,
+        item.access,
+        link.sharedTo.primary,
+        link.internal
+      );
+      copy(link.sharedTo.shareLink);
+      toastr.success(t("Files:LinkSuccessfullyCopied"));
+    } catch (e) {
+      toastr.error(e);
+    }
     fetchLinks();
   };
 

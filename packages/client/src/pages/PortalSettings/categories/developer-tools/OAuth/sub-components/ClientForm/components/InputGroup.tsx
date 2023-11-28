@@ -1,12 +1,11 @@
 import React from "react";
 
-import Text from "@docspace/components/text";
 import InputBlock from "@docspace/components/input-block";
 import Button from "@docspace/components/button";
 //@ts-ignore
-import HelpButton from "@docspace/components/help-button";
-//@ts-ignore
 import FieldContainer from "@docspace/components/field-container";
+//@ts-ignore
+import RectangleLoader from "@docspace/components/skeletons/rectangle";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
@@ -26,7 +25,7 @@ interface InputGroupProps {
   helpButtonText?: string;
 
   buttonLabel?: string;
-  onButtonClick?: () => void;
+  onButtonClick?: () => Promise<void>;
 
   withCopy?: boolean;
   onCopyClick?: (name: string) => void;
@@ -62,6 +61,18 @@ const InputGroup = ({
   isError,
   children,
 }: InputGroupProps) => {
+  const [isRequestRunning, setIsRequestRunning] = React.useState(false);
+
+  const onButtonClickAction = React.useCallback(async () => {
+    setIsRequestRunning(true);
+
+    await onButtonClick?.();
+
+    setTimeout(() => {
+      setIsRequestRunning(false);
+    }, 300);
+  }, [onButtonClick]);
+
   return (
     <StyledInputGroup>
       <FieldContainer
@@ -78,26 +89,35 @@ const InputGroup = ({
           children
         ) : (
           <>
-            <InputBlock
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              onChange={onChange}
-              scale
-              tabIndex={0}
-              maxLength={255}
-              isReadOnly={withCopy}
-              isDisabled={disabled}
-              iconName={withCopy ? CopyReactSvgUrl : null}
-              onIconClick={withCopy && onCopyClick}
-              type={isPassword ? "password" : "text"}
-            />
+            {isRequestRunning ? (
+              <RectangleLoader
+                className={"loader"}
+                width={"100%"}
+                height={"32px"}
+              />
+            ) : (
+              <InputBlock
+                name={name}
+                value={value}
+                placeholder={placeholder}
+                onChange={onChange}
+                scale
+                tabIndex={0}
+                maxLength={255}
+                isReadOnly={withCopy}
+                isDisabled={disabled}
+                iconName={withCopy ? CopyReactSvgUrl : null}
+                onIconClick={withCopy && onCopyClick}
+                type={isPassword ? "password" : "text"}
+              />
+            )}
             {buttonLabel && (
               <Button
                 //@ts-ignore
                 label={buttonLabel}
                 size={"small"}
-                onClick={onButtonClick}
+                onClick={onButtonClickAction}
+                isDisabled={isRequestRunning}
               />
             )}
           </>

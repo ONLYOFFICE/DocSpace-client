@@ -10,7 +10,7 @@ interface ClientBlockProps {
   idValue: string;
   secretValue: string;
 
-  onResetClick: () => void;
+  onResetClick: () => Promise<void>;
 }
 
 const ClientBlock = ({

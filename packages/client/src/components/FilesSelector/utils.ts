@@ -71,7 +71,8 @@ export const getIsDisabled = (
   filterParam?: string,
   isFileSelected?: boolean,
   includeFolder?: boolean,
-  isRestore?: boolean
+  isRestore?: boolean,
+  isSelectedParentFolder
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
@@ -80,6 +81,7 @@ export const getIsDisabled = (
   if (sameId && isCopy && includeFolder) return true;
   if (isRooms) return true;
   if (isRoot) return true;
+  if (isSelectedParentFolder) return true;
   if (isCopy) return !security?.CopyTo;
   if (isMove || isRestoreAll || isRestore) return !security?.MoveTo;
 

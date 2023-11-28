@@ -102,6 +102,7 @@ const FilesSelector = ({
   withHeader,
   getIcon,
   isRoomBackup,
+  selectionId,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -127,7 +128,8 @@ const FilesSelector = ({
 
   const [total, setTotal] = React.useState<number>(0);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
-
+  const [isSelectedParentFolder, setIsSelectedParentFolder] =
+    React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const [isRequestRunning, setIsRequestRunning] =
@@ -180,6 +182,7 @@ const FilesSelector = ({
   });
 
   const { getFileList } = useFilesHelper({
+    setIsSelectedParentFolder,
     setIsBreadCrumbsLoading,
     setBreadCrumbs,
     setIsNextPageLoading,
@@ -203,6 +206,7 @@ const FilesSelector = ({
     getRoomList,
     getIcon,
     t,
+    selectionId,
   });
 
   const onSelectAction = (item: Item) => {
@@ -294,7 +298,21 @@ const FilesSelector = ({
           (value) => value.id.toString() === item.id.toString()
         );
 
-        const newBreadCrumbs = breadCrumbs.map((item) => ({ ...item }));
+        const maxLength = breadCrumbs.length - 1;
+        let foundParentId = false;
+        const newBreadCrumbs = breadCrumbs.map((item, index) => {
+          if (index !== maxLength && selectionId === item.id) {
+            foundParentId = true;
+          }
+
+          if (foundParentId && !isSelectedParentFolder)
+            setIsSelectedParentFolder(true);
+
+          if (index === maxLength && !foundParentId && isSelectedParentFolder)
+            setIsSelectedParentFolder(false);
+
+          return { ...item };
+        });
 
         newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
 
@@ -474,7 +492,7 @@ const FilesSelector = ({
 
   const isDisabled = getIsDisabled(
     isFirstLoad,
-    fromFolderId === selectedItemId,
+    fromFolderId == selectedItemId,
     selectedItemType === "rooms",
     isRoot,
     isCopy,
@@ -485,7 +503,8 @@ const FilesSelector = ({
     filterParam,
     !!selectedFileInfo,
     includeFolder,
-    isRestore
+    isRestore,
+    isSelectedParentFolder
   );
 
   const SelectorBody = (
@@ -675,15 +694,18 @@ export default inject(
     const disabledItems: any[] = [];
 
     selectionsWithoutEditing.forEach((item: any) => {
-      if (item?.isFolder && item?.id) {
+      if ((item?.isFolder || item?.parentId) && item?.id) {
         disabledItems.push(item.id);
       }
     });
+
+    const selectionId = selections.length === 1 ? selections[0].id : null;
 
     const includeFolder =
       selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
 
     return {
+      selectionId,
       currentFolderId,
       fromFolderId,
       parentId,

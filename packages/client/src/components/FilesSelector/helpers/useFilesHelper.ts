@@ -27,7 +27,8 @@ import toastr from "@docspace/components/toast/toastr";
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
-  filterParam?: string
+  filterParam?: string,
+  selectionId?: string | number | null
 ) => {
   const items = folders.map((room: any) => {
     const {
@@ -51,6 +52,9 @@ export const convertFoldersToItems = (
     } = room;
 
     const icon = iconSize32.get("folder.svg");
+
+    const isSelectedFolderParent = selectionId && parentId === selectionId;
+    if (!filterParam && isSelectedFolderParent) disabledItems.push(id);
 
     return {
       id,
@@ -129,6 +133,8 @@ export const useFilesHelper = ({
   getRoomList,
   getIcon,
   t,
+  selectionId,
+  setIsSelectedParentFolder,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -227,7 +233,8 @@ export const useFilesHelper = ({
         const foldersList: Item[] = convertFoldersToItems(
           folders,
           disabledItems,
-          filterParam
+          filterParam,
+          selectionId
         );
 
         const filesList: Item[] = convertFilesToItems(
@@ -258,6 +265,10 @@ export const useFilesHelper = ({
 
               // const { title, id, parentId, rootFolderType, roomType } =
               //   folderInfo;
+
+              if (selectionId == id) {
+                setIsSelectedParentFolder(true);
+              }
 
               return {
                 label: title,

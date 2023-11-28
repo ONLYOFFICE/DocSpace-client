@@ -92,6 +92,7 @@ export type useRoomsHelperProps = {
 export type useFilesHelpersProps = {
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
+  setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
@@ -120,6 +121,7 @@ export type useFilesHelpersProps = {
   ) => void;
   getIcon: (size: number, fileExst: string) => string;
   t: any;
+  selectionId?: string | number | null;
 };
 
 export type FilesSelectorProps = {
@@ -154,6 +156,7 @@ export type FilesSelectorProps = {
 
   selection: any[];
   disabledItems: string[] | number[];
+  selectionId?: string | number | null;
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;

@@ -5,7 +5,7 @@
   "DeleteProfileIsFinished": "Yenidən təyinat tamamlandıqda profili silin",
   "DescriptionDataReassignment": "İstifadəçi tərəfindən yaradılmış otaqları və istifadəçi otaqlarında saxlanılan sənədləri köçürəcəyik.",
   "InProgress": "Davam edir",
-  "Interrupted": "Əlaqə itdi, bəzi məlumatlar ötürülə bilər",
+  "Interrupted": "Bağlantı kəsildi, bəzi məlumatlar ötürülə bilmədi",
   "MoreAboutDataTransfer": "Məlumat ötürülməsi haqqında ətraflı məlumat",
   "NewDataOwner": "Yeni məlumat sahibi",
   "NoteDataReassignment": "Qeyd: Bu əməliyyat geri qaytarıla bilməz.",

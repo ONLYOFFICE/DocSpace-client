@@ -1,6 +1,8 @@
 {
   "Categories": "Kategorien",
   "EmptyFormGalleryScreenDescription": "Es konnten keine Ergebnisse gefunden werden, die Ihrer Anfrage entsprechen",
+  "ErrorViewDescription": "Bitte versuchen Sie es später noch einmal",
+  "ErrorViewHeader": "Die Formular-Galerie ist momentan nicht verfügbar",
   "SelectForm": "Formular auswählen",
   "SubmitToGalleryBlockBody": "Reichen Sie Ihre Vorlagen ein, um sie mit der ONLYOFFICE Gemeinschaft zu teilen.",
   "SubmitToGalleryBlockHeader": "Formulargalerie von ONLYOFFICE",

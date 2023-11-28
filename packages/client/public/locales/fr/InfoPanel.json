@@ -28,6 +28,7 @@
   "FeedUpdateUser": "a été affecté au rôle de {{role}}",
   "FileExtension": "Extension de fichier",
   "FilesEmptyScreenText": "Voir ici les détails des fichiers et des dossiers",
+  "GalleryEmptyScreenText": " Voir les détails du modèle de formulaire ici",
   "HistoryEmptyScreenText": "L'historique des activités sera affiché ici",
   "InfoBanner": "La liste des utilisateurs invités comprend le propriétaire et/ou les administrateurs de ce DocSpace avec un accès complet à toutes les salles. Le propriétaire et/ou l'administrateur ne peuvent se voir attribuer d'autres droits d'accès. Une fois ajoutés à la salle, ils seront informés de tous les changements.",
   "ItemsSelected": "Éléments sélectionnés",

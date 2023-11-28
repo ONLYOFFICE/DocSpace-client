@@ -1,5 +1,7 @@
 {
   "AllAccounts": "Toate conturile",
   "EmptyDescription": "Lista de utilizatori invitaţi anterior în DocSpace sau în săli separate va fi afişată aici. Puteţi invita aceşti utilizatori să colaboreze în orice moment.",
-  "EmptyHeader": "Niciun alt cont deocamdată aici"
+  "EmptyHeader": "Niciun alt cont deocamdată aici",
+  "ListAccounts": "Listare conturi",
+  "SearchEmptyDescription": "Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de utilizatori."
 }

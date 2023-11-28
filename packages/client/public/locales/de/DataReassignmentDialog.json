@@ -5,7 +5,7 @@
   "DeleteProfileIsFinished": "Profil löschen, wenn die Neuzuordnung abgeschlossen ist",
   "DescriptionDataReassignment": "Wir übertragen die vom Benutzer erstellten Räume und die in den Räumen des Benutzers gespeicherten Dokumente.",
   "InProgress": "Laufend",
-  "Interrupted": "Unterbrochen, einige Daten konnten übertragen werden",
+  "Interrupted": "Unterbrochen, einige Daten konnten nicht übertragen werden",
   "MoreAboutDataTransfer": "Mehr über die Datenübertragung",
   "NewDataOwner": "Neuer Dateneigentümer",
   "NoteDataReassignment": "Hinweis: Diese Aktion kann nicht rückgängig gemacht werden.",

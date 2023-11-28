@@ -30,6 +30,7 @@
   "Response": "Cavab",
   "ResponseBodyCopied": "POST cavab mətni mübadilə buferinə uğurla kopyalandı",
   "ResponseHeaderCopied": "POST cavab başlığı mübadilə buferinə uğurla nüsxələndi",
+  "ResponsePostBody": "POST cavab mətni",
   "ResponsePostHeader": "POST cavab başlığı",
   "Retry": "Yenidən cəhd elə",
   "SecretKey": "Gizli şifrə",

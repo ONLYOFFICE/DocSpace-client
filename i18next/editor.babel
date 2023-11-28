@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.1.0" version="1.3">
+<babeledit_project be_version="5.0.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,7 +26,6 @@
 								<name>DeepLinkText</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -146,7 +145,6 @@
 								<name>OpenInApp</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -266,7 +264,6 @@
 								<name>OpeningDocument</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -386,7 +383,6 @@
 								<name>StayInBrowser</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -511,7 +507,6 @@
 								<name>DocumentsFileType</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -631,7 +626,6 @@
 								<name>ErrorConnectionLost</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -751,7 +745,6 @@
 								<name>FileLocation</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -871,7 +864,6 @@
 								<name>FileName</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -991,7 +983,6 @@
 								<name>ImageFileType</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1111,7 +1102,6 @@
 								<name>MailMergeFileType</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1231,7 +1221,6 @@
 								<name>OpenSavedDocument</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1351,7 +1340,6 @@
 								<name>SelectFilesType</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1471,7 +1459,6 @@
 								<name>UsersWithoutAccess</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>

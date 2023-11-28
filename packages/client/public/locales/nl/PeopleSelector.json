@@ -1,5 +1,7 @@
 {
   "AllAccounts": "Alle accounts",
   "EmptyDescription": "Hier verschijnt de lijst met gebruikers die eerder zijn uitgenodigd voor DocSpace of aparte kamers. U kunt deze gebruikers te allen tijde uitnodigen om samen te werken.",
-  "EmptyHeader": "Er zijn hier nog geen andere accounts"
+  "EmptyHeader": "Er zijn hier nog geen andere accounts",
+  "ListAccounts": "Lijst met accounts",
+  "SearchEmptyDescription": "Er zijn geen gebruikers die aan uw zoekopdracht voldoen. Pas uw zoekparameters aan of wis het zoekveld om de volledige lijst met gebruikers te bekijken."
 }

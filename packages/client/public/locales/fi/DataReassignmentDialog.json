@@ -5,7 +5,7 @@
   "DeleteProfileIsFinished": "Poista profiili, kun tietojen siirto on suoritettu",
   "DescriptionDataReassignment": "Siirrämme käyttäjän luomat huoneet ja  käyttäjän huoneisiin tallennetut asiakirjat.",
   "InProgress": "Käynnissä",
-  "Interrupted": "Keskeytetty, osa tiedoista voitiin siirtää",
+  "Interrupted": "Keskeytetty, osaa tiedoista ei voitu siirtää",
   "MoreAboutDataTransfer": "Enemmän tiedonsiirrosta",
   "NewDataOwner": "Uusien tietojen omistaja",
   "NoteDataReassignment": "Huom: tätä toimintoa ei voi perua.",

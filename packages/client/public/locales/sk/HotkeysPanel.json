@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Prepnúť medzi zobrazením vo vzhľade mriežky a zobrazením vo vzhľade zoznamu",
   "HotkeysClearAll": "Zrušiť všetky výbery",
   "HotkeysClose": "Zatvoriť/Vrátiť akciu späť",
+  "HotkeysCopySelected": "Kopírovať vybrané položky do schránky",
   "HotkeysCreateDocument": "Vytvoriť dokument",
   "HotkeysCreateFolder": "Vytvoriť priečinok",
   "HotkeysCreateForm": "Vytvoriť šablónu prázdneho formulára",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Vytvoriť prezentáciu",
   "HotkeysCreateSpreadsheet": "Vytvoriť tabuľku",
   "HotkeysCreatingObjects": "Vytváranie položiek",
+  "HotkeysCutSelected": "Vyrezať vybrané položky do schránky",
   "HotkeysEnterKey": "Zadať",
   "HotkeysExtendSelectionDown": "Rozšíriť výber nadol",
   "HotkeysExtendSelectionLeft": "Rozšíriť výber doľava",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Posunúť sa nahor bez zmeny výberu",
   "HotkeysNavigation": "Navigácia",
   "HotkeysOpen": "Otvoriť vybranú položku/Potvrdiť akciu",
+  "HotkeysPasteSelected": "Vložiť vybrané položky zo schránky",
   "HotkeysPlayPause": "Prehrať/Pozastaviť",
   "HotkeysRedoLastUndoneAction": "Znova vykonať poslednú vrátenú akciu",
   "HotkeysRemove": "Odstrániť vybrané položky",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Priestor",
   "HotkeysUndoLastAction": "Vrátiť späť poslednú akciu",
   "HotkeysUploadFile": "Nahrať súbor",
-  "HotkeysUploadingObjects": "Nahrávanie položiek"
+  "HotkeysUploadingObjects": "Nahrávanie položiek",
+  "HotkeysZoomIn": "Priblížiť",
+  "HotkeysZoomOut": "Oddialiť"
 }

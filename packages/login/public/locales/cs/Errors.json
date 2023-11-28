@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Špatné uživatelské jméno nebo heslo.",
   "LoginWithAccountNotFound": "Nemůže najít přidružený účet třetí strany. Nejdříve musíte na první straně úpravy profilu připojit účet sociální sítě.",
   "LoginWithBruteForce": "Autorizace dočasně zablokována",
+  "LoginWithBruteForceCaptcha": "Potvrďte, že nejste robot",
   "RecaptchaInvalid": "Recaptcha je neplatná",
   "SsoAttributesNotFound": "Ověření se nezdařilo (atributy tvrzení nebyly nalezeny)",
   "SsoAuthFailed": "Ověření se nezdařilo",

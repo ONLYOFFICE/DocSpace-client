@@ -1,6 +1,8 @@
 {
   "Categories": "Categorie",
   "EmptyFormGalleryScreenDescription": "Non è stato possibile trovare alcun risultato corrispondente alla tua ricerca",
+  "ErrorViewDescription": "Ti preghiamo di riprovare più tardi",
+  "ErrorViewHeader": "La galleria dei moduli è temporaneamente non disponibile",
   "SelectForm": "Seleziona modulo",
   "SubmitToGalleryBlockBody": "Invia i tuoi modelli per condividerli con la community di ONLYOFFICE.",
   "SubmitToGalleryBlockHeader": "Galleria dei moduli di ONLYOFFICE",

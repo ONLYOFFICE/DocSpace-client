@@ -1,4 +1,6 @@
 {
+  "Categories": "Luokat",
+  "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
   "SelectForm": "Valitse Lomake",
   "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne ONLYOFFICE-yhteisön kanssa.",
   "SubmitToGalleryBlockHeader": "ONLYOFFICE Lomakegalleria",

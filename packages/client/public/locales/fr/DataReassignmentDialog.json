@@ -5,7 +5,7 @@
   "DeleteProfileIsFinished": "Supprimez le profil lorsque la réaffectation est terminée",
   "DescriptionDataReassignment": "Nous transférerons les salles créées par l'utilisateur et les documents stockés dans les salles de l'utilisateur.",
   "InProgress": "En cours",
-  "Interrupted": "Interruption, certaines données ont pu être transférées",
+  "Interrupted": "Interrompu, certaines données n'ont pas pu être transférées",
   "MoreAboutDataTransfer": "En savoir plus sur le transfert de données",
   "NewDataOwner": "Nouveau propriétaire des données",
   "NoteDataReassignment": "Note : cette action ne peut pas être annulée.",

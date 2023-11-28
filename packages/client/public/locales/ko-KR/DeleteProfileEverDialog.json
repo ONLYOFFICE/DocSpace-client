@@ -1,4 +1,8 @@
 {
+  "DeleteMyDocumentsUser": "이 사용자의 내 문서 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} 이 사용자가 생성한 방과 해당 방에 저장된 문서는 삭제를 수행하는 관리자에게 자동으로 재할당됩니다: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. 재할당을 위해 다른 대상 사용자를 선택하려면 데이터를 수동으로 재할당하세요.",
   "DeleteUser": "사용자 삭제",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> 님이 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+  "ReassignDataToAnotherUser": "다른 사용자에게 데이터 재할당",
   "SuccessfullyDeleteUserInfoMessage": "사용자가 성공적으로 삭제되었습니다"
 }

@@ -1,4 +1,8 @@
 {
+  "DeleteMyDocumentsUser": "Усі особисті файли й папки в розділі «Мої документи» цього користувача буде видалено назавжди.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Кімнати, створені цим користувачем, і документи, які зберігаються в цих кімнатах, будуть автоматично перепризначені адміністратору, який виконує видалення: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Перепризначте дані вручну, щоб вибрати іншого цільового користувача для перепризначення.",
   "DeleteUser": "Видалити користувача",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> буде видалено. Цю дію неможливо скасувати.",
+  "ReassignDataToAnotherUser": "Перепризначити дані іншому користувачу",
   "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено"
 }

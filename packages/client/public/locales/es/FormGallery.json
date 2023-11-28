@@ -1,6 +1,8 @@
 {
   "Categories": "Categorías",
   "EmptyFormGalleryScreenDescription": "No se han encontrado resultados que coincidan con la búsqueda",
+  "ErrorViewDescription": "Vuelva a intentarlo más tarde",
+  "ErrorViewHeader": "La galería de formularios no está disponible temporalmente ",
   "SelectForm": "Seleccionar formulario",
   "SubmitToGalleryBlockBody": "Envíe sus plantillas para compartirlas con la comunidad de ONLYOFFICE.",
   "SubmitToGalleryBlockHeader": "Galería de formularios de ONLYOFFICE",

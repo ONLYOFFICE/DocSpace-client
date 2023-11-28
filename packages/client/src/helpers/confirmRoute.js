@@ -119,6 +119,15 @@ const ConfirmRoute = (props) => {
         }
       })
       .catch((error) => {
+        if (error.response.status === 403) {
+          window.DocSpace.navigate("/access-restricted", {
+            state: { isRestrictionError: true },
+            replace: true,
+          });
+
+          return;
+        }
+
         console.error("FAILED checkConfirmLink", { error, confirmLinkData });
         window.location.href = combineUrl(
           window.DocSpaceConfig?.proxy?.url,

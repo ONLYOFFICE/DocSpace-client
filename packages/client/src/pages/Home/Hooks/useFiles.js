@@ -41,6 +41,7 @@ const useFiles = ({
 
   gallerySelected,
   removeFirstUrl,
+  selectedFolderStore,
 }) => {
   const navigate = useNavigate();
 
@@ -68,6 +69,11 @@ const useFiles = ({
   };
 
   const onDrop = (files, uploadToFolder) => {
+    const { security } = selectedFolderStore;
+
+    if (security && security.hasOwnProperty("Create") && !security.Create)
+      return;
+
     dragging && setDragging(false);
 
     if (disableDrag) return;

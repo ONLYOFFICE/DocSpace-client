@@ -182,7 +182,6 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
-      console.log({ selectedFolder });
 
       if (!selectedFolder.hasOwnProperty("type")) this.type = null;
 

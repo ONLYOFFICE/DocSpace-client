@@ -159,6 +159,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
+    selectedFolderStore,
   });
 
   const { showUploadPanel } = useOperations({

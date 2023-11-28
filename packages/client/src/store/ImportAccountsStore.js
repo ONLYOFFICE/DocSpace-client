@@ -137,8 +137,21 @@ class ImportAccountsStore {
   isAccountChecked = (key, checkedAccountType) =>
     this.checkedUsers[checkedAccountType].some((user) => user.key === key);
 
-  clearCheckedAccounts = (checkedAccountType) =>
-    (this.checkedUsers = { ...this.checkedUsers, [checkedAccountType]: [] });
+  clearCheckedAccounts = () => {
+    runInAction(() => {
+      this.users = {
+        new: [],
+        existing: [],
+        withoutEmail: [],
+        result: [],
+      };
+      this.checkedUsers = {
+        withEmail: [],
+        withoutEmail: [],
+        result: [],
+      };
+    });
+  };
 
   changeUserType = (key, type) => {
     this.users = {

@@ -14,6 +14,7 @@ import { Base } from "@docspace/components/themes";
 import Tags from "@docspace/components/tags";
 import Tag from "@docspace/components/tag";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
+import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -893,8 +894,8 @@ class Tile extends React.PureComponent {
               isHighlight={isHighlight}
               thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
-                item?.viewAccessability?.ImageView ||
-                item?.viewAccessability?.MediaView
+                item?.viewAccessibility?.ImageView ||
+                item?.viewAccessibility?.MediaView
               }
               isPlugin={item.isPlugin}
             >
@@ -959,7 +960,7 @@ class Tile extends React.PureComponent {
                   getContextModel={getContextModel}
                   ref={this.cm}
                   header={contextMenuHeader}
-                  withBackdrop={true}
+                  withBackdrop={isMobileUtils()}
                   onHide={hideContextMenu}
                 />
               </StyledOptionButton>

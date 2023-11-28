@@ -104,7 +104,7 @@ const Textarea = ({
       className="textarea-wrapper"
       isJSONField={isJSONField}
       enableCopy={enableCopy}
-      onFocus={enableCopy ? onTextareaClick : undefined}
+      onClick={onTextareaClick}
     >
       {enableCopy && (
         <CopyIconWrapper

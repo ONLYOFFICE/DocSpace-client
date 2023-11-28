@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
   "DeleteMyDocumentsUser": "Bu istifadəçinin Sənədlərimdəki bütün şəxsi faylları və qovluqları həmişəlik silinəcək.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu istifadəçi tərəfindən yaradılan otaqlar və onlarda saxlanılan sənədlər avtomatik olaraq silməni həyata keçirən administratora yenidən təyin ediləcək: <strong>{{{userPerformedDeletion}} ({{userYou}})</strong>. Yenidən təyinata başqa bir hədəf istifadəçi seçmək üçün məlumatları əl ilə yenidən təyin edin.",
   "DeleteUser": "İstifadəçini sil",

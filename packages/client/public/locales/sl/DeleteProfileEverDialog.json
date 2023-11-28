@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
   "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Moji dokumenti tega uporabnika bodo trajno izbrisane.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
   "DeleteUser": "Izbriši uporabnika",

@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
   "DeleteMyDocumentsUser": "Všetky osobné súbory a priečinky v časti Moje dokumenty tohto používateľa budú natrvalo vymazané.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteUser": "Odstrániť používateľa",

@@ -267,9 +267,10 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      roomId === -1
-        ? await inviteUsers(data)
-        : await setRoomSecurity(roomId, data);
+      const result =
+        roomId === -1
+          ? await inviteUsers(data)
+          : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
@@ -279,6 +280,11 @@ const InvitePanel = ({
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
+
+      if (result?.warning) {
+        toastr.warning(result?.warning);
+      }
+
       reloadSelectionParentRoom();
     } catch (err) {
       toastr.error(err);

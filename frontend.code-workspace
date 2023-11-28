@@ -108,9 +108,19 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
+            "label": "Update yarn.lock",
+            "task": "Frontend | update yarn.lock",
+            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Build and start prod",
+            "task": "Frontend | build-and-start-prod",
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
           },
           {
             "label": "Start",

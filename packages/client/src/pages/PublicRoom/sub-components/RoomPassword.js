@@ -10,7 +10,7 @@ import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 import toastr from "@docspace/components/toast/toastr";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
-import { ValidationResult } from "../../../helpers/constants";
+import { ValidationStatus } from "../../../helpers/constants";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
@@ -54,19 +54,19 @@ const RoomPassword = (props) => {
       setIsLoading(false);
 
       switch (res?.status) {
-        case ValidationResult.Ok: {
+        case ValidationStatus.Ok: {
           setRoomData(res); // Ok
           return;
         }
-        // case ValidationResult.Invalid: {
+        // case ValidationStatus.Invalid: {
         //   setErrorMessage(""); // Invalid
         //   return;
         // }
-        // case ValidationResult.Expired: {
+        // case ValidationStatus.Expired: {
         //   setErrorMessage(""); // Expired
         //   return;
         // }
-        case ValidationResult.InvalidPassword: {
+        case ValidationStatus.InvalidPassword: {
           setErrorMessage(t("Common:IncorrectPassword"));
           return;
         }

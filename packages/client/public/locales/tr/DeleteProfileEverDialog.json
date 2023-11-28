@@ -1,4 +1,5 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Kullanıcılar başarıyla silindi.",
   "DeleteMyDocumentsUser": "Bu kullanıcının Belgelerim bölümündeki tüm kişisel dosya ve klasörler kalıcı olarak silinecektir.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kullanıcı tarafından oluşturulan odalar ve bu odalarda saklanan dokümanlar, silme işlemini gerçekleştiren yöneticiye otomatik olarak yeniden atanacaktır: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Yeniden atama için başka bir hedef kullanıcı seçmek üzere verileri manuel olarak yeniden atayın.",
   "DeleteUser": "Kullanıcıyı sil",

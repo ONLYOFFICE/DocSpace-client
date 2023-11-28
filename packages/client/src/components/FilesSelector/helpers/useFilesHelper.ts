@@ -166,7 +166,7 @@ export const useFilesHelper = ({
             break;
 
           case FilesSelectorFilterTypes.BackupOnly:
-            filter.filterType = FilesSelectorFilterTypes.BackupOnly;
+            filter.extension = "gz,tar";
             break;
 
           case FilesSelectorFilterTypes.DOCXF:

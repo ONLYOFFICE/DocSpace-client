@@ -103,10 +103,10 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    console.log(clientState);
+    deleteCookie("client_id");
+    deleteCookie("client_state");
 
-    // deleteCookie("client_id");
-    // deleteCookie("client_state");
+    setCookie("disable_redirect", true);
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
   };
@@ -129,6 +129,8 @@ const Consent = ({
 
     deleteCookie("client_id");
     deleteCookie("client_state");
+
+    setCookie("disable_redirect", true);
 
     await api.oauth.onOAuthCancel(clientId, clientState);
   };

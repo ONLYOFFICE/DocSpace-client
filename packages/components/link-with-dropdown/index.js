@@ -107,6 +107,7 @@ class LinkWithDropdown extends React.Component {
       hasScroll,
       withExpander,
       dropDownClassName,
+      withoutHover,
       ...rest
     } = this.props;
 
@@ -150,6 +151,7 @@ class LinkWithDropdown extends React.Component {
         id={id}
         style={style}
         ref={this.ref}
+        withoutHover={withoutHover}
       >
         <span onClick={this.onOpen}>
           <StyledLinkWithDropdown
@@ -237,6 +239,8 @@ LinkWithDropdown.propTypes = {
   directionY: PropTypes.oneOf(["bottom", "top", "both"]),
   /** Displays the scrollbar */
   hasScroll: PropTypes.bool,
+  /** Disable hover style */
+  withoutHover: PropTypes.bool,
 };
 
 LinkWithDropdown.defaultProps = {
@@ -251,6 +255,7 @@ LinkWithDropdown.defaultProps = {
   isDisabled: false,
   hasScroll: false,
   withExpander: false,
+  withoutHover: false,
 };
 
 export default LinkWithDropdown;

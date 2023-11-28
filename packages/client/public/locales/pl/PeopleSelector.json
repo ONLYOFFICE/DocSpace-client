@@ -2,6 +2,5 @@
   "AllAccounts": "Wszystkie konta",
   "EmptyDescription": "Tutaj pojawi się lista zaproszonych wcześniej do DocSpace użytkowników lub oddzielnych pokoi. Będziesz w stanie zaprosić tych użytkowników do współpracy kiedykolwiek zechcesz.",
   "EmptyHeader": "Brak innych kont",
-  "ListAccounts": "Lista kont",
-  "SearchEmptyDescription": "Nie znaleziono użytkownika pasującego do wyszukiwanej frazy. Dostosuj parametry lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę użytkowników."
+  "ListAccounts": "Lista kont"
 }

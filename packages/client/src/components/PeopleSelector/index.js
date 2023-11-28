@@ -236,7 +236,7 @@ const PeopleSelector = ({
         searchEmptyScreenHeader || t("People:NotFoundUsers")
       }
       searchEmptyScreenDescription={
-        searchEmptyScreenDescription || t("SearchEmptyDescription")
+        searchEmptyScreenDescription || t("People:NotFoundUsersDescription")
       }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}

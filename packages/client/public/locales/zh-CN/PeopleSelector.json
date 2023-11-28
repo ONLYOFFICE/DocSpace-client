@@ -2,6 +2,5 @@
   "AllAccounts": "所有账户",
   "EmptyDescription": "之前邀请至协作空间或单独房间的用户列表将在此处展示。您可随时邀请这些用户进行协作。",
   "EmptyHeader": "此处暂无其他账户",
-  "ListAccounts": "列出账户",
-  "SearchEmptyDescription": "没有与您搜索条件匹配的用户。请调整搜索参数或清除搜索字段，查看完整的用户列表。"
+  "ListAccounts": "列出账户"
 }

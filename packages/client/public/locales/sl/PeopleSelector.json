@@ -2,6 +2,5 @@
   "AllAccounts": "Vsi računi",
   "EmptyDescription": "Tukaj se prikaže seznam uporabnikov, ki so bili predhodno povabljeni v DocSpace ali ločene sobe. Te uporabnike boste lahko kadar koli povabili k sodelovanju.",
   "EmptyHeader": "Tukaj še ni drugih računov",
-  "ListAccounts": "Seznam računov",
-  "SearchEmptyDescription": "Noben uporabnik ne ustreza vašemu iskanju. Za ogled celotnega seznama uporabnikov prilagodite iskalne parametre ali počistite iskalno polje."
+  "ListAccounts": "Seznam računov"
 }

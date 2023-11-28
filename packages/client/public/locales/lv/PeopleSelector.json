@@ -2,6 +2,5 @@
   "AllAccounts": "Visi konti",
   "EmptyDescription": "Šeit tiks parādīts to lietotāju saraksts, kas iepriekš uzaicināti uz DocSpace vai atsevišķām telpām. Jūs varēsiet uzaicināt šos lietotājus sadarboties jebkurā laikā.",
   "EmptyHeader": "Šeit vēl nav citu kontu",
-  "ListAccounts": "Uzskaitīt kontus",
-  "SearchEmptyDescription": "Neviens lietotājs neatbilst jūsu meklēšanas vaicājumam. Pielāgojiet meklēšanas parametrus vai notīriet meklēšanas lauku, lai skatītu pilnu lietotāju sarakstu."
+  "ListAccounts": "Uzskaitīt kontus"
 }

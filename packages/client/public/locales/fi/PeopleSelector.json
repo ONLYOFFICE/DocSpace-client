@@ -2,6 +2,5 @@
   "AllAccounts": "Kaikki tilit",
   "EmptyDescription": "Luettelo käyttäjistä, jotka on aiemmin kutsuttu DocSpaceen tai erillisiin huoneisiin, ilmestyy tähän. Voit kutsua näitä käyttäjiä yhteistyöhön milloin tahansa.",
   "EmptyHeader": "Ei vielä muita tilejä täällä",
-  "ListAccounts": "Listaa tilit",
-  "SearchEmptyDescription": "Yksikään käyttäjä ei vastaa hakuasi. Ole hyvä ja muokkaa hakuparametrejäsi tai tyhjennä hakukenttä nähdäksesi täyden listan käyttäjistä."
+  "ListAccounts": "Listaa tilit"
 }

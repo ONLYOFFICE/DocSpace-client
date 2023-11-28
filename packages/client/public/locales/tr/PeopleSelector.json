@@ -2,6 +2,5 @@
   "AllAccounts": "Bütün hesaplar",
   "EmptyDescription": "Daha önce DocSpace'e veya ayrı odalara davet edilen kullanıcıların listesi burada görünecektir. Bu kullanıcıları istediğiniz zaman iş birliği için davet edebileceksiniz.",
   "EmptyHeader": "Burada henüz başka hesap yok",
-  "ListAccounts": "Hesapları listele",
-  "SearchEmptyDescription": "Aramanızla eşleşen kullanıcı yok. Lütfen arama parametrelerinizi düzenleyin veya kullanıcıların tam listesini görüntülemek için arama alanını temizleyin."
+  "ListAccounts": "Hesapları listele"
 }

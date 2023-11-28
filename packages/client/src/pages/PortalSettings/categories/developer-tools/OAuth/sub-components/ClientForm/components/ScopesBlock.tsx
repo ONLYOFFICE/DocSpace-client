@@ -152,7 +152,7 @@ const ScopesBlock = ({
                 lineHeight={"16px"}
               >
                 {scope.write.name}
-              </Text>
+              </Text>{" "}
               — {t(`Common:${scope.write.tKey}`)}
             </Text>
           </StyledScopesName>

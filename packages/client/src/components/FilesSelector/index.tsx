@@ -62,8 +62,6 @@ const FilesSelector = ({
 
   selection,
   disabledItems,
-  isFolderActions,
-  setIsFolderActions,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
@@ -323,7 +321,6 @@ const FilesSelector = ({
 
     if (isCopy) {
       setCopyPanelVisible(false);
-      setIsFolderActions(false);
     } else if (isRestoreAll) {
       setRestoreAllPanelVisible(false);
     } else if (isRestore) {
@@ -382,17 +379,10 @@ const FilesSelector = ({
         if (item.fileExst || item.contentLength) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("Translations:MoveToFolderMessage"));
+          toastr.error(t("MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }
-      }
-
-      if (isFolderActions) {
-        fileIds = [];
-        folderIds = [];
-
-        folderIds.push(currentFolderId);
       }
 
       if (folderIds.length || fileIds.length) {
@@ -640,8 +630,6 @@ export default inject(
       restoreAllPanelVisible,
       setRestoreAllPanelVisible,
       conflictResolveDialogVisible,
-      isFolderActions,
-      setIsFolderActions,
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
     } = dialogsStore;
@@ -713,7 +701,6 @@ export default inject(
       theme,
       selection: selectionsWithoutEditing,
       disabledItems,
-      isFolderActions,
       setConflictDialogData,
       checkFileConflicts,
       itemOperationToFolder,
@@ -722,7 +709,6 @@ export default inject(
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
-      setIsFolderActions,
       setSelectedItems,
       setInfoPanelIsMobileHidden,
       includeFolder,

@@ -12,6 +12,7 @@ export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
 export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
+export const LOADER_TIMEOUT = 300;
 
 /**
  * Enum for employee activation status.

@@ -124,6 +124,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    setSelectedFolder,
   } = props;
 
   const location = useLocation();
@@ -225,6 +226,7 @@ const PureHome = (props) => {
     window.addEventListener("popstate", onClickBack);
 
     return () => {
+      setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
@@ -356,6 +358,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
+    const { setSelectedFolder } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -583,6 +586,7 @@ export default inject(
       loadCurrentUser: auth.userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
+      setSelectedFolder,
     };
   }
 )(observer(Home));

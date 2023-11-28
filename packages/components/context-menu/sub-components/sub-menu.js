@@ -14,7 +14,7 @@ import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
 import ContextMenuSkeleton from "../../skeletons/context-menu";
 
-import { isMobile } from "../../utils/device";
+import { isMobile, isTablet } from "../../utils/device";
 
 const SubMenu = (props) => {
   const {
@@ -35,7 +35,7 @@ const SubMenu = (props) => {
   const theme = useTheme();
 
   const onItemMouseEnter = (e, item) => {
-    if (item.disabled || isMobile()) {
+    if (item.disabled || isTablet() || isMobile()) {
       e.preventDefault();
       return;
     }
@@ -46,9 +46,9 @@ const SubMenu = (props) => {
   const onItemClick = (e, item) => {
     if (item.onLoad) {
       e.preventDefault();
-      if (!isMobile()) return;
+      if (!isMobile() && !isTablet()) return;
 
-      if (isMobile()) onMobileItemClick(e, item.onLoad);
+      if (isMobile() || isTablet()) onMobileItemClick(e, item.onLoad);
       else onLeafClick(e);
       return;
     }

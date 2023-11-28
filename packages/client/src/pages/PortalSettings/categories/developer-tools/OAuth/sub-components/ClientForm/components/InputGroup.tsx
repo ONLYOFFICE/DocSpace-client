@@ -10,11 +10,7 @@ import FieldContainer from "@docspace/components/field-container";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
-import {
-  StyledHeaderRow,
-  StyledInputGroup,
-  StyledInputRow,
-} from "../ClientForm.styled";
+import { StyledInputGroup } from "../ClientForm.styled";
 
 interface InputGroupProps {
   label: string;

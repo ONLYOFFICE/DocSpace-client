@@ -236,7 +236,8 @@ const ClientForm = ({
         form.logo &&
         (form.name !== initialClient.name ||
           form.logo !== initialClient.logo ||
-          form.description !== initialClient.description)
+          form.description !== initialClient.description ||
+          form.authentication_method !== initialClient.authenticationMethod)
       );
     }
 
@@ -413,6 +414,7 @@ const ClientForm = ({
             websiteUrlValue={form.website_url}
             descriptionValue={form.description}
             logoValue={form.logo}
+            authMethodValue={form.authentication_method}
             changeValue={onChangeForm}
             isEdit={isEdit}
             errorFields={errorFields}

@@ -1,4 +1,8 @@
 import React from "react";
+
+import ComboBox from "@docspace/components/combobox";
+import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
+
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
@@ -13,6 +17,7 @@ interface BasicBlockProps {
   websiteUrlValue: string;
   logoValue: string;
   descriptionValue: string;
+  authMethodValue: AuthenticationMethod;
 
   changeValue: (name: string, value: string) => void;
 
@@ -61,6 +66,7 @@ const BasicBlock = ({
   websiteUrlValue,
   logoValue,
   descriptionValue,
+  authMethodValue,
   changeValue,
 
   isEdit,
@@ -118,6 +124,21 @@ const BasicBlock = ({
     }
   };
 
+  const getAuthMethodOptions = () => {
+    const noneOption = {
+      key: AuthenticationMethod.none,
+      label: "none",
+    };
+
+    const clientSecretPostOption = {
+      key: AuthenticationMethod.client_secret_post,
+      label: "client_secret_post",
+    };
+    return [noneOption, clientSecretPostOption];
+  };
+
+  const options = getAuthMethodOptions();
+
   return (
     <StyledBlock>
       <BlockHeader header={"Basic info"} />
@@ -157,6 +178,24 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
         />
+        <InputGroup
+          label={"Authentication method"}
+          name={"authentication_method"}
+          value=""
+          placeholder=""
+          error=""
+          onChange={() => {}}
+        >
+          <ComboBox
+            options={options}
+            selectedOption={options.find((o) => o.key === authMethodValue)}
+            displaySelectedOption
+            scaledOptions
+            onSelect={({ key }: { key: string }) => {
+              changeValue("authentication_method", key);
+            }}
+          />
+        </InputGroup>
       </StyledInputBlock>
     </StyledBlock>
   );

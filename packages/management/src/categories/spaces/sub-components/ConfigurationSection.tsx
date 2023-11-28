@@ -54,7 +54,11 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
 
       try {
         await setDomainName(domain);
-        await setPortalName(name);
+        await setPortalName(name).then((result) => {
+          let url = new URL(result);
+          url.searchParams.append("referenceUrl", "/management");
+          return window.location.replace(url);
+        })
         await authStore.settingsStore.getAllPortals();
         
       } catch (err) {

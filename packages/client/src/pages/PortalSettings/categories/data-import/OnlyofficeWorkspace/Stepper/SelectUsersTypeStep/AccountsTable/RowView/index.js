@@ -1,23 +1,59 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
+import UsersTypeRow from "./UsersTypeRow";
+
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
-import Checkbox from "@docspace/components/checkbox";
+import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
 import Text from "@docspace/components/text";
-import UsersRow from "./UsersRow";
+import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
+
+  .table-group-menu {
+    height: 60px;
+    position: relative;
+    z-index: 201;
+    left: -20px;
+    top: 30px;
+    width: 100%;
+    margin-top: -25px;
+
+    .table-container_group-menu {
+      padding: 0px 20px;
+      border-image-slice: 0;
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+    }
+
+    .table-container_group-menu-checkbox {
+      margin-left: 7px;
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+  }
+
+  .header-container-text {
+    font-size: 12px;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+  }
+
+  .table-container_header {
+    position: absolute;
+  }
 
   .clear-icon {
     margin-right: 8px;
@@ -30,14 +66,7 @@ const StyledRowContainer = styled(RowContainer)`
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
-  height: 40px;
   min-height: 40px;
-
-  .row-header-item {
-    display: flex;
-    align-items: center;
-    margin-left: 7px;
-  }
 
   .row-header-title {
     color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
@@ -52,39 +81,36 @@ const StyledRow = styled(Row)`
   }
 `;
 
-const checkedAccountType = "withEmail";
+const checkedAccountType = "result";
 
 const RowView = (props) => {
   const {
     t,
-    withEmailUsers,
-    sectionWidth,
     viewAs,
     setViewAs,
+    sectionWidth,
     accountsData,
+    typeOptions,
+    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
   } = props;
-  const rowRef = useRef(null);
 
-  const toggleAll = (e) => {
-    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
-  };
+  const isIndeterminate =
+    checkedUsers.result.length > 0 &&
+    checkedUsers.result.length !== users.result.length;
 
-  const handleToggle = (user) => toggleAccount(user, checkedAccountType);
+  const isChecked = checkedUsers.result.length === users.result.length;
+
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
   };
-
-  const isIndeterminate =
-    checkedUsers.withEmail.length > 0 &&
-    checkedUsers.withEmail.length !== withEmailUsers.length;
-
-  const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -96,31 +122,47 @@ const RowView = (props) => {
     }
   }, [sectionWidth]);
 
+  const headerMenu = [
+    {
+      id: "change-type",
+      key: "change-type",
+      label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
+      disabled: false,
+      withDropDown: true,
+      options: typeOptions,
+      iconUrl: ChangeTypeReactSvgUrl,
+    },
+  ];
+
   return (
-    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
+    <StyledRowContainer useReactWindow={false}>
+      {checkedUsers.result.length > 0 && (
+        <div className="table-group-menu">
+          <TableGroupMenu
+            sectionWidth={sectionWidth}
+            headerMenu={headerMenu}
+            withoutInfoPanelToggler
+            withComboBox={false}
+            isIndeterminate={isIndeterminate}
+            isChecked={isChecked}
+            onChange={toggleAll}
+          />
+        </div>
+      )}
       {accountsData.length > 0 ? (
         <>
-          <StyledRow sectionWidth={sectionWidth}>
-            <div className="row-header-item">
-              {checkedUsers.withEmail.length > 0 && (
-                <Checkbox
-                  isIndeterminate={isIndeterminate}
-                  isChecked={isChecked}
-                  onChange={toggleAll}
-                />
-              )}
-              <Text className="row-header-title">{t("Common:Name")}</Text>
-            </div>
+          <StyledRow key="Name" sectionWidth={sectionWidth} onClick={toggleAll}>
+            <Text className="row-header-title">{t("Common:Name")}</Text>
           </StyledRow>
 
           {accountsData.map((data) => (
-            <UsersRow
-              t={t}
+            <UsersTypeRow
               key={data.key}
               data={data}
               sectionWidth={sectionWidth}
+              typeOptions={typeOptions}
               isChecked={isAccountChecked(data.key, checkedAccountType)}
-              toggleAccount={() => handleToggle(data)}
+              toggleAccount={() => toggleAccount(data, checkedAccountType)}
             />
           ))}
         </>
@@ -158,7 +200,7 @@ const RowView = (props) => {
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
-    withEmailUsers,
+    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
@@ -167,9 +209,9 @@ export default inject(({ setup, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    withEmailUsers,
     viewAs,
     setViewAs,
+    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,

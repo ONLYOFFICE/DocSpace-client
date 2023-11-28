@@ -21,6 +21,7 @@ import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import Button from "@docspace/components/button";
 import { Base } from "@docspace/components/themes";
 import { generatePKCEPair } from "@docspace/common/utils/oauth";
+import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -166,6 +167,7 @@ const PreviewDialog = ({
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
+  const [state, setState] = React.useState("");
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
@@ -173,13 +175,17 @@ const PreviewDialog = ({
 
   const scopesString = client?.scopes.join(" ");
 
+  const isClientSecretPost =
+    client?.authenticationMethod === AuthenticationMethod.client_secret_post;
+
   const encodingScopes = encodeURI(scopesString || "");
 
   const getData = React.useCallback(() => {
-    const { verifier, challenge } = generatePKCEPair();
+    const { verifier, challenge, state } = generatePKCEPair();
 
     setCodeVerifier(verifier);
     setCodeChallenge(challenge);
+    setState(state);
   }, []);
 
   React.useEffect(() => {
@@ -187,7 +193,17 @@ const PreviewDialog = ({
   }, []);
 
   const getLink = () => {
-    return `${window.location.origin}/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${client?.redirectUris[0]}&scope=${encodingScopes}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
+    return `${
+      window.location.origin
+    }/oauth2/authorize?response_type=code&client_id=${
+      client?.clientId
+    }&redirect_uri=${
+      client?.redirectUris[0]
+    }&scope=${encodingScopes}&state=${state}${
+      isClientSecretPost
+        ? ""
+        : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
+    }`;
   };
 
   const link = getLink();
@@ -299,6 +315,7 @@ const PreviewDialog = ({
                 value={link}
               />
             </div>
+
             <div className="block-container">
               {/* @ts-ignore */}
               <Text
@@ -307,16 +324,37 @@ const PreviewDialog = ({
                 fontSize={"13px"}
                 noSelect
               >
-                Code verifier
+                State
               </Text>
               <Textarea
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
                 isDisabled
-                value={codeVerifier}
+                value={state}
               />
             </div>
+
+            {!isClientSecretPost && (
+              <div className="block-container">
+                {/* @ts-ignore */}
+                <Text
+                  fontWeight={600}
+                  lineHeight={"20px"}
+                  fontSize={"13px"}
+                  noSelect
+                >
+                  Code verifier
+                </Text>
+                <Textarea
+                  heightTextArea={64}
+                  enableCopy
+                  isReadOnly
+                  isDisabled
+                  value={codeVerifier}
+                />
+              </div>
+            )}
           </StyledBlocksContainer>
         </StyledContainer>
       </ModalDialog.Body>

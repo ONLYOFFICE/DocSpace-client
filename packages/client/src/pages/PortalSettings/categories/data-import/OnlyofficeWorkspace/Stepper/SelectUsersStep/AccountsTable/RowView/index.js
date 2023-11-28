@@ -8,6 +8,7 @@ import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
+import Checkbox from "@docspace/components/checkbox";
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
 import Text from "@docspace/components/text";
@@ -31,6 +32,12 @@ const StyledRow = styled(Row)`
   box-sizing: border-box;
   height: 40px;
   min-height: 40px;
+
+  .row-header-item {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+  }
 
   .row-header-title {
     color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
@@ -63,8 +70,8 @@ const RowView = (props) => {
   } = props;
   const rowRef = useRef(null);
 
-  const toggleAll = (isChecked) => {
-    toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e) => {
+    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
   };
 
   const handleToggle = (user) => toggleAccount(user, checkedAccountType);
@@ -76,6 +83,8 @@ const RowView = (props) => {
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 &&
     checkedUsers.withEmail.length !== withEmailUsers.length;
+
+  const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -91,13 +100,17 @@ const RowView = (props) => {
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
-          <StyledRow
-            sectionWidth={sectionWidth}
-            checked={checkedUsers.withEmail.length === withEmailUsers.length}
-            onSelect={toggleAll}
-            indeterminate={isIndeterminate}
-          >
-            <Text className="row-header-title">{t("Common:Name")}</Text>
+          <StyledRow sectionWidth={sectionWidth}>
+            <div className="row-header-item">
+              {checkedUsers.withEmail.length > 0 && (
+                <Checkbox
+                  isIndeterminate={isIndeterminate}
+                  isChecked={isChecked}
+                  onChange={toggleAll}
+                />
+              )}
+              <Text className="row-header-title">{t("Common:Name")}</Text>
+            </div>
           </StyledRow>
 
           {accountsData.map((data) => (

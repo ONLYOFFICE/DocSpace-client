@@ -70,8 +70,9 @@ const TableView = (props) => {
   } = props;
   const tableRef = useRef(null);
 
-  const toggleAll = (e) =>
+  const toggleAll = (e) => {
     toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  };
 
   const handleToggle = (e, user) => {
     e.stopPropagation();
@@ -85,6 +86,8 @@ const TableView = (props) => {
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 &&
     checkedUsers.withEmail.length !== withEmailUsers.length;
+
+  const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
   useEffect(() => {
     if (!sectionWidth) return;
@@ -110,7 +113,7 @@ const TableView = (props) => {
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.withEmail.length === withEmailUsers.length}
+            isChecked={isChecked}
             toggleAll={toggleAll}
           />
           <TableBody

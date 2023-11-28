@@ -1,30 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
-
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-// import UsersInfoBlock from "./../../../sub-components/UsersInfoBlock";
 
-// const LICENSE_LIMIT = 100;
-
-const SelectUsersStep = ({
+const SelectUsersTypeStep = ({
   t,
   onNextStep,
   onPrevStep,
   showReminder,
-  withEmailUsers,
-  setResultUsers,
-  areCheckedUsersEmpty,
+  users,
+  checkedUsers,
   searchValue,
   setSearchValue,
 }) => {
-  const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
+  const [boundaries, setBoundaries] = useState([0, 25]);
+  const [dataPortion, setDataPortion] = useState(
+    users.result.slice(...boundaries)
+  );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));
+    setBoundaries([leftBoundary, rightBoundary]);
+    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -41,48 +40,40 @@ const SelectUsersStep = ({
       data.email.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
-  const handleStepIncrement = () => {
-    setResultUsers();
-    onNextStep();
-  };
+  useEffect(() => {
+    setDataPortion(users.result.slice(...boundaries));
+  }, [users]);
 
   return (
     <>
       <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={handleStepIncrement}
+        className="save-cancel-buttons upper-buttons"
+        onSaveClick={onNextStep}
         onCancelClick={onPrevStep}
         showReminder={showReminder}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
-        saveButtonDisabled={areCheckedUsersEmpty}
-        // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
 
-      {/* <UsersInfoBlock
-        t={t}
-        selectedUsers={numberOfCheckedAccounts}
-        totalUsers={users.length}
-        totalLicenceLimit={LICENSE_LIMIT}
-      /> */}
-
-      <SearchInput
-        id="search-users-input"
-        placeholder={t("Common:Search")}
-        style={{ marginTop: "20px" }}
-        value={searchValue}
-        onChange={onChangeInput}
-        refreshTimeout={100}
-        onClearSearch={onClearSearchInput}
-      />
+      {!checkedUsers.result.length > 0 && (
+        <SearchInput
+          id="search-users-type-input"
+          placeholder={t("Common:Search")}
+          style={{ marginTop: "20px" }}
+          value={searchValue}
+          onChange={onChangeInput}
+          refreshTimeout={100}
+          onClearSearch={onClearSearchInput}
+        />
+      )}
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {withEmailUsers.length > 25 && (
+      {users.result.length > 25 && (
         <AccountsPaging
           t={t}
-          numberOfItems={withEmailUsers.length}
+          numberOfItems={users.result.length}
           setDataPortion={handleDataChange}
         />
       )}
@@ -90,14 +81,12 @@ const SelectUsersStep = ({
       {filteredAccounts.length > 0 && (
         <SaveCancelButtons
           className="save-cancel-buttons"
-          onSaveClick={handleStepIncrement}
+          onSaveClick={onNextStep}
           onCancelClick={onPrevStep}
           showReminder={showReminder}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
-          saveButtonDisabled={areCheckedUsersEmpty}
-          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
       )}
     </>
@@ -105,19 +94,13 @@ const SelectUsersStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    withEmailUsers,
-    searchValue,
-    setSearchValue,
-    setResultUsers,
-    areCheckedUsersEmpty,
-  } = importAccountsStore;
+  const { users, checkedUsers, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
-    setResultUsers,
-    areCheckedUsersEmpty,
-    withEmailUsers,
+    users,
+    checkedUsers,
     searchValue,
     setSearchValue,
   };
-})(observer(SelectUsersStep));
+})(observer(SelectUsersTypeStep));

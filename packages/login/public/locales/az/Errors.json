@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Etibarsız istifadəçi adı və ya parol",
   "LoginWithAccountNotFound": "Əlaqəli üçüncü tərəf hesabını tapmaq mümkün deyil. Əvvəlcə profil redaktə səhifəsində sosial şəbəkə hesabınızı əlaqələndirməlisiniz.",
   "LoginWithBruteForce": "Avtorizasiya müvəqqəti olaraq bloklanıb.",
+  "LoginWithBruteForceCaptcha": "Robot olmadığınızı təsdiqləyin",
   "RecaptchaInvalid": "Yanlış Recaptcha",
   "SsoAttributesNotFound": "İdentifikasiya uğursuz oldu (təsdiq atributları tapılmadı)",
   "SsoAuthFailed": "İdentifikasiya uğursuz oldu",

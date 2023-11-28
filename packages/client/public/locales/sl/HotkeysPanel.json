@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Preklop med prikazom mreže in seznama",
   "HotkeysClearAll": "Premakni vse izbire",
   "HotkeysClose": "Zapri/Razveljavi akcijo",
+  "HotkeysCopySelected": "Kopiraj izbrane elemente v odložišče",
   "HotkeysCreateDocument": "Ustvari dokument",
   "HotkeysCreateFolder": "Ustvari mapo",
   "HotkeysCreateForm": "Ustvari predlogo za prazen obrazec",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Ustvari predstavitev",
   "HotkeysCreateSpreadsheet": "Ustvari preglednico",
   "HotkeysCreatingObjects": "Ustvarjanje predmetov",
+  "HotkeysCutSelected": "Izreži izbrane elemente v odložišče",
   "HotkeysEnterKey": "Vstopi",
   "HotkeysExtendSelectionDown": "Premakni izbiro navzdol",
   "HotkeysExtendSelectionLeft": "Premakni izbiro na levo",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Premakni se navzgor brez spreminjanja izbire",
   "HotkeysNavigation": "Navigacija",
   "HotkeysOpen": "Odpri izbrani predmet/Potrdi dejanje",
+  "HotkeysPasteSelected": "Prilepi izbrane elemente iz odložišča",
   "HotkeysPlayPause": "Predvajaj/Pavza",
   "HotkeysRedoLastUndoneAction": "Ponovi zadnje razveljavljeno dejanje",
   "HotkeysRemove": "Odstrani izbrane izdelke",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Razmik",
   "HotkeysUndoLastAction": "Razveljavi zadnjo akcijo",
   "HotkeysUploadFile": "Naloži datoteko",
-  "HotkeysUploadingObjects": "Nalaganje predmetov"
+  "HotkeysUploadingObjects": "Nalaganje predmetov",
+  "HotkeysZoomIn": "Približaj",
+  "HotkeysZoomOut": "Oddalji"
 }

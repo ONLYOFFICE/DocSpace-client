@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Ongeldige gebruikersnaam of wachtwoord.",
   "LoginWithAccountNotFound": "Kan het geassocieerde account van de derde partij niet vinden. U moet eerst verbinding maken met uw social media account op de profielbewerkingspagina.",
   "LoginWithBruteForce": "Autorisatie tijdelijk geblokkeerd",
+  "LoginWithBruteForceCaptcha": "Bevestig dat u geen robot bent",
   "RecaptchaInvalid": "Ongeldige Recaptcha",
   "SsoAttributesNotFound": "Authenticatie mislukt (bevestigingskenmerken niet gevonden)",
   "SsoAuthFailed": "Authenticatie mislukt",

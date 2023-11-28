@@ -2,7 +2,11 @@
   "Error401Text": "Je nám ľúto, zdroj nie je momentálne dostupný.",
   "Error403Text": "Prepáčte, prístup odmietnutý.",
   "Error404Text": "Prepáčte, zdroj sa nedá nájsť.",
+  "ErrorDeactivatedText": "Tento DocSpace je deaktivovaný",
   "ErrorEmptyResponse": "Prázdna odpoveď",
   "ErrorOfflineText": "Nenašlo sa žiadne internetové pripojenie",
-  "ErrorUnavailableText": "DocSpace je nedostupný"
+  "ErrorUnavailableText": "DocSpace je nedostupný",
+  "InvalidLink": "Neplatný odkaz",
+  "LinkDoesNotExist": "Odkaz, ktorý sa pokúšate otvoriť, neexistuje.",
+  "LinkHasExpired": "Odkaz, ktorý používate, je neplatný."
 }

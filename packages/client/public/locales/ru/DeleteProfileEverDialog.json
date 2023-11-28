@@ -1,5 +1,9 @@
 {
-  "DeleteUser": "Удалить пользователя",
   "DeleteGroupUsersSuccessMessage": "Пользователи были успешно удалены.",
+  "DeleteMyDocumentsUser": "Все личные файлы и папки этого пользователя в разделе Мои документы будут окончательно удалены.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Комнаты, созданные этим пользователем, и документы, хранящиеся в этих комнатах, будут автоматически переназначены администратору, выполняющему удаление: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Переназначьте данные вручную, чтобы выбрать другого пользователя для переназначения.",
+  "DeleteUser": "Удалить пользователя",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> будет удален. Это действие не может быть отменено.",
+  "ReassignDataToAnotherUser": "Переназначить данные другому пользователю",
   "SuccessfullyDeleteUserInfoMessage": "Пользователь успешно удален"
 }

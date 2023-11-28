@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Sie können die deaktivierten Benutzer später bei Bedarf löschen oder wieder aktivieren. Beachten Sie, dass Sie Benutzer wie den Eigentümer und sich selbst nicht deaktivieren können.",
+  "DisableUser": "Benutzer deaktivieren",
+  "DisableUserDescription": "Wenn Sie diesen Benutzer deaktivieren, kann er sich nicht mehr bei DocSpace anmelden, während seine Dokumente und Daten intakt bleiben.",
+  "DisableUsers": "Benutzer deaktivieren",
+  "DisableUsersDescription": "Wenn Sie diese Benutzer deaktivieren, können sie sich nicht mehr bei DocSpace anmelden, während ihre Dokumente und Daten intakt bleiben.",
+  "EnableUser": "Benutzer freigeben",
+  "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder bei DocSpace anmelden und auf seine Dokumente und Daten zugreifen.",
+  "EnableUsers": "Benutzer freischalten",
+  "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in DocSpace einloggen und auf ihre Dokumente und Daten zugreifen."
+}

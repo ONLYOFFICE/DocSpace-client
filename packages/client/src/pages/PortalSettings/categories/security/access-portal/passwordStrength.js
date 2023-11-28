@@ -212,7 +212,7 @@ const PasswordStrength = (props) => {
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="SettingPasswordDescriptionSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"

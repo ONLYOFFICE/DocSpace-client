@@ -1,4 +1,5 @@
 {
+  "AccessDenied": " Accès refusé",
   "Error401Text": "Désolé, la ressource n'est pas disponible actuellement.",
   "Error403Text": "Désolé, accès refusé.",
   "Error404Text": "Désolé, la ressource n'a pu être trouvée.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace non disponible",
   "InvalidLink": "Lien incorrect",
   "LinkDoesNotExist": "Le lien que vous essayez d'ouvrir n'existe pas.",
-  "LinkHasExpired": "Le lien que vous avez suivi a expiré."
+  "LinkHasExpired": "Le lien que vous avez suivi a expiré.",
+  "PortalRestriction": " Votre adresse IP ne figure pas dans la liste des adresses IP autorisées à accéder à ce DocSpace. Désactivez un VPN s'il est activé et rechargez la page, ou utilisez une autre adresse IP pour vous connecter."
 }

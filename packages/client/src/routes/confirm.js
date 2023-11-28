@@ -175,6 +175,16 @@ const confirmRoutes = [
 const ConfirmParentRoutes = [
   {
     path: "confirm.aspx",
+    element: <ConfirmRoute />,
+    errorElement: <Error404 />,
+  },
+  {
+    path: "confirm",
+    element: <ConfirmRoute />,
+    errorElement: <Error404 />,
+  },
+  {
+    path: "confirm.aspx",
     element: (
       <ErrorBoundary>
         <Confirm />

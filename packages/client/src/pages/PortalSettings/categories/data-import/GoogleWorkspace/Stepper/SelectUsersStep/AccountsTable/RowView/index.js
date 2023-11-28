@@ -51,32 +51,27 @@ const checkedAccountType = "withEmail";
 const RowView = (props) => {
   const {
     t,
-    withEmailUsers,
-    sectionWidth,
     viewAs,
     setViewAs,
+    sectionWidth,
     accountsData,
+
     checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
   } = props;
-  const rowRef = useRef(null);
 
-  const toggleAll = (isChecked) => {
-    toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
-  };
+  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
 
   const handleToggle = (user) => toggleAccount(user, checkedAccountType);
 
-  const onClearFilter = () => {
-    setSearchValue("");
-  };
+  const onClearFilter = () => setSearchValue("");
 
   const isIndeterminate =
-    checkedUsers.withEmail.length > 0 &&
-    checkedUsers.withEmail.length !== withEmailUsers.length;
+    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;
@@ -89,15 +84,14 @@ const RowView = (props) => {
   }, [sectionWidth]);
 
   return (
-    <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
+    <StyledRowContainer useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
           <StyledRow
             sectionWidth={sectionWidth}
             checked={checkedUsers.withEmail.length === withEmailUsers.length}
             onSelect={toggleAll}
-            indeterminate={isIndeterminate}
-          >
+            indeterminate={isIndeterminate}>
             <Text className="row-header-title">{t("Common:Name")}</Text>
           </StyledRow>
           {accountsData.map((data) => (
@@ -126,12 +120,7 @@ const RowView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>
@@ -145,8 +134,8 @@ const RowView = (props) => {
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
-    withEmailUsers,
     checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
@@ -154,10 +143,11 @@ export default inject(({ setup, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    withEmailUsers,
     viewAs,
     setViewAs,
+
     checkedUsers,
+    withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,

@@ -33,9 +33,9 @@ const UsersTypeTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
+    setHideColumns,
     isIndeterminate,
     isChecked,
-    toggleAll,
   } = props;
 
   const defaultColumns = [
@@ -47,11 +47,6 @@ const UsersTypeTableHeader = (props) => {
       default: true,
       active: true,
       minWidth: 180,
-      checkbox: {
-        value: isChecked,
-        isIndeterminate,
-        onChange: toggleAll,
-      },
       onChange: onColumnChange,
     },
     {
@@ -59,6 +54,7 @@ const UsersTypeTableHeader = (props) => {
       title: t("Common:Type"),
       enable: true,
       resizable: true,
+      minWidth: 100,
       onChange: onColumnChange,
     },
     {
@@ -72,10 +68,6 @@ const UsersTypeTableHeader = (props) => {
 
   const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
 
-  useEffect(() => {
-    setColumns(getColumns(defaultColumns));
-  }, [isIndeterminate, isChecked]);
-
   function onColumnChange(key, e) {
     const columnIndex = columns.findIndex((c) => c.key === key);
 
@@ -83,13 +75,17 @@ const UsersTypeTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item
-      )
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns));
+  }, [isIndeterminate, isChecked]);
 
   return (
     <TableHeader
@@ -102,6 +98,7 @@ const UsersTypeTableHeader = (props) => {
       checkboxMargin="12px"
       showSettings={false}
       useReactWindow
+      setHideColumns={setHideColumns}
       infoPanelVisible={false}
     />
   );

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -24,8 +24,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const PERCENT_STEP = 5;
-
 const ImportProcessingStep = ({
   t,
   onNextStep,
@@ -33,37 +31,39 @@ const ImportProcessingStep = ({
   setIsLoading,
   proceedFileMigration,
   cancelMigration,
-  data,
   importOptions,
+  finalUsers,
 }) => {
-  const [isVisble, setIsVisble] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
-  const percentRef = useRef(0);
 
-  useEffect(() => {
+  const handleFileMigration = async () => {
     try {
-      const interval = setInterval(() => {
-        if (percentRef.current < 100) {
-          setIsLoading(true);
-          setPercent((prev) => prev + PERCENT_STEP);
-          percentRef.current += PERCENT_STEP;
-        } else {
-          clearInterval(interval);
-          setIsLoading(false);
-          onNextStep();
-        }
-      }, 1000);
-      proceedFileMigration({ ...data, ...importOptions });
+      await proceedFileMigration({
+        users: finalUsers,
+        migratorName: "Nextcloud",
+        ...importOptions,
+      });
+
+      setPercent(100);
+      setIsLoading(false);
+      onNextStep();
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
-  }, []);
+  };
+
+  const hideCancelDialog = () => setIsVisible(false);
 
   const onCancel = () => {
-    setIsVisble(true);
+    setIsVisible(true);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    handleFileMigration();
+  }, []);
 
   return (
     <Wrapper>
@@ -79,13 +79,13 @@ const ImportProcessingStep = ({
         </>
       )}
 
-      {isVisble && (
+      {isVisible && (
         <CancelUploadDialog
-          visible={isVisble}
+          visible={isVisible}
           loading={false}
           isFifthStep={isFifthStep}
           cancelMigration={cancelMigration}
-          onClose={() => setIsVisble(false)}
+          onClose={hideCancelDialog}
         />
       )}
     </Wrapper>
@@ -93,14 +93,14 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { data, setIsLoading, proceedFileMigration, cancelMigration, importOptions } =
+  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, finalUsers } =
     importAccountsStore;
 
   return {
-    data,
     importOptions,
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
+    finalUsers,
   };
 })(observer(ImportProcessingStep));

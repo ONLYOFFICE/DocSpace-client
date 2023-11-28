@@ -16,7 +16,7 @@ const UsersTypeRow = ({
     e.stopPropagation();
     e.target.closest(".dropdown-container") ||
       userTypeRef.current?.contains(e.target) ||
-      toggleAccount(e);
+      toggleAccount();
   };
 
   return (

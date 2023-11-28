@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
@@ -22,21 +22,19 @@ const StyledTableContainer = styled(TableContainer)`
 
   .table-group-menu {
     height: 69px;
-    position: relative;
+    position: absolute;
     z-index: 201;
-    left: -20px;
-    top: 28px;
+    left: 0px;
     width: 100%;
+
+    margin-top: -37.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      background-color: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBackground};
-      border-bottom: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBorder};
-      box-shadow: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBoxShadow};
+      background-color: ${(props) => props.theme.client.settings.migration.groupMenuBackground};
+      border-bottom: ${(props) => props.theme.client.settings.migration.groupMenuBorder};
+      box-shadow: ${(props) => props.theme.client.settings.migration.groupMenuBoxShadow};
     }
 
     .table-container_group-menu-checkbox {
@@ -61,8 +59,7 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background: ${(props) =>
-        props.theme.client.settings.migration.tableRowHoverColor};
+      background: ${(props) => props.theme.client.settings.migration.tableRowHoverColor};
     }
   }
 
@@ -82,36 +79,33 @@ const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `googleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGoogleWorkspaceColumnsSize_ver-${TABLE_VERSION}`;
 
+const checkedAccountType = "result";
+
 const TableView = ({
   t,
-  users,
   userId,
   viewAs,
   setViewAs,
   sectionWidth,
   accountsData,
   typeOptions,
-  checkedAccounts,
+
+  users,
+  checkedUsers,
   toggleAccount,
-  onCheckAccounts,
+  toggleAllAccounts,
   isAccountChecked,
   setSearchValue,
 }) => {
   const tableRef = useRef(null);
+  const [hideColumns, setHideColumns] = useState(false);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   const isIndeterminate =
-    checkedAccounts.length > 0 && checkedAccounts.length !== users.length;
+    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
 
-  const toggleAll = (checked) => {
-    onCheckAccounts(checked, users);
-  };
-
-  const handleToggle = (e, id) => {
-    e.stopPropagation();
-    toggleAccount(id);
-  };
+  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -140,15 +134,16 @@ const TableView = ({
 
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedAccounts.length > 0 && (
+      {checkedUsers.result.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
+            checkboxOptions={[]}
             sectionWidth={sectionWidth}
             headerMenu={headerMenu}
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.result.length === users.result.length}
             onChange={toggleAll}
           />
         </div>
@@ -163,8 +158,9 @@ const TableView = ({
             columnStorageName={columnStorageName}
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedAccounts.length === users.length}
+            isChecked={checkedUsers.result.length === users.result.length}
             toggleAll={toggleAll}
+            setHideColumns={setHideColumns}
           />
           <TableBody
             itemHeight={49}
@@ -175,8 +171,8 @@ const TableView = ({
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-          >
-            {users.map((data) => (
+            fetchMoreFiles={() => {}}>
+            {accountsData.map((data) => (
               <UsersTypeTableRow
                 key={data.key}
                 id={data.key}
@@ -184,8 +180,9 @@ const TableView = ({
                 displayName={data.displayName}
                 email={data.email}
                 typeOptions={typeOptions}
-                isChecked={isAccountChecked(data.key)}
-                toggleAccount={(e) => handleToggle(e, data.key)}
+                hideColumns={hideColumns}
+                isChecked={isAccountChecked(data.key, checkedAccountType)}
+                toggleAccount={() => toggleAccount(data, checkedAccountType)}
               />
             ))}
           </TableBody>
@@ -205,12 +202,7 @@ const TableView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>
@@ -226,24 +218,23 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
   const {
     users,
-    checkedAccounts,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   } = importAccountsStore;
 
   return {
-    users,
     viewAs,
     setViewAs,
     userId,
-    checkedAccounts,
+
+    users,
+    checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    onCheckAccounts,
     setSearchValue,
   };
 })(observer(TableView));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
@@ -16,15 +16,18 @@ const SelectUsersTypeStep = ({
   onNextStep,
   onPrevStep,
   showReminder,
-  checkedAccounts,
+
   users,
+  checkedUsers,
   searchValue,
   setSearchValue,
 }) => {
-  const [dataPortion, setDataPortion] = useState(users.slice(0, 25));
+  const [boundaries, setBoundaries] = useState([0, 25]);
+  const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
-    setDataPortion(users.slice(leftBoundary, rightBoundary));
+    setBoundaries([leftBoundary, rightBoundary]);
+    setDataPortion(users.result.slice(leftBoundary, rightBoundary));
   };
 
   const onChangeInput = (value) => {
@@ -38,8 +41,12 @@ const SelectUsersTypeStep = ({
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
+
+  useEffect(() => {
+    setDataPortion(users.result.slice(...boundaries));
+  }, [users]);
 
   return (
     <>
@@ -51,25 +58,24 @@ const SelectUsersTypeStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
+        saveButtonDisabled={checkedUsers.result.length === 0}
       />
 
-      {!checkedAccounts.length > 0 && (
-        <StyledSearchInput
-          id="search-users-type-input"
-          placeholder={t("Common:Search")}
-          value={searchValue}
-          onChange={onChangeInput}
-          refreshTimeout={100}
-          onClearSearch={onClearSearchInput}
-        />
-      )}
+      <StyledSearchInput
+        id="search-users-type-input"
+        placeholder={t("Common:Search")}
+        value={searchValue}
+        onChange={onChangeInput}
+        refreshTimeout={100}
+        onClearSearch={onClearSearchInput}
+      />
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.length > 25 && (
+      {users.result.length > 25 && (
         <AccountsPaging
           t={t}
-          numberOfItems={users.length}
+          numberOfItems={users.result.length}
           setDataPortion={handleDataChange}
         />
       )}
@@ -83,6 +89,7 @@ const SelectUsersTypeStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
+          saveButtonDisabled={checkedUsers.result.length === 0}
         />
       )}
     </>
@@ -90,12 +97,11 @@ const SelectUsersTypeStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedAccounts, users, searchValue, setSearchValue } =
-    importAccountsStore;
+  const { users, checkedUsers, searchValue, setSearchValue } = importAccountsStore;
 
   return {
-    checkedAccounts,
     users,
+    checkedUsers,
     searchValue,
     setSearchValue,
   };

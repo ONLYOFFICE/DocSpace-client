@@ -2,16 +2,18 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
 import ComboBox from "@docspace/components/combobox";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
+  align-items: center;
 
-  .row-main-container-wrapper {
-    width: 100%;
-    margin-right: 0;
+  .import-accounts-name {
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
   }
 
   .rowMainContainer {
@@ -19,21 +21,15 @@ const StyledRowContent = styled(RowContent)`
     width: 100%;
   }
 
-  .username {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  .row-main-container-wrapper {
+    margin: 0;
   }
 
-  .user-email {
-    margin-right: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+  .mainIcons {
+    height: auto;
   }
 
-  .user-type {
+  .role-type-selector {
     .combo-button {
       border: none;
       padding: 0;
@@ -42,8 +38,7 @@ const StyledRowContent = styled(RowContent)`
     }
 
     .combo-button-label {
-      color: ${(props) =>
-        props.theme.client.settings.migration.tableRowTextColor};
+      color: #a3a9ae;
     }
 
     .combo-buttons_arrow-icon {
@@ -53,8 +48,7 @@ const StyledRowContent = styled(RowContent)`
 
     svg {
       path {
-        fill: ${(props) =>
-          props.theme.client.settings.migration.tableRowTextColor};
+        fill: #a3a9ae;
       }
     }
   }
@@ -68,22 +62,24 @@ const UsersTypeRowContent = ({
   typeOptions,
   userTypeRef,
   type,
-  changeType,
+  changeUserType,
 }) => {
   const onSelectUser = (e) => {
-    changeType(id, e.key);
+    changeUserType(id, e.key);
   };
 
-  const selectedOption =
-    typeOptions.find((option) => option.key === type) || {};
+  const selectedOption = typeOptions.find((option) => option.key === type) || {};
 
-  const contentData = [
-    <Box displayProp="flex" justifyContent="space-between" alignItems="center">
-      <Box>
-        <Text className="username">{displayName}</Text>
-        <Text className="user-email">{email}</Text>
-      </Box>
-
+  return (
+    <StyledRowContent sectionWidth={sectionWidth}>
+      <div className="import-accounts-name">
+        <Text fontWeight={600} fontSize="14px">
+          {displayName}
+        </Text>
+        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+          {email}
+        </Text>
+      </div>
       <div ref={userTypeRef}>
         <ComboBox
           className="user-type"
@@ -97,20 +93,14 @@ const UsersTypeRowContent = ({
           manualWidth="fit-content"
         />
       </div>
-    </Box>,
-  ];
-
-  return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      {contentData}
     </StyledRowContent>
   );
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { changeType } = importAccountsStore;
+  const { changeUserType } = importAccountsStore;
 
   return {
-    changeType,
+    changeUserType,
   };
 })(observer(UsersTypeRowContent));

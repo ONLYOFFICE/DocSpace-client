@@ -46,8 +46,8 @@ const ButtonsWrapper = styled.div`
 
 const ImportCompleteStep = ({
   t,
-  selectedUsers,
-  importedUsers,
+  finalUsers,
+  users,
   getMigrationLog,
   clearCheckedAccounts,
   sendWelcomeLetter,
@@ -80,16 +80,17 @@ const ImportCompleteStep = ({
     if (isChecked) {
       sendWelcomeLetter({ isSendWelcomeEmail: true });
     }
-    setTimeout(() => {
-      navigate(-1);
-      clearCheckedAccounts();
-    }, 300);
+    navigate(-1);
+    clearCheckedAccounts();
   };
 
   return (
     <>
       <StyledText>
-        {t("Settings:ImportedUsers", { selectedUsers, importedUsers })}
+        {t("Settings:ImportedUsers", {
+          selectedUsers: finalUsers.length,
+          importedUsers: users.new.length + users.existing.length + users.withoutEmail.length,
+        })}
       </StyledText>
 
       <Wrapper>
@@ -102,9 +103,7 @@ const ImportCompleteStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={
-            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
         />
       </Wrapper>
 
@@ -128,17 +127,12 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    users,
-    getMigrationLog,
-    numberOfCheckedAccounts,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-  } = importAccountsStore;
+  const { users, getMigrationLog, finalUsers, clearCheckedAccounts, sendWelcomeLetter } =
+    importAccountsStore;
 
   return {
-    importedUsers: users.length,
-    selectedUsers: numberOfCheckedAccounts,
+    users,
+    finalUsers,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,

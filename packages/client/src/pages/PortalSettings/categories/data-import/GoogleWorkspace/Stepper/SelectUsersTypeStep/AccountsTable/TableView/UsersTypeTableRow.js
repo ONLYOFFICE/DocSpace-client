@@ -24,8 +24,7 @@ const StyledTableRow = styled(TableRow)`
     margin-right: 5px;
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-type {
@@ -37,8 +36,7 @@ const StyledTableRow = styled(TableRow)`
     }
 
     .combo-button-label {
-      color: ${(props) =>
-        props.theme.client.settings.migration.tableRowTextColor};
+      color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
     }
 
     .combo-buttons_arrow-icon {
@@ -48,8 +46,7 @@ const StyledTableRow = styled(TableRow)`
 
     svg {
       path {
-        fill: ${(props) =>
-          props.theme.client.settings.migration.tableRowTextColor};
+        fill: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
       }
     }
   }
@@ -63,23 +60,22 @@ const UsersTypeTableRow = ({
   isChecked,
   toggleAccount,
   type,
-  changeType,
+  changeUserType,
 }) => {
   const userTypeRef = useRef();
 
   const onSelectUser = (e) => {
-    changeType(id, e.key);
+    changeUserType(id, e.key);
   };
 
-  const selectedOption =
-    typeOptions.find((option) => option.key === type) || {};
+  const selectedOption = typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
     e.target.closest(".dropdown-container") ||
       userTypeRef.current?.contains(e.target) ||
-      toggleAccount(e);
+      toggleAccount();
   };
 
   return (
@@ -113,9 +109,9 @@ const UsersTypeTableRow = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { changeType } = importAccountsStore;
+  const { changeUserType } = importAccountsStore;
 
   return {
-    changeType,
+    changeUserType,
   };
 })(observer(UsersTypeTableRow));

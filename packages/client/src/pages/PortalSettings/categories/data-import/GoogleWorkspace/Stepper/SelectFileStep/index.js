@@ -11,6 +11,7 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -65,8 +66,8 @@ const SelectFileStep = ({
   onNextStep,
   showReminder,
   setShowReminder,
-  cancelDialogVisble,
-  setCancelDialogVisbile,
+  cancelDialogVisible,
+  setCancelDialogVisible,
   initMigrationName,
   multipleFileUploading,
   singleFileUploading,
@@ -82,6 +83,9 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
+  const goBack = () => navigate(-1);
+  const hideCancelDialog = () => setCancelDialogVisible(false);
+
   const onUploadFile = async (file) => {
     if (file.length) {
       await multipleFileUploading(file, setProgress);
@@ -91,7 +95,8 @@ const SelectFileStep = ({
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      const res = await getMigrationStatus();
+      // const res = await getMigrationStatus();
+      const res = { parseResult: mockRes, failedArchives: [], isCompleted: true };
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);
@@ -139,7 +144,7 @@ const SelectFileStep = ({
   };
 
   const onCancel = () => {
-    setCancelDialogVisbile(true);
+    setCancelDialogVisible(true);
     setProgress(0);
     setIsFileLoading(false);
   };
@@ -200,11 +205,11 @@ const SelectFileStep = ({
         </ErrorBlock>
       )}
 
-      {cancelDialogVisble && (
+      {cancelDialogVisible && (
         <CancelUploadDialog
-          visible={cancelDialogVisble}
+          visible={cancelDialogVisible}
           loading={isFileLoading}
-          onClose={() => setCancelDialogVisbile(false)}
+          onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />
       )}
@@ -234,7 +239,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     isFileLoading,
     setIsFileLoading,
     cancelMigration,
-    cancelDialogVisble: cancelUploadDialogVisible,
-    setCancelDialogVisbile: setCancelUploadDialogVisible,
+    cancelDialogVisible: cancelUploadDialogVisible,
+    setCancelDialogVisible: setCancelUploadDialogVisible,
   };
 })(observer(SelectFileStep));

@@ -39,7 +39,7 @@
   "Other": "Outros",
   "OwnerChange": "Alterar dono",
   "Presentations": "Apresentações ",
-  "PublicRoomLinkValidTime": "Este link é válido até {{data}}. Uma vez expirado, será impossível acessar a sala através deste link.",
+  "PublicRoomLinkValidTime": "Este link é válido até {{date}}. Uma vez expirado, será impossível acessar a sala através deste link.",
   "Remove": "Remover",
   "RoleCommentator": "Comentador",
   "RoleCommentatorDescription": "Operações com os ficheiros existentes: visualização, comentários.",

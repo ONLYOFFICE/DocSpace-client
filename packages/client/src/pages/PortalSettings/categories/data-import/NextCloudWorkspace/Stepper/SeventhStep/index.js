@@ -21,8 +21,8 @@ const ButtonsWrapper = styled.div`
 
 const SeventhStep = ({
   t,
-  selectedUsers,
-  importedUsers,
+  finalUsers,
+  users,
   getMigrationLog,
   clearCheckedAccounts,
   sendWelcomeLetter,
@@ -55,16 +55,17 @@ const SeventhStep = ({
     if (isChecked) {
       sendWelcomeLetter({ isSendWelcomeEmail: true });
     }
-    setTimeout(() => {
-      navigate(-1);
-      clearCheckedAccounts();
-    }, 300);
+    navigate(-1);
+    clearCheckedAccounts();
   };
 
   return (
     <Wrapper>
       <Text fontSize="12px">
-        {t("Settings:ImportedUsers", { selectedUsers, importedUsers })}
+        {t("Settings:ImportedUsers", {
+          selectedUsers: finalUsers.length,
+          importedUsers: users.new.length + users.existing.length + users.withoutEmail.length,
+        })}
       </Text>
       <Text fontSize="12px" color="#F21C0E" className="mt-8">
         {t("Settings:ErrorsWereFound", { errors: 3 })}
@@ -80,41 +81,25 @@ const SeventhStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={
-            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
         />
       </Box>
 
       <ButtonsWrapper>
-        <Button
-          size="small"
-          label={t("Common:Finish")}
-          primary
-          onClick={onFinishClick}
-        />
-        <Button
-          size="small"
-          label={t("Settings:DownloadLog")}
-          onClick={onDownloadLog}
-        />
+        <Button size="small" label={t("Common:Finish")} primary onClick={onFinishClick} />
+        <Button size="small" label={t("Settings:DownloadLog")} onClick={onDownloadLog} />
       </ButtonsWrapper>
     </Wrapper>
   );
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    users,
-    getMigrationLog,
-    numberOfCheckedAccounts,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-  } = importAccountsStore;
+  const { users, getMigrationLog, finalUsers, clearCheckedAccounts, sendWelcomeLetter } =
+    importAccountsStore;
 
   return {
-    importedUsers: users.length,
-    selectedUsers: numberOfCheckedAccounts,
+    users,
+    finalUsers,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,

@@ -2,7 +2,6 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
 import ComboBox from "@docspace/components/combobox";
 
@@ -63,14 +62,13 @@ const UsersRowContent = ({
   typeOptions,
   roleSelectorRef,
   type,
-  changeType,
+  changeUserType,
 }) => {
   const onSelectUser = (e) => {
-    changeType(id, e.key);
+    changeUserType(id, e.key);
   };
 
-  const selectedOption =
-    typeOptions.find((option) => option.key === type) || {};
+  const selectedOption = typeOptions.find((option) => option.key === type) || {};
 
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
@@ -100,9 +98,9 @@ const UsersRowContent = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { changeType } = importAccountsStore;
+  const { changeUserType } = importAccountsStore;
 
   return {
-    changeType,
+    changeUserType,
   };
 })(observer(UsersRowContent));

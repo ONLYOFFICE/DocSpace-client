@@ -17,13 +17,7 @@ const SectionsWrapper = styled.div`
   }
 `;
 
-const FifthStep = ({
-  t,
-  incrementStep,
-  decrementStep,
-  importOptions,
-  setImportOptions,
-}) => {
+const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOptions }) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const onChange = (e, name) => {
@@ -31,8 +25,8 @@ const FifthStep = ({
     setImportOptions({ [name]: checked });
   };
 
-  const users =
-    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+  const serviceName = "NextCloud";
+  const users = t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   return (
     <SectionsWrapper>
@@ -41,7 +35,7 @@ const FifthStep = ({
         onChange={() => setIsChecked((prev) => !prev)}
         sectionName={users}
         description={t("Settings:UsersSectionDescription")}
-        exportSection={{ sectionName: users, workspace: "NextCloud" }}
+        exportSection={{ sectionName: users, workspace: serviceName }}
         importSection={{
           sectionName: t("Common:Accounts"),
           workspace: "DocSpace",
@@ -53,12 +47,10 @@ const FifthStep = ({
         isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
-        description={t("Settings:PersonalFilesDescription", {
-          serviceName: "Nextcloud",
-        })}
+        description={t("Settings:PersonalFilesDescription", { serviceName })}
         exportSection={{
           sectionName: t("Settings:UsersFiles"),
-          workspace: "NextCloud",
+          workspace: serviceName,
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
@@ -70,12 +62,10 @@ const FifthStep = ({
         isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
-        description={t("Settings:SharedFilesDescription", {
-          serviceName: "Nextcloud",
-        })}
+        description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
           sectionName: t("Settings:SharedFiles"),
-          workspace: "NextCloud",
+          workspace: serviceName,
         }}
         importSection={{
           sectionName: t("Settings:MyDocuments"),

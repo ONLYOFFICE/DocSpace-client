@@ -104,9 +104,7 @@ const RowView = (props) => {
 
   const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
-  const onClearFilter = () => {
-    setSearchValue("");
-  };
+  const onClearFilter = () => setSearchValue("");
 
   useEffect(() => {
     if (viewAs !== "table" && viewAs !== "row") return;

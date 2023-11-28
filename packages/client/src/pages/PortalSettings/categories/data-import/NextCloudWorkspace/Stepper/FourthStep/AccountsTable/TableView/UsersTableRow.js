@@ -80,7 +80,7 @@ const UsersTableRow = ({
     e.stopPropagation();
     e.target.closest(".dropdown-container") ||
       roleSelectorRef.current?.contains(e.target) ||
-      toggleAccount(e);
+      toggleAccount();
   };
 
   return (

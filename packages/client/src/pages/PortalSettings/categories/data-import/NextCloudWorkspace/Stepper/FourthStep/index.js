@@ -9,7 +9,8 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 import { Wrapper } from "../StyledStepper";
 
 const FourthStep = (props) => {
-  const { t, incrementStep, decrementStep, users, searchValue, setSearchValue } = props;
+  const { t, incrementStep, decrementStep, checkedUsers, users, searchValue, setSearchValue } =
+    props;
 
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
@@ -47,6 +48,7 @@ const FourthStep = (props) => {
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
+        saveButtonDisabled={checkedUsers.result.length === 0}
       />
 
       <SearchInput
@@ -77,6 +79,7 @@ const FourthStep = (props) => {
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
+          saveButtonDisabled={checkedUsers.result.length === 0}
         />
       )}
     </Wrapper>
@@ -84,9 +87,10 @@ const FourthStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, searchValue, setSearchValue } = importAccountsStore;
+  const { checkedUsers, users, searchValue, setSearchValue } = importAccountsStore;
 
   return {
+    checkedUsers,
     users,
     searchValue,
     setSearchValue,

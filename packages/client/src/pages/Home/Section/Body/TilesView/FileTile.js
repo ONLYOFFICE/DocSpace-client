@@ -55,6 +55,8 @@ const FileTile = (props) => {
     withShiftSelect,
     isHighlight,
     thumbnails1280x720,
+    onDragOver,
+    onDragLeave,
   } = props;
 
   const temporaryExtension =
@@ -84,6 +86,14 @@ const FileTile = (props) => {
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
 
+  const onDragOverEvent = (_, e) => {
+    onDragOver && onDragOver(e);
+  };
+
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+  };
+
   return (
     <div ref={props.selectableRef} id={id}>
       <StyledDragAndDrop
@@ -93,6 +103,8 @@ const FileTile = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
       >
         <Tile

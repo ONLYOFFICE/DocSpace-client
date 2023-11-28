@@ -17,7 +17,6 @@ class TargetUserStore {
   targetUser = null;
   isEditTargetUser = false;
 
-  changeEmailVisible = false;
   changePasswordVisible = false;
   changeNameVisible = false;
   changeAvatarVisible = false;
@@ -126,11 +125,6 @@ class TargetUserStore {
 
   setIsEditTargetUser = (isEditTargetUser) => {
     this.isEditTargetUser = isEditTargetUser;
-  };
-
-  setChangeEmailVisible = (visible) => {
-    //console.log("setChangeEmailVisible", { visible });
-    this.changeEmailVisible = visible;
   };
 
   setChangePasswordVisible = (visible) =>

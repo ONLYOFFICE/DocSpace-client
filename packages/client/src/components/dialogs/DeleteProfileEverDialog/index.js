@@ -77,10 +77,13 @@ const DeleteProfileEverDialogComponent = (props) => {
     userPerformedDeletion,
     setDialogData,
     getUsersList,
+    needResetUserSelection,
+    setSelected
   } = props;
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const needReassignData = user.isRoomAdmin || user.isOwner || user.isAdmin;
+  const needReassignData =
+    user.isRoomAdmin || user.isOwner || user.isAdmin || user.isCollaborator;
 
   const deleteMessage = (
     <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
@@ -120,6 +123,7 @@ const DeleteProfileEverDialogComponent = (props) => {
       .catch((error) => toastr.error(error))
       .finally(() => {
         setIsRequestRunning(false);
+        needResetUserSelection && setSelected("close");
         onClose();
       });
   };
@@ -209,7 +213,7 @@ DeleteProfileEverDialog.propTypes = {
 export default inject(({ peopleStore }) => {
   const { dialogStore, selectionStore } = peopleStore;
 
-  const { getUsersList } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
   const {
     setDataReassignmentDialogVisible,
@@ -228,6 +232,7 @@ export default inject(({ peopleStore }) => {
     setIsDeletingUserWithReassignment,
     setDialogData,
     setSelected,
+    needResetUserSelection,
     removeUser: peopleStore.usersStore.removeUser,
     userPerformedDeletion: peopleStore.authStore.userStore.user,
     getUsersList,

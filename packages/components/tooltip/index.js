@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import Portal from "../portal";
 import StyledTooltip from "./styled-tooltip";
-import { flip, shift, offset } from "@floating-ui/dom";
 
 const defaultOffset = 4;
 const Tooltip = (props) => {
@@ -27,6 +27,23 @@ const Tooltip = (props) => {
     noArrow = true,
   } = props;
 
+  const globalCloseEvents = {
+    escape: true,
+    resize: true,
+    scroll: true,
+    clickOutsideAnchor: true,
+  };
+
+  const openEvents = {
+    click: openOnClick,
+    mouseenter: !openOnClick,
+  };
+
+  const closeEvents = {
+    click: openOnClick,
+    mouseleave: !openOnClick,
+  };
+
   const renderTooltip = () => (
     <StyledTooltip
       theme={props.theme}
@@ -37,10 +54,9 @@ const Tooltip = (props) => {
     >
       <ReactTooltip
         id={id}
+        opacity={1}
         float={float}
         place={place}
-        closeOnScroll
-        closeOnResize
         isOpen={isOpen}
         noArrow={noArrow}
         render={getContent}
@@ -48,11 +64,13 @@ const Tooltip = (props) => {
         afterShow={afterShow}
         afterHide={afterHide}
         offset={props.offset}
+        openEvents={openEvents}
         positionStrategy="fixed"
+        closeEvents={closeEvents}
         openOnClick={openOnClick}
         anchorSelect={anchorSelect}
-        closeEvents={["click", "mouseleave"]}
         className="__react_component_tooltip"
+        globalCloseEvents={globalCloseEvents}
         middlewares={[
           offset(props.offset ?? defaultOffset),
           flip({

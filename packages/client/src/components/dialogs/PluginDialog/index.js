@@ -34,9 +34,7 @@ const PluginDialog = ({
 
   fullScreen,
 
-  pluginId,
   pluginName,
-  pluginSystem,
 
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
@@ -71,9 +69,7 @@ const PluginDialog = ({
       message,
       null,
 
-      pluginId,
       pluginName,
-      pluginSystem,
 
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
@@ -101,9 +97,7 @@ const PluginDialog = ({
             message,
             null,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -154,9 +148,7 @@ const PluginDialog = ({
   const dialog = fullScreen ? (
     <StyledFullScreen>
       <WrappedComponent
-        pluginId={pluginId}
         pluginName={pluginName}
-        pluginSystem={pluginSystem}
         component={{
           component: PluginComponents.box,
           props: dialogBodyProps,
@@ -169,9 +161,7 @@ const PluginDialog = ({
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
       <ModalDialog.Body>
         <WrappedComponent
-          pluginId={pluginId}
           pluginName={pluginName}
-          pluginSystem={pluginSystem}
           component={{
             component: PluginComponents.box,
             props: dialogBodyProps,
@@ -182,9 +172,7 @@ const PluginDialog = ({
       {dialogFooterProps && (
         <ModalDialog.Footer>
           <WrappedComponent
-            pluginId={pluginId}
             pluginName={pluginName}
-            pluginSystem={pluginSystem}
             component={{
               component: PluginComponents.box,
               props: dialogFooterProps,

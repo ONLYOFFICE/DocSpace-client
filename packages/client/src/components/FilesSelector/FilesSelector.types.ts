@@ -128,8 +128,10 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
+  setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 
   onClose?: () => void;
 

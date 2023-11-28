@@ -42,7 +42,7 @@ import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
@@ -330,7 +330,7 @@ class ContextOptionsStore {
     const needConvert = canConvert(item.fileExst);
 
     const canOpenPlayer =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const url = getItemUrl(
       item.id,
@@ -347,7 +347,7 @@ class ContextOptionsStore {
   onClickLinkEdit = (item) => {
     const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
     const canConvert =
-      item.viewAccessability?.Convert && item.security?.Convert;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
@@ -402,7 +402,7 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
-    if (this.isPwa()) {
+    if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
       xhr.responseType = "blob";
@@ -953,7 +953,7 @@ class ContextOptionsStore {
     const isShareable = item.canShare;
 
     const isMedia =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const hasInfoPanel = contextOptions.includes("show-info");
 

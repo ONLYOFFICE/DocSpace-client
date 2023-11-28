@@ -237,6 +237,7 @@ const FilesRowContent = ({
           target="_blank"
           {...linkStyles}
           isTextOverflow={true}
+          dir="auto"
         >
           {titleWithoutExt}
         </Link>

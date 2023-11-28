@@ -75,6 +75,22 @@ let isZoom =
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
+const constructTitle = (firstPart, secondPart, reverse = false) => {
+  return !reverse
+    ? `${firstPart} - ${secondPart}`
+    : `${secondPart} - ${firstPart}`;
+};
+
+const checkIfFirstSymbolInStringIsRtl = (str) => {
+  if (!str) return;
+
+  const rtlRegexp = new RegExp(
+    /[\u04c7-\u0591\u05D0-\u05EA\u05F0-\u05F4\u0600-\u06FF]/
+  );
+
+  return rtlRegexp.test(str[0]);
+};
+
 function Editor({
   config,
   //personal,
@@ -186,7 +202,7 @@ function Editor({
     if (
       !view &&
       fileInfo &&
-      fileInfo.viewAccessability.WebRestrictedEditing &&
+      fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
@@ -222,7 +238,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.viewAccessability?.Convert &&
+        fileInfo?.viewAccessibility?.MustConvert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -305,7 +321,10 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.viewAccessability?.Convert && fileInfo?.security?.Convert) {
+      if (
+        fileInfo?.viewAccessibility?.MustConvert &&
+        fileInfo?.security?.Convert
+      ) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;
@@ -581,15 +600,23 @@ function Editor({
     const organizationName = "ONLYOFFICE"; //TODO: Replace to API variant
     const moduleTitle = "Documents"; //TODO: Replace to API variant
 
+    const isSubTitleRtl = checkIfFirstSymbolInStringIsRtl(subTitle);
+    const fileType = config?.document?.fileType;
+
+    // needs to reverse filename and extension for rtl mode
+    if (subTitle && fileType && isSubTitleRtl) {
+      subTitle = `${fileType}.${subTitle.replace(`.${fileType}`, "")}`;
+    }
+
     let title;
     if (subTitle) {
       if (successAuth && moduleTitle) {
-        title = subTitle + " - " + moduleTitle;
+        title = constructTitle(subTitle, moduleTitle, isSubTitleRtl);
       } else {
-        title = subTitle + " - " + organizationName;
+        title = constructTitle(subTitle, organizationName, isSubTitleRtl);
       }
     } else if (moduleTitle && organizationName) {
-      title = moduleTitle + " - " + organizationName;
+      title = constructTitle(moduleTitle, organizationName);
     } else {
       title = organizationName;
     }

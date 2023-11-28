@@ -13,33 +13,30 @@ import { PluginScopes } from "SRC_DIR/helpers/plugins/constants";
 import { StyledPluginItem, StyledPluginHeader } from "../StyledPlugins";
 
 const PluginItem = ({
-  id,
-
   name,
   version,
   description,
 
   enabled,
-  changePluginStatus,
+  updatePlugin,
 
   scopes,
   openSettingsDialog,
 
   image,
   url,
-
-  system,
 }) => {
   const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
 
   const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
-    changePluginStatus && changePluginStatus(id, name, !enabled, system);
+    console.log(name, enabled);
+    updatePlugin && updatePlugin(name, !enabled);
   };
 
   const onOpenSettingsDialog = () => {
-    openSettingsDialog && openSettingsDialog(id, name, system);
+    openSettingsDialog && openSettingsDialog(name);
   };
 
   return (

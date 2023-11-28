@@ -20,6 +20,8 @@ import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import OAuth from "./OAuth";
 import { DeviceType } from "@docspace/common/constants";
+import PluginSDK from "./PluginSDK";
+import Badge from "@docspace/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -38,12 +40,28 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "OAuth",
+    "WebPlugins",
   ]);
   const [isPending, startTransition] = useTransition();
 
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("JavascriptSdk")}
+    </Box>
+  );
+
+  const pluginLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("WebPlugins:PluginSDK")}
+
+      <Badge
+        label={t("Settings:BetaLabel")}
+        backgroundColor="#533ED1"
+        fontSize="9px"
+        borderRadius="50px"
+        noHover={true}
+        isHovered={false}
+      />
     </Box>
   );
 
@@ -57,6 +75,11 @@ const DeveloperToolsWrapper = (props) => {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
+    },
+    {
+      id: "plugin-sdk",
+      name: pluginLabel,
+      content: <PluginSDK />,
     },
     {
       id: "webhooks",

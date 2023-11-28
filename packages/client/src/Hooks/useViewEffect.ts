@@ -4,6 +4,7 @@ import { DeviceType } from "@docspace/common/constants";
 //@ts-ignore
 import { Context } from "@docspace/components/utils/context";
 import { isTablet, isMobile } from "@docspace/components/utils/device";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 export type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
 
@@ -32,8 +33,8 @@ const useViewEffect = ({
     if ((isNotTableView && isNotRowView) || !sectionWidth) return;
 
     if (
-      (isTablet() || isMobile()) &&
-      currentDeviceType !== DeviceType.desktop
+      isMobileDevice ||
+      ((isTablet() || isMobile()) && currentDeviceType !== DeviceType.desktop)
     ) {
       isNotRowView && setView("row");
     } else {

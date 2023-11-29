@@ -38,6 +38,7 @@ const FilesSelector = ({
   // withoutImmediatelyClose = false,
   isThirdParty = false,
   isRoomsOnly = false,
+  isUserOnly = false,
   isEditorDialog = false,
 
   rootThirdPartyId,
@@ -163,6 +164,7 @@ const FilesSelector = ({
     setHasNextPage,
     setIsNextPageLoading,
     onSetBaseFolderPath,
+    isUserOnly,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -545,7 +547,9 @@ const FilesSelector = ({
       currentFooterInputValue={currentFooterInputValue}
       footerCheckboxLabel={footerCheckboxLabel}
       descriptionText={
-        !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
+        !filterParam || filterParam === "ALL"
+          ? ""
+          : descriptionText ?? t("Common:SelectDOCXFormat")
       }
       acceptButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-submit" : ""

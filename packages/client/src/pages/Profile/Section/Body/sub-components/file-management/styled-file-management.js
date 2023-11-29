@@ -1,6 +1,4 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
 
 const StyledWrapper = styled.div`
   max-width: 660px;
@@ -9,6 +7,11 @@ const StyledWrapper = styled.div`
 
   display: grid;
   grid-gap: 32px;
+
+  .toggle-btn-wrapper {
+    display: flex;
+    //gap: 8px;
+  }
 
   .toggle-btn {
     height: 20px;

@@ -32,7 +32,7 @@ class RoomsModule extends React.PureComponent {
             withoutInitPath={!isDocumentsDefault}
             isError={isError}
             isDisabled={isLoadingData}
-            isRoomsOnly
+            isRoomBackup
           />
         </div>
         <ScheduleComponent isLoadingData={isLoadingData} {...rest} />

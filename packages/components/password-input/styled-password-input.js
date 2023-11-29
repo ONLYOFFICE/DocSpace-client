@@ -28,6 +28,9 @@ const StyledInput = styled(SimpleInput)`
     width: calc(100% - 40px);
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? "right" : "left"};
+    &::-ms-reveal {
+      display: none;
+    }
   }
 
   .input-relative {
@@ -124,7 +127,7 @@ PasswordProgress.defaultProps = { theme: Base };
 const TooltipStyle = styled.div`
   width: 294px;
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     width: 320px;
   }
 

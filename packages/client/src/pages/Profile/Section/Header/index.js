@@ -40,8 +40,10 @@ const Header = (props) => {
 
     setDialogData,
 
-    isProfileLoaded,
     profileClicked,
+
+    showProfileLoader,
+    setIsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -57,19 +59,24 @@ const Header = (props) => {
     setChangePasswordVisible(true);
   };
 
+  const onChangeEmailClick = () => {
+    setDialogData(profile);
+    setChangeEmailVisible(true);
+  };
+
   const getUserContextOptions = () => {
     const options = [
       {
         key: "change-email",
         label: t("PeopleTranslations:EmailChangeButton"),
-        onClick: () => setChangeEmailVisible(true),
+        onClick: onChangeEmailClick,
         disabled: false,
         icon: EmailReactSvgUrl,
       },
       {
         key: "change-password",
         label: t("PeopleTranslations:PasswordChangeButton"),
-        onClick: () => onChangePasswordClick(),
+        onClick: onChangePasswordClick,
         disabled: false,
         icon: SecurityReactSvgUrl,
       },
@@ -111,11 +118,13 @@ const Header = (props) => {
     const urlParams = roomsFilter.toUrlParams();
     const backUrl = `/rooms/shared/filter?${urlParams}`;
 
+    setIsLoading();
+
     navigate(backUrl);
     // setFilter(filter);
   };
 
-  if (!isProfileLoaded) return <Loaders.SectionHeader />;
+  if (showProfileLoader) return <Loaders.SectionHeader />;
 
   return (
     <StyledHeader
@@ -177,17 +186,14 @@ export default inject(
 
     const { targetUser, isMe } = targetUserStore;
 
-    const { isProfileLoaded } = clientLoadingStore;
+    const { showProfileLoader } = clientLoadingStore;
 
     const { profileClicked } = profileActionsStore;
 
-    const {
-      setChangeEmailVisible,
-      setChangePasswordVisible,
-      setChangeAvatarVisible,
-    } = targetUserStore;
+    const { setChangePasswordVisible, setChangeAvatarVisible } =
+      targetUserStore;
 
-    const { setDialogData } = dialogStore;
+    const { setDialogData, setChangeEmailVisible } = dialogStore;
 
     return {
       isAdmin,
@@ -205,7 +211,7 @@ export default inject(
 
       setDialogData,
 
-      isProfileLoaded,
+      showProfileLoader,
       profileClicked,
     };
   }

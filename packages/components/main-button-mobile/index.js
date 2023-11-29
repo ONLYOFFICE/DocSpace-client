@@ -15,9 +15,8 @@ import {
   StyledRenderItem,
 } from "./styled-main-button";
 import IconButton from "../icon-button";
-import Button from "../button";
 import Text from "../text";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "../scrollbar";
 import { isIOS, isMobile } from "react-device-detect";
 import Backdrop from "../backdrop";
 
@@ -25,12 +24,13 @@ import styled from "styled-components";
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "../utils/common-icons-style";
 
-import { isMobileOnly } from "react-device-detect";
-
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
+import SubmenuItem from "./sub-components/SubmenuItem";
+import { classNames } from "../utils/classNames";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
+  vertical-align: top !important;
   ${commonIconsStyles};
 `;
 
@@ -131,7 +131,7 @@ const MainButtonMobile = (props) => {
   const [isOpen, setIsOpen] = useState(opened);
   const [isUploading, setIsUploading] = useState(false);
   const [height, setHeight] = useState(window.innerHeight - 48 + "px");
-  const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
+  const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
   const divRef = useRef();
   const ref = useRef();
@@ -209,7 +209,7 @@ const MainButtonMobile = (props) => {
 
   useLayoutEffect(() => {
     recalculateHeight();
-  }, [isOpen, isOpenButton, window.innerHeight, isUploading, isOpenSubMenu]);
+  }, [isOpen, isOpenButton, window.innerHeight, isUploading]);
 
   useEffect(() => {
     window.addEventListener("resize", recalculateHeight);
@@ -250,7 +250,7 @@ const MainButtonMobile = (props) => {
     }
   }, [progressOptions]);
 
-  const noHover = isMobileOnly ? true : false;
+  const noHover = isMobile ? true : false;
 
   const renderItems = () => {
     return (
@@ -262,50 +262,17 @@ const MainButtonMobile = (props) => {
               option.onClick && option.onClick({ action: option.action });
             };
 
-            const onClickSub = () => {
-              setIsOpenSubMenu(!isOpenSubMenu);
-            };
-
             if (option.items)
               return (
-                <div key="mobile-submenu">
-                  <StyledDropDownItem
-                    id={option.id}
-                    key={option.key}
-                    label={option.label}
-                    className={`${option.className} ${
-                      option.isSeparator && "is-separator"
-                    }`}
-                    onClick={onClickSub}
-                    icon={option.icon ? option.icon : ""}
-                    action={option.action}
-                    isActive={isOpenSubMenu}
-                    isSubMenu={true}
-                    noHover={noHover}
-                  />
-                  {isOpenSubMenu &&
-                    option.items.map((item) => {
-                      const subMenuOnClickAction = () => {
-                        toggle(false);
-                        setIsOpenSubMenu(false);
-                        item.onClick && item.onClick({ action: item.action });
-                      };
-
-                      return (
-                        <StyledDropDownItem
-                          id={item.id}
-                          key={item.key}
-                          label={item.label}
-                          className={`${item.className} sublevel`}
-                          onClick={subMenuOnClickAction}
-                          icon={item.icon ? item.icon : ""}
-                          action={item.action}
-                          withoutIcon={item.withoutIcon}
-                          noHover={noHover}
-                        />
-                      );
-                    })}
-                </div>
+                <SubmenuItem
+                  key={option.key}
+                  option={option}
+                  toggle={toggle}
+                  noHover={noHover}
+                  recalculateHeight={recalculateHeight}
+                  openedSubmenuKey={openedSubmenuKey}
+                  setOpenedSubmenuKey={setOpenedSubmenuKey}
+                />
               );
 
             return (
@@ -313,9 +280,9 @@ const MainButtonMobile = (props) => {
                 id={option.id}
                 key={option.key}
                 label={option.label}
-                className={`${option.className} ${
-                  option.isSeparator && "is-separator"
-                }`}
+                className={classNames(option.className, {
+                  "is-separator": option.isSeparator,
+                })}
                 onClick={optionOnClickAction}
                 icon={option.icon ? option.icon : ""}
                 action={option.action}
@@ -420,7 +387,7 @@ const MainButtonMobile = (props) => {
 
         {alert && !isOpen && (
           <StyledAlertIcon>
-            <StyledButtonAlertIcon onClick={onAlertClickAction} size="medium" />
+            <StyledButtonAlertIcon onClick={onAlertClickAction} size="small" />
           </StyledAlertIcon>
         )}
       </div>

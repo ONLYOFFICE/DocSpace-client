@@ -8,7 +8,12 @@ export const PageCountWrapper = styled.div<{ isPanelOpen: boolean }>`
 
   position: fixed;
   bottom: ${isMobile ? "12px" : "108px"};
-  left: ${({ isPanelOpen }) => `calc(50% + ${isPanelOpen ? 306 / 2 : 0}px)`};
+  left: ${({ theme, isPanelOpen }) => {
+    const value = isPanelOpen ? 306 / 2 : 0;
+    const operator = theme.interfaceDirection === "rtl" ? "-" : "+";
+
+    return `calc(50% ${operator} ${value}px)`;
+  }};
   z-index: 307;
 
   transform: translateX(-50%);

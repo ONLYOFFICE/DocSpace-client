@@ -14,7 +14,13 @@ const observedKeys = [
   "thumbnailUrl",
   "version",
   "comment",
+  "roomType",
+  "rootFolderId",
 ];
+
+const infoMembers = "info_members";
+const infoHistory = "info_history";
+// const infoDetails = "info_details";
 
 class InfoPanelStore {
   isVisible = false;
@@ -25,8 +31,8 @@ class InfoPanelStore {
   selectionParentRoom = null;
   selectionHistory = null;
 
-  roomsView = "info_details";
-  fileView = "info_history";
+  roomsView = infoMembers;
+  fileView = infoHistory;
 
   updateRoomMembers = null;
   isScrollLocked = false;
@@ -47,7 +53,7 @@ class InfoPanelStore {
   // Setters
 
   setIsVisible = (bool) => {
-    this.setView("info_details");
+    this.setView(infoMembers);
     this.isVisible = bool;
     this.isScrollLocked = false;
   };
@@ -73,14 +79,20 @@ class InfoPanelStore {
     this.historyWithFileList = this.selection.isFolder || this.selection.isRoom;
   };
 
+  resetView = () => {
+    this.roomsView = infoMembers;
+    this.fileView = infoHistory;
+  };
+
   setView = (view) => {
     this.roomsView = view;
-    this.fileView = view === "info_members" ? "info_history" : view;
+    this.fileView = view === infoMembers ? infoHistory : view;
     this.isScrollLocked = false;
-    this.setMembersList(null);
+    if (view !== infoMembers) this.setMembersList(null);
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
+    this.setMembersList(null);
     this.updateRoomMembers = updateRoomMembers;
   };
 
@@ -100,7 +112,6 @@ class InfoPanelStore {
       selection: peopleStoreSelection,
       bufferSelection: peopleStoreBufferSelection,
     } = this.peopleStore.selectionStore;
-
     return this.getIsAccounts()
       ? peopleStoreSelection.length
         ? [...peopleStoreSelection]
@@ -116,6 +127,7 @@ class InfoPanelStore {
 
   getSelectedFolder = () => {
     const selectedFolderStore = { ...this.selectedFolderStore };
+
     return {
       ...selectedFolderStore,
       isFolder: true,
@@ -182,7 +194,7 @@ class InfoPanelStore {
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
-      this.selectedFolderStore.pathParts[1];
+      this.selectedFolderStore.pathParts[1]?.id;
     const prevRoomId = this.selectionParentRoom?.id;
 
     if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
@@ -243,7 +255,6 @@ class InfoPanelStore {
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      "/accounts",
       "/profile",
     ];
     this.selectedFolderStore.setSelectedFolder(null);

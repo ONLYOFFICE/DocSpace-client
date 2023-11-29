@@ -1,9 +1,11 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ToggleButtonContainer, HiddenInput } from "./styled-toggle-button";
-import Text from "../text";
 import { motion } from "framer-motion";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import React, { Component } from "react";
+
+import Text from "../text";
+
+import ToggleButtonTheme from "./ToggleButton.theme";
+import { ToggleButtonContainer, HiddenInput } from "./styled-toggle-button";
 
 const ToggleIcon = ({ isChecked, isLoading, noAnimation = false }) => {
   const transition = noAnimation ? { duration: 0 } : {};
@@ -84,8 +86,7 @@ class ToggleButton extends Component {
     //console.log("ToggleButton render");
 
     return (
-      <ColorTheme
-        themeId={ThemeType.ToggleButton}
+      <ToggleButtonTheme
         id={id}
         className={className}
         style={style}
@@ -122,7 +123,7 @@ class ToggleButton extends Component {
             </Text>
           )}
         </ToggleButtonContainer>
-      </ColorTheme>
+      </ToggleButtonTheme>
     );
   }
 }

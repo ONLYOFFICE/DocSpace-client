@@ -12,16 +12,11 @@ import Item from "./item";
 import StyledContainer from "../StyledNavigation";
 import NavigationLogo from "./logo-block";
 
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
-import {
-  tablet,
-  mobile,
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { ReactSVG } from "react-svg";
 
 import { Base } from "@docspace/components/themes";
+import { DeviceType } from "../../../constants";
 
 const StyledBox = styled.div`
   position: absolute;
@@ -30,14 +25,14 @@ const StyledBox = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          right: ${isMobile ? "-16px" : "-20px"};
+          right: -20px;
           ${props.withLogo && `right: 207px;`};
         `
       : css`
-          left: ${isMobile ? "-16px" : "-20px"};
+          left: -20px;
           ${props.withLogo && `left: 207px;`};
         `}
-  padding: ${isMobile ? "0 16px " : "0 20px"};
+  padding: 0 20px;
   padding-top: 18px;
 
   width: unset;
@@ -74,31 +69,10 @@ const StyledBox = styled.div`
     padding-top: 14px;
   }
 
-  ${isMobile &&
-  css`
-    width: ${({ dropBoxWidth }) => dropBoxWidth + "px"};
-    padding-top: 14px;
-  `}
-
   @media ${mobile} {
+    width: ${({ dropBoxWidth }) => dropBoxWidth + "px"};
     padding-top: 10px !important;
   }
-
-  ${isMobileOnly &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-          `
-        : css`
-            margin-left: 16px;
-          `}
-
-    padding: 0 16px !important;
-    padding-top: 14px !important;
-    max-height: ${(props) => props.maxHeight};
-  `}
 `;
 
 StyledBox.defaultProps = { theme: Base };
@@ -114,6 +88,7 @@ const Row = React.memo(({ data, index, style }) => {
       isRoot={isRoot}
       onClick={data[1]}
       withLogo={data[2].withLogo}
+      currentDeviceType={data[2].currentDeviceType}
       style={{ ...style }}
     />
   );
@@ -145,6 +120,8 @@ const DropBox = React.forwardRef(
       withLogo,
       burgerLogo,
       titleIcon,
+      currentDeviceType,
+      navigationTitleContainerNode,
     },
     ref
   ) => {
@@ -153,7 +130,7 @@ const DropBox = React.forwardRef(
 
     const getItemSize = (index) => {
       if (index === countItems - 1) return 51;
-      return isMobile || isMobileUtils() || isTabletUtils() ? 36 : 30;
+      return currentDeviceType !== DeviceType.desktop ? 36 : 30;
     };
 
     const { interfaceDirection } = useTheme();
@@ -166,11 +143,11 @@ const DropBox = React.forwardRef(
 
       let navHeight = 41;
 
-      if (isMobile || isTabletUtils()) {
+      if (currentDeviceType === DeviceType.tablet) {
         navHeight = 49;
       }
 
-      if (isMobileOnly || isMobileUtils()) {
+      if (currentDeviceType === DeviceType.mobile) {
         navHeight = 45;
       }
 
@@ -179,29 +156,9 @@ const DropBox = React.forwardRef(
           ? sectionHeight - navHeight - 20
           : currentHeight
       );
-    }, [sectionHeight]);
+    }, [sectionHeight, currentDeviceType]);
 
-    const navigationTitleNode = (
-      <div className="title-block">
-        {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
-        <Text title={title} isOpen={true} onClick={toggleDropBox} />
-      </div>
-    );
-
-    const navigationTitleContainerNode = showRootFolderNavigation ? (
-      <div className="title-container">
-        <Text
-          title={navigationItems[navigationItems.length - 2].title}
-          isOpen={true}
-          isRootFolderTitle
-        />
-        {navigationTitleNode}
-      </div>
-    ) : (
-      navigationTitleNode
-    );
-
-    const isTabletView = (isTabletUtils() || isTablet) && !isMobileOnly;
+    const isTabletView = currentDeviceType === DeviceType.tablet;
 
     return (
       <>
@@ -237,6 +194,7 @@ const DropBox = React.forwardRef(
 
             <ControlButtons
               isDesktop={isDesktop}
+              isMobile={currentDeviceType !== DeviceType.desktop}
               personal={personal}
               isRootFolder={isRootFolder}
               isDropBoxComponent={true}
@@ -258,7 +216,7 @@ const DropBox = React.forwardRef(
             itemData={[
               navigationItems,
               onClickAvailable,
-              { withLogo: !!withLogo },
+              { withLogo: !!withLogo, currentDeviceType },
             ]}
             outerElementType={CustomScrollbarsVirtualList}
           >

@@ -77,7 +77,6 @@ class MediaViewerDataStore {
     if (this.publicRoomStore.isPublicRoom) return;
 
     const url = "/products/files/#preview/" + id;
-
     window.DocSpace.navigate(url);
   };
 
@@ -119,6 +118,10 @@ class MediaViewerDataStore {
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
+
+  get isViewerOpen() {
+    return this.visible && this.playlist.length > 0;
+  }
 
   get currentPostionIndex() {
     if (this.playlist.length === 0) {
@@ -163,8 +166,8 @@ class MediaViewerDataStore {
     if (filesList.length > 0) {
       filesList.forEach((file) => {
         const canOpenPlayer =
-          file.viewAccessability.ImageView ||
-          file.viewAccessability.MediaView ||
+          file.viewAccessibility.ImageView ||
+          file.viewAccessibility.MediaView ||
           (file.fileExst === ".pdf" && window.DocSpaceConfig.pdfViewer);
 
         if (canOpenPlayer) {
@@ -184,7 +187,7 @@ class MediaViewerDataStore {
             file.thumbnailStatus === thumbnailStatuses.WAITING;
 
           const isVideoOrImage =
-            file.viewAccessability.ImageView || isVideo(file.fileExst);
+            file.viewAccessibility.ImageView || isVideo(file.fileExst);
 
           if (thumbnailIsNotCreated && isVideoOrImage)
             itemsWithoutThumb.push(file);
@@ -207,7 +210,7 @@ class MediaViewerDataStore {
         thumbnailUrl: this.previewFile.thumbnailUrl,
       });
 
-      if (this.previewFile.viewAccessability.ImageView) {
+      if (this.previewFile.viewAccessibility.ImageView) {
         itemsWithoutThumb.push(this.previewFile);
       }
     }

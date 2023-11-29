@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+//import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import LanguageAndTimeZone from "./Customization/language-and-time-zone";
 import WelcomePageSettings from "./Customization/welcome-page-settings";
 import PortalRenaming from "./Customization/portal-renaming";
@@ -13,6 +13,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   width: 100%;
@@ -30,7 +31,7 @@ const StyledComponent = styled.div`
 
   .category-item-description {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     max-width: 1024px;
   }
 
@@ -42,7 +43,7 @@ const StyledComponent = styled.div`
 
   .category-item-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -58,7 +59,7 @@ const StyledComponent = styled.div`
     margin-bottom: 24px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     .settings-block {
       max-width: 350px;
       height: auto;
@@ -77,6 +78,7 @@ const Customization = (props) => {
     isLoadedPage,
     viewMobile,
     isSettingPaid,
+    enablePortalRename,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
@@ -110,14 +112,20 @@ const Customization = (props) => {
       <WelcomePageSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
-      <StyledSettingsSeparator />
-      <PortalRenaming isMobileView={viewMobile} />
+
+      {enablePortalRename && (
+        <>
+          <StyledSettingsSeparator />
+          <PortalRenaming isMobileView={viewMobile} />
+        </>
+      )}
     </StyledComponent>
   );
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, settingsStore } = auth;
+  const { enablePortalRename } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoaded, setIsLoadedCustomization } = common;
 
@@ -125,6 +133,7 @@ export default inject(({ auth, common }) => {
     isLoaded,
     setIsLoadedCustomization,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    enablePortalRename,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization)))

@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
+import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
+import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import EmptyScreen from "../EmptyScreen";
-
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import { Base } from "@docspace/components/themes";
+import EmptyScreen from "../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
@@ -19,12 +19,12 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.
 
 const marginCss = css`
   margin-top: -1px;
-  border-top: ${props =>
+  border-top: ${(props) =>
     `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 `;
 
 const userNameCss = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: -24px;
@@ -39,21 +39,33 @@ const userNameCss = css`
 `;
 
 const contextCss = css`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -20px;
-          padding-left: 18px;
+          padding-left: 20px;
         `
       : css`
           margin-right: -20px;
-          padding-right: 18px;
+          padding-right: 20px;
         `}
 
   ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
+  :has(
+      .table-container_body
+        .table-list-item:first-child:first-child
+        > .table-row-selected
+    ) {
+    .table-container_header {
+      border-image-slice: 1;
+      border-image-source: ${(props) =>
+        props.theme.tableContainer.header.lengthenBorderImageSource};
+    }
+  }
+
   .table-row-selected {
     .table-container_user-name-cell {
       ${userNameCss}
@@ -77,13 +89,13 @@ const StyledTableContainer = styled(TableContainer)`
         border-left: 0; //for Safari macOS
         border-right: 0; //for Safari macOS
 
-        border-image-source: ${props => `linear-gradient(to right, 
+        border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
       .table-container_row-context-menu-wrapper {
         ${contextCss}
 
-        border-image-source: ${props => `linear-gradient(to left,
+        border-image-source: ${(props) => `linear-gradient(to left,
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
     }
@@ -101,7 +113,7 @@ const StyledTableContainer = styled(TableContainer)`
 
       .table-container_user-name-cell,
       .table-container_row-context-menu-wrapper {
-        border-bottom: ${props =>
+        border-bottom: ${(props) =>
           `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
       }
     }
@@ -128,6 +140,7 @@ const Table = ({
   withPaging,
   canChangeUserType,
   isFiltered,
+  currentDeviceType,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -135,27 +148,11 @@ const Table = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if (
-      accountsViewAs !== "tile" &&
-      ((accountsViewAs !== "table" && accountsViewAs !== "row") ||
-        !sectionWidth)
-    )
-      return;
-    // 400 - it is desktop info panel width
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (accountsViewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      isMobile
-    ) {
-      accountsViewAs !== "row" && setViewAs("row");
-    } else {
-      accountsViewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: accountsViewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -180,7 +177,8 @@ const Table = ({
         itemCount={filterTotal}
         filesLength={peopleList.length}
         itemHeight={49}
-        useReactWindow={!withPaging}>
+        useReactWindow={!withPaging}
+      >
         {peopleList.map((item, index) => (
           <TableRow
             theme={theme}
@@ -211,7 +209,7 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging } = auth.settingsStore;
+    const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
@@ -237,6 +235,7 @@ export default inject(
       filterTotal,
       canChangeUserType,
       isFiltered,
+      currentDeviceType,
     };
   }
 )(observer(Table));

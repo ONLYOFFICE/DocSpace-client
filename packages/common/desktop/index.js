@@ -1,7 +1,7 @@
 import toastr from "@docspace/components/toast/toastr";
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
-import { checkIsSSR } from "../utils";
+import { checkIsSSR, getEditorTheme } from "../utils";
 
 const isSSR = checkIsSSR();
 
@@ -27,13 +27,8 @@ export function regDesktop(
       domain: desktopConstants.domain,
       provider: desktopConstants.provider,
       userId: user.id,
+      uiTheme: getEditorTheme(user?.theme),
     };
-
-    console.log(
-      "regDesktop date=",
-      data,
-      `isEncryption=${isEncryption} keys=${keys} isEditor=${isEditor}`
-    );
 
     let extendedData;
 
@@ -73,7 +68,7 @@ export function regDesktop(
             break;
           }
           case "relogin": {
-            toastr.info(t("Common:EncryptionKeysReload"));
+            // toastr.info(t("Common:EncryptionKeysReload"));
             //relogin();
             break;
           }
@@ -88,11 +83,6 @@ export function regDesktop(
             break;
         }
       };
-
-      console.log(
-        "Created window.cloudCryptoCommand",
-        window.cloudCryptoCommand
-      );
     }
 
     window.onSystemMessage = (e) => {
@@ -117,8 +107,6 @@ export function regDesktop(
           break;
       }
     };
-
-    console.log("Created window.onSystemMessage", window.onSystemMessage);
   }
 }
 

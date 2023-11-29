@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import CampaignsBanner from "@docspace/components/campaigns-banner";
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { LANGUAGE } from "@docspace/common/constants";
-import { getLanguage, getCookie } from "@docspace/common/utils";
+import { getLanguage } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 const Banner = () => {
   const [campaignImage, setCampaignImage] = useState();

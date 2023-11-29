@@ -1,8 +1,15 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
 import TileContent from "./sub-components/TileContent";
-import { tablet, desktop } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
+import ContextMenu from "@docspace/components/context-menu";
+
+import {
+  tablet,
+  desktop,
+  mobile,
+  mobileMore,
+} from "@docspace/components/utils/device";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const FlexBoxStyles = css`
@@ -61,6 +68,18 @@ const StyledTile = styled.div`
             margin-right: 8px;
           `}
   }
+
+  .p-contextmenu {
+    @media ${mobile} {
+      z-index: 2000 !important;
+      height: auto;
+      position: fixed;
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      left: 0;
+    }
+  }
 `;
 
 const StyledFileTileTop = styled.div`
@@ -73,6 +92,10 @@ const StyledFileTileTop = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 6px 6px 0 0;
+
+  @media ${mobile} {
+    position: static;
+  }
 
   .thumbnail-image-link {
     margin: 0 auto;
@@ -141,7 +164,7 @@ const StyledContent = styled.div`
     word-break: break-word;
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -226,7 +249,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 
@@ -263,6 +286,10 @@ const StyledGridWrapper = styled.div`
 const StyledTileContainer = styled.div`
   position: relative;
   height: 100%;
+
+  @media ${tablet} {
+    margin-right: 0px !important;
+  }
 
   .tile-item-wrapper {
     position: relative;
@@ -347,7 +374,7 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: 12px;
+          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
@@ -378,53 +405,9 @@ const StyledTileContainer = styled.div`
         ? `margin-left: -3px;`
         : `margin-right: -3px;`}
   }
-
-  ${isMobile &&
-  css`
-    padding-top: 24px;
-  `}
 `;
 
 StyledTileContainer.defaultProps = { theme: Base };
-
-const truncateCss = css`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const commonCss = css`
-  margin: 0;
-  font-family: "Open Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-`;
-
-const StyledTileContent = styled.div`
-  width: 100%;
-  display: inline-flex;
-`;
-
-const MainContainerWrapper = styled.div`
-  ${commonCss};
-
-  display: flex;
-  align-self: center;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: auto;`
-      : `margin-right: auto;`}
-`;
-
-const MainContainer = styled.div`
-  height: 20px;
-
-  @media (max-width: 1024px) {
-    ${truncateCss};
-  }
-`;
 
 const StyledCard = styled.div`
   display: block;
@@ -444,6 +427,17 @@ const StyledItem = styled.div`
   ${paddingCss};
 `;
 
+const StyledContextMenu = styled(ContextMenu)`
+  @media ${mobile} {
+    position: fixed;
+    height: min-content;
+    top: auto !important;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+`;
+
 export {
   StyledTile,
   StyledFileTileTop,
@@ -454,9 +448,7 @@ export {
   SimpleFilesTileContent,
   StyledGridWrapper,
   StyledTileContainer,
-  StyledTileContent,
-  MainContainerWrapper,
-  MainContainer,
   StyledCard,
   StyledItem,
+  StyledContextMenu,
 };

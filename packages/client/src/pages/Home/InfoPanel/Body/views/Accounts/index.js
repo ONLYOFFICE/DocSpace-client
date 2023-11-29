@@ -175,7 +175,7 @@ const Accounts = ({
 
   const typeData = renderTypeData();
 
-  const statusText = isVisitor ? t("SmartBanner:Price") : t("Common:Paid");
+  const statusText = isVisitor ? t("Common:Free") : t("Common:Paid");
 
   return (
     <>

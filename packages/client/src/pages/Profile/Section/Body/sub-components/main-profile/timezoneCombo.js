@@ -5,9 +5,8 @@ import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
 import toastr from "@docspace/components/toast/toastr";
 
-import { isMobileOnly } from "react-device-detect";
-
 import { StyledRow } from "./styled-main-profile";
+import { isMobile } from "@docspace/components/utils/device";
 
 const TimezoneCombo = ({ title }) => {
   const { t } = useTranslation("Wizard");
@@ -28,15 +27,15 @@ const TimezoneCombo = ({ title }) => {
         selectedOption={selectedTimezone}
         //onSelect={onTimezoneSelect}
         isDisabled={false}
-        noBorder={!isMobileOnly}
-        scaled={isMobileOnly}
+        noBorder={!isMobile()}
+        scaled={isMobile()}
         scaledOptions={false}
         size="content"
         showDisabledItems={true}
         dropDownMaxHeight={364}
         manualWidth="250px"
-        isDefaultMode={!isMobileOnly}
-        withBlur={isMobileOnly}
+        isDefaultMode={!isMobile()}
+        withBlur={isMobile()}
         fillIcon={false}
       />
     </StyledRow>

@@ -5,7 +5,8 @@ export const Weekday = styled.span`
   pointer-events: none;
   font-family: "Open Sans";
   font-weight: 400;
-  font-size: ${(props) => (props.isMobile ? "16px" : "13px")};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.isMobile ? "16px" : "13px")};
   line-height: 16px;
 
   color: ${(props) => props.theme.calendar.weekdayColor};

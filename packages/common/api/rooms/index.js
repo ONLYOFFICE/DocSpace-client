@@ -51,11 +51,9 @@ export function getRoomInfo(id) {
 
 export function getRoomMembers(id, filter) {
   let params = "";
-  const str = toUrlParams(filter);
 
-  if (str) {
-    params = `?${str}`;
-  }
+  const str = toUrlParams(filter);
+  if (str) params = `?${str}`;
 
   const options = {
     method: "get",
@@ -380,6 +378,13 @@ export function getExternalLinks(roomId, type) {
   return request({
     method: "get",
     url: `files/rooms/${roomId}/links${linkType}`,
+  });
+}
+
+export function getPrimaryLink(roomId) {
+  return request({
+    method: "get",
+    url: `files/rooms/${roomId}/link`,
   });
 }
 

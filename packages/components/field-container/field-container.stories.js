@@ -48,4 +48,5 @@ Default.args = {
     "Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
   errorColor: "#C96C27",
   errorMessageWidth: "293px",
+  removeMargin: false,
 };

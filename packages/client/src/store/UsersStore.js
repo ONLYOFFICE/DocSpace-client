@@ -94,7 +94,7 @@ class UsersStore {
 
   removeUser = async (userId, filter) => {
     await api.people.deleteUsers(userId);
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
   };
 
   get needResetUserSelection() {

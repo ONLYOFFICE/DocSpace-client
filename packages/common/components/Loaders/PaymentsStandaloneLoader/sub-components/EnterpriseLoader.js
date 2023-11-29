@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleLoader from "../../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { StyledEnterpriseComponent } from "../StyledComponent";
 
 const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
@@ -16,7 +16,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
 
   return (
     <StyledEnterpriseComponent>
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_1"
         title={title}
         width="100%"
@@ -29,7 +29,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_2"
         title={title}
         width="100%"
@@ -42,7 +42,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_3"
         title={title}
         width="100%"
@@ -55,7 +55,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_4"
         title={title}
         width="100%"
@@ -68,7 +68,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_5"
         title={title}
         width="100%"
@@ -81,7 +81,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_6"
         title={title}
         width="100%"
@@ -94,7 +94,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_7"
         title={title}
         width="100%"
@@ -107,7 +107,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_8"
         title={title}
         width="100%"
@@ -120,7 +120,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_9"
         title={title}
         width="100%"
@@ -133,7 +133,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_10"
         title={title}
         width="100%"
@@ -146,7 +146,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="payments-loader_11"
         title={title}
         width="100%"

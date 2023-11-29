@@ -1,4 +1,4 @@
-﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
@@ -26,7 +26,6 @@ import {
   isTablet,
   isDesktop,
 } from "@docspace/components/utils/device";
-import { isMobileRDD } from "react-device-detect";
 
 import toastr from "@docspace/components/toast/toastr";
 import { EmployeeStatus, Events } from "@docspace/common/constants";
@@ -51,7 +50,7 @@ class PeopleStore {
   accessRightsStore = null;
   profileActionsStore = null;
   isInit = false;
-  viewAs = isMobileRDD ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
   constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
@@ -86,9 +85,6 @@ class PeopleStore {
     this.isInit = true;
 
     //this.authStore.settingsStore.setModuleInfo(config.homepage, config.id);
-
-    await this.authStore.settingsStore.getPortalPasswordSettings();
-    await this.authStore.tfaStore.getTfaType();
   };
 
   reset = () => {
@@ -310,7 +306,8 @@ class PeopleStore {
         label: t("Common:Info"),
         disabled:
           isVisible ||
-          !(isTablet() || isMobile() || isMobileRDD || !isDesktop()),
+          !(isTablet() || isMobile() || !isDesktop()) ||
+          selection.length > 1,
         onClick: (item) => this.onOpenInfoPanel(item),
         iconUrl: InfoReactSvgUrl,
       },
@@ -366,8 +363,8 @@ class PeopleStore {
         id: "menu-delete",
         key: "delete",
         label: t("Common:Delete"),
-        disabled: !hasOnlyOneUserToRemove,
-        onClick: () => toggleDeleteProfileEverDialog(selection[0]),
+        disabled: !hasUsersToRemove,
+        onClick: () => toggleDeleteProfileEverDialog(selection),
         iconUrl: DeleteReactSvgUrl,
       },
     ];

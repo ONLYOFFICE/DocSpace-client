@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 //import equal from "fast-deep-equal/react";
 //import { LayoutContextConsumer } from "client/Layout/context";
-import { isMobile, isMobileOnly } from "react-device-detect";
+// import { isMobile, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
 import Scrollbar from "@docspace/components/scrollbar";
@@ -11,10 +11,10 @@ import DragAndDrop from "@docspace/components/drag-and-drop";
 import {
   tablet,
   desktop,
-  smallTablet,
   mobile,
-  hugeMobile,
+  mobileMore,
 } from "@docspace/components/utils/device";
+import { DeviceType } from "../../../constants";
 
 const settingsStudioStyles = css`
   ${({ settingsStudio }) =>
@@ -37,17 +37,6 @@ const settingsStudioStyles = css`
               `
             : css`
                 padding: 0 0 16px 24px;
-              `}
-      }
-
-      @media ${smallTablet} {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 8px 24px 16px 0;
-              `
-            : css`
-                padding: 8px 0 16px 24px;
               `}
       }
 
@@ -81,29 +70,6 @@ const paddingStyles = css`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 19px 24px 16px 0;
-          `
-        : css`
-            padding: 19px 0 16px 24px;
-          `}
-  }
-
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 23px 16px 0 !important;
-          `
-        : css`
-            padding: 0 0 16px 23px !important;
-          `}
-  `};
-
-  @media ${hugeMobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
             padding: 0px 24px 16px 0;
           `
         : css`
@@ -111,17 +77,16 @@ const paddingStyles = css`
           `}
   }
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            padding: 0px 24px 16px 0 !important;
+            padding: 0px 24px 16px 8px;
           `
         : css`
-            padding: 0px 0 16px 24px !important;
+            padding: 0px 8px 16px 24px;
           `}
-  `};
+  }
 `;
 
 const commonStyles = css`
@@ -172,7 +137,27 @@ const commonStyles = css`
         @media ${tablet} {
           padding-top: 0;
         }
-      `}
+      `};
+
+    @media ${`${mobileMore} and ${tablet}`} {
+      ${({ isFormGallery, theme }) =>
+        isFormGallery &&
+        css`
+          padding: ${theme.interfaceDirection === "rtl"
+            ? "0 16px 20px 0"
+            : "0 0    20px 16px"} !important;
+        `}
+    }
+
+    @media ${mobile} {
+      ${({ isFormGallery, theme }) =>
+        isFormGallery &&
+        css`
+          padding: ${theme.interfaceDirection === "rtl"
+            ? "0px 16px 16px 16px"
+            : "0px 16px 16px 16px"} !important;
+        `}
+    }
 
     .section-wrapper {
       display: flex;
@@ -181,17 +166,22 @@ const commonStyles = css`
     }
 
     .files-tile-container {
-      margin-top: ${isMobile ? "-12px" : "0px"};
+      @media ${desktop} {
+        margin-top: 0px;
+      }
     }
 
     .people-row-container,
     .files-row-container {
-      margin-top: -22px;
+      margin-top: 0px;
 
-      ${!isMobile &&
-      css`
+      @media ${desktop} {
         margin-top: -17px;
-      `}
+      }
+
+      @media ${mobile} {
+        margin-top: 0px;
+      }
 
       @media ${desktop} {
         ${(props) =>
@@ -234,19 +224,21 @@ const StyledSectionBody = styled.div`
       }
     `}
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -24px;
-          `
-        : css`
-            margin-left: -24px;
-          `}
-  `}
+  ${({ isFormGallery }) =>
+    isFormGallery &&
+    css`
+      @media ${tablet} {
+        margin: ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? "0 -16px 0 0 "
+            : "0 0 0 -16px"};
 
-    .additional-scroll-height {
+        padding: ${(props) =>
+          props.theme.interfaceDirection === "rtl" ? "0 0 0 0 " : "0 0 0 0"};
+      }
+    `}
+
+  .additional-scroll-height {
     ${({ withScroll }) =>
       !withScroll &&
       css`
@@ -287,23 +279,11 @@ const StyledDropZoneBody = styled(DragAndDrop)`
                 margin-left: -24px;
               `}
       }
-
-      ${isMobile &&
-      css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: -24px;
-              `
-            : css`
-                margin-left: -24px;
-              `}
-      `}
     `}
 `;
 
 const StyledSpacer = styled.div`
-  display: ${isMobile ? "block" : "none"};
+  display: none;
   min-height: 64px;
 
   @media ${tablet} {
@@ -335,6 +315,7 @@ class SectionBody extends React.Component {
   render() {
     //console.log(" SectionBody render" );
     const {
+      isFormGallery,
       autoFocus,
       children,
       onDrop,
@@ -344,6 +325,7 @@ class SectionBody extends React.Component {
       isLoaded,
       isDesktop,
       settingsStudio,
+      currentDeviceType,
     } = this.props;
 
     const focusProps = autoFocus
@@ -365,7 +347,7 @@ class SectionBody extends React.Component {
         className="section-body"
       >
         {withScroll ? (
-          !isMobileOnly ? (
+          currentDeviceType !== DeviceType.mobile ? (
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
@@ -400,9 +382,10 @@ class SectionBody extends React.Component {
         isLoaded={isLoaded}
         isDesktop={isDesktop}
         settingsStudio={settingsStudio}
+        isFormGallery={isFormGallery}
       >
         {withScroll ? (
-          !isMobileOnly ? (
+          currentDeviceType !== DeviceType.mobile ? (
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
@@ -457,9 +440,10 @@ SectionBody.defaultProps = {
 
 export default inject(({ auth }) => {
   const { settingsStore } = auth;
-  const { isDesktopClient: isDesktop } = settingsStore;
+  const { isDesktopClient: isDesktop, currentDeviceType } = settingsStore;
   return {
     isLoaded: auth.isLoaded,
     isDesktop,
+    currentDeviceType,
   };
 })(observer(SectionBody));

@@ -1,6 +1,6 @@
 import UploadIcon from "PUBLIC_DIR/images/actions.upload.react.svg";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import Text from "@docspace/components/text";
 import SsoTextInput from "./SsoTextInput";
 import FileInput from "@docspace/components/file-input";
 import { Base } from "@docspace/components/themes";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     gap: 9px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
 
       .upload-xml-input {
@@ -45,7 +45,7 @@ const StyledWrapper = styled.div`
       position: static;
     }
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
 
       button {
@@ -60,7 +60,7 @@ const StyledWrapper = styled.div`
     overflow: inherit;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     flex-direction: column;
     gap: 8px;
   }
@@ -81,13 +81,36 @@ const UploadXML = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
   const { enableSso, uploadXmlUrl, isLoadingXml, uploadByUrl, uploadXml } =
     props;
+  const [isValidXmlUrl, setIsValidXmlUrl] = useState(true);
 
   const isDisabledProp = {
-    disabled: !enableSso || uploadXmlUrl.trim().length === 0 || isLoadingXml,
+    disabled:
+      !enableSso ||
+      uploadXmlUrl.trim().length === 0 ||
+      isLoadingXml ||
+      !isValidXmlUrl,
+  };
+
+  const isValidHttpUrl = (url) => {
+    try {
+      const newUrl = new URL(url);
+      return newUrl.protocol === "http:" || newUrl.protocol === "https:";
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const onFocus = () => {
+    setIsValidXmlUrl(true);
   };
 
   const onUploadClick = () => {
-    uploadByUrl(t);
+    if (isValidHttpUrl(uploadXmlUrl)) {
+      setIsValidXmlUrl(true);
+      uploadByUrl(t);
+    } else {
+      setIsValidXmlUrl(false);
+    }
   };
 
   return (
@@ -106,13 +129,18 @@ const UploadXML = (props) => {
             placeholder={t("UploadXMLPlaceholder")}
             tabIndex={1}
             value={uploadXmlUrl}
+            hasError={!isValidXmlUrl}
+            onFocus={onFocus}
           />
 
           <Button
             className="upload-button"
             icon={<StyledUploadIcon {...isDisabledProp} />}
             isDisabled={
-              !enableSso || uploadXmlUrl.trim().length === 0 || isLoadingXml
+              !enableSso ||
+              uploadXmlUrl.trim().length === 0 ||
+              isLoadingXml ||
+              !isValidXmlUrl
             }
             onClick={onUploadClick}
             tabIndex={2}
@@ -124,7 +152,7 @@ const UploadXML = (props) => {
 
         <FileInput
           idButton="select-file"
-          accept=".xml"
+          accept={[".xml"]}
           buttonLabel={t("Common:SelectFile")}
           className="xml-upload-file"
           isDisabled={!enableSso || isLoadingXml}

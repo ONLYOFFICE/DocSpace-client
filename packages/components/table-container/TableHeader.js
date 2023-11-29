@@ -121,13 +121,14 @@ class TableHeader extends React.Component {
     const defaultColumn = document.getElementById("column_" + colIndex);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
+    const handleOffset = 8;
     const size = defaultColumn.dataset.minWidth
       ? defaultColumn.dataset.minWidth
       : defaultMinColumnSize;
 
     if (column2Width + offset >= size) {
-      widths[+columnIndex] = newWidth + "px";
-      widths[colIndex] = column2Width + offset + "px";
+      widths[+columnIndex] = newWidth + handleOffset + "px";
+      widths[colIndex] = column2Width + offset - handleOffset + "px";
     } else {
       if (colIndex === this.props.columns.length) return false;
       return this.moveToRight(widths, newWidth, colIndex + 1);
@@ -229,6 +230,14 @@ class TableHeader extends React.Component {
     window.addEventListener("mouseup", this.onMouseUp);
   };
 
+  checkingForUnfixedSize = (item, defaultColumnSize) => {
+    return (
+      item !== `${settingsSize}px` &&
+      item !== `${defaultColumnSize}px` &&
+      item !== "0px"
+    );
+  };
+
   onResize = () => {
     const {
       containerRef,
@@ -254,19 +263,10 @@ class TableHeader extends React.Component {
 
     if (!container) return;
 
-    // // 400 - it is desktop info panel width
-    // const minSize = infoPanelVisible ? size.tablet - 400 : size.tablet;
-
-    // if (
-    //   !container ||
-    //   +container.clientWidth + containerMargin <= minSize ||
-    //   sectionWidth <= minSize
-    // )
-    //   return;
-
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    //TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
 
@@ -314,11 +314,31 @@ class TableHeader extends React.Component {
       let hideColumns = false;
 
       if (infoPanelVisible) {
+        let contentColumnsCount = 0;
+        let contentColumnsCountInfoPanel = 0;
+
         const storageInfoPanelSize = localStorage.getItem(
           columnInfoPanelStorageName
         );
 
-        const tableInfoPanelContainer = storageInfoPanelSize
+        if (storageInfoPanelSize) {
+          contentColumnsCountInfoPanel = storageInfoPanelSize
+            .split(" ")
+            .filter((item) =>
+              this.checkingForUnfixedSize(item, defaultSize)
+            ).length;
+
+          contentColumnsCount = tableContainer.filter((item) =>
+            this.checkingForUnfixedSize(item, defaultSize)
+          ).length;
+        }
+
+        let incorrectNumberColumns =
+          contentColumnsCountInfoPanel < contentColumnsCount &&
+          !this.state.hideColumns;
+
+        const tableInfoPanelContainer =
+          storageInfoPanelSize && !incorrectNumberColumns
           ? storageInfoPanelSize.split(" ")
           : tableContainer;
 

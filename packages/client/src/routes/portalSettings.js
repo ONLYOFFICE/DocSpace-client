@@ -280,6 +280,10 @@ const PortalSettingsRoutes = {
       element: <Integration />,
     },
     {
+      path: "integration/plugins",
+      element: <Integration />,
+    },
+    {
       path: "integration/smtp-settings",
       element: <Integration />,
     },
@@ -312,6 +316,10 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
+      path: "developer-tools/plugin-sdk",
+      element: <DeveloperTools />,
+    },
+    {
       path: "developer-tools/webhooks",
       element: <DeveloperTools />,
     },
@@ -322,10 +330,6 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/webhooks/:id/:eventId",
       element: <WebhookDetails />,
-    },
-    {
-      path: "developer-tools/plugins",
-      element: <DeveloperTools />,
     },
     {
       path: "backup",

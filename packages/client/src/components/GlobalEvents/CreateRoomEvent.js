@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { CreateRoomDialog } from "../dialogs";
-import { isMobile } from "react-device-detect";
 
 const CreateRoomEvent = ({
   visible,

@@ -10,8 +10,7 @@ import { inject, observer } from "mobx-react";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
 import { setCookie } from "@docspace/common/utils";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -208,7 +207,9 @@ const LanguageAndTimeZone = (props) => {
         rawTimezones[0];
 
       const timezoneDefault =
-        findSelectedItemByKey(timezones, portalTimeZoneId) || timezones[0];
+        timezoneDefaultFromSessionStorage ||
+        findSelectedItemByKey(timezones, portalTimeZoneId) ||
+        timezones[0];
 
       setState((val) => ({ ...val, timezone, timezoneDefault }));
     }
@@ -373,7 +374,7 @@ const LanguageAndTimeZone = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(
@@ -439,7 +440,6 @@ const LanguageAndTimeZone = (props) => {
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems={true}
-          directionY="both"
         />
       </FieldContainer>
       <FieldContainer
@@ -461,7 +461,6 @@ const LanguageAndTimeZone = (props) => {
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems={true}
-          directionY="both"
         />
       </FieldContainer>
     </div>
@@ -505,7 +504,7 @@ const LanguageAndTimeZone = (props) => {
         onSaveClick={onSaveLngTZSettings}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}

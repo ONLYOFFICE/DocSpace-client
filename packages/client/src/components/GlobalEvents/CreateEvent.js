@@ -281,6 +281,7 @@ const CreateEvent = ({
   return (
     <Dialog
       t={t}
+      withForm
       visible={eventDialogVisible}
       title={headerTitle}
       startValue={startValue}

@@ -71,7 +71,16 @@ const MobileCategoryWrapper = (props) => {
         >
           {title}
         </Link>
-        {!isDisabled && <StyledArrowRightIcon size="small" />}
+        {withPaidBadge && (
+          <Badge
+            backgroundColor="#EDC409"
+            label={badgeLabel}
+            isPaidBadge={true}
+            className="paid-badge"
+            fontWeight="700"
+          />
+        )}
+        <StyledArrowRightIcon className="settings_unavailable" size="small" />
       </div>
       <Text className="category-item-description">{subtitle}</Text>
     </StyledMobileCategoryWrapper>

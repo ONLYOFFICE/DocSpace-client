@@ -14,19 +14,21 @@ const StyledTrashWarning = styled.div`
     theme.interfaceDirection === "rtl" ? `right` : `left`};
 
   font-weight: 400;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 
   color: ${({ theme }) => theme.section.header.trashErasureLabelText};
   background: ${({ theme }) =>
     theme.section.header.trashErasureLabelBackground};
+
+  @media ${tablet} {
+    margin-bottom: 16px;
+  }
 `;
 
-const TrashWarning = ({ title, isTabletView }) => {
+const TrashWarning = ({ title }) => {
   return (
-    <StyledTrashWarning className="trash-warning" isTabletView={isTabletView}>
-      {title}
-    </StyledTrashWarning>
+    <StyledTrashWarning className="trash-warning">{title}</StyledTrashWarning>
   );
 };
 

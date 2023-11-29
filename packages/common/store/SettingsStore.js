@@ -1,9 +1,10 @@
 import { makeAutoObservable, runInAction } from "mobx";
+
 import api from "../api";
+
 import {
   combineUrl,
   setCookie,
-  getCookie,
   frameCallEvent,
   getSystemTheme,
 } from "../utils";
@@ -13,15 +14,20 @@ import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   TenantStatus,
+  DeviceType,
 } from "../constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/components/themes";
-
+import { getCookie } from "@docspace/components/utils/cookie";
+import {
+  size as deviceSize,
+  isTablet,
+} from "@docspace/components/utils/device";
 import { wrongPortalNameUrl } from "@docspace/common/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
-import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
+//import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {
   Dark: Dark,
@@ -146,7 +152,6 @@ class SettingsStore {
   debugInfo = false;
   socketUrl = "";
 
-  userFormValidation = /^[\p{L}\p{M}'\-]+$/gu;
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
   tenantStatus = null;
@@ -162,6 +167,7 @@ class SettingsStore {
 
   enablePlugins = false;
   pluginOptions = [];
+  domainValidator = null;
 
   additionalResourcesData = null;
   additionalResourcesIsDefault = true;
@@ -184,6 +190,10 @@ class SettingsStore {
   numberAttempt = null;
   blockingTime = null;
   checkPeriod = null;
+
+  userNameRegex = "";
+
+  windowWidth = window.innerWidth;
 
   constructor() {
     makeAutoObservable(this);
@@ -461,7 +471,15 @@ class SettingsStore {
         const url = new URL(wrongPortalNameUrl);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
-        // return window.location.replace(url);
+        return window.location.replace(url);
+      }
+
+      if (err?.response?.status === 403) {
+        //access to the portal is restricted
+        window.DocSpace.navigate("/access-restricted", {
+          state: { isRestrictionError: true },
+          replace: true,
+        });
       }
     });
 
@@ -472,6 +490,10 @@ class SettingsStore {
 
     if (origSettings?.tenantAlias) {
       this.setTenantAlias(origSettings.tenantAlias);
+    }
+
+    if (origSettings?.domainValidator) {
+      this.domainValidator = origSettings.domainValidator;
     }
   };
 
@@ -1012,6 +1034,32 @@ class SettingsStore {
       toastr.error(e);
     }
   };
+
+  setWindowWidth = (width) => {
+    if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
+      return;
+
+    if (isTablet(width) && isTablet(this.windowWidth)) return;
+
+    if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
+      return;
+
+    this.windowWidth = width;
+  };
+
+  get currentDeviceType() {
+    if (this.windowWidth <= deviceSize.mobile) return DeviceType.mobile;
+
+    if (isTablet(this.windowWidth)) return DeviceType.tablet;
+
+    return DeviceType.desktop;
+  }
+
+  get enablePortalRename() {
+    return (
+      !this.standalone || (this.standalone && this.baseDomain !== "localhost")
+    );
+  }
 }
 
 export default SettingsStore;

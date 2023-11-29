@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
 
 import Text from "@docspace/components/text";
 import FormWrapper from "@docspace/components/form-wrapper";
@@ -26,7 +25,9 @@ import {
   combineUrl,
   createPasswordHash,
   convertLanguage,
+  setCookie,
 } from "@docspace/common/utils";
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
 
 import {
   Wrapper,
@@ -44,6 +45,7 @@ import {
   DEFAULT_SELECT_TIMEZONE,
   DEFAULT_SELECT_LANGUAGE,
 } from "SRC_DIR/helpers/constants";
+import { isMobile } from "@docspace/components/utils/device";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
@@ -118,7 +120,8 @@ const Wizard = (props) => {
           const select = getSelectZone(zones, userTimezone);
 
           setTimezones(zones);
-          if (!select) {
+
+          if (select.length === 0) {
             setSelectedTimezone(DEFAULT_SELECT_TIMEZONE);
           } else {
             setSelectedTimezone(select[0]);
@@ -130,7 +133,7 @@ const Wizard = (props) => {
           (lang) => lang.key === convertedCulture
         );
 
-        if (!select) {
+        if (select.length === 0) {
           setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
         } else {
           setSelectedLanguage(select[0]);
@@ -253,13 +256,12 @@ const Wizard = (props) => {
         wizardToken,
         analytics
       );
+
+      setCookie(LANGUAGE, selectedLanguage.key, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+
       setWizardComplete();
-
-      // navigate(combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"));
-
-      window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
-      );
     } catch (error) {
       console.error(error);
       setIsCreated(false);
@@ -378,7 +380,7 @@ const Wizard = (props) => {
                 <FileInput
                   scale
                   size="large"
-                  accept=".lic"
+                  accept={[".lic"]}
                   placeholder={t("PlaceholderLicense")}
                   onInput={onLicenseFileHandler}
                   hasError={hasErrorLicense}
@@ -400,18 +402,18 @@ const Wizard = (props) => {
               <ComboBox
                 withoutPadding
                 directionY="both"
-                options={cultureNames}
-                selectedOption={selectedLanguage}
+                options={cultureNames || []}
+                selectedOption={selectedLanguage || {}}
                 onSelect={onLanguageSelect}
                 isDisabled={isCreated}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
                 manualWidth="250px"
-                isDefaultMode={!isMobileOnly}
-                withBlur={isMobileOnly}
+                isDefaultMode={!isMobile()}
+                withBlur={isMobile()}
                 fillIcon={false}
                 modernView={true}
               />
@@ -424,18 +426,18 @@ const Wizard = (props) => {
                 textOverflow
                 withoutPadding
                 directionY="both"
-                options={timezones}
-                selectedOption={selectedTimezone}
+                options={timezones || []}
+                selectedOption={selectedTimezone || {}}
                 onSelect={onTimezoneSelect}
                 isDisabled={isCreated}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
                 dropDownMaxHeight={364}
                 manualWidth="350px"
-                isDefaultMode={!isMobileOnly}
-                withBlur={isMobileOnly}
+                isDefaultMode={!isMobile()}
+                withBlur={isMobile()}
                 fillIcon={false}
                 modernView={true}
               />

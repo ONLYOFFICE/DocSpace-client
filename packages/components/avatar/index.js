@@ -101,7 +101,11 @@ const Avatar = (props) => {
 
   return (
     <StyledAvatar {...props}>
-      <AvatarWrapper source={source} userName={userName}>
+      <AvatarWrapper
+        source={source}
+        userName={userName}
+        className="avatar-wrapper"
+      >
         {avatarContent}
       </AvatarWrapper>
       {editing && size === "max" ? (

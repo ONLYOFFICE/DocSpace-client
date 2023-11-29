@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Box from "@docspace/components/box";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -14,6 +14,7 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const ConfirmContainer = styled(Box)`
+  width: 100%;
   margin: 56px auto;
   display: flex;
   flex: 1fr 1fr;
@@ -29,7 +30,7 @@ export const ConfirmContainer = styled(Box)`
     gap: 32px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     width: 100%;
     flex: 1fr;
@@ -54,7 +55,7 @@ export const GreetingContainer = styled.div`
     width: 480px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
   }
 
@@ -66,7 +67,7 @@ export const GreetingContainer = styled.div`
       text-align: center;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       padding-bottom: 24px;
     }
   }
@@ -170,7 +171,7 @@ export const RegisterContainer = styled.div`
     @media ${tablet} {
       width: 100%;
     }
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 100%;
     }
   }

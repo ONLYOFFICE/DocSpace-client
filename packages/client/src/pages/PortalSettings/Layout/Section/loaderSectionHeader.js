@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { isTablet, isDesktop } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   display: flex;
   align-items: center;
 
   .arrow {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 12px;
@@ -18,7 +18,7 @@ const StyledLoader = styled.div`
           `}
   }
 
-  padding: ${props =>
+  padding: ${(props) =>
     props.isTabletView
       ? "16px 0 17px"
       : props.isDesktopView
@@ -36,12 +36,9 @@ const LoaderSectionHeader = () => {
   const levelSettings = location.pathname.split("/").length - 1;
 
   const checkInnerWidth = () => {
-    const isTabletView =
-      (window.innerWidth >= 600 && window.innerWidth <= 1024) ||
-      (isTablet && !isMobileOnly);
+    const isTabletView = isTablet();
 
-    const isDesktopView = window.innerWidth > 1024;
-
+    const isDesktopView = isDesktop();
     if (isTabletView) {
       setIsTabletView(true);
     } else {
@@ -65,10 +62,10 @@ const LoaderSectionHeader = () => {
   return (
     <StyledLoader isTabletView={isTabletView} isDesktopView={isDesktopView}>
       {levelSettings === 4 && (
-        <Loaders.Rectangle width="17" height="17" className="arrow" />
+        <RectangleSkeleton width="17" height="17" className="arrow" />
       )}
 
-      <Loaders.Rectangle width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
     </StyledLoader>
   );
 };

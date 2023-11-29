@@ -2,23 +2,22 @@ import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import ContextMenuButton from "@docspace/components/context-menu-button";
-import IconButton from "@docspace/components/icon-button";
-import { isMobile } from "react-device-detect";
+
 import { tablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 import ToggleInfoPanelButton from "./toggle-infopanel-btn";
 import PlusButton from "./plus-btn";
 import ContextButton from "./context-btn";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 
 const StyledContainer = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-right: 20px;
+          margin-right: 16px;
         `
       : css`
-          margin-left: 20px;
+          margin-left: 16px;
         `}
   display: flex;
   align-items: center;
@@ -39,11 +38,6 @@ const StyledContainer = styled.div`
     @media ${tablet} {
       display: ${(props) => (props.isFrame ? "flex" : "none")};
     }
-
-    ${isMobile &&
-    css`
-      display: ${(props) => (props.isFrame ? "flex" : "none")};
-    `}
   }
 
   .add-drop-down {
@@ -51,26 +45,27 @@ const StyledContainer = styled.div`
   }
 
   .option-button {
-    ${(props) =>
+    min-width: 17px;
+
+    /* ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 16px;
           `
         : css`
             margin-right: 16px;
-          `}
-    min-width: 15px;
+          `} */
 
-    @media ${tablet} {
+    /* @media ${tablet} {
       ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 9px;
-            `
-          : css`
-              margin-right: 9px;
-            `}
-    }
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 9px;
+          `
+        : css`
+            margin-right: 9px;
+          `}
+    } */
   }
 
   .trash-button {
@@ -111,18 +106,6 @@ const StyledInfoPanelToggleWrapper = styled.div`
           `}
   }
 
-  ${isMobile &&
-  css`
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: ${(props) => (props.isRootFolder ? "auto" : "0")};
-          `
-        : css`
-            margin-left: ${(props) => (props.isRootFolder ? "auto" : "0")};
-          `}
-  `}
-
   .info-panel-toggle-bg {
     height: 32px;
     width: 32px;
@@ -152,7 +135,6 @@ const ControlButtons = ({
   canCreate,
   getContextOptionsFolder,
   getContextOptionsPlus,
-  isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
   isInfoPanelVisible,
@@ -165,6 +147,7 @@ const ControlButtons = ({
   isFrame,
   isPublicRoom,
   isTrashFolder,
+  isMobile,
 }) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel && toggleInfoPanel();
@@ -173,7 +156,7 @@ const ControlButtons = ({
 
   return (
     <StyledContainer isDropBoxComponent={isDropBoxComponent} isFrame={isFrame}>
-      {!isRootFolder || (isRecycleBinFolder && !isEmptyFilesList) ? (
+      {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
         <>
           {!isMobile && canCreate && (
             <PlusButton
@@ -207,6 +190,7 @@ const ControlButtons = ({
             //onPlusClick={onPlusClick}
             title={titles?.actions}
             isTrashFolder={isTrashFolder}
+            isMobile={isMobile}
           />
 
           {!isDesktop && (
@@ -249,17 +233,14 @@ const ControlButtons = ({
           )}
 
           {isPublicRoom && (
-            <ContextMenuButton
+            <ContextButton
               id="header_optional-button"
-              zIndex={402}
               className="option-button"
-              directionX="right"
-              iconName={VerticalDotsReactSvgUrl}
-              size={15}
-              isFill
               getData={getContextOptionsFolder}
-              isDisabled={false}
+              withMenu={withMenu}
               title={titles?.contextMenu}
+              isTrashFolder={isTrashFolder}
+              isMobile={isMobile}
             />
           )}
         </>

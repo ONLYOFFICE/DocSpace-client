@@ -15,6 +15,12 @@ import { useTranslation } from "react-i18next";
 
 import { Base } from "@docspace/components/themes";
 
+const ModalDialogContainer = styled(ModalDialog)`
+  .modal-body {
+    overflow-y: auto;
+  }
+`;
+
 const DialogBodyWrapper = styled.div`
   margin-top: -4px;
 `;
@@ -27,7 +33,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -40,7 +46,7 @@ const Footer = styled.div`
 
 const Separator = styled.hr`
   border-top: 1px solid;
-  border-color: ${props => (props.theme.isBase ? "#eceef1" : "#474747")};
+  border-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")};
   margin-bottom: 14px;
 `;
 
@@ -48,10 +54,7 @@ Separator.defaultProps = { theme: Base };
 
 const constructUrl = (baseUrl, filters) => {
   const url = new URL(baseUrl, "http://127.0.0.1:8092/");
-  url.searchParams.append(
-    "deliveryDate",
-    filters.deliveryDate?.format("YYYY-MM-DD") || null
-  );
+  url.searchParams.append("deliveryDate", filters.deliveryDate?.format("YYYY-MM-DD") || null);
   url.searchParams.append("deliveryFrom", filters.deliveryFrom.format("HH:mm"));
   url.searchParams.append("deliveryTo", filters.deliveryTo.format("HH:mm"));
   url.searchParams.append("status", JSON.stringify(filters.status));
@@ -60,21 +63,12 @@ const constructUrl = (baseUrl, filters) => {
 };
 
 function areArraysEqual(array1, array2) {
-  return (
-    array1.length === array2.length &&
-    array1.every((val, index) => val === array2[index])
-  );
+  return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
 }
 
-const FilterDialog = props => {
-  const {
-    visible,
-    closeModal,
-    applyFilters,
-    formatFilters,
-    setHistoryFilters,
-    historyFilters,
-  } = props;
+const FilterDialog = (props) => {
+  const { visible, closeModal, applyFilters, formatFilters, setHistoryFilters, historyFilters } =
+    props;
   const { t } = useTranslation(["Webhooks", "Files", "Common"]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -116,12 +110,7 @@ const FilterDialog = props => {
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(
-        constructUrl(
-          `/portal-settings/developer-tools/webhooks/${id}`,
-          historyFilters
-        )
-      );
+      navigate(constructUrl(`/portal-settings/developer-tools/webhooks/${id}`, historyFilters));
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);
@@ -135,11 +124,7 @@ const FilterDialog = props => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialog
-      withFooterBorder
-      visible={visible}
-      onClose={closeModal}
-      displayType="aside">
+    <ModalDialogContainer withFooterBorder visible={visible} onClose={closeModal} displayType="aside">
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>
@@ -173,7 +158,7 @@ const FilterDialog = props => {
           </Footer>
         </ModalDialog.Footer>
       )}
-    </ModalDialog>
+    </ModalDialogContainer>
   );
 };
 

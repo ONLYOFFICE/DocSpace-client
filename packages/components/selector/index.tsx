@@ -27,6 +27,7 @@ const Selector = ({
 
   withSearch,
   searchLoader,
+  isSearchLoading,
   searchPlaceholder,
   searchValue,
   onSearch,
@@ -103,19 +104,20 @@ const Selector = ({
     onBackClick && onBackClick();
   }, [onBackClick]);
 
+  const onClearSearchAction = React.useCallback(() => {
+    onClearSearch && onClearSearch(() => setIsSearch(false));
+  }, [onClearSearch]);
+
   const onSearchAction = React.useCallback(
     (value: string) => {
-      onSearch && onSearch(value);
+      const searchValue = value.trim();
 
-      setIsSearch(true);
+      if (searchValue === "") return onClearSearchAction();
+
+      onSearch && onSearch(searchValue, () => setIsSearch(true));
     },
-    [onSearch]
+    [onSearch, onClearSearchAction]
   );
-
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch && onClearSearch();
-    setIsSearch(false);
-  }, [onClearSearch]);
 
   const onSelectAction = (item: Item) => {
     onSelect &&
@@ -194,6 +196,7 @@ const Selector = ({
 
   const onSelectAllAction = React.useCallback(() => {
     onSelectAll && onSelectAll();
+    if (!items) return;
     if (newSelectedItems.length === 0) {
       const cloneItems = items.map((x) => ({ ...x }));
 
@@ -259,6 +262,7 @@ const Selector = ({
 
   const loadMoreItems = React.useCallback(
     (startIndex: number) => {
+      if (startIndex === 1) return; //fix double fetch of the first page
       !isNextPageLoading && loadNextPage && loadNextPage(startIndex - 1);
     },
     [isNextPageLoading, loadNextPage]
@@ -268,7 +272,7 @@ const Selector = ({
     if (!!selectedAccessRight) setSelectedAccess({ ...selectedAccessRight });
   }, [selectedAccessRight]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (items && selectedItems) {
       if (selectedItems.length === 0 || !isMultiSelect) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
@@ -343,6 +347,7 @@ const Selector = ({
         onSelectBreadCrumb={onSelectBreadCrumb}
         breadCrumbsLoader={breadCrumbsLoader}
         isBreadCrumbsLoading={isBreadCrumbsLoading}
+        isSearchLoading={isSearchLoading}
         withSearch={withSearch}
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}

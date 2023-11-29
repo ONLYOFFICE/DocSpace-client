@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { isTablet } from "react-device-detect";
+
 import { withTranslation } from "react-i18next";
 
 import RowContent from "@docspace/components/row-content";
@@ -8,44 +8,58 @@ import Link from "@docspace/components/link";
 import { getSpaceQuotaAsText } from "@docspace/common/utils";
 
 import Badges from "../Badges";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`
-  ${props =>
-    ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
-    css`
-      .row-main-container-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        max-width: inherit;
-      }
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
 
-      .badges {
-        flex-direction: row-reverse;
-        margin-top: 9px;
-        ${props =>
+    .badges {
+      flex-direction: row-reverse;
+      margin-top: 9px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 12px;
+            `
+          : css`
+              margin-right: 12px;
+            `}
+
+      .paid-badge {
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
-                margin-left: 12px;
+                margin-right: 8px;
+                margin-left: 0px;
               `
             : css`
-                margin-right: 12px;
+                margin-left: 8px;
+                margin-right: 0px;
               `}
-
-        .paid-badge {
-          ${props =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  margin-right: 8px;
-                  margin-left: 0px;
-                `
-              : css`
-                  margin-left: 8px;
-                  margin-right: 0px;
-                `}
-        }
       }
-    `}
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .badges {
+      margin-top: 0px;
+      gap: 8px;
+
+      .paid-badge {
+        margin: 0px;
+      }
+    }
+  }
 `;
 
 const UserContent = ({
@@ -100,7 +114,8 @@ const UserContent = ({
       sideColor={sideInfoColor}
       sectionWidth={sectionWidth}
       nameColor={nameColor}
-      sideInfoColor={sideInfoColor}>
+      sideInfoColor={sideInfoColor}
+    >
       <Link
         containerWidth="28%"
         type="page"
@@ -109,7 +124,8 @@ const UserContent = ({
         fontSize="15px"
         color={nameColor}
         isTextOverflow={true}
-        noHover>
+        noHover
+      >
         {statusType === "pending"
           ? email
           : displayName?.trim()
@@ -127,7 +143,8 @@ const UserContent = ({
         fontSize="12px"
         fontWeight={400}
         color={sideInfoColor}
-        isTextOverflow={true}>
+        isTextOverflow={true}
+      >
         {roleLabel}
       </Link>
       <Link
@@ -138,7 +155,8 @@ const UserContent = ({
         fontSize="12px"
         fontWeight={400}
         color={sideInfoColor}
-        isTextOverflow={true}>
+        isTextOverflow={true}
+      >
         {email}
       </Link>
 

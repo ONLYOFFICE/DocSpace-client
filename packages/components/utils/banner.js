@@ -1,6 +1,9 @@
 import difference from "lodash/difference";
-import { LANGUAGE } from "@docspace/common/constants";
-import { getLanguage, getCookie } from "@docspace/common/utils";
+import { LANGUAGE } from "COMMON_DIR/constants";
+import { getLanguage } from "COMMON_DIR/utils";
+
+import { getCookie } from "../utils/cookie";
+
 export const getBannerAttribute = () => {
   const bar = document.getElementById("bar-banner");
   const mainBar = document.getElementById("main-bar");

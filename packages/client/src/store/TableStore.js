@@ -21,6 +21,7 @@ class TableStore {
   roomColumnTypeIsEnabled = false;
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
+  roomColumnQuickButtonsIsEnabled = true;
   roomColumnActivityIsEnabled = true;
   roomQuotaColumnIsEnable = false;
 

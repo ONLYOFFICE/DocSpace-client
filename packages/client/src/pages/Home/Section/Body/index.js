@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { observer, inject } from "mobx-react";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
@@ -12,6 +11,8 @@ import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import { Consumer } from "@docspace/components/utils/context";
 import { isElementInViewport } from "@docspace/common/utils";
+import { isMobile, isTablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -43,6 +44,7 @@ const SectionBodyContent = (props) => {
     onClickBack,
 
     movingInProgress,
+    currentDeviceType,
   } = props;
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const SectionBodyContent = (props) => {
       "#customScrollBar > .scroll-wrapper > .scroller"
     );
 
-    if (isMobile) {
+    if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
       customScrollElm && customScrollElm.scrollTo(0, 0);
     }
 
@@ -85,6 +87,7 @@ const SectionBodyContent = (props) => {
     folderId,
     viewAs,
     uploaded,
+    currentDeviceType,
   ]);
 
   useEffect(() => {
@@ -98,21 +101,26 @@ const SectionBodyContent = (props) => {
       let isInViewport = isElementInViewport(targetElement);
 
       if (!isInViewport || viewAs === "table") {
-        const bodyScroll = isMobileOnly
-          ? document.querySelector(
-              "#customScrollBar > .scroll-wrapper > .scroller"
-            )
-          : document.querySelector(".section-scroll");
+        const bodyScroll =
+          isMobile() || currentDeviceType === DeviceType.mobile
+            ? document.querySelector(
+                "#customScrollBar > .scroll-wrapper > .scroller"
+              )
+            : document.querySelector(".section-scroll");
 
         const count =
           filesList.findIndex((elem) => elem.id === scrollToItem.id) *
-          (isMobileOnly ? 57 : viewAs === "table" ? 40 : 48);
+          (isMobile() || currentDeviceType === DeviceType.mobile
+            ? 57
+            : viewAs === "table"
+            ? 40
+            : 48);
 
         bodyScroll.scrollTo(0, count);
       }
       setScrollToItem(null);
     }
-  }, [scrollToItem]);
+  }, [scrollToItem, currentDeviceType]);
 
   const onBeforeunload = (e) => {
     if (!uploaded) {
@@ -131,7 +139,7 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest(".search-input-block")
+      e.target.closest("#filter_search-input")
     ) {
       setSelection([]);
       setBufferSelection(null);
@@ -209,8 +217,8 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setDragging(false);
       setStartDrag(false);
+      setTimeout(() => setDragging(false), 0);
       isDragActive = false;
       return;
     }
@@ -218,7 +226,7 @@ const SectionBodyContent = (props) => {
     const folderId = value ? value.split("_")[1] : treeValue;
 
     setStartDrag(false);
-    setDragging(false);
+    setTimeout(() => setDragging(false), 0);
     onMoveTo(folderId, title);
     isDragActive = false;
     return;
@@ -287,6 +295,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
+    auth,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -337,6 +346,7 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
+      currentDeviceType: auth.settingsStore,
     };
   }
 )(

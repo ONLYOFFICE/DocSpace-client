@@ -34,6 +34,7 @@ import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import RoomSharingDialog from "./RoomSharingDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
+import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import ReportDialog from "./ReportDialog";
 import PluginDialog from "./PluginDialog";
@@ -77,6 +78,7 @@ export {
   DeleteLinkDialog,
   RoomSharingDialog,
   MoveToPublicRoom,
+  BackupToPublicRoom,
   SettingsPluginDialog,
   ReportDialog,
   PluginDialog,

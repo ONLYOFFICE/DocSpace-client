@@ -1,6 +1,6 @@
 import React from "react";
-import { LoaderStyle } from "../../../constants";
-import RectangleLoader from "../RectangleLoader";
+import { LoaderStyle } from "@docspace/components/utils/constants";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { StyledSMTPContent } from "./StyledComponent";
 const speed = 2;
 
@@ -8,7 +8,7 @@ const SettingsSMTP = () => {
   const firstComponent = (
     <div>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           height="22"
           width="56"
           backgroundColor={LoaderStyle.backgroundColor}
@@ -19,7 +19,7 @@ const SettingsSMTP = () => {
           animate={true}
         />
       </div>
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -34,7 +34,7 @@ const SettingsSMTP = () => {
 
   const secondComponent = (
     <div>
-      <RectangleLoader
+      <RectangleSkeleton
         height="20"
         width="101"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -44,7 +44,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -58,7 +58,7 @@ const SettingsSMTP = () => {
   );
   const thirdComponent = (
     <div>
-      <RectangleLoader
+      <RectangleSkeleton
         height="20"
         width="138"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -68,7 +68,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -83,7 +83,7 @@ const SettingsSMTP = () => {
 
   const checkboxComponent = (
     <div className="rectangle-loader_checkbox">
-      <RectangleLoader
+      <RectangleSkeleton
         height="16"
         width="16"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -93,7 +93,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         height="22"
         width="101"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -107,7 +107,7 @@ const SettingsSMTP = () => {
   );
   const secondCheckboxComponent = (
     <div className="rectangle-loader_checkbox">
-      <RectangleLoader
+      <RectangleSkeleton
         height="16"
         width="16"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -117,7 +117,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         height="20"
         width="70"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -131,7 +131,7 @@ const SettingsSMTP = () => {
   );
   const buttonsComponent = (
     <div className="rectangle-loader_buttons">
-      <RectangleLoader
+      <RectangleSkeleton
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
         foregroundColor={LoaderStyle.foregroundColor}
@@ -140,7 +140,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
         foregroundColor={LoaderStyle.foregroundColor}
@@ -149,7 +149,7 @@ const SettingsSMTP = () => {
         speed={speed}
         animate={true}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         height="32"
         backgroundColor={LoaderStyle.backgroundColor}
         foregroundColor={LoaderStyle.foregroundColor}
@@ -162,7 +162,7 @@ const SettingsSMTP = () => {
   );
   return (
     <StyledSMTPContent>
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader_title"
         height="22"
         width="128"
@@ -174,7 +174,7 @@ const SettingsSMTP = () => {
         animate={true}
       />
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader_description"
         height="60"
         backgroundColor={LoaderStyle.backgroundColor}
@@ -187,7 +187,7 @@ const SettingsSMTP = () => {
 
       {firstComponent}
       {firstComponent}
-      <RectangleLoader
+      <RectangleSkeleton
         className="rectangle-loader_title"
         height="20"
         width="128"

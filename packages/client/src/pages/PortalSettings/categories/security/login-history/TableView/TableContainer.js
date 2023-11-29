@@ -1,22 +1,28 @@
-import React, { useEffect, useRef } from "react";
-import TableContainer from "@docspace/components/table-container";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
+import TableContainer from "@docspace/components/table-container";
+import TableBody from "@docspace/components/table-container/TableBody";
+
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import TableBody from "@docspace/components/table-container/TableBody";
-import { isMobile } from "react-device-detect";
 
-const Table = ({ historyUsers, sectionWidth, viewAs, setViewAs, theme }) => {
+const Table = ({
+  historyUsers,
+  sectionWidth,
+  viewAs,
+  setViewAs,
+  theme,
+  currentDeviceType,
+}) => {
   const ref = useRef(null);
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return historyUsers && historyUsers.length > 0 ? (
     <TableContainer forwardedRef={ref}>
@@ -34,12 +40,13 @@ const Table = ({ historyUsers, sectionWidth, viewAs, setViewAs, theme }) => {
 
 export default inject(({ auth, setup }) => {
   const { security, viewAs, setViewAs } = setup;
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   return {
     historyUsers: security.loginHistory.users,
     theme,
     viewAs,
     setViewAs,
+    currentDeviceType,
   };
 })(observer(Table));

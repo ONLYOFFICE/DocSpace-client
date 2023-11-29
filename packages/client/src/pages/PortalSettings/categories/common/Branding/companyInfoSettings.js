@@ -14,7 +14,7 @@ import Link from "@docspace/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { smallTablet, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .link {
@@ -29,20 +29,27 @@ const StyledComponent = styled.div`
   }
 
   .text-input {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   .save-cancel-buttons {
     margin-top: 24px;
+    bottom: 0;
   }
 
   .description {
     padding-bottom: 16px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .header {
       display: none;
+    }
+  }
+
+  @media (max-height: 700px) {
+    .save-cancel-buttons {
+      bottom: auto;
     }
   }
 `;
@@ -99,7 +106,7 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
       navigate("/portal-settings/customization/branding");
   };
@@ -440,9 +447,11 @@ const CompanyInfoSettings = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          cancelButtonLabel={t("Common:Restore")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          hasScroll={true}
+          hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"

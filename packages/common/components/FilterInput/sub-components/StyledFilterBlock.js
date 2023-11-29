@@ -1,9 +1,8 @@
 import Text from "@docspace/components/text";
 import styled, { css } from "styled-components";
-import { isMobileOnly, isMobile } from "react-device-detect";
 
 import ToggleButton from "@docspace/components/toggle-button";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -11,7 +10,7 @@ const StyledFilterBlock = styled.div`
   position: fixed;
   top: 0;
 
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           left: 0;
@@ -28,18 +27,13 @@ const StyledFilterBlock = styled.div`
   display: flex;
   flex-direction: column;
 
-  background: ${props => props.theme.filterInput.filter.background};
+  background: ${(props) => props.theme.filterInput.filter.background};
 
   @media ${tablet} {
     max-width: calc(100% - 69px);
   }
 
-  ${isMobile &&
-  css`
-    max-width: calc(100% - 69px);
-  `}
-
-  @media (max-width: 428px) {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -58,7 +52,7 @@ const StyledFilterBlock = styled.div`
   }
 
   .filter-body {
-    height: ${props => (props.showFooter ? "calc(100% - 125px)" : "100%")};
+    height: ${(props) => (props.showFooter ? "calc(100% - 125px)" : "100%")};
 
     .combo-item {
       padding: 0;
@@ -68,7 +62,7 @@ const StyledFilterBlock = styled.div`
       justify-content: space-between;
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 400;
         line-height: 20px;
       }
@@ -87,19 +81,19 @@ const StyledFilterBlockHeader = styled.div`
 
   box-sizing: border-box;
 
-  border-bottom: ${props =>
+  border-bottom: ${(props) =>
     props.isSelector ? "none" : props.theme.filterInput.filter.border};
 
   display: flex;
   align-items: center;
-  justify-content: ${props => (props.isSelector ? "start" : "space-between")};
+  justify-content: ${(props) => (props.isSelector ? "start" : "space-between")};
 
   h1 {
     font-weight: 700;
   }
 
   .arrow-button {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 12px;
@@ -117,17 +111,17 @@ const StyledFilterBlockHeader = styled.div`
 StyledFilterBlockHeader.defaultProps = { theme: Base };
 
 const StyledFilterBlockItem = styled.div`
-  margin: ${props =>
+  margin: ${(props) =>
     props.withoutHeader ? "0" : props.isFirst ? "12px 0 0 0" : "16px 0 0 0"};
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          padding: 0 16px 0 15px;
+          padding: 0 16px 0 24px;
         `
       : css`
-          padding: 0 15px 0 16px;
+          padding: 0 24px 0 16px;
         `}
-  max-width: 480px;
+  max-width: 100%;
   box-sizing: border-box;
 
   display: flex;
@@ -138,7 +132,7 @@ const StyledFilterBlockItem = styled.div`
 const StyledFilterBlockItemHeader = styled.div`
   height: 16px;
   line-height: 16px;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: -16px;
@@ -152,16 +146,16 @@ const StyledFilterBlockItemHeader = styled.div`
 `;
 
 const StyledFilterBlockItemContent = styled.div`
-  margin: ${props =>
+  margin: ${(props) =>
     props.withoutSeparator ? "12px -16px 0 0" : "12px -16px 16px 0"};
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: ${props =>
+          margin: ${(props) =>
             props.withoutSeparator ? "12px 0 0 -16px" : "12px 0 16px -16px"};
         `
       : css`
-          margin: ${props =>
+          margin: ${(props) =>
             props.withoutSeparator ? "12px -16px 0 0" : "12px -16px 16px 0"};
         `}
   height: fit-content;
@@ -171,7 +165,7 @@ const StyledFilterBlockItemContent = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
-  gap: ${props => (props.withMultiItems ? "12px 8px" : "8px")};
+  gap: ${(props) => (props.withMultiItems ? "12px 8px" : "8px")};
 `;
 
 const StyledFilterBlockItemSelector = styled.div`
@@ -185,10 +179,10 @@ const StyledFilterBlockItemSelector = styled.div`
 
 const StyledFilterBlockItemSelectorText = styled(Text)`
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 15px;
-  color: ${props => props.theme.filterInput.filter.color};
-  ${props =>
+  color: ${(props) => props.theme.filterInput.filter.color};
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 8px;
@@ -202,13 +196,14 @@ const StyledFilterBlockItemSelectorText = styled(Text)`
 StyledFilterBlockItemSelectorText.defaultProps = { theme: Base };
 
 const selectedItemTag = css`
-  background: ${props =>
+  background: ${(props) =>
     props.theme.filterInput.filter.selectedItem.background};
-  border-color: ${props => props.theme.filterInput.filter.selectedItem.border};
+  border-color: ${(props) =>
+    props.theme.filterInput.filter.selectedItem.border};
 `;
 
 const selectedItemTagText = css`
-  color: ${props => props.theme.filterInput.filter.selectedItem.color};
+  color: ${(props) => props.theme.filterInput.filter.selectedItem.color};
   font-weight: 600;
 `;
 
@@ -216,16 +211,16 @@ const StyledFilterBlockItemTagText = styled(Text)`
   height: 20px;
 
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
-  ${props => props.isSelected && selectedItemTagText}
+  ${(props) => props.isSelected && selectedItemTagText}
 `;
 
 StyledFilterBlockItemTagText.defaultProps = { theme: Base };
 
 const StyledFilterBlockItemTagIcon = styled.div`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 8px;
@@ -240,7 +235,7 @@ const StyledFilterBlockItemTagIcon = styled.div`
 
   svg {
     path {
-      fill: ${props => props.theme.filterInput.filter.selectedItem.color};
+      fill: ${(props) => props.theme.filterInput.filter.selectedItem.color};
     }
   }
 `;
@@ -259,7 +254,7 @@ const StyledFilterBlockItemToggle = styled.div`
 
 const StyledFilterBlockItemToggleText = styled(Text)`
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 36px;
 `;
 
@@ -270,7 +265,7 @@ const StyledFilterBlockItemToggleButton = styled(ToggleButton)`
 `;
 const StyledFilterBlockItemCheckboxContainer = styled.div`
   .checkbox {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 8px !important;
@@ -289,7 +284,7 @@ const StyledFilterBlockItemSeparator = styled.div`
   height: 1px;
   width: calc(100% + 16px);
 
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: 16px;
@@ -298,7 +293,7 @@ const StyledFilterBlockItemSeparator = styled.div`
           margin-right: 16px;
         `}
 
-  background: ${props => props.theme.filterInput.filter.separatorColor};
+  background: ${(props) => props.theme.filterInput.filter.separatorColor};
 `;
 
 StyledFilterBlockItemToggleButton.defaultProps = { theme: Base };
@@ -306,7 +301,7 @@ StyledFilterBlockItemToggleButton.defaultProps = { theme: Base };
 const StyledFilterBlockFooter = styled.div`
   position: fixed;
   bottom: 0;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           left: 0;
@@ -321,7 +316,7 @@ const StyledFilterBlockFooter = styled.div`
   height: 72px;
   min-height: 72px;
 
-  border-top: ${props => props.theme.filterInput.filter.border};
+  border-top: ${(props) => props.theme.filterInput.filter.border};
 
   box-sizing: border-box;
 
@@ -334,7 +329,7 @@ const StyledFilterBlockFooter = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     width: 100%;
   }
 `;
@@ -356,7 +351,7 @@ const StyledControlContainer = styled.div`
   z-index: 450;
 
   top: 14px;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           right: -34px;
@@ -365,14 +360,9 @@ const StyledControlContainer = styled.div`
           left: -34px;
         `}
 
-  ${isMobile &&
-  css`
-    top: 14px;
-  `}
-
-  @media (max-width: 428px) {
+  @media ${mobile} {
     top: -34px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 10px;
@@ -393,7 +383,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   height: 17px;
   z-index: 455;
   path {
-    fill: ${props => props.theme.catalog.control.fill};
+    fill: ${(props) => props.theme.catalog.control.fill};
   }
 `;
 

@@ -13,7 +13,7 @@ import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { useTranslation } from "react-i18next";
 
 import { useParams } from "react-router-dom";
@@ -28,6 +28,20 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
   min-height: 69px;
 
+  @media ${tablet} {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
+  @media ${mobile} {
+    margin-top: 0;
+    justify-content: space-between;
+  }
+
+  .headerNavigation {
+    display: flex;
+    align-items: center;
+  }
+
   .arrow-button {
     margin-inline-end: 18.5px;
 
@@ -37,6 +51,9 @@ const HeaderContainer = styled.div`
 
       margin-inline-start: -8px;
     }
+    @media ${mobile} {
+      margin-inline-end: 13px;
+    }
 
     svg {
       ${({ theme }) =>
@@ -45,8 +62,16 @@ const HeaderContainer = styled.div`
   }
 
   .headline {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     margin-inline-end: 16px;
+
+    @media ${tablet} {
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    }
+
+    @media ${mobile} {
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    }
   }
 `;
 
@@ -65,27 +90,31 @@ const DetailsNavigationHeader = (props) => {
   };
 
   return (
-    <HeaderContainer>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill={true}
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Headline type="content" truncate={true} className="headline">
-        {t("WebhookDetails")}
-      </Headline>
-      <IconButton
-        className="retry"
-        iconName={RetryIcon}
-        size="17"
-        isFill={true}
-        onClick={handleRetryEvent}
-      />
+    <>
+      <HeaderContainer>
+        <div className="headerNavigation">
+          <IconButton
+            iconName={ArrowPathReactSvgUrl}
+            size="17"
+            isFill={true}
+            onClick={onBack}
+            className="arrow-button"
+          />
+          <Headline type="content" truncate={true} className="headline">
+            {t("WebhookDetails")}
+          </Headline>
+        </div>
 
+        <IconButton
+          className="retry"
+          iconName={RetryIcon}
+          size="17"
+          isFill={true}
+          onClick={handleRetryEvent}
+        />
+      </HeaderContainer>
       <NoBoxShadowToast />
-    </HeaderContainer>
+    </>
   );
 };
 

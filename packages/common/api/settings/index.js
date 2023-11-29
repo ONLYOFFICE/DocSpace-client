@@ -9,7 +9,9 @@ export function getSettings(withPassword = false, headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function getPortalCultures() {
@@ -206,7 +208,9 @@ export function getAppearanceTheme(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function sendAppearanceTheme(data) {
@@ -239,7 +243,9 @@ export function getLogoUrls(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function setWhiteLabelSettings(data) {
@@ -250,6 +256,13 @@ export function setWhiteLabelSettings(data) {
   };
 
   return request(options);
+}
+
+export function getIsDefaultWhiteLabel() {
+  return request({
+    method: "get",
+    url: `/settings/whitelabel/logos/isdefault`,
+  });
 }
 
 export function restoreWhiteLabelSettings(isDefault) {
@@ -743,19 +756,6 @@ export function generateCerts() {
 
 export function getMetadata() {
   return axios.get("/sso/metadata");
-}
-
-export function getOforms(url) {
-  return axios.get(url);
-}
-
-export function submitToGallery(url, file, formName, language) {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("formName", formName);
-  formData.append("language", language);
-
-  return axios.post(url, formData);
 }
 
 export function getStorageRegions() {

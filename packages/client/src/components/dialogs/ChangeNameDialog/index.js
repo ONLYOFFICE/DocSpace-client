@@ -8,14 +8,10 @@ import TextInput from "@docspace/components/text-input";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 
-import ModalDialogContainer from "../ModalDialogContainer";
+import { ChangeNameContainer } from "./StyledChangeName";
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation([
-    "ProfileAction",
-    "PeopleTranslations",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["ProfileAction", "PeopleTranslations", "Common"]);
   const {
     visible,
     onClose,
@@ -23,10 +19,25 @@ const ChangeNameDialog = (props) => {
     updateProfile,
     updateProfileInUsers,
     fromList,
+    userNameRegex,
   } = props;
   const [firstName, setFirstName] = useState(profile.firstName);
   const [lastName, setLastName] = useState(profile.lastName);
   const [isSaving, setIsSaving] = useState(false);
+
+  const nameRegex = new RegExp(userNameRegex, "gu");
+
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isSurnameValid, setIsSurnameValid] = useState(true);
+
+  const handleNameChange = (e) => {
+    setFirstName(e.target.value);
+    setIsNameValid(nameRegex.test(e.target.value.trim()));
+  };
+  const handleSurnameChange = (e) => {
+    setLastName(e.target.value);
+    setIsSurnameValid(nameRegex.test(e.target.value.trim()));
+  };
 
   const onCloseAction = () => {
     if (!isSaving) {
@@ -39,6 +50,14 @@ const ChangeNameDialog = (props) => {
   };
 
   const onSaveClick = async () => {
+    if (
+      !isNameValid ||
+      !isSurnameValid ||
+      firstName.trim().length === 0 ||
+      lastName.trim().length === 0
+    )
+      return;
+
     const newProfile = profile;
     newProfile.firstName = firstName;
     newProfile.lastName = lastName;
@@ -58,31 +77,34 @@ const ChangeNameDialog = (props) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ChangeNameContainer
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
-      displayType="modal"
-    >
-      <ModalDialog.Header>
-        {t("PeopleTranslations:NameChangeButton")}
-      </ModalDialog.Header>
+      displayType="modal">
+      <ModalDialog.Header>{t("PeopleTranslations:NameChangeButton")}</ModalDialog.Header>
       <ModalDialog.Body className="change-name-dialog-body">
         <FieldContainer
           isVertical
           labelText={t("Common:FirstName")}
           className="field"
-        >
+          hasError={!isNameValid}
+          errorMessage={
+            firstName.trim().length === 0
+              ? t("Common:RequiredField")
+              : t("Common:IncorrectFirstName")
+          }>
           <TextInput
             className="first-name"
             scale={true}
             isAutoFocussed={true}
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={handleNameChange}
             placeholder={t("Common:FirstName")}
             isDisabled={isSaving}
             onKeyDown={onKeyDown}
             tabIndex={1}
+            hasError={!isNameValid}
           />
         </FieldContainer>
 
@@ -90,16 +112,20 @@ const ChangeNameDialog = (props) => {
           isVertical
           labelText={t("Common:LastName")}
           className="field"
-        >
+          hasError={!isSurnameValid}
+          errorMessage={
+            lastName.trim().length === 0 ? t("Common:RequiredField") : t("Common:IncorrectLastName")
+          }>
           <TextInput
             className="last-name"
             scale={true}
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={handleSurnameChange}
             placeholder={t("Common:LastName")}
             isDisabled={isSaving}
             onKeyDown={onKeyDown}
             tabIndex={2}
+            hasError={!isSurnameValid}
           />
         </FieldContainer>
       </ModalDialog.Body>
@@ -114,6 +140,12 @@ const ChangeNameDialog = (props) => {
           onClick={onSaveClick}
           isLoading={isSaving}
           tabIndex={3}
+          isDisabled={
+            !isNameValid ||
+            !isSurnameValid ||
+            firstName.trim().length === 0 ||
+            lastName.trim().length === 0
+          }
         />
         <Button
           className="cancel-button"
@@ -126,14 +158,16 @@ const ChangeNameDialog = (props) => {
           tabIndex={4}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ChangeNameContainer>
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore, auth }) => {
   const { updateProfile } = peopleStore.targetUserStore;
 
   const { updateProfileInUsers } = peopleStore.usersStore;
 
-  return { updateProfile, updateProfileInUsers };
+  const { userNameRegex } = auth.settingsStore;
+
+  return { updateProfile, updateProfileInUsers, userNameRegex };
 })(observer(ChangeNameDialog));

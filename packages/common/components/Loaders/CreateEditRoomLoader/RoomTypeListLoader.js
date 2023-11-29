@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledRoomTypeListLoader = styled.div`
   width: 100%;
@@ -15,7 +14,7 @@ const RoomTypeListLoader = ({}) => {
   return (
     <StyledRoomTypeListLoader>
       {[...Array(5).keys()].map((key) => (
-        <RectangleLoader
+        <RectangleSkeleton
           key={key}
           width={"100%"}
           height={"86"}

@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import {
-  isMobileOnly,
-  isDesktop as isDesktopDevice,
-} from "react-device-detect";
-import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
+
+import { isMobile, mobile } from "@docspace/components/utils/device";
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 
@@ -22,6 +19,7 @@ import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { Base } from "@docspace/components/themes";
+import { DeviceType } from "@docspace/common/constants";
 
 const StyledContainer = styled.header`
   position: relative;
@@ -30,34 +28,32 @@ const StyledContainer = styled.header`
 
   ${(props) =>
     !props.isLoaded
-      ? isMobileOnly &&
-        css`
-          position: static;
-
-          ${({ theme }) =>
-            theme.interfaceDirection === "rtl"
-              ? `margin-left: -16px;`
-              : `margin-right: -16px;`}/* It is a opposite value of padding-right of custom scroll bar,
-       so that there is no white bar in the header on loading. (padding-right: 16px)*/
-        `
-      : isMobileOnly &&
-        css`
-          .navMenuHeader,
-          .profileMenuIcon,
-          .navMenuHeaderUnAuth {
-            position: absolute;
-            z-index: 160;
-            top: 0;
-            // top: ${(props) => (props.isVisible ? "0" : "-48px")};
-
-            transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+      ? css`
+          @media ${mobile} {
+            width: 100vw; // fixes space between header loader and screen edge
           }
+        `
+      : css`
+          @media ${mobile} {
+            .navMenuHeader,
+            .profileMenuIcon,
+            .navMenuHeaderUnAuth {
+              position: absolute;
+              z-index: 160;
+              top: 0;
+              // top: ${(props) => (props.isVisible ? "0" : "-48px")};
 
-          width: 100%;
+              transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+            }
+
+            width: 100vw;
+
+            margin-bottom: 48px;
+          }
         `}
 `;
 
@@ -68,10 +64,6 @@ const NavMenu = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [showNavMenu, setShowNavMenu] = React.useState(
-    isMobileOnly || isMobileUtils()
-  );
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
     props.isBackdropVisible
@@ -127,16 +119,6 @@ const NavMenu = (props) => {
     setIsNavHoverEnabled(false);
   };
 
-  const onResize = React.useCallback(() => {
-    setShowNavMenu(isMobileUtils() || isMobileOnly);
-  }, []);
-
-  React.useEffect(() => {
-    if (isDesktopDevice) window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
   const {
     isAuthenticated,
     isLoaded,
@@ -145,26 +127,25 @@ const NavMenu = (props) => {
     isDesktop,
     isFrame,
     showHeader,
+    currentDeviceType,
   } = props;
 
   const isAsideAvailable = !!asideContent;
-  const hideHeader = isDesktop || (!showHeader && isFrame);
+  const hideHeader = !showHeader && isFrame;
 
-  if (!showNavMenu) return <></>;
+  if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
+    return <></>;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
   return (
     <LayoutContextConsumer>
       {(value) => (
-        <StyledContainer
-          isLoaded={isLoaded}
-          isVisible={value.isVisible}
-          isDesktop={hideHeader}
-        >
+        <StyledContainer isLoaded={isLoaded} isVisible={value.isVisible}>
           <Backdrop
             visible={isBackdropVisible}
             onClick={backdropClick}
             withBackground={true}
+            withBlur={true}
           />
 
           {!hideHeader &&
@@ -224,7 +205,12 @@ NavMenu.defaultProps = {
 
 const NavMenuWrapper = inject(({ auth }) => {
   const { settingsStore, isAuthenticated, isLoaded, language } = auth;
-  const { isDesktopClient: isDesktop, frameConfig, isFrame } = settingsStore;
+  const {
+    isDesktopClient: isDesktop,
+    frameConfig,
+    isFrame,
+    currentDeviceType,
+  } = settingsStore;
 
   return {
     isAuthenticated,
@@ -234,6 +220,7 @@ const NavMenuWrapper = inject(({ auth }) => {
 
     showHeader: frameConfig?.showHeader,
     isFrame,
+    currentDeviceType,
   };
 })(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
 

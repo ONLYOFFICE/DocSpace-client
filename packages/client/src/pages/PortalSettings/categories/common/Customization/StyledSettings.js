@@ -5,7 +5,7 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile, desktop, mobileMore } from "@docspace/components/utils/device";
 
 const menuHeight = "48px";
 const sectionHeight = "50px";
@@ -16,7 +16,7 @@ const flex = "4px";
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
   path {
-    fill: ${props => props.theme.client.settings.common.arrowColor};
+    fill: ${(props) => props.theme.client.settings.common.arrowColor};
   }
 `;
 
@@ -35,7 +35,7 @@ const StyledScrollbar = styled(Scrollbar)`
 
 const StyledSettingsComponent = styled.div`
   .dns-setting_helpbutton {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 4px;
@@ -51,9 +51,9 @@ const StyledSettingsComponent = styled.div`
 
   .dns-textarea {
     textarea {
-      color: ${props => props.theme.text.disableColor};
+      color: ${(props) => props.theme.text.disableColor};
     }
-    ${props => props.standalone && "margin-top: 14px"};
+    ${(props) => props.standalone && "margin-top: 14px"};
   }
 
   .combo-button-label {
@@ -68,21 +68,18 @@ const StyledSettingsComponent = styled.div`
 
   .errorText {
     position: absolute;
-    font-size: 10px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
     color: #f21c0e;
   }
 
   .settings-block-description {
     line-height: 20px;
-    color: ${props => props.theme.client.settings.security.descriptionColor};
+    color: ${(props) => props.theme.client.settings.security.descriptionColor};
     padding-bottom: 12px;
   }
 
-  .send-request-button {
-    height: 40px;
-  }
-
   .combo-box-settings {
+    padding: 0px;
     .combo-button {
       justify-content: space-between !important;
     }
@@ -90,7 +87,7 @@ const StyledSettingsComponent = styled.div`
   .settings-dns_toggle-button {
     .toggle-button-text {
       font-weight: 600;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     }
     svg {
       margin-top: 1px;
@@ -98,14 +95,13 @@ const StyledSettingsComponent = styled.div`
   }
 
   .link-learn-more {
-    display: block;
+    display: inline-block;
     margin: 4px 0 16px 0;
     font-weight: 600;
   }
 
   .category-item-description {
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
@@ -114,12 +110,12 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (max-width: 599px) {
-    ${props =>
+  @media ${mobile} {
+    ${(props) =>
       props.hasScroll &&
       css`
         width: ${isMobileOnly ? "100vw" : "calc(100vw - 52px)"};
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 right: -16px;
@@ -132,7 +128,7 @@ const StyledSettingsComponent = styled.div`
         .settings-block {
           width: ${isMobileOnly ? "calc(100vw - 32px)" : "calc(100vw - 84px)"};
           max-width: none;
-          ${props =>
+          ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
                   padding-right: 16px;
@@ -147,7 +143,7 @@ const StyledSettingsComponent = styled.div`
       box-sizing: border-box;
       position: absolute;
       bottom: 0;
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               right: 0;
@@ -164,7 +160,7 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     .settings-block {
       max-width: 350px;
       height: auto;
@@ -176,13 +172,7 @@ const StyledSettingsComponent = styled.div`
     }
   }
 
-  @media (min-width: 1024px) {
-    .send-request-button {
-      height: 32px;
-    }
-  }
-
-  @media (orientation: landscape) and (max-width: 600px) {
+  @media (orientation: landscape) and ${mobile} {
     ${isMobileOnly &&
     css`
       .settings-block {
@@ -190,7 +180,7 @@ const StyledSettingsComponent = styled.div`
       }
     `}
   }
-  ${props => !props.isSettingPaid && UnavailableStyles}
+  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export { StyledSettingsComponent, StyledScrollbar, StyledArrowRightIcon };

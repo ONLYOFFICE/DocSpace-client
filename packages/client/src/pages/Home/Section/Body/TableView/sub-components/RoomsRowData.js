@@ -8,12 +8,14 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import { classNames } from "@docspace/components/utils/classNames";
 import { StyledBadgesContainer } from "../StyledTable";
+import { StyledQuickButtonsContainer } from "../StyledTable";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const RoomsRowDataComponent = (props) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
@@ -28,7 +30,7 @@ const RoomsRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-
+    quickButtonsComponent,
     item,
 
     isDefaultRoomsQuotaSet,
@@ -128,6 +130,27 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+
+      {roomColumnQuickButtonsIsEnabled ? (
+        <TableCell
+          style={
+            !roomColumnQuickButtonsIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            "table-container_quick-buttons-wrapper"
+          )}
+        >
+          <StyledQuickButtonsContainer>
+            {quickButtonsComponent}
+          </StyledQuickButtonsContainer>
+        </TableCell>
+      ) : (
+        <div />
+      )}
       {roomQuotaColumnIsEnable ? (
         <TableCell className={"table-cell_Storage/Quota"}>
           <SpaceQuota
@@ -147,6 +170,7 @@ export default inject(({ auth, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
@@ -158,6 +182,7 @@ export default inject(({ auth, tableStore }) => {
     roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     isDefaultRoomsQuotaSet,

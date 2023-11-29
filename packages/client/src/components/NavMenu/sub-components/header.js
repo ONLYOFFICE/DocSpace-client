@@ -67,7 +67,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   a {
@@ -137,6 +137,8 @@ const HeaderComponent = ({
 
   const location = useLocation();
 
+  const isFormGallery = location.pathname.includes("/form-gallery");
+
   //const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
@@ -201,15 +203,6 @@ const HeaderComponent = ({
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   });
-
-  const [isFormGallery, setIsFormGallery] = useState(
-    location.pathname.includes("/form-gallery")
-  );
-  useEffect(() => {
-    return () => {
-      setIsFormGallery(location.pathname.includes("/form-gallery"));
-    };
-  }, [location]);
 
   const logo = getLogoFromPath(
     !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light

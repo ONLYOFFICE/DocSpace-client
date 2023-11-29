@@ -8,10 +8,11 @@ import {
   SubBlock,
   ThemeBlock,
 } from "./StyledProfileView";
-import RectangleLoader from "../RectangleLoader";
-import CircleLoader from "../CircleLoader";
-import { isMobileOnly } from "react-device-detect";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import CircleSkeleton from "@docspace/components/skeletons/circle";
+
 import MobileViewLoader from "./MobileView";
+import { isMobile } from "@docspace/components/utils/device";
 
 const ProfileViewLoader = ({ id, className, style, ...rest }) => {
   const {
@@ -25,7 +26,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
     animate,
   } = rest;
 
-  if (isMobileOnly)
+  if (isMobile())
     return (
       <div id={id} className={className} style={style}>
         <MobileViewLoader {...rest} />
@@ -35,7 +36,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
     <div id={id} className={className} style={style}>
       <StyledWrapper>
         <MainBlock>
-          <CircleLoader
+          <CircleSkeleton
             className="avatar"
             title={title}
             x="62"
@@ -51,7 +52,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
 
           <div className="combos">
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="37"
                 height="20"
@@ -63,7 +64,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="226"
                 height="20"
@@ -77,7 +78,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               />
             </div>
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="34"
                 height="20"
@@ -89,7 +90,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="156"
                 height="20"
@@ -103,7 +104,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               />
             </div>
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="59"
                 height="20"
@@ -115,7 +116,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="93"
                 height="20"
@@ -129,7 +130,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               />
             </div>
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="75"
                 height="20"
@@ -141,7 +142,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="208"
                 height="20"
@@ -155,7 +156,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               />
             </div>
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="59"
                 height="20"
@@ -167,7 +168,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="140"
                 height="20"
@@ -184,7 +185,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
         </MainBlock>
         <LoginBlock>
           <div>
-            <RectangleLoader
+            <RectangleSkeleton
               className="title"
               title={title}
               width="112"
@@ -197,7 +198,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               height="40"
               borderRadius={borderRadius}
@@ -210,7 +211,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
             />
           </div>
           <div className="actions">
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="168"
               height="32"
@@ -222,7 +223,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="109"
               height="20"
@@ -237,7 +238,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
           </div>
         </LoginBlock>
         <SocialBlock>
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="237"
             height="22"
@@ -250,7 +251,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
             animate={animate}
           />
           <div className="row">
-            <RectangleLoader
+            <RectangleSkeleton
               className="button"
               title={title}
               height="32"
@@ -262,7 +263,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               className="button"
               title={title}
               height="32"
@@ -276,7 +277,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
             />
           </div>
           <div className="row">
-            <RectangleLoader
+            <RectangleSkeleton
               className="button"
               title={title}
               height="32"
@@ -288,7 +289,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               className="button"
               title={title}
               height="32"
@@ -303,7 +304,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
           </div>
         </SocialBlock>
         <SubBlock>
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="101"
             height="22"
@@ -316,7 +317,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
             animate={animate}
           />
           <div className="toggle">
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="28"
               height="16"
@@ -328,7 +329,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               title={title}
               width="223"
               height="20"
@@ -343,7 +344,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
           </div>
         </SubBlock>
         <ThemeBlock>
-          <RectangleLoader
+          <RectangleSkeleton
             title={title}
             width="129"
             height="22"
@@ -357,7 +358,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
           />
           <div className="checkbox">
             <div className="row">
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="16"
                 height="16"
@@ -369,7 +370,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 speed={speed}
                 animate={animate}
               />
-              <RectangleLoader
+              <RectangleSkeleton
                 title={title}
                 width="124"
                 height="20"
@@ -382,7 +383,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
                 animate={animate}
               />
             </div>
-            <RectangleLoader
+            <RectangleSkeleton
               className="description"
               title={title}
               width="291"
@@ -398,7 +399,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
           </div>
 
           <div className="themes-wrapper">
-            <RectangleLoader
+            <RectangleSkeleton
               className="theme"
               title={title}
               height="284"
@@ -410,7 +411,7 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
               speed={speed}
               animate={animate}
             />
-            <RectangleLoader
+            <RectangleSkeleton
               className="theme"
               title={title}
               height="284"

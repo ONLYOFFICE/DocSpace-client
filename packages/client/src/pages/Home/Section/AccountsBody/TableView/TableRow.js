@@ -48,11 +48,11 @@ const StyledPeopleRow = styled(TableRow)`
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: -20px;
-              padding-left: 18px;
+              padding-left: 20px;
             `
           : css`
               margin-right: -20px;
-              padding-right: 18px;
+              padding-right: 20px;
             `}
     }
   }
@@ -114,6 +114,8 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-context-menu-wrapper {
+    justify-content: flex-end;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -169,7 +171,7 @@ const StyledPeopleRow = styled(TableRow)`
             `}
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 600;
       }
     }
@@ -348,6 +350,7 @@ const PeopleTableRow = (props) => {
         options={typesOptions}
         onSelect={onTypeChange}
         scaled
+        directionY="both"
         size="content"
         displaySelectedOption
         modernView

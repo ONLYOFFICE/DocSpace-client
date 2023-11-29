@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 import IconButton from "@docspace/components/icon-button";
 import ContextMenu from "@docspace/components/context-menu";
-import { isDesktop } from "@docspace/components/utils/device";
 
 const ContextButton = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const menuRef = useRef(null);
 
-  const { className, getData, withMenu, isTrashFolder, ...rest } = props;
+  const { className, getData, withMenu, isTrashFolder, isMobile, ...rest } =
+    props;
 
   const toggle = (e, isOpen) => {
     isOpen ? menuRef.current.show(e) : menuRef.current.hide(e);
@@ -33,7 +33,7 @@ const ContextButton = (props) => {
         onClick={onClick}
         iconName={VerticalDotsReactSvgUrl}
         id={props.id}
-        size={15}
+        size={17}
         isFill
       />
       <ContextMenu
@@ -42,7 +42,7 @@ const ContextButton = (props) => {
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        leftOffset={isTrashFolder ? 188 : isDesktop() ? 150 : 0}
+        leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
       />
     </div>
   );

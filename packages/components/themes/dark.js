@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -53,16 +54,17 @@ const {
 } = globalColors;
 
 const Dark = {
+  ...CommonTheme,
   isBase: false,
   color: grayMaxLight,
   backgroundColor: black,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
-  interfaceDirection: "ltr",
 
   text: {
     color: grayMaxLight,
     disableColor: "#5c5c5c",
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
     descriptionColor: darkMain,
@@ -81,6 +83,8 @@ const Dark = {
     fontWeight: 600,
     color: grayMaxLight,
   },
+
+  backgroundAndSubstrateColor: "#282828",
 
   button: {
     fontWeight: "600",
@@ -316,9 +320,9 @@ const Dark = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -539,7 +543,7 @@ const Dark = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -1359,7 +1363,7 @@ const Dark = {
     fontWeight: "600",
     fontSize: "13px",
     zIndex: "400",
-    background: black,
+    background: "#333333",
     borderRadius: "6px",
     boxShadow:
       "0px 16px 16px rgba(0, 0, 0, 0.16), 0px 8.1px 6.975px rgba(0, 0, 0, 0.108), 0px 3.2px 2.6px rgba(0, 0, 0, 0.08), 0px 0.7px 0.925px rgba(0, 0, 0, 0.052)",
@@ -1715,6 +1719,7 @@ const Dark = {
     disabledArrow: "#474747",
     weekdayColor: "#858585",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
   },
 
   datePicker: {
@@ -1970,7 +1975,7 @@ const Dark = {
   },
 
   menuContainer: {
-    background: "#3D3D3D",
+    background: "#3d3d3d",
     color: "rgba(255, 255, 255, 0.92)",
   },
 
@@ -2018,6 +2023,7 @@ const Dark = {
     links: {
       iconColor: "#858585",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#ADADAD",
     },
 
     members: {
@@ -2048,6 +2054,7 @@ const Dark = {
 
     gallery: {
       borderColor: "#292929",
+      descriptionColor: "#eeeeee",
     },
   },
 
@@ -2069,6 +2076,10 @@ const Dark = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: "#DDDDDD",
+    },
+    devTools: {
+      border: "1px solid #474747",
+      color: "#858585",
     },
   },
 
@@ -2167,6 +2178,7 @@ const Dark = {
       hoverIconColor: grayMaxLight,
 
       borderImageSource: `linear-gradient(to right,${black} 21px,#474747 21px,#474747 calc(100% - 20px),${black} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${black} 0px,#474747 0px,#474747 100% ,${black} 100%)`,
       lengthenBorderImageSource: `linear-gradient(to right, #474747, #474747)`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
@@ -2361,6 +2373,7 @@ const Dark = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#858585",
     },
 
     roomType: {
@@ -2638,8 +2651,8 @@ const Dark = {
       width: "16px",
       height: "16px",
       header: {
-        width: "24px",
-        height: "24px",
+        width: "auto",
+        height: "auto",
       },
     },
     separator: {
@@ -2957,6 +2970,7 @@ const Dark = {
           toggleContentBackground: "#474747",
           iconButton: white,
           iconButtonDisabled: "#333",
+          border: "1px solid #474747",
         },
 
         smtp: {
@@ -3051,8 +3065,8 @@ const Dark = {
 
   tag: {
     color: white,
-    background: black,
-    hoverBackground: "#333333",
+    background: "#474747",
+    hoverBackground: "#282828",
     disabledBackground: "#858585",
     defaultTagColor: white,
     newTagBackground: "#333333",
@@ -3060,7 +3074,7 @@ const Dark = {
 
   profile: {
     main: {
-      background: "#1f1f1f",
+      background: "#3D3D3D",
       textColor: white,
 
       descriptionTextColor: "#858585",
@@ -3145,9 +3159,14 @@ const Dark = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#ADADAD",
-    closeIconFill: "#a9a9a9",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#ADADAD",
+    },
+    submitToGalleryTile: {
+      bodyText: "#ADADAD",
+      closeIconFill: "#a9a9a9",
+    },
   },
 
   infoBlock: {
@@ -3164,6 +3183,7 @@ const Dark = {
   plugins: {
     borderColor: "#474747",
     pluginName: "#A3A9AE",
+    descriptionColor: "#ADADAD",
   },
 };
 

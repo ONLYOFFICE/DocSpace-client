@@ -8,14 +8,14 @@ import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
 import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie, getCookie } from "../utils";
+import { isAdmin, setCookie } from "../utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
 import { getPortalTenantExtra } from "../api/portal";
-import { combineUrl } from "@docspace/common/utils";
 
 class AuthStore {
   userStore = null;
@@ -42,7 +42,7 @@ class AuthStore {
     this.tfaStore = new TfaStore();
     this.infoPanelStore = new InfoPanelStore();
     this.currentQuotaStore = new CurrentQuotasStore();
-    this.currentTariffStatusStore = new CurrentTariffStatusStore();
+    this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();
     this.bannerStore = new BannerStore();
 
@@ -84,7 +84,7 @@ class AuthStore {
 
     this.setIsUpdatingTariff(false);
   };
-  init = async (skipRequest = false) => {
+  init = async (skipRequest = false, i18n) => {
     if (this.isInit) return;
     this.isInit = true;
 
@@ -102,16 +102,16 @@ class AuthStore {
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
-      !this.settingsStore.isPublicRoom
+      !this.settingsStore.isPublicRoom &&
+      !isPortalDeactivated
     ) {
-      !isPortalDeactivated &&
-        requests.push(
-          this.userStore.init().then(() => {
-            if (this.isQuotaAvailable && !isPortalRestore) {
-              this.getTenantExtra();
-            }
-          })
-        );
+      requests.push(
+        this.userStore.init(i18n).then(() => {
+          if (this.isQuotaAvailable && !isPortalRestore) {
+            this.getTenantExtra();
+          }
+        })
+      );
     } else {
       this.userStore.setIsLoaded(true);
     }
@@ -123,10 +123,7 @@ class AuthStore {
 
       if (!this.settingsStore.passwordSettings) {
         if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(
-            this.settingsStore.getPortalPasswordSettings(),
-            this.settingsStore.getCompanyInfoSettings()
-          );
+          requests.push(this.settingsStore.getCompanyInfoSettings());
         }
       }
     }
@@ -429,41 +426,6 @@ class AuthStore {
 
   setCapabilities = (capabilities) => {
     this.capabilities = capabilities;
-  };
-
-  getOforms = (filter) => {
-    const culture =
-      this.userStore.user.cultureName || this.settingsStore.culture;
-
-    const formName = "&fields[0]=name_form";
-    const updatedAt = "&fields[1]=updatedAt";
-    const size = "&fields[2]=file_size";
-    const filePages = "&fields[3]=file_pages";
-    const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
-    const templateImage = "&populate[template_image][fields][5]=formats";
-
-    const fields = `${formName}${updatedAt}${size}${filePages}${cardPrewiew}${templateImage}`;
-
-    const params = `?${filter.toUrlParams()}${fields}`;
-
-    const promise = new Promise(async (resolve, reject) => {
-      let oforms = await api.oforms.getOforms(
-        combineUrl(
-          this.settingsStore.formGallery.url,
-          `${params}&locale=${culture}`
-        )
-      );
-
-      if (!oforms?.data?.data.length) {
-        oforms = await api.oforms.getOforms(
-          combineUrl(this.settingsStore.formGallery.url, `${params}&locale=en`)
-        );
-      }
-
-      resolve(oforms);
-    });
-
-    return promise;
   };
 
   getAuthProviders = async () => {

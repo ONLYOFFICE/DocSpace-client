@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes, { element } from "prop-types";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
 import { Provider } from "@docspace/components/utils/context";
 
 import SectionContainer from "./sub-components/section-container";
@@ -19,8 +14,10 @@ import InfoPanel from "./sub-components/info-panel";
 import SubInfoPanelBody from "./sub-components/info-panel-body";
 import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
+import SectionWarning from "./sub-components/section-warning";
 
 import FloatingButton from "@docspace/components/floating-button";
+import { DeviceType } from "../../constants";
 
 const Section = (props) => {
   const {
@@ -46,10 +43,12 @@ const Section = (props) => {
     isInfoPanelAvailable,
     settingsStudio,
     clearUploadedFilesHistory,
-    isInfoPanelVisible,
+
     isInfoPanelScrollLocked,
     isEmptyPage,
     isTrashFolder,
+    isFormGallery,
+    currentDeviceType,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState({
@@ -67,6 +66,7 @@ const Section = (props) => {
   let sectionFooterContent = null;
   let infoPanelBodyContent = null;
   let infoPanelHeaderContent = null;
+  let sectionWarningContent = null;
 
   React.Children.forEach(children, (child) => {
     const childType =
@@ -94,6 +94,8 @@ const Section = (props) => {
       case Section.InfoPanelHeader.displayName:
         infoPanelHeaderContent = child;
         break;
+      case Section.SectionWarning.displayName:
+        sectionWarningContent = child;
       default:
         break;
     }
@@ -143,6 +145,8 @@ const Section = (props) => {
     }, 100);
   }, []);
 
+  const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
+
   return (
     <>
       {isSectionAvailable && (
@@ -159,36 +163,39 @@ const Section = (props) => {
             maintenanceExist={maintenanceExist}
             isSectionHeaderAvailable={isSectionHeaderAvailable}
             settingsStudio={settingsStudio}
-            isInfoPanelVisible={isInfoPanelVisible}
+            showTwoProgress={showTwoProgress}
           >
-            {isSectionHeaderAvailable && !isMobile && (
-              <SubSectionHeader
-                maintenanceExist={maintenanceExist}
-                snackbarExist={snackbarExist}
-                className="section-header_header"
-                isHeaderVisible={isHeaderVisible}
-                viewAs={viewAs}
-                showText={showText}
-                isEmptyPage={isEmptyPage}
-                isTrashFolder={isTrashFolder}
-              >
-                {sectionHeaderContent
-                  ? sectionHeaderContent.props.children
-                  : null}
-              </SubSectionHeader>
-            )}
-            {isSectionFilterAvailable && !isMobile && (
-              <>
-                <SubSectionFilter
-                  className="section-header_filter"
+            {isSectionHeaderAvailable &&
+              currentDeviceType === DeviceType.desktop && (
+                <SubSectionHeader
+                  maintenanceExist={maintenanceExist}
+                  snackbarExist={snackbarExist}
+                  className="section-header_header"
+                  isHeaderVisible={isHeaderVisible}
                   viewAs={viewAs}
+                  showText={showText}
+                  isEmptyPage={isEmptyPage}
+                  isTrashFolder={isTrashFolder}
+                  isFormGallery={isFormGallery}
                 >
-                  {sectionFilterContent
-                    ? sectionFilterContent.props.children
+                  {sectionHeaderContent
+                    ? sectionHeaderContent.props.children
                     : null}
-                </SubSectionFilter>
-              </>
-            )}
+                </SubSectionHeader>
+              )}
+            {isSectionFilterAvailable &&
+              currentDeviceType === DeviceType.desktop && (
+                <>
+                  <SubSectionFilter
+                    className="section-header_filter"
+                    viewAs={viewAs}
+                  >
+                    {sectionFilterContent
+                      ? sectionFilterContent.props.children
+                      : null}
+                  </SubSectionFilter>
+                </>
+              )}
 
             {isSectionBodyAvailable && (
               <>
@@ -196,32 +203,45 @@ const Section = (props) => {
                   onDrop={onDrop}
                   uploadFiles={uploadFiles}
                   withScroll={withBodyScroll}
-                  autoFocus={isMobile || isTabletView ? false : true}
+                  autoFocus={
+                    currentDeviceType !== DeviceType.desktop ? false : true
+                  }
                   viewAs={viewAs}
                   settingsStudio={settingsStudio}
+                  isFormGallery={isFormGallery}
                 >
-                  {isSectionHeaderAvailable && isMobile && (
-                    <SubSectionHeader
-                      className="section-body_header"
-                      isHeaderVisible={isHeaderVisible}
-                      viewAs={viewAs}
-                      showText={showText}
-                      settingsStudio={settingsStudio}
-                      isEmptyPage={isEmptyPage}
-                      isTrashFolder={isTrashFolder}
-                    >
-                      {sectionHeaderContent
-                        ? sectionHeaderContent.props.children
+                  {isSectionHeaderAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionHeader
+                        className="section-body_header"
+                        isHeaderVisible={isHeaderVisible}
+                        viewAs={viewAs}
+                        showText={showText}
+                        settingsStudio={settingsStudio}
+                        isEmptyPage={isEmptyPage}
+                        isTrashFolder={isTrashFolder}
+                        isFormGallery={isFormGallery}
+                      >
+                        {sectionHeaderContent
+                          ? sectionHeaderContent.props.children
+                          : null}
+                      </SubSectionHeader>
+                    )}
+                  {currentDeviceType !== DeviceType.desktop && (
+                    <SectionWarning>
+                      {sectionWarningContent
+                        ? sectionWarningContent.props.children
                         : null}
-                    </SubSectionHeader>
+                    </SectionWarning>
                   )}
-                  {isSectionFilterAvailable && isMobile && (
-                    <SubSectionFilter className="section-body_filter">
-                      {sectionFilterContent
-                        ? sectionFilterContent.props.children
-                        : null}
-                    </SubSectionFilter>
-                  )}
+                  {isSectionFilterAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionFilter className="section-body_filter">
+                        {sectionFilterContent
+                          ? sectionFilterContent.props.children
+                          : null}
+                      </SubSectionFilter>
+                    )}
                   <SubSectionBodyContent>
                     {sectionBodyContent
                       ? sectionBodyContent.props.children
@@ -243,9 +263,9 @@ const Section = (props) => {
               </>
             )}
 
-            {!(isMobile || isMobileUtils() || isTabletUtils()) ? (
-              showPrimaryProgressBar && showSecondaryProgressBar ? (
-                <>
+            {currentDeviceType === DeviceType.desktop ? (
+              showTwoProgress ? (
+                <div className="progress-bar_container">
                   <FloatingButton
                     className="layout-progress-bar"
                     icon={primaryProgressBarIcon}
@@ -259,27 +279,29 @@ const Section = (props) => {
                     icon={secondaryProgressBarIcon}
                     percent={secondaryProgressBarValue}
                     alert={showSecondaryButtonAlert}
-                    showTwoProgress={
-                      showPrimaryProgressBar && showSecondaryProgressBar
-                    }
+                    showTwoProgress={showTwoProgress}
                   />
-                </>
+                </div>
               ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
+                <div className="progress-bar_container">
+                  <FloatingButton
+                    className="layout-progress-bar"
+                    icon={primaryProgressBarIcon}
+                    percent={primaryProgressBarValue}
+                    alert={showPrimaryButtonAlert}
+                    onClick={onOpenUploadPanel}
+                    clearUploadedFilesHistory={clearUploadedFilesHistory}
+                  />
+                </div>
               ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                />
+                <div className="progress-bar_container">
+                  <FloatingButton
+                    className="layout-progress-bar"
+                    icon={secondaryProgressBarIcon}
+                    percent={secondaryProgressBarValue}
+                    alert={showSecondaryButtonAlert}
+                  />
+                </div>
               ) : (
                 <></>
               )
@@ -339,6 +361,11 @@ Section.InfoPanelHeader = () => {
 };
 Section.InfoPanelHeader.displayName = "InfoPanelHeader";
 
+Section.SectionWarning = () => {
+  return null;
+};
+Section.SectionWarning.displayName = "SectionWarning";
+
 Section.propTypes = {
   children: PropTypes.any,
   withBodyScroll: PropTypes.bool,
@@ -376,12 +403,10 @@ export default inject(({ auth }) => {
     maintenanceExist,
     snackbarExist,
     showText,
+    currentDeviceType,
   } = settingsStore;
 
-  const {
-    isVisible: isInfoPanelVisible,
-    isScrollLocked: isInfoPanelScrollLocked,
-  } = auth.infoPanelStore;
+  const { isScrollLocked: isInfoPanelScrollLocked } = auth.infoPanelStore;
 
   return {
     isTabletView,
@@ -392,7 +417,7 @@ export default inject(({ auth }) => {
 
     showText,
 
-    isInfoPanelVisible,
     isInfoPanelScrollLocked,
+    currentDeviceType,
   };
 })(observer(Section));

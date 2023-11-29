@@ -6,7 +6,7 @@ import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
 import { StyledScheduleComponent } from "../../StyledBackup";
 import { AutoBackupPeriod } from "@docspace/common/constants";
-import { isMobileOnly } from "react-device-detect";
+
 import HelpButton from "@docspace/components/help-button";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
@@ -67,9 +67,10 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
+          scaledOptions
           className="schedule-backup_combobox days_option"
           showDisabledItems
+          directionY="both"
         />
         {weeklySchedule && (
           <ComboBox
@@ -81,11 +82,12 @@ const ScheduleComponent = ({
             onSelect={setWeekday}
             isDisabled={isLoadingData}
             noBorder={false}
-            scaled={false}
-            scaledOptions={true}
-            dropDownMaxHeight={400}
+            scaled
+            scaledOptions
+            dropDownMaxHeight={300}
             className="schedule-backup_combobox weekly_option"
             showDisabledItems
+            directionY="both"
           />
         )}
         {monthlySchedule && (
@@ -99,10 +101,11 @@ const ScheduleComponent = ({
             isDisabled={isLoadingData}
             noBorder={false}
             scaled={false}
-            scaledOptions={true}
-            dropDownMaxHeight={400}
+            scaledOptions
+            dropDownMaxHeight={300}
             className="schedule-backup_combobox month_options"
             showDisabledItems
+            directionY="both"
           />
         )}
         <ComboBox
@@ -115,10 +118,11 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
-          dropDownMaxHeight={isMobileOnly ? 100 : 200}
+          scaledOptions
+          dropDownMaxHeight={300}
           className="schedule-backup_combobox time_options"
           showDisabledItems
+          directionY="both"
         />
       </div>
       <div className="maxCopiesOption">
@@ -134,10 +138,11 @@ const ScheduleComponent = ({
           isDisabled={isLoadingData}
           noBorder={false}
           scaled={false}
-          scaledOptions={true}
-          dropDownMaxHeight={isMobileOnly ? 100 : 200}
+          scaledOptions
+          dropDownMaxHeight={300}
           className="schedule-backup_combobox max_copies"
           showDisabledItems
+          directionY="both"
         />
       </div>
     </StyledScheduleComponent>

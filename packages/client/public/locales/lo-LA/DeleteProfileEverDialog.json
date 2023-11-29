@@ -1,4 +1,5 @@
 {
   "DeleteUser": "ລຶບຜູ້ໃຊ້",
+  "DeleteGroupUsersSuccessMessage": "ຢູເຊີ້ນີ້ມີແລ້ວ.",
   "SuccessfullyDeleteUserInfoMessage": "ຜູ້ໃຊ້ຖືກລຶບອອກແລ້ວ"
 }

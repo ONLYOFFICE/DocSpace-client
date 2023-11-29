@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Scrollbar from "@docspace/components/scrollbar";
 import Link from "@docspace/components/link";
 import { desktop, mobile, tablet } from "@docspace/components/utils/device";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
 
 const PanelStyles = css`
@@ -103,7 +103,7 @@ const StyledAsidePanel = styled.div`
     transform: translateX(${(props) => (props.visible ? "0" : "500px")});
     width: 500px;
 
-    @media (max-width: 550px) {
+    @media ${mobile} {
       width: 320px;
       transform: translateX(${(props) => (props.visible ? "0" : "320px")});
     }
@@ -125,7 +125,6 @@ const StyledVersionHistoryPanel = styled.div`
   }
 
   .version-history-panel-header {
-    margin-bottom: 12px;
     height: 53px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -316,7 +315,7 @@ const StyledHeaderContent = styled.div`
     .files-operations-header,
     .sharing_panel-header {
       margin: 12px 0;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 `;
@@ -371,7 +370,7 @@ const StyledBody = styled.div`
         .combo-button-label {
           max-width: 435px;
 
-          @media (max-width: 550px) {
+          @media ${mobile} {
             width: 255px;
           }
         }
@@ -381,7 +380,7 @@ const StyledBody = styled.div`
         .option_checkbox {
           width: 440px;
 
-          @media (max-width: 550px) {
+          @media ${mobile} {
             width: 265px;
           }
         }
@@ -453,7 +452,7 @@ const StyledSharingBody = styled(Scrollbar)`
   .sharing_panel-text {
     line-height: 24px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
   }
 
   .sharing_panel-link {
@@ -564,13 +563,13 @@ const StyledSharingBody = styled(Scrollbar)`
       //padding-right: 15px;
 
       .sharing_panel-remove-icon {
-        font-size: 12px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       }
     }
 
     .sharing_panel-text,
     .sharing_panel-link span {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }
   }
 
@@ -596,7 +595,7 @@ const StyledFooter = styled.div`
   .sharing_panel-checkbox {
     span {
       font-weight: 600;
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     }
 
     .checkbox {
@@ -642,7 +641,7 @@ const StyledFooter = styled.div`
 
     .sharing_panel-checkbox {
       span {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       }
     }
 
@@ -897,7 +896,7 @@ const StyledModalRowContainer = styled.div`
           `}
   }
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     .row_content {
       height: 19px;
       overflow: initial;

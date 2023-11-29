@@ -8,6 +8,8 @@ import { withTranslation } from "react-i18next";
 import Filter from "@docspace/common/api/people/filter";
 import { EmployeeType, ShareAccessRights } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
+import { DeviceType } from "@docspace/common/constants";
+import Portal from "@docspace/components/portal";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -51,6 +53,10 @@ const ChangeRoomOwner = (props) => {
     removeFiles,
     folders,
     setFolders,
+    currentDeviceType,
+    roomOwnerId,
+    isRootFolder,
+    setCreatedBy,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -90,17 +96,17 @@ const ChangeRoomOwner = (props) => {
       });
   };
 
-  const onChangeRoomOwner = (
-    user,
-    selectedAccess,
-    newFooterInputValue,
-    isChecked
-  ) => {
+  const onChangeRoomOwner = (user, isChecked) => {
     setIsLoading(true);
 
     setRoomOwner(user[0].id, [roomId])
       .then(async (res) => {
-        setFolder(res[0]);
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+        }
+
         if (isChecked) await onLeaveRoom();
         else toastr.success(t("Files:AppointNewOwner"));
         setRoomParams && setRoomParams(res[0].createdBy);
@@ -124,7 +130,7 @@ const ChangeRoomOwner = (props) => {
 
   const backClickProp = showBackButton ? { onBackClick } : {};
 
-  return (
+  const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
       <Backdrop
         onClick={onClose}
@@ -133,6 +139,7 @@ const ChangeRoomOwner = (props) => {
         isAside={true}
       />
       <Aside
+        currentDeviceType={currentDeviceType}
         className="header_aside-panel"
         visible={visible}
         onClose={onClose}
@@ -150,9 +157,17 @@ const ChangeRoomOwner = (props) => {
           withFooterCheckbox={!showBackButton}
           footerCheckboxLabel={t("Files:LeaveTheRoom")}
           isChecked={!showBackButton}
+          withOutCurrentAuthorizedUser
+          filterUserId={roomOwnerId}
         />
       </Aside>
     </StyledChangeRoomOwner>
+  );
+
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal visible={visible} element={asideComponent} />
+  ) : (
+    asideComponent
   );
 };
 
@@ -163,6 +178,8 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
+    const { settingsStore } = auth;
+
     const { user } = auth.userStore;
     const {
       setRoomOwner,
@@ -175,11 +192,13 @@ export default inject(
       setFolders,
     } = filesStore;
 
-    const roomId = selection.length
-      ? selection[0].id
+    const room = selection.length
+      ? selection[0]
       : bufferSelection
-      ? bufferSelection.id
-      : selectedFolderStore.id;
+      ? bufferSelection
+      : selectedFolderStore;
+
+    const { currentDeviceType } = settingsStore;
 
     return {
       visible: changeRoomOwnerIsVisible,
@@ -188,13 +207,17 @@ export default inject(
       setRoomParams: changeRoomOwnerData.setRoomParams,
       setRoomOwner,
       userId: user.id,
-      roomId,
+      roomId: room.id,
+      roomOwnerId: room?.createdBy?.id,
+      isRootFolder: selectedFolderStore.isRootFolder,
+      setCreatedBy: selectedFolderStore.setCreatedBy,
       setFolder,
       updateRoomMemberRole,
       isAdmin: user.isOwner || user.isAdmin,
       removeFiles,
       folders,
       setFolders,
+      currentDeviceType,
     };
   }
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

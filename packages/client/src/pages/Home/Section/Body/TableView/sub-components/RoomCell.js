@@ -39,7 +39,7 @@ const RoomCell = ({ sideColor, item }) => {
       data-tooltip-id={"" + item.id}
       data-tip={""}
     >
-      {originRoomTitle || originTitle || "—"}
+      {originRoomTitle || originTitle || ""}
     </StyledText>,
 
     <Tooltip

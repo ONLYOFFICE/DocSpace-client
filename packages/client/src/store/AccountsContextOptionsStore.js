@@ -14,7 +14,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import { makeAutoObservable } from "mobx";
 import toastr from "@docspace/components/toast/toastr";
@@ -74,7 +74,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: ChangeMailReactSvgUrl,
             label: t("PeopleTranslations:EmailChangeButton"),
-            onClick: this.toggleChangeEmailDialog,
+            onClick: () => this.toggleChangeEmailDialog(item),
           };
         case "change-password":
           return {
@@ -137,7 +137,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: TrashReactSvgUrl,
             label: t("DeleteProfileEverDialog:DeleteUser"),
-            onClick: () => this.toggleDeleteProfileEverDialog(item),
+            onClick: () => this.toggleDeleteProfileEverDialog([item]),
           };
 
         case "details":
@@ -317,8 +317,11 @@ class AccountsContextOptionsStore {
     setChangeNameVisible(true);
   };
 
-  toggleChangeEmailDialog = () => {
-    const { setChangeEmailVisible } = this.peopleStore.targetUserStore;
+  toggleChangeEmailDialog = (item) => {
+    const { setDialogData, setChangeEmailVisible } =
+      this.peopleStore.dialogStore;
+
+    setDialogData(item);
     setChangeEmailVisible(true);
   };
 

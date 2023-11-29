@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
+import { tablet } from "@docspace/components/utils/device";
 
 const truncateCss = css`
   white-space: nowrap;
@@ -11,7 +12,7 @@ const truncateCss = css`
 const commonCss = css`
   margin: 0;
   font-family: "Open Sans";
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   font-style: normal;
   font-weight: 600;
 `;
@@ -36,7 +37,7 @@ const MainContainerWrapper = styled.div`
 const MainContainer = styled.div`
   height: 20px;
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     ${truncateCss};
   }
 `;

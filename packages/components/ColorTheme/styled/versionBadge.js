@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
+import Box from "../../box";
 
-const getDefaultStyles = ({ $currentColorScheme, $isVersion, theme, index }) =>
+const getDefaultStyles = ({ $currentColorScheme, $isVersion, theme }) =>
   $currentColorScheme &&
   css`
     .version-mark-icon {
@@ -17,7 +17,7 @@ const getDefaultStyles = ({ $currentColorScheme, $isVersion, theme, index }) =>
     }
 
     .version_badge-text {
-      color: ${$isVersion && index !== 0 && $currentColorScheme.text.accent};
+      color: ${$isVersion && $currentColorScheme.text.accent};
     }
   `;
 

@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import AlertComponent from "../../AlertComponent";
-import Loaders from "../../Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 
 const ArticleTeamTrainingAlert = ({
@@ -19,7 +19,7 @@ const ArticleTeamTrainingAlert = ({
     removeAlertFromArticleAlertsData(ARTICLE_ALERTS.TeamTraining);
 
   return isShowLoader ? (
-    <Loaders.Rectangle width="210px" height="88px" />
+    <RectangleSkeleton width="210px" height="88px" />
   ) : (
     <AlertComponent
       titleColor={theme.catalog.teamTrainingAlert.titleColor}

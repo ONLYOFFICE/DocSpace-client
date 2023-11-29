@@ -1,13 +1,5 @@
-﻿import CommonSettingsSvgUrl from "PUBLIC_DIR/images/common-settings.svg?url";
+﻿import { PageType } from "@docspace/common/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
-import SecuritySettingsIconUrl from "PUBLIC_DIR/images/security-settings.svg?url";
-import IntegrationSettingsIconUrl from "PUBLIC_DIR/images/integration-settings.svg?url";
-import PaymentIconUrl from "PUBLIC_DIR/images/payment.react.svg?url";
-import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?url";
-import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
-import TrashIconUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 /**
  * Array for generation current settings tree.
  */
@@ -16,7 +8,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-customization",
     key: "0",
-    icon: CommonSettingsSvgUrl,
+    type: PageType.customization,
     link: "customization",
     tKey: "Customization",
     isHeader: true,
@@ -112,7 +104,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-security",
     key: "1",
-    icon: SecuritySettingsIconUrl,
+    type: PageType.security,
     link: "security",
     tKey: "ManagementCategorySecurity",
     isHeader: true,
@@ -130,7 +122,7 @@ export const settingsTree = [
             key: "1-0-0",
             icon: "",
             link: "password",
-            tKey: "SettingPasswordStrength",
+            tKey: "SettingPasswordTittle",
           },
           {
             id: "portal-settings_catalog-two-factor-auth",
@@ -213,7 +205,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-backup",
     key: "2",
-    icon: DataManagementIconUrl,
+    type: PageType.backup,
     link: "backup",
     tKey: "Backup",
     isHeader: true,
@@ -239,7 +231,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-restore",
     key: "3",
-    icon: RestoreIconUrl,
+    type: PageType.restore,
     link: "restore",
     tKey: "RestoreBackup",
     isHeader: true,
@@ -256,7 +248,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-integration",
     key: "4",
-    icon: IntegrationSettingsIconUrl,
+    type: PageType.integration,
     link: "integration",
     tKey: "ManagementCategoryIntegration",
     isHeader: true,
@@ -322,7 +314,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-portal-statistics",
     key: "5",
-    icon: DeveloperReactSvgUrl,
+    type: PageType.developerTools,
     link: "management",
     tKey: "StorageManagement",
     isHeader: true,
@@ -378,19 +370,19 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-webhooks",
+        id: "portal-settings_catalog-plugin-sdk",
         key: "5-2",
         icon: "",
-        link: "webhooks",
-        tKey: "DeveloperTools",
+        link: "plugin-sdk",
+        tKey: "PluginSDK",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-plugins",
-        key: "5-1",
+        id: "portal-settings_catalog-webhooks",
+        key: "5-3",
         icon: "",
-        link: "plugins",
-        tKey: "Plugins",
+        link: "webhooks",
+        tKey: "DeveloperTools",
         isCategory: true,
       },
     ],
@@ -398,7 +390,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-delete",
     key: "7",
-    icon: TrashIconUrl,
+    type: PageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
@@ -422,7 +414,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-payments",
     key: "8",
-    icon: PaymentIconUrl,
+    type: PageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
@@ -440,7 +432,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-bonus",
     key: "8",
-    icon: GiftReactSvgUrl,
+    type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
     isHeader: true,

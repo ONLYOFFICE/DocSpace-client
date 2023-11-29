@@ -31,13 +31,45 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
-
-  socketSubscribersId = new Set();
+  inRoom = true;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
   }
+
+  getSelectedFolder = () => {
+    return {
+      folders: this.folders,
+      parentId: this.parentId,
+      filesCount: this.filesCount,
+      foldersCount: this.foldersCount,
+      isShareable: this.isShareable,
+      new: this.new,
+      id: this.id,
+      title: this.title,
+      access: this.access,
+      shared: this.shared,
+      created: this.created,
+      createdBy: this.createdBy,
+      updated: this.updated,
+      updatedBy: this.updatedBy,
+      rootFolderType: this.rootFolderType,
+      pathParts: this.pathParts,
+      navigationPath: this.navigationPath,
+      providerItem: this.providerItem,
+      providerKey: this.providerKey,
+      providerId: this.providerId,
+      roomType: this.roomType,
+      pinned: this.pinned,
+      isRoom: this.isRoom,
+      logo: this.logo,
+      tags: this.tags,
+      rootFolderId: this.rootFolderId,
+      security: this.security,
+      inRoom: this.inRoom,
+    };
+  };
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
@@ -71,11 +103,19 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
-    this.socketSubscribersId = new Set();
+    this.inRoom = true;
   };
 
   setParentId = (parentId) => {
     this.parentId = parentId;
+  };
+
+  setRoomType = (roomType) => {
+    this.roomType = roomType;
+  };
+
+  setCreatedBy = (createdBy) => {
+    this.createdBy = createdBy;
   };
 
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
@@ -115,14 +155,6 @@ class SelectedFolderStore {
     };
   };
 
-  addSocketSubscribersId = (path) => {
-    this.socketSubscribersId.add(path);
-  };
-
-  deleteSocketSubscribersId = (path) => {
-    this.socketSubscribersId.delete(path);
-  };
-
   setSelectedFolder = (selectedFolder) => {
     const { socketHelper } = this.settingsStore;
 
@@ -131,8 +163,6 @@ class SelectedFolderStore {
         command: "unsubscribe",
         data: { roomParts: `DIR-${this.id}`, individual: true },
       });
-
-      this.deleteSocketSubscribersId(`DIR-${this.id}`);
     }
 
     if (selectedFolder) {
@@ -140,8 +170,6 @@ class SelectedFolderStore {
         command: "subscribe",
         data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
       });
-
-      this.addSocketSubscribersId(`DIR-${selectedFolder.id}`);
     }
 
     if (!selectedFolder) {

@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +18,7 @@ const ChangeQuotaDialog = (props) => {
     onSetQuotaBytesSize,
     isError,
     isLoading,
-    defaultRoomsQuota,
+    initialSize,
   } = props;
   const { t } = useTranslation("Common");
   return (
@@ -37,7 +36,7 @@ const ChangeQuotaDialog = (props) => {
           onSetQuotaBytesSize={onSetQuotaBytesSize}
           isLoading={isLoading}
           isError={isError}
-          initialSize={defaultRoomsQuota}
+          initialSize={initialSize}
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -61,16 +60,12 @@ const ChangeQuotaDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ dialogsStore }) => {
   const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
     dialogsStore;
-  const { setUserQuota, defaultRoomsQuota } = currentQuotaStore;
 
   return {
-    setUserQuota,
     changeQuotaDialogVisible,
     setChangeQuotaDialogVisible,
-    defaultRoomsQuota,
   };
 })(observer(ChangeQuotaDialog));

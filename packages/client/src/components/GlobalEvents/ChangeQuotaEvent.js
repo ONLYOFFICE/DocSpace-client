@@ -18,6 +18,7 @@ const ChangeQuotaEvent = (props) => {
     updateRoomQuota,
     successCallback,
     abortCallback,
+    initialSize,
   } = props;
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
@@ -80,17 +81,19 @@ const ChangeQuotaEvent = (props) => {
       headerTitle={headerTitle}
       isError={isError}
       isLoading={isLoading}
+      initialSize={initialSize}
     />
   );
 };
 
-export default inject(({ peopleStore, filesStore }) => {
+export default inject(({ peopleStore, filesStore, auth }, { type }) => {
   const { usersStore } = peopleStore;
   const { updateUserQuota } = usersStore;
   const { updateRoomQuota } = filesStore;
+  const { currentQuotaStore } = auth;
+  const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
 
-  return {
-    updateUserQuota,
-    updateRoomQuota,
-  };
+  const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+
+  return { initialSize, updateUserQuota, updateRoomQuota };
 })(observer(ChangeQuotaEvent));

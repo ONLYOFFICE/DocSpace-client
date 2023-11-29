@@ -149,7 +149,8 @@ class UsersStore {
 
     return users;
   };
-  updateUserQuota = async (quotaSize, userIds) => {
+
+  setCustomUserQuota = async (quotaSize, userIds) => {
     const filter = this.peopleStore.filterStore.filter;
     const users = await api.people.setCustomUserQuota(userIds, quotaSize);
 

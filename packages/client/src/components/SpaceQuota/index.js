@@ -19,7 +19,7 @@ const SpaceQuota = (props) => {
     changeQuota,
     onSuccess,
     onAbort,
-    disableQuota,
+    updateQuota,
     resetQuota,
     defaultSize,
   } = props;
@@ -88,7 +88,7 @@ const SpaceQuota = (props) => {
       });
 
       try {
-        const users = await disableQuota(-1, [item.id]);
+        const users = await updateQuota(-1, [item.id]);
         successCallback(users);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
@@ -151,7 +151,7 @@ const SpaceQuota = (props) => {
 export default inject(
   ({ peopleStore, filesActionsStore, filesStore, auth }, { type }) => {
     const { changeUserQuota, usersStore } = peopleStore;
-    const { updateUserQuota, resetUserQuota } = usersStore;
+    const { setCustomUserQuota, resetUserQuota } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const { updateRoomQuota } = filesStore;
     const { currentQuotaStore } = auth;
@@ -163,7 +163,7 @@ export default inject(
     } = currentQuotaStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
-    const disableQuota = type === "user" ? updateUserQuota : updateRoomQuota;
+    const updateQuota = type === "user" ? setCustomUserQuota : updateRoomQuota;
 
     const resetQuota = type === "user" ? resetUserQuota : null;
 
@@ -175,7 +175,7 @@ export default inject(
     return {
       withoutLimitQuota,
       changeQuota,
-      disableQuota,
+      updateQuota,
       resetQuota,
       defaultSize,
     };

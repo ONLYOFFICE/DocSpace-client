@@ -149,42 +149,50 @@ const ClientForm = ({
 
     if (scopeList?.length === 0) actions.push(fetchScopes());
 
-    const [fetchedClient, ...rest] = await Promise.all(actions);
+    try {
+      const [fetchedClient, ...rest] = await Promise.all(actions);
 
-    if (id) {
-      setForm({
-        name: fetchedClient?.name || client?.name || "",
-        logo: fetchedClient?.logo || client?.logo || "",
-        website_url: fetchedClient?.websiteUrl || client?.websiteUrl || "",
-        description: fetchedClient?.description || client?.description || "",
+      if (id) {
+        setForm({
+          name: fetchedClient?.name || client?.name || "",
+          logo: fetchedClient?.logo || client?.logo || "",
+          website_url: fetchedClient?.websiteUrl || client?.websiteUrl || "",
+          description: fetchedClient?.description || client?.description || "",
 
-        redirect_uris:
-          fetchedClient?.redirectUris || client?.redirectUris || [],
-        allowed_origins:
-          fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
-        logout_redirect_uri:
-          fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
+          redirect_uris:
+            fetchedClient?.redirectUris || client?.redirectUris || [],
+          allowed_origins:
+            fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
+          logout_redirect_uri:
+            fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
-        terms_url: fetchedClient?.termsUrl || client?.termsUrl || "",
-        policy_url: fetchedClient?.policyUrl || client?.policyUrl || "",
+          terms_url: fetchedClient?.termsUrl || client?.termsUrl || "",
+          policy_url: fetchedClient?.policyUrl || client?.policyUrl || "",
 
-        authentication_method:
-          fetchedClient?.authenticationMethod ||
-          client?.authenticationMethod ||
-          AuthenticationMethod.client_secret_post,
+          authentication_method:
+            fetchedClient?.authenticationMethod ||
+            client?.authenticationMethod ||
+            AuthenticationMethod.client_secret_post,
 
-        scopes: fetchedClient?.scopes || client?.scopes || [],
-      });
+          scopes: fetchedClient?.scopes || client?.scopes || [],
+        });
 
-      setClientId(fetchedClient?.clientId || client?.clientId || "");
-      setClientSecret(
-        fetchedClient?.clientSecret || client?.clientSecret || ""
-      );
+        setClientId(fetchedClient?.clientId || client?.clientId || "");
+        setClientSecret(
+          fetchedClient?.clientSecret || client?.clientSecret || ""
+        );
 
-      setInitialClient(client || fetchedClient || ({} as IClientProps));
+        setInitialClient(client || fetchedClient || ({} as IClientProps));
+      }
+
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+
+      console.log("11");
+
+      console.log(e);
     }
-
-    setIsLoading(false);
   }, [id, fetchScopes]);
 
   React.useEffect(() => {

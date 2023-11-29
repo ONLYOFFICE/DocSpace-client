@@ -22,6 +22,9 @@ import {
   IScope,
 } from "@docspace/common/utils/oauth/interfaces";
 
+//@ts-ignore
+import toastr from "@docspace/components/toast/toastr";
+
 import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
@@ -223,6 +226,7 @@ class OAuthStore implements OAuthStoreProps {
 
       return client;
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -245,6 +249,7 @@ class OAuthStore implements OAuthStoreProps {
       });
       this.setClientsIsLoading(false);
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -257,6 +262,7 @@ class OAuthStore implements OAuthStoreProps {
         this.consents = [...consentList];
       });
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -302,6 +308,7 @@ class OAuthStore implements OAuthStoreProps {
         ];
       });
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -322,6 +329,7 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -338,6 +346,7 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -348,6 +357,7 @@ class OAuthStore implements OAuthStoreProps {
 
       return client_secret;
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -371,6 +381,7 @@ class OAuthStore implements OAuthStoreProps {
 
       this.setActiveClient("");
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -381,6 +392,7 @@ class OAuthStore implements OAuthStoreProps {
 
       return scope;
     } catch (e) {
+      toastr.error(e);
       console.log(e);
 
       return {} as IScope;
@@ -393,6 +405,7 @@ class OAuthStore implements OAuthStoreProps {
 
       this.scopes = scopes;
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -416,6 +429,7 @@ class OAuthStore implements OAuthStoreProps {
 
       this.setActiveClient("");
     } catch (e) {
+      toastr.error(e);
       console.log(e);
     }
   };
@@ -522,7 +536,9 @@ class OAuthStore implements OAuthStoreProps {
 
           this.setActiveClient("");
           this.setSelection("");
-        } catch (e) {}
+        } catch (e) {
+          toastr.error(e);
+        }
       } else {
         this.setActiveClient(clientId);
 

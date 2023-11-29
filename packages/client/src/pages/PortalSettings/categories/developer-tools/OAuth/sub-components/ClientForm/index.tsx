@@ -208,11 +208,11 @@ const ClientForm = ({
             ) {
               isValid = false;
 
-              nameTimer.current = setTimeout(() => {
+              return (nameTimer.current = setTimeout(() => {
                 setErrorFields((value) => {
                   return [...value, key];
                 });
-              }, 300);
+              }, 300));
             }
 
             if (
@@ -224,7 +224,11 @@ const ClientForm = ({
               });
               if (nameTimer.current) clearTimeout(nameTimer.current);
               nameTimer.current = null;
+
+              return;
             }
+
+            isValid = !errorFields.includes(key);
 
             break;
         }
@@ -270,6 +274,8 @@ const ClientForm = ({
             if (nameTimer.current) clearTimeout(nameTimer.current);
             nameTimer.current = null;
           }
+
+          isValid = errorFields.includes(key);
 
           break;
         case "logo":

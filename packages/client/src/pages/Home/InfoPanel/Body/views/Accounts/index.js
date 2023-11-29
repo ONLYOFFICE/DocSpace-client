@@ -223,6 +223,7 @@ const Accounts = ({
             item={selection}
             className="type-combobox"
             onSuccess={onSuccess}
+            onAbort={onAbort}
           />
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>

@@ -18,6 +18,7 @@ const SpaceQuota = (props) => {
     className,
     changeQuota,
     onSuccess,
+    onAbort,
     disableQuota,
     resetQuota,
     defaultSize,
@@ -68,6 +69,7 @@ const SpaceQuota = (props) => {
   };
 
   const abortCallback = () => {
+    onAbort && onAbort();
     setIsLoading(false);
   };
 
@@ -86,9 +88,11 @@ const SpaceQuota = (props) => {
       });
 
       try {
-        await disableQuota(-1, [item.id]);
+        const users = await disableQuota(-1, [item.id]);
+        successCallback(users);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
+        abortCallback();
         toastr.error(e);
       }
 
@@ -100,9 +104,11 @@ const SpaceQuota = (props) => {
     });
 
     try {
-      await resetQuota([item.id]);
+      const users = await resetQuota([item.id]);
+      successCallback(users);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
+      abortCallback();
       toastr.error(e);
     }
   };

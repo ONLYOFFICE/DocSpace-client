@@ -4,6 +4,7 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import { ShareAccessRights } from "@docspace/common/constants";
 
 export const getShareOptions = (t) => {
   return [
@@ -23,33 +24,33 @@ export const getShareOptions = (t) => {
 export const getAccessOptions = (t) => {
   return [
     {
-      access: 10,
+      access: ShareAccessRights.Editing,
       key: "editing",
-      label: "Editing",
+      label: t("Editing"),
       icon: AccessEditReactSvgUrl,
     },
     {
-      access: 8,
+      access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
-      label: "Custom filter",
+      label: t("CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
     {
-      access: 6,
+      access: ShareAccessRights.Comment,
       key: "commenting",
-      label: "Commenting",
+      label: t("Comment"),
       icon: AccessCommentReactSvgUrl,
     },
     {
-      access: 2,
+      access: ShareAccessRights.ReadOnly,
       key: "viewing",
-      label: "Viewing",
+      label: t("ReadOnly"),
       icon: EyeReactSvgUrl,
     },
     {
-      access: 3,
+      access: ShareAccessRights.DenyAccess,
       key: "deny-access",
-      label: "Deny access",
+      label: t("DenyAccess"),
       icon: EyeOffReactSvgUrl,
     },
     {
@@ -57,20 +58,47 @@ export const getAccessOptions = (t) => {
       isSeparator: true,
     },
     {
-      access: 0,
+      access: ShareAccessRights.None,
       key: "remove",
-      label: "Remove",
+      label: t("Translations:Remove"),
       icon: RemoveReactSvgUrl,
     },
   ];
 };
 
-export const getExpiredOptions = (t) => {
+export const getExpiredOptions = (
+  t,
+  setTwelveHours,
+  setOneDay,
+  setSevenDays,
+  setUnlimited,
+  onCalendarOpen
+) => {
   return [
-    { key: "halfday", label: t("Common:TwelveHours") },
-    { key: "oneday", label: t("Common:OneDay") },
-    { key: "sevendays", label: t("Common:SevenDays") },
-    { key: "unlimited", label: t("Common:Unlimited") },
-    { key: "custom", label: t("Settings:Custom") },
+    {
+      key: "twelvehours",
+      label: `12 ${t("Common:Hours")}`,
+      onClick: () => setTwelveHours(),
+    },
+    {
+      key: "oneday",
+      label: `1 ${t("Common:Day")}`,
+      onClick: () => setOneDay(),
+    },
+    {
+      key: "sevendays",
+      label: `7 ${t("Common:Days")}`,
+      onClick: () => setSevenDays(),
+    },
+    {
+      key: "unlimited",
+      label: t("Common:Unlimited"),
+      onClick: () => setUnlimited(),
+    },
+    {
+      key: "custom",
+      label: t("Settings:Custom"),
+      onClick: () => onCalendarOpen(),
+    },
   ];
 };

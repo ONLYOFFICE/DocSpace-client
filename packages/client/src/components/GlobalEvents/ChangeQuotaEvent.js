@@ -19,6 +19,7 @@ const ChangeQuotaEvent = (props) => {
     successCallback,
     abortCallback,
     initialSize,
+    filter,
   } = props;
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +32,7 @@ const ChangeQuotaEvent = (props) => {
 
   const updateFunction = (size) => {
     return type === "user"
-      ? updateUserQuota(size, ids)
+      ? updateUserQuota(size, ids, filter)
       : updateRoomQuota(size, ids);
   };
   const onSaveClick = async () => {
@@ -87,13 +88,14 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(({ peopleStore, filesStore, auth }, { type }) => {
-  const { usersStore } = peopleStore;
+  const { usersStore, filterStore } = peopleStore;
   const { updateUserQuota } = usersStore;
   const { updateRoomQuota } = filesStore;
   const { currentQuotaStore } = auth;
   const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+  const filter = type === "user" ? filterStore.filter : null;
 
-  return { initialSize, updateUserQuota, updateRoomQuota };
+  return { initialSize, updateUserQuota, updateRoomQuota, filter };
 })(observer(ChangeQuotaEvent));

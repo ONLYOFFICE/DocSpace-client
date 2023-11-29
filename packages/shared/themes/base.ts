@@ -4,6 +4,19 @@ import { globalColors } from "../constants";
 
 import { CommonTheme } from "./commonTheme";
 
+export type TColorScheme = {
+  id: string | number;
+  main: {
+    accent: string;
+    buttons: string;
+  };
+  name: string;
+  text: {
+    accent: string;
+    buttons: string;
+  };
+};
+
 const {
   black,
   white,
@@ -3186,4 +3199,6 @@ const Base = getBaseTheme();
 
 export default Base;
 
-export type ThemeType = ReturnType<typeof getBaseTheme>;
+export type ThemeType = ReturnType<typeof getBaseTheme> & {
+  currentColorScheme?: TColorScheme;
+};

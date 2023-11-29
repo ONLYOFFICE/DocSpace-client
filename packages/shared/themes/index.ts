@@ -1,4 +1,4 @@
-import Base, { ThemeType } from "./base";
+import Base, { ThemeType, TColorScheme } from "./base";
 import Dark from "./dark";
 
-export { Base, Dark, ThemeType };
+export { Base, Dark, ThemeType, TColorScheme };

@@ -23,17 +23,10 @@ const StyledTableRow = styled(TableRow)`
 
 const NOT_EXIST = "—";
 
-const UsersTableRow = ({
-  t,
-  displayName,
-  email,
-  isDuplicate,
-  isChecked,
-  toggleAccount,
-}) => {
+const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
-      <TableCell>
+      <TableCell className="checkboxWrapper">
         <Checkbox onChange={toggleAccount} isChecked={isChecked} />
         <Text fontWeight={600} className="textOverflow">
           {displayName}
@@ -41,11 +34,7 @@ const UsersTableRow = ({
       </TableCell>
 
       <TableCell>
-        <Text
-          fontWeight={600}
-          color="#a3a9ae"
-          className="user-email textOverflow"
-        >
+        <Text fontWeight={600} color="#a3a9ae" className="user-email textOverflow">
           {email}
         </Text>
       </TableCell>

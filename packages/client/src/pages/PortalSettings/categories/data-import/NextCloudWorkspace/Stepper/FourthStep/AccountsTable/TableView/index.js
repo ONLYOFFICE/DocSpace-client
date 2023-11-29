@@ -1,25 +1,24 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
 import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import { Base } from "@docspace/components/themes";
+
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 
+import { StyledTableContainer } from "../../../StyledStepper";
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-const StyledTableContainer = styled(TableContainer)`
-  margin: 0 0 20px;
-
+const UserSelectTableContainer = styled(StyledTableContainer)`
   .table-group-menu {
     height: 69px;
     position: absolute;
@@ -27,13 +26,14 @@ const StyledTableContainer = styled(TableContainer)`
     left: 0px;
     width: 100%;
 
-    margin-top: -37.5px;
+    margin-top: -32.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
       border-bottom: ${(props) => props.theme.client.settings.migration.workspaceBorder};
       box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      padding: 0px 28px;
     }
 
     .table-container_group-menu-checkbox {
@@ -44,35 +44,9 @@ const StyledTableContainer = styled(TableContainer)`
       margin: 0 16px;
     }
   }
-
-  .header-container-text {
-    font-size: 12px;
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .table-list-item {
-    margin-top: -1px;
-    &:hover {
-      cursor: pointer;
-      background: ${(props) => props.theme.client.settings.migration.tableRowHoverColor};
-    }
-  }
-
-  .clear-icon {
-    margin-right: 8px;
-    margin-top: 2px;
-  }
-
-  .ec-desc {
-    max-width: 618px;
-  }
 `;
 
-StyledTableContainer.defaultProps = { theme: Base };
+UserSelectTableContainer.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
@@ -96,6 +70,7 @@ const TableView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   } = props;
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
@@ -111,14 +86,11 @@ const TableView = (props) => {
     setSearchValue("");
   };
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const headerMenu = [
     {
@@ -133,7 +105,7 @@ const TableView = (props) => {
   ];
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+    <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
       {checkedUsers.result.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
@@ -208,13 +180,14 @@ const TableView = (props) => {
           }
         />
       )}
-    </StyledTableContainer>
+    </UserSelectTableContainer>
   );
 };
 
 export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
   const {
     users,
     checkedUsers,
@@ -235,5 +208,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(TableView));

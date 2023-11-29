@@ -53,6 +53,7 @@ const FourthStep = (props) => {
 
       <SearchInput
         id="search-checkedUsers-type-input"
+        className="importUsersSearch"
         placeholder={t("Common:Search")}
         value={searchValue}
         onChange={onChangeInput}

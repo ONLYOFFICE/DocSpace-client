@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
@@ -85,7 +85,7 @@ const UsersTableRow = ({
 
   return (
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
-      <TableCell>
+      <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text fontWeight={600} className="textOverflow">
           {displayName}

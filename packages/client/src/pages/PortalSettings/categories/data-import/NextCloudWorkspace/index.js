@@ -11,13 +11,9 @@ import { getStepsData } from "./Stepper";
 const NextcloudWrapper = styled.div`
   max-width: 700px;
 
-  .data-import-description {
-    margin-top: 3px;
-  }
-
   .data-import-counter {
     margin-top: 19px;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
   }
 
   .data-import-section-description {
@@ -31,8 +27,7 @@ const NextcloudWorkspace = (props) => {
   const [currentStep, setCurrentStep] = useState(0);
   const StepsData = getStepsData(t, currentStep, setCurrentStep);
 
-  if (isMobileOnly)
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobileOnly) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   if (!tReady) return;
 
@@ -42,21 +37,13 @@ const NextcloudWorkspace = (props) => {
         <Text
           className="data-import-description"
           lineHeight="20px"
-          color={theme.isBase ? "#657077" : "#ADADAD"}
-        >
+          color={theme.isBase ? "#657077" : "#ADADAD"}>
           {t("Settings:AboutDataImport")}
         </Text>
-        <Text
-          className="data-import-counter"
-          fontSize="16px"
-          fontWeight={700}
-          lineHeight="22px"
-        >
+        <Text className="data-import-counter" fontSize="16px" fontWeight={700} lineHeight="22px">
           {currentStep + 1}/{StepsData.length}. {StepsData[currentStep].title}
         </Text>
-        <div className="data-import-section-description">
-          {StepsData[currentStep].description}
-        </div>
+        <div className="data-import-section-description">{StepsData[currentStep].description}</div>
       </NextcloudWrapper>
       {StepsData[currentStep].component}
     </>
@@ -69,8 +56,4 @@ export default inject(({ setup, auth }) => {
     initSettings,
     theme: auth.settingsStore.theme,
   };
-})(
-  withTranslation(["Common, SMTPSettings, Settings"])(
-    observer(NextcloudWorkspace)
-  )
-);
+})(withTranslation(["Common, SMTPSettings, Settings"])(observer(NextcloudWorkspace)));

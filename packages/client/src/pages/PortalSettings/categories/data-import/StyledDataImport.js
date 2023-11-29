@@ -3,7 +3,7 @@ import { tablet, mobile } from "@docspace/components/utils/device";
 
 const WorkspacesContainer = styled.div`
   max-width: 700px;
-  margin-top: 4px;
+  margin-top: 1px;
 
   @media ${tablet} {
     max-width: 675px;

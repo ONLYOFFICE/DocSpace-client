@@ -115,7 +115,7 @@ const UsersTableRow = ({
 
   return (
     <StyledTableRow onClick={handleAccountToggle} isDisabled={!isPrevEmailValid}>
-      <TableCell>
+      <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={handleAccountToggle}
           isChecked={isChecked}

@@ -12,6 +12,8 @@ const SectionsWrapper = styled.div`
   flex-direction: column;
   gap: 12px;
 
+  margin-top: 16px;
+
   .save-cancel-buttons {
     margin-top: 4px;
   }

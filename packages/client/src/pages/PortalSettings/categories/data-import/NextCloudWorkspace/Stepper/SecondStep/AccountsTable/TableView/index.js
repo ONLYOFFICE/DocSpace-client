@@ -1,16 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
-import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
+import { StyledTableContainer } from "../../../StyledStepper";
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
 import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -18,36 +16,6 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
-
-const StyledTableContainer = styled(TableContainer)`
-  margin: 0.5px 0px 20px;
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .table-list-item {
-    margin-top: -1px;
-    &:hover {
-      cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
-    }
-  }
-  .clear-icon {
-    margin-right: 8px;
-    margin-top: 2px;
-  }
-
-  .ec-desc {
-    max-width: 618px;
-  }
-`;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const checkedAccountType = "withEmail";
 
@@ -61,12 +29,12 @@ const TableView = (props) => {
     sectionWidth,
     accountsData,
 
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
@@ -85,14 +53,11 @@ const TableView = (props) => {
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -166,8 +131,8 @@ const TableView = (props) => {
 export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
   const {
-    users,
     checkedUsers,
     withEmailUsers,
     toggleAccount,
@@ -181,12 +146,12 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     setViewAs,
     userId,
 
-    users,
     checkedUsers,
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(TableView));

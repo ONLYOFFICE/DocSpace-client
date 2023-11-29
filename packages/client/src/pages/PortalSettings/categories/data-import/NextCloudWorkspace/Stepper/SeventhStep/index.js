@@ -15,7 +15,6 @@ const ButtonsWrapper = styled.div`
   max-width: 445px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   column-gap: 8px;
 `;
 
@@ -71,7 +70,7 @@ const SeventhStep = ({
         {t("Settings:ErrorsWereFound", { errors: 3 })}
       </Text>
 
-      <Box displayProp="flex" alignItems="center" marginProp="17px 0 16px">
+      <div className='sendLetterBlockWrapper' displayProp="flex" alignItems="center" marginProp="17px 0 16px">
         <Checkbox
           label={t("Settings:SendWelcomeLetter")}
           isChecked={isChecked}
@@ -83,7 +82,7 @@ const SeventhStep = ({
           style={{ marginLeft: "4px" }}
           tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
         />
-      </Box>
+      </div>
 
       <ButtonsWrapper>
         <Button size="small" label={t("Common:Finish")} primary onClick={onFinishClick} />

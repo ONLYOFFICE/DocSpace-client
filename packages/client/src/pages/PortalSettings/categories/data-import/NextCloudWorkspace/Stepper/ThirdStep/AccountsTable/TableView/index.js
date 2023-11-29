@@ -1,39 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
-import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import TableContainer from "@docspace/components/table-container/TableContainer";
 import TableBody from "@docspace/components/table-container/TableBody";
+import { StyledTableContainer } from "../../../StyledStepper";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudThirdColumnsSize_ver-${TABLE_VERSION}`;
-
-const StyledTableContainer = styled(TableContainer)`
-  margin: 0.5px 0px 20px;
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .table-list-item {
-    margin-top: -1px;
-    &:hover {
-      cursor: pointer;
-      background-color: ${(props) => (props.theme.isBase ? "#F8F9F9" : "#282828")};
-    }
-  }
-`;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const checkedAccountType = "withoutEmail";
 
@@ -51,6 +27,7 @@ const TableView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    currentDeviceType,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
@@ -61,14 +38,11 @@ const TableView = (props) => {
   const toggleAll = (e) =>
     toggleAllAccounts(e.target.checked, usersWithFilledEmails, checkedAccountType);
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -124,6 +98,7 @@ const TableView = (props) => {
 export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
   const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
     importAccountsStore;
 
@@ -137,5 +112,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    currentDeviceType,
   };
 })(observer(TableView));

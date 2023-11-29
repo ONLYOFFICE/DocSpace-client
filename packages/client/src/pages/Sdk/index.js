@@ -120,6 +120,7 @@ const Sdk = ({
   const onSelectRoom = useCallback(
     (data) => {
       data[0].icon = toRelativeUrl(data[0].icon);
+
       frameCallEvent({ event: "onSelectCallback", data });
     },
     [frameCallEvent]
@@ -167,6 +168,8 @@ const Sdk = ({
           onSelectFile={onSelectFile}
           onClose={onClose}
           filterParam={"ALL"}
+          isUserOnly={selectorType === "userFolderOnly"}
+          isRoomsOnly={selectorType === "roomsOnly"}
         />
       );
       break;

@@ -173,7 +173,7 @@ const Share = (props) => {
         />
       </StyledLinks>
 
-      {primaryFileLink?.length > 0 && (
+      {(primaryFileLink?.length > 0 || additionalFileLinks?.length > 0) && (
         <StyledLinks>
           <div className="additional-link">
             <Text fontSize="14px" fontWeight={600} className="title-link">

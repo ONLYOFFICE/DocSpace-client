@@ -6,7 +6,7 @@ import { StyledHeaderRow } from "../ClientForm.styled";
 
 interface BlockHeaderProps {
   header: string;
-  helpButtonText?: string;
+  helpButtonText?: string | React.ReactNode;
   className?: string;
 }
 

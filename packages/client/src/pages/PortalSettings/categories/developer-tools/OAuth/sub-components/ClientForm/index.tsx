@@ -236,7 +236,7 @@ const ClientForm = ({
               return;
             }
 
-            isValid = !errorFields.includes(key);
+            isValid = isValid && !errorFields.includes(key);
 
             break;
         }
@@ -283,7 +283,7 @@ const ClientForm = ({
             nameTimer.current = null;
           }
 
-          isValid = errorFields.includes(key);
+          isValid = isValid && !errorFields.includes(key);
 
           break;
         case "logo":

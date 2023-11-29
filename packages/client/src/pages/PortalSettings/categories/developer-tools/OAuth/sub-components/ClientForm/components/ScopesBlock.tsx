@@ -157,27 +157,23 @@ const ScopesBlock = ({
             </Text>
           </StyledScopesName>
           <StyledScopesCheckbox>
-            {scope.read?.name ? (
-              <Checkbox
-                className="checkbox-read"
-                isChecked={isReadChecked}
-                isDisabled={isReadDisabled || isEdit}
-                onChange={() =>
-                  onAddCheckedScope(
-                    key as ScopeGroup,
-                    ScopeType.read,
-                    scope.read?.name
-                  )
-                }
-              />
-            ) : (
-              <></>
-            )}
+            <Checkbox
+              className="checkbox-read"
+              isChecked={isReadChecked}
+              isDisabled={isReadDisabled || isEdit}
+              onChange={() =>
+                onAddCheckedScope(
+                  key as ScopeGroup,
+                  ScopeType.read,
+                  scope.read?.name
+                )
+              }
+            />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
             <Checkbox
               isChecked={isReadDisabled}
-              isDisabled={isEdit}
+              isDisabled={isEdit || !scope.read?.name}
               onChange={() =>
                 onAddCheckedScope(
                   key as ScopeGroup,
@@ -201,8 +197,8 @@ const ScopesBlock = ({
     <StyledScopesContainer>
       <BlockHeader
         className="header"
-        header={"Access scopes"}
-        helpButtonText="Access scopes help"
+        header={t("ScopesHeader")}
+        helpButtonText={t("ScopesHelp")}
       />
       {/* @ts-ignore */}
       <Text

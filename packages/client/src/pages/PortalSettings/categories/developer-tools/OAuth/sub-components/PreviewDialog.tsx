@@ -163,7 +163,7 @@ const PreviewDialog = ({
   client,
   theme,
 }: PreviewDialogProps) => {
-  const { t } = useTranslation(["OAuth", "Common"]);
+  const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
@@ -229,7 +229,7 @@ const PreviewDialog = ({
       onClose={onClose}
       withFooterBorder
     >
-      <ModalDialog.Header>Auth button</ModalDialog.Header>
+      <ModalDialog.Header>{t("AuthButton")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer>
           <StyledPreviewContainer>
@@ -305,7 +305,7 @@ const PreviewDialog = ({
                 fontSize={"13px"}
                 noSelect
               >
-                Authorize link
+                {t("AuthorizeLink")}
               </Text>
               <Textarea
                 heightTextArea={64}
@@ -324,7 +324,7 @@ const PreviewDialog = ({
                 fontSize={"13px"}
                 noSelect
               >
-                State
+                {t("Webhooks:State")}
               </Text>
               <Textarea
                 heightTextArea={64}
@@ -344,7 +344,7 @@ const PreviewDialog = ({
                   fontSize={"13px"}
                   noSelect
                 >
-                  Code verifier
+                  {t("CodeVerifier")}
                 </Text>
                 <Textarea
                   heightTextArea={64}

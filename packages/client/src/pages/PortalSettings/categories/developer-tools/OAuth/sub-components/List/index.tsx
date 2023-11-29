@@ -10,12 +10,13 @@ import { Consumer } from "@docspace/components/utils/context";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
+//@ts-ignore
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
 
 import RegisterNewButton from "../RegisterNewButton";
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 export const StyledContainer = styled.div`
   width: 100%;

@@ -1,4 +1,6 @@
 import React from "react";
+import { Trans } from "react-i18next";
+
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
@@ -30,12 +32,11 @@ const ClientBlock = ({
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
+  const helpButtonText = <Trans t={t} i18nKey="ClientHelpButton" ns="OAuth" />;
+
   return (
     <StyledBlock>
-      <BlockHeader
-        header={t("Client")}
-        helpButtonText={t("ClientHelpButton")}
-      />
+      <BlockHeader header={t("Client")} helpButtonText={helpButtonText} />
       <StyledInputBlock>
         <InputGroup
           label={t("ID")}

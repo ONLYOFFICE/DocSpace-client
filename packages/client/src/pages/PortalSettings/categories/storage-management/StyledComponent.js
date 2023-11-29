@@ -27,8 +27,12 @@ const StyledBaseQuotaComponent = styled.div`
 
 const StyledDiscSpaceUsedComponent = styled.div`
   margin-top: 16px;
-  .disk-space_title {
+
+  .main-title {
     margin-bottom: 16px;
+  }
+  .disk-space_title {
+    color: ${(props) => props.theme.text.grayBackgroundText};
   }
   .button-container {
     display: flex;
@@ -64,6 +68,10 @@ const StyledDiagramComponent = styled.div`
       display: flex;
       margin-right: 24px;
       padding-bottom: 8px;
+
+      .tag_text {
+        margin-left: 4px;
+      }
     }
   }
 `;

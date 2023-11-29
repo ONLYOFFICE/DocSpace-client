@@ -18,16 +18,16 @@ const DiskSpaceUsedComponent = (props) => {
 
   return (
     <StyledDiscSpaceUsedComponent>
-      <Text fontSize="16px" fontWeight={700} className="disk-space_title">
+      <Text fontSize="16px" fontWeight={700} className="main-title">
         {t("DiskSpaceUsed")}
       </Text>
 
-      <Text fontWeight={600}>
+      <Text fontWeight={700} className="disk-space_title">
         {t("TotalStorage", {
           size: totalSize,
         })}
       </Text>
-      <Text fontWeight={600}>
+      <Text fontWeight={700} className="disk-space_title">
         {t("UsedStorage", {
           size: usedSize,
         })}

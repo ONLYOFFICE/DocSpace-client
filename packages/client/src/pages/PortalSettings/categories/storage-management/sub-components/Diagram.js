@@ -19,7 +19,7 @@ const Diagram = (props) => {
     trashUsedSpace,
     archiveUsedSpace,
     roomsUsedSpace,
-    maxWidth = 700,
+    maxWidth = 660,
   } = props;
 
   const { t } = useTranslation("Common");
@@ -32,6 +32,12 @@ const Diagram = (props) => {
       size: getConvertedSize(t, myDocumentsUsedSpace),
     },
     {
+      name: "Rooms",
+      color: "#22C386",
+      percentageSize: calculateSize(roomsUsedSpace, maxTotalSizeByQuota),
+      size: getConvertedSize(t, roomsUsedSpace),
+    },
+    {
       name: "Trash",
       color: "#FF9933",
       percentageSize: calculateSize(trashUsedSpace, maxTotalSizeByQuota),
@@ -42,12 +48,6 @@ const Diagram = (props) => {
       color: "#FFD30F",
       percentageSize: calculateSize(archiveUsedSpace, maxTotalSizeByQuota),
       size: getConvertedSize(t, archiveUsedSpace),
-    },
-    {
-      name: "Rooms",
-      color: "#22C386",
-      percentageSize: calculateSize(roomsUsedSpace, maxTotalSizeByQuota),
-      size: getConvertedSize(t, roomsUsedSpace),
     },
   ];
 
@@ -66,7 +66,8 @@ const Diagram = (props) => {
         {elementsTags.map((tag, index) => (
           <div className="diagram_folder-tag" key={index}>
             <StyledFolderTagColor color={tag.color} />
-            <Text fontWeight={600}>{tag.name}</Text>:<Text>{tag.size}</Text>
+            <Text fontWeight={600}>{tag.name}</Text>:
+            <Text className="tag_text">{tag.size}</Text>
           </div>
         ))}
       </div>

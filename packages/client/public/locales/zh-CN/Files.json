@@ -173,6 +173,7 @@
   "ViewTiles": "卡片",
   "WantLeaveRoom": "您确定要退出房间吗？您可以通过房间管理员的新邀请再次加入。",
   "WantToRestoreTheRoom": "此房间的所有外部链接都会变为活动状态，所有拥有此链接的人都可以访问房间内容。要还原房间吗？",
+  "WantToRestoreTheRooms": "恢复房间后，其所有的共享链接都将重新生效，并且拥有房间链接的人都可以访问其内容。 您确定恢复房间吗？",
   "WithSubfolders": "带有子文件夹",
   "YouLeftTheRoom": "您已退出房间"
 }

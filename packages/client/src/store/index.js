@@ -1,5 +1,6 @@
 import authStore from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
+import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
@@ -195,6 +196,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(authStore);
+const storageManagement = new StorageManagement(filesStore, peopleStore);
 
 const store = {
   auth: authStore,
@@ -237,6 +239,7 @@ const store = {
   publicRoomStore,
 
   pluginStore,
+  storageManagement,
 };
 
 export default store;

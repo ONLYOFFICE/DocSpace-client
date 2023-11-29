@@ -128,7 +128,7 @@ const SpaceQuota = (props) => {
   }
 
   return (
-    <StyledBody hideColumns={hideColumns} isReadOnly={isReadOnly}>
+    <StyledBody hideColumns={hideColumns}>
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox

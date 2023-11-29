@@ -9,13 +9,6 @@ const StyledBody = styled.div`
   display: flex;
   p {
     padding-top: 8px;
-    ${(props) =>
-      props.isReadOnly &&
-      css`
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      `}
   }
 
   .combo-button {

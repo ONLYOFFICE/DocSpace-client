@@ -1,3 +1,5 @@
+import { FolderType } from "../constants";
+
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -676,4 +678,19 @@ export const getEditorTheme = (theme) => {
     default:
       return "default-dark";
   }
+};
+
+export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
+export const getIconPathByFolderType = (
+  folderType?: FolderTypeValueOf
+): string => {
+  const defaultPath = "folder.svg";
+
+  const folderIconPath: Partial<Record<FolderTypeValueOf, string>> = {
+    [FolderType.Done]: "done.svg",
+    [FolderType.InProgress]: "inProgress.svg",
+    [FolderType.DEFAULT]: defaultPath,
+  };
+
+  return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
 };

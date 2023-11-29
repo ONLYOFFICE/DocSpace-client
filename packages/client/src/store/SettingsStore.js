@@ -13,6 +13,7 @@ import {
   iconSize64,
   iconSize96,
 } from "@docspace/common/utils/image-helpers";
+import { getIconPathByFolderType } from "@docspace/common/utils";
 
 class SettingsStore {
   thirdPartyStore;
@@ -307,14 +308,8 @@ class SettingsStore {
   };
 
   getIconByFolderType = (folderType, size = 32) => {
-    switch (folderType) {
-      case FolderType.Done:
-        return this.getIconBySize(size, "done.svg");
-      case FolderType.InProgress:
-        return this.getIconBySize(size, "inProgress.svg");
-      default:
-        return this.getIconBySize(size, "folder.svg");
-    }
+    const path = getIconPathByFolderType(folderType);
+    return this.getIconBySize(size, path);
   };
 
   getIconBySize = (size, path = 32) => {

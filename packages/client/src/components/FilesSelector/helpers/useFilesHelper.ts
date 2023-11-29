@@ -21,15 +21,31 @@ import {
   FilterType,
   FolderType,
 } from "@docspace/common/constants";
+import {
+  getIconPathByFolderType,
+  FolderTypeValueOf,
+} from "@docspace/common/utils";
 //@ts-ignore
 import toastr from "@docspace/components/toast/toastr";
+
+type Room = {
+  id: number;
+  title: string;
+  roomType: number;
+  filesCount: number;
+  foldersCount: number;
+  security: Security;
+  parentId: number;
+  rootFolderType: number;
+  type: FolderTypeValueOf;
+};
 
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
   filterParam?: string
 ) => {
-  const items = folders.map((room: any) => {
+  const items = folders.map((room: Room) => {
     const {
       id,
       title,
@@ -39,18 +55,11 @@ export const convertFoldersToItems = (
       security,
       parentId,
       rootFolderType,
-    }: {
-      id: number;
-      title: string;
-      roomType: number;
-      filesCount: number;
-      foldersCount: number;
-      security: Security;
-      parentId: number;
-      rootFolderType: number;
+      type,
     } = room;
 
-    const icon = iconSize32.get("folder.svg");
+    const folderIconPath = getIconPathByFolderType(type);
+    const icon = iconSize32.get(folderIconPath);
 
     return {
       id,

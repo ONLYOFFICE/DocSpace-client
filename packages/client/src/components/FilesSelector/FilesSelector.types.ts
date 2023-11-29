@@ -71,6 +71,7 @@ export type useRootHelperProps = {
   onSetBaseFolderPath?: (
     value: number | string | undefined | BreadCrumb[]
   ) => void;
+  isUserOnly?: boolean;
 };
 
 export type useRoomsHelperProps = {
@@ -128,6 +129,7 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;

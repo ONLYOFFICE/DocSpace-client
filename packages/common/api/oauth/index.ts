@@ -139,6 +139,10 @@ export const onOAuthLogin = () => {
     method: "post",
     url: `/oauth2/login`,
     data: formData,
+    withRedirect: true,
+    headers: {
+      "X-Disable-Redirect": true,
+    },
   });
 };
 
@@ -161,6 +165,9 @@ export const onOAuthSubmit = (
     url: `/oauth2/authorize`,
     data: formData,
     withRedirect: true,
+    headers: {
+      "X-Disable-Redirect": true,
+    },
   });
 };
 
@@ -175,6 +182,9 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
     url: `/oauth2/authorize`,
     data: formData,
     withRedirect: true,
+    headers: {
+      "X-Disable-Redirect": true,
+    },
   });
 };
 

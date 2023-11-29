@@ -92,7 +92,6 @@ const Consent = ({
     let clientState = "";
     const scope = oauth.client.scopes;
 
-    setCookie("disable_redirect", true);
     setCookie("client_id", clientId);
 
     await api.oauth.onOAuthLogin();
@@ -116,8 +115,6 @@ const Consent = ({
     let clientState = "";
 
     setCookie("client_id", clientId);
-
-    setCookie("disable_redirect", true);
 
     await api.oauth.onOAuthLogin();
 

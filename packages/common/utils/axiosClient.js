@@ -130,7 +130,6 @@ class AxiosClient {
       if (error) throw new Error(error);
 
       if (response.headers["x-redirect-uri"] && options.withRedirect) {
-        deleteCookie("disable_redirect");
         return window.location.replace(response.headers["x-redirect-uri"]);
       }
 

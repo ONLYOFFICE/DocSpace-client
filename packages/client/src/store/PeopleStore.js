@@ -209,10 +209,8 @@ class PeopleStore {
   };
 
   changeStatus = (status, users) => {
-    const {
-      setChangeUserStatusDialogVisible,
-      setDialogData,
-    } = this.dialogStore;
+    const { setChangeUserStatusDialogVisible, setDialogData } =
+      this.dialogStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
@@ -235,6 +233,7 @@ class PeopleStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasOnlyOneUserToRemove,
+      hasUsersToRemove,
       hasFreeUsers,
       userSelectionRole,
       hasUsersToChangeQuota,
@@ -242,10 +241,8 @@ class PeopleStore {
       hasUsersToResetQuota,
       selection,
     } = this.selectionStore;
-    const {
-      setSendInviteDialogVisible,
-      setDeleteDialogVisible,
-    } = this.dialogStore;
+    const { setSendInviteDialogVisible, setDeleteDialogVisible } =
+      this.dialogStore;
 
     const { isOwner, isAdmin } = this.authStore.userStore.user;
 

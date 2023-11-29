@@ -27,7 +27,7 @@ const StatisticsComponent = (props) => {
 
   const usersList = peopleList.map((item) => {
     const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
-    console.log("item", item);
+
     return (
       <StyledSimpleFilesRow key={id}>
         <>

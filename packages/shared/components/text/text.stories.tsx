@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Text } from ".";
+import { TextPure } from ".";
 
 const meta = {
   title: "Components/Text",
-  component: Text,
+  component: TextPure,
   parameters: {
     docs: {
       description: {
@@ -22,16 +22,16 @@ const meta = {
     //   },
     // },
   },
-} satisfies Meta<typeof Text>;
+} satisfies Meta<typeof TextPure>;
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<typeof TextPure>;
 
 export default meta;
 
 export const Default: Story = {
   render: (args) => (
     <div style={{ width: "100%" }}>
-      <Text {...args}>Test text</Text>
+      <TextPure {...args}>Test text</TextPure>
     </div>
   ),
   args: {

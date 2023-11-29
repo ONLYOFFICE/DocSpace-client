@@ -10,6 +10,7 @@ import { CustomScrollbarsVirtualList } from "./scrollbar/sub-components";
 import { Text } from "./text";
 import { ThemeProvider } from "./theme-provider";
 import { Tooltip, TFallbackAxisSideDirection, TTooltipPlace } from "./tooltip";
+import { ToggleButton } from "./toggle-button";
 
 export {
   Aside,
@@ -31,4 +32,5 @@ export {
   Tooltip,
   TFallbackAxisSideDirection,
   TTooltipPlace,
+  ToggleButton,
 };

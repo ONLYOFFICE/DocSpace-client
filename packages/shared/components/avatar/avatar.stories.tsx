@@ -2,11 +2,11 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 
-import { Avatar, AvatarRole, AvatarSize } from ".";
+import { AvatarPure, AvatarRole, AvatarSize } from ".";
 
 const meta = {
   title: "Components/Avatar",
-  component: Avatar,
+  component: AvatarPure,
   argTypes: {
     editAction: { action: "editAction" },
   },
@@ -21,8 +21,8 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=878-37278&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
-} satisfies Meta<typeof Avatar>;
-type Story = StoryObj<typeof Avatar>;
+} satisfies Meta<typeof AvatarPure>;
+type Story = StoryObj<typeof AvatarPure>;
 
 export default meta;
 

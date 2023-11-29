@@ -39,4 +39,4 @@ TextPure.defaultProps = {
 
 const Text = React.memo<TextProps>(TextPure);
 
-export { Text };
+export { Text, TextPure };

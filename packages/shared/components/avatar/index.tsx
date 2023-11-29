@@ -166,4 +166,4 @@ const AvatarPure = ({
 
 const Avatar = memo(AvatarPure);
 
-export { Avatar };
+export { Avatar, AvatarPure };

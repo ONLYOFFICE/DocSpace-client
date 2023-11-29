@@ -1,48 +1,53 @@
-import React from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import Text from "@docspace/components/text";
 
 import {
   StyledDiagramComponent,
   StyledFolderTagColor,
   StyledFolderTagSection,
 } from "../StyledComponent";
-
-import Text from "@docspace/components/text";
+import { getConvertedSize } from "@docspace/common/utils";
 
 const calculateSize = (size, common) => ((100 * size) / common).toFixed(2);
+
 const Diagram = (props) => {
   const {
-    documentsSize = 10,
-    trashSize = 20,
-    archiveSize = 5,
-    roomsSize = 40,
-    common = 115,
+    myDocumentsUsedSpace,
+    maxTotalSizeByQuota,
+    trashUsedSpace,
+    archiveUsedSpace,
+    roomsUsedSpace,
     maxWidth = 700,
   } = props;
+
+  const { t } = useTranslation("Common");
 
   const elementsTags = [
     {
       name: "My Document",
       color: "#13B7EC",
-      percentageSize: calculateSize(documentsSize, common),
-      size: documentsSize,
+      percentageSize: calculateSize(myDocumentsUsedSpace, maxTotalSizeByQuota),
+      size: getConvertedSize(t, myDocumentsUsedSpace),
     },
     {
       name: "Trash",
       color: "#FF9933",
-      percentageSize: calculateSize(trashSize, common),
-      size: trashSize,
+      percentageSize: calculateSize(trashUsedSpace, maxTotalSizeByQuota),
+      size: getConvertedSize(t, trashUsedSpace),
     },
     {
       name: "Archive",
       color: "#FFD30F",
-      percentageSize: calculateSize(archiveSize, common),
-      size: archiveSize,
+      percentageSize: calculateSize(archiveUsedSpace, maxTotalSizeByQuota),
+      size: getConvertedSize(t, archiveUsedSpace),
     },
     {
       name: "Rooms",
       color: "#22C386",
-      percentageSize: calculateSize(roomsSize, common),
-      size: roomsSize,
+      percentageSize: calculateSize(roomsUsedSpace, maxTotalSizeByQuota),
+      size: getConvertedSize(t, roomsUsedSpace),
     },
   ];
 
@@ -69,4 +74,23 @@ const Diagram = (props) => {
   );
 };
 
-export default Diagram;
+export default inject(({ storageManagement, auth }) => {
+  const { filesUsedSpace } = storageManagement;
+  const { currentQuotaStore } = auth;
+  const { maxTotalSizeByQuota } = currentQuotaStore;
+
+  const {
+    myDocumentsUsedSpace,
+    trashUsedSpace,
+    archiveUsedSpace,
+    roomsUsedSpace,
+  } = filesUsedSpace;
+
+  return {
+    maxTotalSizeByQuota,
+    myDocumentsUsedSpace,
+    trashUsedSpace,
+    archiveUsedSpace,
+    roomsUsedSpace,
+  };
+})(observer(Diagram));

@@ -1038,3 +1038,12 @@ export function changeDocumentServiceLocation(
     },
   });
 }
+
+export function getFilesUsedSpace() {
+  const options = {
+    method: "get",
+    url: `/files/filesusedspace`,
+  };
+
+  return request(options);
+}

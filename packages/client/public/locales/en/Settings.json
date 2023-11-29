@@ -114,6 +114,7 @@
   "IPSecuritySettingDescription": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range  or CIDR masking. The IP security does not work for space owners, they can access the space from any IP address.",
   "IPSecurityWarningHelper": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
   "LanguageAndTimeZoneSettingsNavDescription": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
+  "LastUpdate": "Last update: {{date}}",
   "Lifetime": "Lifetime (min)",
   "LimitThemesTooltip": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "LocalFile": "Local file",

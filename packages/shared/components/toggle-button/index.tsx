@@ -1,17 +1,17 @@
-import PropTypes from "prop-types";
+import React from "react";
 import { motion } from "framer-motion";
-import React, { Component } from "react";
 
-import Text from "../text";
+import { Text } from "../text";
 
 import ToggleButtonTheme from "./ToggleButton.theme";
-import { ToggleButtonContainer, HiddenInput } from "./styled-toggle-button";
+import { ToggleButtonContainer, HiddenInput } from "./ToggleButton.styled";
+import { ToggleButtonProps, ToggleIconProps } from "./ToggleButton.types";
 
 const ToggleIcon = ({
   isChecked,
   isLoading,
-  noAnimation = false
-}: any) => {
+  noAnimation = false,
+}: ToggleIconProps) => {
   const transition = noAnimation ? { duration: 0 } : {};
 
   return (
@@ -58,108 +58,52 @@ const ToggleIcon = ({
   );
 };
 
-class ToggleButton extends Component {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      checked: props.isChecked,
-    };
-  }
-
-  componentDidUpdate(prevProps: any) {
-    // @ts-expect-error TS(2339): Property 'isChecked' does not exist on type 'Reado... Remove this comment to see the full error message
-    if (this.props.isChecked !== prevProps.isChecked) {
-      // @ts-expect-error TS(2339): Property 'isChecked' does not exist on type 'Reado... Remove this comment to see the full error message
-      this.setState({ checked: this.props.isChecked });
-    }
-  }
-
-  render() {
-    const {
-      // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Read... Remove this comment to see the full error message
-      isDisabled,
-      // @ts-expect-error TS(2339): Property 'label' does not exist on type 'Readonly<... Remove this comment to see the full error message
-      label,
-      // @ts-expect-error TS(2339): Property 'onChange' does not exist on type 'Readon... Remove this comment to see the full error message
-      onChange,
-      // @ts-expect-error TS(2339): Property 'id' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
-      id,
-      // @ts-expect-error TS(2339): Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
-      className,
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'Readonly<... Remove this comment to see the full error message
-      style,
-      // @ts-expect-error TS(2339): Property 'isLoading' does not exist on type 'Reado... Remove this comment to see the full error message
-      isLoading,
-      // @ts-expect-error TS(2339): Property 'noAnimation' does not exist on type 'Rea... Remove this comment to see the full error message
-      noAnimation,
-    } = this.props;
-
-    //console.log("ToggleButton render");
-
-    return (
-      <ToggleButtonTheme
+const ToggleButton = ({
+  label,
+  isChecked,
+  isDisabled,
+  onChange,
+  id,
+  className,
+  style,
+  isLoading,
+  noAnimation,
+}: ToggleButtonProps) => {
+  return (
+    <ToggleButtonTheme
+      id={id}
+      className={className}
+      style={style}
+      isChecked={isChecked}
+      isDisabled={isDisabled}
+      data-testid="toggle-button"
+    >
+      <ToggleButtonContainer
         id={id}
         className={className}
         style={style}
-        // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-        isChecked={this.state.checked}
         isDisabled={isDisabled}
+        isChecked={isChecked}
       >
-        <ToggleButtonContainer
-          id={id}
-          className={className}
-          style={style}
-          // @ts-expect-error TS(2769): No overload matches this call.
-          isDisabled={isDisabled}
-          // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-          isChecked={this.state.checked}
-        >
-          <HiddenInput
-            type="checkbox"
-            // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-            checked={this.state.checked}
-            disabled={isDisabled}
-            onChange={onChange}
-          />
-          <ToggleIcon
-            // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-            isChecked={this.state.checked}
-            // @ts-expect-error TS(2322): Type '{ isChecked: any; isLoading: any; noAnimatio... Remove this comment to see the full error message
-            isLoading={isLoading}
-            noAnimation={noAnimation}
-          />
-          {label && (
-            // @ts-expect-error TS(2322): Type '{ children: any; className: string; as: stri... Remove this comment to see the full error message
-            <Text className="toggle-button-text" as="span">
-              {label}
-            </Text>
-          )}
-        </ToggleButtonContainer>
-      </ToggleButtonTheme>
-    );
-  }
-}
-
-// @ts-expect-error TS(2339): Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
-ToggleButton.propTypes = {
-  /** Returns the value indicating that the toggle button is enabled. */
-  isChecked: PropTypes.bool.isRequired,
-  /** Disables the ToggleButton */
-  isDisabled: PropTypes.bool,
-  /** Sets a callback function that is triggered when the ToggleButton is clicked */
-  onChange: PropTypes.func.isRequired,
-  /** Label of the input  */
-  label: PropTypes.string,
-  /** Sets component id */
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /** Class name */
-  className: PropTypes.string,
-  /** Accepts css style */
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+        <HiddenInput
+          type="checkbox"
+          checked={isChecked}
+          disabled={isDisabled}
+          onChange={onChange}
+        />
+        <ToggleIcon
+          isChecked={isChecked}
+          isLoading={isLoading}
+          noAnimation={noAnimation || false}
+        />
+        {label && (
+          <Text className="toggle-button-text" as="span">
+            {label}
+          </Text>
+        )}
+      </ToggleButtonContainer>
+    </ToggleButtonTheme>
+  );
 };
 
-ToggleIcon.propTypes = {
-  isChecked: PropTypes.bool,
-};
-
-export default ToggleButton;
+export { ToggleButton };

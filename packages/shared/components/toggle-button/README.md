@@ -5,7 +5,7 @@ Custom toggle button input
 ### Usage
 
 ```js
-import ToggleButton from "@docspace/components/toggle-button";
+import ToggleButton from "@docspace/shared/components";
 ```
 
 ```jsx

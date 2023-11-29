@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import moment from "moment";
 
 import { getUserById } from "@docspace/common/api/people";
 import { combineUrl, getUserRole } from "@docspace/common/utils";
@@ -376,13 +377,14 @@ class InfoPanelStore {
     internal,
     expirationDate
   ) => {
+    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expirationDate
+      expDate
     );
     return res;
   };

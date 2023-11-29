@@ -368,13 +368,21 @@ class InfoPanelStore {
     return res;
   };
 
-  editFileLink = async (fileId, linkId, access, primary, internal) => {
+  editFileLink = async (
+    fileId,
+    linkId,
+    access,
+    primary,
+    internal,
+    expirationDate
+  ) => {
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
-      internal
+      internal,
+      expirationDate
     );
     return res;
   };

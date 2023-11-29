@@ -1055,11 +1055,18 @@ export function getPrimaryLink(fileId) {
   });
 }
 
-export function editExternalLink(fileId, linkId, access, primary, internal) {
+export function editExternalLink(
+  fileId,
+  linkId,
+  access,
+  primary,
+  internal,
+  expirationDate
+) {
   return request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { linkId, access, primary, internal },
+    data: { linkId, access, primary, internal, expirationDate },
   });
 }
 

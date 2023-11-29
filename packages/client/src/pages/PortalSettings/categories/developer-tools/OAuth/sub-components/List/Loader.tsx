@@ -5,7 +5,9 @@ import RectangleLoader from "@docspace/components/skeletons/rectangle";
 //@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 //@ts-ignore
-import Loaders from "@docspace/common/components/Loaders";
+import TableSkeleton from "@docspace/components/skeletons/table";
+//@ts-ignore
+import RowsSkeleton from "@docspace/components/skeletons/rows";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
@@ -35,7 +37,7 @@ const OAuthLoader = ({
           width={"220px"}
           height={buttonHeight}
         />
-        {/* {viewAs === "table" ? <Loaders.TableLoader /> : <Loaders.Rows />} */}
+        {viewAs === "table" ? <TableSkeleton /> : <RowsSkeleton />}
       </StyledContainer>
     </OAuthContainer>
   );

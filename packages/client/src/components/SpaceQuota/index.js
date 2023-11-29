@@ -22,6 +22,11 @@ const SpaceQuota = (props) => {
     updateQuota,
     resetQuota,
     defaultSize,
+
+    needResetSelection,
+    getPeopleListItem,
+    setSelection,
+    setSelected,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,11 +71,23 @@ const SpaceQuota = (props) => {
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
+
+    if (!needResetSelection) {
+      const user = getPeopleListItem(users[0]);
+
+      setSelection(user);
+
+      return;
+    }
+
+    setSelected("close");
   };
 
   const abortCallback = () => {
     onAbort && onAbort();
     setIsLoading(false);
+
+    setSelected("close");
   };
 
   const onChange = async ({ action }) => {
@@ -150,17 +167,24 @@ const SpaceQuota = (props) => {
 
 export default inject(
   ({ peopleStore, filesActionsStore, filesStore, auth }, { type }) => {
-    const { changeUserQuota, usersStore } = peopleStore;
-    const { setCustomUserQuota, resetUserQuota } = usersStore;
+    const { changeUserQuota, usersStore, selectionStore } = peopleStore;
+    const {
+      setCustomUserQuota,
+      resetUserQuota,
+      needResetUserSelection,
+      getPeopleListItem,
+    } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const { updateRoomQuota } = filesStore;
-    const { currentQuotaStore } = auth;
+    const { currentQuotaStore, infoPanelStore } = auth;
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
     } = currentQuotaStore;
+    const { setSelection } = infoPanelStore;
+    const { setSelected: setUsersSelected } = selectionStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota = type === "user" ? setCustomUserQuota : updateRoomQuota;
@@ -172,12 +196,21 @@ export default inject(
 
     const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
+    const needResetSelection = type === "user" ? needResetUserSelection : null;
+
+    const setSelected = type === "user" ? setUsersSelected : null;
+
     return {
+      setSelected,
       withoutLimitQuota,
       changeQuota,
       updateQuota,
       resetQuota,
       defaultSize,
+
+      needResetSelection,
+      getPeopleListItem,
+      setSelection,
     };
   }
 )(observer(SpaceQuota));

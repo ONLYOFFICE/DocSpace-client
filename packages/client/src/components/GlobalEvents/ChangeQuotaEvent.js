@@ -48,8 +48,12 @@ const ChangeQuotaEvent = (props) => {
     try {
       users = await updateFunction(size);
       toastr.success(t("Common:StorageQuotaSet"));
+
+      successCallback && successCallback(users);
     } catch (e) {
       toastr.error(e);
+
+      abortCallback && abortCallback();
     }
 
     timerId && clearTimeout(timerId);
@@ -59,7 +63,6 @@ const ChangeQuotaEvent = (props) => {
     setIsLoading(false);
     setIsError(false);
 
-    successCallback && successCallback(users);
     onClose && onClose();
   };
 
@@ -95,5 +98,9 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
-  return { initialSize, setCustomUserQuota, updateRoomQuota };
+  return {
+    initialSize,
+    setCustomUserQuota,
+    updateRoomQuota,
+  };
 })(observer(ChangeQuotaEvent));

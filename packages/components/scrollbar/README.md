@@ -19,4 +19,3 @@ import Scrollbar from "@docspace/components/scrollbar";
 | `className` |    `string`    |    -     |                              -                              |      -       | Accepts class        |
 | `id`        |    `string`    |    -     |                              -                              |      -       | Accepts id           |
 | `style`     | `obj`, `array` |    -     |                              -                              |      -       | Accepts css style    |
-| `stype`     |    `string`    |          | `smallWhite`, `smallBlack`, `preMediumBlack`, `mediumBlack` | `smallBlack` | Scrollbar style type |

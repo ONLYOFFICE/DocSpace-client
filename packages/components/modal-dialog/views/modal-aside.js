@@ -203,11 +203,7 @@ const Modal = ({
                         embedded={embedded}
                       >
                         {currentDisplayType === "aside" && withBodyScroll ? (
-                          <Scrollbar
-                            stype="mediumBlack"
-                            id="modal-scroll"
-                            className="modal-scroll"
-                          >
+                          <Scrollbar id="modal-scroll" className="modal-scroll">
                             {bodyComponent}
                           </Scrollbar>
                         ) : (

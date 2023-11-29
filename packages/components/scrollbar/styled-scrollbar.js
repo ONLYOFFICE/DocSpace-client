@@ -5,7 +5,14 @@ import { desktop, mobile, tablet } from "../utils/device";
 
 const StyledScrollbar = styled(Scrollbar)`
   .scroll-body {
+    padding-inline-end: 17px !important;
     position: relative;
+    outline: none;
+    tab-index: -1;
+
+    @media ${mobile} {
+      padding-inline-end: 8px !important;
+    }
   }
 
   .track {
@@ -13,6 +20,7 @@ const StyledScrollbar = styled(Scrollbar)`
     display: flex;
     padding: 4px;
     border-radius: 8px !important;
+    background: transparent !important;
 
     @media ${desktop} {
       &:hover {
@@ -37,7 +45,7 @@ const StyledScrollbar = styled(Scrollbar)`
 
   .track-vertical {
     direction: ${({ theme }) => theme.interfaceDirection};
-    height: 100% !important;
+    height: ${({ noScrollY }) => (noScrollY ? 0 : "100%")} !important;
     width: 16px !important;
     top: 0 !important;
     justify-content: flex-end;
@@ -47,6 +55,7 @@ const StyledScrollbar = styled(Scrollbar)`
     width: 100% !important;
     height: 16px !important;
     align-items: flex-end;
+    direction: ltr;
 
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"

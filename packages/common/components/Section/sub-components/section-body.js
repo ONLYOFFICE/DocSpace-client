@@ -351,7 +351,6 @@ class SectionBody extends React.Component {
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
-              stype="mediumBlack"
               fixedSize
             >
               <div className="section-wrapper">
@@ -390,7 +389,6 @@ class SectionBody extends React.Component {
             <Scrollbar
               id="sectionScroll"
               scrollclass="section-scroll"
-              stype="mediumBlack"
               fixedSize
             >
               <div className="section-wrapper">

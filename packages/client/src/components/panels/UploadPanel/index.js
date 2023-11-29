@@ -143,7 +143,7 @@ class UploadPanelComponent extends React.Component {
                   </div>*/}
               </div>
             </StyledHeaderContent>
-            <StyledBody stype="mediumBlack" className="upload-panel_body">
+            <StyledBody className="upload-panel_body">
               <FileList />
             </StyledBody>
           </StyledContent>

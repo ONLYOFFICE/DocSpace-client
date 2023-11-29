@@ -348,7 +348,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-developer-tools",
     key: "6",
-    icon: DeveloperReactSvgUrl,
+    type: PageType.developerTools,
     link: "developer-tools",
     tKey: "DeveloperTools",
     isHeader: true,

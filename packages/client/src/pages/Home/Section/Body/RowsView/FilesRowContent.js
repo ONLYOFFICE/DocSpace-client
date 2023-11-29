@@ -82,55 +82,55 @@ const SimpleFilesRowContent = styled(RowContent)`
   }
 
   @media ${tablet} {
-      .row-main-container-wrapper {
-        display: flex;
-        justify-content: space-between;
-        max-width: inherit;
-      }
+    .row-main-container-wrapper {
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
 
-      .badges {
-        flex-direction: row-reverse;
-      }
+    .badges {
+      flex-direction: row-reverse;
+    }
 
-      .tablet-badge {
-        margin-top: 5px;
-      }
+    .tablet-badge {
+      margin-top: 5px;
+    }
 
-      .tablet-edit,
-      .can-convert {
-        margin-top: 6px;
+    .tablet-edit,
+    .can-convert {
+      margin-top: 6px;
       ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
+        props.theme.interfaceDirection === "rtl"
+          ? css`
               margin-left: 24px;
-              `
-            : css`
+            `
+          : css`
               margin-right: 24px;
-              `}
-      }
+            `}
+    }
 
-      .badge-version {
+    .badge-version {
       ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 22px;
-              `
-            : css`
-                margin-right: 22px;
-              `}
-      }
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 22px;
+            `
+          : css`
+              margin-right: 22px;
+            `}
+    }
 
-      .new-items {
-        min-width: 16px;
+    .new-items {
+      min-width: 16px;
       ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin: 5px 0 0 24px;
-              `
-            : css`
-                margin: 5px 24px 0 0;
-              `}
-      }
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 5px 0 0 24px;
+            `
+          : css`
+              margin: 5px 24px 0 0;
+            `}
+    }
   }
 
   @media ${mobile} {
@@ -152,9 +152,9 @@ const SimpleFilesRowContent = styled(RowContent)`
       margin: 0 1px;
     }
 
-  .row-content-link {
+    .row-content-link {
       padding: 12px 0px 0px 0px;
-  }
+    }
   }
 `;
 
@@ -233,12 +233,12 @@ const FilesRowContent = ({
         isDefaultRoomsQuotaSet
       );
 
-      if (!isMobileOnly) value = `${value} | ${spaceQuota}`;
+      if (!isMobile()) value = `${value} | ${spaceQuota}`;
 
       return value;
     }
 
-    if (!fileExst && !contentLength && !providerKey && !isMobileOnly)
+    if (!fileExst && !contentLength && !providerKey && !isMobile())
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
         "Translations:Files"
       )}`;

@@ -9,17 +9,6 @@ import toastr from "@docspace/components/toast/toastr";
 
 import { StyledBody, StyledText } from "./StyledComponent";
 
-const getSelectedOption = (options, action) => {
-  const option = options.find((elem) => elem.action === action);
-
-  if (option.key === "no-quota") {
-    option.label = "Unlimited";
-    return option;
-  }
-
-  return option;
-};
-
 const SpaceQuota = (props) => {
   const {
     hideColumns,
@@ -31,23 +20,21 @@ const SpaceQuota = (props) => {
     onSuccess,
     disableQuota,
     resetQuota,
+    defaultSize,
   } = props;
-
-  const [action, setAction] = useState(
-    item?.quotaLimit === -1 ? "no-quota" : "current-size"
-  );
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
+  const defaultQuotaSize = getConvertedQuota(t, defaultSize);
 
   const options = [
     {
       id: "info-account-quota_edit",
       key: "change-quota",
-      label: "Change quota",
+      label: t("Common:ChangeQuota"),
       action: "change",
     },
     {
@@ -59,7 +46,10 @@ const SpaceQuota = (props) => {
     {
       id: "info-account-quota_no-quota",
       key: "no-quota",
-      label: "Disable quota",
+      label:
+        item?.quotaLimit === -1
+          ? t("Common:Unlimited")
+          : t("Common:DisableQuota"),
       action: "no-quota",
     },
   ];
@@ -68,7 +58,7 @@ const SpaceQuota = (props) => {
     options?.splice(1, 0, {
       id: "info-account-quota_no-quota",
       key: "default-quota",
-      label: "Set to default",
+      label: t("Common:SetToDefault"),
       action: "default",
     });
 
@@ -87,12 +77,14 @@ const SpaceQuota = (props) => {
 
       changeQuota([item], successCallback, abortCallback);
 
-      setAction("current-size");
-
       return;
     }
 
     if (action === "no-quota") {
+      options.map((item) => {
+        if (item.key === "no-quota") item.label = t("Common:Unlimited");
+      });
+
       try {
         await disableQuota(-1, [item.id]);
         toastr.success(t("Common:StorageQuotaDisabled"));
@@ -100,10 +92,12 @@ const SpaceQuota = (props) => {
         toastr.error(e);
       }
 
-      setAction("no-quota");
-
       return;
     }
+
+    options.map((item) => {
+      if (item.key === "default-quota") item.label = defaultQuotaSize;
+    });
 
     try {
       await resetQuota([item.id]);
@@ -113,7 +107,9 @@ const SpaceQuota = (props) => {
     }
   };
 
-  const selectedOption = getSelectedOption(options, action);
+  const action = item?.quotaLimit === -1 ? "no-quota" : "current-size";
+
+  const selectedOption = options.find((elem) => elem.action === action);
 
   if (withoutLimitQuota) {
     return <StyledText fontWeight={600}>{usedQuota}</StyledText>;
@@ -153,8 +149,12 @@ export default inject(
     const { changeRoomQuota } = filesActionsStore;
     const { updateRoomQuota } = filesStore;
     const { currentQuotaStore } = auth;
-    const { isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet } =
-      currentQuotaStore;
+    const {
+      isDefaultUsersQuotaSet,
+      isDefaultRoomsQuotaSet,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+    } = currentQuotaStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const disableQuota = type === "user" ? updateUserQuota : updateRoomQuota;
@@ -164,11 +164,14 @@ export default inject(
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
 
+    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+
     return {
       withoutLimitQuota,
       changeQuota,
       disableQuota,
       resetQuota,
+      defaultSize,
     };
   }
 )(observer(SpaceQuota));

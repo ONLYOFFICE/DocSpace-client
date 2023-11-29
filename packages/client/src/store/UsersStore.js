@@ -149,18 +149,20 @@ class UsersStore {
 
     return users;
   };
-  updateUserQuota = async (quotaSize, userIds, filter) => {
+  updateUserQuota = async (quotaSize, userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
     const users = await api.people.setCustomUserQuota(userIds, quotaSize);
 
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
 
     return users;
   };
 
-  resetUserQuota = async (userIds, filter) => {
+  resetUserQuota = async (userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
     const users = await api.people.resetUserQuota(userIds);
 
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
 
     return users;
   };

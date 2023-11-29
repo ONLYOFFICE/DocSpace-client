@@ -560,7 +560,7 @@ export const getConvertedSize = (t, bytes) => {
 };
 
 export const getConvertedQuota = (t, bytes) => {
-  if (bytes === -1) return "Unlimited";
+  if (bytes === -1) return t("Common:Unlimited");
   return getConvertedSize(t, bytes);
 };
 

@@ -335,7 +335,7 @@ class PeopleStore {
       {
         id: "menu-change-quota",
         key: "change-quota",
-        label: "Change quota",
+        label: t("Common:ChangeQuota"),
         disabled: !hasUsersToChangeQuota,
         iconUrl: ChangQuotaReactSvgUrl,
         onClick: () => this.changeUserQuota(selection),
@@ -343,7 +343,7 @@ class PeopleStore {
       {
         id: "menu-default-quota",
         key: "default-quota",
-        label: "Set to default",
+        label: t("Common:SetToDefault"),
         disabled: !hasUsersToResetQuota,
         iconUrl: DefaultQuotaReactSvgUrl,
         onClick: () => this.resetUserQuota(selection, t),
@@ -351,7 +351,7 @@ class PeopleStore {
       {
         id: "menu-disable-quota",
         key: "disable-quota",
-        label: "Disable quota",
+        label: t("Common:DisableQuota"),
         disabled: !hasUsersToDisableQuota,
         iconUrl: DisableQuotaReactSvgUrl,
         onClick: () => this.disableUserQuota(selection, t),

@@ -1905,7 +1905,7 @@ class FilesActionStore {
           return {
             id: "menu-change-quota",
             key: "change-quota",
-            label: "Change quota",
+            label: t("Common:ChangeQuota"),
             iconUrl: ChangQuotaReactSvgUrl,
             onClick: () => this.changeRoomQuota(selection),
             disabled: false,
@@ -1927,7 +1927,7 @@ class FilesActionStore {
           return {
             id: "menu-disable-quota",
             key: "disable-quota",
-            label: "Disable quota",
+            label: t("Common:DisableQuota"),
             iconUrl: DisableQuotaReactSvgUrl,
             onClick: () => this.disableRoomQuota(selection, t),
             disabled: false,

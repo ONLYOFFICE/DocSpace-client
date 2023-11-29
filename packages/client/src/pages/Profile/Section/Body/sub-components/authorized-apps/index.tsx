@@ -22,6 +22,7 @@ import { StyledContainer } from "./styled-authorized-apps";
 import TableView from "./sub-components/TableView";
 import RowView from "./sub-components/RowView";
 import RevokeDialog from "./sub-components/RevokeDialog";
+import EmptyScreen from "./sub-components/EmptyScreen";
 
 interface AuthorizedAppsProps {
   consents?: IClientProps[];
@@ -77,28 +78,33 @@ const AuthorizedApps = ({
 
   return (
     <StyledContainer>
-      {/* @ts-ignore */}
-      <Text fontSize={"12px"} fontWeight={"400"} lineHeight={"16px"}>
-        {t("ProfileDescription")}
-      </Text>
-      {consents && consents?.length > 0 && (
-        <Consumer>
-          {(context: { sectionWidth: number; sectionHeight: number }) => (
-            <>
-              {viewAs === "table" ? (
-                <TableView
-                  items={consents || []}
-                  sectionWidth={context.sectionWidth}
-                />
-              ) : (
-                <RowView
-                  items={consents || []}
-                  sectionWidth={context.sectionWidth}
-                />
-              )}
-            </>
-          )}
-        </Consumer>
+      {consents && consents?.length > 0 ? (
+        <>
+          {/* @ts-ignore */}
+          <Text fontSize={"12px"} fontWeight={"400"} lineHeight={"16px"}>
+            {t("ProfileDescription")}
+          </Text>
+
+          <Consumer>
+            {(context: { sectionWidth: number; sectionHeight: number }) => (
+              <>
+                {viewAs === "table" ? (
+                  <TableView
+                    items={consents || []}
+                    sectionWidth={context.sectionWidth}
+                  />
+                ) : (
+                  <RowView
+                    items={consents || []}
+                    sectionWidth={context.sectionWidth}
+                  />
+                )}
+              </>
+            )}
+          </Consumer>
+        </>
+      ) : (
+        <EmptyScreen t={t} />
       )}
       {infoDialogVisible && (
         <InfoDialog visible={infoDialogVisible} isProfile />

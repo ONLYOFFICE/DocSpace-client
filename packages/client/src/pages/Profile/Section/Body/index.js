@@ -51,7 +51,7 @@ const SectionBodyContent = (props) => {
     },
     {
       id: "authorized-apps",
-      name: "Authorized apps",
+      name: t("OAuth:AuthorizedApps"),
       content: <AuthorizedApps />,
     },
   ];
@@ -119,6 +119,7 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
+      "OAuth",
     ])(SectionBodyContent)
   )
 );

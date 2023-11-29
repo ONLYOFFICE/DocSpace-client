@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import Badge from "@docspace/components/badge";
 
-import { StyledBaseQuotaComponent } from "./StyledComponent";
+import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 
 import QuotaPerRoomComponent from "./sub-components/QuotaPerRoom";
 import QuotaPerUserComponent from "./sub-components/QuotaPerUser";
@@ -20,9 +20,9 @@ const QuotasComponent = (props) => {
   return (
     <StyledBaseQuotaComponent>
       <div className="title-container">
-        <Text fontSize="16px" fontWeight={700}>
+        <StyledMainTitle fontSize="16px" fontWeight={700}>
           {t("Quotas")}
-        </Text>
+        </StyledMainTitle>
 
         {!isItemQuotaAvailable && (
           <Badge

@@ -6,7 +6,10 @@ import { getConvertedSize } from "@docspace/common/utils";
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
-import { StyledDiscSpaceUsedComponent } from "./StyledComponent";
+import {
+  StyledDiscSpaceUsedComponent,
+  StyledMainTitle,
+} from "./StyledComponent";
 
 const DiskSpaceUsedComponent = (props) => {
   const { usedTotalStorageSizeCount, maxTotalSizeByQuota } = props;
@@ -18,9 +21,9 @@ const DiskSpaceUsedComponent = (props) => {
 
   return (
     <StyledDiscSpaceUsedComponent>
-      <Text fontSize="16px" fontWeight={700} className="main-title">
+      <StyledMainTitle fontSize="16px" fontWeight={700}>
         {t("DiskSpaceUsed")}
-      </Text>
+      </StyledMainTitle>
 
       <Text fontWeight={700} className="disk-space_title">
         {t("TotalStorage", {

@@ -8,7 +8,7 @@ import Badge from "@docspace/components/badge";
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
-import { StyledStatistics } from "./StyledComponent";
+import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
@@ -54,9 +54,9 @@ const StatisticsComponent = (props) => {
   return (
     <StyledStatistics>
       <div className="title-container">
-        <Text fontWeight={700} fontSize={"16px"} className="statistics_title">
+        <StyledMainTitle fontWeight={700} fontSize={"16px"}>
           {t("Statistic")}
-        </Text>
+        </StyledMainTitle>
         {!isItemQuotaAvailable && (
           <Badge
             backgroundColor="#EDC409"

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Row from "@docspace/components/row";
+import Text from "@docspace/components/text";
 
 const StyledBaseQuotaComponent = styled.div`
   .quotas_description {
     margin-bottom: 20px;
-    margin-top: 8px;
   }
 
   .toggle-container {
@@ -25,12 +25,12 @@ const StyledBaseQuotaComponent = styled.div`
   }
 `;
 
+const StyledMainTitle = styled(Text)`
+  margin-bottom: 16px;
+`;
 const StyledDiscSpaceUsedComponent = styled.div`
   margin-top: 16px;
 
-  .main-title {
-    margin-bottom: 16px;
-  }
   .disk-space_title {
     color: ${(props) => props.theme.text.grayBackgroundText};
   }
@@ -99,10 +99,6 @@ const StyledFolderTagColor = styled.div`
 
 const StyledStatistics = styled.div`
   max-width: 700px;
-
-  .statistics_title {
-    margin-bottom: 8px;
-  }
 
   .statistics-description {
     margin-bottom: 20px;
@@ -184,4 +180,5 @@ export {
   StyledDivider,
   StyledSimpleFilesRow,
   StyledMainInfo,
+  StyledMainTitle,
 };

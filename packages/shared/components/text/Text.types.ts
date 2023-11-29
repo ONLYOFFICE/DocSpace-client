@@ -27,6 +27,8 @@ export interface TextProps {
   textAlign?: string;
   /** Title */
   title?: string;
+  /** Sets the class name */
+  className?: string;
   /** Disables word wrapping */
   truncate?: boolean;
 

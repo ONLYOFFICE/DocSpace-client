@@ -151,7 +151,7 @@
   "PasswordMinLenght": "Минимальная длина пароля",
   "Path": "Путь",
   "PersonalFiles": "Личные файлы",
-  "PersonalFilesDescription": "Файлы и документы пользователей {{serviceName}} будут импортированы в раздел «Мои документы» пользователей.",
+  "PersonalFilesDescription": "Файлы и документы пользователей {{serviceName}} будут импортированы в раздел \"Мои документы\" пользователей.",
   "PortalAccess": "Доступ к DocSpace",
   "PortalDeactivation": "Деактивировать DocSpace",
   "PortalDeactivationDescription": "Используйте эту опцию для временной деактивации портала.",

@@ -167,7 +167,7 @@
   "PasswordMinLenght": "Minimal password length",
   "Path": "Path",
   "PersonalFiles": "Personal files",
-  "PersonalFilesDescription": "Files and documents of {{serviceName}} users will be imported into the users' �My Documents� section.",
+  "PersonalFilesDescription": "Files and documents of {{serviceName}} users will be imported into the \"My Documents\" section.",
   "PortalAccess": "DocSpace access",
   "PortalDeactivation": "Deactivate DocSpace",
   "PortalDeactivationDescription": "Use this option to deactivate your space temporarily.",

@@ -9,6 +9,7 @@ import copy from "copy-to-clipboard";
 import Text from "@docspace/components/text";
 import IconButton from "@docspace/components/icon-button";
 import toastr from "@docspace/components/toast/toastr";
+import { ShareAccessRights } from "@docspace/common/constants";
 
 import PublicRoomBar from "../Members/sub-components/PublicRoomBar";
 import LinkRow from "./LinkRow";
@@ -57,7 +58,12 @@ const Share = (props) => {
   };
 
   const addAdditionalLinks = async () => {
-    const newLink = await addFileLink(selection.id, 10, false, false);
+    const newLink = await addFileLink(
+      selection.id,
+      ShareAccessRights.ReadOnly,
+      false,
+      false
+    );
     setAdditionalFileLinks([...additionalFileLinks, ...[newLink]]);
   };
 
@@ -68,8 +74,11 @@ const Share = (props) => {
         link.sharedTo.id,
         link.access,
         link.sharedTo.primary,
-        item.internal
+        item.internal,
+        link.sharedTo.expirationDate
       );
+      updateLink(link, res);
+
       copy(link.sharedTo.shareLink);
       toastr.success(t("Files:LinkSuccessfullyCopied"));
     } catch (e) {
@@ -84,14 +93,64 @@ const Share = (props) => {
         link.sharedTo.id,
         item.access,
         link.sharedTo.primary,
-        link.internal
+        link.sharedTo.internal,
+        link.sharedTo.expirationDate
       );
+      if (item.access === ShareAccessRights.None) {
+        deleteLink(link, link.sharedTo.id);
+      } else {
+        updateLink(link, res);
+      }
+
       copy(link.sharedTo.shareLink);
       toastr.success(t("Files:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
-    fetchLinks();
+  };
+
+  const changeExpirationOption = async (link, expirationDate) => {
+    try {
+      const res = await editFileLink(
+        selection.id,
+        link.sharedTo.id,
+        link.access,
+        link.sharedTo.primary,
+        link.sharedTo.internal,
+        expirationDate
+      );
+      updateLink(link, res);
+
+      copy(link.sharedTo.shareLink);
+      toastr.success(t("Files:LinkSuccessfullyCopied"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  const updateLink = (link, newItem) => {
+    if (link.sharedTo.primary) {
+      setPrimaryFileLink([newItem]);
+    } else {
+      const newArr = additionalFileLinks.map((item) => {
+        if (item.sharedTo.id === newItem.sharedTo.id) {
+          return newItem || null;
+        }
+        return item;
+      });
+      setAdditionalFileLinks(newArr);
+    }
+  };
+
+  const deleteLink = (link, id) => {
+    if (link.sharedTo.primary) {
+      setPrimaryFileLink(null);
+    } else {
+      const newArr = additionalFileLinks.filter(
+        (item) => item.sharedTo.id !== id
+      );
+      setAdditionalFileLinks(newArr);
+    }
   };
 
   return (
@@ -110,6 +169,7 @@ const Share = (props) => {
           links={primaryFileLink}
           changeShareOption={changeShareOption}
           changeAccessOption={changeAccessOption}
+          changeExpirationOption={changeExpirationOption}
         />
       </StyledLinks>
 
@@ -131,6 +191,7 @@ const Share = (props) => {
             links={additionalFileLinks}
             changeShareOption={changeShareOption}
             changeAccessOption={changeAccessOption}
+            changeExpirationOption={changeExpirationOption}
           />
         </StyledLinks>
       )}

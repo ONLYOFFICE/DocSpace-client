@@ -1,4 +1,5 @@
 {
   "DeleteUser": "删除用户",
+  "DeleteGroupUsersSuccessMessage": "用户已成功删除。",
   "SuccessfullyDeleteUserInfoMessage": "用户已成功删除。"
 }

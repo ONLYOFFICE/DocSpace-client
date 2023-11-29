@@ -32,7 +32,7 @@ import {
   ResetLink,
 } from "../StyledInvitePanel";
 
-const searchUsersThreshold = 2;
+const minSearchValue = 2;
 
 const InviteInput = ({
   defaultAccess,
@@ -107,7 +107,7 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length >= searchUsersThreshold) {
+    if (query.length >= minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
@@ -135,14 +135,14 @@ const InviteInput = ({
 
     setInputValue(value);
 
-    if (clearValue.length < searchUsersThreshold) {
+    if (clearValue.length < minSearchValue) {
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
       return;
     }
 
     if (
-      (!!usersList.length || clearValue.length >= searchUsersThreshold) &&
+      (!!usersList.length || clearValue.length >= minSearchValue) &&
       !searchPanelVisible
     ) {
       openInviteInputPanel();
@@ -150,7 +150,11 @@ const InviteInput = ({
 
     if (roomId !== -1) {
       debouncedSearch(clearValue);
+
+      return;
     }
+
+    setIsAddEmailPanelBlocked(false);
   };
 
   const removeExist = (items) => {
@@ -394,24 +398,23 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= searchUsersThreshold && (
-          <StyledDropDown
-            width={searchRef?.current?.offsetWidth}
-            isDefaultMode={false}
-            open={
-              !!usersList.length
-                ? searchPanelVisible
-                : searchPanelVisible && !isAddEmailPanelBlocked
-            }
-            manualX="16px"
-            showDisabledItems
-            clickOutsideAction={closeInviteInputPanel}
-            eventTypes="click"
-            {...dropDownMaxHeight}
-          >
-            {!!usersList.length ? foundUsers : addEmailPanel}
-          </StyledDropDown>
-        )}
+        {inputValue.length >= minSearchValue &&
+          (isAddEmailPanelBlocked ? (
+            <></>
+          ) : (
+            <StyledDropDown
+              width={searchRef?.current?.offsetWidth}
+              isDefaultMode={false}
+              open={searchPanelVisible}
+              manualX="16px"
+              showDisabledItems
+              clickOutsideAction={closeInviteInputPanel}
+              eventTypes="click"
+              {...dropDownMaxHeight}
+            >
+              {!!usersList.length ? foundUsers : addEmailPanel}
+            </StyledDropDown>
+          ))}
 
         <AccessSelector
           className="add-manually-access"

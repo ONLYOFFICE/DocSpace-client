@@ -25,6 +25,8 @@ class PasswordInput extends React.Component {
     const { inputValue, inputType, clipActionResource, emailInputName } = props;
 
     this.ref = React.createRef();
+    this.refTooltip = React.createRef();
+    this.refTooltipContent = React.createRef();
 
     this.state = {
       type: inputType,
@@ -39,9 +41,43 @@ class PasswordInput extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside = (event) => {
+    if (
+      !this.refTooltip.current ||
+      !this.refTooltip.current.isOpen ||
+      this.refTooltip.current.activeAnchor.contains(event.target) ||
+      this.refTooltipContent.current?.parentElement.contains(event.target)
+    )
+      return;
+
+    this.refTooltip.current.close();
+  };
+
   onBlur = (e) => {
     e.persist();
     if (this.props.onBlur) this.props.onBlur(e);
+  };
+
+  onFocus = (e) => {
+    const length = this.state.inputValue?.length ?? 0;
+
+    const {
+      hasError,
+      hasWarning,
+      passwordSettings: { minLength },
+    } = this.props;
+
+    if (length < minLength || hasError || hasWarning) {
+      this.refTooltip.current?.open?.(e);
+    }
   };
 
   onKeyDown = (e) => {
@@ -116,6 +152,10 @@ class PasswordInput extends React.Component {
 
   onChangeAction = (e) => {
     this.props.onChange && this.props.onChange(e);
+
+    if (this.refTooltip.current?.isOpen) {
+      this.refTooltip.current?.close?.(e);
+    }
 
     if (this.props.simpleView) {
       this.setState({
@@ -291,7 +331,7 @@ class PasswordInput extends React.Component {
   };
 
   renderTooltipContent = () => (
-    <TooltipStyle>
+    <TooltipStyle ref={this.refTooltipContent}>
       <StyledTooltipContainer
         forwardedAs="div"
         fontSize="12px"
@@ -391,6 +431,7 @@ class PasswordInput extends React.Component {
           iconSize={16}
           isIconFill={true}
           onBlur={this.onBlur}
+          onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           hasWarning={hasWarning}
           placeholder={placeholder}
@@ -402,13 +443,14 @@ class PasswordInput extends React.Component {
 
         {!isDisableTooltip && !isDisabled && (
           <Tooltip
-            place="top"
             clickable
+            place="top"
             openOnClick
-            anchorSelect="div[id='tooltipContent'] input"
-            offsetLeft={this.props.tooltipOffsetLeft}
+            imperativeModeOnly
+            ref={this.refTooltip}
             offsetTop={this.props.tooltipOffsetTop}
-            reference={this.refTooltip}
+            offsetLeft={this.props.tooltipOffsetLeft}
+            anchorSelect="div[id='tooltipContent']"
           >
             {this.renderTooltipContent()}
           </Tooltip>

@@ -38,7 +38,8 @@ const InfoPanelBodyContent = ({
   const isNoItemGallery = isGallery && !gallerySelected;
   const itemIsRoot =
     selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
-  const isNoItem = !isSeveralItems && (isNoItemGallery || itemIsRoot);
+  const isNoItem =
+    !isSeveralItems && (isNoItemGallery || (itemIsRoot && !isGallery));
 
   const defaultProps = {
     selection,

@@ -107,6 +107,7 @@ function Editor({
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -809,6 +810,7 @@ function Editor({
         onRequestInsertImage,
         onRequestSelectSpreadsheet,
         onRequestSelectDocument,
+        onRequestReferenceSource,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
@@ -864,6 +866,7 @@ function Editor({
         onRequestInsertImage = onSDKRequestInsertImage;
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
+        onRequestReferenceSource = onSDKRequestReferenceSource;
       }
 
       if (userAccessRights.EditHistory) {
@@ -905,6 +908,7 @@ function Editor({
           onRequestSaveAs,
           onRequestSelectSpreadsheet,
           onRequestSelectDocument,
+          onRequestReferenceSource,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,

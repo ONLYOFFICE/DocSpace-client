@@ -217,11 +217,11 @@ class QuotasStore {
   }
 
   get isDefaultRoomsQuotaSet() {
-    return this.currentPortalQuota?.roomsQuota.enableQuota;
+    return this.currentPortalQuota?.roomsQuota?.enableQuota;
   }
 
   get isDefaultUsersQuotaSet() {
-    return this.currentPortalQuota?.usersQuota.enableQuota;
+    return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
 
   get defaultRoomsQuota() {

@@ -40,6 +40,7 @@ const StyledDiscSpaceUsedComponent = styled.div`
     margin-top: 16px;
     .text-container {
       display: grid;
+      min-height: 35px;
       .last-update {
         color: ${(props) => props.theme.text.descriptionColor};
       }

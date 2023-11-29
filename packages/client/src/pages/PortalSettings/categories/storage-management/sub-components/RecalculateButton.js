@@ -1,77 +1,41 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import {
-  recalculateQuota,
-  checkRecalculateQuota,
-} from "@docspace/common/api/settings";
+import { recalculateQuota } from "@docspace/common/api/settings";
 import toastr from "@docspace/components/toast/toastr";
 
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 
-let isWaitRequest = false;
 const RecalculateButton = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const intervalIdRef = useRef(null);
-  const timerIdRef = useRef(null);
-
   const { t } = useTranslation("Settings");
 
-  const {} = props;
-
-  const checkRecalculate = () => {
-    intervalIdRef.current = setInterval(async () => {
-      try {
-        timerIdRef.current = setTimeout(() => setIsLoading(true), 300);
-        console.log("interval");
-        if (isWaitRequest) {
-          return;
-        }
-
-        isWaitRequest = true;
-        const result = await checkRecalculateQuota();
-
-        isWaitRequest = false;
-
-        if (result === false) {
-          const timerId = timerIdRef.current;
-          const intervalId = intervalIdRef.current;
-
-          clearInterval(intervalId);
-          clearTimeout(timerId);
-
-          intervalId = null;
-          timerId = null;
-
-          setIsLoading(false);
-          return;
-        }
-      } catch (e) {
-        clearInterval(intervalIdRef.current);
-        clearTimeout(timerIdRef.current);
-        setIsLoading(false);
-      }
-    }, 2000);
-  };
+  const {
+    isRecalculating,
+    getIntervalCheckRecalculate,
+    clearIntervalCheckRecalculate,
+    setIsRecalculating,
+  } = props;
 
   useEffect(() => {
-    checkRecalculate();
+    getIntervalCheckRecalculate();
 
     return () => {
-      clearInterval(intervalIdRef.current);
-      clearTimeout(timerIdRef.current);
+      clearIntervalCheckRecalculate();
     };
   }, []);
 
   const onRecalculateClick = async () => {
     try {
+      setIsRecalculating(true);
+
       await recalculateQuota();
 
-      checkRecalculate();
+      getIntervalCheckRecalculate();
     } catch (e) {
-      toastr.error("Error");
+      toastr.error(e);
     }
   };
   const lastUpdateDate = moment("2023-03-09T17:46:59").format("l LT");
@@ -82,17 +46,34 @@ const RecalculateButton = (props) => {
         size="small"
         label={"Recalculate"}
         onClick={onRecalculateClick}
-        isLoading={isLoading}
-        isDisabled={isLoading}
+        isLoading={isRecalculating}
+        isDisabled={isRecalculating}
       />
       <div className="text-container">
         <Text>{t("UpdatingStatistics")}</Text>
-        <Text fontSize="12px" className="last-update">
-          {t("LastUpdate", { date: lastUpdateDate })}
-        </Text>
+
+        {!isRecalculating && (
+          <Text fontSize="12px" className="last-update">
+            {t("LastUpdate", { date: lastUpdateDate })}
+          </Text>
+        )}
       </div>
     </div>
   );
 };
 
-export default RecalculateButton;
+export default inject(({ storageManagement }) => {
+  const {
+    isRecalculating,
+    getIntervalCheckRecalculate,
+    clearIntervalCheckRecalculate,
+    setIsRecalculating,
+  } = storageManagement;
+
+  return {
+    isRecalculating,
+    getIntervalCheckRecalculate,
+    clearIntervalCheckRecalculate,
+    setIsRecalculating,
+  };
+})(observer(RecalculateButton));

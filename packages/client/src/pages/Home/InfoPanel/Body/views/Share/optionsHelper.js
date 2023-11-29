@@ -1,4 +1,5 @@
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
+import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -21,49 +22,57 @@ export const getShareOptions = (t) => {
   ];
 };
 
-export const getAccessOptions = (t) => {
-  return [
-    {
+export const getAccessOptions = (t, available) => {
+  const accessOptions = [
+    available.Editing && {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Editing"),
       icon: AccessEditReactSvgUrl,
     },
-    {
+    available.CustomFilter && {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
-    {
+    available.Comment && {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Comment"),
       icon: AccessCommentReactSvgUrl,
     },
-    {
+    available.Read && {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("ReadOnly"),
       icon: EyeReactSvgUrl,
     },
-    {
+    available.Restrict && {
       access: ShareAccessRights.DenyAccess,
       key: "deny-access",
       label: t("DenyAccess"),
       icon: EyeOffReactSvgUrl,
     },
+    available.Review && {
+      access: ShareAccessRights.Review,
+      key: "review",
+      label: t("Common:Review"),
+      icon: AccessReviewReactSvgUrl,
+    },
     {
       key: "separator",
       isSeparator: true,
     },
-    {
+    available.None && {
       access: ShareAccessRights.None,
       key: "remove",
       label: t("Translations:Remove"),
       icon: RemoveReactSvgUrl,
     },
   ];
+
+  return accessOptions.filter((item) => item.key);
 };
 
 export const getExpiredOptions = (

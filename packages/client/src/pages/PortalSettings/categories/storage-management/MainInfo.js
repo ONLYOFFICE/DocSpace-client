@@ -1,4 +1,4 @@
-import React from "react";
+import { inject, observer } from "mobx-react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
@@ -24,4 +24,10 @@ const MainInfoComponent = (props) => {
   );
 };
 
-export default MainInfoComponent;
+export default inject(({ storageManagement }) => {
+  const { portalInfo, activeUsersCount } = storageManagement;
+  return {
+    portalInfo,
+    activeUsersCount,
+  };
+})(observer(MainInfoComponent));

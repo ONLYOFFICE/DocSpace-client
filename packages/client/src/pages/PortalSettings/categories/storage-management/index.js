@@ -19,9 +19,7 @@ const StorageManagement = ({ isInit, language, init }) => {
 
   return (
     <StyledBody>
-      {/* <MainInfoComponent
-
-      /> */}
+      <MainInfoComponent />
       <StyledSettingsSeparator />
       <DiskSpaceUsedComponent />
       <StyledSettingsSeparator />

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment";
 
 import Calendar from "@docspace/components/calendar";

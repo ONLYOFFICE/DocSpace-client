@@ -312,15 +312,15 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-portal-statistics",
+    id: "portal-settings_catalog-portal-storageManagement",
     key: "5",
-    type: PageType.developerTools,
+    type: PageType.storageManagement,
     link: "management",
     tKey: "StorageManagement",
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-statistics",
+        id: "portal-settings_catalog-storageManagement",
         key: "5-0",
         icon: "",
         link: "disk-space",
@@ -328,14 +328,14 @@ export const settingsTree = [
         isCategory: true,
         children: [
           {
-            id: "portal-settings_catalog-statistics_quota-per-room",
+            id: "portal-settings_catalog-storageManagement_quota-per-room",
             key: "5-0-1",
             icon: "",
             link: "quota-per-room",
             tKey: "QuotaPerRoom",
           },
           {
-            id: "portal-settings_catalog-statistics_quota-per-user",
+            id: "portal-settings_catalog-storageManagement_quota-per-user",
             key: "5-0-2",
             icon: "",
             link: "quota-per-user",

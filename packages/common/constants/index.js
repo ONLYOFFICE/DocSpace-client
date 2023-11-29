@@ -216,6 +216,7 @@ export const PageType = Object.freeze({
   portalDeletion: "portalDeletion",
   payments: "payments",
   bonus: "bonus",
+  storageManagement: "storageManagement",
 });
 
 /**

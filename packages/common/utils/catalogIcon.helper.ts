@@ -22,6 +22,7 @@ import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/ca
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
 
 import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folder.react.svg?url";
 import CatalogUser20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.user.react.svg?url";
@@ -43,6 +44,7 @@ import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
+import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-storage-management.svg?url";
 
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
 type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];
@@ -80,6 +82,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
+    [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
   },
   20: {
     [FolderType.USER]: CatalogUser20ReactSvgUrl,
@@ -102,6 +105,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
+    [PageType.storageManagement]: CatalogSettingsStorageManagement20ReactSvgUrl,
   },
 };
 

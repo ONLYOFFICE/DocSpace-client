@@ -241,6 +241,8 @@ export const FolderType = Object.freeze({
 
   Done: 25,
   InProgress: 26,
+  SubFolderDone: 27,
+  SubFolderInProgress: 28,
 });
 
 // extends FolderType keys

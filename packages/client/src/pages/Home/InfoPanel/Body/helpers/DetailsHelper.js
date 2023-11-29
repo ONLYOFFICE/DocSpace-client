@@ -78,7 +78,6 @@ class DetailsHelper {
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
-    this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
   }
 
   getPropertyList = () => {
@@ -321,12 +320,7 @@ class DetailsHelper {
   };
 
   getQuotaItem = () => {
-    return (
-      <SpaceQuota
-        item={this.item}
-        withoutLimitQuota={!this.isDefaultRoomsQuotaSet}
-      />
-    );
+    return <SpaceQuota item={this.item} />;
   };
 }
 

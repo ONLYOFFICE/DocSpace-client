@@ -87,7 +87,6 @@ const PeopleRowContainer = ({
   filterTotal,
   withPaging,
   currentDeviceType,
-  isDefaultUsersQuotaSet,
 }) => {
   useViewEffect({
     view: accountsViewAs,
@@ -112,7 +111,6 @@ const PeopleRowContainer = ({
           item={item}
           itemIndex={index}
           sectionWidth={sectionWidth}
-          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
         />
       ))}
     </StyledRowContainer>
@@ -133,8 +131,6 @@ export default inject(({ peopleStore, auth, filesStore }) => {
   const { filterTotal, isFiltered } = filterStore;
 
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { currentQuotaStore } = auth;
-  const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
   return {
     peopleList,
@@ -149,6 +145,5 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     filterTotal,
     isFiltered,
     currentDeviceType,
-    isDefaultUsersQuotaSet,
   };
 })(observer(PeopleRowContainer));

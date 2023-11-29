@@ -32,8 +32,6 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
-
-    isDefaultRoomsQuotaSet,
   } = props;
 
   return (
@@ -153,11 +151,7 @@ const RoomsRowDataComponent = (props) => {
       )}
       {roomQuotaColumnIsEnable ? (
         <TableCell className={"table-cell_Storage/Quota"}>
-          <SpaceQuota
-            item={item}
-            type="room"
-            withoutLimitQuota={!isDefaultRoomsQuotaSet}
-          />
+          <SpaceQuota item={item} type="room" />
         </TableCell>
       ) : (
         <div />
@@ -166,7 +160,7 @@ const RoomsRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ auth, tableStore }) => {
+export default inject(({ tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
@@ -175,8 +169,6 @@ export default inject(({ auth, tableStore }) => {
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
   } = tableStore;
-  const { currentQuotaStore } = auth;
-  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   return {
     roomQuotaColumnIsEnable,
@@ -185,6 +177,5 @@ export default inject(({ auth, tableStore }) => {
     roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
-    isDefaultRoomsQuotaSet,
   };
 })(observer(RoomsRowDataComponent));

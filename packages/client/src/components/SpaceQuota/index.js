@@ -147,18 +147,25 @@ const SpaceQuota = (props) => {
 };
 
 export default inject(
-  ({ peopleStore, filesActionsStore, filesStore }, { type }) => {
+  ({ peopleStore, filesActionsStore, filesStore, auth }, { type }) => {
     const { changeUserQuota, usersStore } = peopleStore;
     const { updateUserQuota, resetUserQuota } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const { updateRoomQuota } = filesStore;
+    const { currentQuotaStore } = auth;
+    const { isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet } =
+      currentQuotaStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const disableQuota = type === "user" ? updateUserQuota : updateRoomQuota;
 
     const resetQuota = type === "user" ? resetUserQuota : null;
 
+    const withoutLimitQuota =
+      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+
     return {
+      withoutLimitQuota,
       changeQuota,
       disableQuota,
       resetQuota,

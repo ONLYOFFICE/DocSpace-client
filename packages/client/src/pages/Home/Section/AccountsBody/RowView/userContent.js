@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import RowContent from "@docspace/components/row-content";
@@ -175,4 +175,10 @@ const UserContent = ({
   );
 };
 
-export default withTranslation(["People", "Common"])(UserContent);
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+  return {
+    isDefaultUsersQuotaSet,
+  };
+})(withTranslation(["People", "Common"])(observer(UserContent)));

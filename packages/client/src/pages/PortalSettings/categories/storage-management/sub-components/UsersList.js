@@ -40,7 +40,7 @@ const StatisticsComponent = (props) => {
             "user-icon"
           )}
           {textElement(displayName)}
-          {quotaElement(item)}
+          {quotaElement(item, "user")}
         </>
       </StyledSimpleFilesRow>
     );

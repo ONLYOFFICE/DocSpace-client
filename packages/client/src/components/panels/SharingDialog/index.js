@@ -3,20 +3,20 @@ import styled from "styled-components";
 import { Provider as MobxProvider, inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getShareFiles } from "@docspace/common/api/files";
-
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
+import NoUserSelect from "@docspace/components/utils/commonStyles";
 
-import SharingPanel from "../SharingPanel";
 import Share from "SRC_DIR/pages/Home/InfoPanel/Body/views/Share";
 import store from "client/store";
 
 const { auth: authStore } = store;
 
 const StyledWrapper = styled.div`
+  ${NoUserSelect}
+
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -97,14 +97,6 @@ const SharingDialogWrapper = inject(({ filesStore }) => {
 })(observer(SharingDialog));
 
 class SharingModal extends React.Component {
-  static getSharingSettings = (fileId) =>
-    getShareFiles([+fileId], []).then((users) =>
-      this.convertSharingUsers(users)
-    );
-
-  static convertSharingUsers = (users) =>
-    Promise.resolve(SharingPanel.convertSharingUsers(users));
-
   componentDidMount() {
     authStore.init(true);
   }

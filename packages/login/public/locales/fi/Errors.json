@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Virheellinen käyttäjänimi tai salasana.",
   "LoginWithAccountNotFound": "Kolmannen osapuolen tiliä ei löydy. Sinun täytyy ensin kytkeytyä sosiaalisen median tiliisi profiilisivulla.",
   "LoginWithBruteForce": "Todennus väliaikaisesti estetty",
+  "LoginWithBruteForceCaptcha": "Vahvista, että et ole robotti",
   "RecaptchaInvalid": "Virheellinen Recaptcha",
   "SsoAttributesNotFound": "Todennus epäonnistui (väitemääritteitä ei löydy)",
   "SsoAuthFailed": "Todennus epäonnistui",

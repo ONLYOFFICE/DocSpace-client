@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Przełączaj między widokiem siatki i listy",
   "HotkeysClearAll": "Wyczyść zaznaczenie",
   "HotkeysClose": "Zamknij/Cofnij akcję",
+  "HotkeysCopySelected": "Kopiuj zaznaczone pliki do schowka",
   "HotkeysCreateDocument": "Utwórz dokument",
   "HotkeysCreateFolder": "Utwórz folder",
   "HotkeysCreateForm": "Utwórz pusty szablon formularza",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Utwórz prezentację",
   "HotkeysCreateSpreadsheet": "Utwórz arkusz kalkulacyjny",
   "HotkeysCreatingObjects": "Tworzenie elementów",
+  "HotkeysCutSelected": "Wytnij zaznaczone pliki do schowka",
   "HotkeysEnterKey": "Wpisz",
   "HotkeysExtendSelectionDown": "Rozszerz zaznaczenie w dół",
   "HotkeysExtendSelectionLeft": "Rozszerz zaznaczenie w lewo",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Przejdź w górę bez zmiany zaznaczenia",
   "HotkeysNavigation": "Nawigacja",
   "HotkeysOpen": "Otwórz zaznaczone elementy/Potwierdź akcję",
+  "HotkeysPasteSelected": "Wklej zaznaczone pliki ze schowka",
   "HotkeysPlayPause": "Odtwarzanie/Pauza",
   "HotkeysRedoLastUndoneAction": "Powtórz ostatnią cofniętą akcję",
   "HotkeysRemove": "Usuń zaznaczone elementy",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Odstęp",
   "HotkeysUndoLastAction": "Cofnij ostatnią akcję",
   "HotkeysUploadFile": "Przesyłanie pliku",
-  "HotkeysUploadingObjects": "Wgrywanie elementów"
+  "HotkeysUploadingObjects": "Wgrywanie elementów",
+  "HotkeysZoomIn": "Powiększ",
+  "HotkeysZoomOut": "Pomniejsz"
 }

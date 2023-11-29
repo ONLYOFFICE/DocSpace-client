@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Izdzēst spraudni",
+  "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams DocSpace lietotājiem. Vai tiešām vēlaties turpināt?",
+  "DeletePluginTitle": "Vai izdzēst spraudni?",
+  "Description": "Varat pievienot spraudņus, lai paplašinātu DocSpace funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni un ZIP arhīvā atlasiet spraudņa failu.",
+  "Metadata": "Metadati",
+  "NeedSettings": "Nepieciešams ievadīt iestatījumus",
+  "NoPlugins": "Nav pievienoti spraudņi",
+  "PluginsHelp": "Spraudņi ļauj paplašināt DocSpace funkcionalitāti",
+  "UploadPlugin": "Augšupielādēt spraudni"
+}

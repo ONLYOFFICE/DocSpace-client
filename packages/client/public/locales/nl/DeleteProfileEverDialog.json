@@ -1,5 +1,9 @@
 {
-  "DeleteUser": "Gebruiker verwijderen",
   "DeleteGroupUsersSuccessMessage": "Gebruikers zijn met succes verwijderd.",
+  "DeleteMyDocumentsUser": "Alle persoonlijke bestanden en mappen in Mijn documenten van deze gebruiker worden definitief verwijderd.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kamers aangemaakt door deze gebruiker en documenten opgeslagen in deze kamers worden automatisch toegewezen aan een beheerder die gaat verwijderen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Gegevens handmatig opnieuw toewijzen om een andere bestemmingsgebruiker te kiezen om opnieuw toe te wijzen.",
+  "DeleteUser": "Gebruiker verwijderen",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zal worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+  "ReassignDataToAnotherUser": "Gegevens opnieuw toewijzen aan een andere gebruiker",
   "SuccessfullyDeleteUserInfoMessage": "De gebruiker is met succes verwijderd"
 }

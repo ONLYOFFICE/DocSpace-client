@@ -1,5 +1,8 @@
 {
+  "DeleteMyDocumentsUser": "سيتم حذف كافة الملفات الشخصية والمجلدات في قسم مستنداتي لهذا المستخدم بشكل دائم.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} سيتم إعادة التعيين بشكل تلقائي للغرف التي تم إنشاءها بواسطة هذا المستخدم والمستندات المخزنة في الغرف إلى المسئول الذي قام بعملية الحذف: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. قم بإعادة تعيين البيانات بشكل يدوي لإختيار وجهة أخرى لإعادة التعيين.",
   "DeleteUser": "حذف المستخدم",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",
+  "ReassignDataToAnotherUser": "إعادة تعيين البيانات لمستخدم آخر",
   "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح"
 }

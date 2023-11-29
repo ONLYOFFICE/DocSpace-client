@@ -102,12 +102,14 @@ const StyledInputGroup = styled.div`
     color: ${(props) => props.theme.oauth.clientForm.descriptionColor};
   }
 
-  .field-body {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .input-block-with-button {
+    .field-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    gap: 8px;
+      gap: 8px;
+    }
   }
 `;
 

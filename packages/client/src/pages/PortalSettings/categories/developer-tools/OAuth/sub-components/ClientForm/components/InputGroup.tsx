@@ -76,6 +76,7 @@ const InputGroup = ({
   return (
     <StyledInputGroup>
       <FieldContainer
+        className={buttonLabel ? "input-block-with-button" : ""}
         isVertical
         isRequired={isRequired}
         labelVisible

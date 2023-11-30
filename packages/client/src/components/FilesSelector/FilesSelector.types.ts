@@ -134,6 +134,7 @@ export type FilesSelectorProps = {
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
   setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
+  getIcon: (size: number, fileExst: string) => string;
 
   onClose?: () => void;
 

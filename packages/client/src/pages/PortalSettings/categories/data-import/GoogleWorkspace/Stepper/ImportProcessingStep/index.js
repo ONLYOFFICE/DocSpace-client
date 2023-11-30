@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -33,21 +33,33 @@ const ImportProcessingStep = ({
   cancelMigration,
   importOptions,
   finalUsers,
+  getMigrationStatus,
+  setImportResult,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
+  const uploadInterval = useRef(null);
 
   const handleFileMigration = async () => {
     try {
       await proceedFileMigration({
         users: finalUsers,
-        migratorName: "Nextcloud",
+        migratorName: "GoogleWorkspace",
         ...importOptions,
       });
 
-      setPercent(100);
-      setIsLoading(false);
-      onNextStep();
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
+
+        setPercent(res.progress);
+
+        if (res.isCompleted) {
+          clearInterval(uploadInterval.current);
+          setIsLoading(false);
+          setImportResult(res.parseResult);
+          onNextStep();
+        }
+      }, 1000);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -93,8 +105,15 @@ const ImportProcessingStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, finalUsers } =
-    importAccountsStore;
+  const {
+    setIsLoading,
+    proceedFileMigration,
+    cancelMigration,
+    importOptions,
+    finalUsers,
+    getMigrationStatus,
+    setImportResult,
+  } = importAccountsStore;
 
   return {
     importOptions,
@@ -102,5 +121,7 @@ export default inject(({ importAccountsStore }) => {
     proceedFileMigration,
     cancelMigration,
     finalUsers,
+    getMigrationStatus,
+    setImportResult,
   };
 })(observer(ImportProcessingStep));

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { Wrapper } from "../StyledStepper";
@@ -15,9 +15,12 @@ const SixthStep = ({
   cancelMigration,
   importOptions,
   finalUsers,
+  getMigrationStatus,
+  setImportResult,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
+  const uploadInterval = useRef(null);
 
   const handleFileMigration = async () => {
     try {
@@ -27,9 +30,18 @@ const SixthStep = ({
         ...importOptions,
       });
 
-      setPercent(100);
-      setIsLoading(false);
-      incrementStep();
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
+
+        setPercent(res.progress);
+
+        if (res.isCompleted) {
+          clearInterval(uploadInterval.current);
+          setIsLoading(false);
+          setImportResult(res.parseResult);
+          incrementStep();
+        }
+      }, 1000);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -49,17 +61,13 @@ const SixthStep = ({
 
   return (
     <Wrapper>
-      {percent < 100 && (
-        <>
-          <ProgressBar percent={percent} className="data-import-progress-bar" />
-          <Button
-            size="small"
-            className="cancel-button"
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
-        </>
-      )}
+      <ProgressBar percent={percent} className="data-import-progress-bar" />
+      <Button
+        size="small"
+        className="cancel-button"
+        label={t("Common:CancelButton")}
+        onClick={onCancel}
+      />
 
       {isVisible && (
         <CancelUploadDialog
@@ -75,8 +83,15 @@ const SixthStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { setIsLoading, proceedFileMigration, cancelMigration, importOptions, finalUsers } =
-    importAccountsStore;
+  const {
+    setIsLoading,
+    proceedFileMigration,
+    cancelMigration,
+    importOptions,
+    finalUsers,
+    getMigrationStatus,
+    setImportResult,
+  } = importAccountsStore;
 
   return {
     importOptions,
@@ -84,5 +99,7 @@ export default inject(({ importAccountsStore }) => {
     proceedFileMigration,
     cancelMigration,
     finalUsers,
+    getMigrationStatus,
+    setImportResult,
   };
 })(observer(SixthStep));

@@ -46,8 +46,7 @@ const ButtonsWrapper = styled.div`
 
 const ImportCompleteStep = ({
   t,
-  finalUsers,
-  users,
+  importResult,
   getMigrationLog,
   clearCheckedAccounts,
   sendWelcomeLetter,
@@ -88,8 +87,8 @@ const ImportCompleteStep = ({
     <>
       <StyledText>
         {t("Settings:ImportedUsers", {
-          selectedUsers: finalUsers.length,
-          importedUsers: users.new.length + users.existing.length + users.withoutEmail.length,
+          selectedUsers: importResult.succeedUsers,
+          importedUsers: importResult.failedUsers,
         })}
       </StyledText>
 
@@ -127,12 +126,11 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, getMigrationLog, finalUsers, clearCheckedAccounts, sendWelcomeLetter } =
+  const { importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
     importAccountsStore;
 
   return {
-    users,
-    finalUsers,
+    importResult,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,

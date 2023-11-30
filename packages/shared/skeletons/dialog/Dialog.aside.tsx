@@ -1,23 +1,22 @@
 import React from "react";
-import RectangleSkeleton from "../rectangle";
-import { StyledDialogAsideLoader } from "./styled";
-import Aside from "../../aside";
-import Backdrop from "../../backdrop";
+import { RectangleSkeleton } from "../rectangle";
+import { Aside, Backdrop } from "../../components";
+import { StyledDialogAsideLoader } from "./Dialog.styled";
+
+import { DialogAsideSkeletonProps } from "./Dialog.types";
 
 const DialogAsideSkeleton = ({
   isPanel,
   withoutAside,
-  withFooterBorder = false
-}: any) => {
+  withFooterBorder = false,
+}: DialogAsideSkeletonProps) => {
   const zIndex = 310;
 
   const renderClearDialogAsideLoader = () => {
     return (
       <StyledDialogAsideLoader
-        // @ts-expect-error TS(2769): No overload matches this call.
         withFooterBorder={withFooterBorder}
         isPanel={isPanel}
-        visible
       >
         <div className="dialog-loader-header">
           <RectangleSkeleton height="29px" />
@@ -38,11 +37,15 @@ const DialogAsideSkeleton = ({
     renderClearDialogAsideLoader()
   ) : (
     <>
-      // @ts-expect-error TS(2322): Type '{ visible: true; isAside: true; zIndex: numb... Remove this comment to see the full error message
       <Backdrop visible isAside zIndex={zIndex} />
-      // @ts-expect-error TS(2769): No overload matches this call.
-      <StyledDialogAsideLoader visible isPanel={isPanel}>
-        <Aside className="dialog-aside-loader" visible zIndex={zIndex}>
+
+      <StyledDialogAsideLoader isPanel={isPanel} withFooterBorder={false}>
+        <Aside
+          className="dialog-aside-loader"
+          visible
+          zIndex={zIndex}
+          onClose={() => {}}
+        >
           {renderClearDialogAsideLoader()}
         </Aside>
       </StyledDialogAsideLoader>
@@ -50,4 +53,4 @@ const DialogAsideSkeleton = ({
   );
 };
 
-export default DialogAsideSkeleton;
+export { DialogAsideSkeleton };

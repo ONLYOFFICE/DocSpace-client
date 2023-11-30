@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { tablet } from "../../utils/device";
-import { getCorrectFourValuesStyle } from "../../utils/rtlUtils";
+import { tablet, getCorrectFourValuesStyle } from "../../utils";
+import { Base } from "../../themes";
 
 const StyledContextMenu = styled.div`
   width: 100%;
@@ -31,4 +31,6 @@ const StyledContextMenu = styled.div`
   }
 `;
 
-export {StyledContextMenu};
+StyledContextMenu.defaultProps = { theme: Base };
+
+export { StyledContextMenu };

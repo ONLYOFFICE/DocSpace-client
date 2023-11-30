@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import { mobile } from "../../utils/device";
+import { mobile } from "../../utils";
+import { DialogAsideSkeletonProps, DialogSkeletonProps } from "./Dialog.types";
 
-const StyledDialogLoader = styled.div`
+const StyledDialogLoader = styled.div<DialogSkeletonProps>`
   height: auto;
-  // @ts-expect-error TS(2339): Property 'isLarge' does not exist on type 'ThemedS... Remove this comment to see the full error message
+
   width: ${(props) => (props.isLarge ? "520px" : "400px")};
   @media ${mobile} {
     width: 100%;
@@ -22,7 +23,6 @@ const StyledDialogLoader = styled.div`
 
   .dialog-loader-footer {
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'withFooterBorder' does not exist on type... Remove this comment to see the full error message
       props.withFooterBorder &&
       `border-top: 1px solid ${props.theme.modalDialog.headerBorderColor}`};
     display: flex;
@@ -33,9 +33,8 @@ const StyledDialogLoader = styled.div`
 
 StyledDialogLoader.defaultProps = { theme: Base };
 
-const StyledDialogAsideLoader = styled.div`
+const StyledDialogAsideLoader = styled.div<DialogAsideSkeletonProps>`
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isPanel' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.isPanel
       ? css`
           .dialog-loader-header {
@@ -43,8 +42,7 @@ const StyledDialogAsideLoader = styled.div`
 
             height: 53px;
 
-            border-bottom: ${(props) =>
-              `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+            border-bottom: ${`1px solid ${props.theme.modalDialog.headerBorderColor}`};
 
             box-sizing: border-box;
           }
@@ -67,14 +65,12 @@ const StyledDialogAsideLoader = styled.div`
 
             box-sizing: border-box;
 
-            border-top: ${(props) =>
-              `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+            border-top: ${`1px solid ${props.theme.modalDialog.headerBorderColor}`};
           }
         `
       : css`
           .dialog-loader-header {
-            border-bottom: ${(props) =>
-              `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+            border-bottom: ${`1px solid ${props.theme.modalDialog.headerBorderColor}`};
             padding: 12px 16px;
           }
 
@@ -83,10 +79,8 @@ const StyledDialogAsideLoader = styled.div`
           }
 
           .dialog-loader-footer {
-            ${(props) =>
-              // @ts-expect-error TS(2339): Property 'withFooterBorder' does not exist on type... Remove this comment to see the full error message
-              props.withFooterBorder &&
-              `border-top: 1px solid ${props.theme.modalDialog.headerBorderColor}`};
+            ${props.withFooterBorder &&
+            `border-top: 1px solid ${props.theme.modalDialog.headerBorderColor}`};
             padding: 16px;
             position: fixed;
             bottom: 0;

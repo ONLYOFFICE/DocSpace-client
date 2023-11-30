@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import { StyledRow, StyledBox1, StyledBox2 } from "./styled";
-import RectangleSkeleton from "../rectangle";
+import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
 
 const TableRow = ({
   id,
@@ -9,7 +9,13 @@ const TableRow = ({
   style,
   isRectangle,
   ...rest
-}: any) => {
+}: {
+  id?: string;
+  key?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  isRectangle?: boolean;
+} & RectangleSkeletonProps) => {
   const {
     title,
     borderRadius,
@@ -26,12 +32,10 @@ const TableRow = ({
       id={id}
       className={className}
       style={style}
-      // @ts-expect-error TS(2769): No overload matches this call.
       gap={isRectangle ? "8px" : "16px"}
     >
       <StyledBox1>
         <RectangleSkeleton
-          // @ts-expect-error TS(2322): Type '{ className: string; title: any; width: stri... Remove this comment to see the full error message
           className="rectangle-content"
           title={title}
           width="100%"
@@ -47,7 +51,6 @@ const TableRow = ({
       </StyledBox1>
       <StyledBox2 className="row-content">
         <RectangleSkeleton
-          // @ts-expect-error TS(2322): Type '{ className: string; title: any; height: str... Remove this comment to see the full error message
           className="first-row-content__mobile"
           title={title}
           height="16px"
@@ -60,7 +63,6 @@ const TableRow = ({
           animate={animate}
         />
         <RectangleSkeleton
-          // @ts-expect-error TS(2322): Type '{ className: string; title: any; height: str... Remove this comment to see the full error message
           className="second-row-content__mobile"
           title={title}
           height="12px"
@@ -87,13 +89,6 @@ const TableRow = ({
       />
     </StyledRow>
   );
-};
-
-TableRow.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  isRectangle: PropTypes.bool,
 };
 
 TableRow.defaultProps = {

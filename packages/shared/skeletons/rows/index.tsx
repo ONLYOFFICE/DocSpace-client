@@ -1,24 +1,17 @@
 import React from "react";
 import RowSkeleton from "./row";
-import PropTypes from "prop-types";
+import { RectangleSkeletonProps } from "../rectangle";
 
 const RowsSkeleton = ({
-  count,
+  count = 25,
   ...props
-}: any) => {
+}: { count?: number } & RectangleSkeletonProps) => {
   const items = [];
 
-  for (var i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     items.push(<RowSkeleton key={`row_loader_${i}`} {...props} />);
   }
   return <div>{items}</div>;
 };
 
-RowsSkeleton.propTypes = {
-  count: PropTypes.number,
-};
-
-RowsSkeleton.defaultProps = {
-  count: 25,
-};
-export default RowsSkeleton;
+export { RowsSkeleton };

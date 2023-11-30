@@ -1,7 +1,10 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import PropTypes from "prop-types";
-import { LoaderStyle } from "../../utils/constants";
+
+import { LoaderStyle } from "../../constants";
+import { CircleSkeletonProps } from "./Circle.types";
+
+export { CircleSkeletonProps };
 
 const CircleSkeleton = ({
   title,
@@ -11,26 +14,11 @@ const CircleSkeleton = ({
   width,
   height,
   ...rest
-}: any) => (
+}: CircleSkeletonProps) => (
   <ContentLoader title={title} width={width} height={height} {...rest}>
     <circle cx={x} cy={y} r={radius} />
   </ContentLoader>
 );
-
-CircleSkeleton.propTypes = {
-  title: PropTypes.string,
-  x: PropTypes.string,
-  y: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  radius: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  foregroundColor: PropTypes.string,
-  backgroundOpacity: PropTypes.number,
-  foregroundOpacity: PropTypes.number,
-  speed: PropTypes.number,
-  animate: PropTypes.bool,
-};
 
 CircleSkeleton.defaultProps = {
   title: LoaderStyle.title,
@@ -47,4 +35,4 @@ CircleSkeleton.defaultProps = {
   animate: LoaderStyle.animate,
 };
 
-export default CircleSkeleton;
+export { CircleSkeleton };

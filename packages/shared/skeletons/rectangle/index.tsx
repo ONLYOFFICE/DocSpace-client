@@ -1,7 +1,10 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import PropTypes from "prop-types";
-import { LoaderStyle } from "../../utils/constants";
+
+import { LoaderStyle } from "../../constants";
+import { RectangleSkeletonProps } from "./Rectangle.types";
+
+export { RectangleSkeletonProps };
 
 const RectangleSkeleton = ({
   title,
@@ -11,7 +14,7 @@ const RectangleSkeleton = ({
   width,
   height,
   ...rest
-}: any) => (
+}: RectangleSkeletonProps) => (
   <ContentLoader title={title} width={width} height={height} {...rest}>
     <rect
       x={x}
@@ -24,20 +27,7 @@ const RectangleSkeleton = ({
   </ContentLoader>
 );
 
-RectangleSkeleton.propTypes = {
-  title: PropTypes.string,
-  x: PropTypes.string,
-  y: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  borderRadius: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  foregroundColor: PropTypes.string,
-  backgroundOpacity: PropTypes.number,
-  foregroundOpacity: PropTypes.number,
-  speed: PropTypes.number,
-  animate: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-};
+RectangleSkeleton.propTypes = {};
 
 RectangleSkeleton.defaultProps = {
   title: LoaderStyle.title,
@@ -54,4 +44,4 @@ RectangleSkeleton.defaultProps = {
   animate: LoaderStyle.animate,
 };
 
-export default RectangleSkeleton;
+export { RectangleSkeleton };

@@ -1,8 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { isDesktop } from "../../utils/device";
-import {StyledContextMenu} from "../context-menu/styled";
-import RectangleSkeleton from "../rectangle";
+
+import { isDesktop } from "../../utils";
+
+import { RectangleSkeletonProps, RectangleSkeleton } from "../rectangle";
+
+import { StyledContextMenu } from "./ContextMenu.styled";
+import { ContextMenuSkeletonProps } from "./ContextMenu.types";
 
 const ContextMenuSkeleton = ({
   id,
@@ -10,10 +13,10 @@ const ContextMenuSkeleton = ({
   style,
   isRectangle,
   ...rest
-}: any) => {
+}: ContextMenuSkeletonProps & RectangleSkeletonProps) => {
   const {
     title,
-    borderRadius,
+
     backgroundColor,
     foregroundColor,
     backgroundOpacity,
@@ -27,7 +30,6 @@ const ContextMenuSkeleton = ({
   return (
     <StyledContextMenu id={id} className={className} style={style}>
       <RectangleSkeleton
-        // @ts-expect-error TS(2322): Type '{ className: string; title: any; width: stri... Remove this comment to see the full error message
         className="rectangle-content"
         title={title}
         width="16px"
@@ -41,7 +43,6 @@ const ContextMenuSkeleton = ({
         animate={animate}
       />
       <RectangleSkeleton
-        // @ts-expect-error TS(2322): Type '{ className: string; title: any; width: stri... Remove this comment to see the full error message
         className="context-menu-rectangle"
         title={title}
         width={isDesktopView ? "97px" : "102px"}
@@ -58,13 +59,6 @@ const ContextMenuSkeleton = ({
   );
 };
 
-ContextMenuSkeleton.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  isRectangle: PropTypes.bool,
-};
-
 ContextMenuSkeleton.defaultProps = {
   id: undefined,
   className: undefined,
@@ -72,4 +66,4 @@ ContextMenuSkeleton.defaultProps = {
   isRectangle: true,
 };
 
-export default ContextMenuSkeleton;
+export { ContextMenuSkeleton };

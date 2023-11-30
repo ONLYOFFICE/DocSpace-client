@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 import { desktop } from "../../utils/device";
 
-const StyledRow = styled.div`
+const StyledRow = styled.div<{ gap?: string }>`
   width: 100%;
   display: grid;
   grid-template-columns: 22px 1fr 16px;
   grid-template-rows: 1fr;
-  // @ts-expect-error TS(2339): Property 'gap' does not exist on type 'ThemedStyle... Remove this comment to see the full error message
+
   grid-column-gap: ${(props) => props.gap || "8px"};
   margin-bottom: 22px;
   justify-items: center;

@@ -1,13 +1,11 @@
 import React from "react";
-import RectangleSkeleton from "../rectangle";
-import { StyledDialogLoader } from "./styled";
+import { RectangleSkeleton } from "../rectangle";
+import { StyledDialogLoader } from "./Dialog.styled";
+import { DialogSkeletonProps } from "./Dialog.types";
+import { DialogAsideSkeleton } from "./Dialog.aside";
 
-const DialogSkeleton = ({
-  isLarge,
-  withFooterBorder
-}: any) => {
+const DialogSkeleton = ({ isLarge, withFooterBorder }: DialogSkeletonProps) => {
   return (
-    // @ts-expect-error TS(2769): No overload matches this call.
     <StyledDialogLoader withFooterBorder={withFooterBorder} isLarge={isLarge}>
       <div className="dialog-loader-header">
         <RectangleSkeleton height="29px" />
@@ -23,4 +21,4 @@ const DialogSkeleton = ({
   );
 };
 
-export default DialogSkeleton;
+export { DialogSkeleton, DialogAsideSkeleton };

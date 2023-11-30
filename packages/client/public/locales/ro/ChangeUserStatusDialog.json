@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "Puteți șterge sau activa ulterior utilizatorii dezactivați, dacă este cazul. Rețineți că nu puteți dezactiva utilizatorii cu rol Proprietar sau dumneavoastră înșivă.",
+  "DisableUser": "Dezactivare utilizator",
+  "DisableUserDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul DocSpace, în timp ce documentele și datele asociate vor rămâne intacte.",
+  "DisableUsers": "Dezactivare utilizatori",
+  "DisableUsersDescription": "Dacă dezactivați acești utilizatori, acesta nu va putea să se conecteze la spațiul DocSpace, în timp ce documentele și datele asociate vor rămâne intacte.",
+  "EnableUser": "Activare utilizator",
+  "EnableUserDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu DocSpace și va putea accesa documentele și datele.",
+  "EnableUsers": "Activare utilizatori",
+  "EnableUsersDescription": "Dacă activați acest utilizator, acesta se va putea conecta din nou la spațiu DocSpace și va putea accesa documentele și datele."
+}

@@ -137,7 +137,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: TrashReactSvgUrl,
             label: t("DeleteProfileEverDialog:DeleteUser"),
-            onClick: () => this.toggleDeleteProfileEverDialog(item),
+            onClick: () => this.toggleDeleteProfileEverDialog([item]),
           };
 
         case "details":

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -7,7 +7,14 @@ import Portal from "../portal";
 import StyledTooltip from "./styled-tooltip";
 
 const defaultOffset = 4;
-const Tooltip = (props) => {
+const globalCloseEvents = {
+  escape: true,
+  resize: true,
+  scroll: true,
+  clickOutsideAnchor: true,
+};
+
+const Tooltip = forwardRef((props, ref) => {
   const {
     id,
     place,
@@ -26,13 +33,6 @@ const Tooltip = (props) => {
     float,
     noArrow = true,
   } = props;
-
-  const globalCloseEvents = {
-    escape: true,
-    resize: true,
-    scroll: true,
-    clickOutsideAnchor: true,
-  };
 
   const openEvents = {
     click: openOnClick,
@@ -54,7 +54,7 @@ const Tooltip = (props) => {
     >
       <ReactTooltip
         id={id}
-        opacity={1}
+        ref={ref}
         float={float}
         place={place}
         isOpen={isOpen}
@@ -64,6 +64,7 @@ const Tooltip = (props) => {
         afterShow={afterShow}
         afterHide={afterHide}
         offset={props.offset}
+        opacity={props.opacity}
         openEvents={openEvents}
         positionStrategy="fixed"
         closeEvents={closeEvents}
@@ -71,6 +72,7 @@ const Tooltip = (props) => {
         anchorSelect={anchorSelect}
         className="__react_component_tooltip"
         globalCloseEvents={globalCloseEvents}
+        imperativeModeOnly={props.imperativeModeOnly}
         middlewares={[
           offset(props.offset ?? defaultOffset),
           flip({
@@ -88,7 +90,7 @@ const Tooltip = (props) => {
   const tooltip = renderTooltip();
 
   return <Portal element={tooltip} />;
-};
+});
 
 Tooltip.propTypes = {
   /** Used as HTML id property  */
@@ -125,11 +127,16 @@ Tooltip.propTypes = {
   anchorSelect: PropTypes.string,
   /** Tooltip arrow will not be shown */
   noArrow: PropTypes.bool,
+  /**Change the opacity of the tooltip */
+  opacity: PropTypes.number,
+  /** When enabled, default tooltip behavior is disabled. */
+  imperativeModeOnly: PropTypes.bool,
 };
 
 Tooltip.defaultProps = {
   place: "top",
   noArrow: true,
+  opacity: 1,
 };
 
 export default Tooltip;

@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "ユーザーの詳細情報はこちら",
+  "Administration": "管理",
   "AndMoreLabel": "と、<strong>{{count}}もっと</strong>",
   "CreationDate": "作成日",
   "Data": "データ",
   "DateModified": "データが変更されました",
+  "ExpectUsers": "期待されているユーザー",
   "FeedCreateFileSeveral": "ファイルが追加されました",
   "FeedCreateFileSingle": "ファイルが作成されました",
   "FeedCreateFolderSeveral": "フォルダが追加されました",
@@ -27,6 +29,7 @@
   "FileExtension": "ファイル拡張子",
   "FilesEmptyScreenText": "ファイルやフォルダの詳細はこちら",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
+  "InfoBanner": "招待されたユーザーのリストには、このDocSpaceの所有者および/または管理者が含まれ、すべてのルームにアクセスできます。所有者および/または管理者に他のアクセス権を割り当てることはできません。ルームに追加されると、すべての変更が通知されます。",
   "ItemsSelected": "選択されているアイテム",
   "LastModifiedBy": "最終更新者",
   "Properties": "プロパティ",
@@ -35,5 +38,6 @@
   "StorageType": "ストレージのタイプ",
   "SubmenuDetails": "詳細情報",
   "SubmenuHistory": "履歴",
+  "Users": "ユーザー",
   "Versions": "バージョン"
 }

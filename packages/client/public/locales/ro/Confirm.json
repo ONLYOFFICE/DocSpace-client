@@ -28,5 +28,10 @@
   "SetAppTitle": "Configurarea aplicației de autentificare dvs.",
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",
-  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>."
+  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
+  "WelcomeRegister": "Înregistrați-vă pentru a începe",
+  "WelcomeRegisterViaSocial": "Pentru a începe lucrul, vă înregistrați sau vă conectați prin intermediul rețelelor de socializare",
+  "WelcomeRegisterViaSSO": "Pentru a începe lucrul, vă înregistrați sau vă autentificați utilizând conectarea unică",
+  "WelcomeToDocspace": "Bun venit în spațiul nostru DocSpace!",
+  "WelcomeToRoom": "Bun venit în sala <1>{{ roomName }}</1>!"
 }

@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Bu odadaki tüm dosyalar şifrelenecektir.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut DocSpace kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",
   "MakeRoomPrivateTitle": "Odayı Özel Yap",
+  "PublicRoomBarDescription": "Bu oda, bağlantıya sahip olan herkesin kullanımına açıktır. Harici kullanıcılar tüm dosyalar için Salt Görüntüleme iznine sahip olacaktır.",
+  "PublicRoomDescription": "Kaydolmadan belgeleri görüntülemek için kullanıcıları harici bağlantılar aracılığıyla davet edin. Bu odayı herhangi bir web arayüzüne de gömebilirsiniz.",
   "ReviewRoomDescription": "Belgeler hakkında inceleme veya yorum talep et",
   "ReviewRoomTitle": "İnceleme odası",
   "RoomEditing": "Oda düzenleme",

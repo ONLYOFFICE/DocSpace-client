@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Izbriši vtičnik",
+  "DeletePluginDescription": "Ta vtičnik ne bo več na voljo uporabnikom DocSpace. Ste prepričani, da želite nadaljevati?",
+  "DeletePluginTitle": "Izbrišem vtičnik?",
+  "Description": "Dodate lahko vtičnike, da razširite funkcionalnost DocSpace z dodatnimi funkcijami. Kliknite Naloži vtičnik in izberite datoteko vtičnika v arhivu ZIP.",
+  "Metadata": "Metadata",
+  "NeedSettings": "Potreben je vnos nastavitev",
+  "NoPlugins": "Ni dodanih vtičnikov",
+  "PluginsHelp": "Vtičniki vam omogočajo razširitev funkcionalnosti DocSpace",
+  "UploadPlugin": "Naloži vtičnik"
+}

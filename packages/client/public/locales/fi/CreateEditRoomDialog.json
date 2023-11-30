@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Kaikki tämän huoneen tiedostot salataan.",
   "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia DocSpace-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
   "MakeRoomPrivateTitle": "Tee huoneesta yksityinen",
+  "PublicRoomBarDescription": "Tämä huone on linkin kautta avoin kaikille. Ulkoisilla käyttäjillä on ainoastaan tiedostojen katseluoikeudet.",
+  "PublicRoomDescription": "Kutsu käyttäjiä ulkoisten linkkien kautta katselemaan asiakirjoja ilman rekisteröitymistä. Voit myös upottaa tämän huoneen mihin tahansa verkkokäyttöliittymään.",
   "ReviewRoomDescription": "Pyydä arvostelu tai kommentteja dokumentteihin",
   "ReviewRoomTitle": "Tarkasta huone",
   "RoomEditing": "Huoneen muokkaus",

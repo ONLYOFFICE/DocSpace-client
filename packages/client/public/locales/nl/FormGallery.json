@@ -1,3 +1,10 @@
 {
+  "Categories": "Categorieën",
+  "ErrorViewDescription": "Probeer het later opnieuw",
+  "SelectForm": "Selecteer Formulier",
+  "SubmitToGalleryBlockBody": "Stuur uw sjablonen in om ze te delen met de ONLYOFFICE community.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Formulier Galerij",
+  "SubmitToGalleryDialogGuideInfo": "Leer in onze <1>guide</1> hoe u perfecte formulieren maakt en uw kans op goedkeuring vergroot.",
+  "SubmitToGalleryDialogMainInfo": "Stuur uw formulier naar de openbare galerij zodat anderen het in hun werk kunnen gebruiken. Zodra het formulier door de moderatie komt, ontvangt u een bericht en wordt u beloond voor uw bijdrage.",
   "TemplateInfo": "Sjabloon info"
 }

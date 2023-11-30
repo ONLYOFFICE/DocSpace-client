@@ -1,1 +1,11 @@
-{}
+{
+  "DisableGeneralDescription": "W razie potrzeby możesz później usunąć lub włączyć wyłączonych użytkowników. Pamiętaj, że nie możesz wyłączyć użytkowników takich jak właściciel i Ty.",
+  "DisableUser": "Wyłącz użytkownika",
+  "DisableUserDescription": "Jeśli wyłączysz tego użytkownika, nie będzie mógł zalogować się w DocSpace. Jego dokumenty i dane pozostaną nienaruszone.",
+  "DisableUsers": "Wyłącz użytkowników",
+  "DisableUsersDescription": "Jeśli wyłączysz tych użytkowników, nie będą mogli zalogować się w DocSpace. Ich dokumenty i dane pozostaną nienaruszone.",
+  "EnableUser": "Włącz użytkownika",
+  "EnableUserDescription": "Jeśli włączysz tego użytkownika, będzie mógł ponownie zalogować się w DocSpace i odzyska dostęp do swoich dokumentów oraz danych.",
+  "EnableUsers": "Włącz użytkowników",
+  "EnableUsersDescription": "Jeśli włączysz tych użytkowników, będą mogli ponownie zalogować się w DocSpace i odzyskają dostęp do swoich dokumentów oraz danych."
+}

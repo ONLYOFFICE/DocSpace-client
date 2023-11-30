@@ -1,3 +1,10 @@
 {
+  "Categories": "Категории",
+  "ErrorViewDescription": "Молим да опитате отново по-късно",
+  "SelectForm": "Изберете Формуляр",
+  "SubmitToGalleryBlockBody": "Изпратете вашите шаблони, за да ги споделите с ONLYOFFICE общността.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Галерия с Формуляри",
+  "SubmitToGalleryDialogGuideInfo": "Научете как да създавате идеални формуляри и увеличете шанса си да получите одобрение в нашето  <1>ръководство</1>.",
+  "SubmitToGalleryDialogMainInfo": "Вие сте собственикът на тази стая. Преди да напуснете стаята, трябва да прехвърлите ролята на собственик на друг потребител.",
   "TemplateInfo": "Информация за шаблона"
 }

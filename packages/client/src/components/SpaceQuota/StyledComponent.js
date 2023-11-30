@@ -9,10 +9,12 @@ const StyledBody = styled.div`
   display: flex;
   p {
     padding-top: 8px;
+    padding-right: 5px;
   }
 
   .combo-button {
-    padding-left: 0px;
+    padding-left: 8px;
+    padding-right: 0px;
   }
 `;
 

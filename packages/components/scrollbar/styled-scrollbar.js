@@ -74,6 +74,7 @@ const StyledScrollbar = styled(Scrollbar)`
   }
 
   .thumb {
+    touch-action: none;
     background-color: ${(props) =>
       props.color ? props.color : props.theme.scrollbar.bgColor} !important;
     z-index: 201;
@@ -86,6 +87,7 @@ const StyledScrollbar = styled(Scrollbar)`
 
     :active,
     &.dragging {
+      touch-action: none;
       background-color: ${(props) =>
         props.theme.scrollbar.pressBgColor} !important;
     }

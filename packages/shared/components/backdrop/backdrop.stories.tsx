@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import Backdrop from "./";
-import Button from "../button";
+import { Button } from "../button";
+import { Backdrop } from ".";
 
 export default {
   title: "Components/Backdrop",
@@ -22,24 +22,26 @@ export default {
 const Template = (args: any) => {
   const [isVisible, setIsVisible] = useState(args.visible);
   const toggleVisible = () => setIsVisible(!isVisible);
-  return <>
-    <Button
-      // @ts-expect-error TS(2322): Type '{ label: string; primary: true; size: string... Remove this comment to see the full error message
-      label="Show Backdrop"
-      primary
-      size="small"
-      onClick={toggleVisible}
-    />
-    <Backdrop
-      {...args}
-      visible={isVisible}
-      onClick={(e: any) => {
-        args.onClick(e);
-        // @ts-expect-error TS(2554): Expected 0 arguments, but got 1.
-        toggleVisible(false);
-      }}
-    />
-  </>;
+  return (
+    <>
+      <Button
+        // @ts-expect-error TS(2322): Type '{ label: string; primary: true; size: string... Remove this comment to see the full error message
+        label="Show Backdrop"
+        primary
+        size="small"
+        onClick={toggleVisible}
+      />
+      <Backdrop
+        {...args}
+        visible={isVisible}
+        onClick={(e: any) => {
+          args.onClick(e);
+          // @ts-expect-error TS(2554): Expected 0 arguments, but got 1.
+          toggleVisible(false);
+        }}
+      />
+    </>
+  );
 };
 
 export const Default = Template.bind({});

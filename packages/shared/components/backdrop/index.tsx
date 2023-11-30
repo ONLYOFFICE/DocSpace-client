@@ -1,137 +1,101 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { isTablet } from "../../utils";
 
-import StyledBackdrop from "./styled-backdrop";
+import StyledBackdrop from "./Backdrop.styled";
+import { BackdropProps } from "./Backdrop.types";
 
-class Backdrop extends React.Component {
-  backdropRef: any;
-  constructor(props: any) {
-    super(props);
+const Backdrop = (props: BackdropProps) => {
+  const {
+    visible,
+    className,
+    withBackground,
+    withoutBlur,
+    isAside,
+    withoutBackground,
+    isModalDialog,
+  } = props;
 
-    this.state = {
-      needBackdrop: false,
-      needBackground: false,
-    };
+  const backdropRef = React.useRef<HTMLDivElement | null>(null);
 
-    this.backdropRef = React.createRef();
-  }
+  const [needBackdrop, setNeedBackdrop] = React.useState(false);
+  const [needBackground, setNeedBackground] = React.useState(false);
 
-  componentDidUpdate(prevProps: any) {
-    if (
-      // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'Readonl... Remove this comment to see the full error message
-      prevProps.visible !== this.props.visible ||
-      // @ts-expect-error TS(2339): Property 'isAside' does not exist on type 'Readonl... Remove this comment to see the full error message
-      prevProps.isAside !== this.props.isAside ||
-      // @ts-expect-error TS(2339): Property 'withBackground' does not exist on type '... Remove this comment to see the full error message
-      prevProps.withBackground !== this.props.withBackground
-    ) {
-      this.checkingExistBackdrop();
-    }
-  }
-
-  componentDidMount() {
-    this.checkingExistBackdrop();
-  }
-
-  checkingExistBackdrop = () => {
-    // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'Readonl... Remove this comment to see the full error message
-    const { visible, isAside, withBackground, withoutBlur, withoutBackground } =
-      this.props;
+  const checkingExistBackdrop = React.useCallback(() => {
     if (visible) {
-      const isTablet = window.innerWidth < 1024;
+      const tablet = isTablet();
       const backdrops = document.querySelectorAll(".backdrop-active");
 
-      const needBackdrop =
-        backdrops.length < 1 || (isAside && backdrops.length <= 2);
+      const currentNeedBackdrop =
+        backdrops.length < 1 || (isAside && backdrops.length <= 2) || false;
 
-      let needBackground =
-        needBackdrop && ((isTablet && !withoutBlur) || withBackground);
+      let currentNeedBackground =
+        (needBackdrop && ((tablet && !withoutBlur) || withBackground)) || false;
 
-      if (isAside && needBackdrop && !withoutBackground) needBackground = true;
+      if (isAside && needBackdrop && !withoutBackground)
+        currentNeedBackground = true;
 
-      this.setState({
-        needBackdrop: needBackdrop,
-        needBackground: needBackground,
-      });
+      setNeedBackground(currentNeedBackground);
+      setNeedBackdrop(currentNeedBackdrop);
     } else {
-      this.setState({
-        needBackground: false,
-        needBackdrop: false,
-      });
+      setNeedBackground(false);
+      setNeedBackdrop(false);
     }
-  };
+  }, [
+    visible,
+    isAside,
+    withBackground,
+    withoutBlur,
+    withoutBackground,
+    needBackdrop,
+  ]);
 
-  modifyClassName = () => {
-    // @ts-expect-error TS(2339): Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
-    const { className } = this.props;
-    let modifiedClass = "backdrop-active not-selectable";
+  const modifyClassName = () => {
+    const modifiedClass = ["backdrop-active", "not-selectable"];
 
     if (className) {
       if (typeof className !== "string") {
-        if (!className.includes(modifiedClass)) {
-          modifiedClass = className.push(modifiedClass);
-        } else {
-          modifiedClass = className;
-        }
+        className.forEach((c: string) => {
+          if (!modifiedClass.includes(c)) {
+            modifiedClass.push(c);
+          }
+        });
       } else {
-        modifiedClass += ` ${className}`;
+        modifiedClass.push(className);
       }
     }
 
-    return modifiedClass;
+    return modifiedClass.join(" ");
   };
 
-  onTouchHandler = (e: any) => {
-    // @ts-expect-error TS(2339): Property 'isModalDialog' does not exist on type 'R... Remove this comment to see the full error message
-    const { isModalDialog } = this.props;
-    !isModalDialog && e.preventDefault();
-    this.backdropRef.current.click();
+  const onTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isModalDialog) e.preventDefault();
+    backdropRef.current?.click();
   };
 
-  render() {
-    // @ts-expect-error TS(2339): Property 'needBackdrop' does not exist on type 'Re... Remove this comment to see the full error message
-    const { needBackdrop, needBackground } = this.state;
-    // @ts-expect-error TS(2339): Property 'isAside' does not exist on type 'Readonl... Remove this comment to see the full error message
-    const { isAside, visible } = this.props;
+  React.useEffect(() => {
+    checkingExistBackdrop();
+  }, [checkingExistBackdrop]);
 
-    const modifiedClassName = this.modifyClassName();
+  React.useEffect(() => {
+    checkingExistBackdrop();
+  }, [checkingExistBackdrop, visible, isAside, withBackground]);
 
-    return visible && (needBackdrop || isAside) ? (
-      <StyledBackdrop
-        {...this.props}
-        ref={this.backdropRef}
-        className={modifiedClassName}
-        // @ts-expect-error TS(2769): No overload matches this call.
-        needBackground={needBackground}
-        visible={visible}
-        onTouchMove={this.onTouchHandler}
-        onTouchEnd={this.onTouchHandler}
-      />
-    ) : null;
-  }
-}
+  const modifiedClassName = modifyClassName();
 
-// @ts-expect-error TS(2339): Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
-Backdrop.propTypes = {
-  /** Sets visible or hidden */
-  visible: PropTypes.bool,
-  /** CSS z-index */
-  zIndex: PropTypes.number,
-  /** Accepts class */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /** Accepts id */
-  id: PropTypes.string,
-  /** Accepts css style */
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** Displays the background. *The background is not displayed if the viewport width is more than 1024 */
-  withBackground: PropTypes.bool,
-  /** Must be true if used with Aside component */
-  isAside: PropTypes.bool,
-  /** Must be true if used with Context menu */
-  withoutBlur: PropTypes.bool,
+  return visible && (needBackdrop || isAside) ? (
+    <StyledBackdrop
+      {...props}
+      ref={backdropRef}
+      className={modifiedClassName}
+      needBackground={needBackground}
+      visible={visible}
+      onTouchMove={onTouchHandler}
+      onTouchEnd={onTouchHandler}
+      data-testid="backdrop"
+    />
+  ) : null;
 };
 
-// @ts-expect-error TS(2339): Property 'defaultProps' does not exist on type 'ty... Remove this comment to see the full error message
 Backdrop.defaultProps = {
   visible: false,
   zIndex: 203,
@@ -141,4 +105,4 @@ Backdrop.defaultProps = {
   withoutBlur: false,
 };
 
-export default Backdrop;
+export { Backdrop };

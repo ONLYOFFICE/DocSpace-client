@@ -193,6 +193,7 @@
   "RestoreBackupWarningText": "DocSpace will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "RoomsModule": "Backup room",
   "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
+  "SaveToApply": "Click the <strong>Save</strong> button at the bottom to apply.",
   "SelectFileDescriptionGoogle": "Select the Google Workspace backup files to start the data import. Multiple files can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "SelectFileDescriptionNextcloud": "Select the Nextcloud backup file to start the data import. Only one file can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "SelectFileDescriptionWorkspace": "Select the ONLYOFFICE Workspace backup file to start the data import. Once the data upload and analysis are complete, the next step will be initiated automatically.",

@@ -44,6 +44,11 @@ class ImportAccountsStore {
     importSharedFiles: true,
   };
 
+  importResult = {
+    succeedUsers: 0,
+    failedUsers: 0,
+  };
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -63,6 +68,13 @@ class ImportAccountsStore {
   get areCheckedUsersEmpty() {
     return this.checkedUsers.withEmail.length + this.checkedUsers.withoutEmail.length === 0;
   }
+
+  setImportResult = (parseResult) => {
+    this.importResult = {
+      succeedUsers: parseResult.successedUsers,
+      failedUsers: parseResult.failedUsers,
+    };
+  };
 
   setResultUsers = () => {
     const checkedIds = this.checkedUsers.withoutEmail.map((checkedUser) => checkedUser.key);

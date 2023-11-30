@@ -195,7 +195,7 @@ const SelectFileStep = ({
           <SaveCancelButtons
             className="save-cancel-buttons"
             onSaveClick={onNextStep}
-            onCancelClick={() => navigate(-1)}
+            onCancelClick={goBack}
             saveButtonLabel={t("Settings:UploadToServer")}
             cancelButtonLabel={t("Common:Back")}
             displaySettings

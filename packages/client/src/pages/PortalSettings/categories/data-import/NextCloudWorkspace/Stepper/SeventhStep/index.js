@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
 
@@ -20,8 +19,7 @@ const ButtonsWrapper = styled.div`
 
 const SeventhStep = ({
   t,
-  finalUsers,
-  users,
+  importResult,
   getMigrationLog,
   clearCheckedAccounts,
   sendWelcomeLetter,
@@ -62,15 +60,17 @@ const SeventhStep = ({
     <Wrapper>
       <Text fontSize="12px">
         {t("Settings:ImportedUsers", {
-          selectedUsers: finalUsers.length,
-          importedUsers: users.new.length + users.existing.length + users.withoutEmail.length,
+          selectedUsers: importResult.succeedUsers,
+          importedUsers: importResult.failedUsers,
         })}
       </Text>
-      <Text fontSize="12px" color="#F21C0E" className="mt-8">
-        {t("Settings:ErrorsWereFound", { errors: 3 })}
-      </Text>
+      {importResult.failedUsers > 0 && (
+        <Text fontSize="12px" color="#F21C0E" className="mt-8">
+          {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
+        </Text>
+      )}
 
-      <div className='sendLetterBlockWrapper' displayProp="flex" alignItems="center" marginProp="17px 0 16px">
+      <div className="sendLetterBlockWrapper">
         <Checkbox
           label={t("Settings:SendWelcomeLetter")}
           isChecked={isChecked}
@@ -93,12 +93,11 @@ const SeventhStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, getMigrationLog, finalUsers, clearCheckedAccounts, sendWelcomeLetter } =
+  const { importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
     importAccountsStore;
 
   return {
-    users,
-    finalUsers,
+    importResult,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,

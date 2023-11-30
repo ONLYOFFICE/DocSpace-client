@@ -1,16 +1,17 @@
 import React from "react";
 
-import { StyledOval } from "../styled-loader";
+import { StyledOval } from "../Loader.styled";
 
-// eslint-disable-next-line react/prop-types
 export const Oval = ({
   size,
   color,
   label,
-  theme
-}: any) => (
+}: {
+  size?: string;
+  color?: string;
+  label?: string;
+}) => (
   <StyledOval
-    // @ts-expect-error TS(2769): No overload matches this call.
     size={size}
     color={color}
     viewBox="0 0 38 38"

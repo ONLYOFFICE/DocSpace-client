@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import styled, { keyframes } from "styled-components";
 
-export const keyFrameBlue = (props: any) => keyframes`
+export const keyFrameBlue = (props: {
+  colorStep_1: string;
+  colorStep_2: string;
+  colorStep_3: string;
+  colorStep_4: string;
+}) => keyframes`
     0%   { background: #de7a59;               top: 120px; }
     10%  { background: ${props.colorStep_1};  top: 120px; }
     14%  { background: ${props.colorStep_2};  top: 120px; }
@@ -13,7 +18,11 @@ export const keyFrameBlue = (props: any) => keyframes`
     100% { background: #de7a59;               top: 120px; }
 `;
 
-export const keyFrameRed = (props: any) => keyframes`
+export const keyFrameRed = (props: {
+  colorStep_1: string;
+  colorStep_2: string;
+  colorStep_3: string;
+}) => keyframes`
     0%   { background: #55bce6;               top: 100px; opacity: 1; }
     10%  { background: ${props.colorStep_1};  top: 100px; opacity: 1; }
     14%  { background: ${props.colorStep_2};  top: 100px; opacity: 1; }
@@ -23,7 +32,12 @@ export const keyFrameRed = (props: any) => keyframes`
     100% { background: #55bce6;               top: 100px;             }
 `;
 
-export const keyFrameGreen = (props: any) => keyframes`
+export const keyFrameGreen = (props: {
+  colorStep_1: string;
+  colorStep_2: string;
+  colorStep_3: string;
+  colorStep_4: string;
+}) => keyframes`
     0%   { background: #a1cb5c;               top: 110px; opacity: 1; }
     10%  { background: ${props.colorStep_1};  top: 110px; opacity: 1; }
     14%  { background: ${props.colorStep_2};  top: 110px; opacity: 1; }
@@ -35,10 +49,8 @@ export const keyFrameGreen = (props: any) => keyframes`
     100% { background: #a1cb5c;               top: 110px;             }
 `;
 
-const Romb = styled.div`
-  // @ts-expect-error TS(2339): Property 'size' does not exist on type 'ThemedStyl... Remove this comment to see the full error message
+const Romb = styled.div<{ size: string }>`
   width: ${(props) => props.size};
-  // @ts-expect-error TS(2339): Property 'size' does not exist on type 'ThemedStyl... Remove this comment to see the full error message
   height: ${(props) => props.size};
   -ms-transform: rotate(135deg) skew(20deg, 20deg);
   -webkit-transform: rotate(135deg) skew(20deg, 20deg);
@@ -70,31 +82,14 @@ const Romb = styled.div`
     2s ease-in-out 0s infinite;
 `;
 
-Romb.propTypes = {
-  // @ts-expect-error TS(2322): Type '{ size: PropTypes.Validator<string>; }' is n... Remove this comment to see the full error message
-  size: PropTypes.string.isRequired,
-};
-
-// eslint-disable-next-line react/prop-types
-const Rombs = ({
-  size
-}: any) => (
+const Rombs = ({ size = "40px" }: { size?: string }) => (
   <>
-    // @ts-expect-error TS(2769): No overload matches this call.
     <Romb color="blue" size={size} />
-    // @ts-expect-error TS(2769): No overload matches this call.
+
     <Romb color="green" size={size} />
-    // @ts-expect-error TS(2769): No overload matches this call.
+
     <Romb color="red" size={size} />
   </>
 );
-
-Rombs.propTypes = {
-  size: PropTypes.string.isRequired,
-};
-
-Rombs.defaultProps = {
-  size: "40px",
-};
 
 export { Rombs };

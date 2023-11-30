@@ -1,12 +1,16 @@
+/* eslint-disable react/no-unknown-property */
 import React from "react";
-import { StyledDualRing } from "../styled-loader";
-// eslint-disable-next-line react/prop-types
+import { StyledDualRing } from "../Loader.styled";
+
 export const DualRing = ({
   size,
   color,
   label,
-  theme
-}: any) => (
+}: {
+  size?: string;
+  color?: string;
+  label?: string;
+}) => (
   <StyledDualRing
     width={size}
     height={size}
@@ -39,7 +43,7 @@ export const DualRing = ({
         dur="1.1s"
         begin="0s"
         repeatCount="indefinite"
-      ></animateTransform>
+      />
     </circle>
     <circle
       cx="50"
@@ -67,7 +71,7 @@ export const DualRing = ({
         dur="1.1s"
         begin="0s"
         repeatCount="indefinite"
-      ></animateTransform>
+      />
     </circle>
   </StyledDualRing>
 );

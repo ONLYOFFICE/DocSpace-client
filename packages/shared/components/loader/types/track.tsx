@@ -1,21 +1,24 @@
 import React from "react";
-import useId from "../../utils/useId";
-import { StyledTrack } from "../styled-loader";
+import { useId } from "../../../utils";
+import { StyledTrack } from "../Loader.styled";
 
 const Track = ({
   size,
-  color,
+  color = "",
   label,
-  primary
-}: any) => {
-  // @ts-expect-error TS(2554): Expected 1-2 arguments, but got 0.
+  primary,
+}: {
+  size?: string;
+  color?: string;
+  label?: string;
+  primary?: boolean;
+}) => {
   const id = useId();
 
   return (
     <StyledTrack
       viewBox="-10 -10 220 220"
       xmlns="http://www.w3.org/2000/svg"
-      // @ts-expect-error TS(2769): No overload matches this call.
       size={size}
       color={color}
       primary={primary}

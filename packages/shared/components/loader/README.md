@@ -5,11 +5,11 @@ Loader component is used for displaying loading actions on a page
 ### Usage
 
 ```js
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components";
 ```
 
 ```jsx
-<Loader type="base" color="black" size="18px" label="Loading" />
+<Loader type={LoaderTypes.base} color="black" size="18px" label="Loading" />
 ```
 
 ### Properties

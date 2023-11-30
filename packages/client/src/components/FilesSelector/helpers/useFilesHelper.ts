@@ -268,7 +268,10 @@ export const useFilesHelper = ({
                 currentFolderIndex = selectedFolders.findIndex((x) => x === id);
               }
 
-              if (currentFolderIndex !== -1) setIsSelectedParentFolder(true);
+              if (!foundParentId && currentFolderIndex !== -1) {
+                foundParentId = true;
+                setIsSelectedParentFolder(true);
+              }
 
               return {
                 label: title,

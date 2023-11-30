@@ -37,6 +37,24 @@ const StyledLinkRow = styled.div`
     padding-left: 8px;
   }
 
+  .link-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .internal-combobox {
+    padding: 0px;
+  }
+
+  .expired-options {
+    padding: 0px;
+  }
+
+  .expire-text {
+    margin-left: 8px;
+  }
+
   .link-actions {
     display: flex;
     gap: 16px;

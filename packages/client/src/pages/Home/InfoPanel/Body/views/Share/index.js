@@ -100,10 +100,9 @@ const Share = (props) => {
         deleteLink(link, link.sharedTo.id);
       } else {
         updateLink(link, res);
+        copy(link.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
       }
-
-      copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
@@ -170,6 +169,7 @@ const Share = (props) => {
           changeShareOption={changeShareOption}
           changeAccessOption={changeAccessOption}
           changeExpirationOption={changeExpirationOption}
+          availableExternalRights={selection.availableExternalRights}
         />
       </StyledLinks>
 
@@ -192,6 +192,7 @@ const Share = (props) => {
             changeShareOption={changeShareOption}
             changeAccessOption={changeAccessOption}
             changeExpirationOption={changeExpirationOption}
+            availableExternalRights={selection.availableExternalRights}
           />
         </StyledLinks>
       )}

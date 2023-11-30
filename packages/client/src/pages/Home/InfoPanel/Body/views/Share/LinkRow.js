@@ -2,12 +2,6 @@ import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
-import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
@@ -20,70 +14,26 @@ import IconButton from "@docspace/components/icon-button";
 import toastr from "@docspace/components/toast/toastr";
 
 import { StyledLinkRow } from "./StyledShare";
+import { getShareOptions, getAccessOptions } from "./optionsHelper";
+import ExpiredComboBox from "./ExpiredComboBox";
 
 const LinkRow = ({
   onAddClick,
   links,
   changeShareOption,
   changeAccessOption,
+  changeExpirationOption,
+  availableExternalRights,
 }) => {
-  const { t } = useTranslation(["SharingPanel", "Files"]);
+  const { t } = useTranslation([
+    "SharingPanel",
+    "Files",
+    "Translations",
+    "Common",
+  ]);
 
-  const shareOptions = [
-    {
-      internal: false,
-      key: "anyone",
-      label: t("AnyoneWithLink"),
-    },
-    {
-      internal: true,
-      key: "users",
-      label: t("DoсSpaceUsersOnly"),
-    },
-  ];
-
-  const accessOptions = [
-    {
-      access: 10,
-      key: "editing",
-      label: "Editing",
-      icon: AccessEditReactSvgUrl,
-    },
-    {
-      access: 8,
-      key: "custom-filter",
-      label: "Custom filter",
-      icon: CustomFilterReactSvgUrl,
-    },
-    {
-      access: 6,
-      key: "commenting",
-      label: "Commenting",
-      icon: AccessCommentReactSvgUrl,
-    },
-    {
-      access: 2,
-      key: "viewing",
-      label: "Viewing",
-      icon: EyeReactSvgUrl,
-    },
-    {
-      access: 3,
-      key: "deny-access",
-      label: "Deny access",
-      icon: EyeOffReactSvgUrl,
-    },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    {
-      access: 0,
-      key: "remove",
-      label: "Remove",
-      icon: RemoveReactSvgUrl,
-    },
-  ];
+  const shareOptions = getShareOptions(t);
+  const accessOptions = getAccessOptions(t, availableExternalRights);
 
   const onCopyLink = (link) => {
     copy(link.sharedTo.shareLink);
@@ -106,34 +56,39 @@ const LinkRow = ({
         </StyledLinkRow>
       ) : (
         links.map((link, index) => {
-          const selected = shareOptions.find(
+          const shareOption = shareOptions.find(
             (option) => option.internal === link.sharedTo.internal
           );
-
-          const access = accessOptions.find(
+          const accessOption = accessOptions.find(
             (option) => option.access === link.access
           );
+          const avatar =
+            shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
 
           return (
             <StyledLinkRow key={`share-link-row-${index}`}>
-              <Avatar
-                size="min"
-                source={selected.key === "anyone" ? UniverseIcon : PeopleIcon}
-              />
-              <ComboBox
-                directionY={"both"}
-                options={shareOptions}
-                selectedOption={selected}
-                onSelect={(item) => changeShareOption(item, link)}
-                scaled={false}
-                scaledOptions={false}
-                showDisabledItems={true}
-                size="content"
-                dropDownMaxHeight={200}
-                fillIcon={false}
-                withBlur={isMobileOnly}
-                modernView={true}
-              />
+              <Avatar size="min" source={avatar} />
+              <div className="link-options">
+                <ComboBox
+                  className="internal-combobox"
+                  directionY={"both"}
+                  options={shareOptions}
+                  selectedOption={shareOption}
+                  onSelect={(item) => changeShareOption(item, link)}
+                  scaled={false}
+                  scaledOptions={false}
+                  showDisabledItems={true}
+                  size="content"
+                  dropDownMaxHeight={200}
+                  fillIcon={false}
+                  withBlur={isMobileOnly}
+                  modernView={true}
+                />
+                <ExpiredComboBox
+                  link={link}
+                  changeExpirationOption={changeExpirationOption}
+                />
+              </div>
               <div className="link-actions">
                 <IconButton
                   size={16}
@@ -144,7 +99,7 @@ const LinkRow = ({
                 <ComboBox
                   directionY={"both"}
                   options={accessOptions}
-                  selectedOption={access}
+                  selectedOption={accessOption}
                   onSelect={(item) => changeAccessOption(item, link)}
                   scaled={false}
                   scaledOptions={false}

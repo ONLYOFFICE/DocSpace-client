@@ -310,10 +310,8 @@ const FilesSelector = ({
 
           if (index !== maxLength && currentFolderIndex !== -1) {
             foundParentId = true;
+            !isSelectedParentFolder && setIsSelectedParentFolder(true);
           }
-
-          if (foundParentId && !isSelectedParentFolder)
-            setIsSelectedParentFolder(true);
 
           if (index === maxLength && !foundParentId && isSelectedParentFolder)
             setIsSelectedParentFolder(false);

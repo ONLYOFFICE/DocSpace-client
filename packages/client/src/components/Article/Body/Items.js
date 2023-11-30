@@ -160,6 +160,7 @@ const Items = ({
   isVisitor,
   isCollaborator,
   isAdmin,
+  isRoomAdmin,
   myId,
   commonId,
   currentId,
@@ -228,14 +229,23 @@ const Items = ({
         return true;
       }
 
-      if (isAdmin) {
+      if (isAdmin || isRoomAdmin) {
+        if (
+          item.rootFolderType === FolderType.TRASH &&
+          startDrag &&
+          !isArchive
+        ) {
+          return draggableItems.some(
+            (draggableItem) => draggableItem.security.Delete
+          );
+        }
+
         if (
           (item.pathParts &&
             (item.pathParts[0].id === myId ||
               item.pathParts[0].id === commonId)) ||
           item.rootFolderType === FolderType.USER ||
-          item.rootFolderType === FolderType.COMMON ||
-          (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
+          item.rootFolderType === FolderType.COMMON
         ) {
           return true;
         }
@@ -250,7 +260,7 @@ const Items = ({
 
       return false;
     },
-    [currentId, draggableItems, isAdmin]
+    [currentId, draggableItems, isAdmin, isRoomAdmin]
   );
 
   const onMoveTo = React.useCallback(
@@ -430,6 +440,7 @@ export default inject(
       isAdmin: auth.isAdmin,
       isVisitor: auth.userStore.user.isVisitor,
       isCollaborator: auth.userStore.user.isCollaborator,
+      isRoomAdmin: auth.isRoomAdmin,
       myId: myFolderId,
       commonId: commonFolderId,
       isPrivacy: isPrivacyFolder,

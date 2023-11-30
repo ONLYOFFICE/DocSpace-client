@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Wszystkie pliki w tym pokoju zostaną zaszyfrowane.",
   "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników DocSpace. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
   "MakeRoomPrivateTitle": "Uczyń pokój prywatnym",
+  "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie tylko do odczytu dla wszystkich plików.",
+  "PublicRoomDescription": "Zaproś użytkowników za pomocą linków zewnętrznych do przeglądania dokumentów bez konieczności rejestracji. Możesz również osadzić ten pokój w dowolnym interfejsie internetowym.",
   "ReviewRoomDescription": "Poproś o sprawdzenie dokumentów i dodanie do nich komentarzy",
   "ReviewRoomTitle": "Pokój do recenzowania",
   "RoomEditing": "Edycja pokoi",

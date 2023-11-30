@@ -9,6 +9,7 @@
   "ExternalLink": "Ulkoinen linkki",
   "FormFilling": "Lomakkeen täyttö",
   "InternalLink": "Sisäinen linkki",
+  "LinkName": "Linkin nimi",
   "Notify users": "Ilmoita käyttäjille",
   "ReadOnly": "Vain luku",
   "ShareEmailBody": "Sinulle on myönnetty käyttöoikeus asiakirjaan {{itemName}}. Avaa asiakirja heti napsauttamalla alla olevaa linkkiä: {{shareLink}}.",

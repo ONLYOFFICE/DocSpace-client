@@ -2,5 +2,6 @@
   "LblInviteAgain": "Invită din nou",
   "MessageEmailActivationInstuctionsSentOnEmail": "Instrucțiunile de activare a adresei e-mail au fost trimise la <1>{{email}}</1>.",
   "NotFoundUsers": "Nu s-au găsit utilizatori",
+  "NotFoundUsersDescription": "Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de utilizatori.",
   "UserStatus": "Statutul"
 }

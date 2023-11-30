@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Siirtyminen ruudukko- ja luettelonäkymän välillä",
   "HotkeysClearAll": "Tyhjennä kaikki valinnat",
   "HotkeysClose": "Sulje/kumoa toiminto",
+  "HotkeysCopySelected": "Kopioi valitut kohteet leikepöydälle",
   "HotkeysCreateDocument": "Luo asiakirja",
   "HotkeysCreateFolder": "Luo kansio",
   "HotkeysCreateForm": "Luo tyhjä lomakemalli",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Luo esitys",
   "HotkeysCreateSpreadsheet": "Luo laskentataulukko",
   "HotkeysCreatingObjects": "Kohteiden luominen",
+  "HotkeysCutSelected": "Leikkaa valitut kohteet leikepöydälle",
   "HotkeysEnterKey": "Syötä",
   "HotkeysExtendSelectionDown": "Laajenna valintaa alaspäin",
   "HotkeysExtendSelectionLeft": "Laajenna valintaa vasemmalle",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Siirry ylöspäin muuttamatta valintaa",
   "HotkeysNavigation": "Navigointi",
   "HotkeysOpen": "Avaa valittu kohde/Vahvista toiminto",
+  "HotkeysPasteSelected": "Liitä valitut kohteet leikepöydältä",
   "HotkeysPlayPause": "Toista/keskeytä",
   "HotkeysRedoLastUndoneAction": "Tee edellinen kumottu toiminto uudelleen",
   "HotkeysRemove": "Poista valitut kohteet",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Väli",
   "HotkeysUndoLastAction": "Kumoa viimeinen toiminto",
   "HotkeysUploadFile": "Lataa tiedosto",
-  "HotkeysUploadingObjects": "Kohteiden lataaminen"
+  "HotkeysUploadingObjects": "Kohteiden lataaminen",
+  "HotkeysZoomIn": "Lähennä",
+  "HotkeysZoomOut": "Loitonna"
 }

@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Odstrániť plugin",
+  "DeletePluginDescription": "Tento plugin už nebude používateľom DocSpace k dispozícii. Ste si istí, že chcete pokračovať?",
+  "DeletePluginTitle": "Odstrániť plugin?",
+  "Description": "Pluginy môžete pridávať, aby ste rozšírili funkčnosť DocSpace o ďalšie funkcie. Kliknite na tlačidlo Nahrať plugin a vyberte súbor pluginu v archíve ZIP.",
+  "Metadata": "Metadáta",
+  "NeedSettings": "Potrebujete zadať nastavenia",
+  "NoPlugins": "Nie sú pridané žiadne pluginy",
+  "PluginsHelp": "Pluginy umožňujú rozšíriť funkčnosť DocSpace",
+  "UploadPlugin": "Nahrať plugin"
+}

@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "documente",
+  "ErrorConnectionLost": "Conexiunea este pierdută",
   "FileLocation": "Deschidere locația fișierului",
   "FileName": "Numele fișierului",
   "ImageFileType": "imagini",

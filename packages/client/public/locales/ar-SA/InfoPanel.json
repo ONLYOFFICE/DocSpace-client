@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "انظر تفاصيل المستخدمين هنا",
+  "Administration": "الإدارة",
   "AndMoreLabel": "و <strong> {{count}} المزيد </ strong>",
   "CreationDate": "تاريخ الإنشاء",
   "Data": "بيانات",
   "DateModified": "تم تعديل التاريخ",
+  "ExpectUsers": "مستخدمين متوقعين",
   "FeedCreateFileSeveral": "تمت إضافة الملفات",
   "FeedCreateFileSingle": "تم إنشاء الملف",
   "FeedCreateFolderSeveral": "تم إضافة المجلدات",
@@ -27,6 +29,7 @@
   "FileExtension": "امتداد الملف",
   "FilesEmptyScreenText": "انظر تفاصيل الملف والمجلد هنا",
   "HistoryEmptyScreenText": "سيتم عرض سجل النشاط هنا",
+  "InfoBanner": "قائمة المستخدمين المدعوين تتضمن المالك و/أو المسئولين عن مساحة DocSpace ويمتلكون كامل الصلاحيات لجميع الغرف. لا يمكن منح المالك و/أو المسئول4 حقوق وصول أخرى. بمجرد الإضافة إلى الغرفة سيتم إشعارهم بجميع التغييرات.",
   "ItemsSelected": "تم تحديد العناصر",
   "LastModifiedBy": "تم التعديل الأخير من قبل",
   "Properties": "الخصائص",
@@ -35,5 +38,6 @@
   "StorageType": "نوع التخزين",
   "SubmenuDetails": "التفاصيل",
   "SubmenuHistory": "التاريخ",
+  "Users": "المستخدمين",
   "Versions": "إصدارات"
 }

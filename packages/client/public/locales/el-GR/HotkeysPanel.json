@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Εναλλαγή μεταξύ προβολής πλέγματος και λίστας",
   "HotkeysClearAll": "Εκκαθάριση όλων των επιλογών",
   "HotkeysClose": "Κλείσιμο/Αναίρεση ενέργειας",
+  "HotkeysCopySelected": "Αντιγραφή επιλεγμένων στοιχείων στο πρόχειρο",
   "HotkeysCreateDocument": "Δημιουργία Εγγράφου",
   "HotkeysCreateFolder": "Δημιουργία φακέλου",
   "HotkeysCreateForm": "Δημιουργία προτύπου κενής φόρμας",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Δημιουργία Παρουσίασης",
   "HotkeysCreateSpreadsheet": "Δημιουργία υπολογιστικού φύλλου",
   "HotkeysCreatingObjects": "Δημιουργία στοιχείων",
+  "HotkeysCutSelected": "Αποκοπή επιλεγμένων στοιχείων στο πρόχειρο",
   "HotkeysEnterKey": "Εισαγωγή",
   "HotkeysExtendSelectionDown": "Επέκταση της επιλογής προς τα κάτω",
   "HotkeysExtendSelectionLeft": "Επέκταση της επιλογής αριστερά",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Μετακίνηση προς τα πάνω χωρίς αλλαγή επιλογής",
   "HotkeysNavigation": "Πλοήγηση",
   "HotkeysOpen": "Άνοιγμα επιλεγμένου στοιχείου/Επιβεβαίωση ενέργειας",
+  "HotkeysPasteSelected": "Επικόλληση επιλεγμένων στοιχείων από το πρόχειρο",
   "HotkeysPlayPause": "Αναπαραγωγή/Παύση",
   "HotkeysRedoLastUndoneAction": "Επαναλάβετε την τελευταία ενέργεια που αναιρέθηκε",
   "HotkeysRemove": "Αφαίρεση επιλεγμένων στοιχείων",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Κενό διάστημα",
   "HotkeysUndoLastAction": "Αναίρεση της τελευταίας ενέργειας",
   "HotkeysUploadFile": "Μεταφόρτωση αρχείου",
-  "HotkeysUploadingObjects": "Μεταφόρτωση στοιχείων"
+  "HotkeysUploadingObjects": "Μεταφόρτωση στοιχείων",
+  "HotkeysZoomIn": "Μεγέθυνση",
+  "HotkeysZoomOut": "Σμίκρυνση"
 }

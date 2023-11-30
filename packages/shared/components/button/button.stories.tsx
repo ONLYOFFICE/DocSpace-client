@@ -1,10 +1,13 @@
 import React from "react";
 
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/button.alert... Remove this comment to see the full error message
-import Icon from "PUBLIC_DIR/images/button.alert.react.svg";
-import Button from "./";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import Icon from "PUBLIC_DIR/images/button.alert.react.svg";
+
+import { Button, ButtonSize } from ".";
+import { ButtonProps } from "./Button.types";
+
+const meta = {
   title: "Components/Button",
   component: Button,
   parameters: {
@@ -18,48 +21,61 @@ export default {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=62-3582&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+} satisfies Meta<typeof Button>;
+type Story = StoryObj<typeof Button>;
+
+export default meta;
+
+const Wrapper = (props: { isScale: boolean; children: React.ReactNode }) => {
+  const { isScale, children } = props;
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: isScale
+          ? "1fr"
+          : "repeat( auto-fill, minmax(180px, 1fr) )",
+        gridGap: "16px",
+        alignItems: "center",
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
-const sizes = ["extraSmall", "small", "normal", "medium"];
+const Template = (args: ButtonProps) => (
+  <Button {...args} onClick={() => alert("Button clicked")} />
+);
 
-const Wrapper = (props: any) => <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: props.isScale
-      ? "1fr"
-      : "repeat( auto-fill, minmax(180px, 1fr) )",
-    gridGap: "16px",
-    alignItems: "center",
-  }}
->
-  {props.children}
-</div>;
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: { size: ButtonSize.small, label: "Button" },
+};
 
-const Template = (args: any) => <Button {...args} onClick={() => alert("Button clicked")} />;
-const PrimaryTemplate = (args: any) => {
+const PrimaryTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-primary-${size}`}
-          {...args}
           primary
           scale={false}
           size={size}
           label={`Primary ${size[0].toUpperCase()}${size.slice(1)}`}
+          onClick={() => {}}
         />
       ))}
     </Wrapper>
   );
 };
 
-const SecondaryTemplate = (args: any) => {
+const SecondaryTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-secondary-${size}`}
-          {...args}
           scale={false}
           size={size}
           label={`Secondary ${size[0].toUpperCase()}${size.slice(1)}`}
@@ -69,23 +85,21 @@ const SecondaryTemplate = (args: any) => {
   );
 };
 
-const WithIconTemplate = (args: any) => {
+const WithIconTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-icon-prim-${size}`}
-          {...args}
           primary
           size={size}
           icon={<Icon />}
           label={`With Icon ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-icon-sec-${size}`}
-          {...args}
           size={size}
           icon={<Icon />}
           label={`With Icon ${size[0].toUpperCase()}${size.slice(1)}`}
@@ -95,25 +109,23 @@ const WithIconTemplate = (args: any) => {
   );
 };
 
-const IsLoadingTemplate = (args: any) => {
+const IsLoadingTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-load-prim-${size}`}
-          {...args}
           primary
           size={size}
-          isLoading={true}
+          isLoading
           label={`Loading ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-load-sec-${size}`}
-          {...args}
           size={size}
-          isLoading={true}
+          isLoading
           label={`Loading ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
@@ -121,22 +133,20 @@ const IsLoadingTemplate = (args: any) => {
   );
 };
 
-const ScaleTemplate = (args: any) => {
+const ScaleTemplate = () => {
   return (
     <Wrapper isScale>
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-scale-prim-${size}`}
-          {...args}
           primary
           size={size}
           label={`Scale ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-scale-sec-${size}`}
-          {...args}
           size={size}
           label={`Scale ${size[0].toUpperCase()}${size.slice(1)}`}
         />
@@ -145,25 +155,23 @@ const ScaleTemplate = (args: any) => {
   );
 };
 
-const DisabledTemplate = (args: any) => {
+const DisabledTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-disabled-prim-${size}`}
-          {...args}
           primary
           size={size}
-          isDisabled={true}
+          isDisabled
           label={`Disabled ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-disabled-sec-${size}`}
-          {...args}
           size={size}
-          isDisabled={true}
+          isDisabled
           label={`Disabled ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
@@ -171,25 +179,23 @@ const DisabledTemplate = (args: any) => {
   );
 };
 
-const ClickedTemplate = (args: any) => {
+const ClickedTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-clicked-prim-${size}`}
-          {...args}
           primary
           size={size}
-          isClicked={true}
+          isClicked
           label={`Clicked ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-clicked-sec-${size}`}
-          {...args}
           size={size}
-          isClicked={true}
+          isClicked
           label={`Clicked ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
@@ -197,25 +203,23 @@ const ClickedTemplate = (args: any) => {
   );
 };
 
-const HoveredTemplate = (args: any) => {
+const HoveredTemplate = () => {
   return (
-    <Wrapper>
-      {sizes.map((size) => (
+    <Wrapper isScale={false}>
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-hovered-prim-${size}`}
-          {...args}
           primary
           size={size}
-          isHovered={true}
+          isHovered
           label={`Hovered ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
-      {sizes.map((size) => (
+      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
         <Button
           key={`all-hovered-sec-${size}`}
-          {...args}
           size={size}
-          isHovered={true}
+          isHovered
           label={`Hovered ${size[0].toUpperCase()}${size.slice(1)}`}
         />
       ))}
@@ -223,26 +227,34 @@ const HoveredTemplate = (args: any) => {
   );
 };
 
-const InterfaceDirectionTemplate = (args: any) => {
-  return <Button label="أزرار" icon={<Icon />} {...args} />;
+const InterfaceDirectionTemplate = () => {
+  return <Button label="أزرار" size={ButtonSize.normal} icon={<Icon />} />;
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-Default.args = {
-  size: "extraSmall",
-  label: "Button",
+export const PrimaryButtons: Story = {
+  render: () => <PrimaryTemplate />,
 };
-export const PrimaryButtons = PrimaryTemplate.bind({});
-export const SecondaryButtons = SecondaryTemplate.bind({});
-export const WithIconButtons = WithIconTemplate.bind({});
-export const IsLoadingButtons = IsLoadingTemplate.bind({});
-export const ScaleButtons = ScaleTemplate.bind({});
-export const DisabledButtons = DisabledTemplate.bind({});
-export const ClickedButtons = ClickedTemplate.bind({});
-export const HoveredButtons = HoveredTemplate.bind({});
-export const InterfaceDirection = InterfaceDirectionTemplate.bind({});
-// @ts-expect-error TS(2339): Property 'argTypes' does not exist on type '(args:... Remove this comment to see the full error message
-HoveredButtons.argTypes = {
-  isHovered: { table: { disable: true } },
+export const SecondaryButtons: Story = {
+  render: () => <SecondaryTemplate />,
+};
+export const WithIconButtons: Story = {
+  render: () => <WithIconTemplate />,
+};
+export const IsLoadingButtons: Story = {
+  render: () => <IsLoadingTemplate />,
+};
+export const ScaleButtons: Story = {
+  render: () => <ScaleTemplate />,
+};
+export const DisabledButtons: Story = {
+  render: () => <DisabledTemplate />,
+};
+export const ClickedButtons: Story = {
+  render: () => <ClickedTemplate />,
+};
+export const HoveredButtons: Story = {
+  render: () => <HoveredTemplate />,
+};
+export const InterfaceDirection: Story = {
+  render: () => <InterfaceDirectionTemplate />,
 };

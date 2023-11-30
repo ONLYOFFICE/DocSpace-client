@@ -1,39 +1,37 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import PropTypes from "prop-types";
-import NoUserSelect from "../utils/commonStyles";
-import Base from "../themes/base";
 
-const activeCss = css`
+import { NoUserSelect } from "../../constants";
+import { Base, ThemeType } from "../../themes";
+import { ButtonProps, ButtonThemeProps } from "./Button.types";
+import { ButtonSize } from "./Button.enums";
+
+const activeCss = css<ButtonProps>`
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemePr... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.backgroundColor.primaryActive
       : props.theme.button.backgroundColor.baseActive};
 
   color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.color.primaryActive
       : props.theme.button.color.baseActive};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     !props.primary
       ? css`
-          border: ${(props) => props.theme.button.border.baseActive};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.baseActive};
+          box-sizing: ${props.theme.button.boxSizing};
         `
       : css`
-          border: ${(props) => props.theme.button.border.primaryActive};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.primaryActive};
+          box-sizing: ${props.theme.button.boxSizing};
         `}
 
   .btnIcon {
     svg {
       path {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
           props.primary
             ? props.theme.button.color.primaryActive
             : props.theme.button.color.baseActive};
@@ -42,36 +40,32 @@ const activeCss = css`
   }
 `;
 
-const hoverCss = css`
+const hoverCss = css<ButtonProps>`
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemePr... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.backgroundColor.primaryHover
       : props.theme.button.backgroundColor.baseHover};
 
   color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.color.primaryHover
       : props.theme.button.color.baseHover};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     !props.primary
       ? css`
-          border: ${(props) => props.theme.button.border.baseHover};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.baseHover};
+          box-sizing: ${props.theme.button.boxSizing};
         `
       : css`
-          border: ${(props) => props.theme.button.border.primaryHover};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.primaryHover};
+          box-sizing: ${props.theme.button.boxSizing};
         `}
 
   .btnIcon {
     svg {
       path {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
           props.primary
             ? props.theme.button.color.primaryHover
             : props.theme.button.color.baseHover};
@@ -80,36 +74,32 @@ const hoverCss = css`
   }
 `;
 
-const disableCss = css`
+const disableCss = css<ButtonProps>`
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemePr... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.backgroundColor.primaryDisabled
       : props.theme.button.backgroundColor.baseDisabled};
 
   color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.primary
       ? props.theme.button.color.primaryDisabled
       : props.theme.button.color.baseDisabled};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
     !props.primary
       ? css`
-          border: ${(props) => props.theme.button.border.baseDisabled};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.baseDisabled};
+          box-sizing: ${props.theme.button.boxSizing};
         `
       : css`
-          border: ${(props) => props.theme.button.border.primaryDisabled};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
+          border: ${props.theme.button.border.primaryDisabled};
+          box-sizing: ${props.theme.button.boxSizing};
         `}
 
   .btnIcon {
     svg {
       path {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'primary' does not exist on type 'ThemedS... Remove this comment to see the full error message
           props.primary
             ? props.theme.button.color.primaryDisabled
             : props.theme.button.color.baseDisabled};
@@ -118,8 +108,10 @@ const disableCss = css`
   }
 `;
 
-const heightStyle = (props: any) => props.theme.button.height[props.size];
-const fontSizeStyle = (props: any) => props.theme.button.fontSize[props.size];
+const heightStyle = (props: { size: ButtonSize; theme: ThemeType }) =>
+  props.theme.button.height[props.size];
+const fontSizeStyle = (props: { size: ButtonSize; theme: ThemeType }) =>
+  props.theme.button.fontSize[props.size];
 
 const ButtonWrapper = ({
   primary,
@@ -134,16 +126,19 @@ const ButtonWrapper = ({
   innerRef,
   minWidth,
   ...props
-}: any) => {
-  return <button ref={innerRef} type="button" {...props}></button>;
+}: ButtonProps & {
+  innerRef?: React.LegacyRef<HTMLButtonElement>;
+  interfaceDirection?: boolean | string;
+}) => {
+  return <button ref={innerRef} type="button" {...props} />;
 };
 
-const StyledButton = styled(ButtonWrapper).attrs((props) => ({
+const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   disabled: props.isDisabled || props.isLoading ? "disabled" : "",
   tabIndex: props.tabIndex,
 }))`
   position: relative;
-  direction: ${(props) => props.interfaceDirection && "rtl"};
+  direction: ${(props) => props?.interfaceDirection && "rtl"};
   height: ${(props) => heightStyle(props)};
   font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
 
@@ -163,7 +158,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props) => ({
       : props.theme.button.border.base};
 
   ${(props) => props.scale && `width: 100%;`};
-  min-width: ${(props) => props.minwidth && props.minwidth};
+  min-width: ${(props) => props.minWidth && props.minWidth};
 
   padding: ${(props) => `${props.theme.button.padding[props.size]}`};
 
@@ -171,12 +166,12 @@ const StyledButton = styled(ButtonWrapper).attrs((props) => ({
     props.isDisabled || props.isLoading ? "default !important" : "pointer"};
 
   font-family: ${(props) => props.theme.fontFamily};
-  margin: ${(props) => props.theme.margin};
+  margin: ${(props) => props.theme.button.margin};
   display: ${(props) => props.theme.button.display};
   font-weight: ${(props) => props.theme.button.fontWeight};
   text-align: ${(props) => props.theme.button.textAlign};
   text-decoration: ${(props) => props.theme.button.textDecoration};
-  vertical-align: ${(props) => props.theme.button.verticalAlign};
+  vertical-align: ${(props) => props.theme.button.topVerticalAlign};
   border-radius: ${(props) => props.theme.button.borderRadius};
   -moz-border-radius: ${(props) => props.theme.button.borderRadius};
   -webkit-border-radius: ${(props) => props.theme.button.borderRadius};
@@ -253,24 +248,92 @@ const StyledButton = styled(ButtonWrapper).attrs((props) => ({
   }
 `;
 
-ButtonWrapper.propTypes = {
-  label: PropTypes.string,
-  primary: PropTypes.bool,
-  size: PropTypes.oneOf(["extraSmall", "small", "normal", "medium"]),
-  scale: PropTypes.bool,
-  icon: PropTypes.node,
+StyledButton.defaultProps = { theme: Base };
 
-  tabIndex: PropTypes.number,
+const themeActiveCss = css<ButtonThemeProps>`
+  border-color: ${(props) => props.$currentColorScheme?.main?.buttons};
 
-  isHovered: PropTypes.bool,
-  isClicked: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  disableHover: PropTypes.bool,
-  isLoading: PropTypes.bool,
+  background: ${(props) =>
+    props.primary && props.$currentColorScheme?.main?.buttons};
 
-  onClick: PropTypes.func,
-};
+  opacity: ${(props) => !props.isDisabled && "1"};
+
+  filter: ${(props) =>
+    props.primary &&
+    (props.theme.isBase ? "brightness(90%)" : "brightness(82%)")};
+
+  color: ${(props) => props.$currentColorScheme?.text?.buttons};
+`;
+
+const themeHoverCss = css<ButtonThemeProps>`
+  border-color: ${(props) => props.$currentColorScheme?.main?.buttons};
+
+  background: ${(props) =>
+    props.primary && props.$currentColorScheme?.main?.buttons};
+
+  opacity: ${(props) => props.primary && !props.isDisabled && "0.85"};
+
+  color: ${(props) =>
+    props.primary && props.$currentColorScheme?.text?.buttons};
+`;
+
+const getDefaultStyles = ({
+  primary,
+  $currentColorScheme,
+  isDisabled,
+  isLoading,
+  isClicked,
+  isHovered,
+  disableHover,
+  title,
+}: ButtonThemeProps) =>
+  $currentColorScheme &&
+  !title &&
+  css`
+    ${primary &&
+    css`
+      background: ${$currentColorScheme.main?.buttons};
+      opacity: ${isDisabled && "0.6"};
+      border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
+      color: ${$currentColorScheme.text?.buttons};
+
+      .loader {
+        svg {
+          color: ${$currentColorScheme.text?.buttons};
+        }
+        background-color: ${$currentColorScheme.main?.buttons};
+      }
+    `}
+
+    ${!isDisabled &&
+    !isLoading &&
+    (isHovered && primary
+      ? themeHoverCss
+      : !disableHover &&
+        primary &&
+        css`
+          &:hover,
+          &:focus {
+            ${themeHoverCss}
+          }
+        `)}
+
+    ${!isDisabled &&
+    !isLoading &&
+    (isClicked
+      ? primary && themeActiveCss
+      : primary &&
+        css`
+          &:active {
+            ${themeActiveCss}
+          }
+        `)}
+  `;
 
 StyledButton.defaultProps = { theme: Base };
+
+const StyledThemeButton = styled(StyledButton)(getDefaultStyles);
+
+export { StyledThemeButton };
 
 export default StyledButton;

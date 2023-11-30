@@ -5,12 +5,12 @@ Button is used for a action on a page.
 ### Usage
 
 ```js
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components";
 ```
 
 ```jsx
 <Button
-  size="extraSmall"
+  size={ButtonSize.extraSmall}
   isDisabled={false}
   onClick={() => alert("Button clicked")}
   label="OK"

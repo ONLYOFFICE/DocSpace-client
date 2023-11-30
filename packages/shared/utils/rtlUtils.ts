@@ -23,7 +23,7 @@ export const getCorrectTextAlign = (
  * Not suitable for border-radius! */
 export const getCorrectFourValuesStyle = (
   styleStr: string,
-  interfaceDirection: TInterfaceDirection,
+  interfaceDirection: TInterfaceDirection | string,
 ) => {
   if (interfaceDirection === "ltr") return styleStr;
 

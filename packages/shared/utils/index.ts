@@ -2,7 +2,7 @@ import * as isArrayEqual from "./array";
 
 import * as email from "./email";
 
-import * as useId from "./useId";
+import useId from "./useId";
 import {
   getCorrectTextAlign,
   getCorrectBorderRadius,

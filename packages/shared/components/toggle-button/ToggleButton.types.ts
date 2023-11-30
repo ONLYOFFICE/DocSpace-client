@@ -40,7 +40,7 @@ export interface ContainerToggleButtonThemeProps {
   isDisabled?: boolean;
 }
 
-export interface ToggleButtomThemeProps
+export interface ToggleButtonThemeProps
   extends Omit<ContainerToggleButtonThemeProps, "$currentColorScheme"> {
   id?: string;
   className?: string;

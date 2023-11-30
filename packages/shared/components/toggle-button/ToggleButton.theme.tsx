@@ -2,11 +2,11 @@ import React, { PropsWithChildren, forwardRef, useContext } from "react";
 import { ThemeContext } from "styled-components";
 
 import { ContainerToggleButtonTheme } from "./ToggleButton.styled";
-import { ToggleButtomThemeProps } from "./ToggleButton.types";
+import { ToggleButtonThemeProps } from "./ToggleButton.types";
 
 const ToggleButtonTheme = forwardRef<
   HTMLDivElement,
-  PropsWithChildren<ToggleButtomThemeProps>
+  PropsWithChildren<ToggleButtonThemeProps>
 >((props, ref) => {
   const defaultTheme = useContext(ThemeContext);
 

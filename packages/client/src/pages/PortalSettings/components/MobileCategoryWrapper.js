@@ -53,7 +53,8 @@ const StyledMobileCategoryWrapper = styled.div`
 `;
 
 const MobileCategoryWrapper = (props) => {
-  const { title, url, subtitle, onClickLink, isDisabled } = props;
+  const { title, url, subtitle, onClickLink, isDisabled, withPaidBadge } =
+    props;
 
   const onClickProp = isDisabled ? {} : onClickLink;
   const onHrefProp = isDisabled

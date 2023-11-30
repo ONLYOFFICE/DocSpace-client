@@ -2,8 +2,13 @@ import Scrollbar from "react-scrollbars-custom";
 import styled from "styled-components";
 import Base from "../themes/base";
 import { desktop, mobile, tablet } from "../utils/device";
+import { isIOS, isIOS13, isIPad13 } from "react-device-detect";
 
 const StyledScrollbar = styled(Scrollbar)`
+  .scroller::-webkit-scrollbar {
+    ${(isIOS || isIOS13 || isIPad13) && `display: none;`}
+  }
+
   .scroll-body {
     padding-inline-end: 17px !important;
     position: relative;

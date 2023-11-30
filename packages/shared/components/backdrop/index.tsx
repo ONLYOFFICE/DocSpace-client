@@ -29,9 +29,10 @@ const Backdrop = (props: BackdropProps) => {
         backdrops.length < 1 || (isAside && backdrops.length <= 2) || false;
 
       let currentNeedBackground =
-        (needBackdrop && ((tablet && !withoutBlur) || withBackground)) || false;
+        (currentNeedBackdrop && ((tablet && !withoutBlur) || withBackground)) ||
+        false;
 
-      if (isAside && needBackdrop && !withoutBackground)
+      if (isAside && currentNeedBackdrop && !withoutBackground)
         currentNeedBackground = true;
 
       setNeedBackground(currentNeedBackground);
@@ -40,14 +41,7 @@ const Backdrop = (props: BackdropProps) => {
       setNeedBackground(false);
       setNeedBackdrop(false);
     }
-  }, [
-    visible,
-    isAside,
-    withBackground,
-    withoutBlur,
-    withoutBackground,
-    needBackdrop,
-  ]);
+  }, [visible, isAside, withBackground, withoutBlur, withoutBackground]);
 
   const modifyClassName = () => {
     const modifiedClass = ["backdrop-active", "not-selectable"];

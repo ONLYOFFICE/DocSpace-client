@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import PropType from "prop-types";
 import PropTypes from "prop-types";
 import Countdown, { zeroPad } from "react-countdown";
@@ -30,7 +30,7 @@ class SnackBar extends React.Component {
 
     window.snackbar = barConfig;
 
-    ReactDOM.render(<SnackBar {...rest} />, parentElementNode);
+    ReactDOM.createRoot(parentElementNode).render(<SnackBar {...rest} />);
   }
 
   static close() {

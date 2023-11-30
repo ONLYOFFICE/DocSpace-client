@@ -18,11 +18,13 @@ const QuotaPerItemComponent = (props) => {
     toggleLabel,
     formLabel,
     getTenantExtra,
+    initialSize,
+    isQuotaSet,
   } = props;
 
   const { t } = useTranslation("Settings");
 
-  const [isToggleChecked, setIsToggleChecked] = useState(false);
+  const [isToggleChecked, setIsToggleChecked] = useState(isQuotaSet);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -87,6 +89,7 @@ const QuotaPerItemComponent = (props) => {
             isLoading={isLoading}
             isDisabled={isDisabled}
             onSave={onSaveQuota}
+            initialSize={initialSize}
           />
         )}
       </div>

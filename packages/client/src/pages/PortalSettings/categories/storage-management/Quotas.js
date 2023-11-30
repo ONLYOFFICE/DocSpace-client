@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
+import { isMobile } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 import Badge from "@docspace/components/badge";
 
@@ -35,7 +35,7 @@ const QuotasComponent = (props) => {
       </div>
       <Text className="quotas_description">{t("QuotasDescription")}</Text>
 
-      {isMobileOnly ? (
+      {isMobile() ? (
         <MobileQuotasComponent isDisabled={!isItemQuotaAvailable} />
       ) : (
         <>

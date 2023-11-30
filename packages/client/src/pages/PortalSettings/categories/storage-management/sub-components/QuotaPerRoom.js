@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import QuotaPerItemComponent from "./QuotaPerItem";
 
 const QuotaPerRoomComponent = (props) => {
-  const { setRoomQuota } = props;
+  const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;
   const { t } = useTranslation("Settings");
 
   return (
@@ -13,13 +13,16 @@ const QuotaPerRoomComponent = (props) => {
       toggleLabel={t("DefineQuotaPerRoom")}
       disableQuota={() => setRoomQuota(-1, t)}
       saveQuota={(size) => setRoomQuota(size, t)}
+      initialSize={defaultRoomsQuota}
+      isQuotaSet={isDefaultRoomsQuotaSet}
     />
   );
 };
 
 export default inject(({ auth }) => {
   const { currentQuotaStore } = auth;
-  const { setRoomQuota } = currentQuotaStore;
+  const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } =
+    currentQuotaStore;
 
-  return { setRoomQuota };
+  return { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet };
 })(observer(QuotaPerRoomComponent));

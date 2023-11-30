@@ -121,7 +121,7 @@ export type useFilesHelpersProps = {
   ) => void;
   getIcon: (size: number, fileExst: string) => string;
   t: any;
-  selectionId?: string | number | null;
+  selectedFolders: any[];
 };
 
 export type FilesSelectorProps = {
@@ -156,7 +156,7 @@ export type FilesSelectorProps = {
 
   selection: any[];
   disabledItems: string[] | number[];
-  selectionId?: string | number | null;
+  selectedFolders: any[];
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;

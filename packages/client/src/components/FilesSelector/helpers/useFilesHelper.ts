@@ -27,8 +27,7 @@ import toastr from "@docspace/components/toast/toastr";
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
-  filterParam?: string,
-  selectionId?: string | number | null
+  filterParam?: string
 ) => {
   const items = folders.map((room: any) => {
     const {
@@ -52,9 +51,6 @@ export const convertFoldersToItems = (
     } = room;
 
     const icon = iconSize32.get("folder.svg");
-
-    const isSelectedFolderParent = selectionId && parentId === selectionId;
-    if (!filterParam && isSelectedFolderParent) disabledItems.push(id);
 
     return {
       id,
@@ -133,7 +129,7 @@ export const useFilesHelper = ({
   getRoomList,
   getIcon,
   t,
-  selectionId,
+  selectedFolders,
   setIsSelectedParentFolder,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
@@ -233,8 +229,7 @@ export const useFilesHelper = ({
         const foldersList: Item[] = convertFoldersToItems(
           folders,
           disabledItems,
-          filterParam,
-          selectionId
+          filterParam
         );
 
         const filesList: Item[] = convertFilesToItems(
@@ -251,6 +246,9 @@ export const useFilesHelper = ({
           setSelectedTreeNode({ ...current, path: pathParts });
 
         if (isInit) {
+          let foundParentId = false,
+            currentFolderIndex = -1;
+
           const breadCrumbs: BreadCrumb[] = pathParts.map(
             ({
               id,
@@ -266,9 +264,11 @@ export const useFilesHelper = ({
               // const { title, id, parentId, rootFolderType, roomType } =
               //   folderInfo;
 
-              if (selectionId == id) {
-                setIsSelectedParentFolder(true);
+              if (!foundParentId) {
+                currentFolderIndex = selectedFolders.findIndex((x) => x === id);
               }
+
+              if (currentFolderIndex !== -1) setIsSelectedParentFolder(true);
 
               return {
                 label: title,

@@ -11,8 +11,18 @@ import { Text } from "./text";
 import { ThemeProvider } from "./theme-provider";
 import { Tooltip, TFallbackAxisSideDirection, TTooltipPlace } from "./tooltip";
 import { ToggleButton } from "./toggle-button";
+import { Loader, LoaderTypes } from "./loader";
+import { Button, ButtonSize } from "./button";
+import { Backdrop } from "./backdrop";
+import { RoomIcon } from "./room-icon";
 
 export {
+  RoomIcon,
+  Backdrop,
+  Loader,
+  LoaderTypes,
+  Button,
+  ButtonSize,
   Aside,
   Avatar,
   AvatarRole,

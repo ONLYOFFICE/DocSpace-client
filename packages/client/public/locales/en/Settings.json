@@ -198,7 +198,6 @@
   "SelectFileDescriptionNextcloud": "Select the Nextcloud backup file to start the data import. Only one file can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "SelectFileDescriptionWorkspace": "Select the ONLYOFFICE Workspace backup file to start the data import. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "ImportSectionDescription": "Select sections for import. They will appear in the corresponding sections of DocSpace.",
-  "SaveToApply": "Click the <strong>Save</strong> button at the bottom to apply.",
   "SelectFileInGZFormat": "Select the file in .GZ format",
   "SelectedUsersCounter": "Selected: {{selectedUsers}}/{{totalUsers}} users",
   "SelectUsers": "Select users",

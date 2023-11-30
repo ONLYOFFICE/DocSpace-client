@@ -102,7 +102,6 @@ const FilesSelector = ({
   withHeader,
   getIcon,
   isRoomBackup,
-  selectedFolders,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -206,7 +205,6 @@ const FilesSelector = ({
     getRoomList,
     getIcon,
     t,
-    selectedFolders,
   });
 
   const onSelectAction = (item: Item) => {
@@ -303,7 +301,7 @@ const FilesSelector = ({
           currentFolderIndex = -1;
         const newBreadCrumbs = breadCrumbs.map((item, index) => {
           if (!foundParentId) {
-            currentFolderIndex = selectedFolders.findIndex(
+            currentFolderIndex = disabledItems.findIndex(
               (id) => id === item?.id
             );
           }
@@ -704,17 +702,10 @@ export default inject(
       }
     });
 
-    const selectedFolders =
-      selections.length === 1 &&
-      (selections[0].isFolder || selections[0].parentId)
-        ? [selections[0].id]
-        : disabledItems;
-
     const includeFolder =
       selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
 
     return {
-      selectedFolders,
       currentFolderId,
       fromFolderId,
       parentId,

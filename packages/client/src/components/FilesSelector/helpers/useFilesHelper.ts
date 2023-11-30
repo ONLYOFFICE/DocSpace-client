@@ -129,7 +129,6 @@ export const useFilesHelper = ({
   getRoomList,
   getIcon,
   t,
-  selectedFolders,
   setIsSelectedParentFolder,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
@@ -265,7 +264,7 @@ export const useFilesHelper = ({
               //   folderInfo;
 
               if (!foundParentId) {
-                currentFolderIndex = selectedFolders.findIndex((x) => x === id);
+                currentFolderIndex = disabledItems.findIndex((x) => x === id);
               }
 
               if (!foundParentId && currentFolderIndex !== -1) {

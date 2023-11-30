@@ -176,6 +176,12 @@ export const RegisterContainer = styled.div`
     }
   }
 
+  .signin-container {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+  }
+
   .password-field-wrapper {
     width: 100%;
   }

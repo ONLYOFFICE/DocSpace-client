@@ -31,6 +31,7 @@ import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import combineUrl from "@docspace/common/utils/combineUrl";
 import {
   ButtonsWrapper,
   ConfirmContainer,
@@ -110,8 +111,7 @@ const CreateUserForm = (props) => {
     const { isAuthenticated, logout, linkData } = props;
 
     if (isAuthenticated) {
-      const path = window.location;
-      logout().then(() => window.location.replace(path));
+      return window.location.replace(defaultPage);
     }
 
     const fetchData = async () => {
@@ -419,6 +419,15 @@ const CreateUserForm = (props) => {
     setIsPasswordErrorShow(true);
   };
 
+  const onSignIn = () => {
+    return window.location.replace(
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        "/login"
+      )
+    );
+  }
+
   const userAvatar = user && user.hasAvatar ? user.avatar : DefaultUserPhoto;
 
   return (
@@ -669,6 +678,19 @@ const CreateUserForm = (props) => {
                       isLoading={isLoading}
                       onClick={onSubmit}
                     />
+                    <div className="signin-container">
+                      <Link
+                        isHovered
+                        type="action"
+                        fontSize="13px"
+                        fontWeight="600"
+                        color={currentColorScheme?.main?.accent}
+                        className="signin-button"
+                        onClick={onSignIn}
+                      >
+                        {t("Common:LoginButton")}
+                      </Link>
+                    </div>
                   </div>
                 </form>
               )}

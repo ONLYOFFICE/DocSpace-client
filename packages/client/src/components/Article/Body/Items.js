@@ -230,12 +230,21 @@ const Items = ({
 
       if (isAdmin) {
         if (
+          item.rootFolderType === FolderType.TRASH &&
+          startDrag &&
+          !isArchive
+        ) {
+          return draggableItems.some(
+            (draggableItem) => draggableItem.security.Delete
+          );
+        }
+
+        if (
           (item.pathParts &&
             (item.pathParts[0].id === myId ||
               item.pathParts[0].id === commonId)) ||
           item.rootFolderType === FolderType.USER ||
-          item.rootFolderType === FolderType.COMMON ||
-          (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
+          item.rootFolderType === FolderType.COMMON
         ) {
           return true;
         }

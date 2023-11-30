@@ -284,11 +284,14 @@ class FilesActionStore {
       secondaryProgressDataStore;
     const { withPaging } = this.authStore.settingsStore;
 
-    const selection = newSelection
+    let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
       ? this.filesStore.selection
       : [bufferSelection];
+
+    selection = selection.filter((item) => item.security.Delete);
+
     const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;

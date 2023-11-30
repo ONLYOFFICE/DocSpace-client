@@ -17,6 +17,7 @@ const UsersRow = (props) => {
       >
         <UsersRowContent
           t={t}
+          data={data}
           sectionWidth={sectionWidth}
           displayName={data.displayName}
           email={data.email}

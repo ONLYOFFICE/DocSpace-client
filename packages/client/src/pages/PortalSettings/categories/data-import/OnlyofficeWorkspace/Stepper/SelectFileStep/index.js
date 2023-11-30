@@ -11,7 +11,7 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { mockRes } from "./tempMock";
+// import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -88,15 +88,9 @@ const SelectFileStep = ({
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      // const res = await getMigrationStatus();
+      const res = await getMigrationStatus();
 
-      const res = {
-        parseResult: mockRes,
-        failedArchives: [],
-        isCompleted: true,
-      };
-
-      if (!res || res.parseResult.failedArchives.length > 0) {
+      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
         setIsFileError(true);
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
@@ -164,7 +158,7 @@ const SelectFileStep = ({
           className="select-file-input"
           placeholder={t("Settings:BackupFile")}
           isDisabled={isFileLoading}
-          accept=".zip"
+          accept={[".zip", ".tar", ".tar.gz"]}
         />
       </Wrapper>
 

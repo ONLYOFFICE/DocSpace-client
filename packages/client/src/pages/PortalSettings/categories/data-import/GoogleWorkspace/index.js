@@ -135,9 +135,9 @@ const GoogleWorkspace = ({ t }) => {
           </Text>
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
-        <Text className="step-description">
+        <Box className="step-description">
           {getGoogleStepDescription(t, currentStep, renderTooltip)}
-        </Text>
+        </Box>
         <StepContent
           t={t}
           currentStep={currentStep}

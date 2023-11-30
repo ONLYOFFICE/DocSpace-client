@@ -32,9 +32,12 @@ const StyledTableContainer = styled(TableContainer)`
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      background-color: ${(props) => props.theme.client.settings.migration.groupMenuBackground};
-      border-bottom: ${(props) => props.theme.client.settings.migration.groupMenuBorder};
-      box-shadow: ${(props) => props.theme.client.settings.migration.groupMenuBoxShadow};
+      background-color: ${(props) =>
+        props.theme.client.settings.migration.groupMenuBackground};
+      border-bottom: ${(props) =>
+        props.theme.client.settings.migration.groupMenuBorder};
+      box-shadow: ${(props) =>
+        props.theme.client.settings.migration.groupMenuBoxShadow};
     }
 
     .table-container_group-menu-checkbox {
@@ -59,7 +62,8 @@ const StyledTableContainer = styled(TableContainer)`
     margin-top: -1px;
     &:hover {
       cursor: pointer;
-      background: ${(props) => props.theme.client.settings.migration.tableRowHoverColor};
+      background: ${(props) =>
+        props.theme.client.settings.migration.tableRowHoverColor};
     }
   }
 
@@ -89,7 +93,6 @@ const TableView = ({
   sectionWidth,
   accountsData,
   typeOptions,
-
   users,
   checkedUsers,
   toggleAccount,
@@ -103,9 +106,11 @@ const TableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   const isIndeterminate =
-    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length > 0 &&
+    checkedUsers.result.length !== users.result.length;
 
-  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -171,7 +176,8 @@ const TableView = ({
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}>
+            fetchMoreFiles={() => {}}
+          >
             {accountsData.map((data) => (
               <UsersTypeTableRow
                 key={data.key}
@@ -202,7 +208,12 @@ const TableView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

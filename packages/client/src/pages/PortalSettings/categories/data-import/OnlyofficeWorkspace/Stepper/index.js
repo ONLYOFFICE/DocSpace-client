@@ -1,7 +1,7 @@
 import SelectFileStep from "./SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
-// import SelectUsersTypeStep from "./SelectUsersTypeStep";
-// import ImportStep from "./ImportStep";
+import SelectUsersTypeStep from "./SelectUsersTypeStep";
+import ImportStep from "./ImportStep";
 // import ImportProcessingStep from "./ImportProcessingStep";
 // import ImportCompleteStep from "./ImportCompleteStep";
 
@@ -35,24 +35,24 @@ const StepContent = ({
           showReminder={showReminder}
         />
       );
-    // case 3:
-    //   return (
-    //     <SelectUsersTypeStep
-    //       t={t}
-    //       onNextStep={onNextStep}
-    //       onPrevStep={onPrevStep}
-    //       showReminder={showReminder}
-    //     />
-    //   );
-    // case 4:
-    //   return (
-    //     <ImportStep
-    //       t={t}
-    //       onNextStep={onNextStep}
-    //       onPrevStep={onPrevStep}
-    //       showReminder={showReminder}
-    //     />
-    //   );
+    case 3:
+      return (
+        <SelectUsersTypeStep
+          t={t}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
+          showReminder={showReminder}
+        />
+      );
+    case 4:
+      return (
+        <ImportStep
+          t={t}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
+          showReminder={showReminder}
+        />
+      );
     // case 5:
     //   return (
     //     <ImportProcessingStep

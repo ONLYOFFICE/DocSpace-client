@@ -188,7 +188,7 @@ FileInput.propTypes = {
   /** Called when a file is selected */
   onInput: PropTypes.func,
   /** Specifies the files visible for upload */
-  accept: PropTypes.string,
+  accept: PropTypes.array,
   /** Specifies the label for the upload button */
   buttonLabel: PropTypes.string,
 };
@@ -200,7 +200,7 @@ FileInput.defaultProps = {
   hasError: false,
   isDisabled: false,
   isLoading: false,
-  accept: "",
+  accept: [],
 };
 
 export default withTranslation("Common")(FileInput);

@@ -135,9 +135,9 @@ const OnlyofficeWorkspace = ({ t }) => {
           </Text>
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
-        <Text className="step-description">
+        <Box className="step-description">
           {getWorkspaceStepDescription(t, currentStep, renderTooltip)}
-        </Text>
+        </Box>
         <StepContent
           t={t}
           currentStep={currentStep}

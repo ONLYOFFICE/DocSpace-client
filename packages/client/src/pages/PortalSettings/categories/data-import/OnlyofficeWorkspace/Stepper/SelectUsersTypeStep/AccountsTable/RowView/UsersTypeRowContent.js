@@ -78,7 +78,12 @@ const UsersRowContent = ({
     typeOptions.find((option) => option.key === type) || {};
 
   const contentData = [
-    <Box displayProp="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      key={id}
+      displayProp="flex"
+      justifyContent="space-between"
+      alignItems="center"
+    >
       <Box>
         <Text className="username">{displayName}</Text>
         <Text className="user-email">{email}</Text>

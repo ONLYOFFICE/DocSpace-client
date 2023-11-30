@@ -35,13 +35,14 @@ const StyledRowContent = styled(RowContent)`
 
 const UsersRowContent = ({
   t,
+  data,
   sectionWidth,
   displayName,
   email,
   isDuplicate,
 }) => {
   const contentData = [
-    <>
+    <div key={data.key}>
       <Text className="username">{displayName}</Text>
       <Box displayProp="flex">
         <Text className="user-email">{email}</Text>
@@ -49,7 +50,7 @@ const UsersRowContent = ({
           <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
         )}
       </Box>
-    </>,
+    </div>,
   ];
 
   return (

@@ -73,8 +73,8 @@ export const convertFoldersToItems = (
 
 export const convertFilesToItems = (
   files: any,
-  filterParam?: string,
-  getIcon: (size: number, fileExst: string) => string
+  getIcon: (size: number, fileExst: string) => string,
+  filterParam?: string
 ) => {
   const items = files.map((file: any) => {
     const {
@@ -233,8 +233,8 @@ export const useFilesHelper = ({
 
         const filesList: Item[] = convertFilesToItems(
           files,
-          filterParam,
-          getIcon
+          getIcon,
+          filterParam
         );
 
         const itemList = [...foldersList, ...filesList];

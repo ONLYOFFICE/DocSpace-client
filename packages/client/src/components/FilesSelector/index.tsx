@@ -495,6 +495,7 @@ const FilesSelector = ({
 
   const isDisabled = getIsDisabled(
     isFirstLoad,
+    isSelectedParentFolder,
     fromFolderId == selectedItemId,
     selectedItemType === "rooms",
     isRoot,
@@ -506,8 +507,7 @@ const FilesSelector = ({
     filterParam,
     !!selectedFileInfo,
     includeFolder,
-    isRestore,
-    isSelectedParentFolder
+    isRestore
   );
 
   const SelectorBody = (

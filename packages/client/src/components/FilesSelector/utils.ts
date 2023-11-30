@@ -60,6 +60,7 @@ export const getAcceptButtonLabel = (
 
 export const getIsDisabled = (
   isFirstLoad: boolean,
+  isSelectedParentFolder: boolean,
   sameId?: boolean,
   isRooms?: boolean,
   isRoot?: boolean,
@@ -71,8 +72,7 @@ export const getIsDisabled = (
   filterParam?: string,
   isFileSelected?: boolean,
   includeFolder?: boolean,
-  isRestore?: boolean,
-  isSelectedParentFolder
+  isRestore?: boolean
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;

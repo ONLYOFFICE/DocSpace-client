@@ -15,4 +15,5 @@ export interface LoaderProps {
   id?: string;
   /** Accepts css style */
   style?: React.CSSProperties;
+  primary?: boolean;
 }

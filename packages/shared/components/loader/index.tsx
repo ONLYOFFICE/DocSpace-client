@@ -9,6 +9,7 @@ import { Track } from "./types/track";
 import { LoaderProps } from "./Loader.types";
 import { LoaderTypes } from "./Loader.enums";
 
+export { LoaderTypes };
 const Loader = ({ ...props }: LoaderProps) => {
   const { type, color, size, label, className, style, id } = props;
 

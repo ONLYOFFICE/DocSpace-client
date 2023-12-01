@@ -709,20 +709,26 @@ class FilesStore {
     this.selectedFolderStore.setSelectedFolder(null);
   };
 
+  mappingActiveItems = (items, destFolderId) => {
+    const arrayFormation = items.map((item) =>
+      typeof item === "object"
+        ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
+        : {
+            id: item,
+            destFolderId,
+          }
+    );
+    return arrayFormation;
+  };
+
   setActiveFiles = (activeFiles, destFolderId) => {
-    const arrayFormation = activeFiles.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFiles, destFolderId);
 
     this.activeFiles = arrayFormation;
   };
 
   setActiveFolders = (activeFolders, destFolderId) => {
-    const arrayFormation = activeFolders.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFolders, destFolderId);
 
     this.activeFolders = arrayFormation;
   };

@@ -62,7 +62,7 @@ const Article = ({
   }, [onMobileBack]);
 
   React.useEffect(() => {
-    // const showArticle = JSON.parse(localStorage.getItem("showArticle"));
+    const showArticle = JSON.parse(localStorage.getItem("showArticle"));
 
     if (currentDeviceType === DeviceType.mobile) {
       setShowText(true);
@@ -74,7 +74,7 @@ const Article = ({
     if (currentDeviceType === DeviceType.tablet) {
       setIsMobileArticle(true);
 
-      // if (showArticle) return;
+      if (showArticle) return;
 
       setShowText(false);
 

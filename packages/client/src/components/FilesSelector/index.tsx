@@ -128,7 +128,8 @@ const FilesSelector = ({
 
   const [total, setTotal] = React.useState<number>(0);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
-
+  const [isSelectedParentFolder, setIsSelectedParentFolder] =
+    React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const [isRequestRunning, setIsRequestRunning] =
@@ -182,6 +183,7 @@ const FilesSelector = ({
   });
 
   const { getFileList } = useFilesHelper({
+    setIsSelectedParentFolder,
     setIsBreadCrumbsLoading,
     setBreadCrumbs,
     setIsNextPageLoading,
@@ -296,7 +298,26 @@ const FilesSelector = ({
           (value) => value.id.toString() === item.id.toString()
         );
 
-        const newBreadCrumbs = breadCrumbs.map((item) => ({ ...item }));
+        const maxLength = breadCrumbs.length - 1;
+        let foundParentId = false,
+          currentFolderIndex = -1;
+        const newBreadCrumbs = breadCrumbs.map((item, index) => {
+          if (!foundParentId) {
+            currentFolderIndex = disabledItems.findIndex(
+              (id) => id === item?.id
+            );
+          }
+
+          if (index !== maxLength && currentFolderIndex !== -1) {
+            foundParentId = true;
+            !isSelectedParentFolder && setIsSelectedParentFolder(true);
+          }
+
+          if (index === maxLength && !foundParentId && isSelectedParentFolder)
+            setIsSelectedParentFolder(false);
+
+          return { ...item };
+        });
 
         newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
 
@@ -476,7 +497,8 @@ const FilesSelector = ({
 
   const isDisabled = getIsDisabled(
     isFirstLoad,
-    fromFolderId === selectedItemId,
+    isSelectedParentFolder,
+    fromFolderId == selectedItemId,
     selectedItemType === "rooms",
     isRoot,
     isCopy,
@@ -679,7 +701,7 @@ export default inject(
     const disabledItems: any[] = [];
 
     selectionsWithoutEditing.forEach((item: any) => {
-      if (item?.isFolder && item?.id) {
+      if ((item?.isFolder || item?.parentId) && item?.id) {
         disabledItems.push(item.id);
       }
     });

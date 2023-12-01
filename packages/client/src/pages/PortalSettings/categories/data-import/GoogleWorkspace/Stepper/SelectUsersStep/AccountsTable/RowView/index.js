@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
@@ -10,7 +9,6 @@ import Link from "@docspace/components/link";
 import Box from "@docspace/components/box";
 import RowContainer from "@docspace/components/row-container";
 import Row from "@docspace/components/row";
-import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 import UsersRow from "./UsersRow";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
@@ -62,6 +60,7 @@ const RowView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   } = props;
 
   const toggleAll = (isChecked) => toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
@@ -73,15 +72,11 @@ const RowView = (props) => {
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
 
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return (
     <StyledRowContainer useReactWindow={false}>
@@ -131,8 +126,9 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
   const {
     checkedUsers,
     withEmailUsers,
@@ -152,5 +148,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(RowView));

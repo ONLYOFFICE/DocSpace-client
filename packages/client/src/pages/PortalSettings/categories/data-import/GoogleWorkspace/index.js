@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { isMobileOnly, isDesktop } from "react-device-detect";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, isMobile } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 import StepContent from "./Stepper";
@@ -45,8 +44,7 @@ const GoogleWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.stepDescriptionColor};
+    color: ${(props) => props.theme.client.settings.migration.stepDescriptionColor};
 
     @media ${tablet} {
       max-width: 675px;
@@ -56,25 +54,7 @@ const GoogleWrapper = styled.div`
 
 const GoogleWorkspace = ({ t }) => {
   const [showReminder, setShowReminder] = useState(false);
-  const [isSmallWindow, setIsSmallWindow] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => {
-      window.removeEventListener("resize", onCheckView);
-    };
-  }, []);
-
-  const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 600) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
 
   const onNextStep = () => {
     if (currentStep !== 6) {
@@ -118,16 +98,11 @@ const GoogleWorkspace = ({ t }) => {
     />
   );
 
-  if (isSmallWindow)
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
-  if (isMobileOnly)
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobile()) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   return (
     <GoogleWrapper>
-      <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
-      </Text>
+      <Text className="workspace-subtitle">{t("Settings:AboutDataImport")}</Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
           <Text className="step-counter">

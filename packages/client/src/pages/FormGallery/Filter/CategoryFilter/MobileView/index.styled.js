@@ -26,7 +26,7 @@ export const CategoryFilterMobileWrapper = styled.div`
 `;
 
 export const CategoryFilterMobile = styled(DropDown)`
-  position: absolute;
+  position: fixed;
   top: 36px;
   left: 0;
   width: 100%;

@@ -240,21 +240,6 @@ const Items = ({
         );
       }
 
-      if (isAdmin) {
-        if (
-          (item.pathParts &&
-            (item.pathParts[0].id === myId ||
-              item.pathParts[0].id === commonId)) ||
-          item.rootFolderType === FolderType.COMMON
-        ) {
-          return true;
-        }
-      } else {
-        if (item.pathParts && item.pathParts[0].id === myId) {
-          return true;
-        }
-      }
-
       return false;
     },
     [currentId, draggableItems, isAdmin]

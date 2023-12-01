@@ -92,6 +92,7 @@ export type useRoomsHelperProps = {
 export type useFilesHelpersProps = {
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
+  setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
@@ -132,6 +133,7 @@ export type FilesSelectorProps = {
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
   setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
+  getIcon: (size: number, fileExst: string) => string;
 
   onClose?: () => void;
 

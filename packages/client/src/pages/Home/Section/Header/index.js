@@ -225,6 +225,7 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    onClickArchive,
   } = props;
 
   const navigate = useNavigate();
@@ -478,6 +479,11 @@ const SectionHeaderContent = (props) => {
     );
   };
 
+  const onClickArchiveAction = (e) => {
+    setBufferSelection(selectedFolder);
+    onClickArchive(e);
+  };
+
   const renameAction = () => {
     const event = new Event(Events.RENAME);
 
@@ -579,7 +585,6 @@ const SectionHeaderContent = (props) => {
       onClickEditRoom,
       onClickInviteUsers,
       onShowInfoPanel,
-      onClickArchive,
       onClickReconnectStorage,
 
       canRestoreAll,
@@ -751,7 +756,7 @@ const SectionHeaderContent = (props) => {
         key: "archive-room",
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
-        onClick: (e) => onClickArchive(e),
+        onClick: onClickArchiveAction,
         disabled: !isRoom || !security?.Move,
         "data-action": "archive",
         action: "archive",

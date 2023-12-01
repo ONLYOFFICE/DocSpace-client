@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import Row from "@docspace/components/row";
 import UsersRowContent from "./UsersRowContent";
 
@@ -23,7 +23,6 @@ const UsersRow = (props) => {
   return (
     <Row
       sectionWidth={sectionWidth}
-      data={data}
       checked={isChecked}
       onClick={handleAccountToggle}
       isDisabled={!isPrevEmailValid}>

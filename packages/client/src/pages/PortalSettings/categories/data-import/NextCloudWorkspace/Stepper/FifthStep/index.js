@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
@@ -20,8 +19,6 @@ const SectionsWrapper = styled.div`
 `;
 
 const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOptions }) => {
-  const [isChecked, setIsChecked] = useState(true);
-
   const onChange = (e, name) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
@@ -33,8 +30,7 @@ const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOp
   return (
     <SectionsWrapper>
       <ImportSection
-        isChecked={isChecked}
-        onChange={() => setIsChecked((prev) => !prev)}
+        isChecked
         sectionName={users}
         description={t("Settings:UsersSectionDescription")}
         exportSection={{ sectionName: users, workspace: serviceName }}
@@ -55,8 +51,8 @@ const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOp
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
-          workspace: t("Settings:MyDocuments"),
+          sectionName: t("Settings:MyDocuments"),
+          workspace: "DocSpace",
           SectionIcon: UserIcon,
         }}
       />
@@ -72,7 +68,7 @@ const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOp
         importSection={{
           sectionName: t("Settings:MyDocuments"),
           workspace: "DocSpace",
-          SectionIcon: PeopleIcon,
+          SectionIcon: UserIcon,
         }}
       />
 

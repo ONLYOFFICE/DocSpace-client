@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import UsersRow from "./UsersRow";
 
@@ -97,6 +96,7 @@ const RowView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   } = props;
 
   const isIndeterminate =
@@ -106,15 +106,11 @@ const RowView = (props) => {
 
   const onClearFilter = () => setSearchValue("");
 
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const headerMenu = [
     {
@@ -186,8 +182,9 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
   const {
     users,
     checkedUsers,
@@ -207,5 +204,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(RowView));

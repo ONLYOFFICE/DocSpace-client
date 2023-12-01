@@ -1,21 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
-import Button from "@docspace/components/button";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
 
 import { Wrapper } from "../StyledStepper";
-
-const ButtonsWrapper = styled.div`
-  max-width: 445px;
-  display: flex;
-  align-items: center;
-  column-gap: 8px;
-`;
 
 const SeventhStep = ({
   t,
@@ -84,10 +76,15 @@ const SeventhStep = ({
         />
       </div>
 
-      <ButtonsWrapper>
-        <Button size="small" label={t("Common:Finish")} primary onClick={onFinishClick} />
-        <Button size="small" label={t("Settings:DownloadLog")} onClick={onDownloadLog} />
-      </ButtonsWrapper>
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={onFinishClick}
+        onCancelClick={onDownloadLog}
+        saveButtonLabel={t("Common:Finish")}
+        cancelButtonLabel={t("Settings:DownloadLog")}
+        displaySettings
+        showReminder
+      />
     </Wrapper>
   );
 };

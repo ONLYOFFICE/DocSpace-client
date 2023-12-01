@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import RowContainer from "@docspace/components/row-container";
 import UsersRow from "./UsersRow";
@@ -11,6 +11,7 @@ import Text from "@docspace/components/text";
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
+  height: 40px;
   min-height: 40px;
 
   @media ${tablet} {
@@ -35,6 +36,7 @@ const RowView = (props) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    currentDeviceType,
   } = props;
 
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
@@ -50,15 +52,11 @@ const RowView = (props) => {
     checkedUsers.withoutEmail.length > 0 &&
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return (
     <RowContainer useReactWindow={false}>
@@ -91,8 +89,9 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
   const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
     importAccountsStore;
 
@@ -105,5 +104,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    currentDeviceType,
   };
 })(observer(RowView));

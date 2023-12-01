@@ -160,7 +160,6 @@ const Items = ({
   isVisitor,
   isCollaborator,
   isAdmin,
-  isRoomAdmin,
   myId,
   commonId,
   currentId,
@@ -185,6 +184,7 @@ const Items = ({
   isCommunity,
   isPaymentPageAvailable,
   currentDeviceType,
+  folderAccess,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -229,38 +229,35 @@ const Items = ({
         return true;
       }
 
-      if (isAdmin || isRoomAdmin) {
-        if (
-          item.rootFolderType === FolderType.TRASH &&
-          startDrag &&
-          !isArchive
-        ) {
-          return draggableItems.some(
-            (draggableItem) => draggableItem.security.Delete
-          );
-        }
+      if (
+        (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) ||
+        item.rootFolderType === FolderType.USER
+      ) {
+        return (
+          folderAccess === ShareAccessRights.None ||
+          folderAccess === ShareAccessRights.FullAccess ||
+          folderAccess === ShareAccessRights.RoomManager
+        );
+      }
 
+      if (isAdmin) {
         if (
           (item.pathParts &&
             (item.pathParts[0].id === myId ||
               item.pathParts[0].id === commonId)) ||
-          item.rootFolderType === FolderType.USER ||
           item.rootFolderType === FolderType.COMMON
         ) {
           return true;
         }
       } else {
-        if (
-          (item.pathParts && item.pathParts[0].id === myId) ||
-          item.rootFolderType === FolderType.USER
-        ) {
+        if (item.pathParts && item.pathParts[0].id === myId) {
           return true;
         }
       }
 
       return false;
     },
-    [currentId, draggableItems, isAdmin, isRoomAdmin]
+    [currentId, draggableItems, isAdmin]
   );
 
   const onMoveTo = React.useCallback(
@@ -427,7 +424,7 @@ export default inject(
     const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
       treeFoldersStore;
 
-    const { id } = selectedFolderStore;
+    const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
       uploadEmptyFolders,
@@ -440,7 +437,6 @@ export default inject(
       isAdmin: auth.isAdmin,
       isVisitor: auth.userStore.user.isVisitor,
       isCollaborator: auth.userStore.user.isCollaborator,
-      isRoomAdmin: auth.isRoomAdmin,
       myId: myFolderId,
       commonId: commonFolderId,
       isPrivacy: isPrivacyFolder,
@@ -471,6 +467,7 @@ export default inject(
       isCommunity,
       isPaymentPageAvailable,
       currentDeviceType,
+      folderAccess,
     };
   }
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

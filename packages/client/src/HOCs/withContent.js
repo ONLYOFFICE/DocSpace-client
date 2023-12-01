@@ -91,6 +91,7 @@ export default function withContent(WrappedContent) {
 
       return (
         <WrappedContent
+          asdasd={"asd"}
           titleWithoutExt={titleWithoutExt}
           updatedDate={updatedDate}
           createdDate={createdDate}

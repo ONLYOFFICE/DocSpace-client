@@ -1,0 +1,118 @@
+import styled, { css } from "styled-components";
+import RowContainer from "@docspace/components/row-container";
+import { isMobile } from "react-device-detect";
+import Row from "@docspace/components/row";
+import { Base } from "@docspace/components/themes";
+import { mobile, tablet } from "@docspace/components/utils/device";
+
+export const GroupsRowContainer = styled(RowContainer)`
+  .row-selected + .row-wrapper:not(.row-selected),
+  .row-wrapper:not(.row-selected) + .row-selected,
+  .row-selected:first-child {
+    .user-row {
+      border-top: ${({ theme }) =>
+        `1px ${theme.filesSection.tableView.row.borderColor} solid`};
+      margin: -3px -24px 0 -24px;
+      padding: 0 24px;
+      @media ${tablet} {
+        margin: -3px -16px 0 -16px;
+        padding: 0 16px;
+      }
+    }
+  }
+
+  .row-selected:last-child {
+    .user-row {
+      border-bottom: ${({ theme }) =>
+        `1px ${theme.filesSection.tableView.row.borderColor} solid`};
+      margin: 0 -24px;
+      padding: 0 24px 1px 24px;
+      @media ${tablet} {
+        margin: 0 -16px;
+        padding: 0 16px 1px 16px;
+      }
+
+      &::after {
+        height: 0px;
+      }
+    }
+  }
+
+  .row-hotkey-border + .row-selected {
+    .user-row {
+      border-top: 1px solid #2da7db !important;
+    }
+  }
+`;
+
+export const GroupsRowWrapper = styled.div`
+  .user-item {
+    border: 1px solid transparent;
+    border-left: none;
+    border-right: none;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 0;
+          `
+        : css`
+            margin-left: 0;
+          `}
+    height: 100%;
+    user-select: none;
+
+    position: relative;
+    outline: none;
+    background: none !important;
+  }
+`;
+
+const checkedStyle = css`
+  background: ${({ theme }) => theme.filesSection.rowView.checkedBackground};
+
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  @media ${tablet} {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+`;
+
+export const GroupsRow = styled(Row)`
+  ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
+
+  &:hover {
+    cursor: pointer;
+    ${checkedStyle}
+
+    margin-top: -3px;
+    padding-bottom: 1px;
+    border-top: 1px
+      ${({ theme }) => theme.filesSection.tableView.row.borderColor} solid;
+    border-bottom: 1px
+      ${({ theme }) => theme.filesSection.tableView.row.borderColor} solid;
+  }
+
+  position: unset;
+  margin-top: -2px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  .styled-element {
+    height: 32px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
+  }
+`;
+
+GroupsRow.defaultProps = { theme: Base };

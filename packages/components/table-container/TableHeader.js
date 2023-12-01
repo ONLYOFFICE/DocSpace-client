@@ -289,6 +289,7 @@ class TableHeader extends React.Component {
       : container.style.gridTemplateColumns.split(" ");
 
     // columns.length + 1 - its settings column
+    console.log(tableContainer.length, columns.length);
     if (tableContainer.length !== columns.length + 1) {
       return this.resetColumns(true);
     }
@@ -619,6 +620,7 @@ class TableHeader extends React.Component {
       columns,
       infoPanelVisible,
     } = this.props;
+    console.log("resetColumns");
     const defaultSize = this.props.columns.find(
       (col) => col.defaultSize
     )?.defaultSize;

@@ -115,6 +115,8 @@ export default function withContent(WrappedContent) {
       contextOptions: getModel(item, t),
     };
 
+    console.log(contextOptionsProps);
+
     let value = `folder_${item.id}`;
     value += "_false";
     value += `_index_${itemIndex}`;

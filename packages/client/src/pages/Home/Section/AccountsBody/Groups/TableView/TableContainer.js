@@ -13,9 +13,10 @@ import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
+import { groups } from "../mockdata";
 
-const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
+const COLUMNS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
 
 const marginCss = css`
   margin-top: -1px;
@@ -158,7 +159,9 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return peopleList.length !== 0 || !isFiltered ? (
+  console.log(peopleList);
+
+  return groups.length !== 0 || !isFiltered ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -180,7 +183,7 @@ const Table = ({
         itemHeight={49}
         useReactWindow={!withPaging}
       >
-        {peopleList.map((item, index) => (
+        {groups.map((item, index) => (
           <TableRow
             theme={theme}
             key={item.id}

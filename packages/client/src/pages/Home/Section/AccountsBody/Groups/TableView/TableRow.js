@@ -1,0 +1,355 @@
+import React from "react";
+import styled, { css } from "styled-components";
+import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import TableRow from "@docspace/components/table-container/TableRow";
+import TableCell from "@docspace/components/table-container/TableCell";
+import Link from "@docspace/components/link";
+import Checkbox from "@docspace/components/checkbox";
+
+import withContent from "SRC_DIR/HOCs/withPeopleContent";
+
+import Badges from "../../Badges";
+import { Base } from "@docspace/components/themes";
+
+const StyledWrapper = styled.div`
+  display: contents;
+`;
+
+const StyledPeopleRow = styled(TableRow)`
+  :hover {
+    .table-container_cell {
+      cursor: pointer;
+      background: ${(props) =>
+        `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      border-top: ${(props) =>
+        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+      margin-top: -1px;
+    }
+
+    .table-container_user-name-cell {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -24px;
+              padding-right: 24px;
+            `
+          : css`
+              margin-left: -24px;
+              padding-left: 24px;
+            `}
+    }
+    .table-container_row-context-menu-wrapper {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: -20px;
+              padding-left: 20px;
+            `
+          : css`
+              margin-right: -20px;
+              padding-right: 20px;
+            `}
+    }
+  }
+
+  .table-container_cell {
+    height: 48px;
+    max-height: 48px;
+
+    background: ${(props) =>
+      (props.checked || props.isActive) &&
+      `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+  }
+
+  .table-container_row-checkbox-wrapper {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
+    min-width: 48px;
+
+    .table-container_row-checkbox {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -4px;
+              padding: 16px 12px 16px 0px;
+            `
+          : css`
+              margin-left: -4px;
+              padding: 16px 0px 16px 12px;
+            `}
+    }
+  }
+
+  .link-with-dropdown-group {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
+  }
+
+  .table-cell_username {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
+  }
+
+  .table-container_row-context-menu-wrapper {
+    justify-content: flex-end;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
+  }
+
+  .table-cell_type,
+  .table-cell_room {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -8px;
+          `
+        : css`
+            margin-left: -8px;
+          `}
+  }
+
+  .type-combobox {
+    visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
+    opacity: ${(props) => (props.hideColumns ? 0 : 1)};
+
+    & > div {
+      max-width: fit-content;
+    }
+  }
+
+  .type-combobox,
+  .room-combobox {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 8px;
+          `
+        : css`
+            padding-left: 8px;
+          `}
+    overflow: hidden;
+    .combo-button {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 8px;
+              margin-right: -8px;
+            `
+          : css`
+              padding-left: 8px;
+              margin-left: -8px;
+            `}
+
+      .combo-button-label {
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        font-weight: 600;
+      }
+    }
+  }
+
+  .room-combobox {
+    .combo-buttons_arrow-icon {
+      display: none;
+    }
+  }
+`;
+
+StyledPeopleRow.defaultProps = { theme: Base };
+
+const PeopleTableRow = (props) => {
+  const {
+    t,
+    item,
+    checkedProps,
+    onContentRowSelect,
+    onContentRowClick,
+
+    theme,
+    changeUserType,
+
+    isActive,
+    hideColumns,
+    value,
+  } = props;
+
+  const navigate = useNavigate();
+
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+
+  const onAbort = () => {
+    setIsLoading(false);
+  };
+
+  const onSuccess = () => {
+    setIsLoading(false);
+  };
+
+  const onTypeChange = React.useCallback(
+    ({ action }) => {
+      setIsLoading(true);
+      if (!changeUserType(action, [item], onSuccess, onAbort)) {
+        setIsLoading(false);
+      }
+    },
+    [item, changeUserType]
+  );
+
+  const isChecked = checkedProps.checked;
+
+  const onChange = (e) => {
+    onContentRowSelect && onContentRowSelect(e.target.checked, item);
+  };
+
+  const onRowContextClick = React.useCallback(() => {
+    onContentRowClick && onContentRowClick(!isChecked, item, false);
+  }, [isChecked, item, onContentRowClick]);
+
+  const onRowClick = (e) => {
+    if (
+      e.target.closest(".checkbox") ||
+      e.target.closest(".table-container_row-checkbox") ||
+      e.target.closest(".type-combobox") ||
+      e.target.closest(".paid-badge") ||
+      e.target.closest(".pending-badge") ||
+      e.target.closest(".disabled-badge") ||
+      e.detail === 0
+    ) {
+      return;
+    }
+
+    onContentRowClick && onContentRowClick(!isChecked, item);
+    navigate(`/accounts/groups/filter?group=${item.id}`);
+  };
+
+  const contextOptionsProps = {
+    contextOptions: [
+      {
+        id: "option_profile",
+        key: "profile",
+        icon: "http://192.168.0.105/static/images/check-box.react.svg?hash=079b6e8fa11a027ed622",
+        label: "Select",
+      },
+      {
+        key: "separator-1",
+        isSeparator: true,
+      },
+      {
+        id: "option_change-name",
+        key: "change-name",
+        icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
+        label: "Edit department",
+      },
+      {
+        icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
+        id: "option_details",
+        key: "details",
+        label: "Info",
+      },
+      {
+        key: "separator-2",
+        isSeparator: true,
+      },
+      {
+        id: "option_change-owner",
+        key: "change-owner",
+        icon: "http://192.168.0.105/static/images/catalog.trash.react.svg?hash=eba7f2edad4e3c4f6f77",
+        label: "Delete",
+      },
+    ],
+  };
+
+  return (
+    <StyledWrapper
+      className={`user-item ${
+        isChecked || isActive ? "table-row-selected" : ""
+      }`}
+      value={value}
+    >
+      <StyledPeopleRow
+        key={item.id}
+        className="table-row"
+        sideInfoColor={sideInfoColor}
+        checked={isChecked}
+        isActive={isActive}
+        onClick={onRowClick}
+        fileContextClick={onRowContextClick}
+        hideColumns={hideColumns}
+        {...contextOptionsProps}
+      >
+        <TableCell className={"table-container_user-name-cell"}>
+          <TableCell
+            hasAccess={true}
+            className="table-container_row-checkbox-wrapper"
+            checked={isChecked}
+          >
+            <div className="table-container_element">
+              <div
+                style={{
+                  display: "flex",
+                  width: "32px",
+                  height: "32px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  lineHeight: "16px",
+                  background: "#ECEEF1",
+                  color: "#333",
+                  borderRadius: "50%",
+                }}
+              >
+                {item.shortTitle}
+              </div>
+            </div>
+            <Checkbox
+              className="table-container_row-checkbox"
+              onChange={onChange}
+              isChecked={isChecked}
+            />
+          </TableCell>
+
+          <Link
+            type="page"
+            title={item.title}
+            fontWeight="600"
+            fontSize="13px"
+            isTextOverflow
+            className="table-cell_username"
+          >
+            {item.title}
+          </Link>
+        </TableCell>
+      </StyledPeopleRow>
+    </StyledWrapper>
+  );
+};
+
+export default withTranslation(["People", "Common", "Settings"])(
+  withContent(PeopleTableRow)
+);

@@ -398,6 +398,8 @@ const SimpleFilesRow = (props) => {
     setIsDragActive(false);
   };
 
+  console.log(item.contextOptions);
+
   const dragStyles =
     dragging && isDragging
       ? {

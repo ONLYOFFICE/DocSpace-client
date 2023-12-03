@@ -2,8 +2,8 @@ import SelectFileStep from "./SelectFileStep";
 import SelectUsersStep from "./SelectUsersStep";
 import SelectUsersTypeStep from "./SelectUsersTypeStep";
 import ImportStep from "./ImportStep";
-// import ImportProcessingStep from "./ImportProcessingStep";
-// import ImportCompleteStep from "./ImportCompleteStep";
+import ImportProcessingStep from "./ImportProcessingStep";
+import ImportCompleteStep from "./ImportCompleteStep";
 
 const StepContent = ({
   t,
@@ -13,7 +13,7 @@ const StepContent = ({
   onNextStep,
   onPrevStep,
 }) => {
-  // const isFifthStep = currentStep === 5;
+  const isFifthStep = currentStep === 5;
 
   switch (currentStep) {
     case 1:
@@ -53,25 +53,25 @@ const StepContent = ({
           showReminder={showReminder}
         />
       );
-    // case 5:
-    //   return (
-    //     <ImportProcessingStep
-    //       t={t}
-    //       onNextStep={onNextStep}
-    //       onPrevStep={onPrevStep}
-    //       showReminder={showReminder}
-    //       isFifthStep={isFifthStep}
-    //     />
-    //   );
-    // case 6:
-    //   return (
-    //     <ImportCompleteStep
-    //       t={t}
-    //       onNextStep={onNextStep}
-    //       onPrevStep={onPrevStep}
-    //       showReminder={showReminder}
-    //     />
-    //   );
+    case 5:
+      return (
+        <ImportProcessingStep
+          t={t}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
+          showReminder={showReminder}
+          isFifthStep={isFifthStep}
+        />
+      );
+    case 6:
+      return (
+        <ImportCompleteStep
+          t={t}
+          onNextStep={onNextStep}
+          onPrevStep={onPrevStep}
+          showReminder={showReminder}
+        />
+      );
     default:
       break;
   }

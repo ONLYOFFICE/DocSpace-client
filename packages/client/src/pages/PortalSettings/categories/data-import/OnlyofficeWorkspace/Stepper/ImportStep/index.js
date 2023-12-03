@@ -1,11 +1,15 @@
-import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import ImportSection from "../../../sub-components/ImportSection";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
+import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
+import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg";
+import SharedIcon from "PUBLIC_DIR/images/catalog.share.small.react.svg";
+import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
+import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
+import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,8 +29,6 @@ const ImportStep = ({
   importOptions,
   setImportOptions,
 }) => {
-  const [isChecked, setIsChecked] = useState(true);
-
   const onChange = (e, name) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
@@ -39,19 +41,18 @@ const ImportStep = ({
   return (
     <Wrapper>
       <ImportSection
-        isChecked={isChecked}
-        onChange={() => setIsChecked((prev) => !prev)}
+        isChecked
         sectionName={users}
         description={t("Settings:UsersSectionDescription")}
         exportSection={{
           sectionName: t("Common:People"),
           workspace: serviceName,
-          SectionIcon: UserIcon,
+          SectionIcon: UserSolidIcon,
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
           workspace: "DocSpace",
-          SectionIcon: PeopleIcon,
+          SectionIcon: AccountsIcon,
         }}
         isDisabled
       />
@@ -63,7 +64,7 @@ const ImportStep = ({
         exportSection={{
           sectionName: t("Settings:MyDocuments"),
           workspace: serviceName,
-          SectionIcon: UserIcon,
+          SectionIcon: UserSolidIcon,
         }}
         importSection={{
           sectionName: t("Settings:MyDocuments"),
@@ -77,9 +78,9 @@ const ImportStep = ({
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
-          sectionName: t("Settings:SharedFiles"),
+          sectionName: t("Common:SharedWithMe"),
           workspace: serviceName,
-          SectionIcon: UserIcon,
+          SectionIcon: SharedIcon,
         }}
         importSection={{
           sectionName: t("Settings:MyDocuments"),
@@ -88,35 +89,35 @@ const ImportStep = ({
         }}
       />
       <ImportSection
-        isChecked={importOptions.importSharedFiles}
-        onChange={(e) => onChange(e, "commonFiles")}
+        isChecked={importOptions.importCommonFiles}
+        onChange={(e) => onChange(e, "importCommonFiles")}
         sectionName="Common Files"
         description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
           sectionName: t("Common:Common"),
           workspace: serviceName,
-          SectionIcon: UserIcon,
+          SectionIcon: PortfolioIcon,
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
           workspace: "DocSpace",
-          SectionIcon: UserIcon,
+          SectionIcon: RoomsIcon,
         }}
       />
       <ImportSection
-        isChecked={importOptions.importSharedFiles}
-        onChange={(e) => onChange(e, "projects")}
+        isChecked={importOptions.importProjects}
+        onChange={(e) => onChange(e, "importProjects")}
         sectionName="Projects"
         description={t("Settings:SharedFilesDescription", { serviceName })}
         exportSection={{
           sectionName: "Projects",
           workspace: serviceName,
-          SectionIcon: UserIcon,
+          SectionIcon: ProjectsIcon,
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
           workspace: "DocSpace",
-          SectionIcon: UserIcon,
+          SectionIcon: RoomsIcon,
         }}
       />
 

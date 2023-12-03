@@ -3037,6 +3037,7 @@ const Dark = {
         importItemTextColor: "#ADADAD",
         importItemDisableTextColor: "#5C5C5C",
         importItemDescription: "#A3A9AE",
+        importIconColor: "#a9a9a9",
         errorTextColor: "#E06451",
         groupMenuBackground: "#333333",
         groupMenuBorder: "1px solid #474747",

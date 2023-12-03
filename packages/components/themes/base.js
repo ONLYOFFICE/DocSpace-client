@@ -3036,6 +3036,7 @@ const Base = {
         importItemTextColor: "#555f65",
         importItemDisableTextColor: "#A3A9AE",
         importItemDescription: "#333333",
+        importIconColor: "#657077",
         errorTextColor: "#F21C0E",
         groupMenuBackground: "#fff",
         groupMenuBorder: "1px solid #fff",

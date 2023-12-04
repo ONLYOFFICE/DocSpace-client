@@ -2067,11 +2067,13 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
-      color: "#83888d",
+      textColor: "#A3A9AE",
+      color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#000",
     },
     thirdPartyList: {
       color: "#818b91",

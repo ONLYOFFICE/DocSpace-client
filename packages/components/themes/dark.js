@@ -2063,11 +2063,13 @@ const Dark = {
     expanderColor: "#C4C4C4",
 
     downloadAppList: {
-      color: "#C4C4C4",
+      textColor: "#858585",
+      color: "#5C5C5C",
       winHoverColor: "#3785D3",
-      macHoverColor: "#000",
+      macHoverColor: "#fff",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#fff",
     },
 
     thirdPartyList: {

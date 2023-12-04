@@ -14,7 +14,7 @@ export default class DomHelpers {
     return { width: w, height: h };
   }
 
-  static getOffset(el: HTMLElement) {
+  static getOffset(el?: HTMLElement | null) {
     if (el) {
       const rect = el.getBoundingClientRect();
 
@@ -40,7 +40,7 @@ export default class DomHelpers {
     };
   }
 
-  static getOuterWidth(el: HTMLElement, margin: string) {
+  static getOuterWidth(el: HTMLElement, margin?: string) {
     if (el) {
       let width = el.offsetWidth;
 
@@ -54,7 +54,7 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterWidth(element: HTMLElement) {
+  static getHiddenElementOuterWidth(element: HTMLElement | null) {
     if (element) {
       element.style.visibility = "hidden";
       element.style.display = "block";
@@ -67,7 +67,7 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterHeight(element: HTMLElement) {
+  static getHiddenElementOuterHeight(element: HTMLElement | null) {
     if (element) {
       element.style.visibility = "hidden";
       element.style.display = "block";
@@ -80,7 +80,7 @@ export default class DomHelpers {
     return 0;
   }
 
-  static calculateScrollbarWidth(el: HTMLElement) {
+  static calculateScrollbarWidth(el?: HTMLElement) {
     if (el) {
       const style = getComputedStyle(el);
       return (

@@ -42,7 +42,7 @@ export const getCorrectFourValuesStyle = (
 /* Returns correct border-radius value depending on interface direction (ltr/rtl) */
 export const getCorrectBorderRadius = (
   borderRadiusStr: string,
-  interfaceDirection: TInterfaceDirection,
+  interfaceDirection: TInterfaceDirection | string,
 ) => {
   if (interfaceDirection === "ltr") return borderRadiusStr;
 

@@ -9,16 +9,17 @@ import {
   getCorrectFourValuesStyle,
 } from "./rtlUtils";
 import * as useClickOutside from "./useClickOutside";
-import * as trimSeparator from "./trimSeparator";
+import { trimSeparator } from "./trimSeparator";
 import * as getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
-import * as DomHelpers from "./domHelpers";
-import * as ObjectUtils from "./objectUtils";
+import DomHelpers from "./domHelpers";
+import ObjectUtils from "./objectUtils";
 import {
   size,
   mobile,
   mobileMore,
   tablet,
+  desktop,
   transitionalScreenSize,
   isMobile,
   isTablet,
@@ -33,6 +34,7 @@ import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 
 export {
+  desktop,
   checkIsSSR,
   getLanguage,
   isArrayEqual,

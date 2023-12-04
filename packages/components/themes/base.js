@@ -2067,6 +2067,7 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
+      textColor: "#A3A9AE",
       color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",

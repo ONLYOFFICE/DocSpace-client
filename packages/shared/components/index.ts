@@ -15,8 +15,18 @@ import { Loader, LoaderTypes } from "./loader";
 import { Button, ButtonSize } from "./button";
 import { Backdrop } from "./backdrop";
 import { RoomIcon } from "./room-icon";
+import {
+  ContextMenu,
+  ContextMenuModel,
+  ContextMenuType,
+  SeparatorType,
+} from "./context-menu";
 
 export {
+  ContextMenu,
+  ContextMenuModel,
+  ContextMenuType,
+  SeparatorType,
   RoomIcon,
   Backdrop,
   Loader,

@@ -1,55 +1,62 @@
 import React, { useRef, useState, useEffect } from "react";
-import DomHelpers from "../../utils/domHelpers";
-import { classNames } from "../../utils/classNames";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/arrow.right.... Remove this comment to see the full error message
-import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import Scrollbar from "../../scrollbar";
-import ContextMenuSkeleton from "../../skeletons/context-menu";
+import { CSSTransition } from "react-transition-group";
 
-const MobileSubMenu = (props: any) => {
+import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
+import { DomHelpers, classNames } from "../../../utils";
+import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
+
+import { Scrollbar, ScrollbarType } from "../../scrollbar";
+import {
+  ContextMenuModel,
+  ContextMenuType,
+  SeparatorType,
+} from "../ContextMenu.types";
+
+const MobileSubMenu = (props: {
+  onLeafClick: (e: React.MouseEvent) => void;
+  root?: boolean;
+  resetMenu: boolean;
+  onLoad?: () => Promise<ContextMenuModel[]>;
+}) => {
   const { onLeafClick, root, resetMenu, onLoad } = props;
 
-  const [submenu, setSubmenu] = useState(null);
+  const [submenu, setSubmenu] = useState<null | ContextMenuModel[]>(null);
 
-  const subMenuRef = useRef();
+  const subMenuRef = useRef<HTMLUListElement>(null);
 
-  const position = () => {
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-    const parentItem = subMenuRef.current.parentElement;
-    const containerOffset = DomHelpers.getOffset(
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      subMenuRef.current.parentElement
-    );
+  const position = React.useCallback(() => {
+    const parentItem = subMenuRef.current?.parentElement;
+    const containerOffset = DomHelpers.getOffset(parentItem);
     const viewport = DomHelpers.getViewport();
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-    const subListWidth = subMenuRef.current.offsetParent
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
+
+    const subListWidth = subMenuRef.current?.offsetParent
       ? subMenuRef.current.offsetWidth
       : DomHelpers.getHiddenElementOuterWidth(subMenuRef.current);
-    // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
-    const itemOuterWidth = DomHelpers.getOuterWidth(parentItem.children[0]);
 
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-    subMenuRef.current.style.top = "0px";
+    const itemOuterWidth = DomHelpers.getOuterWidth(
+      parentItem?.children[0] as HTMLElement,
+    );
 
-    if (
-      parseInt(containerOffset.left, 10) + itemOuterWidth + subListWidth >
-      // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
-      viewport.width - DomHelpers.calculateScrollbarWidth()
-    ) {
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      subMenuRef.current.style.left = -1 * subListWidth + "px";
-    } else {
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      subMenuRef.current.style.left = itemOuterWidth + "px";
+    if (subMenuRef.current) {
+      subMenuRef.current.style.top = "0px";
+
+      if (
+        parseInt(`${containerOffset.left}`, 10) +
+          itemOuterWidth +
+          subListWidth >
+        viewport.width - DomHelpers.calculateScrollbarWidth()
+      ) {
+        subMenuRef.current.style.left = `${-1 * subListWidth}px`;
+      } else {
+        subMenuRef.current.style.left = `${itemOuterWidth}px`;
+      }
     }
-  };
+  }, []);
 
   const isActive = () => {
-    return root || !resetMenu;
+    return !!root || !resetMenu;
   };
 
   useEffect(() => {
@@ -58,18 +65,18 @@ const MobileSubMenu = (props: any) => {
     }
   });
 
-  useEffect(() => {
-    onLoad && fetchSubMenu();
-  }, [onLoad]);
-
-  const fetchSubMenu = async () => {
-    const res = await onLoad();
-    setSubmenu(res);
+  const fetchSubMenu = React.useCallback(async () => {
+    const res = await onLoad?.();
+    if (res) setSubmenu(res);
 
     position();
-  };
+  }, [position, setSubmenu, onLoad]);
 
-  const onItemClick = (e: any, item: any) => {
+  useEffect(() => {
+    if (onLoad) fetchSubMenu();
+  }, [onLoad, fetchSubMenu]);
+
+  const onItemClick = (e: React.MouseEvent, item: ContextMenuType) => {
     const { disabled, url, onClick, items, action } = item;
     if (disabled) {
       e.preventDefault();
@@ -83,7 +90,7 @@ const MobileSubMenu = (props: any) => {
     if (onClick) {
       onClick({
         originalEvent: e,
-        action: action,
+        action,
         item,
       });
     }
@@ -93,23 +100,27 @@ const MobileSubMenu = (props: any) => {
     }
   };
 
-  const renderSeparator = (index: any, style: any) => (
+  const renderSeparator = (index: number, style: React.CSSProperties) => (
     <li
-      key={"separator_" + index}
+      key={`separator_${index}`}
       className="p-menu-separator not-selectable"
       role="separator"
       style={style}
-    ></li>
+    />
   );
 
-  const renderMenuitem = (item: any, index: any, style: any) => {
+  const renderMenuitem = (
+    item: ContextMenuType,
+    index: number,
+    style: React.CSSProperties,
+  ) => {
     if (item.disabled) return;
-    //TODO: Not render disabled items
+    // TODO: Not render disabled items
 
     const className = classNames(
       "p-menuitem",
       { "p-menuitem-active": false },
-      item.className
+      item?.className || "",
     );
     const linkClassName = classNames("p-menuitem-link", "not-selectable", {
       "p-disabled": item.disabled || item.disableColor,
@@ -122,9 +133,13 @@ const MobileSubMenu = (props: any) => {
     const icon =
       item.icon &&
       (!item.icon.includes("images/") ? (
-        <img src={item.icon} className={iconClassName} />
+        <img src={item.icon} alt="plugin img" className={iconClassName || ""} />
       ) : (
-        <ReactSVG wrapper="span" className={iconClassName} src={item.icon} />
+        <ReactSVG
+          wrapper="span"
+          className={iconClassName || ""}
+          src={item.icon}
+        />
       ));
 
     const label = item.label && (
@@ -135,9 +150,10 @@ const MobileSubMenu = (props: any) => {
     );
 
     const dataKeys = Object.fromEntries(
-      Object.entries(item).filter((el) => el[0].indexOf("data-") === 0)
+      Object.entries(item).filter((el) => el[0].indexOf("data-") === 0),
     );
-    const onClick = (e: any) => {
+
+    const onClick = (e: React.MouseEvent) => {
       onItemClick(e, item);
     };
 
@@ -146,12 +162,12 @@ const MobileSubMenu = (props: any) => {
         id={item.id}
         key={item.key}
         role="none"
-        className={className}
+        className={className || ""}
         style={{ ...item.style, ...style }}
       >
         <a
           href={item.url || "#"}
-          className={linkClassName}
+          className={linkClassName || ""}
           target={item.target}
           {...dataKeys}
           onClick={onClick}
@@ -165,50 +181,61 @@ const MobileSubMenu = (props: any) => {
     );
   };
 
-  const renderItem = (data: any, idx: any) => {
-    let item = data;
+  const renderItem = (
+    data:
+      | ContextMenuType
+      | SeparatorType
+      | { data: ContextMenuModel[]; index: number; style: React.CSSProperties },
+    idx: number,
+  ) => {
+    let item: ContextMenuType | SeparatorType | null =
+      "data" in data ? null : data;
     let index = idx;
     let style = {};
 
-    if (Array.isArray(data?.data)) {
+    if ("data" in data && Array.isArray(data.data)) {
       item = data.data[data.index] ? data.data[data.index] : null;
       index = data.index;
       style = data.style;
     }
 
     if (!item) return null;
-    if (item.isSeparator)
+    if (item?.isSeparator || !("label" in item))
       return (
-        <React.Fragment key={"fragment" + item.key}>
+        <React.Fragment key={`fragment_${item.key}`}>
           {renderSeparator(index, style)}
         </React.Fragment>
       );
 
     return (
-      <React.Fragment key={"fragment" + item.key}>
+      <React.Fragment key={`fragment_${item.key}`}>
         {renderMenuitem(item, index, style)}
       </React.Fragment>
     );
   };
 
-  const renderMenu = (model: any) => {
+  const renderMenu = (model: ContextMenuModel[]) => {
     if (model) {
-      const newModel = model.filter((item: any) => item && !item.disabled);
-      const rowHeights = newModel.map((item: any) => {
+      const newModel = model.filter(
+        (item: ContextMenuModel) => item && !item.disabled,
+      );
+      const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
         if (!item) return 0;
         if (item.isSeparator) return 13;
         return 36;
       });
 
-      const height = rowHeights.reduce((a: any, b: any) => a + b);
+      const height = rowHeights.reduce((a, b) => a + b);
       const viewport = DomHelpers.getViewport();
       const listHeight =
         height + 61 > viewport.height - 64 ? viewport.height - 125 : height + 5;
 
       return (
-        // @ts-expect-error TS(2322): Type '{ children: any; style: { height: any; }; st... Remove this comment to see the full error message
-        <Scrollbar style={{ height: listHeight }} stype="mediumBlack">
-          {model.map((item: any, index: any) => {
+        <Scrollbar
+          style={{ height: listHeight }}
+          stype={ScrollbarType.mediumBlack}
+        >
+          {model.map((item: ContextMenuModel, index: number) => {
             if (item.disabled) return null;
             return renderItem(item, index);
           })}
@@ -228,9 +255,8 @@ const MobileSubMenu = (props: any) => {
       classNames="p-contextmenusub"
       in={active}
       timeout={{ enter: 0, exit: 0 }}
-      unmountOnExit={true}
+      unmountOnExit
     >
-      // @ts-expect-error TS(2322): Type 'MutableRefObject<undefined>' is not assignab... Remove this comment to see the full error message
       <ul ref={subMenuRef} className={`${className} not-selectable`}>
         {submenu ? renderMenu(submenu) : <ContextMenuSkeleton />}
       </ul>
@@ -238,4 +264,4 @@ const MobileSubMenu = (props: any) => {
   );
 };
 
-export default MobileSubMenu;
+export { MobileSubMenu };

@@ -19,7 +19,7 @@ const borderStyle = (
   borderProp:
     | string
     | { style: string; width: string; color: string; radius?: string },
-  interfaceDirection: TInterfaceDirection = "ltr",
+  interfaceDirection: string | TInterfaceDirection = "ltr",
 ) => {
   const styles = [];
 

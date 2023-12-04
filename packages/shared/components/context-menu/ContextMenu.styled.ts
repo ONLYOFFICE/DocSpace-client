@@ -1,30 +1,24 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import { tablet, mobile } from "../utils/device";
-import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
+import { Base, ThemeType } from "../../themes";
+import { tablet, mobile, getCorrectFourValuesStyle } from "../../utils";
 
-const styledTabletView = css`
+const styledTabletView = css<{ articleWidth: number }>`
   position: fixed;
   width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
   left: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'articleWidth' does not exist on type 'Th... Remove this comment to see the full error message
     props.articleWidth
-      // @ts-expect-error TS(2339): Property 'articleWidth' does not exist on type 'Th... Remove this comment to see the full error message
       ? `${props.articleWidth}px`
       : props.theme.newContextMenu.devices.left};
   right: ${(props) => props.theme.newContextMenu.devices.right};
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      left: ${(props) => props.theme.newContextMenu.devices.right};
-      right: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'articleWidth' does not exist on type 'Th... Remove this comment to see the full error message
-        props.articleWidth
-          // @ts-expect-error TS(2339): Property 'articleWidth' does not exist on type 'Th... Remove this comment to see the full error message
-          ? `${props.articleWidth}px`
-          : props.theme.newContextMenu.devices.left};
+      left: ${props.theme.newContextMenu.devices.right};
+      right: ${props.articleWidth
+        ? `${props.articleWidth}px`
+        : props.theme.newContextMenu.devices.left};
     `}
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   margin: ${(props) => props.theme.newContextMenu.devices.margin};
@@ -40,13 +34,13 @@ const styledMobileView = css`
     props.theme.interfaceDirection === "rtl" &&
     css`
       left: 0;
-      right: ${(props) => props.theme.newContextMenu.devices.left};
+      right: ${props.theme.newContextMenu.devices.left};
     `}
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   border-radius: ${(props) => props.theme.newContextMenu.mobileBorderRadius};
 `;
 
-export const SubMenuItem = styled.li`
+export const SubMenuItem = styled.li<{ noHover?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,14 +59,21 @@ export const SubMenuItem = styled.li`
 
   &:hover {
     background-color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'noHover' does not exist on type 'ThemedS... Remove this comment to see the full error message
       props.noHover
         ? props.theme.dropDownItem.backgroundColor
         : props.theme.dropDownItem.hoverBackgroundColor};
   }
 `;
 
-const StyledContextMenu = styled.div`
+const StyledContextMenu = styled.div<{
+  changeView?: boolean;
+  articleWidth: number;
+  theme: ThemeType;
+  isRoom?: boolean;
+  isIconExist?: boolean;
+  noHover?: boolean;
+  fillIcon?: boolean;
+}>`
   .p-contextmenu {
     position: absolute;
     background: ${(props) => props.theme.newContextMenu.background};
@@ -87,12 +88,10 @@ const StyledContextMenu = styled.div`
     padding: ${(props) => props.theme.newContextMenu.padding};
 
     @media ${tablet} {
-      // @ts-expect-error TS(2339): Property 'changeView' does not exist on type 'Them... Remove this comment to see the full error message
       ${(props) => props.changeView && styledTabletView}
     }
 
     @media ${mobile} {
-      // @ts-expect-error TS(2339): Property 'changeView' does not exist on type 'Them... Remove this comment to see the full error message
       ${(props) => props.changeView && styledMobileView}
     }
   }
@@ -119,16 +118,12 @@ const StyledContextMenu = styled.div`
       display: flex;
       align-items: center;
       width: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isRoom' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isRoom ? "32px" : props.theme.menuItem.iconWrapper.header.width};
       min-width: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isRoom' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isRoom ? "32px" : props.theme.menuItem.iconWrapper.header.width};
       height: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isRoom' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isRoom ? "32px" : props.theme.menuItem.iconWrapper.header.height};
       min-height: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isRoom' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isRoom ? "32px" : props.theme.menuItem.iconWrapper.header.height};
 
       .drop-down-item_icon {
@@ -136,7 +131,6 @@ const StyledContextMenu = styled.div`
         align-items: center;
         border-radius: 6px;
         ${(props) =>
-          // @ts-expect-error TS(2339): Property 'isRoom' does not exist on type 'ThemedSt... Remove this comment to see the full error message
           props.isRoom &&
           css`
             width: 100%;
@@ -168,17 +162,16 @@ const StyledContextMenu = styled.div`
       width: 100%;
       font-size: ${(props) =>
         props.theme.getCorrectFontSize(
-          props.theme.menuItem.text.header.fontSize
+          props.theme.menuItem.text.header.fontSize,
         )};
       font-weight: 600;
       ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isIconExist' does not exist on type 'The... Remove this comment to see the full error message
         props.isIconExist &&
         css`
           margin: ${({ theme }) =>
             getCorrectFourValuesStyle(
               theme.menuItem.text.margin,
-              theme.interfaceDirection
+              theme.interfaceDirection,
             )};
         `}
 
@@ -248,7 +241,6 @@ const StyledContextMenu = styled.div`
 
     &:hover {
       background-color: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'noHover' does not exist on type 'ThemedS... Remove this comment to see the full error message
         props.noHover
           ? props.theme.dropDownItem.backgroundColor
           : props.theme.dropDownItem.hoverBackgroundColor};
@@ -295,19 +287,18 @@ const StyledContextMenu = styled.div`
       height: 16px;
       width: 16px;
       ${(props) =>
-        // @ts-expect-error TS(2339): Property 'fillIcon' does not exist on type 'Themed... Remove this comment to see the full error message
         props.fillIcon &&
         css`
           path[fill],
           circle[fill],
           rect[fill] {
-            fill: ${(props) => props.theme.dropDownItem.icon.color};
+            fill: ${props.theme.dropDownItem.icon.color};
           }
 
           path[stroke],
           circle[stroke],
           rect[stroke] {
-            stroke: ${(props) => props.theme.dropDownItem.icon.color};
+            stroke: ${props.theme.dropDownItem.icon.color};
           }
         `}
     }
@@ -364,4 +355,4 @@ StyledContextMenu.defaultProps = {
   theme: Base,
 };
 
-export default StyledContextMenu;
+export { StyledContextMenu };

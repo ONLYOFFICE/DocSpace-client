@@ -628,18 +628,6 @@ export default inject(
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const fromFolderId = id
-      ? id
-      : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId;
-
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
-
     const { treeFolders } = treeFoldersStore;
 
     const {
@@ -679,7 +667,7 @@ export default inject(
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
-          : selection.length > 0 && selection[0] != null
+          : selection.length > 0 && selection?.[0] != null
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
@@ -704,6 +692,20 @@ export default inject(
 
     const includeFolder =
       selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
+
+    const fromFolderId = id
+      ? id
+      : rootFolderType === FolderType.Archive ||
+        rootFolderType === FolderType.TRASH
+      ? undefined
+      : selectedId === selectionsWithoutEditing[0]?.id
+      ? parentId
+      : selectedId;
+
+    const currentFolderId =
+      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+        ? +sessionPath
+        : fromFolderId;
 
     return {
       currentFolderId,

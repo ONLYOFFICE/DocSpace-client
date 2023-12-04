@@ -91,12 +91,12 @@ const FirstStep = ({
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      // const res = await getMigrationStatus();
-      const res = {
-        parseResult: mockRes,
-        failedArchives: [],
-        isCompleted: true,
-      };
+      const res = await getMigrationStatus();
+      // const res = {
+      //   parseResult: mockRes,
+      //   failedArchives: [],
+      //   isCompleted: true,
+      // };
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);
@@ -112,6 +112,9 @@ const FirstStep = ({
   };
 
   const onSelectFile = (file) => {
+    setProgress(0);
+    setIsFileError(false);
+    setIsSaveDisabled(true);
     setIsFileLoading(true);
     try {
       onUploadFile(file);
@@ -128,7 +131,7 @@ const FirstStep = ({
           (res) =>
             new Blob([res.parseResult.failedArchives], {
               type: "text/csv;charset=utf-8",
-            })
+            }),
         )
         .then((blob) => {
           let a = document.createElement("a");
@@ -159,9 +162,7 @@ const FirstStep = ({
   return (
     <Wrapper>
       <FileUploadContainer>
-        <Text className="choose-backup-file">
-          {t("Settings:ChooseBackupFile")}
-        </Text>
+        <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -178,11 +179,7 @@ const FirstStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button
-            size="small"
-            label={t("Common:CancelButton")}
-            onClick={onCancel}
-          />
+          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
         </FileUploadContainer>
       ) : (
         <ErrorBlock>
@@ -193,15 +190,8 @@ const FirstStep = ({
                 className="complete-progress-bar"
                 label={t("Common:LoadingIsComplete")}
               />
-              <Text className="error-text">
-                {t("Settings:UnsupportedArchivesDescription")}
-              </Text>
-              <Link
-                type="action"
-                isHovered
-                fontWeight={600}
-                onClick={onDownloadArchives}
-              >
+              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
+              <Link type="action" isHovered fontWeight={600} onClick={onDownloadArchives}>
                 {t("Settings:DownloadUnsupportedArchives")}
               </Link>
             </Box>
@@ -241,8 +231,7 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setIsFileLoading,
     cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
 
   return {
     initMigrationName,

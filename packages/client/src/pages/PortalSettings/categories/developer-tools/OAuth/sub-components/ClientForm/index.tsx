@@ -69,7 +69,7 @@ const ClientForm = ({
     terms_url: "",
     policy_url: "",
 
-    authentication_method: AuthenticationMethod.client_secret_post,
+    allow_pkce: false,
 
     scopes: [],
   });
@@ -115,12 +115,14 @@ const ClientForm = ({
     setClientSecret(newSecret);
   }, [clientId, regenerateSecret]);
 
-  const onChangeForm = (name: string, value: string) => {
+  const onChangeForm = (name: string, value: string | boolean) => {
     setForm((val) => {
       const newVal = { ...val };
 
       if (newVal[name as keyof IClientReqDTO] instanceof Array) {
+        //@ts-ignore
         if (newVal[name as keyof IClientReqDTO].includes(value)) {
+          //@ts-ignore
           newVal[name as keyof IClientReqDTO] = newVal[
             name as keyof IClientReqDTO
             //@ts-ignore
@@ -169,10 +171,12 @@ const ClientForm = ({
           terms_url: fetchedClient?.termsUrl || client?.termsUrl || "",
           policy_url: fetchedClient?.policyUrl || client?.policyUrl || "",
 
-          authentication_method:
-            fetchedClient?.authenticationMethod ||
-            client?.authenticationMethod ||
-            AuthenticationMethod.client_secret_post,
+          allow_pkce:
+            fetchedClient?.authenticationMethods.includes(
+              AuthenticationMethod.none
+            ) ||
+            client?.authenticationMethods.includes(AuthenticationMethod.none) ||
+            false,
 
           scopes: fetchedClient?.scopes || client?.scopes || [],
         });
@@ -249,7 +253,10 @@ const ClientForm = ({
         (form.name !== initialClient.name ||
           form.logo !== initialClient.logo ||
           form.description !== initialClient.description ||
-          form.authentication_method !== initialClient.authenticationMethod)
+          form.allow_pkce !==
+            initialClient.authenticationMethods.includes(
+              AuthenticationMethod.none
+            ))
       );
     }
 
@@ -428,7 +435,7 @@ const ClientForm = ({
             websiteUrlValue={form.website_url}
             descriptionValue={form.description}
             logoValue={form.logo}
-            authMethodValue={form.authentication_method}
+            allowPkce={form.allow_pkce}
             changeValue={onChangeForm}
             isEdit={isEdit}
             errorFields={errorFields}

@@ -9,6 +9,7 @@ import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
 import TextAreaGroup from "./TextAreaGroup";
 import SelectGroup from "./SelectGroup";
+import Checkbox from "@docspace/components/checkbox";
 
 interface BasicBlockProps {
   t: any;
@@ -17,9 +18,9 @@ interface BasicBlockProps {
   websiteUrlValue: string;
   logoValue: string;
   descriptionValue: string;
-  authMethodValue: AuthenticationMethod;
+  allowPkce: boolean;
 
-  changeValue: (name: string, value: string) => void;
+  changeValue: (name: string, value: string | boolean) => void;
 
   isEdit: boolean;
   errorFields: string[];
@@ -66,7 +67,7 @@ const BasicBlock = ({
   websiteUrlValue,
   logoValue,
   descriptionValue,
-  authMethodValue,
+  allowPkce,
   changeValue,
 
   isEdit,
@@ -124,21 +125,6 @@ const BasicBlock = ({
     }
   };
 
-  const getAuthMethodOptions = () => {
-    const noneOption = {
-      key: AuthenticationMethod.none,
-      label: "none",
-    };
-
-    const clientSecretPostOption = {
-      key: AuthenticationMethod.client_secret_post,
-      label: "client_secret_post",
-    };
-    return [noneOption, clientSecretPostOption];
-  };
-
-  const options = getAuthMethodOptions();
-
   return (
     <StyledBlock>
       <BlockHeader header={"Basic info"} />
@@ -178,24 +164,13 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
         />
-        <InputGroup
-          label={"Authentication method"}
-          name={"authentication_method"}
-          value=""
-          placeholder=""
-          error=""
-          onChange={() => {}}
-        >
-          <ComboBox
-            options={options}
-            selectedOption={options.find((o) => o.key === authMethodValue)}
-            displaySelectedOption
-            scaledOptions
-            onSelect={({ key }: { key: string }) => {
-              changeValue("authentication_method", key);
-            }}
-          />
-        </InputGroup>
+        <Checkbox
+          label={"Allow pkce"}
+          isChecked={allowPkce}
+          onChange={() => {
+            changeValue("allow_pkce", !allowPkce);
+          }}
+        />
       </StyledInputBlock>
     </StyledBlock>
   );

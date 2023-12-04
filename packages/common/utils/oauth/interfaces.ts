@@ -33,7 +33,7 @@ export interface IClientProps {
   policyUrl: string;
   termsUrl: string;
   logo: string;
-  authenticationMethod: AuthenticationMethod;
+  authenticationMethods: AuthenticationMethod[];
   tenant: number;
   redirectUris: string[];
   logoutRedirectUri: string;
@@ -55,7 +55,7 @@ export interface IClientReqDTO {
   name: string;
   description: string;
   logo: string;
-  authentication_method: AuthenticationMethod;
+  allow_pkce: boolean;
   terms_url: string;
   policy_url: string;
   redirect_uris: string[];
@@ -79,7 +79,7 @@ export interface IClientResDTO {
   policy_url: string;
   logout_redirect_uri: string;
 
-  authentication_method: AuthenticationMethod;
+  authentication_methods: AuthenticationMethod[];
 
   scopes: string[];
 

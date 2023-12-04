@@ -175,8 +175,9 @@ const PreviewDialog = ({
 
   const scopesString = client?.scopes.join(" ");
 
-  const isClientSecretPost =
-    client?.authenticationMethod === AuthenticationMethod.client_secret_post;
+  const isClientSecretPost = !client?.authenticationMethods.includes(
+    AuthenticationMethod.none
+  );
 
   const encodingScopes = encodeURI(scopesString || "");
 

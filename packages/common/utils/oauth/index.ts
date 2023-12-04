@@ -1,7 +1,7 @@
 import crypto from "crypto-js";
 import sha256 from "crypto-js/sha256";
 
-import { ScopeGroup, ScopeType } from "./enums";
+import { AuthenticationMethod, ScopeGroup, ScopeType } from "./enums";
 import {
   IClientResDTO,
   IClientReqDTO,
@@ -20,7 +20,7 @@ export const transformToClientProps = (
     terms_url,
     policy_url,
     logo,
-    authentication_method,
+    authentication_methods,
     redirect_uris,
     logout_redirect_uri,
     scopes,
@@ -45,7 +45,7 @@ export const transformToClientProps = (
     termsUrl: terms_url,
     policyUrl: policy_url,
     logo,
-    authenticationMethod: authentication_method,
+    authenticationMethods: authentication_methods,
     redirectUris: redirect_uris,
     logoutRedirectUri: logout_redirect_uri,
     scopes,
@@ -75,7 +75,7 @@ export const transformToClientReqDTO = (
     termsUrl: terms_url,
     policyUrl: policy_url,
     logo,
-    authenticationMethod,
+    authenticationMethods,
     redirectUris: redirect_uris,
     logoutRedirectUri: logout_redirect_uri,
     scopes,
@@ -93,7 +93,7 @@ export const transformToClientReqDTO = (
     policy_url,
 
     scopes,
-    authentication_method: authenticationMethod,
+    allow_pkce: authenticationMethods.includes(AuthenticationMethod.none),
     website_url: websiteUrl,
     allowed_origins: allowedOrigins,
   };

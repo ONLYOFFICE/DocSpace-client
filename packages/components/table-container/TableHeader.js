@@ -293,6 +293,7 @@ class TableHeader extends React.Component {
         return this.checkingForUnfixedSize(item, defaultSize);
       });
 
+      //If content column sizes are calculated as empty after changing view
       if (!hasContent) return this.resetColumns(true);
     }
 
@@ -338,7 +339,7 @@ class TableHeader extends React.Component {
         ).length;
       }
 
-      let incorrectNumberColumns =
+      const incorrectNumberColumns =
         contentColumnsCountInfoPanel < contentColumnsCount &&
         !this.state.hideColumns;
 

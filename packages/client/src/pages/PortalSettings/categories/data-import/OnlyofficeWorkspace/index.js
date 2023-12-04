@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { isMobileOnly, isDesktop } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 import { getStepTitle, getWorkspaceStepDescription } from "../../../utils";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
@@ -56,25 +56,7 @@ const WorkspaceWrapper = styled.div`
 
 const OnlyofficeWorkspace = ({ t }) => {
   const [showReminder, setShowReminder] = useState(false);
-  const [isSmallWindow, setIsSmallWindow] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => {
-      window.removeEventListener("resize", onCheckView);
-    };
-  }, []);
-
-  const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 600) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
 
   const onNextStep = () => {
     if (currentStep !== 6) {
@@ -118,10 +100,9 @@ const OnlyofficeWorkspace = ({ t }) => {
     />
   );
 
-  if (isSmallWindow)
+  if (isMobile()) {
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
-  if (isMobileOnly)
-    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  }
 
   return (
     <WorkspaceWrapper>

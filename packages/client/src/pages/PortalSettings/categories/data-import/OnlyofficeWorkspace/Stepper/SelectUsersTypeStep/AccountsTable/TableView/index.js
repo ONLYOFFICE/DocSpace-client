@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 import UsersTypeTableHeader from "./UsersTypeTableHeader";
 import UsersTypeTableRow from "./UsersTypeTableRow";
@@ -85,23 +86,22 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudFourthColumnsSize_ver-${TABLE
 
 const checkedAccountType = "result";
 
-const TableView = (props) => {
-  const {
-    t,
-    userId,
-    viewAs,
-    setViewAs,
-    sectionWidth,
-    accountsData,
-    typeOptions,
-    users,
-    checkedUsers,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    setSearchValue,
-  } = props;
-
+const TableView = ({
+  t,
+  userId,
+  viewAs,
+  setViewAs,
+  sectionWidth,
+  accountsData,
+  typeOptions,
+  users,
+  checkedUsers,
+  toggleAccount,
+  toggleAllAccounts,
+  isAccountChecked,
+  setSearchValue,
+  currentDeviceType,
+}) => {
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -121,14 +121,11 @@ const TableView = (props) => {
     setSearchValue("");
   };
 
-  useEffect(() => {
-    if (!sectionWidth) return;
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const headerMenu = [
     {
@@ -231,6 +228,7 @@ const TableView = (props) => {
 export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
   const { id: userId } = auth.userStore.user;
+  const { currentDeviceType } = auth.settingsStore;
   const {
     users,
     checkedUsers,
@@ -250,5 +248,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(TableView));

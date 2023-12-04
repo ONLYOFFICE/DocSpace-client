@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
@@ -54,20 +54,20 @@ const StyledRow = styled(Row)`
 
 const checkedAccountType = "withEmail";
 
-const RowView = (props) => {
-  const {
-    t,
-    withEmailUsers,
-    sectionWidth,
-    viewAs,
-    setViewAs,
-    accountsData,
-    checkedUsers,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    setSearchValue,
-  } = props;
+const RowView = ({
+  t,
+  withEmailUsers,
+  sectionWidth,
+  viewAs,
+  setViewAs,
+  accountsData,
+  checkedUsers,
+  toggleAccount,
+  toggleAllAccounts,
+  isAccountChecked,
+  setSearchValue,
+  currentDeviceType,
+}) => {
   const rowRef = useRef(null);
 
   const toggleAll = (e) => {
@@ -80,21 +80,17 @@ const RowView = (props) => {
     setSearchValue("");
   };
 
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
+
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 &&
     checkedUsers.withEmail.length !== withEmailUsers.length;
 
   const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
-
-  useEffect(() => {
-    if (viewAs !== "table" && viewAs !== "row") return;
-
-    if (sectionWidth < 1025 || isMobile) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
@@ -155,8 +151,9 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, importAccountsStore }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
   const {
     withEmailUsers,
     checkedUsers,
@@ -175,5 +172,6 @@ export default inject(({ setup, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    currentDeviceType,
   };
 })(observer(RowView));

@@ -28,14 +28,14 @@ const StyledTableContainer = styled(TableContainer)`
     left: 0px;
     width: 100%;
 
-    margin-top: -37.5px;
+    margin-top: -32.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      background-color: ${(props) => props.theme.client.settings.migration.groupMenuBackground};
-      border-bottom: ${(props) => props.theme.client.settings.migration.groupMenuBorder};
-      box-shadow: ${(props) => props.theme.client.settings.migration.groupMenuBoxShadow};
+      border-bottom: ${(props) => props.theme.client.settings.migration.workspaceBorder};
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      padding: 0px 28px;
     }
 
     .table-container_group-menu-checkbox {
@@ -48,8 +48,12 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .header-container-text {
-    font-size: 12px;
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  }
+
+  .checkboxWrapper {
+    padding: 0;
+    padding-inline-start: 8px;
   }
 
   .table-container_header {
@@ -57,11 +61,34 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .table-list-item {
-    margin-top: -1px;
+    cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
-      cursor: pointer;
-      background: ${(props) => props.theme.client.settings.migration.tableRowHoverColor};
+      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
+  }
+
+  .table-list-item:has(.selected-table-row) {
+    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
   }
 
   .clear-icon {

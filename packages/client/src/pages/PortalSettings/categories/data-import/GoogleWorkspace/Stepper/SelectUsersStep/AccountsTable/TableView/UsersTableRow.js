@@ -51,7 +51,7 @@ const UsersTableRow = ({
 }) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
-      <TableCell>
+      <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={toggleAccount} />
         <Text className="username">{displayName}</Text>
       </TableCell>

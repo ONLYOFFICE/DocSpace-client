@@ -13,7 +13,7 @@ import HelpButton from "@docspace/components/help-button";
 const STEP_LENGTH = 6;
 
 const GoogleWrapper = styled.div`
-  margin-top: 4px;
+  margin-top: 1px;
 
   .workspace-subtitle {
     color: ${(props) => props.theme.client.settings.migration.descriptionColor};
@@ -23,6 +23,7 @@ const GoogleWrapper = styled.div`
 
     @media ${tablet} {
       max-width: 675px;
+      margin-bottom: 28px;
     }
   }
 

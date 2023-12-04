@@ -49,6 +49,7 @@ module.exports = {
     "prefer-destructuring": "off",
     "no-return-assign": "off",
     // "no-unneeded-ternary": "off",
+    "react/require-default-props": "off",
   },
   ignorePatterns: ["./tsconfig.json", "coverage/**"],
 };

@@ -3543,6 +3543,7 @@ __metadata:
     "@types/luxon": ^3.3.1
     "@types/node": ^20.9.4
     "@types/punycode": ^2.1.3
+    "@types/react-transition-group": ^4.4.9
     "@typescript-eslint/eslint-plugin": ^6.12.0
     "@typescript-eslint/parser": ^6.12.0
     "@use-gesture/react": ^10.2.24
@@ -9331,6 +9332,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: af30e35ff007daf7ba4d3269b12b1236f1620c88988f8f528271814d00a76bb1840b689197197bd2c493f23285072dcaaf47fb6e65cdb9ca853ab72f6b916617
+  languageName: node
+  linkType: hard
+
+"@types/react-transition-group@npm:^4.4.9":
+  version: 4.4.9
+  resolution: "@types/react-transition-group@npm:4.4.9"
+  dependencies:
+    "@types/react": "*"
+  checksum: be9e256e53919a7cf3b4a075f6d01c0a2dd3a67911dd28276aa6158be4beade4ca5327cbf1f096c28b413e04989f069122319b02e5a09c280d903a0accea9ead
   languageName: node
   linkType: hard
 

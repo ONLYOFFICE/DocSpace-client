@@ -9,6 +9,7 @@
     "constants",
     "themes",
     "types",
+    "skeletons",
 
     // add all files in which you see
     // the "parserOptions.project" error

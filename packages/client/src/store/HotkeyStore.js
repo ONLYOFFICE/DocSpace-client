@@ -136,9 +136,11 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    let item = document.getElementsByClassName(
-      `${hotkeyCaret.id}_${hotkeyCaret.fileExst}`
-    );
+    const className = hotkeyCaret.fileExst
+      ? `${hotkeyCaret.id}_${hotkeyCaret.fileExst}`
+      : `${hotkeyCaret.id}`;
+
+    let item = document.getElementsByClassName(className);
 
     if (viewAs === "table") {
       item = item && item[0]?.getElementsByClassName("table-container_cell");

@@ -15,7 +15,11 @@ import Badge from "@docspace/components/badge";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 
-import { FileStatus, RoomsType } from "@docspace/common/constants";
+import {
+  FileStatus,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
@@ -167,9 +171,17 @@ const Badges = ({
     ? { onClick: onShowVersionHistory }
     : {};
 
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;
@@ -188,7 +200,7 @@ const Badges = ({
           title={isForm ? t("Common:FillFormButton") : t("Common:EditButton")}
         />
       )}
-      {item.viewAccessability?.Convert &&
+      {item.viewAccessibility?.MustConvert &&
         item.security?.Convert &&
         !isTrashFolder &&
         !isArchiveFolderRoot && (

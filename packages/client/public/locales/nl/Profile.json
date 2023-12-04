@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "Voor meer veiligheid moet u uw wachtwoord wijzigen.",
   "EditPhoto": "Bewerk foto",
   "EmailNotVerified": "E-mail niet geverifieerd",
+  "FileManagement": "Bestandsbeheer",
   "InterfaceTheme": "Interface thema",
   "LightTheme": "Licht thema",
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
@@ -24,6 +25,5 @@
   "SuccessLogout": "De actieve verbinding werd afgemeld: {{platform}}, {{browser}}",
   "SystemTheme": "Gebruik systeemthema",
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's wanneer uw systeem dat doet.",
-  "TfaLoginSettings": "Inlog instellingen",
   "TwoFactorDescription": "Twee-factor authenticatie via een code-genererende app was ingeschakeld voor alle gebruikers door de beheerder."
 }

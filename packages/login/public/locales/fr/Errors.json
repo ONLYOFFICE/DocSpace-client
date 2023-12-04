@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Nom d'utilisateur ou mot de passe non valide(s).",
   "LoginWithAccountNotFound": "Impossible de trouver le compte associé. Premièrement vous devez connecter votre compte de réseau social à la page d'édition du profil.",
   "LoginWithBruteForce": "Autorisation temporairement bloquée",
+  "LoginWithBruteForceCaptcha": "Confirmez que vous n'êtes pas un robot",
   "RecaptchaInvalid": "Recaptcha Invalide",
   "SsoAttributesNotFound": "Echec d'authentification (affirmation des attributs non trouvée)",
   "SsoAuthFailed": "Echec d'authentification",

@@ -16,6 +16,7 @@ const withLoading = (WrappedComponent) => {
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
+      enablePortalRename,
     } = props;
 
     const [mobileView, setMobileView] = useState(true);
@@ -56,12 +57,16 @@ const withLoading = (WrappedComponent) => {
 
     const viewMobile = !!(isMobile() && mobileView);
 
+    const loadedPortalRenaming = enablePortalRename
+      ? isLoadedPortalRenaming
+      : true;
+
     const isLoadedCustomizationSettings =
       isLoadedCustomization &&
       isLoadedLngTZSettings &&
       isLoadedWelcomePageSettings &&
       isLoadedDNSSettings &&
-      isLoadedPortalRenaming &&
+      loadedPortalRenaming &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
@@ -90,7 +95,7 @@ const withLoading = (WrappedComponent) => {
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedPortalRenaming;
+      loadedPortalRenaming;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
@@ -133,7 +138,8 @@ const withLoading = (WrappedComponent) => {
       isLoadedWelcomePageSettings,
     } = common;
 
-    const { isBurgerLoading, setIsBurgerLoading } = auth.settingsStore;
+    const { isBurgerLoading, setIsBurgerLoading, enablePortalRename } =
+      auth.settingsStore;
 
     return {
       isLoadedArticleBody,
@@ -147,6 +153,7 @@ const withLoading = (WrappedComponent) => {
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
+      enablePortalRename,
     };
   })(observer(withLoading));
 };

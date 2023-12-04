@@ -3180,6 +3180,7 @@ const Dark = {
   plugins: {
     borderColor: "#474747",
     pluginName: "#A3A9AE",
+    descriptionColor: "#ADADAD",
   },
 };
 

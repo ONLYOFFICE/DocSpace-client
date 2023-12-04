@@ -74,10 +74,10 @@ export default inject(({ pluginStore }) => {
     setDeletePluginDialogProps(null);
   };
 
-  const { pluginId, pluginName, pluginSystem } = deletePluginDialogProps;
+  const { pluginName } = deletePluginDialogProps;
 
   const onDelete = async () => {
-    await uninstallPlugin(pluginId, pluginName, pluginSystem);
+    await uninstallPlugin(pluginName);
   };
 
   return { onClose, onDelete };

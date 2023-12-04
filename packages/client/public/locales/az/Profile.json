@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "Daha çox təhlükəsizlik üçün şifrəni dəyişdirməlisiniz.",
   "EditPhoto": "Şəklin redaktə olunması",
   "EmailNotVerified": "E-poçt təsdiqlənmədi",
+  "FileManagement": "Fayl idarəetməsi",
   "InterfaceTheme": "İnterfeys mövzusu",
   "LightTheme": "İşıqlı tema",
   "LogoutActiveConnection": "Aktiv bağlantıdan çıxın",
@@ -24,6 +25,5 @@
   "SuccessLogout": "Aktiv bağlantıdan çıxış edildi: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasından istifadə edin",
   "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
-  "TfaLoginSettings": "Daxilolma sazlamaları",
   "TwoFactorDescription": "Bütün istifadəçilər üçün ikili autentifikasiya (kod generasiyası ilə) inzibatçı tərəfindən yandırıldı."
 }

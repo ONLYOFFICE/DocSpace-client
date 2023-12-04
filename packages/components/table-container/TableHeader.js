@@ -122,9 +122,11 @@ class TableHeader extends React.Component {
     const defaultColumn = document.getElementById("column_" + colIndex);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
+    const handleOffset = 8;
+
     if (column2Width + offset >= defaultMinColumnSize) {
-      widths[+columnIndex] = newWidth + "px";
-      widths[colIndex] = column2Width + offset + "px";
+      widths[+columnIndex] = newWidth + handleOffset + "px";
+      widths[colIndex] = column2Width + offset - handleOffset + "px";
     } else {
       if (colIndex === this.props.columns.length) return false;
       return this.moveToRight(widths, newWidth, colIndex + 1);

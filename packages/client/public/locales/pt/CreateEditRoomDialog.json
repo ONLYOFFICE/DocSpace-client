@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Todos os ficheiros nesta sala serão encriptados.",
   "MakeRoomPrivateLimitationsWarningDescription": "Com esta funcionalidade, pode convidar apenas utilizadores já existentes no DocSpace. Depois de criar uma sala, não será possível alterar a lista de utilizadores.",
   "MakeRoomPrivateTitle": "Tornar a Sala Privada",
+  "PublicRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão Somente visualização para todos os arquivos.",
+  "PublicRoomDescription": "Convide usuários por meio de links externos para visualizar documentos sem registro. Você também pode incorporar esta sala em qualquer interface web.",
   "ReviewRoomDescription": "Solicitar uma revisão ou comentários nos documentos",
   "ReviewRoomTitle": "Rever salar",
   "RoomEditing": "Edição de Salas",

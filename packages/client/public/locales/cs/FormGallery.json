@@ -1,3 +1,10 @@
 {
+  "Categories": "Kategorie",
+  "ErrorViewDescription": "Zkuste to prosím později",
+  "SelectForm": "Vybrat formulář",
+  "SubmitToGalleryBlockBody": "Pošlete své šablony a podělte se o ně s komunitou ONLYOFFICE.",
+  "SubmitToGalleryBlockHeader": "Formulář ONLYOFFICE Galerie",
+  "SubmitToGalleryDialogGuideInfo": "V našem <1>průvodci</1> se dozvíte, jak vytvořit dokonalé formuláře a zvýšit šanci na schválení.",
+  "SubmitToGalleryDialogMainInfo": "Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.",
   "TemplateInfo": "Informace o šabloně"
 }

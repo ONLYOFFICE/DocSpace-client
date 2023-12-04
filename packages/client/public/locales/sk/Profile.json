@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "Pre väčšiu bezpečnosť si musíte zmeniť heslo.",
   "EditPhoto": "Upraviť foto",
   "EmailNotVerified": "E-mail nie je overený",
+  "FileManagement": "Spravovanie súborov",
   "InterfaceTheme": "Vzhľad prostredia",
   "LightTheme": "Svetlá téma",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
@@ -24,6 +25,5 @@
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
-  "TfaLoginSettings": "Nastavenia prihlasovania",
   "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

@@ -327,19 +327,20 @@ class AuthStore {
     this.settingsStore = new SettingsStore();
   };
 
-  logout = async () => {
+  logout = async (reset = true) => {
     const ssoLogoutUrl = await api.user.logout();
 
     this.isLogout = true;
 
-    setWithCredentialsStatus(false);
-
-    const { isDesktopClient: isDesktop, personal } = this.settingsStore;
+    const { isDesktopClient: isDesktop } = this.settingsStore;
 
     isDesktop && logoutDesktop();
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 
+    if (!reset) return;
+
+    setWithCredentialsStatus(false);
     this.reset(true);
     this.userStore.setUser(null);
     this.init();

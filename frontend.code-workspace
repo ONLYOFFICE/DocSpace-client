@@ -67,6 +67,11 @@
             "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
           },
           {
+            "label": "Docker : ReBuild-SAAS + dnsmasq",
+            "task": "Backend | rebuild SAAS + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
+          },
+          {
             "label": "Docker : Build-EE + dnsmasq",
             "task": "Backend | build EE + dnsmasq",
             "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
@@ -103,9 +108,19 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
+            "label": "Update yarn.lock",
+            "task": "Frontend | update yarn.lock",
+            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Build and start prod",
+            "task": "Frontend | build-and-start-prod",
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
           },
           {
             "label": "Start",

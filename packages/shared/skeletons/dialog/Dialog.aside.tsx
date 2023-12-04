@@ -1,6 +1,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
-import { Aside, Backdrop } from "../../components";
+import { Aside } from "../../components/aside";
+import { Backdrop } from "../../components/backdrop";
 import { StyledDialogAsideLoader } from "./Dialog.styled";
 
 import { DialogAsideSkeletonProps } from "./Dialog.types";

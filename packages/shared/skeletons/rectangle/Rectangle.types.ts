@@ -3,8 +3,8 @@ export interface RectangleSkeletonProps {
   className?: string;
   x?: string;
   y?: string;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   borderRadius?: string;
   backgroundColor?: string;
   foregroundColor?: string;

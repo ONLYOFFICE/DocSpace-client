@@ -2,8 +2,8 @@ export interface CircleSkeletonProps {
   title?: string;
   x?: string;
   y?: string;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   radius?: string;
   backgroundColor?: string;
   foregroundColor?: string;

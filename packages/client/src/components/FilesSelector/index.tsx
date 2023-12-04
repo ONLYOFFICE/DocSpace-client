@@ -667,7 +667,7 @@ export default inject(
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
-          : selection.length > 0 && selection[0] != null
+          : selection.length > 0 && selection?.[0] != null
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
@@ -698,7 +698,7 @@ export default inject(
       : rootFolderType === FolderType.Archive ||
         rootFolderType === FolderType.TRASH
       ? undefined
-      : selectedId === selectionsWithoutEditing[0].id
+      : selectedId === selectionsWithoutEditing[0]?.id
       ? parentId
       : selectedId;
 

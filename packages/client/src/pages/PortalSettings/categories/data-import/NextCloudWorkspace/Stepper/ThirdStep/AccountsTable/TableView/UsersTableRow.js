@@ -69,8 +69,8 @@ const UsersTableRow = ({
 
   const [prevEmail, setPrevEmail] = useState(email);
   const [tempEmail, setTempEmail] = useState(email);
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isPrevEmailValid, setIsPrevEmailValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
+  const [isPrevEmailValid, setIsPrevEmailValid] = useState(email.length > 0);
 
   const emailInputRef = useRef();
   const emailTextRef = useRef();
@@ -107,6 +107,10 @@ const UsersTableRow = ({
     setIsEmailValid(res.isValid);
   };
 
+  const handleKeyDown = (e) => {
+    e.key === "Enter" && isEmailValid && handleSaveEmail();
+  };
+
   useEffect(() => {
     isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail);
   }, [isEmailOpen]);
@@ -136,6 +140,7 @@ const UsersTableRow = ({
               onChange={handleEmailChange}
               type="email"
               onValidateInput={onValidateEmail}
+              onKeyDown={handleKeyDown}
             />
 
             <DecisionButton

@@ -8,7 +8,7 @@ const UsersRow = (props) => {
   const emailInputRef = useRef();
   const emailTextRef = useRef();
 
-  const [isPrevEmailValid, setIsPrevEmailValid] = useState(false);
+  const [isPrevEmailValid, setIsPrevEmailValid] = useState(data.email.length > 0);
 
   const handleAccountToggle = (e) => {
     e.preventDefault();

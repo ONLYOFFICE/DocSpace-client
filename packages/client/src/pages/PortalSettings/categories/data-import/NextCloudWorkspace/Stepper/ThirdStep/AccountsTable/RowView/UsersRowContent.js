@@ -75,7 +75,7 @@ const UsersRowContent = ({
 
   const [prevEmail, setPrevEmail] = useState(email);
   const [tempEmail, setTempEmail] = useState(email);
-  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
 
   const handleEmailChange = (e) => {
     setTempEmail(e.target.value);

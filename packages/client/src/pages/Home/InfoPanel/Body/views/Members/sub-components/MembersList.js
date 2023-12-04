@@ -5,6 +5,21 @@ import InfiniteLoader from "react-window-infinite-loader";
 import Loaders from "@docspace/common/components/Loaders";
 import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
 import { isMobile } from "@docspace/components/utils/device";
+import Text from "@docspace/components/text";
+import { StyledUserTypeHeader } from "../../../styles/members";
+
+const MainStyles = styled.div`
+  #members-list-header {
+    display: none;
+    position: fixed;
+    height: 52px;
+    width: calc(100% - 32px);
+    max-width: 440px;
+    padding: 0;
+    z-index: 1;
+    background: ${(props) => props.theme.infoPanel.backgroundColor};
+  }
+`;
 
 const StyledMembersList = styled.div`
   height: 100%;
@@ -35,14 +50,29 @@ const Item = memo(({ data, index, style }) => {
 const itemSize = 48;
 
 const MembersList = (props) => {
-  const { hasNextPage, itemCount, loadNextPage, showPublicRoomBar, children } =
-    props;
+  const {
+    hasNextPage,
+    itemCount,
+    loadNextPage,
+    showPublicRoomBar,
+    linksBlockLength,
+    children,
+  } = props;
 
   const list = [];
 
   React.Children.map(children, (item) => {
     list.push(item);
   });
+
+  const listOfTitles = list
+    .filter((x) => x.props.isTitle)
+    .map((item) => {
+      return {
+        displayName: item.props.user.displayName,
+        index: item.props.index,
+      };
+    });
 
   const { interfaceDirection } = useTheme();
 
@@ -103,36 +133,62 @@ const MembersList = (props) => {
     [isNextPageLoading, loadNextPage]
   );
 
-  return (
-    <StyledMembersList ref={bodyRef}>
-      <InfiniteLoader
-        isItemLoaded={isItemLoaded}
-        itemCount={hasNextPage ? itemCount + 1 : itemCount}
-        loadMoreItems={loadMoreItems}
-      >
-        {({ onItemsRendered, ref }) => {
-          const listWidth = isMobileView
-            ? "calc(100% + 16px)"
-            : "calc(100% + 20px)"; // for scroll
+  const onScroll = (e) => {
+    const header = document.getElementById("members-list-header");
+    const headerTitle = header.children[0];
 
-          return (
-            <List
-              direction={interfaceDirection}
-              ref={ref}
-              width={listWidth}
-              height={bodyHeight}
-              itemCount={itemsCount}
-              itemSize={itemSize}
-              itemData={list}
-              outerElementType={CustomScrollbarsVirtualList}
-              onItemsRendered={onItemsRendered}
-            >
-              {Item}
-            </List>
-          );
-        }}
-      </InfiniteLoader>
-    </StyledMembersList>
+    for (let titleIndex in listOfTitles) {
+      const title = listOfTitles[titleIndex];
+      const titleOffsetTop = title.index * itemSize;
+
+      if (e.scrollOffset > titleOffsetTop) {
+        if (title.displayName) headerTitle.innerText = title.displayName;
+        header.style.display = "flex";
+      } else if (e.scrollOffset <= linksBlockLength * itemSize) {
+        header.style.display = "none";
+      }
+    }
+  };
+
+  return (
+    <MainStyles>
+      <StyledUserTypeHeader
+        id="members-list-header"
+        className="members-list-header"
+      >
+        <Text className="members-list-header_title title" />
+      </StyledUserTypeHeader>
+      <StyledMembersList ref={bodyRef}>
+        <InfiniteLoader
+          isItemLoaded={isItemLoaded}
+          itemCount={hasNextPage ? itemCount + 1 : itemCount}
+          loadMoreItems={loadMoreItems}
+        >
+          {({ onItemsRendered, ref }) => {
+            const listWidth = isMobileView
+              ? "calc(100% + 16px)"
+              : "calc(100% + 20px)"; // for scroll
+
+            return (
+              <List
+                direction={interfaceDirection}
+                ref={ref}
+                width={listWidth}
+                height={bodyHeight}
+                itemCount={itemsCount}
+                itemSize={itemSize}
+                itemData={list}
+                outerElementType={CustomScrollbarsVirtualList}
+                onItemsRendered={onItemsRendered}
+                onScroll={onScroll}
+              >
+                {Item}
+              </List>
+            );
+          }}
+        </InfiniteLoader>
+      </StyledMembersList>
+    </MainStyles>
   );
 };
 

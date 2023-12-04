@@ -91,8 +91,8 @@ const ImportStep = ({
       <ImportSection
         isChecked={importOptions.importCommonFiles}
         onChange={(e) => onChange(e, "importCommonFiles")}
-        sectionName="Common Files"
-        description={t("Settings:SharedFilesDescription", { serviceName })}
+        sectionName={t("Common:CommonFiles")}
+        description={t("Settings:CommonFilesDescription")}
         exportSection={{
           sectionName: t("Common:Common"),
           workspace: serviceName,
@@ -107,10 +107,10 @@ const ImportStep = ({
       <ImportSection
         isChecked={importOptions.importProjects}
         onChange={(e) => onChange(e, "importProjects")}
-        sectionName="Projects"
-        description={t("Settings:SharedFilesDescription", { serviceName })}
+        sectionName={t("Common:Projects")}
+        description={t("Settings:ProjectsDescription")}
         exportSection={{
-          sectionName: "Projects",
+          sectionName: t("Common:Projects"),
           workspace: serviceName,
           SectionIcon: ProjectsIcon,
         }}

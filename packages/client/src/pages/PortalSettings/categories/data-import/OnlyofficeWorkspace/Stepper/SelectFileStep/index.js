@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -11,7 +11,6 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-// import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -83,6 +82,10 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setShowReminder(false);
+  }, []);
+
   const onUploadFile = async (file) => {
     await singleFileUploading(file, setProgress);
     await initMigrationName(searchParams.get("service"));
@@ -99,6 +102,8 @@ const SelectFileStep = ({
         clearInterval(uploadInterval.current);
         setUsers(res.parseResult);
         setShowReminder(true);
+      } else {
+        setIsFileError(false);
       }
     }, 1000);
   };
@@ -127,6 +132,7 @@ const SelectFileStep = ({
 
   const onSelectFile = (file) => {
     setIsFileLoading(true);
+    setProgress(0);
     try {
       onUploadFile(file);
     } catch (error) {

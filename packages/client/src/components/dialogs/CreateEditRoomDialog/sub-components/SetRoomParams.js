@@ -57,13 +57,11 @@ const SetRoomParams = ({
   enableThirdParty,
   setChangeRoomOwnerIsVisible,
   isAdmin,
-  userId,
   folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
 
-  const isMe = userId === roomParams?.roomOwner?.id;
-  const canChangeRoomOwner = (isAdmin || isMe) && roomParams.roomOwner;
+  const canChangeRoomOwner = isAdmin && roomParams.roomOwner;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -195,17 +193,28 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { user } = auth.userStore;
-  const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = auth.settingsStore;
-  return {
-    folderFormValidation,
-    setChangeRoomOwnerIsVisible,
-    isAdmin: user.isAdmin || user.isOwner,
-    userId: user.id,
-  };
-})(
+export default inject(
+  ({ auth, dialogsStore, filesStore, selectedFolderStore }) => {
+    const { user } = auth.userStore;
+    const { setChangeRoomOwnerIsVisible } = dialogsStore;
+    const { folderFormValidation } = auth.settingsStore;
+    const { selection, bufferSelection } = filesStore;
+
+    const room = selection.length
+      ? selection[0]
+      : bufferSelection
+      ? bufferSelection
+      : selectedFolderStore;
+
+    const roomOwnerId = room?.createdBy?.id;
+
+    return {
+      folderFormValidation,
+      setChangeRoomOwnerIsVisible,
+      isAdmin: user.isAdmin || user.isOwner || roomOwnerId === user.id,
+    };
+  }
+)(
   observer(
     withTranslation(["CreateEditRoomDialog", "Translations"])(
       withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)

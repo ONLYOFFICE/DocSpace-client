@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { isMobile, isIOS, deviceType, isMobileOnly } from "react-device-detect";
+import { isMobile, isIOS, deviceType } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { FolderType, EDITOR_ID } from "@docspace/common/constants";
 import throttle from "lodash/throttle";
@@ -144,7 +144,7 @@ function Editor({
     const withoutRedirect = params.get("without_redirect");
 
     if (
-      isMobileOnly &&
+      isMobile &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
@@ -154,7 +154,7 @@ function Editor({
       setIsShowDeepLink(true);
     }
 
-    if (isMobileOnly && defaultOpenDocument === "app") {
+    if (isMobile && defaultOpenDocument === "app") {
       const nav = navigator.userAgent;
       const storeUrl =
         nav.includes("iPhone;") || nav.includes("iPad;")

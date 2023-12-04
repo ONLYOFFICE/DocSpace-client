@@ -77,6 +77,8 @@ const PluginSDK = ({
 
   const list = getPluginList();
 
+  console.log(list, isEmptyList);
+
   return (
     <StyledContainer>
       <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
@@ -106,7 +108,7 @@ const PluginSDK = ({
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(LEARN_MORE_LINK, "_blank")}
       ></Button>
-      {!isEmptyList && (
+      {!isEmptyList && list.length > 0 && (
         <>
           <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
             {t("PluginSamples")}

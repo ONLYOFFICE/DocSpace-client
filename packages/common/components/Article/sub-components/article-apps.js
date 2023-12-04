@@ -39,7 +39,7 @@ const StyledArticleApps = styled.div`
   }
 
   .download-app-text {
-    color: ${(props) => props.theme.filesArticleBody.downloadAppList.color};
+    color: ${(props) => props.theme.filesArticleBody.downloadAppList.textColor};
   }
 
   .download-app-list {

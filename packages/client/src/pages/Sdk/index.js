@@ -12,6 +12,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/common/utils";
+import { RoomsType } from "@docspace/common/constants";
 
 const Sdk = ({
   frameConfig,
@@ -25,6 +26,8 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
+  getRoomsIcon,
+  getPrimaryLink,
 }) => {
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -118,8 +121,17 @@ const Sdk = ({
   };
 
   const onSelectRoom = useCallback(
-    (data) => {
-      data[0].icon = toRelativeUrl(data[0].icon);
+    async (data) => {
+      if (data[0].logo.large !== "") {
+        data[0].icon = toRelativeUrl(data[0].logo.large);
+      } else {
+        data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      }
+
+      if (data[0].roomType === RoomsType.PublicRoom) {
+        const { sharedTo } = await getPrimaryLink(data[0].id);
+        data[0].requestToken = sharedTo?.requestToken;
+      }
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
@@ -180,13 +192,14 @@ const Sdk = ({
   return component;
 };
 
-export default inject(({ auth, settingsStore, peopleStore }) => {
+export default inject(({ auth, settingsStore, peopleStore, filesStore }) => {
   const { login, logout, userStore } = auth;
   const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
     auth.settingsStore;
   const { loadCurrentUser, user } = userStore;
   const { updateProfileCulture } = peopleStore.targetUserStore;
-  const { getIcon } = settingsStore;
+  const { getIcon, getRoomsIcon } = settingsStore;
+  const { getPrimaryLink } = filesStore;
 
   return {
     theme,
@@ -197,8 +210,10 @@ export default inject(({ auth, settingsStore, peopleStore }) => {
     getSettings,
     loadCurrentUser,
     getIcon,
+    getRoomsIcon,
     isLoaded,
     updateProfileCulture,
     user,
+    getPrimaryLink,
   };
 })(observer(Sdk));

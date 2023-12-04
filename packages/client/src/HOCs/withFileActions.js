@@ -377,7 +377,11 @@ export default function withFileActions(WrappedFileItem) {
         return destFolderId != id;
       };
 
-      const activeFileIndex = activeFiles.findIndex((x) => x.id === item.id);
+      const activeFileIndex = activeFiles.findIndex(
+        (x) =>
+          x.id === item.id &&
+          (Boolean(item.fileExst) || item.fileType !== undefined)
+      );
       const activeFolderIndex = activeFolders.findIndex(
         (x) =>
           x.id === item.id &&

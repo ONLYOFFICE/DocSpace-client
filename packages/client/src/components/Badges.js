@@ -188,7 +188,7 @@ const Badges = ({
           title={isForm ? t("Common:FillFormButton") : t("Common:EditButton")}
         />
       )}
-      {item.viewAccessability?.Convert &&
+      {item.viewAccessibility?.MustConvert &&
         item.security?.Convert &&
         !isTrashFolder &&
         !isArchiveFolderRoot && (

@@ -1,3 +1,10 @@
 {
+  "Categories": "Luokat",
+  "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
+  "SelectForm": "Valitse Lomake",
+  "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne ONLYOFFICE-yhteisön kanssa.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Lomakegalleria",
+  "SubmitToGalleryDialogGuideInfo": "Opi luomaan täydellisiä lomakkeita ja kasvattamaan mahdollisuuksiasi saadaksesi  <1>guide</1> hyväksynnän.",
+  "SubmitToGalleryDialogMainInfo": "Olet tämän huoneen omistaja. Sinun täytyy siirtää omistajan rooli toiselle käyttäjälle ennen kuin poistut huoneesta.",
   "TemplateInfo": "Mallin tiedot"
 }

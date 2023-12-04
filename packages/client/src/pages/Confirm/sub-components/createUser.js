@@ -180,7 +180,7 @@ const CreateUserForm = (props) => {
       firstname: fname.trim(),
       lastname: sname.trim(),
       email: email,
-      culture: culture,
+      cultureName: culture,
     };
 
     if (!!type) {

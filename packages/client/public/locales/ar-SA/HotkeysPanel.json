@@ -5,6 +5,7 @@
   "HotkeysChangeView": "التبديل بين عرض الشبكة والقائمة",
   "HotkeysClearAll": "مسح كافة التحديدات",
   "HotkeysClose": "إغلاق / تراجع عن الإجراء",
+  "HotkeysCopySelected": "نسخ العناصر المحددة إلى الحافظة.",
   "HotkeysCreateDocument": "أنشئ مستند",
   "HotkeysCreateFolder": "أنشئ مجلد",
   "HotkeysCreateForm": "أنشئ قالب نموذج فارغ",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "أنشئ عرض تقديمي",
   "HotkeysCreateSpreadsheet": "أنشئ جدول بيانات",
   "HotkeysCreatingObjects": "إنشاء العناصر",
+  "HotkeysCutSelected": "قص العناصر المحددة إلى الحافظة.",
   "HotkeysEnterKey": "ادخل",
   "HotkeysExtendSelectionDown": "تمديد التحديد لأسفل",
   "HotkeysExtendSelectionLeft": "تمديد التحديد لليسار",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "انتقل للأعلى من دون تغيير التحديد",
   "HotkeysNavigation": "التنقل",
   "HotkeysOpen": "فتح العنصر المحدد / تأكيد الإجراء",
+  "HotkeysPasteSelected": "لصق العناصر المحددة من الحافظة.",
   "HotkeysPlayPause": "تشغيل / إيقاف مؤقت",
   "HotkeysRedoLastUndoneAction": "أعد آخر إجراء تم التراجع عنه",
   "HotkeysRemove": "احذف العناصر المحددة",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "إستضافة",
   "HotkeysUndoLastAction": "التراجع عن الإجراء الأخير",
   "HotkeysUploadFile": "ارفع الملف",
-  "HotkeysUploadingObjects": "رفع العناصر"
+  "HotkeysUploadingObjects": "رفع العناصر",
+  "HotkeysZoomIn": "تكبير",
+  "HotkeysZoomOut": "تصغير"
 }

@@ -29,6 +29,7 @@ import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
 import { getRestoreProgress } from "@docspace/common/api/portal";
+import { useTheme } from "styled-components";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -56,6 +57,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     showArticleLoader,
   } = rest;
+
+  const theme = useTheme();
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -252,6 +255,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         setSnackbarExist(true);
         setMaintenanceExist(true);
       },
+      theme,
     };
 
     Snackbar.show(barConfig);

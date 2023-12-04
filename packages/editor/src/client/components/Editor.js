@@ -107,6 +107,7 @@ function Editor({
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -164,7 +165,8 @@ function Editor({
         window.location.origin,
         user.email,
         fileInfo,
-        deepLinkUrl
+        deepLinkUrl,
+        window.location.href
       );
 
       setTimeout(() => {
@@ -202,7 +204,7 @@ function Editor({
     if (
       !view &&
       fileInfo &&
-      fileInfo.viewAccessability.WebRestrictedEditing &&
+      fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
@@ -238,7 +240,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.viewAccessability?.Convert &&
+        fileInfo?.viewAccessibility?.MustConvert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -321,7 +323,10 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.viewAccessability?.Convert && fileInfo?.security?.Convert) {
+      if (
+        fileInfo?.viewAccessibility?.MustConvert &&
+        fileInfo?.security?.Convert
+      ) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;
@@ -806,6 +811,7 @@ function Editor({
         onRequestInsertImage,
         onRequestSelectSpreadsheet,
         onRequestSelectDocument,
+        onRequestReferenceSource,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
@@ -861,6 +867,7 @@ function Editor({
         onRequestInsertImage = onSDKRequestInsertImage;
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
+        onRequestReferenceSource = onSDKRequestReferenceSource;
       }
 
       if (userAccessRights.EditHistory) {
@@ -902,6 +909,7 @@ function Editor({
           onRequestSaveAs,
           onRequestSelectSpreadsheet,
           onRequestSelectDocument,
+          onRequestReferenceSource,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,

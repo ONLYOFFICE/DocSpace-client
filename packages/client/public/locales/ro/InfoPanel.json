@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Detaliile utilizatorilor aici",
+  "Administration": "Administrare",
   "AndMoreLabel": "și <strong>{{count}} mai multe</strong>",
   "CreationDate": "Data creării",
   "Data": "Date",
   "DateModified": "Dată modificare",
+  "ExpectUsers": "Utilizatori în așteptare",
   "FeedCreateFileSeveral": "Fişiere au fost adăugate",
   "FeedCreateFileSingle": "Fişier creat",
   "FeedCreateFolderSeveral": "Foldere adăugate",
@@ -26,7 +28,9 @@
   "FeedUpdateUser": "a fost atribuit rolul {{role}}",
   "FileExtension": "Extensie de fișier",
   "FilesEmptyScreenText": "Vizualizarea detaliilor despre fișiere și foldere",
+  "GalleryEmptyScreenText": "Detalii despre formular șablon aici",
   "HistoryEmptyScreenText": "Istoricul activităților va fi afișat aici",
+  "InfoBanner": "Lista de invitați cuprinde proprietarul și/sau administratorii acestui spațiu DocSpace acces complet la toate sălile. Proprietarului și/sau administratorului nu li se poate acorda alte drepturi de acces. Odată adăugate în sala, vor primi notificări despre toate modificări.",
   "ItemsSelected": "Elemente selectate",
   "LastModifiedBy": "Modificat ultima dată de către",
   "Properties": "Proprietăţi",
@@ -35,5 +39,6 @@
   "StorageType": "Tip de stocare",
   "SubmenuDetails": "Detalii",
   "SubmenuHistory": "Istoric",
+  "Users": "Utilizatori",
   "Versions": "Versiuni"
 }

@@ -129,7 +129,7 @@ const AdminMessage = (props) => {
       <LearnMoreWrapper>
         <Text>{t("AdminsMessageSettingDescription")}</Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="AdminsMessageSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
         <Link

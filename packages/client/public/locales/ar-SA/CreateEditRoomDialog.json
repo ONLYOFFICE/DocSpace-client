@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "سيتم تشفير جميع الملفات الموجودة في هذه الغرفة.",
   "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي DocSpace الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
   "MakeRoomPrivateTitle": "اجعل الغرفة خاصة",
+  "PublicRoomBarDescription": "هذه الغرفة متاحة لأي شخص لديه الرابط.",
+  "PublicRoomDescription": "قم بدعوة مستخدمين خارجين بواسطة الرابط الخارجي لمعاينة المستندات بدون الحاجة للتسجيل. يمكنك أيضاً زيارة هذه الغرفة من خلال أي واجهة الويب. ",
   "ReviewRoomDescription": "اطلب مراجعة أو تعليق على الوثائق",
   "ReviewRoomTitle": "راجع الغرفة",
   "RoomEditing": "تعديل الغرفة",

@@ -28,5 +28,10 @@
   "SetAppTitle": "Konfigurējiet savu autentifikācijas lietojumprogrammu",
   "SuccessDeactivate": "Jūsu konts ir veiksmīgi deaktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>vietni</1>.",
   "SuccessReactivate": "Jūsu konts ir veiksmīgi atkārtoti aktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>portālu</1>.",
-  "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm."
+  "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm.",
+  "WelcomeRegister": "Lai sāktu, reģistrējieties",
+  "WelcomeRegisterViaSocial": "Lai sāktu, reģistrējieties vai piesakieties sociālajos tīklos",
+  "WelcomeRegisterViaSSO": "Lai sāktu, reģistrējieties vai piesakieties, izmantojot SSO",
+  "WelcomeToDocspace": "Laipni lūdzam mūsu DocSpace!",
+  "WelcomeToRoom": "Laipni lūdzam telpā <1>{{ roomName }}</1>!"
 }

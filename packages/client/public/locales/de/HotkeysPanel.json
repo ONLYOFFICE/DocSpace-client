@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Zwischen Gitter- und Listenansicht wechseln",
   "HotkeysClearAll": "Auswahl löschen",
   "HotkeysClose": "Handlung schließen/rückgängig machen",
+  "HotkeysCopySelected": "Markierte Elemente in die Zwischenablage kopieren",
   "HotkeysCreateDocument": "Dokument erstellen",
   "HotkeysCreateFolder": "Ordner erstellen",
   "HotkeysCreateForm": "Leere Formularvorlage erstellen",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Eine Präsentation erstellen",
   "HotkeysCreateSpreadsheet": "Eine Tabelle erstellen",
   "HotkeysCreatingObjects": "Erstellen von Elementen",
+  "HotkeysCutSelected": "Ausgewählte Elemente in der Zwischenablage ausschneiden",
   "HotkeysEnterKey": "Eingeben",
   "HotkeysExtendSelectionDown": "Auswahl nach unten erweitern",
   "HotkeysExtendSelectionLeft": "Auswahl nach links erweitern",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Nach oben, ohne die Auswahl zu ändern",
   "HotkeysNavigation": "Navigation",
   "HotkeysOpen": "Ausgewähltes Element öffnen/Vorgang bestätigen",
+  "HotkeysPasteSelected": "Ausgewählte Elemente aus der Zwischenablage einfügen",
   "HotkeysPlayPause": "Wiedergeben/pausieren",
   "HotkeysRedoLastUndoneAction": "Wiederholen",
   "HotkeysRemove": "Ausgewählte Elemente entfernen",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Leerzeichen",
   "HotkeysUndoLastAction": "Rückgängig machen",
   "HotkeysUploadFile": "Datei hochladen",
-  "HotkeysUploadingObjects": "Hochladen von Elementen"
+  "HotkeysUploadingObjects": "Hochladen von Elementen",
+  "HotkeysZoomIn": "Vergrößern",
+  "HotkeysZoomOut": "Verkleinern"
 }

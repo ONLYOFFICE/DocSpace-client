@@ -1,4 +1,9 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Uživatelé byli úspěšně odstraněni.",
+  "DeleteMyDocumentsUser": "Všechny osobní soubory a složky v sekci Moje dokumenty tohoto uživatele budou trvale odstraněny.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Místnosti vytvořené tímto uživatelem a dokumenty uložené v těchto místnostech budou automaticky přeřazeny na správce provádějícího mazání: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ruční přeřazení dat pro výběr jiného cílového uživatele pro přeřazení.",
   "DeleteUser": "Smazat uživatele",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude smazán. Tuto akci nelze vrátit zpět.",
+  "ReassignDataToAnotherUser": "Přeřazení dat jinému uživateli",
   "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn"
 }

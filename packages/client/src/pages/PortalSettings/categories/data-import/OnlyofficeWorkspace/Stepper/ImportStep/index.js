@@ -6,7 +6,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
 import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg";
-import SharedIcon from "PUBLIC_DIR/images/catalog.share.small.react.svg";
+import SharedIcon from "PUBLIC_DIR/images/catalog.old.share.react.svg";
 import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";

@@ -102,8 +102,6 @@ const SelectFileStep = ({
         clearInterval(uploadInterval.current);
         setUsers(res.parseResult);
         setShowReminder(true);
-      } else {
-        setIsFileError(false);
       }
     }, 1000);
   };
@@ -131,8 +129,9 @@ const SelectFileStep = ({
   };
 
   const onSelectFile = (file) => {
-    setIsFileLoading(true);
     setProgress(0);
+    setIsFileLoading(true);
+    setIsFileError(false);
     try {
       onUploadFile(file);
     } catch (error) {

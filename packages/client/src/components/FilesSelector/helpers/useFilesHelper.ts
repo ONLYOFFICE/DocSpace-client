@@ -24,6 +24,8 @@ import {
 //@ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
+const DEFAULT_FILE_EXTS = "file";
+
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
@@ -87,11 +89,12 @@ export const convertFilesToItems = (
       fileExst,
     } = file;
 
-    let icon = getIcon(32, fileExst);
+    const icon = getIcon(32, fileExst || DEFAULT_FILE_EXTS);
+    const label = title.replace(fileExst, "") || fileExst;
 
     return {
       id,
-      label: title.replace(fileExst, ""),
+      label,
       title,
       icon,
       security,

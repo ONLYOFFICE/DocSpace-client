@@ -1,6 +1,7 @@
 export const enum ScopeType {
   read = "read",
   write = "write",
+  openid = "openid",
 }
 
 export const enum ScopeGroup {

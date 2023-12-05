@@ -26,8 +26,10 @@ import {
   ContextMenuType,
   SeparatorType,
 } from "./context-menu";
+import { Checkbox } from "./checkbox";
 
 export {
+  Checkbox,
   ContextMenu,
   ContextMenuModel,
   ContextMenuType,

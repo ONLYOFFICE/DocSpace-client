@@ -415,7 +415,6 @@ const SubMenu = (props: {
   const submenu = renderMenu();
   const active = isActive();
 
-  console.log("render", model, active, submenu);
   return (
     <CSSTransition
       nodeRef={subMenuRef}

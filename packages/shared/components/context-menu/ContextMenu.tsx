@@ -80,7 +80,6 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps) => {
 
   const show = React.useCallback(
     (e: React.MouseEvent | MouseEvent) => {
-      console.log("show click");
       if (getContextModel) {
         const m = trimSeparator(getContextModel());
         setModel(m);
@@ -129,7 +128,6 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps) => {
   );
 
   React.useEffect(() => {
-    console.log("cl", visible, reshow);
     if (visible && prevReshow.current !== reshow) {
       setVisible(false);
       setReshow(false);

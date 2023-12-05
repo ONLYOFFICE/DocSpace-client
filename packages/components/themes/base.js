@@ -1948,6 +1948,7 @@ const Base = {
     background: white,
     rootFolderTitleColor: "#A3A9AE",
     publicIcon: black,
+    boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
     icon: {
       fill: "#316DAA",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import Text from "@docspace/components/text";
@@ -64,17 +64,15 @@ const Block = ({
   );
 };
 
-const VirtualDataRoomBlock = ({ t }) => {
+const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
   const role = t("Translations:RoleViewer");
 
-  const [automaticIndexingChecked, setAutomaticIndexingChecked] =
-    useState(false);
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(false);
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
   const [watermarksChecked, setWatermarksChecked] = useState(false);
 
   const onChangeAutomaticIndexing = () => {
-    setAutomaticIndexingChecked(!automaticIndexingChecked);
+    setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
   };
 
   const onChangeFileLifetime = () => {
@@ -96,7 +94,7 @@ const VirtualDataRoomBlock = ({ t }) => {
         bodyText={t("AutomaticIndexingDescription")}
         onChange={onChangeAutomaticIndexing}
         isDisabled={false}
-        isChecked={automaticIndexingChecked}
+        isChecked={roomParams.indexing}
       ></Block>
       <Block
         headerText={t("FileLifetime")}

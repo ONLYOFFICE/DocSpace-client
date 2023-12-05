@@ -157,7 +157,13 @@ const SetRoomParams = ({
         />
       )}
 
-      {isVDRRoom && <VirtualDataRoomBlock t={t} />}
+      {isVDRRoom && (
+        <VirtualDataRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+        />
+      )}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage

@@ -93,6 +93,7 @@ class CreateEditRoomStore {
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
+      indexing: roomParams.indexing,
     };
 
     const createTagsData = roomParams.tags

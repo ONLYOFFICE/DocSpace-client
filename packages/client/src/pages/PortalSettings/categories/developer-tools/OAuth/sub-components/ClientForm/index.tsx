@@ -74,11 +74,6 @@ const ClientForm = ({
     scopes: [],
   });
 
-  const nameTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
-  const websiteTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
-  const policyTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
-  const termsTimer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
-
   const [errorFields, setErrorFields] = React.useState<string[]>([]);
 
   const { t } = useTranslation(["OAuth", "Common"]);
@@ -193,8 +188,6 @@ const ClientForm = ({
     } catch (e) {
       setIsLoading(false);
 
-      console.log("11");
-
       console.log(e);
     }
   }, [id, fetchScopes]);
@@ -203,6 +196,28 @@ const ClientForm = ({
     setIsLoading(true);
     getClientData();
   }, [getClientData, fetchScopes]);
+
+  const onBlur = (key: string) => {
+    if (
+      key === "name" &&
+      form[key] &&
+      !errorFields.includes(key) &&
+      (form[key].length < 3 || form[key].length > 256)
+    ) {
+      setErrorFields((value) => {
+        return [...value, key];
+      });
+    } else if (
+      (key === "website_url" || key === "terms_url" || key === "policy_url") &&
+      form[key] &&
+      !errorFields.includes(key) &&
+      !isValidUrl(form[key])
+    ) {
+      setErrorFields((value) => {
+        return [...value, key];
+      });
+    }
+  };
 
   const compareAndValidate = () => {
     let isValid = true;
@@ -220,11 +235,9 @@ const ClientForm = ({
             ) {
               isValid = false;
 
-              return (nameTimer.current = setTimeout(() => {
-                setErrorFields((value) => {
-                  return [...value, key];
-                });
-              }, 300));
+              return setErrorFields((value) => {
+                return [...value, key];
+              });
             }
 
             if (
@@ -234,8 +247,6 @@ const ClientForm = ({
               setErrorFields((value) => {
                 return value.filter((n) => n !== key);
               });
-              if (nameTimer.current) clearTimeout(nameTimer.current);
-              nameTimer.current = null;
 
               return;
             }
@@ -266,28 +277,12 @@ const ClientForm = ({
           isValid = isValid && !!form[key];
 
           if (
-            form[key] &&
-            !errorFields.includes(key) &&
-            (form[key].length < 3 || form[key].length > 256)
-          ) {
-            isValid = false;
-
-            nameTimer.current = setTimeout(() => {
-              setErrorFields((value) => {
-                return [...value, key];
-              });
-            }, 300);
-          }
-
-          if (
             errorFields.includes(key) &&
             (!form[key] || (form[key].length > 2 && form[key].length < 256))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
             });
-            if (nameTimer.current) clearTimeout(nameTimer.current);
-            nameTimer.current = null;
           }
 
           isValid = isValid && !errorFields.includes(key);
@@ -305,30 +300,12 @@ const ClientForm = ({
           isValid = isValid && !!form[key];
 
           if (
-            form[key] &&
-            !errorFields.includes(key) &&
-            !isValidUrl(form[key])
-          ) {
-            isValid = false;
-
-            websiteTimer.current = setTimeout(
-              () =>
-                setErrorFields((value) => {
-                  return [...value, key];
-                }),
-              300
-            );
-          }
-
-          if (
             errorFields.includes(key) &&
             (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
             });
-            if (websiteTimer.current) clearTimeout(websiteTimer.current);
-            websiteTimer.current = null;
           }
 
           break;
@@ -348,30 +325,12 @@ const ClientForm = ({
           isValid = isValid && !!form[key];
 
           if (
-            form[key] &&
-            !errorFields.includes(key) &&
-            !isValidUrl(form[key])
-          ) {
-            isValid = false;
-
-            termsTimer.current = setTimeout(
-              () =>
-                setErrorFields((value) => {
-                  return [...value, key];
-                }),
-              300
-            );
-          }
-
-          if (
             errorFields.includes(key) &&
             (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
             });
-            if (termsTimer.current) clearTimeout(termsTimer.current);
-            termsTimer.current = null;
           }
 
           break;
@@ -379,30 +338,12 @@ const ClientForm = ({
           isValid = isValid && !!form[key];
 
           if (
-            form[key] &&
-            !errorFields.includes(key) &&
-            !isValidUrl(form[key])
-          ) {
-            isValid = false;
-
-            policyTimer.current = setTimeout(
-              () =>
-                setErrorFields((value) => {
-                  return [...value, key];
-                }),
-              300
-            );
-          }
-
-          if (
             errorFields.includes(key) &&
             (!form[key] || isValidUrl(form[key]))
           ) {
             setErrorFields((value) => {
               return value.filter((n) => n !== key);
             });
-            if (policyTimer.current) clearTimeout(policyTimer.current);
-            policyTimer.current = null;
           }
 
           break;
@@ -439,6 +380,7 @@ const ClientForm = ({
             changeValue={onChangeForm}
             isEdit={isEdit}
             errorFields={errorFields}
+            onBlur={onBlur}
           />
           {isEdit && (
             <ClientBlock
@@ -469,6 +411,7 @@ const ClientForm = ({
             changeValue={onChangeForm}
             isEdit={isEdit}
             errorFields={errorFields}
+            onBlur={onBlur}
           />
           <ButtonsBlock
             saveLabel={t("Common:SaveButton")}

@@ -14,6 +14,7 @@ interface SupportBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  onBlur?: (name: string) => void;
 }
 
 const SupportBlock = ({
@@ -25,6 +26,7 @@ const SupportBlock = ({
 
   isEdit,
   errorFields,
+  onBlur,
 }: SupportBlockProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
@@ -47,6 +49,7 @@ const SupportBlock = ({
           disabled={isEdit}
           isRequired
           isError={errorFields.includes("policy_url")}
+          onBlur={onBlur}
         />
         <InputGroup
           label={t("TermsOfServiceURL")}
@@ -59,6 +62,7 @@ const SupportBlock = ({
           disabled={isEdit}
           isRequired
           isError={errorFields.includes("terms_url")}
+          onBlur={onBlur}
         />
       </StyledInputBlock>
     </StyledBlock>

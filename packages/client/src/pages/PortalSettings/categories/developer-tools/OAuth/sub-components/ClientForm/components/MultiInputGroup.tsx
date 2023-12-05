@@ -44,7 +44,7 @@ const MultiInputGroup = ({
   isDisabled,
 }: MultiInputGroupProps) => {
   const [value, setValue] = React.useState("");
-  const timer = React.useRef<null | ReturnType<typeof setTimeout>>(null);
+
   const [isError, setIsError] = React.useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,23 +53,17 @@ const MultiInputGroup = ({
     setValue(value);
   };
 
-  React.useEffect(() => {
-    if (timer.current) {
-      clearTimeout(timer.current);
-    }
-
+  const onBlur = () => {
     if (value) {
       if (isValidUrl(value)) {
         setIsError(false);
       } else {
-        timer.current = setTimeout(() => {
-          setIsError(true);
-        }, 300);
+        setIsError(true);
       }
     } else {
       setIsError(false);
     }
-  }, [value]);
+  };
 
   return (
     <StyledInputGroup>
@@ -94,6 +88,7 @@ const MultiInputGroup = ({
             tabIndex={0}
             maxLength={255}
             isDisabled={isDisabled}
+            onBlur={onBlur}
           />
           <SelectorAddButton
             onClick={() => {

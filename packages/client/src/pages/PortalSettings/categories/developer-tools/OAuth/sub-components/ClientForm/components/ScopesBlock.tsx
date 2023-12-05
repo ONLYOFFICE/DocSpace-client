@@ -135,26 +135,29 @@ const ScopesBlock = ({
                 — {t(`Common:${scope.read?.tKey}`)}
               </Text>
             )}
-
-            {/* @ts-ignore */}
-            <Text
-              className={"scope-desc"}
-              fontSize={"12px"}
-              fontWeight={400}
-              lineHeight={"16px"}
-            >
-              {/* @ts-ignore */}
-              <Text
-                className={"scope-desc"}
-                as={"span"}
-                fontSize={"12px"}
-                fontWeight={600}
-                lineHeight={"16px"}
-              >
-                {scope.write?.name}
-              </Text>{" "}
-              — {t(`Common:${scope.write?.tKey}`)}
-            </Text>
+            {scope.write?.name && (
+              <>
+                {/* @ts-ignore */}
+                <Text
+                  className={"scope-desc"}
+                  fontSize={"12px"}
+                  fontWeight={400}
+                  lineHeight={"16px"}
+                >
+                  {/* @ts-ignore */}
+                  <Text
+                    className={"scope-desc"}
+                    as={"span"}
+                    fontSize={"12px"}
+                    fontWeight={600}
+                    lineHeight={"16px"}
+                  >
+                    {scope.write?.name}
+                  </Text>{" "}
+                  — {t(`Common:${scope.write?.tKey}`)}
+                </Text>
+              </>
+            )}
           </StyledScopesName>
           <StyledScopesCheckbox>
             <Checkbox

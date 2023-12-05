@@ -26,6 +26,7 @@ interface BasicBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  onBlur: (name: string) => void;
 }
 
 function getImageDimensions(
@@ -74,6 +75,7 @@ const BasicBlock = ({
 
   isEdit,
   errorFields,
+  onBlur,
 }: BasicBlockProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
@@ -144,6 +146,7 @@ const BasicBlock = ({
           onChange={onChange}
           isRequired
           isError={errorFields.includes("name")}
+          onBlur={onBlur}
         />
         <InputGroup
           label={t("WebsiteUrl")}
@@ -155,6 +158,7 @@ const BasicBlock = ({
           disabled={isEdit}
           isRequired
           isError={errorFields.includes("website_url")}
+          onBlur={onBlur}
         />
         <SelectGroup
           label={t("AppIcon")}

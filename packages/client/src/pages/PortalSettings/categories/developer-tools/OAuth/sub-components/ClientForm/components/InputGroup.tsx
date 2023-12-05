@@ -35,6 +35,8 @@ interface InputGroupProps {
   isRequired?: boolean;
   isError?: boolean;
   children?: React.ReactNode;
+
+  onBlur?: (name: string) => void;
 }
 
 const InputGroup = ({
@@ -47,6 +49,7 @@ const InputGroup = ({
   error,
 
   onChange,
+  onBlur,
 
   helpButtonText,
 
@@ -110,6 +113,7 @@ const InputGroup = ({
                 iconName={withCopy ? CopyReactSvgUrl : null}
                 onIconClick={withCopy && onCopyClick}
                 type={isPassword ? "password" : "text"}
+                onBlur={() => onBlur?.(name)}
               />
             )}
             {buttonLabel && (

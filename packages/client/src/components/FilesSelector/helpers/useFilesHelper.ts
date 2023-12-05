@@ -90,10 +90,11 @@ export const convertFilesToItems = (
     } = file;
 
     const icon = getIcon(32, fileExst || DEFAULT_FILE_EXTS);
+    const label = title.replace(fileExst, "") || fileExst;
 
     return {
       id,
-      label: title.replace(fileExst, ""),
+      label,
       title,
       icon,
       security,

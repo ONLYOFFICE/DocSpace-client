@@ -151,9 +151,9 @@ const ScopesBlock = ({
                 fontWeight={600}
                 lineHeight={"16px"}
               >
-                {scope.write.name}
+                {scope.write?.name}
               </Text>{" "}
-              — {t(`Common:${scope.write.tKey}`)}
+              — {t(`Common:${scope.write?.tKey}`)}
             </Text>
           </StyledScopesName>
           <StyledScopesCheckbox>
@@ -171,15 +171,15 @@ const ScopesBlock = ({
             />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
-            {scope.read?.name && (
+            {scope.write?.name && (
               <Checkbox
                 isChecked={isReadDisabled}
-                isDisabled={isEdit || !scope.read?.name}
+                isDisabled={isEdit || !scope.write?.name}
                 onChange={() =>
                   onAddCheckedScope(
                     key as ScopeGroup,
                     ScopeType.write,
-                    scope.write.name
+                    scope.write?.name
                   )
                 }
               />

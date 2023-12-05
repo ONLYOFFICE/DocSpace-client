@@ -56,7 +56,7 @@ const SelectGroup = ({
           color={""}
           textAlign={""}
         >
-          {label}
+          {label} *
         </Text>
       </div>
       <div className="select">

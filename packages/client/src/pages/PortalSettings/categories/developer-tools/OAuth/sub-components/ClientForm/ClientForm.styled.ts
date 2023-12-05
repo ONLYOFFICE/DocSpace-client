@@ -77,6 +77,14 @@ const StyledInputGroup = styled.div`
     cursor: pointer;
   }
 
+  .pkce {
+    margin-top: 4px;
+
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+
   .select {
     display: flex;
     flex-direction: row;

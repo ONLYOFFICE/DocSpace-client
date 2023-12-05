@@ -134,8 +134,8 @@ export const filterScopeByGroup = (
       filteredScopes[scope.group] = {
         isChecked,
         checkedType: isChecked ? scope.type : undefined,
-        read: undefined,
-        write,
+        read: write,
+        write: undefined,
       };
 
       return;

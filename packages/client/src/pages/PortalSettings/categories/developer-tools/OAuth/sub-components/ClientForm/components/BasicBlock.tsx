@@ -1,7 +1,8 @@
 import React from "react";
+import { Trans } from "react-i18next";
 
-import ComboBox from "@docspace/components/combobox";
-import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
+//@ts-ignore
+import HelpButton from "@docspace/components/help-button";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -9,6 +10,7 @@ import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
 import TextAreaGroup from "./TextAreaGroup";
 import SelectGroup from "./SelectGroup";
+
 import Checkbox from "@docspace/components/checkbox";
 
 interface BasicBlockProps {
@@ -125,6 +127,10 @@ const BasicBlock = ({
     }
   };
 
+  const pkceHelpButtonText = (
+    <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
+  );
+
   return (
     <StyledBlock>
       <BlockHeader header={"Basic info"} />
@@ -164,13 +170,25 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
         />
-        <Checkbox
-          label={"Allow pkce"}
-          isChecked={allowPkce}
-          onChange={() => {
-            changeValue("allow_pkce", !allowPkce);
-          }}
-        />
+        <InputGroup
+          label={t("AuthenticationMethod")}
+          name={"website_url"}
+          placeholder={t("EnterURL")}
+          value={websiteUrlValue}
+          error=""
+          onChange={() => {}}
+        >
+          <div className={"pkce"}>
+            <Checkbox
+              label={t("AllowPKCE")}
+              isChecked={allowPkce}
+              onChange={() => {
+                changeValue("allow_pkce", !allowPkce);
+              }}
+            />
+            <HelpButton tooltipContent={pkceHelpButtonText} />
+          </div>
+        </InputGroup>
       </StyledInputBlock>
     </StyledBlock>
   );

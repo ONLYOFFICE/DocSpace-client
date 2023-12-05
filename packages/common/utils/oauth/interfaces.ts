@@ -11,8 +11,8 @@ export interface IFilteredScopes {
   [key: string]: {
     isChecked: boolean;
     checkedType?: ScopeType;
-    read?: IScope;
-    write: IScope;
+    read: IScope;
+    write?: IScope;
   };
 }
 

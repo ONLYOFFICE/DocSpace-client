@@ -40,7 +40,8 @@ const DeepLink = ({
       window.location.origin,
       userEmail,
       fileInfo,
-      deepLinkUrl
+      deepLinkUrl,
+      window.location.href
     );
   };
 

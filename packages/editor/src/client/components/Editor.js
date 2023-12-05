@@ -165,7 +165,8 @@ function Editor({
         window.location.origin,
         user.email,
         fileInfo,
-        deepLinkUrl
+        deepLinkUrl,
+        window.location.href
       );
 
       setTimeout(() => {

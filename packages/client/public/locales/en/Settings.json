@@ -6,8 +6,10 @@
   "AccessRightsChangeOwnerConfirmText": "Changes will be applied after the confirmation via email.",
   "AccessRightsProductUsersCan": "{{category}} users can",
   "AccessRightsUsersFromList": "{{users}} from the list",
-  "AccountsWithoutEmails": "We found <1>{{users}} users</1> without emails. You can add necessary data to their accounts on the next step.",
+  "AccountsWithoutEmailsNextStep": "We found <1>{{users}} users</1> without emails. You can add necessary data to their accounts on the next step.",
+  "AccountsWithoutEmails": "We found <1>{{users}} users</1> without emails. You can fill their emails or continue without this action.",
   "AddEmails": "Add emails to incomplete accounts",
+  "AddEmailsDescription": "Check list of unimported users to import into ONLYOFFICE DocSpace.",
   "AddEmailsWarning": "You don't have users with emails. Please proceed to the next step to add them.",
   "AddAllowedIP": "Add allowed IP address",
   "AdditionalResources": "Additional resources",
@@ -203,11 +205,12 @@
   "SelectFileInGZFormat": "Select the file in .GZ format",
   "SelectedUsersCounter": "Selected: {{selectedUsers}}/{{totalUsers}} users",
   "SelectUsers": "Select users",
+  "SelectUsersWithEmail": "Select users with e-mail",
   "SelectUserTypes": "Select user types",
   "SelectUsersDescriptionGoogle": "Check users from the list to import into ONLYOFFICE DocSpace. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
   "SelectUsersDescriptionNextcloud": "Check users from the list to import into ONLYOFFICE DocSpace. Only users with emails can be selected. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
   "SelectUsersDescriptionWorkspace": "Check users from the list to import into ONLYOFFICE DocSpace. Users already existing in ONLYOFFICE DocSpace are highlighted with a green color and are not checked by default.",
-  "SelectUserTypesDescription": "Select DocSpace roles for the imported users: DocSpace admin, Room admin or Power user. By default, Power user role is selected for each user. You can manage the roles after the import.",
+  "SelectUserTypesDescription": "Select DocSpace roles for the imported users: <1>DocSpace admin</1>, <1>Room admin</1> or <1>Power user</1>. By default, Power user role is selected for each user. You can manage the roles after the import.",
   "SendWelcomeLetter": "Send welcome letter",
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
@@ -276,5 +279,6 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "WantToCancelUpload": "Do you want to cancel the upload?",
-  "WantToCancelDataImport": "Do you want to cancel data import?"
+  "WantToCancelDataImport": "Do you want to cancel data import?",
+  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
 }

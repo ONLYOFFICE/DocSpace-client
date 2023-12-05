@@ -1,4 +1,4 @@
-export const getGoogleStepDescription = (t, stepIndex, renderTooltip) => {
+export const getGoogleStepDescription = (t, stepIndex, renderTooltip, Trans) => {
   switch (stepIndex) {
     case 1:
       return t("Settings:SelectFileDescriptionGoogle");
@@ -7,7 +7,11 @@ export const getGoogleStepDescription = (t, stepIndex, renderTooltip) => {
     case 3:
       return (
         <>
-          {t("Settings:SelectUserTypesDescription")}
+          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
+            Select DocSpace roles for the imported users: <b>DocSpace admin</b>, <b>Room admin</b>
+            or <b>Power user</b>. By default, Power user role is selected for each user. You can
+            manage the roles after the import.
+          </Trans>
           {renderTooltip}
         </>
       );

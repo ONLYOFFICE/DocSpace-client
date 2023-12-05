@@ -56,7 +56,7 @@ const ThirdStep = (props) => {
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
-        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />
+        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} isCurrentStep />
       )}
 
       {users.withoutEmail.length > 0 ? (
@@ -101,7 +101,7 @@ const ThirdStep = (props) => {
         </>
       ) : (
         <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          {t("Settings:AddEmailsWarning")}
+          {t("Settings:WithoutEmailHint")}
         </Text>
       )}
 

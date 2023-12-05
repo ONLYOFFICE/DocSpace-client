@@ -118,7 +118,7 @@ const SelectFileStep = ({
   const onSelectFile = (file) => {
     setProgress(0);
     setIsFileError(false);
-    setIsSaveDisabled(true);
+    setShowReminder(false);
     setIsFileLoading(true);
     try {
       onUploadFile(file);

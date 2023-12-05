@@ -115,7 +115,7 @@ const GoogleWorkspace = ({ t, clearCheckedAccounts }) => {
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getGoogleStepDescription(t, currentStep, renderTooltip)}
+          {getGoogleStepDescription(t, currentStep, renderTooltip, Trans)}
         </Box>
         <StepContent
           t={t}

@@ -12,12 +12,12 @@ You can change the CSS styles in the theme, and they will be applied to all chil
 ### Usage
 
 ```js
-import ThemeProvider from "@docspace/components/theme-provider";
-import Themes from "@docspace/components/themes";
+import ThemeProvider from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
 ```
 
 ```jsx
-const newTheme = {...Themes.Base, color: "red"}
+const newTheme = {...Base, color: "red"}
 
 <ThemeProvider theme={newTheme}>
   <Box>

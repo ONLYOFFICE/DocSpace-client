@@ -1,5 +1,5 @@
 import { TColorScheme } from "../../types";
-import { ThemeType } from "../../themes";
+import { TTheme } from "../../themes";
 
 export interface ToggleIconProps {
   isChecked?: boolean;
@@ -31,7 +31,7 @@ export interface ToggleButtonProps {
 export interface StyledToggleButtonProps {
   isChecked?: boolean;
   isDisabled?: boolean;
-  theme: ThemeType;
+  theme: TTheme;
 }
 
 export interface ContainerToggleButtonThemeProps {

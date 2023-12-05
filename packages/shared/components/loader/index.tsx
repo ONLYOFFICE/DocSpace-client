@@ -2,10 +2,10 @@ import React from "react";
 
 import { Text } from "../text";
 
-import { Oval } from "./types/oval";
-import { DualRing } from "./types/dual-ring";
-import { Rombs } from "./types/rombs";
-import { Track } from "./types/track";
+import { Oval } from "./sub-components/Oval";
+import { DualRing } from "./sub-components/DualRing";
+import { Rombs } from "./sub-components/Rombs";
+import { Track } from "./sub-components/Track";
 import { LoaderProps } from "./Loader.types";
 import { LoaderTypes } from "./Loader.enums";
 

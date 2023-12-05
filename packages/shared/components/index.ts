@@ -1,7 +1,7 @@
 import { Aside } from "./aside";
 import { Avatar, AvatarRole, AvatarSize } from "./avatar";
 import { Box } from "./box";
-import GlobalStyle from "./global-style";
+import { GlobalStyle } from "./global-style";
 import { IconButton } from "./icon-button";
 import { Link, LinkTarget, LinkType } from "./link";
 import { Portal } from "./portal";
@@ -9,7 +9,12 @@ import { Scrollbar, ScrollbarType } from "./scrollbar";
 import { CustomScrollbarsVirtualList } from "./scrollbar/sub-components";
 import { Text } from "./text";
 import { ThemeProvider } from "./theme-provider";
-import { Tooltip, TFallbackAxisSideDirection, TTooltipPlace } from "./tooltip";
+import {
+  Tooltip,
+  TFallbackAxisSideDirection,
+  TTooltipPlace,
+  TGetTooltipContent,
+} from "./tooltip";
 import { ToggleButton } from "./toggle-button";
 import { Loader, LoaderTypes } from "./loader";
 import { Button, ButtonSize } from "./button";
@@ -52,5 +57,6 @@ export {
   Tooltip,
   TFallbackAxisSideDirection,
   TTooltipPlace,
+  TGetTooltipContent,
   ToggleButton,
 };

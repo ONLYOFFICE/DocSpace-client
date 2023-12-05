@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import { ThemeType } from "../../themes";
+import { TTheme } from "../../themes";
 
-const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
+const GlobalStyle = createGlobalStyle<{ theme: TTheme }>`
 
 html, body {
   margin: 0;
@@ -21,4 +21,4 @@ body {
 }
 `;
 
-export default GlobalStyle;
+export { GlobalStyle };

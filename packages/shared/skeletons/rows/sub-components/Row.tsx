@@ -1,8 +1,8 @@
 import React from "react";
 
-import { StyledRow, StyledBox } from "./Rows.styled";
-import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
-import { CircleSkeleton } from "../circle";
+import { StyledRow, StyledBox } from "../Rows.styled";
+import { RectangleSkeleton, RectangleSkeletonProps } from "../../rectangle";
+import { CircleSkeleton } from "../../circle";
 
 const RowSkeleton = ({
   id,

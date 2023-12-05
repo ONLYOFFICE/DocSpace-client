@@ -1,6 +1,5 @@
-import globalColors from "./globalColors";
-
-import NoUserSelect from "./commonStyles";
+import { globalColors } from "./globalColors";
+import { NoUserSelect } from "./commonStyles";
 
 export { globalColors, NoUserSelect };
 

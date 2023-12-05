@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { NoUserSelect } from "../../constants";
-import { Base, ThemeType } from "../../themes";
+import { Base, TTheme } from "../../themes";
 import { ButtonProps, ButtonThemeProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 
@@ -108,9 +108,9 @@ const disableCss = css<ButtonProps>`
   }
 `;
 
-const heightStyle = (props: { size: ButtonSize; theme: ThemeType }) =>
+const heightStyle = (props: { size: ButtonSize; theme: TTheme }) =>
   props.theme.button.height[props.size];
-const fontSizeStyle = (props: { size: ButtonSize; theme: ThemeType }) =>
+const fontSizeStyle = (props: { size: ButtonSize; theme: TTheme }) =>
   props.theme.button.fontSize[props.size];
 
 const ButtonWrapper = ({

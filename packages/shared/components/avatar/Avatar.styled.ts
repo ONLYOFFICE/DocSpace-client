@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ThemeType, Base } from "../../themes";
+import { TTheme, Base } from "../../themes";
 import { NoUserSelect } from "../../constants";
 import { commonIconsStyles } from "../../utils";
 
@@ -65,14 +65,14 @@ const AvatarWrapper = styled.div<{ source: string; userName: string }>`
 `;
 AvatarWrapper.defaultProps = { theme: Base };
 
-const rightStyle = (props: { size: AvatarSize; theme: ThemeType }) =>
+const rightStyle = (props: { size: AvatarSize; theme: TTheme }) =>
   props.theme.avatar.roleWrapperContainer.right[props.size];
-const bottomStyle = (props: { size: AvatarSize; theme: ThemeType }) =>
+const bottomStyle = (props: { size: AvatarSize; theme: TTheme }) =>
   props.theme.avatar.roleWrapperContainer.bottom[props.size];
 
 const RoleWrapper = styled.div<{
   size: AvatarSize;
-  theme: ThemeType;
+  theme: TTheme;
 }>`
   position: absolute;
   ${(props) =>
@@ -106,13 +106,8 @@ const RoleWrapper = styled.div<{
 `;
 RoleWrapper.defaultProps = { theme: Base };
 
-const fontSizeStyle = ({
-  size,
-  theme,
-}: {
-  size: AvatarSize;
-  theme: ThemeType;
-}) => theme.avatar.initialsContainer.fontSize[size];
+const fontSizeStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
+  theme.avatar.initialsContainer.fontSize[size];
 
 const NamedAvatar = styled.div<{ size: AvatarSize }>`
   position: absolute;
@@ -156,12 +151,12 @@ const StyledIconWrapper = styled.div`
 `;
 StyledIconWrapper.defaultProps = { theme: Base };
 
-const widthStyle = ({ size, theme }: { size: AvatarSize; theme: ThemeType }) =>
+const widthStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
   theme.avatar.width[size];
-const heightStyle = ({ size, theme }: { size: AvatarSize; theme: ThemeType }) =>
+const heightStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
   theme.avatar.height[size];
 
-const StyledAvatar = styled.div<{ size: AvatarSize; theme: ThemeType }>`
+const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
   position: relative;
   width: ${(props) => widthStyle(props)};
   min-width: ${(props) => widthStyle(props)};

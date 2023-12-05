@@ -1,4 +1,4 @@
-const globalColors = {
+export const globalColors = {
   black: "#333",
   darkBlack: "#000",
   white: "#FFF",
@@ -60,5 +60,3 @@ const globalColors = {
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
 };
-
-export default globalColors;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Base, ThemeType } from "../../themes";
+import { Base, TTheme } from "../../themes";
 import { tablet, mobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledTabletView = css<{ articleWidth: number }>`
@@ -68,7 +68,7 @@ export const SubMenuItem = styled.li<{ noHover?: boolean }>`
 const StyledContextMenu = styled.div<{
   changeView?: boolean;
   articleWidth: number;
-  theme: ThemeType;
+  theme: TTheme;
   isRoom?: boolean;
   isIconExist?: boolean;
   noHover?: boolean;

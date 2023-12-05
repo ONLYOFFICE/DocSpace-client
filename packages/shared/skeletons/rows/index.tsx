@@ -1,6 +1,8 @@
 import React from "react";
-import RowSkeleton from "./row";
+
 import { RectangleSkeletonProps } from "../rectangle";
+
+import RowSkeleton from "./sub-components/Row";
 
 const RowsSkeleton = ({
   count = 25,

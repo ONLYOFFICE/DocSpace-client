@@ -5,7 +5,7 @@ Scrollbar is used for displaying custom scrollbar
 ### Usage
 
 ```js
-import Scrollbar from "@docspace/shared/components";
+import {Scrollbar} from "@docspace/shared/components";
 ```
 
 ```jsx

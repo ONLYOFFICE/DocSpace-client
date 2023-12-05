@@ -14,6 +14,11 @@ export type TTooltipPlace =
 
 export type TFallbackAxisSideDirection = "none" | "start" | "end";
 
+export type TGetTooltipContent = {
+  content: string | null;
+  activeAnchor: HTMLElement | null;
+};
+
 export interface TooltipProps {
   /** Used as HTML id property  */
   id?: string;
@@ -22,9 +27,10 @@ export interface TooltipProps {
   /** Whether to allow fallback to the perpendicular axis of the preferred placement, and if so, which side direction along the axis to prefer. */
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
   /** Sets a callback function that generates the tip content dynamically */
-  getContent?: (content: {
-    [key: string]: string | number;
-  }) => React.ReactNode | string;
+  getContent?: ({
+    content,
+    activeAnchor,
+  }: TGetTooltipContent) => React.ReactNode | string;
   /** A function to be called after the tooltip is hidden */
   afterHide?: () => {};
   /** A function to be called after the tooltip is shown */

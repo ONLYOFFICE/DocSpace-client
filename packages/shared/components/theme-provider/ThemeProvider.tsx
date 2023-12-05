@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider as Provider } from "styled-components";
 
-import GlobalStyle from "../global-style";
+import { GlobalStyle } from "../global-style";
 
 import { ThemeProviderProps } from "./ThemeProvider.types";
 

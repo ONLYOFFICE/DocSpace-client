@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TextPure } from ".";
+import { TextPure } from "./Text";
 
 const meta = {
   title: "Components/Text",

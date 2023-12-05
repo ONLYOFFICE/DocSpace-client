@@ -7,9 +7,7 @@ Custom tooltip
 ### Usage with IconButton
 
 ```js
-import {Tooltip} from "@docspace/shared/components";
-import {IconButton} from "@docspace/shared/components";
-import {Text} from "@docspace/shared/components";
+import {Tooltip, IconButton, Text} from "@docspace/shared/components";
 import QuestionReactSvgUrl from 'PUBLIC_DIR/images/question.react.svg?url";
 ```
 

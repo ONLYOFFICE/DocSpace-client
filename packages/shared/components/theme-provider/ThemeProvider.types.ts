@@ -1,9 +1,9 @@
 import { TColorScheme } from "../../types";
-import { ThemeType } from "../../themes";
+import { TTheme } from "../../themes";
 
 export interface ThemeProviderProps {
   /** Applies a theme to all children components */
-  theme: ThemeType;
+  theme: TTheme;
   /** Applies a currentColorScheme to all children components */
   currentColorScheme: TColorScheme;
   /** Child elements */

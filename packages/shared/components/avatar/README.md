@@ -5,7 +5,7 @@ Used to display an avatar or brand.
 ### Usage
 
 ```js
-import Avatar from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components";
 ```
 
 ```jsx

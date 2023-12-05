@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-const NoUserSelect = css`
+export const NoUserSelect = css`
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -9,5 +9,3 @@ const NoUserSelect = css`
   -ms-user-select: none;
   -khtml-user-select: none;
 `;
-
-export default NoUserSelect;

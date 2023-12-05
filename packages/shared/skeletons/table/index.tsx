@@ -1,5 +1,5 @@
 import React from "react";
-import TableRow from "./row";
+import TableRow from "./sub-components/Row";
 import { RectangleSkeletonProps } from "../rectangle";
 
 const TableSkeleton = ({

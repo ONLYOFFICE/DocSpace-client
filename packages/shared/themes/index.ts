@@ -1,6 +1,6 @@
-import Base, { ThemeType, TColorScheme } from "./base";
+import Base, { TTheme, TColorScheme } from "./base";
 
 import Dark from "./dark";
 
 export { Base, Dark };
-export type { ThemeType, TColorScheme };
+export type { TTheme, TColorScheme };

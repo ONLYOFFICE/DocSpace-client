@@ -3199,6 +3199,6 @@ const Base = getBaseTheme();
 
 export default Base;
 
-export type ThemeType = ReturnType<typeof getBaseTheme> & {
+export type TTheme = ReturnType<typeof getBaseTheme> & {
   currentColorScheme?: TColorScheme;
 };

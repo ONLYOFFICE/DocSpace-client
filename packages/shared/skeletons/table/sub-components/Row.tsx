@@ -1,7 +1,8 @@
 import React from "react";
 
-import { StyledRow, StyledBox1, StyledBox2 } from "./styled";
-import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
+import { RectangleSkeleton, RectangleSkeletonProps } from "../../rectangle";
+
+import { StyledRow, StyledBox1, StyledBox2 } from "../Table.styled";
 
 const TableRow = ({
   id,

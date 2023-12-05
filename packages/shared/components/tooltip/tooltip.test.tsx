@@ -11,7 +11,7 @@ describe("<Tooltip />", () => {
   it("renders without error", () => {
     render(
       <Tooltip>
-        <Text>You tooltip text</Text>
+        <Text>Your tooltip text</Text>
       </Tooltip>,
     );
 

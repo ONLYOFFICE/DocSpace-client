@@ -3,7 +3,7 @@ import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 import { globalColors } from "../constants";
 import { CommonTheme } from "./commonTheme";
 
-import { ThemeType } from "./base";
+import { TTheme } from "./base";
 
 const {
   black,
@@ -36,7 +36,7 @@ const {
   darkErrorStatus,
 } = globalColors;
 
-const Dark: ThemeType = {
+const Dark: TTheme = {
   ...CommonTheme,
   isBase: false,
   color: grayMaxLight,

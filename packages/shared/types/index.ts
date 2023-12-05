@@ -1,9 +1,9 @@
-import { ThemeType, TColorScheme } from "../themes";
+import { TTheme, TColorScheme } from "../themes";
 
 export type TInterfaceDirection = "rtl" | "ltr";
 
 declare module "styled-components" {
-  export interface DefaultTheme extends ThemeType {}
+  export interface DefaultTheme extends TTheme {}
 }
 declare global {
   interface Window {

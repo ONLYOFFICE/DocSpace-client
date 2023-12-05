@@ -1,7 +1,3 @@
-/**
- * Enum for type of email value errors.
- * @readonly
- */
 export const enum ParseErrorTypes {
   None = 0,
   EmptyRecipients = 1,

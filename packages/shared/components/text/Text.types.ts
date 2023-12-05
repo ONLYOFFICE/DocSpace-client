@@ -35,9 +35,9 @@ export interface TextProps {
   children?: React.ReactNode;
 }
 
-// export interface StyledTextProps {
-//   fontSizeProp?: string;
-//   fontWeightProp?: string;
-//   colorProp?: string;
-//   textAlign?: string;
-// }
+export interface StyledTextProps {
+  fontSizeProp?: string;
+  fontWeightProp?: string;
+  colorProp?: string;
+  textAlign?: string;
+}

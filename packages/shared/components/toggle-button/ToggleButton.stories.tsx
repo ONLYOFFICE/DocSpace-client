@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { ToggleButton } from ".";
+import { ToggleButton } from "./ToggleButton";
 import { ToggleButtonProps } from "./ToggleButton.types";
 
 const meta = {

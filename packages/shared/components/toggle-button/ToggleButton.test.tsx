@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import "@testing-library/jest-dom";
 
-import { ToggleButton } from ".";
+import { ToggleButton } from "./ToggleButton";
 
 describe("<ToggleButton />", () => {
   test("renders without error", () => {

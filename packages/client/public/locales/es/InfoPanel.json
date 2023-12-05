@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Vea los detalles de los usuarios aquí",
+  "Administration": "Administración",
   "AndMoreLabel": "y <strong>{{count}} más</strong>",
   "CreationDate": "Fecha de creación",
   "Data": "Datos",
   "DateModified": "Fecha de modificación",
+  "ExpectUsers": "Esperar usuarios",
   "FeedCreateFileSeveral": "Se han añadido los archivos",
   "FeedCreateFileSingle": "Se ha creado un archivo",
   "FeedCreateFolderSeveral": "Se han añadido las carpetas",
@@ -26,7 +28,9 @@
   "FeedUpdateUser": "se le ha asignado el rol {{role}}",
   "FileExtension": "Extensión de archivo",
   "FilesEmptyScreenText": "Ver detalles de archivos y carpetas aquí",
+  "GalleryEmptyScreenText": "Vea aquí los detalles de la plantilla del formulario ",
   "HistoryEmptyScreenText": "El historial de actividad se mostrará aquí",
+  "InfoBanner": "La lista de usuarios invitados incluye al propietario y/o administrador de este DocSpace con acceso completo a todas las salas. Al propietario y/o administrador no se le pueden asignar otros permisos de acceso. Una vez añadidos a la sala, se les notificarán todos los cambios.",
   "ItemsSelected": "Elementos seleccionados",
   "LastModifiedBy": "Ultima modificación por",
   "Properties": "Propiedades",
@@ -35,5 +39,6 @@
   "StorageType": "Tipo de almacenamiento",
   "SubmenuDetails": "Detalles",
   "SubmenuHistory": "Historial",
+  "Users": "Usuarios",
   "Versions": "Versiones"
 }

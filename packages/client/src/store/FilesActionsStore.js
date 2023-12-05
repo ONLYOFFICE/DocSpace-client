@@ -30,6 +30,7 @@ import {
   FileStatus,
   FolderType,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
@@ -340,13 +341,6 @@ class FilesActionStore {
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
 
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
-
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
 
@@ -625,7 +619,7 @@ class FilesActionStore {
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : bufferSelection != null
+      : bufferSelection
       ? [bufferSelection]
       : infoPanelIsVisible && infoPanelSelection != null
       ? [infoPanelSelection]
@@ -650,14 +644,6 @@ class FilesActionStore {
         folderIds.push(item.id);
         items.push({ id: item.id });
       }
-    }
-
-    if (this.dialogsStore.isFolderActions) {
-      fileIds = [];
-      folderIds = [];
-
-      folderIds.push(bufferSelection);
-      this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);
@@ -2434,6 +2420,78 @@ class FilesActionStore {
     };
 
     this.uploadDataStore.itemOperationToFolder(operationData);
+  };
+
+  onLeaveRoom = (t, isOwner = false) => {
+    const {
+      updateRoomMemberRole,
+      removeFiles,
+      folders,
+      setFolders,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const { user } = this.authStore.userStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : this.selectedFolderStore.id;
+
+    const isAdmin = user.isOwner || user.isAdmin;
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    return updateRoomMemberRole(roomId, {
+      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+    }).then(() => {
+      if (!isAdmin) {
+        if (!isRoot) {
+          const filter = RoomsFilter.getDefault();
+          window.DocSpace.navigate(
+            `rooms/shared/filter?${filter.toUrlParams()}`
+          );
+        } else {
+          removeFiles(null, [roomId]);
+        }
+      } else {
+        const newFolders = folders;
+        const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+        newFolders[folderIndex].inRoom = false;
+        setFolders(newFolders);
+      }
+
+      isOwner
+        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+        : toastr.success(t("Files:YouLeftTheRoom"));
+    });
+  };
+
+  changeRoomOwner = (t, userId, isLeaveChecked = false) => {
+    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
+      this.filesStore;
+    const { isRootFolder, setCreatedBy, id } = this.selectedFolderStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : id;
+
+    return setRoomOwner(userId, [roomId])
+      .then(async (res) => {
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+        }
+
+        if (isLeaveChecked) await this.onLeaveRoom(t);
+        else toastr.success(t("Files:AppointNewOwner"));
+      })
+      .finally(() => {
+        setSelected("none");
+      });
   };
 }
 

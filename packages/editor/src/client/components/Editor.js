@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { isMobile, isIOS, deviceType, isMobileOnly } from "react-device-detect";
+import { isMobile, isIOS, deviceType } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { FolderType, EDITOR_ID } from "@docspace/common/constants";
 import throttle from "lodash/throttle";
@@ -107,6 +107,7 @@ function Editor({
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -143,7 +144,7 @@ function Editor({
     const withoutRedirect = params.get("without_redirect");
 
     if (
-      isMobileOnly &&
+      isMobile &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
@@ -153,7 +154,7 @@ function Editor({
       setIsShowDeepLink(true);
     }
 
-    if (isMobileOnly && defaultOpenDocument === "app") {
+    if (isMobile && defaultOpenDocument === "app") {
       const nav = navigator.userAgent;
       const storeUrl =
         nav.includes("iPhone;") || nav.includes("iPad;")
@@ -164,7 +165,8 @@ function Editor({
         window.location.origin,
         user.email,
         fileInfo,
-        deepLinkUrl
+        deepLinkUrl,
+        window.location.href
       );
 
       setTimeout(() => {
@@ -809,6 +811,7 @@ function Editor({
         onRequestInsertImage,
         onRequestSelectSpreadsheet,
         onRequestSelectDocument,
+        onRequestReferenceSource,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
@@ -864,6 +867,7 @@ function Editor({
         onRequestInsertImage = onSDKRequestInsertImage;
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
+        onRequestReferenceSource = onSDKRequestReferenceSource;
       }
 
       if (userAccessRights.EditHistory) {
@@ -905,6 +909,7 @@ function Editor({
           onRequestSaveAs,
           onRequestSelectSpreadsheet,
           onRequestSelectDocument,
+          onRequestReferenceSource,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,

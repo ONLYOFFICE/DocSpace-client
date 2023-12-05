@@ -42,6 +42,7 @@ const PureHome = (props) => {
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -159,7 +160,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
-    selectedFolderStore,
+    folderSecurity,
   });
 
   const { showUploadPanel } = useOperations({
@@ -354,7 +355,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { setSelectedFolder } = selectedFolderStore;
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -495,7 +496,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: auth.userStore.user.isVisitor,
-
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,

@@ -62,8 +62,6 @@ const FilesSelector = ({
 
   selection,
   disabledItems,
-  isFolderActions,
-  setIsFolderActions,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
@@ -129,7 +127,8 @@ const FilesSelector = ({
 
   const [total, setTotal] = React.useState<number>(0);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
-
+  const [isSelectedParentFolder, setIsSelectedParentFolder] =
+    React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const [isRequestRunning, setIsRequestRunning] =
@@ -182,6 +181,7 @@ const FilesSelector = ({
   });
 
   const { getFileList } = useFilesHelper({
+    setIsSelectedParentFolder,
     setIsBreadCrumbsLoading,
     setBreadCrumbs,
     setIsNextPageLoading,
@@ -296,7 +296,26 @@ const FilesSelector = ({
           (value) => value.id.toString() === item.id.toString()
         );
 
-        const newBreadCrumbs = breadCrumbs.map((item) => ({ ...item }));
+        const maxLength = breadCrumbs.length - 1;
+        let foundParentId = false,
+          currentFolderIndex = -1;
+        const newBreadCrumbs = breadCrumbs.map((item, index) => {
+          if (!foundParentId) {
+            currentFolderIndex = disabledItems.findIndex(
+              (id) => id === item?.id
+            );
+          }
+
+          if (index !== maxLength && currentFolderIndex !== -1) {
+            foundParentId = true;
+            !isSelectedParentFolder && setIsSelectedParentFolder(true);
+          }
+
+          if (index === maxLength && !foundParentId && isSelectedParentFolder)
+            setIsSelectedParentFolder(false);
+
+          return { ...item };
+        });
 
         newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
 
@@ -323,7 +342,6 @@ const FilesSelector = ({
 
     if (isCopy) {
       setCopyPanelVisible(false);
-      setIsFolderActions(false);
     } else if (isRestoreAll) {
       setRestoreAllPanelVisible(false);
     } else if (isRestore) {
@@ -382,17 +400,10 @@ const FilesSelector = ({
         if (item.fileExst || item.contentLength) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("Translations:MoveToFolderMessage"));
+          toastr.error(t("MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }
-      }
-
-      if (isFolderActions) {
-        fileIds = [];
-        folderIds = [];
-
-        folderIds.push(currentFolderId);
       }
 
       if (folderIds.length || fileIds.length) {
@@ -484,7 +495,8 @@ const FilesSelector = ({
 
   const isDisabled = getIsDisabled(
     isFirstLoad,
-    fromFolderId === selectedItemId,
+    isSelectedParentFolder,
+    fromFolderId == selectedItemId,
     selectedItemType === "rooms",
     isRoot,
     isCopy,
@@ -616,18 +628,6 @@ export default inject(
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const fromFolderId = id
-      ? id
-      : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId;
-
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
-
     const { treeFolders } = treeFoldersStore;
 
     const {
@@ -640,8 +640,6 @@ export default inject(
       restoreAllPanelVisible,
       setRestoreAllPanelVisible,
       conflictResolveDialogVisible,
-      isFolderActions,
-      setIsFolderActions,
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
     } = dialogsStore;
@@ -669,7 +667,7 @@ export default inject(
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
-          : selection.length > 0 && selection[0] != null
+          : selection.length > 0 && selection?.[0] != null
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
@@ -687,13 +685,27 @@ export default inject(
     const disabledItems: any[] = [];
 
     selectionsWithoutEditing.forEach((item: any) => {
-      if (item?.isFolder && item?.id) {
+      if ((item?.isFolder || item?.parentId) && item?.id) {
         disabledItems.push(item.id);
       }
     });
 
     const includeFolder =
       selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
+
+    const fromFolderId = id
+      ? id
+      : rootFolderType === FolderType.Archive ||
+        rootFolderType === FolderType.TRASH
+      ? undefined
+      : selectedId === selectionsWithoutEditing[0]?.id
+      ? parentId
+      : selectedId;
+
+    const currentFolderId =
+      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+        ? +sessionPath
+        : fromFolderId;
 
     return {
       currentFolderId,
@@ -713,7 +725,6 @@ export default inject(
       theme,
       selection: selectionsWithoutEditing,
       disabledItems,
-      isFolderActions,
       setConflictDialogData,
       checkFileConflicts,
       itemOperationToFolder,
@@ -722,7 +733,6 @@ export default inject(
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
-      setIsFolderActions,
       setSelectedItems,
       setInfoPanelIsMobileHidden,
       includeFolder,

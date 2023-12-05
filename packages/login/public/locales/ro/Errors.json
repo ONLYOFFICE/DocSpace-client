@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Nume de utilizator sau parolă incorectă.",
   "LoginWithAccountNotFound": "Imposibil de găsit contul asociat de la terți Mai întâi, trebuie să conectați contul dvs din reţelele sociale pe pagina de editare profil.",
   "LoginWithBruteForce": "Autorizarea este temporar blocată",
+  "LoginWithBruteForceCaptcha": "Confirmați că nu sunteți un robot",
   "RecaptchaInvalid": "Recaptcha incorectă",
   "SsoAttributesNotFound": "Autentificare nereușită (atributele aserțiunii nu s-a găsit)",
   "SsoAuthFailed": "Autentificare nereușită",

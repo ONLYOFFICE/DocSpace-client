@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Bu otaqdakı bütün fayllar şifrələnəcək.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud DocSpace istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
   "MakeRoomPrivateTitle": "Otağı Şəxsi edin",
+  "PublicRoomBarDescription": "Bu otaq keçid olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Yalnız Baxış icazəsi olacaq.",
+  "PublicRoomDescription": "İstifadəçiləri qeydiyyatdan keçmədən sənədlərə baxmaq üçün xarici keçidlər vasitəsilə dəvət edin. Siz həmçinin bu otağı istənilən veb interfeysə yerləşdirə bilərsiniz.",
   "ReviewRoomDescription": "Sənədlərə baxış və ya şərh tələb edin",
   "ReviewRoomTitle": "Baxış otağı",
   "RoomEditing": "Otaq təşkili",

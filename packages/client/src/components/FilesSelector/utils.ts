@@ -60,6 +60,7 @@ export const getAcceptButtonLabel = (
 
 export const getIsDisabled = (
   isFirstLoad: boolean,
+  isSelectedParentFolder: boolean,
   sameId?: boolean,
   isRooms?: boolean,
   isRoot?: boolean,
@@ -80,6 +81,7 @@ export const getIsDisabled = (
   if (sameId && isCopy && includeFolder) return true;
   if (isRooms) return true;
   if (isRoot) return true;
+  if (isSelectedParentFolder) return true;
   if (isCopy) return !security?.CopyTo;
   if (isMove || isRestoreAll || isRestore) return !security?.MoveTo;
 

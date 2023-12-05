@@ -1,1 +1,19 @@
-{}
+{
+  "AbortTransfer": "Prekini prenos",
+  "AllDataTransferred": "Vsi podatki so prenešeni",
+  "DataReassignment": "Prerazporeditev podatkov",
+  "DeleteProfileIsFinished": "Ko je prerazporeditev končana, izbrišite profil",
+  "DescriptionDataReassignment": "Prenesli bomo sobe, ki jih je ustvaril uporabnik, in dokumente, shranjene v sobah uporabnikov.",
+  "InProgress": "V delu",
+  "Interrupted": "Prekinjeno. Nekaterih podatkov ni bilo mogoče prenesti",
+  "MoreAboutDataTransfer": "Več o prenosu podatkov",
+  "NewDataOwner": "Nov lastnik podatkov",
+  "NoteDataReassignment": "Opomba: tega dejanja ni mogoče razveljaviti.",
+  "ProcessComplete": "To stran lahko zaprete. Ko bo postopek zaključen, bo odgovorni skrbnik obveščen po elektronski pošti.",
+  "Reassign": "Prerazporedi",
+  "ReassignData": "Prerazporedi podatke",
+  "ReassigningDataToAnother": "Postopek prerazporeditve podatkov uporabnika<0>{{fromUser}}</0> na uporabnika <1>{{toUser}}</1> se je začel. Upoštevajte, da lahko traja nekaj časa.",
+  "ReassigningDataToItself": "Postopek prerazporeditve podatkov uporabnika <0>{{fromUser}}</0> na uporabnika <1>{{toUser}}</1> <2>{{you}}</2> se je začel. Upoštevajte, da lahko traja nekaj časa.",
+  "StartTransferAgain": "Ponovno začni prenos",
+  "UserToWhomTheDataWillBeTransferred": "Uporabnik, h kateremu bodo podatki preneseni"
+}

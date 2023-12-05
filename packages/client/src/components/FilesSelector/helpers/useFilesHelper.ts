@@ -39,6 +39,7 @@ type Room = {
   rootFolderType: number;
   type: FolderTypeValueOf;
 };
+const DEFAULT_FILE_EXTS = "file";
 
 export const convertFoldersToItems = (
   folders: any,
@@ -82,8 +83,8 @@ export const convertFoldersToItems = (
 
 export const convertFilesToItems = (
   files: any,
-  filterParam?: string,
-  getIcon: (size: number, fileExst: string) => string
+  getIcon: (size: number, fileExst: string) => string,
+  filterParam?: string
 ) => {
   const items = files.map((file: any) => {
     const {
@@ -96,11 +97,12 @@ export const convertFilesToItems = (
       fileExst,
     } = file;
 
-    let icon = getIcon(32, fileExst);
+    const icon = getIcon(32, fileExst || DEFAULT_FILE_EXTS);
+    const label = title.replace(fileExst, "") || fileExst;
 
     return {
       id,
-      label: title.replace(fileExst, ""),
+      label,
       title,
       icon,
       security,
@@ -138,6 +140,7 @@ export const useFilesHelper = ({
   getRoomList,
   getIcon,
   t,
+  setIsSelectedParentFolder,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -174,8 +177,8 @@ export const useFilesHelper = ({
             filter.filterType = FilterType.ImagesOnly;
             break;
 
-          case FilesSelectorFilterTypes.GZ:
-            filter.extension = FilesSelectorFilterTypes.GZ;
+          case FilesSelectorFilterTypes.BackupOnly:
+            filter.extension = "gz,tar";
             break;
 
           case FilesSelectorFilterTypes.DOCXF:
@@ -241,8 +244,8 @@ export const useFilesHelper = ({
 
         const filesList: Item[] = convertFilesToItems(
           files,
-          filterParam,
-          getIcon
+          getIcon,
+          filterParam
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -253,6 +256,9 @@ export const useFilesHelper = ({
           setSelectedTreeNode({ ...current, path: pathParts });
 
         if (isInit) {
+          let foundParentId = false,
+            currentFolderIndex = -1;
+
           const breadCrumbs: BreadCrumb[] = pathParts.map(
             ({
               id,
@@ -267,6 +273,15 @@ export const useFilesHelper = ({
 
               // const { title, id, parentId, rootFolderType, roomType } =
               //   folderInfo;
+
+              if (!foundParentId) {
+                currentFolderIndex = disabledItems.findIndex((x) => x === id);
+              }
+
+              if (!foundParentId && currentFolderIndex !== -1) {
+                foundParentId = true;
+                setIsSelectedParentFolder(true);
+              }
 
               return {
                 label: title,

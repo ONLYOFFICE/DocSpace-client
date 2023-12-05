@@ -69,7 +69,7 @@ const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
   const [isVisible, setIsVisible] = useState();
 
   const onClick = () => {
-    onLogoutClick();
+    onLogoutClick(t);
   };
   const onClickToContact = () => {
     setIsVisible(true);

@@ -1,7 +1,11 @@
 ﻿import styled from "styled-components";
 import React, { useState } from "react";
 
-import { RoomsType } from "@docspace/common/constants";
+import {
+  RoomsType,
+  ShareAccessRights,
+  FileStatus,
+} from "@docspace/common/constants";
 
 import Badge from "@docspace/components/badge";
 import { Base } from "@docspace/components/themes";
@@ -168,9 +172,17 @@ const Badges = ({
     ? { onClick: onShowVersionHistory }
     : {};
 
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;

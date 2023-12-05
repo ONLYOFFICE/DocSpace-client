@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Schakel tussen raster en lijstweergave",
   "HotkeysClearAll": "Alle selecties wissen",
   "HotkeysClose": "Actie sluiten/ongedaan maken",
+  "HotkeysCopySelected": "Kopieer geselecteerde items naar het klembord",
   "HotkeysCreateDocument": "Document aanmaken",
   "HotkeysCreateFolder": "Map maken",
   "HotkeysCreateForm": "Leeg blanco formuliersjabloon maken",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Presentatie maken",
   "HotkeysCreateSpreadsheet": "Spreadsheet maken",
   "HotkeysCreatingObjects": "Items aanmaken",
+  "HotkeysCutSelected": "Knip geselecteerde items naar het klembord",
   "HotkeysEnterKey": "Invoeren",
   "HotkeysExtendSelectionDown": "Selectie uitbreiden naar beneden",
   "HotkeysExtendSelectionLeft": "Selectie naar links uitbreiden",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Omhoog gaan zonder de selectie te veranderen",
   "HotkeysNavigation": "Navigatie",
   "HotkeysOpen": "Geselecteerd item openen/Actie bevestigen",
+  "HotkeysPasteSelected": "Plak geselecteerde items van het klembord",
   "HotkeysPlayPause": "Afspelen/Pauzeren",
   "HotkeysRedoLastUndoneAction": "De laatst ongedaan gemaakte actie opnieuw uitvoeren",
   "HotkeysRemove": "Geselecteerde items verwijderen",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Spatie",
   "HotkeysUndoLastAction": "Laatste actie ongedaan maken",
   "HotkeysUploadFile": "Bestand uploaden",
-  "HotkeysUploadingObjects": "Items uploaden"
+  "HotkeysUploadingObjects": "Items uploaden",
+  "HotkeysZoomIn": "Zoom in",
+  "HotkeysZoomOut": "Zoom uit"
 }

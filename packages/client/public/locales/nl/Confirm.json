@@ -28,5 +28,10 @@
   "SetAppTitle": "Configureer uw authenticatietoepassing",
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>ruimte</1>.",
-  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>."
+  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
+  "WelcomeRegister": "Registreren om te beginnen",
+  "WelcomeRegisterViaSocial": "Om te beginnen registreert u zich of logt u in via sociale netwerken",
+  "WelcomeRegisterViaSSO": "Om te beginnen registreet u zich of logt u in via SSO",
+  "WelcomeToDocspace": "Welkom bij onze DocSpace!",
+  "WelcomeToRoom": "Welkom bij de <1>{{ roomName }}</1> kamer!"
 }

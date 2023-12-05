@@ -10,7 +10,7 @@ const WorkspacesContainer = styled.div`
   }
 
   @media ${mobile} {
-    max-width: 343px;
+    max-width: 100%;
   }
 
   .data-import-description {

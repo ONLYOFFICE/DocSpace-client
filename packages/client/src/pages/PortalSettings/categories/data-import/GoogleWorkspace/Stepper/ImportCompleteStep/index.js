@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
-import Button from "@docspace/components/button";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
@@ -24,24 +23,6 @@ const StyledText = styled(Text)`
   margin-bottom: 16px;
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-`;
-
-const ButtonsWrapper = styled.div`
-  max-width: 245px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  column-gap: 8px;
-
-  @media ${tablet} {
-    max-width: 255px;
-
-    .finish-button,
-    .download-button {
-      height: 40px;
-      font-size: 14px;
-    }
-  }
 `;
 
 const ImportCompleteStep = ({
@@ -106,21 +87,15 @@ const ImportCompleteStep = ({
         />
       </Wrapper>
 
-      <ButtonsWrapper>
-        <Button
-          size="small"
-          className="finish-button"
-          label={t("Common:Finish")}
-          primary
-          onClick={onFinishClick}
-        />
-        <Button
-          size="small"
-          className="download-button"
-          label={t("Settings:DownloadLog")}
-          onClick={onDownloadLog}
-        />
-      </ButtonsWrapper>
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={onFinishClick}
+        onCancelClick={onDownloadLog}
+        saveButtonLabel={t("Common:Finish")}
+        cancelButtonLabel={t("Settings:DownloadLog")}
+        displaySettings
+        showReminder
+      />
     </>
   );
 };

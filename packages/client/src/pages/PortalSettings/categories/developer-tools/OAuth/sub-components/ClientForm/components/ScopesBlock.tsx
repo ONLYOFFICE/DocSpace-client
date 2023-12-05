@@ -171,17 +171,19 @@ const ScopesBlock = ({
             />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
-            <Checkbox
-              isChecked={isReadDisabled}
-              isDisabled={isEdit || !scope.read?.name}
-              onChange={() =>
-                onAddCheckedScope(
-                  key as ScopeGroup,
-                  ScopeType.write,
-                  scope.write.name
-                )
-              }
-            />
+            {scope.read?.name && (
+              <Checkbox
+                isChecked={isReadDisabled}
+                isDisabled={isEdit || !scope.read?.name}
+                onChange={() =>
+                  onAddCheckedScope(
+                    key as ScopeGroup,
+                    ScopeType.write,
+                    scope.write.name
+                  )
+                }
+              />
+            )}
           </StyledScopesCheckbox>
         </React.Fragment>
       );

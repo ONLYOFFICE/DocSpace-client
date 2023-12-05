@@ -59,7 +59,6 @@ const StepContent = ({
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}
-          showReminder={showReminder}
           isFifthStep={isFifthStep}
         />
       );
@@ -69,7 +68,6 @@ const StepContent = ({
           t={t}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}
-          showReminder={showReminder}
         />
       );
     default:

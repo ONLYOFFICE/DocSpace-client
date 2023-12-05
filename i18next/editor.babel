@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="5.0.0" version="1.3">
+<babeledit_project be_version="4.1.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,6 +26,7 @@
 								<name>DeepLinkText</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -113,6 +114,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -145,6 +150,7 @@
 								<name>OpenInApp</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -232,6 +238,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -264,6 +274,7 @@
 								<name>OpeningDocument</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -351,6 +362,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -383,6 +398,7 @@
 								<name>StayInBrowser</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -470,6 +486,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -507,6 +527,7 @@
 								<name>DocumentsFileType</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -594,6 +615,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -626,6 +651,7 @@
 								<name>ErrorConnectionLost</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -713,6 +739,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -745,6 +775,7 @@
 								<name>FileLocation</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -832,6 +863,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -864,6 +899,7 @@
 								<name>FileName</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -951,6 +987,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -983,6 +1023,7 @@
 								<name>ImageFileType</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1070,6 +1111,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1102,6 +1147,7 @@
 								<name>MailMergeFileType</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1189,6 +1235,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1221,6 +1271,7 @@
 								<name>OpenSavedDocument</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1308,6 +1359,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1340,6 +1395,7 @@
 								<name>SelectFilesType</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1427,6 +1483,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1459,6 +1519,7 @@
 								<name>UsersWithoutAccess</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1546,6 +1607,10 @@
 									</translation>
 									<translation>
 										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1647,6 +1712,9 @@
 		</language>
 		<language>
 			<code>ru-RU</code>
+		</language>
+		<language>
+			<code>si-SI</code>
 		</language>
 		<language>
 			<code>sk-SK</code>
@@ -1760,6 +1828,10 @@
 					<language>ru-RU</language>
 				</translation_url>
 				<translation_url>
+					<path>../packages/editor/public/locales/si</path>
+					<language>si-SI</language>
+				</translation_url>
+				<translation_url>
 					<path>../packages/editor/public/locales/sk</path>
 					<language>sk-SK</language>
 				</translation_url>
@@ -1794,7 +1866,14 @@
 			<copy_template>{ this.props.t('%1') }</copy_template>
 			<copy_template>{ t('%1') }</copy_template>
 		</copy_templates>
-		<custom_languages/>
+		<custom_languages>
+			<custom_language>
+				<name>Sinhala - Sri Lanka</name>
+				<code>si-SI</code>
+				<code_for_spellchecker/>
+				<code_for_machine_translation/>
+			</custom_language>
+		</custom_languages>
 	</editor_configuration>
 	<primary_language>en-US</primary_language>
 	<configuration>

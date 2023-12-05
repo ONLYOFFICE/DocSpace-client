@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
 import { tablet, isMobile } from "@docspace/components/utils/device";
@@ -53,7 +54,7 @@ const GoogleWrapper = styled.div`
   }
 `;
 
-const GoogleWorkspace = ({ t }) => {
+const GoogleWorkspace = ({ t, clearCheckedAccounts }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -99,6 +100,8 @@ const GoogleWorkspace = ({ t }) => {
     />
   );
 
+  useEffect(() => clearCheckedAccounts, []);
+
   if (isMobile()) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   return (
@@ -127,4 +130,7 @@ const GoogleWorkspace = ({ t }) => {
   );
 };
 
-export default withTranslation(["Common", "Settings"])(GoogleWorkspace);
+export default inject(({ importAccountsStore }) => {
+  const { clearCheckedAccounts } = importAccountsStore;
+  return { clearCheckedAccounts };
+})(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMobile } from "@docspace/components/utils/device";
@@ -23,9 +23,11 @@ const NextcloudWrapper = styled.div`
 `;
 
 const NextcloudWorkspace = (props) => {
-  const { t, tReady, theme } = props;
+  const { t, tReady, theme, clearCheckedAccounts } = props;
   const [currentStep, setCurrentStep] = useState(0);
   const StepsData = getStepsData(t, currentStep, setCurrentStep);
+
+  useEffect(() => clearCheckedAccounts, []);
 
   if (isMobile()) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
@@ -50,10 +52,12 @@ const NextcloudWorkspace = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { initSettings } = setup;
+  const { clearCheckedAccounts } = importAccountsStore;
   return {
     initSettings,
     theme: auth.settingsStore.theme,
+    clearCheckedAccounts,
   };
 })(withTranslation(["Common, SMTPSettings, Settings"])(observer(NextcloudWorkspace)));

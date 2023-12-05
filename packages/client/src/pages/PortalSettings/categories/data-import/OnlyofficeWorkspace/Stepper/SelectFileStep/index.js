@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -20,6 +21,14 @@ const Wrapper = styled.div`
     line-height: 20px;
     margin-bottom: 4px;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
+  @media ${tablet} {
+    .cancel-button {
+      width: 100px;
+      height: 40px;
+      font-size: 14px;
+    }
   }
 
   .select-file-input {
@@ -176,6 +185,7 @@ const SelectFileStep = ({
           />
           <Button
             size="small"
+            className="cancel-button"
             label={t("Common:CancelButton")}
             onClick={onCancel}
           />

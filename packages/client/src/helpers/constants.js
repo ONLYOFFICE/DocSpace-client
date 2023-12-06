@@ -154,3 +154,9 @@ export const ARTICLE_ALERTS = Object.freeze({
   TeamTraining: "TeamTraining",
   SubmitToFormGallery: "SubmitToFormGallery",
 });
+
+export const AuthenticatedAction = Object.freeze({
+  None: 0,
+  Logout: 1,
+  Redirect: 2,
+});

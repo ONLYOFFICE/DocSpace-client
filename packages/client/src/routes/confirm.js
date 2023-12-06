@@ -5,6 +5,7 @@ import ConfirmRoute from "../helpers/confirmRoute";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
+import { AuthenticatedAction } from "../helpers/constants";
 
 const Confirm = loadable(() => import("../pages/Confirm"));
 
@@ -53,7 +54,7 @@ const confirmRoutes = [
   {
     path: "EmpInvite",
     element: (
-      <ConfirmRoute forUnauthorized>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
         <CreateUserForm />
       </ConfirmRoute>
     ),
@@ -61,7 +62,7 @@ const confirmRoutes = [
   {
     path: "LinkInvite",
     element: (
-      <ConfirmRoute forUnauthorized>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
         <CreateUserForm />
       </ConfirmRoute>
     ),
@@ -69,7 +70,7 @@ const confirmRoutes = [
   {
     path: "Activation",
     element: (
-      <ConfirmRoute forUnauthorized>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
         <ActivateUserForm />
       </ConfirmRoute>
     ),
@@ -93,7 +94,7 @@ const confirmRoutes = [
   {
     path: "PasswordChange",
     element: (
-      <ConfirmRoute forUnauthorized>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
         <ChangePasswordForm />
       </ConfirmRoute>
     ),
@@ -165,7 +166,7 @@ const confirmRoutes = [
   {
     path: "Auth",
     element: (
-      <ConfirmRoute forUnauthorized>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
         <Auth />
       </ConfirmRoute>
     ),

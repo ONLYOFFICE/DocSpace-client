@@ -1,13 +1,20 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { ValidationResult } from "./../helpers/constants";
+import { AuthenticatedAction, ValidationResult } from "./../helpers/constants";
 import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
 import { checkConfirmLink } from "@docspace/common/api/user"; //TODO: Move AuthStore
 import { combineUrl, getObjectByLocation } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
-const ConfirmRoute = (props) => {
+const ConfirmRoute = ({
+  doAuthenticated,
+  isAuthenticated,
+  storeIsLoaded,
+  logout,
+  defaultPage,
+  children,
+}) => {
   const [state, setState] = React.useState({
     linkData: {},
     isLoaded: false,
@@ -35,10 +42,13 @@ const ConfirmRoute = (props) => {
     );
 
   React.useEffect(() => {
-    const { forUnauthorized, isAuthenticated } = props;
+    if (!storeIsLoaded) return;
 
-    if (forUnauthorized && isAuthenticated) {
-      props.logout();
+    if (isAuthenticated && doAuthenticated != AuthenticatedAction.None) {
+      if (doAuthenticated == AuthenticatedAction.Redirect)
+        return window.location.replace(defaultPage);
+
+      if (doAuthenticated == AuthenticatedAction.Logout) logout();
     }
 
     const { search } = location;
@@ -135,7 +145,7 @@ const ConfirmRoute = (props) => {
           "/error"
         );
       });
-  }, [getData]);
+  }, [getData, doAuthenticated, isAuthenticated, storeIsLoaded, logout]);
 
   // console.log(`ConfirmRoute render`, this.props, this.state);
 
@@ -146,17 +156,24 @@ const ConfirmRoute = (props) => {
       </Section.SectionBody>
     </Section>
   ) : (
-    React.cloneElement(props.children, {
+    React.cloneElement(children, {
       linkData: state.linkData,
       roomData: state.roomData,
     })
   );
 };
 
+ConfirmRoute.defaultProps = {
+  doAuthenticated: AuthenticatedAction.None,
+};
+
 export default inject(({ auth }) => {
-  const { isAuthenticated, logout } = auth;
+  const { isAuthenticated, logout, isLoaded, settingsStore } = auth;
+  const { defaultPage } = settingsStore;
   return {
     isAuthenticated,
     logout,
+    storeIsLoaded: isLoaded,
+    defaultPage,
   };
 })(observer(ConfirmRoute));

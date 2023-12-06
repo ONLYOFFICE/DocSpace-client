@@ -29,8 +29,12 @@ import {
 import { Checkbox } from "./checkbox";
 import { Toast, toastr, ToastType } from "./toast";
 import { Textarea } from "./textarea";
+import { TextInput, InputSize, InputType } from "./text-input";
 
 export {
+  TextInput,
+  InputSize,
+  InputType,
   Textarea,
   Toast,
   toastr,

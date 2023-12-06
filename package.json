@@ -36,6 +36,7 @@
     "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
   },
   "devDependencies": {
+    "@types/react-text-mask": "^5.4.14",
     "he": "^1.2.0",
     "madge": "^6.1.0",
     "shx": "^0.3.4",

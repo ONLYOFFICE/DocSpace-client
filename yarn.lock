@@ -9326,6 +9326,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-text-mask@npm:^5.4.14":
+  version: 5.4.14
+  resolution: "@types/react-text-mask@npm:5.4.14"
+  dependencies:
+    "@types/react": "*"
+  checksum: 52ddb3f68673a833da5c14fb21d3341f60975908849b99d7a3a6fde5f1c83d0a3e3a086f97fd3675788f15049dbd1988971e33263cdaead87ce825513e5b585c
+  languageName: node
+  linkType: hard
+
 "@types/react-textarea-autosize@npm:^4.3.3":
   version: 4.3.6
   resolution: "@types/react-textarea-autosize@npm:4.3.6"
@@ -14276,6 +14285,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "docspace@workspace:."
   dependencies:
+    "@types/react-text-mask": ^5.4.14
     he: ^1.2.0
     madge: ^6.1.0
     shx: ^0.3.4

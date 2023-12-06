@@ -30,37 +30,20 @@ type Story = StoryObj<typeof EmailInput>;
 
 export default meta;
 
-const Template = ({
-  allowDomainPunycode = false,
-  allowLocalPartPunycode = false,
-  allowDomainIp = false,
-  allowStrictLocalPart = false,
-  allowSpaces = false,
-  allowName = false,
-  allowLocalDomainName = false,
-  ...rest
-}: EmailInputProps & {
-  allowDomainPunycode: boolean;
-  allowLocalPartPunycode: boolean;
-  allowDomainIp: boolean;
-  allowStrictLocalPart: boolean;
-  allowSpaces: boolean;
-  allowName: boolean;
-  allowLocalDomainName: boolean;
-}) => {
+const Template = ({ ...rest }: EmailInputProps) => {
   const [emailValue, setEmailValue] = useState("");
 
   const onChangeHandler = (value: string) => {
     setEmailValue(value);
   };
   const settings = EmailSettings.parse({
-    allowDomainPunycode,
-    allowLocalPartPunycode,
-    allowDomainIp,
-    allowStrictLocalPart,
-    allowSpaces,
-    allowName,
-    allowLocalDomainName,
+    allowDomainPunycode: false,
+    allowLocalPartPunycode: false,
+    allowDomainIp: false,
+    allowStrictLocalPart: false,
+    allowSpaces: false,
+    allowName: false,
+    allowLocalDomainName: false,
   });
 
   useEffect(() => {

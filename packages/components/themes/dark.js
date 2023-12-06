@@ -1943,6 +1943,7 @@ const Dark = {
     background: black,
     rootFolderTitleColor: "#858585",
     publicIcon: "#858585",
+    boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {
       fill: "#E06A1B",

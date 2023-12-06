@@ -1,4 +1,4 @@
-import { ContextMenuModel } from "../../types";
+import type { ContextMenuModel, DevicesType } from "../../types";
 
 interface ViewerPlayerProps {
   src?: string;
@@ -16,6 +16,7 @@ interface ViewerPlayerProps {
   isOpenContextMenu: boolean;
   mobileDetails: JSX.Element;
   thumbnailSrc?: string;
+  devices: DevicesType;
   onMask: VoidFunction;
   onPrev: VoidFunction;
   onNext: VoidFunction;

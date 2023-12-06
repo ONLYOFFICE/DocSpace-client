@@ -88,15 +88,22 @@ class ImportAccountsStore {
     const checkedIds = this.checkedUsers.withoutEmail.map(
       (checkedUser) => checkedUser.key
     );
-    this.users = {
-      ...this.users,
-      result: [
-        ...this.checkedUsers.withEmail,
-        ...this.users.withoutEmail.filter((user) =>
-          checkedIds.includes(user.key)
-        ),
-      ],
-    };
+    runInAction(() => {
+      this.users = {
+        ...this.users,
+        result: [
+          ...this.checkedUsers.withEmail,
+          ...this.users.withoutEmail.filter((user) =>
+            checkedIds.includes(user.key)
+          ),
+        ],
+      };
+      this.checkedUsers = {
+        ...this.checkedUsers,
+        result: [],
+      };
+    });
+    
   };
 
   setUsers = (data) => {

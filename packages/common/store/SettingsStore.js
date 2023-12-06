@@ -24,7 +24,7 @@ import {
   size as deviceSize,
   isTablet,
 } from "@docspace/components/utils/device";
-import { wrongPortalNameUrl } from "@docspace/common/constants";
+import { wrongPortalNameUrl } from "../constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";

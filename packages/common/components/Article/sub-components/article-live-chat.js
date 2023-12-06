@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Zendesk, { ZendeskAPI } from "@docspace/common/components/Zendesk";
+import Zendesk, { ZendeskAPI } from "../../Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";

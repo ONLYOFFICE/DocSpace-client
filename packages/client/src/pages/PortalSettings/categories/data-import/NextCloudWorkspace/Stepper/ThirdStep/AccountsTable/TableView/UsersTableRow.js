@@ -72,16 +72,20 @@ const UsersTableRow = ({
   const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
   const [isPrevEmailValid, setIsPrevEmailValid] = useState(email.length > 0);
 
+  const [hasError, setHasError] = useState(false);
+
   const emailInputRef = useRef();
   const emailTextRef = useRef();
 
   const handleEmailChange = (e) => {
     setTempEmail(e.target.value);
+    hasError && setHasError(false);
   };
 
   const clearEmail = () => {
     setTempEmail(prevEmail);
     setOpenedEmailKey(null);
+    setHasError(false);
   };
 
   const openEmail = () => setOpenedEmailKey(id);
@@ -107,12 +111,20 @@ const UsersTableRow = ({
     setIsEmailValid(res.isValid);
   };
 
+  const handleSaveClick = () => {
+    isEmailValid ? handleSaveEmail() : setHasError(true);
+  };
+
+  const checkEmailValidity = () => {
+    !isEmailValid && setHasError(true);
+  };
+
   const handleKeyDown = (e) => {
-    e.key === "Enter" && isEmailValid && handleSaveEmail();
+    e.key === "Enter" && isEmailValid ? handleSaveEmail() : setHasError(true);
   };
 
   useEffect(() => {
-    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail);
+    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail) || setHasError(false);
   }, [isEmailOpen]);
 
   if (!ready) return <></>;
@@ -141,12 +153,13 @@ const UsersTableRow = ({
               type="email"
               onValidateInput={onValidateEmail}
               onKeyDown={handleKeyDown}
+              hasError={hasError}
+              onBlur={checkEmailValidity}
             />
 
             <DecisionButton
               icon={<CheckSvg />}
-              onClick={handleSaveEmail}
-              isDisabled={!isEmailValid}
+              onClick={handleSaveClick}
             />
             <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
           </EmailInputWrapper>

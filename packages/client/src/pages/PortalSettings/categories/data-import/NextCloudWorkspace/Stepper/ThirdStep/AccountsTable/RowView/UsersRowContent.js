@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -77,13 +77,17 @@ const UsersRowContent = ({
   const [tempEmail, setTempEmail] = useState(email);
   const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
 
+  const [hasError, setHasError] = useState(false);
+
   const handleEmailChange = (e) => {
     setTempEmail(e.target.value);
+    hasError && setHasError(false);
   };
 
   const clearEmail = () => {
     setTempEmail(prevEmail);
     setOpenedEmailKey(null);
+    setHasError(false);
   };
 
   const openEmail = () => setOpenedEmailKey(id);
@@ -99,6 +103,18 @@ const UsersRowContent = ({
   const onValidateEmail = (res) => {
     setIsEmailValid(res.isValid);
   };
+
+  const handleSaveClick = () => {
+    isEmailValid ? handleSaveEmail() : setHasError(true);
+  };
+
+  const checkEmailValidity = () => {
+    !isEmailValid && setHasError(true);
+  };
+
+  useEffect(() => {
+    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail) || setHasError(false);
+  }, [isEmailOpen]);
 
   if (!ready) return <></>;
 
@@ -121,13 +137,11 @@ const UsersRowContent = ({
             onChange={handleEmailChange}
             type="email"
             onValidateInput={onValidateEmail}
+            hasError={hasError}
+            onBlur={checkEmailValidity}
           />
 
-          <DecisionButton
-            icon={<CheckSvg />}
-            onClick={handleSaveEmail}
-            isDisabled={!isEmailValid}
-          />
+          <DecisionButton icon={<CheckSvg />} onClick={handleSaveClick} />
           <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
         </EmailInputWrapper>
       ) : (

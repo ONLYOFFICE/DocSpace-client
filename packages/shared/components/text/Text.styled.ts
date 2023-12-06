@@ -1,24 +1,9 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
-import { NoUserSelect } from "../../constants";
-import { getCorrectTextAlign } from "../../utils";
-import { StyledTextProps, TextProps } from "./Text.types";
+import { NoUserSelect, commonTextStyles } from "../../utils";
 
-const commonTextStyles = css<TextProps & StyledTextProps>`
-  font-family: ${(props) => props.theme.fontFamily};
-  text-align: ${(props) =>
-    getCorrectTextAlign(props.textAlign || "", props.theme.interfaceDirection)};
-  color: ${(props) =>
-    props.colorProp ? props.colorProp : props.theme.text.color};
-  ${(props) =>
-    props.truncate &&
-    css`
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `}
-`;
+import { StyledTextProps, TextProps } from "./Text.types";
 
 const styleCss = css<TextProps & StyledTextProps>`
   font-size: ${(props) =>

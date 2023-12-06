@@ -1,7 +1,6 @@
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
-import { globalColors } from "../constants";
-
+import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 export type TColorScheme = {

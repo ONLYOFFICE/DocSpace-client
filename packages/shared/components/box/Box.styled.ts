@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { TInterfaceDirection } from "../../types";
+
 import {
+  TInterfaceDirection,
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
   getCorrectTextAlign,

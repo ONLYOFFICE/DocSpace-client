@@ -1,6 +1,6 @@
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
-import { globalColors } from "../constants";
+import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 import { TTheme } from "./base";

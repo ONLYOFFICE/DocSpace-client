@@ -1,4 +1,4 @@
-import { INFO_PANEL_WIDTH } from "../constants";
+export const INFO_PANEL_WIDTH = 400;
 
 export function checkIsSSR() {
   return typeof window === "undefined";

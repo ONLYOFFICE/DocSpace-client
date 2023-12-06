@@ -8,7 +8,7 @@ import { IconSizeType, commonIconsStyles } from "../../utils";
 
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { Tooltip } from "../tooltip";
+import { TGetTooltipContent, Tooltip } from "../tooltip";
 
 import {
   EmptyIcon,
@@ -114,11 +114,9 @@ const AvatarPure = ({
   const uniqueTooltipId = withTooltip ? `roleTooltip_${Math.random()}` : "";
   const tooltipPlace = interfaceDirection === "rtl" ? "left" : "right";
 
-  const getTooltipContent = ({
-    content,
-  }: {
-    [key: string]: string | number;
-  }) => <Text fontSize="12px">{content}</Text>;
+  const getTooltipContent = ({ content }: TGetTooltipContent) => (
+    <Text fontSize="12px">{content}</Text>
+  );
 
   return (
     <StyledAvatar size={size} data-testid="avatar">

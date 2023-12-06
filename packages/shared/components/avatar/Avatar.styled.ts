@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 import { TTheme, Base } from "../../themes";
-import { NoUserSelect } from "../../constants";
-import { commonIconsStyles } from "../../utils";
+import { commonIconsStyles, NoUserSelect } from "../../utils";
 
 import { CameraReactSvg } from "./svg";
 import { AvatarSize } from "./Avatar.enums";

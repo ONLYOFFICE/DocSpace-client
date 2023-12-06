@@ -1,9 +1,3 @@
-import { globalColors } from "./globalColors";
-import { NoUserSelect } from "./commonStyles";
-import { commonInputStyle } from "./commonInputStyles";
-
-export { globalColors, NoUserSelect, commonInputStyle };
-
 export const LoaderStyle = Object.freeze({
   title: "",
   width: "100%",
@@ -21,7 +15,6 @@ export const LoaderStyle = Object.freeze({
 export const LANGUAGE = "asc_language";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
-export const INFO_PANEL_WIDTH = 400;
 
 // TODO: REMOVE NEXT LINES LATER
 

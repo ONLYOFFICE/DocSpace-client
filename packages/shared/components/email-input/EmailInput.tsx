@@ -1,9 +1,10 @@
 import React from "react";
 
 import { EmailSettings, parseAddress } from "../../utils";
+import { InputSize, InputType, TextInputProps } from "../text-input";
+
 import StyledEmailInput from "./EmailInput.styled";
 import { EmailInputProps, TValidate } from "./EmailInput.types";
-import { InputSize, InputType, TextInputProps } from "../text-input";
 
 const TextInputWrapper = ({
   onValidateInput,

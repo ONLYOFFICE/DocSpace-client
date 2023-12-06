@@ -1,6 +1,4 @@
-import { TTheme, TColorScheme } from "../themes";
-
-export type TInterfaceDirection = "rtl" | "ltr";
+import { TTheme } from "../themes";
 
 declare module "styled-components" {
   export interface DefaultTheme extends TTheme {}
@@ -15,5 +13,3 @@ declare global {
     };
   }
 }
-
-export { TColorScheme };

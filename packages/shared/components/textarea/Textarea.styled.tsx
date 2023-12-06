@@ -4,7 +4,7 @@ import TextareaAutosize from "react-autosize-textarea";
 
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg";
 
-import { commonInputStyle } from "../../constants";
+import { commonInputStyles } from "../../utils";
 import { Base, TColorScheme, TTheme } from "../../themes";
 
 import { Scrollbar, ScrollbarProps } from "../scrollbar";
@@ -25,7 +25,7 @@ const ClearScrollbar = ({
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
 const StyledScrollbar = styled(ClearScrollbar)`
-  ${commonInputStyle};
+  ${commonInputStyles};
   :focus-within {
     border-color: ${(props) =>
       props.hasError
@@ -76,7 +76,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
     dir,
   }),
 )`
-  ${commonInputStyle};
+  ${commonInputStyles};
 
   white-space: ${(props) => (props.isJSONField ? "pre" : "pre-line")};
   width: 100%;

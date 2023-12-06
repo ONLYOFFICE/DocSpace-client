@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-const commonInputStyle = css<{
+const commonInputStyles = css<{
   size?: string;
   scale?: boolean;
   isDisabled?: boolean;
@@ -82,4 +82,4 @@ const commonInputStyle = css<{
     `}
 `;
 
-export { commonInputStyle };
+export { commonInputStyles };

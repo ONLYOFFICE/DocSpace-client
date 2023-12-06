@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import { Text } from "../text";
 import { Base } from "../../themes";
-import { NoUserSelect } from "../../constants";
+import { NoUserSelect } from "../../utils";
 import { LinkProps } from "./Link.types";
 
 const colorCss = css<LinkProps>`

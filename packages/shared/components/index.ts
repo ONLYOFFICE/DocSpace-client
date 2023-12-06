@@ -30,8 +30,14 @@ import { Checkbox } from "./checkbox";
 import { Toast, toastr, ToastType } from "./toast";
 import { Textarea } from "./textarea";
 import { TextInput, InputSize, InputType } from "./text-input";
+import { EmailInput } from "./email-input";
+import { Heading, HeadingLevel, HeadingSize } from "./heading";
 
 export {
+  Heading,
+  HeadingLevel,
+  HeadingSize,
+  EmailInput,
   TextInput,
   InputSize,
   InputType,

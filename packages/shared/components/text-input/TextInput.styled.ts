@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { commonInputStyle, NoUserSelect } from "../../constants";
+import { commonInputStyles, NoUserSelect } from "../../utils";
 import { Base } from "../../themes";
 
 import { InputSize } from "./TextInput.enums";
@@ -24,7 +24,7 @@ const StyledTextInput = styled(Input).attrs((props) => ({
   tabIndex: props.tabIndex,
   disabled: props.isDisabled ? "disabled" : "",
 }))`
-  ${commonInputStyle}
+  ${commonInputStyles}
   -webkit-appearance: ${(props) => props.theme.textInput.appearance};
 
   background-color: ${(props) =>

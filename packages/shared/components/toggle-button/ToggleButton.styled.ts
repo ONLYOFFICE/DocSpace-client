@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
-import { NoUserSelect } from "../../constants";
+import { NoUserSelect } from "../../utils";
 
 import {
   ContainerToggleButtonThemeProps,

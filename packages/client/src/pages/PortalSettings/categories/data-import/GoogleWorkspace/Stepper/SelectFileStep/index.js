@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
+import { isTablet } from "@docspace/components/utils/device";
 
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
@@ -182,7 +183,11 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button size="small" label={t("Common:CancelButton")} onClick={onCancel} />
+          <Button
+            size={isTablet ? "medium" : "small"}
+            label={t("Common:CancelButton")}
+            onClick={onCancel}
+          />
         </Wrapper>
       ) : (
         <ErrorBlock>

@@ -19,6 +19,7 @@ const DEFAULT_SEARCH_IN_CONTENT = null;
 const DEFAULT_EXCLUDE_SUBJECT = null;
 const DEFAULT_APPLY_FILTER_OPTION = null;
 const DEFAULT_EXTENSION = null;
+const DEFAULT_SEARCH_AREA = 3;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
@@ -36,6 +37,7 @@ const SEARCH_IN_CONTENT = "searchInContent";
 const EXCLUDE_SUBJECT = "excludeSubject";
 const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
+const SEARCH_AREA = "searchArea";
 
 // TODO: add next params
 // subjectGroup bool
@@ -85,6 +87,9 @@ class FilesFilter {
     const applyFilterOption =
       urlFilter[APPLY_FILTER_OPTION] || defaultFilter.applyFilterOption;
     const extension = urlFilter[EXTENSION] || defaultFilter.extension;
+    const searchArea =
+      (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
+      defaultFilter.searchArea;
 
     const newFilter = new FilesFilter(
       page,
@@ -103,7 +108,8 @@ class FilesFilter {
       searchInContent,
       excludeSubject,
       applyFilterOption,
-      extension
+      extension,
+      searchArea
     );
 
     return newFilter;
@@ -126,7 +132,8 @@ class FilesFilter {
     searchInContent = DEFAULT_SEARCH_IN_CONTENT,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
     applyFilterOption = DEFAULT_APPLY_FILTER_OPTION,
-    extension = DEFAULT_EXTENSION
+    extension = DEFAULT_EXTENSION,
+    searchArea = DEFAULT_SEARCH_AREA
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -145,6 +152,7 @@ class FilesFilter {
     this.excludeSubject = excludeSubject;
     this.applyFilterOption = applyFilterOption;
     this.extension = extension;
+    this.searchArea = searchArea;
   }
 
   getStartIndex = () => {
@@ -175,6 +183,7 @@ class FilesFilter {
       excludeSubject,
       applyFilterOption,
       extension,
+      searchArea,
     } = this;
 
     const isFilterSet =
@@ -205,6 +214,7 @@ class FilesFilter {
       excludeSubject,
       applyFilterOption,
       extension,
+      searchArea,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -227,6 +237,7 @@ class FilesFilter {
       excludeSubject,
       applyFilterOption,
       extension,
+      searchArea,
     } = this;
 
     const dtoFilter = {};
@@ -245,6 +256,7 @@ class FilesFilter {
     if (excludeSubject) dtoFilter[EXCLUDE_SUBJECT] = excludeSubject;
     if (applyFilterOption) dtoFilter[APPLY_FILTER_OPTION] = applyFilterOption;
     if (extension) dtoFilter[EXTENSION] = extension;
+    if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -276,7 +288,8 @@ class FilesFilter {
       this.searchInContent,
       this.excludeSubject,
       this.applyFilterOption,
-      this.extension
+      this.extension,
+      this.searchArea
     );
   }
 
@@ -297,7 +310,8 @@ class FilesFilter {
       this.searchInContent === filter.searchInContent &&
       this.excludeSubject === filter.excludeSubject &&
       this.applyFilterOption === filter.applyFilterOption &&
-      this.extension === filter.extension;
+      this.extension === filter.extension &&
+      this.searchArea === filter.searchArea;
 
     return equals;
   }

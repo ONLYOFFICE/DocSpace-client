@@ -1,1 +1,5 @@
-{}
+{
+  "LblInviteAgain": "නැවතත් ආරාධනය",
+  "MessageEmailActivationInstuctionsSentOnEmail": "සක්‍රියන උපදෙස් <1>{{email}}</1> වි-තැපැල් ලිපිනයට යවා ඇත.",
+  "UserStatus": "තත්‍වය"
+}

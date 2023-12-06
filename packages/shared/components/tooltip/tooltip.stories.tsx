@@ -4,13 +4,14 @@ import { Link } from "../link";
 import { Text } from "../text";
 import { Tooltip } from ".";
 
+import TooltipDocs from "./Tooltip.mdx";
+
 const meta = {
   title: "Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {
-      description:
-        "Custom tooltip. See documentation: https://github.com/wwayne/react-tooltip",
+      page: TooltipDocs,
     },
     design: {
       type: "figma",
@@ -139,21 +140,21 @@ export const AllTooltip: Story = {
 
         <Tooltip
           id="group"
-          getContent={({ content }) =>
-            content && typeof content === "number" ? (
+          getContent={({ content }) => {
+            return content && typeof content === "string" ? (
               <div>
                 <Text isBold fontSize="16px">
-                  {arrayUsers[content].name}
+                  {arrayUsers[+content].name}
                 </Text>
 
                 <Text color="#A3A9AE" fontSize="13px">
-                  {arrayUsers[content].email}
+                  {arrayUsers[+content].email}
                 </Text>
 
-                <Text fontSize="13px">{arrayUsers[content].position}</Text>
+                <Text fontSize="13px">{arrayUsers[+content].position}</Text>
               </div>
-            ) : null
-          }
+            ) : null;
+          }}
         />
       </div>
     );

@@ -9,8 +9,7 @@ Toast allow you to add notification to your page with ease.
 ### Usage
 
 ```js
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
+import { Toast, toastr } from "@docspace/shared/components";
 ```
 
 ```jsx

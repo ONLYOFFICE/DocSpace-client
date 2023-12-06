@@ -37,6 +37,7 @@ import {
   GreetingContainer,
   RegisterContainer,
 } from "./StyledCreateUser";
+import combineUrl from "@docspace/common/utils/combineUrl";
 
 const CreateUserForm = (props) => {
   const {
@@ -107,12 +108,7 @@ const CreateUserForm = (props) => {
   }, []);*/
 
   useEffect(() => {
-    const { isAuthenticated, logout, linkData } = props;
-
-    if (isAuthenticated) {
-      const path = window.location;
-      logout().then(() => window.location.replace(path));
-    }
+    const { linkData } = props;
 
     const fetchData = async () => {
       if (linkData.type === "LinkInvite") {
@@ -128,7 +124,7 @@ const CreateUserForm = (props) => {
     };
 
     fetchData();
-  }, [props.isAuthenticated]);
+  }, []);
 
   const onSubmit = () => {
     const { linkData, hashSettings } = props;
@@ -419,6 +415,12 @@ const CreateUserForm = (props) => {
     setIsPasswordErrorShow(true);
   };
 
+  const onSignIn = () => {
+    return window.location.replace(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
+    );
+  };
+
   const userAvatar = user && user.hasAvatar ? user.avatar : DefaultUserPhoto;
 
   return (
@@ -431,7 +433,8 @@ const CreateUserForm = (props) => {
               fontSize="23px"
               fontWeight={700}
               textAlign="left"
-              className="greeting-title">
+              className="greeting-title"
+            >
               {greetingTitle}
             </Text>
 
@@ -462,7 +465,8 @@ const CreateUserForm = (props) => {
                         t={t}
                         i18nKey="WelcomeToRoom"
                         ns="Confirm"
-                        key={roomName}>
+                        key={roomName}
+                      >
                         Welcome to the <strong>{{ roomName }}</strong> room!
                       </Trans>
                     ) : (
@@ -500,7 +504,8 @@ const CreateUserForm = (props) => {
                           fontWeight="600"
                           color={currentColorScheme?.main?.accent}
                           className="more-label"
-                          onClick={moreAuthOpen}>
+                          onClick={moreAuthOpen}
+                        >
                           {t("Common:ShowMore")}
                         </Link>
                       )}
@@ -529,7 +534,8 @@ const CreateUserForm = (props) => {
                         emailErrorText
                           ? t(`Common:${emailErrorText}`)
                           : t("Common:RequiredField")
-                      }>
+                      }
+                    >
                       <EmailInput
                         id="login"
                         name="login"
@@ -562,7 +568,8 @@ const CreateUserForm = (props) => {
                           : fname.trim().length === 0
                           ? t("Common:RequiredField")
                           : t("Common:IncorrectFirstName")
-                      }>
+                      }
+                    >
                       <TextInput
                         id="first-name"
                         name="first-name"
@@ -590,7 +597,8 @@ const CreateUserForm = (props) => {
                           : sname.trim().length === 0
                           ? t("Common:RequiredField")
                           : t("Common:IncorrectLastName")
-                      }>
+                      }
+                    >
                       <TextInput
                         id="last-name"
                         name="last-name"
@@ -614,7 +622,8 @@ const CreateUserForm = (props) => {
                       hasError={isPasswordErrorShow && !passwordValid}
                       errorMessage={`${t(
                         "Common:PasswordLimitMessage"
-                      )}: ${getPasswordErrorMessage(t, settings)}`}>
+                      )}: ${getPasswordErrorMessage(t, settings)}`}
+                    >
                       <PasswordInput
                         simpleView={false}
                         hideNewPasswordButton
@@ -670,6 +679,19 @@ const CreateUserForm = (props) => {
                       onClick={onSubmit}
                     />
                   </div>
+                  <div className="signin-container">
+                    <Link
+                      isHovered
+                      type="action"
+                      fontSize="13px"
+                      fontWeight="600"
+                      color={currentColorScheme?.main?.accent}
+                      className="signin-button"
+                      onClick={onSignIn}
+                    >
+                      {t("Common:LoginButton")}
+                    </Link>
+                  </div>
                 </form>
               )}
 
@@ -710,14 +732,7 @@ const CreateUserForm = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const {
-    logout,
-    isAuthenticated,
-    settingsStore,
-    providers,
-    thirdPartyLogin,
-    capabilities,
-  } = auth;
+  const { settingsStore, providers, thirdPartyLogin, capabilities } = auth;
   const {
     passwordSettings,
     greetingSettings,
@@ -733,8 +748,7 @@ export default inject(({ auth }) => {
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    isAuthenticated,
-    logout,
+
     getSettings,
     getPortalPasswordSettings,
     thirdPartyLogin,

@@ -101,6 +101,7 @@ const FilesSelector = ({
 
   embedded,
   withHeader,
+  withCancelButton = true,
   getIcon,
   isRoomBackup,
 }: FilesSelectorProps) => {
@@ -525,7 +526,7 @@ const FilesSelector = ({
       onSelect={onSelectAction}
       acceptButtonLabel={acceptButtonLabel}
       onAccept={onAcceptAction}
-      withCancelButton
+      withCancelButton={withCancelButton}
       cancelButtonLabel={t("Common:CancelButton")}
       onCancel={onCloseAction}
       emptyScreenImage={

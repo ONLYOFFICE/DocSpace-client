@@ -219,5 +219,6 @@ export type FilesSelectorProps = {
 
   embedded: boolean;
   withHeader: boolean;
+  withCancelButton: boolean;
   settings: any;
 };

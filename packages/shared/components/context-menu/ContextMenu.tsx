@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { useTheme } from "styled-components";
@@ -25,7 +26,7 @@ import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
 import { ContextMenuModel, ContextMenuProps } from "./ContextMenu.types";
 
-const ContextMenu = React.forwardRef((props: ContextMenuProps) => {
+const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   const [visible, setVisible] = React.useState(false);
   const [reshow, setReshow] = React.useState(false);
   const [resetMenu, setResetMenu] = React.useState(false);

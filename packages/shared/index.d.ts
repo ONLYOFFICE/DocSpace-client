@@ -11,3 +11,4 @@ declare module "*.svg" {
 }
 
 declare module "external-remotes-plugin" {}
+declare module "csvjson-json_beautifier" {}

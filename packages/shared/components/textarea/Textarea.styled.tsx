@@ -1,11 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
 
-import Scrollbar from "../scrollbar";
-import commonInputStyle from "../text-input/common-input-styles";
-import Base from "../themes/base";
-import { CopyIcon } from "./svg";
+import CopyIcon from "PUBLIC_DIR/images/copy.react.svg";
+
+import { commonInputStyle } from "../../constants";
+import { Base, TColorScheme, TTheme } from "../../themes";
+
+import { Scrollbar, ScrollbarProps } from "../scrollbar";
+import { TextareaProps } from "./Textarea.types";
 
 const ClearScrollbar = ({
   isDisabled,
@@ -13,7 +16,13 @@ const ClearScrollbar = ({
   hasError,
   heightTextArea,
   ...props
-}: any) => <Scrollbar {...props} />;
+}: {
+  isDisabled?: boolean;
+  heightScale?: boolean;
+  hasError?: boolean;
+  heightTextArea?: number;
+  ref?: React.Ref<HTMLDivElement>;
+} & ScrollbarProps) => <Scrollbar {...props} />;
 
 const StyledScrollbar = styled(ClearScrollbar)`
   ${commonInputStyle};
@@ -32,8 +41,8 @@ const StyledScrollbar = styled(ClearScrollbar)`
     return props.heightScale
       ? "67vh"
       : props.heightTextArea
-      ? props.heightTextArea + 2 + "px"
-      : "91px";
+        ? `${props.heightTextArea + 2}px`
+        : "91px";
   }} !important;
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
@@ -43,40 +52,32 @@ StyledScrollbar.defaultProps = {
   theme: Base,
 };
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
 const ClearTextareaAutosize = React.forwardRef(
   (
     {
-      // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type '{}'.
       isDisabled,
-      // @ts-expect-error TS(2339): Property 'heightScale' does not exist on type '{}'... Remove this comment to see the full error message
       heightScale,
-      // @ts-expect-error TS(2339): Property 'hasError' does not exist on type '{}'.
       hasError,
-      // @ts-expect-error TS(2339): Property 'color' does not exist on type '{}'.
       color,
-      // @ts-expect-error TS(2339): Property 'paddingLeftProp' does not exist on type ... Remove this comment to see the full error message
       paddingLeftProp,
-      // @ts-expect-error TS(2339): Property 'isJSONField' does not exist on type '{}'... Remove this comment to see the full error message
       isJSONField,
-      // @ts-expect-error TS(2339): Property 'enableCopy' does not exist on type '{}'.
       enableCopy,
       ...props
-    },
-    ref
-  // @ts-expect-error TS(2322): Type 'ForwardedRef<unknown>' is not assignable to ... Remove this comment to see the full error message
-  ) => <TextareaAutosize {...props} ref={ref} />
+    }: TextareaProps & { disabled?: boolean; readOnly?: boolean },
+    ref: React.Ref<HTMLTextAreaElement>,
+  ) => <TextareaAutosize {...props} ref={ref} />,
 );
 
+ClearTextareaAutosize.displayName = "ClearTextareaAutosize";
+
 const StyledTextarea = styled(ClearTextareaAutosize).attrs(
-  // @ts-expect-error TS(2339): Property 'autoFocus' does not exist on type 'RefAt... Remove this comment to see the full error message
-  ({ autoFocus, ...props }) => ({
-    // @ts-expect-error TS(2339): Property 'autoFocus' does not exist on type '{ ref... Remove this comment to see the full error message
-    autoFocus: props.autoFocus,
-  })
+  ({ autoFocus, dir }: { autoFocus?: boolean; dir?: string }) => ({
+    autoFocus,
+    dir,
+  }),
 )`
   ${commonInputStyle};
-  // @ts-expect-error TS(2339): Property 'isJSONField' does not exist on type 'The... Remove this comment to see the full error message
+
   white-space: ${(props) => (props.isJSONField ? "pre" : "pre-line")};
   width: 100%;
 
@@ -86,18 +87,17 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
   border: none;
   outline: none;
   resize: none;
-  // @ts-expect-error TS(2339): Property 'isJSONField' does not exist on type 'The... Remove this comment to see the full error message
+
   overflow: ${(props) => (props.isJSONField ? "visible !important" : "hidden")};
   padding: 5px 8px 2px;
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
-      // @ts-expect-error TS(2339): Property 'paddingLeftProp' does not exist on type ... Remove this comment to see the full error message
       ? `padding-right: ${props.paddingLeftProp};`
-      // @ts-expect-error TS(2339): Property 'paddingLeftProp' does not exist on type ... Remove this comment to see the full error message
       : `padding-left: ${props.paddingLeftProp};`}
-  // @ts-expect-error TS(2339): Property 'fontSize' does not exist on type 'Themed... Remove this comment to see the full error message
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
+
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(`${props.fontSize}px`)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
 
@@ -164,7 +164,10 @@ const StyledCopyIcon = styled(({ isJSONField, heightScale, ...props }) => (
 
 StyledCopyIcon.defaultProps = { theme: Base };
 
-const CopyIconWrapper = styled.div`
+const CopyIconWrapper = styled.div<{
+  isJSONField: boolean;
+  heightScale?: boolean;
+}>`
   position: absolute;
   width: 20px;
   height: 20px;
@@ -172,9 +175,7 @@ const CopyIconWrapper = styled.div`
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
-      // @ts-expect-error TS(2339): Property 'isJSONField' does not exist on type 'The... Remove this comment to see the full error message
       ? `left: ${props.isJSONField && props.heightScale ? "18px" : "10px"};`
-      // @ts-expect-error TS(2339): Property 'isJSONField' does not exist on type 'The... Remove this comment to see the full error message
       : `right: ${props.isJSONField && props.heightScale ? "18px" : "10px"};`}
   top: 6px;
 
@@ -185,22 +186,21 @@ const CopyIconWrapper = styled.div`
 
 CopyIconWrapper.defaultProps = { theme: Base };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
   position: relative;
 
   max-width: 1200px;
 
   .scroll-wrapper {
     margin-right: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'enableCopy' does not exist on type 'Them... Remove this comment to see the full error message
       props.enableCopy ? (props.isJSONField ? "36px" : "8px") : "0"};
   }
 `;
 
-const Numeration = styled.pre`
+const Numeration = styled.pre<{ fontSize: string }>`
   display: block;
   position: absolute;
-  // @ts-expect-error TS(2339): Property 'fontSize' does not exist on type 'Themed... Remove this comment to see the full error message
+
   font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
@@ -220,6 +220,30 @@ const Numeration = styled.pre`
 
 Numeration.defaultProps = { theme: Base };
 
+const getDefaultStyles = ({
+  $currentColorScheme,
+  hasError,
+  theme,
+}: {
+  $currentColorScheme?: TColorScheme;
+  hasError?: boolean;
+  theme: TTheme;
+}) =>
+  $currentColorScheme &&
+  css`
+    :focus-within {
+      border-color: ${hasError
+        ? theme?.textArea.focusErrorBorderColor
+        : theme.textArea.focusBorderColor};
+    }
+  `;
+
+StyledScrollbar.defaultProps = {
+  theme: Base,
+};
+
+const StyledThemeTextarea = styled(StyledScrollbar)(getDefaultStyles);
+
 export {
   StyledTextarea,
   StyledScrollbar,
@@ -227,4 +251,5 @@ export {
   Wrapper,
   Numeration,
   CopyIconWrapper,
+  StyledThemeTextarea,
 };

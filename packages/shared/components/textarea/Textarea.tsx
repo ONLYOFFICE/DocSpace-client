@@ -1,28 +1,24 @@
 import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import copy from "copy-to-clipboard";
+
+import { Toast, toastr } from "../toast";
+
 import {
   StyledTextarea,
-  StyledScrollbar,
   StyledCopyIcon,
   CopyIconWrapper,
   Wrapper,
   Numeration,
-} from "./styled-textarea";
-import { ColorTheme, ThemeType } from "../ColorTheme";
-import Toast from "../toast";
-import toastr from "../toast/toastr";
-import { isJSON, beautifyJSON } from "./utils";
+} from "./Textarea.styled";
+import { isJSON, jsonify } from "./Textarea.utils";
+import { TextareaProps } from "./Textarea.types";
+import { TextareaTheme } from "./Textarea.theme";
 
-import copy from "copy-to-clipboard";
-
-// eslint-disable-next-line react/prop-types, no-unused-vars
-
-const jsonify = (value: any, isJSONField: any) => {
-  if (isJSONField && value && isJSON(value)) {
-    return beautifyJSON(value);
-  }
-  return value;
-};
+const WrappedStyledCopyIcon = ({
+  heightScale,
+  isJSONField,
+  ...props
+}: TextareaProps) => <StyledCopyIcon {...props} />;
 
 const Textarea = ({
   className,
@@ -38,10 +34,9 @@ const Textarea = ({
   style,
   tabIndex,
   value,
-  fontSize,
+  fontSize = 13,
   heightTextArea,
   color,
-  theme,
   autoFocus,
   areaSelect,
   isJSONField,
@@ -49,9 +44,9 @@ const Textarea = ({
   enableCopy,
   hasNumeration,
   isFullHeight,
-  classNameCopyIcon
-}: any) => {
-  const areaRef = useRef(null);
+  classNameCopyIcon,
+}: TextareaProps) => {
+  const areaRef = useRef<null | HTMLTextAreaElement>(null);
   const [isError, setIsError] = useState(hasError);
   const modifiedValue = jsonify(value, isJSONField);
 
@@ -73,18 +68,17 @@ const Textarea = ({
 
   const numerationValue = [];
 
-  for (let i = 1; i <= numberOfLines; i++) {
+  for (let i = 1; i <= numberOfLines; i += 1) {
     numerationValue.push(i);
   }
 
-  function onTextareaClick() {
-    // @ts-expect-error TS(2531): Object is possibly 'null'.
-    areaRef.current.select();
-  }
+  const onTextareaClick = () => {
+    if (areaRef.current) areaRef.current.select();
+  };
 
   useEffect(() => {
-    hasError !== isError && setIsError(hasError);
-  }, [hasError]);
+    if (hasError !== isError) setIsError(hasError);
+  }, [hasError, isError]);
 
   useEffect(() => {
     setIsError(isJSONField && (!value || !isJSON(value)));
@@ -92,47 +86,35 @@ const Textarea = ({
 
   useEffect(() => {
     if (areaSelect && areaRef.current) {
-      // @ts-expect-error TS(2339): Property 'select' does not exist on type 'never'.
       areaRef.current.select();
     }
   }, [areaSelect]);
 
-  const WrappedStyledCopyIcon = ({
-    heightScale,
-    isJSONField,
-    ...props
-  }: any) => (
-    <StyledCopyIcon {...props} />
-  );
-
   return (
     <Wrapper
       className="textarea-wrapper"
-      // @ts-expect-error TS(2769): No overload matches this call.
       isJSONField={isJSONField}
       enableCopy={enableCopy}
       onClick={onTextareaClick}
+      data-testid="textarea"
     >
       {enableCopy && (
         <CopyIconWrapper
           className={classNameCopyIcon}
-          // @ts-expect-error TS(2769): No overload matches this call.
-          isJSONField={isJSONField}
+          isJSONField={isJSONField || false}
           onClick={() => {
             copy(modifiedValue);
-            // @ts-expect-error TS(2554): Expected 5 arguments, but got 1.
+
             toastr.success(copyInfoText);
           }}
         >
           <WrappedStyledCopyIcon heightScale={heightScale} />
         </CopyIconWrapper>
       )}
-      // @ts-expect-error TS(2322): Type '{ children: any[]; themeId: string; classNam... Remove this comment to see the full error message
-      <ColorTheme
-        themeId={ThemeType.Textarea}
+
+      <TextareaTheme
         className={className}
         style={style}
-        stype="preMediumBlack"
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
@@ -141,25 +123,25 @@ const Textarea = ({
         <Toast />
 
         {hasNumeration && (
-          // @ts-expect-error TS(2769): No overload matches this call.
-          <Numeration fontSize={fontSize}>
+          <Numeration fontSize={`${fontSize}px`}>
             {numerationValue.join("\n")}
           </Numeration>
         )}
         <StyledTextarea
-          // @ts-expect-error TS(2769): No overload matches this call.
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}
           enableCopy={enableCopy}
           placeholder={placeholder}
-          onChange={(e: any) => onChange && onChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            onChange?.(e)
+          }
           maxLength={maxLength}
           name={name}
           tabIndex={tabIndex}
           isDisabled={isDisabled}
-          disabled={isDisabled}
-          readOnly={isReadOnly}
+          disabled={isDisabled || false}
+          readOnly={isReadOnly || false}
           value={isJSONField ? modifiedValue : value}
           fontSize={fontSize}
           color={color}
@@ -167,13 +149,9 @@ const Textarea = ({
           ref={areaRef}
           dir="auto"
         />
-      </ColorTheme>
+      </TextareaTheme>
     </Wrapper>
   );
-};
-
-Textarea.propTypes = {
-
 };
 
 Textarea.defaultProps = {
@@ -184,7 +162,6 @@ Textarea.defaultProps = {
   placeholder: " ",
   tabIndex: -1,
   value: "",
-  fontSize: 13,
   isAutoFocussed: false,
   areaSelect: false,
   isJSONField: false,
@@ -194,4 +171,4 @@ Textarea.defaultProps = {
   isFullHeight: false,
 };
 
-export default Textarea;
+export { Textarea };

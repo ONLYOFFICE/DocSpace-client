@@ -27,8 +27,11 @@ import {
   SeparatorType,
 } from "./context-menu";
 import { Checkbox } from "./checkbox";
+import { Toast, toastr } from "./toast";
 
 export {
+  Toast,
+  toastr,
   Checkbox,
   ContextMenu,
   ContextMenuModel,

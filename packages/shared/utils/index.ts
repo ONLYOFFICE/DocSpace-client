@@ -1,6 +1,7 @@
 import * as isArrayEqual from "./array";
 
 import * as email from "./email";
+import { EmailSettings, parseAddress } from "./email";
 
 import useId from "./useId";
 import {
@@ -34,6 +35,8 @@ import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 
 export {
+  EmailSettings,
+  parseAddress,
   desktop,
   checkIsSSR,
   getLanguage,

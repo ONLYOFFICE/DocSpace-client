@@ -5,8 +5,8 @@ Email entry field with advanced capabilities for validation based on settings
 ### Usage
 
 ```js
-import EmailInput from "@docspace/components/email-input";
-import { EmailSettings } from "@docspace/components/utils/email";
+import { EmailInput } from "@docspace/shared/components";
+import { EmailSettings } from "@docspace/shared/utils";
 
 const settings = new EmailSettings();
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import StyledTextInput from "../text-input/styled-text-input";
+import { StyledTextInput } from "../text-input";
 
 const StyledEmailInput = styled(StyledTextInput)`
   text-align: ${({ theme }) =>

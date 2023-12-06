@@ -163,8 +163,8 @@ const Sdk = ({
     case "room-selector":
       component = (
         <RoomSelector
-          withCancelButton={true}
-          withHeader={false}
+          withCancelButton={frameConfig?.showSelectorCancel}
+          withHeader={frameConfig?.showSelectorHeader}
           onAccept={onSelectRoom}
           onCancel={onClose}
         />
@@ -175,13 +175,14 @@ const Sdk = ({
         <FilesSelector
           isPanelVisible={true}
           embedded={true}
-          withHeader={false}
+          withHeader={frameConfig?.showSelectorHeader}
           isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
           filterParam={"ALL"}
           isUserOnly={selectorType === "userFolderOnly"}
           isRoomsOnly={selectorType === "roomsOnly"}
+          withCancelButton={frameConfig?.showSelectorCancel}
         />
       );
       break;

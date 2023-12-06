@@ -23,34 +23,6 @@ const meta = {
 type Story = StoryObj<typeof CheckboxPure>;
 export default meta;
 
-// class Checkbox extends React.Component {
-//   constructor(props: any) {
-//     super(props);
-
-//     this.state = {
-//       isChecked: false,
-//     };
-//   }
-
-//   onChange = (e: any) => {
-
-//     this.props.onChange(e);
-
-//     this.setState({ isChecked: !this.state.isChecked });
-//   };
-
-//   render() {
-//     return (
-//       <CheckboxComponent
-//         {...this.props}
-
-//         isChecked={this.props.isChecked || this.state.isChecked}
-//         onChange={this.onChange}
-//       />
-//     );
-//   }
-// }
-
 const AllCheckboxesTemplate = (args: CheckboxProps) => {
   const { onChange } = args;
   return (

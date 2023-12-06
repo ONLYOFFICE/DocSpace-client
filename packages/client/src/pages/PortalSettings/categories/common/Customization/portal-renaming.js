@@ -130,8 +130,13 @@ const PortalRenaming = (props) => {
           errorMessage = error;
         }
 
+        toastr.error(errorMessage);
+        setIsShowModal(false);
         setErrorValue(errorMessage);
         saveToSessionStorage("errorValue", errorMessage);
+      })
+      .finally(() => {
+        setIsLoadingPortalNameSave(false);
       });
 
     saveToSessionStorage("portalName", portalName);
@@ -323,6 +328,7 @@ const PortalRenaming = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         displaySettings={true}
         hasScroll={hasScroll}
+        saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
       />

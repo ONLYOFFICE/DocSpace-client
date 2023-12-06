@@ -5,7 +5,7 @@ Heading text structured in levels.
 ## Usage
 
 ```js
-import Heading from "@docspace/components/heading";
+import { Heading } from "@docspace/shared/components";
 ```
 
 ```jsx

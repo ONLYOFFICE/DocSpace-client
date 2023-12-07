@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
+import Checkbox from "@docspace/components/checkbox";
 
 import { StyledWatermark } from "./StyledComponent";
 
 const options = (t) => [
-  { key: "diagonal", label: t("Diagonal"), default: true },
+  { key: "diagonal", label: t("Diagonal") },
   { key: "horizontal", label: t("Horizontal") },
 ];
 const TextWatermark = () => {
@@ -17,14 +18,19 @@ const TextWatermark = () => {
   const typesOptions = options(t);
 
   const [value, setValue] = useState("");
+  const [isChecked, setIsChecked] = useState(true);
   const [selectedOption, setSelectedOption] = useState(typesOptions[0]);
 
   const onChange = (e) => {
-    setValue(e.target.value);
+    const { value } = e.target;
+    setValue(value);
   };
 
   const onTypeChange = (item) => {
     setSelectedOption(item);
+  };
+  const onCheckboxChange = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
@@ -45,7 +51,12 @@ const TextWatermark = () => {
           options={typesOptions}
           onSelect={onTypeChange}
           scaled
-          displaySelectedOption
+        />
+        <Checkbox
+          className="watermark-checkbox"
+          label={t("Semitransparent")}
+          onChange={onCheckboxChange}
+          isChecked={isChecked}
         />
       </div>
       <div

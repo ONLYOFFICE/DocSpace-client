@@ -64,6 +64,8 @@ const Modal = ({
   }, []);
 
   const onResize = (e) => {
+    if (window.innerHeight < window.innerWidth) return;
+
     if (!contentRef.current) return;
 
     if (currentDisplayType === "modal") {

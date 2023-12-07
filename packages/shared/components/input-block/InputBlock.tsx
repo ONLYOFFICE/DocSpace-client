@@ -99,6 +99,7 @@ const InputBlock = ({
       style={style}
       color={iconColor}
       hoverColor={hoverColor}
+      data-testid="input-block"
     >
       <div className="prepend">
         <StyledChildrenBlock className="prepend-children">

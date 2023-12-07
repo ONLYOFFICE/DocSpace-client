@@ -35,6 +35,8 @@ export interface TextInputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   /** Called when field is focused */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
   /** Focus the input field on initial render */
   isAutoFocussed?: boolean;
   /** Indicates that the field cannot be used (e.g not authorised, or changes not saved) */

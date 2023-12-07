@@ -1,3 +1,4 @@
+import React from "react";
 import { Mask } from "react-text-mask";
 import { InputSize, InputType } from "../text-input";
 

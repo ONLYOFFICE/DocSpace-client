@@ -61,8 +61,9 @@ const ViewerInfoWatermark = () => {
         <TabContainer
           elements={dataTabs}
           onSelect={onSelect}
-          multiple
           withBodyScroll={false}
+          multiple
+          withBorder
         />
         <Text className="watermark-title" fontWeight={600} lineHeight="20px">
           {t("Position")}
@@ -75,7 +76,6 @@ const ViewerInfoWatermark = () => {
           isChecked={isChecked}
         />
       </div>
-      <div style={{ width: "100px", height: "140px" }}></div>
     </StyledWatermark>
   );
 };

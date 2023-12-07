@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 
 import TextWatermark from "./Text";
+import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
 
 const textWatermark = "text",
@@ -49,6 +50,7 @@ const Watermarks = () => {
       />
 
       {type === textWatermark && <TextWatermark />}
+      {type === viewerInfoWatermark && <ViewerInfoWatermark />}
     </StyledBody>
   );
 };

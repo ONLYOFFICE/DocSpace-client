@@ -1,4 +1,5 @@
 {
+  "Diagonal": "Diagonal",
   "ChooseRoomType": "Choose room type",
   "CollaborationRoomDescription": "Collaborate on one or multiple documents with your team",
   "CollaborationRoomTitle": "Collaboration room",
@@ -8,6 +9,7 @@
   "CustomRoomTitle": "Custom room",
   "FillingFormsRoomDescription": "Build, share and fill document templates or work with the ready presets to quickly create documents of any type.",
   "FillingFormsRoomTitle": "Filling forms room",
+  "Horizontal": "Horizontal",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
   "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing DocSpace users. After creating a room, you will not be able to change the list of users.",
@@ -15,11 +17,14 @@
   "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
   "PublicRoomDescription": "Invite users via external links to view documents without registration. You can also embed this room into any web interface.",
   "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency while filling and signing documents step-by-step. Set watermarks, automatically index and track all content, restrict downloading and copying.",
+  "ViewerInfo": "Viewer info",
+  "Position": "Position",
   "ReviewRoomDescription": "Request a review or comments on the documents",
   "ReviewRoomTitle": "Review room",
   "RoomEditing": "Room editing",
   "RootLabel": "Root",
   "TagsPlaceholder": "Add a tag",
+  "Text": "Text",
   "ThirdPartyStorageComboBoxPlaceholder": "Select storage",
   "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. A new folder for storing this room’s data will be created in the connected storage.",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
@@ -34,6 +39,6 @@
   "RestrictCopyAndDownload": "Restrict copy and download",
   "RestrictCopyAndDownloadDescription": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "AddWatermarksToDocuments": "Add watermarks to documents",
-  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
+  "AddWatermarksToDocumentsDescription": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced."
   "FilesOlderThan": "Files older than:"
 }

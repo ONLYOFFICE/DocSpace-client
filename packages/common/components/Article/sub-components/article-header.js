@@ -22,6 +22,7 @@ const ArticleHeader = ({
   isBurgerLoading,
   whiteLabelLogoUrls,
   theme,
+  withCustomArticleHeader,
   currentDeviceType,
   ...rest
 }) => {
@@ -33,11 +34,11 @@ const ArticleHeader = ({
   };
 
   const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5].path.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5].path.light);
+    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
+    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
   const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0].path.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0].path.light);
+    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
+    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
 
   if (currentDeviceType === DeviceType.mobile) return <></>;
 
@@ -69,7 +70,11 @@ const ArticleHeader = ({
 
   return (
     <StyledArticleHeader showText={showText} {...rest}>
-      {isBurgerLoading ? isLoadingComponent : mainComponent}
+      {withCustomArticleHeader && children
+        ? children
+        : isBurgerLoading
+        ? isLoadingComponent
+        : mainComponent}
     </StyledArticleHeader>
   );
 };

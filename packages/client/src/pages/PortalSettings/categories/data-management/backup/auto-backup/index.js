@@ -330,6 +330,8 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdParty,
       isCheckedDocuments,
       updateBaseFolderPath,
+
+      isManagement,
     } = this.props;
 
     try {
@@ -341,7 +343,9 @@ class AutomaticBackup extends React.PureComponent {
         selectedMaxCopiesNumber,
         period,
         time,
-        day
+        day,
+        false,
+        isManagement
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
@@ -576,7 +580,7 @@ class AutomaticBackup extends React.PureComponent {
 }
 export default inject(
   ({ auth, backup, treeFoldersStore, filesSelectorInput }) => {
-    const { language, settingsStore, currentQuotaStore } = auth;
+    const { language, settingsStore, currentQuotaStore, isManagement } = auth;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
 
@@ -667,6 +671,8 @@ export default inject(
       resetNewFolderPath,
       setStorageRegions,
       updateBaseFolderPath,
+
+      isManagement,
       automaticBackupUrl,
       currentColorScheme,
     };

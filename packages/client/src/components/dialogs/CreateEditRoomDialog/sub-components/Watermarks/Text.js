@@ -5,7 +5,8 @@ import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
-
+import WMReactSvgUrl from "PUBLIC_DIR/images/WM.react.svg?url";
+import Watermark from "@docspace/common/components/Watermarks";
 import { StyledWatermark } from "./StyledComponent";
 
 const options = (t) => [
@@ -32,7 +33,7 @@ const TextWatermark = () => {
   const onCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-
+  const isHorizontal = selectedOption.key === "horizontal";
   return (
     <StyledWatermark>
       <div>
@@ -59,9 +60,12 @@ const TextWatermark = () => {
           isChecked={isChecked}
         />
       </div>
-      <div
-        style={{ width: "100px", height: "140px", backgroundColor: "red" }}
-      ></div>
+      <Watermark
+        text={value}
+        image={WMReactSvgUrl}
+        rotate={isHorizontal ? 0 : -45}
+        isSemitransparent={isChecked}
+      />
     </StyledWatermark>
   );
 };

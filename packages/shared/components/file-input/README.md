@@ -5,7 +5,7 @@ File entry field
 ### Usage
 
 ```js
-import FileInput from "@docspace/components/file-input";
+import { FileInput } from "@docspace/shared/components";
 ```
 
 ```jsx
@@ -17,7 +17,7 @@ import FileInput from "@docspace/components/file-input";
       file,
       `name: ${file.name}`,
       `lastModified: ${file.lastModifiedDate}`,
-      `size: ${file.size}`
+      `size: ${file.size}`,
     );
   }}
 />

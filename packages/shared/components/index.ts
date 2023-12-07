@@ -34,8 +34,10 @@ import { EmailInput } from "./email-input";
 import { Heading, HeadingLevel, HeadingSize } from "./heading";
 import { InputBlock } from "./input-block";
 import { SearchInput } from "./search-input";
+import { FileInput } from "./file-input";
 
 export {
+  FileInput,
   SearchInput,
   InputBlock,
   Heading,

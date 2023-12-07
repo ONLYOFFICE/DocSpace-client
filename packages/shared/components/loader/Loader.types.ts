@@ -2,7 +2,7 @@ import { LoaderTypes } from "./Loader.enums";
 
 export interface LoaderProps {
   /** Font color */
-  color: string;
+  color?: string;
   /** Type loader */
   type?: LoaderTypes;
   /** Font size  */

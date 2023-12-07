@@ -376,6 +376,7 @@ const Members = ({
 
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
+  const publicRoomItemsLength = publicRoomItems.length;
 
   return (
     <>
@@ -389,16 +390,18 @@ const Members = ({
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={membersList.length - headersCount < membersFilter.total}
-        itemCount={membersFilter.total + headersCount + publicRoomItems.length}
+        itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
+        linksBlockLength={publicRoomItemsLength}
       >
         {publicRoomItems}
-        {membersList.map((user) => {
+        {membersList.map((user, index) => {
           return (
             <User
               t={t}
               user={user}
               key={user.id}
+              index={index + publicRoomItemsLength}
               security={security}
               membersHelper={membersHelper}
               currentMember={currentMember}

@@ -1,7 +1,9 @@
-import React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { I18nextProvider, useTranslation } from "react-i18next";
+
+import ErrorContainer from "@docspace/common/components/ErrorContainer";
+
 import i18n from "./i18n";
 
 const StyledWrapper = styled.div`
@@ -15,6 +17,10 @@ const StyledWrapper = styled.div`
 
 const AccessRestricted = () => {
   const { t, ready } = useTranslation("Errors");
+
+  useEffect(() => {
+    window.history.replaceState(null, "");
+  }, []);
 
   return ready ? (
     <StyledWrapper>

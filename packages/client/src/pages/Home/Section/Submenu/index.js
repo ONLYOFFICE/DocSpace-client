@@ -1,18 +1,21 @@
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Submenu from "@docspace/components/submenu";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getObjectByLocation } from "@docspace/common/utils";
 
 const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab, setFilter }) => {
+  const { t } = useTranslation("Files");
+
   const submenu = [
     {
       id: "my",
-      name: "My documents",
+      name: t("MyDocuments"),
     },
     {
       id: "recent",
-      name: "Recently accessible via link",
+      name: t("RecentlyAccessible"),
     },
   ];
 

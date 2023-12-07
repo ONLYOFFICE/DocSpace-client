@@ -1,25 +1,31 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import PropTypes from "prop-types";
-import Text from "../text";
-import { tablet, mobile } from "../utils/device";
-import Base from "../themes/base";
-// eslint-disable-next-line no-unused-vars
+import { tablet, mobile } from "../../utils";
+import { Base } from "../../themes";
+
+import { Text } from "../text";
+
+import { TPasswordValidation } from "./PasswordInput.types";
 
 const SimpleInput = ({
   onValidateInput,
-  onCopyToClipboard,
+  $isFullWidth,
   ...props
-}: any) => (
-  <div {...props}></div>
-);
+}: {
+  onValidateInput?: (
+    progressScore: boolean,
+    passwordValidation: TPasswordValidation,
+  ) => void;
+  $isFullWidth?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) => <div {...props} />;
 
-SimpleInput.propTypes = {
-  onValidateInput: PropTypes.func,
-  onCopyToClipboard: PropTypes.func,
-};
-
-const StyledInput = styled(SimpleInput)`
+const StyledInput = styled(SimpleInput)<{
+  $isFullWidth?: boolean;
+  isDisabled?: boolean;
+}>`
   display: ${(props) => (props.$isFullWidth ? "block" : "flex")};
   align-items: center;
   line-height: ${(props) => props.theme.passwordInput.lineHeight};
@@ -109,9 +115,8 @@ const StyledInput = styled(SimpleInput)`
 `;
 StyledInput.defaultProps = { theme: Base };
 
-const PasswordProgress = styled.div`
+const PasswordProgress = styled.div<{ inputWidth?: string }>`
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'inputWidth' does not exist on type 'Them... Remove this comment to see the full error message
     props.inputWidth ? `width: ${props.inputWidth};` : `flex: auto;`}
   .input-relative {
     position: relative;
@@ -141,7 +146,6 @@ const TooltipStyle = styled.div`
 `;
 
 const StyledTooltipContainer = styled(Text)`
-  // margin: 8px 16px 16px 16px;
   color: ${(props) => props.theme.passwordInput.tooltipTextColor} !important;
 
   .generate-btn-container {
@@ -155,8 +159,7 @@ const StyledTooltipContainer = styled(Text)`
 
 StyledTooltipContainer.defaultProps = { theme: Base };
 
-const StyledTooltipItem = styled(Text)`
-  //height: 24px;
+const StyledTooltipItem = styled(Text)<{ valid?: boolean }>`
   color: ${(props) => (props.valid ? "#44bb00" : "#B40404")};
 `;
 

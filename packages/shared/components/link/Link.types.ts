@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { LinkTarget, LinkType } from "./Link.enums";
 
 export interface LinkProps {
@@ -27,7 +28,7 @@ export interface LinkProps {
   /** Disables hover styles */
   noHover?: boolean;
   /** Sets a callback function that is triggered when the link is clicked. Only for \'action\' type of link */
-  onClick?: () => void;
+  onClick?: (e: MouseEvent) => void;
   /** Used as HTML `rel` property */
   rel?: string;
   /** Accepts css style */

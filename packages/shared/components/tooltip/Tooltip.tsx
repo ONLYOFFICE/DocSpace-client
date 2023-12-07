@@ -70,7 +70,6 @@ const Tooltip = ({
         clickable={clickable}
         afterShow={afterShow}
         afterHide={afterHide}
-        offset={rest.offset}
         openEvents={openEvents}
         positionStrategy="fixed"
         closeEvents={closeEvents}
@@ -86,6 +85,7 @@ const Tooltip = ({
           }),
           shift(),
         ]}
+        {...rest}
       >
         {children}
       </ReactTooltip>

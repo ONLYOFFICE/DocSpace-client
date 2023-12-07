@@ -8,7 +8,7 @@ const compare = (
   prevProps: Readonly<TextInputProps>,
   nextProps: Readonly<TextInputProps>,
 ) => {
-  return !equal(prevProps, nextProps);
+  return equal(prevProps, nextProps);
 };
 
 export const TextInputPure = (props: TextInputProps) => {

@@ -59,4 +59,7 @@ export interface TooltipProps {
   anchorSelect?: string;
   /** Tooltip arrow will not be shown */
   noArrow?: boolean;
+  offsetTop?: number;
+  offsetLeft?: number;
+  reference?: React.RefObject<HTMLDivElement>;
 }

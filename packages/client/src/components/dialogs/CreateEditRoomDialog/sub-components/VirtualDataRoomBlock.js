@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
 import FileLifetime from "./FileLifetime";
+import Watermarks from "../sub-components/Watermarks";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
@@ -25,6 +26,9 @@ const StyledVirtualDataRoomBlock = styled.div`
       margin-right: 28px;
 
       color: ${({ theme }) => theme.editLink.text.color};
+    }
+    .virtual-data-room-block_content {
+      margin-top: 16px;
     }
   }
 `;
@@ -123,7 +127,9 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams }) => {
         onChange={onChangeAddWatermarksToDocuments}
         isDisabled={false}
         isChecked={watermarksChecked}
-      ></Block>
+      >
+        <Watermarks />
+      </Block>
     </StyledVirtualDataRoomBlock>
   );
 };

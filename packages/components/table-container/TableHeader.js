@@ -577,11 +577,11 @@ class TableHeader extends React.Component {
                     100 +
                   "px";
 
+              const minWidth = column?.dataset?.minWidth;
+              const minSize = +minWidth || minSizeFirstColumn;
+
               //Checking whether the first column is less than the minimum width
-              if (
-                +index === 0 &&
-                this.getSubstring(newItemWidth) < minSizeFirstColumn
-              ) {
+              if (+index === 0 && this.getSubstring(newItemWidth) < minSize) {
                 overWidth =
                   overWidth +
                   (minSizeFirstColumn - this.getSubstring(newItemWidth));
@@ -676,8 +676,12 @@ class TableHeader extends React.Component {
       const fixedSize = this.fixedSizeCheck(item);
       if (fixedSize) return;
 
+      const column = document.getElementById("column_" + index);
+      const minWidth = column?.dataset?.minWidth;
+      const minSize = +minWidth || minSizeFirstColumn;
+
       if (
-        (index === 0 ? minSizeFirstColumn : defaultMinColumnSize) !==
+        (index === 0 ? minSize : defaultMinColumnSize) !==
         this.getSubstring(item)
       )
         countColumns++;
@@ -689,23 +693,23 @@ class TableHeader extends React.Component {
       const fixedSize = this.fixedSizeCheck(item);
       if (fixedSize) return;
 
+      const column = document.getElementById("column_" + index);
+      const minWidth = column?.dataset?.minWidth;
+      const minSize = +minWidth || minSizeFirstColumn;
+
       const itemSubstring = this.getSubstring(item);
 
-      if (
-        (index === 0 ? minSizeFirstColumn : defaultMinColumnSize) ===
-        itemSubstring
-      )
+      if ((index === 0 ? minSize : defaultMinColumnSize) === itemSubstring)
         return;
 
       const differenceWithMinimum =
-        itemSubstring -
-        (index === 0 ? minSizeFirstColumn : defaultMinColumnSize);
+        itemSubstring - (index === 0 ? minSize : defaultMinColumnSize);
 
       if (differenceWithMinimum >= addWidth) {
         newGridTemplateColumns[index] = itemSubstring - addWidth + "px";
       } else {
         newGridTemplateColumns[index] =
-          (index === 0 ? minSizeFirstColumn : defaultMinColumnSize) + "px";
+          (index === 0 ? minSize : defaultMinColumnSize) + "px";
       }
     });
 

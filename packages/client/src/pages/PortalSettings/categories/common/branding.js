@@ -60,6 +60,7 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
+  isManagement,
 }) => {
   const isMobileView = useIsMobileView();
 
@@ -75,7 +76,10 @@ const Branding = ({
     };
   }, []);
 
-  if (isMobileView) return <MobileView isSettingPaid={isSettingPaid} />;
+  if (isMobileView)
+    return (
+      <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement} />
+    );
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
@@ -99,7 +103,7 @@ const Branding = ({
 };
 
 export default inject(({ auth, setup, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone } = settingsStore;
@@ -108,5 +112,6 @@ export default inject(({ auth, setup, common }) => {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
+    isManagement,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

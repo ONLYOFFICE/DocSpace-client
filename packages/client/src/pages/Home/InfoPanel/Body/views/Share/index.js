@@ -98,6 +98,11 @@ const Share = (props) => {
       );
       if (item.access === ShareAccessRights.None) {
         deleteLink(link, link.sharedTo.id);
+        if (link.sharedTo.primary) {
+          toastr.success(t("GeneralAccessLinkRemove"));
+        } else {
+          toastr.success(t("AdditionalLinkRemove"));
+        }
       } else {
         updateLink(link, res);
         copy(link.sharedTo.shareLink);

@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import {
-  SharingPanel,
   UploadPanel,
   VersionHistoryPanel,
   ChangeOwnerPanel,
@@ -46,7 +45,6 @@ import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 const Panels = (props) => {
   const {
     uploadPanelVisible,
-    sharingPanelVisible,
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -114,12 +112,6 @@ const Panels = (props) => {
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
-    sharingPanelVisible && (
-      <SharingPanel
-        key="sharing-panel"
-        uploadPanelVisible={uploadPanelVisible}
-      />
-    ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
@@ -213,7 +205,6 @@ export default inject(
     pluginStore,
   }) => {
     const {
-      sharingPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
@@ -269,7 +260,6 @@ export default inject(
 
     return {
       preparationPortalDialogVisible,
-      sharingPanelVisible,
       uploadPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,

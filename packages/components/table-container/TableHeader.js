@@ -287,7 +287,11 @@ class TableHeader extends React.Component {
       ? storageSize.split(" ")
       : containerGridTemplateColumns;
 
-    if (containerGridTemplateColumns.length === 1 && !this.state.hideColumns) {
+    if (
+      containerGridTemplateColumns.length === 1 &&
+      !this.state.hideColumns &&
+      storageSize
+    ) {
       const hasContent = !!storageSize.split(" ").find((item, index) => {
         if (index === 0) return;
         return this.checkingForUnfixedSize(item, defaultSize);
@@ -575,7 +579,7 @@ class TableHeader extends React.Component {
 
               //Checking whether the first column is less than the minimum width
               if (
-                index === 0 &&
+                +index === 0 &&
                 this.getSubstring(newItemWidth) < minSizeFirstColumn
               ) {
                 overWidth =
@@ -586,7 +590,7 @@ class TableHeader extends React.Component {
 
               //Checking whether columns are smaller than the minimum width
               if (
-                index !== 0 &&
+                +index !== 0 &&
                 !defaultColumnSize &&
                 this.getSubstring(newItemWidth) < defaultMinColumnSize
               ) {

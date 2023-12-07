@@ -32,8 +32,12 @@ import { Textarea } from "./textarea";
 import { TextInput, InputSize, InputType } from "./text-input";
 import { EmailInput } from "./email-input";
 import { Heading, HeadingLevel, HeadingSize } from "./heading";
+import { InputBlock } from "./input-block";
+import { SearchInput } from "./search-input";
 
 export {
+  SearchInput,
+  InputBlock,
   Heading,
   HeadingLevel,
   HeadingSize,

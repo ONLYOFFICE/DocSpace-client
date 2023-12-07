@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
 
-const StyledSearchInput = styled.div`
+import { Base } from "../../themes";
+
+const StyledSearchInput = styled.div<{ isScale?: boolean }>`
   font-family: Open Sans;
   font-style: normal;
 
-  // @ts-expect-error TS(2339): Property 'isScale' does not exist on type 'Omit<De... Remove this comment to see the full error message
   ${({ isScale }) =>
     isScale &&
     css`

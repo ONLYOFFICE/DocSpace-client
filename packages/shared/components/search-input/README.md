@@ -5,7 +5,7 @@ SearchInput description
 ### Usage
 
 ```js
-import SearchInput from "@docspace/components/search-input";
+import { SearchInput } from "@docspace/shared/components";
 ```
 
 ```jsx

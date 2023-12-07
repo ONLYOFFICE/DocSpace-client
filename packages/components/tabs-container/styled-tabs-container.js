@@ -14,6 +14,13 @@ const NavItem = styled.div`
   position: relative;
   white-space: nowrap;
   display: flex;
+
+  ${(props) =>
+    !props.withBodyScroll &&
+    css`
+      gap: 8px;
+      flex-wrap: wrap;
+    `};
 `;
 NavItem.defaultProps = { theme: Base };
 
@@ -26,9 +33,9 @@ const Label = styled.div`
   .title_style {
     text-align: center;
     margin: ${(props) => props.theme.tabsContainer.label.title.margin};
-    overflow: ${(props) =>
-      props.theme.interfaceDirection === "rtl" ? "visible" : "hidden"};
-    ${NoUserSelect};
+    overflow: ${(props) => props.theme.tabsContainer.label.title.overflow};
+
+    ${NoUserSelect}
   }
 
   ${(props) =>
@@ -40,7 +47,7 @@ const Label = styled.div`
   ${(props) =>
     props.selected
       ? css`
-          cursor: default;
+          cursor: ${!props.multiple ? "default" : "pointer"};
           background-color: ${(props) =>
             props.theme.tabsContainer.label.backgroundColor};
           .title_style {

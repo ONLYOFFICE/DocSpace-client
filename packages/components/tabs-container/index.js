@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Text from "../text";
-import { NavItem, Label, StyledScrollbar } from "./styled-tabs-container";
+import { NavItem, StyledScrollbar } from "./styled-tabs-container";
 
 import { ColorTheme, ThemeType } from "../ColorTheme";
 
@@ -19,8 +19,11 @@ class TabContainer extends Component {
       item--;
     }
 
+    const { multiple, selectedItem } = this.props;
+    const selectedIem = multiple ? [selectedItem] : selectedItem;
+
     this.state = {
-      activeTab: this.props.selectedItem,
+      activeTab: selectedIem,
       onScrollHide: true,
     };
 
@@ -28,11 +31,37 @@ class TabContainer extends Component {
   }
 
   titleClick = (index, item, ref) => {
-    if (this.state.activeTab !== index) {
-      this.setState({ activeTab: index });
+    const { multiple, onSelect } = this.props;
+    const { activeTab } = this.state;
+
+    const setSelection = () => {
       let newItem = Object.assign({}, item);
       delete newItem.content;
-      this.props.onSelect && this.props.onSelect(newItem);
+      onSelect && onSelect(newItem);
+    };
+
+    if (multiple) {
+      const indexOperation = () => {
+        let tempArray = [...activeTab];
+
+        if (activeTab.indexOf(index) !== -1) {
+          return activeTab.filter((item) => item !== index);
+        }
+
+        tempArray.push(index);
+        return tempArray;
+      };
+
+      const updatedActiveTab = indexOperation();
+
+      this.setState({ activeTab: updatedActiveTab });
+      setSelection();
+      return;
+    }
+
+    if (activeTab !== index) {
+      this.setState({ activeTab: index });
+      setSelection();
 
       this.setTabPosition(index, ref);
     }
@@ -152,39 +181,54 @@ class TabContainer extends Component {
   render() {
     //console.log("Tabs container render");
 
-    const { isDisabled, elements } = this.props;
+    const { isDisabled, elements, withBodyScroll, multiple } = this.props;
     const { activeTab, onScrollHide } = this.state;
+
+    const content = (
+      <NavItem className="className_items" withBodyScroll={withBodyScroll}>
+        {elements.map((item, index) => {
+          const isSelected = multiple
+            ? activeTab.indexOf(index) !== -1
+            : activeTab === index;
+
+          return (
+            <ColorTheme
+              {...this.props}
+              id={item.id}
+              themeId={ThemeType.TabsContainer}
+              onMouseMove={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              ref={this.arrayRefs[index]}
+              onClick={() => this.onClick(index, item)}
+              key={item.key}
+              selected={isSelected}
+              isDisabled={isDisabled}
+              multiple={multiple}
+            >
+              <Text fontWeight={600} className="title_style" fontSize="13px">
+                {item.title}
+              </Text>
+            </ColorTheme>
+          );
+        })}
+      </NavItem>
+    );
 
     return (
       <>
-        <StyledScrollbar
-          autoHide={onScrollHide}
-          stype="preMediumBlack"
-          className="scrollbar"
-          ref={this.scrollRef}
-        >
-          <NavItem className="className_items">
-            {elements.map((item, index) => (
-              <ColorTheme
-                {...this.props}
-                id={item.id}
-                themeId={ThemeType.TabsContainer}
-                onMouseMove={this.onMouseEnter}
-                onMouseLeave={this.onMouseLeave}
-                ref={this.arrayRefs[index]}
-                onClick={() => this.onClick(index, item)}
-                key={item.key}
-                selected={activeTab === index}
-                isDisabled={isDisabled}
-              >
-                <Text fontWeight={600} className="title_style" fontSize="13px">
-                  {item.title}
-                </Text>
-              </ColorTheme>
-            ))}
-          </NavItem>
-        </StyledScrollbar>
-        <div>{elements[activeTab].content}</div>
+        {withBodyScroll ? (
+          <StyledScrollbar
+            autoHide={onScrollHide}
+            stype="preMediumBlack"
+            className="scrollbar"
+            ref={this.scrollRef}
+          >
+            {content}
+          </StyledScrollbar>
+        ) : (
+          content
+        )}
+        <div>{elements[activeTab]?.content}</div>
       </>
     );
   }
@@ -199,10 +243,16 @@ TabContainer.propTypes = {
   onSelect: PropTypes.func,
   /** Selected title of tabs container */
   selectedItem: PropTypes.number,
+  /** Enables Body scroll */
+  withBodyScroll: PropTypes.bool,
+  /** Enables multiple select  */
+  multiple: PropTypes.bool,
 };
 
 TabContainer.defaultProps = {
   selectedItem: 0,
+  withBodyScroll: true,
+  multiple: false,
 };
 
 export default TabContainer;

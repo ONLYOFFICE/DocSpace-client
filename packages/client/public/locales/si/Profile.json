@@ -1,4 +1,9 @@
 {
+  "ActiveSessions": "සක්‍රිය වාර",
+  "ChangeEmailSuccess": "වි-තැපෑල සාර්ථකව වෙනස් කර ඇත",
+  "ChangePasswordAfterLoggingOut": "නික්මීමෙන් පසු මුරපදය වෙනස් කරන්න",
+  "ConnectSocialNetworks": "ඔබගේ සමාජ ජාල සබඳින්න",
+  "DarkTheme": "අඳුරු තේමාව",
   "DescriptionForSecurity": "වඩාත් හොඳ ආරක්‍ෂාකවකට, ඔබගේ මුරපදය වෙනස් කළ යුතුය.",
   "EditPhoto": "රූපය සංස්කරණය",
   "EmailNotVerified": "වි-තැපෑල සත්‍යාපනය කර නැත",

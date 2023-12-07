@@ -1,1 +1,18 @@
-{}
+{
+  "AddGroupsForSharingButton": "සමූහ යොදන්න",
+  "AddShareMessage": "පණිවිඩයක් යොදන්න",
+  "Comment": "අදහස",
+  "CopyExternalLink": "බාහිර සබැඳියේ පිටපතක්",
+  "CustomFilter": "අභිරුචි පෙරහන",
+  "DenyAccess": "ප්‍රවේශය ඉවතලන්න",
+  "EncryptedFileSharing": "<strong>{{title}}</strong> ගොනුව සාර්ථකව බෙදා ගැනිණි",
+  "ExternalLink": "බාහිර සබැඳිය",
+  "FormFilling": "ආකෘතිපත්‍ර පිරවීම",
+  "InternalLink": "අභ්‍යන්තර සබැඳිය",
+  "Notify users": "පුද්ගලයින්ට දන්වන්න",
+  "ReadOnly": "කියවීමට පමණි",
+  "ShareEmailBody": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත. දැන් ලේඛනය ඇරීමට පහත සබැඳිය ඔබන්න: {{shareLink}}.",
+  "ShareEmailSubject": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත",
+  "ShareVia": "මෙමගින් බෙදාගන්න",
+  "SharingSettingsTitle": "බෙදාගැනීමේ සැකසුම්"
+}

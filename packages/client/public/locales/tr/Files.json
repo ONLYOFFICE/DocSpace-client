@@ -119,6 +119,7 @@
   "Pin": "Sabitle",
   "PinToTop": "En üste sabitle",
   "Presentation": "Sunum",
+  "PreventDownloadFilesAndFolders": "Bu odadan bir bağlantı yoluyla paylaşılan dosya ve klasörlerin indirilmesini devre dışı bırakmak için bu ayarı etkinleştirin",
   "PrivateRoomDescriptionEncrypted": "Şifreli düzenleme ve gerçek zamanlı işbirliği.",
   "PrivateRoomDescriptionSafest": "docx, xlsx ve pptx için en güvenli depolama.",
   "PrivateRoomDescriptionSecure": "Güvenilen ekip arkadaşlarıyla güvenli paylaşım.",

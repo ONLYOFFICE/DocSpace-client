@@ -9,7 +9,7 @@ on:
     paths-ignore:
       - '**/README.md'
       - '**/LICENSE'
-      #- '.github/**'
+      - '.github/**'
   pull_request:
     # The branches below must be a subset of the branches above
     branches: 
@@ -19,7 +19,7 @@ on:
     paths-ignore:
       - '**/README.md'
       - '**/LICENSE'
-      #- '.github/**'
+      - '.github/**'
   schedule:
     - cron: '45 3 * * 5'
 

@@ -5,7 +5,7 @@ InputBlock description
 ### Usage
 
 ```js
-import InputBlock from "@docspace/components/input-block";
+import { InputBlock } from "@docspace/shared/components";
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 ```
 

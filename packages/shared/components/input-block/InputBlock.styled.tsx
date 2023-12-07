@@ -1,14 +1,15 @@
 import styled, { css } from "styled-components";
-import React from "react";
 
-import commonInputStyle from "../text-input/common-input-styles";
-import Base from "../themes/base";
+import { commonInputStyles } from "../../utils";
+import { Base } from "../../themes";
 
-const StyledIconBlock = styled.div`
+const StyledIconBlock = styled.div<{
+  isDisabled?: boolean;
+  isClickable?: boolean;
+}>`
   display: ${(props) => props.theme.inputBlock.display};
   align-items: ${(props) => props.theme.inputBlock.alignItems};
   cursor: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     props.isDisabled || !props.isClickable ? "default" : "pointer"};
 
   height: ${(props) => props.theme.inputBlock.height};
@@ -17,8 +18,8 @@ const StyledIconBlock = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      padding-left: ${(props) => props.theme.inputBlock.paddingRight};
-      padding-right: ${(props) => props.theme.inputBlock.paddingLeft};
+      padding-left: ${props.theme.inputBlock.paddingRight};
+      padding-right: ${props.theme.inputBlock.paddingLeft};
     `}
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
@@ -31,7 +32,6 @@ const StyledChildrenBlock = styled.div`
 `;
 StyledChildrenBlock.defaultProps = { theme: Base };
 
-/* eslint-disable react/prop-types, no-unused-vars */
 const CustomInputGroup = ({
   isIconFill,
   hasError,
@@ -40,8 +40,18 @@ const CustomInputGroup = ({
   scale,
   hoverColor,
   ...props
-}: any) => <div {...props}></div>;
-/* eslint-enable react/prop-types, no-unused-vars */
+}: {
+  hasError?: boolean;
+  hasWarning?: boolean;
+  isIconFill?: boolean;
+  isDisabled?: boolean;
+  scale?: boolean;
+  hoverColor?: string;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) => <div {...props} />;
+
 const StyledInputGroup = styled(CustomInputGroup)`
   display: ${(props) => props.theme.inputBlock.display};
 
@@ -65,7 +75,7 @@ const StyledInputGroup = styled(CustomInputGroup)`
     margin: ${(props) => props.theme.inputBlock.margin};
   }
 
-  ${commonInputStyle}
+  ${commonInputStyles}
 
   :focus-within {
     border-color: ${(props) =>

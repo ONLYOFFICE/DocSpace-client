@@ -18,8 +18,7 @@ const SectionWrapper = styled.div`
   }
 
   border-radius: 6px;
-  background: ${(props) =>
-    props.theme.client.settings.migration.importSectionBackground};
+  background: ${(props) => props.theme.client.settings.migration.importSectionBackground};
 
   .toggleButton {
     position: relative;
@@ -48,8 +47,7 @@ const ImportItemWrapper = styled.div`
   padding-top: 8px;
 
   .workspace-title {
-    color: ${(props) =>
-      props.theme.client.settings.migration.importSectionTextColor};
+    color: ${(props) => props.theme.client.settings.migration.importSectionTextColor};
   }
 
   .importSection {
@@ -95,8 +93,7 @@ const ArrowWrapper = styled.div`
   .arrow-icon {
     svg {
       path {
-        fill: ${(props) =>
-          props.theme.client.settings.migration.importSectionTextColor};
+        fill: ${(props) => props.theme.client.settings.migration.importSectionTextColor};
       }
     }
   }
@@ -105,12 +102,7 @@ const ArrowWrapper = styled.div`
 const ImportItem = ({ sectionName, SectionIcon, workspace, isChecked }) => {
   return (
     <ImportItemWrapper isChecked={isChecked}>
-      <Text
-        className="workspace-title"
-        fontSize="11px"
-        fontWeight={600}
-        lineHeight="12px"
-      >
+      <Text className="workspace-title" fontSize="11px" fontWeight={600} lineHeight="12px">
         {workspace}
       </Text>
       <div className="importSection">
@@ -134,7 +126,7 @@ const ImportSection = ({
     <SectionWrapper isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
-        onChange={onChange}
+        onChange={onChange || function () {}}
         className="toggleButton"
         isDisabled={isDisabled}
       />

@@ -45,8 +45,7 @@ const WorkspaceWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.stepDescriptionColor};
+    color: ${(props) => props.theme.client.settings.migration.stepDescriptionColor};
 
     @media ${tablet} {
       max-width: 675px;
@@ -106,9 +105,7 @@ const OnlyofficeWorkspace = ({ t }) => {
 
   return (
     <WorkspaceWrapper>
-      <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
-      </Text>
+      <Text className="workspace-subtitle">{t("Settings:AboutDataImport")}</Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
           <Text className="step-counter">
@@ -117,7 +114,7 @@ const OnlyofficeWorkspace = ({ t }) => {
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getWorkspaceStepDescription(t, currentStep, renderTooltip)}
+          {getWorkspaceStepDescription(t, currentStep, renderTooltip, Trans)}
         </Box>
         <StepContent
           t={t}

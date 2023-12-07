@@ -23,13 +23,13 @@ const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .table-group-menu {
-    height: 60px;
-    position: relative;
+    height: 69px;
+    position: absolute;
     z-index: 201;
-    left: -20px;
-    top: 30px;
+    left: -16px;
     width: 100%;
-    margin-top: -25px;
+
+    margin-top: -37.5px;
 
     .table-container_group-menu {
       padding: 0px 20px;

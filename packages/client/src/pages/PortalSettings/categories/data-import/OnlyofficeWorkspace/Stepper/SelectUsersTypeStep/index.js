@@ -17,9 +17,7 @@ const SelectUsersTypeStep = ({
   setSearchValue,
 }) => {
   const [boundaries, setBoundaries] = useState([0, 25]);
-  const [dataPortion, setDataPortion] = useState(
-    users.result.slice(...boundaries)
-  );
+  const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
@@ -37,7 +35,7 @@ const SelectUsersTypeStep = ({
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   useEffect(() => {
@@ -54,19 +52,18 @@ const SelectUsersTypeStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
+        saveButtonDisabled={checkedUsers.result.length === 0}
       />
 
-      {!checkedUsers.result.length > 0 && (
-        <SearchInput
-          id="search-users-type-input"
-          placeholder={t("Common:Search")}
-          style={{ marginTop: "20px" }}
-          value={searchValue}
-          onChange={onChangeInput}
-          refreshTimeout={100}
-          onClearSearch={onClearSearchInput}
-        />
-      )}
+      <SearchInput
+        id="search-users-type-input"
+        placeholder={t("Common:Search")}
+        style={{ marginTop: "20px" }}
+        value={searchValue}
+        onChange={onChangeInput}
+        refreshTimeout={100}
+        onClearSearch={onClearSearchInput}
+      />
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
@@ -87,6 +84,7 @@ const SelectUsersTypeStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
+          saveButtonDisabled={checkedUsers.result.length === 0}
         />
       )}
     </>
@@ -94,8 +92,7 @@ const SelectUsersTypeStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, checkedUsers, searchValue, setSearchValue } =
-    importAccountsStore;
+  const { users, checkedUsers, searchValue, setSearchValue } = importAccountsStore;
 
   return {
     users,

@@ -23,22 +23,19 @@ const StyledTableContainer = styled(TableContainer)`
 
   .table-group-menu {
     height: 69px;
-    position: relative;
+    position: absolute;
     z-index: 201;
-    left: -20px;
-    top: 30px;
+    left: 0px;
     width: 100%;
-    margin-top: -25px;
+
+    margin-top: -32.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      background-color: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBackground};
-      border-bottom: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBorder};
-      box-shadow: ${(props) =>
-        props.theme.client.settings.migration.groupMenuBoxShadow};
+      border-bottom: ${(props) => props.theme.client.settings.migration.workspaceBorder};
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      padding: 0px 28px;
     }
 
     .table-container_group-menu-checkbox {
@@ -50,22 +47,49 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
 
-  .header-container-text {
-    font-size: 12px;
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-  }
-
   .table-container_header {
     position: absolute;
+    padding: 0px 28px;
+  }
+
+  .header-container-text {
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  }
+
+  .checkboxWrapper {
+    padding: 0;
+    padding-inline-start: 8px;
   }
 
   .table-list-item {
-    margin-top: -1px;
+    cursor: pointer;
+
+    padding-left: 20px;
+
     &:hover {
-      cursor: pointer;
-      background: ${(props) =>
-        props.theme.client.settings.migration.tableRowHoverColor};
+      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+
+      .table-container_cell {
+        margin-top: -1px;
+        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+        margin-left: -24px;
+        padding-left: 24px;
+      }
+
+      .checkboxWrapper {
+        padding-left: 32px;
+      }
+
+      .table-container_row-context-menu-wrapper {
+        margin-right: -20px;
+        padding-right: 20px;
+      }
     }
+  }
+
+  .table-list-item:has(.selected-table-row) {
+    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
   }
 
   .clear-icon {
@@ -108,8 +132,7 @@ const TableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   const isIndeterminate =
-    checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
 
   const isChecked = checkedUsers.result.length === users.result.length;
 
@@ -177,8 +200,7 @@ const TableView = ({
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
-          >
+            fetchMoreFiles={() => {}}>
             {accountsData.map((data) => (
               <UsersTypeTableRow
                 key={data.key}
@@ -209,12 +231,7 @@ const TableView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link
-                type="action"
-                isHovered={true}
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
+              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

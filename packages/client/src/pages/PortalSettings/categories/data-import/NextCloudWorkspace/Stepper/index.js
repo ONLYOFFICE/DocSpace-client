@@ -52,7 +52,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
             manage the roles after the import.
           </Trans>
           <HelpButton
-            place="right"
+            place="bottom"
             offsetRight={0}
             tooltipContent={
               <Text>

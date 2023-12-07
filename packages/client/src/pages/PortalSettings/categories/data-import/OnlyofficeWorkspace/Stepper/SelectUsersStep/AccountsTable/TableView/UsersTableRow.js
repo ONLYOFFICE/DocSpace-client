@@ -20,38 +20,28 @@ const StyledTableRow = styled(TableRow)`
     margin-right: 5px;
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .not-existing {
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-existing {
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.existingTextColor};
+    color: ${(props) => props.theme.client.settings.migration.existingTextColor};
   }
 `;
 
 const NOT_EXIST = "—";
 
-const UsersTableRow = ({
-  t,
-  displayName,
-  email,
-  isDuplicate,
-  isChecked,
-  toggleAccount,
-}) => {
+const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
-      <TableCell>
+      <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={toggleAccount} />
         <Text className="username">{displayName}</Text>
       </TableCell>

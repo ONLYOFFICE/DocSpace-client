@@ -655,26 +655,18 @@ class TableHeader extends React.Component {
     }
   };
 
-  fixedSizeCheck = (item) => {
-    let defaultColumnSize = "75px";
-
-    return (
-      item === `${settingsSize}px` ||
-      item === defaultColumnSize ||
-      item === "0px"
-    );
-  };
-
   distributionOverWidth = (overWidth, gridTemplateColumns) => {
     const newGridTemplateColumns = JSON.parse(
       JSON.stringify(gridTemplateColumns)
     );
 
     let countColumns = 0;
+    const defaultColumnSize =
+      this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
 
     newGridTemplateColumns.forEach((item, index) => {
-      const fixedSize = this.fixedSizeCheck(item);
-      if (fixedSize) return;
+      const unfixedSize = this.checkingForUnfixedSize(item, defaultColumnSize);
+      if (!unfixedSize) return;
 
       const column = document.getElementById("column_" + index);
       const minWidth = column?.dataset?.minWidth;
@@ -690,8 +682,8 @@ class TableHeader extends React.Component {
     const addWidth = overWidth / countColumns;
 
     newGridTemplateColumns.forEach((item, index) => {
-      const fixedSize = this.fixedSizeCheck(item);
-      if (fixedSize) return;
+      const unfixedSize = this.checkingForUnfixedSize(item, defaultColumnSize);
+      if (!unfixedSize) return;
 
       const column = document.getElementById("column_" + index);
       const minWidth = column?.dataset?.minWidth;

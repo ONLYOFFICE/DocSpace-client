@@ -21,6 +21,7 @@ export default function withCultureNames(WrappedComponent) {
           key: culture,
           label: t(`Culture_${culture}`),
           icon: flagsIcons?.get(`${culture}.react.svg`),
+          isBeta: culture === "ar-SA",
         };
       });
     };

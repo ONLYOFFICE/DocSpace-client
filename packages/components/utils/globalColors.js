@@ -6,6 +6,7 @@ const globalColors = {
   grayLight: "#F8F9F9",
   grayMaxLight: "#eeeeee",
   grayLightMid: "#ECEEF1",
+  darkDividersColor: "#242424",
   graySilver: "#D8D8D8",
   grayMid: "#D0D5DA",
   gray: "#A3A9AE",

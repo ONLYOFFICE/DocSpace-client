@@ -27,6 +27,11 @@ NavItem.defaultProps = { theme: Base };
 const Label = styled.div`
   height: ${(props) => props.theme.tabsContainer.label.height};
   border-radius: ${(props) => props.theme.tabsContainer.label.borderRadius};
+  ${(props) =>
+    props.withBorder &&
+    css`
+      border: ${props.theme.tabsContainer.label.border};
+    `}
   min-width: ${(props) => props.theme.tabsContainer.label.minWidth};
   width: ${(props) => props.theme.tabsContainer.label.width};
 

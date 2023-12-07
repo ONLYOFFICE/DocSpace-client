@@ -181,7 +181,8 @@ class TabContainer extends Component {
   render() {
     //console.log("Tabs container render");
 
-    const { isDisabled, elements, withBodyScroll, multiple } = this.props;
+    const { isDisabled, elements, withBodyScroll, multiple, withBorder } =
+      this.props;
     const { activeTab, onScrollHide } = this.state;
 
     const content = (
@@ -204,6 +205,7 @@ class TabContainer extends Component {
               selected={isSelected}
               isDisabled={isDisabled}
               multiple={multiple}
+              withBorder={withBorder}
             >
               <Text fontWeight={600} className="title_style" fontSize="13px">
                 {item.title}
@@ -247,12 +249,15 @@ TabContainer.propTypes = {
   withBodyScroll: PropTypes.bool,
   /** Enables multiple select  */
   multiple: PropTypes.bool,
+  /** Indicates that component contain border */
+  withBorder: PropTypes.bool,
 };
 
 TabContainer.defaultProps = {
   selectedItem: 0,
   withBodyScroll: true,
   multiple: false,
+  withBorder: false,
 };
 
 export default TabContainer;

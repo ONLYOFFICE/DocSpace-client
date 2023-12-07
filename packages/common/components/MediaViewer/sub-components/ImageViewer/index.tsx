@@ -1,5 +1,5 @@
 import { useGesture } from "@use-gesture/react";
-import { isMobile, isDesktop } from "react-device-detect";
+import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import { useSpring, config } from "@react-spring/web";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 
@@ -55,6 +55,7 @@ function ImageViewer({
   isTiff,
   contextModel,
   errorTitle,
+  devices,
 }: ImageViewerProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -83,6 +84,8 @@ function ImageViewer({
     rotate: 0,
     opacity: 1,
   }));
+
+  const { isMobile, isDesktop } = devices;
 
   useEffect(() => {
     unmountRef.current = false;
@@ -846,10 +849,15 @@ function ImageViewer({
       },
 
       onClick: ({ pinching, event }) => {
-        if (isDesktop && event.target === imgWrapperRef.current)
+        if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
           return onMask();
 
-        if (!imgRef.current || !containerRef.current || pinching || isDesktop)
+        if (
+          !imgRef.current ||
+          !containerRef.current ||
+          pinching ||
+          isDesktopDeviceDetect
+        )
           return;
 
         const time = new Date().getTime();
@@ -1030,7 +1038,7 @@ function ImageViewer({
         </ImageWrapper>
       </ImageViewerContainer>
 
-      {isDesktop && panelVisible && !isError && (
+      {isDesktop && !isMobile && panelVisible && !isError && (
         <ImageViewerToolbar
           ref={toolbarRef}
           toolbar={toolbar}

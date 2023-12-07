@@ -17,6 +17,12 @@ export type NumberOrString = number | string;
 
 export type NullOrUndefined = null | undefined;
 
+export type DevicesType = {
+  isMobile: boolean;
+  isMobileOnly: boolean;
+  isDesktop: boolean;
+};
+
 export type PlaylistType = {
   id: number;
   canShare: boolean;

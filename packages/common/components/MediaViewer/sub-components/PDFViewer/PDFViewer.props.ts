@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { getPDFToolbar } from "./../../helpers/getCustomToolbar";
+import type { DevicesType } from "../../types";
 interface PDFViewerProps {
   src: string;
   title: string;
@@ -9,6 +10,7 @@ interface PDFViewerProps {
 
   isLastImage: boolean;
   isFistImage: boolean;
+  devices: DevicesType;
 
   onMask: VoidFunction;
   generateContextMenu: (

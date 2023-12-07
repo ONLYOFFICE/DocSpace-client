@@ -8,6 +8,7 @@ import Aside from "@docspace/components/aside";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 import NoUserSelect from "@docspace/components/utils/commonStyles";
+import Scrollbar from "@docspace/components/scrollbar";
 
 import Share from "SRC_DIR/pages/Home/InfoPanel/Body/views/Share";
 import store from "client/store";
@@ -67,12 +68,14 @@ const SharingDialog = ({
       />
       <Aside visible={isVisible} onClose={onCancel} withoutBodyScroll>
         <StyledWrapper>
-          <div className="share-file_header">
-            <Text className="share-file_heading">{t("Files:Share")}</Text>
-          </div>
-          <div className="share-file_body">
-            <Share selection={sharingObject} />
-          </div>
+          <Scrollbar stype="mediumBlack">
+            <div className="share-file_header">
+              <Text className="share-file_heading">{t("Files:Share")}</Text>
+            </div>
+            <div className="share-file_body">
+              <Share selection={sharingObject} />
+            </div>
+          </Scrollbar>
           <div className="share-file_footer">
             <Button
               size="normal"

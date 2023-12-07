@@ -5,7 +5,7 @@ Input field for auth code.
 ### Usage
 
 ```js
-import CodeInput from "@docspace/components/code-input";
+import { CodeInput } from "@docspace/shared/components";
 ```
 
 ```jsx

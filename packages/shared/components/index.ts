@@ -35,8 +35,10 @@ import { Heading, HeadingLevel, HeadingSize } from "./heading";
 import { InputBlock } from "./input-block";
 import { SearchInput } from "./search-input";
 import { FileInput } from "./file-input";
+import { CodeInput } from "./code-input";
 
 export {
+  CodeInput,
   FileInput,
   SearchInput,
   InputBlock,

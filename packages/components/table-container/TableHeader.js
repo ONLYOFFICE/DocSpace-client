@@ -850,7 +850,7 @@ class TableHeader extends React.Component {
               >
                 <TableSettings
                   columns={columns}
-                  infoPanelVisible={infoPanelVisible}
+                  disableSettings={infoPanelVisible || this.state.hideColumns}
                 />
               </div>
             )}

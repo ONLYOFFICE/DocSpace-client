@@ -46,7 +46,6 @@ const OAuthBlock = ({
           onAdd={changeValue}
           currentValue={allowedOriginsValue}
           helpButtonText={t("AllowedOriginsHelpButton")}
-          isDisabled={isEdit}
         />
       </StyledInputBlock>
     </StyledBlock>

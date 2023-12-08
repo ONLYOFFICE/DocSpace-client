@@ -153,7 +153,7 @@ const BasicBlock = ({
           name={"website_url"}
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
-          error={`${t("ErrorWrongURL")}`}
+          error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
           onChange={onChange}
           disabled={isEdit}
           isRequired

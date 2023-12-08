@@ -156,10 +156,16 @@ const ClientForm = ({
           website_url: fetchedClient?.websiteUrl || client?.websiteUrl || "",
           description: fetchedClient?.description || client?.description || "",
 
-          redirect_uris:
-            fetchedClient?.redirectUris || client?.redirectUris || [],
-          allowed_origins:
-            fetchedClient?.allowedOrigins || client?.allowedOrigins || [],
+          redirect_uris: fetchedClient?.redirectUris
+            ? [...fetchedClient?.redirectUris]
+            : client?.redirectUris
+            ? [...client?.redirectUris]
+            : [],
+          allowed_origins: fetchedClient?.allowedOrigins
+            ? [...fetchedClient.allowedOrigins]
+            : client?.allowedOrigins
+            ? [...client.allowedOrigins]
+            : [],
           logout_redirect_uri:
             fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
@@ -173,7 +179,11 @@ const ClientForm = ({
             client?.authenticationMethods.includes(AuthenticationMethod.none) ||
             false,
 
-          scopes: fetchedClient?.scopes || client?.scopes || [],
+          scopes: fetchedClient?.scopes
+            ? [...fetchedClient.scopes]
+            : client?.scopes
+            ? [...client.scopes]
+            : [],
         });
 
         setClientId(fetchedClient?.clientId || client?.clientId || "");
@@ -257,13 +267,21 @@ const ClientForm = ({
         }
       }
 
+      console.log(
+        isValid,
+        form?.allowed_origins?.length,
+        initialClient?.allowedOrigins?.length
+      );
+
       return (
         isValid &&
         form.name &&
         form.logo &&
+        form.allowed_origins.length > 0 &&
         (form.name !== initialClient.name ||
           form.logo !== initialClient.logo ||
           form.description !== initialClient.description ||
+          form.allowed_origins.length !== initialClient.allowedOrigins.length ||
           form.allow_pkce !==
             initialClient.authenticationMethods.includes(
               AuthenticationMethod.none

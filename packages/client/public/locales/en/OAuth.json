@@ -20,7 +20,7 @@
   "EditApp": "Edit application",
   "EnterDescription": "Enter description",
   "ErrorName": "Minimal name length:",
-  "ErrorWrongURL": "Wrong URL",
+  "ErrorWrongURL": "URL not valid, example",
   "EnterURL": "Enter URL",
   "IconDescription": "JPG, PNG or SVG, 32x32",
   "ID": "ID",

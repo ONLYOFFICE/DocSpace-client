@@ -74,7 +74,7 @@ const MultiInputGroup = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        error={t("ErrorWrongURL")}
+        error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
         isRequired
         isError={isError}
       >

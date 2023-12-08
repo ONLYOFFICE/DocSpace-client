@@ -54,6 +54,12 @@ export interface OAuthStoreProps {
   previewDialogVisible: boolean;
   setPreviewDialogVisible: (value: boolean) => void;
 
+  disableDialogVisible: boolean;
+  setDisableDialogVisible: (value: boolean) => void;
+
+  resetDialogVisible: boolean;
+  setResetDialogVisible: (value: boolean) => void;
+
   clientsIsLoading: boolean;
   setClientsIsLoading: (value: boolean) => void;
 
@@ -126,6 +132,7 @@ class OAuthStore implements OAuthStoreProps {
 
   infoDialogVisible: boolean = false;
   previewDialogVisible: boolean = false;
+  disableDialogVisible: boolean = false;
 
   selection: string[] = [];
 
@@ -168,6 +175,10 @@ class OAuthStore implements OAuthStoreProps {
 
   setPreviewDialogVisible = (value: boolean) => {
     this.previewDialogVisible = value;
+  };
+
+  setDisableDialogVisible = (value: boolean) => {
+    this.disableDialogVisible = value;
   };
 
   setSelection = (clientId: string) => {
@@ -448,6 +459,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setBufferSelection(clientId);
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(true);
+      this.setDisableDialogVisible(false);
     };
 
     const onRevoke = () => {
@@ -455,6 +467,15 @@ class OAuthStore implements OAuthStoreProps {
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(false);
       this.setRevokeDialogVisible(true);
+      this.setDisableDialogVisible(false);
+    };
+
+    const onDisable = () => {
+      this.setBufferSelection(clientId);
+      this.setPreviewDialogVisible(false);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(true);
     };
 
     const openOption = {
@@ -576,7 +597,7 @@ class OAuthStore implements OAuthStoreProps {
       key: "disable",
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
-      onClick: () => onEnable(false),
+      onClick: onDisable,
     };
 
     const contextOptions = [

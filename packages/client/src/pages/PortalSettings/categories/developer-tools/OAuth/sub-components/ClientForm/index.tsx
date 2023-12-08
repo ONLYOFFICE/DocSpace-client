@@ -267,12 +267,6 @@ const ClientForm = ({
         }
       }
 
-      console.log(
-        isValid,
-        form?.allowed_origins?.length,
-        initialClient?.allowedOrigins?.length
-      );
-
       return (
         isValid &&
         form.name &&

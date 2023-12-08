@@ -1,5 +1,9 @@
 import React from "react";
 import { Trans } from "react-i18next";
+import copy from "copy-to-clipboard";
+
+//@ts-ignore
+import toastr from "@docspace/components/toast/toastr";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -32,6 +36,16 @@ const ClientBlock = ({
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
+  const onCopyClick = (name: string) => {
+    if (name === "id") {
+      copy(value[name]);
+      toastr.success(t("ClientCopy"));
+    } else {
+      copy(value[name]);
+      toastr.success(t("SecretCopy"));
+    }
+  };
+
   const helpButtonText = <Trans t={t} i18nKey="ClientHelpButton" ns="OAuth" />;
 
   return (
@@ -46,6 +60,7 @@ const ClientBlock = ({
           error={""}
           onChange={onChange}
           withCopy
+          onCopyClick={() => onCopyClick("id")}
         />
         <InputGroup
           label={t("Secret")}
@@ -58,6 +73,7 @@ const ClientBlock = ({
           isPassword
           buttonLabel={t("Reset")}
           onButtonClick={onResetClick}
+          onCopyClick={() => onCopyClick("secret")}
         />
       </StyledInputBlock>
     </StyledBlock>

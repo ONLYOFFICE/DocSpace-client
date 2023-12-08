@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment";
 
-import { getDaysLeft, getDaysRemaining } from "@docspace/common/utils";
+import { getDaysLeft, getDaysRemaining } from "../utils";
 
 import api from "../api";
 import { TariffState } from "../constants";

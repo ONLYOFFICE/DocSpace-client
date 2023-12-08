@@ -24,7 +24,7 @@ import {
   size as deviceSize,
   isTablet,
 } from "@docspace/components/utils/device";
-import { wrongPortalNameUrl } from "@docspace/common/constants";
+import { wrongPortalNameUrl } from "../constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
@@ -938,6 +938,7 @@ class SettingsStore {
   };
 
   get isFrame() {
+    console.log("get isFrame:", this.frameConfig?.name === window.name);
     return this.frameConfig?.name === window.name;
   }
 

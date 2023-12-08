@@ -235,7 +235,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("Files:CopyGeneralLink")}
+              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
             />
           </>
         )}

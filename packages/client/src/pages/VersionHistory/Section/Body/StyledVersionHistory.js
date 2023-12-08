@@ -13,6 +13,8 @@ const StyledBody = styled.div`
   }
 
   .loader-history-rows {
+    padding-top: 12px;
+
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `padding-left: 16px;`

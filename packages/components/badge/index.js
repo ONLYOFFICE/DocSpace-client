@@ -72,7 +72,7 @@ Badge.propTypes = {
   /** CSS font-size */
   fontSize: PropTypes.string,
   /** CSS font-weight */
-  fontWeight: PropTypes.number,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** CSS border-radius */
   borderRadius: PropTypes.string,
   /** CSS padding */

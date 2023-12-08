@@ -18,6 +18,7 @@ import InfoDialog from "./sub-components/InfoDialog";
 import PreviewDialog from "./sub-components/PreviewDialog";
 import OAuthLoader from "./sub-components/List/Loader";
 import DisableDialog from "./sub-components/DisableDialog";
+import DeleteDialog from "./sub-components/DeleteDialog";
 
 const MIN_LOADER_TIME = 500;
 
@@ -34,6 +35,7 @@ const OAuth = ({
   isInit,
   setIsInit,
   disableDialogVisible,
+  deleteDialogVisible,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -101,6 +103,7 @@ const OAuth = ({
       {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
       {disableDialogVisible && <DisableDialog />}
       {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}
+      {deleteDialogVisible && <DeleteDialog />}
     </OAuthContainer>
   );
 };
@@ -120,6 +123,7 @@ export default inject(
       isInit,
       setIsInit,
       disableDialogVisible,
+      deleteDialogVisible,
     } = oauthStore;
     return {
       viewAs,
@@ -134,6 +138,7 @@ export default inject(
       isInit,
       setIsInit,
       disableDialogVisible,
+      deleteDialogVisible,
     };
   }
 )(observer(OAuth));

@@ -9,6 +9,8 @@ import {
 } from "@docspace/common/utils/oauth/interfaces";
 import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
 
+import ResetDialog from "../ResetDialog";
+
 import BasicBlock from "./components/BasicBlock";
 import ClientBlock from "./components/ClientBlock";
 import SupportBlock from "./components/SupportBlock";
@@ -20,7 +22,6 @@ import { StyledContainer } from "./ClientForm.styled";
 
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import ClientFormLoader from "./Loader";
-import ResetDialog from "../ResetDialog";
 
 export function isValidUrl(url: string) {
   try {

@@ -484,6 +484,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(true);
       this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
     };
 
     const onRevoke = () => {
@@ -492,6 +493,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setInfoDialogVisible(false);
       this.setRevokeDialogVisible(true);
       this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
     };
 
     const onDisable = () => {
@@ -500,6 +502,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setInfoDialogVisible(false);
       this.setRevokeDialogVisible(false);
       this.setDisableDialogVisible(true);
+      this.setDeleteDialogVisible(false);
     };
 
     const openOption = {
@@ -548,25 +551,29 @@ class OAuthStore implements OAuthStoreProps {
     }
 
     const onDelete = () => {
-      this.setInfoDialogVisible(false);
+      this.setBufferSelection(clientId);
       this.setPreviewDialogVisible(false);
-
-      if (!isGroupContext) {
-        this.deleteClient([clientId]);
-      } else {
-        this.deleteClient(this.selection);
-      }
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(true);
     };
 
     const onShowPreview = () => {
       this.setBufferSelection(clientId);
-      this.setInfoDialogVisible(false);
       this.setPreviewDialogVisible(true);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
     };
 
     const onEnable = async (status: boolean) => {
-      this.setInfoDialogVisible(false);
       this.setPreviewDialogVisible(false);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
 
       if (isGroupContext) {
         try {

@@ -17,6 +17,8 @@
   "Creator": "Creator",
   "ClientHelpButton": "Credentials for using OAth 2.0 as your Authentication type.<br/> <strong>Note</strong>: Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI.",
   "CodeVerifier": "Code verifier",
+  "DeleteHeader": "Delete application",
+  "DeleteDescription": "If you delete this application, all active consents and authorization will be revoked. If the user tries to open the consent screen for this app, an error will be thrown in the document space and the user will be redirected to the specified redirect URL.",
   "DisableApplication": "Disable application",
   "DisableApplicationDescription": "If you disable this application, all active consents and authorization will be disabled. If necessary, you can later enable the disabled application.",
   "EditApp": "Edit application",

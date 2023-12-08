@@ -12,13 +12,13 @@ import toastr from "@docspace/components/toast/toastr";
 // @ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
-interface DisableClientDialog {
+interface DisableClientDialogProps {
   isVisible?: boolean;
   onClose?: () => void;
   onDisable?: () => Promise<void>;
 }
 
-const DisableClientDialog = (props: DisableClientDialog) => {
+const DisableClientDialog = (props: DisableClientDialogProps) => {
   const { t, ready } = useTranslation(["OAuth", "Common"]);
   const { isVisible, onClose, onDisable } = props;
 

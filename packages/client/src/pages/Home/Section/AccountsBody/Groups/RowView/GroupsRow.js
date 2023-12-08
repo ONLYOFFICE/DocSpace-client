@@ -1,34 +1,36 @@
-import React from "react";
-
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
-
-import UserContent from "./userContent";
+import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./index.styled";
+import Link from "@docspace/components/link";
 
-const GroupsRow = (props) => {
-  const {
-    item,
-    sectionWidth,
-    checkedProps,
-    onContentRowSelect,
-    onContentRowClick,
-    element,
-    //setBufferSelection,
-    isActive,
-    //isSeveralSelection,
-    value,
-  } = props;
+const GroupsRow = ({
+  item,
+  itemIndex,
+  selection,
+  bufferSelection,
+  setBufferSelection,
+  sectionWidth,
+  theme,
+}) => {
+  const navigate = useNavigate();
 
-  const isChecked = checkedProps.checked;
+  const isChecked = selection.some((el) => el.id === item.id);
+  const isActive = bufferSelection?.id === item?.id;
 
-  const onRowClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowClick = () =>
+    !isChecked ? setBufferSelection(item, true) : setBufferSelection(null);
 
-  const onRowContextClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = () =>
+    !isChecked ? setBufferSelection(item, false) : setBufferSelection(null);
+
+  const onOpenGroup = () => navigate(`/accounts/groups/${item.id}/filter`);
+
+  const nameColor =
+    item.statusType === "pending" || item.statusType === "disabled"
+      ? theme.peopleTableRow.pendingNameColor
+      : theme.peopleTableRow.nameColor;
+  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
 
   const contextOptionsProps = {
     contextOptions: [
@@ -69,14 +71,21 @@ const GroupsRow = (props) => {
 
   return (
     <Styled.GroupsRowWrapper
+      value={`folder_${item.id}_false_index_${itemIndex}`}
+      isChecked={isChecked}
+      isActive={isActive}
       className={`user-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       }`}
-      value={value}
     >
       <Styled.GroupsRow
         key={item.id}
         data={item}
+        onRowClick={onRowClick}
+        onContextClick={onRowContextClick}
+        onSelect={onRowClick}
+        onDoubleClick={onOpenGroup}
+        onFilesClick={onOpenGroup}
         element={
           <div
             style={{
@@ -96,20 +105,42 @@ const GroupsRow = (props) => {
             {item.shortTitle}
           </div>
         }
-        onSelect={onContentRowSelect}
         checked={isChecked}
         isActive={isActive}
         {...contextOptionsProps}
         sectionWidth={sectionWidth}
         mode={"modern"}
         className={"user-row"}
-        onRowClick={onRowClick}
-        onContextClick={onRowContextClick}
       >
-        <UserContent {...props} />
+        <Styled.GroupsRowContent
+          sideColor={sideInfoColor}
+          sectionWidth={sectionWidth}
+          nameColor={nameColor}
+          sideInfoColor={sideInfoColor}
+        >
+          {[
+            <Link
+              containerWidth="28%"
+              target="_blank"
+              title={item.displayName}
+              fontWeight={600}
+              fontSize="15px"
+              color={nameColor}
+              isTextOverflow={true}
+              onClick={onOpenGroup}
+            >
+              {item.title}
+            </Link>,
+          ]}
+        </Styled.GroupsRowContent>
       </Styled.GroupsRow>
     </Styled.GroupsRowWrapper>
   );
 };
 
-export default withContent(GroupsRow);
+export default inject(({ peopleStore, auth }) => ({
+  selection: peopleStore.selectionStore.selection,
+  bufferSelection: peopleStore.selectionStore.bufferSelection,
+  setBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  theme: auth.settingsStore.theme,
+}))(observer(GroupsRow));

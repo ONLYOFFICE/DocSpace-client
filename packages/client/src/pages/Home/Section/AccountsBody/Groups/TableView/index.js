@@ -9,8 +9,8 @@ import { Base } from "@docspace/components/themes";
 import TableContainer from "@docspace/components/table-container";
 import TableBody from "@docspace/components/table-container/TableBody";
 
-import TableRow from "./TableRow";
-import TableHeader from "./TableHeader";
+import GroupsTableItem from "./GroupsTableItem";
+import GroupsTableHeader from "./GroupsTableHeader";
 import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 import { groups } from "../mockdata";
@@ -124,7 +124,7 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const Table = ({
+const GroupsTableContainer = ({
   peopleList,
   sectionWidth,
   accountsViewAs,
@@ -163,7 +163,7 @@ const Table = ({
 
   return groups.length !== 0 || !isFiltered ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
-      <TableHeader
+      <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
@@ -184,7 +184,7 @@ const Table = ({
         useReactWindow={!withPaging}
       >
         {groups.map((item, index) => (
-          <TableRow
+          <GroupsTableItem
             theme={theme}
             key={item.id}
             item={item}
@@ -242,4 +242,4 @@ export default inject(
       currentDeviceType,
     };
   }
-)(observer(Table));
+)(observer(GroupsTableContainer));

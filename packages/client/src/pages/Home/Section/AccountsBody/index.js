@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import Tabs from "./Tabs";
 import People from "./People";
 import Groups from "./Groups";
+import InsideGroup from "./InsideGroup";
 
 const SectionBodyContent = ({
   setSelection,
@@ -12,6 +13,7 @@ const SectionBodyContent = ({
   setChangeOwnerDialogVisible,
 }) => {
   const location = useLocation();
+  const { groupId } = useParams();
 
   const onMouseDown = (e) => {
     if (
@@ -41,7 +43,13 @@ const SectionBodyContent = ({
   return (
     <>
       <Tabs />
-      {location.pathname.includes("/accounts/people") ? <People /> : <Groups />}
+      {location.pathname.includes("/accounts/people") ? (
+        <People />
+      ) : !groupId ? (
+        <Groups />
+      ) : (
+        <InsideGroup />
+      )}
     </>
   );
 };

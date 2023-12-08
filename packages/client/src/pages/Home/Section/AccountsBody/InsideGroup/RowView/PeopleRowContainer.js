@@ -9,7 +9,6 @@ import { tablet } from "@docspace/components/utils/device";
 
 import EmptyScreen from "../../EmptyScreen";
 import SimpleUserRow from "./SimpleUserRow";
-import { groups } from "../mockdata";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -95,7 +94,7 @@ const PeopleRowContainer = ({
     currentDeviceType,
   });
 
-  return groups.length !== 0 || !isFiltered ? (
+  return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
@@ -105,7 +104,7 @@ const PeopleRowContainer = ({
       filesLength={peopleList.length}
       itemHeight={58}
     >
-      {groups.map((item, index) => (
+      {peopleList.map((item, index) => (
         <SimpleUserRow
           theme={theme}
           key={item.id}

@@ -1,11 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Link from "@docspace/components/link";
+import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
+import ComboBox from "@docspace/components/combobox";
+import DropDownItem from "@docspace/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -182,25 +185,102 @@ const StyledPeopleRow = styled(TableRow)`
 
 StyledPeopleRow.defaultProps = { theme: Base };
 
+const fakeRooms = [
+  {
+    name: "Room 1",
+    role: "Viewer",
+  },
+  {
+    name: "Room 2",
+    role: "Co-worker",
+  },
+];
+
 const PeopleTableRow = (props) => {
   const {
     t,
     item,
+    contextOptionsProps,
+    element,
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
+    onEmailClick,
 
+    isOwner,
     theme,
     changeUserType,
 
+    setBufferSelection,
     isActive,
+    isSeveralSelection,
+    canChangeUserType,
     hideColumns,
     value,
+    standalone,
   } = props;
 
-  const navigate = useNavigate();
+  const {
+    displayName,
+    email,
+    statusType,
 
+    position,
+    rooms,
+
+    role,
+    isVisitor,
+    isCollaborator,
+    isSSO,
+  } = item;
+
+  const isPending = statusType === "pending" || statusType === "disabled";
+
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const nameColor = isPending
+    ? theme.peopleTableRow.pendingNameColor
+    : theme.peopleTableRow.nameColor;
   const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+
+  const getTypesOptions = React.useCallback(() => {
+    const options = [];
+
+    const adminOption = {
+      key: "admin",
+      title: t("Common:DocSpaceAdmin"),
+      label: t("Common:DocSpaceAdmin"),
+      action: "admin",
+    };
+    const managerOption = {
+      key: "manager",
+      title: t("Common:RoomAdmin"),
+      label: t("Common:RoomAdmin"),
+      action: "manager",
+    };
+    const collaboratorOption = {
+      key: "collaborator",
+      title: t("Common:PowerUser"),
+      label: t("Common:PowerUser"),
+      action: "collaborator",
+    };
+    const userOption = {
+      key: "user",
+      title: t("Common:User"),
+      label: t("Common:User"),
+      action: "user",
+    };
+
+    isOwner && options.push(adminOption);
+
+    options.push(managerOption);
+
+    if (isCollaborator || isVisitor) options.push(collaboratorOption);
+
+    isVisitor && options.push(userOption);
+
+    return options;
+  }, [t, isOwner, isVisitor, isCollaborator]);
 
   const onAbort = () => {
     setIsLoading(false);
@@ -220,13 +300,92 @@ const PeopleTableRow = (props) => {
     [item, changeUserType]
   );
 
+  // const getRoomsOptions = React.useCallback(() => {
+  //   const options = [];
+
+  //   fakeRooms.forEach((room) => {
+  //     options.push(
+  //       <DropDownItem key={room.name} noHover={true}>
+  //         {room.name} &nbsp;
+  //         <Text fontSize="13px" fontWeight={600} color={sideInfoColor} truncate>
+  //           ({room.role})
+  //         </Text>
+  //       </DropDownItem>
+  //     );
+  //   });
+
+  //   return <>{options.map((option) => option)}</>;
+  // }, []);
+
+  const getUserTypeLabel = React.useCallback((role) => {
+    switch (role) {
+      case "owner":
+        return t("Common:Owner");
+      case "admin":
+        return t("Common:DocSpaceAdmin");
+      case "manager":
+        return t("Common:RoomAdmin");
+      case "collaborator":
+        return t("Common:PowerUser");
+      case "user":
+        return t("Common:User");
+    }
+  }, []);
+
+  const typeLabel = getUserTypeLabel(role);
+
   const isChecked = checkedProps.checked;
 
+  const renderTypeCell = () => {
+    const typesOptions = getTypesOptions();
+
+    const combobox = (
+      <ComboBox
+        className="type-combobox"
+        selectedOption={
+          typesOptions.find((option) => option.key === role) || {}
+        }
+        options={typesOptions}
+        onSelect={onTypeChange}
+        scaled
+        directionY="both"
+        size="content"
+        displaySelectedOption
+        modernView
+        manualWidth={"fit-content"}
+        isLoading={isLoading}
+      />
+    );
+
+    const text = (
+      <Text
+        type="page"
+        title={position}
+        fontSize="13px"
+        fontWeight={600}
+        color={sideInfoColor}
+        truncate
+        noSelect
+        style={{ paddingLeft: "8px" }}
+      >
+        {typeLabel}
+      </Text>
+    );
+
+    const canChange = canChangeUserType(item);
+
+    return canChange ? combobox : text;
+  };
+
+  const typeCell = renderTypeCell();
+
   const onChange = (e) => {
+    //console.log("onChange");
     onContentRowSelect && onContentRowSelect(e.target.checked, item);
   };
 
   const onRowContextClick = React.useCallback(() => {
+    //console.log("userContextClick");
     onContentRowClick && onContentRowClick(!isChecked, item, false);
   }, [isChecked, item, onContentRowClick]);
 
@@ -243,47 +402,11 @@ const PeopleTableRow = (props) => {
       return;
     }
 
+    //console.log("onRowClick");
+
     onContentRowClick && onContentRowClick(!isChecked, item);
-    navigate(`/accounts/groups/filter?group=${item.id}`);
   };
-
-  const contextOptionsProps = {
-    contextOptions: [
-      {
-        id: "option_profile",
-        key: "profile",
-        icon: "http://192.168.0.105/static/images/check-box.react.svg?hash=079b6e8fa11a027ed622",
-        label: "Select",
-      },
-      {
-        key: "separator-1",
-        isSeparator: true,
-      },
-      {
-        id: "option_change-name",
-        key: "change-name",
-        icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
-        label: "Edit department",
-      },
-      {
-        icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
-        id: "option_details",
-        key: "details",
-        label: "Info",
-      },
-      {
-        key: "separator-2",
-        isSeparator: true,
-      },
-      {
-        id: "option_change-owner",
-        key: "change-owner",
-        icon: "http://192.168.0.105/static/images/catalog.trash.react.svg?hash=eba7f2edad4e3c4f6f77",
-        label: "Delete",
-      },
-    ],
-  };
-
+  const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper
       className={`user-item ${
@@ -308,25 +431,7 @@ const PeopleTableRow = (props) => {
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
-            <div className="table-container_element">
-              <div
-                style={{
-                  display: "flex",
-                  width: "32px",
-                  height: "32px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "12px",
-                  fontWeight: "700",
-                  lineHeight: "16px",
-                  background: "#ECEEF1",
-                  color: "#333",
-                  borderRadius: "50%",
-                }}
-              >
-                {item.shortTitle}
-              </div>
-            </div>
+            <div className="table-container_element">{element}</div>
             <Checkbox
               className="table-container_row-checkbox"
               onChange={onChange}
@@ -336,13 +441,78 @@ const PeopleTableRow = (props) => {
 
           <Link
             type="page"
-            title={item.title}
+            title={displayName}
             fontWeight="600"
             fontSize="13px"
+            color={nameColor}
             isTextOverflow
             className="table-cell_username"
+            noHover
           >
-            {item.title}
+            {statusType === "pending"
+              ? email
+              : displayName?.trim()
+              ? displayName
+              : email}
+          </Link>
+          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+        </TableCell>
+
+        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+
+        {/* <TableCell className="table-cell_room">
+          {!rooms?.length ? (
+            <Text
+              type="page"
+              title={position}
+              fontSize="13px"
+              fontWeight={400}
+              color={sideInfoColor}
+              truncate
+              noSelect
+              style={{ paddingLeft: "8px" }}
+            >
+              —
+            </Text>
+          ) : rooms?.length === 1 ? (
+            <Text
+              type="page"
+              title={position}
+              fontSize="13px"
+              fontWeight={400}
+              color={sideInfoColor}
+              truncate
+              style={{ paddingLeft: "8px" }}
+            >
+              {rooms[0].name} ({rooms[0].role})
+            </Text>
+          ) : (
+            <ComboBox
+              className="room-combobox"
+              selectedOption={{ key: "length", label: `${fakeRooms.length}` }}
+              options={[]}
+              onSelect={onTypeChange}
+              advancedOptions={getRoomsOptions()}
+              scaled={false}
+              size="content"
+              displaySelectedOption
+              modernView
+            />
+          )}
+        </TableCell> */}
+
+        <TableCell>
+          <Link
+            type="page"
+            title={email}
+            fontSize="13px"
+            fontWeight={600}
+            color={sideInfoColor}
+            onClick={onEmailClick}
+            isTextOverflow
+            enableUserSelect
+          >
+            {email}
           </Link>
         </TableCell>
       </StyledPeopleRow>

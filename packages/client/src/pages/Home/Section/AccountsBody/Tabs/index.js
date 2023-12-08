@@ -1,9 +1,10 @@
 import * as Styled from "./index.styled";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const Tabs = ({}) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { groupId } = useParams();
 
   const isPeople = location.pathname.includes("/accounts/people");
 
@@ -14,6 +15,8 @@ const Tabs = ({}) => {
   const onGroups = () => {
     navigate("/accounts/groups/filter");
   };
+
+  if (groupId !== undefined) return null;
 
   return (
     <Styled.Tabs

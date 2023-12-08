@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect";
 import Row from "@docspace/components/row";
 import { Base } from "@docspace/components/themes";
 import { mobile, tablet } from "@docspace/components/utils/device";
+import RowContent from "@docspace/components/row-content";
 
 export const GroupsRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected),
@@ -112,6 +113,27 @@ export const GroupsRow = styled(Row)`
         : css`
             margin-right: 12px;
           `}
+  }
+`;
+
+export const GroupsRowContent = styled(RowContent)`
+  display: flex;
+  align-items: center;
+
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+      margin: 0;
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
   }
 `;
 

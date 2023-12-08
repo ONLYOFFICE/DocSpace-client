@@ -12,7 +12,6 @@ const RowView = ({
   sectionWidth,
   accountsViewAs,
   setViewAs,
-  theme,
   isFiltered,
   fetchMoreAccounts,
   hasMoreAccounts,
@@ -40,7 +39,6 @@ const RowView = ({
     >
       {groups.map((item, index) => (
         <GroupsRow
-          theme={theme}
           key={item.id}
           item={item}
           itemIndex={index}
@@ -52,7 +50,7 @@ const RowView = ({
 };
 
 export default inject(({ peopleStore, auth }) => ({
-  viewAs: peopleStore.accountsViewAs,
+  accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
 
   peopleList: peopleStore.usersStore.peopleList,
@@ -62,7 +60,6 @@ export default inject(({ peopleStore, auth }) => ({
   filterTotal: peopleStore.filterStore.filterTotal,
   isFiltered: peopleStore.filterStore.isFiltered,
 
-  theme: auth.settingsStore.theme,
   withPaging: auth.settingsStore.withPaging,
   currentDeviceType: auth.settingsStore.currentDeviceType,
 }))(observer(RowView));

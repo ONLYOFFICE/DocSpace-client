@@ -35,7 +35,7 @@ import { withTranslation } from "react-i18next";
 import { isMobile, isTablet } from "react-device-detect";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
 import Navigation from "@docspace/common/components/Navigation";
@@ -229,6 +229,7 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { groupId } = useParams();
 
   const isAccountsPage = location.pathname.includes("/accounts");
 
@@ -1009,6 +1010,16 @@ const SectionHeaderContent = (props) => {
     ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
 
+  const isInsideGroup = groupId !== undefined;
+  const accountsNaviationPath = isInsideGroup && [
+    {
+      id: 0,
+      title: "Accounts",
+      isRoom: false,
+      isRootRoom: true,
+    },
+  ];
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -1023,7 +1034,7 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot}
+                isRootFolder={isRoot && !isInsideGroup}
                 canCreate={
                   (security?.Create || isAccountsPage) &&
                   !isSettingsPage &&
@@ -1036,7 +1047,9 @@ const SectionHeaderContent = (props) => {
                 personal={personal}
                 tReady={tReady}
                 menuItems={menuItems}
-                navigationItems={navigationPath}
+                navigationItems={
+                  !isInsideGroup ? navigationPath : accountsNaviationPath
+                }
                 getContextOptionsPlus={getContextOptionsPlus}
                 getContextOptionsFolder={getContextOptionsFolder}
                 onClose={onClose}
@@ -1069,7 +1082,7 @@ const SectionHeaderContent = (props) => {
                 titleIcon={
                   currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
-                showRootFolderTitle={insideTheRoom}
+                showRootFolderTitle={insideTheRoom || isInsideGroup}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
               />

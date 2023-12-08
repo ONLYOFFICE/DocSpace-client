@@ -236,6 +236,22 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "accounts/groups/:groupId",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/:groupId/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/:groupId/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
           /*{
             path: "settings",
             element: (

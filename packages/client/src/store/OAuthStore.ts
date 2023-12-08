@@ -60,8 +60,14 @@ export interface OAuthStoreProps {
   resetDialogVisible: boolean;
   setResetDialogVisible: (value: boolean) => void;
 
+  deleteDialogVisible: boolean;
+  setDeleteDialogVisible: (value: boolean) => void;
+
   clientsIsLoading: boolean;
   setClientsIsLoading: (value: boolean) => void;
+
+  clientSecret: string;
+  setClientSecret: (value: string) => void;
 
   editClient: (clientId: string) => void;
 
@@ -133,6 +139,8 @@ class OAuthStore implements OAuthStoreProps {
   infoDialogVisible: boolean = false;
   previewDialogVisible: boolean = false;
   disableDialogVisible: boolean = false;
+  deleteDialogVisible: boolean = false;
+  resetDialogVisible: boolean = false;
 
   selection: string[] = [];
 
@@ -145,6 +153,8 @@ class OAuthStore implements OAuthStoreProps {
   scopes: IScope[] = [];
 
   clientsIsLoading: boolean = true;
+
+  clientSecret: string = "";
 
   consents: IClientProps[] = [];
 
@@ -179,6 +189,18 @@ class OAuthStore implements OAuthStoreProps {
 
   setDisableDialogVisible = (value: boolean) => {
     this.disableDialogVisible = value;
+  };
+
+  setDeleteDialogVisible = (value: boolean) => {
+    this.deleteDialogVisible = value;
+  };
+
+  setResetDialogVisible = (value: boolean) => {
+    this.resetDialogVisible = value;
+  };
+
+  setClientSecret = (value: string) => {
+    this.clientSecret = value;
   };
 
   setSelection = (clientId: string) => {
@@ -365,6 +387,8 @@ class OAuthStore implements OAuthStoreProps {
   regenerateSecret = async (clientId: string) => {
     try {
       const { client_secret } = await regenerateSecret(clientId);
+
+      this.setClientSecret(client_secret);
 
       return client_secret;
     } catch (e) {

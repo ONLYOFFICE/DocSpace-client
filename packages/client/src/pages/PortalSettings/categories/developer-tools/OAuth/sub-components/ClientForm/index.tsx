@@ -20,6 +20,7 @@ import { StyledContainer } from "./ClientForm.styled";
 
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import ClientFormLoader from "./Loader";
+import ResetDialog from "../ResetDialog";
 
 export function isValidUrl(url: string) {
   try {
@@ -43,7 +44,11 @@ const ClientForm = ({
   saveClient,
   updateClient,
 
-  regenerateSecret,
+  setResetDialogVisible,
+  resetDialogVisible,
+
+  setClientSecretProps,
+  clientSecretProps,
 
   currentDeviceType,
 }: ClientFormProps) => {
@@ -83,6 +88,13 @@ const ClientForm = ({
 
   const isEdit = !!id;
 
+  React.useEffect(() => {
+    if (clientSecretProps) {
+      setClientSecret(clientSecretProps);
+      setClientSecretProps?.("");
+    }
+  }, [clientSecretProps, setClientSecretProps]);
+
   const onSaveClick = async () => {
     try {
       if (!id) {
@@ -104,11 +116,11 @@ const ClientForm = ({
   };
 
   const onResetClick = React.useCallback(async () => {
-    if (!regenerateSecret) return;
-    const newSecret = await regenerateSecret(clientId);
+    if (!setResetDialogVisible) return;
+    setResetDialogVisible(true);
 
-    setClientSecret(newSecret);
-  }, [clientId, regenerateSecret]);
+    // setClientSecret(newSecret);
+  }, [clientId, setResetDialogVisible]);
 
   const onChangeForm = (name: string, value: string | boolean) => {
     setForm((val) => {
@@ -374,70 +386,73 @@ const ClientForm = ({
   const isValid = compareAndValidate();
 
   return (
-    <StyledContainer>
-      {isLoading ? (
-        <ClientFormLoader
-          isEdit={isEdit}
-          currentDeviceType={currentDeviceType}
-        />
-      ) : (
-        <>
-          <BasicBlock
-            t={t}
-            nameValue={form.name}
-            websiteUrlValue={form.website_url}
-            descriptionValue={form.description}
-            logoValue={form.logo}
-            allowPkce={form.allow_pkce}
-            changeValue={onChangeForm}
+    <>
+      <StyledContainer>
+        {isLoading ? (
+          <ClientFormLoader
             isEdit={isEdit}
-            errorFields={errorFields}
-            onBlur={onBlur}
+            currentDeviceType={currentDeviceType}
           />
-          {isEdit && (
-            <ClientBlock
+        ) : (
+          <>
+            <BasicBlock
               t={t}
-              idValue={clientId}
-              secretValue={clientSecret}
-              onResetClick={onResetClick}
+              nameValue={form.name}
+              websiteUrlValue={form.website_url}
+              descriptionValue={form.description}
+              logoValue={form.logo}
+              allowPkce={form.allow_pkce}
+              changeValue={onChangeForm}
+              isEdit={isEdit}
+              errorFields={errorFields}
+              onBlur={onBlur}
             />
-          )}
-          <OAuthBlock
-            t={t}
-            redirectUrisValue={form.redirect_uris}
-            allowedOriginsValue={form.allowed_origins}
-            changeValue={onChangeForm}
-            isEdit={isEdit}
-          />
-          <ScopesBlock
-            t={t}
-            scopes={scopeList || []}
-            selectedScopes={form.scopes}
-            onAddScope={onChangeForm}
-            isEdit={isEdit}
-          />
-          <SupportBlock
-            t={t}
-            policyUrlValue={form.policy_url}
-            termsUrlValue={form.terms_url}
-            changeValue={onChangeForm}
-            isEdit={isEdit}
-            errorFields={errorFields}
-            onBlur={onBlur}
-          />
-          <ButtonsBlock
-            saveLabel={t("Common:SaveButton")}
-            cancelLabel={t("Common:CancelButton")}
-            onSaveClick={onSaveClick}
-            onCancelClick={onCancelClick}
-            isRequestRunning={isRequestRunning}
-            saveButtonDisabled={!isValid}
-            cancelButtonDisabled={isRequestRunning}
-            currentDeviceType={currentDeviceType || ""}
-          />
-        </>
-      )}
-    </StyledContainer>
+            {isEdit && (
+              <ClientBlock
+                t={t}
+                idValue={clientId}
+                secretValue={clientSecret}
+                onResetClick={onResetClick}
+              />
+            )}
+            <OAuthBlock
+              t={t}
+              redirectUrisValue={form.redirect_uris}
+              allowedOriginsValue={form.allowed_origins}
+              changeValue={onChangeForm}
+              isEdit={isEdit}
+            />
+            <ScopesBlock
+              t={t}
+              scopes={scopeList || []}
+              selectedScopes={form.scopes}
+              onAddScope={onChangeForm}
+              isEdit={isEdit}
+            />
+            <SupportBlock
+              t={t}
+              policyUrlValue={form.policy_url}
+              termsUrlValue={form.terms_url}
+              changeValue={onChangeForm}
+              isEdit={isEdit}
+              errorFields={errorFields}
+              onBlur={onBlur}
+            />
+            <ButtonsBlock
+              saveLabel={t("Common:SaveButton")}
+              cancelLabel={t("Common:CancelButton")}
+              onSaveClick={onSaveClick}
+              onCancelClick={onCancelClick}
+              isRequestRunning={isRequestRunning}
+              saveButtonDisabled={!isValid}
+              cancelButtonDisabled={isRequestRunning}
+              currentDeviceType={currentDeviceType || ""}
+            />
+          </>
+        )}
+      </StyledContainer>
+      {resetDialogVisible && <ResetDialog />}
+    </>
   );
 };
 
@@ -453,7 +468,11 @@ export default inject(
       saveClient,
       updateClient,
 
-      regenerateSecret,
+      setResetDialogVisible,
+      resetDialogVisible,
+
+      setClientSecret,
+      clientSecret,
     } = oauthStore;
 
     const { currentDeviceType } = auth.settingsStore;
@@ -467,8 +486,11 @@ export default inject(
       saveClient,
       updateClient,
 
-      regenerateSecret,
+      setResetDialogVisible,
       currentDeviceType,
+      resetDialogVisible,
+      setClientSecretProps: setClientSecret,
+      clientSecretProps: clientSecret,
     };
 
     if (id) {

@@ -25,7 +25,7 @@ interface InputGroupProps {
   helpButtonText?: string;
 
   buttonLabel?: string;
-  onButtonClick?: () => Promise<void>;
+  onButtonClick?: () => void;
 
   withCopy?: boolean;
   onCopyClick?: (name: string) => void;
@@ -66,15 +66,15 @@ const InputGroup = ({
 }: InputGroupProps) => {
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const onButtonClickAction = React.useCallback(async () => {
+  const onButtonClickAction = async () => {
     setIsRequestRunning(true);
 
-    await onButtonClick?.();
+    onButtonClick?.();
 
     setTimeout(() => {
       setIsRequestRunning(false);
-    }, 300);
-  }, [onButtonClick]);
+    });
+  };
 
   return (
     <StyledInputGroup>

@@ -52,9 +52,13 @@ export interface ClientFormProps {
     client: IClientReqDTO
   ) => Promise<IClientReqDTO>;
 
-  regenerateSecret?: (clientId: string) => Promise<string>;
+  resetDialogVisible?: boolean;
+  setResetDialogVisible?: (value: boolean) => void;
 
   currentDeviceType?: DeviceUnionType;
+
+  setClientSecretProps?: (value: string) => void;
+  clientSecretProps?: string;
 }
 
 export interface ClientStore {

@@ -3201,6 +3201,7 @@ __metadata:
     mobx: ^6.8.0
     mobx-react: ^7.6.0
     moment: ^2.29.4
+    moment-timezone: ^0.5.43
     prop-types: ^15.8.1
     query-string: 7.1.3
     re-resizable: ^6.9.9
@@ -20548,6 +20549,15 @@ __metadata:
   bin:
     lookup-amd: bin/cli.js
   checksum: 911abd6b8fb1d82cfae4ef38050981d4eb7e710bfeba898903c5c49a4d3a44b3cacb6201ddf9930a39fae3473faf9b96d39930cfa8766dbf0da86689108895b1
+  languageName: node
+  linkType: hard
+
+"moment-timezone@npm:^0.5.43":
+  version: 0.5.43
+  resolution: "moment-timezone@npm:0.5.43"
+  dependencies:
+    moment: ^2.29.4
+  checksum: 8075c897ed8a044f992ef26fe8cdbcad80caf974251db424cae157473cca03be2830de8c74d99341b76edae59f148c9d9d19c1c1d9363259085688ec1cf508d0
   languageName: node
   linkType: hard
 

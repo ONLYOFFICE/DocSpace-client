@@ -3,7 +3,6 @@ import MacOSReactSvgUrl from "PUBLIC_DIR/images/macOS.react.svg?url";
 import LinuxReactSvgUrl from "PUBLIC_DIR/images/linux.react.svg?url";
 import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
-import IOSHoverReactSvgUrl from "PUBLIC_DIR/images/iOSHover.react.svg?url";
 
 import React from "react";
 import styled, { css } from "styled-components";
@@ -40,7 +39,7 @@ const StyledArticleApps = styled.div`
   }
 
   .download-app-text {
-    color: ${(props) => props.theme.filesArticleBody.downloadAppList.color};
+    color: ${(props) => props.theme.filesArticleBody.downloadAppList.textColor};
   }
 
   .download-app-list {
@@ -99,13 +98,12 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
           title={t("Translations:MobileAndroid")}
         />
         <IconButton
+          onClick={() => window.open(iosLink)}
           iconName={IOSReactSvgUrl}
-          iconHoverName={IOSHoverReactSvgUrl}
           size="32"
-          isFill={false}
+          isFill={true}
+          hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
           title={t("Translations:MobileIos")}
-          onMouseDown={() => window.open(iosLink)}
-          isClickable={true}
         />
       </div>
     </StyledArticleApps>

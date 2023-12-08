@@ -292,7 +292,7 @@ const ClientRoutes = [
   {
     path: "/Products/Files/",
     caseSensitive: true,
-    element: <Navigate to="/rooms/shared" replace />,
+    element: <Navigate to="/rooms/shared/filter" replace />,
   },
   {
     path: "/form-gallery",

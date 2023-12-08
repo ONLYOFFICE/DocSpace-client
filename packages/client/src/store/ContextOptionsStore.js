@@ -469,7 +469,8 @@ class ContextOptionsStore {
       this.dialogsStore;
     const { confirmDelete } = this.settingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
-    const { id: selectedFolderId } = this.selectedFolderStore;
+    const { id: selectedFolderId, getSelectedFolder } =
+      this.selectedFolderStore;
     const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
       this.filesStore;
 
@@ -504,7 +505,9 @@ class ContextOptionsStore {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [selectedFolderId], true).catch((err) =>
+      const selectedFolder = getSelectedFolder();
+
+      deleteAction(translations, [selectedFolder], true).catch((err) =>
         toastr.error(err)
       );
     }
@@ -902,7 +905,7 @@ class ContextOptionsStore {
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: false,
+        disabled: this.publicRoomStore.isPublicRoom,
         "data-action": "pin",
         action: "pin",
       },
@@ -912,7 +915,7 @@ class ContextOptionsStore {
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: false,
+        disabled: this.publicRoomStore.isPublicRoom,
         "data-action": "unpin",
         action: "unpin",
       },
@@ -925,7 +928,7 @@ class ContextOptionsStore {
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom,
+        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
         "data-action": "unmute",
         action: "unmute",
       },
@@ -935,7 +938,7 @@ class ContextOptionsStore {
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom,
+        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
         "data-action": "mute",
         action: "mute",
       },
@@ -1221,9 +1224,10 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (item.roomType === RoomsType.PublicRoom ||
+          ((item.roomType === RoomsType.PublicRoom ||
             item.roomType === RoomsType.CustomRoom) &&
-          !this.treeFoldersStore.isArchiveFolder,
+            !this.treeFoldersStore.isArchiveFolder) ||
+          this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_copy-external-link",
@@ -1231,6 +1235,7 @@ class ContextOptionsStore {
         label: t("Files:CopyGeneralLink"),
         icon: TabletLinkReactSvgUrl,
         disabled:
+          this.publicRoomStore.isPublicRoom ||
           this.treeFoldersStore.isArchiveFolder ||
           (item.roomType !== RoomsType.PublicRoom &&
             item.roomType !== RoomsType.CustomRoom),
@@ -1422,7 +1427,10 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled: this.treeFoldersStore.isArchiveFolder || !item.inRoom,
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          !item.inRoom ||
+          this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_unarchive-room",

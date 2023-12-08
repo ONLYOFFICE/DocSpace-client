@@ -47,7 +47,7 @@ const StyledBox = styled.div`
 
   background: ${(props) => props.theme.navigation.background};
 
-  filter: drop-shadow(0px 12px 40px rgba(4, 15, 27, 0.12));
+  box-shadow: ${(props) => props.theme.navigation.boxShadow};
   border-radius: 0px 0px 6px 6px;
 
   .title-container {

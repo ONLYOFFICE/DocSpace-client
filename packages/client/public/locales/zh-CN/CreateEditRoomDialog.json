@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "此房间中的所有文件都将被加密。",
   "MakeRoomPrivateLimitationsWarningDescription": "您可使用此功能仅邀请现有协作空间用户。创建房间后您将无法更改用户列表。",
   "MakeRoomPrivateTitle": "将房间设为私密",
+  "PublicRoomBarDescription": "所有人都可以通过链接进入此房间。外部用户拥有“仅查看”权限，可查看所有文件",
+  "PublicRoomDescription": "邀请用户通过外部链接查看文档，无需注册。您也可以将此房间嵌入任意网络界面。",
   "ReviewRoomDescription": "请求审阅或评论文档",
   "ReviewRoomTitle": "审阅房间",
   "RoomEditing": "房间编辑",

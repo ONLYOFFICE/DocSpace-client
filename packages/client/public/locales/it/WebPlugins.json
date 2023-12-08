@@ -1,1 +1,17 @@
-{}
+{
+  "DeletePlugin": "Elimina plugin",
+  "DeletePluginDescription": "Questo plugin non sarà più disponibile per gli utenti di DocSpace. Sei sicuro di voler continuare?",
+  "DeletePluginTitle": "Eliminare il plugin?",
+  "Description": "Puoi aggiungere plugin per estendere le funzionalità di DocSpace con funzionalità extra. Fai clic su Carica plugin e seleziona il file del plugin nell'archivio ZIP.",
+  "ExpandFunctionality": "Espandi le funzionalità utilizzando l'SDK del plugin",
+  "GoToRepo": "Vai all'archivio",
+  "Metadata": "Metadata",
+  "NeedSettings": "È necessario inserire le impostazioni",
+  "NoPlugins": "Nessun plugin aggiunto",
+  "NotNeedSettings": "Non è necessario inserire le impostazioni",
+  "PluginSamples": "Esempi di plugin",
+  "PluginSDK": "SDK di plugin",
+  "PluginSDKInstruction": "ໃຫ້ຄລິກໃສ່ປຸ່ມສໍາລັບຄໍາແນະນໍາລາຍລະອຽດກ່ຽວກັບວິທີການສ້າງ plugins ຂອງທ່ານເອງ.",
+  "PluginsHelp": "I plugin ti consentono di estendere le funzionalità di DocSpace",
+  "UploadPlugin": "Carica plugin"
+}

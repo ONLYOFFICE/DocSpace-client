@@ -179,4 +179,10 @@ export const RegisterContainer = styled.div`
   .password-field-wrapper {
     width: 100%;
   }
+
+  .signin-container {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+  }
 }`;

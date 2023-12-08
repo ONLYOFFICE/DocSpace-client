@@ -112,8 +112,13 @@ const Customization = (props) => {
       <WelcomePageSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
-      <StyledSettingsSeparator />
-      {enablePortalRename && <PortalRenaming isMobileView={viewMobile} />}
+
+      {enablePortalRename && (
+        <>
+          <StyledSettingsSeparator />
+          <PortalRenaming isMobileView={viewMobile} />
+        </>
+      )}
     </StyledComponent>
   );
 };

@@ -13,14 +13,24 @@ import Box from "@docspace/components/box";
 import HelpButton from "@docspace/components/help-button";
 import { combineUrl } from "@docspace/common/utils";
 import AppLoader from "@docspace/common/components/AppLoader";
+import { removeLocalStorage } from "../../utils";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 import { DeviceType } from "@docspace/common/constants";
 
 const DataManagementWrapper = (props) => {
-  const { dataBackupUrl, automaticBackupUrl, buttonSize, t, isNotPaidPeriod } =
-    props;
+  const {
+    dataBackupUrl,
+    automaticBackupUrl,
+    buttonSize,
+    t,
+
+    isNotPaidPeriod,
+    toDefault,
+
+    isManagement,
+  } = props;
 
   const navigate = useNavigate();
 
@@ -29,6 +39,12 @@ const DataManagementWrapper = (props) => {
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
+  useEffect(() => {
+    return () => {
+      removeLocalStorage("LocalCopyStorageType");
+      toDefault();
+    };
+  }, []);
 
   const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
@@ -94,12 +110,11 @@ const DataManagementWrapper = (props) => {
   }, []);
 
   const onSelect = (e) => {
+    const url = isManagement
+      ? `/backup/${e.id}`
+      : `/portal-settings/backup/${e.id}`;
     navigate(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/portal-settings/backup/${e.id}`
-      )
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url)
     );
   };
 
@@ -116,11 +131,11 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ auth, setup, backup }) => {
   const { initSettings } = setup;
-  const { settingsStore, currentTariffStatusStore } = auth;
+  const { settingsStore, currentTariffStatusStore, isManagement } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
-
+  const { toDefault } = backup;
   const {
     dataBackupUrl,
     automaticBackupUrl,
@@ -140,5 +155,8 @@ export default inject(({ auth, setup }) => {
     buttonSize,
     isNotPaidPeriod,
     currentColorScheme,
+    toDefault,
+
+    isManagement,
   };
 })(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

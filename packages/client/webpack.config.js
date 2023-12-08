@@ -299,6 +299,7 @@ module.exports = (env, argv) => {
         "./Layout": "./src/components/Layout",
         "./Layout/context": "./src/components/Layout/context.js",
         "./Main": "./src/components/Main",
+        "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
         "./SharingDialog": "./src/components/panels/SharingDialog",
@@ -310,6 +311,18 @@ module.exports = (env, argv) => {
         "./PeopleSelector": "./src/components/PeopleSelector",
         "./PeopleSelector/UserTooltip":
           "./src/components/PeopleSelector/sub-components/UserTooltip.js",
+        "./BrandingPage":
+          "./src/pages/PortalSettings/categories/common/branding.js",
+        "./WhiteLabelPage":
+          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
+        "./AdditionalResPage":
+          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
+        "./CompanyInfoPage":
+          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
+        "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
+        "./RestorePage":
+          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
+        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
       },
       shared: {
         ...deps,

@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Tất cả các tập tin trong phòng này sẽ được mã hóa.",
   "MakeRoomPrivateLimitationsWarningDescription": "Với tính năng này, bạn chỉ có thể mời người dùng DocSpace hiện có. Sau khi tạo một phòng, bạn sẽ không thể thay đổi danh sách người dùng.",
   "MakeRoomPrivateTitle": "Đặt phòng ở Chế độ Riêng tư",
+  "PublicRoomBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Người dùng bên ngoài sẽ có quyền Chỉ Xem cho tất cả các tập tin.",
+  "PublicRoomDescription": "Mời người dùng qua các liên kết bên ngoài để xem tài liệu mà không cần đăng ký. Bạn cũng có thể nhúng phòng này vào bất kỳ giao diện web nào.",
   "ReviewRoomDescription": "Yêu cầu xem xét hoặc nhận xét về tài liệu",
   "ReviewRoomTitle": "Phòng phê duyệt",
   "RoomEditing": "Chỉnh sửa phòng",

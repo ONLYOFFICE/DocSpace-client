@@ -1,1 +1,18 @@
-{}
+{
+  "DeletePlugin": "Plugin löschen",
+  "DeletePluginDescription": "Dieses Plugin wird für DocSpace-Benutzer nicht mehr verfügbar sein. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeletePluginTitle": "Plugin löschen?",
+  "Description": "Sie können Plugins hinzufügen, um die Funktionalität von DocSpace um zusätzliche Funktionen zu erweitern. Klicken Sie auf Plugin hochladen und wählen Sie die Plugin-Datei im ZIP-Archiv aus.",
+  "ExpandFunctionality": "Funktionalität mit Plugin SDK erweitern",
+  "GoToRepo": "Zum Repository gehen",
+  "Metadata": "Metadaten",
+  "NeedSettings": "Einstellungen müssen eingegeben werden",
+  "NoPlugins": "Keine Plugins hinzugefügt",
+  "NotNeedSettings": "Keine Einstellungen erforderlich",
+  "PluginSamples": "Plugin-Beispiele",
+  "PluginSDK": "Plugin SDK",
+  "PluginSDKDescription": "Mit dem Plugin SDK können Sie die DocSpace-Funktionalität erweitern, die Dienste von Drittanbietern einbinden oder die bestehende Benutzererfahrung verbessern. Hier finden Sie die Plugin-Beispiele mit Quellcode, die auf GitHub verfügbar sind. ",
+  "PluginSDKInstruction": "Klicken Sie auf die Schaltfläche, um eine detaillierte Anleitung zur Erstellung eigener Plugins zu erhalten.",
+  "PluginsHelp": "Plugins ermöglichen es Ihnen, die Funktionalität von DocSpace zu erweitern",
+  "UploadPlugin": "Plugin hochladen"
+}

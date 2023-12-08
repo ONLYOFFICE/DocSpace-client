@@ -9,6 +9,7 @@
   "ExternalLink": "رابط خارجي",
   "FormFilling": "تعبئة النموذج",
   "InternalLink": "رابط داخلي",
+  "LinkName": "اسم الرابط",
   "Notify users": "أبلغ المستخدمين",
   "ReadOnly": "للقراءة فقط",
   "ShareEmailBody": "لقد تم منحك حق الوصول إلى المستند {{itemName}}. انقر فوق الرابط أدناه لفتح المستند الآن: {{shareLink}}.",

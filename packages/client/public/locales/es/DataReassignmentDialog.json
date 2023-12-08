@@ -1,1 +1,19 @@
-{}
+{
+  "AbortTransfer": "Cancelar transferencia",
+  "AllDataTransferred": "Todos los datos transferidos",
+  "DataReassignment": "Reasignación de datos",
+  "DeleteProfileIsFinished": "Borrar el perfil cuando finalice la reasignación",
+  "DescriptionDataReassignment": "Transferiremos las salas creadas por el usuario y los documentos almacenados en las salas del usuario.",
+  "InProgress": "En curso",
+  "Interrupted": "Interrupción, no se han podido transferir algunos datos",
+  "MoreAboutDataTransfer": "Más información sobre la transferencia de datos",
+  "NewDataOwner": "Nuevo propietario de los datos",
+  "NoteDataReassignment": "Ojo: esta acción no se puede deshacer.",
+  "ProcessComplete": "Puede cerrar esta página. Cuando finalice el proceso, el administrador responsable recibirá una notificación por correo electrónico.",
+  "Reassign": "Reasignar",
+  "ReassignData": "Reasignar datos",
+  "ReassigningDataToAnother": "Se ha iniciado el proceso de reasignación de datos del usuario <0>{{fromUser}}</0> al usuario <1>{{toUser}}</1>. Por favor, tenga en cuenta que puede tardar un tiempo considerable.",
+  "ReassigningDataToItself": "Se ha iniciado el proceso de reasignación de datos del usuario <0>{{fromUser}}</0> al usuario <1>{{toUser}}</1> <2>{{you}}</2>. Por favor, tenga en cuenta que puede tardar un tiempo considerable.",
+  "StartTransferAgain": "Volver a iniciar la transferencia",
+  "UserToWhomTheDataWillBeTransferred": "Usuario al que se transferirán los datos"
+}

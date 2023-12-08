@@ -56,7 +56,7 @@ const AccessPortal = (props) => {
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="SettingPasswordDescriptionSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"
@@ -104,7 +104,7 @@ const AccessPortal = (props) => {
           {t("TrustedMailSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="TrustedMailSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"
@@ -158,7 +158,7 @@ const AccessPortal = (props) => {
           {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="AdminsMessageSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
         <Link

@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Vse datoteke v tej sobi bodo šifrirane.",
   "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike DocSpace. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",
   "MakeRoomPrivateTitle": "Naredi sobo zasebno",
+  "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje samo za ogled vseh datotek.",
+  "PublicRoomDescription": "Povabite uporabnike prek zunanjih povezav k ogledu dokumentov brez registracije. To sobo lahko tudi vdelate v kateri koli spletni vmesnik.",
   "ReviewRoomDescription": "Zahtevaj pregled ali komentarje dokumentov",
   "ReviewRoomTitle": "Preglej sobo",
   "RoomEditing": "Urejanje sobe",

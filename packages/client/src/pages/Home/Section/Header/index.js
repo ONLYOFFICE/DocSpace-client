@@ -225,6 +225,7 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    onClickArchive,
   } = props;
 
   const navigate = useNavigate();
@@ -468,16 +469,20 @@ const SectionHeaderContent = (props) => {
 
   const onCopyAction = () => {
     setIsFolderActions(true);
-    setBufferSelection(currentFolderId);
+    setBufferSelection(selectedFolder);
     return setCopyPanelVisible(true);
   };
 
   const onDownloadAction = () => {
-    setBufferSelection(currentFolderId);
-    setIsFolderActions(true);
+    setBufferSelection(selectedFolder);
     downloadAction(t("Translations:ArchivingData"), [currentFolderId]).catch(
       (err) => toastr.error(err)
     );
+  };
+
+  const onClickArchiveAction = (e) => {
+    setBufferSelection(selectedFolder);
+    onClickArchive(e);
   };
 
   const renameAction = () => {
@@ -489,7 +494,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onOpenSharingPanel = () => {
-    setBufferSelection(currentFolderId);
+    setBufferSelection(selectedFolder);
     setIsFolderActions(true);
     return setSharingPanelVisible(true);
   };
@@ -510,7 +515,7 @@ const SectionHeaderContent = (props) => {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [currentFolderId], true).catch((err) =>
+      deleteAction(translations, [selectedFolder], true).catch((err) =>
         toastr.error(err)
       );
     }
@@ -562,7 +567,6 @@ const SectionHeaderContent = (props) => {
 
   const onDownloadAll = () => {
     onDownloadAction();
-    // downloadAction(t("Translations:ArchivingData"), currentFolderId);
   };
 
   const onShareRoom = () => {
@@ -582,7 +586,6 @@ const SectionHeaderContent = (props) => {
       onClickEditRoom,
       onClickInviteUsers,
       onShowInfoPanel,
-      onClickArchive,
       onClickReconnectStorage,
 
       canRestoreAll,
@@ -754,7 +757,7 @@ const SectionHeaderContent = (props) => {
         key: "archive-room",
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
-        onClick: (e) => onClickArchive(e),
+        onClick: onClickArchiveAction,
         disabled: !isRoom || !security?.Move,
         "data-action": "archive",
         action: "archive",
@@ -888,7 +891,7 @@ const SectionHeaderContent = (props) => {
 
     const state = {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
-      isRoot: itemIdx === 0,
+      isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
       isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
       rootFolderType: rootFolderType,
       isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
@@ -1266,7 +1269,7 @@ export default inject(
       isDesktop: auth.settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
-      isRootFolder: isRoot,
+      isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
       isPersonalRoom,
       title,
       isRoom,

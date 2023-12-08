@@ -89,6 +89,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           fontSize={"14px"}
           noSelect
           truncate
+          dir="auto"
         >
           {label}
         </Text>

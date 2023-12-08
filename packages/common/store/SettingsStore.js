@@ -938,6 +938,7 @@ class SettingsStore {
   };
 
   get isFrame() {
+    console.log("get isFrame:", this.frameConfig?.name === window.name);
     return this.frameConfig?.name === window.name;
   }
 

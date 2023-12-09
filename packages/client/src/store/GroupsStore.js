@@ -1,23 +1,34 @@
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import api from "@docspace/common/api";
 
 class GroupsStore {
+  peopleStore;
+
   groups = [];
+  currentGroup = null;
 
   constructor(peopleStore) {
     this.peopleStore = peopleStore;
-    makeObservable(this, {
-      groups: observable,
-      getGroupList: action,
-      deleteGroup: action,
-      createGroup: action,
-      updateGroup: action,
-    });
+    makeAutoObservable(this);
   }
 
-  getGroupList = async () => {
-    const res = await api.groups.getGroupList(); //TODO: replace with getGroupListFull() after fixing problems on the server
+  setCurrentGroup = (currentGroup) => {
+    this.currentGroup = currentGroup;
+  };
+
+  createGroup = async (groupName, groupManager, members) => {
+    const res = await api.groups.createGroup(groupName, groupManager, members);
+    return res;
+  };
+
+  getGroups = async () => {
+    const res = await api.groups.getGroups();
     this.groups = res;
+  };
+
+  getGroupById = async (groupId) => {
+    const res = await api.groups.getGroupById(groupId);
+    return res;
   };
 
   deleteGroup = async (id) => {
@@ -26,14 +37,6 @@ class GroupsStore {
     const newData = this.groups.filter((g) => g.id !== id);
     this.groups = newData;
     await this.peopleStore.usersStore.getUsersList(filter);
-  };
-
-  createGroup = async (groupName, groupManager, members) => {
-    const res = await api.groups.createGroup(groupName, groupManager, members);
-    this.peopleStore.selectedGroupStore.resetGroup();
-    this.groups.push(res);
-    this.groups.sort((a, b) => a.name.localeCompare(b.name));
-    return Promise.resolve(res);
   };
 
   updateGroup = async (id, groupName, groupManager, members) => {

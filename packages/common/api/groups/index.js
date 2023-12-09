@@ -1,54 +1,80 @@
 import { request } from "../client";
-import * as fakeGroup from "./fake";
 
-export function getGroupList(fake = false, searchValue) {
-  const params = searchValue ? `?filtervalue=${searchValue}` : "";
+// * Create
 
-  return fake
-    ? fakeGroup.getGroupList()
-    : request({
-        method: "get",
-        url: `/group${params}`,
-      }).then((groups) => {
-        return groups.sort((a, b) => a.name.localeCompare(b.name));
-      });
-}
+export const createGroup = (groupName, groupManager, members) => {
+  return request({
+    method: "post",
+    url: "/group",
+    data: {
+      groupName,
+      groupManager,
+      members,
+    },
+  });
+};
 
-export function getGroup(groupId) {
+// * Read
+
+export const getGroups = (withMembers = true) => {
+  return request({
+    method: "get",
+    url: `/group?withMembers=${withMembers}`,
+  });
+};
+
+export const getGroupById = (groupId) => {
   return request({
     method: "get",
     url: `/group/${groupId}`,
   });
-}
+};
 
-export function createGroup(groupName, groupManager, members) {
-  const data = { groupName, groupManager, members };
-  return request({
-    method: "post",
-    url: "/group",
-    data,
-  });
-}
-
-export function updateGroup(id, groupName, groupManager, members) {
-  const data = { groupId: id, groupName, groupManager, members };
-  return request({
-    method: "put",
-    url: `/group/${id}`,
-    data,
-  });
-}
-
-export function deleteGroup(id) {
-  return request({
-    method: "delete",
-    url: `/group/${id}`,
-  });
-}
-
-/*export function getGroupListFull() {
+export const getGroupsByName = (groupName) => {
   return request({
     method: "get",
-    url: "/group/full",
+    url: `/group/search`,
+    data: { groupName },
   });
-}*/ //TODO: use after fixing problems on the server
+};
+
+export const getGroupsFull = () => {
+  return request({
+    method: "get",
+    url: `/group/full`,
+  });
+};
+
+export const getGroupsByUserId = (userId) => {
+  return request({
+    method: "get",
+    url: `/group/user/${userId}`,
+  });
+};
+
+// * Update
+
+export const updateGroup = (groupId, groupName, groupManager, members) => {
+  return request({
+    method: "put",
+    url: `/group/${groupId}`,
+    data: { groupId, groupName, groupManager, members },
+  });
+};
+
+export const addGroupMembers = (groupName, groupManager, members) => {
+  return request({
+    method: "put",
+    url: `/group/${id}/members`,
+    data: { groupName, groupManager, members },
+  });
+};
+
+// * Delete
+
+export const deleteGroup = (groupId) => {
+  return request({
+    method: "delete",
+    url: `/group/${groupId}`,
+  });
+};

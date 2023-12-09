@@ -309,7 +309,7 @@ const GroupsTableItem = (props) => {
                   borderRadius: "50%",
                 }}
               >
-                {item.shortTitle}
+                {"G"}
               </div>
             </div>
             <Checkbox
@@ -327,7 +327,7 @@ const GroupsTableItem = (props) => {
             isTextOverflow
             className="table-cell_username"
           >
-            {item.title}
+            {item.name}
           </Link>
         </TableCell>
       </StyledPeopleRow>

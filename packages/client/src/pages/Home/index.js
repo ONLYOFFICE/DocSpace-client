@@ -29,6 +29,7 @@ import {
   useOperations,
   useAccounts,
   useSettings,
+  useGroups,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -109,6 +110,7 @@ const PureHome = (props) => {
 
     accountsViewAs,
     fetchPeople,
+    fetchGroups,
     setSelectedNode,
     onClickBack,
 
@@ -189,6 +191,17 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+  });
+
+  useGroups({
+    t,
+    isAccountsPage,
+    location,
+
+    setIsLoading,
+
+    setSelectedNode,
+    fetchGroups,
   });
 
   useSettings({
@@ -473,13 +486,10 @@ export default inject(
       getSettings,
     } = settingsStore;
 
-    const {
-      usersStore,
-
-      viewAs: accountsViewAs,
-    } = peopleStore;
+    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
+    const { getGroups: fetchGroups } = groupsStore;
 
     if (!firstLoad) {
       if (isLoading) {
@@ -571,6 +581,7 @@ export default inject(
 
       accountsViewAs,
       fetchPeople,
+      fetchGroups,
       setSelectedNode,
       onClickBack,
 

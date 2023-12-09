@@ -212,6 +212,7 @@ export default inject(
     } = peopleStore;
     const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
+    console.log(peopleList);
     const { filterTotal, isFiltered } = filterStore;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;

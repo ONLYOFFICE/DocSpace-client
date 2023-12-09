@@ -125,7 +125,7 @@ const StyledTableContainer = styled(TableContainer)`
 StyledTableContainer.defaultProps = { theme: Base };
 
 const GroupsTableContainer = ({
-  peopleList,
+  groups,
   sectionWidth,
   accountsViewAs,
   setViewAs,
@@ -159,7 +159,7 @@ const GroupsTableContainer = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  console.log(peopleList);
+  console.log(groups);
 
   return groups.length !== 0 || !isFiltered ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
@@ -179,7 +179,7 @@ const GroupsTableContainer = ({
         fetchMoreFiles={fetchMoreAccounts}
         hasMoreFiles={hasMoreAccounts}
         itemCount={filterTotal}
-        filesLength={peopleList.length}
+        filesLength={groups.length}
         itemHeight={49}
         useReactWindow={!withPaging}
       >
@@ -208,11 +208,15 @@ export default inject(
   ({ peopleStore, auth, accessRightsStore, filesStore }) => {
     const {
       usersStore,
+      groupsStore,
       filterStore,
       viewAs: accountsViewAs,
       setViewAs,
       changeType,
     } = peopleStore;
+
+    const { groups } = groupsStore;
+
     const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
@@ -223,7 +227,7 @@ export default inject(
     const { canChangeUserType } = accessRightsStore;
 
     return {
-      peopleList,
+      groups,
       accountsViewAs,
       setViewAs,
       theme,

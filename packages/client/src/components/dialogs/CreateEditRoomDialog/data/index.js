@@ -14,6 +14,8 @@ export const getRoomTypeTitleTranslation = (roomType = 1, t) => {
       return t("CreateEditRoomDialog:CustomRoomTitle");
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.FormRoom:
+      return t("CreateEditRoomDialog:FormRoomTitle");
   }
 };
 
@@ -31,6 +33,8 @@ export const getRoomTypeDescriptionTranslation = (roomType = 1, t) => {
       return t("CreateEditRoomDialog:CustomRoomDescription");
     case RoomsType.PublicRoom:
       return t("CreateEditRoomDialog:PublicRoomDescription");
+    case RoomsType.FormRoom:
+      return t("CreateEditRoomDialog:FormRoomDescription");
   }
 };
 
@@ -48,5 +52,7 @@ export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
       return t("Files:CustomRooms");
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.FormRoom:
+      return t("Files:FormRoom");
   }
 };

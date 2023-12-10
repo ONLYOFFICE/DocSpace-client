@@ -3,7 +3,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/common/api/files";
-import { RoomsType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/common/constants";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "../helpers/files-helpers";
@@ -13,6 +13,7 @@ import {
   iconSize64,
   iconSize96,
 } from "@docspace/common/utils/image-helpers";
+import { getIconPathByFolderType } from "@docspace/common/utils";
 
 class SettingsStore {
   thirdPartyStore;
@@ -279,7 +280,8 @@ class SettingsStore {
     providerKey = null,
     contentLength = null,
     roomType = null,
-    isArchive = null
+    isArchive = null,
+    folderType = null
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -298,12 +300,19 @@ class SettingsStore {
       return icon;
     } else if (roomType) {
       return this.getRoomsIcon(roomType, isArchive, 32);
+    } else if (folderType) {
+      return this.getIconByFolderType(folderType, size);
     } else {
       return this.getFolderIcon(providerKey, size);
     }
   };
 
-  getIconBySize = (size, path) => {
+  getIconByFolderType = (folderType, size = 32) => {
+    const path = getIconPathByFolderType(folderType);
+    return this.getIconBySize(size, path);
+  };
+
+  getIconBySize = (size, path = 32) => {
     switch (+size) {
       case 24:
         return iconSize24.get(path);
@@ -341,6 +350,8 @@ class SettingsStore {
         case RoomsType.PublicRoom:
           path = "public.svg";
           break;
+        case RoomsType.FormRoom:
+          path = "form.svg";
       }
     }
 

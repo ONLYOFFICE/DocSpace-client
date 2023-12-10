@@ -136,6 +136,7 @@ export const FileType = Object.freeze({
  * @readonly
  */
 export const RoomsType = Object.freeze({
+  FormRoom: 1,
   // FillingFormsRoom: 1, //TODO: Restore when certs will be done
   EditingRoom: 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
@@ -157,6 +158,7 @@ export const RoomsTypeTranslations = Object.freeze({
   4: "Files:ViewOnlyRooms",
   5: "Files:CustomRooms",
   6: "Files:PublicRoom",
+  7: "Files:FormRoom",
 });
 /**
  * Enum for room provider type.
@@ -237,6 +239,11 @@ export const FolderType = Object.freeze({
   Privacy: 13,
   Rooms: 14,
   Archive: 20,
+
+  Done: 25,
+  InProgress: 26,
+  SubFolderDone: 27,
+  SubFolderInProgress: 28,
 });
 
 // extends FolderType keys

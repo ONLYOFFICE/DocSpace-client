@@ -114,6 +114,15 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
+
+      case RoomsType.FormRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.viewer,
+          options.formFiller,
+          ...deleteOption,
+        ];
       case RoomsType.PublicRoom:
         return [options.roomAdmin, options.collaborator, ...deleteOption];
       default:

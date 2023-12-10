@@ -63,6 +63,17 @@ const SimpleFilesRowContent = styled(RowContent)`
           `}
   }
 
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
+  }
+
   .badge-new-version {
     width: max-content;
   }

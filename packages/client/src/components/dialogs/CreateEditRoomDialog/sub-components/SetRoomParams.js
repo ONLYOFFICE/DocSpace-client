@@ -19,6 +19,8 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
+import SystemFolders from "./SystemFolders";
+import { RoomsType } from "@docspace/common/constants";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
@@ -59,6 +61,8 @@ const SetRoomParams = ({
   folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
+
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -140,6 +144,7 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+      {isFormRoom && <SystemFolders t={t} />}
 
       {isEdit && (
         <ChangeRoomOwner

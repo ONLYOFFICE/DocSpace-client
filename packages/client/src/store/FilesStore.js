@@ -1033,6 +1033,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.FormRoom}`:
+        return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
         return roomType === RoomsType.PublicRoom;
       default:
@@ -1517,6 +1519,7 @@ class FilesStore {
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
+          // type,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -3006,6 +3009,8 @@ class FilesStore {
         rootFolderId,
         shared,
         title,
+        type,
+        hasDraft,
         updated,
         updatedBy,
         version,
@@ -3043,6 +3048,7 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
+
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
@@ -3083,7 +3089,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              type
             );
 
       const defaultRoomIcon = isRoom
@@ -3093,7 +3100,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            type
           )
         : undefined;
 
@@ -3178,6 +3186,8 @@ class FilesStore {
         viewAccessibility,
         ...pluginOptions,
         inRoom,
+        type,
+        hasDraft,
         isForm,
       };
     });
@@ -3223,6 +3233,7 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
+        elem !== `room-${RoomsType.FormRoom}` &&
         elem !== `room-${RoomsType.ReadOnlyRoom}` &&
         elem !== `room-${RoomsType.PublicRoom}`
     );
@@ -3262,6 +3273,8 @@ class FilesStore {
         return t("CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
+      case `room-${RoomsType.FormRoom}`:
+        return t("FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:

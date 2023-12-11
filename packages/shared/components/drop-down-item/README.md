@@ -5,7 +5,7 @@ Is a item of DropDown component
 ### Usage
 
 ```js
-import DropDownItem from "@docspace/components/drop-down-item";
+import { DropDownItem } from "@docspace/shared/components";
 import NavLogoReactSvgUrl from "PUBLIC_DIR/images/nav.logo.react.svg?url";
 ```
 

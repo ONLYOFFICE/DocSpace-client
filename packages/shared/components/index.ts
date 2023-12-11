@@ -37,8 +37,11 @@ import { SearchInput } from "./search-input";
 import { FileInput } from "./file-input";
 import { CodeInput } from "./code-input";
 import { FormWrapper } from "./form-wrapper";
+import { ModalDialog, ModalDialogType } from "./modal-dialog";
 
 export {
+  ModalDialog,
+  ModalDialogType,
   FormWrapper,
   CodeInput,
   FileInput,

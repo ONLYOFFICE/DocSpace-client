@@ -1,26 +1,35 @@
 import React, { useEffect, useState, useCallback } from "react";
-import PropTypes from "prop-types";
-
+import { isSafari, isTablet } from "react-device-detect";
 import throttle from "lodash/throttle";
 
-import Portal from "../portal";
-import ModalAside from "./views/modal-aside";
-import { handleTouchMove, handleTouchStart } from "./handlers/swipeHandler";
-import { getCurrentDisplayType } from "./handlers/resizeHandler";
-import { parseChildren } from "./handlers/childrenParseHandler";
-import { isSafari, isTablet } from "react-device-detect";
+import { Portal } from "../portal";
+import { Modal } from "./sub-components/Modal";
+
+import {
+  handleTouchMove,
+  handleTouchStart,
+  parseChildren,
+  getCurrentDisplayType,
+} from "./ModalDialog.utils";
+import {
+  MODAL_DIALOG_BODY_NAME,
+  MODAL_DIALOG_CONTAINER_NAME,
+  MODAL_DIALOG_FOOTER_NAME,
+  MODAL_DIALOG_HEADER_NAME,
+} from "./ModalDialog.constants";
+import { ModalDialogProps } from "./ModalDialog.types";
 
 const Header = () => null;
-Header.displayName = "DialogHeader";
+Header.displayName = MODAL_DIALOG_HEADER_NAME;
 
 const Body = () => null;
-Body.displayName = "DialogBody";
+Body.displayName = MODAL_DIALOG_BODY_NAME;
 
 const Footer = () => null;
-Footer.displayName = "DialogFooter";
+Footer.displayName = MODAL_DIALOG_FOOTER_NAME;
 
 const Container = () => null;
-Container.displayName = "DialogContainer";
+Container.displayName = MODAL_DIALOG_CONTAINER_NAME;
 
 const ModalDialog = ({
   id,
@@ -37,35 +46,40 @@ const ModalDialog = ({
   autoMaxHeight,
   autoMaxWidth,
   withBodyScroll,
-  modalLoaderBodyHeight,
   withFooterBorder,
   isScrollLocked,
   containerVisible,
   isDoubleFooterLine,
   isCloseable,
   embedded,
-  withForm
-}: any) => {
+  withForm,
+}: ModalDialogProps) => {
   const onCloseEvent = () => {
     if (embedded) return;
-    isCloseable && onClose();
+    if (isCloseable) onClose?.();
   };
   const [currentDisplayType, setCurrentDisplayType] = useState(
-    getCurrentDisplayType(displayType, displayTypeDetailed)
+    getCurrentDisplayType(displayType, displayTypeDetailed),
   );
   const [modalSwipeOffset, setModalSwipeOffset] = useState(0);
+
   const returnWindowPositionAfterKeyboard = () => {
     isSafari && isTablet && window.scrollY !== 0 && window.scrollTo(0, 0);
   };
+
   useEffect(() => {
     const onResize = throttle(() => {
       setCurrentDisplayType(
-        getCurrentDisplayType(displayType, displayTypeDetailed)
+        getCurrentDisplayType(displayType, displayTypeDetailed),
       );
     }, 300);
-    const onSwipe = (e: any) => setModalSwipeOffset(handleTouchMove(e, onClose));
+
+    const onSwipe = (e: TouchEvent) =>
+      setModalSwipeOffset(handleTouchMove(e, onClose));
+
     const onSwipeEnd = () => setModalSwipeOffset(0);
-    const onKeyPress = (e: any) => {
+
+    const onKeyPress = (e: KeyboardEvent) => {
       if ((e.key === "Esc" || e.key === "Escape") && visible) onCloseEvent();
     };
 
@@ -90,15 +104,13 @@ const ModalDialog = ({
     Header.displayName,
     Body.displayName,
     Footer.displayName,
-    Container.displayName
+    Container.displayName,
   );
 
   return (
     <Portal
-      // @ts-expect-error TS(2322): Type '{ element: Element; }' is not assignable to ... Remove this comment to see the full error message
       element={
-        <ModalAside
-          // @ts-expect-error TS(2322): Type '{ withForm: any; isDoubleFooterLine: any; id... Remove this comment to see the full error message
+        <Modal
           withForm={withForm}
           isDoubleFooterLine={isDoubleFooterLine}
           id={id}
@@ -129,76 +141,7 @@ const ModalDialog = ({
   );
 };
 
-ModalDialog.propTypes = {
-  /** Accepts id */
-  id: PropTypes.string,
-  /** Accepts class */
-  className: PropTypes.string,
-  /** CSS z-index   */
-  zIndex: PropTypes.number,
-  /** Accepts css */
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** Displays the child elements */
-  children: PropTypes.any,
-
-  /** Sets the dialog to display */
-  visible: PropTypes.bool,
-  /** Sets a callback function that is triggered when the close button is clicked */
-  onClose: PropTypes.func,
-
-  /** Displays type */
-  displayType: PropTypes.oneOf(["modal", "aside"]),
-  /** Detailed display type for each dimension */
-  displayTypeDetailed: PropTypes.object,
-
-  /** Shows loader in body */
-  isLoading: PropTypes.bool,
-
-  /** Sets the displayed dialog to be closed or open */
-  isCloseable: PropTypes.bool,
-
-  /** **`MODAL-ONLY`**
-
-  Sets `width: 520px` and `max-hight: 400px`*/
-  isLarge: PropTypes.bool,
-
-  /** **`MODAL-ONLY`**
-
-  Sets `max-width: auto`*/
-  autoMaxWidth: PropTypes.bool,
-
-  /** **`MODAL-ONLY`**
-
-  Sets `max-height: auto`*/
-  autoMaxHeight: PropTypes.bool,
-
-  /** **`MODAL-ONLY`**
-
-  Displays border betweeen body and footer`*/
-  withFooterBorder: PropTypes.bool,
-
-  /** **`ASIDE-ONLY`**
-
-  Enables Body scroll */
-  withBodyScroll: PropTypes.bool,
-
-  /** **`ASIDE-ONLY`**
-
-  Enables body scroll */
-  isScrollLocked: PropTypes.bool,
-
-  /** **`ASIDE-ONLY`**
-
-  Sets modal dialog size equal to window */
-  scale: PropTypes.bool,
-  /** **`ASIDE-ONLY`**
-
-  Allows you to embed a modal window as an aside dialog inside the parent container without applying a dialog layout to it */
-  containerVisible: PropTypes.bool,
-};
-
 ModalDialog.defaultProps = {
-  displayType: "modal",
   zIndex: 310,
   isLarge: false,
   isLoading: false,
@@ -213,4 +156,4 @@ ModalDialog.Body = Body;
 ModalDialog.Footer = Footer;
 ModalDialog.Container = Container;
 
-export default ModalDialog;
+export { ModalDialog };

@@ -1,10 +1,13 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import Box from "../box";
-import { mobile, tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
-const StyledModal = styled.div`
+import { Base } from "../../themes";
+import { mobile, tablet } from "../../utils";
+
+import { Box } from "../box";
+import { ModalDialogType } from "./ModalDialog.enums";
+
+const StyledModal = styled.div<{ modalSwipeOffset?: number }>`
   #create-text-input::-webkit-search-decoration,
   #create-text-input::-webkit-search-cancel-button,
   #create-text-input::-webkit-search-results-button,
@@ -31,36 +34,44 @@ const Dialog = styled.div`
   min-height: 100%;
 `;
 
-const Content = styled.div.attrs((props) => ({
+const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
   style: {
     marginBottom:
-      // @ts-expect-error TS(2339): Property 'modalSwipeOffset' does not exist on type... Remove this comment to see the full error message
-      props.modalSwipeOffset < 0 ? `${props.modalSwipeOffset * 1.1}px` : "0px",
+      props.modalSwipeOffset && props.modalSwipeOffset < 0
+        ? `${props.modalSwipeOffset * 1.1}px`
+        : "0px",
   },
-}))`
+}))<{
+  autoMaxHeight?: boolean;
+  autoMaxWidth?: boolean;
+  currentDisplayType?: ModalDialogType;
+  modalSwipeOffset?: number;
+  isLarge?: boolean;
+  visible?: boolean;
+  embedded?: boolean;
+}>`
   box-sizing: border-box;
   position: relative;
   background-color: ${(props) => props.theme.modalDialog.backgroundColor};
   color: ${(props) => props.theme.modalDialog.textColor};
   padding: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'currentDisplayType' does not exist on ty... Remove this comment to see the full error message
     props.currentDisplayType === "modal" ? "0" : "0 0 -16px"};
-
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'currentDisplayType' does not exist on ty... Remove this comment to see the full error message
     props.currentDisplayType === "modal"
-      ? css`
+      ? css<{
+          autoMaxHeight?: boolean;
+          autoMaxWidth?: boolean;
+          isLarge?: boolean;
+          visible?: boolean;
+        }>`
           height: auto;
           max-height: ${(props) =>
-            // @ts-expect-error TS(2339): Property 'autoMaxHeight' does not exist on type 'T... Remove this comment to see the full error message
             props.autoMaxHeight ? "auto" : props.isLarge ? "400px" : "280px"};
           width: ${(props) =>
-            // @ts-expect-error TS(2339): Property 'autoMaxWidth' does not exist on type 'Th... Remove this comment to see the full error message
             props.autoMaxWidth ? "auto" : props.isLarge ? "520px" : "400px"};
 
           border-radius: 6px;
           @media ${mobile} {
-            // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'ThemePr... Remove this comment to see the full error message
             transform: translateY(${(props) => (props.visible ? "0" : "100%")});
             transition: transform 0.3s ease-in-out;
             position: absolute;
@@ -70,7 +81,7 @@ const Content = styled.div.attrs((props) => ({
             border-radius: 6px 6px 0 0;
           }
         `
-      : css`
+      : css<{ embedded?: boolean; visible?: boolean }>`
           width: 480px;
           display: flex;
           flex-direction: column;
@@ -80,17 +91,15 @@ const Content = styled.div.attrs((props) => ({
 
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
-              ? css`
+              ? css<{ visible?: boolean }>`
                   left: 0;
                   transform: translateX(
-                    // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'ThemePr... Remove this comment to see the full error message
                     ${(props) => (props.visible ? "0" : "-100%")}
                   );
                 `
-              : css`
+              : css<{ visible?: boolean }>`
                   right: 0;
                   transform: translateX(
-                    // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'ThemePr... Remove this comment to see the full error message
                     ${(props) => (props.visible ? "0" : "100%")}
                   );
                 `}
@@ -98,12 +107,11 @@ const Content = styled.div.attrs((props) => ({
           transition: transform 0.3s ease-in-out;
 
           @media ${mobile} {
-            // @ts-expect-error TS(2339): Property 'visible' does not exist on type 'ThemePr... Remove this comment to see the full error message
             transform: translateY(${(props) => (props.visible ? "0" : "100%")});
             height: calc(100% - 64px);
             width: 100%;
             left: 0;
-            // @ts-expect-error TS(2339): Property 'embedded' does not exist on type 'ThemeP... Remove this comment to see the full error message
+
             top: ${(props) => (props.embedded ? "0" : "auto")};
             right: 0;
             top: auto;
@@ -129,7 +137,12 @@ const StyledHeader = styled.div`
   }
 `;
 
-const StyledBody = styled(Box)`
+const StyledBody = styled(Box)<{
+  currentDisplayType?: ModalDialogType;
+  hasFooter?: boolean;
+  isScrollLocked?: boolean;
+  withBodyScroll?: boolean;
+}>`
   position: relative;
   padding: 0 16px;
   padding-bottom: ${(props) =>
@@ -162,7 +175,7 @@ const StyledBody = styled(Box)`
 
   ${(props) =>
     props.currentDisplayType === "aside" &&
-    css`
+    css<{ withBodyScroll?: boolean }>`
       ${props.theme.interfaceDirection === "rtl"
         ? `margin-left: ${props.withBodyScroll ? "-16px" : "0"};`
         : `margin-right: ${props.withBodyScroll ? "-16px" : "0"};`}
@@ -173,11 +186,13 @@ const StyledBody = styled(Box)`
     `}
 `;
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.div<{
+  withFooterBorder?: boolean;
+  isDoubleFooterLine?: boolean;
+}>`
   display: flex;
   flex-direction: row;
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withFooterBorder' does not exist on type... Remove this comment to see the full error message
     props.withFooterBorder &&
     `border-top: 1px solid ${props.theme.modalDialog.headerBorderColor}`};
   padding: 16px;
@@ -188,7 +203,6 @@ const StyledFooter = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDoubleFooterLine' does not exist on ty... Remove this comment to see the full error message
     props.isDoubleFooterLine &&
     css`
       flex-direction: column;

@@ -1,15 +1,12 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
-type FormWrapperProps = {
-  withForm: boolean;
-  className?: string;
-};
+import { ModalDialogFormWrapperProps } from "../ModalDialog.types";
 
 function FormWrapper({
   withForm,
   children,
   className,
-}: PropsWithChildren<FormWrapperProps>) {
+}: ModalDialogFormWrapperProps) {
   if (!withForm) return children;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,4 +20,4 @@ function FormWrapper({
   );
 }
 
-export default FormWrapper;
+export { FormWrapper };

@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { isIOS, isMobileOnly } from "react-device-detect";
 
-import DialogSkeleton from "../../skeletons/dialog";
-import DialogAsideSkeleton from "../../skeletons/dialog/aside";
+import { classNames } from "../../../utils";
+import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
-import Heading from "../../heading";
+import { Heading, HeadingSize } from "../../heading";
+import { Scrollbar, ScrollbarType } from "../../scrollbar";
+
 import {
   StyledModal,
   StyledHeader,
@@ -12,13 +14,10 @@ import {
   Dialog,
   StyledBody,
   StyledFooter,
-} from "../styled-modal-dialog";
-import CloseButton from "../components/CloseButton";
-import ModalBackdrop from "../components/ModalBackdrop";
-import Scrollbar from "../../scrollbar";
-import { classNames } from "../../utils/classNames";
-import FormWrapper from "../components/FormWrapper";
-import { isIOS, isMobileOnly } from "react-device-detect";
+} from "../ModalDialog.styled";
+import { CloseButton } from "./CloseButton";
+import { ModalBackdrop } from "./ModalBackdrop";
+import { FormWrapper } from "./FormWrapper";
 
 const Modal = ({
   id,
@@ -44,34 +43,35 @@ const Modal = ({
   isDoubleFooterLine,
   isCloseable,
   embedded,
-  withForm
+  withForm,
 }: any) => {
   const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
 
   const visualPageTop = React.useRef(0);
   const diffRef = React.useRef(0);
-  const contentRef = React.useRef(0);
+  const contentRef = React.useRef<null | HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (isMobileOnly && isIOS) {
+    if (isMobileOnly && isIOS && window.visualViewport) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }
     return () => {
-      window.visualViewport.removeEventListener("resize", onResize);
-      window.visualViewport.removeEventListener("scroll", onResize);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", onResize);
+        window.visualViewport.removeEventListener("scroll", onResize);
+      }
     };
   }, []);
 
   const onResize = (e: any) => {
-    if (!contentRef.current) return;
+    if (!contentRef.current || !window.visualViewport) return;
 
     if (currentDisplayType === "modal") {
       let diff = windowHeight - e.target.height - e.target.pageTop;
 
       visualPageTop.current = e.target.pageTop;
 
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
       contentRef.current.style.bottom = `${diff}px`;
 
       return;
@@ -81,26 +81,24 @@ const Modal = ({
 
       visualPageTop.current = e.target.pageTop;
 
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
       contentRef.current.style.bottom = `${diff}px`;
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
+
       contentRef.current.style.height = `${
         e.target.height - 64 + e.target.pageTop
       }px`;
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
+
       contentRef.current.style.position = "fixed";
 
       diffRef.current = diff;
     } else if (e?.type === "scroll") {
       const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
 
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
       contentRef.current.style.bottom = `${diffRef.current + diff}px`;
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
+
       contentRef.current.style.height = `${
         window.visualViewport.height - 64 + diff
       }px`;
-      // @ts-expect-error TS(2339): Property 'style' does not exist on type 'number'.
+
       contentRef.current.style.position = "fixed";
     }
   };
@@ -118,7 +116,6 @@ const Modal = ({
     <StyledModal
       id={id}
       className={visible ? "modal-active" : ""}
-      // @ts-expect-error TS(2769): No overload matches this call.
       modalSwipeOffset={modalSwipeOffset}
     >
       <ModalBackdrop
@@ -129,14 +126,14 @@ const Modal = ({
       >
         <Dialog
           id="modal-onMouseDown-close"
-          className={classNames(
-            className,
-            "modalOnCloseBacdrop",
-            "not-selectable",
-            "dialog"
-          )}
-          // @ts-expect-error TS(2769): No overload matches this call.
-          currentDisplayType={currentDisplayType}
+          className={
+            classNames(
+              className,
+              "modalOnCloseBacdrop",
+              "not-selectable",
+              "dialog",
+            ) || ""
+          }
           style={style}
           onMouseDown={validateOnMouseDown}
         >
@@ -149,15 +146,12 @@ const Modal = ({
             autoMaxWidth={autoMaxWidth}
             modalSwipeOffset={modalSwipeOffset}
             embedded={embedded}
-            // @ts-expect-error TS(2769): No overload matches this call.
             ref={contentRef}
           >
             {isCloseable && (
               <CloseButton
                 currentDisplayType={currentDisplayType}
                 onClick={onClose}
-                // @ts-expect-error TS(2322): Type '{ currentDisplayType: any; onClick: any; id:... Remove this comment to see the full error message
-                id={id}
               />
             )}
             {isLoading ? (
@@ -169,6 +163,7 @@ const Modal = ({
               ) : (
                 <DialogAsideSkeleton
                   withoutAside
+                  isPanel={false}
                   withFooterBorder={withFooterBorder}
                 />
               )
@@ -179,23 +174,21 @@ const Modal = ({
                 currentDisplayType !== "modal" ? (
                   <>{containerComponent}</>
                 ) : (
-                  // @ts-expect-error TS(2786): 'FormWrapper' cannot be used as a JSX component.
                   <FormWrapper withForm={withForm}>
                     {header && (
                       <StyledHeader
                         id="modal-header-swipe"
                         className={classNames(
                           "modal-header",
-                          header.props.className
+                          header.props.className,
                         )}
                         currentDisplayType={currentDisplayType}
                         {...header.props}
                       >
-                        // @ts-expect-error TS(2322): Type '{ children: any; level: number; className: s... Remove this comment to see the full error message
                         <Heading
                           level={1}
                           className={"heading"}
-                          size="medium"
+                          size={HeadingSize.medium}
                           truncate={true}
                         >
                           {headerComponent}
@@ -206,7 +199,7 @@ const Modal = ({
                       <StyledBody
                         className={classNames(
                           "modal-body",
-                          body.props.className
+                          body.props.className,
                         )}
                         withBodyScroll={withBodyScroll}
                         isScrollLocked={isScrollLocked}
@@ -216,9 +209,8 @@ const Modal = ({
                         embedded={embedded}
                       >
                         {currentDisplayType === "aside" && withBodyScroll ? (
-                          // @ts-expect-error TS(2322): Type '{ children: any; stype: string; id: string; ... Remove this comment to see the full error message
                           <Scrollbar
-                            stype="mediumBlack"
+                            stype={ScrollbarType.mediumBlack}
                             id="modal-scroll"
                             className="modal-scroll"
                           >
@@ -233,7 +225,7 @@ const Modal = ({
                       <StyledFooter
                         className={classNames(
                           "modal-footer",
-                          footer.props.className
+                          footer.props.className,
                         )}
                         withFooterBorder={withFooterBorder}
                         currentDisplayType={currentDisplayType}
@@ -254,24 +246,4 @@ const Modal = ({
   );
 };
 
-Modal.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  zIndex: PropTypes.number,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  onClose: PropTypes.func,
-  visible: PropTypes.bool,
-  modalSwipeOffset: PropTypes.number,
-
-  isLoading: PropTypes.bool,
-  modalLoaderBodyHeight: PropTypes.string,
-
-  currentDisplayType: PropTypes.oneOf(["auto", "modal", "aside"]),
-  isLarge: PropTypes.bool,
-
-  header: PropTypes.object,
-  body: PropTypes.object,
-  footer: PropTypes.object,
-};
-
-export default Modal;
+export { Modal };

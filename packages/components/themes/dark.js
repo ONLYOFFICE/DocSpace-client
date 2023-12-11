@@ -571,6 +571,10 @@ const Dark = {
     },
   },
 
+  rowContainer: {
+    borderColor: "#474747",
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -1943,6 +1947,7 @@ const Dark = {
     background: black,
     rootFolderTitleColor: "#858585",
     publicIcon: "#858585",
+    boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {
       fill: "#E06A1B",
@@ -2063,11 +2068,13 @@ const Dark = {
     expanderColor: "#C4C4C4",
 
     downloadAppList: {
-      color: "#C4C4C4",
+      textColor: "#858585",
+      color: "#5C5C5C",
       winHoverColor: "#3785D3",
-      macHoverColor: "#000",
+      macHoverColor: "#fff",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#fff",
     },
 
     thirdPartyList: {

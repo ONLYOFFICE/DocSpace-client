@@ -56,14 +56,9 @@ const SetRoomParams = ({
   onKeyUp,
   enableThirdParty,
   setChangeRoomOwnerIsVisible,
-  isAdmin,
-  userId,
   folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
-
-  const isMe = userId === roomParams?.roomOwner?.id;
-  const canChangeRoomOwner = (isAdmin || isMe) && roomParams.roomOwner;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -146,7 +141,7 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {isEdit && canChangeRoomOwner && (
+      {isEdit && (
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
@@ -196,14 +191,12 @@ const SetRoomParams = ({
 };
 
 export default inject(({ auth, dialogsStore }) => {
-  const { user } = auth.userStore;
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation } = auth.settingsStore;
+
   return {
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
-    isAdmin: user.isAdmin || user.isOwner,
-    userId: user.id,
   };
 })(
   observer(

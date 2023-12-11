@@ -84,6 +84,7 @@ const Selector = ({
   acceptButtonId,
   cancelButtonId,
   isChecked,
+  setIsChecked,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -375,6 +376,7 @@ const Selector = ({
           setNewFooterInputValue={setNewFooterInputValue}
           isFooterCheckboxChecked={isFooterCheckboxChecked}
           setIsFooterCheckboxChecked={setIsFooterCheckboxChecked}
+          setIsChecked={setIsChecked}
           disableAcceptButton={
             withFooterInput
               ? disableAcceptButton

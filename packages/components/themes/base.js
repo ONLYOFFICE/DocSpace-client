@@ -578,6 +578,10 @@ const Base = {
     },
   },
 
+  rowContainer: {
+    borderColor: globalColors.grayLightMid,
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -1948,6 +1952,7 @@ const Base = {
     background: white,
     rootFolderTitleColor: "#A3A9AE",
     publicIcon: black,
+    boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
     icon: {
       fill: "#316DAA",
@@ -2067,11 +2072,13 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
-      color: "#83888d",
+      textColor: "#A3A9AE",
+      color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#000",
     },
     thirdPartyList: {
       color: "#818b91",

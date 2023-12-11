@@ -68,6 +68,7 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,9 +107,12 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -121,22 +125,22 @@ const CompanyInfoSettings = (props) => {
     const companySettings = getFromSessionStorage("companySettings");
 
     const defaultData = {
-      address: companyInfoSettingsData.address,
-      companyName: companyInfoSettingsData.companyName,
-      email: companyInfoSettingsData.email,
-      phone: companyInfoSettingsData.phone,
-      site: companyInfoSettingsData.site,
+      address: companyInfoSettingsData?.address,
+      companyName: companyInfoSettingsData?.companyName,
+      email: companyInfoSettingsData?.email,
+      phone: companyInfoSettingsData?.phone,
+      site: companyInfoSettingsData?.site,
     };
 
     saveToSessionStorage("defaultCompanySettings", defaultData);
 
     if (companySettings) {
       setCompanySettings({
-        address: companySettings.address,
-        companyName: companySettings.companyName,
-        email: companySettings.email,
-        phone: companySettings.phone,
-        site: companySettings.site,
+        address: companySettings?.address,
+        companyName: companySettings?.companyName,
+        email: companySettings?.email,
+        phone: companySettings?.phone,
+        site: companySettings?.site,
       });
     } else {
       setCompanySettings(defaultData);
@@ -153,11 +157,11 @@ const CompanyInfoSettings = (props) => {
     );
 
     const newSettings = {
-      address: companySettings.address,
-      companyName: companySettings.companyName,
-      email: companySettings.email,
-      phone: companySettings.phone,
-      site: companySettings.site,
+      address: companySettings?.address,
+      companyName: companySettings?.companyName,
+      email: companySettings?.email,
+      phone: companySettings?.phone,
+      site: companySettings?.site,
     };
 
     saveToSessionStorage("companySettings", newSettings);
@@ -463,7 +467,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -493,6 +497,7 @@ export default inject(({ auth, common }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

@@ -42,6 +42,7 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,9 +63,12 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -507,7 +511,7 @@ export default inject(({ setup, auth, common }) => {
 
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls } = auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
-
+  const { isManagement } = auth;
   return {
     setLogoText,
     theme: auth.settingsStore.theme,
@@ -522,5 +526,6 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

@@ -69,7 +69,9 @@ const ConflictResolveDialog = (props) => {
     items,
     itemOperationToFolder,
     activeFiles,
+    activeFolders,
     setActiveFiles,
+    setActiveFolders,
     updateActiveFiles,
     setSelected,
     setMoveToPanelVisible,
@@ -104,14 +106,17 @@ const ConflictResolveDialog = (props) => {
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
   };
-  const onCloseDialog = () => {
-    let newActiveFiles = activeFiles;
 
-    for (let item of fileIds) {
-      newActiveFiles = newActiveFiles.filter((f) => f !== item);
-    }
+  const differenceArray = (activeItems, ids) => {
+    return activeItems.filter((item) => !ids.includes(item.id ?? item));
+  };
+
+  const onCloseDialog = () => {
+    const newActiveFiles = differenceArray(activeFiles, fileIds);
+    const newActiveFolder = differenceArray(activeFolders, folderIds);
 
     setActiveFiles(newActiveFiles);
+    setActiveFolders(newActiveFolder);
     onClose();
   };
 
@@ -283,8 +288,14 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
   } = dialogsStore;
 
   const { itemOperationToFolder } = uploadDataStore;
-  const { activeFiles, setActiveFiles, updateActiveFiles, setSelected } =
-    filesStore;
+  const {
+    activeFiles,
+    activeFolders,
+    setActiveFiles,
+    setActiveFolders,
+    updateActiveFiles,
+    setSelected,
+  } = filesStore;
   const { settingsStore } = auth;
   const { theme } = settingsStore;
   return {
@@ -295,7 +306,9 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     setConflictResolveDialogVisible,
     itemOperationToFolder,
     activeFiles,
+    activeFolders,
     setActiveFiles,
+    setActiveFolders,
     updateActiveFiles,
     setSelected,
     setMoveToPanelVisible,

@@ -19,16 +19,16 @@ import {
 } from "./ModalDialog.constants";
 import { ModalDialogProps } from "./ModalDialog.types";
 
-const Header = () => null;
+const Header = ({ children }: { children: React.ReactNode }) => null;
 Header.displayName = MODAL_DIALOG_HEADER_NAME;
 
-const Body = () => null;
+const Body = ({ children }: { children: React.ReactNode }) => null;
 Body.displayName = MODAL_DIALOG_BODY_NAME;
 
-const Footer = () => null;
+const Footer = ({ children }: { children: React.ReactNode }) => null;
 Footer.displayName = MODAL_DIALOG_FOOTER_NAME;
 
-const Container = () => null;
+const Container = ({ children }: { children: React.ReactNode }) => null;
 Container.displayName = MODAL_DIALOG_CONTAINER_NAME;
 
 const ModalDialog = ({

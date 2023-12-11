@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import ModalDialog from "./index.js";
-import Button from "../button";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import { Button, ButtonSize } from "../button";
+
+import { ModalDialog } from "./ModalDialog";
+import { ModalDialogType } from "./ModalDialog.enums";
+import { ModalDialogProps } from "./ModalDialog.types";
+
+const meta = {
   title: "Components/ModalDialog",
   component: ModalDialog,
   parameters: {
@@ -12,9 +17,12 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof ModalDialog>;
+type Story = StoryObj<typeof meta>;
 
-const Template = ({ ...args }) => {
+export default meta;
+
+const Template = ({ ...args }: ModalDialogProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const openModal = () => setIsVisible(true);
@@ -22,12 +30,15 @@ const Template = ({ ...args }) => {
 
   return (
     <>
-      // @ts-expect-error TS(2322): Type '{ label: string; primary: boolean; size: str... Remove this comment to see the full error message
-      <Button label="Show" primary={true} size="medium" onClick={openModal} />
+      <Button
+        label="Show"
+        primary={true}
+        size={ButtonSize.medium}
+        onClick={openModal}
+      />
       <ModalDialog {...args} visible={isVisible} onClose={closeModal}>
-        // @ts-expect-error TS(2559): Type '{ children: string; }' has no properties in ... Remove this comment to see the full error message
         <ModalDialog.Header>Change password</ModalDialog.Header>
-        // @ts-expect-error TS(2559): Type '{ children: Element; }' has no properties in... Remove this comment to see the full error message
+
         <ModalDialog.Body>
           <span>
             Send the password change instruction to the{" "}
@@ -37,29 +48,27 @@ const Template = ({ ...args }) => {
             email address
           </span>
         </ModalDialog.Body>
-        // @ts-expect-error TS(2559): Type '{ children: Element[]; }' has no properties ... Remove this comment to see the full error message
+
         <ModalDialog.Footer>
           <Button
             key="SendBtn"
-            // @ts-expect-error TS(2322): Type '{ key: string; label: string; primary: boole... Remove this comment to see the full error message
             label="Send"
             primary={true}
             scale
-            size="normal"
+            size={ButtonSize.normal}
             onClick={() => {
               closeModal();
             }}
           />
           <Button
             key="CloseBtn"
-            // @ts-expect-error TS(2322): Type '{ key: string; label: string; scale: true; s... Remove this comment to see the full error message
             label="Cancel"
             scale
-            size="normal"
+            size={ButtonSize.normal}
             onClick={closeModal}
           />
         </ModalDialog.Footer>
-        // @ts-expect-error TS(2559): Type '{ children: Element; }' has no properties in... Remove this comment to see the full error message
+
         <ModalDialog.Container>
           <div style={{ width: "100%", height: "100%", background: "red" }}>
             123
@@ -70,13 +79,15 @@ const Template = ({ ...args }) => {
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ ...args... Remove this comment to see the full error message
-Default.args = {
-  displayType: "aside",
-  displayTypeDetailed: {
-    desktop: "aside",
-    tablet: "aside",
-    mobile: "aside",
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.aside,
+    displayTypeDetailed: {
+      desktop: ModalDialogType.aside,
+      tablet: ModalDialogType.aside,
+      mobile: ModalDialogType.aside,
+    },
+    children: <></>,
   },
 };

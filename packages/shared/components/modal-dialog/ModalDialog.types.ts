@@ -16,7 +16,7 @@ export interface ModalDialogProps {
   /** Accepts css */
   style?: React.CSSProperties;
   /** Displays the child elements */
-  children: React.ReactElement;
+  children: React.ReactElement[] | React.ReactElement;
   /** Sets the dialog to display */
   visible?: boolean;
   /** Sets a callback function that is triggered when the close button is clicked */
@@ -101,7 +101,7 @@ export interface ModalDialogFormWrapperProps {
 export interface ModalDialogBackdropProps {
   id?: string;
   className?: string;
-  children: React.ReactNode | React.ReactElement;
+  children: React.ReactNode | React.ReactElement[] | React.ReactElement;
   zIndex?: number;
   visible?: boolean;
   modalSwipeOffset?: number;

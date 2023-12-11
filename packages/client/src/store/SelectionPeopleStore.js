@@ -195,9 +195,11 @@ class SelectionStore {
   }
 
   get hasFreeUsers() {
-    return this.selection.every(
+    const users = this.selection.filter(
       (x) => x.status !== EmployeeStatus.Disabled && x.isVisitor
     );
+
+    return users.length > 0;
   }
 
   get hasUsersToActivate() {

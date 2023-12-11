@@ -170,7 +170,11 @@ class SelectionStore {
 
     return users.length > 0;
   }
+  get hasUsersToMakePowerUser() {
+    const { canMakePowerUser } = this.peopleStore.accessRightsStore;
 
+    return this.selection.every((x) => canMakePowerUser(x));
+  }
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.peopleStore.accessRightsStore;
 

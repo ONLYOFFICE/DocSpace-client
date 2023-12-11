@@ -183,6 +183,7 @@ class PeopleStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasOnlyOneUserToRemove,
+      hasUsersToMakePowerUser,
       hasFreeUsers,
       userSelectionRole,
       selection,
@@ -228,10 +229,20 @@ class PeopleStore {
       key: "user",
       isActive: userSelectionRole === "user",
     };
-
+    const collaboratorOption = {
+      id: "menu_change-collaborator",
+      key: "collaborator",
+      title: t("Common:PowerUser"),
+      label: t("Common:PowerUser"),
+      "data-action": "collaborator",
+      onClick: (e) => this.onChangeType(e),
+      isActive: userSelectionRole === "collaborator",
+    };
     isOwner && options.push(adminOption);
 
     options.push(managerOption);
+
+    hasUsersToMakePowerUser && options.push(collaboratorOption);
 
     hasFreeUsers && options.push(userOption);
 

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Avatar from "@docspace/components/avatar";
+
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
@@ -17,6 +18,7 @@ import { isMobileOnly } from "react-device-detect";
 import toastr from "@docspace/components/toast/toastr";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { getUserRole, convertLanguage } from "@docspace/common/utils";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import { Trans } from "react-i18next";
 //import TimezoneCombo from "./timezoneCombo";
@@ -150,6 +152,8 @@ const MainProfile = (props) => {
         toastr.error(error && error.message ? error.message : error);
       });
   };
+
+  const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
     <StyledWrapper>
@@ -316,6 +320,7 @@ const MainProfile = (props) => {
                 fillIcon={false}
                 modernView={!isMobile()}
               />
+              {isBetaLanguage && <BetaBadge />}
             </div>
           </div>
         </div>
@@ -417,28 +422,31 @@ const MainProfile = (props) => {
                 tooltipContent={tooltipLanguage}
               />
             </Text>
-            <ComboBox
-              className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-              options={cultureNames}
-              selectedOption={selectedLanguage}
-              onSelect={onLanguageSelect}
-              isDisabled={false}
-              scaled={isMobile()}
-              scaledOptions={false}
-              size="content"
-              showDisabledItems={true}
-              dropDownMaxHeight={364}
-              manualWidth="250px"
-              isDefaultMode={
-                isMobileHorizontalOrientation
-                  ? isMobileHorizontalOrientation
-                  : !isMobile()
-              }
-              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
-              fillIcon={false}
-              modernView={!isMobile()}
-            />
+            <div className="mobile-language__wrapper-combo-box">
+              <ComboBox
+                className="language-combo-box"
+                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                options={cultureNames}
+                selectedOption={selectedLanguage}
+                onSelect={onLanguageSelect}
+                isDisabled={false}
+                scaled={isMobile()}
+                scaledOptions={false}
+                size="content"
+                showDisabledItems={true}
+                dropDownMaxHeight={364}
+                manualWidth="250px"
+                isDefaultMode={
+                  isMobileHorizontalOrientation
+                    ? isMobileHorizontalOrientation
+                    : !isMobile()
+                }
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                fillIcon={false}
+                modernView={!isMobile()}
+              />
+              {isBetaLanguage && <BetaBadge />}
+            </div>
           </div>
         </div>
         {/* <TimezoneCombo title={t("Common:ComingSoon")} /> */}

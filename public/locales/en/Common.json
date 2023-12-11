@@ -24,6 +24,8 @@
   "Authorization": "Authorization",
   "BarMaintenanceDescription": "We apologize for any short-term technical issues in service functioning that may appear on {{targetDate}} during the update of {{productName}}.",
   "BarMaintenanceDisclaimer": "Please, make sure that all the changes are successfully saved during this day.",
+  "BetaBadgeDescription": "Please note: you can enable RTL languages for the DocSpace interface in the beta mode. RTL support for the editors will be available soon. If you have found a bug, please submit it via <1>forum</1> or contact us at <3>{{supportEmail}}</3>.",
+  "BetaBadgeTitle": "RTL interface",
   "Bonus": "Bonus",
   "BookNow": "Book now",
   "BookTeamTraining": "Book a team training session with our best specialists",

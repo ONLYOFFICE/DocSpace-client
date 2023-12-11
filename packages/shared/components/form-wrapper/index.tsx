@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { tablet, mobile } from "../utils/device";
-
-import Base from "../themes/base";
+import { tablet, mobile } from "../../utils";
+import { Base } from "../../themes";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -32,11 +31,16 @@ const StyledWrapper = styled.div`
 
 StyledWrapper.defaultProps = { theme: Base };
 
-const FormWrapper = (props: any) => {
+interface FormWrapperProps {
+  children: React.ReactNode;
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const FormWrapper = (props: FormWrapperProps) => {
   const { children } = props;
   return <StyledWrapper {...props}>{children}</StyledWrapper>;
 };
 
-FormWrapper.defaultProps = { theme: Base };
-
-export default FormWrapper;
+export { FormWrapper };

@@ -36,8 +36,10 @@ import { InputBlock } from "./input-block";
 import { SearchInput } from "./search-input";
 import { FileInput } from "./file-input";
 import { CodeInput } from "./code-input";
+import { FormWrapper } from "./form-wrapper";
 
 export {
+  FormWrapper,
   CodeInput,
   FileInput,
   SearchInput,

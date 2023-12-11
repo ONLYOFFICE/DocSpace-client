@@ -8,7 +8,11 @@ import Link from "@docspace/components/link";
 import type BetaBadgeProps from "./BetaBadge.props";
 import { DeviceType } from "../../constants";
 
+const MobileOffset = 4;
+const OtherOffset = 10;
+
 function BetaBadge({
+  place,
   currentColorScheme,
   documentationEmail,
   currentDeviceType,
@@ -40,13 +44,13 @@ function BetaBadge({
 
   const isMobile = currentDeviceType === DeviceType.mobile;
 
-  const offset = isMobile ? 4 : 10;
+  const offset = isMobile ? MobileOffset : OtherOffset;
 
   return (
     <InfoBadge
       offset={offset}
       noArrow={isMobile}
-      place={"bottom-end"}
+      place={place}
       label={t("Settings:BetaLabel")}
       tooltipDescription={tooltipLanguage}
       tooltipTitle={t("Common:BetaBadgeTitle")}

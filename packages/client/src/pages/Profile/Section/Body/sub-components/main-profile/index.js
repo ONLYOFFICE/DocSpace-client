@@ -320,7 +320,7 @@ const MainProfile = (props) => {
                 fillIcon={false}
                 modernView={!isMobile()}
               />
-              {isBetaLanguage && <BetaBadge />}
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
             </div>
           </div>
         </div>
@@ -445,7 +445,7 @@ const MainProfile = (props) => {
                 fillIcon={false}
                 modernView={!isMobile()}
               />
-              {isBetaLanguage && <BetaBadge />}
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
             </div>
           </div>
         </div>

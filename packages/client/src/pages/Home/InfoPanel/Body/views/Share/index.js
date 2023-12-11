@@ -30,8 +30,10 @@ const Share = (props) => {
   const [primaryFileLink, setPrimaryFileLink] = useState([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
 
+  const hideSharePanel = isRooms || !selection?.canShare;
+
   useEffect(() => {
-    if (isRooms || !selection?.canShare) {
+    if (hideSharePanel) {
       setView("info_details");
     }
     fetchLinks();
@@ -156,6 +158,8 @@ const Share = (props) => {
       setAdditionalFileLinks(newArr);
     }
   };
+
+  if (hideSharePanel) return <></>;
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import Base from "../themes/base";
-import { tablet } from "../utils/device";
+import { Base } from "../../themes";
+import { tablet } from "../../utils";
 
 const itemTruncate = css`
   white-space: nowrap;
@@ -35,23 +35,30 @@ const WrapperToggle = styled.div`
   }
 `;
 
-const StyledDropdownItem = styled.div`
-  // @ts-expect-error TS(2339): Property 'textOverflow' does not exist on type 'Th... Remove this comment to see the full error message
+const StyledDropdownItem = styled.div<{
+  textOverflow?: boolean;
+  minWidth?: string;
+  isModern?: boolean;
+  disabled?: boolean;
+  noHover?: boolean;
+  isHeader?: boolean;
+  isSeparator?: boolean;
+  isActiveDescendant?: boolean;
+  isSelected?: boolean;
+  isActive?: boolean;
+}>`
   display: ${(props) => (props.textOverflow ? "block" : "flex")};
   width: ${(props) => props.theme.dropDownItem.width};
   max-width: ${(props) => props.theme.dropDownItem.maxWidth};
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'minWidth' does not exist on type 'Themed... Remove this comment to see the full error message
     props.minWidth &&
     css`
-      // @ts-expect-error TS(2339): Property 'minWidth' does not exist on type 'Themed... Remove this comment to see the full error message
       min-width: ${props.minWidth};
     `};
   border: ${(props) => props.theme.dropDownItem.border};
   cursor: pointer;
   margin: ${(props) => props.theme.dropDownItem.margin};
   padding: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isModern' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isModern ? "0 8px" : props.theme.dropDownItem.padding};
   line-height: ${(props) => props.theme.dropDownItem.lineHeight};
   box-sizing: border-box;
@@ -65,7 +72,6 @@ const StyledDropdownItem = styled.div`
     svg {
       path[fill] {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
           props.disabled
             ? props.theme.dropDownItem.icon.disableColor
             : props.theme.dropDownItem.icon.color};
@@ -73,7 +79,6 @@ const StyledDropdownItem = styled.div`
 
       path[stroke] {
         stroke: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
           props.disabled
             ? props.theme.dropDownItem.icon.disableColor
             : props.theme.dropDownItem.icon.color};
@@ -81,7 +86,6 @@ const StyledDropdownItem = styled.div`
 
       circle[fill] {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
           props.disabled
             ? props.theme.dropDownItem.icon.disableColor
             : props.theme.dropDownItem.icon.color};
@@ -89,7 +93,6 @@ const StyledDropdownItem = styled.div`
 
       rect[fill] {
         fill: ${(props) =>
-          // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
           props.disabled
             ? props.theme.dropDownItem.icon.disableColor
             : props.theme.dropDownItem.icon.color};
@@ -109,9 +112,7 @@ const StyledDropdownItem = styled.div`
 
   &:hover {
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'noHover' does not exist on type 'ThemedS... Remove this comment to see the full error message
       !props.noHover &&
-      // @ts-expect-error TS(2339): Property 'isHeader' does not exist on type 'Themed... Remove this comment to see the full error message
       !props.isHeader &&
       css`
         background-color: ${(props) =>
@@ -126,7 +127,6 @@ const StyledDropdownItem = styled.div`
   }
 
   &:active {
-    // @ts-expect-error TS(2339): Property 'isHeader' does not exist on type 'Omit<D... Remove this comment to see the full error message
     ${({ isHeader, theme }) =>
       !isHeader &&
       css`
@@ -135,7 +135,6 @@ const StyledDropdownItem = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isSeparator' does not exist on type 'The... Remove this comment to see the full error message
     props.isSeparator &&
     css`
       padding: ${props.theme.dropDownItem.separator.padding};
@@ -158,7 +157,6 @@ const StyledDropdownItem = styled.div`
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
-  // @ts-expect-error TS(2339): Property 'isHeader' does not exist on type 'Omit<D... Remove this comment to see the full error message
   ${({ isHeader, theme }) =>
     isHeader &&
     css`
@@ -182,20 +180,16 @@ const StyledDropdownItem = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isActiveDescendant' does not exist on ty... Remove this comment to see the full error message
     props.isActiveDescendant &&
-    // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
     !props.disabled &&
     css`
       background-color: ${(props) =>
         props.theme.dropDownItem.hoverBackgroundColor};
     `}
 
-  // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
   ${(props) => props.disabled && !props.isSelected && disabledAndHeaderStyle}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'Themed... Remove this comment to see the full error message
     ((props.disabled && props.isSelected) || props.isActive) &&
     css`
       background-color: ${(props) =>
@@ -210,7 +204,6 @@ const StyledDropdownItem = styled.div`
         `
         : `margin-left: auto;`}
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
       props.isActive &&
       css`
         transform: rotate(90deg);

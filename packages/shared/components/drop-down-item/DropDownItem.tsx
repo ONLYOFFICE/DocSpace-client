@@ -1,20 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { ReactSVG } from "react-svg";
 
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/right.arrow.... Remove this comment to see the full error message
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/arrow-left.r... Remove this comment to see the full error message
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
+
+import { ToggleButton } from "../toggle-button";
 
 import {
   StyledDropdownItem,
   IconWrapper,
   WrapperToggle,
-} from "./styled-drop-down-item";
-import ToggleButton from "../toggle-button";
+} from "./DropDownItem.styled";
+import { DropDownItemProps } from "./DropDownItem.types";
 
-const DropDownItem = (props: any) => {
+const DropDownItem = (props: DropDownItemProps) => {
   const {
     isSeparator,
     isHeader,
@@ -25,29 +24,31 @@ const DropDownItem = (props: any) => {
     children,
     disabled,
     className,
-    theme,
+
     fillIcon,
     isSubMenu,
     isActive,
     withoutIcon,
     noHover,
-    height,
+
     isSelected,
     isActiveDescendant,
   } = props;
 
   const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
 
-  const onClickAction = (e: any) => {
-    onClick && !disabled && onClick(e);
-    onClickSelectedItem && isSelected && onClickSelectedItem();
+  const onClickAction = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (onClick && !disabled) onClick(e);
+    if (onClickSelectedItem && isSelected) onClickSelectedItem();
   };
 
   const stopPropagation = (event: any) => {
     event.stopPropagation();
   };
 
-  const onChange = (event: any) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     stopPropagation(event);
     onClickAction(event);
   };
@@ -62,8 +63,8 @@ const DropDownItem = (props: any) => {
       isActive={isActive}
       isHeader={isHeader}
       isSelected={isSelected}
-      withToggle={withToggle}
       isActiveDescendant={isActiveDescendant}
+      data-testid="drop-down-item"
     >
       {isHeader && withHeaderArrow && (
         <IconWrapper
@@ -109,59 +110,15 @@ const DropDownItem = (props: any) => {
 
       {withToggle && (
         <WrapperToggle onClick={stopPropagation}>
-          // @ts-expect-error TS(2322): Type '{ isChecked: any; onChange: (event: any) => ... Remove this comment to see the full error message
-          <ToggleButton isChecked={checked} onChange={onChange} noAnimation />
+          <ToggleButton
+            isChecked={checked || false}
+            onChange={onChange}
+            noAnimation
+          />
         </WrapperToggle>
       )}
     </StyledDropdownItem>
   );
-};
-
-DropDownItem.propTypes = {
-  /** Sets the dropdown item to display as a separator */
-  isSeparator: PropTypes.bool,
-  /** Sets the dropdown to display as a header */
-  isHeader: PropTypes.bool,
-  /** Enables header arrow icon */
-  withHeaderArrow: PropTypes.bool,
-  /** Sets an action that will be triggered when the header arrow is clicked */
-  headerArrowAction: PropTypes.func,
-  /** Accepts tab-index */
-  tabIndex: PropTypes.number,
-  /** Dropdown item text */
-  label: PropTypes.string,
-  /** Sets the dropdown item to display as disabled */
-  disabled: PropTypes.bool,
-  /** Dropdown item icon */
-  icon: PropTypes.string,
-  /** Disables default style hover effect */
-  noHover: PropTypes.bool,
-  /** Sets an action that will be triggered when the dropdown item is clicked */
-  onClick: PropTypes.func,
-  /** Children elements */
-  children: PropTypes.any,
-  /** Accepts class */
-  className: PropTypes.string,
-  /** Accepts id */
-  id: PropTypes.string,
-  /** Accepts css style */
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** Accepts css text-overflow */
-  textOverflow: PropTypes.bool,
-  /** Indicates that component will fill selected item icon */
-  fillIcon: PropTypes.bool,
-  /** Enables the submenu */
-  isSubMenu: PropTypes.bool,
-  /**  Sets drop down item active  */
-  isActive: PropTypes.bool,
-  /** Disables the element icon */
-  withoutIcon: PropTypes.bool,
-  /** Sets the padding to the minimum value */
-  isModern: PropTypes.bool,
-  /** Facilitates highlighting a selected element with the keyboard */
-  isActiveDescendant: PropTypes.bool,
-  /** Facilitates selecting an element from the context menu */
-  isSelected: PropTypes.bool,
 };
 
 DropDownItem.defaultProps = {

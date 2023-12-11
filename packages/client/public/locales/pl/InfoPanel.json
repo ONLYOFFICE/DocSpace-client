@@ -28,6 +28,7 @@
   "FeedUpdateUser": "przypisano rolę {{role}}",
   "FileExtension": "Rozszerzenie pliku",
   "FilesEmptyScreenText": "Zobacz szczegóły plików i folderów tutaj",
+  "GalleryEmptyScreenText": "Zobacz szczegóły szablonu formularza tutaj",
   "HistoryEmptyScreenText": "Historia aktywności będzie widoczna tutaj",
   "InfoBanner": "Lista zaproszonych użytkowników obejmuje właściciela i/lub administratorów tego konta DocSpace z pełnym dostępem do wszystkich pokoi. Właścicielowi i/lub administratorowi nie można przypisać innych praw dostępu. Po dodaniu do pokoju zostaną powiadomieni o wszystkich zmianach.",
   "ItemsSelected": "Wybrano elementy",

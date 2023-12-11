@@ -54,5 +54,5 @@
   "WebhookRemoved": "Webhook odstránený",
   "Webhooks": "Webhooky",
   "WebhooksGuide": "Sprievodca webhookmi",
-  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v ONLYOFFICE DocSpace."
+  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v ONLYOFFICE DocSpace.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
 }

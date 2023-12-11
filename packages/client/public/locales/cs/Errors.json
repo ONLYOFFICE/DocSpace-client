@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Přístup odepřen",
   "Error401Text": "Omlouváme se, ale tento zdroj není v současné době přístupný.",
   "Error403Text": "Omlouváme se, přístup odepřen.",
   "Error404Text": "Omlouváme se, zdroj nelze najít.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace není k dispozici",
   "InvalidLink": "Neplatný odkaz",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
-  "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela."
+  "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela.",
+  "PortalRestriction": "Vaše IP adresa není uvedena v seznamu povolených IP adres pro přístup k tomuto DocSpace. Vypněte VPN, pokud je povolena, a znovu načtěte stránku nebo použijte k přihlášení jinou IP adresu."
 }

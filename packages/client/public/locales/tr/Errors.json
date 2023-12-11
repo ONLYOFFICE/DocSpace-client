@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Erişim engellendi",
   "Error401Text": "Üzgünüz, kaynak şu anda ulaşılabilir değil.",
   "Error403Text": "Üzgünüz, erişim reddedildi.",
   "Error404Text": "Üzgünüz, kaynak bulunamadı.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace kullanılamıyor",
   "InvalidLink": "Geçersiz bağlantı",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
-  "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu."
+  "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu.",
+  "PortalRestriction": "IP adresiniz bu DocSpace'e erişimine izin verilen IP adresleri listesinde yer almıyor. Etkinleştirilmişse VPN'i kapatın ve sayfayı yeniden yükleyin veya oturum açmak için başka bir IP adresi kullanın."
 }

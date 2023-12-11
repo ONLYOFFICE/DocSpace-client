@@ -1,8 +1,13 @@
 {
+  "ActionCannotBeUndone": " سيتم إزالة المستخدمين المُعطلين المحددين من DocSpace. لا يمكن التراجع عن هذا الإجراء.",
+  "CannotReassignFiles": " إذا تم حذف عدة مستخدمين مرة واحدة، لا يمكنك إعادة تعيين ملفاتهم لمستخدمين آخرين.",
   "DeleteMyDocumentsUser": "سيتم حذف كافة الملفات الشخصية والمجلدات في قسم مستنداتي لهذا المستخدم بشكل دائم.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} سيتم إعادة التعيين بشكل تلقائي للغرف التي تم إنشاءها بواسطة هذا المستخدم والمستندات المخزنة في الغرف إلى المسئول الذي قام بعملية الحذف: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. قم بإعادة تعيين البيانات بشكل يدوي لإختيار وجهة أخرى لإعادة التعيين.",
   "DeleteUser": "حذف المستخدم",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",
+  "DeletingUsers": " حذف مستخدمين",
+  "PleaseNote": " يرجى الملاحظة:",
   "ReassignDataToAnotherUser": "إعادة تعيين البيانات لمستخدم آخر",
-  "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح"
+  "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح",
+  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة."
 }

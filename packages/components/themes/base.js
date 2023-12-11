@@ -90,6 +90,12 @@ const Base = {
 
   backgroundAndSubstrateColor: "#F8F9F9",
 
+  betaBadgeTooltip: {
+    color: black,
+    background: "#242424",
+    boxShadowColor: "rgba(4, 15, 27, 0.12)",
+  },
+
   button: {
     fontWeight: "600",
     margin: "0",

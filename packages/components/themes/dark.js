@@ -85,7 +85,7 @@ const Dark = {
 
   betaBadgeTooltip: {
     color: white,
-    background: black,
+    background: "#242424",
     boxShadowColor: "rgba(0, 0, 0, 0.40)",
   },
 

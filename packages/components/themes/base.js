@@ -92,7 +92,7 @@ const Base = {
 
   betaBadgeTooltip: {
     color: black,
-    background: "#242424",
+    background: white,
     boxShadowColor: "rgba(4, 15, 27, 0.12)",
   },
 

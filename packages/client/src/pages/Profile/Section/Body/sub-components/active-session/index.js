@@ -28,7 +28,7 @@ import {
   TableDataCell,
 } from "./styled-active-sessions";
 import { DeviceType } from "@docspace/common/constants";
-import moment from "moment";
+import moment from "moment-timezone";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -114,7 +114,10 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return moment(date).locale(locale).format("L, LTS");
+    return moment(date)
+      .tz(window.timezone || "")
+      .locale(locale)
+      .format("L, LTS");
   };
   const tableCell = (platform, browser) =>
     interfaceDirection === "rtl" && !isMobile ? (

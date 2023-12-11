@@ -2,10 +2,10 @@ import React from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
-import { providersData } from "@docspace/common/constants";
+import { providersData } from "../../constants";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
-import { getProviderTranslation } from "@docspace/common/utils";
+import { getProviderTranslation } from "../../utils";
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import { mobile } from "@docspace/components/utils/device";
 

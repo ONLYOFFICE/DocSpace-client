@@ -27,6 +27,7 @@ const StyledText = styled(Text)`
 
 const ImportCompleteStep = ({
   t,
+  checkedUsers,
   importResult,
   getMigrationLog,
   clearCheckedAccounts,
@@ -69,9 +70,17 @@ const ImportCompleteStep = ({
       <StyledText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
-          importedUsers: importResult.failedUsers,
+          importedUsers: checkedUsers.result.length,
         })}
       </StyledText>
+
+      {importResult.failedUsers > 0 && (
+        <Box marginProp="8px 0 0">
+          <Text fontSize="12px" color="#F21C0E">
+            {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
+          </Text>
+        </Box>
+      )}
 
       <Wrapper>
         <Checkbox
@@ -83,9 +92,7 @@ const ImportCompleteStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={
-            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
         />
       </Wrapper>
 
@@ -103,14 +110,11 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const {
-    importResult,
-    getMigrationLog,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-  } = importAccountsStore;
+  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
+    importAccountsStore;
 
   return {
+    checkedUsers,
     importResult,
     getMigrationLog,
     clearCheckedAccounts,

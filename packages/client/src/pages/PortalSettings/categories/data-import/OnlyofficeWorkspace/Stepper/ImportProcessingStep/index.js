@@ -31,8 +31,6 @@ const ImportProcessingStep = ({
   setIsLoading,
   proceedFileMigration,
   cancelMigration,
-  importOptions,
-  finalUsers,
   getMigrationStatus,
   setImportResult,
 }) => {
@@ -42,11 +40,7 @@ const ImportProcessingStep = ({
 
   const handleFileMigration = async () => {
     try {
-      await proceedFileMigration({
-        users: finalUsers,
-        migratorName: "Workspace",
-        ...importOptions,
-      });
+      await proceedFileMigration("Workspace");
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
@@ -105,18 +99,14 @@ export default inject(({ importAccountsStore }) => {
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
-    importOptions,
-    finalUsers,
     getMigrationStatus,
     setImportResult,
   } = importAccountsStore;
 
   return {
-    importOptions,
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
-    finalUsers,
     getMigrationStatus,
     setImportResult,
   };

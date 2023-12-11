@@ -11,6 +11,7 @@ import { Wrapper } from "../StyledStepper";
 
 const SeventhStep = ({
   t,
+  checkedUsers,
   importResult,
   getMigrationLog,
   clearCheckedAccounts,
@@ -53,7 +54,7 @@ const SeventhStep = ({
       <Text fontSize="12px">
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
-          importedUsers: importResult.failedUsers,
+          importedUsers: checkedUsers.result.length,
         })}
       </Text>
       {importResult.failedUsers > 0 && (
@@ -90,10 +91,11 @@ const SeventhStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
+  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
     importAccountsStore;
 
   return {
+    checkedUsers,
     importResult,
     getMigrationLog,
     clearCheckedAccounts,

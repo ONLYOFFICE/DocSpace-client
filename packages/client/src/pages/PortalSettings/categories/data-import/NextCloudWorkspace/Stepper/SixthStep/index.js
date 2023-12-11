@@ -13,8 +13,6 @@ const SixthStep = ({
   setIsLoading,
   proceedFileMigration,
   cancelMigration,
-  importOptions,
-  finalUsers,
   getMigrationStatus,
   setImportResult,
 }) => {
@@ -24,11 +22,7 @@ const SixthStep = ({
 
   const handleFileMigration = async () => {
     try {
-      await proceedFileMigration({
-        users: finalUsers,
-        migratorName: "Nextcloud",
-        ...importOptions,
-      });
+      await proceedFileMigration("Nextcloud");
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
@@ -87,18 +81,14 @@ export default inject(({ importAccountsStore }) => {
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
-    importOptions,
-    finalUsers,
     getMigrationStatus,
     setImportResult,
   } = importAccountsStore;
 
   return {
-    importOptions,
     setIsLoading,
     proceedFileMigration,
     cancelMigration,
-    finalUsers,
     getMigrationStatus,
     setImportResult,
   };

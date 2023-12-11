@@ -7,6 +7,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
+import Box from "@docspace/components/box";
 
 const Wrapper = styled.div`
   margin: 0 0 16px;
@@ -27,6 +28,7 @@ const StyledText = styled(Text)`
 
 const ImportCompleteStep = ({
   t,
+  checkedUsers,
   importResult,
   getMigrationLog,
   clearCheckedAccounts,
@@ -69,9 +71,17 @@ const ImportCompleteStep = ({
       <StyledText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
-          importedUsers: importResult.failedUsers,
+          importedUsers: checkedUsers.result.length,
         })}
       </StyledText>
+
+      {importResult.failedUsers > 0 && (
+        <Box marginProp='8px 0 0'> 
+          <Text fontSize="12px" color="#F21C0E">
+            {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
+          </Text>
+        </Box>
+      )}
 
       <Wrapper>
         <Checkbox
@@ -101,10 +111,11 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
+  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
     importAccountsStore;
 
   return {
+    checkedUsers,
     importResult,
     getMigrationLog,
     clearCheckedAccounts,

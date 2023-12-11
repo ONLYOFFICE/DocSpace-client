@@ -132,7 +132,7 @@ class AxiosClient {
       if (options.baseURL === "/apisystem" && !response.data.response)
         return response.data;
 
-      return response.data.response;
+      return response.data.response ?? response.data;
     };
 
     const onError = (error) => {

@@ -130,7 +130,7 @@ export default inject(({ auth, pluginStore }) => {
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
-  const withDelete = pluginOptions.includes("delete") && !plugin.system;
+  const withDelete = pluginOptions.delete && !plugin.system;
 
   const pluginSettings = plugin?.getAdminPluginSettings();
 

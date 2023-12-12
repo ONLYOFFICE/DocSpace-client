@@ -53,23 +53,25 @@
     },
   };
 
-  const checkCSP = async (targetSrc, onAppError) => {
-    let allow = false;
+  const checkCSP = (targetSrc, onAppError) => {
     const currentSrc = window.location.origin;
 
-    try {
-      const cspSettings = await fetch(`${targetSrc}/api/2.0/security/csp`);
-      const res = await cspSettings.json();
-      const { header } = res.response;
+    const a = async () => {
+      try {
+        const cspSettings = await fetch(`${targetSrc}/api/2.0/security/csp`);
+        const res = await cspSettings.json();
+        const { header } = res.response;
 
-      allow =
-        header.indexOf(window.location.origin) !== -1 ||
-        targetSrc === currentSrc;
-    } catch (e) {
-      onAppError(e);
-    }
+        return (
+          header.indexOf(window.location.origin) !== -1 ||
+          targetSrc === currentSrc
+        );
+      } catch (e) {
+        onAppError(e);
+      }
+    };
 
-    return allow;
+    return a();
   };
 
   const getConfigFromParams = () => {
@@ -102,7 +104,7 @@
   class DocSpace {
     #iframe;
     #isConnected = false;
-    #cspInstalled = false;
+    #cspInstalled = true;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -302,13 +304,13 @@
       this.#sendMessage(message);
     };
 
-    async initFrame(config) {
+    initFrame(config) {
       const configFull = Object.assign(defaultConfig, config);
       this.config = Object.assign(this.config, configFull);
 
       const target = document.getElementById(this.config.frameId);
 
-      this.#cspInstalled = await checkCSP(
+      this.#cspInstalled = checkCSP(
         this.config.src,
         this.config.events.onAppError
       );

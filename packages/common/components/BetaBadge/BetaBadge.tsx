@@ -13,6 +13,7 @@ const OtherOffset = 10;
 
 function BetaBadge({
   place,
+  mobilePlace = "bottom-end",
   currentColorScheme,
   documentationEmail,
   currentDeviceType,
@@ -50,7 +51,7 @@ function BetaBadge({
     <InfoBadge
       offset={offset}
       noArrow={isMobile}
-      place={isMobile ? "bottom-end" : place}
+      place={isMobile ? mobilePlace : place}
       label={t("Settings:BetaLabel")}
       tooltipDescription={tooltipLanguage}
       tooltipTitle={t("Common:BetaBadgeTitle")}

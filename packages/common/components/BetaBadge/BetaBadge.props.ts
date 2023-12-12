@@ -5,6 +5,7 @@ interface BetaBadgeProps {
   currentDeviceType?: "desktop" | "tablet" | "mobile";
 
   place: PlacesType;
+  mobilePlace?: PlacesType;
 }
 
 export default BetaBadgeProps;

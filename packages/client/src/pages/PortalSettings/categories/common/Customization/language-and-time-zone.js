@@ -18,6 +18,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import BetaBadge from "@docspace/common/components/BetaBadge";
+import { isBetaLanguage } from "@docspace/common/utils";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -31,7 +32,7 @@ const mapCulturesToArray = (cultures, i18n) => {
     return {
       key: culture,
       label: t(`Culture_${culture}`),
-      isBeta: culture === "ar-SA",
+      isBeta: isBetaLanguage(culture),
     };
   });
 };

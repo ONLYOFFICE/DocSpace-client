@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import DropDownItem from "./DropDownItem";
-
 import NavLogoReactSvgUrl from "PUBLIC_DIR/images/nav.logo.react.svg?url";
+
+import { DropDownItem } from "./DropDownItem";
 
 const baseProps = {
   isSeparator: false,

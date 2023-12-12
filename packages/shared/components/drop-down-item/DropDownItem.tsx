@@ -44,7 +44,9 @@ const DropDownItem = (props: DropDownItemProps) => {
     if (onClickSelectedItem && isSelected) onClickSelectedItem();
   };
 
-  const stopPropagation = (event: any) => {
+  const stopPropagation = (
+    event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+  ) => {
     event.stopPropagation();
   };
 
@@ -80,7 +82,11 @@ const DropDownItem = (props: DropDownItemProps) => {
           {!withoutIcon ? (
             (!icon.includes("images/") && !icon.includes(".svg")) ||
             icon.includes("webplugins") ? (
-              <img className="drop-down-icon_image" src={icon} />
+              <img
+                className="drop-down-icon_image"
+                src={icon}
+                alt="plugin-logo"
+              />
             ) : (
               <ReactSVG
                 src={icon}
@@ -137,4 +143,4 @@ DropDownItem.defaultProps = {
   heightTablet: 36,
 };
 
-export default DropDownItem;
+export { DropDownItem };

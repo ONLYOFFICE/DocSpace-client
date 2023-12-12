@@ -115,14 +115,12 @@ const StyledDropdownItem = styled.div<{
       !props.noHover &&
       !props.isHeader &&
       css`
-        background-color: ${(props) =>
-          props.theme.dropDownItem.hoverBackgroundColor};
+        background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
         text-align: left;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl" &&
-          css`
-            text-align: right;
-          `}
+        ${props.theme.interfaceDirection === "rtl" &&
+        css`
+          text-align: right;
+        `}
       `}
   }
 
@@ -183,8 +181,7 @@ const StyledDropdownItem = styled.div<{
     props.isActiveDescendant &&
     !props.disabled &&
     css`
-      background-color: ${(props) =>
-        props.theme.dropDownItem.hoverBackgroundColor};
+      background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
     `}
 
   ${(props) => props.disabled && !props.isSelected && disabledAndHeaderStyle}
@@ -192,8 +189,7 @@ const StyledDropdownItem = styled.div<{
   ${(props) =>
     ((props.disabled && props.isSelected) || props.isActive) &&
     css`
-      background-color: ${(props) =>
-        props.theme.dropDownItem.selectedBackgroundColor};
+      background-color: ${props.theme.dropDownItem.selectedBackgroundColor};
     `}
 
   .submenu-arrow {
@@ -233,7 +229,7 @@ const IconWrapper = styled.div`
     props.theme.interfaceDirection === "rtl" &&
     css`
       margin-right: 0;
-      margin-left: ${(props) => props.theme.dropDownItem.icon.marginRight};
+      margin-left: ${props.theme.dropDownItem.icon.marginRight};
     `}
 
   height: 20px;

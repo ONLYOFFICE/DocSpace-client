@@ -38,8 +38,12 @@ import { FileInput } from "./file-input";
 import { CodeInput } from "./code-input";
 import { FormWrapper } from "./form-wrapper";
 import { ModalDialog, ModalDialogType } from "./modal-dialog";
+import { DropDownItem } from "./drop-down-item";
+import { DropDown } from "./drop-down";
 
 export {
+  DropDown,
+  DropDownItem,
   ModalDialog,
   ModalDialogType,
   FormWrapper,

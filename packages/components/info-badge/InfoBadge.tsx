@@ -11,7 +11,6 @@ import {
   InfoBadgeDescription,
   InfoBadgeHeader,
   InfoBadgeTitle,
-  InfoBadgeWrapper,
   StyledToolTip,
 } from "./InfoBadge.styled";
 import type InfoBadgeProps from "./InfoBadge.props";
@@ -26,7 +25,7 @@ function InfoBadge(props: InfoBadgeProps) {
   }, []);
 
   return (
-    <InfoBadgeWrapper>
+    <div>
       <Badge
         noHover
         fontSize="9px"
@@ -62,7 +61,7 @@ function InfoBadge(props: InfoBadgeProps) {
           </InfoBadgeDescription>
         </InfoBadgeContent>
       </StyledToolTip>
-    </InfoBadgeWrapper>
+    </div>
   );
 }
 

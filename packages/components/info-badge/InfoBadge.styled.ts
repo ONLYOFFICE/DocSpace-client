@@ -3,23 +3,13 @@ import styled from "styled-components";
 import Tooltip from "../tooltip";
 import { mobile } from "../utils/device";
 
-export const InfoBadgeWrapper = styled.div``;
-
 export const StyledToolTip = styled(Tooltip)`
   .__react_component_tooltip {
     padding: 16px;
-    background-color: #fff;
-
     box-shadow: 0px 12px 40px 0px
       ${(props) => props.theme.betaBadgeTooltip.boxShadowColor};
 
     max-width: 240px;
-
-    background-color: ${(props) => props.theme.betaBadgeTooltip.background};
-
-    p {
-      color: ${(props) => props.theme.betaBadgeTooltip.color};
-    }
 
     @media ${mobile} {
       max-width: calc(100vw - 32px);

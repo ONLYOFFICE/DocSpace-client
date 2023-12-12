@@ -84,8 +84,6 @@ const Dark = {
   backgroundAndSubstrateColor: "#282828",
 
   betaBadgeTooltip: {
-    color: white,
-    background: "#242424",
     boxShadowColor: "rgba(0, 0, 0, 0.40)",
   },
 
@@ -940,13 +938,13 @@ const Dark = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.40)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F5E9BA",
-    textColor: black,
+    color: "#242424",
+    textColor: white,
 
     before: {
       border: "none",

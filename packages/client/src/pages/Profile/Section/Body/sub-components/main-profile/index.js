@@ -121,7 +121,6 @@ const MainProfile = (props) => {
         <Link
           isHovered
           isBold
-          color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
           target="_blank"

@@ -175,27 +175,10 @@ class PeopleStore {
     setIsVisible(true);
   };
 
-  getHeaderMenu = (t) => {
-    const {
-      hasUsersToMakeEmployees,
-      hasUsersToActivate,
-      hasUsersToDisable,
-      hasUsersToInvite,
-      hasUsersToRemove,
-      hasOnlyOneUserToRemove,
-      hasUsersToMakePowerUser,
-      hasFreeUsers,
-      userSelectionRole,
-      selection,
-    } = this.selectionStore;
-
-    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.dialogStore;
-    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
+  getUsersRightsSubmenu = (t) => {
+    const { userSelectionRole, selectionUsersRights } = this.selectionStore;
 
     const { isOwner } = this.authStore.userStore.user;
-
-    const { isVisible } = this.authStore.infoPanelStore;
 
     const options = [];
 
@@ -229,6 +212,7 @@ class PeopleStore {
     //   key: "user",
     //   isActive: userSelectionRole === "user",
     // };
+
     const collaboratorOption = {
       id: "menu_change-collaborator",
       key: "collaborator",
@@ -238,11 +222,51 @@ class PeopleStore {
       onClick: (e) => this.onChangeType(e),
       isActive: userSelectionRole === "collaborator",
     };
-    isOwner && options.push(adminOption);
 
-    options.push(managerOption);
+    const { isVisitor, isCollaborator, isRoomAdmin, isAdmin } =
+      selectionUsersRights;
 
-    hasUsersToMakePowerUser && options.push(collaboratorOption);
+    if (isVisitor > 0) {
+      isOwner && options.push(adminOption);
+      options.push(managerOption);
+      options.push(collaboratorOption);
+
+      return options;
+    }
+
+    if (isCollaborator > 0 || (isRoomAdmin > 0 && isAdmin > 0)) {
+      isOwner && options.push(adminOption);
+      options.push(managerOption);
+
+      return options;
+    }
+
+    if (isRoomAdmin > 0) {
+      isOwner && options.push(adminOption);
+
+      return options;
+    }
+
+    if (isAdmin > 0) {
+      options.push(managerOption);
+
+      return options;
+    }
+  };
+  getHeaderMenu = (t) => {
+    const {
+      hasUsersToMakeEmployees,
+      hasUsersToActivate,
+      hasUsersToDisable,
+      hasUsersToInvite,
+      hasUsersToRemove,
+      selection,
+    } = this.selectionStore;
+
+    const { setSendInviteDialogVisible } = this.dialogStore;
+    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
+
+    const { isVisible } = this.authStore.infoPanelStore;
 
     const headerMenu = [
       {
@@ -252,7 +276,7 @@ class PeopleStore {
         disabled: !hasUsersToMakeEmployees,
         iconUrl: ChangeToEmployeeReactSvgUrl,
         withDropDown: true,
-        options: options,
+        options: this.getUsersRightsSubmenu(t),
       },
       {
         id: "menu-info",

@@ -47,10 +47,29 @@
       onSelectCallback: null,
       onCloseCallback: null,
       onAppReady: null,
-      onAppError: null,
+      onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
     },
+  };
+
+  const checkCSP = async (targetSrc, onAppError) => {
+    let allow = false;
+    const currentSrc = window.location.origin;
+
+    try {
+      const cspSettings = await fetch(`${targetSrc}/api/2.0/security/csp`);
+      const res = await cspSettings.json();
+      const { header } = res.response;
+
+      allow =
+        header.indexOf(window.location.origin) !== -1 ||
+        targetSrc === currentSrc;
+    } catch (e) {
+      onAppError(e);
+    }
+
+    return allow;
   };
 
   const getConfigFromParams = () => {
@@ -83,6 +102,7 @@
   class DocSpace {
     #iframe;
     #isConnected = false;
+    #cspInstalled = false;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -173,16 +193,26 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.align = "top";
-      iframe.frameBorder = 0;
+      iframe.loading = "lazy";
       iframe.allowFullscreen = true;
       iframe.setAttribute("allowfullscreen", "");
       iframe.setAttribute("allow", "autoplay");
+
+      //iframe.referrerpolicy = "unsafe-url";
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
         iframe.style.overflow = "hidden";
         document.body.style.overscrollBehaviorY = "contain";
+      }
+
+      if (!this.#cspInstalled) {
+        const errorMessage =
+          "Current domain not set in Content Security Policy (CSP) settings. Please add it on developer tools page.";
+        config.events.onAppError(errorMessage);
+
+        const html = `<body>${errorMessage}</body>`;
+        iframe.srcdoc = html;
       }
 
       return iframe;
@@ -250,7 +280,9 @@
     };
     #executeMethod = (methodName, params, callback) => {
       if (!this.#isConnected) {
-        console.log("Message bus is not connected with frame");
+        this.config.events.onAppError(
+          "Message bus is not connected with frame"
+        );
         return;
       }
 
@@ -270,11 +302,16 @@
       this.#sendMessage(message);
     };
 
-    initFrame(config) {
-      const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull };
+    async initFrame(config) {
+      const configFull = Object.assign(defaultConfig, config);
+      this.config = Object.assign(this.config, configFull);
 
       const target = document.getElementById(this.config.frameId);
+
+      this.#cspInstalled = await checkCSP(
+        this.config.src,
+        this.config.events.onAppError
+      );
 
       if (target) {
         this.#iframe = this.#createIframe(this.config);
@@ -284,6 +321,7 @@
           target.parentNode.replaceChild(this.#iframe, target);
 
         window.addEventListener("message", this.#onMessage, false);
+
         this.#isConnected = true;
       }
 

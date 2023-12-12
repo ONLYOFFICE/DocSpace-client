@@ -28,6 +28,7 @@
   "FeedUpdateUser": "heeft de rol {{role}} toegewezen gekregen",
   "FileExtension": "Bestandsextensie",
   "FilesEmptyScreenText": "Bekijk hier bestands- en mapdetails",
+  "GalleryEmptyScreenText": "Bekijk hier de details van het formulier sjabloon",
   "HistoryEmptyScreenText": "De activiteitsgeschiedenis wordt hier getoond",
   "InfoBanner": "De lijst met uitgenodigde gebruikers bevat de eigenaar en/of beheerders van deze DocSpace met volledige toegang tot alle ruimtes. Aan de eigenaar en/of beheerder kunnen geen andere toegangsrechten worden toegewezen. Zodra ze aan de kamer zijn toegevoegd, worden ze op de hoogte gebracht van alle wijzigingen.",
   "ItemsSelected": "Geselecteerde items",

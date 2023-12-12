@@ -44,7 +44,6 @@ function InfoBadge(props: InfoBadgeProps) {
         ref={tooltipRef}
         place={props.place}
         offset={props.offset}
-        noArrow={props.noArrow}
       >
         <InfoBadgeContent>
           <InfoBadgeHeader>

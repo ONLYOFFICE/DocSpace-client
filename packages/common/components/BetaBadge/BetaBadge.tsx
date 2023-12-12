@@ -50,7 +50,6 @@ function BetaBadge({
   return (
     <InfoBadge
       offset={offset}
-      noArrow={isMobile}
       place={isMobile ? mobilePlace : place}
       label={t("Settings:BetaLabel")}
       tooltipDescription={tooltipLanguage}

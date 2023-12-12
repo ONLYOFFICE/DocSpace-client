@@ -7,7 +7,6 @@ interface InfoBadgeProps {
   tooltipDescription: React.ReactNode;
 
   offset: number;
-  noArrow: boolean;
 }
 
 export default InfoBadgeProps;

@@ -183,6 +183,7 @@ class PeopleStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasOnlyOneUserToRemove,
+      hasUsersToMakePowerUser,
       hasFreeUsers,
       userSelectionRole,
       selection,
@@ -218,22 +219,30 @@ class PeopleStore {
       key: "manager",
       isActive: userSelectionRole === "manager",
     };
-    const userOption = {
-      id: "menu_change-user_user",
-      className: "group-menu_drop-down",
-      label: t("Common:User"),
-      title: t("Common:User"),
+    // const userOption = {
+    //   id: "menu_change-user_user",
+    //   className: "group-menu_drop-down",
+    //   label: t("Common:User"),
+    //   title: t("Common:User"),
+    //   onClick: (e) => this.onChangeType(e),
+    //   "data-action": "user",
+    //   key: "user",
+    //   isActive: userSelectionRole === "user",
+    // };
+    const collaboratorOption = {
+      id: "menu_change-collaborator",
+      key: "collaborator",
+      title: t("Common:PowerUser"),
+      label: t("Common:PowerUser"),
+      "data-action": "collaborator",
       onClick: (e) => this.onChangeType(e),
-      "data-action": "user",
-      key: "user",
-      isActive: userSelectionRole === "user",
+      isActive: userSelectionRole === "collaborator",
     };
-
     isOwner && options.push(adminOption);
 
     options.push(managerOption);
 
-    hasFreeUsers && options.push(userOption);
+    hasUsersToMakePowerUser && options.push(collaboratorOption);
 
     const headerMenu = [
       {

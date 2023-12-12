@@ -307,13 +307,13 @@ const LanguageAndTimeZone = (props) => {
 
     setState((val) => ({ ...val, isLoading: true }));
     setLanguageAndTime(language.key, timezone.key)
-      .then(
-        () =>
-          !user.cultureName &&
+      .then(() => {
+        !user.cultureName &&
           setCookie(LANGUAGE, language.key || "en", {
             "max-age": COOKIE_EXPIRATION_YEAR,
-          })
-      )
+          });
+        window.timezone = timezone.key;
+      })
       .then(() => toastr.success(t("SuccessfullySaveSettingsMessage")))
       .then(
         () => !user.cultureName && lng !== language.key && location.reload()

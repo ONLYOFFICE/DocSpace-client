@@ -28,6 +28,7 @@ import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -226,6 +227,8 @@ const SectionHeaderContent = (props) => {
     currentDeviceType,
     isFrame,
     onClickArchive,
+    setLeaveRoomDialogVisible,
+    inRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -482,6 +485,10 @@ const SectionHeaderContent = (props) => {
   const onClickArchiveAction = (e) => {
     setBufferSelection(selectedFolder);
     onClickArchive(e);
+  };
+
+  const onLeaveRoom = () => {
+    setLeaveRoomDialogVisible(true);
   };
 
   const renameAction = () => {
@@ -760,6 +767,14 @@ const SectionHeaderContent = (props) => {
         disabled: !isRoom || !security?.Move,
         "data-action": "archive",
         action: "archive",
+      },
+      {
+        id: "option_leave-room",
+        key: "leave-room",
+        label: t("LeaveTheRoom"),
+        icon: LeaveRoomSvgUrl,
+        onClick: onLeaveRoom,
+        disabled: isArchiveFolder || !inRoom || isPublicRoom,
       },
       {
         id: "header_option_download",
@@ -1157,6 +1172,7 @@ export default inject(
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
       setRoomSharingPanelVisible,
+      setLeaveRoomDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1183,7 +1199,7 @@ export default inject(
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
-    const { title, id, roomType, pathParts, navigationPath, security } =
+    const { title, id, roomType, pathParts, navigationPath, security, inRoom } =
       selectedFolderStore;
 
     const selectedFolder = { ...selectedFolderStore };
@@ -1362,6 +1378,8 @@ export default inject(
       setRoomSharingPanelVisible,
       isFrame,
       currentDeviceType,
+      setLeaveRoomDialogVisible,
+      inRoom,
     };
   }
 )(

@@ -31,6 +31,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   });
 
   const [createRoomDialogProps, setCreateRoomDialogProps] = useState({
+    title: "",
     visible: false,
     onClose: null,
   });
@@ -101,9 +102,10 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
 
   const onCreateRoom = useCallback((e) => {
     setCreateRoomDialogProps({
+      title: e?.title,
       visible: true,
       onClose: () =>
-        setCreateRoomDialogProps({ visible: false, onClose: null }),
+        setCreateRoomDialogProps({ title: "", visible: false, onClose: null }),
     });
   }, []);
 

@@ -91,6 +91,12 @@ class AccessRightsStore {
       (userIsVisitor || userIsCollaborator)
     );
   };
+  canMakePowerUser = (user) => {
+    const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
+      user;
+
+    return userIsVisitor || userIsCollaborator;
+  };
 
   canActivateUser = (user) => {
     const { id, isOwner, isAdmin } = this.authStore.userStore.user;

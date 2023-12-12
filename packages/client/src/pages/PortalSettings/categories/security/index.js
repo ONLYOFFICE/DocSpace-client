@@ -46,7 +46,7 @@ const SecurityWrapper = (props) => {
 
   useEffect(() => {
     return () => {
-      resetIsInit();
+      // resetIsInit();
       resetSessionStorage();
     };
   }, []);

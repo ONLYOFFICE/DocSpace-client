@@ -116,9 +116,9 @@ const PasswordStrength = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isInit || !passwordSettings) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, passwordSettings]);
 
   useEffect(() => {
     if (!isLoading) return;

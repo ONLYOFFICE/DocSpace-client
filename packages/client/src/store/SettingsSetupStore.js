@@ -12,6 +12,7 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -89,7 +90,10 @@ class SettingsSetupStore {
   initSettings = async () => {
     if (this.isInit) return;
 
-    if (authStore.isAuthenticated) {
+    const isMobileView =
+      authStore.settingsStore.currentDeviceType === DeviceType.mobile;
+
+    if (authStore.isAuthenticated && !isMobileView) {
       await authStore.settingsStore.getPortalPasswordSettings();
       await authStore.settingsStore.getIpRestrictionsEnable();
       await authStore.settingsStore.getIpRestrictions();

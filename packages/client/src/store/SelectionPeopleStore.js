@@ -32,14 +32,18 @@ class SelectionStore {
     }
   };
 
-  setUsersRights = (selection, isDeselect = false) => {
+  incrementUsersRights = (selection) => {
     for (const key in this.selectionUsersRights) {
       if (selection[key]) {
-        isDeselect
-          ? this.selectionUsersRights[key]--
-          : this.selectionUsersRights[key]++;
+        this.selectionUsersRights[key]++;
+      }
+    }
+  };
 
-        this.selectionUsersRights[key];
+  decrementUsersRights = (selection) => {
+    for (const key in this.selectionUsersRights) {
+      if (selection[key]) {
+        this.selectionUsersRights[key]--;
       }
     }
   };
@@ -77,7 +81,7 @@ class SelectionStore {
         );
         newSelections.push(user);
 
-        this.setUsersRights(user);
+        this.incrementUsersRights(user);
       }
     }
 
@@ -94,7 +98,7 @@ class SelectionStore {
       const index = newSelections.findIndex((item) => item.id == id);
 
       if (index !== -1) {
-        this.setUsersRights(newSelections[index], true);
+        this.decrementUsersRights(newSelections[index]);
         newSelections.splice(index, 1);
       }
     }
@@ -121,7 +125,7 @@ class SelectionStore {
 
     this.setSelection([...this.selection, user]);
 
-    this.setUsersRights(user);
+    this.incrementUsersRights(user);
   };
 
   deselectUser = (user) => {
@@ -137,7 +141,7 @@ class SelectionStore {
 
     newData.splice(index, 1);
 
-    this.setUsersRights(this.selection[index], true);
+    this.decrementUsersRights(this.selection[index]);
 
     this.setSelection(newData);
   };

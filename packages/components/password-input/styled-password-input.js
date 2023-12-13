@@ -137,14 +137,10 @@ const TooltipStyle = styled.div`
 
 const StyledTooltipContainer = styled(Text)`
   // margin: 8px 16px 16px 16px;
-  color: ${(props) => props.theme.passwordInput.tooltipTextColor} !important;
+  color: ${(props) => props.theme.passwordInput.tooltipTextColor};
 
   .generate-btn-container {
     margin-top: 10px;
-  }
-
-  .generate-btn {
-    color: ${(props) => props.theme.passwordInput.tooltipTextColor};
   }
 `;
 
@@ -152,7 +148,7 @@ StyledTooltipContainer.defaultProps = { theme: Base };
 
 const StyledTooltipItem = styled(Text)`
   //height: 24px;
-  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")};
+  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")} !important;
 `;
 
 export {

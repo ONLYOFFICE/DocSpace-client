@@ -38,7 +38,7 @@ const DropDownItem = (props) => {
     isBeta,
   } = props;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Settings"]);
 
   const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
 

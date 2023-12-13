@@ -166,7 +166,7 @@ class SettingsStore {
   currentColorScheme = null;
 
   enablePlugins = false;
-  pluginOptions = [];
+  pluginOptions = { upload: false, delete: false };
   domainValidator = null;
 
   additionalResourcesData = null;
@@ -485,7 +485,11 @@ class SettingsStore {
 
     if (origSettings?.plugins?.enabled) {
       this.enablePlugins = origSettings.plugins.enabled;
-      this.pluginOptions = origSettings.plugins.allow;
+
+      this.pluginOptions = {
+        upload: origSettings.plugins.upload,
+        delete: origSettings.plugins.delete,
+      };
     }
 
     if (origSettings?.tenantAlias) {

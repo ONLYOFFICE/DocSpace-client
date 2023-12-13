@@ -430,7 +430,7 @@ const SimpleFilesRow = (props) => {
           mode={"modern"}
           sectionWidth={sectionWidth}
           contentElement={
-            isSmallContainer || isRooms ? null : quickButtonsComponent
+            isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
@@ -463,7 +463,7 @@ const SimpleFilesRow = (props) => {
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={
-              isSmallContainer || isRooms ? quickButtonsComponent : null
+              isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
             badgesComponent={isMobileDevice && badgesComponent}

@@ -48,7 +48,6 @@ const MainContainer = styled.div`
 const PasswordStrength = (props) => {
   const {
     t,
-
     setPortalPasswordSettings,
     passwordSettings,
     initSettings,
@@ -56,7 +55,6 @@ const PasswordStrength = (props) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -95,21 +93,11 @@ const PasswordStrength = (props) => {
     }
   };
 
-  const getPasswordSettings = async () => {
-    setIsLoading(true);
-    await getPortalPasswordSettings();
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (!passwordSettings) getPasswordSettings();
-  }, [passwordSettings]);
-
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("password").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
@@ -291,7 +279,6 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -303,6 +290,5 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

@@ -87,18 +87,54 @@ class SettingsSetupStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async () => {
-    if (this.isInit) return;
-
+  initSettings = async (page) => {
     const isMobileView =
       authStore.settingsStore.currentDeviceType === DeviceType.mobile;
 
-    if (authStore.isAuthenticated && !isMobileView) {
-      await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.settingsStore.getIpRestrictionsEnable();
-      await authStore.settingsStore.getIpRestrictions();
-      await authStore.settingsStore.getSessionLifetime();
-      await authStore.settingsStore.getBruteForceProtection();
+    if (this.isInit && isMobileView) return;
+
+    console.log("window.DocSpace.location", window.DocSpace.location);
+
+    if (authStore.isAuthenticated) {
+      if (isMobileView) {
+        switch (page) {
+          case "password":
+            await authStore.settingsStore.getPortalPasswordSettings();
+            break;
+          case "tfa":
+            await authStore.tfaStore.getTfaType();
+            break;
+          case "trusted-mail":
+            break;
+          case "ip":
+            await authStore.settingsStore.getIpRestrictionsEnable();
+            await authStore.settingsStore.getIpRestrictions();
+            break;
+          case "brute-force-protection":
+            await authStore.settingsStore.getBruteForceProtection();
+            break;
+          case "admin-message":
+            break;
+          case "lifetime":
+            if (
+              !authStore.settingsStore.enabledSessionLifetime ||
+              !authStore.settingsStore.sessionLifetime
+            ) {
+              await authStore.settingsStore.getSessionLifetime();
+            }
+            break;
+
+          default:
+            break;
+        }
+      } else {
+        await authStore.settingsStore.getPortalPasswordSettings();
+        await authStore.tfaStore.getTfaType();
+        await authStore.settingsStore.getIpRestrictionsEnable();
+        await authStore.settingsStore.getIpRestrictions();
+        await authStore.settingsStore.getSessionLifetime();
+        await authStore.settingsStore.getBruteForceProtection();
+      }
     }
 
     this.isInit = true;

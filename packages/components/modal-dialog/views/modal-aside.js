@@ -80,7 +80,7 @@ const Modal = ({
       ?.getBoundingClientRect();
 
     const input = document
-      .getElementById("create-text-input")
+      .getElementsByClassName("input-component")[0]
       ?.getBoundingClientRect();
 
     if (dialogHeader && input) {

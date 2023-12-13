@@ -20,6 +20,7 @@ const useRootHelper = ({
   setIsNextPageLoading,
   setTotal,
   setHasNextPage,
+  isUserOnly,
 }: useRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
 
@@ -41,7 +42,7 @@ const useRootHelper = ({
       const avatar = getCatalogIconUrlByType(folder.rootFolderType);
 
       if (
-        folder.rootFolderType === FolderType.Rooms ||
+        (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
         folder.rootFolderType === FolderType.USER
       ) {
         newItems.push({

@@ -1,4 +1,3 @@
-import { isMobile } from "react-device-detect";
 import React, {
   useState,
   useCallback,
@@ -7,25 +6,29 @@ import React, {
   useRef,
 } from "react";
 
-import ViewerWrapper from "./sub-components/ViewerWrapper";
+import {
+  isMobile as isMobileUtils,
+  isTablet,
+} from "@docspace/components/utils/device";
 
-import { MediaViewerProps } from "./MediaViewer.props";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus } from "../../constants";
+import { getFileExtension } from "../../utils";
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+
 import {
   isNullOrUndefined,
   KeyboardEventKeys,
   mapSupplied,
   mediaTypes,
 } from "./helpers";
-import { getFileExtension } from "@docspace/common/utils";
-
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
+import ViewerWrapper from "./sub-components/ViewerWrapper";
 
-import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import type { MediaViewerProps } from "./MediaViewer.props";
 
 function MediaViewer({
   playlistPos,
@@ -243,6 +246,8 @@ function MediaViewer({
         });
       });
     }
+
+    const isMobile = isMobileUtils() || isTablet();
 
     return isMobile
       ? model

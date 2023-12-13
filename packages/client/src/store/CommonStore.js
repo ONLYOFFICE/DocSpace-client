@@ -67,7 +67,11 @@ class CommonStore {
   };
 
   setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(data);
+    const { isManagement } = authStore;
+    const response = await api.settings.setWhiteLabelSettings(
+      data,
+      isManagement
+    );
     return Promise.resolve(response);
   };
 
@@ -102,10 +106,10 @@ class CommonStore {
   };
 
   restoreWhiteLabelSettings = async (isDefault) => {
-    const { settingsStore } = authStore;
+    const { settingsStore, isManagement } = authStore;
     const { getWhiteLabelLogoUrls } = settingsStore;
 
-    await api.settings.restoreWhiteLabelSettings(isDefault);
+    await api.settings.restoreWhiteLabelSettings(isDefault, isManagement);
     await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();

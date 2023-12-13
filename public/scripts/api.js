@@ -23,6 +23,7 @@
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
+    viewTableColumns: "Name,Size,Type",
     filter: {
       count: 100,
       page: 1,
@@ -63,7 +64,7 @@
         const { header } = res.response;
 
         return (
-          header.indexOf(window.location.origin) !== -1 ||
+          (header && header.indexOf(window.location.origin) !== -1) ||
           targetSrc === currentSrc
         );
       } catch (e) {

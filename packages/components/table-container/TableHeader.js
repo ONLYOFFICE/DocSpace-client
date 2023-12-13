@@ -11,7 +11,6 @@ import TableHeaderCell from "./TableHeaderCell";
 import { size } from "../utils/device";
 import { withTheme } from "styled-components";
 
-const minColumnSize = 150;
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
 const containerMargin = 25;
@@ -124,7 +123,7 @@ class TableHeader extends React.Component {
 
     const handleOffset = 8;
 
-    if (column2Width + offset >= defaultMinColumnSize) {
+    if (column2Width + offset - handleOffset >= defaultMinColumnSize) {
       widths[+columnIndex] = newWidth + handleOffset + "px";
       widths[colIndex] = column2Width + offset - handleOffset + "px";
     } else {
@@ -161,11 +160,11 @@ class TableHeader extends React.Component {
       return true;
     };
 
-    if (indexOfMaxSize === 1) {
-      if (newSize <= 180 || newSize <= defaultColSize)
-        return ResetColumnsSize();
-      else return AddColumn();
-    } else if (newSize <= defaultColSize) return ResetColumnsSize();
+    if (
+      (indexOfMaxSize === 0 && newSize < minSizeFirstColumn) ||
+      newSize <= defaultColSize
+    )
+      return ResetColumnsSize();
     else return AddColumn();
   };
 
@@ -402,6 +401,7 @@ class TableHeader extends React.Component {
         });
       }
 
+      let hasGridTemplateColumnsWithoutOverfilling = false;
       if (infoPanelVisible) {
         if (!hideColumns) {
           let contentWidth = containerWidth - defaultSize - settingsSize;
@@ -572,7 +572,7 @@ class TableHeader extends React.Component {
               let newItemWidth = defaultColumnSize
                 ? `${defaultColumnSize}px`
                 : percent === 0
-                ? `${minColumnSize}px`
+                ? `${defaultMinColumnSize}px`
                 : ((containerWidth - defaultSize - settingsSize) * percent) /
                     100 +
                   "px";
@@ -606,27 +606,31 @@ class TableHeader extends React.Component {
             }
           }
 
-          if (activeColumnIndex) {
-            const needReset = this.addNewColumns(
-              gridTemplateColumns,
-              activeColumnIndex,
-              containerWidth
-            );
-            if (needReset) return;
-          }
-
           if (overWidth > 0) {
             gridTemplateColumnsWithoutOverfilling = this.distributionOverWidth(
               overWidth,
               gridTemplateColumns
             );
           }
+
+          hasGridTemplateColumnsWithoutOverfilling =
+            gridTemplateColumnsWithoutOverfilling &&
+            gridTemplateColumnsWithoutOverfilling.length > 0;
+
+          if (activeColumnIndex) {
+            const gridColumns = hasGridTemplateColumnsWithoutOverfilling
+              ? gridTemplateColumnsWithoutOverfilling
+              : gridTemplateColumns;
+
+            const needReset = this.addNewColumns(
+              gridColumns,
+              activeColumnIndex,
+              containerWidth
+            );
+            if (needReset) return;
+          }
         }
       }
-
-      const hasGridTemplateColumnsWithoutOverfilling =
-        gridTemplateColumnsWithoutOverfilling &&
-        gridTemplateColumnsWithoutOverfilling.length > 0;
 
       str = hasGridTemplateColumnsWithoutOverfilling
         ? gridTemplateColumnsWithoutOverfilling.join(" ")

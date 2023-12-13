@@ -181,7 +181,7 @@ if (IS_DEVELOPMENT) {
 
     const portalLng =
       getLanguage(initialEditorState?.portalSettings?.culture) || "en";
-    const userLng = getLanguage(initialEditorState?.user?.cultureName) || "en";
+    const userLng = getLanguage(initialEditorState?.user?.cultureName);
     const finalLng = getLtrLanguageForEditor(userLng, portalLng, true);
 
     await i18next.changeLanguage(finalLng);

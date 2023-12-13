@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { getCustomToolbar } from "../../helpers/getCustomToolbar";
-import { ContextMenuModel } from "../../types";
+import type { ContextMenuModel, DevicesType } from "../../types";
 
 interface ImageViewerProps {
   src?: string;
@@ -14,6 +14,7 @@ interface ImageViewerProps {
   panelVisible: boolean;
   mobileDetails: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
+  devices: DevicesType;
 
   onPrev: VoidFunction;
   onNext: VoidFunction;

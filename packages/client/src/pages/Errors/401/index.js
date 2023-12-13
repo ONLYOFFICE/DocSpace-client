@@ -10,7 +10,7 @@ const Error401 = ({}) => {
   return <ErrorContainer headerText={t("Error401Text")} />;
 };
 
-export default (
+export default () => (
   <I18nextProvider i18n={i18n}>
     <Error401 />
   </I18nextProvider>

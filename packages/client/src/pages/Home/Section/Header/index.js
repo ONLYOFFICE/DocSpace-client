@@ -28,6 +28,8 @@ import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -226,6 +228,9 @@ const SectionHeaderContent = (props) => {
     currentDeviceType,
     isFrame,
     onClickArchive,
+    setLeaveRoomDialogVisible,
+    inRoom,
+    onClickCreateRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -482,6 +487,10 @@ const SectionHeaderContent = (props) => {
   const onClickArchiveAction = (e) => {
     setBufferSelection(selectedFolder);
     onClickArchive(e);
+  };
+
+  const onLeaveRoom = () => {
+    setLeaveRoomDialogVisible(true);
   };
 
   const renameAction = () => {
@@ -762,11 +771,27 @@ const SectionHeaderContent = (props) => {
         action: "archive",
       },
       {
+        id: "option_create-room",
+        label: t("Files:CreateRoom"),
+        key: "create-room",
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: onClickCreateRoom,
+        disabled: isArchiveFolder || !inRoom || isPublicRoom,
+      },
+      {
+        id: "option_leave-room",
+        key: "leave-room",
+        label: t("LeaveTheRoom"),
+        icon: LeaveRoomSvgUrl,
+        onClick: onLeaveRoom,
+        disabled: isArchiveFolder || !inRoom || isPublicRoom,
+      },
+      {
         id: "header_option_download",
         key: "download",
         label: t("Common:Download"),
         onClick: onDownloadAction,
-        disabled: !isRoom || !security?.Download,
+        disabled: !security?.Download,
         icon: DownloadReactSvgUrl,
       },
       {
@@ -1157,6 +1182,7 @@ export default inject(
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
       setRoomSharingPanelVisible,
+      setLeaveRoomDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1177,13 +1203,14 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
+      onClickCreateRoom
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
-    const { title, id, roomType, pathParts, navigationPath, security } =
+    const { title, id, roomType, pathParts, navigationPath, security, inRoom } =
       selectedFolderStore;
 
     const selectedFolder = { ...selectedFolderStore };
@@ -1320,6 +1347,7 @@ export default inject(
       selectedFolder,
 
       onClickEditRoom,
+      onClickCreateRoom,
       onClickInviteUsers,
       onShowInfoPanel,
       onClickArchive,
@@ -1362,6 +1390,8 @@ export default inject(
       setRoomSharingPanelVisible,
       isFrame,
       currentDeviceType,
+      setLeaveRoomDialogVisible,
+      inRoom,
     };
   }
 )(

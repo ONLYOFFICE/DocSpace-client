@@ -18,7 +18,9 @@ import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
 import FormWrapper from "../components/FormWrapper";
-import { isIOS, isMobileOnly } from "react-device-detect";
+import { isIOS, isTablet, isMobile } from "react-device-detect";
+
+let isInitScroll = false;
 
 const Modal = ({
   id,
@@ -53,17 +55,50 @@ const Modal = ({
   const contentRef = React.useRef(0);
 
   React.useEffect(() => {
-    if (isMobileOnly && isIOS) {
+    if (isIOS && isMobile) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }
+
     return () => {
       window.visualViewport.removeEventListener("resize", onResize);
       window.visualViewport.removeEventListener("scroll", onResize);
     };
   }, []);
 
+  React.useEffect(() => {
+    if (!visible) isInitScroll = false;
+  }, [visible]);
+
+  const scrollPosition = () => {
+    if (currentDisplayType !== "modal") return;
+
+    if (isInitScroll) return;
+
+    const dialogHeader = document
+      .getElementById("modal-header-swipe")
+      ?.getBoundingClientRect();
+
+    const input = document
+      .getElementsByClassName("input-component")[0]
+      ?.getBoundingClientRect();
+
+    if (dialogHeader && input) {
+      dialogHeader.y < dialogHeader.height + input.height
+        ? window.scrollTo(0, input.y)
+        : window.scrollTo(0, dialogHeader.y);
+    }
+
+    isInitScroll = true;
+  };
+
   const onResize = (e) => {
+    if (window.innerHeight < window.innerWidth || isTablet) {
+      scrollPosition();
+
+      return;
+    }
+
     if (!contentRef.current) return;
 
     if (currentDisplayType === "modal") {

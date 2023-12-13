@@ -56,10 +56,10 @@
   const checkCSP = (targetSrc, onAppError) => {
     const currentSrc = window.location.origin;
 
-    const a = async () => {
+    const cspSettings = async () => {
       try {
-        const cspSettings = await fetch(`${targetSrc}/api/2.0/security/csp`);
-        const res = await cspSettings.json();
+        const settings = await fetch(`${targetSrc}/api/2.0/security/csp`);
+        const res = await settings.json();
         const { header } = res.response;
 
         return (
@@ -71,7 +71,7 @@
       }
     };
 
-    return a();
+    return cspSettings();
   };
 
   const getConfigFromParams = () => {

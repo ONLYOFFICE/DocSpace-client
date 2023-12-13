@@ -360,7 +360,10 @@ class InfoPanelStore {
   };
 
   getPrimaryFileLink = async (fileId) => {
+    const { getFileInfo } = this.filesStore;
+
     const res = await getPrimaryLink(fileId);
+    await getFileInfo(fileId);
     return res;
   };
 
@@ -377,6 +380,8 @@ class InfoPanelStore {
     internal,
     expirationDate
   ) => {
+    const { getFileInfo } = this.filesStore;
+
     const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
@@ -386,11 +391,15 @@ class InfoPanelStore {
       internal,
       expDate
     );
+    await getFileInfo(fileId);
     return res;
   };
 
   addFileLink = async (fileId, access, primary, internal) => {
+    const { getFileInfo } = this.filesStore;
+
     const res = await addExternalLink(fileId, access, primary, internal);
+    await getFileInfo(fileId);
     return res;
   };
 }

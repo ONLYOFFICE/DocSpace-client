@@ -6,6 +6,7 @@ import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import Link from "@docspace/components/link";
 import TextInput from "@docspace/components/text-input";
 import { Base } from "@docspace/components/themes";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledPlusIcon = styled(PlusIcon)`
   ${commonIconsStyles}
@@ -33,18 +34,18 @@ const StyledInputWrapper = styled.div`
   margin-bottom: 8px;
   width: 350px;
 
-  @media (max-width: 375px) {
+  @media ${mobile} {
     width: 100%;
   }
 `;
 
 const StyledAddWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   gap: 6px;
   align-items: center;
   cursor: pointer;
-  margin-top: ${(props) => (props.inputsLength > 0 ? "16px" : "0px")};
+  margin-top: ${(props) => (props.inputsLength > 0 ? "8px" : "0px")};
 `;
 
 const usePrevious = (value) => {
@@ -64,6 +65,7 @@ const UserFields = (props) => {
     onClickAdd,
     inputs,
     regexp,
+    classNameAdditional,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
@@ -114,6 +116,7 @@ const UserFields = (props) => {
           return (
             <StyledInputWrapper key={`user-input-${index}`}>
               <TextInput
+                className={`${classNameAdditional}-input`}
                 id={`user-input-${index}`}
                 isAutoFocussed={false}
                 value={input}
@@ -122,7 +125,11 @@ const UserFields = (props) => {
                 onFocus={() => onFocus(index)}
                 hasError={errors[index] && error}
               />
-              <StyledTrashIcon size="medium" onClick={() => onDelete(index)} />
+              <StyledTrashIcon
+                className={`${classNameAdditional}-delete-icon`}
+                size="medium"
+                onClick={() => onDelete(index)}
+              />
             </StyledInputWrapper>
           );
         })
@@ -130,7 +137,11 @@ const UserFields = (props) => {
         <></>
       )}
 
-      <StyledAddWrapper onClick={onClickAdd} inputsLength={inputs.length}>
+      <StyledAddWrapper
+        className={classNameAdditional}
+        onClick={onClickAdd}
+        inputsLength={inputs.length}
+      >
         <StyledPlusIcon size="small" />
         <Link type="action" isHovered={true} fontWeight={600}>
           {buttonLabel}

@@ -1,27 +1,39 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
-import moment from "moment";
+import {
+  isMobile,
+  isTablet,
+  mobile,
+  tablet,
+} from "@docspace/components/utils/device";
 
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
+
 import { Base } from "@docspace/components/themes";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
+import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import { SortByFieldName } from "../../../../../helpers/constants";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 0px;
+          `
+        : css`
+            margin-right: 0px;
+          `}
 
     @media ${desktop} {
       margin-top: 0px;
@@ -41,49 +53,107 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .badge-version {
     width: max-content;
-    margin: -2px 6px -2px -2px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: -2px -2px -2px 6px;
+          `
+        : css`
+            margin: -2px 6px -2px -2px;
+          `}
   }
 
   .badge-new-version {
     width: max-content;
   }
 
-  ${(props) =>
-    ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
-    css`
-      .row-main-container-wrapper {
-        display: flex;
-        justify-content: space-between;
-        max-width: inherit;
-      }
-
-      .badges {
-        flex-direction: row-reverse;
-      }
-
-      .tablet-badge {
-        margin-top: 5px;
-      }
-
-      .tablet-edit,
-      .can-convert {
-        margin-top: 6px;
-        margin-right: 24px !important;
-      }
-
-      .badge-version {
-        margin-right: 22px;
-      }
-
-      .new-items {
-        min-width: 16px;
-        margin: 5px 24px 0 0;
-      }
-    `}
-
   .row-content-link {
-    padding: 12px 12px 0px 0px;
-    margin-top: -12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 12px 0px 0px 12px;
+          `
+        : css`
+            padding: 12px 12px 0px 0px;
+          `}
+    margin-top: ${(props) =>
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
+  }
+
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
+
+    .badges {
+      flex-direction: row-reverse;
+    }
+
+    .tablet-badge {
+      margin-top: 5px;
+    }
+
+    .tablet-edit,
+    .can-convert {
+      margin-top: 6px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 24px;
+            `
+          : css`
+              margin-right: 24px;
+            `}
+    }
+
+    .badge-version {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 22px;
+            `
+          : css`
+              margin-right: 22px;
+            `}
+    }
+
+    .new-items {
+      min-width: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 5px 0 0 24px;
+            `
+          : css`
+              margin: 5px 24px 0 0;
+            `}
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .additional-badges {
+      margin-top: 0;
+    }
+
+    .tablet-edit,
+    .new-items,
+    .tablet-badge {
+      margin: 0;
+    }
+
+    .can-convert {
+      margin: 0 1px;
+    }
+
+    .row-content-link {
+      padding: 12px 0px 0px 0px;
+    }
   }
 `;
 
@@ -101,28 +171,61 @@ const FilesRowContent = ({
   theme,
   isRooms,
   isTrashFolder,
+  filterSortBy,
+  createdDate,
+  fileOwner,
 }) => {
   const {
     contentLength,
     fileExst,
     filesCount,
     foldersCount,
-    autoDelete,
     providerKey,
     title,
     isRoom,
     daysRemaining,
-    viewAccessability,
+    fileType,
+    tags,
   } = item;
 
-  const isMedia = viewAccessability?.ImageView || viewAccessability?.MediaView;
+  const contentComponent = () => {
+    switch (filterSortBy) {
+      case SortByFieldName.Size:
+        if (!contentLength) return "";
+        return contentLength;
+
+      case SortByFieldName.CreationDate:
+        return createdDate;
+
+      case SortByFieldName.Author:
+        return fileOwner;
+
+      case SortByFieldName.Type:
+        return getFileTypeName(fileType);
+
+      case SortByFieldName.Tags:
+        if (tags?.length === 0) return "";
+        return tags?.map((elem) => {
+          return elem;
+        });
+
+      default:
+        if (isTrashFolder)
+          return t("Files:DaysRemaining", {
+            daysRemaining,
+          });
+
+        return updatedDate;
+    }
+  };
 
   return (
     <>
       <SimpleFilesRowContent
         sectionWidth={sectionWidth}
-        isMobile={isMobile}
+        isMobile={!isTablet()}
         isFile={fileExst || contentLength}
+        sideColor={theme.filesSection.rowView.sideColor}
       >
         <Link
           className="row-content-link"
@@ -134,6 +237,7 @@ const FilesRowContent = ({
           target="_blank"
           {...linkStyles}
           isTextOverflow={true}
+          dir="auto"
         >
           {titleWithoutExt}
         </Link>
@@ -147,14 +251,9 @@ const FilesRowContent = ({
           containerWidth="15%"
           fontSize="12px"
           fontWeight={400}
-          // color={sideColor}
           className="row_update-text"
         >
-          {isTrashFolder
-            ? t("Files:DaysRemaining", {
-                daysRemaining,
-              })
-            : updatedDate && updatedDate}
+          {contentComponent()}
         </Text>
 
         <Text
@@ -168,7 +267,7 @@ const FilesRowContent = ({
         >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobileOnly
+            : !fileExst && !contentLength && !providerKey
             ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
                 "Translations:Files"
               )}`
@@ -181,15 +280,23 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore }) => {
-  const { isRecycleBinFolder } = treeFoldersStore;
-  return { theme: auth.settingsStore.theme, isTrashFolder: isRecycleBinFolder };
+export default inject(({ auth, treeFoldersStore, filesStore }) => {
+  const { filter, roomsFilter } = filesStore;
+  const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
+    treeFoldersStore;
+
+  const isRooms = isRoomsFolder || isArchiveFolder;
+  const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+
+  return {
+    filterSortBy,
+    theme: auth.settingsStore.theme,
+    isTrashFolder: isRecycleBinFolder,
+  };
 })(
   observer(
-    withRouter(
-      withTranslation(["Files", "Translations"])(
-        withContent(withBadges(FilesRowContent))
-      )
+    withTranslation(["Files", "Translations", "Notifications"])(
+      withContent(FilesRowContent)
     )
   )
 );

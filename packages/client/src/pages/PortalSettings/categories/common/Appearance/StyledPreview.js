@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
+import {
+  getCorrectBorderRadius,
+  getCorrectFourValuesStyle,
+} from "@docspace/components/utils/rtlUtils";
 
 const StyledComponent = styled.div`
   display: inline-flex;
@@ -20,7 +24,10 @@ const StyledComponent = styled.div`
       css`
         border-width: 1px;
         border-style: solid;
-        border-radius: 16px 0px 0px 16px;
+        border-radius: ${getCorrectBorderRadius(
+          "16px 0px 0px 16px",
+          props.theme.interfaceDirection
+        )};
       `}
   }
 
@@ -42,6 +49,9 @@ const StyledComponent = styled.div`
 
   .tablet-category-notice {
     padding: 20px 16px 20px 16px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 
     circle {
       fill: ${(props) => props.colorPreview};
@@ -65,10 +75,19 @@ const StyledComponent = styled.div`
   }
 
   .tile-half {
-    margin-left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+            border-left: none !important;
+            border-radius: 0px 12px 12px 0 !important;
+          `
+        : css`
+            margin-left: 16px;
+            border-right: none !important;
+            border-radius: 12px 0 0 12px !important;
+          `}
     width: 44% !important;
-    border-right: none !important;
-    border-radius: 12px 0 0 12px !important;
   }
 
   .section {
@@ -79,8 +98,16 @@ const StyledComponent = styled.div`
       css`
         border-width: 1px;
         border-style: solid;
-        border-left-style: none;
-        border-radius: 0px 16px 16px 0px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                border-radius: 16px 0px 0px 16px;
+                border-right-style: none;
+              `
+            : css`
+                border-radius: 0px 16px 16px 0px;
+                border-left-style: none;
+              `}
       `}
     background: ${(props) =>
       props.themePreview === "Light" ? "#FFFFFF" : "#333333"};
@@ -89,11 +116,25 @@ const StyledComponent = styled.div`
   .section-header {
     display: flex;
     align-items: flex-start;
-    padding: 26px 0px 28px 20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 26px 20px 28px 0px;
+          `
+        : css`
+            padding: 26px 0px 28px 20px;
+          `}
   }
 
   .section-header-loader {
-    padding-right: 17px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 17px;
+          `
+        : css`
+            padding-right: 17px;
+          `}
     height: 16px;
   }
 
@@ -101,14 +142,30 @@ const StyledComponent = styled.div`
     height: 30px;
     border-width: 1px;
     border-style: solid;
-    border-radius: 3px 0px 0px 3px;
-    border-right-style: none;
-    margin: 0px 0px 24px 20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0px 20px 24px 0px;
+            border-left-style: none;
+            border-radius: 0px 3px 3px 0px;
+          `
+        : css`
+            margin: 0px 0px 24px 20px;
+            border-right-style: none;
+            border-radius: 3px 0px 0px 3px;
+          `}
   }
 
   .section-search-loader {
     padding-top: 9px;
-    padding-left: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 8px;
+          `
+        : css`
+            padding-left: 8px;
+          `}
   }
 
   .loader-search {
@@ -165,7 +222,6 @@ const StyledComponent = styled.div`
   .flex {
     display: flex;
     align-items: center;
-
     padding: 10px 32px 0px;
 
     &:not(:last-child) {
@@ -175,7 +231,14 @@ const StyledComponent = styled.div`
 
   .padding-right {
     height: 16px;
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 
   .title-section {
@@ -184,7 +247,14 @@ const StyledComponent = styled.div`
   }
 
   .menu-badge {
-    padding-left: 93px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 93px;
+          `
+        : css`
+            padding-left: 93px;
+          `}
     border: none;
     cursor: auto;
   }
@@ -197,7 +267,11 @@ const StyledComponent = styled.div`
   }
 
   .section-tile {
-    padding: ${(props) => (props.isViewTablet ? "0 0 0 20px" : "0 20px 0")};
+    padding: ${({ isViewTablet, theme }) => {
+      const value = isViewTablet ? "0 0 0 20px" : "0 20px 0";
+
+      return getCorrectFourValuesStyle(value, theme.interfaceDirection);
+    }};
   }
 
   .border-color {
@@ -228,9 +302,18 @@ const StyledComponent = styled.div`
 
   .tablet-tile-name {
     width: 44% !important;
-    margin-left: 16px;
-    border-right: none !important;
-    border-radius: 12px 0 16px 0 !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+            border-left: none !important;
+            border-radius: 0 12px 0 16px !important;
+          `
+        : css`
+            margin-left: 16px;
+            border-right: none !important;
+            border-radius: 12px 0 16px 0 !important;
+          `}
   }
 
   .only-tile-name {
@@ -254,7 +337,11 @@ const StyledComponent = styled.div`
     display: flex;
     border-top-width: 1px;
     border-top-style: solid;
-    padding: 16px 0px 16px 16px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle(
+        `16px 0px 16px 16px`,
+        theme.interfaceDirection
+      )};
   }
 
   .tile-container {
@@ -263,15 +350,36 @@ const StyledComponent = styled.div`
   }
 
   .tile-icon {
-    padding-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 12px;
+          `
+        : css`
+            padding-right: 12px;
+          `}
   }
 
   .section-badge {
-    padding-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 12px;
+          `
+        : css`
+            padding-right: 12px;
+          `}
   }
 
   .pin {
-    padding-right: 14px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 14px;
+          `
+        : css`
+            padding-right: 14px;
+          `}
 
     path {
       fill: ${(props) =>
@@ -292,7 +400,14 @@ const StyledComponent = styled.div`
 
 const StyledFloatingButton = styled.div`
   bottom: 24px;
-  right: 24px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: 24px;
+        `
+      : css`
+          right: 24px;
+        `}
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -319,6 +434,217 @@ const IconBox = styled.div`
   }
 `;
 
+const StyledMobilePreview = styled.div`
+  height: 293px;
+  border-radius: 16px;
+  padding: 0px 16px;
+  background: ${({ themePreview }) =>
+    themePreview === "Light" ? "#FFFFFF" : "#333333"};
+
+  border: ${({ themePreview }) =>
+    themePreview === "Light" ? "1px solid #d0d5da" : "1px solid #474747"};
+
+  .section-search {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 3px;
+    padding-inline-start: 8px;
+  }
+
+  .main-button-preview {
+    cursor: auto;
+    background-color: ${(props) => props.colorPreview};
+    border-radius: 3px;
+
+    &:active {
+      background-color: ${(props) => props.colorPreview} !important;
+      opacity: none !important;
+      filter: none !important;
+    }
+  }
+
+  .color-badge rect {
+    fill: ${(props) =>
+      props.themePreview === "Dark" && props.selectThemeId === 7
+        ? "#FFFFFF"
+        : props.colorPreview} !important;
+  }
+
+  .color-loaders rect {
+    fill: ${(props) =>
+      props.themePreview === "Light"
+        ? `${props.colorPreview} !important`
+        : `#FFFFFF !important`};
+  }
+
+  .menu-section {
+    &:not(:last-child) {
+      padding-bottom: 26px;
+    }
+  }
+
+  .loaders-theme {
+    background-color: ${(props) =>
+      props.themePreview === "Light" ? "#FFF" : "#545454"};
+    border-radius: 3px;
+  }
+
+  .loaders-tile-theme {
+    background: ${(props) =>
+      props.themePreview === "Light" ? "#F1F1F1" : "#333333"};
+
+    border-radius: 3px;
+  }
+
+  .loaders-tile-text-theme {
+    background: ${(props) =>
+      props.themePreview === "Light" ? "#D0D5DA" : "#858585"};
+
+    border-radius: 3px;
+  }
+
+  .loaders-theme-avatar {
+    background-color: ${(props) =>
+      props.themePreview === "Light" ? "#FFF" : "#545454"};
+    border-radius: 50px;
+  }
+
+  .border-color {
+    border-color: ${(props) =>
+      props.themePreview === "Light" ? "#d0d5da" : "#474747"};
+  }
+
+  .tile {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 12px;
+    width: ${(props) => props.isViewTablet && "64%"};
+    margin-top: 24px;
+  }
+
+  .background {
+    background: ${(props) =>
+      props.themePreview === "Light" ? "#FFF" : "#292929"};
+  }
+
+  .tile-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 14px 16px;
+    height: 30px;
+  }
+
+  .tablet-tile-name {
+    width: 44% !important;
+    margin-inline-start: 16px;
+    border-right: none !important;
+    border-radius: 12px 0 16px 0 !important;
+  }
+
+  .only-tile-name {
+    width: ${(props) => props.isViewTablet && "66%"};
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-style: solid;
+    border-bottom: none;
+    border-radius: 12px 12px 0px 0px;
+  }
+
+  .action-button {
+    width: 72px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .tile-tag {
+    display: flex;
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-block: 16px;
+    padding-inline: 16px 0;
+  }
+
+  .tile-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .pin {
+    padding-inline-end: 14px;
+
+    path {
+      fill: ${(props) =>
+        props.themePreview === "Light"
+          ? `${props.colorPreview} !important`
+          : `#FFFFFF !important`};
+    }
+  }
+
+  .menu-button > div {
+    cursor: auto;
+  }
+
+  .preview_mobile-header {
+    height: 48px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 34px 1fr 32px;
+    gap: 16px;
+
+    margin: 0 -16px;
+    padding: 0 16px;
+
+    background: ${({ themePreview }) =>
+      themePreview === "Light" ? "#FFFFFF" : "#282828"};
+
+    border-radius: 16px 16px 0px 0px;
+  }
+
+  .preview_mobile-navigation {
+    height: 53px;
+    display: flex;
+    align-items: center;
+
+    .header {
+      width: 45%;
+    }
+  }
+
+  .color-badge rect {
+    fill: ${({ themePreview, selectThemeId, colorPreview }) =>
+      themePreview === "Dark" && selectThemeId === 7
+        ? "#FFFFFF"
+        : colorPreview} !important;
+  }
+  .section-badge {
+    padding-inline-end: 12px;
+  }
+
+  .tile-icon {
+    padding-inline-end: 12px;
+  }
+
+  .floating-button {
+    position: relative;
+    margin-inline-start: auto;
+    inset-inline-end: 0;
+    bottom: 48px;
+  }
+
+  .icon-button_svg {
+    svg {
+      path {
+        fill: #a3a9ae;
+      }
+    }
+  }
+`;
+
 StyledComponent.defaultProps = { theme: Base };
 
-export { StyledComponent, StyledFloatingButton, IconBox };
+export { StyledComponent, StyledFloatingButton, IconBox, StyledMobilePreview };

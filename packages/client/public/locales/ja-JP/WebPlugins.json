@@ -1,0 +1,12 @@
+{
+  "DeletePlugin": "プラグインの削除",
+  "DeletePluginDescription": "このプラグインはDocSpaceユーザーには提供されません。このまま続けますか？",
+  "DeletePluginTitle": "プラグインを削除しますか？",
+  "Description": "プラグインを追加して、DocSpaceの機能を拡張することができます。プラグインのアップロード]をクリックし、ZIPアーカイブ内のプラグインファイルを選択します。",
+  "Metadata": "メタデータ",
+  "NeedSettings": "設定の入力",
+  "NoPlugins": "プラグインの追加なし",
+  "NotNeedSettings": "設定入力が不要",
+  "PluginsHelp": "プラグインはDocSpaceの機能を拡張することができます",
+  "UploadPlugin": "プラグインのアップロード"
+}

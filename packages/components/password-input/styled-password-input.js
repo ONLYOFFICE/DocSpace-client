@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import Text from "../text";
 import { tablet, mobile } from "../utils/device";
@@ -16,12 +16,22 @@ SimpleInput.propTypes = {
 };
 
 const StyledInput = styled(SimpleInput)`
-  display: flex;
+  display: ${(props) => (props.$isFullWidth ? "block" : "flex")};
   align-items: center;
   line-height: ${(props) => props.theme.passwordInput.lineHeight};
   flex-direction: row;
   flex-wrap: wrap;
   position: relative;
+
+  input {
+    flex: inherit;
+    width: calc(100% - 40px);
+    text-align: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "right" : "left"};
+    &::-ms-reveal {
+      display: none;
+    }
+  }
 
   .input-relative {
     svg {
@@ -54,11 +64,20 @@ const StyledInput = styled(SimpleInput)`
   }
 
   .append {
-    padding-right: 8px;
     position: absolute;
-    right: -16px;
     top: 50%;
     transform: translate(-50%, -50%);
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+            left: 16px;
+          `
+        : css`
+            padding-right: 8px;
+            right: -16px;
+          `}
   }
 
   .prepend-children {
@@ -108,7 +127,7 @@ PasswordProgress.defaultProps = { theme: Base };
 const TooltipStyle = styled.div`
   width: 294px;
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     width: 320px;
   }
 

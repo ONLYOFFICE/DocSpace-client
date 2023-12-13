@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ImageViewerToolbarWrapper = styled.div`
   height: 48px;

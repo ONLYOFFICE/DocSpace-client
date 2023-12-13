@@ -1,19 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { isMobileOnly } from "react-device-detect";
+
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import { mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 const StyledIconBox = styled.div`
+  display: none;
+
   @media ${mobile} {
     display: flex;
   }
-  display: ${isMobileOnly ? "flex" : "none"};
+
   align-items: center;
 
-  padding-left: 16px;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `padding-right: 16px;`
+      : `padding-left: 16px;`}
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 

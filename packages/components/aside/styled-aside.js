@@ -4,9 +4,7 @@ import Base from "../themes/base";
 
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
-import { isMobile } from "react-device-detect";
-
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile, mobileFooterHeight } from "../utils/device";
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -15,8 +13,9 @@ const Container = ({
   scale,
   zIndex,
   contentPaddingBottom,
+  forwardRef,
   ...props
-}) => <aside {...props} />;
+}) => <aside ref={forwardRef} {...props} />;
 /* eslint-enable react/prop-types */
 /* eslint-enable no-unused-vars */
 
@@ -25,11 +24,23 @@ const StyledAside = styled(Container)`
   height: ${(props) => props.theme.aside.height};
 
   position: fixed;
-  right: ${(props) => props.theme.aside.right};
   top: ${(props) => props.theme.aside.top};
-  transform: translateX(
-    ${(props) => (props.visible ? "0" : props.scale ? "100%" : "480px")}
-  );
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: ${(props) => props.theme.aside.right};
+          transform: translateX(
+            ${props.visible ? "0" : props.scale ? "-100%" : "-480px"}
+          );
+        `
+      : css`
+          right: ${(props) => props.theme.aside.right};
+          transform: translateX(
+            ${props.visible ? "0" : props.scale ? "100%" : "480px"}
+          );
+        `}
+
   transition: ${(props) => props.theme.aside.transition};
   width: ${(props) => (props.scale ? "100%" : "480px")};
   z-index: ${(props) => props.zIndex};
@@ -37,27 +48,29 @@ const StyledAside = styled(Container)`
 
   @media ${tablet} {
     max-width: calc(100% - 69px);
-    transform: translateX(
-      ${(props) => (props.visible ? "0" : props.scale ? "100%" : "480px")}
-    );
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            transform: translateX(
+              ${props.visible ? "0" : props.scale ? "-100%" : "-480px"}
+            );
+          `
+        : css`
+            transform: translateX(
+              ${props.visible ? "0" : props.scale ? "100%" : "480px"}
+            );
+          `}
   }
 
-  ${isMobile &&
-  css`
-    max-width: calc(100% - 69px);
-    transform: translateX(
-      ${(props) => (props.visible ? "0" : props.scale ? "100%" : "480px")}
-    );
-  `}
-
-  @media (max-width: 428px) {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: calc(100% - 64px);
+    height: ${`calc(100% - ${mobileFooterHeight})`};
+
     width: 100%;
     max-width: 100%;
-    transform: translateX(${(props) => (props.visible ? "0" : "100%")});
-
+    transform: translateY(${(props) => (props.visible ? "0" : "100%")});
     aside:not(:first-child) {
       height: 100%;
     }
@@ -91,29 +104,38 @@ const StyledControlContainer = styled.div`
   z-index: 450;
 
   top: 18px;
-  left: -27px;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" ? `right: -27px;` : `left: -27px;`}
 
   @media ${tablet} {
     display: flex;
 
     top: 18px;
-    left: -27px;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? `right: -27px;`
+        : `left: -27px;`}
   }
 
-  ${isMobile &&
-  css`
-    display: flex;
-
-    top: 18px;
-    left: -27px;
-  `}
-
-  @media (max-width: 428px) {
+  @media ${mobile} {
     display: flex;
 
     top: -27px;
     right: 10px;
     left: unset;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: unset;
+            left: 10px;
+          `
+        : css`
+            right: 10px;
+            left: unset;
+          `}
   }
 `;
 

@@ -4,7 +4,9 @@ import Backdrop from "@docspace/components/backdrop";
 import Heading from "@docspace/components/heading";
 import Aside from "@docspace/components/aside";
 import Loaders from "@docspace/common/components/Loaders";
-import FloatingButton from "@docspace/common/components/FloatingButton";
+import FloatingButton from "@docspace/components/floating-button";
+import Portal from "@docspace/components/portal";
+import { DeviceType } from "@docspace/common/constants";
 import { withTranslation } from "react-i18next";
 import {
   StyledVersionHistoryPanel,
@@ -18,8 +20,9 @@ import config from "PACKAGE_FILE";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
-    const { setIsVerHistoryPanel } = this.props;
+    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
     setIsVerHistoryPanel(false);
+    setInfoPanelIsMobileHidden(false);
   };
 
   componentDidMount() {
@@ -34,10 +37,11 @@ class PureVersionHistoryPanel extends React.Component {
 
   render() {
     //console.log("render versionHistoryPanel");
-    const { visible, isLoading, versions, showProgressBar } = this.props;
+    const { visible, isLoading, versions, showProgressBar, currentDeviceType } =
+      this.props;
     const zIndex = 310;
 
-    return (
+    const element = (
       <StyledVersionHistoryPanel
         className="version-history-modal-dialog"
         visible={visible}
@@ -88,6 +92,12 @@ class PureVersionHistoryPanel extends React.Component {
         </Aside>
       </StyledVersionHistoryPanel>
     );
+
+    return currentDeviceType === DeviceType.mobile ? (
+      <Portal element={element} />
+    ) : (
+      element
+    );
   }
 }
 
@@ -99,9 +109,10 @@ VersionHistoryPanel.propTypes = {
   fileId: PropTypes.string,
 };
 
-export default inject(({ auth, filesStore, versionHistoryStore }) => {
-  const { isTabletView } = auth.settingsStore;
-  const { isLoading } = filesStore;
+export default inject(({ auth, clientLoadingStore, versionHistoryStore }) => {
+  const { isTabletView, currentDeviceType } = auth.settingsStore;
+  const { isLoading } = clientLoadingStore;
+  const { setIsMobileHidden: setInfoPanelIsMobileHidden } = auth.infoPanelStore;
   const {
     fileId,
     versions,
@@ -120,5 +131,7 @@ export default inject(({ auth, filesStore, versionHistoryStore }) => {
     showProgressBar,
 
     setIsVerHistoryPanel,
+    setInfoPanelIsMobileHidden,
+    currentDeviceType,
   };
 })(observer(VersionHistoryPanel));

@@ -4,14 +4,14 @@ import BannerWrapper from "./styled-campaigns-banner";
 
 import Button from "../button";
 import Text from "../text";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "../skeletons/rectangle";
 
 const onButtonClick = (url) => {
   window.open(url, "_blank");
 };
 
 const CampaignsBanner = (props) => {
-  const { headerLabel, subHeaderLabel, img, btnLabel, link } = props;
+  const { headerLabel, subHeaderLabel, img, buttonLabel, link } = props;
   const [imageLoad, setImageLoad] = useState(false);
 
   const handleImageLoaded = () => {
@@ -42,7 +42,7 @@ const CampaignsBanner = (props) => {
           onMouseDown={onMouseDown}
           onLoad={handleImageLoaded}
         />
-        {!imageLoad && <Loaders.Rectangle height="140px" borderRadius="5px" />}
+        {!imageLoad && <RectangleSkeleton height="140px" borderRadius="5px" />}
       </a>
 
       <Button
@@ -51,7 +51,7 @@ const CampaignsBanner = (props) => {
         size="small"
         isDisabled={false}
         disableHover={true}
-        label={btnLabel}
+        label={buttonLabel}
         onClick={() => onButtonClick(link)}
       />
     </BannerWrapper>
@@ -59,13 +59,21 @@ const CampaignsBanner = (props) => {
 };
 
 CampaignsBanner.propTypes = {
+  /** Accepts id */
   id: PropTypes.string,
+  /** Accepts class */
   className: PropTypes.string,
+  /** Accepts css style */
   style: PropTypes.object,
+  /** Label */
   headerLabel: PropTypes.string,
+  /** Label subheader */
   subHeaderLabel: PropTypes.string,
+  /** Image source */
   img: PropTypes.string,
-  btnLabel: PropTypes.string,
+  /** Header button text */
+  buttonLabel: PropTypes.string,
+  /** The link that opens when the button is clicked */
   link: PropTypes.string,
 };
 

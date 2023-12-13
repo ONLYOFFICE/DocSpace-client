@@ -7,7 +7,8 @@ import Item from "./Item";
 
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 
-const FOOTER_HEIGHT = 70;
+const FOOTER_HEIGHT = 73;
+const USER_ITEM_HEIGHT = 48;
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -19,6 +20,8 @@ const Row = memo(({ data, index, style }) => {
     roomType,
     isOwner,
     inputsRef,
+    setIsOpenItemAccess,
+    isMobileView,
   } = data;
 
   if (inviteItems === undefined) return;
@@ -37,6 +40,8 @@ const Row = memo(({ data, index, style }) => {
         roomType={roomType}
         isOwner={isOwner}
         inputsRef={inputsRef}
+        setIsOpenItemAccess={setIsOpenItemAccess}
+        isMobileView={isMobileView}
       />
     </StyledRow>
   );
@@ -51,38 +56,85 @@ const ItemsList = ({
   roomType,
   isOwner,
   externalLinksVisible,
+  scrollAllPanelContent,
   inputsRef,
+  invitePanelBodyRef,
+  isMobileView,
 }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
+  const [isTotalListHeight, setIsTotalListHeight] = useState(false);
+  const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
   const bodyRef = useRef();
   const { height } = useResizeObserver({ ref: bodyRef });
 
   const onBodyResize = useCallback(() => {
+    const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
     const heightList = height ? height : bodyRef.current.offsetHeight;
-    setBodyHeight(heightList - FOOTER_HEIGHT);
+    const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
+    const listAreaHeight = heightList;
+    const heightBody = invitePanelBodyRef?.current?.clientHeight;
+    const fullHeightList = heightBody - bodyRef.current.offsetTop;
+    const heightWitchOpenItemAccess = Math.max(scrollHeight, fullHeightList);
 
+    const calculatedHeight = scrollAllPanelContent
+      ? Math.max(
+          totalHeightItems,
+          listAreaHeight,
+          isOpenItemAccess ? heightWitchOpenItemAccess : 0
+        )
+      : heightList - FOOTER_HEIGHT;
+
+    const finalHeight = scrollAllPanelContent
+      ? isOpenItemAccess
+        ? calculatedHeight
+        : totalHeightItems
+      : calculatedHeight;
+
+    setBodyHeight(finalHeight);
     setOffsetTop(bodyRef.current.offsetTop);
-  }, [height, bodyRef?.current?.offsetHeight]);
+
+    if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
+      setIsTotalListHeight(
+        totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight
+      );
+  }, [
+    height,
+    bodyRef?.current?.offsetHeight,
+    inviteItems.length,
+    scrollAllPanelContent,
+    isOpenItemAccess,
+  ]);
 
   useEffect(() => {
     onBodyResize();
-  }, [bodyRef.current, externalLinksVisible, height]);
+  }, [
+    bodyRef.current,
+    externalLinksVisible,
+    height,
+    inviteItems.length,
+    scrollAllPanelContent,
+    isOpenItemAccess,
+  ]);
 
-  useEffect(() => {
-    window.addEventListener("resize", onBodyResize);
-    return () => {
-      window.removeEventListener("resize", onBodyResize);
-    };
-  }, []);
+  const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
+
+  const willChangeStyle =
+    isMobileView && isOpenItemAccess ? "auto" : "transform";
 
   return (
-    <ScrollList offsetTop={offsetTop} ref={bodyRef}>
+    <ScrollList
+      offsetTop={offsetTop}
+      ref={bodyRef}
+      scrollAllPanelContent={scrollAllPanelContent}
+      isTotalListHeight={isTotalListHeight}
+    >
       <List
+        style={{ overflow: overflowStyle, willChange: willChangeStyle }}
         height={bodyHeight}
         width="auto"
         itemCount={inviteItems.length}
-        itemSize={48}
+        itemSize={USER_ITEM_HEIGHT}
         itemData={{
           inviteItems,
           setInviteItems,
@@ -91,9 +143,11 @@ const ItemsList = ({
           roomType,
           isOwner,
           inputsRef,
+          setIsOpenItemAccess,
+          isMobileView,
           t,
         }}
-        outerElementType={CustomScrollbarsVirtualList}
+        outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
       >
         {Row}
       </List>

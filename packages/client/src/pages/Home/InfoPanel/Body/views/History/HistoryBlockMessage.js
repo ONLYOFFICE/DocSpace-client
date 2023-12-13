@@ -16,7 +16,7 @@ const HistoryBlockMessage = ({
 }) => {
   const message = getBlockMessageTranslation(
     t,
-    action.Action,
+    action.hasOwnProperty("Action") ? action.Action : action.Actions,
     action.Item,
     action.Item === FeedItemTypes.File || action.Item === FeedItemTypes.Folder
       ? !!groupedActions.length
@@ -38,7 +38,7 @@ const HistoryBlockMessage = ({
     if (!folderTitle) return "";
 
     return (
-      <span className="folderLabel">
+      <span className="folder-label">
         {` ${t("FeedLocationLabel", { folderTitle })}`}
       </span>
     );
@@ -46,7 +46,7 @@ const HistoryBlockMessage = ({
 
   return (
     <StyledHistoryBlockMessage className="message">
-      {message}
+      <span className="main-message">{message}</span>
       {getFolderLabel()}
     </StyledHistoryBlockMessage>
   );

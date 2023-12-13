@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
+import { useNavigate } from "react-router-dom";
 import { Events } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
 import throttle from "lodash/throttle";
+import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
     const {
       t,
-      history,
+
       setSelected,
       viewAs,
       setViewAs,
@@ -39,7 +41,6 @@ const withHotkeys = (Component) => {
       backToParentFolder,
 
       uploadFile,
-      someDialogIsOpen,
       enabledHotkeys,
       mediaViewerIsVisible,
 
@@ -60,18 +61,18 @@ const withHotkeys = (Component) => {
       setInviteUsersWarningDialogVisible,
 
       security,
+      copyToClipboard,
+      uploadClipboardFiles,
     } = props;
+
+    const navigate = useNavigate();
 
     const hotkeysFilter = {
       filter: (ev) =>
         ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
-      enabled:
-        !someDialogIsOpen &&
-        enabledHotkeys &&
-        !mediaViewerIsVisible &&
-        !filesIsLoading,
+      enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,
       // keyup: true,
       // keydown: false,
     };
@@ -113,13 +114,20 @@ const withHotkeys = (Component) => {
       }
     };
 
+    const onPaste = async (e) => {
+      uploadClipboardFiles(t, e);
+    };
+
     useEffect(() => {
       const throttledKeyDownEvent = throttle(onKeyDown, 300);
 
       window.addEventListener("keydown", throttledKeyDownEvent);
+      document.addEventListener("paste", onPaste);
 
-      return () =>
+      return () => {
         window.removeEventListener("keypress", throttledKeyDownEvent);
+        document.removeEventListener("paste", onPaste);
+      };
     });
 
     //Select/deselect item
@@ -128,7 +136,9 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "*",
       (e) => {
-        if (e.shiftKey || e.ctrlKey) return;
+        const someDialogIsOpen = checkDialogsOpen();
+
+        if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;
 
         switch (e.key) {
           case "ArrowDown":
@@ -328,12 +338,19 @@ const withHotkeys = (Component) => {
       hotkeysFilter
     );
 
+    useHotkeys("Ctrl+c, command+c", () => copyToClipboard(t), hotkeysFilter);
+    useHotkeys(
+      "Ctrl+x, command+x",
+      () => copyToClipboard(t, true),
+      hotkeysFilter
+    );
+
     //Upload file
     useHotkeys(
       "Shift+u",
       () => {
         if (folderWithNoAction) return;
-        uploadFile(false, history, t);
+        uploadFile(false, navigate, t);
       },
 
       hotkeysFilter
@@ -392,12 +409,13 @@ const withHotkeys = (Component) => {
         selectAll,
         activateHotkeys,
         uploadFile,
+        copyToClipboard,
+        uploadClipboardFiles,
       } = hotkeyStore;
 
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        someDialogIsOpen,
         setInviteUsersWarningDialogVisible,
       } = dialogsStore;
       const {
@@ -411,8 +429,9 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = auth.settingsStore;
-      const { isVisitor } = auth.userStore.user;
       const { isGracePeriod } = auth.currentTariffStatusStore;
+
+      const isVisitor = auth.userStore.user?.isVisitor;
 
       const {
         isFavoritesFolder,
@@ -455,7 +474,6 @@ const withHotkeys = (Component) => {
         backToParentFolder,
 
         uploadFile,
-        someDialogIsOpen,
         enabledHotkeys,
         mediaViewerIsVisible,
 
@@ -477,6 +495,9 @@ const withHotkeys = (Component) => {
         setInviteUsersWarningDialogVisible,
 
         security,
+        copyToClipboard,
+
+        uploadClipboardFiles,
       };
     }
   )(observer(WithHotkeys));

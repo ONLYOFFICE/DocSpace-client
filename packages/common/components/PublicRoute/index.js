@@ -1,72 +1,63 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import AppLoader from "../AppLoader";
+import { Navigate, Route, useLocation } from "react-router-dom";
+//import AppLoader from "../AppLoader";
+import { combineUrl } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 import { TenantStatus } from "../../constants";
 
-export const PublicRoute = ({ component: Component, ...rest }) => {
-  const {
-    wizardCompleted,
-    isAuthenticated,
-    isLoaded,
-    personal,
-    tenantStatus,
-  } = rest;
-  const renderComponent = (props) => {
-    const isPreparationPortalUrl =
-      props.location.pathname === "/preparation-portal";
+export const PublicRoute = ({ children, ...rest }) => {
+  const { wizardCompleted, isAuthenticated, tenantStatus, isPortalDeactivate } =
+    rest;
+
+  const location = useLocation();
+
+  const renderComponent = () => {
+    const isPreparationPortalUrl = location.pathname === "/preparation-portal";
+    const isDeactivationPortalUrl = location.pathname === "/unavailable";
+    const isPortalRestriction = location.pathname === "/access-restricted";
     const isPortalRestoring = tenantStatus === TenantStatus.PortalRestore;
 
-    if (!isLoaded) {
-      return <AppLoader />;
+    // if (!isLoaded) {
+    //   return <AppLoader />;
+    // }
+
+    if (location?.state?.isRestrictionError) {
+      return children;
     }
 
-    if (personal) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location },
-          }}
-        />
-      );
+    if (location.pathname === "/rooms/share") {
+      return children;
     }
 
-    if (isAuthenticated && !isPortalRestoring) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location },
-          }}
-        />
-      );
+    if (
+      (isAuthenticated && !isPortalRestoring && !isPortalDeactivate) ||
+      (!location?.state?.isRestrictionError && isPortalRestriction)
+    ) {
+      return <Navigate replace to={"/"} />;
     }
 
     if (isAuthenticated && isPortalRestoring && !isPreparationPortalUrl) {
       return (
-        <Redirect
-          to={{
-            pathname: combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              "/preparation-portal"
-            ),
-            state: { from: props.location },
-          }}
+        <Navigate
+          replace
+          to={combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            "/preparation-portal"
+          )}
         />
       );
     }
-
-    if (!wizardCompleted && props.location.pathname !== "/wizard") {
+    if (isAuthenticated && isPortalDeactivate && !isDeactivationPortalUrl) {
       return (
-        <Redirect
-          to={{
-            pathname: "/wizard",
-            state: { from: props.location },
-          }}
+        <Navigate
+          replace
+          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
         />
       );
+    }
+    if (!wizardCompleted && location.pathname !== "/wizard") {
+      return <Navigate replace to={"/wizard"} />;
     }
 
     if (
@@ -76,35 +67,59 @@ export const PublicRoute = ({ component: Component, ...rest }) => {
       !isPreparationPortalUrl
     ) {
       return (
-        <Redirect
-          to={{
-            pathname: combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              "/preparation-portal"
-            ),
-            state: { from: props.location },
-          }}
+        <Navigate
+          replace
+          to={combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            "/preparation-portal"
+          )}
+        />
+      );
+    }
+    if (
+      !isAuthenticated &&
+      isPortalDeactivate &&
+      wizardCompleted &&
+      !isDeactivationPortalUrl
+    ) {
+      return (
+        <Navigate
+          replace
+          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
         />
       );
     }
 
-    if (wizardCompleted && !isAuthenticated && !isPortalRestoring)
-      return window.location.replace("/login");
+    if (
+      wizardCompleted &&
+      !isAuthenticated &&
+      !isPortalRestoring &&
+      !isPortalDeactivate
+    ) {
+      window.location.replace(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
+      );
 
-    return <Component {...props} {...rest} />;
+      return null;
+    }
+
+    return children;
   };
-  return <Route {...rest} render={renderComponent} />;
+
+  const component = renderComponent();
+
+  return component;
 };
 
 export default inject(({ auth }) => {
   const { settingsStore, isAuthenticated, isLoaded } = auth;
-  const { wizardCompleted, personal, tenantStatus } = settingsStore;
+  const { wizardCompleted, tenantStatus, isPortalDeactivate } = settingsStore;
 
   return {
     tenantStatus,
     wizardCompleted,
     isAuthenticated,
     isLoaded,
-    personal,
+    isPortalDeactivate,
   };
 })(observer(PublicRoute));

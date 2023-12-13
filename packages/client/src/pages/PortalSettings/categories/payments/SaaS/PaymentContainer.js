@@ -1,12 +1,11 @@
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import { withRouter } from "react-router";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
-import { size, desktop } from "@docspace/components/utils/device";
+import { size, desktop, mobile } from "@docspace/components/utils/device";
 import { Consumer } from "@docspace/components/utils/context";
 import { HelpButton } from "@docspace/components";
 
@@ -31,10 +30,10 @@ const StyledBody = styled.div`
     grid-gap: 20px;
     margin-bottom: 20px;
 
-    @media (max-width: ${size.smallTablet + 40}px) {
+    @media ${mobile} {
       grid-template-columns: 1fr;
 
-      grid-template-rows: ${(props) => "1fr max-content"};
+      grid-template-rows: 1fr max-content;
 
       .price-calculation-container,
       .benefits-container {
@@ -49,7 +48,7 @@ const StyledBody = styled.div`
       props.isChangeView &&
       css`
         grid-template-columns: 1fr;
-        grid-template-rows: ${(props) => "1fr max-content"};
+        grid-template-rows: 1fr max-content;
 
         .price-calculation-container,
         .benefits-container {
@@ -76,7 +75,14 @@ const StyledBody = styled.div`
       margin: auto 0;
     }
     .payment-info_managers-price {
-      margin-right: 6px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 6px;
+            `
+          : css`
+              margin-right: 6px;
+            `}
     }
   }
 `;
@@ -88,7 +94,6 @@ const PaymentContainer = (props) => {
     theme,
     isNotPaidPeriod,
     payerEmail,
-    user,
     isPaidPeriod,
     currencySymbol,
     startValue,
@@ -108,6 +113,7 @@ const PaymentContainer = (props) => {
     return (
       <>
         <HelpButton
+          className="payment-tooltip"
           offsetRight={0}
           iconName={HelpReactSvgUrl}
           tooltipContent={
@@ -274,10 +280,7 @@ const PaymentContainer = (props) => {
     <Consumer>
       {(context) => (
         <StyledBody
-          theme={theme}
-          isChangeView={
-            context.sectionWidth < size.smallTablet && expandArticle
-          }
+          isChangeView={context.sectionWidth <= size.mobile && expandArticle}
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()
@@ -342,11 +345,8 @@ export default inject(({ auth, payments }) => {
   } = auth;
   const { showText: expandArticle } = settingsStore;
 
-  const {
-    isFreeTariff,
-    currentTariffPlanTitle,
-    isNonProfit,
-  } = currentQuotaStore;
+  const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+    currentQuotaStore;
 
   const {
     isNotPaidPeriod,
@@ -366,8 +366,6 @@ export default inject(({ auth, payments }) => {
 
   const { isAlreadyPaid } = payments;
 
-  const { user } = userStore;
-
   return {
     paymentDate,
     isAlreadyPaid,
@@ -385,7 +383,7 @@ export default inject(({ auth, payments }) => {
     startValue: planCost.value,
     isNotPaidPeriod,
     payerEmail: customerId,
-    user,
+
     isPaidPeriod,
     currentTariffPlanTitle,
     portalTariffStatus,
@@ -393,4 +391,4 @@ export default inject(({ auth, payments }) => {
     isNonProfit,
     isPaymentDateValid,
   };
-})(withRouter(observer(PaymentContainer)));
+})(observer(PaymentContainer));

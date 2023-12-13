@@ -6,7 +6,7 @@ import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
 import ConsumerToggle from "./consumerToggle";
 import { Base } from "@docspace/components/themes";
-import { thirdpartiesLogo } from "@docspace/common/utils/image-helpers";
+import { thirdpartiesLogo } from "@docspace/common/utils/image-thirdparties";
 
 const StyledItem = styled.div`
   .consumer-description {
@@ -28,7 +28,7 @@ const StyledBox = styled(Box)`
       css`
         path {
           fill: #ffffff;
-          opacity: ${props.isSet ? 1 : 0.16};
+          opacity: 1;
         }
         ${props.isLinkedIn &&
         css`
@@ -45,7 +45,7 @@ const StyledBox = styled(Box)`
 
     ${(props) =>
       !props.isThirdPartyAvailable &&
-      !props.isSet &&
+      props.canSet &&
       css`
         path {
           opacity: 0.5;
@@ -67,7 +67,7 @@ class ConsumerItem extends React.Component {
       isThirdPartyAvailable,
     } = this.props;
 
-    const logo = thirdpartiesLogo.get(`${consumer.name.toLowerCase()}.svg`);
+    const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
 
     const isSet =
       !consumer.canSet || consumer.props.find((p) => p.value) ? true : false;
@@ -81,15 +81,17 @@ class ConsumerItem extends React.Component {
           widthProp="100%"
         >
           <StyledBox
-            isSet={isSet}
+            canSet={consumer.canSet}
             isLinkedIn={consumer.name === "linkedin"}
             isThirdPartyAvailable={isThirdPartyAvailable}
           >
-            <ReactSVG
-              src={logo}
-              className={"consumer-icon"}
-              alt={consumer.name}
-            />
+            {logo && (
+              <ReactSVG
+                src={logo}
+                className={"consumer-icon"}
+                alt={consumer.name}
+              />
+            )}
           </StyledBox>
           <Box onClick={setConsumer} data-consumer={consumer.name}>
             <ConsumerToggle

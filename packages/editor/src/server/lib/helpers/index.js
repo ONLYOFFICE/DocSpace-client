@@ -15,7 +15,10 @@ import {
 } from "@docspace/common/api/files";
 import { TenantStatus } from "@docspace/common/constants";
 
-import { getLogoFromPath } from "@docspace/common/utils";
+import {
+  getLtrLanguageForEditor,
+  getLogoFromPath,
+} from "@docspace/common/utils";
 
 export const getFavicon = (logoUrls) => {
   if (!logoUrls) return null;
@@ -51,19 +54,26 @@ export const initDocEditor = async (req) => {
     }
 
     const doc = query?.doc || null;
+    const shareKey = query?.share ?? null;
     const view = url.indexOf("action=view") !== -1;
     const fileVersion = version || null;
 
     const baseSettings = [
       getUser(null, headers),
-      getSettings(false, headers),
       getAppearanceTheme(headers),
       getLogoUrls(headers),
     ];
+    let settings;
 
-    [user, settings, appearanceTheme, logoUrls] = await Promise.all(
-      baseSettings
-    );
+    try {
+      settings = await getSettings(false, headers);
+    } catch (err) {
+      console.error("initDocEditor settings failed", err);
+
+      return { isSettingsError: true };
+    }
+
+    [user, appearanceTheme, logoUrls] = await Promise.all(baseSettings);
 
     if (settings.tenantStatus === TenantStatus.PortalRestore) {
       error = "restore-backup";
@@ -79,7 +89,7 @@ export const initDocEditor = async (req) => {
 
     personal = settings?.personal;
 
-    if (!successAuth && !doc) {
+    if (!successAuth && !doc && !shareKey) {
       error = {
         unAuthorized: true,
         // redirectPath: combineUrl(
@@ -90,7 +100,14 @@ export const initDocEditor = async (req) => {
       return { error };
     }
 
-    const config = await openEdit(fileId, fileVersion, doc, view, headers);
+    const config = await openEdit(
+      fileId,
+      fileVersion,
+      doc,
+      view,
+      headers,
+      shareKey
+    );
 
     //const sharingSettings = await getShareFiles([+fileId], []);
 
@@ -139,6 +156,13 @@ export const initDocEditor = async (req) => {
         config.editorConfig.customization.logo.url +
         getLogoFromPath(config.editorConfig.customization.customer.logo);
     }
+
+    // needed to reset rtl language in Editor
+    config.editorConfig.lang = getLtrLanguageForEditor(
+      user?.cultureName || "en",
+      settings.culture,
+      true
+    );
 
     return {
       config,

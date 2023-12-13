@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import ContextMenuButton from "@docspace/components/context-menu-button";
 import PropTypes from "prop-types";
@@ -6,10 +6,7 @@ import ContextMenu from "@docspace/components/context-menu";
 import Link from "@docspace/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { combineUrl } from "@docspace/common/utils";
-import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   StyledTile,
@@ -17,166 +14,116 @@ import {
   StyledFileTileBottom,
   StyledContent,
   StyledOptionButton,
+  StyledContextMenu,
 } from "../StyledTileView";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import Backdrop from "@docspace/components/backdrop";
+import { isMobile } from "@docspace/components/utils/device";
 
-class Tile extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const Tile = ({
+  t,
+  thumbnailClick,
+  item,
 
-    this.state = {
-      errorLoadSrc: false,
-    };
+  onCreateOform,
+  getFormGalleryContextOptions,
 
-    this.cm = React.createRef();
-    this.tile = React.createRef();
-  }
+  setGallerySelected,
+  children,
+  contextButtonSpacerWidth,
+  tileContextClick,
+  isActive,
+  isSelected,
+  title,
+  showHotkeyBorder,
+  getIcon,
+}) => {
+  const cm = useRef();
+  const tile = useRef();
 
-  onError = () => {
-    this.setState({
-      errorLoadSrc: true,
-    });
+  const navigate = useNavigate();
+
+  const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
+  const previewLoader = () => <div style={{ width: "96px" }} />;
+
+  const onSelectForm = () => setGallerySelected(item);
+
+  const onCreateForm = () => onCreateOform(navigate);
+
+  const getContextModel = () => getFormGalleryContextOptions(item, t, navigate);
+
+  const getOptions = () =>
+    getFormGalleryContextOptions(item, t, navigate).map((item) => item.key);
+
+  const onOpenContextMenu = (e) => {
+    tileContextClick && tileContextClick();
+    if (!cm.current.menuRef.current) tile.current.click(e); //TODO: need fix context menu to global
+    cm.current.show(e);
   };
 
-  getIconFile = () => {
-    const { thumbnailClick, item } = this.props;
+  //TODO: OFORM isActive
 
-    // const src =
-    //   item.attributes.template_image.data.attributes.formats.small.url;
-    const src = item.attributes.card_prewiew.data.attributes.url;
-    const svgLoader = () => <div style={{ width: "96px" }} />;
+  return (
+    <StyledTile
+      ref={tile}
+      isSelected={isSelected}
+      onContextMenu={onOpenContextMenu}
+      isActive={isActive}
+      showHotkeyBorder={showHotkeyBorder}
+      onDoubleClick={onCreateForm}
+      onClick={onSelectForm}
+      className="files-item"
+    >
+      <StyledFileTileTop isActive={isActive}>
+        {previewSrc ? (
+          <Link
+            className="thumbnail-image-link"
+            type="page"
+            onClick={thumbnailClick}
+          >
+            <img
+              src={previewSrc}
+              className="thumbnail-image"
+              alt="Thumbnail-img"
+            />
+          </Link>
+        ) : (
+          <ReactSVG
+            className="temporary-icon"
+            src={previewSrc || ""}
+            loading={previewLoader}
+          />
+        )}
+      </StyledFileTileTop>
 
-    return src ? (
-      <Link
-        className="thumbnail-image-link"
-        type="page"
-        onClick={thumbnailClick}
-      >
-        <img
-          src={src}
-          className="thumbnail-image"
-          alt="Thumbnail-img"
-          onError={this.onError}
-        />
-      </Link>
-    ) : (
-      <ReactSVG className="temporary-icon" src={src} loading={svgLoader} />
-    );
-  };
-
-  getContextModel = () => {
-    return [
-      {
-        key: "create",
-        label: this.props.t("Common:Create"),
-        onClick: this.onCreateForm,
-      },
-      {
-        key: "template-info",
-        label: this.props.t("TemplateInfo"),
-        onClick: this.onShowTemplateInfo,
-      },
-    ];
-  };
-
-  onCreateForm = () => {
-    const { match, history, setIsInfoPanelVisible, categoryType } = this.props;
-
-    const filter = FilesFilter.getDefault();
-
-    filter.folder = match.params.folderId;
-
-    const filterParamsStr = filter.toUrlParams();
-
-    const url = getCategoryUrl(categoryType, filter.folder);
-
-    const pathname = `${url}?${filterParamsStr}`;
-
-    setIsInfoPanelVisible(false);
-
-    history.push(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, pathname)
-    );
-  };
-
-  onShowTemplateInfo = () => {
-    this.onSelectForm();
-    if (!this.props.isInfoPanelVisible) this.props.setIsInfoPanelVisible(true);
-  };
-
-  getOptions = () => ["create", "template-info"];
-
-  onSelectForm = () => {
-    this.props.setGallerySelected(this.props.item);
-  };
-
-  render() {
-    const {
-      children,
-      contextButtonSpacerWidth,
-      tileContextClick,
-      isActive,
-      isSelected,
-      title,
-      showHotkeyBorder,
-      getIcon,
-    } = this.props;
-
-    const src = getIcon(32, ".docxf");
-    const element = <img className="react-svg-icon" src={src} />;
-
-    const onContextMenu = (e) => {
-      tileContextClick && tileContextClick();
-      if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); //TODO: need fix context menu to global
-      }
-      this.cm.current.show(e);
-    };
-
-    const icon = this.getIconFile();
-
-    //TODO: OFORM isActive
-
-    return (
-      <StyledTile
-        ref={this.tile}
-        isSelected={isSelected}
-        onContextMenu={onContextMenu}
-        isActive={isActive}
-        showHotkeyBorder={showHotkeyBorder}
-        onDoubleClick={this.onCreateForm}
-        onClick={this.onSelectForm}
-        className="files-item"
-      >
-        <StyledFileTileTop isActive={isActive}>{icon}</StyledFileTileTop>
-
-        <StyledFileTileBottom isSelected={isSelected} isActive={isActive}>
-          <div className="file-icon_container">
-            <div className="file-icon">{element}</div>
+      <StyledFileTileBottom isSelected={isSelected} isActive={isActive}>
+        <div className="file-icon_container">
+          <div className="file-icon">
+            <img className="react-svg-icon" src={getIcon(32, ".docxf")} />
           </div>
+        </div>
 
-          <StyledContent>{children}</StyledContent>
-          <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
-            <ContextMenuButton
-              className="expandButton"
-              directionX="right"
-              getData={this.getOptions}
-              isNew={true}
-              onClick={onContextMenu}
-              title={title}
-            />
+        <StyledContent>{children}</StyledContent>
 
-            <ContextMenu
-              getContextModel={this.getContextModel}
-              ref={this.cm}
-              withBackdrop={true}
-            />
-          </StyledOptionButton>
-        </StyledFileTileBottom>
-      </StyledTile>
-    );
-  }
-}
+        <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+          <ContextMenuButton
+            className="expandButton"
+            directionX="right"
+            getData={getOptions}
+            displayType="toggle"
+            onClick={onOpenContextMenu}
+            title={title}
+          />
+          <StyledContextMenu
+            ignoreChangeView={isMobile()}
+            getContextModel={getContextModel}
+            ref={cm}
+            withBackdrop={true}
+          />
+        </StyledOptionButton>
+      </StyledFileTileBottom>
+    </StyledTile>
+  );
+};
 
 Tile.propTypes = {
   children: PropTypes.oneOfType([
@@ -197,7 +144,10 @@ Tile.defaultProps = {
 };
 
 export default inject(
-  ({ filesStore, settingsStore, auth, oformsStore }, { item }) => {
+  (
+    { filesStore, settingsStore, auth, oformsStore, contextOptionsStore },
+    { item }
+  ) => {
     const { categoryType } = filesStore;
     const { gallerySelected, setGallerySelected } = oformsStore;
     const { getIcon } = settingsStore;
@@ -205,13 +155,17 @@ export default inject(
 
     const isSelected = item.id === gallerySelected?.id;
 
+    const { getFormGalleryContextOptions, onCreateOform } = contextOptionsStore;
+
     return {
       isSelected,
       setGallerySelected,
+      onCreateOform,
+      getFormGalleryContextOptions,
       getIcon,
       setIsInfoPanelVisible: setIsVisible,
       isInfoPanelVisible: isVisible,
       categoryType,
     };
   }
-)(withTranslation(["FormGallery", "Common"])(withRouter(observer(Tile))));
+)(withTranslation(["FormGallery", "Common"])(observer(Tile)));

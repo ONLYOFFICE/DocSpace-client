@@ -2,6 +2,21 @@ import React from "react";
 import Link from "../link";
 import Text from "../text";
 import Tooltip from "./";
+import TooltipDocs from "./tooltip.mdx";
+
+export default {
+  title: "Components/Tooltip",
+  component: Tooltip,
+  parameters: {
+    docs: {
+      page: TooltipDocs,
+    },
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?node-id=649%3A4458&mode=dev",
+    },
+  },
+};
 
 const BodyStyle = { marginTop: 100, marginLeft: 200, position: "absolute" };
 
@@ -9,7 +24,7 @@ const Template = (args) => {
   return (
     <div style={{ height: "240px" }}>
       <div style={BodyStyle}>
-        <Link data-for="link" data-tip="Bob Johnston">
+        <Link data-tooltip-id="link" data-tooltip-content="Bob Johnston">
           Bob Johnston
         </Link>
       </div>
@@ -17,10 +32,10 @@ const Template = (args) => {
       <Tooltip
         {...args}
         id="link"
-        getContent={(dataTip) => (
+        getContent={({ content }) => (
           <div>
             <Text isBold={true} fontSize="16px">
-              {dataTip}
+              {content}
             </Text>
             <Text color="#A3A9AE" fontSize="13px">
               BobJohnston@gmail.com
@@ -35,16 +50,9 @@ const Template = (args) => {
 
 export const basic = Template.bind({});
 basic.args = {
-  effect: "float",
+  float: true,
   place: "top",
-  offsetTop: 0,
-  offsetRight: 0,
-  offsetBottom: 0,
-  offsetLeft: 0,
 };
-
-const BodyStyle_2 = { marginTop: -22, marginLeft: 50, position: "absolute" };
-const BodyStyle_3 = { marginTop: 70, marginLeft: 250 };
 
 const arrayUsers = [
   {
@@ -82,13 +90,13 @@ const arrayUsers = [
 const AllTemplate = (args) => {
   return (
     <div>
-      <div style={BodyStyle_2}>
+      <div>
         <h5 style={{ marginLeft: -5 }}>Hover on me</h5>
-        <Link data-for="link" data-tip="Bob Johnston">
+        <Link data-tooltip-id="link" data-tooltip-content="Bob Johnston">
           Bob Johnston
         </Link>
       </div>
-      <Tooltip id="link" offsetRight={90} effect="solid">
+      <Tooltip id="link" offset={0}>
         <div>
           <Text isBold={true} fontSize="16px">
             Bob Johnston
@@ -100,42 +108,42 @@ const AllTemplate = (args) => {
         </div>
       </Tooltip>
 
-      <div style={BodyStyle_3}>
+      <div>
         <h5 style={{ marginLeft: -5 }}>Hover group</h5>
-        <Link data-for="group" data-tip={0}>
+        <Link data-tooltip-id="group" data-tooltip-content={0}>
           Bob
         </Link>
         <br />
-        <Link data-for="group" data-tip={1}>
+        <Link data-tooltip-id="group" data-tooltip-content={1}>
           John
         </Link>
         <br />
-        <Link data-for="group" data-tip={2}>
+        <Link data-tooltip-id="group" data-tooltip-content={2}>
           Kevin
         </Link>
         <br />
-        <Link data-for="group" data-tip={3}>
+        <Link data-tooltip-id="group" data-tooltip-content={3}>
           Alex
         </Link>
         <br />
-        <Link data-for="group" data-tip={4}>
+        <Link data-tooltip-id="group" data-tooltip-content={4}>
           Tomas
         </Link>
       </div>
 
       <Tooltip
         id="group"
-        offsetRight={90}
-        getContent={(dataTip) =>
-          dataTip ? (
+        offsetRight={0}
+        getContent={({ content }) =>
+          content ? (
             <div>
               <Text isBold={true} fontSize="16px">
-                {arrayUsers[dataTip].name}
+                {arrayUsers[content].name}
               </Text>
               <Text color="#A3A9AE" fontSize="13px">
-                {arrayUsers[dataTip].email}
+                {arrayUsers[content].email}
               </Text>
-              <Text fontSize="13px">{arrayUsers[dataTip].position}</Text>
+              <Text fontSize="13px">{arrayUsers[content].position}</Text>
             </div>
           ) : null
         }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { isMobile } from "react-device-detect";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 import Selector from "./sub-components/Selector";
@@ -14,7 +14,9 @@ import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 const StyledBlock = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `left: 0;` : `right: 0;`}
 
   width: 480px;
   max-width: 100%;
@@ -36,7 +38,7 @@ const StyledBlock = styled.div`
     max-width: calc(100% - 69px);
   `}
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     bottom: 0;
     top: unset;
     height: calc(100% - 64px);
@@ -72,17 +74,28 @@ const StyledControlContainer = styled.div`
   z-index: 450;
 
   top: 18px;
-  left: -27px;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `right: -27px;` : `left: -27px;`}
 
   ${isMobile &&
   css`
     top: 18px;
   `}
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     top: -27px;
-    right: 10px;
-    left: unset;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? css`
+            left: 10px;
+            right: unset;
+          `
+        : css`
+            right: 10px;
+            left: unset;
+          `}
   }
 `;
 

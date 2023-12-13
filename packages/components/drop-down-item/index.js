@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ReactSVG } from "react-svg";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
+import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import {
   StyledDropdownItem,
@@ -12,9 +13,11 @@ import {
 import ToggleButton from "../toggle-button";
 
 const DropDownItem = (props) => {
-  //console.log("DropDownItem render");
   const {
     isSeparator,
+    isHeader,
+    withHeaderArrow,
+    headerArrowAction,
     label,
     icon,
     children,
@@ -31,10 +34,11 @@ const DropDownItem = (props) => {
     isActiveDescendant,
   } = props;
 
-  const { withToggle, checked, onClick, ...rest } = props;
+  const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
 
   const onClickAction = (e) => {
     onClick && !disabled && onClick(e);
+    onClickSelectedItem && isSelected && onClickSelectedItem();
   };
 
   const stopPropagation = (event) => {
@@ -54,15 +58,26 @@ const DropDownItem = (props) => {
       onClick={onClickAction}
       disabled={disabled}
       isActive={isActive}
+      isHeader={isHeader}
       isSelected={isSelected}
       withToggle={withToggle}
       isActiveDescendant={isActiveDescendant}
     >
+      {isHeader && withHeaderArrow && (
+        <IconWrapper
+          className="drop-down-icon back-arrow"
+          onClick={headerArrowAction}
+        >
+          <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
+        </IconWrapper>
+      )}
+
       {icon && (
-        <IconWrapper className="drop-down-icon">
+        <IconWrapper className="drop-down-icon ">
           {!withoutIcon ? (
-            !icon.includes("images/") ? (
-              <img src={icon} />
+            (!icon.includes("images/") && !icon.includes(".svg")) ||
+            icon.includes("webplugins") ? (
+              <img className="drop-down-icon_image" src={icon} />
             ) : (
               <ReactSVG
                 src={icon}
@@ -73,7 +88,13 @@ const DropDownItem = (props) => {
         </IconWrapper>
       )}
 
-      {isSeparator ? "\u00A0" : label ? label : children && children}
+      {isSeparator ? (
+        "\u00A0"
+      ) : label ? (
+        <span dir="auto">{label}</span>
+      ) : (
+        children && children
+      )}
 
       {isSubMenu && (
         <IconWrapper className="submenu-arrow">
@@ -94,21 +115,25 @@ const DropDownItem = (props) => {
 };
 
 DropDownItem.propTypes = {
-  /** Tells when the dropdown item should display like separator */
+  /** Sets the dropdown item to display as a separator */
   isSeparator: PropTypes.bool,
-  /** Tells when the dropdown item should display like header */
+  /** Sets the dropdown to display as a header */
   isHeader: PropTypes.bool,
+  /** Enables header arrow icon */
+  withHeaderArrow: PropTypes.bool,
+  /** Sets an action that will be triggered when the header arrow is clicked */
+  headerArrowAction: PropTypes.func,
   /** Accepts tab-index */
   tabIndex: PropTypes.number,
   /** Dropdown item text */
   label: PropTypes.string,
-  /** Tells when the dropdown item should display like disabled */
+  /** Sets the dropdown item to display as disabled */
   disabled: PropTypes.bool,
   /** Dropdown item icon */
   icon: PropTypes.string,
-  /** Disable default style hover effect */
+  /** Disables default style hover effect */
   noHover: PropTypes.bool,
-  /** What the dropdown item will trigger when clicked */
+  /** Sets an action that will be triggered when the dropdown item is clicked */
   onClick: PropTypes.func,
   /** Children elements */
   children: PropTypes.any,
@@ -119,15 +144,20 @@ DropDownItem.propTypes = {
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   /** Accepts css text-overflow */
-  customHeight: PropTypes.number,
-  customHeightTablet: PropTypes.number,
   textOverflow: PropTypes.bool,
+  /** Indicates that component will fill selected item icon */
   fillIcon: PropTypes.bool,
+  /** Enables the submenu */
   isSubMenu: PropTypes.bool,
+  /**  Sets drop down item active  */
   isActive: PropTypes.bool,
+  /** Disables the element icon */
   withoutIcon: PropTypes.bool,
+  /** Sets the padding to the minimum value */
   isModern: PropTypes.bool,
+  /** Facilitates highlighting a selected element with the keyboard */
   isActiveDescendant: PropTypes.bool,
+  /** Facilitates selecting an element from the context menu */
   isSelected: PropTypes.bool,
 };
 

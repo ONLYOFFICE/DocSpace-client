@@ -1,12 +1,41 @@
 import React, { useState, useEffect } from "react";
 import PasswordInput from ".";
 import TextInput from "../text-input";
+import PasswordInputDocs from "./password-input.mdx";
+
+const disable = {
+  table: {
+    disable: true,
+  },
+};
+
+export default {
+  title: "Components/PasswordInput",
+  component: PasswordInput,
+  parameters: {
+    docs: {
+      description: {
+        component: "Paging is used to navigate med content pages",
+      },
+      page: PasswordInputDocs,
+    },
+  },
+  argTypes: {
+    settingMinLength: disable,
+    settingsUpperCase: disable,
+    settingsDigits: disable,
+    settingsSpecSymbols: disable,
+  },
+};
 
 const Template = ({
   settingMinLength,
   settingsUpperCase,
   settingsDigits,
   settingsSpecSymbols,
+  settingsDigitsRegexStr,
+  settingsUpperCaseRegexStr,
+  settingsSpecSymbolsRegexStr,
   tooltipPasswordLength,
   onChange,
   onValidateInput,
@@ -14,14 +43,17 @@ const Template = ({
   ...args
 }) => {
   const [value, setValue] = useState("");
-  const [fakeSettings, setFakSettings] = useState();
+  const [fakeSettings, setFakeSettings] = useState();
 
   useEffect(() => {
-    setFakSettings({
+    setFakeSettings({
       minLength: settingMinLength,
       upperCase: settingsUpperCase,
       digits: settingsDigits,
       specSymbols: settingsSpecSymbols,
+      digitsRegexStr: settingsDigitsRegexStr,
+      upperCaseRegexStr: settingsUpperCaseRegexStr,
+      specSymbolsRegexStr: settingsSpecSymbolsRegexStr,
     });
     setValue("");
   }, [
@@ -29,6 +61,9 @@ const Template = ({
     settingsUpperCase,
     settingsDigits,
     settingsSpecSymbols,
+    settingsDigitsRegexStr,
+    settingsUpperCaseRegexStr,
+    settingsSpecSymbolsRegexStr,
   ]);
 
   const onChangeHandler = (e) => {
@@ -58,19 +93,19 @@ const Template = ({
         tooltipPasswordLength={`${tooltipPasswordLength} ${settingMinLength}`}
         passwordSettings={fakeSettings}
         onValidateInput={onValidateInputHandler}
-        tooltipOffsetLeft={150}
       />
     </div>
   );
 };
 
-export const basic = Template.bind({});
-basic.args = {
+export const Default = Template.bind({});
+
+Default.args = {
   isDisabled: false,
   settingMinLength: 6,
-  settingsUpperCase: false,
-  settingsDigits: false,
-  settingsSpecSymbols: false,
+  settingsUpperCase: true,
+  settingsDigits: true,
+  settingsSpecSymbols: true,
   simpleView: false,
   inputName: "demoPasswordInput",
   emailInputName: "demoEmailInput",
@@ -84,4 +119,8 @@ basic.args = {
   generatorSpecial: "!@#$%^&*",
   placeholder: "password",
   maxLength: 30,
+  settingsDigitsRegexStr: "(?=.*\\d)",
+  settingsUpperCaseRegexStr: "(?=.*[A-Z])",
+  settingsSpecSymbolsRegexStr:
+    "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
 };

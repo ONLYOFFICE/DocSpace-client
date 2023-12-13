@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
-import { isTablet } from "react-device-detect";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { desktop, mobileMore } from "@docspace/components/utils/device";
 
 const tabletStyles = css`
   .header {
@@ -97,9 +97,17 @@ const StyledLoader = styled.div`
     display: block;
     position: absolute;
     bottom: 0;
-    left: 0;
     width: calc(100% - 32px);
-    padding: 0 0 16px 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: 0;
+            padding: 0 16px 16px 0;
+          `
+        : css`
+            left: 0;
+            padding: 0 0 16px 16px;
+          `}
   }
 
   .flex {
@@ -113,23 +121,25 @@ const StyledLoader = styled.div`
   }
 
   .padding-right {
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 
   .dns-field {
     height: 32px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     ${tabletStyles}
   }
 
-  ${isTablet &&
-  `
-    ${tabletStyles}
-  `}
-
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     .save-cancel-buttons {
       width: ${(props) => (props.welcomePage ? "264px" : "192px")};
     }
@@ -180,42 +190,42 @@ const LoaderCustomization = ({
       dnsSettings={dnsSettings}
       className="category-item-wrapper"
     >
-      <Loaders.Rectangle height="22px" className="header" />
+      <RectangleSkeleton height="22px" className="header" />
 
       {portalRenaming && (
-        <Loaders.Rectangle height="80px" className="description" />
+        <RectangleSkeleton height="80px" className="description" />
       )}
 
       {dnsSettings ? (
         <>
-          <Loaders.Rectangle
+          <RectangleSkeleton
             className="dns-description"
             height={heightDnsDescription}
           />
           <div className="flex">
-            <Loaders.Rectangle
+            <RectangleSkeleton
               height="16px"
               width="16px"
               className="padding-right"
             />
-            <Loaders.Rectangle height="20px" width="135px" />
+            <RectangleSkeleton height="20px" width="135px" />
           </div>
-          <Loaders.Rectangle className="dns-field" />
+          <RectangleSkeleton className="dns-field" />
         </>
       ) : (
         <>
-          <Loaders.Rectangle height="20px" className="title" />
-          <Loaders.Rectangle height="32px" className="combo-box" />
+          <RectangleSkeleton height="20px" className="title" />
+          <RectangleSkeleton height="32px" className="combo-box" />
         </>
       )}
 
       {lngTZSettings && (
         <>
-          <Loaders.Rectangle height="20px" className="title-long" />
-          <Loaders.Rectangle height="32px" className="combo-box" />
+          <RectangleSkeleton height="20px" className="title-long" />
+          <RectangleSkeleton height="32px" className="combo-box" />
         </>
       )}
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height={heightSaveCancelButtons}
         className="save-cancel-buttons"
       />

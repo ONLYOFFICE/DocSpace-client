@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -9,9 +10,19 @@ import Text from "@docspace/components/text";
 import SsoComboBox from "./sub-components/SsoComboBox";
 import SsoFormField from "./sub-components/SsoFormField";
 import UploadXML from "./sub-components/UploadXML";
-import { bindingOptions, nameIdOptions } from "./sub-components/constants";
+import {
+  ssoBindingOptions,
+  sloBindingOptions,
+  nameIdOptions,
+} from "./sub-components/constants";
 
 const PROVIDER_URL = "https://idpservice/idp";
+
+const StyledWrapper = styled.div`
+  .radio-button-group {
+    margin-left: 24px;
+  }
+`;
 
 const IdpSettings = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
@@ -36,7 +47,7 @@ const IdpSettings = (props) => {
   } = props;
 
   return (
-    <Box>
+    <StyledWrapper>
       <UploadXML />
 
       <SsoFormField
@@ -45,6 +56,7 @@ const IdpSettings = (props) => {
         placeholder={t("Settings:SingleSignOn")}
         tabIndex={4}
         tooltipContent={<Text fontSize="12px">{t("CustomEntryTooltip")}</Text>}
+        tooltipClass="custom-entry-tooltip icon-button"
         value={spLoginLabel}
         hasError={spLoginLabelHasError}
       />
@@ -55,6 +67,7 @@ const IdpSettings = (props) => {
         placeholder={PROVIDER_URL}
         tabIndex={5}
         tooltipContent={<Text fontSize="12px">{t("ProviderURLTooltip")}</Text>}
+        tooltipClass="provider-url-tooltip icon-button"
         value={entityId}
         hasError={entityIdHasError}
       />
@@ -71,6 +84,7 @@ const IdpSettings = (props) => {
         tooltipContent={
           <Text fontSize="12px">{t("SignOnEndpointUrlTooltip")}</Text>
         }
+        tooltipClass="sign-on-endpoint-url-tooltip icon-button"
         value={ssoBinding?.includes("POST") ? ssoUrlPost : ssoUrlRedirect}
         hasError={
           ssoBinding?.includes("POST")
@@ -93,7 +107,7 @@ const IdpSettings = (props) => {
             isDisabled={!enableSso}
             name="ssoBinding"
             onClick={setInput}
-            options={bindingOptions}
+            options={ssoBindingOptions}
             selected={ssoBinding}
             spacing="20px"
             tabIndex={6}
@@ -113,6 +127,7 @@ const IdpSettings = (props) => {
         tooltipContent={
           <Text fontSize="12px">{t("LogoutEndpointUrlTooltip")}</Text>
         }
+        tooltipClass="logout-endpoint-url-tooltip icon-button"
         value={sloBinding?.includes("POST") ? sloUrlPost : sloUrlRedirect}
         hasError={
           ssoBinding?.includes("POST")
@@ -135,7 +150,7 @@ const IdpSettings = (props) => {
             isDisabled={!enableSso}
             name="sloBinding"
             onClick={setInput}
-            options={bindingOptions}
+            options={sloBindingOptions}
             selected={sloBinding}
             spacing="20px"
             tabIndex={8}
@@ -150,7 +165,7 @@ const IdpSettings = (props) => {
         options={nameIdOptions}
         tabIndex={8}
       />
-    </Box>
+    </StyledWrapper>
   );
 };
 

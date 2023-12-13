@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
 
 type StyledViewerContainerProps = {
@@ -11,9 +11,17 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   overflow: hidden;
   span {
     position: fixed;
-    right: 0;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 0;
+            margin-left: 10px;
+          `
+        : css`
+            right: 0;
+            margin-right: 10px;
+          `}
     bottom: 5px;
-    margin-right: 10px;
     z-index: 305;
   }
   .deleteBtnContainer,
@@ -41,7 +49,14 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     );
     position: fixed;
     top: 0;
-    left: 0;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: 0;
+          `
+        : css`
+            left: 0;
+          `}
     .title {
       text-align: center;
       white-space: nowrap;
@@ -50,7 +65,14 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);
-      padding-left: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 16px;
+            `
+          : css`
+              padding-left: 16px;
+            `}
       box-sizing: border-box;
       color: ${(props) => props.theme.mediaViewer.titleColor};
     }
@@ -58,7 +80,14 @@ const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 12px;
+          `
+        : css`
+            right: 12px;
+          `}
     height: 17px;
     &:hover {
       background-color: transparent;

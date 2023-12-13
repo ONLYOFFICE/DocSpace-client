@@ -1,6 +1,6 @@
 ﻿import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import copy from "copy-to-clipboard";
 
@@ -22,6 +22,7 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
+import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
 const ExternalLinks = ({
   t,
@@ -29,55 +30,57 @@ const ExternalLinks = ({
   roomType,
   defaultAccess,
   shareLinks,
+  setShareLinks,
   setInvitationLinks,
   isOwner,
-  getInfo,
   onChangeExternalLinksVisible,
   externalLinksVisible,
+  setActiveLink,
+  activeLink,
+  isMobileView,
 }) => {
   const [actionLinksVisible, setActionLinksVisible] = useState(false);
-  const [activeLink, setActiveLink] = useState({});
 
   const inputsRef = useRef();
 
-  useEffect(() => {
-    if (shareLinks[0]?.expirationDate) toggleLinks(false);
-  }, [shareLinks]);
-
-  const toggleLinks = (withCopy = true) => {
-    let link = null;
-    if (!shareLinks.length) return;
-
+  const toggleLinks = () => {
     if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === +defaultAccess);
+      const link = shareLinks.find((l) => l.access === +defaultAccess);
 
       setActiveLink(link);
+      copyLink(link.shareLink);
     } else {
-      link = shareLinks[0];
-
       !externalLinksVisible ? editLink() : disableLink();
     }
-
     onChangeExternalLinksVisible(!externalLinksVisible);
-
-    if (!externalLinksVisible && withCopy) copyLink(link?.shareLink);
   };
 
   const disableLink = () => {
-    setInvitationLinks(roomId, shareLinks[0].id, "Invite", 0);
-    setTimeout(() => getInfo(), 100);
+    setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id);
+    setShareLinks([]);
   };
 
-  const editLink = () => {
-    if (!shareLinks[0].expirationDate) {
-      setInvitationLinks(
-        roomId,
-        shareLinks[0].id,
-        "Invite",
-        shareLinks[0].access
-      );
-    }
-    setActiveLink(shareLinks[0]);
+  const editLink = async () => {
+    const type =
+      roomType === RoomsType.PublicRoom
+        ? ShareAccessRights.RoomManager
+        : ShareAccessRights.ReadOnly;
+
+    const link = await setInvitationLinks(roomId, "Invite", type);
+
+    const { shareLink, id, title, expirationDate } = link.sharedTo;
+
+    const activeLink = {
+      id,
+      title,
+      shareLink,
+      expirationDate,
+      access: link.access || defaultAccess,
+    };
+
+    copyLink(shareLink);
+    setShareLinks([activeLink]);
+    setActiveLink(activeLink);
   };
 
   const onSelectAccess = (access) => {
@@ -87,7 +90,7 @@ const ExternalLinks = ({
 
       setActiveLink(link);
     } else {
-      setInvitationLinks(roomId, shareLinks[0].id, "Invite", +access.access);
+      setInvitationLinks(roomId, "Invite", +access.access, shareLinks[0].id);
 
       link = shareLinks[0];
       setActiveLink(shareLinks[0]);
@@ -187,6 +190,7 @@ const ExternalLinks = ({
           </div>
         )}
         <StyledToggleButton
+          className="invite-via-link"
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
         />
@@ -211,12 +215,14 @@ const ExternalLinks = ({
             />
           </StyledInviteInput>
           <AccessSelector
+            className="invite-via-link-access"
             t={t}
             roomType={roomType}
             defaultAccess={activeLink.access}
             onSelectAccess={onSelectAccess}
             containerRef={inputsRef}
             isOwner={isOwner}
+            isMobileView={isMobileView}
           />
         </StyledInviteInputContainer>
       )}

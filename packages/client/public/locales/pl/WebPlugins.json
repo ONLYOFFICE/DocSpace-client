@@ -1,0 +1,11 @@
+{
+  "DeletePlugin": "Usuń wtyczkę",
+  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników DocSpace. Czy na pewno chcesz kontynuować?",
+  "DeletePluginTitle": "Usunąć wtyczkę?",
+  "Description": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność DocSpace o dodatkowe opcje. Kliknij Prześlij wtyczkę i wybierz plik wtyczki w archiwum ZIP.",
+  "Metadata": "Metadane",
+  "NeedSettings": "Należy wprowadzić ustawienia",
+  "NoPlugins": "Nie dodano żadnych wtyczek",
+  "PluginsHelp": "Wtyczki pozwalają poszerzyć funkcjonalność DocSpace",
+  "UploadPlugin": "Prześlij wtyczkę"
+}

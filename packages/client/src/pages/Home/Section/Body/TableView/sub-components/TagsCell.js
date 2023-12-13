@@ -1,6 +1,6 @@
 import React from "react";
 
-import Tags from "@docspace/common/components/Tags";
+import Tags from "@docspace/components/tags";
 
 //import { RoomsTypeTranslations } from "@docspace/common/constants";
 import Text from "@docspace/components/text";
@@ -41,7 +41,7 @@ const TagsCell = ({
   return (
     <div style={styleTagsCell}>
       {tags.length === 0 ? (
-        <Text color={sideColor}>{"—"}</Text>
+        <Text color={sideColor}>{""}</Text>
       ) : (
         <Tags tags={tags} columnCount={tagCount} onSelectTag={onSelectTag} />
       )}

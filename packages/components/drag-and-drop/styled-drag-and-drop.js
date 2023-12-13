@@ -10,15 +10,19 @@ const StyledDragAndDrop = styled.div`
 -ms-user-select: none;
 user-select: none;*/
   height: ${(props) => props.theme.dragAndDrop.height};
-  border: ${(props) =>
-    props.drag
-      ? props.theme.dragAndDrop.border
-      : props.theme.dragAndDrop.transparentBorder};
-  margin-left: -2px;
+  border: ${(props) => props.theme.dragAndDrop.transparentBorder};
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `margin-right: -2px;`
+      : `margin-left: -2px;`}
   position: relative;
 
   @media ${tablet} {
-    margin-left: 0;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 0;`
+        : `margin-left: 0;`}
   }
   outline: none;
   background: ${(props) =>

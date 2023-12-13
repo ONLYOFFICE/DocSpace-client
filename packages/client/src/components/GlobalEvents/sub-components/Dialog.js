@@ -8,6 +8,7 @@ import Button from "@docspace/components/button";
 import ComboBox from "@docspace/components/combobox";
 import Checkbox from "@docspace/components/checkbox";
 import Box from "@docspace/components/box";
+import FieldContainer from "@docspace/components/field-container";
 
 const Dialog = ({
   t,
@@ -25,8 +26,11 @@ const Dialog = ({
   extension,
   keepNewFileName,
   setKeepNewFileName,
+  withForm,
 }) => {
   const [value, setValue] = useState("");
+
+  const [isError, setIsError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
@@ -47,7 +51,8 @@ const Dialog = ({
   const onKeyUpHandler = useCallback(
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
-      if (e.keyCode === 13) onSaveAction(e);
+
+      if (e.keyCode === 13 && !withForm) onSaveAction(e);
     },
     [value]
   );
@@ -64,10 +69,15 @@ const Dialog = ({
     let newValue = e.target.value;
 
     if (newValue.match(folderFormValidation)) {
-      toastr.warning(t("Files:ContainsSpecCharacter"));
+      setIsError(true);
+      // toastr.warning(t("Files:ContainsSpecCharacter"));
+    } else {
+      setIsError(false);
     }
 
-    newValue = newValue.replace(folderFormValidation, "_");
+    // newValue = newValue.replace(folderFormValidation, "_");
+
+    // console.log(folderFormValidation);
 
     setValue(newValue);
     setIsChanged(true);
@@ -80,28 +90,19 @@ const Dialog = ({
   const onSaveAction = useCallback(
     (e) => {
       setIsDisabled(true);
-      isCreateDialog && setKeepNewFileName(isChecked);
+      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
       onSave && onSave(e, value);
     },
     [onSave, isCreateDialog, value, isChecked]
   );
 
   const onCancelAction = useCallback((e) => {
-    if (isChecked) {
-      setKeepNewFileName(false);
-    }
     onCancel && onCancel(e);
   }, []);
 
-  const onCloseAction = useCallback(
-    (e) => {
-      if (!isDisabled && isChecked) {
-        setKeepNewFileName(false);
-      }
-      onClose && onClose(e);
-    },
-    [isDisabled]
-  );
+  const onCloseAction = useCallback((e) => {
+    onClose && onClose(e);
+  }, []);
 
   const onChangeCheckbox = () => {
     isCreateDialog && setIsChecked((val) => !val);
@@ -109,6 +110,7 @@ const Dialog = ({
 
   return (
     <ModalDialog
+      withForm={withForm}
       visible={visible}
       displayType={"modal"}
       scale={true}
@@ -116,22 +118,31 @@ const Dialog = ({
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <TextInput
-          id="create-text-input"
-          name="create"
-          type="text"
-          scale={true}
-          value={value}
-          isAutoFocussed={true}
-          tabIndex={1}
-          onChange={onChange}
-          onFocus={onFocus}
-          isDisabled={isDisabled}
-          maxLength={165}
-        />
+        <FieldContainer
+          hasError={isError}
+          labelVisible={false}
+          errorMessageWidth={"100%"}
+          errorMessage={t("Files:ContainsSpecCharacter")}
+          removeMargin
+        >
+          <TextInput
+            id="create-text-input"
+            name="create"
+            type="search"
+            scale={true}
+            value={value}
+            isAutoFocussed={true}
+            tabIndex={1}
+            onChange={onChange}
+            onFocus={onFocus}
+            isDisabled={isDisabled}
+            maxLength={165}
+          />
+        </FieldContainer>
         {isCreateDialog && extension && (
           <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
             <Checkbox
+              className="dont-ask-again"
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
@@ -150,16 +161,19 @@ const Dialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          className="submit"
           key="GlobalSendBtn"
           label={isCreateDialog ? t("Common:Create") : t("Common:SaveButton")}
           size="normal"
+          type="submit"
           scale
           primary
           isLoading={isDisabled}
-          isDisabled={isDisabled}
+          isDisabled={isDisabled || isError}
           onClick={onSaveAction}
         />
         <Button
+          className="cancel-button"
           key="CloseBtn"
           label={t("Common:CancelButton")}
           size="normal"

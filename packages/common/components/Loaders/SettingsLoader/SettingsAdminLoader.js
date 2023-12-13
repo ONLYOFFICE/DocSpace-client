@@ -1,6 +1,6 @@
 import React from "react";
-import { LoaderStyle } from "../../../constants";
-import RectangleLoader from "../RectangleLoader";
+import { LoaderStyle } from "@docspace/components/utils/constants";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import Box from "@docspace/components/box";
 
 const speed = 2;
@@ -18,7 +18,7 @@ const Setting = ({ width = "280px" }) => (
       alignItems: "center",
     }}
   >
-    <RectangleLoader
+    <RectangleSkeleton
       height={heightRadio}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -27,7 +27,7 @@ const Setting = ({ width = "280px" }) => (
       speed={speed}
       animate={true}
     />
-    <RectangleLoader
+    <RectangleSkeleton
       height={heightText}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -39,8 +39,8 @@ const Setting = ({ width = "280px" }) => (
   </Box>
 );
 
-const SectionTitle = ({ height = 16, width = 141 }) => (
-  <RectangleLoader
+const SectionTitle = ({ height = "16px", width = "141px" }) => (
+  <RectangleSkeleton
     height={height}
     width={width}
     backgroundColor={LoaderStyle.backgroundColor}
@@ -67,8 +67,8 @@ const SettingsTabs = () => (
       gridTemplateColumns: "41px 58px",
     }}
   >
-    <RectangleLoader
-      height={32}
+    <RectangleSkeleton
+      height={"32"}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
       backgroundOpacity={LoaderStyle.backgroundOpacity}
@@ -76,8 +76,8 @@ const SettingsTabs = () => (
       speed={speed}
       animate={true}
     />
-    <RectangleLoader
-      height={32}
+    <RectangleSkeleton
+      height={"32"}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
       backgroundOpacity={LoaderStyle.backgroundOpacity}

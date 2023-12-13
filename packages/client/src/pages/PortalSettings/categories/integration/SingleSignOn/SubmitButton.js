@@ -2,8 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import Button from "@docspace/components/button";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
 
@@ -22,26 +21,24 @@ const SubmitResetButtons = (props) => {
   } = props;
 
   return (
-    <Box alignItems="center" displayProp="flex" flexDirection="row">
-      <Button
-        className="save-button"
-        label={t("Common:SaveButton")}
-        onClick={() => saveSsoSettings(t)}
-        primary
-        size="small"
-        tabIndex={23}
-        isDisabled={hasErrors || !hasChanges || isLoadingXml}
-        isLoading={isSubmitLoading}
-      />
-      <Button
-        label={t("Settings:RestoreDefaultButton")}
-        onClick={isSsoEnabled ? openResetModal : resetForm}
-        size="small"
-        tabIndex={24}
-        isDisabled={isSubmitLoading || isLoadingXml}
+    <>
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={() => saveSsoSettings(t)}
+        onCancelClick={isSsoEnabled ? openResetModal : resetForm}
+        showReminder={true}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:Restore")}
+        displaySettings={true}
+        hasScroll={true}
+        isSaving={isSubmitLoading}
+        saveButtonDisabled={hasErrors || !hasChanges || isLoadingXml}
+        cancelEnable={!(isSubmitLoading || isLoadingXml)}
+        additionalClassSaveButton="save-button"
+        additionalClassCancelButton="restore-button"
       />
       {confirmationResetModal && <ResetConfirmationModal />}
-    </Box>
+    </>
   );
 };
 

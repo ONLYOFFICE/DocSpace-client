@@ -45,8 +45,7 @@ const HotkeyPanel = ({
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
   useEffect(() => {
-    scrollRef.current && scrollRef.current.view.focus();
-
+    scrollRef.current && scrollRef?.current?.contentElement.focus();
     document.addEventListener("keyup", onKeyPress);
 
     return () => document.removeEventListener("keyup", onKeyPress);
@@ -60,7 +59,12 @@ const HotkeyPanel = ({
         isAside={true}
         zIndex={210}
       />
-      <Aside className="hotkeys-panel" visible={visible} onClose={onClose}>
+      <Aside
+        className="hotkeys-panel"
+        visible={visible}
+        onClose={onClose}
+        withoutBodyScroll={true}
+      >
         <div className="hotkeys_header">
           <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
         </div>
@@ -145,20 +149,15 @@ const HotkeyPanel = ({
 
 HotkeyPanel.defaultProps = { theme: Base };
 
-export default inject(({ auth }) => {
-  const {
-    hotkeyPanelVisible,
-    setHotkeyPanelVisible,
-    theme,
-  } = auth.settingsStore;
-
-  const { isVisitor } = auth.userStore.user;
+export default inject(({ auth, publicRoomStore }) => {
+  const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } =
+    auth.settingsStore;
 
   return {
     visible: hotkeyPanelVisible,
     setHotkeyPanelVisible,
     theme,
-    isVisitor,
+    isVisitor: auth?.userStore?.user?.isVisitor || publicRoomStore.isPublicRoom,
   };
 })(
   withTranslation(["HotkeysPanel", "Article", "Common", "Files"])(

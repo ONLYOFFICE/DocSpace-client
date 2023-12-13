@@ -4,15 +4,17 @@ import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/components/drag-and-drop";
 import Row from "@docspace/components/row";
 import FilesRowContent from "./FilesRowContent";
-import { withRouter } from "react-router-dom";
-import { isTablet, isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
+
+import { isMobile as isMobileUtile } from "@docspace/components/utils/device";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
+import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
 import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { classNames } from "@docspace/components/utils/classNames";
 const checkedStyle = css`
@@ -137,7 +139,14 @@ const StyledSimpleFilesRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    margin-right: 7px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 7px;
+          `
+        : css`
+            margin-right: 7px;
+          `}
   }
 
   .row_content {
@@ -148,21 +157,45 @@ const StyledSimpleFilesRow = styled(Row)`
   .badges {
     display: flex;
     align-items: center;
-    margin-bottom: 26px;
-  }
-
-  .badge {
-    margin-right: 8px;
-  }
-
-  .badge:last-child {
-    margin-right: 0px;
   }
 
   .lock-file {
     cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
     svg {
       height: 12px;
+    }
+  }
+
+  .tablet-row-copy-link {
+    display: none;
+  }
+
+  @media ${tablet} {
+    .tablet-row-copy-link {
+      display: block;
+    }
+
+    .row-copy-link {
+      display: none;
+    }
+  }
+
+  @media ${mobile} {
+    .tablet-row-copy-link {
+      display: none;
+    }
+
+    .row-copy-link {
+      display: block;
+
+      ${isMobileOnly &&
+      css`
+        :hover {
+          svg path {
+            fill: ${({ theme }) => theme.iconButton.color};
+          }
+        }
+      `}
     }
   }
 
@@ -183,25 +216,12 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .badges {
-    margin-top: ${(props) =>
-      props.isSmallContainer ? "1px" : props.isRooms ? "4px" : "2px"};
+    margin-top: 0px;
     margin-bottom: 0px;
-
-    ${(props) =>
-      props.isSmallContainer &&
-      css`
-        .tablet-pinned {
-          margin-top: 2px;
-        }
-      `}
   }
 
   .temp-badges {
     margin-top: 0px;
-  }
-
-  .badge {
-    margin-right: ${(props) => (props.isSmallContainer ? "8px" : "24px")};
   }
 
   .lock-file {
@@ -211,15 +231,100 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .expandButton {
-    margin-left: ${(props) => (!props.folderCategory ? "6px" : "0")};
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
+          `
+        : css`
+            margin-left: ${(props) =>
+              !props.folderCategory ? "17px" : "24px"};
+          `}
     padding-top: 0px;
   }
   .expandButton > div:first-child {
     ${(props) =>
       props.folderCategory &&
       css`
-        padding-left: 0 !important;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding-right: 0 !important;
+              `
+            : css`
+                padding-left: 0 !important;
+              `}
       `}
+  }
+
+  @media ${tablet} {
+    .badges {
+      flex-direction: row-reverse;
+      gap: 24px;
+    }
+
+    .file__badges,
+    .room__badges,
+    .folder__badges {
+      > div {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .file__badges,
+    .room__badges,
+    .folder__badges {
+      > div {
+        margin-top: 0px;
+      }
+    }
+
+    .file__badges,
+    .folder__badges,
+    .room__badges {
+      margin-top: 0px;
+    }
+  }
+
+  @media ${mobile} {
+    .badges {
+      gap: 8px;
+    }
+
+    .badges__quickButtons:not(:empty) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
+    }
+    .room__badges:empty,
+    .file__badges:empty,
+    .folder__badges:empty,
+    .badges__quickButtons:empty {
+      display: none;
+    }
+
+    .badges,
+    .folder__badges,
+    .room__badges,
+    .file__badges {
+      margin-top: 0px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .room__badges,
+    .folder__badges {
+      > div {
+        margin-top: 0px;
+      }
+    }
   }
 `;
 
@@ -252,12 +357,16 @@ const SimpleFilesRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
-
     folderCategory,
     isHighlight,
+    badgesComponent,
+    onDragOver,
+    onDragLeave,
   } = props;
 
-  const [isDragOver, setIsDragOver] = React.useState(false);
+  const isMobileDevice = isMobileUtile();
+
+  const [isDragActive, setIsDragActive] = React.useState(false);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -268,18 +377,25 @@ const SimpleFilesRow = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
-      defaultRoomIcon={item.defaultRoomIcon}
+      title={item.title}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
     />
   );
 
-  const onDragOver = (dragOver) => {
-    if (dragOver !== isDragOver) {
-      setIsDragOver(dragOver);
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
-    setIsDragOver(false);
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
+    setIsDragActive(false);
   };
 
   const dragStyles =
@@ -315,8 +431,8 @@ const SimpleFilesRow = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         style={dragStyles}
       >
         <StyledSimpleFilesRow
@@ -329,8 +445,9 @@ const SimpleFilesRow = (props) => {
           contentElement={
             isSmallContainer || isRooms ? null : quickButtonsComponent
           }
+          badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
-          rowContextClick={fileContextClick}
+          onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
           onClick={onMouseClick}
           onDoubleClick={onDoubleClick}
@@ -347,7 +464,8 @@ const SimpleFilesRow = (props) => {
           getContextModel={getContextModel}
           showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
-          isDragOver={isDragOver}
+          isArchive={item.isArchive}
+          isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
@@ -361,6 +479,7 @@ const SimpleFilesRow = (props) => {
               isSmallContainer || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
+            badgesComponent={isMobileDevice && badgesComponent}
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>
@@ -368,6 +487,9 @@ const SimpleFilesRow = (props) => {
   );
 };
 
-export default withTranslation(["Files", "Translations", "InfoPanel"])(
-  withRouter(withFileActions(withQuickButtons(SimpleFilesRow)))
-);
+export default withTranslation([
+  "Files",
+  "Translations",
+  "InfoPanel",
+  "Notifications",
+])(withFileActions(withQuickButtons(withBadges(SimpleFilesRow))));

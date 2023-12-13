@@ -16,7 +16,14 @@ import Button from "@docspace/components/button";
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);
   box-sizing: border-box;
-  padding-left: 16px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-right: 16px;
+        `
+      : css`
+          padding-left: 16px;
+        `}
   max-width: 484px;
 
   .row_context-menu-wrapper {
@@ -42,7 +49,14 @@ const StyledFileRow = styled(Row)`
   }
 
   .styled-element {
-    margin-right: 8px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px !important;
+          `
+        : css`
+            margin-right: 8px !important;
+          `}
   }
 
   .upload-panel_file-name {
@@ -62,14 +76,28 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 44px;
-    left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: 16px;
+          `
+        : css`
+            left: 16px;
+          `}
     max-width: 470px;
     width: calc(100% - 16px);
     display: flex;
   }
 
   #conversion-button {
-    margin-left: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px;
+          `
+        : css`
+            margin-left: 8px;
+          `}
 
     width: 100%;
     max-width: 78px;
@@ -81,8 +109,17 @@ const StyledFileRow = styled(Row)`
   }
 
   .upload_panel-icon {
-    margin-left: auto;
-    padding-left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+            padding-right: 16px;
+          `
+        : css`
+            margin-left: auto;
+            padding-left: 16px;
+          `}
+
     line-height: 24px;
     display: flex;
     align-items: center;
@@ -94,7 +131,15 @@ const StyledFileRow = styled(Row)`
     }
 
     .enter-password {
-      margin-right: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 8px;
+            `
+          : css`
+              margin-right: 8px;
+            `}
+
       text-decoration: underline dashed;
       cursor: pointer;
     }
@@ -105,7 +150,14 @@ const StyledFileRow = styled(Row)`
   }
 
   .convert_icon {
-    padding-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 12px;
+          `
+        : css`
+            padding-right: 12px;
+          `}
   }
 
   .upload-panel_file-row-link {
@@ -368,6 +420,7 @@ export default inject(
     } else {
       ext = item.fileInfo.fileExst;
       splitted = item.fileInfo.title.split(".");
+      if (!!ext) splitted.splice(-1);
     }
 
     name = splitted.join(".");
@@ -388,8 +441,8 @@ export default inject(
       mediaViewerDataStore;
 
     const isMedia =
-      item.fileInfo?.viewAccessability?.ImageView ||
-      item.fileInfo?.viewAccessability?.MediaView;
+      item.fileInfo?.viewAccessibility?.ImageView ||
+      item.fileInfo?.viewAccessibility?.MediaView;
 
     const isMediaActive =
       playlist.findIndex((el) => el.fileId === item.fileId) !== -1;

@@ -15,12 +15,17 @@ import {
   StyledIconButton,
 } from "./styled-toastr";
 import commonIconsStyles from "../utils/common-icons-style";
+import { getCookie } from "../utils/cookie";
 
 const getTitle = (type) => {
+  const cookieLang = getCookie("asc_language");
+  const lang =
+    cookieLang == "en-US" || cookieLang == "en-GB" ? "en" : cookieLang;
+
   const commonKeys =
     (window.i18n &&
       Object.getOwnPropertyNames(window.i18n.loaded).filter(
-        (k) => k.indexOf("/Common.json") > -1
+        (k) => k.indexOf(`${lang}/Common.json`) > -1
       )) ||
     [];
 
@@ -150,14 +155,7 @@ function error(data, title, timeout, withCross, centerPosition) {
       data;
   }
 
-  // const message =
-  //   dataType === "string"
-  //     ? data
-  //     : dataType === "object" && data.statusText
-  //     ? data.statusText
-  //     : dataType === "object" && data.message
-  //     ? data.message
-  //     : "";
+  //console.trace("Error", message);
 
   return notify(
     "error",

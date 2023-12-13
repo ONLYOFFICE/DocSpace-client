@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -53,9 +54,13 @@ const {
   strongBlue,
   lightGrayishStrongBlue,
   darkRed,
+
+  lightErrorStatus,
 } = globalColors;
 
 const Base = {
+  ...CommonTheme,
+
   isBase: true,
   color: black,
   backgroundColor: white,
@@ -65,6 +70,7 @@ const Base = {
   text: {
     color: black,
     disableColor: gray,
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -81,6 +87,8 @@ const Base = {
     fontWeight: 600,
     color: black,
   },
+
+  backgroundAndSubstrateColor: "#F8F9F9",
 
   button: {
     fontWeight: "600",
@@ -241,10 +249,10 @@ const Base = {
   },
 
   mainButton: {
-    backgroundColor: orangeMain,
-    disableBackgroundColor: orangeDisabled,
-    hoverBackgroundColor: orangeHover,
-    clickBackgroundColor: orangePressed,
+    backgroundColor: "#4781D1",
+    disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
+    hoverBackgroundColor: "rgba(71, 129, 209, .85)",
+    clickBackgroundColor: "#4074BC",
 
     padding: "5px 14px 5px 12px",
     borderRadius: "3px",
@@ -312,9 +320,9 @@ const Base = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -496,7 +504,7 @@ const Base = {
     textColor: black,
     textDisableColor: gray,
 
-    marginRight: "8px",
+    marginBeforeLabel: "8px",
 
     background: white,
     disableBackground: grayLight,
@@ -539,7 +547,7 @@ const Base = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -855,16 +863,6 @@ const Base = {
   },
 
   textArea: {
-    width: "100%",
-    height: "90%",
-    border: "none",
-    outline: "none",
-    resize: "none",
-    overflow: "hidden",
-    padding: "5px 8px 2px 8px",
-    fontSize: "13px",
-    lineHeight: "1.5",
-
     disabledColor: grayLight,
 
     focusBorderColor: blueMain,
@@ -873,6 +871,11 @@ const Base = {
 
     scrollWidth: "100%",
     scrollHeight: "91px",
+
+    numerationColor: "#A3A9AE",
+
+    copyIconFilter:
+      "invert(71%) sepia(1%) saturate(1597%) hue-rotate(166deg) brightness(100%) contrast(73%)",
   },
 
   link: {
@@ -1132,8 +1135,8 @@ const Base = {
     },
 
     icon: {
-      background: lightHover,
-      color: grayMain,
+      background: "#ECEEF1",
+      color: "#A3A9AE",
     },
 
     width: {
@@ -1314,6 +1317,9 @@ const Base = {
         width: "85%",
       },
     },
+    icon: {
+      color: grayMain,
+    },
 
     draggable: {
       color: cyanBlueDarkShade,
@@ -1352,38 +1358,10 @@ const Base = {
   },
 
   progressBar: {
-    height: "22px",
-    backgroundColor: grayLight,
-    marginLeft: "-100%",
-
-    fullText: {
-      padding: "0px 6px",
-      fontWeight: "600",
-      margin: "0",
-    },
+    backgroundColor: "#DADDDF",
 
     percent: {
-      float: "left",
-      overflow: "hidden",
-      maxHeight: "22px",
-      minHeight: "22px",
-      transition: "width 0.6s ease",
-      background: "linear-gradient(90deg, #20d21f 75%, #b9d21f 100%)",
-    },
-
-    text: {
-      minWidth: "200%",
-
-      progressText: {
-        padding: "2px 6px",
-        margin: "0",
-        minWidth: "100px",
-        fontWeight: "600",
-      },
-    },
-
-    dropDown: {
-      padding: "16px 16px 16px 17px",
+      background: "#4781D1",
     },
   },
 
@@ -1732,67 +1710,17 @@ const Base = {
   },
 
   calendar: {
-    baseWidth: "265px",
-    bigWidth: "289px",
-
-    baseMaxWidth: "293px",
-    bigMaxWidth: "325px",
-
-    hover: {
-      backgroundColor: grayLightMid,
-      borderRadius: "16px",
-      cursor: "pointer",
-    },
-
-    day: {
-      width: "32px",
-      height: "32px",
-      baseSizeWidth: "270px",
-      bigSizeWidth: "294px",
-      baseMarginTop: "3px",
-      bigMarginTop: "7.5px",
-      lineHeight: "33px",
-    },
-
-    weekdays: {
-      color: black,
-      disabledColor: gray,
-      baseWidth: "272px",
-      bigWidth: "295px",
-      marginBottom: "-5px",
-    },
-
-    month: {
-      baseWidth: "267px",
-      bigWidth: "295px",
-      color: black,
-      weekendColor: gray,
-      disabledColor: grayLightMid,
-      neighboringHoverColor: black,
-      neighboringColor: grayLightMid,
-    },
-
-    selectedDay: {
-      backgroundColor: orangeMain,
-      borderRadius: "16px",
-      cursor: "pointer",
-      color: white,
-    },
-
-    comboBox: {
-      color: black,
-      minWidth: "80px",
-      height: "32px",
-      marginLeft: "8px",
-      padding: "0 0 24px 0",
-    },
-    comboBoxMonth: {
-      baseWidth: "172px",
-      bigWidth: "205px",
-
-      baseMaxWidth: "172px",
-      bigMaxWidth: "196px",
-    },
+    color: "#333333",
+    disabledColor: "#DFE2E3",
+    pastColor: "#A3A9AE",
+    onHoverBackground: "#f3f4f4",
+    titleColor: "#555F65",
+    outlineColor: "#eceef1",
+    arrowColor: "#555f65",
+    disabledArrow: "#A3A9AE",
+    weekdayColor: "#A3A9AE",
+    accent: "#4781d1",
+    boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
   },
 
   datePicker: {
@@ -1941,6 +1869,7 @@ const Base = {
       height: "36px",
       padding: "0 12px",
       marginBottom: "16px",
+      background: "#fff",
       tablet: {
         height: "44px",
         padding: "0 12px",
@@ -2017,6 +1946,8 @@ const Base = {
   navigation: {
     expanderColor: black,
     background: white,
+    rootFolderTitleColor: "#A3A9AE",
+    publicIcon: black,
 
     icon: {
       fill: "#316DAA",
@@ -2091,6 +2022,12 @@ const Base = {
     closeButtonSize: "17px",
     closeButtonBg: "transparent",
 
+    links: {
+      iconColor: "#3B72A7",
+      iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
+    },
+
     members: {
       iconColor: "#A3A9AE",
       iconHoverColor: "#657077",
@@ -2119,6 +2056,7 @@ const Base = {
 
     gallery: {
       borderColor: "#d0d5da",
+      descriptionColor: "#657077",
     },
   },
 
@@ -2138,6 +2076,10 @@ const Base = {
     thirdPartyList: {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
+    },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
     },
   },
 
@@ -2236,6 +2178,8 @@ const Base = {
       hoverIconColor: grayMain,
 
       borderImageSource: `linear-gradient(to right,${white} 21px,${grayLightMid} 21px,${grayLightMid} calc(100% - 20px),${white} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${white} 0px,${grayLightMid} 0px,${grayLightMid} 100% ,${white} 100%)`,
+
       lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
@@ -2344,6 +2288,13 @@ const Base = {
   selector: {
     border: `1px solid ${grayLightMid}`,
 
+    breadCrumbs: {
+      prevItemColor: "#A3A9AE",
+      arrowRightColor: "#A3A9AE",
+    },
+
+    bodyDescriptionText: "#A3A9AE",
+
     item: {
       hoverBackground: grayLight,
       selectedBackground: lightHover,
@@ -2417,6 +2368,7 @@ const Base = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#657077",
     },
 
     roomType: {
@@ -2693,8 +2645,8 @@ const Base = {
       width: "16px",
       height: "16px",
       header: {
-        width: "24px",
-        height: "24px",
+        width: "auto",
+        height: "auto",
       },
     },
     separator: {
@@ -2849,6 +2801,11 @@ const Base = {
 
     container: {
       backgroundColor: grayLightMid,
+    },
+
+    captcha: {
+      border: `1px solid ${lightErrorStatus}`,
+      color: lightErrorStatus,
     },
   },
 
@@ -3006,6 +2963,7 @@ const Base = {
           toggleContentBackground: grayLight,
           iconButton: black,
           iconButtonDisabled: gray,
+          border: "1px solid #eceef1",
         },
 
         smtp: {
@@ -3174,6 +3132,54 @@ const Base = {
 
   portalUnavailable: {
     textDescriptionColor: "#A3A9AE",
+  },
+
+  deepLink: {
+    navBackground: "#f8f9f9",
+    fileTileBackground: "#f3f4f4",
+  },
+
+  emailChips: {
+    borderColor: "#A3A9AE",
+    dashedBorder: "1px dashed #5299E0",
+  },
+
+  dialogs: {
+    disableText: "#A3A9AE",
+  },
+
+  editLink: {
+    text: {
+      color: "#A3A9AE",
+      errorColor: "#F21C0E",
+    },
+  },
+
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#555F65",
+    },
+    submitToGalleryTile: {
+      bodyText: "#555F65",
+      closeIconFill: "#657077",
+    },
+  },
+
+  infoBlock: {
+    background: "#F8F9F9",
+    headerColor: "#333",
+    descriptionColor: "#555F65",
+  },
+
+  roomIcon: {
+    backgroundArchive: "#A3A9AE",
+    opacityBackground: "1",
+  },
+
+  plugins: {
+    borderColor: "#D0D5DA",
+    pluginName: "#5C5C5C",
+    descriptionColor: "#657077",
   },
 };
 

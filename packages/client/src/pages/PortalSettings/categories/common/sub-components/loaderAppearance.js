@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import styled, { css } from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   width: 100%;
@@ -18,7 +17,14 @@ const StyledLoader = styled.div`
   }
 
   .padding-right {
-    padding-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 12px;
+          `
+        : css`
+            padding-right: 12px;
+          `}
   }
 
   .preview-title {
@@ -36,71 +42,71 @@ const StyledLoader = styled.div`
 const Loader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height="24px"
         width="93px"
         className="block padding-bottom"
       />
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height="16px"
         width="118px"
         className="block padding-bottom"
       />
       <div className="flex padding-bottom">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           height="46px"
           width="46px"
           className="padding-right"
         />
       </div>
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height="16px"
         width="118px"
         className="block padding-bottom"
       />
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height="46px"
         width="46px"
         className="block padding-bottom"
       />
-      <Loaders.Rectangle
+      <RectangleSkeleton
         height="24px"
         width="93px"
         className="block preview-title"
       />
-      <Loaders.Rectangle height="32px" width="211px" className="block" />
-      <Loaders.Rectangle height="325px" className="block preview" />
-      <Loaders.Rectangle height="32px" width="447px" className="block" />
+      <RectangleSkeleton height="32px" width="211px" className="block" />
+      <RectangleSkeleton height="325px" className="block preview" />
+      <RectangleSkeleton height="32px" width="447px" className="block" />
     </StyledLoader>
   );
 };

@@ -8,7 +8,7 @@ import FilterBlock from "./FilterBlock";
 
 import StyledButton from "./StyledButton";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 const FilterButton = ({
   t,
   onFilter,
@@ -24,6 +24,7 @@ const FilterButton = ({
   isAccounts,
   id,
   title,
+  currentDeviceType,
 }) => {
   const [showFilterBlock, setShowFilterBlock] = React.useState(false);
 
@@ -52,6 +53,7 @@ const FilterButton = ({
           isPersonalRoom={isPersonalRoom}
           isRooms={isRooms}
           isAccounts={isAccounts}
+          currentDeviceType={currentDeviceType}
         />
       )}
     </>

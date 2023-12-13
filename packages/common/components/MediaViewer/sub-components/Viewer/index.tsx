@@ -2,8 +2,6 @@ import ReactDOM from "react-dom";
 import { isMobile } from "react-device-detect";
 import React, { useRef, useState, useEffect, useCallback } from "react";
 
-import ContextMenu from "@docspace/components/context-menu";
-
 import { StyledViewerContainer } from "../../StyledComponents";
 
 import NextButton from "../NextButton";
@@ -14,12 +12,14 @@ import DesktopDetails from "../DesktopDetails";
 import ViewerPlayer from "../ViewerPlayer";
 
 import type ViewerProps from "./Viewer.props";
+import PDFViewer from "../PDFViewer";
 
 function Viewer(props: ViewerProps) {
   const timerIDRef = useRef<NodeJS.Timeout>();
 
   const containerRef = React.useRef(document.createElement("div"));
 
+  const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);
   const [isOpenContextMenu, setIsOpenContextMenu] = useState<boolean>(false);
 
@@ -30,11 +30,12 @@ function Viewer(props: ViewerProps) {
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
 
-  const contextMenuRef = useRef<ContextMenu>(null);
+  const contextMenuRef = useRef<{ show: (e: any) => void }>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
   useEffect(() => {
     document.body.appendChild(containerRef.current);
+    containerRef.current.style.direction = "ltr";
 
     return () => {
       document.body.removeChild(containerRef.current);
@@ -128,12 +129,21 @@ function Viewer(props: ViewerProps) {
     if (isFullscreen) {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } else if (document["webkitExitFullscreen"]) {
-        document["webkitExitFullscreen"]();
-      } else if (document["mozCancelFullScreen"]) {
-        document["mozCancelFullScreen"]();
-      } else if (document["msExitFullscreen"]) {
-        document["msExitFullscreen"]();
+      } else if (
+        "webkitExitFullscreen" in document &&
+        typeof document.webkitExitFullscreen === "function"
+      ) {
+        document.webkitExitFullscreen();
+      } else if (
+        "mozCancelFullScreen" in document &&
+        typeof document.mozCancelFullScreen === "function"
+      ) {
+        document.mozCancelFullScreen();
+      } else if (
+        "msExitFullscreen" in document &&
+        typeof document.msExitFullscreen === "function"
+      ) {
+        document.msExitFullscreen();
       }
     }
 
@@ -157,16 +167,25 @@ function Viewer(props: ViewerProps) {
   const isNotFirstElement = props.playlistPos !== 0;
   const isNotLastElement = props.playlistPos < props.playlist.length - 1;
 
+  const targetFile = props.playlist[props.playlistPos];
+
+  const isTiff =
+    targetFile?.fileExst === ".tiff" || targetFile.fileExst === ".tif";
+
   return (
     <StyledViewerContainer visible={props.visible}>
-      {!isFullscreen && !isMobile && panelVisible && (
+      {!isFullscreen && !isMobile && panelVisible && !props.isPdf && (
         <DesktopDetails title={props.title} onMaskClick={handleMaskClick} />
       )}
 
       {props.playlist.length > 1 && !isFullscreen && !isMobile && (
         <>
-          {isNotFirstElement && <PrevButton prevClick={prevClick} />}
-          {isNotLastElement && <NextButton nextClick={nextClick} />}
+          {isNotFirstElement && !isPDFSidebarOpen && (
+            <PrevButton prevClick={prevClick} />
+          )}
+          {isNotLastElement && (
+            <NextButton isPdfFIle={props.isPdf} nextClick={nextClick} />
+          )}
         </>
       )}
 
@@ -175,7 +194,11 @@ function Viewer(props: ViewerProps) {
             <ImageViewer
               panelVisible={panelVisible}
               toolbar={props.toolbar}
-              src={props.fileUrl}
+              src={isTiff ? props.fileUrl : targetFile.src}
+              isTiff={isTiff}
+              thumbnailSrc={targetFile.thumbnailUrl}
+              imageId={targetFile.fileId}
+              version={targetFile.version}
               mobileDetails={mobileDetails}
               onMask={props.onMaskClick}
               onPrev={props.onPrevClick}
@@ -190,11 +213,13 @@ function Viewer(props: ViewerProps) {
             />,
             containerRef.current
           )
-        : (props.isVideo || props.isAudio) &&
-          ReactDOM.createPortal(
+        : props.isVideo || props.isAudio
+        ? ReactDOM.createPortal(
             <ViewerPlayer
               isError={isError}
+              canDownload={!!props.targetFile?.security.Download}
               src={props.fileUrl}
+              thumbnailSrc={targetFile.thumbnailUrl}
               isAudio={props.isAudio}
               isVideo={props.isVideo}
               panelVisible={panelVisible}
@@ -218,6 +243,25 @@ function Viewer(props: ViewerProps) {
               removeToolbarVisibleTimer={removeToolbarVisibleTimer}
               removePanelVisibleTimeout={removePanelVisibleTimeout}
               restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+            />,
+            containerRef.current
+          )
+        : props.isPdf &&
+          ReactDOM.createPortal(
+            <PDFViewer
+              src={props.fileUrl ?? ""}
+              title={props.title}
+              toolbar={props.toolbar}
+              onMask={handleMaskClick}
+              isPDFSidebarOpen={isPDFSidebarOpen}
+              mobileDetails={mobileDetails}
+              generateContextMenu={props.generateContextMenu}
+              setIsOpenContextMenu={setIsOpenContextMenu}
+              setIsPDFSidebarOpen={setIsPDFSidebarOpen}
+              isLastImage={!isNotLastElement}
+              isFistImage={!isNotFirstElement}
+              onPrev={props.onPrevClick}
+              onNext={props.onNextClick}
             />,
             containerRef.current
           )}

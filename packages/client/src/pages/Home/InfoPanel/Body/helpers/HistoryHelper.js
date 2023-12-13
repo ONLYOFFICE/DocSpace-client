@@ -1,7 +1,7 @@
 import moment from "moment";
 
 import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));
@@ -34,4 +34,48 @@ export const getDateTime = (date) => {
 
   const given = moment(date);
   return given.format("LT");
+};
+
+// from { response: { feeds: groupedFeeds: [{ json: "" }], json: "" }}
+//   to [{ day: "", feeds: [ groupedFeeds: [{ json: {} }], json: {} ]}]
+
+export const parseHistory = (t, fetchedHistory) => {
+  let feeds = fetchedHistory.feeds;
+  let parsedFeeds = [];
+
+  for (let i = 0; i < feeds.length; i++) {
+    const feedsJSON = JSON.parse(feeds[i].json);
+    const feedDay = getRelativeDateDay(t, feeds[i].modifiedDate);
+
+    let newGroupedFeeds = [];
+    if (feeds[i].groupedFeeds) {
+      let groupFeeds = feeds[i].groupedFeeds;
+      for (let j = 0; j < groupFeeds.length; j++)
+        newGroupedFeeds.push(
+          !!groupFeeds[j].target
+            ? groupFeeds[j].target
+            : JSON.parse(groupFeeds[j].json)
+        );
+    }
+
+    if (parsedFeeds.length && parsedFeeds.at(-1).day === feedDay)
+      parsedFeeds.at(-1).feeds.push({
+        ...feeds[i],
+        json: feedsJSON,
+        groupedFeeds: newGroupedFeeds,
+      });
+    else
+      parsedFeeds.push({
+        day: feedDay,
+        feeds: [
+          {
+            ...feeds[i],
+            json: feedsJSON,
+            groupedFeeds: newGroupedFeeds,
+          },
+        ],
+      });
+  }
+
+  return parsedFeeds;
 };

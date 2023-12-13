@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import Scrollbar from "../scrollbar";
+import Scrollbar from "./";
 
 export class CustomScrollbars extends React.Component {
   refSetter = (scrollbarsRef, forwardedRef) => {
     const isFuntion = typeof forwardedRef === "function";
 
-    const ref = scrollbarsRef?.view ?? null;
+    const ref = scrollbarsRef?.contentElement ?? null;
 
     if (isFuntion) {
       forwardedRef(ref);
@@ -16,14 +16,8 @@ export class CustomScrollbars extends React.Component {
   };
 
   render() {
-    const {
-      onScroll,
-      forwardedRef,
-      style,
-      children,
-      className,
-      stype,
-    } = this.props;
+    const { onScroll, forwardedRef, style, children, className, stype } =
+      this.props;
     //console.log("CustomScrollbars", this.props);
     return (
       <Scrollbar

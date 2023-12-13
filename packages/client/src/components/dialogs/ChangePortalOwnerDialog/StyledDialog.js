@@ -10,21 +10,24 @@ const StyledOwnerInfo = styled.div`
   margin-bottom: 24px;
 
   .info {
-    padding-left: 16px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 16px;`
+        : `padding-left: 16px;`}
     display: flex;
     flex-direction: column;
 
     .display-name {
       font-weight: 700;
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
     }
 
-    .owner {
+    .status {
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       line-height: 20px;
-      color: ${(props) => props.theme.text.disableColor};
+      color: ${(props) => props.theme.dialogs.disableText};
     }
   }
 `;
@@ -36,17 +39,17 @@ const StyledPeopleSelectorInfo = styled.div`
 
   .new-owner {
     font-weight: 600;
-    font-size: 15px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
     line-height: 16px;
     margin-bottom: 4px;
   }
 
   .description {
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
 
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.dialogs.disableText};
   }
 `;
 
@@ -60,12 +63,15 @@ const StyledPeopleSelector = styled.div`
 
   .label {
     font-weight: 600;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
 
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.dialogs.disableText};
 
-    margin-left: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 8px;`
+        : `margin-left: 8px;`}
   }
 `;
 
@@ -80,7 +86,7 @@ const StyledAvailableList = styled.div`
 
   .list-header {
     font-weight: 600;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
 
     margin-bottom: 8px;
@@ -88,7 +94,7 @@ const StyledAvailableList = styled.div`
 
   .list-item {
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
 
     margin-bottom: 2px;
@@ -109,7 +115,7 @@ const StyledFooterWrapper = styled.div`
     margin-bottom: 16px;
 
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
   }
 
@@ -142,6 +148,46 @@ const StyledSelectedOwnerContainer = styled.div`
 
 StyledSelectedOwnerContainer.defaultProps = { theme: Base };
 
+const StyledSelectedOwner = styled.div`
+  width: fit-content;
+  height: 28px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 15px;
+  gap: 8px;
+
+  box-sizing: border-box;
+
+  background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+
+  border-radius: 16px;
+
+  .text {
+    color: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+
+    font-weight: 600;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    line-height: 20px;
+  }
+
+  .cross-icon {
+    display: flex;
+    align-items: center;
+
+    svg {
+      cursor: pointer;
+
+      path {
+        fill: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+      }
+    }
+  }
+`;
+
+StyledSelectedOwner.defaultProps = { theme: Base };
+
 export {
   StyledOwnerInfo,
   StyledPeopleSelectorInfo,
@@ -149,4 +195,5 @@ export {
   StyledAvailableList,
   StyledFooterWrapper,
   StyledSelectedOwnerContainer,
+  StyledSelectedOwner,
 };

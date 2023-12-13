@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .payments_file-input {
@@ -19,7 +19,7 @@ const StyledButtonComponent = styled.div`
 
       height: 40px;
     }
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -31,7 +31,14 @@ const StyledContactComponent = styled.div`
     display: flex;
     width: 100%;
     p {
-      margin-right: 4px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 4px;
+            `
+          : css`
+              margin-right: 4px;
+            `}
     }
     a {
       text-decoration: underline;

@@ -1,0 +1,12 @@
+{
+  "DeletePlugin": "플러그인 삭제",
+  "DeletePluginDescription": "DocSpace 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다.",
+  "DeletePluginTitle": "플러그인을 삭제하시겠습니까?",
+  "Description": "추가 기능으로 DocSpace의 기능을 확장하기 위해 플러그인을 추가할 수 있습니다. 플러그인 업로드를 클릭하고 ZIP 아카이브에서 플러그인 파일을 선택하세요.",
+  "Metadata": "메타데이터",
+  "NeedSettings": "설정을 입력해야 합니다",
+  "NoPlugins": "추가된 플러그인이 없습니다",
+  "NotNeedSettings": "설정을 입력하지 않아도 됩니다",
+  "PluginsHelp": "플러그인을 사용하면 DocSpace의 기능을 확장할 수 있습니다",
+  "UploadPlugin": "플러그인 업로드"
+}

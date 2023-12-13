@@ -1,5 +1,5 @@
 import { getNewFiles } from "@docspace/common/api/files";
-import { FileAction, ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/common/constants";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/common/constants";
 
@@ -11,8 +11,10 @@ class DialogsStore {
   versionHistoryStore;
 
   sharingPanelVisible = false;
+  roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
+  restorePanelVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
@@ -26,9 +28,17 @@ class DialogsStore {
   selectFileDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
-
+  unsavedChangesDialogVisible = false;
+  moveToPublicRoomVisible = false;
+  moveToPublicRoomData = null;
+  backupToPublicRoomVisible = false;
+  backupToPublicRoomData = null;
   isFolderActions = false;
   roomCreation = false;
+  culture = {
+    key: "",
+    label: "",
+  };
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
@@ -38,9 +48,11 @@ class DialogsStore {
   archiveDialogVisible = false;
   restoreRoomDialogVisible = false;
   eventDialogVisible = false;
+  deleteLinkDialogVisible = false;
 
   removeItem = null;
   connectItem = null;
+  formItem = null;
   destFolderId = null;
   newFilesIds = null;
   newFiles = null;
@@ -59,6 +71,13 @@ class DialogsStore {
   createRoomDialogVisible = false;
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
+  editLinkPanelIsVisible = false;
+  embeddingPanelIsVisible = false;
+  submitToGalleryDialogVisible = false;
+  linkParams = null;
+  leaveRoomDialogVisible = false;
+  changeRoomOwnerIsVisible = false;
+  changeRoomOwnerData = null;
 
   constructor(
     authStore,
@@ -75,7 +94,9 @@ class DialogsStore {
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
   }
-
+  setInviteLanguage = (culture) => {
+    this.culture = culture;
+  };
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };
@@ -96,6 +117,10 @@ class DialogsStore {
     this.sharingPanelVisible = sharingPanelVisible;
   };
 
+  setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
+    this.roomSharingPanelVisible = roomSharingPanelVisible;
+  };
+
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
   };
@@ -105,6 +130,18 @@ class DialogsStore {
   };
 
   setMoveToPanelVisible = (visible) => {
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
+    )
+      return;
+
+    this.moveToPanelVisible = visible;
+  };
+
+  setRestorePanelVisible = (visible) => {
     !visible && this.deselectActiveFiles();
 
     if (
@@ -114,7 +151,7 @@ class DialogsStore {
     )
       return;
 
-    this.moveToPanelVisible = visible;
+    this.restorePanelVisible = visible;
   };
 
   setRestoreAllPanelVisible = (visible) => {
@@ -122,12 +159,11 @@ class DialogsStore {
   };
 
   setCopyPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
     ) {
       console.log("No files selected");
       return;
@@ -159,7 +195,6 @@ class DialogsStore {
   };
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
-    !deleteDialogVisible && this.deselectActiveFiles();
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
@@ -168,7 +203,6 @@ class DialogsStore {
   };
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
-    !downloadDialogVisible && this.deselectActiveFiles();
     this.downloadDialogVisible = downloadDialogVisible;
   };
 
@@ -196,8 +230,17 @@ class DialogsStore {
     const { pathParts } = this.selectedFolderStore;
 
     const id = visible && !newId ? item.id : newId;
-    const newIds = newId ? [newId] : pathParts;
-    item && pathParts.push(item.id);
+    const newIds = newId
+      ? [newId]
+      : pathParts
+      ? pathParts.map((p) => p.id)
+      : [];
+    item &&
+      pathParts.push({
+        id: item.id,
+        title: item.title,
+        roomType: item.roomType,
+      });
 
     let newFilesPanelVisible = visible;
 
@@ -331,36 +374,64 @@ class DialogsStore {
     this.changeUserTypeDialogVisible = changeUserTypeDialogVisible;
   };
 
-  get someDialogIsOpen() {
-    return (
-      this.sharingPanelVisible ||
-      this.ownerPanelVisible ||
-      this.moveToPanelVisible ||
-      this.copyPanelVisible ||
-      this.deleteThirdPartyDialogVisible ||
-      this.connectDialogVisible ||
-      this.thirdPartyMoveDialogVisible ||
-      this.deleteDialogVisible ||
-      this.downloadDialogVisible ||
-      this.emptyTrashDialogVisible ||
-      this.newFilesPanelVisible ||
-      this.conflictResolveDialogVisible ||
-      this.convertDialogVisible ||
-      this.selectFileDialogVisible ||
-      this.authStore.settingsStore.hotkeyPanelVisible ||
-      this.versionHistoryStore.isVisible ||
-      this.eventDialogVisible ||
-      this.invitePanelOptions.visible ||
-      this.archiveDialogVisible ||
-      this.restoreRoomDialogVisible ||
-      this.restoreAllPanelVisible ||
-      this.inviteUsersWarningDialogVisible ||
-      this.createRoomDialogVisible ||
-      this.createRoomConfirmDialogVisible ||
-      this.changeUserTypeDialogVisible
-    );
-  }
+  setSubmitToGalleryDialogVisible = (submitToGalleryDialogVisible) => {
+    this.submitToGalleryDialogVisible = submitToGalleryDialogVisible;
+  };
 
+  setFormItem = (formItem) => {
+    if (formItem && !formItem.exst) {
+      const splitted = formItem.title.split(".");
+      formItem.title = splitted.slice(0, -1).join(".");
+      formItem.exst = splitted.length !== 1 ? `.${splitted.at(-1)}` : null;
+    }
+    this.formItem = formItem;
+  };
+
+  setLinkParams = (linkParams) => {
+    this.linkParams = linkParams;
+  };
+
+  setUnsavedChangesDialog = (unsavedChangesDialogVisible) => {
+    this.unsavedChangesDialogVisible = unsavedChangesDialogVisible;
+  };
+
+  setEditLinkPanelIsVisible = (editLinkPanelIsVisible) => {
+    this.editLinkPanelIsVisible = editLinkPanelIsVisible;
+  };
+
+  setLeaveRoomDialogVisible = (visible) => {
+    this.leaveRoomDialogVisible = visible;
+  };
+
+  setChangeRoomOwnerIsVisible = (
+    visible,
+    showBackButton = false,
+    setRoomParams
+  ) => {
+    this.changeRoomOwnerIsVisible = visible;
+
+    this.changeRoomOwnerData = {
+      showBackButton,
+      setRoomParams,
+    };
+  };
+
+  setDeleteLinkDialogVisible = (visible) => {
+    this.deleteLinkDialogVisible = visible;
+  };
+
+  setEmbeddingPanelIsVisible = (embeddingPanelIsVisible) => {
+    this.embeddingPanelIsVisible = embeddingPanelIsVisible;
+  };
+
+  setMoveToPublicRoomVisible = (visible, data = null) => {
+    this.moveToPublicRoomVisible = visible;
+    this.moveToPublicRoomData = data;
+  };
+  setBackupToPublicRoomVisible = (visible, data = null) => {
+    this.backupToPublicRoomVisible = visible;
+    this.backupToPublicRoomData = data;
+  };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };

@@ -34,6 +34,8 @@ class FieldContainer extends React.Component {
       inlineHelpButton,
       offsetRight,
       tooltipMaxWidth,
+      tooltipClass,
+      removeMargin,
     } = this.props;
 
     return (
@@ -44,6 +46,7 @@ class FieldContainer extends React.Component {
         id={id}
         style={style}
         maxwidth={errorMessageWidth}
+        removeMargin={removeMargin}
       >
         {labelVisible &&
           (!inlineHelpButton ? (
@@ -58,6 +61,7 @@ class FieldContainer extends React.Component {
               />
               {tooltipContent && (
                 <HelpButton
+                  className={tooltipClass}
                   tooltipContent={tooltipContent}
                   place={place}
                   helpButtonHeaderContent={helpButtonHeaderContent}
@@ -75,6 +79,7 @@ class FieldContainer extends React.Component {
               >
                 {tooltipContent && (
                   <HelpButton
+                    className={tooltipClass}
                     tooltipContent={tooltipContent}
                     place={place}
                     helpButtonHeaderContent={helpButtonHeaderContent}
@@ -104,18 +109,21 @@ FieldContainer.displayName = "FieldContainer";
 FieldContainer.propTypes = {
   /** Vertical or horizontal alignment */
   isVertical: PropTypes.bool,
+  /** Remove default margin property */
+  removeMargin: PropTypes.bool,
   /** Accepts class */
   className: PropTypes.string,
   /** Indicates that the field is required to fill */
   isRequired: PropTypes.bool,
   /** Indicates that the field is incorrect */
   hasError: PropTypes.bool,
-  /** Sets visibility of field label section */
+  /** Sets visibility of the field label section */
   labelVisible: PropTypes.bool,
   /** Field label text or element */
   labelText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /** Icon source */
   icon: PropTypes.string,
-  /** Renders help button inline instead of separate div*/
+  /** Renders the help button inline instead of the separate div*/
   inlineHelpButton: PropTypes.bool,
   /** Children elements */
   children: PropTypes.oneOfType([
@@ -124,6 +132,7 @@ FieldContainer.propTypes = {
   ]),
   /** Tooltip content */
   tooltipContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Sets the global position of the tooltip */
   place: PropTypes.string,
   /** Tooltip header content (tooltip opened in aside) */
   helpButtonHeaderContent: PropTypes.string,
@@ -139,7 +148,9 @@ FieldContainer.propTypes = {
   id: PropTypes.string,
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  /** Specifies the offset */
   offsetRight: PropTypes.number,
+  /** Sets the maximum width of the tooltip  */
   tooltipMaxWidth: PropTypes.string,
 };
 
@@ -149,6 +160,7 @@ FieldContainer.defaultProps = {
   maxLabelWidth: "110px",
   errorMessageWidth: "293px",
   offsetRight: 0,
+  removeMargin: false,
 };
 
 export default FieldContainer;

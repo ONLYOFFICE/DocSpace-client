@@ -3,6 +3,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
+import Link from "@docspace/components/link";
 import { startBackup } from "@docspace/common/api/portal";
 import RadioButton from "@docspace/components/radio-button";
 import toastr from "@docspace/components/toast/toastr";
@@ -18,7 +19,7 @@ import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/common/api/settings";
-import FloatingButton from "@docspace/common/components/FloatingButton";
+import FloatingButton from "@docspace/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -105,20 +106,6 @@ class ManualBackup extends React.Component {
 
   componentDidMount() {
     const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
-    const valueFromLocalStorage = getFromLocalStorage("LocalCopyStorageType");
-
-    if (valueFromLocalStorage) {
-      let newStateObj = {};
-      const name = valueFromLocalStorage;
-      newStateObj[name] = true;
-      const newState = this.switches.filter((el) => el !== name);
-      newState.forEach((name) => (newStateObj[name] = false));
-      this.setState({
-        ...newStateObj,
-      });
-    } else {
-      saveToLocalStorage("LocalCopyStorageType", "isCheckedTemporaryStorage");
-    }
 
     if (isNotPaidPeriod) {
       this.setState({
@@ -153,7 +140,7 @@ class ManualBackup extends React.Component {
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
-
+    saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null);
       setDownloadingProgress(1);
@@ -178,7 +165,6 @@ class ManualBackup extends React.Component {
     this.setState({
       ...newStateObj,
     });
-    saveToLocalStorage("LocalCopyStorageType", name);
   };
   onMakeCopy = async (
     selectedFolder,
@@ -235,11 +221,11 @@ class ManualBackup extends React.Component {
       downloadingProgress,
       //commonThirdPartyList,
       buttonSize,
-      organizationName,
-      renderTooltip,
       //isDocSpace,
       rootFoldersTitles,
       isNotPaidPeriod,
+      dataBackupUrl,
+      currentColorScheme,
     } = this.props;
     const {
       isInitialLoading,
@@ -278,16 +264,24 @@ class ManualBackup extends React.Component {
     ) : (
       <StyledManualBackup>
         <div className="backup_modules-header_wrapper">
-          <Text isBold fontSize="16px">
-            {t("DataBackup")}
+          <Text className="backup_modules-description">
+            {t("ManualBackupDescription")}
           </Text>
-          {renderTooltip(t("ManualBackupHelp"))}
+          <Link
+            className="link-learn-more"
+            href={dataBackupUrl}
+            target="_blank"
+            fontSize="13px"
+            color={currentColorScheme.main.accent}
+            isHovered
+          >
+            {t("Common:LearnMore")}
+          </Link>
         </div>
-        <Text className="backup_modules-description">
-          {t("ManualBackupDescription")}
-        </Text>
+
         <StyledModules>
           <RadioButton
+            id="temporary-storage"
             label={t("TemporaryStorage")}
             name={"isCheckedTemporaryStorage"}
             key={0}
@@ -301,6 +295,7 @@ class ManualBackup extends React.Component {
           {isCheckedTemporaryStorage && (
             <div className="manual-backup_buttons">
               <Button
+                id="create-button"
                 label={t("Common:Create")}
                 onClick={this.onMakeTemporaryBackup}
                 primary
@@ -309,6 +304,7 @@ class ManualBackup extends React.Component {
               />
               {temporaryLink?.length > 0 && isMaxProgress && (
                 <Button
+                  id="download-copy"
                   label={t("DownloadCopy")}
                   onClick={this.onClickDownloadBackup}
                   isDisabled={false}
@@ -329,6 +325,7 @@ class ManualBackup extends React.Component {
         </StyledModules>
         <StyledModules isDisabled={isNotPaidPeriod}>
           <RadioButton
+            id="backup-room"
             label={t("RoomsModule")}
             name={"isCheckedDocuments"}
             key={1}
@@ -351,6 +348,7 @@ class ManualBackup extends React.Component {
 
         <StyledModules isDisabled={isNotPaidPeriod}>
           <RadioButton
+            id="third-party-resource"
             label={t("ThirdPartyResource")}
             name={"isCheckedThirdParty"}
             key={2}
@@ -365,6 +363,7 @@ class ManualBackup extends React.Component {
         </StyledModules>
         <StyledModules isDisabled={isNotPaidPeriod}>
           <RadioButton
+            id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
             name={"isCheckedThirdPartyStorage"}
             key={3}
@@ -412,13 +411,12 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     setConnectedThirdPartyAccount,
   } = backup;
   const { currentTariffStatusStore } = auth;
-  const { organizationName } = auth.settingsStore;
+  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
   const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
   return {
     isNotPaidPeriod,
-    organizationName,
     setThirdPartyStorage,
     clearProgressInterval,
     clearLocalStorage,
@@ -436,5 +434,7 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     fetchTreeFolders,
     saveToLocalStorage,
     setConnectedThirdPartyAccount,
+    dataBackupUrl,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

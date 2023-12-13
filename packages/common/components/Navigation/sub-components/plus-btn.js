@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
-import PlusReactSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 
 import IconButton from "@docspace/components/icon-button";
 import ContextMenu from "@docspace/components/context-menu";
@@ -11,7 +11,7 @@ const PlusButton = (props) => {
   const ref = useRef(null);
   const menuRef = useRef(null);
 
-  const { className, getData, withMenu, onPlusClick, isFrame } = props;
+  const { className, getData, withMenu, onPlusClick, isFrame, ...rest } = props;
 
   const toggle = (e, isOpen) => {
     isOpen ? menuRef.current.show(e) : menuRef.current.hide(e);
@@ -30,12 +30,12 @@ const PlusButton = (props) => {
   const model = getData();
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} {...rest}>
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}
         id={props.id}
-        size={15}
+        size={17}
         isFill
       />
       <ContextMenu

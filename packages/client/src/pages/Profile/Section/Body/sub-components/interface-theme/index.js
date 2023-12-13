@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -10,23 +10,43 @@ import toastr from "@docspace/components/toast/toastr";
 
 import { ThemeKeys } from "@docspace/common/constants";
 
-import { smallTablet } from "@docspace/components/utils/device";
-import { showLoader, hideLoader, getSystemTheme } from "@docspace/common/utils";
+import { mobile } from "@docspace/components/utils/device";
+import {
+  showLoader,
+  getSystemTheme,
+  getEditorTheme,
+} from "@docspace/common/utils";
 
 import ThemePreview from "./theme-preview";
 
 const StyledWrapper = styled.div`
+  width: 100%;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+
+  .system-theme-checkbox {
+    display: inline-flex;
+  }
 
   .checkbox {
     height: 20px;
-    margin-right: 8px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px !important;
+          `
+        : css`
+            margin-right: 8px !important;
+          `}
   }
 
   .system-theme-description {
-    padding: 4px 0 4px 24px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    font-weight: 400;
+    line-height: 16px;
+    padding-left: 24px;
     max-width: 295px;
     color: ${(props) => props.theme.profile.themePreview.descriptionColor};
   }
@@ -36,7 +56,7 @@ const StyledWrapper = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -44,7 +64,7 @@ const StyledWrapper = styled.div`
   .mobile-themes-container {
     display: none;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: flex;
       padding-left: 30px;
     }
@@ -53,7 +73,13 @@ const StyledWrapper = styled.div`
 
 const InterfaceTheme = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { theme, changeTheme, currentColorScheme, selectedThemeId } = props;
+  const {
+    theme,
+    changeTheme,
+    currentColorScheme,
+    selectedThemeId,
+    isDesktopClient,
+  } = props;
   const [currentTheme, setCurrentTheme] = useState(theme);
 
   const themeChange = async (theme) => {
@@ -61,6 +87,12 @@ const InterfaceTheme = (props) => {
 
     try {
       setCurrentTheme(theme);
+
+      if (isDesktopClient) {
+        const editorTheme = getEditorTheme(theme);
+        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+      }
+
       await changeTheme(theme);
     } catch (error) {
       console.error(error);
@@ -87,27 +119,31 @@ const InterfaceTheme = (props) => {
   const isSystemTheme = currentTheme === ThemeKeys.SystemStr;
   const systemThemeValue = getSystemTheme();
 
+  const systemThemeLabel = isDesktopClient
+    ? t("DesktopTheme")
+    : t("SystemTheme");
+  const systemThemeDescriptionLabel = isDesktopClient
+    ? t("DesktopThemeDescription")
+    : t("SystemThemeDescription");
+
   return (
     <StyledWrapper>
-      <Text fontSize="16px" fontWeight={700}>
-        {t("InterfaceTheme")}
-      </Text>
-
       <div>
         <Checkbox
+          className="system-theme-checkbox"
           value={ThemeKeys.SystemStr}
-          label={t("SystemTheme")}
+          label={systemThemeLabel}
           isChecked={isSystemTheme}
           onChange={onChangeSystemTheme}
         />
         <Text as="div" className="system-theme-description">
-          {t("SystemThemeDescription")}
+          {systemThemeDescriptionLabel}
         </Text>
       </div>
       <div className="themes-container">
         <ThemePreview
+          className="light-theme"
           label={t("LightTheme")}
-          isDisabled={isSystemTheme}
           theme="Light"
           accentColor={currentColorScheme.main.accent}
           themeId={selectedThemeId}
@@ -119,8 +155,8 @@ const InterfaceTheme = (props) => {
           onChangeTheme={onChangeTheme}
         />
         <ThemePreview
+          className="dark-theme"
           label={t("DarkTheme")}
-          isDisabled={isSystemTheme}
           theme="Dark"
           accentColor={currentColorScheme.main.accent}
           themeId={selectedThemeId}
@@ -155,12 +191,14 @@ export default inject(({ auth }) => {
   const { userStore, settingsStore } = auth;
 
   const { changeTheme, user } = userStore;
-  const { currentColorScheme, selectedThemeId } = settingsStore;
+  const { currentColorScheme, selectedThemeId, isDesktopClient } =
+    settingsStore;
 
   return {
     changeTheme,
     theme: user.theme || "System",
     currentColorScheme,
     selectedThemeId,
+    isDesktopClient,
   };
 })(observer(InterfaceTheme));

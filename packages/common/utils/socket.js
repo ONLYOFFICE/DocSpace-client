@@ -2,11 +2,12 @@ import io from "socket.io-client";
 
 let client = null;
 let callbacks = [];
+const subscribers = new Set();
 
 class SocketIOHelper {
   socketUrl = null;
 
-  constructor(url) {
+  constructor(url, publicRoomKey) {
     if (!url) return;
 
     this.socketUrl = url;
@@ -15,12 +16,20 @@ class SocketIOHelper {
 
     const origin = window.location.origin;
 
-    client = io(origin, {
+    const config = {
       withCredentials: true,
       transports: ["websocket", "polling"],
       eio: 4,
       path: url,
-    });
+    };
+
+    if (publicRoomKey) {
+      config.query = {
+        share: publicRoomKey,
+      };
+    }
+
+    client = io(origin, config);
 
     client.on("connect", () => {
       console.log("socket is connected");
@@ -35,14 +44,40 @@ class SocketIOHelper {
       console.log("socket connect error", err)
     );
     client.on("disconnect", () => console.log("socket is disconnected"));
+
+    // DEV tests
+    //window.socketHelper = this;
   }
 
   get isEnabled() {
     return this.socketUrl !== null;
   }
 
+  get socketSubscribers() {
+    return subscribers;
+  }
+
   emit = ({ command, data, room = null }) => {
     if (!this.isEnabled) return;
+
+    const ids =
+      !data || !data.roomParts
+        ? []
+        : typeof data.roomParts === "object"
+        ? data.roomParts
+        : [data.roomParts];
+
+    ids.forEach((id) => {
+      if (command === "subscribe") {
+        if (subscribers.has(id)) return;
+
+        subscribers.add(id);
+      }
+
+      if (command === "unsubscribe") {
+        subscribers.delete(id);
+      }
+    });
 
     if (!client.connected) {
       client.on("connect", () => {

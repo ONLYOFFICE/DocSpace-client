@@ -2,6 +2,6 @@
   "LblInviteAgain": "Bir daha dəvət et",
   "MessageEmailActivationInstuctionsSentOnEmail": "<1>{{email}}</1> elektron poçtuna aktivləşdirmə haqqında məlumat göndərilmişdir.",
   "NotFoundUsers": "İstifadəçi tapılmadı",
-  "NotFoundUsersDescription": "Filtrinizə uyğun gələn heç kimə baxmaq mümkün deyil. Bu bölmədə olanların hamısına baxmaq üçün digər filtr seçimlərini seçin və ya filtri təmizləyin.",
+  "NotFoundUsersDescription": "Axtarışınıza uyğun istifadəçi yoxdur. İstifadəçilərin tam siyahısına baxmaq üçün axtarış parametrlərinizi tənzimləyin və ya axtarış sahəsini təmizləyin.",
   "UserStatus": "Status"
 }

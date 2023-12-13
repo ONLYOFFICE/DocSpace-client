@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import Loader from "@docspace/components/loader";
@@ -9,16 +8,16 @@ import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
 
 class ChangeEmail extends React.PureComponent {
   componentDidMount() {
-    const { changeEmail, userId, isLoaded, linkData } = this.props;
+    const { changeEmail, isLoaded, linkData } = this.props;
     if (isLoaded) {
-      const [email, key] = [linkData.email, linkData.confirmHeader];
-      changeEmail(userId, email, key)
+      const { email, uid, confirmHeader } = linkData;
+      changeEmail(uid, email, confirmHeader)
         .then((res) => {
           console.log("change client email success", res);
           tryRedirectTo(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
-              `/accounts/view/@self?email_change=success`
+              `/profile?email_change=success`
             )
           );
         })
@@ -46,16 +45,16 @@ class ChangeEmail extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const { changeEmail, userId, isLoaded, linkData, defaultPage } = this.props;
+    const { changeEmail, isLoaded, linkData, defaultPage } = this.props;
     if (isLoaded) {
-      const [email, key] = [linkData.email, linkData.confirmHeader];
-      changeEmail(userId, email, key)
+      const { email, uid, confirmHeader } = linkData;
+      changeEmail(uid, email, confirmHeader)
         .then((res) => {
           console.log("change client email success", res);
           tryRedirectTo(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
-              `/accounts/view/@self?email_change=success`
+              `/profile?email_change=success`
             )
           );
         })
@@ -72,7 +71,6 @@ class ChangeEmail extends React.PureComponent {
 }
 
 ChangeEmail.propTypes = {
-  location: PropTypes.object.isRequired,
   changeEmail: PropTypes.func.isRequired,
 };
 const ChangeEmailForm = (props) => (
@@ -84,12 +82,10 @@ const ChangeEmailForm = (props) => (
 );
 
 export default inject(({ auth }) => {
-  const { logout, userStore, settingsStore, isLoaded } = auth;
+  const { userStore, settingsStore, isLoaded } = auth;
   return {
     isLoaded,
-    userId: userStore.user.id,
-    logout,
     changeEmail: userStore.changeEmail,
     defaultPage: settingsStore.defaultPage,
   };
-})(observer(withRouter(ChangeEmailForm)));
+})(observer(ChangeEmailForm));

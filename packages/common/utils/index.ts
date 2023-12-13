@@ -17,13 +17,15 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import moment from "moment";
 
-import { LANGUAGE, ThemeKeys } from "../constants";
+import { LANGUAGE, ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
 import TopLoaderService from "@docspace/components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
+
+import { getCookie } from "@docspace/components/utils/cookie";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";
@@ -34,7 +36,15 @@ export const toUrlParams = (obj, skipNull) => {
       str += "&";
     }
 
-    if (typeof obj[key] === "object") {
+    // added for double employeetype
+    if (Array.isArray(obj[key]) && key === "employeetypes") {
+      for (let i = 0; i < obj[key].length; i++) {
+        str += key + "=" + encodeURIComponent(obj[key][i]);
+        if (i !== obj[key].length - 1) {
+          str += "&";
+        }
+      }
+    } else if (typeof obj[key] === "object") {
       str += key + "=" + encodeURIComponent(JSON.stringify(obj[key]));
     } else {
       str += key + "=" + encodeURIComponent(obj[key]);
@@ -82,7 +92,6 @@ export function getObjectByLocation(location) {
 
   try {
     const object = JSON.parse(`{"${decodedString}"}`);
-
     return object;
   } catch (e) {
     return {};
@@ -193,17 +202,6 @@ export const getUserRole = (user) => {
 
 export const combineUrl = combineUrlFunc;
 
-export function getCookie(name) {
-  let matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-      name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-      "=([^;]*)"
-    )
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
 export function setCookie(name, value, options = {}) {
   options = {
     path: "/",
@@ -267,7 +265,12 @@ export function toCommunityHostname(hostname) {
   return communityHostname;
 }
 
-export function getProviderTranslation(provider, t, linked = false, signUp = false) {
+export function getProviderTranslation(
+  provider,
+  t,
+  linked = false,
+  signUp = false
+) {
   const capitalizeProvider =
     provider.charAt(0).toUpperCase() + provider.slice(1);
   if (linked) {
@@ -278,15 +281,25 @@ export function getProviderTranslation(provider, t, linked = false, signUp = fal
     case "apple":
       return signUp ? t("Common:SignUpWithApple") : t("Common:SignInWithApple");
     case "google":
-      return signUp ? t("Common:SignUpWithGoogle") : t("Common:SignInWithGoogle");
+      return signUp
+        ? t("Common:SignUpWithGoogle")
+        : t("Common:SignInWithGoogle");
     case "facebook":
-      return signUp ? t("Common:SignUpWithFacebook") : t("Common:SignInWithFacebook");
+      return signUp
+        ? t("Common:SignUpWithFacebook")
+        : t("Common:SignInWithFacebook");
     case "twitter":
-      return signUp ? t("Common:SignUpWithTwitter") : t("Common:SignInWithTwitter");
+      return signUp
+        ? t("Common:SignUpWithTwitter")
+        : t("Common:SignInWithTwitter");
     case "linkedin":
-      return signUp ? t("Common:SignUpWithLinkedIn") : t("Common:SignInWithLinkedIn");
+      return signUp
+        ? t("Common:SignUpWithLinkedIn")
+        : t("Common:SignInWithLinkedIn");
     case "microsoft":
-      return signUp ? t("Common:SignUpWithMicrosoft") : t("Common:SignInWithMicrosoft");
+      return signUp
+        ? t("Common:SignUpWithMicrosoft")
+        : t("Common:SignInWithMicrosoft");
     case "sso":
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
@@ -313,6 +326,33 @@ export function getLanguage(lng) {
 
   return lng;
 }
+
+export const isLanguageRtl = (lng: string) => {
+  if (!lng) return;
+
+  const splittedLng = lng.split("-");
+  return RtlLanguages.includes(splittedLng[0]);
+};
+
+// temporary function needed to replace rtl language in Editor to ltr
+export const getLtrLanguageForEditor = (
+  userLng: string,
+  portalLng: string,
+  isEditor: boolean = false
+): string => {
+  let isEditorPath;
+  if (typeof window !== "undefined") {
+    isEditorPath = window?.location.pathname.indexOf("doceditor") !== -1;
+  }
+  const isUserLngRtl = isLanguageRtl(userLng);
+  const isPortalLngRtl = isLanguageRtl(portalLng);
+
+  if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
+    return userLng;
+  if (portalLng && !isPortalLngRtl) return portalLng;
+
+  return "en";
+};
 
 export function loadScript(url, id, onLoad, onError) {
   try {
@@ -363,6 +403,39 @@ export function convertLanguage(key) {
   return key;
 }
 
+export function convertToCulture(key: string) {
+  switch (key) {
+    case "ar":
+      return "ar-SA";
+    case "en":
+      return "en-US";
+    case "el":
+      return "el-GR";
+    case "hy":
+      return "hy-AM";
+    case "ko":
+      return "ko-KR";
+    case "lo":
+      return "lo-LA";
+    case "pt":
+      return "pt-BR";
+    case "uk":
+      return "uk-UA";
+    case "ja":
+      return "ja-JP";
+    case "zh":
+      return "zh-CN";
+  }
+  return key;
+}
+
+export function convertToLanguage(key: string) {
+  const splittedKey = key.split("-");
+  if (splittedKey.length > 1) return splittedKey[0];
+
+  return key;
+}
+
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -376,7 +449,7 @@ export function isElementInViewport(el) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-    (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -550,6 +623,18 @@ export const getDaysRemaining = (autoDelete) => {
   return "" + daysRemaining;
 };
 
+export const checkFilterInstance = (filterObject, certainClass) => {
+  const isInstance =
+    filterObject.constructor.name === certainClass.prototype.constructor.name;
+
+  if (!isInstance)
+    throw new Error(
+      `Filter ${filterObject.constructor.name} isn't an instance of   ${certainClass.prototype.constructor.name}`
+    );
+
+  return isInstance;
+};
+
 export const getFileExtension = (fileTitle: string) => {
   if (!fileTitle) {
     return "";
@@ -574,6 +659,21 @@ export const getSystemTheme = () => {
       : ThemeKeys.BaseStr
     : window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    ? ThemeKeys.DarkStr
+    : ThemeKeys.BaseStr;
+};
+
+export const getEditorTheme = (theme) => {
+  switch (theme) {
+    case ThemeKeys.BaseStr:
+      return "default-light";
+    case ThemeKeys.DarkStr:
+      return "default-dark";
+    case ThemeKeys.SystemStr: {
+      const uiTheme = getSystemTheme();
+      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    }
+    default:
+      return "default-dark";
+  }
 };

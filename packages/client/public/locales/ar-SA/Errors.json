@@ -1,0 +1,12 @@
+{
+  "Error401Text": "عذرا، المورد غير متاح حاليا.",
+  "Error403Text": "نأسف، الوصول مرفوض.",
+  "Error404Text": "عذرا، لا يمكن العثور على المورد.",
+  "ErrorDeactivatedText": "DocSpace هذا معطل",
+  "ErrorEmptyResponse": "رد فارغ",
+  "ErrorOfflineText": "لا يوجد اتصال بالإنترنت",
+  "ErrorUnavailableText": "DocSpace غير متوفر",
+  "InvalidLink": "رابط غير صالح",
+  "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
+  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه"
+}

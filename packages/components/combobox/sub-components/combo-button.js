@@ -12,7 +12,8 @@ import {
 
 import Text from "../../text";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../../ColorTheme";
+import Badge from "../../badge";
 
 const ComboButton = (props) => {
   const {
@@ -33,6 +34,7 @@ const ComboButton = (props) => {
     modernView,
     tabIndex,
     isLoading,
+    type,
   } = props;
 
   const defaultOption = selectedOption?.default;
@@ -56,6 +58,7 @@ const ComboButton = (props) => {
       tabIndex={tabIndex}
       displayArrow={displayArrow}
       isLoading={isLoading}
+      type={type}
     >
       {innerContainer && (
         <StyledOptionalItem
@@ -63,6 +66,7 @@ const ComboButton = (props) => {
           isDisabled={isDisabled}
           defaultOption={defaultOption}
           isLoading={isLoading}
+          fillIcon={fillIcon}
         >
           {innerContainer}
         </StyledOptionalItem>
@@ -74,6 +78,7 @@ const ComboButton = (props) => {
           defaultOption={defaultOption}
           isSelected={isSelected}
           isLoading={isLoading}
+          fillIcon={fillIcon}
         >
           <ReactSVG
             src={selectedOption.icon}
@@ -81,17 +86,27 @@ const ComboButton = (props) => {
           />
         </StyledIcon>
       )}
-      <Text
-        noBorder={noBorder}
-        title={selectedOption?.label}
-        as="div"
-        truncate={true}
-        fontWeight={600}
-        className="combo-button-label"
-      >
-        {selectedOption?.label}
-      </Text>
-
+      {type === "badge" ? (
+        <Badge
+          label={selectedOption.label}
+          noHover={true}
+          color={selectedOption.color}
+          backgroundColor={selectedOption.backgroundColor}
+          border={`2px solid ${selectedOption.border}`}
+          compact={!!selectedOption.border}
+        />
+      ) : (
+        <Text
+          noBorder={noBorder}
+          title={selectedOption?.label}
+          as="div"
+          truncate={true}
+          fontWeight={600}
+          className="combo-button-label"
+        >
+          {selectedOption?.label}
+        </Text>
+      )}
       <StyledArrowIcon
         displayArrow={displayArrow}
         noBorder={noBorder}
@@ -142,6 +157,7 @@ ComboButton.propTypes = {
   modernView: PropTypes.bool,
   tabIndex: PropTypes.number,
   isLoading: PropTypes.bool,
+  type: PropTypes.oneOf(["badge", null]),
 };
 
 ComboButton.defaultProps = {

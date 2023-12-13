@@ -5,7 +5,7 @@ import { ReactSVG } from "react-svg";
 
 import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
-import { isHugeMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import DomHelpers from "@docspace/components/utils/domHelpers";
 
 import Text from "@docspace/components/text";
@@ -58,7 +58,7 @@ const StyledStorageLocation = styled.div`
 
       &-text {
         font-weight: 400;
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         line-height: 20px;
       }
 
@@ -84,11 +84,14 @@ const StyledStorageLocation = styled.div`
     &-checkbox {
       margin-top: 8px;
       .checkbox {
-        margin-right: 8px;
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
+            ? `margin-left: 8px;`
+            : `margin-right: 8px;`}
       }
       .checkbox-text {
         font-weight: 400;
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         line-height: 20px;
       }
     }
@@ -154,9 +157,7 @@ const ThirdPartyComboBox = ({
 
     const neededHeightDesktop = Math.min(thirdparties.length * 32 + 16, 404);
     const neededHeightMobile = Math.min(thirdparties.length * 32 + 16, 180);
-    const neededheight = isHugeMobile()
-      ? neededHeightMobile
-      : neededHeightDesktop;
+    const neededheight = isMobile() ? neededHeightMobile : neededHeightDesktop;
 
     setDropdownDirection(neededheight > offsetBottom ? "top" : "bottom");
   };
@@ -259,7 +260,7 @@ const ThirdPartyComboBox = ({
           open={isOpen}
           forwardedRef={dropdownRef}
           clickOutsideAction={toggleIsOpen}
-          maxHeight={isHugeMobile() ? 158 : 382}
+          maxHeight={isMobile() ? 158 : 382}
           directionY={dropdownDirection}
           marginTop={dropdownDirection === "bottom" ? "4px" : "-36px"}
           hasItems={isOpen}

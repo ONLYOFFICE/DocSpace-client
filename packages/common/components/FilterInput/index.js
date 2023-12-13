@@ -1,19 +1,14 @@
 import React from "react";
-import { isMobile, isMobileOnly } from "react-device-detect";
-
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
 
 import ViewSelector from "@docspace/components/view-selector";
 import Link from "@docspace/components/link";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-import SelectedItem from "./sub-components/SelectedItem";
-
+import SelectedItem from "@docspace/components/selected-item";
+import { useTheme } from "styled-components";
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
+import { DeviceType } from "../../constants";
 
 const FilterInput = React.memo(
   ({
@@ -51,6 +46,7 @@ const FilterInput = React.memo(
 
     onSortButtonClick,
     onClearFilter,
+    currentDeviceType,
   }) => {
     const [viewSettings, setViewSettings] = React.useState([]);
     const [inputValue, setInputValue] = React.useState("");
@@ -58,7 +54,11 @@ const FilterInput = React.memo(
     const [selectedItems, setSelectedItems] = React.useState(null);
 
     const mountRef = React.useRef(true);
-
+    const { interfaceDirection } = useTheme();
+    const styleViewSelector =
+      interfaceDirection === "rtl"
+        ? { marginRight: "8px" }
+        : { marginLeft: "8px" };
     React.useEffect(() => {
       const value = getViewSettingsData && getViewSettingsData();
 
@@ -153,6 +153,7 @@ const FilterInput = React.memo(
             isRooms={isRooms}
             isAccounts={isAccounts}
             title={filterTitle}
+            currentDeviceType={currentDeviceType}
           />
           {!isRecentFolder && (
             <SortButton
@@ -169,20 +170,19 @@ const FilterInput = React.memo(
               viewSelectorVisible={
                 viewSettings &&
                 viewSelectorVisible &&
-                (isMobile || isMobileUtils() || isTabletUtils())
+                currentDeviceType !== DeviceType.desktop
               }
               title={sortByTitle}
             />
           )}
+
           {((viewSettings &&
-            !isMobile &&
-            viewSelectorVisible &&
-            !isMobileUtils() &&
-            !isTabletUtils()) ||
+            currentDeviceType === DeviceType.desktop &&
+            viewSelectorVisible) ||
             isRecentFolder) && (
             <ViewSelector
               id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
-              style={{ marginLeft: "8px" }}
+              style={styleViewSelector}
               viewAs={viewAs === "table" ? "row" : viewAs}
               viewSettings={viewSettings}
               onChangeView={onChangeViewAs}
@@ -198,7 +198,8 @@ const FilterInput = React.memo(
                 propKey={item.key}
                 label={item.selectedLabel ? item.selectedLabel : item.label}
                 group={item.group}
-                removeSelectedItem={removeSelectedItemAction}
+                onClose={removeSelectedItemAction}
+                onClick={removeSelectedItemAction}
               />
             ))}
             {selectedItems.filter((item) => item.label).length > 1 && (

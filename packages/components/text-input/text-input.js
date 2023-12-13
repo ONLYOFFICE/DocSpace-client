@@ -18,12 +18,15 @@ class TextInput extends React.Component {
 TextInput.propTypes = {
   /** Used as HTML `id` property */
   id: PropTypes.string,
+  /** Forwarded ref */
+  forwardedRef: PropTypes.object,
   /** Used as HTML `name` property */
   name: PropTypes.string,
   /** Supported type of the input fields. */
-  type: PropTypes.oneOf(["text", "password", "email", "tel"]),
+  type: PropTypes.oneOf(["text", "password", "email", "tel", "search"]),
   /** Value of the input */
   value: PropTypes.string.isRequired,
+  /** Default maxLength value of the input */
   maxLength: PropTypes.number,
   /** Placeholder text for the input */
   placeholder: PropTypes.string,
@@ -31,7 +34,7 @@ TextInput.propTypes = {
   tabIndex: PropTypes.number,
   /** input text mask */
   mask: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  /** When true, adding or deleting characters will not affect the positions of existing characters. */
+  /** Allows to add or delete characters without changing the positions of the existing characters.*/
   keepCharPositions: PropTypes.bool,
   /** When guide is true, Text Mask always shows both placeholder characters and non-placeholder mask characters. */
   guide: PropTypes.bool,
@@ -71,6 +74,8 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   type: "text",
+  // Empty placeholder by default needed for RTL mode to make :placeholder-shown work to put cursor on the right side of input
+  placeholder: " ",
   value: "",
   maxLength: 255,
   size: "base",

@@ -14,6 +14,12 @@ class SelectionStore {
     makeAutoObservable(this);
   }
 
+  updateSelection = (peopleList) => {
+    peopleList.some((el) => {
+      if (el.id === this.selection[0].id) this.setSelection([el]);
+    });
+  };
+
   setSelection = (selection) => {
     //console.log("setSelection", { selection });
     this.selection = selection;
@@ -173,6 +179,16 @@ class SelectionStore {
     return users.map((u) => u);
   }
 
+  get userSelectionRole() {
+    if (this.selection.length !== 1) return null;
+
+    return this.selection[0].role;
+  }
+
+  get isOneUserSelection() {
+    return this.selection.length > 0 && this.selection.length === 1;
+  }
+
   get hasFreeUsers() {
     const users = this.selection.filter(
       (x) => x.status !== EmployeeStatus.Disabled && x.isVisitor
@@ -235,6 +251,14 @@ class SelectionStore {
     const users = this.selection.filter((x) => canRemoveUser(x));
 
     return users.length > 0;
+  }
+
+  get hasOnlyOneUserToRemove() {
+    const { canRemoveUser } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter((x) => canRemoveUser(x));
+
+    return users.length === 1;
   }
 
   get getUsersToRemoveIds() {

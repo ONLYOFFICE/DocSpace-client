@@ -46,8 +46,10 @@ function ViewerPlayer({
   errorTitle,
   isLastImage,
   isFistImage,
+  canDownload,
   isFullScreen,
   panelVisible,
+  thumbnailSrc,
   mobileDetails,
   isPreviewFile,
   isOpenContextMenu,
@@ -266,6 +268,7 @@ function ViewerPlayer({
   const onExitFullScreen = () => {
     if (!document.fullscreenElement) {
       setIsFullScreen(false);
+      handleResize();
     }
   };
 
@@ -534,6 +537,15 @@ function ViewerPlayer({
     if (isPlaying && isVideo) restartToolbarVisibleTimer();
   };
 
+  const hadleError = useCallback(
+    (error: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+      console.error("video error", error);
+      setIsError(true);
+      setIsLoading(false);
+    },
+    []
+  );
+
   const stopPropagation = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       event?.stopPropagation();
@@ -562,39 +574,38 @@ function ViewerPlayer({
         >
           <animated.video
             style={lodash.omit(style, ["x", "y"])}
-            src={`${src}#t=0.001`}
+            src={thumbnailSrc ? src : `${src}#t=0.001`}
             playsInline
             ref={videoRef}
             hidden={isAudio}
             preload="metadata"
+            poster={thumbnailSrc && `${thumbnailSrc}&size=1280x720`}
             onClick={handleClickVideo}
             onEnded={handleVideoEnded}
             onDurationChange={handleDurationChange}
             onTimeUpdate={handleTimeUpdate}
             onPlaying={() => setIsWaiting(false)}
             onWaiting={() => setIsWaiting(true)}
-            onError={(error) => {
-              console.error("video error", error);
-              setIsError(true);
-              setIsLoading(false);
-            }}
+            onError={hadleError}
             onLoadedMetadata={handleLoadedMetaDataVideo}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}
             visible={!isPlaying && isVideo && !isError}
           />
-          {isAudio && (
+          {isAudio && !isError && (
             <div className="audio-container">
               <img src={audioIcon} />
             </div>
           )}
+          <ViewerLoader
+            isError={isError}
+            onClick={handleClickVideo}
+            withBackground={isWaiting && isPlaying}
+            isLoading={isLoading || (isWaiting && isPlaying)}
+          />
         </VideoWrapper>
-
-        <ViewerLoader
-          isLoading={isLoading || (isWaiting && isPlaying)}
-          isError={isError}
-        />
+        <ViewerLoader isError={isError} isLoading={isLoading} />
       </ContainerPlayer>
       {isError ? (
         <PlayerMessageError
@@ -651,6 +662,7 @@ function ViewerPlayer({
                 />
                 {isDesktop && (
                   <PlayerDesktopContextMenu
+                    canDownload={canDownload}
                     isPreviewFile={isPreviewFile}
                     hideContextMenu={hideContextMenu}
                     onDownloadClick={onDownloadClick}

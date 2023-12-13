@@ -3,7 +3,6 @@ import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.rem
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
 
 import { mobile } from "@docspace/components/utils/device";
 
@@ -11,22 +10,30 @@ import MainButtonMobile from "@docspace/components/main-button-mobile";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
-
   z-index: 200;
 
-  right: 24px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: 24px;
+        `
+      : css`
+          right: 24px;
+        `}
+
   bottom: 24px;
 
   @media ${mobile} {
-    right: 16px;
-    bottom: 16px;
+    position: absolute;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 16px;
+          `
+        : css`
+            right: 16px;
+          `}
   }
-
-  ${isMobileOnly &&
-  css`
-    right: 16px;
-    bottom: 16px;
-  `}
 `;
 
 const MobileView = ({
@@ -46,6 +53,7 @@ const MobileView = ({
   clearPrimaryProgressData,
   secondaryProgressDataStoreVisible,
   secondaryProgressDataStorePercent,
+  secondaryProgressDataStoreIsDownload,
   secondaryProgressDataStoreCurrentFile,
   secondaryProgressDataStoreCurrentFilesCount,
   clearSecondaryProgressData,
@@ -100,6 +108,12 @@ const MobileView = ({
         secondaryProgressDataStorePercent) /
       100;
 
+    const secondaryProgressStatus = secondaryProgressDataStoreIsDownload
+      ? `${Math.floor(secondaryProgressDataStorePercent)}%`
+      : `${Math.floor(
+          currentSecondaryProgressItem
+        )}/${secondaryProgressDataStoreCurrentFilesCount}`;
+
     const newProgressOptions = [
       {
         key: "primary-progress",
@@ -120,9 +134,7 @@ const MobileView = ({
         label: t("Common:OtherOperations"),
         icon: MobileActionsRemoveReactSvgUrl,
         percent: secondaryProgressDataStorePercent,
-        status: `${Math.round(
-          currentSecondaryProgressItem
-        )}/${secondaryProgressDataStoreCurrentFilesCount}`,
+        status: secondaryProgressStatus,
         onCancel: clearSecondaryProgressData,
       },
     ];
@@ -155,6 +167,7 @@ const MobileView = ({
     primaryProgressDataErrors,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
   ]);
@@ -208,6 +221,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     currentFile: secondaryProgressDataStoreCurrentFile,
     filesCount: secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,
+    isDownload: secondaryProgressDataStoreIsDownload,
   } = secondaryProgressDataStore;
 
   return {
@@ -222,6 +236,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     clearPrimaryProgressData,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,

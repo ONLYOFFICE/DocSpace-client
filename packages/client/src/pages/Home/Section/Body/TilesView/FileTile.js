@@ -6,7 +6,6 @@ import DragAndDrop from "@docspace/components/drag-and-drop";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
-import { withRouter } from "react-router-dom";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -56,6 +55,8 @@ const FileTile = (props) => {
     withShiftSelect,
     isHighlight,
     thumbnails1280x720,
+    onDragOver,
+    onDragLeave,
   } = props;
 
   const temporaryExtension =
@@ -76,11 +77,22 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
-      defaultRoomIcon={item.defaultRoomIcon}
+      title={item.title}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
     />
   );
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
+
+  const onDragOverEvent = (_, e) => {
+    onDragOver && onDragOver(e);
+  };
+
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+  };
 
   return (
     <div ref={props.selectableRef} id={id}>
@@ -91,6 +103,8 @@ const FileTile = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
       >
         <Tile
@@ -148,12 +162,8 @@ const FileTile = (props) => {
 export default inject(
   ({ settingsStore, filesStore, treeFoldersStore }, { item }) => {
     const { getIcon, thumbnails1280x720 } = settingsStore;
-    const {
-      setSelection,
-      withCtrlSelect,
-      withShiftSelect,
-      highlightFile,
-    } = filesStore;
+    const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
+      filesStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -173,9 +183,7 @@ export default inject(
     };
   }
 )(
-  withTranslation(["Files", "InfoPanel"])(
-    withRouter(
-      withFileActions(withBadges(withQuickButtons(observer(FileTile))))
-    )
+  withTranslation(["Files", "InfoPanel", "Notifications"])(
+    withFileActions(withBadges(withQuickButtons(observer(FileTile))))
   )
 );

@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import Text from "@docspace/components/text";
 import { inject, observer } from "mobx-react";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     max-width: 520px;
   }
 
@@ -34,7 +34,14 @@ const StyledBody = styled.div`
     .payment_price_month-text {
       margin: auto 0;
       margin-bottom: 9px;
-      margin-left: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
     }
     .payment_price_month-text,
     .payment_price_price-text {
@@ -61,8 +68,6 @@ const TotalTariffContainer = ({
   isNeedRequest,
   currencySymbol,
 }) => {
-  
-
   return (
     <StyledBody isDisabled={isDisabled} theme={theme}>
       <div className="payment_price_total-price">
@@ -121,12 +126,8 @@ const TotalTariffContainer = ({
 export default inject(({ auth, payments }) => {
   const { paymentQuotasStore } = auth;
   const { theme } = auth.settingsStore;
-  const {
-    isLoading,
-    totalPrice,
-    isNeedRequest,
-    maxAvailableManagersCount,
-  } = payments;
+  const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
+    payments;
 
   const { planCost } = paymentQuotasStore;
   return {

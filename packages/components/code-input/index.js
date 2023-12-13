@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import InputWrapper from "./styled-code-input";
 
 const CodeInput = (props) => {
-  const { onSubmit, handleChange, isDisabled } = props;
+  const { onSubmit, onChange, isDisabled, interfaceDirection } = props;
 
   const inputsRef = useRef([]);
   const characters = 6;
@@ -22,7 +22,7 @@ const CodeInput = (props) => {
 
   const handleOnChange = (e) => {
     if (e.target.value.match(allowed)) {
-      handleChange();
+      onChange();
       if (e.target.nextElementSibling !== null) {
         if (e.target.nextElementSibling.nodeName === "HR") {
           e.target.nextElementSibling.nextElementSibling.focus();
@@ -40,7 +40,7 @@ const CodeInput = (props) => {
     const target = e.target;
 
     if (key === "Backspace") {
-      handleChange();
+      onChange();
       if (target.value === "" && target.previousElementSibling !== null) {
         if (target.previousElementSibling !== null) {
           if (e.target.previousElementSibling.nodeName === "HR") {
@@ -76,30 +76,35 @@ const CodeInput = (props) => {
   const elements = [];
   for (let i = 0; i < characters; i++) {
     if (i === 3) elements.push(<hr key="InputCode-line" />);
-
-    elements.push(
-      <input
-        key={`InputCode-${i}`}
-        onChange={handleOnChange}
-        onKeyDown={handleOnKeyDown}
-        onFocus={handleOnFocus}
-        onPaste={handleOnPaste}
-        ref={(el) => (inputsRef.current[i] = el)}
-        maxLength={1}
-        disabled={isDisabled}
-      />
-    );
+      elements.push(
+        <input
+          key={`InputCode-${i}`}
+          onChange={handleOnChange}
+          onKeyDown={handleOnKeyDown}
+          onFocus={handleOnFocus}
+          onPaste={handleOnPaste}
+          ref={(el) => (inputsRef.current[i] = el)}
+          maxLength={1}
+          disabled={isDisabled}
+        />
+      );
   }
 
   return <InputWrapper {...props}>{elements}</InputWrapper>;
 };
 
 CodeInput.propTypes = {
+  /** Sets a callback function that is triggered when the enter is pressed */
   onSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func,
+  /** Sets a callback function that is triggered on the onChange event */
+  onChange: PropTypes.func,
+  /** Sets the code input to present a disabled state */
   isDisabled: PropTypes.bool,
+  /** Accepts class */
   className: PropTypes.string,
+  /** Accepts id */
   id: PropTypes.string,
+  /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 

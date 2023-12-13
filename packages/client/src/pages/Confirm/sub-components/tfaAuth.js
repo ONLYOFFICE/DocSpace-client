@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
+import { useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "@docspace/components/button";
@@ -10,7 +10,7 @@ import { inject, observer } from "mobx-react";
 import Box from "@docspace/components/box";
 import toastr from "@docspace/components/toast/toastr";
 import withLoader from "../withLoader";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
@@ -21,7 +21,7 @@ const StyledForm = styled(Box)`
   flex-direction: column;
   flex: 1fr;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     width: 100%;
   }
@@ -48,26 +48,34 @@ const StyledForm = styled(Box)`
 `;
 
 const TfaAuthForm = withLoader((props) => {
-  const { t, loginWithCode, loginWithCodeAndCookie, location, history } = props;
+  const { t, loginWithCode, loginWithCodeAndCookie } = props;
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const location = useLocation();
+
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData } = props;
+      const { linkData, defaultPage } = props;
 
       setIsLoading(true);
 
       if (user && hash) {
-        const url = await loginWithCode(user, hash, code);
-        history.push(url || "/");
+        await loginWithCode(user, hash, code);
       } else {
-        const url = await loginWithCodeAndCookie(code, linkData.confirmHeader);
-        history.push(url || "/");
+        await loginWithCodeAndCookie(code, linkData.confirmHeader);
       }
+
+      const referenceUrl = sessionStorage.getItem("referenceUrl");
+
+      if (referenceUrl) {
+        sessionStorage.removeItem("referenceUrl");
+      }
+
+      window.location.replace(referenceUrl || defaultPage);
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -174,8 +182,5 @@ export default inject(({ auth, confirm }) => ({
   setIsLoading: confirm.setIsLoading,
   loginWithCode: auth.loginWithCode,
   loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
-}))(
-  withRouter(
-    withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper))
-  )
-);
+  defaultPage: auth.settingsStore.defaultPage,
+}))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));

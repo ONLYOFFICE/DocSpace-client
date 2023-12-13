@@ -1,12 +1,12 @@
 ﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton, Link } from "@docspace/components";
 import Avatar from "@docspace/components/avatar";
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 const StyledContainer = styled.div`
   display: flex;
@@ -18,14 +18,35 @@ const StyledContainer = styled.div`
   border-radius: 6px;
 
   .payer-info {
-    margin-left: 3px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 3px;
+          `
+        : css`
+            margin-left: 3px;
+          `}
   }
 
   .payer-info_avatar {
-    margin-right: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 16px;
+          `
+        : css`
+            margin-right: 16px;
+          `}
   }
   .payer-info {
-    margin-right: 3px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 3px;
+          `
+        : css`
+            margin-right: 3px;
+          `}
   }
   .payer-info_wrapper {
     height: max-content;
@@ -36,7 +57,14 @@ const StyledContainer = styled.div`
 
     .payer-info_description {
       p {
-        margin-right: 3px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 3px;
+              `
+            : css`
+                margin-right: 3px;
+              `}
       }
       div {
         display: inline-block;
@@ -66,6 +94,7 @@ const PayerInformationContainer = ({
 
   const renderTooltip = (
     <HelpButton
+      className="payer-tooltip"
       iconName={HelpReactSvgUrl}
       tooltipContent={
         <>
@@ -176,7 +205,7 @@ const PayerInformationContainer = ({
     : {};
 
   return (
-    <StyledContainer style={style} theme={theme}>
+    <StyledContainer style={style}>
       <div className="payer-info_avatar">
         <Avatar
           size={"base"}
@@ -207,12 +236,8 @@ export default inject(({ auth, payments }) => {
   const { userStore, settingsStore, currentTariffStatusStore } = auth;
   const { accountLink, isStripePortalAvailable } = payments;
   const { theme } = settingsStore;
-  const {
-    customerId,
-    isGracePeriod,
-    isNotPaidPeriod,
-    payerInfo,
-  } = currentTariffStatusStore;
+  const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
+    currentTariffStatusStore;
   const { user } = userStore;
 
   return {

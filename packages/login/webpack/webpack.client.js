@@ -1,20 +1,22 @@
 const { merge } = require("webpack-merge");
 const path = require("path");
-const ModuleFederationPlugin = require("webpack").container
-  .ModuleFederationPlugin;
+const ModuleFederationPlugin =
+  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const combineUrl = require("@docspace/common/utils/combineUrl");
+//const combineUrl = require("@docspace/common/utils/combineUrl");
 const minifyJson = require("@docspace/common/utils/minifyJson");
 const sharedDeps = require("@docspace/common/constants/sharedDependencies");
-const beforeBuild = require("@docspace/common/utils/beforeBuild");
+//const beforeBuild = require("@docspace/common/utils/beforeBuild");
 const baseConfig = require("./webpack.base.js");
+const runtime = require("../../runtime.json");
 const pkg = require("../package.json");
 const deps = pkg.dependencies || {};
+const dateHash = runtime?.date || "";
 
 for (let dep in sharedDeps) {
   sharedDeps[dep].eager = true;
@@ -161,6 +163,16 @@ module.exports = (env, argv) => {
       PORT: process.env.PORT || 5011,
       IS_PERSONAL: env.personal || false,
       IS_ROOMS_MODE: env.rooms || false,
+      BROWSER_DETECTOR_URL: JSON.stringify(
+        `/static/scripts/browserDetector.js?hash=${
+          runtime.checksums["browserDetector.js"] || dateHash
+        }`
+      ),
+      CONFIG_URL: JSON.stringify(
+        `/static/scripts/config.json?hash=${
+          runtime.checksums["config.json"] || dateHash
+        }`
+      ),
     }),
   ];
 

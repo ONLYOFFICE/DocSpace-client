@@ -1,56 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
 import Submenu from "@docspace/components/submenu";
-import Badge from "@docspace/components/badge";
+
 import Box from "@docspace/components/box";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { withRouter } from "react-router";
 
+import { useNavigate } from "react-router-dom";
 import JavascriptSDK from "./JavascriptSDK";
+import Webhooks from "./Webhooks";
+
 import Api from "./Api";
 
-import AppLoader from "@docspace/common/components/AppLoader";
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
+import AppLoader from "@docspace/common/components/AppLoader";
+import SSOLoader from "./sub-components/ssoLoader";
+import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
+import { DeviceType } from "@docspace/common/constants";
+import PluginSDK from "./PluginSDK";
+import Badge from "@docspace/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
-    margin-top: ${() => (isMobile ? "0" : "4px")};
     z-index: 201;
-    ${() =>
-      isMobileOnly &&
-      css`
-        top: 58px;
-      `}
-  }
-
-  #javascript-sdk {
-    gap: 0px;
   }
 `;
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo, history } = props;
-  const [currentTab, setCurrentTab] = useState(0);
+  const { loadBaseInfo, currentDeviceType } = props;
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const { t, ready } = useTranslation(["JavascriptSdk", "Settings"]);
+  const { t, ready } = useTranslation([
+    "JavascriptSdk",
+    "Webhooks",
+    "Settings",
+    "WebPlugins",
+  ]);
+  const [isPending, startTransition] = useTransition();
 
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
       {t("JavascriptSdk")}
-      <Box>
-        <Badge
-          label={t("Settings:BetaLabel")}
-          backgroundColor="#7763F0"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
-      </Box>
+    </Box>
+  );
+
+  const pluginLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("WebPlugins:PluginSDK")}
+
+      <Badge
+        label={t("Settings:BetaLabel")}
+        backgroundColor="#533ED1"
+        fontSize="9px"
+        borderRadius="50px"
+        noHover={true}
+        isHovered={false}
+      />
     </Box>
   );
 
@@ -65,23 +74,40 @@ const DeveloperToolsWrapper = (props) => {
       name: sdkLabel,
       content: <JavascriptSDK />,
     },
+    {
+      id: "plugin-sdk",
+      name: pluginLabel,
+      content: <PluginSDK />,
+    },
+    {
+      id: "webhooks",
+      name: t("Webhooks:Webhooks"),
+      content: <Webhooks />,
+    },
   ];
 
-  const load = async () => {
-    const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
+  const [currentTab, setCurrentTab] = useState(
+    data.findIndex((item) => location.pathname.includes(item.id))
+  );
 
+  const load = async () => {
     //await loadBaseInfo();
-    setIsLoading(true);
   };
 
   useEffect(() => {
-    load();
+    const path = location.pathname;
+    const currentTab = data.findIndex((item) => path.includes(item.id));
+    if (currentTab !== -1) {
+      setCurrentTab(currentTab);
+    }
   }, []);
 
+  useEffect(() => {
+    ready && startTransition(load);
+  }, [ready]);
+
   const onSelect = (e) => {
-    history.push(
+    navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
@@ -90,19 +116,35 @@ const DeveloperToolsWrapper = (props) => {
     );
   };
 
-  if (!isLoading && !ready) return <AppLoader />;
+  const loaders = [<SSOLoader />, <AppLoader />];
 
   return (
-    <StyledSubmenu data={data} startSelect={currentTab} onSelect={onSelect} />
+    <Suspense fallback={loaders[currentTab] || <AppLoader />}>
+      <StyledSubmenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
+      />
+    </Suspense>
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, auth }) => {
   const { initSettings } = setup;
 
+  const { settingsStore } = auth;
+
   return {
+    currentDeviceType: settingsStore.currentDeviceType,
     loadBaseInfo: async () => {
       await initSettings();
     },
   };
-})(withRouter(observer(DeveloperToolsWrapper)));
+})(observer(DeveloperToolsWrapper));

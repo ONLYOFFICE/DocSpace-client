@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Text from "../text";
 import { NavItem, Label, StyledScrollbar } from "./styled-tabs-container";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 class TabContainer extends Component {
   constructor(props) {
@@ -72,10 +72,13 @@ class TabContainer extends Component {
   }
 
   setTabPosition = (index, currentRef) => {
+    const scrollElement = this.scrollRef.current;
+    if (!scrollElement) return;
+
     const arrayOfWidths = this.getWidthElements(); //get tabs widths
-    const scrollLeft = this.scrollRef.current.getScrollLeft(); // get scroll position relative to left side
-    const staticScroll = this.scrollRef.current.getScrollWidth(); //get static scroll width
-    const containerWidth = this.scrollRef.current.getClientWidth(); //get main container width
+    const scrollLeft = scrollElement.scrollLeft; // get scroll position relative to left side
+    const staticScroll = scrollElement.scrollWidth; //get static scroll width
+    const containerWidth = scrollElement.clientWidth; //get main container width
     const currentTabWidth = currentRef.current.offsetWidth;
     const marginRight = 8;
 
@@ -108,17 +111,20 @@ class TabContainer extends Component {
       const difference = containerWidth - widthBlocksInContainer;
       const currentContainerWidth = currentTabWidth;
 
-      this.scrollRef.current.scrollLeft(
+      scrollElement.scrollTo(
         difference * -1 + currentContainerWidth + marginRight
       );
     }
     //Out of range of left side
     else if (rightFullWidth > staticScroll - scrollLeft) {
-      this.scrollRef.current.scrollLeft(staticScroll - rightFullWidth);
+      scrollElement.scrollTo(staticScroll - rightFullWidth);
     }
   };
 
   setPrimaryTabPosition = (index) => {
+    const scrollElement = this.scrollRef.current;
+    if (!scrollElement) return;
+
     const arrayOfWidths = this.getWidthElements(); //get tabs widths
     const marginRight = 8;
     let rightTabs = this.arrayRefs.length - 1;
@@ -128,8 +134,7 @@ class TabContainer extends Component {
       rightTabs--;
     }
     rightFullWidth -= marginRight;
-    const staticScroll = this.scrollRef.current.getScrollWidth(); //get static scroll width
-    this.scrollRef.current.scrollLeft(staticScroll - rightFullWidth);
+    scrollElement.scrollTo(scrollElement.scrollWidth - rightFullWidth);
   };
 
   onMouseEnter = () => {
@@ -162,6 +167,7 @@ class TabContainer extends Component {
             {elements.map((item, index) => (
               <ColorTheme
                 {...this.props}
+                id={item.id}
                 themeId={ThemeType.TabsContainer}
                 onMouseMove={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
@@ -187,9 +193,9 @@ class TabContainer extends Component {
 TabContainer.propTypes = {
   /** Child elements */
   elements: PropTypes.PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  /** Disable the TabContainer  */
+  /** Disables the TabContainer  */
   isDisabled: PropTypes.bool,
-  /** Triggered when a title is selected */
+  /** Sets a callback function that is triggered when the title is selected */
   onSelect: PropTypes.func,
   /** Selected title of tabs container */
   selectedItem: PropTypes.number,

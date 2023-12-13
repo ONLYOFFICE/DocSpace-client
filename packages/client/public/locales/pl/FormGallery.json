@@ -1,6 +1,10 @@
 {
-  "EmptyScreenDescription": "Sprawdź połączenie z Internetem i odśwież stronę lub spróbuj ponownie później.",
-  "GalleryEmptyScreenDescription": "Wybierz dowolny szablon formularza, aby zobaczyć szczegóły",
-  "GalleryEmptyScreenHeader": "Nie udało się załadować szablonów formularza",
+  "Categories": "Kategorie",
+  "ErrorViewDescription": "Spróbuj ponownie później",
+  "SelectForm": "Wybierz formularz",
+  "SubmitToGalleryBlockBody": "Prześlij swoje szablony, aby udostępnić je społeczności ONLYOFFICE.",
+  "SubmitToGalleryBlockHeader": "Galeria formularzy ONLYOFFICE",
+  "SubmitToGalleryDialogGuideInfo": "Dowiedz się, jak tworzyć idealne formularze i zwiększyć swoje szanse na uzyskanie zgody w naszym <1>guide</1>.",
+  "SubmitToGalleryDialogMainInfo": "Prześlij swój formularz do galerii publicznej, aby umożliwić innym skorzystanie z niego w swojej pracy. Gdy formularz przejdzie moderację, otrzymasz powiadomienie i nagrodę za swój wkład.",
   "TemplateInfo": "Dane szablonu"
 }

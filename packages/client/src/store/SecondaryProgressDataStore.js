@@ -9,6 +9,7 @@ class SecondaryProgressDataStore {
   filesCount = 0;
   itemsSelectionLength = 0;
   itemsSelectionTitle = null;
+  isDownload = false;
 
   secondaryOperationsArray = [];
 
@@ -66,7 +67,7 @@ class SecondaryProgressDataStore {
         this.icon = nextOperation.icon;
         this.alert = nextOperation.alert;
         this.filesCount = nextOperation.filesCount;
-
+        this.isDownload = nextOperation.isDownload;
         return;
       }
     }
@@ -78,6 +79,7 @@ class SecondaryProgressDataStore {
       this.icon = "";
       this.alert = false;
       this.filesCount = 0;
+      this.isDownload = false;
     }
   };
 

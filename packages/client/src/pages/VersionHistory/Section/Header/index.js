@@ -1,10 +1,9 @@
 ﻿import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import { withRouter } from "react-router";
 import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
-import { desktop } from "@docspace/components/utils/device";
+import { desktop, tablet } from "@docspace/components/utils/device";
 
 const StyledContainer = styled.div`
   display: grid;
@@ -12,19 +11,43 @@ const StyledContainer = styled.div`
   align-items: center;
 
   .arrow-button {
-    margin-left: -8px;
-    margin-right: 15px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -8px;
+            margin-left: 15px;
+          `
+        : css`
+            margin-left: -8px;
+            margin-right: 15px;
+          `}
     min-width: 17px;
 
-    @media (max-width: 1024px) {
-      padding: 8px 0 8px 8px;
-      margin-left: -8px;
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
+
+    @media ${tablet} {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 8px 8px 8px 0;
+              margin-right: -8px;
+            `
+          : css`
+              padding: 8px 0 8px 8px;
+              margin-left: -8px;
+            `}
     }
   }
 
   .headline-header {
     @media ${desktop} {
-      margin-left: -9px;
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `margin-right: -9px;`
+          : `margin-left: -9px;`}
     }
   }
 `;

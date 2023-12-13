@@ -9,7 +9,9 @@ export function getSettings(withPassword = false, headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function getPortalCultures() {
@@ -128,6 +130,21 @@ export function setLifetimeAuditSettings(data) {
   });
 }
 
+export function getBruteForceProtection() {
+  return request({
+    method: "get",
+    url: "/settings/security/loginSettings",
+  });
+}
+
+export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
+  return request({
+    method: "put",
+    url: "/settings/security/loginSettings",
+    data: { AttemptCount, BlockTime, CheckPeriod },
+  });
+}
+
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -191,7 +208,9 @@ export function getAppearanceTheme(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function sendAppearanceTheme(data) {
@@ -224,7 +243,9 @@ export function getLogoUrls(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function setWhiteLabelSettings(data) {
@@ -235,6 +256,13 @@ export function setWhiteLabelSettings(data) {
   };
 
   return request(options);
+}
+
+export function getIsDefaultWhiteLabel() {
+  return request({
+    method: "get",
+    url: `/settings/whitelabel/logos/isdefault`,
+  });
 }
 
 export function restoreWhiteLabelSettings(isDefault) {
@@ -384,6 +412,31 @@ export function sendOwnerChange(ownerId) {
   return request({
     method: "post",
     url: `/settings/owner`,
+    data,
+  });
+}
+
+export function dataReassignment(fromUserId, toUserId, deleteProfile) {
+  const data = { fromUserId, toUserId, deleteProfile };
+  return request({
+    method: "post",
+    url: `/people/reassign/start`,
+    data,
+  });
+}
+
+export function dataReassignmentProgress(id) {
+  return request({
+    method: "get",
+    url: `/people/reassign/progress/${id}`,
+  });
+}
+
+export function dataReassignmentTerminate(userId) {
+  const data = { userId };
+  return request({
+    method: "put",
+    url: `/people/reassign/terminate`,
     data,
   });
 }
@@ -705,10 +758,6 @@ export function getMetadata() {
   return axios.get("/sso/metadata");
 }
 
-export function getOforms(url) {
-  return axios.get(url);
-}
-
 export function getStorageRegions() {
   const options = {
     method: "get",
@@ -750,6 +799,93 @@ export function removeActiveSession(eventId) {
     method: "put",
     url: `/security/activeconnections/logout/${eventId}`,
     data: { eventId },
+  });
+}
+
+export function createWebhook(name, uri, secretKey, ssl) {
+  return request({
+    method: "post",
+    url: `/settings/webhook`,
+    data: { name, uri, secretKey, ssl },
+  });
+}
+
+export function getAllWebhooks() {
+  return request({
+    method: "get",
+    url: `/settings/webhook`,
+  });
+}
+
+export function updateWebhook(id, name, uri, secretKey, ssl) {
+  return request({
+    method: "put",
+    url: `/settings/webhook`,
+    data: { id, name, uri, secretKey, ssl },
+  });
+}
+
+export function toggleEnabledWebhook(webhook) {
+  return request({
+    method: "put",
+    url: `/settings/webhook`,
+    data: {
+      id: webhook.id,
+      name: webhook.name,
+      uri: webhook.uri,
+      secretKey: webhook.secretKey,
+      enabled: !webhook.enabled,
+    },
+  });
+}
+
+export function removeWebhook(id) {
+  return request({
+    method: "delete",
+    url: `/settings/webhook/${id}`,
+  });
+}
+
+export function getWebhooksJournal(props) {
+  const {
+    configId,
+    eventId,
+    count,
+    startIndex,
+    deliveryFrom,
+    deliveryTo,
+    groupStatus,
+  } = props;
+
+  const params = {};
+
+  configId && (params.configId = configId);
+  eventId && (params.eventId = eventId);
+  count && (params.count = count);
+  startIndex && (params.startIndex = startIndex);
+  deliveryFrom && (params.deliveryFrom = deliveryFrom);
+  deliveryTo && (params.deliveryTo = deliveryTo);
+  groupStatus && (params.groupStatus = groupStatus);
+
+  return request({
+    method: "get",
+    url: "/settings/webhooks/log?",
+    params,
+  });
+}
+
+export function retryWebhook(webhookId) {
+  return request({
+    method: "put",
+    url: `/settings/webhook/${webhookId}/retry`,
+  });
+}
+
+export function retryWebhooks(webhooksIds) {
+  return request({
+    method: "put",
+    url: `/settings/webhook/retry`,
+    data: { Ids: webhooksIds },
   });
 }
 

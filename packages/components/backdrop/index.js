@@ -30,7 +30,8 @@ class Backdrop extends React.Component {
   }
 
   checkingExistBackdrop = () => {
-    const { visible, isAside, withBackground, withoutBlur } = this.props;
+    const { visible, isAside, withBackground, withoutBlur, withoutBackground } =
+      this.props;
     if (visible) {
       const isTablet = window.innerWidth < 1024;
       const backdrops = document.querySelectorAll(".backdrop-active");
@@ -41,7 +42,7 @@ class Backdrop extends React.Component {
       let needBackground =
         needBackdrop && ((isTablet && !withoutBlur) || withBackground);
 
-      if (isAside && needBackdrop) needBackground = true;
+      if (isAside && needBackdrop && !withoutBackground) needBackground = true;
 
       this.setState({
         needBackdrop: needBackdrop,
@@ -101,7 +102,7 @@ class Backdrop extends React.Component {
 }
 
 Backdrop.propTypes = {
-  /** Display or not */
+  /** Sets visible or hidden */
   visible: PropTypes.bool,
   /** CSS z-index */
   zIndex: PropTypes.number,
@@ -111,8 +112,7 @@ Backdrop.propTypes = {
   id: PropTypes.string,
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** The background is not displayed if the viewport width is less than 1024,
-   * set it to true for display */
+  /** Displays the background. *The background is not displayed if the viewport width is more than 1024 */
   withBackground: PropTypes.bool,
   /** Must be true if used with Aside component */
   isAside: PropTypes.bool,

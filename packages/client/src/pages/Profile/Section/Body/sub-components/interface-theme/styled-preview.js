@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { tablet } from "@docspace/components/utils/device";
 
 export const StyledWrapper = styled.div`
@@ -15,12 +15,20 @@ export const StyledWrapper = styled.div`
   }
 
   .card-header {
-    padding: 12px 20px;
+    padding: 11px 19px;
     border-bottom: ${(props) => props.theme.profile.themePreview.border};
+    line-height: 20px;
   }
 
   .floating-btn {
     bottom: 100px !important;
-    right: 30px !important;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 80px !important;
+          `
+        : css`
+            right: 80px !important;
+          `}
   }
 `;

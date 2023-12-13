@@ -11,7 +11,7 @@ import {
 } from "@docspace/common/api/settings";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -19,7 +19,7 @@ class SettingsSetupStore {
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
-  viewAs = isMobile ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
 
@@ -76,6 +76,10 @@ class SettingsSetupStore {
 
   securityLifetime = [];
 
+  sessionsIsInit = false;
+  sessions = [];
+  currentSession = [];
+
   constructor() {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
@@ -84,15 +88,16 @@ class SettingsSetupStore {
 
   initSettings = async () => {
     if (this.isInit) return;
-    this.isInit = true;
 
     if (authStore.isAuthenticated) {
       await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.tfaStore.getTfaType();
       await authStore.settingsStore.getIpRestrictionsEnable();
       await authStore.settingsStore.getIpRestrictions();
       await authStore.settingsStore.getSessionLifetime();
+      await authStore.settingsStore.getBruteForceProtection();
     }
+
+    this.isInit = true;
   };
 
   setIsLoadingDownloadReport = (state) => {
@@ -314,11 +319,6 @@ class SettingsSetupStore {
     this.setFilter(filterData);
   };
 
-  setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(data);
-    return Promise.resolve(response);
-  };
-
   setLanguageAndTime = async (lng, timeZoneID) => {
     return api.settings.setLanguageAndTime(lng, timeZoneID);
   };
@@ -365,7 +365,7 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const res = await api.settings.getLoginHistoryReport();
-    window.open(res);
+    setTimeout(() => window.open(res), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
@@ -373,7 +373,7 @@ class SettingsSetupStore {
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      window.open(res);
+      setTimeout(() => window.open(res), 100); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
@@ -441,6 +441,18 @@ class SettingsSetupStore {
     return api.settings.sendOwnerChange(id);
   };
 
+  dataReassignment = (fromUserId, toUserId, deleteProfile) => {
+    return api.settings.dataReassignment(fromUserId, toUserId, deleteProfile);
+  };
+
+  dataReassignmentProgress = (id) => {
+    return api.settings.dataReassignmentProgress(id);
+  };
+
+  dataReassignmentTerminate = (userId) => {
+    return api.settings.dataReassignmentTerminate(userId);
+  };
+
   getCommonThirdPartyList = async () => {
     const res = await api.settings.getCommonThirdPartyList();
 
@@ -463,13 +475,22 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  getAllSettings = () => {
-    return api.settings.getSettings();
-  };
-
   setLogoutVisible = (visible) => (this.logoutVisible = visible);
 
   setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
+
+  getSessions = () => {
+    if (this.sessionsIsInit) return;
+    this.getAllSessions().then((res) => {
+      this.setSessions(res.items);
+      this.currentSession = res.loginEvent;
+      this.sessionsIsInit = true;
+    });
+  };
+
+  setSessions = (sessions) => {
+    this.sessions = sessions;
+  };
 }
 
 export default SettingsSetupStore;

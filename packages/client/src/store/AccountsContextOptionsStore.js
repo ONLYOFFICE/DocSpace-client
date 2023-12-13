@@ -14,11 +14,11 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import { makeAutoObservable } from "mobx";
 import toastr from "@docspace/components/toast/toastr";
 
-import history from "@docspace/common/history";
 import { combineUrl } from "@docspace/common/utils";
 import { EmployeeStatus, FilterSubject } from "@docspace/common/constants";
 import { resendUserInvites } from "@docspace/common/api/people";
@@ -29,7 +29,7 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 
-const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/accounts/view/@self");
+const PROFILE_SELF_URL = "/profile";
 
 class AccountsContextOptionsStore {
   authStore = null;
@@ -57,7 +57,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: ProfileReactSvgUrl,
             label: t("Common:Profile"),
-            onClick: this.onProfileClick,
+            onClick: this.peopleStore.profileActionsStore.onProfileClick,
           };
 
         case "change-name":
@@ -74,7 +74,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: ChangeMailReactSvgUrl,
             label: t("PeopleTranslations:EmailChangeButton"),
-            onClick: this.toggleChangeEmailDialog,
+            onClick: () => this.toggleChangeEmailDialog(item),
           };
         case "change-password":
           return {
@@ -115,6 +115,14 @@ class AccountsContextOptionsStore {
             label: t("PeopleTranslations:DisableUserButton"),
             onClick: () => this.onDisableClick(t, item),
           };
+        case "reassign-data":
+          return {
+            id: "option_reassign-data",
+            key: option,
+            icon: ReassignDataReactSvgUrl,
+            label: t("DataReassignmentDialog:ReassignData"),
+            onClick: () => this.toggleDataReassignmentDialog(item),
+          };
         case "delete-personal-data":
           return {
             id: "option_delete-personal-data",
@@ -129,7 +137,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: TrashReactSvgUrl,
             label: t("DeleteProfileEverDialog:DeleteUser"),
-            onClick: () => this.toggleDeleteProfileEverDialog(item),
+            onClick: () => this.toggleDeleteProfileEverDialog([item]),
           };
 
         case "details":
@@ -179,7 +187,7 @@ class AccountsContextOptionsStore {
       hasUsersToRemove,
       hasFreeUsers,
     } = this.peopleStore.selectionStore;
-    const { setSendInviteDialogVisible, setDeleteDialogVisible } =
+    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.peopleStore.dialogStore;
 
     const { isOwner } = this.authStore.userStore.user;
@@ -262,7 +270,7 @@ class AccountsContextOptionsStore {
         key: "cm-delete",
         label: t("Common:Delete"),
         disabled: !hasUsersToRemove,
-        onClick: () => setDeleteDialogVisible(true),
+        onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },
     ];
@@ -303,18 +311,17 @@ class AccountsContextOptionsStore {
     );
   };
 
-  onProfileClick = () => {
-    history.push(PROFILE_SELF_URL);
-  };
-
   toggleChangeNameDialog = () => {
     const { setChangeNameVisible } = this.peopleStore.targetUserStore;
 
     setChangeNameVisible(true);
   };
 
-  toggleChangeEmailDialog = () => {
-    const { setChangeEmailVisible } = this.peopleStore.targetUserStore;
+  toggleChangeEmailDialog = (item) => {
+    const { setDialogData, setChangeEmailVisible } =
+      this.peopleStore.dialogStore;
+
+    setDialogData(item);
     setChangeEmailVisible(true);
   };
 
@@ -358,17 +365,29 @@ class AccountsContextOptionsStore {
   toggleDeleteProfileEverDialog = (item) => {
     const { setDialogData, setDeleteProfileDialogVisible, closeDialogs } =
       this.peopleStore.dialogStore;
-    const { id, displayName, userName } = item;
+
+    closeDialogs();
+
+    setDialogData(item);
+    setDeleteProfileDialogVisible(true);
+  };
+
+  toggleDataReassignmentDialog = (item) => {
+    const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
+      this.peopleStore.dialogStore;
+    const { id, displayName, userName, avatar, statusType } = item;
 
     closeDialogs();
 
     setDialogData({
       id,
+      avatar,
       displayName,
+      statusType,
       userName,
     });
 
-    setDeleteProfileDialogVisible(true);
+    setDataReassignmentDialogVisible(true);
   };
 
   onDetailsClick = (item) => {

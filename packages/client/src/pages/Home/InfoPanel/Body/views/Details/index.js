@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -9,7 +9,7 @@ import Text from "@docspace/components/text";
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
-
+import RoomIcon from "@docspace/components/room-icon";
 const Details = ({
   t,
   selection,
@@ -27,7 +27,7 @@ const Details = ({
   const [isThumbnailError, setIsThumbmailError] = useState(false);
   const onThumbnailError = () => setIsThumbmailError(true);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const detailsHelper = new DetailsHelper({
     isCollaborator,
@@ -35,13 +35,13 @@ const Details = ({
     t,
     item: selection,
     openUser,
-    history,
+    navigate,
     personal,
     culture,
     selectTag,
   });
 
-  useEffect(async () => {
+  const createThumbnailAction = useCallback(async () => {
     setItemProperties(detailsHelper.getPropertyList());
 
     if (
@@ -56,6 +56,10 @@ const Details = ({
     }
   }, [selection]);
 
+  useEffect(() => {
+    createThumbnailAction();
+  }, [selection, createThumbnailAction]);
+
   const currentIcon =
     !selection.isArchive && selection?.logo?.large
       ? selection?.logo?.large
@@ -63,13 +67,16 @@ const Details = ({
 
   //console.log("InfoPanel->Details render", { selection });
 
+  const isLoadedRoomIcon = !!selection.logo?.large;
+  const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
+
   return (
     <>
       {selection.thumbnailUrl && !isThumbnailError ? (
         <StyledThumbnail
           isImageOrMedia={
-            selection?.viewAccessability?.ImageView ||
-            selection?.viewAccessability?.MediaView
+            selection?.viewAccessibility?.ImageView ||
+            selection?.viewAccessibility?.MediaView
           }
         >
           <img
@@ -82,16 +89,26 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          <img
-            className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
-              selection.isRoom &&
-              !selection.isArchive &&
-              selection.logo?.large &&
-              "custom-logo"
-            }`}
-            src={currentIcon}
-            alt="thumbnail-icon-big"
-          />
+          {showDefaultRoomIcon ? (
+            <RoomIcon
+              color={selection.logo.color}
+              title={selection.title}
+              isArchive={selection.isArchive}
+              size="96px"
+              radius="16px"
+            />
+          ) : (
+            <img
+              className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
+                selection.isRoom &&
+                !selection.isArchive &&
+                selection.logo?.large &&
+                "custom-logo"
+              }`}
+              src={currentIcon}
+              alt="thumbnail-icon-big"
+            />
+          )}
         </StyledNoThumbnail>
       )}
 

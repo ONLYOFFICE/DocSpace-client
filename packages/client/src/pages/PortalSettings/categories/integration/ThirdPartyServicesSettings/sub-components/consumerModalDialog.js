@@ -12,12 +12,12 @@ import Link from "@docspace/components/link";
 import toastr from "@docspace/components/toast/toastr";
 import ModalDialogContainer from "./modalDialogContainer";
 import { showLoader, hideLoader } from "@docspace/common/utils";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 const StyledBox = styled(Box)`
   padding: 20px 0 8px;
-  @media ${hugeMobile} {
+  @media ${mobile} {
     padding-top: 0;
   }
 `;
@@ -155,6 +155,7 @@ class ConsumerModalDialog extends React.Component {
     <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
       Detailed instructions in our{" "}
       <Link
+        id="help-center-link"
         color={this.props.theme.client.settings.integration.linkColor}
         isHovered={false}
         target="_blank"
@@ -175,6 +176,7 @@ class ConsumerModalDialog extends React.Component {
         If you still have some questions on how to connect this service or need
         technical assistance, please feel free to contact our{" "}
         <Link
+          id="support-team-link"
           color={this.props.theme.client.settings.integration.linkColor}
           isHovered={false}
           target="_blank"
@@ -187,13 +189,8 @@ class ConsumerModalDialog extends React.Component {
   );
 
   render() {
-    const {
-      selectedConsumer,
-      onModalClose,
-      dialogVisible,
-      isLoading,
-      t,
-    } = this.props;
+    const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
+      this.props;
     const {
       state,
       onChangeHandler,
@@ -208,6 +205,7 @@ class ConsumerModalDialog extends React.Component {
         visible={dialogVisible}
         onClose={onModalClose}
         displayType="aside"
+        withBodyScroll
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
@@ -228,6 +226,7 @@ class ConsumerModalDialog extends React.Component {
                   <Box>
                     <TextInput
                       scale
+                      id={prop.name}
                       name={prop.name}
                       placeholder={prop.title}
                       isAutoFocussed={i === 0}
@@ -249,6 +248,7 @@ class ConsumerModalDialog extends React.Component {
           <Button
             primary
             size="normal"
+            id="enable-button"
             label={isLoading ? t("Common:Sending") : t("Common:Enable")}
             isLoading={isLoading}
             isDisabled={isLoading}
@@ -258,6 +258,7 @@ class ConsumerModalDialog extends React.Component {
           <Button
             size="normal"
             scale
+            id="cancel-button"
             label={t("Common:CancelButton")}
             isLoading={isLoading}
             isDisabled={isLoading}

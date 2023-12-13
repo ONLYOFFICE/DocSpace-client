@@ -6,7 +6,8 @@ function getHorizontalCss(labelWidth) {
     display: flex;
     flex-direction: row;
     align-items: start;
-    margin: ${(props) => props.theme.fieldContainer.horizontal.margin};
+    margin: ${(props) =>
+      props.removeMargin ? 0 : props.theme.fieldContainer.horizontal.margin};
 
     .field-label {
       line-height: ${(props) =>
@@ -29,6 +30,13 @@ function getHorizontalCss(labelWidth) {
         props.theme.fieldContainer.horizontal.iconButton.marginTop};
       margin-left: ${(props) =>
         props.theme.fieldContainer.horizontal.iconButton.marginLeft};
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl" &&
+        css`
+          margin-left: 0;
+          margin-right: ${(props) =>
+            props.theme.fieldContainer.horizontal.iconButton.marginLeft};
+        `}
     }
   `;
 }
@@ -38,7 +46,8 @@ function getVerticalCss() {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: ${(props) => props.theme.fieldContainer.vertical.margin};
+    margin: ${(props) =>
+      props.removeMargin ? 0 : props.theme.fieldContainer.vertical.margin};
 
     .field-label {
       line-height: ${(props) =>
@@ -61,9 +70,9 @@ function getVerticalCss() {
         props.theme.fieldContainer.vertical.iconButton.margin};
       padding: ${(props) =>
         props.theme.fieldContainer.vertical.iconButton.padding};
-      width: ${(props) => props.theme.fieldContainer.vertical.iconButton.width};
-      height: ${(props) =>
-        props.theme.fieldContainer.vertical.iconButton.height};
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
   `;
 }

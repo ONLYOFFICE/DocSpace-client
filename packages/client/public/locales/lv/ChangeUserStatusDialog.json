@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "Iespējots",
-  "ChangeUsersDisableStatus": "atspējots",
-  "ChangeUserStatusDialog": "Lietotāji ar '{{ userStatus }}' statusu tiks {{ status }}.",
-  "ChangeUserStatusDialogHeader": "Mainiet lietotāja statusu",
-  "ChangeUserStatusDialogMessage": "Jūs nevarat mainīt statusu DocSpace īpašnieka un sev."
+  "DisableGeneralDescription": "Ja nepieciešams, vēlāk varat izdzēst vai iespējot atspējotos lietotājus. Ņemiet vērā, ka jūs nevarat atspējot tādus lietotājus kā Īpašnieks un sevi.",
+  "DisableUser": "Atspējot lietotāju",
+  "DisableUserDescription": "Ja atspējosiet šo lietotāju, viņš nevarēs pieteikties DocSpace, kamēr viņa dokumenti un dati paliks neskarti.",
+  "DisableUsers": "Atspējot lietotājus",
+  "DisableUsersDescription": "Ja atspējosiet šos lietotājus, viņi nevarēs pieteikties DocSpace, kamēr viņu dokumenti un dati paliks neskarti.",
+  "EnableUser": "Iespējot lietotāju",
+  "EnableUserDescription": "Ja iespējosiet šo lietotāju, viņš varēs vēlreiz pieteikties DocSpace un piekļūt saviem dokumentiem un datiem.",
+  "EnableUsers": "Iespējot lietotājus",
+  "EnableUsersDescription": "Ja iespējosiet šos lietotājus, viņi varēs vēlreiz pieteikties DocSpace un piekļūt saviem dokumentiem un datiem."
 }

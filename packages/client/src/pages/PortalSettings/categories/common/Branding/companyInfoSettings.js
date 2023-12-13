@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import toastr from "@docspace/components/toast/toastr";
 import FieldContainer from "@docspace/components/field-container";
 import TextInput from "@docspace/components/text-input";
@@ -12,6 +14,7 @@ import Link from "@docspace/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .link {
@@ -26,11 +29,28 @@ const StyledComponent = styled.div`
   }
 
   .text-input {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   .save-cancel-buttons {
     margin-top: 24px;
+    bottom: 0;
+  }
+
+  .description {
+    padding-bottom: 16px;
+  }
+
+  @media ${mobile} {
+    .header {
+      display: none;
+    }
+  }
+
+  @media (max-height: 700px) {
+    .save-cancel-buttons {
+      bottom: auto;
+    }
   }
 `;
 
@@ -49,6 +69,8 @@ const CompanyInfoSettings = (props) => {
     buildVersionInfo,
     personal,
   } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
@@ -59,7 +81,9 @@ const CompanyInfoSettings = (props) => {
   };
 
   const [companySettings, setCompanySettings] = useState({});
-  const [companySettingsError, setCompanySettingsError] = useState(defaultCompanySettingsError);
+  const [companySettingsError, setCompanySettingsError] = useState(
+    defaultCompanySettingsError
+  );
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -74,6 +98,18 @@ const CompanyInfoSettings = (props) => {
   } = companySettingsError;
 
   const link = t("Common:AboutCompanyTitle");
+
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("company-info-settings") &&
+      navigate("/portal-settings/customization/branding");
+  };
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -112,7 +148,9 @@ const CompanyInfoSettings = (props) => {
   }, [isLoading]);
 
   useEffect(() => {
-    const defaultCompanySettings = getFromSessionStorage("defaultCompanySettings");
+    const defaultCompanySettings = getFromSessionStorage(
+      "defaultCompanySettings"
+    );
 
     const newSettings = {
       address: companySettings.address,
@@ -190,7 +228,10 @@ const CompanyInfoSettings = (props) => {
     const companyName = e.target.value;
     validateEmpty(companyName, "companyName");
     setCompanySettings({ ...companySettings, companyName });
-    saveToSessionStorage("companySettings", {...companySettings, companyName });
+    saveToSessionStorage("companySettings", {
+      ...companySettings,
+      companyName,
+    });
   };
 
   const onChangePhone = (e) => {
@@ -406,11 +447,15 @@ const CompanyInfoSettings = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          cancelButtonLabel={t("Common:Restore")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          hasScroll={true}
+          hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
+          additionalClassSaveButton="company-info-save"
+          additionalClassCancelButton="company-info-cancel"
         />
       </StyledComponent>
     </>
@@ -418,7 +463,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { settingsStore } = auth;
+  const { currentQuotaStore, settingsStore } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -435,6 +480,8 @@ export default inject(({ auth, common }) => {
     personal,
   } = settingsStore;
 
+  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
   return {
     getCompanyInfoSettings,
     setCompanyInfoSettings,
@@ -445,6 +492,7 @@ export default inject(({ auth, common }) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    isSettingPaid: isBrandingAndCustomizationAvailable,
   };
 })(
   withLoading(

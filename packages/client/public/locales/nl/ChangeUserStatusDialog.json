@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "Ingeschakeld",
-  "ChangeUsersDisableStatus": "Uitgeschakeld",
-  "ChangeUserStatusDialog": "De gebruikers met de '{{ userStatus }}' status zullen worden {{ status }}.",
-  "ChangeUserStatusDialogHeader": "Wijzig gebruikersstatus",
-  "ChangeUserStatusDialogMessage": "U kunt de status voor de DocSpace-eigenaar en voor uzelf niet veranderen."
+  "DisableGeneralDescription": "U kunt de uitgeschakelde gebruikers later verwijderen of inschakelen als dat nodig is. U kunt gebruikers zoals de Eigenaar en uzelf niet uitschakelen.",
+  "DisableUser": "Gebruiker uitschakelen",
+  "DisableUserDescription": "Als u deze gebruiker uitschakelt, kan hij/zij zich niet meer aanmelden bij DocSpace, terwijl zijn/haar documenten en gegevens intact blijven.",
+  "DisableUsers": "Gebruikers uitschakelen",
+  "DisableUsersDescription": "Als u deze gebruikers uitschakelt, kunnen zij zich niet meer aanmelden bij DocSpace, terwijl hun documenten en gegevens intact blijven.",
+  "EnableUser": "Gebruiker inschakelen",
+  "EnableUserDescription": "Als u deze gebruiker inschakelt, kan hij/zij zich weer aanmelden bij DocSpace en toegang krijgen tot zijn/haar documenten en gegevens.",
+  "EnableUsers": "Gebruikers inschakelen",
+  "EnableUsersDescription": "Als u deze gebruikers inschakelt, kunnen zij zich weer aanmelden bij DocSpace en toegang krijgen tot hun documenten en gegevens."
 }

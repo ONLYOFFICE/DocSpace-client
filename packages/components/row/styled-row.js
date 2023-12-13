@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 
-import { tablet } from "../utils/device";
+import { desktop, mobile, tablet } from "../utils/device";
 import Base from "../themes/base";
 import { isMobile } from "react-device-detect";
+import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
 
 const StyledRow = styled.div`
   cursor: default;
@@ -34,9 +35,12 @@ const StyledRow = styled.div`
   align-items: center;
   align-content: center;
 
-  .row-loader {
+  .row-progress-loader {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 9px;`
+        : `margin-left: 9px;`}
     padding: 0;
-    margin-left: 9px;
     display: flex;
     align-items: center;
     justify-items: center;
@@ -48,8 +52,14 @@ const StyledRow = styled.div`
     css`
       .checkbox {
         display: ${(props) => (props.checked ? "flex" : "none")};
-        margin-left: -4px;
-        padding: 10px 0px 10px 8px;
+
+        padding: ${getCorrectFourValuesStyle(
+          "10px 1px 10px 8px",
+          props.theme.interfaceDirection
+        )};
+        ${props.theme.interfaceDirection === "rtl"
+          ? `margin-right: -4px;`
+          : `margin-left: -4px;`}
       }
 
       .styled-element {
@@ -104,8 +114,16 @@ const StyledCheckbox = styled.div`
 const StyledElement = styled.div`
   flex: 0 0 auto;
   display: flex;
-  margin-right: ${(props) => props.theme.row.element.marginRight};
-  margin-left: ${(props) => props.theme.row.element.marginLeft};
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `
+      margin-left: ${theme.row.element.marginRight};
+      margin-right: ${theme.row.element.marginLeft};
+        `
+      : `
+      margin-right: ${theme.row.element.marginRight};
+      margin-left: ${theme.row.element.marginLeft};
+        `}
   user-select: none;
 
   .react-svg-icon svg {
@@ -118,25 +136,53 @@ const StyledElement = styled.div`
 StyledElement.defaultProps = { theme: Base };
 
 const StyledContentElement = styled.div`
-  margin-top: 6px;
+  margin-top: 0px;
   user-select: none;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 24px;
+        `
+      : css`
+          margin-left: 24px;
+        `}
+
+  :empty, :has(.badges__quickButtons:empty) {
+    display: none;
+  }
 `;
 
 const StyledOptionButton = styled.div`
   display: flex;
   width: ${(props) => props.spacerWidth && props.spacerWidth};
   justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 
   .expandButton > div:first-child {
-    padding: ${(props) => props.theme.row.optionButton.padding};
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle(
+        theme.row.optionButton.padding,
+        theme.interfaceDirection
+      )};
 
-    margin-right: 0px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: 0px;`
+        : `margin-right: 0px;`}
 
-    @media (min-width: 1024px) {
-      margin-right: -1px;
+    @media ${desktop} {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `margin-left: -1px;`
+          : `margin-right: -1px;`}
     }
-    @media (max-width: 516px) {
-      padding-left: 10px;
+    @media ${mobile} {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `padding-right: 10px;`
+          : `padding-left: 10px;`}
     }
   }
 

@@ -1,6 +1,6 @@
 import { mobile } from "@docspace/components/utils/device";
 import React, { forwardRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { formatTime } from "../../helpers";
 
 const PlayerDurationWrapper = styled.div`

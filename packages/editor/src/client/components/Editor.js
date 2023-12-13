@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { isMobile, isIOS, deviceType } from "react-device-detect";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { isMobile, isIOS, deviceType, isMobileOnly } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { FolderType, EDITOR_ID } from "@docspace/common/constants";
 import throttle from "lodash/throttle";
@@ -15,17 +16,18 @@ import {
   convertFile,
   getReferenceData,
   getSharedUsers,
+  getProtectUsers,
   sendEditorNotify,
 } from "@docspace/common/api/files";
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent } from "@docspace/common/utils";
+import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
 import toastr from "@docspace/components/toast/toastr";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import styled from "styled-components";
-import { getEditorTheme } from "../helpers/utils";
+import DeepLink from "./DeepLink";
+import { getDeepLink } from "../helpers/deepLinkHelper";
 
 toast.configure();
 
@@ -55,6 +57,7 @@ const onSDKError = (event) => {
 const ErrorContainerBody = styled(ErrorContainer)`
   position: absolute;
   height: 100%;
+  width: 100%;
 `;
 
 let documentIsReady = false;
@@ -67,6 +70,27 @@ let documentserverUrl =
 let userAccessRights = {};
 let isArchiveFolderRoot = true;
 let usersInRoom = [];
+let isZoom =
+  typeof window !== "undefined" &&
+  (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
+    window?.navigator?.userAgent?.includes("ZoomApps"));
+
+const constructTitle = (firstPart, secondPart, reverse = false) => {
+  return !reverse
+    ? `${firstPart} - ${secondPart}`
+    : `${secondPart} - ${firstPart}`;
+};
+
+const checkIfFirstSymbolInStringIsRtl = (str) => {
+  if (!str) return;
+
+  const rtlRegexp = new RegExp(
+    /[\u04c7-\u0591\u05D0-\u05EA\u05F0-\u05F4\u0600-\u06FF]/
+  );
+
+  return rtlRegexp.test(str[0]);
+};
+
 function Editor({
   config,
   //personal,
@@ -81,8 +105,9 @@ function Editor({
   // isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
-  onSDKRequestMailMergeRecipients,
-  onSDKRequestCompareFile,
+  onSDKRequestSelectSpreadsheet,
+  onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -92,7 +117,12 @@ function Editor({
   fileId,
   url,
   filesSettings,
+  logoUrls,
+  currentColorScheme,
+  portalSettings,
 }) {
+  const [isShowDeepLink, setIsShowDeepLink] = useState(false);
+
   const fileInfo = config?.file;
 
   isArchiveFolderRoot =
@@ -103,6 +133,52 @@ function Editor({
   if (fileInfo) {
     userAccessRights = fileInfo.security;
   }
+
+  useEffect(() => {
+    const androidID = portalSettings?.deepLink?.androidPackageName;
+    const iOSId = portalSettings?.deepLink?.iosPackageId;
+    const deepLinkUrl = portalSettings?.deepLink?.url;
+
+    const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
+    const params = new URLSearchParams(window.location.search);
+    const withoutRedirect = params.get("without_redirect");
+
+    if (
+      isMobileOnly &&
+      !defaultOpenDocument &&
+      androidID &&
+      iOSId &&
+      deepLinkUrl &&
+      !withoutRedirect
+    ) {
+      setIsShowDeepLink(true);
+    }
+
+    if (isMobileOnly && defaultOpenDocument === "app") {
+      const nav = navigator.userAgent;
+      const storeUrl =
+        nav.includes("iPhone;") || nav.includes("iPad;")
+          ? `https://apps.apple.com/app/id${iOSId}`
+          : `https://play.google.com/store/apps/details?id=${androidID}`;
+
+      window.location = getDeepLink(
+        window.location.origin,
+        user.email,
+        fileInfo,
+        deepLinkUrl,
+        window.location.href
+      );
+
+      setTimeout(() => {
+        if (document.hasFocus()) {
+          window.location.replace(storeUrl);
+        } else {
+          history.goBack();
+        }
+      }, 3000);
+    }
+  }, []);
+
   useEffect(() => {
     if (error && mfReady) {
       if (error?.unAuthorized) {
@@ -128,7 +204,7 @@ function Editor({
     if (
       !view &&
       fileInfo &&
-      fileInfo.viewAccessability.WebRestrictedEditing &&
+      fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
@@ -164,7 +240,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.viewAccessability?.Convert &&
+        fileInfo?.viewAccessibility?.MustConvert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -247,7 +323,10 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.viewAccessability?.Convert && fileInfo?.security?.Convert) {
+      if (
+        fileInfo?.viewAccessibility?.MustConvert &&
+        fileInfo?.security?.Convert
+      ) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;
@@ -264,6 +343,33 @@ function Editor({
     );
 
     docEditor.setReferenceData(referenceData);
+  };
+
+  const onSDKRequestOpen = async (event) => {
+    const windowName = event.data.windowName;
+    const reference = event.data;
+
+    try {
+      const data = {
+        fileKey: reference.referenceData ? reference.referenceData.fileKey : "",
+        instanceId: reference.referenceData
+          ? reference.referenceData.instanceId
+          : "",
+        fileId,
+        path: reference.path || "",
+      };
+
+      const result = await getReferenceData(data);
+
+      if (result.error) throw new Error(result.error);
+
+      var link = result.link;
+      window.open(link, windowName);
+    } catch (e) {
+      var winEditor = window.open("", windowName);
+      winEditor.close();
+      docEditor.showMessage(e?.message || t("ErrorConnectionLost"));
+    }
   };
 
   const onMakeActionLink = (event) => {
@@ -496,15 +602,23 @@ function Editor({
     const organizationName = "ONLYOFFICE"; //TODO: Replace to API variant
     const moduleTitle = "Documents"; //TODO: Replace to API variant
 
+    const isSubTitleRtl = checkIfFirstSymbolInStringIsRtl(subTitle);
+    const fileType = config?.document?.fileType;
+
+    // needs to reverse filename and extension for rtl mode
+    if (subTitle && fileType && isSubTitleRtl) {
+      subTitle = `${fileType}.${subTitle.replace(`.${fileType}`, "")}`;
+    }
+
     let title;
     if (subTitle) {
       if (successAuth && moduleTitle) {
-        title = subTitle + " - " + moduleTitle;
+        title = constructTitle(subTitle, moduleTitle, isSubTitleRtl);
       } else {
-        title = subTitle + " - " + organizationName;
+        title = constructTitle(subTitle, organizationName, isSubTitleRtl);
       }
     } else if (moduleTitle && organizationName) {
-      title = moduleTitle + " - " + organizationName;
+      title = constructTitle(moduleTitle, organizationName);
     } else {
       title = organizationName;
     }
@@ -548,22 +662,26 @@ function Editor({
     }
   };
 
-  const onSDKRequestUsers = async () => {
+  const onSDKRequestUsers = async (event) => {
     try {
-      const res = await getSharedUsers(fileInfo.id);
+      const c = event?.data?.c;
+      const users = await (c == "protect"
+        ? getProtectUsers(fileInfo.id)
+        : getSharedUsers(fileInfo.id));
 
-      res.map((item) => {
-        return usersInRoom.push({
+      if (c !== "protect") {
+        usersInRoom = users.map((item) => ({
           email: item.email,
           name: item.name,
-        });
-      });
+        }));
+      }
 
       docEditor.setUsers({
-        users: usersInRoom,
+        c,
+        users,
       });
     } catch (e) {
-      console.error(e);
+      docEditor.showMessage(e?.message || t("ErrorConnectionLost"));
     }
   };
 
@@ -608,11 +726,18 @@ function Editor({
 
   const getBackUrl = () => {
     if (!fileInfo) return;
+    const search = window.location.search;
+    const shareIndex = search.indexOf("share=");
+    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
 
     let backUrl = "";
 
     if (fileInfo.rootFolderType === FolderType.Rooms) {
-      backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
+      if (key) {
+        backUrl = `/rooms/share?key=${key}`;
+      } else {
+        backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
+      }
     } else {
       backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
     }
@@ -684,11 +809,13 @@ function Editor({
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
-        onRequestMailMergeRecipients,
-        onRequestCompareFile,
+        onRequestSelectSpreadsheet,
+        onRequestSelectDocument,
+        onRequestReferenceSource,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
+        onRequestOpen,
         onRequestUsers,
         onRequestSendNotify,
         onRequestCreateNew,
@@ -738,8 +865,9 @@ function Editor({
 
       if (successAuth) {
         onRequestInsertImage = onSDKRequestInsertImage;
-        onRequestMailMergeRecipients = onSDKRequestMailMergeRecipients;
-        onRequestCompareFile = onSDKRequestCompareFile;
+        onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
+        onRequestSelectDocument = onSDKRequestSelectDocument;
+        onRequestReferenceSource = onSDKRequestReferenceSource;
       }
 
       if (userAccessRights.EditHistory) {
@@ -748,6 +876,10 @@ function Editor({
 
       if (!fileInfo?.providerKey) {
         onRequestReferenceData = onSDKRequestReferenceData;
+
+        if (!isZoom) {
+          onRequestOpen = onSDKRequestOpen;
+        }
       }
 
       if (fileInfo?.rootFolderType !== FolderType.USER) {
@@ -762,6 +894,7 @@ function Editor({
       const events = {
         events: {
           onRequestReferenceData,
+          onRequestOpen,
           onAppReady: onSDKAppReady,
           onDocumentStateChange: onDocumentStateChange,
           onMetaChange: onMetaChange,
@@ -774,8 +907,9 @@ function Editor({
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
           onRequestSaveAs,
-          onRequestMailMergeRecipients,
-          onRequestCompareFile,
+          onRequestSelectSpreadsheet,
+          onRequestSelectDocument,
+          onRequestReferenceSource,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,
@@ -813,6 +947,18 @@ function Editor({
         {selectFileDialog}
         {selectFolderDialog}
       </>
+    );
+
+  if (isShowDeepLink)
+    return (
+      <DeepLink
+        fileInfo={fileInfo}
+        logoUrls={logoUrls}
+        userEmail={user.email}
+        setIsShowDeepLink={setIsShowDeepLink}
+        currentColorScheme={currentColorScheme}
+        deepLinkUrl={portalSettings.deepLink.url}
+      />
     );
 
   return (

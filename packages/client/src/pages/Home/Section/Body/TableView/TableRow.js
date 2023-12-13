@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -41,6 +40,8 @@ const FilesTableRow = (props) => {
     isTrashFolder,
     isHighlight,
     hideColumns,
+    onDragOver,
+    onDragLeave,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -50,7 +51,10 @@ const FilesTableRow = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
-      defaultRoomIcon={item.defaultRoomIcon}
+      title={item.title}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
     />
   );
 
@@ -72,13 +76,17 @@ const FilesTableRow = (props) => {
     },
   };
 
-  const onDragOver = (dragActive) => {
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
     if (dragActive !== isDragActive) {
       setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
     setIsDragActive(false);
   };
 
@@ -113,8 +121,8 @@ const FilesTableRow = (props) => {
       onDrop={onDrop}
       onMouseDown={onMouseDown}
       dragging={dragging && isDragging}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
+      onDragOver={onDragOverEvent}
+      onDragLeave={onDragLeaveEvent}
     >
       <StyledTableRow
         className="table-row"
@@ -169,8 +177,9 @@ const FilesTableRow = (props) => {
   );
 };
 
-export default withTranslation(["Files", "Common", "InfoPanel"])(
-  withRouter(
-    withFileActions(withContent(withQuickButtons(withBadges(FilesTableRow))))
-  )
-);
+export default withTranslation([
+  "Files",
+  "Common",
+  "InfoPanel",
+  "Notifications",
+])(withFileActions(withContent(withQuickButtons(withBadges(FilesTableRow)))));

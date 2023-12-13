@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
@@ -21,14 +21,9 @@ import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 
 const RemovePortal = (props) => {
-  const {
-    t,
-    greetingTitle,
-    linkData,
-    history,
-    companyInfoSettingsData,
-  } = props;
+  const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
   const [isRemoved, setIsRemoved] = useState(false);
+  const navigate = useNavigate();
 
   const url = companyInfoSettingsData?.site
     ? companyInfoSettingsData.site
@@ -45,7 +40,7 @@ const RemovePortal = (props) => {
   };
 
   const onCancelClick = () => {
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -101,8 +96,4 @@ export default inject(({ auth }) => ({
   greetingTitle: auth.settingsStore.greetingSettings,
   theme: auth.settingsStore.theme,
   companyInfoSettingsData: auth.settingsStore.companyInfoSettingsData,
-}))(
-  withRouter(
-    withTranslation(["Confirm", "Common"])(withLoader(observer(RemovePortal)))
-  )
-);
+}))(withTranslation(["Confirm", "Common"])(withLoader(observer(RemovePortal))));

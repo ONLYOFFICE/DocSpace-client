@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "1.1.3",
+  "version": "2.0.0",
   "private": true,
   "workspaces": {
     "packages": [
@@ -12,18 +12,20 @@
     "yarn": ">=3"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build",
+    "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build",
     "bump": "yarn version apply --all",
     "clean": "yarn workspaces foreach -vptiR run clean",
     "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/editor}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run start",
+    "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run start",
     "start-prod": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run start-prod",
     "storybook": "yarn workspace @docspace/components storybook",
     "storybook-build": "yarn workspace @docspace/components run storybook-build",
     "storybook-serve": "yarn workspace @docspace/components run storybook-serve",
     "test": "yarn workspace @docspace/components test",
     "wipe": "shx rm -rf node_modules yarn.lock packages/**/node_modules",
-    "debug-info": "auto-changelog --unreleased-only --template debuginfo --output public/debuginfo.md"
+    "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
+    "check-circular": "yarn madge --circular ./packages",
+    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",
@@ -34,10 +36,10 @@
     "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
   },
   "devDependencies": {
-    "auto-changelog": "file:./packages/auto-changelog-2.3.1.tgz",
     "he": "^1.2.0",
-    "shx": "^0.3.3",
-    "terser": "^5.8.0"
+    "madge": "^6.1.0",
+    "shx": "^0.3.4",
+    "terser": "^5.16.6"
   },
   "packageManager": "yarn@3.2.4"
 }

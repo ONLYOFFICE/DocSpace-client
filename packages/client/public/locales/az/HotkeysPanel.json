@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Şəbəkə və siyahı görünüşü arasında keçid edin",
   "HotkeysClearAll": "Bütün seçimləri təmizləyin",
   "HotkeysClose": "Hərəkəti sonlandırın/Ləğv edin",
+  "HotkeysCopySelected": "Seçilmiş elementləri mübadilə buferinə nüsxələyin",
   "HotkeysCreateDocument": "Sənəd yarat",
   "HotkeysCreateFolder": "Qovluq yaradın",
   "HotkeysCreateForm": "Boş forma şablonu yaradın",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Təqdimat yarat",
   "HotkeysCreateSpreadsheet": "Cədvəl yarat",
   "HotkeysCreatingObjects": "Elementlərin yaradılması",
+  "HotkeysCutSelected": "Seçilmiş elementləri mübadilə buferinə kopyalayın",
   "HotkeysEnterKey": "Daxil olun",
   "HotkeysExtendSelectionDown": "Seçimi sağa doğru uzadın",
   "HotkeysExtendSelectionLeft": "Seçimi sola doğru uzadın",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Seçimi dəyişmədən yuxarı hərəkət edin",
   "HotkeysNavigation": "Keçid",
   "HotkeysOpen": "Seçilmiş elementi açın/Hərəkəti təsdiqləyin",
+  "HotkeysPasteSelected": "Seçilmiş elementləri mübadilə buferindən yapışdırın",
   "HotkeysPlayPause": "Başladın/Dayandırın",
   "HotkeysRedoLastUndoneAction": "Sonuncu yerinə yetirilməyən hərəkəti təkrarlayın",
   "HotkeysRemove": "Seçilmiş elementləri silin",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Boşluq",
   "HotkeysUndoLastAction": "Son hərəkəti ləğv edin",
   "HotkeysUploadFile": "Fayl yüklə",
-  "HotkeysUploadingObjects": "Elementlərin yüklənilməsi"
+  "HotkeysUploadingObjects": "Elementlərin yüklənilməsi",
+  "HotkeysZoomIn": "Yaxınlaşdırın",
+  "HotkeysZoomOut": "Uzaqlaşdırın"
 }

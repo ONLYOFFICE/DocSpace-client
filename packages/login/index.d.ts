@@ -35,6 +35,8 @@ declare global {
     size: number;
   };
 
+  type CaptchaPublicKeyType = string | undefined;
+
   interface IEmailValid {
     value: string;
     isValid: boolean;
@@ -60,6 +62,7 @@ declare global {
     version: string;
     standalone: boolean;
     trustedDomains: string[];
+    recaptchaPublicKey: CaptchaPublicKeyType;
   }
 
   interface IBuildInfo {
@@ -85,7 +88,7 @@ declare global {
   type TThemeObj = {
     accent: string;
     buttons: string;
-  }
+  };
 
   interface ITheme {
     id: number;
@@ -105,6 +108,10 @@ declare global {
     message: string | undefined;
   }
 
+  interface ISSOSettings {
+    hideAuthPage: boolean;
+  }
+
   interface IInitialState {
     portalSettings?: IPortalSettings;
     buildInfo?: IBuildInfo;
@@ -112,7 +119,7 @@ declare global {
     capabilities?: ICapabilities;
     match?: MatchType;
     currentColorScheme?: ITheme;
-    isAuth?: boolean;
+    ssoSettings?: ISSOSettings;
     logoUrls: ILogoUrl[];
     error?: IError;
   }
@@ -124,6 +131,8 @@ declare global {
   var PORT: number;
   var IS_PERSONAL: boolean;
   var IS_ROOMS_MODE: boolean;
+  var BROWSER_DETECTOR_URL: string;
+  var CONFIG_URL: string;
 
   type assetsType = { [key: string]: string } | undefined;
 
@@ -165,13 +174,13 @@ declare global {
   type TLogoPath = {
     light: string;
     dark?: string;
-  }
+  };
 
   type TLogoSize = {
     width: number;
     height: number;
     isEmpty: boolean;
-  }
+  };
 
   interface ILogoUrl {
     name: string;

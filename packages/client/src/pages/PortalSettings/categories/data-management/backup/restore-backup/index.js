@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import {
   getBackupStorage,
@@ -10,7 +9,7 @@ import {
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
 import toastr from "@docspace/components/toast/toastr";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
-import { BackupStorageType } from "@docspace/common/constants";
+import { BackupStorageType, DeviceType } from "@docspace/common/constants";
 import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 
@@ -49,7 +48,6 @@ const RestoreBackup = (props) => {
     isEnableRestore,
     setRestoreResource,
     buttonSize,
-    history,
     standalone,
   } = props;
 
@@ -59,18 +57,12 @@ const RestoreBackup = (props) => {
     confirmation: false,
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-  const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] = useState(
-    false
-  );
-  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] = useState(
-    false
-  );
+  const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
+    useState(false);
+  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
+    useState(false);
 
-  useEffect(() => {
-    setDocumentTitle(t("RestoreBackup"));
-  }, []);
-
-  useEffect(async () => {
+  const startRestoreBackup = useCallback(async () => {
     try {
       getProgress(t);
 
@@ -88,7 +80,11 @@ const RestoreBackup = (props) => {
     } catch (error) {
       toastr.error(error);
     }
+  }, []);
 
+  useEffect(() => {
+    setDocumentTitle(t("RestoreBackup"));
+    startRestoreBackup();
     return () => {
       clearProgressInterval();
       setRestoreResource(null);
@@ -148,10 +144,18 @@ const RestoreBackup = (props) => {
         fontWeight="400"
         className="backup_radio-button"
         options={[
-          { value: LOCAL_FILE, label: t("LocalFile") },
-          { value: BACKUP_ROOM, label: t("RoomsModule") },
-          { value: DISK_SPACE, label: t("ThirdPartyResource") },
-          { value: STORAGE_SPACE, label: t("Common:ThirdPartyStorage") },
+          { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
+          { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
+          {
+            id: "third-party-resource",
+            value: DISK_SPACE,
+            label: t("ThirdPartyResource"),
+          },
+          {
+            id: "third-party-storage",
+            value: STORAGE_SPACE,
+            label: t("Common:ThirdPartyStorage"),
+          },
         ]}
         onClick={onChangeRadioButton}
         selected={radioButtonState}
@@ -165,25 +169,9 @@ const RestoreBackup = (props) => {
     <div className="restore-backup_modules">
       {radioButtonState === LOCAL_FILE && <LocalFileModule t={t} />}
 
-      {radioButtonState === BACKUP_ROOM && (
-        <RoomsModule
-          isDisabled={!isEnableRestore}
-          t={t}
-          isPanelVisible={isVisibleSelectFileDialog}
-          onClose={onModalClose}
-          onClickInput={onClickInput}
-          onSelectFile={(file) => setRestoreResource(file.id)}
-        />
-      )}
+      {radioButtonState === BACKUP_ROOM && <RoomsModule />}
       {radioButtonState === DISK_SPACE && (
-        <ThirdPartyResourcesModule
-          t={t}
-          isPanelVisible={isVisibleSelectFileDialog}
-          onClose={onModalClose}
-          onClickInput={onClickInput}
-          onSelectFile={(file) => setRestoreResource(file.id)}
-          buttonSize={buttonSize}
-        />
+        <ThirdPartyResourcesModule buttonSize={buttonSize} />
       )}
       {radioButtonState === STORAGE_SPACE && (
         <ThirdPartyStoragesModule onSetStorageId={onSetStorageId} />
@@ -243,7 +231,6 @@ const RestoreBackup = (props) => {
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
           isNotify={checkboxState.notification}
-          history={history}
         />
       )}
       <Checkbox
@@ -272,7 +259,6 @@ const RestoreBackup = (props) => {
         radioButtonState={radioButtonState}
         isCheckedThirdPartyStorage={radioButtonState === STORAGE_SPACE}
         isCheckedLocalFile={radioButtonState === LOCAL_FILE}
-        history={history}
         t={t}
         buttonSize={buttonSize}
       />
@@ -282,7 +268,7 @@ const RestoreBackup = (props) => {
 
 export default inject(({ auth, backup }) => {
   const { settingsStore, currentQuotaStore } = auth;
-  const { isTabletView, standalone } = settingsStore;
+  const { currentDeviceType, standalone } = settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {
     getProgress,
@@ -293,7 +279,8 @@ export default inject(({ auth, backup }) => {
     setRestoreResource,
   } = backup;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
   return {
     standalone,

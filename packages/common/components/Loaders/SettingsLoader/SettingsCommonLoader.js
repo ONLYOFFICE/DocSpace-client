@@ -1,13 +1,13 @@
 import React from "react";
-import { LoaderStyle } from "../../../constants";
-import RectangleLoader from "../RectangleLoader";
+import { LoaderStyle } from "@docspace/components/utils/constants";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import Box from "@docspace/components/box";
 
 const speed = 2;
 const heightText = "20px";
 const heightRadio = "16px";
-const sectionGap = "16px";
-const sectionsGap = "32px";
+const sectionGap = "12px";
+const sectionsGap = "12px";
 
 const Setting = ({ width = "280px" }) => (
   <Box
@@ -18,7 +18,7 @@ const Setting = ({ width = "280px" }) => (
       alignItems: "center",
     }}
   >
-    <RectangleLoader
+    <RectangleSkeleton
       height={heightRadio}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -27,7 +27,7 @@ const Setting = ({ width = "280px" }) => (
       speed={speed}
       animate={true}
     />
-    <RectangleLoader
+    <RectangleSkeleton
       height={heightText}
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -40,7 +40,7 @@ const Setting = ({ width = "280px" }) => (
 );
 
 const SectionTitle = ({ height = "16", width = "62" }) => (
-  <RectangleLoader
+  <RectangleSkeleton
     height={height}
     width={width}
     backgroundColor={LoaderStyle.backgroundColor}
@@ -68,7 +68,7 @@ const SettingsTabs = () => (
       gridTemplateColumns: "41px 58px",
     }}
   >
-    <RectangleLoader
+    <RectangleSkeleton
       height="32"
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -77,7 +77,7 @@ const SettingsTabs = () => (
       speed={speed}
       animate={true}
     />
-    <RectangleLoader
+    <RectangleSkeleton
       height="32"
       backgroundColor={LoaderStyle.backgroundColor}
       foregroundColor={LoaderStyle.foregroundColor}
@@ -96,10 +96,8 @@ const SettingsCommonLoader = ({ isAdmin = false }) => (
     displayProp="grid"
     style={{ gridGap: sectionsGap }}
   >
-    {isAdmin && <SettingsTabs />}
-    <SettingsSection width1={"281px"} width2={"351px"} withTitle={!isAdmin} />
-    <SettingsSection width1={"103px"} width2={"89px"} />
-    <SettingsSection width1={"650px"} width2={"248px"} />
+    <SettingsSection width1={"225px"} width2={"281px"} withTitle={false} />
+    <SettingsSection width1={"324px"} width2={"351px"} withTitle={false} />
   </Box>
 );
 

@@ -14,7 +14,7 @@ import RadioButtonGroup from "../radio-button-group";
 import TextInput from "../text-input";
 import Textarea from "../textarea";
 //import ContextMenuButton from "../context-menu-button";
-import DatePicker from "../date-picker";
+// import DatePicker from "../date-picker";
 import FieldContainer from "../field-container";
 import Heading from "../heading";
 import Link from "../link";
@@ -165,7 +165,7 @@ while (rowCount != 0) {
 }
 
 export default {
-  title: "Components/All",
+  title: "All",
   parameters: {
     docs: { description: { component: "All components" } },
   },
@@ -174,10 +174,9 @@ const Template = (args) => (
   <>
     <div
       style={{
-        display: "grid",
-        gridGap: 15,
-        //gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))"
-        gridTemplateColumns: "repeat(auto-fill, 300px)",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "25px",
       }}
     >
       <div style={{ justifySelf: "center" }}>
@@ -208,30 +207,29 @@ const Template = (args) => (
           </Link>
         </div>
         <div style={{ padding: "24px 0 8px 0" }}>
-          <Link data-for="group" data-tip={0}>
+          <Link data-tooltip-id="group" data-tooltip-content={0}>
             Bob
           </Link>
           <br />
-          <Link data-for="group" data-tip={1}>
+          <Link data-tooltip-id="group" data-tooltip-content={1}>
             John
           </Link>
           <br />
-          <Link data-for="group" data-tip={2}>
+          <Link data-tooltip-id="group" data-tooltip-content={2}>
             Kevin
           </Link>
           <Tooltip
             id="group"
-            offsetRight={90}
-            getContent={(dataTip) =>
-              dataTip ? (
+            getContent={({ content }) =>
+              content ? (
                 <div>
                   <Text isBold={true} fontSize="16px">
-                    {arrayUsers[dataTip].name}
+                    {arrayUsers[content].name}
                   </Text>
                   <Text color="#A3A9AE" fontSize="13px">
-                    {arrayUsers[dataTip].email}
+                    {arrayUsers[content].email}
                   </Text>
-                  <Text fontSize="13px">{arrayUsers[dataTip].position}</Text>
+                  <Text fontSize="13px">{arrayUsers[content].position}</Text>
                 </div>
               ) : null
             }
@@ -346,7 +344,7 @@ const Template = (args) => (
           </StringValue>
         </div>
 
-        <div style={{ padding: "8px 0" }}>
+        {/* <div style={{ padding: "8px 0" }}>
           <DatePicker
             onChange={(date) => {
               console.log("Selected date", date);
@@ -360,8 +358,11 @@ const Template = (args) => (
             isOpen={false}
             themeColor="#ED7309"
             locale="en"
+            setSelectedDate={(date) => {
+              console.log("Selected date", date);
+            }}
           />
-        </div>
+        </div> */}
 
         <div style={{ padding: "8px 0" }}>
           <StringValue>
@@ -454,7 +455,8 @@ const Template = (args) => (
             openToDate={new Date()}
             minDate={new Date("1970/01/01")}
             maxDate={new Date("3000/01/01")}
-            locale="ru"
+            locale="en"
+            setSelectedDate={(date) => {}}
           />
         </div>
       </div>

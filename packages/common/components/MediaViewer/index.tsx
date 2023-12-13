@@ -19,18 +19,20 @@ import {
 } from "./helpers";
 import { getFileExtension } from "@docspace/common/utils";
 
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
-import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import {
+  getDesktopMediaContextModel,
+  getMobileMediaContextModel,
+  getPDFContextModel,
+} from "./helpers/contextModel";
+
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
 
 function MediaViewer({
   playlistPos,
   nextMedia,
   prevMedia,
+  pluginContextMenuItems,
+  setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
@@ -144,103 +146,103 @@ function MediaViewer({
   const getContextModel = () => {
     const {
       t,
+      onClickDownloadAs,
+      onClickLinkEdit,
       onClickDownload,
+      onPreviewClick,
       onClickRename,
       onClickDelete,
       onShowInfoPanel,
       onMoveAction,
       onCopyAction,
       onDuplicate,
+      onCopyLink,
     } = props;
 
     if (!targetFile) return [];
 
-    const desktopModel = [
+    const desktopModel = getDesktopMediaContextModel(
+      t,
+      targetFile,
+      archiveRoom,
       {
-        key: "download",
-        label: t("Common:Download"),
-        icon: DownloadReactSvgUrl,
-        onClick: () => onClickDownload(targetFile, t),
-        disabled: false,
-      },
-      {
-        key: "rename",
-        label: t("Common:Rename"),
-        icon: RenameReactSvgUrl,
-        onClick: () => onClickRename(targetFile),
-        disabled: archiveRoom,
-      },
-      {
-        key: "delete",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
-        onClick: () => onClickDelete(targetFile, t),
-        disabled: archiveRoom,
-      },
-    ];
+        onClickDownload,
+        onClickRename,
+        onClickDelete,
+      }
+    );
 
-    const model = [
-      {
-        id: "option_room-info",
-        key: "room-info",
-        label: t("Common:Info"),
-        icon: InfoOutlineReactSvgUrl,
-        onClick: () => {
-          return onShowInfoPanel(targetFile);
-        },
-        disabled: false,
-      },
-      {
-        key: "download",
-        label: t("Common:Download"),
-        icon: DownloadReactSvgUrl,
-        onClick: () => onClickDownload(targetFile, t),
-        disabled: false,
-      },
-      {
-        key: "move-to",
-        label: t("Common:MoveTo"),
-        icon: MoveReactSvgUrl,
-        onClick: onMoveAction,
-        disabled: !targetFile.security.Move,
-      },
-      {
-        id: "option_copy-to",
-        key: "copy-to",
-        label: t("Common:Copy"),
-        icon: CopyReactSvgUrl,
-        onClick: onCopyAction,
-        disabled: !targetFile.security.Copy,
-      },
-      {
-        id: "option_create-copy",
-        key: "copy",
-        label: t("Common:Duplicate"),
-        icon: DuplicateReactSvgUrl,
-        onClick: () => onDuplicate(targetFile, t),
-        disabled: !targetFile.security.Duplicate,
-      },
-      {
-        key: "rename",
-        label: t("Common:Rename"),
-        icon: RenameReactSvgUrl,
-        onClick: () => onClickRename(targetFile),
-        disabled: !targetFile.security.Rename,
-      },
+    const model = getMobileMediaContextModel(t, targetFile, {
+      onShowInfoPanel,
+      onClickDownload,
+      onMoveAction,
+      onCopyAction,
+      onDuplicate,
+      onClickRename,
+      onClickDelete,
+    });
 
-      {
-        key: "separator0",
+    if (isPdf)
+      return getPDFContextModel(t, targetFile, {
+        onClickDownloadAs,
+        onMoveAction,
+        onCopyAction,
+        onClickRename,
+        onDuplicate,
+        onClickDelete,
+        onClickDownload,
+        onClickLinkEdit,
+        onPreviewClick,
+        onCopyLink,
+      });
+
+    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
+      model.unshift({
+        key: "separator-plugin",
         isSeparator: true,
-        disabled: !targetFile.security.Delete,
-      },
-      {
-        key: "delete",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
-        onClick: () => onClickDelete(targetFile, t),
-        disabled: !targetFile.security.Delete,
-      },
-    ];
+        disabled: false,
+      });
+
+      pluginContextMenuItems.forEach((item) => {
+        const onClick = async (): Promise<void> => {
+          props.onClose();
+
+          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+
+          await item.value.onClick(targetFile.id);
+
+          if (item.value.withActiveItem) setActiveFiles([]);
+        };
+
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("image") &&
+          !targetFile.viewAccessibility.ImageView
+        )
+          return;
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("video") &&
+          !targetFile.viewAccessibility.MediaView
+        )
+          return;
+
+        model.unshift({
+          id: item.key,
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+
+        desktopModel.unshift({
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+      });
+    }
 
     return isMobile
       ? model
@@ -276,8 +278,9 @@ function MediaViewer({
   const onDelete = () => {
     const { playlist, onDelete } = props;
 
-    let currentFileId = playlist.find((file) => file.id === playlistPos)
-      ?.fileId;
+    let currentFileId = playlist.find(
+      (file) => file.id === playlistPos
+    )?.fileId;
 
     if (currentFileId === lastRemovedFileId) return;
 
@@ -294,15 +297,20 @@ function MediaViewer({
   const onDownload = () => {
     const { playlist, onDownload } = props;
 
-    let currentFileId = playlist.find((file) => file.id === playlistPos)
-      ?.fileId;
+    if (!targetFile?.security.Download) return;
+
+    let currentFileId = playlist.find(
+      (file) => file.id === playlistPos
+    )?.fileId;
 
     if (!isNullOrUndefined(currentFileId)) onDownload(currentFileId);
   };
 
   const onKeydown = (event: KeyboardEvent) => {
     const { code, ctrlKey } = event;
-    if (props.deleteDialogVisible) return;
+
+    const someDialogIsOpen = checkDialogsOpen();
+    if (props.deleteDialogVisible || someDialogIsOpen) return;
 
     if (code in KeyboardEventKeys) {
       const includesKeyboardCode = [
@@ -386,6 +394,7 @@ function MediaViewer({
   let isAudio = false;
   let canOpen = true;
   let isImage = false;
+  let isPdf = false;
 
   const archiveRoom =
     props.archiveRoomsId === targetFile?.rootFolderId ||
@@ -400,18 +409,23 @@ function MediaViewer({
     isImage = true;
   } else {
     isImage = false;
+
     isVideo = mapSupplied[ext]
       ? mapSupplied[ext]?.type == mediaTypes.video
       : false;
+
     isAudio = mapSupplied[ext]
       ? mapSupplied[ext]?.type == mediaTypes.audio
       : false;
+
+    isPdf = mapSupplied[ext] ? mapSupplied[ext]?.type == mediaTypes.pdf : false;
   }
 
   return (
     <>
       {canOpen && (
         <ViewerWrapper
+          targetFile={targetFile}
           userAccess={props.userAccess}
           visible={props.visible}
           title={title}
@@ -429,6 +443,7 @@ function MediaViewer({
           isImage={isImage}
           isAudio={isAudio}
           isVideo={isVideo}
+          isPdf={isPdf}
           isPreviewFile={props.isPreviewFile}
           onDownloadClick={onDownload}
           archiveRoom={archiveRoom}

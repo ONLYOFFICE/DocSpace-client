@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
+import { mobile } from "../utils/device";
 
 const StyledPaging = styled.div`
   display: flex;
@@ -7,15 +8,27 @@ const StyledPaging = styled.div`
   justify-content: flex-start;
 
   & > button {
-    margin-right: ${(props) => props.theme.paging.button.marginRight};
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: ${theme.paging.button.marginRight};`
+        : `margin-right: ${theme.paging.button.marginRight};`}
+
     max-width: ${(props) => props.theme.paging.button.maxWidth};
   }
 `;
 StyledPaging.defaultProps = { theme: Base };
 
 const StyledOnPage = styled.div`
-  margin-left: ${(props) => props.theme.paging.comboBox.marginLeft};
-  margin-right: ${(props) => props.theme.paging.comboBox.marginRight};
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `
+        margin-right: ${theme.paging.comboBox.marginLeft};
+        margin-left: ${theme.paging.comboBox.marginRight};
+      `
+      : `
+        margin-left: ${theme.paging.comboBox.marginLeft};
+        margin-right: ${theme.paging.comboBox.marginRight};
+      `}
 
   .hideDisabled {
     div[disabled] {
@@ -23,14 +36,17 @@ const StyledOnPage = styled.div`
     }
   }
 
-  @media (max-width: 450px) {
+  @media ${mobile} {
     display: none;
   }
 `;
 StyledOnPage.defaultProps = { theme: Base };
 
 const StyledPage = styled.div`
-  margin-right: ${(props) => props.theme.paging.page.marginRight};
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `margin-left: ${theme.paging.page.marginRight};`
+      : `margin-right: ${theme.paging.page.marginRight};`}
 
   .manualWidth {
     .dropdown-container {

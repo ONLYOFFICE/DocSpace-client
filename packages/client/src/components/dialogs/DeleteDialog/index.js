@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router";
 import ModalDialog from "@docspace/components/modal-dialog";
 import { StyledDeleteDialog } from "./StyledDeleteDialog";
 import Button from "@docspace/components/button";
@@ -14,6 +13,7 @@ const DeleteDialogComponent = (props) => {
     deleteAction,
     unsubscribeAction,
     setBufferSelection,
+    setSelected,
     setRemoveMediaItem,
     setDeleteDialogVisible,
     visible,
@@ -57,6 +57,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDelete = () => {
+    setSelected("none");
     onClose();
 
     const translations = {
@@ -73,6 +74,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onUnsubscribe = () => {
+    setSelected("none");
     onClose();
 
     if (!selection.length) return;
@@ -96,6 +98,7 @@ const DeleteDialogComponent = (props) => {
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
 
+    setSelected("none");
     onClose();
 
     const itemsIdDeleteHaveRights = selection
@@ -128,27 +131,69 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRecycleBinFolder) {
-      return isSingle
-        ? isFolder
-          ? t("DeleteFolder")
-          : t("DeleteFile")
-        : t("DeleteItems");
+      return isSingle ? (
+        isFolder ? (
+          t("DeleteFolder")
+        ) : (
+          <>
+            <>{t("DeleteFile")} </>
+            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:WantToContinue")}</>
+          </>
+        )
+      ) : (
+        <>
+          <>{t("DeleteItems")} </>
+          <>{t("ItemsPermanentlyDeleted")} </>
+          <>{t("Common:WantToContinue")}</>
+        </>
+      );
     }
 
     if (isPersonalRoom) {
-      return isSingle
-        ? isFolder
-          ? t("MoveToTrashFolderFromPersonal")
-          : t("DeleteFile")
-        : t("DeleteItems");
+      return isSingle ? (
+        isFolder ? (
+          <>
+            <>{t("DeleteFolder")} </>
+            <>{t("FolderPermanentlyDeleted")} </>
+            <>{t("Common:WantToContinue")}</>
+          </>
+        ) : (
+          <>
+            <>{t("DeleteFile")} </>
+            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:WantToContinue")}</>
+          </>
+        )
+      ) : (
+        <>
+          <>{t("DeleteItems")} </>
+          <>{t("ItemsPermanentlyDeleted")} </>
+          <>{t("Common:WantToContinue")}</>
+        </>
+      );
     }
 
     if (isRoom) {
-      return isSingle
-        ? isFolder
-          ? t("MoveToTrashFolder")
-          : t("MoveToTrashFile")
-        : t("MoveToTrashItems");
+      return isSingle ? (
+        isFolder ? (
+          <>
+            <>{t("DeleteFolder")} </>
+            <>{t("DeleteSharedNote")} </>
+            <>{t("FolderPermanentlyDeleted")} </>
+            <>{t("Common:WantToContinue")}</>
+          </>
+        ) : (
+          t("MoveToTrashFile")
+        )
+      ) : (
+        <>
+          <>{t("DeleteItems")} </>
+          <>{t("DeleteItemsSharedNote")} </>
+          <>{t("ItemsPermanentlyDeleted")} </>
+          <>{t("Common:WantToContinue")}</>
+        </>
+      );
     }
   };
 
@@ -220,8 +265,13 @@ const DeleteDialog = withTranslation([
 
 export default inject(
   ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore, auth }) => {
-    const { selection, isLoading, bufferSelection, setBufferSelection } =
-      filesStore;
+    const {
+      selection,
+      isLoading,
+      bufferSelection,
+      setBufferSelection,
+      setSelected,
+    } = filesStore;
     const { deleteAction, unsubscribeAction, deleteRoomsAction } =
       filesActionsStore;
     const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
@@ -255,6 +305,7 @@ export default inject(
 
       setRemoveMediaItem,
       setBufferSelection,
+      setSelected,
 
       isRoomDelete,
       setIsRoomDelete,
@@ -263,4 +314,4 @@ export default inject(
       isRoom,
     };
   }
-)(withRouter(observer(DeleteDialog)));
+)(observer(DeleteDialog));

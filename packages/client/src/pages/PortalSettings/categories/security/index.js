@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Submenu from "@docspace/components/submenu";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
@@ -13,13 +13,13 @@ import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loade
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
-
-import { isMobile } from "react-device-detect";
+import { DeviceType } from "@docspace/common/constants/index.js";
 
 const SecurityWrapper = (props) => {
-  const { t, history, loadBaseInfo, resetIsInit } = props;
+  const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
   const [currentTab, setCurrentTab] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const data = [
     {
@@ -60,7 +60,7 @@ const SecurityWrapper = (props) => {
   }, []);
 
   const onSelect = (e) => {
-    history.push(
+    navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
@@ -71,7 +71,7 @@ const SecurityWrapper = (props) => {
 
   if (!isLoading)
     return currentTab === 0 ? (
-      isMobile ? (
+      currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />
       ) : (
         <SecurityLoader />
@@ -84,11 +84,18 @@ const SecurityWrapper = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
     />
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ auth, setup }) => {
   const { initSettings, resetIsInit } = setup;
 
   return {
@@ -96,7 +103,6 @@ export default inject(({ setup }) => {
       await initSettings();
     },
     resetIsInit,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
-})(
-  withTranslation(["Settings", "Common"])(withRouter(observer(SecurityWrapper)))
-);
+})(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

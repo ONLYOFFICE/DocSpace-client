@@ -56,7 +56,10 @@ class FileInput extends Component {
       id,
       onInput, // eslint-disable-line no-unused-vars
       buttonLabel,
+      idButton,
       isLoading,
+      fromStorage = false,
+      path,
       ...rest
     } = this.props;
 
@@ -86,11 +89,13 @@ class FileInput extends Component {
         break;
     }
 
+    const onClickProp = fromStorage ? { onClick: rest.onClick } : {};
+
     return (
       <Dropzone
         onDrop={this.onDrop}
-        {...(accept && { accept: [accept] })}
         noClick={isDisabled || isLoading}
+        accept={accept}
       >
         {({ getRootProps, getInputProps }) => (
           <StyledFileInput
@@ -98,6 +103,7 @@ class FileInput extends Component {
             scale={scale ? 1 : 0}
             hasError={hasError}
             hasWarning={hasWarning}
+            id={idButton}
             isDisabled={isDisabled}
             {...rest}
             {...getRootProps()}
@@ -106,20 +112,23 @@ class FileInput extends Component {
               isReadOnly
               className="text-input"
               placeholder={placeholder}
-              value={fileName}
+              value={fromStorage ? path : fileName}
               size={size}
               isDisabled={isDisabled || isLoading}
               hasError={hasError}
               hasWarning={hasWarning}
               scale={scale}
+              {...onClickProp}
             />
-            <input
-              type="file"
-              id={id}
-              ref={this.inputRef}
-              style={{ display: "none" }}
-              {...getInputProps()}
-            />
+            {!fromStorage && (
+              <input
+                type="file"
+                id={id}
+                ref={this.inputRef}
+                style={{ display: "none" }}
+                {...getInputProps()}
+              />
+            )}
 
             {buttonLabel ? (
               <Button
@@ -128,7 +137,7 @@ class FileInput extends Component {
                 size={buttonSize}
               />
             ) : (
-              <div className="icon">
+              <div className="icon" {...onClickProp}>
                 {isLoading ? (
                   <Loader className="loader" size="20px" type="track" />
                 ) : (
@@ -156,13 +165,13 @@ FileInput.propTypes = {
   placeholder: PropTypes.string,
   /** Supported size of the input fields */
   size: PropTypes.oneOf(["base", "middle", "big", "huge", "large"]),
-  /** Indicates the input field has scale */
+  /** Indicates that the input field has scale */
   scale: PropTypes.bool,
   /** Accepts class */
   className: PropTypes.string,
-  /** Indicates the input field has an error */
+  /** Indicates that the input field has an error */
   hasError: PropTypes.bool,
-  /** Indicates the input field has a warning */
+  /** Indicates that the input field has a warning */
   hasWarning: PropTypes.bool,
   /** Used as HTML `id` property */
   id: PropTypes.string,
@@ -174,9 +183,9 @@ FileInput.propTypes = {
   name: PropTypes.string,
   /** Called when a file is selected */
   onInput: PropTypes.func,
-  /**Specifies files visible for upload */
+  /** Specifies the files visible for upload */
   accept: PropTypes.string,
-  /**Specifies label for upload button */
+  /** Specifies the label for the upload button */
   buttonLabel: PropTypes.string,
 };
 

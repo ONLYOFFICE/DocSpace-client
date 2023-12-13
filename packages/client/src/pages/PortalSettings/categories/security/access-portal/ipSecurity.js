@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 import toastr from "@docspace/components/toast/toastr";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -12,11 +13,16 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
+
+  .ip-security_warning {
+    max-width: 700px;
+  }
 
   .page-subtitle {
     margin-bottom: 10px;
@@ -42,14 +48,19 @@ const MainContainer = styled.div`
 const IpSecurity = (props) => {
   const {
     t,
-    history,
     ipRestrictionEnable,
     setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
     initSettings,
     isInit,
+    ipSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = props;
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; //check ip valid
 
@@ -109,9 +120,9 @@ const IpSecurity = (props) => {
   }, [enable, ips]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
-      history.location.pathname.includes("ip") &&
-      history.push("/portal-settings/security/access-portal");
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("ip") &&
+      navigate("/portal-settings/security/access-portal");
   };
 
   const onSelectType = (e) => {
@@ -154,7 +165,7 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
-        ips: ipsObjectArr,
+        ips: ips,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -172,14 +183,25 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <IpSecurityLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text className="page-subtitle">{t("IPSecurityHelper")}</Text>
+        <Text className="page-subtitle">
+          {t("IPSecuritySettingDescription")}
+        </Text>
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main.accent}
+          target="_blank"
+          isHovered
+          href={ipSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -191,10 +213,12 @@ const IpSecurity = (props) => {
         spacing="8px"
         options={[
           {
+            id: "ip-security-disabled",
             label: t("Disabled"),
             value: "disabled",
           },
           {
+            id: "ip-security-enable",
             label: t("Common:Enable"),
             value: "enable",
           },
@@ -212,6 +236,7 @@ const IpSecurity = (props) => {
           onDeleteInput={onDeleteInput}
           onClickAdd={onClickAdd}
           regexp={regexp}
+          classNameAdditional="add-allowed-ip-address"
         />
       )}
 
@@ -225,7 +250,9 @@ const IpSecurity = (props) => {
           >
             {t("Common:Warning")}!
           </Text>
-          <Text>{t("IPSecurityWarningHelper")}</Text>
+          <Text className="ip-security_warning">
+            {t("IPSecurityWarningHelper")}
+          </Text>
         </>
       )}
 
@@ -234,12 +261,14 @@ const IpSecurity = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
         hasScroll={false}
         isSaving={isSaving}
+        additionalClassSaveButton="ip-security-save"
+        additionalClassCancelButton="ip-security-cancel"
       />
     </MainContainer>
   );
@@ -251,6 +280,9 @@ export default inject(({ auth, setup }) => {
     setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
+    ipSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -262,5 +294,8 @@ export default inject(({ auth, setup }) => {
     setIpRestrictions,
     initSettings,
     isInit,
+    ipSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   };
-})(withTranslation(["Settings", "Common"])(withRouter(observer(IpSecurity))));
+})(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

@@ -1,31 +1,33 @@
 import React from "react";
-import Backdrop from "@docspace/components/backdrop";
-import Button from "@docspace/components/button";
+import { inject, observer } from "mobx-react";
+import { I18nextProvider } from "react-i18next";
+import { isMobileOnly } from "react-device-detect";
+import { withTranslation, Trans } from "react-i18next";
 
 import Aside from "@docspace/components/aside";
-import SaveCancelButton from "@docspace/components/save-cancel-buttons";
-import { withTranslation, Trans } from "react-i18next";
+import Backdrop from "@docspace/components/backdrop";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
-import { StyledAsidePanel } from "../StyledPanels";
-import { AddUsersPanel, EmbeddingPanel } from "../index";
-import { inject, observer } from "mobx-react";
-import config from "PACKAGE_FILE";
-import i18n from "./i18n";
-import { I18nextProvider } from "react-i18next";
-import { isMobile, isMobileOnly } from "react-device-detect";
-import Loaders from "@docspace/common/components/Loaders";
-import withLoader from "../../../HOCs/withLoader";
 import ModalDialog from "@docspace/components/modal-dialog";
-import EmbeddingBody from "../EmbeddingPanel/EmbeddingBody";
+import SaveCancelButton from "@docspace/components/save-cancel-buttons";
 
-import { StyledContent, StyledModalFooter } from "./StyledSharingPanel";
-
-import Header from "./Header";
-import Body from "./Body";
-import Footer from "./Footer";
+import Loaders from "@docspace/common/components/Loaders";
+import { ShareAccessRights } from "@docspace/common/constants";
 import SharingPanelLoader from "@docspace/common/components/Loaders/SharingPanelLoader";
 import SharingPanelLoaderModal from "@docspace/common/components/Loaders/SharingPanelLoader/modal";
+
+import config from "PACKAGE_FILE";
+
+import i18n from "./i18n";
+import Body from "./Body";
+import Header from "./Header";
+import Footer from "./Footer";
+import { StyledContent, StyledModalFooter } from "./StyledSharingPanel";
+
+import { StyledAsidePanel } from "../StyledPanels";
+import AddUsersPanel from "../AddUsersPanel";
+import EmbeddingPanel from "../EmbeddingPanel";
+import EmbeddingBody from "../EmbeddingPanel/EmbeddingBody";
+import withLoader from "../../../HOCs/withLoader";
 
 // const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -430,11 +432,8 @@ class SharingPanelComponent extends React.Component {
   }
 
   onKeyPress = (event) => {
-    const {
-      showAddUsersPanel,
-      showEmbeddingPanel,
-      showChangeOwnerPanel,
-    } = this.state;
+    const { showAddUsersPanel, showEmbeddingPanel, showChangeOwnerPanel } =
+      this.state;
     if (showAddUsersPanel || showEmbeddingPanel || showChangeOwnerPanel) return;
     if (event.key === "Esc" || event.key === "Escape") {
       this.onClose();
@@ -450,7 +449,7 @@ class SharingPanelComponent extends React.Component {
     }
 
     if (this.state.message === prevState.message && this.scrollRef.current) {
-      this.scrollRef.current.view.focus();
+      this.scrollRef.current.contentElement.focus();
     }
   }
 
@@ -833,11 +832,8 @@ const SharingPanel = inject(
       setIsFolderActions,
       isFolderActions,
     } = dialogsStore;
-    const {
-      selectedUploadFile,
-      selectUploadedFile,
-      updateUploadedItem,
-    } = uploadDataStore;
+    const { selectedUploadFile, selectUploadedFile, updateUploadedItem } =
+      uploadDataStore;
 
     const isShared =
       selection.length > 0 && selection[0].shared

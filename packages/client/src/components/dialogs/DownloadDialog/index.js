@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledDownloadDialog } from "./StyledDownloadDialog";
@@ -12,13 +11,8 @@ import DownloadContent from "./DownloadContent";
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      documents,
-      spreadsheets,
-      presentations,
-      masterForms,
-      other,
-    } = this.props.sortedFiles;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.props.sortedFiles;
 
     this.state = {
       documents: {
@@ -99,13 +93,15 @@ class DownloadDialogComponent extends React.Component {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
         window.open(viewUrl, "_self");
       }
+      this.props.setSelected("none");
       this.onClose();
     } else if (fileConvertIds.length || folderIds.length) {
-      this.onClose();
       downloadFiles(fileConvertIds, folderIds, {
         label: t("Translations:ArchivingData"),
         error: t("Common:ErrorInternalServer"),
       });
+      this.props.setSelected("none");
+      this.onClose();
     }
   };
 
@@ -131,7 +127,7 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onSelectFormat = (e) => {
-    const { format, type, fileId } = e.target.dataset;
+    const { format, type, fileId } = e.currentTarget.dataset;
     const files = this.state[type].files;
 
     this.setState((prevState) => {
@@ -372,6 +368,7 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Footer>
           <Button
             key="DownloadButton"
+            className="download-button"
             label={t("Common:Download")}
             size="normal"
             primary
@@ -381,6 +378,7 @@ class DownloadDialogComponent extends React.Component {
           />
           <Button
             key="CancelButton"
+            className="cancel-button"
             label={t("Common:CancelButton")}
             size="normal"
             onClick={this.onClose}
@@ -400,14 +398,12 @@ const DownloadDialog = withTranslation([
 
 export default inject(
   ({ auth, filesStore, dialogsStore, filesActionsStore, settingsStore }) => {
-    const { sortedFiles } = filesStore;
+    const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = settingsStore;
     const { theme } = auth.settingsStore;
 
-    const {
-      downloadDialogVisible: visible,
-      setDownloadDialogVisible,
-    } = dialogsStore;
+    const { downloadDialogVisible: visible, setDownloadDialogVisible } =
+      dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
 
@@ -417,9 +413,10 @@ export default inject(
       extsConvertible,
 
       setDownloadDialogVisible,
+      setSelected,
       downloadFiles,
 
       theme,
     };
   }
-)(withRouter(observer(DownloadDialog)));
+)(observer(DownloadDialog));

@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
-import { hugeMobile } from "@docspace/components/utils/device";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   display: flex;
@@ -12,7 +11,7 @@ const StyledLoader = styled.div`
     height: 22px;
     margin-bottom: 8px;
 
-    @media (${hugeMobile}) {
+    @media ${mobile} {
       width: 171px;
     }
   }
@@ -22,7 +21,7 @@ const StyledLoader = styled.div`
     height: 16px;
     margin-bottom: 16px;
 
-    @media (${hugeMobile}) {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -43,12 +42,12 @@ const DeleteDataLoader = () => {
   return (
     <StyledLoader>
       <div className="submenu">
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
       </div>
-      <Loaders.Rectangle className="header" />
-      <Loaders.Rectangle className="subheader" />
-      <Loaders.Rectangle className="body" height="100px" />
+      <RectangleSkeleton className="header" />
+      <RectangleSkeleton className="subheader" />
+      <RectangleSkeleton className="body" height="100px" />
     </StyledLoader>
   );
 };

@@ -11,8 +11,11 @@ class DialogStore {
   changeUserStatusDialogVisible = false;
   disableDialogVisible = false;
   sendInviteDialogVisible = false;
-  deleteDialogVisible = false;
   resetAuthDialogVisible = false;
+  dataReassignmentDialogVisible = false;
+  dataReassignmentDeleteProfile = false;
+  isDeletingUserWithReassignment = false;
+  changeEmailVisible = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -28,6 +31,14 @@ class DialogStore {
 
   setDeleteProfileDialogVisible = (visible) => {
     this.deleteProfileEver = visible;
+  };
+
+  setDataReassignmentDeleteProfile = (dataReassignmentDeleteProfile) => {
+    this.dataReassignmentDeleteProfile = dataReassignmentDeleteProfile;
+  };
+
+  setIsDeletingUserWithReassignment = (isDeletingUserWithReassignment) => {
+    this.isDeletingUserWithReassignment = isDeletingUserWithReassignment;
   };
 
   setDialogData = (data) => {
@@ -46,12 +57,16 @@ class DialogStore {
     this.sendInviteDialogVisible = visible;
   };
 
-  setDeleteDialogVisible = (visible) => {
-    this.deleteDialogVisible = visible;
-  };
-
   setResetAuthDialogVisible = (visible) => {
     this.resetAuthDialogVisible = visible;
+  };
+
+  setDataReassignmentDialogVisible = (visible) => {
+    this.dataReassignmentDialogVisible = visible;
+  };
+
+  setChangeEmailVisible = (visible) => {
+    this.changeEmailVisible = visible;
   };
 
   closeDialogs = () => {
@@ -64,8 +79,9 @@ class DialogStore {
     this.setChangeUserStatusDialogVisible(false);
 
     this.setSendInviteDialogVisible(false);
-    this.setDeleteDialogVisible(false);
     this.setResetAuthDialogVisible(false);
+
+    this.setChangeEmailVisible(false);
   };
 }
 

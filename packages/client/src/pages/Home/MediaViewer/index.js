@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import history from "@docspace/common/history";
 import MediaViewer from "@docspace/common/components/MediaViewer";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -16,25 +16,28 @@ const FilesMediaViewer = (props) => {
     currentMediaFileId,
     deleteItemAction,
     setMediaViewerData,
-    location,
+
     setRemoveMediaItem,
     userAccess,
     deleteDialogVisible,
     previewFile,
     fetchFiles,
     setIsLoading,
-    setFirstLoad,
+
     setToPreviewFile,
     setScrollToItem,
     setCurrentId,
-    setAlreadyFetchingRooms,
+
     setBufferSelection,
-    isFavoritesFolder,
+
     archiveRoomsId,
-    onClickFavorite,
+
     onShowInfoPanel,
     onClickDownload,
-    onClickDownloadAs,
+
+    onClickLinkEdit,
+    onPreviewClick,
+    onCopyLink,
     onClickRename,
     onClickDelete,
     onMoveAction,
@@ -53,7 +56,14 @@ const FilesMediaViewer = (props) => {
     setSelection,
     activeFiles,
     activeFolders,
+    onClickDownloadAs,
+    setActiveFiles,
+    pluginContextMenuItems,
+    someDialogIsOpen,
   } = props;
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (visible) {
@@ -75,8 +85,6 @@ const FilesMediaViewer = (props) => {
       // fetch file after preview with
       fetchFiles(previewFile.folderId).finally(() => {
         setIsLoading(false);
-        setFirstLoad(false);
-        setAlreadyFetchingRooms(false);
       });
     }
   }, [previewFile]);
@@ -100,7 +108,7 @@ const FilesMediaViewer = (props) => {
   const onChangeUrl = (id) => {
     const url = "/products/files/#preview/" + id;
     setCurrentId(id);
-    window.history.pushState(null, null, url);
+    navigate(url);
   };
 
   const resetSelection = () => {
@@ -112,7 +120,7 @@ const FilesMediaViewer = (props) => {
 
     if (queryParams.has(queryName)) {
       queryParams.delete(queryName);
-      history.replace({
+      navigate(_, {
         search: queryParams.toString(),
       });
     }
@@ -181,7 +189,7 @@ const FilesMediaViewer = (props) => {
     const targetFile = files.find((item) => item.id === currentMediaFileId);
     if (targetFile) setBufferSelection(targetFile);
 
-    window.history.replaceState(null, null, url);
+    navigate(url, { replace: true });
   };
 
   return (
@@ -205,6 +213,10 @@ const FilesMediaViewer = (props) => {
         onMoveAction={onMoveAction}
         onCopyAction={onCopyAction}
         onDuplicate={onDuplicate}
+        onClickLinkEdit={onClickLinkEdit}
+        onPreviewClick={onPreviewClick}
+        onCopyLink={onCopyLink}
+        onClickDownloadAs={onClickDownloadAs}
         onClose={onMediaViewerClose}
         getIcon={getIcon}
         onEmptyPlaylistError={onMediaViewerClose}
@@ -215,6 +227,8 @@ const FilesMediaViewer = (props) => {
         onChangeUrl={onChangeUrl}
         nextMedia={nextMedia}
         prevMedia={prevMedia}
+        pluginContextMenuItems={pluginContextMenuItems}
+        setActiveFiles={setActiveFiles}
       />
     )
   );
@@ -229,14 +243,24 @@ export default inject(
     dialogsStore,
     treeFoldersStore,
     contextOptionsStore,
+    clientLoadingStore,
+    pluginStore,
   }) => {
+    const {
+      firstLoad,
+
+      setIsSectionFilterLoading,
+    } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+
     const {
       files,
       userAccess,
       fetchFiles,
-      setIsLoading,
-      firstLoad,
-      setFirstLoad,
+
       setScrollToItem,
       setBufferSelection,
       setIsPreview,
@@ -246,6 +270,8 @@ export default inject(
       setAlreadyFetchingRooms,
       activeFiles,
       activeFolders,
+
+      setActiveFiles,
     } = filesStore;
     const {
       visible,
@@ -274,7 +300,31 @@ export default inject(
       onMoveAction,
       onCopyAction,
       onDuplicate,
+      onClickLinkEdit,
+      onPreviewClick,
+      onCopyLink,
     } = contextOptionsStore;
+
+    const { contextMenuItemsList, getContextMenuKeysByType } = pluginStore;
+
+    const item = playlist.find((p) => p.fileId === currentMediaFileId);
+
+    const fileExst = item?.fileExst;
+
+    const pluginContextMenuKeys = [
+      ...(getContextMenuKeysByType() || []),
+      ...(getContextMenuKeysByType(PluginFileType.Image, fileExst) || []),
+      ...(getContextMenuKeysByType(PluginFileType.Video, fileExst) || []),
+    ];
+
+    const pluginContextMenuItems =
+      contextMenuItemsList?.filter((i) => {
+        if (pluginContextMenuKeys.includes(i.key)) {
+          return true;
+        }
+
+        return false;
+      }) || [];
 
     return {
       files,
@@ -295,7 +345,7 @@ export default inject(
       previewFile,
       setIsLoading,
       firstLoad,
-      setFirstLoad,
+
       setToPreviewFile,
       setIsPreview,
       resetUrl,
@@ -310,6 +360,9 @@ export default inject(
       onClickDelete,
       onClickDownload,
       onShowInfoPanel,
+      onClickLinkEdit,
+      onPreviewClick,
+      onCopyLink,
       onClickRename,
       onMoveAction,
       getIcon,
@@ -320,10 +373,8 @@ export default inject(
       getFirstUrl,
       activeFiles,
       activeFolders,
+      setActiveFiles,
+      pluginContextMenuItems,
     };
   }
-)(
-  withRouter(
-    withTranslation(["Files", "Translations"])(observer(FilesMediaViewer))
-  )
-);
+)(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

@@ -1,14 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ComboBox from "../combobox/index.js";
 import Base from "../themes/base";
+import { mobile } from "../utils/device";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
     padding-left: 16px;
     padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        padding-left: 8px;
+        padding-right: 16px;
+      `}
   }
 
-  @media (max-width: 428px) {
+  @media ${mobile} {
     .backdrop-active {
       top: -64px;
       z-index: 560;
@@ -40,7 +47,7 @@ StyledItem.defaultProps = { theme: Base };
 const StyledItemDescription = styled.div`
   margin: 1px 0px;
 
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   font-style: normal;
   font-weight: 400;
   line-height: 16px;

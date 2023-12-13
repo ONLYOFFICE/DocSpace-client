@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
@@ -12,33 +13,24 @@ import Box from "@docspace/components/box";
 import HelpButton from "@docspace/components/help-button";
 import { combineUrl } from "@docspace/common/utils";
 import AppLoader from "@docspace/common/components/AppLoader";
-import { removeLocalStorage } from "../../utils";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
+import { DeviceType } from "@docspace/common/constants";
 
 const DataManagementWrapper = (props) => {
-  const {
-    dataBackupUrl,
-    automaticBackupUrl,
-    buttonSize,
-    t,
-    history,
-    isNotPaidPeriod,
-    toDefault,
-  } = props;
+  const { dataBackupUrl, automaticBackupUrl, buttonSize, t, isNotPaidPeriod } =
+    props;
+
+  const navigate = useNavigate();
 
   const [currentTab, setCurrentTab] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      removeLocalStorage("LocalCopyStorageType");
-      toDefault();
-    };
-  }, []);
+  const { interfaceDirection } = useTheme();
+  const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
-  const renderTooltip = (helpInfo) => {
+  const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
       "portal-settings/backup/auto-backup"
     );
@@ -47,15 +39,17 @@ const DataManagementWrapper = (props) => {
         <HelpButton
           size={12}
           offsetRight={5}
-          place="right"
+          place={directionTooltip}
+          className={className}
           iconName={HelpReactSvgUrl}
           tooltipContent={
             <Text fontSize="12px">
               <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
                 {helpInfo}
               </Trans>
-              <Box marginProp="10px 0 0">
+              <Box as={"span"} marginProp="10px 0 0">
                 <Link
+                  id="link-tooltip"
                   color="#333333"
                   fontSize="13px"
                   href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
@@ -100,7 +94,7 @@ const DataManagementWrapper = (props) => {
   }, []);
 
   const onSelect = (e) => {
-    history.push(
+    navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
@@ -122,19 +116,21 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup, backup }) => {
+export default inject(({ auth, setup }) => {
   const { initSettings } = setup;
   const { settingsStore, currentTariffStatusStore } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { toDefault } = backup;
+
   const {
     dataBackupUrl,
     automaticBackupUrl,
-    isTabletView,
+
     currentColorScheme,
+    currentDeviceType,
   } = settingsStore;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
   return {
     loadBaseInfo: async () => {
       await initSettings();
@@ -144,10 +140,5 @@ export default inject(({ auth, setup, backup }) => {
     buttonSize,
     isNotPaidPeriod,
     currentColorScheme,
-    toDefault,
   };
-})(
-  withTranslation(["Settings", "Common"])(
-    withRouter(observer(DataManagementWrapper))
-  )
-);
+})(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

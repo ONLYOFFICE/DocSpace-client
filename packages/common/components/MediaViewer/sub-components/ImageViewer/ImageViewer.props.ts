@@ -4,6 +4,10 @@ import { ContextMenuModel } from "../../types";
 
 interface ImageViewerProps {
   src?: string;
+  thumbnailSrc?: string;
+  isTiff?: boolean;
+  imageId?: number;
+  version?: number;
   errorTitle: string;
   isFistImage: boolean;
   isLastImage: boolean;

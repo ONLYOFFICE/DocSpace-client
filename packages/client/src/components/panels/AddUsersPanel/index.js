@@ -1,24 +1,33 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import IconButton from "@docspace/components/icon-button";
-import { ShareAccessRights } from "@docspace/common/constants";
-import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Loaders from "@docspace/common/components/Loaders";
-import withLoader from "../../../HOCs/withLoader";
+import React, { useState, useEffect, useCallback } from "react";
+
+import Aside from "@docspace/components/aside";
+import Backdrop from "@docspace/components/backdrop";
+import Selector from "@docspace/components/selector";
 import toastr from "@docspace/components/toast/toastr";
+
+import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
+import Loaders from "@docspace/common/components/Loaders";
+import { getMembersList } from "@docspace/common/api/people";
+import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
+import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
+
+import withLoader from "../../../HOCs/withLoader";
+
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 const AddUsersPanel = ({
   isEncrypted,
   defaultAccess,
   onClose,
   onParentPanelClose,
-  shareDataItems,
   tempDataItems,
   setDataItems,
   t,
@@ -27,6 +36,9 @@ const AddUsersPanel = ({
   accessOptions,
   isMultiSelect,
   theme,
+  withoutBackground,
+  withBlur,
+  roomId,
 }) => {
   const accessRight = defaultAccess
     ? defaultAccess
@@ -59,25 +71,21 @@ const AddUsersPanel = ({
     const items = [];
 
     for (let item of users) {
-      const currentItem = shareDataItems.find((x) => x.sharedTo.id === item.id);
+      const currentAccess =
+        item.isOwner || item.isAdmin
+          ? ShareAccessRights.RoomManager
+          : access.access;
 
-      if (!currentItem) {
-        const currentAccess =
-          item.isOwner || item.isAdmin
-            ? ShareAccessRights.RoomManager
-            : access.access;
-
-        const newItem = {
-          access: currentAccess,
-          email: item.email,
-          id: item.id,
-          displayName: item.label,
-          avatar: item.avatar,
-          isOwner: item.isOwner,
-          isAdmin: item.isAdmin,
-        };
-        items.push(newItem);
-      }
+      const newItem = {
+        access: currentAccess,
+        email: item.email,
+        id: item.id,
+        displayName: item.label,
+        avatar: item.avatar,
+        isOwner: item.isOwner,
+        isAdmin: item.isAdmin,
+      };
+      items.push(newItem);
     }
 
     if (users.length > items.length)
@@ -87,21 +95,119 @@ const AddUsersPanel = ({
     onClose();
   };
 
-  const onUserSelect = (owner) => {
-    const ownerItem = shareDataItems.find((x) => x.isOwner);
-    ownerItem.sharedTo = owner[0];
-
-    if (owner[0].key) {
-      owner[0].id = owner[0].key;
-    }
-
-    setDataItems(shareDataItems);
-    onClose();
-  };
-
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight
   )[0];
+
+  const [itemsList, setItemsList] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false
+  );
+  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false
+  );
+
+  useEffect(() => {
+    loadNextPage(0);
+  }, []);
+
+  const onSearch = (value, callback) => {
+    if (value === searchValue) return;
+
+    setIsLoadingSearch(true);
+    setSearchValue(value);
+    loadNextPage(0, value, callback);
+  };
+
+  const onClearSearch = (callback) => {
+    onSearch("", callback);
+  };
+
+  const toListItem = (item) => {
+    const {
+      id,
+      email,
+      avatar,
+      icon,
+      displayName,
+      hasAvatar,
+      isOwner,
+      isAdmin,
+      isVisitor,
+      isCollaborator,
+    } = item;
+
+    const role = getUserRole(item);
+
+    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+    return {
+      id,
+      email,
+      avatar: userAvatar,
+      icon,
+      label: displayName || email,
+      role,
+      isOwner,
+      isAdmin,
+      isVisitor,
+      isCollaborator,
+    };
+  };
+
+  const loadNextPage = (startIndex, search = searchValue, callback) => {
+    const pageCount = 100;
+
+    setIsNextPageLoading(true);
+
+    if (startIndex === 0) {
+      setIsLoading(true);
+    }
+
+    const currentFilter = getFilterWithOutDisabledUser();
+
+    currentFilter.page = startIndex / pageCount;
+    currentFilter.pageCount = pageCount;
+    currentFilter.excludeShared = true;
+
+    if (!!search.length) {
+      currentFilter.search = search;
+    }
+
+    getMembersList(roomId, currentFilter)
+      .then((response) => {
+        let newItems = startIndex ? itemsList : [];
+        let totalDifferent = startIndex ? response.total - total : 0;
+
+        const items = response.items.map((item) => toListItem(item));
+
+        newItems = [...newItems, ...items];
+
+        const newTotal = response.total - totalDifferent;
+
+        setHasNextPage(newItems.length < newTotal);
+        setItemsList(newItems);
+        setTotal(newTotal);
+
+        setIsNextPageLoading(false);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {
+        callback?.();
+        setIsLoading(false);
+        setIsLoadingSearch(false);
+      });
+  };
+
+  const emptyScreenImage = theme.isBase
+    ? EmptyScreenPersonsSvgUrl
+    : EmptyScreenPersonsSvgDarkUrl;
 
   return (
     <>
@@ -110,6 +216,8 @@ const AddUsersPanel = ({
         visible={visible}
         zIndex={310}
         isAside={true}
+        withoutBackground={withoutBackground}
+        withoutBlur={!withBlur}
       />
       <Aside
         className="header_aside-panel"
@@ -117,18 +225,48 @@ const AddUsersPanel = ({
         onClose={onClosePanels}
         withoutBodyScroll
       >
-        <PeopleSelector
-          isMultiSelect={isMultiSelect}
-          onAccept={onUsersSelect}
+        <Selector
+          headerLabel={t("PeopleSelector:ListAccounts")}
           onBackClick={onBackClick}
-          accessRights={accessOptions}
+          searchPlaceholder={t("Common:Search")}
+          searchValue={searchValue}
+          onSearch={onSearch}
+          onClearSearch={onClearSearch}
+          items={itemsList}
+          isMultiSelect={isMultiSelect}
           acceptButtonLabel={t("Common:AddButton")}
-          selectedAccessRight={selectedAccess}
-          onCancel={onClosePanels}
-          withCancelButton={!isMultiSelect}
-          withAccessRights={isMultiSelect}
+          onAccept={onUsersSelect}
           withSelectAll={isMultiSelect}
-          filter={getFilterWithOutDisabledUser}
+          selectAllLabel={t("PeopleSelector:AllAccounts")}
+          selectAllIcon={CatalogAccountsReactSvgUrl}
+          withAccessRights={isMultiSelect}
+          accessRights={accessOptions}
+          selectedAccessRight={selectedAccess}
+          withCancelButton={!isMultiSelect}
+          cancelButtonLabel={t("Common:CancelButton")}
+          onCancel={onClosePanels}
+          emptyScreenImage={emptyScreenImage}
+          emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
+          emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+          searchEmptyScreenImage={emptyScreenImage}
+          searchEmptyScreenHeader={t("People:NotFoundUsers")}
+          searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
+          hasNextPage={hasNextPage}
+          isNextPageLoading={isNextPageLoading}
+          loadNextPage={loadNextPage}
+          totalItems={total}
+          isLoading={isLoading}
+          searchLoader={<Loaders.SelectorSearchLoader />}
+          isSearchLoading={isLoading && !isLoadingSearch}
+          rowLoader={
+            <Loaders.SelectorRowLoader
+              isUser
+              count={15}
+              isContainer={isLoading}
+              isMultiSelect={isMultiSelect}
+              withAllSelect={!isLoadingSearch}
+            />
+          }
         />
       </Aside>
     </>
@@ -142,7 +280,9 @@ AddUsersPanel.propTypes = {
 };
 
 export default inject(({ auth }) => {
-  return { theme: auth.settingsStore.theme };
+  return {
+    theme: auth.settingsStore.theme,
+  };
 })(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(

@@ -3,11 +3,11 @@ import axios from "axios";
 import FilesFilter from "./filter";
 import { FolderType, RoomSearchArea } from "../../constants";
 import find from "lodash/find";
-import { decodeDisplayName } from "../../utils";
+import { checkFilterInstance, decodeDisplayName } from "../../utils";
 import { getRooms } from "../rooms";
 import RoomsFilter from "../rooms/filter";
 
-export function openEdit(fileId, version, doc, view, headers = null) {
+export function openEdit(fileId, version, doc, view, headers = null, shareKey) {
   const params = []; // doc ? `?doc=${doc}` : "";
 
   if (view) {
@@ -20,6 +20,10 @@ export function openEdit(fileId, version, doc, view, headers = null) {
 
   if (doc) {
     params.push(`doc=${doc}`);
+  }
+
+  if (shareKey) {
+    params.push(`share=${shareKey}`);
   }
 
   const paramsString = params.length > 0 ? `?${params.join("&")}` : "";
@@ -45,13 +49,13 @@ export function getReferenceData(object) {
   return request(options);
 }
 
-export function getFolderInfo(folderId) {
+export function getFolderInfo(folderId, skipRedirect = false) {
   const options = {
     method: "get",
     url: `/files/folder/${folderId}`,
   };
 
-  return request(options);
+  return request(options, skipRedirect);
 }
 
 export function getFolderPath(folderId) {
@@ -64,14 +68,17 @@ export function getFolderPath(folderId) {
 }
 
 export function getFolder(folderId, filter, signal) {
+  let params = folderId;
+
   if (folderId && typeof folderId === "string") {
     folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
   }
 
-  const params =
-    filter && filter instanceof FilesFilter
-      ? `${folderId}?${filter.toApiUrlParams()}`
-      : folderId;
+  if (filter) {
+    checkFilterInstance(filter, FilesFilter);
+
+    params = `${folderId}?${filter.toApiUrlParams()}`;
+  }
 
   const options = {
     method: "get",
@@ -531,8 +538,9 @@ export function removeShareFiles(fileIds, folderIds) {
   });
 }
 
-export function setFileOwner(folderIds, fileIds, userId) {
-  const data = { folderIds, fileIds, userId };
+export function setFileOwner(userId, folderIds) {
+  const data = { userId, folderIds };
+
   return request({
     method: "post",
     url: "/files/owner",
@@ -564,9 +572,14 @@ export function uploadBackup(url, data) {
   return axios.post(url, data);
 }
 
-export function downloadFiles(fileIds, folderIds) {
+export function downloadFiles(fileIds, folderIds, shareKey) {
   const data = { fileIds, folderIds };
-  return request({ method: "put", url: "/files/fileops/bulkdownload", data });
+  const share = shareKey ? `?share=${shareKey}` : "";
+  return request({
+    method: "put",
+    url: `/files/fileops/bulkdownload${share}`,
+    data,
+  });
 }
 
 export function getProgress() {
@@ -590,7 +603,8 @@ export function copyToFolder(
   folderIds,
   fileIds,
   conflictResolveType,
-  deleteAfter
+  deleteAfter,
+  content = false
 ) {
   const data = {
     destFolderId,
@@ -598,6 +612,7 @@ export function copyToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    content,
   };
   return request({ method: "put", url: "/files/fileops/copy", data });
 }
@@ -817,10 +832,6 @@ export function removeFromFavorite(ids) {
   return request(options);
 }
 
-export function getDocServiceUrl() {
-  return request({ method: "get", url: `/files/docservice` });
-}
-
 export function getIsEncryptionSupport() {
   return request({
     method: "get",
@@ -976,6 +987,16 @@ export function getSharedUsers(fileId) {
 
   return request(options);
 }
+
+export function getProtectUsers(fileId) {
+  const options = {
+    method: "get",
+    url: `/files/file/${fileId}/protectusers`,
+  };
+
+  return request(options);
+}
+
 export function sendEditorNotify(fileId, actionLink, emails, message) {
   return request({
     method: "post",
@@ -984,6 +1005,36 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
       actionLink,
       emails,
       message,
+    },
+  });
+}
+
+export function getDocumentServiceLocation(version) {
+  const params = {};
+
+  if (version !== undefined) {
+    params.version = version;
+  }
+
+  return request({
+    method: "get",
+    url: `/files/docservice`,
+    params,
+  });
+}
+
+export function changeDocumentServiceLocation(
+  docServiceUrl,
+  internalUrl,
+  portalUrl
+) {
+  return request({
+    method: "put",
+    url: `files/docservice`,
+    data: {
+      DocServiceUrl: docServiceUrl,
+      DocServiceUrlInternal: internalUrl,
+      DocServiceUrlPortal: portalUrl,
     },
   });
 }

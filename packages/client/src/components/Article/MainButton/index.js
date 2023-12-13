@@ -12,6 +12,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React from "react";
 
 import { inject, observer } from "mobx-react";
@@ -20,50 +21,47 @@ import MainButton from "@docspace/components/main-button";
 import { withTranslation } from "react-i18next";
 import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
-import { combineUrl } from "@docspace/common/utils";
-import config from "PACKAGE_FILE";
-import withLoader from "../../../HOCs/withLoader";
-import { Events, EmployeeType } from "@docspace/common/constants";
-import { getMainButtonItems } from "SRC_DIR/helpers/plugins";
 
+import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
 
 import { resendInvitesAgain } from "@docspace/common/api/people";
+import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
-  background-color: ${({ currentColorScheme }) =>
-    currentColorScheme.main.accent} !important;
-  background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
-  border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+  background-color: ${({ $currentColorScheme }) =>
+    $currentColorScheme.main.accent} !important;
+  background: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+  border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
 
   ${(props) =>
     !props.isDisabled &&
     css`
       :hover {
-        background-color: ${({ currentColorScheme }) =>
-          currentColorScheme.main.accent};
+        background-color: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
         opacity: 0.85;
-        background: ${({ currentColorScheme }) =>
-          currentColorScheme.main.accent};
-        border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+        background: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
       }
 
       :active {
-        background-color: ${({ currentColorScheme }) =>
-          currentColorScheme.main.accent};
-        background: ${({ currentColorScheme }) =>
-          currentColorScheme.main.accent};
-        border: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+        background-color: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        background: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main.accent};
+        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
         opacity: 1;
         filter: brightness(90%);
         cursor: pointer;
@@ -71,13 +69,14 @@ const StyledButton = styled(Button)`
     `}
 
   .button-content {
-    color: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+    color: ${({ $currentColorScheme }) => $currentColorScheme.text.accent};
     position: relative;
     display: flex;
     justify-content: space-between;
     vertical-align: middle;
     box-sizing: border-box;
-    padding: 5px 14px 5px 12px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle("5px 14px 5px 12px", theme.interfaceDirection)};
     line-height: 22px;
     border-radius: 3px;
 
@@ -89,44 +88,55 @@ const StyledButton = styled(Button)`
 const ArticleMainButtonContent = (props) => {
   const {
     t,
+    tReady,
     isMobileArticle,
-    canCreate,
+
     isPrivacy,
     encryptedFile,
     encrypted,
     startUpload,
     setAction,
     setSelectFileDialogVisible,
-    isArticleLoading,
+    selectFileDialogVisible,
+    showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
-    history,
+
     currentFolderId,
     isRoomsFolder,
     isArchiveFolder,
 
-    selectedTreeNode,
+    setOformFromFolderId,
+    oformsFilter,
 
     enablePlugins,
+    mainButtonItemsList,
 
     currentColorScheme,
 
     isOwner,
     isAdmin,
 
-    canCreateFiles,
-
     setInvitePanelOptions,
 
     mainButtonMobileVisible,
+    versionHistoryPanelVisible,
+    moveToPanelVisible,
+    restorePanelVisible,
+    copyPanelVisible,
 
     security,
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
+    currentDeviceType,
   } = props;
 
-  const isAccountsPage = selectedTreeNode[0] === "accounts";
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAccountsPage = location.pathname.includes("/accounts");
+  const isSettingsPage = location.pathname.includes("settings");
 
   const inputFilesElement = React.useRef(null);
   const inputFolderElement = React.useRef(null);
@@ -198,13 +208,11 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    history.push(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/form-gallery/${currentFolderId}/`
-      )
-    );
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    setOformFromFolderId(currentFolderId);
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const onInvite = React.useCallback((e) => {
@@ -232,16 +240,12 @@ const ArticleMainButtonContent = (props) => {
   }, [resendInvitesAgain]);
 
   React.useEffect(() => {
-    const isSettingFolder =
-      window.location.pathname.endsWith("/settings/common") ||
-      window.location.pathname.endsWith("/settings/admin");
-
     const isFolderHiddenDropdown =
       isArchiveFolder ||
       isFavoritesFolder ||
       isRecentFolder ||
       isRecycleBinFolder ||
-      isSettingFolder;
+      isSettingsPage;
 
     if (isFolderHiddenDropdown) {
       setIsDropdownMainButton(false);
@@ -253,11 +257,22 @@ const ArticleMainButtonContent = (props) => {
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
-    window.location.pathname,
+    isSettingsPage,
   ]);
 
   React.useEffect(() => {
-    if (isRoomsFolder) return;
+    if (isRoomsFolder || isSettingsPage) return;
+
+    const pluginItems = [];
+
+    if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
+      mainButtonItemsList.forEach((option) => {
+        pluginItems.push({
+          key: option.key,
+          ...option.value,
+        });
+      });
+    }
 
     const formActions = [
       {
@@ -414,6 +429,28 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
+    if (pluginItems.length > 0) {
+      // menuModel.push({
+      //   id: "actions_more-plugins",
+      //   className: "main-button_drop-down",
+      //   icon: PluginMoreReactSvgUrl,
+      //   label: t("Common:More"),
+      //   disabled: false,
+      //   key: "more-plugins",
+      //   items: pluginItems,
+      // });
+
+      actions.push({
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
+      });
+    }
+
     const menuModel = [...actions];
 
     menuModel.push({
@@ -424,19 +461,6 @@ const ArticleMainButtonContent = (props) => {
     menuModel.push(...uploadActions);
     setUploadActions(uploadActions);
 
-    if (enablePlugins) {
-      const pluginOptions = getMainButtonItems();
-
-      if (pluginOptions) {
-        pluginOptions.forEach((option) => {
-          menuModel.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
-        });
-      }
-    }
-
     setModel(menuModel);
     setActions(actions);
   }, [
@@ -444,10 +468,13 @@ const ArticleMainButtonContent = (props) => {
     isPrivacy,
     currentFolderId,
     isAccountsPage,
+    isSettingsPage,
     enablePlugins,
+    mainButtonItemsList,
     isRoomsFolder,
     isOwner,
     isAdmin,
+
     onCreate,
     onCreateRoom,
     onInvite,
@@ -457,35 +484,51 @@ const ArticleMainButtonContent = (props) => {
     onUploadFolderClick,
   ]);
 
-  const canInvite =
-    isAccountsPage &&
-    selectedTreeNode.length > 1 &&
-    selectedTreeNode[1] === "filter";
   const mainButtonText = isAccountsPage
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled = isAccountsPage ? !canInvite : !security?.Create;
+  const isDisabled = isSettingsPage
+    ? isSettingsPage
+    : isAccountsPage
+    ? !isAccountsPage
+    : !security?.Create;
 
-  const isProfile = history.location.pathname === "/accounts/view/@self";
+  const isProfile = location.pathname.includes("/profile");
+
+  let mainButtonVisible = true;
+
+  if (currentDeviceType === DeviceType.mobile) {
+    mainButtonVisible =
+      moveToPanelVisible ||
+      restorePanelVisible ||
+      copyPanelVisible ||
+      selectFileDialogVisible ||
+      versionHistoryPanelVisible
+        ? false
+        : true;
+  }
+
+  if (showArticleLoader)
+    return isMobileArticle ? null : <Loaders.ArticleButton height="32px" />;
 
   return (
     <>
       {isMobileArticle ? (
         <>
-          {!isArticleLoading &&
-            !isProfile &&
-            (security?.Create || canInvite) && (
-              <MobileView
-                t={t}
-                titleProp={t("Upload")}
-                actionOptions={actions}
-                buttonOptions={uploadActions}
-                isRooms={isRoomsFolder}
-                mainButtonMobileVisible={mainButtonMobileVisible}
-                onMainButtonClick={onCreateRoom}
-              />
-            )}
+          {!isProfile && (security?.Create || isAccountsPage) && (
+            <MobileView
+              t={t}
+              titleProp={t("Upload")}
+              actionOptions={actions}
+              buttonOptions={uploadActions}
+              isRooms={isRoomsFolder}
+              mainButtonMobileVisible={
+                mainButtonMobileVisible && mainButtonVisible
+              }
+              onMainButtonClick={onCreateRoom}
+            />
+          )}
         </>
       ) : isRoomsFolder ? (
         <StyledButton
@@ -493,11 +536,12 @@ const ArticleMainButtonContent = (props) => {
           id="rooms-shared_create-room-button"
           label={t("Files:NewRoom")}
           onClick={onCreateRoom}
-          currentColorScheme={currentColorScheme}
+          $currentColorScheme={currentColorScheme}
           isDisabled={isDisabled}
           size="small"
           primary
           scale
+          title={t("Files:NewRoom")}
         />
       ) : (
         <MainButton
@@ -510,6 +554,7 @@ const ArticleMainButtonContent = (props) => {
           isDropdown={isDropdownMainButton}
           text={mainButtonText}
           model={model}
+          title={mainButtonText}
         />
       )}
 
@@ -546,15 +591,13 @@ export default inject(
     uploadDataStore,
     treeFoldersStore,
     selectedFolderStore,
-    accessRightsStore,
+    clientLoadingStore,
+    oformsStore,
+    pluginStore,
+    versionHistoryStore,
   }) => {
-    const {
-      isLoaded,
-      firstLoad,
-      isLoading,
-      canCreate,
-      mainButtonMobileVisible,
-    } = filesStore;
+    const { showArticleLoader } = clientLoadingStore;
+    const { mainButtonMobileVisible } = filesStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -569,11 +612,15 @@ export default inject(
       setSelectFileDialogVisible,
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
+      copyPanelVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      selectFileDialogVisible,
     } = dialogsStore;
 
-    const isArticleLoading = (!isLoaded || isLoading) && firstLoad;
-
-    const { enablePlugins, currentColorScheme } = auth.settingsStore;
+    const { enablePlugins, currentColorScheme, currentDeviceType } =
+      auth.settingsStore;
+    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
@@ -582,7 +629,8 @@ export default inject(
     const { isAdmin, isOwner } = auth.userStore.user;
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
-    const { canCreateFiles } = accessRightsStore;
+    const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { mainButtonItemsList } = pluginStore;
 
     return {
       isGracePeriod,
@@ -590,7 +638,7 @@ export default inject(
       showText: auth.settingsStore.showText,
       isMobileArticle: auth.settingsStore.isMobileArticle,
 
-      isArticleLoading,
+      showArticleLoader,
       isPrivacy: isPrivacyFolder,
       isFavoritesFolder,
       isRecentFolder,
@@ -600,27 +648,32 @@ export default inject(
       isArchiveFolder,
       selectedTreeNode,
 
-      canCreate,
-      canCreateFiles,
-
       startUpload,
 
       setSelectFileDialogVisible,
+      selectFileDialogVisible,
       setInvitePanelOptions,
 
-      isLoading,
-      isLoaded,
-      firstLoad,
       currentFolderId,
 
+      setOformFromFolderId,
+      oformsFilter,
+
       enablePlugins,
+      mainButtonItemsList,
+
       currentColorScheme,
 
       isAdmin,
       isOwner,
 
       mainButtonMobileVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      copyPanelVisible,
+      versionHistoryPanelVisible,
       security,
+      currentDeviceType,
     };
   }
 )(
@@ -631,9 +684,5 @@ export default inject(
     "Files",
     "People",
     "PeopleTranslations",
-  ])(
-    withLoader(observer(withRouter(ArticleMainButtonContent)))(
-      <Loaders.ArticleButton height="28px" />
-    )
-  )
+  ])(observer(ArticleMainButtonContent))
 );

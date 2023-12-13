@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "activados",
-  "ChangeUsersDisableStatus": "desactivados",
-  "ChangeUserStatusDialog": "Los usuarios con el estado '{{ userStatus }}' estarán {{ status }}.",
-  "ChangeUserStatusDialogHeader": "Cambiar estado",
-  "ChangeUserStatusDialogMessage": "No puede cambiar el estado para el propietario de DocSpace y para usted mismo."
+  "DisableGeneralDescription": "Más tarde puede eliminar o activar a los usuarios desactivados si es necesario. Tenga en cuenta que no puede deshabilitar a usuarios como el Propietario y usted mismo.",
+  "DisableUser": "Desactivar usuario",
+  "DisableUserDescription": "Si desactiva a este usuario, no podrá iniciar sesión en DocSpace, mientras que sus documentos y datos permanecerán intactos.",
+  "DisableUsers": "Desactivar usuarios",
+  "DisableUsersDescription": "Si desactiva a estes usuarios, no podrán iniciar sesión en DocSpace, mientras que sus documentos y datos permanecerán intactos.",
+  "EnableUser": "Activar usuario",
+  "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en DocSpace y acceder a sus documentos y datos.",
+  "EnableUsers": "Activar usuarios",
+  "EnableUsersDescription": "Si activa a estes usuarios, podrán volver a iniciar sesión en DocSpace y acceder a sus documentos y datos."
 }

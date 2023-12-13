@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
@@ -9,7 +8,9 @@ import Link from "@docspace/components/link";
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
-import { isMobile } from "react-device-detect";
+
+import { DeviceType } from "@docspace/common/constants";
+import { tablet } from "@docspace/components/utils/device";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -23,7 +24,14 @@ const SimpleFilesTileContent = styled(TileContent)`
   }
 
   .badge {
-    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
     cursor: pointer;
     height: 16px;
     width: 16px;
@@ -31,7 +39,14 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .new-items {
     position: absolute;
-    right: 29px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 29px;
+          `
+        : css`
+            right: 29px;
+          `}
     top: 19px;
   }
 
@@ -42,7 +57,14 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .share-icon {
     margin-top: -4px;
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 
   .favorite,
@@ -69,11 +91,11 @@ const SimpleFilesTileContent = styled(TileContent)`
     isRooms &&
     css`
       .item-file-name {
-        font-size: 16px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       }
     `}
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 
@@ -89,10 +111,11 @@ const FilesTileContent = ({
   linkStyles,
   theme,
   isRooms,
+  currentDeviceType,
 }) => {
-  const { fileExst, title, viewAccessability } = item;
+  const { fileExst, title, viewAccessibility } = item;
 
-  const isMedia = viewAccessability?.ImageView || viewAccessability?.MediaView;
+  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
   return (
     <>
@@ -107,7 +130,7 @@ const FilesTileContent = ({
           type="page"
           title={title}
           fontWeight="600"
-          fontSize={!isMobile ? "13px" : "14px"}
+          fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
           target="_blank"
           {...linkStyles}
           color={theme.filesSection.tilesView.color}
@@ -125,13 +148,15 @@ export default inject(({ auth, treeFoldersStore }) => {
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return { theme: auth.settingsStore.theme, isRooms };
+  return {
+    theme: auth.settingsStore.theme,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
+    isRooms,
+  };
 })(
   observer(
-    withRouter(
-      withTranslation(["Files", "Translations"])(
-        withContent(withBadges(FilesTileContent))
-      )
+    withTranslation(["Files", "Translations", "Notifications"])(
+      withContent(withBadges(FilesTileContent))
     )
   )
 );

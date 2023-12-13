@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.1.0" version="1.3">
+<babeledit_project be_version="5.0.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,8 +26,11 @@
 								<name>ErrorConfirmURLError</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -142,8 +145,11 @@
 								<name>ErrorExpiredActivationLink</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -258,8 +264,11 @@
 								<name>ErrorInvalidActivationLink</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -374,8 +383,11 @@
 								<name>ErrorNotAllowedOption</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -490,8 +502,11 @@
 								<name>ErrorUserNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -606,8 +621,11 @@
 								<name>InvalidUsernameOrPassword</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -722,8 +740,11 @@
 								<name>LoginWithAccountNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -838,8 +859,130 @@
 								<name>LoginWithBruteForce</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>LoginWithBruteForceCaptcha</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -954,8 +1097,11 @@
 								<name>RecaptchaInvalid</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1070,8 +1216,11 @@
 								<name>SsoAttributesNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1186,8 +1335,11 @@
 								<name>SsoAuthFailed</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1302,8 +1454,11 @@
 								<name>SsoError</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1418,8 +1573,11 @@
 								<name>SsoSettingsCantCreateUser</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1534,8 +1692,11 @@
 								<name>SsoSettingsDisabled</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1650,8 +1811,11 @@
 								<name>SsoSettingsEmptyToken</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1766,8 +1930,11 @@
 								<name>SsoSettingsNotValidToken</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -1882,8 +2049,11 @@
 								<name>SsoSettingsUserTerminated</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2003,8 +2173,11 @@
 								<name>CodeSubtitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2119,8 +2292,11 @@
 								<name>CodeTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2235,124 +2411,11 @@
 								<name>CookieSettingsTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
-										<language>az-Latn-AZ</language>
+										<language>ar-SA</language>
 										<approved>false</approved>
 									</translation>
-									<translation>
-										<language>bg-BG</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>cs-CZ</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>de-DE</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>el-GR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>en-US</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>es-ES</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>fi-FI</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>fr-FR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>hy-AM</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>it-IT</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ja-JP</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ko-KR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>lo-LA</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>lv-LV</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>nl-NL</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pl-PL</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pt-BR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pt-PT</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ro-RO</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ru-RU</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>sk-SK</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>sl-SI</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>tr-TR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>uk-UA</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>vi-VN</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>zh-CN</language>
-										<approved>false</approved>
-									</translation>
-								</translations>
-							</concept_node>
-							<concept_node>
-								<name>ErrorInvalidHeader</name>
-								<description/>
-								<comment/>
-								<default_text/>
-								<translations>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2467,8 +2530,11 @@
 								<name>ErrorInvalidText</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2583,8 +2649,11 @@
 								<name>ExpiredCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2699,8 +2768,11 @@
 								<name>ForgotPassword</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2815,8 +2887,11 @@
 								<name>InvalidCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -2931,8 +3006,11 @@
 								<name>MessageAuthorize</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3047,8 +3125,11 @@
 								<name>MessageEmailConfirmed</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3163,8 +3244,11 @@
 								<name>MessageSendPasswordRecoveryInstructionsOnEmail</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3279,8 +3363,11 @@
 								<name>NotFoundCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3395,8 +3482,11 @@
 								<name>Or</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3511,8 +3601,11 @@
 								<name>PasswordRecoveryTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3627,8 +3720,11 @@
 								<name>RecoverAccess</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3743,8 +3839,11 @@
 								<name>RecoverContactEmailPlaceholder</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3859,8 +3958,11 @@
 								<name>RecoverTextBody</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -3975,8 +4077,11 @@
 								<name>Register</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4091,8 +4196,11 @@
 								<name>RegisterTextBodyAfterDomainsList</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4207,8 +4315,11 @@
 								<name>RegisterTextBodyBeforeDomainsList</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4323,8 +4434,11 @@
 								<name>RegisterTitle</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4439,124 +4553,11 @@
 								<name>RegistrationEmailWatermark</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
-										<language>az-Latn-AZ</language>
+										<language>ar-SA</language>
 										<approved>false</approved>
 									</translation>
-									<translation>
-										<language>bg-BG</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>cs-CZ</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>de-DE</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>el-GR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>en-US</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>es-ES</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>fi-FI</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>fr-FR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>hy-AM</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>it-IT</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ja-JP</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ko-KR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>lo-LA</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>lv-LV</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>nl-NL</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pl-PL</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pt-BR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>pt-PT</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ro-RO</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>ru-RU</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>sk-SK</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>sl-SI</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>tr-TR</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>uk-UA</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>vi-VN</language>
-										<approved>false</approved>
-									</translation>
-									<translation>
-										<language>zh-CN</language>
-										<approved>false</approved>
-									</translation>
-								</translations>
-							</concept_node>
-							<concept_node>
-								<name>Remember</name>
-								<description/>
-								<comment/>
-								<default_text/>
-								<translations>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4671,8 +4672,11 @@
 								<name>RememberHelper</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4787,8 +4791,11 @@
 								<name>ResendCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -4903,8 +4910,11 @@
 								<name>SignInWithCode</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -5019,8 +5029,11 @@
 								<name>SignInWithPassword</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
 									<translation>
 										<language>az-Latn-AZ</language>
 										<approved>false</approved>
@@ -5140,6 +5153,9 @@
 	<isTemplateProject>false</isTemplateProject>
 	<languages>
 		<language>
+			<code>ar-SA</code>
+		</language>
+		<language>
 			<code>az-Latn-AZ</code>
 		</language>
 		<language>
@@ -5225,6 +5241,10 @@
 		<translation_package>
 			<name>main</name>
 			<translation_urls>
+				<translation_url>
+					<path>../packages/login/public/locales/ar-SA</path>
+					<language>ar-SA</language>
+				</translation_url>
 				<translation_url>
 					<path>../packages/login/public/locales/az</path>
 					<language>az-Latn-AZ</language>

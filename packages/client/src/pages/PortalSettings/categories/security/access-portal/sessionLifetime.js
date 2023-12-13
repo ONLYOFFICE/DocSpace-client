@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
 import TextInput from "@docspace/components/text-input";
 import toastr from "@docspace/components/toast/toastr";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -12,8 +13,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
-import { isMobile } from "react-device-detect";
+
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -36,12 +38,15 @@ const MainContainer = styled.div`
 const SessionLifetime = (props) => {
   const {
     t,
-    history,
+
     lifetime,
     enabled,
     setSessionLifetimeSettings,
     initSettings,
     isInit,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
@@ -49,13 +54,16 @@ const SessionLifetime = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const getSettings = () => {
     const currentSettings = getFromSessionStorage(
       "currentSessionLifetimeSettings"
     );
 
     const defaultData = {
-      lifetime: lifetime.toString(),
+      lifetime: lifetime?.toString(),
       type: enabled,
     };
     saveToSessionStorage("defaultSessionLifetimeSettings", defaultData);
@@ -64,7 +72,7 @@ const SessionLifetime = (props) => {
       setSessionLifetime(currentSettings.lifetime);
       setType(currentSettings.type);
     } else {
-      setSessionLifetime(lifetime.toString());
+      setSessionLifetime(lifetime?.toString());
       setType(enabled);
     }
 
@@ -73,7 +81,7 @@ const SessionLifetime = (props) => {
       setSessionLifetime(currentSettings.lifetime);
     } else {
       setType(enabled);
-      setSessionLifetime(lifetime.toString());
+      setSessionLifetime(lifetime?.toString());
     }
     setIsLoading(true);
   };
@@ -100,7 +108,7 @@ const SessionLifetime = (props) => {
       "defaultSessionLifetimeSettings"
     );
     const newSettings = {
-      lifetime: sessionLifetime.toString(),
+      lifetime: sessionLifetime?.toString(),
       type: type,
     };
 
@@ -114,9 +122,9 @@ const SessionLifetime = (props) => {
   }, [type, sessionLifetime]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
-      history.location.pathname.includes("lifetime") &&
-      history.push("/portal-settings/security/access-portal");
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("lifetime") &&
+      navigate("/portal-settings/security/access-portal");
   };
 
   const onSelectType = (e) => {
@@ -153,7 +161,7 @@ const SessionLifetime = (props) => {
       sessionValue = lifetime;
 
       saveToSessionStorage("currentSessionLifetimeSettings", {
-        lifetime: sessionValue.toString(),
+        lifetime: sessionValue?.toString(),
         type: type,
       });
     }
@@ -162,7 +170,7 @@ const SessionLifetime = (props) => {
       .then(() => {
         toastr.success(t("SuccessfullySaveSettingsMessage"));
         saveToSessionStorage("defaultSessionLifetimeSettings", {
-          lifetime: sessionValue.toString(),
+          lifetime: sessionValue?.toString(),
           type: type,
         });
         setShowReminder(false);
@@ -179,14 +187,25 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <SessionLifetimeLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text>{t("SessionLifetimeHelper")}</Text>
+        <Text className="learn-subtitle">
+          {t("SessionLifetimeSettingDescription")}
+        </Text>
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main.accent}
+          target="_blank"
+          isHovered
+          href={lifetimeSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -198,10 +217,12 @@ const SessionLifetime = (props) => {
         spacing="8px"
         options={[
           {
+            id: "session-lifetime-disabled",
             label: t("Disabled"),
             value: "disabled",
           },
           {
+            id: "session-lifetime-enable",
             label: t("Common:Enable"),
             value: "enable",
           },
@@ -233,11 +254,13 @@ const SessionLifetime = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
         hasScroll={false}
+        additionalClassSaveButton="session-lifetime-save"
+        additionalClassCancelButton="session-lifetime-cancel"
       />
     </MainContainer>
   );
@@ -248,6 +271,9 @@ export default inject(({ auth, setup }) => {
     sessionLifetime,
     enabledSessionLifetime,
     setSessionLifetimeSettings,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -257,7 +283,8 @@ export default inject(({ auth, setup }) => {
     setSessionLifetimeSettings,
     initSettings,
     isInit,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   };
-})(
-  withTranslation(["Settings", "Common"])(withRouter(observer(SessionLifetime)))
-);
+})(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
+import React, { useCallback, useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "@docspace/components/button";
@@ -11,7 +10,7 @@ import Box from "@docspace/components/box";
 import withLoader from "../withLoader";
 import toastr from "@docspace/components/toast/toastr";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Link from "@docspace/components/link";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
@@ -32,11 +31,15 @@ const StyledForm = styled(Box)`
     gap: 32px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto;
     flex-direction: column;
     gap: 0px;
-    padding-right: 8px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-left: 8px;`
+        : `padding-right: 8px;`}
   }
 
   .app-code-wrapper {
@@ -78,7 +81,7 @@ const StyledForm = styled(Box)`
     border-radius: 6px;
     margin-bottom: 32px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -94,7 +97,7 @@ const TfaActivationForm = withLoader((props) => {
     qrCode,
     loginWithCode,
     loginWithCodeAndCookie,
-    history,
+
     location,
     currentColorScheme,
   } = props;
@@ -106,17 +109,23 @@ const TfaActivationForm = withLoader((props) => {
   const onSubmit = async () => {
     try {
       const { user, hash } = (location && location.state) || {};
-      const { linkData } = props;
+      const { linkData, defaultPage } = props;
 
       setIsLoading(true);
 
       if (user && hash) {
-        const url = await loginWithCode(user, hash, code);
-        history.push(url || "/");
+        await loginWithCode(user, hash, code);
       } else {
-        const url = await loginWithCodeAndCookie(code, linkData.confirmHeader);
-        history.push("/");
+        await loginWithCodeAndCookie(code, linkData.confirmHeader);
       }
+
+      const referenceUrl = sessionStorage.getItem("referenceUrl");
+
+      if (referenceUrl) {
+        sessionStorage.removeItem("referenceUrl");
+      }
+
+      window.location.replace(referenceUrl || defaultPage);
     } catch (err) {
       let errorMessage = "";
       if (typeof err === "object") {
@@ -265,7 +274,7 @@ const TfaActivationWrapper = (props) => {
   const [qrCode, setQrCode] = useState("");
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const getSecretKeyAndQRAction = useCallback(async () => {
     try {
       setIsLoading(true);
       const confirmKey = linkData.confirmHeader;
@@ -280,10 +289,10 @@ const TfaActivationWrapper = (props) => {
     }
     setIsLoaded(true);
     setIsLoading(false);
-  };
+  });
 
   useEffect(() => {
-    fetchData();
+    getSecretKeyAndQRAction();
   }, []);
 
   return error ? (
@@ -303,8 +312,5 @@ export default inject(({ auth, confirm }) => ({
   tfaIosAppUrl: auth.tfaStore.tfaIosAppUrl,
   tfaWinAppUrl: auth.tfaStore.tfaWinAppUrl,
   currentColorScheme: auth.settingsStore.currentColorScheme,
-}))(
-  withRouter(
-    withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper))
-  )
-);
+  defaultPage: auth.settingsStore.defaultPage,
+}))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

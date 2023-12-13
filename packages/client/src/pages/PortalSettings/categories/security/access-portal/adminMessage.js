@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router";
-import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 import Text from "@docspace/components/text";
@@ -12,8 +12,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
-import { isMobile } from "react-device-detect";
+
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -30,17 +31,20 @@ const MainContainer = styled.div`
 const AdminMessage = (props) => {
   const {
     t,
-    history,
+
     enableAdmMess,
     setMessageSettings,
     initSettings,
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage(
@@ -89,9 +93,9 @@ const AdminMessage = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
-      history.location.pathname.includes("admin-message") &&
-      history.push("/portal-settings/security/access-portal");
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("admin-message") &&
+      navigate("/portal-settings/security/access-portal");
   };
 
   const onSelectType = (e) => {
@@ -116,15 +120,20 @@ const AdminMessage = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <AdmMsgLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text className="page-subtitle">{t("AdminsMessageHelper")}</Text>
+        <Text>{t("AdminsMessageSettingDescription")}</Text>
+        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
+
         <Link
+          className="link-learn-more"
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
@@ -143,10 +152,12 @@ const AdminMessage = (props) => {
         spacing="8px"
         options={[
           {
+            id: "admin-message-disabled",
             label: t("Disabled"),
             value: "disabled",
           },
           {
+            id: "admin-message-enable",
             label: t("Common:Enable"),
             value: "enable",
           },
@@ -160,11 +171,13 @@ const AdminMessage = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
         hasScroll={false}
+        additionalClassSaveButton="admin-message-save"
+        additionalClassCancelButton="admin-message-cancel"
       />
     </MainContainer>
   );
@@ -176,6 +189,7 @@ export default inject(({ auth, setup }) => {
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -186,5 +200,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   };
-})(withTranslation(["Settings", "Common"])(withRouter(observer(AdminMessage))));
+})(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

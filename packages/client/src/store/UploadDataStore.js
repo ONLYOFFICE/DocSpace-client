@@ -14,9 +14,10 @@ import {
   copyToFolder,
   moveToFolder,
   fileCopyAs,
+  getFolder,
 } from "@docspace/common/api/files";
 import toastr from "@docspace/components/toast/toastr";
-import { isMobile } from "react-device-detect";
+
 import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
@@ -500,10 +501,7 @@ class UploadDataStore {
 
           const percent = this.getConversationPercent(index + 1);
 
-          if (
-            numberFiles === 1 &&
-            !(isMobile || isMobileUtils() || isTabletUtils())
-          ) {
+          if (numberFiles === 1 && !(isMobileUtils() || isTabletUtils())) {
             this.setConversionPercent(progress);
           } else {
             this.setConversionPercent(percent);
@@ -1326,7 +1324,8 @@ class UploadDataStore {
     fileIds,
     conflictResolveType,
     deleteAfter,
-    operationId
+    operationId,
+    content
   ) => {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.secondaryProgressDataStore;
@@ -1336,7 +1335,8 @@ class UploadDataStore {
       folderIds,
       fileIds,
       conflictResolveType,
-      deleteAfter
+      deleteAfter,
+      content
     )
       .then((res) => {
         const pbData = { icon: "duplicate", operationId };
@@ -1449,6 +1449,7 @@ class UploadDataStore {
       deleteAfter,
       isCopy,
       translations,
+      content,
     } = data;
     const conflictResolveType = data.conflictResolveType
       ? data.conflictResolveType
@@ -1473,7 +1474,8 @@ class UploadDataStore {
           fileIds,
           conflictResolveType,
           deleteAfter,
-          operationId
+          operationId,
+          content
         )
       : this.moveToAction(
           destFolderId,

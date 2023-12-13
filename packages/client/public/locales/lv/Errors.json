@@ -2,7 +2,11 @@
   "Error401Text": "Diemžēl resurss pašlaik nav pieejams.",
   "Error403Text": "Diemžēl piekļuve liegta",
   "Error404Text": "Diemžēl resursu nevar atrast.",
+  "ErrorDeactivatedText": "Šī DocSpace ir deaktivizēta",
   "ErrorEmptyResponse": "Tukša atbilde",
   "ErrorOfflineText": "Interneta savienojums nav atrasts",
-  "ErrorUnavailableText": "DocSpace nav pieejams"
+  "ErrorUnavailableText": "DocSpace nav pieejams",
+  "InvalidLink": "Nederīga saite",
+  "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
+  "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš."
 }

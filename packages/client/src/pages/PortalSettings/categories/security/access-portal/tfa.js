@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router";
-import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 import Text from "@docspace/components/text";
@@ -11,8 +11,9 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import TfaLoader from "../sub-components/loaders/tfa-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -25,23 +26,26 @@ const MainContainer = styled.div`
 const TwoFactorAuth = (props) => {
   const {
     t,
-    history,
     initSettings,
     isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
+    currentDeviceType,
+    getTfaType,
+    smsAvailable,
+    appAvailable,
+    tfaSettings,
   } = props;
   const [type, setType] = useState("none");
-
-  const [smsDisabled, setSmsDisabled] = useState(false);
-  const [appDisabled, setAppDisabled] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const getSettings = () => {
-    const { tfaSettings, smsAvailable, appAvailable } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getSettings = async () => {
     const currentSettings = getFromSessionStorage("currentTfaSettings");
 
     saveToSessionStorage("defaultTfaSettings", tfaSettings);
@@ -51,25 +55,26 @@ const TwoFactorAuth = (props) => {
     } else {
       setType(tfaSettings);
     }
+    setIsLoading(true);
+  };
 
-    setSmsDisabled(smsAvailable);
-    setAppDisabled(appAvailable);
+  const getTfaTypeFn = async () => {
+    await getTfaType();
   };
 
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) initSettings().then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
-    getSettings();
-  }, [isLoading]);
+    if (smsAvailable === null || appAvailable === null) getTfaTypeFn();
+  }, [smsAvailable, appAvailable]);
+
+  useEffect(() => {
+    tfaSettings && getSettings();
+  }, [tfaSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -85,9 +90,9 @@ const TwoFactorAuth = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
-      history.location.pathname.includes("tfa") &&
-      history.push("/portal-settings/security/access-portal");
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("tfa") &&
+      navigate("/portal-settings/security/access-portal");
   };
 
   const onSelectTfaType = (e) => {
@@ -97,7 +102,7 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings, getTfaConfirmLink, history } = props;
+    const { t, setTfaSettings, getTfaConfirmLink } = props;
 
     setIsSaving(true);
 
@@ -111,7 +116,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        history.push(res.replace(window.location.origin, ""));
+        navigate(res.replace(window.location.origin, ""));
       }
     } catch (error) {
       toastr.error(error);
@@ -124,15 +129,18 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <TfaLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text className="learn-subtitle">{t("TwoFactorAuthHelper")}</Text>
+        <Text fontSize="13px" fontWeight="400">
+          {t("TwoFactorAuthEnableDescription")}
+        </Text>
         <Link
+          className="link-learn-more"
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
@@ -151,19 +159,22 @@ const TwoFactorAuth = (props) => {
         spacing="8px"
         options={[
           {
+            id: "tfa-disabled",
             label: t("Disabled"),
             value: "none",
           },
           //TODO: hide while 2fa by sms is not working
           /*{
+            id: "by-sms",
             label: t("BySms"),
             value: "sms",
-            disabled: !smsDisabled,
+            disabled: !smsAvailable,
           },*/
           {
+            id: "by-app",
             label: t("ByApp"),
             value: "app",
-            disabled: !appDisabled,
+            disabled: !appAvailable,
           },
         ]}
         selected={type}
@@ -175,12 +186,14 @@ const TwoFactorAuth = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
         hasScroll={false}
         isSaving={isSaving}
+        additionalClassSaveButton="two-factor-auth-save"
+        additionalClassCancelButton="two-factor-auth-cancel"
       />
     </MainContainer>
   );
@@ -193,10 +206,12 @@ export default inject(({ auth, setup }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
+    getTfaType,
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
-  const { currentColorScheme, tfaSettingsUrl } = auth.settingsStore;
+  const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
+    auth.settingsStore;
 
   return {
     setTfaSettings,
@@ -209,7 +224,7 @@ export default inject(({ auth, setup }) => {
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
+    currentDeviceType,
+    getTfaType,
   };
-})(
-  withTranslation(["Settings", "Common"])(withRouter(observer(TwoFactorAuth)))
-);
+})(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

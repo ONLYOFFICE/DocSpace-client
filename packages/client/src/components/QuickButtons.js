@@ -1,4 +1,6 @@
 ﻿import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
@@ -6,25 +8,26 @@ import React from "react";
 import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isMobile, isTablet } from "react-device-detect";
-import { FileStatus } from "@docspace/common/constants";
+import { isTablet } from "@docspace/components/utils/device";
+import { FileStatus, RoomsType } from "@docspace/common/constants";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
-
-export const StyledIcon = styled(IconButton)`
-  ${commonIconsStyles}
-`;
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
 const QuickButtons = (props) => {
   const {
+    t,
     item,
     theme,
     sectionWidth,
     onClickLock,
+    onClickDownload,
+    onCopyPrimaryLink,
     isDisabled,
     onClickFavorite,
     viewAs,
     folderCategory,
+    isPublicRoom,
+    isArchiveFolder,
   } = props;
 
   const { id, locked, fileStatus, title, fileExst } = item;
@@ -34,9 +37,7 @@ const QuickButtons = (props) => {
 
   const isTile = viewAs === "tile";
 
-  const iconLock = locked
-    ? FileActionsLockedReactSvgUrl
-    : LockedReactSvgUrl;
+  const iconLock = locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
 
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
@@ -50,8 +51,7 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
-  const tabletViewQuickButton =
-    (sectionWidth > 500 && sectionWidth <= 1024) || isTablet;
+  const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
 
@@ -59,10 +59,20 @@ const QuickButtons = (props) => {
 
   const setFavorite = () => onClickFavorite(isFavorite);
 
-  const isAvailableLockFile = !folderCategory && fileExst && displayBadges;
+  const isAvailableLockFile =
+    !folderCategory && fileExst && displayBadges && item.security.Lock;
+  const isAvailableDownloadFile =
+    isPublicRoom && item.security.Download && viewAs === "tile";
+
+  const showCopyLinkIcon =
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom) &&
+    item.shared &&
+    !isArchiveFolder &&
+    !isTile;
 
   return (
-    <div className="badges additional-badges">
+    <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
           themeId={ThemeType.IconButton}
@@ -75,6 +85,33 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("UnblockVersion")}
+        />
+      )}
+      {isAvailableDownloadFile && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={FileActionsDownloadReactSvgUrl}
+          className="badge download-file icons-group"
+          size={sizeQuickButton}
+          onClick={onClickDownload}
+          color={colorLock}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Common:Download")}
+        />
+      )}
+      {showCopyLinkIcon && (
+        <ColorTheme
+          themeId={ThemeType.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onCopyPrimaryLink}
+          color={colorLock}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopyGeneralLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

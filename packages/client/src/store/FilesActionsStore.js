@@ -8,6 +8,7 @@ import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -21,28 +22,37 @@ import {
   removeShareFiles,
   createFolder,
   moveToFolder,
+  getFolder,
 } from "@docspace/common/api/files";
 import {
   ConflictResolveType,
   FileAction,
   FileStatus,
   FolderType,
+  RoomsType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
-import { isMobile } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isTablet } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
+import AccountsFilter from "@docspace/common/api/people/filter";
 import { RoomSearchArea } from "@docspace/common/constants";
 import { getObjectByLocation } from "@docspace/common/utils";
+import { Events } from "@docspace/common/constants";
 import uniqueid from "lodash/uniqueId";
+import FilesFilter from "@docspace/common/api/files/filter";
+import {
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 
 class FilesActionStore {
   authStore;
@@ -54,11 +64,14 @@ class FilesActionStore {
   dialogsStore;
   mediaViewerDataStore;
   accessRightsStore;
+  clientLoadingStore;
+  publicRoomStore;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
+  processCreatingRoomFromData = false;
 
   constructor(
     authStore,
@@ -69,7 +82,10 @@ class FilesActionStore {
     settingsStore,
     dialogsStore,
     mediaViewerDataStore,
-    accessRightsStore
+    accessRightsStore,
+    clientLoadingStore,
+    publicRoomStore,
+    pluginStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -81,6 +97,9 @@ class FilesActionStore {
     this.dialogsStore = dialogsStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
     this.accessRightsStore = accessRightsStore;
+    this.clientLoadingStore = clientLoadingStore;
+    this.publicRoomStore = publicRoomStore;
+    this.pluginStore = pluginStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -99,10 +118,11 @@ class FilesActionStore {
       this.uploadDataStore.secondaryProgressDataStore;
 
     const {
-      filter,
       fetchFiles,
-      roomsFilter,
       fetchRooms,
+      filter,
+      roomsFilter,
+
       isEmptyLastPageAfterOperation,
       resetFilterPage,
     } = this.filesStore;
@@ -133,7 +153,11 @@ class FilesActionStore {
     if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
       fetchRooms(
         updatedFolder,
-        newFilter ? newFilter : roomsFilter.clone()
+        newFilter ? newFilter : roomsFilter.clone(),
+        undefined,
+        undefined,
+        undefined,
+        true
       ).finally(() => {
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
@@ -245,11 +269,8 @@ class FilesActionStore {
     newSelection = null,
     withoutDialog = false
   ) => {
-    const {
-      isRecycleBinFolder,
-      isPrivacyFolder,
-      recycleBinFolderId,
-    } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isPrivacyFolder, recycleBinFolderId } =
+      this.treeFoldersStore;
     const {
       addActiveItems,
       getIsEmptyTrash,
@@ -315,13 +336,6 @@ class FilesActionStore {
 
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
-
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
 
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
@@ -537,45 +551,50 @@ class FilesActionStore {
       label,
       alert: false,
       operationId,
+      isDownload: true,
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
     addActiveItems(fileIds, folderIds);
 
+    const shareKey = this.publicRoomStore.publicRoomKey;
+
     try {
-      await downloadFiles(fileConvertIds, folderIds).then(async (res) => {
-        const data = res[0] ? res[0] : null;
-        const pbData = {
-          icon: "file",
-          label,
-          operationId,
-        };
-
-        const item =
-          data?.finished && data?.url
-            ? data
-            : await this.uploadDataStore.loopFilesOperations(
-                data,
-                pbData,
-                true
-              );
-
-        clearActiveOperations(fileIds, folderIds);
-        this.setIsBulkDownload(false);
-
-        if (item.url) {
-          window.location.href = item.url;
-        } else {
-          setSecondaryProgressBarData({
-            visible: true,
-            alert: true,
+      await downloadFiles(fileConvertIds, folderIds, shareKey).then(
+        async (res) => {
+          const data = res[0] ? res[0] : null;
+          const pbData = {
+            icon: "file",
+            label,
             operationId,
-          });
-        }
+          };
 
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        !item.url && toastr.error(translations.error, null, 0, true);
-      });
+          const item =
+            data?.finished && data?.url
+              ? data
+              : await this.uploadDataStore.loopFilesOperations(
+                  data,
+                  pbData,
+                  true
+                );
+
+          clearActiveOperations(fileIds, folderIds);
+          this.setIsBulkDownload(false);
+
+          if (item.url) {
+            window.location.href = item.url;
+          } else {
+            setSecondaryProgressBarData({
+              visible: true,
+              alert: true,
+              operationId,
+            });
+          }
+
+          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+          !item.url && toastr.error(translations.error, null, 0, true);
+        }
+      );
     } catch (err) {
       this.setIsBulkDownload(false);
       clearActiveOperations(fileIds, folderIds);
@@ -591,10 +610,18 @@ class FilesActionStore {
 
   downloadAction = (label, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : [bufferSelection];
+      : bufferSelection
+      ? [bufferSelection]
+      : infoPanelIsVisible && infoPanelSelection != null
+      ? [infoPanelSelection]
+      : null;
+
+    if (!selection.length) return;
 
     let fileIds = [];
     let folderIds = [];
@@ -613,14 +640,6 @@ class FilesActionStore {
         folderIds.push(item.id);
         items.push({ id: item.id });
       }
-    }
-
-    if (this.dialogsStore.isFolderActions) {
-      fileIds = [];
-      folderIds = [];
-
-      folderIds.push(bufferSelection);
-      this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);
@@ -994,7 +1013,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomPinned")));
+          .then(() =>
+            toastr.success(
+              items.length > 1
+                ? t("RoomsPinned", { count: items.length })
+                : t("RoomPinned")
+            )
+          )
+          .catch((error) => console.log(error));
       case "unpin":
         items.forEach((item) => {
           updateRoomPin(item);
@@ -1008,7 +1034,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomUnpinned")));
+          .then(() => {
+            toastr.success(
+              items.length > 1
+                ? t("RoomsUnpinned", { count: items.length })
+                : t("RoomUnpinned")
+            );
+          })
+          .catch((error) => console.log(error));
       default:
         return;
     }
@@ -1019,12 +1052,12 @@ class FilesActionStore {
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
 
-    const muteStatus = action === "mute" ? true : false;
+    const muteStatus = action === "mute";
 
-    const folderIndex = id && folders.findIndex((x) => x.id === id);
+    const folderIndex = id && folders.findIndex((x) => x.id == id);
     if (folderIndex) updateRoomMute(folderIndex, muteStatus);
 
-    const treeIndex = treeFolders.findIndex((x) => x.id === rootFolderId);
+    const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
       if (muteStatus) {
@@ -1211,9 +1244,13 @@ class FilesActionStore {
   };
 
   selectTag = (tag) => {
-    const { roomsFilter, fetchRooms, setIsLoading } = this.filesStore;
+    const { roomsFilter } = this.filesStore;
 
-    const { id } = this.selectedFolderStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionBodyLoading(param);
+    };
 
     const newFilter = roomsFilter.clone();
 
@@ -1237,13 +1274,19 @@ class FilesActionStore {
     }
 
     setIsLoading(true);
-
-    fetchRooms(id, newFilter).finally(() => setIsLoading(false));
+    window.DocSpace.navigate(
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`
+    );
   };
 
   selectOption = ({ option, value }) => {
-    const { roomsFilter, fetchRooms, setIsLoading } = this.filesStore;
-    const { id } = this.selectedFolderStore;
+    const { roomsFilter } = this.filesStore;
+
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionBodyLoading(param);
+    };
 
     const newFilter = roomsFilter.clone();
     const tags = newFilter.tags ? [...newFilter.tags] : [];
@@ -1258,7 +1301,9 @@ class FilesActionStore {
     }
 
     setIsLoading(true);
-    fetchRooms(id, newFilter).finally(() => setIsLoading(false));
+    window.DocSpace.navigate(
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`
+    );
   };
 
   selectRowAction = (checked, file) => {
@@ -1283,31 +1328,69 @@ class FilesActionStore {
     }
   };
 
-  openLocationAction = async (locationId) => {
-    const { setBufferSelection, setIsLoading, fetchFiles } = this.filesStore;
+  openLocationAction = async (item) => {
+    if (this.publicRoomStore.isPublicRoom)
+      return this.moveToPublicRoom(item.id);
 
-    setBufferSelection(null);
-    setIsLoading(true);
-    const files = await fetchFiles(locationId, null);
-    setIsLoading(false);
-    return files;
+    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+
+    const { id, isRoom, title, rootFolderType } = item;
+    const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
+
+    const state = { title, rootFolderType, isRoot: false, isRoom };
+    const filter = FilesFilter.getDefault();
+
+    filter.folder = id;
+
+    const url = getCategoryUrl(categoryType, id);
+
+    window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
   };
 
   checkAndOpenLocationAction = async (item) => {
-    const { filter, setHighlightFile, fetchFiles } = this.filesStore;
-    const newFilter = filter.clone();
+    const { categoryType } = this.filesStore;
+    const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
+      this.treeFoldersStore;
+    const { rootFolderType } = this.selectedFolderStore;
+    const { setIsSectionFilterLoading } = this.clientLoadingStore;
 
-    newFilter.page = 0;
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+
+    const { ExtraLocationTitle, ExtraLocation, fileExst } = item;
+
+    const isRoot =
+      ExtraLocation === myRoomsId ||
+      ExtraLocation === myFolderId ||
+      ExtraLocation === archiveRoomsId ||
+      ExtraLocation === recycleBinFolderId;
+
+    const state = {
+      title: ExtraLocationTitle,
+
+      isRoot,
+      fileExst,
+      highlightFileId: item.id,
+      isFileHasExst: !item.fileExst,
+      rootFolderType,
+    };
+
+    const url = getCategoryUrl(categoryType, ExtraLocation);
+
+    const newFilter = FilesFilter.getDefault();
+
     newFilter.search = item.title;
+    newFilter.folder = ExtraLocation;
 
-    fetchFiles(item.ExtraLocation, newFilter)
-      .then(() => {
-        setHighlightFile({
-          highlightFileId: item.id,
-          isFileHasExst: !item.fileExst,
-        });
-      })
-      .catch((err) => toastr.error(err));
+    setIsLoading(
+      window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
+        url !== window.DocSpace.location.pathname
+    );
+
+    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
+
+    window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
 
   setThirdpartyInfo = (providerKey) => {
@@ -1381,9 +1464,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder || el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 
@@ -1422,9 +1509,9 @@ class FilesActionStore {
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  setSelectedItems = () => {
-    const selectionLength = this.filesStore.selection.length;
-    const selectionTitle = this.filesStore.selectionTitle;
+  setSelectedItems = (title, length) => {
+    const selectionLength = length ? length : this.filesStore.selection.length;
+    const selectionTitle = title ? title : this.filesStore.selectionTitle;
 
     if (selectionLength !== undefined && selectionTitle) {
       this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(
@@ -1473,6 +1560,7 @@ class FilesActionStore {
       this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
+    const canDownload = selection.every((s) => s.security?.Download);
 
     switch (option) {
       case "copy":
@@ -1481,9 +1569,9 @@ class FilesActionStore {
         return hasSelection && canCopy;
       case "showInfo":
       case "download":
-        return hasSelection;
+        return hasSelection && canDownload;
       case "downloadAs":
-        return canConvertSelected;
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 
@@ -1510,6 +1598,10 @@ class FilesActionStore {
         const canDelete = selection.every((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
+      case "create-room":
+        const canCreateRoom = rootFolderType === FolderType.USER;
+
+        return canCreateRoom;
     }
   };
 
@@ -1641,6 +1733,16 @@ class FilesActionStore {
     setIsVisible(true);
   };
 
+  setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
+    this.processCreatingRoomFromData = processCreatingRoomFromData;
+  };
+
+  onClickCreateRoom = () => {
+    this.setProcessCreatingRoomFromData(true);
+    const event = new Event(Events.ROOM_CREATE);
+    window.dispatchEvent(event);
+  };
+
   getOption = (option, t) => {
     const {
       setSharingPanelVisible,
@@ -1652,7 +1754,7 @@ class FilesActionStore {
 
     switch (option) {
       case "show-info":
-        if (!isTablet() && !isMobile) return null;
+        if (isDesktop()) return null;
         else
           return {
             id: "menu-show-info",
@@ -1669,6 +1771,16 @@ class FilesActionStore {
             label: t("Common:Copy"),
             onClick: () => setCopyPanelVisible(true),
             iconUrl: CopyToReactSvgUrl,
+          };
+
+      case "create-room":
+        if (!this.isAvailableOption("create-room")) return null;
+        else
+          return {
+            id: "menu-create-room",
+            label: t("Files:CreateRoom"),
+            onClick: this.onClickCreateRoom,
+            iconUrl: CatalogRoomsReactSvgUrl,
           };
 
       case "download":
@@ -1810,6 +1922,7 @@ class FilesActionStore {
   };
 
   getAnotherFolderOptions = (itemsCollection, t) => {
+    const createRoom = this.getOption("create-room", t);
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
     const moveTo = this.getOption("moveTo", t);
@@ -1818,6 +1931,7 @@ class FilesActionStore {
     const showInfo = this.getOption("showInfo", t);
 
     itemsCollection
+      .set("createRoom", createRoom)
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("moveTo", moveTo)
@@ -1913,8 +2027,7 @@ class FilesActionStore {
   };
 
   getRecycleBinFolderOptions = (itemsCollection, t) => {
-    const { setEmptyTrashDialogVisible, setMoveToPanelVisible } =
-      this.dialogsStore;
+    const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -1927,7 +2040,7 @@ class FilesActionStore {
       .set("restore", {
         id: "menu-restore",
         label: t("Common:Restore"),
-        onClick: () => setMoveToPanelVisible(true),
+        onClick: () => setRestorePanelVisible(true),
         iconUrl: MoveReactSvgUrl,
       })
       .set("delete", deleteOption)
@@ -1972,23 +2085,31 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item) => {
-    const {
-      isLoading,
-      setIsLoading,
-      fetchFiles,
-      openDocEditor,
-      isPrivacyFolder,
-    } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
+    const { currentDeviceType } = this.authStore.settingsStore;
+    const { fileItemsList } = this.pluginStore;
+    const { enablePlugins } = this.authStore.settingsStore;
+
+    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
+    const { roomType, title: currentTitle } = this.selectedFolderStore;
+
+    if (this.publicRoomStore.isPublicRoom && item.isFolder)
+      return this.moveToPublicRoom(item.id);
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+
     const isMediaOrImage =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
     const canConvert =
-      item.viewAccessability?.Convert && item.security?.Convert;
-    const canWebEdit = item.viewAccessability?.WebEdit;
-    const canViewedDocs = item.viewAccessability?.WebView;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
+    const canWebEdit = item.viewAccessibility?.WebEdit;
+    const canViewedDocs = item.viewAccessibility?.WebView;
 
     const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
@@ -1996,14 +2117,30 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
+      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
+
       setIsLoading(true);
 
-      fetchFiles(id, null, true, false)
-        .catch((err) => {
-          toastr.error(err);
-          setIsLoading(false);
-        })
-        .finally(() => setIsLoading(false));
+      const path = getCategoryUrl(
+        getCategoryTypeByFolderType(rootFolderType, id),
+        id
+      );
+
+      const filter = FilesFilter.getDefault();
+      filter.folder = id;
+
+      const state = {
+        title,
+        isRoot: false,
+        rootFolderType,
+        isRoom,
+        rootRoomTitle: !!roomType ? currentTitle : "",
+        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+      };
+
+      setSelection([]);
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
@@ -2029,17 +2166,42 @@ class FilesActionStore {
               )
             : null;
 
-        return openDocEditor(id, providerKey, tab, null, !canWebEdit);
+        const isPreview = item.isForm
+          ? !item.security.FillForms
+          : !item.security.Edit;
+
+        return openDocEditor(id, providerKey, tab, null, isPreview);
       }
 
       if (isMediaOrImage) {
         // localStorage.setItem("isFirstUrl", window.location.href);
-        this.mediaViewerDataStore.saveFirstUrl(window.location.href);
+
+        this.mediaViewerDataStore.saveFirstUrl(
+          `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
+        );
         setMediaViewerData({ visible: true, id });
 
         const url = "/products/files/#preview/" + id;
-        history.pushState(null, null, url);
+
+        if (this.publicRoomStore.isPublicRoom) return;
+
+        window.DocSpace.navigate(url);
         return;
+      }
+
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
       }
 
       return window.open(viewUrl, "_self");
@@ -2047,15 +2209,21 @@ class FilesActionStore {
   };
 
   onClickBack = () => {
-    const { roomType, parentId, setSelectedFolder } = this.selectedFolderStore;
+    const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
+    const { clearFiles } = this.filesStore;
 
-    const categoryType = getCategoryType(location);
+    const categoryType = getCategoryType(window.DocSpace.location);
+
     const isRoom = !!roomType;
 
-    const urlFilter = getObjectByLocation(location);
+    const urlFilter = getObjectByLocation(window.DocSpace.location);
 
     const isArchivedRoom = !!(CategoryType.Archive && urlFilter?.folder);
+
+    if (this.publicRoomStore.isPublicRoom) {
+      return this.backToParentFolder();
+    }
 
     if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
       if (isRoom) {
@@ -2080,71 +2248,174 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Settings) {
-      setSelectedFolder(null);
+      clearFiles();
+
+      const path = getCategoryUrl(CategoryType.Settings);
+
       setSelectedNode(["common"]);
+
+      return window.DocSpace.navigate(path, { replace: true });
     }
 
     if (categoryType === CategoryType.Accounts) {
-      setSelectedFolder(null);
+      const accountsFilter = AccountsFilter.getDefault();
+      const params = accountsFilter.toUrlParams();
+      const path = getCategoryUrl(CategoryType.Accounts);
+
+      clearFiles();
+
       setSelectedNode(["accounts", "filter"]);
+
+      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
   };
 
   moveToRoomsPage = () => {
-    const { setIsLoading, fetchRooms, setAlreadyFetchingRooms } =
-      this.filesStore;
-
-    const categoryType = getCategoryType(location);
-
-    setIsLoading(true);
-    setAlreadyFetchingRooms(true);
+    const categoryType = getCategoryType(window.DocSpace.location);
 
     const filter = RoomsFilter.getDefault();
+
+    const correctCategoryType =
+      categoryType === CategoryType.SharedRoom
+        ? CategoryType.Shared
+        : CategoryType.ArchivedRoom === categoryType
+        ? CategoryType.Archive
+        : categoryType;
+
+    const path = getCategoryUrl(correctCategoryType);
+
+    const state = {
+      title:
+        (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath[
+            this.selectedFolderStore?.navigationPath?.length - 1
+          ]?.title) ||
+        "",
+      isRoot: true,
+      isPublicRoomType: false,
+      rootFolderType: this.selectedFolderStore.rootFolderType,
+    };
 
     if (categoryType == CategoryType.Archive) {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
-    fetchRooms(null, filter, undefined, undefined, undefined, true).finally(
-      () => {
-        setIsLoading(false);
-      }
+    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
+  };
+
+  moveToPublicRoom = (folderId) => {
+    const { navigationPath, rootFolderType } = this.selectedFolderStore;
+    const { publicRoomKey } = this.publicRoomStore;
+    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+
+    const id = folderId ? folderId : this.selectedFolderStore.parentId;
+    const path = getCategoryUrl(CategoryType.PublicRoom);
+    const filter = FilesFilter.getDefault();
+    filter.folder = id;
+
+    const state = {
+      title: navigationPath[0]?.title || "",
+      isRoot: navigationPath.length === 1,
+      rootFolderType: rootFolderType,
+    };
+
+    setIsSectionFilterLoading(true);
+    window.DocSpace.navigate(
+      `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
+      { state }
     );
   };
 
   backToParentFolder = () => {
-    const {
-      archiveFolderId,
-      myFolderId,
-      myRoomsId,
-      isTrashFolder,
-    } = this.treeFoldersStore;
-    const currentFolderId = this.selectedFolderStore?.id;
+    if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
 
-    if (
-      currentFolderId === archiveFolderId ||
-      currentFolderId === myFolderId ||
-      currentFolderId === myRoomsId ||
-      isTrashFolder
-    )
-      return;
+    const id = this.selectedFolderStore.parentId;
 
-    const { setIsLoading, fetchFiles } = this.filesStore;
+    const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
-    let id = this.selectedFolderStore.parentId;
+    const filter = FilesFilter.getDefault();
 
-    if (!id) {
-      const urlFilter = getObjectByLocation(location);
-      id = urlFilter.folder;
-    }
+    filter.folder = id;
 
-    setIsLoading(true);
+    const categoryType = getCategoryType(window.DocSpace.location);
+    const path = getCategoryUrl(categoryType, id);
 
-    fetchFiles(id, null, true, false).finally(() => setIsLoading(false));
+    const isRoot = navigationPath.length === 1;
+
+    const state = {
+      title: (navigationPath && navigationPath[0]?.title) || "",
+      isRoom: navigationPath[0]?.isRoom,
+      isRoot,
+      rootFolderType: rootFolderType,
+      isPublicRoomType: navigationPath[0]?.isRoom
+        ? navigationPath[0]?.roomType === RoomsType.PublicRoom
+        : false,
+      rootRoomTitle: "",
+    };
+
+    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+      state,
+      replace: true,
+    });
   };
 
   setGroupMenuBlocked = (blocked) => {
     this.isGroupMenuBlocked = blocked;
+  };
+
+  preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
+    let fileIds = [];
+    let folderIds = [];
+
+    if (!selections.length) return;
+    const oneFolder = selections.length === 1 && selections[0].isFolder;
+
+    if (oneFolder) {
+      folderIds = [selections[0].id];
+
+      try {
+        const selectedFolder = await getFolder(selections[0].id);
+        const { folders, files, total } = selectedFolder;
+
+        if (total === 0) {
+          this.filesStore.setSelection([]);
+          this.filesStore.setBufferSelection(null);
+          return;
+        }
+
+        const title = !!folders.length ? folders[0].title : files[0].title;
+        this.setSelectedItems(title, total);
+      } catch (err) {
+        toastr.error(err);
+      }
+    }
+
+    !oneFolder &&
+      selections.map((item) => {
+        if (item.fileExst || item.contentLength) fileIds.push(item.id);
+        else folderIds.push(item.id);
+      });
+
+    !oneFolder && this.setSelectedItems(selections[0].title, selections.length);
+    this.filesStore.setSelection([]);
+    this.filesStore.setBufferSelection(null);
+
+    const operationData = {
+      destFolderId,
+      folderIds: folderIds,
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      translations: {
+        copy: t("Common:CopyOperation"),
+      },
+      content: oneFolder,
+    };
+
+    this.uploadDataStore.itemOperationToFolder(operationData);
   };
 }
 

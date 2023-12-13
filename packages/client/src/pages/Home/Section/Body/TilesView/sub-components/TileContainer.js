@@ -10,12 +10,27 @@ import InfiniteGrid from "./InfiniteGrid";
 
 const paddingCss = css`
   @media ${desktop} {
-    margin-left: 1px;
-    padding-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 1px;
+            padding-left: 0px;
+          `
+        : css`
+            margin-left: 1px;
+            padding-right: 0px;
+          `}
   }
 
   @media ${tablet} {
-    margin-left: -1px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -1px;
+          `
+        : css`
+            margin-left: -1px;
+          `}
   }
 `;
 
@@ -75,7 +90,14 @@ const StyledTileContainer = styled.div`
       cursor: pointer !important;
 
       .sort-combo-box {
-        margin-right: 3px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 3px;
+              `
+            : css`
+                margin-right: 3px;
+              `}
         .dropdown-container {
           top: 104%;
           bottom: auto;
@@ -131,13 +153,20 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: 12px;
+          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
 
           .sort-icon {
-            margin-right: 8px;
+            ${(props) =>
+              props.theme.interfaceDirection === "rtl"
+                ? css`
+                    margin-left: 8px;
+                  `
+                : css`
+                    margin-right: 8px;
+                  `}
             svg {
               path {
                 fill: ${(props) => props.theme.filterInput.sort.tileSortFill};
@@ -154,7 +183,14 @@ const StyledTileContainer = styled.div`
   }
 
   @media ${tablet} {
-    margin-right: -3px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: -3px;
+          `
+        : css`
+            margin-right: -3px;
+          `}
   }
 `;
 
@@ -278,17 +314,18 @@ TileContainer.defaultProps = {
 
 export default inject(({ auth, filesStore, treeFoldersStore }) => {
   const { personal } = auth.settingsStore;
-  const { fetchFiles, filter, setIsLoading } = filesStore;
+  const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 
   const isDesc = filter?.sortOrder === "desc";
 
   return {
     personal,
-    fetchFiles,
-    setIsLoading,
+
     isFavoritesFolder,
     isRecentFolder,
     isDesc,
   };
-})(observer(withTranslation(["Files", "Common"])(TileContainer)));
+})(
+  observer(withTranslation(["Files", "Common", "Notifications"])(TileContainer))
+);

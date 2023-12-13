@@ -5,21 +5,37 @@ import ObjectUtils from "../../utils/objectUtils";
 import { classNames } from "../../utils/classNames";
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
+import { useTheme } from "styled-components";
+
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
 import Scrollbar from "../../scrollbar";
 import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
-//import CustomScrollbarsVirtualList from "../../scrollbar/custom-scrollbars-virtual-list";
-//import { VariableSizeList } from "react-window";
+import ContextMenuSkeleton from "../../skeletons/context-menu";
+
+import { isMobile, isTablet } from "../../utils/device";
 
 const SubMenu = (props) => {
-  const { onLeafClick, root, resetMenu, model, changeView } = props;
+  const {
+    onLeafClick,
+    root,
+    resetMenu,
+    changeView,
+    onMobileItemClick,
+    onLoad,
+  } = props;
 
+  const [model, setModel] = useState(props.model);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
+
   const subMenuRef = useRef();
 
+  const theme = useTheme();
+
   const onItemMouseEnter = (e, item) => {
-    if (item.disabled) {
+    if (item.disabled || isTablet() || isMobile()) {
       e.preventDefault();
       return;
     }
@@ -28,6 +44,15 @@ const SubMenu = (props) => {
   };
 
   const onItemClick = (e, item) => {
+    if (item.onLoad) {
+      e.preventDefault();
+      if (!isMobile() && !isTablet()) return;
+
+      if (isMobile() || isTablet()) onMobileItemClick(e, item.onLoad);
+      else onLeafClick(e);
+      return;
+    }
+
     const { disabled, url, onClick, items, action } = item;
     if (disabled) {
       e.preventDefault();
@@ -48,33 +73,49 @@ const SubMenu = (props) => {
 
     if (!items) {
       onLeafClick(e);
+    } else {
+      e.stopPropagation();
     }
   };
 
   const position = () => {
-    const parentItem = subMenuRef.current.parentElement;
+    const parentItem = subMenuRef.current?.parentElement;
     const containerOffset = DomHelpers.getOffset(
-      subMenuRef.current.parentElement
+      subMenuRef.current?.parentElement
     );
     const viewport = DomHelpers.getViewport();
     const subListWidth = subMenuRef.current.offsetParent
       ? subMenuRef.current.offsetWidth
       : DomHelpers.getHiddenElementOuterWidth(subMenuRef.current);
     const itemOuterWidth = DomHelpers.getOuterWidth(parentItem.children[0]);
-
+    const isRtl = theme.interfaceDirection === "rtl";
     subMenuRef.current.style.top = "0px";
-
-    if (
-      parseInt(containerOffset.left, 10) + itemOuterWidth + subListWidth >
-      viewport.width - DomHelpers.calculateScrollbarWidth()
-    ) {
-      subMenuRef.current.style.left = -1 * subListWidth + "px";
+    if (isRtl) {
+      if (subListWidth < parseInt(containerOffset.left, 10)) {
+        subMenuRef.current.style.left = -1 * subListWidth + "px";
+      } else {
+        subMenuRef.current.style.left = itemOuterWidth + "px";
+      }
     } else {
-      subMenuRef.current.style.left = itemOuterWidth + "px";
+      if (
+        parseInt(containerOffset.left, 10) + itemOuterWidth + subListWidth >
+        viewport.width - DomHelpers.calculateScrollbarWidth()
+      ) {
+        subMenuRef.current.style.left = -1 * subListWidth + "px";
+      } else {
+        subMenuRef.current.style.left = itemOuterWidth + "px";
+      }
     }
   };
 
-  const onEnter = () => {
+  const onEnter = async () => {
+    if (onLoad && model && model.length && model[0].isLoader && !isLoading) {
+      setIsLoading(true);
+      const res = await onLoad();
+      setIsLoading(false);
+      setModel(res);
+    }
+
     position();
   };
 
@@ -98,12 +139,21 @@ const SubMenu = (props) => {
   );
 
   const renderSubMenu = (item) => {
-    if (item.items) {
+    const loaderItem = {
+      id: "link-loader-option",
+      key: "link-loader",
+      isLoader: true,
+      label: <ContextMenuSkeleton />,
+    };
+
+    if (item.items || item.onLoad) {
       return (
         <SubMenu
-          model={item.items}
+          model={item.onLoad ? [loaderItem] : item.items}
           resetMenu={item !== activeItem}
           onLeafClick={onLeafClick}
+          onEnter={onEnter}
+          onLoad={item.onLoad}
         />
       );
     }
@@ -121,16 +171,17 @@ const SubMenu = (props) => {
       item.className
     );
     const linkClassName = classNames("p-menuitem-link", "not-selectable", {
-      "p-disabled": item.disabled,
+      "p-disabled": item.disabled || item.disableColor,
     });
     const iconClassName = classNames("p-menuitem-icon", {
-      "p-disabled": item.disabled,
+      "p-disabled": item.disabled || item.disableColor,
     });
     const subMenuIconClassName = "p-submenu-icon";
 
     const icon =
       item.icon &&
-      (!item.icon.includes("images/") ? (
+      ((!item.icon.includes("images/") && !item.icon.includes(".svg")) ||
+      item.icon.includes("webplugins") ? (
         <img src={item.icon} className={iconClassName} />
       ) : (
         <ReactSVG wrapper="span" className={iconClassName} src={item.icon} />
@@ -139,7 +190,7 @@ const SubMenu = (props) => {
     const label = item.label && (
       <span className="p-menuitem-text not-selectable">{item.label}</span>
     );
-    const subMenuIcon = item.items && (
+    const subMenuIcon = (item.items || item.onLoad) && (
       <ArrowIcon className={subMenuIconClassName} />
     );
     const subMenu = renderSubMenu(item);
@@ -161,6 +212,9 @@ const SubMenu = (props) => {
         {icon}
         {label}
         {subMenuIcon}
+        {item.isOutsideLink && (
+          <OutsdideIcon className={subMenuIconClassName} />
+        )}
       </a>
     );
 

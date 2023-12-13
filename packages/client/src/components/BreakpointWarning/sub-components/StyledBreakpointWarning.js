@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { mobileMore } from "@docspace/components/utils/device";
 
 const StyledBreakpointWarning = styled.div`
-  padding: 24px 44px 0 24px;
+  padding: ${({ theme }) =>
+    getCorrectFourValuesStyle("24px 44px 0 24px", theme.interfaceDirection)};
   display: flex;
   flex-direction: column;
 
@@ -14,7 +17,7 @@ const StyledBreakpointWarning = styled.div`
 
   .text-breakpoint {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     padding-bottom: 8px;
     max-width: 348px;
@@ -22,7 +25,7 @@ const StyledBreakpointWarning = styled.div`
 
   .text-prompt {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
   }
 
@@ -31,13 +34,15 @@ const StyledBreakpointWarning = styled.div`
     height: 72px;
   }
 
-  @media (min-width: 600px) {
+  @media ${mobileMore} {
     flex-direction: row;
 
-    padding: 65px 0 0 104px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle("65px 0 0 104px", theme.interfaceDirection)};
 
     .description {
-      padding: 0 0 0 32px;
+      padding: ${({ theme }) =>
+        getCorrectFourValuesStyle("0 0 0 32px", theme.interfaceDirection)};
     }
 
     img {

@@ -9,6 +9,7 @@ import {
 import TableSettings from "./TableSettings";
 import TableHeaderCell from "./TableHeaderCell";
 import { size } from "../utils/device";
+import { withTheme } from "styled-components";
 
 const minColumnSize = 150;
 const defaultMinColumnSize = 110;
@@ -120,9 +121,11 @@ class TableHeader extends React.Component {
     const defaultColumn = document.getElementById("column_" + colIndex);
     if (!defaultColumn || defaultColumn.dataset.defaultSize) return;
 
+    const handleOffset = 8;
+
     if (column2Width + offset >= defaultMinColumnSize) {
-      widths[+columnIndex] = newWidth + "px";
-      widths[colIndex] = column2Width + offset + "px";
+      widths[+columnIndex] = newWidth + handleOffset + "px";
+      widths[colIndex] = column2Width + offset - handleOffset + "px";
     } else {
       if (colIndex === this.props.columns.length) return false;
       return this.moveToRight(widths, newWidth, colIndex + 1);
@@ -167,11 +170,15 @@ class TableHeader extends React.Component {
 
   onMouseMove = (e) => {
     const { columnIndex } = this.state;
-    const { containerRef } = this.props;
+    const { containerRef, theme } = this.props;
+    const isRtl = theme.interfaceDirection === "rtl";
+
     if (!columnIndex) return;
     const column = document.getElementById("column_" + columnIndex);
     const columnSize = column.getBoundingClientRect();
-    const newWidth = e.clientX - columnSize.left;
+    const newWidth = isRtl
+      ? columnSize.right - e.clientX
+      : e.clientX - columnSize.left;
 
     const tableContainer = containerRef.current.style.gridTemplateColumns;
     const widths = tableContainer.split(" ");
@@ -220,6 +227,14 @@ class TableHeader extends React.Component {
     window.addEventListener("mouseup", this.onMouseUp);
   };
 
+  checkingForUnfixedSize = (item, defaultColumnSize) => {
+    return (
+      item !== `${settingsSize}px` &&
+      item !== `${defaultColumnSize}px` &&
+      item !== "0px"
+    );
+  };
+
   onResize = () => {
     const {
       containerRef,
@@ -243,19 +258,12 @@ class TableHeader extends React.Component {
       ? containerRef.current
       : document.getElementById("table-container");
 
-    // 400 - it is desktop info panel width
-    const minSize = infoPanelVisible ? size.tablet - 400 : size.tablet;
-
-    if (
-      !container ||
-      +container.clientWidth + containerMargin <= minSize ||
-      sectionWidth <= minSize
-    )
-      return;
+    if (!container) return;
 
     const storageSize =
       !resetColumnsSize && localStorage.getItem(columnStorageName);
 
+    //TODO: If defaultSize(75px) is less than defaultMinColumnSize(110px) the calculations work correctly
     const defaultSize =
       this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
 
@@ -285,6 +293,8 @@ class TableHeader extends React.Component {
       return this.resetColumns(true);
     }
 
+    if (!container) return;
+
     const containerWidth = +container.clientWidth;
 
     const oldWidth =
@@ -301,13 +311,33 @@ class TableHeader extends React.Component {
       let hideColumns = false;
 
       if (infoPanelVisible) {
+        let contentColumnsCount = 0;
+        let contentColumnsCountInfoPanel = 0;
+
         const storageInfoPanelSize = localStorage.getItem(
           columnInfoPanelStorageName
         );
 
-        const tableInfoPanelContainer = storageInfoPanelSize
-          ? storageInfoPanelSize.split(" ")
-          : tableContainer;
+        if (storageInfoPanelSize) {
+          contentColumnsCountInfoPanel = storageInfoPanelSize
+            .split(" ")
+            .filter((item) =>
+              this.checkingForUnfixedSize(item, defaultSize)
+            ).length;
+
+          contentColumnsCount = tableContainer.filter((item) =>
+            this.checkingForUnfixedSize(item, defaultSize)
+          ).length;
+        }
+
+        let incorrectNumberColumns =
+          contentColumnsCountInfoPanel < contentColumnsCount &&
+          !this.state.hideColumns;
+
+        const tableInfoPanelContainer =
+          storageInfoPanelSize && !incorrectNumberColumns
+            ? storageInfoPanelSize.split(" ")
+            : tableContainer;
 
         let containerMinWidth = containerWidth - defaultSize - settingsSize;
 
@@ -589,8 +619,9 @@ class TableHeader extends React.Component {
       columns,
       infoPanelVisible,
     } = this.props;
-    const defaultSize = this.props.columns.find((col) => col.defaultSize)
-      ?.defaultSize;
+    const defaultSize = this.props.columns.find(
+      (col) => col.defaultSize
+    )?.defaultSize;
 
     let str = "";
 
@@ -666,6 +697,7 @@ class TableHeader extends React.Component {
       infoPanelVisible,
       showSettings,
       tagRef,
+      settingsTitle,
       ...rest
     } = this.props;
 
@@ -688,7 +720,7 @@ class TableHeader extends React.Component {
 
               return (
                 <TableHeaderCell
-                  key={column.key}
+                  key={column.key ?? "empty-cell"}
                   index={index}
                   column={column}
                   sorted={sorted}
@@ -703,7 +735,10 @@ class TableHeader extends React.Component {
             })}
 
             {showSettings && (
-              <div className="table-container_header-settings">
+              <div
+                className="table-container_header-settings"
+                title={settingsTitle}
+              >
                 <TableSettings
                   columns={columns}
                   infoPanelVisible={infoPanelVisible}
@@ -742,4 +777,4 @@ TableHeader.propTypes = {
   showSettings: PropTypes.bool,
 };
 
-export default TableHeader;
+export default withTheme(TableHeader);

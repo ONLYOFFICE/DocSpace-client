@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import Row from "@docspace/components/row";
 import { tablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
+import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledBody = styled.div`
   height: 100%;
@@ -12,13 +13,15 @@ const StyledBody = styled.div`
   }
 
   .loader-history-rows {
-    padding-right: 16px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-left: 16px;`
+        : `padding-right: 16px;`}
   }
 `;
 
 const StyledVersionList = styled.div`
-
-.row_context-menu-wrapper {
+  .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>
         props.isRestoreProcess &&
@@ -37,11 +40,9 @@ const StyledVersionList = styled.div`
         }
       }
     }
-  
   }
 
   .row_content {
-
     .version_link,
     .version-link-file,
     .version_content-length,
@@ -54,21 +55,22 @@ const StyledVersionList = styled.div`
           color:${(props) => props.theme.filesVersionHistory.versionList.color};
           touch-action: none;
           pointer-events: none;
-        `}
+        `};
     }
 
-    .versioned, .not-versioned {
+    .versioned,
+    .not-versioned {
       ${(props) =>
         props.isRestoreProcess &&
         `
         touch-action: none;
         pointer-events: none;
-        `}
+        `};
     }
 
-    .versioned { 
-        svg {
-            path {
+    .versioned {
+      svg {
+        path {
           ${(props) =>
             props.isRestoreProcess &&
             `
@@ -79,10 +81,9 @@ const StyledVersionList = styled.div`
       }
     }
 
-    .not-versioned{
-        svg {
-            path {
-
+    .not-versioned {
+      svg {
+        path {
           ${(props) =>
             props.isRestoreProcess &&
             `
@@ -92,22 +93,20 @@ const StyledVersionList = styled.div`
         }
       }
     }
-
-}
-    .icon-link {
-      ${(props) =>
-        props.isRestoreProcess &&
-        `
+  }
+  .icon-link {
+    ${(props) =>
+      props.isRestoreProcess &&
+      `
         touch-action: none;
         pointer-events: none;
         `}
-      svg {
-        path {
-          ${(props) =>
-            props.isRestoreProcess &&
-            `fill: ${(props) =>
-              props.theme.filesVersionHistory.versionList.fill}`}
-        }
+    svg {
+      path {
+        ${(props) =>
+          props.isRestoreProcess &&
+          `fill: ${(props) =>
+            props.theme.filesVersionHistory.versionList.fill}`}
       }
     }
   }
@@ -121,17 +120,30 @@ const StyledVersionRow = styled(Row)`
     padding-top: 13px;
     padding-bottom: 12px;
     height: auto;
-    ${(props) => !props.isTabletView && "padding-right:16px"};
+    ${(props) =>
+      !props.isTabletView &&
+      (props.theme.interfaceDirection === "rtl"
+        ? "padding-left:16px"
+        : "padding-right:16px")};
   }
 
   .version_badge {
     cursor: ${(props) => (props.canEdit ? "pointer" : "default")};
-    margin-right: 16px;
-    margin-left: 0px;
 
-    .version_badge-text {
-      position: absolute;
-      left: 6px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 16px;
+            margin-right: 0;
+          `
+        : css`
+            margin-right: 16px;
+            margin-left: 0;
+          `}
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
     }
 
     @media ${tablet} {
@@ -151,8 +163,17 @@ const StyledVersionRow = styled(Row)`
   .icon-link {
     width: 10px;
     height: 10px;
-    margin-left: 9px;
-    margin-right: 32px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 9px;
+            margin-left: 32px;
+          `
+        : css`
+            margin-left: 9px;
+            margin-right: 32px;
+          `}
     @media ${tablet} {
       margin-top: -1px;
     }
@@ -162,13 +183,19 @@ const StyledVersionRow = styled(Row)`
     display: block;
   }
 
-  .textarea-desktop {
-    margin: 6px 31px 1px -7px;
+  .textarea-wrapper {
+    margin: ${({ theme }) =>
+      getCorrectFourValuesStyle("6px 31px 1px -7px", theme.interfaceDirection)};
+    width: 100%;
   }
 
   .version_content-length {
     display: block;
-    margin-left: auto;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;`
+        : `margin-left: auto;`}
 
     @media ${tablet} {
       display: none;
@@ -180,7 +207,11 @@ const StyledVersionRow = styled(Row)`
       props.showEditPanel ? "none" : props.canEdit ? "block" : "none"};
     /* text-decoration: underline dashed; */
     white-space: break-spaces;
-    margin-left: -7px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: -7px;`
+        : `margin-left: -7px;`}
     margin-top: 4px;
 
     cursor: ${(props) => (props.isEditing ? "default" : "pointer")};
@@ -192,18 +223,29 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_text {
-    margin-left: -7px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: -7px;`
+        : `margin-left: -7px;`}
     margin-top: 5px;
 
     @media ${tablet} {
-      margin-left: -7px;
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `margin-right: -7px;`
+          : `margin-left: -7px;`}
       margin-top: 5px;
     }
 
-    display: ${(props) => props.showEditPanel && "none"};
+    word-break: break-word;
+    display: ${(props) => (props.showEditPanel ? "none" : "-webkit-box")};
+    display: ${(props) => (props.showEditPanel ? "none" : "-moz-box")};
+    display: ${(props) => (props.showEditPanel ? "none" : "-ms-box")};
+    text-overflow: ellipsis;
     overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    white-space: inherit;
   }
 
   .version-comment-wrapper {
@@ -213,7 +255,11 @@ const StyledVersionRow = styled(Row)`
   .row_context-menu-wrapper {
     display: block;
     position: absolute;
-    right: 13px !important;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `left: 13px !important;`
+        : `right: 13px !important;`}
     top: 6px;
 
     .expandButton {
@@ -260,7 +306,10 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_edit-comment-button-primary {
-    margin-right: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: 8px;`
+        : `margin-right: 8px;`}
     width: 87px;
   }
   .version_edit-comment-button-second {

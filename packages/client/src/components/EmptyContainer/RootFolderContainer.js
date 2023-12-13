@@ -2,9 +2,9 @@
 import PersonSvgUrl from "PUBLIC_DIR/images/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { FolderType } from "@docspace/common/constants";
+
+import { useNavigate, useLocation } from "react-router-dom";
+import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
@@ -12,13 +12,12 @@ import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import IconButton from "@docspace/components/icon-button";
-import Loaders from "@docspace/common/components/Loaders";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { combineUrl } from "@docspace/common/utils";
+import FilesFilter from "@docspace/common/api/files/filter";
+
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import history from "@docspace/common/history";
-import config from "PACKAGE_FILE";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
+import { CategoryType } from "SRC_DIR/helpers/constants";
+
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
 import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
@@ -34,13 +33,7 @@ import EmptyScreenTrashSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_trash_dar
 import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?url";
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
-import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
-
-const StyledPlusIcon = styled(PlusIcon)`
-  path {
-    fill: #657077;
-  }
-`;
+import CommonButtons from "./sub-components/CommonButtons";
 
 const RootFolderContainer = (props) => {
   const {
@@ -55,25 +48,26 @@ const RootFolderContainer = (props) => {
     onCreate,
     onCreateRoom,
     myFolderId,
-    filter,
-    fetchFiles,
+
     setIsLoading,
     rootFolderType,
     linkStyles,
-    isLoading,
-    viewAs,
-    fetchRooms,
-    setAlreadyFetchingRooms,
-    categoryType,
+
     isEmptyPage,
-    setIsEmptyPage,
+
     isVisitor,
     isCollaborator,
     sectionWidth,
-    setIsLoadedEmptyPage,
+
     security,
+
+    myFolder,
+    roomsFolder,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const emptyScreenHeader = t("EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
@@ -102,58 +96,44 @@ const RootFolderContainer = (props) => {
 
   const roomHeader = t("EmptyRootRoomHeader");
 
-  useEffect(() => {
-    if (rootFolderType !== FolderType.COMMON) {
-      setIsEmptyPage(true);
-    } else {
-      setIsEmptyPage(false);
-    }
-
-    return () => {
-      setIsEmptyPage(false);
-      setIsLoadedEmptyPage(false);
-    };
-  }, []);
-
-  useEffect(() => {
-    setIsLoadedEmptyPage(!isLoading);
-  }, [isLoading]);
-
   const onGoToPersonal = () => {
-    const newFilter = filter.clone();
+    const newFilter = FilesFilter.getDefault();
+
+    newFilter.folder = myFolderId;
+
+    const state = {
+      title: myFolder.title,
+      isRoot: true,
+      rootFolderType: myFolder.rootFolderType,
+    };
+
+    const path = getCategoryUrl(CategoryType.Personal);
+
     setIsLoading(true);
-    fetchFiles(myFolderId, newFilter).finally(() => setIsLoading(false));
+
+    navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 
   const onGoToShared = () => {
+    const newFilter = RoomsFilter.getDefault();
+
+    newFilter.searchArea = RoomSearchArea.Active;
+
+    const state = {
+      title: roomsFolder.title,
+      isRoot: true,
+      rootFolderType: roomsFolder.rootFolderType,
+    };
+
     setIsLoading(true);
 
-    setAlreadyFetchingRooms(true);
-    fetchRooms(null, null)
-      .then(() => {
-        const filter = RoomsFilter.getDefault();
+    const path = getCategoryUrl(CategoryType.Shared);
 
-        const filterParamsStr = filter.toUrlParams();
-
-        const url = getCategoryUrl(categoryType, filter.folder);
-
-        const pathname = `${url}?${filterParamsStr}`;
-
-        history.push(
-          combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
-            config.homepage,
-            pathname
-          )
-        );
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 
   const getEmptyFolderProps = () => {
-    switch (rootFolderType) {
+    switch (rootFolderType || location?.state?.rootFolderType) {
       case FolderType.USER:
         return {
           headerText: emptyScreenHeader,
@@ -193,7 +173,10 @@ const RootFolderContainer = (props) => {
         return {
           headerText: emptyScreenHeader,
           descriptionText: trashDescription,
-          style: { gridColumnGap: "39px", gridTemplateColumns: "150px" },
+          style: {
+            gridColumnGap: "39px",
+            marginTop: 32,
+          },
           imageSrc: theme.isBase
             ? EmptyScreenTrashSvgUrl
             : EmptyScreenTrashSvgDarkUrl,
@@ -257,52 +240,19 @@ const RootFolderContainer = (props) => {
   );
 
   const commonButtons = (
-    <span>
-      <div className="empty-folder_container-links">
-        <StyledPlusIcon
-          className="empty-folder_container-image"
-          data-format="docx"
-          onClick={onCreate}
-          alt="plus_icon"
-        />
-
-        <Box className="flex-wrapper_container">
-          <Link data-format="docx" onClick={onCreate} {...linkStyles}>
-            {t("Document")},
-          </Link>
-          <Link data-format="xlsx" onClick={onCreate} {...linkStyles}>
-            {t("Spreadsheet")},
-          </Link>
-          <Link data-format="pptx" onClick={onCreate} {...linkStyles}>
-            {t("Presentation")},
-          </Link>
-          <Link data-format="docxf" onClick={onCreate} {...linkStyles}>
-            {t("Translations:NewForm")}
-          </Link>
-        </Box>
-      </div>
-
-      <div className="empty-folder_container-links">
-        <StyledPlusIcon
-          className="empty-folder_container-image"
-          onClick={onCreate}
-          alt="plus_icon"
-        />
-        <Link {...linkStyles} onClick={onCreate}>
-          {t("Folder")}
-        </Link>
-      </div>
-    </span>
+    <CommonButtons onCreate={onCreate} linkStyles={linkStyles} isRoot />
   );
 
   const trashButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container-image"
-        src={PersonSvgUrl}
-        alt="person_icon"
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
       />
+
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("GoToPersonal")}
       </Link>
@@ -311,12 +261,14 @@ const RootFolderContainer = (props) => {
 
   const roomsButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container_plus-image"
-        src={PlusSvgUrl}
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onCreateRoom}
-        alt="plus_icon"
+        iconName={PlusSvgUrl}
+        isFill
       />
+
       <Link onClick={onCreateRoom} {...linkStyles}>
         {t("CreateRoom")}
       </Link>
@@ -355,79 +307,72 @@ const RootFolderContainer = (props) => {
   const headerText = isPrivacyFolder ? privateRoomHeader : title;
   const emptyFolderProps = getEmptyFolderProps();
 
-  useEffect(() => (isLoading ? showLoader() : hideLoader()), [isLoading]);
-
-  if (isLoading) {
-    return (
-      <Loaders.EmptyContainerLoader
-        style={{ display: "none", marginTop: 32 }}
-        id="empty-container-loader"
-        viewAs={viewAs}
-      />
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Loaders.EmptyContainerLoader
+  //       style={{ display: "none", marginTop: 32 }}
+  //       id="empty-container-loader"
+  //       viewAs={viewAs}
+  //     />
+  //   );
+  // }
 
   return (
-    <EmptyContainer
-      headerText={headerText}
-      isEmptyPage={isEmptyPage}
-      sectionWidth={sectionWidth}
-      style={{ marginTop: 32 }}
-      {...emptyFolderProps}
-    />
+    emptyFolderProps && (
+      <EmptyContainer
+        headerText={headerText}
+        isEmptyPage={isEmptyPage}
+        sectionWidth={sectionWidth}
+        {...emptyFolderProps}
+      />
+    )
   );
 };
 
 export default inject(
-  ({ auth, filesStore, treeFoldersStore, selectedFolderStore }) => {
-    const {
-      isDesktopClient,
-      isEncryptionSupport,
-      organizationName,
-      theme,
-    } = auth.settingsStore;
+  ({
+    auth,
+    filesStore,
+    treeFoldersStore,
+    selectedFolderStore,
+    clientLoadingStore,
+  }) => {
+    const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
+      auth.settingsStore;
 
-    const {
-      filter,
-      fetchFiles,
-      privacyInstructions,
-      isLoading,
-      setIsLoading,
-      viewAs,
-      fetchRooms,
-      categoryType,
-      setAlreadyFetchingRooms,
-      isEmptyPage,
-      setIsEmptyPage,
-      setIsLoadedEmptyPage,
-    } = filesStore;
+    const { setIsSectionFilterLoading } = clientLoadingStore;
+
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+
+    const { filter, privacyInstructions, isEmptyPage } = filesStore;
     const { title, rootFolderType, security } = selectedFolderStore;
-    const { isPrivacyFolder, myFolderId } = treeFoldersStore;
+    const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
+      treeFoldersStore;
 
     return {
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth.userStore.user.isVisitor,
-      isCollaborator: auth.userStore.user.isCollaborator,
+      isVisitor: auth?.userStore?.user?.isVisitor,
+      isCollaborator: auth?.userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,
       title,
       myFolderId,
       filter,
-      fetchFiles,
-      isLoading,
+
       setIsLoading,
       rootFolderType,
-      viewAs,
-      fetchRooms,
-      categoryType,
-      setAlreadyFetchingRooms,
+
       isEmptyPage,
-      setIsEmptyPage,
-      setIsLoadedEmptyPage,
+
       security,
+
+      myFolder,
+      roomsFolder,
     };
   }
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

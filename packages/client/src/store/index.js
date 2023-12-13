@@ -22,11 +22,10 @@ import PrimaryProgressDataStore from "./PrimaryProgressDataStore";
 
 import VersionHistoryStore from "./VersionHistoryStore";
 import DialogsStore from "./DialogsStore";
-import selectFolderDialogStore from "./SelectFolderDialogStore";
+import filesSelectorInput from "./FilesSelectorInput";
 import ContextOptionsStore from "./ContextOptionsStore";
 import HotkeyStore from "./HotkeyStore";
 
-import selectFileDialogStore from "./SelectFileDialogStore";
 import TagsStore from "./TagsStore";
 import PeopleStore from "./PeopleStore";
 import OformsStore from "./OformsStore";
@@ -34,10 +33,16 @@ import OformsStore from "./OformsStore";
 import AccessRightsStore from "./AccessRightsStore";
 import TableStore from "./TableStore";
 import CreateEditRoomStore from "./CreateEditRoomStore";
+import PublicRoomStore from "./PublicRoomStore";
 
-const oformsStore = new OformsStore(authStore);
+import WebhooksStore from "./WebhooksStore";
+import ClientLoadingStore from "./ClientLoadingStore";
+
+import PluginStore from "./PluginStore";
 
 const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
+
+const pluginStore = new PluginStore(authStore, selectedFolderStore);
 
 const paymentStore = new PaymentStore();
 const wizardStore = new WizardStore();
@@ -50,8 +55,19 @@ const ssoStore = new SsoFormStore();
 
 const tagsStore = new TagsStore();
 
-const treeFoldersStore = new TreeFoldersStore(selectedFolderStore);
-const settingsStore = new SettingsStore(thirdPartyStore, treeFoldersStore);
+const treeFoldersStore = new TreeFoldersStore(selectedFolderStore, authStore);
+
+const publicRoomStore = new PublicRoomStore();
+
+const clientLoadingStore = new ClientLoadingStore();
+
+const settingsStore = new SettingsStore(
+  thirdPartyStore,
+  treeFoldersStore,
+  publicRoomStore,
+  pluginStore,
+  authStore
+);
 
 const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
 
@@ -61,13 +77,20 @@ const filesStore = new FilesStore(
   treeFoldersStore,
   settingsStore,
   thirdPartyStore,
-  accessRightsStore
+  accessRightsStore,
+  clientLoadingStore,
+  pluginStore,
+  publicRoomStore
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
-  settingsStore
+  settingsStore,
+  publicRoomStore
 );
+
+const oformsStore = new OformsStore(authStore);
+
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore);
@@ -107,7 +130,10 @@ const filesActionsStore = new FilesActionsStore(
   settingsStore,
   dialogsStore,
   mediaViewerDataStore,
-  accessRightsStore
+  accessRightsStore,
+  clientLoadingStore,
+  publicRoomStore,
+  pluginStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -120,7 +146,10 @@ const contextOptionsStore = new ContextOptionsStore(
   uploadDataStore,
   versionHistoryStore,
   settingsStore,
-  selectedFolderStore
+  selectedFolderStore,
+  publicRoomStore,
+  oformsStore,
+  pluginStore
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -129,7 +158,8 @@ const hotkeyStore = new HotkeyStore(
   settingsStore,
   filesActionsStore,
   treeFoldersStore,
-  uploadDataStore
+  uploadDataStore,
+  selectedFolderStore
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -137,8 +167,11 @@ const profileActionsStore = new ProfileActionsStore(
   filesStore,
   peopleStore,
   treeFoldersStore,
-  selectedFolderStore
+  selectedFolderStore,
+  pluginStore
 );
+
+peopleStore.profileActionsStore = profileActionsStore;
 
 const tableStore = new TableStore(authStore, treeFoldersStore);
 
@@ -157,8 +190,11 @@ const createEditRoomStore = new CreateEditRoomStore(
   thirdPartyStore,
   authStore.settingsStore,
   authStore.infoPanelStore,
-  authStore.currentQuotaStore
+  authStore.currentQuotaStore,
+  clientLoadingStore
 );
+
+const webhooksStore = new WebhooksStore(authStore);
 
 const store = {
   auth: authStore,
@@ -182,10 +218,10 @@ const store = {
   treeFoldersStore,
   selectedFolderStore,
   filesActionsStore,
-  selectFolderDialogStore,
+  filesSelectorInput,
   contextOptionsStore,
   hotkeyStore,
-  selectFileDialogStore,
+
   oformsStore,
   tableStore,
 
@@ -195,6 +231,12 @@ const store = {
 
   accessRightsStore,
   createEditRoomStore,
+
+  webhooksStore,
+  clientLoadingStore,
+  publicRoomStore,
+
+  pluginStore,
 };
 
 export default store;

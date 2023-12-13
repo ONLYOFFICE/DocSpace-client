@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { mobile, tablet, smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 const StyledPaymentsLoader = styled.div`
   .payments-loader_title {
     height: 28px;
@@ -11,7 +11,7 @@ const StyledPaymentsLoader = styled.div`
     height: 40px;
     margin-top: 16px;
     margin-bottom: 24px;
-    @media ${smallTablet} {
+    @media ${mobile} {
       height: 68px;
     }
   }
@@ -27,7 +27,7 @@ const StyledPaymentsLoader = styled.div`
     grid-template-rows: 453px;
     grid-gap: 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       grid-template-columns: 1fr;
     }
   }

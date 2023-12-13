@@ -1,6 +1,10 @@
 {
-  "EmptyScreenDescription": "Tarkista Internet-yhteytesi ja päivitä sivu tai yritä myöhemmin.",
-  "GalleryEmptyScreenDescription": "Valitse mikä tahansa lomakemalli nähdäksesi tiedot",
-  "GalleryEmptyScreenHeader": "Ei onnistunut lataamaan lomakemalleja",
+  "Categories": "Luokat",
+  "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
+  "SelectForm": "Valitse Lomake",
+  "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne ONLYOFFICE-yhteisön kanssa.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Lomakegalleria",
+  "SubmitToGalleryDialogGuideInfo": "Opi luomaan täydellisiä lomakkeita ja kasvattamaan mahdollisuuksiasi saadaksesi  <1>guide</1> hyväksynnän.",
+  "SubmitToGalleryDialogMainInfo": "Olet tämän huoneen omistaja. Sinun täytyy siirtää omistajan rooli toiselle käyttäjälle ennen kuin poistut huoneesta.",
   "TemplateInfo": "Mallin tiedot"
 }

@@ -1,14 +1,50 @@
 ﻿import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import React from "react";
+import styled, { css } from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import copy from "copy-to-clipboard";
 
 import { Text, HelpButton, InputBlock } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 
-import copy from "copy-to-clipboard";
+import { mobile } from "@docspace/components/utils/device";
 
-const MetadataUrlField = ({ labelText, name, placeholder, tooltipContent }) => {
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+  max-width: 520px;
+
+  .input {
+    width: 100%;
+  }
+
+  @media ${mobile} {
+    max-width: 100%;
+  }
+
+  .label > div {
+    display: inline-flex;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 4px;
+          `
+        : css`
+            margin-left: 4px;
+          `}
+  }
+`;
+
+const MetadataUrlField = ({
+  labelText,
+  name,
+  placeholder,
+  tooltipContent,
+  tooltipClass,
+}) => {
   const { t } = useTranslation("Translations");
 
   const onCopyClick = () => {
@@ -17,17 +53,19 @@ const MetadataUrlField = ({ labelText, name, placeholder, tooltipContent }) => {
   };
 
   return (
-    <div className="metadata-field">
+    <StyledWrapper>
       <Text className="label" fontSize="13px" as="div" fontWeight={600}>
         {labelText}
         <HelpButton
           place="right"
           offsetRight={0}
           tooltipContent={tooltipContent}
+          className={tooltipClass}
         />
       </Text>
       <InputBlock
         className="input"
+        iconButtonClassName={name}
         isDisabled
         name={name}
         placeholder={placeholder}
@@ -35,7 +73,7 @@ const MetadataUrlField = ({ labelText, name, placeholder, tooltipContent }) => {
         iconSize={16}
         onIconClick={onCopyClick}
       />
-    </div>
+    </StyledWrapper>
   );
 };
 

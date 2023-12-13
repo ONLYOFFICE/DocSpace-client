@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { GuestReactSvg, AdministratorReactSvg, OwnerReactSvg } from "./svg";
@@ -69,6 +69,9 @@ const Avatar = (props) => {
     tooltipContent,
     withTooltip,
   } = props;
+
+  const { interfaceDirection } = useTheme();
+
   let isDefault = false,
     isIcon = false;
 
@@ -94,10 +97,15 @@ const Avatar = (props) => {
   const roleIcon = getRoleIcon(role);
 
   const uniqueTooltipId = withTooltip ? `roleTooltip_${Math.random()}` : "";
+  const tooltipPlace = interfaceDirection === "rtl" ? "left" : "right";
 
   return (
     <StyledAvatar {...props}>
-      <AvatarWrapper source={source} userName={userName}>
+      <AvatarWrapper
+        source={source}
+        userName={userName}
+        className="avatar-wrapper"
+      >
         {avatarContent}
       </AvatarWrapper>
       {editing && size === "max" ? (
@@ -115,19 +123,20 @@ const Avatar = (props) => {
             <>
               <RoleWrapper
                 size={size}
-                data-for={uniqueTooltipId}
-                data-tip={tooltipContent}
+                data-tooltip-id={uniqueTooltipId}
+                data-tooltip-content={tooltipContent}
+                className="avatar_role-wrapper"
               >
-                {roleIcon}
+                {props.roleIcon ? props.roleIcon : roleIcon}
               </RoleWrapper>
               {withTooltip && (
                 <Tooltip
+                  float
                   id={uniqueTooltipId}
-                  getContent={(dataTip) => (
-                    <Text fontSize="12px">{dataTip}</Text>
+                  getContent={({ content }) => (
+                    <Text fontSize="12px">{content}</Text>
                   )}
-                  effect="float"
-                  place="right"
+                  place={tooltipPlace}
                 />
               )}
             </>
@@ -141,7 +150,7 @@ const Avatar = (props) => {
 Avatar.propTypes = {
   /** Size of avatar */
   size: PropTypes.oneOf(["max", "big", "medium", "base", "small", "min"]),
-  /** Adds a user role table */
+  /** Adds a table of user roles */
   role: PropTypes.oneOf([
     "owner",
     "admin",
@@ -151,16 +160,17 @@ Avatar.propTypes = {
     "collaborator",
     "",
   ]),
-  /** Provide either a url to display as `Picture` or path to **.svg** file to display as `Icon` */
+  /** Displays as `Picture` in case the url is specified and as `Icon` in case the path to the .svg file is specified */
   source: PropTypes.string,
-  /** Provide this and leave `source` empty to display as initials */
+  /** Allows to display a user name as initials when `source` is set to blank */
   userName: PropTypes.string,
+  /** Enables avatar editing */
   editing: PropTypes.bool,
-  /** Provide this and leave `source` empty to display as default icon */
+  /** Allows to display as a default icon when `source` is set to blank */
   isDefaultSource: PropTypes.bool,
   /** Function called when the avatar change button is pressed */
   editAction: PropTypes.func,
-  /** Hide user role */
+  /** Hides user role */
   hideRoleIcon: PropTypes.bool,
   /** Accepts class */
   className: PropTypes.string,

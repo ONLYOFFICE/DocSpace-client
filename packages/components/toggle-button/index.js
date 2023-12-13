@@ -1,9 +1,11 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ToggleButtonContainer, HiddenInput } from "./styled-toggle-button";
-import Text from "../text";
 import { motion } from "framer-motion";
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import React, { Component } from "react";
+
+import Text from "../text";
+
+import ToggleButtonTheme from "./ToggleButton.theme";
+import { ToggleButtonContainer, HiddenInput } from "./styled-toggle-button";
 
 const ToggleIcon = ({ isChecked, isLoading, noAnimation = false }) => {
   const transition = noAnimation ? { duration: 0 } : {};
@@ -81,8 +83,7 @@ class ToggleButton extends Component {
     //console.log("ToggleButton render");
 
     return (
-      <ColorTheme
-        themeId={ThemeType.ToggleButton}
+      <ToggleButtonTheme
         id={id}
         className={className}
         style={style}
@@ -113,21 +114,21 @@ class ToggleButton extends Component {
             </Text>
           )}
         </ToggleButtonContainer>
-      </ColorTheme>
+      </ToggleButtonTheme>
     );
   }
 }
 
 ToggleButton.propTypes = {
-  /** The checked property sets the checked state of a ToggleButton. */
+  /** Returns the value indicating that the toggle button is enabled. */
   isChecked: PropTypes.bool.isRequired,
   /** Disables the ToggleButton */
   isDisabled: PropTypes.bool,
-  /** Will be triggered whenever an ToggleButton is clicked */
+  /** Sets a callback function that is triggered when the ToggleButton is clicked */
   onChange: PropTypes.func.isRequired,
   /** Label of the input  */
   label: PropTypes.string,
-  /** Set component id */
+  /** Sets component id */
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Class name */
   className: PropTypes.string,

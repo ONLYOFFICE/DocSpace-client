@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+
 import Base from "../../themes/base";
 import NoUserSelect from "../../utils/commonStyles";
 
@@ -20,7 +20,6 @@ const modernViewButton = css`
       : props.theme.comboBox.button.backgroundModernView};
 
   border: none !important;
-  padding-right: 0px;
 `;
 
 const hoverModernViewButton = css`
@@ -33,6 +32,7 @@ const hoverModernViewButton = css`
 const StyledComboButton = styled.div`
   display: flex;
   align-items: center;
+  gap: ${(props) => props.type && "4px"};
   justify-content: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
@@ -63,6 +63,26 @@ const StyledComboButton = styled.div`
       : props.displayArrow
       ? props.theme.comboBox.button.selectPaddingRight
       : props.theme.comboBox.button.selectPaddingRightNoArrow};
+  ${(props) => {
+    return (
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        padding-right: ${(props) =>
+          props.size === "content"
+            ? props.theme.comboBox.button.paddingLeft
+            : props.theme.comboBox.button.selectPaddingLeft};
+
+        padding-left: ${(props) =>
+          props.size === "content"
+            ? props.displayArrow
+              ? props.theme.comboBox.button.paddingRight
+              : props.theme.comboBox.button.paddingRightNoArrow
+            : props.displayArrow
+            ? props.theme.comboBox.button.selectPaddingRight
+            : props.theme.comboBox.button.selectPaddingRightNoArrow};
+      `
+    );
+  }}
 
   background: ${(props) =>
     !props.noBorder
@@ -78,6 +98,7 @@ const StyledComboButton = styled.div`
 
   ${(props) =>
     !props.noBorder &&
+    !props.type &&
     `
     border:  ${props.theme.comboBox.button.border};
     border-radius: ${props.theme.comboBox.button.borderRadius};
@@ -103,16 +124,21 @@ const StyledComboButton = styled.div`
   ${(props) => props.modernView && modernViewButton}
 
 
-  .optionalBlock {
-    svg {
-      path {
-        fill: ${(props) =>
-          props.isOpen
-            ? props.theme.iconButton.hoverColor
-            : props.theme.iconButton.color};
+  ${({ fillIcon }) =>
+    fillIcon &&
+    css`
+      .optionalBlock {
+        svg {
+          path {
+            fill: ${(props) =>
+              props.isOpen
+                ? props.theme.iconButton.hoverColor
+                : props.theme.iconButton.color};
+          }
+        }
       }
-    }
-  }
+    `};
+
   :hover {
     border-color: ${(props) =>
       props.isOpen
@@ -133,13 +159,17 @@ const StyledComboButton = styled.div`
 
     ${(props) => props.modernView && hoverModernViewButton}
 
-    .optionalBlock {
-      svg {
-        path {
-          fill: ${(props) => props.theme.iconButton.hoverColor};
+      ${({ fillIcon }) =>
+      fillIcon &&
+      css`
+        .optionalBlock {
+          svg {
+            path {
+              fill: ${(props) => props.theme.iconButton.hoverColor};
+            }
+          }
         }
-      }
-    }
+      `}
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
@@ -147,6 +177,15 @@ const StyledComboButton = styled.div`
       props.noBorder
         ? props.theme.comboBox.label.marginRight
         : props.theme.comboBox.label.marginRightWithBorder};
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        margin-right: 0;
+        margin-left: ${(props) =>
+          props.noBorder
+            ? props.theme.comboBox.label.marginRight
+            : props.theme.comboBox.label.marginRightWithBorder};
+      `}
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
@@ -171,45 +210,70 @@ const StyledComboButton = styled.div`
         ? props.theme.comboBox.button.hoverBorderColorOpen
         : props.theme.comboBox.button.hoverBorderColor};
 
-    .optionalBlock {
-      svg {
-        path {
-          fill: ${(props) =>
-            props.isOpen
-              ? props.theme.iconButton.hoverColor
-              : props.theme.iconButton.color};
+    ${({ fillIcon }) =>
+      fillIcon &&
+      css`
+        .optionalBlock {
+          svg {
+            path {
+              fill: ${(props) =>
+                props.isOpen
+                  ? props.theme.iconButton.hoverColor
+                  : props.theme.iconButton.color};
+            }
+          }
         }
-      }
-    }
+      `}
   }
 `;
 StyledComboButton.defaultProps = { theme: Base };
 
 const StyledOptionalItem = styled.div`
   margin-right: ${(props) => props.theme.comboBox.childrenButton.marginRight};
-
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      margin-right: 0;
+      margin-left: ${(props) =>
+        props.theme.comboBox.childrenButton.marginRight};
+    `}
   visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
 
-  path {
-    fill: ${(props) =>
-      props.defaultOption
-        ? props.isDisabled
-          ? props.theme.comboBox.childrenButton.defaultDisabledColor
-          : props.theme.comboBox.childrenButton.defaultColor
-        : props.isDisabled
-        ? props.theme.comboBox.childrenButton.disabledColor
-        : props.theme.comboBox.childrenButton.color};
-  }
+  ${({ fillIcon }) =>
+    fillIcon &&
+    css`
+      path {
+        fill: ${(props) =>
+          props.defaultOption
+            ? props.isDisabled
+              ? props.theme.comboBox.childrenButton.defaultDisabledColor
+              : props.theme.comboBox.childrenButton.defaultColor
+            : props.isDisabled
+            ? props.theme.comboBox.childrenButton.disabledColor
+            : props.theme.comboBox.childrenButton.color};
+      }
+    `}
 `;
 StyledOptionalItem.defaultProps = { theme: Base };
 
 const StyledIcon = styled.div`
   margin-right: ${(props) => props.theme.comboBox.childrenButton.marginRight};
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      margin-right: 0;
+      margin-left: ${(props) =>
+        props.theme.comboBox.childrenButton.marginRight};
+    `}
   width: ${(props) => props.theme.comboBox.childrenButton.width};
   height: ${(props) => props.theme.comboBox.childrenButton.height};
 
   visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      transform: scaleX(-1);
+    `}
   .combo-button_selected-icon {
     path {
       fill: ${(props) =>
@@ -253,16 +317,19 @@ const StyledArrowIcon = styled.div`
     props.displayArrow ? props.theme.comboBox.arrow.marginRight : "0px"};
   margin-left: ${(props) =>
     props.displayArrow ? props.theme.comboBox.arrow.marginLeft : "0px"};
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      margin-right: ${(props) =>
+        props.displayArrow ? props.theme.comboBox.arrow.marginLeft : "0px"};
+      margin-left: ${(props) =>
+        props.displayArrow ? props.theme.comboBox.arrow.marginRight : "0px"};
+    `}
 
   ${(props) =>
     props.isOpen &&
     `
     transform: scale(1, -1);
-  `}
-
-  ${isMobileOnly &&
-  css`
-    margin-left: auto;
   `}
 `;
 
@@ -270,8 +337,17 @@ StyledArrowIcon.defaultProps = { theme: Base };
 
 const StyledLoader = styled(Loader)`
   position: absolute;
-  margin-left: ${(props) =>
-    props.displaySize === "content" ? "-16px" : "-8px"};
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: ${(props) =>
+            props.displaySize === "content" ? "-16px" : "-8px"};
+        `
+      : css`
+          margin-left: ${(props) =>
+            props.displaySize === "content" ? "-16px" : "-8px"};
+        `}
   margin-top: 2px;
 `;
 

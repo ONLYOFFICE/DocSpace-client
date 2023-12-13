@@ -17,6 +17,9 @@ import {
 class SettingsStore {
   thirdPartyStore;
   treeFoldersStore;
+  publicRoomStore;
+  pluginStore;
+  authStore;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -64,11 +67,20 @@ class SettingsStore {
   html = [".htm", ".mht", ".html"];
   ebook = [".fb2", ".ibk", ".prc", ".epub"];
 
-  constructor(thirdPartyStore, treeFoldersStore) {
+  constructor(
+    thirdPartyStore,
+    treeFoldersStore,
+    publicRoomStore,
+    pluginStore,
+    authStore
+  ) {
     makeAutoObservable(this);
 
     this.thirdPartyStore = thirdPartyStore;
     this.treeFoldersStore = treeFoldersStore;
+    this.publicRoomStore = publicRoomStore;
+    this.pluginStore = pluginStore;
+    this.authStore = authStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -110,20 +122,23 @@ class SettingsStore {
         this.setFilesSettings(settings);
         this.setIsLoaded(true);
 
-        if (!settings.enableThirdParty) return;
+        if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
+          return;
 
-        return axios
-          .all([
-            api.files.getThirdPartyCapabilities(),
-            api.files.getThirdPartyList(),
-          ])
-          .then(([capabilities, providers]) => {
-            for (let item of capabilities) {
-              item.splice(1, 1);
-            }
-            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
-            this.thirdPartyStore.setThirdPartyProviders(providers);
-          });
+        // TODO: enable after supporting third-party
+
+        // return axios
+        //   .all([
+        //     api.files.getThirdPartyCapabilities(),
+        //     api.files.getThirdPartyList(),
+        //   ])
+        //   .then(([capabilities, providers]) => {
+        //     for (let item of capabilities) {
+        //       item.splice(1, 1);
+        //     }
+        //     this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+        //     this.thirdPartyStore.setThirdPartyProviders(providers);
+        //   });
       })
       .catch(() => this.setIsErrorSettings(true));
   };
@@ -186,6 +201,15 @@ class SettingsStore {
 
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
+
+  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+
+  changeDocumentServiceLocation = (docServiceUrl, internalUrl, portalUrl) =>
+    api.files.changeDocumentServiceLocation(
+      docServiceUrl,
+      internalUrl,
+      portalUrl
+    );
 
   setForcesave = (val) => (this.forcesave = val);
 
@@ -313,6 +337,9 @@ class SettingsStore {
           break;
         case RoomsType.ReviewRoom:
           path = "review.svg";
+          break;
+        case RoomsType.PublicRoom:
+          path = "public.svg";
           break;
       }
     }
@@ -496,8 +523,57 @@ class SettingsStore {
       case ".docxf":
         path = "docxf.svg";
         break;
+      case ".sxc":
+        path = "sxc.svg";
+        break;
+      case ".et":
+        path = "et.svg";
+        break;
+      case ".ett":
+        path = "ett.svg";
+        break;
+      case ".sxw":
+        path = "sxw.svg";
+        break;
+      case ".stw":
+        path = "stw.svg";
+        break;
+      case ".wps":
+        path = "wps.svg";
+        break;
+      case ".wpt":
+        path = "wpt.svg";
+        break;
+      case ".mhtml":
+        path = "mhtml.svg";
+        break;
+      case ".dps":
+        path = "dps.svg";
+        break;
+      case ".dpt":
+        path = "dpt.svg";
+        break;
+      case ".sxi":
+        path = "sxi.svg";
+        break;
       default:
+        const { enablePlugins } = this.authStore.settingsStore;
+
+        if (enablePlugins) {
+          const { fileItemsList } = this.pluginStore;
+
+          if (fileItemsList) {
+            fileItemsList.forEach(({ key, value }) => {
+              if (value.extension === extension && value.fileIcon)
+                path = value.fileIcon;
+            });
+
+            if (path) return path;
+          }
+        }
+
         path = "file.svg";
+
         break;
     }
 

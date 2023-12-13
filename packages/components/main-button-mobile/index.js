@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import {
   StyledFloatingButton,
@@ -15,9 +15,8 @@ import {
   StyledRenderItem,
 } from "./styled-main-button";
 import IconButton from "../icon-button";
-import Button from "../button";
 import Text from "../text";
-import Scrollbar from "@docspace/components/scrollbar";
+import Scrollbar from "../scrollbar";
 import { isIOS, isMobile } from "react-device-detect";
 import Backdrop from "../backdrop";
 
@@ -25,12 +24,13 @@ import styled from "styled-components";
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 import commonIconsStyles from "../utils/common-icons-style";
 
-import { isMobileOnly } from "react-device-detect";
-
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
+import SubmenuItem from "./sub-components/SubmenuItem";
+import { classNames } from "../utils/classNames";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
+  vertical-align: top !important;
   ${commonIconsStyles};
 `;
 
@@ -95,11 +95,11 @@ ProgressBarMobile.propTypes = {
   open: PropTypes.bool,
   onCancel: PropTypes.func,
   icon: PropTypes.string,
-  /** The function that will be called after the progress header click  */
+  /** The function called after the progress header is clicked  */
   onClickAction: PropTypes.func,
-  /** The function that hide button */
+  /** The function that facilitates hiding the button */
   hideButton: PropTypes.func,
-  /** If true the progress bar changes color */
+  /** Changes the progress bar color, if set to true */
   error: PropTypes.bool,
 };
 
@@ -125,12 +125,13 @@ const MainButtonMobile = (props) => {
     onClick,
     onAlertClick,
     withAlertClick,
+    dropdownStyle,
   } = props;
 
   const [isOpen, setIsOpen] = useState(opened);
   const [isUploading, setIsUploading] = useState(false);
   const [height, setHeight] = useState(window.innerHeight - 48 + "px");
-  const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
+  const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
   const divRef = useRef();
   const ref = useRef();
@@ -201,9 +202,14 @@ const MainButtonMobile = (props) => {
       : setHeight(height + "px");
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const { height } = divRef.current.getBoundingClientRect();
+    setHeight(height);
+  }, [isOpen]);
+
+  useLayoutEffect(() => {
     recalculateHeight();
-  }, [isOpen, isOpenButton, window.innerHeight, isUploading, isOpenSubMenu]);
+  }, [isOpen, isOpenButton, window.innerHeight, isUploading]);
 
   useEffect(() => {
     window.addEventListener("resize", recalculateHeight);
@@ -244,7 +250,7 @@ const MainButtonMobile = (props) => {
     }
   }, [progressOptions]);
 
-  const noHover = isMobileOnly ? true : false;
+  const noHover = isMobile ? true : false;
 
   const renderItems = () => {
     return (
@@ -256,57 +262,27 @@ const MainButtonMobile = (props) => {
               option.onClick && option.onClick({ action: option.action });
             };
 
-            const onClickSub = () => {
-              setIsOpenSubMenu(!isOpenSubMenu);
-            };
-
             if (option.items)
               return (
-                <div key="mobile-submenu">
-                  <StyledDropDownItem
-                    key={option.key}
-                    label={option.label}
-                    className={`${option.className} ${
-                      option.isSeparator && "is-separator"
-                    }`}
-                    onClick={onClickSub}
-                    icon={option.icon ? option.icon : ""}
-                    action={option.action}
-                    isActive={isOpenSubMenu}
-                    isSubMenu={true}
-                    noHover={noHover}
-                  />
-                  {isOpenSubMenu &&
-                    option.items.map((item) => {
-                      const subMenuOnClickAction = () => {
-                        toggle(false);
-                        setIsOpenSubMenu(false);
-                        item.onClick && item.onClick({ action: item.action });
-                      };
-
-                      return (
-                        <StyledDropDownItem
-                          key={item.key}
-                          label={item.label}
-                          className={`${item.className} sublevel`}
-                          onClick={subMenuOnClickAction}
-                          icon={item.icon ? item.icon : ""}
-                          action={item.action}
-                          withoutIcon={item.withoutIcon}
-                          noHover={noHover}
-                        />
-                      );
-                    })}
-                </div>
+                <SubmenuItem
+                  key={option.key}
+                  option={option}
+                  toggle={toggle}
+                  noHover={noHover}
+                  recalculateHeight={recalculateHeight}
+                  openedSubmenuKey={openedSubmenuKey}
+                  setOpenedSubmenuKey={setOpenedSubmenuKey}
+                />
               );
 
             return (
               <StyledDropDownItem
+                id={option.id}
                 key={option.key}
                 label={option.label}
-                className={`${option.className} ${
-                  option.isSeparator && "is-separator"
-                }`}
+                className={classNames(option.className, {
+                  "is-separator": option.isSeparator,
+                })}
                 onClick={optionOnClickAction}
                 icon={option.icon ? option.icon : ""}
                 action={option.action}
@@ -346,6 +322,7 @@ const MainButtonMobile = (props) => {
                   </div>
                 ) : (
                   <StyledDropDownItem
+                    id={option.id}
                     className={`drop-down-item-button ${
                       option.isSeparator ? "is-separator" : ""
                     }`}
@@ -381,6 +358,7 @@ const MainButtonMobile = (props) => {
         />
 
         <StyledDropDown
+          style={dropdownStyle}
           open={isOpen}
           withBackdrop={false}
           manualWidth={manualWidth || "400px"}
@@ -391,6 +369,7 @@ const MainButtonMobile = (props) => {
           heightProp={height}
           sectionWidth={sectionWidth}
           isDefaultMode={false}
+          className="mainBtnDropdown"
         >
           {isMobile ? (
             <Scrollbar
@@ -408,7 +387,7 @@ const MainButtonMobile = (props) => {
 
         {alert && !isOpen && (
           <StyledAlertIcon>
-            <StyledButtonAlertIcon onClick={onAlertClickAction} size="medium" />
+            <StyledButtonAlertIcon onClick={onAlertClickAction} size="small" />
           </StyledAlertIcon>
         )}
       </div>
@@ -419,35 +398,38 @@ const MainButtonMobile = (props) => {
 MainButtonMobile.propTypes = {
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  /** Options for drop down items  */
+  /** Drop down items options */
   actionOptions: PropTypes.array.isRequired,
-  /** If you need display progress bar components */
+  /** Displays progress bar components */
   progressOptions: PropTypes.array,
-  /** Menu that opens by clicking on the button  */
+  /** Menu that opens by clicking on the button */
   buttonOptions: PropTypes.array,
-  /** The function that will be called after the button click  */
+  /** The function called after the button is clicked */
   onUploadClick: PropTypes.func,
-  /** Show button inside drop down */
+  /** Displays button inside the drop down */
   withButton: PropTypes.bool,
-  /** The parameter that is used with buttonOptions is needed to open the menu by clicking on the button */
+  /** Opens a menu on clicking the button. Used with buttonOptions */
   isOpenButton: PropTypes.bool,
-  /** The name of the button in the drop down */
+  /** The button name in the drop down */
   title: PropTypes.string,
   /** Loading indicator */
   percent: PropTypes.number,
-  /** Section width */
+  /** Width section */
   sectionWidth: PropTypes.number,
-  /** Required if you need to specify the exact width of the drop down component */
+  /** Specifies the exact width of the drop down component */
   manualWidth: PropTypes.string,
+  /** Accepts class */
   className: PropTypes.string,
-  /** Tells when the dropdown should be opened */
+  /** Sets the dropdown to open */
   opened: PropTypes.bool,
-  /** If you need close drop down  */
+  /** Closes the drop down */
   onClose: PropTypes.func,
   /** If you need open upload panel when clicking on alert button  */
   onAlertClick: PropTypes.func,
-  /** Enable alert click  */
+  /** Enables alert click  */
   withAlertClick: PropTypes.bool,
+  /** Enables the submenu */
+  withMenu: PropTypes.bool,
 };
 
 MainButtonMobile.defaultProps = {

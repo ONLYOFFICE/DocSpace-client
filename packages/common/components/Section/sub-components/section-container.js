@@ -1,44 +1,49 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { tablet, size, mobile } from "@docspace/components/utils/device";
-import {
-  isIOS,
-  isTablet,
-  isSafari,
-  isChrome,
-  isMobileOnly,
-  isMobile,
-} from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const tabletProps = css`
   .section-body_header {
+    width: 100%;
     position: sticky;
     top: 0;
-    background: ${(props) => props.theme.section.header.background};
-    z-index: 202;
-
-    ${isMobileOnly &&
-    css`
-      padding: 0 16px;
-      margin: 0 0 0 -16px;
-    `}
+    background: ${(props) =>
+      props.viewAs === "profile" || props.viewAs === "settings"
+        ? props.theme.section.header.backgroundColor
+        : props.theme.section.header.background};
 
     ${(props) =>
-      (props.settingsStudio || props.viewAs == "settings") &&
-      isMobileOnly &&
-      css`
-        background: ${(props) => props.theme.section.header.backgroundColor};
-      `}
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0;
+          `
+        : css`
+            padding-right: 0;
+          `}
+    z-index: 201;
   }
   .section-body_filter {
     display: block;
-    margin: 4px 0 30px;
+    margin: 0;
   }
 `;
 
+const closeIconSize = "24px";
+const sizeBetweenIcons = "8px";
+
 const StyledSectionContainer = styled.section`
-  padding: 0 0 0 20px;
+  position: relative;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 0 20px 0 0;
+        `
+      : css`
+          padding: 0 0 0 20px;
+        `}
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -50,54 +55,84 @@ const StyledSectionContainer = styled.section`
   @media ${tablet} {
     width: 100%;
     max-width: 100vw !important;
-    padding: 0 0 0 16px;
-  }
-
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 0 0 0 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0 16px 0 0;
+          `
+        : css`
+            padding: 0 0 0 16px;
+          `}
     ${tabletProps};
-    min-width: 100px;
-  `}
+  }
 
   @media ${mobile} {
     width: 100vw !important;
     max-width: 100vw !important;
   }
 
-  ${isMobileOnly &&
-  css`
-    width: 100vw !important;
-    max-width: 100vw !important;
-  `}
+  .progress-bar_container {
+    position: absolute;
+    bottom: 0;
 
-  .layout-progress-bar_wrapper {
-    position: fixed;
-    right: ${(props) =>
-      props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-  }
+    display: grid;
+    grid-gap: 24px;
+    margin-bottom: 24px;
 
-  .layout-progress-bar {
-    position: fixed;
-    right: ${(props) =>
-      props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-    bottom: 24px;
-  }
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 24px;
+            left: 0;
+          `
+        : css`
+            margin-right: 24px;
+            right: 0;
+          `}
 
-  .layout-progress-bar_close-icon {
-    position: fixed;
-    right: ${(props) =>
-      props.isInfoPanelVisible && !isMobile ? "480px" : "80px"};
-    bottom: 36px;
-  }
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
 
-  .layout-progress-second-bar {
-    position: fixed;
-    right: ${(props) =>
-      props.isInfoPanelVisible && !isMobile ? "424px" : "24px"};
-    bottom: 96px;
+      .layout-progress-bar,
+      .layout-progress-second-bar {
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
+              : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
+          `}
+      }
+
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: ${closeIconSize};
+        height: ${closeIconSize};
+
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: ${sizeBetweenIcons};
+              `
+            : css`
+                margin-right: ${sizeBetweenIcons};
+              `}
+
+        ${(props) =>
+          props.showTwoProgress &&
+          css`
+            ${props.theme.interfaceDirection === "rtl"
+              ? `margin-left:-${closeIconSize}`
+              : `margin-right:-${closeIconSize}`}
+          `}
+      }
+    }
   }
 
   ${(props) =>
@@ -111,12 +146,8 @@ const StyledSectionContainer = styled.section`
 
 StyledSectionContainer.defaultProps = { theme: Base };
 
-class SectionContainer extends React.Component {
-  render() {
-    //console.log("PageLayout Section render");
-
-    return <StyledSectionContainer id="section" {...this.props} />;
-  }
-}
+const SectionContainer = React.forwardRef((props, forwardRef) => {
+  return <StyledSectionContainer ref={forwardRef} id="section" {...props} />;
+});
 
 export default SectionContainer;

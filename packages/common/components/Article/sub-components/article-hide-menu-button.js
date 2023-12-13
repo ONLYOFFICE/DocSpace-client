@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import { ReactSVG } from "react-svg";
 import { desktop, mobile, tablet } from "@docspace/components/utils/device";
-import { isTablet, isMobileOnly } from "react-device-detect";
+
 import { useTranslation } from "react-i18next";
 import Base from "@docspace/components/themes/base";
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
@@ -12,11 +12,18 @@ import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.reac
 const StyledHideArticleMenuButton = styled.div`
   display: flex;
   align-items: center;
-  position: fixed;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 209;
   bottom: 89px;
-  left: 0;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          right: 0;
+        `
+      : css`
+          left: 0;
+        `}
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
@@ -24,38 +31,38 @@ const StyledHideArticleMenuButton = styled.div`
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};
 
   @media ${desktop} {
-    ${!isTablet &&
-    css`
-      display: none;
-    `}
+    display: none;
   }
 
   @media ${mobile} {
     display: none;
   }
 
-  ${isMobileOnly &&
-  css`
-    display: none;
-  `}
-
   .article-hide-menu-container {
     align-items: center;
-    margin-left: 16px;
-
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+          `
+        : css`
+            margin-left: 16px;
+          `}
     .article-hide-menu-text {
-      margin-left: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
       color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
     }
 
     @media ${tablet} {
       display: ${({ showText }) => (showText ? "flex" : "none")};
     }
-
-    ${isTablet &&
-    css`
-      display: ${({ showText }) => (showText ? "flex" : "none")};
-    `}
   }
 
   .article-show-menu-container {
@@ -65,19 +72,24 @@ const StyledHideArticleMenuButton = styled.div`
     @media ${tablet} {
       display: ${({ showText }) => (showText ? "none" : "flex")};
     }
-
-    ${isTablet &&
-    css`
-      display: ${({ showText }) => (showText ? "none" : "flex")};
-    `}
   }
 
   .article-hide-menu-icon_svg,
   .article-show-menu-icon_svg {
-    height: 28px;
+    height: 20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform: scaleX(-1);
+      `}
   }
 
   .article-hide-menu-icon_svg {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform: scaleX(-1);
+      `}
     svg {
       path {
         fill: ${({ currentColorScheme }) => currentColorScheme.main.accent};
@@ -100,6 +112,7 @@ const HideArticleMenuButton = ({
   showText,
   toggleShowText,
   currentColorScheme,
+  isVirtualKeyboardOpen,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -108,6 +121,7 @@ const HideArticleMenuButton = ({
       showText={showText}
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
     >
       {showText ? (
         <div

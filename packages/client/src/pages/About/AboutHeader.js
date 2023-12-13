@@ -1,8 +1,8 @@
 ﻿import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 import { tablet } from "@docspace/components/utils/device";
@@ -14,20 +14,38 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
 
   .arrow-button {
-    margin-right: 12px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: 12px;`
+        : `margin-right: 12px;`}
 
     @media ${tablet} {
-      padding: 8px 0 8px 8px;
-      margin-left: -8px;
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 8px 8px 8px 0;
+              margin-right: -8px;
+            `
+          : css`
+              padding: 8px 0 8px 8px;
+              margin-left: -8px;
+            `}
+    }
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 `;
 
 const AboutHeader = (props) => {
-  const { t, history } = props;
+  const { t } = props;
+
+  const navigate = useNavigate();
 
   const onBack = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   return (
@@ -46,4 +64,4 @@ const AboutHeader = (props) => {
   );
 };
 
-export default withRouter(withTranslation(["About"])(AboutHeader));
+export default withTranslation(["About"])(AboutHeader);

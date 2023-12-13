@@ -197,29 +197,31 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ filesStore, treeFoldersStore }) => {
-  const {
-    filesList,
-    hasMoreFiles,
-    filterTotal,
-    fetchMoreFiles,
-    getCountTilesInRow,
-    roomsFilterTotal,
-    isLoading,
-  } = filesStore;
+export default inject(
+  ({ filesStore, treeFoldersStore, clientLoadingStore }) => {
+    const {
+      filesList,
+      hasMoreFiles,
+      filterTotal,
+      fetchMoreFiles,
+      getCountTilesInRow,
+      roomsFilterTotal,
+    } = filesStore;
 
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isLoading } = clientLoadingStore;
+    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
 
-  const filesLength = filesList.length;
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    const filesLength = filesList.length;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return {
-    filesList,
-    hasMoreFiles,
-    filterTotal: isRooms ? roomsFilterTotal : filterTotal,
-    fetchMoreFiles,
-    filesLength,
-    getCountTilesInRow,
-    isLoading,
-  };
-})(observer(InfiniteGrid));
+    return {
+      filesList,
+      hasMoreFiles,
+      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      fetchMoreFiles,
+      filesLength,
+      getCountTilesInRow,
+      isLoading,
+    };
+  }
+)(observer(InfiniteGrid));

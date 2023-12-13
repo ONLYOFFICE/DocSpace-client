@@ -1,9 +1,14 @@
 {
+  "AccessDenied": "Zugriff verweigert",
   "Error401Text": "Die Ressource kann zurzeit nicht zugegriffen werden.",
   "Error403Text": "Zugriff verweigert.",
   "Error404Text": "Die Ressource kann nicht gefunden werden.",
   "ErrorDeactivatedText": "Dieser DocSpace ist deaktiviert",
   "ErrorEmptyResponse": "Leere Antwort",
   "ErrorOfflineText": "Keine Internetverbindung gefunden",
-  "ErrorUnavailableText": "DocSpace nicht verfügbar"
+  "ErrorUnavailableText": "DocSpace nicht verfügbar",
+  "InvalidLink": "Ungültiger Link",
+  "LinkDoesNotExist": "Der Link, den Sie öffnen möchten, existiert nicht.",
+  "LinkHasExpired": "Der von Ihnen verwendete Link ist abgelaufen.",
+  "PortalRestriction": "Ihre IP-Adresse ist nicht in der Liste der erlaubten IP-Adressen für den Zugriff auf diesen DocSpace enthalten. Schalten Sie das VPN aus, falls es aktiviert ist, und laden Sie die Seite neu, oder verwenden Sie eine andere IP-Adresse, um sich anzumelden."
 }

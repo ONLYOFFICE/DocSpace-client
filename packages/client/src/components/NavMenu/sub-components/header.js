@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link as LinkWithoutRedirect } from "react-router-dom";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import history from "@docspace/common/history";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { isDesktop, tablet, mobile } from "@docspace/components/utils/device";
 import { combineUrl } from "@docspace/common/utils";
@@ -36,7 +36,7 @@ const Header = styled.header`
 
   .header-logo-icon {
     position: absolute;
-    right: 50%;
+    right: 50%; /* Just centering. Does not require rtl mirroring */
     transform: translateX(50%);
     height: 24px;
     cursor: pointer;
@@ -53,7 +53,11 @@ const Header = styled.header`
 
   .header-items-wrapper {
     display: flex;
-    margin-left: 82px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 82px;`
+        : `margin-left: 82px;`}
   }
 `;
 
@@ -63,7 +67,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   a {
@@ -86,13 +90,18 @@ const versionBadgeProps = {
 const StyledNavigationIconsWrapper = styled.div`
   height: 20px;
   position: absolute;
-  left: ${isMobile ? "254px" : "275px"};
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `right: ${isMobile ? "254px" : "275px"};`
+      : `left: ${isMobile ? "254px" : "275px"};`}
   display: ${isMobileOnly ? "none" : "flex"};
   justify-content: flex-start;
   align-items: center;
 
   @media ${tablet} {
-    left: 254px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `right: 254px;` : `left: 254px;`}
   }
 
   @media ${mobile} {
@@ -121,9 +130,15 @@ const HeaderComponent = ({
   theme,
   toggleArticleOpen,
   logoUrl,
+
   ...props
 }) => {
   const { t } = useTranslation("Common");
+
+  const location = useLocation();
+
+  const isFormGallery = location.pathname.includes("/form-gallery");
+
   //const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
@@ -188,15 +203,6 @@ const HeaderComponent = ({
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   });
-
-  const [isFormGallery, setIsFormGallery] = useState(
-    history.location.pathname.includes("/form-gallery")
-  );
-  useEffect(() => {
-    return history.listen((location) => {
-      setIsFormGallery(location.pathname.includes("/form-gallery"));
-    });
-  }, [history]);
 
   const logo = getLogoFromPath(
     !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light

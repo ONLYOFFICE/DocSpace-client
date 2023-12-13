@@ -13,7 +13,7 @@ import {
   SubmenuScrollbarSize,
 } from "./styled-submenu";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const Submenu = (props) => {
   const {
@@ -21,6 +21,7 @@ const Submenu = (props) => {
     startSelect = 0,
     forsedActiveItemId,
     onSelect,
+    topProps,
     ...rest
   } = props;
   if (!data) return null;
@@ -101,7 +102,7 @@ const Submenu = (props) => {
   }, [submenuItemsRef]);
 
   return (
-    <StyledSubmenu {...rest}>
+    <StyledSubmenu {...rest} topProps={topProps}>
       <div className="sticky">
         <SubmenuRoot>
           <SubmenuScrollbarSize />
@@ -158,9 +159,13 @@ const Submenu = (props) => {
 };
 
 Submenu.propTypes = {
+  /** List of the elements*/
   data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  /** Specifies the first item or the item's index to be displayed in the submenu. */
   startSelect: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+  /** Property that allows explicitly selecting content passed through an external operation  */
   forsedActiveItemId: PropTypes.any,
+  /** Sets a callback function that is triggered when the submenu item is selected */
   onSelect: PropTypes.func,
 };
 

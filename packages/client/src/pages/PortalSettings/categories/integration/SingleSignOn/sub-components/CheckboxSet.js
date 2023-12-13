@@ -1,8 +1,8 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
 import Checkbox from "@docspace/components/checkbox";
 
 const checkboxesNames = {
@@ -19,6 +19,20 @@ const checkboxesNames = {
   ],
 };
 
+const StyledWrapper = styled.div`
+  margin: 16px 0;
+  .checkbox-input {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 10px 0 6px 8px;
+          `
+        : css`
+            margin: 10px 8px 6px 0;
+          `}
+  }
+`;
+
 const CheckboxSet = (props) => {
   const { t } = useTranslation("SingleSignOn");
   const {
@@ -30,16 +44,25 @@ const CheckboxSet = (props) => {
     spSignLogoutRequests,
     spSignLogoutResponses,
     spEncryptAssertions,
-    enableSso,
     setCheckbox,
-    isLoadingXml,
+    isDisabledSpSigning,
+    isDisabledSpEncrypt,
+    isDisabledIdpSigning,
   } = props;
 
+  const isDisabled =
+    prefix === "sp" ? isDisabledSpSigning : isDisabledIdpSigning;
+
   return (
-    <Box marginProp="16px 0">
+    <StyledWrapper>
       <Checkbox
+        id={
+          prefix === "idp"
+            ? "idp-verify-auth-responses-sign"
+            : "sp-sign-auth-requests"
+        }
         className="checkbox-input"
-        isDisabled={!enableSso || isLoadingXml}
+        isDisabled={isDisabled}
         onChange={setCheckbox}
         label={prefix === "idp" ? t("idpAuthRequest") : t("spAuthRequest")}
         name={checkboxesNames[prefix][0]}
@@ -49,8 +72,13 @@ const CheckboxSet = (props) => {
         }
       />
       <Checkbox
+        id={
+          prefix === "idp"
+            ? "idp-verify-logout-requests-sign"
+            : "sp-sign-logout-requests"
+        }
         className="checkbox-input"
-        isDisabled={!enableSso || isLoadingXml}
+        isDisabled={isDisabled}
         onChange={setCheckbox}
         label={
           prefix === "idp" ? t("idpSignExitRequest") : t("spSignExitRequest")
@@ -62,8 +90,13 @@ const CheckboxSet = (props) => {
         }
       />
       <Checkbox
+        id={
+          prefix === "idp"
+            ? "idp-verify-logout-responses-sign"
+            : "sp-sign-logout-responses"
+        }
         className="checkbox-input"
-        isDisabled={!enableSso || isLoadingXml}
+        isDisabled={isDisabled}
         onChange={setCheckbox}
         label={
           prefix === "idp"
@@ -81,8 +114,9 @@ const CheckboxSet = (props) => {
 
       {prefix === "sp" && (
         <Checkbox
+          id="sp-encrypt-assertions"
           className="checkbox-input"
-          isDisabled={!enableSso || isLoadingXml}
+          isDisabled={isDisabledSpEncrypt}
           onChange={setCheckbox}
           label={t("spDecryptStatements")}
           name={checkboxesNames[prefix][3]}
@@ -90,7 +124,7 @@ const CheckboxSet = (props) => {
           isChecked={spEncryptAssertions}
         />
       )}
-    </Box>
+    </StyledWrapper>
   );
 };
 
@@ -103,9 +137,10 @@ export default inject(({ ssoStore }) => {
     spSignLogoutRequests,
     spSignLogoutResponses,
     spEncryptAssertions,
-    enableSso,
     setCheckbox,
-    isLoadingXml,
+    isDisabledSpSigning,
+    isDisabledSpEncrypt,
+    isDisabledIdpSigning,
   } = ssoStore;
 
   return {
@@ -116,8 +151,9 @@ export default inject(({ ssoStore }) => {
     spSignLogoutRequests,
     spSignLogoutResponses,
     spEncryptAssertions,
-    enableSso,
     setCheckbox,
-    isLoadingXml,
+    isDisabledSpSigning,
+    isDisabledSpEncrypt,
+    isDisabledIdpSigning,
   };
 })(observer(CheckboxSet));

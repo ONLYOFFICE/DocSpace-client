@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Button from "@docspace/components/button";
 import TextInput from "@docspace/components/text-input";
 import Text from "@docspace/components/text";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Textarea from "@docspace/components/textarea";
 import FieldContainer from "@docspace/components/field-container";
-import { smallTablet } from "@docspace/components/utils/device";
-import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
+import { tablet } from "@docspace/components/utils/device";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside-footer {
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       width: 90%;
     }
   }
@@ -110,6 +109,7 @@ const SalesDepartmentRequestDialog = ({
           errorMessage={t("Common:RequiredField")}
         >
           <TextInput
+            id="your-name"
             hasError={!isValidName}
             name="name"
             type="text"
@@ -134,7 +134,7 @@ const SalesDepartmentRequestDialog = ({
         >
           <TextInput
             hasError={!isValidEmail}
-            id="e-mail"
+            id="registration-email"
             name="e-mail"
             type="text"
             size="base"
@@ -156,6 +156,7 @@ const SalesDepartmentRequestDialog = ({
           errorMessage={t("Common:RequiredField")}
         >
           <Textarea
+            id="request-details"
             heightScale={false}
             hasError={!isValidDescription}
             placeholder={t("RequestDetails")}
@@ -168,6 +169,7 @@ const SalesDepartmentRequestDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          className="send-button"
           label={isLoading ? t("Common:Sending") : t("Common:SendButton")}
           size="normal"
           primary={true}
@@ -177,6 +179,7 @@ const SalesDepartmentRequestDialog = ({
           tabIndex={3}
         />
         <Button
+          className="cancel-button"
           label={t("Common:CancelButton")}
           size="normal"
           onClick={onCloseModal}

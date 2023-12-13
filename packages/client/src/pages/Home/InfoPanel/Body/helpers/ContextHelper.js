@@ -8,7 +8,7 @@ class ContextHelper {
     this.t = props.t;
     this.isUser = props.isUser;
     this.selection = props.selection;
-    this.getContextOptions = props.getContextOptions;
+    this.setBufferSelection = props.setBufferSelection;
     this.getUserContextOptions = props.getUserContextOptions;
     this.getContextOptionActions = props.getContextOptionActions;
 
@@ -25,7 +25,7 @@ class ContextHelper {
       return;
     }
 
-    const options = this.getContextOptions(this.selection, false);
+    const options = this.getContextOptions(this.selection, true);
 
     excludeGeneralOptions.forEach((excludeOption) => {
       const idx = options.findIndex((o) => o === excludeOption);
@@ -81,17 +81,15 @@ class ContextHelper {
   };
 
   getItemContextOptions = () => {
-    return this.isUser
-      ? this.getUserContextOptions(
-          this.t,
-          this.selection.options || [],
-          this.selection
-        )
-      : this.getContextOptionActions(
-          this.selection,
-          this.t,
-          this.selection.isSelectedFolder
-        );
+    if (this.isUser) {
+      return this.getUserContextOptions(
+        this.t,
+        this.selection.options || [],
+        this.selection
+      );
+    }
+
+    return this.getContextOptionActions(this.selection, this.t, true);
   };
 }
 

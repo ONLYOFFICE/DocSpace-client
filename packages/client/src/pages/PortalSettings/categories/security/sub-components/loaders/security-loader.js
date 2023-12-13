@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { tablet } from "@docspace/components/utils/device";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
@@ -10,7 +9,7 @@ const StyledLoader = styled.div`
     height: 29px;
     margin-bottom: 14px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 184px;
       height: 37px;
     }
@@ -30,7 +29,7 @@ const StyledLoader = styled.div`
     width: 591px;
     margin-bottom: 20px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 100%;
     }
   }
@@ -39,7 +38,7 @@ const StyledLoader = styled.div`
     width: 192px;
     height: 32px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       height: 40px;
     }
   }
@@ -119,65 +118,65 @@ const StyledLoader = styled.div`
 const SecurityLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="submenu" height="100%" />
+      <RectangleSkeleton className="submenu" height="100%" />
       <div className="header">
-        <Loaders.Rectangle className="header-item" height="28px" />
-        <Loaders.Rectangle className="header-item" height="28px" />
-        <Loaders.Rectangle className="header-item" height="28px" />
-        <Loaders.Rectangle className="header-item" height="28px" />
+        <RectangleSkeleton className="header-item" height="28px" />
+        <RectangleSkeleton className="header-item" height="28px" />
+        <RectangleSkeleton className="header-item" height="28px" />
+        <RectangleSkeleton className="header-item" height="28px" />
       </div>
-      <Loaders.Rectangle className="description" height="20px" />
+      <RectangleSkeleton className="description" height="20px" />
 
       <div className="password-settings">
-        <Loaders.Rectangle className="header" height="22px" />
-        <Loaders.Rectangle className="subheader" height="16px" />
+        <RectangleSkeleton className="header" height="22px" />
+        <RectangleSkeleton className="subheader" height="16px" />
         <div className="slider">
-          <Loaders.Rectangle height="24px" width="160px" />
-          <Loaders.Rectangle height="20px" width="75px" />
+          <RectangleSkeleton height="24px" width="160px" />
+          <RectangleSkeleton height="20px" width="75px" />
         </div>
         <div className="checkboxs">
-          <Loaders.Rectangle height="20px" width="133px" />
-          <Loaders.Rectangle height="20px" width="83px" />
-          <Loaders.Rectangle height="20px" width="159px" />
+          <RectangleSkeleton height="20px" width="133px" />
+          <RectangleSkeleton height="20px" width="83px" />
+          <RectangleSkeleton height="20px" width="159px" />
         </div>
-        <Loaders.Rectangle className="buttons" height="100%" />
+        <RectangleSkeleton className="buttons" height="100%" />
       </div>
 
       <StyledSettingsSeparator />
 
       <div className="tfa-settings">
-        <Loaders.Rectangle className="header" height="22px" />
+        <RectangleSkeleton className="header" height="22px" />
         <div className="radio-buttons">
-          <Loaders.Rectangle height="20px" width="69px" />
-          <Loaders.Rectangle height="20px" width="69px" />
-          <Loaders.Rectangle height="20px" width="152px" />
+          <RectangleSkeleton height="20px" width="69px" />
+          <RectangleSkeleton height="20px" width="69px" />
+          <RectangleSkeleton height="20px" width="152px" />
         </div>
-        <Loaders.Rectangle className="buttons" height="100%" />
+        <RectangleSkeleton className="buttons" height="100%" />
       </div>
 
       <StyledSettingsSeparator />
 
       <div className="domain-settings">
-        <Loaders.Rectangle className="header" height="22px" />
+        <RectangleSkeleton className="header" height="22px" />
         <div className="radio-buttons">
-          <Loaders.Rectangle height="20px" width="77px" />
-          <Loaders.Rectangle height="20px" width="103px" />
-          <Loaders.Rectangle height="20px" width="127px" />
+          <RectangleSkeleton height="20px" width="77px" />
+          <RectangleSkeleton height="20px" width="103px" />
+          <RectangleSkeleton height="20px" width="127px" />
         </div>
         <div className="inputs">
           <div className="input">
-            <Loaders.Rectangle height="32px" width="350px" />
-            <Loaders.Rectangle height="16px" width="16px" />
+            <RectangleSkeleton height="32px" width="350px" />
+            <RectangleSkeleton height="16px" width="16px" />
           </div>
           <div className="input">
-            <Loaders.Rectangle height="32px" width="350px" />
-            <Loaders.Rectangle height="16px" width="16px" />
+            <RectangleSkeleton height="32px" width="350px" />
+            <RectangleSkeleton height="16px" width="16px" />
           </div>
           <div className="input">
-            <Loaders.Rectangle height="32px" width="350px" />
-            <Loaders.Rectangle height="16px" width="16px" />
+            <RectangleSkeleton height="32px" width="350px" />
+            <RectangleSkeleton height="16px" width="16px" />
           </div>
-          <Loaders.Rectangle className="button" height="20px" />
+          <RectangleSkeleton className="button" height="20px" />
         </div>
       </div>
     </StyledLoader>

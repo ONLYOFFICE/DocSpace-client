@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Tags from "@docspace/common/components/Tags";
+import Tags from "../../tags";
 
-import { smallTablet } from "../../utils/device";
+import { mobile } from "../../utils/device";
 import Tag from "../../tag";
 import { Base } from "../../themes";
 
@@ -16,7 +16,7 @@ const StyledPreviewTile = styled.div`
   height: 120px;
   border-radius: 12px;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     display: none;
   }
 
@@ -45,7 +45,7 @@ const StyledPreviewTile = styled.div`
     }
     &-title {
       font-weight: 600;
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
       white-space: nowrap;
       overflow: hidden;

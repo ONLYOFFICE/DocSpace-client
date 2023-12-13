@@ -1,11 +1,18 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/components/themes";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
-  padding: 0px 3px 0 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 0px 20px 24px 3px;
+        `
+      : css`
+          padding: 0px 3px 24px 20px;
+        `}
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -21,8 +28,15 @@ const StyledInfoPanelBody = styled.div`
     margin-top: 116.56px;
   }
 
-  @media ${hugeMobile} {
-    padding: 0px 8px 0 16px;
+  @media ${mobile} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0px 16px 0 8px;
+          `
+        : css`
+            padding: 0px 8px 0 16px;
+          `}
   }
 `;
 
@@ -30,8 +44,17 @@ const StyledTitle = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  margin-left: -20px;
-  padding: 24px 0 24px 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 24px 20px 24px 0px;
+          margin-right: -20px;
+        `
+      : css`
+          padding: 24px 0 24px 20px;
+          margin-left: -20px;
+        `}
+
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
   display: flex;
@@ -39,6 +62,33 @@ const StyledTitle = styled.div`
   flex-direction: row;
   align-items: center;
   height: 32px;
+
+  .info_title-icons {
+    display: flex;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
+    /* theme.interfaceDirection */
+    gap: 14px;
+    .icon {
+      cursor: pointer;
+      path,
+      rect {
+        fill: ${(props) => props.theme.infoPanel.members.iconColor};
+      }
+      &:hover {
+        path,
+        rect {
+          fill: ${(props) => props.theme.infoPanel.members.iconHoverColor};
+        }
+      }
+    }
+  }
 
   img {
     &.icon {
@@ -57,7 +107,7 @@ const StyledTitle = styled.div`
 
   .text {
     font-weight: 600;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
@@ -68,32 +118,81 @@ const StyledTitle = styled.div`
     -webkit-line-clamp: 2;
   }
 
+  .free-label {
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    font-weight: 600;
+    line-height: 16px;
+
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
+  }
+
   ${(props) =>
     props.withBottomBorder &&
     css`
       width: calc(100% + 20px);
       margin: 0 -20px 0 -20px;
-      padding: 23px 0 23px 20px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 23px 23px 23px 0;
+            `
+          : css`
+              padding: 23px 0 23px 20px;
+            `}
       border-bottom: ${(props) =>
         `solid 1px ${props.theme.infoPanel.borderColor}`};
     `}
+
+  @media ${desktop} {
+    max-width: 360px;
+  }
 
   @media ${tablet} {
     width: 440px;
     padding: 24px 20px 24px 20px;
   }
 
-  @media ${hugeMobile} {
-    width: calc(100vw - 32px);
-    padding: 24px 0 24px 16px;
+  @media ${mobile} {
+    width: calc(100vw - 24px);
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 24px 16px 24px 0;
+          `
+        : css`
+            padding: 24px 0 24px 16px;
+          `}
 
     ${(props) =>
       props.withBottomBorder &&
       css`
         width: calc(100% + 16px);
-        padding: 23px 0 23px 16px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 23px 16px 23px 0;
+              `
+            : css`
+                padding: 23px 0 23px 16px;
+              `}
         margin: 0 -16px 0 -16px;
       `}
+  }
+`;
+
+const StyledLink = styled.div`
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  a,
+  .link {
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    font-weight: 600;
+    line-height: 15px;
   }
 `;
 
@@ -110,6 +209,7 @@ const StyledProperties = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  padding-bottom: 20px;
 
   .property {
     width: 100%;
@@ -118,14 +218,14 @@ const StyledProperties = styled.div`
     grid-column-gap: 24px;
 
     .property-title {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }
 
     .property-content {
       max-width: 100%;
       margin: auto 0;
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -190,6 +290,11 @@ const StyledProperties = styled.div`
       }
 
       .property-content {
+        white-space: pre-wrap;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        word-break: break-word;
         overflow: hidden;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
@@ -201,4 +306,10 @@ const StyledProperties = styled.div`
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
 
-export { StyledInfoPanelBody, StyledTitle, StyledSubtitle, StyledProperties };
+export {
+  StyledInfoPanelBody,
+  StyledTitle,
+  StyledSubtitle,
+  StyledProperties,
+  StyledLink,
+};

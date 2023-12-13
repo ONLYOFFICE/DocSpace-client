@@ -1,14 +1,14 @@
-﻿import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import styled from "styled-components";
+﻿import { mobile } from "@docspace/components/utils/device";
+import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
+import styled, { css } from "styled-components";
 
 const StyledComponent = styled.div`
-  padding-top: 3px;
   width: 100%;
   max-width: 575px;
 
   .header {
     font-weight: 700;
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     line-height: 22px;
   }
 
@@ -21,7 +21,7 @@ const StyledComponent = styled.div`
   }
 
   .theme-name {
-    font-size: 15px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
     line-height: 16px;
     font-weight: 600;
   }
@@ -38,7 +38,14 @@ const StyledComponent = styled.div`
   .theme-add {
     width: 46px;
     height: 46px;
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
     border-radius: 8px;
     cursor: pointer;
     background: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")}
@@ -48,20 +55,61 @@ const StyledComponent = styled.div`
   .add-theme {
     background: #d0d5da;
     padding-top: 16px;
-    padding-left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 16px;
+          `
+        : css`
+            padding-left: 16px;
+          `}
     box-sizing: border-box;
   }
 
   .buttons-container {
+    display: flex;
     padding-top: 24px;
-  }
 
-  .button:not(:last-child) {
-    margin-right: 8px;
+    .button:not(:last-child) {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 8px;
+            `
+          : css`
+              margin-right: 8px;
+            `}
+    }
+    @media ${mobile} {
+      .button {
+        width: 100%;
+      }
+    }
+
+    ${({ isShowDeleteButton }) =>
+      isShowDeleteButton &&
+      css`
+        @media ${mobile} {
+          flex-direction: column;
+          gap: 8px;
+          margin: 0;
+
+          .button:not(:last-child) {
+            margin-right: 0px;
+          }
+        }
+      `}
   }
 
   .check-img {
-    padding: 18px 0 0 15px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 16px 15px 0 0;
+          `
+        : css`
+            padding: 16px 0 0 15px;
+          `}
     svg path {
       fill: ${(props) => props.colorCheckImg};
     }
@@ -71,7 +119,14 @@ const StyledComponent = styled.div`
 const StyledTheme = styled.div`
   width: 46px;
   height: 46px;
-  margin-right: 12px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-left: 12px;
+        `
+      : css`
+          margin-right: 12px;
+        `}
   border-radius: 8px;
   cursor: pointer;
 
@@ -81,7 +136,14 @@ const StyledTheme = styled.div`
 
   &:hover {
     .check-hover {
-      padding: 18px 0 0 15px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 16px 15px 0 0;
+            `
+          : css`
+              padding: 16px 0 0 15px;
+            `}
       visibility: visible;
       opacity: 0.5;
       svg path {

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import styled, { css } from "styled-components";
-import { smallTablet } from "../../utils/device";
+import { mobile } from "../../utils/device";
 import IconButton from "../../icon-button";
 import Base from "../../themes/base";
 
@@ -21,27 +21,45 @@ const StyledCloseButtonWrapper = styled.div`
     props.currentDisplayType === "modal"
       ? css`
           top: 18px;
-          right: -30px;
 
-          @media ${smallTablet} {
-            right: 10px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? `left: -30px;`
+              : `right: -30px;`}
+
+          @media ${mobile} {
+            ${(props) =>
+              props.theme.interfaceDirection === "rtl"
+                ? `left: 10px;`
+                : `right: 10px;`}
             top: -27px;
           }
         `
       : css`
           top: 18px;
-          left: -27px;
-          @media ${smallTablet} {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? `right: -27px;`
+              : `left: -27px;`}
+          @media ${mobile} {
             top: -27px;
-            left: auto;
-            right: 10px;
+            ${(props) =>
+              props.theme.interfaceDirection === "rtl"
+                ? css`
+                    right: auto;
+                    left: 10px;
+                  `
+                : css`
+                    left: auto;
+                    right: 10px;
+                  `}
           }
         `}
 
   .close-button, .close-button:hover {
     cursor: pointer;
     path {
-      fill: ${(props) => props.theme.modalDialog.closeButton.fillColor};
+      stroke: ${(props) => props.theme.modalDialog.closeButton.fillColor};
     }
   }
 `;

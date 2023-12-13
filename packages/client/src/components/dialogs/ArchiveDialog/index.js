@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router";
+
 import ModalDialogContainer from "../ModalDialogContainer";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
@@ -13,7 +13,11 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .cancel-btn {
     display: inline-block;
-    margin-left: 8px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 8px;`
+        : `margin-left: 8px;`}
   }
 `;
 
@@ -126,4 +130,4 @@ export default inject(
       items,
     };
   }
-)(withRouter(observer(ArchiveDialog)));
+)(observer(ArchiveDialog));

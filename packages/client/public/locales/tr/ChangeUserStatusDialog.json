@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "etkinleştirildi",
-  "ChangeUsersDisableStatus": "devre dışı bırakıldı",
-  "ChangeUserStatusDialog": "'{{ userStatus }} durumuna sahip kullanıcılar {{ status }} olacak.",
-  "ChangeUserStatusDialogHeader": "Kullanıcı durumunu değiştir",
-  "ChangeUserStatusDialogMessage": "DocSpace sahibi ve kendiniz için durumu değiştiremezsiniz."
+  "DisableGeneralDescription": "Daha sonra gerekirse devre dışı bırakılan kullanıcıları silebilir veya etkinleştirebilirsiniz. Kendiniz veya Sahip gibi kullanıcıları devre dışı bırakamayacağınızı unutmayın.",
+  "DisableUser": "Kullanıcıyı devre dışı bırak",
+  "DisableUserDescription": "Bu kullanıcıyı Devre Dışı Bırakırsanız, DocSpace'te oturum açamayacak fakat belgeleri ve verileri bozulmadan kalacaktır.",
+  "DisableUsers": "Kullanıcıları devre dışı bırak",
+  "DisableUsersDescription": "Bu kullanıcıları Devre Dışı Bırakırsanız, DocSpace'te oturum açamayacaklar fakat belgeleri ve verileri bozulmadan kalacaktır.",
+  "EnableUser": "Kullanıcıyı etkinleştir",
+  "EnableUserDescription": "Bu kullanıcıyı etkinleştirirseniz DocSpace'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebilecektir.",
+  "EnableUsers": "Kullanıcıları etkinleştir",
+  "EnableUsersDescription": "Bu kullanıcıları etkinleştirirseniz DocSpace'te tekrar oturum açabilecek ve kendi belgelerine ve verilerine erişebileceklerdir."
 }

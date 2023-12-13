@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "Vaihda salasanasi lisätäksesi turvallisuutta.",
   "EditPhoto": "Muokkaa kuvaa",
   "EmailNotVerified": "Sähköpostia ei ole vahvistettu",
+  "FileManagement": "Tiedostojen hallinta",
   "InterfaceTheme": "Käyttöliittymän teema",
   "LightTheme": "Kevyt teema",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
@@ -24,6 +25,5 @@
   "SuccessLogout": "Aktiivisesta yhteydestä kirjauduttiin ulos:{{platform}}, {{browser}}",
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
-  "TfaLoginSettings": "Kirjautumisasetukset",
   "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
 }

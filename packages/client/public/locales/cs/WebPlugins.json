@@ -1,0 +1,12 @@
+{
+  "DeletePlugin": "Odstranění zásuvného modulu",
+  "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům služby DocSpace k dispozici. Jste si jisti, že chcete pokračovat?",
+  "DeletePluginTitle": "Smazat zásuvný modul?",
+  "Description": "Můžete přidat zásuvné moduly a rozšířit tak funkce DocSpace o další funkce. Klikněte na tlačítko Nahrát zásuvný modul a vyberte soubor zásuvného modulu v archivu ZIP.",
+  "Metadata": "Metadata",
+  "NeedSettings": "Potřebujete zadat nastavení",
+  "NoPlugins": "Nebyly přidány žádné zásuvné moduly",
+  "NotNeedSettings": "Potřebujete zadat nastavení",
+  "PluginsHelp": "Zásuvné moduly umožňují rozšířit funkce DocSpace",
+  "UploadPlugin": "Nahrát zásuvný modul"
+}

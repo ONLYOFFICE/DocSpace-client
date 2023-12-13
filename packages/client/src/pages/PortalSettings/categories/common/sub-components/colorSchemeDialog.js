@@ -1,15 +1,23 @@
 ﻿import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import React, { useEffect } from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
 import { withTranslation } from "react-i18next";
+import { isMobileOnly } from "react-device-detect";
 
 const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
     width: 100%;
     bottom: 0 !important;
-    left: 0;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: 0;
+          `
+        : css`
+            left: 0;
+          `}
     padding: 16px;
     box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
   }
@@ -25,7 +33,7 @@ const StyledComponent = styled(ModalDialog)`
 
   .name-color {
     font-weight: 700;
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     line-height: 24px;
   }
 
@@ -56,6 +64,24 @@ const StyledComponent = styled(ModalDialog)`
     height: 46px;
     border-radius: 8px;
     cursor: pointer;
+  }
+
+  .drop-down-container-hex {
+    ${isMobileOnly &&
+    css`
+      width: 100%;
+    `}
+  }
+
+  .drop-down-item-hex {
+    ${isMobileOnly &&
+    css`
+      width: calc(100vw - 32px);
+    `}
+
+    :hover {
+      background-color: unset;
+    }
   }
 `;
 
@@ -120,23 +146,22 @@ const ColorSchemeDialog = (props) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        {showSaveButtonDialog && (
-          <>
-            <Button
-              label={t("Common:SaveButton")}
-              size="normal"
-              primary
-              scale
-              onClick={onSaveColorSchemeDialog}
-            />
-            <Button
-              label={t("Common:CancelButton")}
-              size="normal"
-              scale
-              onClick={onClose}
-            />
-          </>
-        )}
+        <Button
+          className="save"
+          label={t("Common:SaveButton")}
+          size="normal"
+          primary
+          scale
+          onClick={onSaveColorSchemeDialog}
+          isDisabled={!showSaveButtonDialog}
+        />
+        <Button
+          className="cancel-button"
+          label={t("Common:CancelButton")}
+          size="normal"
+          scale
+          onClick={onClose}
+        />
       </ModalDialog.Footer>
     </StyledComponent>
   );

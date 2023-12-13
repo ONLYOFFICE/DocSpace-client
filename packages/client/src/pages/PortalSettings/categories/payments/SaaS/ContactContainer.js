@@ -1,16 +1,22 @@
 import React from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import Text from "@docspace/components/text";
 
 const StyledContactContainer = styled.div`
   display: flex;
   width: 100%;
   a {
-    margin-left: 4px;
+    ${props =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 4px;
+          `
+        : css`
+            margin-left: 4px;
+          `}
   }
 `;
 
@@ -21,11 +27,11 @@ const ContactContainer = ({ t, salesEmail }) => {
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
           <ColorTheme
+            className="sales-email-link"
             tag="a"
             themeId={ThemeType.Link}
             fontWeight="600"
-            href={`mailto:${salesEmail}`}
-          >
+            href={`mailto:${salesEmail}`}>
             {salesEmail}
           </ColorTheme>
         </Text>
@@ -40,4 +46,4 @@ export default inject(({ payments, auth }) => {
     salesEmail,
     theme: auth.settingsStore.theme,
   };
-})(withRouter(observer(ContactContainer)));
+})(observer(ContactContainer));

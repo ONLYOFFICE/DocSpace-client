@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/common/utils";
-import history from "@docspace/common/history";
 
 import AlertComponent from "../../AlertComponent";
-import Loaders from "../../Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
@@ -25,6 +24,8 @@ const ArticleEnterpriseAlert = ({
 }) => {
   const { t, ready } = useTranslation("Common");
 
+  const navigate = useNavigate();
+
   const [isClose, setIsClose] = useState(
     localStorage.getItem("enterpriseAlertClose")
   );
@@ -39,7 +40,7 @@ const ArticleEnterpriseAlert = ({
       PROXY_BASE_URL,
       "/payments/portal-payments"
     );
-    history.push(paymentPageUrl);
+    navigate(paymentPageUrl);
     toggleArticleOpen();
   };
 
@@ -77,7 +78,7 @@ const ArticleEnterpriseAlert = ({
   if (isEnterprise && isClose) return <></>;
 
   return isShowLoader ? (
-    <Loaders.Rectangle width="210px" height="88px" />
+    <RectangleSkeleton width="210px" height="88px" />
   ) : (
     <AlertComponent
       id="document_catalog-payment-alert"
@@ -95,29 +96,24 @@ const ArticleEnterpriseAlert = ({
   );
 };
 
-export default withRouter(
-  inject(({ auth }) => {
-    const {
-      currentQuotaStore,
-      settingsStore,
-      currentTariffStatusStore,
-      isEnterprise,
-    } = auth;
-    const { isTrial } = currentQuotaStore;
-    const { theme, toggleArticleOpen } = settingsStore;
-    const {
-      isLicenseDateExpired,
-      trialDaysLeft,
-      paymentDate,
-    } = currentTariffStatusStore;
-    return {
-      isEnterprise,
-      isTrial,
-      isLicenseDateExpired,
-      trialDaysLeft,
-      paymentDate,
-      theme,
-      toggleArticleOpen,
-    };
-  })(observer(ArticleEnterpriseAlert))
-);
+export default inject(({ auth }) => {
+  const {
+    currentQuotaStore,
+    settingsStore,
+    currentTariffStatusStore,
+    isEnterprise,
+  } = auth;
+  const { isTrial } = currentQuotaStore;
+  const { theme, toggleArticleOpen } = settingsStore;
+  const { isLicenseDateExpired, trialDaysLeft, paymentDate } =
+    currentTariffStatusStore;
+  return {
+    isEnterprise,
+    isTrial,
+    isLicenseDateExpired,
+    trialDaysLeft,
+    paymentDate,
+    theme,
+    toggleArticleOpen,
+  };
+})(observer(ArticleEnterpriseAlert));

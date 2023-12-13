@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import onClickOutside from "react-onclickoutside";
-import { isMobile } from "react-device-detect";
+import { isIOS, isMobileOnly, isMobile } from "react-device-detect";
 import Portal from "../portal";
 import DomHelpers from "../utils/domHelpers";
 
@@ -12,6 +12,8 @@ import StyledDropdown from "./styled-drop-down";
 import VirtualList from "./VirtualList";
 import { withTheme } from "styled-components";
 /* eslint-disable react/prop-types, react/display-name */
+
+const DEFAULT_PARENT_HEIGHT = 42;
 
 const Row = memo(({ data, index, style }) => {
   const { children, theme, activedescendant, handleMouseMove } = data;
@@ -46,6 +48,8 @@ class DropDown extends React.PureComponent {
       directionX: props.directionX,
       directionY: props.directionY,
       manualY: props.manualY,
+      borderOffset: props.theme.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
+      isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
       borderOffset: props.theme.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     };
 
@@ -119,10 +123,14 @@ class DropDown extends React.PureComponent {
   }
 
   checkPosition = () => {
-    if (!this.dropDownRef.current || this.props.fixedDirection) return;
+    if (!this.dropDownRef.current || this.props.fixedDirection) {
+      this.setState({ isDropdownReady: true });
+      return;
+    }
     const { smallSectionWidth, forwardedRef } = this.props;
     const { manualY, borderOffset } = this.state;
 
+    const isRtl = this.props.theme.interfaceDirection === "rtl";
     const rects = this.dropDownRef.current.getBoundingClientRect();
     const parentRects = forwardedRef?.current?.getBoundingClientRect();
 
@@ -136,16 +144,29 @@ class DropDown extends React.PureComponent {
         }
       : {
           toTopCorner: rects.top,
-          parentHeight: 42,
+          parentHeight: DEFAULT_PARENT_HEIGHT,
           containerHeight: container.height,
         };
 
-    const left = rects.left < 0 && rects.width < container.width;
-    const right =
-      rects.width &&
-      rects.left < (rects.width || 250) &&
-      rects.left > rects.width &&
-      rects.width < container.width;
+    let left;
+    let right;
+
+    if (isRtl) {
+      right = rects.right > container.width && rects.width < container.width;
+      left =
+        rects.width &&
+        rects.right > (container.width - rects.width || 250) &&
+        rects.right < container.width - rects.width &&
+        rects.width < container.width;
+    } else {
+      left = rects.left < 0 && rects.width < container.width;
+      right =
+        rects.width &&
+        rects.left < (rects.width || 250) &&
+        rects.left > rects.width &&
+        rects.width < container.width;
+    }
+
     const top =
       rects.bottom > dimensions.containerHeight &&
       dimensions.toTopCorner > rects.height;
@@ -167,48 +188,74 @@ class DropDown extends React.PureComponent {
       width: this.dropDownRef
         ? this.dropDownRef.current.offsetWidth - borderOffset
         : 240,
+      isDropdownReady: true,
     });
   };
 
   checkPositionPortal = () => {
     const parent = this.props.forwardedRef;
-    if (!parent.current || this.props.fixedDirection) return;
+    if (!parent?.current || this.props.fixedDirection) {
+      this.setState({ isDropdownReady: true });
+      return;
+    }
+    const dropDown = this.dropDownRef.current;
     const { borderOffset } = this.state;
 
-    const rects = parent.current.getBoundingClientRect();
+    const parentRects = parent.current.getBoundingClientRect();
 
     let dropDownHeight = this.dropDownRef.current?.offsetParent
       ? this.dropDownRef.current.offsetHeight
       : DomHelpers.getHiddenElementOuterHeight(this.dropDownRef.current);
 
-    let left = rects.left;
-    let bottom = rects.bottom;
+    let bottom = parentRects.bottom;
 
     const viewport = DomHelpers.getViewport();
+    const scrollBarWidth =
+      viewport.width - document.documentElement.clientWidth;
     const dropDownRects = this.dropDownRef.current.getBoundingClientRect();
 
     if (
       this.props.directionY === "top" ||
       (this.props.directionY === "both" &&
-        rects.bottom + dropDownHeight > viewport.height)
+        parentRects.bottom + dropDownHeight > viewport.height)
     ) {
       bottom -= parent.current.clientHeight + dropDownHeight;
     }
 
-    if (this.props.right) {
-      this.dropDownRef.current.style.right = this.props.right;
-    } else if (this.props.directionX === "right") {
-      this.dropDownRef.current.style.left =
-        rects.right - this.dropDownRef.current.clientWidth + "px";
-    } else if (rects.left + dropDownRects.width > viewport.width) {
-      if (rects.right - dropDownRects.width < 0) {
-        this.dropDownRef.current.style.left = 0 + "px";
+    if (this.props.theme.interfaceDirection === "ltr") {
+      if (this.props.right) {
+        dropDown.style.right = this.props.right;
+      } else if (this.props.directionX === "right") {
+        dropDown.style.left = parentRects.right - dropDown.clientWidth + "px";
+      } else if (parentRects.left + dropDownRects.width > viewport.width) {
+        if (parentRects.right - dropDownRects.width < 0) {
+          dropDown.style.left = 0 + "px";
+        } else {
+          dropDown.style.left = parentRects.right - dropDown.clientWidth + "px";
+        }
       } else {
-        this.dropDownRef.current.style.left =
-          rects.right - this.dropDownRef.current.clientWidth + "px";
+        dropDown.style.left = parentRects.left + this.props.offsetLeft + "px";
       }
     } else {
-      this.dropDownRef.current.style.left = left + this.props.offsetLeft + "px";
+      if (this.props.right) {
+        dropDown.style.left = this.props.right;
+      } else if (this.props.directionX === "right") {
+        dropDown.style.left = parentRects.left - scrollBarWidth + "px";
+      } else if (parentRects.right - dropDownRects.width < 0) {
+        if (parentRects.left + dropDownRects.width > viewport.width) {
+          dropDown.style.left =
+            viewport.width - dropDown.clientWidth - scrollBarWidth + "px";
+        } else {
+          dropDown.style.left = parentRects.left - scrollBarWidth + "px";
+        }
+      } else {
+        dropDown.style.left =
+          parentRects.right -
+          dropDown.clientWidth -
+          this.props.offsetLeft -
+          scrollBarWidth +
+          "px";
+      }
     }
 
     this.dropDownRef.current.style.top = this.props.top || bottom + "px";
@@ -219,6 +266,7 @@ class DropDown extends React.PureComponent {
       width: this.dropDownRef
         ? this.dropDownRef.current.offsetWidth - borderOffset
         : 240,
+      isDropdownReady: true,
     });
   };
 
@@ -270,6 +318,12 @@ class DropDown extends React.PureComponent {
     } = this.props;
     const { directionX, directionY, width, manualY } = this.state;
 
+    // Need to avoid conflict between inline styles from checkPositionPortal and styled-component styles
+    const directionXStylesDisabled =
+      this.props.isDefaultMode &&
+      this.props.forwardedRef.current &&
+      !this.props.fixedDirection;
+
     let cleanChildren = children;
     let itemCount = children.length;
 
@@ -283,8 +337,27 @@ class DropDown extends React.PureComponent {
     );
     const getItemSize = (index) => rowHeights[index];
     const fullHeight = cleanChildren && rowHeights.reduce((a, b) => a + b, 0);
-    const calculatedHeight =
+    let calculatedHeight =
       fullHeight > 0 && fullHeight < maxHeight ? fullHeight : maxHeight;
+
+    const container = DomHelpers.getViewport();
+
+    if (
+      isIOS &&
+      isMobileOnly &&
+      container?.height !== window.visualViewport.height
+    ) {
+      const rects = this.dropDownRef?.current?.getBoundingClientRect();
+      const parentRects =
+        this.props.forwardedRef?.current?.getBoundingClientRect();
+
+      const parentHeight = parentRects?.height || DEFAULT_PARENT_HEIGHT;
+
+      const height = window.visualViewport.height - rects?.top - parentHeight;
+
+      if (rects && calculatedHeight > height) calculatedHeight = height;
+    }
+
     const dropDownMaxHeightProp = maxHeight
       ? { height: calculatedHeight + "px" }
       : {};
@@ -296,11 +369,11 @@ class DropDown extends React.PureComponent {
         directionX={directionX}
         directionY={directionY}
         manualY={manualY}
-        isExternalLink={this.props.isExternalLink}
-        isPersonal={this.props.isPersonal}
         isMobileView={isMobileView}
         itemCount={itemCount}
         {...dropDownMaxHeightProp}
+        directionXStylesDisabled={directionXStylesDisabled}
+        isDropdownReady={this.state.isDropdownReady}
       >
         <VirtualList
           Row={Row}
@@ -322,6 +395,7 @@ class DropDown extends React.PureComponent {
   render() {
     const { isDefaultMode } = this.props;
     const element = this.renderDropDown();
+
     if (isDefaultMode) {
       return <Portal element={element} appendTo={this.props.appendTo} />;
     }
@@ -344,8 +418,12 @@ class DropDownContainer extends React.Component {
       isAside,
       withBackground,
       eventTypes,
+      forceCloseClickOutside,
+      withoutBackground,
     } = this.props;
-    const eventTypesProp = isMobile
+    const eventTypesProp = forceCloseClickOutside
+      ? {}
+      : isMobile
       ? { eventTypes: ["click, touchend"] }
       : eventTypes
       ? { eventTypes }
@@ -361,6 +439,7 @@ class DropDownContainer extends React.Component {
             withoutBlur={!withBlur}
             isAside={isAside}
             withBackground={withBackground}
+            withoutBackground={withoutBackground}
           />
         ) : null}
         <EnhancedComponent
@@ -376,8 +455,6 @@ class DropDownContainer extends React.Component {
 DropDown.propTypes = {
   disableOnClickOutside: PropTypes.func,
   enableOnClickOutside: PropTypes.func,
-  isExternalLink: PropTypes.bool,
-  isPersonal: PropTypes.bool,
 };
 
 DropDownContainer.propTypes = {
@@ -393,15 +470,15 @@ DropDownContainer.propTypes = {
   directionY: PropTypes.oneOf(["bottom", "top", "both"]),
   /** Accepts id */
   id: PropTypes.string,
-  /** Required if you need to specify the exact width of the component, for example 100% */
+  /** Required for specifying the exact width of the component, for example, 100% */
   manualWidth: PropTypes.string,
-  /** Required if you need to specify the exact distance from the parent component */
+  /** Required for specifying the exact distance from the parent component */
   manualX: PropTypes.string,
-  /** Required if you need to specify the exact distance from the parent component */
+  /** Required for specifying the exact distance from the parent component */
   manualY: PropTypes.string,
   /** Required if the scrollbar is displayed */
   maxHeight: PropTypes.number,
-  /** Tells when the dropdown should be opened */
+  /** Sets the dropdown to be opened */
   open: PropTypes.bool,
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -409,18 +486,18 @@ DropDownContainer.propTypes = {
   withBackdrop: PropTypes.bool,
   /** Count of columns */
   columnCount: PropTypes.number,
-  /** Display disabled items or not */
+  /** Sets the disabled items to display */
   showDisabledItems: PropTypes.bool,
   forwardedRef: PropTypes.shape({ current: PropTypes.any }),
-  /** Defines the operation mode of the component, by default with the portal */
+  /** Sets the operation mode of the component. The default option is set to portal mode */
   isDefaultMode: PropTypes.bool,
-  /** Needed to open correctly people and group selector when the section width is small */
+  /** Used to open people and group selectors correctly when the section width is small */
   smallSectionWidth: PropTypes.bool,
-  /** It is necessary when we explicitly set the direction, disables check position */
+  /** Disables check position. Used to set the direction explicitly */
   fixedDirection: PropTypes.bool,
-  /**Enable blur for backdrop */
+  /** Enables blur for backdrop */
   withBlur: PropTypes.bool,
-
+  /** Specifies the offset */
   offsetLeft: PropTypes.number,
 };
 

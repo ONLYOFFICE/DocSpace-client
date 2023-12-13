@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Submenu from "@docspace/components/submenu";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
@@ -11,32 +11,26 @@ import Appearance from "./appearance";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderSubmenu from "./sub-components/loaderSubmenu";
 import { resetSessionStorage } from "../../utils";
+import { DeviceType } from "@docspace/common/constants";
 
 const SubmenuCommon = (props) => {
   const {
     t,
-    history,
+
     tReady,
     setIsLoadedSubmenu,
     loadBaseInfo,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
+    currentDeviceType,
   } = props;
-  const [currentTab, setCurrentTab] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
       resetSessionStorage();
       getWhiteLabelLogoUrls();
     };
-  }, []);
-
-  useEffect(() => {
-    const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) {
-      setCurrentTab(currentTab);
-    }
   }, []);
 
   useEffect(() => {
@@ -69,7 +63,7 @@ const SubmenuCommon = (props) => {
   ];
 
   const onSelect = (e) => {
-    history.push(
+    navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
@@ -78,6 +72,14 @@ const SubmenuCommon = (props) => {
     );
   };
 
+  const getCurrentTab = () => {
+    const path = location.pathname;
+    const currentTab = data.findIndex((item) => path.includes(item.id));
+    return currentTab !== -1 ? currentTab : 0;
+  };
+
+  const currentTab = getCurrentTab();
+
   if (!isLoadedSubmenu) return <LoaderSubmenu />;
 
   return (
@@ -85,11 +87,18 @@ const SubmenuCommon = (props) => {
       data={data}
       startSelect={currentTab}
       onSelect={(e) => onSelect(e)}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
     />
   );
 };
 
-export default inject(({ common }) => {
+export default inject(({ auth, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -105,7 +114,6 @@ export default inject(({ common }) => {
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
-})(
-  withLoading(withRouter(withTranslation("Settings")(observer(SubmenuCommon))))
-);
+})(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
-import { options } from "./options";
+import { useTheme } from "styled-components";
 import { FixedSizeList as List } from "react-window";
-import { StyledBox } from "./styled-input-phone";
-import InvalidSvgUrl from "PUBLIC_DIR/images/phoneFlags/invalid.svg?url";
 import PropTypes from "prop-types";
+
+import { options } from "./options";
+import { StyledBox } from "./styled-input-phone";
+
+import InvalidSvgUrl from "PUBLIC_DIR/images/phoneFlags/invalid.svg?url";
 import CustomScrollbarsVirtualList from "../scrollbar/custom-scrollbars-virtual-list";
-import Box from "@docspace/components/box";
-import ComboBox from "@docspace/components/combobox";
-import Label from "@docspace/components/label";
-import TextInput from "@docspace/components/text-input";
-import SearchInput from "@docspace/components/search-input";
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
-import Text from "@docspace/components/text";
+import Box from "../box";
+import ComboBox from "../combobox";
+import Label from "../label";
+import TextInput from "../text-input";
+import SearchInput from "../search-input";
+import DropDown from "../drop-down";
+import DropDownItem from "../drop-down-item";
+import Text from "../text";
 
 const PLUS = "+";
 
@@ -31,15 +34,16 @@ const InputPhone = ({
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const theme = useTheme();
+  const isRtl = theme.interfaceDirection === "rtl";
 
   const onInputChange = (e) => {
     const str = e.target.value.replace(/\D/g, "");
     const el = options.find(
       (option) => option.dialCode && str.startsWith(option.dialCode)
     );
-
-    const singleСode = ["1", "7"];
-    const invalidCode = singleСode.find((code) => code === str);
+    const singleCode = ["1", "7"];
+    const invalidCode = singleCode.find((code) => code === str);
 
     if (e.target.value === "" || !e.target.value.includes(invalidCode)) {
       setIsValid(false);
@@ -104,6 +108,20 @@ const InputPhone = ({
   const Row = ({ data, index, style }) => {
     const country = data[index];
     const prefix = "+";
+    const RtlRowComponent = () => (
+      <>
+        <Text className="country-dialcode">{country.dialCode}</Text>
+        <Text className="country-prefix">{prefix}</Text>
+        <Text className="country-name">{country.name}</Text>
+      </>
+    );
+    const LtrRowComponent = () => (
+      <>
+        <Text className="country-name">{country.name}</Text>
+        <Text className="country-prefix">{prefix}</Text>
+        <Text className="country-dialcode">{country.dialCode}</Text>
+      </>
+    );
 
     return (
       <DropDownItem
@@ -115,9 +133,7 @@ const InputPhone = ({
         data-option={index}
         onClick={onCountryClick}
       >
-        <Text className="country-name">{country.name}</Text>
-        <Text className="country-prefix">{prefix}</Text>
-        <Text className="country-dialcode">{country.dialCode}</Text>
+        {isRtl ? <RtlRowComponent /> : <LtrRowComponent />}
       </DropDownItem>
     );
   };
@@ -134,13 +150,13 @@ const InputPhone = ({
         noBorder={true}
         opened={isOpen}
         data="country"
-        toggleAction={handleClick}
+        onToggle={handleClick}
         displayType="toggle"
         className="country-box"
         fillIcon={true}
         selectedOption={country}
       />
-      <Label text={PLUS} className="prefix" />
+      {!isRtl && <Label text={PLUS} className="prefix" />}
       <TextInput
         type="tel"
         className="input-phone"
@@ -151,6 +167,8 @@ const InputPhone = ({
         value={phoneValue}
         onChange={onInputChange}
       />
+      {isRtl && <Label text={PLUS} className="prefix" />}
+
       <DropDown
         open={isOpen}
         clickOutsideAction={handleClick}
@@ -206,19 +224,19 @@ const InputPhone = ({
 };
 
 InputPhone.propTypes = {
-  /** Default selected country Russia */
+  /** Default selected country */
   defaultCountry: PropTypes.object.isRequired,
   /** Text displayed on the Input placeholder */
   phonePlaceholderText: PropTypes.string,
   /** Text displayed on the SearchInput placeholder */
   searchPlaceholderText: PropTypes.string,
-  /** Indicates the input field has scaled */
+  /** Indicates that the input field has scaled */
   scaled: PropTypes.bool,
-  /** Called when value is changed */
+  /** The callback function that is called when the value is changed */
   onChange: PropTypes.func,
   /** Gets the country mask  */
   searchEmptyMessage: PropTypes.string,
-  /** Text is displayed when invalid country dial code */
+  /** Text displayed in case of the invalid country dial code */
   errorMessage: PropTypes.string,
 };
 

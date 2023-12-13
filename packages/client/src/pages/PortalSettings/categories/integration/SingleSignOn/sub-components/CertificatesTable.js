@@ -27,8 +27,8 @@ const CertificatesTable = (props) => {
     console.log(prefix, index);
     const onEdit = () => {
       prefix === "sp"
-        ? setSpCertificate(certificate, index)
-        : setIdpCertificate(certificate);
+        ? setSpCertificate(certificate, index, true)
+        : setIdpCertificate(certificate, index, true);
     };
 
     const onDelete = () => {
@@ -39,12 +39,14 @@ const CertificatesTable = (props) => {
 
     const contextOptions = [
       {
+        id: "edit",
         key: "edit",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: onEdit,
       },
       {
+        id: "delete",
         key: "delete",
         label: t("Common:Delete"),
         icon: CatalogTrashReactSvgUrl,
@@ -86,7 +88,7 @@ const CertificatesTable = (props) => {
         <ContextMenuButton
           className="context-btn"
           getData={getOptions}
-          usePortal={false}
+          usePortal={true}
         />
       </div>
     );

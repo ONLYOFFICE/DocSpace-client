@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledMobileDetails = styled.div`
   z-index: 307;

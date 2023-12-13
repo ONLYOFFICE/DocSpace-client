@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
+
 import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
@@ -69,7 +69,7 @@ const LicenseContainer = (props) => {
         className="payments_file-input"
         scale
         size="base"
-        accept=".lic"
+        accept={[".lic"]}
         placeholder={t("UploadLicenseFile")}
         onInput={onLicenseFileHandler}
         isDisabled={isLicenseUploading || isLoading}
@@ -105,4 +105,4 @@ export default inject(({ payments }) => {
     setIsLoading,
     isLoading,
   };
-})(withRouter(observer(LicenseContainer)));
+})(observer(LicenseContainer));

@@ -8,8 +8,7 @@ import React, {
   useState,
 } from "react";
 import { VariableSizeList } from "react-window";
-import Scrollbar from "@docspace/components/scrollbar";
-import CustomScrollbarsVirtualList from "../scrollbar/custom-scrollbars-virtual-list";
+import Scrollbar from "../scrollbar";
 
 type VirtualListProps = {
   width: number;
@@ -131,7 +130,7 @@ function VirtualList({
             activedescendant: currentIndex,
             handleMouseMove,
           }}
-          outerElementType={CustomScrollbarsVirtualList}
+          outerElementType={Scrollbar}
         >
           {Row}
         </VariableSizeList>

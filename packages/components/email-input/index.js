@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../text-input";
 import { EmailSettings, parseAddress } from "../utils/email/";
-import equal from "fast-deep-equal/react";
+import StyledEmailInput from "./styled-email-input";
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -12,7 +11,7 @@ const TextInputWrapper = ({
   emailSettings,
   customValidate,
   ...props
-}) => <TextInput {...props}></TextInput>;
+}) => <StyledEmailInput {...props} />;
 /* eslint-enable react/prop-types */
 /* eslint-enable no-unused-vars */
 
@@ -109,21 +108,21 @@ class EmailInput extends React.Component {
 EmailInput.propTypes = {
   /** Accepts class */
   className: PropTypes.string,
-  /** Function for your custom validation input value. Function must return object with following parameters: `value`: string value of input, `isValid`: boolean result of validating, `errors`(optional): array of errors */
+  /** Function for custom validation of the input value. Function must return object with following parameters: `value`: string value of input, `isValid`: boolean result of validating, `errors`(optional): array of errors */
   customValidate: PropTypes.func,
   /** { allowDomainPunycode: false, allowLocalPartPunycode: false, allowDomainIp: false, allowStrictLocalPart: true, allowSpaces: false, allowName: false, allowLocalDomainName: false } | Settings for validating email  */
   emailSettings: PropTypes.instanceOf(EmailSettings),
-  /** Used in your custom validation  */
+  /** Used in custom validation  */
   hasError: PropTypes.bool,
   /** Supported size of the input fields.  */
   size: PropTypes.oneOf(["base", "middle", "big", "huge", "large"]),
   /** Accepts id  */
   id: PropTypes.string,
-  /** Function for your custom handling changes in input */
+  /** Function for custom handling of input changes  */
   onChange: PropTypes.func,
-
+  /** Event that is triggered when the focused item is lost  */
   onBlur: PropTypes.func,
-  /** Will be validate our value, return object with following parameters: `isValid`: boolean result of validating, `errors`: array of errors */
+  /** Function that validates the value, and returns the object with following parameters: `isValid`: boolean result of validating, `errors`: array of errors */
   onValidateInput: PropTypes.func,
   /** Accepts css style */
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -139,7 +138,7 @@ EmailInput.propTypes = {
   name: PropTypes.string,
   /** Placeholder text for the input  */
   placeholder: PropTypes.string,
-  /** Indicates the input field has scale */
+  /** Indicates that the input field has scale */
   scale: PropTypes.bool,
 };
 
@@ -148,7 +147,6 @@ EmailInput.defaultProps = {
   className: "",
   hasError: undefined,
   id: "",
-  /** kkkk;kk */
   isDisabled: false,
   isReadOnly: false,
   maxLength: 255,
@@ -158,9 +156,7 @@ EmailInput.defaultProps = {
   size: "base",
   title: "",
   value: "",
-  /** dfkasdfklasd;flkajs; */
   withBorder: true,
-  /** Some text */
   emailSettings: new EmailSettings(),
 };
 

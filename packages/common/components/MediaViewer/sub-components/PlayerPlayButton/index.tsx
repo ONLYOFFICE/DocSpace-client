@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 import IconPlay from "PUBLIC_DIR/images/videoplayer.play.react.svg";
 import IconStop from "PUBLIC_DIR/images/videoplayer.stop.react.svg";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type PlayerPlayButtonProps = {
   isPlaying: boolean;
@@ -15,7 +15,6 @@ const WrapperPlayerPlayButton = styled.div`
   align-items: center;
   width: 48px;
   height: 48px;
-
   margin-left: -10px;
 
   cursor: pointer;

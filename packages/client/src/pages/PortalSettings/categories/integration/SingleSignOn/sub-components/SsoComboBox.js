@@ -30,6 +30,7 @@ const SsoComboBox = (props) => {
     <FieldContainer isVertical labelText={labelText}>
       <StyledInputWrapper>
         <ComboBox
+          id={name}
           isDisabled={!enableSso || isLoadingXml || isDisabled}
           onSelect={onSelect}
           options={options}
@@ -38,6 +39,11 @@ const SsoComboBox = (props) => {
           selectedOption={currentOption}
           showDisabledItems
           tabIndex={tabIndex}
+          size="content"
+          dropDownMaxHeight={364}
+          manualWidth="100%"
+          directionY="both"
+          textOverflow={true}
         />
       </StyledInputWrapper>
     </FieldContainer>

@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "より安全性を高めるために、パスワードの変更をお勧めします。",
   "EditPhoto": "写真を編集する",
   "EmailNotVerified": "メールアドレス未確認",
+  "FileManagement": "ファイル管理",
   "InterfaceTheme": "インターフェイスのテーマ",
   "LightTheme": "ライトのテーマ",
   "LogoutActiveConnection": "アクティブな接続からログアウトする",
@@ -24,6 +25,5 @@
   "SuccessLogout": "アクティブな接続はログアウトされました：{{platform}}, {{browser}}",
   "SystemTheme": "システムテーマのように",
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
-  "TfaLoginSettings": "ログイン設定",
   "TwoFactorDescription": "管理者がすべてのユーザーに対して、コード生成アプリによる二要素認証を有効にしました。"
 }

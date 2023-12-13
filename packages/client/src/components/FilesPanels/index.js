@@ -4,13 +4,13 @@ import { inject, observer } from "mobx-react";
 import {
   SharingPanel,
   UploadPanel,
-  OperationsPanel,
   VersionHistoryPanel,
   ChangeOwnerPanel,
   NewFilesPanel,
-  SelectFileDialog,
   HotkeyPanel,
   InvitePanel,
+  EditLinkPanel,
+  EmbeddingPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -24,11 +24,24 @@ import {
   InviteUsersWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
+  SubmitToFormGallery,
+  UnsavedChangesDialog,
+  DeleteLinkDialog,
+  RoomSharingDialog,
+  MoveToPublicRoom,
+  BackupToPublicRoom,
+  SettingsPluginDialog,
+  PluginDialog,
+  DeletePluginDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
+import FilesSelector from "../FilesSelector";
+import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
+import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 
 const Panels = (props) => {
   const {
@@ -37,6 +50,7 @@ const Panels = (props) => {
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
+    restorePanelVisible,
     thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
@@ -62,6 +76,19 @@ const Panels = (props) => {
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
+    submitToGalleryDialogVisible,
+    editLinkPanelIsVisible,
+    unsavedChangesDialogVisible,
+    deleteLinkDialogVisible,
+    embeddingPanelIsVisible,
+    roomSharingPanelVisible,
+    moveToPublicRoomVisible,
+    backupToPublicRoomVisible,
+    settingsPluginDialogVisible,
+    pluginDialogVisible,
+    leaveRoomDialogVisible,
+    changeRoomOwnerIsVisible,
+    deletePluginDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -71,6 +98,21 @@ const Panels = (props) => {
   };
 
   return [
+    settingsPluginDialogVisible && (
+      <SettingsPluginDialog
+        isVisible={settingsPluginDialogVisible}
+        key={"settings-plugin-dialog"}
+      />
+    ),
+    deletePluginDialogVisible && (
+      <DeletePluginDialog
+        isVisible={deletePluginDialogVisible}
+        key={"delete-plugin-dialog"}
+      />
+    ),
+    pluginDialogVisible && (
+      <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+    ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     sharingPanelVisible && (
       <SharingPanel
@@ -79,11 +121,16 @@ const Panels = (props) => {
       />
     ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
-    (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) && (
-      <OperationsPanel
-        key="operation-panel"
+    (moveToPanelVisible ||
+      copyPanelVisible ||
+      restorePanelVisible ||
+      restoreAllPanelVisible) && (
+      <FilesSelector
+        key="files-selector"
+        isMove={moveToPanelVisible}
         isCopy={copyPanelVisible}
-        isRestore={restoreAllPanelVisible}
+        isRestore={restorePanelVisible}
+        isRestoreAll={restoreAllPanelVisible}
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -110,21 +157,15 @@ const Panels = (props) => {
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
     ),
     selectFileDialogVisible && (
-      <SelectFileDialog
+      <FilesSelector
         key="select-file-dialog"
-        //resetTreeFolders
-        onSelectFile={createMasterForm}
+        filterParam={FilesSelectorFilterTypes.DOCX}
         isPanelVisible={selectFileDialogVisible}
+        onSelectFile={createMasterForm}
         onClose={onClose}
-        filteredType="exceptPrivacyTrashArchiveFolders"
-        ByExtension
-        searchParam={".docx"}
-        dialogName={t("Translations:CreateMasterFormFromFile")}
-        filesListTitle={t("Common:SelectDOCXFormat")}
-        creationButtonPrimary
-        withSubfolders={false}
       />
     ),
+
     hotkeyPanelVisible && <HotkeyPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
@@ -138,6 +179,26 @@ const Panels = (props) => {
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
     ),
+    submitToGalleryDialogVisible && (
+      <SubmitToFormGallery key="submit-to-form-gallery-dialog" />
+    ),
+    editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
+    unsavedChangesDialogVisible && (
+      <UnsavedChangesDialog key="unsaved-dialog" />
+    ),
+    deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
+    embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
+    roomSharingPanelVisible && <RoomSharingDialog key="room-sharing-dialog" />,
+    moveToPublicRoomVisible && (
+      <MoveToPublicRoom key="move-to-public-room-panel" />
+    ),
+    backupToPublicRoomVisible && (
+      <BackupToPublicRoom key="backup-to-public-room-panel" />
+    ),
+    leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
+    changeRoomOwnerIsVisible && (
+      <ChangeRoomOwnerPanel key="change-room-owner" />
+    ),
   ];
 };
 
@@ -149,12 +210,14 @@ export default inject(
     versionHistoryStore,
     backup,
     createEditRoomStore,
+    pluginStore,
   }) => {
     const {
       sharingPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
@@ -172,12 +235,23 @@ export default inject(
       archiveDialogVisible,
       restoreRoomDialogVisible,
 
+      unsavedChangesDialogVisible,
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
+
+      submitToGalleryDialogVisible,
+      editLinkPanelIsVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelIsVisible,
+      roomSharingPanelVisible,
+      moveToPublicRoomVisible,
+      backupToPublicRoomVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -187,6 +261,12 @@ export default inject(
     const { hotkeyPanelVisible } = auth.settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
 
+    const {
+      settingsPluginDialogVisible,
+      deletePluginDialogVisible,
+      pluginDialogVisible,
+    } = pluginStore;
+
     return {
       preparationPortalDialogVisible,
       sharingPanelVisible,
@@ -194,6 +274,7 @@ export default inject(
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
       deleteThirdPartyDialogVisible,
@@ -218,6 +299,19 @@ export default inject(
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
+      submitToGalleryDialogVisible,
+      editLinkPanelIsVisible,
+      unsavedChangesDialogVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelIsVisible,
+      roomSharingPanelVisible,
+      moveToPublicRoomVisible,
+      backupToPublicRoomVisible,
+      settingsPluginDialogVisible,
+      pluginDialogVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
+      deletePluginDialogVisible,
     };
   }
 )(observer(Panels));

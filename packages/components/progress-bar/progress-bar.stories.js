@@ -11,15 +11,20 @@ export default {
           "A container that displays a process or operation as a progress bar",
       },
     },
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?node-id=991%3A43382&mode=dev",
+    },
   },
 };
 
+//
+
 const Template = (args) => {
-  return <ProgressBar {...args} style={{ marginTop: 16 }} />;
+  return <ProgressBar {...args} />;
 };
 export const Default = Template.bind({});
 Default.args = {
-  label: "Uploading files: 20 of 100",
+  label: "Operation in progress...",
   percent: 20,
-  dropDownContent: "You content here",
 };

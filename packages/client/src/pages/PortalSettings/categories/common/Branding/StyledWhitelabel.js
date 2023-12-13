@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Base } from "@docspace/components/themes";
+import { mobile } from "@docspace/components/utils/device";
 
 const WhiteLabelWrapper = styled.div`
   .subtitle {
-    margin-top: 5px;
     margin-bottom: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
@@ -28,6 +28,11 @@ const WhiteLabelWrapper = styled.div`
     gap: 4px;
     align-items: center;
     margin-bottom: 16px;
+
+    .wl-helper-label > div {
+      display: inline-flex;
+      margin: 0 4px;
+    }
   }
 
   .use-as-logo {
@@ -53,7 +58,12 @@ const WhiteLabelWrapper = styled.div`
 
   .logos-wrapper {
     display: flex;
+    flex-direction: row;
     gap: 20px;
+
+    @media ${mobile} {
+      flex-direction: column;
+    }
   }
 
   .logos-login-wrapper {
@@ -64,8 +74,13 @@ const WhiteLabelWrapper = styled.div`
 
   .logos-editor-wrapper {
     display: flex;
+    flex-direction: row;
     gap: 8px;
     margin-bottom: 8px;
+
+    @media ${mobile} {
+      flex-direction: column;
+    }
   }
 
   .logo-item {
@@ -97,6 +112,11 @@ const WhiteLabelWrapper = styled.div`
     width: 384px;
     height: 42px;
     padding: 12px 20px;
+
+    @media ${mobile} {
+      width: 310px;
+      height: 35px;
+    }
   }
 
   .logo-about {
@@ -158,8 +178,19 @@ const WhiteLabelWrapper = styled.div`
     display: none;
   }
 
-  .save-cancel-buttons {
-    margin-top: 24px;
+  .spacer {
+    height: 24px;
+  }
+
+  @media ${mobile} {
+    .subtitle,
+    .header-container {
+      display: none;
+    }
+
+    .spacer {
+      height: ${(props) => (props.showReminder ? "64px" : "24px")};
+    }
   }
 `;
 

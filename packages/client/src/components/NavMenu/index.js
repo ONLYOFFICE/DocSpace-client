@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+
+import { isMobile, mobile } from "@docspace/components/utils/device";
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 
@@ -8,15 +10,16 @@ import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";
 import HeaderUnAuth from "./sub-components/header-unauth";
 import { I18nextProvider, withTranslation } from "react-i18next";
-import { withRouter } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
 import { LayoutContextConsumer } from "../Layout/context";
-import { isMobileOnly } from "react-device-detect";
+
 import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { Base } from "@docspace/components/themes";
+import { DeviceType } from "@docspace/common/constants";
 
 const StyledContainer = styled.header`
   position: relative;
@@ -25,174 +28,156 @@ const StyledContainer = styled.header`
 
   ${(props) =>
     !props.isLoaded
-      ? isMobileOnly &&
-        css`
-          position: static;
-
-          margin-right: -16px; /* It is a opposite value of padding-right of custom scroll bar,
-       so that there is no white bar in the header on loading. (padding-right: 16px)*/
-        `
-      : isMobileOnly &&
-        css`
-          .navMenuHeader,
-          .profileMenuIcon,
-          .navMenuHeaderUnAuth {
-            position: absolute;
-            z-index: 160;
-            top: 0;
-            // top: ${(props) => (props.isVisible ? "0" : "-48px")};
-
-            transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+      ? css`
+          @media ${mobile} {
+            width: 100vw; // fixes space between header loader and screen edge
           }
+        `
+      : css`
+          @media ${mobile} {
+            .navMenuHeader,
+            .profileMenuIcon,
+            .navMenuHeaderUnAuth {
+              position: absolute;
+              z-index: 160;
+              top: 0;
+              // top: ${(props) => (props.isVisible ? "0" : "-48px")};
 
-          width: 100%;
+              transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+              -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
+            }
+
+            width: 100vw;
+
+            margin-bottom: 48px;
+          }
         `}
 `;
 
 StyledContainer.defaultProps = { theme: Base };
 
-class NavMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.timeout = null;
+const NavMenu = (props) => {
+  const timeout = React.useRef(null);
 
-    const {
-      isBackdropVisible,
-      isNavHoverEnabled,
-      isNavOpened,
-      isAsideVisible,
-    } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    this.state = {
-      isBackdropVisible,
-      isNavOpened,
-      isAsideVisible,
-      isNavHoverEnabled,
-    };
-  }
+  const [isBackdropVisible, setIsBackdropVisible] = React.useState(
+    props.isBackdropVisible
+  );
+  const [isNavOpened, setIsNavOpened] = React.useState(props.isNavHoverEnabled);
+  const [isAsideVisible, setIsAsideVisible] = React.useState(props.isNavOpened);
+  const [isNavHoverEnabled, setIsNavHoverEnabled] = React.useState(
+    props.isAsideVisible
+  );
 
-  backdropClick = () => {
-    this.setState({
-      isBackdropVisible: false,
-      isNavOpened: false,
-      isAsideVisible: false,
-      isNavHoverEnabled: !this.state.isNavHoverEnabled,
-    });
+  const backdropClick = () => {
+    setIsBackdropVisible(false);
+    setIsNavOpened(false);
+    setIsAsideVisible(false);
+    setIsNavHoverEnabled((val) => !val);
   };
 
-  showNav = () => {
-    this.setState({
-      isBackdropVisible: true,
-      isNavOpened: true,
-      isAsideVisible: false,
-      isNavHoverEnabled: false,
-    });
+  const showNav = () => {
+    setIsBackdropVisible(true);
+    setIsNavOpened(true);
+    setIsAsideVisible(false);
+    setIsNavHoverEnabled(false);
   };
 
-  clearNavTimeout = () => {
-    if (this.timeout == null) return;
-    clearTimeout(this.timeout);
-    this.timeout = null;
+  const clearNavTimeout = () => {
+    if (timeout.current === null) return;
+    clearTimeout(timeout.current);
+    timeout.current = null;
   };
 
-  handleNavMouseEnter = () => {
-    if (!this.state.isNavHoverEnabled) return;
-    this.timeout = setTimeout(() => {
-      this.setState({
-        isBackdropVisible: false,
-        isNavOpened: true,
-        isAsideVisible: false,
-      });
+  const handleNavMouseEnter = () => {
+    if (!isNavHoverEnabled) return;
+    timeout.current = setTimeout(() => {
+      setIsBackdropVisible(false);
+      setIsNavOpened(true);
+      setIsAsideVisible(false);
     }, 1000);
   };
 
-  handleNavMouseLeave = () => {
-    if (!this.state.isNavHoverEnabled) return;
-    this.clearNavTimeout();
-    this.setState({
-      isBackdropVisible: false,
-      isNavOpened: false,
-      isAsideVisible: false,
-    });
+  const handleNavMouseLeave = () => {
+    if (!isNavHoverEnabled) return;
+    clearNavTimeout();
+    setIsBackdropVisible(false);
+    setIsNavOpened(false);
+    setIsAsideVisible(false);
   };
 
-  toggleAside = () => {
-    this.clearNavTimeout();
-    this.setState({
-      isBackdropVisible: true,
-      isNavOpened: false,
-      isAsideVisible: true,
-      isNavHoverEnabled: false,
-    });
+  const toggleAside = () => {
+    clearNavTimeout();
+    setIsBackdropVisible(true);
+    setIsNavOpened(false);
+    setIsAsideVisible(true);
+    setIsNavHoverEnabled(false);
   };
 
-  render() {
-    const { isBackdropVisible, isNavOpened, isAsideVisible } = this.state;
+  const {
+    isAuthenticated,
+    isLoaded,
+    asideContent,
 
-    const {
-      isAuthenticated,
-      isLoaded,
-      asideContent,
-      history,
-      isDesktop,
-      isFrame,
-      showHeader,
-    } = this.props;
+    isDesktop,
+    isFrame,
+    showHeader,
+    currentDeviceType,
+  } = props;
 
-    const isAsideAvailable = !!asideContent;
-    const hideHeader = isDesktop || (!showHeader && isFrame);
-    //console.log("NavMenu render", this.state, this.props);
-    const isPreparationPortal =
-      history.location.pathname === "/preparation-portal";
-    return (
-      <LayoutContextConsumer>
-        {(value) => (
-          <StyledContainer
-            isLoaded={isLoaded}
-            isVisible={value.isVisible}
-            isDesktop={hideHeader}
-          >
-            <Backdrop
-              visible={isBackdropVisible}
-              onClick={this.backdropClick}
-              withBackground={true}
-            />
+  const isAsideAvailable = !!asideContent;
+  const hideHeader = !showHeader && isFrame;
 
-            {!hideHeader &&
-              (isLoaded && isAuthenticated ? (
-                <>
-                  {!isPreparationPortal && <HeaderNav />}
-                  <Header
-                    isPreparationPortal={isPreparationPortal}
-                    isNavOpened={isNavOpened}
-                    onClick={this.showNav}
-                    onNavMouseEnter={this.handleNavMouseEnter}
-                    onNavMouseLeave={this.handleNavMouseLeave}
-                    toggleAside={this.toggleAside}
-                    backdropClick={this.backdropClick}
-                  />
-                </>
-              ) : !isLoaded && isAuthenticated ? (
-                <Loaders.Header />
-              ) : (
-                <HeaderUnAuth />
-              ))}
+  if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
+    return <></>;
 
-            {isAsideAvailable && (
-              <Aside visible={isAsideVisible} onClick={this.backdropClick}>
-                {asideContent}
-              </Aside>
-            )}
-          </StyledContainer>
-        )}
-      </LayoutContextConsumer>
-    );
-  }
-}
+  const isPreparationPortal = location.pathname === "/preparation-portal";
+  return (
+    <LayoutContextConsumer>
+      {(value) => (
+        <StyledContainer isLoaded={isLoaded} isVisible={value.isVisible}>
+          <Backdrop
+            visible={isBackdropVisible}
+            onClick={backdropClick}
+            withBackground={true}
+            withBlur={true}
+          />
+
+          {!hideHeader &&
+            (isLoaded && isAuthenticated ? (
+              <>
+                {!isPreparationPortal && <HeaderNav />}
+                <Header
+                  isPreparationPortal={isPreparationPortal}
+                  isNavOpened={isNavOpened}
+                  onClick={showNav}
+                  onNavMouseEnter={handleNavMouseEnter}
+                  onNavMouseLeave={handleNavMouseLeave}
+                  toggleAside={toggleAside}
+                  backdropClick={backdropClick}
+                />
+              </>
+            ) : !isLoaded && isAuthenticated ? (
+              <Loaders.Header />
+            ) : (
+              <HeaderUnAuth />
+            ))}
+
+          {isAsideAvailable && (
+            <Aside visible={isAsideVisible} onClick={backdropClick}>
+              {asideContent}
+            </Aside>
+          )}
+        </StyledContainer>
+      )}
+    </LayoutContextConsumer>
+  );
+};
 
 NavMenu.propTypes = {
   isBackdropVisible: PropTypes.bool,
@@ -220,7 +205,12 @@ NavMenu.defaultProps = {
 
 const NavMenuWrapper = inject(({ auth }) => {
   const { settingsStore, isAuthenticated, isLoaded, language } = auth;
-  const { isDesktopClient: isDesktop, frameConfig, isFrame } = settingsStore;
+  const {
+    isDesktopClient: isDesktop,
+    frameConfig,
+    isFrame,
+    currentDeviceType,
+  } = settingsStore;
 
   return {
     isAuthenticated,
@@ -230,8 +220,9 @@ const NavMenuWrapper = inject(({ auth }) => {
 
     showHeader: frameConfig?.showHeader,
     isFrame,
+    currentDeviceType,
   };
-})(observer(withTranslation(["NavMenu", "Common"])(withRouter(NavMenu))));
+})(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
 
 export default () => (
   <I18nextProvider i18n={i18n}>

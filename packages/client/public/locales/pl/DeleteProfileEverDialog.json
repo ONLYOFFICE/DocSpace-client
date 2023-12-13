@@ -1,5 +1,9 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
+  "DeleteMyDocumentsUser": "Wszystkie osobiste pliki i katalogi w sekcji Moje dokumenty tego użytkownika zostaną trwale usunięte.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
   "DeleteUser": "Usuń użytkownika",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zostanie usunięty. Dokumenty osobiste użytkownika, które są dostępne dla innych, zostaną usunięte. Czy na pewno chcesz kontynuować?",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zostanie usunięty. Nie można cofnąć tej czynności.",
+  "ReassignDataToAnotherUser": "Przypisz dane innemu użytkownikowi",
   "SuccessfullyDeleteUserInfoMessage": "Użytkownik został pomyślnie usunięty"
 }

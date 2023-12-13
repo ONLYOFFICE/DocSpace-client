@@ -1,68 +1,38 @@
-﻿import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
-import React from "react";
-import { withRouter } from "react-router";
-import CatalogItem from "@docspace/components/catalog-item";
+﻿import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { combineUrl } from "@docspace/common/utils";
-import withLoader from "../../../HOCs/withLoader";
-import config from "PACKAGE_FILE";
 
-const iconUrl = CatalogAccountsReactSvgUrl;
+import { PageType } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-const PureAccountsItem = ({
-  showText,
-  setSelectedFolder,
-  selectedTreeNode,
-  setSelectedNode,
-  toggleArticleOpen,
-  history,
-  t,
-}) => {
-  const onClick = React.useCallback(() => {
-    setSelectedFolder(null);
+import CatalogItem from "@docspace/components/catalog-item";
 
-    setSelectedNode(["accounts", "filter"]);
+const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
+  const onClickAction = React.useCallback(() => {
+    onClick && onClick("accounts");
+  }, [onClick]);
 
-    history.push(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        "/accounts"
-      )
-    );
-    toggleArticleOpen();
-  }, [setSelectedFolder, setSelectedNode, history]);
-
-  const isActive = selectedTreeNode[0] === "accounts";
+  const icon = getCatalogIconUrlByType(PageType.account);
 
   return (
     <CatalogItem
       key="accounts"
-      text={t("Common:Accounts")}
-      icon={iconUrl}
+      text={t("Accounts")}
+      icon={icon}
       showText={showText}
-      onClick={onClick}
+      onClick={onClickAction}
       isActive={isActive}
       folderId="document_catalog-accounts"
     />
   );
 };
 
-const AccountsItem = withTranslation(["FilesSettings", "Common"])(
-  withRouter(withLoader(PureAccountsItem)(<></>))
-);
+const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
 
-export default inject(({ auth, treeFoldersStore, selectedFolderStore }) => {
-  const { setSelectedFolder } = selectedFolderStore;
-  const { selectedTreeNode, setSelectedNode } = treeFoldersStore;
-  const { toggleArticleOpen, showText } = auth.settingsStore;
+export default inject(({ auth }) => {
+  const { showText } = auth.settingsStore;
 
   return {
     showText,
-    setSelectedFolder,
-    selectedTreeNode,
-    setSelectedNode,
-    toggleArticleOpen,
   };
 })(observer(AccountsItem));

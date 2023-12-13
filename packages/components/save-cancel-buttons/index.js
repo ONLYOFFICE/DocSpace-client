@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Button from "../button";
 import Text from "../text";
 import StyledSaveCancelButtons from "./styled-save-cancel-buttons";
+import { isDesktop, isMobile } from "../utils/device";
 
 const ButtonKeys = Object.freeze({
   enter: 13,
@@ -42,7 +43,7 @@ class SaveCancelButtons extends React.Component {
       onCancelClick,
       displaySettings,
       showReminder,
-      reminderTest,
+      reminderText,
       saveButtonLabel,
       cancelButtonLabel,
       hasScroll,
@@ -53,6 +54,9 @@ class SaveCancelButtons extends React.Component {
       cancelEnable,
       tabIndex,
       saveButtonDisabled,
+      additionalClassSaveButton,
+      additionalClassCancelButton,
+      hideBorder,
     } = this.props;
 
     const cancelButtonDisabled = cancelEnable
@@ -64,6 +68,16 @@ class SaveCancelButtons extends React.Component {
     const tabIndexSaveButton = tabIndex ? tabIndex : -1;
     const tabIndexCancelButton = tabIndex ? tabIndex + 1 : -1;
 
+    const classNameSave = additionalClassSaveButton
+      ? `save-button ` + additionalClassSaveButton
+      : `save-button`;
+
+    const classNameCancel = additionalClassCancelButton
+      ? `cancel-button ` + additionalClassCancelButton
+      : `cancel-button`;
+
+    const buttonSize = isDesktop() ? "small" : "normal";
+
     return (
       <StyledSaveCancelButtons
         className={className}
@@ -71,31 +85,34 @@ class SaveCancelButtons extends React.Component {
         displaySettings={displaySettings}
         showReminder={showReminder}
         hasScroll={hasScroll}
+        hideBorder={hideBorder}
       >
         <div className="buttons-flex">
           <Button
             tabIndex={tabIndexSaveButton}
-            className="save-button"
-            size="normal"
+            className={classNameSave}
+            size={buttonSize}
             isDisabled={!showReminder || saveButtonDisabled}
             primary
             onClick={onSaveClick}
             label={saveButtonLabel}
             minwidth={displaySettings && "auto"}
             isLoading={isSaving}
+            scale={isMobile()}
           />
           <Button
             tabIndex={tabIndexCancelButton}
-            className="cancel-button"
-            size="normal"
+            className={classNameCancel}
+            size={buttonSize}
             isDisabled={cancelButtonDisabled || isSaving}
             onClick={onCancelClick}
             label={cancelButtonLabel}
             minwidth={displaySettings && "auto"}
+            scale={isMobile()}
           />
         </div>
-        {showReminder && (
-          <Text className="unsaved-changes"> {reminderTest} </Text>
+        {showReminder && reminderText && (
+          <Text className="unsaved-changes">{reminderText}</Text>
         )}
       </StyledSaveCancelButtons>
     );
@@ -107,26 +124,34 @@ SaveCancelButtons.propTypes = {
   id: PropTypes.string,
   /** Accepts css class */
   className: PropTypes.string,
-  /** Text reminding of unsaved changes */
-  reminderTest: PropTypes.string,
+  /** Message text that notifies of the unsaved changes */
+  reminderText: PropTypes.string,
   /** Save button label */
   saveButtonLabel: PropTypes.string,
   /** Cancel button label  */
   cancelButtonLabel: PropTypes.string,
-  /** What the save button will trigger when clicked */
+  /** Sets a callback function that is triggered when the save button is clicked */
   onSaveClick: PropTypes.func,
-  /** What the cancel button will trigger when clicked */
+  /** Sets a callback function that is triggered when the cancel button is clicked */
   onCancelClick: PropTypes.func,
-  /** Show message about unsaved changes (Only shown on desktops) */
+  /** Reminder message that notifies of the unsaved changes (Only shown on desktops) */
   showReminder: PropTypes.bool,
-  /** Tells when the button should present a disabled state */
+  /** Sets save and cancel buttons block to 'position: static' instead of absolute */
   displaySettings: PropTypes.bool,
+  /** Displays the scrollbar */
   hasScroll: PropTypes.bool,
+  /** Sets the min width of the button */
   minwidth: PropTypes.string,
+  /** Sets the Cancel button disabled by default */
   disableRestoreToDefault: PropTypes.bool,
+  /** Sets the button to present a disabled state while executing an operation after clicking the save button */
   isSaving: PropTypes.bool,
+  /** Activates the disabled button */
   cancelEnable: PropTypes.bool,
+  /** Accepts css tab-index */
   tabIndex: PropTypes.number,
+  /** Hide top border */
+  hideBorder: PropTypes.bool,
 };
 
 SaveCancelButtons.defaultProps = {

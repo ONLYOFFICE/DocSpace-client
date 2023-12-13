@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 
 import { parseAddresses } from "@docspace/components/utils/email";
 import { getAccessOptions } from "../utils";
+import { getUserRole } from "@docspace/common/utils";
 
 import {
   StyledEditInput,
@@ -28,11 +29,14 @@ const Item = ({
   roomType,
   isOwner,
   inputsRef,
+  setIsOpenItemAccess,
+  isMobileView,
 }) => {
   const { avatar, displayName, email, id, errors, access } = item;
 
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
+  const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -128,10 +132,15 @@ const Item = ({
             size={16}
             color="#F21C0E"
           />
-          <StyledDeleteIcon size="medium" onClick={removeItem} />
+          <StyledDeleteIcon
+            className="delete-icon"
+            size="medium"
+            onClick={removeItem}
+          />
         </>
       ) : (
         <AccessSelector
+          className="user-access"
           t={t}
           roomType={roomType}
           defaultAccess={defaultAccess?.access}
@@ -140,6 +149,9 @@ const Item = ({
           isOwner={isOwner}
           withRemove={true}
           filteredAccesses={filteredAccesses}
+          setIsOpenItemAccess={setIsOpenItemAccess}
+          isMobileView={isMobileView}
+          noBorder
         />
       )}
     </>
@@ -158,7 +170,7 @@ const Item = ({
 
   return (
     <>
-      <Avatar size="min" role="user" source={source} />
+      <Avatar size="min" role={role} source={source} />
       {edit ? editBody : displayBody}
     </>
   );

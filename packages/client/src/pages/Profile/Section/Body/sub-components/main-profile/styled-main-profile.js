@@ -1,15 +1,10 @@
 import styled, { css } from "styled-components";
-import {
-  hugeMobile,
-  mobile,
-  smallTablet,
-  tablet,
-} from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 
 export const StyledWrapper = styled.div`
   width: 100%;
-  max-width: 100%;
+  max-width: 660px;
 
   display: flex;
   padding: 24px 24px 18px 24px;
@@ -23,7 +18,11 @@ export const StyledWrapper = styled.div`
     min-width: 124px;
   }
 
-  @media ${smallTablet} {
+  @media ${tablet} {
+    max-width: 100%;
+  }
+
+  @media ${mobile} {
     background: none;
     flex-direction: column;
     gap: 24px;
@@ -35,7 +34,7 @@ export const StyledWrapper = styled.div`
 export const StyledAvatarWrapper = styled.div`
   display: flex;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     width: 100%;
     justify-content: center;
   }
@@ -43,10 +42,18 @@ export const StyledAvatarWrapper = styled.div`
   .badges-wrapper {
     display: none;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: flex;
       position: fixed;
       right: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              left: 16px;
+            `
+          : css`
+              right: 16px;
+            `}
     }
   }
 `;
@@ -76,6 +83,7 @@ export const StyledInfo = styled.div`
     .profile-block {
       display: flex;
       flex-direction: column;
+      overflow: hidden;
 
       .profile-block-field {
         display: flex;
@@ -86,7 +94,14 @@ export const StyledInfo = styled.div`
       }
 
       .sso-badge {
-        margin-left: 18px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 18px;
+              `
+            : css`
+                margin-left: 18px;
+              `}
       }
 
       .profile-block-password {
@@ -110,12 +125,6 @@ export const StyledInfo = styled.div`
           height: 36px;
           margin-top: 7px;
         }
-
-        .language-combo-box {
-          .combo-button {
-            margin-left: -16px;
-          }
-        }
       }
     }
   }
@@ -135,7 +144,14 @@ export const StyledInfo = styled.div`
   .email-edit-container {
     display: flex;
     align-items: center;
-    padding-right: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 16px;
+          `
+        : css`
+            padding-right: 16px;
+          `}
     line-height: 20px;
 
     .email-text-container {
@@ -149,6 +165,14 @@ export const StyledInfo = styled.div`
     .email-edit-button {
       display: block;
       padding-left: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 8px;
+            `
+          : css`
+              padding-left: 8px;
+            `}
     }
   }
 
@@ -163,6 +187,14 @@ export const StyledInfo = styled.div`
 
     .send-again-text {
       margin-left: 5px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 5px;
+            `
+          : css`
+              margin-left: 5px;
+            `}
       line-height: 15px;
       color: ${(props) => props.currentColorScheme.main.accent};
       border-bottom: 1px solid
@@ -198,7 +230,7 @@ export const StyledInfo = styled.div`
     display: flex;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .rows-container {
       display: none;
     }
@@ -221,7 +253,8 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-field {
           display: flex;
-          align-items: baseline;
+          align-items: ${({ theme }) =>
+            theme.interfaceDirection === "rtl" ? `flex-start` : `baseline`};
           max-width: calc(100% - 28px);
           flex-direction: column;
           gap: 2px;
@@ -230,7 +263,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label {
           min-width: 100%;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
           white-space: nowrap;
           color: rgb(163, 169, 174);
@@ -239,7 +273,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label-field {
           padding-left: 0px;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px;
         }
 
@@ -252,7 +287,14 @@ export const StyledInfo = styled.div`
         }
 
         .edit-button {
-          margin-left: auto;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-right: auto;
+                `
+              : css`
+                  margin-left: auto;
+                `}
           min-width: 12px;
 
           svg path {
@@ -262,7 +304,8 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-password {
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
         }
       }
@@ -287,7 +330,7 @@ export const StyledInfo = styled.div`
         }
       }
 
-      @media ${hugeMobile} {
+      @media ${mobile} {
         gap: 8px;
       }
     }

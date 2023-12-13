@@ -11,20 +11,27 @@ export const commonSettingsStyles = css`
     }
 
     .category-item-subheader {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       font-weight: 600;
       margin-bottom: 5px;
     }
 
     .category-item-description {
       color: #555f65;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       max-width: 1024px;
     }
 
     .inherit-title-link {
-      margin-right: 7px;
-      font-size: 19px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 7px;
+            `
+          : css`
+              margin-right: 7px;
+            `}
+      font-size: ${(props) => props.theme.getCorrectFontSize("19px")};
       font-weight: 600;
     }
 
@@ -41,6 +48,10 @@ export const UnavailableStyles = css`
 
     label {
       color: ${(props) => props.theme.text.disableColor};
+    }
+
+    path {
+      fill: ${(props) => props.theme.text.disableColor};
     }
   }
 `;

@@ -1,23 +1,12 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { isMobileOnly } from "react-device-detect";
 
 const StyledDropdown = styled.div`
-  @media (orientation: landscape) {
-    ${(props) =>
-      props.isPersonal &&
-      props.isExternalLink &&
-      window.innerHeight < 500 &&
-      css`
-        top: 10% !important;
-        left: 45% !important;
-      `}
-  }
-
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
   font-weight: ${(props) => props.theme.dropDown.fontWeight};
-  font-size: ${(props) => props.theme.dropDown.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.dropDown.fontSize)};
   ${(props) =>
     props.maxHeight &&
     `
@@ -37,20 +26,41 @@ const StyledDropdown = styled.div`
     css`
       top: ${(props) => (props.manualY ? props.manualY : "100%")};
     `}
+
   ${(props) =>
     props.directionX === "right" &&
-    css`
-      right: ${(props) => (props.manualX ? props.manualX : "0px")};
-    `}
+    !props.directionXStylesDisabled &&
+    (props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: ${props.manualX || "0px"};
+        `
+      : css`
+          right: ${props.manualX || "0px"};
+        `)}
+
   ${(props) =>
     props.directionX === "left" &&
-    css`
-      left: ${(props) => (props.manualX ? props.manualX : "0px")};
-    `}
+    !props.directionXStylesDisabled &&
+    (props.theme.interfaceDirection === "rtl"
+      ? css`
+          right: ${props.manualX || "0px"};
+        `
+      : css`
+          left: ${props.manualX || "0px"};
+        `)}
+
   z-index: ${(props) =>
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
   display: ${(props) =>
     props.open ? (props.columnCount ? "block" : "table") : "none"};
+
+  ${(props) =>
+    !props.isDropdownReady &&
+    `
+    visibility: hidden;
+    top: 0;
+  `}}
+
   background: ${(props) => props.theme.dropDown.background};
   border: ${(props) => props.theme.dropDown.border};
   border-radius: ${(props) => props.theme.dropDown.borderRadius};
@@ -60,7 +70,7 @@ const StyledDropdown = styled.div`
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   ${(props) =>
-    (props.isMobileView || isMobileOnly) &&
+    props.isMobileView &&
     css`
       box-shadow: ${(props) => props.theme.dropDown.boxShadowMobile};
       -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadowMobile};
@@ -78,7 +88,10 @@ const StyledDropdown = styled.div`
 
   .scroll-drop-down-item {
     .scroll-body {
-      padding-right: 0 !important;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? `padding-left: 0 !important;`
+          : `padding-right: 0 !important;`}
     }
   }
   &.download-dialog-dropDown {
@@ -91,7 +104,7 @@ const StyledDropdown = styled.div`
       css`
         top: auto !important;
         bottom: 0;
-        left: 0;
+        ${props.theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
         width: 100%;
       `}
   }

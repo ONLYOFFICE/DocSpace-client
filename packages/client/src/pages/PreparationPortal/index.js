@@ -7,7 +7,7 @@ import Text from "@docspace/components/text";
 import { getRestoreProgress } from "@docspace/common/api/portal";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
 const baseSize = 1073741824; //number of bytes in one GB
 const unSizeMultiplicationFactor = 3;
@@ -29,6 +29,7 @@ const PreparationPortal = (props) => {
     withoutHeader,
     style,
     clearLocalStorage,
+    isDialog,
   } = props;
 
   const [percent, setPercent] = useState(0);
@@ -154,9 +155,9 @@ const PreparationPortal = (props) => {
       if (typeof error !== "object") return error;
 
       return (
-        err?.response?.data?.error?.message ||
-        err?.statusText ||
-        err?.message ||
+        error?.response?.data?.error?.message ||
+        error?.statusText ||
+        error?.message ||
         t("Common:ErrorInternalServer")
       );
     };
@@ -189,7 +190,7 @@ const PreparationPortal = (props) => {
       setErrorMessage(errorMessage(err));
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
     setTimeout(() => {
       getRecoveryProgress();
     }, 4000);
@@ -204,7 +205,7 @@ const PreparationPortal = (props) => {
     : t("Common:PreparationPortalTitle");
 
   return (
-    <StyledPreparationPortal errorMessage={errorMessage}>
+    <StyledPreparationPortal errorMessage={errorMessage} isDialog={isDialog}>
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
@@ -236,7 +237,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ backup }) => {
+const PreparationPortalWrapper = inject(({ auth, backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize
@@ -253,10 +254,12 @@ const PreparationPortalWrapper = inject(({ backup }) => {
 
 PreparationPortal.propTypes = {
   withoutHeader: PropTypes.bool,
+  isDialog: PropTypes.bool,
 };
 
 PreparationPortal.defaultProps = {
   withoutHeader: false,
+  isDialog: false,
 };
 
 export default (props) => <PreparationPortalWrapper {...props} />;

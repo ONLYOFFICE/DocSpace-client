@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Submenu from "@docspace/components/submenu";
-import { withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
 
 import SSO from "./SingleSignOn";
 import ThirdParty from "./ThirdPartyServicesSettings";
-import PortalPlugins from "./PortalPlugins";
 
-import AppLoader from "@docspace/common/components/AppLoader";
-import SSOLoader from "./sub-components/ssoLoader";
 import SMTPSettings from "./SMTPSettings";
+import DocumentService from "./DocumentService";
+import PluginPage from "./Plugins";
+import { DeviceType } from "@docspace/common/constants";
+import Badge from "@docspace/components/badge";
+import Box from "@docspace/components/box";
 
 const IntegrationWrapper = (props) => {
-  const { t, tReady, history, enablePlugins, toDefault, isSSOAvailable } =
-    props;
-  const [currentTab, setCurrentTab] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    t,
+    tReady,
+    currentDeviceType,
+    toDefault,
+    isSSOAvailable,
+    standalone,
+    enablePlugins,
+  } = props;
+  const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
-      isSSOAvailable && toDefault();
+      isSSOAvailable &&
+        !window.location.pathname.includes("single-sign-on") &&
+        toDefault();
     };
   }, []);
-
-  const pluginData = {
-    id: "plugins",
-    name: "Plugins",
-    content: <PortalPlugins />,
-  };
 
   const data = [
     {
@@ -51,24 +54,49 @@ const IntegrationWrapper = (props) => {
     },
   ];
 
-  if (!isMobile) {
-    enablePlugins && data.push(pluginData);
+  if (standalone) {
+    const documentServiceData = {
+      id: "document-service",
+      name: t("DocumentService"),
+      content: <DocumentService />,
+    };
+
+    data.push(documentServiceData);
   }
 
-  const load = async () => {
+  if (enablePlugins) {
+    const pluginLabel = (
+      <Box displayProp="flex" style={{ gap: "8px" }}>
+        {t("Common:Plugins")}
+
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
+    );
+
+    data.splice(1, 0, {
+      id: "plugins",
+      name: pluginLabel,
+      content: <PluginPage />,
+    });
+  }
+
+  const getCurrentTab = () => {
     const path = location.pathname;
     const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
-
-    setIsLoading(true);
+    return currentTab !== -1 ? currentTab : 0;
   };
 
-  useEffect(() => {
-    load();
-  }, []);
+  const currentTab = getCurrentTab();
 
   const onSelect = (e) => {
-    history.push(
+    navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
@@ -77,24 +105,37 @@ const IntegrationWrapper = (props) => {
     );
   };
 
-  if (!isLoading && !tReady)
-    return currentTab === 0 ? <SSOLoader /> : <AppLoader />;
-
-  return <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />;
+  return (
+    <Submenu
+      data={data}
+      startSelect={currentTab}
+      onSelect={onSelect}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
+    />
+  );
 };
 
 export default inject(({ auth, ssoStore }) => {
+  const { standalone, enablePlugins } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
-  const { enablePlugins } = auth.settingsStore;
+  const { currentDeviceType } = auth.settingsStore;
   const { isSSOAvailable } = auth.currentQuotaStore;
 
   return {
-    enablePlugins,
     toDefault,
     isSSOAvailable,
+    standalone,
+    currentDeviceType,
+    enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations"])(
-    withRouter(observer(IntegrationWrapper))
+  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
+    observer(IntegrationWrapper)
   )
 );

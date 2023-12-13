@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
 import { getLogoFromPath } from "@docspace/common/utils";
 
@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     height: 44px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     display: none;
   }
 `;
@@ -27,7 +27,11 @@ const DocspaceLogo = (props) => {
 
   return (
     <StyledWrapper>
-      <ReactSVG src={logo} className={`logo-wrapper ${className}`} />
+      {logo ? (
+        <ReactSVG src={logo} className={`logo-wrapper ${className}`} />
+      ) : (
+        <></>
+      )}
     </StyledWrapper>
   );
 };

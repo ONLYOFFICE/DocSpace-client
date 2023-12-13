@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Text from "@docspace/components/text";
 
@@ -9,15 +9,11 @@ import RootIcon from "PUBLIC_DIR/images/root.react.svg";
 import DefaultTabletIcon from "PUBLIC_DIR/images/default.tablet.react.svg";
 import RootTabletIcon from "PUBLIC_DIR/images/root.tablet.react.svg";
 
-import { isMobile } from "react-device-detect";
-import {
-  tablet,
-  isTablet,
-  isMobile as IsMobileUtils,
-} from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { DeviceType } from "../../../constants";
 
 const StyledItem = styled.div`
   height: auto;
@@ -27,23 +23,74 @@ const StyledItem = styled.div`
   align-items: ${(props) => (props.isRoot ? "baseline" : "end")};
   grid-template-columns: 17px auto;
   cursor: pointer;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `margin-right: 0;` : `margin-left: 0;`}
+
+  @media ${tablet} {
+    ${({ withLogo }) =>
+      withLogo &&
+      css`
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 44px;
+              `
+            : css`
+                margin-left: 44px;
+              `}
+      `};
+  }
+
+  @media ${mobile} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 0;
+          `
+        : css`
+            margin-left: 0;
+          `}
+  }
 `;
 
 const StyledText = styled(Text)`
-  margin-left: 10px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 10px;
+        `
+      : css`
+          margin-left: 10px;
+        `}
   position: relative;
   bottom: ${(props) => (props.isRoot ? "2px" : "-1px")};
 `;
 
-const Item = ({ id, title, isRoot, isRootRoom, onClick, ...rest }) => {
+const Item = ({
+  id,
+  title,
+  isRoot,
+  isRootRoom,
+  onClick,
+  withLogo,
+  currentDeviceType,
+  ...rest
+}) => {
   const onClickAvailable = () => {
     onClick && onClick(id, isRootRoom);
   };
 
   return (
-    <StyledItem id={id} isRoot={isRoot} onClick={onClickAvailable} {...rest}>
+    <StyledItem
+      id={id}
+      isRoot={isRoot}
+      onClick={onClickAvailable}
+      withLogo={withLogo}
+      {...rest}
+    >
       <ColorTheme isRoot={isRoot} themeId={ThemeType.IconWrapper}>
-        {isMobile || isTablet() || IsMobileUtils() ? (
+        {currentDeviceType !== DeviceType.desktop ? (
           isRoot ? (
             <RootTabletIcon />
           ) : (

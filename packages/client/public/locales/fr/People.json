@@ -2,6 +2,6 @@
   "LblInviteAgain": "Inviter à nouveau",
   "MessageEmailActivationInstuctionsSentOnEmail": "Les instructions d'activation ont été envoyées à l'adresse <1>{{email}}</1>.",
   "NotFoundUsers": "Aucun utilisateur trouvé",
-  "NotFoundUsersDescription": "Aucune personne correspondant à votre filtre ne peut être affichée. Veuillez sélectionner d’autres options de filtrage ou effacer le filtre pour afficher toutes les personnes de cette section.",
+  "NotFoundUsersDescription": "Aucun utilisateur ne correspond à votre recherche. Veuillez ajuster vos paramètres de recherche ou effacer le champ de recherche pour afficher la liste complète des utilisateurs.",
   "UserStatus": "Statut"
 }

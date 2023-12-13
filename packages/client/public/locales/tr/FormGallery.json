@@ -1,6 +1,10 @@
 {
-  "EmptyScreenDescription": "Lütfen internet bağlantınızı kontrol edin ve sayfayı yenileyin veya daha sonra deneyin.",
-  "GalleryEmptyScreenDescription": "Detayları görmek için herhangi bir form şablonunu seçin",
-  "GalleryEmptyScreenHeader": "Form şablonları yüklenemedi",
+  "Categories": "Kategoriler",
+  "ErrorViewDescription": "Lütfen daha sonra tekrar deneyin",
+  "SelectForm": "Formu Seç",
+  "SubmitToGalleryBlockBody": "ONLYOFFICE topluluğuyla paylaşmak için şablonlarınızı gönderin.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Form Galerisi",
+  "SubmitToGalleryDialogGuideInfo": "<1>guide</1> mükemmel formlar oluşturmayı ve onay alma şansınızı nasıl artıracağınızı öğrenin.",
+  "SubmitToGalleryDialogMainInfo": "Formunuzun başkalarının çalışmalarında kullanmasına izin vermek için genel galeriye gönderin. Form denetimden geçtikten sonra, katkınız için bilgilendirileceksiniz ve ödüllendirileceksiniz.",
   "TemplateInfo": "Şablon bilgisi"
 }

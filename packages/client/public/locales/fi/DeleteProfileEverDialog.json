@@ -1,5 +1,9 @@
 {
+  "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",
+  "DeleteMyDocumentsUser": "Kaikki henkilökohtaiset tiedostot ja kansiot tämän käyttäjän Asiakirjani-osiossa poistetaan pysyvästi.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat siirretään automaattisesti järjestelmänvalvojalle, joka suorittaa poiston:<strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Siirrä tiedot manuaalisesti valitaksesi toinen kohdekäyttäjä tietojen siirrolle.",
   "DeleteUser": "Poista käyttäjä",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> poistetaan. Käyttäjän henkilökohtaiset dokumentit, jotka on saatavilla muille, poistetaan. Haluatko varmasti jatkaa?",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
+  "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
   "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti"
 }

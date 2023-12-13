@@ -18,7 +18,7 @@ import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import FormWrapper from "@docspace/components/form-wrapper";
 import Register from "./sub-components/register-container";
-import { ColorTheme, ThemeType } from "@docspace/common/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/components/themes";
 import { useMounted } from "../helpers/useMounted";
@@ -36,6 +36,7 @@ interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
   theme: IUserTheme;
   setTheme: (theme: IUserTheme) => void;
+  isBaseTheme: boolean;
 }
 
 const Login: React.FC<ILoginProps> = ({
@@ -48,6 +49,7 @@ const Login: React.FC<ILoginProps> = ({
   theme,
   setTheme,
   logoUrls,
+  isBaseTheme,
 }) => {
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
@@ -228,7 +230,7 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeType.LinkForgotPassword} theme={theme}>
+        <ColorTheme themeId={ThemeType.LinkForgotPassword}>
           <img src={logoUrl} className="logo-wrapper" />
           <Text
             fontSize="23px"
@@ -264,6 +266,8 @@ const Login: React.FC<ILoginProps> = ({
               </div>
             )}
             <LoginForm
+              isBaseTheme={isBaseTheme}
+              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
               isDesktop={!!isDesktopEditor}
               isLoading={isLoading}
               hashSettings={portalSettings?.passwordHash}
@@ -312,5 +316,6 @@ export default inject(({ loginStore }) => {
   return {
     theme: loginStore.theme,
     setTheme: loginStore.setTheme,
+    isBaseTheme: loginStore.theme.isBase,
   };
 })(observer(Login));

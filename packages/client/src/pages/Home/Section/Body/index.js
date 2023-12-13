@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { useLocation } from "react-router-dom";
 
 import { observer, inject } from "mobx-react";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
@@ -12,6 +11,8 @@ import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import { Consumer } from "@docspace/components/utils/context";
 import { isElementInViewport } from "@docspace/common/utils";
+import { isMobile, isTablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -41,7 +42,9 @@ const SectionBodyContent = (props) => {
     filesList,
     uploaded,
     onClickBack,
+
     movingInProgress,
+    currentDeviceType,
   } = props;
 
   useEffect(() => {
@@ -50,14 +53,13 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-body"
+      "#customScrollBar > .scroll-wrapper > .scroller"
     );
 
-    if (isMobile) {
+    if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
       customScrollElm && customScrollElm.scrollTo(0, 0);
     }
 
-    window.addEventListener("popstate", onClickBack);
     window.addEventListener("beforeunload", onBeforeunload);
     window.addEventListener("mousedown", onMouseDown);
     startDrag && window.addEventListener("mouseup", onMouseUp);
@@ -68,7 +70,6 @@ const SectionBodyContent = (props) => {
     document.addEventListener("drop", onDropEvent);
 
     return () => {
-      window.removeEventListener("popstate", onClickBack);
       window.removeEventListener("beforeunload", onBeforeunload);
       window.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mouseup", onMouseUp);
@@ -86,6 +87,7 @@ const SectionBodyContent = (props) => {
     folderId,
     viewAs,
     uploaded,
+    currentDeviceType,
   ]);
 
   useEffect(() => {
@@ -99,19 +101,26 @@ const SectionBodyContent = (props) => {
       let isInViewport = isElementInViewport(targetElement);
 
       if (!isInViewport || viewAs === "table") {
-        const bodyScroll = isMobileOnly
-          ? document.querySelector("#customScrollBar > .scroll-body")
-          : document.querySelector(".section-scroll");
+        const bodyScroll =
+          isMobile() || currentDeviceType === DeviceType.mobile
+            ? document.querySelector(
+                "#customScrollBar > .scroll-wrapper > .scroller"
+              )
+            : document.querySelector(".section-scroll");
 
         const count =
           filesList.findIndex((elem) => elem.id === scrollToItem.id) *
-          (isMobileOnly ? 57 : viewAs === "table" ? 40 : 48);
+          (isMobile() || currentDeviceType === DeviceType.mobile
+            ? 57
+            : viewAs === "table"
+            ? 40
+            : 48);
 
         bodyScroll.scrollTo(0, count);
       }
       setScrollToItem(null);
     }
-  }, [scrollToItem]);
+  }, [scrollToItem, currentDeviceType]);
 
   const onBeforeunload = (e) => {
     if (!uploaded) {
@@ -126,10 +135,11 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".files-item") &&
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
-        !e.target.closest(".table-container_group-menu")) ||
+        !e.target.closest(".table-container_group-menu") &&
+        !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest(".search-input-block")
+      e.target.closest("#filter_search-input")
     ) {
       setSelection([]);
       setBufferSelection(null);
@@ -207,8 +217,8 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setDragging(false);
       setStartDrag(false);
+      setTimeout(() => setDragging(false), 0);
       isDragActive = false;
       return;
     }
@@ -216,7 +226,7 @@ const SectionBodyContent = (props) => {
     const folderId = value ? value.split("_")[1] : treeValue;
 
     setStartDrag(false);
-    setDragging(false);
+    setTimeout(() => setDragging(false), 0);
     onMoveTo(folderId, title);
     isDragActive = false;
     return;
@@ -253,10 +263,12 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
+  const isEmptyPage = isEmptyFilesList;
+
   return (
     <Consumer>
       {(context) =>
-        isEmptyFilesList ? (
+        isEmptyPage ? (
           <>
             <EmptyContainer sectionWidth={context.sectionWidth} />
           </>
@@ -283,6 +295,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
+    auth,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -306,6 +319,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
+
       movingInProgress,
     } = filesStore;
     return {
@@ -332,12 +346,11 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
+      currentDeviceType: auth.settingsStore,
     };
   }
 )(
-  withRouter(
-    withTranslation(["Files", "Common", "Translations"])(
-      withLoader(withHotkeys(observer(SectionBodyContent)))()
-    )
+  withTranslation(["Files", "Common", "Translations"])(
+    withHotkeys(withLoader(observer(SectionBodyContent))())
   )
 );

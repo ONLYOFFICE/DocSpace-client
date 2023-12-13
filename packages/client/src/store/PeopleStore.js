@@ -1,4 +1,4 @@
-﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+﻿import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
@@ -16,14 +16,13 @@ import HeaderMenuStore from "./HeaderMenuStore";
 import AvatarEditorStore from "./AvatarEditorStore";
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
-import LoadingStore from "./LoadingStore";
+
 import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import {
   isMobile,
   isTablet,
   isDesktop,
 } from "@docspace/components/utils/device";
-import { isMobileRDD } from "react-device-detect";
 
 import toastr from "@docspace/components/toast/toastr";
 import { EmployeeStatus, Events } from "@docspace/common/constants";
@@ -44,11 +43,11 @@ class PeopleStore {
   avatarEditorStore = null;
   inviteLinksStore = null;
   dialogStore = null;
-  loadingStore = null;
   setupStore = null;
   accessRightsStore = null;
+  profileActionsStore = null;
   isInit = false;
-  viewAs = isMobileRDD ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
   constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
@@ -64,7 +63,7 @@ class PeopleStore {
     this.avatarEditorStore = new AvatarEditorStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
-    this.loadingStore = new LoadingStore();
+
     this.setupStore = setupStore;
     this.accessRightsStore = accessRightsStore;
     this.dialogsStore = dialogsStore;
@@ -83,28 +82,20 @@ class PeopleStore {
     this.isInit = true;
 
     //this.authStore.settingsStore.setModuleInfo(config.homepage, config.id);
-
-    await this.authStore.settingsStore.getPortalPasswordSettings();
-    await this.authStore.tfaStore.getTfaType();
-
-    this.loadingStore.setIsLoaded(true);
   };
 
   reset = () => {
     this.isInit = false;
-    this.loadingStore.setIsLoaded(false);
   };
 
   resetFilter = () => {
-    const { getUsersList } = this.usersStore;
-
     const filter = Filter.getDefault();
 
-    return getUsersList(filter, true);
+    window.DocSpace.navigate(`accounts/filter?${filter.toUrlParams()}`);
   };
 
   onChangeType = (e) => {
-    const action = e?.action ? e.action : e?.target?.dataset?.action;
+    const action = e?.action ? e.action : e?.currentTarget?.dataset?.action;
 
     const { getUsersToMakeEmployees } = this.selectionStore;
 
@@ -167,10 +158,8 @@ class PeopleStore {
   };
 
   changeStatus = (status, users) => {
-    const {
-      setChangeUserStatusDialogVisible,
-      setDialogData,
-    } = this.dialogStore;
+    const { setChangeUserStatusDialogVisible, setDialogData } =
+      this.dialogStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
@@ -193,12 +182,15 @@ class PeopleStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       hasFreeUsers,
+      userSelectionRole,
+      selection,
     } = this.selectionStore;
-    const {
-      setSendInviteDialogVisible,
-      setDeleteDialogVisible,
-    } = this.dialogStore;
+
+    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
+      this.dialogStore;
+    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
     const { isOwner } = this.authStore.userStore.user;
 
@@ -214,6 +206,7 @@ class PeopleStore {
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",
+      isActive: userSelectionRole === "admin",
     };
     const managerOption = {
       id: "menu_change-user_manager",
@@ -223,6 +216,7 @@ class PeopleStore {
       onClick: (e) => this.onChangeType(e),
       "data-action": "manager",
       key: "manager",
+      isActive: userSelectionRole === "manager",
     };
     const userOption = {
       id: "menu_change-user_user",
@@ -232,6 +226,7 @@ class PeopleStore {
       onClick: (e) => this.onChangeType(e),
       "data-action": "user",
       key: "user",
+      isActive: userSelectionRole === "user",
     };
 
     isOwner && options.push(adminOption);
@@ -256,7 +251,8 @@ class PeopleStore {
         label: t("Common:Info"),
         disabled:
           isVisible ||
-          !(isTablet() || isMobile() || isMobileRDD || !isDesktop()),
+          !(isTablet() || isMobile() || !isDesktop()) ||
+          selection.length > 1,
         onClick: (item) => this.onOpenInfoPanel(item),
         iconUrl: InfoReactSvgUrl,
       },
@@ -289,7 +285,7 @@ class PeopleStore {
         key: "delete",
         label: t("Common:Delete"),
         disabled: !hasUsersToRemove,
-        onClick: () => setDeleteDialogVisible(true),
+        onClick: () => toggleDeleteProfileEverDialog(selection),
         iconUrl: DeleteReactSvgUrl,
       },
     ];

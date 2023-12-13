@@ -84,7 +84,9 @@ export const getDeepLink = (
     },
     originalUrl: originalUrl,
   };
-  const deepLinkData = window.btoa(JSON.stringify(jsonData));
+  const deepLinkData = window.btoa(
+    encodeURIComponent(JSON.stringify(jsonData))
+  );
 
   const linker = new DeepLinker({
     onIgnored: function () {

@@ -107,11 +107,11 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
-    if (window.innerHeight > window.innerWidth) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.scrollTo(0, 0);
-    }
+    if (window.innerHeight < window.innerWidth) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    window.scrollTo(0, 0);
   };
 
   const onResize = () => {
@@ -154,37 +154,30 @@ const Layout = (props) => {
         height = `100%`;
       }
 
-      if (window.innerHeight > window.innerWidth) {
-        if (
-          isIOS &&
-          isMobileOnly &&
-          e?.type === "resize" &&
-          e?.target?.height
-        ) {
-          const diff = window.innerHeight - e.target.height;
+      if (isIOS && isMobileOnly && e?.type === "resize" && e?.target?.height) {
+        const diff = window.innerHeight - e.target.height;
 
-          windowHeight -= diff;
+        windowHeight -= diff;
 
         document.body.style.height = `${e.target.height + e.target.offsetTop}`;
-          document.body.style.maxHeight = `${
-            e.target.height + e.target.offsetTop
-          }`;
-          document.body.style.minHeight = `${
-            e.target.height + e.target.offsetTop
-          }`;
+        document.body.style.maxHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
+        document.body.style.minHeight = `${
+          e.target.height + e.target.offsetTop
+        }`;
 
-          document.body.style.top = `0px`;
-          document.body.style.position = `fixed`;
-          document.body.style.overflow = `hidden`;
-          document.body.style.scroll = `hidden`;
-        } else if (isMobileOnly && isIOS) {
-          document.body.style.height = `100%`;
-          document.body.style.maxHeight = `100%`;
-          document.body.style.minHeight = `100%`;
-          document.body.style.removeProperty("bottom");
-          document.body.style.removeProperty("position");
-          document.body.style.removeProperty("overflow");
-        }
+        document.body.style.top = `0px`;
+        document.body.style.position = `fixed`;
+        document.body.style.overflow = `hidden`;
+        document.body.style.scroll = `hidden`;
+      } else if (isMobileOnly && isIOS) {
+        document.body.style.height = `100%`;
+        document.body.style.maxHeight = `100%`;
+        document.body.style.minHeight = `100%`;
+        document.body.style.removeProperty("bottom");
+        document.body.style.removeProperty("position");
+        document.body.style.removeProperty("overflow");
       }
 
       if (isMobile && !isIOS) {

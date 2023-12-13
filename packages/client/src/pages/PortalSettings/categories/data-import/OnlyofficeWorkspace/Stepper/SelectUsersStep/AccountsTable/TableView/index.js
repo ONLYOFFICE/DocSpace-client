@@ -21,6 +21,7 @@ const StyledTableContainer = styled(TableContainer)`
   .table-container_header {
     position: absolute;
     padding: 0px 28px;
+    padding-right: 15px;
   }
 
   .header-container-text {
@@ -38,11 +39,13 @@ const StyledTableContainer = styled(TableContainer)`
     padding-left: 20px;
 
     &:hover {
-      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+      background-color: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundActive};
 
       .table-container_cell {
         margin-top: -1px;
-        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
         margin-left: -24px;
         padding-left: 24px;
@@ -60,7 +63,8 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+    background-color: ${(props) =>
+      props.theme.filesSection.tableView.row.backgroundActive};
   }
 
   .clear-icon {
@@ -118,7 +122,8 @@ const TableView = ({
   });
 
   const isIndeterminate =
-    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
 
   const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
@@ -149,7 +154,8 @@ const TableView = ({
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}>
+            fetchMoreFiles={() => {}}
+          >
             {accountsData.map((data) => (
               <UsersTableRow
                 t={t}
@@ -179,7 +185,12 @@ const TableView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

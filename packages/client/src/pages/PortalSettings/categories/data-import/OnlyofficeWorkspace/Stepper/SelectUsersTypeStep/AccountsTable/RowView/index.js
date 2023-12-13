@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/components/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
@@ -23,7 +21,7 @@ const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .table-group-menu {
-    height: 69px;
+    height: 61px;
     position: absolute;
     z-index: 201;
     left: -16px;
@@ -32,7 +30,7 @@ const StyledRowContainer = styled(RowContainer)`
     margin-top: -37.5px;
 
     .table-container_group-menu {
-      padding: 0px 20px;
+      padding: 0px 16px;
       border-image-slice: 0;
       box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
     }

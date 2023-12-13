@@ -21,7 +21,7 @@ const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .table-group-menu {
-    height: 69px;
+    height: 61px;
     position: absolute;
     z-index: 201;
     left: -16px;
@@ -30,7 +30,7 @@ const StyledRowContainer = styled(RowContainer)`
     margin-top: -37.5px;
 
     .table-container_group-menu {
-      padding: 0px 20px;
+      padding: 0px 16px;
       border-image-slice: 0;
       box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
     }
@@ -46,7 +46,8 @@ const StyledRowContainer = styled(RowContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .table-container_header {
@@ -98,9 +99,11 @@ const RowView = ({
   currentDeviceType,
 }) => {
   const isIndeterminate =
-    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length > 0 &&
+    checkedUsers.result.length !== users.result.length;
 
-  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => setSearchValue("");
 
@@ -169,7 +172,12 @@ const RowView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

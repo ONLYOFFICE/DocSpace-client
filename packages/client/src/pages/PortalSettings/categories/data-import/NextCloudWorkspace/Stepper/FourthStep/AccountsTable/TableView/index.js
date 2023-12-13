@@ -26,22 +26,25 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     left: 0px;
     width: 100%;
 
-    margin-top: -32.5px;
+    margin-top: -35.5px;
 
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      border-bottom: ${(props) => props.theme.client.settings.migration.workspaceBorder};
+      border-bottom: ${(props) =>
+        props.theme.client.settings.migration.workspaceBorder};
       box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
-      padding: 0px 28px;
-    }
-
-    .table-container_group-menu-checkbox {
-      margin-left: 0;
+      padding: 0px;
     }
 
     .table-container_group-menu-separator {
       margin: 0 16px;
+    }
+
+    .table-container_header {
+      position: absolute;
+      padding: 0px 28px;
+      padding-right: 15px;
     }
   }
 `;
@@ -78,9 +81,11 @@ const TableView = (props) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   const isIndeterminate =
-    checkedUsers.result.length > 0 && checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length > 0 &&
+    checkedUsers.result.length !== users.result.length;
 
-  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, users.result, checkedAccountType);
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => {
     setSearchValue("");
@@ -142,7 +147,8 @@ const TableView = (props) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}>
+            fetchMoreFiles={() => {}}
+          >
             {accountsData.map((data) => (
               <UsersTableRow
                 key={data.key}
@@ -173,7 +179,12 @@ const TableView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

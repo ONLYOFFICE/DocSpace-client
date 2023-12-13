@@ -12,13 +12,13 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .username {
+    margin-right: 5px;
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
   .user-email {
-    margin-right: 5px;
     font-size: 12px;
     font-weight: 600;
     color: ${(props) =>
@@ -26,7 +26,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .user-existing {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: ${(props) =>
       props.theme.client.settings.migration.existingTextColor};
@@ -43,13 +43,14 @@ const UsersRowContent = ({
 }) => {
   const contentData = [
     <div key={data.key}>
-      <Text className="username">{displayName}</Text>
       <Box displayProp="flex">
-        <Text className="user-email">{email}</Text>
+        <Text className="username">{displayName}</Text>
         {isDuplicate && (
           <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
         )}
       </Box>
+
+      <Text className="user-email">{email}</Text>
     </div>,
   ];
 

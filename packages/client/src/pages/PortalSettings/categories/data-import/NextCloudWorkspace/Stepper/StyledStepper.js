@@ -69,6 +69,7 @@ export const StyledTableContainer = styled(TableContainer)`
   .table-container_header {
     position: absolute;
     padding: 0px 28px;
+    padding-right: 15px;
   }
 
   .header-container-text {
@@ -86,11 +87,13 @@ export const StyledTableContainer = styled(TableContainer)`
     padding-left: 20px;
 
     &:hover {
-      background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+      background-color: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundActive};
 
       .table-container_cell {
         margin-top: -1px;
-        border-top: ${(props) => `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+        border-top: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
         margin-left: -24px;
         padding-left: 24px;
@@ -108,7 +111,8 @@ export const StyledTableContainer = styled(TableContainer)`
   }
 
   .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) => props.theme.filesSection.tableView.row.backgroundActive};
+    background-color: ${(props) =>
+      props.theme.filesSection.tableView.row.backgroundActive};
   }
 
   .clear-icon {

@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
+import Box from "@docspace/components/box";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
 
@@ -77,7 +78,9 @@ const ImportCompleteStep = ({
       {importResult.failedUsers > 0 && (
         <Box marginProp="8px 0 0">
           <Text fontSize="12px" color="#F21C0E">
-            {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
+            {t("Settings:ErrorsWereFound", {
+              errors: importResult.failedUsers,
+            })}
           </Text>
         </Box>
       )}
@@ -92,7 +95,9 @@ const ImportCompleteStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
+          tooltipContent={
+            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+          }
         />
       </Wrapper>
 
@@ -110,8 +115,13 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
-    importAccountsStore;
+  const {
+    checkedUsers,
+    importResult,
+    getMigrationLog,
+    clearCheckedAccounts,
+    sendWelcomeLetter,
+  } = importAccountsStore;
 
   return {
     checkedUsers,

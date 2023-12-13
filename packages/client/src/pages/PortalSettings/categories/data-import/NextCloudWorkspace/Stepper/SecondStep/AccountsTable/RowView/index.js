@@ -15,6 +15,8 @@ import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.reac
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 const StyledRowContainer = styled(RowContainer)`
+  margin: 0 0 20px;
+
   .clear-icon {
     margin-right: 8px;
   }
@@ -55,14 +57,16 @@ const RowView = (props) => {
     currentDeviceType,
   } = props;
 
-  const toggleAll = (isChecked) => toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
+  const toggleAll = (isChecked) =>
+    toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
 
   const handleToggle = (user) => toggleAccount(user, checkedAccountType);
 
   const onClearFilter = () => setSearchValue("");
 
   const isIndeterminate =
-    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
 
   useViewEffect({
     view: viewAs,
@@ -78,7 +82,8 @@ const RowView = (props) => {
             sectionWidth={sectionWidth}
             checked={checkedUsers.withEmail.length === withEmailUsers.length}
             onSelect={toggleAll}
-            indeterminate={isIndeterminate}>
+            indeterminate={isIndeterminate}
+          >
             <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
               {t("Common:Name")}
             </Text>
@@ -110,7 +115,12 @@ const RowView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

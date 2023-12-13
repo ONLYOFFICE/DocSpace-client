@@ -33,6 +33,18 @@ const StyledRow = styled(Row)`
   height: 40px;
   min-height: 40px;
 
+  .row-header-item {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+  }
+
+  .row-header-title {
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+    font-weight: 600;
+    font-size: 12px;
+  }
+
   @media ${tablet} {
     .row_content {
       height: auto;
@@ -58,8 +70,8 @@ const RowView = ({
 }) => {
   const rowRef = useRef(null);
 
-  const toggleAll = (isChecked) => {
-    toggleAllAccounts(isChecked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e) => {
+    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
   };
 
   const handleToggle = (user) => toggleAccount(user, checkedAccountType);
@@ -75,20 +87,26 @@ const RowView = ({
   });
 
   const isIndeterminate =
-    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
+
+  const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
   return (
     <StyledRowContainer forwardedRef={rowRef} useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
-          <StyledRow
-            sectionWidth={sectionWidth}
-            checked={checkedUsers.withEmail.length === withEmailUsers.length}
-            onSelect={toggleAll}
-            indeterminate={isIndeterminate}>
-            <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
-              {t("Common:Name")}
-            </Text>
+          <StyledRow sectionWidth={sectionWidth}>
+            <div className="row-header-item">
+              {checkedUsers.withEmail.length > 0 && (
+                <Checkbox
+                  isIndeterminate={isIndeterminate}
+                  isChecked={isChecked}
+                  onChange={toggleAll}
+                />
+              )}
+              <Text className="row-header-title">{t("Common:Name")}</Text>
+            </div>
           </StyledRow>
 
           {accountsData.map((data) => (
@@ -117,7 +135,12 @@ const RowView = ({
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>

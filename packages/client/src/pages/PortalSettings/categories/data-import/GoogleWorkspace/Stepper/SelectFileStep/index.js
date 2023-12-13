@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import styled from "styled-components";
-import { isTablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
 
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
@@ -24,6 +24,14 @@ const Wrapper = styled.div`
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
+  @media ${tablet} {
+    .cancel-button {
+      width: 100px;
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+
   .select-file-input {
     height: 32px;
     margin-bottom: 16px;
@@ -31,7 +39,8 @@ const Wrapper = styled.div`
     .icon-button_svg {
       svg {
         path {
-          fill: ${(props) => props.theme.client.settings.migration.fileInputIconColor};
+          fill: ${(props) =>
+            props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
@@ -136,7 +145,7 @@ const SelectFileStep = ({
           (res) =>
             new Blob([res.parseResult.failedArchives], {
               type: "text/csv;charset=utf-8",
-            }),
+            })
         )
         .then((blob) => {
           let a = document.createElement("a");
@@ -165,7 +174,9 @@ const SelectFileStep = ({
   return (
     <>
       <Wrapper>
-        <Text className="select-file-title">{t("Settings:ChooseBackupFile")}</Text>
+        <Text className="select-file-title">
+          {t("Settings:ChooseBackupFile")}
+        </Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -184,7 +195,8 @@ const SelectFileStep = ({
             label={t("Settings:BackupFileUploading")}
           />
           <Button
-            size={isTablet ? "medium" : "small"}
+            size="small"
+            className="cancel-button"
             label={t("Common:CancelButton")}
             onClick={onCancel}
           />
@@ -198,8 +210,15 @@ const SelectFileStep = ({
                 className="complete-progress-bar"
                 label={t("Common:LoadingIsComplete")}
               />
-              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
-              <Link type="action" isHovered fontWeight={600} onClick={onDownloadArchives}>
+              <Text className="error-text">
+                {t("Settings:UnsupportedArchivesDescription")}
+              </Text>
+              <Link
+                type="action"
+                isHovered
+                fontWeight={600}
+                onClick={onDownloadArchives}
+              >
                 {t("Settings:DownloadUnsupportedArchives")}
               </Link>
             </Box>
@@ -240,7 +259,8 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setIsFileLoading,
     cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
     initMigrationName,

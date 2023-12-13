@@ -221,15 +221,15 @@ class InfoPanelStore {
   getInfoPanelItemIcon = (item, size) => {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
-        ? this.settingsStore.getIcon(
-            size,
-            null,
-            null,
-            null,
-            item.roomType,
-            true
-          )
-        : item.logo && item.logo.medium
+        ? item.logo && item.logo.medium
+        :  this.settingsStore.getIcon(
+          size,
+          null,
+          null,
+          null,
+          item.roomType,
+          true
+        )
         ? item.logo.medium
         : item.icon
         ? item.icon

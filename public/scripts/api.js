@@ -15,6 +15,8 @@
     editorType: "embedded", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
+    showSelectorCancel: false,
+    showSelectorHeader: false,
     showHeader: false,
     showTitle: true,
     showMenu: false,

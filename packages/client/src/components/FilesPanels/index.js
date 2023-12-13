@@ -32,6 +32,7 @@ import {
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
+  ShareFolderDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -87,6 +88,7 @@ const Panels = (props) => {
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
+    shareFolderDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -191,6 +193,7 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
+    shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
   ];
 };
 
@@ -243,6 +246,7 @@ export default inject(
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
+      shareFolderDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -302,6 +306,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
+      shareFolderDialogVisible,
     };
   }
 )(observer(Panels));

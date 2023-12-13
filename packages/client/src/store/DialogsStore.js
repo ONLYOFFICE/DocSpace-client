@@ -78,6 +78,8 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
 
+  shareFolderDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -429,6 +431,10 @@ class DialogsStore {
   };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
+  };
+
+  setShareFolderDialogVisible = (visible) => {
+    this.shareFolderDialogVisible = visible;
   };
 }
 

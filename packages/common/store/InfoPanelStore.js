@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
 
-import { getUserById } from "@docspace/common/api/people";
-import { combineUrl, getUserRole } from "@docspace/common/utils";
-import { FolderType } from "@docspace/common/constants";
+import { getUserById } from "../api/people";
+import { combineUrl, getUserRole } from "../utils";
+import { FolderType } from "../constants";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";
 import { getRoomInfo } from "../api/rooms";
@@ -228,15 +228,15 @@ class InfoPanelStore {
   getInfoPanelItemIcon = (item, size) => {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
-        ? this.settingsStore.getIcon(
-            size,
-            null,
-            null,
-            null,
-            item.roomType,
-            true
-          )
-        : item.logo && item.logo.medium
+        ? item.logo && item.logo.medium
+        :  this.settingsStore.getIcon(
+          size,
+          null,
+          null,
+          null,
+          item.roomType,
+          true
+        )
         ? item.logo.medium
         : item.icon
         ? item.icon

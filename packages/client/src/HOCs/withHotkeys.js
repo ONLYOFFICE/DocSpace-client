@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
@@ -67,17 +67,24 @@ const withHotkeys = (Component) => {
 
     const navigate = useNavigate();
 
+    const [isEnabled, setIsEnabled] = useState(true);
+
     const hotkeysFilter = {
       filter: (ev) =>
         ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
-      enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,
+      enabled:
+        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
       // keyup: true,
       // keydown: false,
     };
 
-    const onKeyDown = (e) => activateHotkeys(e);
+    const onKeyDown = (e) => {
+      const someDialogIsOpen = checkDialogsOpen();
+      setIsEnabled(!someDialogIsOpen);
+      activateHotkeys(e);
+    };
 
     const folderWithNoAction =
       isFavoritesFolder ||

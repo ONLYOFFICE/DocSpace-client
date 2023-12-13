@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Loaders from "@docspace/common/components/Loaders";
+import Loaders from "../../Loaders";
 
 import { Link } from "react-router-dom";
 

@@ -221,7 +221,7 @@ SnackBar.propTypes = {
   /** Sets the font size  */
   fontSize: PropTypes.string,
   /** Sets the font weight */
-  fontWeight: PropTypes.string,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Specifies the text alignment */
   textAlign: PropTypes.string,
   /** Allows displaying content in HTML format */

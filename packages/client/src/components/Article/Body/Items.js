@@ -139,7 +139,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
       />
     </StyledDragAndDrop>
   );

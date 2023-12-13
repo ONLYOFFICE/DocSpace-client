@@ -63,7 +63,7 @@ const ExternalLinks = ({
   const editLink = async () => {
     const type =
       roomType === RoomsType.PublicRoom
-        ? ShareAccessRights.RoomManager
+        ? ShareAccessRights.Collaborator
         : ShareAccessRights.ReadOnly;
 
     const link = await setInvitationLinks(roomId, "Invite", type);

@@ -430,9 +430,12 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onClickCreateRoom = () => {
+  onClickCreateRoom = (item) => {
     this.filesActionsStore.setProcessCreatingRoomFromData(true);
     const event = new Event(Events.ROOM_CREATE);
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
     window.dispatchEvent(event);
   };
 
@@ -1362,7 +1365,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: this.onClickCreateRoom,
+        onClick: () => this.onClickCreateRoom(item),
         disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
       },
       {

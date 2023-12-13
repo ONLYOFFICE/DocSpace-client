@@ -155,27 +155,13 @@ function Editor({
     }
 
     if (isMobile && defaultOpenDocument === "app") {
-      const nav = navigator.userAgent;
-      const storeUrl =
-        nav.includes("iPhone;") || nav.includes("iPad;")
-          ? `https://apps.apple.com/app/id${iOSId}`
-          : `https://play.google.com/store/apps/details?id=${androidID}`;
-
-      window.location = getDeepLink(
+      getDeepLink(
         window.location.origin,
         user.email,
         fileInfo,
-        deepLinkUrl,
+        portalSettings?.deepLink,
         window.location.href
       );
-
-      setTimeout(() => {
-        if (document.hasFocus()) {
-          window.location.replace(storeUrl);
-        } else {
-          history.goBack();
-        }
-      }, 3000);
     }
   }, []);
 
@@ -957,7 +943,7 @@ function Editor({
         userEmail={user.email}
         setIsShowDeepLink={setIsShowDeepLink}
         currentColorScheme={currentColorScheme}
-        deepLinkUrl={portalSettings.deepLink.url}
+        deepLinkConfig={portalSettings?.deepLink}
       />
     );
 

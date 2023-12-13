@@ -28,12 +28,10 @@ function PlayerSpeedControl({
 
   const timerRef = useRef<NodeJS.Timeout>();
 
-  const [currentIndexSpeed, setCurrentIndexSpeed] = useState<number>(
-    DefaultIndexSpeed
-  );
-  const [isOpenSpeedContextMenu, setIsOpenSpeedContextMenu] = useState<boolean>(
-    false
-  );
+  const [currentIndexSpeed, setCurrentIndexSpeed] =
+    useState<number>(DefaultIndexSpeed);
+  const [isOpenSpeedContextMenu, setIsOpenSpeedContextMenu] =
+    useState<boolean>(false);
   const [speedToastVisible, setSpeedToastVisible] = useState<boolean>(false);
 
   useEffect(() => {

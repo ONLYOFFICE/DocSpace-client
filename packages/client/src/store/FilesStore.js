@@ -2273,7 +2273,7 @@ class FilesStore {
         "select",
         "open",
         // "separator0",
-        // "sharing-settings",
+        "sharing-settings",
         "link-for-room-members",
         "owner-change",
         "show-info",

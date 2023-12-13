@@ -551,9 +551,15 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = () => {
+  onClickShare = (item) => {
     const { openShareTab } = this.authStore.infoPanelStore;
-    openShareTab();
+    const { setShareFolderDialogVisible } = this.dialogsStore;
+
+    if (item.isFolder) {
+      setShareFolderDialogVisible(true);
+    } else {
+      openShareTab();
+    }
   };
 
   onClickMarkRead = (item) => {
@@ -953,7 +959,7 @@ class ContextOptionsStore {
       item.providerKey && item.id === item.rootFolderId;
 
     const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare
+      ? item.canShare || item.isFolder
       : false;
 
     const isMedia =
@@ -1222,7 +1228,7 @@ class ContextOptionsStore {
         key: "sharing-settings",
         label: t("Files:Share"),
         icon: ShareReactSvgUrl,
-        onClick: this.onClickShare,
+        onClick: () => this.onClickShare(item),
         disabled: !isShareable,
       },
       ...versionActions,

@@ -17,30 +17,34 @@ function BetaBadge({
   currentColorScheme,
   documentationEmail,
   currentDeviceType,
+  withOutFeedbackLink = false,
 }: BetaBadgeProps) {
   const { t } = useTranslation(["Common,Settings"]);
 
-  const tooltipLanguage = (
-    <Trans t={t} i18nKey="BetaBadgeDescription" ns="Common">
-      Please note: you can enable RTL languages for the DocSpace interface in
-      the beta mode. RTL support for the editors will be available soon. If you
-      have found a bug, please submit it via
-      {/*@ts-ignore */}
-      <Link
-        href={`mailto:${documentationEmail}`}
-        color={currentColorScheme?.main?.accent}
-      >
-        form
-      </Link>
-      or contact us at
-      {/*@ts-ignore */}
-      <Link
-        href={`mailto:${documentationEmail}`}
-        color={currentColorScheme?.main?.accent}
-      >
-        {{ supportEmail: documentationEmail }}
-      </Link>
-    </Trans>
+  const tooltipDescription = (
+    <>
+      {t("Common:BetaBadgeDescription")}{" "}
+      {!withOutFeedbackLink && (
+        <Trans t={t} i18nKey="BetaBadgeFeedback" ns="Common">
+          If you have found a bug, please submit it via
+          {/*@ts-ignore */}
+          <Link
+            href={`mailto:${documentationEmail}`}
+            color={currentColorScheme?.main?.accent}
+          >
+            form
+          </Link>
+          or contact us at
+          {/*@ts-ignore */}
+          <Link
+            href={`mailto:${documentationEmail}`}
+            color={currentColorScheme?.main?.accent}
+          >
+            {{ supportEmail: documentationEmail }}
+          </Link>
+        </Trans>
+      )}
+    </>
   );
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -52,7 +56,7 @@ function BetaBadge({
       offset={offset}
       place={isMobile ? mobilePlace : place}
       label={t("Settings:BetaLabel")}
-      tooltipDescription={tooltipLanguage}
+      tooltipDescription={tooltipDescription}
       tooltipTitle={t("Common:BetaBadgeTitle")}
     />
   );

@@ -28,6 +28,7 @@ import {
   setCookie,
 } from "@docspace/common/utils";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import {
   Wrapper,
@@ -399,24 +400,29 @@ const Wizard = (props) => {
               <Text color="#A3A9AE" fontWeight={400}>
                 {t("Common:Language")}
               </Text>
-              <ComboBox
-                withoutPadding
-                directionY="both"
-                options={cultureNames || []}
-                selectedOption={selectedLanguage || {}}
-                onSelect={onLanguageSelect}
-                isDisabled={isCreated}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="250px"
-                isDefaultMode={!isMobile()}
-                withBlur={isMobile()}
-                fillIcon={false}
-                modernView={true}
-              />
+              <div className="wrapper__language-selector">
+                <ComboBox
+                  withoutPadding
+                  directionY="both"
+                  options={cultureNames || []}
+                  selectedOption={selectedLanguage || {}}
+                  onSelect={onLanguageSelect}
+                  isDisabled={isCreated}
+                  scaled={isMobile()}
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems={true}
+                  dropDownMaxHeight={364}
+                  manualWidth="250px"
+                  isDefaultMode={!isMobile()}
+                  withBlur={isMobile()}
+                  fillIcon={false}
+                  modernView={true}
+                />
+                {selectedLanguage?.isBeta && (
+                  <BetaBadge withOutFeedbackLink place="bottom" />
+                )}
+              </div>
             </StyledInfo>
             <StyledInfo>
               <Text color="#A3A9AE" fontWeight={400}>
@@ -514,6 +520,8 @@ export default inject(({ auth, wizard }) => {
     setLicense,
     resetLicenseUploaded,
   } = wizard;
+
+  console.log({ wizard, settingsStore: auth.settingsStore });
 
   return {
     theme,

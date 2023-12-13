@@ -6,6 +6,7 @@ interface BetaBadgeProps {
 
   place: PlacesType;
   mobilePlace?: PlacesType;
+  withOutFeedbackLink?: boolean;
 }
 
 export default BetaBadgeProps;

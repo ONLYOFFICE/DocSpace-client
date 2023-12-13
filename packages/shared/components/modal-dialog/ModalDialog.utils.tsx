@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 
 import { isMobile, isTablet, isTouchDevice } from "../../utils";
 import { ModalDialogType } from "./ModalDialog.enums";
@@ -27,7 +27,7 @@ export const handleTouchStart = (e: TouchEvent) => {
 export const handleTouchMove = (e: TouchEvent, onClose?: () => void) => {
   if (!y1) return 0;
 
-  let y2 = e.touches[0].clientY;
+  const y2 = e.touches[0].clientY;
   if (y2 - y1 > 120) onClose?.();
 
   return y1 - y2;

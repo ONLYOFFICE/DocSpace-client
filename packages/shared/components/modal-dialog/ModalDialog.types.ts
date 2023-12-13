@@ -31,18 +31,18 @@ export interface ModalDialogProps {
   isCloseable?: boolean;
 
   /** **`MODAL-ONLY`**
-  Sets `width: 520px` and `max-height: 400px`*/
+  Sets `width: 520px` and `max-height: 400px` */
   isLarge?: boolean;
 
   /** **`MODAL-ONLY`**
-  Sets `max-width: auto`*/
+  Sets `max-width: auto` */
   autoMaxWidth?: boolean;
   /** **`MODAL-ONLY`**
-  Sets `max-height: auto`*/
+  Sets `max-height: auto` */
   autoMaxHeight?: boolean;
 
   /** **`MODAL-ONLY`**
-  Displays border betweeen body and footer`*/
+  Displays border betweeen body and footer` */
   withFooterBorder?: boolean;
 
   /** **`ASIDE-ONLY`**
@@ -105,4 +105,31 @@ export interface ModalDialogBackdropProps {
   zIndex?: number;
   visible?: boolean;
   modalSwipeOffset?: number;
+}
+
+export interface ModalSubComponentsProps {
+  id?: string;
+  style?: React.CSSProperties;
+  className?: string;
+  currentDisplayType: ModalDialogType;
+  withBodyScroll?: boolean;
+  isScrollLocked?: boolean;
+  isLarge: boolean;
+  zIndex?: number;
+  autoMaxHeight?: boolean;
+  autoMaxWidth?: boolean;
+  onClose: () => void;
+  isLoading?: boolean;
+  header?: React.ReactNode;
+  body?: React.ReactNode;
+  footer?: React.ReactNode;
+  container?: React.ReactNode;
+  visible?: boolean;
+  withFooterBorder: boolean;
+  modalSwipeOffset?: number;
+  containerVisible?: boolean;
+  isDoubleFooterLine?: boolean;
+  isCloseable?: boolean;
+  embedded?: boolean;
+  withForm?: boolean;
 }

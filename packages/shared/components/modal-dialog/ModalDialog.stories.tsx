@@ -32,7 +32,7 @@ const Template = ({ ...args }: ModalDialogProps) => {
     <>
       <Button
         label="Show"
-        primary={true}
+        primary
         size={ButtonSize.medium}
         onClick={openModal}
       />
@@ -53,7 +53,7 @@ const Template = ({ ...args }: ModalDialogProps) => {
           <Button
             key="SendBtn"
             label="Send"
-            primary={true}
+            primary
             scale
             size={ButtonSize.normal}
             onClick={() => {
@@ -88,6 +88,6 @@ export const Default: Story = {
       tablet: ModalDialogType.aside,
       mobile: ModalDialogType.aside,
     },
-    children: <></>,
+    children: <>123</>,
   },
 };

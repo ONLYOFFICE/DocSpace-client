@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from "react";
 import { isSafari, isTablet } from "react-device-detect";
 import throttle from "lodash/throttle";
 
@@ -54,17 +55,18 @@ const ModalDialog = ({
   embedded,
   withForm,
 }: ModalDialogProps) => {
-  const onCloseEvent = () => {
+  const onCloseEvent = React.useCallback(() => {
     if (embedded) return;
     if (isCloseable) onClose?.();
-  };
+  }, [embedded, isCloseable, onClose]);
+
   const [currentDisplayType, setCurrentDisplayType] = useState(
     getCurrentDisplayType(displayType, displayTypeDetailed),
   );
   const [modalSwipeOffset, setModalSwipeOffset] = useState(0);
 
   const returnWindowPositionAfterKeyboard = () => {
-    isSafari && isTablet && window.scrollY !== 0 && window.scrollTo(0, 0);
+    if (isSafari && isTablet && window.scrollY !== 0) window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -97,7 +99,7 @@ const ModalDialog = ({
       window.removeEventListener("touchmove", onSwipe);
       window.addEventListener("touchend", onSwipeEnd);
     };
-  }, []);
+  }, [displayType, displayTypeDetailed, onClose, onCloseEvent, visible]);
 
   const [header, body, footer, container] = parseChildren(
     children,
@@ -119,11 +121,11 @@ const ModalDialog = ({
           currentDisplayType={currentDisplayType}
           withBodyScroll={withBodyScroll}
           isScrollLocked={isScrollLocked}
-          isLarge={isLarge}
+          isLarge={isLarge || false}
           zIndex={zIndex}
           autoMaxHeight={autoMaxHeight}
           autoMaxWidth={autoMaxWidth}
-          withFooterBorder={withFooterBorder}
+          withFooterBorder={withFooterBorder || false}
           onClose={onCloseEvent}
           isLoading={isLoading}
           header={header}

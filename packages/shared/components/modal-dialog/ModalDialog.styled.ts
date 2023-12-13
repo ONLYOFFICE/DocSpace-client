@@ -65,14 +65,20 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
           visible?: boolean;
         }>`
           height: auto;
-          max-height: ${(props) =>
-            props.autoMaxHeight ? "auto" : props.isLarge ? "400px" : "280px"};
-          width: ${(props) =>
-            props.autoMaxWidth ? "auto" : props.isLarge ? "520px" : "400px"};
+          max-height: ${props.autoMaxHeight
+            ? "auto"
+            : props.isLarge
+              ? "400px"
+              : "280px"};
+          width: ${props.autoMaxWidth
+            ? "auto"
+            : props.isLarge
+              ? "520px"
+              : "400px"};
 
           border-radius: 6px;
           @media ${mobile} {
-            transform: translateY(${(props) => (props.visible ? "0" : "100%")});
+            transform: translateY(${props.visible ? "0" : "100%"});
             transition: transform 0.3s ease-in-out;
             position: absolute;
             bottom: 0;
@@ -89,30 +95,25 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
           top: 0;
           bottom: 0;
 
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css<{ visible?: boolean }>`
-                  left: 0;
-                  transform: translateX(
-                    ${(props) => (props.visible ? "0" : "-100%")}
-                  );
-                `
-              : css<{ visible?: boolean }>`
-                  right: 0;
-                  transform: translateX(
-                    ${(props) => (props.visible ? "0" : "100%")}
-                  );
-                `}
+          ${props.theme.interfaceDirection === "rtl"
+            ? css<{ visible?: boolean }>`
+                left: 0;
+                transform: translateX(${props.visible ? "0" : "-100%"});
+              `
+            : css<{ visible?: boolean }>`
+                right: 0;
+                transform: translateX(${props.visible ? "0" : "100%"});
+              `}
 
           transition: transform 0.3s ease-in-out;
 
           @media ${mobile} {
-            transform: translateY(${(props) => (props.visible ? "0" : "100%")});
+            transform: translateY(${props.visible ? "0" : "100%"});
             height: calc(100% - 64px);
             width: 100%;
             left: 0;
 
-            top: ${(props) => (props.embedded ? "0" : "auto")};
+            top: ${props.embedded ? "0" : "auto"};
             right: 0;
             top: auto;
             bottom: 0;
@@ -164,10 +165,9 @@ const StyledBody = styled(Box)<{
     ${(props) =>
       props.isScrollLocked &&
       css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? `margin-left: 0 !important;`
-            : `margin-right: 0 !important;`}
+        ${props.theme.interfaceDirection === "rtl"
+          ? `margin-left: 0 !important;`
+          : `margin-right: 0 !important;`}
 
         overflow: hidden !important;
       `}

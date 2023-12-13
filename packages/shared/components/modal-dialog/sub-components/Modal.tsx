@@ -18,6 +18,7 @@ import {
 import { CloseButton } from "./CloseButton";
 import { ModalBackdrop } from "./ModalBackdrop";
 import { FormWrapper } from "./FormWrapper";
+import { ModalSubComponentsProps } from "../ModalDialog.types";
 
 const Modal = ({
   id,
@@ -44,12 +45,56 @@ const Modal = ({
   isCloseable,
   embedded,
   withForm,
-}: any) => {
-  const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+}: ModalSubComponentsProps) => {
+  const [windowHeight] = React.useState(window.innerHeight);
 
   const visualPageTop = React.useRef(0);
   const diffRef = React.useRef(0);
   const contentRef = React.useRef<null | HTMLDivElement>(null);
+
+  const onResize = React.useCallback(
+    (e: Event) => {
+      if (!contentRef.current || !window.visualViewport) return;
+
+      const target = e.target as VisualViewport;
+
+      if (currentDisplayType === "modal") {
+        const diff = windowHeight - target.height - target.pageTop;
+
+        visualPageTop.current = target.pageTop;
+
+        contentRef.current.style.bottom = `${diff}px`;
+
+        return;
+      }
+      if (e?.type === "resize") {
+        const diff = windowHeight - target.height - target.pageTop;
+
+        visualPageTop.current = target.pageTop;
+
+        contentRef.current.style.bottom = `${diff}px`;
+
+        contentRef.current.style.height = `${
+          target.height - 64 + target.pageTop
+        }px`;
+
+        contentRef.current.style.position = "fixed";
+
+        diffRef.current = diff;
+      } else if (e?.type === "scroll") {
+        const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
+
+        contentRef.current.style.bottom = `${diffRef.current + diff}px`;
+
+        contentRef.current.style.height = `${
+          window.visualViewport.height - 64 + diff
+        }px`;
+
+        contentRef.current.style.position = "fixed";
+      }
+    },
+    [currentDisplayType, windowHeight],
+  );
 
   React.useEffect(() => {
     if (isMobileOnly && isIOS && window.visualViewport) {
@@ -62,55 +107,33 @@ const Modal = ({
         window.visualViewport.removeEventListener("scroll", onResize);
       }
     };
-  }, []);
+  }, [onResize]);
 
-  const onResize = (e: any) => {
-    if (!contentRef.current || !window.visualViewport) return;
+  const headerComponent = React.isValidElement(header)
+    ? header.props.children
+    : null;
+  const bodyComponent = React.isValidElement(body) ? body.props.children : null;
+  const footerComponent = React.isValidElement(footer)
+    ? footer.props.children
+    : null;
+  const containerComponent = React.isValidElement(container)
+    ? container.props.children
+    : null;
 
-    if (currentDisplayType === "modal") {
-      let diff = windowHeight - e.target.height - e.target.pageTop;
-
-      visualPageTop.current = e.target.pageTop;
-
-      contentRef.current.style.bottom = `${diff}px`;
-
-      return;
-    }
-    if (e?.type === "resize") {
-      let diff = windowHeight - e.target.height - e.target.pageTop;
-
-      visualPageTop.current = e.target.pageTop;
-
-      contentRef.current.style.bottom = `${diff}px`;
-
-      contentRef.current.style.height = `${
-        e.target.height - 64 + e.target.pageTop
-      }px`;
-
-      contentRef.current.style.position = "fixed";
-
-      diffRef.current = diff;
-    } else if (e?.type === "scroll") {
-      const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
-
-      contentRef.current.style.bottom = `${diffRef.current + diff}px`;
-
-      contentRef.current.style.height = `${
-        window.visualViewport.height - 64 + diff
-      }px`;
-
-      contentRef.current.style.position = "fixed";
-    }
+  const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    if (target.id === "modal-onMouseDown-close") onClose?.();
   };
 
-  const headerComponent = header ? header.props.children : null;
-  const bodyComponent = body ? body.props.children : null;
-  const footerComponent = footer ? footer.props.children : null;
-  const containerComponent = container ? container.props.children : null;
-
-  const validateOnMouseDown = (e: any) => {
-    if (e.target.id === "modal-onMouseDown-close") onClose();
-  };
+  const headerProps = React.isValidElement(header)
+    ? (header?.props as { className?: string })
+    : { className: "" };
+  const bodyProps = React.isValidElement(body)
+    ? (body?.props as { className?: string })
+    : { className: "" };
+  const footerProps = React.isValidElement(footer)
+    ? (footer?.props as { className?: string })
+    : { className: "" };
 
   return (
     <StyledModal
@@ -120,19 +143,19 @@ const Modal = ({
     >
       <ModalBackdrop
         className={visible ? "modal-backdrop-active backdrop-active" : ""}
-        visible={true}
+        visible
         zIndex={zIndex}
         modalSwipeOffset={modalSwipeOffset}
       >
         <Dialog
           id="modal-onMouseDown-close"
           className={
-            classNames(
+            classNames([
               className,
               "modalOnCloseBacdrop",
               "not-selectable",
               "dialog",
-            ) || ""
+            ]) || ""
           }
           style={style}
           onMouseDown={validateOnMouseDown}
@@ -167,77 +190,71 @@ const Modal = ({
                   withFooterBorder={withFooterBorder}
                 />
               )
+            ) : container &&
+              containerVisible &&
+              currentDisplayType !== "modal" ? (
+              { containerComponent }
             ) : (
-              <>
-                {container &&
-                containerVisible &&
-                currentDisplayType !== "modal" ? (
-                  <>{containerComponent}</>
-                ) : (
-                  <FormWrapper withForm={withForm}>
-                    {header && (
-                      <StyledHeader
-                        id="modal-header-swipe"
-                        className={classNames(
-                          "modal-header",
-                          header.props.className,
-                        )}
-                        currentDisplayType={currentDisplayType}
-                        {...header.props}
-                      >
-                        <Heading
-                          level={1}
-                          className={"heading"}
-                          size={HeadingSize.medium}
-                          truncate={true}
-                        >
-                          {headerComponent}
-                        </Heading>
-                      </StyledHeader>
-                    )}
-                    {body && (
-                      <StyledBody
-                        className={classNames(
-                          "modal-body",
-                          body.props.className,
-                        )}
-                        withBodyScroll={withBodyScroll}
-                        isScrollLocked={isScrollLocked}
-                        hasFooter={1 && footer}
-                        currentDisplayType={currentDisplayType}
-                        {...body.props}
-                        embedded={embedded}
-                      >
-                        {currentDisplayType === "aside" && withBodyScroll ? (
-                          <Scrollbar
-                            stype={ScrollbarType.mediumBlack}
-                            id="modal-scroll"
-                            className="modal-scroll"
-                          >
-                            {bodyComponent}
-                          </Scrollbar>
-                        ) : (
-                          bodyComponent
-                        )}
-                      </StyledBody>
-                    )}
-                    {footer && (
-                      <StyledFooter
-                        className={classNames(
-                          "modal-footer",
-                          footer.props.className,
-                        )}
-                        withFooterBorder={withFooterBorder}
-                        currentDisplayType={currentDisplayType}
-                        isDoubleFooterLine={isDoubleFooterLine}
-                        {...footer.props}
-                      >
-                        {footerComponent}
-                      </StyledFooter>
-                    )}
-                  </FormWrapper>
+              <FormWrapper withForm={withForm || false}>
+                {header && (
+                  <StyledHeader
+                    id="modal-header-swipe"
+                    className={
+                      classNames(["modal-header", headerProps.className]) ||
+                      "modal-header"
+                    }
+                    {...headerProps}
+                  >
+                    <Heading
+                      level={1}
+                      className="heading"
+                      size={HeadingSize.medium}
+                      truncate
+                    >
+                      {headerComponent}
+                    </Heading>
+                  </StyledHeader>
                 )}
-              </>
+                {body && (
+                  <StyledBody
+                    className={
+                      classNames(["modal-body", bodyProps.className]) ||
+                      "modal-body"
+                    }
+                    withBodyScroll={withBodyScroll}
+                    isScrollLocked={isScrollLocked}
+                    hasFooter={!!footer}
+                    currentDisplayType={currentDisplayType}
+                    {...bodyProps}
+                    // embedded={embedded}
+                  >
+                    {currentDisplayType === "aside" && withBodyScroll ? (
+                      <Scrollbar
+                        stype={ScrollbarType.mediumBlack}
+                        id="modal-scroll"
+                        className="modal-scroll"
+                      >
+                        {bodyComponent}
+                      </Scrollbar>
+                    ) : (
+                      bodyComponent
+                    )}
+                  </StyledBody>
+                )}
+                {footer && (
+                  <StyledFooter
+                    className={
+                      classNames(["modal-footer", footerProps.className]) ||
+                      "modal-footer"
+                    }
+                    withFooterBorder={withFooterBorder}
+                    isDoubleFooterLine={isDoubleFooterLine}
+                    {...footerProps}
+                  >
+                    {footerComponent}
+                  </StyledFooter>
+                )}
+              </FormWrapper>
             )}
           </Content>
         </Dialog>

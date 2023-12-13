@@ -284,7 +284,6 @@ const PortalIntegration = (props) => {
   );
 
   const [config, setConfig] = useState({
-    hash: `${API_JS_HASH}`,
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",

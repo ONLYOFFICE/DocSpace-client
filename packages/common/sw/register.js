@@ -5,7 +5,7 @@ import { Workbox } from "workbox-window";
 import SnackBar from "@docspace/components/snackbar";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
-import Backend from "@docspace/common/utils/i18next-http-backend";
+import Backend from "../utils/i18next-http-backend";
 import { LANGUAGE } from "../constants";
 import { getCookie } from "@docspace/components/utils/cookie";
 

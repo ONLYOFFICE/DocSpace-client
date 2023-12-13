@@ -1,5 +1,8 @@
 import { TTheme } from "../themes";
 
+export type TDirectionX = "left" | "right";
+export type TDirectionY = "bottom" | "top" | "both";
+
 declare module "styled-components" {
   export interface DefaultTheme extends TTheme {}
 }

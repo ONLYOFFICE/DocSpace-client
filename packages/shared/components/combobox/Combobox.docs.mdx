@@ -1,7 +1,7 @@
 import { Meta, Story, ArgsTable, Canvas, Controls } from "@storybook/blocks";
 import CatalogEmployeeReactSvg from "PUBLIC_DIR/images/catalog.employee.react.svg?url";
-import ComboBox from "./";
-import * as stories from "./combobox.stories.js";
+import { ComboBox } from "./ComboBox";
+import * as stories from "./combobox.stories.tsx";
 
 <Meta
   title="Components/ComboBox"
@@ -27,10 +27,9 @@ Custom combo box input
       alignItems: "center",
     }}
   >
-    <Story story={stories.basic} />
-    <Story story={stories.baseOption} name="Base Option" />
-    <Story story={stories.advancedOption} />
-    <Story story={stories.badgeType} />
+
+    <Story story={stories.Default} name="Base Option" />
+
   </div>
 </Canvas>
 

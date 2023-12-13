@@ -30,7 +30,8 @@ function VirtualList({
   const activeIndex = useMemo(() => {
     let foundIndex = -1;
     React.Children.forEach(cleanChildren, (child, index) => {
-      if (child && child.props.disabled) foundIndex = index;
+      const props = child && React.isValidElement(child) && child.props;
+      if (props?.disabled) foundIndex = index;
     });
     return foundIndex;
   }, [cleanChildren]);

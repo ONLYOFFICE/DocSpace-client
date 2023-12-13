@@ -3544,6 +3544,7 @@ __metadata:
     "@types/node": ^20.9.4
     "@types/punycode": ^2.1.3
     "@types/react-transition-group": ^4.4.9
+    "@types/react-window": ^1.8.8
     "@typescript-eslint/eslint-plugin": ^6.12.0
     "@typescript-eslint/parser": ^6.12.0
     "@use-gesture/react": ^10.2.24
@@ -9350,6 +9351,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: be9e256e53919a7cf3b4a075f6d01c0a2dd3a67911dd28276aa6158be4beade4ca5327cbf1f096c28b413e04989f069122319b02e5a09c280d903a0accea9ead
+  languageName: node
+  linkType: hard
+
+"@types/react-window@npm:^1.8.8":
+  version: 1.8.8
+  resolution: "@types/react-window@npm:1.8.8"
+  dependencies:
+    "@types/react": "*"
+  checksum: 253c9d6e0c942f34633edbddcbc369324403c42458ff004457c5bd5972961d8433a909c0cc1a89c918063d5eb85ecbdd774142af2555fae61f4ceb3ba9884b5a
   languageName: node
   linkType: hard
 

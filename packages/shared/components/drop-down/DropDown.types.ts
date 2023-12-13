@@ -1,11 +1,9 @@
+import { TDirectionX, TDirectionY } from "../../types";
 import { TTheme } from "../../themes";
-
-export type TDirectionX = "left" | "right";
-export type TDirectionY = "bottom" | "top" | "both";
 
 export interface DropDownProps {
   /** Children elements */
-  children?: React.ReactElement[];
+  children?: React.ReactNode;
   /** Accepts class */
   className?: string;
   /** Required for determining a click outside DropDown with the withBackdrop parameter */
@@ -69,7 +67,7 @@ export interface VirtualListProps {
   maxHeight?: number;
   calculatedHeight: number;
   isNoFixedHeightOptions: boolean;
-  cleanChildren?: React.ReactElement[];
+  cleanChildren?: React.ReactNode;
   children: React.ReactElement | React.ReactNode;
   Row: React.MemoExoticComponent<
     ({ data, index, style }: RowProps) => JSX.Element
@@ -80,7 +78,7 @@ export interface VirtualListProps {
 
 export interface RowProps {
   data: {
-    children?: React.ReactElement[];
+    children?: React.ReactNode;
     theme: TTheme;
     activeIndex?: number;
     activedescendant?: number;

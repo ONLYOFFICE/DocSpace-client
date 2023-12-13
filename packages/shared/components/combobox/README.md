@@ -5,7 +5,7 @@ Custom combo box input
 ### Usage
 
 ```js
-import ComboBox from "@docspace/components/combobox";
+import { ComboBox } from "@docspace/shared/components";
 import NavLogoReactSvg from "PUBLIC_DIR/images/nav.logo.react.svg";
 import CatalogEmployeeReactSvg from "PUBLIC_DIR/images/catalog.employee.react.svg?url";
 ```

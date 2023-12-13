@@ -325,6 +325,7 @@ const DropDown = ({
 
     const rowHeights =
       cleanChildren &&
+      React.isValidElement(cleanChildren) &&
       React.Children.map(cleanChildren, (child: React.ReactElement) =>
         getItemHeight(child),
       );

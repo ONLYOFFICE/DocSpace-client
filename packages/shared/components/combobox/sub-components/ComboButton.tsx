@@ -1,6 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { ReactSVG } from "react-svg";
+
+import { IconSizeType } from "../../../utils";
+import { LoaderTypes } from "../../loader";
 
 import {
   StyledArrowIcon,
@@ -8,14 +10,17 @@ import {
   StyledOptionalItem,
   StyledTriangleDownIcon,
   StyledLoader,
-} from "./styled-combobutton";
+} from "../Combobox.styled";
 
-import Text from "../../text";
+import { Text } from "../../text";
+import { Badge } from "../../badge";
 
-import { ColorTheme, ThemeType } from "../../ColorTheme";
-import Badge from "../../badge";
+import ComboButtonTheme from "../Combobox.theme";
 
-const ComboButton = (props: any) => {
+import { ComboButtonProps } from "../Combobox.types";
+import { ComboBoxSize } from "../Combobox.enums";
+
+const ComboButton = (props: ComboButtonProps) => {
   const {
     noBorder,
     onClick,
@@ -42,8 +47,7 @@ const ComboButton = (props: any) => {
   const displayArrow = withOptions || withAdvancedOptions;
 
   return (
-    // @ts-expect-error TS(2322): Type '{ children: any[]; isOpen: any; isDisabled: ... Remove this comment to see the full error message
-    <ColorTheme
+    <ComboButtonTheme
       isOpen={isOpen}
       isDisabled={isDisabled}
       noBorder={noBorder}
@@ -55,16 +59,15 @@ const ComboButton = (props: any) => {
       isSelected={isSelected}
       modernView={modernView}
       className="combo-button"
-      themeId={ThemeType.ComboButton}
       tabIndex={tabIndex}
       displayArrow={displayArrow}
       isLoading={isLoading}
       type={type}
+      selectedOption={selectedOption}
     >
       {innerContainer && (
         <StyledOptionalItem
           className={innerContainerClassName}
-          // @ts-expect-error TS(2769): No overload matches this call.
           isDisabled={isDisabled}
           defaultOption={defaultOption}
           isLoading={isLoading}
@@ -76,12 +79,10 @@ const ComboButton = (props: any) => {
       {selectedOption && selectedOption.icon && (
         <StyledIcon
           className="forceColor"
-          // @ts-expect-error TS(2769): No overload matches this call.
           isDisabled={isDisabled}
           defaultOption={defaultOption}
           isSelected={isSelected}
           isLoading={isLoading}
-          fillIcon={fillIcon}
         >
           <ReactSVG
             src={selectedOption.icon}
@@ -92,19 +93,17 @@ const ComboButton = (props: any) => {
       {type === "badge" ? (
         <Badge
           label={selectedOption.label}
-          noHover={true}
+          noHover
           color={selectedOption.color}
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
         />
       ) : (
-        // @ts-expect-error TS(2322): Type '{ children: any; noBorder: any; title: any; ... Remove this comment to see the full error message
         <Text
-          noBorder={noBorder}
           title={selectedOption?.label}
           as="div"
-          truncate={true}
+          truncate
           fontWeight={600}
           className="combo-button-label"
         >
@@ -112,11 +111,8 @@ const ComboButton = (props: any) => {
         </Text>
       )}
       <StyledArrowIcon
-        // @ts-expect-error TS(2769): No overload matches this call.
         displayArrow={displayArrow}
-        noBorder={noBorder}
         isOpen={isOpen}
-        modernView={modernView}
         className="combo-buttons_arrow-icon"
         isLoading={isLoading}
       >
@@ -125,44 +121,17 @@ const ComboButton = (props: any) => {
             <ReactSVG src={comboIcon} className="combo-buttons_expander-icon" />
           ) : (
             <StyledTriangleDownIcon
-              size="scale"
+              size={IconSizeType.scale}
               className="combo-buttons_expander-icon"
             />
           ))}
       </StyledArrowIcon>
 
       {isLoading && (
-        <StyledLoader displaySize={size} type="track" size="20px" />
+        <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
       )}
-    </ColorTheme>
+    </ComboButtonTheme>
   );
-};
-
-ComboButton.propTypes = {
-  noBorder: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  selectedOption: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object,
-  ]),
-  withOptions: PropTypes.bool,
-  optionsLength: PropTypes.number,
-  withAdvancedOptions: PropTypes.bool,
-  innerContainer: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  innerContainerClassName: PropTypes.string,
-  isOpen: PropTypes.bool,
-  size: PropTypes.oneOf(["base", "middle", "big", "huge", "content"]),
-  scaled: PropTypes.bool,
-  onClick: PropTypes.func,
-  comboIcon: PropTypes.string,
-  fillIcon: PropTypes.bool,
-  modernView: PropTypes.bool,
-  tabIndex: PropTypes.number,
-  isLoading: PropTypes.bool,
-  type: PropTypes.oneOf(["badge", null]),
 };
 
 ComboButton.defaultProps = {
@@ -172,11 +141,11 @@ ComboButton.defaultProps = {
   withAdvancedOptions: false,
   innerContainerClassName: "innerContainer",
   isOpen: false,
-  size: "content",
+  size: ComboBoxSize.content,
   scaled: false,
   modernView: false,
   tabIndex: -1,
   isLoading: false,
 };
 
-export default ComboButton;
+export { ComboButton };

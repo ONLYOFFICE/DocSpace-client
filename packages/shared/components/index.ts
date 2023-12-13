@@ -40,8 +40,12 @@ import { FormWrapper } from "./form-wrapper";
 import { ModalDialog, ModalDialogType } from "./modal-dialog";
 import { DropDownItem } from "./drop-down-item";
 import { DropDown } from "./drop-down";
+import { ComboBox, ComboBoxDisplayType, ComboBoxSize } from "./combobox";
 
 export {
+  ComboBox,
+  ComboBoxDisplayType,
+  ComboBoxSize,
   DropDown,
   DropDownItem,
   ModalDialog,

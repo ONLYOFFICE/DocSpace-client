@@ -1672,6 +1672,7 @@ export const getBaseTheme = () => {
         defaultColor: gray,
         disabledColor: grayMid,
         color: black,
+        selectedColor: black,
       },
     },
 

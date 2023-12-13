@@ -1,23 +1,23 @@
-// import React from "react";
-// import { render } from "@testing-library/react";
+import React from "react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-// import { DropDown } from ".";
+import { DropDown } from ".";
 
-// const baseProps = {
-//   open: false,
-//   isOpen: false,
-//   // directionX: "left",
-//   // directionY: "bottom",
-//   manualWidth: "100%",
-//   showDisabledItems: true,
-//   withBackdrop: false,
-// };
+const baseProps = {
+  open: false,
+  isOpen: false,
+  // directionX: "left",
+  // directionY: "bottom",
+  manualWidth: "100%",
+  showDisabledItems: true,
+  withBackdrop: false,
+};
 
 // const baseChildren = <div label="1" />;
 
 describe("<DropDown />", () => {
   it("rendered without error", () => {
-    // render(<DropDown {...baseProps} />);
+    render(<DropDown {...baseProps} />);
   });
 
   // it("opened/isOpen", () => {

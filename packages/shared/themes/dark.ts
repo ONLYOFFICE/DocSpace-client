@@ -1642,7 +1642,7 @@ const Dark: TTheme = {
       defaultColor: white,
       disabledColor: "#858585",
       color: white,
-      // selectedColor: white,
+      selectedColor: white,
     },
   },
 

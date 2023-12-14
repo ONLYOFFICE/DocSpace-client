@@ -307,8 +307,8 @@
     };
 
     initFrame(config) {
-      const configFull = Object.assign(defaultConfig, config);
-      this.config = Object.assign(this.config, configFull);
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
 

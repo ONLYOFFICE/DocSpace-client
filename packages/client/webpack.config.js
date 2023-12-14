@@ -384,7 +384,6 @@ module.exports = (env, argv) => {
       return JSON.stringify(today.toISOString().split(".")[0] + "Z");
     }, true),
     IS_PERSONAL: env.personal || false,
-    API_JS_HASH: JSON.stringify(runtime.checksums["api.js"] || dateHash),
   };
 
   config.plugins.push(new DefinePlugin(defines));

@@ -1,7 +1,11 @@
 import lodash from "lodash";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, animated } from "@react-spring/web";
-import { isMobile, isDesktop, isIOS, isMobileOnly } from "react-device-detect";
+import {
+  isDesktop as isDesktopDeviceDetect,
+  isIOS,
+  isMobileOnly,
+} from "react-device-detect";
 import React, {
   useCallback,
   useEffect,
@@ -42,6 +46,7 @@ function ViewerPlayer({
   isAudio,
   isVideo,
   isError,
+  devices,
   audioIcon,
   errorTitle,
   isLastImage,
@@ -71,6 +76,8 @@ function ViewerPlayer({
   const playerWrapperRef = useRef<HTMLDivElement>(null);
 
   const isDurationInfinityRef = useRef<boolean>(false);
+
+  const { isDesktop, isMobile } = devices;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -232,7 +239,8 @@ function ViewerPlayer({
         });
       },
       onClick: ({ dragging, event }) => {
-        if (isDesktop && event.target === containerRef.current) return onMask();
+        if (isDesktopDeviceDetect && event.target === containerRef.current)
+          return onMask();
 
         if (
           dragging ||
@@ -385,7 +393,7 @@ function ViewerPlayer({
       videoRef.current.play();
       setIsPlaying(true);
     }
-  }, [isPlaying, isVideo]);
+  }, [isPlaying, isVideo, isMobile]);
 
   const handleBigPlayButtonClick = () => {
     togglePlay();
@@ -612,6 +620,7 @@ function ViewerPlayer({
           model={model}
           onMaskClick={onMask}
           errorTitle={errorTitle}
+          isMobile={isMobile}
         />
       ) : (
         <StyledPlayerControls

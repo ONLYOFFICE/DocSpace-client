@@ -17,7 +17,6 @@ const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const [heightValue, setHeightValue] = useState("100%");
 
   const config = {
-    hash: `${API_JS_HASH}`,
     width: `${widthValue}`,
     height: `${heightValue}`,
     frameId: "ds-frame-embedding",

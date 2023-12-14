@@ -84,7 +84,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
 
-    setCSPSettings({ domains });
+    setCSPSettings({ domains, setDefaultIfEmpty: true });
   };
 
   const addDomain = () => {

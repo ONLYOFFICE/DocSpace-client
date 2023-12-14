@@ -1,7 +1,14 @@
 import ReactDOM from "react-dom";
-import { isMobile } from "react-device-detect";
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import { inject, observer } from "mobx-react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 
+import { DeviceType } from "../../../../constants";
 import { StyledViewerContainer } from "../../StyledComponents";
 
 import NextButton from "../NextButton";
@@ -33,6 +40,19 @@ function Viewer(props: ViewerProps) {
   const contextMenuRef = useRef<{ show: (e: any) => void }>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
+
+  const devices = useMemo(
+    () => ({
+      isMobileOnly: props.currentDeviceType === DeviceType.mobile,
+      isMobile:
+        props.currentDeviceType === DeviceType.tablet ||
+        props.currentDeviceType === DeviceType.mobile,
+      isDesktop: props.currentDeviceType === DeviceType.desktop,
+    }),
+    [props.currentDeviceType]
+  );
+  const { isMobile } = devices;
+
   useEffect(() => {
     document.body.appendChild(containerRef.current);
     containerRef.current.style.direction = "ltr";
@@ -61,7 +81,7 @@ function Viewer(props: ViewerProps) {
       clearTimeout(timerIDRef.current);
       setPanelVisible(true);
     };
-  }, [setImageTimer, setPanelVisible]);
+  }, [setImageTimer, setPanelVisible, isMobile]);
 
   const resetToolbarVisibleTimer = () => {
     if (panelToolbarRef.current) return;
@@ -210,6 +230,7 @@ function Viewer(props: ViewerProps) {
               resetToolbarVisibleTimer={resetToolbarVisibleTimer}
               contextModel={props.contextModel}
               errorTitle={props.errorTitle}
+              devices={devices}
             />,
             containerRef.current
           )
@@ -243,6 +264,7 @@ function Viewer(props: ViewerProps) {
               removeToolbarVisibleTimer={removeToolbarVisibleTimer}
               removePanelVisibleTimeout={removePanelVisibleTimeout}
               restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+              devices={devices}
             />,
             containerRef.current
           )
@@ -262,6 +284,7 @@ function Viewer(props: ViewerProps) {
               isFistImage={!isNotFirstElement}
               onPrev={props.onPrevClick}
               onNext={props.onNextClick}
+              devices={devices}
             />,
             containerRef.current
           )}
@@ -269,4 +292,8 @@ function Viewer(props: ViewerProps) {
   );
 }
 
-export default Viewer;
+export default inject<any>(({ auth }) => {
+  const { currentDeviceType } = auth.settingsStore;
+
+  return { currentDeviceType };
+})(observer(Viewer));

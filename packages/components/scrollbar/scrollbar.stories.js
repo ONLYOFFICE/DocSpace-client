@@ -37,6 +37,5 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  stype: "mediumBlack",
   style: { width: 300, height: 200 },
 };

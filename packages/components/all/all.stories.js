@@ -493,7 +493,7 @@ const Template = (args) => (
       </div>
       <div style={{ justifySelf: "center" }}>
         <div style={{ padding: "8px 0" }}>
-          <Scrollbar stype="mediumBlack" style={{ width: 300, height: 200 }}>
+          <Scrollbar style={{ width: 300, height: 200 }}>
             ================================================================
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

@@ -159,7 +159,7 @@
   "RestoreBackupWarningText": "DocSpace sera indisponible pendant le processus de restauration. Une fois la restauration terminée, toutes les modifications effectuées après la date du point de restauration sélectionné seront perdues.",
   "RoomsModule": "Salle de sauvegarde",
   "RoomsModuleDescription": "Vous pouvez créer une nouvelle salle spécialement pour la sauvegarde, choisir l’une des salles existantes ou enregistrer la copie dans la salle {{roomName}}.",
-  "SaveToApply": "Cliquez sur le bouton <strong>Enregistrer</strong> en bas pour appliquer.\n",
+  "SaveToApply": "Cliquez sur le bouton <strong>Enregistrer</strong> en bas pour appliquer.",
   "SelectFileInGZFormat": "Sélectionnez le fichier au format .GZ",
   "SendNotificationAboutRestoring": "Informer les utilisateurs sur la restauration de l’espace",
   "ServerSideEncryptionMethod": "Méthode de chiffrement partie serveur",

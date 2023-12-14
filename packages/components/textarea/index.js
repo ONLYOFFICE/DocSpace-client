@@ -122,7 +122,6 @@ const Textarea = ({
         themeId={ThemeType.Textarea}
         className={className}
         style={style}
-        stype="preMediumBlack"
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}

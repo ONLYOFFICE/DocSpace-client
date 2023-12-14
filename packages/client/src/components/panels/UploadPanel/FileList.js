@@ -7,7 +7,7 @@ import FileRow from "./FileRow";
 import { isDesktop } from "@docspace/components/utils/device";
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
-  <CustomScrollbars stype="mediumBlack" {...props} forwardedRef={ref} />
+  <CustomScrollbars {...props} forwardedRef={ref} />
 ));
 
 const mobileRowHeight = 48;

@@ -71,11 +71,7 @@ const Aside = React.memo((props) => {
       forwardRef={contentRef}
     >
       {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
-      {withoutBodyScroll ? (
-        children
-      ) : (
-        <Scrollbar stype="mediumBlack">{children}</Scrollbar>
-      )}
+      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
 
       {visible && (
         <StyledControlContainer className="close-button" onClick={onClose}>

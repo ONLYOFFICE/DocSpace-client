@@ -28,6 +28,7 @@
   "FeedUpdateUser": "đã được chỉ định vai trò {{role}}",
   "FileExtension": "Phần mở rộng tập tin",
   "FilesEmptyScreenText": "Xem chi tiết tệp và thư mục tại đây",
+  "GalleryEmptyScreenText": "Xem chi tiết biểu mẫu tại đây",
   "HistoryEmptyScreenText": "Lịch sử hoạt động sẽ được hiển thị ở đây",
   "InfoBanner": "Danh sách người dùng được mời bao gồm chủ sở hữu và/hoặc quản trị viên của DocSpace này có toàn quyền truy cập vào tất cả các phòng. Chủ sở hữu và/hoặc quản trị viên không thể được chỉ định các quyền truy cập khác. Sau khi được thêm vào phòng, họ sẽ được thông báo về tất cả các thay đổi.",
   "ItemsSelected": "Các mục đã chọn",

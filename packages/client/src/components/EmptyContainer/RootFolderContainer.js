@@ -293,7 +293,7 @@ const RootFolderContainer = (props) => {
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
       <img
-        className="empty-folder_container-image"
+        className="empty-folder_container-icon"
         src={PersonSvgUrl}
         alt="person_icon"
         onClick={onGoToPersonal}

@@ -197,7 +197,7 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.loading = "lazy";
+      //iframe.loading = "lazy";
       iframe.allowFullscreen = true;
       iframe.setAttribute("allowfullscreen", "");
       iframe.setAttribute("allow", "autoplay");

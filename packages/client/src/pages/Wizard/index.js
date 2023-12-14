@@ -521,8 +521,6 @@ export default inject(({ auth, wizard }) => {
     resetLicenseUploaded,
   } = wizard;
 
-  console.log({ wizard, settingsStore: auth.settingsStore });
-
   return {
     theme,
     isLoaded: auth.isLoaded,

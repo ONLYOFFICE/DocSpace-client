@@ -69,7 +69,7 @@ const Layout = (props) => {
   useEffect(() => {
     window.addEventListener("resize", onResize);
 
-    if (isTabletUtils() || isMobileUtils()) {
+    if (isMobile || isTabletView) {
       window.addEventListener("orientationchange", onOrientationChange);
 
       if (isMobileOnly) {

@@ -59,10 +59,17 @@
   "EmptyFolderDecription": "Drop files here or create new ones",
   "EmptyFolderDescriptionUser": "Files and folders uploaded by admins will appear here.",
   "EmptyFolderHeader": "No files in this folder",
+
   "EmptyFormFolderDoneHeaderText": "No finished forms yet",
   "EmptyFormFolderDoneDescriptionText": "This section will display all forms that are complete.",
+
   "EmptyFormFolderProgressHeaderText": "Nothing here yet",
   "EmptyFormFolderProgressDescriptionText": "This section will display the forms in progress.",
+
+  "EmptyFormSubFolderHeaderText": "No files in this folder yet",
+  "EmptyFormSubFolderDoneDescriptionText": "Here you will find forms which have been completely filled out by other users.",
+  "EmptyFormSubFolderProgressDescriptionText": "Here you will find forms in progress, i.e. forms which users have started to fill out but haven't completed. ",
+
   "EmptyRecycleBin": "Empty Trash",
   "EmptyRootRoomHeader": "Welcome to DocSpace",
   "EmptyScreenFolder": "No docs here yet",

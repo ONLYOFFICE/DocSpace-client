@@ -16,39 +16,54 @@ type ThemeType = "light" | "dark";
 
 type FolderTypeOf = typeof FolderType;
 type FolderTypeValueOfType = FolderTypeOf[keyof FolderTypeOf];
-type EmptyType =
-  | "emptyScreenDone"
-  | "emptyScreenInProgress"
-  | "emptyScreenCorporate"
-  | "emptyScreenDefault";
 
-export const headerIconsUrl: Record<ThemeType, Record<EmptyType, string>> = {
+enum EmptyScreenTypeEnum {
+  Done = "emptyScreenDone",
+  InProgress = "emptyScreenInProgress",
+  Corporate = "emptyScreenCorporate",
+  Default = "emptyScreenDefault",
+  SubFolderDone = "emptyScreenSubFolderDone",
+  SubFolderinProgress = "emptyScreenSubFolderinProgress",
+}
+
+export const headerIconsUrl: Record<
+  ThemeType,
+  Record<EmptyScreenTypeEnum, string>
+> = {
   light: {
-    emptyScreenDone: EmptyScreenDoneSvgUrl,
-    emptyScreenInProgress: EmptyScreenRoleSvgUrl,
-    emptyScreenDefault: EmptyScreenPersonalUrl,
-    emptyScreenCorporate: EmptyScreenCorporateSvgUrl,
+    [EmptyScreenTypeEnum.Done]: EmptyScreenDoneSvgUrl,
+    [EmptyScreenTypeEnum.InProgress]: EmptyScreenRoleSvgUrl,
+    [EmptyScreenTypeEnum.Default]: EmptyScreenPersonalUrl,
+    [EmptyScreenTypeEnum.Corporate]: EmptyScreenCorporateSvgUrl,
+    [EmptyScreenTypeEnum.SubFolderDone]: EmptyScreenPersonalUrl,
+    [EmptyScreenTypeEnum.SubFolderinProgress]: EmptyScreenPersonalUrl,
   },
-
   dark: {
-    emptyScreenDone: EmptyScreenDoneDarkSvgUrl,
-    emptyScreenInProgress: EmptyScreenRoleDarkSvgUrl,
-    emptyScreenDefault: EmptyScreenPersonalDarkUrl,
-    emptyScreenCorporate: EmptyScreenCorporateDarkSvgUrl,
+    [EmptyScreenTypeEnum.Done]: EmptyScreenDoneDarkSvgUrl,
+    [EmptyScreenTypeEnum.InProgress]: EmptyScreenRoleDarkSvgUrl,
+    [EmptyScreenTypeEnum.Default]: EmptyScreenPersonalDarkUrl,
+    [EmptyScreenTypeEnum.Corporate]: EmptyScreenCorporateDarkSvgUrl,
+    [EmptyScreenTypeEnum.SubFolderDone]: EmptyScreenPersonalDarkUrl,
+    [EmptyScreenTypeEnum.SubFolderinProgress]: EmptyScreenPersonalDarkUrl,
   },
 };
 
-export const translateHeaderKey: Record<EmptyType, string> = {
-  emptyScreenDone: "EmptyFormFolderDoneHeaderText",
-  emptyScreenInProgress: "EmptyFormFolderProgressHeaderText",
-  emptyScreenDefault: "EmptyScreenFolder",
-  emptyScreenCorporate: "RoomCreated",
+export const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {
+  [EmptyScreenTypeEnum.Done]: "EmptyFormFolderDoneHeaderText",
+  [EmptyScreenTypeEnum.InProgress]: "EmptyFormFolderProgressHeaderText",
+  [EmptyScreenTypeEnum.Default]: "EmptyScreenFolder",
+  [EmptyScreenTypeEnum.Corporate]: "RoomCreated",
+  [EmptyScreenTypeEnum.SubFolderDone]: "EmptyFormSubFolderHeaderText",
+  [EmptyScreenTypeEnum.SubFolderinProgress]: "EmptyFormSubFolderHeaderText",
 };
-export const translateDescriptionKey: Record<EmptyType, string> = {
-  emptyScreenDone: "EmptyFormFolderDoneDescriptionText",
-  emptyScreenInProgress: "EmptyFormFolderProgressDescriptionText",
-  emptyScreenDefault: "EmptyFolderDescriptionUser",
-  emptyScreenCorporate: "EmptyFolderDecription",
+export const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {
+  [EmptyScreenTypeEnum.Done]: "EmptyFormFolderDoneDescriptionText",
+  [EmptyScreenTypeEnum.InProgress]: "EmptyFormFolderProgressDescriptionText",
+  [EmptyScreenTypeEnum.Default]: "EmptyFolderDescriptionUser",
+  [EmptyScreenTypeEnum.Corporate]: "EmptyFolderDecription",
+  [EmptyScreenTypeEnum.SubFolderDone]: "EmptyFormSubFolderDoneDescriptionText",
+  [EmptyScreenTypeEnum.SubFolderinProgress]:
+    "EmptyFormSubFolderProgressDescriptionText",
 };
 
 export const getThemeMode = (theme: { isBase: boolean }): ThemeType => {
@@ -58,16 +73,20 @@ export const getThemeMode = (theme: { isBase: boolean }): ThemeType => {
 export const getEmptyScreenType = (
   type: FolderTypeValueOfType | null,
   displayRoomCondition: boolean
-): EmptyType => {
+): EmptyScreenTypeEnum => {
   switch (true) {
     case type === FolderType.Done:
-      return "emptyScreenDone";
+      return EmptyScreenTypeEnum.Done;
     case type === FolderType.InProgress:
-      return "emptyScreenInProgress";
+      return EmptyScreenTypeEnum.InProgress;
+    case type === FolderType.SubFolderDone:
+      return EmptyScreenTypeEnum.SubFolderDone;
+    case type === FolderType.SubFolderInProgress:
+      return EmptyScreenTypeEnum.SubFolderinProgress;
     case displayRoomCondition:
-      return "emptyScreenCorporate";
+      return EmptyScreenTypeEnum.Corporate;
     default:
-      return "emptyScreenDefault";
+      return EmptyScreenTypeEnum.Default;
   }
 };
 

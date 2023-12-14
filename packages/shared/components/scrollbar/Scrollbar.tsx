@@ -17,7 +17,9 @@ const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
     ...rest
   } = props;
 
-  const { interfaceDirection } = useTheme();
+  const defaultTheme = useTheme();
+  const interfaceDirection = defaultTheme?.interfaceDirection;
+
   const [isScrolling, setIsScrolling] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const timerId = useRef<null | ReturnType<typeof setTimeout>>();

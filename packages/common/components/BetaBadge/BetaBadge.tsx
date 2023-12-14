@@ -72,8 +72,6 @@ export default inject<any>(({ auth }) => {
     currentDeviceType,
   } = auth.settingsStore;
 
-  console.log({ ...auth.settingsStore });
-
   return {
     documentationEmail,
     currentColorScheme,

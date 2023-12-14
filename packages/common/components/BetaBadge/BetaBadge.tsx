@@ -13,6 +13,7 @@ const OtherOffset = 10;
 
 function BetaBadge({
   place,
+  forumLink,
   mobilePlace = "bottom-end",
   currentColorScheme,
   documentationEmail,
@@ -29,8 +30,9 @@ function BetaBadge({
           If you have found a bug, please submit it via
           {/*@ts-ignore */}
           <Link
-            href={`mailto:${documentationEmail}`}
+            href={forumLink}
             color={currentColorScheme?.main?.accent}
+            target="_blank"
           >
             form
           </Link>
@@ -64,11 +66,18 @@ function BetaBadge({
 
 export default inject<any>(({ auth }) => {
   const {
-    helpLink,
+    forumLink,
     currentColorScheme,
     documentationEmail,
     currentDeviceType,
   } = auth.settingsStore;
 
-  return { documentationEmail, currentColorScheme, currentDeviceType };
+  console.log({ ...auth.settingsStore });
+
+  return {
+    documentationEmail,
+    currentColorScheme,
+    currentDeviceType,
+    forumLink,
+  };
 })(observer(BetaBadge));

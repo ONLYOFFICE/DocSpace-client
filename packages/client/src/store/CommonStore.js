@@ -39,6 +39,7 @@ class CommonStore {
 
   resetIsInit = () => {
     this.isInit = false;
+    this.setIsLoaded(false);
   };
 
   initSettings = async (page) => {
@@ -56,12 +57,20 @@ class CommonStore {
 
     if (isMobileView) {
       switch (page) {
-        case "white-label":
-          {
-            requests.push(
-              this.getWhiteLabelLogoUrls(),
-              this.getWhiteLabelLogoText()
-            );
+        case "white-label": {
+          requests.push(
+            this.getWhiteLabelLogoUrls(),
+            this.getWhiteLabelLogoText()
+          );
+        }
+        case "language-and-time-zone":
+          requests.push(
+            settingsStore.getPortalTimezones(),
+            settingsStore.getPortalCultures()
+          );
+        case "dns-settings":
+          if (standalone) {
+            requests.push(this.getDNSSettings());
           }
           break;
 
@@ -78,9 +87,6 @@ class CommonStore {
       );
     }
 
-    if (standalone) {
-      requests.push(this.getDNSSettings());
-    }
     return Promise.all(requests).finally(() => this.setIsLoaded(true));
   };
 

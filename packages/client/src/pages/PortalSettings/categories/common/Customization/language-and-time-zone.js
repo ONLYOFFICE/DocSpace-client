@@ -88,7 +88,9 @@ const LanguageAndTimeZone = (props) => {
 
     setDocumentTitle(t("StudioTimeLanguageSettings"));
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    if (!isLoaded) {
+      initSettings("language-and-time-zone").then(() => setIsLoaded(true));
+    }
 
     const isLoadedSetting =
       isLoaded &&

@@ -71,7 +71,7 @@ const DNSSettings = (props) => {
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    if (!isLoaded) initSettings("dns-settings").then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();

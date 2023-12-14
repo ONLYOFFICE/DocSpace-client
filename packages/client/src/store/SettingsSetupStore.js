@@ -93,8 +93,6 @@ class SettingsSetupStore {
 
     if (this.isInit && isMobileView) return;
 
-    console.log("window.DocSpace.location", window.DocSpace.location);
-
     if (authStore.isAuthenticated) {
       if (isMobileView) {
         switch (page) {

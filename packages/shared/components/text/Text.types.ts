@@ -32,6 +32,7 @@ export interface TextProps {
   /** Disables word wrapping */
   truncate?: boolean;
 
+  dir?: string;
   children?: React.ReactNode;
 }
 

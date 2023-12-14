@@ -17,7 +17,8 @@ import ChipsRender from "./sub-components/chips-render";
 import { EmailSettings, parseAddresses } from "../utils/email";
 import { Scrollbar } from "../index";
 
-const calcMaxLengthInput = (exceededLimit: any) => exceededLimit * MAX_EMAIL_LENGTH_WITH_DOTS;
+const calcMaxLengthInput = (exceededLimit: any) =>
+  exceededLimit * MAX_EMAIL_LENGTH_WITH_DOTS;
 
 const EmailChips = ({
   options,
@@ -96,8 +97,8 @@ const EmailChips = ({
             // @ts-expect-error TS(2339): Property 'email' does not exist on type 'never'.
             selectedChips.filter((it) => it.email != value.email)
           )
-        // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
-        : setSelectedChips([value, ...selectedChips]);
+        : // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
+          setSelectedChips([value, ...selectedChips]);
     } else {
       // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
       setSelectedChips([value]);
@@ -204,7 +205,9 @@ const EmailChips = ({
       !currentChip
     ) {
       // @ts-expect-error TS(2345): Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
-      const filteredChips = chips.filter((e: any) => !~selectedChips.indexOf(e));
+      const filteredChips = chips.filter(
+        (e: any) => !~selectedChips.indexOf(e)
+      );
       setChips(filteredChips);
       setSelectedChips([]);
       // @ts-expect-error TS(2531): Object is possibly 'null'.
@@ -298,16 +301,18 @@ const EmailChips = ({
     if (chips.length >= exceededLimit) return;
     const filterLimit = exceededLimit - chips.length;
 
-    const filteredChips = chipsToAdd.map(sliceEmail).filter((it: any, index: any) => {
-      const isExisted = !!chips.find(
-        (chip: any) => chip.email === it || chip.email === it?.email
-      );
-      if (chipsToAdd.length === 1) {
-        setIsExistedOn(isExisted);
-        if (isExisted) return false;
-      }
-      return !isExisted && index < filterLimit;
-    });
+    const filteredChips = chipsToAdd
+      .map(sliceEmail)
+      .filter((it: any, index: any) => {
+        const isExisted = !!chips.find(
+          (chip: any) => chip.email === it || chip.email === it?.email
+        );
+        if (chipsToAdd.length === 1) {
+          setIsExistedOn(isExisted);
+          if (isExisted) return false;
+        }
+        return !isExisted && index < filterLimit;
+      });
     setChips([...chips, ...filteredChips]);
   };
 
@@ -317,12 +322,7 @@ const EmailChips = ({
       <StyledChipGroup onKeyDown={onKeyDown} ref={containerRef} tabindex="-1">
         // @ts-expect-error TS(2769): No overload matches this call.
         <StyledChipWithInput length={chips.length}>
-          // @ts-expect-error TS(2322): Type '{ children: Element; scrollclass: string; st... Remove this comment to see the full error message
-          <Scrollbar
-            scrollclass={"scroll"}
-            stype={"preMediumBlack"}
-            ref={scrollbarRef}
-          >
+          <Scrollbar scrollclass={"scroll"} ref={scrollbarRef}>
             <ChipsRender
               // @ts-expect-error TS(2322): Type '{ chips: any; checkSelected: (value: any) =>... Remove this comment to see the full error message
               chips={chips}

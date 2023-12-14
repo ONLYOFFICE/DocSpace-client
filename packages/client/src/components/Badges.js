@@ -11,15 +11,21 @@ import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 
 import React, { useState } from "react";
 import styled from "styled-components";
+import { isMobile as isMobileDevice } from "react-device-detect";
+
 import Badge from "@docspace/components/badge";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 
-import { FileStatus, RoomsType } from "@docspace/common/constants";
+import {
+  FileStatus,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/common/constants";
 import { Base } from "@docspace/components/themes";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet, isDesktop } from "@docspace/components/utils/device";
+import { isTablet, isDesktop, size } from "@docspace/components/utils/device";
 import { classNames } from "@docspace/components/utils/classNames";
 
 const StyledWrapper = styled.div`
@@ -110,7 +116,10 @@ const Badges = ({
 
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
-  const tabletViewBadge = !isTile && isTablet();
+  const isLargeTabletDevice =
+    isMobileDevice && window.innerWidth >= size.desktop;
+
+  const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
   const desktopView = !isTile && isDesktop();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
@@ -167,9 +176,17 @@ const Badges = ({
     ? { onClick: onShowVersionHistory }
     : {};
 
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;

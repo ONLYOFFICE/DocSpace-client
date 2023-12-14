@@ -9,7 +9,11 @@ import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { isTablet } from "@docspace/components/utils/device";
-import { FileStatus, RoomsType } from "@docspace/common/constants";
+import {
+  FileStatus,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/common/constants";
 
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 
@@ -64,9 +68,17 @@ const QuickButtons = (props) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
 
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.CustomRoom;
+
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
   const showCopyLinkIcon =
-    (item.roomType === RoomsType.PublicRoom ||
-      item.roomType === RoomsType.CustomRoom) &&
+    isPublicRoomType &&
+    haveLinksRight &&
     item.shared &&
     !isArchiveFolder &&
     !isTile;

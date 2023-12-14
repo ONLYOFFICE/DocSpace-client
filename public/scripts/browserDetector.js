@@ -9,7 +9,7 @@
         Edge: 102,
         Opera: 90,
         Safari: 14,
-        SafariMobile: 13,
+        SafariMobile: 14,
         AscDesktopEditor: 6,
         SamsungBrowser: 4,
         UCBrowser: 12,
@@ -36,6 +36,7 @@
           temp = agent.match(
             /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/
           );
+
           const userOS =
             agent.search("Linux") !== -1 && agent.search("X11") !== -1
               ? "Linux"
@@ -45,7 +46,7 @@
             return {
               name: temp[1].replace("OPR", "Opera"),
               version: temp[2],
-              chromeVersion: match[2],
+              chromeVersion: match[2] || 70,
               userOS,
             };
           }
@@ -64,12 +65,16 @@
         }
 
         if ((temp = agent.match(/mobile/i)) != null) {
-          if ((temp = agent.match(/chrome\/?\s*(\d+)/i))) {
+          if ((temp = agent.match(/chrome\/?\s*(\d+)/i)) != null) {
             match[1] = temp[1];
           }
         }
 
-        return { name: match[0], version: match[1] };
+        return {
+          name: match[0],
+          version: match[1],
+          chromeVersion: match[1] || 70,
+        };
       })();
     }
 
@@ -83,7 +88,8 @@
           return false;
 
         if (
-          +this.browser.version < this.unsupportedBrowsers[this.browser.name]
+          +this.browser.version < this.unsupportedBrowsers[this.browser.name] &&
+          +this.browser.chromeVersion < this.unsupportedBrowsers.Chrome
         ) {
           return false;
         }

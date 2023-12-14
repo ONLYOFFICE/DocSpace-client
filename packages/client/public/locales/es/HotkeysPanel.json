@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Cambiar entre la vista de cuadrícula y la de lista",
   "HotkeysClearAll": "Borrar todas las selecciones",
   "HotkeysClose": "Cerrar/deshacer la acción",
+  "HotkeysCopySelected": "Copiar los elementos seleccionados en el portapapeles",
   "HotkeysCreateDocument": "Crear documento",
   "HotkeysCreateFolder": "Crear carpeta",
   "HotkeysCreateForm": "Crear plantilla de formulario en blanco",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Crear presentación",
   "HotkeysCreateSpreadsheet": "Crear hoja de cálculo",
   "HotkeysCreatingObjects": "Creando elementos",
+  "HotkeysCutSelected": "Cortar los elementos seleccionados en el portapapeles",
   "HotkeysEnterKey": "Introducir",
   "HotkeysExtendSelectionDown": "Ampliar la selección hacia abajo",
   "HotkeysExtendSelectionLeft": "Ampliar la selección hacia la izquierda",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Mover hacia arriba sin cambiar la selección",
   "HotkeysNavigation": "Navegación",
   "HotkeysOpen": "Abrir el elemento seleccionado/Confirmar la acción",
+  "HotkeysPasteSelected": "Pegar elementos seleccionados del portapapeles",
   "HotkeysPlayPause": "Reproducir/Pausar",
   "HotkeysRedoLastUndoneAction": "Rehacer la acción previamente deshecha",
   "HotkeysRemove": "Eliminar los elementos seleccionados",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Espacio",
   "HotkeysUndoLastAction": "Deshacer la última acción",
   "HotkeysUploadFile": "Cargar archivo",
-  "HotkeysUploadingObjects": "Cargando elementos"
+  "HotkeysUploadingObjects": "Cargando elementos",
+  "HotkeysZoomIn": "Ampliar",
+  "HotkeysZoomOut": "Alejar"
 }

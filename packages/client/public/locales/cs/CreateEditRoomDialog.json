@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Všechny soubory v této místnosti budou zašifrovány.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocí této funkce můžete pozvat pouze stávající uživatele služby DocSpace. Po vytvoření místnosti nebudete moci seznam uživatelů měnit.",
   "MakeRoomPrivateTitle": "Vytvořte si soukromou místnost",
+  "PublicRoomBarDescription": "Tato místnost je k dispozici každému, kdo má odkaz. Externí uživatelé budou mít oprávnění pouze k prohlížení všech souborů.",
+  "PublicRoomDescription": "Pozvat uživatele prostřednictvím externích odkazů k prohlížení dokumentů bez registrace. Tuto místnost můžete také vložit do libovolného webového rozhraní.",
   "ReviewRoomDescription": "Požádat o přezkum nebo připomínky k dokumentům",
   "ReviewRoomTitle": "Ověřit místnost",
   "RoomEditing": "Úprava místnosti",

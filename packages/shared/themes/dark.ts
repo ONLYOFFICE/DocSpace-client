@@ -555,6 +555,10 @@ const Dark: TTheme = {
     },
   },
 
+  rowContainer: {
+    borderColor: "#474747",
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -566,9 +570,9 @@ const Dark: TTheme = {
   },
 
   scrollbar: {
-    backgroundColorVertical: "rgba(255, 255, 255, 0.1)",
-    backgroundColorHorizontal: "rgba(255, 255, 255, 0.1)",
-    hoverBackgroundColorVertical: "#ADADAD",
+    bgColor: "rgba(20, 20, 20, 0.4)",
+    hoverBgColor: "rgba(20, 20, 20, 0.64)",
+    pressBgColor: "rgba(20, 20, 20, 0.8)",
   },
 
   modalDialog: {
@@ -1928,6 +1932,7 @@ const Dark: TTheme = {
     background: black,
     rootFolderTitleColor: "#858585",
     publicIcon: "#858585",
+    boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {
       fill: "#E06A1B",
@@ -2048,11 +2053,13 @@ const Dark: TTheme = {
     expanderColor: "#C4C4C4",
 
     downloadAppList: {
-      color: "#C4C4C4",
+      textColor: "#858585",
+      color: "#5C5C5C",
       winHoverColor: "#3785D3",
-      macHoverColor: "#000",
+      macHoverColor: "#fff",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#fff",
     },
 
     thirdPartyList: {

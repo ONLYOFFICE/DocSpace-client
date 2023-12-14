@@ -1,11 +1,11 @@
-import React from "react";
-import { isIOS, isMobileOnly } from "react-device-detect";
+import React, { useCallback } from "react";
+import { isIOS, isTablet, isMobile } from "react-device-detect";
 
 import { classNames } from "../../../utils";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
 import { Heading, HeadingSize } from "../../heading";
-import { Scrollbar, ScrollbarType } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 
 import {
   StyledModal,
@@ -20,6 +20,7 @@ import { ModalBackdrop } from "./ModalBackdrop";
 import { FormWrapper } from "./FormWrapper";
 import { ModalSubComponentsProps } from "../ModalDialog.types";
 
+let isInitScroll = false;
 const Modal = ({
   id,
   style,
@@ -52,8 +53,36 @@ const Modal = ({
   const diffRef = React.useRef(0);
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
+  const scrollPosition = useCallback(() => {
+    if (currentDisplayType !== "modal") return;
+
+    if (isInitScroll) return;
+
+    const dialogHeader = document
+      .getElementById("modal-header-swipe")
+      ?.getBoundingClientRect();
+
+    const input = document
+      .getElementsByClassName("input-component")[0]
+      ?.getBoundingClientRect();
+
+    if (dialogHeader && input) {
+      if (dialogHeader.y < dialogHeader.height + input.height)
+        window.scrollTo(0, input.y);
+      else window.scrollTo(0, dialogHeader.y);
+    }
+
+    isInitScroll = true;
+  }, [currentDisplayType]);
+
   const onResize = React.useCallback(
     (e: Event) => {
+      if (window.innerHeight < window.innerWidth || isTablet) {
+        scrollPosition();
+
+        return;
+      }
+
       if (!contentRef.current || !window.visualViewport) return;
 
       const target = e.target as VisualViewport;
@@ -93,11 +122,11 @@ const Modal = ({
         contentRef.current.style.position = "fixed";
       }
     },
-    [currentDisplayType, windowHeight],
+    [currentDisplayType, scrollPosition, windowHeight],
   );
 
   React.useEffect(() => {
-    if (isMobileOnly && isIOS && window.visualViewport) {
+    if (isIOS && isMobile && window.visualViewport) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }
@@ -109,10 +138,16 @@ const Modal = ({
     };
   }, [onResize]);
 
+  React.useEffect(() => {
+    if (!visible) isInitScroll = false;
+  }, [visible]);
+
   const headerComponent = React.isValidElement(header)
     ? header.props.children
     : null;
-  const bodyComponent = React.isValidElement(body) ? body.props.children : null;
+  const bodyComponent = React.isValidElement(body)
+    ? (body.props.children as React.ReactNode)
+    : null;
   const footerComponent = React.isValidElement(footer)
     ? footer.props.children
     : null;
@@ -229,11 +264,7 @@ const Modal = ({
                     // embedded={embedded}
                   >
                     {currentDisplayType === "aside" && withBodyScroll ? (
-                      <Scrollbar
-                        stype={ScrollbarType.mediumBlack}
-                        id="modal-scroll"
-                        className="modal-scroll"
-                      >
+                      <Scrollbar id="modal-scroll" className="modal-scroll">
                         {bodyComponent}
                       </Scrollbar>
                     ) : (

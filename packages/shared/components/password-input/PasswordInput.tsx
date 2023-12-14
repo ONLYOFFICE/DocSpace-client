@@ -7,6 +7,7 @@ import React, {
   FocusEvent,
   MouseEvent,
 } from "react";
+import { TooltipRefProps } from "react-tooltip";
 
 import equal from "fast-deep-equal/react";
 
@@ -87,6 +88,7 @@ const PasswordInputPure = ({
 
   const ref = useRef(null);
   const refTooltip = useRef(null);
+  const refTooltipContent = useRef(null);
 
   const onBlurAction = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
@@ -95,6 +97,45 @@ const PasswordInputPure = ({
     },
     [onBlur],
   );
+
+  const onFocusAction = () => {
+    const length = state.value?.length ?? 0;
+
+    const minLength = passwordSettings?.minLength;
+
+    if ((minLength && length < minLength) || hasError || hasWarning) {
+      if (refTooltip.current) {
+        const tooltip = refTooltip.current as TooltipRefProps;
+
+        tooltip?.open?.();
+      }
+    }
+  };
+
+  const handleClickOutside = React.useCallback((event: Event) => {
+    if (refTooltip.current && refTooltipContent.current) {
+      const target = event.target as HTMLElement;
+      const tooltip = refTooltip.current as TooltipRefProps;
+      const tooltipContent = refTooltipContent.current as HTMLElement;
+      if (
+        !tooltip ||
+        !tooltip.isOpen ||
+        tooltip.activeAnchor?.contains(target) ||
+        tooltipContent?.parentElement?.contains(target)
+      )
+        return;
+
+      tooltip.close();
+    }
+  }, []);
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
 
   const onKeyDownAction = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
@@ -195,6 +236,13 @@ const PasswordInputPure = ({
   const onChangeAction = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e);
+
+      if (refTooltip.current) {
+        const tooltip = refTooltip.current as TooltipRefProps;
+        if (tooltip?.isOpen) {
+          tooltip?.close?.();
+        }
+      }
 
       if (simpleView) {
         setState((s) => ({
@@ -333,7 +381,7 @@ const PasswordInputPure = ({
   };
 
   const renderTooltipContent = () => (
-    <TooltipStyle>
+    <TooltipStyle ref={refTooltipContent}>
       <StyledTooltipContainer
         forwardedAs="div"
         fontSize="12px"
@@ -418,6 +466,7 @@ const PasswordInputPure = ({
           iconSize={16}
           isIconFill
           onBlur={onBlurAction}
+          onFocus={onFocusAction}
           onKeyDown={onKeyDownAction}
           hasWarning={hasWarning}
           placeholder={placeholder}
@@ -435,7 +484,8 @@ const PasswordInputPure = ({
             anchorSelect="div[id='tooltipContent'] input"
             offsetLeft={tooltipOffsetLeft}
             offsetTop={tooltipOffsetTop}
-            reference={refTooltip}
+            ref={refTooltip}
+            imperativeModeOnly
           >
             {renderTooltipContent()}
           </Tooltip>

@@ -423,7 +423,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                   </div>
                 )}
 
-                <Text className="text" truncate>
+                <Text className="text" truncate dir="auto">
                   {header.title}
                 </Text>
               </div>

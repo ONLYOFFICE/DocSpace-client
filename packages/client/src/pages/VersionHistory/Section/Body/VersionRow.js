@@ -19,7 +19,8 @@ import toastr from "@docspace/components/toast/toastr";
 import { Encoder } from "@docspace/common/utils/encoder";
 import { Base } from "@docspace/components/themes";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
-import moment from "moment";
+import moment from "moment-timezone";
+import getCorrectDate from "@docspace/components/utils/getCorrectDate";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -66,9 +67,7 @@ const VersionRow = (props) => {
     }
   }, [info.comment]);
 
-  const versionDate = `${moment(info.updated)
-    .locale(culture)
-    .format("L, LTS")}`;
+  const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 

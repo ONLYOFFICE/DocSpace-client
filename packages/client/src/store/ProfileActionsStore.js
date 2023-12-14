@@ -9,6 +9,7 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 //import VideoGuidesReactSvgUrl from "PUBLIC_DIR/images/video.guides.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/common/utils";
 
@@ -30,6 +31,7 @@ const PAYMENTS_URL = combineUrl(
 
 //const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
+const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
   filesStore = null;
@@ -122,6 +124,11 @@ class ProfileActionsStore {
     window.DocSpace.navigate(settingsUrl);
   };
 
+  onSpacesClick = () => {
+    this.selectedFolderStore.setSelectedFolder(null);
+    window.open(SPACES_URL, "_blank");
+  };
+
   onPaymentsClick = () => {
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(PAYMENTS_URL);
@@ -173,19 +180,17 @@ class ProfileActionsStore {
     }
   };
 
-  onLogoutClick = () => {
-    this.authStore.logout().then((ssoLogoutUrl) => {
-      this.filesStore.reset();
-      this.peopleStore.reset();
-      setTimeout(() => {
-        window.location.replace(
-          combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
-            ssoLogoutUrl || "/login"
-          )
-        );
-      }, 300);
-    });
+  onLogoutClick = async (t) => {
+    try {
+      const ssoLogoutUrl = await this.authStore.logout(false);
+
+      window.location.replace(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login")
+      );
+    } catch (e) {
+      console.error(e);
+      toastr.error(t("Common:UnexpectedError"));
+    }
   };
 
   onDebugClick = () => {
@@ -193,9 +198,11 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone } = this.authStore.settingsStore;
+    const { enablePlugins, standalone, portals, baseDomain, tenantAlias, limitedAccessSpace } =
+      this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
+    const { isOwner } = this.authStore.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -216,6 +223,44 @@ class ProfileActionsStore {
           onClick: () => this.onSettingsClick(settingsUrl),
         }
       : null;
+
+    const protocol = window?.location?.protocol;
+
+    const managementItems = portals.map((portal) => {
+      return {
+        key: portal.tenantId,
+        label: portal.domain,
+        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+        disabled: false,
+        checked: tenantAlias === portal.portalName
+      };
+    });
+
+    const management =
+      isAdmin && standalone && !limitedAccessSpace
+        ? {
+            key: "spaces-management-settings",
+            id: "spaces",
+            icon: SpacesReactSvgUrl,
+            label: t("Common:Spaces"),
+            onClick: this.onSpacesClick,
+            items:
+              baseDomain && baseDomain !== "localhost"
+                ? [
+                    ...managementItems,
+                    {
+                      key: "spaces-separator",
+                      isSeparator: true,
+                    },
+                    {
+                      key: "spaces-management",
+                      label: t("Common:SpaceManagement"),
+                      onClick: this.onSpacesClick,
+                    },
+                  ]
+                : null,
+          }
+        : null;
 
     let hotkeys = null;
     // if (modules) {
@@ -275,6 +320,7 @@ class ProfileActionsStore {
         onClick: this.onProfileClick,
       },
       settings,
+      management,
       isAdmin &&
         !isCommunity && {
           key: "user-menu-payments",
@@ -327,7 +373,7 @@ class ProfileActionsStore {
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
         label: t("Common:LogoutButton"),
-        onClick: this.onLogoutClick,
+        onClick: () => this.onLogoutClick(t),
         isButton: true,
       });
     }

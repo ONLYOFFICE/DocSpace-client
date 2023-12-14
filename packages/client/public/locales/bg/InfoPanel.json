@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Вижте подробности за потребителите тук",
+  "Administration": "Администрация",
   "AndMoreLabel": "и <strong>още {{count}}</strong>",
   "CreationDate": "Дата на създаване",
   "Data": "Данни",
   "DateModified": "Дата на промяна",
+  "ExpectUsers": "Очаквай потребители",
   "FeedCreateFileSeveral": "Добавени файлове",
   "FeedCreateFileSingle": "Файлът е създаден",
   "FeedCreateFolderSeveral": "Папките са добавени",
@@ -27,6 +29,7 @@
   "FileExtension": "Разширение на файл",
   "FilesEmptyScreenText": "Вижте подробности за файловете и папките тук",
   "HistoryEmptyScreenText": "Историята на дейностите ще бъде показана тук",
+  "InfoBanner": "Списъкът с поканени потребители включва собственика и/или администраторите на този DocSpace с пълен достъп до всички стаи. На собственика и/или администратора не могат да се назначават други права за достъп. Веднъж добавени в стаята, те ще бъдат уведомени за всички промени.",
   "ItemsSelected": "Избрани елементи",
   "LastModifiedBy": "Последно модифициран от",
   "Properties": "Свойства",
@@ -35,5 +38,6 @@
   "StorageType": "Тип съхранение",
   "SubmenuDetails": "Подробности",
   "SubmenuHistory": "История",
+  "Users": "Потребители",
   "Versions": "Версии"
 }

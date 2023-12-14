@@ -43,7 +43,7 @@ const convertToItems = (folders) => {
     const icon = logo.medium ? logo.medium : getRoomLogo(roomType);
     const color = logo.color;
 
-    return { id, label: title, icon, color };
+    return { id, label: title, icon, color, logo, roomType };
   });
 
   return items;
@@ -100,8 +100,6 @@ const RoomSelector = ({
   const [total, setTotal] = React.useState(0);
 
   const [items, setItems] = React.useState([]);
-
-  const timeoutRef = React.useRef(null);
 
   const onSearchAction = React.useCallback(
     (value) => {

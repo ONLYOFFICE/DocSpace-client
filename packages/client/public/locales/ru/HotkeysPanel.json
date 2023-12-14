@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Переключение между сеткой и списком",
   "HotkeysClearAll": "Отменить все выделения",
   "HotkeysClose": "Закрыть/Отменить действие",
+  "HotkeysCopySelected": "Копировать выбранные элементы в буфер обмена",
   "HotkeysCreateDocument": "Создать документ",
   "HotkeysCreateFolder": "Создать папку",
   "HotkeysCreateForm": "Создать пустой шаблон формы",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Создать презентацию",
   "HotkeysCreateSpreadsheet": "Создать таблицу",
   "HotkeysCreatingObjects": "Создание объектов",
+  "HotkeysCutSelected": "Вырезать выбранные элементы в буфер обмена",
   "HotkeysEnterKey": "Ввод",
   "HotkeysExtendSelectionDown": "Расширить выделение вниз",
   "HotkeysExtendSelectionLeft": "Расширить выделение влево",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Перейти вверх без изменения области выделения",
   "HotkeysNavigation": "Навигация",
   "HotkeysOpen": "Открыть выбранный объект/Подтвердить действие",
+  "HotkeysPasteSelected": "Вставить выбранные элементы из буфера обмена",
   "HotkeysPlayPause": "Воспроизвести/Пауза",
   "HotkeysRedoLastUndoneAction": "Повторить последнее отмененное действие",
   "HotkeysRemove": "Удалить выбранные объекты",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Пробел",
   "HotkeysUndoLastAction": "Отменить последнее действие",
   "HotkeysUploadFile": "Загрузить файл",
-  "HotkeysUploadingObjects": "Загрузка объектов"
+  "HotkeysUploadingObjects": "Загрузка объектов",
+  "HotkeysZoomIn": "Увеличить",
+  "HotkeysZoomOut": "Уменьшить"
 }

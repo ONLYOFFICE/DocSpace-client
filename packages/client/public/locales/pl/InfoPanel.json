@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Zobacz dane użytkowników tutaj",
+  "Administration": "Administracja",
   "AndMoreLabel": "jeszcze <strong>{{count}}</strong>",
   "CreationDate": "Data utworzenia",
   "Data": "Dane",
   "DateModified": "Data modyfikacji",
+  "ExpectUsers": "Oczekiwanie na użytkowników",
   "FeedCreateFileSeveral": "Pliki zostały dodane",
   "FeedCreateFileSingle": "Plik został utworzony",
   "FeedCreateFolderSeveral": "Katalogi zostały dodane",
@@ -27,6 +29,7 @@
   "FileExtension": "Rozszerzenie pliku",
   "FilesEmptyScreenText": "Zobacz szczegóły plików i folderów tutaj",
   "HistoryEmptyScreenText": "Historia aktywności będzie widoczna tutaj",
+  "InfoBanner": "Lista zaproszonych użytkowników obejmuje właściciela i/lub administratorów tego konta DocSpace z pełnym dostępem do wszystkich pokoi. Właścicielowi i/lub administratorowi nie można przypisać innych praw dostępu. Po dodaniu do pokoju zostaną powiadomieni o wszystkich zmianach.",
   "ItemsSelected": "Wybrano elementy",
   "LastModifiedBy": "Ostatnio zmodyfikowany przez",
   "Properties": "Właściwości",
@@ -35,5 +38,6 @@
   "StorageType": "Rodzaj pamięci",
   "SubmenuDetails": "Szczegóły",
   "SubmenuHistory": "Historia",
+  "Users": "Użytkownicy",
   "Versions": "Wersje"
 }

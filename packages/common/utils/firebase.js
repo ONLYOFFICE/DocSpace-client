@@ -63,8 +63,9 @@ class FirebaseHelper {
       !!this.config["projectId"] &&
       !!this.config["storageBucket"] &&
       !!this.config["messagingSenderId"] &&
-      !!this.config["appId"] /*&&
-      this.config["measurementId"]*/
+      !!this.config["appId"] &&
+      !window.navigator.userAgent.includes("ZoomWebKit") && // Disabled firebase for Zoom - unknown 403 error inside iframe
+      !window.navigator.userAgent.includes("ZoomApps")
     );
   }
 

@@ -10,7 +10,7 @@ export interface BadgeProps {
   /** CSS font-size */
   fontSize?: string;
   /** CSS font-weight */
-  fontWeight?: number;
+  fontWeight?: number | string;
   /** CSS border-radius */
   borderRadius?: string;
   /** CSS padding */

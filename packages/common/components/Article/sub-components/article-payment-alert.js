@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "../../../utils";
 
 import AlertComponent from "../../AlertComponent";
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";

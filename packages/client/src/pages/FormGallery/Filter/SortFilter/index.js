@@ -50,7 +50,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
 
       <Styled.SortButton
         id={"oform-sort"}
-        title={"Sort"}
+        title={t("Common:SortBy")}
         onClick={onToggleCombobox}
       >
         <Styled.SortComboBox

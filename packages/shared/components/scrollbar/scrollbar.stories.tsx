@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Scrollbar, ScrollbarType } from ".";
+import { Scrollbar } from ".";
 
 const meta = {
   title: "Components/Scrollbar",
@@ -38,7 +38,6 @@ export const Default: Story = {
     </Scrollbar>
   ),
   args: {
-    stype: ScrollbarType.mediumBlack,
     style: { width: 300, height: 200 },
   },
 };

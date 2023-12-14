@@ -536,7 +536,7 @@ const Template = (args: any) => <>
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
         // @ts-expect-error TS(2322): Type '{ children: string; stype: string; style: { ... Remove this comment to see the full error message
-        <Scrollbar stype="mediumBlack" style={{ width: 300, height: 200 }}>
+        <Scrollbar  style={{ width: 300, height: 200 }}>
           ================================================================
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

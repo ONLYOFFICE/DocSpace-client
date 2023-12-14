@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Xóa plugin",
+  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng DocSpace. Bạn có chắc muốn tiếp tục?",
+  "DeletePluginTitle": "Bạn muốn xóa plugin?",
+  "Description": "Bạn có thể thêm các plugin để mở rộng chức năng của DocSpace với các tính năng bổ sung. Nhấp vào Tải plugin lên và chọn tập tin plugin trong kho lưu trữ ZIP.",
+  "Metadata": "Siêu dữ liệu",
+  "NeedSettings": "Cần vào cài đặt",
+  "NoPlugins": "Không có plugin nào được thêm",
+  "PluginsHelp": "Plugin cho phép bạn mở rộng chức năng của DocSpace",
+  "UploadPlugin": "Tải Plugin lên"
+}

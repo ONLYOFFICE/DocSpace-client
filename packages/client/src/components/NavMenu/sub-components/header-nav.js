@@ -43,13 +43,14 @@ const HeaderNav = ({
   userIsUpdate,
   setUserIsUpdate,
   getActions,
+  hideProfileMenu,
 }) => {
   const { t } = useTranslation(["NavMenu", "Common", "About"]);
   const userActions = getActions(t);
 
   return (
     <StyledNav className="profileMenuIcon hidingHeader">
-      {isAuthenticated && user ? (
+      {isAuthenticated && user && !hideProfileMenu ? (
         <>
           <ProfileActions
             userActions={userActions}

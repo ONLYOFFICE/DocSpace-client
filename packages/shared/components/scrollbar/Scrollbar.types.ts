@@ -1,8 +1,6 @@
 import { ScrollbarType } from "./Scrollbar.enums";
 
 export interface ScrollbarProps {
-  /** Scrollbar style type */
-  stype: ScrollbarType;
   /** Accepts class */
   className?: string;
   /** Accepts id  */
@@ -13,10 +11,15 @@ export interface ScrollbarProps {
   autoHide?: boolean;
   /** Track auto hiding delay in ms.  */
   hideTrackTimer?: number;
+  /** Fix scrollbar size. */
+  fixedSize?: boolean;
+  /** Disable vertical scrolling. */
+  noScrollY?: boolean;
+  /** Disable horizontal scrolling. */
+  noScrollX?: boolean;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
-  scrollClass?: string;
-  noScrollY?: boolean;
+  scrollclass?: string;
   children?: React.ReactNode;
 }
 

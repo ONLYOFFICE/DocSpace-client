@@ -14,5 +14,6 @@ declare global {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
       };
     };
+    timezone: string;
   }
 }

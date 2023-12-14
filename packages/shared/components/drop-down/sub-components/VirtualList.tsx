@@ -111,6 +111,7 @@ function VirtualList({
 
   if (!maxHeight) return cleanChildren || children;
 
+<<<<<<< HEAD:packages/shared/components/drop-down/sub-components/VirtualList.tsx
   return isNoFixedHeightOptions ? (
     <Scrollbar style={{ height: maxHeight }} stype={ScrollbarType.mediumBlack}>
       {cleanChildren}
@@ -133,6 +134,33 @@ function VirtualList({
     >
       {Row}
     </VariableSizeList>
+=======
+  return (
+    <>
+      {isNoFixedHeightOptions ? (
+        //@ts-ignore
+        <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
+      ) : (
+        <VariableSizeList
+          ref={ref}
+          width={width}
+          itemCount={itemCount}
+          itemSize={getItemSize}
+          height={calculatedHeight}
+          itemData={{
+            children: cleanChildren,
+            theme: theme,
+            activeIndex,
+            activedescendant: currentIndex,
+            handleMouseMove,
+          }}
+          outerElementType={Scrollbar}
+        >
+          {Row}
+        </VariableSizeList>
+      )}
+    </>
+>>>>>>> develop:packages/components/drop-down/VirtualList.tsx
   );
 }
 

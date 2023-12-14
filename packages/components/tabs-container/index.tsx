@@ -165,39 +165,37 @@ class TabContainer extends Component {
     // @ts-expect-error TS(2339): Property 'activeTab' does not exist on type 'Reado... Remove this comment to see the full error message
     const { activeTab, onScrollHide } = this.state;
 
-    return <>
-      // @ts-expect-error TS(2769): No overload matches this call.
-      <StyledScrollbar
-        autoHide={onScrollHide}
-        stype="preMediumBlack"
-        className="scrollbar"
-        ref={this.scrollRef}
-      >
-        <NavItem className="className_items">
-          {elements.map((item: any, index: any) => (
-            // @ts-expect-error TS(2322): Type '{ children: Element; id: any; themeId: strin... Remove this comment to see the full error message
-            <ColorTheme
-              {...this.props}
-              id={item.id}
-              themeId={ThemeType.TabsContainer}
-              onMouseMove={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave}
-              ref={this.arrayRefs[index]}
-              onClick={() => this.onClick(index, item)}
-              key={item.key}
-              selected={activeTab === index}
-              isDisabled={isDisabled}
-            >
-              // @ts-expect-error TS(2322): Type '{ children: any; fontWeight: number; classNa... Remove this comment to see the full error message
-              <Text fontWeight={600} className="title_style" fontSize="13px">
-                {item.title}
-              </Text>
-            </ColorTheme>
-          ))}
-        </NavItem>
-      </StyledScrollbar>
-      <div>{elements[activeTab].content}</div>
-    </>;
+    return (
+      <>
+        <StyledScrollbar
+          autoHide={onScrollHide}
+          className="scrollbar"
+          ref={this.scrollRef}
+        >
+          <NavItem className="className_items">
+            {elements.map((item, index) => (
+              <ColorTheme
+                {...this.props}
+                id={item.id}
+                themeId={ThemeType.TabsContainer}
+                onMouseMove={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
+                ref={this.arrayRefs[index]}
+                onClick={() => this.onClick(index, item)}
+                key={item.key}
+                selected={activeTab === index}
+                isDisabled={isDisabled}
+              >
+                <Text fontWeight={600} className="title_style" fontSize="13px">
+                  {item.title}
+                </Text>
+              </ColorTheme>
+            ))}
+          </NavItem>
+        </StyledScrollbar>
+        <div>{elements[activeTab].content}</div>
+      </>
+    );
   }
 }
 

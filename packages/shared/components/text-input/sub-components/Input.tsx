@@ -29,7 +29,7 @@ const Input = ({
 
   return mask ? (
     <MaskedInput
-      className={`${className} not-selectable`}
+      className={`${className} input-component not-selectable`}
       keepCharPositions
       guide={false}
       mask={mask}
@@ -37,7 +37,7 @@ const Input = ({
     />
   ) : (
     <input
-      className={`${className} not-selectable`}
+      className={`${className} input-component not-selectable`}
       dir={dir}
       {...props}
       {...rest}

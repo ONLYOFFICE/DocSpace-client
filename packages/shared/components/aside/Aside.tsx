@@ -85,11 +85,7 @@ const AsidePure = (props: AsideProps) => {
       data-testid="aside"
     >
       {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
-      {withoutBodyScroll ? (
-        children
-      ) : (
-        <Scrollbar stype={ScrollbarType.mediumBlack}>{children}</Scrollbar>
-      )}
+      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
 
       {visible && (
         <StyledControlContainer className="close-button" onClick={onClose}>

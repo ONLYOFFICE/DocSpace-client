@@ -62,4 +62,8 @@ export interface TooltipProps {
   offsetTop?: number;
   offsetLeft?: number;
   reference?: React.RefObject<HTMLDivElement>;
+  /** Change the opacity of the tooltip */
+  opacity?: number;
+  /** When enabled, default tooltip behavior is disabled. */
+  imperativeModeOnly?: boolean;
 }

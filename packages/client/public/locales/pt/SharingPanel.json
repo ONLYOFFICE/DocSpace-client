@@ -9,6 +9,7 @@
   "ExternalLink": "Ligação externa",
   "FormFilling": "Preenchimento de formulário",
   "InternalLink": "Ligação interna",
+  "LinkName": "Nome do link",
   "Notify users": "Notificar os utilizadores",
   "ReadOnly": "Apenas leitura",
   "ShareEmailBody": "Foi-lhe concedido acesso ao documento {{itemName}}. Clique na ligação abaixo para abrir o documento agora mesmo: {{shareLink}}.",

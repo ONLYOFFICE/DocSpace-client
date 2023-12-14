@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "Dokumente",
+  "ErrorConnectionLost": "Verbindung ist unterbrochen",
   "FileLocation": "Dateispeicherort öffnen",
   "FileName": "Dateiname",
   "ImageFileType": "Bilder",

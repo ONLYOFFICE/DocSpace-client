@@ -11,6 +11,7 @@ import * as groups from "./groups";
 import * as files from "./files";
 import * as rooms from "./rooms";
 import * as plugins from "./plugins";
+import * as management from "./management";
 import * as oforms from "./oforms";
 import * as oauth from "./oauth";
 
@@ -30,4 +31,5 @@ export default {
   plugins,
   oforms,
   oauth,
+  management,
 };

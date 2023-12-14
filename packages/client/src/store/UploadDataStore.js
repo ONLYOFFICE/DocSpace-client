@@ -25,6 +25,10 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
+import {
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 
 const UPLOAD_LIMIT_AT_ONCE = 5;
 
@@ -1527,6 +1531,26 @@ class UploadDataStore {
     return operationItem;
   };
 
+  navigateToNewFolderLocation = async (folderId) => {
+    const { filter } = this.filesStore;
+
+    filter.folder = folderId;
+
+    try {
+      const { rootFolderType, parentId } = await getFolderInfo(folderId);
+      const path = getCategoryUrl(
+        getCategoryTypeByFolderType(rootFolderType, parentId),
+        folderId
+      );
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+        replace: true,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
     const {
       fetchFiles,
@@ -1539,6 +1563,7 @@ class UploadDataStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
     const { withPaging } = this.authStore.settingsStore;
+    const isMovingCurrentFolder = !isCopy && this.dialogsStore.isFolderActions;
 
     let receivedFolder = destFolderId;
     let updatedFolder = this.selectedFolderStore.id;
@@ -1558,6 +1583,8 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT
         );
+        isMovingCurrentFolder &&
+          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
         return;
       }
@@ -1578,6 +1605,8 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT
         );
+        isMovingCurrentFolder &&
+          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
       });
     } else {

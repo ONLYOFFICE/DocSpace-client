@@ -19,7 +19,7 @@ const ThirdPartyResources = (props) => {
       <DirectThirdPartyConnection
         className="restore-backup_input"
         onSelectFile={onSelectFile}
-        filterParam={FilesSelectorFilterTypes.GZ}
+        filterParam={FilesSelectorFilterTypes.BackupOnly}
         descriptionText={t("SelectFileInGZFormat")}
         withoutInitPath
         buttonSize={buttonSize}

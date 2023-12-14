@@ -107,6 +107,8 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
+    if (window.innerHeight < window.innerWidth) return;
+
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);

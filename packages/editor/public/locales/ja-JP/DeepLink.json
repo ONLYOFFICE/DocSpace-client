@@ -1,1 +1,6 @@
-{}
+{
+  "DeepLinkText": "ポータルまたはモバイルアプリケーションでドキュメントを開くことができます",
+  "OpenInApp": "アプリで開く",
+  "OpeningDocument": "ドキュメントを開いています",
+  "StayInBrowser": "ブラウザのまま"
+}

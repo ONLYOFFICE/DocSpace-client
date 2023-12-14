@@ -140,6 +140,9 @@ class AxiosClient {
 
       if (response.request.responseType === "text") return response.data;
 
+      if (options.baseURL === "/apisystem" && !response.data.response)
+        return response.data;
+
       return typeof response.data.response !== "undefined"
         ? response.data.response
         : response.data;
@@ -192,6 +195,10 @@ class AxiosClient {
               }, 1000);
             }
 
+            break;
+
+          case 429:
+            error = { ...error, message: "Request limit exceeded" };
             break;
           default:
             break;

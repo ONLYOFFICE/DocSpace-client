@@ -1,1 +1,12 @@
-{}
+{
+  "DeletePlugin": "Poista liitännäinen",
+  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla DocSpacen käyttäjille. Haluako varmasti jatkaa?",
+  "DeletePluginTitle": "Poistetaanko liitännäinen?",
+  "Description": "Voit lisätä liitännäiset laajentamaan DocSpacen toiminnallisuutta extraominaisuuksilla. Klikkaa ladataksesi liitännäisen ja valitse liitännäistiedosto ZIP-arkistossa.",
+  "Metadata": "Metatiedot",
+  "NeedSettings": "Tarvitsee sisäänpääsyasetukset",
+  "NoPlugins": "Ei liitännäisiä lisätty",
+  "NotNeedSettings": "Tarvitsee sisäänpääsyasetukset",
+  "PluginsHelp": "Liitännäiset mahdollistavat DocSpacen toiminnallisuuden laajentamisen ",
+  "UploadPlugin": "Lataa liitännäinen"
+}

@@ -70,7 +70,7 @@ const LinksBlock = styled.div`
   justify-content: space-between;
 
   p {
-    color: ${({ theme }) => theme.text.disableColor};
+    color: ${({ theme }) => theme.infoPanel.members.subtitleColor};
   }
 
   .link-to-viewing-icon {

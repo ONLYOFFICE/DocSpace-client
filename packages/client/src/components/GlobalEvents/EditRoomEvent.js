@@ -45,6 +45,7 @@ const EditRoomEvent = ({
   removeLogoPaths,
 
   reloadInfoPanelSelection,
+  changeRoomOwner,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -97,6 +98,8 @@ const EditRoomEvent = ({
       title: roomParams.title || t("Files:NewRoom"),
     };
 
+    const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
+
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
     const removedTags = startTags.filter((sT) => !tags.includes(sT));
@@ -106,6 +109,10 @@ const EditRoomEvent = ({
 
     try {
       setIsLoading(true);
+
+      if (isOwnerChanged) {
+        await changeRoomOwner(t, roomParams?.roomOwner?.id);
+      }
 
       let room = await editRoom(item.id, editRoomParams);
 
@@ -259,7 +266,7 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder } = filesActionsStore;
+    const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
     const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = auth.settingsStore;
@@ -297,6 +304,7 @@ export default inject(
       removeLogoPaths,
 
       reloadInfoPanelSelection,
+      changeRoomOwner,
     };
   }
 )(observer(EditRoomEvent));

@@ -2,5 +2,6 @@
   "LblInviteAgain": "再次邀请",
   "MessageEmailActivationInstuctionsSentOnEmail": "邮件激活指示已发送至<1>{{email}}</1>邮件地址。",
   "NotFoundUsers": "未找到用户",
+  "NotFoundUsersDescription": "没有与您搜索条件匹配的用户。请调整搜索参数或清除搜索字段，查看完整的用户列表。",
   "UserStatus": "状态"
 }

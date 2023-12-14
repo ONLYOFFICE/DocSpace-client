@@ -50,5 +50,9 @@
   "WebhookEditedSuccessfully": "La configuration du webhook a été modifiée avec succès",
   "WebhookHistory": "Historique des webhooks",
   "WebhookName": "Nom du webhook",
-  "WebhookRedilivered": "Webhook redélivré"
+  "WebhookRedilivered": "Webhook redélivré",
+  "WebhookRemoved": "Webhook supprimé",
+  "Webhooks": "Webhooks",
+  "WebhooksGuide": "Guide sur les webhooks",
+  "WebhooksInfo": "Utilisez les webhooks pour effectuer des actions personnalisées sur le côté de n'importe quelle application ou site web que vous utilisez en fonction de divers événements dans ONLYOFFICE DocSpace."
 }

@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Plugin verwijderen",
+  "DeletePluginDescription": "Deze plug-in zal niet langer beschikbaar zijn voor DocSpace gebruikers. Weet u zeker dat u door wilt gaan?",
+  "DeletePluginTitle": "Plug-in verwijderen?",
+  "Description": "U kunt plug-ins toevoegen om de functionaliteit van DocSpace uit te breiden met extra functies. Klik op Plug-in uploaden en selecteer het plugin-bestand in het ZIP-archief.",
+  "Metadata": "Metadata",
+  "NeedSettings": "Instellingen invoeren",
+  "NoPlugins": "Geen plug-ins toegevoegd",
+  "PluginsHelp": "Met plug-ins kunt u de functionaliteit van DocSpace uitbreiden",
+  "UploadPlugin": "Upload plug-in"
+}

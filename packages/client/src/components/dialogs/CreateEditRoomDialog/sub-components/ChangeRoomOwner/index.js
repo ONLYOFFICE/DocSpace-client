@@ -14,6 +14,8 @@ const ChangeRoomOwner = ({
   onOwnerChange,
   currentColorScheme,
 }) => {
+  const userName = roomOwner.displayName ?? roomOwner.label;
+
   return (
     <Styled.ChangeRoomOwner>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
@@ -26,12 +28,12 @@ const ChangeRoomOwner = ({
           size="base"
           role={""}
           isDefaultSource={roomOwner.hasAvatar}
-          source={roomOwner.avatarSmall}
-          userName={roomOwner.displayName}
+          source={roomOwner.avatarSmall ?? roomOwner.avatar}
+          userName={userName}
         />
         <div className="change-owner-display-name">
           <Text fontWeight={600} fontSize="13px">
-            {roomOwner.displayName}
+            {userName}
           </Text>
           {roomOwner.id === currentUserId && (
             <Text className="me-label">({t("Common:MeLabel")})</Text>

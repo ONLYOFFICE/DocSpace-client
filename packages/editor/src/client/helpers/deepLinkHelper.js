@@ -29,7 +29,7 @@ function DeepLinker(options) {
           if (!didHide) {
             options.onFallback();
           }
-        }, 1000);
+        }, 3000);
       }
     }
 

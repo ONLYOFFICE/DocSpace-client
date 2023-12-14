@@ -116,12 +116,8 @@ class SettingsSetupStore {
           case "admin-message":
             break;
           case "lifetime":
-            if (
-              !authStore.settingsStore.enabledSessionLifetime ||
-              !authStore.settingsStore.sessionLifetime
-            ) {
-              await authStore.settingsStore.getSessionLifetime();
-            }
+            await authStore.settingsStore.getSessionLifetime();
+
             break;
 
           default:

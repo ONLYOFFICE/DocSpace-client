@@ -24,6 +24,7 @@
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
+    checkCSP: true,
     filter: {
       count: 100,
       page: 1,
@@ -311,10 +312,12 @@
 
       const target = document.getElementById(this.config.frameId);
 
-      this.#cspInstalled = checkCSP(
-        this.config.src,
-        this.config.events.onAppError
-      );
+      if (this.config.checkCSP) {
+        this.#cspInstalled = checkCSP(
+          this.config.src,
+          this.config.events.onAppError
+        );
+      }
 
       if (target) {
         this.#iframe = this.#createIframe(this.config);

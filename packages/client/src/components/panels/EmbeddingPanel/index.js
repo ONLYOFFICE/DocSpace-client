@@ -55,7 +55,7 @@ const EmbeddingPanelComponent = (props) => {
             {t("Files:EmbeddingSettings")}
           </Heading>
         </div>
-        <StyledScrollbar ref={scrollRef} stype="mediumBlack">
+        <StyledScrollbar ref={scrollRef}>
           <EmbeddingBody
             t={t}
             link={link}

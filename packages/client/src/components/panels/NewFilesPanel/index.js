@@ -278,7 +278,7 @@ const NewFilesPanel = (props) => {
           </StyledHeaderContent>
           {!isLoading ? (
             <StyledBody className="files-operations-body">
-              <StyledSharingBody stype="mediumBlack" style={SharingBodyStyle}>
+              <StyledSharingBody style={SharingBodyStyle}>
                 {filesListNode}
               </StyledSharingBody>
             </StyledBody>

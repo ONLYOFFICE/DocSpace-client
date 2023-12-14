@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { CreateRoomDialog } from "../dialogs";
 
 const CreateRoomEvent = ({
+  title,
   visible,
   onClose,
 
@@ -57,6 +58,7 @@ const CreateRoomEvent = ({
 
   return (
     <CreateRoomDialog
+      title={title}
       t={t}
       visible={
         visible &&

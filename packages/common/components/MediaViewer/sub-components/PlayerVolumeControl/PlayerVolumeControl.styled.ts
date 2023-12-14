@@ -1,6 +1,6 @@
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
 import styled, { css } from "styled-components";
+
+import { tablet } from "@docspace/components/utils/device";
 
 export const PlayerVolumeControlWrapper = styled.div`
   display: flex;
@@ -143,5 +143,7 @@ export const VolumeWrapper = styled.div`
     }
   }
 
-  ${isMobile && mobilecss}
+  @media ${tablet} {
+    ${mobilecss}
+  }
 `;

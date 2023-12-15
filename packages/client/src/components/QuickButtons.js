@@ -9,7 +9,7 @@ import React from "react";
 import styled from "styled-components";
 import IconButton from "@docspace/components/icon-button";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "@docspace/components/utils/device";
+import { isTablet, isMobile } from "@docspace/components/utils/device";
 import {
   FileStatus,
   RoomsType,
@@ -92,6 +92,11 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
+  const onShare = () => {
+    if (isMobile()) return;
+    onClickShare();
+  };
+
   return (
     <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
@@ -141,7 +146,7 @@ const QuickButtons = (props) => {
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
-          onClick={onClickShare}
+          onClick={onShare}
           color={colorShare}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}

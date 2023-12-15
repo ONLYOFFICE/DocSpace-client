@@ -41,8 +41,12 @@ import { ModalDialog, ModalDialogType } from "./modal-dialog";
 import { DropDownItem } from "./drop-down-item";
 import { DropDown } from "./drop-down";
 import { ComboBox, ComboBoxDisplayType, ComboBoxSize } from "./combobox";
+import { RoomLogo } from "./room-logo";
+import { MainButton } from "./main-button";
 
 export {
+  MainButton,
+  RoomLogo,
   ComboBox,
   ComboBoxDisplayType,
   ComboBoxSize,

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import NoUserSelect from "../utils/commonStyles";
-import Base from "../themes/base";
+import { NoUserSelect } from "../../utils";
+import { TColorScheme, TTheme, Base } from "../../themes";
 
 const hoveredCss = css`
   background-color: ${(props) => props.theme.mainButton.hoverBackgroundColor};
@@ -33,7 +33,10 @@ const GroupMainButton = styled.div`
   grid-template-columns: 1fr;
 `;
 
-const StyledMainButton = styled.div`
+const StyledMainButton = styled.div<{
+  isDisabled?: boolean;
+  isDropdown?: boolean;
+}>`
   ${NoUserSelect}
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -44,7 +47,6 @@ const StyledMainButton = styled.div`
   box-sizing: border-box;
 
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     props.isDisabled
       ? `${props.theme.mainButton.disableBackgroundColor}`
       : `${props.theme.mainButton.backgroundColor}`};
@@ -56,15 +58,14 @@ const StyledMainButton = styled.div`
   line-height: ${(props) => props.theme.mainButton.lineHeight};
   border-radius: 3px;
 
-  // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
   ${(props) => !props.isDisabled && notDisableStyles}
-  // @ts-expect-error TS(2339): Property 'isDropdown' does not exist on type 'Them... Remove this comment to see the full error message
+
   ${(props) => !props.isDropdown && notDropdown}
 
-    & > svg {
+  & > svg {
     display: block;
-    margin: ${(props) => props.theme.mainButton.margin};
-    height: ${(props) => props.theme.mainButton.height};
+    margin: ${(props) => props.theme.mainButton.svg.margin};
+    height: ${(props) => props.theme.mainButton.svg.height};
   }
 
   .main-button_text {
@@ -73,7 +74,6 @@ const StyledMainButton = styled.div`
       props.theme.getCorrectFontSize(props.theme.mainButton.fontSize)};
     font-weight: ${(props) => props.theme.mainButton.fontWeight};
     color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       !props.isDisabled
         ? props.theme.mainButton.textColor
         : props.theme.mainButton.textColorDisabled};
@@ -91,3 +91,62 @@ const StyledMainButton = styled.div`
 StyledMainButton.defaultProps = { theme: Base };
 
 export { StyledMainButton, GroupMainButton };
+
+const disableStyles = css`
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &:active {
+    opacity: 0.6;
+    cursor: default;
+    filter: none;
+  }
+`;
+
+const getDefaultStyles = ({
+  $currentColorScheme,
+  isDisabled,
+  theme,
+}: {
+  $currentColorScheme?: TColorScheme;
+  theme: TTheme;
+  isDisabled?: boolean;
+}) =>
+  $currentColorScheme &&
+  css`
+    background-color: ${$currentColorScheme.main.accent};
+
+    &:hover {
+      background-color: ${$currentColorScheme.main.accent};
+      opacity: 0.85;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: ${$currentColorScheme.main.accent};
+      opacity: 1;
+      filter: ${theme.isBase ? "brightness(90%)" : "brightness(82%)"};
+      cursor: pointer;
+    }
+
+    .main-button_text {
+      color: ${$currentColorScheme.text.accent};
+    }
+
+    .main-button_img svg path {
+      fill: ${$currentColorScheme.text.accent};
+    }
+
+    ${isDisabled &&
+    `
+    ${disableStyles}
+    `}
+  `;
+
+const StyledThemeMainButton = styled(StyledMainButton)(getDefaultStyles);
+
+export { StyledThemeMainButton };

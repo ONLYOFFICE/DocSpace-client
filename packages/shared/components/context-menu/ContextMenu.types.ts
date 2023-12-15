@@ -33,7 +33,7 @@ export type ContextMenuType = {
 export type SeparatorType = {
   key: string | number;
   isSeparator: boolean;
-  disabled: boolean;
+  disabled?: boolean;
   className?: string;
   disableColor?: string;
   isLoader?: boolean;

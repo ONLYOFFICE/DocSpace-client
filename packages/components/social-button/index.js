@@ -17,20 +17,16 @@ class SocialButton extends React.Component {
       this.props;
     return (
       <StyledSocialButton isConnect={isConnect} {...otherProps}>
-        <div>
-          {IconComponent ? (
-            <IconComponent className="iconWrapper" />
-          ) : (
-            <ReactSVG className="iconWrapper" src={iconName} />
-          )}
-        </div>
-        <div>
-          {label && (
-            <Text as="span" className="social_button_text">
-              {label}
-            </Text>
-          )}
-        </div>
+        {IconComponent ? (
+          <IconComponent className="iconWrapper" />
+        ) : (
+          <ReactSVG className="iconWrapper" src={iconName} />
+        )}
+        {label && (
+          <Text as="div" className="social_button_text">
+            {label}
+          </Text>
+        )}
       </StyledSocialButton>
     );
   }

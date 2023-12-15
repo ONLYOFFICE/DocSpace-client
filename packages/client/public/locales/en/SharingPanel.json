@@ -19,6 +19,7 @@
   "GeneralAccessLinkCreated": "General link for public viewing successfully created and copied to clipboard",
   "GeneralAccessLinkRemove": "General access link remove",
   "InternalLink": "Internal link",
+  "LinkAccessDenied": "Access to the link has been denied",
   "LinkName": "Link name",
   "LinkExpireAfter": "The link will expire after <1>{{date}}</1>",
   "LinkExpired": "The link has expired.",

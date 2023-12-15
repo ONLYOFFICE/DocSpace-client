@@ -45,6 +45,8 @@ import { RoomLogo } from "./room-logo";
 import { MainButton } from "./main-button";
 import { FloatingButton, FloatingButtonIcons } from "./floating-button";
 
+export type { TFallbackAxisSideDirection, TTooltipPlace, TGetTooltipContent };
+
 export {
   FloatingButton,
   FloatingButtonIcons,
@@ -101,8 +103,5 @@ export {
   CustomScrollbarsVirtualList,
   Text,
   Tooltip,
-  TFallbackAxisSideDirection,
-  TTooltipPlace,
-  TGetTooltipContent,
   ToggleButton,
 };

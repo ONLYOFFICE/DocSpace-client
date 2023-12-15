@@ -104,7 +104,14 @@ const Item = ({
   const onClickAction = React.useCallback(
     (folderId) => {
       setBufferSelection(null);
-      onClick && onClick(folderId, item.title, item.rootFolderType);
+
+      onClick &&
+        onClick(
+          folderId,
+          item.title,
+          item.rootFolderType,
+          item.security.Create
+        );
     },
     [onClick, item.title, item.rootFolderType]
   );

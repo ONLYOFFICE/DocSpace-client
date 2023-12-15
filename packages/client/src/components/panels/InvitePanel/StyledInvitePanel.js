@@ -470,6 +470,12 @@ const StyledInviteLanguage = styled.div`
       }
     }
   }
+
+  .language-combo-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
 `;
 const StyledCrossIconMobile = styled(CrossIconMobile)`
   width: 17px;

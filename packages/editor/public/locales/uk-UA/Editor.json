@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "документи",
+  "ErrorConnectionLost": "З'єднання втрачено",
   "FileLocation": "Перейти до документів",
   "FileName": "Ім'я файлу",
   "ImageFileType": "картинки",

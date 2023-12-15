@@ -24,6 +24,7 @@
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
+    checkCSP: true,
     filter: {
       count: 100,
       page: 1,
@@ -196,7 +197,7 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.loading = "lazy";
+      //iframe.loading = "lazy";
       iframe.allowFullscreen = true;
       iframe.setAttribute("allowfullscreen", "");
       iframe.setAttribute("allow", "autoplay");
@@ -306,15 +307,17 @@
     };
 
     initFrame(config) {
-      const configFull = Object.assign(defaultConfig, config);
-      this.config = Object.assign(this.config, configFull);
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
 
-      this.#cspInstalled = checkCSP(
-        this.config.src,
-        this.config.events.onAppError
-      );
+      if (this.config.checkCSP) {
+        this.#cspInstalled = checkCSP(
+          this.config.src,
+          this.config.events.onAppError
+        );
+      }
 
       if (target) {
         this.#iframe = this.#createIframe(this.config);

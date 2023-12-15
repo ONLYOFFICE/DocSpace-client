@@ -676,3 +676,8 @@ export const getEditorTheme = (theme) => {
       return "default-dark";
   }
 };
+
+const languages: string[] = ["ar-SA"];
+export const isBetaLanguage = (language: string): boolean => {
+  return languages.includes(language);
+};

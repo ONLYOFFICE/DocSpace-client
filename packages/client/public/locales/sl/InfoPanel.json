@@ -28,6 +28,7 @@
   "FeedUpdateUser": "je bila dodeljena vloga {{role}}",
   "FileExtension": "Končnica datoteke",
   "FilesEmptyScreenText": "Tukaj si oglejte podrobnosti o datotekah in mapah",
+  "GalleryEmptyScreenText": "Oglejte si podrobnosti predloge obrazca tukaj",
   "HistoryEmptyScreenText": "Tukaj bo prikazana zgodovina aktivnosti",
   "InfoBanner": "Seznam povabljenih uporabnikov vključuje lastnika in/ali skrbnike tega prostora DocSpace s polnim dostopom do vseh sob. Lastniku in/ali skrbniku ni mogoče dodeliti drugih pravic dostopa. Ko bodo dodani v sobo, bodo obveščeni o vseh spremembah.",
   "ItemsSelected": "Predmeti izbrani",

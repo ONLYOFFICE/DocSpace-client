@@ -1,6 +1,6 @@
 {
   "DocumentsFileType": "dökümanlar",
-  "ErrorConnectionLost": "Bağlantı koptu",
+  "ErrorConnectionLost": "Bağlantı kesildi",
   "FileLocation": "Dosya konumunu aç",
   "FileName": "Dosya Adı",
   "ImageFileType": "görüntüler",

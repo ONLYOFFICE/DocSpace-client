@@ -81,6 +81,9 @@ const ClientForm = ({
   });
 
   const [errorFields, setErrorFields] = React.useState<string[]>([]);
+  const [requiredErrorFields, setRequiredErrorFields] = React.useState<
+    string[]
+  >([]);
 
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -99,6 +102,41 @@ const ClientForm = ({
   const onSaveClick = async () => {
     try {
       if (!id) {
+        let isValid = true;
+        for (let key in form) {
+          switch (key) {
+            case "name":
+            case "logo":
+            case "website_url":
+            case "terms_url":
+            case "policy_url":
+              if (form[key] === "") {
+                if (!requiredErrorFields.includes(key))
+                  setRequiredErrorFields((s) => [...s, key]);
+
+                isValid = false;
+              }
+              isValid = isValid && !errorFields.includes(key);
+
+              break;
+
+            case "redirect_uris":
+            case "allowed_origins":
+            case "scopes":
+              if (form[key].length === 0) {
+                if (!requiredErrorFields.includes(key))
+                  setRequiredErrorFields((s) => [...s, key]);
+
+                isValid = false;
+              }
+              isValid = isValid && !errorFields.includes(key);
+
+              break;
+          }
+        }
+
+        if (!isValid) return;
+
         setIsRequestRunning(true);
 
         await saveClient?.(form);
@@ -299,8 +337,10 @@ const ClientForm = ({
     for (let key in form) {
       switch (key) {
         case "name":
-          isValid = isValid && !!form[key];
-
+        case "logo":
+        case "website_url":
+        case "terms_url":
+        case "policy_url":
           if (
             errorFields.includes(key) &&
             (!form[key] || (form[key].length > 2 && form[key].length < 256))
@@ -310,73 +350,17 @@ const ClientForm = ({
             });
           }
 
-          isValid = isValid && !errorFields.includes(key);
+          if (requiredErrorFields.includes(key) && form[key] !== "")
+            setRequiredErrorFields((value) => value.filter((v) => v !== key));
 
           break;
-        case "logo":
-          isValid = isValid && !!form[key];
 
-          break;
-        case "description":
-          // isValid = isValid && !!form[key];
-
-          break;
-        case "website_url":
-          isValid = isValid && !!form[key];
-
-          if (
-            errorFields.includes(key) &&
-            (!form[key] || isValidUrl(form[key]))
-          ) {
-            setErrorFields((value) => {
-              return value.filter((n) => n !== key);
-            });
-          }
-
-          break;
         case "redirect_uris":
-          isValid = isValid && form[key].length > 0;
-
-          break;
         case "allowed_origins":
-          isValid = isValid && form[key].length > 0;
-
-          break;
-        case "logout_redirect_uris":
-          isValid = isValid;
-
-          break;
-        case "terms_url":
-          isValid = isValid && !!form[key];
-
-          if (
-            errorFields.includes(key) &&
-            (!form[key] || isValidUrl(form[key]))
-          ) {
-            setErrorFields((value) => {
-              return value.filter((n) => n !== key);
-            });
-          }
-
-          break;
-        case "policy_url":
-          isValid = isValid && !!form[key];
-
-          if (
-            errorFields.includes(key) &&
-            (!form[key] || isValidUrl(form[key]))
-          ) {
-            setErrorFields((value) => {
-              return value.filter((n) => n !== key);
-            });
-          }
-
-          break;
-        case "authentication_method":
-          isValid = isValid;
-          break;
         case "scopes":
-          isValid = isValid && form[key].length > 0;
+          if (requiredErrorFields.includes(key) && form[key].length > 0)
+            setRequiredErrorFields((value) => value.filter((v) => v !== key));
+
           break;
       }
     }
@@ -406,6 +390,7 @@ const ClientForm = ({
               changeValue={onChangeForm}
               isEdit={isEdit}
               errorFields={errorFields}
+              requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
             {isEdit && (
@@ -422,6 +407,7 @@ const ClientForm = ({
               allowedOriginsValue={form.allowed_origins}
               changeValue={onChangeForm}
               isEdit={isEdit}
+              requiredErrorFields={requiredErrorFields}
             />
             <ScopesBlock
               t={t}
@@ -437,6 +423,7 @@ const ClientForm = ({
               changeValue={onChangeForm}
               isEdit={isEdit}
               errorFields={errorFields}
+              requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
             <ButtonsBlock
@@ -445,7 +432,7 @@ const ClientForm = ({
               onSaveClick={onSaveClick}
               onCancelClick={onCancelClick}
               isRequestRunning={isRequestRunning}
-              saveButtonDisabled={!isValid}
+              saveButtonDisabled={isEdit ? !isValid : false}
               cancelButtonDisabled={isRequestRunning}
               currentDeviceType={currentDeviceType || ""}
             />

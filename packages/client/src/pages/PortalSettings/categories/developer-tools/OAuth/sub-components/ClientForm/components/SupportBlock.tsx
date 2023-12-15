@@ -15,6 +15,7 @@ interface SupportBlockProps {
   isEdit: boolean;
   errorFields: string[];
   onBlur?: (name: string) => void;
+  requiredErrorFields: string[];
 }
 
 const SupportBlock = ({
@@ -27,12 +28,18 @@ const SupportBlock = ({
   isEdit,
   errorFields,
   onBlur,
+  requiredErrorFields,
 }: SupportBlockProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
     changeValue(target.name, target.value);
   };
+
+  const policyRequiredError = requiredErrorFields.includes("policy_url");
+  const termsRequiredError = requiredErrorFields.includes("terms_url");
+  const policyError = errorFields.includes("policy_url");
+  const termsError = errorFields.includes("terms_url");
 
   return (
     <StyledBlock>
@@ -43,12 +50,16 @@ const SupportBlock = ({
           name={"policy_url"}
           placeholder={t("EnterURL")}
           value={policyUrlValue}
-          error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
+          error={
+            policyError
+              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              : t("ThisRequiredField")
+          }
           onChange={onChange}
           helpButtonText={t("PrivacyPolicyURLHelpButton")}
           disabled={isEdit}
           isRequired
-          isError={errorFields.includes("policy_url")}
+          isError={policyError || policyRequiredError}
           onBlur={onBlur}
         />
         <InputGroup
@@ -56,12 +67,16 @@ const SupportBlock = ({
           name={"terms_url"}
           placeholder={t("EnterURL")}
           value={termsUrlValue}
-          error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
+          error={
+            termsError
+              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              : t("ThisRequiredField")
+          }
           onChange={onChange}
-          helpButtonText={t("TermsOfServiceURLHelpButton")}
+          helpButtonText={t("TermsOfServiceURLHelpButton")} 
           disabled={isEdit}
           isRequired
-          isError={errorFields.includes("terms_url")}
+          isError={termsError || termsRequiredError}
           onBlur={onBlur}
         />
       </StyledInputBlock>

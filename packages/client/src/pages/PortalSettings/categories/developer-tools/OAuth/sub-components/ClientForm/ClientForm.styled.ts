@@ -34,6 +34,10 @@ const StyledBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  .icon-field {
+    margin: 0;
+  }
 `;
 
 const StyledHeaderRow = styled.div`

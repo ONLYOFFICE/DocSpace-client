@@ -63,6 +63,7 @@
   "TermsOfService": "Terms of Service",
   "TermsOfServiceURL": "Terms of Service URL",
   "TermsOfServiceURLHelpButton": "Terms and conditions that users must comply with when using this application.",
+  "ThisRequiredField": "This is a required field",
   "WebsiteUrl": "Website URL",
   "Write": "Write"
 }

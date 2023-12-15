@@ -114,6 +114,7 @@ const InputGroup = ({
                 onIconClick={withCopy && onCopyClick}
                 type={isPassword ? "password" : "text"}
                 onBlur={() => onBlur?.(name)}
+                hasError={isError}
               />
             )}
             {buttonLabel && (

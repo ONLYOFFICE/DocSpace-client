@@ -1,8 +1,10 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-//@ts-ignore
+// @ts-ignore
 import HelpButton from "@docspace/components/help-button";
+// @ts-ignore
+import FieldContainer from "@docspace/components/field-container";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -26,6 +28,7 @@ interface BasicBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  requiredErrorFields: string[];
   onBlur: (name: string) => void;
 }
 
@@ -75,6 +78,7 @@ const BasicBlock = ({
 
   isEdit,
   errorFields,
+  requiredErrorFields,
   onBlur,
 }: BasicBlockProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,6 +137,12 @@ const BasicBlock = ({
     <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
 
+  const isNameRequiredError = requiredErrorFields.includes("name");
+  const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
+  const isNameError = errorFields.includes("name");
+  const isWebsiteError = errorFields.includes("website_url");
+  const isLogoRequiredError = requiredErrorFields.includes("logo");
+
   return (
     <StyledBlock>
       <BlockHeader header={"Basic info"} />
@@ -142,10 +152,10 @@ const BasicBlock = ({
           name={"name"}
           placeholder={t("Common:EnterName")}
           value={nameValue}
-          error={`${t("ErrorName")} 3`}
+          error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
           onChange={onChange}
           isRequired
-          isError={errorFields.includes("name")}
+          isError={isNameRequiredError || isNameError}
           onBlur={onBlur}
         />
         <InputGroup
@@ -153,26 +163,40 @@ const BasicBlock = ({
           name={"website_url"}
           placeholder={t("EnterURL")}
           value={websiteUrlValue}
-          error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
+          error={
+            isWebsiteError
+              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              : t("ThisRequiredField")
+          }
           onChange={onChange}
           disabled={isEdit}
           isRequired
-          isError={errorFields.includes("website_url")}
+          isError={isWebsiteRequiredError || isWebsiteError}
           onBlur={onBlur}
         />
-        <SelectGroup
-          label={t("AppIcon")}
-          value={logoValue}
-          selectLabel={t("SelectNewImage")}
-          description={t("IconDescription")}
-          onSelect={onSelect}
-        />
+        <FieldContainer
+          isVertical
+          labelVisible={false}
+          errorMessage={t("ThisRequiredField")}
+          hasError={isLogoRequiredError}
+          className="icon-field"
+        >
+          <SelectGroup
+            label={t("AppIcon")}
+            value={logoValue}
+            selectLabel={t("SelectNewImage")}
+            description={t("IconDescription")}
+            onSelect={onSelect}
+          />
+        </FieldContainer>
+
         <TextAreaGroup
           label={t("Common:Description")}
           name={"description"}
           placeholder={t("EnterDescription")}
           value={descriptionValue}
           onChange={onChange}
+          increaseHeight={isLogoRequiredError}
         />
         <InputGroup
           label={t("AuthenticationMethod")}

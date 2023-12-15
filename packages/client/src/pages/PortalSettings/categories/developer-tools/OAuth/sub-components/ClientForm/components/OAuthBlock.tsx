@@ -11,6 +11,7 @@ interface OAuthBlockProps {
   allowedOriginsValue: string[];
 
   changeValue: (name: string, value: string) => void;
+  requiredErrorFields: string[];
 
   isEdit: boolean;
 }
@@ -21,7 +22,7 @@ const OAuthBlock = ({
   allowedOriginsValue,
 
   changeValue,
-
+  requiredErrorFields,
   isEdit,
 }: OAuthBlockProps) => {
   return (
@@ -37,6 +38,7 @@ const OAuthBlock = ({
           currentValue={redirectUrisValue}
           helpButtonText={t("RedirectsURLSHelpButton")}
           isDisabled={isEdit}
+          hasError={requiredErrorFields.includes("redirect_uris")}
         />
         <MultiInputGroup
           t={t}
@@ -46,6 +48,7 @@ const OAuthBlock = ({
           onAdd={changeValue}
           currentValue={allowedOriginsValue}
           helpButtonText={t("AllowedOriginsHelpButton")}
+          hasError={requiredErrorFields.includes("allowed_origins")}
         />
       </StyledInputBlock>
     </StyledBlock>

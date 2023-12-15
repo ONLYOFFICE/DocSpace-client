@@ -24,7 +24,7 @@ interface MultiInputGroupProps {
   name: string;
   placeholder: string;
   currentValue: string[];
-
+  hasError?: boolean;
   onAdd: (name: string, value: string, remove?: boolean) => void;
 
   helpButtonText?: string;
@@ -39,7 +39,7 @@ const MultiInputGroup = ({
   placeholder,
   currentValue,
   onAdd,
-
+  hasError,
   helpButtonText,
   isDisabled,
 }: MultiInputGroupProps) => {
@@ -74,9 +74,13 @@ const MultiInputGroup = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        error={`${t("ErrorWrongURL")}: ${window.location.origin}`}
+        error={
+          isError
+            ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+            : t("ThisRequiredField")
+        }
         isRequired
-        isError={isError}
+        isError={isError || hasError}
       >
         <StyledInputRow>
           <InputBlock
@@ -89,6 +93,7 @@ const MultiInputGroup = ({
             maxLength={255}
             isDisabled={isDisabled}
             onBlur={onBlur}
+            hasError={isError || hasError}
           />
           <SelectorAddButton
             onClick={() => {

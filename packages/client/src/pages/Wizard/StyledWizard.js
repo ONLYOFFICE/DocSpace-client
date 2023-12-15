@@ -154,6 +154,12 @@ export const StyledInfo = styled.div`
         : `padding-left: 8px;`}
   }
 
+  .wrapper__language-selector {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
   .combo-button-label {
     max-width: 220px;
 

@@ -16,7 +16,7 @@ export interface CheckboxProps {
   /** Disables the Checkbox input */
   isDisabled?: boolean;
   /** Is triggered whenever the CheckboxInput is clicked */
-  onChange?: () => {};
+  onChange?: () => void;
   /** Accepts class */
   className?: string;
   /** Accepts css style */

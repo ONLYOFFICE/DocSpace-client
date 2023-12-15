@@ -7,7 +7,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
-import { Scrollbar, ScrollbarType } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 import {
   ContextMenuModel,
   ContextMenuType,

@@ -17,3 +17,12 @@ export const enum ErrorKeys {
   ManyEmails = "ManyEmails",
   EmptyEmail = "EmptyEmail",
 }
+
+export const enum RoomsType {
+  // FillingFormsRoom: 1, //TODO: Restore when certs will be done
+  EditingRoom = 2,
+  // ReviewRoom: 3, //TODO: Restore when certs will be done
+  // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
+  PublicRoom = 6,
+  CustomRoom = 5,
+}

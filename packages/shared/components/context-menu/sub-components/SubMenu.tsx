@@ -17,7 +17,7 @@ import {
 } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
-import { Scrollbar, ScrollbarType } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 import { ToggleButton } from "../../toggle-button";
 
 import { SubMenuItem } from "../ContextMenu.styled";

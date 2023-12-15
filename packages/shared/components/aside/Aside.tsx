@@ -1,7 +1,7 @@
 import React from "react";
 import { isMobileOnly, isIOS } from "react-device-detect";
 
-import { Scrollbar, ScrollbarType } from "../scrollbar";
+import { Scrollbar } from "../scrollbar";
 
 import {
   StyledAside,

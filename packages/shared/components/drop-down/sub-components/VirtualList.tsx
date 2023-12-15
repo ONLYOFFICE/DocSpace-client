@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { VariableSizeList } from "react-window";
 
-import { Scrollbar, ScrollbarType } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 
 import { VirtualListProps } from "../DropDown.types";
 

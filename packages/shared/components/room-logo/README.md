@@ -5,7 +5,7 @@ Room logo allow you display default room logo depend on type and private
 ### Usage
 
 ```js
-import RoomLogo from "@docspace/components/room-logo";
+import { RoomLogo } from "@docspace/shared/components";
 ```
 
 ```jsx

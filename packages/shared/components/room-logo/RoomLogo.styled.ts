@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { Base } from "../../themes";
 
 const StyledContainer = styled.div`
   width: 32px;
@@ -27,6 +28,8 @@ const StyledContainer = styled.div`
     }
   }
 `;
+
+StyledContainer.defaultProps = { theme: Base };
 
 const StyledLogoContainer = styled.div`
   width: 32px;

@@ -15,7 +15,10 @@ const MainButton = (props: MainButtonProps) => {
   const { id, ...rest } = props;
 
   const ref = useRef(null);
-  const menuRef = useRef(null);
+  const menuRef = useRef<null | {
+    show: (e: React.MouseEvent) => void;
+    hide: (e: React.MouseEvent) => void;
+  }>(null);
 
   const [isOpen, setIsOpen] = useState(opened);
 
@@ -24,10 +27,7 @@ const MainButton = (props: MainButtonProps) => {
   const toggle = (e: React.MouseEvent, isOpenProp: boolean) => {
     if (!menuRef.current) return;
 
-    const menu = menuRef.current as {
-      show: (e: React.MouseEvent) => void;
-      hide: (e: React.MouseEvent) => void;
-    };
+    const menu = menuRef.current;
 
     if (isOpenProp) {
       menu.show(e);

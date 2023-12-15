@@ -75,10 +75,8 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const buttonBackground = useRef<boolean>(false);
 
   useEffect(() => {
-    if (opened !== isOpen) {
-      setIsOpen(opened);
-    }
-  }, [isOpen, opened]);
+    setIsOpen(opened);
+  }, [opened]);
 
   const setDialogBackground = (scrollHeight: number) => {
     if (!buttonBackground) {

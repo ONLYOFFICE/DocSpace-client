@@ -346,6 +346,14 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     setShowMobileMenu(false);
   };
 
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return { show, hide };
+    },
+    [hide, show],
+  );
+
   const renderContextMenu = () => {
     const currentClassName = className
       ? classNames("p-contextmenu p-component", className) ||

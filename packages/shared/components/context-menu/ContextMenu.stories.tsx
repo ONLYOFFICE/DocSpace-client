@@ -31,7 +31,10 @@ type Story = StoryObj<typeof ContextMenu>;
 export default meta;
 
 const Template = () => {
-  const cm = useRef<HTMLDivElement>(null);
+  const cm = useRef<{
+    show: (e: React.MouseEvent) => void;
+    hide: (e: React.MouseEvent) => {};
+  }>(null);
   const items: ContextMenuModel[] = [
     {
       key: 0,
@@ -161,8 +164,9 @@ const Template = () => {
           color: "#fff",
           fontSize: "18px",
         }}
-        // @ts-expect-error Fix warning
-        onContextMenu={(e) => cm.current?.show(e)}
+        onContextMenu={(e) => {
+          cm.current?.show(e);
+        }}
       >
         Right click on me
       </div>

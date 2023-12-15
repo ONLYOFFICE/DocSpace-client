@@ -2,6 +2,7 @@
   "Categories": "カテゴリー",
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした",
   "ErrorViewDescription": "後で再試行してください",
+  "ErrorViewHeader": "フォームギャラリーは一時的に利用できません",
   "SelectForm": "フォームの選択",
   "SubmitToGalleryBlockBody": "ONLYOFFICEコミュニティで共有するためにテンプレートを投稿してください。",
   "SubmitToGalleryBlockHeader": "ONLYOFFICEフォームライブラリ",

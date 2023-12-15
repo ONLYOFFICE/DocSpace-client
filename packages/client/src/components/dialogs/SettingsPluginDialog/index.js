@@ -87,7 +87,12 @@ const SettingsPluginDialog = ({
           setSaveButtonProps={setSaveButtonProps}
           setModalRequestRunning={setModalRequestRunning}
         />
-        <Info t={t} plugin={plugin} withDelete={withDelete} />
+        <Info
+          t={t}
+          plugin={plugin}
+          withDelete={withDelete}
+          withSeparator={!!customSettingsProps?.children}
+        />
         {withDelete && (
           <Button
             label={t("DeletePlugin")}

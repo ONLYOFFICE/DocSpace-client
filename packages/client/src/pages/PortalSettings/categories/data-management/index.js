@@ -66,7 +66,6 @@ const DataManagementWrapper = (props) => {
               <Box as={"span"} marginProp="10px 0 0">
                 <Link
                   id="link-tooltip"
-                  color="#333333"
                   fontSize="13px"
                   href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
                   target="_blank"

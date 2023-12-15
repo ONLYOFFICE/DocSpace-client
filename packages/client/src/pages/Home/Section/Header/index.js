@@ -991,6 +991,7 @@ const SectionHeaderContent = (props) => {
   }
 
   const stateTitle = location?.state?.title;
+  const stateCanCreate = location?.state?.canCreate;
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
@@ -1008,6 +1009,11 @@ const SectionHeaderContent = (props) => {
     : isLoading && stateTitle
     ? stateTitle
     : title;
+
+  const currentCanCreate =
+    isLoading && location?.state?.hasOwnProperty("canCreate")
+      ? stateCanCreate
+      : security?.Create;
 
   const currentRootRoomTitle =
     isLoading && stateRootRoomTitle
@@ -1053,7 +1059,7 @@ const SectionHeaderContent = (props) => {
                 showText={showText}
                 isRootFolder={isRoot}
                 canCreate={
-                  (security?.Create || isAccountsPage) &&
+                  (currentCanCreate || isAccountsPage) &&
                   !isSettingsPage &&
                   !isPublicRoom
                 }

@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Uzaicināt jaunus lietotājus uz DocSpace personīgi pa e-pastu",
   "AddManuallyDescriptionRoom": "Pievienot telpā esošos DocSpace lietotājus, izmantojot vārdus, vai uzaicināt jaunus lietotājus personīgi pa e-pastu",
   "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, noklikšķinot uz tā.",
+  "InvitationLanguage": "Uzaicinājuma valoda",
   "InviteAccountSearchPlaceholder": "Uzaicināt personas pa e-pastu",
   "Invited": "Uzaicināts",
   "InviteRoomSearchPlaceholder": "Uzaicināt personas pēc vārda vai e-pasta adreses",
@@ -10,5 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Izveidot universālu saiti pašautorizācijai DocSpace",
   "InviteViaLinkDescriptionRoom": "Izveidot universālu saiti pašautorizācijai telpā",
   "LinkCopySuccess": "Saite ir nokopēta",
+  "ResetChange": "Atiestatīt izmaiņas",
   "SendInvitation": "Sūtīt ielūgumu"
 }

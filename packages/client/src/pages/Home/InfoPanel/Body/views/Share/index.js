@@ -25,12 +25,15 @@ const Share = (props) => {
     getFileLinks,
     editFileLink,
     addFileLink,
+    shareChanged,
+    setShareChanged,
   } = props;
   const { t } = useTranslation(["SharingPanel", "Files"]);
   const [primaryFileLink, setPrimaryFileLink] = useState([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
 
   const hideSharePanel = isRooms || !selection?.canShare;
+  console.log("shareChanged", shareChanged);
 
   useEffect(() => {
     if (hideSharePanel) {
@@ -38,6 +41,11 @@ const Share = (props) => {
     }
     fetchLinks();
   }, [selection]);
+
+  useEffect(() => {
+    fetchLinks();
+    setShareChanged(false);
+  }, [shareChanged]);
 
   const fetchLinks = async () => {
     const res = await getFileLinks(selection.id);
@@ -107,8 +115,12 @@ const Share = (props) => {
         }
       } else {
         updateLink(link, res);
-        copy(link.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        if (item.access === ShareAccessRights.DenyAccess) {
+          toastr.success(t("Files:AccessDenied"));
+        } else {
+          copy(link.sharedTo.shareLink);
+          toastr.success(t("Files:LinkSuccessfullyCopied"));
+        }
       }
     } catch (e) {
       toastr.error(e);
@@ -216,6 +228,8 @@ export default inject(({ auth }) => {
     getFileLinks,
     editFileLink,
     addFileLink,
+    shareChanged,
+    setShareChanged,
   } = auth.infoPanelStore;
 
   return {
@@ -224,5 +238,7 @@ export default inject(({ auth }) => {
     getFileLinks,
     editFileLink,
     addFileLink,
+    shareChanged,
+    setShareChanged,
   };
 })(observer(Share));

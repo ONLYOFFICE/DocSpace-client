@@ -53,6 +53,8 @@ class InfoPanelStore {
   treeFoldersStore = null;
   membersList = null;
 
+  shareChanged = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -229,14 +231,14 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        :  this.settingsStore.getIcon(
-          size,
-          null,
-          null,
-          null,
-          item.roomType,
-          true
-        )
+        : this.settingsStore.getIcon(
+            size,
+            null,
+            null,
+            null,
+            item.roomType,
+            true
+          )
         ? item.logo.medium
         : item.icon
         ? item.icon
@@ -401,6 +403,10 @@ class InfoPanelStore {
     const res = await addExternalLink(fileId, access, primary, internal);
     await getFileInfo(fileId);
     return res;
+  };
+
+  setShareChanged = (shareChanged) => {
+    this.shareChanged = shareChanged;
   };
 }
 

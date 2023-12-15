@@ -670,15 +670,21 @@ class UploadDataStore {
   }
 
   handleUploadConflicts = async (t, toFolderId, newUploadData) => {
-    const filesArray = newUploadData.files.map(fileInfo => fileInfo.file.name)
-    const conflicts = await checkIsFileExist(toFolderId, filesArray);
+    const filesArray = newUploadData.files.map((fileInfo) => fileInfo.file.name);
+    let conflicts = await checkIsFileExist(toFolderId, filesArray);
+    const folderInfo = await getFolderInfo(toFolderId);
 
-    if(conflicts.length > 0){
-      this.setConflictDialogData(conflicts, {isUploadConflict: true, newUploadData})
+    conflicts = conflicts.map((fileTitle) => ({ title: fileTitle }));
+
+    if (conflicts.length > 0) {
+      this.setConflictDialogData(conflicts, {
+        isUploadConflict: true,
+        newUploadData,
+        folderTitle: folderInfo.title,
+      });
     } else {
-      this.handleFilesUpload(newUploadData, t, true)
+      this.handleFilesUpload(newUploadData, t, true);
     }
-
   };
 
   startUpload = (uploadFiles, folderId, t) => {

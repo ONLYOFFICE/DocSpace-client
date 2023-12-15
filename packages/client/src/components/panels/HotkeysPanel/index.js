@@ -68,7 +68,7 @@ const HotkeyPanel = ({
         <div className="hotkeys_header">
           <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
         </div>
-        <StyledScrollbar ref={scrollRef} stype="mediumBlack">
+        <StyledScrollbar ref={scrollRef}>
           <Heading className="hotkeys_sub-header">
             {t("HotkeysNavigation")}
           </Heading>

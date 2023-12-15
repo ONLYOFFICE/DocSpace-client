@@ -2,5 +2,6 @@
   "LblInviteAgain": "Uzaicināt vēlreiz",
   "MessageEmailActivationInstuctionsSentOnEmail": "Norādījumi par e-pasta aktivizēšanu ir nosūtīti uz <1>{{email}}</1> e-pasta adresi.",
   "NotFoundUsers": "Lietotāji nav atrasti",
+  "NotFoundUsersDescription": "Neviens lietotājs neatbilst jūsu meklēšanas vaicājumam. Pielāgojiet meklēšanas parametrus vai notīriet meklēšanas lauku, lai skatītu pilnu lietotāju sarakstu.",
   "UserStatus": "Statuss"
 }

@@ -9,7 +9,9 @@ export function getSettings(withPassword = false, headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function getPortalCultures() {
@@ -206,7 +208,9 @@ export function getAppearanceTheme(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
 export function sendAppearanceTheme(data) {
@@ -239,13 +243,17 @@ export function getLogoUrls(headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options);
+  const skipRedirect = true;
+
+  return request(options, skipRedirect);
 }
 
-export function setWhiteLabelSettings(data) {
+export function setWhiteLabelSettings(data, isManagement) {
+  const url = "/settings/whitelabel/save";
+
   const options = {
     method: "post",
-    url: "/settings/whitelabel/save",
+    url: isManagement ? `${url}?isDefault=true` : url,
     data,
   };
 
@@ -259,10 +267,12 @@ export function getIsDefaultWhiteLabel() {
   });
 }
 
-export function restoreWhiteLabelSettings(isDefault) {
+export function restoreWhiteLabelSettings(isDefault, isManagement) {
+  const url = "/settings/whitelabel/restore";
+
   return request({
     method: "put",
-    url: "/settings/whitelabel/restore",
+    url: isManagement ? `${url}?isDefault=true` : url,
     data: { isDefault },
   });
 }

@@ -92,7 +92,7 @@ const StyledPluginHeader = styled.div`
     padding: 0;
 
     font-weight: 700 !important;
-    font-size: 16px !important;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")} !important;
     line-height: 22px;
   }
 

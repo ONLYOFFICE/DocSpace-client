@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import moment from "moment-timezone";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
@@ -32,9 +32,10 @@ const InviteUsersWarningDialog = (props) => {
 
   useEffect(() => {
     moment.locale(language);
+    if (window.timezone) moment().tz(window.timezone);
 
     gracePeriodDays();
-  }, [language, gracePeriodDays]);
+  }, [language, gracePeriodDays, window.timezone]);
 
   const gracePeriodDays = () => {
     const fromDateMoment = moment(dueDate);

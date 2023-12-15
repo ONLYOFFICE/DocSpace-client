@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleLoader from "../../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledMembersLoader = styled.div`
   width: 100%;
@@ -52,24 +52,24 @@ const MembersLoader = () => {
   return (
     <StyledMembersLoader>
       <StyledSubtitleLoader>
-        <RectangleLoader width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleLoader width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
       </StyledSubtitleLoader>
 
       {[...Array(4).keys()].map((i) => (
         <StyledMemberLoader key={i}>
-          <RectangleLoader
+          <RectangleSkeleton
             className="avatar"
             width={"32px"}
             height={"32px"}
             borderRadius={"50%"}
           />
-          <RectangleLoader
+          <RectangleSkeleton
             width={"212px"}
             height={"16px"}
             borderRadius={"3px"}
           />
-          <RectangleLoader
+          <RectangleSkeleton
             className="role-selector"
             width={"64px"}
             height={"20px"}
@@ -79,24 +79,24 @@ const MembersLoader = () => {
       ))}
 
       <StyledSubtitleLoader className="pending_users">
-        <RectangleLoader width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleLoader width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
       </StyledSubtitleLoader>
 
       {[...Array(4).keys()].map((i) => (
         <StyledMemberLoader key={i}>
-          <RectangleLoader
+          <RectangleSkeleton
             className="avatar"
             width={"32px"}
             height={"32px"}
             borderRadius={"50%"}
           />
-          <RectangleLoader
+          <RectangleSkeleton
             width={"212px"}
             height={"16px"}
             borderRadius={"3px"}
           />
-          <RectangleLoader
+          <RectangleSkeleton
             className="role-selector"
             width={"64px"}
             height={"20px"}

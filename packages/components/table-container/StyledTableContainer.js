@@ -4,7 +4,7 @@ import { mobile, tablet } from "../utils/device";
 import IconButton from "../icon-button";
 import Scrollbar from "../scrollbar";
 
-import { ColorTheme } from "@docspace/components/ColorTheme";
+import { ColorTheme } from "../ColorTheme";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
@@ -385,6 +385,14 @@ const StyledTableBody = styled.div`
   display: contents;
 
   ${({ useReactWindow }) => useReactWindow && reactWindowBodyStyles}
+
+  .table-container_cell {
+    ${({ infoPanelVisible }) =>
+      infoPanelVisible &&
+      css`
+        padding: 0;
+      `}
+  }
 `;
 
 const StyledTableRow = styled.div`

@@ -10,10 +10,7 @@ const StyledDragAndDrop = styled.div`
 -ms-user-select: none;
 user-select: none;*/
   height: ${(props) => props.theme.dragAndDrop.height};
-  border: ${(props) =>
-    props.drag
-      ? props.theme.dragAndDrop.border
-      : props.theme.dragAndDrop.transparentBorder};
+  border: ${(props) => props.theme.dragAndDrop.transparentBorder};
 
   ${({ theme }) =>
     theme.interfaceDirection === "rtl"

@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import StyledRestoreBackup from "./StyledRestoreBackup";
 const RestoreBackupLoader = ({
   id,
@@ -21,7 +21,7 @@ const RestoreBackupLoader = ({
 
   return (
     <StyledRestoreBackup>
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup-loader_title"
         title={title}
         width="100%"
@@ -36,7 +36,7 @@ const RestoreBackupLoader = ({
       />
 
       <div className="restore-backup_checkbox">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -48,7 +48,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="restore-backup_checkbox-first"
           title={title}
           width="100%"
@@ -61,7 +61,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -73,7 +73,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="restore-backup_checkbox-second"
           title={title}
           width="100%"
@@ -86,7 +86,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -98,7 +98,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="restore-backup_checkbox-third"
           title={title}
           width="100%"
@@ -113,7 +113,7 @@ const RestoreBackupLoader = ({
         />
       </div>
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_input"
         title={title}
         width="100%"
@@ -126,7 +126,7 @@ const RestoreBackupLoader = ({
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_backup-list"
         title={title}
         width="100%"
@@ -140,7 +140,7 @@ const RestoreBackupLoader = ({
         animate={animate}
       />
       <div className="restore-backup_notification">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -152,7 +152,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="restore-backup_notification-title"
           title={title}
           width="100%"
@@ -167,7 +167,7 @@ const RestoreBackupLoader = ({
         />
       </div>
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_warning-title"
         title={title}
         width="100%"
@@ -180,7 +180,7 @@ const RestoreBackupLoader = ({
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_warning-description"
         title={title}
         width="100%"
@@ -192,7 +192,7 @@ const RestoreBackupLoader = ({
         speed={speed}
         animate={animate}
       />
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_warning"
         title={title}
         width="100%"
@@ -205,7 +205,7 @@ const RestoreBackupLoader = ({
         animate={animate}
       />
       <div className="restore-backup_notification">
-        <RectangleLoader
+        <RectangleSkeleton
           title={title}
           width="16"
           height="16"
@@ -217,7 +217,7 @@ const RestoreBackupLoader = ({
           speed={speed}
           animate={animate}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="restore-backup_notification-title"
           title={title}
           width="100%"
@@ -232,7 +232,7 @@ const RestoreBackupLoader = ({
         />
       </div>
 
-      <RectangleLoader
+      <RectangleSkeleton
         className="restore-backup_button"
         title={title}
         width="100%"

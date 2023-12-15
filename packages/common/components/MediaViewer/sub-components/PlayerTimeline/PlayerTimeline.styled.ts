@@ -1,17 +1,11 @@
-import { isMobile } from "react-device-detect";
 import styled, { css } from "styled-components";
+
+import { tablet } from "@docspace/components/utils/device";
 
 export const HoverProgress = styled.div`
   display: none;
   position: absolute;
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 2px;
-        `
-      : css`
-          left: 2px;
-        `}
+  left: 2px;
 
   height: 6px;
 
@@ -79,14 +73,7 @@ export const PlayerTimelineWrapper = styled.div`
   time {
     display: none;
     position: absolute;
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 50%;
-          `
-        : css`
-            left: 50%;
-          `}
+    left: 50%;
     top: -25px;
     font-size: 13px;
     color: #fff;
@@ -191,5 +178,7 @@ export const PlayerTimelineWrapper = styled.div`
     }
   }
 
-  ${isMobile && mobileCss}
+  @media ${tablet} {
+    ${mobileCss}
+  }
 `;

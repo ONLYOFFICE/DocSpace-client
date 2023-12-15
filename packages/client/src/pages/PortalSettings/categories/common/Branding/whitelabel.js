@@ -42,6 +42,7 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,9 +63,12 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -204,11 +208,12 @@ const WhiteLabel = (props) => {
 
   const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
+  const showReminder = !isEqualLogo || !isEqualText;
 
   return !isLoadedData ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper>
+    <WhiteLabelWrapper showReminder={showReminder}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
 
       <div className="header-container">
@@ -466,6 +471,8 @@ const WhiteLabel = (props) => {
         </div>
       </div>
 
+      <div className="spacer"></div>
+
       <SaveCancelButtons
         tabIndex={3}
         className="save-cancel-buttons"
@@ -475,7 +482,8 @@ const WhiteLabel = (props) => {
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
         hasScroll={true}
-        showReminder={!isEqualLogo || !isEqualText}
+        hideBorder={true}
+        showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo && isEqualText}
         disableRestoreToDefault={!enableRestoreButton}
@@ -503,7 +511,7 @@ export default inject(({ setup, auth, common }) => {
 
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls } = auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
-
+  const { isManagement } = auth;
   return {
     setLogoText,
     theme: auth.settingsStore.theme,
@@ -518,5 +526,6 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

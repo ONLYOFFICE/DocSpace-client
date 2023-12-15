@@ -10,24 +10,10 @@ const PlayerDurationWrapper = styled.div`
   font-size: 12px;
   font-weight: 700;
 
-  ${props =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 10px;
-        `
-      : css`
-          margin-left: 10px;
-        `}
+  margin-left: 10px;
 
   @media ${mobile} {
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0;
-          `
-        : css`
-            margin-left: 0;
-          `}
+    margin-left: 0;
   }
 `;
 

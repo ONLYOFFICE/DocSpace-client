@@ -8,9 +8,9 @@ import {
   Wrapper,
   Numeration,
 } from "./styled-textarea";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
+import { ColorTheme, ThemeType } from "../ColorTheme";
+import Toast from "../toast";
+import toastr from "../toast/toastr";
 import { isJSON, beautifyJSON } from "./utils";
 
 import copy from "copy-to-clipboard";
@@ -104,7 +104,7 @@ const Textarea = ({
       className="textarea-wrapper"
       isJSONField={isJSONField}
       enableCopy={enableCopy}
-      onFocus={enableCopy ? onTextareaClick : undefined}
+      onClick={onTextareaClick}
     >
       {enableCopy && (
         <CopyIconWrapper
@@ -122,7 +122,6 @@ const Textarea = ({
         themeId={ThemeType.Textarea}
         className={className}
         style={style}
-        stype="preMediumBlack"
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}

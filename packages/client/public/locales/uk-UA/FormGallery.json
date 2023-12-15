@@ -1,6 +1,10 @@
 {
-  "EmptyScreenDescription": "Перевірте підключення до Інтернету та оновіть сторінку або спробуйте пізніше.",
-  "GalleryEmptyScreenDescription": "Виберіть шаблон форми, щоб переглянути деталі",
-  "GalleryEmptyScreenHeader": "Не вдалося завантажити шаблони форм",
+  "Categories": "Категорії",
+  "ErrorViewDescription": "Повторіть спробу пізніше",
+  "SelectForm": "Виберіть форму",
+  "SubmitToGalleryBlockBody": "Надішліть свої шаблони, щоб поділитися ними зі спільнотою ONLYOFFICE.",
+  "SubmitToGalleryBlockHeader": "Галерея форм ONLYOFFICE",
+  "SubmitToGalleryDialogGuideInfo": "Дізнайтеся, як створювати ідеальні форми та підвищити свій шанс отримати схвалення, в нашому <1>guide</1>.",
+  "SubmitToGalleryDialogMainInfo": "Надішліть свою форму до публічної галереї, щоб інші могли використовувати її у своїй роботі. Коли форма пройде модерацію, ви отримаєте сповіщення та винагороду за свій внесок.",
   "TemplateInfo": "Інформація про шаблон"
 }

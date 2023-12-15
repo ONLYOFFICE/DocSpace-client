@@ -28,7 +28,6 @@ const Dialogs = ({
   resetAuthDialogVisible,
 
   changeEmailVisible,
-  setChangeEmailVisible,
 
   changePasswordVisible,
   setChangePasswordVisible,
@@ -45,8 +44,8 @@ const Dialogs = ({
       {changeEmailVisible && (
         <ChangeEmailDialog
           visible={changeEmailVisible}
-          onClose={() => setChangeEmailVisible(false)}
-          user={profile}
+          onClose={closeDialogs}
+          user={data}
           fromList
         />
       )}
@@ -71,7 +70,7 @@ const Dialogs = ({
         <DeleteProfileEverDialog
           visible={deleteProfileEver}
           onClose={closeDialogs}
-          user={data}
+          users={data}
         />
       )}
       {changeUserTypeDialogVisible && (
@@ -130,6 +129,7 @@ export default inject(({ auth, peopleStore }) => {
     deleteProfileEver,
     data,
     closeDialogs,
+    changeEmailVisible,
 
     changeUserTypeDialogVisible,
     guestDialogVisible,
@@ -143,8 +143,6 @@ export default inject(({ auth, peopleStore }) => {
   const { user: profile } = auth.userStore;
 
   const {
-    changeEmailVisible,
-    setChangeEmailVisible,
     changeNameVisible,
     changePasswordVisible,
     setChangePasswordVisible,
@@ -170,7 +168,6 @@ export default inject(({ auth, peopleStore }) => {
     resetAuthDialogVisible,
 
     changeEmailVisible,
-    setChangeEmailVisible,
 
     changePasswordVisible,
     setChangePasswordVisible,

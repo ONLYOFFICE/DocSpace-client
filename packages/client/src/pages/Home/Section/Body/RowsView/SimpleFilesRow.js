@@ -258,33 +258,20 @@ const StyledSimpleFilesRow = styled(Row)`
       `}
   }
 
-  @media ${tablet} {
-    .badges {
-      flex-direction: row-reverse;
-      gap: 24px;
-    }
+  .badges {
+    flex-direction: row-reverse;
+    gap: 24px;
+  }
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+  .file__badges,
+  .room__badges,
+  .folder__badges {
+    margin-top: 0px;
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-top: 0px;
-      }
-    }
-
-    .file__badges,
-    .folder__badges,
-    .room__badges {
+    > div {
       margin-top: 0px;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -357,15 +344,16 @@ const SimpleFilesRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
-
     folderCategory,
     isHighlight,
     badgesComponent,
+    onDragOver,
+    onDragLeave,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
-  const [isDragOver, setIsDragOver] = React.useState(false);
+  const [isDragActive, setIsDragActive] = React.useState(false);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -383,14 +371,18 @@ const SimpleFilesRow = (props) => {
     />
   );
 
-  const onDragOver = (dragOver) => {
-    if (dragOver !== isDragOver) {
-      setIsDragOver(dragOver);
+  const onDragOverEvent = (dragActive, e) => {
+    onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
     }
   };
 
-  const onDragLeave = () => {
-    setIsDragOver(false);
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+
+    setIsDragActive(false);
   };
 
   const dragStyles =
@@ -426,8 +418,8 @@ const SimpleFilesRow = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         style={dragStyles}
       >
         <StyledSimpleFilesRow
@@ -438,7 +430,7 @@ const SimpleFilesRow = (props) => {
           mode={"modern"}
           sectionWidth={sectionWidth}
           contentElement={
-            isSmallContainer || isRooms ? null : quickButtonsComponent
+            isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
@@ -460,7 +452,7 @@ const SimpleFilesRow = (props) => {
           showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
           isArchive={item.isArchive}
-          isDragOver={isDragOver}
+          isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
@@ -471,7 +463,7 @@ const SimpleFilesRow = (props) => {
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={
-              isSmallContainer || isRooms ? quickButtonsComponent : null
+              isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
             badgesComponent={isMobileDevice && badgesComponent}

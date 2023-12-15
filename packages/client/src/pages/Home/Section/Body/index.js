@@ -205,7 +205,13 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
-    document.body.classList.remove("drag-cursor");
+    setStartDrag(false);
+
+    setTimeout(() => {
+      isDragActive = false;
+      setDragging(false);
+      document.body.classList.remove("drag-cursor");
+    }, 0);
 
     const treeElem = e.target.closest(".tree-drag");
     const treeDataValue = treeElem?.dataset?.value;
@@ -217,18 +223,11 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setDragging(false);
-      setStartDrag(false);
-      isDragActive = false;
       return;
     }
 
     const folderId = value ? value.split("_")[1] : treeValue;
-
-    setStartDrag(false);
-    setDragging(false);
     onMoveTo(folderId, title);
-    isDragActive = false;
     return;
   };
 

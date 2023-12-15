@@ -1,7 +1,6 @@
 import React from "react";
-import FileInput from "@docspace/components/file-input";
-import Row from "@docspace/components/row";
-import Textarea from "@docspace/components/textarea";
+import FileInput from "../file-input";
+import Row from "../row";
 import Text from "../text";
 
 export const data = [
@@ -10,7 +9,7 @@ export const data = [
     name: "Overview",
     content: (
       <FileInput
-        accept=".doc, .docx"
+        accept={[".doc", ".docx"]}
         id="file-input-id"
         name="demoFileInputName"
         onInput={() => {}}

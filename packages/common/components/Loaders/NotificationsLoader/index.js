@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import { StyledComponent } from "./StyledComponent";
 
 const NotificationsLoader = ({
@@ -17,7 +17,7 @@ const NotificationsLoader = ({
   const contentItem = (
     <>
       <div>
-        <RectangleLoader
+        <RectangleSkeleton
           className="notifications_title-loader"
           title={title}
           width="100%"
@@ -30,7 +30,7 @@ const NotificationsLoader = ({
           speed={speed}
           animate
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="notifications_content-loader"
           title={title}
           width="100%"
@@ -44,7 +44,7 @@ const NotificationsLoader = ({
           animate
         />
       </div>
-      <RectangleLoader
+      <RectangleSkeleton
         className="notifications_content-loader"
         title={title}
         width="24px"

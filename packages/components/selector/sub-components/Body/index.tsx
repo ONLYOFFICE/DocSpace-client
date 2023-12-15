@@ -1,5 +1,5 @@
 import React from "react";
-import { isMobile, isIOS } from "react-device-detect";
+import { isMobileOnly, isIOS } from "react-device-detect";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
@@ -82,7 +82,7 @@ const Body = ({
 
   const onBodyResize = React.useCallback(
     (e) => {
-      if (e?.target?.height && isMobile && isIOS) {
+      if (e?.target?.height && isMobileOnly && isIOS) {
         let height = e?.target?.height - 64 - HEADER_HEIGHT;
 
         if (footerVisible) {
@@ -111,7 +111,7 @@ const Body = ({
 
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
-    if (isMobile && isIOS)
+    if (isMobileOnly && isIOS)
       window.visualViewport?.addEventListener("resize", onBodyResize);
     return () => {
       window.removeEventListener("resize", onBodyResize);

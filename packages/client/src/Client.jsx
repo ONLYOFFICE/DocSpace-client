@@ -6,7 +6,6 @@ import { withTranslation } from "react-i18next";
 import Article from "@docspace/common/components/Article";
 import {
   updateTempContent,
-  loadScript,
   showLoader,
   hideLoader,
 } from "@docspace/common/utils";
@@ -84,20 +83,12 @@ const ClientContent = (props) => {
   const isFormGallery = location.pathname.split("/").includes("form-gallery");
 
   React.useEffect(() => {
-    loadScript("/static/scripts/tiff.min.js", "img-tiff-script");
-
     loadClientInfo()
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoaded(true);
-
         updateTempContent();
       });
-
-    return () => {
-      const script = document.getElementById("img-tiff-script");
-      document.body.removeChild(script);
-    };
   }, []);
 
   React.useEffect(() => {

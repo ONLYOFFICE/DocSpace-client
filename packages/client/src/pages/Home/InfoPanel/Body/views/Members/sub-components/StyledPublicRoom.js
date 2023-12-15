@@ -7,7 +7,7 @@ const StyledPublicRoomBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBlock.background};
   color: #333;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -70,7 +70,7 @@ const LinksBlock = styled.div`
   justify-content: space-between;
 
   p {
-    color: ${({ theme }) => theme.text.disableColor};
+    color: ${({ theme }) => theme.infoPanel.members.subtitleColor};
   }
 
   .link-to-viewing-icon {
@@ -87,9 +87,7 @@ const StyledLinkRow = styled.div`
   justify-content: space-between;
   gap: 12px;
   height: 100%;
-  position: relative;
   background: ${(props) => props.theme.backgroundColor};
-  z-index: 1;
 
   .external-row-link {
     white-space: nowrap;

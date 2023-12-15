@@ -1,22 +1,23 @@
-import { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
+import { useState, useCallback, useEffect, useRef } from "react";
+
 import Avatar from "@docspace/components/avatar";
 import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import DropDownItem from "@docspace/components/drop-down-item";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
 import { parseAddresses } from "@docspace/components/utils/email";
-
-import { withTranslation } from "react-i18next";
-
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import ComboBox from "@docspace/components/combobox";
 
-import { AddUsersPanel } from "../../index";
-import { getAccessOptions } from "../utils";
+import Filter from "@docspace/common/api/people/filter";
+import { getMembersList } from "@docspace/common/api/people";
+import { ShareAccessRights } from "@docspace/common/constants";
+import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
+import AddUsersPanel from "../../AddUsersPanel";
+import { getAccessOptions } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -31,10 +32,7 @@ import {
   ResetLink,
 } from "../StyledInvitePanel";
 
-import Filter from "@docspace/common/api/people/filter";
-import { getMembersList } from "@docspace/common/api/people";
-
-const searchUsersThreshold = 2;
+const minSearchValue = 2;
 
 const InviteInput = ({
   defaultAccess,
@@ -109,7 +107,7 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length >= searchUsersThreshold) {
+    if (query.length >= minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
@@ -137,14 +135,14 @@ const InviteInput = ({
 
     setInputValue(value);
 
-    if (clearValue.length < searchUsersThreshold) {
+    if (clearValue.length < minSearchValue) {
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
       return;
     }
 
     if (
-      (!!usersList.length || clearValue.length >= searchUsersThreshold) &&
+      (!!usersList.length || clearValue.length >= minSearchValue) &&
       !searchPanelVisible
     ) {
       openInviteInputPanel();
@@ -152,7 +150,11 @@ const InviteInput = ({
 
     if (roomId !== -1) {
       debouncedSearch(clearValue);
+
+      return;
     }
+
+    setIsAddEmailPanelBlocked(false);
   };
 
   const removeExist = (items) => {
@@ -346,6 +348,7 @@ const InviteInput = ({
             textOverflow
             scaledOptions={false}
             size="content"
+            manualWidth="280px"
             showDisabledItems={true}
             dropDownMaxHeight={364}
             withBlur={isMobileView}
@@ -395,24 +398,23 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= searchUsersThreshold && (
-          <StyledDropDown
-            width={searchRef?.current?.offsetWidth}
-            isDefaultMode={false}
-            open={
-              !!usersList.length
-                ? searchPanelVisible
-                : searchPanelVisible && !isAddEmailPanelBlocked
-            }
-            manualX="16px"
-            showDisabledItems
-            clickOutsideAction={closeInviteInputPanel}
-            eventTypes="click"
-            {...dropDownMaxHeight}
-          >
-            {!!usersList.length ? foundUsers : addEmailPanel}
-          </StyledDropDown>
-        )}
+        {inputValue.length >= minSearchValue &&
+          (isAddEmailPanelBlocked ? (
+            <></>
+          ) : (
+            <StyledDropDown
+              width={searchRef?.current?.offsetWidth}
+              isDefaultMode={false}
+              open={searchPanelVisible}
+              manualX="16px"
+              showDisabledItems
+              clickOutsideAction={closeInviteInputPanel}
+              eventTypes="click"
+              {...dropDownMaxHeight}
+            >
+              {!!usersList.length ? foundUsers : addEmailPanel}
+            </StyledDropDown>
+          ))}
 
         <AccessSelector
           className="add-manually-access"

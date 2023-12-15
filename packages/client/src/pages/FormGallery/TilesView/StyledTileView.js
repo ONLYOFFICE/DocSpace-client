@@ -374,7 +374,7 @@ const StyledTileContainer = styled.div`
           flex-direction: row;
           align-items: center;
 
-          font-size: 12px;
+          font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
           font-weight: 600;
 
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
@@ -408,45 +408,6 @@ const StyledTileContainer = styled.div`
 `;
 
 StyledTileContainer.defaultProps = { theme: Base };
-
-const truncateCss = css`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const commonCss = css`
-  margin: 0;
-  font-family: "Open Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-`;
-
-const StyledTileContent = styled.div`
-  width: 100%;
-  display: inline-flex;
-`;
-
-const MainContainerWrapper = styled.div`
-  ${commonCss};
-
-  display: flex;
-  align-self: center;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: auto;`
-      : `margin-right: auto;`}
-`;
-
-const MainContainer = styled.div`
-  height: 20px;
-
-  @media ${tablet} {
-    ${truncateCss};
-  }
-`;
 
 const StyledCard = styled.div`
   display: block;
@@ -487,9 +448,6 @@ export {
   SimpleFilesTileContent,
   StyledGridWrapper,
   StyledTileContainer,
-  StyledTileContent,
-  MainContainerWrapper,
-  MainContainer,
   StyledCard,
   StyledItem,
   StyledContextMenu,

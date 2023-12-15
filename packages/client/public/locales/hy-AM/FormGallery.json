@@ -1,6 +1,14 @@
 {
-  "EmptyScreenDescription": "Խնդրում ենք ստուգել ձեր ինտերնետ կապը և թարմացնել էջը կամ փորձել ավելի ուշ։",
-  "GalleryEmptyScreenDescription": "Մանրամասները տեսնելու համար ընտրեք ձևի ցանկացած ձևանմուշ։",
-  "GalleryEmptyScreenHeader": "Չհաջողվեց բեռնել ձևանմուշները",
-  "TemplateInfo": "Ձևանմուշի տեղեկատվություն"
+  "Categories": "Կատեգորիաներ",
+  "EmptyFormGalleryScreenDescription": "Ձեր հարցմանը համապատասխանող արդյունքներ չեն գտնվել",
+  "ErrorViewDescription": "Խնդրում ենք փորձել մի փոքր ուշ։",
+  "ErrorViewHeader": "Ձևերի պատկերասրահը ժամանակավորապես անհասանելի է",
+  "SelectForm": "Ընտրել Ձևը",
+  "SubmitToGalleryBlockBody": "Ներկայացրեք ձեր ձևանմուշները՝ դրանք կիսելու ONLYOFFICE community-ի հետ:",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE ձևերի պատկերասրահ",
+  "SubmitToGalleryDialogGuideInfo": "Իմացեք, թե ինչպես ստեղծել կատարյալ ձևեր և մեծացնել հավանություն ստանալու ձեր հնարավորությունը մեր <1>ուղեցույցում</1>։",
+  "SubmitToGalleryDialogMainInfo": "Ներկայացրե՛ք ձեր ձևը հանրային պատկերասրահին, որպեսզի ուրիշներն օգտագործեն այն իրենց աշխատանքում: Հենց որ ձևը անցնի մոդերատորությունը, դուք կտեղեկացվեք և կպարգևատրվեք ձեր ներդրման համար:",
+  "SuggestChanges": "Առաջարկեք փոփոխություններ",
+  "TemplateInfo": "Ձևանմուշի տեղեկատվություն",
+  "ViewAllTemplates": "Դիտեք բոլոր ձևանմուշները"
 }

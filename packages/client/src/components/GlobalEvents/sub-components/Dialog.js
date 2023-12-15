@@ -52,9 +52,9 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm) onSaveAction(e);
+      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
     },
-    [value]
+    [value, isError]
   );
 
   useEffect(() => {
@@ -90,28 +90,19 @@ const Dialog = ({
   const onSaveAction = useCallback(
     (e) => {
       setIsDisabled(true);
-      isCreateDialog && setKeepNewFileName(isChecked);
+      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
       onSave && onSave(e, value);
     },
     [onSave, isCreateDialog, value, isChecked]
   );
 
   const onCancelAction = useCallback((e) => {
-    if (isChecked) {
-      setKeepNewFileName(false);
-    }
     onCancel && onCancel(e);
   }, []);
 
-  const onCloseAction = useCallback(
-    (e) => {
-      if (!isDisabled && isChecked) {
-        setKeepNewFileName(false);
-      }
-      onClose && onClose(e);
-    },
-    [isDisabled]
-  );
+  const onCloseAction = useCallback((e) => {
+    onClose && onClose(e);
+  }, []);
 
   const onChangeCheckbox = () => {
     isCreateDialog && setIsChecked((val) => !val);

@@ -15,7 +15,7 @@ const StyledHistorySubtitle = styled.div`
 
   padding: 8px 0 12px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
@@ -27,7 +27,7 @@ const StyledUserNameLink = styled.span`
   margin: 1px 0;
 
   .username {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
     display: inline-block;
   }
@@ -73,7 +73,7 @@ const StyledHistoryBlock = styled.div`
       gap: 4px;
       .name {
         font-weight: 600;
-        font-size: 14px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -90,7 +90,7 @@ const StyledHistoryBlock = styled.div`
                 margin-left: auto;
               `}
         font-weight: 600;
-        font-size: 12px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
         color: ${(props) => props.theme.infoPanel.history.dateColor};
       }
     }
@@ -119,7 +119,7 @@ const StyledHistoryBlock = styled.div`
 
 const StyledHistoryBlockMessage = styled.div`
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
   display: flex;
@@ -169,7 +169,7 @@ const StyledHistoryBlockFilesList = styled.div`
             margin: 10px 0 3px 20px;
           `}
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 15px;
 
     strong {
@@ -200,7 +200,7 @@ const StyledHistoryBlockFile = styled.div`
 
   .item-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     display: flex;
     min-width: 0;
     gap: 0;

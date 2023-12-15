@@ -91,7 +91,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     isRooms &&
     css`
       .item-file-name {
-        font-size: 16px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       }
     `}
 
@@ -113,9 +113,9 @@ const FilesTileContent = ({
   isRooms,
   currentDeviceType,
 }) => {
-  const { fileExst, title, viewAccessability } = item;
+  const { fileExst, title, viewAccessibility } = item;
 
-  const isMedia = viewAccessability?.ImageView || viewAccessability?.MediaView;
+  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
   return (
     <>

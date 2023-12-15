@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledText } from "./CellStyles";
+import { StyledTypeCell } from "./CellStyles";
 import { FileType } from "@docspace/common/constants";
 import { getDefaultRoomName } from "../../../../../../helpers/filesUtils";
 
@@ -36,15 +36,18 @@ const TypeCell = ({ t, item, sideColor }) => {
   const data = `${type} ${Exst}`;
 
   return (
-    <StyledText
+    <StyledTypeCell
       fontSize="12px"
       fontWeight="600"
       color={sideColor}
       truncate
       title={data}
     >
-      {data}
-    </StyledText>
+      <span className="type">{type}</span>&nbsp;
+      <span dir="ltr" className="extension">
+        {Exst}
+      </span>
+    </StyledTypeCell>
   );
 };
 export default TypeCell;

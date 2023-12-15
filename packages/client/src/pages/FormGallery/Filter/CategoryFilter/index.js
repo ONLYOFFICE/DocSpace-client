@@ -35,6 +35,7 @@ export const StyledCategoryFilterWrapper = styled.div`
 `;
 
 const CategoryFilter = ({
+  oformsFilter,
   noLocales,
   fetchCategoryTypes,
   fetchCategoriesOfCategoryType,
@@ -46,6 +47,10 @@ const CategoryFilter = ({
     (async () => {
       setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
+      if (!newMenuItems) {
+        setIsLoading(false);
+        return;
+      }
 
       const categoryPromises = newMenuItems.map(
         (item) =>
@@ -75,7 +80,7 @@ const CategoryFilter = ({
           setIsLoading(false);
         });
     })();
-  }, []);
+  }, [oformsFilter.locale]);
 
   if (!isLoading && menuItems.length === 0) return null;
 
@@ -90,6 +95,7 @@ const CategoryFilter = ({
   );
 };
 export default inject(({ oformsStore }) => ({
+  oformsFilter: oformsStore.oformsFilter,
   noLocales:
     oformsStore.oformLocales !== null && oformsStore.oformLocales?.length === 0,
   fetchCategoryTypes: oformsStore.fetchCategoryTypes,

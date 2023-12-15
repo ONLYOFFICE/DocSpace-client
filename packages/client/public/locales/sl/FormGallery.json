@@ -1,6 +1,10 @@
 {
-  "EmptyScreenDescription": "Preverite svojo internetno povezavo in osvežite stran ali poskusite kasneje.",
-  "GalleryEmptyScreenDescription": "Za ogled podrobnosti izberite katero koli predlogo obrazca",
-  "GalleryEmptyScreenHeader": "Predloge obrazcev ni bilo mogoče naložiti",
+  "Categories": "Kategorije",
+  "ErrorViewDescription": "Prosimo, poskusite kasneje",
+  "SelectForm": "Izberi obrazec",
+  "SubmitToGalleryBlockBody": "Predložite svoje predloge, da jih delite s skupnostjo ONLYOFFICE.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE galerija obrazcev",
+  "SubmitToGalleryDialogGuideInfo": "Naučite se ustvariti popolne oblike in povečajte svojo možnost, da dobite odobritev v naših <1>guide</1>.",
+  "SubmitToGalleryDialogMainInfo": "Pošljite svoj obrazec v javno galerijo, da ga lahko drugi uporabljajo pri svojem delu. Ko bo obrazec prestal moderacijo, boste obveščeni in nagrajeni za svoj prispevek.",
   "TemplateInfo": "Informacije o predlogi"
 }

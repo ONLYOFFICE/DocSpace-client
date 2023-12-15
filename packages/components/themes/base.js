@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -58,12 +59,13 @@ const {
 } = globalColors;
 
 const Base = {
+  ...CommonTheme,
+
   isBase: true,
   color: black,
   backgroundColor: white,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
-  interfaceDirection: "ltr",
 
   text: {
     color: black,
@@ -576,6 +578,10 @@ const Base = {
     },
   },
 
+  rowContainer: {
+    borderColor: globalColors.grayLightMid,
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -587,9 +593,9 @@ const Base = {
   },
 
   scrollbar: {
-    backgroundColorVertical: "rgba(0, 0, 0, 0.1)",
-    backgroundColorHorizontal: "rgba(0, 0, 0, 0.1)",
-    hoverBackgroundColorVertical: grayMid,
+    bgColor: "rgba(6, 22, 38, 0.16)",
+    hoverBgColor: "rgba(6, 22, 38, 0.32)",
+    pressBgColor: "rgba(6, 22, 38, 0.5)",
   },
 
   modalDialog: {
@@ -1946,6 +1952,7 @@ const Base = {
     background: white,
     rootFolderTitleColor: "#A3A9AE",
     publicIcon: black,
+    boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
     icon: {
       fill: "#316DAA",
@@ -2065,11 +2072,13 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
-      color: "#83888d",
+      textColor: "#A3A9AE",
+      color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#000",
     },
     thirdPartyList: {
       color: "#818b91",
@@ -2643,8 +2652,8 @@ const Base = {
       width: "16px",
       height: "16px",
       header: {
-        width: "24px",
-        height: "24px",
+        width: "auto",
+        height: "auto",
       },
     },
     separator: {
@@ -3153,9 +3162,14 @@ const Base = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#555F65",
-    closeIconFill: "#657077",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#555F65",
+    },
+    submitToGalleryTile: {
+      bodyText: "#555F65",
+      closeIconFill: "#657077",
+    },
   },
 
   infoBlock: {
@@ -3172,6 +3186,7 @@ const Base = {
   plugins: {
     borderColor: "#D0D5DA",
     pluginName: "#5C5C5C",
+    descriptionColor: "#657077",
   },
 };
 

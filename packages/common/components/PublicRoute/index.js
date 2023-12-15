@@ -2,7 +2,7 @@
 import React from "react";
 import { Navigate, Route, useLocation } from "react-router-dom";
 //import AppLoader from "../AppLoader";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "../../utils";
 import { inject, observer } from "mobx-react";
 import { TenantStatus } from "../../constants";
 
@@ -15,17 +15,25 @@ export const PublicRoute = ({ children, ...rest }) => {
   const renderComponent = () => {
     const isPreparationPortalUrl = location.pathname === "/preparation-portal";
     const isDeactivationPortalUrl = location.pathname === "/unavailable";
+    const isPortalRestriction = location.pathname === "/access-restricted";
     const isPortalRestoring = tenantStatus === TenantStatus.PortalRestore;
 
     // if (!isLoaded) {
     //   return <AppLoader />;
     // }
 
+    if (location?.state?.isRestrictionError) {
+      return children;
+    }
+
     if (location.pathname === "/rooms/share") {
       return children;
     }
 
-    if (isAuthenticated && !isPortalRestoring && !isPortalDeactivate) {
+    if (
+      (isAuthenticated && !isPortalRestoring && !isPortalDeactivate) ||
+      (!location?.state?.isRestrictionError && isPortalRestriction)
+    ) {
       return <Navigate replace to={"/"} />;
     }
 

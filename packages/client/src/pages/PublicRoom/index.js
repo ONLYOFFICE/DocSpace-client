@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Section from "@docspace/common/components/Section";
 import Loader from "@docspace/components/loader";
-import { ValidationResult } from "../../helpers/constants";
+import { ValidationStatus } from "../../helpers/constants";
 
 import RoomPassword from "./sub-components/RoomPassword";
 import RoomErrors from "./sub-components/RoomErrors";
@@ -73,13 +73,13 @@ const PublicRoom = (props) => {
 
   const renderPage = () => {
     switch (roomStatus) {
-      case ValidationResult.Ok:
+      case ValidationStatus.Ok:
         return <PublicRoomPage />;
-      case ValidationResult.Invalid:
+      case ValidationStatus.Invalid:
         return <RoomErrors isInvalid />;
-      case ValidationResult.Expired:
+      case ValidationStatus.Expired:
         return <RoomErrors />;
-      case ValidationResult.Password:
+      case ValidationStatus.Password:
         return <RoomPassword roomKey={key} />;
 
       default:

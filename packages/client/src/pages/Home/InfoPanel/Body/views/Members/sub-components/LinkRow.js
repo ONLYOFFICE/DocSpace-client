@@ -19,7 +19,8 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
-import moment from "moment";
+import moment from "moment-timezone";
+import { RoomsType } from "@docspace/common/constants";
 
 import { StyledLinkRow } from "./StyledPublicRoom";
 
@@ -37,6 +38,7 @@ const LinkRow = (props) => {
     isArchiveFolder,
     theme,
     setIsScrollLocked,
+    isPublicRoomType,
     ...rest
   } = props;
 
@@ -54,7 +56,9 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate).format("LLL");
+  const date = moment(expirationDate)
+    .tz(window.timezone || "")
+    .format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -173,8 +177,12 @@ const LinkRow = (props) => {
       },
       {
         key: "delete-link-key",
-        label: t("Files:RevokeLink"),
-        icon: OutlineReactSvgUrl,
+        label:
+          primary && isPublicRoomType
+            ? t("Files:RevokeLink")
+            : t("Common:Delete"),
+        icon:
+          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
@@ -229,7 +237,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("Files:CopyGeneralLink")}
+              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
             />
           </>
         )}
@@ -273,6 +281,7 @@ export default inject(
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
+      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
     };
   }
 )(

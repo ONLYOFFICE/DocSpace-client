@@ -1,7 +1,5 @@
-import React from "react";
 import { inject, observer } from "mobx-react";
-
-import { useViewEffect } from "@docspace/common/hooks";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import RowContainer from "@docspace/components/row-container";
 

@@ -254,6 +254,7 @@ const SectionFilterContent = ({
   setRoomsFilter,
   standalone,
   currentDeviceType,
+  isRoomAdmin,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -652,7 +653,7 @@ const SectionFilterContent = ({
           label:
             PaymentsType.Paid === accountsFilter.payments.toString()
               ? t("Common:Paid")
-              : t("SmartBanner:Price"),
+              : t("Common:Free"),
           group: "filter-account",
         });
       }
@@ -1001,13 +1002,15 @@ const SectionFilterContent = ({
           group: "filter-status",
           label: t("PeopleTranslations:PendingTitle"),
         },
-        {
+      ];
+
+      if (!isRoomAdmin)
+        statusItems.push({
           id: "filter_status-disabled",
           key: 3,
           group: "filter-status",
           label: t("PeopleTranslations:DisabledEmployeeStatus"),
-        },
-      ];
+        });
 
       const typeItems = [
         {
@@ -1074,7 +1077,7 @@ const SectionFilterContent = ({
         {
           key: PaymentsType.Free,
           group: "filter-account",
-          label: t("SmartBanner:Price"),
+          label: t("Common:Free"),
         },
       ];
 
@@ -2088,7 +2091,7 @@ export default inject(
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
-
+    const { isRoomAdmin } = auth;
     const { user } = auth.userStore;
     const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
@@ -2119,6 +2122,7 @@ export default inject(
     const { canSearchByContent } = filesSettingsStore;
 
     return {
+      isRoomAdmin,
       user,
       userId: user?.id,
 

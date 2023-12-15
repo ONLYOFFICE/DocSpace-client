@@ -1,5 +1,6 @@
-import React, { useMemo, memo, useCallback } from "react";
 import equal from "fast-deep-equal/react";
+import { useTheme } from "styled-components";
+import React, { useMemo, memo, useCallback } from "react";
 
 import Viewer from "../Viewer";
 import { isSeparator } from "../../helpers";
@@ -14,6 +15,9 @@ import { StyledDropDownItem } from "../StyledDropDownItem";
 import ViewerWrapperProps from "./ViewerWrapper.props";
 
 function ViewerWrapper(props: ViewerWrapperProps) {
+  const { interfaceDirection } = useTheme();
+  const isRtl = interfaceDirection === "rtl";
+
   const onClickContextItem = useCallback(
     (item: ContextMenuModel) => {
       if (isSeparator(item)) return;
@@ -33,10 +37,11 @@ function ViewerWrapper(props: ViewerWrapperProps) {
 
     return (
       <StyledDropDown
+        dir={interfaceDirection}
         open={isOpen}
         isDefaultMode={false}
         directionY="top"
-        directionX="right"
+        directionX={isRtl ? "left" : "right"}
         fixedDirection={true}
         withBackdrop={false}
         manualY={(bottom || "63") + "px"}

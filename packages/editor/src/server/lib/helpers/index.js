@@ -60,14 +60,20 @@ export const initDocEditor = async (req) => {
 
     const baseSettings = [
       getUser(null, headers),
-      getSettings(false, headers),
       getAppearanceTheme(headers),
       getLogoUrls(headers),
     ];
+    let settings;
 
-    [user, settings, appearanceTheme, logoUrls] = await Promise.all(
-      baseSettings
-    );
+    try {
+      settings = await getSettings(false, headers);
+    } catch (err) {
+      console.error("initDocEditor settings failed", err);
+
+      return { isSettingsError: true };
+    }
+
+    [user, appearanceTheme, logoUrls] = await Promise.all(baseSettings);
 
     if (settings.tenantStatus === TenantStatus.PortalRestore) {
       error = "restore-backup";
@@ -150,10 +156,9 @@ export const initDocEditor = async (req) => {
         config.editorConfig.customization.logo.url +
         getLogoFromPath(config.editorConfig.customization.customer.logo);
     }
-
     // needed to reset rtl language in Editor
     config.editorConfig.lang = getLtrLanguageForEditor(
-      user?.cultureName || "en",
+      user?.cultureName,
       settings.culture,
       true
     );

@@ -68,17 +68,17 @@ const StyledHeadline = styled(Headline)`
   width: 100%;
   max-width: min-content;
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
   box-sizing: border-box;
 
   @media ${tablet} {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 
   @media ${mobile} {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     line-height: 24px;
   }
 `;

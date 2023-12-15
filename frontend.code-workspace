@@ -17,6 +17,10 @@
       "path": "packages/editor"
     },
     {
+      "name": "🗂 @docspace/management",
+      "path": "packages/management"
+    },
+    {
       "name": "📦 @docspace/common",
       "path": "packages/common"
     },
@@ -37,7 +41,8 @@
       "🔑 @docspace/login",
       "🚀 @docspace/client",
       "📄 @docspace/editor",
-      "📦 @docspace/common"
+      "📦 @docspace/common",
+      "🗂 @docspace/management"
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -52,14 +57,29 @@
             "tooltip": "🛠️ Start the \"backend docker build EE\" task"
           },
           {
+            "label": "Docker : ReBuild-EE",
+            "task": "Backend | rebuild EE",
+            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
+          },
+          {
             "label": "Docker : Build-CE",
             "task": "Backend | build CE",
             "tooltip": "🛠️ Start the \"backend docker build CE\" task"
           },
           {
-            "label": "Docker : Build-SAAS",
-            "task": "Backend | build SAAS",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS\" task"
+            "label": "Docker : Build-SAAS + dnsmasq",
+            "task": "Backend | build SAAS + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
+          },
+          {
+            "label": "Docker : ReBuild-SAAS + dnsmasq",
+            "task": "Backend | rebuild SAAS + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
+          },
+          {
+            "label": "Docker : Build-EE + dnsmasq",
+            "task": "Backend | build EE + dnsmasq",
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
           },
           {
             "label": "Docker : Clear",
@@ -93,9 +113,19 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
+            "label": "Update yarn.lock",
+            "task": "Frontend | update yarn.lock",
+            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Build and start prod",
+            "task": "Frontend | build-and-start-prod",
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
           },
           {
             "label": "Start",
@@ -109,6 +139,27 @@
           }
         ],
         "tooltip": "🛠️ Client tasks"
+      },
+      {
+        "label": "Tests",
+        "tasks": [
+          {
+            "label": "translations",
+            "task": "Test | frontend-translations",
+            "tooltip": "🛠️ Start the \"frontend translation tests\" task"
+          },
+          {
+            "label": "spellcheck",
+            "task": "Test | frontend-translations-spellcheck",
+            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+          },
+          {
+            "label": "spellcheck-force-save",
+            "task": "Test | frontend-translations-spellcheck-force-save",
+            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+          }
+        ],
+        "tooltip": "🛠️ Client tests tasks"
       }
     ]
   },

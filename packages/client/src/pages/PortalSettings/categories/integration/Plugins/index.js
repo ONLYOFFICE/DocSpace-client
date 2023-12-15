@@ -23,7 +23,7 @@ const PluginPage = ({
 
   openSettingsDialog,
 
-  changePluginStatus,
+  updatePlugin,
 
   addPlugin,
 
@@ -35,10 +35,8 @@ const PluginPage = ({
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
   React.useEffect(() => {
-    setDocumentTitle(t("Plugins"));
+    setDocumentTitle(t("Common:Plugins"));
   }, []);
-
-  const learnMoreLink = "https://api.onlyoffice.com/docspace/pluginssdk/";
 
   return (
     <>
@@ -53,7 +51,6 @@ const PluginPage = ({
             theme={theme}
             onAddAction={addPlugin}
             currentColorScheme={currentColorScheme}
-            learnMoreLink={learnMoreLink}
             withUpload={withUpload}
           />
         </StyledEmptyContainer>
@@ -62,7 +59,7 @@ const PluginPage = ({
           {/* <Header
             t={t}
             currentColorScheme={currentColorScheme}
-            learnMoreLink={learnMoreLink}
+           
             withUpload={withUpload}
           /> */}
           {withUpload && <UploadButton t={t} addPlugin={addPlugin} />}
@@ -71,7 +68,7 @@ const PluginPage = ({
               <PluginItem
                 key={`plugin-${plugin.name}-${plugin.version}`}
                 openSettingsDialog={openSettingsDialog}
-                changePluginStatus={changePluginStatus}
+                updatePlugin={updatePlugin}
                 {...plugin}
               />
             ))}
@@ -85,11 +82,11 @@ const PluginPage = ({
 export default inject(({ auth, pluginStore }) => {
   const { pluginOptions, currentColorScheme, theme } = auth.settingsStore;
 
-  const withUpload = pluginOptions.includes("upload");
+  const withUpload = pluginOptions.upload;
 
   const {
     pluginList,
-    changePluginStatus,
+    updatePlugin,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
 
@@ -99,9 +96,9 @@ export default inject(({ auth, pluginStore }) => {
     isEmptyList,
   } = pluginStore;
 
-  const openSettingsDialog = (pluginId, pluginName, pluginSystem) => {
+  const openSettingsDialog = (pluginName) => {
     setSettingsPluginDialogVisible(true);
-    setCurrentSettingsDialogPlugin({ pluginId, pluginName, pluginSystem });
+    setCurrentSettingsDialogPlugin({ pluginName });
   };
 
   return {
@@ -109,7 +106,7 @@ export default inject(({ auth, pluginStore }) => {
 
     pluginList,
 
-    changePluginStatus,
+    updatePlugin,
 
     openSettingsDialog,
 

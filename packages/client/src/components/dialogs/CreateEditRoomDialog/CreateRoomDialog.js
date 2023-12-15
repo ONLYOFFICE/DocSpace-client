@@ -35,6 +35,7 @@ const StyledModalDialog = styled(ModalDialog)`
 const CreateRoomDialog = ({
   t,
   visible,
+  title,
   onClose,
   onCreate,
 
@@ -59,7 +60,7 @@ const CreateRoomDialog = ({
 
   const startRoomParams = {
     type: undefined,
-    title: "",
+    title: title,
     tags: [],
     isPrivate: false,
     storageLocation: {
@@ -93,14 +94,15 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams.title.trim() !== "" ? false : true;
+  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
 
   const onCreateRoom = async () => {
-    if (!roomParams.title.trim()) {
+    if (!roomParams?.title?.trim()) {
       setIsValidTitle(false);
       return;
     }

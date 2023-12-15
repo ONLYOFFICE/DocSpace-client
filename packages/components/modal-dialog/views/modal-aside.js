@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Loaders from "@docspace/common/components/Loaders";
+import DialogSkeleton from "../../skeletons/dialog";
+import DialogAsideSkeleton from "../../skeletons/dialog/aside";
 
 import Heading from "../../heading";
 import {
@@ -17,7 +18,9 @@ import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
 import FormWrapper from "../components/FormWrapper";
-import { isIOS, isMobile } from "react-device-detect";
+import { isIOS, isTablet, isMobile } from "react-device-detect";
+
+let isInitScroll = false;
 
 const Modal = ({
   id,
@@ -52,17 +55,50 @@ const Modal = ({
   const contentRef = React.useRef(0);
 
   React.useEffect(() => {
-    if (isMobile && isIOS) {
+    if (isIOS && isMobile) {
       window.visualViewport.addEventListener("resize", onResize);
       window.visualViewport.addEventListener("scroll", onResize);
     }
+
     return () => {
       window.visualViewport.removeEventListener("resize", onResize);
       window.visualViewport.removeEventListener("scroll", onResize);
     };
   }, []);
 
+  React.useEffect(() => {
+    if (!visible) isInitScroll = false;
+  }, [visible]);
+
+  const scrollPosition = () => {
+    if (currentDisplayType !== "modal") return;
+
+    if (isInitScroll) return;
+
+    const dialogHeader = document
+      .getElementById("modal-header-swipe")
+      ?.getBoundingClientRect();
+
+    const input = document
+      .getElementsByClassName("input-component")[0]
+      ?.getBoundingClientRect();
+
+    if (dialogHeader && input) {
+      dialogHeader.y < dialogHeader.height + input.height
+        ? window.scrollTo(0, input.y)
+        : window.scrollTo(0, dialogHeader.y);
+    }
+
+    isInitScroll = true;
+  };
+
   const onResize = (e) => {
+    if (window.innerHeight < window.innerWidth || isTablet) {
+      scrollPosition();
+
+      return;
+    }
+
     if (!contentRef.current) return;
 
     if (currentDisplayType === "modal") {
@@ -150,12 +186,12 @@ const Modal = ({
             )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
-                <Loaders.DialogLoader
+                <DialogSkeleton
                   isLarge={isLarge}
                   withFooterBorder={withFooterBorder}
                 />
               ) : (
-                <Loaders.DialogAsideLoader
+                <DialogAsideSkeleton
                   withoutAside
                   withFooterBorder={withFooterBorder}
                 />
@@ -202,11 +238,7 @@ const Modal = ({
                         embedded={embedded}
                       >
                         {currentDisplayType === "aside" && withBodyScroll ? (
-                          <Scrollbar
-                            stype="mediumBlack"
-                            id="modal-scroll"
-                            className="modal-scroll"
-                          >
+                          <Scrollbar id="modal-scroll" className="modal-scroll">
                             {bodyComponent}
                           </Scrollbar>
                         ) : (

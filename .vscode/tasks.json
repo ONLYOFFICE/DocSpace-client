@@ -18,6 +18,21 @@
       }
     },
     {
+      "label": "Backend | rebuild EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
       "type": "shell",
@@ -33,8 +48,38 @@
       }
     },
     {
-      "label": "Backend | build SAAS",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s",
+      "label": "Backend | build SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | rebuild SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build EE + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -123,6 +168,21 @@
       }
     },
     {
+      "label": "Frontend | update yarn.lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn wipe && yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build",
@@ -156,6 +216,66 @@
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build && yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck-force-save",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py -f",
       "group": {
         "kind": "build",
         "isDefault": true

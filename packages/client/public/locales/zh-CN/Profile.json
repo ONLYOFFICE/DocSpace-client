@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "连接您的社交媒体",
   "DarkTheme": "深色主题",
   "DescriptionForSecurity": "如需进一步的安全性，您需要更改密码。",
+  "DesktopTheme": "与桌面编辑器的设置同步",
+  "DesktopThemeDescription": "根据桌面编辑器的当前主题，自动在浅色和深色主题之间切换。",
   "EditPhoto": "编辑照片",
   "EmailNotVerified": "邮件未验证",
+  "ErrorAccountAlreadyUse": "关联帐户已被其他用户使用",
+  "FileManagement": "文件管理",
   "InterfaceTheme": "界面主題",
   "LightTheme": "浅色主题",
   "LogoutActiveConnection": "从活动连接中注销",
@@ -24,6 +28,5 @@
   "SuccessLogout": "活动连接已登出：{{platform}}，{{browser}}",
   "SystemTheme": "使用系统主题",
   "SystemThemeDescription": "根据系统状态切换浅色和深色主题。",
-  "TfaLoginSettings": "登录设置",
   "TwoFactorDescription": "管理员为所有用户启用了通过代码生成应用进行的双因素身份认证功能。"
 }

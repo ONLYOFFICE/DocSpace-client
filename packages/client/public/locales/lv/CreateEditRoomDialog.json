@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Visi faili šajā telpā tiks šifrēti.",
   "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos DocSpace lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",
   "MakeRoomPrivateTitle": "Padarīt telpu privātu",
+  "PublicRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs tikai skatīšanas atļauja visiem failiem.",
+  "PublicRoomDescription": "Uzaiciniet lietotājus, izmantojot ārējās saites, skatīt dokumentus bez reģistrācijas. Varat arī iegult šo telpu jebkurā tīmekļa saskarnē.",
   "ReviewRoomDescription": "Pieprasīt pārskatīšanu vai komentārus par dokumentiem",
   "ReviewRoomTitle": "Pārskatīt telpu",
   "RoomEditing": "Telpas rediģēšana",

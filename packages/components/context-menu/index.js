@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DomHelpers from "../utils/domHelpers";
 import { classNames } from "../utils/classNames";
+import { trimSeparator } from "../utils/trimSeparator";
 import { CSSTransition } from "react-transition-group";
 import { withTheme } from "styled-components";
 
@@ -20,7 +21,8 @@ import Text from "../text";
 import Avatar from "../avatar";
 import IconButton from "../icon-button";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
-import RoomIcon from "@docspace/components/room-icon";
+import RoomIcon from "../room-icon";
+
 class ContextMenu extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +55,7 @@ class ContextMenu extends Component {
 
   show = (e) => {
     if (this.props.getContextModel) {
-      const model = this.props.getContextModel();
+      const model = trimSeparator(this.props.getContextModel());
       this.setState({ model });
     }
 
@@ -402,7 +404,7 @@ class ContextMenu extends Component {
                       />
                     </div>
                   )}
-                  <Text className="text" truncate={true}>
+                  <Text className="text" truncate={true} dir="auto">
                     {this.props.header.title}
                   </Text>
                 </div>

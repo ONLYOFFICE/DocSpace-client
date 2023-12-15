@@ -33,6 +33,7 @@ const SectionHeaderContent = ({
   setIsInfoPanelVisible,
 
   setIsLoading,
+  oformsLoadError,
 }) => {
   const navigate = useNavigate();
 
@@ -69,17 +70,17 @@ const SectionHeaderContent = ({
         onClick={onNavigateBack}
         className="arrow-button"
       />
-
       <StyledHeading
         className="oform-header"
         isInfoPanelVisible={isInfoPanelVisible}
       >
         <StyledHeadline type="content" truncate>
-          {getCategoryTitle(currentCategory) || t("Common:OFORMsGallery")}
+          {(!oformsLoadError && getCategoryTitle(currentCategory)) ||
+            t("Common:OFORMsGallery")}
         </StyledHeadline>
       </StyledHeading>
 
-      {canSubmitToFormGallery() && (
+      {!oformsLoadError && canSubmitToFormGallery() && (
         <StyledSubmitToGalleryButton
           primary
           size="small"
@@ -87,18 +88,21 @@ const SectionHeaderContent = ({
           label={t("Common:SubmitToFormGallery")}
         />
       )}
-      <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
-        <div className="info-panel-toggle-bg">
-          <IconButton
-            className="info-panel-toggle"
-            iconName={PanelReactSvgUrl}
-            size="16"
-            isFill={true}
-            onClick={onToggleInfoPanel}
-            title={t("Common:InfoPanel")}
-          />
-        </div>
-      </StyledInfoPanelToggleWrapper>
+
+      {!oformsLoadError && (
+        <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
+          <div className="info-panel-toggle-bg">
+            <IconButton
+              className="info-panel-toggle"
+              iconName={PanelReactSvgUrl}
+              size="16"
+              isFill={true}
+              onClick={onToggleInfoPanel}
+              title={t("Common:InfoPanel")}
+            />
+          </div>
+        </StyledInfoPanelToggleWrapper>
+      )}
     </StyledContainer>
   );
 };
@@ -135,6 +139,8 @@ export default inject(
         clientLoadingStore.setIsSectionFilterLoading(true, false);
         clientLoadingStore.setIsSectionBodyLoading(true, false);
       },
+
+      oformsLoadError: oformsStore.oformsLoadError,
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

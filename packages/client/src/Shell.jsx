@@ -18,7 +18,7 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "./i18n";
 
 import Snackbar from "@docspace/components/snackbar";
-import moment from "moment";
+import moment from "moment-timezone";
 //import ReactSmartBanner from "./components/SmartBanner";
 import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -29,6 +29,7 @@ import { Portal } from "@docspace/components";
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
 import { getRestoreProgress } from "@docspace/common/api/portal";
+import { useTheme } from "styled-components";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -53,9 +54,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     standalone,
     userId,
     currentDeviceType,
-
+    timezone,
     showArticleLoader,
   } = rest;
+
+  const theme = useTheme();
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -73,6 +76,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     } catch (err) {
       toastr.error(err);
     }
+  }, []);
+
+  useEffect(() => {
+    moment.updateLocale("ar-sa", {
+      longDateFormat: {
+        LT: "h:mm a",
+        LTS: "h:mm:ss a",
+        L: "YYYY/MM/DD",
+        LL: "YYYY MMMM D",
+        LLL: "h:mm a YYYY MMMM D",
+        LLLL: "h:mm a YYYY MMMM D dddd",
+      },
+    });
+
+    moment.locale(language);
   }, []);
 
   useEffect(() => {
@@ -237,6 +255,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         setSnackbarExist(true);
         setMaintenanceExist(true);
       },
+      theme,
     };
 
     Snackbar.show(barConfig);
@@ -465,9 +484,15 @@ const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
     currentColorScheme = settingsStore.currentColorScheme || false;
   }
 
+  const { timezone } = settingsStore;
+
+  window.theme = theme;
+  window.timezone = timezone;
+
   return {
     theme: { ...theme, interfaceDirection: i18n.dir() },
     currentColorScheme,
+    timezone,
   };
 })(observer(ThemeProvider));
 

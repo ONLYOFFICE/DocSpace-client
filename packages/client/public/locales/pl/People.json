@@ -2,5 +2,6 @@
   "LblInviteAgain": "Zaproś ponownie",
   "MessageEmailActivationInstuctionsSentOnEmail": "Instrukcje dotyczące aktywacji adresu e-mail zostały wysłane na adres <1>{{email}}</1>.",
   "NotFoundUsers": "Nie znaleziono użytkowników",
+  "NotFoundUsersDescription": "Nie znaleziono użytkownika pasującego do wyszukiwanej frazy. Dostosuj parametry lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę użytkowników.",
   "UserStatus": "Status"
 }

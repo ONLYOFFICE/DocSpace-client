@@ -26,6 +26,10 @@ const Wizard = loadable(() => import("../pages/Wizard"));
 const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
 const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
+const AccessRestricted = loadable(() =>
+  import("../pages/Errors/AccessRestricted")
+);
+
 const Error401 = loadable(() => import("client/Error401"));
 
 const ClientRoutes = [
@@ -240,7 +244,7 @@ const ClientRoutes = [
   {
     path: "/Products/Files/",
     caseSensitive: true,
-    element: <Navigate to="/rooms/shared" replace />,
+    element: <Navigate to="/rooms/shared/filter" replace />,
   },
   {
     path: "/form-gallery",
@@ -333,6 +337,16 @@ const ClientRoutes = [
       <PublicRoute>
         <ErrorBoundary>
           <ErrorUnavailable />
+        </ErrorBoundary>
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/access-restricted",
+    element: (
+      <PublicRoute>
+        <ErrorBoundary>
+          <AccessRestricted />
         </ErrorBoundary>
       </PublicRoute>
     ),

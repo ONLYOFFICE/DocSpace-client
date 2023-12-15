@@ -37,7 +37,7 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
   }
 
-  .headerNavigation{
+  .headerNavigation {
     display: flex;
     align-items: center;
   }
@@ -56,20 +56,21 @@ const HeaderContainer = styled.div`
     }
 
     svg {
-      ${({ theme }) => theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
   .headline {
-    font-size: 18px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     margin-inline-end: 16px;
 
     @media ${tablet} {
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
 
     @media ${mobile} {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 `;

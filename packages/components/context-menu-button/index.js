@@ -10,6 +10,7 @@ import Aside from "../aside";
 import Heading from "../heading";
 import Link from "../link";
 import { desktop, isTablet, isMobile } from "../utils/device";
+import {  isTablet as Tablet } from "react-device-detect";
 
 import {
   StyledBodyContent,
@@ -214,7 +215,7 @@ class ContextMenuButton extends React.Component {
             forwardedRef={this.ref}
             clickOutsideAction={this.clickOutsideAction}
             columnCount={columnCount}
-            withBackdrop={isTablet() || isMobile()}
+            withBackdrop={isTablet() || isMobile() || Tablet}
             zIndex={zIndex}
             isDefaultMode={usePortal}
           >

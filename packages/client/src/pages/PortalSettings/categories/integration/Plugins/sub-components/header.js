@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import Heading from "@docspace/components/heading";
-import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 
@@ -12,7 +11,7 @@ const StyledHeader = styled.div`
   flex-direction: column;
 
   .plugin-list-header {
-    font-size: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     font-weight: 700;
     lien-height: 22px;
 
@@ -30,11 +29,13 @@ const StyledHeader = styled.div`
   }
 `;
 
-const Header = ({ t, currentColorScheme, withUpload, learnMoreLink }) => {
+const Header = ({ t, currentColorScheme, withUpload }) => {
   return (
     <StyledHeader>
       <div className="header-container">
-        <Heading className={"plugin-list-header"}>{t("Plugins")}</Heading>
+        <Heading className={"plugin-list-header"}>
+          {t("Common:Plugins")}
+        </Heading>
         {/* <HelpButton
           offsetBottom={0}
           offsetLeft={0}
@@ -44,18 +45,7 @@ const Header = ({ t, currentColorScheme, withUpload, learnMoreLink }) => {
         /> */}
       </div>
       <div>
-        <Text>
-          {withUpload ? t("Description") : t("PluginsHelp")}
-          <br />
-          <Link
-            color={currentColorScheme?.main?.accent}
-            type={"page"}
-            target={"_blank"}
-            href={learnMoreLink}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        </Text>
+        <Text>{withUpload ? t("Description") : t("PluginsHelp")}</Text>
       </div>
     </StyledHeader>
   );

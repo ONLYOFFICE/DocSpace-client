@@ -9,9 +9,10 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid }) => {
+const MobileView = ({ isSettingPaid, isManagement }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
+  const baseUrl = isManagement ? "/" : "/portal-settings/customization";
 
   const onClickLink = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const MobileView = ({ isSettingPaid }) => {
       <MobileCategoryWrapper
         title={t("WhiteLabel")}
         subtitle={t("BrandingSubtitle")}
-        url="/portal-settings/customization/branding/white-label"
+        url={`${baseUrl}/branding/white-label`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
@@ -31,7 +32,7 @@ const MobileView = ({ isSettingPaid }) => {
       <MobileCategoryWrapper
         title={t("CompanyInfoSettings")}
         subtitle={t("BrandingSectionDescription")}
-        url="/portal-settings/customization/branding/company-info-settings"
+        url={`${baseUrl}/branding/company-info-settings`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
@@ -39,7 +40,7 @@ const MobileView = ({ isSettingPaid }) => {
       <MobileCategoryWrapper
         title={t("AdditionalResources")}
         subtitle={t("AdditionalResourcesSubtitle")}
-        url="/portal-settings/customization/branding/additional-resources"
+        url={`${baseUrl}/branding/additional-resources`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}

@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Сonecte sus redes sociales",
   "DarkTheme": "Tema oscuro",
   "DescriptionForSecurity": "Para aumentar la seguridad, debe cambiar su contraseña.",
+  "DesktopTheme": "Sincronizar con la configuración del Editor de escritorio ",
+  "DesktopThemeDescription": "Cambie automáticamente entre temas claros y oscuros según el tema actual de los editores de escritorio.",
   "EditPhoto": "Editar foto",
   "EmailNotVerified": "Correo electrónico no verificado",
+  "ErrorAccountAlreadyUse": "La cuenta vinculada ya está utilizada por otro usuario",
+  "FileManagement": "Gestión de archivos",
   "InterfaceTheme": "Tema de interfaz",
   "LightTheme": "Tema claro",
   "LogoutActiveConnection": "Salir de la conexión activa",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Se ha cerrado la conexión activa:{{platform}}, {{browser}}",
   "SystemTheme": "Utilizar el tema del sistema",
   "SystemThemeDescription": "Cambie automáticamente entre los temas claros y oscuros cuando lo haga su sistema.",
-  "TfaLoginSettings": "Ajustes de acceso",
   "TwoFactorDescription": "El administrador ha habilitado la autenticación de dos factores a través de una aplicación que genera códigos para todos los usuarios."
 }

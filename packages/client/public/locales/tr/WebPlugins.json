@@ -1,1 +1,11 @@
-{}
+{
+  "DeletePlugin": "Eklentiyi sil",
+  "DeletePluginDescription": "Bu eklenti artık DocSpace kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
+  "DeletePluginTitle": "Eklenti silinsin mi?",
+  "Description": "DocSpace'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın ve ZIP arşivindeki eklenti dosyasını seçin.",
+  "Metadata": "Meta veri",
+  "NeedSettings": "Ayarları girmeniz gerekiyor",
+  "NoPlugins": "Hiçbir eklenti eklenmedi",
+  "PluginsHelp": "Eklentiler DocSpace'in işlevselliğini genişletmenize olanak sağlar",
+  "UploadPlugin": "Eklentiyi yükle"
+}

@@ -709,20 +709,26 @@ class FilesStore {
     this.selectedFolderStore.setSelectedFolder(null);
   };
 
+  mappingActiveItems = (items, destFolderId) => {
+    const arrayFormation = items.map((item) =>
+      typeof item === "object"
+        ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
+        : {
+            id: item,
+            destFolderId,
+          }
+    );
+    return arrayFormation;
+  };
+
   setActiveFiles = (activeFiles, destFolderId) => {
-    const arrayFormation = activeFiles.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFiles, destFolderId);
 
     this.activeFiles = arrayFormation;
   };
 
   setActiveFolders = (activeFolders, destFolderId) => {
-    const arrayFormation = activeFolders.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFolders, destFolderId);
 
     this.activeFolders = arrayFormation;
   };
@@ -1104,9 +1110,12 @@ class FilesStore {
         const selectableFolder = this.filesList.find(
           (f) => f.id == id && f.isFolder
         );
-        selectableFolder.isFolder = true;
 
-        newSelections.push(selectableFolder);
+        if (selectableFolder) {
+          selectableFolder.isFolder = true;
+
+          newSelections.push(selectableFolder);
+        }
       }
     }
 
@@ -1539,8 +1548,6 @@ class FilesStore {
         }
       })
       .catch((err) => {
-        console.error(err);
-
         if (err?.response?.status === 402)
           this.authStore.currentTariffStatusStore.setPortalTariff();
 
@@ -1804,12 +1811,14 @@ class FilesStore {
     const isThirdPartyItem = !!item.providerKey;
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
-    const canConvert = this.filesSettingsStore.extsConvertible[item.fileExst];
+    const canConvert = item.viewAccessibility?.CanConvert;
+    const mustConvert = item.viewAccessibility?.MustConvert;
     const isEncrypted = item.encrypted;
     const isDocuSign = false; //TODO: need this prop;
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
+    const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.authStore.settingsStore;
 
@@ -1821,7 +1830,8 @@ class FilesStore {
     const { isDesktopClient } = this.authStore.settingsStore;
 
     const pluginAllKeys =
-      enablePlugins && this.pluginStore.getContextMenuKeysByType();
+      enablePlugins &&
+      this.pluginStore.getContextMenuKeysByType(null, null, security);
 
     const canRenameItem = item.security?.Rename;
 
@@ -1837,7 +1847,7 @@ class FilesStore {
     const canDownload = item.security?.Download;
 
     if (isFile) {
-      const shouldFillForm = item.viewAccessability.WebRestrictedEditing;
+      const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
       const canLockFile = item.security?.Lock;
       const canChangeVersionFileHistory =
         !isEditing && item.security?.EditHistory;
@@ -1847,10 +1857,10 @@ class FilesStore {
 
       const canSubmitToFormGallery = item.security?.SubmitToFormGallery;
 
-      const canEditFile = item.security.Edit && item.viewAccessability.WebEdit;
+      const canEditFile = item.security.Edit && item.viewAccessibility.WebEdit;
       const canOpenPlayer =
-        item.viewAccessability.ImageView || item.viewAccessability.MediaView;
-      const canViewFile = item.viewAccessability.WebView;
+        item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
+      const canViewFile = item.viewAccessibility.WebView;
 
       const isMasterForm = item.fileExst === ".docxf";
       const isPdf = item.fileExst === ".pdf";
@@ -1981,7 +1991,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download-as"]);
       }
 
-      if (!canConvert || isEncrypted) {
+      if (!mustConvert || isEncrypted) {
         fileOptions = this.removeOptions(fileOptions, ["convert"]);
       }
 
@@ -2041,12 +2051,13 @@ class FilesStore {
 
         if (enablePlugins) {
           if (
-            !item.viewAccessability.MediaView &&
-            !item.viewAccessability.ImageView
+            !item.viewAccessibility.MediaView &&
+            !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Files,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2056,12 +2067,13 @@ class FilesStore {
           }
 
           if (
-            !item.viewAccessability.MediaView &&
-            item.viewAccessability.ImageView
+            !item.viewAccessibility.MediaView &&
+            item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Image,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2071,12 +2083,13 @@ class FilesStore {
           }
 
           if (
-            item.viewAccessability.MediaView &&
-            !item.viewAccessability.ImageView
+            item.viewAccessibility.MediaView &&
+            !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.Video,
-              item.fileExst
+              item.fileExst,
+              security
             );
 
             pluginAllKeys &&
@@ -2236,7 +2249,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms
+            PluginFileType.Rooms,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2334,7 +2349,9 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Folders
+            PluginFileType.Folders,
+            null,
+            security
           );
 
           pluginAllKeys &&
@@ -2654,6 +2671,7 @@ class FilesStore {
           );
 
       newFilter.total -= deleteCount;
+      this.setIsEmptyPage(newFilter.total <= 0);
 
       runInAction(() => {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
@@ -2661,6 +2679,7 @@ class FilesStore {
         this.setFolders(folders);
         this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
+        this.setTempActionFoldersIds([]);
       });
 
       return;
@@ -2670,38 +2689,68 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
 
-    api.files
-      .getFolder(newFilter.folder, newFilter)
-      .then((res) => {
-        const files = fileIds
-          ? this.files.filter((x) => !fileIds.includes(x.id))
-          : this.files;
-        const folders = folderIds
-          ? this.folders.filter((x) => !folderIds.includes(x.id))
-          : this.folders;
+    if (isRooms) {
+      return api.rooms
+        .getRooms(newFilter)
+        .then((res) => {
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        const newFiles = [...files, ...res.files];
-        const newFolders = [...folders, ...res.folders];
+          const newFolders = [...folders, ...res.folders];
 
-        const filter = this.filter.clone();
-        filter.total = res.total;
+          const roomsFilter = this.roomsFilter.clone();
+          roomsFilter.total = res.total;
 
-        runInAction(() => {
-          this.setFilter(filter);
-          this.setFiles(newFiles);
-          this.setFolders(newFolders);
+          runInAction(() => {
+            this.setRoomsFilter(roomsFilter);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
         });
+    } else {
+      api.files
+        .getFolder(newFilter.folder, newFilter)
+        .then((res) => {
+          const files = fileIds
+            ? this.files.filter((x) => !fileIds.includes(x.id))
+            : this.files;
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        showToast && showToast();
-      })
-      .catch((err) => {
-        toastr.error(err);
-        console.log("Need page reload");
-      })
-      .finally(() => {
-        this.setOperationAction(false);
-        this.setTempActionFilesIds([]);
-      });
+          const newFiles = [...files, ...res.files];
+          const newFolders = [...folders, ...res.folders];
+
+          const filter = this.filter.clone();
+          filter.total = res.total;
+
+          runInAction(() => {
+            this.setFilter(filter);
+            this.setFiles(newFiles);
+            this.setFolders(newFolders);
+          });
+
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
+          this.setTempActionFoldersIds([]);
+        });
+    }
   };
 
   updateFile = (fileId, title) => {
@@ -2973,7 +3022,7 @@ class FilesStore {
         tags,
         pinned,
         security,
-        viewAccessability,
+        viewAccessibility,
         mute,
         inRoom = true,
       } = item;
@@ -2989,7 +3038,7 @@ class FilesStore {
         ];
 
       const canOpenPlayer =
-        item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+        item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
@@ -3008,7 +3057,7 @@ class FilesStore {
 
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
 
-      const needConvert = item.viewAccessability?.Convert;
+      const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
@@ -3126,7 +3175,7 @@ class FilesStore {
         thirdPartyIcon,
         providerType,
         security,
-        viewAccessability,
+        viewAccessibility,
         ...pluginOptions,
         inRoom,
         isForm,
@@ -3159,9 +3208,9 @@ class FilesStore {
         cbMenu.push(FilterType.PresentationsOnly);
       else if (isSpreadsheet(item.fileExst))
         cbMenu.push(FilterType.SpreadsheetsOnly);
-      else if (item.viewAccessability?.ImageView)
+      else if (item.viewAccessibility?.ImageView)
         cbMenu.push(FilterType.ImagesOnly);
-      else if (item.viewAccessability?.MediaView)
+      else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
     }
@@ -3261,13 +3310,8 @@ class FilesStore {
   };
 
   get sortedFiles() {
-    const {
-      extsConvertible,
-      isSpreadsheet,
-      isPresentation,
-      isDocument,
-      isMasterFormExtension,
-    } = this.filesSettingsStore;
+    const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =
+      this.filesSettingsStore;
 
     let sortedFiles = {
       documents: [],
@@ -3289,9 +3333,7 @@ class FilesStore {
       item.checked = true;
       item.format = null;
 
-      const canConvert = extsConvertible[item.fileExst];
-
-      if (item.fileExst && canConvert) {
+      if (item.fileExst && item.viewAccessibility?.CanConvert) {
         if (isSpreadsheet(item.fileExst)) {
           sortedFiles.spreadsheets.push(item);
         } else if (isPresentation(item.fileExst)) {
@@ -3349,8 +3391,6 @@ class FilesStore {
   }
 
   get canConvertSelected() {
-    const { extsConvertible } = this.filesSettingsStore;
-
     const selection = this.selection.length
       ? this.selection
       : this.bufferSelection
@@ -3358,16 +3398,21 @@ class FilesStore {
       : [];
 
     return selection.some((selected) => {
-      if (selected.isFolder === true || !selected.fileExst) return false;
-      const array = extsConvertible[selected.fileExst];
-      return array;
+      if (
+        selected.isFolder === true ||
+        !selected.fileExst ||
+        !selected.viewAccessibility
+      )
+        return false;
+
+      return selected.viewAccessibility?.CanConvert;
     });
   }
 
   get isViewedSelected() {
     return this.selection.some((selected) => {
       if (selected.isFolder === true || !selected.fileExst) return false;
-      return selected.viewAccessability?.WebView;
+      return selected.viewAccessibility?.WebView;
     });
   }
 
@@ -3375,8 +3420,8 @@ class FilesStore {
     return this.selection.some((selected) => {
       if (selected.isFolder === true || !selected.fileExst) return false;
       return (
-        selected.viewAccessability?.ImageView ||
-        selected.viewAccessability?.MediaView
+        selected.viewAccessibility?.ImageView ||
+        selected.viewAccessibility?.MediaView
       );
     });
   }
@@ -3428,21 +3473,23 @@ class FilesStore {
 
     AccessOptions.push("ReadOnly", "DenyAccess");
 
-    const webEdit = selection.find((x) => x.viewAccessability?.WebEdit);
+    const webEdit = selection.find((x) => x.viewAccessibility?.WebEdit);
 
-    const webComment = selection.find((x) => x.viewAccessability?.WebComment);
+    const webComment = selection.find((x) => x.viewAccessibility?.WebComment);
 
-    const webReview = selection.find((x) => x.viewAccessability?.WebReview);
+    const webReview = selection.find((x) => x.viewAccessibility?.WebReview);
 
     const formFillingDocs = selection.find(
-      (x) => x.viewAccessability?.WebRestrictedEditing
+      (x) => x.viewAccessibility?.WebRestrictedEditing
     );
 
     const webFilter = selection.find(
-      (x) => x.viewAccessability?.WebCustomFilterEditing
+      (x) => x.viewAccessibility?.WebCustomFilterEditing
     );
 
-    const webNeedConvert = selection.find((x) => x.viewAccessability?.Convert);
+    const webNeedConvert = selection.find(
+      (x) => x.viewAccessibility?.MustConvert
+    );
 
     if ((webEdit && !webNeedConvert) || !externalAccess)
       AccessOptions.push("FullAccess");

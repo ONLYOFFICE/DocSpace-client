@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "Nome de usuário ou senha inválida.",
   "LoginWithAccountNotFound": "Não foi possível encontrar conta de terceiros associada. Você precisa conectar sua conta da rede social na página de edição de perfil em primeiro lugar.",
   "LoginWithBruteForce": "Autorização temporariamente bloqueada.",
+  "LoginWithBruteForceCaptcha": "Confirme que você não é um robô",
   "RecaptchaInvalid": "Recaptcha inválido",
   "SsoAttributesNotFound": "A autenticação falhou (atributos de asserção não encontrados)",
   "SsoAuthFailed": "A autenticação falhou",

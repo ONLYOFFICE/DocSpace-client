@@ -4,6 +4,7 @@ import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 import SmartBanner from "react-smartbanner";
+import { getCookie } from "@docspace/components/utils/cookie";
 import "./main.css";
 
 const Wrapper = styled.div`
@@ -14,17 +15,6 @@ const ReactSmartBanner = (props) => {
   const { t, ready, isBannerVisible, setIsBannerVisible } = props;
   const force = isIOS ? "ios" : "android";
   const location = useLocation();
-
-  const getCookie = (name) => {
-    let matches = document.cookie.match(
-      new RegExp(
-        "(?:^|; )" +
-          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-          "=([^;]*)"
-      )
-    );
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-  };
 
   const checkBanner = () => {
     const cookieClosed = getCookie("smartbanner-closed");
@@ -56,8 +46,8 @@ const ReactSmartBanner = (props) => {
   };
 
   const priceText = {
-    ios: t("SmartBanner:Price"),
-    android: t("SmartBanner:Price"),
+    ios: t("Common:Free"),
+    android: t("Common:Free"),
     windows: "",
     kindle: "",
   };

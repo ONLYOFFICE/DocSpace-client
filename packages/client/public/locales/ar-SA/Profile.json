@@ -7,6 +7,7 @@
   "DescriptionForSecurity": "من أجل مزيد من الأمان، يجب عليك تغيير كلمة المرور.",
   "EditPhoto": "تحرير الصورة",
   "EmailNotVerified": "البريد الإلكتروني غير موثق",
+  "FileManagement": "إدارة الملف",
   "InterfaceTheme": "واجهة المستخدم",
   "LightTheme": "الوضع النهاري",
   "LogoutActiveConnection": "تسجيل الخروج من الاتصال النشط",
@@ -24,6 +25,5 @@
   "SuccessLogout": "تم تسجيل خروج الاتصال النشط: {{platform}} ، {{browser}}",
   "SystemTheme": "استخدم قالب النظام",
   "SystemThemeDescription": "قم بالتبديل تلقائيًا بين القوالب الفاتحة والداكنة عندما يقوم نظامك بذلك.",
-  "TfaLoginSettings": "إعدادات تسجيل الدخول",
   "TwoFactorDescription": "تم تمكين المصادقة الثنائية عبر تطبيق إنشاء التعليمات البرمجية لجميع المستخدمين من قبل المسؤول."
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg";
 
 export const SidebarContainer = styled.aside<{ isPanelOpen: boolean }>`
@@ -42,6 +42,13 @@ export const Thumbnails = styled.section<{ visible: boolean }>`
 `;
 
 export const HideSidebarIcon = styled(ArticleShowMenuReactSvgUrl)`
-  transform: rotate(180deg);
-  margin-left: auto;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          transform: rotate(180deg);
+          margin-left: auto;
+        `}
 `;

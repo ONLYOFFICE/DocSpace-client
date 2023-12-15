@@ -62,7 +62,7 @@ const StyledFilterBlock = styled.div`
       justify-content: space-between;
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 400;
         line-height: 20px;
       }
@@ -179,7 +179,7 @@ const StyledFilterBlockItemSelector = styled.div`
 
 const StyledFilterBlockItemSelectorText = styled(Text)`
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 15px;
   color: ${(props) => props.theme.filterInput.filter.color};
   ${(props) =>
@@ -211,7 +211,7 @@ const StyledFilterBlockItemTagText = styled(Text)`
   height: 20px;
 
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
   ${(props) => props.isSelected && selectedItemTagText}
@@ -254,7 +254,7 @@ const StyledFilterBlockItemToggle = styled.div`
 
 const StyledFilterBlockItemToggleText = styled(Text)`
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 36px;
 `;
 

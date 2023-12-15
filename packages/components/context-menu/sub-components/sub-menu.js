@@ -9,12 +9,13 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import CheckEditIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import Scrollbar from "../../scrollbar";
 import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
-import Loaders from "@docspace/common/components/Loaders";
+import ContextMenuSkeleton from "../../skeletons/context-menu";
 
-import { isMobile } from "../../utils/device";
+import { isMobile, isTablet } from "../../utils/device";
 
 const SubMenu = (props) => {
   const {
@@ -35,7 +36,7 @@ const SubMenu = (props) => {
   const theme = useTheme();
 
   const onItemMouseEnter = (e, item) => {
-    if (item.disabled || isMobile()) {
+    if (item.disabled || isTablet() || isMobile()) {
       e.preventDefault();
       return;
     }
@@ -46,9 +47,9 @@ const SubMenu = (props) => {
   const onItemClick = (e, item) => {
     if (item.onLoad) {
       e.preventDefault();
-      if (!isMobile()) return;
+      if (!isMobile() && !isTablet()) return;
 
-      if (isMobile()) onMobileItemClick(e, item.onLoad);
+      if (isMobile() || isTablet()) onMobileItemClick(e, item.onLoad);
       else onLeafClick(e);
       return;
     }
@@ -143,7 +144,7 @@ const SubMenu = (props) => {
       id: "link-loader-option",
       key: "link-loader",
       isLoader: true,
-      label: <Loaders.ContextMenuLoader />,
+      label: <ContextMenuSkeleton />,
     };
 
     if (item.items || item.onLoad) {
@@ -180,7 +181,8 @@ const SubMenu = (props) => {
 
     const icon =
       item.icon &&
-      (!item.icon.includes("images/") && !item.icon.includes(".svg") ? (
+      ((!item.icon.includes("images/") && !item.icon.includes(".svg")) ||
+      item.icon.includes("webplugins") ? (
         <img src={item.icon} className={iconClassName} />
       ) : (
         <ReactSVG wrapper="span" className={iconClassName} src={item.icon} />
@@ -211,6 +213,9 @@ const SubMenu = (props) => {
         {icon}
         {label}
         {subMenuIcon}
+        {item.checked && (
+          <CheckEditIcon className={subMenuIconClassName} />
+        )}
         {item.isOutsideLink && (
           <OutsdideIcon className={subMenuIconClassName} />
         )}
@@ -320,7 +325,7 @@ const SubMenu = (props) => {
             : height + 5;
 
         return (
-          <Scrollbar style={{ height: listHeight }} stype="mediumBlack">
+          <Scrollbar style={{ height: listHeight }}>
             {model.map((item, index) => {
               if (item.disabled) return null;
               return renderItem(item, index);

@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import PropType from "prop-types";
 import PropTypes from "prop-types";
 import Countdown, { zeroPad } from "react-countdown";
@@ -30,7 +30,7 @@ class SnackBar extends React.Component {
 
     window.snackbar = barConfig;
 
-    ReactDOM.render(<SnackBar {...rest} />, parentElementNode);
+    ReactDOM.createRoot(parentElementNode).render(<SnackBar {...rest} />);
   }
 
   static close() {
@@ -45,9 +45,23 @@ class SnackBar extends React.Component {
     this.props.onAction && this.props.onAction(e);
   };
 
+  onClickIFrame = () => {
+    if (
+      document.activeElement &&
+      document.activeElement.nodeName.toLowerCase() === "iframe"
+    ) {
+      setTimeout(() => this.onActionClick(), 500);
+    }
+  };
+
   componentDidMount() {
     const { onLoad } = this.props;
     onLoad();
+    window.addEventListener("blur", this.onClickIFrame);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("blur", this.onClickIFrame);
   }
 
   bannerRenderer = () => {
@@ -207,7 +221,7 @@ SnackBar.propTypes = {
   /** Sets the font size  */
   fontSize: PropTypes.string,
   /** Sets the font weight */
-  fontWeight: PropTypes.string,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Specifies the text alignment */
   textAlign: PropTypes.string,
   /** Allows displaying content in HTML format */

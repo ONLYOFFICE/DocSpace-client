@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "../../../utils";
 
 import AlertComponent from "../../AlertComponent";
-import Loaders from "../../Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
@@ -55,7 +55,7 @@ const ArticlePaymentAlert = ({
   const isShowLoader = !ready;
 
   return isShowLoader ? (
-    <Loaders.Rectangle width="210px" height="88px" />
+    <RectangleSkeleton width="210px" height="88px" />
   ) : (
     <AlertComponent
       id="document_catalog-payment-alert"

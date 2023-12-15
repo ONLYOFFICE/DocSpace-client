@@ -43,8 +43,11 @@ import { DropDown } from "./drop-down";
 import { ComboBox, ComboBoxDisplayType, ComboBoxSize } from "./combobox";
 import { RoomLogo } from "./room-logo";
 import { MainButton } from "./main-button";
+import { FloatingButton, FloatingButtonIcons } from "./floating-button";
 
 export {
+  FloatingButton,
+  FloatingButtonIcons,
   MainButton,
   RoomLogo,
   ComboBox,

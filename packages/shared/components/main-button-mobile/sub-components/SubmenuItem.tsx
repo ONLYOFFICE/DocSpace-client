@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
 
-import { StyledDropDownItem } from "../styled-main-button";
+import { StyledDropDownItem } from "../MainButtonMobile.styled";
+import { ActionOption, SubmenuItemProps } from "../MainButtonMobile.types";
 
 const SubmenuItem = ({
   option,
@@ -8,13 +9,13 @@ const SubmenuItem = ({
   noHover,
   recalculateHeight,
   openedSubmenuKey,
-  setOpenedSubmenuKey
-}: any) => {
+  setOpenedSubmenuKey,
+}: SubmenuItemProps) => {
   const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
 
   useLayoutEffect(() => {
     recalculateHeight();
-  }, [isOpenSubMenu]);
+  }, [isOpenSubMenu, recalculateHeight]);
 
   useEffect(() => {
     if (openedSubmenuKey === option.key) return;
@@ -24,7 +25,7 @@ const SubmenuItem = ({
 
   const onClick = () => {
     setOpenedSubmenuKey(option.key);
-    setIsOpenSubMenu((isOpenSubMenu) => !isOpenSubMenu);
+    setIsOpenSubMenu((v) => !v);
   };
 
   return (
@@ -38,17 +39,16 @@ const SubmenuItem = ({
         }`}
         onClick={onClick}
         icon={option.icon ? option.icon : ""}
-        action={option.action}
         isActive={isOpenSubMenu}
-        isSubMenu={true}
+        isSubMenu
         noHover={noHover}
       />
       {isOpenSubMenu &&
-        option.items.map((item: any) => {
+        option.items?.map((item: ActionOption) => {
           const subMenuOnClickAction = () => {
             toggle(false);
             setIsOpenSubMenu(false);
-            item.onClick && item.onClick({ action: item.action });
+            item.onClick?.({ action: item.action });
           };
 
           return (
@@ -59,7 +59,6 @@ const SubmenuItem = ({
               className={`${item.className} sublevel`}
               onClick={subMenuOnClickAction}
               icon={item.icon ? item.icon : ""}
-              action={item.action}
               withoutIcon={item.withoutIcon}
               noHover={noHover}
             />

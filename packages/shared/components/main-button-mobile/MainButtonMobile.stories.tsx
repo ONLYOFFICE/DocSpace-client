@@ -1,18 +1,16 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import MainButtonMobile from ".";
-import { useEffect, useReducer, useState } from "react";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/mobile.actio... Remove this comment to see the full error message
-import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.folder.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/mobile.actio... Remove this comment to see the full error message
-import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/mobile.star.... Remove this comment to see the full error message
-import MobileStartReactSvgUrl from "PUBLIC_DIR/images/mobile.star.react.svg?url";
-import { useTheme } from "styled-components";
-// @ts-expect-error TS(2307): Cannot find module './main-button-mobile-docs.mdx'... Remove this comment to see the full error message
-import MobileMainButtonDocs from "./main-button-mobile-docs.mdx";
+import React, { useEffect, useReducer, useState } from "react";
+import styled, { css, useTheme } from "styled-components";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.folder.react.svg?url";
+import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
+import MobileStartReactSvgUrl from "PUBLIC_DIR/images/mobile.star.react.svg?url";
+
+import { MainButtonMobile } from "./MainButtonMobile";
+
+import MobileMainButtonDocs from "./MainButtonMobile.docs.mdx";
+
+const meta = {
   title: "Components/MainButtonMobile",
   component: MainButtonMobile,
   tags: ["autodocs"],
@@ -21,66 +19,16 @@ export default {
       page: MobileMainButtonDocs,
     },
   },
-};
+} satisfies Meta<typeof MainButtonMobile>;
+type Story = StoryObj<typeof meta>;
 
-const actionOptions = [
-  {
-    key: "1",
-    label: "New document",
-    icon: MobileActionsFolderReactSvgUrl,
-  },
-  {
-    key: "2",
-    label: "New presentation",
-    icon: MobileActionsFolderReactSvgUrl,
-  },
-  {
-    key: "3",
-    label: "New spreadsheet",
-    icon: MobileActionsFolderReactSvgUrl,
-  },
-  {
-    key: "4",
-    label: "New folder",
-    icon: MobileActionsFolderReactSvgUrl,
-  },
-];
+export default meta;
 
-const buttonOptions = [
-  {
-    key: "1",
-    label: "Import point",
-    icon: MobileStartReactSvgUrl,
-    // @ts-expect-error TS(2304): Cannot find name 'setIsOpenButton'.
-    onClick: () => setIsOpenButton(false),
-  },
-  {
-    key: "2",
-    label: "Import point",
-    icon: MobileStartReactSvgUrl,
-    // @ts-expect-error TS(2304): Cannot find name 'setIsOpenButton'.
-    onClick: () => setIsOpenButton(false),
-  },
-  {
-    key: "3",
-    label: "Import point",
-    isSeparator: true,
-  },
-  {
-    key: "4",
-    label: "Import point",
-    icon: MobileStartReactSvgUrl,
-    // @ts-expect-error TS(2304): Cannot find name 'setIsOpenButton'.
-    onClick: () => setIsOpenButton(false),
-  },
-];
-
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ isAutoDocs: boolean; isMobile?: boolean }>`
   width: 500px;
   height: 600px;
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isAutoDocs' does not exist on type 'Them... Remove this comment to see the full error message
     props.isAutoDocs &&
     css`
       width: calc(100% + 40px);
@@ -90,7 +38,6 @@ const StyledWrapper = styled.div`
     `}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isMobile' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isMobile &&
     css`
       .mainBtnDropdown {
@@ -122,10 +69,12 @@ const Template = ({ ...args }) => {
     setIsOpenUploads(true);
     setIsOpenOperations(true);
     setIsOpenButton(true);
-    //  setOpened(false);
   };
 
-  function reducer(state: any, action: any) {
+  function reducer(
+    state: { uploads: number; operations: number },
+    action: { type: string },
+  ) {
     switch (action.type) {
       case "start":
         if (
@@ -195,8 +144,7 @@ const Template = ({ ...args }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
-      isMobile !== window.innerWidth && setIsMobile(window.innerWidth < 1025);
+      setIsMobile(window.innerWidth < 1025);
     };
 
     window.addEventListener("resize", handleResize);
@@ -208,45 +156,101 @@ const Template = ({ ...args }) => {
 
   const isAutoDocs =
     typeof window !== "undefined" && window?.location?.href.includes("docs");
-  // @ts-expect-error TS(2339): Property 'interfaceDirection' does not exist on ty... Remove this comment to see the full error message
+
   const { interfaceDirection } = useTheme();
   const style = {
-    position: "absolute",
+    // position: "absolute",
     bottom: "26px",
-    [interfaceDirection === "rtl" ? "left" : "right"]: "44px",
+    left: "unset",
+    right: "unset",
   };
   const dropdownStyle = {
-    position: "absolute",
-    [interfaceDirection === "rtl" ? "left" : "right"]: "60px",
+    // position: "absolute",
     bottom: "25px",
+    left: "unset",
+    right: "unset",
   };
+  if (interfaceDirection === "rtl") {
+    style.left = "44px";
+    dropdownStyle.left = "60px";
+  } else {
+    style.right = "44px";
+    dropdownStyle.right = "60px";
+  }
+
+  const actionOptions = [
+    {
+      key: "1",
+      label: "New document",
+      icon: MobileActionsFolderReactSvgUrl,
+    },
+    {
+      key: "2",
+      label: "New presentation",
+      icon: MobileActionsFolderReactSvgUrl,
+    },
+    {
+      key: "3",
+      label: "New spreadsheet",
+      icon: MobileActionsFolderReactSvgUrl,
+    },
+    {
+      key: "4",
+      label: "New folder",
+      icon: MobileActionsFolderReactSvgUrl,
+    },
+  ];
+
+  const buttonOptions = [
+    {
+      key: "1",
+      label: "Import point",
+      icon: MobileStartReactSvgUrl,
+      onClick: () => setIsOpenButton(false),
+    },
+    {
+      key: "2",
+      label: "Import point",
+      icon: MobileStartReactSvgUrl,
+      onClick: () => setIsOpenButton(false),
+    },
+    {
+      key: "3",
+      label: "Import point",
+      isSeparator: true,
+    },
+    {
+      key: "4",
+      label: "Import point",
+      icon: MobileStartReactSvgUrl,
+      onClick: () => setIsOpenButton(false),
+    },
+  ];
   return (
-    // @ts-expect-error TS(2769): No overload matches this call.
     <StyledWrapper isAutoDocs={isAutoDocs} isMobile={isMobile}>
       <MainButtonMobile
         {...args}
         style={style}
         actionOptions={actionOptions}
-        // @ts-expect-error TS(2322): Type '{ style: { [x: string]: string; position: st... Remove this comment to see the full error message
         dropdownStyle={dropdownStyle}
         progressOptions={progressOptions}
         buttonOptions={buttonOptions}
         onUploadClick={onUploadClick}
-        withButton={true}
+        withButton
         isOpenButton={isOpenButton}
-        isDefaultMode={false}
         title="Upload"
         percent={uploadPercent}
-        opened={opened}
+        opened={opened || false}
       />
     </StyledWrapper>
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ ...args... Remove this comment to see the full error message
-Default.args = {
-  title: "Upload",
-  percent: 0,
-  opened: null,
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    title: "Upload",
+    percent: 0,
+    opened: false,
+  },
 };

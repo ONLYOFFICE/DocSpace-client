@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { NoUserSelect } from "../../constants";
+import { NoUserSelect } from "../../utils";
 import { Base, TTheme } from "../../themes";
 import { ButtonProps, ButtonThemeProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";

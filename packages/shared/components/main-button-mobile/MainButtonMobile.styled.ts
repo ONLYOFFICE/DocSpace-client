@@ -1,11 +1,13 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import DropDown from "../drop-down";
-import DropDownItem from "../drop-down-item";
-import FloatingButton from "../floating-button";
-
 import { isMobile } from "react-device-detect";
-import { mobile, tablet } from "../utils/device";
+
+import { mobile, tablet } from "../../utils";
+
+import { Base } from "../../themes";
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
+import { FloatingButton } from "../floating-button";
+import { ProgressBarMobileDefaultStyles } from "./MainButtonMobile.types";
 
 const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
@@ -66,7 +68,7 @@ const mobileDropDown = css`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      left: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.right};
+      left: ${props.theme.mainButtonMobile.dropDown.mobile.right};
       right: unset;
     `}
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.bottom};
@@ -84,7 +86,7 @@ const StyledRenderItem = styled.div`
   background: ${(props) => props.theme.backgroundColor};
 `;
 
-const StyledDropDown = styled(DropDown)`
+const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
   position: ${(props) => props.theme.mainButtonMobile.dropDown.position};
   width: ${(props) => props.theme.mainButtonMobile.dropDown.width};
   max-width: calc(100vw - 48px);
@@ -92,10 +94,10 @@ const StyledDropDown = styled(DropDown)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          left: ${(props) => props.theme.mainButtonMobile.dropDown.right};
+          left: ${props.theme.mainButtonMobile.dropDown.right};
         `
       : css`
-          right: ${(props) => props.theme.mainButtonMobile.dropDown.right};
+          right: ${props.theme.mainButtonMobile.dropDown.right};
         `}
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.bottom};
 
@@ -109,7 +111,6 @@ const StyledDropDown = styled(DropDown)`
   padding: 0px;
 
   @media ${tablet} {
-    // @ts-expect-error TS(2339): Property 'heightProp' does not exist on type 'Them... Remove this comment to see the full error message
     height: ${(props) => props.heightProp};
   }
 
@@ -179,10 +180,9 @@ const StyledDropDownItem = styled(DropDownItem)`
   }
 `;
 
-const StyledButtonOptions = styled.div`
+const StyledButtonOptions = styled.div<{ withoutButton?: boolean }>`
   padding: 16px 0;
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withoutButton' does not exist on type 'T... Remove this comment to see the full error message
     props.withoutButton
       ? props.theme.mainButtonMobile.buttonWrapper.background
       : props.theme.mainButtonMobile.buttonOptions.backgroundColor};
@@ -202,36 +202,39 @@ const StyledContainerAction = styled.div`
   }
 `;
 
-const StyledButtonWrapper = styled.div`
+const StyledButtonWrapper = styled.div<{
+  isOpenButton?: boolean;
+  isUploading?: boolean;
+}>`
   padding: 0 24px 34px;
-  // @ts-expect-error TS(2339): Property 'isOpenButton' does not exist on type 'Th... Remove this comment to see the full error message
+
   display: ${(props) => (props.isOpenButton ? "none" : "block")};
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isUploading' does not exist on type 'The... Remove this comment to see the full error message
     props.isUploading
-      ? props.theme.mainButtonMobile.buttonWrapper.uploadingBackground
-      : props.theme.mainButtonMobile.buttonWrapper.background};
+      ? props.theme.mainButtonMobile?.buttonWrapper.uploadingBackground
+      : props.theme.mainButtonMobile?.buttonWrapper.background};
 `;
 
 StyledButtonWrapper.defaultProps = { theme: Base };
 
-const StyledProgressContainer = styled.div`
-  // @ts-expect-error TS(2339): Property 'isUploading' does not exist on type 'The... Remove this comment to see the full error message
+const StyledProgressContainer = styled.div<{ isUploading?: boolean }>`
   display: ${(props) => (props.isUploading ? "flex" : "none")};
   flex-direction: column;
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isUploading' does not exist on type 'The... Remove this comment to see the full error message
     props.isUploading
-      ? props.theme.mainButtonMobile.buttonWrapper.uploadingBackground
-      : props.theme.mainButtonMobile.buttonWrapper.background};
+      ? props.theme.mainButtonMobile?.buttonWrapper.uploadingBackground
+      : props.theme.mainButtonMobile?.buttonWrapper.background};
   cursor: default;
   padding: 0 24px 34px;
 `;
 
+StyledProgressContainer.defaultProps = {
+  theme: Base,
+};
+
 StyledButtonWrapper.defaultProps = { theme: Base };
 
-const StyledProgressBarContainer = styled.div`
-  // @ts-expect-error TS(2339): Property 'isUploading' does not exist on type 'The... Remove this comment to see the full error message
+const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
   display: ${(props) => (props.isUploading ? "flex" : "none")};
 
   align-items: center;
@@ -310,8 +313,7 @@ const StyledMobileProgressBar = styled.div`
 
 StyledMobileProgressBar.defaultProps = { theme: Base };
 
-const StyledBar = styled.div`
-  // @ts-expect-error TS(2339): Property 'uploadPercent' does not exist on type 'T... Remove this comment to see the full error message
+const StyledBar = styled.div<{ uploadPercent: number }>`
   width: ${(props) => props.uploadPercent}%;
   height: 4px;
   opacity: 1;
@@ -343,3 +345,21 @@ export {
   StyledAlertIcon,
   StyledRenderItem,
 };
+
+const getDefaultProgressStyles = ({
+  $currentColorScheme,
+  theme,
+  error,
+}: ProgressBarMobileDefaultStyles) =>
+  $currentColorScheme &&
+  css`
+    background: ${error
+      ? theme.mainButtonMobile.bar.errorBackground
+      : theme.isBase
+        ? $currentColorScheme?.main?.accent
+        : "#FFFFFF"};
+  `;
+
+const StyledProgressBarTheme = styled(StyledBar)(getDefaultProgressStyles);
+
+export { StyledProgressBarTheme };

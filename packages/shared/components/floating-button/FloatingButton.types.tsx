@@ -15,7 +15,7 @@ export interface FloatingButtonProps {
   /** Loading indicator */
   percent: number;
   /**  Sets a callback function that is triggered when the button is clicked */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   /** CSS color */
   color?: string;
   clearUploadedFilesHistory?: () => void;

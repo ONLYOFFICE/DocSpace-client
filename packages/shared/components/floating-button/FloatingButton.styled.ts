@@ -12,10 +12,10 @@ const StyledCircleWrap = styled.div`
   width: 48px;
   height: 48px;
   background: ${(props) =>
-    props.color ? props.color : props.theme.floatingButton.backgroundColor};
+    props.color ? props.color : props.theme.floatingButton?.backgroundColor};
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: ${(props) => props.theme.floatingButton.boxShadow};
+  box-shadow: ${(props) => props.theme.floatingButton?.boxShadow};
 `;
 
 StyledCircleWrap.defaultProps = { theme: Base };
@@ -118,7 +118,7 @@ const StyledCircle = styled.div<{ percent: number; displayProgress?: boolean }>`
     background-color: ${(props) =>
       !props.displayProgress
         ? "transparent !important"
-        : props.theme.floatingButton.color};
+        : props.theme.floatingButton?.color};
   }
 
   .circle__mask.circle__full {
@@ -142,7 +142,7 @@ const StyledFloatingButton = styled.div`
   height: 38px;
   border-radius: 50%;
   background: ${(props) =>
-    props.color ? props.color : props.theme.floatingButton.backgroundColor};
+    props.color ? props.color : props.theme.floatingButton?.backgroundColor};
   text-align: center;
   margin: 5px;
   position: absolute;
@@ -161,7 +161,7 @@ const IconBox = styled.div`
 
   svg {
     path {
-      fill: ${(props) => props.theme.floatingButton.fill};
+      fill: ${(props) => props.theme.floatingButton?.fill};
     }
   }
 `;
@@ -179,10 +179,10 @@ const StyledAlertIcon = styled.div`
 
   svg {
     circle {
-      fill: ${(props) => props.theme.floatingButton.alert.fill};
+      fill: ${(props) => props.theme.floatingButton?.alert.fill};
     }
     path {
-      fill: ${(props) => props.theme.floatingButton.alert.path};
+      fill: ${(props) => props.theme.floatingButton?.alert.path};
     }
   }
 `;

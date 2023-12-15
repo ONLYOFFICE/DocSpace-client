@@ -19,5 +19,5 @@ export interface BackdropProps {
   withoutBlur?: boolean;
   withoutBackground?: boolean;
   isModalDialog?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }

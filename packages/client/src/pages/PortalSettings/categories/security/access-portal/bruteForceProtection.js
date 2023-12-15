@@ -28,6 +28,7 @@ const BruteForceProtection = (props) => {
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -242,6 +243,7 @@ const BruteForceProtection = (props) => {
           target="_blank"
           isHovered
           href={bruteForceProtectionUrl}
+          color={currentColorScheme.main.accent}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -331,6 +333,7 @@ export default inject(({ auth, setup }) => {
     getBruteForceProtection,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -345,5 +348,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

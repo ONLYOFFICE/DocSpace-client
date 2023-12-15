@@ -1,6 +1,8 @@
-import Base from "../themes/base";
 import styled, { keyframes, css } from "styled-components";
-import { desktop, tablet } from "../utils/device";
+
+import { desktop, tablet } from "../../utils/device";
+import { Base } from "../../themes";
+import { DefaultStylesProps } from "./FloatingButton.types";
 
 const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
 
@@ -18,7 +20,7 @@ const StyledCircleWrap = styled.div`
 
 StyledCircleWrap.defaultProps = { theme: Base };
 
-const StyledFloatingButtonWrapper = styled.div`
+const StyledFloatingButtonWrapper = styled.div<{ showTwoProgress?: boolean }>`
   @media ${desktop} {
     position: absolute;
     z-index: 300;
@@ -31,7 +33,6 @@ const StyledFloatingButtonWrapper = styled.div`
             right: 0;
           `}
 
-    // @ts-expect-error TS(2339): Property 'showTwoProgress' does not exist on type ... Remove this comment to see the full error message
     bottom: ${(props) => (props.showTwoProgress ? "96px" : "0")};
 
     width: 100px;
@@ -74,7 +75,7 @@ const rotate360 = keyframes`
   }
 `;
 
-const StyledCircle = styled.div`
+const StyledCircle = styled.div<{ percent: number; displayProgress?: boolean }>`
   .circle__mask,
   .circle__fill {
     width: 42px;
@@ -93,7 +94,6 @@ const StyledCircle = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'percent' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.percent > MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR
       ? css`
           .circle__mask {
@@ -102,8 +102,8 @@ const StyledCircle = styled.div`
 
           .circle__fill {
             animation: fill-rotate ease-in-out none;
-            // @ts-expect-error TS(2339): Property 'percent' does not exist on type 'ThemePr... Remove this comment to see the full error message
-            transform: rotate(${(props) => props.percent * 1.8}deg);
+
+            transform: rotate(${props.percent * 1.8}deg);
           }
         `
       : css`
@@ -116,7 +116,6 @@ const StyledCircle = styled.div`
   .circle__mask .circle__fill {
     clip: rect(0px, 21px, 42px, 0px);
     background-color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'displayProgress' does not exist on type ... Remove this comment to see the full error message
       !props.displayProgress
         ? "transparent !important"
         : props.theme.floatingButton.color};
@@ -124,7 +123,7 @@ const StyledCircle = styled.div`
 
   .circle__mask.circle__full {
     animation: fill-rotate ease-in-out none;
-    // @ts-expect-error TS(2339): Property 'percent' does not exist on type 'ThemedS... Remove this comment to see the full error message
+
     transform: rotate(${(props) => props.percent * 1.8}deg);
   }
 
@@ -133,7 +132,6 @@ const StyledCircle = styled.div`
       transform: rotate(0deg);
     }
     100% {
-      // @ts-expect-error TS(2339): Property 'percent' does not exist on type 'ThemedS... Remove this comment to see the full error message
       transform: rotate(${(props) => props.percent * 1.8}deg);
     }
   }
@@ -197,3 +195,37 @@ export {
   StyledAlertIcon,
   IconBox,
 };
+
+const getDefaultStyles = ({
+  $currentColorScheme,
+  color,
+  displayProgress,
+}: DefaultStylesProps) =>
+  $currentColorScheme &&
+  css`
+    background: ${color || $currentColorScheme.main.accent} !important;
+
+    .circle__background {
+      background: ${color || $currentColorScheme.main.accent} !important;
+    }
+
+    .icon-box {
+      svg {
+        path {
+          fill: ${$currentColorScheme.text.accent};
+        }
+      }
+    }
+
+    .circle__mask .circle__fill {
+      background-color: ${!displayProgress
+        ? "transparent !important"
+        : $currentColorScheme.text.accent};
+    }
+  `;
+
+StyledCircleWrap.defaultProps = { theme: Base };
+
+const StyledFloatingButtonTheme = styled(StyledCircleWrap)(getDefaultStyles);
+
+export { StyledFloatingButtonTheme };

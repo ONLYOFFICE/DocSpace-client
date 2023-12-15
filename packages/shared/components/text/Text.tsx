@@ -39,4 +39,6 @@ TextPure.defaultProps = {
 
 const Text = React.memo<TextProps>(TextPure);
 
+Text.displayName = "Text";
+
 export { Text, TextPure };

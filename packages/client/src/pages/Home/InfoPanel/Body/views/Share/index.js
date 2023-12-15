@@ -116,7 +116,7 @@ const Share = (props) => {
       } else {
         updateLink(link, res);
         if (item.access === ShareAccessRights.DenyAccess) {
-          toastr.success(t("Files:AccessDenied"));
+          toastr.success(t("LinkAccessDenied"));
         } else {
           copy(link.sharedTo.shareLink);
           toastr.success(t("Files:LinkSuccessfullyCopied"));

@@ -222,7 +222,7 @@ const SectionFilterContent = ({
   filter,
   roomsFilter,
   personal,
-  isRecentFolder,
+  isRecentTab,
   isFavoritesFolder,
   sectionWidth,
   viewAs,
@@ -1147,7 +1147,7 @@ const SectionFilterContent = ({
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
     const folders =
-      !isFavoritesFolder && !isRecentFolder
+      !isFavoritesFolder && !isRecentTab
         ? [
             {
               id: "filter_type-folders",
@@ -1158,7 +1158,7 @@ const SectionFilterContent = ({
           ]
         : "";
 
-    const images = !isRecentFolder
+    const images = !isRecentTab
       ? [
           {
             id: "filter_type-images",
@@ -1169,7 +1169,7 @@ const SectionFilterContent = ({
         ]
       : "";
 
-    const archives = !isRecentFolder
+    const archives = !isRecentTab
       ? [
           {
             id: "filter_type-archive",
@@ -1180,7 +1180,7 @@ const SectionFilterContent = ({
         ]
       : "";
 
-    const media = !isRecentFolder
+    const media = !isRecentTab
       ? [
           {
             id: "filter_type-media",
@@ -1437,7 +1437,7 @@ const SectionFilterContent = ({
         filterOptions.push(...thirdPartyOptions);
       }
     } else {
-      if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
+      if (!isRecentTab && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
           {
             key: FilterGroups.filterFolders,
@@ -1551,7 +1551,7 @@ const SectionFilterContent = ({
     isRooms,
     isAccountsPage,
     isFavoritesFolder,
-    isRecentFolder,
+    isRecentTab,
     isTrash,
     isPublicRoom,
   ]);
@@ -2045,7 +2045,7 @@ const SectionFilterContent = ({
       placeholder={t("Common:Search")}
       view={t("Common:View")}
       isFavoritesFolder={isFavoritesFolder}
-      isRecentFolder={isRecentFolder}
+      isRecentTab={isRecentTab}
       isPersonalRoom={isPersonalRoom}
       isRooms={isRooms}
       removeSelectedItem={removeSelectedItem}
@@ -2096,7 +2096,7 @@ export default inject(
     const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
       isFavoritesFolder,
-      isRecentFolder,
+      isRecentTab,
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
@@ -2132,7 +2132,7 @@ export default inject(
       viewAs,
 
       isFavoritesFolder,
-      isRecentFolder,
+      isRecentTab,
       isRooms,
       isTrash,
       isArchiveFolder,

@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components";
 ```
 
 ```jsx

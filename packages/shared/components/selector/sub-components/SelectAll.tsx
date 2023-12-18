@@ -1,11 +1,11 @@
 import React from "react";
 
-import Avatar from "../../../avatar";
-import Text from "../../../text";
-import Checkbox from "../../../checkbox";
+import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import { Text } from "../../text";
+import { Checkbox } from "../../checkbox";
 
-import StyledSelectAll from "./StyledSelectAll";
-import { SelectAllProps } from "./SelectAll.types";
+import { StyledSelectAll } from "../Selector.styled";
+import { SelectAllProps } from "../Selector.types";
 
 const SelectAll = React.memo(
   ({
@@ -21,7 +21,7 @@ const SelectAll = React.memo(
       if (e.target instanceof HTMLElement && e.target.closest(".checkbox"))
         return;
 
-      onSelectAll && onSelectAll();
+      onSelectAll?.();
     };
 
     return (
@@ -32,16 +32,15 @@ const SelectAll = React.memo(
           <>
             <Avatar
               className="select-all_avatar"
-              source={icon}
-              role={"user"}
-              size={"min"}
+              source={icon || ""}
+              role={AvatarRole.user}
+              size={AvatarSize.min}
             />
 
-            // @ts-expect-error TS(2322): Type '{ children: string | undefined; className: s... Remove this comment to see the full error message
             <Text
               className="label"
               fontWeight={600}
-              fontSize={"14px"}
+              fontSize="14px"
               noSelect
               truncate
             >
@@ -58,7 +57,9 @@ const SelectAll = React.memo(
         )}
       </StyledSelectAll>
     );
-  }
+  },
 );
 
-export default SelectAll;
+SelectAll.displayName = "SelectAll";
+
+export { SelectAll };

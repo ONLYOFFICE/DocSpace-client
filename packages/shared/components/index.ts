@@ -5,8 +5,11 @@ import { GlobalStyle } from "./global-style";
 import { IconButton } from "./icon-button";
 import { Link, LinkTarget, LinkType } from "./link";
 import { Portal } from "./portal";
-import { Scrollbar, ScrollbarType } from "./scrollbar";
-import { CustomScrollbarsVirtualList } from "./scrollbar/sub-components";
+import {
+  Scrollbar,
+  ScrollbarType,
+  CustomScrollbarsVirtualList,
+} from "./scrollbar";
 import { Text } from "./text";
 import { ThemeProvider } from "./theme-provider";
 import {
@@ -46,6 +49,11 @@ import { MainButton } from "./main-button";
 import { FloatingButton, FloatingButtonIcons } from "./floating-button";
 import { ViewSelector, TViewSelectorOption } from "./view-selector";
 import { EmptyScreenContainer } from "./empty-screen-container";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "./context-menu-button";
+import { Selector } from "./selector";
 
 export type {
   TFallbackAxisSideDirection,
@@ -55,6 +63,9 @@ export type {
 };
 
 export {
+  Selector,
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
   EmptyScreenContainer,
   ViewSelector,
   FloatingButton,

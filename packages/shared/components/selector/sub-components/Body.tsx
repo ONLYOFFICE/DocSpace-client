@@ -1,23 +1,19 @@
 import React from "react";
 import { isMobileOnly, isIOS } from "react-device-detect";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import InfiniteLoader from "react-window-infinite-loader";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FixedSizeList as List } from "react-window";
 
-import CustomScrollbarsVirtualList from "../../../scrollbar/custom-scrollbars-virtual-list";
+import { CustomScrollbarsVirtualList, Scrollbar } from "../../scrollbar";
+import { Text } from "../../text";
 
-import Text from "../../../text";
+import { Search } from "./Search";
+import { SelectAll } from "./SelectAll";
+import { Item } from "./Item";
+import { EmptyScreen } from "./EmptyScreen";
+import { BreadCrumbs } from "./BreadCrumbs";
 
-import Search from "../Search";
-import SelectAll from "../SelectAll";
-import Item from "../Item";
-import EmptyScreen from "../EmptyScreen";
-
-import StyledBody from "./StyledBody";
-import { BodyProps } from "./Body.types";
-import BreadCrumbs from "../BreadCrumbs";
-import Scrollbar from "../../../scrollbar";
+import { StyledBody } from "../Selector.styled";
+import { BodyProps } from "../Selector.types";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -72,7 +68,7 @@ const Body = ({
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
-  const listOptionsRef = React.useRef<any>(null);
+  const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
 
   const itemsCount = hasNextPage ? items.length + 1 : items.length;
 
@@ -80,19 +76,20 @@ const Body = ({
     if (listOptionsRef && listOptionsRef.current) {
       listOptionsRef.current.resetloadMoreItemsCache(true);
     }
-  }, [listOptionsRef.current]);
+  }, []);
 
   const onBodyResize = React.useCallback(
-    (e: any) => {
-      if (e?.target?.height && isMobileOnly && isIOS) {
-        let height = e?.target?.height - 64 - HEADER_HEIGHT;
+    (e?: Event) => {
+      const target = e ? (e.target as VisualViewport) : null;
+      if (target && target.height && isMobileOnly && isIOS) {
+        let height = target.height - 64 - HEADER_HEIGHT;
 
         if (footerVisible) {
           height -= withFooterCheckbox
             ? FOOTER_WITH_CHECKBOX_HEIGHT
             : withFooterInput
-            ? FOOTER_WITH_NEW_NAME_HEIGHT
-            : FOOTER_HEIGHT;
+              ? FOOTER_WITH_NEW_NAME_HEIGHT
+              : FOOTER_HEIGHT;
         }
         setBodyHeight(height);
         return;
@@ -101,14 +98,14 @@ const Body = ({
         setBodyHeight(bodyRef.current.offsetHeight);
       }
     },
-    [bodyRef?.current?.offsetHeight]
+    [footerVisible, withFooterCheckbox, withFooterInput],
   );
 
   const isItemLoaded = React.useCallback(
     (index: number) => {
       return !hasNextPage || index < itemsCount;
     },
-    [hasNextPage, itemsCount]
+    [hasNextPage, itemsCount],
   );
 
   React.useEffect(() => {
@@ -119,12 +116,11 @@ const Body = ({
       window.removeEventListener("resize", onBodyResize);
       window.visualViewport?.removeEventListener("resize", onBodyResize);
     };
-  }, []);
+  }, [onBodyResize]);
 
   React.useEffect(() => {
-    // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
     onBodyResize();
-  }, [isLoading, footerVisible]);
+  }, [isLoading, footerVisible, onBodyResize]);
 
   React.useEffect(() => {
     resetCache();
@@ -139,7 +135,7 @@ const Body = ({
   if (isMultiSelect && withSelectAll && !isSearch)
     listHeight -= SELECT_ALL_HEIGHT;
 
-  if (!!descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
+  if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
   return (
     <StyledBody
@@ -148,8 +144,8 @@ const Body = ({
         withFooterCheckbox
           ? FOOTER_WITH_CHECKBOX_HEIGHT
           : withFooterInput
-          ? FOOTER_WITH_NEW_NAME_HEIGHT
-          : FOOTER_HEIGHT
+            ? FOOTER_WITH_NEW_NAME_HEIGHT
+            : FOOTER_HEIGHT
       }
       className="selector_body"
       headerHeight={HEADER_HEIGHT}
@@ -180,7 +176,6 @@ const Body = ({
       ) : null}
 
       {isLoading ? (
-        // @ts-expect-error TS(2322): Type '{ children: any; style: { height: number; };... Remove this comment to see the full error message
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
@@ -195,7 +190,6 @@ const Body = ({
       ) : (
         <>
           {!!descriptionText && (
-            // @ts-expect-error TS(2322): Type '{ children: string; className: string; }' is... Remove this comment to see the full error message
             <Text className="body-description-text">{descriptionText}</Text>
           )}
           {isMultiSelect && withSelectAll && !isSearch && (
@@ -217,19 +211,16 @@ const Body = ({
               itemCount={totalItems}
               loadMoreItems={loadMoreItems}
             >
-              {({
-                onItemsRendered,
-                ref
-              }: any) => (
+              {({ onItemsRendered, ref }) => (
                 <List
                   className="items-list"
                   height={listHeight}
-                  width={"100%"}
+                  width="100%"
                   itemCount={itemsCount}
                   itemData={{
                     items,
                     onSelect,
-                    isMultiSelect,
+                    isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
                   }}
@@ -249,4 +240,4 @@ const Body = ({
   );
 };
 
-export default Body;
+export { Body };

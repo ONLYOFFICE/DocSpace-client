@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Scrollbar } from "../index";
+import { Scrollbar } from "../Scrollbar";
 import { CustomScrollbarsVirtualListProps } from "../Scrollbar.types";
 
 const CustomScrollbars = ({

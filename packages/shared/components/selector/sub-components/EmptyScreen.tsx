@@ -1,10 +1,10 @@
 import React from "react";
 
-import Heading from "../../../heading";
-import Text from "../../../text";
+import { Heading } from "../../heading";
+import { Text } from "../../text";
 
-import StyledEmptyScreen from "./StyledEmptyScreen";
-import { EmptyScreenProps } from "./EmptyScreen.type";
+import { StyledEmptyScreen } from "../Selector.styled";
+import { EmptyScreenProps } from "../Selector.types";
 
 const EmptyScreen = ({
   image,
@@ -21,16 +21,12 @@ const EmptyScreen = ({
 
   return (
     <StyledEmptyScreen withSearch={withSearch}>
-      <img
-        className="empty-image"
-        src={currentImage}
-        alt="empty-screen-image"
-      />
-      // @ts-expect-error TS(2322): Type '{ children: string | undefined; level: numbe... Remove this comment to see the full error message
+      <img className="empty-image" src={currentImage} alt="empty-screen" />
+
       <Heading level={3} className="empty-header">
         {currentHeader}
       </Heading>
-      // @ts-expect-error TS(2322): Type '{ children: string | undefined; className: s... Remove this comment to see the full error message
+
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
@@ -38,4 +34,4 @@ const EmptyScreen = ({
   );
 };
 
-export default EmptyScreen;
+export { EmptyScreen };

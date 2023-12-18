@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Meta, StoryObj } from "@storybook/react";
 
-import Selector from ".";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/icons/32/roo... Remove this comment to see the full error message
 import CustomSvgUrl from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/room.archive... Remove this comment to see the full error message
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/empty_screen... Remove this comment to see the full error message
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
-import { Item } from "./sub-components/Item/Item.types";
+
+import { Selector } from "./Selector";
+import { SelectorProps, TItem } from "./Selector.types";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -27,7 +26,7 @@ const StyledBreadCrumbsLoader = styled.div`
   background: black;
 `;
 
-export default {
+const meta = {
   title: "Components/Selector",
   component: Selector,
   parameters: {
@@ -38,43 +37,48 @@ export default {
       },
     },
   },
-  argTypes: {
-    height: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
+  // argTypes: {
+  //   height: {
+  //     table: {
+  //       disable: true,
+  //     },
+  //   },
+  // },
+} satisfies Meta<typeof Selector>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
 
 function makeName() {
-  var result = "";
-  var characters =
+  let result = "";
+  const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < 15; i++) {
+  const charactersLength = characters.length;
+  for (let i = 0; i < 15; i += 1) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
 }
 
 const getItems = (count: number) => {
-  const items: Item[] = [];
+  const items: TItem[] = [];
 
-  for (let i = 0; i < count / 2; i++) {
+  for (let i = 0; i < count / 2; i += 1) {
+    const label = makeName();
     items.push({
       key: `user_${i}`,
       id: `user_${i}`,
-      label: makeName() + " " + i,
+      label: `${label} ${i}`,
       icon: CustomSvgUrl,
     });
   }
 
-  for (let i = 0; i < count / 2; i++) {
+  for (let i = 0; i < count / 2; i += 1) {
+    const label = makeName();
     items.push({
       key: `room_${i}`,
       id: `room_${i}`,
-      label: makeName() + " " + i + " room",
+      label: `${label} ${i}`,
       icon: CustomSvgUrl,
     });
   }
@@ -130,10 +134,10 @@ const selectedAccessRight = accessRights[1];
 const renderedItems = items.slice(0, 100);
 const totalItems = items.length;
 
-const Template = (args: any) => {
+const Template = (args: SelectorProps) => {
   const [rendItems, setRendItems] = React.useState(renderedItems);
 
-  const loadNextPage = (index: number) => {
+  const loadNextPage = async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
   };
 
@@ -144,7 +148,7 @@ const Template = (args: any) => {
     <div
       style={{
         width: "480px",
-        height: args.height,
+        height: "485px",
         border: "1px solid #eee",
         margin: "auto",
       }}
@@ -160,170 +164,167 @@ const Template = (args: any) => {
   );
 };
 
-export const Default = Template.bind({});
-
-export const BreadCrumbs = Template.bind({});
-
-export const NewName = Template.bind({});
-
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-Default.args = {
-  height: "485px", // container height
-  headerLabel: "Room list",
-  onBackClick: () => {},
-  searchPlaceholder: "Search",
-  searchValue: "",
-  items: renderedItems,
-  onSelect: (item: any) => {},
-  isMultiSelect: false,
-  selectedItems: selectedItems,
-  acceptButtonLabel: "Add",
-  onAccept: (items: any, access: any) => {},
-  withSelectAll: false,
-  selectAllLabel: "All accounts",
-  selectAllIcon: ArchiveSvgUrl,
-  onSelectAll: () => {},
-  withAccessRights: false,
-  accessRights,
-  selectedAccessRight,
-  onAccessRightsChange: (access: any) => {},
-  withCancelButton: false,
-  cancelButtonLabel: "Cancel",
-  onCancel: () => {},
-  emptyScreenImage: EmptyScreenFilter,
-  emptyScreenHeader: "No other accounts here yet",
-  emptyScreenDescription:
-    "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  searchEmptyScreenImage: EmptyScreenFilter,
-  searchEmptyScreenHeader: "No other accounts here yet search",
-  searchEmptyScreenDescription:
-    " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  totalItems,
-  hasNextPage: true,
-  isNextPageLoading: false,
-  isLoading: false,
-  withBreadCrumbs: false,
-  breadCrumbs: [],
-  onSelectBreadCrumb: (item: any) => {},
-  breadCrumbsLoader: <StyledBreadCrumbsLoader />,
-  withoutBackButton: false,
-  withSearch: false,
-  isBreadCrumbsLoading: false,
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  descriptionText: "",
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    headerLabel: "Room list",
+    onBackClick: () => {},
+    searchPlaceholder: "Search",
+    searchValue: "",
+    items: renderedItems,
+    onSelect: () => {},
+    isMultiSelect: false,
+    selectedItems,
+    acceptButtonLabel: "Add",
+    onAccept: () => {},
+    withSelectAll: false,
+    selectAllLabel: "All accounts",
+    selectAllIcon: ArchiveSvgUrl,
+    onSelectAll: () => {},
+    withAccessRights: false,
+    accessRights,
+    selectedAccessRight,
+    onAccessRightsChange: () => {},
+    withCancelButton: false,
+    cancelButtonLabel: "Cancel",
+    onCancel: () => {},
+    emptyScreenImage: EmptyScreenFilter,
+    emptyScreenHeader: "No other accounts here yet",
+    emptyScreenDescription:
+      "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    searchEmptyScreenImage: EmptyScreenFilter,
+    searchEmptyScreenHeader: "No other accounts here yet search",
+    searchEmptyScreenDescription:
+      " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    totalItems,
+    hasNextPage: true,
+    isNextPageLoading: false,
+    isLoading: false,
+    withBreadCrumbs: false,
+    breadCrumbs: [],
+    onSelectBreadCrumb: () => {},
+    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    withoutBackButton: false,
+    withSearch: false,
+    isBreadCrumbsLoading: false,
+    alwaysShowFooter: false,
+    disableAcceptButton: false,
+    descriptionText: "",
+  },
 };
 
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-BreadCrumbs.args = {
-  height: "485px", // container height
-  headerLabel: "Room list",
-  onBackClick: () => {},
-  searchPlaceholder: "Search",
-  searchValue: "",
-  items: renderedItems,
-  onSelect: (item: any) => {},
-  isMultiSelect: false,
-  selectedItems: selectedItems,
-  acceptButtonLabel: "Add",
-  onAccept: (items: any, access: any) => {},
-  withSelectAll: false,
-  selectAllLabel: "All accounts",
-  selectAllIcon: ArchiveSvgUrl,
-  onSelectAll: () => {},
-  withAccessRights: false,
-  accessRights,
-  selectedAccessRight,
-  onAccessRightsChange: (access: any) => {},
-  withCancelButton: false,
-  cancelButtonLabel: "Cancel",
-  onCancel: () => {},
-  emptyScreenImage: EmptyScreenFilter,
-  emptyScreenHeader: "No other accounts here yet",
-  emptyScreenDescription:
-    "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  searchEmptyScreenImage: EmptyScreenFilter,
-  searchEmptyScreenHeader: "No other accounts here yet search",
-  searchEmptyScreenDescription:
-    " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  totalItems,
-  hasNextPage: true,
-  isNextPageLoading: false,
-  isLoading: false,
-  withBreadCrumbs: true,
-  breadCrumbs: [
-    { id: 1, label: "DocSpace" },
-    { id: 2, label: "1111111" },
-    { id: 3, label: "21222222222" },
-    { id: 4, label: "32222222222222222222222222222222222222" },
-    { id: 5, label: "4222222222222222222222222222222222222" },
-  ],
-  onSelectBreadCrumb: (item: any) => {},
-  breadCrumbsLoader: <StyledBreadCrumbsLoader />,
-  withoutBackButton: false,
-  withSearch: false,
-  isBreadCrumbsLoading: false,
-  withFooterInput: false,
-  footerInputHeader: "",
-  footerCheckboxLabel: "",
-  currentFooterInputValue: "",
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  descriptionText: "",
+export const BreadCrumbs: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    headerLabel: "Room list",
+    onBackClick: () => {},
+    searchPlaceholder: "Search",
+    searchValue: "",
+    items: renderedItems,
+    onSelect: () => {},
+    isMultiSelect: false,
+    selectedItems,
+    acceptButtonLabel: "Add",
+    onAccept: () => {},
+    withSelectAll: false,
+    selectAllLabel: "All accounts",
+    selectAllIcon: ArchiveSvgUrl,
+    onSelectAll: () => {},
+    withAccessRights: false,
+    accessRights,
+    selectedAccessRight,
+    onAccessRightsChange: () => {},
+    withCancelButton: false,
+    cancelButtonLabel: "Cancel",
+    onCancel: () => {},
+    emptyScreenImage: EmptyScreenFilter,
+    emptyScreenHeader: "No other accounts here yet",
+    emptyScreenDescription:
+      "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    searchEmptyScreenImage: EmptyScreenFilter,
+    searchEmptyScreenHeader: "No other accounts here yet search",
+    searchEmptyScreenDescription:
+      " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    totalItems,
+    hasNextPage: true,
+    isNextPageLoading: false,
+    isLoading: false,
+    withBreadCrumbs: true,
+    breadCrumbs: [
+      { id: 1, label: "DocSpace" },
+      { id: 2, label: "1111111" },
+      { id: 3, label: "21222222222" },
+      { id: 4, label: "32222222222222222222222222222222222222" },
+      { id: 5, label: "4222222222222222222222222222222222222" },
+    ],
+    onSelectBreadCrumb: () => {},
+    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    withoutBackButton: false,
+    withSearch: false,
+    isBreadCrumbsLoading: false,
+    withFooterInput: false,
+    footerInputHeader: "",
+    footerCheckboxLabel: "",
+    currentFooterInputValue: "",
+    alwaysShowFooter: false,
+    disableAcceptButton: false,
+    descriptionText: "",
+  },
 };
 
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-NewName.args = {
-  height: "485px", // container height
-  headerLabel: "Room list",
-  onBackClick: () => {},
-  searchPlaceholder: "Search",
-  searchValue: "",
-  items: renderedItems,
-  onSelect: (item: any) => {},
-  isMultiSelect: false,
-  selectedItems: selectedItems,
-  acceptButtonLabel: "Add",
-  onAccept: (items: any, access: any) => {},
-  withSelectAll: false,
-  selectAllLabel: "All accounts",
-  selectAllIcon: ArchiveSvgUrl,
-  onSelectAll: () => {},
-  withAccessRights: false,
-  accessRights,
-  selectedAccessRight,
-  onAccessRightsChange: (access: any) => {},
-  withCancelButton: false,
-  cancelButtonLabel: "Cancel",
-  onCancel: () => {},
-  emptyScreenImage: EmptyScreenFilter,
-  emptyScreenHeader: "No other accounts here yet",
-  emptyScreenDescription:
-    "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  searchEmptyScreenImage: EmptyScreenFilter,
-  searchEmptyScreenHeader: "No other accounts here yet search",
-  searchEmptyScreenDescription:
-    " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-  totalItems,
-  hasNextPage: true,
-  isNextPageLoading: false,
-  isLoading: false,
-  withBreadCrumbs: true,
-  breadCrumbs: [
-    { id: 1, label: "DocSpace" },
-    { id: 2, label: "1111111" },
-    { id: 3, label: "21222222222" },
-  ],
-  onSelectBreadCrumb: (item: any) => {},
-  breadCrumbsLoader: <StyledBreadCrumbsLoader />,
-  withoutBackButton: false,
-  withSearch: false,
-  isBreadCrumbsLoading: false,
-  withFooterInput: true,
-  footerInputHeader: "File name",
-  footerCheckboxLabel: "Open saved document in new tab",
-  currentFooterInputValue: "OldFIleName.docx",
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  descriptionText: "",
+export const NewName: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    headerLabel: "Room list",
+    onBackClick: () => {},
+    searchPlaceholder: "Search",
+    searchValue: "",
+    items: renderedItems,
+    onSelect: () => {},
+    isMultiSelect: false,
+    selectedItems,
+    acceptButtonLabel: "Add",
+    onAccept: () => {},
+    withSelectAll: false,
+    selectAllLabel: "All accounts",
+    selectAllIcon: ArchiveSvgUrl,
+    onSelectAll: () => {},
+    withAccessRights: false,
+    accessRights,
+    selectedAccessRight,
+    onAccessRightsChange: () => {},
+    withCancelButton: false,
+    cancelButtonLabel: "Cancel",
+    onCancel: () => {},
+    emptyScreenImage: EmptyScreenFilter,
+    emptyScreenHeader: "No other accounts here yet",
+    emptyScreenDescription:
+      "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    searchEmptyScreenImage: EmptyScreenFilter,
+    searchEmptyScreenHeader: "No other accounts here yet search",
+    searchEmptyScreenDescription:
+      " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    totalItems,
+    hasNextPage: true,
+    isNextPageLoading: false,
+    isLoading: false,
+    withBreadCrumbs: true,
+    breadCrumbs: [
+      { id: 1, label: "DocSpace" },
+      { id: 2, label: "1111111" },
+      { id: 3, label: "21222222222" },
+    ],
+    onSelectBreadCrumb: () => {},
+    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    withoutBackButton: false,
+    withSearch: false,
+    isBreadCrumbsLoading: false,
+    withFooterInput: true,
+    footerInputHeader: "File name",
+    footerCheckboxLabel: "Open saved document in new tab",
+    currentFooterInputValue: "OldFIleName.docx",
+    alwaysShowFooter: false,
+    disableAcceptButton: false,
+    descriptionText: "",
+  },
 };

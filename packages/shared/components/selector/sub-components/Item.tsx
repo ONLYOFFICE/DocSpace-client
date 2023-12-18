@@ -1,12 +1,12 @@
 import React from "react";
 
-import Avatar from "../../../avatar";
-import Text from "../../../text";
-import Checkbox from "../../../checkbox";
-import RoomIcon from "../../../room-icon";
-import StyledItem from "./StyledItem";
+import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import { Text } from "../../text";
+import { Checkbox } from "../../checkbox";
+import { RoomIcon } from "../../room-icon";
 
-import { ItemProps, Data, Item as ItemType } from "./Item.types";
+import { StyledItem } from "../Selector.styled";
+import { ItemProps, Data, TItem } from "../Selector.types";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -34,20 +34,20 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   const isLoaded = isItemLoaded(index);
 
   const renderItem = () => {
-    const item: ItemType = items[index];
+    const item: TItem = items[index];
 
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
     const { label, avatar, icon, role, isSelected, isDisabled, color } = item;
 
-    const currentRole = role ? role : "user";
+    const currentRole = role || AvatarRole.user;
 
     const defaultIcon = !!color;
     const isLogo = !!icon || defaultIcon;
 
     const onChangeAction = () => {
-      onSelect && onSelect(item);
+      onSelect(item);
     };
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -58,7 +58,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       )
         return;
 
-      onSelect && onSelect(item);
+      onSelect(item);
     };
 
     return (
@@ -73,22 +73,20 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {!isLogo ? (
           <Avatar
             className="user-avatar"
-            source={avatar}
+            source={avatar || ""}
             role={currentRole}
-            size={"min"}
+            size={AvatarSize.min}
           />
         ) : defaultIcon ? (
-          // @ts-expect-error TS(2786): 'RoomIcon' cannot be used as a JSX component.
           <RoomIcon color={color} title={label} />
         ) : (
           <img className="room-logo" src={icon} alt="room logo" />
         )}
 
-        // @ts-expect-error TS(2322): Type '{ children: string; className: string; fontW... Remove this comment to see the full error message
         <Text
           className="label"
           fontWeight={600}
-          fontSize={"14px"}
+          fontSize="14px"
           noSelect
           truncate
           dir="auto"
@@ -110,4 +108,6 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   return isLoaded ? renderItem() : <div style={style}>{rowLoader}</div>;
 }, compareFunction);
 
-export default Item;
+Item.displayName = "Item";
+
+export { Item };

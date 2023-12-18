@@ -1,49 +1,52 @@
 import React from "react";
 
-import ContextMenuButton from "../../../context-menu-button";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "../../context-menu-button";
+import { ContextMenuModel } from "../../context-menu";
 
 import {
-  BreadCrumb,
+  TBreadCrumb,
   BreadCrumbsProps,
-  DisplayedItem,
-} from "./BreadCrumbs.types";
-
+  TDisplayedItem,
+} from "../Selector.types";
 import {
   StyledBreadCrumbs,
   StyledItemText,
   StyledArrowRightSvg,
-} from "./StyledBreadCrumbs";
+} from "../Selector.styled";
 
 const BreadCrumbs = ({
   breadCrumbs,
   onSelectBreadCrumb,
   isLoading,
 }: BreadCrumbsProps) => {
-  const [displayedItems, setDisplayedItems] = React.useState<DisplayedItem[]>(
-    []
+  const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
+    [],
   );
 
   const onClickItem = React.useCallback(
-    (e: any, open: any, item: BreadCrumb) => {
+    (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => {
       if (isLoading) return;
-      onSelectBreadCrumb && onSelectBreadCrumb(item);
+      onSelectBreadCrumb?.(item);
     },
-    [breadCrumbs, isLoading]
+    [isLoading, onSelectBreadCrumb],
   );
 
   const calculateDisplayedItems = React.useCallback(
-    (items: BreadCrumb[]) => {
+    (items: TBreadCrumb[]) => {
       const itemsLength = items.length;
-      const oldItems: BreadCrumb[] = [];
+      const oldItems: TBreadCrumb[] = [];
 
       items.forEach((item) =>
         oldItems.push({
           ...item,
           id: item.id?.toString(),
-        })
+        }),
       );
       if (itemsLength > 0) {
-        const newItems: DisplayedItem[] = [];
+        const newItems: TDisplayedItem[] = [];
 
         if (itemsLength <= 3) {
           oldItems.forEach((item, index) => {
@@ -133,7 +136,7 @@ const BreadCrumbs = ({
         return setDisplayedItems(newItems);
       }
     },
-    [onClickItem]
+    [onClickItem],
   );
 
   React.useEffect(() => {
@@ -163,40 +166,44 @@ const BreadCrumbs = ({
       {displayedItems.map((item, index) =>
         item.isList ? (
           <ContextMenuButton
-            key={`bread-crumb-item-${item.id}-${index}`}
-            // @ts-expect-error TS(2322): Type '{ key: string; className: string; getData: (... Remove this comment to see the full error message
+            key={`bread-crumb-item-${item.id}`}
             className="context-menu-button"
-            getData={() => item.listItems}
+            displayType={ContextMenuButtonDisplayType.dropdown}
+            getData={() => {
+              const items = item.listItems
+                ? ([...item.listItems] as ContextMenuModel[])
+                : [];
+              return items;
+            }}
           />
         ) : item.isArrow ? (
-          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}-${index}`} />
+          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
         ) : (
           <StyledItemText
-            key={`bread-crumb-item-${item.id}-${index}`}
-            fontSize={"16px"}
+            key={`bread-crumb-item-${item.id}`}
+            fontSize="16px"
             fontWeight={600}
-            lineHeight={"22px"}
+            lineHeight="22px"
             noSelect
             truncate
             isCurrent={index === displayedItems.length - 1}
-            isLoading={isLoading}
+            isLoading={isLoading || false}
             onClick={() => {
               if (index === displayedItems.length - 1 || isLoading) return;
 
-              onSelectBreadCrumb &&
-                onSelectBreadCrumb({
-                  id: item.id,
-                  label: item.label,
-                  isRoom: item.isRoom,
-                });
+              onSelectBreadCrumb?.({
+                id: item.id,
+                label: item.label,
+                isRoom: item.isRoom,
+              });
             }}
           >
             {item.label}
           </StyledItemText>
-        )
+        ),
       )}
     </StyledBreadCrumbs>
   );
 };
 
-export default BreadCrumbs;
+export { BreadCrumbs };

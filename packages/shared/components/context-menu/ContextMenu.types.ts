@@ -4,15 +4,11 @@ export type ContextMenuType = {
   label: string | React.ReactNode;
   icon?: string;
   disabled?: boolean;
-  onClick?: ({
-    originalEvent,
-    action,
-    item,
-  }: {
-    originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-    action?: string | boolean;
-    item: ContextMenuType;
-  }) => VoidFunction;
+  onClick?: (
+    originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    action?: string | boolean,
+    item?: ContextMenuType,
+  ) => VoidFunction;
   isSeparator?: undefined;
   url?: string;
   items?: ContextMenuType[];

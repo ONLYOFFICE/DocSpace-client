@@ -1,8 +1,9 @@
 import React from "react";
 
-import Button from "../../../button";
-import TextInput from "../../../text-input";
-import Checkbox from "../../../checkbox";
+import { Button, ButtonSize } from "../../button";
+import { TextInput, InputSize, InputType } from "../../text-input";
+import { Checkbox } from "../../checkbox";
+import { ComboBoxSize, TOption } from "../../combobox";
 
 import {
   StyledFooter,
@@ -10,8 +11,8 @@ import {
   StyledButtonContainer,
   StyledNewNameContainer,
   StyledNewNameHeader,
-} from "./StyledFooter";
-import { FooterProps } from "./Footer.types";
+} from "../Selector.styled";
+import { AccessRight, FooterProps } from "../Selector.types";
 
 const Footer = React.memo(
   ({
@@ -47,13 +48,13 @@ const Footer = React.memo(
 
     const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setNewFooterInputValue && setNewFooterInputValue(value);
+      setNewFooterInputValue?.(value);
     };
 
     const onChangeCheckbox = () => {
-      setIsChecked && setIsChecked((value: boolean) => !value);
-      setIsFooterCheckboxChecked &&
-        setIsFooterCheckboxChecked((value: boolean) => !value);
+      setIsChecked?.((value: boolean) => !value);
+
+      setIsFooterCheckboxChecked?.((value: boolean) => !value);
     };
 
     return (
@@ -65,15 +66,17 @@ const Footer = React.memo(
         {withFooterInput && (
           <StyledNewNameContainer>
             <StyledNewNameHeader
-              lineHeight={"20px"}
+              lineHeight="20px"
               fontWeight={600}
-              fontSize={"13px"}
+              fontSize="13px"
             >
               {footerInputHeader}
             </StyledNewNameHeader>
             <TextInput
-              className={"new-file-input"}
-              value={currentFooterInputValue}
+              type={InputType.text}
+              size={InputSize.base}
+              className="new-file-input"
+              value={currentFooterInputValue || ""}
               scale
               onChange={onChangeFileName}
             />
@@ -98,47 +101,49 @@ const Footer = React.memo(
 
         <StyledButtonContainer>
           <Button
-            // @ts-expect-error TS(2322): Type '{ id: string | undefined; className: string;... Remove this comment to see the full error message
             id={acceptButtonId}
-            className={"button accept-button"}
+            className="button accept-button"
             label={label}
             primary
             scale
-            size={"normal"}
+            size={ButtonSize.normal}
             isDisabled={disableAcceptButton}
             onClick={onAccept}
           />
 
           {withAccessRights && (
             <StyledComboBox
-              onSelect={onChangeAccessRights}
-              options={accessRights}
-              size="content"
+              onSelect={(opt?: TOption) =>
+                onChangeAccessRights?.({ ...opt } as AccessRight)
+              }
+              options={accessRights as TOption[]}
+              size={ComboBoxSize.content}
               scaled={false}
               manualWidth="fit-content"
-              selectedOption={selectedAccessRight}
+              selectedOption={selectedAccessRight as TOption}
               showDisabledItems
-              directionX={"right"}
-              directionY={"top"}
-              forceCloseClickOutside={true}
+              directionX="right"
+              directionY="top"
+              forceCloseClickOutside
             />
           )}
 
           {withCancelButton && (
             <Button
-              // @ts-expect-error TS(2322): Type '{ id: string | undefined; className: string;... Remove this comment to see the full error message
               id={cancelButtonId}
-              className={"button cancel-button"}
-              label={cancelButtonLabel}
+              className="button cancel-button"
+              label={cancelButtonLabel || ""}
               scale
-              size={"normal"}
+              size={ButtonSize.normal}
               onClick={onCancel}
             />
           )}
         </StyledButtonContainer>
       </StyledFooter>
     );
-  }
+  },
 );
 
-export default Footer;
+Footer.displayName = "Footer";
+
+export { Footer };

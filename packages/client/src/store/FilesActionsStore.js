@@ -1559,8 +1559,13 @@ class FilesActionStore {
   };
 
   isAvailableOption = (option) => {
-    const { canConvertSelected, hasSelection, allFilesIsEditing, selection } =
-      this.filesStore;
+    const {
+      canConvertSelected,
+      hasSelection,
+      allFilesIsEditing,
+      selection,
+      hasRoomsToResetQuota,
+    } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
     const canDownload = selection.every((s) => s.security?.Download);
@@ -1611,7 +1616,7 @@ class FilesActionStore {
       case "disable-quota":
         return true;
       case "default-quota":
-        return true;
+        return hasRoomsToResetQuota;
     }
   };
 
@@ -1916,7 +1921,7 @@ class FilesActionStore {
           return {
             id: "menu-default-quota",
             key: "default-quota",
-            label: "Set to quota",
+            label: t("Common:SetToDefault"),
             iconUrl: DefaultQuotaReactSvgUrl,
             onClick: () => console.log("default-quota"),
             disabled: false,

@@ -756,7 +756,7 @@ class FilesStore {
     // this.isEmptyPage = isEmptyPage;
 
     runInAction(() => {
-    this.isEmptyPage = isEmptyPage;
+      this.isEmptyPage = isEmptyPage;
     });
   };
 
@@ -1106,11 +1106,11 @@ class FilesStore {
         );
 
         if (selectableFolder) {
-        selectableFolder.isFolder = true;
+          selectableFolder.isFolder = true;
 
-        newSelections.push(selectableFolder);
+          newSelections.push(selectableFolder);
+        }
       }
-    }
     }
 
     for (let item of removed) {
@@ -1465,7 +1465,7 @@ class FilesStore {
             const isCurrentFolder = data.current.id === folderId;
 
             const folderInfo = isCurrentFolder
-                ? data.current
+              ? data.current
               : { ...folder, id: folderId };
 
             const { title, roomType } = folderInfo;
@@ -2067,13 +2067,13 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security
-        );
+            );
 
             pluginAllKeys &&
               pluginAllKeys.forEach((key) => fileOptions.push(key));
-        pluginFilesKeys &&
-          pluginFilesKeys.forEach((key) => fileOptions.push(key));
-      }
+            pluginFilesKeys &&
+              pluginFilesKeys.forEach((key) => fileOptions.push(key));
+          }
 
           if (
             !item.viewAccessibility.MediaView &&
@@ -2527,7 +2527,7 @@ class FilesStore {
       newFilter.pageCount = 100;
       newFilter.startIndex = newFilter.page * newFilter.pageCount;
       this.setRoomMembersFilter(newFilter);
-  }
+    }
 
     const membersFilters = {
       startIndex: newFilter.startIndex,
@@ -2726,38 +2726,38 @@ class FilesStore {
           this.setTempActionFoldersIds([]);
         });
     } else {
-    api.files
-      .getFolder(newFilter.folder, newFilter)
-      .then((res) => {
-        const files = fileIds
-          ? this.files.filter((x) => !fileIds.includes(x.id))
-          : this.files;
-        const folders = folderIds
-          ? this.folders.filter((x) => !folderIds.includes(x.id))
-          : this.folders;
+      api.files
+        .getFolder(newFilter.folder, newFilter)
+        .then((res) => {
+          const files = fileIds
+            ? this.files.filter((x) => !fileIds.includes(x.id))
+            : this.files;
+          const folders = folderIds
+            ? this.folders.filter((x) => !folderIds.includes(x.id))
+            : this.folders;
 
-        const newFiles = [...files, ...res.files];
-        const newFolders = [...folders, ...res.folders];
+          const newFiles = [...files, ...res.files];
+          const newFolders = [...folders, ...res.folders];
 
-        const filter = this.filter.clone();
-        filter.total = res.total;
+          const filter = this.filter.clone();
+          filter.total = res.total;
 
-        runInAction(() => {
-          this.setFilter(filter);
-          this.setFiles(newFiles);
-          this.setFolders(newFolders);
-        });
+          runInAction(() => {
+            this.setFilter(filter);
+            this.setFiles(newFiles);
+            this.setFolders(newFolders);
+          });
 
-        showToast && showToast();
-      })
-      .catch((err) => {
-        toastr.error(err);
-      })
-      .finally(() => {
-        this.setOperationAction(false);
-        this.setTempActionFilesIds([]);
+          showToast && showToast();
+        })
+        .catch((err) => {
+          toastr.error(err);
+        })
+        .finally(() => {
+          this.setOperationAction(false);
+          this.setTempActionFilesIds([]);
           this.setTempActionFoldersIds([]);
-      });
+        });
     }
   };
 
@@ -3444,6 +3444,23 @@ class FilesStore {
     }
 
     return this.selection.find((el) => el.title)?.title || null;
+  }
+
+  get hasRoomsToResetQuota() {
+    const caResetCustomQuota = (item) => {
+      const { isOwner, isAdmin } = this.authStore.userStore.user;
+      const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      if (!isOwner && !isAdmin) return false;
+
+      if (isAdmin && !item.security?.EditRoom) return false;
+
+      return item.isCustomQuota;
+    };
+
+    return this.selection.every((x) => caResetCustomQuota(x));
   }
 
   get hasSelection() {

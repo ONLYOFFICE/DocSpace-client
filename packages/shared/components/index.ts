@@ -45,6 +45,7 @@ import { RoomLogo } from "./room-logo";
 import { MainButton } from "./main-button";
 import { FloatingButton, FloatingButtonIcons } from "./floating-button";
 import { ViewSelector, TViewSelectorOption } from "./view-selector";
+import { EmptyScreenContainer } from "./empty-screen-container";
 
 export type {
   TFallbackAxisSideDirection,
@@ -54,6 +55,7 @@ export type {
 };
 
 export {
+  EmptyScreenContainer,
   ViewSelector,
   FloatingButton,
   FloatingButtonIcons,

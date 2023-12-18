@@ -1,13 +1,21 @@
 import styled from "styled-components";
-import { mobile, tablet, transitionalScreenSize } from "../utils/device";
-import NoUserSelect from "../utils/commonStyles";
+import {
+  mobile,
+  tablet,
+  transitionalScreenSize,
+  NoUserSelect,
+} from "../../utils";
+import { Base } from "../../themes";
 
-const EmptyContentBody = styled.div`
+const EmptyContentBody = styled.div<{
+  withoutFilter?: boolean;
+  subheadingText?: boolean;
+  descriptionText?: boolean;
+}>`
   margin: 0 auto;
   padding-top: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withoutFilter' does not exist on type 'T... Remove this comment to see the full error message
     props.withoutFilter
-      ? "91px" //calculated without section body padding and without filter
+      ? "91px" // calculated without section body padding and without filter
       : "52px"}; //calculated without section body padding, margin of filter
 
   grid-template-columns: 1fr;
@@ -16,9 +24,7 @@ const EmptyContentBody = styled.div`
   grid-template-areas:
     "img"
     "headerText"
-    // @ts-expect-error TS(2339): Property 'subheadingText' does not exist on type '... Remove this comment to see the full error message
     ${(props) => props.subheadingText && `"subheadingText"`}
-    // @ts-expect-error TS(2339): Property 'descriptionText' does not exist on type ... Remove this comment to see the full error message
     ${(props) => props.descriptionText && `"descriptionText"`}
     "button";
 
@@ -83,20 +89,18 @@ const EmptyContentBody = styled.div`
 
   @media ${tablet} {
     padding-top: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'withoutFilter' does not exist on type 'T... Remove this comment to see the full error message
       props.withoutFilter
-        ? "109px" //calculated without section body padding and without filter
-        : "71px"}; //calculated without section body padding, margin of filter
+        ? "109px" // calculated without section body padding and without filter
+        : "71px"}; // calculated without section body padding, margin of filter
     max-width: 480px;
   }
 
   @media ${mobile} {
     padding-top: 31px;
     padding-top: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'withoutFilter' does not exist on type 'T... Remove this comment to see the full error message
       props.withoutFilter
-        ? "69px" //calculated without section body padding and without filter
-        : "31px"}; //calculated without section body padding, margin of filter
+        ? "69px" // calculated without section body padding and without filter
+        : "31px"}; // calculated without section body padding, margin of filter
     max-width: 343px;
     padding-left: 28px;
     padding-right: 28px;
@@ -112,12 +116,9 @@ const EmptyContentBody = styled.div`
   }
 `;
 
-const EmptyContentImage = styled.img.attrs((props) => ({
-  // @ts-expect-error TS(2339): Property 'imageSrc' does not exist on type 'Themed... Remove this comment to see the full error message
-  src: props.imageSrc,
-  // @ts-expect-error TS(2339): Property 'imageAlt' does not exist on type 'Themed... Remove this comment to see the full error message
-  alt: props.imageAlt,
-}))`
+EmptyContentBody.defaultProps = { theme: Base };
+
+const EmptyContentImage = styled.img`
   background: no-repeat 0 0 transparent;
 `;
 

@@ -243,7 +243,6 @@ class OformsStore {
       url,
       this.oformsFilter.locale
     );
-
     return categories;
   };
 

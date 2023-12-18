@@ -17,6 +17,8 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import BetaBadge from "@docspace/common/components/BetaBadge";
+import { isBetaLanguage } from "@docspace/common/utils";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -27,7 +29,11 @@ const mapTimezonesToArray = (timezones) => {
 const mapCulturesToArray = (cultures, i18n) => {
   const t = i18n.getFixedT(null, "Common");
   return cultures.map((culture) => {
-    return { key: culture, label: t(`Culture_${culture}`) };
+    return {
+      key: culture,
+      label: t(`Culture_${culture}`),
+      isBeta: isBetaLanguage(culture),
+    };
   });
 };
 
@@ -421,6 +427,8 @@ const LanguageAndTimeZone = (props) => {
   const timezones = mapTimezonesToArray(rawTimezones);
   const cultureNamesNew = mapCulturesToArray(cultures, i18n);
 
+  const isBetaLanguage = state?.language?.isBeta;
+
   const settingsBlock = !(state.language && state.timezone) ? null : (
     <div className="settings-block">
       <FieldContainer
@@ -428,21 +436,24 @@ const LanguageAndTimeZone = (props) => {
         labelText={`${t("Common:Language")}`}
         isVertical={true}
       >
-        <ComboBox
-          tabIndex={1}
-          id="comboBoxLanguage"
-          options={cultureNamesNew}
-          selectedOption={state.language}
-          onSelect={onLanguageSelect}
-          isDisabled={isLoading}
-          directionY="both"
-          noBorder={false}
-          scaled={true}
-          scaledOptions={true}
-          dropDownMaxHeight={300}
-          className="dropdown-item-width combo-box-settings"
-          showDisabledItems={true}
-        />
+        <div className="settings-block__wrapper-language">
+          <ComboBox
+            tabIndex={1}
+            id="comboBoxLanguage"
+            options={cultureNamesNew}
+            selectedOption={state.language}
+            onSelect={onLanguageSelect}
+            isDisabled={isLoading}
+            directionY="both"
+            noBorder={false}
+            scaled={true}
+            scaledOptions={true}
+            dropDownMaxHeight={300}
+            className="dropdown-item-width combo-box-settings"
+            showDisabledItems={true}
+          />
+          {isBetaLanguage && <BetaBadge place={"right-start"} />}
+        </div>
       </FieldContainer>
       <FieldContainer
         id="fieldContainerTimezone"

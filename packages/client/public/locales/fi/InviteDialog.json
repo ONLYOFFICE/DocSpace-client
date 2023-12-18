@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Kutsu uusia käyttäjiä DocSpaceen henkilökohtaisesti sähköpostilla",
   "AddManuallyDescriptionRoom": "Lisää olemassa olevat DocSpace-käyttäjät huoneeseen käyttämällä nimiä tai kutsu uudet käyttäjät henkilökohtaisesti sähköpostin kautta",
   "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia klikkaamalla sitä.",
+  "InvitationLanguage": "Kutsukieli",
   "InviteAccountSearchPlaceholder": "Kutsu ihmisiä sähköpostilla",
   "Invited": "Kutsuttu",
   "InviteRoomSearchPlaceholder": "Kutsu ihmisiä nimellä tai sähköpostilla",
@@ -10,5 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Luo yleinen linkki DocSpaceen itsevaltuutusta varten",
   "InviteViaLinkDescriptionRoom": "Luo yleinen linkki huoneeseen itsevaltuutusta varten",
   "LinkCopySuccess": "Linkki on kopioitu",
+  "ResetChange": "Nollaa muutos",
   "SendInvitation": "Lähetä kutsu"
 }

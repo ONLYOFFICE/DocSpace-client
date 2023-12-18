@@ -159,7 +159,7 @@
   "RestoreBackupWarningText": "DocSpace non sarà più disponibile durante il processo di ripristino. Una volta completato il ripristino, tutte le modifiche apportate dopo la data del punto di ripristino selezionato andranno perse.",
   "RoomsModule": "Stanza di backup",
   "RoomsModuleDescription": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella loro stanza {{roomName}}.",
-  "SaveToApply": "Fai clic sul pulsante <strong>Salva</strong> in basso per applicare\n",
+  "SaveToApply": "Fai clic sul pulsante <strong>Salva</strong> in basso per applicare",
   "SelectFileInGZFormat": "Selezionare il file in formato .GZ",
   "SendNotificationAboutRestoring": "Invia agli utenti una notifica relativa al ripristino dello spazio",
   "ServerSideEncryptionMethod": "Metodo di crittografia lato server",

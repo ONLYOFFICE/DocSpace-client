@@ -3,9 +3,16 @@
   "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników DocSpace. Czy na pewno chcesz kontynuować?",
   "DeletePluginTitle": "Usunąć wtyczkę?",
   "Description": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność DocSpace o dodatkowe opcje. Kliknij Prześlij wtyczkę i wybierz plik wtyczki w archiwum ZIP.",
+  "ExpandFunctionality": "Rozszerz funkcjonalność za pomocą zestawu SDK do tworzenia wtyczek",
+  "GoToRepo": "Przejdź do repozytorium",
   "Metadata": "Metadane",
   "NeedSettings": "Należy wprowadzić ustawienia",
   "NoPlugins": "Nie dodano żadnych wtyczek",
+  "NotNeedSettings": "Nie trzeba wchodzić w ustawienia",
+  "PluginSamples": "Próbki wtyczek",
+  "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
+  "PluginSDKDescription": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojego obszaru DocSpace, podłączyć usługi podmiotów trzecich lub poprawić komfort obsługi dla swoich bieżących użytkowników. Tutaj znajdziesz próbki wtyczek z kodem źródłowym dostępnym na GitHub.",
+  "PluginSDKInstruction": "Kliknij przycisk, aby uzyskać szczegółowe instrukcje na temat tworzenia własnych wtyczek.",
   "PluginsHelp": "Wtyczki pozwalają poszerzyć funkcjonalność DocSpace",
   "UploadPlugin": "Prześlij wtyczkę"
 }

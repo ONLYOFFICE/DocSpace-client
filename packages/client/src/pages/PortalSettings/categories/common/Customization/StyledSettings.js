@@ -72,6 +72,12 @@ const StyledSettingsComponent = styled.div`
     color: #f21c0e;
   }
 
+  .settings-block__wrapper-language {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .settings-block-description {
     line-height: 20px;
     color: ${(props) => props.theme.client.settings.security.descriptionColor};

@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Odmowa dostępu",
   "Error401Text": "Przepraszamy, wybrany zasób jest w tej chwili niedostępny.",
   "Error403Text": "Przepraszamy, odmówiono dostępu.",
   "Error404Text": "Przepraszamy, nie znaleziono zasobu.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "Oprogramowanie DocSpace jest niedostępne",
   "InvalidLink": "Nieprawidłowy link",
   "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
-  "LinkHasExpired": "Dany link wygasł."
+  "LinkHasExpired": "Dany link wygasł.",
+  "PortalRestriction": "Twój adres IP nie znajduje się na liście dozwolonych adresów IP z dostępem do tego obszaru DocSpace. Jeżeli masz włączony VPN, wyłącz go i odśwież stronę lub skorzystaj z innego adresu IP, aby się zalogować."
 }

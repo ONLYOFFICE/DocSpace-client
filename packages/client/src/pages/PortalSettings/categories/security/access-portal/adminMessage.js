@@ -75,7 +75,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     if (!isInit) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, isInit]);
 
   useEffect(() => {
     if (!isLoading) return;

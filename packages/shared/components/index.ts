@@ -56,6 +56,7 @@ import {
 import { Selector } from "./selector";
 import { HelpButton } from "./help-button";
 import { RadioButton } from "./radio-button";
+import { RadioButtonGroup } from "./radio-button-group";
 
 export type {
   TFallbackAxisSideDirection,
@@ -65,6 +66,7 @@ export type {
 };
 
 export {
+  RadioButtonGroup,
   RadioButton,
   HelpButton,
   Selector,

@@ -1,12 +1,18 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
 const ClearDiv = ({
   orientation,
   width,
   ...props
-}: any) => <div {...props} />;
+}: {
+  orientation?: "horizontal" | "vertical";
+  width?: string;
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}) => <div {...props} />;
 
 const StyledDiv = styled(ClearDiv)`
   .subtext {

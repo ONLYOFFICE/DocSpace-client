@@ -78,9 +78,7 @@ class OformsStore {
 
     try {
       const fetchedLocales = await getOformLocales(url);
-      const localeKeys = fetchedLocales.map((locale) =>
-        convertToLanguage(locale.code)
-      );
+      const localeKeys = fetchedLocales.map((locale) => locale.code);
       this.setOformLocales(localeKeys);
     } catch (err) {
       this.setOformLocales([]);

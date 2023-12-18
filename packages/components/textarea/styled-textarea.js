@@ -71,7 +71,9 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
 
   display: table;
   width: -webkit-fill-available;
-  height: fit-content;
+  height: ${(props) =>
+    props.heightTextArea ? `${props.heightTextArea}px` : "fit-content"};
+
   border: none;
   outline: none;
   resize: none;

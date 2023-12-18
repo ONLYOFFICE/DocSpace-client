@@ -3465,14 +3465,14 @@ class FilesStore {
 
   get hasRoomsToDisableQuota() {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
-    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
     const canDisableQuota = (item) => {
       if (!isOwner && !isAdmin) return false;
 
       if (isAdmin && !item.security?.EditRoom) return false;
 
-      return isDefaultUsersQuotaSet;
+      return isDefaultRoomsQuotaSet;
     };
 
     return this.selection.every((x) => canDisableQuota(x));
@@ -3480,14 +3480,14 @@ class FilesStore {
 
   get hasRoomsToChangeQuota() {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
-    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
     const canChangeQuota = (item) => {
       if (!isOwner && !isAdmin) return false;
 
       if (isAdmin && !item.security?.EditRoom) return false;
 
-      return isDefaultUsersQuotaSet;
+      return isDefaultRoomsQuotaSet;
     };
 
     return this.selection.every((x) => canChangeQuota(x));

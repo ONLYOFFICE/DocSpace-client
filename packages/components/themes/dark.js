@@ -3189,6 +3189,10 @@ const Dark = {
     pluginName: "#A3A9AE",
     descriptionColor: "#ADADAD",
   },
+  
+  sdkPresets: {
+    borderColor: "#d0d5da",
+  },
 };
 
 export default Dark;

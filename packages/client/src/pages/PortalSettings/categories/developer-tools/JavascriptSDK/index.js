@@ -24,6 +24,14 @@ import GetCodeDialog from "./sub-components/GetCodeDialog";
 import CSP from "./sub-components/csp";
 import Button from "@docspace/components/button";
 
+import PresetTile from "./sub-components/PresetTile";
+
+import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
+import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
+import ManagerImg from "PUBLIC_DIR/images/sdk-presets_manager.react.svg?url";
+import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
+import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
+
 const showPreviewThreshold = 720;
 
 const SDKContainer = styled(Box)`
@@ -65,7 +73,7 @@ const Controls = styled(Box)`
 
 const CategoryHeader = styled.div`
   margin-top: 40px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
@@ -245,6 +253,20 @@ const FilesSelectorInputWrapper = styled.div`
   }
 `;
 
+const PresetsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min(200px, 100%), 1fr));
+  gap: 16px;
+
+  max-width: fit-content;
+
+  margin-top: 16px;
+
+  @media ${mobile} {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const PortalIntegration = (props) => {
   const { t, setDocumentTitle, currentColorScheme, sdkLink } = props;
 
@@ -279,9 +301,7 @@ const PortalIntegration = (props) => {
   const [height, setHeight] = useState("600");
   const [withSubfolders, setWithSubfolders] = useState(true);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold
-  );
+  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
 
   const [config, setConfig] = useState({
     width: `${width}${widthDimension.label}`,
@@ -311,9 +331,7 @@ const PortalIntegration = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config)
-    );
+    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
   }, 500);
 
   useEffect(() => {
@@ -441,8 +459,7 @@ const PortalIntegration = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
   };
 
   useEffect(() => {
@@ -463,9 +480,7 @@ const PortalIntegration = (props) => {
 
   const code = (
     <>
-      <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
-      </CategorySubHeader>
+      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </>
   );
@@ -483,6 +498,14 @@ const PortalIntegration = (props) => {
     },
   ];
 
+  const presetsData = [
+    { title: t("Manager"), description: t("ManagerDescription"), image: ManagerImg },
+    { title: t("RoomSelector"), description: t("RoomSelectorDescription"), image: RoomSelectorImg },
+    { title: t("FileSelector"), description: t("FileSelectorDescription"), image: FileSelectorImg },
+    { title: t("Editor"), description: t("EditorDescription"), image: EditorImg },
+    { title: t("Viewer"), description: t("ViewerDescription"), image: ViewerImg },
+  ];
+
   return (
     <SDKContainer>
       <CategoryDescription>
@@ -491,13 +514,24 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
           fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}
-        >
+          onClick={() => window.open(sdkLink, "_blank")}>
           {t("APILink")}.
         </Link>
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <Text lineHeight="20px">{t("InitializeSDK")}</Text>
+      <PresetsContainer>
+        {presetsData.map((data) => (
+          <PresetTile
+            t={t}
+            key={data.title}
+            title={data.title}
+            description={data.description}
+            image={data.image}
+          />
+        ))}
+      </PresetsContainer>
       <Container>
         {showPreview && (
           <Preview>
@@ -594,9 +628,7 @@ const PortalIntegration = (props) => {
               <HelpButton
                 offsetRight={0}
                 size={12}
-                tooltipContent={
-                  <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
-                }
+                tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
               />
             </LabelGroup>
             <FilesSelectorInputWrapper>
@@ -650,9 +682,7 @@ const PortalIntegration = (props) => {
               <HelpButton
                 offsetRight={0}
                 size={12}
-                tooltipContent={
-                  <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
-                }
+                tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
               />
             </LabelGroup>
             <TextInput
@@ -714,6 +744,6 @@ export default inject(({ setup, auth }) => {
   };
 })(
   withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
-    observer(PortalIntegration)
-  )
+    observer(PortalIntegration),
+  ),
 );

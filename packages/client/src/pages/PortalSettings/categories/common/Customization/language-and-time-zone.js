@@ -7,7 +7,11 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import {
+  LANGUAGE,
+  COOKIE_EXPIRATION_YEAR,
+  DeviceType,
+} from "@docspace/common/constants";
 import { setCookie } from "@docspace/common/utils";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/components/utils/device";
@@ -65,7 +69,12 @@ const LanguageAndTimeZone = (props) => {
     timezone,
     languageAndTimeZoneSettingsUrl,
     initSettings,
+    isLoadedPage,
+    currentColorScheme,
+    currentDeviceType,
   } = props;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const navigate = useNavigate();
 
@@ -95,7 +104,8 @@ const LanguageAndTimeZone = (props) => {
     setDocumentTitle(t("StudioTimeLanguageSettings"));
 
     if (!isLoaded) {
-      initSettings("language-and-time-zone").then(() => setIsLoaded(true));
+      const page = isMobileView ? "language-and-time-zone" : "general";
+      initSettings(page).then(() => setIsLoaded(true));
     }
 
     const isLoadedSetting =
@@ -170,7 +180,7 @@ const LanguageAndTimeZone = (props) => {
     return () => {
       window.removeEventListener("resize", checkInnerWidth);
     };
-  }, []);
+  }, [isLoaded]);
 
   React.useState(() => {
     prevProps.current = {
@@ -407,16 +417,6 @@ const LanguageAndTimeZone = (props) => {
   };
 
   const {
-    theme,
-    isMobileView,
-
-    isLoadedPage,
-    helpLink,
-    organizationName,
-    currentColorScheme,
-  } = props;
-
-  const {
     isLoading,
 
     showReminder,
@@ -535,12 +535,11 @@ export default inject(({ auth, setup, common }) => {
     timezone,
     timezones,
     nameSchemaId,
-    organizationName,
     greetingSettings,
     cultures,
-    helpLink,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { user } = auth.userStore;
@@ -549,7 +548,6 @@ export default inject(({ auth, setup, common }) => {
   const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
     common;
   return {
-    theme: auth.settingsStore.theme,
     user,
     portalLanguage: culture,
     portalTimeZoneId: timezone,
@@ -557,16 +555,15 @@ export default inject(({ auth, setup, common }) => {
     rawTimezones: timezones,
     greetingSettings,
     nameSchemaId,
-    organizationName,
     setLanguageAndTime,
     isLoaded,
     setIsLoadedLngTZSettings,
     cultures,
-    helpLink,
     initSettings,
     setIsLoaded,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    currentDeviceType,
   };
 })(
   withLoading(

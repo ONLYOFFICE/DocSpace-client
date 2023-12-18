@@ -60,7 +60,8 @@ class CommonStore {
         case "white-label": {
           requests.push(
             this.getWhiteLabelLogoUrls(),
-            this.getWhiteLabelLogoText()
+            this.getWhiteLabelLogoText(),
+            this.getIsDefaultWhiteLabel()
           );
           break;
         }
@@ -80,13 +81,30 @@ class CommonStore {
           break;
       }
     } else {
-      requests.push(
-        settingsStore.getPortalTimezones(),
-        settingsStore.getPortalCultures(),
-        this.getWhiteLabelLogoUrls(),
-        this.getWhiteLabelLogoText(),
-        this.getIsDefaultWhiteLabel()
-      );
+      switch (page) {
+        case "general":
+          {
+            requests.push(
+              settingsStore.getPortalTimezones(),
+              settingsStore.getPortalCultures()
+            );
+
+            if (standalone) {
+              requests.push(this.getDNSSettings());
+            }
+          }
+          break;
+        case "branding":
+          requests.push(
+            this.getWhiteLabelLogoUrls(),
+            this.getWhiteLabelLogoText(),
+            this.getIsDefaultWhiteLabel()
+          );
+          break;
+
+        default:
+          break;
+      }
     }
 
     return Promise.all(requests).finally(() => this.setIsLoaded(true));

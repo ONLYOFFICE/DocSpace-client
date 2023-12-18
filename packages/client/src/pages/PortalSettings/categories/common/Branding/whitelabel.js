@@ -60,7 +60,8 @@ const WhiteLabel = (props) => {
     const isWhiteLabelPage = location.pathname.includes("white-label");
 
     if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
-      await initSettings("white-label");
+      const page = isMobileView ? "white-label" : "branding";
+      await initSettings(page);
     }
   };
 

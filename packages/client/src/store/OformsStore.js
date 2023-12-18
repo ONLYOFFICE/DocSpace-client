@@ -50,9 +50,7 @@ class OformsStore {
     return this.oformLocales?.includes(userLocale) ? userLocale : "en";
   }
 
-  setOformFiles = (oformFiles) => {
-    this.oformFiles = oformFiles;
-  };
+  setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
 
   setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
 

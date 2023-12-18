@@ -9,6 +9,7 @@ import { flagsIcons } from "@docspace/common/utils/image-flags";
 import { convertToCulture } from "@docspace/common/utils";
 import Backdrop from "@docspace/components/backdrop";
 import { isMobile } from "@docspace/components/utils/device";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const LanguageFilter = ({
   t,
@@ -16,6 +17,7 @@ const LanguageFilter = ({
   defaultOformLocale,
   oformLocales,
   filterOformsByLocale,
+  filterOformsByLocaleIsLoading,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -30,6 +32,9 @@ const LanguageFilter = ({
   };
 
   if (oformLocales !== null && oformLocales?.length === 0) return null;
+
+  if (filterOformsByLocaleIsLoading)
+    return <RectangleSkeleton width="41px" height="32px" />;
 
   return (
     <Styled.LanguageFilter>
@@ -100,4 +105,5 @@ export default inject(({ oformsStore }) => ({
   defaultOformLocale: oformsStore.defaultOformLocale,
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
+  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
 }))(withTranslation(["Common"])(observer(LanguageFilter)));

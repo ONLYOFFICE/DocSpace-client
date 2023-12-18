@@ -44,10 +44,17 @@ import { ComboBox, ComboBoxDisplayType, ComboBoxSize } from "./combobox";
 import { RoomLogo } from "./room-logo";
 import { MainButton } from "./main-button";
 import { FloatingButton, FloatingButtonIcons } from "./floating-button";
+import { ViewSelector, TViewSelectorOption } from "./view-selector";
 
-export type { TFallbackAxisSideDirection, TTooltipPlace, TGetTooltipContent };
+export type {
+  TFallbackAxisSideDirection,
+  TTooltipPlace,
+  TGetTooltipContent,
+  TViewSelectorOption,
+};
 
 export {
+  ViewSelector,
   FloatingButton,
   FloatingButtonIcons,
   MainButton,

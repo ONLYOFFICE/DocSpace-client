@@ -5,7 +5,7 @@ Actions with a button.
 ### Usage
 
 ```js
-import { ViewSelector } from "app-components";
+import { ViewSelector } from "@docspace/shared/components";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 ```

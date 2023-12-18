@@ -31,9 +31,10 @@ const LanguageFilter = ({
     sectionScroll.scrollTop = 0;
   };
 
-  if (oformLocales !== null && oformLocales?.length === 0) return null;
-
-  if (filterOformsByLocaleIsLoading)
+  if (
+    filterOformsByLocaleIsLoading ||
+    (oformLocales !== null && oformLocales?.length === 0)
+  )
     return <RectangleSkeleton width="41px" height="32px" />;
 
   return (

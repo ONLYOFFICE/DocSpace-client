@@ -52,11 +52,6 @@ class OformsStore {
 
   setOformFiles = (oformFiles) => {
     this.oformFiles = oformFiles;
-
-    this.filterOformsByLocaleIsLoading &&
-      this.setFilterOformsByLocaleIsLoading(
-        !this.filterOformsByLocaleIsLoading
-      );
   };
 
   setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);

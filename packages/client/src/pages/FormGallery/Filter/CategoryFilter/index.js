@@ -58,16 +58,16 @@ const CategoryFilter = ({
   fetchCategoryTypes,
   fetchCategoriesOfCategoryType,
   filterOformsByLocaleIsLoading,
+  setFilterOformsByLocaleIsLoading,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
-        setIsLoading(false);
+        filterOformsByLocaleIsLoading &&
+          setFilterOformsByLocaleIsLoading(false);
         return;
       }
 
@@ -96,14 +96,13 @@ const CategoryFilter = ({
         })
         .finally(() => {
           setMenuItems(newMenuItems);
-          setIsLoading(false);
+          filterOformsByLocaleIsLoading &&
+            setFilterOformsByLocaleIsLoading(false);
         });
     })();
   }, [oformsFilter.locale]);
 
-  if (!isLoading && menuItems.length === 0) return null;
-
-  if (filterOformsByLocaleIsLoading)
+  if (filterOformsByLocaleIsLoading || menuItems.length === 0)
     return <StyledSkeleton $noLocales={noLocales} />;
 
   return (
@@ -123,4 +122,6 @@ export default inject(({ oformsStore }) => ({
   fetchCategoryTypes: oformsStore.fetchCategoryTypes,
   fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
   filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
+  setFilterOformsByLocaleIsLoading:
+    oformsStore.setFilterOformsByLocaleIsLoading,
 }))(observer(CategoryFilter));

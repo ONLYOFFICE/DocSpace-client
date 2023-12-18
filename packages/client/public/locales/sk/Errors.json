@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Prístup bol zamietnutý",
   "Error401Text": "Je nám ľúto, zdroj nie je momentálne dostupný.",
   "Error403Text": "Prepáčte, prístup odmietnutý.",
   "Error404Text": "Prepáčte, zdroj sa nedá nájsť.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace je nedostupný",
   "InvalidLink": "Neplatný odkaz",
   "LinkDoesNotExist": "Odkaz, ktorý sa pokúšate otvoriť, neexistuje.",
-  "LinkHasExpired": "Odkaz, ktorý používate, je neplatný."
+  "LinkHasExpired": "Odkaz, ktorý používate, je neplatný.",
+  "PortalRestriction": "Vaša IP adresa nie je uvedená v zozname povolených IP adries pre prístup do tohto priestoru DocSpace. Vypnite VPN, ak je zapnuté, a znovu načítajte stránku alebo na prihlásenie použite inú IP adresu."
 }

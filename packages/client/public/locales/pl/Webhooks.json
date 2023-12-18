@@ -54,5 +54,5 @@
   "WebhookRemoved": "Webhook został usunięty",
   "Webhooks": "Webhooki",
   "WebhooksGuide": "Przewodnik po webhookach",
-  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w ONLYOFFICE DocSpace."
+  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w ONLYOFFICE DocSpace.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."
 }

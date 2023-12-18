@@ -184,7 +184,6 @@ const FilesSelector = ({
   });
 
   const { getFileList } = useFilesHelper({
-    setIsSelectedParentFolder,
     setIsBreadCrumbsLoading,
     setBreadCrumbs,
     setIsNextPageLoading,
@@ -208,6 +207,7 @@ const FilesSelector = ({
     getRoomList,
     getIcon,
     t,
+    setIsSelectedParentFolder,
   });
 
   const onSelectAction = (item: Item) => {

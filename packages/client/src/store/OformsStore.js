@@ -34,6 +34,7 @@ class OformsStore {
   categoryTitles = [];
 
   oformLocales = null;
+  filterOformsByLocaleIsLoading = false;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -49,7 +50,14 @@ class OformsStore {
     return this.oformLocales?.includes(userLocale) ? userLocale : "en";
   }
 
-  setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
+  setOformFiles = (oformFiles) => {
+    this.oformFiles = oformFiles;
+
+    this.filterOformsByLocaleIsLoading &&
+      this.setFilterOformsByLocaleIsLoading(
+        !this.filterOformsByLocaleIsLoading
+      );
+  };
 
   setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
 
@@ -69,6 +77,10 @@ class OformsStore {
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
+
+  setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
+    this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
+  };
 
   fetchOformLocales = async () => {
     const { uploadDomain, uploadDashboard } =
@@ -257,6 +269,9 @@ class OformsStore {
 
   filterOformsByLocale = async (locale) => {
     if (!locale) return;
+
+    if (locale !== this.oformsFilter.locale)
+      this.setFilterOformsByLocaleIsLoading(true);
 
     this.currentCategory = null;
 

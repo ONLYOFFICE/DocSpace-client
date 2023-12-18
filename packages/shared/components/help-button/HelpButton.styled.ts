@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Base from "../themes/base";
+import { Base } from "../../themes";
 
 const Content = styled.div`
   box-sizing: border-box;

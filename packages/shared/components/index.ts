@@ -54,6 +54,7 @@ import {
   ContextMenuButtonDisplayType,
 } from "./context-menu-button";
 import { Selector } from "./selector";
+import { HelpButton } from "./help-button";
 
 export type {
   TFallbackAxisSideDirection,
@@ -63,6 +64,7 @@ export type {
 };
 
 export {
+  HelpButton,
   Selector,
   ContextMenuButton,
   ContextMenuButtonDisplayType,

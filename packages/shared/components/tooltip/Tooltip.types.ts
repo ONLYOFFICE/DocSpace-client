@@ -32,9 +32,9 @@ export interface TooltipProps {
     activeAnchor,
   }: TGetTooltipContent) => React.ReactNode | string;
   /** A function to be called after the tooltip is hidden */
-  afterHide?: () => {};
+  afterHide?: () => void;
   /** A function to be called after the tooltip is shown */
-  afterShow?: () => {};
+  afterShow?: () => void;
   /** Space between the tooltip element and anchor element (arrow not included in calculation) */
   offset?: number;
   /** Child elements */

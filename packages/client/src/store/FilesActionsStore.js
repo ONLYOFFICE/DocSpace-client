@@ -1565,6 +1565,8 @@ class FilesActionStore {
       allFilesIsEditing,
       selection,
       hasRoomsToResetQuota,
+      hasRoomsToDisableQuota,
+      hasRoomsToChangeQuota,
     } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
@@ -1612,9 +1614,9 @@ class FilesActionStore {
         return canCreateRoom;
 
       case "change-quota":
-        return true;
+        return hasRoomsToChangeQuota;
       case "disable-quota":
-        return true;
+        return hasRoomsToDisableQuota;
       case "default-quota":
         return hasRoomsToResetQuota;
     }

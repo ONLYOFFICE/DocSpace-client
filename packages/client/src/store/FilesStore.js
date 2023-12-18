@@ -3447,7 +3447,7 @@ class FilesStore {
   }
 
   get hasRoomsToResetQuota() {
-    const caResetCustomQuota = (item) => {
+    const canResetCustomQuota = (item) => {
       const { isOwner, isAdmin } = this.authStore.userStore.user;
       const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -3460,7 +3460,37 @@ class FilesStore {
       return item.isCustomQuota;
     };
 
-    return this.selection.every((x) => caResetCustomQuota(x));
+    return this.selection.every((x) => canResetCustomQuota(x));
+  }
+
+  get hasRoomsToDisableQuota() {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canDisableQuota = (item) => {
+      if (!isOwner && !isAdmin) return false;
+
+      if (isAdmin && !item.security?.EditRoom) return false;
+
+      return isDefaultUsersQuotaSet;
+    };
+
+    return this.selection.every((x) => canDisableQuota(x));
+  }
+
+  get hasRoomsToChangeQuota() {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canChangeQuota = (item) => {
+      if (!isOwner && !isAdmin) return false;
+
+      if (isAdmin && !item.security?.EditRoom) return false;
+
+      return isDefaultUsersQuotaSet;
+    };
+
+    return this.selection.every((x) => canChangeQuota(x));
   }
 
   get hasSelection() {

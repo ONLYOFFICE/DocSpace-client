@@ -34,6 +34,7 @@ const DropDown = ({
   enableKeyboardEvents,
   appendTo,
   eventTypes,
+  zIndex,
   clickOutsideAction,
 }: DropDownProps) => {
   const theme = useTheme();
@@ -378,6 +379,7 @@ const DropDown = ({
         directionXStylesDisabled={directionXStylesDisabled}
         isDropdownReady={state.isDropdownReady}
         open={open}
+        zIndex={zIndex}
       >
         <VirtualList
           Row={Row}

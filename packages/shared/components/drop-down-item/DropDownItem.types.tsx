@@ -10,7 +10,7 @@ export interface DropDownItemProps {
   /** Accepts tab-index */
   tabIndex?: number;
   /** Dropdown item text */
-  label?: string;
+  label?: string | React.ReactNode;
   /** Sets the dropdown item to display as disabled */
   disabled?: boolean;
   /** Dropdown item icon */

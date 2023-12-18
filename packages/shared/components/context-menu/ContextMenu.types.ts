@@ -10,7 +10,7 @@ export type ContextMenuType = {
     item,
   }: {
     originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-    action?: string;
+    action?: string | boolean;
     item: ContextMenuType;
   }) => VoidFunction;
   isSeparator?: undefined;
@@ -22,6 +22,7 @@ export type ContextMenuType = {
   style?: React.CSSProperties;
   target?: string;
   isLoader?: boolean;
+  isHeader?: boolean;
   onLoad?: () => Promise<ContextMenuModel[]>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   template?: any;
@@ -31,6 +32,7 @@ export type ContextMenuType = {
 };
 
 export type SeparatorType = {
+  id?: string;
   key: string | number;
   isSeparator: boolean;
   disabled?: boolean;

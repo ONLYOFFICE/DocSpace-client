@@ -1,17 +1,17 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
 
-const StyledOuter = styled.div`
+import { Base } from "../../themes";
+
+const StyledOuter = styled.div<{ displayIconBorder?: boolean }>`
   display: inline-block;
   position: relative;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'displayIconBorder' does not exist on typ... Remove this comment to see the full error message
     props.displayIconBorder &&
     css`
-      border: ${(props) => props.theme.comboBox.button.border};
+      border: ${props.theme.comboBox.button.border};
       width: 32px;
       height: 32px;
       box-sizing: border-box;
@@ -21,8 +21,7 @@ const StyledOuter = styled.div`
         padding: 6px 7px;
       }
       :hover {
-        border-color: ${(props) =>
-          props.theme.comboBox.button.hoverBorderColor};
+        border-color: ${props.theme.comboBox.button.hoverBorderColor};
       }
     `}
 `;

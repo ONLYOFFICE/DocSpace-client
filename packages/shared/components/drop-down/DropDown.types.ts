@@ -57,6 +57,7 @@ export interface DropDownProps {
   eventTypes?: string[];
   forceCloseClickOutside?: boolean;
   withoutBackground?: boolean;
+  zIndex?: number;
 }
 
 export interface VirtualListProps {

@@ -55,6 +55,7 @@ import {
 } from "./context-menu-button";
 import { Selector } from "./selector";
 import { HelpButton } from "./help-button";
+import { RadioButton } from "./radio-button";
 
 export type {
   TFallbackAxisSideDirection,
@@ -64,6 +65,7 @@ export type {
 };
 
 export {
+  RadioButton,
   HelpButton,
   Selector,
   ContextMenuButton,

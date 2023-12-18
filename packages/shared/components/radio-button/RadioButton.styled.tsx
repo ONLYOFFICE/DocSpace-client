@@ -1,17 +1,33 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import NoUserSelect from "../utils/commonStyles";
-import Base from "../themes/base";
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
+import RadioButtonReactSvg from "PUBLIC_DIR/images/radiobutton.react.svg";
+import RadioButtonCheckedReactSvg from "PUBLIC_DIR/images/radiobutton.checked.react.svg";
+
+import { NoUserSelect, commonIconsStyles } from "../../utils";
+import { Base } from "../../themes";
+
+export const RadioButtonIcon = styled(RadioButtonReactSvg)`
+  ${commonIconsStyles}
+`;
+export const RadioButtonCheckedIcon = styled(RadioButtonCheckedReactSvg)`
+  ${commonIconsStyles}
+`;
+
 const ClearLabel = ({
   spacing,
   isDisabled,
   orientation,
   ...props
-}: any) => (
-  <label {...props} />
-);
+}: {
+  spacing?: string;
+  isDisabled?: boolean;
+  orientation?: "horizontal" | "vertical";
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}) => <label {...props} />;
 
 const Label = styled(ClearLabel)`
   display: flex;

@@ -62,12 +62,14 @@ class CommonStore {
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText()
           );
+          break;
         }
         case "language-and-time-zone":
           requests.push(
             settingsStore.getPortalTimezones(),
             settingsStore.getPortalCultures()
           );
+          break;
         case "dns-settings":
           if (standalone) {
             requests.push(this.getDNSSettings());

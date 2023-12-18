@@ -76,7 +76,7 @@ const BruteForceProtection = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings();
+    if (!isInit) initSettings("brute-force-protection");
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);

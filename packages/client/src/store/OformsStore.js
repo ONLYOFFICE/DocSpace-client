@@ -239,9 +239,10 @@ class OformsStore {
 
     const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 
-    const categories = !!this.oformsFilter.locale
-      ? await getCategoriesOfCategoryType(url, this.oformsFilter.locale)
-      : await getCategoriesOfCategoryType(url);
+    const categories = await getCategoriesOfCategoryType(
+      url,
+      this.oformsFilter.locale
+    );
 
     return categories;
   };

@@ -217,6 +217,9 @@ const StyledProperties = styled.div`
     grid-template-columns: 120px 1fr;
     grid-column-gap: 24px;
 
+    -webkit-box-align: center;
+    align-items: center;
+
     .property-title {
       font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     }

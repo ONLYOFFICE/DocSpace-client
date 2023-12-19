@@ -567,6 +567,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onToggleInfoPanel = () => {
+    setBufferSelection(selectedFolder);
     setIsInfoPanelVisible(!isInfoPanelVisible);
   };
 
@@ -1210,7 +1211,7 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom
+      onClickCreateRoom,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;

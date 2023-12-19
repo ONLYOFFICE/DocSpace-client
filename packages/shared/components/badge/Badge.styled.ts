@@ -107,6 +107,7 @@ const getDefaultStyles = ({
   theme,
   isPaidBadge,
   isMutedBadge,
+  noHover,
 }: {
   $currentColorScheme: TColorScheme;
   isVersionBadge?: boolean;
@@ -115,6 +116,7 @@ const getDefaultStyles = ({
   theme?: TTheme;
   isPaidBadge?: boolean;
   isMutedBadge?: boolean;
+  noHover?: boolean;
 }) =>
   $currentColorScheme &&
   !isVersionBadge &&
@@ -131,16 +133,22 @@ const getDefaultStyles = ({
         : backgroundColor || $currentColorScheme?.main?.accent};
 
       &:hover {
-        background-color: ${isMutedBadge
-          ? theme?.badge.disableBackgroundColor || backgroundColor
-          : $currentColorScheme?.main?.accent};
+        ${!noHover &&
+        css`
+          background-color: ${isMutedBadge
+            ? theme?.badge.disableBackgroundColor
+            : backgroundColor || $currentColorScheme?.main?.accent};
+        `}
       }
     }
 
     &:hover {
-      border-color: ${isMutedBadge
-        ? theme?.badge.disableBackgroundColor
-        : backgroundColor || $currentColorScheme?.main?.accent};
+      ${!noHover &&
+      css`
+        border-color: ${isMutedBadge
+          ? theme?.badge.disableBackgroundColor
+          : backgroundColor || $currentColorScheme?.main?.accent};
+      `}
     }
   `;
 

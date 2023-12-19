@@ -99,6 +99,10 @@ export const getBaseTheme = () => {
 
     backgroundAndSubstrateColor: "#F8F9F9",
 
+    betaBadgeTooltip: {
+      boxShadowColor: "rgba(4, 15, 27, 0.12)",
+    },
+
     button: {
       fontWeight: "600",
       margin: "0",

@@ -21,7 +21,7 @@ class AuditTableHeader extends React.Component {
         enable: true,
         sortBy: "AZ",
         active: true,
-        minWidth: 180,
+        minWidth: 210,
       },
 
       {

@@ -14,6 +14,13 @@ import { DEFAULT_OFFSET } from "./Tooltip.constants";
 
 export { TFallbackAxisSideDirection, TTooltipPlace };
 
+const globalCloseEvents = {
+  escape: true,
+  resize: true,
+  scroll: true,
+  clickOutsideAnchor: true,
+};
+
 const Tooltip = React.forwardRef<React.Ref<TooltipRefProps>, TooltipProps>(
   (
     {
@@ -40,13 +47,6 @@ const Tooltip = React.forwardRef<React.Ref<TooltipRefProps>, TooltipProps>(
     },
     ref,
   ) => {
-    const globalCloseEvents = {
-      escape: true,
-      resize: true,
-      scroll: true,
-      clickOutsideAnchor: true,
-    };
-
     const openEvents = {
       click: openOnClick,
       mouseenter: !openOnClick,

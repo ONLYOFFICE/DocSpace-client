@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "dokumenty",
+  "ErrorConnectionLost": "Spojení je ztraceno",
   "FileLocation": "Otevřít umístění souboru",
   "FileName": "Název souboru",
   "ImageFileType": "obrázky",

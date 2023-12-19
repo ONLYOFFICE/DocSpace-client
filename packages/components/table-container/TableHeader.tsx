@@ -12,10 +12,10 @@ import TableHeaderCell from "./TableHeaderCell";
 import { size } from "../utils/device";
 import { withTheme } from "styled-components";
 
-const minColumnSize = 150;
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
 const containerMargin = 25;
+const minSizeFirstColumn = 210;
 
 class TableHeader extends React.Component {
   headerRef: any;
@@ -87,8 +87,8 @@ class TableHeader extends React.Component {
 
     // @ts-expect-error TS(2532): Object is possibly 'undefined'.
     const minSize = leftColumn.dataset.minWidth
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      ? leftColumn.dataset.minWidth
+      ? // @ts-expect-error TS(2532): Object is possibly 'undefined'.
+        leftColumn.dataset.minWidth
       : defaultMinColumnSize;
 
     // @ts-expect-error TS(2532): Object is possibly 'undefined'.
@@ -136,7 +136,7 @@ class TableHeader extends React.Component {
 
     const handleOffset = 8;
 
-    if (column2Width + offset >= defaultMinColumnSize) {
+    if (column2Width + offset - handleOffset >= defaultMinColumnSize) {
       widths[+columnIndex] = newWidth + handleOffset + "px";
       widths[colIndex] = column2Width + offset - handleOffset + "px";
     } else {
@@ -146,7 +146,11 @@ class TableHeader extends React.Component {
     }
   };
 
-  addNewColumns = (gridTemplateColumns: any, activeColumnIndex: any, containerWidth: any) => {
+  addNewColumns = (
+    gridTemplateColumns: any,
+    activeColumnIndex: any,
+    containerWidth: any
+  ) => {
     // @ts-expect-error TS(2339): Property 'columns' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { columns, columnStorageName } = this.props;
     const filterColumns = columns.filter((x: any) => !x.defaultSize);
@@ -175,11 +179,11 @@ class TableHeader extends React.Component {
       return true;
     };
 
-    if (indexOfMaxSize === 1) {
-      if (newSize <= 180 || newSize <= defaultColSize)
-        return ResetColumnsSize();
-      else return AddColumn();
-    } else if (newSize <= defaultColSize) return ResetColumnsSize();
+    if (
+      (indexOfMaxSize === 0 && newSize < minSizeFirstColumn) ||
+      newSize <= defaultColSize
+    )
+      return ResetColumnsSize();
     else return AddColumn();
   };
 
@@ -203,8 +207,8 @@ class TableHeader extends React.Component {
 
     // @ts-expect-error TS(2531): Object is possibly 'null'.
     const minSize = column.dataset.minWidth
-      // @ts-expect-error TS(2531): Object is possibly 'null'.
-      ? column.dataset.minWidth
+      ? // @ts-expect-error TS(2531): Object is possibly 'null'.
+        column.dataset.minWidth
       : defaultMinColumnSize;
 
     if (newWidth <= minSize) {
@@ -283,12 +287,6 @@ class TableHeader extends React.Component {
       setHideColumns,
     } = this.props;
 
-    // @ts-expect-error TS(2339): Property 'hideColumns' does not exist on type 'Rea... Remove this comment to see the full error message
-    if (!infoPanelVisible && this.state.hideColumns) {
-      this.setState({ hideColumns: false });
-      setHideColumns && setHideColumns(false);
-    }
-
     let activeColumnIndex = null;
 
     const container = containerRef.current
@@ -322,9 +320,26 @@ class TableHeader extends React.Component {
       }
     }
 
+    const containerGridTemplateColumns =
+      container.style.gridTemplateColumns.split(" ");
+
     const tableContainer = storageSize
       ? storageSize.split(" ")
-      : container.style.gridTemplateColumns.split(" ");
+      : containerGridTemplateColumns;
+
+    if (
+      containerGridTemplateColumns.length === 1 &&
+      !this.state.hideColumns &&
+      storageSize
+    ) {
+      const hasContent = !!storageSize.split(" ").find((item, index) => {
+        if (index === 0) return;
+        return this.checkingForUnfixedSize(item, defaultSize);
+      });
+
+      //If content column sizes are calculated as empty after changing view
+      if (!hasContent) return this.resetColumns(true);
+    }
 
     // columns.length + 1 - its settings column
     if (tableContainer.length !== columns.length + 1) {
@@ -343,91 +358,93 @@ class TableHeader extends React.Component {
       settingsSize;
 
     let str = "";
+    let gridTemplateColumnsWithoutOverfilling = [];
 
     if (tableContainer.length > 1) {
       const gridTemplateColumns: any = [];
       let hideColumns = false;
 
-      if (infoPanelVisible) {
-        let contentColumnsCount = 0;
-        let contentColumnsCountInfoPanel = 0;
+      let contentColumnsCount = 0;
+      let contentColumnsCountInfoPanel = 0;
 
-        const storageInfoPanelSize = localStorage.getItem(
-          columnInfoPanelStorageName
-        );
+      const storageInfoPanelSize = localStorage.getItem(
+        columnInfoPanelStorageName
+      );
 
-        if (storageInfoPanelSize) {
-          contentColumnsCountInfoPanel = storageInfoPanelSize
-            .split(" ")
-            .filter((item) =>
-              this.checkingForUnfixedSize(item, defaultSize)
-            ).length;
-
-          contentColumnsCount = tableContainer.filter((item: any) => this.checkingForUnfixedSize(item, defaultSize)
+      if (storageInfoPanelSize) {
+        contentColumnsCountInfoPanel = storageInfoPanelSize
+          .split(" ")
+          .filter((item) =>
+            this.checkingForUnfixedSize(item, defaultSize)
           ).length;
+
+        contentColumnsCount = tableContainer.filter((item) =>
+          this.checkingForUnfixedSize(item, defaultSize)
+        ).length;
+      }
+
+      const incorrectNumberColumns =
+        contentColumnsCountInfoPanel < contentColumnsCount &&
+        !this.state.hideColumns;
+
+      const tableInfoPanelContainer =
+        storageInfoPanelSize && !incorrectNumberColumns
+          ? storageInfoPanelSize.split(" ")
+          : tableContainer;
+
+      let containerMinWidth = containerWidth - defaultSize - settingsSize;
+
+      tableInfoPanelContainer.forEach((item, index) => {
+        const column = document.getElementById("column_" + index);
+
+        const enable =
+          index == tableContainer.length - 1 ||
+          (column ? column.dataset.enable === "true" : item !== "0px");
+
+        if (
+          enable &&
+          (item !== `${defaultSize}px` || `${defaultSize}px` === `0px`) &&
+          item !== `${settingsSize}px`
+        ) {
+          if (column?.dataset?.minWidth) {
+            containerMinWidth = containerMinWidth - column.dataset.minWidth;
+          } else {
+            containerMinWidth = containerMinWidth - defaultMinColumnSize;
+          }
         }
+      });
 
-        let incorrectNumberColumns =
-          contentColumnsCountInfoPanel < contentColumnsCount &&
-          // @ts-expect-error TS(2339): Property 'hideColumns' does not exist on type 'Rea... Remove this comment to see the full error message
-          !this.state.hideColumns;
+      if (containerMinWidth < 0) {
+        hideColumns = true;
+      }
 
-        const tableInfoPanelContainer =
-          storageInfoPanelSize && !incorrectNumberColumns
-            ? storageInfoPanelSize.split(" ")
-            : tableContainer;
+      if (this.state.hideColumns !== hideColumns) {
+        this.setState({ hideColumns: hideColumns });
+        setHideColumns(hideColumns);
+      }
 
-        let containerMinWidth = containerWidth - defaultSize - settingsSize;
-
-        tableInfoPanelContainer.forEach((item: any, index: any) => {
+      if (hideColumns) {
+        tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById("column_" + index);
 
-          const enable =
-            index == tableContainer.length - 1 ||
-            (column ? column.dataset.enable === "true" : item !== "0px");
-
-          if (
-            enable &&
-            (item !== `${defaultSize}px` || `${defaultSize}px` === `0px`) &&
-            item !== `${settingsSize}px`
+          if (column?.dataset?.minWidth) {
+            gridTemplateColumns.push(
+              `${containerWidth - defaultSize - settingsSize}px`
+            );
+          } else if (
+            item === `${defaultSize}px` ||
+            item === `${settingsSize}px`
           ) {
-            if (column?.dataset?.minWidth) {
-              // @ts-expect-error TS(2363): The right-hand side of an arithmetic operation mus... Remove this comment to see the full error message
-              containerMinWidth = containerMinWidth - column.dataset.minWidth;
-            } else {
-              containerMinWidth = containerMinWidth - defaultMinColumnSize;
-            }
+            gridTemplateColumns.push(item);
+          } else {
+            gridTemplateColumns.push("0px");
           }
         });
+      }
 
-        if (containerMinWidth < 0) {
-          hideColumns = true;
-        }
-
-        // @ts-expect-error TS(2339): Property 'hideColumns' does not exist on type 'Rea... Remove this comment to see the full error message
-        if (this.state.hideColumns !== hideColumns) {
-          this.setState({ hideColumns: hideColumns });
-          setHideColumns(hideColumns);
-        }
-
-        if (hideColumns) {
-          tableInfoPanelContainer.forEach((item: any, index: any) => {
-            const column = document.getElementById("column_" + index);
-
-            if (column?.dataset?.minWidth) {
-              gridTemplateColumns.push(
-                `${containerWidth - defaultSize - settingsSize}px`
-              );
-            } else if (
-              item === `${defaultSize}px` ||
-              item === `${settingsSize}px`
-            ) {
-              gridTemplateColumns.push(item);
-            } else {
-              gridTemplateColumns.push("0px");
-            }
-          });
-        } else {
+      let hasGridTemplateColumnsWithoutOverfilling = false;
+      if (infoPanelVisible) {
+        if (!hideColumns) {
           let contentWidth = containerWidth - defaultSize - settingsSize;
 
           let enabledColumnsCount = 0;
@@ -562,65 +579,104 @@ class TableHeader extends React.Component {
           }
         }
       } else {
-        for (let index in tableContainer) {
-          const item = tableContainer[index];
+        let overWidth = 0;
+        if (!hideColumns) {
+          for (let index in tableContainer) {
+            const item = tableContainer[index];
 
-          const column = document.getElementById("column_" + index);
-          const enable =
-            // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
-            index == tableContainer.length - 1 ||
-            (column ? column.dataset.enable === "true" : item !== "0px");
-          const defaultColumnSize = column && column.dataset.defaultSize;
+            const column = document.getElementById("column_" + index);
+            const enable =
+              index == tableContainer.length - 1 ||
+              (column ? column.dataset.enable === "true" : item !== "0px");
+            const defaultColumnSize = column && column.dataset.defaultSize;
 
-          const isActiveNow = item === "0px" && enable;
-          if (isActiveNow && column) activeColumnIndex = index;
+            const isActiveNow = item === "0px" && enable;
+            if (isActiveNow && column) activeColumnIndex = index;
 
-          if (!enable) {
-            gridTemplateColumns.push("0px");
+            if (!enable) {
+              gridTemplateColumns.push("0px");
 
-            let colIndex = 1;
-            // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
-            let leftEnableColumn = gridTemplateColumns[index - colIndex];
-            while (leftEnableColumn === "0px") {
-              colIndex++;
-              // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
-              leftEnableColumn = gridTemplateColumns[index - colIndex];
-            }
+              let colIndex = 1;
+              let leftEnableColumn = gridTemplateColumns[index - colIndex];
+              while (leftEnableColumn === "0px") {
+                colIndex++;
+                leftEnableColumn = gridTemplateColumns[index - colIndex];
+              }
 
-            //added the size of the disabled column to the left column
-            // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
-            gridTemplateColumns[index - colIndex] =
-              // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
-              this.getSubstring(gridTemplateColumns[index - colIndex]) +
-              this.getSubstring(item) +
-              "px";
-          } else if (item !== `${settingsSize}px`) {
-            const percent = (this.getSubstring(item) / oldWidth) * 100;
-
-            const newItemWidth = defaultColumnSize
-              ? `${defaultColumnSize}px`
-              : percent === 0
-              ? `${minColumnSize}px`
-              : ((containerWidth - defaultSize - settingsSize) * percent) /
-                  100 +
+              //added the size of the disabled column to the left column
+              gridTemplateColumns[index - colIndex] =
+                this.getSubstring(gridTemplateColumns[index - colIndex]) +
+                this.getSubstring(item) +
                 "px";
+            } else if (item !== `${settingsSize}px`) {
+              const percent = (this.getSubstring(item) / oldWidth) * 100;
 
-            gridTemplateColumns.push(newItemWidth);
-          } else {
-            gridTemplateColumns.push(item);
+              let newItemWidth = defaultColumnSize
+                ? `${defaultColumnSize}px`
+                : percent === 0
+                ? `${defaultMinColumnSize}px`
+                : ((containerWidth - defaultSize - settingsSize) * percent) /
+                    100 +
+                  "px";
+
+              const minWidth = column?.dataset?.minWidth;
+              const minSize = +minWidth || minSizeFirstColumn;
+
+              //Checking whether the first column is less than the minimum width
+              if (+index === 0 && this.getSubstring(newItemWidth) < minSize) {
+                overWidth =
+                  overWidth +
+                  (minSizeFirstColumn - this.getSubstring(newItemWidth));
+                newItemWidth = minSizeFirstColumn + "px";
+              }
+
+              //Checking whether columns are smaller than the minimum width
+              if (
+                +index !== 0 &&
+                !defaultColumnSize &&
+                this.getSubstring(newItemWidth) < defaultMinColumnSize
+              ) {
+                overWidth =
+                  overWidth +
+                  (defaultMinColumnSize - this.getSubstring(newItemWidth));
+                newItemWidth = defaultMinColumnSize + "px";
+              }
+
+              gridTemplateColumns.push(newItemWidth);
+            } else {
+              gridTemplateColumns.push(item);
+            }
+          }
+
+          if (overWidth > 0) {
+            gridTemplateColumnsWithoutOverfilling = this.distributionOverWidth(
+              overWidth,
+              gridTemplateColumns
+            );
+          }
+
+          hasGridTemplateColumnsWithoutOverfilling =
+            gridTemplateColumnsWithoutOverfilling &&
+            gridTemplateColumnsWithoutOverfilling.length > 0;
+
+          if (activeColumnIndex) {
+            const gridColumns = hasGridTemplateColumnsWithoutOverfilling
+              ? gridTemplateColumnsWithoutOverfilling
+              : gridTemplateColumns;
+
+            const needReset = this.addNewColumns(
+              gridColumns,
+              activeColumnIndex,
+              containerWidth
+            );
+            if (needReset) return;
           }
         }
-
-        if (activeColumnIndex) {
-          const needReset = this.addNewColumns(
-            gridTemplateColumns,
-            activeColumnIndex,
-            containerWidth
-          );
-          if (needReset) return;
-        }
       }
-      str = gridTemplateColumns.join(" ");
+
+      str = hasGridTemplateColumnsWithoutOverfilling
+        ? gridTemplateColumnsWithoutOverfilling.join(" ")
+        : gridTemplateColumns.join(" ");
     } else {
       this.resetColumns(true);
     }
@@ -645,8 +701,60 @@ class TableHeader extends React.Component {
     }
   };
 
-  updateTableRows = (str: any) => {
-    // @ts-expect-error TS(2339): Property 'useReactWindow' does not exist on type '... Remove this comment to see the full error message
+  distributionOverWidth = (overWidth, gridTemplateColumns) => {
+    const newGridTemplateColumns = JSON.parse(
+      JSON.stringify(gridTemplateColumns)
+    );
+
+    let countColumns = 0;
+    const defaultColumnSize =
+      this.props.columns.find((col) => col.defaultSize)?.defaultSize || 0;
+
+    newGridTemplateColumns.forEach((item, index) => {
+      const unfixedSize = this.checkingForUnfixedSize(item, defaultColumnSize);
+      if (!unfixedSize) return;
+
+      const column = document.getElementById("column_" + index);
+      const minWidth = column?.dataset?.minWidth;
+      const minSize = +minWidth || minSizeFirstColumn;
+
+      if (
+        (index === 0 ? minSize : defaultMinColumnSize) !==
+        this.getSubstring(item)
+      )
+        countColumns++;
+    });
+
+    const addWidth = overWidth / countColumns;
+
+    newGridTemplateColumns.forEach((item, index) => {
+      const unfixedSize = this.checkingForUnfixedSize(item, defaultColumnSize);
+      if (!unfixedSize) return;
+
+      const column = document.getElementById("column_" + index);
+      const minWidth = column?.dataset?.minWidth;
+      const minSize = +minWidth || minSizeFirstColumn;
+
+      const itemSubstring = this.getSubstring(item);
+
+      if ((index === 0 ? minSize : defaultMinColumnSize) === itemSubstring)
+        return;
+
+      const differenceWithMinimum =
+        itemSubstring - (index === 0 ? minSize : defaultMinColumnSize);
+
+      if (differenceWithMinimum >= addWidth) {
+        newGridTemplateColumns[index] = itemSubstring - addWidth + "px";
+      } else {
+        newGridTemplateColumns[index] =
+          (index === 0 ? minSize : defaultMinColumnSize) + "px";
+      }
+    });
+
+    return newGridTemplateColumns;
+  };
+
+  updateTableRows = (str) => {
     if (!this.props.useReactWindow) return;
 
     const rows = document.querySelectorAll(".table-row, .table-list-item");
@@ -768,54 +876,55 @@ class TableHeader extends React.Component {
 
     //console.log("TABLE HEADER RENDER", columns);
 
-    return <>
-      <StyledTableHeader
-        id="table-container_caption-header"
-        className={`${
-          isLengthenHeader ? "lengthen-header" : ""
-        } table-container_header`}
-        ref={this.headerRef}
-        {...rest}
-      >
-        <StyledTableRow>
-          {columns.map((column: any, index: any) => {
-            const nextColumn = this.getNextColumn(columns, index);
-            const resizable = nextColumn ? nextColumn.resizable : false;
+    return (
+      <>
+        <StyledTableHeader
+          id="table-container_caption-header"
+          className={`${
+            isLengthenHeader ? "lengthen-header" : ""
+          } table-container_header`}
+          ref={this.headerRef}
+          {...rest}
+        >
+          <StyledTableRow>
+            {columns.map((column: any, index: any) => {
+              const nextColumn = this.getNextColumn(columns, index);
+              const resizable = nextColumn ? nextColumn.resizable : false;
 
-            return (
-              <TableHeaderCell
-                key={column.key ?? "empty-cell"}
-                index={index}
-                column={column}
-                sorted={sorted}
-                sortBy={sortBy}
-                resizable={resizable}
-                defaultSize={column.defaultSize}
-                onMouseDown={this.onMouseDown}
-                sortingVisible={sortingVisible}
-                // @ts-expect-error TS(2322): Type '{ key: any; index: any; column: any; sorted:... Remove this comment to see the full error message
-                tagRef={tagRef}
-              />
-            );
-          })}
+              return (
+                <TableHeaderCell
+                  key={column.key ?? "empty-cell"}
+                  index={index}
+                  column={column}
+                  sorted={sorted}
+                  sortBy={sortBy}
+                  resizable={resizable}
+                  defaultSize={column.defaultSize}
+                  onMouseDown={this.onMouseDown}
+                  sortingVisible={sortingVisible}
+                  // @ts-expect-error TS(2322): Type '{ key: any; index: any; column: any; sorted:... Remove this comment to see the full error message
+                  tagRef={tagRef}
+                />
+              );
+            })}
 
-          {showSettings && (
-            <div
-              className="table-container_header-settings"
-              title={settingsTitle}
-            >
-              <TableSettings
-                columns={columns}
-                // @ts-expect-error TS(2322): Type '{ columns: any; infoPanelVisible: any; }' is... Remove this comment to see the full error message
-                infoPanelVisible={infoPanelVisible}
-              />
-            </div>
-          )}
-        </StyledTableRow>
-      </StyledTableHeader>
+            {showSettings && (
+              <div
+                className="table-container_header-settings"
+                title={settingsTitle}
+              >
+                <TableSettings
+                  columns={columns}
+                  disableSettings={infoPanelVisible || this.state.hideColumns}
+                />
+              </div>
+            )}
+          </StyledTableRow>
+        </StyledTableHeader>
 
-      <StyledEmptyTableContainer />
-    </>;
+        <StyledEmptyTableContainer />
+      </>
+    );
   }
 }
 

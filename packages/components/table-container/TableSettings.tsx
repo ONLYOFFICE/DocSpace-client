@@ -10,16 +10,13 @@ import Checkbox from "../checkbox";
 // @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/settings.des... Remove this comment to see the full error message
 import SettingsDeskReactSvgUrl from "PUBLIC_DIR/images/settings.desc.react.svg?url";
 
-const TableSettings = ({
-  columns,
-  infoPanelVisible
-}: any) => {
+const TableSettings = ({ columns, disableSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef();
 
   const onClick = () => {
-    !infoPanelVisible && setIsOpen(!isOpen);
+    !disableSettings && setIsOpen(!isOpen);
   };
 
   const clickOutsideAction = (e: any) => {
@@ -41,7 +38,7 @@ const TableSettings = ({
         isFill
         iconName={SettingsDeskReactSvgUrl}
         onClick={onClick}
-        isDisabled={infoPanelVisible}
+        isDisabled={disableSettings}
       />
       // @ts-expect-error TS(2769): No overload matches this call.
       <DropDown
@@ -55,7 +52,8 @@ const TableSettings = ({
         {columns.map((column: any) => {
           if (column.isDisabled) return;
 
-          const onChange = (e: any) => column.onChange && column.onChange(column.key, e);
+          const onChange = (e: any) =>
+            column.onChange && column.onChange(column.key, e);
 
           return (
             column.onChange && (

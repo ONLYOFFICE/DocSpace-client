@@ -89,7 +89,7 @@ const SessionLifetime = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("lifetime").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);

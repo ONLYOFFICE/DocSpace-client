@@ -9,14 +9,12 @@ import StyledSettings from "./StyledSettings";
 const PersonalSettings = ({
   storeOriginalFiles,
   confirmDelete,
-  updateIfExist,
   forceSave,
 
   isVisitor,
   //favoritesSection,
   //recentSection,
 
-  setUpdateIfExist,
   setStoreOriginal,
 
   setConfirmDelete,
@@ -46,10 +44,6 @@ const PersonalSettings = ({
   const onChangeDeleteConfirm = React.useCallback(() => {
     setConfirmDelete(!confirmDelete, "confirmDelete");
   }, [setConfirmDelete, confirmDelete]);
-
-  const onChangeUpdateIfExist = React.useCallback(() => {
-    setUpdateIfExist(!updateIfExist, "updateIfExist");
-  }, [setUpdateIfExist, updateIfExist]);
 
   const onChangeForceSave = React.useCallback(() => {
     setForceSave(!forceSave);
@@ -124,14 +118,6 @@ const PersonalSettings = ({
             isChecked={confirmDelete}
           />
         )}
-        {!isVisitor && (
-          <ToggleButton
-            className="toggle-btn"
-            label={t("UpdateOrCreate")}
-            onChange={onChangeUpdateIfExist}
-            isChecked={updateIfExist}
-          />
-        )}
       </Box>
 
       {/* <Box className="settings-section">
@@ -193,10 +179,8 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forcesave,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,
@@ -220,7 +204,6 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
   return {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forceSave: forcesave,
 
     myFolderId,
@@ -229,7 +212,6 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
     favoritesSection,
     recentSection,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,

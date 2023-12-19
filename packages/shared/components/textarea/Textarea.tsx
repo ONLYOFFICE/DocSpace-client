@@ -73,7 +73,7 @@ const Textarea = ({
   }
 
   const onTextareaClick = () => {
-    if (areaRef.current) areaRef.current.select();
+    if (areaRef.current && enableCopy) areaRef.current.select();
   };
 
   useEffect(() => {

@@ -46,4 +46,5 @@ export interface DropDownItemProps {
   withToggle?: boolean;
   checked?: boolean;
   onClickSelectedItem?: () => void;
+  isBeta?: boolean;
 }

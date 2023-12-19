@@ -19,7 +19,12 @@ const SMTPSettings = (props) => {
     integrationSettingsUrl,
   } = props;
 
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+  const { t, ready } = useTranslation([
+    "SMTPSettings",
+    "Settings",
+    "Common",
+    "UploadPanel",
+  ]);
   const [isInit, setIsInit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

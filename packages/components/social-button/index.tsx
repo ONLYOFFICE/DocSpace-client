@@ -18,21 +18,16 @@ class SocialButton extends React.Component {
       this.props;
     return (
       <StyledSocialButton isConnect={isConnect} {...otherProps}>
-        <div>
-          {IconComponent ? (
-            <IconComponent className="iconWrapper" />
-          ) : (
-            <ReactSVG className="iconWrapper" src={iconName} />
-          )}
-        </div>
-        <div>
-          {label && (
-            // @ts-expect-error TS(2322): Type '{ children: any; as: string; className: stri... Remove this comment to see the full error message
-            <Text as="span" className="social_button_text">
-              {label}
-            </Text>
-          )}
-        </div>
+        {IconComponent ? (
+          <IconComponent className="iconWrapper" />
+        ) : (
+          <ReactSVG className="iconWrapper" src={iconName} />
+        )}
+        {label && (
+          <Text as="div" className="social_button_text">
+            {label}
+          </Text>
+        )}
       </StyledSocialButton>
     );
   }

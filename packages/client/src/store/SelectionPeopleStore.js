@@ -109,9 +109,16 @@ class SelectionStore {
   setBufferSelection = (bufferSelection, addToSelection = true) => {
     this.bufferSelection = bufferSelection;
     //console.log("setBufferSelection", { bufferSelection });
-    bufferSelection
-      ? addToSelection && this.setSelection([bufferSelection])
-      : this.clearSelection();
+
+    if (bufferSelection) {
+      if (!addToSelection) return;
+      this.setSelection([bufferSelection]);
+      this.incrementUsersRights(bufferSelection);
+
+      return;
+    }
+
+    this.clearSelection();
   };
 
   selectUser = (user) => {

@@ -3,6 +3,7 @@ import authStore from "@docspace/common/store/AuthStore";
 import api from "@docspace/common/api";
 import { setDNSSettings } from "@docspace/common/api/settings";
 import toastr from "@docspace/components/toast/toastr";
+import { DeviceType } from "@docspace/common/constants";
 
 class CommonStore {
   logoUrlsWhiteLabel = [];
@@ -36,25 +37,76 @@ class CommonStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async () => {
+  resetIsInit = () => {
+    this.isInit = false;
+    this.setIsLoaded(false);
+  };
+
+  initSettings = async (page) => {
+    const isMobileView =
+      authStore.settingsStore.currentDeviceType === DeviceType.mobile;
+
     if (this.isInit) return;
+
     this.isInit = true;
 
     const { settingsStore } = authStore;
     const { standalone } = settingsStore;
 
     const requests = [];
-    requests.push(
-      settingsStore.getPortalTimezones(),
-      settingsStore.getPortalCultures(),
-      this.getWhiteLabelLogoUrls(),
-      this.getWhiteLabelLogoText(),
-      this.getIsDefaultWhiteLabel()
-    );
 
-    if (standalone) {
-      requests.push(this.getDNSSettings());
+    if (isMobileView) {
+      switch (page) {
+        case "white-label": {
+          requests.push(
+            this.getWhiteLabelLogoUrls(),
+            this.getWhiteLabelLogoText(),
+            this.getIsDefaultWhiteLabel()
+          );
+          break;
+        }
+        case "language-and-time-zone":
+          requests.push(
+            settingsStore.getPortalTimezones(),
+            settingsStore.getPortalCultures()
+          );
+          break;
+        case "dns-settings":
+          if (standalone) {
+            requests.push(this.getDNSSettings());
+          }
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      switch (page) {
+        case "general":
+          {
+            requests.push(
+              settingsStore.getPortalTimezones(),
+              settingsStore.getPortalCultures()
+            );
+
+            if (standalone) {
+              requests.push(this.getDNSSettings());
+            }
+          }
+          break;
+        case "branding":
+          requests.push(
+            this.getWhiteLabelLogoUrls(),
+            this.getWhiteLabelLogoText(),
+            this.getIsDefaultWhiteLabel()
+          );
+          break;
+
+        default:
+          break;
+      }
     }
+
     return Promise.all(requests).finally(() => this.setIsLoaded(true));
   };
 

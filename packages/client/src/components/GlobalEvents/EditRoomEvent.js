@@ -103,7 +103,7 @@ const EditRoomEvent = ({
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
       ...(isDefaultRoomsQuotaSet && {
-        quota: roomParams.quota || defaultRoomsQuota,
+        quota: roomParams.quota || -2,
       }),
     };
 

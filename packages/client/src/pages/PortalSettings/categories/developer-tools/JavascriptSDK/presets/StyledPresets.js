@@ -1,0 +1,223 @@
+import styled, { css } from "styled-components";
+import { mobile, tablet } from "@docspace/components/utils/device";
+import { isMobile } from "react-device-detect";
+import Box from "@docspace/components/box";
+
+export const SDKContainer = styled(Box)`
+  @media ${tablet} {
+    width: 100%;
+  }
+
+  ${isMobile &&
+  css`
+    width: 100%;
+  `}
+`;
+
+export const Controls = styled(Box)`
+  max-width: 350px;
+  min-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media ${tablet} {
+    min-width: 0;
+  }
+
+  ${isMobile &&
+  css`
+    min-width: 0;
+  `}
+
+  .label {
+    min-width: fit-content;
+  }
+
+  .checkbox {
+    max-width: fit-content;
+  }
+`;
+
+export const CategoryHeader = styled.div`
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+
+  @media ${tablet} {
+    margin-top: 24px;
+  }
+
+  ${isMobile &&
+  css`
+    margin-top: 24px;
+  `}
+`;
+
+export const CategorySubHeader = styled.div`
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+
+  @media ${tablet} {
+    &:not(&.copy-window-code) {
+      margin-bottom: 0;
+    }
+  }
+
+  ${isMobile &&
+  css`
+    &:not(&.copy-window-code) {
+      margin-bottom: 0;
+    }
+  `}
+
+  @media ${mobile} {
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+`;
+
+export const CategoryDescription = styled(Box)`
+  margin-top: 5px;
+  max-width: 700px;
+  .sdk-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+  }
+`;
+
+export const ControlsGroup = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  @media ${tablet} {
+    gap: 4px;
+  }
+
+  ${isMobile &&
+  css`
+    gap: 4px;
+  `}
+`;
+
+export const LabelGroup = styled(Box)`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const InterfaceElements = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+`;
+
+export const Frame = styled(Box)`
+  margin-top: 16px;
+  position: relative;
+
+  @media ${tablet} {
+    margin-top: 4px;
+  }
+
+  ${isMobile &&
+  css`
+    margin-top: 4px;
+  `}
+
+  ${(props) =>
+    props.targetId &&
+    `
+    #${props.targetId} {
+      position: absolute;
+      border-radius: 6px;
+      border: 1px solid #d0d5da;
+      min-width: ${props.width ? props.width : "100%"};
+      min-height: ${props.height ? props.height : "400px"};
+    }
+  `}
+`;
+
+export const Container = styled(Box)`
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 16px;
+
+  @media ${tablet} {
+    flex-direction: column;
+  }
+
+  ${isMobile &&
+  css`
+    flex-direction: column;
+  `}
+`;
+
+export const RowContainer = styled(Box)`
+  flex-direction: row;
+  display: flex;
+  gap: 8px;
+
+  ${(props) =>
+    props.combo &&
+    `
+      height: 32px;
+      align-items: center;
+    `}
+`;
+
+export const ColumnContainer = styled(Box)`
+  flex-direction: column;
+  display: flex;
+  gap: 8px;
+`;
+
+export const Preview = styled(Box)`
+  width: 100%;
+  margin-top: 24px;
+  min-width: 660px;
+  flex-direction: row;
+
+  @media ${tablet} {
+    margin-top: 0;
+    min-width: 0;
+  }
+  ${isMobile &&
+  css`
+    margin-top: 0;
+    min-width: 0;
+  `}
+`;
+
+export const GetCodeButtonWrapper = styled.div`
+  padding-block: 30px;
+  position: sticky;
+  bottom: 0;
+  margin-top: 32px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+
+  @media ${mobile} {
+    position: fixed;
+    padding-inline: 16px;
+    inset-inline: 0;
+  }
+`;
+
+export const FilesSelectorInputWrapper = styled.div`
+  & > div {
+    margin: 0;
+  }
+`;

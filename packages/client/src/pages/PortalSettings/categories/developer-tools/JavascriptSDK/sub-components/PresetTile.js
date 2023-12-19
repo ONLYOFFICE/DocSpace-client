@@ -55,7 +55,7 @@ const TileContainer = styled.div`
 TileContainer.defaultProps = { theme: Base };
 
 const PresetTile = (props) => {
-  const { t, title, description, image } = props;
+  const { t, title, description, image, handleOnClick } = props;
 
   return (
     <TileContainer>
@@ -73,6 +73,7 @@ const PresetTile = (props) => {
         scale
         isClicked
         size="small"
+        onClick={handleOnClick}
       />
     </TileContainer>
   );

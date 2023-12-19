@@ -307,6 +307,6 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
+    withTranslation(["Settings", "Common", "JavascriptSdk"])(observer(ArticleBodyContent))
   )
 );

@@ -19,9 +19,10 @@ class StorageManagement {
 
   isRecalculating = false;
 
-  constructor(filesStore, peopleStore) {
+  constructor(filesStore, peopleStore, authStore) {
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
+    this.authStore = authStore;
     makeAutoObservable(this);
   }
 
@@ -47,6 +48,31 @@ class StorageManagement {
         ]);
 
       this.isInit = true;
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  updateQuotaInfo = async (type) => {
+    const { fetchRooms } = this.filesStore;
+    const { usersStore } = this.peopleStore;
+    const { getUsersList } = usersStore;
+    const { getTenantExtra } = this.authStore;
+
+    const userFilterData = Filter.getDefault();
+    userFilterData.pageCount = FILTER_COUNT;
+
+    const roomFilterData = RoomsFilter.getDefault();
+    roomFilterData.pageCount = FILTER_COUNT;
+
+    const requests = [getTenantExtra()];
+
+    type = "user"
+      ? requests.push(getUsersList(userFilterData))
+      : requests.push(fetchRooms(null, roomFilterData));
+
+    try {
+      await Promise.all(requests);
     } catch (e) {
       toastr.error(e);
     }

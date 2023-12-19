@@ -4,7 +4,6 @@ import { inject, observer } from "mobx-react";
 
 import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
-import toastr from "@docspace/components/toast/toastr";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import QuotaForm from "../../../../../components/QuotaForm";
@@ -17,9 +16,10 @@ const QuotaPerItemComponent = (props) => {
     disableQuota,
     toggleLabel,
     formLabel,
-    getTenantExtra,
+    updateQuotaInfo,
     initialSize,
     isQuotaSet,
+    type,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -38,27 +38,16 @@ const QuotaPerItemComponent = (props) => {
     setIsLoading(true);
 
     await disableQuota();
-
-    try {
-      await getTenantExtra();
-    } catch (e) {
-      toastr.error(e);
-    }
+    await updateQuotaInfo(type);
 
     setIsLoading(false);
   };
 
   const onSaveQuota = async (size) => {
-    console.log("onSaveUserQuota", size);
     timerId = setTimeout(() => setIsLoading(true), 200);
 
     await saveQuota(size);
-
-    try {
-      await getTenantExtra();
-    } catch (e) {
-      toastr.error(e);
-    }
+    await updateQuotaInfo(type);
 
     timerId && clearTimeout(timerId);
     timerId = null;
@@ -69,6 +58,7 @@ const QuotaPerItemComponent = (props) => {
   const onCancel = () => {
     !isQuotaSet && setIsToggleChecked(false);
   };
+
   return (
     <StyledBaseQuotaComponent isDisabled={isDisabled}>
       <div className="toggle-container">
@@ -101,10 +91,12 @@ const QuotaPerItemComponent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore, getTenantExtra } = auth;
+export default inject(({ auth, storageManagement }) => {
+  const { currentQuotaStore } = auth;
   const { setUserQuota } = currentQuotaStore;
   const { isItemQuotaAvailable } = currentQuotaStore;
 
-  return { setUserQuota, isDisabled: !isItemQuotaAvailable, getTenantExtra };
+  const { updateQuotaInfo } = storageManagement;
+
+  return { setUserQuota, isDisabled: !isItemQuotaAvailable, updateQuotaInfo };
 })(observer(QuotaPerItemComponent));

@@ -196,7 +196,11 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(authStore);
-const storageManagement = new StorageManagement(filesStore, peopleStore);
+const storageManagement = new StorageManagement(
+  filesStore,
+  peopleStore,
+  authStore
+);
 
 const store = {
   auth: authStore,

@@ -10,6 +10,7 @@ const QuotaPerUserComponent = (props) => {
 
   return (
     <QuotaPerItemComponent
+      type="user"
       formLabel={t("QuotaPerUser")}
       toggleLabel={t("DefineQuotaPerUser")}
       disableQuota={() => setUserQuota(-1, t)}

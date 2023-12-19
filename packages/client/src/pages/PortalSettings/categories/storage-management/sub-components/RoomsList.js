@@ -12,7 +12,7 @@ import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const RoomsListComponent = (props) => {
-  const { filesList, iconElement, textElement, quotaElement, buttonProps } =
+  const { filesList, iconElement, textElement, quotaElement, buttonProps, id } =
     props;
   const { t } = useTranslation("Settings");
 
@@ -22,6 +22,8 @@ const RoomsListComponent = (props) => {
     const newFilter = RoomsFilter.getDefault();
     newFilter.sortBy = SortByFieldName.UsedSpace;
     const urlFilter = newFilter.toUrlParams();
+
+    localStorage.removeItem(`UserRoomsFilter=${id}`);
 
     navigate(`/rooms/shared/filter?${urlFilter}`);
   };
@@ -64,10 +66,13 @@ const RoomsListComponent = (props) => {
   );
 };
 
-export default inject(({ filesStore }) => {
+export default inject(({ auth, filesStore }) => {
+  const { userStore } = auth;
+  const { user } = userStore;
   const { filesList } = filesStore;
 
   return {
     filesList,
+    id: user?.id,
   };
 })(observer(RoomsListComponent));

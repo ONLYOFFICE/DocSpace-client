@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -12,7 +12,7 @@ import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
-import { mockRes } from "./tempMock";
+// import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -99,7 +99,7 @@ const FirstStep = ({
       //   isCompleted: true,
       // };
 
-      if (!res || res.parseResult.failedArchives.length > 0) {
+      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
         setIsFileError(true);
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
@@ -132,7 +132,7 @@ const FirstStep = ({
           (res) =>
             new Blob([res.parseResult.failedArchives], {
               type: "text/csv;charset=utf-8",
-            }),
+            })
         )
         .then((blob) => {
           let a = document.createElement("a");
@@ -163,7 +163,9 @@ const FirstStep = ({
   return (
     <Wrapper>
       <FileUploadContainer>
-        <Text className="choose-backup-file">{t("Settings:ChooseBackupFile")}</Text>
+        <Text className="choose-backup-file">
+          {t("Settings:ChooseBackupFile")}
+        </Text>
         <FileInput
           scale
           onInput={onSelectFile}
@@ -195,8 +197,15 @@ const FirstStep = ({
                 className="complete-progress-bar"
                 label={t("Common:LoadingIsComplete")}
               />
-              <Text className="error-text">{t("Settings:UnsupportedArchivesDescription")}</Text>
-              <Link type="action" isHovered fontWeight={600} onClick={onDownloadArchives}>
+              <Text className="error-text">
+                {t("Settings:UnsupportedArchivesDescription")}
+              </Text>
+              <Link
+                type="action"
+                isHovered
+                fontWeight={600}
+                onClick={onDownloadArchives}
+              >
                 {t("Settings:DownloadUnsupportedArchives")}
               </Link>
             </Box>
@@ -236,7 +245,8 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setIsFileLoading,
     cancelMigration,
   } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } = dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
   return {
     initMigrationName,

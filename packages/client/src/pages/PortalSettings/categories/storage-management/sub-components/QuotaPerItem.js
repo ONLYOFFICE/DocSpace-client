@@ -66,6 +66,9 @@ const QuotaPerItemComponent = (props) => {
     setIsLoading(false);
   };
 
+  const onCancel = () => {
+    !isQuotaSet && setIsToggleChecked(false);
+  };
   return (
     <StyledBaseQuotaComponent isDisabled={isDisabled}>
       <div className="toggle-container">
@@ -89,6 +92,7 @@ const QuotaPerItemComponent = (props) => {
             isLoading={isLoading}
             isDisabled={isDisabled}
             onSave={onSaveQuota}
+            onCancel={onCancel}
             initialSize={initialSize}
           />
         )}

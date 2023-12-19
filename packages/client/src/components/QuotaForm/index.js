@@ -15,6 +15,12 @@ import Text from "@docspace/components/text";
 import StyledBody from "./StyledComponent";
 import Checkbox from "@docspace/components/checkbox";
 
+const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
+  if (initialSize === -1) return false;
+  if (initPower === power && initSize === value) return true;
+
+  return false;
+};
 const QuotaForm = ({
   isLoading,
   isDisabled,
@@ -24,11 +30,11 @@ const QuotaForm = ({
   isError,
   isButtonsEnable = false,
   onSave,
+  onCancel,
   label,
   checkboxLabel,
   description,
 }) => {
-
   const initPower =
     initialSize && initialSize !== -1 ? getPowerFromBytes(initialSize, 4) : 0;
   const initSize =
@@ -41,7 +47,7 @@ const QuotaForm = ({
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(initialSize === -1);
 
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Settings", "Common"]);
   const options = [
     { key: 0, label: t("Common:Bytes") },
     { key: 1, label: t("Common:Kilobyte") },
@@ -110,10 +116,23 @@ const QuotaForm = ({
   };
 
   const onCancelClick = () => {
+    onCancel && onCancel();
+
+    setSize(initSize);
+    setPower(initPower);
+
     console.log("onCancel");
   };
 
   const isDisable = isLoading || isDisabled || (checkboxLabel && isChecked);
+  const isDefaultQuota = isDefaultValue(
+    initPower,
+    initSize,
+    power,
+    size,
+    initialSize
+  );
+
   return (
     <StyledBody
       maxInputWidth={maxInputWidth}
@@ -165,11 +184,11 @@ const QuotaForm = ({
           onCancelClick={onCancelClick}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:CancelButton")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings
-          cancelEnable
-          saveButtonDisabled={false}
-          showReminder
+          saveButtonDisabled={isDefaultQuota}
+          disableRestoreToDefault={isDefaultQuota}
+          showReminder={!isDefaultQuota}
         />
       )}
     </StyledBody>

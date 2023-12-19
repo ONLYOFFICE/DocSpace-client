@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import styled from "styled-components";
 import { tablet } from "@docspace/components/utils/device";
+import styled from "styled-components";
 
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
@@ -12,7 +12,6 @@ import Button from "@docspace/components/button";
 import FileInput from "@docspace/components/file-input";
 import ProgressBar from "@docspace/components/progress-bar";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -105,12 +104,7 @@ const SelectFileStep = ({
     await initMigrationName(searchParams.get("service"));
 
     uploadInterval.current = setInterval(async () => {
-      // const res = await getMigrationStatus();
-      const res = {
-        parseResult: mockRes,
-        failedArchives: [],
-        isCompleted: true,
-      };
+      const res = await getMigrationStatus();
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);

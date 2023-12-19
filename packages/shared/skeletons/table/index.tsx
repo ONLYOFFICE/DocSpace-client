@@ -5,7 +5,7 @@ import { RectangleSkeletonProps } from "../rectangle";
 const TableSkeleton = ({
   count = 25,
   ...props
-}: { count?: number } & RectangleSkeletonProps) => {
+}: { count?: number; style: React.CSSProperties } & RectangleSkeletonProps) => {
   const items = [];
 
   for (let i = 0; i < count; i += 1) {

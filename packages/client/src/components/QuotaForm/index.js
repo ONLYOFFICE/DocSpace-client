@@ -28,13 +28,18 @@ const QuotaForm = ({
   checkboxLabel,
   description,
 }) => {
-  const initPower = initialSize ? getPowerFromBytes(initialSize, 4) : 0;
-  const initSize = initialSize ? getSizeFromBytes(initialSize, initPower) : "";
+
+  const initPower =
+    initialSize && initialSize !== -1 ? getPowerFromBytes(initialSize, 4) : 0;
+  const initSize =
+    initialSize && initialSize !== -1
+      ? getSizeFromBytes(initialSize, initPower)
+      : "";
 
   const [power, setPower] = useState(initPower);
   const [size, setSize] = useState(initSize);
   const [hasError, setHasError] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(initialSize === -1);
 
   const { t } = useTranslation(["Common"]);
   const options = [
@@ -108,7 +113,7 @@ const QuotaForm = ({
     console.log("onCancel");
   };
 
-  const isDisable = isLoading || isDisabled || isChecked;
+  const isDisable = isLoading || isDisabled || (checkboxLabel && isChecked);
   return (
     <StyledBody
       maxInputWidth={maxInputWidth}

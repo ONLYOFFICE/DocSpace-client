@@ -45,6 +45,9 @@ const EditRoomEvent = ({
   removeLogoPaths,
 
   reloadInfoPanelSelection,
+
+  defaultRoomsQuota,
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -75,6 +78,10 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
   };
 
   const updateRoom = (oldRoom, newRoom) => {
@@ -95,6 +102,9 @@ const EditRoomEvent = ({
   const onSave = async (roomParams) => {
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
+      ...(isDefaultRoomsQuotaSet && {
+        quota: roomParams.quota || defaultRoomsQuota,
+      }),
     };
 
     const tags = roomParams.tags.map((tag) => tag.name);
@@ -264,7 +274,13 @@ export default inject(
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = auth.settingsStore;
     const { reloadSelection: reloadInfoPanelSelection } = auth.infoPanelStore;
+
+    const { currentQuotaStore } = auth;
+    const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       addActiveItems,
       setActiveFolders,
 

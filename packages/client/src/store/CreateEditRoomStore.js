@@ -90,10 +90,15 @@ class CreateEditRoomStore {
     } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
+    const { isDefaultRoomsQuotaSet, defaultRoomsQuota } =
+      this.currentQuotaStore;
+
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
-      quota: roomParams.quota || -2,
+      ...(isDefaultRoomsQuotaSet && {
+        quota: roomParams.quota || defaultRoomsQuota,
+      }),
     };
 
     const createTagsData = roomParams.tags

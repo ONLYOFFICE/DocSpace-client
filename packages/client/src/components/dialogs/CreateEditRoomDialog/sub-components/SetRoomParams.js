@@ -155,8 +155,8 @@ const SetRoomParams = ({
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
-            />
-              )}
+        />
+      )}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
@@ -171,7 +171,11 @@ const SetRoomParams = ({
       )}
 
       {isDefaultRoomsQuotaSet && (
-        <RoomQuota setRoomParams={setRoomParams} roomParams={roomParams} />
+        <RoomQuota
+          setRoomParams={setRoomParams}
+          roomParams={roomParams}
+          isEdit={isEdit}
+        />
       )}
 
       <div>
@@ -206,9 +210,13 @@ const SetRoomParams = ({
 
 export default inject(({ auth, dialogsStore }) => {
   const { user } = auth.userStore;
+  const { currentQuotaStore } = auth;
+  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation } = auth.settingsStore;
   return {
+    isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
     isAdmin: user.isAdmin || user.isOwner,

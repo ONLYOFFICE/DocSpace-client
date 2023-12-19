@@ -17,7 +17,7 @@ import Checkbox from "@docspace/components/checkbox";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   if (initialSize === -1) return false;
-  if (initPower === power && initSize === value) return true;
+  if (initPower == power && initSize == value) return true;
 
   return false;
 };

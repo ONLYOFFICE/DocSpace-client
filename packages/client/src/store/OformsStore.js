@@ -35,6 +35,9 @@ class OformsStore {
 
   oformLocales = null;
   filterOformsByLocaleIsLoading = false;
+  categoryFilterLoaded = false;
+  languageFilterLoaded = false;
+  oformFilesLoaded = false;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -73,6 +76,18 @@ class OformsStore {
 
   setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
     this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
+  };
+
+  setCategoryFilterLoaded = (categoryFilterLoaded) => {
+    this.categoryFilterLoaded = categoryFilterLoaded;
+  };
+
+  setLanguageFilterLoaded = (languageFilterLoaded) => {
+    this.languageFilterLoaded = languageFilterLoaded;
+  };
+
+  setOformFilesLoaded = (oformFilesLoaded) => {
+    this.oformFilesLoaded = oformFilesLoaded;
   };
 
   fetchOformLocales = async () => {

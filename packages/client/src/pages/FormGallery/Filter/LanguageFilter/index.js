@@ -2,7 +2,7 @@ import * as Styled from "./index.styled";
 
 import { withTranslation } from "react-i18next";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/common/utils/image-flags";
@@ -18,6 +18,10 @@ const LanguageFilter = ({
   oformLocales,
   filterOformsByLocale,
   filterOformsByLocaleIsLoading,
+  setLanguageFilterLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -31,9 +35,13 @@ const LanguageFilter = ({
     sectionScroll.scrollTop = 0;
   };
 
+  useEffect(() => {
+    setLanguageFilterLoaded(oformLocales && oformLocales?.length !== 0);
+  }, [oformLocales, oformLocales?.length]);
+
   if (
     filterOformsByLocaleIsLoading ||
-    (oformLocales !== null && oformLocales?.length === 0)
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
   )
     return <RectangleSkeleton width="41px" height="32px" />;
 
@@ -107,4 +115,8 @@ export default inject(({ oformsStore }) => ({
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
   filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
+  setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(withTranslation(["Common"])(observer(LanguageFilter)));

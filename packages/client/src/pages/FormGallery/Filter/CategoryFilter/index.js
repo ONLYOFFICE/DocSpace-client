@@ -59,6 +59,10 @@ const CategoryFilter = ({
   fetchCategoriesOfCategoryType,
   filterOformsByLocaleIsLoading,
   setFilterOformsByLocaleIsLoading,
+  setCategoryFilterLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
 
@@ -102,7 +106,14 @@ const CategoryFilter = ({
     })();
   }, [oformsFilter.locale]);
 
-  if (filterOformsByLocaleIsLoading || menuItems.length === 0)
+  useEffect(() => {
+    setCategoryFilterLoaded(menuItems.length !== 0);
+  }, [menuItems.length]);
+
+  if (
+    filterOformsByLocaleIsLoading ||
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+  )
     return <StyledSkeleton $noLocales={noLocales} />;
 
   return (
@@ -124,4 +135,8 @@ export default inject(({ oformsStore }) => ({
   filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
   setFilterOformsByLocaleIsLoading:
     oformsStore.setFilterOformsByLocaleIsLoading,
+  setCategoryFilterLoaded: oformsStore.setCategoryFilterLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(observer(CategoryFilter));

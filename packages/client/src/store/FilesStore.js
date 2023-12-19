@@ -1751,6 +1751,14 @@ class FilesStore {
     return rooms;
   };
 
+  resetRoomQuota = async (itemsIDs, filter) => {
+    const rooms = await api.rooms.resetRoomQuota(itemsIDs);
+
+    await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
+  };
+
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {
     this.alreadyFetchingRooms = alreadyFetchingRooms;
   };

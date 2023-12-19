@@ -1793,6 +1793,21 @@ class FilesActionStore {
       toastr.error(e);
     }
   };
+
+  resetRoomQuota = async (users, t) => {
+    const { resetRoomQuota } = this.filesStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      await resetRoomQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
   getOption = (option, t) => {
     const {
       // setSharingPanelVisible,
@@ -1925,7 +1940,7 @@ class FilesActionStore {
             key: "default-quota",
             label: t("Common:SetToDefault"),
             iconUrl: DefaultQuotaReactSvgUrl,
-            onClick: () => console.log("default-quota"),
+            onClick: () => this.resetRoomQuota(selection, t),
             disabled: false,
           };
       case "disable-quota":

@@ -416,3 +416,16 @@ export function setCustomRoomQuota(roomIds, quota) {
 
   return request(options);
 }
+
+export function resetRoomQuota(roomIds) {
+  const data = {
+    roomIds,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}

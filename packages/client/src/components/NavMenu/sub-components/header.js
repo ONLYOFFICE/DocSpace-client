@@ -36,7 +36,7 @@ const Header = styled.header`
 
   .header-logo-icon {
     position: absolute;
-    right: 50%;
+    right: 50%; /* Just centering. Does not require rtl mirroring */
     transform: translateX(50%);
     height: 24px;
     cursor: pointer;
@@ -53,7 +53,11 @@ const Header = styled.header`
 
   .header-items-wrapper {
     display: flex;
-    margin-left: 82px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 82px;`
+        : `margin-left: 82px;`}
   }
 `;
 
@@ -63,7 +67,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   a {
@@ -86,13 +90,18 @@ const versionBadgeProps = {
 const StyledNavigationIconsWrapper = styled.div`
   height: 20px;
   position: absolute;
-  left: ${isMobile ? "254px" : "275px"};
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? `right: ${isMobile ? "254px" : "275px"};`
+      : `left: ${isMobile ? "254px" : "275px"};`}
   display: ${isMobileOnly ? "none" : "flex"};
   justify-content: flex-start;
   align-items: center;
 
   @media ${tablet} {
-    left: 254px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `right: 254px;` : `left: 254px;`}
   }
 
   @media ${mobile} {
@@ -122,11 +131,14 @@ const HeaderComponent = ({
   toggleArticleOpen,
   logoUrl,
 
+  customHeader,
   ...props
 }) => {
   const { t } = useTranslation("Common");
 
   const location = useLocation();
+
+  const isFormGallery = location.pathname.includes("/form-gallery");
 
   //const isNavAvailable = mainModules.length > 0;
 
@@ -193,15 +205,6 @@ const HeaderComponent = ({
     return () => window.removeEventListener("resize", onResize);
   });
 
-  const [isFormGallery, setIsFormGallery] = useState(
-    location.pathname.includes("/form-gallery")
-  );
-  useEffect(() => {
-    return () => {
-      setIsFormGallery(location.pathname.includes("/form-gallery"));
-    };
-  }, [location]);
-
   const logo = getLogoFromPath(
     !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light
   );
@@ -221,20 +224,24 @@ const HeaderComponent = ({
         {((isPersonal && location.pathname.includes("files")) ||
           (!isPersonal && currentProductId !== "home")) &&
           !isFormGallery && <HeaderCatalogBurger onClick={toggleArticleOpen} />}
-        <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
-          {!isPersonal ? (
-            <img alt="logo" src={logo} className="header-logo-icon" />
-          ) : (
-            <img
-              alt="logo"
-              className="header-logo-icon"
-              src={combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                PersonalLogoReactSvgUrl
-              )}
-            />
-          )}
-        </LinkWithoutRedirect>
+        {customHeader ? (
+          <>{customHeader}</>
+        ) : (
+          <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
+            {!isPersonal ? (
+              <img alt="logo" src={logo} className="header-logo-icon" />
+            ) : (
+              <img
+                alt="logo"
+                className="header-logo-icon"
+                src={combineUrl(
+                  window.DocSpaceConfig?.proxy?.url,
+                  PersonalLogoReactSvgUrl
+                )}
+              />
+            )}
+          </LinkWithoutRedirect>
+        )}
         {/* {isNavAvailable &&
           isDesktopView &&
           !isPersonal &&

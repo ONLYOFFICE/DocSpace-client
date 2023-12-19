@@ -15,7 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
-
+import { getCookie } from "@docspace/components/utils/cookie";
 // Property Content Components
 
 const text = (text) => (
@@ -58,7 +58,7 @@ export const decodeString = (str) => {
 };
 
 export const parseAndFormatDate = (date, personal, culture) => {
-  const locale = personal ? localStorage.getItem(LANGUAGE) : culture;
+  const locale = getCookie(LANGUAGE) || culture;
   const correctDate = getCorrectDate(locale, date);
   return correctDate;
 };
@@ -119,39 +119,40 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    return (this.item.isRoom
-      ? [
-          "Owner",
-          this.item.providerKey && "Storage Type",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          this.item.tags.length && "Tags",
-        ]
-      : this.item.isFolder
-      ? [
-          "Owner",
-          //"Location",
-          "Type",
-          "Content",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-        ]
-      : [
-          "Owner",
-          //"Location",
-          "Type",
-          "File extension",
-          "Size",
-          "Date modified",
-          "Last modified by",
-          "Creation date",
-          "Versions",
-          "Comments",
-        ]
+    return (
+      this.item.isRoom
+        ? [
+            "Owner",
+            this.item.providerKey && "Storage Type",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            this.item.tags.length && "Tags",
+          ]
+        : this.item.isFolder
+        ? [
+            "Owner",
+            //"Location",
+            "Type",
+            "Content",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+          ]
+        : [
+            "Owner",
+            //"Location",
+            "Type",
+            "File extension",
+            "Size",
+            "Date modified",
+            "Last modified by",
+            "Creation date",
+            "Versions",
+            "Comments",
+          ]
     ).filter((nP) => !!nP);
   };
 

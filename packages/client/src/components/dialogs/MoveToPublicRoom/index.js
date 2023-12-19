@@ -17,6 +17,7 @@ const MoveToPublicRoomComponent = (props) => {
     setIsVisible,
     setConflictResolveDialogVisible,
     setMoveToPanelVisible,
+    setRestorePanelVisible,
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     moveToPublicRoomData,
@@ -25,6 +26,8 @@ const MoveToPublicRoomComponent = (props) => {
     setMovingInProgress,
     itemOperationToFolder,
     clearActiveOperations,
+    setSelectedItems,
+    setSelected,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +55,9 @@ const MoveToPublicRoomComponent = (props) => {
   const onClosePanels = () => {
     setIsVisible(false);
     setConflictResolveDialogVisible(false);
+    setSelected("none");
     setMoveToPanelVisible(false);
+    setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
   };
@@ -69,6 +74,7 @@ const MoveToPublicRoomComponent = (props) => {
         setIsLoading(true);
       }, 500);
 
+    setSelectedItems();
     checkFileConflicts(destFolderId, folderIds, fileIds)
       .then(async (conflicts) => {
         if (conflicts.length) {
@@ -141,19 +147,21 @@ const MoveToPublicRoomDialog = withTranslation([
 
 export default inject(
   ({ dialogsStore, filesActionsStore, filesStore, uploadDataStore }) => {
-    const { setMovingInProgress } = filesStore;
+    const { setMovingInProgress, setSelected } = filesStore;
 
     const {
       moveToPublicRoomVisible,
       setMoveToPublicRoomVisible,
       setConflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       moveToPublicRoomData,
     } = dialogsStore;
 
-    const { setConflictDialogData, checkFileConflicts } = filesActionsStore;
+    const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
+      filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
     return {
@@ -161,6 +169,7 @@ export default inject(
       setIsVisible: setMoveToPublicRoomVisible,
       setConflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
       moveToPublicRoomData,
@@ -169,6 +178,8 @@ export default inject(
       setMovingInProgress,
       itemOperationToFolder,
       clearActiveOperations,
+      setSelectedItems,
+      setSelected,
     };
   }
 )(observer(MoveToPublicRoomDialog));

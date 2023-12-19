@@ -46,7 +46,14 @@ const StyledHeaderContent = styled.div`
       .icon-button_svg {
         width: 15px;
       }
-      margin-right: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 16px;
+            `
+          : css`
+              margin-right: 16px;
+            `}
     }
   }
 
@@ -62,7 +69,14 @@ const StyledHeaderContent = styled.div`
 
   .sharing_panel-icons-container {
     display: flex;
-    margin-left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+          `
+        : css`
+            margin-left: 16px;
+          `}
   }
 `;
 
@@ -101,13 +115,24 @@ const StyledBodyContent = styled.div`
 
 const StyledExternalLink = styled.div`
   width: 100%;
-
-  padding: ${(props) =>
-    props.isPersonal
-      ? props.isOpen
-        ? "8px 4px 4px"
-        : "8px 4px 20px"
-      : "20px 16px"};
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: ${(props) =>
+            props.isPersonal
+              ? props.isOpen
+                ? "8px 0px 4px 4px"
+                : "8px 0px 20px 4px"
+              : "20px 16px"};
+        `
+      : css`
+          padding: ${(props) =>
+            props.isPersonal
+              ? props.isOpen
+                ? "8px 4px 4px 0px"
+                : "8px 4px 20px 0px"
+              : "20px 16px"};
+        `}
 
   border-bottom: ${(props) =>
     props.isPersonal ? "none" : props.theme.filesPanels.sharing.borderBottom};
@@ -126,10 +151,17 @@ const StyledExternalLink = styled.div`
 
     .external-link__text {
       font-weight: 700;
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       line-height: 22px;
 
-      margin-right: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 16px;
+            `
+          : css`
+              margin-right: 16px;
+            `}
     }
 
     .external-link__toggler {
@@ -147,7 +179,14 @@ const StyledExternalLink = styled.div`
 
     .external-link__input-link {
       flex-direction: row-reverse;
-      padding-right: 0px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-left: 0px;
+            `
+          : css`
+              padding-right: 0px;
+            `}
 
       .external-link__buttons {
         position: relative;
@@ -160,7 +199,14 @@ const StyledExternalLink = styled.div`
         padding: 4px 16px;
 
         .external-link__code-icon {
-          margin-right: 12px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-left: 12px;
+                `
+              : css`
+                  margin-right: 12px;
+                `}
 
           cursor: pointer;
           path {
@@ -187,7 +233,14 @@ const StyledExternalLink = styled.div`
     }
 
     .external-link__copy {
-      margin-left: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
     }
 
     .panel_combo-box {
@@ -216,7 +269,14 @@ const StyledExternalLink = styled.div`
 
     .external-link__access-rights_text {
       color: #a3a9ae;
-      margin-right: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 8px;
+            `
+          : css`
+              margin-right: 8px;
+            `}
     }
   }
 `;
@@ -236,7 +296,7 @@ const StyledInternalLink = styled.div`
 
   .internal-link__link-text {
     line-height: 22px !important;
-    font-size: 16px !important;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")} !important;
     font-weight: 700 !important;
   }
 
@@ -270,7 +330,14 @@ const StyledItem = styled.div`
     justify-content: start;
 
     .info-block__text {
-      margin-left: 12px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 12px;
+            `
+          : css`
+              margin-left: 12px;
+            `}
     }
   }
 
@@ -335,7 +402,14 @@ StyledFooterContent.defaultProps = { theme: Base };
 const StyledModalFooter = styled.div`
   width: 100%;
 
-  padding: 16px 4px 4px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 16px 0 4px 0;
+        `
+      : css`
+          padding: 16px 4px 4px 0;
+        `}
 
   box-sizing: border-box;
 
@@ -369,7 +443,14 @@ const StyledModalFooter = styled.div`
   }
 
   button:first-child {
-    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
   }
 `;
 

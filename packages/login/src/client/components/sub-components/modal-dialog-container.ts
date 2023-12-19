@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ModalDialog from "@docspace/components/modal-dialog";
+import { tablet } from "@docspace/components/utils/device";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside {
@@ -12,7 +13,7 @@ const ModalDialogContainer = styled(ModalDialog)`
   }
 
   .modal-dialog-aside-footer {
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       width: 90%;
     }
   }
@@ -24,7 +25,6 @@ const ModalDialogContainer = styled(ModalDialog)`
   }
 
   .email-reg-field {
-    height: 46px;
     margin: 0;
   }
 `;

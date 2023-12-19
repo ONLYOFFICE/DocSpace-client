@@ -1,36 +1,35 @@
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
 import Submenu from "@docspace/components/submenu";
+
+import Box from "@docspace/components/box";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 
 import { useNavigate } from "react-router-dom";
 import JavascriptSDK from "./JavascriptSDK";
-import Api from "./Api";
-
 import Webhooks from "./Webhooks";
+
+import Api from "./Api";
 
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
+import { DeviceType } from "@docspace/common/constants";
+import PluginSDK from "./PluginSDK";
+import Badge from "@docspace/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
-    margin-top: ${() => (isMobile ? "0" : "4px")};
     z-index: 201;
-    ${() =>
-      isMobileOnly &&
-      css`
-        top: 58px;
-      `}
   }
 `;
 
 const DeveloperToolsWrapper = (props) => {
-  const { loadBaseInfo } = props;
+  const { loadBaseInfo, currentDeviceType } = props;
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -39,8 +38,30 @@ const DeveloperToolsWrapper = (props) => {
     "JavascriptSdk",
     "Webhooks",
     "Settings",
+    "WebPlugins",
   ]);
   const [isPending, startTransition] = useTransition();
+
+  const sdkLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("JavascriptSdk")}
+    </Box>
+  );
+
+  const pluginLabel = (
+    <Box displayProp="flex" style={{ gap: "8px" }}>
+      {t("WebPlugins:PluginSDK")}
+
+      <Badge
+        label={t("Settings:BetaLabel")}
+        backgroundColor="#533ED1"
+        fontSize="9px"
+        borderRadius="50px"
+        noHover={true}
+        isHovered={false}
+      />
+    </Box>
+  );
 
   const data = [
     {
@@ -50,8 +71,13 @@ const DeveloperToolsWrapper = (props) => {
     },
     {
       id: "javascript-sdk",
-      name: t("JavascriptSdk"),
+      name: sdkLabel,
       content: <JavascriptSDK />,
+    },
+    {
+      id: "plugin-sdk",
+      name: pluginLabel,
+      content: <PluginSDK />,
     },
     {
       id: "webhooks",
@@ -65,7 +91,7 @@ const DeveloperToolsWrapper = (props) => {
   );
 
   const load = async () => {
-    await loadBaseInfo();
+    //await loadBaseInfo();
   };
 
   useEffect(() => {
@@ -94,15 +120,29 @@ const DeveloperToolsWrapper = (props) => {
 
   return (
     <Suspense fallback={loaders[currentTab] || <AppLoader />}>
-      <StyledSubmenu data={data} startSelect={currentTab} onSelect={onSelect} />
+      <StyledSubmenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
+      />
     </Suspense>
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, auth }) => {
   const { initSettings } = setup;
 
+  const { settingsStore } = auth;
+
   return {
+    currentDeviceType: settingsStore.currentDeviceType,
     loadBaseInfo: async () => {
       await initSettings();
     },

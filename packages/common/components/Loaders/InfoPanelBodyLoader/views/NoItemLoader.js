@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleLoader from "../../RectangleLoader/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledNoItemLoader = styled.div`
   width: 100%;
@@ -16,8 +16,8 @@ const StyledNoItemLoader = styled.div`
 const NoItemLoader = () => {
   return (
     <StyledNoItemLoader>
-      <RectangleLoader width={"96px"} height={"96px"} borderRadius={"6px"} />
-      <RectangleLoader width={"150px"} height={"16px"} borderRadius={"3px"} />
+      <RectangleSkeleton width={"96px"} height={"96px"} borderRadius={"6px"} />
+      <RectangleSkeleton width={"150px"} height={"16px"} borderRadius={"3px"} />
     </StyledNoItemLoader>
   );
 };

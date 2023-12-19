@@ -8,11 +8,13 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import { classNames } from "@docspace/components/utils/classNames";
 import { StyledBadgesContainer } from "../StyledTable";
+import { StyledQuickButtonsContainer } from "../StyledTable";
 
 const RoomsRowDataComponent = (props) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
 
@@ -26,6 +28,7 @@ const RoomsRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
+    quickButtonsComponent,
   } = props;
 
   return (
@@ -122,6 +125,27 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+
+      {roomColumnQuickButtonsIsEnabled ? (
+        <TableCell
+          style={
+            !roomColumnQuickButtonsIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            "table-container_quick-buttons-wrapper"
+          )}
+        >
+          <StyledQuickButtonsContainer>
+            {quickButtonsComponent}
+          </StyledQuickButtonsContainer>
+        </TableCell>
+      ) : (
+        <div />
+      )}
     </>
   );
 };
@@ -130,6 +154,7 @@ export default inject(({ tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
   } = tableStore;
@@ -137,6 +162,7 @@ export default inject(({ tableStore }) => {
   return {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
+    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
   };

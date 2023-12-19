@@ -12,6 +12,8 @@
   "MakeRoomPrivateDescription": "Toate fişierele din această sală vor fi criptate.",
   "MakeRoomPrivateLimitationsWarningDescription": "Această funcţie vă permite să invitaţi doar utilizatorii DocSpace existenți. După crearea unei săli, nu veţi putea modifica lista de utilizatori.",
   "MakeRoomPrivateTitle": "Marcare sala ca privată",
+  "PublicRoomBarDescription": "Această sală este disponibilă tuturor la link-ul. Utilizatorii externi vor fi acordați permisiunea Doar vizualizare pentru toate fișierele.",
+  "PublicRoomDescription": "Invitați utilizatorii la vizualizarea documentelor fără conectare prin link-uri externe. De asemenea puteți incorpora această sală în orice interfață web.",
   "ReviewRoomDescription": "Solicitaţi o revizuire sau comentarii la documente",
   "ReviewRoomTitle": "Revizuire sala",
   "RoomEditing": "Modificare sală",

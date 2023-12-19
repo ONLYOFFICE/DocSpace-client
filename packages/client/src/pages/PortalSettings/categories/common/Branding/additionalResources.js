@@ -1,17 +1,28 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Checkbox from "@docspace/components/checkbox";
 import toastr from "@docspace/components/toast/toastr";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   margin-top: 40px;
+
+  @media ${mobile} {
+    margin-top: 0px;
+
+    .header {
+      display: none;
+    }
+  }
 
   .branding-checkbox {
     display: flex;
@@ -33,8 +44,14 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    width: max-content;
-    margin-right: 9px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 9px;
+          `
+        : css`
+            margin-right: 9px;
+          `}
   }
 `;
 
@@ -50,7 +67,10 @@ const AdditionalResources = (props) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
+    isManagement,
   } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [additionalSettings, setAdditionalSettings] = useState({});
   const [hasChange, setHasChange] = useState(false);
@@ -64,22 +84,38 @@ const AdditionalResources = (props) => {
 
     const defaultData = {
       feedbackAndSupportEnabled:
-        additionalResourcesData.feedbackAndSupportEnabled,
-      videoGuidesEnabled: additionalResourcesData.videoGuidesEnabled,
-      helpCenterEnabled: additionalResourcesData.helpCenterEnabled,
+        additionalResourcesData?.feedbackAndSupportEnabled,
+      videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
+      helpCenterEnabled: additionalResourcesData?.helpCenterEnabled,
     };
 
     saveToSessionStorage("defaultAdditionalSettings", defaultData);
 
     if (additionalSettings) {
       setAdditionalSettings({
-        feedbackAndSupportEnabled: additionalSettings.feedbackAndSupportEnabled,
-        videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
-        helpCenterEnabled: additionalSettings.helpCenterEnabled,
+        feedbackAndSupportEnabled:
+          additionalSettings?.feedbackAndSupportEnabled,
+        videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
+        helpCenterEnabled: additionalSettings?.helpCenterEnabled,
       });
     } else {
       setAdditionalSettings(defaultData);
     }
+  };
+
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("additional-resources") &&
+      navigate(url);
   };
 
   useEffect(() => {
@@ -217,14 +253,14 @@ const AdditionalResources = (props) => {
             onChange={onChangeFeedback}
           />
 
-          <Checkbox
+          {/*<Checkbox
             tabIndex={13}
             className="show-video-guides checkbox"
             isDisabled={!isSettingPaid}
             label={t("ShowVideoGuides")}
             isChecked={videoGuidesEnabled}
             onChange={onChangeVideoGuides}
-          />
+  />*/}
           <Checkbox
             tabIndex={14}
             className="show-help-center checkbox"
@@ -239,9 +275,9 @@ const AdditionalResources = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
+          cancelButtonLabel={t("Common:Restore")}
           displaySettings={true}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          reminderText={t("YouHaveUnsavedChanges")}
           showReminder={(isSettingPaid && hasChange) || isLoading}
           disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
           additionalClassSaveButton="additional-resources-save"
@@ -253,7 +289,7 @@ const AdditionalResources = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
@@ -266,6 +302,8 @@ export default inject(({ auth, common }) => {
     additionalResourcesIsDefault,
   } = settingsStore;
 
+  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
   return {
     getAdditionalResources,
     setAdditionalResources,
@@ -274,6 +312,8 @@ export default inject(({ auth, common }) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
+    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

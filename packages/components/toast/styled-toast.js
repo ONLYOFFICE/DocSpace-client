@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
-import { tablet } from "../utils/device";
+import { tablet, mobile } from "../utils/device";
 import Base from "../themes/base";
 
 const StyledToastContainer = styled(ToastContainer)`
@@ -35,7 +35,8 @@ const StyledToastContainer = styled(ToastContainer)`
   .Toastify__close-button {
     color: ${(props) => props.theme.toast.closeButton.color};
     font-weight: ${(props) => props.theme.toast.closeButton.fontWeight};
-    font-size: ${(props) => props.theme.toast.closeButton.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.toast.closeButton.fontSize)};
     background: ${(props) => props.theme.toast.closeButton.background};
     outline: none;
     border: none;
@@ -187,7 +188,7 @@ const StyledToastContainer = styled(ToastContainer)`
       `}
   }
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and ${mobile} {
     left: 0;
     margin: auto;
     right: 0;

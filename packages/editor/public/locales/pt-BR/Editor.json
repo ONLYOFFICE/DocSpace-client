@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "documentos",
+  "ErrorConnectionLost": "A conexão foi perdida",
   "FileLocation": "Local do arquivo aberto",
   "FileName": "Nome de Arquivo",
   "ImageFileType": "imagens",

@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Yhdistä sosiaaliset verkostosi",
   "DarkTheme": "Tumma teema",
   "DescriptionForSecurity": "Vaihda salasanasi lisätäksesi turvallisuutta.",
+  "DesktopTheme": "Synkronoi työpöytäeditorin asetusten kanssa",
+  "DesktopThemeDescription": "Vaihda automaattisesti vaaleiden ja tummien teemojen välillä työpöytäeditorien nykyisen teeman mukaan.",
   "EditPhoto": "Muokkaa kuvaa",
   "EmailNotVerified": "Sähköpostia ei ole vahvistettu",
+  "ErrorAccountAlreadyUse": "Linkitetty tili on jo toisen käyttäjän käytössä",
+  "FileManagement": "Tiedostojen hallinta",
   "InterfaceTheme": "Käyttöliittymän teema",
   "LightTheme": "Kevyt teema",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Aktiivisesta yhteydestä kirjauduttiin ulos:{{platform}}, {{browser}}",
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
-  "TfaLoginSettings": "Kirjautumisasetukset",
   "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
 }

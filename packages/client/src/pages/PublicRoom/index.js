@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Section from "@docspace/common/components/Section";
 import Loader from "@docspace/components/loader";
-import { ValidationResult } from "../../helpers/constants";
+import { ValidationStatus } from "../../helpers/constants";
 
 import RoomPassword from "./sub-components/RoomPassword";
 import RoomErrors from "./sub-components/RoomErrors";
@@ -21,6 +21,7 @@ const PublicRoom = (props) => {
     validatePublicRoomKey,
     getFilesSettings,
     setPublicRoomKey,
+    setIsArticleLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const PublicRoom = (props) => {
   const fetchRoomFiles = async () => {
     setPublicRoomKey(key);
     await getFilesSettings();
+    setIsArticleLoading(false);
 
     const filterObj = FilesFilter.getFilter(window.location);
 
@@ -71,13 +73,13 @@ const PublicRoom = (props) => {
 
   const renderPage = () => {
     switch (roomStatus) {
-      case ValidationResult.Ok:
+      case ValidationStatus.Ok:
         return <PublicRoomPage />;
-      case ValidationResult.Invalid:
+      case ValidationStatus.Invalid:
         return <RoomErrors isInvalid />;
-      case ValidationResult.Expired:
+      case ValidationStatus.Expired:
         return <RoomErrors />;
-      case ValidationResult.Password:
+      case ValidationStatus.Password:
         return <RoomPassword roomKey={key} />;
 
       default:
@@ -94,22 +96,26 @@ const PublicRoom = (props) => {
   );
 };
 
-export default inject(({ auth, publicRoomStore, settingsStore }) => {
-  const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
-    publicRoomStore;
+export default inject(
+  ({ auth, publicRoomStore, settingsStore, clientLoadingStore }) => {
+    const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
+      publicRoomStore;
 
-  const { getFilesSettings } = settingsStore;
-  const { setPublicRoomKey } = auth.settingsStore;
+    const { getFilesSettings } = settingsStore;
+    const { setPublicRoomKey } = auth.settingsStore;
+    const { setIsArticleLoading } = clientLoadingStore;
 
-  return {
-    roomId,
-    isLoaded,
-    isLoading,
-    roomStatus,
+    return {
+      roomId,
+      isLoaded,
+      isLoading,
+      roomStatus,
 
-    getFilesSettings,
+      getFilesSettings,
 
-    validatePublicRoomKey,
-    setPublicRoomKey,
-  };
-})(observer(PublicRoom));
+      validatePublicRoomKey,
+      setPublicRoomKey,
+      setIsArticleLoading,
+    };
+  }
+)(observer(PublicRoom));

@@ -1,26 +1,40 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
+
+import { DeviceType } from "@docspace/common/constants";
+import { LOADER_TIMEOUT } from "@docspace/common/constants";
 
 import Backdrop from "@docspace/components/backdrop";
 import Aside from "@docspace/components/aside";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
+import { isDesktop, isMobile, size } from "@docspace/components/utils/device";
 
 import {
   StyledBlock,
   StyledHeading,
   StyledInvitePanel,
   StyledButtons,
+  StyledControlContainer,
+  StyledCrossIconMobile,
 } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import Scrollbar from "@docspace/components/scrollbar";
-import { LinkType } from "../../../helpers/constants";
+
+import InfoBar from "./sub-components/InfoBar";
+import InvitePanelLoader from "./sub-components/InvitePanelLoader";
+
 const InvitePanel = ({
   folders,
   getFolderInfo,
@@ -43,26 +57,40 @@ const InvitePanel = ({
   reloadSelectionParentRoom,
   setUpdateRoomMembers,
   roomsView,
+  setInviteLanguage,
   getUsersList,
   filter,
+  currentDeviceType,
 }) => {
+  const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
+    () =>
+      ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
+      roomId !== -1
+  );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
-  const [roomUsers, setRoomUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
+  const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
+  const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(isMobile());
+
+  const [cultureKey, setCultureKey] = useState();
+
+  const onCloseBar = () => setInfoBarIsVisible(false);
 
   const inputsRef = useRef();
+  const invitePanelBodyRef = useRef();
+  const invitePanelWrapper = useRef(null);
+  const invitePanelRef = useRef(null);
+  const windowHeight = useRef(window.innerHeight);
+  const loaderRef = useRef();
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
-  };
-
-  const onChangeActiveLink = (activeLink) => {
-    setActiveLink(activeLink);
   };
 
   const selectRoom = () => {
@@ -70,40 +98,57 @@ const InvitePanel = ({
 
     if (room) {
       setSelectedRoom(room);
+      return Promise.resolve();
     } else {
-      getFolderInfo(roomId).then((info) => {
+      return getFolderInfo(roomId).then((info) => {
         setSelectedRoom(info);
       });
     }
   };
 
   const getInfo = () => {
-    getRoomSecurityInfo(roomId).then((users) => {
-      let links = [];
+    return getRoomSecurityInfo(roomId).then((links) => {
+      const link = links && links[0];
+      if (link) {
+        const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-      users.map((user) => {
-        const { shareLink, id, title, expirationDate, linkType } = user.sharedTo;
+        const activeLink = {
+          id,
+          title,
+          shareLink,
+          expirationDate,
+          access: link.access || defaultAccess,
+        };
 
-        if (!!shareLink && linkType === LinkType.Invite) {
-          links.push({
-            id,
-            title,
-            shareLink,
-            expirationDate,
-            access: user.access || defaultAccess,
-          });
-        }
-      });
+        onChangeExternalLinksVisible(!!links.length);
 
-      setShareLinks(links);
-      setRoomUsers(users);
+        setShareLinks([activeLink]);
+        setActiveLink(activeLink);
+      }
     });
+  };
+
+  const clearLoaderTimeout = () => {
+    clearTimeout(loaderRef.current);
+    loaderRef.current = undefined;
+  };
+
+  const disableInvitePanelLoader = () => {
+    if (loaderRef.current) return;
+
+    loaderRef.current = setTimeout(() => {
+      setInvitePanelIsLoading(false);
+    }, LOADER_TIMEOUT);
   };
 
   useEffect(() => {
     if (roomId === -1) {
-      if (!userLink || !guestLink || !adminLink || !collaboratorLink)
-        getPortalInviteLinks();
+      if ((!userLink || !guestLink || !collaboratorLink) && !adminLink) {
+        setInvitePanelIsLoading(true);
+        getPortalInviteLinks().finally(() => {
+          disableInvitePanelLoader();
+        });
+      }
 
       setShareLinks([
         {
@@ -135,8 +180,10 @@ const InvitePanel = ({
       return;
     }
 
-    selectRoom();
-    getInfo();
+    setInvitePanelIsLoading(true);
+    Promise.all([selectRoom(), getInfo()]).finally(() => {
+      disableInvitePanelLoader(false);
+    });
   }, [roomId, userLink, guestLink, adminLink, collaboratorLink]);
 
   useEffect(() => {
@@ -150,14 +197,45 @@ const InvitePanel = ({
     window.addEventListener("resize", onCheckHeight);
     return () => {
       window.removeEventListener("resize", onCheckHeight);
+      window.removeEventListener("mousedown", onMouseDown);
+      clearLoaderTimeout();
     };
   }, []);
 
+  useEffect(() => {
+    isMobileView && window.addEventListener("mousedown", onMouseDown);
+  }, [isMobileView]);
+
+  useEffect(() => {
+    window.visualViewport.addEventListener("resize", onResize);
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = useCallback((e) => {
+    const diff = windowHeight.current - e.target.height;
+
+    if (invitePanelRef.current) {
+      invitePanelRef.current.style.height = `${e.target.height - 64}px`;
+      // invitePanelRef.current.style.bottom = `${diff}px`;
+      invitePanelWrapper.current.style.height = `${e.target.height}px`;
+      invitePanelWrapper.current.style.bottom = `${diff}px`;
+    }
+  }, []);
+
+  const onMouseDown = (e) => {
+    if (e.target.id === "InvitePanelWrapper") onClose();
+  };
+
   const onCheckHeight = () => {
-    setScrollAllPanelContent(window.innerHeight < 1024);
+    setScrollAllPanelContent(!isDesktop());
+    setIsMobileView(isMobile());
   };
 
   const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
       visible: false,
@@ -190,8 +268,8 @@ const InvitePanel = ({
 
     const data = {
       invitations,
+      culture: cultureKey,
     };
-
     if (roomId !== -1) {
       data.notify = true;
       data.message = "Invitation message";
@@ -199,9 +277,10 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      roomId === -1
-        ? await inviteUsers(data)
-        : await setRoomSecurity(roomId, data);
+      const result =
+        roomId === -1
+          ? await inviteUsers(data)
+          : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
@@ -211,6 +290,11 @@ const InvitePanel = ({
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
+
+      if (result?.warning) {
+        toastr.warning(result?.warning);
+      }
+
       reloadSelectionParentRoom();
     } catch (err) {
       toastr.error(err);
@@ -224,6 +308,7 @@ const InvitePanel = ({
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
+  const hasAdmins = inviteItems.findIndex((u) => u.isAdmin || u.isOwner) > -1;
 
   const bodyInvitePanel = useMemo(() => {
     return (
@@ -231,21 +316,29 @@ const InvitePanel = ({
         <ExternalLinks
           t={t}
           shareLinks={shareLinks}
+          setShareLinks={setShareLinks}
           getInfo={getInfo}
           roomType={roomType}
           onChangeExternalLinksVisible={onChangeExternalLinksVisible}
           externalLinksVisible={externalLinksVisible}
-          onChangeActiveLink={onChangeActiveLink}
+          setActiveLink={setActiveLink}
           activeLink={activeLink}
+          isMobileView={isMobileView}
         />
 
         <InviteInput
           t={t}
           onClose={onClose}
-          roomUsers={roomUsers}
+          setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
+          addUsersPanelVisible={addUsersPanelVisible}
+          setAddUsersPanelVisible={setAddUsersPanelVisible}
+          isMobileView={isMobileView}
         />
+        {infoBarIsVisible && hasAdmins && (
+          <InfoBar t={t} onClose={onCloseBar} />
+        )}
         {hasInvitedUsers && (
           <ItemsList
             t={t}
@@ -254,6 +347,8 @@ const InvitePanel = ({
             externalLinksVisible={externalLinksVisible}
             scrollAllPanelContent={scrollAllPanelContent}
             inputsRef={inputsRef}
+            invitePanelBodyRef={invitePanelBodyRef}
+            isMobileView={isMobileView}
           />
         )}
       </>
@@ -266,62 +361,89 @@ const InvitePanel = ({
     onChangeExternalLinksVisible,
     externalLinksVisible,
     onClose,
-    roomUsers,
     setHasErrors,
     scrollAllPanelContent,
     hasInvitedUsers,
+    invitePanelBodyRef,
   ]);
 
+  const invitePanelNode = (
+    <>
+      <StyledBlock>
+        <StyledHeading>{t("Common:InviteUsers")}</StyledHeading>
+      </StyledBlock>
+      {invitePanelIsLoding ? (
+        <InvitePanelLoader />
+      ) : (
+        <>
+          {scrollAllPanelContent ? (
+            <div className="invite-panel-body" ref={invitePanelBodyRef}>
+              <Scrollbar>{bodyInvitePanel}</Scrollbar>
+            </div>
+          ) : (
+            bodyInvitePanel
+          )}
+          {hasInvitedUsers && (
+            <StyledButtons>
+              <Button
+                className="send-invitation"
+                scale={true}
+                size={"normal"}
+                isDisabled={hasErrors}
+                primary
+                onClick={onClickSend}
+                label={t("SendInvitation")}
+                isLoading={isLoading}
+              />
+              <Button
+                className="cancel-button"
+                scale={true}
+                size={"normal"}
+                onClick={onClose}
+                label={t("Common:CancelButton")}
+                isDisabled={isLoading}
+              />
+            </StyledButtons>
+          )}
+        </>
+      )}
+    </>
+  );
+
   const invitePanelComponent = (
-    <StyledInvitePanel hasInvitedUsers={hasInvitedUsers}>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        isAside={true}
-        zIndex={isMobileOnly ? 10 : 210}
-      />
-      <Aside
-        className="invite_panel"
-        visible={visible}
-        onClose={onClose}
-        withoutBodyScroll
-        zIndex={310}
-      >
-        <StyledBlock>
-          <StyledHeading>{t("Common:InviteUsers")}</StyledHeading>
-        </StyledBlock>
-
-        {scrollAllPanelContent ? (
-          <div className="invite-panel-body">
-            <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
-          </div>
-        ) : (
-          bodyInvitePanel
-        )}
-
-        {hasInvitedUsers && (
-          <StyledButtons>
-            <Button
-              className="send-invitation"
-              scale={true}
-              size={"normal"}
-              isDisabled={hasErrors}
-              primary
-              onClick={onClickSend}
-              label={t("SendInvitation")}
-              isLoading={isLoading}
-            />
-            <Button
-              className="cancel-button"
-              scale={true}
-              size={"normal"}
-              onClick={onClose}
-              label={t("Common:CancelButton")}
-              isDisabled={isLoading}
-            />
-          </StyledButtons>
-        )}
-      </Aside>
+    <StyledInvitePanel
+      id="InvitePanelWrapper"
+      hasInvitedUsers={hasInvitedUsers}
+      scrollAllPanelContent={scrollAllPanelContent}
+      addUsersPanelVisible={addUsersPanelVisible}
+      ref={invitePanelWrapper}
+    >
+      {isMobileView ? (
+        <div className="invite_panel" ref={invitePanelRef}>
+          <StyledControlContainer onClick={onClose}>
+            <StyledCrossIconMobile />
+          </StyledControlContainer>
+          {invitePanelNode}
+        </div>
+      ) : (
+        <>
+          <Backdrop
+            onClick={onClose}
+            visible={visible}
+            isAside={true}
+            zIndex={currentDeviceType === DeviceType.mobile ? 10 : 210}
+          />
+          <Aside
+            className="invite_panel"
+            visible={visible}
+            onClose={onClose}
+            withoutBodyScroll
+            zIndex={310}
+          >
+            {invitePanelNode}
+          </Aside>
+        </>
+      )}
     </StyledInvitePanel>
   );
 
@@ -337,11 +459,13 @@ const InvitePanel = ({
     );
   };
 
-  return isMobileOnly ? renderPortalInvitePanel() : invitePanelComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortalInvitePanel()
+    : invitePanelComponent;
 };
 
 export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   const { getUsersByQuery, inviteUsers, getUsersList } = peopleStore.usersStore;
   const { filter } = peopleStore.filterStore;
@@ -366,6 +490,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     invitePanelOptions,
     setInviteItems,
     setInvitePanelOptions,
+    setInviteLanguage,
   } = dialogsStore;
 
   const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -373,6 +498,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
 
   return {
     folders,
+    setInviteLanguage,
     getUsersByQuery,
     getRoomSecurityInfo,
     inviteItems,
@@ -396,6 +522,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     roomsView,
     getUsersList,
     filter,
+    currentDeviceType,
   };
 })(
   withTranslation([
@@ -404,5 +531,6 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     "Translations",
     "Common",
     "InfoPanel",
+    "PeopleSelector",
   ])(observer(InvitePanel))
 );

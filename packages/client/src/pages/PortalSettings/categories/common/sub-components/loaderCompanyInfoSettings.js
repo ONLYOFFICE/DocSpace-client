@@ -1,6 +1,5 @@
-import React from "react";
-import Loaders from "@docspace/common/components/Loaders";
-import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import styled, { css } from "styled-components";
 
 const StyledLoader = styled.div`
   .item {
@@ -22,7 +21,14 @@ const StyledLoader = styled.div`
   }
 
   .save {
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 `;
 
@@ -30,62 +36,62 @@ const LoaderCompanyInfoSettings = () => {
   return (
     <StyledLoader>
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="179px"
           height="22px"
           className="loader-header"
         />
-        <Loaders.Rectangle width="419px" height="22px" />
+        <RectangleSkeleton width="419px" height="22px" />
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="99px"
           height="20px"
           className="loader-label"
         />
-        <Loaders.Rectangle width="433px" height="32px" />
+        <RectangleSkeleton width="433px" height="32px" />
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="35px"
           height="20px"
           className="loader-label"
         />
-        <Loaders.Rectangle width="433px" height="32px" />
+        <RectangleSkeleton width="433px" height="32px" />
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="40px"
           height="20px"
           className="loader-label"
         />
-        <Loaders.Rectangle width="433px" height="32px" />
+        <RectangleSkeleton width="433px" height="32px" />
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="51px"
           height="20px"
           className="loader-label"
         />
-        <Loaders.Rectangle width="433px" height="32px" />
+        <RectangleSkeleton width="433px" height="32px" />
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="51px"
           height="20px"
           className="loader-label"
         />
-        <Loaders.Rectangle width="433px" height="32px" />
+        <RectangleSkeleton width="433px" height="32px" />
       </div>
 
       <div className="button">
-        <Loaders.Rectangle width="86px" height="32px" className="save" />
-        <Loaders.Rectangle width="170px" height="32px" />
+        <RectangleSkeleton width="86px" height="32px" className="save" />
+        <RectangleSkeleton width="170px" height="32px" />
       </div>
     </StyledLoader>
   );

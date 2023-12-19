@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "dokumenti",
+  "ErrorConnectionLost": "Zudis savienojums",
   "FileLocation": "Atvērt faila atrašanās vietu",
   "FileName": "Faila nosaukums",
   "ImageFileType": "attēli",

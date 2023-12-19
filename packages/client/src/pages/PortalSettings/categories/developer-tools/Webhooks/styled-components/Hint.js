@@ -3,13 +3,12 @@ import styled, { css } from "styled-components";
 export const Hint = styled.div`
   box-sizing: border-box;
   padding: 8px 12px;
-  background: ${(props) => (props.backgroundColor ? props.backgroundColor : "#f8f7bf")};
+  background: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "#f8f7bf"};
   color: ${(props) => (props.color ? props.color : "initial")};
   border-radius: 6px;
-  font-family: "Open Sans";
-  font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 
   position: relative;
@@ -21,6 +20,6 @@ export const Hint = styled.div`
       position: absolute;
       z-index: 2;
 
-      width: 320px;
+      width: calc(100% - 32px);
     `}
 `;

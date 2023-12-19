@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "@docspace/components/utils/device";
 import NoUserSelect from "@docspace/components/utils/commonStyles";
 
@@ -18,40 +17,32 @@ const StyledSectionHeader = styled.div`
     height: 61px;
     min-height: 61px;
 
+    ${({ isFormGallery }) =>
+      isFormGallery &&
+      css`
+        height: 69px;
+        min-height: 69px;
+      `}
+
     .header-container {
       margin-bottom: 1px;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
   }
 
-  ${isMobile &&
-  css`
-    height: 61px;
-    min-height: 61px;
-  `}
-
   @media ${mobile} {
     height: 53px;
     min-height: 53px;
   }
 
-  ${isMobileOnly &&
-  css`
-    height: 53px;
-    min-height: 53px;
-  `}
-
-  ${({ isTrashFolder, isEmptyPage }) =>
-    isTrashFolder &&
-    !isEmptyPage &&
-    css`
-      @media ${tablet} {
-        height: 109px;
-        min-height: 109px;
-      }
-    `}
-
-  padding-right: 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-left: 20px;
+        `
+      : css`
+          padding-right: 20px;
+        `}
 
   box-sizing: border-box;
 
@@ -68,30 +59,28 @@ const StyledSectionHeader = styled.div`
   }
 
   @media ${tablet} {
-    padding-right: 16px;
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 16px;
+            margin-left: 0px;
+          `
+        : css`
+            padding-right: 16px;
+            margin-right: 0px;
+          `}
   }
-
-  ${isMobile &&
-  css`
-    padding-right: 0 !important;
-    margin-right: -16px !important;
-  `}
 
   @media ${mobile} {
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 0px;
+          `
+        : css`
+            margin-right: 0px;
+          `}
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100vw !important;
-    max-width: 100vw !important;
-
-    padding-right: 16px !important;
-
-    margin-bottom: ${(props) =>
-      props.settingsStudio ? "8px !important" : "0"};
-  `}
 `;
 
 StyledSectionHeader.defaultProps = { theme: Base };
@@ -102,11 +91,10 @@ const SectionHeader = (props) => {
     settingsStudio = false,
     className,
     isEmptyPage,
+    isTrashFolder,
+    isFormGallery,
     ...rest
   } = props;
-
-  const pathname = window.location.pathname.toLowerCase();
-  const isTrashFolder = pathname.indexOf("trash") !== -1;
 
   return (
     <StyledSectionHeader
@@ -115,6 +103,7 @@ const SectionHeader = (props) => {
       viewAs={viewAs}
       settingsStudio={settingsStudio}
       isTrashFolder={isTrashFolder}
+      isFormGallery={isFormGallery}
       {...rest}
     />
   );

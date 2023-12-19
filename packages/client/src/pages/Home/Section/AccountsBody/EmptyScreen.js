@@ -33,11 +33,7 @@ const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
         headerText={title}
         descriptionText={description}
         buttons={
-          <Grid
-            marginProp="13px 0"
-            gridColumnGap="8px"
-            columnsProp={["12px 1fr"]}
-          >
+          <Grid gridColumnGap="8px" columnsProp={["12px 1fr"]}>
             {
               <>
                 <Box>

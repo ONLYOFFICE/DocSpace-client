@@ -2,9 +2,8 @@
 import PersonSvgUrl from "PUBLIC_DIR/images/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
-import React, { useEffect } from "react";
+
 import { useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import { FolderType, RoomSearchArea } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
@@ -13,14 +12,12 @@ import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import IconButton from "@docspace/components/icon-button";
-import Loaders from "@docspace/common/components/Loaders";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import FilesFilter from "@docspace/common/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
 import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
@@ -36,13 +33,7 @@ import EmptyScreenTrashSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_trash_dar
 import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?url";
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
-import { showLoader, hideLoader } from "./EmptyFolderContainerUtils";
-
-const StyledPlusIcon = styled(PlusIcon)`
-  path {
-    fill: #657077;
-  }
-`;
+import CommonButtons from "./sub-components/CommonButtons";
 
 const RootFolderContainer = (props) => {
   const {
@@ -182,7 +173,10 @@ const RootFolderContainer = (props) => {
         return {
           headerText: emptyScreenHeader,
           descriptionText: trashDescription,
-          style: { gridColumnGap: "39px", gridTemplateColumns: "150px" },
+          style: {
+            gridColumnGap: "39px",
+            marginTop: 32,
+          },
           imageSrc: theme.isBase
             ? EmptyScreenTrashSvgUrl
             : EmptyScreenTrashSvgDarkUrl,
@@ -246,72 +240,19 @@ const RootFolderContainer = (props) => {
   );
 
   const commonButtons = (
-    <span>
-      <div className="empty-folder_container-links">
-        <StyledPlusIcon
-          className="plus-document empty-folder_container-image"
-          data-format="docx"
-          onClick={onCreate}
-          alt="plus_icon"
-        />
-
-        <Box className="flex-wrapper_container">
-          <Link
-            id="document"
-            data-format="docx"
-            onClick={onCreate}
-            {...linkStyles}
-          >
-            {t("Document")},
-          </Link>
-          <Link
-            id="spreadsheet"
-            data-format="xlsx"
-            onClick={onCreate}
-            {...linkStyles}
-          >
-            {t("Spreadsheet")},
-          </Link>
-          <Link
-            id="presentation"
-            data-format="pptx"
-            onClick={onCreate}
-            {...linkStyles}
-          >
-            {t("Presentation")},
-          </Link>
-          <Link
-            id="form-template"
-            data-format="docxf"
-            onClick={onCreate}
-            {...linkStyles}
-          >
-            {t("Translations:NewForm")}
-          </Link>
-        </Box>
-      </div>
-
-      <div className="empty-folder_container-links">
-        <StyledPlusIcon
-          className="plus-folder empty-folder_container-image"
-          onClick={onCreate}
-          alt="plus_icon"
-        />
-        <Link id="folder" {...linkStyles} onClick={onCreate}>
-          {t("Folder")}
-        </Link>
-      </div>
-    </span>
+    <CommonButtons onCreate={onCreate} linkStyles={linkStyles} isRoot />
   );
 
   const trashButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container-image"
-        src={PersonSvgUrl}
-        alt="person_icon"
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
       />
+
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("GoToPersonal")}
       </Link>
@@ -320,12 +261,14 @@ const RootFolderContainer = (props) => {
 
   const roomsButtons = (
     <div className="empty-folder_container-links">
-      <img
-        className="empty-folder_container_plus-image"
-        src={PlusSvgUrl}
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
         onClick={onCreateRoom}
-        alt="plus_icon"
+        iconName={PlusSvgUrl}
+        isFill
       />
+
       <Link onClick={onCreateRoom} {...linkStyles}>
         {t("CreateRoom")}
       </Link>
@@ -380,7 +323,6 @@ const RootFolderContainer = (props) => {
         headerText={headerText}
         isEmptyPage={isEmptyPage}
         sectionWidth={sectionWidth}
-        style={{ marginTop: 32 }}
         {...emptyFolderProps}
       />
     )
@@ -395,12 +337,8 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const {
-      isDesktopClient,
-      isEncryptionSupport,
-      organizationName,
-      theme,
-    } = auth.settingsStore;
+    const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
+      auth.settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 

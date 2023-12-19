@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import NoUserSelect from "../utils/commonStyles";
 import Base from "../themes/base";
-import DropDown from "../drop-down";
 
 const hoveredCss = css`
   background-color: ${(props) => props.theme.mainButton.hoverBackgroundColor};
@@ -33,15 +32,6 @@ const GroupMainButton = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 `;
-
-const StyledDropDown = styled(DropDown)`
-  width: ${(props) => props.theme.mainButton.dropDown.width};
-  top: ${(props) => props.theme.mainButton.dropDown.top};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-StyledDropDown.defaultProps = { theme: Base };
 
 const StyledMainButton = styled.div`
   ${NoUserSelect}
@@ -76,7 +66,8 @@ const StyledMainButton = styled.div`
 
   .main-button_text {
     display: inline;
-    font-size: ${(props) => props.theme.mainButton.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.mainButton.fontSize)};
     font-weight: ${(props) => props.theme.mainButton.fontWeight};
     color: ${(props) =>
       !props.isDisabled
@@ -95,4 +86,4 @@ const StyledMainButton = styled.div`
 `;
 StyledMainButton.defaultProps = { theme: Base };
 
-export { StyledMainButton, StyledDropDown, GroupMainButton };
+export { StyledMainButton, GroupMainButton };

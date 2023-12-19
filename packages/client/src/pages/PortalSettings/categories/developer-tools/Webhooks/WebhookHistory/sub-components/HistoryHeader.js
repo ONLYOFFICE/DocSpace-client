@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
@@ -10,10 +11,14 @@ import Headline from "@docspace/common/components/Headline";
 import IconButton from "@docspace/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet } from "@docspace/components/utils/device";
+import {
+  tablet,
+  mobile,
+  isTablet,
+  isMobile,
+} from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import DropDownItem from "@docspace/components/drop-down-item";
 
 import toastr from "@docspace/components/toast/toastr";
@@ -21,6 +26,8 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import FloatingButton from "@docspace/components/floating-button";
+
+import Base from "@docspace/components/themes/base";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -30,47 +37,51 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 70px;
+  min-height: 53px;
   flex-wrap: wrap;
 
-  ${() =>
-    isMobile &&
-    css`
-      margin-bottom: 11px;
-    `}
-
-  ${() =>
-    isMobileOnly &&
-    css`
-      margin-top: 7px;
-      margin-left: -14px;
-      padding-left: 14px;
-      margin-right: -14px;
-      padding-right: 14px;
-    `}
+  @media ${mobile} {
+    margin-left: -14px;
+    padding-left: 14px;
+    margin-right: -14px;
+    padding-right: 14px;
+  }
 
   .arrow-button {
-    margin-right: 18.5px;
+    margin-inline-end: 17px;
 
     @media ${tablet} {
-      padding: 8px 0 8px 8px;
-      margin-left: -8px;
+      padding-block: 8px;
+      padding-inline: 8px 0;
+      margin-inline-start: -8px;
     }
 
-    ${() =>
-      isMobileOnly &&
-      css`
-        margin-right: 13px;
-      `}
+    @media ${mobile} {
+      margin-inline-end: 13px;
+    }
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
   }
 
   .headline {
-    font-size: 18px;
-    margin-right: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    margin-inline-end: 16px;
+
+    @media ${tablet} {
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    }
+    @media ${mobile} {
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    }
   }
 
   .table-container_group-menu {
-    margin: 0 0 0 -20px;
+    margin-block: 0;
+    margin-inline: -20px 0;
+
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     flex: 0 0 auto;
@@ -81,28 +92,31 @@ const HeaderContainer = styled.div`
     .combo-button_selected-icon {
       svg {
         path {
-          fill: ${(props) => (props.isDisabled ? "#d0d5da" : "#333")};
+          fill: ${(props) =>
+            props.isDisabled ? "#d0d5da" : props.theme.color};
         }
       }
     }
 
-    ${() =>
-      isMobile &&
-      css`
-        height: 60px;
-        margin: 0 0 0 -16px;
-        width: calc(100% + 32px);
-      `}
-    ${() =>
-      isMobileOnly &&
-      css`
-        position: absolute;
-        height: 48px;
-        margin: -35px 0 0 -17px;
-        width: calc(100% + 32px);
-      `}
+    @media ${tablet} {
+      height: 60px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+      top: 5px;
+    }
+    @media ${mobile} {
+      position: absolute;
+      height: 48px;
+      margin-block: -17px 0;
+      margin-inline: -17px 0;
+      width: 100%;
+      top: 10px;
+    }
   }
 `;
+
+HeaderContainer.defaultProps = { theme: Base };
 
 const HistoryHeader = (props) => {
   const {
@@ -154,7 +168,7 @@ const HistoryHeader = (props) => {
         <b>{t("Common:Done")}</b>
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastr.error(error);
     } finally {
       setRetryPendingFalse();
@@ -236,7 +250,7 @@ const HistoryHeader = (props) => {
 
   return (
     <HeaderContainer isDisabled={isRetryPending}>
-      {isMobileOnly ? (
+      {isMobile() ? (
         <>
           {isGroupMenuVisible && <GroupMenu />}
           <NavigationHeader />
@@ -247,7 +261,8 @@ const HistoryHeader = (props) => {
         <NavigationHeader />
       )}
 
-      {isPendingVisible && <FloatingButton icon="refresh" />}
+      {isPendingVisible &&
+        createPortal(<FloatingButton icon="refresh" />, document.body)}
     </HeaderContainer>
   );
 };

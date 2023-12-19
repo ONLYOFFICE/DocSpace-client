@@ -1,22 +1,14 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect
-} from"react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import {
-  ButtonsWrapper,
-  LoginFormWrapper,
-  LoginContent
-} from "./StyledLogin";
+import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
 import Text from "@docspace/components/text";
 import SocialButton from "@docspace/components/social-button";
 import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-  checkIsSSR
+  checkIsSSR,
 } from "@docspace/common/utils";
 import { providersData } from "@docspace/common/constants";
 import Link from "@docspace/components/link";
@@ -26,23 +18,25 @@ import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import FormWrapper from "@docspace/components/form-wrapper";
 import Register from "./sub-components/register-container";
-import {
-  ColorTheme,
-  ThemeType
-} from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/components/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern } from "@docspace/common/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath } from "@docspace/common/utils";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
 import { TenantStatus } from "@docspace/common/constants";
+
+const themes = {
+  Dark: Dark,
+  Base: Base,
+};
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
   theme: IUserTheme;
   setTheme: (theme: IUserTheme) => void;
+  isBaseTheme: boolean;
 }
 
 const Login: React.FC<ILoginProps> = ({
@@ -55,6 +49,7 @@ const Login: React.FC<ILoginProps> = ({
   theme,
   setTheme,
   logoUrls,
+  isBaseTheme,
 }) => {
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
@@ -82,21 +77,12 @@ const Login: React.FC<ILoginProps> = ({
   const ssoUrl = capabilities?.ssoUrl || "";
   const { t } = useTranslation(["Login", "Common"]);
   const mounted = useMounted();
-  const systemTheme = typeof window !== "undefined" && useThemeDetector();
 
   useIsomorphicLayoutEffect(() => {
-    const theme =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? Dark
-        : Base;
+    const systemTheme = getSystemTheme();
+    const theme = themes[systemTheme];
     setTheme(theme);
   }, []);
-
-  useIsomorphicLayoutEffect(() => {
-    if (systemTheme === "Base") setTheme(Base);
-    else setTheme(Dark);
-  }, [systemTheme]);
 
   const ssoExists = () => {
     if (ssoUrl) return true;
@@ -132,7 +118,7 @@ const Login: React.FC<ILoginProps> = ({
   };
 
   const onSocialButtonClick = useCallback(
-    (e: HTMLElementEvent<HTMLButtonElement | HTMLElement>) => {
+    async (e: HTMLElementEvent<HTMLButtonElement | HTMLElement>) => {
       const { target } = e;
       let targetElement = target;
 
@@ -143,9 +129,14 @@ const Login: React.FC<ILoginProps> = ({
         targetElement = target.parentElement;
       }
       const providerName = targetElement.dataset.providername;
-      const url = targetElement.dataset.url || "";
+      let url = targetElement.dataset.url || "";
 
       try {
+        //Lifehack for Twitter
+        if (providerName == "twitter") {
+          url += "authCallback";
+        }
+
         const tokenGetterWin = isDesktopEditor
           ? (window.location.href = url)
           : window.open(
@@ -154,17 +145,18 @@ const Login: React.FC<ILoginProps> = ({
               "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no"
             );
 
-        getOAuthToken(tokenGetterWin).then((code: string) => {
-          const token = window.btoa(
-            JSON.stringify({
-              auth: providerName,
-              mode: "popup",
-              callback: "authCallback",
-            })
-          );
-          if (tokenGetterWin && typeof tokenGetterWin !== "string")
-            tokenGetterWin.location.href = getLoginLink(token, code);
-        });
+        const code: string = await getOAuthToken(tokenGetterWin);
+
+        const token = window.btoa(
+          JSON.stringify({
+            auth: providerName,
+            mode: "popup",
+            callback: "authCallback",
+          })
+        );
+
+        if (tokenGetterWin && typeof tokenGetterWin !== "string")
+          tokenGetterWin.location.href = getLoginLink(token, code);
       } catch (err) {
         console.log(err);
       }
@@ -179,9 +171,8 @@ const Login: React.FC<ILoginProps> = ({
         if (!providersData[item.provider]) return;
         if (index > 1) return;
 
-        const { icon, label, iconOptions, className } = providersData[
-          item.provider
-        ];
+        const { icon, label, iconOptions, className } =
+          providersData[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -210,8 +201,12 @@ const Login: React.FC<ILoginProps> = ({
     setMoreAuthVisible(false);
   };
 
-  const onRecoverDialogVisible = () => {
-    setRecoverDialogVisible(!recoverDialogVisible);
+  const openRecoverDialog = () => {
+    setRecoverDialogVisible(true);
+  };
+
+  const closeRecoverDialog = () => {
+    setRecoverDialogVisible(false);
   };
 
   const bgPattern = getBgPattern(currentColorScheme?.id);
@@ -235,7 +230,7 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeType.LinkForgotPassword} theme={theme}>
+        <ColorTheme themeId={ThemeType.LinkForgotPassword}>
           <img src={logoUrl} className="logo-wrapper" />
           <Text
             fontSize="23px"
@@ -271,11 +266,13 @@ const Login: React.FC<ILoginProps> = ({
               </div>
             )}
             <LoginForm
+              isBaseTheme={isBaseTheme}
+              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
               isDesktop={!!isDesktopEditor}
               isLoading={isLoading}
               hashSettings={portalSettings?.passwordHash}
               setIsLoading={setIsLoading}
-              onRecoverDialogVisible={onRecoverDialogVisible}
+              openRecoverDialog={openRecoverDialog}
               match={match}
               enableAdmMess={enableAdmMess}
               cookieSettingsEnabled={cookieSettingsEnabled}
@@ -294,7 +291,7 @@ const Login: React.FC<ILoginProps> = ({
 
           <RecoverAccessModalDialog
             visible={recoverDialogVisible}
-            onClose={onRecoverDialogVisible}
+            onClose={closeRecoverDialog}
             textBody={t("RecoverTextBody")}
             emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
             id="recover-access-modal"
@@ -319,5 +316,6 @@ export default inject(({ loginStore }) => {
   return {
     theme: loginStore.theme,
     setTheme: loginStore.setTheme,
+    isBaseTheme: loginStore.theme.isBase,
   };
 })(observer(Login));

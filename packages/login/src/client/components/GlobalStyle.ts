@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     ${(props: IGlobalStyleProps) => props?.fonts}
     font-family: 'Open Sans', sans-serif, Arial;
-    font-size: 13px;
+    font-size: ${(props) => props.theme?.getCorrectFontSize("13px")};
     overscroll-behavior: none;
   }
 
@@ -19,7 +19,11 @@ const GlobalStyle = createGlobalStyle`
 
     .pageLoader {
       position: fixed;
-      left: calc(50% - 20px);
+      
+      ${({ theme }) =>
+        theme?.interfaceDirection === "rtl"
+          ? `right: calc(50% - 20px);`
+          : `left: calc(50% - 20px);`}
       top: 35%;
     }
   }

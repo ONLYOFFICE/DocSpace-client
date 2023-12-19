@@ -7,7 +7,7 @@ import { checkFilterInstance, decodeDisplayName } from "../../utils";
 import { getRooms } from "../rooms";
 import RoomsFilter from "../rooms/filter";
 
-export function openEdit(fileId, version, doc, view, shareKey) {
+export function openEdit(fileId, version, doc, view, headers = null, shareKey) {
   const params = []; // doc ? `?doc=${doc}` : "";
 
   if (view) {
@@ -33,6 +33,8 @@ export function openEdit(fileId, version, doc, view, shareKey) {
     url: `/files/file/${fileId}/openedit${paramsString}`,
   };
 
+  if (headers) options.headers = headers;
+
   return request(options);
 }
 
@@ -47,13 +49,13 @@ export function getReferenceData(object) {
   return request(options);
 }
 
-export function getFolderInfo(folderId) {
+export function getFolderInfo(folderId, skipRedirect = false) {
   const options = {
     method: "get",
     url: `/files/folder/${folderId}`,
   };
 
-  return request(options);
+  return request(options, skipRedirect);
 }
 
 export function getFolderPath(folderId) {
@@ -536,8 +538,9 @@ export function removeShareFiles(fileIds, folderIds) {
   });
 }
 
-export function setFileOwner(folderIds, fileIds, userId) {
-  const data = { folderIds, fileIds, userId };
+export function setFileOwner(userId, folderIds) {
+  const data = { userId, folderIds };
+
   return request({
     method: "post",
     url: "/files/owner",
@@ -551,9 +554,10 @@ export function startUploadSession(
   fileSize,
   relativePath,
   encrypted,
-  createOn
+  createOn,
+  CreateNewIfExist
 ) {
-  const data = { fileName, fileSize, relativePath, encrypted, createOn };
+  const data = { fileName, fileSize, relativePath, encrypted, createOn, CreateNewIfExist };
   return request({
     method: "post",
     url: `/files/${folderId}/upload/create_session`,
@@ -562,6 +566,10 @@ export function startUploadSession(
 }
 
 export function uploadFile(url, data) {
+  return axios.post(url, data);
+}
+
+export function uploadBackup(url, data) {
   return axios.post(url, data);
 }
 
@@ -587,7 +595,7 @@ export function checkFileConflicts(destFolderId, folderIds, fileIds) {
 
   return request({
     method: "get",
-    url: `/files/fileops/move/full?destFolderId=${destFolderId}${paramsString}`,
+    url: `/files/fileops/move?destFolderId=${destFolderId}${paramsString}`,
   });
 }
 
@@ -596,7 +604,8 @@ export function copyToFolder(
   folderIds,
   fileIds,
   conflictResolveType,
-  deleteAfter
+  deleteAfter,
+  content = false
 ) {
   const data = {
     destFolderId,
@@ -604,6 +613,7 @@ export function copyToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    content,
   };
   return request({ method: "put", url: "/files/fileops/copy", data });
 }
@@ -793,8 +803,12 @@ export function openConnectWindow(service) {
   return request({ method: "get", url: `thirdparty/${service}` });
 }
 
-export function getSettingsFiles() {
-  return request({ method: "get", url: `/files/settings` });
+export function getSettingsFiles(headers = null) {
+  const options = { method: "get", url: `/files/settings` };
+
+  if (headers) options.headers = headers;
+
+  return request(options);
 }
 
 export function markAsFavorite(ids) {
@@ -817,10 +831,6 @@ export function removeFromFavorite(ids) {
   };
 
   return request(options);
-}
-
-export function getDocServiceUrl() {
-  return request({ method: "get", url: `/files/docservice` });
 }
 
 export function getIsEncryptionSupport() {
@@ -996,6 +1006,49 @@ export function sendEditorNotify(fileId, actionLink, emails, message) {
       actionLink,
       emails,
       message,
+    },
+  });
+}
+
+export function getDocumentServiceLocation(version) {
+  const params = {};
+
+  if (version !== undefined) {
+    params.version = version;
+  }
+
+  return request({
+    method: "get",
+    url: `/files/docservice`,
+    params,
+  });
+}
+
+export function changeDocumentServiceLocation(
+  docServiceUrl,
+  internalUrl,
+  portalUrl
+) {
+  return request({
+    method: "put",
+    url: `files/docservice`,
+    data: {
+      DocServiceUrl: docServiceUrl,
+      DocServiceUrlInternal: internalUrl,
+      DocServiceUrlPortal: portalUrl,
+    },
+  });
+}
+
+export function checkIsFileExist(
+  folderId,
+  fileTitles,
+) {
+  return request({
+    method: "post",
+    url: `files/${folderId}/upload/check`,
+    data: {
+      filesTitle: fileTitles
     },
   });
 }

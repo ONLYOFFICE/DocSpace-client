@@ -55,6 +55,8 @@ const FileTile = (props) => {
     withShiftSelect,
     isHighlight,
     thumbnails1280x720,
+    onDragOver,
+    onDragLeave,
   } = props;
 
   const temporaryExtension =
@@ -75,13 +77,22 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
-      defaultRoomIcon={
-        item.isRoom && item.icon ? item.icon : item.defaultRoomIcon
-      }
+      title={item.title}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
     />
   );
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
+
+  const onDragOverEvent = (_, e) => {
+    onDragOver && onDragOver(e);
+  };
+
+  const onDragLeaveEvent = (e) => {
+    onDragLeave && onDragLeave(e);
+  };
 
   return (
     <div ref={props.selectableRef} id={id}>
@@ -92,6 +103,8 @@ const FileTile = (props) => {
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging && isDragging}
+        onDragOver={onDragOverEvent}
+        onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
       >
         <Tile

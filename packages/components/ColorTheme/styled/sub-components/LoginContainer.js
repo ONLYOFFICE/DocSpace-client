@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
-import Base from "@docspace/components/themes/base";
+import { tablet, mobile } from "../../../utils/device";
+import Base from "../../../themes/base";
 
 const LoginContainer = styled.div`
   user-select: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 56px auto 0 auto;
+  //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
 
@@ -27,9 +27,10 @@ const LoginContainer = styled.div`
     max-width: 480px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     margin: 0 auto 0 auto;
-    max-width: 311px;
+    max-width: 100%;
+    width: calc(100% - 32px);
   }
 
   .socialButton {
@@ -52,11 +53,12 @@ const LoginContainer = styled.div`
 
   .greeting-title {
     width: 100%;
+    max-width: 480px;
     padding-bottom: 32px;
     min-height: 32px;
     color: ${(props) => props.theme.login.headerColor};
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       padding-top: 32px;
     }
   }
@@ -72,18 +74,10 @@ const LoginContainer = styled.div`
 
   .line {
     display: flex;
-    width: 320px;
+    width: 100%;
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
-
-    @media ${tablet} {
-      width: 416px;
-    }
-
-    @media ${hugeMobile} {
-      width: 311px;
-    }
   }
 
   .line:before,
@@ -115,7 +109,7 @@ const LoginContainer = styled.div`
     padding: 14px 12px;
     text-align: center;
     font-weight: 600;
-    font-size: 11px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
     line-height: 12px;
     color: #333;
     svg {
@@ -159,7 +153,10 @@ const LoginContainer = styled.div`
           align-items: flex-start;
 
           svg {
-            margin-right: 8px !important;
+            ${({ theme }) =>
+              theme.interfaceDirection === "rtl"
+                ? `margin-left: 8px !important;`
+                : `margin-right: 8px !important;`}
             rect {
               fill: ${(props) => props.theme.checkbox.fillColor};
               stroke: ${(props) => props.theme.checkbox.borderColor};
@@ -250,7 +247,7 @@ const LoginContainer = styled.div`
       }
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       display: none;
     }
   }
@@ -259,7 +256,7 @@ const LoginContainer = styled.div`
     color: ${(props) => props.theme.login.titleColor};
     margin-bottom: 16px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       margin-top: 32px;
     }
   }

@@ -1,6 +1,5 @@
 {
   "AdditionalSections": "Dodatni razdelki",
-  "ConnectEmpty": "Tu ni ničesar",
   "DisplayFavorites": "Prikaži priljubljene",
   "DisplayNotification": "Prikažite obvestilo pri premikanju elementov v koš",
   "DisplayRecent": "Prikaži nedavne",
@@ -11,6 +10,5 @@
   "StoringFileVersion": "Shranjevanje različic datotek",
   "ThirdPartyAccounts": "Računi tretjih oseb",
   "ThirdPartyBtn": "Dovoli povezavo za shranjevanje tretjim osebam",
-  "UpdateOrCreate": "Posodobite različico datoteke za obstoječo datoteko z istim imenom. V nasprotnem primeru bo ustvarjena kopija datoteke.",
-  "UploadPluginsHere": "Tukaj naložite vtičnike"
+  "UpdateOrCreate": "Posodobite različico datoteke za obstoječo datoteko z istim imenom. V nasprotnem primeru bo ustvarjena kopija datoteke."
 }

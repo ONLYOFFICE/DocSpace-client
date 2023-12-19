@@ -1,6 +1,5 @@
-import React from "react";
-import Loaders from "@docspace/common/components/Loaders";
-import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import styled, { css } from "styled-components";
 
 const StyledLoader = styled.div`
   margin-top: 40px;
@@ -19,7 +18,14 @@ const StyledLoader = styled.div`
   }
 
   .checkbox {
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 
   .button {
@@ -27,7 +33,14 @@ const StyledLoader = styled.div`
   }
 
   .save {
-    padding-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 8px;
+          `
+        : css`
+            padding-right: 8px;
+          `}
   }
 `;
 
@@ -35,7 +48,7 @@ const LoaderAdditionalResources = () => {
   return (
     <StyledLoader>
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="166px"
           height="22px"
           className="loader-header"
@@ -43,7 +56,7 @@ const LoaderAdditionalResources = () => {
       </div>
 
       <div className="item">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           width="700px"
           height="20px"
           className="loader-description"
@@ -52,28 +65,28 @@ const LoaderAdditionalResources = () => {
 
       <div className="item">
         <div className="flex">
-          <Loaders.Rectangle width="16px" height="16px" className="checkbox" />
-          <Loaders.Rectangle width="166px" height="20px" />
+          <RectangleSkeleton width="16px" height="16px" className="checkbox" />
+          <RectangleSkeleton width="166px" height="20px" />
         </div>
       </div>
 
       <div className="item">
         <div className="flex">
-          <Loaders.Rectangle width="16px" height="16px" className="checkbox" />
-          <Loaders.Rectangle width="150px" height="20px" />
+          <RectangleSkeleton width="16px" height="16px" className="checkbox" />
+          <RectangleSkeleton width="150px" height="20px" />
         </div>
       </div>
 
       <div className="item">
         <div className="flex">
-          <Loaders.Rectangle width="16px" height="16px" className="checkbox" />
-          <Loaders.Rectangle width="157px" height="20px" />
+          <RectangleSkeleton width="16px" height="16px" className="checkbox" />
+          <RectangleSkeleton width="157px" height="20px" />
         </div>
       </div>
 
       <div className="button">
-        <Loaders.Rectangle width="86px" height="32px" className="save" />
-        <Loaders.Rectangle width="170px" height="32px" />
+        <RectangleSkeleton width="86px" height="32px" className="save" />
+        <RectangleSkeleton width="170px" height="32px" />
       </div>
     </StyledLoader>
   );

@@ -21,34 +21,40 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
-import MuteReactSvgUrl from "PUBLIC_DIR/images/mute.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
+import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
+import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
+
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
 import combineUrl from "@docspace/common/utils/combineUrl";
-import {
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { Events } from "@docspace/common/constants";
-import { getContextMenuItems } from "SRC_DIR/helpers/plugins";
+
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
+import { FolderType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/common/api/files/filter";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -66,6 +72,8 @@ class ContextOptionsStore {
   settingsStore;
   selectedFolderStore;
   publicRoomStore;
+  oformsStore;
+  pluginStore;
 
   linksIsLoading = false;
 
@@ -80,7 +88,9 @@ class ContextOptionsStore {
     versionHistoryStore,
     settingsStore,
     selectedFolderStore,
-    publicRoomStore
+    publicRoomStore,
+    oformsStore,
+    pluginStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -94,6 +104,8 @@ class ContextOptionsStore {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
+    this.oformsStore = oformsStore;
+    this.pluginStore = pluginStore;
   }
 
   onOpenFolder = (item) => {
@@ -196,6 +208,17 @@ class ContextOptionsStore {
     });
   };
 
+  onClickSubmitToFormGallery = (item) => {
+    if (item && !item.exst) {
+      const splitTitle = item.title.split(".");
+      item.title = splitTitle.slice(0, -1).join(".");
+      item.exst = splitTitle.length !== 1 ? `.${splitTitle.at(-1)}` : null;
+    }
+
+    this.dialogsStore.setFormItem(item);
+    this.dialogsStore.setSubmitToGalleryDialogVisible(true);
+  };
+
   onOpenLocation = (item) => {
     this.filesActionsStore.openLocationAction(item);
   };
@@ -205,10 +228,23 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
+  onRestoreAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+    console.log("Click");
+    this.dialogsStore.setRestorePanelVisible(true);
+  };
+
   onCopyAction = () => {
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    setIsMobileHidden(true);
+
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
@@ -216,10 +252,13 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
+    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(id + "", security);
     setIsVerHistoryPanel(true);
+    setIsMobileHidden(true);
   };
 
   finalizeVersion = (id) => {
@@ -291,7 +330,7 @@ class ContextOptionsStore {
     const needConvert = canConvert(item.fileExst);
 
     const canOpenPlayer =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const url = getItemUrl(
       item.id,
@@ -308,7 +347,7 @@ class ContextOptionsStore {
   onClickLinkEdit = (item) => {
     const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
     const canConvert =
-      item.viewAccessability?.Convert && item.security?.Convert;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
@@ -336,7 +375,9 @@ class ContextOptionsStore {
       : null;
 
     let tab =
-      !isDesktopClient && fileExst
+      !isDesktopClient &&
+      window.DocSpaceConfig?.editor?.openOnNewPage &&
+      fileExst
         ? window.open(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
@@ -361,7 +402,7 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
-    if (this.isPwa()) {
+    if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
       xhr.responseType = "blob";
@@ -387,6 +428,15 @@ class ContextOptionsStore {
 
   onClickDownloadAs = () => {
     this.dialogsStore.setDownloadDialogVisible(true);
+  };
+
+  onClickCreateRoom = (item) => {
+    this.filesActionsStore.setProcessCreatingRoomFromData(true);
+    const event = new Event(Events.ROOM_CREATE);
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
+    window.dispatchEvent(event);
   };
 
   onDuplicate = (item, t) => {
@@ -422,7 +472,8 @@ class ContextOptionsStore {
       this.dialogsStore;
     const { confirmDelete } = this.settingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
-    const { id: selectedFolderId } = this.selectedFolderStore;
+    const { id: selectedFolderId, getSelectedFolder } =
+      this.selectedFolderStore;
     const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
       this.filesStore;
 
@@ -457,7 +508,9 @@ class ContextOptionsStore {
         FolderRemoved: t("Files:FolderRemoved"),
       };
 
-      deleteAction(translations, [selectedFolderId], true).catch((err) =>
+      const selectedFolder = getSelectedFolder();
+
+      deleteAction(translations, [selectedFolder], true).catch((err) =>
         toastr.error(err)
       );
     }
@@ -469,7 +522,7 @@ class ContextOptionsStore {
     const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
       this.dialogsStore;
 
-    if (id === this.selectedFolderStore.id) {
+    if (id === this.selectedFolderStore.id && isFolder) {
       this.onClickDeleteSelectedFolder(t, isRoom);
 
       return;
@@ -560,67 +613,119 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onLoadLinks = async (t, item) => {
-    const promise = new Promise(async (resolve, reject) => {
-      let linksArray = [];
+  // onLoadLinks = async (t, item) => {
+  //   const promise = new Promise(async (resolve, reject) => {
+  //     let linksArray = [];
 
-      this.setLoaderTimer(true);
-      try {
-        const links = await this.publicRoomStore.fetchExternalLinks(item.id);
+  //     this.setLoaderTimer(true);
+  //     try {
+  //       const links = await this.publicRoomStore.fetchExternalLinks(item.id);
 
-        for (let link of links) {
-          const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
+  //       for (let link of links) {
+  //         const { id, title, shareLink, disabled, isExpired } = link.sharedTo;
 
-          if (!disabled && !isExpired) {
-            linksArray.push({
-              icon: InvitationLinkReactSvgUrl,
-              id,
-              key: `external-link_${id}`,
-              label: title,
-              onClick: () => {
-                copy(shareLink);
-                toastr.success(t("Files:LinkSuccessfullyCopied"));
-              },
+  //         if (!disabled && !isExpired) {
+  //           linksArray.push({
+  //             icon: InvitationLinkReactSvgUrl,
+  //             id,
+  //             key: `external-link_${id}`,
+  //             label: title,
+  //             onClick: () => {
+  //               copy(shareLink);
+  //               toastr.success(t("Translations:LinkCopySuccess"));
+  //             },
+  //           });
+  //         }
+  //       }
+
+  //       if (!linksArray.length) {
+  //         linksArray = [
+  //           {
+  //             id: "no-external-links-option",
+  //             key: "no-external-links",
+  //             label: !links.length
+  //               ? t("Files:NoExternalLinks")
+  //               : t("Files:AllLinksAreDisabled"),
+  //             disableColor: true,
+  //           },
+  //           !isMobile && {
+  //             key: "separator0",
+  //             isSeparator: true,
+  //           },
+  //           {
+  //             icon: SettingsReactSvgUrl,
+  //             id: "manage-option",
+  //             key: "manage-links",
+  //             label: t("Notifications:ManageNotifications"),
+  //             onClick: () => this.onShowInfoPanel(item, "info_members"),
+  //           },
+  //         ];
+  //       }
+
+  //       this.setLoaderTimer(false, () => resolve(linksArray));
+  //     } catch (error) {
+  //       toastr.error(error);
+  //       this.setLoaderTimer(false);
+  //       return reject(linksArray);
+  //     }
+  //   });
+
+  //   return promise;
+  // };
+
+  onLoadPlugins = (item) => {
+    const { contextOptions } = item;
+    const { enablePlugins } = this.authStore.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        if (contextOptions.includes(option.key)) {
+          const value = option.value;
+
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
+
+              setActiveFiles([item.id]);
+
+              await value.onClick(item.id);
+
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
+            }
+          };
+
+          if (value.fileExt) {
+            if (value.fileExt.includes(item.fileExst)) {
+              pluginItems.push({
+                key: option.key,
+                label: value.label,
+                icon: value.icon,
+                onClick,
+              });
+            }
+          } else {
+            pluginItems.push({
+              key: option.key,
+              label: value.label,
+              icon: value.icon,
+              onClick,
             });
           }
         }
+      });
+    }
 
-        if (!linksArray.length) {
-          linksArray = [
-            {
-              id: "no-external-links-option",
-              key: "no-external-links",
-              label: !links.length
-                ? t("Files:NoExternalLinks")
-                : t("Files:AllLinksAreDisabled"),
-              disableColor: true,
-            },
-            !isMobile && {
-              key: "separator0",
-              isSeparator: true,
-            },
-            {
-              icon: SettingsReactSvgUrl,
-              id: "manage-option",
-              key: "manage-links",
-              label: t("Notifications:ManageNotifications"),
-              onClick: () => this.onShowInfoPanel(item, "info_members"),
-            },
-          ];
-        }
+    this.setLoaderTimer(false);
 
-        this.setLoaderTimer(false, () => resolve(linksArray));
-      } catch (error) {
-        toastr.error(error);
-        this.setLoaderTimer(false);
-        return reject(linksArray);
-      }
-    });
-
-    return promise;
+    return pluginItems;
   };
 
-  onClickInviteUsers = (e) => {
+  onClickInviteUsers = (e, roomType) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
 
     const { action } = data;
@@ -635,7 +740,10 @@ class ContextOptionsStore {
         visible: true,
         roomId: action ? action : e,
         hideSelector: false,
-        defaultAccess: ShareAccessRights.ReadOnly,
+        defaultAccess:
+          roomType === RoomsType.PublicRoom
+            ? ShareAccessRights.RoomManager
+            : ShareAccessRights.ReadOnly,
       });
     }
   };
@@ -667,6 +775,10 @@ class ContextOptionsStore {
     } else {
       setRestoreRoomDialogVisible(true);
     }
+  };
+
+  onLeaveRoom = () => {
+    this.dialogsStore.setLeaveRoomDialogVisible(true);
   };
 
   onSelect = (item) => {
@@ -726,6 +838,63 @@ class ContextOptionsStore {
     }
   };
 
+  onCreateOform = (navigate) => {
+    this.authStore.infoPanelStore.setIsVisible(false);
+    const filesFilter = FilesFilter.getDefault();
+    filesFilter.folder = this.oformsStore.oformFromFolderId;
+    const filterUrlParams = filesFilter.toUrlParams();
+    const url = getCategoryUrl(
+      this.filesStore.categoryType,
+      filterUrlParams.folder
+    );
+
+    navigate(
+      combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterUrlParams}`
+      )
+    );
+  };
+
+  onShowOformTemplateInfo = (item) => {
+    this.authStore.infoPanelStore.setIsVisible(true);
+    this.oformsStore.setGallerySelected(item);
+  };
+
+  onSuggestOformChanges = (item) => {
+    const formTitle = item.attributes ? item.attributes.name_form : item.title;
+
+    window.location = `mailto:marketing@onlyoffice.com
+    ?subject=Suggesting changes for ${formTitle}
+    &body=Suggesting changes for ${formTitle}.
+  `;
+  };
+
+  getFormGalleryContextOptions = (item, t, navigate) => {
+    return [
+      {
+        key: "create",
+        label: t("Common:Create"),
+        onClick: () => this.onCreateOform(navigate),
+      },
+      {
+        key: "template-info",
+        label: t("FormGallery:TemplateInfo"),
+        onClick: () => this.onShowOformTemplateInfo(item),
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        key: "suggest-changes",
+        label: t("FormGallery:SuggestChanges"),
+        onClick: () => this.onSuggestOformChanges(item),
+      },
+    ];
+  };
+
   getRoomsRootContextOptions = (item, t) => {
     const { id, rootFolderId } = this.selectedFolderStore;
     const isRootRoom = item.isRoom && rootFolderId === id;
@@ -739,7 +908,7 @@ class ContextOptionsStore {
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: false,
+        disabled: this.publicRoomStore.isPublicRoom,
         "data-action": "pin",
         action: "pin",
       },
@@ -749,7 +918,7 @@ class ContextOptionsStore {
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: false,
+        disabled: this.publicRoomStore.isPublicRoom,
         "data-action": "unpin",
         action: "unpin",
       },
@@ -762,7 +931,7 @@ class ContextOptionsStore {
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: false,
+        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
         "data-action": "unmute",
         action: "unmute",
       },
@@ -772,7 +941,7 @@ class ContextOptionsStore {
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: false,
+        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
         "data-action": "mute",
         action: "mute",
       },
@@ -780,10 +949,9 @@ class ContextOptionsStore {
 
     return { pinOptions, muteOptions };
   };
+
   getFilesContextOptions = (item, t, isInfoPanel) => {
     const { contextOptions, isEditing } = item;
-
-    const { enablePlugins } = this.authStore.settingsStore;
 
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
@@ -791,7 +959,7 @@ class ContextOptionsStore {
     const isShareable = item.canShare;
 
     const isMedia =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     const hasInfoPanel = contextOptions.includes("show-info");
 
@@ -810,72 +978,71 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils()
-        ? onlyShowVersionHistory
-          ? [
-              {
-                id: "option_show-version-history",
-                key: "show-version-history",
-                label: t("ShowVersionHistory"),
-                icon: HistoryReactSvgUrl,
-                onClick: () => this.showVersionHistory(item.id, item.security),
-                disabled: false,
-              },
-            ]
-          : [
-              {
-                id: "option_version",
-                key: "version",
-                label: t("VersionHistory"),
-                icon: HistoryFinalizedReactSvgUrl,
-                items: [
-                  {
-                    id: "option_finalize-version",
-                    key: "finalize-version",
-                    label: t("FinalizeVersion"),
-                    icon: HistoryFinalizedReactSvgUrl,
-                    onClick: () =>
-                      isEditing
-                        ? this.onShowEditingToast(t)
-                        : this.finalizeVersion(item.id, item.security),
-                    disabled: false,
-                  },
-                  {
-                    id: "option_version-history",
-                    key: "show-version-history",
-                    label: t("ShowVersionHistory"),
-                    icon: HistoryReactSvgUrl,
-                    onClick: () =>
-                      this.showVersionHistory(item.id, item.security),
-                    disabled: false,
-                  },
-                ],
-              },
-            ]
-        : [
+    const versionActions = isDesktop()
+      ? onlyShowVersionHistory
+        ? [
             {
-              id: "option_finalize-version",
-              key: "finalize-version",
-              label: t("FinalizeVersion"),
-              icon: HistoryFinalizedReactSvgUrl,
-              onClick: () =>
-                isEditing
-                  ? this.onShowEditingToast(t)
-                  : this.finalizeVersion(item.id),
-              disabled: false,
-            },
-            {
-              id: "option_version-history",
+              id: "option_show-version-history",
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
               onClick: () => this.showVersionHistory(item.id, item.security),
               disabled: false,
             },
-          ];
+          ]
+        : [
+            {
+              id: "option_version",
+              key: "version",
+              label: t("VersionHistory"),
+              icon: HistoryFinalizedReactSvgUrl,
+              items: [
+                {
+                  id: "option_finalize-version",
+                  key: "finalize-version",
+                  label: t("FinalizeVersion"),
+                  icon: HistoryFinalizedReactSvgUrl,
+                  onClick: () =>
+                    isEditing
+                      ? this.onShowEditingToast(t)
+                      : this.finalizeVersion(item.id, item.security),
+                  disabled: false,
+                },
+                {
+                  id: "option_version-history",
+                  key: "show-version-history",
+                  label: t("ShowVersionHistory"),
+                  icon: HistoryReactSvgUrl,
+                  onClick: () =>
+                    this.showVersionHistory(item.id, item.security),
+                  disabled: false,
+                },
+              ],
+            },
+          ]
+      : [
+          {
+            id: "option_finalize-version",
+            key: "finalize-version",
+            label: t("FinalizeVersion"),
+            icon: HistoryFinalizedReactSvgUrl,
+            onClick: () =>
+              isEditing
+                ? this.onShowEditingToast(t)
+                : this.finalizeVersion(item.id),
+            disabled: false,
+          },
+          {
+            id: "option_version-history",
+            key: "show-version-history",
+            label: t("ShowVersionHistory"),
+            icon: HistoryReactSvgUrl,
+            onClick: () => this.showVersionHistory(item.id, item.security),
+            disabled: false,
+          },
+        ];
     const moveActions =
-      !isMobile && !isMobileUtils() && !isTabletUtils() && !isInfoPanel
+      isDesktop() && !isInfoPanel
         ? [
             {
               id: "option_move-or-copy",
@@ -1015,6 +1182,19 @@ class ContextOptionsStore {
       },
       separator0,
       {
+        id: "option_submit-to-gallery",
+        key: "submit-to-gallery",
+        label: t("Common:SubmitToFormGallery"),
+        icon: FormFileReactSvgUrl,
+        onClick: () => this.onClickSubmitToFormGallery(item),
+        isOutsideLink: true,
+        disabled: !item.security?.SubmitToFormGallery,
+      },
+      {
+        key: "separator-SubmitToGallery",
+        isSeparator: true,
+      },
+      {
         id: "option_reconnect-storage",
         key: "reconnect-storage",
         label: t("Common:ReconnectStorage"),
@@ -1035,7 +1215,7 @@ class ContextOptionsStore {
         key: "invite-users-to-room",
         label: t("Common:InviteUsers"),
         icon: PersonReactSvgUrl,
-        onClick: (e) => this.onClickInviteUsers(e),
+        onClick: (e) => this.onClickInviteUsers(e, item.roomType),
         disabled: false,
         action: item.id,
       },
@@ -1043,18 +1223,38 @@ class ContextOptionsStore {
       {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("LinkForRoomMembers"),
+        label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          ((item.roomType === RoomsType.PublicRoom ||
+            item.roomType === RoomsType.CustomRoom) &&
+            !this.treeFoldersStore.isArchiveFolder) ||
+          this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("SharingPanel:CopyExternalLink"),
-        icon: CopyToReactSvgUrl,
-        disabled: this.treeFoldersStore.isArchiveFolder,
-        onLoad: () => this.onLoadLinks(t, item),
+        label: t("Files:CopyGeneralLink"),
+        icon: TabletLinkReactSvgUrl,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          this.treeFoldersStore.isArchiveFolder ||
+          (item.roomType !== RoomsType.PublicRoom &&
+            item.roomType !== RoomsType.CustomRoom),
+        onClick: async () => {
+          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+            this.publicRoomStore.setExternalLink(primaryLink);
+          }
+        },
+        // onLoad: () => this.onLoadLinks(t, item),
       },
       {
         id: "option_room-info",
@@ -1154,12 +1354,20 @@ class ContextOptionsStore {
         action: "remove",
       },
       {
+        id: "option_create_room",
+        key: "create-room",
+        label: t("Files:CreateRoom"),
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: () => this.onClickCreateRoom(item),
+        disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
+      },
+      {
         id: "option_download",
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security.Download,
+        disabled: !item.security?.Download,
       },
       {
         id: "option_download-as",
@@ -1167,7 +1375,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !item.security.Download || this.publicRoomStore.isPublicRoom,
+        disabled: !item.security?.Download,
       },
       ...moveActions,
       {
@@ -1175,7 +1383,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: false,
       },
       {
@@ -1187,7 +1395,7 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        key: "separator2",
+        key: "separator3",
         isSeparator: true,
       },
       {
@@ -1217,6 +1425,17 @@ class ContextOptionsStore {
         action: "archive",
       },
       {
+        id: "option_leave-room",
+        key: "leave-room",
+        label: t("LeaveTheRoom"),
+        icon: LeaveRoomSvgUrl,
+        onClick: this.onLeaveRoom,
+        disabled:
+          this.treeFoldersStore.isArchiveFolder ||
+          !item.inRoom ||
+          this.publicRoomStore.isPublicRoom,
+      },
+      {
         id: "option_unarchive-room",
         key: "unarchive-room",
         label: t("Common:Restore"),
@@ -1241,40 +1460,30 @@ class ContextOptionsStore {
 
     const options = this.filterModel(optionsModel, contextOptions);
 
-    if (enablePlugins) {
-      const pluginOptions = getContextMenuItems();
+    const pluginItems = this.onLoadPlugins(item);
 
-      if (pluginOptions) {
-        pluginOptions.forEach((option) => {
-          if (contextOptions.includes(option.key)) {
-            const value = option.value;
-            if (!value.onClick) {
-              options.splice(value.position, 0, {
-                key: option.key,
-                ...value,
-              });
-            } else {
-              options.splice(value.position, 0, {
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick: () => value.onClick(item),
-              });
-            }
-          }
-        });
-      }
+    if (pluginItems.length > 0) {
+      options.splice(1, 0, {
+        id: "option_plugin-actions",
+        key: "plugin_actions",
+        label: t("Common:Actions"),
+        icon: PluginActionsSvgUrl,
+        disabled: false,
+
+        onLoad: () => this.onLoadPlugins(item),
+      });
     }
 
-    if (options[0]?.isSeparator) {
-      options.shift();
-    }
+    const filteredOptions = this.removeSeparatorFirstInList(options);
+    return filteredOptions;
+  };
 
-    if (options[options.length - 1]?.isSeparator) {
-      options.pop();
-    }
+  removeSeparatorFirstInList = (options) => {
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1")
+    );
 
-    return options;
+    return newOptions;
   };
 
   getGroupContextOptions = (t) => {
@@ -1445,6 +1654,14 @@ class ContextOptionsStore {
         action: "remove",
       },
       {
+        id: "create_room",
+        key: "create-room",
+        label: t("Files:CreateRoom"),
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: this.onClickCreateRoom,
+        disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
+      },
+      {
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
@@ -1481,7 +1698,7 @@ class ContextOptionsStore {
         key: "restore",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: this.onMoveAction,
+        onClick: this.onRestoreAction,
         disabled: !isRecycleBinFolder || !restoreItems,
       },
       {

@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   padding-right: 8px;
@@ -43,22 +42,22 @@ const StyledLoader = styled.div`
 const IpSecurityLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="37px" />
-      <Loaders.Rectangle className="description" height="80px" />
+      <RectangleSkeleton className="header" height="37px" />
+      <RectangleSkeleton className="description" height="80px" />
 
       <div className="checkboxs">
-        <Loaders.Rectangle height="20px" />
-        <Loaders.Rectangle height="20px" />
+        <RectangleSkeleton height="20px" />
+        <RectangleSkeleton height="20px" />
       </div>
 
-      <Loaders.Rectangle className="add-button" height="20px" />
+      <RectangleSkeleton className="add-button" height="20px" />
 
       <div className="block">
-        <Loaders.Rectangle height="22px" width="72px" />
-        <Loaders.Rectangle height="64px" />
+        <RectangleSkeleton height="22px" width="72px" />
+        <RectangleSkeleton height="64px" />
       </div>
 
-      <Loaders.Rectangle className="buttons" height="40px" />
+      <RectangleSkeleton className="buttons" height="40px" />
     </StyledLoader>
   );
 };

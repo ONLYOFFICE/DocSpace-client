@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import Text from "@docspace/components/text";
-import HelpButton from "@docspace/components/help-button";
+import Link from "@docspace/components/link";
 
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 import Loaders from "@docspace/common/components/Loaders";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 let timerId = null;
 const SMTPSettings = (props) => {
-  const { setInitSMTPSettings, organizationName } = props;
+  const {
+    setInitSMTPSettings,
+    organizationName,
+    currentColorScheme,
+    integrationSettingsUrl,
+  } = props;
 
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+  const { t, ready } = useTranslation([
+    "SMTPSettings",
+    "Settings",
+    "Common",
+    "UploadPanel",
+  ]);
   const [isInit, setIsInit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,6 +35,8 @@ const SMTPSettings = (props) => {
     setIsInit(true);
   };
   useEffect(() => {
+    setDocumentTitle(t("Settings:SMTPSettings"));
+
     timerId = setTimeout(() => {
       setIsLoading(true);
     }, 400);
@@ -45,23 +58,19 @@ const SMTPSettings = (props) => {
   return (
     <StyledComponent>
       <div className="smtp-settings_main-title">
-        <Text fontWeight={700} fontSize="16px">
-          {t("Settings:SMTPSettings")}
+        <Text className="smtp-settings_description">
+          {t("Settings:SMTPSettingsDescription", { organizationName })}
         </Text>
-        <HelpButton
-          place="bottom"
-          offsetBottom={0}
-          className="smtp-settings_help-button"
-          place="bottom"
-          offsetBottom={0}
-          tooltipContent={
-            <Text fontSize="12px">{t("HelpText", { organizationName })}</Text>
-          }
-        />
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main.accent}
+          isHovered
+          target="_blank"
+          href={integrationSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </div>
-      <Text className="smtp-settings_description">
-        {t("Settings:SMTPSettingsDescription", { organizationName })}
-      </Text>
 
       <CustomSettings t={t} />
     </StyledComponent>
@@ -70,8 +79,14 @@ const SMTPSettings = (props) => {
 
 export default inject(({ auth, setup }) => {
   const { settingsStore } = auth;
-  const { organizationName } = settingsStore;
+  const { organizationName, currentColorScheme, integrationSettingsUrl } =
+    settingsStore;
   const { setInitSMTPSettings } = setup;
 
-  return { setInitSMTPSettings, organizationName };
+  return {
+    setInitSMTPSettings,
+    organizationName,
+    currentColorScheme,
+    integrationSettingsUrl,
+  };
 })(observer(SMTPSettings));

@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Savienojiet savus sociālos tīklus",
   "DarkTheme": "Tumšs dizains",
   "DescriptionForSecurity": "Lai nodrošinātu lielāku drošību, ir jāmaina parole.",
+  "DesktopTheme": "Sinhronizēt ar darbvirsmas redaktora iestatījumiem",
+  "DesktopThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem atkarībā no pašreizējās darbvirsmas redaktoru tēmas.",
   "EditPhoto": "Rediģēt fotoattēlu",
   "EmailNotVerified": "E-pasta adrese nav verificēta",
+  "ErrorAccountAlreadyUse": "Saistīto kontu jau izmanto cits lietotājs",
+  "FileManagement": "Failu pārvaldība",
   "InterfaceTheme": "Interfeisa dizains",
   "LightTheme": "Gaišs dizains",
   "LogoutActiveConnection": "Izrakstīties no aktīvā savienojuma",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Tika izrakstīts no aktīvā savienojuma: {{platform}}, {{browser}}",
   "SystemTheme": "Izmantot sistēmas dizainu",
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma.",
-  "TfaLoginSettings": "Pieteikšanās iestatījumi",
   "TwoFactorDescription": "Administrators visiem lietotājiem ir iespējojis divu faktoru autentifikāciju, izmantojot kodu ģenerējošu lietotni."
 }

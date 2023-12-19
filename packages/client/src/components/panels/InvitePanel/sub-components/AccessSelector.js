@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import AccessRightSelect from "@docspace/components/access-right-select";
-import { getAccessOptions } from "../utils";
-import { isMobileOnly } from "react-device-detect";
+import { inject, observer } from "mobx-react";
 
+import { getAccessOptions } from "../utils";
 import { StyledAccessSelector } from "../StyledInvitePanel";
-import { isSmallTablet } from "@docspace/components/utils/device";
+
+import { isMobile } from "@docspace/components/utils/device";
+import AccessRightSelect from "@docspace/components/access-right-select";
+
 const AccessSelector = ({
   t,
   roomType,
@@ -16,16 +18,26 @@ const AccessSelector = ({
   filteredAccesses,
   setIsOpenItemAccess,
   className,
+  standalone,
+  isMobileView,
+  noBorder = false,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-  const width = containerRef?.current?.offsetWidth - 32;
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!containerRef?.current?.offsetWidth) return;
+
+    setWidth(containerRef?.current?.offsetWidth - 32);
+  }, [containerRef?.current?.offsetWidth]);
 
   const accessOptions = getAccessOptions(
     t,
     roomType,
     withRemove,
     true,
-    isOwner
+    isOwner,
+    standalone
   );
 
   const selectedOption = accessOptions.filter(
@@ -39,26 +51,26 @@ const AccessSelector = ({
   }, []);
 
   const checkWidth = () => {
-    if (!isMobileOnly) return;
+    if (!isMobile()) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);
     }
   };
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   return (
     <StyledAccessSelector className="invite-panel_access-selector">
-      {!(isMobileOnly && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) && (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses ? filteredAccesses : accessOptions}
-          noBorder={false}
+          noBorder={noBorder}
           directionX="right"
           directionY="bottom"
           fixedDirection={true}
@@ -70,25 +82,34 @@ const AccessSelector = ({
         />
       )}
 
-      {isMobileOnly && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation && (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses ? filteredAccesses : accessOptions}
-          noBorder={false}
+          noBorder={noBorder}
           directionX="right"
           directionY="top"
           fixedDirection={true}
           manualWidth={"fit-content"}
           isDefaultMode={true}
-          isAside={false}
+          isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}
           manualY={"0px"}
+          withoutBackground={isMobileView}
+          withBackground={!isMobileView}
+          withBlur={isMobileView}
         />
       )}
     </StyledAccessSelector>
   );
 };
 
-export default AccessSelector;
+export default inject(({ auth }) => {
+  const { standalone } = auth.settingsStore;
+
+  return {
+    standalone,
+  };
+})(observer(AccessSelector));

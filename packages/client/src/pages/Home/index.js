@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
@@ -21,7 +22,6 @@ import MediaViewer from "./MediaViewer";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import AccountsSelectionArea from "./SelectionArea/AccountsSelectionArea";
 import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
-import { RoomSearchArea } from "@docspace/common/constants";
 
 import {
   useFiles,
@@ -42,6 +42,7 @@ const PureHome = (props) => {
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -113,6 +114,7 @@ const PureHome = (props) => {
 
     showFilterLoader,
 
+    enablePlugins,
     getSettings,
     logout,
     login,
@@ -122,12 +124,15 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    setSelectedFolder,
   } = props;
 
   const location = useLocation();
 
+  const isSettingsPage =
+    location.pathname.includes("settings") &&
+    !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
-  const isSettingsPage = location.pathname.includes("settings");
 
   const { onDrop } = useFiles({
     t,
@@ -155,6 +160,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
+    folderSecurity,
   });
 
   const { showUploadPanel } = useOperations({
@@ -169,8 +175,7 @@ const PureHome = (props) => {
     itemsSelectionTitle,
     secondaryProgressDataStoreIcon,
     itemsSelectionLength,
-    isAccountsPage,
-    isSettingsPage,
+
     setItemsSelectionTitle,
   });
 
@@ -186,7 +191,12 @@ const PureHome = (props) => {
     setPortalTariff,
   });
 
-  useSettings({ t, isSettingsPage, setIsLoading });
+  useSettings({
+    t,
+    isSettingsPage,
+
+    setIsLoading,
+  });
 
   useSDK({
     frameConfig,
@@ -217,6 +227,7 @@ const PureHome = (props) => {
     window.addEventListener("popstate", onClickBack);
 
     return () => {
+      setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
@@ -248,6 +259,7 @@ const PureHome = (props) => {
         primaryProgressDataVisible || secondaryProgressDataStoreVisible;
 
       sectionProps.isEmptyPage = isEmptyPage;
+      sectionProps.isTrashFolder = isRecycleBinFolder;
     }
   }
 
@@ -286,6 +298,12 @@ const PureHome = (props) => {
               <SectionHeaderContent />
             )}
           </Section.SectionHeader>
+        )}
+
+        {isRecycleBinFolder && !isEmptyPage && (
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
         )}
 
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
@@ -337,6 +355,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -345,6 +364,7 @@ export default inject(
 
     const {
       firstLoad,
+      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -352,9 +372,10 @@ export default inject(
       showFilterLoader,
     } = clientLoadingStore;
 
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
+    const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
+      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      setIsSectionFilterLoading(param, !withoutTimer);
+      setIsSectionBodyLoading(param, !withoutTimer);
     };
 
     const {
@@ -445,6 +466,7 @@ export default inject(
       isFrame,
       withPaging,
       showCatalog,
+      enablePlugins,
       getSettings,
     } = settingsStore;
 
@@ -474,7 +496,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: auth.userStore.user.isVisitor,
-
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,
@@ -491,6 +513,8 @@ export default inject(
       selectionLength,
       isProgressFinished,
       selectionTitle,
+
+      enablePlugins,
 
       itemsSelectionLength,
       setItemsSelectionTitle,
@@ -559,6 +583,7 @@ export default inject(
       loadCurrentUser: auth.userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
+      setSelectedFolder,
     };
   }
 )(observer(Home));

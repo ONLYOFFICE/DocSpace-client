@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Sluit uw sociale netwerken aan",
   "DarkTheme": "Donker thema",
   "DescriptionForSecurity": "Voor meer veiligheid moet u uw wachtwoord wijzigen.",
+  "DesktopTheme": "Synchroniseren met desktop Editor instellingen",
+  "DesktopThemeDescription": "Schakel automatisch tussen lichte en donkere thema's, afhankelijk van het huidige thema van de desktop editors.",
   "EditPhoto": "Bewerk foto",
   "EmailNotVerified": "E-mail niet geverifieerd",
+  "ErrorAccountAlreadyUse": "Gekoppelde account al in gebruik door een andere gebruiker",
+  "FileManagement": "Bestandsbeheer",
   "InterfaceTheme": "Interface thema",
   "LightTheme": "Licht thema",
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
@@ -24,6 +28,5 @@
   "SuccessLogout": "De actieve verbinding werd afgemeld: {{platform}}, {{browser}}",
   "SystemTheme": "Gebruik systeemthema",
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's wanneer uw systeem dat doet.",
-  "TfaLoginSettings": "Inlog instellingen",
   "TwoFactorDescription": "Twee-factor authenticatie via een code-genererende app was ingeschakeld voor alle gebruikers door de beheerder."
 }

@@ -8,9 +8,9 @@ import {
   Wrapper,
   Numeration,
 } from "./styled-textarea";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
+import { ColorTheme, ThemeType } from "../ColorTheme";
+import Toast from "../toast";
+import toastr from "../toast/toastr";
 import { isJSON, beautifyJSON } from "./utils";
 
 import copy from "copy-to-clipboard";
@@ -78,7 +78,7 @@ const Textarea = ({
   }
 
   function onTextareaClick() {
-    areaRef.current.select();
+    if (enableCopy) areaRef.current.select();
   }
 
   useEffect(() => {
@@ -103,9 +103,10 @@ const Textarea = ({
     <Wrapper
       className="textarea-wrapper"
       isJSONField={isJSONField}
-      onFocus={enableCopy ? onTextareaClick : undefined}
+      enableCopy={enableCopy}
+      onClick={onTextareaClick}
     >
-      {isJSONField && (
+      {enableCopy && (
         <CopyIconWrapper
           className={classNameCopyIcon}
           isJSONField={isJSONField}
@@ -121,7 +122,6 @@ const Textarea = ({
         themeId={ThemeType.Textarea}
         className={className}
         style={style}
-        stype="preMediumBlack"
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
@@ -135,6 +135,7 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
+          heightTextArea={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

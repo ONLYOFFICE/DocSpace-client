@@ -4,11 +4,13 @@ import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/common/constants";
 
 import Aside from "@docspace/components/aside";
 import Backdrop from "@docspace/components/backdrop";
 import Selector from "@docspace/components/selector";
+import Portal from "@docspace/components/portal";
 // @ts-ignore
 import toastr from "@docspace/components/toast/toastr";
 
@@ -29,21 +31,26 @@ import useRoomsHelper from "./helpers/useRoomsHelper";
 import useLoadersHelper from "./helpers/useLoadersHelper";
 import useFilesHelper from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+import useSocketHelper from "./helpers/useSocketHelper";
 
 const FilesSelector = ({
   isPanelVisible = false,
-  withoutBasicSelection = false,
-  withoutImmediatelyClose = false,
+  // withoutImmediatelyClose = false,
   isThirdParty = false,
+  isRoomsOnly = false,
+  isUserOnly = false,
   isEditorDialog = false,
 
+  rootThirdPartyId,
   filterParam,
 
   onClose,
 
   isMove,
   isCopy,
+  isRestore,
   isRestoreAll,
+  isSelect,
 
   currentFolderId,
   fromFolderId,
@@ -56,20 +63,20 @@ const FilesSelector = ({
 
   selection,
   disabledItems,
-  isFolderActions,
-  setIsFolderActions,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
   setMovingInProgress,
+  setSelected,
   setMoveToPanelVisible,
+  setRestorePanelVisible,
   setCopyPanelVisible,
   setRestoreAllPanelVisible,
 
   onSelectFolder,
   onSetBaseFolderPath,
-  onSetNewFolderPath,
+  //onSetNewFolderPath,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -82,6 +89,21 @@ const FilesSelector = ({
 
   descriptionText,
   setSelectedItems,
+
+  includeFolder,
+
+  socketHelper,
+  socketSubscribers,
+  setMoveToPublicRoomVisible,
+  setBackupToPublicRoomVisible,
+  setInfoPanelIsMobileHidden,
+  currentDeviceType,
+
+  embedded,
+  withHeader,
+  withCancelButton = true,
+  getIcon,
+  isRoomBackup,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -102,15 +124,28 @@ const FilesSelector = ({
     id: number | string;
     title: string;
     path?: string[];
+    fileExst?: string;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
-
+  const [isSelectedParentFolder, setIsSelectedParentFolder] =
+    React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
+
+  const { subscribe, unsubscribe } = useSocketHelper({
+    socketHelper,
+    socketSubscribers,
+    setItems,
+    setBreadCrumbs,
+    setTotal,
+    disabledItems,
+    filterParam,
+    getIcon,
+  });
 
   const {
     setIsBreadCrumbsLoading,
@@ -130,6 +165,8 @@ const FilesSelector = ({
     treeFolders,
     setHasNextPage,
     setIsNextPageLoading,
+    onSetBaseFolderPath,
+    isUserOnly,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -142,6 +179,8 @@ const FilesSelector = ({
     isFirstLoad,
     setIsRoot,
     searchValue,
+    isRoomsOnly,
+    onSetBaseFolderPath,
   });
 
   const { getFileList } = useFilesHelper({
@@ -161,6 +200,14 @@ const FilesSelector = ({
     onSelectTreeNode,
     setSelectedTreeNode,
     filterParam,
+    getRootData,
+    onSetBaseFolderPath,
+    isRoomsOnly,
+    rootThirdPartyId,
+    getRoomList,
+    getIcon,
+    t,
+    setIsSelectedParentFolder,
   });
 
   const onSelectAction = (item: Item) => {
@@ -174,6 +221,7 @@ const FilesSelector = ({
           id: item.id,
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
+          roomType: item.roomType,
         },
       ]);
       setSelectedItemId(item.id);
@@ -187,31 +235,52 @@ const FilesSelector = ({
         getFileList(0, item.id, false, null);
       }
     } else {
-      setSelectedFileInfo({ id: item.id, title: item.title });
+      setSelectedFileInfo({
+        id: item.id,
+        title: item.title,
+        fileExst: item.fileExst,
+      });
     }
   };
 
   React.useEffect(() => {
-    if (!withoutBasicSelection) {
-      onSelectFolder && onSelectFolder(currentFolderId);
-      onSetBaseFolderPath && onSetBaseFolderPath(currentFolderId);
+    if (!selectedItemId) return;
+    if (selectedItemId && isRoot) return unsubscribe(+selectedItemId);
+
+    subscribe(+selectedItemId);
+  }, [selectedItemId, isRoot]);
+
+  React.useEffect(() => {
+    const getRoomSettings = () => {
+      setSelectedItemType("rooms");
+      getRoomList(0, true);
+    };
+
+    const needRoomList = isRoomsOnly && !currentFolderId;
+
+    if (needRoomList) {
+      getRoomSettings();
+      return;
     }
+
     if (!currentFolderId) {
       getRootData();
-    } else {
-      setSelectedItemId(currentFolderId);
-      if (
-        parentId === 0 &&
-        rootFolderType === FolderType.Rooms &&
-        !isThirdParty
-      ) {
-        setSelectedItemType("rooms");
-        getRoomList(0, true);
-      } else {
-        setSelectedItemType("files");
-        getFileList(0, currentFolderId, true);
-      }
+      return;
     }
+
+    setSelectedItemId(currentFolderId);
+
+    if (
+      needRoomList ||
+      (!isThirdParty && parentId === 0 && rootFolderType === FolderType.Rooms)
+    ) {
+      getRoomSettings();
+
+      return;
+    }
+
+    setSelectedItemType("files");
+    getFileList(0, currentFolderId, true);
   }, []);
 
   const onClickBreadCrumb = (item: BreadCrumb) => {
@@ -230,7 +299,26 @@ const FilesSelector = ({
           (value) => value.id.toString() === item.id.toString()
         );
 
-        const newBreadCrumbs = breadCrumbs.map((item) => ({ ...item }));
+        const maxLength = breadCrumbs.length - 1;
+        let foundParentId = false,
+          currentFolderIndex = -1;
+        const newBreadCrumbs = breadCrumbs.map((item, index) => {
+          if (!foundParentId) {
+            currentFolderIndex = disabledItems.findIndex(
+              (id) => id === item?.id
+            );
+          }
+
+          if (index !== maxLength && currentFolderIndex !== -1) {
+            foundParentId = true;
+            !isSelectedParentFolder && setIsSelectedParentFolder(true);
+          }
+
+          if (index === maxLength && !foundParentId && isSelectedParentFolder)
+            setIsSelectedParentFolder(false);
+
+          return { ...item };
+        });
 
         newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
 
@@ -248,18 +336,27 @@ const FilesSelector = ({
   };
 
   const onCloseAction = () => {
+    setInfoPanelIsMobileHidden(false);
+
     if (onClose) {
       onClose();
-    } else {
-      if (isCopy) {
-        setCopyPanelVisible(false);
-        setIsFolderActions(false);
-      } else if (isRestoreAll) {
-        setRestoreAllPanelVisible(false);
-      } else {
-        setMoveToPanelVisible(false);
-      }
+      return;
     }
+
+    if (isCopy) {
+      setCopyPanelVisible(false);
+    } else if (isRestoreAll) {
+      setRestoreAllPanelVisible(false);
+    } else if (isRestore) {
+      setRestorePanelVisible(false);
+    } else {
+      setMoveToPanelVisible(false);
+    }
+  };
+
+  const onCloseAndDeselectAction = () => {
+    setSelected("none");
+    onCloseAction();
   };
 
   const onSearchAction = (value: string) => {
@@ -292,7 +389,11 @@ const FilesSelector = ({
     fileName: string,
     isChecked: boolean
   ) => {
-    if ((isMove || isCopy || isRestoreAll) && !isEditorDialog) {
+    const isPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
+
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       let fileIds: any[] = [];
@@ -302,17 +403,10 @@ const FilesSelector = ({
         if (item.fileExst || item.contentLength) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("Translations:MoveToFolderMessage"));
+          toastr.error(t("MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }
-      }
-
-      if (isFolderActions) {
-        fileIds = [];
-        folderIds = [];
-
-        folderIds.push(currentFolderId);
       }
 
       if (folderIds.length || fileIds.length) {
@@ -329,6 +423,11 @@ const FilesSelector = ({
           },
         };
 
+        if (isPublic) {
+          setMoveToPublicRoomVisible(true, operationData);
+          return;
+        }
+
         setIsRequestRunning(true);
         setSelectedItems();
         checkFileConflicts(selectedItemId, folderIds, fileIds)
@@ -338,7 +437,7 @@ const FilesSelector = ({
               setIsRequestRunning(false);
             } else {
               setIsRequestRunning(false);
-              onCloseAction();
+              onCloseAndDeselectAction();
               const move = !isCopy;
               if (move) setMovingInProgress(move);
               sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
@@ -354,30 +453,26 @@ const FilesSelector = ({
         toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
-      setIsRequestRunning(true);
-      onSetNewFolderPath && onSetNewFolderPath(selectedItemId);
-      onSelectFolder && onSelectFolder(selectedItemId);
+      if (isRoomBackup && isPublic) {
+        setBackupToPublicRoomVisible(true, {
+          selectedItemId,
+          breadCrumbs,
+          onSelectFolder,
+          onClose,
+        });
+
+        return;
+      }
+      //setIsRequestRunning(true);
+      //onSetNewFolderPath && onSetNewFolderPath(breadCrumbs);
+      onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
       onSave &&
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-
-      const info: {
-        id: string | number;
-        title: string;
-        path?: string[];
-      } = {
-        id: selectedFileInfo?.id || "",
-        title: selectedFileInfo?.title || "",
-        path: [],
-      };
-
-      breadCrumbs.forEach((item, index) => {
-        if (index !== 0 && info.path) info.path.push(item.label);
-      });
-
-      onSelectFile && selectedFileInfo && onSelectFile(info);
-      !withoutImmediatelyClose && onCloseAction();
+      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
+      onCloseAndDeselectAction();
+      //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
 
@@ -386,7 +481,9 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
-    filterParam
+    isSelect,
+    filterParam,
+    isRestore
   );
 
   const acceptButtonLabel = getAcceptButtonLabel(
@@ -394,12 +491,15 @@ const FilesSelector = ({
     isCopy,
     isRestoreAll,
     isMove,
-    filterParam
+    isSelect,
+    filterParam,
+    isRestore
   );
 
   const isDisabled = getIsDisabled(
     isFirstLoad,
-    fromFolderId === selectedItemId,
+    isSelectedParentFolder,
+    fromFolderId == selectedItemId,
     selectedItemType === "rooms",
     isRoot,
     isCopy,
@@ -408,16 +508,90 @@ const FilesSelector = ({
     isRequestRunning,
     selectedItemSecurity,
     filterParam,
-    !!selectedFileInfo
+    !!selectedFileInfo,
+    includeFolder,
+    isRestore
   );
 
-  return (
+  const SelectorBody = (
+    <Selector
+      withHeader={withHeader}
+      headerLabel={headerLabel}
+      withoutBackButton
+      searchPlaceholder={t("Common:Search")}
+      searchValue={searchValue}
+      onSearch={onSearchAction}
+      onClearSearch={onClearSearchAction}
+      items={items ? items : []}
+      onSelect={onSelectAction}
+      acceptButtonLabel={acceptButtonLabel}
+      onAccept={onAcceptAction}
+      withCancelButton={withCancelButton}
+      cancelButtonLabel={t("Common:CancelButton")}
+      onCancel={onCloseAction}
+      emptyScreenImage={
+        theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+      }
+      emptyScreenHeader={t("SelectorEmptyScreenHeader")}
+      emptyScreenDescription=""
+      searchEmptyScreenImage={
+        theme.isBase
+          ? EmptyScreenFilterAltSvgUrl
+          : EmptyScreenFilterAltDarkSvgUrl
+      }
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
+      withBreadCrumbs
+      breadCrumbs={breadCrumbs}
+      onSelectBreadCrumb={onClickBreadCrumb}
+      isLoading={showLoader}
+      isBreadCrumbsLoading={showBreadCrumbsLoader}
+      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      rowLoader={
+        <Loaders.SelectorRowLoader
+          isMultiSelect={false}
+          isUser={isRoot}
+          isContainer={showLoader}
+        />
+      }
+      searchLoader={<Loaders.SelectorSearchLoader />}
+      breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
+      alwaysShowFooter={true}
+      isNextPageLoading={isNextPageLoading}
+      hasNextPage={hasNextPage}
+      totalItems={total}
+      loadNextPage={
+        isRoot ? null : selectedItemType === "rooms" ? getRoomList : getFileList
+      }
+      disableAcceptButton={isDisabled}
+      withFooterInput={withFooterInput}
+      withFooterCheckbox={withFooterCheckbox}
+      footerInputHeader={footerInputHeader}
+      currentFooterInputValue={currentFooterInputValue}
+      footerCheckboxLabel={footerCheckboxLabel}
+      descriptionText={
+        !filterParam || filterParam === "ALL"
+          ? ""
+          : descriptionText ?? t("Common:SelectDOCXFormat")
+      }
+      acceptButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
+      }
+      cancelButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
+      }
+    />
+  );
+
+  const selectorComponent = embedded ? (
+    SelectorBody
+  ) : (
     <>
       <Backdrop
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={210}
+        zIndex={309}
         onClick={onCloseAction}
       />
       <Aside
@@ -426,74 +600,15 @@ const FilesSelector = ({
         zIndex={310}
         onClose={onCloseAction}
       >
-        <Selector
-          headerLabel={headerLabel}
-          withoutBackButton
-          searchPlaceholder={t("Common:Search")}
-          searchValue={searchValue}
-          onSearch={onSearchAction}
-          onClearSearch={onClearSearchAction}
-          items={items ? items : []}
-          onSelect={onSelectAction}
-          acceptButtonLabel={acceptButtonLabel}
-          onAccept={onAcceptAction}
-          withCancelButton
-          cancelButtonLabel={t("Common:CancelButton")}
-          onCancel={onCloseAction}
-          emptyScreenImage={
-            theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
-          }
-          emptyScreenHeader={t("SelectorEmptyScreenHeader")}
-          emptyScreenDescription=""
-          searchEmptyScreenImage={
-            theme.isBase
-              ? EmptyScreenFilterAltSvgUrl
-              : EmptyScreenFilterAltDarkSvgUrl
-          }
-          searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-          searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
-          withBreadCrumbs
-          breadCrumbs={breadCrumbs}
-          onSelectBreadCrumb={onClickBreadCrumb}
-          isLoading={showLoader}
-          isBreadCrumbsLoading={showBreadCrumbsLoader}
-          withSearch={
-            !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad
-          }
-          rowLoader={
-            <Loaders.SelectorRowLoader
-              isMultiSelect={false}
-              isUser={isRoot}
-              isContainer={showLoader}
-            />
-          }
-          searchLoader={<Loaders.SelectorSearchLoader />}
-          breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
-          alwaysShowFooter={true}
-          isNextPageLoading={isNextPageLoading}
-          hasNextPage={hasNextPage}
-          totalItems={total}
-          loadNextPage={
-            isRoot
-              ? null
-              : selectedItemType === "rooms"
-              ? getRoomList
-              : getFileList
-          }
-          disableAcceptButton={isDisabled}
-          withFooterInput={withFooterInput}
-          withFooterCheckbox={withFooterCheckbox}
-          footerInputHeader={footerInputHeader}
-          currentFooterInputValue={currentFooterInputValue}
-          footerCheckboxLabel={footerCheckboxLabel}
-          descriptionText={
-            !filterParam ? "" : descriptionText ?? t("Common:SelectDOCXFormat")
-          }
-          acceptButtonId={isMove || isCopy ? "select-file-modal-submit" : ""}
-          cancelButtonId={isMove || isCopy ? "select-file-modal-cancel" : ""}
-        />
+        {SelectorBody}
       </Aside>
     </>
+  );
+
+  return currentDeviceType === DeviceType.mobile && !embedded ? (
+    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
+  ) : (
+    selectorComponent
   );
 };
 
@@ -508,7 +623,7 @@ export default inject(
       dialogsStore,
       filesStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isPanelVisible, id, passedFoldersTree }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
@@ -518,23 +633,11 @@ export default inject(
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const fromFolderId = id
-      ? id
-      : passedFoldersTree?.length > 0
-      ? passedFoldersTree[0].id
-      : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId;
-
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
-
     const { treeFolders } = treeFoldersStore;
 
     const {
+      restorePanelVisible,
+      setRestorePanelVisible,
       moveToPanelVisible,
       setMoveToPanelVisible,
       copyPanelVisible,
@@ -542,23 +645,39 @@ export default inject(
       restoreAllPanelVisible,
       setRestoreAllPanelVisible,
       conflictResolveDialogVisible,
-      isFolderActions,
-      setIsFolderActions,
+      setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
     } = dialogsStore;
 
-    const { theme } = auth.settingsStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
+      auth.infoPanelStore;
 
-    const { selection, bufferSelection, filesList, setMovingInProgress } =
-      filesStore;
+    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
+
+    const socketSubscribesId = socketHelper.socketSubscribers;
+
+    const {
+      selection,
+      bufferSelection,
+      filesList,
+      setMovingInProgress,
+      setSelected,
+      filesSettingsStore,
+    } = filesStore;
+    const { getIcon } = filesSettingsStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      auth.infoPanelStore;
 
     const selections =
-      isMove || isCopy || isRestoreAll
+      isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
-          : selection.length > 0 && selection[0] != null
+          : selection.length > 0 && selection?.[0] != null
           ? selection
           : bufferSelection != null
           ? [bufferSelection]
+          : infoPanelIsVisible && infoPanelSelection != null
+          ? [infoPanelSelection]
           : []
         : [];
 
@@ -571,10 +690,27 @@ export default inject(
     const disabledItems: any[] = [];
 
     selectionsWithoutEditing.forEach((item: any) => {
-      if (item?.isFolder && item?.id) {
+      if ((item?.isFolder || item?.parentId) && item?.id) {
         disabledItems.push(item.id);
       }
     });
+
+    const includeFolder =
+      selectionsWithoutEditing.filter((i: any) => i.isFolder).length > 0;
+
+    const fromFolderId = id
+      ? id
+      : rootFolderType === FolderType.Archive ||
+        rootFolderType === FolderType.TRASH
+      ? undefined
+      : selectedId === selectionsWithoutEditing[0]?.id
+      ? parentId
+      : selectedId;
+
+    const currentFolderId =
+      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+        ? +sessionPath
+        : fromFolderId;
 
     return {
       currentFolderId,
@@ -584,22 +720,33 @@ export default inject(
       treeFolders,
       isPanelVisible: isPanelVisible
         ? isPanelVisible
-        : (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) &&
+        : (moveToPanelVisible ||
+            copyPanelVisible ||
+            restorePanelVisible ||
+            restoreAllPanelVisible) &&
           !conflictResolveDialogVisible,
       setMoveToPanelVisible,
+      setRestorePanelVisible,
       theme,
       selection: selectionsWithoutEditing,
       disabledItems,
-      isFolderActions,
       setConflictDialogData,
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
       setMovingInProgress,
+      setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
-      setIsFolderActions,
       setSelectedItems,
+      setInfoPanelIsMobileHidden,
+      includeFolder,
+      socketHelper,
+      socketSubscribers: socketSubscribesId,
+      setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
+      currentDeviceType,
+      getIcon,
     };
   }
 )(observer(FilesSelector));

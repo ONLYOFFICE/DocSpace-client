@@ -1,8 +1,10 @@
 import React from "react";
+
 import { getLogoFromPath } from "@docspace/common/utils";
 
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Logo = (props) => {
   const {
@@ -19,6 +21,10 @@ const Logo = (props) => {
 
   const currentLogo = getLogoFromPath(src);
 
+  const onLogoClick = () => {
+    isMobile() && document.getElementById(inputId).click();
+  };
+
   return (
     <div>
       <div className="logo-item">
@@ -32,7 +38,7 @@ const Logo = (props) => {
           </Text>
         )}
         {isEditor ? (
-          <div className="logos-editor-wrapper">
+          <div className="logos-editor-wrapper" onClick={onLogoClick}>
             <img
               className="logo-docs-editor background-green"
               src={currentLogo}
@@ -47,7 +53,7 @@ const Logo = (props) => {
             />
           </div>
         ) : (
-          <img className={imageClass} src={currentLogo} />
+          <img className={imageClass} src={currentLogo} onClick={onLogoClick} />
         )}
       </div>
       <label>

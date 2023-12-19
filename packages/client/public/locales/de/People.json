@@ -2,6 +2,6 @@
   "LblInviteAgain": "Erneut einladen",
   "MessageEmailActivationInstuctionsSentOnEmail": "Anleitungen zur Änderung eines Passworts wurden an <1>{{email}}</1> gesendet.",
   "NotFoundUsers": "Keine Benutzer gefunden",
-  "NotFoundUsersDescription": "Es können keine Personen angezeigt werden, die Ihrem Filter entsprechen. Bitte wählen Sie andere Filteroptionen oder löschen Sie den Filter, um alle Personen in diesem Bereich anzuzeigen.",
+  "NotFoundUsersDescription": "Keine Benutzer gefunden, die Ihrer Suche entsprechen. Bitte passen Sie Ihre Suchparameter an oder leeren Sie das Suchfeld, um die vollständige Liste der Benutzer anzuzeigen.",
   "UserStatus": "Status"
 }

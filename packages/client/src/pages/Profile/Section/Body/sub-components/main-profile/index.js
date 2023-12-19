@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Avatar from "@docspace/components/avatar";
+
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
@@ -17,6 +18,7 @@ import { isMobileOnly } from "react-device-detect";
 import toastr from "@docspace/components/toast/toastr";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { getUserRole, convertLanguage } from "@docspace/common/utils";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import { Trans } from "react-i18next";
 //import TimezoneCombo from "./timezoneCombo";
@@ -31,8 +33,9 @@ import {
 } from "./styled-main-profile";
 import { HelpButton, Tooltip } from "@docspace/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
+import { useTheme } from "styled-components";
 
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
@@ -54,9 +57,13 @@ const MainProfile = (props) => {
     currentColorScheme,
     updateProfileCulture,
     documentationEmail,
+    setDialogData,
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+  const [dimension, setDimension] = useState(window.innerHeight);
+  const { interfaceDirection } = useTheme();
+  const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
   useEffect(() => {
     checkWidth();
@@ -65,9 +72,10 @@ const MainProfile = (props) => {
   }, []);
 
   const checkWidth = () => {
+    setDimension(innerHeight);
     if (!isMobileOnly) return;
 
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setHorizontalOrientation(true);
     } else {
       setHorizontalOrientation(false);
@@ -80,19 +88,30 @@ const MainProfile = (props) => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);
   };
 
+  const onChangeEmailClick = () => {
+    setDialogData(profile);
+    setChangeEmailVisible(true);
+  };
+
+  const onChangePasswordClick = () => {
+    const email = profile.email;
+    setDialogData({ email });
+    setChangePasswordVisible(true);
+  };
+
   const userAvatar = profile.hasAvatar
     ? profile.avatarMax
     : DefaultUserAvatarMax;
 
   const tooltipLanguage = (
-    <Text as="div" fontSize="12px">
+    <Text as="div" fontSize="12px" color="#333333">
       <Trans t={t} i18nKey="NotFoundLanguage" ns="Common">
         "In case you cannot find your language in the list of the available
         ones, feel free to write to us at
         <Link
           href={`mailto:${documentationEmail}`}
           isHovered={true}
-          color={theme.profileInfo.tooltipLinkColor}
+          color={currentColorScheme?.main?.accent}
         >
           {{ supportEmail: documentationEmail }}
         </Link>
@@ -102,7 +121,6 @@ const MainProfile = (props) => {
         <Link
           isHovered
           isBold
-          color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
           target="_blank"
@@ -113,7 +131,7 @@ const MainProfile = (props) => {
     </Text>
   );
 
-  const isMobileHorizontalOrientation = isMobileOnly && horizontalOrientation;
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -133,6 +151,8 @@ const MainProfile = (props) => {
         toastr.error(error && error.message ? error.message : error);
       });
   };
+
+  const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
     <StyledWrapper>
@@ -189,7 +209,7 @@ const MainProfile = (props) => {
               <HelpButton
                 size={12}
                 offsetRight={0}
-                place="right"
+                place={dirTooltip}
                 tooltipContent={tooltipLanguage}
               />
             </StyledLabel>
@@ -197,7 +217,7 @@ const MainProfile = (props) => {
 
           <div className="profile-block">
             <div className="profile-block-field">
-              <Text fontWeight={600} truncate>
+              <Text fontWeight={600} truncate title={profile.displayName}>
                 {profile.displayName}
               </Text>
               {profile.isSSO && (
@@ -225,8 +245,8 @@ const MainProfile = (props) => {
             <div className="email-container">
               <div className="email-edit-container">
                 <Text
-                  data-for="emailTooltip"
-                  data-tip={t("EmailNotVerified")}
+                  data-tooltip-id="emailTooltip"
+                  data-tooltip-content={t("EmailNotVerified")}
                   as="div"
                   className="email-text-container"
                   fontWeight={600}
@@ -235,11 +255,11 @@ const MainProfile = (props) => {
                 </Text>
                 {withActivationBar && (
                   <Tooltip
+                    float
                     id="emailTooltip"
-                    getContent={(dataTip) => (
-                      <Text fontSize="12px">{dataTip}</Text>
+                    getContent={({ content }) => (
+                      <Text fontSize="12px">{content}</Text>
                     )}
-                    effect="float"
                     place="bottom"
                   />
                 )}
@@ -248,7 +268,7 @@ const MainProfile = (props) => {
                     className="edit-button email-edit-button"
                     iconName={PencilOutlineReactSvgUrl}
                     size="12"
-                    onClick={() => setChangeEmailVisible(true)}
+                    onClick={onChangeEmailClick}
                   />
                 )}
               </div>
@@ -273,7 +293,7 @@ const MainProfile = (props) => {
                 className="edit-button password-edit-button"
                 iconName={PencilOutlineReactSvgUrl}
                 size="12"
-                onClick={() => setChangePasswordVisible(true)}
+                onClick={onChangePasswordClick}
               />
             </div>
             <div className="language-combo-box-wrapper">
@@ -284,21 +304,22 @@ const MainProfile = (props) => {
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={false}
-                scaled={isMobileOnly}
+                scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="250px"
+                dropDownMaxHeight={dimension < 620 ? 200 : 364}
+                manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation
                     ? isMobileHorizontalOrientation
-                    : !isMobileOnly
+                    : !isMobile()
                 }
-                withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
-                modernView={!isMobileOnly}
+                modernView={!isMobile()}
               />
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
             </div>
           </div>
         </div>
@@ -331,8 +352,8 @@ const MainProfile = (props) => {
               <div className="email-container">
                 <div className="email-edit-container">
                   <Text
-                    data-for="emailTooltip"
-                    data-tip={t("EmailNotVerified")}
+                    data-tooltip-id="emailTooltip"
+                    data-tooltip-content={t("EmailNotVerified")}
                     as="div"
                     className="email-text-container"
                     fontWeight={600}
@@ -342,11 +363,11 @@ const MainProfile = (props) => {
                 </div>
                 {withActivationBar && (
                   <Tooltip
+                    float
                     id="emailTooltip"
-                    getContent={(dataTip) => (
-                      <Text fontSize="12px">{dataTip}</Text>
+                    getContent={({ content }) => (
+                      <Text fontSize="12px">{content}</Text>
                     )}
-                    effect="float"
                     place="bottom"
                   />
                 )}
@@ -370,7 +391,7 @@ const MainProfile = (props) => {
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size="12"
-              onClick={() => setChangeEmailVisible(true)}
+              onClick={onChangeEmailClick}
             />
           </div>
           <div className="mobile-profile-row">
@@ -386,7 +407,7 @@ const MainProfile = (props) => {
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size="12"
-              onClick={() => setChangePasswordVisible(true)}
+              onClick={onChangePasswordClick}
             />
           </div>
 
@@ -400,28 +421,31 @@ const MainProfile = (props) => {
                 tooltipContent={tooltipLanguage}
               />
             </Text>
-            <ComboBox
-              className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-              options={cultureNames}
-              selectedOption={selectedLanguage}
-              onSelect={onLanguageSelect}
-              isDisabled={false}
-              scaled={isMobileOnly}
-              scaledOptions={false}
-              size="content"
-              showDisabledItems={true}
-              dropDownMaxHeight={364}
-              manualWidth="250px"
-              isDefaultMode={
-                isMobileHorizontalOrientation
-                  ? isMobileHorizontalOrientation
-                  : !isMobileOnly
-              }
-              withBlur={isMobileHorizontalOrientation ? false : isMobileOnly}
-              fillIcon={false}
-              modernView={!isMobileOnly}
-            />
+            <div className="mobile-language__wrapper-combo-box">
+              <ComboBox
+                className="language-combo-box"
+                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                options={cultureNames}
+                selectedOption={selectedLanguage}
+                onSelect={onLanguageSelect}
+                isDisabled={false}
+                scaled={isMobile()}
+                scaledOptions={false}
+                size="content"
+                showDisabledItems={true}
+                dropDownMaxHeight={364}
+                manualWidth="250px"
+                isDefaultMode={
+                  isMobileHorizontalOrientation
+                    ? isMobileHorizontalOrientation
+                    : !isMobile()
+                }
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                fillIcon={false}
+                modernView={!isMobile()}
+              />
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
+            </div>
           </div>
         </div>
         {/* <TimezoneCombo title={t("Common:ComingSoon")} /> */}
@@ -440,23 +464,18 @@ const MainProfile = (props) => {
 
 export default inject(({ auth, peopleStore }) => {
   const { withActivationBar, sendActivationLink } = auth.userStore;
-  const {
-    theme,
-    helpLink,
-    culture,
-    currentColorScheme,
-    documentationEmail,
-  } = auth.settingsStore;
+  const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
+    auth.settingsStore;
 
   const {
     targetUser: profile,
-    setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
     changeAvatarVisible,
     setChangeAvatarVisible,
     updateProfileCulture,
   } = peopleStore.targetUserStore;
+  const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
 
   return {
     theme,
@@ -474,5 +493,6 @@ export default inject(({ auth, peopleStore }) => {
     currentColorScheme,
     updateProfileCulture,
     documentationEmail,
+    setDialogData,
   };
 })(withCultureNames(observer(MainProfile)));

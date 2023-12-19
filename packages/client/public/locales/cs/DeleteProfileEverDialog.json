@@ -1,5 +1,14 @@
 {
+  "ActionCannotBeUndone": "Vybraní zakázaní uživatelé budou zprostoru DocSpace odstraněni. Tuto akci nelze vrátit zpět.",
+  "CannotReassignFiles": "Pokud odstraníte více uživatelů najednou, nelze jejich soubory znovu přiřadit jiným uživatelům.",
+  "DeleteGroupUsersSuccessMessage": "Uživatelé byli úspěšně odstraněni.",
+  "DeleteMyDocumentsUser": "Všechny osobní soubory a složky v sekci Moje dokumenty tohoto uživatele budou trvale odstraněny.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Místnosti vytvořené tímto uživatelem a dokumenty uložené v těchto místnostech budou automaticky přeřazeny na správce provádějícího mazání: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ruční přeřazení dat pro výběr jiného cílového uživatele pro přeřazení.",
   "DeleteUser": "Smazat uživatele",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude smazán. Osobní dokumenty uživatele, které jsou dostupné ostatním, budou smazány. Opravdu chcete pokračovat?",
-  "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude smazán. Tuto akci nelze vrátit zpět.",
+  "DeletingUsers": "Odstranění uživatelů",
+  "PleaseNote": "Vezměte prosím na vědomí:",
+  "ReassignDataToAnotherUser": "Přeřazení dat jinému uživateli",
+  "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn",
+  "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele."
 }

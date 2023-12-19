@@ -56,19 +56,22 @@ const StyledPermanentSetting = styled.div`
 
     &-title {
       font-weight: 600;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
     }
   }
 
   .permanent_setting-help_button {
-    margin-left: auto;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;`
+        : `margin-left: auto;`}
     white-space: pre-line;
   }
 
   .permanent_setting-secondary-info {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.permanentSettings.descriptionColor};

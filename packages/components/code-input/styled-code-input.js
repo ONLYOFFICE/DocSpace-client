@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Base from "../themes/base";
+import { mobile, tablet } from "../utils/device";
 
 const InputWrapper = styled.div`
   display: flex;
@@ -17,18 +18,18 @@ const InputWrapper = styled.div`
     border-radius: 8px;
     margin: 0 4px;
     text-align: center;
-    font-size: 72px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("72px")};
 
-    @media (max-width: 768px) {
+    @media ${tablet} {
       height: 76px;
       width: 64px;
-      font-size: 48px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("48px")};
     }
 
-    @media (max-width: 414px) {
+    @media ${mobile} {
       height: 48px;
       width: 40px;
-      font-size: 32px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("32px")};
     }
 
     &:last-child {
@@ -55,7 +56,7 @@ const InputWrapper = styled.div`
     border: none;
     margin: 0 16px;
 
-    @media (max-width: 768px) {
+    @media ${mobile} {
       margin: 0 4px;
     }
   }

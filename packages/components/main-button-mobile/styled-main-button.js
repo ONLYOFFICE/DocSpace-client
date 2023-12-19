@@ -4,8 +4,8 @@ import DropDown from "../drop-down";
 import DropDownItem from "../drop-down-item";
 import FloatingButton from "../floating-button";
 
-import { isMobileOnly } from "react-device-detect";
-import { mobile } from "../utils/device";
+import { isMobile } from "react-device-detect";
+import { mobile, tablet } from "../utils/device";
 
 const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
@@ -58,7 +58,7 @@ const StyledFloatingButton = styled(FloatingButton)`
 StyledFloatingButton.defaultProps = { theme: Base };
 
 const mobileDropDown = css`
-  @media (max-width: 428px) {
+  @media ${mobile} {
     width: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.width};
   }
 
@@ -100,7 +100,7 @@ const StyledDropDown = styled(DropDown)`
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.bottom};
 
   z-index: ${(props) => props.theme.mainButtonMobile.dropDown.zIndex};
-  height: ${(props) => (props.isMobile ? props.heightProp : "auto")};
+  height: auto;
 
   white-space: nowrap;
   overflow: hidden;
@@ -108,14 +108,20 @@ const StyledDropDown = styled(DropDown)`
 
   padding: 0px;
 
+  @media ${tablet} {
+    height: ${(props) => props.heightProp};
+  }
+
   @media ${mobile} {
     ${mobileDropDown}
   }
 
-  ${isMobileOnly && mobileDropDown}
-
-  .section-scroll {
-    padding-right: 0px !important;
+  .section-scroll,
+  .scroll-body {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-left: 0px !important;`
+        : `padding-right: 0px !important;`}
   }
 
   .separator-wrapper {
@@ -146,7 +152,7 @@ const StyledDropDown = styled(DropDown)`
 
     &:hover {
       background-color: ${(props) =>
-        isMobileOnly
+        isMobile
           ? props.theme.mainButtonMobile.buttonOptions.backgroundColor
           : props.theme.mainButtonMobile.dropDown.hoverButtonColor};
     }
@@ -157,7 +163,7 @@ const StyledDropDown = styled(DropDown)`
     background-color: ${(props) =>
       props.theme.mainButtonMobile.dropDown.backgroundActionMobile};
     border-radius: 3px;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     display: block;
   }
 `;
@@ -166,6 +172,10 @@ StyledDropDown.defaultProps = { theme: Base };
 
 const StyledDropDownItem = styled(DropDownItem)`
   padding: 6px 23px;
+
+  .drop-down-icon {
+    height: 22px;
+  }
 `;
 
 const StyledButtonOptions = styled.div`
@@ -183,7 +193,10 @@ const StyledContainerAction = styled.div`
   padding: 16px 0px;
 
   .sublevel {
-    padding-left: 48px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 48px;`
+        : `padding-left: 48px;`}
   }
 `;
 
@@ -301,14 +314,9 @@ const StyledAlertIcon = styled.div`
   z-index: 1010;
   width: 12px;
   height: 12px;
-  right: 26px;
+  top: 10px;
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: 26px;
-      right: 0px;
-    `}
-  top: 6px;
+    props.theme.interfaceDirection === "rtl" ? "left: 10px;" : "right: 10px;"}
 `;
 
 StyledBar.defaultProps = { theme: Base };

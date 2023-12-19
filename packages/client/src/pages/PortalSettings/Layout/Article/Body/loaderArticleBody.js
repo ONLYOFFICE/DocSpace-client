@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
-import { isTablet as isTabletUtils } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+
+import { isDesktop, desktop } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
-  padding-left: 8px;
-
   .loader {
     padding-bottom: 12px;
   }
@@ -25,8 +23,7 @@ const StyledLoader = styled.div`
     margin: 0px;
   }
 
-  @media (min-width: 1024px) {
-    padding-left: 10px;
+  @media ${desktop} {
     padding-top: 7px;
     display: flex;
     flex-direction: column;
@@ -45,7 +42,7 @@ const LoaderArticleBody = () => {
   const [isTabletView, setIsTabletView] = useState(false);
 
   const checkInnerWidth = () => {
-    const isTabletView = window.innerWidth <= 1024 || isTablet;
+    const isTabletView = !isDesktop();
 
     if (isTabletView) {
       setIsTabletView(true);
@@ -62,28 +59,17 @@ const LoaderArticleBody = () => {
   });
 
   const height = isTabletView ? "28px" : "20px";
-  const width = isTabletView ? "28px" : "187px";
+  const width = isTabletView ? "28px" : "210px";
 
   return (
     <StyledLoader>
-      {isTabletView ? (
-        <div className="section-name-container">
-          <p className="section-name"></p>
-        </div>
-      ) : (
-        <Loaders.Rectangle
-          width={"42px"}
-          height={"12px"}
-          className="section-name-loader"
-        />
-      )}
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
-      <Loaders.Rectangle width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
+      <RectangleSkeleton width={width} height={height} className="loader" />
     </StyledLoader>
   );
 };

@@ -3,15 +3,14 @@ import moment from "moment";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
-import Calendar from "@docspace/components/calendar";
-
-import { isMobileOnly } from "react-device-detect";
+import Text from "../text";
+import SelectorAddButton from "../selector-add-button";
+import SelectedItem from "../selected-item";
+import Calendar from "../calendar";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
+import { mobile } from "../utils/device";
 
 const Wrapper = styled.div`
   .selectedItem {
@@ -52,13 +51,12 @@ const SelectedLabel = styled.span`
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  ${(props) =>
-    props.isMobile &&
-    css`
-      position: fixed;
-      bottom: 0;
-      left: 0;
-    `}
+
+  @media ${mobile} {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 `;
 
 const DatePicker = (props) => {
@@ -74,6 +72,7 @@ const DatePicker = (props) => {
     showCalendarIcon,
     outerDate,
     openDate,
+    isMobile,
   } = props;
 
   const calendarRef = useRef();
@@ -102,13 +101,12 @@ const DatePicker = (props) => {
     handleChange(null);
     setIsCalendarOpen(false);
   };
-
   const CalendarElement = () => (
     <StyledCalendar
+      isMobile={isMobile}
       selectedDate={date}
       setSelectedDate={handleChange}
       onChange={closeCalendar}
-      isMobile={isMobileOnly}
       forwardedRef={calendarRef}
       minDate={minDate}
       maxDate={maxDate}
@@ -118,6 +116,13 @@ const DatePicker = (props) => {
   );
 
   const handleClick = (e) => {
+    if (
+      e.target.classList.contains("nav-thumb-vertical") ||
+      e.target.classList.contains("nav-thumb-horizontal")
+    ) {
+      return;
+    }
+
     !selectorRef?.current?.contains(e.target) &&
       !calendarRef?.current?.contains(e.target) &&
       !selectedItemRef?.current?.contains(e.target) &&
@@ -125,9 +130,9 @@ const DatePicker = (props) => {
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick, { capture: true });
+    document.addEventListener("mousedown", handleClick, { capture: true });
     return () =>
-      document.removeEventListener("click", handleClick, { capture: true });
+      document.removeEventListener("mousedown", handleClick, { capture: true });
   }, []);
 
   useEffect(() => {

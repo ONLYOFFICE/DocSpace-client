@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
@@ -14,8 +14,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import PasswordLoader from "../sub-components/loaders/password-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -23,7 +24,14 @@ const MainContainer = styled.div`
   .password-slider {
     width: 160px;
     height: 8px;
-    margin: 24px 16px 24px 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 24px 0px 24px 16px;
+          `
+        : css`
+            margin: 24px 16px 24px 0px;
+          `}
   }
 
   .checkboxes {
@@ -40,13 +48,13 @@ const MainContainer = styled.div`
 const PasswordStrength = (props) => {
   const {
     t,
-
     setPortalPasswordSettings,
     passwordSettings,
     initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -89,16 +97,16 @@ const PasswordStrength = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("password").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isInit || !passwordSettings) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, passwordSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -121,7 +129,7 @@ const PasswordStrength = (props) => {
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("password") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -181,17 +189,21 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <PasswordLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text className="learn-subtitle">
-          {t("SettingPasswordStrengthHelper")}
+        <Text fontSize="13px" fontWeight="400">
+          {t("SettingPasswordDescription")}
+        </Text>
+        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
+          className="link-learn-more"
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
@@ -200,11 +212,9 @@ const PasswordStrength = (props) => {
           {t("Common:LearnMore")}
         </Link>
       </LearnMoreWrapper>
-
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}
       </Text>
-
       <Box displayProp="flex" flexDirection="row" alignItems="center">
         <Slider
           className="password-slider"
@@ -221,7 +231,6 @@ const PasswordStrength = (props) => {
           })}
         </Text>
       </Box>
-
       <Box className="checkboxes">
         <Checkbox
           className="use-upper-case"
@@ -245,13 +254,12 @@ const PasswordStrength = (props) => {
           value="special"
         />
       </Box>
-
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -270,6 +278,7 @@ export default inject(({ auth, setup }) => {
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -280,5 +289,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

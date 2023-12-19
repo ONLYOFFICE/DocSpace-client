@@ -1,12 +1,12 @@
 ﻿import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Button from "@docspace/components/button";
 import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
-import { smallTablet, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import { I18nextProvider, Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
@@ -44,9 +44,12 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-install-text {
-    text-align: left;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `text-align: right;`
+        : `text-align: left;`}
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       text-align: center;
     }
   }
@@ -55,13 +58,16 @@ const StyledPrivacyPage = styled.div`
     display: flex;
     flex-direction: row;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
     }
   }
 
   .privacy-rooms-link {
-    margin-left: 4px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 4px;`
+        : `margin-left: 4px;`}
     color: ${(props) => props.theme.filesPrivateRoom.linkColor};
   }
 
@@ -74,14 +80,25 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-avatar {
-    text-align: left;
-    padding-left: 66px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? css`
+            text-align: right;
+            padding-right: 66px;
+          `
+        : css`
+            text-align: left;
+            padding-left: 66px;
+          `}
 
     @media ${tablet} {
-      padding-left: 74px;
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `padding-right: 74px;`
+          : `padding-left: 74px;`}
     }
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       padding: 0px;
       text-align: center;
     }

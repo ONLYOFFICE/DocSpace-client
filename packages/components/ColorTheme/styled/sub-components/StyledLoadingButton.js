@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "../../../themes";
 
 const rotate360 = keyframes`
   from {
@@ -28,7 +28,7 @@ const StyledLoadingButton = styled.div`
     props.theme.filesPanels.upload.loadingButton.background};
   position: absolute;
   margin: 2px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-weight: bold;
   color: ${(props) => props.theme.filesPanels.upload.loadingButton.color};
 `;

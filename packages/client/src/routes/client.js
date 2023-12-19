@@ -26,6 +26,10 @@ const Wizard = loadable(() => import("../pages/Wizard"));
 const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
 const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
+const AccessRestricted = loadable(() =>
+  import("../pages/Errors/AccessRestricted")
+);
+
 const Error401 = loadable(() => import("client/Error401"));
 
 const ClientRoutes = [
@@ -200,7 +204,7 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
-          {
+          /*{
             path: "settings",
             element: (
               <PrivateRoute withCollaborator restricted>
@@ -223,20 +227,47 @@ const ClientRoutes = [
                 <SettingsView />
               </PrivateRoute>
             ),
-          },
+          },*/
         ],
       },
-
+      {
+        path: "/accounts/view/@self/notification",
+        element: (
+          <PrivateRoute>
+            <Navigate to="/profile/notifications" replace />
+          </PrivateRoute>
+        ),
+      },
       ...generalRoutes,
     ],
   },
   {
     path: "/Products/Files/",
     caseSensitive: true,
-    element: <Navigate to="/rooms/shared" replace />,
+    element: <Navigate to="/rooms/shared/filter" replace />,
   },
   {
-    path: "/form-gallery/:folderId",
+    path: "/form-gallery",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <FormGallery />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/form-gallery/:fromFolderId",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <FormGallery />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/form-gallery/:fromFolderId/filter",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
@@ -254,6 +285,17 @@ const ClientRoutes = [
         </ErrorBoundary>
       </PublicRoute>
     ),
+    errorElement: <Error404 />,
+    children: [
+      {
+        index: true,
+        element: (
+          <PublicRoute>
+            <FilesView />
+          </PublicRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/wizard",
@@ -292,11 +334,21 @@ const ClientRoutes = [
   {
     path: "/unavailable",
     element: (
-      <PrivateRoute>
+      <PublicRoute>
         <ErrorBoundary>
           <ErrorUnavailable />
         </ErrorBoundary>
-      </PrivateRoute>
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/access-restricted",
+    element: (
+      <PublicRoute>
+        <ErrorBoundary>
+          <AccessRestricted />
+        </ErrorBoundary>
+      </PublicRoute>
     ),
   },
   {

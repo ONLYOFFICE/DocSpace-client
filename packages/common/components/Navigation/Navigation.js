@@ -11,17 +11,13 @@ import { Consumer } from "@docspace/components/utils/context";
 
 import DomHelpers from "@docspace/components/utils/domHelpers";
 import Backdrop from "@docspace/components/backdrop";
-import { isMobileOnly } from "react-device-detect";
 
 import { ReactSVG } from "react-svg";
-import {
-  isTablet as isTabletUtils,
-  isDesktop as isDesktopUtils,
-  isSmallTablet as isSmallTabletUtils,
-} from "@docspace/components/utils/device";
+
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
+import { DeviceType } from "../../constants";
 
 const Navigation = ({
   tReady,
@@ -37,7 +33,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  isRecycleBinFolder,
   isEmptyFilesList,
   clearTrash,
   showFolderInfo,
@@ -57,6 +52,9 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  currentDeviceType,
+  rootRoomTitle,
+
   ...rest
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -67,8 +65,7 @@ const Navigation = ({
   const dropBoxRef = React.useRef(null);
   const containerRef = React.useRef(null);
 
-  const isDesktop =
-    (!isTabletUtils() && !isSmallTabletUtils()) || isDesktopUtils();
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const infoPanelIsVisible = React.useMemo(
     () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
@@ -98,6 +95,7 @@ const Navigation = ({
   );
 
   const toggleDropBox = () => {
+    if (navigationItems.length === 0) return;
     if (isRootFolder) return setIsOpen(false);
     setIsOpen((prev) => !prev);
 
@@ -136,18 +134,17 @@ const Navigation = ({
   }, [onBackToParentFolder]);
 
   const showRootFolderNavigation =
+    !isRootFolder &&
     showRootFolderTitle &&
-    navigationItems &&
-    navigationItems.length > 1 &&
-    !isSmallTabletUtils() &&
-    !isMobileOnly;
+    ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
+    currentDeviceType !== DeviceType.mobile;
 
   const navigationTitleNode = (
     <div className="title-block">
       {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
       <Text
         title={title}
-        isOpen={false}
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
       />
@@ -157,10 +154,22 @@ const Navigation = ({
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
       <Text
-        title={navigationItems[navigationItems.length - 2].title}
-        isOpen={false}
+        className="room-title"
+        title={
+          rootRoomTitle || navigationItems[navigationItems.length - 2].title
+        }
+        isOpen={isOpen}
         isRootFolder={isRootFolder}
         isRootFolderTitle
+        onClick={() => {
+          {
+            onClickFolder(
+              navigationItems[navigationItems.length - 2].id,
+              false
+            );
+            setIsOpen(false);
+          }
+        }}
       />
       {navigationTitleNode}
     </div>
@@ -206,6 +215,8 @@ const Navigation = ({
                 withLogo={withLogo}
                 burgerLogo={burgerLogo}
                 titleIcon={titleIcon}
+                currentDeviceType={currentDeviceType}
+                navigationTitleContainerNode={navigationTitleContainerNode}
               />
             </>
           )}
@@ -216,11 +227,11 @@ const Navigation = ({
             canCreate={canCreate}
             isTabletView={isTabletView}
             isTrashFolder={isTrashFolder}
-            isRecycleBinFolder={isRecycleBinFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
             withLogo={!!withLogo}
+            className="navigation-container"
           >
             {withLogo && (
               <NavigationLogo
@@ -242,7 +253,6 @@ const Navigation = ({
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
               getContextOptionsPlus={getContextOptionsPlus}
-              isRecycleBinFolder={isRecycleBinFolder}
               isEmptyFilesList={isEmptyFilesList}
               clearTrash={clearTrash}
               toggleInfoPanel={toggleInfoPanel}
@@ -253,10 +263,14 @@ const Navigation = ({
               onPlusClick={onPlusClick}
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
+              isTrashFolder={isTrashFolder}
             />
           </StyledContainer>
-          {isTrashFolder && !isEmptyPage && (
-            <TrashWarning title={titles.trashWarning} />
+          {isDesktop && isTrashFolder && !isEmptyPage && (
+            <TrashWarning
+              title={titles.trashWarning}
+              isTabletView={isTabletView}
+            />
           )}
           {infoPanelIsVisible && !hideInfoPanel && (
             <ToggleInfoPanelButton

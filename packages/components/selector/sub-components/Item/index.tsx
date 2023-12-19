@@ -3,7 +3,7 @@ import React from "react";
 import Avatar from "../../../avatar";
 import Text from "../../../text";
 import Checkbox from "../../../checkbox";
-
+import RoomIcon from "../../../room-icon";
 import StyledItem from "./StyledItem";
 
 import { ItemProps, Data, Item as ItemType } from "./Item.types";
@@ -22,6 +22,7 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
 
   return (
     prevItem?.id === nextItem?.id &&
+    prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected
   );
 };
@@ -38,11 +39,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabled } = item;
+    const { label, avatar, icon, role, isSelected, isDisabled, color } = item;
 
     const currentRole = role ? role : "user";
 
-    const isLogo = !!icon;
+    const defaultIcon = !!color;
+    const isLogo = !!icon || defaultIcon;
 
     const onChangeAction = () => {
       onSelect && onSelect(item);
@@ -75,6 +77,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             role={currentRole}
             size={"min"}
           />
+        ) : defaultIcon ? (
+          <RoomIcon color={color} title={label} />
         ) : (
           <img className="room-logo" src={icon} alt="room logo" />
         )}
@@ -85,6 +89,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           fontSize={"14px"}
           noSelect
           truncate
+          dir="auto"
         >
           {label}
         </Text>

@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
@@ -18,6 +19,7 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
 import Text from "@docspace/components/text";
+import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -49,13 +51,23 @@ const SetRoomParams = ({
   isDisabled,
   isValidTitle,
   setIsValidTitle,
+  isWrongTitle,
+  setIsWrongTitle,
   onKeyUp,
   enableThirdParty,
+  setChangeRoomOwnerIsVisible,
+  folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
+    if (e.target.value.match(folderFormValidation)) {
+      setIsWrongTitle(true);
+      // toastr.warning(t("Files:ContainsSpecCharacter"));
+    } else {
+      setIsWrongTitle(false);
+    }
     setRoomParams({ ...roomParams, title: e.target.value });
   };
 
@@ -66,6 +78,12 @@ const SetRoomParams = ({
     setRoomParams({ ...roomParams, storageLocation });
 
   const onChangeIcon = (icon) => setRoomParams({ ...roomParams, icon: icon });
+
+  const onOwnerChange = () => {
+    setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
+      setRoomParams({ ...roomParams, roomOwner })
+    );
+  };
 
   return (
     <StyledSetRoomParams>
@@ -98,7 +116,12 @@ const SetRoomParams = ({
         onChange={onChangeName}
         isDisabled={isDisabled}
         isValidTitle={isValidTitle}
-        errorMessage={t("Common:RequiredField")}
+        isWrongTitle={isWrongTitle}
+        errorMessage={
+          isWrongTitle
+            ? t("Files:ContainsSpecCharacter")
+            : t("Common:RequiredField")
+        }
         onKeyUp={onKeyUp}
         isAutoFocussed={true}
       />
@@ -108,6 +131,7 @@ const SetRoomParams = ({
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}
       />
+
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (
         <IsPrivateParam
@@ -116,6 +140,13 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+
+      {isEdit && (
+        <ChangeRoomOwner
+          roomOwner={roomParams.roomOwner}
+          onOwnerChange={onOwnerChange}
+        />
+      )}
 
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
@@ -128,6 +159,7 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
         />
       )}
+
       <div>
         <Text fontWeight={600} className="icon-editor_text">
           {t("Icon")}
@@ -158,6 +190,18 @@ const SetRoomParams = ({
   );
 };
 
-export default withTranslation(["CreateEditRoomDialog", "Translations"])(
-  withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
+export default inject(({ auth, dialogsStore }) => {
+  const { setChangeRoomOwnerIsVisible } = dialogsStore;
+  const { folderFormValidation } = auth.settingsStore;
+
+  return {
+    folderFormValidation,
+    setChangeRoomOwnerIsVisible,
+  };
+})(
+  observer(
+    withTranslation(["CreateEditRoomDialog", "Translations"])(
+      withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
+    )
+  )
 );

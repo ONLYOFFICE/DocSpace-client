@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
@@ -61,7 +61,7 @@ const HistoryTableRow = (props) => {
     formatFilters,
     isRetryPending,
   } = props;
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { t, i18n } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -98,9 +98,14 @@ const HistoryTableRow = (props) => {
   ];
 
   const formattedDelivery =
-    moment(item.delivery).format("MMM D, YYYY, h:mm:ss A") + " UTC";
+    moment(item.delivery)
+      .tz(window.timezone || "")
+      .locale(i18n.language)
+      .format("MMM D, YYYY, h:mm:ss A") +
+    " " +
+    t("Common:UTC");
 
-  const onChange = (e) => {
+  const onRowClick = (e) => {
     if (
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
@@ -113,12 +118,16 @@ const HistoryTableRow = (props) => {
     toggleEventId(item.id);
   };
 
+  const onCheckboxClick = () => {
+    toggleEventId(item.id);
+  };
+
   const isChecked = isIdChecked(item.id);
 
   return (
     <StyledWrapper
       className={isChecked ? "selected-table-row" : ""}
-      onClick={onChange}
+      onClick={onRowClick}
     >
       <StyledTableRow
         contextOptions={contextOptions}
@@ -129,7 +138,7 @@ const HistoryTableRow = (props) => {
           <TableCell checked={isChecked} className="checkboxWrapper">
             <Checkbox
               className="checkbox"
-              onChange={onChange}
+              onChange={onCheckboxClick}
               isChecked={isChecked}
             />
           </TableCell>

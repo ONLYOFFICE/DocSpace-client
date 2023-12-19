@@ -23,6 +23,8 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isPublicRoom,
+      isFrame,
+      frameTableColumns,
     } = this.props;
 
     const defaultColumns = [];
@@ -75,6 +77,13 @@ class FilesTableHeader extends React.Component {
           sortBy: SortByFieldName.ModifiedDate,
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
+        },
+        {
+          key: "QuickButtons",
+          title: "",
+          enable: this.props.roomColumnQuickButtonsIsEnabled,
+          defaultSize: 75,
+          resizable: false,
         },
       ];
       defaultColumns.push(...columns);
@@ -225,13 +234,25 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
-    const columns = getColumns(defaultColumns);
+    let columns = getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(this.props.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
-      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
+      (splitColumns && splitColumns.length !== columns.length) ||
+      !splitColumns ||
+      isFrame;
 
     const tableColumns = columns.map((c) => c.enable && c.key);
+
+    if (isFrame && frameTableColumns) {
+      const frameTableArray = frameTableColumns.split(",");
+
+      columns = columns.map((col) => {
+        col.enable = frameTableArray.includes(col.key) ? true : false;
+        return col;
+      });
+    }
+
     this.setTableColumns(tableColumns);
     if (fromUpdate) {
       this.setState({
@@ -256,7 +277,7 @@ class FilesTableHeader extends React.Component {
 
   componentDidMount() {
     this.customScrollElm = document.getElementsByClassName("section-scroll")[0];
-    this.customScrollElm.addEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.addEventListener("scroll", this.onBeginScroll);
   }
 
   onBeginScroll = () => {
@@ -319,7 +340,7 @@ class FilesTableHeader extends React.Component {
   }
 
   componentWillUnmount() {
-    this.customScrollElm.removeEventListener("scroll", this.onBeginScroll);
+    this.customScrollElm?.removeEventListener("scroll", this.onBeginScroll);
   }
 
   onColumnChange = (key) => {
@@ -368,7 +389,8 @@ class FilesTableHeader extends React.Component {
   };
 
   onRoomsFilter = (sortBy) => {
-    const { roomsFilter, setIsLoading, navigate, location } = this.props;
+    const { roomsFilter, setIsLoading, navigate, location, setRoomsFilter } =
+      this.props;
 
     const newFilter = roomsFilter.clone();
     if (newFilter.sortBy !== sortBy) {
@@ -379,7 +401,7 @@ class FilesTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
+    setRoomsFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -399,6 +421,7 @@ class FilesTableHeader extends React.Component {
       withPaging,
       tagRef,
       setHideColumns,
+      isFrame,
     } = this.props;
 
     const {
@@ -429,6 +452,7 @@ class FilesTableHeader extends React.Component {
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
+        showSettings={!isFrame}
       />
     );
   }
@@ -455,13 +479,14 @@ export default inject(
       firstElemChecked,
       headerBorder,
       roomsFilter,
+      setRoomsFilter,
     } = filesStore;
     const { isRecentFolder, isRoomsFolder, isArchiveFolder, isTrashFolder } =
       treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
     const sortingVisible = !isRecentFolder;
-    const { withPaging } = auth.settingsStore;
+    const { withPaging, isFrame, frameConfig } = auth.settingsStore;
 
     const {
       tableStorageName,
@@ -486,6 +511,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,
@@ -495,6 +521,7 @@ export default inject(
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
     return {
+      setRoomsFilter,
       isHeaderChecked,
       filter,
       selectedFolderId: selectedFolderStore.id,
@@ -533,6 +560,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,
@@ -541,6 +569,9 @@ export default inject(
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,
+
+      isFrame,
+      frameTableColumns: frameConfig?.viewTableColumns,
     };
   }
 )(

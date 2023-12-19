@@ -7,12 +7,13 @@ import React, {
 } from "react";
 import { isDesktop, isMobile } from "react-device-detect";
 
-import { loadScript, combineUrl } from "@docspace/common/utils";
+import { loadScript, combineUrl } from "../../../../utils";
+import { getDocumentServiceLocation } from "../../../../api/files";
 
 import PDFViewerProps, { BookMark } from "./PDFViewer.props";
 import ViewerLoader from "../ViewerLoader";
 import MainPanel from "./ui/MainPanel";
-import Sidebar from "./ui/Sidebar";
+import Sidebar from "./ui/SideBar";
 
 import {
   ErrorMessage,
@@ -88,30 +89,9 @@ function PDFViewer({
   }, [src]);
 
   useLayoutEffect(() => {
-    const origin = window.location.origin;
-    //@ts-ignore
-    const path = window.DocSpaceConfig.pdfViewerUrl;
-
-    if (isError) return;
-
-    if (!isLoadedViewerScript) {
-      setIsLoadingScript(true);
-      loadScript(
-        combineUrl(origin, path),
-        pdfViewerId,
-        () => {
-          // initViewer();
-          setIsLoadedViewerScript(true);
-          setIsLoadingScript(false);
-        },
-        (event: any) => {
-          setIsLoadingScript(false);
-          setIsError(true);
-          console.error(event);
-        }
-      );
-    }
-  }, [isError]);
+    if (isError || isLoadedViewerScript) return;
+    loadViewerScript();
+  }, [isError, isLoadedViewerScript]);
 
   useEffect(() => {
     if (isError) return;
@@ -205,6 +185,27 @@ function PDFViewer({
       pdfViewer.current.setZoomMode(2);
     }
   };
+
+  const loadViewerScript = useCallback(async () => {
+    const path = window.DocSpaceConfig.pdfViewerUrl;
+    const { docServiceUrl } = await getDocumentServiceLocation();
+
+    setIsLoadingScript(true);
+    loadScript(
+      combineUrl(docServiceUrl, path),
+      pdfViewerId,
+      () => {
+        // initViewer();
+        setIsLoadedViewerScript(true);
+        setIsLoadingScript(false);
+      },
+      (event: any) => {
+        setIsLoadingScript(false);
+        setIsError(true);
+        console.error(event);
+      }
+    );
+  }, []);
 
   const resize = useCallback(() => {
     //@ts-ignore

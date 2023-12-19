@@ -15,7 +15,10 @@ import {
 } from "@docspace/common/api/files";
 import { TenantStatus } from "@docspace/common/constants";
 
-import { getLogoFromPath } from "@docspace/common/utils";
+import {
+  getLtrLanguageForEditor,
+  getLogoFromPath,
+} from "@docspace/common/utils";
 
 export const getFavicon = (logoUrls) => {
   if (!logoUrls) return null;
@@ -56,15 +59,21 @@ export const initDocEditor = async (req) => {
     const fileVersion = version || null;
 
     const baseSettings = [
-      getUser(),
-      getSettings(),
-      getAppearanceTheme(),
-      getLogoUrls(),
+      getUser(null, headers),
+      getAppearanceTheme(headers),
+      getLogoUrls(headers),
     ];
+    let settings;
 
-    [user, settings, appearanceTheme, logoUrls] = await Promise.all(
-      baseSettings
-    );
+    try {
+      settings = await getSettings(false, headers);
+    } catch (err) {
+      console.error("initDocEditor settings failed", err);
+
+      return { isSettingsError: true };
+    }
+
+    [user, appearanceTheme, logoUrls] = await Promise.all(baseSettings);
 
     if (settings.tenantStatus === TenantStatus.PortalRestore) {
       error = "restore-backup";
@@ -72,8 +81,8 @@ export const initDocEditor = async (req) => {
     }
 
     [filesSettings, versionInfo] = await Promise.all([
-      getSettingsFiles(),
-      getBuildVersion(),
+      getSettingsFiles(headers),
+      getBuildVersion(headers),
     ]);
 
     const successAuth = !!user;
@@ -91,7 +100,14 @@ export const initDocEditor = async (req) => {
       return { error };
     }
 
-    const config = await openEdit(fileId, fileVersion, doc, view, shareKey);
+    const config = await openEdit(
+      fileId,
+      fileVersion,
+      doc,
+      view,
+      headers,
+      shareKey
+    );
 
     //const sharingSettings = await getShareFiles([+fileId], []);
 
@@ -140,6 +156,12 @@ export const initDocEditor = async (req) => {
         config.editorConfig.customization.logo.url +
         getLogoFromPath(config.editorConfig.customization.customer.logo);
     }
+    // needed to reset rtl language in Editor
+    config.editorConfig.lang = getLtrLanguageForEditor(
+      user?.cultureName,
+      settings.culture,
+      true
+    );
 
     return {
       config,

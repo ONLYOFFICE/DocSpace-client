@@ -1,34 +1,59 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { ValidationResult } from "./../helpers/constants";
+import { useLocation, Navigate } from "react-router-dom";
+import { AuthenticatedAction, ValidationResult } from "./../helpers/constants";
 import Loader from "@docspace/components/loader";
 import Section from "@docspace/common/components/Section";
 import { checkConfirmLink } from "@docspace/common/api/user"; //TODO: Move AuthStore
 import { combineUrl, getObjectByLocation } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
-const ConfirmRoute = (props) => {
+const ConfirmRoute = ({
+  doAuthenticated,
+  isAuthenticated,
+  storeIsLoaded,
+  logout,
+  defaultPage,
+  children,
+}) => {
   const [state, setState] = React.useState({
     linkData: {},
     isLoaded: false,
+    roomData: {},
   });
 
   const location = useLocation();
 
-  React.useEffect(() => {
-    const { forUnauthorized, isAuthenticated } = props;
+  const getData = React.useCallback(() => {
+    const queryParams = getObjectByLocation(location);
+    const url = location.pathname;
+    const posSeparator = url.lastIndexOf("/");
 
-    if (forUnauthorized && isAuthenticated) {
-      props.logout();
+    const type = !!posSeparator ? url?.slice(posSeparator + 1) : "";
+    const confirmLinkData = Object.assign({ type }, queryParams);
+
+    return { type, confirmLinkData };
+  }, [location.pathname]);
+
+  const { type, confirmLinkData } = getData();
+
+  if (!type && confirmLinkData.type)
+    return (
+      <Navigate to={`/confirm/${confirmLinkData.type}${location.search}`} />
+    );
+
+  React.useEffect(() => {
+    if (!storeIsLoaded) return;
+
+    if (isAuthenticated && doAuthenticated != AuthenticatedAction.None) {
+      if (doAuthenticated == AuthenticatedAction.Redirect)
+        return window.location.replace(defaultPage);
+
+      if (doAuthenticated == AuthenticatedAction.Logout) logout();
     }
 
     const { search } = location;
 
-    const queryParams = getObjectByLocation(location);
-    const url = location.pathname;
-    const posSeparator = url.lastIndexOf("/");
-    const type = url.slice(posSeparator + 1);
-    const confirmLinkData = Object.assign({ type }, queryParams);
+    const { confirmLinkData } = getData();
 
     let path = "";
     if (!isAuthenticated) {
@@ -36,7 +61,9 @@ const ConfirmRoute = (props) => {
     }
 
     checkConfirmLink(confirmLinkData)
-      .then((validationResult) => {
+      .then((res) => {
+        const validationResult = res.result;
+
         switch (validationResult) {
           case ValidationResult.Ok:
             const confirmHeader = search.slice(1);
@@ -45,13 +72,18 @@ const ConfirmRoute = (props) => {
               confirmHeader,
             };
 
+            const roomData = {
+              roomId: res?.roomId,
+              title: res?.title,
+            };
+
             console.log("checkConfirmLink", {
               confirmLinkData,
               validationResult,
               linkData,
             });
 
-            setState((val) => ({ ...val, isLoaded: true, linkData }));
+            setState((val) => ({ ...val, isLoaded: true, linkData, roomData }));
             break;
           case ValidationResult.Invalid:
             console.error("invlid link", { confirmLinkData, validationResult });
@@ -72,6 +104,17 @@ const ConfirmRoute = (props) => {
               "/error"
             );
             break;
+          case ValidationResult.TariffLimit:
+            console.error("tariff limit", {
+              confirmLinkData,
+              validationResult,
+            });
+            window.location.href = combineUrl(
+              window.DocSpaceConfig?.proxy?.url,
+              path,
+              "/error?messageKey=20"
+            );
+            break;
           default:
             console.error("unknown link", {
               confirmLinkData,
@@ -86,6 +129,15 @@ const ConfirmRoute = (props) => {
         }
       })
       .catch((error) => {
+        if (error.response.status === 403) {
+          window.DocSpace.navigate("/access-restricted", {
+            state: { isRestrictionError: true },
+            replace: true,
+          });
+
+          return;
+        }
+
         console.error("FAILED checkConfirmLink", { error, confirmLinkData });
         window.location.href = combineUrl(
           window.DocSpaceConfig?.proxy?.url,
@@ -93,7 +145,7 @@ const ConfirmRoute = (props) => {
           "/error"
         );
       });
-  }, []);
+  }, [getData, doAuthenticated, isAuthenticated, storeIsLoaded, logout]);
 
   // console.log(`ConfirmRoute render`, this.props, this.state);
 
@@ -104,16 +156,24 @@ const ConfirmRoute = (props) => {
       </Section.SectionBody>
     </Section>
   ) : (
-    React.cloneElement(props.children, {
+    React.cloneElement(children, {
       linkData: state.linkData,
+      roomData: state.roomData,
     })
   );
 };
 
+ConfirmRoute.defaultProps = {
+  doAuthenticated: AuthenticatedAction.None,
+};
+
 export default inject(({ auth }) => {
-  const { isAuthenticated, logout } = auth;
+  const { isAuthenticated, logout, isLoaded, settingsStore } = auth;
+  const { defaultPage } = settingsStore;
   return {
     isAuthenticated,
     logout,
+    storeIsLoaded: isLoaded,
+    defaultPage,
   };
 })(observer(ConfirmRoute));

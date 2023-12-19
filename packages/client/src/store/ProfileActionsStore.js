@@ -9,14 +9,16 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 //import VideoGuidesReactSvgUrl from "PUBLIC_DIR/images/video.guides.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/common/utils";
 
-import { isDesktop, isTablet, isMobile } from "react-device-detect";
-import { getProfileMenuItems } from "SRC_DIR/helpers/plugins";
+import { isMobile } from "react-device-detect";
+
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
+import { isDesktop, isTablet } from "@docspace/components/utils/device";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -29,12 +31,14 @@ const PAYMENTS_URL = combineUrl(
 
 //const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
+const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
   filesStore = null;
   peopleStore = null;
   treeFoldersStore = null;
   selectedFolderStore = null;
+  pluginStore = null;
   isAboutDialogVisible = false;
   isDebugDialogVisible = false;
   isShowLiveChat = false;
@@ -45,13 +49,15 @@ class ProfileActionsStore {
     filesStore,
     peopleStore,
     treeFoldersStore,
-    selectedFolderStore
+    selectedFolderStore,
+    pluginStore
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.pluginStore = pluginStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -118,6 +124,11 @@ class ProfileActionsStore {
     window.DocSpace.navigate(settingsUrl);
   };
 
+  onSpacesClick = () => {
+    this.selectedFolderStore.setSelectedFolder(null);
+    window.open(SPACES_URL, "_blank");
+  };
+
   onPaymentsClick = () => {
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(PAYMENTS_URL);
@@ -153,27 +164,33 @@ class ProfileActionsStore {
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
 
-  // onVideoGuidesClick = () => {
-  //   window.open(VIDEO_GUIDES_URL, "_blank");
-  // };
+  //onVideoGuidesClick = () => {
+  //  window.open(VIDEO_GUIDES_URL, "_blank");
+  //};
 
   onHotkeysClick = () => {
     this.authStore.settingsStore.setHotkeyPanelVisible(true);
   };
 
   onAboutClick = () => {
-    if (isDesktop || isTablet) {
+    if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
     } else {
       window.DocSpace.navigate(ABOUT_URL);
     }
   };
 
-  onLogoutClick = () => {
-    this.authStore.logout().then(() => {
-      this.filesStore.reset();
-      this.peopleStore.reset();
-    });
+  onLogoutClick = async (t) => {
+    try {
+      const ssoLogoutUrl = await this.authStore.logout(false);
+
+      window.location.replace(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login")
+      );
+    } catch (e) {
+      console.error(e);
+      toastr.error(t("Common:UnexpectedError"));
+    }
   };
 
   onDebugClick = () => {
@@ -181,9 +198,11 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone } = this.authStore.settingsStore;
+    const { enablePlugins, standalone, portals, baseDomain, tenantAlias, limitedAccessSpace } =
+      this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
+    const { isOwner } = this.authStore.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -200,10 +219,48 @@ class ProfileActionsStore {
       ? {
           key: "user-menu-settings",
           icon: CatalogSettingsReactSvgUrl,
-          label: t("Common:SettingsDocSpace"),
+          label: t("Common:Settings"),
           onClick: () => this.onSettingsClick(settingsUrl),
         }
       : null;
+
+    const protocol = window?.location?.protocol;
+
+    const managementItems = portals.map((portal) => {
+      return {
+        key: portal.tenantId,
+        label: portal.domain,
+        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+        disabled: false,
+        checked: tenantAlias === portal.portalName
+      };
+    });
+
+    const management =
+      isAdmin && standalone && !limitedAccessSpace
+        ? {
+            key: "spaces-management-settings",
+            id: "spaces",
+            icon: SpacesReactSvgUrl,
+            label: t("Common:Spaces"),
+            onClick: this.onSpacesClick,
+            items:
+              baseDomain && baseDomain !== "localhost"
+                ? [
+                    ...managementItems,
+                    {
+                      key: "spaces-separator",
+                      isSeparator: true,
+                    },
+                    {
+                      key: "spaces-management",
+                      label: t("Common:SpaceManagement"),
+                      onClick: this.onSpacesClick,
+                    },
+                  ]
+                : null,
+          }
+        : null;
 
     let hotkeys = null;
     // if (modules) {
@@ -247,6 +304,14 @@ class ProfileActionsStore {
       };
     }
 
+    const feedbackAndSupportEnabled =
+      this.authStore.settingsStore.additionalResourcesData
+        ?.feedbackAndSupportEnabled;
+    const videoGuidesEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
+    const helpCenterEnabled =
+      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
+
     const actions = [
       {
         key: "user-menu-profile",
@@ -255,6 +320,7 @@ class ProfileActionsStore {
         onClick: this.onProfileClick,
       },
       settings,
+      management,
       isAdmin &&
         !isCommunity && {
           key: "user-menu-payments",
@@ -266,25 +332,25 @@ class ProfileActionsStore {
         isSeparator: true,
         key: "separator1",
       },
-      {
+      helpCenterEnabled && {
         key: "user-menu-help-center",
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
       },
-      // {
-      //   key: "user-menu-video",
-      //   icon: VideoGuidesReactSvgUrl,
-      //   label: "VideoGuides",
-      //   onClick: this.onVideoGuidesClick,
-      // },
+      /*videoGuidesEnabled && {
+        key: "user-menu-video",
+        icon: VideoGuidesReactSvgUrl,
+        label: "VideoGuides",
+        onClick: this.onVideoGuidesClick,
+      },*/
       hotkeys,
-      {
+      !isMobile && {
         isSeparator: true,
         key: "separator2",
       },
       liveChat,
-      {
+      feedbackAndSupportEnabled && {
         key: "user-menu-support",
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
@@ -297,18 +363,20 @@ class ProfileActionsStore {
         label: t("Common:AboutCompanyTitle"),
         onClick: this.onAboutClick,
       },
-      {
-        isSeparator: true,
-        key: "separator3",
-      },
-      {
+    ];
+
+    if (
+      !window.navigator.userAgent.includes("ZoomWebKit") &&
+      !window.navigator.userAgent.includes("ZoomApps")
+    ) {
+      actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
         label: t("Common:LogoutButton"),
-        onClick: this.onLogoutClick,
+        onClick: () => this.onLogoutClick(t),
         isButton: true,
-      },
-    ];
+      });
+    }
 
     if (debugInfo) {
       actions.splice(4, 0, {
@@ -319,62 +387,16 @@ class ProfileActionsStore {
       });
     }
 
-    if (enablePlugins) {
-      const pluginActions = getProfileMenuItems();
-
-      if (pluginActions) {
-        pluginActions.forEach((option) => {
-          actions.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
+    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
+      this.pluginStore.profileMenuItemsList.forEach((option) => {
+        actions.splice(option.value.position, 0, {
+          key: option.key,
+          ...option.value,
         });
-      }
+      });
     }
 
-    return this.checkEnabledActions(actions);
-  };
-
-  checkEnabledActions = (actions) => {
-    const actionsArray = actions;
-
-    if (!this.authStore.settingsStore.additionalResourcesData) {
-      return actionsArray;
-    }
-
-    const feedbackAndSupportEnabled =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportEnabled;
-    const videoGuidesEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
-    const helpCenterEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
-
-    if (!feedbackAndSupportEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-support"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!videoGuidesEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-video"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    if (!helpCenterEnabled) {
-      const index = actionsArray.findIndex(
-        (item) => item?.key === "user-menu-help-center"
-      );
-
-      actionsArray.splice(index, 1);
-    }
-
-    return actionsArray;
+    return actions;
   };
 }
 

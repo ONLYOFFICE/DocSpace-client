@@ -1,12 +1,24 @@
 import styled, { css } from "styled-components";
 import Box from "@docspace/components/box";
 import Scrollbar from "@docspace/components/scrollbar";
+import ModalDialog from "@docspace/components/modal-dialog";
 
-const StyledEditLinkPanel = styled.div`
+const StyledEditLinkPanel = styled(ModalDialog)`
   .edit-link-panel {
     .scroll-body {
-      padding-right: 0 !important;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-left: 0 !important;
+            `
+          : css`
+              padding-right: 0 !important;
+            `}
     }
+  }
+
+  .modal-body {
+    padding: 0px 0px 8px;
   }
 
   .field-label-icon {
@@ -14,19 +26,26 @@ const StyledEditLinkPanel = styled.div`
   }
 
   .edit-link_body {
-    padding: 22px 0px 20px;
+    padding: 4px 0px 0px;
 
     .edit-link_link-block {
       padding: 0px 16px 20px 16px;
 
       .edit-link-text {
         display: inline-flex;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
       }
 
       .edit-link_required-icon {
         display: inline-flex;
-        margin-left: 2px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 2px;
+              `
+            : css`
+                margin-left: 2px;
+              `}
       }
 
       .edit-link_link-input {
@@ -36,17 +55,34 @@ const StyledEditLinkPanel = styled.div`
     }
 
     .edit-link-toggle-block {
-      padding: 0px 16px 20px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 0 20px 16px;
+            `
+          : css`
+              padding: 0 16px 20px;
+            `}
+
       border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 
       .edit-link-toggle-header {
         display: flex;
         padding-top: 20px;
         padding-bottom: 8px;
+        gap: 8px;
 
         .edit-link-toggle {
-          margin-left: auto;
-          margin-right: 28px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-right: auto;
+                  margin-left: 28px;
+                `
+              : css`
+                  margin-left: auto;
+                  margin-right: 28px;
+                `}
         }
       }
       .edit-link_password-block {
@@ -75,7 +111,14 @@ const StyledEditLinkPanel = styled.div`
       }
 
       .edit-link_generate-icon {
-        margin: 16px 0px 0px 8px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin: 16px 8px 0px 0px;
+              `
+            : css`
+                margin: 16px 0px 0px 8px;
+              `}
       }
     }
   }
@@ -92,7 +135,7 @@ const StyledEditLinkPanel = styled.div`
 
     .edit-link_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 
@@ -109,11 +152,11 @@ const StyledEditLinkPanel = styled.div`
 const StyledScrollbar = styled(Scrollbar)`
   position: relative;
   padding: 16px 0;
-  height: calc(100vh - 87px) !important;
+  height: calc(100% - 150px) !important;
 `;
 
 const StyledButtons = styled(Box)`
-  padding: 16px 16px 16px 16px;
+  padding: 16px;
   display: flex;
   align-items: center;
   gap: 10px;

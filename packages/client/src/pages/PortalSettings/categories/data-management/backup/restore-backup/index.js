@@ -9,7 +9,7 @@ import {
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
 import toastr from "@docspace/components/toast/toastr";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
-import { BackupStorageType } from "@docspace/common/constants";
+import { BackupStorageType, DeviceType } from "@docspace/common/constants";
 import Checkbox from "@docspace/components/checkbox";
 import Text from "@docspace/components/text";
 
@@ -20,6 +20,7 @@ import BackupListModalDialog from "./sub-components/backup-list";
 import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LOCAL_FILE = "localFile",
   BACKUP_ROOM = "backupRoom",
@@ -47,6 +48,7 @@ const RestoreBackup = (props) => {
     isEnableRestore,
     setRestoreResource,
     buttonSize,
+    standalone,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -59,7 +61,6 @@ const RestoreBackup = (props) => {
     useState(false);
   const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
     useState(false);
-  const [path, setPath] = useState("");
 
   const startRestoreBackup = useCallback(async () => {
     try {
@@ -82,6 +83,7 @@ const RestoreBackup = (props) => {
   }, []);
 
   useEffect(() => {
+    setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
     return () => {
       clearProgressInterval();
@@ -167,32 +169,9 @@ const RestoreBackup = (props) => {
     <div className="restore-backup_modules">
       {radioButtonState === LOCAL_FILE && <LocalFileModule t={t} />}
 
-      {radioButtonState === BACKUP_ROOM && (
-        <RoomsModule
-          isDisabled={!isEnableRestore}
-          t={t}
-          fileName={path}
-          isPanelVisible={isVisibleSelectFileDialog}
-          onClose={onModalClose}
-          onClickInput={onClickInput}
-          onSelectFile={(file) => {
-            if (file && file.path) {
-              const newPath = file.path.join("/");
-              setPath(`${newPath}/${file.title}`);
-            }
-            setRestoreResource(file.id);
-          }}
-        />
-      )}
+      {radioButtonState === BACKUP_ROOM && <RoomsModule />}
       {radioButtonState === DISK_SPACE && (
-        <ThirdPartyResourcesModule
-          t={t}
-          isPanelVisible={isVisibleSelectFileDialog}
-          onClose={onModalClose}
-          onClickInput={onClickInput}
-          onSelectFile={(file) => setRestoreResource(file.id)}
-          buttonSize={buttonSize}
-        />
+        <ThirdPartyResourcesModule buttonSize={buttonSize} />
       )}
       {radioButtonState === STORAGE_SPACE && (
         <ThirdPartyStoragesModule onSetStorageId={onSetStorageId} />
@@ -212,12 +191,14 @@ const RestoreBackup = (props) => {
       >
         {t("RestoreBackupWarningText")}
       </Text>
-      <Text
-        className="restore-backup_warning-link settings_unavailable"
-        noSelect
-      >
-        {t("RestoreBackupResetInfoWarningText")}
-      </Text>
+      {!standalone && (
+        <Text
+          className="restore-backup_warning-link settings_unavailable"
+          noSelect
+        >
+          {t("RestoreBackupResetInfoWarningText")}
+        </Text>
+      )}
     </>
   );
 
@@ -287,7 +268,7 @@ const RestoreBackup = (props) => {
 
 export default inject(({ auth, backup }) => {
   const { settingsStore, currentQuotaStore } = auth;
-  const { isTabletView } = settingsStore;
+  const { currentDeviceType, standalone } = settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {
     getProgress,
@@ -298,9 +279,11 @@ export default inject(({ auth, backup }) => {
     setRestoreResource,
   } = backup;
 
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
   return {
+    standalone,
     isEnableRestore: isRestoreAndAutoBackupAvailable,
     setStorageRegions,
     setThirdPartyStorage,

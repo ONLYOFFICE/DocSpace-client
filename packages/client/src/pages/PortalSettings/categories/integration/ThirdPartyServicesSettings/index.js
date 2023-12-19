@@ -1,39 +1,42 @@
+import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
+import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
+
 import React from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import { showLoader, hideLoader } from "@docspace/common/utils";
+
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import Badge from "@docspace/components/badge";
 import toastr from "@docspace/components/toast/toastr";
 import Button from "@docspace/components/button";
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { mobile, isMobile } from "@docspace/components/utils/device";
+
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
-import { inject, observer } from "mobx-react";
-import {
-  mobile,
-  smallTablet,
-  isSmallTablet,
-} from "@docspace/components/utils/device";
-import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
-import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
+
+import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
   width: 100%;
 
+  .third-party-link {
+    font-weight: 600;
+  }
+
   .third-party-description {
+    line-height: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .paid-badge {
     cursor: auto;
-  }
-
-  @media ${mobile} {
-    width: calc(100% - 8px);
   }
 
   .consumers-list-container {
@@ -58,14 +61,18 @@ const RootContainer = styled(Box)`
     gap: 24px;
     align-items: center;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
       align-items: baseline;
     }
   }
 
-  .paid-badge {
-    margin-bottom: 8px;
+  .business-plan {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: -4px;
   }
 `;
 
@@ -164,7 +171,16 @@ class ThirdPartyServices extends React.Component {
       (consumer) =>
         consumer.title !== "Bitly" &&
         consumer.title !== "WordPress" &&
-        consumer.title !== "DocuSign"
+        consumer.title !== "DocuSign" &&
+        consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
+        consumer.name !== "twilio"
+    );
+
+    const freeConsumers = filteredConsumers.filter(
+      (consumer) => consumer.canSet === false
+    );
+    const paidConsumers = filteredConsumers.filter(
+      (consumer) => !freeConsumers.includes(consumer)
     );
 
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
@@ -175,18 +191,10 @@ class ThirdPartyServices extends React.Component {
     return (
       <>
         <RootContainer className="RootContainer">
-          {!isThirdPartyAvailable && (
-            <Badge
-              backgroundColor="#EDC409"
-              label={t("Common:Paid")}
-              className="paid-badge"
-              isPaidBadge={true}
-            />
-          )}
           <Text className="third-party-description">
             {t("ThirdPartyTitleDescription")}
           </Text>
-          <Box marginProp="8px 0 24px 0">
+          <Box marginProp="8px 0 20px 0">
             <Link
               className="third-party-link"
               color={currentColorScheme.main.accent}
@@ -210,27 +218,60 @@ class ThirdPartyServices extends React.Component {
               size="normal"
               minwidth="138px"
               onClick={submitRequest}
-              scale={isSmallTablet()}
+              scale={isMobile()}
             />
           </Box>
-          <div className="consumers-list-container">
-            {filteredConsumers.map((consumer) => (
-              <Box className="consumer-item-wrapper" key={consumer.name}>
-                <ConsumerItem
-                  consumer={consumer}
-                  dialogVisible={dialogVisible}
-                  isLoading={isLoading}
-                  onChangeLoading={onChangeLoading}
-                  onModalClose={onModalClose}
-                  onModalOpen={onModalOpen}
-                  setConsumer={setConsumer}
-                  updateConsumerProps={updateConsumerProps}
-                  t={t}
-                  isThirdPartyAvailable={isThirdPartyAvailable}
-                />
-              </Box>
-            ))}
-          </div>
+          {!consumers.length ? (
+            <ThirdPartyLoader />
+          ) : (
+            <div className="consumers-list-container">
+              {freeConsumers.map((consumer) => (
+                <Box className="consumer-item-wrapper" key={consumer.name}>
+                  <ConsumerItem
+                    consumer={consumer}
+                    dialogVisible={dialogVisible}
+                    isLoading={isLoading}
+                    onChangeLoading={onChangeLoading}
+                    onModalClose={onModalClose}
+                    onModalOpen={onModalOpen}
+                    setConsumer={setConsumer}
+                    updateConsumerProps={updateConsumerProps}
+                    t={t}
+                    isThirdPartyAvailable={isThirdPartyAvailable}
+                  />
+                </Box>
+              ))}
+              {!isThirdPartyAvailable && (
+                <div className="business-plan">
+                  <Text fontSize="16px" fontWeight={700}>
+                    {t("IncludedInBusiness")}
+                  </Text>
+                  <Badge
+                    backgroundColor="#EDC409"
+                    fontWeight="700"
+                    label={t("Common:Paid")}
+                    isPaidBadge={true}
+                  />
+                </div>
+              )}
+              {paidConsumers.map((consumer) => (
+                <Box className="consumer-item-wrapper" key={consumer.name}>
+                  <ConsumerItem
+                    consumer={consumer}
+                    dialogVisible={dialogVisible}
+                    isLoading={isLoading}
+                    onChangeLoading={onChangeLoading}
+                    onModalClose={onModalClose}
+                    onModalOpen={onModalOpen}
+                    setConsumer={setConsumer}
+                    updateConsumerProps={updateConsumerProps}
+                    t={t}
+                    isThirdPartyAvailable={isThirdPartyAvailable}
+                  />
+                </Box>
+              ))}
+            </div>
+          )}
         </RootContainer>
         {dialogVisible && (
           <ConsumerModalDialog

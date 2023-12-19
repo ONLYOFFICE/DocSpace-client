@@ -60,8 +60,10 @@ class InputBlock extends React.Component {
       iconSize,
       theme,
       forwardedRef,
+      onClick,
       iconButtonClassName,
       iconNode,
+      ...props
     } = this.props;
 
     if (typeof iconSize == "number" && iconSize > 0) {
@@ -105,6 +107,7 @@ class InputBlock extends React.Component {
           name={name}
           type={type}
           value={value}
+          onClick={onClick}
           isDisabled={isDisabled}
           hasError={hasError}
           hasWarning={hasWarning}
@@ -124,6 +127,7 @@ class InputBlock extends React.Component {
           mask={mask}
           keepCharPositions={keepCharPositions}
           forwardedRef={forwardedRef}
+          {...props}
         />
         {
           //iconNames.includes(iconName) && (
@@ -155,6 +159,8 @@ class InputBlock extends React.Component {
 InputBlock.propTypes = {
   /** Used as HTML `id` property */
   id: PropTypes.string,
+  /** Forwarded ref */
+  forwardedRef: PropTypes.object,
   /** Used as HTML `name` property */
   name: PropTypes.string,
   /** Supported type of the input fields.  */

@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Podłącz swoje sieci społecznościowe",
   "DarkTheme": "Motyw ciemny",
   "DescriptionForSecurity": "Ze względów bezpieczeństwa należy zmienić hasło.",
+  "DesktopTheme": "Zsynchronizuj z ustawieniami edytora dla komputerów stacjonarnych",
+  "DesktopThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem w zależności od bieżącego motywu edytorów dla komputerów stacjonarnych.",
   "EditPhoto": "Edytuj zdjęcie",
   "EmailNotVerified": "Adres e-mail nie został jeszcze zweryfikowany",
+  "ErrorAccountAlreadyUse": "Połączone konto jest już wykorzystywane przez innego użytkownika",
+  "FileManagement": "Zarządzanie plikami",
   "InterfaceTheme": "Motyw interfejsu",
   "LightTheme": "Motyw jasny",
   "LogoutActiveConnection": "Wyloguj z aktywnego połączenia",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Aktywne połączenie zostało wylogowane: {{platform}}, {{browser}}",
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
-  "TfaLoginSettings": "Ustawienia logowania",
   "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
 }

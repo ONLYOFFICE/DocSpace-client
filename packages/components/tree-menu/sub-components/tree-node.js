@@ -5,6 +5,7 @@ import { TreeNode } from "rc-tree";
 import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import NoUserSelect from "../../utils/commonStyles";
+import { tablet } from "../../utils/device";
 import Base from "../../themes/base";
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/catalog.folder.react.svg";
 import CheckboxCheckedReactSvg from "PUBLIC_DIR/images/checkbox.checked.react.svg";
@@ -115,7 +116,7 @@ const TreeNodeMenu = styled(TreeNode)`
   font-family: Open Sans;
   font-style: normal;
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 24px;
 
   position: relative;
@@ -371,7 +372,7 @@ const TreeNodeMenu = styled(TreeNode)`
     position: absolute;
     right: -10px;
     top: 2px;
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       right: -29px;
     }
   }
@@ -379,7 +380,7 @@ const TreeNodeMenu = styled(TreeNode)`
     props.needTopMargin &&
     css`
       margin-top: 18px !important;
-      @media (max-width: 1024px) {
+      @media ${tablet} {
         margin-top: 14px !important;
       }
     `}

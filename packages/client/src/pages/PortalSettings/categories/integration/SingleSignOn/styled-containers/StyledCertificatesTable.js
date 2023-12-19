@@ -11,7 +11,8 @@ const StyledCertificatesTable = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 40px;
 
-    border-bottom: 1px solid #eceef1;
+    border-bottom: ${(props) =>
+      props.theme.client.settings.integration.sso.border};
 
     &-cell:nth-child(n + 2) {
       display: flex;
@@ -24,12 +25,14 @@ const StyledCertificatesTable = styled.div`
   }
 
   .row {
-    width: 350px;
+    max-width: 520px;
+    width: 100%;
     display: flex;
     gap: 12px;
     align-items: center;
     padding: 11px 0 10px;
-    border-bottom: 1px solid #eceef1;
+    border-bottom: ${(props) =>
+      props.theme.client.settings.integration.sso.border};
 
     .column {
       display: flex;

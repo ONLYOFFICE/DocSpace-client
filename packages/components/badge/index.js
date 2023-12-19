@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { StyledBadge, StyledInner, StyledText } from "./styled-badge";
+import { StyledInner, StyledText } from "./styled-badge";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const Badge = (props) => {
   //console.log("Badge render");
@@ -50,7 +50,6 @@ const Badge = (props) => {
       >
         <StyledText
           textAlign="center"
-          backgroundColor={backgroundColor}
           fontWeight={fontWeight}
           borderRadius={borderRadius}
           color={color}
@@ -73,7 +72,7 @@ Badge.propTypes = {
   /** CSS font-size */
   fontSize: PropTypes.string,
   /** CSS font-weight */
-  fontWeight: PropTypes.number,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** CSS border-radius */
   borderRadius: PropTypes.string,
   /** CSS padding */

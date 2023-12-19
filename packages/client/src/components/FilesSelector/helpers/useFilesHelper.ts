@@ -21,157 +21,12 @@ import {
   FilterType,
   FolderType,
 } from "@docspace/common/constants";
+//@ts-ignore
+import toastr from "@docspace/components/toast/toastr";
 
-const getIconUrl = (extension: string, isImage: boolean, isMedia: boolean) => {
-  // if (extension !== iconPath) return iconSize32.get(iconPath);
-  let path = "";
+const DEFAULT_FILE_EXTS = "file";
 
-  switch (extension) {
-    case ".avi":
-      path = "avi.svg";
-      break;
-    case ".csv":
-      path = "csv.svg";
-      break;
-    case ".djvu":
-      path = "djvu.svg";
-      break;
-    case ".doc":
-      path = "doc.svg";
-      break;
-    case ".docm":
-      path = "docm.svg";
-      break;
-    case ".docx":
-      path = "docx.svg";
-      break;
-    case ".dotx":
-      path = "dotx.svg";
-      break;
-    case ".dvd":
-      path = "dvd.svg";
-      break;
-    case ".epub":
-      path = "epub.svg";
-      break;
-    case ".pb2":
-    case ".fb2":
-      path = "fb2.svg";
-      break;
-    case ".flv":
-      path = "flv.svg";
-      break;
-    case ".fodt":
-      path = "fodt.svg";
-      break;
-    case ".iaf":
-      path = "iaf.svg";
-      break;
-    case ".ics":
-      path = "ics.svg";
-      break;
-    case ".m2ts":
-      path = "m2ts.svg";
-      break;
-    case ".mht":
-      path = "mht.svg";
-      break;
-    case ".mkv":
-      path = "mkv.svg";
-      break;
-    case ".mov":
-      path = "mov.svg";
-      break;
-    case ".mp4":
-      path = "mp4.svg";
-      break;
-    case ".mpg":
-      path = "mpg.svg";
-      break;
-    case ".odp":
-      path = "odp.svg";
-      break;
-    case ".ods":
-      path = "ods.svg";
-      break;
-    case ".odt":
-      path = "odt.svg";
-      break;
-    case ".otp":
-      path = "otp.svg";
-      break;
-    case ".ots":
-      path = "ots.svg";
-      break;
-    case ".ott":
-      path = "ott.svg";
-      break;
-    case ".pdf":
-      path = "pdf.svg";
-      break;
-    case ".pot":
-      path = "pot.svg";
-      break;
-    case ".pps":
-      path = "pps.svg";
-      break;
-    case ".ppsx":
-      path = "ppsx.svg";
-      break;
-    case ".ppt":
-      path = "ppt.svg";
-      break;
-    case ".pptm":
-      path = "pptm.svg";
-      break;
-    case ".pptx":
-      path = "pptx.svg";
-      break;
-    case ".rtf":
-      path = "rtf.svg";
-      break;
-    case ".svg":
-      path = "svg.svg";
-      break;
-    case ".txt":
-      path = "txt.svg";
-      break;
-    case ".webm":
-      path = "webm.svg";
-      break;
-    case ".xls":
-      path = "xls.svg";
-      break;
-    case ".xlsm":
-      path = "xlsm.svg";
-      break;
-    case ".xlsx":
-      path = "xlsx.svg";
-      break;
-    case ".xps":
-      path = "xps.svg";
-      break;
-    case ".xml":
-      path = "xml.svg";
-      break;
-    case ".oform":
-      path = "oform.svg";
-      break;
-    case ".docxf":
-      path = "docxf.svg";
-      break;
-    default:
-      path = "file.svg";
-      break;
-  }
-
-  if (isMedia) path = "sound.svg";
-  if (isImage) path = "image.svg";
-
-  return iconSize32.get(path);
-};
-
-const convertFoldersToItems = (
+export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
   filterParam?: string
@@ -180,6 +35,7 @@ const convertFoldersToItems = (
     const {
       id,
       title,
+      roomType,
       filesCount,
       foldersCount,
       security,
@@ -188,6 +44,7 @@ const convertFoldersToItems = (
     }: {
       id: number;
       title: string;
+      roomType: number;
       filesCount: number;
       foldersCount: number;
       security: Security;
@@ -208,6 +65,7 @@ const convertFoldersToItems = (
       parentId,
       rootFolderType,
       isFolder: true,
+      roomType,
       isDisabled: !!filterParam ? false : disabledItems.includes(id),
     };
   });
@@ -215,28 +73,36 @@ const convertFoldersToItems = (
   return items;
 };
 
-const convertFilesToItems = (files: any, filterParam?: string) => {
+export const convertFilesToItems = (
+  files: any,
+  getIcon: (size: number, fileExst: string) => string,
+  filterParam?: string
+) => {
   const items = files.map((file: any) => {
-    const { id, title, security, parentId, rootFolderType, fileExst } = file;
+    const {
+      id,
+      title,
+      security,
+      parentId,
+      folderId,
+      rootFolderType,
+      fileExst,
+    } = file;
 
-    const isImage = file.viewAccessability.ImageView;
-    const isMedia = file.viewAccessability.MediaView;
-
-    let icon = getIconUrl(fileExst, isImage, isMedia);
-
-    // if(filterParam)
+    const icon = getIcon(32, fileExst || DEFAULT_FILE_EXTS);
+    const label = title.replace(fileExst, "") || fileExst;
 
     return {
       id,
-      label: title.replace(fileExst, ""),
+      label,
       title,
       icon,
-
       security,
-      parentId,
+      parentId: parentId || folderId,
       rootFolderType,
       isFolder: false,
       isDisabled: !filterParam,
+      fileExst,
     };
   });
   return items;
@@ -259,6 +125,14 @@ export const useFilesHelper = ({
   onSelectTreeNode,
   setSelectedTreeNode,
   filterParam,
+  getRootData,
+  onSetBaseFolderPath,
+  isRoomsOnly,
+  rootThirdPartyId,
+  getRoomList,
+  getIcon,
+  t,
+  setIsSelectedParentFolder,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -288,15 +162,27 @@ export const useFilesHelper = ({
         filter.applyFilterOption = ApplyFilterOption.Files;
         switch (filterParam) {
           case FilesSelectorFilterTypes.DOCX:
-            filter.filterType = FilterType.DocumentsOnly;
+            filter.extension = FilesSelectorFilterTypes.DOCX;
             break;
 
           case FilesSelectorFilterTypes.IMG:
             filter.filterType = FilterType.ImagesOnly;
             break;
 
-          case FilesSelectorFilterTypes.GZ:
-            filter.filterType = FilterType.ArchiveOnly;
+          case FilesSelectorFilterTypes.BackupOnly:
+            filter.extension = "gz,tar";
+            break;
+
+          case FilesSelectorFilterTypes.DOCXF:
+            filter.filterType = FilterType.OFormTemplateOnly;
+            break;
+
+          case FilesSelectorFilterTypes.XLSX:
+            filter.filterType = FilterType.SpreadsheetsOnly;
+            break;
+
+          case FilesSelectorFilterTypes.ALL:
+            filter.filterType = FilterType.FilesOnly;
             break;
         }
       }
@@ -305,68 +191,148 @@ export const useFilesHelper = ({
 
       filter.folder = id.toString();
 
-      const currentFolder = await getFolder(id, filter);
+      const setSettings = async (
+        folderId: string | number,
+        isErrorPath = false
+      ) => {
+        if (isInit && getRootData) {
+          const folder = await getFolderInfo(folderId, true);
 
-      const { folders, files, total, count, pathParts, current } =
-        currentFolder;
+          const isArchive = folder.rootFolderType === FolderType.Archive;
 
-      setSelectedItemSecurity(current.security);
+          if (folder.rootFolderType === FolderType.TRASH || isArchive) {
+            if (isRoomsOnly && getRoomList) {
+              await getRoomList(0, true, null, true);
+              toastr.error(
+                t("Files:ArchivedRoomAction", { name: folder.title })
+              );
+              return;
+            }
+            await getRootData();
 
-      const foldersList: Item[] = convertFoldersToItems(
-        folders,
-        disabledItems,
-        filterParam
-      );
+            if (onSetBaseFolderPath && isArchive) {
+              onSetBaseFolderPath && onSetBaseFolderPath([]);
+              toastr.error(
+                t("Files:ArchivedRoomAction", { name: folder.title })
+              );
+            }
 
-      const filesList: Item[] = convertFilesToItems(files, filterParam);
+            return;
+          }
+        }
 
-      const itemList = [...foldersList, ...filesList];
+        const currentFolder = await getFolder(folderId, filter);
 
-      setHasNextPage(count === PAGE_COUNT);
+        const { folders, files, total, count, pathParts, current } =
+          currentFolder;
 
-      onSelectTreeNode && setSelectedTreeNode({ ...current, path: pathParts });
+        setSelectedItemSecurity(current.security);
 
-      if (isInit) {
-        if (isThirdParty) {
-          const breadCrumbs: BreadCrumb[] = [
-            { label: current.title, isRoom: false, id: current.id },
-          ];
+        const foldersList: Item[] = convertFoldersToItems(
+          folders,
+          disabledItems,
+          filterParam
+        );
 
-          setBreadCrumbs(breadCrumbs);
-          setIsBreadCrumbsLoading(false);
-        } else {
-          const breadCrumbs: BreadCrumb[] = await Promise.all(
-            pathParts.map(async (folderId: number | string) => {
-              const folderInfo: any = await getFolderInfo(folderId);
+        const filesList: Item[] = convertFilesToItems(
+          files,
+          getIcon,
+          filterParam
+        );
 
-              const { title, id, parentId, rootFolderType } = folderInfo;
+        const itemList = [...foldersList, ...filesList];
+
+        setHasNextPage(count === PAGE_COUNT);
+
+        onSelectTreeNode &&
+          setSelectedTreeNode({ ...current, path: pathParts });
+
+        if (isInit) {
+          let foundParentId = false,
+            currentFolderIndex = -1;
+
+          const breadCrumbs: BreadCrumb[] = pathParts.map(
+            ({
+              id,
+              title,
+              roomType,
+            }: {
+              id: number | string;
+              title: string;
+              roomType?: number;
+            }) => {
+              // const folderInfo: any = await getFolderInfo(folderId);
+
+              // const { title, id, parentId, rootFolderType, roomType } =
+              //   folderInfo;
+
+              if (!foundParentId) {
+                currentFolderIndex = disabledItems.findIndex((x) => x === id);
+              }
+
+              if (!foundParentId && currentFolderIndex !== -1) {
+                foundParentId = true;
+                setIsSelectedParentFolder(true);
+              }
 
               return {
                 label: title,
                 id: id,
-                isRoom: parentId === 0 && rootFolderType === FolderType.Rooms,
+                isRoom: currentFolder?.current?.rootFolderId === id,
+                roomType,
               };
-            })
+            }
           );
 
-          breadCrumbs.unshift({ ...defaultBreadCrumb });
+          !isThirdParty &&
+            !isRoomsOnly &&
+            breadCrumbs.unshift({ ...defaultBreadCrumb });
+
+          onSetBaseFolderPath &&
+            onSetBaseFolderPath(isErrorPath ? [] : breadCrumbs);
 
           setBreadCrumbs(breadCrumbs);
           setIsBreadCrumbsLoading(false);
         }
-      }
 
-      if (isFirstLoad || startIndex === 0) {
-        setTotal(total);
-        setItems(itemList);
-      } else {
-        setItems((prevState: Item[] | null) => {
-          if (prevState) return [...prevState, ...itemList];
-          return [...itemList];
-        });
+        if (isFirstLoad || startIndex === 0) {
+          setTotal(total);
+          setItems(itemList);
+        } else {
+          setItems((prevState: Item[] | null) => {
+            if (prevState) return [...prevState, ...itemList];
+            return [...itemList];
+          });
+        }
+        setIsRoot(false);
+        setIsNextPageLoading(false);
+      };
+
+      try {
+        await setSettings(id);
+      } catch (e) {
+        sessionStorage.removeItem("filesSelectorPath");
+        if (isThirdParty && rootThirdPartyId) {
+          await setSettings(rootThirdPartyId, true);
+
+          toastr.error(e);
+          return;
+        }
+
+        if (isRoomsOnly && getRoomList) {
+          await getRoomList(0, true, null, true);
+
+          toastr.error(e);
+          return;
+        }
+
+        getRootData && getRootData();
+
+        if (onSetBaseFolderPath) {
+          onSetBaseFolderPath([]);
+          toastr.error(e);
+        }
       }
-      setIsRoot(false);
-      setIsNextPageLoading(false);
     },
     [selectedItemId, searchValue, isFirstLoad, disabledItems]
   );

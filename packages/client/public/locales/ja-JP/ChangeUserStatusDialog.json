@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "有効",
-  "ChangeUsersDisableStatus": "無効になっています",
-  "ChangeUserStatusDialog": "ステータスが'{{ userStatus }}' のユーザーは {{ status }} になります。",
-  "ChangeUserStatusDialogHeader": "ユーザーステータスの変更",
-  "ChangeUserStatusDialogMessage": "DocSpaceの所有者と自分自身のステータスを変更することはできません。"
+  "DisableGeneralDescription": "必要に応じて、無効にしたユーザーを削除したり、有効にしたりすることができます。オーナーや自分自身などのユーザーを無効にすることはできません。",
+  "DisableUser": "ユーザーを無効にする",
+  "DisableUserDescription": "このユーザーを無効にすると、DocSpaceにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
+  "DisableUsers": "ユーザーを無効にする",
+  "DisableUsersDescription": "このユーザーを無効にすると、DocSpaceにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
+  "EnableUser": "ユーザーを有効にするActivare utilizator",
+  "EnableUserDescription": "このユーザーを有効にすると、再度DocSpaceにログインし、文書やデータにアクセスできるようになります。",
+  "EnableUsers": "ユーザーを有効にする",
+  "EnableUsersDescription": "このユーザーを有効にすると、再度DocSpaceにログインし、文書やデータにアクセスできるようになります。"
 }

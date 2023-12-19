@@ -1,7 +1,7 @@
 ﻿import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import IconButton from "@docspace/components/icon-button";
 import Text from "@docspace/components/text";
@@ -41,19 +41,27 @@ const StyledRoomType = styled.div`
       align-items: center;
       .choose_room-title-text {
         font-weight: 600;
-        font-size: 14px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
         line-height: 16px;
       }
     }
     .choose_room-description {
       font-weight: 400;
-      font-size: 12px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
       line-height: 16px;
     }
   }
 
   .choose_room-forward_btn {
-    margin-left: auto;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+            transform: scaleX(-1);
+          `
+        : css`
+            margin-left: auto;
+          `}
     max-width: 17px;
     max-height: 17px;
     min-width: 17px;

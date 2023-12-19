@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Pripojte svoje sociálne siete",
   "DarkTheme": "Tmavá téma",
   "DescriptionForSecurity": "Pre väčšiu bezpečnosť si musíte zmeniť heslo.",
+  "DesktopTheme": "Synchronizácia s nastaveniami Editora pre počítač",
+  "DesktopThemeDescription": "Automatické prepínanie medzi svetlými a tmavými témami v závislosti od aktuálnej témy editorov na počítači.",
   "EditPhoto": "Upraviť foto",
   "EmailNotVerified": "E-mail nie je overený",
+  "ErrorAccountAlreadyUse": "Prepojený účet už používa iný používateľ",
+  "FileManagement": "Spravovanie súborov",
   "InterfaceTheme": "Vzhľad prostredia",
   "LightTheme": "Svetlá téma",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
-  "TfaLoginSettings": "Nastavenia prihlasovania",
   "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

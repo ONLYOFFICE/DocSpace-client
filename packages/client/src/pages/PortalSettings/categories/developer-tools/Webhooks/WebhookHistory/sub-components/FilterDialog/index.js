@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import ModalDialog from "@docspace/components/modal-dialog";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Button from "@docspace/components/button";
 import DeliveryDatePicker from "./DeliveryDatePicker";
@@ -14,6 +14,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Base } from "@docspace/components/themes";
+
+const ModalDialogContainer = styled(ModalDialog)`
+  .modal-body {
+    overflow-y: auto;
+  }
+`;
 
 const DialogBodyWrapper = styled.div`
   margin-top: -4px;
@@ -27,7 +33,14 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    margin-right: 10px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 10px;
+          `
+        : css`
+            margin-right: 10px;
+          `}
   }
 `;
 
@@ -41,7 +54,10 @@ Separator.defaultProps = { theme: Base };
 
 const constructUrl = (baseUrl, filters) => {
   const url = new URL(baseUrl, "http://127.0.0.1:8092/");
-  url.searchParams.append("deliveryDate", filters.deliveryDate?.format("YYYY-MM-DD") || null);
+  url.searchParams.append(
+    "deliveryDate",
+    filters.deliveryDate?.format("YYYY-MM-DD") || null
+  );
   url.searchParams.append("deliveryFrom", filters.deliveryFrom.format("HH:mm"));
   url.searchParams.append("deliveryTo", filters.deliveryTo.format("HH:mm"));
   url.searchParams.append("status", JSON.stringify(filters.status));
@@ -50,7 +66,10 @@ const constructUrl = (baseUrl, filters) => {
 };
 
 function areArraysEqual(array1, array2) {
-  return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
+  return (
+    array1.length === array2.length &&
+    array1.every((val, index) => val === array2[index])
+  );
 }
 
 const FilterDialog = (props) => {
@@ -68,8 +87,12 @@ const FilterDialog = (props) => {
 
   const [filters, setFilters] = useState({
     deliveryDate: null,
-    deliveryFrom: moment().startOf("day"),
-    deliveryTo: moment().endOf("day"),
+    deliveryFrom: moment()
+      .tz(window.timezone || "")
+      .startOf("day"),
+    deliveryTo: moment()
+      .tz(window.timezone || "")
+      .endOf("day"),
     status: [],
   });
 
@@ -94,8 +117,12 @@ const FilterDialog = (props) => {
       if (filters.deliveryDate !== null || filters.status.length > 0) {
         setFilters({
           deliveryDate: null,
-          deliveryFrom: moment().startOf("day"),
-          deliveryTo: moment().endOf("day"),
+          deliveryFrom: moment()
+            .tz(window.timezone || "")
+            .startOf("day"),
+          deliveryTo: moment()
+            .tz(window.timezone || "")
+            .endOf("day"),
           status: [],
         });
       }
@@ -103,7 +130,12 @@ const FilterDialog = (props) => {
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(constructUrl(`/portal-settings/developer-tools/webhooks/${id}`, historyFilters));
+      navigate(
+        constructUrl(
+          `/portal-settings/developer-tools/webhooks/${id}`,
+          historyFilters
+        )
+      );
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);
@@ -117,7 +149,12 @@ const FilterDialog = (props) => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialog withFooterBorder visible={visible} onClose={closeModal} displayType="aside">
+    <ModalDialogContainer
+      withFooterBorder
+      visible={visible}
+      onClose={closeModal}
+      displayType="aside"
+    >
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>
@@ -151,7 +188,7 @@ const FilterDialog = (props) => {
           </Footer>
         </ModalDialog.Footer>
       )}
-    </ModalDialog>
+    </ModalDialogContainer>
   );
 };
 

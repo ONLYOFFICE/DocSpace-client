@@ -1,20 +1,26 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "../utils/device";
+import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
 
 const styledTabletView = css`
   position: fixed;
   width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  left: ${(props) => props.theme.newContextMenu.devices.left};
+  left: ${(props) =>
+    props.articleWidth
+      ? `${props.articleWidth}px`
+      : props.theme.newContextMenu.devices.left};
   right: ${(props) => props.theme.newContextMenu.devices.right};
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
       left: ${(props) => props.theme.newContextMenu.devices.right};
-      right: ${(props) => props.theme.newContextMenu.devices.left};
+      right: ${(props) =>
+        props.articleWidth
+          ? `${props.articleWidth}px`
+          : props.theme.newContextMenu.devices.left};
     `}
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   margin: ${(props) => props.theme.newContextMenu.devices.margin};
@@ -76,19 +82,12 @@ const StyledContextMenu = styled.div`
     padding: ${(props) => props.theme.newContextMenu.padding};
 
     @media ${tablet} {
-      ${(props) => props.changeView && !isMobile && styledTabletView}
+      ${(props) => props.changeView && styledTabletView}
     }
 
     @media ${mobile} {
-      ${(props) => props.changeView && !isMobile && styledMobileView}
+      ${(props) => props.changeView && styledMobileView}
     }
-
-    ${(props) =>
-      props.changeView
-        ? isMobileOnly
-          ? styledMobileView
-          : styledTabletView
-        : null}
   }
 
   .contextmenu-header {
@@ -155,16 +154,24 @@ const StyledContextMenu = styled.div`
 
     .text {
       width: 100%;
-      font-size: ${(props) => props.theme.menuItem.text.header.fontSize};
+      font-size: ${(props) =>
+        props.theme.getCorrectFontSize(
+          props.theme.menuItem.text.header.fontSize
+        )};
       font-weight: 600;
       ${(props) =>
         props.isIconExist &&
         css`
-          margin: ${(props) => props.theme.menuItem.text.margin};
+          margin: ${({ theme }) =>
+            getCorrectFourValuesStyle(
+              theme.menuItem.text.margin,
+              theme.interfaceDirection
+            )};
         `}
 
       color: ${(props) => props.theme.menuItem.text.color};
-      text-align: left;
+      text-align: ${({ theme }) =>
+        theme.interfaceDirection === "rtl" ? `right` : `left`};
       text-transform: none;
       text-decoration: none;
       user-select: none;
@@ -219,7 +226,8 @@ const StyledContextMenu = styled.div`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
-    font-size: ${(props) => props.theme.dropDownItem.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.dropDownItem.fontSize)};
     color: ${(props) => props.theme.dropDownItem.color};
     text-transform: none;
 

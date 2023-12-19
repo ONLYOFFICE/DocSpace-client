@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
   box-sizing: border-box;
   outline: none;
-  max-width: 700px;
-  padding-top: 5px;
 
   .intro-text {
-    margin-bottom: 18px;
+    width: 100%;
     max-width: 700px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    margin-bottom: 20px;
+    line-height: 20px;
   }
 
   .toggle {
@@ -25,24 +25,22 @@ const StyledSsoPage = styled.div`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        margin-left: 4px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 4px;
+              `
+            : css`
+                margin-left: 4px;
+              `}
         cursor: auto;
       }
     }
   }
 
-  .tooltip-button,
-  .icon-button {
-    padding: 0 5px;
-  }
-
-  .hide-button {
-    margin-left: 12px;
-  }
-
   .field-input {
     ::placeholder {
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       font-weight: 400;
     }
   }
@@ -79,40 +77,33 @@ const StyledSsoPage = styled.div`
   }
 
   .radio-button-group {
-    margin-left: 24px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 24px;
+          `
+        : css`
+            margin-left: 24px;
+          `}
   }
 
   .combo-button-label {
     max-width: 100%;
   }
 
-  .checkbox-input {
-    margin: 10px 8px 6px 0;
-  }
-
-  .upload-button {
-    height: 32px;
-    width: 45px;
-    margin-left: 9px;
-    overflow: inherit;
-  }
-
   .save-button {
-    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
   }
 
   .download-button {
     width: fit-content;
-  }
-
-  .xml-upload-file {
-    .text-input {
-      display: none;
-    }
-
-    .icon {
-      position: static;
-    }
   }
 
   .service-provider-settings {
@@ -127,7 +118,7 @@ const StyledSsoPage = styled.div`
     margin: 24px 0;
 
     .field-label {
-      font-size: 15px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
       font-weight: 600;
     }
   }
@@ -145,7 +136,14 @@ const StyledSsoPage = styled.div`
 
     .label > div {
       display: inline-flex;
-      margin-left: 4px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 4px;
+            `
+          : css`
+              margin-left: 4px;
+            `}
     }
   }
 

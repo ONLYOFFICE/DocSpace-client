@@ -1,72 +1,122 @@
 import styled, { css } from "styled-components";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { tablet, mobile } from "@docspace/components/utils/device";
 import Headline from "@docspace/common/components/Headline";
 import { Base } from "@docspace/components/themes";
-
-const StyledHeadline = styled(Headline)`
-  width: 100%;
-  font-weight: 700;
-  font-size: ${isMobile ? "21px !important" : "18px"};
-  line-height: ${isMobile ? "28px !important" : "24px"};
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
+import { Button } from "@docspace/components";
 
 const StyledContainer = styled.div`
+  height: 69px;
   width: 100%;
-  height: 32px;
+  max-width: 100%;
+  box-sizing: border-box;
+
   display: grid;
-
-  grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto" : "29px 1fr auto"};
-
   align-items: center;
+  grid-template-columns: ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible
+      ? "29px min-content auto"
+      : "29px min-content auto 52px"};
 
   .arrow-button {
     width: 17px;
     min-width: 17px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
+    height: 69px;
+    padding: 0;
+    grid-template-columns: 29px min-content auto;
   }
-
-  ${isMobile &&
-  css`
-    width: 100% !important;
-    padding: 16px 0 0px;
-  `}
 
   @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 0;
+    height: 53px;
+    padding: 0;
+    display: flex;
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100% !important;
-    padding: 12px 0 0;
-  `}
 `;
 
-const StyledInfoPanelToggleWrapper = styled.div`
-  margin-left: auto;
+const StyledHeading = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 
+  ${({ isInfoPanelVisible }) =>
+    isInfoPanelVisible &&
+    css`
+      max-width: calc(100vw - 320px - 440px);
+    `};
+
+  @media ${tablet} {
+    width: 100%;
+    max-width: calc(100vw - 320px);
+  }
+
+  @media ${mobile} {
+    margin: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "0 12px 0 0 " : "0 0 0 12px"};
+    width: 100%;
+    max-width: calc(100vw - 68px);
+  }
+`;
+
+const StyledHeadline = styled(Headline)`
+  width: 100%;
+  max-width: min-content;
+  font-weight: 700;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+  line-height: 24px;
+  box-sizing: border-box;
+
+  @media ${tablet} {
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
+    line-height: 28px;
+  }
+
+  @media ${mobile} {
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    line-height: 24px;
+  }
+`;
+
+const StyledSubmitToGalleryButton = styled(Button)`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
+
+  @media ${mobile} {
+    display: none;
+  }
+`;
+StyledSubmitToGalleryButton.defaultProps = { theme: Base };
+
+const StyledInfoPanelToggleWrapper = styled.div`
+  box-sizing: border-box;
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
   align-items: center;
   justify-content: center;
+  width: 16px;
+  height: 16px;
+
+  margin: ${({ theme }) =>
+    theme.interfaceDirection !== "rtl" ? "0 8px 0 28px" : "0 28px 0 8px"};
 
   @media ${tablet} {
     display: none;
   }
 
   .info-panel-toggle-bg {
-    height: 32px;
-    width: 32px;
+    height: 16px;
+    width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,6 +128,11 @@ const StyledInfoPanelToggleWrapper = styled.div`
         ? props.theme.infoPanel.sectionHeaderToggleBgActive
         : props.theme.infoPanel.sectionHeaderToggleBg};
 
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
+
     path {
       fill: ${(props) =>
         props.isInfoPanelVisible
@@ -88,4 +143,10 @@ const StyledInfoPanelToggleWrapper = styled.div`
 `;
 StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
-export { StyledHeadline, StyledContainer, StyledInfoPanelToggleWrapper };
+export {
+  StyledHeading,
+  StyledHeadline,
+  StyledContainer,
+  StyledSubmitToGalleryButton,
+  StyledInfoPanelToggleWrapper,
+};

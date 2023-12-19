@@ -11,7 +11,7 @@ import IconButton from "@docspace/components/icon-button";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import DropDownItem from "@docspace/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, desktop } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Badge from "@docspace/components/badge";
 import {
@@ -21,7 +21,6 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import { combineUrl } from "@docspace/common/utils";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -30,9 +29,16 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
   .settings-section_header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     .settings-section_badge {
-      margin-left: 8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
       cursor: auto;
     }
 
@@ -46,42 +52,57 @@ const HeaderContainer = styled.div`
     flex-grow: 1;
 
     .action-button {
-      margin-left: auto;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: auto;
+            `
+          : css`
+              margin-left: auto;
+            `}
     }
   }
 
   .arrow-button {
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
 
     @media ${tablet} {
-      padding: 8px 0 8px 8px;
-      margin-left: -8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 8px 8px 8px 0;
+              margin-right: -8px;
+            `
+          : css`
+              padding: 8px 0 8px 8px;
+              margin-left: -8px;
+            `}
     }
   }
 
-  ${isTablet &&
-  css`
+  @media ${tablet} {
     h1 {
       line-height: 61px;
-      font-size: 21px;
-    }
-  `};
-
-  @media (min-width: 600px) and (max-width: 1024px) {
-    h1 {
-      line-height: 61px;
-      font-size: 21px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     }
   }
 
-  @media (min-width: 1024px) {
+  @media ${desktop} {
     h1 {
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
       line-height: 59px !important;
-    }
-
-    .settings-section_header {
-      padding-top: 6px;
     }
   }
 `;
@@ -103,18 +124,6 @@ const StyledContainer = styled.div`
       margin: 0 -16px;
       width: calc(100% + 32px);
     }
-
-    ${isMobile &&
-    css`
-      margin: 0 -16px;
-      width: calc(100% + 32px);
-    `}
-
-    ${isMobileOnly &&
-    css`
-      margin: 0 -16px;
-      width: calc(100% + 32px);
-    `}
   }
 `;
 
@@ -142,6 +151,12 @@ const SectionHeaderContent = (props) => {
         return isBrandingAndCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
+      case "WhiteLabel":
+        return isBrandingAndCustomizationAvailable;
+      case "CompanyInfoSettings":
+        return isBrandingAndCustomizationAvailable;
+      case "AdditionalResources":
+        return isBrandingAndCustomizationAvailable;
       default:
         return true;
     }
@@ -302,6 +317,7 @@ const SectionHeaderContent = (props) => {
                 <Badge
                   backgroundColor="#EDC409"
                   label={t("Common:Paid")}
+                  fontWeight="700"
                   className="settings-section_badge"
                   isPaidBadge={true}
                 />
@@ -368,6 +384,8 @@ export default inject(({ auth, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(SectionHeaderContent))
+    withTranslation(["Settings", "SingleSignOn", "Common"])(
+      observer(SectionHeaderContent)
+    )
   )
 );

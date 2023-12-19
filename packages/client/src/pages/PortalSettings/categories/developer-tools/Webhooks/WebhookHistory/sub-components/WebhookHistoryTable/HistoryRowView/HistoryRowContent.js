@@ -1,11 +1,12 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
+import { useTranslation } from "react-i18next";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -28,12 +29,24 @@ const StatusHeader = styled.div`
 `;
 
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
-  const formattedDelivery = moment(historyItem.delivery).format("MMM D, YYYY, h:mm:ss A") + " UTC";
+  const { t, i18n } = useTranslation("Webhooks");
+
+  const formattedDelivery =
+    moment(historyItem.delivery)
+      .tz(window.timezone || "")
+      .locale(i18n.language)
+      .format("MMM D, YYYY, h:mm:ss A") +
+    " " +
+    t("Common:UTC");
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
         <StatusHeader>
-          <Text fontWeight={600} fontSize="14px" style={{ marginRight: "8px" }}>
+          <Text
+            fontWeight={600}
+            fontSize="14px"
+            style={{ marginInlineEnd: "8px" }}
+          >
             {historyItem.id}
           </Text>
           <StatusBadge status={historyItem.status} />

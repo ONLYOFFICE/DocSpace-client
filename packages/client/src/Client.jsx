@@ -6,7 +6,6 @@ import { withTranslation } from "react-i18next";
 import Article from "@docspace/common/components/Article";
 import {
   updateTempContent,
-  loadScript,
   showLoader,
   hideLoader,
 } from "@docspace/common/utils";
@@ -23,7 +22,12 @@ import {
 } from "./components/Article";
 
 const ClientArticle = React.memo(
-  ({ withMainButton, setIsHeaderLoading, setIsFilterLoading }) => {
+  ({
+    withMainButton,
+    setIsHeaderLoading,
+    setIsFilterLoading,
+    showArticleLoader,
+  }) => {
     return (
       <Article
         withMainButton={withMainButton}
@@ -31,6 +35,7 @@ const ClientArticle = React.memo(
           setIsFilterLoading(true, false);
           setIsHeaderLoading(true, false);
         }}
+        showArticleLoader={showArticleLoader}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -67,6 +72,9 @@ const ClientContent = (props) => {
     isLoading,
     setIsFilterLoading,
     setIsHeaderLoading,
+    isDesktopClientInit,
+    setIsDesktopClientInit,
+    showArticleLoader,
   } = props;
 
   const location = useLocation();
@@ -74,28 +82,18 @@ const ClientContent = (props) => {
   const isEditor = location.pathname.indexOf("doceditor") !== -1;
   const isFormGallery = location.pathname.split("/").includes("form-gallery");
 
-  const [isDesktopInit, setIsDesktopInit] = React.useState(false);
-
   React.useEffect(() => {
-    loadScript("/static/scripts/tiff.min.js", "img-tiff-script");
-
     loadClientInfo()
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoaded(true);
-
         updateTempContent();
       });
-
-    return () => {
-      const script = document.getElementById("img-tiff-script");
-      document.body.removeChild(script);
-    };
   }, []);
 
   React.useEffect(() => {
-    if (isAuthenticated && !isDesktopInit && isDesktop && isLoaded) {
-      setIsDesktopInit(true);
+    if (isAuthenticated && !isDesktopClientInit && isDesktop && isLoaded) {
+      setIsDesktopClientInit(true);
       regDesktop(
         user,
         isEncryption,
@@ -121,7 +119,6 @@ const ClientContent = (props) => {
     setEncryptionKeys,
     isLoaded,
     isDesktop,
-    isDesktopInit,
   ]);
 
   React.useEffect(() => {
@@ -134,16 +131,24 @@ const ClientContent = (props) => {
 
   return (
     <>
-      <GlobalEvents />
       <FilesPanels />
+      <GlobalEvents />
       {!isFormGallery ? (
         isFrame ? (
-          showMenu && <ClientArticle />
+          showMenu && (
+            <ClientArticle
+              withMainButton={withMainButton}
+              setIsHeaderLoading={setIsHeaderLoading}
+              setIsFilterLoading={setIsFilterLoading}
+              showArticleLoader={showArticleLoader}
+            />
+          )
         ) : (
           <ClientArticle
             withMainButton={withMainButton}
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
+            showArticleLoader={showArticleLoader}
           />
         )
       ) : (
@@ -155,7 +160,7 @@ const ClientContent = (props) => {
 };
 
 const Client = inject(
-  ({ auth, clientLoadingStore, filesStore, peopleStore }) => {
+  ({ auth, clientLoadingStore, filesStore, peopleStore, pluginStore }) => {
     const {
       frameConfig,
       isFrame,
@@ -163,19 +168,30 @@ const Client = inject(
       encryptionKeys,
       setEncryptionKeys,
       isEncryptionSupport,
+      enablePlugins,
+      isDesktopClientInit,
+      setIsDesktopClientInit,
     } = auth.settingsStore;
 
     if (!auth.userStore.user) return;
 
     const { isVisitor } = auth.userStore.user;
 
-    const { isLoading, setIsSectionFilterLoading, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      isLoading,
+      setIsSectionFilterLoading,
+      setIsSectionHeaderLoading,
+      showArticleLoader,
+    } = clientLoadingStore;
 
     const withMainButton = !isVisitor;
 
+    const { isInit: isInitPlugins, initPlugins } = pluginStore;
+
     return {
       isDesktop: isDesktopClient,
+      isDesktopClientInit,
+      setIsDesktopClientInit,
       isFrame,
       showMenu: frameConfig?.showMenu,
       user: auth.userStore.user,
@@ -189,10 +205,13 @@ const Client = inject(
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
       setEncryptionKeys: setEncryptionKeys,
+      showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
         actions.push(filesStore.initFiles());
         actions.push(peopleStore.init());
+
+        if (enablePlugins && !isInitPlugins) actions.push(initPlugins());
         await Promise.all(actions);
       },
     };

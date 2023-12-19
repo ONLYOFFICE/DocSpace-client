@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -14,8 +15,16 @@ import {
   sloBindingOptions,
   nameIdOptions,
 } from "./sub-components/constants";
+import { useIsMobileView } from "../../../utils/useIsMobileView";
+import { DeviceType } from "@docspace/common/constants";
 
 const PROVIDER_URL = "https://idpservice/idp";
+
+const StyledWrapper = styled.div`
+  .radio-button-group {
+    margin-left: 24px;
+  }
+`;
 
 const IdpSettings = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
@@ -37,10 +46,19 @@ const IdpSettings = (props) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    isInit,
+    init,
+    currentDeviceType,
   } = props;
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
+  useEffect(() => {
+    if (!isInit || isMobileView) init();
+  }, [isInit]);
+
   return (
-    <Box>
+    <StyledWrapper>
       <UploadXML />
 
       <SsoFormField
@@ -158,11 +176,11 @@ const IdpSettings = (props) => {
         options={nameIdOptions}
         tabIndex={8}
       />
-    </Box>
+    </StyledWrapper>
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject(({ auth, ssoStore }) => {
   const {
     ssoBinding,
     enableSso,
@@ -181,7 +199,10 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    init,
+    isInit,
   } = ssoStore;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     ssoBinding,
@@ -201,5 +222,8 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    init,
+    isInit,
+    currentDeviceType,
   };
 })(observer(IdpSettings));

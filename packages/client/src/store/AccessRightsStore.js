@@ -33,6 +33,12 @@ class AccessRightsStore {
     return security?.Move;
   };
 
+  canSubmitToFormGallery = () => {
+    const { isVisitor } = this.authStore.userStore.user;
+
+    return !isVisitor;
+  };
+
   canChangeUserType = (user) => {
     const { id, isOwner, isAdmin } = this.authStore.userStore.user;
 
@@ -84,6 +90,12 @@ class AccessRightsStore {
       !userIsOwner &&
       (userIsVisitor || userIsCollaborator)
     );
+  };
+  canMakePowerUser = (user) => {
+    const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
+      user;
+
+    return userIsVisitor || userIsCollaborator;
   };
 
   canActivateUser = (user) => {

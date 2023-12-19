@@ -1,4 +1,3 @@
-import { isMobile } from "react-device-detect";
 import React, {
   useState,
   useCallback,
@@ -7,28 +6,36 @@ import React, {
   useRef,
 } from "react";
 
-import ViewerWrapper from "./sub-components/ViewerWrapper";
+import {
+  isMobile as isMobileUtils,
+  isTablet,
+} from "@docspace/components/utils/device";
 
-import { MediaViewerProps } from "./MediaViewer.props";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus } from "../../constants";
+import { getFileExtension } from "../../utils";
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+
 import {
   isNullOrUndefined,
   KeyboardEventKeys,
   mapSupplied,
   mediaTypes,
 } from "./helpers";
-import { getFileExtension } from "@docspace/common/utils";
-
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
+import ViewerWrapper from "./sub-components/ViewerWrapper";
+
+import type { MediaViewerProps } from "./MediaViewer.props";
 
 function MediaViewer({
   playlistPos,
   nextMedia,
   prevMedia,
+  pluginContextMenuItems,
+  setActiveFiles,
   ...props
 }: MediaViewerProps): JSX.Element {
   const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
@@ -192,6 +199,56 @@ function MediaViewer({
         onCopyLink,
       });
 
+    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
+      model.unshift({
+        key: "separator-plugin",
+        isSeparator: true,
+        disabled: false,
+      });
+
+      pluginContextMenuItems.forEach((item) => {
+        const onClick = async (): Promise<void> => {
+          props.onClose();
+
+          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+
+          await item.value.onClick(targetFile.id);
+
+          if (item.value.withActiveItem) setActiveFiles([]);
+        };
+
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("image") &&
+          !targetFile.viewAccessibility.ImageView
+        )
+          return;
+        if (
+          item.value.fileType &&
+          item.value.fileType.includes("video") &&
+          !targetFile.viewAccessibility.MediaView
+        )
+          return;
+
+        model.unshift({
+          id: item.key,
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+
+        desktopModel.unshift({
+          key: item.key,
+          disabled: false,
+          ...item.value,
+          onClick,
+        });
+      });
+    }
+
+    const isMobile = isMobileUtils() || isTablet();
+
     return isMobile
       ? model
       : isImage && !isMobile
@@ -256,7 +313,9 @@ function MediaViewer({
 
   const onKeydown = (event: KeyboardEvent) => {
     const { code, ctrlKey } = event;
-    if (props.deleteDialogVisible) return;
+
+    const someDialogIsOpen = checkDialogsOpen();
+    if (props.deleteDialogVisible || someDialogIsOpen) return;
 
     if (code in KeyboardEventKeys) {
       const includesKeyboardCode = [

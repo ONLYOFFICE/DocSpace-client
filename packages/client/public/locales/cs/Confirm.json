@@ -29,5 +29,9 @@
   "SuccessDeactivate": "Váš účet byl úspěšně deaktivován. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
   "SuccessReactivate": "Váš účet byl úspěšně reaktivován. Za 10 sekund budete přesměrováni na <1>prostor</1>.",
   "SuccessRemoved": "Váš účet byl úspěšně odstraněn. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
-  "WelcomeUser": "Vítejte na našem DocSpace!\nChcete-li začít, zaregistrujte se nebo se přihlaste prostřednictvím sociálních sítí."
+  "WelcomeRegister": "Chcete-li začít, zaregistrujte se",
+  "WelcomeRegisterViaSocial": "Chcete-li začít, zaregistrujte se nebo se přihlaste prostřednictvím sociálních sítí",
+  "WelcomeRegisterViaSSO": "Chcete-li začít, zaregistrujte se nebo se přihlaste pomocí SSO",
+  "WelcomeToDocspace": "Vítejte v našem DocSpace!",
+  "WelcomeToRoom": "Vítejte v místnosti <1>{{ roomName }}</1>!"
 }

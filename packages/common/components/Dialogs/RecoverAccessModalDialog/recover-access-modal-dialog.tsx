@@ -6,8 +6,8 @@ import Text from "@docspace/components/text";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Textarea from "@docspace/components/textarea";
 import FieldContainer from "@docspace/components/field-container";
-import { smallTablet } from "@docspace/components/utils/device";
-import { sendRecoverRequest } from "@docspace/common/api/settings";
+import { mobile, tablet } from "@docspace/components/utils/device";
+import { sendRecoverRequest } from "../../../api/settings";
 import toastr from "@docspace/components/toast/toastr";
 import { useTranslation } from "react-i18next";
 
@@ -21,13 +21,13 @@ interface IRecoverAccessModalDialogProps {
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside-footer {
-    @media (max-width: 1024px) {
+    @media ${tablet} {
       width: 90%;
     }
   }
 
   .recover-button-dialog {
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -154,12 +154,13 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             type="email"
             size="base"
             scale={true}
-            tabIndex={3}
+            tabIndex={1}
             isDisabled={loading}
             value={email}
             onChange={onChangeEmail}
             onValidateInput={onValidateEmail}
             onBlur={onBlurEmail}
+            autoComplete="username"
           />
         </FieldContainer>
         <FieldContainer
@@ -175,7 +176,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             heightScale={false}
             hasError={descErr}
             placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
-            tabIndex={3}
+            tabIndex={2}
             value={description}
             onChange={onChangeDescription}
             isDisabled={loading}
@@ -205,7 +206,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
           onClick={onRecoverModalClose}
           isLoading={loading}
           isDisabled={loading}
-          tabIndex={3}
+          tabIndex={4}
         />
       </ModalDialog.Footer>
     </ModalDialogContainer>

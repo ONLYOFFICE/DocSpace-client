@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
+import styled, { css } from "styled-components";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import RowContainer from "@docspace/components/row-container";
+import { tablet } from "@docspace/components/utils/device";
 
 import EmptyScreen from "../EmptyScreen";
-
 import SimpleUserRow from "./SimpleUserRow";
-import withLoader from "SRC_DIR/HOCs/withLoader";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -16,26 +16,11 @@ const marginStyles = css`
   padding-left: 24px;
   padding-right: 24px;
 
-  ${isMobile &&
-  css`
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  `}
-
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
-  }
-
-  @media (max-width: 375px) {
-    margin-left: -16px;
-    margin-right: -8px;
-    padding-left: 16px;
-    padding-right: 8px;
   }
 `;
 
@@ -101,27 +86,13 @@ const PeopleRowContainer = ({
   hasMoreAccounts,
   filterTotal,
   withPaging,
+  currentDeviceType,
 }) => {
-  useEffect(() => {
-    const width = window.innerWidth;
-
-    if (
-      (accountsViewAs !== "table" && accountsViewAs !== "row") ||
-      !sectionWidth
-    )
-      return;
-    // 400 - it is desktop info panel width
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (accountsViewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      isMobile
-    ) {
-      accountsViewAs !== "row" && setViewAs("row");
-    } else {
-      accountsViewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: accountsViewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer
@@ -155,7 +126,7 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     viewAs: accountsViewAs,
     setViewAs,
   } = peopleStore;
-  const { theme, withPaging } = auth.settingsStore;
+  const { theme, withPaging, currentDeviceType } = auth.settingsStore;
   const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
   const { filterTotal, isFiltered } = filterStore;
 
@@ -173,5 +144,6 @@ export default inject(({ peopleStore, auth, filesStore }) => {
     hasMoreAccounts,
     filterTotal,
     isFiltered,
+    currentDeviceType,
   };
 })(observer(PeopleRowContainer));

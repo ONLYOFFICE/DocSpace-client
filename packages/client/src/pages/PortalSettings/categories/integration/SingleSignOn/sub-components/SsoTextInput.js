@@ -19,10 +19,13 @@ const SsoTextInput = (props) => {
     isLoadingXml,
     setError,
     hideError,
+    className,
+    onFocus,
   } = props;
 
-  const onFocus = (e) => {
+  const onFocusFn = (e) => {
     hideError(e.target.name);
+    onFocus && onFocus();
   };
 
   const onBlur = (e) => {
@@ -33,7 +36,7 @@ const SsoTextInput = (props) => {
   };
 
   return (
-    <StyledInputWrapper maxWidth={maxWidth}>
+    <StyledInputWrapper maxWidth={maxWidth} className={className}>
       <TextInput
         id={name}
         className="field-input"
@@ -41,7 +44,7 @@ const SsoTextInput = (props) => {
         isDisabled={isDisabled ?? (!enableSso || isLoadingXml)}
         name={name}
         onBlur={onBlur}
-        onFocus={onFocus}
+        onFocus={onFocusFn}
         onChange={setInput}
         placeholder={placeholder}
         scale

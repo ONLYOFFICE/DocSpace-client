@@ -1,6 +1,5 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
@@ -18,7 +17,7 @@ import FilterBlockItem from "./FilterBlockItem";
 import PeopleSelector from "client/PeopleSelector";
 import RoomSelector from "@docspace/client/src/components/RoomSelector";
 
-import { FilterGroups } from "../../../constants";
+import { DeviceType, FilterGroups } from "../../../constants";
 
 import {
   StyledFilterBlock,
@@ -41,6 +40,7 @@ const FilterBlock = ({
   isPersonalRoom,
   isRooms,
   isAccounts,
+  currentDeviceType,
 }) => {
   const [showSelector, setShowSelector] = React.useState({
     show: false,
@@ -413,7 +413,7 @@ const FilterBlock = ({
             {isLoading ? (
               <Loaders.FilterBlock isRooms={isRooms} isAccounts={isAccounts} />
             ) : (
-              <Scrollbar className="filter-body__scrollbar" stype="mediumBlack">
+              <Scrollbar className="filter-body__scrollbar">
                 {filterData.map((item, index) => {
                   return (
                     <FilterBlockItem
@@ -482,7 +482,7 @@ const FilterBlock = ({
     );
   };
 
-  return isMobileOnly ? renderPortalFilterBlock() : filterBlockComponent;
+  return renderPortalFilterBlock();
 };
 
 export default React.memo(withTranslation("Common")(FilterBlock));

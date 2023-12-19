@@ -1,7 +1,6 @@
-import Base from "@docspace/components/themes/base";
+import Base from "../themes/base";
 import styled, { keyframes, css } from "styled-components";
-import { desktop, tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
+import { desktop, tablet } from "../utils/device";
 
 const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
 
@@ -34,11 +33,8 @@ const StyledFloatingButtonWrapper = styled.div`
 
     bottom: ${(props) => (props.showTwoProgress ? "96px" : "0")};
 
-    ${!isMobile &&
-    css`
-      width: 100px;
-      height: 70px;
-    `}
+    width: 100px;
+    height: 70px;
   }
 
   .layout-progress-bar_close-icon {

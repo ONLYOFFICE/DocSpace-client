@@ -1,5 +1,14 @@
 {
+  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus DocSpace entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "CannotReassignFiles": "Wenn Sie mehrere Benutzer gleichzeitig löschen, können Sie deren Dateien nicht anderen Benutzern neu zuweisen.",
+  "DeleteGroupUsersSuccessMessage": "Benutzer wurden erfolgreich gelöscht.",
+  "DeleteMyDocumentsUser": "Alle persönlichen Dateien und Ordner im Bereich Meine Dokumente dieses Benutzers werden endgültig gelöscht.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Räume, die von diesem Benutzer erstellt wurden, und Dokumente, die in diesen Räumen gespeichert sind, werden automatisch einem Administrator, der die Löschung durchführt, neu zugewiesen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Weisen Sie Daten manuell neu zu, um einen anderen Benutzer als Empfänger auszuwählen.",
   "DeleteUser": "Benutzer löschen",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> wird gelöscht. Persönliche Dokumente von Benutzer, die für andere verfügbar sind, werden gelöscht. Bist du dir sicher, dass du weitermachen willst?",
-  "SuccessfullyDeleteUserInfoMessage": "Der Benutzer wurde erfolgreich gelöscht"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> wird gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.",
+  "DeletingUsers": "Löschen von Benutzern",
+  "PleaseNote": "Bitte beachten:",
+  "ReassignDataToAnotherUser": "Daten an einen anderen Benutzer neu zuweisen",
+  "SuccessfullyDeleteUserInfoMessage": "Der Benutzer wurde erfolgreich gelöscht",
+  "ToBeAbleToReassignData": "Um Daten neu zuweisen zu können, löschen Sie jeweils einen Benutzer."
 }

@@ -1,12 +1,12 @@
-import moment from "moment";
+import moment from "moment-timezone";
 
 import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));
 
-  const given = moment(date);
+  const given = moment(date).tz(window.timezone || "");
 
   const now = moment();
   const weekAgo = moment().subtract(1, "week");

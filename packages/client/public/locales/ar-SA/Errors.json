@@ -1,0 +1,14 @@
+{
+  "AccessDenied": "المحاولة مرفوضة",
+  "Error401Text": "عذرا، المورد غير متاح حاليا.",
+  "Error403Text": "نأسف، الوصول مرفوض.",
+  "Error404Text": "عذرا، لا يمكن العثور على المورد.",
+  "ErrorDeactivatedText": "DocSpace هذا معطل",
+  "ErrorEmptyResponse": "رد فارغ",
+  "ErrorOfflineText": "لا يوجد اتصال بالإنترنت",
+  "ErrorUnavailableText": "DocSpace غير متوفر",
+  "InvalidLink": "رابط غير صالح",
+  "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
+  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه",
+  "PortalRestriction": "لم يتم تضمين عنوان IP الخاص بك في قائمة عناوين IP المسموح بها للوصول إلى DocSpace. قم بإيقاف تشغيل VPN إذا تم تمكينه وأعد تحميل الصفحة، أو استخدم عنوان IP آخر لتسجيل الدخول."
+}

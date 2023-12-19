@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
 import TableRow from "@docspace/components/table-container/TableRow";
@@ -31,12 +31,28 @@ const StyledPeopleRow = styled(TableRow)`
     }
 
     .table-container_user-name-cell {
-      margin-left: -24px;
-      padding-left: 24px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -24px;
+              padding-right: 24px;
+            `
+          : css`
+              margin-left: -24px;
+              padding-left: 24px;
+            `}
     }
     .table-container_row-context-menu-wrapper {
-      margin-right: -20px;
-      padding-right: 18px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: -20px;
+              padding-left: 20px;
+            `
+          : css`
+              margin-right: -20px;
+              padding-right: 20px;
+            `}
     }
   }
 
@@ -50,30 +66,75 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-checkbox-wrapper {
-    padding-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
     min-width: 48px;
 
     .table-container_row-checkbox {
-      margin-left: -4px;
-      padding: 16px 0px 16px 12px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -4px;
+              padding: 16px 12px 16px 0px;
+            `
+          : css`
+              margin-left: -4px;
+              padding: 16px 0px 16px 12px;
+            `}
     }
   }
 
   .link-with-dropdown-group {
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
   }
 
   .table-cell_username {
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
   }
 
   .table-container_row-context-menu-wrapper {
-    padding-right: 0px;
+    justify-content: flex-end;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
   }
 
   .table-cell_type,
   .table-cell_room {
-    margin-left: -8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -8px;
+          `
+        : css`
+            margin-left: -8px;
+          `}
   }
 
   .type-combobox {
@@ -87,14 +148,29 @@ const StyledPeopleRow = styled(TableRow)`
 
   .type-combobox,
   .room-combobox {
-    padding-left: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 8px;
+          `
+        : css`
+            padding-left: 8px;
+          `}
     overflow: hidden;
     .combo-button {
-      padding-left: 8px;
-      margin-left: -8px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 8px;
+              margin-right: -8px;
+            `
+          : css`
+              padding-left: 8px;
+              margin-left: -8px;
+            `}
 
       .combo-button-label {
-        font-size: 13px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
         font-weight: 600;
       }
     }
@@ -141,6 +217,7 @@ const PeopleTableRow = (props) => {
     canChangeUserType,
     hideColumns,
     value,
+    standalone,
   } = props;
 
   const {
@@ -271,6 +348,7 @@ const PeopleTableRow = (props) => {
         options={typesOptions}
         onSelect={onTypeChange}
         scaled
+        directionY="both"
         size="content"
         displaySelectedOption
         modernView
@@ -328,7 +406,7 @@ const PeopleTableRow = (props) => {
 
     onContentRowClick && onContentRowClick(!isChecked, item);
   };
-
+  const isPaidUser = !standalone && !isVisitor;
   return (
     <StyledWrapper
       className={`user-item ${
@@ -377,7 +455,7 @@ const PeopleTableRow = (props) => {
               ? displayName
               : email}
           </Link>
-          <Badges statusType={statusType} isPaid={!isVisitor} isSSO={isSSO} />
+          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
         <TableCell className={"table-cell_type"}>{typeCell}</TableCell>

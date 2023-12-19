@@ -5,14 +5,19 @@ import Avatar from "@docspace/components/avatar";
 import ComboBox from "@docspace/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import toastr from "@docspace/components/toast/toastr";
-import { isMobileOnly } from "react-device-detect";
+import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
 import { getUserRole } from "@docspace/common/utils";
+import Text from "@docspace/components/text";
+import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
+import { StyledUserTypeHeader } from "../../styles/members";
+import IconButton from "@docspace/components/icon-button";
 
 const User = ({
   t,
   user,
+  setMembers,
   isExpect,
   membersHelper,
   currentMember,
@@ -21,6 +26,13 @@ const User = ({
   setSelectionParentRoom,
   changeUserType,
   setIsScrollLocked,
+  isTitle,
+  onRepeatInvitation,
+  showInviteIcon,
+  membersFilter,
+  setMembersFilter,
+  fetchMembers,
+  hasNextPage,
 }) => {
   if (!selectionParentRoom) return null;
   if (!user.displayName && !user.email) return null;
@@ -46,24 +58,102 @@ const User = ({
       notify: false,
       sharingMessage: "",
     })
-      .then(() => {
+      .then(async () => {
         setIsLoading(false);
-        const inRoomMembers = selectionParentRoom.members.inRoom;
+        const users = selectionParentRoom.members.users;
+        const administrators = selectionParentRoom.members.administrators;
         const expectedMembers = selectionParentRoom.members.expected;
         if (option.key === "remove") {
+          const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
+
+          const newMembers = {
+            users: users?.filter((m) => m.id !== user.id),
+            administrators: administrators?.filter((m) => m.id !== user.id),
+            expected: expectedMembers?.filter((m) => m.id !== user.id),
+          };
+
+          const roomId = selectionParentRoom.id;
+          const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
+          const newAdministrators =
+            newMembers.administrators.length > 1
+              ? newMembers?.administrators
+              : [];
+          const newExpected =
+            newMembers.expected.length > 1 ? newMembers?.expected : [];
+
+          setMembers({
+            roomId,
+            users: newUsers,
+            administrators: newAdministrators,
+            expected: newExpected,
+          });
+
+          newMembersFilter.total -= 1;
+
           setSelectionParentRoom({
             ...selectionParentRoom,
             members: {
-              inRoom: inRoomMembers?.filter((m) => m.id !== user.id),
-              expected: expectedMembers?.filter((m) => m.id !== user.id),
+              users: newUsers,
+              administrators: newAdministrators,
+              expected: newExpected,
             },
           });
+
+          if (hasNextPage) {
+            newMembersFilter.startIndex =
+              (newMembersFilter.page + 1) * newMembersFilter.pageCount - 1;
+            newMembersFilter.pageCount = 1;
+
+            const fetchedMembers = await fetchMembers(
+              selectionParentRoom.id,
+              false,
+              newMembersFilter
+            );
+
+            const newMembers = {
+              administrators: [
+                ...newAdministrators,
+                ...fetchedMembers.administrators,
+              ],
+              users: [...newUsers, ...fetchedMembers.users],
+              expected: [...newExpected, ...fetchedMembers.expected],
+            };
+
+            setMembers({
+              roomId: selectionParentRoom.id,
+              ...newMembers,
+            });
+
+            setSelectionParentRoom({
+              ...selectionParentRoom,
+              members: newMembers,
+            });
+          }
+
+          setMembersFilter(newMembersFilter);
+
           //setUserIsRemoved(true);
         } else {
+          setMembers({
+            roomId: selectionParentRoom.id,
+            users: users?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m
+            ),
+            administrators: administrators?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m
+            ),
+            expected: expectedMembers?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m
+            ),
+          });
+
           setSelectionParentRoom({
             ...selectionParentRoom,
             members: {
-              inRoom: inRoomMembers?.map((m) =>
+              users: users?.map((m) =>
+                m.id === user.id ? { ...m, access: option.access } : m
+              ),
+              administrators: administrators?.map((m) =>
                 m.id === user.id ? { ...m, access: option.access } : m
               ),
               expected: expectedMembers?.map((m) =>
@@ -126,7 +216,22 @@ const User = ({
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
   }. ${t("Common:HasFullAccess")}`;
 
-  return (
+  return isTitle ? (
+    <StyledUserTypeHeader isExpect={isExpect}>
+      <Text className="title">{user.displayName}</Text>
+
+      {showInviteIcon && (
+        <IconButton
+          className={"icon"}
+          title={t("Common:RepeatInvitation")}
+          iconName={EmailPlusReactSvgUrl}
+          isFill={true}
+          onClick={onRepeatInvitation}
+          size={16}
+        />
+      )}
+    </StyledUserTypeHeader>
+  ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
       <Avatar
         role={role}
@@ -155,7 +260,7 @@ const User = ({
               options={userRoleOptions}
               onSelect={onOptionClick}
               scaled={false}
-              withBackdrop={isMobileOnly}
+              withBackdrop={isMobile}
               size="content"
               modernView
               title={t("Common:Role")}

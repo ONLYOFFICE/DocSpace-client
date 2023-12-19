@@ -7,8 +7,8 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import Heading from "@docspace/components/heading";
 
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile, isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const StyledTextContainer = styled.div`
@@ -22,7 +22,11 @@ const StyledTextContainer = styled.div`
 
   ${(props) =>
     !props.isRootFolder && !props.isRootFolderTitle && "cursor: pointer"};
-  ${(props) => props.isRootFolderTitle && "padding-right: 3px"};
+  ${(props) =>
+    props.isRootFolderTitle &&
+    (props.theme.interfaceDirection === "rtl"
+      ? "padding-left: 3px;"
+      : "padding-right: 3px;")};
 
   ${(props) =>
     !props.isRootFolderTitle &&
@@ -35,7 +39,7 @@ const StyledTextContainer = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
 
   margin: 0;
@@ -45,28 +49,28 @@ const StyledHeading = styled(Heading)`
     `color: ${props.theme.navigation.rootFolderTitleColor}`};
 
   @media ${tablet} {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 
-  ${isMobile &&
-  css`
-    font-size: 18px !important;
-    line-height: 24px !important;
-  `}
-
-  ${isTablet &&
-  css`
-    font-size: 21px;
-    line-height: 28px;
-  `}
+  @media ${mobile} {
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    line-height: 24px;
+  }
 `;
 
 const StyledExpanderDownIcon = styled(ExpanderDownIcon)`
   min-width: 8px !important;
   width: 8px !important;
   min-height: 18px !important;
-  padding: 0 2px 0 4px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 0 4px 0 2px;
+        `
+      : css`
+          padding: 0 2px 0 4px;
+        `}
   path {
     fill: ${(props) => props.theme.navigation.expanderColor};
   }
@@ -77,8 +81,14 @@ const StyledExpanderDownIcon = styled(ExpanderDownIcon)`
 const StyledArrowIcon = styled(ArrowIcon)`
   height: 12px;
   min-width: 12px;
-
-  padding-left: 6px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-right: 6px;
+        `
+      : css`
+          padding-left: 6px;
+        `}
   path {
     fill: ${(props) => props.theme.navigation.rootFolderTitleColor};
   }
@@ -90,7 +100,14 @@ const StyledExpanderDownIconRotate = styled(ExpanderDownIcon)`
   min-width: 8px !important;
   width: 8px !important;
   min-height: 18px !important;
-  padding: 0 4px 0 2px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding: 0 2px 0 4px;
+        `
+      : css`
+          padding: 0 4px 0 2px;
+        `}
   transform: rotate(-180deg);
 
   path {

@@ -36,6 +36,7 @@ const Footer = React.memo(
     setNewFooterInputValue,
     isFooterCheckboxChecked,
     setIsFooterCheckboxChecked,
+    setIsChecked,
     acceptButtonId,
     cancelButtonId,
   }: FooterProps) => {
@@ -50,6 +51,7 @@ const Footer = React.memo(
     };
 
     const onChangeCheckbox = () => {
+      setIsChecked && setIsChecked((value: boolean) => !value);
       setIsFooterCheckboxChecked &&
         setIsFooterCheckboxChecked((value: boolean) => !value);
     };
@@ -58,6 +60,7 @@ const Footer = React.memo(
       <StyledFooter
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
+        className="selector_footer"
       >
         {withFooterInput && (
           <StyledNewNameContainer>
@@ -84,6 +87,15 @@ const Footer = React.memo(
           </StyledNewNameContainer>
         )}
 
+        {withFooterCheckbox && !withFooterInput && (
+          <Checkbox
+            label={footerCheckboxLabel}
+            isChecked={isFooterCheckboxChecked}
+            onChange={onChangeCheckbox}
+            className="selector_footer-checkbox"
+          />
+        )}
+
         <StyledButtonContainer>
           <Button
             id={acceptButtonId}
@@ -107,6 +119,7 @@ const Footer = React.memo(
               showDisabledItems
               directionX={"right"}
               directionY={"top"}
+              forceCloseClickOutside={true}
             />
           )}
 

@@ -111,7 +111,7 @@ const NamedAvatar = styled.div`
   top: ${(props) => props.theme.avatar.initialsContainer.top};
   transform: ${(props) => props.theme.avatar.initialsContainer.transform};
   font-weight: ${(props) => props.theme.avatar.initialsContainer.fontWeight};
-  font-size: ${(props) => fontSizeStyle(props)};
+  font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
 
   ${NoUserSelect}
 `;

@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
-import TimePicker from "@docspace/components/time-picker";
-import DatePicker from "@docspace/components/date-picker";
+import TimePicker from "../time-picker";
+import DatePicker from "../date-picker";
 
 import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment";
 import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
+
+import Base from "../themes/base";
 
 const Selectors = styled.div`
   position: relative;
@@ -37,7 +39,7 @@ const TimeCell = styled.span`
   width: 73px;
   height: 32px;
 
-  background-color: #eceef1;
+  background-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#242424")};
   border-radius: 3px;
 
   padding: 6px 8px;
@@ -57,6 +59,8 @@ const TimeCell = styled.span`
       color: red;
     `}
 `;
+
+TimeCell.defaultProps = { theme: Base };
 
 const TimeSelector = styled.span`
   ${({ theme }) =>

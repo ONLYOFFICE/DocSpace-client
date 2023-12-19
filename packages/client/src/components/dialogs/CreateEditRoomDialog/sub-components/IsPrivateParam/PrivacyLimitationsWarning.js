@@ -35,7 +35,7 @@ const StyledPrivacyLimitationsWarning = styled.div`
 
     &-text {
       font-weight: 600;
-      font-size: 13px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
       line-height: 20px;
       color: ${(props) =>
         props.theme.createEditRoomDialog.isPrivate.limitations.titleColor};
@@ -44,7 +44,7 @@ const StyledPrivacyLimitationsWarning = styled.div`
 
   .warning-description {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.isPrivate.limitations.descriptionColor};
@@ -54,7 +54,7 @@ const StyledPrivacyLimitationsWarning = styled.div`
     cursor: pointer;
     margin-top: 2px;
     font-weight: 600;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 15px;
     color: ${(props) =>
       props.theme.createEditRoomDialog.isPrivate.limitations.linkColor};

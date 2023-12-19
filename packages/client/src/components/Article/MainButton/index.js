@@ -12,6 +12,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
+import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React from "react";
 
 import { inject, observer } from "mobx-react";
@@ -24,18 +25,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
 
-import { Events, EmployeeType } from "@docspace/common/constants";
-import { getMainButtonItems } from "SRC_DIR/helpers/plugins";
-
+import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
 import styled, { css } from "styled-components";
 import Button from "@docspace/components/button";
 
 import { resendInvitesAgain } from "@docspace/common/api/people";
+import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
@@ -75,7 +75,8 @@ const StyledButton = styled(Button)`
     justify-content: space-between;
     vertical-align: middle;
     box-sizing: border-box;
-    padding: 5px 14px 5px 12px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle("5px 14px 5px 12px", theme.interfaceDirection)};
     line-height: 22px;
     border-radius: 3px;
 
@@ -96,6 +97,7 @@ const ArticleMainButtonContent = (props) => {
     startUpload,
     setAction,
     setSelectFileDialogVisible,
+    selectFileDialogVisible,
     showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
@@ -105,7 +107,11 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
+    setOformFromFolderId,
+    oformsFilter,
+
     enablePlugins,
+    mainButtonItemsList,
 
     currentColorScheme,
 
@@ -115,10 +121,15 @@ const ArticleMainButtonContent = (props) => {
     setInvitePanelOptions,
 
     mainButtonMobileVisible,
+    versionHistoryPanelVisible,
+    moveToPanelVisible,
+    restorePanelVisible,
+    copyPanelVisible,
 
     security,
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -197,7 +208,11 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
-    navigate(`/form-gallery/${currentFolderId}/`);
+    const initOformFilter = (
+      oformsFilter || oformsFilter.getDefault()
+    ).toUrlParams();
+    setOformFromFolderId(currentFolderId);
+    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
 
   const onInvite = React.useCallback((e) => {
@@ -247,6 +262,17 @@ const ArticleMainButtonContent = (props) => {
 
   React.useEffect(() => {
     if (isRoomsFolder || isSettingsPage) return;
+
+    const pluginItems = [];
+
+    if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
+      mainButtonItemsList.forEach((option) => {
+        pluginItems.push({
+          key: option.key,
+          ...option.value,
+        });
+      });
+    }
 
     const formActions = [
       {
@@ -403,6 +429,28 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
+    if (pluginItems.length > 0) {
+      // menuModel.push({
+      //   id: "actions_more-plugins",
+      //   className: "main-button_drop-down",
+      //   icon: PluginMoreReactSvgUrl,
+      //   label: t("Common:More"),
+      //   disabled: false,
+      //   key: "more-plugins",
+      //   items: pluginItems,
+      // });
+
+      actions.push({
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
+      });
+    }
+
     const menuModel = [...actions];
 
     menuModel.push({
@@ -413,19 +461,6 @@ const ArticleMainButtonContent = (props) => {
     menuModel.push(...uploadActions);
     setUploadActions(uploadActions);
 
-    if (enablePlugins) {
-      const pluginOptions = getMainButtonItems();
-
-      if (pluginOptions) {
-        pluginOptions.forEach((option) => {
-          menuModel.splice(option.value.position, 0, {
-            key: option.key,
-            ...option.value,
-          });
-        });
-      }
-    }
-
     setModel(menuModel);
     setActions(actions);
   }, [
@@ -435,9 +470,11 @@ const ArticleMainButtonContent = (props) => {
     isAccountsPage,
     isSettingsPage,
     enablePlugins,
+    mainButtonItemsList,
     isRoomsFolder,
     isOwner,
     isAdmin,
+
     onCreate,
     onCreateRoom,
     onInvite,
@@ -459,6 +496,19 @@ const ArticleMainButtonContent = (props) => {
 
   const isProfile = location.pathname.includes("/profile");
 
+  let mainButtonVisible = true;
+
+  if (currentDeviceType === DeviceType.mobile) {
+    mainButtonVisible =
+      moveToPanelVisible ||
+      restorePanelVisible ||
+      copyPanelVisible ||
+      selectFileDialogVisible ||
+      versionHistoryPanelVisible
+        ? false
+        : true;
+  }
+
   if (showArticleLoader)
     return isMobileArticle ? null : <Loaders.ArticleButton height="32px" />;
 
@@ -473,7 +523,9 @@ const ArticleMainButtonContent = (props) => {
               actionOptions={actions}
               buttonOptions={uploadActions}
               isRooms={isRoomsFolder}
-              mainButtonMobileVisible={mainButtonMobileVisible}
+              mainButtonMobileVisible={
+                mainButtonMobileVisible && mainButtonVisible
+              }
               onMainButtonClick={onCreateRoom}
             />
           )}
@@ -540,6 +592,9 @@ export default inject(
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    oformsStore,
+    pluginStore,
+    versionHistoryStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -557,9 +612,15 @@ export default inject(
       setSelectFileDialogVisible,
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
+      copyPanelVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      selectFileDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme } = auth.settingsStore;
+    const { enablePlugins, currentColorScheme, currentDeviceType } =
+      auth.settingsStore;
+    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
@@ -567,6 +628,9 @@ export default inject(
 
     const { isAdmin, isOwner } = auth.userStore.user;
     const { isGracePeriod } = auth.currentTariffStatusStore;
+
+    const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { mainButtonItemsList } = pluginStore;
 
     return {
       isGracePeriod,
@@ -587,18 +651,29 @@ export default inject(
       startUpload,
 
       setSelectFileDialogVisible,
+      selectFileDialogVisible,
       setInvitePanelOptions,
 
       currentFolderId,
 
+      setOformFromFolderId,
+      oformsFilter,
+
       enablePlugins,
+      mainButtonItemsList,
+
       currentColorScheme,
 
       isAdmin,
       isOwner,
 
       mainButtonMobileVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      copyPanelVisible,
+      versionHistoryPanelVisible,
       security,
+      currentDeviceType,
     };
   }
 )(

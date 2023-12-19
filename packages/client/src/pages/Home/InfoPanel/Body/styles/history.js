@@ -11,11 +11,11 @@ const StyledHistorySubtitle = styled.div`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
-  z-index: 100;
+  z-index: 99;
 
   padding: 8px 0 12px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
@@ -27,7 +27,7 @@ const StyledUserNameLink = styled.span`
   margin: 1px 0;
 
   .username {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
     display: inline-block;
   }
@@ -73,7 +73,7 @@ const StyledHistoryBlock = styled.div`
       gap: 4px;
       .name {
         font-weight: 600;
-        font-size: 14px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -81,9 +81,16 @@ const StyledHistoryBlock = styled.div`
       .date {
         white-space: nowrap;
         display: inline-block;
-        margin-left: auto;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: auto;
+              `
+            : css`
+                margin-left: auto;
+              `}
         font-weight: 600;
-        font-size: 12px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
         color: ${(props) => props.theme.infoPanel.history.dateColor};
       }
     }
@@ -97,7 +104,14 @@ const StyledHistoryBlock = styled.div`
         flex-wrap: wrap;
         .message {
           display: inline-block;
-          margin-right: 4px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-left: 4px;
+                `
+              : css`
+                  margin-right: 4px;
+                `}
         }
       }
     `}
@@ -105,22 +119,26 @@ const StyledHistoryBlock = styled.div`
 
 const StyledHistoryBlockMessage = styled.div`
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
   display: flex;
   gap: 4px;
 
+  .main-message {
+    width: max-content;
+    max-width: 100%;
+    min-width: max-content;
+  }
+
   strong {
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: top;
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-  }
-
-  .main-message {
-    width: max-content;
-    white-space: nowrap;
   }
 
   .folder-label {
@@ -142,9 +160,16 @@ const StyledHistoryBlockFilesList = styled.div`
 
   .show_more-link {
     cursor: pointer;
-    margin: 10px 0 3px 20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 10px 20px 3px 0;
+          `
+        : css`
+            margin: 10px 0 3px 20px;
+          `}
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 15px;
 
     strong {
@@ -175,7 +200,7 @@ const StyledHistoryBlockFile = styled.div`
 
   .item-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     display: flex;
     min-width: 0;
     gap: 0;
@@ -193,7 +218,14 @@ const StyledHistoryBlockFile = styled.div`
   }
 
   .location-btn {
-    margin-left: auto;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
     min-width: 16px;
   }
 `;

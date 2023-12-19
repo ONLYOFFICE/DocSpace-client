@@ -7,7 +7,7 @@ import Text from "@docspace/components/text";
 import ToggleButton from "@docspace/components/toggle-button";
 import Badge from "@docspace/components/badge";
 import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
-import SSOLoader from "../../sub-components/ssoLoader";
+
 const borderProp = { radius: "6px" };
 
 const ToggleSSO = (props) => {
@@ -19,21 +19,12 @@ const ToggleSSO = (props) => {
     ssoToggle,
     confirmationDisableModal,
     isSSOAvailable,
-    tReady,
     t,
   } = props;
 
-  if (!tReady) {
-    return <SSOLoader isToggleSSO={true} />;
-  }
-
   return (
     <>
-      <Text
-        className="intro-text settings_unavailable"
-        lineHeight="20px"
-        noSelect
-      >
+      <Text className="intro-text settings_unavailable" noSelect>
         {t("SsoIntro")}
       </Text>
 
@@ -69,6 +60,7 @@ const ToggleSSO = (props) => {
               <Badge
                 backgroundColor="#EDC409"
                 label={t("Common:Paid")}
+                fontWeight="700"
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}
               />

@@ -1,0 +1,18 @@
+{
+  "DeletePlugin": "プラグインの削除",
+  "DeletePluginDescription": "このプラグインはDocSpaceユーザーには提供されません。このまま続けますか？",
+  "DeletePluginTitle": "プラグインを削除しますか？",
+  "Description": "プラグインを追加して、DocSpaceの機能を拡張することができます。プラグインのアップロード]をクリックし、ZIPアーカイブ内のプラグインファイルを選択します。",
+  "ExpandFunctionality": "プラグインSDKを使用した機能拡張",
+  "GoToRepo": "リポジトリへ",
+  "Metadata": "メタデータ",
+  "NeedSettings": "設定の入力",
+  "NoPlugins": "プラグインの追加なし",
+  "NotNeedSettings": "設定入力が不要",
+  "PluginSamples": "プラグインのサンプル",
+  "PluginSDK": "プラグインSDK",
+  "PluginSDKDescription": "プラグインSDKを使用すると、DocSpaceの機能を拡張したり、サードパーティのサービスと接続したり、既存のユーザーエクスペリエンスを向上させたりすることができます。ここでは、GitHubで利用可能なコードソース付きのプラグインサンプルを見つけることができます。",
+  "PluginSDKInstruction": "ボタンをクリックすると、独自のプラグインを作成するための詳細な手順が表示されます。",
+  "PluginsHelp": "プラグインはDocSpaceの機能を拡張することができます",
+  "UploadPlugin": "プラグインのアップロード"
+}

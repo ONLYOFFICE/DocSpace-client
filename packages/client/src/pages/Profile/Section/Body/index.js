@@ -3,94 +3,103 @@ import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
+import Submenu from "@docspace/components/submenu";
 
 import MainProfile from "./sub-components/main-profile";
-import LoginSettings from "./sub-components/login-settings";
-import Subscription from "./sub-components/subscription";
+import LoginContent from "./sub-components/LoginContent";
+import Notifications from "./sub-components/notifications";
+import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
-import SocialNetworks from "./sub-components/social-networks";
-import InterfaceDirection from "./sub-components/interface-direction";
 
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Wrapper = styled.div`
-  max-width: 660px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 
   @media ${tablet} {
     width: 100%;
     max-width: 100%;
   }
-
-  @media ${hugeMobile} {
-    gap: 32px;
-  }
 `;
 
 const SectionBodyContent = (props) => {
-  const {
-    setBackupCodes,
-    getTfaType,
-    getBackupCodes,
-    isProfileLoaded,
+  const { showProfileLoader, profile, currentDeviceType, t } = props;
+  const navigate = useNavigate();
 
-    t,
-  } = props;
-  const [tfa, setTfa] = useState(false);
-  const [backupCodesCount, setBackupCodesCount] = useState(0);
+  const data = [
+    {
+      id: "login",
+      name: t("ConnectDialog:Login"),
+      content: <LoginContent />,
+    },
+    {
+      id: "notifications",
+      name: t("Notifications:Notifications"),
+      content: <Notifications />,
+    },
+    {
+      id: "interface-theme",
+      name: t("InterfaceTheme"),
+      content: <InterfaceTheme />,
+    },
+  ];
 
-  const fetchData = async () => {
-    const type = await getTfaType();
-    setTfa(type);
-    if (type && type !== "none") {
-      const codes = await getBackupCodes();
-      setBackupCodes(codes);
+  if (!profile?.isVisitor)
+    data.splice(2, 0, {
+      id: "file-management",
+      name: t("FileManagement"),
+      content: <FileManagement />,
+    });
 
-      let backupCodesCount = 0;
-      if (codes && codes.length > 0) {
-        codes.map((item) => {
-          if (!item.isUsed) {
-            backupCodesCount++;
-          }
-        });
-      }
-      setBackupCodesCount(backupCodesCount);
-    }
+  const getCurrentTab = () => {
+    const path = location.pathname;
+    const currentTab = data.findIndex((item) => path.includes(item.id));
+    return currentTab !== -1 ? currentTab : 0;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const currentTab = getCurrentTab();
 
-  if (!isProfileLoaded) return <Loaders.ProfileView />;
+  const onSelect = (e) => {
+    const arrayPaths = location.pathname.split("/");
+    arrayPaths.splice(arrayPaths.length - 1);
+    const path = arrayPaths.join("/");
+    navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
+  };
 
+  if (showProfileLoader) return <Loaders.ProfileView />;
   return (
     <Wrapper>
       <MainProfile />
-      {tfa && tfa !== "none" && (
-        <LoginSettings backupCodesCount={backupCodesCount} />
-      )}
-      <InterfaceDirection />
-      <SocialNetworks />
-      <Subscription t={t} />
-      <InterfaceTheme />
+      <Submenu
+        data={data}
+        startSelect={currentTab}
+        onSelect={onSelect}
+        topProps={
+          currentDeviceType === DeviceType.desktop
+            ? 0
+            : currentDeviceType === DeviceType.mobile
+            ? "53px"
+            : "61px"
+        }
+      />
     </Wrapper>
   );
 };
 
-export default inject(({ auth, clientLoadingStore }) => {
-  const { tfaStore } = auth;
-  const { getBackupCodes, getTfaType, setBackupCodes } = tfaStore;
-  const { isProfileLoaded } = clientLoadingStore;
+export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+  const { showProfileLoader } = clientLoadingStore;
+  const { targetUser: profile } = peopleStore.targetUserStore;
+
   return {
-    getBackupCodes,
-    getTfaType,
-    setBackupCodes,
-    isProfileLoaded,
+    profile,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
+    showProfileLoader,
   };
 })(
   observer(
@@ -103,6 +112,7 @@ export default inject(({ auth, clientLoadingStore }) => {
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",
       "Notifications",
+      "ConnectDialog",
     ])(SectionBodyContent)
   )
 );

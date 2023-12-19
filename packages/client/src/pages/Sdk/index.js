@@ -12,6 +12,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/common/utils";
+import { RoomsType } from "@docspace/common/constants";
 
 const Sdk = ({
   frameConfig,
@@ -25,6 +26,8 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
+  getRoomsIcon,
+  getPrimaryLink,
 }) => {
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -75,7 +78,9 @@ const Sdk = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                user && updateProfileCulture(user.id, data.locale),
+                user &&
+                  data.locale &&
+                  updateProfileCulture(user.id, data.locale),
               ]);
               res = requests[0];
             }
@@ -116,8 +121,18 @@ const Sdk = ({
   };
 
   const onSelectRoom = useCallback(
-    (data) => {
-      data[0].icon = toRelativeUrl(data[0].icon);
+    async (data) => {
+      if (data[0].logo.large !== "") {
+        data[0].icon = toRelativeUrl(data[0].logo.large);
+      } else {
+        data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      }
+
+      if (data[0].roomType === RoomsType.PublicRoom) {
+        const { sharedTo } = await getPrimaryLink(data[0].id);
+        data[0].requestToken = sharedTo?.requestToken;
+      }
+
       frameCallEvent({ event: "onSelectCallback", data });
     },
     [frameCallEvent]
@@ -148,8 +163,8 @@ const Sdk = ({
     case "room-selector":
       component = (
         <RoomSelector
-          withCancelButton
-          withHeader={false}
+          withCancelButton={frameConfig?.showSelectorCancel}
+          withHeader={frameConfig?.showSelectorHeader}
           onAccept={onSelectRoom}
           onCancel={onClose}
         />
@@ -159,14 +174,15 @@ const Sdk = ({
       component = (
         <FilesSelector
           isPanelVisible={true}
-          onSelectFile={onSelectFile}
-          filteredType={selectorType}
-          withSubfolders={false}
-          displayType="aside"
           embedded={true}
-          searchParam={frameConfig?.filter.search}
-          ByExtension
-          {...onCloseCallback}
+          withHeader={frameConfig?.showSelectorHeader}
+          isSelect={true}
+          onSelectFile={onSelectFile}
+          onClose={onClose}
+          filterParam={"ALL"}
+          isUserOnly={selectorType === "userFolderOnly"}
+          isRoomsOnly={selectorType === "roomsOnly"}
+          withCancelButton={frameConfig?.showSelectorCancel}
         />
       );
       break;
@@ -177,13 +193,14 @@ const Sdk = ({
   return component;
 };
 
-export default inject(({ auth, settingsStore, peopleStore }) => {
+export default inject(({ auth, settingsStore, peopleStore, filesStore }) => {
   const { login, logout, userStore } = auth;
   const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
     auth.settingsStore;
   const { loadCurrentUser, user } = userStore;
   const { updateProfileCulture } = peopleStore.targetUserStore;
-  const { getIcon } = settingsStore;
+  const { getIcon, getRoomsIcon } = settingsStore;
+  const { getPrimaryLink } = filesStore;
 
   return {
     theme,
@@ -194,8 +211,10 @@ export default inject(({ auth, settingsStore, peopleStore }) => {
     getSettings,
     loadCurrentUser,
     getIcon,
+    getRoomsIcon,
     isLoaded,
     updateProfileCulture,
     user,
+    getPrimaryLink,
   };
 })(observer(Sdk));

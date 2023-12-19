@@ -4,6 +4,8 @@ const path = require("path");
 const DefinePlugin = require("webpack").DefinePlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const runtime = require("../../runtime.json");
+const dateHash = runtime?.date || "";
 
 const serverConfig = {
   target: "node",
@@ -34,7 +36,18 @@ const serverConfig = {
       return `/doceditor/static/${folder}[name][ext]?hash=[contenthash]`; //`${folder}/[name].[contenthash][ext]`;
     },
   },
-
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        generator: {
+          emit: false,
+        },
+        type: "asset/resource",
+        resourceQuery: /url/, // *.css?url
+      },
+    ],
+  },
   plugins: [
     new CopyPlugin({
       patterns: [
@@ -63,6 +76,16 @@ module.exports = (env, argv) => {
       IS_DEVELOPMENT: argv.mode !== "production",
       PORT: 5013,
       IS_PERSONAL: env.personal || false,
+      BROWSER_DETECTOR_URL: JSON.stringify(
+        `/static/scripts/browserDetector.js?hash=${
+          runtime.checksums["browserDetector.js"] || dateHash
+        }`
+      ),
+      CONFIG_URL: JSON.stringify(
+        `/static/scripts/config.json?hash=${
+          runtime.checksums["config.json"] || dateHash
+        }`
+      ),
     }),
   ];
 

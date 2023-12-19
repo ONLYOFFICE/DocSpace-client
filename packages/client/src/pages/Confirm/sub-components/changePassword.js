@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import Text from "@docspace/components/text";
 import PasswordInput from "@docspace/components/password-input";
 import Button from "@docspace/components/button";
 import FieldContainer from "@docspace/components/field-container";
-import { inject, observer } from "mobx-react";
-import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
-import withLoader from "../withLoader";
-import { getPasswordErrorMessage } from "../../../helpers/utils";
-import { createPasswordHash } from "@docspace/common/utils";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
 import toastr from "@docspace/components/toast/toastr";
 import FormWrapper from "@docspace/components/form-wrapper";
+
+import { createPasswordHash } from "@docspace/common/utils";
+import { login } from "@docspace/common/utils/loginUtils";
+
 import DocspaceLogo from "../../../DocspaceLogo";
+import { getPasswordErrorMessage } from "../../../helpers/utils";
+import withLoader from "../withLoader";
+import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 
 const ChangePasswordForm = (props) => {
   const {
@@ -21,10 +24,10 @@ const ChangePasswordForm = (props) => {
     settings,
     hashSettings,
     defaultPage,
-    logout,
     changePassword,
     linkData,
     getSettings,
+    history,
   } = props;
 
   const [password, setPassword] = useState("");
@@ -62,12 +65,23 @@ const ChangePasswordForm = (props) => {
 
     try {
       const hash = createPasswordHash(password, hashSettings);
-      const { uid, confirmHeader } = linkData;
+      const { email, uid, confirmHeader } = linkData;
       await changePassword(uid, hash, confirmHeader);
-      logout();
       setIsLoading(false);
       toastr.success(t("ChangePasswordSuccess"));
-      tryRedirectTo(defaultPage);
+
+      login(email, hash).then((res) => {
+        const isConfirm = typeof res === "string" && res.includes("confirm");
+        const redirectPath = sessionStorage.getItem("referenceUrl");
+        if (redirectPath && !isConfirm) {
+          sessionStorage.removeItem("referenceUrl");
+          window.location.href = redirectPath;
+          return;
+        }
+
+        if (typeof res === "string") window.location.replace(res);
+        else window.location.replace("/");
+      });
     } catch (error) {
       let errorMessage = "";
       if (typeof error === "object") {
@@ -184,7 +198,6 @@ export default inject(({ auth, setup }) => {
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    logout: auth.logout,
     changePassword,
     isAuthenticated: auth.isAuthenticated,
     getSettings,

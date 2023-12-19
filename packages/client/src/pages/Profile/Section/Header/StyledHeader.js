@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { tablet } from "@docspace/components/utils/device";
 
 export const StyledHeader = styled.div`
   position: relative;
@@ -8,25 +9,50 @@ export const StyledHeader = styled.div`
     props.showContextButton ? "auto auto auto 1fr" : "auto 1fr"};
   align-items: center;
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     grid-template-columns: ${(props) =>
       props.showContextButton ? "auto 1fr auto" : "auto 1fr"};
   }
 
   .action-button {
-    margin-left: 16px;
-
-    @media (max-width: 1024px) {
-      margin-left: auto;
-
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+          `
+        : css`
+            margin-left: 16px;
+          `}
+    @media ${tablet} {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: auto;
+            `
+          : css`
+              margin-left: auto;
+            `}
       & > div:first-child {
-        padding: 8px 16px 8px 0px;
-        margin-right: -16px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding: 8px 0px 8px 16px;
+                margin-left: -16px;
+              `
+            : css`
+                padding: 8px 16px 8px 0px;
+                margin-right: -16px;
+              `}
       }
     }
   }
   .arrow-button {
-    @media (max-width: 1024px) {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform: scaleX(-1);
+      `}
+    @media ${tablet} {
       padding: 8px 16px 8px 16px;
       margin-left: -16px;
       margin-right: -16px;
@@ -34,6 +60,13 @@ export const StyledHeader = styled.div`
   }
 
   .header-headline {
-    margin-left: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+          `
+        : css`
+            margin-left: 16px;
+          `}
   }
 `;

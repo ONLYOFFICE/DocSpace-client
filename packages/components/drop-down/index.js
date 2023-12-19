@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import onClickOutside from "react-onclickoutside";
-import { isMobile } from "react-device-detect";
+import { isIOS, isMobileOnly, isMobile } from "react-device-detect";
 import Portal from "../portal";
 import DomHelpers from "../utils/domHelpers";
 
@@ -12,6 +12,8 @@ import StyledDropdown from "./styled-drop-down";
 import VirtualList from "./VirtualList";
 import { withTheme } from "styled-components";
 /* eslint-disable react/prop-types, react/display-name */
+
+const DEFAULT_PARENT_HEIGHT = 42;
 
 const Row = memo(({ data, index, style }) => {
   const { children, theme, activedescendant, handleMouseMove } = data;
@@ -46,7 +48,9 @@ class DropDown extends React.PureComponent {
       directionX: props.directionX,
       directionY: props.directionY,
       manualY: props.manualY,
+      borderOffset: props.theme.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
       isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
+      borderOffset: props.theme.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     };
 
     this.dropDownRef = React.createRef();
@@ -124,7 +128,7 @@ class DropDown extends React.PureComponent {
       return;
     }
     const { smallSectionWidth, forwardedRef } = this.props;
-    const { manualY } = this.state;
+    const { manualY, borderOffset } = this.state;
 
     const isRtl = this.props.theme.interfaceDirection === "rtl";
     const rects = this.dropDownRef.current.getBoundingClientRect();
@@ -140,7 +144,7 @@ class DropDown extends React.PureComponent {
         }
       : {
           toTopCorner: rects.top,
-          parentHeight: 42,
+          parentHeight: DEFAULT_PARENT_HEIGHT,
           containerHeight: container.height,
         };
 
@@ -181,7 +185,9 @@ class DropDown extends React.PureComponent {
       directionX: x,
       directionY: y,
       manualY: mY,
-      width: this.dropDownRef ? this.dropDownRef.current.offsetWidth : 240,
+      width: this.dropDownRef
+        ? this.dropDownRef.current.offsetWidth - borderOffset
+        : 240,
       isDropdownReady: true,
     });
   };
@@ -193,6 +199,7 @@ class DropDown extends React.PureComponent {
       return;
     }
     const dropDown = this.dropDownRef.current;
+    const { borderOffset } = this.state;
 
     const parentRects = parent.current.getBoundingClientRect();
 
@@ -256,7 +263,9 @@ class DropDown extends React.PureComponent {
     this.setState({
       directionX: this.props.directionX,
       directionY: this.props.directionY,
-      width: this.dropDownRef ? this.dropDownRef.current.offsetWidth : 240,
+      width: this.dropDownRef
+        ? this.dropDownRef.current.offsetWidth - borderOffset
+        : 240,
       isDropdownReady: true,
     });
   };
@@ -328,8 +337,27 @@ class DropDown extends React.PureComponent {
     );
     const getItemSize = (index) => rowHeights[index];
     const fullHeight = cleanChildren && rowHeights.reduce((a, b) => a + b, 0);
-    const calculatedHeight =
+    let calculatedHeight =
       fullHeight > 0 && fullHeight < maxHeight ? fullHeight : maxHeight;
+
+    const container = DomHelpers.getViewport();
+
+    if (
+      isIOS &&
+      isMobileOnly &&
+      container?.height !== window.visualViewport.height
+    ) {
+      const rects = this.dropDownRef?.current?.getBoundingClientRect();
+      const parentRects =
+        this.props.forwardedRef?.current?.getBoundingClientRect();
+
+      const parentHeight = parentRects?.height || DEFAULT_PARENT_HEIGHT;
+
+      const height = window.visualViewport.height - rects?.top - parentHeight;
+
+      if (rects && calculatedHeight > height) calculatedHeight = height;
+    }
+
     const dropDownMaxHeightProp = maxHeight
       ? { height: calculatedHeight + "px" }
       : {};
@@ -367,6 +395,7 @@ class DropDown extends React.PureComponent {
   render() {
     const { isDefaultMode } = this.props;
     const element = this.renderDropDown();
+
     if (isDefaultMode) {
       return <Portal element={element} appendTo={this.props.appendTo} />;
     }
@@ -389,8 +418,12 @@ class DropDownContainer extends React.Component {
       isAside,
       withBackground,
       eventTypes,
+      forceCloseClickOutside,
+      withoutBackground,
     } = this.props;
-    const eventTypesProp = isMobile
+    const eventTypesProp = forceCloseClickOutside
+      ? {}
+      : isMobile
       ? { eventTypes: ["click, touchend"] }
       : eventTypes
       ? { eventTypes }
@@ -406,6 +439,7 @@ class DropDownContainer extends React.Component {
             withoutBlur={!withBlur}
             isAside={isAside}
             withBackground={withBackground}
+            withoutBackground={withoutBackground}
           />
         ) : null}
         <EnhancedComponent

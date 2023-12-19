@@ -1,63 +1,291 @@
 {
   "version": "2.0.0",
   "problemMatcher": [],
-  "presentation": {
-    "focus": true,
-    "close": true
-  },
   "tasks": [
     {
-      "label": "Frontend | Start",
+      "label": "Backend | build EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start"
-    },
-    {
-      "label": "Backend  | Build",
-      "type": "shell",
-      "command": "${workspaceFolder}/build/build.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\build.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Start",
+      "label": "Backend | rebuild EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/start.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\start.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Restart",
+      "label": "Backend | build CE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/restart.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\restart.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
-      "label": "Backend  | Stop",
+      "label": "Backend | build SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d",
       "type": "shell",
-      "command": "${workspaceFolder}/build/start/stop.backend.docker.sh",
-      "windows": {
-        "command": "${workspaceFolder}\\build\\start\\stop.bat"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "start-param",
-      "description": "Command",
-      "default": "Start",
-      "type": "pickString",
-      "options": ["Start", "Restart", "Stop"]
     },
     {
-      "id": "local-docker",
-      "description": "Manipulation",
-      "default": "Local",
-      "type": "pickString",
-      "options": ["Local", "Docker"]
+      "label": "Backend | rebuild SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build EE + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | clear",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/clear.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | stop",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/stop.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | restart",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/restart.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | start",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/start.backend.docker.py",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | install",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update yarn.lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn wipe ; yarn install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | frontend-translations-spellcheck-force-save",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py -f",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

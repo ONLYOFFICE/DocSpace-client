@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Loaders from "@docspace/common/components/Loaders";
+import DialogSkeleton from "../../skeletons/dialog";
+import DialogAsideSkeleton from "../../skeletons/dialog/aside";
 
 import Heading from "../../heading";
 import {
@@ -16,6 +17,10 @@ import CloseButton from "../components/CloseButton";
 import ModalBackdrop from "../components/ModalBackdrop";
 import Scrollbar from "../../scrollbar";
 import { classNames } from "../../utils/classNames";
+import FormWrapper from "../components/FormWrapper";
+import { isIOS, isTablet, isMobile } from "react-device-detect";
+
+let isInitScroll = false;
 
 const Modal = ({
   id,
@@ -41,7 +46,93 @@ const Modal = ({
   isDoubleFooterLine,
   isCloseable,
   embedded,
+  withForm,
 }) => {
+  const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+
+  const visualPageTop = React.useRef(0);
+  const diffRef = React.useRef(0);
+  const contentRef = React.useRef(0);
+
+  React.useEffect(() => {
+    if (isIOS && isMobile) {
+      window.visualViewport.addEventListener("resize", onResize);
+      window.visualViewport.addEventListener("scroll", onResize);
+    }
+
+    return () => {
+      window.visualViewport.removeEventListener("resize", onResize);
+      window.visualViewport.removeEventListener("scroll", onResize);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!visible) isInitScroll = false;
+  }, [visible]);
+
+  const scrollPosition = () => {
+    if (currentDisplayType !== "modal") return;
+
+    if (isInitScroll) return;
+
+    const dialogHeader = document
+      .getElementById("modal-header-swipe")
+      ?.getBoundingClientRect();
+
+    const input = document
+      .getElementsByClassName("input-component")[0]
+      ?.getBoundingClientRect();
+
+    if (dialogHeader && input) {
+      dialogHeader.y < dialogHeader.height + input.height
+        ? window.scrollTo(0, input.y)
+        : window.scrollTo(0, dialogHeader.y);
+    }
+
+    isInitScroll = true;
+  };
+
+  const onResize = (e) => {
+    if (window.innerHeight < window.innerWidth || isTablet) {
+      scrollPosition();
+
+      return;
+    }
+
+    if (!contentRef.current) return;
+
+    if (currentDisplayType === "modal") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+
+      return;
+    }
+    if (e?.type === "resize") {
+      let diff = windowHeight - e.target.height - e.target.pageTop;
+
+      visualPageTop.current = e.target.pageTop;
+
+      contentRef.current.style.bottom = `${diff}px`;
+      contentRef.current.style.height = `${
+        e.target.height - 64 + e.target.pageTop
+      }px`;
+      contentRef.current.style.position = "fixed";
+
+      diffRef.current = diff;
+    } else if (e?.type === "scroll") {
+      const diff = window.visualViewport.pageTop ? 0 : visualPageTop.current;
+
+      contentRef.current.style.bottom = `${diffRef.current + diff}px`;
+      contentRef.current.style.height = `${
+        window.visualViewport.height - 64 + diff
+      }px`;
+      contentRef.current.style.position = "fixed";
+    }
+  };
+
   const headerComponent = header ? header.props.children : null;
   const bodyComponent = body ? body.props.children : null;
   const footerComponent = footer ? footer.props.children : null;
@@ -58,7 +149,7 @@ const Modal = ({
       modalSwipeOffset={modalSwipeOffset}
     >
       <ModalBackdrop
-        className={visible ? "modal-backdrop-active" : ""}
+        className={visible ? "modal-backdrop-active backdrop-active" : ""}
         visible={true}
         zIndex={zIndex}
         modalSwipeOffset={modalSwipeOffset}
@@ -84,6 +175,7 @@ const Modal = ({
             autoMaxWidth={autoMaxWidth}
             modalSwipeOffset={modalSwipeOffset}
             embedded={embedded}
+            ref={contentRef}
           >
             {isCloseable && (
               <CloseButton
@@ -94,12 +186,12 @@ const Modal = ({
             )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
-                <Loaders.DialogLoader
+                <DialogSkeleton
                   isLarge={isLarge}
                   withFooterBorder={withFooterBorder}
                 />
               ) : (
-                <Loaders.DialogAsideLoader
+                <DialogAsideSkeleton
                   withoutAside
                   withFooterBorder={withFooterBorder}
                 />
@@ -111,7 +203,7 @@ const Modal = ({
                 currentDisplayType !== "modal" ? (
                   <>{containerComponent}</>
                 ) : (
-                  <>
+                  <FormWrapper withForm={withForm}>
                     {header && (
                       <StyledHeader
                         id="modal-header-swipe"
@@ -146,11 +238,7 @@ const Modal = ({
                         embedded={embedded}
                       >
                         {currentDisplayType === "aside" && withBodyScroll ? (
-                          <Scrollbar
-                            stype="mediumBlack"
-                            id="modal-scroll"
-                            className="modal-scroll"
-                          >
+                          <Scrollbar id="modal-scroll" className="modal-scroll">
                             {bodyComponent}
                           </Scrollbar>
                         ) : (
@@ -172,7 +260,7 @@ const Modal = ({
                         {footerComponent}
                       </StyledFooter>
                     )}
-                  </>
+                  </FormWrapper>
                 )}
               </>
             )}

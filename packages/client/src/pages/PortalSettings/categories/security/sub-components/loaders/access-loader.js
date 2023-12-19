@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
-import { tablet } from "@docspace/components/utils/device";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledLoader = styled.div`
   .header {
@@ -9,12 +8,12 @@ const StyledLoader = styled.div`
     height: 29px;
     margin-bottom: 14px;
 
-    @media (${tablet}) {
+    @media ${tablet} {
       width: 184px;
       height: 37px;
     }
 
-    @media (max-width: 428px) {
+    @media ${mobile} {
       width: 273px;
       height: 37px;
       margin-bottom: 18px;
@@ -34,13 +33,13 @@ const StyledLoader = styled.div`
     gap: 20px;
     margin-bottom: 40px;
 
-    @media (max-width: 428px) {
+    @media ${mobile} {
       width: 100%;
     }
 
     .header {
       height: 40px;
-      @media (${tablet}) {
+      @media ${tablet} {
         height: 60px;
       }
     }
@@ -53,7 +52,7 @@ const StyledLoader = styled.div`
 
     .description {
       width: 700px;
-      @media (${tablet}) {
+      @media ${tablet} {
         width: 100%;
       }
     }
@@ -63,21 +62,21 @@ const StyledLoader = styled.div`
 const AccessLoader = () => {
   return (
     <StyledLoader>
-      <Loaders.Rectangle className="header" height="100%" />
+      <RectangleSkeleton className="header" height="100%" />
       <div className="submenu">
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
-        <Loaders.Rectangle height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
+        <RectangleSkeleton height="28px" width="72px" />
       </div>
       <div className="owner">
-        <Loaders.Rectangle className="header" height="100%" />
-        <Loaders.Rectangle height="82px" />
+        <RectangleSkeleton className="header" height="100%" />
+        <RectangleSkeleton height="82px" />
       </div>
       <div className="admins">
-        <Loaders.Rectangle height="22px" width="77px" />
-        <Loaders.Rectangle height="20px" width="56px" />
-        <Loaders.Rectangle className="description" height="40px" />
+        <RectangleSkeleton height="22px" width="77px" />
+        <RectangleSkeleton height="20px" width="56px" />
+        <RectangleSkeleton className="description" height="40px" />
       </div>
     </StyledLoader>
   );

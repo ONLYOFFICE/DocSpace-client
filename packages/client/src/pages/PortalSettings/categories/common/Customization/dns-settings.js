@@ -8,10 +8,8 @@ import Button from "@docspace/components/button";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
-import { DNSSettingsTooltip } from "../sub-components/common-tooltips";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -19,6 +17,9 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import Badge from "@docspace/components/badge";
 import toastr from "@docspace/components/toast/toastr";
 import ToggleButton from "@docspace/components/toggle-button";
+import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const toggleStyle = {
   position: "static",
@@ -35,7 +36,6 @@ const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
   primary: true,
-  size: "small",
 };
 let timerId = null;
 const DNSSettings = (props) => {
@@ -58,6 +58,8 @@ const DNSSettings = (props) => {
     dnsName,
     enable,
     isDefaultDNS,
+    dnsSettingsUrl,
+    currentDeviceType,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -69,7 +71,7 @@ const DNSSettings = (props) => {
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    if (!isLoaded) initSettings("dns-settings").then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -79,15 +81,6 @@ const DNSSettings = (props) => {
 
     if (scrollPortalName !== hasScroll) {
       setHasScroll(scrollPortalName);
-    }
-
-    // TODO: Remove div with height 64 and remove settings-mobile class
-    const settingsMobile = document.getElementsByClassName(
-      "settings-mobile"
-    )[0];
-
-    if (settingsMobile) {
-      settingsMobile.style.display = "none";
     }
 
     return () => window.removeEventListener("resize", checkInnerWidth);
@@ -135,7 +128,7 @@ const DNSSettings = (props) => {
     setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -151,16 +144,7 @@ const DNSSettings = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isSmallTablet, setIsCustomizationView]);
-
-  const tooltipDNSSettingsTooltip = (
-    <DNSSettingsTooltip
-      t={t}
-      currentColorScheme={currentColorScheme}
-      helpLink={helpLink}
-      standalone={standalone}
-    />
-  );
+  }, [isMobile, setIsCustomizationView]);
 
   const settingsBlock = (
     <div className="settings-block">
@@ -207,6 +191,7 @@ const DNSSettings = (props) => {
   const buttonContainer = standalone ? (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SaveButton")}
       onClick={onSaveSettings}
       isDisabled={isLoading || isDefaultDNS}
@@ -215,6 +200,7 @@ const DNSSettings = (props) => {
   ) : (
     <Button
       {...buttonProps}
+      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SendRequest")}
       onClick={onSendRequest}
       isDisabled={!isSettingPaid}
@@ -233,16 +219,10 @@ const DNSSettings = (props) => {
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          <HelpButton
-            offsetRight={0}
-            iconName={CombinedShapeSvgUrl}
-            size={12}
-            tooltipContent={tooltipDNSSettingsTooltip}
-            className="dns-setting_helpbutton "
-          />
           {!isSettingPaid && (
             <Badge
               className="paid-badge"
+              fontWeight="700"
               backgroundColor="#EDC409"
               label={t("Common:Paid")}
               isPaidBadge={true}
@@ -250,18 +230,34 @@ const DNSSettings = (props) => {
           )}
         </div>
       )}
-      {(isMobileOnly && isSmallTablet()) || isSmallTablet() ? (
-        <StyledScrollbar stype="mediumBlack">{settingsBlock}</StyledScrollbar>
-      ) : (
-        <> {settingsBlock}</>
-      )}
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight={400}>
+          {t("DNSSettingsDescription")}
+        </Text>
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main.accent}
+          target="_blank"
+          isHovered
+          href={dnsSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      </div>
+      {settingsBlock}
       <div className="send-request-container">{buttonContainer}</div>
     </StyledSettingsComponent>
   );
 };
 
 export default inject(({ auth, common }) => {
-  const { helpLink, currentColorScheme, standalone } = auth.settingsStore;
+  const {
+    helpLink,
+    currentColorScheme,
+    standalone,
+    dnsSettingsUrl,
+    currentDeviceType,
+  } = auth.settingsStore;
   const {
     isLoaded,
     setIsLoadedDNSSettings,
@@ -293,5 +289,7 @@ export default inject(({ auth, common }) => {
     standalone,
     setIsEnableDNS,
     saveDNSSettings,
+    dnsSettingsUrl,
+    currentDeviceType,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

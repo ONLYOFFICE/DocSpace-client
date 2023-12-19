@@ -20,7 +20,6 @@ import toastr from "@docspace/components/toast/toastr";
 
 const MainWrapper = styled.div`
   width: 100%;
-  margin-top: 5px;
 
   .toggleButton {
     display: flex;
@@ -34,7 +33,8 @@ const ButtonSeating = styled.div`
   width: 100vw;
   height: 73px;
   bottom: 0;
-  left: 0;
+
+  inset-inline-start: 0;
   background-color: ${(props) => props.theme.backgroundColor};
 
   display: flex;
@@ -121,10 +121,7 @@ const Webhooks = (props) => {
         )}
 
         {!isWebhooksEmpty && (
-          <WebhooksTable
-            openSettingsModal={openSettingsModal}
-            openDeleteModal={openDeleteModal}
-          />
+          <WebhooksTable openSettingsModal={openSettingsModal} openDeleteModal={openDeleteModal} />
         )}
         <WebhookDialog
           visible={isCreateOpened}
@@ -132,12 +129,13 @@ const Webhooks = (props) => {
           header={t("CreateWebhook")}
           onSubmit={onCreateWebhook}
           additionalId="create-webhook"
+          isSettingsModal={false}
         />
         <WebhookDialog
           visible={isSettingsOpened}
           onClose={closeSettingsModal}
           header={t("SettingsWebhook")}
-          isSettingsModal={true}
+          isSettingsModal
           webhook={currentWebhook}
           onSubmit={handleWebhookUpdate}
           additionalId="settings-webhook"

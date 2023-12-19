@@ -1,5 +1,5 @@
 ﻿import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
@@ -10,20 +10,20 @@ import TabContainer from "@docspace/components/tabs-container";
 import Preview from "./Appearance/preview";
 import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
-
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import DropDownItem from "@docspace/components/drop-down-item";
 import DropDownContainer from "@docspace/components/drop-down";
 
 import HexColorPickerComponent from "./sub-components/hexColorPicker";
-import { isMobileOnly, isDesktop } from "react-device-detect";
 
 import Loader from "./sub-components/loaderAppearance";
 
 import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
-import BreakpointWarning from "../../../../components/BreakpointWarning/index";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
+import { isMobile } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 const Appearance = (props) => {
   const {
@@ -35,6 +35,8 @@ const Appearance = (props) => {
     deleteAppearanceTheme,
     tReady,
     t,
+    currentDeviceType,
+    resetIsInit,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
@@ -151,6 +153,7 @@ const Appearance = (props) => {
 
   useEffect(() => {
     getSettings();
+    setDocumentTitle(t("Appearance"));
   }, []);
 
   useEffect(() => {
@@ -163,6 +166,7 @@ const Appearance = (props) => {
 
     return () => {
       window.removeEventListener("resize", onCheckView);
+      resetIsInit();
     };
   }, []);
 
@@ -287,7 +291,7 @@ const Appearance = (props) => {
   );
 
   const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 600) {
+    if (isMobile()) {
       setIsSmallWindow(true);
     } else {
       setIsSmallWindow(false);
@@ -458,36 +462,40 @@ const Appearance = (props) => {
     return textColor;
   };
 
-  const onAppliedColorAccent = useCallback(() => {
-    if (appliedColorAccent.toUpperCase() !== currentColorAccent) {
-      setChangeCurrentColorAccent(true);
-    }
+  const onAppliedColorAccent = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorAccent) {
+        setChangeCurrentColorAccent(true);
+      }
 
-    setCurrentColorAccent(appliedColorAccent);
-    saveToSessionStorage("selectColorAccent", appliedColorAccent);
+      setCurrentColorAccent(color);
+      saveToSessionStorage("selectColorAccent", color);
 
-    setOpenHexColorPickerAccent(false);
-  }, [
-    appliedColorAccent,
-    currentColorAccent,
-    setChangeCurrentColorAccent,
-    setOpenHexColorPickerAccent,
-  ]);
+      setOpenHexColorPickerAccent(false);
+    },
+    [
+      currentColorAccent,
+      setChangeCurrentColorAccent,
+      setOpenHexColorPickerAccent,
+    ]
+  );
 
-  const onAppliedColorButtons = useCallback(() => {
-    if (appliedColorButtons.toUpperCase() !== currentColorButtons) {
-      setChangeCurrentColorButtons(true);
-    }
+  const onAppliedColorButtons = useCallback(
+    (color) => {
+      if (color.toUpperCase() !== currentColorButtons) {
+        setChangeCurrentColorButtons(true);
+      }
 
-    setCurrentColorButtons(appliedColorButtons);
+      setCurrentColorButtons(color);
 
-    setOpenHexColorPickerButtons(false);
-  }, [
-    appliedColorButtons,
-    currentColorButtons,
-    setChangeCurrentColorButtons,
-    setOpenHexColorPickerButtons,
-  ]);
+      setOpenHexColorPickerButtons(false);
+    },
+    [
+      currentColorButtons,
+      setChangeCurrentColorButtons,
+      setOpenHexColorPickerButtons,
+    ]
+  );
 
   const onSaveNewThemes = useCallback(
     async (theme) => {
@@ -588,8 +596,7 @@ const Appearance = (props) => {
           id="buttons-hex"
           onCloseHexColorPicker={onCloseHexColorPickerButtons}
           onAppliedColor={onAppliedColorButtons}
-          color={appliedColorButtons}
-          setColor={setAppliedColorButtons}
+          appliedColor={appliedColorButtons}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -609,8 +616,7 @@ const Appearance = (props) => {
           id="accent-hex"
           onCloseHexColorPicker={onCloseHexColorPickerAccent}
           onAppliedColor={onAppliedColorAccent}
-          color={appliedColorAccent}
-          setColor={setAppliedColorAccent}
+          appliedColor={appliedColorAccent}
         />
       </DropDownItem>
     </DropDownContainer>
@@ -624,12 +630,8 @@ const Appearance = (props) => {
     );
   };
 
-  if (isSmallWindow)
-    return (
-      <BreakpointWarning sectionName={t("Settings:Appearance")} isSmallWindow />
-    );
-  if (isMobileOnly)
-    return <BreakpointWarning sectionName={t("Settings:Appearance")} />;
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
 
   return !tReady ? (
     <Loader />
@@ -641,7 +643,10 @@ const Appearance = (props) => {
         onClickDelete={onClickDeleteModal}
       />
 
-      <StyledComponent colorCheckImg={colorCheckImg}>
+      <StyledComponent
+        colorCheckImg={colorCheckImg}
+        isShowDeleteButton={isShowDeleteButton}
+      >
         <div className="header">{t("Common:Color")}</div>
 
         <div className="theme-standard-container">
@@ -696,7 +701,7 @@ const Appearance = (props) => {
             </div>
 
             <div
-              data-for="theme-add"
+              data-tooltip-id="theme-add"
               data-tip="tooltip"
               className="theme-add"
               onClick={onAddTheme}
@@ -706,7 +711,6 @@ const Appearance = (props) => {
                 id="theme-add"
                 offsetBottom={0}
                 offsetRight={130}
-                effect="solid"
                 place="bottom"
                 getContent={textTooltip}
                 maxWidth="300px"
@@ -724,7 +728,7 @@ const Appearance = (props) => {
           visible={showColorSchemeDialog}
           onClose={onCloseColorSchemeDialog}
           header={headerColorSchemeDialog}
-          viewMobile={isMobileOnly}
+          // viewMobile={isMobileOnly}
           openHexColorPickerButtons={openHexColorPickerButtons}
           openHexColorPickerAccent={openHexColorPickerAccent}
           showSaveButtonDialog={showSaveButtonDialog}
@@ -739,15 +743,15 @@ const Appearance = (props) => {
             label={t("Common:SaveButton")}
             onClick={onSave}
             primary
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledSaveButton}
           />
 
           <Button
             className="edit-current-theme button"
-            label={t("Settings:EditCurrentTheme")}
+            label={t("Common:EditButton")}
             onClick={onClickEdit}
-            size="small"
+            size={buttonSize}
             isDisabled={isDisabledEditButton}
           />
           {isShowDeleteButton && (
@@ -755,7 +759,7 @@ const Appearance = (props) => {
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
               onClick={onOpenDialogDelete}
-              size="small"
+              size={buttonSize}
               isDisabled={isDisabledDeleteButton}
             />
           )}
@@ -765,7 +769,7 @@ const Appearance = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, common }) => {
   const { settingsStore } = auth;
   const {
     appearanceTheme,
@@ -775,7 +779,10 @@ export default inject(({ auth }) => {
     currentColorScheme,
     deleteAppearanceTheme,
     theme,
+    currentDeviceType,
   } = settingsStore;
+
+  const { resetIsInit } = common;
 
   return {
     appearanceTheme,
@@ -784,6 +791,8 @@ export default inject(({ auth }) => {
     getAppearanceTheme,
     currentColorScheme,
     deleteAppearanceTheme,
+    currentDeviceType,
     theme,
+    resetIsInit,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

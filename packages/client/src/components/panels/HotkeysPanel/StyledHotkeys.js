@@ -1,12 +1,19 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Scrollbar from "@docspace/components/scrollbar";
 import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledHotkeysPanel = styled.div`
   .hotkeys-panel {
     .scroll-body {
-      padding-right: 0 !important;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-left: 0 !important;
+            `
+          : css`
+              padding-right: 0 !important;
+            `}
     }
   }
 
@@ -16,14 +23,21 @@ const StyledHotkeysPanel = styled.div`
 
     .hotkeys_heading {
       font-weight: 700;
-      font-size: 18px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 
   .hotkeys_sub-header {
     font-weight: 700;
-    font-size: 16px;
-    padding-left: 16px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 16px;
+          `
+        : css`
+            padding-left: 16px;
+          `}
     margin: 20px 0 6px 0;
   }
 
@@ -47,7 +61,11 @@ const StyledHotkeysPanel = styled.div`
     max-width: 320px;
     width: 100%;
 
-    @media (max-width: 550px) {
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+
+    @media ${mobile} {
       max-width: 140px;
       word-wrap: break-word;
       white-space: normal;
@@ -55,10 +73,24 @@ const StyledHotkeysPanel = styled.div`
   }
 
   .hotkeys-key {
-    margin: 0 auto 0 0;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 0 0 auto;
+          `
+        : css`
+            margin: 0 auto 0 0;
+          `}
 
-    @media (max-width: 550px) {
-      margin: 0 0 0 auto;
+    @media ${mobile} {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 0 auto 0 0;
+            `
+          : css`
+              margin: 0 0 0 auto;
+            `}
       width: fit-content;
     }
   }

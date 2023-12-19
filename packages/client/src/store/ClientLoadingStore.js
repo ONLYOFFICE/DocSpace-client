@@ -4,8 +4,6 @@ const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
 
 class ClientLoadingStore {
-  publicRoomStore;
-
   isLoaded = false;
   firstLoad = true;
 
@@ -33,10 +31,8 @@ class ClientLoadingStore {
     body: null,
   };
 
-  constructor(publicRoomStore) {
+  constructor() {
     makeAutoObservable(this);
-
-    this.publicRoomStore = publicRoomStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -47,8 +43,13 @@ class ClientLoadingStore {
     this.firstLoad = firstLoad;
   };
 
-  setIsArticleLoading = (isArticleLoading) => {
-    this.isArticleLoading = isArticleLoading;
+  setIsArticleLoading = (isArticleLoading, withTimer = true) => {
+    if (!withTimer || !this.firstLoad)
+      return (this.isArticleLoading = isArticleLoading);
+
+    setTimeout(() => {
+      this.setIsArticleLoading(isArticleLoading, false);
+    }, MIN_LOADER_TIMER);
   };
 
   updateIsSectionHeaderLoading = (param) => {
@@ -64,27 +65,30 @@ class ClientLoadingStore {
   };
 
   setIsSectionHeaderLoading = (isSectionHeaderLoading, withTimer = true) => {
-    this.pendingSectionLoaders.header = isSectionHeaderLoading;
     if (isSectionHeaderLoading) {
+      if (this.pendingSectionLoaders.header || this.isSectionHeaderLoading)
+        return;
       if (this.sectionHeaderTimer) {
         return;
       }
+      this.pendingSectionLoaders.header = isSectionHeaderLoading;
       this.startLoadingTime.header = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionHeaderTimer = setTimeout(() => {
           this.updateIsSectionHeaderLoading(isSectionHeaderLoading);
         }, SHOW_LOADER_TIMER));
       }
       this.updateIsSectionHeaderLoading(isSectionHeaderLoading);
     } else {
+      this.pendingSectionLoaders.header = isSectionHeaderLoading;
       if (this.startLoadingTime.header) {
         const currentDate = new Date();
 
-        const ms = Math.abs(
+        let ms = Math.abs(
           this.startLoadingTime.header.getTime() - currentDate.getTime()
         );
         if (this.sectionHeaderTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
           clearTimeout(this.sectionHeaderTimer);
           this.sectionHeaderTimer = null;
         }
@@ -92,6 +96,7 @@ class ClientLoadingStore {
         if (ms < MIN_LOADER_TIMER)
           return setTimeout(() => {
             this.updateIsSectionHeaderLoading(false);
+            this.sectionHeaderTimer = null;
             this.startLoadingTime.header = null;
           }, MIN_LOADER_TIMER - ms);
       }
@@ -105,19 +110,24 @@ class ClientLoadingStore {
   };
 
   setIsSectionFilterLoading = (isSectionFilterLoading, withTimer = true) => {
-    this.pendingSectionLoaders.filter = isSectionFilterLoading;
     if (isSectionFilterLoading) {
+      if (this.pendingSectionLoaders.filter || this.isSectionFilterLoading)
+        return;
       if (this.sectionFilterTimer) {
         return;
       }
+      this.pendingSectionLoaders.filter = isSectionFilterLoading;
+
       this.startLoadingTime.filter = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionFilterTimer = setTimeout(() => {
           this.updateIsSectionFilterLoading(isSectionFilterLoading);
         }, SHOW_LOADER_TIMER));
       }
+
       this.updateIsSectionFilterLoading(isSectionFilterLoading);
     } else {
+      this.pendingSectionLoaders.filter = isSectionFilterLoading;
       if (this.startLoadingTime.filter) {
         const currentDate = new Date();
 
@@ -126,7 +136,7 @@ class ClientLoadingStore {
         );
 
         if (this.sectionFilterTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.sectionFilterTimer);
           this.sectionFilterTimer = null;
@@ -135,6 +145,7 @@ class ClientLoadingStore {
         if (ms < MIN_LOADER_TIMER) {
           return setTimeout(() => {
             this.updateIsSectionFilterLoading(false);
+
             this.startLoadingTime.filter = null;
           }, MIN_LOADER_TIMER - ms);
         }
@@ -145,25 +156,27 @@ class ClientLoadingStore {
       }
 
       this.startLoadingTime.filter = null;
+
       this.updateIsSectionFilterLoading(false);
     }
   };
 
   setIsSectionBodyLoading = (isSectionBodyLoading, withTimer = true) => {
-    this.pendingSectionLoaders.body = isSectionBodyLoading;
-
     if (isSectionBodyLoading) {
+      if (this.pendingSectionLoaders.body || this.isSectionBodyLoading) return;
       if (this.sectionBodyTimer) {
         return;
       }
+      this.pendingSectionLoaders.body = isSectionBodyLoading;
       this.startLoadingTime.body = new Date();
-      if (withTimer) {
+      if (withTimer && !this.firstLoad) {
         return (this.sectionBodyTimer = setTimeout(() => {
           this.updateIsSectionBodyLoading(isSectionBodyLoading);
         }, SHOW_LOADER_TIMER));
       }
       this.updateIsSectionBodyLoading(isSectionBodyLoading);
     } else {
+      this.pendingSectionLoaders.body = isSectionBodyLoading;
       if (this.startLoadingTime.body) {
         const currentDate = new Date();
 
@@ -172,7 +185,7 @@ class ClientLoadingStore {
         );
 
         if (this.sectionBodyTimer) {
-          let ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.sectionBodyTimer);
           this.sectionBodyTimer = null;
@@ -195,8 +208,14 @@ class ClientLoadingStore {
     }
   };
 
+  updateIsProfileLoaded = (isLoaded) => {
+    this.isProfileLoaded = isLoaded;
+  };
+
   setIsProfileLoaded = (isProfileLoaded) => {
-    this.isProfileLoaded = isProfileLoaded;
+    setTimeout(() => {
+      this.updateIsProfileLoaded(isProfileLoaded);
+    }, MIN_LOADER_TIMER);
   };
 
   hideLoaders = () => {
@@ -217,7 +236,7 @@ class ClientLoadingStore {
 
   get isLoading() {
     return (
-      (this.isArticleLoading && !this.publicRoomStore.isPublicRoom) ||
+      this.isArticleLoading ||
       this.pendingSectionLoaders.header ||
       this.pendingSectionLoaders.filter ||
       this.pendingSectionLoaders.body
@@ -225,8 +244,11 @@ class ClientLoadingStore {
   }
 
   get showArticleLoader() {
-    if (this.publicRoomStore.isPublicRoom) return false;
     return this.isArticleLoading;
+  }
+
+  get showProfileLoader() {
+    return !this.isProfileLoaded;
   }
 
   get showHeaderLoader() {

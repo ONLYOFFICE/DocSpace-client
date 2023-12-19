@@ -1,13 +1,18 @@
+import ShareAppleReactSvgUrl from "PUBLIC_DIR/images/share.apple.react.svg?url";
 import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
 import ShareFacebookReactSvgUrl from "PUBLIC_DIR/images/share.facebook.react.svg?url";
 import ShareTwitterReactSvgUrl from "PUBLIC_DIR/images/share.twitter.react.svg?url";
 import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
+import ShareMicrosoftReactSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
+import ShareZoomReactSvgUrl from "PUBLIC_DIR/images/share.zoom.react.svg?url";
 
 export const LANGUAGE = "asc_language";
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
 export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
+export const LINKS_LIMIT_COUNT = 5;
+export const LOADER_TIMEOUT = 300;
 
 /**
  * Enum for employee activation status.
@@ -76,6 +81,10 @@ export const FilesSelectorFilterTypes = Object.freeze({
   DOCX: "DOCX",
   IMG: "IMG",
   GZ: "GZ",
+  DOCXF: "DOCXF",
+  XLSX: "XLSX",
+  ALL: "ALL",
+  BackupOnly: "BackupOnly",
 });
 /**
  * Enum for filter subject.
@@ -131,8 +140,8 @@ export const RoomsType = Object.freeze({
   EditingRoom: 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
-  CustomRoom: 5,
   PublicRoom: 6,
+  CustomRoom: 5,
 });
 
 export const RoomsTypeValues = Object.freeze(
@@ -192,6 +201,24 @@ export const FileAction = Object.freeze({
   Create: 0,
   Rename: 1,
 });
+
+/**
+ * @readonly
+ */
+
+export const PageType = Object.freeze({
+  account: "account",
+  customization: "customization",
+  security: "security",
+  backup: "backup",
+  restore: "restore",
+  integration: "integration",
+  developerTools: "developerTools",
+  portalDeletion: "portalDeletion",
+  payments: "payments",
+  bonus: "bonus",
+});
+
 /**
  * Enum for root folders type.
  * @readonly
@@ -249,6 +276,10 @@ export const ConflictResolveType = Object.freeze({
   Duplicate: 2,
 });
 export const providersData = Object.freeze({
+  appleid: {
+    label: "apple",
+    icon: ShareAppleReactSvgUrl,
+  },
   google: {
     label: "google",
     icon: ShareGoogleReactSvgUrl,
@@ -266,20 +297,15 @@ export const providersData = Object.freeze({
     label: "linkedin",
     icon: ShareLinkedinReactSvgUrl,
   },
+  microsoft: {
+    label: "microsoft",
+    icon: ShareMicrosoftReactSvgUrl,
+  },
+  zoom: {
+    label: "zoom",
+    icon: ShareZoomReactSvgUrl,
+  },
 });
-export const LoaderStyle = {
-  title: "",
-  width: "100%",
-  height: "32",
-  backgroundColor: "#000000",
-  foregroundColor: "#000000",
-  backgroundOpacity: 0.1,
-  foregroundOpacity: 0.15,
-  borderRadius: "3",
-  radius: "3",
-  speed: 2,
-  animate: true,
-};
 
 /**
  * Enum for third-party storages.
@@ -369,6 +395,7 @@ export const Events = Object.freeze({
   ROOM_EDIT: "edit_room",
   CHANGE_COLUMN: "change_column",
   CHANGE_USER_TYPE: "change_user_type",
+  CREATE_PLUGIN_FILE: "create_plugin_file",
 });
 
 /**
@@ -464,4 +491,25 @@ export const IndexedDBStores = Object.freeze({
 export const FilterSelectorTypes = Object.freeze({
   people: "people-selector",
   rooms: "rooms-selector",
+});
+
+export const RtlLanguages = [
+  "ar",
+  "arc",
+  "dv",
+  "fa",
+  "ha",
+  "he",
+  "khw",
+  "ks",
+  "ku",
+  "ps",
+  "ur",
+  "yi",
+];
+
+export const DeviceType = Object.freeze({
+  mobile: "mobile",
+  tablet: "tablet",
+  desktop: "desktop",
 });

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import StyledTextInput from "@docspace/components/text-input/styled-text-input";
-import Base from "@docspace/components/themes/base";
+import StyledTextInput from "../../text-input/styled-text-input";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({
   $currentColorScheme,

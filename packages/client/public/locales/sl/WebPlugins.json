@@ -1,0 +1,18 @@
+{
+  "DeletePlugin": "Izbriši vtičnik",
+  "DeletePluginDescription": "Ta vtičnik ne bo več na voljo uporabnikom DocSpace. Ste prepričani, da želite nadaljevati?",
+  "DeletePluginTitle": "Izbrišem vtičnik?",
+  "Description": "Dodate lahko vtičnike, da razširite funkcionalnost DocSpace z dodatnimi funkcijami. Kliknite Naloži vtičnik in izberite datoteko vtičnika v arhivu ZIP.",
+  "ExpandFunctionality": "Razširite funkcionalnost z uporabo vtičnika SDK",
+  "GoToRepo": "Pojdi v repozitorij",
+  "Metadata": "Metadata",
+  "NeedSettings": "Potreben je vnos nastavitev",
+  "NoPlugins": "Ni dodanih vtičnikov",
+  "NotNeedSettings": "Ni treba vnesti nastavitev",
+  "PluginSamples": "Vzorci vtičnika",
+  "PluginSDK": "Vtičnik SDK",
+  "PluginSDKDescription": "Z uporabo vtičnika SDK lahko razširite svojo funkcionalnost DocSpace, povežete storitve tretjih oseb ali izboljšate obstoječo uporabniško izkušnjo. Tukaj lahko najdete vzorce vtičnikov z izvorno kodo, ki so na voljo na GitHubu.",
+  "PluginSDKInstruction": "Kliknite gumb za podrobna navodila o ustvarjanju lastnih vtičnikov.",
+  "PluginsHelp": "Vtičniki vam omogočajo razširitev funkcionalnosti DocSpace",
+  "UploadPlugin": "Naloži vtičnik"
+}

@@ -11,8 +11,16 @@ const hotkeyBorderStyle = css`
 `;
 
 const rowCheckboxDraggingStyle = css`
-  margin-left: -20px;
-  padding-left: 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: -20px;
+          padding-right: 20px;
+        `
+      : css`
+          margin-left: -20px;
+          padding-left: 20px;
+        `}
 
   border-bottom: 1px solid;
   border-image-slice: 1;
@@ -21,8 +29,16 @@ const rowCheckboxDraggingStyle = css`
 `;
 
 const contextMenuWrapperDraggingStyle = css`
-  margin-right: -20px;
-  padding-right: 20px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-left: -20px;
+          padding-left: 20px;
+        `
+      : css`
+          margin-right: -20px;
+          padding-right: 20px;
+        `}
 
   border-bottom: 1px solid;
   border-image-slice: 1;
@@ -58,12 +74,28 @@ const StyledTableRow = styled(TableRow)`
             `}
         }
         .table-container_file-name-cell {
-          margin-left: -24px;
-          padding-left: 24px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-right: -24px;
+                  padding-right: 24px;
+                `
+              : css`
+                  margin-left: -24px;
+                  padding-left: 24px;
+                `}
         }
         .table-container_row-context-menu-wrapper {
-          margin-right: -20px;
-          padding-right: 18px;
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-left: -20px;
+                  padding-left: 20px;
+                `
+              : css`
+                  margin-right: -20px;
+                  padding-right: 20px;
+                `}
         }
       }
     `}
@@ -88,15 +120,30 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_element-wrapper,
   .table-container_quick-buttons-wrapper {
-    padding-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
   }
 
   .table-container_element-wrapper,
   .table-container_row-loader {
     min-width: ${(props) => (props.isRoom ? "40px" : "36px")};
-
-    margin-left: -20px;
-    padding-left: 20px;
+    border-bottom: unset;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -20px;
+            padding-right: 20px;
+          `
+        : css`
+            margin-left: -20px;
+            padding-left: 20px;
+          `}
   }
 
   .table-container_element-container {
@@ -110,7 +157,14 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_row-loader {
     svg {
-      margin-left: 4px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 4px;
+            `
+          : css`
+              margin-left: 4px;
+            `}
     }
   }
 
@@ -122,22 +176,48 @@ const StyledTableRow = styled(TableRow)`
     ${(props) =>
       props.showHotkeyBorder &&
       css`
-        margin-left: -24px;
-        padding-left: 24px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+                padding-right: 24px;
+              `
+            : css`
+                margin-left: -24px;
+                padding-left: 24px;
+              `}
+
         ${hotkeyBorderStyle}
       `};
     ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
 
   .table-container_row-context-menu-wrapper {
-    padding-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 0px;
+          `
+        : css`
+            padding-right: 0px;
+          `}
+    justify-content:flex-end;
 
     ${(props) => props.dragging && contextMenuWrapperDraggingStyle};
     ${(props) =>
       props.showHotkeyBorder &&
       css`
-        margin-right: -20px;
-        padding-right: 18px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: -20px;
+                padding-left: 20px;
+              `
+            : css`
+                margin-right: -20px;
+                padding-right: 20px;
+              `}
+
         ${hotkeyBorderStyle}
       `};
   }
@@ -150,7 +230,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    padding: 12px 12px 12px 0px;
+    padding: 12px 0;
   }
 
   ${(props) =>
@@ -196,17 +276,43 @@ const StyledTableRow = styled(TableRow)`
         }
       }
 
-      .table-container_cell:not(.table-container_element-wrapper, .table-container_file-name-cell) {
-        padding-right: ${(props) => props.hideColumns && `0px`};
+      .table-container_cell:not(
+          .table-container_element-wrapper,
+          .table-container_file-name-cell
+        ) {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding-left: ${(props) => props.hideColumns && `0px`};
+              `
+            : css`
+                padding-right: ${(props) => props.hideColumns && `0px`};
+              `}
       }
 
       .table-container_file-name-cell {
-        margin-left: -24px;
-        padding-left: 24px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+                padding-right: 24px;
+              `
+            : css`
+                margin-left: -24px;
+                padding-left: 24px;
+              `}
       }
       .table-container_row-context-menu-wrapper {
-        margin-right: -20px;
-        padding-right: 18px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: -20px;
+                padding-left: 20px;
+              `
+            : css`
+                margin-right: -20px;
+                padding-right: 20px;
+              `}
       }
     `}
 `;
@@ -216,7 +322,14 @@ const StyledDragAndDrop = styled(DragAndDrop)`
 `;
 
 const StyledBadgesContainer = styled.div`
-  margin-left: 8px;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 8px;
+        `
+      : css`
+          margin-left: 8px;
+        `}
 
   display: flex;
   align-items: center;
@@ -230,16 +343,37 @@ const StyledBadgesContainer = styled.div`
   .badges {
     display: flex;
     align-items: center;
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
   }
 
   .badges:last-child {
-    margin-left: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 0px;
+          `
+        : css`
+            margin-left: 0px;
+          `}
   }
 
   .badge {
     cursor: pointer;
-    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
+          `}
   }
 
   .new-items {
@@ -248,15 +382,34 @@ const StyledBadgesContainer = styled.div`
     margin: 0 -2px -2px -2px;
   }
 
+  .row-copy-link,
+  .tablet-row-copy-link {
+    display: none;
+  }
+
   .badge-version {
     width: max-content;
-    margin: 0 5px -2px -2px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 -2px -2px 5px;
+          `
+        : css`
+            margin: 0 5px -2px -2px;
+          `}
 
     > div {
-      padding: 0 3.3px 0 4px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding: 0 4px 0 3.3px;
+            `
+          : css`
+              padding: 0 3.3px 0 4px;
+            `}
       p {
         letter-spacing: 0.5px;
-        font-size: 9px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("9px")};
         font-weight: 800;
       }
     }
@@ -277,11 +430,25 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .badge {
-    margin-right: 14px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 14px;
+          `
+        : css`
+            margin-right: 14px;
+          `}
   }
 
   .badge:last-child {
-    margin-right: 10px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 10px;
+          `
+        : css`
+            margin-right: 10px;
+          `}
   }
 
   .lock-file {

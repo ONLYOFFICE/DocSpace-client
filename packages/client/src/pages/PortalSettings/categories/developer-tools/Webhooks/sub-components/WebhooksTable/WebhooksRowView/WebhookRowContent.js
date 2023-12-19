@@ -7,11 +7,17 @@ import ToggleButton from "@docspace/components/toggle-button";
 
 import StatusBadge from "../../StatusBadge";
 
-import { isMobileOnly } from "react-device-detect";
+import { isMobile, tablet } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
   padding-bottom: 10px;
+
+  .row-main-container-wrapper {
+    @media ${tablet} {
+      width: 100%;
+    }
+  }
 
   .rowMainContainer {
     height: 100%;
@@ -20,6 +26,7 @@ const StyledRowContent = styled(RowContent)`
 
   .mainIcons {
     min-width: 76px;
+    display: flex;
   }
 `;
 
@@ -35,7 +42,7 @@ const ToggleButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: -52px;
+  margin-inline-start: -52px;
 `;
 
 const FlexWrapper = styled.div`
@@ -47,13 +54,13 @@ export const WebhookRowContent = ({ sectionWidth, webhook, isChecked, handleTogg
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
         <FlexWrapper>
-          <Text fontWeight={600} fontSize="14px" style={{ marginRight: "8px" }}>
+          <Text fontWeight={600} fontSize="14px" style={{ marginInlineEnd: "8px" }}>
             {webhook.name}
           </Text>
           <StatusBadge status={webhook.status} />
         </FlexWrapper>
 
-        {!isMobileOnly && (
+        {!isMobile() && (
           <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
             {webhook.uri}
           </Text>

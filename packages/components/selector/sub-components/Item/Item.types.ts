@@ -8,6 +8,8 @@ export type Item = {
   isSelected?: boolean;
   email?: string;
   isDisabled?: boolean;
+  color?: string;
+  fileExst?: string;
 };
 
 export type Data = {

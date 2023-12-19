@@ -42,7 +42,10 @@ const ModalDialogContainer = styled(ModalDialog)`
   }
 
   .link-dialog {
-    margin-right: 12px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: 12px;`
+        : `margin-right: 12px;`}
   }
 
   .error-label {
@@ -56,7 +59,7 @@ const ModalDialogContainer = styled(ModalDialog)`
 
   .toggle-content-dialog {
     .heading-toggle-content {
-      font-size: 16px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
     }
   }
 
@@ -81,13 +84,17 @@ const ModalDialogContainer = styled(ModalDialog)`
 
     .convert_dialog_image {
       display: block;
+
       @media ${tablet} {
         display: none;
       }
     }
 
     .convert_dialog-content {
-      padding-left: 16px;
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? `padding-right: 16px;`
+          : `padding-left: 16px;`}
 
       @media ${tablet} {
         padding: 0;
@@ -106,6 +113,7 @@ const ModalDialogContainer = styled(ModalDialog)`
       }
     }
   }
+
   .convert_dialog_footer {
     display: flex;
     flex-direction: column;

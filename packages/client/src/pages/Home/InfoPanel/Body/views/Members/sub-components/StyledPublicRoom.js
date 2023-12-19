@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { tablet, desktop } from "@docspace/components/utils/device";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
-  background-color: #f8f9f9;
+  background-color: ${(props) => props.theme.infoBlock.background};
   color: #333;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -25,13 +26,20 @@ const StyledPublicRoomBar = styled.div`
     font-weight: 600;
   }
 
-  .body-container {
-    color: #555f65;
-    font-weight: 400;
+  .text-container_header {
+    color: ${(props) => props.theme.infoBlock.headerColor};
+  }
+
+  .text-container_body {
+    color: ${(props) => props.theme.infoBlock.descriptionColor};
   }
 
   .close-icon {
     margin: -5px -17px 0 0;
+
+    path {
+      fill: ${({ theme }) => theme.iconButton.color};
+    }
 
     svg {
       weight: 8px;
@@ -56,8 +64,14 @@ const StyledCrossIcon = styled(CrossReactSvg)`
 
 const LinksBlock = styled.div`
   display: flex;
+  height: 100%;
+  padding-top: 3px;
+  align-items: center;
   justify-content: space-between;
-  padding: 8px 0px 12px 0px;
+
+  p {
+    color: ${({ theme }) => theme.infoPanel.members.subtitleColor};
+  }
 
   .link-to-viewing-icon {
     svg {
@@ -71,13 +85,15 @@ const StyledLinkRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 8px 0px;
+  gap: 12px;
+  height: 100%;
+  background: ${(props) => props.theme.backgroundColor};
 
   .external-row-link {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
   }
 
   .external-row-icons {
@@ -86,13 +102,26 @@ const StyledLinkRow = styled.div`
     gap: 16px;
   }
 
-  .avatar_role-wrapper {
-    ${({ isExpired }) =>
-      isExpired &&
+  .avatar-wrapper {
+    ${({ isPrimary, theme }) =>
+      isPrimary &&
       css`
         svg {
           path {
-            fill: #f98e86;
+            fill: ${theme.infoPanel.links.primaryColor} !important;
+          }
+        }
+      `}
+  }
+
+  .avatar_role-wrapper {
+    ${({ isExpired, theme }) =>
+      css`
+        svg {
+          path {
+            fill: ${isExpired
+              ? theme.infoPanel.links.iconErrorColor
+              : theme.infoPanel.links.iconColor};
           }
         }
       `}

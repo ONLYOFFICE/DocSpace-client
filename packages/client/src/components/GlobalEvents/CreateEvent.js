@@ -111,7 +111,10 @@ const CreateEvent = ({
     }
 
     let tab =
-      !isDesktop && extension && open
+      !isDesktop &&
+      window.DocSpaceConfig?.editor?.openOnNewPage &&
+      extension &&
+      open
         ? window.open(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
@@ -278,6 +281,7 @@ const CreateEvent = ({
   return (
     <Dialog
       t={t}
+      withForm
       visible={eventDialogVisible}
       title={headerTitle}
       startValue={startValue}

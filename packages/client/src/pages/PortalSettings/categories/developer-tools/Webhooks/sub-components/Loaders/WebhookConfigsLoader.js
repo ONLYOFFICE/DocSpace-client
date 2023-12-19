@@ -1,7 +1,5 @@
-import React from "react";
-
 import styled from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const LoaderWrapper = styled.div`
   width: 100%;
@@ -53,10 +51,14 @@ const TableRowLoader = styled.div`
 export const WebhookConfigsLoader = () => {
   const RowLoader = () => (
     <TableRowLoader>
-      <Loaders.Rectangle width="888px" height="20px" />
+      <RectangleSkeleton width="888px" height="20px" />
       <div className="iconsLoader">
-        <Loaders.Rectangle width="28px" height="16px" className="roundedStatusLoader" />
-        <Loaders.Rectangle width="16px" height="16px" />
+        <RectangleSkeleton
+          width="28px"
+          height="16px"
+          className="roundedStatusLoader"
+        />
+        <RectangleSkeleton width="16px" height="16px" />
       </div>
     </TableRowLoader>
   );
@@ -64,22 +66,30 @@ export const WebhookConfigsLoader = () => {
   return (
     <LoaderWrapper>
       <NavContainerLoader>
-        <Loaders.Rectangle width="82px" height="32px" />
-        <Loaders.Rectangle width="82px" height="32px" />
+        <RectangleSkeleton width="82px" height="32px" />
+        <RectangleSkeleton width="82px" height="32px" />
       </NavContainerLoader>
 
-      <Loaders.Rectangle width="700px" height="88px" className="webhookTextLoader" />
+      <RectangleSkeleton
+        width="700px"
+        height="88px"
+        className="webhookTextLoader"
+      />
 
-      <Loaders.Rectangle width="159px" height="32px" className="webhookButtonLoader" />
+      <RectangleSkeleton
+        width="159px"
+        height="32px"
+        className="webhookButtonLoader"
+      />
 
       <TableHeaderLoader>
         <div className="labelsLoader">
-          <Loaders.Rectangle width="51px" height="16px" />
-          <Loaders.Rectangle width="60px" height="16px" />
+          <RectangleSkeleton width="51px" height="16px" />
+          <RectangleSkeleton width="60px" height="16px" />
         </div>
         <div className="iconsLoader">
-          <Loaders.Rectangle width="62px" height="16px" />
-          <Loaders.Rectangle width="16px" height="16px" />
+          <RectangleSkeleton width="62px" height="16px" />
+          <RectangleSkeleton width="16px" height="16px" />
         </div>
       </TableHeaderLoader>
 

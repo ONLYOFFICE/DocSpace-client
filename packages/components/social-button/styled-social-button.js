@@ -144,13 +144,23 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     font-family: Roboto, "Open Sans", sans-serif, Arial;
     font-style: normal;
     font-weight: ${(props) => props.theme.socialButton.text.fontWeight};
-    font-size: ${(props) => props.theme.socialButton.text.fontSize};
+    font-size: ${(props) =>
+      props.theme.getCorrectFontSize(props.theme.socialButton.text.fontSize)};
     line-height: ${(props) => props.theme.socialButton.text.lineHeight};
     letter-spacing: ${(props) => props.theme.socialButton.text.letterSpacing};
     user-select: none;
     overflow: ${(props) => props.theme.socialButton.text.overflow};
     text-overflow: ${(props) => props.theme.socialButton.text.textOverflow};
     white-space: ${(props) => props.theme.socialButton.text.whiteSpace};
+
+    ${(props) =>
+      props.interfaceDirection === "rtl"
+        ? css`
+            padding-left: 16px;
+          `
+        : css`
+            padding-right: 16px;
+          `}
   }
 
   svg {

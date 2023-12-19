@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { tablet, hugeMobile } from "@docspace/components/utils/device";
-import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+import { isIOS, isFirefox } from "react-device-detect";
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
 export const Wrapper = styled.div`
@@ -11,12 +11,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   box-sizing: border-box;
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     height: auto;
     min-height: 100%;
     width: 100%;
-  `}
+    min-width: 100%;
+  }
 
   .bg-cover {
     background-image: url("${BackgroundPatternReactSvgUrl}");
@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
     bottom: 0;
     z-index: -1;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       background-image: none;
     }
   }
@@ -47,8 +47,10 @@ export const StyledContent = styled.div`
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     min-height: 100%;
+    width: calc(100% - 32px);
+    justify-content: start;
   }
 `;
 
@@ -64,7 +66,8 @@ export const WizardContainer = styled.div`
     max-width: 480px;
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
+    max-width: 100%;
     margin: 32px auto;
   }
 
@@ -78,7 +81,7 @@ export const WizardContainer = styled.div`
   .welcome-text {
     padding-bottom: 32px;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       max-width: 343px;
     }
   }
@@ -137,11 +140,24 @@ export const StyledInfo = styled.div`
     padding-bottom: 4px;
     padding-top: 4px;
     padding-left: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 8px;`
+        : `padding-left: 8px;`}
     line-height: 20px;
   }
 
   .combo-button {
-    padding-left: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 8px;`
+        : `padding-left: 8px;`}
+  }
+
+  .wrapper__language-selector {
+    display: flex;
+    align-items: center;
+    gap: 2px;
   }
 
   .combo-button-label {
@@ -151,7 +167,7 @@ export const StyledInfo = styled.div`
       max-width: 300px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       max-width: 220px;
     }
   }
@@ -166,6 +182,9 @@ export const StyledAcceptTerms = styled.div`
   padding-bottom: 24px;
 
   .wizard-checkbox svg {
-    margin-right: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-left: 8px;`
+        : `margin-right: 8px;`}
   }
 `;

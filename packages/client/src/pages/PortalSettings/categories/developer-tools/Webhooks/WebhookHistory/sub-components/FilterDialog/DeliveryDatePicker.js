@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import Text from "@docspace/components/text";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import TimePicker from "@docspace/components/time-picker";
 import SelectorAddButton from "@docspace/components/selector-add-button";
 import SelectedItem from "@docspace/components/selected-item";
 
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Selectors = styled.div`
   position: relative;
@@ -21,7 +21,7 @@ const Selectors = styled.div`
   align-items: center;
 
   .mr-8 {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .selectedItem {
@@ -30,14 +30,14 @@ const Selectors = styled.div`
 `;
 
 const TimePickerCell = styled.span`
-  margin-left: 8px;
+  margin-inline-start: 8px;
   display: inline-flex;
   align-items: center;
 
   .timePickerItem {
     display: inline-flex;
     align-items: center;
-    margin-right: 16px;
+    margin-inline-end: 16px;
   }
 `;
 
@@ -48,12 +48,17 @@ const StyledCalendar = styled(Calendar)`
     css`
       position: fixed;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
     `}
 `;
 
-const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) => {
-  const { t } = useTranslation(["Webhooks"]);
+const DeliveryDatePicker = ({
+  filters,
+  setFilters,
+  isApplied,
+  setIsApplied,
+}) => {
+  const { t, i18n } = useTranslation(["Webhooks", "Common"]);
 
   const calendarRef = useRef();
   const selectorRef = useRef();
@@ -66,8 +71,12 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: null,
-      deliveryFrom: moment().startOf("day"),
-      deliveryTo: moment().endOf("day"),
+      deliveryFrom: moment()
+        .tz(window.timezone || "")
+        .startOf("day"),
+      deliveryTo: moment()
+        .tz(window.timezone || "")
+        .endOf("day"),
     }));
     setIsTimeOpen(false);
     setIsCalendarOpen(false);
@@ -86,12 +95,17 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: date,
-      deliveryFrom: moment().startOf("day"),
-      deliveryTo: moment().endOf("day"),
+      deliveryFrom: moment()
+        .tz(window.timezone || "")
+        .startOf("day"),
+      deliveryTo: moment()
+        .tz(window.timezone || "")
+        .endOf("day"),
     }));
   };
 
-  const toggleCalendar = () => setIsCalendarOpen((prevIsCalendarOpen) => !prevIsCalendarOpen);
+  const toggleCalendar = () =>
+    setIsCalendarOpen((prevIsCalendarOpen) => !prevIsCalendarOpen);
 
   const closeCalendar = () => {
     setIsApplied(false);
@@ -106,15 +120,18 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
       selectedDate={filters.deliveryDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
-      isMobile={isMobileOnly}
+      isMobile={isMobile()}
       forwardedRef={calendarRef}
+      locale={i18n.language}
     />
   );
 
   const SelectedDateTime = () => {
     const formattedTime = isTimeEqual
       ? ""
-      : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo).format("HH:mm")}`;
+      : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo)
+          .tz(window.timezone || "")
+          .format("HH:mm")}`;
 
     return (
       <div>
@@ -135,21 +152,26 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
       setIsCalendarOpen(false);
   };
   const isEqualDates = (firstDate, secondDate) => {
-    return firstDate.format("YYYY-MM-D HH:mm") === secondDate.format("YYYY-MM-D HH:mm");
+    return (
+      firstDate.format("YYYY-MM-D HH:mm") ===
+      secondDate.format("YYYY-MM-D HH:mm")
+    );
   };
 
   const isTimeEqual =
-    isEqualDates(filters.deliveryFrom, filters.deliveryFrom.clone().startOf("day")) &&
+    isEqualDates(
+      filters.deliveryFrom,
+      filters.deliveryFrom.clone().startOf("day")
+    ) &&
     isEqualDates(filters.deliveryTo, filters.deliveryTo.clone().endOf("day"));
 
   const isTimeValid = filters.deliveryTo > filters.deliveryFrom;
 
   useEffect(() => {
     document.addEventListener("click", handleClick, { capture: true });
-    return () => document.removeEventListener("click", handleClick, { capture: true });
+    return () =>
+      document.removeEventListener("click", handleClick, { capture: true });
   }, []);
-
-  console.log(filters.deliveryDate, "delivery date picker");
 
   return (
     <>
@@ -162,9 +184,11 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
         ) : (
           <DatePicker
             outerDate={filters.deliveryDate}
+            isMobile={isMobile()}
             onChange={onDateSet}
             selectedDateText={t("SelectDate")}
             showCalendarIcon={false}
+            locale={i18n.language}
           />
         )}
         {filters.deliveryDate !== null &&
@@ -172,7 +196,12 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
           (isTimeOpen ? (
             <TimePickerCell>
               <span className="timePickerItem">
-                <Text isInline fontWeight={600} color="#A3A9AE" className="mr-8">
+                <Text
+                  isInline
+                  fontWeight={600}
+                  color="#A3A9AE"
+                  className="mr-8"
+                >
                   {t("From")}
                 </Text>
                 <TimePicker
@@ -180,6 +209,7 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
                   onChange={setDeliveryFrom}
                   hasError={!isTimeValid}
                   tabIndex={1}
+                  locale={i18n.language}
                 />
               </span>
 
@@ -192,12 +222,13 @@ const DeliveryDatePicker = ({ filters, setFilters, isApplied, setIsApplied }) =>
                 setDate={setDeliveryTo}
                 hasError={!isTimeValid}
                 tabIndex={2}
+                locale={i18n.language}
               />
             </TimePickerCell>
           ) : (
             <TimePickerCell>
               <SelectorAddButton
-                title={t("Add")}
+                title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"
               />

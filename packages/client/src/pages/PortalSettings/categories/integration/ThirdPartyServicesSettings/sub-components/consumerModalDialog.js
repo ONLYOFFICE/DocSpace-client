@@ -12,15 +12,21 @@ import Link from "@docspace/components/link";
 import toastr from "@docspace/components/toast/toastr";
 import ModalDialogContainer from "./modalDialogContainer";
 import { showLoader, hideLoader } from "@docspace/common/utils";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 const StyledBox = styled(Box)`
   padding: 20px 0 8px;
-  @media ${hugeMobile} {
+  @media ${mobile} {
     padding-top: 0;
   }
 `;
+
+const maxLength = {
+  json: Infinity,
+};
+
+const defaultMaxLength = 255;
 
 class ConsumerModalDialog extends React.Component {
   constructor(props) {
@@ -199,6 +205,7 @@ class ConsumerModalDialog extends React.Component {
         visible={dialogVisible}
         onClose={onModalClose}
         displayType="aside"
+        withBodyScroll
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
@@ -227,6 +234,7 @@ class ConsumerModalDialog extends React.Component {
                       value={Object.values(state)[i]}
                       isDisabled={isLoading}
                       onChange={onChangeHandler}
+                      maxLength={maxLength[prop.name] ?? defaultMaxLength}
                     />
                   </Box>
                 </Box>

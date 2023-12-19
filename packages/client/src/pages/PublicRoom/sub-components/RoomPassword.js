@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withTranslation } from "react-i18next";
 import Text from "@docspace/components/text";
 import PasswordInput from "@docspace/components/password-input";
@@ -10,7 +10,7 @@ import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 import toastr from "@docspace/components/toast/toastr";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
-import { ValidationResult } from "../../../helpers/constants";
+import { ValidationStatus } from "../../../helpers/constants";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
@@ -22,6 +22,14 @@ const RoomPassword = (props) => {
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -46,27 +54,25 @@ const RoomPassword = (props) => {
       setIsLoading(false);
 
       switch (res?.status) {
-        case ValidationResult.Ok: {
+        case ValidationStatus.Ok: {
           setRoomData(res); // Ok
           return;
         }
-        // case ValidationResult.Invalid: {
+        // case ValidationStatus.Invalid: {
         //   setErrorMessage(""); // Invalid
-        //   toastr.error("Invalid");
         //   return;
         // }
-        // case ValidationResult.Expired: {
+        // case ValidationStatus.Expired: {
         //   setErrorMessage(""); // Expired
-        //   toastr.error("Expired");
         //   return;
         // }
-        case ValidationResult.InvalidPassword: {
+        case ValidationStatus.InvalidPassword: {
           setErrorMessage(t("Common:IncorrectPassword"));
           return;
         }
       }
     } catch (error) {
-      console.log(error);
+      toastr.error(error);
       setIsLoading(false);
     }
   };
@@ -129,6 +135,7 @@ const RoomPassword = (props) => {
                   onKeyDown={onKeyPress}
                   isDisabled={isLoading}
                   isDisableTooltip
+                  forwardedRef={inputRef}
                 />
               </FieldContainer>
             </div>

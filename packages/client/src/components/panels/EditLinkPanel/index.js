@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
-import Heading from "@docspace/components/heading";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
-
-import {
-  StyledEditLinkPanel,
-  StyledScrollbar,
-  StyledButtons,
-} from "./StyledEditLinkPanel";
+import ModalDialog from "@docspace/components/modal-dialog";
+import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { LinkType } from "../../../helpers/constants";
-import { isMobileOnly } from "react-device-detect";
+import { RoomsType } from "@docspace/common/constants";
+
+import { DeviceType } from "@docspace/common/constants";
 
 const EditLinkPanel = (props) => {
   const {
     t,
     roomId,
-    linkId,
     isEdit,
     visible,
     password,
     setIsVisible,
     editExternalLink,
-    setExternalLinks,
+    setExternalLink,
     shareLink,
     unsavedChangesDialogVisible,
     setUnsavedChangesDialog,
@@ -42,12 +35,16 @@ const EditLinkPanel = (props) => {
     isDenyDownload,
     link,
     date,
+    language,
+    isPublic,
+    currentDeviceType,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const linkTitle = link.sharedTo.title ?? "";
-  const [linkNameValue, setLinkNameValue] = useState(linkTitle);
+  const [linkNameValue, setLinkNameValue] = useState(
+    link?.sharedTo?.title || ""
+  );
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
   const isExpiredDate = expirationDate
@@ -92,7 +89,9 @@ const EditLinkPanel = (props) => {
       return;
     }
 
-    const newLink = JSON.parse(JSON.stringify(link));
+    const externalLink = link ?? { access: 2, sharedTo: {} };
+
+    const newLink = JSON.parse(JSON.stringify(externalLink));
 
     newLink.sharedTo.title = linkNameValue;
     newLink.sharedTo.password = passwordAccessIsChecked ? passwordValue : null;
@@ -101,10 +100,8 @@ const EditLinkPanel = (props) => {
 
     setIsLoading(true);
     editExternalLink(roomId, newLink)
-      .then((res) => {
-        setExternalLinks(res);
-
-        const link = res.find((l) => l?.sharedTo?.id === linkId);
+      .then((link) => {
+        setExternalLink(link);
 
         if (isEdit) {
           copy(linkValue);
@@ -112,7 +109,7 @@ const EditLinkPanel = (props) => {
         } else {
           copy(link?.sharedTo?.shareLink);
 
-          toastr.success(t("Files:LinkAddedSuccessfully"));
+          toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
       })
       .catch((err) => toastr.error(err?.message))
@@ -127,6 +124,7 @@ const EditLinkPanel = (props) => {
     expirationDate: date,
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
+    linkNameValue: link?.sharedTo?.title || "",
   };
 
   useEffect(() => {
@@ -135,6 +133,7 @@ const EditLinkPanel = (props) => {
       expirationDate,
       passwordAccessIsChecked,
       denyDownload,
+      linkNameValue,
     };
 
     if (!isEqual(data, initState)) {
@@ -152,7 +151,7 @@ const EditLinkPanel = (props) => {
     window.addEventListener("keydown", onKeyPress);
 
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [unsavedChangesDialogVisible]);
+  }, [onKeyPress]);
 
   const linkNameIsValid = !!linkNameValue.trim();
 
@@ -162,55 +161,60 @@ const EditLinkPanel = (props) => {
     ? `${t("Files:LinkValidUntil")}:`
     : t("Files:ChooseExpirationDate");
 
+  const isPrimary = link?.sharedTo?.primary;
+
   const editLinkPanelComponent = (
-    <StyledEditLinkPanel isExpired={isExpired}>
-      <Backdrop
-        onClick={onClosePanel}
-        visible={visible}
-        isAside={true}
-        zIndex={310}
-      />
-      <Aside
-        className="edit-link-panel"
-        visible={visible}
-        onClose={onClosePanel}
-        zIndex={310}
-      >
-        <div className="edit-link_header">
-          <Heading className="edit-link_heading">
-            {isEdit ? t("Files:EditLink") : t("Files:AddNewLink")}
-          </Heading>
-        </div>
-        <StyledScrollbar stype="mediumBlack">
-          <div className="edit-link_body">
-            <LinkBlock
-              t={t}
-              isLoading={isLoading}
-              shareLink={shareLink}
-              linkNameValue={linkNameValue}
-              setLinkNameValue={setLinkNameValue}
-              linkValue={linkValue}
-              setLinkValue={setLinkValue}
-            />
-            <PasswordAccessBlock
-              t={t}
-              isLoading={isLoading}
-              headerText={t("Files:PasswordAccess")}
-              bodyText={t("Files:PasswordLink")}
-              isChecked={passwordAccessIsChecked}
-              isPasswordValid={isPasswordValid}
-              passwordValue={passwordValue}
-              setPasswordValue={setPasswordValue}
-              setIsPasswordValid={setIsPasswordValid}
-              onChange={onPasswordAccessChange}
-            />
-            <ToggleBlock
-              isLoading={isLoading}
-              headerText={t("Files:DisableDownload")}
-              bodyText={t("Files:PreventDownloadFilesAndFolders")}
-              isChecked={denyDownload}
-              onChange={onDenyDownloadChange}
-            />
+    <StyledEditLinkPanel
+      isExpired={isExpired}
+      displayType="aside"
+      visible={visible}
+      onClose={onClose}
+      isLarge
+      zIndex={310}
+      withBodyScroll={true}
+      withFooterBorder={true}
+    >
+      <ModalDialog.Header>
+        {isEdit
+          ? isPrimary
+            ? t("Files:EditGeneralLink")
+            : isPublic
+            ? t("Files:EditAdditionalLink")
+            : t("Files:EditLink")
+          : t("Files:CreateNewLink")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <div className="edit-link_body">
+          <LinkBlock
+            t={t}
+            isEdit={isEdit}
+            isLoading={isLoading}
+            shareLink={shareLink}
+            linkNameValue={linkNameValue}
+            setLinkNameValue={setLinkNameValue}
+            linkValue={linkValue}
+            setLinkValue={setLinkValue}
+          />
+          <PasswordAccessBlock
+            t={t}
+            isLoading={isLoading}
+            headerText={t("Files:PasswordAccess")}
+            bodyText={t("Files:PasswordLink")}
+            isChecked={passwordAccessIsChecked}
+            isPasswordValid={isPasswordValid}
+            passwordValue={passwordValue}
+            setPasswordValue={setPasswordValue}
+            setIsPasswordValid={setIsPasswordValid}
+            onChange={onPasswordAccessChange}
+          />
+          <ToggleBlock
+            isLoading={isLoading}
+            headerText={t("Files:DisableDownload")}
+            bodyText={t("Files:PreventDownloadFilesAndFolders")}
+            isChecked={denyDownload}
+            onChange={onDenyDownloadChange}
+          />
+          {!isPrimary && (
             <LimitTimeBlock
               isExpired={isExpired}
               isLoading={isLoading}
@@ -219,28 +223,28 @@ const EditLinkPanel = (props) => {
               expirationDate={expirationDate}
               setExpirationDate={setExpirationDate}
               setIsExpired={setIsExpired}
+              language={language}
             />
-          </div>
-        </StyledScrollbar>
-
-        <StyledButtons>
-          <Button
-            scale
-            primary
-            size="normal"
-            label={t("Common:SaveButton")}
-            isDisabled={isLoading || !linkNameIsValid || isExpired}
-            onClick={onSave}
-          />
-          <Button
-            scale
-            size="normal"
-            label={t("Common:CancelButton")}
-            isDisabled={isLoading}
-            onClick={onClose}
-          />
-        </StyledButtons>
-      </Aside>
+          )}
+        </div>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          scale
+          primary
+          size="normal"
+          label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
+          isDisabled={isLoading || !linkNameIsValid || isExpired}
+          onClick={onSave}
+        />
+        <Button
+          scale
+          size="normal"
+          label={t("Common:CancelButton")}
+          isDisabled={isLoading}
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
     </StyledEditLinkPanel>
   );
 
@@ -256,7 +260,9 @@ const EditLinkPanel = (props) => {
     );
   };
 
-  return isMobileOnly ? renderPortal() : editLinkPanelComponent;
+  return currentDeviceType === DeviceType.mobile
+    ? renderPortal()
+    : editLinkPanelComponent;
 };
 
 export default inject(({ auth, dialogsStore, publicRoomStore }) => {
@@ -268,25 +274,23 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     setUnsavedChangesDialog,
     linkParams,
   } = dialogsStore;
-  const { externalLinks, editExternalLink, setExternalLinks } = publicRoomStore;
+  const { externalLinks, editExternalLink, setExternalLink } = publicRoomStore;
   const { isEdit } = linkParams;
 
   const linkId = linkParams?.link?.sharedTo?.id;
   const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
-  const template = externalLinks.find(
-    (t) =>
-      t?.sharedTo?.isTemplate && t?.sharedTo?.linkType === LinkType.External
-  );
-  const shareLink = link?.sharedTo?.shareLink ?? template?.sharedTo?.shareLink;
+
+  const shareLink = link?.sharedTo?.shareLink;
+  const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
 
   return {
     visible: editLinkPanelIsVisible,
     setIsVisible: setEditLinkPanelIsVisible,
     isEdit,
-    linkId: link?.sharedTo?.id ?? template?.sharedTo?.id,
+    linkId: link?.sharedTo?.id,
     editExternalLink,
     roomId: selectionParentRoom.id,
-    setExternalLinks,
+    setExternalLink,
     isLocked: !!link?.sharedTo?.password,
     password: link?.sharedTo?.password ?? "",
     date: link?.sharedTo?.expirationDate,
@@ -295,7 +299,10 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     externalLinks,
     unsavedChangesDialogVisible,
     setUnsavedChangesDialog,
-    link: link ?? template,
+    link,
+    language: auth.language,
+    isPublic,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
   };
 })(
   withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel))

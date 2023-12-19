@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import styled, { css } from "styled-components";
-import { smallTablet } from "../../utils/device";
+import { mobile } from "../../utils/device";
 import IconButton from "../../icon-button";
 import Base from "../../themes/base";
 
@@ -27,7 +27,7 @@ const StyledCloseButtonWrapper = styled.div`
               ? `left: -30px;`
               : `right: -30px;`}
 
-          @media ${smallTablet} {
+          @media ${mobile} {
             ${(props) =>
               props.theme.interfaceDirection === "rtl"
                 ? `left: 10px;`
@@ -41,7 +41,7 @@ const StyledCloseButtonWrapper = styled.div`
             props.theme.interfaceDirection === "rtl"
               ? `right: -27px;`
               : `left: -27px;`}
-          @media ${smallTablet} {
+          @media ${mobile} {
             top: -27px;
             ${(props) =>
               props.theme.interfaceDirection === "rtl"
@@ -59,7 +59,7 @@ const StyledCloseButtonWrapper = styled.div`
   .close-button, .close-button:hover {
     cursor: pointer;
     path {
-      fill: ${(props) => props.theme.modalDialog.closeButton.fillColor};
+      stroke: ${(props) => props.theme.modalDialog.closeButton.fillColor};
     }
   }
 `;

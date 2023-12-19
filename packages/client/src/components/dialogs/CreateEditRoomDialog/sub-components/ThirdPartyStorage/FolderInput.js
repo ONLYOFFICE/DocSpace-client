@@ -41,12 +41,15 @@ const StyledFolderInput = styled.div`
   .room_title {
     padding: 5px 0px 5px 0px;
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
   }
 
   .root_label {
-    padding-left: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-right: 8px;`
+        : `padding-left: 8px;`}
     background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .background};
@@ -62,12 +65,18 @@ const StyledFolderInput = styled.div`
   }
 
   .room_title {
-    padding-right: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `padding-left: 8px;`
+        : `padding-right: 8px;`}
     white-space: nowrap;
   }
 
   .icon-wrapper {
-    margin-left: auto;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;`
+        : `margin-left: auto;`}
     background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .background};
@@ -80,8 +89,11 @@ const StyledFolderInput = styled.div`
     justify-content: center;
     transition: all 0.2s ease;
     border-top: none !important;
-    border-right: none !important;
     border-bottom: none !important;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl"
+        ? `border-left: none !important;`
+        : `border-right: none !important;`}
 
     &:hover {
       path {

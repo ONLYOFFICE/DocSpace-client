@@ -8,13 +8,13 @@ import IconButton from "@docspace/components/icon-button";
 import ViewSelector from "@docspace/components/view-selector";
 import Text from "@docspace/components/text";
 
-import { mobile } from "@docspace/components/utils/device";
+import { isMobile, mobile } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import Backdrop from "@docspace/components/backdrop";
-import { Events } from "@docspace/common/constants";
+import { Events } from "../../../constants";
 
 const selectedViewIcon = css`
   svg {
@@ -46,7 +46,14 @@ const StyledSortButton = styled.div`
     width: 32px;
     height: 32px;
 
-    margin-left: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px;
+          `
+        : css`
+            margin-left: 8px;
+          `}
 
     .dropdown-container {
       top: 102%;
@@ -143,7 +150,14 @@ const StyledSortButton = styled.div`
       align-items: center;
       justify-content: center;
 
-      margin-right: 0;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 0;
+            `
+          : css`
+              margin-right: 0;
+            `}
     }
 
     .combo-buttons_arrow-icon {
@@ -251,7 +265,7 @@ const SortButton = ({
         sortDirection: sortDirection,
       });
 
-      toggleCombobox();
+      // toggleCombobox();
 
       onSort && onSort(key, sortDirection);
     },
@@ -304,9 +318,9 @@ const SortButton = ({
     <>
       <Backdrop
         visible={isOpen}
-        withBackground={false}
+        withBackground={isMobile()}
         onClick={toggleCombobox}
-        withoutBlur={true}
+        withoutBlur={!isMobile()}
       />
       <StyledSortButton
         viewAs={viewAs}

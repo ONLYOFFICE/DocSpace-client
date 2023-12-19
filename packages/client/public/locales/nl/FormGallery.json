@@ -1,6 +1,14 @@
 {
-  "EmptyScreenDescription": "Controleer uw internetverbinding en vernieuw de pagina of probeer het later nog eens.",
-  "GalleryEmptyScreenDescription": "Selecteer een formulier sjabloon om de details te zien",
-  "GalleryEmptyScreenHeader": "Het laden van formulier sjablonen is mislukt",
-  "TemplateInfo": "Sjabloon info"
+  "Categories": "Categorieën",
+  "EmptyFormGalleryScreenDescription": "Er zijn geen resultaten gevonden die aan uw zoekopdracht voldoen",
+  "ErrorViewDescription": "Probeer het later opnieuw",
+  "ErrorViewHeader": "De Formulier Galerij is tijdelijk niet beschikbaar",
+  "SelectForm": "Selecteer Formulier",
+  "SubmitToGalleryBlockBody": "Stuur uw sjablonen in om ze te delen met de ONLYOFFICE community.",
+  "SubmitToGalleryBlockHeader": "ONLYOFFICE Formulier Galerij",
+  "SubmitToGalleryDialogGuideInfo": "Leer in onze <1>guide</1> hoe u perfecte formulieren maakt en uw kans op goedkeuring vergroot.",
+  "SubmitToGalleryDialogMainInfo": "Stuur uw formulier naar de openbare galerij zodat anderen het in hun werk kunnen gebruiken. Zodra het formulier door de moderatie komt, ontvangt u een bericht en wordt u beloond voor uw bijdrage.",
+  "SuggestChanges": "Wijzigingen voorstellen",
+  "TemplateInfo": "Sjabloon info",
+  "ViewAllTemplates": "Bekijk alle sjablonen"
 }

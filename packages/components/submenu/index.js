@@ -13,7 +13,7 @@ import {
   SubmenuScrollbarSize,
 } from "./styled-submenu";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeType } from "../ColorTheme";
 
 const Submenu = (props) => {
   const {
@@ -21,6 +21,7 @@ const Submenu = (props) => {
     startSelect = 0,
     forsedActiveItemId,
     onSelect,
+    topProps,
     ...rest
   } = props;
   if (!data) return null;
@@ -101,7 +102,7 @@ const Submenu = (props) => {
   }, [submenuItemsRef]);
 
   return (
-    <StyledSubmenu {...rest}>
+    <StyledSubmenu {...rest} topProps={topProps}>
       <div className="sticky">
         <SubmenuRoot>
           <SubmenuScrollbarSize />
@@ -123,6 +124,7 @@ const Submenu = (props) => {
                     <StyledSubmenuItemText isActive={isActive}>
                       <ColorTheme
                         {...props}
+                        as="div"
                         themeId={ThemeType.SubmenuText}
                         className="item-text"
                         fontSize="13px"

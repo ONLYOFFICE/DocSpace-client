@@ -6,6 +6,7 @@ import Text from "@docspace/components/text";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
+import { RoomsType } from "@docspace/common/constants";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -15,8 +16,10 @@ const DeleteLinkDialogComponent = (props) => {
     setIsVisible,
     tReady,
     roomId,
-    setExternalLinks,
+    deleteExternalLink,
     editExternalLink,
+    isPublicRoomType,
+    setRoomShared,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -46,8 +49,12 @@ const DeleteLinkDialogComponent = (props) => {
 
     editExternalLink(roomId, newLink)
       .then((res) => {
-        setExternalLinks(res);
-        toastr.success(t("Files:LinkDeletedSuccessfully"));
+        setRoomShared(roomId, !!res);
+        deleteExternalLink(res, newLink.sharedTo.id);
+
+        if (link.sharedTo.primary && isPublicRoomType) {
+          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
+        } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
       .catch((err) => toastr.error(err?.message))
       .finally(() => {
@@ -62,17 +69,29 @@ const DeleteLinkDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
     >
-      <ModalDialog.Header>{t("Files:DeleteLink")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {link.sharedTo.primary && isPublicRoomType
+          ? t("Files:RevokeLink")
+          : t("Files:DeleteLink")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Files:DeleteLinkNote")}</Text>
+          <Text noSelect>
+            {link.sharedTo.primary && isPublicRoomType
+              ? t("Files:DeleteGeneralLink")
+              : t("Files:DeleteLinkNote")}
+          </Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
           key="OkButton"
-          label={t("Common:Delete")}
+          label={
+            link.sharedTo.primary && isPublicRoomType
+              ? t("Files:RevokeLink")
+              : t("Files:DeleteLink")
+          }
           size="normal"
           primary
           scale
@@ -97,14 +116,14 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent
 );
 
-export default inject(({ auth, dialogsStore, publicRoomStore }) => {
+export default inject(({ auth, dialogsStore, publicRoomStore, filesStore }) => {
   const { selectionParentRoom } = auth.infoPanelStore;
   const {
     deleteLinkDialogVisible: visible,
     setDeleteLinkDialogVisible: setIsVisible,
     linkParams,
   } = dialogsStore;
-  const { editExternalLink, setExternalLinks } = publicRoomStore;
+  const { editExternalLink, deleteExternalLink } = publicRoomStore;
 
   return {
     visible,
@@ -112,6 +131,8 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     roomId: selectionParentRoom.id,
     link: linkParams.link,
     editExternalLink,
-    setExternalLinks,
+    deleteExternalLink,
+    isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+    setRoomShared: filesStore.setRoomShared,
   };
 })(observer(DeleteLinkDialog));

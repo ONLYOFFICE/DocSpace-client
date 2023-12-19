@@ -1,13 +1,5 @@
-﻿import CommonSettingsSvgUrl from "PUBLIC_DIR/images/common-settings.svg?url";
+﻿import { PageType } from "@docspace/common/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
-import SecuritySettingsIconUrl from "PUBLIC_DIR/images/security-settings.svg?url";
-import IntegrationSettingsIconUrl from "PUBLIC_DIR/images/integration-settings.svg?url";
-import PaymentIconUrl from "PUBLIC_DIR/images/payment.react.svg?url";
-import DataManagementIconUrl from "PUBLIC_DIR/images/data-management.react.svg?url";
-import RestoreIconUrl from "PUBLIC_DIR/images/restore.react.svg?url";
-import TrashIconUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 /**
  * Array for generation current settings tree.
  */
@@ -16,7 +8,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-customization",
     key: "0",
-    icon: CommonSettingsSvgUrl,
+    type: PageType.customization,
     link: "customization",
     tKey: "Customization",
     isHeader: true,
@@ -112,7 +104,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-security",
     key: "1",
-    icon: SecuritySettingsIconUrl,
+    type: PageType.security,
     link: "security",
     tKey: "ManagementCategorySecurity",
     isHeader: true,
@@ -130,7 +122,7 @@ export const settingsTree = [
             key: "1-0-0",
             icon: "",
             link: "password",
-            tKey: "SettingPasswordStrength",
+            tKey: "SettingPasswordTittle",
           },
           {
             id: "portal-settings_catalog-two-factor-auth",
@@ -154,15 +146,22 @@ export const settingsTree = [
             tKey: "IPSecurity",
           },
           {
-            id: "portal-settings_catalog-admin-message",
+            id: "portal-settings_catalog-brute-force-protection",
             key: "1-0-4",
+            icon: "",
+            link: "brute-force-protection",
+            tKey: "BruteForceProtection",
+          },
+          {
+            id: "portal-settings_catalog-admin-message",
+            key: "1-0-5",
             icon: "",
             link: "admin-message",
             tKey: "AdminsMessage",
           },
           {
             id: "portal-settings_catalog-session-life-time",
-            key: "1-0-5",
+            key: "1-0-6",
             icon: "",
             link: "lifetime",
             tKey: "SessionLifetime",
@@ -206,7 +205,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-backup",
     key: "2",
-    icon: DataManagementIconUrl,
+    type: PageType.backup,
     link: "backup",
     tKey: "Backup",
     isHeader: true,
@@ -232,7 +231,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-restore",
     key: "3",
-    icon: RestoreIconUrl,
+    type: PageType.restore,
     link: "restore",
     tKey: "RestoreBackup",
     isHeader: true,
@@ -249,7 +248,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-integration",
     key: "4",
-    icon: IntegrationSettingsIconUrl,
+    type: PageType.integration,
     link: "integration",
     tKey: "ManagementCategoryIntegration",
     isHeader: true,
@@ -277,6 +276,22 @@ export const settingsTree = [
         link: "single-sign-on",
         tKey: "SingleSignOn",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-single-sign-on-sp-settings",
+            key: "4-1-0",
+            icon: "",
+            link: "sp-settings",
+            tKey: "SingleSignOn:ServiceProviderSettings",
+          },
+          {
+            id: "portal-settings_catalog-single-sign-on-sp-metadata",
+            key: "4-1-1",
+            icon: "",
+            link: "sp-metadata",
+            tKey: "SingleSignOn:SpMetadata",
+          },
+        ],
       },
       {
         id: "portal-settings_catalog-plugins",
@@ -287,8 +302,16 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-smtp-settings",
+        id: "portal-settings_catalog-document-service",
         key: "4-4",
+        icon: "",
+        link: "document-service",
+        tKey: "DocumentService",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-smtp-settings",
+        key: "4-5",
         icon: "",
         link: "smtp-settings",
         tKey: "SMTPSettings",
@@ -299,7 +322,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-developer-tools",
     key: "5",
-    icon: DeveloperReactSvgUrl,
+    type: PageType.developerTools,
     link: "developer-tools",
     tKey: "DeveloperTools",
     isHeader: true,
@@ -321,8 +344,16 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-webhooks",
+        id: "portal-settings_catalog-plugin-sdk",
         key: "5-2",
+        icon: "",
+        link: "plugin-sdk",
+        tKey: "PluginSDK",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-webhooks",
+        key: "5-3",
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",
@@ -333,7 +364,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-delete",
     key: "6",
-    icon: TrashIconUrl,
+    type: PageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
@@ -357,7 +388,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-payments",
     key: "7",
-    icon: PaymentIconUrl,
+    type: PageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
@@ -375,7 +406,7 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-bonus",
     key: "8",
-    icon: GiftReactSvgUrl,
+    type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
     isHeader: true,
@@ -494,12 +525,7 @@ export const settingsTreeFull = [
         icon: "",
         link: "third-party-services",
       },
-      {
-        key: "3-1",
-        icon: "",
-        link: "plugins",
-        tKey: "Plugins",
-      },
+
       {
         title: "SMTP Settings",
         key: "3-1",

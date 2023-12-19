@@ -93,13 +93,15 @@ class DownloadDialogComponent extends React.Component {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
         window.open(viewUrl, "_self");
       }
+      this.props.setSelected("none");
       this.onClose();
     } else if (fileConvertIds.length || folderIds.length) {
-      this.onClose();
       downloadFiles(fileConvertIds, folderIds, {
         label: t("Translations:ArchivingData"),
         error: t("Common:ErrorInternalServer"),
       });
+      this.props.setSelected("none");
+      this.onClose();
     }
   };
 
@@ -125,7 +127,7 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onSelectFormat = (e) => {
-    const { format, type, fileId } = e.target.dataset;
+    const { format, type, fileId } = e.currentTarget.dataset;
     const files = this.state[type].files;
 
     this.setState((prevState) => {
@@ -396,7 +398,7 @@ const DownloadDialog = withTranslation([
 
 export default inject(
   ({ auth, filesStore, dialogsStore, filesActionsStore, settingsStore }) => {
-    const { sortedFiles } = filesStore;
+    const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = settingsStore;
     const { theme } = auth.settingsStore;
 
@@ -411,6 +413,7 @@ export default inject(
       extsConvertible,
 
       setDownloadDialogVisible,
+      setSelected,
       downloadFiles,
 
       theme,

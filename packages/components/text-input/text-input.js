@@ -18,10 +18,12 @@ class TextInput extends React.Component {
 TextInput.propTypes = {
   /** Used as HTML `id` property */
   id: PropTypes.string,
+  /** Forwarded ref */
+  forwardedRef: PropTypes.object,
   /** Used as HTML `name` property */
   name: PropTypes.string,
   /** Supported type of the input fields. */
-  type: PropTypes.oneOf(["text", "password", "email", "tel"]),
+  type: PropTypes.oneOf(["text", "password", "email", "tel", "search"]),
   /** Value of the input */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   /** Default maxLength value of the input */

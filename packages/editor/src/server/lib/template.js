@@ -1,5 +1,6 @@
 import { getFavicon, getScripts } from "./helpers";
 import pkg from "../../../package.json";
+import fontsCssUrl from "PUBLIC_DIR/css/fonts.css?url";
 
 export default function template(
   initialEditorState = {},
@@ -34,11 +35,12 @@ export default function template(
 
   const initialEditorStateStringify = JSON.stringify(initialEditorState);
 
-  const initialEditorStateString = initialEditorStateStringify.includes(
-    "</script>"
-  )
-    ? initialEditorStateStringify.replaceAll("</script>", "<\\/script>")
-    : initialEditorStateStringify;
+  const lt = /</g,
+    gt = />/g;
+
+  const initialEditorStateString = initialEditorStateStringify
+    .replace(lt, "&lt;")
+    .replace(gt, "&gt;");
 
   const scripts = `   
     <script id="__ASC_INITIAL_EDITOR_STATE__">
@@ -54,7 +56,7 @@ export default function template(
       tempElm.style.backgroundColor =
         localStorage.theme === "Dark" ? "#333333" : "#f4f4f4";
       console.log("It's Editor INIT");
-      fetch("/static/scripts/config.json")
+      fetch("${CONFIG_URL}")
       .then((response) => {
         if (!response.ok) {
           throw new Error("HTTP error " + response.status);
@@ -65,6 +67,13 @@ export default function template(
         window.DocSpaceConfig = {
           ...config,
         };
+
+        if (window.navigator.userAgent.includes("ZoomWebKit") || window.navigator.userAgent.includes("ZoomApps")) {
+          window.DocSpaceConfig.editor = {
+            openOnNewPage: false,
+            requestClose: true
+          };
+        }
       })
       .catch((e) => {
         console.error(e);
@@ -87,6 +96,8 @@ export default function template(
             content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
           <meta name="theme-color" content="#000000" />
+          <link rel="stylesheet" type="text/css" href=${fontsCssUrl} />
+          
           <link id="favicon" rel="shortcut icon" href=${faviconHref} type="image/x-icon"/>
           <link rel="manifest" href="/manifest.json" />
           <meta name="mobile-web-app-capable" content="yes" />
@@ -404,7 +415,7 @@ export default function template(
           </div>
           <div id="root">${appComponent}</div>
           <noscript> You need to enable JavaScript to run this app. </noscript>
-          <script src="/static/scripts/browserDetector.js"></script>
+          <script src=${BROWSER_DETECTOR_URL}></script>
           ${scripts}
         </body>
       </html>

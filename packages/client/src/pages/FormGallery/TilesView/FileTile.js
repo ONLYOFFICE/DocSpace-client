@@ -1,8 +1,7 @@
-import React from "react";
 import Tile from "./sub-components/Tile";
 import { SimpleFilesTileContent } from "./StyledTileView";
 import Link from "@docspace/components/link";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 
 const FileTile = (props) => {
   const { item } = props;
@@ -16,7 +15,7 @@ const FileTile = (props) => {
             containerWidth="100%"
             type="page"
             fontWeight="600"
-            fontSize={!isMobile ? "13px" : "14px"}
+            fontSize={isDesktop() ? "13px" : "14px"}
             target="_blank"
             isTextOverflow
           >

@@ -1,23 +1,23 @@
 import styled, { css } from "styled-components";
 import Box from "../box";
-import { isMobile } from "react-device-detect";
+
+import { tablet } from "../utils/device";
 
 const StyledIframe = styled.iframe`
   border: none;
   height: 60px;
   width: 100%;
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     min-width: ${(props) => props.sectionWidth + 40 + "px"};
-  `};
+  }
 `;
 
 const StyledSnackBar = styled(Box)`
   transition: all 500ms ease;
   transition-property: top, right, bottom, left, opacity;
   font-family: Open Sans, sans-serif, Arial;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   min-height: 14px;
   position: relative;
   display: flex;
@@ -48,7 +48,7 @@ const StyledSnackBar = styled(Box)`
       justify-content: start;
 
       .text-header {
-        font-size: 12px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
         line-height: 16px;
         font-weight: 600;
 
@@ -64,7 +64,7 @@ const StyledSnackBar = styled(Box)`
       justify-content: ${(props) => props.textalign};
 
       .text {
-        font-size: 12px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
         line-height: 16px;
         font-weight: 400;
       }
@@ -96,7 +96,7 @@ const StyledSnackBar = styled(Box)`
   .button {
     background: inherit;
     border: none;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: "#000";
     cursor: pointer;
     line-height: 14px;
@@ -116,10 +116,9 @@ const StyledAction = styled.div`
   color: "#333";
   cursor: pointer;
   text-decoration: underline;
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     right: 14px;
-  `};
+  }
 `;
 
 export { StyledAction, StyledSnackBar, StyledIframe };

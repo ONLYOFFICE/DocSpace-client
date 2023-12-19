@@ -18,6 +18,7 @@ const DEFAULT_FOLDER = "@my";
 const DEFAULT_SEARCH_IN_CONTENT = null;
 const DEFAULT_EXCLUDE_SUBJECT = null;
 const DEFAULT_APPLY_FILTER_OPTION = null;
+const DEFAULT_EXTENSION = null;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
@@ -34,6 +35,7 @@ const PREVIEW = "preview";
 const SEARCH_IN_CONTENT = "searchInContent";
 const EXCLUDE_SUBJECT = "excludeSubject";
 const APPLY_FILTER_OPTION = "applyFilterOption";
+const EXTENSION = "extension";
 
 // TODO: add next params
 // subjectGroup bool
@@ -82,6 +84,7 @@ class FilesFilter {
       urlFilter[EXCLUDE_SUBJECT] || defaultFilter.excludeSubject;
     const applyFilterOption =
       urlFilter[APPLY_FILTER_OPTION] || defaultFilter.applyFilterOption;
+    const extension = urlFilter[EXTENSION] || defaultFilter.extension;
 
     const newFilter = new FilesFilter(
       page,
@@ -99,7 +102,8 @@ class FilesFilter {
       folder,
       searchInContent,
       excludeSubject,
-      applyFilterOption
+      applyFilterOption,
+      extension
     );
 
     return newFilter;
@@ -121,7 +125,8 @@ class FilesFilter {
     folder = DEFAULT_FOLDER,
     searchInContent = DEFAULT_SEARCH_IN_CONTENT,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
-    applyFilterOption = DEFAULT_APPLY_FILTER_OPTION
+    applyFilterOption = DEFAULT_APPLY_FILTER_OPTION,
+    extension = DEFAULT_EXTENSION
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -139,6 +144,7 @@ class FilesFilter {
     this.searchInContent = searchInContent;
     this.excludeSubject = excludeSubject;
     this.applyFilterOption = applyFilterOption;
+    this.extension = extension;
   }
 
   getStartIndex = () => {
@@ -168,6 +174,7 @@ class FilesFilter {
       searchInContent,
       excludeSubject,
       applyFilterOption,
+      extension,
     } = this;
 
     const isFilterSet =
@@ -197,6 +204,7 @@ class FilesFilter {
       searchInContent,
       excludeSubject,
       applyFilterOption,
+      extension,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -218,6 +226,7 @@ class FilesFilter {
       searchInContent,
       excludeSubject,
       applyFilterOption,
+      extension,
     } = this;
 
     const dtoFilter = {};
@@ -235,6 +244,7 @@ class FilesFilter {
     if (searchInContent) dtoFilter[SEARCH_IN_CONTENT] = searchInContent;
     if (excludeSubject) dtoFilter[EXCLUDE_SUBJECT] = excludeSubject;
     if (applyFilterOption) dtoFilter[APPLY_FILTER_OPTION] = applyFilterOption;
+    if (extension) dtoFilter[EXTENSION] = extension;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -265,7 +275,8 @@ class FilesFilter {
       this.folder,
       this.searchInContent,
       this.excludeSubject,
-      this.applyFilterOption
+      this.applyFilterOption,
+      this.extension
     );
   }
 
@@ -285,7 +296,8 @@ class FilesFilter {
       this.pageCount === filter.pageCount &&
       this.searchInContent === filter.searchInContent &&
       this.excludeSubject === filter.excludeSubject &&
-      this.applyFilterOption === filter.applyFilterOption;
+      this.applyFilterOption === filter.applyFilterOption &&
+      this.extension === filter.extension;
 
     return equals;
   }

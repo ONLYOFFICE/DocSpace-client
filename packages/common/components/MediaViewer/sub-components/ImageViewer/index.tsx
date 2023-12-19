@@ -1,5 +1,5 @@
 import { useGesture } from "@use-gesture/react";
-import { isMobile, isDesktop } from "react-device-detect";
+import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import { useSpring, config } from "@react-spring/web";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 
@@ -22,6 +22,7 @@ import {
 } from "../ImageViewerToolbar/ImageViewerToolbar.props";
 import { ToolbarActionType, KeyboardEventKeys, compareTo } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
+import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
 
 const MaxScale = 5;
 const MinScale = 0.5;
@@ -54,6 +55,7 @@ function ImageViewer({
   isTiff,
   contextModel,
   errorTitle,
+  devices,
 }: ImageViewerProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -82,6 +84,8 @@ function ImageViewer({
     rotate: 0,
     opacity: 1,
   }));
+
+  const { isMobile, isDesktop } = devices;
 
   useEffect(() => {
     unmountRef.current = false;
@@ -138,7 +142,7 @@ function ImageViewer({
   };
 
   const changeSource = React.useCallback(
-    (src) => {
+    (src: any) => {
       if (!window.DocSpaceConfig.imageThumbnails) return;
       changeSourceTimeoutRef.current = setTimeout(() => {
         if (imgRef.current && !unmountRef.current) {
@@ -545,6 +549,9 @@ function ImageViewer({
   const onKeyDown = (event: KeyboardEvent) => {
     const { code, ctrlKey } = event;
 
+    const someDialogIsOpen = checkDialogsOpen();
+    if (someDialogIsOpen) return;
+
     switch (code) {
       case KeyboardEventKeys.ArrowLeft:
       case KeyboardEventKeys.ArrowRight:
@@ -555,9 +562,13 @@ function ImageViewer({
         }
         break;
       case KeyboardEventKeys.ArrowUp:
+      case KeyboardEventKeys.NumpadAdd:
+      case KeyboardEventKeys.Equal:
         zoomIn();
         break;
       case KeyboardEventKeys.ArrowDown:
+      case KeyboardEventKeys.NumpadSubtract:
+      case KeyboardEventKeys.Minus:
         zoomOut();
         break;
       case KeyboardEventKeys.Digit1:
@@ -838,10 +849,15 @@ function ImageViewer({
       },
 
       onClick: ({ pinching, event }) => {
-        if (isDesktop && event.target === imgWrapperRef.current)
+        if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
           return onMask();
 
-        if (!imgRef.current || !containerRef.current || pinching || isDesktop)
+        if (
+          !imgRef.current ||
+          !containerRef.current ||
+          pinching ||
+          isDesktopDeviceDetect
+        )
           return;
 
         const time = new Date().getTime();
@@ -1022,7 +1038,7 @@ function ImageViewer({
         </ImageWrapper>
       </ImageViewerContainer>
 
-      {isDesktop && panelVisible && !isError && (
+      {isDesktop && !isMobile && panelVisible && !isError && (
         <ImageViewerToolbar
           ref={toolbarRef}
           toolbar={toolbar}

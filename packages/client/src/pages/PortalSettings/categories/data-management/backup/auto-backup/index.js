@@ -29,7 +29,9 @@ import ButtonContainer from "./sub-components/ButtonContainer";
 import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
 import FloatingButton from "@docspace/components/floating-button";
 import Badge from "@docspace/components/badge";
+import Link from "@docspace/components/link";
 import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -50,15 +52,15 @@ class AutomaticBackup extends React.PureComponent {
     this.periodsObject = [
       {
         key: 0,
-        label: t("EveryDay"),
+        label: t("Common:EveryDay"),
       },
       {
         key: 1,
-        label: t("EveryWeek"),
+        label: t("Common:EveryWeek"),
       },
       {
         key: 2,
-        label: t("EveryMonth"),
+        label: t("Common:EveryMonth"),
       },
     ];
     this.timerId = null;
@@ -66,6 +68,8 @@ class AutomaticBackup extends React.PureComponent {
     this.monthNumbersArray = [];
     this.maxNumberCopiesArray = [];
     this.weekdaysLabelArray = [];
+
+    setDocumentTitle(t("AutoBackup"));
 
     this.getTime();
     this.getMonthNumbers();
@@ -326,6 +330,8 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdParty,
       isCheckedDocuments,
       updateBaseFolderPath,
+
+      isManagement,
     } = this.props;
 
     try {
@@ -337,7 +343,9 @@ class AutomaticBackup extends React.PureComponent {
         selectedMaxCopiesNumber,
         period,
         time,
-        day
+        day,
+        false,
+        isManagement
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
@@ -391,11 +399,11 @@ class AutomaticBackup extends React.PureComponent {
       buttonSize,
       downloadingProgress,
       theme,
-      renderTooltip,
       selectedEnableSchedule,
-      organizationName,
       rootFoldersTitles,
       isEnableAuto,
+      automaticBackupUrl,
+      currentColorScheme,
     } = this.props;
 
     const {
@@ -433,40 +441,55 @@ class AutomaticBackup extends React.PureComponent {
     ) : isInitialLoading ? (
       <AutoBackupLoader />
     ) : (
-      <StyledAutoBackup theme={theme} isEnableAuto={isEnableAuto}>
+      <StyledAutoBackup isEnableAuto={isEnableAuto}>
         <div className="backup_modules-header_wrapper">
-          <Text isBold fontSize="16px">
-            {t("AutoBackup")}
+          <Text className="backup_modules-description settings_unavailable">
+            {t("AutoBackupDescription")}
           </Text>
-          {renderTooltip(
-            t("AutoBackupHelp") +
-              " " +
-              t("AutoBackupHelpNote", { organizationName }),
-            "automatic-backup"
-          )}
-          {!isEnableAuto && (
-            <Badge
-              backgroundColor="#EDC409"
-              label={t("Common:Paid")}
-              className="auto-backup_badge"
-              isPaidBadge={true}
-            />
-          )}
+          <Link
+            className="link-learn-more"
+            href={automaticBackupUrl}
+            target="_blank"
+            fontSize="13px"
+            color={currentColorScheme.main.accent}
+            isHovered
+          >
+            {t("Common:LearnMore")}
+          </Link>
         </div>
-        <Text className="backup_modules-description settings_unavailable">
-          {t("AutoBackupDescription")}
-        </Text>
+
         <div className="backup_toggle-wrapper">
           <ToggleButton
             className="enable-automatic-backup backup_toggle-btn"
-            label={t("EnableAutomaticBackup")}
             onChange={this.onClickPermissions}
             isChecked={selectedEnableSchedule}
             isDisabled={isLoadingData || !isEnableAuto}
           />
-          <Text className="backup_toggle-btn-description settings_unavailable">
-            {t("EnableAutomaticBackupDescription")}
-          </Text>
+
+          <div className="toggle-caption">
+            <div className="toggle-caption_title">
+              <Text
+                fontWeight={600}
+                lineHeight="20px"
+                noSelect
+                className="settings_unavailable"
+              >
+                {t("EnableAutomaticBackup")}
+              </Text>
+              {!isEnableAuto && (
+                <Badge
+                  backgroundColor="#EDC409"
+                  label={t("Common:Paid")}
+                  fontWeight="700"
+                  className="auto-backup_badge"
+                  isPaidBadge={true}
+                />
+              )}
+            </div>
+            <Text className="backup_toggle-btn-description settings_unavailable">
+              {t("EnableAutomaticBackupDescription")}
+            </Text>
+          </div>
         </div>
         {selectedEnableSchedule && isEnableAuto && (
           <div className="backup_modules">
@@ -556,10 +579,11 @@ class AutomaticBackup extends React.PureComponent {
   }
 }
 export default inject(
-  ({ auth, backup, treeFoldersStore, selectFolderDialogStore }) => {
-    const { language, settingsStore, currentQuotaStore } = auth;
+  ({ auth, backup, treeFoldersStore, filesSelectorInput }) => {
+    const { language, settingsStore, currentQuotaStore, isManagement } = auth;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const { organizationName, theme } = settingsStore;
+    const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
+
     const {
       downloadingProgress,
       backupSchedule,
@@ -592,8 +616,7 @@ export default inject(
       defaultFolderId,
     } = backup;
 
-    const { updateBaseFolderPath, resetNewFolderPath } =
-      selectFolderDialogStore;
+    const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
 
     const isCheckedDocuments = selectedStorageType === `${DocumentModuleType}`;
     const isCheckedThirdParty =
@@ -613,7 +636,6 @@ export default inject(
       theme,
       language,
       isFormReady,
-      organizationName,
       backupSchedule,
       //commonThirdPartyList,
       clearProgressInterval,
@@ -649,6 +671,10 @@ export default inject(
       resetNewFolderPath,
       setStorageRegions,
       updateBaseFolderPath,
+
+      isManagement,
+      automaticBackupUrl,
+      currentColorScheme,
     };
   }
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

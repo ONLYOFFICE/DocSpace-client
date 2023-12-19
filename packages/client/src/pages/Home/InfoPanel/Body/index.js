@@ -35,12 +35,11 @@ const InfoPanelBodyContent = ({
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
-  const isNoItem = isGallery
-    ? !gallerySelected
-    : (!selection?.title && !isSeveralItems && !isAccounts) ||
-      ((isRootFolder || isAccounts) &&
-        selection?.isSelectedFolder &&
-        !selection?.wasContextMenuSelection);
+  const isNoItemGallery = isGallery && !gallerySelected;
+  const itemIsRoot =
+    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isNoItem =
+    !isSeveralItems && (isNoItemGallery || (itemIsRoot && !isGallery));
 
   const defaultProps = {
     selection,
@@ -48,7 +47,7 @@ const InfoPanelBodyContent = ({
     isRooms,
     isAccounts,
     isGallery,
-    isRootFolder,
+    isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
   };
 
@@ -59,15 +58,18 @@ const InfoPanelBodyContent = ({
     historyProps: { selectedFolder },
     accountsProps: {},
     galleryProps: {},
+    pluginProps: { isRooms, roomsView, fileView },
   });
 
   const getView = () => {
+    const currentView = isRooms ? roomsView : fileView;
+
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
     if (isGallery) return viewHelper.GalleryView();
     if (isAccounts) return viewHelper.AccountsView();
 
-    switch (isRooms ? roomsView : fileView) {
+    switch (currentView) {
       case "info_members":
         return viewHelper.MembersView();
       case "info_history":
@@ -75,6 +77,8 @@ const InfoPanelBodyContent = ({
       case "info_details":
         return viewHelper.DetailsView();
     }
+
+    if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();
   };
 
   //////////////////////////////////////////////////////////
@@ -115,7 +119,7 @@ const InfoPanelBodyContent = ({
     const currentFolderRoomId =
       selectedFolder?.pathParts &&
       selectedFolder?.pathParts?.length > 1 &&
-      selectedFolder.pathParts[1];
+      selectedFolder.pathParts[1].id;
 
     const storeRoomId = selectionParentRoom?.id;
     if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
@@ -131,28 +135,27 @@ const InfoPanelBodyContent = ({
     updateSelectionParentRoomAction();
   }, [selectedFolder, updateSelectionParentRoomAction]);
 
-  //////////////////////////////////////////////////////////
-
   // Setting selection after selectedItems or selectedFolder update
   useEffect(() => {
     setSelection(calculateSelection());
   }, [selectedItems, selectedFolder]);
 
-  //////////////////////////////////////////////////////////
-
+  // * DEV-ONLY - Logs selection change
   // useEffect(() => {
   //   console.log("\nfor-dev  Selected items: ", selectedItems);
   //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
   // }, [selectedItems, selectedFolder]);
 
-  //////////////////////////////////////////////////////////
-
   if (!selection && !isGallery) return null;
 
   return (
-    <StyledInfoPanelBody isAccounts={isAccounts}>
+    <StyledInfoPanelBody>
       {!isNoItem && (
-        <ItemTitle {...defaultProps} selectionLength={selectedItems.length} />
+        <ItemTitle
+          {...defaultProps}
+          selectionLength={selectedItems.length}
+          isNoItem={isNoItem}
+        />
       )}
       {getView()}
     </StyledInfoPanelBody>

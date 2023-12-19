@@ -1,8 +1,14 @@
 {
+  "AccessDenied": " Accesso negato",
   "Error401Text": "Spiacente, la risorsa non è attualmente accessibile.",
   "Error403Text": "Spiacente, accesso negato.",
   "Error404Text": "Spiacente, impossibile trovare la risorsa.",
+  "ErrorDeactivatedText": "Questo DocSpace è disattivato",
   "ErrorEmptyResponse": "Risposta vuota",
   "ErrorOfflineText": "Nessuna connessione a internet trovata",
-  "ErrorUnavailableText": "DocSpace non disponibile"
+  "ErrorUnavailableText": "DocSpace non disponibile",
+  "InvalidLink": "Link non valido",
+  "LinkDoesNotExist": "Il link che stai cercando di aprire non esiste.",
+  "LinkHasExpired": "Il link che hai seguito è scaduto.",
+  "PortalRestriction": " Il tuo indirizzo IP non è incluso nell'elenco degli indirizzi IP consentiti per accedere a questo DocSpace. Disattiva una VPN se è abilitata e ricarica la pagina oppure utilizza un altro indirizzo IP per accedere."
 }

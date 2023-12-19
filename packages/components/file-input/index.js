@@ -58,6 +58,8 @@ class FileInput extends Component {
       buttonLabel,
       idButton,
       isLoading,
+      fromStorage = false,
+      path,
       ...rest
     } = this.props;
 
@@ -87,11 +89,13 @@ class FileInput extends Component {
         break;
     }
 
+    const onClickProp = fromStorage ? { onClick: rest.onClick } : {};
+
     return (
       <Dropzone
         onDrop={this.onDrop}
-        {...(accept && { accept: [accept] })}
         noClick={isDisabled || isLoading}
+        accept={accept}
       >
         {({ getRootProps, getInputProps }) => (
           <StyledFileInput
@@ -108,20 +112,23 @@ class FileInput extends Component {
               isReadOnly
               className="text-input"
               placeholder={placeholder}
-              value={fileName}
+              value={fromStorage ? path : fileName}
               size={size}
               isDisabled={isDisabled || isLoading}
               hasError={hasError}
               hasWarning={hasWarning}
               scale={scale}
+              {...onClickProp}
             />
-            <input
-              type="file"
-              id={id}
-              ref={this.inputRef}
-              style={{ display: "none" }}
-              {...getInputProps()}
-            />
+            {!fromStorage && (
+              <input
+                type="file"
+                id={id}
+                ref={this.inputRef}
+                style={{ display: "none" }}
+                {...getInputProps()}
+              />
+            )}
 
             {buttonLabel ? (
               <Button
@@ -130,7 +137,7 @@ class FileInput extends Component {
                 size={buttonSize}
               />
             ) : (
-              <div className="icon">
+              <div className="icon" {...onClickProp}>
                 {isLoading ? (
                   <Loader className="loader" size="20px" type="track" />
                 ) : (
@@ -177,7 +184,7 @@ FileInput.propTypes = {
   /** Called when a file is selected */
   onInput: PropTypes.func,
   /** Specifies the files visible for upload */
-  accept: PropTypes.string,
+  accept: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /** Specifies the label for the upload button */
   buttonLabel: PropTypes.string,
 };

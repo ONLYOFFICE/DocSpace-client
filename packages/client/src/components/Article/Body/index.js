@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isDesktop, isTablet, isMobileOnly } from "react-device-detect";
+
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
 import Items from "./Items";
-import { isMobile, tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/components/utils/device";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
@@ -51,6 +51,8 @@ const ArticleBodyContent = (props) => {
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,
+    setSelection,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ const ArticleBodyContent = (props) => {
   const isAccounts = location.pathname.includes("accounts/filter");
 
   const onClick = React.useCallback(
-    (folderId, title, rootFolderType) => {
+    (folderId, title, rootFolderType, canCreate) => {
       const { toggleArticleOpen } = props;
 
       let params = null;
@@ -75,10 +77,14 @@ const ArticleBodyContent = (props) => {
       const state = {
         title,
         isRoot: true,
+        isPublicRoomType: false,
         rootFolderType,
+        canCreate,
       };
 
       let withTimer = !!selectedFolderId;
+
+      setSelection && setSelection([]);
 
       switch (folderId) {
         case myFolderId:
@@ -117,6 +123,7 @@ const ArticleBodyContent = (props) => {
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
+          withTimer = false;
           if (activeItemId === "accounts" && isAccounts) return;
 
           break;
@@ -126,7 +133,7 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Settings);
           navigate(path);
 
-          if (isMobileOnly || isMobile()) {
+          if (currentDeviceType === DeviceType.mobile) {
             toggleArticleOpen();
           }
           return;
@@ -146,7 +153,7 @@ const ArticleBodyContent = (props) => {
 
       navigate(path, { state });
 
-      if (isMobileOnly || isMobile()) {
+      if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();
       }
     },
@@ -158,6 +165,7 @@ const ArticleBodyContent = (props) => {
       activeItemId,
       selectedFolderId,
       isAccounts,
+      setSelection,
     ]
   );
 
@@ -263,7 +271,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { clearFiles } = filesStore;
+    const { clearFiles, setSelection } = filesStore;
     const {
       showArticleLoader,
 
@@ -293,6 +301,7 @@ export default inject(
       FirebaseHelper,
       theme,
       setIsBurgerLoading,
+      currentDeviceType,
     } = auth.settingsStore;
 
     return {
@@ -319,6 +328,8 @@ export default inject(
       clearFiles,
       selectedFolderId,
       setIsBurgerLoading,
+      setSelection,
+      currentDeviceType,
     };
   }
 )(withTranslation([])(observer(ArticleBodyContent)));

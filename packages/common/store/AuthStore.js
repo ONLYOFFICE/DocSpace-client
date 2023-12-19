@@ -8,7 +8,8 @@ import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
 import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie, getCookie } from "../utils";
+import { isAdmin, setCookie } from "../utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
@@ -34,6 +35,7 @@ class AuthStore {
   isUpdatingTariff = false;
 
   tenantExtra = {};
+
   constructor() {
     this.userStore = new UserStore();
 
@@ -41,7 +43,7 @@ class AuthStore {
     this.tfaStore = new TfaStore();
     this.infoPanelStore = new InfoPanelStore();
     this.currentQuotaStore = new CurrentQuotasStore();
-    this.currentTariffStatusStore = new CurrentTariffStatusStore();
+    this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();
     this.bannerStore = new BannerStore();
 
@@ -83,7 +85,7 @@ class AuthStore {
 
     this.setIsUpdatingTariff(false);
   };
-  init = async (skipRequest = false) => {
+  init = async (skipRequest = false, i18n) => {
     if (this.isInit) return;
     this.isInit = true;
 
@@ -93,17 +95,22 @@ class AuthStore {
 
     const requests = [];
 
+    const isPortalDeactivated = this.settingsStore.isPortalDeactivate;
+
+    const isPortalRestore =
+      this.settingsStore.tenantStatus === TenantStatus.PortalRestore;
+
+    const { user } = this.userStore;
+
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
-      !this.settingsStore.isPublicRoom
+      !this.settingsStore.isPublicRoom &&
+      !isPortalDeactivated
     ) {
       requests.push(
-        this.userStore.init().then(() => {
-          if (
-            this.isQuotaAvailable &&
-            this.settingsStore.tenantStatus !== TenantStatus.PortalRestore
-          ) {
+        this.userStore.init(i18n).then(() => {
+          if (this.isQuotaAvailable && !isPortalRestore) {
             this.getTenantExtra();
           }
         })
@@ -113,20 +120,29 @@ class AuthStore {
     }
 
     if (this.isAuthenticated && !skipRequest) {
-      this.settingsStore.tenantStatus !== TenantStatus.PortalRestore &&
+      !isPortalRestore &&
+        !isPortalDeactivated &&
         requests.push(this.settingsStore.getAdditionalResources());
 
       if (!this.settingsStore.passwordSettings) {
-        if (this.settingsStore.tenantStatus !== TenantStatus.PortalRestore) {
-          requests.push(
-            this.settingsStore.getPortalPasswordSettings(),
-            this.settingsStore.getCompanyInfoSettings()
-          );
+        if (!isPortalRestore && !isPortalDeactivated) {
+          requests.push(this.settingsStore.getCompanyInfoSettings());
         }
       }
     }
 
-    return Promise.all(requests);
+    return Promise.all(requests).then(() => {
+      const { user } = this.userStore;
+
+      if (
+        this.settingsStore.standalone &&
+        !this.settingsStore.wizardToken &&
+        this.isAuthenticated &&
+        user.isAdmin
+      ) {
+        requests.push(this.settingsStore.getPortals());
+      }
+    });
   };
 
   get isEnterprise() {
@@ -245,6 +261,12 @@ class AuthStore {
     );
   }
 
+  get isSubmitToGalleryAlertAvailable() {
+    const { user } = this.userStore;
+    if (!user) return false;
+    return !user.isVisitor;
+  }
+
   get isLiveChatAvailable() {
     const { user } = this.userStore;
 
@@ -319,18 +341,20 @@ class AuthStore {
     this.settingsStore = new SettingsStore();
   };
 
-  logout = async () => {
-    await api.user.logout();
+  logout = async (reset = true) => {
+    const ssoLogoutUrl = await api.user.logout();
 
     this.isLogout = true;
-    //console.log("Logout response ", response);
 
-    setWithCredentialsStatus(false);
-
-    const { isDesktopClient: isDesktop, personal } = this.settingsStore;
+    const { isDesktopClient: isDesktop } = this.settingsStore;
 
     isDesktop && logoutDesktop();
 
+    if (ssoLogoutUrl) return ssoLogoutUrl;
+
+    if (!reset) return;
+
+    setWithCredentialsStatus(false);
     this.reset(true);
     this.userStore.setUser(null);
     this.init();
@@ -419,38 +443,6 @@ class AuthStore {
     this.capabilities = capabilities;
   };
 
-  getOforms = (filter) => {
-    const culture =
-      this.userStore.user.cultureName || this.settingsStore.culture;
-
-    const formName = "&fields[0]=name_form";
-    const updatedAt = "&fields[1]=updatedAt";
-    const size = "&fields[2]=file_size";
-    const filePages = "&fields[3]=file_pages";
-    const cardPrewiew = "&populate[card_prewiew][fields][4]=url";
-    const templateImage = "&populate[template_image][fields][5]=formats";
-
-    const fields = `${formName}${updatedAt}${size}${filePages}${cardPrewiew}${templateImage}`;
-
-    const params = `?${filter.toUrlParams()}${fields}`;
-
-    const promise = new Promise(async (resolve, reject) => {
-      let oforms = await api.settings.getOforms(
-        `${this.settingsStore.urlOforms}${params}&locale=${culture}`
-      );
-
-      if (!oforms?.data?.data.length) {
-        oforms = await api.settings.getOforms(
-          `${this.settingsStore.urlOforms}${params}&locale=en`
-        );
-      }
-
-      resolve(oforms);
-    });
-
-    return promise;
-  };
-
   getAuthProviders = async () => {
     const providers = await api.settings.getAuthProviders();
     if (providers) this.setProviders(providers);
@@ -460,6 +452,10 @@ class AuthStore {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
   };
+
+  get isManagement() {
+    return window.location.pathname.includes("management");
+  }
 }
 
 export default new AuthStore();

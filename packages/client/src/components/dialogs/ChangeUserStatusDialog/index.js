@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
+import { combineUrl } from "@docspace/common/utils";
 
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
@@ -18,6 +20,15 @@ class ChangeUserStatusDialogComponent extends React.Component {
     this.state = { isRequestRunning: false };
   }
 
+  onClickPayments = () => {
+    const paymentPageUrl = combineUrl(
+      "/portal-settings",
+      "/payments/portal-payments"
+    );
+
+    toastr.clear();
+    window.DocSpace.navigate(paymentPageUrl);
+  };
   onChangeUserStatus = () => {
     const {
       updateUserStatus,
@@ -29,9 +40,8 @@ class ChangeUserStatusDialogComponent extends React.Component {
       getPeopleListItem,
       setSelection,
       infoPanelVisible,
+      needResetUserSelection,
     } = this.props;
-
-    let usersCount = 0;
 
     this.setState({ isRequestRunning: true }, () => {
       updateUserStatus(status, userIDs)
@@ -42,14 +52,29 @@ class ChangeUserStatusDialogComponent extends React.Component {
             setSelection(user);
           }
 
-          usersCount = users.length;
-
           toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
         })
-        .catch((error) => toastr.error(error))
+        .catch((err) => {
+          toastr.error(
+            <>
+              <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
+              <Link
+                color="#5387AD"
+                isHovered={true}
+                onClick={this.onClickPayments}
+              >
+                {t("Common:PaymentsTitle")}
+              </Link>
+            </>,
+            false,
+            0,
+            true,
+            true
+          );
+        })
         .finally(() => {
           this.setState({ isRequestRunning: false }, () => {
-            (!infoPanelVisible || usersCount !== 1) && setSelected("close");
+            needResetUserSelection && setSelected("close");
             onClose();
           });
         });
@@ -67,15 +92,32 @@ class ChangeUserStatusDialogComponent extends React.Component {
     const { t, tReady, visible, status, userIDs } = this.props;
     const { isRequestRunning } = this.state;
 
-    const statusTranslation =
-      status === EmployeeStatus.Active
-        ? t("ChangeUsersActiveStatus")
-        : t("ChangeUsersDisableStatus");
+    const needDisabled = status === EmployeeStatus.Disabled;
+    const onlyOneUser = userIDs.length === 1;
 
-    const userStatusTranslation =
-      status === EmployeeStatus.Active
-        ? t("PeopleTranslations:DisabledEmployeeStatus")
-        : t("Common:Active");
+    let header = "";
+    let bodyText = "";
+    let buttonLabelSave = "";
+
+    if (needDisabled) {
+      header = onlyOneUser ? t("DisableUser") : t("DisableUsers");
+
+      bodyText = onlyOneUser
+        ? t("DisableUserDescription")
+        : t("DisableUsersDescription");
+
+      bodyText = bodyText + t("DisableGeneralDescription");
+
+      buttonLabelSave = t("PeopleTranslations:DisableUserButton");
+    } else {
+      header = onlyOneUser ? t("EnableUser") : t("EnableUsers");
+
+      bodyText = onlyOneUser
+        ? t("EnableUserDescription")
+        : t("EnableUsersDescription");
+
+      buttonLabelSave = t("Common:Enable");
+    }
 
     return (
       <ModalDialogContainer
@@ -84,22 +126,14 @@ class ChangeUserStatusDialogComponent extends React.Component {
         onClose={this.onCloseAction}
         autoMaxHeight
       >
-        <ModalDialog.Header>
-          {t("ChangeUserStatusDialogHeader")}
-        </ModalDialog.Header>
+        <ModalDialog.Header>{header}</ModalDialog.Header>
         <ModalDialog.Body>
-          <Text>
-            {t("ChangeUserStatusDialog", {
-              status: statusTranslation,
-              userStatus: userStatusTranslation,
-            })}
-          </Text>
-          <Text>{t("ChangeUserStatusDialogMessage")}</Text>
+          <Text>{bodyText}</Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
             id="change-user-status-modal_submit"
-            label={t("Common:ChangeButton")}
+            label={buttonLabelSave}
             size="normal"
             primary
             scale
@@ -137,11 +171,13 @@ ChangeUserStatusDialog.propTypes = {
 export default inject(({ peopleStore, auth }) => {
   const setSelected = peopleStore.selectionStore.setSelected;
 
-  const { getPeopleListItem, updateUserStatus } = peopleStore.usersStore;
+  const { getPeopleListItem, updateUserStatus, needResetUserSelection } =
+    peopleStore.usersStore;
 
   const { setSelection, isVisible: infoPanelVisible } = auth.infoPanelStore;
 
   return {
+    needResetUserSelection,
     updateUserStatus,
 
     setSelected,

@@ -1,5 +1,14 @@
 {
+  "ActionCannotBeUndone": "Вибрані вимкнені користувачі будуть видалені з DocSpace. Цю дію не можна скасувати.",
+  "CannotReassignFiles": "Якщо ви видалите кількох користувачів одночасно, то не зможете перепризначити їхні файли іншим користувачам.",
+  "DeleteGroupUsersSuccessMessage": "Користувачів успішно видалено.",
+  "DeleteMyDocumentsUser": "Усі особисті файли й папки в розділі «Мої документи» цього користувача буде видалено назавжди.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Кімнати, створені цим користувачем, і документи, які зберігаються в цих кімнатах, будуть автоматично перепризначені адміністратору, який виконує видалення: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Перепризначте дані вручну, щоб вибрати іншого цільового користувача для перепризначення.",
   "DeleteUser": "Видалити користувача",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> буде видалений. Особисті документи користувача, доступні іншим, будуть видалені. Ви впевнені, що бажаєте продовжити?",
-  "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> буде видалено. Цю дію неможливо скасувати.",
+  "DeletingUsers": "Видалення користувачів",
+  "PleaseNote": "Зверніть увагу!",
+  "ReassignDataToAnotherUser": "Перепризначити дані іншому користувачу",
+  "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено",
+  "ToBeAbleToReassignData": "Щоб мати можливість перепризначити дані, видаляйте по одному користувачу за раз."
 }

@@ -35,6 +35,16 @@ const StyledScrollbar = styled(ClearScrollbar)`
       ? props.heightTextArea + 2 + "px"
       : "91px";
   }} !important;
+
+  textarea {
+    height: ${(props) => {
+      return props.heightScale
+        ? "65vh"
+        : props.heightTextArea
+        ? props.heightTextArea + "px"
+        : "89px";
+    }};
+  }
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;
@@ -71,18 +81,18 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
 
   display: table;
   width: -webkit-fill-available;
-  height: fit-content;
+
   border: none;
   outline: none;
   resize: none;
   overflow: ${(props) => (props.isJSONField ? "visible !important" : "hidden")};
-  padding: ${(props) => (props.enableCopy ? "5px 28px 2px" : "5px 8px 2px")};
+  padding: 5px 8px 2px;
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? `padding-right: ${props.paddingLeftProp};`
       : `padding-left: ${props.paddingLeftProp};`}
-  font-size: ${(props) => props.fontSize + "px"};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
 
@@ -129,7 +139,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
     `
       &:placeholder-shown {
         text-align: right;
-      }`}}
+      }`}
 `;
 
 StyledTextarea.defaultProps = { theme: Base };
@@ -164,7 +174,6 @@ const CopyIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 CopyIconWrapper.defaultProps = { theme: Base };
@@ -173,12 +182,17 @@ const Wrapper = styled.div`
   position: relative;
 
   max-width: 1200px;
+
+  .scroll-wrapper {
+    margin-right: ${(props) =>
+      props.enableCopy ? (props.isJSONField ? "36px" : "8px") : "0"};
+  }
 `;
 
 const Numeration = styled.pre`
   display: block;
   position: absolute;
-  font-size: ${(props) => props.fontSize + "px"};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

@@ -8,6 +8,7 @@ import { Base } from "@docspace/components/themes";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import UserContent from "./userContent";
+import { mobile, tablet } from "@docspace/components/utils/device";
 
 const marginStyles = css`
   margin-left: -24px;
@@ -15,26 +16,11 @@ const marginStyles = css`
   padding-left: 24px;
   padding-right: 24px;
 
-  ${isMobile &&
-  css`
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  `}
-
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     margin-left: -16px;
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
-  }
-
-  @media (max-width: 375px) {
-    margin-left: -16px;
-    margin-right: -8px;
-    padding-left: 16px;
-    padding-right: 8px;
   }
 `;
 
@@ -48,7 +34,14 @@ const StyledWrapper = styled.div`
     border: 1px solid transparent;
     border-left: none;
     border-right: none;
-    margin-left: 0;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 0;
+          `
+        : css`
+            margin-left: 0;
+          `}
     height: 100%;
     user-select: none;
 
@@ -84,7 +77,14 @@ const StyledSimpleUserRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    margin-right: 12px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 12px;
+          `
+        : css`
+            margin-right: 12px;
+          `}
   }
 `;
 

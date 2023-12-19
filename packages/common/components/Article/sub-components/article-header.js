@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Loaders from "@docspace/common/components/Loaders";
-import { isTablet as isTabletUtils } from "@docspace/components/utils/device";
+import Loaders from "../../Loaders";
+
 import { Link } from "react-router-dom";
-import { isTablet, isMobileOnly } from "react-device-detect";
-import { isMobile } from "@docspace/components/utils/device";
+
 import { inject, observer } from "mobx-react";
 import {
   StyledArticleHeader,
@@ -13,6 +12,7 @@ import {
   StyledIconBox,
 } from "../styled-article";
 import { getLogoFromPath } from "../../../utils";
+import { DeviceType } from "../../../constants";
 
 const ArticleHeader = ({
   showText,
@@ -22,12 +22,11 @@ const ArticleHeader = ({
   isBurgerLoading,
   whiteLabelLogoUrls,
   theme,
+  withCustomArticleHeader,
+  currentDeviceType,
   ...rest
 }) => {
   const navigate = useNavigate();
-
-  const isTabletView =
-    (isTabletUtils() || isTablet) && !isMobileOnly && !isMobile();
 
   const onLogoClick = () => {
     onLogoClickAction && onLogoClickAction();
@@ -35,29 +34,30 @@ const ArticleHeader = ({
   };
 
   const burgerLogo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[5].path.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[5].path.light);
+    ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
+    : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
   const logo = !theme.isBase
-    ? getLogoFromPath(whiteLabelLogoUrls[0].path.dark)
-    : getLogoFromPath(whiteLabelLogoUrls[0].path.light);
+    ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
+    : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
 
-  if (isMobileOnly || isMobile()) return <></>;
+  if (currentDeviceType === DeviceType.mobile) return <></>;
 
-  const isLoadingComponent = isTabletView ? (
-    <Loaders.ArticleHeader height="28px" width={showText ? "100%" : "28px"} />
-  ) : (
-    <Loaders.ArticleHeader height="28px" width="211px" />
-  );
+  const isLoadingComponent =
+    currentDeviceType === DeviceType.tablet ? (
+      <Loaders.ArticleHeader height="28px" width={showText ? "100%" : "28px"} />
+    ) : (
+      <Loaders.ArticleHeader height="28px" width="211px" />
+    );
 
   const mainComponent = (
     <>
-      {isTabletView && (
+      {currentDeviceType === DeviceType.tablet && (
         <StyledIconBox name="article-burger" showText={showText}>
           <img src={burgerLogo} onClick={onLogoClick} />
         </StyledIconBox>
       )}
       <StyledHeading showText={showText} size="large">
-        {isTabletView ? (
+        {currentDeviceType === DeviceType.tablet ? (
           <img className="logo-icon_svg" src={logo} onClick={onLogoClick} />
         ) : (
           <Link to="/">
@@ -70,7 +70,11 @@ const ArticleHeader = ({
 
   return (
     <StyledArticleHeader showText={showText} {...rest}>
-      {isBurgerLoading ? isLoadingComponent : mainComponent}
+      {withCustomArticleHeader && children
+        ? children
+        : isBurgerLoading
+        ? isLoadingComponent
+        : mainComponent}
     </StyledArticleHeader>
   );
 };

@@ -19,11 +19,12 @@ import { StyledWrapper } from "./styled-social-networks";
 
 const SocialNetworks = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { providers, setProviders, isOAuthAvailable } = props;
+  const { providers, setProviders, isOAuthAvailable, setPortalQuota } = props;
 
   const fetchData = async () => {
     try {
       const data = await getAuthProviders();
+      if (typeof isOAuthAvailable === "undefined") await setPortalQuota();
       setProviders(data);
     } catch (e) {
       console.error(e);
@@ -34,6 +35,11 @@ const SocialNetworks = (props) => {
     e.preventDefault();
 
     try {
+      //Lifehack for Twitter
+      if (providerName == "twitter") {
+        link += "loginCallback";
+      }
+
       const tokenGetterWin = window.open(
         link,
         "login",
@@ -48,8 +54,6 @@ const SocialNetworks = (props) => {
           callback: "loginCallback",
         })
       );
-
-      console.log(getLoginLink(token, code));
 
       tokenGetterWin.location.href = getLoginLink(token, code);
     } catch (err) {
@@ -67,12 +71,21 @@ const SocialNetworks = (props) => {
   };
 
   const loginCallback = (profile) => {
-    linkOAuth(profile).then((resp) => {
-      getAuthProviders().then((providers) => {
-        setProviders(providers);
-        toastr.success(t("ProviderSuccessfullyConnected"));
+    linkOAuth(profile)
+      .then(() => {
+        getAuthProviders().then((providers) => {
+          setProviders(providers);
+          toastr.success(t("ProviderSuccessfullyConnected"));
+        });
+      })
+      .catch((error) => {
+        const message = error?.response?.data?.error?.message;
+        const data =
+          message === "ErrorAccountAlreadyUse"
+            ? t("ErrorAccountAlreadyUse")
+            : message;
+        toastr.error(data);
       });
-    });
   };
 
   useEffect(() => {
@@ -89,8 +102,6 @@ const SocialNetworks = (props) => {
       const { icon, label, iconOptions } = providersData[item.provider];
       if (!icon || !label) return <></>;
 
-      console.log(item);
-
       const onClick = (e) => {
         if (item.linked) {
           unlinkAccount(item.provider);
@@ -105,8 +116,8 @@ const SocialNetworks = (props) => {
             iconName={icon}
             label={getProviderTranslation(label, t, item.linked)}
             $iconOptions={iconOptions}
-            onClick={(e) => onClick(e)}
-            size="small"
+            onClick={onClick}
+            size="base"
             isConnect={item.linked}
           />
         </div>
@@ -118,7 +129,7 @@ const SocialNetworks = (props) => {
 
   return (
     <StyledWrapper>
-      <Text fontSize="16px" fontWeight={700}>
+      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>
       <div className="buttons">{providerButtons}</div>
@@ -130,11 +141,12 @@ export default inject(({ auth, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
   const { currentQuotaStore } = auth;
-  const { isOAuthAvailable } = currentQuotaStore;
+  const { isOAuthAvailable, setPortalQuota } = currentQuotaStore;
 
   return {
     providers,
     setProviders,
     isOAuthAvailable,
+    setPortalQuota,
   };
 })(observer(SocialNetworks));

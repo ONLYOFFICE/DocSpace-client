@@ -1,7 +1,11 @@
 {
-  "ChangeUsersActiveStatus": "aktivován",
-  "ChangeUsersDisableStatus": "aktivován",
-  "ChangeUserStatusDialog": "Uživatelé se stavem '{{ status }}' budou {{ status }}.",
-  "ChangeUserStatusDialogHeader": "Změnit status",
-  "ChangeUserStatusDialogMessage": "Nemůžete změnit status pro vlastníka DocSpace a pro sebe."
+  "DisableGeneralDescription": "Zakázané uživatele můžete později v případě potřeby odstranit nebo povolit. Všimněte si, že nemůžete zakázat uživatele, jako je Vlastník a vy sami.",
+  "DisableUser": "Zakázat uživatele",
+  "DisableUserDescription": "Pokud tohoto uživatele zakážete, nebude se moci přihlásit do služby DocSpace, zatímco jeho dokumenty a data zůstanou nedotčeny.",
+  "DisableUsers": "Zakázat uživatele",
+  "DisableUsersDescription": "Pokud tyto uživatele zakážete, nebudou se moci přihlásit do služby DocSpace, zatímco jejich dokumenty a data zůstanou nedotčeny.",
+  "EnableUser": "Povolit uživatele",
+  "EnableUserDescription": "Pokud tohoto uživatele povolíte, bude se moci znovu přihlásit do služby DocSpace a získat přístup ke svým dokumentům a datům.",
+  "EnableUsers": "Povolit uživatele",
+  "EnableUsersDescription": "Pokud tyto uživatele povolíte, budou se moci znovu přihlásit do služby DocSpace a získat přístup ke svým dokumentům a datům."
 }

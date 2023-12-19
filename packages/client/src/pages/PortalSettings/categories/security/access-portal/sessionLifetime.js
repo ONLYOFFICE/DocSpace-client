@@ -5,6 +5,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
 import Text from "@docspace/components/text";
+import Link from "@docspace/components/link";
 import TextInput from "@docspace/components/text-input";
 import toastr from "@docspace/components/toast/toastr";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -12,8 +13,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
-import { isMobile } from "react-device-detect";
+
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -42,6 +44,9 @@ const SessionLifetime = (props) => {
     setSessionLifetimeSettings,
     initSettings,
     isInit,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
@@ -84,7 +89,7 @@ const SessionLifetime = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("lifetime").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -117,7 +122,7 @@ const SessionLifetime = (props) => {
   }, [type, sessionLifetime]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("lifetime") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -182,14 +187,25 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <SessionLifetimeLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text>{t("SessionLifetimeHelper")}</Text>
+        <Text className="learn-subtitle">
+          {t("SessionLifetimeSettingDescription")}
+        </Text>
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main.accent}
+          target="_blank"
+          isHovered
+          href={lifetimeSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -238,7 +254,7 @@ const SessionLifetime = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -255,6 +271,9 @@ export default inject(({ auth, setup }) => {
     sessionLifetime,
     enabledSessionLifetime,
     setSessionLifetimeSettings,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -264,5 +283,8 @@ export default inject(({ auth, setup }) => {
     setSessionLifetimeSettings,
     initSettings,
     isInit,
+    lifetimeSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

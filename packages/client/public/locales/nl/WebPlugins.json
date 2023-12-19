@@ -1,0 +1,18 @@
+{
+  "DeletePlugin": "Plugin verwijderen",
+  "DeletePluginDescription": "Deze plug-in zal niet langer beschikbaar zijn voor DocSpace gebruikers. Weet u zeker dat u door wilt gaan?",
+  "DeletePluginTitle": "Plug-in verwijderen?",
+  "Description": "U kunt plug-ins toevoegen om de functionaliteit van DocSpace uit te breiden met extra functies. Klik op Plug-in uploaden en selecteer het plugin-bestand in het ZIP-archief.",
+  "ExpandFunctionality": "Functionaliteit uitbreiden met Plugin SDK",
+  "GoToRepo": "Ga naar repository",
+  "Metadata": "Metadata",
+  "NeedSettings": "Instellingen invoeren",
+  "NoPlugins": "Geen plug-ins toegevoegd",
+  "NotNeedSettings": "Instellingen invoeren is niet nodig",
+  "PluginSamples": "Plugin-voorbeelden",
+  "PluginSDK": "Plugin SDK",
+  "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw DocSpace functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
+  "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
+  "PluginsHelp": "Met plug-ins kunt u de functionaliteit van DocSpace uitbreiden",
+  "UploadPlugin": "Upload plug-in"
+}

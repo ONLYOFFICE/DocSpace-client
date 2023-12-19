@@ -5,25 +5,35 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
 
 import SSO from "./SingleSignOn";
 import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
-import AppLoader from "@docspace/common/components/AppLoader";
-import SSOLoader from "./sub-components/ssoLoader";
 import SMTPSettings from "./SMTPSettings";
+import DocumentService from "./DocumentService";
+import PluginPage from "./Plugins";
+import { DeviceType } from "@docspace/common/constants";
+import Badge from "@docspace/components/badge";
+import Box from "@docspace/components/box";
 
 const IntegrationWrapper = (props) => {
-  const { t, tReady, loadBaseInfo, enablePlugins, toDefault } = props;
-  const [currentTab, setCurrentTab] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    t,
+    tReady,
+    currentDeviceType,
+    toDefault,
+    isSSOAvailable,
+    standalone,
+    enablePlugins,
+  } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
-      toDefault();
+      isSSOAvailable &&
+        !window.location.pathname.includes("single-sign-on") &&
+        toDefault();
     };
   }, []);
 
@@ -50,18 +60,46 @@ const IntegrationWrapper = (props) => {
     },
   ];
 
-  const load = async () => {
+  if (standalone) {
+    const documentServiceData = {
+      id: "document-service",
+      name: t("DocumentService"),
+      content: <DocumentService />,
+    };
+
+    data.push(documentServiceData);
+  }
+
+  if (enablePlugins) {
+    const pluginLabel = (
+      <Box displayProp="flex" style={{ gap: "8px" }}>
+        {t("Common:Plugins")}
+
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
+    );
+
+    data.splice(1, 0, {
+      id: "plugins",
+      name: pluginLabel,
+      content: <PluginPage />,
+    });
+  }
+
+  const getCurrentTab = () => {
     const path = location.pathname;
     const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
-
-    await loadBaseInfo();
-    setIsLoading(true);
+    return currentTab !== -1 ? currentTab : 0;
   };
 
-  useEffect(() => {
-    load();
-  }, []);
+  const currentTab = getCurrentTab();
 
   const onSelect = (e) => {
     navigate(
@@ -73,26 +111,37 @@ const IntegrationWrapper = (props) => {
     );
   };
 
-  if (!isLoading && !tReady)
-    return currentTab === 0 ? <SSOLoader /> : <AppLoader />;
-
-  return <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />;
+  return (
+    <Submenu
+      data={data}
+      startSelect={currentTab}
+      onSelect={onSelect}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
+    />
+  );
 };
 
-export default inject(({ setup, auth, ssoStore }) => {
-  const { initSettings } = setup;
+export default inject(({ auth, ssoStore }) => {
+  const { standalone, enablePlugins } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
-  const { enablePlugins } = auth.settingsStore;
+  const { currentDeviceType } = auth.settingsStore;
+  const { isSSOAvailable } = auth.currentQuotaStore;
 
   return {
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
-    enablePlugins,
     toDefault,
+    isSSOAvailable,
+    standalone,
+    currentDeviceType,
+    enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations"])(
+  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
     observer(IntegrationWrapper)
   )
 );

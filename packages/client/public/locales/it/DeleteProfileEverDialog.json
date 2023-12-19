@@ -1,5 +1,14 @@
 {
+  "ActionCannotBeUndone": "Gli utenti disattivati selezionati verranno rimossi da DocSpace. Questa azione non può essere annullata.",
+  "CannotReassignFiles": "Se elimini più utenti contemporaneamente, non potrai riassegnare i loro file ad altri utenti.",
+  "DeleteGroupUsersSuccessMessage": "Gli utenti sono stati eliminati con successo.",
+  "DeleteMyDocumentsUser": "Tutti i file e le cartelle personali nella sezione I miei documenti di questo utente verranno eliminati definitivamente.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Le stanze create da questo utente e i documenti archiviati in queste stanze verranno riassegnati automaticamente a un amministratore che esegue l'eliminazione: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Riassegna manualmente i dati per scegliere un altro utente per la riassegnazione.",
   "DeleteUser": "Elimina utente",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> verrà eliminato. I documenti personali dell'utente disponibili per gli altri verranno eliminati.Sei sicuro di voler continuare?",
-  "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> verrà eliminato. Questa azione non può essere annullata.",
+  "DeletingUsers": "Eliminazione di utenti",
+  "PleaseNote": "Ti preghiamo di notare:",
+  "ReassignDataToAnotherUser": "Riassegna i dati a un altro utente",
+  "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo",
+  "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta."
 }

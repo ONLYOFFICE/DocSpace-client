@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
@@ -13,8 +13,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ const TrustedMail = (props) => {
     setMailDomainSettings,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -93,7 +95,7 @@ const TrustedMail = (props) => {
   }, [type, domains]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("trusted-mail") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -156,15 +158,21 @@ const TrustedMail = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <TrustedMailLoader />;
   }
 
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text className="learn-subtitle">{t("TrustedMailHelper")}</Text>
+        <Text fontSize="13px" fontWeight="400">
+          {t("TrustedMailSettingDescription")}
+        </Text>
+        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
         <Link
+          className="link-learn-more"
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
@@ -219,7 +227,7 @@ const TrustedMail = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -240,6 +248,7 @@ export default inject(({ auth }) => {
     helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
 
   return {
@@ -249,5 +258,6 @@ export default inject(({ auth }) => {
     helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TrustedMail)));

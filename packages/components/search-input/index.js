@@ -10,7 +10,7 @@ class SearchInput extends React.Component {
   constructor(props) {
     super(props);
 
-    this.input = React.createRef();
+    this.forwardedRef = props.forwardedRef || React.createRef();
     this.timerId = null;
 
     this.state = {
@@ -95,11 +95,13 @@ class SearchInput extends React.Component {
         theme={this.props.theme}
         className={this.props.className}
         style={this.props.style}
+        isScale={this.props.scale}
       >
         <InputBlock
           theme={this.props.theme}
           className="search-input-block"
-          ref={this.input}
+          forwardedRef={this.forwardedRef}
+          onClick={this.props.onClick}
           id={this.props.id}
           name={this.props.name}
           isDisabled={this.props.isDisabled}
@@ -132,6 +134,8 @@ class SearchInput extends React.Component {
 SearchInput.propTypes = {
   /** Used as HTML `id` property */
   id: PropTypes.string,
+  /** Forwarded ref */
+  forwardedRef: PropTypes.object,
   /** Sets the unique element name */
   name: PropTypes.string,
   /** Accepts class */

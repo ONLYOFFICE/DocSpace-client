@@ -17,6 +17,12 @@ export type NumberOrString = number | string;
 
 export type NullOrUndefined = null | undefined;
 
+export type DevicesType = {
+  isMobile: boolean;
+  isMobileOnly: boolean;
+  isDesktop: boolean;
+};
+
 export type PlaylistType = {
   id: number;
   canShare: boolean;
@@ -94,7 +100,7 @@ export interface IFile {
   updatedBy: CreatedType;
   version: number;
   versionGroup: number;
-  viewAccessability: ViewAccessabilityType;
+  viewAccessibility: ViewAccessabilityType;
   viewUrl: string;
   webUrl: string;
 }

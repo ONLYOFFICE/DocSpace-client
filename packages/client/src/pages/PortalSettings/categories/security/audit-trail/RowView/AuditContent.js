@@ -1,8 +1,11 @@
-import RowContent from "@docspace/components/row-content";
 import React from "react";
-import Text from "@docspace/components/text";
-import moment from "moment";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import Text from "@docspace/components/text";
+import RowContent from "@docspace/components/row-content";
+import { convertTime } from "@docspace/common/utils/convertTime";
+
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledRowContent = styled(RowContent)`
@@ -10,17 +13,13 @@ const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
-    width: min-content;
   }
 
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;
 
-export const AuditContent = ({ sectionWidth, item, isSettingNotPaid }) => {
-  const DATE_FORMAT = "YYYY-MM-DD LT";
-  const to = moment(item.date).local();
-
-  const dateStr = to.format(DATE_FORMAT);
+const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
+  const dateStr = convertTime(item.date, locale);
 
   return (
     <StyledRowContent
@@ -55,3 +54,13 @@ export const AuditContent = ({ sectionWidth, item, isSettingNotPaid }) => {
     </StyledRowContent>
   );
 };
+
+export default inject(({ auth }) => {
+  const { culture } = auth.settingsStore;
+  const { user } = auth.userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  return {
+    locale,
+  };
+})(observer(AuditContent));

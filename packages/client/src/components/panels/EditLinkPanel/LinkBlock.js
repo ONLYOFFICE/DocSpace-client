@@ -7,6 +7,7 @@ import FieldContainer from "@docspace/components/field-container";
 const LinkBlock = (props) => {
   const {
     t,
+    isEdit,
     isLoading,
     shareLink,
     linkNameValue,
@@ -19,14 +20,9 @@ const LinkBlock = (props) => {
     setLinkNameValue(e.target.value);
   };
 
-  const onShortenClick = () => {
-    alert("api in progress");
-    // setLinkValue
-  };
-
   return (
     <div className="edit-link_link-block">
-      <Text className="edit-link-text" fontSize="13px" fontWeight={600}>
+      <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
         {t("LinkName")}
       </Text>
       <Text className="edit-link_required-icon" color="#F24724">
@@ -37,35 +33,26 @@ const LinkBlock = (props) => {
         scale
         size="base"
         withBorder
-        isAutoFocussed={false}
+        isAutoFocussed
         className="edit-link_name-input"
         value={linkNameValue}
         onChange={onChangeLinkName}
-        placeholder={t("ExternalLink")}
+        placeholder={t("LinkName")}
         isDisabled={isLoading}
       />
 
-      <TextInput
-        scale
-        size="base"
-        withBorder
-        isDisabled
-        isReadOnly
-        className="edit-link_link-input"
-        value={linkValue}
-        placeholder={t("ExternalLink")}
-      />
-
-      <Link
-        fontSize="13px"
-        fontWeight={600}
-        isHovered
-        type="action"
-        isDisabled={isLoading}
-        onClick={onShortenClick}
-      >
-        {t("Shorten")}
-      </Link>
+      {isEdit && (
+        <TextInput
+          scale
+          size="base"
+          withBorder
+          isDisabled
+          isReadOnly
+          className="edit-link_link-input"
+          value={linkValue}
+          placeholder={t("LinkName")}
+        />
+      )}
     </div>
   );
 };

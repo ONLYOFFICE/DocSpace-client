@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "ユーザ名またはパスワードが無効である。",
   "LoginWithAccountNotFound": "関連するサードパーティのアカウントを見つけることができません。あなたが最初のプロファイルの編集ページであなたのソーシャルネットワーキングのアカウントを接続する必要があります。",
   "LoginWithBruteForce": "承認は一時的にブロックされました。 ",
+  "LoginWithBruteForceCaptcha": "私はロボットではありません",
   "RecaptchaInvalid": "Recaptchaが間違っているようです",
   "SsoAttributesNotFound": "認証に失敗しました（属性値アサーションが見つかりません）",
   "SsoAuthFailed": "認証に失敗しました",

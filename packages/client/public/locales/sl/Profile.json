@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Povežite svoja socialna omrežja",
   "DarkTheme": "Temna tema",
   "DescriptionForSecurity": "Za večjo varnost morate spremeniti geslo.",
+  "DesktopTheme": "Sinhronizacija z nastavitvami namiznega urejevalnika",
+  "DesktopThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami glede na trenutno temo namiznih urejevalnikov.",
   "EditPhoto": "Uredi fotografije",
   "EmailNotVerified": "E-pošta ni preverjena",
+  "ErrorAccountAlreadyUse": "Povezani račun že uporablja drug uporabnik",
+  "FileManagement": "Upravljanje datotek",
   "InterfaceTheme": "Tema vmesnika",
   "LightTheme": "Svetla tema",
   "LogoutActiveConnection": "Odjava iz aktivne povezave",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Aktivna povezava je bila odjavljena: {{platform}}, {{browser}}",
   "SystemTheme": "Uporabi sistemsko temo",
   "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
-  "TfaLoginSettings": "Nastavitve za prijavo",
   "TwoFactorDescription": "Administrator je za vse uporabnike omogočil dvofaktorsko avtentikacijo preko aplikacije za ustvarjanje kode."
 }

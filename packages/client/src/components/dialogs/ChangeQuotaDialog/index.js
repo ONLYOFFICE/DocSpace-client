@@ -37,6 +37,7 @@ const ChangeQuotaDialog = (props) => {
           isLoading={isLoading}
           isError={isError}
           initialSize={initialSize}
+          isAutoFocussed
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>

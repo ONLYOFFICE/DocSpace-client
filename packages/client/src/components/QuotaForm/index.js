@@ -34,6 +34,7 @@ const QuotaForm = ({
   label,
   checkboxLabel,
   description,
+  isAutoFocussed = false,
 }) => {
   const initPower =
     initialSize && initialSize !== -1 ? getPowerFromBytes(initialSize, 4) : 0;
@@ -148,7 +149,7 @@ const QuotaForm = ({
       <div className="quota-container">
         <TextInput
           className="quota_limit"
-          isAutoFocussed
+          isAutoFocussed={isAutoFocussed}
           value={size}
           onChange={onChangeTextInput}
           isDisabled={isDisable}

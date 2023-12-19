@@ -58,6 +58,7 @@ import { HelpButton } from "./help-button";
 import { RadioButton } from "./radio-button";
 import { RadioButtonGroup } from "./radio-button-group";
 import { InfiniteLoaderComponent } from "./infinite-loader";
+import { RowContent } from "./row-content";
 
 export type {
   TFallbackAxisSideDirection,
@@ -67,6 +68,7 @@ export type {
 };
 
 export {
+  RowContent,
   InfiniteLoaderComponent,
   RadioButtonGroup,
   RadioButton,

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import { tablet, size } from "../utils/device";
+import { Base } from "../../themes";
+import { tablet, size } from "../../utils";
 
 const truncateCss = css`
   white-space: nowrap;
@@ -39,28 +39,27 @@ const mainContainerTabletStyle = css`
   max-width: ${(props) => props.theme.rowContent.maxWidth};
 `;
 
-const sideInfoTabletStyle = css`
+const sideInfoTabletStyle = css<{ color?: string }>`
   display: block;
   min-width: ${(props) => props.theme.rowContent.sideInfo.minWidth};
   margin: ${(props) => props.theme.rowContent.sideInfo.margin};
   ${commonCss};
-  // @ts-expect-error TS(2339): Property 'color' does not exist on type 'ThemedSty... Remove this comment to see the full error message
   color: ${(props) => props.color && props.color};
   ${truncateCss};
 `;
 
-const StyledRowContent = styled.div`
+const StyledRowContent = styled.div<{
+  disableSideInfo?: boolean;
+  widthProp?: number;
+  isMobile: boolean;
+}>`
   width: 100%;
   display: inline-flex;
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'disableSideInfo' does not exist on type ... Remove this comment to see the full error message
     (!props.disableSideInfo &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp <= size.desktop) ||
-    // @ts-expect-error TS(2339): Property 'isMobile' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isMobile
       ? `${containerTabletStyle}`
       : `
@@ -71,7 +70,12 @@ const StyledRowContent = styled.div`
 `;
 StyledRowContent.defaultProps = { theme: Base };
 
-const MainContainerWrapper = styled.div`
+const MainContainerWrapper = styled.div<{
+  disableSideInfo?: boolean;
+  widthProp?: number;
+  isMobile: boolean;
+  mainContainerWidth?: string;
+}>`
   ${commonCss};
 
   display: flex;
@@ -89,18 +93,13 @@ const MainContainerWrapper = styled.div`
       `}
 
   width: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'mainContainerWidth' does not exist on ty... Remove this comment to see the full error message
     props.mainContainerWidth ? props.mainContainerWidth : "140px"};
   min-width: 140px;
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'disableSideInfo' does not exist on type ... Remove this comment to see the full error message
     (!props.disableSideInfo &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp <= size.desktop) ||
-    // @ts-expect-error TS(2339): Property 'isMobile' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isMobile
       ? css`
           ${mainWrapperTabletStyle}
@@ -114,7 +113,11 @@ const MainContainerWrapper = styled.div`
 
 MainContainerWrapper.defaultProps = { theme: Base };
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<{
+  widthProp?: number;
+  isMobile: boolean;
+  mainContainerWidth?: string;
+}>`
   height: 20px;
 
   max-width: 100%;
@@ -125,7 +128,6 @@ const MainContainer = styled.div`
       : `margin-right: 8px;`}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
     (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${mainContainerTabletStyle}`
       : `
@@ -143,11 +145,17 @@ const MainIcons = styled.div`
 `;
 MainIcons.defaultProps = { theme: Base };
 
-const SideContainerWrapper = styled.div`
+const SideContainerWrapper = styled.div<{
+  disableSideInfo?: boolean;
+  widthProp?: number;
+  isMobile: boolean;
+  mainContainerWidth?: string;
+  containerWidth?: string;
+  containerMinWidth?: string;
+}>`
   ${commonCss};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
     (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${truncateCss}`
       : `
@@ -163,21 +171,15 @@ const SideContainerWrapper = styled.div`
     vertical-align: middle;
   }
 
-  // @ts-expect-error TS(2339): Property 'containerWidth' does not exist on type '... Remove this comment to see the full error message
   width: ${(props) => (props.containerWidth ? props.containerWidth : "40px")};
   min-width: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'containerMinWidth' does not exist on typ... Remove this comment to see the full error message
     props.containerMinWidth ? props.containerMinWidth : "40px"};
   color: ${(props) => props.color && props.color};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'disableSideInfo' does not exist on type ... Remove this comment to see the full error message
     (!props.disableSideInfo &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp &&
-      // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
       props.widthProp <= size.desktop) ||
-    // @ts-expect-error TS(2339): Property 'isMobile' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isMobile
       ? `display: none;`
       : `
@@ -188,11 +190,14 @@ const SideContainerWrapper = styled.div`
 `;
 SideContainerWrapper.defaultProps = { theme: Base };
 
-const TabletSideInfo = styled.div`
+const TabletSideInfo = styled.div<{
+  color?: string;
+  widthProp?: number;
+  isMobile?: boolean;
+}>`
   display: none;
   ${(props) => (props.color ? `color: ${props.color};` : null)}
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'widthProp' does not exist on type 'Theme... Remove this comment to see the full error message
     (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${sideInfoTabletStyle}`
       : `

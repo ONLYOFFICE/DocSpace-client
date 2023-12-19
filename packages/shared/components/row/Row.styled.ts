@@ -1,21 +1,29 @@
 import styled, { css } from "styled-components";
-
-import { desktop, mobile, tablet } from "../utils/device";
-import Base from "../themes/base";
 import { isMobile } from "react-device-detect";
-import { getCorrectFourValuesStyle } from "../utils/rtlUtils";
 
-const StyledRow = styled.div`
+import {
+  desktop,
+  mobile,
+  tablet,
+  getCorrectFourValuesStyle,
+} from "../../utils";
+import { Base } from "../../themes";
+
+import { TMode } from "./Row.types";
+
+const StyledRow = styled.div<{
+  withoutBorder?: boolean;
+  checked?: boolean;
+  mode: TMode;
+}>`
   cursor: default;
   position: relative;
   min-height: ${(props) => props.theme.row.minHeight};
   width: ${(props) => props.theme.row.width};
   border-bottom: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withoutBorder' does not exist on type 'T... Remove this comment to see the full error message
     props.withoutBorder ? "none" : "2px solid transparent"};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withoutBorder' does not exist on type 'T... Remove this comment to see the full error message
     !props.withoutBorder &&
     css`
       ::after {
@@ -24,7 +32,7 @@ const StyledRow = styled.div`
         bottom: 0px;
         width: 100%;
         height: 1px;
-        background-color: ${(props) => props.theme.row.borderBottom};
+        background-color: ${props.theme.row.borderBottom};
         content: "";
       }
     `}
@@ -50,16 +58,14 @@ const StyledRow = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'mode' does not exist on type 'ThemedStyl... Remove this comment to see the full error message
-    props.mode == "modern" &&
+    props.mode === "modern" &&
     css`
       .checkbox {
-        // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'ThemePr... Remove this comment to see the full error message
-        display: ${(props) => (props.checked ? "flex" : "none")};
+        display: ${props.checked ? "flex" : "none"};
 
         padding: ${getCorrectFourValuesStyle(
           "10px 1px 10px 8px",
-          props.theme.interfaceDirection
+          props.theme.interfaceDirection,
         )};
         ${props.theme.interfaceDirection === "rtl"
           ? `margin-right: -4px;`
@@ -67,8 +73,7 @@ const StyledRow = styled.div`
       }
 
       .styled-element {
-        // @ts-expect-error TS(2339): Property 'checked' does not exist on type 'ThemePr... Remove this comment to see the full error message
-        display: ${(props) => (props.checked ? "none" : "flex")};
+        display: ${props.checked ? "none" : "flex"};
       }
     `}
 `;
@@ -89,7 +94,7 @@ const StyledContent = styled.div`
 `;
 StyledContent.defaultProps = { theme: Base };
 
-const StyledCheckbox = styled.div`
+const StyledCheckbox = styled.div<{ mode: TMode }>`
   display: flex;
   flex: 0 0 16px;
   height: 56px;
@@ -100,8 +105,7 @@ const StyledCheckbox = styled.div`
   min-width: 41px;
   width: 41px;
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'mode' does not exist on type 'ThemedStyl... Remove this comment to see the full error message
-    props.mode == "modern" &&
+    props.mode === "modern" &&
     !isMobile &&
     css`
       :hover {
@@ -159,9 +163,8 @@ const StyledContentElement = styled.div`
   }
 `;
 
-const StyledOptionButton = styled.div`
+const StyledOptionButton = styled.div<{ spacerWidth?: string }>`
   display: flex;
-  // @ts-expect-error TS(2339): Property 'spacerWidth' does not exist on type 'The... Remove this comment to see the full error message
   width: ${(props) => props.spacerWidth && props.spacerWidth};
   justify-content: flex-end;
   align-items: center;
@@ -171,7 +174,7 @@ const StyledOptionButton = styled.div`
     padding: ${({ theme }) =>
       getCorrectFourValuesStyle(
         theme.row.optionButton.padding,
-        theme.interfaceDirection
+        theme.interfaceDirection,
       )};
 
     ${({ theme }) =>

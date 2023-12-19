@@ -1,22 +1,39 @@
 import React from "react";
-import RowContainer from ".";
-import Row from "../row";
-import RowContent from "../row-content";
-import Avatar from "../avatar";
-import Link from "../link";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/send.clock.r... Remove this comment to see the full error message
-import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/catalog.spam... Remove this comment to see the full error message
-import CatalogSpamReactSvg from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import { Meta, StoryObj } from "@storybook/react";
+import styled from "styled-components";
 
-export default {
+import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
+import CatalogSpamReactSvg from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import { IconSizeType, commonIconsStyles } from "../../utils";
+
+import { Row } from "../row";
+import { RowContent } from "../row-content";
+import { Avatar, AvatarRole, AvatarSize } from "../avatar";
+import { Link, LinkType } from "../link";
+
+import { RowContainer } from "./RowContainer";
+
+import { RowContainerProps } from "./RowContainer.types";
+
+const SendClockIcon = styled(SendClockReactSvg)`
+  ${commonIconsStyles}
+`;
+
+const CatalogSpamIcon = styled(CatalogSpamReactSvg)`
+  ${commonIconsStyles}
+`;
+
+const meta = {
   title: "Components/RowContainer",
   component: RowContainer,
-  subcomponents: { Row, RowContent },
+  // subcomponents: { Row, RowContent },
   parameters: {
     docs: { description: { component: "Container for Row component" } },
   },
-};
+} satisfies Meta<typeof RowContainer>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
 
 const fakeNames = [
   "Ella Green",
@@ -41,34 +58,36 @@ const fakeNames = [
   "Albert Clark",
 ];
 
-const getRndString = (n: any) => Math.random()
-  .toString(36)
-  .substring(2, n + 2);
+const getRndString = (n: number) =>
+  Math.random()
+    .toString(36)
+    .substring(2, n + 2);
 
-const getRndNumber = (a: any, b: any) => Math.floor(Math.random() * (b - a)) + a;
+const getRndNumber = (a: number, b: number) =>
+  Math.floor(Math.random() * (b - a)) + a;
 
 const getRndBool = () => Math.random() >= 0.5;
 
-const fillFakeData = (n: any) => {
+const fillFakeData = (n: number) => {
   const data = [];
 
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     data.push({
       id: getRndString(6),
       userName: fakeNames[i],
       avatar: "",
       role: getRndBool()
-        ? "user"
+        ? AvatarRole.user
         : getRndBool()
-        ? "guest"
-        : getRndBool()
-        ? "admin"
-        : "owner",
+          ? AvatarRole.guest
+          : getRndBool()
+            ? AvatarRole.admin
+            : AvatarRole.owner,
       status: getRndBool() ? "normal" : getRndBool() ? "disabled" : "pending",
       isHead: getRndBool(),
       department: getRndBool() ? "Demo department" : "",
-      mobilePhone: "+" + getRndNumber(10000000000, 99999999999),
-      email: getRndString(12) + "@yahoo.com",
+      mobilePhone: `+${getRndNumber(10000000000, 99999999999)}`,
+      email: `${getRndString(12)}@yahoo.com`,
       contextOptions: [
         { key: 1, label: "Profile" },
         { key: 2, label: "Room list" },
@@ -83,7 +102,7 @@ const fillFakeData = (n: any) => {
 
 const fakeData = fillFakeData(20);
 
-const Template = (args: any) => {
+const Template = (args: RowContainerProps) => {
   return (
     <RowContainer
       {...args}
@@ -93,7 +112,7 @@ const Template = (args: any) => {
       {fakeData.map((user) => {
         const element = (
           <Avatar
-            size="min"
+            size={AvatarSize.min}
             role={user.role}
             userName={user.userName}
             source={user.avatar}
@@ -103,38 +122,37 @@ const Template = (args: any) => {
         const sideInfoColor = user.status === "pending" ? "#D0D5DA" : "#A3A9AE";
 
         return (
-          // @ts-expect-error TS(2322): Type '{ children: Element; key: string; status: st... Remove this comment to see the full error message
           <Row
             key={user.id}
-            status={user.status}
+            // status={user.status}
             checked={false}
             data={user}
             element={element}
             contextOptions={user.contextOptions}
+            onRowClick={() => {}}
           >
             <RowContent>
               <Link
-                type="page"
+                type={LinkType.page}
                 title={user.userName}
-                isBold={true}
+                isBold
                 fontSize="15px"
-                color={nameColor ? nameColor : ""}
+                color={nameColor || ""}
               >
                 {user.userName}
               </Link>
               <>
                 {user.status === "pending" && (
-                  <SendClockReactSvg size="small" color="#3B72A7" />
+                  <SendClockIcon size={IconSizeType.small} color="#3B72A7" />
                 )}
                 {user.status === "disabled" && (
-                  <CatalogSpamReactSvg size="small" color="#3B72A7" />
+                  <CatalogSpamIcon size={IconSizeType.small} color="#3B72A7" />
                 )}
               </>
               {user.isHead ? (
                 <Link
-                  // @ts-expect-error TS(2322): Type '{ children: string; containerWidth: string; ... Remove this comment to see the full error message
-                  containerWidth="120px"
-                  type="page"
+                  // containerWidth="120px"
+                  type={LinkType.page}
                   title="Head of department"
                   fontSize="12px"
                   color={sideInfoColor}
@@ -142,12 +160,11 @@ const Template = (args: any) => {
                   Head of department
                 </Link>
               ) : (
-                <div></div>
+                <div />
               )}
               <Link
-                // @ts-expect-error TS(2322): Type '{ children: string; containerWidth: string; ... Remove this comment to see the full error message
-                containerWidth="160px"
-                type="action"
+                // containerWidth="160px"
+                type={LinkType.action}
                 title={user.department}
                 fontSize="12px"
                 color={sideInfoColor}
@@ -155,7 +172,7 @@ const Template = (args: any) => {
                 {user.department}
               </Link>
               <Link
-                type="page"
+                type={LinkType.page}
                 title={user.mobilePhone}
                 fontSize="12px"
                 color={sideInfoColor}
@@ -163,9 +180,8 @@ const Template = (args: any) => {
                 {user.mobilePhone}
               </Link>
               <Link
-                // @ts-expect-error TS(2322): Type '{ children: string; containerWidth: string; ... Remove this comment to see the full error message
-                containerWidth="180px"
-                type="page"
+                // containerWidth="180px"
+                type={LinkType.page}
                 title={user.email}
                 fontSize="12px"
                 color={sideInfoColor}
@@ -180,8 +196,16 @@ const Template = (args: any) => {
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-Default.args = {
-  useReactWindow: false,
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    useReactWindow: true,
+    itemCount: 20,
+    itemHeight: 50,
+    children: fakeData.map(() => <div key={getRndString(10)}>13</div>),
+    onScroll: () => {},
+    filesLength: 20,
+    hasMoreFiles: false,
+    fetchMoreFiles: async () => {},
+  },
 };

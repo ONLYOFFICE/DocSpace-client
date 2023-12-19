@@ -9,11 +9,20 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 import { Wrapper } from "../StyledStepper";
 
 const FourthStep = (props) => {
-  const { t, incrementStep, decrementStep, checkedUsers, users, searchValue, setSearchValue } =
-    props;
+  const {
+    t,
+    incrementStep,
+    decrementStep,
+    checkedUsers,
+    users,
+    searchValue,
+    setSearchValue,
+  } = props;
 
   const [boundaries, setBoundaries] = useState([0, 25]);
-  const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
+  const [dataPortion, setDataPortion] = useState(
+    users.result.slice(...boundaries)
+  );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
@@ -31,7 +40,7 @@ const FourthStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
   useEffect(() => {
@@ -63,7 +72,7 @@ const FourthStep = (props) => {
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.result.length > 25 && (
+      {users.result.length > 25 && filteredAccounts.length > 0 && (
         <AccountsPaging
           t={t}
           numberOfItems={users.result.length}
@@ -88,7 +97,8 @@ const FourthStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, users, searchValue, setSearchValue } = importAccountsStore;
+  const { checkedUsers, users, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
     checkedUsers,

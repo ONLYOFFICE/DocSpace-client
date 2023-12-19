@@ -17,7 +17,9 @@ const SelectUsersTypeStep = ({
   setSearchValue,
 }) => {
   const [boundaries, setBoundaries] = useState([0, 25]);
-  const [dataPortion, setDataPortion] = useState(users.result.slice(...boundaries));
+  const [dataPortion, setDataPortion] = useState(
+    users.result.slice(...boundaries)
+  );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setBoundaries([leftBoundary, rightBoundary]);
@@ -35,7 +37,7 @@ const SelectUsersTypeStep = ({
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
   useEffect(() => {
@@ -67,7 +69,7 @@ const SelectUsersTypeStep = ({
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {users.result.length > 25 && (
+      {users.result.length > 25 && filteredAccounts.length > 0 && (
         <AccountsPaging
           t={t}
           numberOfItems={users.result.length}
@@ -92,7 +94,8 @@ const SelectUsersTypeStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, checkedUsers, searchValue, setSearchValue } = importAccountsStore;
+  const { users, checkedUsers, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
     users,

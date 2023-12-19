@@ -79,7 +79,7 @@ const SelectUsersStep = ({
 
       <AccountsTable t={t} accountsData={filteredAccounts} />
 
-      {withEmailUsers.length > 25 && (
+      {withEmailUsers.length > 25 && filteredAccounts.length > 0 && (
         <AccountsPaging
           t={t}
           numberOfItems={withEmailUsers.length}

@@ -43,12 +43,14 @@ const SecondStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
   return (
     <Wrapper>
-      {withEmailUsers.length > 0 && <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />}
+      {withEmailUsers.length > 0 && (
+        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} />
+      )}
 
       {withEmailUsers.length > 0 ? (
         <>
@@ -81,7 +83,7 @@ const SecondStep = (props) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > 25 && (
+          {withEmailUsers.length > 25 && filteredAccounts.length > 0 && (
             <AccountsPaging
               t={t}
               numberOfItems={withEmailUsers.length}
@@ -112,7 +114,8 @@ const SecondStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, withEmailUsers, searchValue, setSearchValue } = importAccountsStore;
+  const { users, withEmailUsers, searchValue, setSearchValue } =
+    importAccountsStore;
 
   return {
     users,

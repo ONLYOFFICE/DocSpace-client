@@ -39,5 +39,5 @@ declare module "resize-image" {
   }
 
   const value: ResizeImage;
-  return value;
+  export default value;
 }

@@ -134,35 +134,53 @@ class TableHeader extends React.Component {
 
   addNewColumns = (gridTemplateColumns, activeColumnIndex, containerWidth) => {
     const { columns, columnStorageName } = this.props;
-    const filterColumns = columns.filter((x) => !x.defaultSize);
-
     const clearSize = gridTemplateColumns.map((c) => this.getSubstring(c));
     const maxSize = Math.max.apply(Math, clearSize);
 
     const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+    const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
-    const defaultColSize = defaultSize
+    const addedColumn = 1;
+    const enableColumnsLength =
+      columns.filter((column) => !column.defaultSize && column.enable).length -
+      addedColumn;
+
+    const allColumnsLength = columns.filter(
+      (column) => !column.defaultSize
+    ).length;
+
+    const defaultSizeColumn = columns.find(
+      (column) => column.defaultSize
+    )?.defaultSize;
+
+    const widthColumns =
+      containerWidth -
+      settingsSize -
+      (defaultSizeColumn ? defaultSizeColumn : 0);
+
+    const newColumnSize = defaultSize
       ? defaultSize
-      : containerWidth / filterColumns.length;
-    const indexOfMaxSize = clearSize.findIndex((s) => s === maxSize);
+      : widthColumns / allColumnsLength;
 
-    const newSize = maxSize - defaultColSize;
+    const newSizeMaxColumn = maxSize - newColumnSize;
 
     const AddColumn = () => {
-      gridTemplateColumns[indexOfMaxSize] = newSize + "px";
-      gridTemplateColumns[activeColumnIndex] = defaultColSize + "px";
+      gridTemplateColumns[indexOfMaxSize] = newSizeMaxColumn + "px";
+      gridTemplateColumns[activeColumnIndex] = newColumnSize + "px";
       return false;
     };
 
     const ResetColumnsSize = () => {
       localStorage.removeItem(columnStorageName);
-      this.resetColumns();
+      this.resetColumns(true);
       return true;
     };
 
     if (
-      (indexOfMaxSize === 0 && newSize < minSizeFirstColumn) ||
-      newSize <= defaultColSize
+      (indexOfMaxSize === 0 && newSizeMaxColumn < minSizeFirstColumn) ||
+      (indexOfMaxSize !== 0 && newSizeMaxColumn < defaultMinColumnSize) ||
+      newColumnSize < defaultMinColumnSize ||
+      enableColumnsLength === 1
     )
       return ResetColumnsSize();
     else return AddColumn();

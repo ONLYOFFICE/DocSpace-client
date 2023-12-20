@@ -14,33 +14,18 @@ import { useIsMobileView } from "../../../utils/useIsMobileView";
 
 const StyledWrapper = styled.div`
   .button-wrapper {
-    margin-top: 24px;
-  }
+    padding-block: 16px;
+    position: sticky;
+    bottom: 0;
+    margin-top: 32px;
+    background-color: ${({ theme }) => theme.backgroundColor};
 
-  @media ${mobile} {
-    .button-wrapper {
-      box-sizing: border-box;
-      position: absolute;
-      bottom: 0;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-            `
-          : css`
-              left: 0;
-            `}
-      width: 100%;
-      padding: 16px 16px 16px 24px;
+    @media ${mobile} {
+      position: fixed;
+      padding-inline: 16px;
+      inset-inline: 0;
     }
   }
-
-  @media ${mobile}{
-    .button-wrapper {
-      padding: 16px;
-    }
-  }
-}
 `;
 
 const ProviderMetadata = (props) => {

@@ -197,8 +197,7 @@ const WelcomePageSettings = (props) => {
       .finally(() => {
         getGreetingSettingsIsDefault();
         setState((val) => ({ ...val, isLoadingGreetingSave: false }));
-      }
-      );
+      });
 
     setState((val) => ({ ...val, showReminder: false }));
 
@@ -225,8 +224,7 @@ const WelcomePageSettings = (props) => {
       .finally(() => {
         getGreetingSettingsIsDefault();
         setState((val) => ({ ...val, isLoadingGreetingRestore: false }));
-      }
-      );
+      });
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {

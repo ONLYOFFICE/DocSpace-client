@@ -118,7 +118,11 @@ const QuotasBar = ({
             </Trans>
           ),
         };
-
+      case QuotaBarTypes.PersonalUserQuota:
+        return {
+          header: t("StorageQuotaExceeded"),
+          description: t("PersonalUserQuotaDescription"),
+        };
       default:
         return null;
     }

@@ -45,6 +45,7 @@ const Bar = (props) => {
     currentColorScheme,
 
     setMainBarVisible,
+    personalQuotaLimitReached,
   } = props;
 
   const [barVisible, setBarVisible] = useState({
@@ -54,6 +55,7 @@ const Bar = (props) => {
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
+    personalUserQuota: false,
   });
 
   const [htmlLink, setHtmlLink] = useState();
@@ -97,6 +99,9 @@ const Bar = (props) => {
       if (!closed.includes(QuotaBarTypes.ConfirmEmail)) {
         setBarVisible((value) => ({ ...value, confirmEmail: true }));
       }
+      if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
+        setBarVisible((value) => ({ ...value, personalUserQuota: true }));
+      }
     } else {
       setBarVisible({
         roomQuota: isAdmin,
@@ -105,6 +110,7 @@ const Bar = (props) => {
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
+        personalUserQuota: true,
       });
     }
 
@@ -178,6 +184,9 @@ const Bar = (props) => {
       case QuotaBarTypes.RoomAndStorageQuota:
         setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
         break;
+      case QuotaBarTypes.PersonalUserQuota:
+        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
+        break;
     }
 
     setMaintenanceExist(false);
@@ -241,6 +250,14 @@ const Bar = (props) => {
         currentValue: addedManagersCount,
       };
     }
+
+    if (personalQuotaLimitReached && barVisible.personalUserQuota) {
+      return {
+        type: QuotaBarTypes.PersonalUserQuota,
+        //maxValue: maxCountManagersByQuota,
+        //  currentValue: addedManagersCount,
+      };
+    }
     return null;
   };
 
@@ -295,7 +312,12 @@ const Bar = (props) => {
 };
 
 export default inject(({ auth, profileActionsStore }) => {
-  const { user, withActivationBar, sendActivationLink } = auth.userStore;
+  const {
+    user,
+    withActivationBar,
+    sendActivationLink,
+    personalQuotaLimitReached,
+  } = auth.userStore;
 
   const { onPaymentsClick } = profileActionsStore;
 
@@ -339,5 +361,7 @@ export default inject(({ auth, profileActionsStore }) => {
 
     currentColorScheme,
     setMainBarVisible,
+
+    personalQuotaLimitReached,
   };
 })(withTranslation(["Profile", "Common"])(observer(Bar)));

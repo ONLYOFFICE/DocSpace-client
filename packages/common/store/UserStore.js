@@ -130,6 +130,11 @@ class UserStore {
   get isAuthenticated() {
     return !!this.user;
   }
+
+  get personalQuotaLimitReached() {
+    if (this.user.quotaLimit === -1) return false;
+    return this.user.quotaLimit <= this.user.usedSpace;
+  }
 }
 
 export default UserStore;

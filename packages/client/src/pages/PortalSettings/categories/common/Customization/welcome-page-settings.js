@@ -86,7 +86,8 @@ const WelcomePageSettings = (props) => {
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);

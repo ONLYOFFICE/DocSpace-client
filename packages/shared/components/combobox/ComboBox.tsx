@@ -10,7 +10,7 @@ import { ComboboxProps, TOption } from "./Combobox.types";
 import { ComboBoxSize } from "./Combobox.enums";
 
 const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
-  const needUpdate = !equal(prevProps, nextProps);
+  const needUpdate = equal(prevProps, nextProps);
 
   return needUpdate;
 };
@@ -62,7 +62,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
       disableItemClick ||
       isLoading ||
       (disableIconClick && e && target.closest(".optionalBlock")) ||
-      target.classList.contains("nav-thumb-vertical")
+      target.classList.contains("nav-thumb-vertical") ||
+      target.classList.contains("backdrop-active")
     )
       return;
 
@@ -74,13 +75,13 @@ const ComboBoxPure = (props: ComboboxProps) => {
   };
 
   const optionClick = (option: TOption) => {
-    const { setIsOpenItemAccess, onSelect } = props;
+    const { onSelect } = props;
 
-    setSelectedOption({ ...selectedOption });
-    setIsOpen((v) => {
-      setIsOpenItemAccess?.(!v);
-      return !v;
-    });
+    setSelectedOption({ ...option });
+    // setIsOpen((v) => {
+    //   setIsOpenItemAccess?.(!v);
+    //   return !v;
+    // });
 
     onSelect?.(option);
   };

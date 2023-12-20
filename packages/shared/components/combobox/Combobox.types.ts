@@ -7,7 +7,7 @@ export type TCombobox = null | "badge";
 export type TOption = {
   key: string | number;
   icon?: string;
-  label?: string;
+  label: string;
   color?: string;
   backgroundColor?: string;
   border?: string;

@@ -50,8 +50,8 @@ const StyledScrollbar = styled(ClearScrollbar)`
       return props.heightScale
         ? "65vh"
         : props.heightTextArea
-        ? props.heightTextArea + "px"
-        : "89px";
+          ? `${props.heightTextArea}px`
+          : "89px";
     }};
   }
   background-color: ${(props) =>

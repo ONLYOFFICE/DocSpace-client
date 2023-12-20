@@ -61,15 +61,31 @@ import { InfiniteLoaderComponent } from "./infinite-loader";
 import { RowContent } from "./row-content";
 import { Row } from "./row";
 import { RowContainer } from "./row-container";
+import {
+  TableGroupMenu,
+  TableBody,
+  TableContainer,
+  TableHeader,
+  TableRow,
+  TTableColumn,
+  TGroupMenuItem,
+} from "./table";
 
 export type {
   TFallbackAxisSideDirection,
   TTooltipPlace,
   TGetTooltipContent,
   TViewSelectorOption,
+  TTableColumn,
+  TGroupMenuItem,
 };
 
 export {
+  TableGroupMenu,
+  TableBody,
+  TableContainer,
+  TableHeader,
+  TableRow,
   RowContainer,
   Row,
   RowContent,

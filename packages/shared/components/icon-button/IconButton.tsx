@@ -133,7 +133,7 @@ const IconButton = ({
       {iconNode || (
         <ReactSVG
           className="icon-button_svg not-selectable"
-          src={currentIconName}
+          src={currentIconName || ""}
         />
       )}
     </StyledOuter>

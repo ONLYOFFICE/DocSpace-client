@@ -127,6 +127,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     opened,
     setIsOpenItemAccess,
     dropDownId,
+    title,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -219,6 +220,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       disableMobileView={disableMobileView}
       withoutPadding={withoutPadding}
       data-testid="combobox"
+      title={title}
       // {...rest}
     >
       <ComboButton

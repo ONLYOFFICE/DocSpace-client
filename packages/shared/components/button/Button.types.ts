@@ -9,7 +9,7 @@ export interface ButtonProps {
   primary?: boolean;
   /** Size of the button.
    The normal size equals 36px and 40px in height on the Desktop and Touchcreen devices. */
-  size: ButtonSize;
+  size?: ButtonSize;
   /** Scales the width of the button to 100% */
   scale?: boolean;
   /** Icon node element */
@@ -35,7 +35,7 @@ export interface ButtonProps {
   /** Sets the minimal button width */
   minWidth?: string;
   /** Sets the action initiated upon clicking the button */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export interface ButtonThemeProps extends ButtonProps {

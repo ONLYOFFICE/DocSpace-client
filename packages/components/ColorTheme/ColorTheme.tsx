@@ -1,13 +1,10 @@
 import React, { forwardRef, useContext } from "react";
 import { ThemeContext } from "styled-components";
 import {
-  ButtonTheme,
-  MainButtonTheme,
   CatalogItemTheme,
   CalendarTheme,
   DateItemTheme,
   RoundButtonTheme,
-  BadgeTheme,
   SubmenuTextTheme,
   SubmenuItemLabelTheme,
   TabsContainerTheme,
@@ -17,10 +14,8 @@ import {
   FilterBlockItemTagTheme,
   IconWrapperTheme,
   VersionBadgeTheme,
-  TextareaTheme,
   InputBlockTheme,
   TextInputTheme,
-  ComboButtonTheme,
   LinkForgotPasswordTheme,
   LoadingButtonTheme,
   InfoPanelToggleTheme,
@@ -35,137 +30,10 @@ import {
 import { ThemeType } from "./constants";
 
 const ColorTheme = forwardRef(
-  // @ts-expect-error TS(2345): Argument of type '({ isVersion, themeId, hoverColo... Remove this comment to see the full error message
   ({ isVersion, themeId, hoverColor, ...props }, ref) => {
     const { currentColorScheme } = useContext(ThemeContext);
 
     switch (themeId) {
-      case ThemeType.Button: {
-        return (
-          <ButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.MainButton: {
-        return (
-          <MainButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.CatalogItem: {
-        return (
-          <CatalogItemTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.Badge: {
-        return (
-          <BadgeTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.SubmenuText: {
-        return (
-          <SubmenuTextTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.SubmenuItemLabel: {
-        return (
-          <SubmenuItemLabelTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.TabsContainer: {
-        return (
-          <TabsContainerTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IconButton: {
-        return (
-          <IconButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IconButtonPin: {
-        return (
-          <IconButtonPinTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IconButtonMute: {
-        return (
-          <IconButtonMuteTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IndicatorFilterButton: {
-        return (
-          <IndicatorFilterButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.FilterBlockItemTag: {
-        return (
-          <FilterBlockItemTagTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IconWrapper: {
-        return (
-          <IconWrapperTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
       case ThemeType.VersionBadge: {
         return (
           <VersionBadgeTheme
@@ -176,73 +44,7 @@ const ColorTheme = forwardRef(
           />
         );
       }
-      case ThemeType.Textarea: {
-        return (
-          <TextareaTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.InputBlock: {
-        return (
-          <InputBlockTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.TextInput: {
-        return (
-          <TextInputTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.Calendar: {
-        return (
-          <CalendarTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.RoundButton: {
-        return (
-          <RoundButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.DateItem: {
-        return (
-          <DateItemTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.ComboButton: {
-        return (
-          <ComboButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
+
       case ThemeType.LinkForgotPassword: {
         return (
           <LinkForgotPasswordTheme
@@ -263,58 +65,10 @@ const ColorTheme = forwardRef(
           />
         );
       }
-      case ThemeType.InfoPanelToggle: {
-        return (
-          <InfoPanelToggleTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.Link: {
-        return (
-          <LinkTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.Slider: {
-        return (
-          <SliderTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.IndicatorLoader: {
-        return (
-          <IndicatorLoaderTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
+
       case ThemeType.Progress: {
         return (
           <ProgressTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            // @ts-expect-error TS(2769): No overload matches this call.
-            ref={ref}
-          />
-        );
-      }
-      case ThemeType.MobileProgressBar: {
-        return (
-          <MobileProgressBarTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             // @ts-expect-error TS(2769): No overload matches this call.

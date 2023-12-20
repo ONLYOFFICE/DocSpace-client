@@ -3,13 +3,11 @@ import { render, screen } from "@testing-library/react";
 
 import "@testing-library/jest-dom";
 
-import { Scrollbar, ScrollbarType } from ".";
+import { Scrollbar } from ".";
 
 describe("<Scrollbar />", () => {
   it("<Scrollbar />: renders without error", () => {
-    render(
-      <Scrollbar stype={ScrollbarType.mediumBlack}>Some content</Scrollbar>,
-    );
+    render(<Scrollbar>Some content</Scrollbar>);
 
     expect(screen.queryByTestId("scrollbar")).toBeInTheDocument();
   });

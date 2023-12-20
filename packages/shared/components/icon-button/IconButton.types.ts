@@ -1,3 +1,5 @@
+import { IconSizeType } from "../../utils";
+
 export interface IconButtonProps {
   /** Sets component class */
   className?: string;
@@ -8,7 +10,7 @@ export interface IconButtonProps {
   /** Icon color on click action */
   clickColor?: string;
   /** Button height and width value */
-  size: number;
+  size?: number | IconSizeType;
   /** Determines if icon fill is needed */
   isFill?: boolean;
   /** Determines if icon stroke is needed */
@@ -20,7 +22,7 @@ export interface IconButtonProps {
   /** Icon node */
   iconNode?: React.ReactNode;
   /** Icon name */
-  iconName: string;
+  iconName?: string;
   /** Icon name on hover action */
   iconHoverName?: string;
   /** Icon name on click action */

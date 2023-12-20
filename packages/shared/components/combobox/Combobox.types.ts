@@ -5,9 +5,9 @@ import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 export type TCombobox = null | "badge";
 
 export type TOption = {
-  key: string | number;
+  key?: string | number;
   icon?: string;
-  label: string;
+  label?: string;
   color?: string;
   backgroundColor?: string;
   border?: string;
@@ -108,6 +108,7 @@ export interface ComboboxProps {
   withBackground?: boolean;
   isAside?: boolean;
   withBlur?: boolean;
+  title?: string;
 }
 
 export interface ComboButtonProps {

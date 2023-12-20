@@ -1,8 +1,6 @@
 import React, { PropsWithChildren, forwardRef, useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-import { ScrollbarType } from "../scrollbar";
-
 import { StyledThemeTextarea } from "./Textarea.styled";
 import { TextareaThemeProps } from "./Textarea.types";
 
@@ -19,7 +17,6 @@ const TextareaTheme = forwardRef<
       {...props}
       ref={ref}
       $currentColorScheme={currentColorScheme}
-      stype={ScrollbarType.mediumBlack}
     />
   );
 });

@@ -22,7 +22,7 @@ const PureText = ({
   type,
   color,
   ...props
-}: LinkProps & { tag: string; truncate: boolean }) => <Text {...props} />;
+}: LinkProps & { tag?: string; truncate?: boolean }) => <Text {...props} />;
 
 const StyledText = styled(PureText)`
   text-decoration: ${(props) => props.theme.link.textDecoration};

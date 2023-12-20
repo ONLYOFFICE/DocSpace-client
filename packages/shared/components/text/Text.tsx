@@ -11,6 +11,7 @@ const TextPure = ({
   fontWeight,
   color,
   textAlign,
+  onClick,
   ...rest
 }: TextProps) => {
   return (
@@ -22,6 +23,7 @@ const TextPure = ({
       as={!as && tag ? tag : as}
       title={title}
       data-testid="text"
+      onClick={onClick}
       {...rest}
     />
   );

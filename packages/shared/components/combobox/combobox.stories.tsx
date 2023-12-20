@@ -12,7 +12,7 @@ import { ComboBox } from "./ComboBox";
 // import RadioButton from "../radio-button";
 
 // import ComboBoxDocs from "./Combobox.docs.mdx";
-import { ComboboxProps, TOption } from "./Combobox.types";
+import { ComboboxProps } from "./Combobox.types";
 
 const meta = {
   title: "Components/ComboBox",
@@ -125,7 +125,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 //     />
 //   </Wrapper>
 // );
-const Template = (args: ComboboxProps<TOption>) => (
+const Template = (args: ComboboxProps) => (
   <Wrapper>
     <ComboBox
       {...args}

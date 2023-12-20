@@ -7,15 +7,11 @@ import React, {
 import { ThemeContext } from "styled-components";
 
 import { StyledThemeComboButton } from "./Combobox.styled";
-import type {
-  ComboButtonThemeProps,
-  TOption,
-  TOptionKey,
-} from "./Combobox.types";
+import type { ComboButtonThemeProps } from "./Combobox.types";
 
 const ComboButtonTheme = forwardRef(
-  <T extends TOption<Extract<T["key"], TOptionKey>>>(
-    props: PropsWithChildren<ComboButtonThemeProps<T>>,
+  (
+    props: PropsWithChildren<ComboButtonThemeProps>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const defaultTheme = useContext(ThemeContext);

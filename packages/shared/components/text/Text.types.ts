@@ -31,10 +31,12 @@ export interface TextProps {
   className?: string;
   /** Disables word wrapping */
   truncate?: boolean;
-
+  id?: string;
+  style?: React.CSSProperties;
   dir?: string;
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<Element>) => void;
+  htmlFor?: string;
 }
 
 export interface StyledTextProps {

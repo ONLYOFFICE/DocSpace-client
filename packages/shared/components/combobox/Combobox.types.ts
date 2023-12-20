@@ -4,8 +4,10 @@ import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
 export type TCombobox = null | "badge";
 
-export type TOption = {
-  key: string | number;
+export type TOptionKey = string | number;
+
+export type TOption<T extends TOptionKey = TOptionKey> = {
+  key: T;
   icon?: string;
   label: string;
   color?: string;
@@ -15,7 +17,7 @@ export type TOption = {
   disabled?: boolean;
 };
 
-export interface ComboboxProps {
+export interface ComboboxProps<T> {
   /** Displays advanced options */
   advancedOptions?: React.ReactNode;
   /** Children elements */
@@ -43,17 +45,17 @@ export interface ComboboxProps {
   /** Indicates that component is displayed without borders */
   noBorder?: boolean;
   /** Is triggered whenever ComboBox is a selected option */
-  onSelect: (option?: TOption) => void;
+  onSelect: (option: T) => void;
   /** Sets the component open */
   opened?: boolean;
   /** Combo box options */
-  options: TOption[];
+  options: T[];
   /** Indicates that component is scaled by parent */
   scaled?: boolean;
   /** Indicates that component`s options are scaled by ComboButton */
   scaledOptions?: boolean;
   /** Selected option */
-  selectedOption: TOption;
+  selectedOption: T;
   /** Sets the component's width from the default settings */
   size?: ComboBoxSize;
   /** Accepts css style */
@@ -99,7 +101,7 @@ export interface ComboboxProps {
   /** Type ComboBox */
   type?: TCombobox;
   setIsOpenItemAccess?: (value: boolean) => void;
-  onClickSelectedItem?: (option: TOption) => void;
+  onClickSelectedItem?: (option: T) => void;
   withoutBackground?: boolean;
   forceCloseClickOutside?: boolean;
   hideMobileView?: boolean;
@@ -110,10 +112,10 @@ export interface ComboboxProps {
   withBlur?: boolean;
 }
 
-export interface ComboButtonProps {
+export interface ComboButtonProps<T> {
   noBorder?: boolean;
   isDisabled?: boolean;
-  selectedOption: TOption;
+  selectedOption: T;
   withOptions?: boolean;
   optionsLength?: number;
   withAdvancedOptions?: boolean;
@@ -131,7 +133,7 @@ export interface ComboButtonProps {
   type?: TCombobox;
 }
 
-export interface ComboButtonThemeProps extends ComboButtonProps {
+export interface ComboButtonThemeProps<T> extends ComboButtonProps<T> {
   ref: React.LegacyRef<HTMLDivElement>;
   $currentColorScheme?: TColorScheme;
   interfaceDirection?: string;

@@ -6,16 +6,21 @@ import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./Combobox.styled";
-import { ComboboxProps, TOption } from "./Combobox.types";
 import { ComboBoxSize } from "./Combobox.enums";
+import type { ComboboxProps, TOption, TOptionKey } from "./Combobox.types";
 
-const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
+const compare = <T extends TOption<Extract<T["key"], TOptionKey>>>(
+  prevProps: ComboboxProps<T>,
+  nextProps: ComboboxProps<T>,
+) => {
   const needUpdate = !equal(prevProps, nextProps);
 
   return needUpdate;
 };
 
-const ComboBoxPure = (props: ComboboxProps) => {
+const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
+  props: ComboboxProps<T>,
+) => {
   const { selectedOption: selectedOptionProps } = props;
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedOption, setSelectedOption] =
@@ -73,7 +78,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     });
   };
 
-  const optionClick = (option: TOption) => {
+  const optionClick = (option: T) => {
     const { setIsOpenItemAccess, onSelect } = props;
 
     setSelectedOption({ ...selectedOption });
@@ -163,10 +168,10 @@ const ComboBoxPure = (props: ComboboxProps) => {
   let optionsCount = optionsLength;
 
   if (withAdvancedOptions) {
-    const advancedOptionsWithoutSeparator: TOption[] =
+    const advancedOptionsWithoutSeparator: T[] =
       React.isValidElement(advancedOptions) && advancedOptions.props
-        ? (advancedOptions.props as { children: TOption[] }).children.filter(
-            (option: TOption) => option.key !== "s1",
+        ? (advancedOptions.props as { children: T[] }).children.filter(
+            (option: T) => option.key !== "s1",
           )
         : [];
 
@@ -183,7 +188,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
   const dropDownBody =
     (advancedOptions as React.ReactNode) ||
-    (options.map((option: TOption) => {
+    (options.map((option: T) => {
       const disabled =
         option.disabled ||
         (!displaySelectedOption && option.label === selectedOption.label);

@@ -131,6 +131,7 @@
   "PublicRoom": "Public room",
   "RecentlyAccessible": "Recently accessible via link",
   "RecentEmptyContainerDescription": "Your last viewed or edited docs will be displayed in this section.",
+  "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",
   "RecycleBinAction": "Empty trash",
   "RemovedFromFavorites": "Removed from favorites",
   "RemoveFromFavorites": "Remove from favorites",

@@ -28,14 +28,14 @@ const Input = ({
 
   return props.mask != null ? (
     <MaskedInput
-      className={`${className} not-selectable`}
+      className={`${className} input-component not-selectable`}
       keepCharPositions={true}
       guide={false}
       {...props}
     />
   ) : (
     <input
-      className={`${className} not-selectable`}
+      className={`${className} input-component not-selectable`}
       dir={dir}
       {...props}
       {...rest}

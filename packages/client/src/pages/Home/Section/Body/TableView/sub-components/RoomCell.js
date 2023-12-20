@@ -43,7 +43,6 @@ const RoomCell = ({ sideColor, item }) => {
     </StyledText>,
 
     <Tooltip
-      float
       place="bottom"
       key={"tooltip"}
       id={"" + item.id}

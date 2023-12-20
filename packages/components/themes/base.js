@@ -90,6 +90,10 @@ const Base = {
 
   backgroundAndSubstrateColor: "#F8F9F9",
 
+  betaBadgeTooltip: {
+    boxShadowColor: "rgba(4, 15, 27, 0.12)",
+  },
+
   button: {
     fontWeight: "600",
     margin: "0",
@@ -593,9 +597,9 @@ const Base = {
   },
 
   scrollbar: {
-    backgroundColorVertical: "rgba(0, 0, 0, 0.1)",
-    backgroundColorHorizontal: "rgba(0, 0, 0, 0.1)",
-    hoverBackgroundColorVertical: grayMid,
+    bgColor: "rgba(6, 22, 38, 0.16)",
+    hoverBgColor: "rgba(6, 22, 38, 0.32)",
+    pressBgColor: "rgba(6, 22, 38, 0.5)",
   },
 
   modalDialog: {
@@ -948,12 +952,12 @@ const Base = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.12)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F8F7BF",
+    color: white,
     textColor: black,
 
     before: {

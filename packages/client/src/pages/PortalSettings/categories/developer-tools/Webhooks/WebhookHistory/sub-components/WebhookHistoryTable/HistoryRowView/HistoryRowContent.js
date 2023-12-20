@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -33,6 +33,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
 
   const formattedDelivery =
     moment(historyItem.delivery)
+      .tz(window.timezone || "")
       .locale(i18n.language)
       .format("MMM D, YYYY, h:mm:ss A") +
     " " +

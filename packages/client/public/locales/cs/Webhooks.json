@@ -54,5 +54,5 @@
   "WebhookRemoved": "Odstranění webhooku",
   "Webhooks": "Webové háčky",
   "WebhooksGuide": "Průvodce webovými háčky",
-  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci ONLYOFFICE DocSpace."
+  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci ONLYOFFICE DocSpace.\nZde můžete vytvářet a spravovat všechny své webové háčky, konfigurovat je a procházet historii všech webhooků a kontrolovat jejich výkonnost."
 }

@@ -15,7 +15,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import moment from "moment";
+import moment from "moment-timezone";
 
 import { LANGUAGE, ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
@@ -336,7 +336,7 @@ export const isLanguageRtl = (lng: string) => {
 
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
-  userLng: string,
+  userLng: string | undefined,
   portalLng: string,
   isEditor: boolean = false
 ): string => {
@@ -349,7 +349,6 @@ export const getLtrLanguageForEditor = (
 
   if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
     return userLng;
-  if (portalLng && !isPortalLngRtl) return portalLng;
 
   return "en";
 };
@@ -676,4 +675,9 @@ export const getEditorTheme = (theme) => {
     default:
       return "default-dark";
   }
+};
+
+const languages: string[] = ["ar-SA"];
+export const isBetaLanguage = (language: string): boolean => {
+  return languages.includes(language);
 };

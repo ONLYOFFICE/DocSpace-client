@@ -35,7 +35,7 @@ export default function withContent(WrappedContent) {
     }
 
     getStatusByDate = (create) => {
-      const { culture, item, personal } = this.props;
+      const { culture, item } = this.props;
       const { created, updated } = item;
 
       const locale = getCookie(LANGUAGE) || culture;

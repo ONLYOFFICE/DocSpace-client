@@ -120,6 +120,11 @@ export const StyledInfo = styled.div`
         height: 28px;
         align-items: center;
         margin-top: 11px;
+        gap: 8px;
+
+        .language-combo-box .combo-button {
+          padding-inline-end: 0px;
+        }
 
         @media ${tablet} {
           height: 36px;
@@ -318,6 +323,12 @@ export const StyledInfo = styled.div`
 
         @media ${mobile} {
           margin-top: 8px;
+        }
+
+        &__wrapper-combo-box {
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
 
         .mobile-profile-label {

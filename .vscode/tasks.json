@@ -170,7 +170,7 @@
     {
       "label": "Frontend | update yarn.lock",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn wipe && yarn install",
+      "command": "cd ${workspaceFolder} ; yarn wipe ; yarn install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -230,7 +230,7 @@
     {
       "label": "Frontend | build-and-start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn build && yarn start-prod",
+      "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
       "group": {
         "kind": "build",
         "isDefault": true

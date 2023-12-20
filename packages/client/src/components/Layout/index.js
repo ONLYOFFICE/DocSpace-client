@@ -33,7 +33,8 @@ const StyledContainer = styled.div`
 `;
 
 const Layout = (props) => {
-  const { children, isTabletView, setIsTabletView, setWindowWidth } = props;
+  const { children, isTabletView, setIsTabletView, setWindowWidth, isFrame } =
+    props;
 
   const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
@@ -69,7 +70,7 @@ const Layout = (props) => {
   useEffect(() => {
     window.addEventListener("resize", onResize);
 
-    if (isTabletUtils() || isMobileUtils()) {
+    if (isMobile || isTabletView || !isFrame) {
       window.addEventListener("orientationchange", onOrientationChange);
 
       if (isMobileOnly) {
@@ -107,6 +108,8 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
+    if (window.innerHeight < window.innerWidth) return;
+
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);

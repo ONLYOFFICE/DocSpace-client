@@ -404,7 +404,7 @@ class ContextMenu extends Component {
                       />
                     </div>
                   )}
-                  <Text className="text" truncate={true}>
+                  <Text className="text" truncate={true} dir="auto">
                     {this.props.header.title}
                   </Text>
                 </div>

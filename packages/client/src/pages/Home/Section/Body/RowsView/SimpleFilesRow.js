@@ -258,33 +258,20 @@ const StyledSimpleFilesRow = styled(Row)`
       `}
   }
 
-  @media ${tablet} {
-    .badges {
-      flex-direction: row-reverse;
-      gap: 24px;
-    }
+  .badges {
+    flex-direction: row-reverse;
+    gap: 24px;
+  }
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+  .file__badges,
+  .room__badges,
+  .folder__badges {
+    margin-top: 0px;
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-top: 0px;
-      }
-    }
-
-    .file__badges,
-    .folder__badges,
-    .room__badges {
+    > div {
       margin-top: 0px;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -445,7 +432,7 @@ const SimpleFilesRow = (props) => {
           mode={"modern"}
           sectionWidth={sectionWidth}
           contentElement={
-            isSmallContainer || isRooms ? null : quickButtonsComponent
+            isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
@@ -478,7 +465,7 @@ const SimpleFilesRow = (props) => {
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={
-              isSmallContainer || isRooms ? quickButtonsComponent : null
+              isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
             badgesComponent={isMobileDevice && badgesComponent}

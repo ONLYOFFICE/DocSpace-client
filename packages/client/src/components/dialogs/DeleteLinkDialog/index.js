@@ -87,7 +87,11 @@ const DeleteLinkDialogComponent = (props) => {
         <Button
           id="delete-file-modal_submit"
           key="OkButton"
-          label={t("Common:Delete")}
+          label={
+            link.sharedTo.primary && isPublicRoomType
+              ? t("Files:RevokeLink")
+              : t("Files:DeleteLink")
+          }
           size="normal"
           primary
           scale

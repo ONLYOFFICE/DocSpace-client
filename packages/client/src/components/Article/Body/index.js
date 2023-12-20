@@ -68,7 +68,7 @@ const ArticleBodyContent = (props) => {
   const isAccounts = location.pathname.includes("accounts/filter");
 
   const onClick = React.useCallback(
-    (folderId, title, rootFolderType) => {
+    (folderId, title, rootFolderType, canCreate) => {
       const { toggleArticleOpen } = props;
 
       let params = null;
@@ -79,6 +79,7 @@ const ArticleBodyContent = (props) => {
         isRoot: true,
         isPublicRoomType: false,
         rootFolderType,
+        canCreate,
       };
 
       let withTimer = !!selectedFolderId;

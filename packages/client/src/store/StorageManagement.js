@@ -14,7 +14,6 @@ class StorageManagement {
   portalInfo = null;
   activeUsersCount = null;
   filesUsedSpace = {};
-  timerId = null;
   intervalId = null;
 
   isRecalculating = false;
@@ -85,7 +84,6 @@ class StorageManagement {
     let isWaitRequest = false;
     this.intervalId = setInterval(async () => {
       try {
-        console.log("interval");
         if (isWaitRequest) {
           return;
         }
@@ -95,14 +93,14 @@ class StorageManagement {
         const result = await checkRecalculateQuota();
         !this.isRecalculating && this.setIsRecalculating(true);
 
-        isWaitRequest = false;
-
         if (result === false) {
           this.clearIntervalCheckRecalculate();
 
           this.setIsRecalculating(false);
           return;
         }
+
+        isWaitRequest = false;
       } catch (e) {
         this.clearIntervalCheckRecalculate();
 
@@ -112,11 +110,9 @@ class StorageManagement {
   };
 
   clearIntervalCheckRecalculate = () => {
-    this.timerId && clearInterval(this.timerId);
     this.intervalId && clearInterval(this.intervalId);
 
     this.intervalId = null;
-    this.timerId = null;
   };
 }
 

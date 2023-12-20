@@ -36,6 +36,7 @@ const DropDown = ({
   eventTypes,
   zIndex,
   clickOutsideAction,
+  manualWidth,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -46,7 +47,7 @@ const DropDown = ({
     directionX,
     directionY,
     manualY,
-    width: 0,
+    width: 240,
     borderOffset: theme?.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
   });
@@ -326,10 +327,10 @@ const DropDown = ({
 
     const rowHeights =
       cleanChildren &&
-      React.isValidElement(cleanChildren) &&
-      React.Children.map(cleanChildren, (child: React.ReactElement) =>
-        getItemHeight(child),
-      );
+      Array.isArray(cleanChildren) &&
+      React.Children.map(cleanChildren, (child: React.ReactElement) => {
+        return getItemHeight(child);
+      });
 
     const getItemSize = (index: number) => rowHeights && rowHeights[index];
     const fullHeight =
@@ -379,7 +380,9 @@ const DropDown = ({
         directionXStylesDisabled={directionXStylesDisabled}
         isDropdownReady={state.isDropdownReady}
         open={open}
+        maxHeight={maxHeight}
         zIndex={zIndex}
+        manualWidth={manualWidth}
       >
         <VirtualList
           Row={Row}

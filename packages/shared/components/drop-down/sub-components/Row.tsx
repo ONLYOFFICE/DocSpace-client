@@ -7,10 +7,7 @@ import { RowProps } from "../DropDown.types";
 const Row = memo(({ data, index, style }: RowProps) => {
   const { children, theme, activedescendant, handleMouseMove } = data;
 
-  const option =
-    React.isValidElement(children) && Array.isArray(children)
-      ? children[index]
-      : null;
+  const option = Array.isArray(children) ? children[index] : null;
 
   const separator = option?.props?.isSeparator
     ? { width: `calc(100% - 32px)`, height: `1px` }

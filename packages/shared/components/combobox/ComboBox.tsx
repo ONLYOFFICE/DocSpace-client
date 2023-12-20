@@ -107,7 +107,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     manualY,
     manualX,
     isDefaultMode,
-    manualWidth,
+    manualWidth = "200px",
     displaySelectedOption,
     fixedDirection,
     withBlur,
@@ -289,7 +289,7 @@ ComboBoxPure.defaultProps = {
   showDisabledItems: false,
   manualY: "102%",
   isDefaultMode: true,
-  manualWidth: "200px",
+
   displaySelectedOption: false,
   fixedDirection: false,
   disableItemClick: false,

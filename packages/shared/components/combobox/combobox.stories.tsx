@@ -17,14 +17,14 @@ import { ComboboxProps } from "./Combobox.types";
 const meta = {
   title: "Components/ComboBox",
   component: ComboBox,
-  tags: ["autodocs"],
+  // tags: ["autodocs"],
   parameters: {
     docs: {
       // page: ComboBoxDocs,
     },
   },
 } satisfies Meta<typeof ComboBox>;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ComboBox>;
 
 export default meta;
 
@@ -214,6 +214,7 @@ export const Default: Story = {
       key: 0,
       label: "Select",
     },
+    dropDownMaxHeight: 1500,
   },
 };
 

@@ -47,7 +47,7 @@ const DropDown = ({
     directionX,
     directionY,
     manualY,
-    width: 240,
+    width: 0,
     borderOffset: theme?.isBase ? 0 : 2, // need to remove the difference in width with the parent in a dark theme
     isDropdownReady: false, // need to avoid scrollbar appearing during dropdown position calculation
   });
@@ -73,6 +73,7 @@ const DropDown = ({
     const viewport = DomHelpers.getViewport();
     const scrollBarWidth =
       viewport.width - document.documentElement.clientWidth;
+
     const dropDownRects = dropDownRef.current?.getBoundingClientRect();
 
     if (

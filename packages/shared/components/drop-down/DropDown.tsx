@@ -427,9 +427,18 @@ const DropDown = ({
 
     const listener = (evt: Event) => {
       const target = evt.target as HTMLElement;
+
       if (dropDownRef.current && dropDownRef.current.contains(target)) return;
       clickOutsideAction?.(evt, !open);
     };
+
+    if (!open) {
+      eventTypes?.forEach((type) => {
+        window.removeEventListener(type, listener);
+      });
+
+      return;
+    }
 
     eventTypes?.forEach((type) => {
       window.addEventListener(type, listener);

@@ -12,7 +12,14 @@ const compare = (
 };
 
 export const TextInputPure = (props: TextInputProps) => {
-  return <StyledTextInput {...props} data-testid="text-input" />;
+  const { withBorder = true } = props;
+  return (
+    <StyledTextInput
+      {...props}
+      withBorder={withBorder}
+      data-testid="text-input"
+    />
+  );
 };
 
 const TextInput = React.memo(TextInputPure, compare);

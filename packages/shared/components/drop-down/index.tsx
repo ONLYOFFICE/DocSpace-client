@@ -16,7 +16,7 @@ const DropDown = (props: DropDownProps) => {
 
     isAside,
     withBackground,
-    eventTypes,
+    eventTypes = ["click"],
     forceCloseClickOutside,
     withoutBackground,
   } = props;

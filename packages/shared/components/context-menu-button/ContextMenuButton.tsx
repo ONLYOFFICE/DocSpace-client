@@ -113,7 +113,12 @@ const ContextMenuButtonPure = ({
     [],
   );
 
-  const toggle = (isOpen: boolean) => setState((s) => ({ ...s, isOpen }));
+  const toggle = (o?: boolean) => {
+    setState((s) => ({
+      ...s,
+      isOpen: typeof o === "boolean" ? o : !s.isOpen,
+    }));
+  };
 
   const onCloseAction = React.useCallback(() => {
     setState((s) => ({ ...s, isOpen: !s.isOpen }));
@@ -133,7 +138,7 @@ const ContextMenuButtonPure = ({
   }, [popstate]);
 
   React.useEffect(() => {
-    toggle(opened || false);
+    toggle(opened);
   }, [opened]);
 
   React.useEffect(() => {
@@ -152,7 +157,7 @@ const ContextMenuButtonPure = ({
       return;
     }
 
-    setState((s) => ({ ...s, data: getData(), isOpen: !state.isOpen }));
+    setState((s) => ({ ...s, data: getData(), isOpen: !s.isOpen }));
 
     if (!isDisabled && state.isOpen) onClick?.(e);
   };
@@ -174,8 +179,8 @@ const ContextMenuButtonPure = ({
     if ("onClick" in item) {
       const open = state.displayType === "dropdown";
       item.onClick?.(e, open, item);
-      toggle(!state.isOpen);
     }
+    toggle();
   };
 
   const callNewMenu = (e: React.MouseEvent) => {

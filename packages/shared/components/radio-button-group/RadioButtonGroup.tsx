@@ -52,6 +52,7 @@ const RadioButtonGroup = ({
               {option.label}
             </Text>
           );
+
         return (
           <RadioButton
             id={option.id}

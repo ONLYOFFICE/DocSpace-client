@@ -13,7 +13,7 @@ const compare = <T extends TOption<Extract<T["key"], TOptionKey>>>(
   prevProps: ComboboxProps<T>,
   nextProps: ComboboxProps<T>,
 ) => {
-  const needUpdate = !equal(prevProps, nextProps);
+  const needUpdate = equal(prevProps, nextProps);
 
   return needUpdate;
 };
@@ -42,6 +42,7 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
     const target = e.target as HTMLElement;
 
     if (ref.current && ref.current.contains(target)) return;
+    console.log({ e });
 
     setIsOpen((v) => {
       onToggle?.(e, !v);

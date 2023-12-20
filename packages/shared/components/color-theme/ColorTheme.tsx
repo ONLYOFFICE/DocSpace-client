@@ -12,7 +12,7 @@ import IconWrapperTheme from "./styled-components/iconWrapper";
 import IndicatorFilterButtonTheme from "./styled-components/indicatorFilterButton";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
-// import LinkTheme from "./styled-components/link";
+import LinkTheme from "./styled-components/link";
 import LinkForgotPasswordColorTheme from "./styled-components/linkForgotPassword";
 import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
@@ -147,15 +147,21 @@ const ColorTheme = forwardRef<
         );
       }
 
-      // case ThemeId.Link: {
-      //   return (
-      //     <LinkTheme
-      //       {...props}
-      //       themeId={ThemeId.Link}
-      //       $currentColorScheme={currentColorScheme}
-      //     />
-      //   );
-      // }
+      case ThemeId.Link: {
+        const onClickAction = (e: React.MouseEvent<Element>) => {
+          // @ts-expect-error Its not error, because its link onClick, not IconButton
+          if ("onClick" in props) props.onClick?.(e);
+        };
+
+        return (
+          <LinkTheme
+            {...props}
+            onClick={onClickAction}
+            themeId={ThemeId.Link}
+            $currentColorScheme={currentColorScheme}
+          />
+        );
+      }
 
       default:
         return null;

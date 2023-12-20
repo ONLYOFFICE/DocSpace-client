@@ -1,7 +1,7 @@
 import { TColorScheme, TTheme } from "../../themes";
 
 import { IconButtonProps } from "../icon-button/IconButton.types";
-// import { LinkProps } from "../link/Link.types";
+import { LinkProps } from "../link/Link.types";
 
 import { ThemeId } from "./ColorTheme.enums";
 
@@ -76,11 +76,12 @@ export interface VersionBadgeTheme extends DefaultColorThemeProps {
   $isVersion?: boolean;
 }
 
-// export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
-//   themeId: ThemeId.Link;
-//   noHover?: boolean;
-//   $currentColorScheme?: TColorScheme;
-// }
+export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
+  themeId: ThemeId.Link;
+  noHover?: boolean;
+  $currentColorScheme?: TColorScheme;
+  onClick?: (e: React.MouseEvent<Element>) => void;
+}
 
 export type ColorThemeProps =
   | IconButtonColorTheme
@@ -94,5 +95,5 @@ export type ColorThemeProps =
   | LinkForgotPasswordColorTheme
   | LoadingButtonColorTheme
   | ProgressColorTheme
-  | VersionBadgeTheme;
-// | LinkColorTheme;
+  | VersionBadgeTheme
+  | LinkColorTheme;

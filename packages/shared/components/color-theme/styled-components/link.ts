@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-// import StyledText from "../../link/Link.styled";
+import StyledText from "../../link/Link.styled";
 
 import { LinkColorTheme } from "../ColorTheme.types";
-import { Link } from "../../link";
 
-const LinkTheme = styled(Link)<LinkColorTheme>`
+const LinkTheme = styled(StyledText)<LinkColorTheme>`
   color: ${(props) => props.$currentColorScheme?.main.accent};
 
   &:hover {

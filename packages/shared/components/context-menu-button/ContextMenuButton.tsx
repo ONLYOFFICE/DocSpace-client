@@ -167,6 +167,7 @@ const ContextMenuButtonPure = ({
     const dropDownItem = path
       ? path.find((x: EventTarget) => x === ref.current)
       : null;
+
     if (dropDownItem) return;
 
     onCloseAction();
@@ -235,6 +236,7 @@ const ContextMenuButtonPure = ({
           withBackdrop={isTablet() || isMobile() || Tablet}
           zIndex={zIndex}
           isDefaultMode={usePortal}
+          eventTypes={["click"]}
         >
           {state.data?.map(
             (item: ContextMenuModel, index: number) =>

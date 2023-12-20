@@ -66,7 +66,7 @@ class StorageManagement {
 
     const requests = [getTenantExtra()];
 
-    type = "user"
+    type === "user"
       ? requests.push(getUsersList(userFilterData))
       : requests.push(fetchRooms(null, roomFilterData));
 

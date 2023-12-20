@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
@@ -17,6 +17,7 @@ import Checkbox from "@docspace/components/checkbox";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   if (initialSize === -1) return false;
+
   if (initPower == power && initSize == value) return true;
 
   return false;
@@ -42,6 +43,11 @@ const QuotaForm = ({
     initialSize && initialSize !== -1
       ? getSizeFromBytes(initialSize, initPower)
       : "";
+
+  useEffect(() => {
+    setSize(initSize);
+    setPower(initPower);
+  }, [initialSize]);
 
   const [power, setPower] = useState(initPower);
   const [size, setSize] = useState(initSize);
@@ -202,8 +208,8 @@ QuotaForm.propTypes = {
   isError: PropTypes.bool,
   isButtonsEnable: PropTypes.bool,
   onSetQuotaBytesSize: PropTypes.func,
-  initialSize: PropTypes.string,
-  initialPower: PropTypes.number,
+  initialSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  initialPower: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default QuotaForm;

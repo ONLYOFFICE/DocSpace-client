@@ -314,10 +314,7 @@ const DropDown = ({
       isDefaultMode && forwardedRef?.current && !fixedDirection;
 
     let cleanChildren = children;
-    let itemCount =
-      children && React.isValidElement(children)
-        ? React.Children.toArray(children).length
-        : 0;
+    let itemCount = children ? React.Children.toArray(children).length : 0;
 
     if (!showDisabledItems) {
       cleanChildren = hideDisabledItems();

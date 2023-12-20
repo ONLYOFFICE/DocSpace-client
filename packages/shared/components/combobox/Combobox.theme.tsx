@@ -1,25 +1,36 @@
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  forwardRef,
+  useContext,
+} from "react";
 import { ThemeContext } from "styled-components";
 
 import { StyledThemeComboButton } from "./Combobox.styled";
-import { ComboButtonThemeProps } from "./Combobox.types";
+import type {
+  ComboButtonThemeProps,
+  TOption,
+  TOptionKey,
+} from "./Combobox.types";
 
-const ComboButtonTheme = forwardRef<
-  HTMLDivElement,
-  PropsWithChildren<ComboButtonThemeProps>
->((props, ref) => {
-  const defaultTheme = useContext(ThemeContext);
+const ComboButtonTheme = forwardRef(
+  <T extends TOption<Extract<T["key"], TOptionKey>>>(
+    props: PropsWithChildren<ComboButtonThemeProps<T>>,
+    ref: ForwardedRef<HTMLDivElement>,
+  ) => {
+    const defaultTheme = useContext(ThemeContext);
 
-  const currentColorScheme = defaultTheme?.currentColorScheme;
+    const currentColorScheme = defaultTheme?.currentColorScheme;
 
-  return (
-    <StyledThemeComboButton
-      {...props}
-      ref={ref}
-      $currentColorScheme={currentColorScheme}
-    />
-  );
-});
+    return (
+      <StyledThemeComboButton
+        {...props}
+        ref={ref}
+        $currentColorScheme={currentColorScheme}
+      />
+    );
+  },
+);
 
 ComboButtonTheme.displayName = "ComboButtonTheme";
 

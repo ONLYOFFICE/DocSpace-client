@@ -43,7 +43,7 @@ export interface ComboboxProps {
   /** Indicates that component is displayed without borders */
   noBorder?: boolean;
   /** Is triggered whenever ComboBox is a selected option */
-  onSelect: (option?: TOption) => void;
+  onSelect: (option: TOption) => void;
   /** Sets the component open */
   opened?: boolean;
   /** Combo box options */

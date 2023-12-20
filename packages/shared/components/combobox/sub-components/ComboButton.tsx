@@ -17,8 +17,8 @@ import { Badge } from "../../badge";
 
 import ComboButtonTheme from "../Combobox.theme";
 
-import { ComboButtonProps } from "../Combobox.types";
 import { ComboBoxSize } from "../Combobox.enums";
+import type { ComboButtonProps } from "../Combobox.types";
 
 const ComboButton = (props: ComboButtonProps) => {
   const {

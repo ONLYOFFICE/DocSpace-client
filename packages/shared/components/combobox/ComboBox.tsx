@@ -6,8 +6,8 @@ import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./Combobox.styled";
-import { ComboboxProps, TOption } from "./Combobox.types";
 import { ComboBoxSize } from "./Combobox.enums";
+import type { ComboboxProps, TOption } from "./Combobox.types";
 
 const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
   const needUpdate = equal(prevProps, nextProps);

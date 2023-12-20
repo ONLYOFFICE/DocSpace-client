@@ -74,7 +74,7 @@ const RootFolderContainer = (props) => {
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
-  const recentDescription = t("RecentEmptyContainerDescription");
+  const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
   const roomsDescription =
     isVisitor || isCollaborator

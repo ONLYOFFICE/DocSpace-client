@@ -44,6 +44,16 @@ const StyledScrollbar = styled(ClearScrollbar)`
         ? `${props.heightTextArea + 2}px`
         : "91px";
   }} !important;
+
+  textarea {
+    height: ${(props) => {
+      return props.heightScale
+        ? "65vh"
+        : props.heightTextArea
+        ? props.heightTextArea + "px"
+        : "89px";
+    }};
+  }
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;
@@ -83,7 +93,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
 
   display: table;
   width: -webkit-fill-available;
-  height: fit-content;
+
   border: none;
   outline: none;
   resize: none;

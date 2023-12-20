@@ -278,7 +278,7 @@ export const useFilesHelper = ({
               return {
                 label: title,
                 id: id,
-                isRoom: !!roomType,
+                isRoom: currentFolder?.current?.rootFolderId === id,
                 roomType,
               };
             }

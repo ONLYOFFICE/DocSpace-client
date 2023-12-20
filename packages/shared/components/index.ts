@@ -70,6 +70,8 @@ import {
   TTableColumn,
   TGroupMenuItem,
 } from "./table";
+import { Label } from "./label";
+import { FieldContainer } from "./field-container";
 
 export type {
   TFallbackAxisSideDirection,
@@ -81,6 +83,8 @@ export type {
 };
 
 export {
+  FieldContainer,
+  Label,
   TableGroupMenu,
   TableBody,
   TableContainer,

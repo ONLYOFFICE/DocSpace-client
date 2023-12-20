@@ -7,20 +7,15 @@ import { DropDownItem } from "../drop-down-item";
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./Combobox.styled";
 import { ComboBoxSize } from "./Combobox.enums";
-import type { ComboboxProps, TOption, TOptionKey } from "./Combobox.types";
+import type { ComboboxProps, TOption } from "./Combobox.types";
 
-const compare = <T extends TOption<Extract<T["key"], TOptionKey>>>(
-  prevProps: ComboboxProps<T>,
-  nextProps: ComboboxProps<T>,
-) => {
+const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
   const needUpdate = equal(prevProps, nextProps);
 
   return needUpdate;
 };
 
-const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
-  props: ComboboxProps<T>,
-) => {
+const ComboBoxPure = (props: ComboboxProps) => {
   const { selectedOption: selectedOptionProps } = props;
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedOption, setSelectedOption] =
@@ -42,7 +37,6 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
     const target = e.target as HTMLElement;
 
     if (ref.current && ref.current.contains(target)) return;
-    console.log({ e });
 
     setIsOpen((v) => {
       onToggle?.(e, !v);
@@ -68,7 +62,8 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
       disableItemClick ||
       isLoading ||
       (disableIconClick && e && target.closest(".optionalBlock")) ||
-      target.classList.contains("nav-thumb-vertical")
+      target.classList.contains("nav-thumb-vertical") ||
+      target.classList.contains("backdrop-active")
     )
       return;
 
@@ -79,14 +74,14 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
     });
   };
 
-  const optionClick = (option: T) => {
-    const { setIsOpenItemAccess, onSelect } = props;
+  const optionClick = (option: TOption) => {
+    const { onSelect } = props;
 
-    setSelectedOption({ ...selectedOption });
-    setIsOpen((v) => {
-      setIsOpenItemAccess?.(!v);
-      return !v;
-    });
+    setSelectedOption({ ...option });
+    // setIsOpen((v) => {
+    //   setIsOpenItemAccess?.(!v);
+    //   return !v;
+    // });
 
     onSelect?.(option);
   };
@@ -170,10 +165,10 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
   let optionsCount = optionsLength;
 
   if (withAdvancedOptions) {
-    const advancedOptionsWithoutSeparator: T[] =
+    const advancedOptionsWithoutSeparator: TOption[] =
       React.isValidElement(advancedOptions) && advancedOptions.props
-        ? (advancedOptions.props as { children: T[] }).children.filter(
-            (option: T) => option.key !== "s1",
+        ? (advancedOptions.props as { children: TOption[] }).children.filter(
+            (option: TOption) => option.key !== "s1",
           )
         : [];
 
@@ -190,7 +185,7 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
 
   const dropDownBody =
     (advancedOptions as React.ReactNode) ||
-    (options.map((option: T) => {
+    (options.map((option: TOption) => {
       const disabled =
         option.disabled ||
         (!displaySelectedOption && option.label === selectedOption.label);

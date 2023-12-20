@@ -18,11 +18,9 @@ import { Badge } from "../../badge";
 import ComboButtonTheme from "../Combobox.theme";
 
 import { ComboBoxSize } from "../Combobox.enums";
-import type { ComboButtonProps, TOption, TOptionKey } from "../Combobox.types";
+import type { ComboButtonProps } from "../Combobox.types";
 
-const ComboButton = <T extends TOption<Extract<T["key"], TOptionKey>>>(
-  props: ComboButtonProps<T>,
-) => {
+const ComboButton = (props: ComboButtonProps) => {
   const {
     noBorder,
     onClick,

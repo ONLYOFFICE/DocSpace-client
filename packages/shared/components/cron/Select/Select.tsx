@@ -2,9 +2,10 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-import { ComboBox, ComboBoxSize } from "../../combobox";
-import { Option } from "../Cron.types";
+import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+
 import { fixFormatValue } from "../Cron.util";
+
 import { SelectWrapper } from "./Select.styled";
 import SelectProps from "./Select.props";
 
@@ -65,11 +66,11 @@ function Select({
     };
   }, [value, placeholder, unit.altWithTranslation, unit.min, i18n.language]);
 
-  const onSelect = (option: Option<number, string>) => {
-    setValue([option.key]);
+  const onSelect = (option: TOption) => {
+    setValue([option.key as number]);
   };
 
-  const onReset = (option: Option<number, string>) => {
+  const onReset = (option: TOption) => {
     if (option.key === value[0]) {
       setValue([]);
     }

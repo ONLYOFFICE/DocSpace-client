@@ -5,7 +5,7 @@ import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.naviga
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 
 import { Checkbox } from "../checkbox";
-import { ComboBox } from "../combobox";
+import { ComboBox, TOption } from "../combobox";
 import { IconButton } from "../icon-button";
 import { ThemeId } from "../color-theme";
 
@@ -59,7 +59,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
         advancedOptions={checkboxOptions}
         className="table-container_group-menu-combobox not-selectable"
         options={[]}
-        selectedOption={{}}
+        selectedOption={{} as TOption}
         manualY="42px"
         manualX="-32px"
         title={t("Common:TitleSelectFile")}

@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Label } from "./Label";
 
 const meta = {
-  title: "Components/Text",
+  title: "Components/Label",
   component: Label,
   parameters: {
     docs: {

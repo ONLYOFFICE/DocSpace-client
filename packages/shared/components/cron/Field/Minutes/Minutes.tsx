@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import Select from "../../Select";
+import { Select } from "../../Select";
 
 import type MinutesProps from "./Minutes.props";
 

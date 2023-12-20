@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
-// @ts-expect-error TS(7016): Could not find a declaration file for module '../.... Remove this comment to see the full error message
-import i18nextStoryDecorator from "../.storybook/decorators/i18nextStoryDecorator";
 
-import Cron, { getNextSynchronization } from ".";
-import TextInput from "../text-input/text-input";
-import Button from "../button";
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+
+import { Cron, getNextSynchronization } from ".";
+import { InputSize, InputType, TextInput } from "../text-input";
+import { Button, ButtonSize } from "../button";
 import CronProps from "./Cron.props";
 
 type CronType = FC<{ locale: string } & CronProps>;
@@ -60,6 +60,88 @@ const meta: Meta<CronType> = {
   decorators: [i18nextStoryDecorator],
 };
 
+const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
+  const { i18n } = useTranslation();
+
+  const [input, setInput] = useState(() => defaultValue);
+
+  const [cron, setCron] = useState(defaultValue);
+  const [error, setError] = useState<Error>();
+
+  useEffect(() => {
+    i18n.changeLanguage(locale);
+  }, [i18n, locale]);
+
+  const onError = useCallback((exception?: Error) => {
+    setError(exception);
+  }, []);
+
+  const setValue = (value: string) => {
+    setInput(value);
+    setCron(value);
+  };
+
+  const onClick = () => {
+    setCron(input);
+  };
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
+  const date = useMemo(() => cron && getNextSynchronization(cron), [cron]);
+
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          gap: "6px",
+          alignItems: "baseline",
+          maxWidth: "max-content",
+          marginBottom: "8px",
+        }}
+      >
+        <TextInput
+          withBorder
+          scale={false}
+          value={input}
+          type={InputType.text}
+          size={InputSize.base}
+          hasError={Boolean(error)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setInput(e.target.value)
+          }
+        />
+
+        <Button
+          size={ButtonSize.small}
+          primary
+          label="Set value"
+          onClick={onClick}
+        />
+      </div>
+
+      <Cron value={cron} setValue={setValue} onError={onError} />
+      <p>
+        <strong>Cron string: </strong> {cron}
+      </p>
+      <p>
+        <strong>Error message: </strong> {error?.message ?? "undefined"}
+      </p>
+      {date && (
+        <p>
+          <strong>Next synchronization: </strong>{" "}
+          {date
+            .toUTC()
+            .setLocale(locale ?? "en")
+            .toFormat("DDDD tt")}
+        </p>
+      )}
+    </div>
+  );
+};
+
 export default meta;
 
 export const Default: Story = {
@@ -67,77 +149,7 @@ export const Default: Story = {
     locale: "en",
   },
 
-  render: ({ value: defaultValue, locale }) => {
-    const { i18n } = useTranslation();
-
-    const [input, setInput] = useState(defaultValue);
-
-    const [cron, setCron] = useState(defaultValue);
-    const [error, setError] = useState<Error>();
-
-    useEffect(() => {
-      i18n.changeLanguage(locale);
-    }, [locale]);
-
-    const onError = (error?: Error) => {
-      setError(error);
-    };
-
-    const setValue = (cron?: string) => {
-      setInput(cron);
-      setCron(cron);
-    };
-
-    const onClick = () => {
-      setCron(input);
-    };
-
-    useEffect(() => {
-      setValue(defaultValue);
-    }, [defaultValue]);
-
-    const date = useMemo(() => cron && getNextSynchronization(cron), [cron]);
-
-    return (
-      <div>
-        <div
-          style={{
-            display: "flex",
-            gap: "6px",
-            alignItems: "baseline",
-            maxWidth: "max-content",
-            marginBottom: "8px",
-          }}
-        >
-          <TextInput
-            // @ts-expect-error TS(2769): No overload matches this call.
-            value={input}
-            onChange={(e: any) => setInput(e.target.value)}
-            hasError={!!error}
-            scale={false}
-          />
-
-          // @ts-expect-error TS(2322): Type '{ size: string; primary: true; label: string... Remove this comment to see the full error message
-          <Button size="small" primary label={"Set value"} onClick={onClick} />
-        </div>
-
-        <Cron value={cron} setValue={setValue} onError={onError} />
-        <p>
-          <strong>Cron string: </strong> {cron}
-        </p>
-        <p>
-          <strong>Error message: </strong> {error?.message ?? "undefined"}
-        </p>
-        {date && (
-          <p>
-            <strong>Next synchronization: </strong>{" "}
-            {date
-              .toUTC()
-              .setLocale(locale ?? "en")
-              .toFormat("DDDD tt")}
-          </p>
-        )}
-      </div>
-    );
+  render: ({ value: defaultValue = "", locale }) => {
+    return <DefaultTemplate defaultValue={defaultValue} locale={locale} />;
   },
 };

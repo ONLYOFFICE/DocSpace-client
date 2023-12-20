@@ -1,6 +1,6 @@
 import React, { useMemo, memo } from "react";
 
-import Select from "../../Select";
+import { Select } from "../../Select";
 
 import type WeekDaysProps from "./WeekDays.props";
 
@@ -19,7 +19,7 @@ function WeekDays({
     const isEmpty = monthDays.length === 0;
 
     return isEmpty || isWeek ? t("EveryDayOfTheWeek") : t("DayOfTheWeek");
-  }, [monthDays.length, isWeek]);
+  }, [monthDays.length, isWeek, t]);
 
   return (
     <Select

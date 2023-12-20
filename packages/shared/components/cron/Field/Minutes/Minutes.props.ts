@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { PeriodType, FieldProps } from "../../types";
+import type { PeriodType, FieldProps } from "../../Cron.types";
 
 interface MinutesProps extends FieldProps {
   minutes: number[];

@@ -1,2 +1,2 @@
-export { default } from "./Cron";
-export { getNextSynchronization } from "./part";
+export { default as Cron } from "./Cron";
+export { getNextSynchronization } from "./Cron.part";

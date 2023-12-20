@@ -1,13 +1,13 @@
 import { DateTime } from "luxon";
-import { Options, PeriodType } from "./types";
-import { defaultOptions } from "./constants";
+import { defaultOptions } from "./Cron.constants";
 import {
   arrayToStringPart,
   assertValidArray,
   findDate,
   stringToArrayPart,
   getUnits,
-} from "./util";
+} from "./Cron.util";
+import type { Options, PeriodType } from "./Cron.types";
 
 const units = getUnits();
 
@@ -19,14 +19,14 @@ export const stringToArray = (str: string, full = false) => {
   if (parts.length !== 5) {
     throw new Error("Invalid cron string format");
   } else {
-    return parts.map((str, idx) => stringToArrayPart(str, units[idx], full));
+    return parts.map((part, idx) => stringToArrayPart(part, units[idx], full));
   }
 };
 
 export function arrayToString(arr: number[][], options?: Partial<Options>) {
   assertValidArray(arr);
   const parts = arr.map((part, idx) =>
-    arrayToStringPart(part, units[idx], { ...defaultOptions, ...options })
+    arrayToStringPart(part, units[idx], { ...defaultOptions, ...options }),
   );
   return parts.join(" ");
 }
@@ -37,7 +37,7 @@ export function getCronStringFromValues(
   monthDays: number[] | undefined,
   weekDays: number[] | undefined,
   hours: number[] | undefined,
-  minutes: number[] | undefined
+  minutes: number[] | undefined,
 ) {
   const newMonths = period === "Year" && months ? months : [];
   const newMonthDays =
@@ -63,12 +63,12 @@ export function getCronStringFromValues(
 
 export const getNextSynchronization = (
   cronString: string,
-  timezone?: string
+  timezone?: string,
 ) => {
   try {
     const cron = stringToArray(cronString, true);
     assertValidArray(cron);
-    let date = DateTime.now();
+    let date: DateTime = DateTime.now();
 
     if (timezone) date = date.setZone(timezone);
 
@@ -83,6 +83,7 @@ export const getNextSynchronization = (
 
     return findDate(cron, date);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 };

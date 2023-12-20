@@ -1,5 +1,22 @@
 import type { PeriodOptionType } from "./Period.props";
-import type { PeriodType, TFunction } from "../../types";
+import type { PeriodType, TFunction } from "../../Cron.types";
+
+export const getLabel = (period: PeriodType, t: TFunction) => {
+  switch (period) {
+    case "Year":
+      return t("EveryYear");
+    case "Month":
+      return t("EveryMonth");
+    case "Week":
+      return t("EveryWeek");
+    case "Day":
+      return t("EveryDay");
+    case "Hour":
+      return t("EveryHour");
+    default:
+      return "";
+  }
+};
 
 export const getOptions = (t: TFunction): PeriodOptionType[] => [
   {
@@ -23,20 +40,3 @@ export const getOptions = (t: TFunction): PeriodOptionType[] => [
     label: getLabel("Hour", t),
   },
 ];
-
-export const getLabel = (period: PeriodType, t: TFunction) => {
-  switch (period) {
-    case "Year":
-      return t("EveryYear");
-    case "Month":
-      return t("EveryMonth");
-    case "Week":
-      return t("EveryWeek");
-    case "Day":
-      return t("EveryDay");
-    case "Hour":
-      return t("EveryHour");
-    default:
-      return "";
-  }
-};

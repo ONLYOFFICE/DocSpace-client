@@ -1,6 +1,6 @@
-import React, { useMemo, memo } from "react";
+import { useMemo, memo } from "react";
 
-import ComboBox from "../../../combobox";
+import { ComboBox, ComboBoxSize } from "../../../combobox";
 import { getLabel, getOptions } from "./Period.helper";
 
 import PeriodProps, { type PeriodOptionType } from "./Period.props";
@@ -13,19 +13,18 @@ function Period({ period = "Hour", setPeriod, t }: PeriodProps) {
   const options = useMemo(() => getOptions(t), [t]);
   const selectedOption = useMemo(
     () => ({ key: period, label: getLabel(period, t) }),
-    [period, t]
+    [period, t],
   );
 
   return (
     <ComboBox
-      // @ts-expect-error TS(2322): Type '{ scaledOptions: true; size: string; scaled:... Remove this comment to see the full error message
       scaledOptions
-      size="content"
       scaled={false}
       noBorder={false}
       options={options}
       showDisabledItems
       onSelect={onSelect}
+      size={ComboBoxSize.content}
       selectedOption={selectedOption}
     />
   );

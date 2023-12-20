@@ -1,10 +1,10 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-import ComboBox from "../../combobox";
-import { Option } from "../types";
-import { fixFormatValue } from "../util";
+import { ComboBox, ComboBoxSize } from "../../combobox";
+import { Option } from "../Cron.types";
+import { fixFormatValue } from "../Cron.util";
 import { SelectWrapper } from "./Select.styled";
 import SelectProps from "./Select.props";
 
@@ -50,7 +50,7 @@ function Select({
         label: fixFormatValue(number, i18n.language),
       };
     });
-  }, [i18n.language]);
+  }, [i18n.language, unit]);
 
   const selectedOption = useMemo(() => {
     const isEmpty = value.length === 0;
@@ -60,10 +60,10 @@ function Select({
       label: isEmpty
         ? placeholder
         : unit.altWithTranslation
-        ? unit.altWithTranslation[value[0] - unit.min]
-        : fixFormatValue(value[0], i18n.language),
+          ? unit.altWithTranslation[value[0] - unit.min]
+          : fixFormatValue(value[0], i18n.language),
     };
-  }, [value, placeholder, i18n.language]);
+  }, [value, placeholder, unit.altWithTranslation, unit.min, i18n.language]);
 
   const onSelect = (option: Option<number, string>) => {
     setValue([option.key]);
@@ -79,14 +79,13 @@ function Select({
     <SelectWrapper>
       <span>{prefix}</span>
       <ComboBox
-        // @ts-expect-error TS(2322): Type '{ scaledOptions: true; size: string; scaled:... Remove this comment to see the full error message
         scaledOptions
-        size="content"
         scaled={false}
         noBorder={false}
         showDisabledItems
         options={options}
         onSelect={onSelect}
+        size={ComboBoxSize.content}
         onClickSelectedItem={onReset}
         selectedOption={selectedOption}
         dropDownMaxHeight={dropDownMaxHeight}

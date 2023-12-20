@@ -1,4 +1,4 @@
-import type { Options, PeriodType, Unit } from "./types";
+import type { Options, PeriodType } from "./Cron.types";
 
 export const defaultPeriod: PeriodType = "Hour";
 

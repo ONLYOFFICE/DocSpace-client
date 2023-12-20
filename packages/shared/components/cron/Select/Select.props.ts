@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { Unit } from "./../types";
+
+import { Unit } from "../Cron.types";
+
 interface SelectProps {
   unit: Unit;
   value: number[];

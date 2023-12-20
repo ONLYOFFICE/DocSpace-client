@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { PeriodType, TFunction } from "../../types";
+import type { PeriodType, TFunction } from "../../Cron.types";
 
 interface PeriodProps {
   t: TFunction;

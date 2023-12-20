@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from "react";
-import Select from "../../Select";
+import { Select } from "../../Select";
 
 import type MonthDaysProps from "./MonthDays.props";
 
@@ -14,7 +14,7 @@ function MonthDays({
     const isEmpty = weekDays.length === 0;
 
     return isEmpty ? t("EveryDayOfTheMonth") : t("DayOfTheMonth");
-  }, [weekDays.length]);
+  }, [weekDays.length, t]);
 
   return (
     <Select

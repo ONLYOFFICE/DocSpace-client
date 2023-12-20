@@ -1,22 +1,26 @@
 import { useTranslation } from "react-i18next";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 import { MonthDays, Months, Period, WeekDays, Hours, Minutes } from "./Field";
 
-import { getCronStringFromValues, stringToArray } from "./part";
-import { defaultCronString, defaultPeriod } from "./constants";
-import { getPeriodFromCronParts, getUnits } from "./util";
+import { getCronStringFromValues, stringToArray } from "./Cron.part";
+import { defaultCronString, defaultPeriod } from "./Cron.constants";
+import { getPeriodFromCronParts, getUnits } from "./Cron.util";
 
 import { CronWrapper, Suffix } from "./Cron.styled";
 
 import type CronProps from "./Cron.props";
-import type { PeriodType } from "./types";
+import type { PeriodType } from "./Cron.types";
 
 function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
   const { t } = useTranslation("Common");
 
-  const valueRef = useRef<string>(value);
+  const didMountRef = useRef<boolean>(false);
+  const cronRef = useRef<string>(value);
+  const errorRef = useRef<Error>();
 
+  const [error, setError] = useState<Error>();
+  const [cron, setCron] = useState<string>(value);
   const [period, setPeriod] = useState<PeriodType>(defaultPeriod);
 
   const [hours, setHours] = useState<number[]>([]);
@@ -25,10 +29,34 @@ function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
   const [weekDays, setWeekDays] = useState<number[]>([]);
   const [monthDays, setMonthDays] = useState<number[]>([]);
 
+  const handleError = useCallback((exception?: Error) => {
+    setError(exception);
+  }, []);
+
+  const init = useCallback(() => {
+    try {
+      const cronParts = stringToArray(value);
+      const initPeriod = getPeriodFromCronParts(cronParts);
+
+      const [minutesPart, hoursPart, monthDaysPart, monthsPart, weekDaysPart] =
+        cronParts;
+
+      setMinutes(minutesPart);
+      setHours(hoursPart);
+      setMonthDays(monthDaysPart);
+      setMonths(monthsPart);
+      setWeekDays(weekDaysPart);
+
+      setPeriod(initPeriod);
+    } catch (exception) {
+      if (exception instanceof Error) handleError(exception);
+    }
+  }, [value, handleError]);
+
   useEffect(() => {
-    onError?.(undefined); // reset error state
-    if (valueRef.current !== value) init();
-  }, [value]);
+    handleError(undefined); // reset error state
+    if (cronRef.current !== value) init();
+  }, [value, handleError, init]);
 
   useEffect(() => {
     try {
@@ -38,55 +66,44 @@ function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
         monthDays,
         weekDays,
         hours,
-        minutes
+        minutes,
       );
+      setCron(cornString);
 
-      setValue(cornString);
-      valueRef.current = cornString;
-
-      onError?.(undefined);
-    } catch (error) {
-      if (error instanceof Error) onError?.(error);
+      handleError(undefined);
+    } catch (exception) {
+      if (exception instanceof Error) handleError(exception);
     }
-  }, [period, hours, months, minutes, weekDays, monthDays]);
+  }, [period, hours, months, minutes, weekDays, monthDays, handleError]);
 
   useEffect(() => {
-    init();
-  }, []);
-
-  const init = () => {
-    try {
-      const cronParts = stringToArray(value);
-      const period = getPeriodFromCronParts(cronParts);
-
-      const [minutes, hours, monthDays, months, weekDays] = cronParts;
-
-      setMinutes(minutes);
-      setHours(hours);
-      setMonthDays(monthDays);
-      setMonths(months);
-      setWeekDays(weekDays);
-
-      setPeriod(period);
-    } catch (error) {
-      console.log(error);
-      if (error instanceof Error) onError?.(error);
+    if (!didMountRef.current) {
+      init();
+      didMountRef.current = true;
     }
-  };
+  }, [init]);
+
+  useEffect(() => {
+    if (cronRef.current !== cron) {
+      setValue(cron);
+      cronRef.current = cron;
+    }
+  }, [cron, setValue]);
+
+  useEffect(() => {
+    if (error !== errorRef.current) {
+      onError?.(error);
+      errorRef.current = error;
+    }
+  }, [error, onError]);
 
   const { isYear, isMonth, isWeek, isHour, isMinute } = useMemo(() => {
-    const isYear = period === "Year";
-    const isMonth = period === "Month";
-    const isWeek = period === "Week";
-    const isHour = period === "Hour";
-    const isMinute = period == "Minute";
-
     return {
-      isYear,
-      isMonth,
-      isWeek,
-      isHour,
-      isMinute,
+      isYear: period === "Year",
+      isMonth: period === "Month",
+      isWeek: period === "Week",
+      isHour: period === "Hour",
+      isMinute: period === "Minute",
     };
   }, [period]);
 

@@ -16,7 +16,13 @@ const baseProps = {
 
 describe("<RadioButtonGroup />", () => {
   it("renders without error", () => {
-    render(<RadioButtonGroup {...baseProps} onClick={() => {}} />);
+    render(
+      <RadioButtonGroup
+        {...baseProps}
+        orientation="horizontal"
+        onClick={() => {}}
+      />,
+    );
 
     expect(screen.getByTestId("radio-button-group")).toBeInTheDocument();
   });

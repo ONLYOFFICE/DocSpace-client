@@ -133,6 +133,7 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
     opened,
     setIsOpenItemAccess,
     dropDownId,
+    title,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -225,6 +226,7 @@ const ComboBoxPure = <T extends TOption<Extract<T["key"], string | number>>>(
       disableMobileView={disableMobileView}
       withoutPadding={withoutPadding}
       data-testid="combobox"
+      title={title}
       // {...rest}
     >
       <ComboButton

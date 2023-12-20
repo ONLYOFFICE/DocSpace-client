@@ -1,10 +1,4 @@
-export { default as ButtonTheme } from "./button";
-
-export { default as MainButtonTheme } from "./mainButton";
-
 export { default as CatalogItemTheme } from "./catalogItem";
-
-export { default as BadgeTheme } from "./badge";
 
 export { default as CalendarTheme } from "./calendar";
 
@@ -31,13 +25,9 @@ export { default as IconWrapperTheme } from "./iconWrapper";
 
 export { default as VersionBadgeTheme } from "./versionBadge";
 
-export { default as TextareaTheme } from "./textarea";
-
 export { default as InputBlockTheme } from "./inputBlock";
 
 export { default as TextInputTheme } from "./textInput";
-
-export { default as ComboButtonTheme } from "./comboButton";
 
 export { default as LinkForgotPasswordTheme } from "./linkForgotPassword";
 

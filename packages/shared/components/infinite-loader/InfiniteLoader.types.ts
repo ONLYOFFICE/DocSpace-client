@@ -14,7 +14,7 @@ export interface InfiniteLoaderProps {
   columnStorageName?: string;
   columnInfoPanelStorageName?: string;
   className?: string;
-  infoPanelVisible?: string;
+  infoPanelVisible?: boolean;
   countTilesInRow?: number;
 }
 

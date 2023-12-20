@@ -9,7 +9,7 @@ export type TOptionKey = string | number;
 export type TOption<T extends TOptionKey = TOptionKey> = {
   key: T;
   icon?: string;
-  label: string;
+  label?: string;
   color?: string;
   backgroundColor?: string;
   border?: string;
@@ -110,6 +110,7 @@ export interface ComboboxProps<T> {
   withBackground?: boolean;
   isAside?: boolean;
   withBlur?: boolean;
+  title?: string;
 }
 
 export interface ComboButtonProps<T> {

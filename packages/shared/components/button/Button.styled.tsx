@@ -108,10 +108,10 @@ const disableCss = css<ButtonProps>`
   }
 `;
 
-const heightStyle = (props: { size: ButtonSize; theme: TTheme }) =>
-  props.theme.button.height[props.size];
-const fontSizeStyle = (props: { size: ButtonSize; theme: TTheme }) =>
-  props.theme.button.fontSize[props.size];
+const heightStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
+  props.theme.button.height[props.size || ButtonSize.normal];
+const fontSizeStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
+  props.theme.button.fontSize[props.size || ButtonSize.normal];
 
 const ButtonWrapper = ({
   primary,
@@ -160,7 +160,8 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   ${(props) => props.scale && `width: 100%;`};
   min-width: ${(props) => props.minWidth && props.minWidth};
 
-  padding: ${(props) => `${props.theme.button.padding[props.size]}`};
+  padding: ${(props) =>
+    `${props.theme.button.padding[props.size || ButtonSize.normal]}`};
 
   cursor: ${(props) =>
     props.isDisabled || props.isLoading ? "default !important" : "pointer"};

@@ -54,6 +54,7 @@ import {
   EmployeeType,
   RoomsType,
   DeviceType,
+  FolderType,
 } from "@docspace/common/constants";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -776,7 +777,7 @@ const SectionHeaderContent = (props) => {
         key: "create-room",
         icon: CatalogRoomsReactSvgUrl,
         onClick: onClickCreateRoom,
-        disabled: isArchiveFolder || !inRoom || isPublicRoom,
+        disabled: selectedFolder.rootFolderType !== FolderType.USER,
       },
       {
         id: "option_leave-room",

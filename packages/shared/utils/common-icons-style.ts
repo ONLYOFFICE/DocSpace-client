@@ -16,7 +16,7 @@ const enum IconSizes {
   scale = "scale",
 }
 
-const getSizeStyle = (size: IconSizeType) => {
+const getSizeStyle = (size?: IconSizeType | number) => {
   switch (size) {
     case "scale":
       return `
@@ -59,17 +59,23 @@ const getSizeStyle = (size: IconSizeType) => {
       min-height: ${IconSizes.medium}px;
     `;
     case IconSizeType.big:
-    default:
       return `
           width: ${IconSizes.big}px;
           min-width: ${IconSizes.big}px;
           height: ${IconSizes.big}px;
           min-height: ${IconSizes.big}px;
         `;
+    default:
+      return `
+        width: ${size}px;
+        min-width: ${size}px;
+        height: ${size}px;
+        min-height: ${size}px;
+      `;
   }
 };
 
-const commonIconsStyles = css<{ size: IconSizeType }>`
+const commonIconsStyles = css<{ size?: IconSizeType | number }>`
   overflow: hidden;
   vertical-align: middle;
   ${(props) => getSizeStyle(props.size)};

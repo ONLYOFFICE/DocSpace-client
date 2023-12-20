@@ -34,7 +34,7 @@ export interface TextProps {
 
   dir?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<Element>) => void;
 }
 
 export interface StyledTextProps {

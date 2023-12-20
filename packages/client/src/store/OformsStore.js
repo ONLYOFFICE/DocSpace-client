@@ -49,8 +49,13 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    return this.oformLocales?.includes(userLocale) ? userLocale : "en";
+    const userLocale =
+      getCookie(LANGUAGE) || this.authStore.userStore.user?.cultureName || "en";
+    const convertedLocale = convertToLanguage(userLocale);
+
+    return this.oformLocales?.includes(convertedLocale)
+      ? convertedLocale
+      : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);

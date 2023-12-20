@@ -13,6 +13,7 @@ import { ShareAccessRights } from "@docspace/common/constants";
 
 import PublicRoomBar from "../Members/sub-components/PublicRoomBar";
 import LinkRow from "./LinkRow";
+import ShareLoader from "./ShareLoader";
 
 import { StyledLinks } from "./StyledShare";
 
@@ -31,9 +32,9 @@ const Share = (props) => {
   const { t } = useTranslation(["SharingPanel", "Files"]);
   const [primaryFileLink, setPrimaryFileLink] = useState([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const hideSharePanel = isRooms || !selection?.canShare;
-  console.log("shareChanged", shareChanged);
 
   useEffect(() => {
     if (hideSharePanel) {
@@ -58,6 +59,7 @@ const Share = (props) => {
 
     setPrimaryFileLink(primaryLink);
     setAdditionalFileLinks(additionalLinks);
+    setIsLoading(false);
   };
 
   const addGeneralLink = async () => {
@@ -180,42 +182,48 @@ const Share = (props) => {
         bodyText={t("ShareDocumentDescription")}
         iconName={InfoIcon}
       />
-      <StyledLinks>
-        <Text fontSize="14px" fontWeight={600} className="title-link">
-          {t("GeneralAccessLink")}
-        </Text>
-        <LinkRow
-          onAddClick={addGeneralLink}
-          links={primaryFileLink}
-          changeShareOption={changeShareOption}
-          changeAccessOption={changeAccessOption}
-          changeExpirationOption={changeExpirationOption}
-          availableExternalRights={selection.availableExternalRights}
-        />
-      </StyledLinks>
-
-      {(primaryFileLink?.length > 0 || additionalFileLinks?.length > 0) && (
-        <StyledLinks>
-          <div className="additional-link">
+      {isLoading ? (
+        <ShareLoader t={t} />
+      ) : (
+        <>
+          <StyledLinks>
             <Text fontSize="14px" fontWeight={600} className="title-link">
-              {t("AdditionalLinks")}
+              {t("GeneralAccessLink")}
             </Text>
-            <IconButton
-              className="link-to-viewing-icon"
-              iconName={LinksToViewingIconUrl}
-              onClick={addAdditionalLinks}
-              size={16}
+            <LinkRow
+              onAddClick={addGeneralLink}
+              links={primaryFileLink}
+              changeShareOption={changeShareOption}
+              changeAccessOption={changeAccessOption}
+              changeExpirationOption={changeExpirationOption}
+              availableExternalRights={selection.availableExternalRights}
             />
-          </div>
-          <LinkRow
-            onAddClick={addAdditionalLinks}
-            links={additionalFileLinks}
-            changeShareOption={changeShareOption}
-            changeAccessOption={changeAccessOption}
-            changeExpirationOption={changeExpirationOption}
-            availableExternalRights={selection.availableExternalRights}
-          />
-        </StyledLinks>
+          </StyledLinks>
+
+          {(primaryFileLink?.length > 0 || additionalFileLinks?.length > 0) && (
+            <StyledLinks>
+              <div className="additional-link">
+                <Text fontSize="14px" fontWeight={600} className="title-link">
+                  {t("AdditionalLinks")}
+                </Text>
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={addAdditionalLinks}
+                  size={16}
+                />
+              </div>
+              <LinkRow
+                onAddClick={addAdditionalLinks}
+                links={additionalFileLinks}
+                changeShareOption={changeShareOption}
+                changeAccessOption={changeAccessOption}
+                changeExpirationOption={changeExpirationOption}
+                availableExternalRights={selection.availableExternalRights}
+              />
+            </StyledLinks>
+          )}
+        </>
       )}
     </div>
   );

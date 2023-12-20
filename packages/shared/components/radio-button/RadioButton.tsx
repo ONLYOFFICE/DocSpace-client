@@ -18,7 +18,7 @@ const RadiobuttonIcon = ({ isChecked }: { isChecked?: boolean }) => {
     className: "radio-button",
   };
 
-  return isChecked ? (
+  return !isChecked ? (
     <RadioButtonIcon {...newProps} />
   ) : (
     <RadioButtonCheckedIcon {...newProps} />

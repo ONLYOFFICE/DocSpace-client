@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Base } from "../../themes";
 
 export const CronWrapper = styled.div`
   display: flex;
@@ -12,3 +13,5 @@ export const Suffix = styled.span`
   line-height: 20px;
   font-weight: 400;
 `;
+
+Suffix.defaultProps = { theme: Base };

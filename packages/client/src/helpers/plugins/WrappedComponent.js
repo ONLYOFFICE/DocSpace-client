@@ -317,7 +317,7 @@ const ComponentPure = ({
         return (
           <iframe
             {...elementProps}
-            style={{ minHeight: "100%", border: "none" }}
+            style={{ minHeight: "100%", border: "none", ...elementProps.style }}
           ></iframe>
         );
       }

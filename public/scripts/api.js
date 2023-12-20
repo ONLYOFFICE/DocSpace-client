@@ -197,12 +197,9 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      //iframe.loading = "lazy";
+      iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("allow", "autoplay");
-
-      //iframe.referrerpolicy = "unsafe-url";
+      iframe.setAttribute("allow", "storage-access");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";

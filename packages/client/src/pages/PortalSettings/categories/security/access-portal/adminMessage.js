@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
@@ -65,7 +65,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("admin-message").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -75,7 +75,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     if (!isInit) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, isInit]);
 
   useEffect(() => {
     if (!isLoading) return;

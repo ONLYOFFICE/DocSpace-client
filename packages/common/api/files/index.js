@@ -554,9 +554,17 @@ export function startUploadSession(
   fileSize,
   relativePath,
   encrypted,
-  createOn
+  createOn,
+  CreateNewIfExist
 ) {
-  const data = { fileName, fileSize, relativePath, encrypted, createOn };
+  const data = {
+    fileName,
+    fileSize,
+    relativePath,
+    encrypted,
+    createOn,
+    CreateNewIfExist,
+  };
   return request({
     method: "post",
     url: `/files/${folderId}/upload/create_session`,
@@ -1075,5 +1083,15 @@ export function addExternalLink(fileId, access, primary, internal) {
     method: "put",
     url: `/files/file/${fileId}/links`,
     data: { access, primary, internal },
+  });
+}
+
+export function checkIsFileExist(folderId, fileTitles) {
+  return request({
+    method: "post",
+    url: `files/${folderId}/upload/check`,
+    data: {
+      filesTitle: fileTitles,
+    },
   });
 }

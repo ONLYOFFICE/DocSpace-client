@@ -1,5 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 
 import { MonthDays, Months, Period, WeekDays, Hours, Minutes } from "./Field";
 
@@ -110,7 +116,7 @@ function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
   const units = useMemo(() => getUnits(t), [t]);
 
   return (
-    <CronWrapper>
+    <CronWrapper data-testid="cron">
       <Period t={t} period={period} setPeriod={setPeriod} />
       {isYear && (
         <Months unit={units[3]} t={t} months={months} setMonths={setMonths} />

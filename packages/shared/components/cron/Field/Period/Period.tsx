@@ -1,4 +1,4 @@
-import { useMemo, memo } from "react";
+import React, { useMemo, memo } from "react";
 
 import { ComboBox, ComboBoxSize, TOption } from "../../../combobox";
 import { getLabel, getOptions } from "./Period.helper";

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Base } from "../../../themes";
 
 export const SelectWrapper = styled.div`
   display: flex;
@@ -9,3 +10,5 @@ export const SelectWrapper = styled.div`
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 `;
+
+SelectWrapper.defaultProps = { theme: Base };

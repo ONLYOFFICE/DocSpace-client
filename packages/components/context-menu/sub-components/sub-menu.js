@@ -9,6 +9,7 @@ import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import CheckEditIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import Scrollbar from "../../scrollbar";
 import ToggleButton from "../../toggle-button";
 import { SubMenuItem } from "../styled-context-menu";
@@ -212,6 +213,9 @@ const SubMenu = (props) => {
         {icon}
         {label}
         {subMenuIcon}
+        {item.checked && (
+          <CheckEditIcon className={subMenuIconClassName} />
+        )}
         {item.isOutsideLink && (
           <OutsdideIcon className={subMenuIconClassName} />
         )}
@@ -321,7 +325,7 @@ const SubMenu = (props) => {
             : height + 5;
 
         return (
-          <Scrollbar style={{ height: listHeight }} stype="mediumBlack">
+          <Scrollbar style={{ height: listHeight }}>
             {model.map((item, index) => {
               if (item.disabled) return null;
               return renderItem(item, index);

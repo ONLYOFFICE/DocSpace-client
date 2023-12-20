@@ -159,7 +159,6 @@ class TabContainer extends Component {
       <>
         <StyledScrollbar
           autoHide={onScrollHide}
-          stype="preMediumBlack"
           className="scrollbar"
           ref={this.scrollRef}
         >

@@ -582,6 +582,10 @@ const Base = {
     },
   },
 
+  rowContainer: {
+    borderColor: globalColors.grayLightMid,
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -593,9 +597,9 @@ const Base = {
   },
 
   scrollbar: {
-    backgroundColorVertical: "rgba(0, 0, 0, 0.1)",
-    backgroundColorHorizontal: "rgba(0, 0, 0, 0.1)",
-    hoverBackgroundColorVertical: grayMid,
+    bgColor: "rgba(6, 22, 38, 0.16)",
+    hoverBgColor: "rgba(6, 22, 38, 0.32)",
+    pressBgColor: "rgba(6, 22, 38, 0.5)",
   },
 
   modalDialog: {

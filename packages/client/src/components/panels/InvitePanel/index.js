@@ -378,7 +378,7 @@ const InvitePanel = ({
         <>
           {scrollAllPanelContent ? (
             <div className="invite-panel-body" ref={invitePanelBodyRef}>
-              <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
+              <Scrollbar>{bodyInvitePanel}</Scrollbar>
             </div>
           ) : (
             bodyInvitePanel

@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import Error403 from "client/Error403";
 
 import AppLoader from "../AppLoader";
 
@@ -29,6 +30,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     isEnterprise,
     isPortalDeactivate,
     enablePortalRename,
+    limitedAccessSpace
   } = rest;
 
   const location = useLocation();
@@ -96,11 +98,14 @@ const PrivateRoute = ({ children, ...rest }) => {
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
         (!user.isOwner && isPortalDeletionUrl) ||
-        (standalone && isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to={"/"} />;
+    }
+
+    if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
+      return <Error403 />
     }
 
     if (
@@ -237,6 +242,7 @@ export default inject(({ auth }) => {
     standalone,
     isPortalDeactivate,
     enablePortalRename,
+    limitedAccessSpace
   } = settingsStore;
 
   return {
@@ -255,5 +261,6 @@ export default inject(({ auth }) => {
     standalone,
     isEnterprise,
     enablePortalRename,
+    limitedAccessSpace
   };
 })(observer(PrivateRoute));

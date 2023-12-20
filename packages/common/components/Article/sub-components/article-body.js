@@ -6,7 +6,6 @@ const ArticleBody = ({ children, className }) => {
     <Scrollbar
       className="article-body__scrollbar"
       scrollclass="article-scroller"
-      stype="mediumBlack"
     >
       {children}
     </Scrollbar>

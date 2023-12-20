@@ -131,6 +131,7 @@ class SettingsStore {
   nameSchemaId = null;
   owner = {};
   wizardToken = null;
+  limitedAccessSpace = null;
   passwordSettings = null;
   hasShortenService = false;
   withPaging = false;
@@ -182,7 +183,9 @@ class SettingsStore {
   zendeskKey = null;
   bookTrainingEmail = null;
   legalTerms = null;
-  baseDomain = "onlyoffice.io";
+  baseDomain = null;
+  portals = [];
+  domain = null;
   documentationEmail = null;
   articleAlertsData = initArticleAlertsData();
   cspDomains = [];
@@ -398,6 +401,13 @@ class SettingsStore {
 
   setDefaultPage = (defaultPage) => {
     this.defaultPage = defaultPage;
+  };
+
+  setPortalDomain = (domain) => {
+    this.baseDomain = domain;
+  };
+  setPortals = (portals) => {
+    this.portals = portals;
   };
 
   setGreetingSettings = (greetingSettings) => {
@@ -634,6 +644,23 @@ class SettingsStore {
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+  };
+
+  getDomainName = async () => {
+    const res = await api.management.getDomainName();
+    const { settings } = res;
+    this.setPortalDomain(settings);
+    return settings;
+  };
+
+  getAllPortals = async () => {
+    const res = await api.management.getAllPortals();
+    this.setPortals(res.tenants);
+    return res;
+  };
+
+  getPortals = async () => {
+    await this.getAllPortals();
   };
 
   restoreCompanyInfoSettings = async () => {

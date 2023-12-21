@@ -2,7 +2,6 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import RowContainer from "@docspace/components/row-container";
 import UsersRow from "./UsersRow";
@@ -26,22 +25,20 @@ const checkedAccountType = "withoutEmail";
 const RowView = (props) => {
   const {
     t,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
-
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    currentDeviceType,
   } = props;
 
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
 
-  const usersWithFilledEmails = users.withoutEmail.filter((user) => user.email.length > 0);
+  const usersWithFilledEmails = users.withoutEmail.filter(
+    (user) => user.email.length > 0
+  );
 
   const toggleAll = (isChecked) =>
     toggleAllAccounts(isChecked, usersWithFilledEmails, checkedAccountType);
@@ -51,12 +48,6 @@ const RowView = (props) => {
   const isIndeterminate =
     checkedUsers.withoutEmail.length > 0 &&
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   return (
     <RowContainer useReactWindow={false}>
@@ -68,7 +59,8 @@ const RowView = (props) => {
         }
         onSelect={toggleAll}
         indeterminate={isIndeterminate}
-        isDisabled={usersWithFilledEmails.length === 0}>
+        isDisabled={usersWithFilledEmails.length === 0}
+      >
         <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
           {t("Common:Name")}
         </Text>
@@ -89,21 +81,20 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = auth.settingsStore;
-  const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
-    importAccountsStore;
-
-  return {
-    viewAs,
-    setViewAs,
-
+export default inject(({ importAccountsStore }) => {
+  const {
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    currentDeviceType,
+  } = importAccountsStore;
+
+  return {
+    users,
+    checkedUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
   };
 })(observer(RowView));

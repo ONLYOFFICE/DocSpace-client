@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/components/themes";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
@@ -89,8 +88,6 @@ const TableView = ({
   t,
   withEmailUsers,
   userId,
-  viewAs,
-  setViewAs,
   sectionWidth,
   accountsData,
   checkedUsers,
@@ -98,7 +95,6 @@ const TableView = ({
   toggleAllAccounts,
   isAccountChecked,
   setSearchValue,
-  currentDeviceType,
 }) => {
   const tableRef = useRef(null);
 
@@ -114,12 +110,6 @@ const TableView = ({
   const onClearFilter = () => {
     setSearchValue("");
   };
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 &&
@@ -201,10 +191,8 @@ const TableView = ({
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
+export default inject(({ auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
   const {
     withEmailUsers,
     checkedUsers,
@@ -216,14 +204,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
 
   return {
     withEmailUsers,
-    viewAs,
-    setViewAs,
     userId,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(TableView));

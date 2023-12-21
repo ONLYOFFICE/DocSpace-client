@@ -1,7 +1,6 @@
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
@@ -56,18 +55,14 @@ const checkedAccountType = "withEmail";
 const RowView = (props) => {
   const {
     t,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
-
     checkedUsers,
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   } = props;
 
   const toggleAll = (e) => {
@@ -83,12 +78,6 @@ const RowView = (props) => {
     checkedUsers.withEmail.length !== withEmailUsers.length;
 
   const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   return (
     <StyledRowContainer useReactWindow={false}>
@@ -149,9 +138,7 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = auth.settingsStore;
+export default inject(({ importAccountsStore }) => {
   const {
     checkedUsers,
     withEmailUsers,
@@ -162,15 +149,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    viewAs,
-    setViewAs,
-
     checkedUsers,
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(RowView));

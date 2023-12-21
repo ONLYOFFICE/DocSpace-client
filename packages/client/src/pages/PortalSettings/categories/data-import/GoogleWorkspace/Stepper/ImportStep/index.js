@@ -33,7 +33,8 @@ const ImportStep = ({
   };
 
   const serviceName = "Google Workspace";
-  const users = t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+  const users =
+    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   return (
     <Wrapper>

@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/components/themes";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
@@ -90,8 +89,6 @@ const TableView = (props) => {
     t,
     withEmailUsers,
     userId,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
     checkedUsers,
@@ -99,7 +96,6 @@ const TableView = (props) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   } = props;
   const tableRef = useRef(null);
 
@@ -119,12 +115,6 @@ const TableView = (props) => {
   const isIndeterminate =
     checkedUsers.withEmail.length > 0 &&
     checkedUsers.withEmail.length !== withEmailUsers.length;
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -199,10 +189,8 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
+export default inject(({ auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
   const {
     withEmailUsers,
     checkedUsers,
@@ -214,14 +202,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
 
   return {
     withEmailUsers,
-    viewAs,
-    setViewAs,
     userId,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(TableView));

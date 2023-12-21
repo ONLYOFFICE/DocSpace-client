@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import styled from "styled-components";
 import { isTablet } from "@docspace/components/utils/device";
+import styled from "styled-components";
 
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
@@ -183,7 +183,7 @@ const FirstStep = ({
             label={t("Settings:BackupFileUploading")}
           />
           <Button
-            size={isTablet ? "medium" : "small"}
+            size={isTablet() ? "medium" : "small"}
             label={t("Common:CancelButton")}
             onClick={onCancel}
           />

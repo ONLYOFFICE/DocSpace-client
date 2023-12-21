@@ -73,7 +73,9 @@ const SeventhStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
+          tooltipContent={
+            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+          }
         />
       </div>
 
@@ -91,8 +93,13 @@ const SeventhStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
-    importAccountsStore;
+  const {
+    checkedUsers,
+    importResult,
+    getMigrationLog,
+    clearCheckedAccounts,
+    sendWelcomeLetter,
+  } = importAccountsStore;
 
   return {
     checkedUsers,

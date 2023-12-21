@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { StyledTableContainer } from "../../../StyledStepper";
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
@@ -24,22 +23,19 @@ const TableView = (props) => {
     t,
     withEmailUsers,
     userId,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
-
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
-  const toggleAll = (e) => toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e) =>
+    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
 
   const handleToggle = (e, user) => {
     e.stopPropagation();
@@ -51,13 +47,8 @@ const TableView = (props) => {
   };
 
   const isIndeterminate =
-    checkedUsers.withEmail.length > 0 && checkedUsers.withEmail.length !== withEmailUsers.length;
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -87,7 +78,8 @@ const TableView = (props) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}>
+            fetchMoreFiles={() => {}}
+          >
             {accountsData.map((data) => (
               <UsersTableRow
                 t={t}
@@ -117,7 +109,12 @@ const TableView = (props) => {
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
               />
-              <Link type="action" isHovered={true} fontWeight="600" onClick={onClearFilter}>
+              <Link
+                type="action"
+                isHovered={true}
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
                 {t("Common:ClearFilter")}
               </Link>
             </Box>
@@ -128,10 +125,9 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
+export default inject(({ auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
+
   const {
     checkedUsers,
     withEmailUsers,
@@ -142,16 +138,12 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    viewAs,
-    setViewAs,
     userId,
-
     checkedUsers,
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(TableView));

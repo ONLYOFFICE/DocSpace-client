@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/components/themes";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
+
 import UsersTypeTableHeader from "./UsersTypeTableHeader";
 import UsersTypeTableRow from "./UsersTypeTableRow";
 
@@ -114,8 +113,6 @@ const checkedAccountType = "result";
 const TableView = ({
   t,
   userId,
-  viewAs,
-  setViewAs,
   sectionWidth,
   accountsData,
   typeOptions,
@@ -125,7 +122,6 @@ const TableView = ({
   toggleAllAccounts,
   isAccountChecked,
   setSearchValue,
-  currentDeviceType,
 }) => {
   const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
@@ -145,12 +141,6 @@ const TableView = ({
   const onClearFilter = () => {
     setSearchValue("");
   };
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   const headerMenu = [
     {
@@ -250,10 +240,8 @@ const TableView = ({
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
+export default inject(({ auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
   const {
     users,
     checkedUsers,
@@ -264,8 +252,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    viewAs,
-    setViewAs,
     userId,
     users,
     checkedUsers,
@@ -273,6 +259,5 @@ export default inject(({ setup, auth, importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(TableView));

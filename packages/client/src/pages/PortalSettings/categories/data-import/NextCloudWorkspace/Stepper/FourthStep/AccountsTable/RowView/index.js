@@ -1,7 +1,6 @@
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import UsersRow from "./UsersRow";
 
@@ -85,19 +84,15 @@ const checkedAccountType = "result";
 const RowView = (props) => {
   const {
     t,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
     typeOptions,
-
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   } = props;
 
   const isIndeterminate =
@@ -108,12 +103,6 @@ const RowView = (props) => {
     toggleAllAccounts(isChecked, users.result, checkedAccountType);
 
   const onClearFilter = () => setSearchValue("");
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
 
   const headerMenu = [
     {
@@ -190,9 +179,7 @@ const RowView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = auth.settingsStore;
+export default inject(({ importAccountsStore }) => {
   const {
     users,
     checkedUsers,
@@ -203,15 +190,11 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   } = importAccountsStore;
 
   return {
-    viewAs,
-    setViewAs,
-
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(RowView));

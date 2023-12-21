@@ -3,12 +3,12 @@ import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import SearchInput from "@docspace/components/search-input";
+import Text from "@docspace/components/text";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
-import Text from "@docspace/components/text";
 
+// import UsersInfoBlock from "../../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../StyledStepper";
 import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
@@ -19,7 +19,6 @@ const SecondStep = (props) => {
     t,
     incrementStep,
     decrementStep,
-
     users,
     withEmailUsers,
     searchValue,

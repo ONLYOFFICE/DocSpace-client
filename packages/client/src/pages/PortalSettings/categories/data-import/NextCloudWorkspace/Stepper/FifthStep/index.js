@@ -18,14 +18,21 @@ const SectionsWrapper = styled.div`
   }
 `;
 
-const FifthStep = ({ t, incrementStep, decrementStep, importOptions, setImportOptions }) => {
+const FifthStep = ({
+  t,
+  incrementStep,
+  decrementStep,
+  importOptions,
+  setImportOptions,
+}) => {
   const onChange = (e, name) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
   };
 
   const serviceName = "NextCloud";
-  const users = t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+  const users =
+    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   return (
     <SectionsWrapper>

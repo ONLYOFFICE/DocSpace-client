@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import { tablet } from "@docspace/components/utils/device";
+import { isTablet } from "@docspace/components/utils/device";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -21,14 +21,6 @@ const Wrapper = styled.div`
     line-height: 20px;
     margin-bottom: 4px;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-  }
-
-  @media ${tablet} {
-    .cancel-button {
-      width: 100px;
-      height: 40px;
-      font-size: 14px;
-    }
   }
 
   .select-file-input {
@@ -90,6 +82,8 @@ const SelectFileStep = ({
   const [searchParams] = useSearchParams();
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
+
+  const goBack = () => navigate(-1);
 
   useEffect(() => {
     setShowReminder(false);
@@ -184,8 +178,7 @@ const SelectFileStep = ({
             label={t("Settings:BackupFileUploading")}
           />
           <Button
-            size="small"
-            className="cancel-button"
+            size={isTablet() ? "medium" : "small"}
             label={t("Common:CancelButton")}
             onClick={onCancel}
           />
@@ -215,7 +208,7 @@ const SelectFileStep = ({
           <SaveCancelButtons
             className="save-cancel-buttons"
             onSaveClick={onNextStep}
-            onCancelClick={() => navigate(-1)}
+            onCancelClick={goBack}
             saveButtonLabel={t("Settings:UploadToServer")}
             cancelButtonLabel={t("Common:Back")}
             displaySettings

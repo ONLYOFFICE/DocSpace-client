@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
@@ -17,32 +16,28 @@ const TableView = (props) => {
   const {
     t,
     userId,
-    viewAs,
-    setViewAs,
     sectionWidth,
     accountsData,
-
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    currentDeviceType,
   } = props;
   const [hideColumns, setHideColumns] = useState(false);
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
   const tableRef = useRef(null);
 
-  const usersWithFilledEmails = users.withoutEmail.filter((user) => user.email.length > 0);
+  const usersWithFilledEmails = users.withoutEmail.filter(
+    (user) => user.email.length > 0
+  );
 
   const toggleAll = (e) =>
-    toggleAllAccounts(e.target.checked, usersWithFilledEmails, checkedAccountType);
-
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
+    toggleAllAccounts(
+      e.target.checked,
+      usersWithFilledEmails,
+      checkedAccountType
+    );
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -75,7 +70,8 @@ const TableView = (props) => {
         filesLength={accountsData.length}
         hasMoreFiles={false}
         itemCount={accountsData.length}
-        fetchMoreFiles={() => {}}>
+        fetchMoreFiles={() => {}}
+      >
         {accountsData.map((data) => (
           <UsersTableRow
             t={t}
@@ -95,23 +91,22 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
-  const { viewAs, setViewAs } = setup;
+export default inject(({ auth, importAccountsStore }) => {
   const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
-  const { users, checkedUsers, toggleAccount, toggleAllAccounts, isAccountChecked } =
-    importAccountsStore;
-
-  return {
-    viewAs,
-    setViewAs,
-    userId,
-
+  const {
     users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
-    currentDeviceType,
+  } = importAccountsStore;
+
+  return {
+    userId,
+    users,
+    checkedUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
   };
 })(observer(TableView));

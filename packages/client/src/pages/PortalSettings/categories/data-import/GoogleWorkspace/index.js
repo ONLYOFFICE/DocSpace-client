@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
 import { tablet, isMobile } from "@docspace/components/utils/device";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 
 import StepContent from "./Stepper";
@@ -46,7 +47,8 @@ const GoogleWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
-    color: ${(props) => props.theme.client.settings.migration.stepDescriptionColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.stepDescriptionColor};
 
     @media ${tablet} {
       max-width: 675px;
@@ -54,7 +56,13 @@ const GoogleWrapper = styled.div`
   }
 `;
 
-const GoogleWorkspace = ({ t, clearCheckedAccounts }) => {
+const GoogleWorkspace = ({
+  t,
+  clearCheckedAccounts,
+  viewAs,
+  setViewAs,
+  currentDeviceType,
+}) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -100,13 +108,22 @@ const GoogleWorkspace = ({ t, clearCheckedAccounts }) => {
     />
   );
 
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
+
   useEffect(() => clearCheckedAccounts, []);
 
-  if (isMobile()) return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+  if (isMobile())
+    return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
   return (
     <GoogleWrapper>
-      <Text className="workspace-subtitle">{t("Settings:AboutDataImport")}</Text>
+      <Text className="workspace-subtitle">
+        {t("Settings:AboutDataImport")}
+      </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
           <Text className="step-counter">
@@ -130,7 +147,10 @@ const GoogleWorkspace = ({ t, clearCheckedAccounts }) => {
   );
 };
 
-export default inject(({ importAccountsStore }) => {
+export default inject(({ setup, auth, importAccountsStore }) => {
   const { clearCheckedAccounts } = importAccountsStore;
-  return { clearCheckedAccounts };
+  const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
+
+  return { clearCheckedAccounts, viewAs, setViewAs, currentDeviceType };
 })(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

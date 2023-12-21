@@ -15,7 +15,6 @@ const SelectUsersStep = ({
   onNextStep,
   onPrevStep,
   showReminder,
-
   withEmailUsers,
   searchValue,
   setSearchValue,

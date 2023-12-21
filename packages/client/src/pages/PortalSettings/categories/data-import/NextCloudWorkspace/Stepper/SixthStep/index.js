@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
+import { isTablet } from "@docspace/components/utils/device";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { Wrapper } from "../StyledStepper";
 
@@ -57,7 +58,7 @@ const SixthStep = ({
     <Wrapper>
       <ProgressBar percent={percent} className="data-import-progress-bar" />
       <Button
-        size="small"
+        size={isTablet() ? "medium" : "small"}
         className="cancel-button"
         label={t("Common:CancelButton")}
         onClick={onCancel}

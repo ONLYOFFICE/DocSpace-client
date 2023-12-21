@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
-import { isMobile } from "@docspace/components/utils/device";
 import { getStepTitle, getWorkspaceStepDescription } from "../../../utils";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet, isMobile } from "@docspace/components/utils/device";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 
 import StepContent from "./Stepper";
@@ -45,7 +46,8 @@ const WorkspaceWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 16px;
     line-height: 16px;
-    color: ${(props) => props.theme.client.settings.migration.stepDescriptionColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.stepDescriptionColor};
 
     @media ${tablet} {
       max-width: 675px;
@@ -53,7 +55,13 @@ const WorkspaceWrapper = styled.div`
   }
 `;
 
-const OnlyofficeWorkspace = ({ t }) => {
+const OnlyofficeWorkspace = ({
+  t,
+  clearCheckedAccounts,
+  viewAs,
+  setViewAs,
+  currentDeviceType,
+}) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -99,13 +107,23 @@ const OnlyofficeWorkspace = ({ t }) => {
     />
   );
 
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
+
+  useEffect(() => clearCheckedAccounts, []);
+
   if (isMobile()) {
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
   }
 
   return (
     <WorkspaceWrapper>
-      <Text className="workspace-subtitle">{t("Settings:AboutDataImport")}</Text>
+      <Text className="workspace-subtitle">
+        {t("Settings:AboutDataImport")}
+      </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
           <Text className="step-counter">
@@ -129,4 +147,10 @@ const OnlyofficeWorkspace = ({ t }) => {
   );
 };
 
-export default withTranslation(["Common", "Settings"])(OnlyofficeWorkspace);
+export default inject(({ setup, auth, importAccountsStore }) => {
+  const { clearCheckedAccounts } = importAccountsStore;
+  const { viewAs, setViewAs } = setup;
+  const { currentDeviceType } = auth.settingsStore;
+
+  return { clearCheckedAccounts, viewAs, setViewAs, currentDeviceType };
+})(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

@@ -5,26 +5,28 @@ import { Consumer } from "@docspace/components/utils/context";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-const AccountsTable = ({ t, viewAs, accountsData, changeGroupType, UserTypes }) => {
-  const setTypeDocspaceAdmin = () => changeGroupType(UserTypes.DocSpaceAdmin);
-  const setTypeRoomAdmin = () => changeGroupType(UserTypes.RoomAdmin);
-  const setTypeUser = () => changeGroupType(UserTypes.User);
-
+const AccountsTable = ({
+  t,
+  viewAs,
+  accountsData,
+  changeGroupType,
+  UserTypes,
+}) => {
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
-      label: t(`Common:${UserTypes.DocSpaceAdmin}`),
-      onClick: setTypeDocspaceAdmin,
+      key: "DocSpaceAdmin",
+      label: t("Common:DocSpaceAdmin"),
+      onClick: () => changeGroupType(UserTypes.DocSpaceAdmin),
     },
     {
-      key: UserTypes.RoomAdmin,
-      label: t(`Common:${UserTypes.RoomAdmin}`),
-      onClick: setTypeRoomAdmin,
+      key: "RoomAdmin",
+      label: t("Common:RoomAdmin"),
+      onClick: () => changeGroupType(UserTypes.RoomAdmin),
     },
     {
-      key: UserTypes.User,
-      label: t(`Common:PowerUser`),
-      onClick: setTypeUser,
+      key: "User",
+      label: t("Common:PowerUser"),
+      onClick: () => changeGroupType(UserTypes.User),
     },
   ];
 
@@ -60,4 +62,6 @@ export default inject(({ setup, importAccountsStore }) => {
     changeGroupType,
     UserTypes,
   };
-})(withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable)));
+})(
+  withTranslation(["ChangeUserTypeDialog", "People"])(observer(AccountsTable))
+);

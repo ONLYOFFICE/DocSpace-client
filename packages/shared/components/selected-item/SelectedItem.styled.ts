@@ -1,10 +1,12 @@
-import { Base } from "../themes";
 import styled, { css } from "styled-components";
 
-import NoUserSelect from "../utils/commonStyles";
+import { NoUserSelect } from "../../utils";
+import { Base } from "../../themes";
 
-const StyledSelectedItem = styled.div`
-  // @ts-expect-error TS(2339): Property 'isInline' does not exist on type 'Themed... Remove this comment to see the full error message
+const StyledSelectedItem = styled.div<{
+  isInline?: boolean;
+  isDisabled?: boolean;
+}>`
   width: ${(props) => (props.isInline ? "fit-content" : "100%")};
   height: 32px;
 
@@ -27,30 +29,26 @@ const StyledSelectedItem = styled.div`
   background: ${(props) => props.theme.filterInput.selectedItems.background};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     !props.isDisabled &&
     css`
       :hover {
-        background: ${(props) =>
-          props.theme.filterInput.selectedItems.hoverBackground};
+        background: ${props.theme.filterInput.selectedItems.hoverBackground};
       }
     `}
 `;
 
-const StyledLabel = styled.div`
+const StyledLabel = styled.div<{ isDisabled?: boolean; truncate?: boolean }>`
   line-height: 20px;
   ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? `margin-left: 10px;`
       : `margin-right: 10px;`}
   max-width: 23ch;
-  // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
   color: ${(props) => props.isDisabled && props.theme.text.disableColor};
 
-  ${() => NoUserSelect}
+  ${NoUserSelect}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'truncate' does not exist on type 'Themed... Remove this comment to see the full error message
     props.truncate &&
     css`
       white-space: nowrap;

@@ -1,27 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import SelectedItem from "./";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import { SelectedItem } from "./SelectedItem";
+
+const meta = {
   title: "Components/SelectedItem",
   component: SelectedItem,
   argTypes: {
     onClose: { action: "onClose" },
   },
-};
-const Template = ({
-  onClose,
-  ...args
-}: any) => {
-  return <SelectedItem {...args} onClose={(e) => onClose(e)} />;
-};
+} satisfies Meta<typeof SelectedItem>;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ onClose... Remove this comment to see the full error message
-Default.args = {
-  label: "Selected item",
-  isInline: true,
-  isDisabled: false,
+export default meta;
+
+export const Default: Story = {
+  args: {
+    label: "Selected item",
+    isInline: true,
+    isDisabled: false,
+    onClose: () => {},
+    propKey: "",
+  },
 };
 
 const StyledContainer = styled.div`
@@ -41,24 +42,21 @@ const StyledContainerInline = styled.div`
   }
 `;
 
-const AllTemplate = ({
-  onClose,
-  ...args
-}: any) => {
-  const onCloseHandler = (e: any) => {
-    onClose(e);
-  };
+const AllTemplate = () => {
+  const onCloseHandler = () => {};
   return (
     <>
       <StyledContainerInline>
         <SelectedItem
           label="Selected item"
-          isInline={true}
+          propKey=""
+          isInline
           onClose={onCloseHandler}
         />
         <SelectedItem
           label="Selected item"
-          isInline={true}
+          propKey=""
+          isInline
           isDisabled
           onClose={onCloseHandler}
         />
@@ -67,6 +65,7 @@ const AllTemplate = ({
       <StyledContainer>
         <SelectedItem
           label="Selected item"
+          propKey=""
           isInline={false}
           onClose={onCloseHandler}
         />
@@ -75,4 +74,13 @@ const AllTemplate = ({
   );
 };
 
-export const All = AllTemplate.bind({});
+export const All: Story = {
+  render: () => <AllTemplate />,
+  args: {
+    label: "Selected item",
+    isInline: true,
+    isDisabled: false,
+    onClose: () => {},
+    propKey: "",
+  },
+};

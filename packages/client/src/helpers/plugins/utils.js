@@ -40,7 +40,7 @@ export const messageActions = (
 
       case PluginActions.updateContext:
         if (message.contextProps) {
-          updatePropsContext(contextProps);
+          updatePropsContext(message.contextProps);
         }
         break;
 

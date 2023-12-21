@@ -15,7 +15,7 @@ import MobileQuotasComponent from "./sub-components/MobileQuotas";
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
 
-  const { isItemQuotaAvailable } = props;
+  const { isStatisticsAvailable } = props;
 
   return (
     <StyledBaseQuotaComponent>
@@ -24,7 +24,7 @@ const QuotasComponent = (props) => {
           {t("Quotas")}
         </StyledMainTitle>
 
-        {!isItemQuotaAvailable && (
+        {!isStatisticsAvailable && (
           <Badge
             backgroundColor="#EDC409"
             label={t("Common:Paid")}
@@ -36,10 +36,10 @@ const QuotasComponent = (props) => {
       <Text className="quotas_description">{t("QuotasDescription")}</Text>
 
       {isMobile() ? (
-        <MobileQuotasComponent isDisabled={!isItemQuotaAvailable} />
+        <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />
       ) : (
         <>
-          <QuotaPerRoomComponent isDisabled={!isItemQuotaAvailable} />
+          <QuotaPerRoomComponent isDisabled={!isStatisticsAvailable} />
           <QuotaPerUserComponent />
         </>
       )}
@@ -49,9 +49,9 @@ const QuotasComponent = (props) => {
 
 export default inject(({ auth }) => {
   const { currentQuotaStore } = auth;
-  const { isItemQuotaAvailable } = currentQuotaStore;
+  const { isStatisticsAvailable } = currentQuotaStore;
 
   return {
-    isItemQuotaAvailable,
+    isStatisticsAvailable,
   };
 })(observer(QuotasComponent));

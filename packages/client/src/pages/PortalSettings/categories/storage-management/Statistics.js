@@ -19,7 +19,7 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const { isItemQuotaAvailable } = props;
+  const { isStatisticsAvailable } = props;
   const iconElement = (
     id,
     icon,
@@ -59,7 +59,7 @@ const StatisticsComponent = (props) => {
         <StyledMainTitle fontWeight={700} fontSize={"16px"}>
           {t("Statistic")}
         </StyledMainTitle>
-        {!isItemQuotaAvailable && (
+        {!isStatisticsAvailable && (
           <Badge
             backgroundColor="#EDC409"
             label={t("Common:Paid")}
@@ -71,7 +71,7 @@ const StatisticsComponent = (props) => {
       <Text className="statistics-description">
         {t("StatisticDescription")}
       </Text>
-      {isItemQuotaAvailable && (
+      {isStatisticsAvailable && (
         <>
           <RoomsList
             buttonProps={buttonProps}
@@ -93,9 +93,9 @@ const StatisticsComponent = (props) => {
 
 export default inject(({ auth }) => {
   const { currentQuotaStore } = auth;
-  const { isItemQuotaAvailable } = currentQuotaStore;
+  const { isStatisticsAvailable } = currentQuotaStore;
 
   return {
-    isItemQuotaAvailable,
+    isStatisticsAvailable,
   };
 })(observer(StatisticsComponent));

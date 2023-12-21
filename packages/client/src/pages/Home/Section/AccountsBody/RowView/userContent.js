@@ -71,6 +71,7 @@ const UserContent = ({
   standalone,
 
   isDefaultUsersQuotaSet,
+  isStatisticsAvailable,
 }) => {
   const {
     displayName,
@@ -160,25 +161,28 @@ const UserContent = ({
         {email}
       </Link>
 
-      <Link
-        containerMinWidth="140px"
-        containerWidth="17%"
-        type="page"
-        fontSize="12px"
-        fontWeight={400}
-        color={sideInfoColor}
-        isTextOverflow={true}
-      >
-        {spaceQuota}
-      </Link>
+      {isStatisticsAvailable && (
+        <Link
+          containerMinWidth="140px"
+          containerWidth="17%"
+          type="page"
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow={true}
+        >
+          {spaceQuota}
+        </Link>
+      )}
     </StyledRowContent>
   );
 };
 
 export default inject(({ auth }) => {
   const { currentQuotaStore } = auth;
-  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+  const { isDefaultUsersQuotaSet, isStatisticsAvailable } = currentQuotaStore;
   return {
     isDefaultUsersQuotaSet,
+    isStatisticsAvailable,
   };
 })(withTranslation(["People", "Common"])(observer(UserContent)));

@@ -94,9 +94,9 @@ const QuotaPerItemComponent = (props) => {
 export default inject(({ auth, storageManagement }) => {
   const { currentQuotaStore } = auth;
   const { setUserQuota } = currentQuotaStore;
-  const { isItemQuotaAvailable } = currentQuotaStore;
+  const { isStatisticsAvailable } = currentQuotaStore;
 
   const { updateQuotaInfo } = storageManagement;
 
-  return { setUserQuota, isDisabled: !isItemQuotaAvailable, updateQuotaInfo };
+  return { setUserQuota, isDisabled: !isStatisticsAvailable, updateQuotaInfo };
 })(observer(QuotaPerItemComponent));

@@ -266,7 +266,7 @@ const SectionFilterContent = ({
   standalone,
   currentDeviceType,
   isRoomAdmin,
-  isItemQuotaAvailable,
+  isStatisticsAvailable,
   isDefaultRoomsQuotaSet,
 }) => {
   const location = useLocation();
@@ -1207,7 +1207,9 @@ const SectionFilterContent = ({
       if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
-      filterOptions.push(...quotaFilter);
+      isStatisticsAvailable &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
       return filterOptions;
     }
 
@@ -1513,7 +1515,9 @@ const SectionFilterContent = ({
         filterOptions.push(...thirdPartyOptions);
       }
 
-      isDefaultRoomsQuotaSet && filterOptions.push(...quotaFilter);
+      isStatisticsAvailable &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
     } else {
       if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
@@ -1683,7 +1687,7 @@ const SectionFilterContent = ({
         },
       ];
 
-      isItemQuotaAvailable &&
+      isStatisticsAvailable &&
         accountsOptions.push({
           id: "sort-quota",
           key: SortByFieldName.UsedSpace,
@@ -1691,6 +1695,7 @@ const SectionFilterContent = ({
           default: true,
         });
 
+      console.log("accountsOptions", accountsOptions);
       return accountsOptions;
     }
 
@@ -1812,7 +1817,7 @@ const SectionFilterContent = ({
           !hide && commonOptions.push(modifiedDate);
         }
 
-        if (isItemQuotaAvailable && availableSort?.includes("Storage")) {
+        if (isStatisticsAvailable && availableSort?.includes("Storage")) {
           const idx = availableSort.findIndex(
             (x) => x === SortByFieldName.UsedSpace
           );
@@ -2208,7 +2213,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isItemQuotaAvailable, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isStatisticsAvailable, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2226,7 +2231,7 @@ export default inject(
 
     return {
       isRoomAdmin,
-      isItemQuotaAvailable,
+      isStatisticsAvailable,
       isDefaultRoomsQuotaSet,
 
       user,

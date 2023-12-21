@@ -24,6 +24,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isPublicRoom,
       isDefaultRoomsQuotaSet,
+      isStatisticsAvailable,
     } = this.props;
 
     const defaultColumns = [];
@@ -84,7 +85,10 @@ class FilesTableHeader extends React.Component {
           defaultSize: 75,
           resizable: false,
         },
-        {
+      ];
+
+      isStatisticsAvailable &&
+        columns.push({
           key: "Storage",
           title: isDefaultRoomsQuotaSet
             ? t("Common:StorageAndQuota")
@@ -95,8 +99,8 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
           minWidth: 179,
-        },
-      ];
+        });
+      console.log("columns", columns);
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
       const columns = [
@@ -466,7 +470,7 @@ export default inject(
     clientLoadingStore,
   }) => {
     const { currentQuotaStore } = auth;
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultRoomsQuotaSet, isStatisticsAvailable } = currentQuotaStore;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
 
@@ -572,6 +576,7 @@ export default inject(
       isPublicRoom,
       publicRoomKey,
       isDefaultRoomsQuotaSet,
+      isStatisticsAvailable,
     };
   }
 )(

@@ -73,6 +73,8 @@ import {
 } from "./table";
 import { Label } from "./label";
 import { FieldContainer } from "./field-container";
+import { ProgressBar } from "./progress-bar";
+import { BarConfig, SnackBar } from "./snackbar";
 
 export type {
   TFallbackAxisSideDirection,
@@ -81,9 +83,12 @@ export type {
   TViewSelectorOption,
   TTableColumn,
   TGroupMenuItem,
+  BarConfig,
 };
 
 export {
+  SnackBar,
+  ProgressBar,
   FieldContainer,
   Label,
   TableGroupMenu,

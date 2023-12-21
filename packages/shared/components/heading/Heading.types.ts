@@ -16,4 +16,5 @@ export interface HeadingProps {
   /** Accepts css class */
   className?: string;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 }

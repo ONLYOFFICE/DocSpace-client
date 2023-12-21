@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 
-import { Select } from "../../Select";
+import { Select } from "./Select";
 
-import type MonthsProps from "./Months.props";
+import type { MonthsProps } from "../Cron.types";
 
-function Months({ months, unit, setMonths, t }: MonthsProps) {
+export const Months = memo(({ months, unit, setMonths, t }: MonthsProps) => {
   return (
     <Select
       value={months}
@@ -15,6 +15,6 @@ function Months({ months, unit, setMonths, t }: MonthsProps) {
       dropDownMaxHeight={300}
     />
   );
-}
+});
 
-export default memo(Months);
+Months.displayName = "Months";

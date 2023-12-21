@@ -7,7 +7,7 @@ import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecor
 import { Cron, getNextSynchronization } from ".";
 import { InputSize, InputType, TextInput } from "../text-input";
 import { Button, ButtonSize } from "../button";
-import CronProps from "./Cron.props";
+import type { CronProps } from "./Cron.types";
 
 type CronType = FC<{ locale: string } & CronProps>;
 

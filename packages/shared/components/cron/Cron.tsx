@@ -7,16 +7,21 @@ import React, {
   useCallback,
 } from "react";
 
-import { MonthDays, Months, Period, WeekDays, Hours, Minutes } from "./Field";
+import {
+  MonthDays,
+  Months,
+  Period,
+  WeekDays,
+  Hours,
+  Minutes,
+} from "./sub-components";
 
 import { getCronStringFromValues, stringToArray } from "./Cron.part";
 import { defaultCronString, defaultPeriod } from "./Cron.constants";
-import { getPeriodFromCronParts, getUnits } from "./Cron.util";
-
+import { getPeriodFromCronParts, getUnits } from "./Cron.utils";
 import { CronWrapper, Suffix } from "./Cron.styled";
 
-import type CronProps from "./Cron.props";
-import type { PeriodType } from "./Cron.types";
+import type { PeriodType, CronProps } from "./Cron.types";
 
 function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
   const { t } = useTranslation("Common");

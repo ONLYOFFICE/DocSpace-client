@@ -4,19 +4,19 @@ import moment from "moment";
 
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
-import { fixFormatValue } from "../Cron.util";
+import { fixFormatValue } from "../Cron.utils";
+import { SelectWrapper } from "../Cron.styled";
 
-import { SelectWrapper } from "./Select.styled";
-import SelectProps from "./Select.props";
+import type { SelectProps } from "../Cron.types";
 
-function Select({
+export const Select = ({
   unit,
   value,
   placeholder,
   setValue,
   prefix,
   dropDownMaxHeight,
-}: SelectProps) {
+}: SelectProps) => {
   const { i18n } = useTranslation();
 
   const options = useMemo(() => {
@@ -93,6 +93,4 @@ function Select({
       />
     </SelectWrapper>
   );
-}
-
-export default Select;
+};

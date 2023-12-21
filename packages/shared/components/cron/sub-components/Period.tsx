@@ -1,12 +1,11 @@
 import React, { useMemo, memo } from "react";
 
-import { ComboBox, ComboBoxSize, TOption } from "../../../combobox";
-import { getLabel, getOptions } from "./Period.helper";
+import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
-import PeriodProps from "./Period.props";
-import { PeriodType } from "../../Cron.types";
+import { getLabel, getOptions } from "../Cron.utils";
+import type { PeriodProps, PeriodType } from "../Cron.types";
 
-function Period({ period = "Hour", setPeriod, t }: PeriodProps) {
+export const Period = memo(({ period = "Hour", setPeriod, t }: PeriodProps) => {
   const onSelect = (arg: TOption) => {
     setPeriod(arg.key as PeriodType);
   };
@@ -29,6 +28,6 @@ function Period({ period = "Hour", setPeriod, t }: PeriodProps) {
       selectedOption={selectedOption}
     />
   );
-}
+});
 
-export default memo(Period);
+Period.displayName = "Period";

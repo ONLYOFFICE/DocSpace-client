@@ -60,6 +60,27 @@ const StyledLdapPage = styled(Box)`
     grid-template-columns: minmax(100px, 340px) 1fr;
     grid-gap: 12px;
   }
+
+  .group_membership-header {
+    display: flex;
+    align-items: baseline;
+    .help-icon {
+      padding-left: 8px;
+    }
+  }
+
+  .group_membership-container {
+    margin-top: 18px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: minmax(100px, 340px) 1fr;
+    grid-gap: 12px;
+  }
+
+  .ldap_group-filter {
+    grid-column: span 2;
+  }
+
   .ldap_attribute-mapping-text {
     display: flex;
     align-items: baseline;

@@ -21,6 +21,7 @@ import ButtonsContainer from "./sub-components/ButtonsContainer";
 import AuthenticationContainer from "./sub-components/AuthenticationContainer";
 import AdvancedSettings from "./sub-components/AdvancedSettings";
 import SyncContainer from "./sub-components/SyncContainer";
+import GroupMembership from './sub-components/GroupMembership';
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -85,6 +86,7 @@ const LDAP = ({
 
           <ConnectionSettings />
           <AttributeMapping />
+          <GroupMembership />
           <AuthenticationContainer />
           <AdvancedSettings />
           <ButtonsContainer />

@@ -251,7 +251,7 @@ const ComponentPure = ({
           );
 
           setIsRequestRunning && setIsRequestRunning(false);
-
+          setModalRequestRunning && setModalRequestRunning(false);
           if (isSaveButton) {
             setSettingsModalRequestRunning &&
               setSettingsModalRequestRunning(false);
@@ -263,15 +263,15 @@ const ComponentPure = ({
           ? isSaveButton
             ? modalRequestRunning
             : isRequestRunning
-            ? isRequestRunning
-            : rest.isLoading
+              ? isRequestRunning
+              : rest.isLoading
           : rest.isLoading;
         const isDisabled = disableWhileRequestRunning
           ? isSaveButton
             ? modalRequestRunning
             : isRequestRunning
-            ? isRequestRunning
-            : rest.isDisabled
+              ? isRequestRunning
+              : rest.isDisabled
           : rest.isDisabled;
 
         return (
@@ -317,7 +317,7 @@ const ComponentPure = ({
         return (
           <iframe
             {...elementProps}
-            style={{ minHeight: "100%", border: "none" }}
+            style={{ minHeight: "100%", border: "none", ...elementProps.style }}
           ></iframe>
         );
       }
@@ -382,15 +382,18 @@ const WrappedComponent = ({
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const updatePropsContext = (name, props) => {
-    if (saveButton && name === saveButton.contextName) {
-      setSaveButtonProps && setSaveButtonProps((val) => ({ ...val, props }));
-    } else {
-      const newProps = { ...contextProps };
-      newProps[name] = props;
+  const updatePropsContext = (newContextProps) => {
+    const newProps = { ...contextProps };
 
-      setContextProps(newProps);
-    }
+    newContextProps.forEach(({ name, props }) => {
+      if (saveButton && name === saveButton.contextName) {
+        setSaveButtonProps && setSaveButtonProps((val) => ({ ...val, props }));
+      } else {
+        newProps[name] = props;
+      }
+    });
+
+    setContextProps(newProps);
   };
 
   return (

@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import PropType from "prop-types";
-import PropTypes from "prop-types";
 import Countdown, { zeroPad } from "react-countdown";
+
+import {Box} from "../box";
+import {Heading} from "../heading";
+import {Text} from "../text";
+
 import { StyledAction, StyledSnackBar, StyledIframe } from "./styled-snackbar";
 import StyledCrossIcon from "./styled-snackbar-action";
 import StyledLogoIcon from "./styled-snackbar-logo";
-import Box from "../box";
-import Heading from "../heading";
-import Text from "../text";
 
 class SnackBar extends React.Component {
   constructor(props: any) {

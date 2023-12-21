@@ -1,23 +1,30 @@
 import styled, { css } from "styled-components";
-import Box from "../box";
 
-import { tablet } from "../utils/device";
+import { Box } from "../box";
+import { tablet } from "../../utils";
 
-const StyledIframe = styled.iframe`
+const StyledIframe = styled.iframe<{ sectionWidth: number }>`
   border: none;
   height: 60px;
   width: 100%;
 
   @media ${tablet} {
-    // @ts-expect-error TS(2339): Property 'sectionWidth' does not exist on type 'Th... Remove this comment to see the full error message
-    min-width: ${(props) => props.sectionWidth + 40 + "px"};
+    min-width: ${(props) => `${props.sectionWidth + 40}px`};
   }
 `;
 
-const StyledSnackBar = styled(Box)`
+const StyledSnackBar = styled(Box)<{
+  opacity?: number;
+  backgroundColor?: string;
+  backgroundImg?: string;
+  textalign?: string;
+}>`
   transition: all 500ms ease;
   transition-property: top, right, bottom, left, opacity;
-  font-family: Open Sans, sans-serif, Arial;
+  font-family:
+    Open Sans,
+    sans-serif,
+    Arial;
   font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   min-height: 14px;
   position: relative;

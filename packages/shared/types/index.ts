@@ -17,5 +17,6 @@ declare global {
       };
     };
     timezone: string;
+    snackbar?: {};
   }
 }

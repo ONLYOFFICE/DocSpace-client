@@ -1,4 +1,4 @@
-export const frames = (fn: any) => {
+export const frames = (fn: Function) => {
   let frameId = -1;
   let lock = false;
 

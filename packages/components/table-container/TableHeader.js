@@ -172,7 +172,7 @@ class TableHeader extends React.Component {
 
     const ResetColumnsSize = () => {
       localStorage.removeItem(columnStorageName);
-      this.resetColumns(true);
+      this.resetColumns();
       return true;
     };
 
@@ -315,12 +315,12 @@ class TableHeader extends React.Component {
       });
 
       //If content column sizes are calculated as empty after changing view
-      if (!hasContent) return this.resetColumns(true);
+      if (!hasContent) return this.resetColumns();
     }
 
     // columns.length + 1 - its settings column
     if (tableContainer.length !== columns.length + 1) {
-      return this.resetColumns(true);
+      return this.resetColumns();
     }
 
     if (!container) return;
@@ -654,7 +654,7 @@ class TableHeader extends React.Component {
         ? gridTemplateColumnsWithoutOverfilling.join(" ")
         : gridTemplateColumns.join(" ");
     } else {
-      this.resetColumns(true);
+      this.resetColumns();
     }
 
     if (str) {
@@ -742,7 +742,7 @@ class TableHeader extends React.Component {
     }
   };
 
-  resetColumns = (resetToDefault = false) => {
+  resetColumns = () => {
     const {
       containerRef,
       columnStorageName,
@@ -750,9 +750,6 @@ class TableHeader extends React.Component {
       columns,
       infoPanelVisible,
     } = this.props;
-    const defaultSize = this.props.columns.find(
-      (col) => col.defaultSize
-    )?.defaultSize;
 
     let str = "";
 
@@ -766,39 +763,21 @@ class TableHeader extends React.Component {
       : document.getElementById("table-container");
     const containerWidth = +container.clientWidth;
 
-    if (resetToDefault) {
-      const firstColumnPercent = 40;
-      const percent = 60 / enableColumns.length;
+    const firstColumnPercent = 40;
+    const percent = 60 / enableColumns.length;
 
-      const wideColumnSize = (containerWidth * firstColumnPercent) / 100 + "px";
-      const otherColumns = (containerWidth * percent) / 100 + "px";
+    const wideColumnSize = (containerWidth * firstColumnPercent) / 100 + "px";
+    const otherColumns = (containerWidth * percent) / 100 + "px";
 
-      for (let col of columns) {
-        if (col.default) {
-          str += `${wideColumnSize} `;
-        } else
-          str += col.enable
-            ? col.defaultSize
-              ? `${col.defaultSize}px `
-              : `${otherColumns} `
-            : "0px ";
-      }
-    } else {
-      const percent = 100 / enableColumns.length;
-      const newContainerWidth =
-        containerWidth - containerMargin - (defaultSize || 0);
-      const otherColumns = (newContainerWidth * percent) / 100 + "px";
-
-      str = "";
-      for (let col of this.props.columns) {
+    for (let col of columns) {
+      if (col.default) {
+        str += `${wideColumnSize} `;
+      } else
         str += col.enable
-          ? /*  col.minWidth
-            ? `${col.minWidth}px `
-            :  */ col.defaultSize
+          ? col.defaultSize
             ? `${col.defaultSize}px `
             : `${otherColumns} `
           : "0px ";
-      }
     }
 
     str += `${settingsSize}px`;

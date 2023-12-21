@@ -63,6 +63,8 @@ const FormGallery = ({
     }
   }, [fromFolderId]);
 
+  if (isInitLoading) return <></>;
+
   return (
     <>
       <Section

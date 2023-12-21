@@ -13,7 +13,6 @@ import { TTableColumn, TableHeaderProps } from "./Table.types";
 import { TableSettings } from "./sub-components/TableSettings";
 import { TableHeaderCell } from "./sub-components/TableHeaderCell";
 import {
-  CONTAINER_MARGIN,
   DEFAULT_MIN_COLUMN_SIZE,
   MIN_SIZE_FIRST_COLUMN,
   SETTINGS_SIZE,
@@ -51,84 +50,59 @@ function TableHeader({
     hideColumns: boolean;
   }>({ columnIndex: 0, hideColumns: false });
 
-  const resetColumns = React.useCallback<(resetToDefault?: boolean) => void>(
-    (resetToDefault = false) => {
-      const defaultSize = columns.find((col: TTableColumn) => col.defaultSize)
-        ?.defaultSize;
+  const resetColumns = React.useCallback<
+    (resetToDefault?: boolean) => void
+  >(() => {
+    let str = "";
 
-      let str = "";
+    const enableColumns = columns
+      .filter((x: TTableColumn) => x.enable)
+      .filter((x: TTableColumn) => !x.defaultSize)
+      .filter((x: TTableColumn) => !x.default);
 
-      const enableColumns = columns
-        .filter((x: TTableColumn) => x.enable)
-        .filter((x: TTableColumn) => !x.defaultSize)
-        .filter((x: TTableColumn) => !x.default);
+    const container = containerRef.current
+      ? containerRef.current
+      : document.getElementById("table-container");
+    const containerWidth = container ? +container.clientWidth : 0;
 
-      const container = containerRef.current
-        ? containerRef.current
-        : document.getElementById("table-container");
-      const containerWidth = container ? +container.clientWidth : 0;
+    const firstColumnPercent = 40;
+    const percent = 60 / enableColumns.length;
 
-      if (resetToDefault) {
-        const firstColumnPercent = 40;
-        const percent = 60 / enableColumns.length;
+    const wideColumnSize = `${(containerWidth * firstColumnPercent) / 100}px`;
+    const otherColumns = `${(containerWidth * percent) / 100}px`;
 
-        const wideColumnSize = `${
-          (containerWidth * firstColumnPercent) / 100
-        }px`;
-        const otherColumns = `${(containerWidth * percent) / 100}px`;
+    columns.forEach((col: TTableColumn) => {
+      if (col.default) {
+        str += `${wideColumnSize} `;
+      } else
+        str += col.enable
+          ? col.defaultSize
+            ? `${col.defaultSize}px `
+            : `${otherColumns} `
+          : "0px ";
+    });
 
-        columns.forEach((col: TTableColumn) => {
-          if (col.default) {
-            str += `${wideColumnSize} `;
-          } else
-            str += col.enable
-              ? col.defaultSize
-                ? `${col.defaultSize}px `
-                : `${otherColumns} `
-              : "0px ";
-        });
-      } else {
-        const percent = 100 / enableColumns.length;
-        const newContainerWidth =
-          containerWidth - CONTAINER_MARGIN - (defaultSize || 0);
-        const otherColumns = `${(newContainerWidth * percent) / 100}px`;
+    str += `${SETTINGS_SIZE}px`;
+    if (container) container.style.gridTemplateColumns = str;
 
-        str = "";
+    if (headerRef.current) {
+      headerRef.current.style.gridTemplateColumns = str;
+      headerRef.current.style.width = `${containerWidth}px`;
+    }
 
-        columns.forEach((col: TTableColumn) => {
-          str += col.enable
-            ? /*  col.minWidth
-            ? `${col.minWidth}px `
-            :  */ col.defaultSize
-              ? `${col.defaultSize}px `
-              : `${otherColumns} `
-            : "0px ";
-        });
-      }
+    if (str) {
+      if (!infoPanelVisible) localStorage.setItem(columnStorageName, str);
+      else localStorage.setItem(columnInfoPanelStorageName, str);
+    }
 
-      str += `${SETTINGS_SIZE}px`;
-      if (container) container.style.gridTemplateColumns = str;
-
-      if (headerRef.current) {
-        headerRef.current.style.gridTemplateColumns = str;
-        headerRef.current.style.width = `${containerWidth}px`;
-      }
-
-      if (str) {
-        if (!infoPanelVisible) localStorage.setItem(columnStorageName, str);
-        else localStorage.setItem(columnInfoPanelStorageName, str);
-      }
-
-      if (resizeRef.current) resizeRef.current();
-    },
-    [
-      columnInfoPanelStorageName,
-      columnStorageName,
-      columns,
-      containerRef,
-      infoPanelVisible,
-    ],
-  );
+    if (resizeRef.current) resizeRef.current();
+  }, [
+    columnInfoPanelStorageName,
+    columnStorageName,
+    columns,
+    containerRef,
+    infoPanelVisible,
+  ]);
 
   const distributionOverWidth = React.useCallback(
     (overWidth: number, gridTemplateColumns: string[]) => {
@@ -195,30 +169,42 @@ function TableHeader({
     ) => boolean
   >(
     (gridTemplateColumns, activeColumnIndex, containerWidth) => {
-      const filterColumns = columns.filter((x) => !x.defaultSize);
-
       const clearSize = gridTemplateColumns.map((c) => getSubstring(c));
       const maxSize = Math.max(...clearSize);
 
-      const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+      const defaultSize = columns[activeColumnIndex - 1].defaultSize || 0;
+      const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
-      const defaultColSize =
-        defaultSize || containerWidth / filterColumns.length;
-      const indexOfMaxSize = clearSize.findIndex((s) => s === maxSize);
+      const addedColumn = 1;
+      const enableColumnsLength =
+        columns.filter((column) => !column.defaultSize && column.enable)
+          .length - addedColumn;
+      const allColumnsLength = columns.filter(
+        (column) => !column.defaultSize,
+      ).length;
 
-      const newSize = maxSize - defaultColSize;
+      const defaultSizeColumn =
+        columns.find((column) => column.defaultSize)?.defaultSize || 0;
+
+      const widthColumns = containerWidth - SETTINGS_SIZE - defaultSizeColumn;
+
+      const newColumnSize = defaultSize || widthColumns / allColumnsLength;
+
+      const newSizeMaxColumn = maxSize - newColumnSize;
 
       if (
-        (indexOfMaxSize === 0 && newSize < MIN_SIZE_FIRST_COLUMN) ||
-        newSize <= defaultColSize
+        (indexOfMaxSize === 0 && newSizeMaxColumn < MIN_SIZE_FIRST_COLUMN) ||
+        (indexOfMaxSize !== 0 && newSizeMaxColumn < DEFAULT_MIN_COLUMN_SIZE) ||
+        newColumnSize < DEFAULT_MIN_COLUMN_SIZE ||
+        enableColumnsLength === 1
       ) {
         localStorage.removeItem(columnStorageName);
         resetColumns();
         return true;
       }
 
-      gridTemplateColumns[indexOfMaxSize] = `${newSize}px`;
-      gridTemplateColumns[activeColumnIndex] = `${defaultColSize}px`;
+      gridTemplateColumns[indexOfMaxSize] = `${newSizeMaxColumn}px`;
+      gridTemplateColumns[activeColumnIndex] = `${newColumnSize}px`;
       return false;
     },
     [columnStorageName, columns, resetColumns],
@@ -292,14 +278,14 @@ function TableHeader({
 
       // If content column sizes are calculated as empty after changing view
       if (!hasContent) {
-        resetColumns(true);
+        resetColumns();
         return;
       }
     }
 
     // columns.length + 1 - its settings column
     if (tableContainer.length !== columns.length + 1) {
-      resetColumns(true);
+      resetColumns();
       return;
     }
 
@@ -635,7 +621,7 @@ function TableHeader({
         ? gridTemplateColumnsWithoutOverfilling.join(" ")
         : gridTemplateColumns.join(" ");
     } else {
-      resetColumns(true);
+      resetColumns();
     }
 
     if (str) {

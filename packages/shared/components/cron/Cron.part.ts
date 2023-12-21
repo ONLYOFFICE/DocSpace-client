@@ -6,7 +6,7 @@ import {
   findDate,
   stringToArrayPart,
   getUnits,
-} from "./Cron.util";
+} from "./Cron.utils";
 import type { Options, PeriodType } from "./Cron.types";
 
 const units = getUnits();

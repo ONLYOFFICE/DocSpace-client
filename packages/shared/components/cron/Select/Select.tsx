@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
-import { fixFormatValue } from "../Cron.util";
+import { fixFormatValue } from "../Cron.utils";
 
 import { SelectWrapper } from "./Select.styled";
 import SelectProps from "./Select.props";

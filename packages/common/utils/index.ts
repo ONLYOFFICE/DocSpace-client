@@ -430,7 +430,10 @@ export function convertToCulture(key: string) {
 }
 
 export function convertToLanguage(key: string) {
+  if (!key) return;
+
   const splittedKey = key.split("-");
+
   if (splittedKey.length > 1) return splittedKey[0];
 
   return key;
@@ -676,4 +679,9 @@ export const getEditorTheme = (theme) => {
     default:
       return "default-dark";
   }
+};
+
+const languages: string[] = ["ar-SA"];
+export const isBetaLanguage = (language: string): boolean => {
+  return languages.includes(language);
 };

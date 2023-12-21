@@ -1,5 +1,5 @@
 ﻿import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
@@ -36,6 +36,7 @@ const Appearance = (props) => {
     tReady,
     t,
     currentDeviceType,
+    resetIsInit,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
@@ -165,6 +166,7 @@ const Appearance = (props) => {
 
     return () => {
       window.removeEventListener("resize", onCheckView);
+      resetIsInit();
     };
   }, []);
 
@@ -767,7 +769,7 @@ const Appearance = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, common }) => {
   const { settingsStore } = auth;
   const {
     appearanceTheme,
@@ -780,6 +782,8 @@ export default inject(({ auth }) => {
     currentDeviceType,
   } = settingsStore;
 
+  const { resetIsInit } = common;
+
   return {
     appearanceTheme,
     selectedThemeId,
@@ -789,5 +793,6 @@ export default inject(({ auth }) => {
     deleteAppearanceTheme,
     currentDeviceType,
     theme,
+    resetIsInit,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

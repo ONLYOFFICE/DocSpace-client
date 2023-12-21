@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Pieeja ir liegta",
   "Error401Text": "Diemžēl resurss pašlaik nav pieejams.",
   "Error403Text": "Diemžēl piekļuve liegta",
   "Error404Text": "Diemžēl resursu nevar atrast.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace nav pieejams",
   "InvalidLink": "Nederīga saite",
   "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
-  "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš."
+  "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš.",
+  "PortalRestriction": "Jūsu interneta protokola (IP) adrese nav iekļauta atļauto IP adrešu sarakstā, lai piekļūtu šai DocSpace. Izslēdziet virtuālo privāto tīklu (VPN), ja tas ir iespējots, un atkārtoti ielādējiet lapu vai izmantojiet citu IP adresi, lai pieteiktos."
 }

@@ -1,10 +1,14 @@
 {
   "Categories": "Категорії",
+  "EmptyFormGalleryScreenDescription": "Результатів, що відповідають вашому запиту, не знайдено",
   "ErrorViewDescription": "Повторіть спробу пізніше",
+  "ErrorViewHeader": "Галерея форм тимчасово недоступна",
   "SelectForm": "Виберіть форму",
   "SubmitToGalleryBlockBody": "Надішліть свої шаблони, щоб поділитися ними зі спільнотою ONLYOFFICE.",
   "SubmitToGalleryBlockHeader": "Галерея форм ONLYOFFICE",
   "SubmitToGalleryDialogGuideInfo": "Дізнайтеся, як створювати ідеальні форми та підвищити свій шанс отримати схвалення, в нашому <1>guide</1>.",
   "SubmitToGalleryDialogMainInfo": "Надішліть свою форму до публічної галереї, щоб інші могли використовувати її у своїй роботі. Коли форма пройде модерацію, ви отримаєте сповіщення та винагороду за свій внесок.",
-  "TemplateInfo": "Інформація про шаблон"
+  "SuggestChanges": "Запропонувати зміни",
+  "TemplateInfo": "Інформація про шаблон",
+  "ViewAllTemplates": "Подивитися всі шаблони"
 }

@@ -79,6 +79,7 @@ const ConflictResolveDialog = (props) => {
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
+    handleFilesUpload,
   } = props;
 
   const {
@@ -89,6 +90,7 @@ const ConflictResolveDialog = (props) => {
     folderTitle,
     isCopy,
     translations,
+    isUploadConflict
   } = conflictResolveDialogData;
 
   const [resolveType, setResolveType] = useState("overwrite");
@@ -172,6 +174,40 @@ const ConflictResolveDialog = (props) => {
       toastr.error(error.message ? error.message : error);
     }
   };
+
+  const onAcceptUploadType = async () => {
+    const conflictResolveType = getResolveType();
+
+    let data = conflictResolveDialogData.newUploadData
+    
+    if(conflictResolveType === ConflictResolveType.Skip){
+      let filesSize = 0;
+      const newFiles = []
+
+      for(let i = 0; i < data.files.length; i++){
+        if(!items.includes(data.files[i].file.name)){
+          filesSize += data.files[i].file.size;
+          newFiles.push(data.files[i])
+        }
+      }
+
+      data = {...data, files: newFiles, filesSize};
+    }
+
+    if (data.files.length === 0) {
+      setSelected("none");
+      onClosePanels();
+      return;
+    }
+
+    setSelected("none");
+    onClosePanels();
+    try {
+      handleFilesUpload(data, t, conflictResolveType === ConflictResolveType.Duplicate )
+    } catch (error) {
+      toastr.error(error.message ? error.message : error);
+    }
+  }
 
   const radioOptions = [
     {
@@ -261,7 +297,7 @@ const ConflictResolveDialog = (props) => {
           label={t("Common:OKButton")}
           size="normal"
           primary
-          onClick={onAcceptType}
+          onClick={isUploadConflict ? onAcceptUploadType : onAcceptType}
         />
         <Button
           key="CancelButton"
@@ -287,7 +323,7 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     setMoveToPublicRoomVisible,
   } = dialogsStore;
 
-  const { itemOperationToFolder } = uploadDataStore;
+  const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
   const {
     activeFiles,
     activeFolders,
@@ -316,6 +352,7 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,
+    handleFilesUpload
   };
 })(
   withTranslation(["ConflictResolveDialog", "Common"])(

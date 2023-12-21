@@ -83,6 +83,10 @@ const Dark = {
 
   backgroundAndSubstrateColor: "#282828",
 
+  betaBadgeTooltip: {
+    boxShadowColor: "rgba(0, 0, 0, 0.40)",
+  },
+
   button: {
     fontWeight: "600",
     margin: "0",
@@ -938,13 +942,13 @@ const Dark = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.40)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F5E9BA",
-    textColor: black,
+    color: "#242424",
+    textColor: white,
 
     before: {
       border: "none",
@@ -3177,6 +3181,12 @@ const Dark = {
     background: "#282828",
     headerColor: "#FFF",
     descriptionColor: "#ADADAD",
+  },
+
+  infoBar: {
+    background: "#282828",
+    title: white,
+    description: "#ADADAD",
   },
 
   roomIcon: {

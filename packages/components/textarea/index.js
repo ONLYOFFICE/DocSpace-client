@@ -78,7 +78,7 @@ const Textarea = ({
   }
 
   function onTextareaClick() {
-    areaRef.current.select();
+    if (enableCopy) areaRef.current.select();
   }
 
   useEffect(() => {
@@ -135,6 +135,7 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
+          heightTextArea={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

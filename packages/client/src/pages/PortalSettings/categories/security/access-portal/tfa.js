@@ -32,7 +32,6 @@ const TwoFactorAuth = (props) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
     smsAvailable,
     appAvailable,
     tfaSettings,
@@ -58,19 +57,15 @@ const TwoFactorAuth = (props) => {
     setIsLoading(true);
   };
 
-  const getTfaTypeFn = async () => {
-    await getTfaType();
-  };
-
   useEffect(() => {
     checkWidth();
+
+    if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
+    else setIsLoading(true);
+
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  useEffect(() => {
-    if (smsAvailable === null || appAvailable === null) getTfaTypeFn();
-  }, [smsAvailable, appAvailable]);
 
   useEffect(() => {
     tfaSettings && getSettings();
@@ -206,7 +201,6 @@ export default inject(({ auth, setup }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
@@ -225,6 +219,5 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));
